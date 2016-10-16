@@ -4985,22 +4985,22 @@ class Digraph(object):
 
     def graphDetermination(self):
         """
-        Output: average arc determination
+        Output: average relative arc determination.
+
+        averageDeterm = ( sum_(x,y) [ abs( relf-relation[x][y] - Med )] / n ) / ( Max-Med )
+        
         """
         Min = self.valuationdomain['min']
         Med = self.valuationdomain['med']
         Max = self.valuationdomain['max']
         determ = Decimal("0.0")
-        #actions = [x for x in self.actions]
         for x,rx in self.relation.items():
             for y,rxy in rx.items():
-                if x != y:
-                    if rxy > Med:
-                        determ += rxy
-                    else:
-                        determ += Max - rxy + Min
-        n = self.order * (self.order - 1)
-        averageDeterm = determ / Decimal(str(n))
+                if rxy > Med:
+                    determ += rxy - Med
+                else:
+                    determ += Med - rxy
+        averageDeterm = (determ / Decimal(str(self.order)))/(Max-Med)
         return  averageDeterm
 
     def computeSize(self):
