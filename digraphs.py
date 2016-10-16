@@ -9477,7 +9477,7 @@ class Preorder(Digraph):
     and the evaluation dictionary into self.
     """
 
-    def __init__(self,other,direction="best"):
+    def __init__(self,other,direction="best",ranking=None):
         from copy import deepcopy
         self.__class__ = other.__class__
         self.name = 'preorder-'+other.name
@@ -9505,11 +9505,15 @@ class Preorder(Digraph):
             rx = relation[x]
             for y in self.actions:
                 rx[y] = None
-
-        if direction == 'best':
-            rank = other.bestRanks()
+        
+        if ranking == None:
+            if direction == 'best':
+                rank = other.bestRanks()
+            else:
+                rank = other.worstRanks()
         else:
-            rank = other.worstRanks()
+            rank = ranking
+
         for i in range(self.order):
             x = actionsList[i]
             for j in range(i, self.order):
@@ -12223,8 +12227,8 @@ if __name__ == "__main__":
         g = BipolarOutrankingDigraph(t1,Normalized=True)
         cop = CopelandOrder(g)
         g.showHTMLRelationMap(rankingRule='rankedPairs')
-        #gcd = CoDualDigraph(g)
-        #gcd.showHTMLRelationMap(cop.copelandOrder)
+        gcd = CoDualDigraph(g)
+        gcd.showHTMLRelationMap(cop.copelandOrder)
        
         #g.showHTMLRelationMap(Colored=False)
         #g.exportGraphViz()
