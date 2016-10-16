@@ -217,7 +217,7 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 
 <dl class="class">
 <dt id="digraphs.CirculantDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'max': Decimal('1.0'), 'min': Decimal('-1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'min': Decimal('-1.0'), 'max': Decimal('1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1294,7 +1294,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'max': 1</em>, <em>'med': 0</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2269,7 +2269,7 @@ called dg1 and dg2.</p>
 
 <dl class="class">
 <dt id="digraphs.GridDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2300,7 +2300,7 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 
 <dl class="class">
 <dt id="digraphs.KneserDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -3607,7 +3607,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4850,7 +4850,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -5886,26 +5886,27 @@ respecting the order of the categories.</p>
 </ul>
 </div></blockquote>
 <p>Template of required data for a 4-sorting:</p>
-<div class="highlight-python"><div class="highlight"><pre>categories = {&#39;c1&#39;: { &#39;name&#39;: &#39;week&#39;,&#39;order&#39;: 1,
-                      &#39;lowLimit&#39;: 0,&#39;highLimit&#39;: 25,
-                      &#39;comment&#39;: &#39;lowest category&#39;,},
-              &#39;c2&#39;: { &#39;name&#39;: &#39;ok&#39;,&#39;order&#39;: 2,
-                      &#39;lowLimit&#39;: 25,&#39;highLimit&#39;: 50,
-                      &#39;comment&#39;: &#39;medium category&#39;,},
-              &#39;c3&#39;: { &#39;name&#39;: &#39;good&#39;,&#39;order&#39;: 3,
-                      &#39;lowLimit&#39;: 50,&#39;highLimit&#39;: 75,
-                      &#39;comment&#39;: &#39;highest category&#39;,},
-              &#39;c4&#39;: { &#39;name&#39;: &#39;excellent&#39;,&#39;order&#39;: 4,
-                      &#39;lowLimit&#39;: 75,&#39;highLimit&#39;: 100,                               &#39;heigLimit&#39;: Decimal(&#39;100.0&#39;).
-                      &#39;comment&#39;: &#39;highest category&#39;,},
-}
-criteriaCategoryLimits[&#39;LowerClosed&#39;] = True # default
-criteriaCategoryLimits[g] = {
-        &#39;c1&#39;: {&#39;minimum&#39;:0, &#39;maximum&#39;:25},
-        &#39;c2&#39;: {&#39;minimum&#39;:25, &#39;maximum&#39;:50},
-        &#39;c3&#39;: {&#39;minimum&#39;:50, &#39;maximum&#39;:75},
-        &#39;c4&#39;: {&#39;minimum&#39;:75, &#39;maximum&#39;:200},
- }
+<div class="highlight-python"><div class="highlight"><pre><span class="n">categories</span> <span class="o">=</span> <span class="p">{</span>
+              <span class="s">&#39;c1&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;week&#39;</span><span class="p">,</span><span class="s">&#39;order&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                      <span class="s">&#39;lowLimit&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span><span class="s">&#39;highLimit&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+                      <span class="s">&#39;comment&#39;</span><span class="p">:</span> <span class="s">&#39;lowest category&#39;</span><span class="p">,},</span>
+              <span class="s">&#39;c2&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;ok&#39;</span><span class="p">,</span><span class="s">&#39;order&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                      <span class="s">&#39;lowLimit&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span><span class="s">&#39;highLimit&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+                      <span class="s">&#39;comment&#39;</span><span class="p">:</span> <span class="s">&#39;medium category&#39;</span><span class="p">,},</span>
+              <span class="s">&#39;c3&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;good&#39;</span><span class="p">,</span><span class="s">&#39;order&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+                      <span class="s">&#39;lowLimit&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span><span class="s">&#39;highLimit&#39;</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span>
+                      <span class="s">&#39;comment&#39;</span><span class="p">:</span> <span class="s">&#39;highest category&#39;</span><span class="p">,},</span>
+              <span class="s">&#39;c4&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;excellent&#39;</span><span class="p">,</span><span class="s">&#39;order&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+                      <span class="s">&#39;lowLimit&#39;</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span><span class="s">&#39;highLimit&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+                      <span class="s">&#39;comment&#39;</span><span class="p">:</span> <span class="s">&#39;highest category&#39;</span><span class="p">,},</span>
+ <span class="p">}</span>
+<span class="n">criteriaCategoryLimits</span><span class="p">[</span><span class="s">&#39;LowerClosed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span> <span class="c"># default</span>
+<span class="n">criteriaCategoryLimits</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&#39;c1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;minimum&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s">&#39;maximum&#39;</span><span class="p">:</span><span class="mi">25</span><span class="p">},</span>
+        <span class="s">&#39;c2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;minimum&#39;</span><span class="p">:</span><span class="mi">25</span><span class="p">,</span> <span class="s">&#39;maximum&#39;</span><span class="p">:</span><span class="mi">50</span><span class="p">},</span>
+        <span class="s">&#39;c3&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;minimum&#39;</span><span class="p">:</span><span class="mi">50</span><span class="p">,</span> <span class="s">&#39;maximum&#39;</span><span class="p">:</span><span class="mi">75</span><span class="p">},</span>
+        <span class="s">&#39;c4&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;minimum&#39;</span><span class="p">:</span><span class="mi">75</span><span class="p">,</span> <span class="s">&#39;maximum&#39;</span><span class="p">:</span><span class="mi">200</span><span class="p">},</span>
+ <span class="p">}</span>
 </pre></div>
 </div>
 <p>A template named tempProfile.py is providied in the digraphs module distribution.</p>
@@ -7074,7 +7075,7 @@ from random choices in the set of potential oriented pairs of nodes numbered fro
 
 <dl class="class">
 <dt id="randomDigraphs.RandomGridDigraph">
-<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.GridDigraph" title="digraphs.GridDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.GridDigraph</span></code></a></p>
 <p>Specialization of the general Digraph class for generating
 temporary randomly oriented Grid digraphs of dimension n time m

@@ -40,7 +40,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 
     Template of required data for a 4-sorting::
         
-        categories = {'c1': { 'name': 'week','order': 1,
+        categories = {
+                      'c1': { 'name': 'week','order': 1,
                               'lowLimit': 0,'highLimit': 25,
                               'comment': 'lowest category',},
                       'c2': { 'name': 'ok','order': 2,
@@ -50,9 +51,9 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                               'lowLimit': 50,'highLimit': 75,
                               'comment': 'highest category',},
                       'c4': { 'name': 'excellent','order': 4,
-                              'lowLimit': 75,'highLimit': 100,                               'heigLimit': Decimal('100.0').
+                              'lowLimit': 75,'highLimit': 100,
                               'comment': 'highest category',},
-        }
+         }
         criteriaCategoryLimits['LowerClosed'] = True # default
         criteriaCategoryLimits[g] = {
                 'c1': {'minimum':0, 'maximum':25},
