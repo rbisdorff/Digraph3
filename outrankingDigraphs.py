@@ -1551,7 +1551,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 except:
                     actionsList += [(actions[x]['name'],x)]
             else:
-                actionsList += [(x,x)]
+                actionsList += [(str(x),x)]
         if Sorted:
             actionsList.sort()
         #print actionsList

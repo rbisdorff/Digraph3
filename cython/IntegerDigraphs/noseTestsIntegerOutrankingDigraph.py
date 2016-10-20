@@ -19,6 +19,7 @@ def testcIntegerOutrankingDigraph():
     gi = IntegerBipolarOutrankingDigraph(t)
     gi.showShort()
     print(gi)
+    gi.showRelationTable()
 
 def testconvert2DecimalValuation():
     t = cR3ObjPT(numberOfActions=13,numberOfCriteria=7,seed=2)

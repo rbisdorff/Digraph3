@@ -365,7 +365,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
     ##     for g in self.criteria:
     ##         self.criteria[g]['weight'] = int(self.criteria[g]['weight'])
         
-    def computeCriterionRelation(self,c,a,b,hasSymmetricThresholds=True):
+    def computeCriterionRelation(self,c, a,b,hasSymmetricThresholds=True):
         """
         Compute the outranking characteristic for actions x and y
         on criterion c.
