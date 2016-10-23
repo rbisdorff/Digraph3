@@ -261,7 +261,7 @@ We may now extract both this symmetric as well as this asymmetric part of digrap
     >>> symDg.exportGraphViz()
 
 .. image:: asymSymParts.png
-   :width: 400 px
+   :width: 600 px
    :align: center
 
 .. note::

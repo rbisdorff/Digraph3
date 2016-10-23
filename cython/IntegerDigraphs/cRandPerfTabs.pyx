@@ -149,6 +149,54 @@ class cPerformanceTableau(PerformanceTableau):
                     pass
                 print()
 
+    def normalizeEvaluations(self,lowValue=0.0,highValue=100.0,Debug=False):
+        """
+        recode the evaluations between lowValue and highValue on all criteria
+        """
+        ##from math import copysign
+        criteria = self.criteria
+        actions = self.actions
+        evaluation = self.evaluation
+##        lowValue = Decimal(str(lowValue))
+##        highValue = Decimal(str(highValue))
+        amplitude = highValue-lowValue
+        if Debug:
+            print('lowValue', lowValue, 'amplitude', amplitude)
+        criterionKeys = [x for x in criteria]
+        actionKeys = [x for x in actions]
+        normEvaluation = {}
+        for g in criterionKeys:
+            normEvaluation[g] = {}
+            glow = criteria[g]['scale'][0]
+            ghigh = criteria[g]['scale'][1]
+            gamp = ghigh - glow
+            if Debug:
+                print('-->> g, glow, ghigh, gamp', g, glow, ghigh, gamp)
+            for x in actionKeys:
+                if evaluation[g][x] != -999:
+                    evalx = abs(evaluation[g][x])
+                    if Debug:
+                        print(evalx)
+                    ## normEvaluation[g][x] = lowValue + ((evalx-glow)/gamp)*amplitude
+                    try:
+                        if criteria[g]['preferenceDirection'] == 'min':
+                            sign = -1
+                        else:
+                            sign = 1
+                        normEvaluation[g][x] = (lowValue + ((evalx-glow)/gamp)*amplitude)*sign
+                        ## else:
+                        ##     normEvaluation[g][x] = -(lowValue + ((evalx-glow)/gamp)*(-amplitude))
+                    except:
+                        self.criteria[g]['preferenceDirection'] = 'max'
+                        normEvaluation[g][x] = lowValue + ((evalx-glow)/gamp)*amplitude
+                        
+                    if Debug:
+                        print(criteria[g]['preferenceDirection'], evaluation[g][x], normEvaluation[g][x])
+                else:
+                    normEvaluation[g][x] = Decimal('-999')
+                    
+        return normEvaluation
+
 
 class RandomPerformanceTableau(cPerformanceTableau):
     """
