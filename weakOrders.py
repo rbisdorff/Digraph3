@@ -266,7 +266,7 @@ class WeakOrder(Digraph):
 ##
 ##        Digraph.showRankingByChoosing(self,rankingByChoosing)
 
-class WeakQuantilesRankingOrder(WeakOrder):
+class WeakRankingOrder(WeakOrder):
     """
     Specialization of the abstract WeakOrder class for 
     weak orderings resulting from the epistemic
@@ -275,20 +275,21 @@ class WeakQuantilesRankingOrder(WeakOrder):
 
     Example session:
 
-    >>> from weakOrders import *
+    >>> from weakOrders import WeakQuantilesRankingOrder
+    >>> from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
     >>> t = RandomPerformanceTableau()
-    >>> qr = QuantilesRankingDigraph(t,10,strategy='average')
-    >>> r1 = qr.showRanking()
-    >>> qro = QuantilesRankingDigraph(t,10,strategy='optimistic')
-    >>> r2 = qro.showRanking()
-    >>> qrp = QuantilesRankingDigraph(t,10,strategy='pessimistic')
-    >>> r3 = qrp.showRanking()
-    >>> qr.qrRankings = [r1,r2,r3]
-    >>> wqr = WeakQuantilesRankingOrder(qr)
+    >>> pr = PreRankedOutrankingDigraph(t,10,strategy='average')
+    >>> r1 = qr.boostedRanking
+    >>> pro = PreRankedOutrankingDigraph(t,10,strategy='optimistic')
+    >>> r2 = pro.boostedRanking()
+    >>> prp = QuantilesRankingDigraph(t,10,strategy='pessimistic')
+    >>> r3 = prp.boostedRanking()
+    >>> pr.qrRankings = [r1,r2,r3]
+    >>> wqr = WeakQuantilesRankingOrder(pr)
     >>> wqr.exportGraphViz('partialOrdering',graphType="pdf")
     
     """
-    def __init__(self,other,Debug=False):
+    def __init__(self,other,rankings,Debug=False):
         
         from digraphs import ranking2preorder, omax
         from copy import deepcopy
@@ -300,14 +301,10 @@ class WeakQuantilesRankingOrder(WeakOrder):
         self.valuationdomain['max'] = Decimal('1')
         self.valuationdomain['med'] = Decimal('0')
         Med = self.valuationdomain['med']
-        try:
-            qrRankings = self.qrRankings
-        except:
-            print('attribute qrRankings is missing! It should contain the rankings obtained with the three local ordering strategies.')
         if Debug:
-            print(qrRankings)
+            print(rankings)
         relations = []
-        for rel in qrRankings:
+        for rel in rankings:
             if Debug:
                 print(rel)
             relations.append(self.computePreorderRelation(ranking2preorder(rel)))
@@ -1754,7 +1751,7 @@ class QuantilesRankingDigraph(WeakOrder,QuantilesSortingDigraph):
         obsolete, see showRanking.
         """
         print(self.computeQsRbcRanking(Descending=Descending,
-                                       Comments=False))
+                                       Comments=True))
         
     def showRanking(self,Descending=True):
         """
@@ -1861,13 +1858,26 @@ if __name__ == "__main__":
 ##    t = PerformanceTableau('auditor2_2')
 ##    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0,Debug=True)
 ##    t = XMCDA2PerformanceTableau('uniSorting')
-    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                   numberOfActions=8,seed=105)
-    g = BipolarOutrankingDigraph(t)
-    g.exportGraphViz('testg')
-    wke = KemenyWeakOrder(g,orderLimit=8)
-    wke.exportGraphViz('testwke')
-    print(wke.relation)
+##    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+##                                   numberOfActions=8,seed=105)
+##    g = BipolarOutrankingDigraph(t)
+##    g.exportGraphViz('testg')
+##    wke = KemenyWeakOrder(g,orderLimit=8)
+##    wke.exportGraphViz('testwke')
+##    print(wke.relation)
+
+    from weakOrders import WeakRankingOrder
+    from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
+    t = RandomCBPerformanceTableau(numberOfActions=50,seed=10)
+    pra = PreRankedOutrankingDigraph(t,5,quantilesOrderingStrategy='average')
+    r1 = pra.boostedRanking
+    pro = PreRankedOutrankingDigraph(t,5,quantilesOrderingStrategy='optimistic')
+    r2 = pro.boostedRanking
+    prp = PreRankedOutrankingDigraph(t,5,quantilesOrderingStrategy='pessimistic')
+    r3 = prp.boostedRanking
+    wqr = WeakRankingOrder(pra,[r1,r2,r3])
+    wqr.exportGraphViz('partialOrdering',graphType="pdf")
+ 
 ##    limitingQuantiles = 7
 ##    qr = QuantilesRankingDigraph(t,limitingQuantiles,
 ##                              strategy="average",
