@@ -270,22 +270,20 @@ class WeakRankingOrder(WeakOrder):
     """
     Specialization of the abstract WeakOrder class for 
     weak orderings resulting from the epistemic
-    disjunctive fusion (omax operator) of the optimistics,
-    pessimistic and average quantiles rankings.
+    disjunctive fusion (omax operator) of a list of rankings.
 
-    Example session:
+    Example application:
 
-    >>> from weakOrders import WeakQuantilesRankingOrder
+    >>> from weakOrders import WeakRankingOrder
     >>> from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
     >>> t = RandomPerformanceTableau()
-    >>> pr = PreRankedOutrankingDigraph(t,10,strategy='average')
+    >>> pr = PreRankedOutrankingDigraph(t,10,quantilesOrderingStrategy='average')
     >>> r1 = qr.boostedRanking
-    >>> pro = PreRankedOutrankingDigraph(t,10,strategy='optimistic')
-    >>> r2 = pro.boostedRanking()
-    >>> prp = QuantilesRankingDigraph(t,10,strategy='pessimistic')
-    >>> r3 = prp.boostedRanking()
-    >>> pr.qrRankings = [r1,r2,r3]
-    >>> wqr = WeakQuantilesRankingOrder(pr)
+    >>> pro = PreRankedOutrankingDigraph(t,10,quantilesOrderingStrategy='optimistic')
+    >>> r2 = pro.boostedRanking
+    >>> prp = QuantilesRankingDigraph(t,10,quantilesOrderingStrategy='pessimistic')
+    >>> r3 = prp.boostedRanking
+    >>> wqr = WeakQuantilesRankingOrder(pr,[r1,r2,r3])
     >>> wqr.exportGraphViz('partialOrdering',graphType="pdf")
     
     """
@@ -294,15 +292,17 @@ class WeakRankingOrder(WeakOrder):
         from digraphs import ranking2preorder, omax
         from copy import deepcopy
         from decimal import Decimal
-
+        if Debug:
+            print(rankings)
+        if len(rankings) < 1:
+            print('Error: several rankings have to be provided!')
+            return
         self.__dict__ = deepcopy(other.__dict__)
         self.name = other.name + '_wk'
         self.valuationdomain['min'] = Decimal('-1')
         self.valuationdomain['max'] = Decimal('1')
         self.valuationdomain['med'] = Decimal('0')
         Med = self.valuationdomain['med']
-        if Debug:
-            print(rankings)
         relations = []
         for rel in rankings:
             if Debug:
