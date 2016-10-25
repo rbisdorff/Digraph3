@@ -266,6 +266,69 @@ class WeakOrder(Digraph):
 ##
 ##        Digraph.showRankingByChoosing(self,rankingByChoosing)
 
+class WeakQuantilesRankingOrder(WeakOrder):
+    """
+    Specialization of the abstract WeakOrder class for 
+    weak orderings resulting from the epistemic
+    disjunctive fusion (omax operator) of the optimistics,
+    pessimistic and average quantiles rankings.
+
+    Example session:
+
+    >>> from weakOrders import *
+    >>> t = RandomPerformanceTableau()
+    >>> qr = QuantilesRankingDigraph(t,10,strategy='average')
+    >>> r1 = qr.showRanking()
+    >>> qro = QuantilesRankingDigraph(t,10,strategy='optimistic')
+    >>> r2 = qro.showRanking()
+    >>> qrp = QuantilesRankingDigraph(t,10,strategy='pessimistic')
+    >>> r3 = qrp.showRanking()
+    >>> qr.qrRankings = [r1,r2,r3]
+    >>> wqr = WeakQuantilesRankingOrder(qr)
+    >>> wqr.exportGraphViz('partialOrdering',graphType="pdf")
+    
+    """
+    def __init__(self,other,Debug=False):
+        
+        from digraphs import ranking2preorder, omax
+        from copy import deepcopy
+        from decimal import Decimal
+
+        self.__dict__ = deepcopy(other.__dict__)
+        self.name = other.name + '_wk'
+        self.valuationdomain['min'] = Decimal('-1')
+        self.valuationdomain['max'] = Decimal('1')
+        self.valuationdomain['med'] = Decimal('0')
+        Med = self.valuationdomain['med']
+        try:
+            qrRankings = self.qrRankings
+        except:
+            print('attribute qrRankings is missing! It should contain the rankings obtained with the three local ordering strategies.')
+        if Debug:
+            print(qrRankings)
+        relations = []
+        for rel in qrRankings:
+            if Debug:
+                print(rel)
+            relations.append(self.computePreorderRelation(ranking2preorder(rel)))
+        if Debug:
+            print(relations)
+
+        relation = {}
+        
+        for x in self.actions:
+            relation[x] = {}
+            for y in self.actions:
+                L = [relations[i][x][y] for i in range(len(relations))]
+                relation[x][y] = omax(Med,L)
+                if Debug:
+                    print(x,y,L,relation[x][y])
+        if Debug:
+            print(relation)
+        self.relation = relation
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+
 class KemenyWeakOrder(WeakOrder):
     """
     Specialization of the abstract WeakOrder class for 
@@ -301,7 +364,7 @@ class KemenyWeakOrder(WeakOrder):
             print(kemenyRankings)
         relations = []
         for rel in kemenyRankings:
-            print(rel)
+            #print(rel)
             relations.append(self.computePreorderRelation(ranking2preorder(rel)))
         if Debug:
             print(relations)
@@ -317,7 +380,7 @@ class KemenyWeakOrder(WeakOrder):
         if Debug:
             print(relation)
         self.relation = relation
-        print(self.relation)
+        #print(self.relation)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
