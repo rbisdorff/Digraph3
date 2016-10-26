@@ -1129,7 +1129,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             strategy = self.sortingParameters['strategy']
         actionsCategories = {}
         for x in self.actions:
-            a,lowCateg,highCateg,credibility =\
+            a,lowCateg,highCateg,credibility,lowLimit,notHighLimit =\
                      self.computeActionCategories(x,Comments=Comments,Debug=Debug,\
                                                Threading=Threading,\
                                                nbrOfCPUs = nbrOfCPUs)
@@ -1137,25 +1137,33 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             highQtileLimit = self.categories[highCateg]['highLimit']
             if strategy == "optimistic":
                 score1 = float(highCateg)
-                score2 = float(lowCateg)
+                score2 = -notHighLimit
+                score3 = float(lowCateg)
+                score4 = lowLimit
             elif strategy == "pessimistic":
                 score1 = float(lowCateg)
-                score2 = float(highCateg)
+                score2 = lowLimit
+                score3 = float(highCateg)
+                score4 = -notHighLimit
             else:   #strategy == "average":
                 lc = float(lowCateg)
                 hc = float(highCateg)
                 score1 = (lc+hc)/2.0
                 score2 = float(highCateg)
+                score3 = -notHighLimit
+                score4 = lowLimit
             #print(score,highQtileLimit,lowQtileLimit,lowCateg,highCateg)
             try:
-                actionsCategories[(score1,highQtileLimit,lowQtileLimit,lowCateg,highCateg,score2)].append(a)
+                actionsCategories[(score1,highQtileLimit,\
+                                   lowQtileLimit,lowCateg,highCateg,score2,score3,score4)].append(a)
             except:
-                actionsCategories[(score1,highQtileLimit,lowQtileLimit,lowCateg,highCateg,score2)] = [a]
+                actionsCategories[(score1,highQtileLimit,\
+                                   lowQtileLimit,lowCateg,highCateg,score2,score3,score4)] = [a]
 
         #print(actionsCategories)
                 
         actionsCategKeys = list(actionsCategories.keys())
-        actionsCategIntervals = sorted(actionsCategKeys,key=itemgetter(0,5), reverse=True)
+        actionsCategIntervals = sorted(actionsCategKeys,key=itemgetter(0,5,6,7), reverse=True)
         #if Debug:
         #    print(actionsCategIntervals)
         compSize = self.minimalComponentSize
@@ -1246,7 +1254,9 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             return action,\
                     keys[0],\
                     keys[0],\
-                    credibility
+                    credibility,\
+                    lowLimit,\
+                    notHighLimit
         else:
             if Show:
                 print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
@@ -1257,7 +1267,9 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             return action,\
                     keys[0],\
                     keys[-1],\
-                    credibility            
+                    credibility,\
+                    lowLimit,\
+                    notHighLimit
 
 
 
@@ -1341,17 +1353,31 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                 c = x[2]
                 print('%9s |  %.2f \t %.3f \t %.3f \t %.3f' % (c,criteria[c]['weight'],x[0],x[1],x[0]*x[1]))
 
-    def showActionsSortingResult(self,actionsSubset=None):
+    def showActionSortingResult(self,action):
         """
         shows the quantiles sorting result all (default) of a subset of the decision actions.
         """
+        Med = self.valuationdomain['med']
         print('Quantiles sorting result per decision action')
-        if actionsSubset==None:
-            for x in self.actions.keys():
-                self.computeActionCategories(x,Show=True)
-        else:
-            for x in actionsSubset:
-                self.computeActionCategories(x,Show=True)
+        res = self.sorting[action]
+        for categ in self.categories.keys():
+            if res[categ]['categoryMembership'] >= Med: 
+                print('%s: %.2f (%.2f,%.2f)' % (self.categories[categ]['name'],
+                                                res[categ]['categoryMembership'],
+                                                res[categ]['lowLimit'],
+                                                res[categ]['notHighLimit'] ) )
+            
+##    def showActionsSortingResult(self,actionsSubset=None):
+##        """
+##        shows the quantiles sorting result all (default) of a subset of the decision actions.
+##        """
+##        print('Quantiles sorting result per decision action')
+##        if actionsSubset==None:
+##            for x in self.actions.keys():
+##                self.computeActionCategories(x,Show=True)
+##        else:
+##            for x in actionsSubset:
+##                self.computeActionCategories(x,Show=True)
 
     def showShort(self,fileName=None,WithFileSize=True):
         """
@@ -2038,6 +2064,7 @@ if __name__ == "__main__":
     bg1.showDecomposition(direction='increasing')
     bg1.showDecomposition(direction='decreasing')
     bg1.showSorting()
+    bg1.showActionSortingResult('a001')
     
 ##    bg1.sorting.update(newSorting)
 ##    bg1.showActionsSortingResult()
