@@ -1000,8 +1000,8 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                 compKey = ('c%%0%dd' % (self.nd)) % (i)
                 components[compKey] = {'rank':i}
                 pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
-                components[compKey]['lowQtileLimit'] = comp[0][0]
-                components[compKey]['highQtileLimit'] = comp[0][1]
+                components[compKey]['lowQtileLimit'] = comp[0][1]
+                components[compKey]['highQtileLimit'] = comp[0][0]
                 pg = BipolarOutrankingDigraph(pt,
                                           WithConcordanceRelation=False,
                                           WithVetoCounts=False,
@@ -1508,7 +1508,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             #if direction == 'decreasing':
             #print('%s. %s-%s : %s' % (compKey,comp['lowQtileLimit'],comp['highQtileLimit'],actions))
             #else:
-            print('%s. %s-%s : %s' % (compKey,comp['highQtileLimit'],comp['lowQtileLimit'],actions))
+            print('%s. %s-%s : %s' % (compKey,comp['lowQtileLimit'],comp['highQtileLimit'],actions))
                 
     def computeCategoryContents(self,Reverse=False,Comments=False,StoreSorting=True,\
                                 Threading=False,nbrOfCPUs=None):
