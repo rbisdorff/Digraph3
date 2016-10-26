@@ -1124,6 +1124,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
               in the uppest, the lowest or the average potential quantile.
         
         """
+        from operator import itemgetter
         if strategy == None:
             strategy = self.sortingParameters['strategy']
         actionsCategories = {}
@@ -1135,35 +1136,40 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             lowQtileLimit = self.categories[lowCateg]['lowLimit']
             highQtileLimit = self.categories[highCateg]['highLimit']
             if strategy == "optimistic":
-                score = highQtileLimit
+                score1 = highQtileLimit
+                score2 = lowQtileLimit
             elif strategy == "pessimistic":
-                score = lowQtileLimit
+                score1 = lowQtileLimit
+                score2 = highQtileLimit
             else:   #strategy == "average":
                 lc = float(lowCateg)
                 hc = float(highCateg)
-                score = (lc+hc)/2.0
+                score1 = (lc+hc)/2.0
+                score2 = highQtileLimit
             #print(score,highQtileLimit,lowQtileLimit,lowCateg,highCateg)
             try:
-                actionsCategories[(score,highQtileLimit,lowQtileLimit,lowCateg,highCateg)].append(a)
+                actionsCategories[(score1,highQtileLimit,lowQtileLimit,lowCateg,highCateg,score2)].append(a)
             except:
-                actionsCategories[(score,highQtileLimit,lowQtileLimit,lowCateg,highCateg)] = [a]
+                actionsCategories[(score1,highQtileLimit,lowQtileLimit,lowCateg,highCateg,score2)] = [a]
 
         #print(actionsCategories)
                 
-        actionsCategIntervals = []
-        for interval in actionsCategories:
-            actionsCategIntervals.append([interval,\
-                                          actionsCategories[interval]])
-        actionsCategIntervals.sort(reverse=Descending)
+        actionsCategKeys = list(actionsCategories.keys())
+        #for interval in actionsCategories:
+        #   actionsCategIntervals.append([interval,\
+        #                                  actionsCategories[interval]])
+        #actionsCategIntervals.sort(reverse=Descending)
+        actionsCategIntervals = sorted(actionsCategKeys,key=itemgetter(0,5), reverse=True)
         #if Debug:
-        #print(actionsCategIntervals)
-        CompSize = self.minimalComponentSize 
-        if CompSize == 1:
+        print(actionsCategIntervals)
+        compSize = self.minimalComponentSize
+        
+        if compSize == 1:
             if Descending:
-                componentsIntervals = [[(item[0][1],item[0][2]),item[1],item[0][0],item[0][3],item[0][4]]\
+                componentsIntervals = [[(item[1],item[2]),actionsCategories[item],item[0],item[3],item[4]]\
                                    for item in actionsCategIntervals]
             else:
-                componentsIntervals = [[(item[0][2],item[0][1]),item[1],item[0][0],item[0][3],item[0][4]]\
+                componentsIntervals = [[(item[2],item[1]),actionsCategories[item],item[0],item[3],item[4]]\
                                    for item in actionsCategIntervals]
                 
         else:
@@ -1175,13 +1181,13 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                 comp = actionsCategIntervals[i]
                 #print(comp)
                 if currContLength == 0:
-                    lowQtileLimit = comp[0][2]
-                highQtileLimit = comp[0][1]             
-                compContent += comp[1]
-                if len(compContent) >= CompSize or i == nc-1:
-                    score = comp[0][0]
-                    lowCateg = comp[0][3]
-                    highCateg = comp[0][4]
+                    lowQtileLimit = comp[2]
+                highQtileLimit = comp[1]             
+                compContent += actionsCategories[comp]
+                if len(compContent) >= compSize or i == nc-1:
+                    score = comp[0]
+                    lowCateg = comp[3]
+                    highCateg = comp[4]
                     if Descending:
                         componentsIntervals.append([(highQtileLimit,lowQtileLimit),compContent,\
                                                     score,lowCateg,highCateg])
@@ -1992,47 +1998,47 @@ if __name__ == "__main__":
     print(bg1)
     bg1.showComponents(direction='descending')
 ##    rag = RandomCBPerformanceGenerator(bg1,actionNamePrefix='t')
-    rag = Random3ObjectivesPerformanceGenerator(bg1,actionNamePrefix='t')
-    rag.randomUpdate(2)
-    newActions = [key for key in bg1.actions if key[0] == 't']
-    print(newActions)
-    if bg1.sortingParameters['LowerClosed']:
-        newRelation = bg1._constructRelationSimple(bg1.criteria,bg1.evaluation,
-                                               initial=newActions,terminal=bg1.profiles)
-    else:
-        newRelation = bg1._constructRelationSimple(bg1.criteria,bg1.evaluation,
-                                               initial=bg1.profiles,terminal=newActions)
-    print(newRelation)
-    newSorting = bg1.computeNewSortingCharacteristics(newActions,newRelation)
-    print(newSorting)
-    for x in newActions:
-        res = bg1.computeNewActionCategories(x,newSorting)
-        print(res,bg1.categories[res[1]]['lowLimit'],bg1.categories[res[2]]['highLimit'])
-        #compute score
-        strategy = bg1.sortingParameters['strategy']
-        if strategy == 'optimistic':
-            score = float(res[1])
-        elif strategy == 'pessimistic':
-            score = float(res[2])
-        else:
-            score = (float(res[1])+float(res[2]))/2.0
-            
-        bg1.showNewActionCategories(x,newSorting)
-        for compKey in bg1.components:
-            comp = bg1.components[compKey]
-            #print(score,comp)
-            if comp['lowQtileLimit'] == bg1.categories[res[1]]['lowLimit'] and\
-               comp['highQtileLimit'] == bg1.categories[res[2]]['highLimit']:
-                Found = True
-                print('new Action \'%s\' joins component %s-%s: %s (%s)' % (res[0],comp['lowQtileLimit'],\
-                                                comp['highQtileLimit'], list(comp['subGraph'].actions.keys()), str(comp['score']) ) )
-                break
-            if score > comp['score'][0]:
-                print('New component: %s-%s : [\'%s\'] needs to be inserted!' %\
-                  (bg1.categories[res[1]]['lowLimit'],bg1.categories[res[2]]['highLimit'],res[0]) )
-                break
-
-    bg1.sorting.update(newSorting)
+##    rag = Random3ObjectivesPerformanceGenerator(bg1,actionNamePrefix='t')
+##    rag.randomUpdate(2)
+##    newActions = [key for key in bg1.actions if key[0] == 't']
+##    print(newActions)
+##    if bg1.sortingParameters['LowerClosed']:
+##        newRelation = bg1._constructRelationSimple(bg1.criteria,bg1.evaluation,
+##                                               initial=newActions,terminal=bg1.profiles)
+##    else:
+##        newRelation = bg1._constructRelationSimple(bg1.criteria,bg1.evaluation,
+##                                               initial=bg1.profiles,terminal=newActions)
+##    print(newRelation)
+##    newSorting = bg1.computeNewSortingCharacteristics(newActions,newRelation)
+##    print(newSorting)
+##    for x in newActions:
+##        res = bg1.computeNewActionCategories(x,newSorting)
+##        print(res,bg1.categories[res[1]]['lowLimit'],bg1.categories[res[2]]['highLimit'])
+##        #compute score
+##        strategy = bg1.sortingParameters['strategy']
+##        if strategy == 'optimistic':
+##            score = float(res[1])
+##        elif strategy == 'pessimistic':
+##            score = float(res[2])
+##        else:
+##            score = (float(res[1])+float(res[2]))/2.0
+##            
+##        bg1.showNewActionCategories(x,newSorting)
+##        for compKey in bg1.components:
+##            comp = bg1.components[compKey]
+##            #print(score,comp)
+##            if comp['lowQtileLimit'] == bg1.categories[res[1]]['lowLimit'] and\
+##               comp['highQtileLimit'] == bg1.categories[res[2]]['highLimit']:
+##                Found = True
+##                print('new Action \'%s\' joins component %s-%s: %s (%s)' % (res[0],comp['lowQtileLimit'],\
+##                                                comp['highQtileLimit'], list(comp['subGraph'].actions.keys()), str(comp['score']) ) )
+##                break
+##            if score > comp['score'][0]:
+##                print('New component: %s-%s : [\'%s\'] needs to be inserted!' %\
+##                  (bg1.categories[res[1]]['lowLimit'],bg1.categories[res[2]]['highLimit'],res[0]) )
+##                break
+##
+##    bg1.sorting.update(newSorting)
     bg1.showDecomposition(direction='increasing')
     bg1.showDecomposition(direction='decreasing')
     bg1.showSorting()
