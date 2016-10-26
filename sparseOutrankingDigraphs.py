@@ -1136,16 +1136,16 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             lowQtileLimit = self.categories[lowCateg]['lowLimit']
             highQtileLimit = self.categories[highCateg]['highLimit']
             if strategy == "optimistic":
-                score1 = highQtileLimit
-                score2 = lowQtileLimit
+                score1 = float(highCateg)
+                score2 = float(lowCateg)
             elif strategy == "pessimistic":
-                score1 = lowQtileLimit
-                score2 = highQtileLimit
+                score1 = float(lowCateg)
+                score2 = float(highCateg)
             else:   #strategy == "average":
                 lc = float(lowCateg)
                 hc = float(highCateg)
                 score1 = (lc+hc)/2.0
-                score2 = highQtileLimit
+                score2 = highCateg
             #print(score,highQtileLimit,lowQtileLimit,lowCateg,highCateg)
             try:
                 actionsCategories[(score1,highQtileLimit,lowQtileLimit,lowCateg,highCateg,score2)].append(a)
@@ -1161,7 +1161,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         #actionsCategIntervals.sort(reverse=Descending)
         actionsCategIntervals = sorted(actionsCategKeys,key=itemgetter(0,5), reverse=True)
         #if Debug:
-        print(actionsCategIntervals)
+        #    print(actionsCategIntervals)
         compSize = self.minimalComponentSize
         
         if compSize == 1:

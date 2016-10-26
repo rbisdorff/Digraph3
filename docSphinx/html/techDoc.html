@@ -1294,7 +1294,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'max': 1</em>, <em>'min': -1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'max': 1</em>, <em>'med': 0</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -3607,7 +3607,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4850,7 +4850,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -6920,20 +6920,18 @@ valued self relation.</p>
 <dd><p>Bases: <a class="reference internal" href="#weakOrders.WeakOrder" title="weakOrders.WeakOrder"><code class="xref py py-class docutils literal"><span class="pre">weakOrders.WeakOrder</span></code></a></p>
 <p>Specialization of the abstract WeakOrder class for 
 weak orderings resulting from the epistemic
-disjunctive fusion (omax operator) of the optimistics,
-pessimistic and average quantiles rankings.</p>
-<p>Example session:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="kn">import</span> <span class="n">WeakQuantilesRankingOrder</span>
+disjunctive fusion (omax operator) of a list of rankings.</p>
+<p>Example application:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="kn">import</span> <span class="n">WeakRankingOrder</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="kn">import</span> <span class="n">PreRankedOutrankingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pr</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s">&#39;average&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pr</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s">&#39;average&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r1</span> <span class="o">=</span> <span class="n">qr</span><span class="o">.</span><span class="n">boostedRanking</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pro</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s">&#39;optimistic&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">r2</span> <span class="o">=</span> <span class="n">pro</span><span class="o">.</span><span class="n">boostedRanking</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">prp</span> <span class="o">=</span> <span class="n">QuantilesRankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s">&#39;pessimistic&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">r3</span> <span class="o">=</span> <span class="n">prp</span><span class="o">.</span><span class="n">boostedRanking</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pr</span><span class="o">.</span><span class="n">qrRankings</span> <span class="o">=</span> <span class="p">[</span><span class="n">r1</span><span class="p">,</span><span class="n">r2</span><span class="p">,</span><span class="n">r3</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">wqr</span> <span class="o">=</span> <span class="n">WeakQuantilesRankingOrder</span><span class="p">(</span><span class="n">pr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pro</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s">&#39;optimistic&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r2</span> <span class="o">=</span> <span class="n">pro</span><span class="o">.</span><span class="n">boostedRanking</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prp</span> <span class="o">=</span> <span class="n">QuantilesRankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s">&#39;pessimistic&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r3</span> <span class="o">=</span> <span class="n">prp</span><span class="o">.</span><span class="n">boostedRanking</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wqr</span> <span class="o">=</span> <span class="n">WeakQuantilesRankingOrder</span><span class="p">(</span><span class="n">pr</span><span class="p">,[</span><span class="n">r1</span><span class="p">,</span><span class="n">r2</span><span class="p">,</span><span class="n">r3</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">wqr</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;partialOrdering&#39;</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s">&quot;pdf&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
