@@ -1145,7 +1145,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                 lc = float(lowCateg)
                 hc = float(highCateg)
                 score1 = (lc+hc)/2.0
-                score2 = highCateg
+                score2 = float(highCateg)
             #print(score,highQtileLimit,lowQtileLimit,lowCateg,highCateg)
             try:
                 actionsCategories[(score1,highQtileLimit,lowQtileLimit,lowCateg,highCateg,score2)].append(a)
@@ -1155,10 +1155,6 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         #print(actionsCategories)
                 
         actionsCategKeys = list(actionsCategories.keys())
-        #for interval in actionsCategories:
-        #   actionsCategIntervals.append([interval,\
-        #                                  actionsCategories[interval]])
-        #actionsCategIntervals.sort(reverse=Descending)
         actionsCategIntervals = sorted(actionsCategKeys,key=itemgetter(0,5), reverse=True)
         #if Debug:
         #    print(actionsCategIntervals)
