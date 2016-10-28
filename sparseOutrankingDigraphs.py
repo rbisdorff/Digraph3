@@ -1151,8 +1151,8 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                 score1 = (lc+hc)/2.0
                 score2 = float(highCateg)
                 score3 = -notHighLimit
-                score4 = lowLimit
-            #print(score,highQtileLimit,lowQtileLimit,lowCateg,highCateg)
+                score4 = credibility
+            #print(score1,highQtileLimit,lowQtileLimit,lowCateg,highCateg,score2,score3,score4)
             try:
                 actionsCategories[(score1,highQtileLimit,\
                                    lowQtileLimit,lowCateg,highCateg,score2,score3,score4)].append(a)
