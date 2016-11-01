@@ -90,7 +90,7 @@ def testSparseModelFitness():
     print('==>> Testing sparse modeling fitness')
     MP = True
     Nsim = 2
-    nbrOfActions = 250
+    nbrOfActions = 300
     nbrOfCriteria = 13
     qTiles = 25
     minimalComponentSize=1

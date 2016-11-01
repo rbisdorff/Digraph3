@@ -138,7 +138,8 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         categories = OrderedDict()
         k = len(limitingQuantiles)-1
         if LowerClosed:
-            for i in range(0,k-1):
+            #for i in range(0,k-1):
+            for i from 0 <= i < (k-1):
                 categories[str(i+1)] = {'name':'[%.2f - %.2f['\
                 %(limitingQuantiles[i],limitingQuantiles[i+1]),\
                                 'order':i+1,\
@@ -153,7 +154,8 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                 %(limitingQuantiles[1]), 'order':1,
                     'highLimit': '%.2f]' % (limitingQuantiles[1]),\
                     'lowLimit': ']<'}                                  
-            for i in range(1,k):
+            #for i in range(1,k):
+            for i from 1 <= i < k:
                 categories[str(i+1)] = {'name':']%.2f - %.2f]'\
                 %(limitingQuantiles[i],limitingQuantiles[i+1]), 'order':i+1,
                         'lowLimit': ']%.2f' % (limitingQuantiles[i]),
@@ -294,7 +296,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         """
         Specialization of the corresponding BipolarOutrankingDigraph method
         """
-        cdef int x, n, nq, ni, nt, nbrOfJobs, nit, i, j, Min, Max, Med
+        cdef int x, n, ns, nq, ni, nt, nbrOfJobs, nit, i, j, Min, Max, Med
         cdef bint LowerClosed, InitialSplit
         
         from array import array        
@@ -555,11 +557,13 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                 i = 0
                 actionsRemain = set(actions2Split)
                 splitActionsList = []
-                for j in range(nbrOfJobs):
+                #for j in range(nbrOfJobs):
+                for j from 0 <= j < nbrOfJobs:
                     if Comments:
                         print('Thread = %d/%d' % (j+1,nbrOfJobs),end=" ")
                     splitActions=[]
-                    for k in range(nit):
+                    #for k in range(nit):
+                    for k from 0 <= k < nit:
                         if j < (nbrOfJobs -1) and i < n:
                             splitActions.append(actions2Split[i])
                         else:
@@ -592,7 +596,9 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                 sorting = {}
                 categoryContent = {}
                 relation = {}
-                for j in range(len(splitActionsList)):
+                ns = len(splitActionsList)
+                #for j in range(len(splitActionsList)):
+                for j from 0 <= j < ns:
                     # update category contents
                     fiName = tempDirName+'/splitCategoryContent-'+str(j)+'.py'
                     fi = open(fiName,'rb')

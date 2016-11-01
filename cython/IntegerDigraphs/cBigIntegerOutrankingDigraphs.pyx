@@ -1144,49 +1144,75 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
         
         """
         cdef int x,i,nc,currentContLength,CompSize
-        cdef double lc,hc,score
+        cdef double lc,hc,score1,score2,score3,score4
+        
+        from operator import itemgetter
+
         if strategy == None:
             strategy = self.sortingParameters['strategy']
         actionsCategories = {}
         for x in self.actions:
-            a,lowCateg,highCateg,credibility =\
+            a,lowCateg,highCateg,credibility,lowLimit,notHighLimit =\
                      self.computeActionCategories(x,Comments=Comments,Debug=False,\
                                                Threading=Threading,\
                                                nbrOfCPUs = nbrOfCPUs)
             lowQtileLimit = self.categories[lowCateg]['lowLimit']
             highQtileLimit = self.categories[highCateg]['highLimit']
             if strategy == "optimistic":
-                score = highQtileLimit
+                score1 = float(highCateg)
+                score2 = -notHighLimit
+                score3 = float(lowCateg)
+                score4 = lowLimit
             elif strategy == "pessimistic":
-                score = lowQtileLimit
+                score1 = float(lowCateg)
+                score2 = lowLimit
+                score3 = float(highCateg)
+                score4 = -notHighLimit
             else:   #strategy == "average":
                 lc = float(lowCateg)
                 hc = float(highCateg)
-                score = (lc+hc)/2.0
-            # if Debug:
-            #     print(x,score,highQtileLimit,lowQtileLimit,lowCateg,highCateg)
+                score1 = (lc+hc)/2.0
+                score2 = float(highCateg)
+                score3 = -notHighLimit
+                score4 = lowLimit
+            #print(score,highQtileLimit,lowQtileLimit,lowCateg,highCateg)
             try:
-                actionsCategories[(score,highQtileLimit,lowQtileLimit,lowCateg,highCateg)].append(a)
+                actionsCategories[(score1,highQtileLimit,\
+                                   lowQtileLimit,lowCateg,highCateg,score2,score3,score4)].append(a)
             except:
-                actionsCategories[(score,highQtileLimit,lowQtileLimit,lowCateg,highCateg)] = [a]
+                actionsCategories[(score1,highQtileLimit,\
+                                   lowQtileLimit,lowCateg,highCateg,score2,score3,score4)] = [a]
+            # if strategy == "optimistic":
+            #     score = highQtileLimit
+            # elif strategy == "pessimistic":
+            #     score = lowQtileLimit
+            # else:   #strategy == "average":
+            #     lc = float(lowCateg)
+            #     hc = float(highCateg)
+            #     score = (lc+hc)/2.0
+            # # if Debug:
+            # #     print(x,score,highQtileLimit,lowQtileLimit,lowCateg,highCateg)
+            # try:
+            #     actionsCategories[(score,highQtileLimit,lowQtileLimit,lowCateg,highCateg)].append(a)
+            # except:
+            #     actionsCategories[(score,highQtileLimit,lowQtileLimit,lowCateg,highCateg)] = [a]
 
         if Debug:
             print(actionsCategories)
-                
-        actionsCategIntervals = []
-        for interval in actionsCategories:
-            actionsCategIntervals.append([interval,\
-                                          actionsCategories[interval]])
-        actionsCategIntervals.sort(reverse=Descending)
-        # if Debug:
-        #     print(actionsCategIntervals)
-        CompSize = self.minimalComponentSize 
-        if CompSize == 1:
+
+        actionsCategKeys = list(actionsCategories.keys())
+        actionsCategIntervals = sorted(actionsCategKeys,key=itemgetter(0,5,6,7), reverse=True)
+
+        #if Debug:
+        #    print(actionsCategIntervals)
+        compSize = self.minimalComponentSize
+        
+        if compSize == 1:
             if Descending:
-                componentsIntervals = [[(item[0][1],item[0][2]),item[1],item[0][0],item[0][3],item[0][4]]\
+                componentsIntervals = [[(item[1],item[2]),actionsCategories[item],item[0],item[3],item[4]]\
                                    for item in actionsCategIntervals]
             else:
-                componentsIntervals = [[(item[0][2],item[0][1]),item[1],item[0][0],item[0][3],item[0][4]]\
+                componentsIntervals = [[(item[2],item[1]),actionsCategories[item],item[0],item[3],item[4]]\
                                    for item in actionsCategIntervals]
                 
         else:
@@ -1198,13 +1224,13 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                 comp = actionsCategIntervals[i]
                 #print(comp)
                 if currContLength == 0:
-                    lowQtileLimit = comp[0][2]
-                highQtileLimit = comp[0][1]             
-                compContent += comp[1]
-                if len(compContent) >= CompSize or i == nc-1:
-                    score = comp[0][0]
-                    lowCateg = comp[0][3]
-                    highCateg = comp[0][4]
+                    lowQtileLimit = comp[2]
+                highQtileLimit = comp[1]             
+                compContent += actionsCategories[comp]
+                if len(compContent) >= compSize or i == nc-1:
+                    score = comp[0]
+                    lowCateg = comp[3]
+                    highCateg = comp[4]
                     if Descending:
                         componentsIntervals.append([(highQtileLimit,lowQtileLimit),compContent,\
                                                     score,lowCateg,highCateg])
@@ -1212,9 +1238,52 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                         componentsIntervals.append([(lowQtileLimit,highQtileLimit),compContent,\
                                                     score,lowCateg,highCateg])
                     compContent = []
-        #if Debug:
-        #    print(componentsIntervals)
+        if Debug:
+            print(componentsIntervals)
         return componentsIntervals        
+
+        # actionsCategIntervals = []
+        # for interval in actionsCategories:
+        #     actionsCategIntervals.append([interval,\
+        #                                   actionsCategories[interval]])
+        # actionsCategIntervals.sort(reverse=Descending)
+        # if Debug:
+        #     print(actionsCategIntervals)
+        # CompSize = self.minimalComponentSize 
+        # if CompSize == 1:
+        #     if Descending:
+        #         componentsIntervals = [[(item[0][1],item[0][2]),item[1],item[0][0],item[0][3],item[0][4]]\
+        #                            for item in actionsCategIntervals]
+        #     else:
+        #         componentsIntervals = [[(item[0][2],item[0][1]),item[1],item[0][0],item[0][3],item[0][4]]\
+        #                            for item in actionsCategIntervals]
+                
+        # else:
+        #     componentsIntervals = []
+        #     nc = len(actionsCategIntervals)
+        #     compContent = []
+        #     for i in range(nc):
+        #         currContLength = len(compContent)
+        #         comp = actionsCategIntervals[i]
+        #         #print(comp)
+        #         if currContLength == 0:
+        #             lowQtileLimit = comp[0][2]
+        #         highQtileLimit = comp[0][1]             
+        #         compContent += comp[1]
+        #         if len(compContent) >= CompSize or i == nc-1:
+        #             score = comp[0][0]
+        #             lowCateg = comp[0][3]
+        #             highCateg = comp[0][4]
+        #             if Descending:
+        #                 componentsIntervals.append([(highQtileLimit,lowQtileLimit),compContent,\
+        #                                             score,lowCateg,highCateg])
+        #             else:
+        #                 componentsIntervals.append([(lowQtileLimit,highQtileLimit),compContent,\
+        #                                             score,lowCateg,highCateg])
+        #             compContent = []
+        # #if Debug:
+        # #    print(componentsIntervals)
+        # return componentsIntervals        
 
     def computeActionCategories(self,int action,
                                     bint Show=False,
@@ -1271,7 +1340,15 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
             return action,\
                     keys[0],\
                     keys[0],\
-                    credibility
+                    credibility,\
+                    lowLimit,\
+                    notHighLimit
+            # return action,\
+            #         keys[0],\
+            #         keys[0],\
+            #         credibility,\
+            #         lowLimit,\
+            #         notHighLimit
         else:
             if Show:
                 print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
@@ -1282,7 +1359,15 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
             return action,\
                     keys[0],\
                     keys[-1],\
-                    credibility            
+                    credibility,\
+                    lowLimit,\
+                    notHighLimit
+            # return action,\
+            #         keys[0],\
+            #         keys[-1],\
+            #         credibility,\           
+            #         lowLimit,\
+            #         notHighLimit
 
 
     # ## @cython.locals(x=cython.int,
