@@ -138,3 +138,22 @@ def testexportSortingGraphViz():
     bg1.showComponents()
     bg1.exportSortingGraphViz(actionsSubset=bg1.boostedRanking[:100])     
     
+def testPreRankedConfidentOutrankingDigraph():
+    print('==>> Testing PreRankedConfidentOutrankingDigraph ')
+    MP  = True
+    nbrActions=100
+    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions)
+##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP)
+##                                      seed=100)
+    bg1 = PreRankedConfidentOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,
+                                 quantilesOrderingStrategy='average',
+                                 componentRankingRule='Copeland',
+                                 LowerClosed=True,
+                                 minimalComponentSize=1,
+                                 Threading=False,nbrOfCPUs=8,
+                                 #tempDir='.',
+                                 nbrOfThreads=8,
+                                 Comments=False,Debug=False,
+                                 save2File='testbgMP')
+    print(bg1)
+    bg1.showComponents(direction='descending')
