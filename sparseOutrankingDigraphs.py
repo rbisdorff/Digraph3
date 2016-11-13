@@ -1992,6 +1992,569 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         print('Quantiles sorting result per decision action')
         for x in actions:
             self.showNewActionCategories(x,sorting,Debug=Debug)
+
+##############
+class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,PerformanceTableau):
+    """
+    Main class for the multiprocessing implementation of pre-ranked sparse confident outranking digraphs.
+    
+    The sparse outranking digraph instance is decomposed with a confident q-tiling sort into a partition
+    of quantile equivalence classes which are linearly ordered by average quantile limits (default).
+
+    With each quantile equivalence class is associated a ConfidentBipolarOutrankingDigraph object
+    which is restricted to the decision actions gathered in this quantile equivalence class.
+
+    By default, the number of quantiles is set to a tenth of the number of decision actions,
+    i.e. quantiles = order//10. The effective number of quantiles can be much lower for large orders;
+    for instance quantiles = 250 gives good results for a digraph of order 25000.
+    
+    For other parameters settings, see the corresponding :py:class:`sortingDigraphs.QuantilesSortingDigraph` class.
+
+    """
+    def __init__(self,argPerfTab,\
+                 quantiles=None,\
+                 quantilesOrderingStrategy='average',\
+                 LowerClosed=False,\
+                 componentRankingRule='Copeland',\
+                 minimalComponentSize=1,\
+                 distribution = 'triangular',
+                 betaParameter = 2,
+                 confidence = 90.0,
+                 Threading=False,\
+                 tempDir=None,\
+                 #componentThreadingThreshold=50,\
+                 nbrOfCPUs=1,\
+                 nbrOfThreads=1,\
+                 save2File=None,\
+                 CopyPerfTab=True,\
+                 Comments=True,\
+                 Debug=True):
+
+        global perfTab
+        global decomposition
+        
+        from collections import OrderedDict
+        from time import time
+        from os import cpu_count
+        from multiprocessing import Pool
+        from copy import copy, deepcopy
+        
+        ttot = time()
+
+        # setting name
+        perfTab = argPerfTab
+        # setting quantiles sorting parameters
+        if CopyPerfTab:
+            self.__dict__ = deepcopy(perfTab.__dict__)
+##            self.actions = deepcopy(perfTab.actions)
+##            self.criteria = deepcopy(perfTab.criteria)
+##            self.evaluation = deepcopy(perfTab.evaluation)
+        else:
+            self.__dict__.update(perfTab.__dict__)
+##            self.actions = perfTab.actions
+##            self.criteria = perfTab.criteria
+##            self.evaluation = perfTab.evaluation
+        self.name = perfTab.name + '_conf_pr'
+        na = len(self.actions)
+        self.order = na
+        self.dimension = len(perfTab.criteria)
+        self.componentRankingRule = componentRankingRule
+
+        #######
+        if quantiles == None:
+            quantiles = na//10
+        self.sortingParameters = {}
+        self.sortingParameters['limitingQuantiles'] = quantiles
+        self.sortingParameters['strategy'] = quantilesOrderingStrategy
+        self.sortingParameters['LowerClosed'] = LowerClosed
+        self.sortingParameters['Threading'] = Threading
+        self.sortingParameters['PrefThresholds'] = False
+        self.sortingParameters['hasNoVeto'] = False
+        self.nbrOfCPUs = nbrOfCPUs
+        # quantiles sorting
+        t0 = time()
+        if Comments:        
+            print('Computing the %d-quantiles sorting digraph of order %d ...' % (quantiles,na))
+        qs = QuantilesSortingDigraph(argPerfTab=perfTab,\
+                                     limitingQuantiles=quantiles,\
+                                     LowerClosed=LowerClosed,\
+                                     CompleteOutranking=False,\
+                                     StoreSorting=False,\
+                                     WithSortingRelation=True,\
+                                     hasNoVeto=True,
+                                     CopyPerfTab=CopyPerfTab,\
+                                     Threading=Threading,\
+                                     tempDir=tempDir,\
+                                     nbrCores=nbrOfCPUs,\
+                                     nbrOfProcesses=nbrOfThreads,\
+                                     Comments=Comments,\
+                                     Debug=Debug)
+        self.runTimes = {'sorting': time() - t0}
+        self.valuationdomain = qs.valuationdomain
+        self.profiles = qs.profiles
+        self.categories = qs.categories
+        # compute sorting likelyhoods
+        self.bipolarConfidenceLevel = (confidence/100.0)*2.0 -1.0 
+        self.distribution = distribution
+        self.betaParameter = betaParameter
+        self.evaluation = qs.evaluation
+        self.relation = qs.relation
+        
+        self.likelihoods = self.computeCLTLikelihoods(distribution=distribution,
+                                                      betaParameter=betaParameter,
+                                                      Debug=Debug)
+
+        self.relation = self._computeConfidentRelation(qs.relation,Debug=Debug)
+
+       # compute quantiles sorting result
+        categories = self.categories.keys()
+        actions = self.actions
+        relation = self.relation
+        Max = self.valuationdomain['max']
+        Med = self.valuationdomain['med']
+        Min = self.valuationdomain['min']
+        sorting = {}
+        nq = quantiles-1
+        for x in actions:
+            sorting[x] = {}
+            for c in categories:
+                sorting[x][c] = {}
+                if LowerClosed:
+                    cKey= c+'-m'
+                else:
+                    cKey= c+'-M'
+                if LowerClosed:
+                    lowLimit = relation[x][cKey]
+                    if int(c) < nq:
+                        cMaxKey = str(int(c)+1)+'-m'
+                        notHighLimit = Max - relation[x][cMaxKey] + Min
+                    else:
+                        notHighLimit = Max
+                else:
+                    if int(c) > 1:
+                        cMinKey = str(int(c)-1)+'-M'
+                        lowLimit = Max - relation[cMinKey][x] + Min
+                    else:
+                        lowLimit = Max
+                    notHighLimit = relation[cKey][x]
+                categoryMembership = min(lowLimit,notHighLimit)
+                sorting[x][c]['lowLimit'] = lowLimit
+                sorting[x][c]['notHighLimit'] = notHighLimit
+                sorting[x][c]['categoryMembership'] = categoryMembership
+
+        self.sorting = sorting
+
+        # compute category contents
+        categoryContent = {}
+        for c in self.categories:
+            categoryContent[c] = []
+            for x in actions:
+                if sorting[x][c]['categoryMembership'] >= self.valuationdomain['med']:
+                    categoryContent[c].append(x)
+        self.categoryContent = categoryContent
+        
+        
+        if CopyPerfTab:
+            self.evaluation = deepcopy(perfTab.evaluation)
+        else:
+            self.evaluation = perfTab.evaluation         
+        
+        if Comments:
+            print('execution time: %.4f' % (self.runTimes['sorting']))
+        # preordering
+        if minimalComponentSize == None:
+            minimalComponentSize = 1
+        self.minimalComponentSize = minimalComponentSize
+        self.componentRankingRule = componentRankingRule
+        tw = time()
+        quantilesOrderingStrategy = self.sortingParameters['strategy']
+        ##if quantilesOrderingStrategy == 'average':
+        decomposition = [[(item[0][0],item[0][1]),item[1],item[2],item[3],item[4]]\
+                for item in self._computeQuantileOrdering(\
+                    strategy=quantilesOrderingStrategy,\
+                    Descending=True,Threading=Threading,nbrOfCPUs=nbrOfCPUs)]
+        if Debug:
+            print(decomposition)
+        self.decomposition = decomposition
+        self.runTimes['preordering'] = time() - tw
+        if Comments:
+            print('weak ordering execution time: %.4f' % self.runTimes['preordering']  )
+        # setting components
+        t0 = time()
+        nc = len(decomposition)
+        self.nbrComponents = nc
+        self.nd = len(str(nc))
+        if not self.sortingParameters['Threading']:
+            components = OrderedDict()
+            for i in range(1,nc+1):
+                comp = decomposition[i-1]
+                #print('==>>',comp)
+                compKey = ('c%%0%dd' % (self.nd)) % (i)
+                components[compKey] = {'rank':i}
+                pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
+                components[compKey]['lowQtileLimit'] = comp[0][1]
+                components[compKey]['highQtileLimit'] = comp[0][0]
+                pg = BipolarOutrankingDigraph(pt,
+                                          WithConcordanceRelation=False,
+                                          WithVetoCounts=False,
+                                          Normalized=True,
+                                          CopyPerfTab=False)
+                pg.__dict__.pop('criteria')
+                pg.__dict__.pop('evaluation')
+                pg.__class__ = Digraph
+                components[compKey]['subGraph'] = pg
+                components[compKey]['score']=(comp[2],comp[3],comp[4])
+        else:   # if self.sortingParameters['Threading'] == True:
+                from copy import copy, deepcopy
+                from pickle import dumps, loads, load, dump
+                from multiprocessing import Process, Queue,active_children, cpu_count                 
+                if Comments:
+                    print('Processing the %d components' % nc )
+                    print('Threading ...')
+                #tdump = time()
+                from tempfile import TemporaryDirectory,mkdtemp
+                with TemporaryDirectory(dir=tempDir) as tempDirName:
+                    ## tasks queue and workers launching
+                    NUMBER_OF_WORKERS = nbrOfCPUs
+                    tasksIndex = [(i,len(decomposition[i][1])) for i in range(nc)]
+                    tasksIndex.sort(key=lambda pos: pos[1],reverse=True)
+                    TASKS = [(Comments,(pos[0],nc,tempDirName,componentRankingRule)) for pos in tasksIndex]
+                    task_queue = Queue()
+                    for task in TASKS:
+                        task_queue.put(task)
+                    for i in range(NUMBER_OF_WORKERS):
+                        Process(target=_worker,args=(task_queue,)).start()
+                    print('started')
+                    for i in range(NUMBER_OF_WORKERS):
+                        task_queue.put('STOP')                   
+
+                    while active_children() != []:
+                        pass
+                    if Comments:
+                        print('Exit %d threads' % NUMBER_OF_WORKERS)
+                        
+                    components = OrderedDict()
+                    #componentsList = []
+                    boostedRanking = []
+                    for j in range(nc):
+                        if Debug:
+                            print('job',j)
+                        fiName = tempDirName+'/splitComponent-'+str(j)+'.py'
+                        fi = open(fiName,'rb')
+                        splitComponent = loads(fi.read())
+                        if Debug:
+                            print('splitComponent',splitComponent)
+                        components[splitComponent['compKey']] = splitComponent['compDict']
+                        boostedRanking += splitComponent['compDict']['subGraph'].ranking
+                    self.boostedRanking = boostedRanking
+                    self.boostedOrder = list(reversed(self.boostedRanking))
+                    
+        # storing components, fillRate and maximalComponentSize
+
+        self.components = components
+        fillRate = 0
+        maximalComponentSize = 0
+        for compKey,comp in components.items():
+            pg = comp['subGraph']
+            npg = pg.order
+            if npg > maximalComponentSize:
+                maximalComponentSize = npg
+            fillRate += npg*(npg-1)
+            for x in pg.actions.keys():
+                self.actions[x]['component'] = compKey
+        self.fillRate = fillRate/(self.order * (self.order-1))
+        self.maximalComponentSize = maximalComponentSize
+
+
+
+
+        # setting the component relation
+        self.valuationdomain = {'min':Decimal('-1'),
+                                'med':Decimal('0'),
+                                'max':Decimal('1')}
+       
+        self.runTimes['decomposing'] = time() - t0
+        if Comments:
+            print('decomposing time: %.4f' % self.runTimes['decomposing']  )
+
+        #  compute boosted ranking in not threaded exceution
+        if not self.sortingParameters['Threading']:
+            t0 = time()
+            self.boostedRanking = self.computeBoostedRanking(rankingRule=componentRankingRule)
+            self.boostedOrder = list(reversed(self.boostedRanking))
+            self.runTimes['ordering'] = time() - t0
+        else:
+            self.runTimes['ordering'] = 0
+        if Comments:
+            print('ordering time: %.4f' % self.runTimes['ordering']  )
+        ########
+        self.runTimes['totalTime'] = time() - ttot
+        if Comments:
+            print(self.runTimes)
+        if save2File != None:
+            self.showShort(fileName=save2File)
+            
+
+    # ----- class methods ------------
+
+    
+    def computeCLTLikelihoods(self,distribution="triangular",
+                              betaParameter=None,
+                              Debug=True):
+        """
+        Renders the pairwise CLT likelihood of the at least as good as relation
+        neglecting all considerable large performance differences polarisations.
+        """
+        from copy import copy as deepcopy
+        from decimal import Decimal
+        from math import sqrt
+        from random import gauss
+        sumWeights = Decimal('0')
+        criteriaList = [x for x in self.criteria]
+        m = len(criteriaList)
+        
+        weightSquares = {}
+        for g in criteriaList:
+            gWeight = self.criteria[g]['weight']
+            weightSquares[g] = gWeight*gWeight
+            sumWeights += gWeight
+        concordanceRelation = self._recodeConcordanceValuation(\
+                                self.relation,sumWeights,Debug=Debug)
+
+        ccf = {}
+        if distribution == 'uniform':
+            varFactor = Decimal('1')/Decimal('3')
+        elif distribution == 'triangular':
+            varFactor = Decimal('1')/Decimal('6')
+        elif distribution == 'beta':
+            if betaParameter != None:
+                a = Decimal(str(betaParameter))
+            else:
+                a = self.betaParameter
+            varFactor = Decimal('1')/(Decimal('2')*a + Decimal('1'))
+        ## elif distribution == 'beta(4,4)':
+        ##     varFactor = Decimal('1')/Decimal('9')
+        for x in self.relation:
+            ccf[x] = {}
+            for y in self.relation[x]:
+                ccf[x][y] = {'std': Decimal('0.0')}
+                for c in criteriaList:
+                    ccf[x][y][c] = self.criterionCharacteristicFunction(c,x,y)
+                    ccf[x][y]['std'] += abs(ccf[x][y][c])*weightSquares[c]
+##                    if Debug:
+##                        print(c,x,y,ccf[x][y][c])
+                ccf[x][y]['std'] = sqrt(varFactor*ccf[x][y]['std'])
+##                if Debug:
+##                    print(x,y,ccf[x][y]['std'])
+        lh = {}
+        for x in self.relation:
+            lh[x] = {}
+            for y in self.relation[x]:
+
+                mean = float(concordanceRelation[x][y])
+                std = float(ccf[x][y]['std'])
+                lh[x][y] = -self._myGaussCDF(mean,std,0.0)
+                if Debug:
+                    print(x,y,lh[x][y])
+        return lh
+
+    def _computeConfidentRelation(self,
+                               sortingRelation,
+                               likelihoodLevel=None,
+                               Debug=True):
+        """
+        Renders the relation cut at likelihood level.
+        """
+        
+        Med = self.valuationdomain['med']
+        Max = self.valuationdomain['max']
+        Min = self.valuationdomain['min']
+
+        if likelihoodLevel == None:
+            likelihoodLevel = self.bipolarConfidenceLevel
+
+        print(likelihoodLevel)
+        confidenceCutLevel = Med
+        confidentRelation = {}
+        #actionsList = [x for x in self.actions]
+
+        for x in self.likelihoods:
+            lhx = self.likelihoods[x]
+            confidentRelation[x] = {}
+            for y in lhx:
+                lhxy = lhx[y]
+                if abs(lhxy) >= likelihoodLevel:
+                    confidentRelation[x][y] = sortingRelation[x][y]
+                else:
+                    confidentRelation[x][y] = Med
+                    level = abs(sortingRelation[x][y])
+                    if level < Max and level > confidenceCutLevel:
+                        confidenceCutLevel = level
+                if Debug:
+                    print(x,y,sortingRelation[x][y],self.likelihoods[x][y],confidentRelation[x][y])
+            self.confidenceCutLevel = confidenceCutLevel
+        return confidentRelation
+        
+    def _recodeConcordanceValuation(self,oldRelation,sumWeights,Debug=True):
+        """
+        Recodes the characteristic valuation according
+        to the parameters given.
+        """
+        if Debug:
+            print(oldRelation,sumWeights)
+        from copy import copy as deepcopy
+        
+##        oldMax = Decimal('1')
+##        oldMin = Decimal('-1')
+##        oldMed = Decimal('0')
+        oldMax = self.valuationdomain['max']
+        oldMin = self.valuationdomain['min']
+        oldMed = self.valuationdomain['med']
+        oldAmplitude = oldMax - oldMin
+        if Debug:
+            print('old: ',oldMin, oldMed, oldMax, oldAmplitude)
+
+        newMin = -sumWeights
+        newMax = sumWeights
+        newMed = Decimal('%.3f' % ((newMax + newMin)/Decimal('2.0')))
+        newAmplitude = newMax - newMin
+        if Debug:
+            print('new: ', newMin, newMed, newMax, newAmplitude)
+
+##        actions = [x for x in self.actions]
+        newRelation = {}
+        for x in oldRelation:
+            newRelation[x] = {}
+            for y in oldRelation[x]:
+                if oldRelation[x][y] == oldMax:
+                    newRelation[x][y] = newMax
+                elif oldRelation[x][y] == oldMin:
+                    newRelation[x][y] = newMin
+                elif oldRelation[x][y] == oldMed:
+                    newRelation[x][y] = newMed
+                else:
+                    newRelation[x][y] = newMin +\
+                        ((oldRelation[x][y] - oldMin)/oldAmplitude)*newAmplitude
+                    if Debug:
+                        print(x,y,oldRelation[x][y],newRelation[x][y])
+
+        return newRelation
+
+    def _myGaussCDF(self,mean,sigma,x,Bipolar=True):
+        """
+        Bipolar error function of z = (x-mu)/sigma) divided by sqrt(2).
+        If Bipolar = False,
+        renders the Gauss cdf(z) = [erf( z ) + 1] / 2
+        sqrt(2) = 1.4142135623731
+        """
+        #print(mean,sigma,x)
+        from math import sqrt,erf
+        try:
+            z = (x - mean) / (sigma * 1.4142135623731)
+        except:
+            z = x
+        if Bipolar:
+            return erf(z)
+        else:
+            return 0.5 + 0.5*erf(z)
+
+    def showRelationTable(self,IntegerValues=False,
+                          actionsSubset= None,
+                          Sorted=True,
+                          LikelihoodDenotation=True,
+                          hasLatexFormat=False,
+                          hasIntegerValuation=False,
+                          relation=None,
+                          Debug=False):
+        """
+        prints the relation valuation in actions X actions table format.
+        """
+        if LikelihoodDenotation:
+            try:
+                likelihoods = self.likelihoods
+            except:
+                LikelihoodDenotation = False
+        if Debug:
+            print(LikelihoodDenotation)
+        if actionsSubset == None:
+            actions = self.actions
+        else:
+            actions = actionsSubset
+            
+        if relation == None:
+            relation = self.relation
+            
+        print('* ---- Outranking Relation Table -----')
+        if LikelihoodDenotation:
+            print('r/(lh) | ', end=' ')
+        else:
+            print(' r()   | ', end=' ')
+        #actions = [x for x in actions]
+        actionsList = []
+        for x in actions:
+            if isinstance(x,frozenset):
+                try:
+                    actionsList += [(actions[x]['shortName'],x)]
+                except:
+                    actionsList += [(actions[x]['name'],x)]
+            else:
+                actionsList += [(x,x)]
+        if Sorted:
+            actionsList.sort()
+
+        try:
+            hasIntegerValuation = self.valuationdomain['hasIntegerValuation']
+        except KeyError:
+            hasIntegerValuation = IntegerValues
+        
+        for x in actionsList:
+            print("'"+x[0]+"'\t", end=' ')
+        print('\n-------|------------------------------------------------------------')
+        for x in actionsList:
+            if hasLatexFormat:
+                print("$"+x[0]+"$ & ", end=' ')
+            else:
+                print(" '"+x[0]+"' |", end=' ')
+            for y in actionsList:
+                if hasIntegerValuation:
+                    if hasLatexFormat:
+                        print('$%+d$ &' % (relation[x[1]][y[1]]), end=' ')
+                    else:
+                        print('%+d' % (relation[x[1]][y[1]]), end=' ')
+                else:
+                    if hasLatexFormat:
+                        print('$%+.2f$ & ' % (relation[x[1]][y[1]]), end=' ')       
+                    else:
+                        print(' %+.2f ' % (relation[x[1]][y[1]]), end=' ')
+                
+            if hasLatexFormat:
+                print(' \\cr')
+            else:
+                print()
+            if LikelihoodDenotation:
+                headString = "' "+x[0]+"' "
+                formatStr = ' ' * len(headString)
+                print(formatStr+'|', end=' ')
+                for y in actionsList:
+                    if x != y:
+                        print('(%+.2f)' % (likelihoods[x[1]][y[1]]), end=' ')
+                    else:
+                        print(' ( - ) ', end=' ')
+                print()
+
+        print('Valuation domain : [%+.3f; %+.3f] ' % (self.valuationdomain['min'],
+                                                   self.valuationdomain['max']))
+        print('Uncertainty model: %s(a=%.1f,b=%.1f) ' % (self.distribution,
+                                                         self.betaParameter,
+                                                         self.betaParameter)
+                                                         )
+        print('Likelihood domain: [-1.0;+1.0] ')
+        print('Likelihood level : %.2f (%.2f%%) ' % (self.bipolarConfidenceLevel,
+                                                     (self.bipolarConfidenceLevel+1.0)/2.0))
+        
+        print('Determinateness  : %.3f ' % self.computeDeterminateness() )
+        print('\n')
+
  
 #######################################################################
 #######################################################################
@@ -2007,7 +2570,7 @@ if __name__ == "__main__":
 
 ##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP)
 ##                                      seed=100)
-    bg1 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=20,
+    bg1 = PreRankedConfidentOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,
                                  quantilesOrderingStrategy='average',
                                  componentRankingRule='Copeland',
                                  LowerClosed=True,

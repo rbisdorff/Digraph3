@@ -8228,9 +8228,12 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             print(oldRelation,sumWeights)
         from copy import copy as deepcopy
         
-        oldMax = Decimal('1')
-        oldMin = Decimal('-1')
-        oldMed = Decimal('0')
+##        oldMax = Decimal('1')
+##        oldMin = Decimal('-1')
+##        oldMed = Decimal('0')
+        oldMax = self.valuationdomain['max']
+        oldMin = self.valuationdomain['min']
+        oldMed = self.valuationdomain['med']
         oldAmplitude = oldMax - oldMin
         if Debug:
             print('old: ',oldMin, oldMed, oldMax, oldAmplitude)
