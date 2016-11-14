@@ -157,3 +157,38 @@ def testPreRankedConfidentOutrankingDigraph():
                                  save2File='testbgMP')
     print(bg1)
     bg1.showComponents(direction='descending')
+
+def testConfidentVersusStdPreRankedOutrankingDigraph():
+    print('==>> Testing confident versus standard PreRanked vesrion')
+    MP  = True
+    nbrActions=100
+    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions)
+##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP)
+##                                      seed=100)
+    bg1 = PreRankedConfidentOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,
+                                 quantilesOrderingStrategy='average',
+                                 componentRankingRule='Copeland',
+                                 LowerClosed=False,
+                                 minimalComponentSize=1,
+                                 Threading=False,nbrOfCPUs=4,
+                                 #tempDir='.',
+                                 nbrOfThreads=4,
+                                 Comments=False,Debug=False,
+                                 save2File='testbgconf')
+    print(bg1)
+    bg1.showComponents(direction='descending')
+    bg2 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,
+                                 quantilesOrderingStrategy='average',
+                                 componentRankingRule='Copeland',
+                                 LowerClosed=False,
+                                 minimalComponentSize=1,
+                                 Threading=False,nbrOfCPUs=4,
+                                 #tempDir='.',
+                                 nbrOfThreads=4,
+                                 Comments=False,Debug=False,
+                                 save2File='testbgstd')
+    print(bg2)
+    bg2.showComponents(direction='descending')
+    from weakOrders import WeakRankingOrder
+    wr = WeakRankingOrder(bg1,[bg1.boostedRanking,bg2.boostedRanking])
+    wr.exportGraphViz('fusion-cpr-pr',graphType="pdf")

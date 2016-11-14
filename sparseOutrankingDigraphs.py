@@ -2027,8 +2027,8 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
                  nbrOfThreads=1,\
                  save2File=None,\
                  CopyPerfTab=True,\
-                 Comments=True,\
-                 Debug=True):
+                 Comments=False,\
+                 Debug=False):
 
         global perfTab
         global decomposition
@@ -2300,7 +2300,7 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
     
     def computeCLTLikelihoods(self,distribution="triangular",
                               betaParameter=None,
-                              Debug=True):
+                              Debug=False):
         """
         Renders the pairwise CLT likelihood of the at least as good as relation
         neglecting all considerable large performance differences polarisations.
@@ -2361,7 +2361,7 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
     def _computeConfidentRelation(self,
                                sortingRelation,
                                likelihoodLevel=None,
-                               Debug=True):
+                               Debug=False):
         """
         Renders the relation cut at likelihood level.
         """
@@ -2395,7 +2395,7 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
             self.confidenceCutLevel = confidenceCutLevel
         return confidentRelation
         
-    def _recodeConcordanceValuation(self,oldRelation,sumWeights,Debug=True):
+    def _recodeConcordanceValuation(self,oldRelation,sumWeights,Debug=False):
         """
         Recodes the characteristic valuation according
         to the parameters given.
@@ -2563,25 +2563,42 @@ if __name__ == "__main__":
     
     from time import time
     from weakOrders import QuantilesRankingDigraph
-    MP  = False
+    MP  = True
     nbrActions=100
 ##    t0 = time()
     tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions)
+##    tp = XMCDA2PerformanceTableau('the_cs_2016')
 
-##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP)
-##                                      seed=100)
+##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
+##                                     seed=100)
     bg1 = PreRankedConfidentOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,
                                  quantilesOrderingStrategy='average',
                                  componentRankingRule='Copeland',
-                                 LowerClosed=True,
+                                 LowerClosed=False,
                                  minimalComponentSize=1,
-                                 Threading=False,nbrOfCPUs=8,
+                                 Threading=MP,nbrOfCPUs=8,
                                  #tempDir='.',
                                  nbrOfThreads=8,
                                  Comments=False,Debug=False,
                                  save2File='testbgMP')
     print(bg1)
     bg1.showComponents(direction='descending')
+    bg2 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,
+                                 quantilesOrderingStrategy='average',
+                                 componentRankingRule='Copeland',
+                                 LowerClosed=False,
+                                 minimalComponentSize=1,
+                                 Threading=MP,nbrOfCPUs=8,
+                                 #tempDir='.',
+                                 nbrOfThreads=8,
+                                 Comments=False,Debug=False,
+                                 save2File='testbgMP')
+    print(bg2)
+    bg2.showComponents(direction='descending')
+    from weakOrders import WeakRankingOrder
+    wr = WeakRankingOrder(bg1,[bg1.boostedRanking,bg2.boostedRanking])
+    wr.exportGraphViz('fusion-cpr-pr',graphType="pdf")
+    
 ##    rag = RandomCBPerformanceGenerator(bg1,actionNamePrefix='t')
 ##    rag = Random3ObjectivesPerformanceGenerator(bg1,actionNamePrefix='t')
 ##    rag.randomUpdate(2)
@@ -2624,10 +2641,10 @@ if __name__ == "__main__":
 ##                break
 ##
 ##    bg1.sorting.update(newSorting)
-    bg1.showDecomposition(direction='increasing')
-    bg1.showDecomposition(direction='decreasing')
-    bg1.showSorting()
-    bg1.showActionSortingResult('a001')
+##    bg1.showDecomposition(direction='increasing')
+##    bg1.showDecomposition(direction='decreasing')
+##    bg1.showSorting()
+##    bg1.showActionSortingResult('a001')
     
 ##    bg1.sorting.update(newSorting)
 ##    bg1.showActionsSortingResult()
