@@ -157,6 +157,7 @@ def testPreRankedConfidentOutrankingDigraph():
                                  save2File='testbgMP')
     print(bg1)
     bg1.showComponents(direction='descending')
+    bg1.showRelationMap()
 
 def testConfidentVersusStdPreRankedOutrankingDigraph():
     print('==>> Testing confident versus standard PreRanked vesrion')

@@ -77,6 +77,24 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         else:
             return Max
 
+    def computeDeterminateness(self):
+        """
+        Computes the Kendalll distance in % of self
+        with the all median valued (indeterminate) digraph.
+        """
+        Max = self.valuationdomain['max']
+        Med = self.valuationdomain['med']
+        actions = self.actions
+        relation = self.relation
+        order = self.order
+        deter = Decimal('0.0')
+        for x in actions:
+            for y in actions:
+                if x != y:
+                    deter += abs(relation(x,y) - Med)
+        deter = ( Decimal(str(deter)) / Decimal(str((order * (order-1)))) )
+        return deter/(Decimal(str(Max-Med)))*Decimal('100')
+
     def sortingRelation(self,x,y,Debug=False):
         """
         Dynamic construction of the quantiles sorting characteristic function *r(x QS y)*.
@@ -2098,18 +2116,18 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
         self.distribution = distribution
         self.betaParameter = betaParameter
         self.evaluation = qs.evaluation
-        self.relation = qs.relation
+        self.sortingRelation = qs.relation
         
         self.likelihoods = self.computeCLTLikelihoods(distribution=distribution,
                                                       betaParameter=betaParameter,
                                                       Debug=Debug)
 
-        self.relation = self._computeConfidentRelation(qs.relation,Debug=Debug)
+        self.confidentRelation = self._computeConfidentRelation(qs.relation,Debug=Debug)
 
        # compute quantiles sorting result
         categories = self.categories.keys()
         actions = self.actions
-        relation = self.relation
+        relation = self.confidentRelation
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         Min = self.valuationdomain['min']
@@ -2305,10 +2323,9 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
         Renders the pairwise CLT likelihood of the at least as good as relation
         neglecting all considerable large performance differences polarisations.
         """
-        from copy import copy as deepcopy
         from decimal import Decimal
         from math import sqrt
-        from random import gauss
+        #from random import gauss
         sumWeights = Decimal('0')
         criteriaList = [x for x in self.criteria]
         m = len(criteriaList)
@@ -2319,7 +2336,7 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
             weightSquares[g] = gWeight*gWeight
             sumWeights += gWeight
         concordanceRelation = self._recodeConcordanceValuation(\
-                                self.relation,sumWeights,Debug=Debug)
+                                self.sortingRelation,sumWeights,Debug=Debug)
 
         ccf = {}
         if distribution == 'uniform':
@@ -2334,9 +2351,9 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
             varFactor = Decimal('1')/(Decimal('2')*a + Decimal('1'))
         ## elif distribution == 'beta(4,4)':
         ##     varFactor = Decimal('1')/Decimal('9')
-        for x in self.relation:
+        for x in concordanceRelation:
             ccf[x] = {}
-            for y in self.relation[x]:
+            for y in concordanceRelation[x]:
                 ccf[x][y] = {'std': Decimal('0.0')}
                 for c in criteriaList:
                     ccf[x][y][c] = self.criterionCharacteristicFunction(c,x,y)
@@ -2347,9 +2364,9 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
 ##                if Debug:
 ##                    print(x,y,ccf[x][y]['std'])
         lh = {}
-        for x in self.relation:
+        for x in concordanceRelation:
             lh[x] = {}
-            for y in self.relation[x]:
+            for y in concordanceRelation[x]:
 
                 mean = float(concordanceRelation[x][y])
                 std = float(ccf[x][y]['std'])
@@ -2482,7 +2499,7 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
             actions = actionsSubset
             
         if relation == None:
-            relation = self.relation
+            relation = self.confidentRelation
             
         print('* ---- Outranking Relation Table -----')
         if LikelihoodDenotation:
