@@ -2026,7 +2026,8 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
     i.e. quantiles = order//10. The effective number of quantiles can be much lower for large orders;
     for instance quantiles = 250 gives good results for a digraph of order 25000.
     
-    For other parameters settings, see the corresponding :py:class:`sortingDigraphs.QuantilesSortingDigraph` class.
+    For other parameters settings, see the corresponding classes:
+    :py:class:`sortingDigraphs.QuantilesSortingDigraph` and :py:class:`outrankingDigraphs.ConfidentBipolarOutrankingDigraph` .
 
     """
     def __init__(self,argPerfTab,\

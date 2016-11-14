@@ -1294,7 +1294,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -3607,7 +3607,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4850,7 +4850,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -5239,7 +5239,8 @@ which is restricted to the decision actions gathered in this quantile equivalenc
 <p>By default, the number of quantiles is set to a tenth of the number of decision actions,
 i.e. quantiles = order//10. The effective number of quantiles can be much lower for large orders;
 for instance quantiles = 250 gives good results for a digraph of order 25000.</p>
-<p>For other parameters settings, see the corresponding <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.QuantilesSortingDigraph</span></code></a> class.</p>
+<p>For other parameters settings, see the corresponding classes:
+<a class="reference internal" href="#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.QuantilesSortingDigraph</span></code></a> and <a class="reference internal" href="#outrankingDigraphs.ConfidentBipolarOutrankingDigraph" title="outrankingDigraphs.ConfidentBipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.ConfidentBipolarOutrankingDigraph</span></code></a> .</p>
 <dl class="method">
 <dt id="sparseOutrankingDigraphs.PreRankedConfidentOutrankingDigraph.computeCLTLikelihoods">
 <code class="descname">computeCLTLikelihoods</code><span class="sig-paren">(</span><em>distribution='triangular'</em>, <em>betaParameter=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#sparseOutrankingDigraphs.PreRankedConfidentOutrankingDigraph.computeCLTLikelihoods" title="Permalink to this definition">¶</a></dt>
@@ -5469,6 +5470,13 @@ the components as follows:</p>
                       (see computeFillRate()}
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="method">
+<dt id="sparseOutrankingDigraphs.SparseOutrankingDigraph.computeDeterminateness">
+<code class="descname">computeDeterminateness</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sparseOutrankingDigraphs.SparseOutrankingDigraph.computeDeterminateness" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the Kendalll distance in % of self
+with the all median valued (indeterminate) digraph.</p>
 </dd></dl>
 
 <dl class="method">
