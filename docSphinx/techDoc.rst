@@ -29,7 +29,7 @@ On Linux or Mac OS, ..$ cd to the extracted <Digraph3> directory::
 
      ../Digraph3$ make install
 
-installs (with sudo !!) the digraphs module in the current running python environment. Pythhon 3.5 (or later) environment is recoomemded::
+installs (with sudo !!) the digraphs module in the current running python environment. Pythhon 3.5 (or later) environment is recommended::
 
      ../Digraph3$ make tests
 
@@ -41,7 +41,7 @@ runs a verbose (with stdout not captured) nose test suite::
 
      ../Digraph3$ make pTests
 
-runs the nose test suite in multiple processing mode when multiple cores are detected.
+runs the nose test suite in multiple processing mode when the GNU `parallel <https://www.gnu.org/software/parallel/>`_ shell tool is installed and multiple cores are detected.
 
 To be fully functional, the Digraph3 resources mainly need the `graphviz <http://graphviz.org>`_ tools and the `R statistics resources <http://www.r-project.org>`_ to be installed. When exploring digraph isomorphisms, the `nauty <http://www.cs.sunysb.edu/~algorith/implement/nauty/implement.shtml>`_ isomorphism testing program is required. Two specific criteria and actions clustering methods of the `OutrankingDigraph <techDoc.html#outrankingDigraphs.OutrankingDigraph>`_ class furthermore require the `calmat <http://leopold-loewenheim.uni.lu/svn/repos/Calmat/>`_ matrix computing resource to be installed. 
 
