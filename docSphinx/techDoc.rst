@@ -93,6 +93,18 @@ A tutorial with coding examples is available here: :ref:`Digraphs-Tutorial-label
 
 Back to the :ref:`Technical-label`
 
+.. _randomDigraphs-label:
+
+randomDigraphs module
+----------------------
+
+.. automodule:: randomDigraphs
+   :member-order: alphabetical
+   :no-inherited-members:
+   :members:
+
+Back to the :ref:`Technical-label`
+
 .. _graphs-label:
 
 graphs module
@@ -217,18 +229,6 @@ randomNumbers module
 ----------------------
 
 .. automodule:: randomNumbers
-   :member-order: alphabetical
-   :no-inherited-members:
-   :members:
-
-Back to the :ref:`Technical-label`
-
-.. _randomDigraphs-label:
-
-randomDigraphs module
-----------------------
-
-.. automodule:: randomDigraphs
    :member-order: alphabetical
    :no-inherited-members:
    :members:
