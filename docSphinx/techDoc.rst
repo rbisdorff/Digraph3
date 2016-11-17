@@ -51,6 +51,8 @@ The Digraph3 source code is split into several interdependent modules of which t
 
 * :ref:`digraphs-label`  
      Main part of the Digraph3 source code with the root `Digraph <techDoc.html#digraphs.Digraph>`_ class;
+* :ref:`randomDigraphs-label` 
+     Various implemented random digraph models.
 * :ref:`graphs-label`
      Specialization for undirected graphs with the root `Graph <techDoc.html#graphs.Graph>`_ class and a brigde to the ``digraphs`` module resources;
 * :ref:`outrankingDigraphs-label`
@@ -67,8 +69,6 @@ The Digraph3 source code is split into several interdependent modules of which t
      Additional tools for solving ranking by choosing problems with root `WeakOrder <techDoc.html#weakOrders.WeakOrder>`_ class.
 * :ref:`randomNumbers-label` 
      Additional random number generators, not available in the standard python library.
-* :ref:`randomDigraphs-label` 
-     Various implemented random digraph models.
 * :ref:`randomPerfTabs-label` 
      Various implemented random performance tableau models.
 * :ref:`sparseOutrankingDigraphs-label` 
