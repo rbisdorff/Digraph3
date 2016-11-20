@@ -86,42 +86,42 @@ def testPRIThreadingOptions():
     print('execution time %s: ' % (str ( time()-t0 ) ) )
     rcf2.showWeakOrder()
 
-def testQuantilesRankingDigraphWithOutThreading():
-    print('===>>> test QsRbcOrdering class methods---------')
-    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=30)
-    g = BipolarOutrankingDigraph(t,Normalized=True)
-    t0 = time()
-    #limitingQuantiles = len(t.actions) // 2
-    limitingQuantiles = 10
-    qsrbc = QsRbcWeakOrdering(t,limitingQuantiles,Threading=False,Debug=False)
-    print(time()-t0)
-    qsrbc.showSorting()
-    weakOrdering = qsrbc.computeWeakOrder(Comments=False,Debug=False)
-    print(weakOrdering)
-    qsrbc.showOrderedRelationTable()
-    qsrbc.exportGraphViz()
-    print(g.computeOrdinalCorrelation(qsrbc))
-    
-def testQuantilesRankingDigraphWithThreading():
-    print('===>>> test QsRbcOrderingWithThreading class methods---------')
-    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=30)
-    g = BipolarOutrankingDigraph(t,Normalized=True)
-    t0 = time()
-    #limitingQuantiles = len(t.actions) // 2
-    limitingQuantiles = 10
-    qsrbc = QsRbcWeakOrdering(t,limitingQuantiles,
-                              strategy="pessimistic",
-                              rankingRule="RubisChoice",
-                              nbrCores=4,Debug=False)
-    print(time()-t0)
-    qsrbc.showSorting()
-    weakOrdering = qsrbc.computeWeakOrder(Comments=False,Debug=False)
-    print(weakOrdering)
-    qsrbc.showOrderedRelationTable()
-    QsRbcWeakOrdering.exportGraphViz(qsrbc,'test')
-    print(g.computeOrdinalCorrelation(qsrbc))
+##def testQuantilesRankingDigraphWithOutThreading():
+##    print('===>>> test QsRbcOrdering class methods---------')
+##    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+##                                 numberOfActions=30)
+##    g = BipolarOutrankingDigraph(t,Normalized=True)
+##    t0 = time()
+##    #limitingQuantiles = len(t.actions) // 2
+##    limitingQuantiles = 10
+##    qsrbc = QsRbcWeakOrdering(t,limitingQuantiles,Threading=False,Debug=False)
+##    print(time()-t0)
+##    qsrbc.showSorting()
+##    weakOrdering = qsrbc.computeWeakOrder(Comments=False,Debug=False)
+##    print(weakOrdering)
+##    qsrbc.showOrderedRelationTable()
+##    qsrbc.exportGraphViz()
+##    print(g.computeOrdinalCorrelation(qsrbc))
+##    
+##def testQuantilesRankingDigraphWithThreading():
+##    print('===>>> test QsRbcOrderingWithThreading class methods---------')
+##    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+##                                 numberOfActions=30)
+##    g = BipolarOutrankingDigraph(t,Normalized=True)
+##    t0 = time()
+##    #limitingQuantiles = len(t.actions) // 2
+##    limitingQuantiles = 10
+##    qsrbc = QsRbcWeakOrdering(t,limitingQuantiles,
+##                              strategy="pessimistic",
+##                              rankingRule="RubisChoice",
+##                              nbrCores=4,Debug=False)
+##    print(time()-t0)
+##    qsrbc.showSorting()
+##    weakOrdering = qsrbc.computeWeakOrder(Comments=False,Debug=False)
+##    print(weakOrdering)
+##    qsrbc.showOrderedRelationTable()
+##    QsRbcWeakOrdering.exportGraphViz(qsrbc,'test')
+##    print(g.computeOrdinalCorrelation(qsrbc))
 
 def testKohlerArrowRaynaudFusionDigraph():
     print('===>>> test KohlerArrowRaynaudFusionDigraph class ---------')

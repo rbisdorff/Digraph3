@@ -217,7 +217,7 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 
 <dl class="class">
 <dt id="digraphs.CirculantDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'min': Decimal('-1.0'), 'max': Decimal('1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'max': Decimal('1.0'), 'min': Decimal('-1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1294,7 +1294,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'med': 0</em>, <em>'max': 1</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2269,7 +2269,7 @@ called dg1 and dg2.</p>
 
 <dl class="class">
 <dt id="digraphs.GridDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2300,7 +2300,7 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 
 <dl class="class">
 <dt id="digraphs.KneserDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2650,7 +2650,7 @@ from random choices in the set of potential oriented pairs of nodes numbered fro
 
 <dl class="class">
 <dt id="randomDigraphs.RandomGridDigraph">
-<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.GridDigraph" title="digraphs.GridDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.GridDigraph</span></code></a></p>
 <p>Specialization of the general Digraph class for generating
 temporary randomly oriented Grid digraphs of dimension n time m
@@ -3779,7 +3779,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -5022,7 +5022,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -6872,100 +6872,6 @@ of the principal orders of the variance-covariance of in-
 <dt id="weakOrders.PrincipalInOutDegreesOrdering.showWeakOrder">
 <code class="descname">showWeakOrder</code><span class="sig-paren">(</span><em>ColwiseOrder=False</em><span class="sig-paren">)</span><a class="headerlink" href="#weakOrders.PrincipalInOutDegreesOrdering.showWeakOrder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Specialisation for PrincipalInOutDegreesOrderings.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="weakOrders.QsRbcWeakOrdering">
-<em class="property">class </em><code class="descclassname">weakOrders.</code><code class="descname">QsRbcWeakOrdering</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>limitingQuantiles=None</em>, <em>LowerClosed=True</em>, <em>strategy='average'</em>, <em>rankingRule='KohlerRule'</em>, <em>PrefThresholds=False</em>, <em>hasNoVeto=False</em>, <em>outrankingType='bipolar'</em>, <em>StoreSorting=True</em>, <em>Threading=True</em>, <em>nbrCores=None</em>, <em>nbrOfProcesses=None</em>, <em>chunkSize=1</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#weakOrders.QsRbcWeakOrdering" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#weakOrders.QuantilesRankingDigraph" title="weakOrders.QuantilesRankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">weakOrders.QuantilesRankingDigraph</span></code></a></p>
-<p>Dummy obsolete class for the QuantilesRankingDigraph class.</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="weakOrders.QuantilesRankingDigraph">
-<em class="property">class </em><code class="descclassname">weakOrders.</code><code class="descname">QuantilesRankingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>limitingQuantiles=None</em>, <em>LowerClosed=True</em>, <em>strategy='average'</em>, <em>rankingRule='KohlerRule'</em>, <em>PrefThresholds=False</em>, <em>hasNoVeto=False</em>, <em>outrankingType='bipolar'</em>, <em>StoreSorting=True</em>, <em>Threading=True</em>, <em>nbrCores=None</em>, <em>nbrOfProcesses=None</em>, <em>chunkSize=1</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#weakOrders.QuantilesRankingDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#weakOrders.WeakOrder" title="weakOrders.WeakOrder"><code class="xref py py-class docutils literal"><span class="pre">weakOrders.WeakOrder</span></code></a>, <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.QuantilesSortingDigraph</span></code></a></p>
-<p>Refinig a quantiles sorting result
-with a local ranking by choosing strategy (Kohler&#8217;s rule by default).</p>
-<dl class="docutils">
-<dt><em>Main parameters</em>:</dt>
-<dd><ul class="first last simple">
-<li>limitingQuantiles are set by default to len(actions)//2
-for outranking digraph orders below 200.
-For higher orders, centiles are used by default.</li>
-<li>strategies are: &#8220;optimistic&#8221; (default), &#8220;pessimistic&#8221; or &#8220;average&#8221;</li>
-<li>rankingRule is either &#8220;KohlerRule&#8221; (default) or &#8220;RubisChoice&#8221;. In the latter case, large quantile equivalence classes (&gt;30) are ranked with help of the principal ranking obtained from the covariance of the indegrees.</li>
-<li>Threading is on (True) by default for CPUs with more than 2 cores.</li>
-</ul>
-</dd>
-</dl>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The weak ordering is instantiated in a [-100;100] valuation domain as crisp weak strict order ,
-its dual being a weakly complete preorder!</p>
-</div>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">For larger orders a consistent size of several
-Giga bytes cpu memory is required!</p>
-</div>
-<dl class="method">
-<dt id="weakOrders.QuantilesRankingDigraph.computeOutrankingCorrelation">
-<code class="descname">computeOutrankingCorrelation</code><span class="sig-paren">(</span><em>Threading=False</em><span class="sig-paren">)</span><a class="headerlink" href="#weakOrders.QuantilesRankingDigraph.computeOutrankingCorrelation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the ordinal (Kendall) correlation of the quantiles ranking
-with the underlying bipolar outranking relation.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="weakOrders.QuantilesRankingDigraph.computeQsRbcRanking">
-<code class="descname">computeQsRbcRanking</code><span class="sig-paren">(</span><em>Descending=True</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#weakOrders.QuantilesRankingDigraph.computeQsRbcRanking" title="Permalink to this definition">¶</a></dt>
-<dd><p>Render the ranking result of QsRbcWeakOrdering constructor</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="weakOrders.QuantilesRankingDigraph.computeRankingRelation">
-<code class="descname">computeRankingRelation</code><span class="sig-paren">(</span><em>preorder</em>, <em>Normalized=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#weakOrders.QuantilesRankingDigraph.computeRankingRelation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the bipolar-valued relation obtained from
-a given preordering in decreasing levels (list of lists) result.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="weakOrders.QuantilesRankingDigraph.computeWeakOrder">
-<code class="descname">computeWeakOrder</code><span class="sig-paren">(</span><em>Descending=True</em>, <em>strategy=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#weakOrders.QuantilesRankingDigraph.computeWeakOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>specialisation of the showWeakOrder method</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="weakOrders.QuantilesRankingDigraph.exportSortingGraphViz">
-<code class="descname">exportSortingGraphViz</code><span class="sig-paren">(</span><em>fileName=None</em>, <em>direction='decreasing'</em>, <em>noSilent=True</em>, <em>graphType='png'</em>, <em>graphSize='7</em>, <em>7'</em>, <em>fontSize=10</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#weakOrders.QuantilesRankingDigraph.exportSortingGraphViz" title="Permalink to this definition">¶</a></dt>
-<dd><p>Exporting graphviz dot file for a Hasse diagram drawing
-of the quantiles sorting result.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="weakOrders.QuantilesRankingDigraph.showOrderedRelationTable">
-<code class="descname">showOrderedRelationTable</code><span class="sig-paren">(</span><em>direction='decreasing'</em>, <em>originalRelation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#weakOrders.QuantilesRankingDigraph.showOrderedRelationTable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Showing the relation table in decreasing (default) or increasing order.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="weakOrders.QuantilesRankingDigraph.showQsRbcRanking">
-<code class="descname">showQsRbcRanking</code><span class="sig-paren">(</span><em>Descending=True</em><span class="sig-paren">)</span><a class="headerlink" href="#weakOrders.QuantilesRankingDigraph.showQsRbcRanking" title="Permalink to this definition">¶</a></dt>
-<dd><p>obsolete, see showRanking.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="weakOrders.QuantilesRankingDigraph.showRanking">
-<code class="descname">showRanking</code><span class="sig-paren">(</span><em>Descending=True</em><span class="sig-paren">)</span><a class="headerlink" href="#weakOrders.QuantilesRankingDigraph.showRanking" title="Permalink to this definition">¶</a></dt>
-<dd><p>show the ranking-by-choosing refinement of the quantiles sorting result</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="weakOrders.QuantilesRankingDigraph.showWeakOrder">
-<code class="descname">showWeakOrder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#weakOrders.QuantilesRankingDigraph.showWeakOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dummy show method for the commenting computeWeakOrder() method.</p>
 </dd></dl>
 
 </dd></dl>
