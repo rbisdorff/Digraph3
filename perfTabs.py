@@ -821,6 +821,54 @@ The performance evaluations of each decision alternative on each criterion are g
                       % (self.objectives[obj]['weight'],len(self.objectives[obj]['criteria'])))
         else:
             print('The performance tableau does not contain objectives.')
+
+    def convertBigData2Standard(self):
+        """
+        convert cRandPerfTabs generated objects into standard PerformanceTableau instances.
+        """
+        self.convertWeightFloatToDecimal()
+        self.convertEvaluationFloatToDecimal()
+        self.convertDiscriminationThresholds2Decimal()
+        
+    def convertWeight2Integer(self):
+        """
+        Convert significance weights from Decimal format
+        to int format.
+        """
+        criteria = self.criteria
+        for g in criteria:
+            criteria[g]['weight'] = int(criteria[g]['weight'])
+        self.criteria = criteria
+
+    def convertEvaluation2Float(self):
+        """
+        Convert evaluations from decimal format to float
+        """
+        evaluation = self.evaluation
+        actions = self.actions
+        criteria = self.criteria
+        for g in criteria:
+            for x in actions:
+                evaluation[g][x] = float(evaluation[g][x])
+        self.evaluation = evaluation
+
+    def convertDiscriminationThresholds2Float(self):
+        criteria = self.criteria
+        for g in criteria:
+            for th in criteria[g]['thresholds']:
+                d = criteria[g]['thresholds'][th]
+                d1 = (float(d[0]),float(d[1]))
+                criteria[g]['thresholds'][th] = d1
+
+    def convertDiscriminationThresholds2Decimal(self):
+        from decimal import Decimal
+        criteria = self.criteria
+        for g in criteria:
+            for th in criteria[g]['thresholds']:
+                d = criteria[g]['thresholds'][th]
+                d1 = (Decimal(str(d[0])),Decimal(str(d[1])))
+                criteria[g]['thresholds'][th] = d1
+
  
     def convertWeightFloatToDecimal(self):
         """

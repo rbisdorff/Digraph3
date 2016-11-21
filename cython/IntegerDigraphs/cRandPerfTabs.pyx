@@ -32,6 +32,16 @@ class cPerformanceTableau(PerformanceTableau):
     """
     Abstract root class for cythenized performace tableau methods.
     """
+    def convert2BigData(self):
+        self.convertWeight2Integer()
+        self.convertEvaluation2Float()
+        self.convertDiscriminationThresholds2Float()
+
+    def convert2Standard(self):
+        self.convertWeight2Decimal()
+        self.convertEvaluation2Decimal()
+        self.convertDiscriminationThresholds2Decimal()
+        
     def convertWeight2Integer(self):
         """
         Convert significance weights from Decimal format
@@ -40,6 +50,17 @@ class cPerformanceTableau(PerformanceTableau):
         criteria = self.criteria
         for g in criteria:
             criteria[g]['weight'] = int(criteria[g]['weight'])
+        self.criteria = criteria
+
+    def convertWeight2Decimal(self):
+        """
+        Convert significance weights from Decimal format
+        to int format.
+        """
+        from decimal import Decimal
+        criteria = self.criteria
+        for g in criteria:
+            criteria[g]['weight'] = Decimal(str(criteria[g]['weight']))
         self.criteria = criteria
 
     def convertEvaluation2Float(self):
@@ -52,6 +73,19 @@ class cPerformanceTableau(PerformanceTableau):
         for g in criteria:
             for x in actions:
                 evaluation[g][x] = float(evaluation[g][x])
+        self.evaluation = evaluation
+
+    def convertEvaluation2Decimal(self):
+        """
+        Convert evaluations from decimal format to float
+        """
+        from decimal import Decimal
+        evaluation = self.evaluation
+        actions = self.actions
+        criteria = self.criteria
+        for g in criteria:
+            for x in actions:
+                evaluation[g][x] = Decimal('%.2f' % evaluation[g][x])
         self.evaluation = evaluation
 
     def convertDiscriminationThresholds2Float(self):

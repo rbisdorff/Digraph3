@@ -3779,7 +3779,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3938,9 +3938,38 @@ can be provided for a specific normalisation.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="perfTabs.PerformanceTableau.convertBigData2Standard">
+<code class="descname">convertBigData2Standard</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.convertBigData2Standard" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert cRandPerfTabs generated objects into standard PerformanceTableau instances.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="perfTabs.PerformanceTableau.convertDiscriminationThresholds2Decimal">
+<code class="descname">convertDiscriminationThresholds2Decimal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.convertDiscriminationThresholds2Decimal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="perfTabs.PerformanceTableau.convertDiscriminationThresholds2Float">
+<code class="descname">convertDiscriminationThresholds2Float</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.convertDiscriminationThresholds2Float" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="perfTabs.PerformanceTableau.convertEvaluation2Float">
+<code class="descname">convertEvaluation2Float</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.convertEvaluation2Float" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert evaluations from decimal format to float</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="perfTabs.PerformanceTableau.convertEvaluationFloatToDecimal">
 <code class="descname">convertEvaluationFloatToDecimal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.convertEvaluationFloatToDecimal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert evaluations from obsolete float format to decimal format</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="perfTabs.PerformanceTableau.convertWeight2Integer">
+<code class="descname">convertWeight2Integer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.convertWeight2Integer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert significance weights from Decimal format
+to int format.</p>
 </dd></dl>
 
 <dl class="method">
@@ -5022,7 +5051,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
