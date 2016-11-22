@@ -236,6 +236,16 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         else:
             print('List of actions provided.')
 
+    def showHTMLMarginalQuantileLimits(self):
+        """
+        shows the marginal quantiles limits.
+        """
+        for x in self.profiles:
+            catKey = self.profiles[x]['category']
+            self.profiles[x]['shortName']= '%.2f' % self.categories[catKey]['quantile']
+        self.showHTMLPerformanceTableau(actionsSubset=self.profiles,
+                                        title='Marginal performance quantiles')
+        
     def showHTMLRelationMap(self,actionsSubset=None,\
                             Colored=True,\
                             tableTitle='Relation Map',\

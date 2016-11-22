@@ -1556,7 +1556,7 @@ The performance evaluations of each decision alternative on each criterion are g
                 result[g]['maximum'] = Decimal('-999')
         return result
         
-    def showHTMLPerformanceTableau(self,isSorted=True,\
+    def showHTMLPerformanceTableau(self,actionsSubset=None,isSorted=True,\
                                    Transposed=False,ndigits=2,\
                                    ContentCentered=True,title=None):
         """
@@ -1565,7 +1565,7 @@ The performance evaluations of each decision alternative on each criterion are g
         import webbrowser
         fileName = '/tmp/performanceTable.html'
         fo = open(fileName,'w')
-        fo.write(self.htmlPerformanceTable(isSorted=isSorted,\
+        fo.write(self.htmlPerformanceTable(actions=actionsSubset,isSorted=isSorted,\
                                            Transposed=Transposed,\
                                            ndigits=ndigits,
                                            ContentCentered=ContentCentered,
@@ -1575,7 +1575,7 @@ The performance evaluations of each decision alternative on each criterion are g
         webbrowser.open_new(url)
            
             
-    def htmlPerformanceTable(self,isSorted=False,\
+    def htmlPerformanceTable(self,actions=None,isSorted=False,\
                              Transposed=False,ndigits=2,\
                              ContentCentered=True,
                              title=None):
@@ -1591,8 +1591,11 @@ The performance evaluations of each decision alternative on each criterion are g
         criteriaKeys = list(criteria.keys())
         if isSorted:
             criteriaKeys.sort()
-        actions = self.actions
-        actionsKeys = list(actions.keys())
+        if actions == None:
+            actions = self.actions
+            actionsKeys = list(self.actions.keys())
+        else:
+            actionsKeys = [x for x in actions]
         if isSorted:
             actionsKeys.sort()
         evaluation = self.evaluation

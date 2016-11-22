@@ -1294,7 +1294,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'med': 0</em>, <em>'max': 1</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -3779,7 +3779,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4002,7 +4002,7 @@ actions x criteria in html format.</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.htmlPerformanceTable">
-<code class="descname">htmlPerformanceTable</code><span class="sig-paren">(</span><em>isSorted=False</em>, <em>Transposed=False</em>, <em>ndigits=2</em>, <em>ContentCentered=True</em>, <em>title=None</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.htmlPerformanceTable" title="Permalink to this definition">¶</a></dt>
+<code class="descname">htmlPerformanceTable</code><span class="sig-paren">(</span><em>actions=None</em>, <em>isSorted=False</em>, <em>Transposed=False</em>, <em>ndigits=2</em>, <em>ContentCentered=True</em>, <em>title=None</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.htmlPerformanceTable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the performance table citerion x actions in html format.</p>
 </dd></dl>
 
@@ -4153,7 +4153,7 @@ to indicate the exact number of singled threaded cores in fact allocated to the 
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.showHTMLPerformanceTableau">
-<code class="descname">showHTMLPerformanceTableau</code><span class="sig-paren">(</span><em>isSorted=True</em>, <em>Transposed=False</em>, <em>ndigits=2</em>, <em>ContentCentered=True</em>, <em>title=None</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.showHTMLPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showHTMLPerformanceTableau</code><span class="sig-paren">(</span><em>actionsSubset=None</em>, <em>isSorted=True</em>, <em>Transposed=False</em>, <em>ndigits=2</em>, <em>ContentCentered=True</em>, <em>title=None</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.showHTMLPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>shows the html version of the performance tableau in a browser window.</p>
 </dd></dl>
 
@@ -5051,7 +5051,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'ind': 10</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -5833,6 +5833,12 @@ By default the valuation domain is normalized to [-1;1]</p>
 <code class="descname">showDecomposition</code><span class="sig-paren">(</span><em>direction='decreasing'</em><span class="sig-paren">)</span><a class="headerlink" href="#sparseOutrankingDigraphs.SparseOutrankingDigraph.showDecomposition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prints on the console the decomposition structure of the sparse outranking digraph instance
 in <em>decreasing</em> (default) or <em>increasing</em> preference direction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sparseOutrankingDigraphs.SparseOutrankingDigraph.showHTMLMarginalQuantileLimits">
+<code class="descname">showHTMLMarginalQuantileLimits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sparseOutrankingDigraphs.SparseOutrankingDigraph.showHTMLMarginalQuantileLimits" title="Permalink to this definition">¶</a></dt>
+<dd><p>shows the marginal quantiles limits.</p>
 </dd></dl>
 
 <dl class="method">
