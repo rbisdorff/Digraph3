@@ -983,7 +983,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         self.categories = qs.categories
         self.sorting = qs.sorting
         self.evaluation = qs.evaluation
-        self.evaluation = self.restoreOriginalEvaluations()
+        #self.evaluation = self.restoreOriginalEvaluations()
         
         if Comments:
             print('execution time: %.4f' % (self.runTimes['sorting']))
@@ -2580,7 +2580,6 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
 if __name__ == "__main__":
     
     from time import time
-    from weakOrders import QuantilesRankingDigraph
     MP  = False
     nbrActions=20
 ##    t0 = time()
@@ -2602,18 +2601,18 @@ if __name__ == "__main__":
     print(bg1)
     bg1.showComponents(direction='descending')
     bg1.showRelationTable()
-##    bg2 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,
-##                                 quantilesOrderingStrategy='average',
-##                                 componentRankingRule='Copeland',
-##                                 LowerClosed=False,
-##                                 minimalComponentSize=1,
-##                                 Threading=MP,nbrOfCPUs=8,
-##                                 #tempDir='.',
-##                                 nbrOfThreads=8,
-##                                 Comments=False,Debug=False,
-##                                 save2File='testbgMP')
-##    print(bg2)
-##    bg2.showComponents(direction='descending')
+    bg2 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,
+                                 quantilesOrderingStrategy='average',
+                                 componentRankingRule='Copeland',
+                                 LowerClosed=False,
+                                 minimalComponentSize=1,
+                                 Threading=MP,nbrOfCPUs=8,
+                                 #tempDir='.',
+                                 nbrOfThreads=8,
+                                 Comments=False,Debug=False,
+                                 save2File='testbgMP')
+    print(bg2)
+    bg2.showComponents(direction='descending')
 ##    from weakOrders import WeakRankingOrder
 ##    wr = WeakRankingOrder(bg1,[bg1.boostedRanking,bg2.boostedRanking])
 ##    wr.exportGraphViz('fusion-cpr-pr',graphType="pdf")
