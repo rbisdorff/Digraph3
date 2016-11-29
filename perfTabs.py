@@ -829,6 +829,34 @@ The performance evaluations of each decision alternative on each criterion are g
         self.convertWeightFloatToDecimal()
         self.convertEvaluationFloatToDecimal()
         self.convertDiscriminationThresholds2Decimal()
+
+    def convertStandard2BigData(self):
+        """
+        convert standard PerformanceTableau to cPerformanceTableau instances, by converting the action keys to integers
+        and evaluations to floats, including the discrimination thresholds the case given.
+        """
+        from collections import OrderedDict
+        from cRandPerfTabs import cPerformanceTableau
+        self.convertWeight2Integer()
+        self.convertEvaluation2Float()
+        self.convertDiscriminationThresholds2Float()
+        # convert action keys to integers
+        actions = self.actions
+        newActions = OrderedDict()
+        for i,x in enumerate(actions):
+            newKey = i+1
+            newActions[newKey] = actions[x]
+        # convert evaluation access keys
+        evaluation = self.evaluation
+        newEvaluation = {}
+        for g in self.criteria:
+            newEvaluation[g] = {}
+            for i,x in enumerate(actions):
+                newKey = i+1
+                newEvaluation[g][newKey] = evaluation[g][x]
+        self.actions = newActions
+        self.evaluation = newEvaluation
+        self.__class__ = cPerformanceTableau
         
     def convertWeight2Integer(self):
         """

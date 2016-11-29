@@ -364,6 +364,41 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
     ##     cdef int intWeight
     ##     for g in self.criteria:
     ##         self.criteria[g]['weight'] = int(self.criteria[g]['weight'])
+
+    # def convertValuation2Decimal(self,Normalized=False):
+    #     """
+    #     Convert integer valuation to Decimal.
+    #     """
+    #     from decimal import Decimal
+    #     oldMax = self.valuationdomain['max']
+    #     oldMin = self.valuationdomain['min']
+    #     oldAmplitude = oldMax - oldMin
+    #     if Normalized:
+    #         newMax = Decimal('1')
+    #         newMed = Decimal('0')
+    #         newMin = Decimal('-1')
+    #     else:
+    #         newMax = Decimal(str(oldMax))
+    #         newMin = Decimal('0')
+    #         newMin = Decimal(str(oldMin))
+    #     relation = self.relation
+    #     newRelation = {}
+    #     if Normalized:
+    #         for x in relation:
+    #             rx = relation[x]
+    #             newRelation[x] = {}
+    #             for y in rx:
+    #                 newRelation[x][y] = Decimal( '%.4f' % ( rx[y]/oldMax ) )
+    #     else:
+    #         for x in relation:
+    #             rx = relation[x]
+    #             newRelation[x] = {}
+    #             for y in rx:
+    #                 newRelation[x][y] = Decimal( str(rx[y]) )
+    #     self.valuationdomain['max'] = newMax
+    #     self.valuationdomain['med'] = newMed
+    #     self.valuationdomain['min'] = newMin
+    #     self.relation = newRelation
         
     def computeCriterionRelation(self,c, a,b,hasSymmetricThresholds=True):
         """
