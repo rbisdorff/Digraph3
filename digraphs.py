@@ -6951,22 +6951,25 @@ class Digraph(object):
         nc = len(circuit)
         for i in range(nc):
             x = circuit[i]
-            for j in range(i+1,nc):
-                y = circuit[j]
-                if Debug:
-                    print(x,y,end=',')
-                degP += relation[x][y]
-                nParcs += 1
-                diffxy = abs(relation[x][y]) + abs(relation[y][x])
-                if Debug:
-                    print(relation[x][y],relation[y][x],diffxy,end=',')
-                if minAmplitude >= diffxy:
-                    minAmplitude = diffxy
-                    minLink = (x,y)
-                if Debug:
-                    print(minLink)
-                degN += relation[y][x]
-                nNarcs += 1
+            #for j in range(i+1,nc):
+            if i != nc -1:
+                y = circuit[i+1]
+            else:
+                y = circuit[0]
+            if Debug:
+                print(x,y,end=',')
+            degP += relation[x][y]
+            nParcs += 1
+            diffxy = abs(relation[x][y]) + abs(relation[y][x])
+            if Debug:
+                print(relation[x][y],relation[y][x],diffxy,end=',')
+            if minAmplitude >= diffxy:
+                minAmplitude = diffxy
+                minLink = (x,y)
+            if Debug:
+                print(minLink)
+            degN += relation[y][x]
+            nNarcs += 1
         if nParcs != 0:
             degP /= Decimal(str(nParcs))
         if nNarcs != 0:
