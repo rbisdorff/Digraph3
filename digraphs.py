@@ -7268,6 +7268,95 @@ class Digraph(object):
             
         """
         #print('Passing here',_OldCoca)
+        if Comments:
+            from time import time
+            t0 = time()
+        # save original actions and relation
+        from copy import deepcopy
+        try:
+            self.actions_orig = deepcopy(self.actions_orig)
+        except:
+            self.actions_orig = deepcopy(self.actions)
+        #self.actions_orig = actions_orig
+        self.relation_orig = deepcopy(self.relation)
+        # computing Coca
+        if Comments:
+            print('*--- computing the COCA digraph --*')
+        if _OldCoca:
+            _selfwcoc = _CocaDigraph(self,Cpp=CppAgrum,Comments=Comments)
+            self.brakings = 0
+        else:
+            _selfwcoc = CocaDigraph(self,Cpp=CppAgrum,Comments=Comments)
+            self.brakings = _selfwcoc.brakings
+        if Comments:
+            print('Execution time: %.3f seconds' % (time()-t0))
+            _selfwcoc.showPreKernels()
+        # transferring coca actions and relation
+        self.actions = deepcopy(_selfwcoc.actions)
+        self.order = len(self.actions)
+        self.relation = deepcopy(_selfwcoc.relation)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        # computing good and bad choices
+        actions = set([x for x in self.actions])
+        self.dompreKernels = set()
+        self.abspreKernels = set()
+        for choice in self.independentChoices(self.singletons()):
+            restactions = actions - choice[0][0]
+            if restactions <= choice[0][1]:
+                self.dompreKernels.add(choice[0][0])
+            if restactions <= choice[0][2]:
+                self.abspreKernels.add(choice[0][0])
+        self.computeGoodChoices(Comments=Comments)
+        self.computeBadChoices(Comments=Comments)
+        # sorting out the strict choices
+        self.strictGoodChoices = set()
+        self.nullChoices = set()
+        self.strictBadChoices = set()
+        self.nonRobustChoices = set()
+        for gch in self.goodChoices:
+            if gch[0] <= 0:
+                goodChoice = True
+                for bch in self.badChoices:
+                    if gch[5] == bch[5]:
+                        if gch[3] == gch[4]:
+                            goodChoice = False
+                            self.nullChoices.add(frozenset(gch[5]))
+                        elif gch[4] > gch[3]:
+                            goodChoice = False
+                            self.strictBadChoices.add(frozenset(bch[5]))
+                        else:
+                            goodChoice = True
+                if goodChoice:
+                    self.strictGoodChoices.add(frozenset(gch[5]))
+            else:
+                self.nonRobustChoices.add(frozenset(gch[5]))
+        if Comments:
+            self.showGoodChoices()
+            self.showBadChoices()
+        #n1 = _selfwcoc.order
+        #nc = n1 - n0
+        #if nc > 0 or b1 > 0:
+        #self.actions = self.actions_orig
+        #self.relation = self.relation_orig
+        self.order = len(self.actions)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+
+    def _computeRubisChoice(self,CppAgrum=False,Comments=False,_OldCoca=False):
+        """
+        Renders self.strictGoodChoices, self.nullChoices
+        self.strictBadChoices, self.nonRobustChoices.
+
+        CppgArum = False (default | true : use C++/Agrum digraph library
+        for computing chordless circuits in self.
+
+        .. warning::
+            Changes in site the outranking digraph by
+            adding or braking chordless odd outranking circuits.
+            
+        """
+        #print('Passing here',_OldCoca)
         import copy,time
         if Comments:
             print('*--- computing the COCA digraph --*')
@@ -7417,7 +7506,7 @@ class Digraph(object):
         Med = Decimal(str(temp.valuationdomain['med']))
         actions = [x for x in temp.actions]
         relation = temp.relation
-        domChoicesSort = []
+        domChoices = []
         if 'dompreKernels' not in dir(temp):
             if Comments:
                 temp.showPreKernels()
@@ -7468,8 +7557,8 @@ class Digraph(object):
             domvec = [(domvecsharp[i],str(actions[i])) for i in range(n)]
             domvec.sort(reverse=True)
             determ = temp.determinateness(domvec)
-            domChoicesSort.append([-determ,degirred,degi,degd,dega,str(choice),domvec,cover])
-        domChoicesSort.sort()
+            domChoices.append([determ,degirred,degi,degd,dega,str(choice),domvec,cover])
+        domChoicesSort = sorted(domChoices,key=itemgetter(0,7,3,4),reverse=True)
         goodChoicesDic = {}
         for ch in domChoicesSort:
             ch[5] = eval(ch[5])
