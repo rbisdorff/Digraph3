@@ -1311,8 +1311,10 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         self.missingDataProbability = missingDataProbability
         
         # randomizer init
-        import random
-        random.seed(seed)
+        from random import Random
+        _random = Random(seed)
+        _random1 = Random(seed)
+        _random2 = Random(seed)
 
         from randomNumbers import ExtendedTriangularRandomVariable as RNGTr            
 
@@ -1345,7 +1347,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
             weightsList = []
             sumWeights = Decimal('0.0')
             for i in range(numberOfCriteria):               
-                weightsList.append(Decimal(str(random.randint(weightScale[0],
+                weightsList.append(Decimal(str(_random.randint(weightScale[0],
                                                               weightScale[1]))))
                 sumWeights += weightsList[i]
             weightsList.reverse()
@@ -1360,14 +1362,14 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                 sumWeights += weightScale[0]
 
         # generate objectives dictionary
-        objectives = OrderedDict({
-            'Eco': {'name':'Economical aspect',
-                  'comment': 'Random3ObjectivesPerformanceTableau generated'},
-            'Soc': {'name': 'Societal aspect',
-                  'comment': 'Random3ObjectivesPerformanceTableau generated'},
-            'Env': {'name':'Environmental aspect',
-                  'comment': 'Random3ObjectivesPerformanceTableau generated'}
-            })
+        objectives = OrderedDict([(
+            'Eco', {'name':'Economical aspect',
+                  'comment': 'Random3ObjectivesPerformanceTableau generated'}),
+            ('Soc', {'name': 'Societal aspect',
+                  'comment': 'Random3ObjectivesPerformanceTableau generated'}),
+            ('Env',{'name':'Environmental aspect',
+                  'comment': 'Random3ObjectivesPerformanceTableau generated'})
+            ])
 
 
         # generate criteria dictionary with random thresholds
@@ -1381,7 +1383,9 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         self.commonScale = commonScale
 
         criteria = OrderedDict()
-        objectivesKeys = list(objectives.keys())
+        objectivesKeys = [key for key in objectives]
+        #objectivesKeys.sort()
+        #randChoice1 = Random(seed)
         ng = len(str(numberOfCriteria))
         for i in range(numberOfCriteria):
             g = ('g%%0%dd' % ng) % (i+1)
@@ -1393,7 +1397,10 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
             elif i == 2:
                 criterionObjective = 'Env'
             else:    
-                criterionObjective = random.choice(objectivesKeys)
+                #criterionObjective = _random.choice(objectivesKeys)
+                objInd = _random1.randint(1,len(objectivesKeys))
+                criterionObjective = objectivesKeys[objInd-1]
+            #print(g,criterionObjective,objectivesKeys)
             criteria[g]['objective'] = criterionObjective
             criteria[g]['preferenceDirection'] = 'max'           
             criteria[g]['name'] = 'criterion of objective %s' % (criterionObjective)
@@ -1409,7 +1416,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
             if Debug:
                 print(g,thresholds)
             thitems = ['ind','pref','veto']
-            randVeto = random.uniform(0.0,1.0)
+            randVeto = _random.uniform(0.0,1.0)
             if randVeto > vetoProbability or vetoProbability == None:
                     thitems = ['ind','pref']
             criteria[g]['thresholds'] = {}
@@ -1447,12 +1454,14 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         # allocate (criterion,action) to coalition supporting type
         objectiveSupportingTypes = [('good','+'),('fair','~'),('weak','-')]
         self.objectiveSupportingTypes = objectiveSupportingTypes
+        #randChoice2 = Random(seed)
         for x in actions:
             profile = {}
             for obj in objectives:
                 if Debug:
                     print(objectives,obj)
-                ost = random.choice(objectiveSupportingTypes)
+                ostInd = _random2.randint(1,len(objectiveSupportingTypes))
+                ost = objectiveSupportingTypes[ostInd-1]
                 actions[x][obj]=ost[0]
                 actions[x]['name'] =\
                     actions[x]['name'] + ' '+ str(obj) + ost[1]
@@ -1498,7 +1507,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                         actions[a]['comment'] += ': %s %s' % (randomMode[0],randomRange)
                     else:
                         randomRange = (commonScale[1],commonScale[2]) 
-                    randeval = random.uniform(randomRange[0],randomRange[1])
+                    randeval = _random.uniform(randomRange[0],randomRange[1])
                     actions[a]['generators'][g] = (randomMode[0],randomRange)
                     if OrdinalScales:
                         if criteria[g]['preferenceDirection'] == 'max':
@@ -1541,7 +1550,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                             beta = 1.0 / xm
                     if Debug:
                         print('alpha,beta', alpha,beta)
-                    u = random.betavariate(alpha,beta)
+                    u = _random.betavariate(alpha,beta)
                     randeval = (u * (M-m)) + m
                     if Debug:
                         print('xm,alpha,beta,u,m,M,randeval',xm,alpha,beta,u,m,M,randeval)
@@ -1575,7 +1584,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                     actions[a]['generators'][g] = (randomMode[0],xm,r)
                     # setting a speudo random seed
                     if seed == None:
-                        rdseed = random.random()
+                        rdseed = _random.randint(1,pow(2,32))
                     else:
                         try:
                             rdseed += 1
@@ -1619,7 +1628,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         for g in criteria:
             sevalg = self.evaluation[g]
             for x in actions:
-                if random.random() < missingDataProbability:
+                if _random.random() < missingDataProbability:
                     sevalg[x] = Decimal('-999')
 
     def showObjectives(self):
@@ -2154,10 +2163,10 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                         'comment': 'Cost-Benefit',
                         'type': actionType}
         # generate objectives
-        objectives = OrderedDict({
-            'C': {'name': 'Costs', 'criteria':[]},
-            'B': {'name': 'Benefits', 'criteria':[]},
-            })
+        objectives = OrderedDict([
+            ('C', {'name': 'Costs', 'criteria':[]}),
+            ('B', {'name': 'Benefits', 'criteria':[]}),
+            ])
         
         # generate criteria
         if numberOfCriteria == None:
@@ -2761,7 +2770,7 @@ if __name__ == "__main__":
 
     from digraphs import *
     from outrankingDigraphs import BipolarOutrankingDigraph
-    from weakOrders import QuantilesRankingDigraph
+#    from weakOrders import QuantilesRankingDigraph
     from randomPerfTabs import *
     from time import time
 ##    t0 = time()

@@ -7401,7 +7401,7 @@ class Digraph(object):
         self.strictBadChoices = set()
         self.nonRobustChoices = set()
         for gch in self.goodChoices:
-            if gch[0] <= 0:
+            if gch[0] >= 0:
                 goodChoice = True
                 for bch in self.badChoices:
                     if gch[5] == bch[5]:
@@ -7411,10 +7411,10 @@ class Digraph(object):
                         elif gch[4] > gch[3]:
                             goodChoice = False
                             self.strictBadChoices.add(frozenset(bch[5]))
-                        else:
-                            goodChoice = True
-                if goodChoice:
-                    self.strictGoodChoices.add(frozenset(gch[5]))
+                    else:
+                        goodChoice = True
+                    if goodChoice:
+                        self.strictGoodChoices.add(frozenset(gch[5]))
             else:
                 self.nonRobustChoices.add(frozenset(gch[5]))
         if Comments:

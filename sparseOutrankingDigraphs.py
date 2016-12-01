@@ -1060,7 +1060,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                         task_queue.put(task)
                     for i in range(NUMBER_OF_WORKERS):
                         Process(target=_worker,args=(task_queue,)).start()
-                    print('started')
+                    #print('started')
                     for i in range(NUMBER_OF_WORKERS):
                         task_queue.put('STOP')                   
 
