@@ -7166,7 +7166,7 @@ class Digraph(object):
         bestChoice = set()
         worstChoice = set()
         for gch in self.goodChoices:
-            if gch[0] <= Med:
+            if gch[0] >= Med:
                 goodChoice = True
                 for bch in self.badChoices:
                     if gch[5] == bch[5]:
@@ -7199,7 +7199,7 @@ class Digraph(object):
                     print('non robust best choice ')
                     self.showChoiceVector(gch,ChoiceVector=ChoiceVector)
         for bch in self.badChoices:
-            if bch[0] <= Med:
+            if bch[0] >= Med:
                 badChoice = True
                 nullChoice = False
                 for gch in self.goodChoices:
@@ -7562,7 +7562,7 @@ class Digraph(object):
         goodChoicesDic = {}
         for ch in domChoicesSort:
             ch[5] = eval(ch[5])
-            goodChoicesDic[frozenset(ch[5])] = {'determ':-ch[0],
+            goodChoicesDic[frozenset(ch[5])] = {'determ':ch[0],
                                     'degirred':ch[1],
                                     'degi':ch[2],
                                     'degd':ch[3],
@@ -7728,7 +7728,7 @@ class Digraph(object):
         Med = Decimal(str(temp.valuationdomain['med']))
         actions = [x for x in temp.actions]
         relation = temp.relation
-        absChoicesSort = []
+        absChoices = []
         if 'abspreKernels' not in dir(temp):
             temp.computePreKernels()
         for ker in temp.abspreKernels:
@@ -7773,8 +7773,9 @@ class Digraph(object):
             absvec = [(absvecsharp[i],str(actions[i])) for i in range(n)]
             absvec.sort(reverse=True)
             determ = temp.determinateness(absvec)
-            absChoicesSort.append([-determ,degirred,degi,degd,dega,str(choice),absvec,cover])
-        absChoicesSort.sort()
+            absChoices.append([determ,degirred,degi,degd,dega,str(choice),absvec,cover])
+        absChoicesSort = sorted(absChoices,key=itemgetter(0,7,4,3),reverse=True)
+        #absChoicesSort.sort()
         ## absChoicesSort.sort(reverse=True, key=itemgetter(7))
         ## for ch in absChoicesSort:
         ##     ch[5] = eval(ch[5])
@@ -7782,7 +7783,7 @@ class Digraph(object):
         badChoicesDic = {}
         for ch in absChoicesSort:
             ch[5] = eval(ch[5])
-            badChoicesDic[frozenset(ch[5])] = {'determ':-ch[0],
+            badChoicesDic[frozenset(ch[5])] = {'determ':ch[0],
                                     'degirred':ch[1],
                                     'degi':ch[2],
                                     'degd':ch[3],
@@ -7798,7 +7799,7 @@ class Digraph(object):
         """
         actions = [x for x in self.actions]
         Med = self.valuationdomain['med']
-        determ = -ch[0]
+        determ = ch[0]
         degirred = ch[1]
         degi = ch[2]
         degd = ch[3]
@@ -7858,7 +7859,7 @@ class Digraph(object):
         relation = temp.relation
         print('*** Potentially good choices ***')
         print('    valuationdomain', temp.valuationdomain)
-        domChoicesSort = []
+        domChoices = []
         if 'dompreKernels' not in dir(temp) or Recompute:
             temp.computePreKernels()
         for ker in temp.dompreKernels:
@@ -7869,7 +7870,8 @@ class Digraph(object):
             degd = temp.domin(ker)
             degirred = temp.domirredval(ker,relation)
             degmd = min(degi,degd)
-            domChoicesSort.append([-degmd,degirred,degi,degd,dega,str(choice)])
+            domChoices.append([degmd,degirred,degi,degd,dega,str(choice)])
+        domChoicesSort = sorted(domChoices,key=itemgetter(0,7,3,4),reverse=True)
         print('domChoicesSort', domChoicesSort)
         for ch in domChoicesSort:
             choice = ch[5]
@@ -7930,7 +7932,7 @@ class Digraph(object):
         relation = temp.relation
         print('*** Potentially bad choices ***')
         print('    valuationdomain', temp.valuationdomain)
-        absChoicesSort = []
+        absChoices = []
         if 'abspreKernels' not in dir(temp) or Recompute:
             temp.computePreKernels()
         for ker in temp.abspreKernels:
@@ -7941,7 +7943,8 @@ class Digraph(object):
             degd = temp.domin(ker)
             degirred = temp.absirredval(ker,relation)
             degmd = min(degi,dega)
-            absChoicesSort.append((-degmd,degirred,degi,degd,dega,str(choice)))
+            absChoices.append((degmd,degirred,degi,degd,dega,str(choice)))
+        absChoicesSort = sorted(absChoices,key=itemgetter(0,7,4,3),reverse=True)
         print('absChoicesSort', absChoicesSort)
         absChoicesSort.sort()
         for ch in absChoicesSort:
