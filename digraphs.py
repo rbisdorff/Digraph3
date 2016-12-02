@@ -7849,6 +7849,7 @@ class Digraph(object):
         Characteristic values for potentially good choices.
         """
         import array,copy
+        from operator import itemgetter
         temp = copy.deepcopy(self)
 
         Max = temp.valuationdomain['max']
@@ -7870,8 +7871,9 @@ class Digraph(object):
             degd = temp.domin(ker)
             degirred = temp.domirredval(ker,relation)
             degmd = min(degi,degd)
-            domChoices.append([degmd,degirred,degi,degd,dega,str(choice)])
-        domChoicesSort = sorted(domChoices,key=itemgetter(0,7,3,4),reverse=True)
+            cover = temp.averageCoveringIndex(ker,direction="out")
+            domChoices.append([degmd,degirred,degi,degd,dega,str(choice),cover])
+        domChoicesSort = sorted(domChoices,key=itemgetter(0,6,3,4),reverse=True)
         print('domChoicesSort', domChoicesSort)
         for ch in domChoicesSort:
             choice = ch[5]
@@ -7922,6 +7924,7 @@ class Digraph(object):
         Characteristic values for potentially bad choices.
         """
         import copy
+        from operator import itemgetter
         temp = copy.deepcopy(self)
 
         Max = temp.valuationdomain['max']
@@ -7943,8 +7946,9 @@ class Digraph(object):
             degd = temp.domin(ker)
             degirred = temp.absirredval(ker,relation)
             degmd = min(degi,dega)
-            absChoices.append((degmd,degirred,degi,degd,dega,str(choice)))
-        absChoicesSort = sorted(absChoices,key=itemgetter(0,7,4,3),reverse=True)
+            cover = temp.averageCoveringIndex(ker,direction="in")
+            absChoices.append((degmd,degirred,degi,degd,dega,str(choice),cover))
+        absChoicesSort = sorted(absChoices,key=itemgetter(0,6,4,3),reverse=True)
         print('absChoicesSort', absChoicesSort)
         absChoicesSort.sort()
         for ch in absChoicesSort:
