@@ -7841,8 +7841,7 @@ class Digraph(object):
                     except:
                         print('\'%s\': %.2f' %  (vec[i][1],vec[i][0]), end=', ')
             print('}')
-                
-        print()
+            print()
 
     def showGoodChoices(self,Recompute=True):
         """
@@ -7955,8 +7954,8 @@ class Digraph(object):
             choice = ch[5]
             degirred = ch[1]
             degi = ch[2]
-            degd = -ch[3]
-            dega = ch[4]
+            degd = ch[3]
+            dega = -ch[4]
             print('* choice           : ' + str(choice))
             print('  -irredundance    : %.2f' % (degirred))
             print('  independence     : %.2f' % (degi))
