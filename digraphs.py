@@ -7557,7 +7557,7 @@ class Digraph(object):
             domvec = [(domvecsharp[i],str(actions[i])) for i in range(n)]
             domvec.sort(reverse=True)
             determ = temp.determinateness(domvec)
-            domChoices.append([determ,degirred,degi,degd,dega,str(choice),domvec,cover])
+            domChoices.append([determ,degirred,degi,degd,-dega,str(choice),domvec,cover])
         domChoicesSort = sorted(domChoices,key=itemgetter(0,7,3,4),reverse=True)
         goodChoicesDic = {}
         for ch in domChoicesSort:
@@ -7566,7 +7566,7 @@ class Digraph(object):
                                     'degirred':ch[1],
                                     'degi':ch[2],
                                     'degd':ch[3],
-                                    'dega':ch[4],
+                                    'dega':-ch[4],
                                     'cover':ch[7],
                                     'bpv':ch[6]}
 
@@ -7773,7 +7773,7 @@ class Digraph(object):
             absvec = [(absvecsharp[i],str(actions[i])) for i in range(n)]
             absvec.sort(reverse=True)
             determ = temp.determinateness(absvec)
-            absChoices.append([determ,degirred,degi,degd,dega,str(choice),absvec,cover])
+            absChoices.append([determ,degirred,degi,-degd,dega,str(choice),absvec,cover])
         absChoicesSort = sorted(absChoices,key=itemgetter(0,7,4,3),reverse=True)
         #absChoicesSort.sort()
         ## absChoicesSort.sort(reverse=True, key=itemgetter(7))
@@ -7786,7 +7786,7 @@ class Digraph(object):
             badChoicesDic[frozenset(ch[5])] = {'determ':ch[0],
                                     'degirred':ch[1],
                                     'degi':ch[2],
-                                    'degd':ch[3],
+                                    'degd':-ch[3],
                                     'dega':ch[4],
                                     'cover':ch[7],
                                     'bpv':ch[6]}
@@ -7872,7 +7872,7 @@ class Digraph(object):
             degirred = temp.domirredval(ker,relation)
             degmd = min(degi,degd)
             cover = temp.averageCoveringIndex(ker,direction="out")
-            domChoices.append([degmd,degirred,degi,degd,dega,str(choice),cover])
+            domChoices.append([degmd,degirred,degi,degd,-dega,str(choice),cover])
         domChoicesSort = sorted(domChoices,key=itemgetter(0,6,3,4),reverse=True)
         print('domChoicesSort', domChoicesSort)
         for ch in domChoicesSort:
@@ -7880,7 +7880,7 @@ class Digraph(object):
             degirred = ch[1]
             degi = ch[2]
             degd = ch[3]
-            dega = ch[4]
+            dega = -ch[4]
             print('* choice           : ' + str(choice))
             print('  +irredundance    : %.2f' % (degirred))
             print('  independence     : %.2f' % (degi))
@@ -7947,7 +7947,7 @@ class Digraph(object):
             degirred = temp.absirredval(ker,relation)
             degmd = min(degi,dega)
             cover = temp.averageCoveringIndex(ker,direction="in")
-            absChoices.append((degmd,degirred,degi,degd,dega,str(choice),cover))
+            absChoices.append((degmd,degirred,degi,-degd,dega,str(choice),cover))
         absChoicesSort = sorted(absChoices,key=itemgetter(0,6,4,3),reverse=True)
         print('absChoicesSort', absChoicesSort)
         absChoicesSort.sort()
@@ -7955,7 +7955,7 @@ class Digraph(object):
             choice = ch[5]
             degirred = ch[1]
             degi = ch[2]
-            degd = ch[3]
+            degd = -ch[3]
             dega = ch[4]
             print('* choice           : ' + str(choice))
             print('  -irredundance    : %.2f' % (degirred))
