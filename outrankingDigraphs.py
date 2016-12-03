@@ -3303,7 +3303,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 fo.write('<value name="choiceSet independence"><integer>%d</integer></value>\n' %(independent) )
                 outranking = ch[3]
                 fo.write('<value name="outranking"><integer>%d</integer></value>\n' %(outranking) )
-                outranked = ch[4]
+                outranked = -ch[4]
                 fo.write('<value name="outranked"><integer>%d</integer></value>\n' % (outranked) )
                 determ = (ch[0]*Decimal('6'))-Decimal('3')
                 fo.write('<value name="determinateness"><real>%2.2f</real></value>\n' % (determ)  )
