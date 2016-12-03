@@ -3271,7 +3271,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         for ch in self.goodChoices:
             maxDet = max(maxDet,ch[0])
         for ch in self.goodChoices:
-            if ch[3] > ch[4]:
+            if ch[3] >= ch[4]:
                 nb += 1
                 fo.write('<alternativesSet id="good_%d" mcdaConcept="%s">\n' % (nb,'goodChoice') )
                 fo.write('<description>\n')
