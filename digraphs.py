@@ -7561,12 +7561,13 @@ class Digraph(object):
         domChoicesSort = sorted(domChoices,key=itemgetter(0,7,3,4),reverse=True)
         goodChoicesDic = {}
         for ch in domChoicesSort:
+            ch[4] = -ch[4]
             ch[5] = eval(ch[5])
             goodChoicesDic[frozenset(ch[5])] = {'determ':ch[0],
                                     'degirred':ch[1],
                                     'degi':ch[2],
                                     'degd':ch[3],
-                                    'dega':-ch[4],
+                                    'dega':ch[4],
                                     'cover':ch[7],
                                     'bpv':ch[6]}
 
@@ -7782,15 +7783,18 @@ class Digraph(object):
         ## self.badChoices = absChoicesSort
         badChoicesDic = {}
         for ch in absChoicesSort:
+            ch[3] = -ch[3]
             ch[5] = eval(ch[5])
             badChoicesDic[frozenset(ch[5])] = {'determ':ch[0],
                                     'degirred':ch[1],
                                     'degi':ch[2],
-                                    'degd':-ch[3],
+                                    'degd':ch[3],
                                     'dega':ch[4],
                                     'cover':ch[7],
                                     'bpv':ch[6]}
+            
         self.badChoices = absChoicesSort
+        
         return badChoicesDic
 
     def showChoiceVector(self,ch,ChoiceVector=True):
@@ -7954,8 +7958,8 @@ class Digraph(object):
             choice = ch[5]
             degirred = ch[1]
             degi = ch[2]
-            degd = ch[3]
-            dega = -ch[4]
+            degd = -ch[3]
+            dega = ch[4]
             print('* choice           : ' + str(choice))
             print('  -irredundance    : %.2f' % (degirred))
             print('  independence     : %.2f' % (degi))
