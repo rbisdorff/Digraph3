@@ -7566,7 +7566,7 @@ class Digraph(object):
                                     'degirred':ch[1],
                                     'degi':ch[2],
                                     'degd':ch[3],
-                                    'dega':ch[4],
+                                    'dega':-ch[4],
                                     'cover':ch[7],
                                     'bpv':ch[6]}
 
@@ -7786,7 +7786,7 @@ class Digraph(object):
             badChoicesDic[frozenset(ch[5])] = {'determ':ch[0],
                                     'degirred':ch[1],
                                     'degi':ch[2],
-                                    'degd':ch[3],
+                                    'degd':-ch[3],
                                     'dega':ch[4],
                                     'cover':ch[7],
                                     'bpv':ch[6]}
