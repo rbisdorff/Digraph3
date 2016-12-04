@@ -11466,7 +11466,8 @@ class CocaDigraph(Digraph):
         newCircuits = None
         self.circuitsList = []
         self.brakings = 0
-        while newCircuits != set():
+        self.newBrakings = self.order
+        while newCircuits != set() or self.newBrakings != 0:
             initialCircuits = set([x for cl,x in self.circuitsList])
             if Cpp:
                 if Piping:
@@ -11489,7 +11490,7 @@ class CocaDigraph(Digraph):
         import time
         #from copy import deepcopy
         order0 = self.order
-        brakings = self.brakings
+        newBrakings = 0
         if not(isinstance(self.actions,dict)):
             actions = {}
             for x in self.actions:
@@ -11570,7 +11571,7 @@ class CocaDigraph(Digraph):
                 relation[x][y] = Med
                 relation[y][x] = Med
                 currentCircuits.remove((cycleList,cycle))
-                brakings += 1
+                newBrakings += 1
 
         self.actions = actions
         self.order = len(actions)
@@ -11585,12 +11586,13 @@ class CocaDigraph(Digraph):
                 print('  No circuits added !')
             else:
                 print('  ',new,' circuit(s) added!')
-        self.brakings = brakings
+        self.newBrakings = newBrakings
+        self.brakings += newBrakings
         if Comments:
-            if self.brakings == 0:
-                print('  No circuit brakings !')
+            if newBrakings == 0:
+                print('  No further circuit brakings !')
             else:
-                print('  ',brakings,' circuit(s) were broken')
+                print('  ',newBrakings,' new circuit(s) were broken')
             
 
     def showCircuits(self,credibility=None,Debug=False):
