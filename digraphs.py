@@ -11465,9 +11465,13 @@ class CocaDigraph(Digraph):
         """
         newCircuits = None
         self.circuitsList = []
-        self.brakings = 0
+        try:
+            oldBrakings = self.brakings
+        except:
+            self.brakings = 0
         self.newBrakings = self.order
-        while newCircuits != set() or self.newBrakings != 0:
+        #while newCircuits != set() or self.newBrakings != 0:
+        while newCircuits != set():
             initialCircuits = set([x for cl,x in self.circuitsList])
             if Cpp:
                 if Piping:
