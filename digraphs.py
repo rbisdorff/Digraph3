@@ -7254,7 +7254,8 @@ class Digraph(object):
         """
         self.computeRubisChoice(CppAgrum=CppAgrum,Comments=Comments,_OldCoca=_OldCoca)
 
-    def computeRubisChoice(self,CppAgrum=False,Comments=False,_OldCoca=False):
+    def computeRubisChoice(self,CppAgrum=False,Comments=False,_OldCoca=False,\
+                           Threading=False,nbrOfCPUs=1):
         """
         Renders self.strictGoodChoices, self.nullChoices
         self.strictBadChoices, self.nonRobustChoices.
@@ -7286,7 +7287,8 @@ class Digraph(object):
             _selfwcoc = _CocaDigraph(self,Cpp=CppAgrum,Comments=Comments)
             self.brakings = 0
         else:
-            _selfwcoc = CocaDigraph(self,Cpp=CppAgrum,Comments=Comments)
+            _selfwcoc = CocaDigraph(self,Cpp=CppAgrum,Comments=Comments,\
+                                    Threading=Threading,nbrOfCPUs=nbrOfCPUs)
             self.brakings = _selfwcoc.brakings
         if Comments:
             print('Execution time: %.3f seconds' % (time()-t0))
@@ -11425,7 +11427,8 @@ class CocaDigraph(Digraph):
     i.e. a link (*x*, *y*) with minimal difference between r(*x* S *y*) - r(*y* S *x*).
 
     """
-    def __init__(self,digraph=None,Cpp=False,Piping=False,Comments=False):
+    def __init__(self,digraph=None,Cpp=False,Piping=False,\
+                 Comments=False,Threading=False,nbrOfCPUs=1):
         import random,sys,array,copy
         from outrankingDigraphs import OutrankingDigraph, RandomOutrankingDigraph, BipolarOutrankingDigraph
         ## if comment == None:
@@ -11457,9 +11460,11 @@ class CocaDigraph(Digraph):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         self.weakGamma = self.weakGammaSets()
-        self.closureChordlessOddCircuits(Cpp=Cpp,Piping=Piping,Comments=Comments)
+        self.closureChordlessOddCircuits(Cpp=Cpp,Piping=Piping,\
+                                         Comments=Comments,Threading=Threading,nbrOfCPUs=nbrOfCPUs)
 
-    def closureChordlessOddCircuits(self,Cpp=False,Piping=False,Comments=True,Debug=False):
+    def closureChordlessOddCircuits(self,Cpp=False,Piping=False,\
+                                    Comments=True,Debug=False,Threading=False,nbrOfCPUs=1):
         """
         Closure of chordless odd circuits extraction.
         """
@@ -11478,8 +11483,12 @@ class CocaDigraph(Digraph):
                     self.computeCppInOutPipingChordlessCircuits(Odd=True,Debug=Debug)
                 else:
                     self.computeCppChordlessCircuits(Odd=True,Debug=Debug)
+            elif Threading:
+                self.computeChordlessCircuitsMP(Odd=True,Comments=Debug,\
+                                                Threading=Threading,nbrOfCPUs=nbrOfCPUs)
             else:
                 self.computeChordlessCircuits(Odd=True,Comments=Debug)
+           
             #print(self.circuitsList)
             self.addCircuits(Comments=Comments)
             currentCircuits = set([x for cl,x in self.circuitsList])
