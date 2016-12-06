@@ -7120,13 +7120,13 @@ class Digraph(object):
         """
         Renders the RuBis best choice recommendation.
 
-        -- notice::
+        .. note::
 
             In case of an outranking chordless circuit, if the supporting arcs are more credible
             than the reversed negating arcs, we collapse the circuit into a hyper node.
             Inversely,  if the supporting arcs are not more credible than the reversed negating arcs,
-            we brake the circuit on its weakest arc
-            .
+            we brake the circuit on its weakest arc.
+
         .. warning::
 
             Computes by default the Rubis best choice recommendation on the strict codual outranking digraph.
