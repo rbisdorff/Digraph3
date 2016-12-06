@@ -294,7 +294,7 @@ and the other.evaluation dictionaries into self.</p>
 
 <dl class="class">
 <dt id="digraphs.CocaDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CocaDigraph</code><span class="sig-paren">(</span><em>digraph=None</em>, <em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CocaDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CocaDigraph</code><span class="sig-paren">(</span><em>digraph=None</em>, <em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CocaDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <p>Parameters:</p>
 <blockquote>
@@ -317,7 +317,7 @@ i.e. a link (<em>x</em>, <em>y</em>) with minimal difference between r(<em>x</em
 
 <dl class="method">
 <dt id="digraphs.CocaDigraph.closureChordlessOddCircuits">
-<code class="descname">closureChordlessOddCircuits</code><span class="sig-paren">(</span><em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CocaDigraph.closureChordlessOddCircuits" title="Permalink to this definition">¶</a></dt>
+<code class="descname">closureChordlessOddCircuits</code><span class="sig-paren">(</span><em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=True</em>, <em>Debug=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CocaDigraph.closureChordlessOddCircuits" title="Permalink to this definition">¶</a></dt>
 <dd><p>Closure of chordless odd circuits extraction.</p>
 </dd></dl>
 
@@ -1094,7 +1094,7 @@ leq &#8216;&lt;=&#8217;, geq &#8216;&gt;=&#8217;, indeterm &#8216;?&#8217;</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.computeRubisChoice">
-<code class="descname">computeRubisChoice</code><span class="sig-paren">(</span><em>CppAgrum=False</em>, <em>Comments=False</em>, <em>_OldCoca=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computeRubisChoice" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeRubisChoice</code><span class="sig-paren">(</span><em>CppAgrum=False</em>, <em>Comments=False</em>, <em>_OldCoca=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.computeRubisChoice" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders self.strictGoodChoices, self.nullChoices
 self.strictBadChoices, self.nonRobustChoices.</p>
 <p>CppgArum = False (default | true : use C++/Agrum digraph library
@@ -1294,7 +1294,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'med': 0</em>, <em>'min': -1</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2087,8 +2087,20 @@ Kohler&#8217;s (rankingRule=&#8221;kohler&#8221;), and Tideman&#8217;s ranked pa
 
 <dl class="method">
 <dt id="digraphs.Digraph.showRubisBestChoiceRecommendation">
-<code class="descname">showRubisBestChoiceRecommendation</code><span class="sig-paren">(</span><em>Comments=False</em>, <em>ChoiceVector=True</em>, <em>Debug=False</em>, <em>_OldCoca=False</em>, <em>Cpp=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.showRubisBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showRubisBestChoiceRecommendation</code><span class="sig-paren">(</span><em>Comments=False</em>, <em>ChoiceVector=False</em>, <em>CoDual=True</em>, <em>Debug=False</em>, <em>_OldCoca=False</em>, <em>Cpp=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.showRubisBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the RuBis best choice recommendation.</p>
+<p>&#8211; notice:</p>
+<div class="highlight-python"><div class="highlight"><pre>In case of an outranking chordless circuit, if the supporting arcs are more credible
+than the reversed negating arcs, we collapse the circuit into a hyper node.
+Inversely,  if the supporting arcs are not more credible than the reversed negating arcs,
+we brake the circuit on its weakest arc
+.
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Computes by default the Rubis best choice recommendation on the strict codual outranking digraph.</p>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -3779,7 +3791,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -5058,7 +5070,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
