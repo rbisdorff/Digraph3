@@ -6961,6 +6961,7 @@ class Digraph(object):
             degP += relation[x][y]
             nParcs += 1
             diffxy = abs(relation[x][y]) + abs(relation[y][x])
+            #diffxy = abs(relation[x][y]) + abs(relation[y][x])
             if Debug:
                 print(relation[x][y],relation[y][x],diffxy,end=',')
             if minAmplitude >= diffxy:
@@ -11524,8 +11525,10 @@ class CocaDigraph(Digraph):
             degP,degN,minLink = self.circuitCredibilities(cycleList,Debug=Comments)
             if Comments:
                 print(cycleList,cycle,degP,degN,minLink)
-            if degP+degN > Med:
-                #print('Adding cycle:', cycle, 'with degree=',degP)
+            #if degP+degN > Med:
+            if abs(degP) > abs(degN):
+                if Comments:
+                    print('Adding cycle:', cycle, ' with Pdegree=',degP,' and Ndegree=',degN )
                 cn = '_'
                 dcycle = set()
                 acycle = set()

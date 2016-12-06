@@ -2270,10 +2270,13 @@ The performance evaluations of each decision alternative on each criterion are g
             RankingRule = 'Copeland'
         na = len(self.actions)
         if SparseModel:
-            if na < 100:
-                q = na
+            if quantiles == None:
+                if na < 100:
+                    q = 5
+                else:
+                    q = None
             else:
-                q = None
+                q = quantiles
             g = PreRankedOutrankingDigraph(self,quantiles=q,LowerClosed=False,
                                            minimalComponentSize=minimalComponentSize,
                                        componentRankingRule=RankingRule,Threading=Threading,
@@ -2284,15 +2287,15 @@ The performance evaluations of each decision alternative on each criterion are g
                 actionsList = argActionsList
         else: # standard outranking model
             if RankingRule == 'NetFlows':
-                if quantiles == None:
-                    quantiles = na
+##                if quantiles == None:
+##                    quantiles = na
                 from outrankingDigraphs import BipolarOutrankingDigraph
                 from linearOrders import NetFlowsOrder
                 g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
                 actionsList = g.computeNetFlowsRanking()
             else:
-                if quantiles == None:
-                    quantiles = na
+##                if quantiles == None:
+##                    quantiles = na
                 from outrankingDigraphs import BipolarOutrankingDigraph
                 from linearOrders import CopelandOrder
                 g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
