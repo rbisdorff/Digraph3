@@ -7131,6 +7131,36 @@ class Digraph(object):
 
             Computes by default the Rubis best choice recommendation on the strict codual outranking digraph.
          
+        Usage example:
+        
+        >>> from outrankingDigraphs import *
+        >>> t = Random3ObjectivesPerformanceTableau(seed=5)
+        >>> g = BipolarOutrankingDigraph(t)
+        >>> g.showRubisBestChoiceRecommendation()
+        ***********************
+        RuBis Best Choice Recommendation (BCR)
+        (in decreasing order of determinateness)   
+        Credibility domain:  [-100.0, 100.0]
+        === >> potential BCR 
+        * choice              : ['a04', 'a14', 'a19', 'a20']
+           +-irredundancy      : 1.19
+           independence        : 1.19
+           dominance           : 4.76
+           absorbency          : -59.52
+           covering (%)        : 75.00
+           determinateness (%) : 57.86
+           - most credible action(s) = { 'a14': 23.81, 'a19': 11.90,
+                                                         'a04': 2.38, 'a20': 1.19, }  
+        === >> potential worst choice 
+        * choice              : ['a03', 'a12', 'a17']
+           +-irredundancy      : 4.76
+          independence        : 4.76
+          dominance           : -76.19
+          absorbency          : 4.76
+          covering (%)        : 0.00
+          determinateness (%) : 65.39
+          - most credible action(s) = { 'a03': 38.10, 'a12': 13.10,
+                                                        'a17': 4.76, }
 
         """
         import copy,time
