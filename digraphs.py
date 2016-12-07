@@ -7141,7 +7141,7 @@ class Digraph(object):
         RuBis Best Choice Recommendation (BCR)
         (in decreasing order of determinateness)   
         Credibility domain:  [-100.0, 100.0]
-        === >> potential BCR 
+        === >> potential vest choices
         * choice              : ['a04', 'a14', 'a19', 'a20']
            +-irredundancy      : 1.19
            independence        : 1.19
@@ -7150,7 +7150,7 @@ class Digraph(object):
            covering (%)        : 75.00
            determinateness (%) : 57.86
            - most credible action(s) = { 'a14': 23.81, 'a19': 11.90, 'a04': 2.38, 'a20': 1.19, }  
-        === >> potential worst choice 
+        === >> potential worst choices 
         * choice              : ['a03', 'a12', 'a17']
            +-irredundancy      : 4.76
           independence        : 4.76
@@ -7159,21 +7159,26 @@ class Digraph(object):
           covering (%)        : 0.00
           determinateness (%) : 65.39
           - most credible action(s) = { 'a03': 38.10, 'a12': 13.10, 'a17': 4.76, }
+        Execution time: 0.024 seconds
+        *****************************
 
         """
-        import copy,time
+        from copy import deepcopy
+        from time import time
         if Debug:
             Comments = True
         print('***********************')
-        print('RuBis BCR')
-        if Comments:
+        #print('RuBis BCR')
+        if Debug:
             print('All comments !!!')
-        t0 = time.time()
+            Comments=True
+        t0 = time()
         n0 = self.order
+        cpself = deepcopy(self)
         if CoDual:
-            g = ~(-self)
+            g = ~(-cpself)
         else:
-            g = self
+            g = cpself
         if _OldCoca:
             _selfwcoc = _CocaDigraph(g,Cpp=Cpp,Comments=Comments)
             b1 = 0
@@ -7183,13 +7188,13 @@ class Digraph(object):
         n1 = _selfwcoc.order
         nc = n1 - n0
         
-        self.relation_orig = copy.deepcopy(g.relation)
+        self.relation_orig = deepcopy(g.relation)
         if nc > 0 or b1 > 0:
-            self.actions_orig = copy.deepcopy(g.actions)
-            g.actions = copy.deepcopy(_selfwcoc.actions)
+            self.actions_orig = deepcopy(g.actions)
+            g.actions = deepcopy(_selfwcoc.actions)
             g.order = len(g.actions)
-            g.relation = copy.deepcopy(_selfwcoc.relation)
-        if Comments:
+            g.relation = deepcopy(_selfwcoc.relation)
+        if Debug:
             print('List of pseudo-independent choices')
             print(g.actions)
         g.gamma = g.gammaSets()
@@ -7198,17 +7203,19 @@ class Digraph(object):
             g.showRelationTable()
         #self.showPreKernels()
         actions = set([x for x in g.actions])
-        g.showPreKernels()
+        if Comments:
+            g.showPreKernels()
         if Debug:
             print(g.dompreKernels,g.abspreKernels)
         g.computeGoodChoices(Comments=Comments)
         g.computeBadChoices(Comments=Comments)
         if Debug:
             print('good and bad choices: ',g.goodChoices,g.badChoices)
-        t1 = time.time()
-        print('* --- Rubis best choice recommendation(s) ---*')
-        print('  (in decreasing order of determinateness)   ')
-        print('Credibility domain: ', g.valuationdomain)
+        t1 = time()
+        print('Rubis best choice recommendation(s) (BCR)')
+        print(' (in decreasing order of determinateness)   ')
+        print('Credibility domain: [%.2f,%.2f]' % (g.valuationdomain['min'],\
+                                                                        g.valuationdomain['max']) )
         Med = g.valuationdomain['med']
         bestChoice = set()
         worstChoice = set()
@@ -7237,14 +7244,13 @@ class Digraph(object):
                         else:
                             goodChoice = True
                 if goodChoice:
-                    print(' === >> potential BCR ')
+                    print(' === >> potential best choice(s)')
                     g.showChoiceVector(gch,ChoiceVector=ChoiceVector)
                     if bestChoice == set():
                         bestChoice = gch[5]
             else:
-                if Comments:
-                    print('non robust best choice ')
-                    g.showChoiceVector(gch,ChoiceVector=ChoiceVector)
+                print(' === >> non robust best choice(s)')
+                g.showChoiceVector(gch,ChoiceVector=ChoiceVector)
         for bch in g.badChoices:
             if bch[0] >= Med:
                 badChoice = True
@@ -7268,31 +7274,30 @@ class Digraph(object):
                         else:
                             badChoice = True
                 if badChoice:
-                    print(' === >> potential worst choice ')
+                    print(' === >> potential worst choice(s) ')
                     g.showChoiceVector(bch,ChoiceVector=ChoiceVector)
                     if worstChoice == set():
                         worstChoice = bch[5]
                 elif nullChoice:
-                    print(' === >> ambiguous choice ')
+                    print(' === >> ambiguous choice(s)')
                     g.showChoiceVector(bch,ChoiceVector=ChoiceVector)
                     if worstChoice == set():
                         worstChoice = bch[5]
 
             else:
-                if Comments:
-                    print('non robust worst choice ')
-                    g.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                print('=== >> non robust worst choice(s)')
+                g.showChoiceVector(bch,ChoiceVector=ChoiceVector)
         print()
         print('Execution time: %.3f seconds' % (t1-t0))
         print('*****************************')
         self.bestChoice = bestChoice
         self.worstChoice = worstChoice
-        if nc > 0 or b1 > 0:
-            self.actions = copy.deepcopy(self.actions_orig)
-            self.relation = copy.deepcopy(self.relation_orig)
-            self.order = len(self.actions)
-            self.gamma = self.gammaSets()
-            self.notGamma = self.notGammaSets()
+        #if nc > 0 or b1 > 0:
+##        self.actions = deepcopy(self.actions_orig)
+##        self.relation = deepcopy(self.relation_orig)
+##        self.order = len(self.actions)
+##        self.gamma = self.gammaSets()
+##        self.notGamma = self.notGammaSets()
 
     def computeRubyChoice(self,CppAgrum=False,Comments=False,_OldCoca=False):
         """
