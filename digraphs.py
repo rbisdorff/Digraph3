@@ -7149,8 +7149,7 @@ class Digraph(object):
            absorbency          : -59.52
            covering (%)        : 75.00
            determinateness (%) : 57.86
-           - most credible action(s) = { 'a14': 23.81, 'a19': 11.90,
-                                                         'a04': 2.38, 'a20': 1.19, }  
+           - most credible action(s) = { 'a14': 23.81, 'a19': 11.90, 'a04': 2.38, 'a20': 1.19, }  
         === >> potential worst choice 
         * choice              : ['a03', 'a12', 'a17']
            +-irredundancy      : 4.76
@@ -7159,8 +7158,7 @@ class Digraph(object):
           absorbency          : 4.76
           covering (%)        : 0.00
           determinateness (%) : 65.39
-          - most credible action(s) = { 'a03': 38.10, 'a12': 13.10,
-                                                        'a17': 4.76, }
+          - most credible action(s) = { 'a03': 38.10, 'a12': 13.10, 'a17': 4.76, }
 
         """
         import copy,time
