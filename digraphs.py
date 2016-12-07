@@ -7180,17 +7180,17 @@ class Digraph(object):
         else:
             g = cpself
         if _OldCoca:
-            _selfwcoc = _CocaDigraph(g,Cpp=Cpp,Comments=Comments)
+            _selfwcoc = _CocaDigraph(g,Cpp=Cpp)
             b1 = 0
         else:
-            _selfwcoc = CocaDigraph(g,Cpp=Cpp,Comments=Comments)
+            _selfwcoc = CocaDigraph(g,Cpp=Cpp)
             b1 = _selfwcoc.brakings
         n1 = _selfwcoc.order
         nc = n1 - n0
         
-        self.relation_orig = deepcopy(g.relation)
+        #self.relation_orig = deepcopy(g.relation)
         if nc > 0 or b1 > 0:
-            self.actions_orig = deepcopy(g.actions)
+            #self.actions_orig = deepcopy(g.actions)
             g.actions = deepcopy(_selfwcoc.actions)
             g.order = len(g.actions)
             g.relation = deepcopy(_selfwcoc.relation)
