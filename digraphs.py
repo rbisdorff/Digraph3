@@ -7122,13 +7122,12 @@ class Digraph(object):
 
         .. note::
 
-            Computes by default the Rubis best choice recommendation on the strict codual outranking digraph.
+            Computes by default the Rubis best choice recommendation on the corresponding strict (codual) outranking digraph.
 
             In case of chordless circuits, if supporting arcs are more credible
             than the reversed negating arcs, we collapse the circuits into hyper nodes.
             Inversely,  if supporting arcs are not more credible than the reversed negating arcs,
             we brake the circuits on their weakest arc.
-
          
         Usage example:
         
@@ -7206,8 +7205,8 @@ class Digraph(object):
             g.showPreKernels()
         if Debug:
             print(g.dompreKernels,g.abspreKernels)
-        g.computeGoodChoices(Comments=Comments)
-        g.computeBadChoices(Comments=Comments)
+        g.computeGoodChoices(Comments=Debug)
+        g.computeBadChoices(Comments=Debug)
         if Debug:
             print('good and bad choices: ',g.goodChoices,g.badChoices)
         t1 = time()
@@ -7226,7 +7225,7 @@ class Digraph(object):
                         #if gch[0] == bch[0]:
                         if gch[3] == gch[4]:
                             if Comments:
-                                print('null choice ')
+                                print('null (good) choice ')
                                 g.showChoiceVector(gch,
                                                       ChoiceVector=ChoiceVector)
                                 g.showChoiceVector(bch,
@@ -7234,7 +7233,7 @@ class Digraph(object):
                             goodChoice = False
                         elif gch[4] > gch[3]:
                             if Comments:
-                                print('outranked choice ')
+                                print('outranked (good) choice ')
                                 g.showChoiceVector(gch,
                                                       ChoiceVector=ChoiceVector)
                                 g.showChoiceVector(bch,
@@ -7259,14 +7258,14 @@ class Digraph(object):
                         #if gch[0] == bch[0]:
                         if bch[3] == bch[4]:
                             if Comments:
-                                print('null choice ')
+                                print('null (bad) choice ')
                                 g.showChoiceVector(gch,ChoiceVector=ChoiceVector)
                                 g.showChoiceVector(bch,ChoiceVector=ChoiceVector)
                             badChoice = False
                             nullChoice = True
                         elif bch[3] > bch[4]:
                             if Comments:
-                                print('outranking choice ')
+                                print('outranking (bad) choice ')
                                 g.showChoiceVector(gch,ChoiceVector=ChoiceVector)
                                 g.showChoiceVector(bch,ChoiceVector=ChoiceVector)
                             badChoice = False
