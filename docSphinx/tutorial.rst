@@ -1997,7 +1997,7 @@ To model these *strict outranking* situations, we may compute the Rubis best cho
     * --- Rubis best choice recommendation(s) ---*
     (in decreasing order of determinateness)   
     Credibility domain:  {'min':-100.0, 'max': 100.0', 'med':0.0'}
-    === >> potential BCR 
+    === >> potential best choice(s)
     * choice                : ['A', 'C', 'D']
       +-irredundancy        : 0.00
       independence          : 0.00
@@ -2008,7 +2008,7 @@ To model these *strict outranking* situations, we may compute the Rubis best cho
       characteristic vector :  
          { 'D': 11.11, 'A': 0.00, 'C': 0.00, 'G': 0.00, 
            'B': -11.11, 'E': -11.11, 'F': -11.11 }
-    === >> potential worst choice 
+    === >> potential worst choice(s)
     * choice                : ['A', 'F']
       +-irredundancy        : 0.00
       independence          : 0.00
@@ -2020,9 +2020,9 @@ To model these *strict outranking* situations, we may compute the Rubis best cho
          {'A': 0.00, 'B': 0.00, 'C': 0.00, 'D': 0.00, 
           'E': 0.00, 'F': 0.00, 'G': 0.00, }
 
-It is interesting to notice that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D' (see line 7). In the corresponding characteristic vector (see line 15-16), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see [BIS-2006]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in the strict best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate. 
+It is interesting to notice that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D' (see line 6). In the corresponding characteristic vector (see line 14-15), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see [BIS-2006]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in the strict best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate. 
 
-We may also notice that both alternatives *A* and *F* are reported as certainly outranked, hence a **worst choice recommendation**. This confirms the global incomparability status of alternative *A*.
+We may also notice (see line 17 and line 21) that both alternatives *A* and *F* are reported as certainly outranked choices, hence a **potential worst choice recommendation** . This confirms again the global incomparability status of alternative *A*.
 
 Weakly ordering
 ...............
