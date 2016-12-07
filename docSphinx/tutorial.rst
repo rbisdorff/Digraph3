@@ -1880,7 +1880,7 @@ Following the Rubis outranking method (see [BIS-2008]_), potential best choice r
     Results in sets: dompreKernels and abspreKernels.
 
 We notice three potential best choice recommendations: the Condorcet winner *D* (line 4), the triplet *B*, *C* and *E* (line 9), and finally the pair *A* and *G* (line 14). The Rubis best choice recommendation is given by the **most determined** pre-kernel; the one supported by the most significant criteria coalition. This result is shown with the following command:
-    >>> g.showRubisBestChoiceRecommendation()
+    >>> g.showRubisBestChoiceRecommendation(CoDual=False)
     ***********************
     * --- Rubis best choice recommendation(s) (BCR) ---*
       (in decreasing order of determinateness)   
@@ -1992,9 +1992,8 @@ However, we must as well notice that the cheapest alternative *C* is in fact **s
     Valuation in range: -9.00 to +9.00; global concordance: +1.00/-1.00
 
 
-To model these *strict outranking* situations, we may compute the **codual**, the converse (~) of the dual (-), of the outranking digraph instance *g* (see [BIS-2013]_). On this digraph, the Rubis best choice recommendation may be computed as follows: 
-    >>> gcd = ~(-g)          ## g = BipolarOutrankingDigraph(t)
-    >>> gcd.showRubisBestChoiceRecommendation()
+To model these *strict outranking* situations, we may compute the **codual**, the converse (~) of the dual (-), of the outranking digraph instance *g* (see [BIS-2013]_), as follows: 
+    >>> g.showRubisBestChoiceRecommendation(CoDual=True)
     * --- Rubis best choice recommendation(s) ---*
     (in decreasing order of determinateness)   
     Credibility domain:  {'min':-100.0, 'max': 100.0', 'med':0.0'}
@@ -2005,7 +2004,7 @@ To model these *strict outranking* situations, we may compute the **codual**, th
       dominance             : 11.11
       absorbency            : 0.00
       covering (%)          : 41.67
-      determinateness (%)   : 0.53
+      determinateness (%)   : 53.17
       characteristic vector :  
          { 'D': 11.11, 'A': 0.00, 'C': 0.00, 'G': 0.00, 
            'B': -11.11, 'E': -11.11, 'F': -11.11 }
@@ -2016,7 +2015,7 @@ To model these *strict outranking* situations, we may compute the **codual**, th
       dominance             : -55.56
       absorbency            : 100.00
       covering (%)          : 0.00
-      determinateness (%)   : 0.50
+      determinateness (%)   : 50.00
       characteristic vector : 
          {'A': 0.00, 'B': 0.00, 'C': 0.00, 'D': 0.00, 
           'E': 0.00, 'F': 0.00, 'G': 0.00, }
