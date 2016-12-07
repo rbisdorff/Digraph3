@@ -7122,14 +7122,13 @@ class Digraph(object):
 
         .. note::
 
-            In case of an outranking chordless circuit, if the supporting arcs are more credible
-            than the reversed negating arcs, we collapse the circuit into a hyper node.
-            Inversely,  if the supporting arcs are not more credible than the reversed negating arcs,
-            we brake the circuit on its weakest arc.
-
-        .. warning::
-
             Computes by default the Rubis best choice recommendation on the strict codual outranking digraph.
+
+            In case of chordless circuits, if supporting arcs are more credible
+            than the reversed negating arcs, we collapse the circuits into hyper nodes.
+            Inversely,  if supporting arcs are not more credible than the reversed negating arcs,
+            we brake the circuits on their weakest arc.
+
          
         Usage example:
         
