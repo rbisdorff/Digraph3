@@ -1992,8 +1992,8 @@ However, we must as well notice that the cheapest alternative *C* is in fact **s
     Valuation in range: -9.00 to +9.00; global concordance: +1.00/-1.00
 
 
-To model these *strict outranking* situations, we may compute the **codual**, the converse (~) of the dual (-), of the outranking digraph instance *g* (see [BIS-2013]_), as follows: 
-    >>> g.showRubisBestChoiceRecommendation(CoDual=True)
+To model these *strict outranking* situations, we may compute the Rubis best choice recommendation on the **codual**, the converse (~) of the dual (-), of the outranking digraph instance *g* (see [BIS-2013]_), as follows: 
+    >>> g.showRubisBestChoiceRecommendation(CoDual=True,ChoiceVector=True)
     * --- Rubis best choice recommendation(s) ---*
     (in decreasing order of determinateness)   
     Credibility domain:  {'min':-100.0, 'max': 100.0', 'med':0.0'}
