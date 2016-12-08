@@ -12,8 +12,8 @@ Tutorials of the Digraph3 resources
 
 .. _Digraphs-tutorial-label:
 
-Working with the :code:`digraphs` module
-----------------------------------------
+Working with the *Digraph3* software ressources
+-----------------------------------------------
 
 .. contents:: 
 	:depth: 2
@@ -66,13 +66,15 @@ You may start an interactive Python3 session in the :code:`Digraph3` directory f
 ``Digraph`` object structure
 ............................
 
-All :py:class:`digraphs.Digraph` object *dg* contains at least the following sub-objects: 
+All :py:class:`digraphs.Digraph` object *dg* contains at least the following components: 
 
-1. the digraph nodes called **actions** (decision actions): a list, set or dictionary of nodes with 'name' and 'shortname' attributes,
-2. the digraph **valuationdomain** , a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true),
-3. the graph **relation** : a double dictionary indexed by an oriented pair of actions (nodes) and carrying a characteristic value in the range of the previous valuation domain,
-4. its associated **gamma function** : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor,
-5. its associated **notGamma function** : a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor. See the reference manual of the :ref:`digraphs-label`.
+1. A collection of digraph nodes called **actions** (decision actions): a list, set or (ordered) dictionary of nodes with 'name' and 'shortname' attributes,
+2. A logical characteristic **valuationdomain**, a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true),
+3. The digraph **relation** : a double dictionary indexed by an oriented pair of actions (nodes) and carrying a characteristic value in the range of the previous valuation domain,
+4. Its associated **gamma function** : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor,
+5. Its associated **notGamma function** : a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor.
+
+See the reference manual of the :ref:`digraphs-label`.
 
 Permanent storage
 .................
@@ -309,8 +311,8 @@ We may recover object *dg* from both partial objects *asymDg* and *symDg* with a
     '6'    | -0.84  0.00 -0.40 -0.96 -0.18  0.00 -0.22	 
     '7'    |  0.88  0.72  0.82  0.52 -0.84  0.04  0.00	 
 
-Dual, converse and codual
-.........................
+Dual, converse and codual digraphs
+..................................
 
 We may as readily compute the **dual**, the **converse** and the **codual** (dual and converse) of *dg*:
     >>> from digraphs import DualDigraph, ConverseDigraph, CoDualDigraph
@@ -510,7 +512,7 @@ Let us finally mention some special universal classes of digraphs that are readi
 
 .. note::
 
-       Notice the subtle difference between the neighborhoods of an *empty* and the neighborhoods of an *indeterminate* digraph instance. In the first kind, the neighborhoods are known to be completely *empty* whereas, in the latter, *nothing is known* about the actual neighborhoods of the nodes. These two cases illustrate why in the case of a bipolar valuation domain, we need both a *gamma* **and** a *notGamma* function.
+   Notice the subtle difference between the neighborhoods of an *empty* and the neighborhoods of an *indeterminate* digraph instance. In the first kind, the neighborhoods are known to be completely *empty* whereas, in the latter, *nothing is known* about the actual neighborhoods of the nodes. These two cases illustrate why in the case of a bipolar valuation domain, we need both a *gamma* **and** a *notGamma* function.
 
 Back to :ref:`Tutorial-label`
 

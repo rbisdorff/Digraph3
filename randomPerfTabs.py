@@ -33,8 +33,7 @@ from collections import OrderedDict
 
 class RandomPerformanceTableau(PerformanceTableau):
     """
-    Specialization of the PerformanceTableau class for generating a temporary
-    random performance tableau.
+    Specialization of the generic :py:class:`perftabs.PerformanceTableau` class for generating a temporary random performance tableau.
 
     Parameters:
         * numberOfActions := nbr of decision actions.
@@ -2566,8 +2565,8 @@ class RandomCBPerformanceTableau(PerformanceTableau):
 
 class RandomCBPerformanceGenerator(object):
     """
-    Generates and/or new decision actions with random evaluation for a
-    given RandomCBPerformanceTableau instance.
+    Instantiates a generator of new decision actions with associated random evaluations using the model parameters provided by a given RandomCBPerformanceTableau instance.
+
     """
     def __init__(self,argPerfTab,actionNamePrefix='a',
                  instanceCounter=0,seed=None):
@@ -2588,11 +2587,13 @@ class RandomCBPerformanceGenerator(object):
        
     def randomAction(self):
         """
-        Returns a dictionary with following content:
+        Returns a dictionary with following content::
 
-        { 'action': { 'key': actionKey, 'shortName': ..., 'name': ...,  
-                                         'type': 'neutral'|'advantageous'|'cheap'},
-                        'evaluation': {'g1': Decimal(...), 'g2': Decimal(...), ... }}.
+             { 'action': { 'key': actionKey, 'shortName': ..., 'name': ...,  
+                      'type': 'neutral'|'advantageous'|'cheap'},
+                      'evaluation': {'g1': Decimal(...), 
+                                     'g2': Decimal(...), ... }}.
+        
         """
         # generate action key
         self.counter += 1

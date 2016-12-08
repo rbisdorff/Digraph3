@@ -185,7 +185,7 @@
 </div>
 <div class="section" id="digraphs-module">
 <span id="digraphs-label"></span><h2>digraphs module<a class="headerlink" href="#digraphs-module" title="Permalink to this headline">¶</a></h2>
-<p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#digraphs-tutorial-label"><span>Working with the digraphs module</span></a></p>
+<p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#digraphs-tutorial-label"><span>Working with the Digraph3 software ressources</span></a></p>
 <span class="target" id="module-digraphs"></span><dl class="class">
 <dt id="digraphs.AsymmetricPartialDigraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">AsymmetricPartialDigraph</code><span class="sig-paren">(</span><em>digraph</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.AsymmetricPartialDigraph" title="Permalink to this definition">¶</a></dt>
@@ -217,7 +217,7 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 
 <dl class="class">
 <dt id="digraphs.CirculantDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'min': Decimal('-1.0'), 'max': Decimal('1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'max': Decimal('1.0'), 'min': Decimal('-1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1294,7 +1294,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'max': 1</em>, <em>'med': 0</em>, <em>'min': -1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2308,7 +2308,7 @@ called dg1 and dg2.</p>
 
 <dl class="class">
 <dt id="digraphs.GridDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2339,7 +2339,7 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 
 <dl class="class">
 <dt id="digraphs.KneserDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2689,7 +2689,7 @@ from random choices in the set of potential oriented pairs of nodes numbered fro
 
 <dl class="class">
 <dt id="randomDigraphs.RandomGridDigraph">
-<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.GridDigraph" title="digraphs.GridDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.GridDigraph</span></code></a></p>
 <p>Specialization of the general Digraph class for generating
 temporary randomly oriented Grid digraphs of dimension n time m
@@ -3818,7 +3818,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4491,19 +4491,17 @@ on each of the three objectives.</p>
 <dt id="randomPerfTabs.RandomCBPerformanceGenerator">
 <em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomCBPerformanceGenerator</code><span class="sig-paren">(</span><em>argPerfTab</em>, <em>actionNamePrefix='a'</em>, <em>instanceCounter=0</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomCBPerformanceGenerator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
-<p>Generates and/or new decision actions with random evaluation for a
-given RandomCBPerformanceTableau instance.</p>
+<p>Instantiates a generator of new decision actions with associated random evaluations using the model parameters provided by a given RandomCBPerformanceTableau instance.</p>
 <dl class="method">
 <dt id="randomPerfTabs.RandomCBPerformanceGenerator.randomAction">
 <code class="descname">randomAction</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomCBPerformanceGenerator.randomAction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a dictionary with following content:</p>
-<dl class="docutils">
-<dt>{ &#8216;action&#8217;: { &#8216;key&#8217;: actionKey, &#8216;shortName&#8217;: ..., &#8216;name&#8217;: ...,  </dt>
-<dd><blockquote class="first">
-<div>&#8216;type&#8217;: &#8216;neutral&#8217;|&#8217;advantageous&#8217;|&#8217;cheap&#8217;},</div></blockquote>
-<p class="last">&#8216;evaluation&#8217;: {&#8216;g1&#8217;: Decimal(...), &#8216;g2&#8217;: Decimal(...), ... }}.</p>
-</dd>
-</dl>
+<div class="highlight-python"><div class="highlight"><pre>{ &#39;action&#39;: { &#39;key&#39;: actionKey, &#39;shortName&#39;: ..., &#39;name&#39;: ...,  
+         &#39;type&#39;: &#39;neutral&#39;|&#39;advantageous&#39;|&#39;cheap&#39;},
+         &#39;evaluation&#39;: {&#39;g1&#39;: Decimal(...), 
+                        &#39;g2&#39;: Decimal(...), ... }}.
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -4614,8 +4612,7 @@ or updating the performances of already existing decision actions.</p>
 <dt id="randomPerfTabs.RandomPerformanceTableau">
 <em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=13</em>, <em>actionNamePrefix='a'</em>, <em>numberOfCriteria=7</em>, <em>weightDistribution='equisignificant'</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=(0.0</em>, <em>100.0)</em>, <em>commonThresholds=((10.0</em>, <em>0.0)</em>, <em>(20.0</em>, <em>0.0)</em>, <em>(80.0</em>, <em>0.0))</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>missingDataProbability=0.0</em>, <em>BigData=False</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
-<p>Specialization of the PerformanceTableau class for generating a temporary
-random performance tableau.</p>
+<p>Specialization of the generic <code class="xref py py-class docutils literal"><span class="pre">perftabs.PerformanceTableau</span></code> class for generating a temporary random performance tableau.</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd><ul class="first last">
@@ -5097,7 +5094,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">

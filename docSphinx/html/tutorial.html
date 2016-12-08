@@ -69,7 +69,7 @@
 <div class="contents local topic" id="table-of-contents">
 <p class="topic-title first">Table of Contents</p>
 <ul class="simple">
-<li><a class="reference internal" href="#working-with-the-digraphs-module" id="id37">Working with the <code class="code docutils literal"><span class="pre">digraphs</span></code> module</a></li>
+<li><a class="reference internal" href="#working-with-the-digraph3-software-ressources" id="id37">Working with the <em>Digraph3</em> software ressources</a></li>
 <li><a class="reference internal" href="#manipulating-digraph-objects" id="id38">Manipulating <code class="docutils literal"><span class="pre">Digraph</span></code> objects</a></li>
 <li><a class="reference internal" href="#working-with-the-graphs-module" id="id39">Working with the <code class="code docutils literal"><span class="pre">graphs</span></code> module</a></li>
 <li><a class="reference internal" href="#computing-the-winner-of-an-election" id="id40">Computing the winner of an election</a></li>
@@ -80,8 +80,8 @@
 <li><a class="reference internal" href="#links-and-appendices" id="id45">Links and appendices</a></li>
 </ul>
 </div>
-<div class="section" id="working-with-the-digraphs-module">
-<span id="digraphs-tutorial-label"></span><h2><a class="toc-backref" href="#id37">Working with the <code class="code docutils literal"><span class="pre">digraphs</span></code> module</a><a class="headerlink" href="#working-with-the-digraphs-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="working-with-the-digraph3-software-ressources">
+<span id="digraphs-tutorial-label"></span><h2><a class="toc-backref" href="#id37">Working with the <em>Digraph3</em> software ressources</a><a class="headerlink" href="#working-with-the-digraph3-software-ressources" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><a class="reference internal" href="#purpose" id="id46">Purpose</a></li>
@@ -145,14 +145,15 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </div>
 <div class="section" id="digraph-object-structure">
 <h3><a class="toc-backref" href="#id49"><code class="docutils literal"><span class="pre">Digraph</span></code> object structure</a><a class="headerlink" href="#digraph-object-structure" title="Permalink to this headline">¶</a></h3>
-<p>All <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a> object <em>dg</em> contains at least the following sub-objects:</p>
+<p>All <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a> object <em>dg</em> contains at least the following components:</p>
 <ol class="arabic simple">
-<li>the digraph nodes called <strong>actions</strong> (decision actions): a list, set or dictionary of nodes with &#8216;name&#8217; and &#8216;shortname&#8217; attributes,</li>
-<li>the digraph <strong>valuationdomain</strong> , a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true),</li>
-<li>the graph <strong>relation</strong> : a double dictionary indexed by an oriented pair of actions (nodes) and carrying a characteristic value in the range of the previous valuation domain,</li>
-<li>its associated <strong>gamma function</strong> : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor,</li>
-<li>its associated <strong>notGamma function</strong> : a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor. See the reference manual of the <a class="reference internal" href="techDoc.html#digraphs-label"><span>digraphs module</span></a>.</li>
+<li>A collection of digraph nodes called <strong>actions</strong> (decision actions): a list, set or (ordered) dictionary of nodes with &#8216;name&#8217; and &#8216;shortname&#8217; attributes,</li>
+<li>A logical characteristic <strong>valuationdomain</strong>, a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true),</li>
+<li>The digraph <strong>relation</strong> : a double dictionary indexed by an oriented pair of actions (nodes) and carrying a characteristic value in the range of the previous valuation domain,</li>
+<li>Its associated <strong>gamma function</strong> : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor,</li>
+<li>Its associated <strong>notGamma function</strong> : a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor.</li>
 </ol>
+<p>See the reference manual of the <a class="reference internal" href="techDoc.html#digraphs-label"><span>digraphs module</span></a>.</p>
 </div>
 <div class="section" id="permanent-storage">
 <h3><a class="toc-backref" href="#id50">Permanent storage</a><a class="headerlink" href="#permanent-storage" title="Permalink to this headline">¶</a></h3>
@@ -323,7 +324,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <li><a class="reference internal" href="#graphviz-drawings" id="id54">Graphviz drawings</a></li>
 <li><a class="reference internal" href="#asymmetric-and-symmetric-parts" id="id55">Asymmetric and symmetric parts</a></li>
 <li><a class="reference internal" href="#fusion-by-epistemic-disjunction" id="id56">Fusion by epistemic disjunction</a></li>
-<li><a class="reference internal" href="#dual-converse-and-codual" id="id57">Dual, converse and codual</a></li>
+<li><a class="reference internal" href="#dual-converse-and-codual-digraphs" id="id57">Dual, converse and codual digraphs</a></li>
 <li><a class="reference internal" href="#symmetric-and-transitive-closures" id="id58">Symmetric and transitive closures</a></li>
 <li><a class="reference internal" href="#strong-components" id="id59">Strong components</a></li>
 <li><a class="reference internal" href="#csv-storage" id="id60">CSV storage</a></li>
@@ -541,8 +542,8 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dd>
 </dl>
 </div>
-<div class="section" id="dual-converse-and-codual">
-<h3><a class="toc-backref" href="#id57">Dual, converse and codual</a><a class="headerlink" href="#dual-converse-and-codual" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="dual-converse-and-codual-digraphs">
+<h3><a class="toc-backref" href="#id57">Dual, converse and codual digraphs</a><a class="headerlink" href="#dual-converse-and-codual-digraphs" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>We may as readily compute the <strong>dual</strong>, the <strong>converse</strong> and the <strong>codual</strong> (dual and converse) of <em>dg</em>:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -1793,7 +1794,7 @@ linearBallot = {
 </pre></div>
 </div>
 </dd>
-<dt>By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic <code class="docutils literal"><span class="pre">Digraph</span></code> class (see <a class="reference internal" href="#digraphs-tutorial-label"><span>Working with the digraphs module</span></a>), and especially its <code class="docutils literal"><span class="pre">exportGraphViz</span></code> method <a class="footnote-reference" href="#id35" id="id10">[1]</a>, for visualizing an election result:</dt>
+<dt>By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic <code class="docutils literal"><span class="pre">Digraph</span></code> class (see <a class="reference internal" href="#digraphs-tutorial-label"><span>Working with the Digraph3 software ressources</span></a>), and especially its <code class="docutils literal"><span class="pre">exportGraphViz</span></code> method <a class="footnote-reference" href="#id35" id="id10">[1]</a>, for visualizing an election result:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;tutorialLinearBallots&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to tutorialLinearBallots.dot</span>
@@ -4298,7 +4299,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Tutorials of the Digraph3 resources</a><ul>
-<li><a class="reference internal" href="#working-with-the-digraphs-module">Working with the <code class="code docutils literal"><span class="pre">digraphs</span></code> module</a><ul>
+<li><a class="reference internal" href="#working-with-the-digraph3-software-ressources">Working with the <em>Digraph3</em> software ressources</a><ul>
 <li><a class="reference internal" href="#purpose">Purpose</a></li>
 <li><a class="reference internal" href="#downloading-of-the-digraph3-resources">Downloading of the Digraph3 resources</a></li>
 <li><a class="reference internal" href="#starting-a-python3-session">Starting a python3 session</a></li>
@@ -4313,7 +4314,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <li><a class="reference internal" href="#graphviz-drawings">Graphviz drawings</a></li>
 <li><a class="reference internal" href="#asymmetric-and-symmetric-parts">Asymmetric and symmetric parts</a></li>
 <li><a class="reference internal" href="#fusion-by-epistemic-disjunction">Fusion by epistemic disjunction</a></li>
-<li><a class="reference internal" href="#dual-converse-and-codual">Dual, converse and codual</a></li>
+<li><a class="reference internal" href="#dual-converse-and-codual-digraphs">Dual, converse and codual digraphs</a></li>
 <li><a class="reference internal" href="#symmetric-and-transitive-closures">Symmetric and transitive closures</a></li>
 <li><a class="reference internal" href="#strong-components">Strong components</a></li>
 <li><a class="reference internal" href="#csv-storage">CSV storage</a></li>
