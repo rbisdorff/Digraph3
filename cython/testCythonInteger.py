@@ -19,7 +19,6 @@
 #
 #######################
 import outrankingDigraphs as ODG
-import cBigOutrankingDigraphs as Bg
 import cBigIntegerOutrankingDigraphs as iBg
 #from bigOutrankingDigraphs import *
 from time import time
@@ -48,38 +47,38 @@ if path.isfile(fileName):
 	pass
 else:
 	fo = open(fileName,'w')
-	fo.write('"tt","tti","pr","pri","dc","dci","s","si","sd"\n')
+	fo.write('"tti","pri","dci","si","sd"\n')
 	fo.close()
 
 for s in range(sampleSize):
     seed += 1
     print('sample %d\n' % (s+1))
     # main starting
-    t0 = time()
-    tp1 = R3ObjPT(numberOfActions=nbrActions,
-                                    numberOfCriteria=nbrCriteria,
-                                    weightDistribution='equiobjectives',
-#                                    commonPercentiles={'ind':0.01,'pref':0.025,'veto':0.975},
-                                        commonMode=commonPar,
-#                                   Threading=MP,
-                                    BigData=True,
-#                                    nbrCores=nbrOfCPUs,
-                                    seed=seed)
-    print(tp1.name)
-    print(time()-t0)
-    #t0 = time()
-    bg1 = Bg.BigOutrankingDigraph(tp1,quantiles=qtiles,
-                               quantilesOrderingStrategy='average',
-                               minimalComponentSize=minimalSize,
-                               LowerClosed=False,
-                               Threading=MP,
-                               nbrOfCPUs=nbrOfCPUs,
-                               nbrOfThreads=nbrOfThreads,
-                               CopyPerfTab=False,
-                               Comments=True,
-                               Debug=False)
-
-    print(bg1)
+##    t0 = time()
+##    tp1 = R3ObjPT(numberOfActions=nbrActions,
+##                                    numberOfCriteria=nbrCriteria,
+##                                    weightDistribution='equiobjectives',
+###                                    commonPercentiles={'ind':0.01,'pref':0.025,'veto':0.975},
+##                                        commonMode=commonPar,
+###                                   Threading=MP,
+##                                    BigData=True,
+###                                    nbrCores=nbrOfCPUs,
+##                                    seed=seed)
+##    print(tp1.name)
+##    print(time()-t0)
+##    #t0 = time()
+##    bg1 = Bg.BigOutrankingDigraph(tp1,quantiles=qtiles,
+##                               quantilesOrderingStrategy='average',
+##                               minimalComponentSize=minimalSize,
+##                               LowerClosed=False,
+##                               Threading=MP,
+##                               nbrOfCPUs=nbrOfCPUs,
+##                               nbrOfThreads=nbrOfThreads,
+##                               CopyPerfTab=False,
+##                               Comments=True,
+##                               Debug=False)
+##
+##    print(bg1)
     t0 = time()
     tp2 = cR3ObjPT(numberOfActions=nbrActions,
                                     numberOfCriteria=nbrCriteria,
@@ -120,11 +119,11 @@ for s in range(sampleSize):
     
     
     fo = open(fileName,'a')
-    wstr = '%.4f,%.4f,%.4f,%.4f,%.4f,%.4f,%.4f,%.4f,%d\n'\
-             % (bg1.runTimes['totalTime'],bg2.runTimes['totalTime'],\
-                bg1.runTimes['preordering'],bg2.runTimes['preordering'],\
-                bg1.runTimes['decomposing'],bg2.runTimes['decomposing'],\
-                bg1.runTimes['sorting'],bg2.runTimes['sorting'],seed)
+    wstr = '%.4f,%.4f,%.4f,%.4f,%d\n'\
+             % (bg2.runTimes['totalTime'],\
+                bg2.runTimes['preordering'],\
+                bg2.runTimes['decomposing'],\
+                bg2.runTimes['sorting'],seed)
     fo.write(wstr)
     fo.close()
     print(wstr)
