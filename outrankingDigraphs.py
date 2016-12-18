@@ -1303,8 +1303,19 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 print(' %s  %s | %.2f %.2f %.2f %.2f %.2f | %.2f' % (a[i],a[j],pc[a[i]][a[j]]['lt'],pc[a[i]][a[j]]['leq'],pc[a[i]][a[j]]['eq'],pc[a[i]][a[j]]['geq'],pc[a[i]][a[j]]['gt'],self.relation[a[i]][a[j]]))
                 print(' %s  %s | %.2f %.2f %.2f %.2f %.2f | %.2f' % (a[j],a[i],pc[a[j]][a[i]]['lt'],pc[a[j]][a[i]]['leq'],pc[a[j]][a[i]]['eq'],pc[a[j]][a[i]]['geq'],pc[a[j]][a[i]]['gt'],self.relation[a[j]][a[i]]))
 
+    def showPairwiseOutrankings(self,a,b,hasSymetricThresholds=True,\
+                               Debug=False,isReturningHTML=False,\
+                               hasSymmetricThresholds=True):
+        self.showPairwiseComparison(a,b,hasSymetricThresholds=hasSymmetricThresholds,\
+                               Debug=Debug,isReturningHTML=isReturningHTML,\
+                               hasSymmetricThresholds=hasSymmetricThresholds)
+        self.showPairwiseComparison(b,a,hasSymetricThresholds=hasSymmetricThresholds,\
+                               Debug=Debug,isReturningHTML=isReturningHTML,\
+                               hasSymmetricThresholds=hasSymmetricThresholds)
 
-    def showPairwiseComparison(self,a,b,hasSymetricThresholds=True,Debug=False,isReturningHTML=False,hasSymmetricThresholds=True):
+    def showPairwiseComparison(self,a,b,hasSymetricThresholds=True,\
+                               Debug=False,isReturningHTML=False,\
+                               hasSymmetricThresholds=True):
         """
         renders the pairwise comprison parameters on all criteria
         in html format
