@@ -31,4 +31,6 @@ installVenv:
 		python3 csetupODGInteger.py install
 		python3 csetupSOInteger.py install
 		python3 csetupBGInteger.py install
+test:
+		python3 testCythonInteger.py
 
