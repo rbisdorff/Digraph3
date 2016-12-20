@@ -10,8 +10,6 @@
 #from cIntegerOutrankingDigraphs import *
 from cIntegerOutrankingDigraphs import *
 from cRandPerfTabs import Random3ObjectivesPerformanceTableau as cR3ObjPT
-#from randomPerfTabs import Random3ObjectivesPerformanceTableau as R3ObjPT
-#from outrankingDigraphs import BipolarOutrankingDigraph
 from time import time
 
 def testcIntegerOutrankingDigraph():
