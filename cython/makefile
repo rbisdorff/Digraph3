@@ -32,3 +32,8 @@ installVenv:
 		python3 csetupSOInteger.py install
 		python3 csetupBGInteger.py install
 
+tests:
+		(cd Test; nosetests3 -vs noseTestsBigIntegerOutrankingDigraph.py)
+		(cd Test; nosetests3 -vs noseTestsIntegerOutrankingDigraph.py)
+		(cd Test; nosetests3 -vs noseTestsVerifyFitness.py)
+
