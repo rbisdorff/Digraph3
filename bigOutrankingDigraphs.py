@@ -29,6 +29,11 @@ class BigDigraph(object):
     """
     Abstract root class for linearly decomposed big digraphs (order > 1000)
     using multiprocessing ressources.
+
+    .. warning::
+
+       Obsolete! The sparseOutrankingDigraphs module is providing this resource.
+
     """
     def __repr__(self):
         """
@@ -587,19 +592,9 @@ class BigDigraph(object):
 #from weakOrders import QuantilesRankingDigraph
 class BigOutrankingDigraph(BigDigraph,PerformanceTableau):
     """
-    Main class for the multiprocessing implementation of big outranking digraphs.
-    
-    The big outranking digraph instance is decomposed with a q-tiling sort into a partition
-    of quantile equivalence classes which are linearly ordered by average quantile limits (default).
+    .. warning::
 
-    With each quantile equivalence class is associated a BipolarOutrankingDigraph object
-    which is restricted to the decision actions gathered in this quantile equivalence class.
-
-    By default, the number of quantiles q is set to a twentieth of the number of decision actions,
-    ie q = order//10. The effective number of quantiles may be much lower for large orders;
-    for instance quantiles = 250 may give good results for a digraph of order 25000.
-    
-    For other parameters settings, see the corresponding :py:class:`sortingDigraphs.QuantilesSortingDigraph` class.
+       Obsolete class! Use the equivalent sparseOutramkinDigraphs.PreRankedOutrankingDigraph class instead.
 
     """
     def __init__(self,argPerfTab,\

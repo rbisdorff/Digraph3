@@ -1303,8 +1303,19 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 print(' %s  %s | %.2f %.2f %.2f %.2f %.2f | %.2f' % (a[i],a[j],pc[a[i]][a[j]]['lt'],pc[a[i]][a[j]]['leq'],pc[a[i]][a[j]]['eq'],pc[a[i]][a[j]]['geq'],pc[a[i]][a[j]]['gt'],self.relation[a[i]][a[j]]))
                 print(' %s  %s | %.2f %.2f %.2f %.2f %.2f | %.2f' % (a[j],a[i],pc[a[j]][a[i]]['lt'],pc[a[j]][a[i]]['leq'],pc[a[j]][a[i]]['eq'],pc[a[j]][a[i]]['geq'],pc[a[j]][a[i]]['gt'],self.relation[a[j]][a[i]]))
 
+    def showPairwiseOutrankings(self,a,b,hasSymetricThresholds=True,\
+                               Debug=False,isReturningHTML=False,\
+                               hasSymmetricThresholds=True):
+        self.showPairwiseComparison(a,b,hasSymetricThresholds=hasSymmetricThresholds,\
+                               Debug=Debug,isReturningHTML=isReturningHTML,\
+                               hasSymmetricThresholds=hasSymmetricThresholds)
+        self.showPairwiseComparison(b,a,hasSymetricThresholds=hasSymmetricThresholds,\
+                               Debug=Debug,isReturningHTML=isReturningHTML,\
+                               hasSymmetricThresholds=hasSymmetricThresholds)
 
-    def showPairwiseComparison(self,a,b,hasSymetricThresholds=True,Debug=False,isReturningHTML=False,hasSymmetricThresholds=True):
+    def showPairwiseComparison(self,a,b,hasSymetricThresholds=True,\
+                               Debug=False,isReturningHTML=False,\
+                               hasSymmetricThresholds=True):
         """
         renders the pairwise comprison parameters on all criteria
         in html format
@@ -1551,7 +1562,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 except:
                     actionsList += [(actions[x]['name'],x)]
             else:
-                actionsList += [(x,x)]
+                actionsList += [(str(x),x)]
         if Sorted:
             actionsList.sort()
         #print actionsList
@@ -3269,57 +3280,57 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         nb = Decimal('0')
         maxDet = Decimal('0.0')
         for ch in self.goodChoices:
-            maxDet = max(maxDet,-ch[0])
+            maxDet = max(maxDet,ch[0])
         for ch in self.goodChoices:
-            if ch[3] > ch[4]:
-                nb += 1
-                fo.write('<alternativesSet id="good_%d" mcdaConcept="%s">\n' % (nb,'goodChoice') )
-                fo.write('<description>\n')
-                if category == 'Robust Rubis':
-                    determ = (-ch[0]*Decimal('6')) - Decimal('3')
-                    if determ > Decimal('1'):
-                        fo.write('<comment>Robust good choice</comment>\n')
-                    else:
-                        fo.write('<comment>Potential good choice</comment>\n')
+            #if ch[3] > -ch[4]:
+            nb += 1
+            fo.write('<alternativesSet id="good_%d" mcdaConcept="%s">\n' % (nb,'goodChoice') )
+            fo.write('<description>\n')
+            if category == 'Robust Rubis':
+                determ = (ch[0]*Decimal('6')) - Decimal('3')
+                if determ > Decimal('1'):
+                    fo.write('<comment>Robust good choice</comment>\n')
                 else:
-                    if maxDet == -ch[0]:
-                        fo.write('<comment>Best choice</comment>\n')
-                    else:
-                        fo.write('<comment>Potential good choice</comment>\n')                    
-                fo.write('</description>\n')
-                for x in ch[5]:
-                    fo.write('<element>\n')
-                    fo.write('<alternativeID>')
-                    if isinstance(x,frozenset):
-                        #print(self.actions[x])
-                        fo.write(str(self.actions[x]['name']))
-                    else:
-                        fo.write(str(x))
-                    fo.write('</alternativeID>\n')
-                    fo.write('</element>\n')
-                if category == 'Robust Rubis':
-                    fo.write('<values>\n')
-                    independent = ch[2]
-                    fo.write('<value name="choiceSet independence"><integer>%d</integer></value>\n' %(independent) )
-                    outranking = ch[3]
-                    fo.write('<value name="outranking"><integer>%d</integer></value>\n' %(outranking) )
-                    outranked = ch[4]
-                    fo.write('<value name="outranked"><integer>%d</integer></value>\n' % (outranked) )
-                    determ = (-ch[0]*Decimal('6'))-Decimal('3')
-                    fo.write('<value name="determinateness"><real>%2.2f</real></value>\n' % (determ)  )
-                    fo.write('</values>\n')
+                    fo.write('<comment>Potential good choice</comment>\n')
+            else:
+                if maxDet == ch[0]:
+                    fo.write('<comment>Best choice</comment>\n')
                 else:
-                    fo.write('<values>\n')
-                    independent = (ch[2] - Min) / amplitude
-                    fo.write('<value name="choiceSet independence"><real>%2.2f</real></value>\n' %(independent) )
-                    outranking = (ch[3] - Min) / amplitude
-                    fo.write('<value name="outranking"><real>%2.2f</real></value>\n' %(outranking) )
-                    outranked = (ch[4] - Min) / amplitude
-                    fo.write('<value name="outranked"><real>%2.2f</real></value>\n' %(outranked) )
-                    determ = -ch[0]*Decimal('100.0')
-                    fo.write('<value name="determinateness"><real>%2.2f</real></value>\n' %(determ) )
-                    fo.write('</values>\n')                    
-                fo.write('</alternativesSet>\n')             
+                    fo.write('<comment>Potential good choice</comment>\n')                    
+            fo.write('</description>\n')
+            for x in ch[5]:
+                fo.write('<element>\n')
+                fo.write('<alternativeID>')
+                if isinstance(x,frozenset):
+                    #print(self.actions[x])
+                    fo.write(str(self.actions[x]['name']))
+                else:
+                    fo.write(str(x))
+                fo.write('</alternativeID>\n')
+                fo.write('</element>\n')
+            if category == 'Robust Rubis':
+                fo.write('<values>\n')
+                independent = ch[2]
+                fo.write('<value name="choiceSet independence"><integer>%d</integer></value>\n' %(independent) )
+                outranking = ch[3]
+                fo.write('<value name="outranking"><integer>%d</integer></value>\n' %(outranking) )
+                outranked = ch[4]
+                fo.write('<value name="outranked"><integer>%d</integer></value>\n' % (outranked) )
+                determ = (ch[0]*Decimal('6'))-Decimal('3')
+                fo.write('<value name="determinateness"><real>%2.2f</real></value>\n' % (determ)  )
+                fo.write('</values>\n')
+            else:
+                fo.write('<values>\n')
+                independent = (ch[2] - Min) / amplitude
+                fo.write('<value name="choiceSet independence"><real>%2.2f</real></value>\n' %(independent) )
+                outranking = (ch[3] - Min) / amplitude
+                fo.write('<value name="outranking"><real>%2.2f</real></value>\n' %(outranking) )
+                outranked = (ch[4] - Min) / amplitude
+                fo.write('<value name="outranked"><real>%2.2f</real></value>\n' %(outranked) )
+                determ = ch[0]*Decimal('100.0')
+                fo.write('<value name="determinateness"><real>%2.2f</real></value>\n' %(determ) )
+                fo.write('</values>\n')                    
+            fo.write('</alternativesSet>\n')             
         fo.write('</alternativesSets>\n')
 
         # bad choices if any
@@ -3334,54 +3345,54 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             fo.write('</description>\n')
             nb = 0
             for ch in self.badChoices:
-                if ch[3] <= ch[4]: 
-                    nb += 1
-                    fo.write('<alternativesSet id="bad_%d" mcdaConcept="badChoice">\n' % (nb) )
-                    fo.write('<description>\n')
-                    if category == 'Robust Rubis':
-                        determ = (-ch[0]*Decimal('6'))-Decimal('3')
-                        if determ > Decimal('1'):
-                            fo.write('<comment>Robust bad choice</comment>\n')
-                        else:
-                            fo.write('<comment>Potential bad choice</comment>\n')
+                #if -ch[3] > ch[4]: 
+                nb += 1
+                fo.write('<alternativesSet id="bad_%d" mcdaConcept="badChoice">\n' % (nb) )
+                fo.write('<description>\n')
+                if category == 'Robust Rubis':
+                    determ = (ch[0]*Decimal('6'))-Decimal('3')
+                    if determ > Decimal('1'):
+                        fo.write('<comment>Robust bad choice</comment>\n')
                     else:
-                        if ch[4] > ch[3]:
-                            fo.write('<comment>Bad choice</comment>\n')
-                        else:
-                            fo.write('<comment>Ambiguous choice</comment>\n')
-                    fo.write('</description>\n')
-                    for x in ch[5]:
-                        fo.write('<element>\n')
-                        fo.write('<alternativeID>')
-                        if isinstance(x,frozenset):
-                            fo.write(str(self.actions[x]['name']))
-                        else:
-                            fo.write(str(x))
-                        fo.write('</alternativeID>\n')
-                        fo.write('</element>\n')
-                    if category == 'Robust Rubis':
-                        fo.write('<values>\n')
-                        independent = ch[2]
-                        fo.write('<value name="choiceSet independence"><integer>%d</integer></value>\n' %(independent) )
-                        outranking = ch[3]
-                        fo.write('<value name="outranking"><integer>%d</integer></value>\n' %(outranking) )
-                        outranked = ch[4]
-                        fo.write('<value name="outranked"><integer>%d</integer></value>\n' %(outranked) )
-                        determ = (-ch[0]*Decimal('6')) - Decimal('3')
-                        fo.write('<value name="determinateness"><real>%2.2f</real></value>\n' %(determ) )
-                        fo.write('</values>\n')
+                        fo.write('<comment>Potential bad choice</comment>\n')
+                else:
+                    if ch[4] > ch[3]:
+                        fo.write('<comment>Bad choice</comment>\n')
                     else:
-                        fo.write('<values>\n')
-                        independent = (ch[2] - Min)/amplitude
-                        fo.write('<value name="choiceSet independence"><real>%2.2f</real></value>\n' %(independent) )
-                        outranking = (ch[3] - Min)/amplitude
-                        fo.write('<value name="outranking"><real>%2.2f</real></value>\n' %(outranking) )
-                        outranked = (ch[4] - Min)/amplitude
-                        fo.write('<value name="outranked"><real>%2.2f</real></value>\n' %(outranked) )
-                        determ = -ch[0]*Decimal('100.0')
-                        fo.write('<value name="determinateness"><real>%2.2f</real></value>\n' %(determ) )
-                        fo.write('</values>\n')                    
-                    fo.write('</alternativesSet>\n')             
+                        fo.write('<comment>Ambiguous choice</comment>\n')
+                fo.write('</description>\n')
+                for x in ch[5]:
+                    fo.write('<element>\n')
+                    fo.write('<alternativeID>')
+                    if isinstance(x,frozenset):
+                        fo.write(str(self.actions[x]['name']))
+                    else:
+                        fo.write(str(x))
+                    fo.write('</alternativeID>\n')
+                    fo.write('</element>\n')
+                if category == 'Robust Rubis':
+                    fo.write('<values>\n')
+                    independent = ch[2]
+                    fo.write('<value name="choiceSet independence"><integer>%d</integer></value>\n' %(independent) )
+                    outranking = ch[3]
+                    fo.write('<value name="outranking"><integer>%d</integer></value>\n' %(outranking) )
+                    outranked = ch[4]
+                    fo.write('<value name="outranked"><integer>%d</integer></value>\n' %(outranked) )
+                    determ = (ch[0]*Decimal('6')) - Decimal('3')
+                    fo.write('<value name="determinateness"><real>%2.2f</real></value>\n' %(determ) )
+                    fo.write('</values>\n')
+                else:
+                    fo.write('<values>\n')
+                    independent = (ch[2] - Min)/amplitude
+                    fo.write('<value name="choiceSet independence"><real>%2.2f</real></value>\n' %(independent) )
+                    outranking = (ch[3] - Min)/amplitude
+                    fo.write('<value name="outranking"><real>%2.2f</real></value>\n' %(outranking) )
+                    outranked = (ch[4] - Min)/amplitude
+                    fo.write('<value name="outranked"><real>%2.2f</real></value>\n' %(outranked) )
+                    determ = ch[0]*Decimal('100.0')
+                    fo.write('<value name="determinateness"><real>%2.2f</real></value>\n' %(determ) )
+                    fo.write('</values>\n')                    
+                fo.write('</alternativesSet>\n')             
             fo.write('</alternativesSets>\n')
 
         # end of XMCDA 2.0 file
@@ -8228,9 +8239,12 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             print(oldRelation,sumWeights)
         from copy import copy as deepcopy
         
-        oldMax = Decimal('1')
-        oldMin = Decimal('-1')
-        oldMed = Decimal('0')
+##        oldMax = Decimal('1')
+##        oldMin = Decimal('-1')
+##        oldMed = Decimal('0')
+        oldMax = self.valuationdomain['max']
+        oldMin = self.valuationdomain['min']
+        oldMed = self.valuationdomain['med']
         oldAmplitude = oldMax - oldMin
         if Debug:
             print('old: ',oldMin, oldMed, oldMax, oldAmplitude)

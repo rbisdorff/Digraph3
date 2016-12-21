@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # Python implementation of digraphs
-# Current revision $Revision: 1799 $
+# Current revision $Revision: 1972 $
 # Copyright (C) 2006-2008  Raymond Bisdorff
 #
 #    This program is free software; you can redistribute it and/or modify
@@ -40,7 +40,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 
     Template of required data for a 4-sorting::
         
-        categories = {'c1': { 'name': 'week','order': 1,
+        categories = {
+                      'c1': { 'name': 'week','order': 1,
                               'lowLimit': 0,'highLimit': 25,
                               'comment': 'lowest category',},
                       'c2': { 'name': 'ok','order': 2,
@@ -50,9 +51,9 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                               'lowLimit': 50,'highLimit': 75,
                               'comment': 'highest category',},
                       'c4': { 'name': 'excellent','order': 4,
-                              'lowLimit': 75,'highLimit': 100,                               'heigLimit': Decimal('100.0').
+                              'lowLimit': 75,'highLimit': 100,
                               'comment': 'highest category',},
-        }
+         }
         criteriaCategoryLimits['LowerClosed'] = True # default
         criteriaCategoryLimits[g] = {
                 'c1': {'minimum':0, 'maximum':25},
@@ -71,7 +72,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         on each criteria. By default lower-closed limts of categories are
         supposed to be used in the sorting.
 
-    Example Python3 session
+    Example Python3 session:
 
     >>> from sortingDigraphs import SortingDigraph
     >>> from randomPerfTabs import RandomPerformanceTableau
@@ -102,27 +103,6 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
     ] 40.0-20.0] : ['a01']
 
     """
-    def __repr__(self):
-        """
-        Default presentation method for SortingDigraph instance.
-        """
-        print('*----- show short --------------*')
-        print('Instance name    : %s' % self.name)
-        print('# Actions        : %d' % self.order)
-        print('# Criteria       : %d' % len(self.criteria))
-        print('# Categories     : %d' % len(self.categories))
-        print('Lowerclosed      : %s' % str(self.criteriaCategoryLimits['LowerClosed']))
-        print('Size             : %d' % self.computeSize())
-        print('Determinateness  : %.3f' % (self.computeDeterminateness()) )
-        print('----  Constructor run times (in sec.) ----')
-        print('#Threads         : %d' % self.nbrThreads)
-        print('Total time       : %.5f' % self.runTimes['totalTime'])
-        print('Data input       : %.5f' % self.runTimes['dataInput'])
-        print('Compute profiles : %.5f' % self.runTimes['computeProfiles'])
-        print('Compute relation : %.5f' % self.runTimes['computeRelation'])
-        print('weak ordering    : %.5f' % self.runTimes['weakOrdering'])
-        return '%s instance' % str(self.__class__)
-
     def __init__(self,argPerfTab=None,\
                  argProfile=None,\
                  scaleSteps=5,\
@@ -163,18 +143,18 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         else:
             perfTab = argPerfTab
 
-##        # normalize the actions as a dictionary construct
-##        if isinstance(perfTab.actions,list):
-##            actions = OrderedDict()
-##            for x in perfTab.actions:
-##                actions[x] = {'name': str(x)}
-##            self.actions = actions
-##        else:
-##            self.actions = deepcopy(perfTab.actions)
-##        self.criteria = deepcopy(perfTab.criteria)
-##        self.convertWeightFloatToDecimal()
-##        self.evaluation = deepcopy(perfTab.evaluation)
-##        self.convertEvaluationFloatToDecimal()
+        # normalize the actions as a dictionary construct
+        if isinstance(perfTab.actions,list):
+            actions = OrderedDict()
+            for x in perfTab.actions:
+                actions[x] = {'name': str(x)}
+            self.actions = actions
+        else:
+            self.actions = deepcopy(perfTab.actions)
+        self.criteria = deepcopy(perfTab.criteria)
+        self.convertWeightFloatToDecimal()
+        self.evaluation = deepcopy(perfTab.evaluation)
+        self.convertEvaluationFloatToDecimal()
 
         # keep a copy of the original actions set before adding the profiles
         actionsOrig = deepcopy(perfTab.actions)
@@ -248,9 +228,13 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                     (self.criteria[g]['scale'][0] + (i+1)*k))
                     else:
                         gHighLimit = Decimal('%.1f' % (2*self.criteria[g]['scale'][1]))
+                    if i > 0:
+                        gLowLimit = Decimal('%.1f' %\
+                                    (self.criteria[g]['scale'][0] + (i)*k))
+                    else:
+                        gLowLimit = Decimal('%.1f' % (-self.criteria[g]['scale'][1]))
                     criteriaCategoryLimits[g][c]={
-                        'minimum': Decimal('%.1f' %\
-                                    (self.criteria[g]['scale'][0] + i*k)),
+                        'minimum': Decimal('%.1f' % gLowLimit),
                         'maximum': Decimal('%.1f' % gHighLimit)
                         }
                     i += 1
@@ -397,6 +381,29 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         self.runTimes['weakOrdering'] = time()-t0
         self.runTimes['totalTime'] = time()-tt
 
+#########
+
+    def __repr__(self):
+        """
+        Default presentation method for SortingDigraph instance.
+        """
+        print('*----- show short --------------*')
+        print('Instance name    : %s' % self.name)
+        print('# Actions        : %d' % self.order)
+        print('# Criteria       : %d' % len(self.criteria))
+        print('# Categories     : %d' % len(self.categories))
+        print('Lowerclosed      : %s' % str(self.criteriaCategoryLimits['LowerClosed']))
+        print('Size             : %d' % self.computeSize())
+        print('Determinateness  : %.3f' % (self.computeDeterminateness()) )
+        print('----  Constructor run times (in sec.) ----')
+        print('#Threads         : %d' % self.nbrThreads)
+        print('Total time       : %.5f' % self.runTimes['totalTime'])
+        print('Data input       : %.5f' % self.runTimes['dataInput'])
+        print('Compute profiles : %.5f' % self.runTimes['computeProfiles'])
+        print('Compute relation : %.5f' % self.runTimes['computeRelation'])
+        print('weak ordering    : %.5f' % self.runTimes['weakOrdering'])
+        return '%s instance' % str(self.__class__)
+
     def saveCategories(self,fileName='tempCategories'):
 
         fileName += '.py'
@@ -468,7 +475,8 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         s += '</table>'
         return s
 
-    def computeWeakOrder(self,Descending=False,strategy='average',Comments=False,Debug=False):
+    def computeWeakOrder(self,Descending=False,strategy='average',\
+                         Comments=False,Debug=False):
         """
         specialisation of the showWeakOrder method.
         The weak ordering strategy may be:
@@ -481,9 +489,11 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         categories = self.categories
         actionsCategories = {}
         actionsCategoryLimits = {}
-        for x in actions:
-            a,lowCateg,highCateg,credibility =\
-                     self.showActionCategories(x,Comments=Debug)
+        for x in actions.keys():
+            a,lowCateg,highCateg,credibility = self.showActionCategories(x,Comments=Debug)
+            if Debug:
+                print(actions[x],a,lowCateg,highCateg,credibility)
+                print(strategy)
             if strategy == 'average': # average by default
                 lc = categories[lowCateg]['lowLimit']
                 hc = categories[highCateg]['highLimit']
@@ -659,7 +669,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             orderedCategoryKeys.reverse()
         return orderedCategoryKeys
 
-    def _computeWeakOrder(self,Descending=True,Debug=False):
+    def _computeWeakOrder(self,Descending=True,strategy=None,Comments=None,Debug=False):
         """
         Specialisation for QuantilesSortingDigraphs.
         """
@@ -1246,45 +1256,34 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                                      Threading=Threading,
                                                      StoreSorting=False,
                                                      nbrOfCPUs=nbrOfCPUs)
-        keys = []
+        if Debug:
+            print(sorting)
+        #keys = []
+        catKeys = self.orderedCategoryKeys()
+        lowLimit = sorting[action][catKeys[0]]['lowLimit']
+        notHighLimit = sorting[action][catKeys[-1]]['notHighLimit']
+        keys = [catKeys[0],catKeys[-1]]  # action is sorted by default in all categories 
         for c in self.orderedCategoryKeys():
             if sorting[action][c]['categoryMembership'] >= Med:
                 if sorting[action][c]['lowLimit'] > Med:
                     lowLimit = sorting[action][c]['lowLimit']
+                    keys[0] = c  # the highest lowLimit is remembered
                 if sorting[action][c]['notHighLimit'] > Med:
                     notHighLimit = sorting[action][c]['notHighLimit']
-                keys.append(c)
+                    keys[1] = c  # the highest notHighLimit (lowest HigLimit) is remembered
                 if Debug:
-                    print(action, c, sorting[action][c])
-        n = len(keys)
-        try:
-            credibility = min(lowLimit,notHighLimit)
-        except:
-            credibility = Med
-        if n == 0:
-            return None
-        elif n == 1:
-            if Comments:
-                print('%s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
-                                     self.categories[keys[0]]['name'],\
-                                     #self.categories[keys[0]]['name'],\
-                                     action,\
-                                     credibility,lowLimit,notHighLimit) )
-            return action,\
-                    keys[0],\
-                    keys[0],\
-                    credibility
-        else:
-            if Comments:
-                print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
-                                     self.categories[keys[0]]['name'],\
-                                     self.categories[keys[-1]]['name'],\
-                                     action,\
-                                     credibility,lowLimit,notHighLimit) )
-            return action,\
-                    keys[0],\
-                    keys[-1],\
-                    credibility            
+                    print(action, c, sorting[action][c],keys)
+        credibility = min(lowLimit,notHighLimit)
+        if Comments:
+            print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
+                                 self.categories[keys[0]]['name'],\
+                                 self.categories[keys[1]]['name'],\
+                                 action,\
+                                 credibility,lowLimit,notHighLimit) )
+        return action,\
+                keys[0],\
+                keys[1],\
+                credibility            
 
     def showActionsSortingResult(self,actionSubset=None,Debug=False):
         """
@@ -1584,21 +1583,25 @@ class QuantilesSortingDigraph(SortingDigraph):
                 %(limitingQuantiles[i],limitingQuantiles[i+1]),\
                                 'order':i+1,\
                                 'lowLimit': '[%.2f' % (limitingQuantiles[i]),
-                                'highLimit': '%.2f[' % (limitingQuantiles[i+1])}
+                                'highLimit': '%.2f[' % (limitingQuantiles[i+1]),
+                                        'quantile': limitingQuantiles[i]}
             categories[str(k)] = {'name':'[%.2f - <['\
                 %(limitingQuantiles[k-1]), 'order':k,\
                                   'lowLimit': '[%.2f' % (limitingQuantiles[k-1]),\
-                                  'highLimit': '<['}                 
+                                  'highLimit': '<[',
+                                'quantile': limitingQuantiles[k-1] }                 
         else:
             categories[str(1)] = {'name':']< - %.2f]'\
                 %(limitingQuantiles[1]), 'order':1,
                     'highLimit': '%.2f]' % (limitingQuantiles[1]),\
-                    'lowLimit': ']<'}                                  
+                    'lowLimit': ']<',
+                    'quantile': limitingQuantiles[1]}                                  
             for i in range(1,k):
                 categories[str(i+1)] = {'name':']%.2f - %.2f]'\
                 %(limitingQuantiles[i],limitingQuantiles[i+1]), 'order':i+1,
                         'lowLimit': ']%.2f' % (limitingQuantiles[i]),
-                        'highLimit': '%.2f]' % (limitingQuantiles[i+1])}
+                        'highLimit': '%.2f]' % (limitingQuantiles[i+1]),
+                                        'quantile': limitingQuantiles[i+1]}
         self.categories = categories
         if Debug:
             print('categories',self.categories)
@@ -2143,45 +2146,32 @@ class QuantilesSortingDigraph(SortingDigraph):
                                                      Threading=Threading,
                                                      StoreSorting=False,
                                                      nbrOfCPUs=nbrOfCPUs)
-        keys = []
+        catKeys = self.orderedCategoryKeys()
+        keys = [catKeys[0],[catKeys[-1]]]
+        lowLimit = sorting[action][catKeys[0]]['lowLimit']
+        notHighLimit = sorting[action][catKeys[-1]]['lowLimit']
         for c in self.orderedCategoryKeys():
             if sorting[action][c]['categoryMembership'] >= Med:
                 if sorting[action][c]['lowLimit'] > Med:
                     lowLimit = sorting[action][c]['lowLimit']
+                    keys[0] = c
                 if sorting[action][c]['notHighLimit'] > Med:
                     notHighLimit = sorting[action][c]['notHighLimit']
-                keys.append(c)
+                    keys[1] = c
+                #keys.append(c)
                 if Debug:
-                    print(action, c, sorting[action][c])
-        n = len(keys)
-        try:
-            credibility = min(lowLimit,notHighLimit)
-        except:
-            credibility = Med
-        if n == 0:
-            return None
-        elif n == 1:
-            if Comments:
-                print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
-                                     self.categories[keys[0]]['lowLimit'],\
-                                     self.categories[keys[0]]['highLimit'],\
-                                     action,\
-                                     credibility,lowLimit,notHighLimit) )
-            return action,\
-                    keys[0],\
-                    keys[0],\
-                    credibility
-        else:
-            if Comments:
-                print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
-                                     self.categories[keys[0]]['lowLimit'],\
-                                     self.categories[keys[-1]]['highLimit'],\
-                                     action,\
-                                     credibility,lowLimit,notHighLimit) )
-            return action,\
-                    keys[0],\
-                    keys[-1],\
-                    credibility            
+                    print(action, c, sorting[action][c], keys)
+        credibility = min(lowLimit,notHighLimit)
+        if Comments:
+            print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
+                                 self.categories[keys[0]]['lowLimit'],\
+                                 self.categories[keys[-1]]['highLimit'],\
+                                 action,\
+                                 credibility,lowLimit,notHighLimit) )
+        return action,\
+                keys[0],\
+                keys[1],\
+                credibility            
 
     def showActionsSortingResult(self,actionSubset=None,Debug=False):
         """
@@ -3836,7 +3826,7 @@ if __name__ == "__main__":
     ****************************************************
     * Python sortingDigraphs module                    *
     * depends on BipolarOutrankingDigraph and          *
-    * $Revision: 1799 $                                 *
+    * $Revision: 1972 $                                 *
     * Copyright (C) 2010 Raymond Bisdorff              *
     * The module comes with ABSOLUTELY NO WARRANTY     *
     * to the extent permitted by the applicable law.   *
@@ -3849,34 +3839,39 @@ if __name__ == "__main__":
     MP = True
 ##    t = PerformanceTableau('auditor2_1')
 ##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)
-    t = XMCDA2PerformanceTableau('spiegel2004')
+##    t = XMCDA2PerformanceTableau('spiegel2004')
 ##    t = XMCDA2PerformanceTableau('ex1')
-##    t = Random3ObjectivesPerformanceTableau(numberOfActions=25,
-##                                    numberOfCriteria=13,
-##                                    weightDistribution='equiobjectives',
-##                                            missingProbability=0.05,
-##                                    seed=1)
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=25,
+                                    numberOfCriteria=13,
+                                    weightDistribution='equiobjectives',
+                                    missingDataProbability=0.05,
+                                    seed=1)
     nt = NormalizedPerformanceTableau(t)
-    so = SortingDigraph(t,scaleSteps=5,LowerClosed=True,Debug=True)
-##    so = SortingDigraph('grafittiPerfTab','grafittiCategories')
-##    so = SortingDigraph(t,scaleSteps=7,Debug=True)
-    print(so.categories)
-    so.saveCategories('testCategories')
-##    print(so.profiles)
-##    print(so.criteriaCategoryLimits)
-    so.showSortingCharacteristics()
-    so.showSorting(Reverse=False)
-    so.showSorting()
-    print('optimistic')
-    so.showWeakOrder(Descending=True,strategy='optimistic')
-    print('pessimistic')
-    so.showWeakOrder(strategy='pessimistic')
-    print('average')
-    so.showWeakOrder()
-    so1 = SortingDigraph(nt,scaleSteps=5,LowerClosed=False)
-    so1.showSorting()
-    so1.showSortingCharacteristics()
-    so1.showWeakOrder()
+##    so = SortingDigraph(t,scaleSteps=5,LowerClosed=True,Debug=True)
+####    so = SortingDigraph('grafittiPerfTab','grafittiCategories')
+####    so = SortingDigraph(t,scaleSteps=7,Debug=True)
+##    print(so.categories)
+##    so.saveCategories('testCategories')
+####    print(so.profiles)
+####    print(so.criteriaCategoryLimits)
+##    so.showSortingCharacteristics()
+##    so.showSorting(Reverse=False)
+##    so.showSorting()
+##    print('optimistic')
+##    so.showWeakOrder(Descending=True,strategy='optimistic')
+##    print('pessimistic')
+##    so.showWeakOrder(strategy='pessimistic')
+##    print('average')
+##    so.showWeakOrder()
+    so1 = SortingDigraph(nt,scaleSteps=10,LowerClosed=False)
+    so1.computeWeakOrder(Comments=True)
+    so1.showPerformanceTableau(actionsSubset=so1.profiles['min'])
+    so1.showPerformanceTableau(actionsSubset=so1.profiles['max'])
+##    so1.showSorting()
+##    so1.showSortingCharacteristics()
+    
+##    so.computeWeakOrder(Debug=True)
+##    so1.computeWeakOrder(Comments=True,Debug=True)
                                                                             
 ##    so.saveProfiles('testProfile')
 ##    t.save()
@@ -3940,7 +3935,7 @@ if __name__ == "__main__":
 
     print('*************************************')
     print('* R.B. december 2010                *')
-    print('* $Revision: 1799 $                  *')
+    print('* $Revision: 1972 $                  *')
     print('*************************************')
 
 #############################
