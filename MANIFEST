@@ -12,7 +12,6 @@ graphs.py
 randomNumbers.py
 randomDigraphs.py
 randomPerfTabs.py
-bigOutrankingDigraphs.py
 sparseOutrankingDigraph.py
 htmlmodel.py
 makefile
@@ -39,7 +38,7 @@ test/noseTestsWeakOrders.py
 test/noseTestsRandomNumbers.py
 test/noseTestsRandomDigraph.py
 test/noseTestsRandomPerfTabs.py
-test/noseTestsBigOutrankingDigraph.py
+test/noseTestsSparseOutrankingDigraph.py
 test/testAVprofile.py
 test/testapprovalvotingprofile.py
 test/testdecimal.py

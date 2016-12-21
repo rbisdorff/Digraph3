@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Technical Reference of the Digraph3 modules &mdash; Digraph3 3.4-769 documentation</title>
+    <title>Technical Reference of the Digraph3 modules &#8212; Digraph3 3.4-769 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -17,13 +17,15 @@
         VERSION:     '3.4-769',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Digraph3 3.4-769 documentation" href="index.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Tutorials of the Digraph3 resources" href="tutorial.html" /> 
   </head>
   <body role="document">
@@ -39,7 +41,7 @@
         <li class="right" >
           <a href="tutorial.html" title="Tutorials of the Digraph3 resources"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Digraph3 3.4-769 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Digraph3 3.4-769 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -68,124 +70,110 @@
 <p>Three download options are given:</p>
 <ol class="arabic">
 <li><p class="first">Either (easiest under Linux or Mac OS-X), by using a git client:</p>
-<div class="highlight-python"><div class="highlight"><pre>..$ git clone https://github.com/rbisdorff/Digraph3
+<div class="highlight-default"><div class="highlight"><pre><span></span>..$ git clone https://github.com/rbisdorff/Digraph3
 </pre></div>
 </div>
 </li>
 <li><p class="first">or a subversion client:</p>
-<div class="highlight-python"><div class="highlight"><pre>..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
+<div class="highlight-default"><div class="highlight"><pre><span></span>..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
 </pre></div>
 </div>
 </li>
 <li><p class="first">Or, with a browser access, download and extract the latest distribution tar.gz archive from this page:</p>
-<div class="highlight-python"><div class="highlight"><pre>http://leopold-loewenheim.uni.lu/Digraph3/dist/
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">leopold</span><span class="o">-</span><span class="n">loewenheim</span><span class="o">.</span><span class="n">uni</span><span class="o">.</span><span class="n">lu</span><span class="o">/</span><span class="n">Digraph3</span><span class="o">/</span><span class="n">dist</span><span class="o">/</span>
 </pre></div>
 </div>
 </li>
 </ol>
 <p>On Linux or Mac OS, ..$ cd to the extracted &lt;Digraph3&gt; directory:</p>
-<div class="highlight-python"><div class="highlight"><pre>../Digraph3$ make install
+<div class="highlight-default"><div class="highlight"><pre><span></span>../Digraph3$ make install
 </pre></div>
 </div>
 <p>installs (with sudo !!) the digraphs module in the current running python environment. Pythhon 3.5 (or later) environment is recommended:</p>
-<div class="highlight-python"><div class="highlight"><pre>../Digraph3$ make tests
+<div class="highlight-default"><div class="highlight"><pre><span></span>../Digraph3$ make tests
 </pre></div>
 </div>
 <p>runs a nose test suite in the ./test directory (python3 nose package required  ..$ pip3 install nose ):</p>
-<div class="highlight-python"><div class="highlight"><pre>../Digraph3$ make verboseTests
+<div class="highlight-default"><div class="highlight"><pre><span></span>../Digraph3$ make verboseTests
 </pre></div>
 </div>
 <p>runs a verbose (with stdout not captured) nose test suite:</p>
-<div class="highlight-python"><div class="highlight"><pre>../Digraph3$ make pTests
+<div class="highlight-default"><div class="highlight"><pre><span></span>../Digraph3$ make pTests
 </pre></div>
 </div>
 <p>runs the nose test suite in multiple processing mode when the GNU <a class="reference external" href="https://www.gnu.org/software/parallel/">parallel</a> shell tool is installed and multiple cores are detected.</p>
 <p>To be fully functional, the Digraph3 resources mainly need the <a class="reference external" href="http://graphviz.org">graphviz</a> tools and the <a class="reference external" href="http://www.r-project.org">R statistics resources</a> to be installed. When exploring digraph isomorphisms, the <a class="reference external" href="http://www.cs.sunysb.edu/~algorith/implement/nauty/implement.shtml">nauty</a> isomorphism testing program is required. Two specific criteria and actions clustering methods of the <a class="reference external" href="techDoc.html#outrankingDigraphs.OutrankingDigraph">OutrankingDigraph</a> class furthermore require the <a class="reference external" href="http://leopold-loewenheim.uni.lu/svn/repos/Calmat/">calmat</a> matrix computing resource to be installed.</p>
 <p><strong>Organisation of the Digraph3 python3 source code</strong></p>
 <p>The Digraph3 source code is split into several interdependent modules of which the <code class="docutils literal"><span class="pre">digraphs</span></code> module is the master module.</p>
-<ul>
+<ul class="simple">
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="#digraphs-label"><span>digraphs module</span></a></dt>
-<dd><p class="first last">Main part of the Digraph3 source code with the root <a class="reference external" href="techDoc.html#digraphs.Digraph">Digraph</a> class;</p>
-</dd>
+<dt><a class="reference internal" href="#digraphs-label"><span class="std std-ref">digraphs module</span></a></dt>
+<dd>Main part of the Digraph3 source code with the root <a class="reference external" href="techDoc.html#digraphs.Digraph">Digraph</a> class;</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="#randomdigraphs-label"><span>randomDigraphs module</span></a></dt>
-<dd><p class="first last">Various implemented random digraph models.</p>
-</dd>
+<dt><a class="reference internal" href="#randomdigraphs-label"><span class="std std-ref">randomDigraphs module</span></a></dt>
+<dd>Various implemented random digraph models.</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="#graphs-label"><span>graphs module</span></a></dt>
-<dd><p class="first last">Specialization for undirected graphs with the root <a class="reference external" href="techDoc.html#graphs.Graph">Graph</a> class and a brigde to the <code class="docutils literal"><span class="pre">digraphs</span></code> module resources;</p>
-</dd>
+<dt><a class="reference internal" href="#graphs-label"><span class="std std-ref">graphs module</span></a></dt>
+<dd>Specialization for undirected graphs with the root <a class="reference external" href="techDoc.html#graphs.Graph">Graph</a> class and a brigde to the <code class="docutils literal"><span class="pre">digraphs</span></code> module resources;</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="#outrankingdigraphs-label"><span>outrankingDigraphs module</span></a></dt>
-<dd><p class="first last">New Python3 specific root <a class="reference external" href="techDoc.html#outrankingDigraphs.OutrankingDigraph">OutrankingDigraph</a> class and specializations;</p>
-</dd>
+<dt><a class="reference internal" href="#outrankingdigraphs-label"><span class="std std-ref">outrankingDigraphs module</span></a></dt>
+<dd>New Python3 specific root <a class="reference external" href="techDoc.html#outrankingDigraphs.OutrankingDigraph">OutrankingDigraph</a> class and specializations;</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="#perftabs-label"><span>perfTabs module</span></a></dt>
-<dd><p class="first last">Everything needed for handling Multiple Criteria Decision Aid performance tableaux with root <a class="reference external" href="techDoc.html#perfTabs.PerformanceTableau">PerformaceTableau</a> class;</p>
-</dd>
+<dt><a class="reference internal" href="#perftabs-label"><span class="std std-ref">perfTabs module</span></a></dt>
+<dd>Everything needed for handling Multiple Criteria Decision Aid performance tableaux with root <a class="reference external" href="techDoc.html#perfTabs.PerformanceTableau">PerformaceTableau</a> class;</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="#votingdigraphs-label"><span>votingDigraphs module</span></a></dt>
-<dd><p class="first last">Additional classes and methods for computing election results with main <a class="reference external" href="techDoc.html#votingDigraphs.LinearVotingProfile">LinearVotingProfile</a> class;</p>
-</dd>
+<dt><a class="reference internal" href="#votingdigraphs-label"><span class="std std-ref">votingDigraphs module</span></a></dt>
+<dd>Additional classes and methods for computing election results with main <a class="reference external" href="techDoc.html#votingDigraphs.LinearVotingProfile">LinearVotingProfile</a> class;</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="#sortingdigraphs-label"><span>sortingDigraphs module</span></a></dt>
-<dd><p class="first last">Additional tools for solving sorting problems with the root <a class="reference external" href="techDoc.html#sortingDigraphs.SortingDigraph">SortingDigraph</a> class;</p>
-</dd>
+<dt><a class="reference internal" href="#sortingdigraphs-label"><span class="std std-ref">sortingDigraphs module</span></a></dt>
+<dd>Additional tools for solving sorting problems with the root <a class="reference external" href="techDoc.html#sortingDigraphs.SortingDigraph">SortingDigraph</a> class;</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="#linearorders-label"><span>linearOrders module</span></a></dt>
-<dd><p class="first last">Additional tools for solving linearly ranking problems with the root <a class="reference external" href="techDoc.html#linearOrders.LinearOrder">LinearOrder</a> class;</p>
-</dd>
+<dt><a class="reference internal" href="#linearorders-label"><span class="std std-ref">linearOrders module</span></a></dt>
+<dd>Additional tools for solving linearly ranking problems with the root <a class="reference external" href="techDoc.html#linearOrders.LinearOrder">LinearOrder</a> class;</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="#weakorders-label"><span>weakOrders module</span></a></dt>
-<dd><p class="first last">Additional tools for solving ranking by choosing problems with root <a class="reference external" href="techDoc.html#weakOrders.WeakOrder">WeakOrder</a> class.</p>
-</dd>
+<dt><a class="reference internal" href="#weakorders-label"><span class="std std-ref">weakOrders module</span></a></dt>
+<dd>Additional tools for solving ranking by choosing problems with root <a class="reference external" href="techDoc.html#weakOrders.WeakOrder">WeakOrder</a> class.</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="#randomnumbers-label"><span>randomNumbers module</span></a></dt>
-<dd><p class="first last">Additional random number generators, not available in the standard python library.</p>
-</dd>
+<dt><a class="reference internal" href="#randomnumbers-label"><span class="std std-ref">randomNumbers module</span></a></dt>
+<dd>Additional random number generators, not available in the standard python library.</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="#randomperftabs-label"><span>randomPerfTabs module</span></a></dt>
-<dd><p class="first last">Various implemented random performance tableau models.</p>
-</dd>
+<dt><a class="reference internal" href="#randomperftabs-label"><span class="std std-ref">randomPerfTabs module</span></a></dt>
+<dd>Various implemented random performance tableau models.</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="#sparseoutrankingdigraphs-label"><span>sparseOutrankingDigraphs module</span></a></dt>
-<dd><p class="first last">Sparse implementation design for large outranking digraphs (order &gt; 1000).</p>
-</dd>
+<dt><a class="reference internal" href="#sparseoutrankingdigraphs-label"><span class="std std-ref">sparseOutrankingDigraphs module</span></a></dt>
+<dd>Sparse implementation design for large outranking digraphs (order &gt; 1000).</dd>
 </dl>
 </li>
 </ul>
 <p>Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff &lt;<a class="reference external" href="http://leopold-loewenheim.uni.lu/bisdorff/">http://leopold-loewenheim.uni.lu/bisdorff/</a>&gt;, University of Luxembourg.</p>
 <div class="toctree-wrapper compound">
-<ul class="simple">
-</ul>
 </div>
 </div>
 <div class="section" id="digraphs-module">
 <span id="digraphs-label"></span><h2>digraphs module<a class="headerlink" href="#digraphs-module" title="Permalink to this headline">¶</a></h2>
-<p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#digraphs-tutorial-label"><span>Working with the Digraph3 software ressources</span></a></p>
+<p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#digraphs-tutorial-label"><span class="std std-ref">Working with the Digraph3 software ressources</span></a></p>
 <span class="target" id="module-digraphs"></span><dl class="class">
 <dt id="digraphs.AsymmetricPartialDigraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">AsymmetricPartialDigraph</code><span class="sig-paren">(</span><em>digraph</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.AsymmetricPartialDigraph" title="Permalink to this definition">¶</a></dt>
@@ -241,9 +229,9 @@ temporary circulant digraphs.</p>
 </dd>
 </dl>
 <p>Example session:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">CirculantDigraph</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">CirculantDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c8</span> <span class="o">=</span> <span class="n">CirculantDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">circulants</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">c8</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;c8&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c8</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;c8&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
 <span class="go">Exporting to c8.dot</span>
 <span class="go">circo -Tpng c8.dot -o c8.png</span>
@@ -401,28 +389,25 @@ and the other.evaluation dictionaries into self.</p>
 <dl class="class">
 <dt id="digraphs.Digraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">Digraph</code><span class="sig-paren">(</span><em>file=None</em>, <em>order=7</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.Digraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Genuine root class of all Digraph3 modules.
 See <a class="reference external" href="http://leopold-loewenheim.uni.lu/docDigraph3/tutorial.html#digraph-object-structure">tutorial working with the digraphs module</a></p>
 <dl class="docutils">
 <dt>Python data file format:</dt>
-<dd><ul class="first last">
+<dd><ul class="first last simple">
 <li><dl class="first docutils">
 <dt>actionset = {&#8216;1&#8217;: {&#8216;name&#8217;: &#8216;a1&#8217;, &#8216;shortName&#8217;: ...},</dt>
-<dd><p class="first last">&#8216;2&#8217;: {&#8216;name&#8217;: &#8216;a1&#8217;, ...},
-... }</p>
-</dd>
+<dd>&#8216;2&#8217;: {&#8216;name&#8217;: &#8216;a1&#8217;, ...},
+... }</dd>
 </dl>
 </li>
-<li><p class="first">valuationdomain = { &#8216;min&#8217;:-1, &#8216;med&#8217;:0, &#8216;max&#8217;: 1}</p>
-</li>
-<li><p class="first">relation = { &#8216;1&#8217;: { &#8216;1&#8217;:0, &#8216;2&#8217;: 1, ...}, ...}</p>
-</li>
+<li>valuationdomain = { &#8216;min&#8217;:-1, &#8216;med&#8217;:0, &#8216;max&#8217;: 1}</li>
+<li>relation = { &#8216;1&#8217;: { &#8216;1&#8217;:0, &#8216;2&#8217;: 1, ...}, ...}</li>
 </ul>
 </dd>
 <dt>Example python3 (3.5+ recommended) session::</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">Digraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Digraph</span><span class="p">(</span><span class="s">&#39;tempdigraph&#39;</span><span class="p">)</span>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">Digraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Digraph</span><span class="p">(</span><span class="s1">&#39;tempdigraph&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*----- show short --------------*</span>
 <span class="go">Digraph          : tempdigraph</span>
@@ -1363,8 +1348,8 @@ The thesis document with more explanations can be found
 Therefore this function allows you to export a html file together with all the needed libraries, including the 
 D3 Library which we use for graph generation and the physics between nodes, which attracts or pushes nodes away from each other.</p>
 <dl class="docutils">
-<dt>Features of our graph include i.e. <span class="classifier-delimiter">:</span> <span class="classifier"></span></dt>
-<dd><ul class="first last simple">
+<dt>Features of our graph include i.e.</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier"></span><dd><ul class="first last simple">
 <li>A way to only inspect a node and it&#8217;s neighbours</li>
 <li>Dynamic draging and freezing of the graph</li>
 <li>Export of a newly created general graph</li>
@@ -1400,8 +1385,8 @@ D3 Library which we use for graph generation and the physics between nodes, whic
 <dd><ol class="first last arabic">
 <li><dl class="first docutils">
 <dt>python3 session:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">RandomValuationDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">RandomValuationDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">exportD3</span><span class="p">()</span>
 <span class="go">or</span>
 <span class="go">&gt;&gt; dg.showInteractiveGraph()</span>
@@ -1869,11 +1854,11 @@ Dummy for showCircuits().</p>
 <dd><p>Launches a browser window with the colored relation map of self.
 See corresponding Digraph.showRelationMap() method.</p>
 <p>Example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span>  <span class="c"># strict outranking relation</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">showHTMLRelationMap</span><span class="p">(</span><span class="n">rankingRule</span><span class="o">=</span><span class="s">&quot;netFlows&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span>  <span class="c1"># strict outranking relation</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">showHTMLRelationMap</span><span class="p">(</span><span class="n">rankingRule</span><span class="o">=</span><span class="s2">&quot;netFlows&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/relationMap.png"><img alt="Browser view of a relation map" class="align-center" src="_images/relationMap.png" style="width: 600px;" /></a>
@@ -2043,11 +2028,11 @@ certainly validated and certainly invalidated outranking situations.</p>
 from best to worst actions. Further available ranking rules are net flows (rankingRule=&#8221;netFlows&#8221;),
 Kohler&#8217;s (rankingRule=&#8221;kohler&#8221;), and Tideman&#8217;s ranked pairs rule (rankingRule=&#8221;rankedPairs&#8221;).</p>
 <p>Example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span>  <span class="c"># strict outranking relation</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">showRelationMap</span><span class="p">(</span><span class="n">rankingRule</span><span class="o">=</span><span class="s">&quot;netFlows&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span>  <span class="c1"># strict outranking relation</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">showRelationMap</span><span class="p">(</span><span class="n">rankingRule</span><span class="o">=</span><span class="s2">&quot;netFlows&quot;</span><span class="p">)</span>
 <span class="go"> -   ++++++++  +++++┬+┬┬+</span>
 <span class="go">- -   + +++++ ++┬+┬+++┬++</span>
 <span class="go">┴+  ┴ + ++  ++++┬+┬┬++┬++</span>
@@ -2098,7 +2083,7 @@ Inversely,  if supporting arcs are not more credible than the reversed negating 
 we brake the circuits on their weakest arc.</p>
 </div>
 <p>Usage example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showRubisBestChoiceRecommendation</span><span class="p">()</span>
@@ -2532,7 +2517,7 @@ digraphs d1 and d2 of same order.</p>
 <code class="descclassname">digraphs.</code><code class="descname">flatten</code><span class="sig-paren">(</span><em>iterable</em>, <em>ltypes=&lt;class 'collections.abc.Iterable'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.flatten" title="Permalink to this definition">¶</a></dt>
 <dd><p>Flattens a list of lists into a flat list.</p>
 <p>Main usage:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">listOfLists</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">]]</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">listOfLists</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">flatten</span><span class="p">(</span><span class="n">listOfLists</span><span class="p">)]</span>
 <span class="go">[1,2,3,4]</span>
 </pre></div>
@@ -2641,7 +2626,7 @@ To search other containers, add handlers to iterate over their contents:</p>
 <code class="descclassname">digraphs.</code><code class="descname">totient</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#digraphs.totient" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<p>Back to the <a class="reference internal" href="#technical-label"><span>Installation</span></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="module-randomDigraphs">
 <span id="randomdigraphs-module"></span><span id="randomdigraphs-label"></span><h2>randomDigraphs module<a class="headerlink" href="#module-randomDigraphs" title="Permalink to this headline">¶</a></h2>
@@ -2750,8 +2735,8 @@ Otherwise, decimal precision.</li>
 </ul>
 </dd>
 <dt>Example python3 session:</dt>
-<dd><div class="first highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">RandomValuationDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<dd><div class="first highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">RandomValuationDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">showAll</span><span class="p">()</span>
 <span class="go">*----- show detail -------------*</span>
 <span class="go">Digraph          : randomValuationDigraph</span>
@@ -2785,7 +2770,7 @@ Otherwise, decimal precision.</li>
 <span class="go">&#39;3&#39;: in =&gt; {&#39;2&#39;}, out =&gt; {&#39;4&#39;, &#39;2&#39;}</span>
 </pre></div>
 </div>
-<div class="last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
 </pre></div>
 </div>
 </dd>
@@ -2813,11 +2798,11 @@ else valuation domain = [-1.0,1.0]</li>
 </dl>
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="#technical-label"><span>Installation</span></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="graphs-module">
 <span id="graphs-label"></span><h2>graphs module<a class="headerlink" href="#graphs-module" title="Permalink to this headline">¶</a></h2>
-<p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#graphs-tutorial-label"><span>Working with the graphs module</span></a></p>
+<p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#graphs-tutorial-label"><span class="std std-ref">Working with the graphs module</span></a></p>
 <span class="target" id="module-graphs"></span><dl class="class">
 <dt id="graphs.BestDeterminedSpanningForest">
 <em class="property">class </em><code class="descclassname">graphs.</code><code class="descname">BestDeterminedSpanningForest</code><span class="sig-paren">(</span><em>g</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#graphs.BestDeterminedSpanningForest" title="Permalink to this definition">¶</a></dt>
@@ -2826,7 +2811,7 @@ else valuation domain = [-1.0,1.0]</li>
 using Kruskal&#8217;s greedy algorithm on the dual valuation.</p>
 <dl class="docutils">
 <dt>Example Python session:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomValuationGraph</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomValuationGraph</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*---- short description of the graph ----*</span>
 <span class="go">Name             : &#39;randomGraph&#39;</span>
@@ -2839,7 +2824,7 @@ using Kruskal&#8217;s greedy algorithm on the dual valuation.</p>
 <span class="go">v4 -&gt; [&#39;v5&#39;, &#39;v2&#39;]</span>
 <span class="go">v5 -&gt; [&#39;v4&#39;, &#39;v2&#39;, &#39;v3&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span> <span class="o">=</span> <span class="n">BestDeterminedSpanningForest</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;spanningTree&#39;</span><span class="p">,</span><span class="n">withSpanningTree</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;spanningTree&#39;</span><span class="p">,</span><span class="n">withSpanningTree</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to spanningTree.dot</span>
 <span class="go">[[&#39;v4&#39;, &#39;v2&#39;, &#39;v1&#39;, &#39;v3&#39;, &#39;v1&#39;, &#39;v2&#39;, &#39;v5&#39;, &#39;v2&#39;, &#39;v4&#39;]]</span>
@@ -2912,7 +2897,7 @@ where Max (resp. Min) equals valuation maximum (resp. minimum).</dd>
 <dl class="class">
 <dt id="graphs.Graph">
 <em class="property">class </em><code class="descclassname">graphs.</code><code class="descname">Graph</code><span class="sig-paren">(</span><em>fileName=None</em>, <em>Empty=False</em>, <em>numberOfVertices=7</em>, <em>edgeProbability=0.5</em><span class="sig-paren">)</span><a class="headerlink" href="#graphs.Graph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>In the <cite>graphs</cite> module, the root <a class="reference internal" href="#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal"><span class="pre">graphs.Graph</span></code></a> class provides a generic graph model. A given object consists in:</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -2923,22 +2908,22 @@ where Max (resp. Min) equals valuation maximum (resp. minimum).</dd>
 </ol>
 </div></blockquote>
 <p>General structure:</p>
-<div class="highlight-python"><div class="highlight"><pre>vertices = {&#39;v1&#39;: {&#39;name&#39;: ...,&#39;shortName&#39;: ...},
-            &#39;v2&#39;: {&#39;name&#39;: ...,&#39;shortName&#39;: ...},
-            &#39;v3&#39;: {&#39;name&#39;: ...,&#39;shortName&#39;: ...},
-            ... }
-valuationDomain = {&#39;min&#39;: -1, &#39;med&#39;: 0, &#39;max&#39;: 1}
-edges = {frozenset({&#39;v1&#39;,&#39;v2&#39;}): 1,
-         frozenset({&#39;v1&#39;,&#39;v3&#39;}): 1,
-         frozenset({&#39;v2&#39;,&#39;v3&#39;}): -1,
-           ...}
-## links from each vertex to its neighbors
-gamma = {&#39;v1&#39;: {&#39;v2&#39;,v3&#39;}, &#39;v2&#39;: {&#39;v1&#39;}, &#39;v3&#39;: {&#39;v1&#39;}, ... }
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">vertices</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;v1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span><span class="s1">&#39;shortName&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">},</span>
+            <span class="s1">&#39;v2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span><span class="s1">&#39;shortName&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">},</span>
+            <span class="s1">&#39;v3&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span><span class="s1">&#39;shortName&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">},</span>
+            <span class="o">...</span> <span class="p">}</span>
+<span class="n">valuationDomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;med&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<span class="n">edges</span> <span class="o">=</span> <span class="p">{</span><span class="nb">frozenset</span><span class="p">({</span><span class="s1">&#39;v1&#39;</span><span class="p">,</span><span class="s1">&#39;v2&#39;</span><span class="p">}):</span> <span class="mi">1</span><span class="p">,</span>
+         <span class="nb">frozenset</span><span class="p">({</span><span class="s1">&#39;v1&#39;</span><span class="p">,</span><span class="s1">&#39;v3&#39;</span><span class="p">}):</span> <span class="mi">1</span><span class="p">,</span>
+         <span class="nb">frozenset</span><span class="p">({</span><span class="s1">&#39;v2&#39;</span><span class="p">,</span><span class="s1">&#39;v3&#39;</span><span class="p">}):</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+           <span class="o">...</span><span class="p">}</span>
+<span class="c1">## links from each vertex to its neighbors</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;v1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;v2&#39;</span><span class="p">,</span><span class="n">v3</span><span class="s1">&#39;}, &#39;</span><span class="n">v2</span><span class="s1">&#39;: {&#39;</span><span class="n">v1</span><span class="s1">&#39;}, &#39;</span><span class="n">v3</span><span class="s1">&#39;: {&#39;</span><span class="n">v1</span><span class="s1">&#39;}, ... }</span>
 </pre></div>
 </div>
 <dl class="docutils">
 <dt>Example python3 session:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">Graph</span>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="k">import</span> <span class="n">Graph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">numberOfVertices</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*----- show short --------------*</span>
@@ -3050,8 +3035,8 @@ of the vertex keys.</p>
 <dd><p>Exports GraphViz dot file  for graph drawing filtering.</p>
 <dl class="docutils">
 <dt>Example:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">numberOfVertices</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;randomGraph&#39;</span><span class="p">))</span>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">numberOfVertices</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;randomGraph&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </dd>
@@ -3198,16 +3183,16 @@ temporary Grid graphs of dimension n times m.</p>
 <p>Specialisation of a Gibbs Sampler for the Ising model</p>
 <dl class="docutils">
 <dt>Example:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">GridGraph</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">GridGraph</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*----- show short --------------*</span>
 <span class="go">Grid graph    :  grid-6-6</span>
 <span class="go">n             :  6</span>
 <span class="go">m             :  6</span>
 <span class="go">order         :  36</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">IsingModel</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">beta</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span><span class="n">nSim</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">IsingModel</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">beta</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span><span class="n">nSim</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="go">Running a Gibbs Sampler for 100000 step !</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;lightblue&#39;</span><span class="p">,</span><span class="s">&#39;lightcoral&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span><span class="s1">&#39;lightcoral&#39;</span><span class="p">])</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to grid-15-15-ising.dot</span>
 <span class="go">fdp -Tpng grid-15-15-ising.dot -o grid-15-15-ising.png</span>
@@ -3244,7 +3229,7 @@ H(c) = -sum_{{x,y} in self.edges}[spin_c(x)*spin_c(y)]</p>
 that is a random MIS generator.</p>
 <dl class="docutils">
 <dt>Example:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">CirculantDigraph</span>        
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">CirculantDigraph</span>        
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">CirculantDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">dg</span><span class="o">.</span><span class="n">digraph2Graph</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
@@ -3317,7 +3302,7 @@ Metropolis Markov Chain Monte Carlo sampler with a given probability distributio
 probs = {&#8216;v1&#8217;: x, &#8216;v2&#8217;: y, ...}</p>
 <dl class="docutils">
 <dt>Usage example:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">numberOfVertices</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">numberOfVertices</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*---- short description of the graph ----*</span>
 <span class="go">Name             : &#39;randomGraph&#39;</span>
@@ -3340,7 +3325,7 @@ probs = {&#8216;v1&#8217;: x, &#8216;v2&#8217;: y, ...}</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">met</span> <span class="o">=</span> <span class="n">MetropolisChain</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">probs</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">frequency</span> <span class="o">=</span> <span class="n">met</span><span class="o">.</span><span class="n">checkSampling</span><span class="p">(</span><span class="n">verticesList</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">nSim</span><span class="o">=</span><span class="mi">30000</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">verticesList</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">probs</span><span class="p">[</span><span class="n">v</span><span class="p">],</span><span class="n">frequency</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">probs</span><span class="p">[</span><span class="n">v</span><span class="p">],</span><span class="n">frequency</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
 <span class="go">v1 0.3333 0.3343</span>
 <span class="go">v2 0.2666 0.2680</span>
 <span class="go">v3 0.2    0.2030 </span>
@@ -3399,7 +3384,7 @@ nSim simulation steps (default = len(graph.edges)).</p>
 <blockquote>
 <div><dl class="docutils">
 <dt>Example 3-coloring of a grid 6x6 :</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">GridGraph</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">GridGraph</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
 <span class="go">*----- show short --------------*</span>
@@ -3407,7 +3392,7 @@ nSim simulation steps (default = len(graph.edges)).</p>
 <span class="go">n             :  6</span>
 <span class="go">m             :  6</span>
 <span class="go">order         :  36</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">qc</span> <span class="o">=</span> <span class="n">Q_Coloring</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;gold&#39;</span><span class="p">,</span><span class="s">&#39;lightblue&#39;</span><span class="p">,</span><span class="s">&#39;lightcoral&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qc</span> <span class="o">=</span> <span class="n">Q_Coloring</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;gold&#39;</span><span class="p">,</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span><span class="s1">&#39;lightcoral&#39;</span><span class="p">])</span>
 <span class="go">Running a Gibbs Sampler for 630 step !</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">qc</span><span class="o">.</span><span class="n">checkFeasibility</span><span class="p">()</span>
 <span class="go">The q-coloring with 3 colors is feasible !!</span>
@@ -3434,7 +3419,7 @@ nSim simulation steps (default = len(graph.edges)).</p>
 &#8216;fdp&#8217;, &#8216;circo&#8217; or &#8216;neato&#8217; with the layout parameter.</p>
 <dl class="docutils">
 <dt>Example:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">numberOfVertices</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">numberOfVertices</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*---- short description of the graph ----*</span>
 <span class="go">Name : &#39;randomGraph&#39;</span>
@@ -3585,7 +3570,7 @@ where p and q are two coprime integers such that
 <p><em>Reference</em>: M. Aigner,
 Markov&#8217;s Theorem and 100 Years of the Uniqueness Conjecture, Springer, 2013, p. 141-149</p>
 <p>S(4/7) snake graph instance:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">SnakeGraph</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="k">import</span> <span class="n">SnakeGraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">s4_7</span> <span class="o">=</span> <span class="n">SnakeGraph</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">s4_7</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*---- short description of the snake graph ----*</span>
@@ -3594,7 +3579,7 @@ Markov&#8217;s Theorem and 100 Years of the Uniqueness Conjecture, Springer, 201
 <span class="go">Christoffel words:</span>
 <span class="go">Upper word       :  BBABABA</span>
 <span class="go">Lower word       :  ABABABB</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">s4_7</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;4_7_snake&#39;</span><span class="p">,</span><span class="n">lineWidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">arcColor</span><span class="o">=</span><span class="s">&#39;red&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s4_7</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;4_7_snake&#39;</span><span class="p">,</span><span class="n">lineWidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">arcColor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/4_7_snake.png"><img alt="4/7 snake graph instance" class="align-center" src="_images/4_7_snake.png" style="width: 300px;" /></a>
@@ -3629,7 +3614,7 @@ temporary triangulated grids of dimension n times m.</p>
 
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="#technical-label"><span>Installation</span></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="module-perfTabs">
 <span id="perftabs-module"></span><span id="perftabs-label"></span><h2>perfTabs module<a class="headerlink" href="#module-perfTabs" title="Permalink to this headline">¶</a></h2>
@@ -3677,7 +3662,7 @@ xml.etree (for Python 2.5+).</p>
 <dl class="class">
 <dt id="perfTabs.PerformanceTableau">
 <em class="property">class </em><code class="descclassname">perfTabs.</code><code class="descname">PerformanceTableau</code><span class="sig-paren">(</span><em>filePerfTab=None</em>, <em>isEmpty=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>In this <em>Digraph3</em> module, the root <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a> class provides a generic <strong>performance table model</strong>. A given object of this class consists in:</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -3687,30 +3672,30 @@ xml.etree (for Python 2.5+).</p>
 </ol>
 </div></blockquote>
 <p>Structure:</p>
-<div class="highlight-python"><div class="highlight"><pre>actions = OrderedDict[(&#39;a1&#39;, {&#39;name&#39;: ..., &#39;comment&#39;: ...}),
-           (&#39;a2&#39;, {&#39;name&#39;: ..., &#39;comment&#39;: ...}),
-           ...])
-criteria = OrderedDict([
-     (&#39;g1&#39;, {&#39;weight&#39;:Decimal(&quot;3.00&quot;),
-             &#39;scale&#39;: (Decimal(&quot;0.00&quot;),Decimal(&quot;100.00&quot;)),
-             &#39;thresholds&#39; : {&#39;pref&#39;: (Decimal(&#39;20.0&#39;), Decimal(&#39;0.0&#39;)),
-                             &#39;ind&#39;: (Decimal(&#39;10.0&#39;), Decimal(&#39;0.0&#39;)),
-                             &#39;veto&#39;: (Decimal(&#39;80.0&#39;), Decimal(&#39;0.0&#39;))}
-             }),
-     (&#39;g2&#39;, {&#39;weight&#39;:Decimal(&quot;5.00&quot;),
-                   &#39;scale&#39;: (Decimal(&quot;0.00&quot;),Decimal(&quot;100.00&quot;)),
-                   &#39;thresholds&#39; : {&#39;pref&#39;: (Decimal(&#39;20.0&#39;), Decimal(&#39;0.0&#39;)),
-                                   &#39;ind&#39;: (Decimal(&#39;10.0&#39;), Decimal(&#39;0.0&#39;)),
-                                   &#39;veto&#39;: (Decimal(&#39;80.0&#39;), Decimal(&#39;0.0&#39;))}}),
-              ...])
-evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39;:Decimal(&quot;99.85&quot;), ...},
-              &#39;g2&#39;: {&#39;a1&#39;:Decimal(&quot;88.12&quot;),&#39;a2&#39;:Decimal(&quot;33.25&quot;), ...},
-              ...}
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">actions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">[(</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span> <span class="s1">&#39;comment&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">}),</span>
+           <span class="p">(</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span> <span class="s1">&#39;comment&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">}),</span>
+           <span class="o">...</span><span class="p">])</span>
+<span class="n">criteria</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([</span>
+     <span class="p">(</span><span class="s1">&#39;g1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;3.00&quot;</span><span class="p">),</span>
+             <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.00&quot;</span><span class="p">),</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;100.00&quot;</span><span class="p">)),</span>
+             <span class="s1">&#39;thresholds&#39;</span> <span class="p">:</span> <span class="p">{</span><span class="s1">&#39;pref&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;20.0&#39;</span><span class="p">),</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)),</span>
+                             <span class="s1">&#39;ind&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;10.0&#39;</span><span class="p">),</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)),</span>
+                             <span class="s1">&#39;veto&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;80.0&#39;</span><span class="p">),</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">))}</span>
+             <span class="p">}),</span>
+     <span class="p">(</span><span class="s1">&#39;g2&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;5.00&quot;</span><span class="p">),</span>
+                   <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.00&quot;</span><span class="p">),</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;100.00&quot;</span><span class="p">)),</span>
+                   <span class="s1">&#39;thresholds&#39;</span> <span class="p">:</span> <span class="p">{</span><span class="s1">&#39;pref&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;20.0&#39;</span><span class="p">),</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)),</span>
+                                   <span class="s1">&#39;ind&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;10.0&#39;</span><span class="p">),</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)),</span>
+                                   <span class="s1">&#39;veto&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;80.0&#39;</span><span class="p">),</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">))}}),</span>
+              <span class="o">...</span><span class="p">])</span>
+<span class="n">evaluation</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;g1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;a1&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;57.28&quot;</span><span class="p">),</span><span class="s1">&#39;a2&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;99.85&quot;</span><span class="p">),</span> <span class="o">...</span><span class="p">},</span>
+              <span class="s1">&#39;g2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;a1&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;88.12&quot;</span><span class="p">),</span><span class="s1">&#39;a2&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;33.25&quot;</span><span class="p">),</span> <span class="o">...</span><span class="p">},</span>
+              <span class="o">...</span><span class="p">}</span>
 </pre></div>
 </div>
 <dl class="docutils">
 <dt>With the help of the <code class="xref py py-class docutils literal"><span class="pre">perfTabs.RandomPerformanceTableau</span></code> class let us generate for illustration a random performance tableau concerning 7 decision actions or alternatives denoted <em>a01</em>, <em>a02</em>, ..., <em>a07</em>:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span><span class="o">.</span><span class="n">showActions</span><span class="p">()</span>
 <span class="go">    *----- show decision action --------------*</span>
@@ -3736,7 +3721,7 @@ evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39
 </div>
 </dd>
 <dt>In this example we consider furthermore a family of seven equisignificant cardinal criteria functions <em>g01</em>, <em>g02</em>, ..., <em>g07</em>, measuring the performance of each alternative on a rational scale form 0.0 to 100.00. In order to capture the evaluation&#8217;s uncertainty and imprecision, each criterion function <em>g1</em> to <em>g7</em> admits three performance discrimination thresholds of 10, 20 and 80 pts for warranting respectively any indifference, preference and veto situations: </dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span><span class="o">.</span><span class="n">showCriteria</span><span class="p">(</span><span class="n">IntegerWeights</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span><span class="o">.</span><span class="n">showCriteria</span><span class="p">(</span><span class="n">IntegerWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">    *----  criteria -----*</span>
 <span class="go">    g1 &#39;RandomPerformanceTableau() instance&#39;</span>
 <span class="go">      Scale = (0.0, 100.0)</span>
@@ -3769,7 +3754,7 @@ evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39
 </div>
 </dd>
 <dt>The performance evaluations of each decision alternative on each criterion are gathered in a <em>performance tableau</em>:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">()</span>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">()</span>
 <span class="go">    *----  performance tableau -----*</span>
 <span class="go">    criteria | weights |    &#39;a01&#39;     &#39;a02&#39;     &#39;a03&#39;   ...     &#39;a12&#39;    &#39;a13&#39;   </span>
 <span class="go">    ----------|---------------------------------------------------------------------</span>
@@ -3818,7 +3803,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -3833,42 +3818,42 @@ are provided. Used by the Web API.</p>
 <p>For a performance tableau with 5 criteria, colorLevels=5 and
 Correlations = True, one obtains for instance
 the following ordered dictionary in return:</p>
-<div class="highlight-python"><div class="highlight"><pre>OrderedDict([
-    (&#39;title&#39;, &#39;Performance Heatmap&#39;),
-    (&#39;precision&#39;, 2),
-    (&#39;colorPalette&#39;, OrderedDict([
-                      (&#39;0&#39;,{&#39;quantile&#39;:Decimal(&#39;0.2&#39;),&#39;quantileClass&#39;:&#39;q5_1&#39;}),
-                      (&#39;1&#39;,{&#39;quantile&#39;:Decimal(&#39;0.4&#39;),&#39;quantileClass&#39;:&#39;q5_2&#39;}),
-                      (&#39;2&#39;,{&#39;quantile&#39;:Decimal(&#39;0.6&#39;),&#39;quantileClass&#39;:&#39;q5_3&#39;}),
-                      (&#39;3&#39;,{&#39;quantile&#39;:Decimal(&#39;0.8&#39;),&#39;quantileClass&#39;:&#39;q5_4&#39;}),
-                      (&#39;4&#39;,{&#39;quantile&#39;:Decimal(&#39;1.0&#39;),&#39;quantileClass&#39;:&#39;q5_5&#39;})
-    ])),
-    (&#39;criteriaList&#39;, OrderedDict([(&#39;0&#39;,&#39;g5&#39;), (&#39;1&#39;,&#39;g2&#39;), (&#39;2&#39;,&#39;g4&#39;), (&#39;3&#39;,&#39;g1&#39;), (&#39;4&#39;,&#39;g3&#39;)]),
-    (&#39;criteriaCorrelations&#39;, OrderedDict([
-                                         (&#39;0&#39;,Decimal(&#39;0.71428&#39;)),
-                                         (&#39;1&#39;,Decimal(&#39;0.48571&#39;)),
-                                         (&#39;2&#39;,Decimal(&#39;0.40952&#39;)),
-                                         (&#39;3&#39;,Decimal(&#39;0.35238&#39;)),
-                                         (&#39;4&#39;,Decimal(&#39;0.16190&#39;))
-    ])),
-    (&#39;quantiles&#39;, OrderedDict([
-                               (&#39;0&#39;,{&#39;a1&#39;:OrderedDict([
-                                                 (&#39;0&#39;,{&#39;quantile&#39;:Decimal(&#39;3&#39;), &#39;qantileClass&#39;:&#39;q5-2&#39;}),
-                                                 (&#39;1&#39;,{&#39;quantile&#39;:Decimal(&#39;-17.92&#39;), &#39;qantileClass&#39;:&#39;q5-5&#39;}),
-                                                 (&#39;2&#39;,{&#39;quantile&#39;:Decimal(&#39;26.68&#39;), &#39;qantileClass&#39;:&#39;q5-2&#39;}),
-                                                 (&#39;3&#39;,{&#39;quantile&#39;:Decimal(&#39;1&#39;), &#39;qantileClass&#39;:&#39;q5-1&#39;}),
-                                                 (&#39;4&#39;,{&#39;quantile&#39;:Decimal(&#39;-33.99&#39;), &#39;qantileClass&#39;:&#39;q5-3&#39;})
-                               ])}),
-                               (&#39;1&#39;,{&#39;a2&#39;:OrderedDict([
-                                                 (&#39;0&#39;,{&#39;quantile&#39;:Decimal(&#39;6&#39;), &#39;qantileClass&#39;:&#39;q5-3&#39;}),
-                                                 (&#39;1&#39;,{&#39;quantile&#39;:Decimal(&#39;-30.71&#39;), &#39;qantileClass&#39;:&#39;q5-5&#39;}),
-                                                 (&#39;2&#39;,{&#39;quantile&#39;:Decimal(&#39;66.35&#39;), &#39;qantileClass&#39;:&#39;q5-4&#39;}),
-                                                 (&#39;3&#39;,{&#39;quantile&#39;:Decimal(&#39;8&#39;), &#39;qantileClass&#39;:&#39;q5-5&#39;}),
-                                                 (&#39;4&#39;,{&#39;quantile&#39;:Decimal(&#39;-77.77&#39;), &#39;qantileClass&#39;:&#39;q5-3&#39;})
-                               ])}),
-                               (&#39;2&#39;, ...
-    ]))...
-]))
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">OrderedDict</span><span class="p">([</span>
+    <span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;Performance Heatmap&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;precision&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;colorPalette&#39;</span><span class="p">,</span> <span class="n">OrderedDict</span><span class="p">([</span>
+                      <span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">,{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.2&#39;</span><span class="p">),</span><span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;q5_1&#39;</span><span class="p">}),</span>
+                      <span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.4&#39;</span><span class="p">),</span><span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;q5_2&#39;</span><span class="p">}),</span>
+                      <span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">,{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.6&#39;</span><span class="p">),</span><span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;q5_3&#39;</span><span class="p">}),</span>
+                      <span class="p">(</span><span class="s1">&#39;3&#39;</span><span class="p">,{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.8&#39;</span><span class="p">),</span><span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;q5_4&#39;</span><span class="p">}),</span>
+                      <span class="p">(</span><span class="s1">&#39;4&#39;</span><span class="p">,{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">),</span><span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;q5_5&#39;</span><span class="p">})</span>
+    <span class="p">])),</span>
+    <span class="p">(</span><span class="s1">&#39;criteriaList&#39;</span><span class="p">,</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;g5&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="s1">&#39;g2&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="s1">&#39;g4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;3&#39;</span><span class="p">,</span><span class="s1">&#39;g1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;4&#39;</span><span class="p">,</span><span class="s1">&#39;g3&#39;</span><span class="p">)]),</span>
+    <span class="p">(</span><span class="s1">&#39;criteriaCorrelations&#39;</span><span class="p">,</span> <span class="n">OrderedDict</span><span class="p">([</span>
+                                         <span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.71428&#39;</span><span class="p">)),</span>
+                                         <span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.48571&#39;</span><span class="p">)),</span>
+                                         <span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.40952&#39;</span><span class="p">)),</span>
+                                         <span class="p">(</span><span class="s1">&#39;3&#39;</span><span class="p">,</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.35238&#39;</span><span class="p">)),</span>
+                                         <span class="p">(</span><span class="s1">&#39;4&#39;</span><span class="p">,</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.16190&#39;</span><span class="p">))</span>
+    <span class="p">])),</span>
+    <span class="p">(</span><span class="s1">&#39;quantiles&#39;</span><span class="p">,</span> <span class="n">OrderedDict</span><span class="p">([</span>
+                               <span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">,{</span><span class="s1">&#39;a1&#39;</span><span class="p">:</span><span class="n">OrderedDict</span><span class="p">([</span>
+                                                 <span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">,{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;3&#39;</span><span class="p">),</span> <span class="s1">&#39;qantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;q5-2&#39;</span><span class="p">}),</span>
+                                                 <span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-17.92&#39;</span><span class="p">),</span> <span class="s1">&#39;qantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;q5-5&#39;</span><span class="p">}),</span>
+                                                 <span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">,{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;26.68&#39;</span><span class="p">),</span> <span class="s1">&#39;qantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;q5-2&#39;</span><span class="p">}),</span>
+                                                 <span class="p">(</span><span class="s1">&#39;3&#39;</span><span class="p">,{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">),</span> <span class="s1">&#39;qantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;q5-1&#39;</span><span class="p">}),</span>
+                                                 <span class="p">(</span><span class="s1">&#39;4&#39;</span><span class="p">,{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-33.99&#39;</span><span class="p">),</span> <span class="s1">&#39;qantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;q5-3&#39;</span><span class="p">})</span>
+                               <span class="p">])}),</span>
+                               <span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,{</span><span class="s1">&#39;a2&#39;</span><span class="p">:</span><span class="n">OrderedDict</span><span class="p">([</span>
+                                                 <span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">,{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;6&#39;</span><span class="p">),</span> <span class="s1">&#39;qantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;q5-3&#39;</span><span class="p">}),</span>
+                                                 <span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-30.71&#39;</span><span class="p">),</span> <span class="s1">&#39;qantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;q5-5&#39;</span><span class="p">}),</span>
+                                                 <span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">,{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;66.35&#39;</span><span class="p">),</span> <span class="s1">&#39;qantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;q5-4&#39;</span><span class="p">}),</span>
+                                                 <span class="p">(</span><span class="s1">&#39;3&#39;</span><span class="p">,{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;8&#39;</span><span class="p">),</span> <span class="s1">&#39;qantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;q5-5&#39;</span><span class="p">}),</span>
+                                                 <span class="p">(</span><span class="s1">&#39;4&#39;</span><span class="p">,{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-77.77&#39;</span><span class="p">),</span> <span class="s1">&#39;qantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;q5-3&#39;</span><span class="p">})</span>
+                               <span class="p">])}),</span>
+                               <span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="o">...</span>
+    <span class="p">]))</span><span class="o">...</span>
+<span class="p">]))</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -3879,28 +3864,28 @@ the following ordered dictionary in return:</p>
 <dd><p>Computes the performance table in a JSON compatible format with minima and maxima. Used by the Web API.</p>
 <p>For a performance tableau with 5 criteria one obtains for instance
 the following ordered dictionary in return:</p>
-<div class="highlight-python"><div class="highlight"><pre>OrderedDict([
-    (&#39;title&#39;, &#39;Min/Max Performance Tableau&#39;),
-    (&#39;precision&#39;, 2),
-    (&#39;criteriaList&#39;, OrderedDict([(&#39;0&#39;,&#39;g5&#39;), (&#39;1&#39;,&#39;g2&#39;), (&#39;2&#39;,&#39;g4&#39;), (&#39;3&#39;,&#39;g1&#39;), (&#39;4&#39;,&#39;g3&#39;)]),
-    (&#39;quantiles&#39;, OrderedDict([
-                               (&#39;0&#39;,{&#39;a1&#39;:OrderedDict([
-                                                 (&#39;0&#39;,{&#39;quantile&#39;:Decimal(&#39;3&#39;), &#39;qantileClass&#39;:&#39;minimum&#39;}),
-                                                 (&#39;1&#39;,{&#39;quantile&#39;:Decimal(&#39;-17.92&#39;), &#39;qantileClass&#39;:&#39;default&#39;}),
-                                                 (&#39;2&#39;,{&#39;quantile&#39;:Decimal(&#39;26.68&#39;), &#39;qantileClass&#39;:&#39;maximum&#39;}),
-                                                 (&#39;3&#39;,{&#39;quantile&#39;:&#39;NaN, &#39;qantileClass&#39;:&#39;NaN&#39;}),
-                                                 (&#39;4&#39;,{&#39;quantile&#39;:Decimal(&#39;-33.99&#39;), &#39;qantileClass&#39;:&#39;default&#39;})
-                               ])}),
-                               (&#39;1&#39;,{&#39;a2&#39;:OrderedDict([
-                                                 (&#39;0&#39;,{&#39;quantile&#39;:Decimal(&#39;6&#39;), &#39;qantileClass&#39;:&#39;minimum&#39;}),
-                                                 (&#39;1&#39;,{&#39;quantile&#39;:Decimal(&#39;-30.71&#39;), &#39;qantileClass&#39;:&#39;default&#39;}),
-                                                 (&#39;2&#39;,{&#39;quantile&#39;:&#39;NaN&#39;, &#39;qantileClass&#39;:&#39;NaN&#39;}),
-                                                 (&#39;3&#39;,{&#39;quantile&#39;:Decimal(&#39;8&#39;), &#39;qantileClass&#39;:&#39;maximum&#39;}),
-                                                 (&#39;4&#39;,{&#39;quantile&#39;:Decimal(&#39;-77.77&#39;), &#39;qantileClass&#39;:&#39;default&#39;})
-                               ])}),
-                               (&#39;2&#39;, ...
-    ]))...
-]))
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">OrderedDict</span><span class="p">([</span>
+    <span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;Min/Max Performance Tableau&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;precision&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;criteriaList&#39;</span><span class="p">,</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;g5&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="s1">&#39;g2&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="s1">&#39;g4&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;3&#39;</span><span class="p">,</span><span class="s1">&#39;g1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;4&#39;</span><span class="p">,</span><span class="s1">&#39;g3&#39;</span><span class="p">)]),</span>
+    <span class="p">(</span><span class="s1">&#39;quantiles&#39;</span><span class="p">,</span> <span class="n">OrderedDict</span><span class="p">([</span>
+                               <span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">,{</span><span class="s1">&#39;a1&#39;</span><span class="p">:</span><span class="n">OrderedDict</span><span class="p">([</span>
+                                                 <span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">,{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;3&#39;</span><span class="p">),</span> <span class="s1">&#39;qantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;minimum&#39;</span><span class="p">}),</span>
+                                                 <span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-17.92&#39;</span><span class="p">),</span> <span class="s1">&#39;qantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;default&#39;</span><span class="p">}),</span>
+                                                 <span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">,{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;26.68&#39;</span><span class="p">),</span> <span class="s1">&#39;qantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;maximum&#39;</span><span class="p">}),</span>
+                                                 <span class="p">(</span><span class="s1">&#39;3&#39;</span><span class="p">,{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="s1">&#39;NaN, &#39;</span><span class="n">qantileClass</span><span class="s1">&#39;:&#39;</span><span class="n">NaN</span><span class="s1">&#39;}),</span>
+                                                 <span class="p">(</span><span class="s1">&#39;4&#39;</span><span class="p">,{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-33.99&#39;</span><span class="p">),</span> <span class="s1">&#39;qantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;default&#39;</span><span class="p">})</span>
+                               <span class="p">])}),</span>
+                               <span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,{</span><span class="s1">&#39;a2&#39;</span><span class="p">:</span><span class="n">OrderedDict</span><span class="p">([</span>
+                                                 <span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">,{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;6&#39;</span><span class="p">),</span> <span class="s1">&#39;qantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;minimum&#39;</span><span class="p">}),</span>
+                                                 <span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-30.71&#39;</span><span class="p">),</span> <span class="s1">&#39;qantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;default&#39;</span><span class="p">}),</span>
+                                                 <span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">,{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="s1">&#39;NaN&#39;</span><span class="p">,</span> <span class="s1">&#39;qantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;NaN&#39;</span><span class="p">}),</span>
+                                                 <span class="p">(</span><span class="s1">&#39;3&#39;</span><span class="p">,{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;8&#39;</span><span class="p">),</span> <span class="s1">&#39;qantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;maximum&#39;</span><span class="p">}),</span>
+                                                 <span class="p">(</span><span class="s1">&#39;4&#39;</span><span class="p">,{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-77.77&#39;</span><span class="p">),</span> <span class="s1">&#39;qantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;default&#39;</span><span class="p">})</span>
+                               <span class="p">])}),</span>
+                               <span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="o">...</span>
+    <span class="p">]))</span><span class="o">...</span>
+<span class="p">]))</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -4183,9 +4168,9 @@ presenting the decision alternatives.</li>
 to indicate the exact number of singled threaded cores in fact allocated to the job.</li>
 </ul>
 </div></blockquote>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/perfTabsExample.png"><img alt="HTML heat map of the performance tableau" class="align-center" src="_images/perfTabsExample.png" style="width: 600px;" /></a>
@@ -4261,8 +4246,8 @@ Using the inbuilt module xml.etree (for Python 2.5+).</p>
 </dl>
 <dl class="class">
 <dt id="perfTabs.XMCDA2PerformanceTableau.OrderedDict">
-<em class="property">class </em><code class="descname">OrderedDict</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.XMCDA2PerformanceTableau.OrderedDict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">dict</span></code></a></p>
+<em class="property">class </em><code class="descname">OrderedDict</code><a class="headerlink" href="#perfTabs.XMCDA2PerformanceTableau.OrderedDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">dict</span></code></a></p>
 <p>Dictionary that remembers insertion order</p>
 <dl class="method">
 <dt id="perfTabs.XMCDA2PerformanceTableau.OrderedDict.clear">
@@ -4274,25 +4259,25 @@ Using the inbuilt module xml.etree (for Python 2.5+).</p>
 <code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; a shallow copy of od<a class="headerlink" href="#perfTabs.XMCDA2PerformanceTableau.OrderedDict.copy" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="classmethod">
+<dl class="method">
 <dt id="perfTabs.XMCDA2PerformanceTableau.OrderedDict.fromkeys">
-<em class="property">classmethod </em><code class="descname">fromkeys</code><span class="sig-paren">(</span><em>S</em><span class="optional">[</span>, <em>v</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; New ordered dictionary with keys from S.<a class="headerlink" href="#perfTabs.XMCDA2PerformanceTableau.OrderedDict.fromkeys" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fromkeys</code><span class="sig-paren">(</span><em>S</em><span class="optional">[</span>, <em>v</em><span class="optional">]</span><span class="sig-paren">)</span> &rarr; New ordered dictionary with keys from S.<a class="headerlink" href="#perfTabs.XMCDA2PerformanceTableau.OrderedDict.fromkeys" title="Permalink to this definition">¶</a></dt>
 <dd><p>If not specified, the value defaults to None.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="perfTabs.XMCDA2PerformanceTableau.OrderedDict.items">
-<code class="descname">items</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; a set-like object providing a view on D's items<a class="headerlink" href="#perfTabs.XMCDA2PerformanceTableau.OrderedDict.items" title="Permalink to this definition">¶</a></dt>
+<code class="descname">items</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.XMCDA2PerformanceTableau.OrderedDict.items" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="perfTabs.XMCDA2PerformanceTableau.OrderedDict.keys">
-<code class="descname">keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; a set-like object providing a view on D's keys<a class="headerlink" href="#perfTabs.XMCDA2PerformanceTableau.OrderedDict.keys" title="Permalink to this definition">¶</a></dt>
+<code class="descname">keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.XMCDA2PerformanceTableau.OrderedDict.keys" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="perfTabs.XMCDA2PerformanceTableau.OrderedDict.move_to_end">
-<code class="descname">move_to_end</code><span class="sig-paren">(</span><em>key</em>, <em>last=True</em><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.XMCDA2PerformanceTableau.OrderedDict.move_to_end" title="Permalink to this definition">¶</a></dt>
+<code class="descname">move_to_end</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.XMCDA2PerformanceTableau.OrderedDict.move_to_end" title="Permalink to this definition">¶</a></dt>
 <dd><p>Move an existing element to the end (or beginning if last==False).</p>
 <p>Raises KeyError if the element does not exist.
 When last=True, acts like a fast version of self[key]=self.pop(key).</p>
@@ -4318,15 +4303,12 @@ is raised.</p>
 
 <dl class="method">
 <dt id="perfTabs.XMCDA2PerformanceTableau.OrderedDict.update">
-<code class="descname">update</code><span class="sig-paren">(</span><span class="optional">[</span><em>E</em>, <span class="optional">]</span><em>**F</em><span class="sig-paren">)</span> &rarr; None.  Update D from mapping/iterable E and F.<a class="headerlink" href="#perfTabs.XMCDA2PerformanceTableau.OrderedDict.update" title="Permalink to this definition">¶</a></dt>
-<dd><p>If E present and has a .keys() method, does:     for k in E: D[k] = E[k]
-If E present and lacks .keys() method, does:     for (k, v) in E: D[k] = v
-In either case, this is followed by: for k, v in F.items(): D[k] = v</p>
-</dd></dl>
+<code class="descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.XMCDA2PerformanceTableau.OrderedDict.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="perfTabs.XMCDA2PerformanceTableau.OrderedDict.values">
-<code class="descname">values</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; an object providing a view on D's values<a class="headerlink" href="#perfTabs.XMCDA2PerformanceTableau.OrderedDict.values" title="Permalink to this definition">¶</a></dt>
+<code class="descname">values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.XMCDA2PerformanceTableau.OrderedDict.values" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -4368,11 +4350,11 @@ xml.etree (for Python 2.5+).</p>
 
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="#technical-label"><span>Installation</span></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="randomperftabs-module">
 <span id="randomperftabs-label"></span><h2>randomPerfTabs module<a class="headerlink" href="#randomperftabs-module" title="Permalink to this headline">¶</a></h2>
-<p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#randomperformacetableau-tutorial-label"><span>Generating random performance tableaux</span></a></p>
+<p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#randomperformacetableau-tutorial-label"><span class="std std-ref">Generating random performance tableaux</span></a></p>
 <span class="target" id="module-randomPerfTabs"></span><dl class="class">
 <dt id="randomPerfTabs.FullRandomPerformanceTableau">
 <em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">FullRandomPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=None</em>, <em>numberOfCriteria=None</em>, <em>weightDistribution=None</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.FullRandomPerformanceTableau" title="Permalink to this definition">¶</a></dt>
@@ -4389,7 +4371,7 @@ xml.etree (for Python 2.5+).</p>
 <dl class="class">
 <dt id="randomPerfTabs.Random3ObjectivesPerformanceGenerator">
 <em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">Random3ObjectivesPerformanceGenerator</code><span class="sig-paren">(</span><em>argPerfTab</em>, <em>actionNamePrefix='a'</em>, <em>instanceCounter=0</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.Random3ObjectivesPerformanceGenerator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Generates and/or new decision actions with random evaluation for a
 given Random3ObjectivesPerformanceTableau instance.</p>
 <dl class="method">
@@ -4490,16 +4472,16 @@ on each of the three objectives.</p>
 <dl class="class">
 <dt id="randomPerfTabs.RandomCBPerformanceGenerator">
 <em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomCBPerformanceGenerator</code><span class="sig-paren">(</span><em>argPerfTab</em>, <em>actionNamePrefix='a'</em>, <em>instanceCounter=0</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomCBPerformanceGenerator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Instantiates a generator of new decision actions with associated random evaluations using the model parameters provided by a given RandomCBPerformanceTableau instance.</p>
 <dl class="method">
 <dt id="randomPerfTabs.RandomCBPerformanceGenerator.randomAction">
 <code class="descname">randomAction</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomCBPerformanceGenerator.randomAction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a dictionary with following content:</p>
-<div class="highlight-python"><div class="highlight"><pre>{ &#39;action&#39;: { &#39;key&#39;: actionKey, &#39;shortName&#39;: ..., &#39;name&#39;: ...,  
-         &#39;type&#39;: &#39;neutral&#39;|&#39;advantageous&#39;|&#39;cheap&#39;},
-         &#39;evaluation&#39;: {&#39;g1&#39;: Decimal(...), 
-                        &#39;g2&#39;: Decimal(...), ... }}.
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span> <span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">actionKey</span><span class="p">,</span> <span class="s1">&#39;shortName&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span>  
+         <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;neutral&#39;</span><span class="o">|</span><span class="s1">&#39;advantageous&#39;</span><span class="o">|</span><span class="s1">&#39;cheap&#39;</span><span class="p">},</span>
+         <span class="s1">&#39;evaluation&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;g1&#39;</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="o">...</span><span class="p">),</span> 
+                        <span class="s1">&#39;g2&#39;</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="o">...</span><span class="p">),</span> <span class="o">...</span> <span class="p">}}</span><span class="o">.</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -4585,7 +4567,7 @@ Cost versus Benefit oriented performance tableaux.</p>
 <dl class="class">
 <dt id="randomPerfTabs.RandomPerformanceGenerator">
 <em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomPerformanceGenerator</code><span class="sig-paren">(</span><em>argPerfTab</em>, <em>actionNamePrefix='a'</em>, <em>instanceCounter=0</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="headerlink" href="#randomPerfTabs.RandomPerformanceGenerator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Generates and/or new decision actions with random evaluation for a given RandomPerformanceTableau instance.</p>
 <dl class="method">
 <dt id="randomPerfTabs.RandomPerformanceGenerator.randomAction">
@@ -4658,7 +4640,7 @@ and considerable performance difference discrimination thresholds.</p>
 </ul>
 </dd>
 <dt>Code example:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">actions</span>
 <span class="go">    {&#39;a1&#39;: {&#39;comment&#39;: &#39;RandomPerformanceTableau() generated.&#39;, &#39;name&#39;: &#39;random decision action&#39;},</span>
@@ -4731,11 +4713,11 @@ matching the RandomLinearVotingProfiles class (see the votingDigraphs module)</p
 <p>Obsolete dummy class for backports.</p>
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="#technical-label"><span>Installation</span></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="outrankingdigraphs-module">
 <span id="outrankingdigraphs-label"></span><h2>outrankingDigraphs module<a class="headerlink" href="#outrankingdigraphs-module" title="Permalink to this headline">¶</a></h2>
-<p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#outrankingdigraphs-tutorial-label"><span>Working with the outrankingDigraphs module</span></a></p>
+<p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#outrankingdigraphs-tutorial-label"><span class="std std-ref">Working with the outrankingDigraphs module</span></a></p>
 <span class="target" id="module-outrankingDigraphs"></span><dl class="class">
 <dt id="outrankingDigraphs.BipolarIntegerOutrankingDigraph">
 <em class="property">class </em><code class="descclassname">outrankingDigraphs.</code><code class="descname">BipolarIntegerOutrankingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>coalition=None</em>, <em>hasBipolarVeto=True</em>, <em>hasSymmetricThresholds=True</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.BipolarIntegerOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
@@ -5094,7 +5076,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -5314,7 +5296,7 @@ robustness anaylsis.</p>
 <p>xmlrpc-cgi Proxy Server for accessing on-line
 a Rubis Rest Solver.</p>
 <p>Example Python3 session:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">RubisRestServer</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">RubisRestServer</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span> <span class="o">=</span> <span class="n">RubisRestServer</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span><span class="o">.</span><span class="n">ping</span><span class="p">()</span>
 <span class="go">*************************************************</span>
@@ -5324,7 +5306,7 @@ a Rubis Rest Solver.</p>
 <span class="go">* R. Bisdorff (c) 2009-2013                     *</span>
 <span class="go">* November 2013, version REST/D4 1.1            *</span>
 <span class="go">*************************************************</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">perfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span><span class="o">.</span><span class="n">submitProblem</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="go">The problem submission was successful !</span>
@@ -5458,7 +5440,7 @@ neglecting all considerable large performance differences polarisations.</p>
 temporary unanimous outranking digraphs</p>
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="#technical-label"><span>Installation</span></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="module-sparseOutrankingDigraphs">
 <span id="sparseoutrankingdigraphs-module"></span><span id="sparseoutrankingdigraphs-label"></span><h2>sparseOutrankingDigraphs module<a class="headerlink" href="#module-sparseOutrankingDigraphs" title="Permalink to this headline">¶</a></h2>
@@ -5664,10 +5646,10 @@ Components are stored in an ordered dictionary.</p>
 <dt id="sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showShort">
 <code class="descname">showShort</code><span class="sig-paren">(</span><em>fileName=None</em>, <em>WithFileSize=True</em><span class="sig-paren">)</span><a class="headerlink" href="#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showShort" title="Permalink to this definition">¶</a></dt>
 <dd><p>Default (__repr__) presentation method for big outranking digraphs instances:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="go">*----- show short --------------*</span>
 <span class="go">Instance name     : randomCBperftab_mp</span>
 <span class="go"># Actions         : 100</span>
@@ -5711,12 +5693,12 @@ the method returns a htlm table with the sorting result.</p>
 <code class="descname">computeDecompositionSummaryStatistics</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sparseOutrankingDigraphs.SparseOutrankingDigraph.computeDecompositionSummaryStatistics" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the summary of the distribution of the length of
 the components as follows:</p>
-<div class="highlight-python"><div class="highlight"><pre>summary = {&#39;max&#39;: maxLength,
-           &#39;median&#39;:medianLength,
-           &#39;mean&#39;:meanLength,
-           &#39;stdev&#39;: stdLength,
-           &#39;fillrate&#39;: fillrate,
-                      (see computeFillRate()}
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">summary</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="n">maxLength</span><span class="p">,</span>
+           <span class="s1">&#39;median&#39;</span><span class="p">:</span><span class="n">medianLength</span><span class="p">,</span>
+           <span class="s1">&#39;mean&#39;</span><span class="p">:</span><span class="n">meanLength</span><span class="p">,</span>
+           <span class="s1">&#39;stdev&#39;</span><span class="p">:</span> <span class="n">stdLength</span><span class="p">,</span>
+           <span class="s1">&#39;fillrate&#39;</span><span class="p">:</span> <span class="n">fillrate</span><span class="p">,</span>
+                      <span class="p">(</span><span class="n">see</span> <span class="n">computeFillRate</span><span class="p">()}</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -5766,22 +5748,22 @@ is by convention 0.0 at determination level 0.0 .</p>
 <dd><p>export GraphViz dot file for weak order (Hasse diagram) drawing
 filtering from SortingDigraph instances.</p>
 <p>Example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s">&#39;==&gt;&gt; Testing graph viz export of sorting Hasse diagram&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span>  <span class="o">=</span> <span class="bp">True</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; Testing graph viz export of sorting Hasse diagram&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MP</span>  <span class="o">=</span> <span class="kc">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nbrActions</span><span class="o">=</span><span class="mi">100</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>
 <span class="gp">... </span>                        <span class="n">Threading</span><span class="o">=</span><span class="n">MP</span><span class="p">,</span>
 <span class="gp">... </span>                        <span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">CopyPerfTab</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
-<span class="gp">... </span>                            <span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s">&#39;average&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                            <span class="n">componentRankingRule</span><span class="o">=</span><span class="s">&#39;Copeland&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                            <span class="n">LowerClosed</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">CopyPerfTab</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+<span class="gp">... </span>                            <span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                            <span class="n">componentRankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                            <span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="gp">... </span>                            <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
 <span class="gp">... </span>                           <span class="n">Threading</span><span class="o">=</span><span class="n">MP</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
-<span class="gp">... </span>                           <span class="c">#tempDir=&#39;.&#39;,</span>
+<span class="gp">... </span>                           <span class="c1">#tempDir=&#39;.&#39;,</span>
 <span class="gp">... </span>                            <span class="n">nbrOfThreads</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
-<span class="gp">... </span>                            <span class="n">Comments</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">bg</span><span class="p">)</span>
+<span class="gp">... </span>                            <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">bg</span><span class="p">)</span>
 <span class="go">*----- show short --------------*</span>
 <span class="go">Instance name     : randomCBperftab_mp</span>
 <span class="go"># Actions         : 100</span>
@@ -5905,10 +5887,10 @@ the diagonal outranking components of the sparse outranking digraph.</p>
 <dd>&#8216;negative&#8217;: &#8216;-&#8216;, &#8216;min&#8217;: &#8216;┴&#8217;}</dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">bg</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">bg</span><span class="p">)</span>
 <span class="go">*----- show short --------------*</span>
 <span class="go">Instance name     : randomCBperftab_mp</span>
 <span class="go"># Actions         : 50</span>
@@ -5993,7 +5975,7 @@ the diagonal outranking components of the sparse outranking digraph.</p>
 
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="#technical-label"><span>Installation</span></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="module-sortingDigraphs">
 <span id="sortingdigraphs-module"></span><span id="sortingdigraphs-label"></span><h2>sortingDigraphs module<a class="headerlink" href="#module-sortingDigraphs" title="Permalink to this headline">¶</a></h2>
@@ -6011,10 +5993,10 @@ If none is given, then a default profile with the limiting quartiles Q0,Q1,Q2, Q
 By default upper closed limits of categories are supposed to be used in the sorting.</p>
 </div>
 <p>Example Python3 session:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="kn">import</span> <span class="n">QuantilesSortingDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="k">import</span> <span class="n">QuantilesSortingDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-<span class="gp">... </span>                               <span class="n">weightDistribution</span><span class="o">=</span><span class="s">&#39;equiobjectives&#39;</span><span class="p">)</span>
+<span class="gp">... </span>                               <span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;equiobjectives&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">qs</span> <span class="o">=</span> <span class="n">QuantilesSortingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">limitingQuantiles</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">qs</span><span class="o">.</span><span class="n">showSorting</span><span class="p">()</span>
 <span class="go">*--- Sorting results in descending order ---*</span>
@@ -6031,7 +6013,7 @@ By default upper closed limits of categories are supposed to be used in the sort
 <span class="go">]0.43-0.57] : [&#39;a05&#39;]</span>
 <span class="go">]0.29-0.57] : [&#39;a06&#39;]</span>
 <span class="go">]0.29-0.43] : [&#39;a07&#39;, &#39;a02&#39;, &#39;a01&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">qs</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;quantilesSorting&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qs</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;quantilesSorting&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="_images/quantilesSorting.png" src="_images/quantilesSorting.png" />
@@ -6177,26 +6159,26 @@ respecting the order of the categories.</p>
 </ul>
 </div></blockquote>
 <p>Template of required data for a 4-sorting:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">categories</span> <span class="o">=</span> <span class="p">{</span>
-              <span class="s">&#39;c1&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;week&#39;</span><span class="p">,</span><span class="s">&#39;order&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-                      <span class="s">&#39;lowLimit&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span><span class="s">&#39;highLimit&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
-                      <span class="s">&#39;comment&#39;</span><span class="p">:</span> <span class="s">&#39;lowest category&#39;</span><span class="p">,},</span>
-              <span class="s">&#39;c2&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;ok&#39;</span><span class="p">,</span><span class="s">&#39;order&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-                      <span class="s">&#39;lowLimit&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span><span class="s">&#39;highLimit&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
-                      <span class="s">&#39;comment&#39;</span><span class="p">:</span> <span class="s">&#39;medium category&#39;</span><span class="p">,},</span>
-              <span class="s">&#39;c3&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;good&#39;</span><span class="p">,</span><span class="s">&#39;order&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-                      <span class="s">&#39;lowLimit&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span><span class="s">&#39;highLimit&#39;</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span>
-                      <span class="s">&#39;comment&#39;</span><span class="p">:</span> <span class="s">&#39;highest category&#39;</span><span class="p">,},</span>
-              <span class="s">&#39;c4&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;excellent&#39;</span><span class="p">,</span><span class="s">&#39;order&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-                      <span class="s">&#39;lowLimit&#39;</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span><span class="s">&#39;highLimit&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-                      <span class="s">&#39;comment&#39;</span><span class="p">:</span> <span class="s">&#39;highest category&#39;</span><span class="p">,},</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">categories</span> <span class="o">=</span> <span class="p">{</span>
+              <span class="s1">&#39;c1&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;week&#39;</span><span class="p">,</span><span class="s1">&#39;order&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                      <span class="s1">&#39;lowLimit&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span><span class="s1">&#39;highLimit&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+                      <span class="s1">&#39;comment&#39;</span><span class="p">:</span> <span class="s1">&#39;lowest category&#39;</span><span class="p">,},</span>
+              <span class="s1">&#39;c2&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;ok&#39;</span><span class="p">,</span><span class="s1">&#39;order&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                      <span class="s1">&#39;lowLimit&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span><span class="s1">&#39;highLimit&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+                      <span class="s1">&#39;comment&#39;</span><span class="p">:</span> <span class="s1">&#39;medium category&#39;</span><span class="p">,},</span>
+              <span class="s1">&#39;c3&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">,</span><span class="s1">&#39;order&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+                      <span class="s1">&#39;lowLimit&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span><span class="s1">&#39;highLimit&#39;</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span>
+                      <span class="s1">&#39;comment&#39;</span><span class="p">:</span> <span class="s1">&#39;highest category&#39;</span><span class="p">,},</span>
+              <span class="s1">&#39;c4&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;excellent&#39;</span><span class="p">,</span><span class="s1">&#39;order&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+                      <span class="s1">&#39;lowLimit&#39;</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span><span class="s1">&#39;highLimit&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+                      <span class="s1">&#39;comment&#39;</span><span class="p">:</span> <span class="s1">&#39;highest category&#39;</span><span class="p">,},</span>
  <span class="p">}</span>
-<span class="n">criteriaCategoryLimits</span><span class="p">[</span><span class="s">&#39;LowerClosed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span> <span class="c"># default</span>
+<span class="n">criteriaCategoryLimits</span><span class="p">[</span><span class="s1">&#39;LowerClosed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># default</span>
 <span class="n">criteriaCategoryLimits</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s">&#39;c1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;minimum&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s">&#39;maximum&#39;</span><span class="p">:</span><span class="mi">25</span><span class="p">},</span>
-        <span class="s">&#39;c2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;minimum&#39;</span><span class="p">:</span><span class="mi">25</span><span class="p">,</span> <span class="s">&#39;maximum&#39;</span><span class="p">:</span><span class="mi">50</span><span class="p">},</span>
-        <span class="s">&#39;c3&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;minimum&#39;</span><span class="p">:</span><span class="mi">50</span><span class="p">,</span> <span class="s">&#39;maximum&#39;</span><span class="p">:</span><span class="mi">75</span><span class="p">},</span>
-        <span class="s">&#39;c4&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;minimum&#39;</span><span class="p">:</span><span class="mi">75</span><span class="p">,</span> <span class="s">&#39;maximum&#39;</span><span class="p">:</span><span class="mi">200</span><span class="p">},</span>
+        <span class="s1">&#39;c1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;minimum&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;maximum&#39;</span><span class="p">:</span><span class="mi">25</span><span class="p">},</span>
+        <span class="s1">&#39;c2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;minimum&#39;</span><span class="p">:</span><span class="mi">25</span><span class="p">,</span> <span class="s1">&#39;maximum&#39;</span><span class="p">:</span><span class="mi">50</span><span class="p">},</span>
+        <span class="s1">&#39;c3&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;minimum&#39;</span><span class="p">:</span><span class="mi">50</span><span class="p">,</span> <span class="s1">&#39;maximum&#39;</span><span class="p">:</span><span class="mi">75</span><span class="p">},</span>
+        <span class="s1">&#39;c4&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;minimum&#39;</span><span class="p">:</span><span class="mi">75</span><span class="p">,</span> <span class="s1">&#39;maximum&#39;</span><span class="p">:</span><span class="mi">200</span><span class="p">},</span>
  <span class="p">}</span>
 </pre></div>
 </div>
@@ -6210,8 +6192,8 @@ on each criteria. By default lower-closed limts of categories are
 supposed to be used in the sorting.</p>
 </div>
 <p>Example Python3 session:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="kn">import</span> <span class="n">SortingDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="k">import</span> <span class="n">SortingDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
 <span class="go">[&#39;a01&#39;, &#39;a02&#39;, &#39;a03&#39;, &#39;a04&#39;, &#39;a05&#39;, &#39;a06&#39;, &#39;a07&#39;, &#39;a08&#39;,</span>
@@ -6229,7 +6211,7 @@ supposed to be used in the sorting.</p>
 <span class="go"># Notice that some alternatives, like a04, a09, a11 and a12 are sorted</span>
 <span class="go"># into more than one adjacent category. Weak ordering the sorting result</span>
 <span class="go"># into ordered adjacent categories gives following result:</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">so</span><span class="o">.</span><span class="n">showWeakOrder</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s">&#39;average&#39;</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">so</span><span class="o">.</span><span class="n">showWeakOrder</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">Weak ordering by average normalized 5-sorting limits</span>
 <span class="go">]  &gt;  -80.0] : [&#39;a02&#39;, &#39;a03&#39;]</span>
 <span class="go">]100.0-60.0] : [&#39;a11&#39;]</span>
@@ -6378,27 +6360,27 @@ the high category limit.</p>
 
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="#technical-label"><span>Installation</span></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="votingdigraphs-module">
 <span id="votingdigraphs-label"></span><h2>votingDigraphs module<a class="headerlink" href="#votingdigraphs-module" title="Permalink to this headline">¶</a></h2>
-<p>A tutorial with coding examples is available here: <a class="reference internal" href="#votingdigraphs-label"><span>votingDigraphs module</span></a></p>
+<p>A tutorial with coding examples is available here: <a class="reference internal" href="#votingdigraphs-label"><span class="std std-ref">votingDigraphs module</span></a></p>
 <span class="target" id="module-votingDigraphs"></span><dl class="class">
 <dt id="votingDigraphs.ApprovalVotingProfile">
 <em class="property">class </em><code class="descclassname">votingDigraphs.</code><code class="descname">ApprovalVotingProfile</code><span class="sig-paren">(</span><em>fileVotingProfile=None</em><span class="sig-paren">)</span><a class="headerlink" href="#votingDigraphs.ApprovalVotingProfile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#votingDigraphs.VotingProfile" title="votingDigraphs.VotingProfile"><code class="xref py py-class docutils literal"><span class="pre">votingDigraphs.VotingProfile</span></code></a></p>
 <p>A specialised class for approval voting profiles</p>
 <p>Structure:</p>
-<div class="highlight-python"><div class="highlight"><pre>candidates = {&#39;a&#39;: {&#39;name&#39;: ...},
-              &#39;b&#39;: {&#39;name&#39;: ...},
-              ..., ...}
-voters = {&#39;v1&#39;:{&#39;weight&#39;:1.0},&#39;v2&#39;:{&#39;weight&#39;:1.0}, ...}
-## each specifies the subset of candidates he approves on
-approvalBallot = {
-    &#39;v1&#39; : [&#39;b&#39;],
-    &#39;v2&#39; : [&#39;a&#39;,&#39;b&#39;],
-    ...
-    }
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">candidates</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">},</span>
+              <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">},</span>
+              <span class="o">...</span><span class="p">,</span> <span class="o">...</span><span class="p">}</span>
+<span class="n">voters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;v1&#39;</span><span class="p">:{</span><span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">},</span><span class="s1">&#39;v2&#39;</span><span class="p">:{</span><span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">},</span> <span class="o">...</span><span class="p">}</span>
+<span class="c1">## each specifies the subset of candidates he approves on</span>
+<span class="n">approvalBallot</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;v1&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;v2&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">],</span>
+    <span class="o">...</span>
+    <span class="p">}</span>
 </pre></div>
 </div>
 <dl class="method">
@@ -6443,7 +6425,7 @@ bipolar-valued marginal pairwise majority difference digraphs.</p>
 </div>
 </div></blockquote>
 <p>Example Python3 session</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">votingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">votingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">101</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">showLinearBallots</span><span class="p">()</span>
 <span class="go">v101(1.0):   [&#39;a5&#39;, &#39;a1&#39;, &#39;a2&#39;, &#39;a4&#39;, &#39;a3&#39;]</span>
@@ -6456,7 +6438,7 @@ bipolar-valued marginal pairwise majority difference digraphs.</p>
 <span class="go">v84(1.0):    [&#39;a3&#39;, &#39;a1&#39;, &#39;a2&#39;, &#39;a4&#39;, &#39;a5&#39;]</span>
 <span class="gp">...</span>
 <span class="gp">...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">CondorcetDigraph</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">hasIntegerValuation</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">CondorcetDigraph</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">hasIntegerValuation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
 <span class="go">* ---- Relation Table -----</span>
 <span class="go"> S   |  &#39;a1&#39;  &#39;a2&#39;   &#39;a3&#39;   &#39;a4&#39;  &#39;a5&#39;        </span>
@@ -6523,19 +6505,19 @@ on the basis of an approval ballot.</p>
 <dd><p>Bases: <a class="reference internal" href="#votingDigraphs.VotingProfile" title="votingDigraphs.VotingProfile"><code class="xref py py-class docutils literal"><span class="pre">votingDigraphs.VotingProfile</span></code></a></p>
 <p>A specialised class for linear voting profiles</p>
 <p>Structure:</p>
-<div class="highlight-python"><div class="highlight"><pre>candidates = {&#39;a&#39;: ,&#39;b&#39;:  ,&#39;c&#39;, ..., ...}
-voters = {&#39;1&#39;:{&#39;weight&#39;:1.0},&#39;2&#39;:{&#39;weight&#39;:1.0}, ...}
-## each specifies a a ranked list of candidates
-## from the best to the worst
-linearBallot = {
-    &#39;1&#39; : [&#39;b&#39;,&#39;c&#39;,&#39;a&#39;, ...],
-    &#39;2&#39; : [&#39;a&#39;,&#39;b&#39;,&#39;c&#39;, ...],
-    ...
-    }
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">candidates</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">:</span>  <span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="o">...</span><span class="p">}</span>
+<span class="n">voters</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;1&#39;</span><span class="p">:{</span><span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">},</span><span class="s1">&#39;2&#39;</span><span class="p">:{</span><span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">},</span> <span class="o">...</span><span class="p">}</span>
+<span class="c1">## each specifies a a ranked list of candidates</span>
+<span class="c1">## from the best to the worst</span>
+<span class="n">linearBallot</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;1&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+    <span class="s1">&#39;2&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+    <span class="o">...</span>
+    <span class="p">}</span>
 </pre></div>
 </div>
 <p>Sample Python3 session</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">votingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">votingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">showLinearBallots</span><span class="p">()</span>
 <span class="go">voters(weight)       candidates rankings</span>
@@ -6682,29 +6664,29 @@ from a shuffled list of candidates for each voter.</p>
 <dl class="class">
 <dt id="votingDigraphs.VotingProfile">
 <em class="property">class </em><code class="descclassname">votingDigraphs.</code><code class="descname">VotingProfile</code><span class="sig-paren">(</span><em>fileVotingProfile=None</em><span class="sig-paren">)</span><a class="headerlink" href="#votingDigraphs.VotingProfile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>A general class for storing voting profiles.</p>
 <p>General structure:</p>
-<div class="highlight-python"><div class="highlight"><pre>candidates = {&#39;a&#39;: ...,&#39;b&#39;: ...,&#39;c&#39;: ...,  ... }
-voters = {
-&#39;1&#39;:{&#39;weight&#39;:1.0},
-&#39;2&#39;:{&#39;weight&#39;:1.0},
-...,
-}
-ballot = {     # voters x candidates x candidates
-    &#39;1&#39;: {     # bipolar characteristic {-1,0,1} of each voter&#39;s
-          &#39;a&#39;: { &#39;a&#39;:0,&#39;b&#39;:-1,&#39;c&#39;:0, ...},   # pairwise preferences
-          &#39;b&#39;: { &#39;a&#39;:1,&#39;b&#39;:0, &#39;c&#39;:1, ...},
-          &#39;c&#39;: { &#39;a&#39;:0,&#39;b&#39;:-1,&#39;c&#39;:0, ...},
-          ...,
-    },
-    &#39;2&#39;: { &#39;a&#39;: { &#39;a&#39;:0, &#39;b&#39;:0, &#39;c&#39;:1, ...},
-           &#39;b&#39;: { &#39;a&#39;:0, &#39;b&#39;:0, &#39;c&#39;:1, ...},
-           &#39;c&#39;: { &#39;a&#39;:-1,&#39;b&#39;:-1,&#39;c&#39;:0, ...},
-           ...,
-    },
-    ...,
-}
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">candidates</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span>  <span class="o">...</span> <span class="p">}</span>
+<span class="n">voters</span> <span class="o">=</span> <span class="p">{</span>
+<span class="s1">&#39;1&#39;</span><span class="p">:{</span><span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">},</span>
+<span class="s1">&#39;2&#39;</span><span class="p">:{</span><span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">},</span>
+<span class="o">...</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">ballot</span> <span class="o">=</span> <span class="p">{</span>     <span class="c1"># voters x candidates x candidates</span>
+    <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="p">{</span>     <span class="c1"># bipolar characteristic {-1,0,1} of each voter&#39;s</span>
+          <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="o">...</span><span class="p">},</span>   <span class="c1"># pairwise preferences</span>
+          <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="o">...</span><span class="p">},</span>
+          <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="o">...</span><span class="p">},</span>
+          <span class="o">...</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;2&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="o">...</span><span class="p">},</span>
+           <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="o">...</span><span class="p">},</span>
+           <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="o">...</span><span class="p">},</span>
+           <span class="o">...</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="o">...</span><span class="p">,</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <dl class="method">
@@ -6727,11 +6709,11 @@ ballot = {     # voters x candidates x candidates
 
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="#technical-label"><span>Installation</span></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="linearorders-module">
 <span id="linearorders-label"></span><h2>linearOrders module<a class="headerlink" href="#linearorders-module" title="Permalink to this headline">¶</a></h2>
-<p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#linearvoting-tutorial-label"><span>Computing the winner of an election</span></a></p>
+<p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#linearvoting-tutorial-label"><span class="std std-ref">Computing the winner of an election</span></a></p>
 <span class="target" id="module-linearOrders"></span><dl class="class">
 <dt id="linearOrders.CopelandOrder">
 <em class="property">class </em><code class="descclassname">linearOrders.</code><code class="descname">CopelandOrder</code><span class="sig-paren">(</span><em>other</em>, <em>coDual=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#linearOrders.CopelandOrder" title="Permalink to this definition">¶</a></dt>
@@ -6873,7 +6855,7 @@ outdegrees of the valued digraph &#8216;other&#8217;.</p>
 a given bipolar-valued Digraph instance</p>
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="#technical-label"><span>Installation</span></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="module-weakOrders">
 <span id="weakorders-module"></span><span id="weakorders-label"></span><h2>weakOrders module<a class="headerlink" href="#module-weakOrders" title="Permalink to this headline">¶</a></h2>
@@ -6905,8 +6887,8 @@ Kohler linear best ordering and an Arrow-Raynaud linear worst ordering.</p>
 of the principal orders of the variance-covariance of in- 
 (Colwise) and outdegrees (Rowwise).</p>
 <p>Example Python3 session with same outranking digraph g as shown in the RankingByChoosingDigraph example session (see below).</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="kn">import</span> <span class="n">PrincipalInOutDegreesOrdering</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pro</span> <span class="o">=</span> <span class="n">PrincipalInOutDegreesOrdering</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">imageType</span><span class="o">=</span><span class="s">&quot;png&quot;</span><span class="p">,</span>\ 
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="k">import</span> <span class="n">PrincipalInOutDegreesOrdering</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pro</span> <span class="o">=</span> <span class="n">PrincipalInOutDegreesOrdering</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">imageType</span><span class="o">=</span><span class="s2">&quot;png&quot;</span><span class="p">,</span>\ 
 <span class="go">                 plotFileName=&quot;proWeakOrdering&quot;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pro</span><span class="o">.</span><span class="n">showWeakOrder</span><span class="p">()</span>
 <span class="go">Ranking by Choosing and Rejecting</span>
@@ -6918,7 +6900,7 @@ of the principal orders of the variance-covariance of in-
 <span class="go">     3rd last ranked [&#39;a07&#39;] (1.00)</span>
 <span class="go">   2nd last ranked [&#39;a01&#39;] (1.00)</span>
 <span class="go"> 1st last ranked [&#39;a03&#39;] (1.00)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pro</span><span class="o">.</span><span class="n">showPrincipalScores</span><span class="p">(</span><span class="n">ColwiseOrder</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pro</span><span class="o">.</span><span class="n">showPrincipalScores</span><span class="p">(</span><span class="n">ColwiseOrder</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">List of principal scores</span>
 <span class="go">Column wise covariance ordered</span>
 <span class="go">action       colwise         rowwise</span>
@@ -6979,11 +6961,11 @@ of the principal orders of the variance-covariance of in-
 <p>Specialization of the abstract WeakOrder class for 
 ranking-by-Rubis-choosing orderings.</p>
 <p>Example python3 session:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>\ 
 <span class="go">            numberOfCriteria=5,\ </span>
 <span class="go">            weightDistribution=&#39;equiobjectives&#39;)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
 <span class="go">* ---- Relation Table -----</span>
 <span class="go">  S   |   &#39;a01&#39;  &#39;a02&#39;  &#39;a03&#39;  &#39;a04&#39;  &#39;a05&#39;  &#39;a06&#39;  &#39;a07&#39;   </span>
@@ -6995,7 +6977,7 @@ ranking-by-Rubis-choosing orderings.</p>
 <span class="go">&#39;a05&#39; |   +0.00  -0.67  -0.67  -1.00  +0.00  -0.17  +0.33  </span>
 <span class="go">&#39;a06&#39; |   +0.33  +0.00  -0.33  -0.67  +0.50  +0.00  +1.00  </span>
 <span class="go">&#39;a07&#39; |   +0.33  +0.00  -0.33  -0.67  +0.50  +0.17  +0.00  </span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="kn">import</span> <span class="n">RankingByChoosingDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="k">import</span> <span class="n">RankingByChoosingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span> <span class="o">=</span> <span class="n">RankingByChoosingDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span><span class="o">.</span><span class="n">showWeakOrder</span><span class="p">()</span>
 <span class="go">Ranking by Choosing and Rejecting</span>
@@ -7005,7 +6987,7 @@ ranking-by-Rubis-choosing orderings.</p>
 <span class="go">    3rd last ranked [&#39;a06&#39;] (1.00)</span>
 <span class="go">   2nd last ranked [&#39;a07&#39;] (0.50)</span>
 <span class="go">  1st last ranked [&#39;a01&#39;, &#39;a05&#39;] (0.58)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;weakOrdering&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;weakOrdering&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to converse-dual_rel_randomCBperftab.dot</span>
 <span class="go">dot -Grankdir=BT -Tpng converse-dual_rel_randomCBperftab.dot </span>
@@ -7013,7 +6995,7 @@ ranking-by-Rubis-choosing orderings.</p>
 </pre></div>
 </div>
 <img alt="_images/weakOrdering.png" src="_images/weakOrdering.png" />
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span><span class="o">.</span><span class="n">showOrderedRelationTable</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s">&quot;decreasing&quot;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span><span class="o">.</span><span class="n">showOrderedRelationTable</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;decreasing&quot;</span><span class="p">)</span>
 <span class="go">* ---- Relation Table -----</span>
 <span class="go">  S   |  &#39;a03&#39;  &#39;a04&#39;  &#39;a02&#39;  &#39;a06&#39;  &#39;a07&#39;  &#39;a01&#39;  &#39;a05&#39;      </span>
 <span class="go"> -----|------------------------------------------------------------</span>
@@ -7119,29 +7101,29 @@ valued self relation.</p>
 weak orderings resulting from the epistemic
 disjunctive fusion (omax operator) of a list of rankings.</p>
 <p>Example application:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="kn">import</span> <span class="n">WeakRankingOrder</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="kn">import</span> <span class="n">PreRankedOutrankingDigraph</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="k">import</span> <span class="n">WeakRankingOrder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="k">import</span> <span class="n">PreRankedOutrankingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pr</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s">&#39;average&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pr</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r1</span> <span class="o">=</span> <span class="n">qr</span><span class="o">.</span><span class="n">boostedRanking</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pro</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s">&#39;optimistic&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pro</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;optimistic&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r2</span> <span class="o">=</span> <span class="n">pro</span><span class="o">.</span><span class="n">boostedRanking</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">prp</span> <span class="o">=</span> <span class="n">QuantilesRankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s">&#39;pessimistic&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prp</span> <span class="o">=</span> <span class="n">QuantilesRankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;pessimistic&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r3</span> <span class="o">=</span> <span class="n">prp</span><span class="o">.</span><span class="n">boostedRanking</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">wqr</span> <span class="o">=</span> <span class="n">WeakQuantilesRankingOrder</span><span class="p">(</span><span class="n">pr</span><span class="p">,[</span><span class="n">r1</span><span class="p">,</span><span class="n">r2</span><span class="p">,</span><span class="n">r3</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">wqr</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s">&#39;partialOrdering&#39;</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s">&quot;pdf&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wqr</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;partialOrdering&#39;</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s2">&quot;pdf&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="#technical-label"><span>Installation</span></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="module-randomNumbers">
 <span id="randomnumbers-module"></span><span id="randomnumbers-label"></span><h2>randomNumbers module<a class="headerlink" href="#module-randomNumbers" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="randomNumbers.CauchyRandomVariable">
 <em class="property">class </em><code class="descclassname">randomNumbers.</code><code class="descname">CauchyRandomVariable</code><span class="sig-paren">(</span><em>position=0.0</em>, <em>scale=1.0</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomNumbers.CauchyRandomVariable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Cauchy random variable generator.</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -7166,7 +7148,7 @@ disjunctive fusion (omax operator) of a list of rankings.</p>
 <dl class="class">
 <dt id="randomNumbers.DiscreteRandomVariable">
 <em class="property">class </em><code class="descclassname">randomNumbers.</code><code class="descname">DiscreteRandomVariable</code><span class="sig-paren">(</span><em>discreteLaw=None</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomNumbers.DiscreteRandomVariable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Discrete random variable generator</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -7179,7 +7161,7 @@ disjunctive fusion (omax operator) of a list of rankings.</p>
 </div>
 </dd>
 <dt>Example usage:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="kn">import</span> <span class="n">DiscreteRandomVariable</span>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="k">import</span> <span class="n">DiscreteRandomVariable</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">discreteLaw</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mf">0.0478</span><span class="p">,</span>
 <span class="go">                   1:0.3349,</span>
 <span class="go">                   2:0.2392,</span>
@@ -7211,7 +7193,7 @@ disjunctive fusion (omax operator) of a list of rankings.</p>
 <span class="go">        print  (&#39;%s, %d, %.3f, %.3f&#39; % (x, frequencies[x],</span>
 <span class="go">                  float(frequencies[x])/float(sampleSize),</span>
 <span class="go">                  discreteLaw[x]))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="p">(</span><span class="s">&#39;# of valid samples = </span><span class="si">%d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">counts</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;# of valid samples = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">counts</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd>
@@ -7227,7 +7209,7 @@ disjunctive fusion (omax operator) of a list of rankings.</p>
 <dl class="class">
 <dt id="randomNumbers.ExtendedTriangularRandomVariable">
 <em class="property">class </em><code class="descclassname">randomNumbers.</code><code class="descname">ExtendedTriangularRandomVariable</code><span class="sig-paren">(</span><em>lowLimit=0.0</em>, <em>highLimit=1.0</em>, <em>mode=None</em>, <em>probRepart=0.5</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#randomNumbers.ExtendedTriangularRandomVariable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="http://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Extended triangular random variable generator</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -7247,14 +7229,14 @@ disjunctive fusion (omax operator) of a list of rankings.</p>
 
 </dd></dl>
 
-<p>Back to the <a class="reference internal" href="#technical-label"><span>Installation</span></a></p>
+<p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="indices-and-tables">
 <h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><a class="reference internal" href="genindex.html"><span>Index</span></a></li>
-<li><a class="reference internal" href="py-modindex.html"><span>Module Index</span></a></li>
-<li><a class="reference internal" href="search.html"><span>Search Page</span></a></li>
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
 </ul>
 </div>
 <div class="section" id="tutorials">
@@ -7299,21 +7281,18 @@ disjunctive fusion (omax operator) of a list of rankings.</p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/techDoc.txt"
+      <li><a href="_sources/techDoc.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -7332,12 +7311,12 @@ disjunctive fusion (omax operator) of a list of rankings.</p>
         <li class="right" >
           <a href="tutorial.html" title="Tutorials of the Digraph3 resources"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Digraph3 3.4-769 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Digraph3 3.4-769 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2012-2014, Raymond Bisdorff.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+        &#169; Copyright 2012-2014, Raymond Bisdorff.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
     </div>
   </body>
 </html>

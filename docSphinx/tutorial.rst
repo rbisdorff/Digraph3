@@ -38,15 +38,16 @@ Three download options are given:
 
 1. Either (easiest under Linux or Mac OS-X), by using a git client::
 
-     ..$ git clone https://github.com/rbisdorff/Digraph3 
+   ..$ git clone https://github.com/rbisdorff/Digraph3 
 
 2. or a subversion client::
 
-     ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3 
+   ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3 
 
-3. Or, with a browser access, download and extract the latest distribution tar.gz archive from this page::
+3. Or, with a browser access, download and extract the latest distribution tar.gz archive from this page:
 
-     http://leopold-loewenheim.uni.lu/Digraph3/dist/
+   http://leopold-loewenheim.uni.lu/Digraph3/dist/
+
 
 Starting a python3 session
 ..........................
@@ -61,7 +62,7 @@ You may start an interactive Python3 session in the :code:`Digraph3` directory f
 	>>> dg = Digraph('test/testdigraph')
 	>>> dg.save('tutorialDigraph')
 	*--- Saving digraph in file: <tutorialDigraph.py> ---*
-        >>> 
+    >>> 
 
 ``Digraph`` object structure
 ............................
@@ -82,7 +83,7 @@ Permanent storage
 The :code:`dg.save('tutorialDigraph')` command stores the digraph *dg* in a file named :code:`tutorialDigraph.py` with the following content::
 
        # Saved digraph instance
-       actionset = ['1','2','3','4','5']
+       actionset = {'1','2','3','4','5'}
        valuationdomain = {'min': -1,
                           'med': 0,
                           'max': 1}
