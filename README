@@ -1,7 +1,7 @@
 #--------------------------------------------------------------------------
 # Python3 implementation of the Digraph software
 # Current revision Py35
-# Copyright (C) 2006-2015 Raymond Bisdorff
+# Copyright (C) 2006-2017 Raymond Bisdorff
 #
 #    This resource is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -19,13 +19,20 @@
 #
 #-----------------------------------------------------------------------------
 
+This Python3 software resources implement decision aid algorithms useful in the field of 
+Algorithmic Decision Theory and more specifically 
+in outranking based Multiple Criteria Decision Aid (MCDA).
+
+Technical documentation and tutorials are available under the following link:
+http://leopold-loewenheim.uni.lu/docDigraph3/
+
 Installation instructions:
 
 On a (Unix, Mac OSX) command line using git or subversion:
 
 ..$git clone https://github.com/rbisdorff/Digraph3
 
-or
+or,
 
 ..$svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
 
@@ -42,9 +49,6 @@ runs a nose test suite in the ./test directory
 .. /Digraph3$ make verboseTests
 runs a verbose (with stdout not captured) nose test suite 
 
-Technical documentation and tutorials are available under the following link:
-
-http://leopold-loewenheim.uni.lu/Digraph3/docSphinx/html/index.html
-
 Enjoy !!
 R Bisdorff
+http://leopold-loewenheim.uni.lu/bisdorff/
