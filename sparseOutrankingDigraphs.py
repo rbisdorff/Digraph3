@@ -2582,8 +2582,7 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
         
         print('Determinateness  : %.3f ' % self.computeDeterminateness() )
         print('\n')
-
- 
+    
 #######################################################################
 #######################################################################
 #----------test classes and methods ----------------

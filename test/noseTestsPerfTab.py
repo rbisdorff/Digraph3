@@ -285,4 +285,18 @@ def testHTMPerformanceHeatmap():
                                    Correlations=True,
                                    ndigits=4,
                                    Debug=False))
-    
+
+def testComputeQuantileOrder():
+    print('*------ test quantile order computation -----*')
+    t = RandomCBPerformanceTableau(numberOfCriteria=13,
+                                   numberOfActions=30,
+                                   weightDistribution='equiobjectives',
+                                   integerWeights=True,
+                                   Debug=False,
+                                   missingDataProbability=0.1,
+                                   seed=100,Threading=True,nbrCores=4)
+    res = t.computeQuantileOrder(Comments=True,Threading=True,nbrOfCPUs=4)
+    assert res == ['a22', 'a28', 'a26', 'a01', 'a20', 'a12', 'a24',
+                   'a19', 'a30', 'a14', 'a27', 'a17', 'a29', 'a16', 'a04',
+                   'a09', 'a10', 'a08', 'a02', 'a13', 'a11', 'a06', 'a21',
+                   'a07', 'a23', 'a03', 'a15', 'a25', 'a18', 'a05']
