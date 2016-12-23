@@ -1,0 +1,26 @@
+digraph G {
+graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",
+ fontsize = 12,
+ label = "\nweakOrders module (graphviz)\n R. Bisdorff, 2014", size="7,7",fontsize=10];
+a07 [shape = "circle", label = "a07", fontsize=10];
+a05 [shape = "circle", label = "a05", fontsize=10];
+a03 [shape = "circle", label = "a03", fontsize=10];
+a02 [shape = "circle", label = "a02", fontsize=10];
+a01 [shape = "circle", label = "a01", fontsize=10];
+a04 [shape = "circle", label = "a04", fontsize=10];
+a06 [shape = "circle", label = "a06", fontsize=10];
+{ rank = same; a03; }
+{ rank = same; a04; }
+{ rank = same; a05; }
+{ rank = same; a02; a07; a01; a06; }
+a03-> a04 [style="setlinewidth(1)",color=black] ;
+a03-> a05 [style="setlinewidth(1)",color=black] ;
+a03-> a06 [style="setlinewidth(1)",color=black] ;
+a04-> a02 [style="setlinewidth(1)",color=black] ;
+a04-> a07 [style="setlinewidth(1)",color=black] ;
+a04-> a01 [style="setlinewidth(1)",color=black] ;
+a05-> a02 [style="setlinewidth(1)",color=black] ;
+a05-> a07 [style="setlinewidth(1)",color=black] ;
+a05-> a01 [style="setlinewidth(1)",color=black] ;
+}
+ 
