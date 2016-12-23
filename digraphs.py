@@ -287,8 +287,8 @@ def isprime(n, precision=7):
 
     return True
 
-# https://comeoncodeon.wordpress.com/2010/09/18/pollard-rho-brent-integer-factorization/
 def pollard_brent(n):
+    # https://comeoncodeon.wordpress.com/2010/09/18/pollard-rho-brent-integer-factorization/
     if n % 2 == 0: return 2
     if n % 3 == 0: return 3
 
