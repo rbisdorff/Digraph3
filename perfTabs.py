@@ -1276,7 +1276,9 @@ The performance evaluations of each decision alternative on each criterion are g
         """
         Renders a linear ordering of the decision actions from a simulation of pre-ranked outranking digraphs.
 
-        The pre-ranking simulations range from quantiles=3 to max[10,len(self.actions)/10].
+        The pre-ranking simulations range by default from
+        quantiles=q0 to quantiles=min( 100, max(10,len(self.actions)/10]) ).
+
         The actions are ordered along a decreasing Borda score of their ranking results.
         
         """
@@ -1311,7 +1313,9 @@ The performance evaluations of each decision alternative on each criterion are g
         """
         Renders a linear ranking of the decision actions from a simulation of pre-ranked outranking digraphs.
 
-        The pre-ranking simulations range by default from quantiles=q0 to q1=max[10,len(self.actions)/10].
+        The pre-ranking simulations range by default from
+        quantiles=q0 to qantiles=min( 100, max(10,len(self.actions)/10) ).
+
         The actions are ordered along an increasing Borda score of their ranking results.
         
         """
