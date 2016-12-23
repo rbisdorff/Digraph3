@@ -1274,7 +1274,7 @@ The performance evaluations of each decision alternative on each criterion are g
 
     def computeQuantileOrder(self,q0=3,q1=0,Threading=False,nbrOfCPUs=1,Comments=False):
         """
-        Renders a linear ordering ordering of the decision actions from a simulation of pre-ranked outranking digraphs.
+        Renders a linear ordering of the decision actions from a simulation of pre-ranked outranking digraphs.
 
         The pre-ranking simulations range from quantiles=3 to max[10,len(self.actions)/10].
         The actions are ordered along a decreasing Borda score of their ranking results.
@@ -1306,6 +1306,22 @@ The performance evaluations of each decision alternative on each criterion are g
             print(bestStatistics)
             print(quantileOrder)
         return quantileOrder
+
+    def computeQuantileRanking(self,q0=3,q1=0,Threading=False,nbrOfCPUs=1,Comments=False):
+        """
+        Renders a linear ranking of the decision actions from a simulation of pre-ranked outranking digraphs.
+
+        The pre-ranking simulations range by default from quantiles=q0 to q1=max[10,len(self.actions)/10].
+        The actions are ordered along an increasing Borda score of their ranking results.
+        
+        """
+        ranking = self.computeQuantileOrder(q0=q0,q1=q1,\
+                                          Threading=Threading,nbrOfCPUs=nbrOfCPUs,\
+                                              Comments=Comments)
+        ranking.reverse()
+        if Comments:
+            print(ranking)
+        return ranking
         
     def computeQuantileSort(self):
         """

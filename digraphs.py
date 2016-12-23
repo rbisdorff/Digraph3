@@ -10475,8 +10475,7 @@ class CirculantDigraph(Digraph):
         self.name = 'c'+str(order)
         self.order = order
         self.circulants = circulants
-        actionlist = list(range(order+1))
-        actionlist.remove(0)
+        actionlist = list(range(1,order+1))
         actions = []
         for x in actionlist:
             actions.append(str(x))

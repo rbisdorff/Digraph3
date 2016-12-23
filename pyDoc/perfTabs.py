@@ -1271,7 +1271,42 @@ The performance evaluations of each decision alternative on each criterion are g
                                           
         html += '</table>\n'
         return html
-    
+
+    def computeQuantileOrder(self,q0=3,q1=0,Threading=False,nbrOfCPUs=1,Comments=False):
+        """
+        Renders a linear ordering ordering of the decision actions from a simulation of pre-ranked outranking digraphs.
+
+        The pre-ranking simulations range from quantiles=3 to max[10,len(self.actions)/10].
+        The actions are ordered along a decreasing Borda score of their ranking results.
+        
+        """
+        from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
+        from operator import itemgetter
+        n = len(self.actions)
+        kBestFrequency = OrderedDict([(x,[0 for r in range(n+1)]) for x in self.actions])
+        ordering = []
+        if q1 <= q0:
+            q1 = min(100,max(11,n//10))
+        for q in range(q0,q1):
+            pr = PreRankedOutrankingDigraph(self,quantiles=q,LowerClosed=False,
+                                    minimalComponentSize=1,
+                                    CopyPerfTab=True,Threading=Threading,
+                                    nbrOfCPUs=nbrOfCPUs)
+            for r in range(n):
+                rbest = pr.boostedOrder[r]
+                kBestFrequency[rbest][r] += 1
+        for x in self.actions:
+            stats = kBestFrequency[x]
+            for i in range(n):
+                stats[n] += (i+1)*stats[i]
+        Stats = [(x,-kBestFrequency[x][n],kBestFrequency[x][:-1]) for x in self.actions]
+        bestStatistics = sorted(Stats,key=itemgetter(1,2),reverse=True)
+        quantileOrder = [x[0] for x in bestStatistics]
+        if Comments:
+            print(bestStatistics)
+            print(quantileOrder)
+        return quantileOrder
+        
     def computeQuantileSort(self):
         """
         shows a sorting of the actions from decreasing majority quantiles
@@ -6572,7 +6607,7 @@ if __name__ == "__main__":
 ##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
     t = RandomCBPerformanceTableau(numberOfCriteria=13,
-                                   numberOfActions=7,
+                                   numberOfActions=30,
                                    weightDistribution='equiobjectives',
                                    integerWeights=True,
                                    Debug=False,

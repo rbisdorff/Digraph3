@@ -300,3 +300,6 @@ def testComputeQuantileOrder():
                    'a19', 'a30', 'a14', 'a27', 'a17', 'a29', 'a16', 'a04',
                    'a09', 'a10', 'a08', 'a02', 'a13', 'a11', 'a06', 'a21',
                    'a07', 'a23', 'a03', 'a15', 'a25', 'a18', 'a05']
+    res.reverse()
+    resrev = t.computeQuantileRanking()
+    assert resrev == res

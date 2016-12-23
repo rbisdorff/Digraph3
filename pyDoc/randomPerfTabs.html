@@ -106,7 +106,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="FullRandomPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="FullRandomPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'pref': 20, 'veto': 80, 'ind': 10, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="FullRandomPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'weakVeto': 60, 'pref': 20, 'ind': 10}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -192,6 +192,11 @@ Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbs
 evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
 
 <dl><dt><a name="FullRandomPerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True, WithMaxMin=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
+
+<dl><dt><a name="FullRandomPerformanceTableau-computeQuantileOrder"><strong>computeQuantileOrder</strong></a>(self, q0=3, q1=0, Threading=False, nbrOfCPUs=1, Comments=False)</dt><dd><tt>Renders&nbsp;a&nbsp;linear&nbsp;ordering&nbsp;ordering&nbsp;of&nbsp;the&nbsp;decision&nbsp;actions&nbsp;from&nbsp;a&nbsp;simulation&nbsp;of&nbsp;pre-ranked&nbsp;outranking&nbsp;digraphs.<br>
+&nbsp;<br>
+The&nbsp;pre-ranking&nbsp;simulations&nbsp;range&nbsp;from&nbsp;quantiles=3&nbsp;to&nbsp;max[10,len(self.<strong>actions</strong>)/10].<br>
+The&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;along&nbsp;a&nbsp;decreasing&nbsp;Borda&nbsp;score&nbsp;of&nbsp;their&nbsp;ranking&nbsp;results.</tt></dd></dl>
 
 <dl><dt><a name="FullRandomPerformanceTableau-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;self.<a href="#FullRandomPerformanceTableau-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
@@ -435,7 +440,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="Random3ObjectivesPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="Random3ObjectivesPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'pref': 20, 'veto': 80, 'ind': 10, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="Random3ObjectivesPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'weakVeto': 60, 'pref': 20, 'ind': 10}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -521,6 +526,11 @@ Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbs
 evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
 
 <dl><dt><a name="Random3ObjectivesPerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True, WithMaxMin=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
+
+<dl><dt><a name="Random3ObjectivesPerformanceTableau-computeQuantileOrder"><strong>computeQuantileOrder</strong></a>(self, q0=3, q1=0, Threading=False, nbrOfCPUs=1, Comments=False)</dt><dd><tt>Renders&nbsp;a&nbsp;linear&nbsp;ordering&nbsp;ordering&nbsp;of&nbsp;the&nbsp;decision&nbsp;actions&nbsp;from&nbsp;a&nbsp;simulation&nbsp;of&nbsp;pre-ranked&nbsp;outranking&nbsp;digraphs.<br>
+&nbsp;<br>
+The&nbsp;pre-ranking&nbsp;simulations&nbsp;range&nbsp;from&nbsp;quantiles=3&nbsp;to&nbsp;max[10,len(self.<strong>actions</strong>)/10].<br>
+The&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;along&nbsp;a&nbsp;decreasing&nbsp;Borda&nbsp;score&nbsp;of&nbsp;their&nbsp;ranking&nbsp;results.</tt></dd></dl>
 
 <dl><dt><a name="Random3ObjectivesPerformanceTableau-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;self.<a href="#Random3ObjectivesPerformanceTableau-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
@@ -757,7 +767,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="RandomCBPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="RandomCBPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'pref': 20, 'veto': 80, 'ind': 10, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="RandomCBPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'weakVeto': 60, 'pref': 20, 'ind': 10}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -843,6 +853,11 @@ Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbs
 evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
 
 <dl><dt><a name="RandomCBPerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True, WithMaxMin=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
+
+<dl><dt><a name="RandomCBPerformanceTableau-computeQuantileOrder"><strong>computeQuantileOrder</strong></a>(self, q0=3, q1=0, Threading=False, nbrOfCPUs=1, Comments=False)</dt><dd><tt>Renders&nbsp;a&nbsp;linear&nbsp;ordering&nbsp;ordering&nbsp;of&nbsp;the&nbsp;decision&nbsp;actions&nbsp;from&nbsp;a&nbsp;simulation&nbsp;of&nbsp;pre-ranked&nbsp;outranking&nbsp;digraphs.<br>
+&nbsp;<br>
+The&nbsp;pre-ranking&nbsp;simulations&nbsp;range&nbsp;from&nbsp;quantiles=3&nbsp;to&nbsp;max[10,len(self.<strong>actions</strong>)/10].<br>
+The&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;along&nbsp;a&nbsp;decreasing&nbsp;Borda&nbsp;score&nbsp;of&nbsp;their&nbsp;ranking&nbsp;results.</tt></dd></dl>
 
 <dl><dt><a name="RandomCBPerformanceTableau-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;self.<a href="#RandomCBPerformanceTableau-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
@@ -1044,7 +1059,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="RandomCoalitionsPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="RandomCoalitionsPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'pref': 20, 'veto': 80, 'ind': 10, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="RandomCoalitionsPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'weakVeto': 60, 'pref': 20, 'ind': 10}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -1130,6 +1145,11 @@ Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbs
 evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
 
 <dl><dt><a name="RandomCoalitionsPerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True, WithMaxMin=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
+
+<dl><dt><a name="RandomCoalitionsPerformanceTableau-computeQuantileOrder"><strong>computeQuantileOrder</strong></a>(self, q0=3, q1=0, Threading=False, nbrOfCPUs=1, Comments=False)</dt><dd><tt>Renders&nbsp;a&nbsp;linear&nbsp;ordering&nbsp;ordering&nbsp;of&nbsp;the&nbsp;decision&nbsp;actions&nbsp;from&nbsp;a&nbsp;simulation&nbsp;of&nbsp;pre-ranked&nbsp;outranking&nbsp;digraphs.<br>
+&nbsp;<br>
+The&nbsp;pre-ranking&nbsp;simulations&nbsp;range&nbsp;from&nbsp;quantiles=3&nbsp;to&nbsp;max[10,len(self.<strong>actions</strong>)/10].<br>
+The&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;along&nbsp;a&nbsp;decreasing&nbsp;Borda&nbsp;score&nbsp;of&nbsp;their&nbsp;ranking&nbsp;results.</tt></dd></dl>
 
 <dl><dt><a name="RandomCoalitionsPerformanceTableau-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;self.<a href="#RandomCoalitionsPerformanceTableau-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
@@ -1389,7 +1409,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="RandomPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="RandomPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'pref': 20, 'veto': 80, 'ind': 10, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="RandomPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'weakVeto': 60, 'pref': 20, 'ind': 10}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -1475,6 +1495,11 @@ Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbs
 evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
 
 <dl><dt><a name="RandomPerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True, WithMaxMin=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
+
+<dl><dt><a name="RandomPerformanceTableau-computeQuantileOrder"><strong>computeQuantileOrder</strong></a>(self, q0=3, q1=0, Threading=False, nbrOfCPUs=1, Comments=False)</dt><dd><tt>Renders&nbsp;a&nbsp;linear&nbsp;ordering&nbsp;ordering&nbsp;of&nbsp;the&nbsp;decision&nbsp;actions&nbsp;from&nbsp;a&nbsp;simulation&nbsp;of&nbsp;pre-ranked&nbsp;outranking&nbsp;digraphs.<br>
+&nbsp;<br>
+The&nbsp;pre-ranking&nbsp;simulations&nbsp;range&nbsp;from&nbsp;quantiles=3&nbsp;to&nbsp;max[10,len(self.<strong>actions</strong>)/10].<br>
+The&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;along&nbsp;a&nbsp;decreasing&nbsp;Borda&nbsp;score&nbsp;of&nbsp;their&nbsp;ranking&nbsp;results.</tt></dd></dl>
 
 <dl><dt><a name="RandomPerformanceTableau-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;self.<a href="#RandomPerformanceTableau-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
@@ -1676,7 +1701,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="RandomRankPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="RandomRankPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'pref': 20, 'veto': 80, 'ind': 10, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="RandomRankPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'weakVeto': 60, 'pref': 20, 'ind': 10}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -1762,6 +1787,11 @@ Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbs
 evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
 
 <dl><dt><a name="RandomRankPerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True, WithMaxMin=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
+
+<dl><dt><a name="RandomRankPerformanceTableau-computeQuantileOrder"><strong>computeQuantileOrder</strong></a>(self, q0=3, q1=0, Threading=False, nbrOfCPUs=1, Comments=False)</dt><dd><tt>Renders&nbsp;a&nbsp;linear&nbsp;ordering&nbsp;ordering&nbsp;of&nbsp;the&nbsp;decision&nbsp;actions&nbsp;from&nbsp;a&nbsp;simulation&nbsp;of&nbsp;pre-ranked&nbsp;outranking&nbsp;digraphs.<br>
+&nbsp;<br>
+The&nbsp;pre-ranking&nbsp;simulations&nbsp;range&nbsp;from&nbsp;quantiles=3&nbsp;to&nbsp;max[10,len(self.<strong>actions</strong>)/10].<br>
+The&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;along&nbsp;a&nbsp;decreasing&nbsp;Borda&nbsp;score&nbsp;of&nbsp;their&nbsp;ranking&nbsp;results.</tt></dd></dl>
 
 <dl><dt><a name="RandomRankPerformanceTableau-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;self.<a href="#RandomRankPerformanceTableau-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
@@ -1946,7 +1976,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="RandomS3PerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="RandomS3PerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'pref': 20, 'veto': 80, 'ind': 10, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="RandomS3PerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'weakVeto': 60, 'pref': 20, 'ind': 10}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -2032,6 +2062,11 @@ Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbs
 evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
 
 <dl><dt><a name="RandomS3PerformanceTableau-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True, WithMaxMin=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
+
+<dl><dt><a name="RandomS3PerformanceTableau-computeQuantileOrder"><strong>computeQuantileOrder</strong></a>(self, q0=3, q1=0, Threading=False, nbrOfCPUs=1, Comments=False)</dt><dd><tt>Renders&nbsp;a&nbsp;linear&nbsp;ordering&nbsp;ordering&nbsp;of&nbsp;the&nbsp;decision&nbsp;actions&nbsp;from&nbsp;a&nbsp;simulation&nbsp;of&nbsp;pre-ranked&nbsp;outranking&nbsp;digraphs.<br>
+&nbsp;<br>
+The&nbsp;pre-ranking&nbsp;simulations&nbsp;range&nbsp;from&nbsp;quantiles=3&nbsp;to&nbsp;max[10,len(self.<strong>actions</strong>)/10].<br>
+The&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;along&nbsp;a&nbsp;decreasing&nbsp;Borda&nbsp;score&nbsp;of&nbsp;their&nbsp;ranking&nbsp;results.</tt></dd></dl>
 
 <dl><dt><a name="RandomS3PerformanceTableau-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;self.<a href="#RandomS3PerformanceTableau-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 

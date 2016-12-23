@@ -287,8 +287,8 @@ def isprime(n, precision=7):
 
     return True
 
-# https://comeoncodeon.wordpress.com/2010/09/18/pollard-rho-brent-integer-factorization/
 def pollard_brent(n):
+    # https://comeoncodeon.wordpress.com/2010/09/18/pollard-rho-brent-integer-factorization/
     if n % 2 == 0: return 2
     if n % 3 == 0: return 3
 
@@ -10475,8 +10475,7 @@ class CirculantDigraph(Digraph):
         self.name = 'c'+str(order)
         self.order = order
         self.circulants = circulants
-        actionlist = list(range(order+1))
-        actionlist.remove(0)
+        actionlist = list(range(1,order+1))
         actions = []
         for x in actionlist:
             actions.append(str(x))
