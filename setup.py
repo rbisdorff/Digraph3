@@ -6,7 +6,7 @@ from distutils.core import setup
 
 setup(name='Digraph3',
       version='Python3.5+',
-      py_modules=['digraphs','perfTabs','outrankingDigraphs',\
+      py_modules=['digraphsTools','digraphs','perfTabs','outrankingDigraphs',\
         'sortingDigraphs','votingDigraphs',\
         'linearOrders','weakOrders',\
         'iqagent','graphs','htmlmodel','randomNumbers','randomDigraphs','randomPerfTabs',

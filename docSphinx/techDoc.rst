@@ -57,8 +57,12 @@ The Digraph3 source code is split into several interdependent modules of which t
      Specialization for undirected graphs with the root `Graph <techDoc.html#graphs.Graph>`_ class and a brigde to the ``digraphs`` module resources;
 * :ref:`outrankingDigraphs-label`
      New Python3 specific root `OutrankingDigraph <techDoc.html#outrankingDigraphs.OutrankingDigraph>`_ class and specializations; 
+* :ref:`sparseOutrankingDigraphs-label` 
+     Sparse implementation design for large outranking digraphs (order > 1000).
 * :ref:`perfTabs-label` 
      Everything needed for handling Multiple Criteria Decision Aid performance tableaux with root `PerformaceTableau <techDoc.html#perfTabs.PerformanceTableau>`_ class;
+* :ref:`randomPerfTabs-label` 
+     Various implemented random performance tableau models.
 * :ref:`votingDigraphs-label` 
      Additional classes and methods for computing election results with main `LinearVotingProfile <techDoc.html#votingDigraphs.LinearVotingProfile>`_ class;
 * :ref:`sortingDigraphs-label`
@@ -69,10 +73,8 @@ The Digraph3 source code is split into several interdependent modules of which t
      Additional tools for solving ranking by choosing problems with root `WeakOrder <techDoc.html#weakOrders.WeakOrder>`_ class.
 * :ref:`randomNumbers-label` 
      Additional random number generators, not available in the standard python library.
-* :ref:`randomPerfTabs-label` 
-     Various implemented random performance tableau models.
-* :ref:`sparseOutrankingDigraphs-label` 
-     Sparse implementation design for large outranking digraphs (order > 1000).
+* :ref:`digraphsTools-label` 
+     Additional various methods and tools.
 
 Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff <http://leopold-loewenheim.uni.lu/bisdorff/>, University of Luxembourg.
 
@@ -96,7 +98,7 @@ Back to the :ref:`Technical-label`
 .. _randomDigraphs-label:
 
 randomDigraphs module
-----------------------
+---------------------
 
 .. automodule:: randomDigraphs
    :member-order: alphabetical
@@ -108,7 +110,7 @@ Back to the :ref:`Technical-label`
 .. _graphs-label:
 
 graphs module
----------------
+-------------
 
 A tutorial with coding examples is available here: :ref:`Graphs-Tutorial-label`
 
@@ -134,7 +136,7 @@ Back to the :ref:`Technical-label`
 .. _randomPerfTabs-label:
       
 randomPerfTabs module
-----------------------
+---------------------
 
 A tutorial with coding examples is available here: :ref:`RandomPerformaceTableau-Tutorial-label`
 
@@ -162,7 +164,7 @@ Back to the :ref:`Technical-label`
 .. _sparseOutrankingDigraphs-label:
 
 sparseOutrankingDigraphs module
---------------------------------
+-------------------------------
 
 .. automodule:: sparseOutrankingDigraphs
    :member-order: alphabetical
@@ -214,7 +216,7 @@ Back to the :ref:`Technical-label`
 .. _weakOrders-label:
 
 weakOrders module
-------------------
+-----------------
 
 .. automodule:: weakOrders
    :member-order: alphabetical
@@ -226,9 +228,21 @@ Back to the :ref:`Technical-label`
 .. _randomNumbers-label:
 
 randomNumbers module
-----------------------
+--------------------
 
 .. automodule:: randomNumbers
+   :member-order: alphabetical
+   :no-inherited-members:
+   :members:
+
+Back to the :ref:`Technical-label`
+
+.. _digraphsTools-label:
+
+digraphsTools module
+--------------------
+
+.. automodule:: digraphsTools
    :member-order: alphabetical
    :no-inherited-members:
    :members:

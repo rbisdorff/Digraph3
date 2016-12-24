@@ -127,8 +127,18 @@
 </dl>
 </li>
 <li><dl class="first docutils">
+<dt><a class="reference internal" href="#sparseoutrankingdigraphs-label"><span class="std std-ref">sparseOutrankingDigraphs module</span></a></dt>
+<dd>Sparse implementation design for large outranking digraphs (order &gt; 1000).</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
 <dt><a class="reference internal" href="#perftabs-label"><span class="std std-ref">perfTabs module</span></a></dt>
 <dd>Everything needed for handling Multiple Criteria Decision Aid performance tableaux with root <a class="reference external" href="techDoc.html#perfTabs.PerformanceTableau">PerformaceTableau</a> class;</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="#randomperftabs-label"><span class="std std-ref">randomPerfTabs module</span></a></dt>
+<dd>Various implemented random performance tableau models.</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
@@ -157,13 +167,8 @@
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="#randomperftabs-label"><span class="std std-ref">randomPerfTabs module</span></a></dt>
-<dd>Various implemented random performance tableau models.</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt><a class="reference internal" href="#sparseoutrankingdigraphs-label"><span class="std std-ref">sparseOutrankingDigraphs module</span></a></dt>
-<dd>Sparse implementation design for large outranking digraphs (order &gt; 1000).</dd>
+<dt><a class="reference internal" href="#digraphstools-label"><span class="std std-ref">digraphsTools module</span></a></dt>
+<dd>Additional various methods and tools.</dd>
 </dl>
 </li>
 </ul>
@@ -205,7 +210,7 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 
 <dl class="class">
 <dt id="digraphs.CirculantDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'min': Decimal('-1.0'), 'max': Decimal('1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CirculantDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'max': Decimal('1.0'), 'min': Decimal('-1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CirculantDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -1279,7 +1284,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.digraph2Graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'max': 1</em>, <em>'min': -1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.digraph2Graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2293,7 +2298,7 @@ called dg1 and dg2.</p>
 
 <dl class="class">
 <dt id="digraphs.GridDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#GridDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#GridDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2324,7 +2329,7 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 
 <dl class="class">
 <dt id="digraphs.KneserDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#KneserDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#KneserDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -2502,38 +2507,6 @@ stored XML formatted digraphs.</p>
 digraphs d1 and d2 of same order.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="digraphs.all_perms">
-<code class="descclassname">digraphs.</code><code class="descname">all_perms</code><span class="sig-paren">(</span><em>str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#all_perms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.all_perms" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="digraphs.factorization">
-<code class="descclassname">digraphs.</code><code class="descname">factorization</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#factorization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.factorization" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="digraphs.flatten">
-<code class="descclassname">digraphs.</code><code class="descname">flatten</code><span class="sig-paren">(</span><em>iterable</em>, <em>ltypes=&lt;class 'collections.abc.Iterable'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#flatten"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.flatten" title="Permalink to this definition">¶</a></dt>
-<dd><p>Flattens a list of lists into a flat list.</p>
-<p>Main usage:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">listOfLists</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">]]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">flatten</span><span class="p">(</span><span class="n">listOfLists</span><span class="p">)]</span>
-<span class="go">[1,2,3,4]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="function">
-<dt id="digraphs.gcd">
-<code class="descclassname">digraphs.</code><code class="descname">gcd</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#gcd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.gcd" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="digraphs.isprime">
-<code class="descclassname">digraphs.</code><code class="descname">isprime</code><span class="sig-paren">(</span><em>n</em>, <em>precision=7</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#isprime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.isprime" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 <dl class="class">
 <dt id="digraphs.kChoicesDigraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">kChoicesDigraph</code><span class="sig-paren">(</span><em>digraph=None</em>, <em>k=3</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#kChoicesDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.kChoicesDigraph" title="Permalink to this definition">¶</a></dt>
@@ -2549,82 +2522,6 @@ digraphs d1 and d2 of same order.</p>
 <p>Specialization of general Digraph class for instantiation
 of chordless odd circuits augmented digraphs.</p>
 </dd></dl>
-
-<dl class="function">
-<dt id="digraphs.lcm">
-<code class="descclassname">digraphs.</code><code class="descname">lcm</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#lcm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.lcm" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="digraphs.omax">
-<code class="descclassname">digraphs.</code><code class="descname">omax</code><span class="sig-paren">(</span><em>Med</em>, <em>L</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#omax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.omax" title="Permalink to this definition">¶</a></dt>
-<dd><p>epistemic disjunction for bipolar outranking characteristics
-computation: Med is the valuation domain median and L is a list of
-r-valued statement characteristics.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="digraphs.omin">
-<code class="descclassname">digraphs.</code><code class="descname">omin</code><span class="sig-paren">(</span><em>Med</em>, <em>L</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#omin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.omin" title="Permalink to this definition">¶</a></dt>
-<dd><p>epistemic conjunction of a list L of bipolar outranking characteristics.
-Med is the given valuation domain median.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="digraphs.pollard_brent">
-<code class="descclassname">digraphs.</code><code class="descname">pollard_brent</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#pollard_brent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.pollard_brent" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="digraphs.powerset">
-<code class="descclassname">digraphs.</code><code class="descname">powerset</code><span class="sig-paren">(</span><em>S</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#powerset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.powerset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Power set generator iterator.</p>
-<p>Parameter S may be any object that is accepted as input by the set class constructor.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="digraphs.primefactors">
-<code class="descclassname">digraphs.</code><code class="descname">primefactors</code><span class="sig-paren">(</span><em>n</em>, <em>sort=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#primefactors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.primefactors" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="digraphs.primesbelow">
-<code class="descclassname">digraphs.</code><code class="descname">primesbelow</code><span class="sig-paren">(</span><em>N</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#primesbelow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.primesbelow" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="digraphs.ranking2preorder">
-<code class="descclassname">digraphs.</code><code class="descname">ranking2preorder</code><span class="sig-paren">(</span><em>R</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#ranking2preorder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.ranking2preorder" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="digraphs.timefn">
-<code class="descclassname">digraphs.</code><code class="descname">timefn</code><span class="sig-paren">(</span><em>fn</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#timefn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.timefn" title="Permalink to this definition">¶</a></dt>
-<dd><p>A decorator for automate run time measurements
-from &#8220;High Performance Python&#8221; by  M Gorelick &amp; I Ozswald
-O&#8217;Reilly 2014 p.27</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="digraphs.total_size">
-<code class="descclassname">digraphs.</code><code class="descname">total_size</code><span class="sig-paren">(</span><em>o</em>, <em>handlers={}</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#total_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.total_size" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the approximate memory footprint of an object and all of its contents.</p>
-<p>Automatically finds the contents of the following containers and
-their subclasses:  tuple, list, deque, dict, set, frozenset, Digraph and BigDigraph.
-To search other containers, add handlers to iterate over their contents:</p>
-<blockquote>
-<div><dl class="docutils">
-<dt>handlers = {SomeContainerClass: iter,</dt>
-<dd>OtherContainerClass: OtherContainerClass.get_elements}</dd>
-</dl>
-</div></blockquote>
-<p>See <a class="reference external" href="http://code.activestate.com/recipes/577504/">http://code.activestate.com/recipes/577504/</a></p>
-</dd></dl>
-
-<dl class="function">
-<dt id="digraphs.totient">
-<code class="descclassname">digraphs.</code><code class="descname">totient</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#totient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.totient" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
@@ -2674,7 +2571,7 @@ from random choices in the set of potential oriented pairs of nodes numbered fro
 
 <dl class="class">
 <dt id="randomDigraphs.RandomGridDigraph">
-<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomDigraphs.html#RandomGridDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomGridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'max': 1.0</em>, <em>'min': -1.0}</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomDigraphs.html#RandomGridDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomDigraphs.RandomGridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.GridDigraph" title="digraphs.GridDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.GridDigraph</span></code></a></p>
 <p>Specialization of the general Digraph class for generating
 temporary randomly oriented Grid digraphs of dimension n time m
@@ -3803,7 +3700,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.computeDefaultDiscriminationThresholds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.computeDefaultDiscriminationThresholds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -5094,7 +4991,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'pref': 20}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#OutrankingDigraph.defaultDiscriminationThresholds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'veto': 80</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#OutrankingDigraph.defaultDiscriminationThresholds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -7249,6 +7146,118 @@ disjunctive fusion (omax operator) of a list of rankings.</p>
 
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
+<div class="section" id="module-digraphsTools">
+<span id="digraphstools-module"></span><span id="digraphstools-label"></span><h2>digraphsTools module<a class="headerlink" href="#module-digraphsTools" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="digraphsTools.all_perms">
+<code class="descclassname">digraphsTools.</code><code class="descname">all_perms</code><span class="sig-paren">(</span><em>str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#all_perms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.all_perms" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="digraphsTools.factorization">
+<code class="descclassname">digraphsTools.</code><code class="descname">factorization</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#factorization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.factorization" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="digraphsTools.flatten">
+<code class="descclassname">digraphsTools.</code><code class="descname">flatten</code><span class="sig-paren">(</span><em>iterable</em>, <em>ltypes=&lt;class 'collections.abc.Iterable'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#flatten"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.flatten" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flattens a list of lists into a flat list.</p>
+<p>Main usage:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">listOfLists</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">flatten</span><span class="p">(</span><span class="n">listOfLists</span><span class="p">)]</span>
+<span class="go">[1,2,3,4]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="digraphsTools.gcd">
+<code class="descclassname">digraphsTools.</code><code class="descname">gcd</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#gcd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.gcd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="digraphsTools.isprime">
+<code class="descclassname">digraphsTools.</code><code class="descname">isprime</code><span class="sig-paren">(</span><em>n</em>, <em>precision=7</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#isprime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.isprime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="digraphsTools.lcm">
+<code class="descclassname">digraphsTools.</code><code class="descname">lcm</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#lcm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.lcm" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="digraphsTools.omax">
+<code class="descclassname">digraphsTools.</code><code class="descname">omax</code><span class="sig-paren">(</span><em>Med</em>, <em>L</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#omax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.omax" title="Permalink to this definition">¶</a></dt>
+<dd><p>epistemic disjunction for bipolar outranking characteristics
+computation: Med is the valuation domain median and L is a list of
+r-valued statement characteristics.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="digraphsTools.omin">
+<code class="descclassname">digraphsTools.</code><code class="descname">omin</code><span class="sig-paren">(</span><em>Med</em>, <em>L</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#omin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.omin" title="Permalink to this definition">¶</a></dt>
+<dd><p>epistemic conjunction of a list L of bipolar outranking characteristics.
+Med is the given valuation domain median.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="digraphsTools.pollard_brent">
+<code class="descclassname">digraphsTools.</code><code class="descname">pollard_brent</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#pollard_brent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.pollard_brent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="digraphsTools.powerset">
+<code class="descclassname">digraphsTools.</code><code class="descname">powerset</code><span class="sig-paren">(</span><em>S</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#powerset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.powerset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Power set generator iterator.</p>
+<p>Parameter S may be any object that is accepted as input by the set class constructor.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="digraphsTools.primefactors">
+<code class="descclassname">digraphsTools.</code><code class="descname">primefactors</code><span class="sig-paren">(</span><em>n</em>, <em>sort=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#primefactors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.primefactors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="digraphsTools.primesbelow">
+<code class="descclassname">digraphsTools.</code><code class="descname">primesbelow</code><span class="sig-paren">(</span><em>N</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#primesbelow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.primesbelow" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="digraphsTools.ranking2preorder">
+<code class="descclassname">digraphsTools.</code><code class="descname">ranking2preorder</code><span class="sig-paren">(</span><em>R</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#ranking2preorder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.ranking2preorder" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="digraphsTools.timefn">
+<code class="descclassname">digraphsTools.</code><code class="descname">timefn</code><span class="sig-paren">(</span><em>fn</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#timefn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.timefn" title="Permalink to this definition">¶</a></dt>
+<dd><p>A decorator for automate run time measurements
+from &#8220;High Performance Python&#8221; by  M Gorelick &amp; I Ozswald
+O&#8217;Reilly 2014 p.27</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="digraphsTools.total_size">
+<code class="descclassname">digraphsTools.</code><code class="descname">total_size</code><span class="sig-paren">(</span><em>o</em>, <em>handlers={}</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#total_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.total_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the approximate memory footprint of an object and all of its contents.</p>
+<p>Automatically finds the contents of the following containers and
+their subclasses:  tuple, list, deque, dict, set, frozenset, Digraph and BigDigraph.
+To search other containers, add handlers to iterate over their contents:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>handlers = {SomeContainerClass: iter,</dt>
+<dd>OtherContainerClass: OtherContainerClass.get_elements}</dd>
+</dl>
+</div></blockquote>
+<p>See <a class="reference external" href="http://code.activestate.com/recipes/577504/">http://code.activestate.com/recipes/577504/</a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="digraphsTools.totient">
+<code class="descclassname">digraphsTools.</code><code class="descname">totient</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#totient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.totient" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
+</div>
 <div class="section" id="indices-and-tables">
 <h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -7287,6 +7296,7 @@ disjunctive fusion (omax operator) of a list of rankings.</p>
 <li><a class="reference internal" href="#linearorders-module">linearOrders module</a></li>
 <li><a class="reference internal" href="#module-weakOrders">weakOrders module</a></li>
 <li><a class="reference internal" href="#module-randomNumbers">randomNumbers module</a></li>
+<li><a class="reference internal" href="#module-digraphsTools">digraphsTools module</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 <li><a class="reference internal" href="#tutorials">Tutorials</a></li>
 </ul>
