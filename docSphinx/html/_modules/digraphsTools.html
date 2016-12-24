@@ -1,0 +1,467 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>digraphsTools &#8212; Digraph3 3.5-2000+ documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.5-2000+',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Digraph3 3.5-2000+ documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for digraphsTools</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/Usr/bin/env python3</span>
+<span class="c1"># Python3+ implementation of Digraph3 tools</span>
+<span class="c1"># Copyright (C) 2006-2013  Raymond Bisdorff</span>
+<span class="c1">#</span>
+<span class="c1">#    This program is free software; you can redistribute it and/or modify</span>
+<span class="c1">#    it under the terms of the GNU General Public License as published by</span>
+<span class="c1">#    the Free Software Foundation; either version 3 of the License, or</span>
+<span class="c1">#    (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1">#    This program is distributed in the hope that it will be useful,</span>
+<span class="c1">#    but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1">#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1">#    GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1">#    You should have received a copy of the GNU General Public License along</span>
+<span class="c1">#    with this program; if not, write to the Free Software Foundation, Inc.,</span>
+<span class="c1">#    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</span>
+<span class="c1">#</span>
+<span class="c1">#######################</span>
+
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;Branch: 3.5 $&quot;</span>
+<span class="c1"># ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3</span>
+
+<span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">perfTabs</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="c1">#--------- Decimal precision --------------</span>
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
+
+<span class="c1">#---------- general methods -----------------</span>
+<span class="c1"># from High Performance Python M Gorelick &amp; I Ozswald</span>
+<span class="c1"># O&#39;Reilly 2014 p.27</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">wraps</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
+<div class="viewcode-block" id="timefn"><a class="viewcode-back" href="../techDoc.html#digraphs.timefn">[docs]</a><span class="k">def</span> <span class="nf">timefn</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A decorator for automate run time measurements</span>
+<span class="sd">    from &quot;High Performance Python&quot; by  M Gorelick &amp; I Ozswald</span>
+<span class="sd">    O&#39;Reilly 2014 p.27</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">measure_time</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">t2</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;@timefn:&quot;</span> <span class="o">+</span> <span class="n">fn</span><span class="o">.</span><span class="n">__name__</span> <span class="o">+</span> <span class="s2">&quot; took &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">t2</span><span class="o">-</span><span class="n">t1</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; sec.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="k">return</span> <span class="n">measure_time</span></div>
+
+<span class="c1"># generate all permutations from a string or a list</span>
+<span class="c1"># From Michael Davies&#39;s recipe:</span>
+<span class="c1"># http://snippets.dzone.com/posts/show/753</span>
+<div class="viewcode-block" id="all_perms"><a class="viewcode-back" href="../techDoc.html#digraphs.all_perms">[docs]</a><span class="k">def</span> <span class="nf">all_perms</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">&lt;=</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="nb">str</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">perm</span> <span class="ow">in</span> <span class="n">all_perms</span><span class="p">(</span><span class="nb">str</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">perm</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+                <span class="k">yield</span> <span class="n">perm</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="nb">str</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">perm</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span></div>
+<span class="c1"># epistemic or symmetric disjunction operator</span>
+<div class="viewcode-block" id="omax"><a class="viewcode-back" href="../techDoc.html#digraphs.omax">[docs]</a><span class="k">def</span> <span class="nf">omax</span><span class="p">(</span><span class="n">Med</span><span class="p">,</span><span class="n">L</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    epistemic disjunction for bipolar outranking characteristics</span>
+<span class="sd">    computation: Med is the valuation domain median and L is a list of</span>
+<span class="sd">    r-valued statement characteristics. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#Med = self.valuationdomain[&#39;med&#39;]</span>
+    <span class="n">terms</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+    <span class="n">termsPlus</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">termsMinus</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">termsNuls</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">terms</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
+            <span class="n">termsPlus</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Med</span><span class="p">:</span>
+            <span class="n">termsMinus</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">termsNuls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="c1">##    if Debug:</span>
+<span class="c1">##        print(&#39;terms&#39;, terms)</span>
+<span class="c1">##        print(&#39;termsPlus&#39;,termsPlus)</span>
+<span class="c1">##        print(&#39;termsMinus&#39;, termsMinus)</span>
+<span class="c1">##        print(&#39;termsNuls&#39;, termsNuls)</span>
+    <span class="n">np</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">termsPlus</span><span class="p">)</span>
+    <span class="n">nm</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">termsMinus</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">nm</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">termsPlus</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">nm</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">np</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">termsMinus</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Med</span></div>
+<span class="c1"># epistemic or symmetric conjunction operator</span>
+<div class="viewcode-block" id="omin"><a class="viewcode-back" href="../techDoc.html#digraphs.omin">[docs]</a><span class="k">def</span> <span class="nf">omin</span><span class="p">(</span><span class="n">Med</span><span class="p">,</span><span class="n">L</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    epistemic conjunction of a list L of bipolar outranking characteristics.</span>
+<span class="sd">    Med is the given valuation domain median.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#Med = self.valuationdomain[&#39;med&#39;]</span>
+    <span class="n">terms</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+    <span class="n">termsPlus</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">termsMinus</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">termsNuls</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">terms</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
+            <span class="n">termsPlus</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Med</span><span class="p">:</span>
+            <span class="n">termsMinus</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">termsNuls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="c1">##    if Debug:</span>
+<span class="c1">##        print(&#39;terms&#39;, terms)</span>
+<span class="c1">##        print(&#39;termsPlus&#39;,termsPlus)</span>
+<span class="c1">##        print(&#39;termsMinus&#39;, termsMinus)</span>
+<span class="c1">##        print(&#39;termsNuls&#39;, termsNuls)</span>
+    <span class="n">np</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">termsPlus</span><span class="p">)</span>
+    <span class="n">nm</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">termsMinus</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">nm</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Med</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">termsPlus</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">nm</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">termsMinus</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Med</span></div>
+
+<span class="c1"># generate all subsets of a given set E</span>
+<span class="c1"># Discrete Mathematics BINFO 1 course Lesson 2-sets</span>
+<span class="c1"># RB October 2009 (recursive version)</span>
+<div class="viewcode-block" id="powerset"><a class="viewcode-back" href="../techDoc.html#digraphs.powerset">[docs]</a><span class="k">def</span> <span class="nf">powerset</span><span class="p">(</span><span class="n">S</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Power set generator iterator.</span>
+
+<span class="sd">    Parameter S may be any object that is accepted as input by the set class constructor.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">E</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">E</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">X</span> <span class="ow">in</span> <span class="n">powerset</span><span class="p">(</span><span class="n">E</span><span class="p">):</span>
+            <span class="k">yield</span> <span class="nb">set</span><span class="p">([</span><span class="n">e</span><span class="p">])</span> <span class="o">|</span> <span class="n">X</span>
+            <span class="k">yield</span> <span class="n">X</span></div>
+
+<span class="c1"># transforms a ranking (list from best to worst) into</span>
+<span class="c1"># a preorder ( a list of list from worst to best)</span>
+<div class="viewcode-block" id="ranking2preorder"><a class="viewcode-back" href="../techDoc.html#digraphs.ranking2preorder">[docs]</a><span class="k">def</span> <span class="nf">ranking2preorder</span><span class="p">(</span><span class="n">R</span><span class="p">):</span>
+    <span class="n">preorder</span> <span class="o">=</span> <span class="p">[[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">R</span><span class="p">)]</span>
+<span class="c1">#    for x in R:</span>
+<span class="c1">#        preorder.append([x])</span>
+<span class="c1">#    preorder.reverse()</span>
+    <span class="k">return</span> <span class="n">preorder</span></div>
+
+<span class="c1"># flattens a list of lists into a flat list</span>
+<span class="kn">import</span> <span class="nn">itertools</span> <span class="k">as</span> <span class="nn">IT</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+
+<div class="viewcode-block" id="flatten"><a class="viewcode-back" href="../techDoc.html#digraphs.flatten">[docs]</a><span class="k">def</span> <span class="nf">flatten</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">ltypes</span><span class="o">=</span><span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Flattens a list of lists into a flat list.</span>
+
+<span class="sd">    Main usage:</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; listOfLists = [[1,2],[3],[4]]</span>
+<span class="sd">    &gt;&gt;&gt; [x for x in flatten(listOfLists)]</span>
+<span class="sd">    [1,2,3,4]</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">remainder</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">first</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">remainder</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">ltypes</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">remainder</span> <span class="o">=</span> <span class="n">IT</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">remainder</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">first</span></div>
+
+<div class="viewcode-block" id="total_size"><a class="viewcode-back" href="../techDoc.html#digraphs.total_size">[docs]</a><span class="k">def</span> <span class="nf">total_size</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">handlers</span><span class="o">=</span><span class="p">{},</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Returns the approximate memory footprint of an object and all of its contents.</span>
+
+<span class="sd">    Automatically finds the contents of the following containers and</span>
+<span class="sd">    their subclasses:  tuple, list, deque, dict, set, frozenset, Digraph and BigDigraph.</span>
+<span class="sd">    To search other containers, add handlers to iterate over their contents:</span>
+
+<span class="sd">        handlers = {SomeContainerClass: iter,</span>
+<span class="sd">                    OtherContainerClass: OtherContainerClass.get_elements}</span>
+
+<span class="sd">    See http://code.activestate.com/recipes/577504/  </span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">sys</span> <span class="k">import</span> <span class="n">getsizeof</span><span class="p">,</span> <span class="n">stderr</span>
+    <span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">chain</span>
+    <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">deque</span>
+    <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">Digraph</span>
+    <span class="kn">from</span> <span class="nn">bigOutrankingDigraphs</span> <span class="k">import</span> <span class="n">BigDigraph</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">reprlib</span> <span class="k">import</span> <span class="nb">repr</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="c1"># built-in containers and their subclasses</span>
+    <span class="n">dict_handler</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">d</span><span class="p">:</span> <span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+    <span class="n">all_handlers</span> <span class="o">=</span> <span class="p">{</span><span class="nb">tuple</span><span class="p">:</span> <span class="nb">iter</span><span class="p">,</span>
+                    <span class="nb">list</span><span class="p">:</span> <span class="nb">iter</span><span class="p">,</span>
+                    <span class="n">deque</span><span class="p">:</span> <span class="nb">iter</span><span class="p">,</span>
+                    <span class="nb">dict</span><span class="p">:</span> <span class="n">dict_handler</span><span class="p">,</span>
+                    <span class="nb">set</span><span class="p">:</span> <span class="nb">iter</span><span class="p">,</span>
+                    <span class="nb">frozenset</span><span class="p">:</span> <span class="nb">iter</span><span class="p">,</span>
+                    <span class="p">}</span>
+
+    <span class="c1"># Digraph3 objects </span>
+    <span class="n">object_handler</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">d</span><span class="p">:</span> <span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>    
+    <span class="n">handlers</span> <span class="o">=</span> <span class="p">{</span><span class="n">BigDigraph</span><span class="p">:</span> <span class="n">object_handler</span><span class="p">,</span>
+                <span class="n">Digraph</span><span class="p">:</span> <span class="n">object_handler</span><span class="p">,</span>
+                <span class="n">PerformanceTableau</span> <span class="p">:</span> <span class="n">object_handler</span><span class="p">,</span>
+                <span class="p">}</span>
+    
+    <span class="n">all_handlers</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">handlers</span><span class="p">)</span>     <span class="c1"># user handlers take precedence</span>
+    <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>                      <span class="c1"># track which object id&#39;s have already been seen</span>
+    <span class="n">default_size</span> <span class="o">=</span> <span class="n">getsizeof</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>       <span class="c1"># estimate sizeof object without __sizeof__</span>
+
+    <span class="k">def</span> <span class="nf">sizeof</span><span class="p">(</span><span class="n">o</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">id</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>       <span class="c1"># do not double count the same object</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">o</span><span class="p">))</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">getsizeof</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">default_size</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">o</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">o</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">stderr</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">typ</span><span class="p">,</span> <span class="n">handler</span> <span class="ow">in</span> <span class="n">all_handlers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">typ</span><span class="p">):</span>
+                <span class="n">s</span> <span class="o">+=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">sizeof</span><span class="p">,</span> <span class="n">handler</span><span class="p">(</span><span class="n">o</span><span class="p">)))</span>
+                <span class="k">break</span>
+        <span class="k">return</span> <span class="n">s</span>
+
+    <span class="k">return</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">o</span><span class="p">)</span></div>
+
+<span class="c1">### arithmetics</span>
+<div class="viewcode-block" id="primesbelow"><a class="viewcode-back" href="../techDoc.html#digraphs.primesbelow">[docs]</a><span class="k">def</span> <span class="nf">primesbelow</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="c1"># http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188</span>
+    <span class="c1">#&quot;&quot;&quot; Input N&gt;=6, Returns a list of primes, 2 &lt;= p &lt; N &quot;&quot;&quot;</span>
+    <span class="n">correction</span> <span class="o">=</span> <span class="n">N</span> <span class="o">%</span> <span class="mi">6</span> <span class="o">&gt;</span> <span class="mi">1</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="n">N</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="n">N</span><span class="o">+</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="n">N</span><span class="o">+</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span><span class="n">N</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">}[</span><span class="n">N</span><span class="o">%</span><span class="mi">6</span><span class="p">]</span>
+    <span class="n">sieve</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">N</span> <span class="o">//</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">sieve</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">N</span> <span class="o">**</span> <span class="o">.</span><span class="mi">5</span><span class="p">)</span> <span class="o">//</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">sieve</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="mi">1</span>
+            <span class="n">sieve</span><span class="p">[</span><span class="n">k</span><span class="o">*</span><span class="n">k</span> <span class="o">//</span> <span class="mi">3</span><span class="p">::</span><span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="p">((</span><span class="n">N</span><span class="o">//</span><span class="mi">6</span> <span class="o">-</span> <span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="n">k</span><span class="p">)</span><span class="o">//</span><span class="mi">6</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">sieve</span><span class="p">[(</span><span class="n">k</span><span class="o">*</span><span class="n">k</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">k</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="p">))</span> <span class="o">//</span> <span class="mi">3</span><span class="p">::</span><span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="p">((</span><span class="n">N</span> <span class="o">//</span> <span class="mi">6</span> <span class="o">-</span> <span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="n">k</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">k</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="p">))</span><span class="o">//</span><span class="mi">6</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="p">[(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="o">//</span><span class="mi">3</span> <span class="o">-</span> <span class="n">correction</span><span class="p">)</span> <span class="k">if</span> <span class="n">sieve</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span></div>
+
+<span class="n">smallprimeset</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">primesbelow</span><span class="p">(</span><span class="mi">100000</span><span class="p">))</span>
+<span class="n">_smallprimeset</span> <span class="o">=</span> <span class="mi">100000</span>
+<div class="viewcode-block" id="isprime"><a class="viewcode-back" href="../techDoc.html#digraphs.isprime">[docs]</a><span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">7</span><span class="p">):</span>
+    <span class="c1"># http://en.wikipedia.org/wiki/Miller-Rabin_primality_test#Algorithm_and_running_time</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">elif</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Out of bounds, first argument must be &gt; 0&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="n">_smallprimeset</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">smallprimeset</span>
+
+
+    <span class="n">d</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">d</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">d</span> <span class="o">//=</span> <span class="mi">2</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">repeat</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">precision</span><span class="p">):</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">x</span> <span class="o">==</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span> <span class="k">continue</span>
+
+        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span> <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="pollard_brent"><a class="viewcode-back" href="../techDoc.html#digraphs.pollard_brent">[docs]</a><span class="k">def</span> <span class="nf">pollard_brent</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="c1"># https://comeoncodeon.wordpress.com/2010/09/18/pollard-rho-brent-integer-factorization/</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="mi">2</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="mi">3</span>
+
+    <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">g</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">g</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">y</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="n">c</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span>
+
+        <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">r</span> <span class="ow">and</span> <span class="n">g</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">ys</span> <span class="o">=</span> <span class="n">y</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">r</span><span class="o">-</span><span class="n">k</span><span class="p">)):</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="n">c</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span>
+                <span class="n">q</span> <span class="o">=</span> <span class="n">q</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">y</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span>
+            <span class="n">g</span> <span class="o">=</span> <span class="n">gcd</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+            <span class="n">k</span> <span class="o">+=</span> <span class="n">m</span>
+        <span class="n">r</span> <span class="o">*=</span> <span class="mi">2</span>
+    <span class="k">if</span> <span class="n">g</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">ys</span> <span class="o">=</span> <span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">ys</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="n">c</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span>
+            <span class="n">g</span> <span class="o">=</span> <span class="n">gcd</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">ys</span><span class="p">),</span> <span class="n">n</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">g</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">break</span>
+
+    <span class="k">return</span> <span class="n">g</span></div>
+
+<span class="n">smallprimes</span> <span class="o">=</span> <span class="n">primesbelow</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="c1"># might seem low, but 1000*1000 = 1000000, so this will fully factor every composite &lt; 1000000</span>
+<div class="viewcode-block" id="primefactors"><a class="viewcode-back" href="../techDoc.html#digraphs.primefactors">[docs]</a><span class="k">def</span> <span class="nf">primefactors</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">factors</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">limit</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span> <span class="o">**</span> <span class="o">.</span><span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">checker</span> <span class="ow">in</span> <span class="n">smallprimes</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">checker</span> <span class="o">&gt;</span> <span class="n">limit</span><span class="p">:</span> <span class="k">break</span>
+        <span class="k">while</span> <span class="n">n</span> <span class="o">%</span> <span class="n">checker</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">factors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">checker</span><span class="p">)</span>
+            <span class="n">n</span> <span class="o">//=</span> <span class="n">checker</span>
+            <span class="n">limit</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span> <span class="o">**</span> <span class="o">.</span><span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">checker</span> <span class="o">&gt;</span> <span class="n">limit</span><span class="p">:</span> <span class="k">break</span>
+
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span> <span class="k">return</span> <span class="n">factors</span>
+
+    <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">factors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+            <span class="k">break</span>
+        <span class="n">factor</span> <span class="o">=</span> <span class="n">pollard_brent</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="c1"># trial division did not fully factor, switch to pollard-brent</span>
+        <span class="n">factors</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">primefactors</span><span class="p">(</span><span class="n">factor</span><span class="p">))</span> <span class="c1"># recurse to factor the not necessarily prime factor returned by pollard-brent</span>
+        <span class="n">n</span> <span class="o">//=</span> <span class="n">factor</span>
+
+    <span class="k">if</span> <span class="n">sort</span><span class="p">:</span> <span class="n">factors</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">factors</span></div>
+
+<div class="viewcode-block" id="factorization"><a class="viewcode-back" href="../techDoc.html#digraphs.factorization">[docs]</a><span class="k">def</span> <span class="nf">factorization</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">factors</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">p1</span> <span class="ow">in</span> <span class="n">primefactors</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">factors</span><span class="p">[</span><span class="n">p1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">factors</span><span class="p">[</span><span class="n">p1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">factors</span></div>
+
+<span class="n">totients</span> <span class="o">=</span> <span class="p">{}</span>
+<div class="viewcode-block" id="totient"><a class="viewcode-back" href="../techDoc.html#digraphs.totient">[docs]</a><span class="k">def</span> <span class="nf">totient</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="mi">1</span>
+
+    <span class="k">try</span><span class="p">:</span> <span class="k">return</span> <span class="n">totients</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span> <span class="k">pass</span>
+
+    <span class="n">tot</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">exp</span> <span class="ow">in</span> <span class="n">factorization</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">tot</span> <span class="o">*=</span> <span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>  <span class="o">*</span>  <span class="n">p</span> <span class="o">**</span> <span class="p">(</span><span class="n">exp</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">totients</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">tot</span>
+    <span class="k">return</span> <span class="n">tot</span></div>
+
+<div class="viewcode-block" id="gcd"><a class="viewcode-back" href="../techDoc.html#digraphs.gcd">[docs]</a><span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">:</span> <span class="k">return</span> <span class="n">a</span>
+    <span class="k">while</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span>
+    <span class="k">return</span> <span class="n">a</span></div>
+
+<div class="viewcode-block" id="lcm"><a class="viewcode-back" href="../techDoc.html#digraphs.lcm">[docs]</a><span class="k">def</span> <span class="nf">lcm</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="o">//</span> <span class="n">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span></div>
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Digraph3 3.5-2000+ documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012-2014, Raymond Bisdorff.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>
