@@ -2364,7 +2364,7 @@ In the coding example, we generate for instance, by using multiprossing techniqu
     ...                                 seed=100)
     >>> bg = PreRankedOutrankingDigraph(tp,quantiles=20,
     ...                                 LowerClosed=False,
-    ...                                 minimalComponentSize=10,
+    ...                                 minimalComponentSize=1,
     ...                                 Threading=True)
     >>> print(bg)
     *----- show short --------------*

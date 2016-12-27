@@ -10777,7 +10777,7 @@ class RedhefferDigraph(Digraph):
     """
     ############### helper functions
 
-    from digraphsTools import factorization
+    #from digraphsTools import Arithmetics
     
 
     def __init__(self,order=5,valuationdomain = (-1.0,1.0)):
