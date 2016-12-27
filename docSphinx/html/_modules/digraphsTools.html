@@ -315,8 +315,8 @@
                 <span class="n">sieve</span><span class="p">[(</span><span class="n">k</span><span class="o">*</span><span class="n">k</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">k</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="p">))</span> <span class="o">//</span> <span class="mi">3</span><span class="p">::</span><span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="p">((</span><span class="n">N</span> <span class="o">//</span> <span class="mi">6</span> <span class="o">-</span> <span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="n">k</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">k</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="p">))</span><span class="o">//</span><span class="mi">6</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="p">[(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="o">//</span><span class="mi">3</span> <span class="o">-</span> <span class="n">correction</span><span class="p">)</span> <span class="k">if</span> <span class="n">sieve</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span></div>
 
-    <span class="n">smallprimeset</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">primesbelow</span><span class="p">(</span><span class="mi">100000</span><span class="p">))</span>
-    <span class="n">_smallprimeset</span> <span class="o">=</span> <span class="mi">100000</span>
+    <span class="n">_smallprimeset</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">primesbelow</span><span class="p">(</span><span class="mi">100000</span><span class="p">))</span>
+    <span class="n">_smallprimesetSize</span> <span class="o">=</span> <span class="mi">100000</span>
 <div class="viewcode-block" id="Arithmetics.isprime"><a class="viewcode-back" href="../techDoc.html#digraphsTools.Arithmetics.isprime">[docs]</a>    <span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">7</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -327,8 +327,8 @@
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">elif</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Out of bounds, first argument must be &gt; 0&quot;</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="n">Arithmetics</span><span class="o">.</span><span class="n">_smallprimeset</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">Arithmetics</span><span class="o">.</span><span class="n">smallprimeset</span>
+        <span class="k">elif</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="n">Arithmetics</span><span class="o">.</span><span class="n">_smallprimesetSize</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">Arithmetics</span><span class="o">.</span><span class="n">_smallprimeset</span>
 
 
         <span class="n">d</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span>
@@ -385,12 +385,12 @@
 
         <span class="k">return</span> <span class="n">g</span></div>
 
-    <span class="n">smallprimes</span> <span class="o">=</span> <span class="n">primesbelow</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="c1"># might seem low, but 1000*1000 = 1000000, so this will fully factor every composite &lt; 1000000</span>
+    <span class="n">_smallprimes</span> <span class="o">=</span> <span class="n">primesbelow</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="c1"># might seem low, but 1000*1000 = 1000000, so this will fully factor every composite &lt; 1000000</span>
 <div class="viewcode-block" id="Arithmetics.primefactors"><a class="viewcode-back" href="../techDoc.html#digraphsTools.Arithmetics.primefactors">[docs]</a>    <span class="k">def</span> <span class="nf">primefactors</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="n">factors</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="n">limit</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span> <span class="o">**</span> <span class="o">.</span><span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="k">for</span> <span class="n">checker</span> <span class="ow">in</span> <span class="n">Arithmetics</span><span class="o">.</span><span class="n">smallprimes</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">checker</span> <span class="ow">in</span> <span class="n">Arithmetics</span><span class="o">.</span><span class="n">_smallprimes</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">checker</span> <span class="o">&gt;</span> <span class="n">limit</span><span class="p">:</span> <span class="k">break</span>
             <span class="k">while</span> <span class="n">n</span> <span class="o">%</span> <span class="n">checker</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">factors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">checker</span><span class="p">)</span>
@@ -405,7 +405,7 @@
                 <span class="n">factors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
                 <span class="k">break</span>
             <span class="n">factor</span> <span class="o">=</span> <span class="n">Arithmetics</span><span class="o">.</span><span class="n">pollard_brent</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="c1"># trial division did not fully factor, switch to pollard-brent</span>
-            <span class="n">factors</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">Arithmetics</span><span class="o">.</span><span class="n">primefactors</span><span class="p">(</span><span class="n">factor</span><span class="p">))</span> <span class="c1"># recurse to factor the not necessarily prime factor returned by pollard-brent</span>
+            <span class="n">factors</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">primefactors</span><span class="p">(</span><span class="n">factor</span><span class="p">))</span> <span class="c1"># recurse to factor the not necessarily prime factor returned by pollard-brent</span>
             <span class="n">n</span> <span class="o">//=</span> <span class="n">factor</span>
 
         <span class="k">if</span> <span class="n">sort</span><span class="p">:</span> <span class="n">factors</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
@@ -421,18 +421,18 @@
                 <span class="n">factors</span><span class="p">[</span><span class="n">p1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">factors</span></div>
 
-    <span class="n">totients</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">_totients</span> <span class="o">=</span> <span class="p">{}</span>
 <div class="viewcode-block" id="Arithmetics.totient"><a class="viewcode-back" href="../techDoc.html#digraphsTools.Arithmetics.totient">[docs]</a>    <span class="k">def</span> <span class="nf">totient</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="mi">1</span>
 
-        <span class="k">try</span><span class="p">:</span> <span class="k">return</span> <span class="n">Arithmetics</span><span class="o">.</span><span class="n">totients</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+        <span class="k">try</span><span class="p">:</span> <span class="k">return</span> <span class="n">Arithmetics</span><span class="o">.</span><span class="n">_totients</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span> <span class="k">pass</span>
 
         <span class="n">tot</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">exp</span> <span class="ow">in</span> <span class="n">Arithmetics</span><span class="o">.</span><span class="n">factorization</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">tot</span> <span class="o">*=</span> <span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>  <span class="o">*</span>  <span class="n">p</span> <span class="o">**</span> <span class="p">(</span><span class="n">exp</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 
-        <span class="n">Arithmetics</span><span class="o">.</span><span class="n">totients</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">tot</span>
+        <span class="n">Arithmetics</span><span class="o">.</span><span class="n">_totients</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">tot</span>
         <span class="k">return</span> <span class="n">tot</span></div>
 
 <div class="viewcode-block" id="Arithmetics.gcd"><a class="viewcode-back" href="../techDoc.html#digraphsTools.Arithmetics.gcd">[docs]</a>    <span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
