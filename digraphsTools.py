@@ -265,8 +265,8 @@ class Arithmetics:
                 sieve[(k*k + 4*k - 2*k*(i%2)) // 3::2*k] = [False] * ((N // 6 - (k*k + 4*k - 2*k*(i%2))//6 - 1) // k + 1)
         return [2, 3] + [(3 * i + 1) | 1 for i in range(1, N//3 - correction) if sieve[i]]
 
-    smallprimeset = set(primesbelow(100000))
-    _smallprimeset = 100000
+    _smallprimeset = set(primesbelow(100000))
+    _smallprimesetSize = 100000
     def isprime(n, precision=7):
         """
 
@@ -277,8 +277,8 @@ class Arithmetics:
             return False
         elif n < 1:
             raise ValueError("Out of bounds, first argument must be > 0")
-        elif n < Arithmetics._smallprimeset:
-            return n in Arithmetics.smallprimeset
+        elif n < Arithmetics._smallprimesetSize:
+            return n in Arithmetics._smallprimeset
 
 
         d = n - 1
@@ -335,12 +335,12 @@ class Arithmetics:
 
         return g
 
-    smallprimes = primesbelow(1000) # might seem low, but 1000*1000 = 1000000, so this will fully factor every composite < 1000000
+    _smallprimes = primesbelow(1000) # might seem low, but 1000*1000 = 1000000, so this will fully factor every composite < 1000000
     def primefactors(n, sort=False):
         factors = []
 
         limit = int(n ** .5) + 1
-        for checker in Arithmetics.smallprimes:
+        for checker in Arithmetics._smallprimes:
             if checker > limit: break
             while n % checker == 0:
                 factors.append(checker)
@@ -355,7 +355,7 @@ class Arithmetics:
                 factors.append(n)
                 break
             factor = Arithmetics.pollard_brent(n) # trial division did not fully factor, switch to pollard-brent
-            factors.extend(Arithmetics.primefactors(factor)) # recurse to factor the not necessarily prime factor returned by pollard-brent
+            factors.extend(primefactors(factor)) # recurse to factor the not necessarily prime factor returned by pollard-brent
             n //= factor
 
         if sort: factors.sort()
@@ -371,18 +371,18 @@ class Arithmetics:
                 factors[p1] = 1
         return factors
 
-    totients = {}
+    _totients = {}
     def totient(n):
         if n == 0: return 1
 
-        try: return Arithmetics.totients[n]
+        try: return Arithmetics._totients[n]
         except KeyError: pass
 
         tot = 1
         for p, exp in Arithmetics.factorization(n).items():
             tot *= (p - 1)  *  p ** (exp - 1)
 
-        Arithmetics.totients[n] = tot
+        Arithmetics._totients[n] = tot
         return tot
 
     def gcd(a, b):
