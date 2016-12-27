@@ -3763,6 +3763,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                  Debug=False,Comments=False):
         from copy import deepcopy
         from time import time
+        #from digraphsTools import omax, omin
 
         # set initial time stamp
         tt = time()
@@ -4358,6 +4359,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             * hasBipolarVeto = False allows to revert (if False) to standard Electre veto handling
             
         """
+        from digraphsTools import omax,omin
         ## default setting for digraphs
         if initial == None:
             initial = self.actions

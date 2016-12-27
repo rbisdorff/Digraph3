@@ -5757,7 +5757,7 @@ class Digraph(object):
 
         .. note::
 
-                Inititalize: self.MISgen(self.actionscopy(),set())
+                Inititalize: self.MISgen(self.actions.copy(),set())
              
         """
         if S == set():
@@ -10777,9 +10777,6 @@ class RedhefferDigraph(Digraph):
     """
     ############### helper functions
 
-    #from digraphsTools import Arithmetics
-    
-
     def __init__(self,order=5,valuationdomain = (-1.0,1.0)):
         import sys,array,copy
         self.name = 'Redheffer'
@@ -12297,6 +12294,7 @@ from randomDigraphs import *
 #----------test Digraph class ----------------
 if __name__ == "__main__":
     import sys,array
+    from digraphsTools import *
     from outrankingDigraphs import OutrankingDigraph,\
     RandomOutrankingDigraph, BipolarOutrankingDigraph
     from votingDigraphs import CondorcetDigraph
