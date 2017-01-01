@@ -373,6 +373,10 @@ class Arithmetics:
 
     _totients = {}
     def totient(n):
+        """
+        Implements the totient function rendering
+        Euler's number of coprime elements a in Zn.
+        """
         if n == 0: return 1
 
         try: return Arithmetics._totients[n]
@@ -386,12 +390,85 @@ class Arithmetics:
         return tot
 
     def gcd(a, b):
+        """
+        Renders the greatest common divisor of a and b.
+        """
         if a == b: return a
         while b > 0: a, b = b, a % b
         return a
 
     def lcm(a, b):
+        """
+        Renders the least common multiple of a and b.
+        """
         return abs(a * b) // Arithmetics.gcd(a, b)
+
+    def bezout(a,b):
+        """
+        Renders d = gcd(a,b) and the
+        Bezout coefficient x, y such that
+        d = ax + by.
+        """
+        
+        x,y,u,v = 1,0,0,1
+        print(a,0,x,y)
+        print(a,b,u,v)
+        while b != 0:
+            r = a % b
+            q = (a - r)/b
+            x,y, u,v = u,v, x-(q*u),y-(q*v)
+            print(a,b,q,r,u,v)
+            a,b = b,r
+        return a,x,y
+
+    def solPartEqnDioph(a,b,c):
+        """
+        renders a particular integer solution of the Diophantian equation
+        ax + by = c.
+        """
+
+        d = Arithmetics.gcd(a,b)
+        if c % d != 0:
+            return None,None,None,None # pas de solution
+        
+        A,B,C = a/d, b/d, c/d
+
+        D,x,y = Arithmetics.bezout(A,B)
+
+        return C*x, C*y , A, B # solution particulière plus coefficients
+
+    def zn_squareroots(n,Comments=False):
+        """
+        Renders the quadratic residues of Zn as a dictionary.
+        """
+        sqrt = {}
+        units = Arithmetics.zn_units(n)
+        if Comments:
+            print(units)
+        for i in units:
+            sqi =  i*i % n
+            if Comments:
+                print(i,i*i,sqi)
+            try:
+                sqrt[sqi].append(i)
+            except:
+                sqrt[sqi] = [i]
+        return sqrt
+
+    def zn_units(n,Comments=False):
+        """
+        Renders the set of units of Zn.
+        """
+        units = set()
+        for i in range(1,n):
+            for j in range(1,n):
+                if (i * j) % n == 1:
+                    units.add(i)
+                    units.add(j)
+        if Comments:
+            print(units)
+        return units
+    
 
 ###############################
 if __name__ == '__main__':
@@ -401,6 +478,7 @@ if __name__ == '__main__':
     print(Arithmetics.gcd(2224,12345))
     print(Arithmetics.lcm(2224,12345))
     print(Arithmetics.totient(11))
+    print(Arithmetics.zn_squareroots(60,Comments=True))
 
     from outrankingDigraphs import *
     t = RandomPerformanceTableau()
@@ -410,3 +488,24 @@ if __name__ == '__main__':
     from sparseOutrankingDigraphs import *
     pr = PreRankedOutrankingDigraph(t)
     print(total_size(pr))
+
+    a = 17
+    b = 1
+    m = 19
+    
+    print( ( "Congruence: %dx =  %d (mod %d)" % (a,b,m) ) )  # \equiv = \u2262
+
+    x,y,A,B = Arithmetics.solPartEqnDioph(a,m,b)
+
+    if x == None:
+        print("Pas de solution")
+    else:
+        print("Solution générale: x = %d + %dn" % (x,B))
+        h = Arithmetics.gcd(a,m)
+        y = m / h
+        print('m,h,y',m,h,y)
+        print("Il y a %d solution(s) particulière(s):" % (h))
+        for i in range(h):
+            print("x_%d = %d + %d*%d (mod %d) = %d" % (i+1,x,i,y,m,(x + (i*y))%m ))
+             
+

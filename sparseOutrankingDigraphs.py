@@ -1178,8 +1178,8 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                 hc = float(highCateg)
                 score1 = (lc+hc)/2.0
                 score2 = float(highCateg)
-                score3 = -notHighLimit
-                score4 = credibility
+                score3 = lowLimit - notHighLimit
+                score4 = -notHighLimit
             #print(score1,highQtileLimit,lowQtileLimit,lowCateg,highCateg,score2,score3,score4)
             try:
                 actionsCategories[(score1,highQtileLimit,\
@@ -1188,12 +1188,9 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                 actionsCategories[(score1,highQtileLimit,\
                                    lowQtileLimit,lowCateg,highCateg,score2,score3,score4)] = [a]
 
-        #print(actionsCategories)
-                
-        actionsCategKeys = list(actionsCategories.keys())
-        actionsCategIntervals = sorted(actionsCategKeys,key=itemgetter(0,5,6,7), reverse=True)
-        #if Debug:
-        #    print(actionsCategIntervals)
+        actionsCategIntervals = sorted(actionsCategories,key=itemgetter(0,5,6,7), reverse=True)
+        if Debug:
+            print(actionsCategIntervals)
         compSize = self.minimalComponentSize
         
         if compSize == 1:
@@ -2592,7 +2589,7 @@ if __name__ == "__main__":
     MP  = False
     nbrActions=20
 ##    t0 = time()
-    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions)
+    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,seed=105)
 ##    tp = XMCDA2PerformanceTableau('the_cs_2016')
 
 ##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
@@ -2609,7 +2606,7 @@ if __name__ == "__main__":
                                  save2File='testbgMP')
     print(bg1)
     bg1.showComponents(direction='descending')
-    bg1.showRelationTable()
+    #bg1.showRelationTable()
     bg2 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,
                                  quantilesOrderingStrategy='average',
                                  componentRankingRule='Copeland',
