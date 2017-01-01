@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module arithmetics</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>arithmetics</strong></big></big> (version Branch: 3.5 $)</font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/arithmetics.py">/Users/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/arithmetics.py</a></font></td></tr></table>
+    <p><tt>#&nbsp;Python3+&nbsp;implementation&nbsp;of&nbsp;arithmetics&nbsp;tools<br>
+#&nbsp;Copyright&nbsp;(C)&nbsp;2016-2017&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
+#<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;it&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;as&nbsp;published&nbsp;by<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation;&nbsp;either&nbsp;version&nbsp;3&nbsp;of&nbsp;the&nbsp;License,&nbsp;or<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;(at&nbsp;your&nbsp;option)&nbsp;any&nbsp;later&nbsp;version.<br>
+#<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;distributed&nbsp;in&nbsp;the&nbsp;hope&nbsp;that&nbsp;it&nbsp;will&nbsp;be&nbsp;useful,<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;but&nbsp;WITHOUT&nbsp;ANY&nbsp;WARRANTY;&nbsp;without&nbsp;even&nbsp;the&nbsp;implied&nbsp;warranty&nbsp;of<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;MERCHANTABILITY&nbsp;or&nbsp;FITNESS&nbsp;FOR&nbsp;A&nbsp;PARTICULAR&nbsp;PURPOSE.&nbsp;&nbsp;See&nbsp;the<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;for&nbsp;more&nbsp;details.<br>
+#<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;You&nbsp;should&nbsp;have&nbsp;received&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;along<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;this&nbsp;program;&nbsp;if&nbsp;not,&nbsp;write&nbsp;to&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation,&nbsp;Inc.,<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;51&nbsp;Franklin&nbsp;Street,&nbsp;Fifth&nbsp;Floor,&nbsp;Boston,&nbsp;MA&nbsp;02110-1301&nbsp;USA.<br>
+#<br>
+#######################</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-bezout"><strong>bezout</strong></a>(a, b)</dt><dd><tt>Renders&nbsp;d&nbsp;=&nbsp;<a href="#-gcd">gcd</a>(a,b)&nbsp;and&nbsp;the<br>
+Bezout&nbsp;coefficient&nbsp;x,&nbsp;y&nbsp;such&nbsp;that<br>
+d&nbsp;=&nbsp;ax&nbsp;+&nbsp;by.</tt></dd></dl>
+ <dl><dt><a name="-factorization"><strong>factorization</strong></a>(n)</dt></dl>
+ <dl><dt><a name="-gcd"><strong>gcd</strong></a>(a, b)</dt><dd><tt>Renders&nbsp;the&nbsp;greatest&nbsp;common&nbsp;divisor&nbsp;of&nbsp;a&nbsp;and&nbsp;b.</tt></dd></dl>
+ <dl><dt><a name="-isprime"><strong>isprime</strong></a>(n, precision=7)</dt><dd><tt><a href="http://en.wikipedia.org/wiki/Miller-Rabin_primality_test#Algorithm_and_running_time">http://en.wikipedia.org/wiki/Miller-Rabin_primality_test#Algorithm_and_running_time</a></tt></dd></dl>
+ <dl><dt><a name="-lcm"><strong>lcm</strong></a>(a, b)</dt><dd><tt>Renders&nbsp;the&nbsp;least&nbsp;common&nbsp;multiple&nbsp;of&nbsp;a&nbsp;and&nbsp;b.</tt></dd></dl>
+ <dl><dt><a name="-pollard_brent"><strong>pollard_brent</strong></a>(n)</dt><dd><tt>https://comeoncodeon.wordpress.com/2010/09/18/pollard-rho-brent-integer-factorization/</tt></dd></dl>
+ <dl><dt><a name="-primefactors"><strong>primefactors</strong></a>(n, sort=False)</dt></dl>
+ <dl><dt><a name="-primesbelow"><strong>primesbelow</strong></a>(N)</dt><dd><tt><a href="http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188">http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188</a><br>
+Input&nbsp;N&gt;=6,&nbsp;Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;primes,&nbsp;2&nbsp;&lt;=&nbsp;p&nbsp;&lt;&nbsp;N</tt></dd></dl>
+ <dl><dt><a name="-solPartEqnDioph"><strong>solPartEqnDioph</strong></a>(a, b, c)</dt><dd><tt>renders&nbsp;a&nbsp;particular&nbsp;integer&nbsp;solution&nbsp;of&nbsp;the&nbsp;Diophantian&nbsp;equation<br>
+ax&nbsp;+&nbsp;by&nbsp;=&nbsp;c.</tt></dd></dl>
+ <dl><dt><a name="-totient"><strong>totient</strong></a>(n)</dt><dd><tt>Implements&nbsp;the&nbsp;totient&nbsp;function&nbsp;rendering<br>
+Euler's&nbsp;number&nbsp;of&nbsp;coprime&nbsp;elements&nbsp;a&nbsp;in&nbsp;Zn.</tt></dd></dl>
+ <dl><dt><a name="-zn_squareroots"><strong>zn_squareroots</strong></a>(n, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;quadratic&nbsp;residues&nbsp;of&nbsp;Zn&nbsp;as&nbsp;a&nbsp;dictionary.</tt></dd></dl>
+ <dl><dt><a name="-zn_units"><strong>zn_units</strong></a>(n, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;units&nbsp;of&nbsp;Zn.</tt></dd></dl>
+</td></tr></table>
+</body></html>

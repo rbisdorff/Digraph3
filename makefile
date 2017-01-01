@@ -11,6 +11,7 @@ sphinx:
 		sphinx-build -E . html/ )
 
 pydocs:
+		cp arithmetics.py pyDoc/
 		cp digraphsTools.py pyDoc/
 		cp digraphs.py pyDoc/
 		cp outrankingDigraphs.py pyDoc/
