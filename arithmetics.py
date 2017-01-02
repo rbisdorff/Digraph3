@@ -17,6 +17,10 @@
 #    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 #######################
+from arithmetics import *
+from digraphs import Digraph
+from decimal import Decimal
+from collections import OrderedDict
 
 __version__ = "Branch: 3.5 $"
 # ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
@@ -29,7 +33,72 @@ Elementary Number Theroy
 Springer Verlag London 1998
 
 """
-def primesbelow(N):
+class LegendreDigraph(Digraph):
+    """
+    For an odd prime *p*, the Legendre symbol (a/p) of any non null integer *a* is:
+
+         1. 0 if p divides a;
+         2. 1 if a is a quadratic residue in Zp, ie a in Qp;
+         3. -1 if a is a non quadratic residue unit in Zp, ie a in Un \ Qn.
+
+    The Legendre symbol hence defines a bipolar valuation on pairs of integers.
+    The reciprocity theorem of the Legendre symbol tates that for p being an odd prime, (a/p) = (p/a)
+    apart from those pairs (a/p) where a = p = 3 (mod 4).
+
+    We may graphically illustrate the reciprocity theorem as follows::
+    
+       >>> from digraphs import AsymmetricPartialDigraph
+       >>> from arithmetics import LegendreDigraph
+       >>> leg = LegendreDigraph(primesBelow(20,Odd=True))
+       >>> aleg = AsymmetricsPartialDigraph(leg)
+       >>> aleg.exportGraphViz('legendreAsym')
+
+    .. image:: legendreAsym.png
+       :alt: Legendre digraph asymmetric part
+       :width: 300 px
+       :align: center
+
+    """
+    def __init__(self,integers=[3,5,7,11,13,17,19]):
+        """
+        By default we consider only primes, but the Legendre symbol
+        works for any integer sequence not containing 0.
+
+        """
+        import sys,array,copy
+        self.name = 'legendreDigraph'
+        self.order = len(integers)
+        actionsList = integers
+        actions = OrderedDict()
+        for x in actionsList:
+            actions[x] = {'name':str(x),'shortName':str(x)}
+        self.actions = actions
+        Max = Decimal('1')
+        Min = Decimal('-1')
+        Med = Decimal('0')
+        self.valuationdomain = {'min':Min,'med':Med,'max':Max}
+        relation = {}
+        for x in actions:
+            relation[x] = {}
+            for y in actions:
+                relation[x][y] = Med
+        for p in actions:
+            Units = set(zn_units(p))
+            Sqrts = set(zn_squareroots(p))
+            for a in actions:
+                q,r = divmod(a,p)
+                if r == 0:
+                    relation[p][a] = Med
+                else:
+                    if r in Sqrts:
+                        relation[p][a] = Max
+                    elif r in Units-Sqrts:
+                        relation[p][a] = Min
+        self.relation = relation
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+    
+def primesBelow(N,Odd=False):
     """
 
     http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188
@@ -45,9 +114,12 @@ def primesbelow(N):
             k = (3 * i + 1) | 1
             sieve[k*k // 3::2*k] = [False] * ((N//6 - (k*k)//6 - 1)//k + 1)
             sieve[(k*k + 4*k - 2*k*(i%2)) // 3::2*k] = [False] * ((N // 6 - (k*k + 4*k - 2*k*(i%2))//6 - 1) // k + 1)
-    return [2, 3] + [(3 * i + 1) | 1 for i in range(1, N//3 - correction) if sieve[i]]
+    primes = [2, 3] + [(3 * i + 1) | 1 for i in range(1, N//3 - correction) if sieve[i]]
+    if Odd:
+        primes.remove(2)
+    return primes
 
-_smallprimeset = set(primesbelow(100000))
+_smallprimeset = set(primesBelow(100000))
 _smallprimesetSize = 100000
 def isprime(n, precision=7):
     """
@@ -117,8 +189,8 @@ def pollard_brent(n):
 
     return g
 
-_smallprimes = primesbelow(1000) # might seem low, but 1000*1000 = 1000000, so this will fully factor every composite < 1000000
-def primefactors(n, sort=False):
+_smallprimes = primesBelow(1000) # might seem low, but 1000*1000 = 1000000, so this will fully factor every composite < 1000000
+def primeFactors(n, sort=False):
     factors = []
 
     limit = int(n ** .5) + 1
@@ -137,7 +209,7 @@ def primefactors(n, sort=False):
             factors.append(n)
             break
         factor = pollard_brent(n) # trial division did not fully factor, switch to pollard-brent
-        factors.extend(primefactors(factor)) # recurse to factor the not necessarily prime factor returned by pollard-brent
+        factors.extend(primeFactors(factor)) # recurse to factor the not necessarily prime factor returned by pollard-brent
         n //= factor
 
     if sort: factors.sort()
@@ -146,7 +218,7 @@ def primefactors(n, sort=False):
 
 def factorization(n):
     factors = {}
-    for p1 in primefactors(n):
+    for p1 in primeFactors(n):
         try:
             factors[p1] += 1
         except KeyError:
@@ -255,30 +327,38 @@ def zn_units(n,Comments=False):
 ###############################
 if __name__ == '__main__':
     ######  scratch pad for testing the module components
-
-    print(factorization(2224))
-    print(gcd(2224,12345))
-    print(lcm(2224,12345))
-    print(totient(11))
-    print(zn_squareroots(60,Comments=True))
-
-    a = 17
-    b = 1
-    m = 19
+    from digraphs import *
+##    print(factorization(2224))
+##    print(gcd(2224,12345))
+##    print(lcm(2224,12345))
+##    print(totient(11))
+##    print(zn_squareroots(60,Comments=True))
+##
+##    a = 17
+##    b = 1
+##    m = 19
+##    
+##    print( ( "Congruence: %dx =  %d (mod %d)" % (a,b,m) ) )  # \equiv = \u2262
+##
+##    x,y,A,B = solPartEqnDioph(a,m,b)
+##
+##    if x == None:
+##        print("Pas de solution")
+##    else:
+##        print("Solution générale: x = %d + %dn" % (x,B))
+##        h = gcd(a,m)
+##        y = m / h
+##        print('m,h,y',m,h,y)
+##        print("Il y a %d solution(s) particulière(s):" % (h))
+##        for i in range(h):
+##            print("x_%d = %d + %d*%d (mod %d) = %d" % (i+1,x,i,y,m,(x + (i*y))%m ))
+            
+    l = LegendreDigraph(primesBelow(20,Odd=True))
+##    l = LegendreDigraph(range(20))
+##    l.showRelationTable(Sorted=False)
+##    l.exportGraphViz('legendre')
+    al = AsymmetricPartialDigraph(l)
+    al.exportGraphViz('legendreAsym')
+    al.computeChordlessCircuits()
+    al.showChordlessCircuits()
     
-    print( ( "Congruence: %dx =  %d (mod %d)" % (a,b,m) ) )  # \equiv = \u2262
-
-    x,y,A,B = solPartEqnDioph(a,m,b)
-
-    if x == None:
-        print("Pas de solution")
-    else:
-        print("Solution générale: x = %d + %dn" % (x,B))
-        h = gcd(a,m)
-        y = m / h
-        print('m,h,y',m,h,y)
-        print("Il y a %d solution(s) particulière(s):" % (h))
-        for i in range(h):
-            print("x_%d = %d + %d*%d (mod %d) = %d" % (i+1,x,i,y,m,(x + (i*y))%m ))
-             
-

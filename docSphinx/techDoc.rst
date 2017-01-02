@@ -75,6 +75,8 @@ The Digraph3 source code is split into several interdependent modules of which t
      Additional random number generators, not available in the standard python library.
 * :ref:`digraphsTools-label` 
      Additional various methods and tools.
+* :ref:`arithmetics-label` 
+     Additional various methods and tools.
 
 Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff <http://leopold-loewenheim.uni.lu/bisdorff/>, University of Luxembourg.
 
@@ -243,6 +245,18 @@ digraphsTools module
 --------------------
 
 .. automodule:: digraphsTools
+   :member-order: alphabetical
+   :no-inherited-members:
+   :members:
+
+Back to the :ref:`Technical-label`
+
+.. _arithmetics-label:
+
+arithmetics module
+--------------------
+
+.. automodule:: arithmetics
    :member-order: alphabetical
    :no-inherited-members:
    :members:

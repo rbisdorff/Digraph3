@@ -171,6 +171,11 @@
 <dd>Additional various methods and tools.</dd>
 </dl>
 </li>
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="#arithmetics-label"><span class="std std-ref">arithmetics module</span></a></dt>
+<dd>Additional various methods and tools.</dd>
+</dl>
+</li>
 </ul>
 <p>Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff &lt;<a class="reference external" href="http://leopold-loewenheim.uni.lu/bisdorff/">http://leopold-loewenheim.uni.lu/bisdorff/</a>&gt;, University of Luxembourg.</p>
 <div class="toctree-wrapper compound">
@@ -3695,7 +3700,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.computeDefaultDiscriminationThresholds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.computeDefaultDiscriminationThresholds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4986,7 +4991,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'ind': 10</em>, <em>'pref': 20</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#OutrankingDigraph.defaultDiscriminationThresholds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'veto': 80</em>, <em>'pref': 20</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#OutrankingDigraph.defaultDiscriminationThresholds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -7149,6 +7154,14 @@ disjunctive fusion (omax operator) of a list of rankings.</p>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Tools gathered from the internet for doing arithmetics.</p>
 <dl class="method">
+<dt id="digraphsTools.Arithmetics.bezout">
+<code class="descname">bezout</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#Arithmetics.bezout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.Arithmetics.bezout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders d = gcd(a,b) and the
+Bezout coefficient x, y such that
+d = ax + by.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="digraphsTools.Arithmetics.factorization">
 <code class="descname">factorization</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#Arithmetics.factorization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.Arithmetics.factorization" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -7156,7 +7169,8 @@ disjunctive fusion (omax operator) of a list of rankings.</p>
 <dl class="method">
 <dt id="digraphsTools.Arithmetics.gcd">
 <code class="descname">gcd</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#Arithmetics.gcd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.Arithmetics.gcd" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Renders the greatest common divisor of a and b.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="digraphsTools.Arithmetics.isprime">
@@ -7167,7 +7181,8 @@ disjunctive fusion (omax operator) of a list of rankings.</p>
 <dl class="method">
 <dt id="digraphsTools.Arithmetics.lcm">
 <code class="descname">lcm</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#Arithmetics.lcm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.Arithmetics.lcm" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Renders the least common multiple of a and b.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="digraphsTools.Arithmetics.pollard_brent">
@@ -7188,9 +7203,30 @@ Input N&gt;=6, Returns a list of primes, 2 &lt;= p &lt; N</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="digraphsTools.Arithmetics.solPartEqnDioph">
+<code class="descname">solPartEqnDioph</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>c</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#Arithmetics.solPartEqnDioph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.Arithmetics.solPartEqnDioph" title="Permalink to this definition">¶</a></dt>
+<dd><p>renders a particular integer solution of the Diophantian equation
+ax + by = c.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="digraphsTools.Arithmetics.totient">
 <code class="descname">totient</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#Arithmetics.totient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.Arithmetics.totient" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Implements the totient function rendering
+Euler&#8217;s number of coprime elements a in Zn.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphsTools.Arithmetics.zn_squareroots">
+<code class="descname">zn_squareroots</code><span class="sig-paren">(</span><em>n</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#Arithmetics.zn_squareroots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.Arithmetics.zn_squareroots" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the quadratic residues of Zn as a dictionary.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphsTools.Arithmetics.zn_units">
+<code class="descname">zn_units</code><span class="sig-paren">(</span><em>n</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#Arithmetics.zn_units"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.Arithmetics.zn_units" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the set of units of Zn.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -7264,6 +7300,111 @@ To search other containers, add handlers to iterate over their contents:</p>
 
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
+<div class="section" id="module-arithmetics">
+<span id="arithmetics-module"></span><span id="arithmetics-label"></span><h2>arithmetics module<a class="headerlink" href="#module-arithmetics" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="arithmetics.LegendreDigraph">
+<em class="property">class </em><code class="descclassname">arithmetics.</code><code class="descname">LegendreDigraph</code><span class="sig-paren">(</span><em>integers=[3, 5, 7, 11, 13, 17, 19]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#LegendreDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#arithmetics.LegendreDigraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
+<p>For an odd prime <em>p</em>, the Legendre symbol (a/p) of any non null integer <em>a</em> is:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>0 if p divides a;</li>
+<li>1 if a is a quadratic residue in Zp, ie a in Qp;</li>
+<li>-1 if a is a non quadratic residue unit in Zp, ie a in Un Qn.</li>
+</ol>
+</div></blockquote>
+<p>The Legendre symbol hence defines a bipolar valuation on pairs of integers.
+The reciprocity theorem of the Legendre symbol tates that for p being an odd prime, (a/p) = (p/a)
+apart from those pairs (a/p) where a = p = 3 (mod 4).</p>
+<p>We may graphically illustrate the reciprocity theorem as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">AsymmetricPartialDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">arithmetics</span> <span class="k">import</span> <span class="n">LegendreDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">leg</span> <span class="o">=</span> <span class="n">LegendreDigraph</span><span class="p">(</span><span class="n">primesBelow</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="n">Odd</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aleg</span> <span class="o">=</span> <span class="n">AsymmetricsPartialDigraph</span><span class="p">(</span><span class="n">leg</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aleg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;legendreAsym&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/legendreAsym.png"><img alt="Legendre digraph asymmetric part" class="align-center" src="_images/legendreAsym.png" style="width: 300px;" /></a>
+</dd></dl>
+
+<dl class="function">
+<dt id="arithmetics.bezout">
+<code class="descclassname">arithmetics.</code><code class="descname">bezout</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#bezout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#arithmetics.bezout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders d = gcd(a,b) and the
+Bezout coefficient x, y such that
+d = ax + by.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="arithmetics.factorization">
+<code class="descclassname">arithmetics.</code><code class="descname">factorization</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#factorization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#arithmetics.factorization" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="arithmetics.gcd">
+<code class="descclassname">arithmetics.</code><code class="descname">gcd</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#gcd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#arithmetics.gcd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the greatest common divisor of a and b.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="arithmetics.isprime">
+<code class="descclassname">arithmetics.</code><code class="descname">isprime</code><span class="sig-paren">(</span><em>n</em>, <em>precision=7</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#isprime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#arithmetics.isprime" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="http://en.wikipedia.org/wiki/Miller-Rabin_primality_test#Algorithm_and_running_time">http://en.wikipedia.org/wiki/Miller-Rabin_primality_test#Algorithm_and_running_time</a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="arithmetics.lcm">
+<code class="descclassname">arithmetics.</code><code class="descname">lcm</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#lcm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#arithmetics.lcm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the least common multiple of a and b.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="arithmetics.pollard_brent">
+<code class="descclassname">arithmetics.</code><code class="descname">pollard_brent</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#pollard_brent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#arithmetics.pollard_brent" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="https://comeoncodeon.wordpress.com/2010/09/18/pollard-rho-brent-integer-factorization/">https://comeoncodeon.wordpress.com/2010/09/18/pollard-rho-brent-integer-factorization/</a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="arithmetics.primeFactors">
+<code class="descclassname">arithmetics.</code><code class="descname">primeFactors</code><span class="sig-paren">(</span><em>n</em>, <em>sort=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#primeFactors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#arithmetics.primeFactors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="arithmetics.primesBelow">
+<code class="descclassname">arithmetics.</code><code class="descname">primesBelow</code><span class="sig-paren">(</span><em>N</em>, <em>Odd=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#primesBelow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#arithmetics.primesBelow" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference external" href="http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188">http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188</a>
+Input N&gt;=6, Returns a list of primes, 2 &lt;= p &lt; N</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="arithmetics.solPartEqnDioph">
+<code class="descclassname">arithmetics.</code><code class="descname">solPartEqnDioph</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>c</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#solPartEqnDioph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#arithmetics.solPartEqnDioph" title="Permalink to this definition">¶</a></dt>
+<dd><p>renders a particular integer solution of the Diophantian equation
+ax + by = c.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="arithmetics.totient">
+<code class="descclassname">arithmetics.</code><code class="descname">totient</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#totient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#arithmetics.totient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implements the totient function rendering
+Euler&#8217;s number of coprime elements a in Zn.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="arithmetics.zn_squareroots">
+<code class="descclassname">arithmetics.</code><code class="descname">zn_squareroots</code><span class="sig-paren">(</span><em>n</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#zn_squareroots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#arithmetics.zn_squareroots" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the quadratic residues of Zn as a dictionary.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="arithmetics.zn_units">
+<code class="descclassname">arithmetics.</code><code class="descname">zn_units</code><span class="sig-paren">(</span><em>n</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#zn_units"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#arithmetics.zn_units" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the set of units of Zn.</p>
+</dd></dl>
+
+<p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
+</div>
 <div class="section" id="indices-and-tables">
 <h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -7303,6 +7444,7 @@ To search other containers, add handlers to iterate over their contents:</p>
 <li><a class="reference internal" href="#module-weakOrders">weakOrders module</a></li>
 <li><a class="reference internal" href="#module-randomNumbers">randomNumbers module</a></li>
 <li><a class="reference internal" href="#module-digraphsTools">digraphsTools module</a></li>
+<li><a class="reference internal" href="#module-arithmetics">arithmetics module</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 <li><a class="reference internal" href="#tutorials">Tutorials</a></li>
 </ul>

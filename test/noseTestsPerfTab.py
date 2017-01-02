@@ -296,10 +296,17 @@ def testComputeQuantileOrder():
                                    missingDataProbability=0.1,
                                    seed=100,Threading=True,nbrCores=4)
     res = t.computeQuantileOrder(Comments=True,Threading=True,nbrOfCPUs=4)
-    assert res == ['a22', 'a28', 'a26', 'a01', 'a20', 'a12', 'a24',
+    assert res == ['a22', 'a20', 'a28', 'a01', 'a12', 'a24', 'a26', 'a19',
+                       'a14', 'a30', 'a27', 'a17', 'a08', 'a29', 'a16',
+                       'a10', 'a04', 'a09', 'a13', 'a02', 'a11', 'a21',
+                       'a06', 'a07', 'a15', 'a03', 'a23', 'a18', 'a25', 'a05']
+    res1 = ['a22', 'a28', 'a26', 'a01', 'a20', 'a12', 'a24',
                    'a19', 'a30', 'a14', 'a27', 'a17', 'a29', 'a16', 'a04',
                    'a09', 'a10', 'a08', 'a02', 'a13', 'a11', 'a06', 'a21',
                    'a07', 'a23', 'a03', 'a15', 'a25', 'a18', 'a05']
+    g = BipolarOutrankingDigraph(t,Normalized=True)
+    print(g.computeOrderCorrelation(res))
+    print(g.computeOrderCorrelation(res1))
     res.reverse()
     resrev = t.computeQuantileRanking()
     assert resrev == res

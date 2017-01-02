@@ -423,6 +423,10 @@
 
     <span class="n">_totients</span> <span class="o">=</span> <span class="p">{}</span>
 <div class="viewcode-block" id="Arithmetics.totient"><a class="viewcode-back" href="../techDoc.html#digraphsTools.Arithmetics.totient">[docs]</a>    <span class="k">def</span> <span class="nf">totient</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Implements the totient function rendering</span>
+<span class="sd">        Euler&#39;s number of coprime elements a in Zn.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="mi">1</span>
 
         <span class="k">try</span><span class="p">:</span> <span class="k">return</span> <span class="n">Arithmetics</span><span class="o">.</span><span class="n">_totients</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
@@ -436,12 +440,85 @@
         <span class="k">return</span> <span class="n">tot</span></div>
 
 <div class="viewcode-block" id="Arithmetics.gcd"><a class="viewcode-back" href="../techDoc.html#digraphsTools.Arithmetics.gcd">[docs]</a>    <span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders the greatest common divisor of a and b.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">:</span> <span class="k">return</span> <span class="n">a</span>
         <span class="k">while</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span>
         <span class="k">return</span> <span class="n">a</span></div>
 
 <div class="viewcode-block" id="Arithmetics.lcm"><a class="viewcode-back" href="../techDoc.html#digraphsTools.Arithmetics.lcm">[docs]</a>    <span class="k">def</span> <span class="nf">lcm</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="o">//</span> <span class="n">Arithmetics</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span></div></div>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders the least common multiple of a and b.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="o">//</span> <span class="n">Arithmetics</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Arithmetics.bezout"><a class="viewcode-back" href="../techDoc.html#digraphsTools.Arithmetics.bezout">[docs]</a>    <span class="k">def</span> <span class="nf">bezout</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders d = gcd(a,b) and the</span>
+<span class="sd">        Bezout coefficient x, y such that</span>
+<span class="sd">        d = ax + by.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">v</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">b</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">r</span><span class="p">)</span><span class="o">/</span><span class="n">b</span>
+            <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span><span class="n">v</span> <span class="o">=</span> <span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">,</span> <span class="n">x</span><span class="o">-</span><span class="p">(</span><span class="n">q</span><span class="o">*</span><span class="n">u</span><span class="p">),</span><span class="n">y</span><span class="o">-</span><span class="p">(</span><span class="n">q</span><span class="o">*</span><span class="n">v</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+            <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span><span class="n">r</span>
+        <span class="k">return</span> <span class="n">a</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span></div>
+
+<div class="viewcode-block" id="Arithmetics.solPartEqnDioph"><a class="viewcode-back" href="../techDoc.html#digraphsTools.Arithmetics.solPartEqnDioph">[docs]</a>    <span class="k">def</span> <span class="nf">solPartEqnDioph</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        renders a particular integer solution of the Diophantian equation</span>
+<span class="sd">        ax + by = c.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">d</span> <span class="o">=</span> <span class="n">Arithmetics</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">c</span> <span class="o">%</span> <span class="n">d</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span> <span class="c1"># pas de solution</span>
+        
+        <span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span> <span class="o">=</span> <span class="n">a</span><span class="o">/</span><span class="n">d</span><span class="p">,</span> <span class="n">b</span><span class="o">/</span><span class="n">d</span><span class="p">,</span> <span class="n">c</span><span class="o">/</span><span class="n">d</span>
+
+        <span class="n">D</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">Arithmetics</span><span class="o">.</span><span class="n">bezout</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">C</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">C</span><span class="o">*</span><span class="n">y</span> <span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="c1"># solution particulière plus coefficients</span></div>
+
+<div class="viewcode-block" id="Arithmetics.zn_squareroots"><a class="viewcode-back" href="../techDoc.html#digraphsTools.Arithmetics.zn_squareroots">[docs]</a>    <span class="k">def</span> <span class="nf">zn_squareroots</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders the quadratic residues of Zn as a dictionary.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sqrt</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">units</span> <span class="o">=</span> <span class="n">Arithmetics</span><span class="o">.</span><span class="n">zn_units</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">units</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">units</span><span class="p">:</span>
+            <span class="n">sqi</span> <span class="o">=</span>  <span class="n">i</span><span class="o">*</span><span class="n">i</span> <span class="o">%</span> <span class="n">n</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="p">,</span><span class="n">sqi</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">sqrt</span><span class="p">[</span><span class="n">sqi</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">sqrt</span><span class="p">[</span><span class="n">sqi</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">sqrt</span></div>
+
+<div class="viewcode-block" id="Arithmetics.zn_units"><a class="viewcode-back" href="../techDoc.html#digraphsTools.Arithmetics.zn_units">[docs]</a>    <span class="k">def</span> <span class="nf">zn_units</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders the set of units of Zn.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">units</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">j</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">units</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                    <span class="n">units</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">units</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">units</span></div></div>
+    
 
 <span class="c1">###############################</span>
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
@@ -451,6 +528,7 @@
     <span class="nb">print</span><span class="p">(</span><span class="n">Arithmetics</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="mi">2224</span><span class="p">,</span><span class="mi">12345</span><span class="p">))</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">Arithmetics</span><span class="o">.</span><span class="n">lcm</span><span class="p">(</span><span class="mi">2224</span><span class="p">,</span><span class="mi">12345</span><span class="p">))</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">Arithmetics</span><span class="o">.</span><span class="n">totient</span><span class="p">(</span><span class="mi">11</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">Arithmetics</span><span class="o">.</span><span class="n">zn_squareroots</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 
     <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">()</span>
@@ -460,6 +538,27 @@
     <span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
     <span class="n">pr</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">total_size</span><span class="p">(</span><span class="n">pr</span><span class="p">))</span>
+
+    <span class="n">a</span> <span class="o">=</span> <span class="mi">17</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="mi">19</span>
+    
+    <span class="nb">print</span><span class="p">(</span> <span class="p">(</span> <span class="s2">&quot;Congruence: </span><span class="si">%d</span><span class="s2">x =  </span><span class="si">%d</span><span class="s2"> (mod </span><span class="si">%d</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">m</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span>  <span class="c1"># \equiv = \u2262</span>
+
+    <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span> <span class="o">=</span> <span class="n">Arithmetics</span><span class="o">.</span><span class="n">solPartEqnDioph</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pas de solution&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Solution générale: x = </span><span class="si">%d</span><span class="s2"> + </span><span class="si">%d</span><span class="s2">n&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">B</span><span class="p">))</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">Arithmetics</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">m</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">m</span> <span class="o">/</span> <span class="n">h</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;m,h,y&#39;</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">h</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Il y a </span><span class="si">%d</span><span class="s2"> solution(s) particulière(s):&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">h</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">h</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x_</span><span class="si">%d</span><span class="s2"> = </span><span class="si">%d</span><span class="s2"> + </span><span class="si">%d</span><span class="s2">*</span><span class="si">%d</span><span class="s2"> (mod </span><span class="si">%d</span><span class="s2">) = </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">m</span><span class="p">,(</span><span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">y</span><span class="p">))</span><span class="o">%</span><span class="n">m</span> <span class="p">))</span>
+             
+
 </pre></div>
 
           </div>

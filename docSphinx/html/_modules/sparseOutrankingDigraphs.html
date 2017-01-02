@@ -1228,8 +1228,8 @@
                 <span class="n">hc</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">highCateg</span><span class="p">)</span>
                 <span class="n">score1</span> <span class="o">=</span> <span class="p">(</span><span class="n">lc</span><span class="o">+</span><span class="n">hc</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span>
                 <span class="n">score2</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">highCateg</span><span class="p">)</span>
-                <span class="n">score3</span> <span class="o">=</span> <span class="o">-</span><span class="n">notHighLimit</span>
-                <span class="n">score4</span> <span class="o">=</span> <span class="n">credibility</span>
+                <span class="n">score3</span> <span class="o">=</span> <span class="n">lowLimit</span> <span class="o">-</span> <span class="n">notHighLimit</span>
+                <span class="n">score4</span> <span class="o">=</span> <span class="o">-</span><span class="n">notHighLimit</span>
             <span class="c1">#print(score1,highQtileLimit,lowQtileLimit,lowCateg,highCateg,score2,score3,score4)</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">actionsCategories</span><span class="p">[(</span><span class="n">score1</span><span class="p">,</span><span class="n">highQtileLimit</span><span class="p">,</span>\
@@ -1238,12 +1238,9 @@
                 <span class="n">actionsCategories</span><span class="p">[(</span><span class="n">score1</span><span class="p">,</span><span class="n">highQtileLimit</span><span class="p">,</span>\
                                    <span class="n">lowQtileLimit</span><span class="p">,</span><span class="n">lowCateg</span><span class="p">,</span><span class="n">highCateg</span><span class="p">,</span><span class="n">score2</span><span class="p">,</span><span class="n">score3</span><span class="p">,</span><span class="n">score4</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
 
-        <span class="c1">#print(actionsCategories)</span>
-                
-        <span class="n">actionsCategKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">actionsCategories</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-        <span class="n">actionsCategIntervals</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">actionsCategKeys</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="c1">#if Debug:</span>
-        <span class="c1">#    print(actionsCategIntervals)</span>
+        <span class="n">actionsCategIntervals</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">actionsCategories</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">actionsCategIntervals</span><span class="p">)</span>
         <span class="n">compSize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimalComponentSize</span>
         
         <span class="k">if</span> <span class="n">compSize</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -2642,7 +2639,7 @@
     <span class="n">MP</span>  <span class="o">=</span> <span class="kc">False</span>
     <span class="n">nbrActions</span><span class="o">=</span><span class="mi">20</span>
 <span class="c1">##    t0 = time()</span>
-    <span class="n">tp</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">)</span>
+    <span class="n">tp</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
 <span class="c1">##    tp = XMCDA2PerformanceTableau(&#39;the_cs_2016&#39;)</span>
 
 <span class="c1">##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,</span>
@@ -2659,7 +2656,7 @@
                                  <span class="n">save2File</span><span class="o">=</span><span class="s1">&#39;testbgMP&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">bg1</span><span class="p">)</span>
     <span class="n">bg1</span><span class="o">.</span><span class="n">showComponents</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;descending&#39;</span><span class="p">)</span>
-    <span class="n">bg1</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+    <span class="c1">#bg1.showRelationTable()</span>
     <span class="n">bg2</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">CopyPerfTab</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
                                  <span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
                                  <span class="n">componentRankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">,</span>
