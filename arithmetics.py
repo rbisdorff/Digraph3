@@ -35,22 +35,23 @@ Springer Verlag London 1998
 """
 class LegendreDigraph(Digraph):
     """
-    For an odd prime *p*, the Legendre symbol (a/p) of any non null integer *a* is:
+    The **Legendre** symbol *(a/p)* of any pair of non null integers *a* and *p* is:
 
-         1. 0 if p divides a;
-         2. 1 if a is a quadratic residue in Zp, ie a in Qp;
-         3. -1 if a is a non quadratic residue unit in Zp, ie a in Un \ Qn.
+         - **0** if *a* = 0 (mod p);
+         - **1** if *a* is a quadratic residue in *Zp*, ie *a* in *Qp*;
+         - **-1** if *a* is a non quadratic residue unit in *Zp*, ie *a* in *Up* - *Qp*.
 
-    The Legendre symbol hence defines a bipolar valuation on pairs of integers.
-    The reciprocity theorem of the Legendre symbol tates that for p being an odd prime, (a/p) = (p/a)
-    apart from those pairs (a/p) where a = p = 3 (mod 4).
+    The Legendre symbol hence defines a bipolar valuation on pairs 
+    of non null integers. The **reciprocity theorem** of the Legendre symbol 
+    states that, for *p* being an odd prime, *(a/p)* = *(p/a)*,
+    apart from those pairs *(a/p)*, where *a* = *p* = 3 (mod 4). In this case, *(a/p)* = -*(p/a)*.
 
     We may graphically illustrate the reciprocity theorem as follows::
     
-       >>> from digraphs import AsymmetricPartialDigraph
-       >>> from arithmetics import LegendreDigraph
+       >>> from arithmetics import *
        >>> leg = LegendreDigraph(primesBelow(20,Odd=True))
-       >>> aleg = AsymmetricsPartialDigraph(leg)
+       >>> from digraphs import AsymmetricPartialDigraph
+       >>> aleg = AsymmetricPartialDigraph(leg)
        >>> aleg.exportGraphViz('legendreAsym')
 
     .. image:: legendreAsym.png

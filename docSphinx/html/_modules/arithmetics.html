@@ -85,22 +85,23 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <div class="viewcode-block" id="LegendreDigraph"><a class="viewcode-back" href="../techDoc.html#arithmetics.LegendreDigraph">[docs]</a><span class="k">class</span> <span class="nc">LegendreDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    For an odd prime *p*, the Legendre symbol (a/p) of any non null integer *a* is:</span>
+<span class="sd">    The **Legendre** symbol *(a/p)* of any pair of non null integers *a* and *p* is:</span>
 
-<span class="sd">         1. 0 if p divides a;</span>
-<span class="sd">         2. 1 if a is a quadratic residue in Zp, ie a in Qp;</span>
-<span class="sd">         3. -1 if a is a non quadratic residue unit in Zp, ie a in Un \ Qn.</span>
+<span class="sd">         - **0** if *a* = 0 (mod p);</span>
+<span class="sd">         - **1** if *a* is a quadratic residue in *Zp*, ie *a* in *Qp*;</span>
+<span class="sd">         - **-1** if *a* is a non quadratic residue unit in *Zp*, ie *a* in *Up* - *Qp*.</span>
 
-<span class="sd">    The Legendre symbol hence defines a bipolar valuation on pairs of integers.</span>
-<span class="sd">    The reciprocity theorem of the Legendre symbol tates that for p being an odd prime, (a/p) = (p/a)</span>
-<span class="sd">    apart from those pairs (a/p) where a = p = 3 (mod 4).</span>
+<span class="sd">    The Legendre symbol hence defines a bipolar valuation on pairs </span>
+<span class="sd">    of non null integers. The **reciprocity theorem** of the Legendre symbol </span>
+<span class="sd">    states that, for *p* being an odd prime, *(a/p)* = *(p/a)*,</span>
+<span class="sd">    apart from those pairs *(a/p)*, where *a* = *p* = 3 (mod 4). In this case, *(a/p)* = -*(p/a)*.</span>
 
 <span class="sd">    We may graphically illustrate the reciprocity theorem as follows::</span>
 <span class="sd">    </span>
-<span class="sd">       &gt;&gt;&gt; from digraphs import AsymmetricPartialDigraph</span>
-<span class="sd">       &gt;&gt;&gt; from arithmetics import LegendreDigraph</span>
+<span class="sd">       &gt;&gt;&gt; from arithmetics import *</span>
 <span class="sd">       &gt;&gt;&gt; leg = LegendreDigraph(primesBelow(20,Odd=True))</span>
-<span class="sd">       &gt;&gt;&gt; aleg = AsymmetricsPartialDigraph(leg)</span>
+<span class="sd">       &gt;&gt;&gt; from digraphs import AsymmetricPartialDigraph</span>
+<span class="sd">       &gt;&gt;&gt; aleg = AsymmetricPartialDigraph(leg)</span>
 <span class="sd">       &gt;&gt;&gt; aleg.exportGraphViz(&#39;legendreAsym&#39;)</span>
 
 <span class="sd">    .. image:: legendreAsym.png</span>
