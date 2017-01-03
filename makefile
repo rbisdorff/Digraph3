@@ -35,6 +35,7 @@ pTests:
 
 tests:
 		cp digraphsTools.py test/
+		cp arithmetics.py test/
 		cp digraphs.py test/
 		cp outrankingDigraphs.py test/
 		cp perfTabs.py test/
@@ -49,6 +50,7 @@ tests:
 		cp bigOutrankingDigraphs.py test/
 		cp sparseOutrankingDigraphs.py test/
 		cp iqagent.py test/
+		(cd test; nosetests3 -v noseTestsArithmetics.py)
 		(cd test; nosetests3 -v noseTestsDigraph.py)
 		(cd test; nosetests3 -v noseTestsOutrankingDigraph.py)
 		(cd test; nosetests3 -v noseTestsPerfTab.py)
@@ -60,12 +62,13 @@ tests:
 		(cd test; nosetests3 -v noseTestsGraph.py)
 		(cd test; nosetests3 -v noseTestsRandomNumbers.py)
 		(cd test; nosetests3 -v noseTestsRandomDigraph.py)
-		(cd test; nosetests3 -v noseTestsBigOutrankingDigraph.py)
+#		(cd test; nosetests3 -v noseTestsBigOutrankingDigraph.py)
 		(cd test; nosetests3 -v noseTestsSparseOutrankingDigraph.py)
 
 
 verboseTests:
 		cp digraphsTools.py test/
+		cp arithmetics.py test/
 		cp digraphs.py test/
 		cp outrankingDigraphs.py test/
 		cp perfTabs.py test/
@@ -529,6 +532,12 @@ verboseRandomNumbersTests:
 		cp iqagent.py test/
 		(cd test; nosetests3 -vs noseTestsRandomNumbers.py)
 
+arithmeticsTests:
+		cp arithmetics.py test/
+		(cd test; nosetests3 -v noseTestsArithmetics.py)
+verboseArithmeticsTests:
+		cp arithmetics.py test/
+		(cd test; nosetests3 -vs noseTestsArithmetics.py)
 
 install:
 		sudo python3 setup.py install

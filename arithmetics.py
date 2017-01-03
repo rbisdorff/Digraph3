@@ -33,7 +33,7 @@ Elementary Number Theroy
 Springer Verlag London 1998
 
 """
-class LegendreDigraph(Digraph):
+class QuadraticResiduesDigraph(Digraph):
     """
     The **Legendre** symbol *(a/p)* of any pair of non null integers *a* and *p* is:
 
@@ -49,13 +49,13 @@ class LegendreDigraph(Digraph):
     We may graphically illustrate the reciprocity theorem as follows::
     
        >>> from arithmetics import *
-       >>> leg = LegendreDigraph(primesBelow(20,Odd=True))
+       >>> leg = QuadraticResiduesDigraph(primesBelow(20,Odd=True))
        >>> from digraphs import AsymmetricPartialDigraph
        >>> aleg = AsymmetricPartialDigraph(leg)
        >>> aleg.exportGraphViz('legendreAsym')
 
     .. image:: legendreAsym.png
-       :alt: Legendre digraph asymmetric part
+       :alt: Quadratic residues digraph asymmetric part
        :width: 300 px
        :align: center
 
@@ -72,6 +72,9 @@ class LegendreDigraph(Digraph):
         actionsList = integers
         actions = OrderedDict()
         for x in actionsList:
+            if x == 0:
+                print('Only positive integers are allowed!')
+                return
             actions[x] = {'name':str(x),'shortName':str(x)}
         self.actions = actions
         Max = Decimal('1')
@@ -191,7 +194,7 @@ def pollard_brent(n):
     return g
 
 _smallprimes = primesBelow(1000) # might seem low, but 1000*1000 = 1000000, so this will fully factor every composite < 1000000
-def primeFactors(n, sort=False):
+def primeFactors(n, sort=True):
     factors = []
 
     limit = int(n ** .5) + 1
@@ -218,13 +221,36 @@ def primeFactors(n, sort=False):
     return factors
 
 def factorization(n):
-    factors = {}
+    factors = OrderedDict()
     for p1 in primeFactors(n):
         try:
             factors[p1] += 1
         except KeyError:
             factors[p1] = 1
     return factors
+
+def moebius_mu(n):
+    """
+    Implements the Moebius mu function on N based on n's prime factorization:
+    n = p1^e1 * ... * pk^ek with each ei >= 1 for i = 1, ..., k.  
+
+    mu = 0 if ei > 1 for some i = 1, ... k else mu = (-1)^k.
+    
+    """
+    if n < 1:
+        print('n must be a positive integer!')
+        return
+    factors = factorization(n)
+    k = len(factors)
+    SquareFree = True
+    for p in factors:
+        if factors[p] > 1:
+            SquareFree = False
+            break
+    if SquareFree:
+        return pow(-1,k)
+    else:
+        return 0
 
 _totients = {}
 def totient(n):
@@ -323,43 +349,45 @@ def zn_units(n,Comments=False):
     if Comments:
         print(units)
     return units
-    
 
 ###############################
 if __name__ == '__main__':
     ######  scratch pad for testing the module components
     from digraphs import *
-##    print(factorization(2224))
-##    print(gcd(2224,12345))
-##    print(lcm(2224,12345))
-##    print(totient(11))
-##    print(zn_squareroots(60,Comments=True))
-##
-##    a = 17
-##    b = 1
-##    m = 19
-##    
-##    print( ( "Congruence: %dx =  %d (mod %d)" % (a,b,m) ) )  # \equiv = \u2262
-##
-##    x,y,A,B = solPartEqnDioph(a,m,b)
-##
-##    if x == None:
-##        print("Pas de solution")
-##    else:
-##        print("Solution générale: x = %d + %dn" % (x,B))
-##        h = gcd(a,m)
-##        y = m / h
-##        print('m,h,y',m,h,y)
-##        print("Il y a %d solution(s) particulière(s):" % (h))
-##        for i in range(h):
-##            print("x_%d = %d + %d*%d (mod %d) = %d" % (i+1,x,i,y,m,(x + (i*y))%m ))
+    print(factorization(2224))
+    print(gcd(2224,12345))
+    print(lcm(2224,12345))
+    print(totient(11))
+    print(zn_squareroots(60,Comments=True))
+
+    a = 17
+    b = 1
+    m = 19
+    
+    print( ( "Congruence: %dx =  %d (mod %d)" % (a,b,m) ) )  # \equiv = \u2262
+
+    x,y,A,B = solPartEqnDioph(a,m,b)
+
+    if x == None:
+        print("Pas de solution")
+    else:
+        print("Solution générale: x = %d + %dn" % (x,B))
+        h = gcd(a,m)
+        y = m / h
+        print('m,h,y',m,h,y)
+        print("Il y a %d solution(s) particulière(s):" % (h))
+        for i in range(h):
+            print("x_%d = %d + %d*%d (mod %d) = %d" % (i+1,x,i,y,m,(x + (i*y))%m ))
             
-    l = LegendreDigraph(primesBelow(20,Odd=True))
-##    l = LegendreDigraph(range(20))
-##    l.showRelationTable(Sorted=False)
-##    l.exportGraphViz('legendre')
+    l = QuadraticResiduesDigraph(primesBelow(20,Odd=True))
+    l = QuadraticResiduesDigraph(range(1,20))
+    l.showRelationTable(Sorted=False)
+    l.exportGraphViz('legendre')
     al = AsymmetricPartialDigraph(l)
     al.exportGraphViz('legendreAsym')
     al.computeChordlessCircuits()
     al.showChordlessCircuits()
-    
+
+    for i in range(1,13):
+        print(i,moebius_mu(i))
+        
