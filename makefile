@@ -30,7 +30,7 @@ pydocs:
 		(cd pyDoc; pydoc3 -w ./)
 
 pTests:
-		parallel --gnu cp {}.py test/ ::: digraphsTools digraphs outrankingDigraphs perfTabs sortingDigraphs votingDigraphs linearOrders weakOrders graphs randomNumbers randomDigraphs randomPerfTabs bigOutrankingDigraphs sparseOutrankingDigraphs iqagent
+		parallel --gnu cp {}.py test/ ::: arithmetics digraphsTools digraphs outrankingDigraphs perfTabs sortingDigraphs votingDigraphs linearOrders weakOrders graphs randomNumbers randomDigraphs randomPerfTabs bigOutrankingDigraphs sparseOutrankingDigraphs iqagent
 		(cd test; parallel --gnu -k nosetests3 -v ::: noseTests*.py )
 
 tests:
@@ -83,6 +83,7 @@ verboseTests:
 		cp bigOutrankingDigraphs.py test/
 		cp sparseOutrankingDigraphs.py test/
 		cp iqagent.py test/
+		(cd test; nosetests3 -vs noseTestsArithmetics.py)
 		(cd test; nosetests3 -vs noseTestsDigraph.py)
 		(cd test; nosetests3 -vs noseTestsOutrankingDigraph.py)
 		(cd test; nosetests3 -vs noseTestsPerfTab.py)
@@ -94,7 +95,7 @@ verboseTests:
 		(cd test; nosetests3 -vs noseTestsGraph.py)
 		(cd test; nosetests3 -vs noseTestsRandomNumbers.py)
 		(cd test; nosetests3 -vs noseTestsRandomDigraph.py)
-		(cd test; nosetests3 -vs noseTestsBigOutrankingDigraph.py)
+		#(cd test; nosetests3 -vs noseTestsBigOutrankingDigraph.py)
 		(cd test; nosetests3 -vs noseTestsSparseOutrankingDigraph.py)
 
 digraphsTests:

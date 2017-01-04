@@ -252,6 +252,34 @@ def moebius_mu(n):
     else:
         return 0
 
+def divisors(n,Sorted=True):
+    """
+    Renders the list of divisors of integer n.
+    """
+    if n == 0:
+        return
+    Dn = [n]
+    for i in range(2,n):
+        q,r = divmod(n,i)
+        if r == 0:
+            Dn.append(q)
+    Dn.append(1)
+    if Sorted:
+        Dn.reverse()       
+    return Dn
+
+def divisorsFunction(k,n):
+    """
+    generic divisor function:
+
+       - the number of divisors of *n* is divisorsFunction(0,n)
+       - the sum of the divisors of *n* is divisorsFunction(1,n)
+    """
+    tot = 0
+    for d in divisors(n):
+        tot += pow(d,k)
+    return tot
+
 _totients = {}
 def totient(n):
     """
@@ -353,41 +381,61 @@ def zn_units(n,Comments=False):
 ###############################
 if __name__ == '__main__':
     ######  scratch pad for testing the module components
-    from digraphs import *
-    print(factorization(2224))
-    print(gcd(2224,12345))
-    print(lcm(2224,12345))
-    print(totient(11))
-    print(zn_squareroots(60,Comments=True))
-
-    a = 17
-    b = 1
-    m = 19
-    
-    print( ( "Congruence: %dx =  %d (mod %d)" % (a,b,m) ) )  # \equiv = \u2262
-
-    x,y,A,B = solPartEqnDioph(a,m,b)
-
-    if x == None:
-        print("Pas de solution")
-    else:
-        print("Solution générale: x = %d + %dn" % (x,B))
-        h = gcd(a,m)
-        y = m / h
-        print('m,h,y',m,h,y)
-        print("Il y a %d solution(s) particulière(s):" % (h))
-        for i in range(h):
-            print("x_%d = %d + %d*%d (mod %d) = %d" % (i+1,x,i,y,m,(x + (i*y))%m ))
-            
-    l = QuadraticResiduesDigraph(primesBelow(20,Odd=True))
-    l = QuadraticResiduesDigraph(range(1,20))
-    l.showRelationTable(Sorted=False)
-    l.exportGraphViz('legendre')
-    al = AsymmetricPartialDigraph(l)
-    al.exportGraphViz('legendreAsym')
-    al.computeChordlessCircuits()
-    al.showChordlessCircuits()
-
-    for i in range(1,13):
-        print(i,moebius_mu(i))
+##    from digraphs import *
+##    print(factorization(2224))
+##    print(gcd(2224,12345))
+##    print(lcm(2224,12345))
+##    print(totient(11))
+##    print(zn_squareroots(60,Comments=True))
+##
+##    a = 17
+##    b = 1
+##    m = 19
+##    
+##    print( ( "Congruence: %dx =  %d (mod %d)" % (a,b,m) ) )  # \equiv = \u2262
+##
+##    x,y,A,B = solPartEqnDioph(a,m,b)
+##
+##    if x == None:
+##        print("Pas de solution")
+##    else:
+##        print("Solution générale: x = %d + %dn" % (x,B))
+##        h = gcd(a,m)
+##        y = m / h
+##        print('m,h,y',m,h,y)
+##        print("Il y a %d solution(s) particulière(s):" % (h))
+##        for i in range(h):
+##            print("x_%d = %d + %d*%d (mod %d) = %d" % (i+1,x,i,y,m,(x + (i*y))%m ))
+##            
+##    l = QuadraticResiduesDigraph(primesBelow(20,Odd=True))
+##    l = QuadraticResiduesDigraph(range(1,20))
+##    l.showRelationTable(Sorted=False)
+##    l.exportGraphViz('legendre')
+##    al = AsymmetricPartialDigraph(l)
+##    al.exportGraphViz('legendreAsym')
+##    al.computeChordlessCircuits()
+##    al.showChordlessCircuits()
+##
+##    for i in range(1,13):
+##        print(i,moebius_mu(i))
+##
+##    f12 = Factorizations
+    D12 = divisors(12)
+    print(D12)
+    print(totient(234))
+    tot = 0
+    for d in divisors(234):
+        tot += moebius_mu(d)*234//d
+    print(tot)
+    tot = 0
+    for d in divisors(234):
+        tot += d * moebius_mu(234//d)
+    print(tot)
+    for i in range(1,100):
+        df = divisorsFunction(0,i)
+        print(df)
+        if df % 2 == 1:
+            print('-->',i)
+        print(divisorsFunction(1,i))
+        print(divisorsFunction(2,i))
         
