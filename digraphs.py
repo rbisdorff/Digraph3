@@ -7184,7 +7184,7 @@ class Digraph(object):
             b1 = 0
         else:
             _selfwcoc = CocaDigraph(g,Cpp=Cpp)
-            b1 = _selfwcoc.brakings
+            b1 = _selfwcoc.breakings
         n1 = _selfwcoc.order
         nc = n1 - n0
         
@@ -7337,11 +7337,11 @@ class Digraph(object):
             print('*--- computing the COCA digraph --*')
         if _OldCoca:
             _selfwcoc = _CocaDigraph(self,Cpp=CppAgrum,Comments=Comments)
-            self.brakings = 0
+            self.breakings = 0
         else:
             _selfwcoc = CocaDigraph(self,Cpp=CppAgrum,Comments=Comments,\
                                     Threading=Threading,nbrOfCPUs=nbrOfCPUs)
-            self.brakings = _selfwcoc.brakings
+            self.breakings = _selfwcoc.breakings
         if Comments:
             print('Execution time: %.3f seconds' % (time()-t0))
             _selfwcoc.showPreKernels()
@@ -7855,6 +7855,7 @@ class Digraph(object):
         """
         show procedure for annotated bipolar choices
         """
+        from digraphsTools import flatten
         actions = [x for x in self.actions]
         Med = self.valuationdomain['med']
         determ = ch[0]
@@ -11528,13 +11529,26 @@ class CocaDigraph(Digraph):
         newCircuits = None
         self.circuitsList = []
         try:
-            oldBrakings = self.brakings
+            oldBreakings = self.breakings
         except:
-            self.brakings = 0
-        self.newBrakings = self.order
+            self.breakings = 0
+        self.newBreakings = self.order
         #while newCircuits != set() or self.newBrakings != 0:
         while newCircuits != set():
             initialCircuits = set([x for cl,x in self.circuitsList])
+##            if Cpp:
+##                if Piping:
+##                    self.computeCppInOutPipingChordlessCircuits(Odd=True,Debug=Debug)
+##                else:
+##                    self.computeCppChordlessCircuits(Odd=True,Debug=Debug)
+##            elif Threading:
+##                self.computeChordlessCircuitsMP(Odd=True,Comments=Debug,\
+##                                                Threading=Threading,nbrOfCPUs=nbrOfCPUs)
+##            else:
+##                self.computeChordlessCircuits(Odd=True,Comments=Debug)
+##           
+            #print(self.circuitsList)
+            self.addCircuits(Comments=Comments)
             if Cpp:
                 if Piping:
                     self.computeCppInOutPipingChordlessCircuits(Odd=True,Debug=Debug)
@@ -11545,9 +11559,6 @@ class CocaDigraph(Digraph):
                                                 Threading=Threading,nbrOfCPUs=nbrOfCPUs)
             else:
                 self.computeChordlessCircuits(Odd=True,Comments=Debug)
-           
-            #print(self.circuitsList)
-            self.addCircuits(Comments=Comments)
             currentCircuits = set([x for cl,x in self.circuitsList])
             if Comments:
                 print('initialCircuits, currentCircuits', initialCircuits, currentCircuits)
@@ -11560,7 +11571,7 @@ class CocaDigraph(Digraph):
         import time
         #from copy import deepcopy
         order0 = self.order
-        newBrakings = 0
+        newBreakings = 0
         if not(isinstance(self.actions,dict)):
             actions = {}
             for x in self.actions:
@@ -11632,7 +11643,7 @@ class CocaDigraph(Digraph):
                     print(actions[cycle])
             else:
                 if Comments:
-                    print('Braking:',cycleList,degP,degN)
+                    print('Breaking:',cycleList,degP,degN)
                 actionsSubset = [x for x in flatten(cycle)]
                 if Comments:
                     self.showRelationTable(actionsSubset=actionsSubset)
@@ -11643,7 +11654,7 @@ class CocaDigraph(Digraph):
                 relation[x][y] = Med
                 relation[y][x] = Med
                 currentCircuits.remove((cycleList,cycle))
-                newBrakings += 1
+                newBreakings += 1
 
         self.actions = actions
         self.order = len(actions)
@@ -11658,13 +11669,13 @@ class CocaDigraph(Digraph):
                 print('  No circuits added !')
             else:
                 print('  ',new,' circuit(s) added!')
-        self.newBrakings = newBrakings
-        self.brakings += newBrakings
+        self.newBreakings = newBreakings
+        self.breakings += newBreakings
         if Comments:
-            if newBrakings == 0:
+            if newBreakings == 0:
                 print('  No further circuit brakings !')
             else:
-                print('  ',newBrakings,' new circuit(s) were broken')
+                print('  ',newBreakings,' new circuit(s) were broken')
             
 
     def showCircuits(self,credibility=None,Debug=False):
