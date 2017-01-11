@@ -1131,6 +1131,12 @@ res = ((netdet,singleton,dom,absorb)+)</p>
 <dl class="method">
 <dt id="digraphs.Digraph.computeSlaterOrder">
 <code class="descname">computeSlaterOrder</code><span class="sig-paren">(</span><em>isProbabilistic=False</em>, <em>seed=None</em>, <em>sampleSize=1000</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeSlaterOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeSlaterOrder" title="Permalink to this definition">¶</a></dt>
+<dd><p>reversed return from computeSlaterRanking method.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.Digraph.computeSlaterRanking">
+<code class="descname">computeSlaterRanking</code><span class="sig-paren">(</span><em>isProbabilistic=False</em>, <em>seed=None</em>, <em>sampleSize=1000</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeSlaterRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeSlaterRanking" title="Permalink to this definition">¶</a></dt>
 <dd><p>renders a ranking of the actions with minimal Slater index.
 Return a tuple: slaterOrder, slaterIndex</p>
 </dd></dl>
@@ -3700,7 +3706,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.computeDefaultDiscriminationThresholds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.computeDefaultDiscriminationThresholds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4417,7 +4423,7 @@ or updating the performances of already existing decision actions.</p>
 
 <dl class="class">
 <dt id="randomPerfTabs.RandomCBPerformanceTableau">
-<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomCBPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=13</em>, <em>numberOfCriteria=7</em>, <em>name='randomCBperftab'</em>, <em>weightDistribution='equiobjectives'</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonPercentiles=None</em>, <em>samplingSize=100000</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>missingDataProbability=0.0</em>, <em>BigData=False</em>, <em>seed=None</em>, <em>Threading=False</em>, <em>nbrCores=None</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomCBPerformanceTableau"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomCBPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomCBPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=13</em>, <em>numberOfCriteria=7</em>, <em>name='randomCBperftab'</em>, <em>weightDistribution='equiobjectives'</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonPercentiles=None</em>, <em>samplingSize=100000</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>missingDataProbability=0.01</em>, <em>BigData=False</em>, <em>seed=None</em>, <em>Threading=False</em>, <em>nbrCores=None</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomCBPerformanceTableau"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomCBPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>Full automatic generation of random
 Cost versus Benefit oriented performance tableaux.</p>
@@ -4425,13 +4431,39 @@ Cost versus Benefit oriented performance tableaux.</p>
 <blockquote>
 <div><ul class="simple">
 <li>If numberOfActions == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated</li>
-<li>If numberOfCriteria == None, a uniform random number between 5 and 21 of cost or benefit criteria (1/3 respectively 2/3 probability) is instantiated</li>
-<li>weightDistribution := {&#8216;equiobjectives&#8217;|&#8217;fixed&#8217;|&#8217;random&#8217;|&#8217;equisignificant&#8217; (default = &#8216;equisignificant&#8217;)}</li>
-<li>default weightScale for &#8216;random&#8217; weightDistribution is 1 - numberOfCriteria</li>
-<li>commonScale parameter is obsolete. The scale of cost criteria is cardinal or ordinal (0-10) with proabailities 1/4 respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal with probabilities 2/3, respectively 1/3.</li>
-<li>All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.</li>
-<li>commonThresholds is obsolete. Preference discrimination is specified as percentiles of concerned performance differences (see below).</li>
-<li>CommonPercentiles = {&#8216;ind&#8217;:0.05, &#8216;pref&#8217;:0.10, [&#8216;weakveto&#8217;:0.90,] &#8216;veto&#8217;:&#8216;95} are expressed in centiless (reversed for vetoes) and only concern cardinal criteria.</li>
+<li><dl class="first docutils">
+<dt>If numberOfCriteria == None, a uniform random number between 5 and 21 of cost or benefit criteria. </dt>
+<dd>Cost criteria have probability 1/3, whereas benefit criteria respectively 2/3 probability to be generated.
+However, at least one criterion of each kind is always instantiated.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>weightDistribution := {&#8216;equiobjectives&#8217;|&#8217;fixed&#8217;|&#8217;random&#8217;|&#8217;equisignificant&#8217;} By default, the sum of</dt>
+<dd>significance of the cost criteria is set equal to the sum of the significance of the benefit criteria.</dd>
+</dl>
+</li>
+<li>default weightScale for &#8216;random&#8217; weightDistribution is 1 - numberOfCriteria.</li>
+<li><dl class="first docutils">
+<dt>commonScale parameter is obsolete. The scale of cost criteria is cardinal or ordinal (0-10)</dt>
+<dd>with proabailities 1/4 respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal
+with probabilities 2/3, respectively 1/3.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria</dt>
+<dd>are evaluated with integers between 0 and 10.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>commonThresholds is obsolete. Preference discrimination is specified as percentiles of</dt>
+<dd>concerned performance differences (see below).</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>CommonPercentiles = {&#8216;ind&#8217;:0.05, &#8216;pref&#8217;:0.10, [&#8216;weakveto&#8217;:0.90,] &#8216;veto&#8217;:&#8216;95} are expressed</dt>
+<dd>in centiless (reversed for vetoes) and only concern cardinal criteria.</dd>
+</dl>
+</li>
 </ul>
 </div></blockquote>
 <div class="admonition warning">
@@ -4991,7 +5023,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#OutrankingDigraph.defaultDiscriminationThresholds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#OutrankingDigraph.defaultDiscriminationThresholds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -6371,7 +6403,7 @@ bipolar-valued marginal pairwise majority difference digraphs.</p>
 <span class="go">dot -Grankdir=BT -Tpng rel_randLinearProfile.dot -o rel_randLinearProfile.png</span>
 </pre></div>
 </div>
-<img alt="_images/rel_randLinearProfile.png" src="_images/rel_randLinearProfile.png" />
+<img alt="rel_randLinearProfile.png" src="rel_randLinearProfile.png" />
 <dl class="method">
 <dt id="votingDigraphs.CondorcetDigraph.computeArrowRaynaudRanking">
 <code class="descname">computeArrowRaynaudRanking</code><span class="sig-paren">(</span><em>linearOrdered=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#CondorcetDigraph.computeArrowRaynaudRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.CondorcetDigraph.computeArrowRaynaudRanking" title="Permalink to this definition">¶</a></dt>
@@ -7303,8 +7335,8 @@ To search other containers, add handlers to iterate over their contents:</p>
 <div class="section" id="module-arithmetics">
 <span id="arithmetics-module"></span><span id="arithmetics-label"></span><h2>arithmetics module<a class="headerlink" href="#module-arithmetics" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="arithmetics.LegendreDigraph">
-<em class="property">class </em><code class="descclassname">arithmetics.</code><code class="descname">LegendreDigraph</code><span class="sig-paren">(</span><em>integers=[3, 5, 7, 11, 13, 17, 19]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#LegendreDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#arithmetics.LegendreDigraph" title="Permalink to this definition">¶</a></dt>
+<dt id="arithmetics.QuadraticResiduesDigraph">
+<em class="property">class </em><code class="descclassname">arithmetics.</code><code class="descname">QuadraticResiduesDigraph</code><span class="sig-paren">(</span><em>integers=[3, 5, 7, 11, 13, 17, 19]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#QuadraticResiduesDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#arithmetics.QuadraticResiduesDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <p>The <strong>Legendre</strong> symbol <em>(a/p)</em> of any pair of non null integers <em>a</em> and <em>p</em> is:</p>
 <blockquote>
@@ -7320,13 +7352,13 @@ states that, for <em>p</em> being an odd prime, <em>(a/p)</em> = <em>(p/a)</em>,
 apart from those pairs <em>(a/p)</em>, where <em>a</em> = <em>p</em> = 3 (mod 4). In this case, <em>(a/p)</em> = -<em>(p/a)</em>.</p>
 <p>We may graphically illustrate the reciprocity theorem as follows:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">arithmetics</span> <span class="k">import</span> <span class="o">*</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">leg</span> <span class="o">=</span> <span class="n">LegendreDigraph</span><span class="p">(</span><span class="n">primesBelow</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="n">Odd</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">leg</span> <span class="o">=</span> <span class="n">QuadraticResiduesDigraph</span><span class="p">(</span><span class="n">primesBelow</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="n">Odd</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">AsymmetricPartialDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">aleg</span> <span class="o">=</span> <span class="n">AsymmetricPartialDigraph</span><span class="p">(</span><span class="n">leg</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">aleg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;legendreAsym&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/legendreAsym.png"><img alt="Legendre digraph asymmetric part" class="align-center" src="_images/legendreAsym.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="_images/legendreAsym.png"><img alt="Quadratic residues digraph asymmetric part" class="align-center" src="_images/legendreAsym.png" style="width: 300px;" /></a>
 </dd></dl>
 
 <dl class="function">
@@ -7335,6 +7367,24 @@ apart from those pairs <em>(a/p)</em>, where <em>a</em> = <em>p</em> = 3 (mod 4)
 <dd><p>Renders d = gcd(a,b) and the
 Bezout coefficient x, y such that
 d = ax + by.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="arithmetics.divisors">
+<code class="descclassname">arithmetics.</code><code class="descname">divisors</code><span class="sig-paren">(</span><em>n</em>, <em>Sorted=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#divisors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#arithmetics.divisors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the list of divisors of integer n.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="arithmetics.divisorsFunction">
+<code class="descclassname">arithmetics.</code><code class="descname">divisorsFunction</code><span class="sig-paren">(</span><em>k</em>, <em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#divisorsFunction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#arithmetics.divisorsFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>generic divisor function:</p>
+<blockquote>
+<div><ul class="simple">
+<li>the number of divisors of <em>n</em> is divisorsFunction(0,n)</li>
+<li>the sum of the divisors of <em>n</em> is divisorsFunction(1,n)</li>
+</ul>
+</div></blockquote>
 </dd></dl>
 
 <dl class="function">
@@ -7361,6 +7411,14 @@ d = ax + by.</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="arithmetics.moebius_mu">
+<code class="descclassname">arithmetics.</code><code class="descname">moebius_mu</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#moebius_mu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#arithmetics.moebius_mu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implements the Moebius mu function on N based on n&#8217;s prime factorization:
+n = p1^e1 * ... * pk^ek with each ei &gt;= 1 for i = 1, ..., k.</p>
+<p>mu = 0 if ei &gt; 1 for some i = 1, ... k else mu = (-1)^k.</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="arithmetics.pollard_brent">
 <code class="descclassname">arithmetics.</code><code class="descname">pollard_brent</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#pollard_brent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#arithmetics.pollard_brent" title="Permalink to this definition">¶</a></dt>
 <dd><p><a class="reference external" href="https://comeoncodeon.wordpress.com/2010/09/18/pollard-rho-brent-integer-factorization/">https://comeoncodeon.wordpress.com/2010/09/18/pollard-rho-brent-integer-factorization/</a></p>
@@ -7368,7 +7426,7 @@ d = ax + by.</p>
 
 <dl class="function">
 <dt id="arithmetics.primeFactors">
-<code class="descclassname">arithmetics.</code><code class="descname">primeFactors</code><span class="sig-paren">(</span><em>n</em>, <em>sort=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#primeFactors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#arithmetics.primeFactors" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">arithmetics.</code><code class="descname">primeFactors</code><span class="sig-paren">(</span><em>n</em>, <em>sort=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#primeFactors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#arithmetics.primeFactors" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">

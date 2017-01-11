@@ -9250,7 +9250,7 @@ class Digraph(object):
         return principalScores
 
 
-    def computeSlaterOrder(self,isProbabilistic=False, seed=None, sampleSize=1000, Debug=False):
+    def computeSlaterRanking(self,isProbabilistic=False, seed=None, sampleSize=1000, Debug=False):
         """
         renders a ranking of the actions with minimal Slater index.
         Return a tuple: slaterOrder, slaterIndex
@@ -9261,7 +9261,7 @@ class Digraph(object):
             CopySign = True
         except:
             CopySign = False
-        from digraphs import all_perms
+        from digraphsTools import all_perms
 
 
         Min = self.valuationdomain['min']
@@ -9279,7 +9279,7 @@ class Digraph(object):
                 seed = seed
             a = list(actions)
             slaterIndex = -(n*n)
-            slaterOrder = list(a)
+            slaterRanking = list(a)
             sampleSize = sampleSize
 
             for s in range(sampleSize):
@@ -9301,11 +9301,11 @@ class Digraph(object):
 
                 if kcurr > slaterIndex:
                     slaterIndex = kcurr
-                    slaterOrder = list(a)
+                    slaterRanking = list(a)
                     if Debug:
                         print(s, slaterIndex)
             if Debug:
-                print('Probabilistic Slater Order = ', slaterOrder)
+                print('Probabilistic Slater Order = ', slaterRanking)
                 print('Probabilistic Slater Index = ', slaterIndex)
                 print('with samplesize :            ', sampleSize)
 
@@ -9342,16 +9342,25 @@ class Digraph(object):
                     print(s, a, kcurr)
                 if kcurr >= slaterIndex:
                     slaterIndex = kcurr
-                    slaterOrder = list(a)
+                    slaterRanking = list(a)
                     if Debug:
-                        print(s, slaterOrder, slaterIndex)
+                        print(s, slaterRanking, slaterIndex)
             if Debug:
-                print('Exact Slater Order = ', slaterOrder)
+                print('Exact Slater Order = ', slaterRanking)
                 print('Exact Slater Index = ', slaterIndex)
                 print('# of permutations  = ', s)
 
         self.recodeValuation(minOrig,maxOrig)
-        return slaterOrder, slaterIndex
+        return slaterRanking, slaterIndex
+
+    def computeSlaterOrder(self,isProbabilistic=False, seed=None, sampleSize=1000, Debug=False):
+        """
+        reversed return from computeSlaterRanking method.
+        """
+        slaterOrder,slaterIndex = self.computeSlaterRanking(isProbabilistic=isProbabilistic,
+                                                          seed=seed, sampleSize=sampleSize, Debug=Debug)
+        slaterOrder.reverse()
+        return slaterOrder,slaterIndex
 
     def computePairwiseClusterComparison(self, K1, K2, Debug=False):
         """

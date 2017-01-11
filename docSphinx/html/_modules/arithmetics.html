@@ -83,7 +83,7 @@
 <span class="sd">Springer Verlag London 1998</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
-<div class="viewcode-block" id="LegendreDigraph"><a class="viewcode-back" href="../techDoc.html#arithmetics.LegendreDigraph">[docs]</a><span class="k">class</span> <span class="nc">LegendreDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<div class="viewcode-block" id="QuadraticResiduesDigraph"><a class="viewcode-back" href="../techDoc.html#arithmetics.QuadraticResiduesDigraph">[docs]</a><span class="k">class</span> <span class="nc">QuadraticResiduesDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The **Legendre** symbol *(a/p)* of any pair of non null integers *a* and *p* is:</span>
 
@@ -99,13 +99,13 @@
 <span class="sd">    We may graphically illustrate the reciprocity theorem as follows::</span>
 <span class="sd">    </span>
 <span class="sd">       &gt;&gt;&gt; from arithmetics import *</span>
-<span class="sd">       &gt;&gt;&gt; leg = LegendreDigraph(primesBelow(20,Odd=True))</span>
+<span class="sd">       &gt;&gt;&gt; leg = QuadraticResiduesDigraph(primesBelow(20,Odd=True))</span>
 <span class="sd">       &gt;&gt;&gt; from digraphs import AsymmetricPartialDigraph</span>
 <span class="sd">       &gt;&gt;&gt; aleg = AsymmetricPartialDigraph(leg)</span>
 <span class="sd">       &gt;&gt;&gt; aleg.exportGraphViz(&#39;legendreAsym&#39;)</span>
 
 <span class="sd">    .. image:: legendreAsym.png</span>
-<span class="sd">       :alt: Legendre digraph asymmetric part</span>
+<span class="sd">       :alt: Quadratic residues digraph asymmetric part</span>
 <span class="sd">       :width: 300 px</span>
 <span class="sd">       :align: center</span>
 
@@ -122,6 +122,9 @@
         <span class="n">actionsList</span> <span class="o">=</span> <span class="n">integers</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionsList</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Only positive integers are allowed!&#39;</span><span class="p">)</span>
+                <span class="k">return</span>
             <span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="s1">&#39;shortName&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">actions</span>
         <span class="n">Max</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
@@ -241,7 +244,7 @@
     <span class="k">return</span> <span class="n">g</span></div>
 
 <span class="n">_smallprimes</span> <span class="o">=</span> <span class="n">primesBelow</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="c1"># might seem low, but 1000*1000 = 1000000, so this will fully factor every composite &lt; 1000000</span>
-<div class="viewcode-block" id="primeFactors"><a class="viewcode-back" href="../techDoc.html#arithmetics.primeFactors">[docs]</a><span class="k">def</span> <span class="nf">primeFactors</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="primeFactors"><a class="viewcode-back" href="../techDoc.html#arithmetics.primeFactors">[docs]</a><span class="k">def</span> <span class="nf">primeFactors</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="n">factors</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="n">limit</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span> <span class="o">**</span> <span class="o">.</span><span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
@@ -268,13 +271,64 @@
     <span class="k">return</span> <span class="n">factors</span></div>
 
 <div class="viewcode-block" id="factorization"><a class="viewcode-back" href="../techDoc.html#arithmetics.factorization">[docs]</a><span class="k">def</span> <span class="nf">factorization</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">factors</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">factors</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">p1</span> <span class="ow">in</span> <span class="n">primeFactors</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">factors</span><span class="p">[</span><span class="n">p1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="n">factors</span><span class="p">[</span><span class="n">p1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="n">factors</span></div>
+
+<div class="viewcode-block" id="moebius_mu"><a class="viewcode-back" href="../techDoc.html#arithmetics.moebius_mu">[docs]</a><span class="k">def</span> <span class="nf">moebius_mu</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Implements the Moebius mu function on N based on n&#39;s prime factorization:</span>
+<span class="sd">    n = p1^e1 * ... * pk^ek with each ei &gt;= 1 for i = 1, ..., k.  </span>
+
+<span class="sd">    mu = 0 if ei &gt; 1 for some i = 1, ... k else mu = (-1)^k.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;n must be a positive integer!&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="n">factors</span> <span class="o">=</span> <span class="n">factorization</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">factors</span><span class="p">)</span>
+    <span class="n">SquareFree</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">factors</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">factors</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">SquareFree</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">break</span>
+    <span class="k">if</span> <span class="n">SquareFree</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">pow</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+
+<div class="viewcode-block" id="divisors"><a class="viewcode-back" href="../techDoc.html#arithmetics.divisors">[docs]</a><span class="k">def</span> <span class="nf">divisors</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Renders the list of divisors of integer n.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="n">Dn</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">q</span><span class="p">,</span><span class="n">r</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">Dn</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+    <span class="n">Dn</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">Sorted</span><span class="p">:</span>
+        <span class="n">Dn</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>       
+    <span class="k">return</span> <span class="n">Dn</span></div>
+
+<div class="viewcode-block" id="divisorsFunction"><a class="viewcode-back" href="../techDoc.html#arithmetics.divisorsFunction">[docs]</a><span class="k">def</span> <span class="nf">divisorsFunction</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    generic divisor function:</span>
+
+<span class="sd">       - the number of divisors of *n* is divisorsFunction(0,n)</span>
+<span class="sd">       - the sum of the divisors of *n* is divisorsFunction(1,n)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tot</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">divisors</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">tot</span> <span class="o">+=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tot</span></div>
 
 <span class="n">_totients</span> <span class="o">=</span> <span class="p">{}</span>
 <div class="viewcode-block" id="totient"><a class="viewcode-back" href="../techDoc.html#arithmetics.totient">[docs]</a><span class="k">def</span> <span class="nf">totient</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -373,12 +427,11 @@
     <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">units</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">units</span></div>
-    
 
 <span class="c1">###############################</span>
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="c1">######  scratch pad for testing the module components</span>
-    <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="o">*</span>
+<span class="c1">##    from digraphs import *</span>
 <span class="c1">##    print(factorization(2224))</span>
 <span class="c1">##    print(gcd(2224,12345))</span>
 <span class="c1">##    print(lcm(2224,12345))</span>
@@ -403,16 +456,39 @@
 <span class="c1">##        print(&quot;Il y a %d solution(s) particulière(s):&quot; % (h))</span>
 <span class="c1">##        for i in range(h):</span>
 <span class="c1">##            print(&quot;x_%d = %d + %d*%d (mod %d) = %d&quot; % (i+1,x,i,y,m,(x + (i*y))%m ))</span>
-            
-    <span class="n">l</span> <span class="o">=</span> <span class="n">LegendreDigraph</span><span class="p">(</span><span class="n">primesBelow</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="n">Odd</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-<span class="c1">##    l = LegendreDigraph(range(20))</span>
+<span class="c1">##            </span>
+<span class="c1">##    l = QuadraticResiduesDigraph(primesBelow(20,Odd=True))</span>
+<span class="c1">##    l = QuadraticResiduesDigraph(range(1,20))</span>
 <span class="c1">##    l.showRelationTable(Sorted=False)</span>
 <span class="c1">##    l.exportGraphViz(&#39;legendre&#39;)</span>
-    <span class="n">al</span> <span class="o">=</span> <span class="n">AsymmetricPartialDigraph</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
-    <span class="n">al</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;legendreAsym&#39;</span><span class="p">)</span>
-    <span class="n">al</span><span class="o">.</span><span class="n">computeChordlessCircuits</span><span class="p">()</span>
-    <span class="n">al</span><span class="o">.</span><span class="n">showChordlessCircuits</span><span class="p">()</span>
-    
+<span class="c1">##    al = AsymmetricPartialDigraph(l)</span>
+<span class="c1">##    al.exportGraphViz(&#39;legendreAsym&#39;)</span>
+<span class="c1">##    al.computeChordlessCircuits()</span>
+<span class="c1">##    al.showChordlessCircuits()</span>
+<span class="c1">##</span>
+<span class="c1">##    for i in range(1,13):</span>
+<span class="c1">##        print(i,moebius_mu(i))</span>
+<span class="c1">##</span>
+<span class="c1">##    f12 = Factorizations</span>
+    <span class="n">D12</span> <span class="o">=</span> <span class="n">divisors</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">D12</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">totient</span><span class="p">(</span><span class="mi">234</span><span class="p">))</span>
+    <span class="n">tot</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">divisors</span><span class="p">(</span><span class="mi">234</span><span class="p">):</span>
+        <span class="n">tot</span> <span class="o">+=</span> <span class="n">moebius_mu</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">*</span><span class="mi">234</span><span class="o">//</span><span class="n">d</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">tot</span><span class="p">)</span>
+    <span class="n">tot</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">divisors</span><span class="p">(</span><span class="mi">234</span><span class="p">):</span>
+        <span class="n">tot</span> <span class="o">+=</span> <span class="n">d</span> <span class="o">*</span> <span class="n">moebius_mu</span><span class="p">(</span><span class="mi">234</span><span class="o">//</span><span class="n">d</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">tot</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">):</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">divisorsFunction</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">df</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--&gt;&#39;</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">divisorsFunction</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">divisorsFunction</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">i</span><span class="p">))</span>
+        
 </pre></div>
 
           </div>

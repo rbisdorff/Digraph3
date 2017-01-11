@@ -544,11 +544,12 @@ install:
 		sudo python3 setup.py install
 #		sudo python3.3 setup.py install
 		sudo python3.5 setup.py install
+		sudo python3.6 setup.py install
 
 installVenv:
 		python3 setup.py install
 #		python3.3 setup.py install
 #		python3.4 setup.py install
 
-installPyPy:
-		pypy3 setup.py install
+#installPyPy:
+#		pypy3 setup.py install
