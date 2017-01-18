@@ -5894,9 +5894,15 @@ class Digraph(object):
             Default values gives a normalized valuation domain
 
         """
+        from decimal import Decimal
+        
         oldMax = self.valuationdomain['max']
         oldMin = self.valuationdomain['min']
         oldMed = self.valuationdomain['med']
+        try:
+            oldPrecision = self.valuationdomain['precision']
+        except:
+            oldPrecision = Decimal('0')
 
         oldAmplitude = oldMax - oldMin
         if Debug:
@@ -5905,10 +5911,12 @@ class Digraph(object):
         newMin = Decimal(str(newMin))
         newMax = Decimal(str(newMax))
         newMed = Decimal('%.3f' % ((newMax + newMin)/Decimal('2.0')))
+        newPrecision = oldPrecision/oldMax
 
         newAmplitude = newMax - newMin
         if Debug:
             print(newMin, newMed, newMax, newAmplitude)
+            print('old and new precison', oldPrecision, newPrecision) 
 
         actions = self.actions
         oldrelation = self.relation
@@ -5932,7 +5940,9 @@ class Digraph(object):
         self.valuationdomain['max'] = newMax
         self.valuationdomain['min'] = newMin
         self.valuationdomain['med'] = newMed
+        self.valuationdomain['precision'] = newPrecision
         self.valuationdomain['hasIntegerValuation'] = False
+        
 
         self.relation = newrelation
 
@@ -11598,7 +11608,7 @@ class CocaDigraph(Digraph):
                 print(cycleList,cycle,degP,degN,minLink)
             #if degP+degN > Med:
             
-            if abs(degP) - abs(degN) > valuationdomain['precision']:
+            if (degP + degN) > -valuationdomain['precision']:
                 if Comments:
                     print('Adding cycle:', cycle, ' with Pdegree=',degP,' and Ndegree=',degN )
                 cn = '_'
