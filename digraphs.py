@@ -6671,6 +6671,7 @@ class Digraph(object):
         the set of actions in the stored circuit.
         """
         #import copy
+        from digraphsTools import flatten
         if Comments:
             if Odd:
                 print('*--- chordless odd circuits ---*')
@@ -11578,11 +11579,221 @@ class CocaDigraph(Digraph):
                 print('initialCircuits, currentCircuits', initialCircuits, currentCircuits)
             newCircuits = currentCircuits - initialCircuits
 
+##    def _closureChordlessOddCircuits(self,Cpp=False,Piping=False,\
+##                                    Comments=True,Debug=False,Threading=False,nbrOfCPUs=1):
+##        """
+##        Closure of chordless odd circuits extraction.
+##        """
+##        newCircuits = None
+##        self.circuitsList = []
+##        try:
+##            oldBreakings = self.breakings
+##            oldlinks2break = self.links2break
+##        except:
+##            self.breakings = 0
+##            self.links2break = []
+##            
+##        self.newBreakings = self.order
+##        #while newCircuits != set() or self.newBrakings != 0:
+##        while newCircuits != set():
+##            initialCircuits = set([x for cl,x in self.circuitsList])
+####            if Cpp:
+####                if Piping:
+####                    self.computeCppInOutPipingChordlessCircuits(Odd=True,Debug=Debug)
+####                else:
+####                    self.computeCppChordlessCircuits(Odd=True,Debug=Debug)
+####            elif Threading:
+####                self.computeChordlessCircuitsMP(Odd=True,Comments=Debug,\
+####                                                Threading=Threading,nbrOfCPUs=nbrOfCPUs)
+####            else:
+####                self.computeChordlessCircuits(Odd=True,Comments=Debug)
+####           
+##            #print(self.circuitsList)
+##            self._collectBreakings(Comments=Comments)
+##            #print(self.circuitsList)
+###            self.addCircuits(Comments=Comments)
+##            if Cpp:
+##                if Piping:
+##                    self.computeCppInOutPipingChordlessCircuits(Odd=True,Debug=Debug)
+##                else:
+##                    self.computeCppChordlessCircuits(Odd=True,Debug=Debug)
+##            elif Threading:
+##                self.computeChordlessCircuitsMP(Odd=True,Comments=Debug,\
+##                                                Threading=Threading,nbrOfCPUs=nbrOfCPUs)
+##            else:
+##                self.computeChordlessCircuits(Odd=True,Comments=Debug)
+##            currentCircuits = set([x for cl,x in self.circuitsList])
+##            if Comments:
+##                print('initialCircuits, currentCircuits', initialCircuits, currentCircuits)
+##            newCircuits = currentCircuits - initialCircuits
+##            self._addCircuits(Comments=Comments)
+
+##    def _collectBreakings(self,Comments=False):
+##        """
+##        Collect links to break.
+##        """
+##        import time
+##        #from copy import deepcopy
+##        order0 = self.order
+##        newBreakings = 0
+##        newlinks2break = []
+##        if not(isinstance(self.actions,dict)):
+##            actions = {}
+##            for x in self.actions:
+##                actions[x] = {'name':x}
+##        else:
+##            actions = self.actions
+##
+##        #ListActions = [frozenset([x]) for x in actions]
+##        circuitsList = self.circuitsList
+##        if Comments:
+##            print('list of circuits: ', circuitsList)
+##        valuationdomain = self.valuationdomain
+##        gamma = self.gamma
+##        relation = self.relation
+##        Med = valuationdomain['med']
+##        currentCircuits = list(circuitsList)
+##        for (cycleList,cycle) in circuitsList:
+##            degP,degN,minLink = self.circuitCredibilities(cycleList,Debug=Comments)
+##            if Comments:
+##                print(cycleList,cycle,degP,degN,minLink)
+##            #if degP+degN > Med:
+##            
+##            if (degP + degN) < -valuationdomain['precision']:
+##                if Comments:
+##                    print('Breaking:',cycleList,degP,degN)
+##                actionsSubset = [x for x in flatten(cycle)]
+##                if Comments:
+##                    self.showRelationTable(actionsSubset=actionsSubset)
+##                x = minLink[0]
+##                y = minLink[1]
+##                if Comments:
+##                    print('Minimal link put to doubt: ', x,y)
+##                relation[x][y] = Med
+##                relation[y][x] = Med
+##                currentCircuits.remove((cycleList,cycle))
+##                newBreakings += 1
+##                newlinks2break.append((x,y))
+##
+##        self.actions = actions
+##        self.order = len(actions)
+##        self.relation = relation
+##        self.circuitsList = currentCircuits
+##        self.gamma = self.gammaSets()
+##        self.notGamma = self.notGammaSets()
+##        self.weakGamma = self.weakGammaSets()
+##        new = self.order - order0
+##        self.newBreakings = newBreakings
+##        self.breakings += newBreakings
+##        try:
+##            self.links2break += newlinks2break
+##        except:
+##            self.links2break = newlinks2break
+##        if Comments:
+##            if newBreakings == 0:
+##                print('  No further circuit breakings !')
+##            else:
+##                print('  ',newlinks2break,' new links were broken')
+##            
+##    def _addCircuits(self,Comments=False):
+##        """
+##        Augmenting self with self.circuits.
+##        """
+##        import time
+##        #from copy import deepcopy
+##        order0 = self.order
+##        if not(isinstance(self.actions,dict)):
+##            actions = {}
+##            for x in self.actions:
+##                actions[x] = {'name':x}
+##        else:
+##            actions = self.actions
+##
+##        #ListActions = [frozenset([x]) for x in actions]
+##        circuitsList = self.circuitsList
+##        if Comments:
+##            print('list of circuits: ', circuitsList)
+##        valuationdomain = self.valuationdomain
+##        gamma = self.gamma
+##        relation = self.relation
+##        Med = valuationdomain['med']
+##        currentCircuits = list(circuitsList)
+##        for (cycleList,cycle) in circuitsList:
+##            degP,degN,minLink = self.circuitCredibilities(cycleList,Debug=Comments)
+##            if Comments:
+##                print(cycleList,cycle,degP,degN,minLink)
+##            #if degP+degN > Med:
+##            
+##            #if (degP + degN) > -valuationdomain['precision']:
+##            if Comments:
+##                print('Adding cycle:', cycle, ' with Pdegree=',degP,' and Ndegree=',degN )
+##            cn = '_'
+##            dcycle = set()
+##            acycle = set()
+##            for x in cycleList:
+##                if isinstance(x,frozenset):
+##                    cn += actions[x]['name'] + '_'
+##                else:
+##                    cn += str(x) + '_'
+##                dcycle = dcycle | gamma[x][0]
+##                dcycle = dcycle | set([x])
+##                acycle = acycle | gamma[x][1]
+##                acycle = acycle | set([x])
+##            gamma[cycle]=(dcycle,acycle)
+##            for x in actions:
+##                if x in cycle:
+##                    dx0 = gamma[x][0] | set([cycle])
+##                    dx1 = gamma[x][1] | set([cycle])
+##                    gamma[x] = (dx0,dx1)
+##                    relxcn = relation[x]
+##                    #relxcn[cycle] = valuationdomain['max']
+##                    relxcn[cycle] = degP + degN
+##                    relation[x] = relxcn
+##                else:
+##                    relxy = valuationdomain['min']
+##                    for y in cycle:
+##                        relxy = max(relxy,relation[x][y])
+##                        relxcn = relation[x]
+##                        relxcn[cycle] = relxy
+##                        relation[x] = relxcn
+##            relcycle = {}
+##            for x in actions:
+##                if x in cycle:
+##                    #relcycle[x] = valuationdomain['max']
+##                    relcycle[x] = degP
+##                else:
+##                    relxy = valuationdomain['min']
+##                    for y in cycle:
+##                        relxy = max(relxy,relation[y][x])
+##                    relcycle[x] = relxy
+##            relcycle[cycle] = valuationdomain['min']
+##            relation[cycle] = relcycle
+##            name = 'chordless odd %d-circuit' % (len(cycle))
+##            actions[cycle] = {'name': cn, 'comment': name}
+##            if Comments:
+##                print(actions[cycle])
+##
+##        self.actions = actions
+##        self.order = len(actions)
+##        self.relation = relation
+##        self.circuitsList = currentCircuits
+##        self.gamma = self.gammaSets()
+##        self.notGamma = self.notGammaSets()
+##        self.weakGamma = self.weakGammaSets()
+##        new = self.order - order0
+##        if Comments:
+##            if new == 0:
+##                print('  No circuits added !')
+##            else:
+##                print('  ',new,' circuit(s) added!')
+
     def addCircuits(self,Comments=False):
         """
         Augmenting self with self.circuits.
         """
         import time
+        from digraphsTools import flatten
+        
         #from copy import deepcopy
         order0 = self.order
         newBreakings = 0
@@ -11608,7 +11819,8 @@ class CocaDigraph(Digraph):
                 print(cycleList,cycle,degP,degN,minLink)
             #if degP+degN > Med:
             
-            if (degP + degN) > -valuationdomain['precision']:
+            if (degP + degN) > valuationdomain['precision']:
+#           if (degP + degN) >= valuationdomain['med']:
                 if Comments:
                     print('Adding cycle:', cycle, ' with Pdegree=',degP,' and Ndegree=',degN )
                 cn = '_'
@@ -11691,7 +11903,6 @@ class CocaDigraph(Digraph):
                 print('  No further circuit brakings !')
             else:
                 print('  ',newBreakings,' new circuit(s) were broken')
-            
 
     def showCircuits(self,credibility=None,Debug=False):
         """
@@ -12420,19 +12631,21 @@ if __name__ == "__main__":
         print('*-------- Testing classes and methods -------')
 
         from time import time
+        from digraphsTools import *
         ##dg = RedhefferDigraph(order=113)
         #g = RandomTournament(order=5,seed=1)
         #g = RandomValuationDigraph(seed=1)
         from outrankingDigraphs import BipolarOutrankingDigraph
         from randomPerfTabs import RandomCBPerformanceTableau
         from linearOrders import CopelandOrder
-        t1 = RandomPerformanceTableau(numberOfActions=20,seed=10)
+        t1 = RandomCBPerformanceTableau(numberOfActions=20,seed=1)
         g = BipolarOutrankingDigraph(t1,Normalized=True)
         cop = CopelandOrder(g)
-        g.showHTMLRelationMap(rankingRule='rankedPairs')
+        #g.showHTMLRelationMap(rankingRule='rankedPairs')
         gcd = CoDualDigraph(g)
-        gcd.showHTMLRelationMap(cop.copelandOrder)
-       
+        #gcd.showHTMLRelationMap(cop.copelandOrder)
+        g.showRubisBestChoiceRecommendation()
+        t1.computeQuantileOrder(3,10)
         #g.showHTMLRelationMap(Colored=False)
         #g.exportGraphViz()
 ##        from outrankingDigraphs import BipolarOutrankingDigraph
