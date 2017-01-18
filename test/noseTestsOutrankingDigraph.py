@@ -1,9 +1,9 @@
 #######################
 # R. Bisdorff 
-# digraphs.py module tests for nose
+# outrankingDigraphs.py module tests for nose
 #
 # ..$ easyinstall nose   # installing the nose test environment
-# ..$ nosetests -vs noseTestsDigraph.py
+# ..$ nosetests -vs noseTestsOutrankingDigraph.py
 # # Current $Revision: 1.8 $
 ########################
 

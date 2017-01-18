@@ -3812,6 +3812,11 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             Med =   Decimal('0.0')
             Max =   Decimal('100.0')
         self.valuationdomain = {'min':Min,'med':Med,'max':Max}
+        try:
+            self.valuationdomain['precision'] = perfTab.valuationPrecision
+        except:
+            self.valuationdomain['precision'] = Decimal('0')
+            
         # objectives and criteria
         try:
             if CopyPerfTab:

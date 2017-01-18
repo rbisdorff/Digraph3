@@ -11504,6 +11504,10 @@ class CocaDigraph(Digraph):
             self.name = str(digraph.name)
             self.actions = copy.deepcopy(digraph.actions)
             self.valuationdomain = copy.deepcopy(digraph.valuationdomain)
+            try:
+                self.valuationdomain['precision'] = digraph.valuationdomain['precision']
+            except:
+                self.valuationdomain['precision']  = Decimal('0')
             self.relation = copy.deepcopy(digraph.relation)
         else:
             fileName = digraph + 'py'
@@ -11593,7 +11597,8 @@ class CocaDigraph(Digraph):
             if Comments:
                 print(cycleList,cycle,degP,degN,minLink)
             #if degP+degN > Med:
-            if abs(degP) > abs(degN):
+            
+            if abs(degP) - abs(degN) > valuationdomain['precision']:
                 if Comments:
                     print('Adding cycle:', cycle, ' with Pdegree=',degP,' and Ndegree=',degN )
                 cn = '_'

@@ -1360,6 +1360,10 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                 weightsList.append(Decimal(str(weightScale[0])))
                 sumWeights += weightScale[0]
 
+        # store sum of weights and precision level
+        self.sumWeights = sumWeights
+        self.valuationPrecision = Decimal('0.1')/sumWeights
+        
         # generate objectives dictionary
         objectives = OrderedDict([(
             'Eco', {'name':'Economical aspect',
@@ -2293,6 +2297,10 @@ class RandomCBPerformanceTableau(PerformanceTableau):
             print('!!! Error: wrong criteria weight distribution mode: %s !!!!' % (weightDistribution))
         if Debug:
             print(weightsList, sumWeights)
+
+        # store sum of weights and valuation precision
+        self.sumWeights = sumWeights
+        self.valuationPrecision = Decimal('0.1')/sumWeights
 
         for i,g in enumerate(criteria):
             ## if Debug:
