@@ -8210,6 +8210,7 @@
                  <span class="n">hasBipolarVeto</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,):</span>
         <span class="c1"># getting module ressources and setting the random seed</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
@@ -8222,10 +8223,11 @@
             <span class="n">perfTab</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">argPerfTab</span><span class="p">)</span>
         <span class="c1"># initializing the bipolar outranking digraph</span>
         <span class="n">bodg</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">argPerfTab</span><span class="o">=</span><span class="n">perfTab</span><span class="p">,</span><span class="n">coalition</span><span class="o">=</span><span class="n">coalition</span><span class="p">,</span>\
-                                     <span class="n">hasNoVeto</span> <span class="o">=</span> <span class="n">hasNoVeto</span><span class="p">,</span>\
-                                     <span class="n">hasBipolarVeto</span> <span class="o">=</span> <span class="n">hasBipolarVeto</span><span class="p">,</span>\
+                                     <span class="n">hasNoVeto</span><span class="o">=</span><span class="n">hasNoVeto</span><span class="p">,</span>\
+                                     <span class="n">hasBipolarVeto</span><span class="o">=</span><span class="n">hasBipolarVeto</span><span class="p">,</span>\
                                      <span class="n">Normalized</span><span class="o">=</span><span class="n">Normalized</span><span class="p">,</span>\
-                                     <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">)</span>
+                                     <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span>\
+                                     <span class="n">nbrCores</span><span class="o">=</span><span class="n">nbrOfCPUs</span> <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">bodg</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_CLT&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bipolarConfidenceLevel</span> <span class="o">=</span> <span class="p">(</span><span class="n">confidence</span><span class="o">/</span><span class="mf">100.0</span><span class="p">)</span><span class="o">*</span><span class="mf">2.0</span> <span class="o">-</span><span class="mf">1.0</span> 
         <span class="bp">self</span><span class="o">.</span><span class="n">distribution</span> <span class="o">=</span> <span class="n">distribution</span>
@@ -8346,9 +8348,11 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">erf</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
     
-<div class="viewcode-block" id="ConfidentBipolarOutrankingDigraph.computeCLTLikelihoods"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.ConfidentBipolarOutrankingDigraph.computeCLTLikelihoods">[docs]</a>    <span class="k">def</span> <span class="nf">computeCLTLikelihoods</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">distribution</span><span class="o">=</span><span class="s2">&quot;triangular&quot;</span><span class="p">,</span>
-                              <span class="n">betaParameter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                              <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="ConfidentBipolarOutrankingDigraph.computeCLTLikelihoods"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.ConfidentBipolarOutrankingDigraph.computeCLTLikelihoods">[docs]</a>    <span class="k">def</span> <span class="nf">computeCLTLikelihoods</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">distribution</span><span class="o">=</span><span class="s2">&quot;triangular&quot;</span><span class="p">,</span>\
+                              <span class="n">betaParameter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+                              <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
+                              <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>\
+                              <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the pairwise CLT likelihood of the at least as good as relation</span>
 <span class="sd">        neglecting all considerable large performance differences polarisations.</span>
@@ -8374,7 +8378,7 @@
 <span class="c1">##            print(weightSquares)</span>
         <span class="k">if</span> <span class="n">Threading</span><span class="p">:</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                         <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">)</span>
+                                         <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
             <span class="n">concordanceRelation</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">relation</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">concordanceRelation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_recodeConcordanceValuation</span><span class="p">(</span>\

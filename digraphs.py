@@ -11507,7 +11507,8 @@ class BrokenCocsDigraph(Digraph):
     def __init__(self,digraph=None,Cpp=False,Piping=False,\
                  Comments=False,Threading=False,nbrOfCPUs=1):
         import random,sys,array,copy
-        from outrankingDigraphs import OutrankingDigraph, RandomOutrankingDigraph, BipolarOutrankingDigraph
+        from outrankingDigraphs import OutrankingDigraph,\
+             RandomOutrankingDigraph, BipolarOutrankingDigraph, ConfidentBipolarOutrankingDigraph
         ## if comment == None:
         ##     silent = True
         ## else:
@@ -11515,7 +11516,9 @@ class BrokenCocsDigraph(Digraph):
         if digraph == None:
             print('Erreur: A valid Digraph instance is required!')
             return
-        elif isinstance(digraph,(Digraph,OutrankingDigraph,RandomOutrankingDigraph,BipolarOutrankingDigraph)):
+        elif isinstance(digraph,(Digraph,OutrankingDigraph,\
+                                 RandomOutrankingDigraph,BipolarOutrankingDigraph,\
+                                 ConfidentBipolarOutrankingDigraph)):
             self.name = str(digraph.name)
             self.actions = copy.deepcopy(digraph.actions)
             self.valuationdomain = copy.deepcopy(digraph.valuationdomain)
@@ -11547,7 +11550,7 @@ class BrokenCocsDigraph(Digraph):
         """
         newCircuits = None
         self.circuitsList = []
-        self.brokenLinks = []
+        self.brokenLinks = set()
         try:
             oldBreakings = self.breakings
         except:
@@ -11610,11 +11613,12 @@ class BrokenCocsDigraph(Digraph):
             y = minLink[1]
             if Comments:
                 print('Minimal link put to doubt: ', x,y)
-            relation[x][y] = Med
-            relation[y][x] = Med
+            if (x,y) not in self.brokenLinks:
+                relation[x][y] = Med
+                relation[y][x] = Med
+                self.brokenLinks.add((x,y))
+                newBreakings += 1
             currentCircuits.remove((cycleList,cycle))
-            newBreakings += 1
-            self.brokenLinks.append([x,y])
 
         self.actions = actions
         self.order = len(actions)
@@ -12797,6 +12801,7 @@ if __name__ == "__main__":
         t1 = RandomCBPerformanceTableau(numberOfActions=20,seed=1)
         g = BipolarOutrankingDigraph(t1,Normalized=True)
         cocb = BrokenCocsDigraph(g,Comments=True)
+        print(cocb.brokenLinks)
         g.showRubisBestChoiceRecommendation()
         gcd = ~(-g)
         gcd.computeRubisChoice()

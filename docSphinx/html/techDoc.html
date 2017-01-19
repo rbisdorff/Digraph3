@@ -197,6 +197,41 @@ characteristic value!</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="digraphs.BrokenCocsDigraph">
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">BrokenCocsDigraph</code><span class="sig-paren">(</span><em>digraph=None</em>, <em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#BrokenCocsDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.BrokenCocsDigraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
+<p>Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li>digraph: stored or memory resident digraph instance.</li>
+<li>Cpp: using a C++/Agrum version of the Digraoh.computeChordlessCircuits() method.</li>
+<li>Piping: using OS pipes for data in- and output between Python and C++.</li>
+</ul>
+</div></blockquote>
+<p>Specialization of general Digraph class for instantiation
+of chordless odd circuits broken digraphs.</p>
+<p>All chordless odd circuits are broken at the weakest asymmetric link,
+i.e. a link (<em>x</em>, <em>y</em>) with minimal difference between r(<em>x</em> S <em>y</em>) - r(<em>y</em> S <em>x</em>).</p>
+<dl class="method">
+<dt id="digraphs.BrokenCocsDigraph.breakChordlessOddCircuits">
+<code class="descname">breakChordlessOddCircuits</code><span class="sig-paren">(</span><em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=True</em>, <em>Debug=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#BrokenCocsDigraph.breakChordlessOddCircuits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.BrokenCocsDigraph.breakChordlessOddCircuits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Breaking of chordless odd circuits extraction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.BrokenCocsDigraph.breakCircuits">
+<code class="descname">breakCircuits</code><span class="sig-paren">(</span><em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#BrokenCocsDigraph.breakCircuits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.BrokenCocsDigraph.breakCircuits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Break all cricuits in self.circuits.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.BrokenCocsDigraph.showComponents">
+<code class="descname">showComponents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#BrokenCocsDigraph.showComponents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.BrokenCocsDigraph.showComponents" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="digraphs.CSVDigraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CSVDigraph</code><span class="sig-paren">(</span><em>fileName='temp'</em>, <em>valuationMin=-1</em>, <em>valuationMax=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CSVDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.CSVDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
@@ -288,41 +323,6 @@ a given Digraph instance called <em>other</em>.</p>
 And, deepcopies, the case given, the other.description, the other.criteria
 and the other.evaluation dictionaries into self.</p>
 </div>
-</dd></dl>
-
-<dl class="class">
-<dt id="digraphs.CocBrokenDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CocBrokenDigraph</code><span class="sig-paren">(</span><em>digraph=None</em>, <em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CocBrokenDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.CocBrokenDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
-<p>Parameters:</p>
-<blockquote>
-<div><ul class="simple">
-<li>digraph: Stored or memory resident digraph instance.</li>
-<li>Cpp: using a C++/Agrum version of the Digraoh.computeChordlessCircuits() method.</li>
-<li>Piping: using OS pipes for data in- and output between Python and C++.</li>
-</ul>
-</div></blockquote>
-<p>Specialization of general Digraph class for instantiation
-of chordless odd circuits broken digraphs.</p>
-<p>All chordless odd circuits are broken at the weakest asymmetric link,
-i.e. a link (<em>x</em>, <em>y</em>) with minimal difference between r(<em>x</em> S <em>y</em>) - r(<em>y</em> S <em>x</em>).</p>
-<dl class="method">
-<dt id="digraphs.CocBrokenDigraph.breakChordlessOddCircuits">
-<code class="descname">breakChordlessOddCircuits</code><span class="sig-paren">(</span><em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=True</em>, <em>Debug=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CocBrokenDigraph.breakChordlessOddCircuits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.CocBrokenDigraph.breakChordlessOddCircuits" title="Permalink to this definition">¶</a></dt>
-<dd><p>Breaking of chordless odd circuits extraction.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="digraphs.CocBrokenDigraph.breakCircuits">
-<code class="descname">breakCircuits</code><span class="sig-paren">(</span><em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CocBrokenDigraph.breakCircuits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.CocBrokenDigraph.breakCircuits" title="Permalink to this definition">¶</a></dt>
-<dd><p>Break all cricuits in self.circuits.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="digraphs.CocBrokenDigraph.showComponents">
-<code class="descname">showComponents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CocBrokenDigraph.showComponents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.CocBrokenDigraph.showComponents" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 </dd></dl>
 
 <dl class="class">
@@ -1124,7 +1124,7 @@ leq &#8216;&lt;=&#8217;, geq &#8216;&gt;=&#8217;, indeterm &#8216;?&#8217;</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.computeRubisChoice">
-<code class="descname">computeRubisChoice</code><span class="sig-paren">(</span><em>CppAgrum=False</em>, <em>Comments=False</em>, <em>_OldCoca=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeRubisChoice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeRubisChoice" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeRubisChoice</code><span class="sig-paren">(</span><em>CppAgrum=False</em>, <em>Comments=False</em>, <em>_OldCoca=False</em>, <em>BrokenCocs=True</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeRubisChoice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeRubisChoice" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders self.strictGoodChoices, self.nullChoices
 self.strictBadChoices, self.nonRobustChoices.</p>
 <p>CppgArum = False (default | true : use C++/Agrum digraph library
@@ -2123,7 +2123,7 @@ Kohler&#8217;s (rankingRule=&#8221;kohler&#8221;), and Tideman&#8217;s ranked pa
 
 <dl class="method">
 <dt id="digraphs.Digraph.showRubisBestChoiceRecommendation">
-<code class="descname">showRubisBestChoiceRecommendation</code><span class="sig-paren">(</span><em>Comments=False</em>, <em>ChoiceVector=False</em>, <em>CoDual=True</em>, <em>Debug=False</em>, <em>_OldCoca=False</em>, <em>Cpp=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showRubisBestChoiceRecommendation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showRubisBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showRubisBestChoiceRecommendation</code><span class="sig-paren">(</span><em>Comments=False</em>, <em>ChoiceVector=False</em>, <em>CoDual=True</em>, <em>Debug=False</em>, <em>_OldCoca=False</em>, <em>BrokenCocs=True</em>, <em>Cpp=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showRubisBestChoiceRecommendation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showRubisBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the RuBis best choice recommendation.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -4790,7 +4790,7 @@ on criterion c.</p>
 
 <dl class="class">
 <dt id="outrankingDigraphs.ConfidentBipolarOutrankingDigraph">
-<em class="property">class </em><code class="descclassname">outrankingDigraphs.</code><code class="descname">ConfidentBipolarOutrankingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>distribution='triangular'</em>, <em>betaParameter=2</em>, <em>confidence=90.0</em>, <em>coalition=None</em>, <em>hasNoVeto=False</em>, <em>hasBipolarVeto=True</em>, <em>Normalized=True</em>, <em>Threading=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#ConfidentBipolarOutrankingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.ConfidentBipolarOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">outrankingDigraphs.</code><code class="descname">ConfidentBipolarOutrankingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>distribution='triangular'</em>, <em>betaParameter=2</em>, <em>confidence=90.0</em>, <em>coalition=None</em>, <em>hasNoVeto=False</em>, <em>hasBipolarVeto=True</em>, <em>Normalized=True</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#ConfidentBipolarOutrankingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.ConfidentBipolarOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a></p>
 <p>Confident bipolar outranking digraph based on multiple criteria of
 uncertain significance.</p>
@@ -4811,7 +4811,7 @@ be a triangular random variable of mode w_i in the range 0 to 2*w_i.</p>
 </div></blockquote>
 <dl class="method">
 <dt id="outrankingDigraphs.ConfidentBipolarOutrankingDigraph.computeCLTLikelihoods">
-<code class="descname">computeCLTLikelihoods</code><span class="sig-paren">(</span><em>distribution='triangular'</em>, <em>betaParameter=None</em>, <em>Threading=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#ConfidentBipolarOutrankingDigraph.computeCLTLikelihoods"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.ConfidentBipolarOutrankingDigraph.computeCLTLikelihoods" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeCLTLikelihoods</code><span class="sig-paren">(</span><em>distribution='triangular'</em>, <em>betaParameter=None</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#ConfidentBipolarOutrankingDigraph.computeCLTLikelihoods"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.ConfidentBipolarOutrankingDigraph.computeCLTLikelihoods" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the pairwise CLT likelihood of the at least as good as relation
 neglecting all considerable large performance differences polarisations.</p>
 </dd></dl>

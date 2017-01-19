@@ -7179,6 +7179,7 @@
                                           <span class="n">CoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                           <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                           <span class="n">_OldCoca</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                          <span class="n">BrokenCocs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                           <span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the RuBis best choice recommendation.</span>
@@ -7243,14 +7244,18 @@
         <span class="k">if</span> <span class="n">_OldCoca</span><span class="p">:</span>
             <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">_CocaDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">)</span>
             <span class="n">b1</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">elif</span> <span class="n">BrokenCocs</span><span class="p">:</span>
+            <span class="c1">#print(&#39;passed here!&#39;)</span>
+            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">BrokenCocsDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">)</span>
+            <span class="n">b1</span> <span class="o">=</span> <span class="n">_selfwcoc</span><span class="o">.</span><span class="n">breakings</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">CocaDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">)</span>
-            <span class="n">b1</span> <span class="o">=</span> <span class="n">_selfwcoc</span><span class="o">.</span><span class="n">breakings</span>
+            <span class="n">b1</span> <span class="o">=</span>  <span class="n">_selfwcoc</span><span class="o">.</span><span class="n">breakings</span>
         <span class="n">n1</span> <span class="o">=</span> <span class="n">_selfwcoc</span><span class="o">.</span><span class="n">order</span>
         <span class="n">nc</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">-</span> <span class="n">n0</span>
         
         <span class="c1">#self.relation_orig = deepcopy(g.relation)</span>
-        <span class="k">if</span> <span class="n">nc</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">b1</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">b1</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">nc</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="c1">#self.actions_orig = deepcopy(g.actions)</span>
             <span class="n">g</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">_selfwcoc</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
             <span class="n">g</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
@@ -7367,7 +7372,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">computeRubisChoice</span><span class="p">(</span><span class="n">CppAgrum</span><span class="o">=</span><span class="n">CppAgrum</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span><span class="n">_OldCoca</span><span class="o">=</span><span class="n">_OldCoca</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Digraph.computeRubisChoice"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeRubisChoice">[docs]</a>    <span class="k">def</span> <span class="nf">computeRubisChoice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">CppAgrum</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">_OldCoca</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
+<div class="viewcode-block" id="Digraph.computeRubisChoice"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeRubisChoice">[docs]</a>    <span class="k">def</span> <span class="nf">computeRubisChoice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">CppAgrum</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">_OldCoca</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">BrokenCocs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                            <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders self.strictGoodChoices, self.nullChoices</span>
@@ -7399,6 +7404,10 @@
         <span class="k">if</span> <span class="n">_OldCoca</span><span class="p">:</span>
             <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">_CocaDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">CppAgrum</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">breakings</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">elif</span> <span class="n">BrokenCocs</span><span class="p">:</span>
+            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">BrokenCocsDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">CppAgrum</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span>\
+                                    <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>            
+            <span class="bp">self</span><span class="o">.</span><span class="n">breakings</span> <span class="o">=</span> <span class="n">_selfwcoc</span><span class="o">.</span><span class="n">breakings</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">CocaDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">CppAgrum</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span>\
                                     <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
@@ -11530,11 +11539,11 @@
             <span class="k">return</span> <span class="p">(</span><span class="n">qualmaj0</span><span class="p">,</span><span class="n">pg</span><span class="p">)</span></div></div>
 
 <span class="c1">#--------------------</span>
-<div class="viewcode-block" id="CocBrokenDigraph"><a class="viewcode-back" href="../techDoc.html#digraphs.CocBrokenDigraph">[docs]</a><span class="k">class</span> <span class="nc">CocBrokenDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<div class="viewcode-block" id="BrokenCocsDigraph"><a class="viewcode-back" href="../techDoc.html#digraphs.BrokenCocsDigraph">[docs]</a><span class="k">class</span> <span class="nc">BrokenCocsDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters:</span>
 
-<span class="sd">        - digraph: Stored or memory resident digraph instance.</span>
+<span class="sd">        - digraph: stored or memory resident digraph instance.</span>
 <span class="sd">        - Cpp: using a C++/Agrum version of the Digraoh.computeChordlessCircuits() method.</span>
 <span class="sd">        - Piping: using OS pipes for data in- and output between Python and C++.</span>
 
@@ -11548,7 +11557,8 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                  <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">sys</span><span class="o">,</span><span class="nn">array</span><span class="o">,</span><span class="nn">copy</span>
-        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">OutrankingDigraph</span><span class="p">,</span> <span class="n">RandomOutrankingDigraph</span><span class="p">,</span> <span class="n">BipolarOutrankingDigraph</span>
+        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">OutrankingDigraph</span><span class="p">,</span>\
+             <span class="n">RandomOutrankingDigraph</span><span class="p">,</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">,</span> <span class="n">ConfidentBipolarOutrankingDigraph</span>
         <span class="c1">## if comment == None:</span>
         <span class="c1">##     silent = True</span>
         <span class="c1">## else:</span>
@@ -11556,7 +11566,9 @@
         <span class="k">if</span> <span class="n">digraph</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Erreur: A valid Digraph instance is required!&#39;</span><span class="p">)</span>
             <span class="k">return</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">digraph</span><span class="p">,(</span><span class="n">Digraph</span><span class="p">,</span><span class="n">OutrankingDigraph</span><span class="p">,</span><span class="n">RandomOutrankingDigraph</span><span class="p">,</span><span class="n">BipolarOutrankingDigraph</span><span class="p">)):</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">digraph</span><span class="p">,(</span><span class="n">Digraph</span><span class="p">,</span><span class="n">OutrankingDigraph</span><span class="p">,</span>\
+                                 <span class="n">RandomOutrankingDigraph</span><span class="p">,</span><span class="n">BipolarOutrankingDigraph</span><span class="p">,</span>\
+                                 <span class="n">ConfidentBipolarOutrankingDigraph</span><span class="p">)):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
@@ -11581,14 +11593,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">breakChordlessOddCircuits</span><span class="p">(</span><span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="n">Piping</span><span class="p">,</span>\
                                          <span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
 
-<div class="viewcode-block" id="CocBrokenDigraph.breakChordlessOddCircuits"><a class="viewcode-back" href="../techDoc.html#digraphs.CocBrokenDigraph.breakChordlessOddCircuits">[docs]</a>    <span class="k">def</span> <span class="nf">breakChordlessOddCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
+<div class="viewcode-block" id="BrokenCocsDigraph.breakChordlessOddCircuits"><a class="viewcode-back" href="../techDoc.html#digraphs.BrokenCocsDigraph.breakChordlessOddCircuits">[docs]</a>    <span class="k">def</span> <span class="nf">breakChordlessOddCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                                     <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Breaking of chordless odd circuits extraction.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">newCircuits</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">circuitsList</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">brokenLinks</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">brokenLinks</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">oldBreakings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">breakings</span>
         <span class="k">except</span><span class="p">:</span>
@@ -11616,7 +11628,7 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;newCircuits&#39;</span><span class="p">,</span> <span class="n">newCircuits</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="CocBrokenDigraph.breakCircuits"><a class="viewcode-back" href="../techDoc.html#digraphs.CocBrokenDigraph.breakCircuits">[docs]</a>    <span class="k">def</span> <span class="nf">breakCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="BrokenCocsDigraph.breakCircuits"><a class="viewcode-back" href="../techDoc.html#digraphs.BrokenCocsDigraph.breakCircuits">[docs]</a>    <span class="k">def</span> <span class="nf">breakCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Break all cricuits in self.circuits.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -11651,11 +11663,12 @@
             <span class="n">y</span> <span class="o">=</span> <span class="n">minLink</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Minimal link put to doubt: &#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-            <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
-            <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">brokenLinks</span><span class="p">:</span>
+                <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
+                <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">brokenLinks</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
+                <span class="n">newBreakings</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="n">currentCircuits</span><span class="o">.</span><span class="n">remove</span><span class="p">((</span><span class="n">cycleList</span><span class="p">,</span><span class="n">cycle</span><span class="p">))</span>
-            <span class="n">newBreakings</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">brokenLinks</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">])</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">actions</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
@@ -11666,7 +11679,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">weakGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weakGammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">breakings</span> <span class="o">+=</span> <span class="n">newBreakings</span></div>
 
-<div class="viewcode-block" id="CocBrokenDigraph.showComponents"><a class="viewcode-back" href="../techDoc.html#digraphs.CocBrokenDigraph.showComponents">[docs]</a>    <span class="k">def</span> <span class="nf">showComponents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="BrokenCocsDigraph.showComponents"><a class="viewcode-back" href="../techDoc.html#digraphs.BrokenCocsDigraph.showComponents">[docs]</a>    <span class="k">def</span> <span class="nf">showComponents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*--- Connected Components ---*&#39;</span><span class="p">)</span>
         <span class="n">k</span><span class="o">=</span><span class="mi">1</span>
         <span class="k">for</span> <span class="n">Comp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">():</span>
@@ -12837,8 +12850,12 @@
         <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="k">import</span> <span class="n">CopelandOrder</span>
         <span class="n">t1</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">cocb</span> <span class="o">=</span> <span class="n">CocBrokenDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        
+        <span class="n">cocb</span> <span class="o">=</span> <span class="n">BrokenCocsDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">cocb</span><span class="o">.</span><span class="n">brokenLinks</span><span class="p">)</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">showRubisBestChoiceRecommendation</span><span class="p">()</span>
+        <span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span>
+        <span class="n">gcd</span><span class="o">.</span><span class="n">computeRubisChoice</span><span class="p">()</span>
+        <span class="n">gcd</span><span class="o">.</span><span class="n">showGoodChoices</span><span class="p">()</span>
 <span class="c1">##        cop = CopelandOrder(g)</span>
 <span class="c1">##        #g.showHTMLRelationMap(rankingRule=&#39;rankedPairs&#39;)</span>
 <span class="c1">##        gcd = CoDualDigraph(g)</span>
