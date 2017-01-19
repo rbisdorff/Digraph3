@@ -219,7 +219,7 @@ def testPerformanceDifferencesPerCriteria():
 
 def testDefaultDiscriminationThresholds():
     print('* ---- verify default discrimination thresholds ----*')
-    t = RandomCBPerformanceTableau(numberOfActions=3,numberOfCriteria=3)
+    t = RandomCBPerformanceTableau(numberOfActions=13,numberOfCriteria=7)
     g = BipolarOutrankingDigraph(t)
     print('outranking original')
     g.showRelationTable()

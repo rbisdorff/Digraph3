@@ -7129,6 +7129,7 @@ class Digraph(object):
                                           CoDual=True,
                                           Debug=False,
                                           _OldCoca=False,
+                                          BrokenCocs=True,
                                           Cpp=False):
         """
         Renders the RuBis best choice recommendation.
@@ -7193,14 +7194,18 @@ class Digraph(object):
         if _OldCoca:
             _selfwcoc = _CocaDigraph(g,Cpp=Cpp)
             b1 = 0
+        elif BrokenCocs:
+            #print('passed here!')
+            _selfwcoc = BrokenCocsDigraph(g,Cpp=Cpp)
+            b1 = _selfwcoc.breakings
         else:
             _selfwcoc = CocaDigraph(g,Cpp=Cpp)
-            b1 = _selfwcoc.breakings
+            b1 =  _selfwcoc.breakings
         n1 = _selfwcoc.order
         nc = n1 - n0
         
         #self.relation_orig = deepcopy(g.relation)
-        if nc > 0 or b1 > 0:
+        if b1 > 0 or nc > 0:
             #self.actions_orig = deepcopy(g.actions)
             g.actions = deepcopy(_selfwcoc.actions)
             g.order = len(g.actions)
@@ -7317,7 +7322,7 @@ class Digraph(object):
         """
         self.computeRubisChoice(CppAgrum=CppAgrum,Comments=Comments,_OldCoca=_OldCoca)
 
-    def computeRubisChoice(self,CppAgrum=False,Comments=False,_OldCoca=False,\
+    def computeRubisChoice(self,CppAgrum=False,Comments=False,_OldCoca=False,BrokenCocs=True,\
                            Threading=False,nbrOfCPUs=1):
         """
         Renders self.strictGoodChoices, self.nullChoices
@@ -7349,6 +7354,10 @@ class Digraph(object):
         if _OldCoca:
             _selfwcoc = _CocaDigraph(self,Cpp=CppAgrum,Comments=Comments)
             self.breakings = 0
+        elif BrokenCocs:
+            _selfwcoc = BrokenCocsDigraph(self,Cpp=CppAgrum,Comments=Comments,\
+                                    Threading=Threading,nbrOfCPUs=nbrOfCPUs)            
+            self.breakings = _selfwcoc.breakings
         else:
             _selfwcoc = CocaDigraph(self,Cpp=CppAgrum,Comments=Comments,\
                                     Threading=Threading,nbrOfCPUs=nbrOfCPUs)
@@ -11480,11 +11489,11 @@ class CoceDigraph(Digraph):
             return (qualmaj0,pg)
 
 #--------------------
-class CocBrokenDigraph(Digraph):
+class BrokenCocsDigraph(Digraph):
     """
     Parameters:
 
-        - digraph: Stored or memory resident digraph instance.
+        - digraph: stored or memory resident digraph instance.
         - Cpp: using a C++/Agrum version of the Digraoh.computeChordlessCircuits() method.
         - Piping: using OS pipes for data in- and output between Python and C++.
 
@@ -12787,8 +12796,11 @@ if __name__ == "__main__":
         from linearOrders import CopelandOrder
         t1 = RandomCBPerformanceTableau(numberOfActions=20,seed=1)
         g = BipolarOutrankingDigraph(t1,Normalized=True)
-        cocb = CocBrokenDigraph(g,Comments=True)
-        
+        cocb = BrokenCocsDigraph(g,Comments=True)
+        g.showRubisBestChoiceRecommendation()
+        gcd = ~(-g)
+        gcd.computeRubisChoice()
+        gcd.showGoodChoices()
 ##        cop = CopelandOrder(g)
 ##        #g.showHTMLRelationMap(rankingRule='rankedPairs')
 ##        gcd = CoDualDigraph(g)
