@@ -8220,7 +8220,8 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         if likelihoodLevel == None:
             likelihoodLevel = self.bipolarConfidenceLevel
 
-        print(likelihoodLevel)
+        if Debug:
+            print('Likelihood level = %.2f%%' % ( (likelihoodLevel + 1.0)/2.0*100.0) )
         confidenceCutLevel = Med
         confidentRelation = {}
         actionsList = [x for x in self.actions]

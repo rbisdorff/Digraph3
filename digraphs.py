@@ -6602,6 +6602,8 @@ class Digraph(object):
         """
         import os
         from tempfile import mkstemp
+        from digraphsTools import flatten
+        
         fd, tempFileName = mkstemp()
         fo = os.fdopen(fd,'w+b')
         Med = self.valuationdomain['med']
