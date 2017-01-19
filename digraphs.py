@@ -9138,7 +9138,7 @@ class Digraph(object):
         Return a tuple: kemenyRanking (from best to worst), kemenyIndex
         """
         from random import seed, shuffle
-        from digraphs import all_perms
+        from digraphsTools import all_perms
 
 
         Min = self.valuationdomain['min']
@@ -9590,6 +9590,7 @@ class FusionDigraph(Digraph):
 
     def __init__(self,dg1,dg2,operator="o-min"):
         from copy import deepcopy
+        from digraphsTools import omin, omax
         self.name = 'fusion-'+dg1.name+'-'+dg2.name
         self.actions = deepcopy(dg1.actions)
         self.order = len(dg1.actions)
@@ -12800,10 +12801,10 @@ if __name__ == "__main__":
         from linearOrders import CopelandOrder
         t1 = RandomCBPerformanceTableau(numberOfActions=20,seed=1)
         g = BipolarOutrankingDigraph(t1,Normalized=True)
-        cocb = BrokenCocsDigraph(g,Comments=True)
-        print(cocb.brokenLinks)
         g.showRubisBestChoiceRecommendation()
         gcd = ~(-g)
+        cocb = BrokenCocsDigraph(gcd,Comments=True)
+        print(cocb.brokenLinks)
         gcd.computeRubisChoice()
         gcd.showGoodChoices()
 ##        cop = CopelandOrder(g)

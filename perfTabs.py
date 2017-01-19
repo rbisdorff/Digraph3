@@ -28,7 +28,7 @@ __version__ = "$Revision: 1.37 $"
 from perfTabs import *
 import json
 import decimal
-
+from digraphsTools import *
 from decimal import Decimal
 from collections import OrderedDict
 
@@ -2260,7 +2260,6 @@ The performance evaluations of each decision alternative on each criterion are g
         See the corresponding perfTabs.showHTMLPerformanceHeatMap() method.
         """
         from decimal import Decimal
-        from digraphs import flatten
                     
         brewerRdYlGn9Colors = [(Decimal('0.1111'),'"#D53E4F"'),
                                (Decimal('0.2222'),'"#F46D43"'),

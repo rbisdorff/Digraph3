@@ -22,6 +22,7 @@
 __version__ = "Branch: 3.3 $"
 # ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
 
+from digraphsTools import *
 from decimal import Decimal
 from collections import OrderedDict
 

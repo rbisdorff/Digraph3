@@ -22,6 +22,7 @@
 __version__ = "Branch: 3.3 $"
 # ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
 
+from digraphsTools import *
 from digraphs import *
 from outrankingDigraphs import *
 from weakOrders import *
@@ -289,7 +290,7 @@ class WeakRankingOrder(WeakOrder):
     """
     def __init__(self,other,rankings,Debug=False):
         
-        from digraphs import ranking2preorder, omax
+        from digraphsTools import ranking2preorder, omax
         from copy import deepcopy
         from decimal import Decimal
         if Debug:
@@ -340,7 +341,7 @@ class KemenyWeakOrder(WeakOrder):
             print('Digraph order %d to high. The default limit (7) may be changed with the oderLimit argument.')
             return
                   
-        from digraphs import ranking2preorder, omax
+        from digraphsTools import ranking2preorder, omax
         from copy import deepcopy
         from decimal import Decimal
 

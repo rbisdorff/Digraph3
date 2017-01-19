@@ -24,6 +24,7 @@
 __version__ = "$Revision: 1.18 $"
 # $Source: /home/cvsroot/Digraph/linearOrders.py,v $
 
+from digraphsTools import *
 from digraphs import *
 from linearOrders import *
 
