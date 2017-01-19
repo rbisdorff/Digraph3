@@ -8160,6 +8160,7 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                  hasBipolarVeto=True,
                  Normalized=True,
                  Threading=False,
+                 nbrOfCPUs=1,
                  Debug=False,):
         # getting module ressources and setting the random seed
         from copy import copy, deepcopy
@@ -8172,10 +8173,11 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             perfTab = copy(argPerfTab)
         # initializing the bipolar outranking digraph
         bodg = BipolarOutrankingDigraph(argPerfTab=perfTab,coalition=coalition,\
-                                     hasNoVeto = hasNoVeto,\
-                                     hasBipolarVeto = hasBipolarVeto,\
+                                     hasNoVeto=hasNoVeto,\
+                                     hasBipolarVeto=hasBipolarVeto,\
                                      Normalized=Normalized,\
-                                     Threading=Threading)
+                                     Threading=Threading,\
+                                     nbrCores=nbrOfCPUs )
         self.name = bodg.name + '_CLT'
         self.bipolarConfidenceLevel = (confidence/100.0)*2.0 -1.0 
         self.distribution = distribution
@@ -8296,9 +8298,11 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         else:
             return 0.5 + 0.5*erf(z)
     
-    def computeCLTLikelihoods(self,distribution="triangular",
-                              betaParameter=None,
-                              Threading=False,Debug=False):
+    def computeCLTLikelihoods(self,distribution="triangular",\
+                              betaParameter=None,\
+                              Threading=False,\
+                              nbrOfCPUs=1,\
+                              Debug=False):
         """
         Renders the pairwise CLT likelihood of the at least as good as relation
         neglecting all considerable large performance differences polarisations.
@@ -8324,7 +8328,7 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 ##            print(weightSquares)
         if Threading:
             g = BipolarOutrankingDigraph(self,hasNoVeto=True,
-                                         Threading=Threading)
+                                         Threading=Threading,nbrCores=nbrOfCPUs)
             concordanceRelation = g.relation
         else:
             concordanceRelation = self._recodeConcordanceValuation(\
