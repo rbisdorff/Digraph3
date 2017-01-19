@@ -291,6 +291,41 @@ and the other.evaluation dictionaries into self.</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="digraphs.CocBrokenDigraph">
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CocBrokenDigraph</code><span class="sig-paren">(</span><em>digraph=None</em>, <em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CocBrokenDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.CocBrokenDigraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
+<p>Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li>digraph: Stored or memory resident digraph instance.</li>
+<li>Cpp: using a C++/Agrum version of the Digraoh.computeChordlessCircuits() method.</li>
+<li>Piping: using OS pipes for data in- and output between Python and C++.</li>
+</ul>
+</div></blockquote>
+<p>Specialization of general Digraph class for instantiation
+of chordless odd circuits broken digraphs.</p>
+<p>All chordless odd circuits are broken at the weakest asymmetric link,
+i.e. a link (<em>x</em>, <em>y</em>) with minimal difference between r(<em>x</em> S <em>y</em>) - r(<em>y</em> S <em>x</em>).</p>
+<dl class="method">
+<dt id="digraphs.CocBrokenDigraph.breakChordlessOddCircuits">
+<code class="descname">breakChordlessOddCircuits</code><span class="sig-paren">(</span><em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=True</em>, <em>Debug=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CocBrokenDigraph.breakChordlessOddCircuits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.CocBrokenDigraph.breakChordlessOddCircuits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Breaking of chordless odd circuits extraction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.CocBrokenDigraph.breakCircuits">
+<code class="descname">breakCircuits</code><span class="sig-paren">(</span><em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CocBrokenDigraph.breakCircuits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.CocBrokenDigraph.breakCircuits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Break all cricuits in self.circuits.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.CocBrokenDigraph.showComponents">
+<code class="descname">showComponents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CocBrokenDigraph.showComponents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.CocBrokenDigraph.showComponents" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="digraphs.CocaDigraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CocaDigraph</code><span class="sig-paren">(</span><em>digraph=None</em>, <em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CocaDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.CocaDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
