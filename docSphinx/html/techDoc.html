@@ -197,6 +197,48 @@ characteristic value!</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="digraphs.BreakAddCocsDigraph">
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">BreakAddCocsDigraph</code><span class="sig-paren">(</span><em>digraph=None</em>, <em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#BreakAddCocsDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.BreakAddCocsDigraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
+<p>Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li>digraph: Stored or memory resident digraph instance.</li>
+<li>Cpp: using a C++/Agrum version of the Digraoh.computeChordlessCircuits() method.</li>
+<li>Piping: using OS pipes for data in- and output between Python and C++.</li>
+</ul>
+</div></blockquote>
+<p>Specialization of general Digraph class for instantiation
+of chordless odd circuits augmented digraphs.</p>
+<p>A chordless odd circuit is added if the cumulated credibility of the circuit supporting arcs is larger or
+equal to the cumulated credibility of the converse arcs. Otherwise, the circuit is broken at the weakest asymmetric link,
+i.e. a link (<em>x</em>, <em>y</em>) with minimal difference between r(<em>x</em> S <em>y</em>) - r(<em>y</em> S <em>x</em>).</p>
+<dl class="method">
+<dt id="digraphs.BreakAddCocsDigraph.addCircuits">
+<code class="descname">addCircuits</code><span class="sig-paren">(</span><em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#BreakAddCocsDigraph.addCircuits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.BreakAddCocsDigraph.addCircuits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Augmenting self with self.circuits.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.BreakAddCocsDigraph.closureChordlessOddCircuits">
+<code class="descname">closureChordlessOddCircuits</code><span class="sig-paren">(</span><em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=True</em>, <em>Debug=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#BreakAddCocsDigraph.closureChordlessOddCircuits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.BreakAddCocsDigraph.closureChordlessOddCircuits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Closure of chordless odd circuits extraction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.BreakAddCocsDigraph.showCircuits">
+<code class="descname">showCircuits</code><span class="sig-paren">(</span><em>credibility=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#BreakAddCocsDigraph.showCircuits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.BreakAddCocsDigraph.showCircuits" title="Permalink to this definition">¶</a></dt>
+<dd><p>show methods for chordless odd circuits in CocaGraph</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.BreakAddCocsDigraph.showComponents">
+<code class="descname">showComponents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#BreakAddCocsDigraph.showComponents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.BreakAddCocsDigraph.showComponents" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="digraphs.BrokenCocsDigraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">BrokenCocsDigraph</code><span class="sig-paren">(</span><em>digraph=None</em>, <em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#BrokenCocsDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.BrokenCocsDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
@@ -327,8 +369,15 @@ and the other.evaluation dictionaries into self.</p>
 
 <dl class="class">
 <dt id="digraphs.CocaDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CocaDigraph</code><span class="sig-paren">(</span><em>digraph=None</em>, <em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CocaDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.CocaDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CocaDigraph</code><span class="sig-paren">(</span><em>digraph=None</em>, <em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CocaDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.CocaDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
+<p>Old CocaDigraph class without circuit breakings; all circuits and circuits of circuits are added as hyper-nodes.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">OBSOLETE: Gives inconsistent results when an autranking digraph shows loads of chordless cuircuits.
+It is recommended to use instead either the BrokenCocsDigraph class (preferred option)
+or the  BreakAddCocsDigraph class.</p>
+</div>
 <p>Parameters:</p>
 <blockquote>
 <div><ul class="simple">
@@ -339,9 +388,6 @@ and the other.evaluation dictionaries into self.</p>
 </div></blockquote>
 <p>Specialization of general Digraph class for instantiation
 of chordless odd circuits augmented digraphs.</p>
-<p>A chordless odd circuit is added if the cumulated credibility of the circuit supporting arcs is larger or
-equal to the cumulated credibility of the converse arcs. Otherwise, the circuit is broken at the weakest asymmetric link,
-i.e. a link (<em>x</em>, <em>y</em>) with minimal difference between r(<em>x</em> S <em>y</em>) - r(<em>y</em> S <em>x</em>).</p>
 <dl class="method">
 <dt id="digraphs.CocaDigraph.addCircuits">
 <code class="descname">addCircuits</code><span class="sig-paren">(</span><em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CocaDigraph.addCircuits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.CocaDigraph.addCircuits" title="Permalink to this definition">¶</a></dt>
@@ -350,13 +396,13 @@ i.e. a link (<em>x</em>, <em>y</em>) with minimal difference between r(<em>x</em
 
 <dl class="method">
 <dt id="digraphs.CocaDigraph.closureChordlessOddCircuits">
-<code class="descname">closureChordlessOddCircuits</code><span class="sig-paren">(</span><em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=True</em>, <em>Debug=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CocaDigraph.closureChordlessOddCircuits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.CocaDigraph.closureChordlessOddCircuits" title="Permalink to this definition">¶</a></dt>
+<code class="descname">closureChordlessOddCircuits</code><span class="sig-paren">(</span><em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CocaDigraph.closureChordlessOddCircuits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.CocaDigraph.closureChordlessOddCircuits" title="Permalink to this definition">¶</a></dt>
 <dd><p>Closure of chordless odd circuits extraction.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="digraphs.CocaDigraph.showCircuits">
-<code class="descname">showCircuits</code><span class="sig-paren">(</span><em>credibility=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CocaDigraph.showCircuits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.CocaDigraph.showCircuits" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showCircuits</code><span class="sig-paren">(</span><em>credibility=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CocaDigraph.showCircuits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.CocaDigraph.showCircuits" title="Permalink to this definition">¶</a></dt>
 <dd><p>show methods for chordless odd circuits in CocaGraph</p>
 </dd></dl>
 

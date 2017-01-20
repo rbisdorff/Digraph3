@@ -6652,6 +6652,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">os</span>
         <span class="kn">from</span> <span class="nn">tempfile</span> <span class="k">import</span> <span class="n">mkstemp</span>
+        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="n">flatten</span>
+        
         <span class="n">fd</span><span class="p">,</span> <span class="n">tempFileName</span> <span class="o">=</span> <span class="n">mkstemp</span><span class="p">()</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">fdopen</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="s1">&#39;w+b&#39;</span><span class="p">)</span>
         <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
@@ -7242,14 +7244,14 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">cpself</span>
         <span class="k">if</span> <span class="n">_OldCoca</span><span class="p">:</span>
-            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">_CocaDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">)</span>
+            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">CocaDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">)</span>
             <span class="n">b1</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">elif</span> <span class="n">BrokenCocs</span><span class="p">:</span>
             <span class="c1">#print(&#39;passed here!&#39;)</span>
             <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">BrokenCocsDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">)</span>
             <span class="n">b1</span> <span class="o">=</span> <span class="n">_selfwcoc</span><span class="o">.</span><span class="n">breakings</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">CocaDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">)</span>
+            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">BreakAddCocsDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">)</span>
             <span class="n">b1</span> <span class="o">=</span>  <span class="n">_selfwcoc</span><span class="o">.</span><span class="n">breakings</span>
         <span class="n">n1</span> <span class="o">=</span> <span class="n">_selfwcoc</span><span class="o">.</span><span class="n">order</span>
         <span class="n">nc</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">-</span> <span class="n">n0</span>
@@ -7402,14 +7404,14 @@
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*--- computing the COCA digraph --*&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">_OldCoca</span><span class="p">:</span>
-            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">_CocaDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">CppAgrum</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">)</span>
+            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">CocaDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">CppAgrum</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">breakings</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">elif</span> <span class="n">BrokenCocs</span><span class="p">:</span>
             <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">BrokenCocsDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">CppAgrum</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span>\
                                     <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>            
             <span class="bp">self</span><span class="o">.</span><span class="n">breakings</span> <span class="o">=</span> <span class="n">_selfwcoc</span><span class="o">.</span><span class="n">breakings</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">CocaDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">CppAgrum</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span>\
+            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">BreakAddCocsDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">CppAgrum</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span>\
                                     <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">breakings</span> <span class="o">=</span> <span class="n">_selfwcoc</span><span class="o">.</span><span class="n">breakings</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
@@ -9188,7 +9190,7 @@
 <span class="sd">        Return a tuple: kemenyRanking (from best to worst), kemenyIndex</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">seed</span><span class="p">,</span> <span class="n">shuffle</span>
-        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">all_perms</span>
+        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="n">all_perms</span>
 
 
         <span class="n">Min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
@@ -9640,6 +9642,7 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dg1</span><span class="p">,</span><span class="n">dg2</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="s2">&quot;o-min&quot;</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="n">omin</span><span class="p">,</span> <span class="n">omax</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;fusion-&#39;</span><span class="o">+</span><span class="n">dg1</span><span class="o">.</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="n">dg2</span><span class="o">.</span><span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">dg1</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dg1</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
@@ -11690,7 +11693,7 @@
 
 
 <span class="c1">#--------------------</span>
-<div class="viewcode-block" id="CocaDigraph"><a class="viewcode-back" href="../techDoc.html#digraphs.CocaDigraph">[docs]</a><span class="k">class</span> <span class="nc">CocaDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<div class="viewcode-block" id="BreakAddCocsDigraph"><a class="viewcode-back" href="../techDoc.html#digraphs.BreakAddCocsDigraph">[docs]</a><span class="k">class</span> <span class="nc">BreakAddCocsDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters:</span>
 
@@ -11746,7 +11749,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">closureChordlessOddCircuits</span><span class="p">(</span><span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="n">Piping</span><span class="p">,</span>\
                                          <span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
 
-<div class="viewcode-block" id="CocaDigraph.closureChordlessOddCircuits"><a class="viewcode-back" href="../techDoc.html#digraphs.CocaDigraph.closureChordlessOddCircuits">[docs]</a>    <span class="k">def</span> <span class="nf">closureChordlessOddCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
+<div class="viewcode-block" id="BreakAddCocsDigraph.closureChordlessOddCircuits"><a class="viewcode-back" href="../techDoc.html#digraphs.BreakAddCocsDigraph.closureChordlessOddCircuits">[docs]</a>    <span class="k">def</span> <span class="nf">closureChordlessOddCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                                     <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Closure of chordless odd circuits extraction.</span>
@@ -11789,215 +11792,7 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;initialCircuits, currentCircuits&#39;</span><span class="p">,</span> <span class="n">initialCircuits</span><span class="p">,</span> <span class="n">currentCircuits</span><span class="p">)</span>
             <span class="n">newCircuits</span> <span class="o">=</span> <span class="n">currentCircuits</span> <span class="o">-</span> <span class="n">initialCircuits</span></div>
 
-<span class="c1">##    def _closureChordlessOddCircuits(self,Cpp=False,Piping=False,\</span>
-<span class="c1">##                                    Comments=True,Debug=False,Threading=False,nbrOfCPUs=1):</span>
-<span class="c1">##        &quot;&quot;&quot;</span>
-<span class="c1">##        Closure of chordless odd circuits extraction.</span>
-<span class="c1">##        &quot;&quot;&quot;</span>
-<span class="c1">##        newCircuits = None</span>
-<span class="c1">##        self.circuitsList = []</span>
-<span class="c1">##        try:</span>
-<span class="c1">##            oldBreakings = self.breakings</span>
-<span class="c1">##            oldlinks2break = self.links2break</span>
-<span class="c1">##        except:</span>
-<span class="c1">##            self.breakings = 0</span>
-<span class="c1">##            self.links2break = []</span>
-<span class="c1">##            </span>
-<span class="c1">##        self.newBreakings = self.order</span>
-<span class="c1">##        #while newCircuits != set() or self.newBrakings != 0:</span>
-<span class="c1">##        while newCircuits != set():</span>
-<span class="c1">##            initialCircuits = set([x for cl,x in self.circuitsList])</span>
-<span class="c1">####            if Cpp:</span>
-<span class="c1">####                if Piping:</span>
-<span class="c1">####                    self.computeCppInOutPipingChordlessCircuits(Odd=True,Debug=Debug)</span>
-<span class="c1">####                else:</span>
-<span class="c1">####                    self.computeCppChordlessCircuits(Odd=True,Debug=Debug)</span>
-<span class="c1">####            elif Threading:</span>
-<span class="c1">####                self.computeChordlessCircuitsMP(Odd=True,Comments=Debug,\</span>
-<span class="c1">####                                                Threading=Threading,nbrOfCPUs=nbrOfCPUs)</span>
-<span class="c1">####            else:</span>
-<span class="c1">####                self.computeChordlessCircuits(Odd=True,Comments=Debug)</span>
-<span class="c1">####           </span>
-<span class="c1">##            #print(self.circuitsList)</span>
-<span class="c1">##            self._collectBreakings(Comments=Comments)</span>
-<span class="c1">##            #print(self.circuitsList)</span>
-<span class="c1">###            self.addCircuits(Comments=Comments)</span>
-<span class="c1">##            if Cpp:</span>
-<span class="c1">##                if Piping:</span>
-<span class="c1">##                    self.computeCppInOutPipingChordlessCircuits(Odd=True,Debug=Debug)</span>
-<span class="c1">##                else:</span>
-<span class="c1">##                    self.computeCppChordlessCircuits(Odd=True,Debug=Debug)</span>
-<span class="c1">##            elif Threading:</span>
-<span class="c1">##                self.computeChordlessCircuitsMP(Odd=True,Comments=Debug,\</span>
-<span class="c1">##                                                Threading=Threading,nbrOfCPUs=nbrOfCPUs)</span>
-<span class="c1">##            else:</span>
-<span class="c1">##                self.computeChordlessCircuits(Odd=True,Comments=Debug)</span>
-<span class="c1">##            currentCircuits = set([x for cl,x in self.circuitsList])</span>
-<span class="c1">##            if Comments:</span>
-<span class="c1">##                print(&#39;initialCircuits, currentCircuits&#39;, initialCircuits, currentCircuits)</span>
-<span class="c1">##            newCircuits = currentCircuits - initialCircuits</span>
-<span class="c1">##            self._addCircuits(Comments=Comments)</span>
-
-<span class="c1">##    def _collectBreakings(self,Comments=False):</span>
-<span class="c1">##        &quot;&quot;&quot;</span>
-<span class="c1">##        Collect links to break.</span>
-<span class="c1">##        &quot;&quot;&quot;</span>
-<span class="c1">##        import time</span>
-<span class="c1">##        #from copy import deepcopy</span>
-<span class="c1">##        order0 = self.order</span>
-<span class="c1">##        newBreakings = 0</span>
-<span class="c1">##        newlinks2break = []</span>
-<span class="c1">##        if not(isinstance(self.actions,dict)):</span>
-<span class="c1">##            actions = {}</span>
-<span class="c1">##            for x in self.actions:</span>
-<span class="c1">##                actions[x] = {&#39;name&#39;:x}</span>
-<span class="c1">##        else:</span>
-<span class="c1">##            actions = self.actions</span>
-<span class="c1">##</span>
-<span class="c1">##        #ListActions = [frozenset([x]) for x in actions]</span>
-<span class="c1">##        circuitsList = self.circuitsList</span>
-<span class="c1">##        if Comments:</span>
-<span class="c1">##            print(&#39;list of circuits: &#39;, circuitsList)</span>
-<span class="c1">##        valuationdomain = self.valuationdomain</span>
-<span class="c1">##        gamma = self.gamma</span>
-<span class="c1">##        relation = self.relation</span>
-<span class="c1">##        Med = valuationdomain[&#39;med&#39;]</span>
-<span class="c1">##        currentCircuits = list(circuitsList)</span>
-<span class="c1">##        for (cycleList,cycle) in circuitsList:</span>
-<span class="c1">##            degP,degN,minLink = self.circuitCredibilities(cycleList,Debug=Comments)</span>
-<span class="c1">##            if Comments:</span>
-<span class="c1">##                print(cycleList,cycle,degP,degN,minLink)</span>
-<span class="c1">##            #if degP+degN &gt; Med:</span>
-<span class="c1">##            </span>
-<span class="c1">##            if (degP + degN) &lt; -valuationdomain[&#39;precision&#39;]:</span>
-<span class="c1">##                if Comments:</span>
-<span class="c1">##                    print(&#39;Breaking:&#39;,cycleList,degP,degN)</span>
-<span class="c1">##                actionsSubset = [x for x in flatten(cycle)]</span>
-<span class="c1">##                if Comments:</span>
-<span class="c1">##                    self.showRelationTable(actionsSubset=actionsSubset)</span>
-<span class="c1">##                x = minLink[0]</span>
-<span class="c1">##                y = minLink[1]</span>
-<span class="c1">##                if Comments:</span>
-<span class="c1">##                    print(&#39;Minimal link put to doubt: &#39;, x,y)</span>
-<span class="c1">##                relation[x][y] = Med</span>
-<span class="c1">##                relation[y][x] = Med</span>
-<span class="c1">##                currentCircuits.remove((cycleList,cycle))</span>
-<span class="c1">##                newBreakings += 1</span>
-<span class="c1">##                newlinks2break.append((x,y))</span>
-<span class="c1">##</span>
-<span class="c1">##        self.actions = actions</span>
-<span class="c1">##        self.order = len(actions)</span>
-<span class="c1">##        self.relation = relation</span>
-<span class="c1">##        self.circuitsList = currentCircuits</span>
-<span class="c1">##        self.gamma = self.gammaSets()</span>
-<span class="c1">##        self.notGamma = self.notGammaSets()</span>
-<span class="c1">##        self.weakGamma = self.weakGammaSets()</span>
-<span class="c1">##        new = self.order - order0</span>
-<span class="c1">##        self.newBreakings = newBreakings</span>
-<span class="c1">##        self.breakings += newBreakings</span>
-<span class="c1">##        try:</span>
-<span class="c1">##            self.links2break += newlinks2break</span>
-<span class="c1">##        except:</span>
-<span class="c1">##            self.links2break = newlinks2break</span>
-<span class="c1">##        if Comments:</span>
-<span class="c1">##            if newBreakings == 0:</span>
-<span class="c1">##                print(&#39;  No further circuit breakings !&#39;)</span>
-<span class="c1">##            else:</span>
-<span class="c1">##                print(&#39;  &#39;,newlinks2break,&#39; new links were broken&#39;)</span>
-<span class="c1">##            </span>
-<span class="c1">##    def _addCircuits(self,Comments=False):</span>
-<span class="c1">##        &quot;&quot;&quot;</span>
-<span class="c1">##        Augmenting self with self.circuits.</span>
-<span class="c1">##        &quot;&quot;&quot;</span>
-<span class="c1">##        import time</span>
-<span class="c1">##        #from copy import deepcopy</span>
-<span class="c1">##        order0 = self.order</span>
-<span class="c1">##        if not(isinstance(self.actions,dict)):</span>
-<span class="c1">##            actions = {}</span>
-<span class="c1">##            for x in self.actions:</span>
-<span class="c1">##                actions[x] = {&#39;name&#39;:x}</span>
-<span class="c1">##        else:</span>
-<span class="c1">##            actions = self.actions</span>
-<span class="c1">##</span>
-<span class="c1">##        #ListActions = [frozenset([x]) for x in actions]</span>
-<span class="c1">##        circuitsList = self.circuitsList</span>
-<span class="c1">##        if Comments:</span>
-<span class="c1">##            print(&#39;list of circuits: &#39;, circuitsList)</span>
-<span class="c1">##        valuationdomain = self.valuationdomain</span>
-<span class="c1">##        gamma = self.gamma</span>
-<span class="c1">##        relation = self.relation</span>
-<span class="c1">##        Med = valuationdomain[&#39;med&#39;]</span>
-<span class="c1">##        currentCircuits = list(circuitsList)</span>
-<span class="c1">##        for (cycleList,cycle) in circuitsList:</span>
-<span class="c1">##            degP,degN,minLink = self.circuitCredibilities(cycleList,Debug=Comments)</span>
-<span class="c1">##            if Comments:</span>
-<span class="c1">##                print(cycleList,cycle,degP,degN,minLink)</span>
-<span class="c1">##            #if degP+degN &gt; Med:</span>
-<span class="c1">##            </span>
-<span class="c1">##            #if (degP + degN) &gt; -valuationdomain[&#39;precision&#39;]:</span>
-<span class="c1">##            if Comments:</span>
-<span class="c1">##                print(&#39;Adding cycle:&#39;, cycle, &#39; with Pdegree=&#39;,degP,&#39; and Ndegree=&#39;,degN )</span>
-<span class="c1">##            cn = &#39;_&#39;</span>
-<span class="c1">##            dcycle = set()</span>
-<span class="c1">##            acycle = set()</span>
-<span class="c1">##            for x in cycleList:</span>
-<span class="c1">##                if isinstance(x,frozenset):</span>
-<span class="c1">##                    cn += actions[x][&#39;name&#39;] + &#39;_&#39;</span>
-<span class="c1">##                else:</span>
-<span class="c1">##                    cn += str(x) + &#39;_&#39;</span>
-<span class="c1">##                dcycle = dcycle | gamma[x][0]</span>
-<span class="c1">##                dcycle = dcycle | set([x])</span>
-<span class="c1">##                acycle = acycle | gamma[x][1]</span>
-<span class="c1">##                acycle = acycle | set([x])</span>
-<span class="c1">##            gamma[cycle]=(dcycle,acycle)</span>
-<span class="c1">##            for x in actions:</span>
-<span class="c1">##                if x in cycle:</span>
-<span class="c1">##                    dx0 = gamma[x][0] | set([cycle])</span>
-<span class="c1">##                    dx1 = gamma[x][1] | set([cycle])</span>
-<span class="c1">##                    gamma[x] = (dx0,dx1)</span>
-<span class="c1">##                    relxcn = relation[x]</span>
-<span class="c1">##                    #relxcn[cycle] = valuationdomain[&#39;max&#39;]</span>
-<span class="c1">##                    relxcn[cycle] = degP + degN</span>
-<span class="c1">##                    relation[x] = relxcn</span>
-<span class="c1">##                else:</span>
-<span class="c1">##                    relxy = valuationdomain[&#39;min&#39;]</span>
-<span class="c1">##                    for y in cycle:</span>
-<span class="c1">##                        relxy = max(relxy,relation[x][y])</span>
-<span class="c1">##                        relxcn = relation[x]</span>
-<span class="c1">##                        relxcn[cycle] = relxy</span>
-<span class="c1">##                        relation[x] = relxcn</span>
-<span class="c1">##            relcycle = {}</span>
-<span class="c1">##            for x in actions:</span>
-<span class="c1">##                if x in cycle:</span>
-<span class="c1">##                    #relcycle[x] = valuationdomain[&#39;max&#39;]</span>
-<span class="c1">##                    relcycle[x] = degP</span>
-<span class="c1">##                else:</span>
-<span class="c1">##                    relxy = valuationdomain[&#39;min&#39;]</span>
-<span class="c1">##                    for y in cycle:</span>
-<span class="c1">##                        relxy = max(relxy,relation[y][x])</span>
-<span class="c1">##                    relcycle[x] = relxy</span>
-<span class="c1">##            relcycle[cycle] = valuationdomain[&#39;min&#39;]</span>
-<span class="c1">##            relation[cycle] = relcycle</span>
-<span class="c1">##            name = &#39;chordless odd %d-circuit&#39; % (len(cycle))</span>
-<span class="c1">##            actions[cycle] = {&#39;name&#39;: cn, &#39;comment&#39;: name}</span>
-<span class="c1">##            if Comments:</span>
-<span class="c1">##                print(actions[cycle])</span>
-<span class="c1">##</span>
-<span class="c1">##        self.actions = actions</span>
-<span class="c1">##        self.order = len(actions)</span>
-<span class="c1">##        self.relation = relation</span>
-<span class="c1">##        self.circuitsList = currentCircuits</span>
-<span class="c1">##        self.gamma = self.gammaSets()</span>
-<span class="c1">##        self.notGamma = self.notGammaSets()</span>
-<span class="c1">##        self.weakGamma = self.weakGammaSets()</span>
-<span class="c1">##        new = self.order - order0</span>
-<span class="c1">##        if Comments:</span>
-<span class="c1">##            if new == 0:</span>
-<span class="c1">##                print(&#39;  No circuits added !&#39;)</span>
-<span class="c1">##            else:</span>
-<span class="c1">##                print(&#39;  &#39;,new,&#39; circuit(s) added!&#39;)</span>
-
-<div class="viewcode-block" id="CocaDigraph.addCircuits"><a class="viewcode-back" href="../techDoc.html#digraphs.CocaDigraph.addCircuits">[docs]</a>    <span class="k">def</span> <span class="nf">addCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="BreakAddCocsDigraph.addCircuits"><a class="viewcode-back" href="../techDoc.html#digraphs.BreakAddCocsDigraph.addCircuits">[docs]</a>    <span class="k">def</span> <span class="nf">addCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Augmenting self with self.circuits.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -12030,7 +11825,7 @@
             <span class="c1">#if degP+degN &gt; Med:</span>
             
             <span class="k">if</span> <span class="p">(</span><span class="n">degP</span> <span class="o">+</span> <span class="n">degN</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;precision&#39;</span><span class="p">]:</span>
-<span class="c1">#           if (degP + degN) &gt;= valuationdomain[&#39;med&#39;]:</span>
+<span class="c1">#           if (degP + degN) &gt;= valuationdomain[&#39;med&#39;]:   # adds potentially more circuits </span>
                 <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Adding cycle:&#39;</span><span class="p">,</span> <span class="n">cycle</span><span class="p">,</span> <span class="s1">&#39; with Pdegree=&#39;</span><span class="p">,</span><span class="n">degP</span><span class="p">,</span><span class="s1">&#39; and Ndegree=&#39;</span><span class="p">,</span><span class="n">degN</span> <span class="p">)</span>
                 <span class="n">cn</span> <span class="o">=</span> <span class="s1">&#39;_&#39;</span>
@@ -12114,7 +11909,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  &#39;</span><span class="p">,</span><span class="n">newBreakings</span><span class="p">,</span><span class="s1">&#39; new circuit(s) were broken&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="CocaDigraph.showCircuits"><a class="viewcode-back" href="../techDoc.html#digraphs.CocaDigraph.showCircuits">[docs]</a>    <span class="k">def</span> <span class="nf">showCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">credibility</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="BreakAddCocsDigraph.showCircuits"><a class="viewcode-back" href="../techDoc.html#digraphs.BreakAddCocsDigraph.showCircuits">[docs]</a>    <span class="k">def</span> <span class="nf">showCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">credibility</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        show methods for chordless odd circuits in CocaGraph</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -12139,7 +11934,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Coca graph of order </span><span class="si">%d</span><span class="s1"> with </span><span class="si">%d</span><span class="s1"> odd chordless circuits.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">circuitsList</span><span class="p">)))</span></div>
         <span class="c1">#print len(aself.circuitsList),&#39; cirduits</span>
 
-<div class="viewcode-block" id="CocaDigraph.showComponents"><a class="viewcode-back" href="../techDoc.html#digraphs.CocaDigraph.showComponents">[docs]</a>    <span class="k">def</span> <span class="nf">showComponents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="BreakAddCocsDigraph.showComponents"><a class="viewcode-back" href="../techDoc.html#digraphs.BreakAddCocsDigraph.showComponents">[docs]</a>    <span class="k">def</span> <span class="nf">showComponents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*--- Connected Components ---*&#39;</span><span class="p">)</span>
         <span class="n">k</span><span class="o">=</span><span class="mi">1</span>
         <span class="k">for</span> <span class="n">Comp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">():</span>
@@ -12149,10 +11944,16 @@
             <span class="n">xk</span> <span class="o">=</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span></div></div>
 
 <span class="c1">#--------------------</span>
-<span class="k">class</span> <span class="nc">_CocaDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<div class="viewcode-block" id="CocaDigraph"><a class="viewcode-back" href="../techDoc.html#digraphs.CocaDigraph">[docs]</a><span class="k">class</span> <span class="nc">CocaDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">    Old CocaDigraph class without circuit elimination !</span>
+<span class="sd">    Old CocaDigraph class without circuit breakings; all circuits and circuits of circuits are added as hyper-nodes.</span>
+
+<span class="sd">    .. warning::</span>
+
+<span class="sd">        OBSOLETE: Gives inconsistent results when an autranking digraph shows loads of chordless cuircuits.</span>
+<span class="sd">        It is recommended to use instead either the BrokenCocsDigraph class (preferred option)</span>
+<span class="sd">        or the  BreakAddCocsDigraph class.</span>
 <span class="sd">    </span>
 <span class="sd">    Parameters:</span>
 
@@ -12199,7 +12000,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">weakGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weakGammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">closureChordlessOddCircuits</span><span class="p">(</span><span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="n">Piping</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">closureChordlessOddCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="CocaDigraph.closureChordlessOddCircuits"><a class="viewcode-back" href="../techDoc.html#digraphs.CocaDigraph.closureChordlessOddCircuits">[docs]</a>    <span class="k">def</span> <span class="nf">closureChordlessOddCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Closure of chordless odd circuits extraction.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -12218,9 +12019,9 @@
             <span class="n">currentCircuits</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">cl</span><span class="p">,</span><span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuitsList</span><span class="p">])</span>
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;initialCircuits, currentCircuits&#39;</span><span class="p">,</span> <span class="n">initialCircuits</span><span class="p">,</span> <span class="n">currentCircuits</span><span class="p">)</span>
-            <span class="n">newCircuits</span> <span class="o">=</span> <span class="n">currentCircuits</span> <span class="o">-</span> <span class="n">initialCircuits</span>
+            <span class="n">newCircuits</span> <span class="o">=</span> <span class="n">currentCircuits</span> <span class="o">-</span> <span class="n">initialCircuits</span></div>
 
-    <span class="k">def</span> <span class="nf">addCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="CocaDigraph.addCircuits"><a class="viewcode-back" href="../techDoc.html#digraphs.CocaDigraph.addCircuits">[docs]</a>    <span class="k">def</span> <span class="nf">addCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Augmenting self with self.circuits.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -12297,9 +12098,9 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">==</span> <span class="n">order0</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  No circuits added !&#39;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  &#39;</span><span class="p">,</span><span class="n">new</span><span class="p">,</span><span class="s1">&#39; circuit(s) added!&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  &#39;</span><span class="p">,</span><span class="n">new</span><span class="p">,</span><span class="s1">&#39; circuit(s) added!&#39;</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">showCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">credibility</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="CocaDigraph.showCircuits"><a class="viewcode-back" href="../techDoc.html#digraphs.CocaDigraph.showCircuits">[docs]</a>    <span class="k">def</span> <span class="nf">showCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">credibility</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        show methods for chordless odd circuits in CocaGraph</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -12318,17 +12119,17 @@
                 <span class="n">degP</span><span class="p">,</span><span class="n">degN</span><span class="p">,</span><span class="n">minLink</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuitCredibilities</span><span class="p">(</span><span class="n">circSet</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">circList</span><span class="p">,</span> <span class="s1">&#39;, marginal credibility :&#39;</span><span class="p">,</span> <span class="n">degP</span><span class="o">+</span><span class="n">degN</span><span class="p">)</span>
             
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Coca graph of order </span><span class="si">%d</span><span class="s1"> with </span><span class="si">%d</span><span class="s1"> odd chordles circuits.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">circuitsList</span><span class="p">)))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Coca graph of order </span><span class="si">%d</span><span class="s1"> with </span><span class="si">%d</span><span class="s1"> odd chordles circuits.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">circuitsList</span><span class="p">)))</span></div>
         <span class="c1">#print len(aself.circuitsList),&#39; cirduits</span>
 
-    <span class="k">def</span> <span class="nf">showComponents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="CocaDigraph.showComponents"><a class="viewcode-back" href="../techDoc.html#digraphs.CocaDigraph.showComponents">[docs]</a>    <span class="k">def</span> <span class="nf">showComponents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*--- Connected Components ---*&#39;</span><span class="p">)</span>
         <span class="n">k</span><span class="o">=</span><span class="mi">1</span>
         <span class="k">for</span> <span class="n">Comp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">():</span>
             <span class="n">component</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">Comp</span><span class="p">)</span>
             <span class="c1">#component.sort()</span>
             <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">component</span><span class="p">))</span>
-            <span class="n">xk</span> <span class="o">=</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">xk</span> <span class="o">=</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span></div></div>
 
 <span class="c1">#---------------------</span>
 <span class="c1">##class CocaDigraph(_CocaDigraph):</span>
@@ -12850,10 +12651,10 @@
         <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="k">import</span> <span class="n">CopelandOrder</span>
         <span class="n">t1</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">cocb</span> <span class="o">=</span> <span class="n">BrokenCocsDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">cocb</span><span class="o">.</span><span class="n">brokenLinks</span><span class="p">)</span>
         <span class="n">g</span><span class="o">.</span><span class="n">showRubisBestChoiceRecommendation</span><span class="p">()</span>
         <span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span>
+        <span class="n">cocb</span> <span class="o">=</span> <span class="n">BrokenCocsDigraph</span><span class="p">(</span><span class="n">gcd</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">cocb</span><span class="o">.</span><span class="n">brokenLinks</span><span class="p">)</span>
         <span class="n">gcd</span><span class="o">.</span><span class="n">computeRubisChoice</span><span class="p">()</span>
         <span class="n">gcd</span><span class="o">.</span><span class="n">showGoodChoices</span><span class="p">()</span>
 <span class="c1">##        cop = CopelandOrder(g)</span>
