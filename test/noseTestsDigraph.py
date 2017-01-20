@@ -393,8 +393,8 @@ def testPerformanceDifferencesPerCriteria():
     g.showPerformanceTableau()
     g.computePerformanceDifferences(Comments=True)
 
-def testCocaDigraph():
-    print('==>> Testing CocaGraph instantiation')
+def testCoca_BreakAdd_BrokenCocsDigraph():
+    print('==>> Testing Coca_ BreakAdd_ and BrokenCocsDiGraph instantiation')
     g = RandomValuationDigraph(order=10)
     #g = RandomWeakTournament(order=5)
     #g.save('testCoca')
@@ -402,10 +402,16 @@ def testCocaDigraph():
     print(g.valuationdomain)
     gp = PolarisedDigraph(g,0.2)
     #gp = IndeterminateDigraph(order=5)
-    h = CocaDigraph(digraph = gp,Comments=True)
-    h.save('res2')
-    h.showAll()
-    gp.exportGraphViz()
+    h1 = CocaDigraph(digraph = gp,Comments=True)
+    h1.save('rescoca2')
+    h1.showAll()
+    h2 = BreakAddCocsDigraph(digraph = g,Comments=True)
+    h2.save('resbradco2')
+    h2.showAll()
+    h3 = BrokenCocsDigraph(digraph = g,Comments=True)
+    h3.save('resbreakco2')
+    h3.showAll()
+    
     #h.showRelationTable()
     #h.showRelation()
 

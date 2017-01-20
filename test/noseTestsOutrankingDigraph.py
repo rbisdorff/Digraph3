@@ -100,12 +100,12 @@ def testBipolarOutrankingDigraph():
     print(g.computeMoreOrLessUnrelatedPairs())
     g.showVetos()
 
-def testRubyChoice():
+def testComputeRubisChoice():
     print('*==>> Test ruby BCR ---*')
     t = RandomPerformanceTableau(numberOfActions=7)
     g = BipolarOutrankingDigraph(t)
     g.showRelationTable()
-    g.showRubyChoice(Comments=True)
+    g.showRubisBestChoiceRecommendation(ChoiceVector=True,Comments=True)
     g.showRubyChoice(Comments=True,_OldCoca=True)
     g.showStatistics()
     print(g)
@@ -414,36 +414,6 @@ def testRankingRules():
     print(gcd.computeKemenyRanking(isProbabilistic=True, seed=1,sampleSize=500))    
     gcd.computeSlaterOrder(Debug=True)
     print(gcd.computeSlaterOrder(isProbabilistic=True, seed=1,sampleSize=500))
-
-## def testChordlessCircuitsCPPExtraction():
-##     print '*--- test C++/agrum enhanced chordless circuits extraction ----*'
-##     from time import time
-##     g = RandomBipolarOutrankingDigraph()
-##     t0 = time()
-##     print len(g.computeChordlessCircuits(Debug=False))
-##     print 'python time = ', time() - t0
-##     t0 = time()
-##     print len(g.computeCppInOutPipingChordlessCircuits(Debug=False))
-##     print 'cpp piping time = ', time() - t0
-##     t0 = time()
-##     print len(g.computeCppChordlessCircuits(Debug=False))
-##     print g.detectCppChordlessCircuits(Debug=True)
-##     print 'cpp file time = ', time() - t0
-##     t0 = time()
-##     gcoca1 = CocaDigraph(g,Cpp=False,Comments=False)
-##     print 'coca python time = ', time() - t0
-##     print len(gcoca1.actions)
-##     t0 = time()
-##     gcoca2 = CocaDigraph(g,Cpp=True,Comments=False)
-##     print 'coca cpp time = ', time() - t0
-##     print len(gcoca2.actions)
-##     t0 = time()
-##     gcoca3 = CocaDigraph(g,Cpp=True,Piping=True,Comments=False)
-##     print 'coca cpp piping time = ', time() - t0
-##     print len(gcoca3.actions)
-##     for xc in gcoca1.actions:
-##         if xc not in gcoca2.actions:
-##             print xc
 
 def testQuantilesRanking():
     print('*---- test quantiles ranking procedures -----*')
