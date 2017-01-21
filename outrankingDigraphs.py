@@ -3741,7 +3741,11 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         print('Size             : %d' % self.computeSize())
         print('Determinateness  : %.3f' % (self.computeDeterminateness()) )
         print('----  Constructor run times (in sec.) ----')
-        print('#Threads         : %d' % self.nbrThreads)
+        try:
+            print('#Threads         : %d' % self.nbrThreads)
+        except:
+            self.nbrThreads = 1
+            print('#Threads         : %d' % self.nbrThreads)
         print('Total time       : %.5f' % self.runTimes['totalTime'])
         print('Data input       : %.5f' % self.runTimes['dataInput'])
         print('Compute relation : %.5f' % self.runTimes['computeRelation'])
