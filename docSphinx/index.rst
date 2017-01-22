@@ -17,9 +17,12 @@ This documentation describes the Python3 resources for implementing decision aid
 
 **Parts of the documentation:**
 
+The documentation contains, first, a set of tutorials introducing the main objects like digraphs, outranking digraphs and performance tableaux. There is also a tutorial provided on undirected graphs. Some tutorials are pronlem oriented and show how to compute the winner of an election or how to build a best choice recommendation. 
+
 .. toctree:: tutorial
    :maxdepth: 2
 
+The second part concerns the technical documentaion and reference manual of the proposed Python3 modules. The main generic root objects in this collection are the py:class:`digraphs.Digraph` class, the py:class:`perfTabs.PerformanceTableau` class and the py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class. 
 
 .. toctree:: techDoc
    :maxdepth: 2
