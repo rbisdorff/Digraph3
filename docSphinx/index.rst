@@ -17,12 +17,12 @@ This documentation describes the Python3 resources for implementing decision aid
 
 **Parts of the documentation:**
 
-The documentation contains, first, a set of tutorials introducing the main objects like digraphs, outranking digraphs and performance tableaux. There is also a tutorial provided on undirected graphs. Some tutorials are problem oriented and show how to compute the winner of an election, how to build a best choice recommendation, or how to linearly rank with multiple incommensurable ranking criteria.
+The documentation contains, first, a set of tutorials introducing the main objects like digraphs, outranking digraphs and performance tableaux. There is also a tutorial provided on undirected graphs. Some tutorials are problem oriented and show how to compute the winner of an election, how to build a best choice recommendation, or how to linearly rank with multiple incommensurable ranking criteria. 
 
 .. toctree:: tutorial
    :maxdepth: 2
 
-The second part concerns the technical documentaion and reference manual of the proposed Python3 modules. The main generic root objects in this collection are the :py:class:`digraphs.Digraph` class, the :py:class:`perfTabs.PerformanceTableau` class and the :py:class:`outrankingDigraphs.OutrankingDigraph` class. 
+The second part concerns the technical documentaion and reference manual of the proposed Python3 modules. The main generic root objects in this collection are the :py:class:`digraphs.Digraph` class, the :py:class:`perfTabs.PerformanceTableau` class and the :py:class:`outrankingDigraphs.OutrankingDigraph` class. The reference manual provides links to the complete source code of all modules, classes and methods.
 
 .. toctree:: techDoc
    :maxdepth: 2
@@ -40,7 +40,7 @@ References
 
 .. [2] R. Bisdorff (2013) "On Polarizing Outranking Relations with Large Performance Differences" *Journal of Multi-Criteria Decision Analysis* (Wiley) **20**:3-12 (Preprint `PDF file 403.5kB <http://leopold-loewenheim.uni.lu/bisdorff/documents/MCDA-10-0059-PrePeerReview.pdf>`_)
 
-See Publications of R. Bisdorff `http://sma.uni.lu/bisdorff/publications.html <http://sma.uni.lu/bisdorff/publications.html>`_
+For further scientific documentation of the Digraph3 ressources, see `http://sma.uni.lu/bisdorff/publications.html <http://sma.uni.lu/bisdorff/publications.html>`_
 
 `Copyright <http://leopold-loewenheim.uni.lu/Digraph3/digraph3_copyright.html>`_
 
