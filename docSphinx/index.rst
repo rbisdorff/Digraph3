@@ -22,7 +22,7 @@ The documentation contains, first, a set of tutorials introducing the main objec
 .. toctree:: tutorial
    :maxdepth: 2
 
-The second part concerns the technical documentaion and reference manual of the proposed Python3 modules. The main generic root objects in this collection are the py:class:`digraphs.Digraph` class, the py:class:`perfTabs.PerformanceTableau` class and the py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class. 
+The second part concerns the technical documentaion and reference manual of the proposed Python3 modules. The main generic root objects in this collection are the :py:class:`digraphs.Digraph` class, the :py:class:`perfTabs.PerformanceTableau` class and the :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class. 
 
 .. toctree:: techDoc
    :maxdepth: 2
