@@ -24,7 +24,7 @@
 __version__ = "$Revision: 1.01 $"
 # $Source: /home/cvsroot/Digraph/randomPerfTabs.py,v $
 
-from perfTabs import *
+from perfTabs import PerformanceTableau
 from decimal import Decimal
 from collections import OrderedDict
 

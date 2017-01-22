@@ -21,9 +21,9 @@
 __version__ = "Branch: 3.5 $"
 # ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
 
-from digraphs import *
-from perfTabs import *
-from randomPerfTabs import *
+#from digraphs import *
+#from perfTabs import *
+#from randomPerfTabs import *
 
 #--------- Decimal precision --------------
 from decimal import Decimal
@@ -195,6 +195,7 @@ def total_size(o, handlers={}, verbose=False):
     from itertools import chain
     from collections import deque
     from digraphs import Digraph
+    from perfTabs import PerformanceTableau
     from sparseOutrankingDigraphs import SparseOutrankingDigraph
     
     try:
