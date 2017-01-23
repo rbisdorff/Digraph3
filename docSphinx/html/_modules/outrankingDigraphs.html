@@ -80,10 +80,16 @@
         
 <div class="viewcode-block" id="OutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.OutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">OutrankingDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Abstract class for methods common to all</span>
-<span class="sd">    outranking digraphs</span>
+<span class="sd">    Abstract class for outranking digraphs.</span>
+<span class="sd">    Provides common methods to all specialized models of outranking digraphs.</span>
+
+<span class="sd">    .. warning::</span>
+
+<span class="sd">        Cannot be called directly !</span>
+<span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">coalition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generic constructor for many outranking digraph models.&quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">copy</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">argPerfTab</span><span class="p">,</span> <span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">,</span><span class="n">RandomPerformanceTableau</span><span class="p">)):</span>
             <span class="n">perfTab</span> <span class="o">=</span> <span class="n">argPerfTab</span>
@@ -106,14 +112,13 @@
             <span class="n">criteria</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">coalition</span><span class="p">:</span>
                 <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
-        <span class="c1">#self.relation = self._constructRelation(criteria,perfTab.evaluation, self.weightPreorder)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">criteria</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">convertWeightFloatToDecimal</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">evaluation</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluationFloatToDecimal</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_constructRelation</span><span class="p">(</span><span class="n">criteria</span><span class="p">,</span><span class="n">perfTab</span><span class="o">.</span><span class="n">evaluation</span><span class="p">,</span><span class="n">hasNoVeto</span><span class="o">=</span><span class="n">hasNoVeto</span><span class="p">)</span>
         <span class="n">methodData</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">methodData</span><span class="p">[</span><span class="s1">&#39;parameter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;valuationType&#39;</span><span class="p">:</span><span class="s1">&#39;normalized&#39;</span><span class="p">,</span><span class="s1">&#39;variant&#39;</span><span class="p">:</span><span class="s1">&#39;unipolar&#39;</span><span class="p">}</span>
+        <span class="n">methodData</span><span class="p">[</span><span class="s1">&#39;parameter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;valuationType&#39;</span><span class="p">:</span><span class="s1">&#39;decimal&#39;</span><span class="p">,</span><span class="s1">&#39;variant&#39;</span><span class="p">:</span><span class="s1">&#39;none&#39;</span><span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">methodData</span> <span class="o">=</span> <span class="n">methodData</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
@@ -343,29 +348,6 @@
                     <span class="nb">print</span><span class="p">(</span><span class="n">rankingRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">],</span><span class="n">rankingRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">rankingRelation</span>        </div>
 
-<span class="c1">##    def convertWeightFloatToDecimal(self):</span>
-<span class="c1">##        &quot;&quot;&quot;</span>
-<span class="c1">##        Convert significance weights from obsolete float format</span>
-<span class="c1">##        to decimal.Decimal format.</span>
-<span class="c1">##        &quot;&quot;&quot;</span>
-<span class="c1">##        criteria = self.criteria</span>
-<span class="c1">##        criteriaList = [x for x in self.criteria]</span>
-<span class="c1">##        for g in criteriaList:</span>
-<span class="c1">##            criteria[g][&#39;weight&#39;] = Decimal(str(criteria[g][&#39;weight&#39;]))</span>
-<span class="c1">##        self.criteria = criteria</span>
-<span class="c1">##</span>
-<span class="c1">##    def convertEvaluationFloatToDecimal(self):</span>
-<span class="c1">##        &quot;&quot;&quot;</span>
-<span class="c1">##        Convert evaluations from obsolete float format to decimal format</span>
-<span class="c1">##        &quot;&quot;&quot;</span>
-<span class="c1">##        evaluation = self.evaluation</span>
-<span class="c1">##        actionsList = [x for x in self.actions]</span>
-<span class="c1">##        criteriaList = [x for x in self.criteria]</span>
-<span class="c1">##        for g in criteriaList:</span>
-<span class="c1">##            for x in actionsList:</span>
-<span class="c1">##                evaluation[g][x] = Decimal(str(evaluation[g][x]))</span>
-<span class="c1">##        self.evaluation = evaluation</span>
-
 <div class="viewcode-block" id="OutrankingDigraph.showCriterionRelationTable"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.OutrankingDigraph.showCriterionRelationTable">[docs]</a>    <span class="k">def</span> <span class="nf">showCriterionRelationTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criterion</span><span class="p">,</span> <span class="n">actionsSubset</span><span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        prints the relation valuation in actions X actions table format.</span>
@@ -408,9 +390,7 @@
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeCriterionRelation</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%.1f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">()</span></div>
-
-                
+                <span class="nb">print</span><span class="p">()</span>         </div>
 
 <div class="viewcode-block" id="OutrankingDigraph.computeCriterionRelation"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.OutrankingDigraph.computeCriterionRelation">[docs]</a>    <span class="k">def</span> <span class="nf">computeCriterionRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -898,8 +878,6 @@
         <span class="n">g</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="n">g</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">g</span></div>
-
-
         
 <div class="viewcode-block" id="OutrankingDigraph.showCriteriaHierarchy"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.OutrankingDigraph.showCriteriaHierarchy">[docs]</a>    <span class="k">def</span> <span class="nf">showCriteriaHierarchy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

@@ -30,10 +30,16 @@ from outrankingDigraphs import *
         
 class OutrankingDigraph(Digraph,PerformanceTableau):
     """
-    Abstract class for methods common to all
-    outranking digraphs
+    Abstract class for outranking digraphs.
+    Provides common methods to all specialized models of outranking digraphs.
+
+    .. warning::
+
+        Cannot be called directly !
+        
     """
     def __init__(self,argPerfTab=None,coalition=None,hasNoVeto=False):
+        """Generic constructor for many outranking digraph models."""
         import copy
         if isinstance(argPerfTab, (PerformanceTableau,RandomPerformanceTableau)):
             perfTab = argPerfTab
@@ -56,14 +62,13 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             criteria = {}
             for g in coalition:
                 criteria[g] = perfTab.criteria[g]
-        #self.relation = self._constructRelation(criteria,perfTab.evaluation, self.weightPreorder)
         self.criteria = criteria
         self.convertWeightFloatToDecimal()
         self.evaluation = copy.deepcopy(perfTab.evaluation)
         self.convertEvaluationFloatToDecimal()
         self.relation = self._constructRelation(criteria,perfTab.evaluation,hasNoVeto=hasNoVeto)
         methodData = {}
-        methodData['parameter'] = {'valuationType':'normalized','variant':'unipolar'}
+        methodData['parameter'] = {'valuationType':'decimal','variant':'none'}
         self.methodData = methodData
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
@@ -293,29 +298,6 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     print(rankingRelation[x][y],rankingRelation[y][x])
         return rankingRelation        
 
-##    def convertWeightFloatToDecimal(self):
-##        """
-##        Convert significance weights from obsolete float format
-##        to decimal.Decimal format.
-##        """
-##        criteria = self.criteria
-##        criteriaList = [x for x in self.criteria]
-##        for g in criteriaList:
-##            criteria[g]['weight'] = Decimal(str(criteria[g]['weight']))
-##        self.criteria = criteria
-##
-##    def convertEvaluationFloatToDecimal(self):
-##        """
-##        Convert evaluations from obsolete float format to decimal format
-##        """
-##        evaluation = self.evaluation
-##        actionsList = [x for x in self.actions]
-##        criteriaList = [x for x in self.criteria]
-##        for g in criteriaList:
-##            for x in actionsList:
-##                evaluation[g][x] = Decimal(str(evaluation[g][x]))
-##        self.evaluation = evaluation
-
     def showCriterionRelationTable(self,criterion, actionsSubset= None):
         """
         prints the relation valuation in actions X actions table format.
@@ -358,9 +340,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     else:
                         value = self.computeCriterionRelation(c,x,y)
                     print('%.1f' % (value), end=' ')
-                print()
-
-                
+                print()         
 
     def computeCriterionRelation(self,c,a,b):
         """
@@ -848,8 +828,6 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         g.gamma = g.gammaSets()
         g.notGamma = g.notGammaSets()
         return g
-
-
         
     def showCriteriaHierarchy(self):
         """
