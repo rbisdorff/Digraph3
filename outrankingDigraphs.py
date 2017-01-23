@@ -35,44 +35,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
 
     .. warning::
 
-        Cannot be called directly !
+        Cannot be called directly ! No __init__(self,...) method defined.
         
     """
-    def __init__(self,argPerfTab=None,coalition=None,hasNoVeto=False):
-        """Generic constructor for many outranking digraph models."""
-        import copy
-        if isinstance(argPerfTab, (PerformanceTableau,RandomPerformanceTableau)):
-            perfTab = argPerfTab
-        else:
-            if argPerfTab == None:
-                perfTab = RandomPerformanceTableau()
-            else:
-                perfTab = PerformanceTableau(argPerfTab)
-        self.performanceTableau = perfTab
-        self.name = 'rel_' + perfTab.name
-        self.actions = copy.deepcopy(perfTab.actions)
-        Min = Decimal('0.0')
-        Med = Decimal('50.0')
-        Max = Decimal('100.0')
-        self.valuationdomain = {'min':Min,'med':Med,'max':Max}
-        #self.weightPreorder = perfTab.computeWeightPreorder()
-        if coalition == None:
-            criteria = copy.deepcopy(perfTab.criteria)
-        else:
-            criteria = {}
-            for g in coalition:
-                criteria[g] = perfTab.criteria[g]
-        self.criteria = criteria
-        self.convertWeightFloatToDecimal()
-        self.evaluation = copy.deepcopy(perfTab.evaluation)
-        self.convertEvaluationFloatToDecimal()
-        self.relation = self._constructRelation(criteria,perfTab.evaluation,hasNoVeto=hasNoVeto)
-        methodData = {}
-        methodData['parameter'] = {'valuationType':'decimal','variant':'none'}
-        self.methodData = methodData
-        self.order = len(self.actions)
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
 
     def computeMarginalCorrelation(self,args,Threading=False,\
                                     nbrOfCPUs=None,Debug=False,
@@ -6699,6 +6664,41 @@ class OrdinalOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
     Specialization of the general OutrankingDigraph class for 
     temporary ordinal outranking digraphs
     """
+    def __init__(self,argPerfTab=None,coalition=None,hasNoVeto=False):
+        """Generic constructor for many outranking digraph models."""
+        import copy
+        if isinstance(argPerfTab, (PerformanceTableau,RandomPerformanceTableau)):
+            perfTab = argPerfTab
+        else:
+            if argPerfTab == None:
+                perfTab = RandomPerformanceTableau()
+            else:
+                perfTab = PerformanceTableau(argPerfTab)
+        self.performanceTableau = perfTab
+        self.name = 'rel_' + perfTab.name
+        self.actions = copy.deepcopy(perfTab.actions)
+        Min = Decimal('0.0')
+        Med = Decimal('50.0')
+        Max = Decimal('100.0')
+        self.valuationdomain = {'min':Min,'med':Med,'max':Max}
+        #self.weightPreorder = perfTab.computeWeightPreorder()
+        if coalition == None:
+            criteria = copy.deepcopy(perfTab.criteria)
+        else:
+            criteria = {}
+            for g in coalition:
+                criteria[g] = perfTab.criteria[g]
+        self.criteria = criteria
+        self.convertWeightFloatToDecimal()
+        self.evaluation = copy.deepcopy(perfTab.evaluation)
+        self.convertEvaluationFloatToDecimal()
+        self.relation = self._constructRelation(criteria,perfTab.evaluation,hasNoVeto=hasNoVeto)
+        methodData = {}
+        methodData['parameter'] = {'valuationType':'decimal','variant':'none'}
+        self.methodData = methodData
+        self.order = len(self.actions)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
     
 
     def _constructRelation(self,criteria,evaluation,hasSymmetricThresholds=True,hasNoVeto=False):
@@ -7017,6 +7017,41 @@ class UnanimousOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
     Specialization of the general OutrankingDigraph class for 
     temporary unanimous outranking digraphs
     """
+    def __init__(self,argPerfTab=None,coalition=None,hasNoVeto=False):
+        """Generic constructor for many outranking digraph models."""
+        import copy
+        if isinstance(argPerfTab, (PerformanceTableau,RandomPerformanceTableau)):
+            perfTab = argPerfTab
+        else:
+            if argPerfTab == None:
+                perfTab = RandomPerformanceTableau()
+            else:
+                perfTab = PerformanceTableau(argPerfTab)
+        self.performanceTableau = perfTab
+        self.name = 'rel_' + perfTab.name
+        self.actions = copy.deepcopy(perfTab.actions)
+        Min = Decimal('0.0')
+        Med = Decimal('50.0')
+        Max = Decimal('100.0')
+        self.valuationdomain = {'min':Min,'med':Med,'max':Max}
+        #self.weightPreorder = perfTab.computeWeightPreorder()
+        if coalition == None:
+            criteria = copy.deepcopy(perfTab.criteria)
+        else:
+            criteria = {}
+            for g in coalition:
+                criteria[g] = perfTab.criteria[g]
+        self.criteria = criteria
+        self.convertWeightFloatToDecimal()
+        self.evaluation = copy.deepcopy(perfTab.evaluation)
+        self.convertEvaluationFloatToDecimal()
+        self.relation = self._constructRelation(criteria,perfTab.evaluation,hasNoVeto=hasNoVeto)
+        methodData = {}
+        methodData['parameter'] = {'valuationType':'decimal','variant':'none'}
+        self.methodData = methodData
+        self.order = len(self.actions)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
 
     def _constructRelation(self,criteria,evaluation,hasSymmetricThresholds=True,hasNoVeto=True):
         """
