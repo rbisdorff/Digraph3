@@ -1,6 +1,7 @@
 README
 digraph3_copyright.html
 digraphsTools.py
+arithmetics.py
 digraphs.py
 perfTabs.py
 outrankingDigraphs.py
@@ -29,6 +30,7 @@ doc/up.png
 doc/rel_rubyExample.eps
 doc/sedpngs
 test/nosetests
+test/noseTestsArithmetics.py
 test/noseTestsDigraph.py
 test/noseTestsOutrankingDigraph.py
 test/noseTestsSortingDigraph.py
