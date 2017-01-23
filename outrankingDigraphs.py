@@ -38,7 +38,6 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         Cannot be called directly ! No __init__(self,...) method defined.
         
     """
-
     def computeMarginalCorrelation(self,args,Threading=False,\
                                     nbrOfCPUs=None,Debug=False,
                                     Comments=False):
