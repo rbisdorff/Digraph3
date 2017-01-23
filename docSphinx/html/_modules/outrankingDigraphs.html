@@ -85,45 +85,9 @@
 
 <span class="sd">    .. warning::</span>
 
-<span class="sd">        Cannot be called directly !</span>
+<span class="sd">        Cannot be called directly ! No __init__(self,...) method defined.</span>
 <span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<span class="c1">##    def __init__(self,argPerfTab=None,coalition=None,hasNoVeto=False):</span>
-<span class="c1">##        &quot;&quot;&quot;Generic constructor for many outranking digraph models.&quot;&quot;&quot;</span>
-<span class="c1">##        import copy</span>
-<span class="c1">##        if isinstance(argPerfTab, (PerformanceTableau,RandomPerformanceTableau)):</span>
-<span class="c1">##            perfTab = argPerfTab</span>
-<span class="c1">##        else:</span>
-<span class="c1">##            if argPerfTab == None:</span>
-<span class="c1">##                perfTab = RandomPerformanceTableau()</span>
-<span class="c1">##            else:</span>
-<span class="c1">##                perfTab = PerformanceTableau(argPerfTab)</span>
-<span class="c1">##        self.performanceTableau = perfTab</span>
-<span class="c1">##        self.name = &#39;rel_&#39; + perfTab.name</span>
-<span class="c1">##        self.actions = copy.deepcopy(perfTab.actions)</span>
-<span class="c1">##        Min = Decimal(&#39;0.0&#39;)</span>
-<span class="c1">##        Med = Decimal(&#39;50.0&#39;)</span>
-<span class="c1">##        Max = Decimal(&#39;100.0&#39;)</span>
-<span class="c1">##        self.valuationdomain = {&#39;min&#39;:Min,&#39;med&#39;:Med,&#39;max&#39;:Max}</span>
-<span class="c1">##        #self.weightPreorder = perfTab.computeWeightPreorder()</span>
-<span class="c1">##        if coalition == None:</span>
-<span class="c1">##            criteria = copy.deepcopy(perfTab.criteria)</span>
-<span class="c1">##        else:</span>
-<span class="c1">##            criteria = {}</span>
-<span class="c1">##            for g in coalition:</span>
-<span class="c1">##                criteria[g] = perfTab.criteria[g]</span>
-<span class="c1">##        self.criteria = criteria</span>
-<span class="c1">##        self.convertWeightFloatToDecimal()</span>
-<span class="c1">##        self.evaluation = copy.deepcopy(perfTab.evaluation)</span>
-<span class="c1">##        self.convertEvaluationFloatToDecimal()</span>
-<span class="c1">##        self.relation = self._constructRelation(criteria,perfTab.evaluation,hasNoVeto=hasNoVeto)</span>
-<span class="c1">##        methodData = {}</span>
-<span class="c1">##        methodData[&#39;parameter&#39;] = {&#39;valuationType&#39;:&#39;decimal&#39;,&#39;variant&#39;:&#39;none&#39;}</span>
-<span class="c1">##        self.methodData = methodData</span>
-<span class="c1">##        self.order = len(self.actions)</span>
-<span class="c1">##        self.gamma = self.gammaSets()</span>
-<span class="c1">##        self.notGamma = self.notGammaSets()</span>
-
 <div class="viewcode-block" id="OutrankingDigraph.computeMarginalCorrelation"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.OutrankingDigraph.computeMarginalCorrelation">[docs]</a>    <span class="k">def</span> <span class="nf">computeMarginalCorrelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">args</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                                     <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                     <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>

@@ -645,6 +645,10 @@ Optimized with marking of visited chordless P1s.</p>
 <dt id="digraphs.Digraph.circuitCredibilities">
 <code class="descname">circuitCredibilities</code><span class="sig-paren">(</span><em>circuit</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.circuitCredibilities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.circuitCredibilities" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the average linking credibilities and the minimal link of a COC.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The characteristic valuation domain of the relation must be bipolar with Med = 0 !!</p>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -4978,7 +4982,7 @@ temporary ordinal outranking digraphs</p>
 Provides common methods to all specialized models of outranking digraphs.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Cannot be called directly !</p>
+<p class="last">Cannot be called directly ! No __init__(self,...) method defined.</p>
 </div>
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.computeAMPLData">
