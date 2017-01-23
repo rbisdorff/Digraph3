@@ -6948,6 +6948,11 @@ class Digraph(object):
     def circuitCredibilities(self,circuit,Debug=False):
         """
         Renders the average linking credibilities and the minimal link of a COC.
+
+        .. warning::
+
+            The characteristic valuation domain of the relation must be bipolar with Med = 0 !!
+
         """
         if Debug:
             print(circuit)
@@ -6956,36 +6961,68 @@ class Digraph(object):
         Med = self.valuationdomain['med']
         Max = self.valuationdomain['max']
         Min = self.valuationdomain['min']
-        maxAmplitude = abs(Max) + abs(Min)
-        degP = Med
-        degN = Med
-        nParcs = 0
-        nNarcs = 0
-        minAmplitude = maxAmplitude
-        minLink = None
-        nc = len(circuit)
-        for i in range(nc):
-            x = circuit[i]
-            #for j in range(i+1,nc):
-            if i != nc -1:
-                y = circuit[i+1]
-            else:
-                y = circuit[0]
-            if Debug:
-                print(x,y,end=',')
-            degP += relation[x][y]
-            nParcs += 1
-            diffxy = abs(relation[x][y]) + abs(relation[y][x])
-            #diffxy = abs(relation[x][y]) + abs(relation[y][x])
-            if Debug:
-                print(relation[x][y],relation[y][x],diffxy,end=',')
-            if minAmplitude >= diffxy:
-                minAmplitude = diffxy
-                minLink = (x,y)
-            if Debug:
-                print(minLink)
-            degN += relation[y][x]
-            nNarcs += 1
+        if Min != -Max:
+            # the characteristic valuation is not bipolar !
+            maxAmplitude = abs(Max-Med) + abs(Min-Med)
+            degP = Decimal('0')
+            degN = Decimal('0')
+            nParcs = 0
+            nNarcs = 0
+            minAmplitude = maxAmplitude
+            minLink = None
+            nc = len(circuit)
+            for i in range(nc):
+                x = circuit[i]
+                #for j in range(i+1,nc):
+                if i != nc -1:
+                    y = circuit[i+1]
+                else:
+                    y = circuit[0]
+                if Debug:
+                    print(x,y,end=',')
+                degP += (relation[x][y]-Med)
+                nParcs += 1
+                diffxy = abs(relation[x][y]-Med) + abs(relation[y][x]-Med)
+                if Debug:
+                    print(relation[x][y],relation[y][x],diffxy,end=',')
+                if minAmplitude >= diffxy:
+                    minAmplitude = diffxy
+                    minLink = (x,y)
+                if Debug:
+                    print(minLink)
+                degN += (relation[y][x]-Med)
+                nNarcs += 1
+        else:
+            # the characteristic valuation is bipolar !
+            maxAmplitude = abs(Max) + abs(Min)
+            degP = Med
+            degN = Med
+            nParcs = 0
+            nNarcs = 0
+            minAmplitude = maxAmplitude
+            minLink = None
+            nc = len(circuit)
+            for i in range(nc):
+                x = circuit[i]
+                #for j in range(i+1,nc):
+                if i != nc -1:
+                    y = circuit[i+1]
+                else:
+                    y = circuit[0]
+                if Debug:
+                    print(x,y,end=',')
+                degP += relation[x][y]
+                nParcs += 1
+                diffxy = abs(relation[x][y]) + abs(relation[y][x])
+                if Debug:
+                    print(relation[x][y],relation[y][x],diffxy,end=',')
+                if minAmplitude >= diffxy:
+                    minAmplitude = diffxy
+                    minLink = (x,y)
+                if Debug:
+                    print(minLink)
+                degN += relation[y][x]
+                nNarcs += 1            
         if nParcs != 0:
             degP /= Decimal(str(nParcs))
         if nNarcs != 0:
@@ -11605,8 +11642,8 @@ class BrokenCocsDigraph(Digraph):
         currentCircuits = list(circuitsList)
         for (cycleList,cycle) in circuitsList:
             degP,degN,minLink = self.circuitCredibilities(cycleList,Debug=Comments)
-            if Comments:
-                print(cycleList,cycle,degP,degN,minLink)
+            #if Comments:
+            print(cycleList,cycle,degP,degN,minLink)
             if Comments:
                 print('Breaking:',cycleList,degP,degN)
             actionsSubset = [x for x in flatten(cycle)]
@@ -12599,14 +12636,20 @@ if __name__ == "__main__":
         from outrankingDigraphs import BipolarOutrankingDigraph
         from randomPerfTabs import RandomCBPerformanceTableau
         from linearOrders import CopelandOrder
-        t1 = RandomCBPerformanceTableau(numberOfActions=20,seed=1)
-        g = BipolarOutrankingDigraph(t1,Normalized=True)
-        g.showRubisBestChoiceRecommendation()
-        gcd = ~(-g)
-        cocb = BrokenCocsDigraph(gcd,Comments=True)
-        print(cocb.brokenLinks)
-        gcd.computeRubisChoice()
-        gcd.showGoodChoices()
+##        t1 = RandomCBPerformanceTableau(numberOfActions=20,seed=1)
+##        g = BipolarOutrankingDigraph(t1,Normalized=True)
+##        g.showRubisBestChoiceRecommendation()
+##        gcd = ~(-g)
+##        cocb = BrokenCocsDigraph(gcd,Comments=True)
+##        print(cocb.brokenLinks)
+##        gcd.computeRubisChoice()
+##        gcd.showGoodChoices()
+        g = RandomValuationDigraph(order=10,seed=3)
+        g.recodeValuation()
+        h3 = BrokenCocsDigraph(digraph=g,Comments=False)
+        h3.save('resbreakco2')
+        h3.showAll()
+
 ##        cop = CopelandOrder(g)
 ##        #g.showHTMLRelationMap(rankingRule='rankedPairs')
 ##        gcd = CoDualDigraph(g)
