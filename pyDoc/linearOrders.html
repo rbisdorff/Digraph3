@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>linearOrders</strong></big></big> (version 1.18)</font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/linearOrders.py">/Users/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/linearOrders.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/linearOrders.py">/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/linearOrders.py</a></font></td></tr></table>
     <p><tt>#&nbsp;-*-&nbsp;coding:&nbsp;utf-8&nbsp;-*-<br>
 #&nbsp;Python&nbsp;implementation&nbsp;of&nbsp;linear&nbsp;orders<br>
 #&nbsp;Dependancy:&nbsp;digraphs&nbsp;1.589+<br>
@@ -475,7 +475,7 @@ the&nbsp;following&nbsp;type&nbsp;of&nbsp;links:<br>
 gt&nbsp;'&gt;',&nbsp;eq&nbsp;'=',&nbsp;lt&nbsp;'&lt;',&nbsp;incomp&nbsp;'&lt;&gt;',<br>
 leq&nbsp;'&lt;=',&nbsp;geq&nbsp;'&gt;=',&nbsp;indeterm&nbsp;'?'</tt></dd></dl>
 
-<dl><dt><a name="CopelandOrder-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, CppAgrum=False, Comments=False, _OldCoca=False, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
+<dl><dt><a name="CopelandOrder-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, CppAgrum=False, Comments=False, _OldCoca=False, BrokenCocs=True, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
 self.<strong>strictBadChoices</strong>,&nbsp;self.<strong>nonRobustChoices</strong>.<br>
 &nbsp;<br>
 CppgArum&nbsp;=&nbsp;False&nbsp;(default&nbsp;|&nbsp;true&nbsp;:&nbsp;use&nbsp;C++/Agrum&nbsp;digraph&nbsp;library<br>
@@ -496,7 +496,9 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-computeSizeTransitiveClosure"><strong>computeSizeTransitiveClosure</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
 
-<dl><dt><a name="CopelandOrder-computeSlaterOrder"><strong>computeSlaterOrder</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
+<dl><dt><a name="CopelandOrder-computeSlaterOrder"><strong>computeSlaterOrder</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>reversed&nbsp;return&nbsp;from&nbsp;computeSlaterRanking&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="CopelandOrder-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -573,7 +575,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="CopelandOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="CopelandOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'max': 1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="CopelandOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -962,7 +964,7 @@ Example::<br>
 
 <dl><dt><a name="CopelandOrder-showRelationTable"><strong>showRelationTable</strong></a>(self, Sorted=True, IntegerValues=False, actionsSubset=None, relation=None, ndigits=2, ReflexiveTerms=True)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;table&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="CopelandOrder-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
+<dl><dt><a name="CopelandOrder-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
@@ -1440,7 +1442,7 @@ the&nbsp;following&nbsp;type&nbsp;of&nbsp;links:<br>
 gt&nbsp;'&gt;',&nbsp;eq&nbsp;'=',&nbsp;lt&nbsp;'&lt;',&nbsp;incomp&nbsp;'&lt;&gt;',<br>
 leq&nbsp;'&lt;=',&nbsp;geq&nbsp;'&gt;=',&nbsp;indeterm&nbsp;'?'</tt></dd></dl>
 
-<dl><dt><a name="ExtendedPrudentDigraph-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, CppAgrum=False, Comments=False, _OldCoca=False, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
+<dl><dt><a name="ExtendedPrudentDigraph-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, CppAgrum=False, Comments=False, _OldCoca=False, BrokenCocs=True, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
 self.<strong>strictBadChoices</strong>,&nbsp;self.<strong>nonRobustChoices</strong>.<br>
 &nbsp;<br>
 CppgArum&nbsp;=&nbsp;False&nbsp;(default&nbsp;|&nbsp;true&nbsp;:&nbsp;use&nbsp;C++/Agrum&nbsp;digraph&nbsp;library<br>
@@ -1461,7 +1463,9 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 
 <dl><dt><a name="ExtendedPrudentDigraph-computeSizeTransitiveClosure"><strong>computeSizeTransitiveClosure</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
 
-<dl><dt><a name="ExtendedPrudentDigraph-computeSlaterOrder"><strong>computeSlaterOrder</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
+<dl><dt><a name="ExtendedPrudentDigraph-computeSlaterOrder"><strong>computeSlaterOrder</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>reversed&nbsp;return&nbsp;from&nbsp;computeSlaterRanking&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="ExtendedPrudentDigraph-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
 <dl><dt><a name="ExtendedPrudentDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -1538,7 +1542,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="ExtendedPrudentDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="ExtendedPrudentDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'max': 1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="ExtendedPrudentDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="ExtendedPrudentDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -1929,7 +1933,7 @@ Example::<br>
 
 <dl><dt><a name="ExtendedPrudentDigraph-showRelationTable"><strong>showRelationTable</strong></a>(self, Sorted=True, IntegerValues=False, actionsSubset=None, relation=None, ndigits=2, ReflexiveTerms=True)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;table&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="ExtendedPrudentDigraph-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
+<dl><dt><a name="ExtendedPrudentDigraph-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
@@ -2427,7 +2431,7 @@ the&nbsp;following&nbsp;type&nbsp;of&nbsp;links:<br>
 gt&nbsp;'&gt;',&nbsp;eq&nbsp;'=',&nbsp;lt&nbsp;'&lt;',&nbsp;incomp&nbsp;'&lt;&gt;',<br>
 leq&nbsp;'&lt;=',&nbsp;geq&nbsp;'&gt;=',&nbsp;indeterm&nbsp;'?'</tt></dd></dl>
 
-<dl><dt><a name="KemenyOrder-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, CppAgrum=False, Comments=False, _OldCoca=False, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
+<dl><dt><a name="KemenyOrder-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, CppAgrum=False, Comments=False, _OldCoca=False, BrokenCocs=True, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
 self.<strong>strictBadChoices</strong>,&nbsp;self.<strong>nonRobustChoices</strong>.<br>
 &nbsp;<br>
 CppgArum&nbsp;=&nbsp;False&nbsp;(default&nbsp;|&nbsp;true&nbsp;:&nbsp;use&nbsp;C++/Agrum&nbsp;digraph&nbsp;library<br>
@@ -2448,7 +2452,9 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-computeSizeTransitiveClosure"><strong>computeSizeTransitiveClosure</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
 
-<dl><dt><a name="KemenyOrder-computeSlaterOrder"><strong>computeSlaterOrder</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
+<dl><dt><a name="KemenyOrder-computeSlaterOrder"><strong>computeSlaterOrder</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>reversed&nbsp;return&nbsp;from&nbsp;computeSlaterRanking&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="KemenyOrder-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -2525,7 +2531,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="KemenyOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="KemenyOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'max': 1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="KemenyOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -2914,7 +2920,7 @@ Example::<br>
 
 <dl><dt><a name="KemenyOrder-showRelationTable"><strong>showRelationTable</strong></a>(self, Sorted=True, IntegerValues=False, actionsSubset=None, relation=None, ndigits=2, ReflexiveTerms=True)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;table&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="KemenyOrder-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
+<dl><dt><a name="KemenyOrder-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
@@ -3412,7 +3418,7 @@ the&nbsp;following&nbsp;type&nbsp;of&nbsp;links:<br>
 gt&nbsp;'&gt;',&nbsp;eq&nbsp;'=',&nbsp;lt&nbsp;'&lt;',&nbsp;incomp&nbsp;'&lt;&gt;',<br>
 leq&nbsp;'&lt;=',&nbsp;geq&nbsp;'&gt;=',&nbsp;indeterm&nbsp;'?'</tt></dd></dl>
 
-<dl><dt><a name="KohlerOrder-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, CppAgrum=False, Comments=False, _OldCoca=False, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
+<dl><dt><a name="KohlerOrder-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, CppAgrum=False, Comments=False, _OldCoca=False, BrokenCocs=True, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
 self.<strong>strictBadChoices</strong>,&nbsp;self.<strong>nonRobustChoices</strong>.<br>
 &nbsp;<br>
 CppgArum&nbsp;=&nbsp;False&nbsp;(default&nbsp;|&nbsp;true&nbsp;:&nbsp;use&nbsp;C++/Agrum&nbsp;digraph&nbsp;library<br>
@@ -3433,7 +3439,9 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-computeSizeTransitiveClosure"><strong>computeSizeTransitiveClosure</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
 
-<dl><dt><a name="KohlerOrder-computeSlaterOrder"><strong>computeSlaterOrder</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
+<dl><dt><a name="KohlerOrder-computeSlaterOrder"><strong>computeSlaterOrder</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>reversed&nbsp;return&nbsp;from&nbsp;computeSlaterRanking&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="KohlerOrder-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -3510,7 +3518,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="KohlerOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="KohlerOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'max': 1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="KohlerOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -3899,7 +3907,7 @@ Example::<br>
 
 <dl><dt><a name="KohlerOrder-showRelationTable"><strong>showRelationTable</strong></a>(self, Sorted=True, IntegerValues=False, actionsSubset=None, relation=None, ndigits=2, ReflexiveTerms=True)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;table&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="KohlerOrder-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
+<dl><dt><a name="KohlerOrder-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
@@ -4392,7 +4400,7 @@ the&nbsp;following&nbsp;type&nbsp;of&nbsp;links:<br>
 gt&nbsp;'&gt;',&nbsp;eq&nbsp;'=',&nbsp;lt&nbsp;'&lt;',&nbsp;incomp&nbsp;'&lt;&gt;',<br>
 leq&nbsp;'&lt;=',&nbsp;geq&nbsp;'&gt;=',&nbsp;indeterm&nbsp;'?'</tt></dd></dl>
 
-<dl><dt><a name="LinearOrder-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, CppAgrum=False, Comments=False, _OldCoca=False, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
+<dl><dt><a name="LinearOrder-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, CppAgrum=False, Comments=False, _OldCoca=False, BrokenCocs=True, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
 self.<strong>strictBadChoices</strong>,&nbsp;self.<strong>nonRobustChoices</strong>.<br>
 &nbsp;<br>
 CppgArum&nbsp;=&nbsp;False&nbsp;(default&nbsp;|&nbsp;true&nbsp;:&nbsp;use&nbsp;C++/Agrum&nbsp;digraph&nbsp;library<br>
@@ -4413,7 +4421,9 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-computeSizeTransitiveClosure"><strong>computeSizeTransitiveClosure</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
 
-<dl><dt><a name="LinearOrder-computeSlaterOrder"><strong>computeSlaterOrder</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
+<dl><dt><a name="LinearOrder-computeSlaterOrder"><strong>computeSlaterOrder</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>reversed&nbsp;return&nbsp;from&nbsp;computeSlaterRanking&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="LinearOrder-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -4490,7 +4500,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="LinearOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="LinearOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'max': 1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="LinearOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -4879,7 +4889,7 @@ Example::<br>
 
 <dl><dt><a name="LinearOrder-showRelationTable"><strong>showRelationTable</strong></a>(self, Sorted=True, IntegerValues=False, actionsSubset=None, relation=None, ndigits=2, ReflexiveTerms=True)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;table&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="LinearOrder-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
+<dl><dt><a name="LinearOrder-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
@@ -5377,7 +5387,7 @@ the&nbsp;following&nbsp;type&nbsp;of&nbsp;links:<br>
 gt&nbsp;'&gt;',&nbsp;eq&nbsp;'=',&nbsp;lt&nbsp;'&lt;',&nbsp;incomp&nbsp;'&lt;&gt;',<br>
 leq&nbsp;'&lt;=',&nbsp;geq&nbsp;'&gt;=',&nbsp;indeterm&nbsp;'?'</tt></dd></dl>
 
-<dl><dt><a name="NetFlowsOrder-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, CppAgrum=False, Comments=False, _OldCoca=False, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
+<dl><dt><a name="NetFlowsOrder-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, CppAgrum=False, Comments=False, _OldCoca=False, BrokenCocs=True, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
 self.<strong>strictBadChoices</strong>,&nbsp;self.<strong>nonRobustChoices</strong>.<br>
 &nbsp;<br>
 CppgArum&nbsp;=&nbsp;False&nbsp;(default&nbsp;|&nbsp;true&nbsp;:&nbsp;use&nbsp;C++/Agrum&nbsp;digraph&nbsp;library<br>
@@ -5398,7 +5408,9 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-computeSizeTransitiveClosure"><strong>computeSizeTransitiveClosure</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
 
-<dl><dt><a name="NetFlowsOrder-computeSlaterOrder"><strong>computeSlaterOrder</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
+<dl><dt><a name="NetFlowsOrder-computeSlaterOrder"><strong>computeSlaterOrder</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>reversed&nbsp;return&nbsp;from&nbsp;computeSlaterRanking&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="NetFlowsOrder-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -5475,7 +5487,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="NetFlowsOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="NetFlowsOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'max': 1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="NetFlowsOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -5864,7 +5876,7 @@ Example::<br>
 
 <dl><dt><a name="NetFlowsOrder-showRelationTable"><strong>showRelationTable</strong></a>(self, Sorted=True, IntegerValues=False, actionsSubset=None, relation=None, ndigits=2, ReflexiveTerms=True)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;table&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="NetFlowsOrder-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
+<dl><dt><a name="NetFlowsOrder-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
@@ -6362,7 +6374,7 @@ the&nbsp;following&nbsp;type&nbsp;of&nbsp;links:<br>
 gt&nbsp;'&gt;',&nbsp;eq&nbsp;'=',&nbsp;lt&nbsp;'&lt;',&nbsp;incomp&nbsp;'&lt;&gt;',<br>
 leq&nbsp;'&lt;=',&nbsp;geq&nbsp;'&gt;=',&nbsp;indeterm&nbsp;'?'</tt></dd></dl>
 
-<dl><dt><a name="OutFlowsOrder-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, CppAgrum=False, Comments=False, _OldCoca=False, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
+<dl><dt><a name="OutFlowsOrder-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, CppAgrum=False, Comments=False, _OldCoca=False, BrokenCocs=True, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
 self.<strong>strictBadChoices</strong>,&nbsp;self.<strong>nonRobustChoices</strong>.<br>
 &nbsp;<br>
 CppgArum&nbsp;=&nbsp;False&nbsp;(default&nbsp;|&nbsp;true&nbsp;:&nbsp;use&nbsp;C++/Agrum&nbsp;digraph&nbsp;library<br>
@@ -6383,7 +6395,9 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 
 <dl><dt><a name="OutFlowsOrder-computeSizeTransitiveClosure"><strong>computeSizeTransitiveClosure</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
 
-<dl><dt><a name="OutFlowsOrder-computeSlaterOrder"><strong>computeSlaterOrder</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
+<dl><dt><a name="OutFlowsOrder-computeSlaterOrder"><strong>computeSlaterOrder</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>reversed&nbsp;return&nbsp;from&nbsp;computeSlaterRanking&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="OutFlowsOrder-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
 <dl><dt><a name="OutFlowsOrder-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -6460,7 +6474,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="OutFlowsOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="OutFlowsOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'max': 1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="OutFlowsOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="OutFlowsOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -6849,7 +6863,7 @@ Example::<br>
 
 <dl><dt><a name="OutFlowsOrder-showRelationTable"><strong>showRelationTable</strong></a>(self, Sorted=True, IntegerValues=False, actionsSubset=None, relation=None, ndigits=2, ReflexiveTerms=True)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;table&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="OutFlowsOrder-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
+<dl><dt><a name="OutFlowsOrder-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
@@ -7355,7 +7369,7 @@ the&nbsp;following&nbsp;type&nbsp;of&nbsp;links:<br>
 gt&nbsp;'&gt;',&nbsp;eq&nbsp;'=',&nbsp;lt&nbsp;'&lt;',&nbsp;incomp&nbsp;'&lt;&gt;',<br>
 leq&nbsp;'&lt;=',&nbsp;geq&nbsp;'&gt;=',&nbsp;indeterm&nbsp;'?'</tt></dd></dl>
 
-<dl><dt><a name="PrincipalOrder-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, CppAgrum=False, Comments=False, _OldCoca=False, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
+<dl><dt><a name="PrincipalOrder-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, CppAgrum=False, Comments=False, _OldCoca=False, BrokenCocs=True, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
 self.<strong>strictBadChoices</strong>,&nbsp;self.<strong>nonRobustChoices</strong>.<br>
 &nbsp;<br>
 CppgArum&nbsp;=&nbsp;False&nbsp;(default&nbsp;|&nbsp;true&nbsp;:&nbsp;use&nbsp;C++/Agrum&nbsp;digraph&nbsp;library<br>
@@ -7376,7 +7390,9 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-computeSizeTransitiveClosure"><strong>computeSizeTransitiveClosure</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
 
-<dl><dt><a name="PrincipalOrder-computeSlaterOrder"><strong>computeSlaterOrder</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
+<dl><dt><a name="PrincipalOrder-computeSlaterOrder"><strong>computeSlaterOrder</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>reversed&nbsp;return&nbsp;from&nbsp;computeSlaterRanking&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="PrincipalOrder-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -7453,7 +7469,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="PrincipalOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="PrincipalOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'max': 1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="PrincipalOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -7842,7 +7858,7 @@ Example::<br>
 
 <dl><dt><a name="PrincipalOrder-showRelationTable"><strong>showRelationTable</strong></a>(self, Sorted=True, IntegerValues=False, actionsSubset=None, relation=None, ndigits=2, ReflexiveTerms=True)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;table&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="PrincipalOrder-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
+<dl><dt><a name="PrincipalOrder-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
@@ -8337,7 +8353,7 @@ the&nbsp;following&nbsp;type&nbsp;of&nbsp;links:<br>
 gt&nbsp;'&gt;',&nbsp;eq&nbsp;'=',&nbsp;lt&nbsp;'&lt;',&nbsp;incomp&nbsp;'&lt;&gt;',<br>
 leq&nbsp;'&lt;=',&nbsp;geq&nbsp;'&gt;=',&nbsp;indeterm&nbsp;'?'</tt></dd></dl>
 
-<dl><dt><a name="RandomLinearOrder-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, CppAgrum=False, Comments=False, _OldCoca=False, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
+<dl><dt><a name="RandomLinearOrder-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, CppAgrum=False, Comments=False, _OldCoca=False, BrokenCocs=True, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
 self.<strong>strictBadChoices</strong>,&nbsp;self.<strong>nonRobustChoices</strong>.<br>
 &nbsp;<br>
 CppgArum&nbsp;=&nbsp;False&nbsp;(default&nbsp;|&nbsp;true&nbsp;:&nbsp;use&nbsp;C++/Agrum&nbsp;digraph&nbsp;library<br>
@@ -8358,7 +8374,9 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-computeSizeTransitiveClosure"><strong>computeSizeTransitiveClosure</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
 
-<dl><dt><a name="RandomLinearOrder-computeSlaterOrder"><strong>computeSlaterOrder</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
+<dl><dt><a name="RandomLinearOrder-computeSlaterOrder"><strong>computeSlaterOrder</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>reversed&nbsp;return&nbsp;from&nbsp;computeSlaterRanking&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="RandomLinearOrder-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -8435,7 +8453,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="RandomLinearOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="RandomLinearOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'max': 1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RandomLinearOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -8824,7 +8842,7 @@ Example::<br>
 
 <dl><dt><a name="RandomLinearOrder-showRelationTable"><strong>showRelationTable</strong></a>(self, Sorted=True, IntegerValues=False, actionsSubset=None, relation=None, ndigits=2, ReflexiveTerms=True)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;table&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="RandomLinearOrder-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
+<dl><dt><a name="RandomLinearOrder-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
@@ -9323,7 +9341,7 @@ the&nbsp;following&nbsp;type&nbsp;of&nbsp;links:<br>
 gt&nbsp;'&gt;',&nbsp;eq&nbsp;'=',&nbsp;lt&nbsp;'&lt;',&nbsp;incomp&nbsp;'&lt;&gt;',<br>
 leq&nbsp;'&lt;=',&nbsp;geq&nbsp;'&gt;=',&nbsp;indeterm&nbsp;'?'</tt></dd></dl>
 
-<dl><dt><a name="RankedPairsOrder-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, CppAgrum=False, Comments=False, _OldCoca=False, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
+<dl><dt><a name="RankedPairsOrder-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, CppAgrum=False, Comments=False, _OldCoca=False, BrokenCocs=True, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
 self.<strong>strictBadChoices</strong>,&nbsp;self.<strong>nonRobustChoices</strong>.<br>
 &nbsp;<br>
 CppgArum&nbsp;=&nbsp;False&nbsp;(default&nbsp;|&nbsp;true&nbsp;:&nbsp;use&nbsp;C++/Agrum&nbsp;digraph&nbsp;library<br>
@@ -9344,7 +9362,9 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-computeSizeTransitiveClosure"><strong>computeSizeTransitiveClosure</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
 
-<dl><dt><a name="RankedPairsOrder-computeSlaterOrder"><strong>computeSlaterOrder</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
+<dl><dt><a name="RankedPairsOrder-computeSlaterOrder"><strong>computeSlaterOrder</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>reversed&nbsp;return&nbsp;from&nbsp;computeSlaterRanking&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="RankedPairsOrder-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -9421,7 +9441,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="RankedPairsOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="RankedPairsOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'max': 1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RankedPairsOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -9810,7 +9830,7 @@ Example::<br>
 
 <dl><dt><a name="RankedPairsOrder-showRelationTable"><strong>showRelationTable</strong></a>(self, Sorted=True, IntegerValues=False, actionsSubset=None, relation=None, ndigits=2, ReflexiveTerms=True)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;table&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="RankedPairsOrder-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
+<dl><dt><a name="RankedPairsOrder-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>

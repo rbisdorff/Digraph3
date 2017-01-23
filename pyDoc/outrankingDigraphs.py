@@ -21,6 +21,7 @@
 
 __version__ = "Revision: Py35"
 
+from digraphsTools import *
 from digraphs import *
 from xmlrpc.client import ServerProxy
 from outrankingDigraphs import *
@@ -3740,7 +3741,11 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         print('Size             : %d' % self.computeSize())
         print('Determinateness  : %.3f' % (self.computeDeterminateness()) )
         print('----  Constructor run times (in sec.) ----')
-        print('#Threads         : %d' % self.nbrThreads)
+        try:
+            print('#Threads         : %d' % self.nbrThreads)
+        except:
+            self.nbrThreads = 1
+            print('#Threads         : %d' % self.nbrThreads)
         print('Total time       : %.5f' % self.runTimes['totalTime'])
         print('Data input       : %.5f' % self.runTimes['dataInput'])
         print('Compute relation : %.5f' % self.runTimes['computeRelation'])
@@ -3812,6 +3817,11 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             Med =   Decimal('0.0')
             Max =   Decimal('100.0')
         self.valuationdomain = {'min':Min,'med':Med,'max':Max}
+        try:
+            self.valuationdomain['precision'] = perfTab.valuationPrecision
+        except:
+            self.valuationdomain['precision'] = Decimal('0')
+            
         # objectives and criteria
         try:
             if CopyPerfTab:
@@ -8155,6 +8165,7 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                  hasBipolarVeto=True,
                  Normalized=True,
                  Threading=False,
+                 nbrOfCPUs=1,
                  Debug=False,):
         # getting module ressources and setting the random seed
         from copy import copy, deepcopy
@@ -8167,10 +8178,11 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             perfTab = copy(argPerfTab)
         # initializing the bipolar outranking digraph
         bodg = BipolarOutrankingDigraph(argPerfTab=perfTab,coalition=coalition,\
-                                     hasNoVeto = hasNoVeto,\
-                                     hasBipolarVeto = hasBipolarVeto,\
+                                     hasNoVeto=hasNoVeto,\
+                                     hasBipolarVeto=hasBipolarVeto,\
                                      Normalized=Normalized,\
-                                     Threading=Threading)
+                                     Threading=Threading,\
+                                     nbrCores=nbrOfCPUs )
         self.name = bodg.name + '_CLT'
         self.bipolarConfidenceLevel = (confidence/100.0)*2.0 -1.0 
         self.distribution = distribution
@@ -8212,7 +8224,8 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         if likelihoodLevel == None:
             likelihoodLevel = self.bipolarConfidenceLevel
 
-        print(likelihoodLevel)
+        if Debug:
+            print('Likelihood level = %.2f%%' % ( (likelihoodLevel + 1.0)/2.0*100.0) )
         confidenceCutLevel = Med
         confidentRelation = {}
         actionsList = [x for x in self.actions]
@@ -8291,9 +8304,11 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         else:
             return 0.5 + 0.5*erf(z)
     
-    def computeCLTLikelihoods(self,distribution="triangular",
-                              betaParameter=None,
-                              Threading=False,Debug=False):
+    def computeCLTLikelihoods(self,distribution="triangular",\
+                              betaParameter=None,\
+                              Threading=False,\
+                              nbrOfCPUs=1,\
+                              Debug=False):
         """
         Renders the pairwise CLT likelihood of the at least as good as relation
         neglecting all considerable large performance differences polarisations.
@@ -8319,7 +8334,7 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 ##            print(weightSquares)
         if Threading:
             g = BipolarOutrankingDigraph(self,hasNoVeto=True,
-                                         Threading=Threading)
+                                         Threading=Threading,nbrCores=nbrOfCPUs)
             concordanceRelation = g.relation
         else:
             concordanceRelation = self._recodeConcordanceValuation(\

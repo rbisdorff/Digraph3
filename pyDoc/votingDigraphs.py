@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Python 3 implementation of voting digraphs
 # Refactored from revision 1.549 of the digraphs module
-# Current revision $Revision: 1194 $
+# Current revision $Revision: 2093 $
 # Copyright (C) 2011  Raymond Bisdorff
 #
 #    This program is free software; you can redistribute it and/or modify
@@ -19,6 +19,7 @@
 #    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 #######################
+from digraphsTools import * 
 from digraphs import *
 
 #--------- Decimal precision --------------
@@ -1061,7 +1062,7 @@ if __name__ == "__main__":
 
     print('****************************************************')
     print('* Python voting digraphs module                    *')
-    print('* $Revision: 1194 $                                   *')
+    print('* $Revision: 2093 $                                   *')
     print('* Copyright (C) 2006-2007 University of Luxembourg *')
     print('* The module comes with ABSOLUTELY NO WARRANTY     *')
     print('* to the extent permitted by the applicable law.   *')
@@ -1116,7 +1117,7 @@ if __name__ == "__main__":
 
     print('*************************************')
     print('* R.B. September 2008               *')
-    print('* $Revision: 1194 $                   *')
+    print('* $Revision: 2093 $                   *')
     print('*************************************')
 
 #############################

@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>randomPerfTabs</strong></big></big> (version 1.01)</font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/randomPerfTabs.py">/Users/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/randomPerfTabs.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/randomPerfTabs.py">/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/randomPerfTabs.py</a></font></td></tr></table>
     <p><tt>#&nbsp;-*-&nbsp;coding:&nbsp;utf-8&nbsp;-*-<br>
 #&nbsp;Python&nbsp;implementation&nbsp;of&nbsp;digraphs<br>
 #&nbsp;submodule&nbsp;randomPerfTabs.py&nbsp;&nbsp;for&nbsp;generating&nbsp;random&nbsp;performance&nbsp;tableaux&nbsp;&nbsp;<br>
@@ -30,17 +30,6 @@
 #<br>
 #######################</tt></p>
 <p>
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#aa55cc">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
-    
-<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="decimal.html">decimal</a><br>
-</td><td width="25%" valign=top><a href="xml.sax.handler.html">xml.sax.handler</a><br>
-</td><td width="25%" valign=top><a href="json.html">json</a><br>
-</td><td width="25%" valign=top><a href="xml.sax.xmlreader.html">xml.sax.xmlreader</a><br>
-</td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -106,7 +95,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="FullRandomPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="FullRandomPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'pref': 20, 'ind': 10, 'veto': 80, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="FullRandomPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'ind': 10, 'pref': 20, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -449,7 +438,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="Random3ObjectivesPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="Random3ObjectivesPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'pref': 20, 'ind': 10, 'veto': 80, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="Random3ObjectivesPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'ind': 10, 'pref': 20, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -745,13 +734,21 @@ Cost&nbsp;versus&nbsp;Benefit&nbsp;oriented&nbsp;performance&nbsp;tableaux.<br>
 Parameters:<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;numberOfActions&nbsp;==&nbsp;None,&nbsp;a&nbsp;uniform&nbsp;random&nbsp;number&nbsp;between&nbsp;10&nbsp;and&nbsp;31&nbsp;of&nbsp;cheap,&nbsp;neutral&nbsp;or&nbsp;advantageous&nbsp;actions&nbsp;(equal&nbsp;1/3&nbsp;probability&nbsp;each&nbsp;type)&nbsp;actions&nbsp;is&nbsp;instantiated<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;numberOfCriteria&nbsp;==&nbsp;None,&nbsp;a&nbsp;uniform&nbsp;random&nbsp;number&nbsp;between&nbsp;5&nbsp;and&nbsp;21&nbsp;of&nbsp;cost&nbsp;or&nbsp;benefit&nbsp;criteria&nbsp;(1/3&nbsp;respectively&nbsp;2/3&nbsp;probability)&nbsp;is&nbsp;instantiated<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;weightDistribution&nbsp;:=&nbsp;{'equiobjectives'|'fixed'|'random'|'equisignificant'&nbsp;(default&nbsp;=&nbsp;'equisignificant')}<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;default&nbsp;weightScale&nbsp;for&nbsp;'random'&nbsp;weightDistribution&nbsp;is&nbsp;1&nbsp;-&nbsp;numberOfCriteria<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;commonScale&nbsp;parameter&nbsp;is&nbsp;obsolete.&nbsp;The&nbsp;scale&nbsp;of&nbsp;cost&nbsp;criteria&nbsp;is&nbsp;cardinal&nbsp;or&nbsp;ordinal&nbsp;(0-10)&nbsp;with&nbsp;proabailities&nbsp;1/4&nbsp;respectively&nbsp;3/4,&nbsp;whereas&nbsp;the&nbsp;scale&nbsp;of&nbsp;benefit&nbsp;criteria&nbsp;is&nbsp;ordinal&nbsp;or&nbsp;cardinal&nbsp;with&nbsp;probabilities&nbsp;2/3,&nbsp;respectively&nbsp;1/3.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;All&nbsp;cardinal&nbsp;criteria&nbsp;are&nbsp;evaluated&nbsp;with&nbsp;decimals&nbsp;between&nbsp;0.0&nbsp;and&nbsp;100.0&nbsp;wheras&nbsp;all&nbsp;ordinal&nbsp;criteria&nbsp;are&nbsp;evaluated&nbsp;with&nbsp;integers&nbsp;between&nbsp;0&nbsp;and&nbsp;10.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;commonThresholds&nbsp;is&nbsp;obsolete.&nbsp;Preference&nbsp;discrimination&nbsp;is&nbsp;specified&nbsp;as&nbsp;percentiles&nbsp;of&nbsp;concerned&nbsp;performance&nbsp;differences&nbsp;(see&nbsp;below).<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;CommonPercentiles&nbsp;=&nbsp;{'ind':0.05,&nbsp;'pref':0.10,&nbsp;['weakveto':0.90,]&nbsp;'veto':'95}&nbsp;are&nbsp;expressed&nbsp;in&nbsp;centiless&nbsp;(reversed&nbsp;for&nbsp;vetoes)&nbsp;and&nbsp;only&nbsp;concern&nbsp;cardinal&nbsp;criteria.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;numberOfCriteria&nbsp;==&nbsp;None,&nbsp;a&nbsp;uniform&nbsp;random&nbsp;number&nbsp;between&nbsp;5&nbsp;and&nbsp;21&nbsp;of&nbsp;cost&nbsp;or&nbsp;benefit&nbsp;criteria.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cost&nbsp;criteria&nbsp;have&nbsp;probability&nbsp;1/3,&nbsp;whereas&nbsp;benefit&nbsp;criteria&nbsp;respectively&nbsp;2/3&nbsp;probability&nbsp;to&nbsp;be&nbsp;generated.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;However,&nbsp;at&nbsp;least&nbsp;one&nbsp;criterion&nbsp;of&nbsp;each&nbsp;kind&nbsp;is&nbsp;always&nbsp;instantiated.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;weightDistribution&nbsp;:=&nbsp;{'equiobjectives'|'fixed'|'random'|'equisignificant'}&nbsp;By&nbsp;default,&nbsp;the&nbsp;sum&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;significance&nbsp;of&nbsp;the&nbsp;cost&nbsp;criteria&nbsp;is&nbsp;set&nbsp;equal&nbsp;to&nbsp;the&nbsp;sum&nbsp;of&nbsp;the&nbsp;significance&nbsp;of&nbsp;the&nbsp;benefit&nbsp;criteria.&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;default&nbsp;weightScale&nbsp;for&nbsp;'random'&nbsp;weightDistribution&nbsp;is&nbsp;1&nbsp;-&nbsp;numberOfCriteria.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;commonScale&nbsp;parameter&nbsp;is&nbsp;obsolete.&nbsp;The&nbsp;scale&nbsp;of&nbsp;cost&nbsp;criteria&nbsp;is&nbsp;cardinal&nbsp;or&nbsp;ordinal&nbsp;(0-10)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;proabailities&nbsp;1/4&nbsp;respectively&nbsp;3/4,&nbsp;whereas&nbsp;the&nbsp;scale&nbsp;of&nbsp;benefit&nbsp;criteria&nbsp;is&nbsp;ordinal&nbsp;or&nbsp;cardinal<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;probabilities&nbsp;2/3,&nbsp;respectively&nbsp;1/3.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;All&nbsp;cardinal&nbsp;criteria&nbsp;are&nbsp;evaluated&nbsp;with&nbsp;decimals&nbsp;between&nbsp;0.0&nbsp;and&nbsp;100.0&nbsp;wheras&nbsp;all&nbsp;ordinal&nbsp;criteria<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;are&nbsp;evaluated&nbsp;with&nbsp;integers&nbsp;between&nbsp;0&nbsp;and&nbsp;10.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;commonThresholds&nbsp;is&nbsp;obsolete.&nbsp;Preference&nbsp;discrimination&nbsp;is&nbsp;specified&nbsp;as&nbsp;percentiles&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;concerned&nbsp;performance&nbsp;differences&nbsp;(see&nbsp;below).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;CommonPercentiles&nbsp;=&nbsp;{'ind':0.05,&nbsp;'pref':0.10,&nbsp;['weakveto':0.90,]&nbsp;'veto':'95}&nbsp;are&nbsp;expressed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;centiless&nbsp;(reversed&nbsp;for&nbsp;vetoes)&nbsp;and&nbsp;only&nbsp;concern&nbsp;cardinal&nbsp;criteria.<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
@@ -764,7 +761,7 @@ Parameters:<br>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="RandomCBPerformanceTableau-__init__"><strong>__init__</strong></a>(self, numberOfActions=13, numberOfCriteria=7, name='randomCBperftab', weightDistribution='equiobjectives', weightScale=None, integerWeights=True, commonScale=None, commonThresholds=None, commonPercentiles=None, samplingSize=100000, commonMode=None, valueDigits=2, missingDataProbability=0.0, BigData=False, seed=None, Threading=False, nbrCores=None, Debug=False, Comments=False)</dt><dd><tt>Constructor&nbsp;for&nbsp;RadomCBPerformanceTableau&nbsp;instances.</tt></dd></dl>
+<dl><dt><a name="RandomCBPerformanceTableau-__init__"><strong>__init__</strong></a>(self, numberOfActions=13, numberOfCriteria=7, name='randomCBperftab', weightDistribution='equiobjectives', weightScale=None, integerWeights=True, commonScale=None, commonThresholds=None, commonPercentiles=None, samplingSize=100000, commonMode=None, valueDigits=2, missingDataProbability=0.01, BigData=False, seed=None, Threading=False, nbrCores=None, Debug=False, Comments=False)</dt><dd><tt>Constructor&nbsp;for&nbsp;RadomCBPerformanceTableau&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="RandomCBPerformanceTableau-updateDiscriminationThresholds"><strong>updateDiscriminationThresholds</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Recomputes&nbsp;performance&nbsp;discrimination&nbsp;thresholds&nbsp;from&nbsp;commonPercentiles.<br>
 &nbsp;<br>
@@ -785,7 +782,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="RandomCBPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="RandomCBPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'pref': 20, 'ind': 10, 'veto': 80, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="RandomCBPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'ind': 10, 'pref': 20, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -1086,7 +1083,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="RandomCoalitionsPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="RandomCoalitionsPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'pref': 20, 'ind': 10, 'veto': 80, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="RandomCoalitionsPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'ind': 10, 'pref': 20, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -1445,7 +1442,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="RandomPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="RandomPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'pref': 20, 'ind': 10, 'veto': 80, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="RandomPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'ind': 10, 'pref': 20, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -1746,7 +1743,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="RandomRankPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="RandomRankPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'pref': 20, 'ind': 10, 'veto': 80, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="RandomRankPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'ind': 10, 'pref': 20, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -2030,7 +2027,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="RandomS3PerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="RandomS3PerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'pref': 20, 'ind': 10, 'veto': 80, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="RandomS3PerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'ind': 10, 'pref': 20, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -2282,12 +2279,5 @@ Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">perfT
 <dl><dt><strong>__weakref__</strong></dt>
 <dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
-</td></tr></table></td></tr></table><p>
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#55aa55">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
-    
-<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>default_parser_list</strong> = ['xml.sax.expatreader']</td></tr></table>
+</td></tr></table></td></tr></table>
 </body></html>

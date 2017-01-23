@@ -24,7 +24,7 @@
 __version__ = "$Revision: 1.01 $"
 # $Source: /home/cvsroot/Digraph/randomPerfTabs.py,v $
 
-from perfTabs import *
+from perfTabs import PerformanceTableau
 from decimal import Decimal
 from collections import OrderedDict
 
@@ -1360,6 +1360,10 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                 weightsList.append(Decimal(str(weightScale[0])))
                 sumWeights += weightScale[0]
 
+        # store sum of weights and precision level
+        self.sumWeights = sumWeights
+        self.valuationPrecision = Decimal('0.1')/sumWeights
+        
         # generate objectives dictionary
         objectives = OrderedDict([(
             'Eco', {'name':'Economical aspect',
@@ -2090,13 +2094,21 @@ class RandomCBPerformanceTableau(PerformanceTableau):
     Parameters:
     
         * If numberOfActions == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated
-        * If numberOfCriteria == None, a uniform random number between 5 and 21 of cost or benefit criteria (1/3 respectively 2/3 probability) is instantiated
-        * weightDistribution := {'equiobjectives'|'fixed'|'random'|'equisignificant' (default = 'equisignificant')}
-        * default weightScale for 'random' weightDistribution is 1 - numberOfCriteria
-        * commonScale parameter is obsolete. The scale of cost criteria is cardinal or ordinal (0-10) with proabailities 1/4 respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal with probabilities 2/3, respectively 1/3.
-        * All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.
-        * commonThresholds is obsolete. Preference discrimination is specified as percentiles of concerned performance differences (see below).
-        * CommonPercentiles = {'ind':0.05, 'pref':0.10, ['weakveto':0.90,] 'veto':'95} are expressed in centiless (reversed for vetoes) and only concern cardinal criteria.
+        * If numberOfCriteria == None, a uniform random number between 5 and 21 of cost or benefit criteria. 
+           Cost criteria have probability 1/3, whereas benefit criteria respectively 2/3 probability to be generated.
+           However, at least one criterion of each kind is always instantiated.
+        * weightDistribution := {'equiobjectives'|'fixed'|'random'|'equisignificant'} By default, the sum of
+           significance of the cost criteria is set equal to the sum of the significance of the benefit criteria. 
+        * default weightScale for 'random' weightDistribution is 1 - numberOfCriteria.
+        * commonScale parameter is obsolete. The scale of cost criteria is cardinal or ordinal (0-10)
+           with proabailities 1/4 respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal
+           with probabilities 2/3, respectively 1/3.
+        * All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria
+           are evaluated with integers between 0 and 10.
+        * commonThresholds is obsolete. Preference discrimination is specified as percentiles of
+           concerned performance differences (see below).
+        * CommonPercentiles = {'ind':0.05, 'pref':0.10, ['weakveto':0.90,] 'veto':'95} are expressed
+           in centiless (reversed for vetoes) and only concern cardinal criteria.
 
     .. warning::
 
@@ -2115,7 +2127,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                  samplingSize = 100000,\
                  commonMode = None,\
                  valueDigits = 2,\
-                 missingDataProbability = 0.0,\
+                 missingDataProbability = 0.01,\
                  BigData=False,\
                  seed = None,\
                  Threading = False,\
@@ -2285,6 +2297,10 @@ class RandomCBPerformanceTableau(PerformanceTableau):
             print('!!! Error: wrong criteria weight distribution mode: %s !!!!' % (weightDistribution))
         if Debug:
             print(weightsList, sumWeights)
+
+        # store sum of weights and valuation precision
+        self.sumWeights = sumWeights
+        self.valuationPrecision = Decimal('0.1')/sumWeights
 
         for i,g in enumerate(criteria):
             ## if Debug:

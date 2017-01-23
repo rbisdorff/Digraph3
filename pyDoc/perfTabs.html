@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>perfTabs</strong></big></big> (version 1.37)</font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/perfTabs.py">/Users/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/perfTabs.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/perfTabs.py">/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/perfTabs.py</a></font></td></tr></table>
     <p><tt>#&nbsp;testing&nbsp;commit&nbsp;-&nbsp;ian<br>
 #&nbsp;-*-&nbsp;coding:&nbsp;utf-8&nbsp;-*-<br>
 #&nbsp;Python&nbsp;implementation&nbsp;of&nbsp;digraphs<br>
@@ -38,11 +38,13 @@
 <font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="decimal.html">decimal</a><br>
-</td><td width="25%" valign=top><a href="xml.sax.handler.html">xml.sax.handler</a><br>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="itertools.html">itertools</a><br>
+<a href="collections.html">collections</a><br>
+</td><td width="25%" valign=top><a href="decimal.html">decimal</a><br>
+<a href="xml.sax.handler.html">xml.sax.handler</a><br>
 </td><td width="25%" valign=top><a href="json.html">json</a><br>
-</td><td width="25%" valign=top><a href="xml.sax.xmlreader.html">xml.sax.xmlreader</a><br>
-</td></tr></table></td></tr></table><p>
+<a href="xml.sax.xmlreader.html">xml.sax.xmlreader</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -106,7 +108,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="ConstantPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="ConstantPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'pref': 20, 'ind': 10, 'veto': 80, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="ConstantPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'ind': 10, 'pref': 20, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -391,7 +393,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="NormalizedPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="NormalizedPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'pref': 20, 'ind': 10, 'veto': 80, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="NormalizedPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'ind': 10, 'pref': 20, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -678,7 +680,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="OldXMCDAPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="OldXMCDAPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'pref': 20, 'ind': 10, 'veto': 80, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="OldXMCDAPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'ind': 10, 'pref': 20, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -961,7 +963,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="PartialPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="PartialPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'pref': 20, 'ind': 10, 'veto': 80, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="PartialPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'ind': 10, 'pref': 20, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -1331,7 +1333,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="PerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="PerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'pref': 20, 'ind': 10, 'veto': 80, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="PerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'ind': 10, 'pref': 20, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -1626,7 +1628,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="XMCDA2PerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="XMCDA2PerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'pref': 20, 'ind': 10, 'veto': 80, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="XMCDA2PerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'ind': 10, 'pref': 20, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -1914,7 +1916,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="XMCDAPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="XMCDAPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'pref': 20, 'ind': 10, 'veto': 80, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="XMCDAPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'ind': 10, 'pref': 20, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -2198,7 +2200,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="XMLPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="XMLPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'pref': 20, 'ind': 10, 'veto': 80, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="XMLPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'ind': 10, 'pref': 20, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -2487,7 +2489,7 @@ the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
 
 <dl><dt><a name="XMLRubisPerformanceTableau-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
 
-<dl><dt><a name="XMLRubisPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'pref': 20, 'ind': 10, 'veto': 80, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+<dl><dt><a name="XMLRubisPerformanceTableau-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'veto': 80, 'ind': 10, 'pref': 20, 'weakVeto': 60}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
 from&nbsp;the&nbsp;performance&nbsp;differences.<br>
 Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
 
@@ -2740,6 +2742,17 @@ Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">Perfo
 <dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
 </td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-time"><strong>time</strong></a>(...)</dt><dd><tt><a href="#-time">time</a>()&nbsp;-&gt;&nbsp;floating&nbsp;point&nbsp;number<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;current&nbsp;time&nbsp;in&nbsp;seconds&nbsp;since&nbsp;the&nbsp;Epoch.<br>
+Fractions&nbsp;of&nbsp;a&nbsp;second&nbsp;may&nbsp;be&nbsp;present&nbsp;if&nbsp;the&nbsp;system&nbsp;clock&nbsp;provides&nbsp;them.</tt></dd></dl>
+</td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#55aa55">
 <td colspan=3 valign=bottom>&nbsp;<br>

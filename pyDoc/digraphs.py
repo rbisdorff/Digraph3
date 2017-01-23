@@ -5894,9 +5894,15 @@ class Digraph(object):
             Default values gives a normalized valuation domain
 
         """
+        from decimal import Decimal
+        
         oldMax = self.valuationdomain['max']
         oldMin = self.valuationdomain['min']
         oldMed = self.valuationdomain['med']
+        try:
+            oldPrecision = self.valuationdomain['precision']
+        except:
+            oldPrecision = Decimal('0')
 
         oldAmplitude = oldMax - oldMin
         if Debug:
@@ -5905,10 +5911,12 @@ class Digraph(object):
         newMin = Decimal(str(newMin))
         newMax = Decimal(str(newMax))
         newMed = Decimal('%.3f' % ((newMax + newMin)/Decimal('2.0')))
+        newPrecision = oldPrecision/oldMax
 
         newAmplitude = newMax - newMin
         if Debug:
             print(newMin, newMed, newMax, newAmplitude)
+            print('old and new precison', oldPrecision, newPrecision) 
 
         actions = self.actions
         oldrelation = self.relation
@@ -5932,7 +5940,9 @@ class Digraph(object):
         self.valuationdomain['max'] = newMax
         self.valuationdomain['min'] = newMin
         self.valuationdomain['med'] = newMed
+        self.valuationdomain['precision'] = newPrecision
         self.valuationdomain['hasIntegerValuation'] = False
+        
 
         self.relation = newrelation
 
@@ -6592,6 +6602,8 @@ class Digraph(object):
         """
         import os
         from tempfile import mkstemp
+        from digraphsTools import flatten
+        
         fd, tempFileName = mkstemp()
         fo = os.fdopen(fd,'w+b')
         Med = self.valuationdomain['med']
@@ -6661,6 +6673,7 @@ class Digraph(object):
         the set of actions in the stored circuit.
         """
         #import copy
+        from digraphsTools import flatten
         if Comments:
             if Odd:
                 print('*--- chordless odd circuits ---*')
@@ -7118,6 +7131,7 @@ class Digraph(object):
                                           CoDual=True,
                                           Debug=False,
                                           _OldCoca=False,
+                                          BrokenCocs=True,
                                           Cpp=False):
         """
         Renders the RuBis best choice recommendation.
@@ -7180,16 +7194,20 @@ class Digraph(object):
         else:
             g = cpself
         if _OldCoca:
-            _selfwcoc = _CocaDigraph(g,Cpp=Cpp)
-            b1 = 0
-        else:
             _selfwcoc = CocaDigraph(g,Cpp=Cpp)
-            b1 = _selfwcoc.brakings
+            b1 = 0
+        elif BrokenCocs:
+            #print('passed here!')
+            _selfwcoc = BrokenCocsDigraph(g,Cpp=Cpp)
+            b1 = _selfwcoc.breakings
+        else:
+            _selfwcoc = BreakAddCocsDigraph(g,Cpp=Cpp)
+            b1 =  _selfwcoc.breakings
         n1 = _selfwcoc.order
         nc = n1 - n0
         
         #self.relation_orig = deepcopy(g.relation)
-        if nc > 0 or b1 > 0:
+        if b1 > 0 or nc > 0:
             #self.actions_orig = deepcopy(g.actions)
             g.actions = deepcopy(_selfwcoc.actions)
             g.order = len(g.actions)
@@ -7306,7 +7324,7 @@ class Digraph(object):
         """
         self.computeRubisChoice(CppAgrum=CppAgrum,Comments=Comments,_OldCoca=_OldCoca)
 
-    def computeRubisChoice(self,CppAgrum=False,Comments=False,_OldCoca=False,\
+    def computeRubisChoice(self,CppAgrum=False,Comments=False,_OldCoca=False,BrokenCocs=True,\
                            Threading=False,nbrOfCPUs=1):
         """
         Renders self.strictGoodChoices, self.nullChoices
@@ -7336,12 +7354,16 @@ class Digraph(object):
         if Comments:
             print('*--- computing the COCA digraph --*')
         if _OldCoca:
-            _selfwcoc = _CocaDigraph(self,Cpp=CppAgrum,Comments=Comments)
-            self.brakings = 0
+            _selfwcoc = CocaDigraph(self,Cpp=CppAgrum,Comments=Comments)
+            self.breakings = 0
+        elif BrokenCocs:
+            _selfwcoc = BrokenCocsDigraph(self,Cpp=CppAgrum,Comments=Comments,\
+                                    Threading=Threading,nbrOfCPUs=nbrOfCPUs)            
+            self.breakings = _selfwcoc.breakings
         else:
-            _selfwcoc = CocaDigraph(self,Cpp=CppAgrum,Comments=Comments,\
+            _selfwcoc = BreakAddCocsDigraph(self,Cpp=CppAgrum,Comments=Comments,\
                                     Threading=Threading,nbrOfCPUs=nbrOfCPUs)
-            self.brakings = _selfwcoc.brakings
+            self.breakings = _selfwcoc.breakings
         if Comments:
             print('Execution time: %.3f seconds' % (time()-t0))
             _selfwcoc.showPreKernels()
@@ -7855,6 +7877,7 @@ class Digraph(object):
         """
         show procedure for annotated bipolar choices
         """
+        from digraphsTools import flatten
         actions = [x for x in self.actions]
         Med = self.valuationdomain['med']
         determ = ch[0]
@@ -9117,7 +9140,7 @@ class Digraph(object):
         Return a tuple: kemenyRanking (from best to worst), kemenyIndex
         """
         from random import seed, shuffle
-        from digraphs import all_perms
+        from digraphsTools import all_perms
 
 
         Min = self.valuationdomain['min']
@@ -9250,7 +9273,7 @@ class Digraph(object):
         return principalScores
 
 
-    def computeSlaterOrder(self,isProbabilistic=False, seed=None, sampleSize=1000, Debug=False):
+    def computeSlaterRanking(self,isProbabilistic=False, seed=None, sampleSize=1000, Debug=False):
         """
         renders a ranking of the actions with minimal Slater index.
         Return a tuple: slaterOrder, slaterIndex
@@ -9261,7 +9284,7 @@ class Digraph(object):
             CopySign = True
         except:
             CopySign = False
-        from digraphs import all_perms
+        from digraphsTools import all_perms
 
 
         Min = self.valuationdomain['min']
@@ -9279,7 +9302,7 @@ class Digraph(object):
                 seed = seed
             a = list(actions)
             slaterIndex = -(n*n)
-            slaterOrder = list(a)
+            slaterRanking = list(a)
             sampleSize = sampleSize
 
             for s in range(sampleSize):
@@ -9301,11 +9324,11 @@ class Digraph(object):
 
                 if kcurr > slaterIndex:
                     slaterIndex = kcurr
-                    slaterOrder = list(a)
+                    slaterRanking = list(a)
                     if Debug:
                         print(s, slaterIndex)
             if Debug:
-                print('Probabilistic Slater Order = ', slaterOrder)
+                print('Probabilistic Slater Order = ', slaterRanking)
                 print('Probabilistic Slater Index = ', slaterIndex)
                 print('with samplesize :            ', sampleSize)
 
@@ -9342,16 +9365,25 @@ class Digraph(object):
                     print(s, a, kcurr)
                 if kcurr >= slaterIndex:
                     slaterIndex = kcurr
-                    slaterOrder = list(a)
+                    slaterRanking = list(a)
                     if Debug:
-                        print(s, slaterOrder, slaterIndex)
+                        print(s, slaterRanking, slaterIndex)
             if Debug:
-                print('Exact Slater Order = ', slaterOrder)
+                print('Exact Slater Order = ', slaterRanking)
                 print('Exact Slater Index = ', slaterIndex)
                 print('# of permutations  = ', s)
 
         self.recodeValuation(minOrig,maxOrig)
-        return slaterOrder, slaterIndex
+        return slaterRanking, slaterIndex
+
+    def computeSlaterOrder(self,isProbabilistic=False, seed=None, sampleSize=1000, Debug=False):
+        """
+        reversed return from computeSlaterRanking method.
+        """
+        slaterOrder,slaterIndex = self.computeSlaterRanking(isProbabilistic=isProbabilistic,
+                                                          seed=seed, sampleSize=sampleSize, Debug=Debug)
+        slaterOrder.reverse()
+        return slaterOrder,slaterIndex
 
     def computePairwiseClusterComparison(self, K1, K2, Debug=False):
         """
@@ -9560,6 +9592,7 @@ class FusionDigraph(Digraph):
 
     def __init__(self,dg1,dg2,operator="o-min"):
         from copy import deepcopy
+        from digraphsTools import omin, omax
         self.name = 'fusion-'+dg1.name+'-'+dg2.name
         self.actions = deepcopy(dg1.actions)
         self.order = len(dg1.actions)
@@ -11459,7 +11492,158 @@ class CoceDigraph(Digraph):
             return (qualmaj0,pg)
 
 #--------------------
-class CocaDigraph(Digraph):
+class BrokenCocsDigraph(Digraph):
+    """
+    Parameters:
+
+        - digraph: stored or memory resident digraph instance.
+        - Cpp: using a C++/Agrum version of the Digraoh.computeChordlessCircuits() method.
+        - Piping: using OS pipes for data in- and output between Python and C++.
+
+    Specialization of general Digraph class for instantiation
+    of chordless odd circuits broken digraphs.
+
+    All chordless odd circuits are broken at the weakest asymmetric link,
+    i.e. a link (*x*, *y*) with minimal difference between r(*x* S *y*) - r(*y* S *x*).
+
+    """
+    def __init__(self,digraph=None,Cpp=False,Piping=False,\
+                 Comments=False,Threading=False,nbrOfCPUs=1):
+        import random,sys,array,copy
+        from outrankingDigraphs import OutrankingDigraph,\
+             RandomOutrankingDigraph, BipolarOutrankingDigraph, ConfidentBipolarOutrankingDigraph
+        ## if comment == None:
+        ##     silent = True
+        ## else:
+        ##     silent = not(comment)
+        if digraph == None:
+            print('Erreur: A valid Digraph instance is required!')
+            return
+        elif isinstance(digraph,(Digraph,OutrankingDigraph,\
+                                 RandomOutrankingDigraph,BipolarOutrankingDigraph,\
+                                 ConfidentBipolarOutrankingDigraph)):
+            self.name = str(digraph.name)
+            self.actions = copy.deepcopy(digraph.actions)
+            self.valuationdomain = copy.deepcopy(digraph.valuationdomain)
+            try:
+                self.valuationdomain['precision'] = digraph.valuationdomain['precision']
+            except:
+                self.valuationdomain['precision']  = Decimal('0')
+            self.relation = copy.deepcopy(digraph.relation)
+        else:
+            fileName = digraph + 'py'
+            argDict = {}
+            exec(compile(open(fileName).read(), fileName, 'exec'),argDict)
+            self.name = digraph
+            self.actions = argDict['actionset']
+            self.valuationdomain = argDict['valuationdomain']
+            self.relation = argDict['relation']
+
+        self.order = len(self.actions)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        self.weakGamma = self.weakGammaSets()
+        self.breakChordlessOddCircuits(Cpp=Cpp,Piping=Piping,\
+                                         Comments=Comments,Threading=Threading,nbrOfCPUs=nbrOfCPUs)
+
+    def breakChordlessOddCircuits(self,Cpp=False,Piping=False,\
+                                    Comments=True,Debug=False,Threading=False,nbrOfCPUs=1):
+        """
+        Breaking of chordless odd circuits extraction.
+        """
+        newCircuits = None
+        self.circuitsList = []
+        self.brokenLinks = set()
+        try:
+            oldBreakings = self.breakings
+        except:
+            self.breakings = 0
+        self.newBreakings = self.order
+        #while newCircuits != set() or self.newBreakings != 0:
+        i = 0
+        while newCircuits != set():
+            i += 1
+            initialCircuits = set([x for cl,x in self.circuitsList])
+            self.breakCircuits(Comments=Comments)
+            if Cpp:
+                if Piping:
+                    self.computeCppInOutPipingChordlessCircuits(Odd=True,Debug=Debug)
+                else:
+                    self.computeCppChordlessCircuits(Odd=True,Debug=Debug)
+            elif Threading:
+                self.computeChordlessCircuitsMP(Odd=True,Comments=Debug,\
+                                                Threading=Threading,nbrOfCPUs=nbrOfCPUs)
+            else:
+                self.computeChordlessCircuits(Odd=True,Comments=Debug)
+            newCircuits = set([x for cl,x in self.circuitsList])
+            if Comments:
+                print('--->> iteration %d:', i)
+                print('newCircuits', newCircuits)
+
+
+    def breakCircuits(self,Comments=False):
+        """
+        Break all cricuits in self.circuits.
+        """
+        import time
+        from digraphsTools import flatten
+        
+        newBreakings = 0
+        if not(isinstance(self.actions,dict)):
+            actions = {}
+            for x in self.actions:
+                actions[x] = {'name':x}
+        else:
+            actions = self.actions
+        circuitsList = self.circuitsList
+        if Comments:
+            print('list of circuits tp break : ', circuitsList)
+        valuationdomain = self.valuationdomain
+##        gamma = self.gamma
+        relation = self.relation
+        Med = valuationdomain['med']
+        currentCircuits = list(circuitsList)
+        for (cycleList,cycle) in circuitsList:
+            degP,degN,minLink = self.circuitCredibilities(cycleList,Debug=Comments)
+            if Comments:
+                print(cycleList,cycle,degP,degN,minLink)
+            if Comments:
+                print('Breaking:',cycleList,degP,degN)
+            actionsSubset = [x for x in flatten(cycle)]
+            if Comments:
+                self.showRelationTable(actionsSubset=actionsSubset)
+            x = minLink[0]
+            y = minLink[1]
+            if Comments:
+                print('Minimal link put to doubt: ', x,y)
+            if (x,y) not in self.brokenLinks:
+                relation[x][y] = Med
+                relation[y][x] = Med
+                self.brokenLinks.add((x,y))
+                newBreakings += 1
+            currentCircuits.remove((cycleList,cycle))
+
+        self.actions = actions
+        self.order = len(actions)
+        self.relation = relation
+        self.circuitsList = currentCircuits
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        self.weakGamma = self.weakGammaSets()
+        self.breakings += newBreakings
+
+    def showComponents(self):
+        print('*--- Connected Components ---*')
+        k=1
+        for Comp in self.components():
+            component = list(Comp)
+            #component.sort()
+            print(str(k) + ': ' + str(component))
+            xk = k + 1
+
+
+#--------------------
+class BreakAddCocsDigraph(Digraph):
     """
     Parameters:
 
@@ -11494,6 +11678,10 @@ class CocaDigraph(Digraph):
             self.name = str(digraph.name)
             self.actions = copy.deepcopy(digraph.actions)
             self.valuationdomain = copy.deepcopy(digraph.valuationdomain)
+            try:
+                self.valuationdomain['precision'] = digraph.valuationdomain['precision']
+            except:
+                self.valuationdomain['precision']  = Decimal('0')
             self.relation = copy.deepcopy(digraph.relation)
         else:
             fileName = digraph + 'py'
@@ -11519,13 +11707,26 @@ class CocaDigraph(Digraph):
         newCircuits = None
         self.circuitsList = []
         try:
-            oldBrakings = self.brakings
+            oldBreakings = self.breakings
         except:
-            self.brakings = 0
-        self.newBrakings = self.order
+            self.breakings = 0
+        self.newBreakings = self.order
         #while newCircuits != set() or self.newBrakings != 0:
         while newCircuits != set():
             initialCircuits = set([x for cl,x in self.circuitsList])
+##            if Cpp:
+##                if Piping:
+##                    self.computeCppInOutPipingChordlessCircuits(Odd=True,Debug=Debug)
+##                else:
+##                    self.computeCppChordlessCircuits(Odd=True,Debug=Debug)
+##            elif Threading:
+##                self.computeChordlessCircuitsMP(Odd=True,Comments=Debug,\
+##                                                Threading=Threading,nbrOfCPUs=nbrOfCPUs)
+##            else:
+##                self.computeChordlessCircuits(Odd=True,Comments=Debug)
+##           
+            #print(self.circuitsList)
+            self.addCircuits(Comments=Comments)
             if Cpp:
                 if Piping:
                     self.computeCppInOutPipingChordlessCircuits(Odd=True,Debug=Debug)
@@ -11536,9 +11737,6 @@ class CocaDigraph(Digraph):
                                                 Threading=Threading,nbrOfCPUs=nbrOfCPUs)
             else:
                 self.computeChordlessCircuits(Odd=True,Comments=Debug)
-           
-            #print(self.circuitsList)
-            self.addCircuits(Comments=Comments)
             currentCircuits = set([x for cl,x in self.circuitsList])
             if Comments:
                 print('initialCircuits, currentCircuits', initialCircuits, currentCircuits)
@@ -11549,9 +11747,11 @@ class CocaDigraph(Digraph):
         Augmenting self with self.circuits.
         """
         import time
+        from digraphsTools import flatten
+        
         #from copy import deepcopy
         order0 = self.order
-        newBrakings = 0
+        newBreakings = 0
         if not(isinstance(self.actions,dict)):
             actions = {}
             for x in self.actions:
@@ -11573,7 +11773,9 @@ class CocaDigraph(Digraph):
             if Comments:
                 print(cycleList,cycle,degP,degN,minLink)
             #if degP+degN > Med:
-            if abs(degP) > abs(degN):
+            
+            if (degP + degN) > valuationdomain['precision']:
+#           if (degP + degN) >= valuationdomain['med']:   # adds potentially more circuits 
                 if Comments:
                     print('Adding cycle:', cycle, ' with Pdegree=',degP,' and Ndegree=',degN )
                 cn = '_'
@@ -11623,7 +11825,7 @@ class CocaDigraph(Digraph):
                     print(actions[cycle])
             else:
                 if Comments:
-                    print('Braking:',cycleList,degP,degN)
+                    print('Breaking:',cycleList,degP,degN)
                 actionsSubset = [x for x in flatten(cycle)]
                 if Comments:
                     self.showRelationTable(actionsSubset=actionsSubset)
@@ -11634,7 +11836,7 @@ class CocaDigraph(Digraph):
                 relation[x][y] = Med
                 relation[y][x] = Med
                 currentCircuits.remove((cycleList,cycle))
-                newBrakings += 1
+                newBreakings += 1
 
         self.actions = actions
         self.order = len(actions)
@@ -11649,14 +11851,13 @@ class CocaDigraph(Digraph):
                 print('  No circuits added !')
             else:
                 print('  ',new,' circuit(s) added!')
-        self.newBrakings = newBrakings
-        self.brakings += newBrakings
+        self.newBreakings = newBreakings
+        self.breakings += newBreakings
         if Comments:
-            if newBrakings == 0:
+            if newBreakings == 0:
                 print('  No further circuit brakings !')
             else:
-                print('  ',newBrakings,' new circuit(s) were broken')
-            
+                print('  ',newBreakings,' new circuit(s) were broken')
 
     def showCircuits(self,credibility=None,Debug=False):
         """
@@ -11693,10 +11894,16 @@ class CocaDigraph(Digraph):
             xk = k + 1
 
 #--------------------
-class _CocaDigraph(Digraph):
+class CocaDigraph(Digraph):
     """
 
-    Old CocaDigraph class without circuit elimination !
+    Old CocaDigraph class without circuit breakings; all circuits and circuits of circuits are added as hyper-nodes.
+
+    .. warning::
+
+        OBSOLETE: Gives inconsistent results when an autranking digraph shows loads of chordless cuircuits.
+        It is recommended to use instead either the BrokenCocsDigraph class (preferred option)
+        or the  BreakAddCocsDigraph class.
     
     Parameters:
 
@@ -12385,21 +12592,29 @@ if __name__ == "__main__":
         print('*-------- Testing classes and methods -------')
 
         from time import time
+        from digraphsTools import *
         ##dg = RedhefferDigraph(order=113)
         #g = RandomTournament(order=5,seed=1)
         #g = RandomValuationDigraph(seed=1)
         from outrankingDigraphs import BipolarOutrankingDigraph
         from randomPerfTabs import RandomCBPerformanceTableau
         from linearOrders import CopelandOrder
-        t1 = RandomPerformanceTableau(numberOfActions=20,seed=10)
+        t1 = RandomCBPerformanceTableau(numberOfActions=20,seed=1)
         g = BipolarOutrankingDigraph(t1,Normalized=True)
-        cop = CopelandOrder(g)
-        g.showHTMLRelationMap(rankingRule='rankedPairs')
-        gcd = CoDualDigraph(g)
-        gcd.showHTMLRelationMap(cop.copelandOrder)
-       
-        #g.showHTMLRelationMap(Colored=False)
-        #g.exportGraphViz()
+        g.showRubisBestChoiceRecommendation()
+        gcd = ~(-g)
+        cocb = BrokenCocsDigraph(gcd,Comments=True)
+        print(cocb.brokenLinks)
+        gcd.computeRubisChoice()
+        gcd.showGoodChoices()
+##        cop = CopelandOrder(g)
+##        #g.showHTMLRelationMap(rankingRule='rankedPairs')
+##        gcd = CoDualDigraph(g)
+##        #gcd.showHTMLRelationMap(cop.copelandOrder)
+##        g.showRubisBestChoiceRecommendation()
+##        t1.computeQuantileOrder(3,10)
+##        #g.showHTMLRelationMap(Colored=False)
+##        #g.exportGraphViz()
 ##        from outrankingDigraphs import BipolarOutrankingDigraph
 ##        from randomPerfTabs import RandomCBPerformanceTableau
 ##        MP = False
