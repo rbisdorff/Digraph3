@@ -6999,10 +6999,6 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the average linking credibilities and the minimal link of a COC.</span>
 
-<span class="sd">        .. warning::</span>
-
-<span class="sd">            The characteristic valuation domain of the relation must be bipolar with Med = 0 !!</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span>
@@ -11484,16 +11480,21 @@
             <span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">circ</span><span class="p">),</span> <span class="s1">&#39;, credibility :&#39;</span><span class="p">,</span> <span class="n">deg</span><span class="p">)</span>
 
 <span class="c1">#--------------------</span>
-<div class="viewcode-block" id="CoceDigraph"><a class="viewcode-back" href="../techDoc.html#digraphs.CoceDigraph">[docs]</a><span class="k">class</span> <span class="nc">CoceDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">_CoceDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Specialization of general Digraph class for instantiation of digraphs where</span>
+<span class="sd">    all chordless odd circuits are eliminated by appropriate cuts of the valuation of the arcs.</span>
+
+<span class="sd">    .. note::</span>
+
+<span class="sd">        The method is only experimental and may easily lead to very sparse outranking digraphs with loads of undeterminate arcs.</span>
+<span class="sd">        It is recommended to use instead the :py:class:`digraphs.BrokenCocsDigraph` class.</span>
+<span class="sd">        </span>
 <span class="sd">    Parameters:</span>
 
 <span class="sd">        - digraph: Stored or memory resident digraph instance.</span>
-<span class="sd">        - Cpp: using a C++/Agrum version of the Digraoh.computeChordlessCircuits() method.</span>
+<span class="sd">        - Cpp: using a C++/Agrum version of the Digraph.computeChordlessCircuits() method.</span>
 <span class="sd">        - Piping: using OS pipes for data in- and output between Python and C++.</span>
-
-<span class="sd">    Specialization of general Digraph class for instantiation</span>
-<span class="sd">    of chordless odd circuits eliminated digraphs.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -11539,7 +11540,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">weakGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weakGammaSets</span><span class="p">()</span>
 
 
-<div class="viewcode-block" id="CoceDigraph.iterateCocElimination"><a class="viewcode-back" href="../techDoc.html#digraphs.CoceDigraph.iterateCocElimination">[docs]</a>    <span class="k">def</span> <span class="nf">iterateCocElimination</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">iterateCocElimination</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Eliminates all chordless odd circuits with rising valuation cut levels.</span>
 <span class="sd">        Renders a tuple (level,polarisedDigraph) where level is the</span>
@@ -11576,7 +11577,7 @@
         <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">(</span><span class="n">qualmaj0</span><span class="p">,</span><span class="n">pg</span><span class="p">)</span></div></div>
+            <span class="k">return</span> <span class="p">(</span><span class="n">qualmaj0</span><span class="p">,</span><span class="n">pg</span><span class="p">)</span>
 
 <span class="c1">#--------------------</span>
 <div class="viewcode-block" id="BrokenCocsDigraph"><a class="viewcode-back" href="../techDoc.html#digraphs.BrokenCocsDigraph">[docs]</a><span class="k">class</span> <span class="nc">BrokenCocsDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
@@ -11591,7 +11592,7 @@
 <span class="sd">    of chordless odd circuits broken digraphs.</span>
 
 <span class="sd">    All chordless odd circuits are broken at the weakest asymmetric link,</span>
-<span class="sd">    i.e. a link (*x*, *y*) with minimal difference between r(*x* S *y*) - r(*y* S *x*).</span>
+<span class="sd">    i.e. a link :math:`(x, y)` with minimal difference between :math:`r(x S y)` and :math:`r(y S x)`.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
@@ -11988,8 +11989,8 @@
 
 <span class="sd">    .. warning::</span>
 
-<span class="sd">        OBSOLETE: Gives inconsistent results when an autranking digraph shows loads of chordless cuircuits.</span>
-<span class="sd">        It is recommended to use instead either the BrokenCocsDigraph class (preferred option)</span>
+<span class="sd">        May sometimes give inconsistent results when an autranking digraph shows loads of chordless cuircuits.</span>
+<span class="sd">        It is recommended in this case to use instead either the BrokenCocsDigraph class (preferred option)</span>
 <span class="sd">        or the  BreakAddCocsDigraph class.</span>
 <span class="sd">    </span>
 <span class="sd">    Parameters:</span>

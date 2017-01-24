@@ -750,10 +750,11 @@ def testPairwiseClusterComparison():
     g.computePairwiseClusterComparison(K1, K2, Debug=True)
 
 def testCoceDigraph():
-    print('*----- test CoceDigraph class ----*')
+    print('*----- test rxperimental CoceDigraph class ----*')
+    from digraphs import _CoceDigraph
     t = RandomCBPerformanceTableau(numberOfActions=10)
     g = BipolarOutrankingDigraph(t)
-    coceg = CoceDigraph(g,Comments=True)
+    coceg = _CoceDigraph(g,Comments=True)
     coceg.computeChordlessCircuits()
     print(coceg.computeDeterminateness())
     print(coceg.graphDetermination())

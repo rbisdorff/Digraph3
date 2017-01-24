@@ -253,7 +253,7 @@ i.e. a link (<em>x</em>, <em>y</em>) with minimal difference between r(<em>x</em
 <p>Specialization of general Digraph class for instantiation
 of chordless odd circuits broken digraphs.</p>
 <p>All chordless odd circuits are broken at the weakest asymmetric link,
-i.e. a link (<em>x</em>, <em>y</em>) with minimal difference between r(<em>x</em> S <em>y</em>) - r(<em>y</em> S <em>x</em>).</p>
+i.e. a link <img class="math" src="_images/math/b7c48905409677f888c39e46ee27f2d17a3530fd.png" alt="(x, y)"/> with minimal difference between <img class="math" src="_images/math/6f86de060493eed77b8d8e308aa176938c975319.png" alt="r(x S y)"/> and <img class="math" src="_images/math/7418a94cc7a90e3e78712f33509db665b47021dc.png" alt="r(y S x)"/>.</p>
 <dl class="method">
 <dt id="digraphs.BrokenCocsDigraph.breakChordlessOddCircuits">
 <code class="descname">breakChordlessOddCircuits</code><span class="sig-paren">(</span><em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=True</em>, <em>Debug=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#BrokenCocsDigraph.breakChordlessOddCircuits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.BrokenCocsDigraph.breakChordlessOddCircuits" title="Permalink to this definition">¶</a></dt>
@@ -374,8 +374,8 @@ and the other.evaluation dictionaries into self.</p>
 <p>Old CocaDigraph class without circuit breakings; all circuits and circuits of circuits are added as hyper-nodes.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">OBSOLETE: Gives inconsistent results when an autranking digraph shows loads of chordless cuircuits.
-It is recommended to use instead either the BrokenCocsDigraph class (preferred option)
+<p class="last">May sometimes give inconsistent results when an autranking digraph shows loads of chordless cuircuits.
+It is recommended in this case to use instead either the BrokenCocsDigraph class (preferred option)
 or the  BreakAddCocsDigraph class.</p>
 </div>
 <p>Parameters:</p>
@@ -410,32 +410,6 @@ of chordless odd circuits augmented digraphs.</p>
 <dt id="digraphs.CocaDigraph.showComponents">
 <code class="descname">showComponents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CocaDigraph.showComponents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.CocaDigraph.showComponents" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="digraphs.CoceDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CoceDigraph</code><span class="sig-paren">(</span><em>digraph=None</em>, <em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CoceDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.CoceDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
-<p>Parameters:</p>
-<blockquote>
-<div><ul class="simple">
-<li>digraph: Stored or memory resident digraph instance.</li>
-<li>Cpp: using a C++/Agrum version of the Digraoh.computeChordlessCircuits() method.</li>
-<li>Piping: using OS pipes for data in- and output between Python and C++.</li>
-</ul>
-</div></blockquote>
-<p>Specialization of general Digraph class for instantiation
-of chordless odd circuits eliminated digraphs.</p>
-<dl class="method">
-<dt id="digraphs.CoceDigraph.iterateCocElimination">
-<code class="descname">iterateCocElimination</code><span class="sig-paren">(</span><em>Comments=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CoceDigraph.iterateCocElimination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.CoceDigraph.iterateCocElimination" title="Permalink to this definition">¶</a></dt>
-<dd><p>Eliminates all chordless odd circuits with rising valuation cut levels.
-Renders a tuple (level,polarisedDigraph) where level is the
-necessary bipolar cut level for eliminating all chordless odd circuits,
-and polarisedDigraph is the resulting digraph instance.
-Renders (None,None) if no chordless odd circuit is detected.</p>
-</dd></dl>
 
 </dd></dl>
 
@@ -645,10 +619,6 @@ Optimized with marking of visited chordless P1s.</p>
 <dt id="digraphs.Digraph.circuitCredibilities">
 <code class="descname">circuitCredibilities</code><span class="sig-paren">(</span><em>circuit</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.circuitCredibilities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.circuitCredibilities" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the average linking credibilities and the minimal link of a COC.</p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">The characteristic valuation domain of the relation must be bipolar with Med = 0 !!</p>
-</div>
 </dd></dl>
 
 <dl class="method">

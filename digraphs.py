@@ -6949,10 +6949,6 @@ class Digraph(object):
         """
         Renders the average linking credibilities and the minimal link of a COC.
 
-        .. warning::
-
-            The characteristic valuation domain of the relation must be bipolar with Med = 0 !!
-
         """
         if Debug:
             print(circuit)
@@ -11434,16 +11430,21 @@ class _WeakCocaDigraph(Digraph):
             print(list(circ), ', credibility :', deg)
 
 #--------------------
-class CoceDigraph(Digraph):
+class _CoceDigraph(Digraph):
     """
+    Specialization of general Digraph class for instantiation of digraphs where
+    all chordless odd circuits are eliminated by appropriate cuts of the valuation of the arcs.
+
+    .. note::
+
+        The method is only experimental and may easily lead to very sparse outranking digraphs with loads of undeterminate arcs.
+        It is recommended to use instead the :py:class:`digraphs.BrokenCocsDigraph` class.
+        
     Parameters:
 
         - digraph: Stored or memory resident digraph instance.
-        - Cpp: using a C++/Agrum version of the Digraoh.computeChordlessCircuits() method.
+        - Cpp: using a C++/Agrum version of the Digraph.computeChordlessCircuits() method.
         - Piping: using OS pipes for data in- and output between Python and C++.
-
-    Specialization of general Digraph class for instantiation
-    of chordless odd circuits eliminated digraphs.
 
     """
     def __init__(self,digraph=None,Cpp=False,Piping=False,Comments=False,Debug=False):
@@ -11541,7 +11542,7 @@ class BrokenCocsDigraph(Digraph):
     of chordless odd circuits broken digraphs.
 
     All chordless odd circuits are broken at the weakest asymmetric link,
-    i.e. a link (*x*, *y*) with minimal difference between r(*x* S *y*) - r(*y* S *x*).
+    i.e. a link :math:`(x, y)` with minimal difference between :math:`r(x S y)` and :math:`r(y S x)`.
 
     """
     def __init__(self,digraph=None,Cpp=False,Piping=False,\
@@ -11938,8 +11939,8 @@ class CocaDigraph(Digraph):
 
     .. warning::
 
-        OBSOLETE: Gives inconsistent results when an autranking digraph shows loads of chordless cuircuits.
-        It is recommended to use instead either the BrokenCocsDigraph class (preferred option)
+        May sometimes give inconsistent results when an autranking digraph shows loads of chordless cuircuits.
+        It is recommended in this case to use instead either the BrokenCocsDigraph class (preferred option)
         or the  BreakAddCocsDigraph class.
     
     Parameters:
