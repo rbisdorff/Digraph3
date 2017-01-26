@@ -430,10 +430,8 @@
 
 <div class="viewcode-block" id="computePiDecimals"><a class="viewcode-back" href="../techDoc.html#arithmetics.computePiDecimals">[docs]</a><span class="k">def</span> <span class="nf">computePiDecimals</span><span class="p">(</span><span class="n">decimalWordLength</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">nbrOfWords</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Renders at least prec-1 decimals of :math:`\pi` expressed in base modulus.</span>
-
+<span class="sd">    Renders at least decimalWordLemgth * nbrOfWords (default 4x600=2400) decimals of :math:`\pi` expressed in base modulus.</span>
 <span class="sd">    Transcription from an original C code of unknown author.</span>
-
 <span class="sd">    Uses the following infinite Euler series:</span>
 <span class="sd">    </span>
 <span class="sd">    :math:`\pi = 2 * \sum_{n=0}^{\infty} [ (n !) / (1 * 3  * 5 ... * (2n+1)) ].`</span>
