@@ -47,3 +47,16 @@ def testArithemtics():
 
     for i in range(1,13):
         print(i,moebius_mu(i))
+
+def testComputePiDecimals():
+    print('==>> Testing computePiDecimals')
+    from time import time
+    t0 = time()
+    piDecimals = computePiDecimals(prec=5000,modulus=100000)
+    print(time()-t0,end=' sec.\n')
+    print('pi = '+piDecimals[0]+'.')
+    print(piDecimals[1:])
+    print('precision = '+str(len(piDecimals[1:])),end=" decimals\n")
+
+
+    

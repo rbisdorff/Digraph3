@@ -378,6 +378,50 @@ def zn_units(n,Comments=False):
         print(units)
     return units
 
+def computePiDecimals(prec=2400,modulus=10000,Comments=False):
+    """
+    Renders prec-1 decimals of pi expressed in base 10000.
+    Transcription from an original C code of unknown author
+    Uses the following Euler series:
+    pi = 2 * sum_{n=0}^{infty} \frac{n !}{1 \times 3 \times 5 ... \times (2n+1)}
+    The series gives a new pi decimal after adding in average 3.32 terms
+    Source: J.-P. Delahaye "Le fascinant nombre pi", Pour la science Belin 1997 p.95.
+    
+    """
+    a = modulus                      # modulus base of the computations all done in short integers
+    na = len(str(a))-1              # maximal length of number expressed in base a
+    prna = prec//na
+    print(a,na,prna)
+    c = prna*na*3 + prec//2         # Euler's pi series requires about 3.5 steps for one more pi decimal
+    e = 0                                       # gathers the next ng pi-decimals in base a
+    h = [a//5 for i in range(c+1)]   # Accumulator for Horner transform of Euler's pi series
+                                                    # a/10 pi = a/5( 1 + 1/3(1 + 2/5(1 + 3/7(...))))
+                                                    # index runs on f  from c to 1 ! f[0] is ignored !
+    piDecimals = ''
+    while c > 0:
+        g = 2*c
+        d = 0
+        b = c
+        while b > 0:
+            d += h[b]*a
+            g -=1
+            d,h[b] = divmod(d,g)  # d = d//g; h[b] = d % g
+            g -= 1
+            b -= 1
+            if b != 0:
+                d *= b
+        c -= (na*3 + na//2)     # ng * 3.5 steps for each group of ng decimals expressed in base a
+        e += d // a
+        nd = ('%%0%dd' % na) % e
+        if Comments:
+            print(nd)
+        piDecimals += nd
+        e = d % a
+    if Comments:
+        print('pi = '+piDecimals[0]+'.')
+        print(piDecimals[1:])
+    return piDecimals
+
 ###############################
 if __name__ == '__main__':
     ######  scratch pad for testing the module components
@@ -438,4 +482,12 @@ if __name__ == '__main__':
             print('-->',i)
         print(divisorsFunction(1,i))
         print(divisorsFunction(2,i))
+        
+##    from time import time
+##    t0 = time()
+##    piDecimals = computePiDecimals(prec=5000,modulus=100000)
+##    print(time()-t0,end=' sec.\n')
+##    print('pi = '+piDecimals[0]+'.')
+##    print(piDecimals[1:])
+##    print('precision = '+str(len(piDecimals[1:])),end=" decimals\n")
         
