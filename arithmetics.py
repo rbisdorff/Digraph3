@@ -380,11 +380,11 @@ def zn_units(n,Comments=False):
 
 def computePiDecimals(decimalWordLength=4,nbrOfWords=600,Comments=False):
     """
-    Renders at least decimalWordLemgth * nbrOfWords (default 4x600=2400) decimals of :math:`\pi` expressed in base modulus.
-    Transcription from an original C code of unknown author.
-    Uses the following infinite Euler series:
+    Renders at least decimalWordLemgth * nbrOfWords (default 4x600=2400) decimals of :math:`\pi`
+    .
+    Transcription from an original C code of unknown author. Uses the following infinite Euler series:
     
-    :math:`\pi = 2 * \sum_{n=0}^{\infty} [ (n !) / (1 * 3  * 5 ... * (2n+1)) ].`
+         :math:`\pi = 2 * \sum_{n=0}^{\infty} [ (n !) / (1 * 3  * 5 ... * (2n+1)) ].`
     
     The series gives a new :math:`\pi` decimal after adding in average 3.32 terms.
 
