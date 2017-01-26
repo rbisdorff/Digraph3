@@ -380,7 +380,7 @@ def zn_units(n,Comments=False):
 
 def computePiDecimals(decimalWordLength=4,nbrOfWords=600,Comments=False):
     """
-    Renders at least decimalWordLenght * nbrOfWords (default 4x600=2400) decimals of :math:`\pi`.
+    Renders at least decimalWordLenght * nbrOfWords (default: 4x600=2400) decimals of :math:`\pi`.
     The Python transcription here recodes an original C code of unknown author (see [*]_).
 
     Uses the following infinite Euler series:
@@ -389,6 +389,20 @@ def computePiDecimals(decimalWordLength=4,nbrOfWords=600,Comments=False):
     
     The series gives a new :math:`\pi` decimal after adding in average 3.32 terms.
 
+        >>> from arithmetics import computePiDecimals
+        >>> from time import time
+        >>> t0=time();piDecimals = computePiDecimals(decimalWordLength=3,nbrOfWords=100);t1= time()
+        >>> print('pi = '+piDecimals[0]+'.'+piDecimals[1:])
+        pi = 3.14159265358979323846264338327950288419716939937510582097494459
+        2307816406286208998628034825342117067982148086513282306647093844609
+        5505822317253594081284811174502841027019385211055596446229489549303
+        8196442881097566593344612847564823378678316527120190914564856692346
+        034861045432664821339360726024914127372458700660630
+        >>> print('precision = '+str(len(piDecimals[1:]))+'decimals')
+        precision = 314 decimals
+        >>> print('%.4f' % (t1-t0)+' sec.')
+        0.0338 sec.
+    
     .. [*] *Source:* J.-P. Delahaye "*Le fascinant nombre* :math:`\pi`", Pour la science Belin 1997 p.95.
     """
     na =    decimalWordLength  # maximal string length of a number expressed in base a

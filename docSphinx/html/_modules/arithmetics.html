@@ -430,7 +430,7 @@
 
 <div class="viewcode-block" id="computePiDecimals"><a class="viewcode-back" href="../techDoc.html#arithmetics.computePiDecimals">[docs]</a><span class="k">def</span> <span class="nf">computePiDecimals</span><span class="p">(</span><span class="n">decimalWordLength</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">nbrOfWords</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Renders at least decimalWordLenght * nbrOfWords (default 4x600=2400) decimals of :math:`\pi`.</span>
+<span class="sd">    Renders at least decimalWordLenght * nbrOfWords (default: 4x600=2400) decimals of :math:`\pi`.</span>
 <span class="sd">    The Python transcription here recodes an original C code of unknown author (see [*]_).</span>
 
 <span class="sd">    Uses the following infinite Euler series:</span>
@@ -439,6 +439,20 @@
 <span class="sd">    </span>
 <span class="sd">    The series gives a new :math:`\pi` decimal after adding in average 3.32 terms.</span>
 
+<span class="sd">        &gt;&gt;&gt; from arithmetics import computePiDecimals</span>
+<span class="sd">        &gt;&gt;&gt; from time import time</span>
+<span class="sd">        &gt;&gt;&gt; t0=time();piDecimals = computePiDecimals(decimalWordLength=3,nbrOfWords=100);t1= time()</span>
+<span class="sd">        &gt;&gt;&gt; print(&#39;pi = &#39;+piDecimals[0]+&#39;.&#39;+piDecimals[1:])</span>
+<span class="sd">        pi = 3.14159265358979323846264338327950288419716939937510582097494459</span>
+<span class="sd">        2307816406286208998628034825342117067982148086513282306647093844609</span>
+<span class="sd">        5505822317253594081284811174502841027019385211055596446229489549303</span>
+<span class="sd">        8196442881097566593344612847564823378678316527120190914564856692346</span>
+<span class="sd">        034861045432664821339360726024914127372458700660630</span>
+<span class="sd">        &gt;&gt;&gt; print(&#39;precision = &#39;+str(len(piDecimals[1:]))+&#39;decimals&#39;)</span>
+<span class="sd">        precision = 314 decimals</span>
+<span class="sd">        &gt;&gt;&gt; print(&#39;%.4f&#39; % (t1-t0)+&#39; sec.&#39;)</span>
+<span class="sd">        0.0338 sec.</span>
+<span class="sd">    </span>
 <span class="sd">    .. [*] *Source:* J.-P. Delahaye &quot;*Le fascinant nombre* :math:`\pi`&quot;, Pour la science Belin 1997 p.95.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">na</span> <span class="o">=</span>    <span class="n">decimalWordLength</span>  <span class="c1"># maximal string length of a number expressed in base a</span>
