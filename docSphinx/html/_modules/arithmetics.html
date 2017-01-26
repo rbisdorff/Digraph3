@@ -431,7 +431,7 @@
 <div class="viewcode-block" id="computePiDecimals"><a class="viewcode-back" href="../techDoc.html#arithmetics.computePiDecimals">[docs]</a><span class="k">def</span> <span class="nf">computePiDecimals</span><span class="p">(</span><span class="n">decimalWordLength</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">nbrOfWords</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders at least decimalWordLemgth * nbrOfWords (default 4x600=2400) decimals of :math:`\pi`.</span>
-<span class="sd">    The Python transcription here recodes an original C code of unknown author.</span>
+<span class="sd">    The Python transcription here recodes an original C code of unknown author (see [*]_).</span>
 
 <span class="sd">    Uses the following infinite Euler series:</span>
 <span class="sd">    </span>
@@ -439,7 +439,7 @@
 <span class="sd">    </span>
 <span class="sd">    The series gives a new :math:`\pi` decimal after adding in average 3.32 terms.</span>
 
-<span class="sd">    *Source:* J.-P. Delahaye &quot;*Le fascinant nombre* :math:`\pi`&quot;, Pour la science Belin 1997 p.95.</span>
+<span class="sd">    .. [*] *Source:* J.-P. Delahaye &quot;*Le fascinant nombre* :math:`\pi`&quot;, Pour la science Belin 1997 p.95.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">na</span> <span class="o">=</span>    <span class="n">decimalWordLength</span>  <span class="c1"># maximal string length of a number expressed in base a</span>
     <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="n">na</span>                             <span class="c1"># base of the integer computations of the decimals</span>
