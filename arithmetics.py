@@ -380,19 +380,22 @@ def zn_units(n,Comments=False):
 
 def computePiDecimals(prec=2400,modulus=10000,Comments=False):
     """
-    Renders prec-1 decimals of pi expressed in base 10000.
-    Transcription from an original C code of unknown author
-    Uses the following Euler series:
-    pi = 2 * sum_{n=0}^{infty} \frac{n !}{1 \times 3 \times 5 ... \times (2n+1)}
-    The series gives a new pi decimal after adding in average 3.32 terms
-    Source: J.-P. Delahaye "Le fascinant nombre pi", Pour la science Belin 1997 p.95.
+    Renders at least prec-1 decimals of :math:`\pi` expressed in base modulus.
+
+    Transcription from an original C code of unknown author.
+
+    Uses the following infinite Euler series:
     
+    :math:`\pi = 2 * \sum_{n=0}^{\infty} [ (n !) / (1 * 3  * 5 ... * (2n+1)) ].`
+    
+    The series gives a new :math:`\pi` decimal after adding in average 3.32 terms.
+
+    *Source:* J.-P. Delahaye "*Le fascinant nombre* :math:`\pi`", Pour la science Belin 1997 p.95.
     """
-    a = modulus                      # modulus base of the computations all done in short integers
-    na = len(str(a))-1              # maximal length of number expressed in base a
-    prna = prec//na
-    print(a,na,prna)
-    c = prna*na*3 + prec//2         # Euler's pi series requires about 3.5 steps for one more pi decimal
+    a = modulus                      # base of the integer computations of the decimals
+    na = len(str(a))-1              # maximal string length of a number expressed in base a
+    prna = prec//na*na           # prec//na groups of na digits to compute in base a
+    c = prna*3 + prna//2        # Euler's pi series requires about 3.5 steps for one more pi decimal
     e = 0                                       # gathers the next ng pi-decimals in base a
     h = [a//5 for i in range(c+1)]   # Accumulator for Horner transform of Euler's pi series
                                                     # a/10 pi = a/5( 1 + 1/3(1 + 2/5(1 + 3/7(...))))
@@ -464,30 +467,30 @@ if __name__ == '__main__':
 ##        print(i,moebius_mu(i))
 ##
 ##    f12 = Factorizations
-    D12 = divisors(12)
-    print(D12)
-    print(totient(234))
-    tot = 0
-    for d in divisors(234):
-        tot += moebius_mu(d)*234//d
-    print(tot)
-    tot = 0
-    for d in divisors(234):
-        tot += d * moebius_mu(234//d)
-    print(tot)
-    for i in range(1,100):
-        df = divisorsFunction(0,i)
-        print(df)
-        if df % 2 == 1:
-            print('-->',i)
-        print(divisorsFunction(1,i))
-        print(divisorsFunction(2,i))
+##    D12 = divisors(12)
+##    print(D12)
+##    print(totient(234))
+##    tot = 0
+##    for d in divisors(234):
+##        tot += moebius_mu(d)*234//d
+##    print(tot)
+##    tot = 0
+##    for d in divisors(234):
+##        tot += d * moebius_mu(234//d)
+##    print(tot)
+##    for i in range(1,100):
+##        df = divisorsFunction(0,i)
+##        print(df)
+##        if df % 2 == 1:
+##            print('-->',i)
+##        print(divisorsFunction(1,i))
+##        print(divisorsFunction(2,i))
         
-##    from time import time
-##    t0 = time()
-##    piDecimals = computePiDecimals(prec=5000,modulus=100000)
-##    print(time()-t0,end=' sec.\n')
-##    print('pi = '+piDecimals[0]+'.')
-##    print(piDecimals[1:])
-##    print('precision = '+str(len(piDecimals[1:])),end=" decimals\n")
+    from time import time
+    t0 = time()
+    piDecimals = computePiDecimals(prec=5000,modulus=100000)
+    print(time()-t0,end=' sec.\n')
+    print('pi = '+piDecimals[0]+'.')
+    print(piDecimals[1:])
+    print('precision = '+str(len(piDecimals[1:])),end=" decimals\n")
         
