@@ -378,7 +378,7 @@ def zn_units(n,Comments=False):
         print(units)
     return units
 
-def computePiDecimals(prec=2400,modulus=10000,Comments=False):
+def computePiDecimals(decimalWordLength=4,nbrOfWords=600,Comments=False):
     """
     Renders at least prec-1 decimals of :math:`\pi` expressed in base modulus.
 
@@ -392,10 +392,10 @@ def computePiDecimals(prec=2400,modulus=10000,Comments=False):
 
     *Source:* J.-P. Delahaye "*Le fascinant nombre* :math:`\pi`", Pour la science Belin 1997 p.95.
     """
-    a = modulus                      # base of the integer computations of the decimals
-    na = len(str(a))-1              # maximal string length of a number expressed in base a
-    prna = prec//na*na           # prec//na groups of na digits to compute in base a
-    c = prna*3 + prna//2        # Euler's pi series requires about 3.5 steps for one more pi decimal
+    na =    decimalWordLength  # maximal string length of a number expressed in base a
+    a = 10**na                             # base of the integer computations of the decimals
+    prna = nbrOfWords * na        # total number of  decimals to compute in base a
+    c = prna*3 + prna//2              # Euler's pi series requires about 3.5 steps for one more pi decimal
     e = 0                                       # gathers the next na pi-decimals in base a
     h = [a//5 for i in range(c+1)]   # Accumulator for Horner transform of Euler's pi series
                                                     # a/10 pi = a/5( 1 + 1/3(1 + 2/5(1 + 3/7(...))))
@@ -488,7 +488,7 @@ if __name__ == '__main__':
         
     from time import time
     t0 = time()
-    piDecimals = computePiDecimals(prec=5000,modulus=100000)
+    piDecimals = computePiDecimals(decimalWordLength=4,nbrOfWords=600)
     print(time()-t0,end=' sec.\n')
     print('pi = '+piDecimals[0]+'.')
     print(piDecimals[1:])

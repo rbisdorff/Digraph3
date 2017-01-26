@@ -428,7 +428,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="n">units</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">units</span></div>
 
-<div class="viewcode-block" id="computePiDecimals"><a class="viewcode-back" href="../techDoc.html#arithmetics.computePiDecimals">[docs]</a><span class="k">def</span> <span class="nf">computePiDecimals</span><span class="p">(</span><span class="n">prec</span><span class="o">=</span><span class="mi">2400</span><span class="p">,</span><span class="n">modulus</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="computePiDecimals"><a class="viewcode-back" href="../techDoc.html#arithmetics.computePiDecimals">[docs]</a><span class="k">def</span> <span class="nf">computePiDecimals</span><span class="p">(</span><span class="n">decimalWordLength</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">nbrOfWords</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders at least prec-1 decimals of :math:`\pi` expressed in base modulus.</span>
 
@@ -442,11 +442,11 @@
 
 <span class="sd">    *Source:* J.-P. Delahaye &quot;*Le fascinant nombre* :math:`\pi`&quot;, Pour la science Belin 1997 p.95.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="n">modulus</span>                      <span class="c1"># base of the integer computations of the decimals</span>
-    <span class="n">na</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">-</span><span class="mi">1</span>              <span class="c1"># maximal string length of a number expressed in base a</span>
-    <span class="n">prna</span> <span class="o">=</span> <span class="n">prec</span><span class="o">//</span><span class="n">na</span><span class="o">*</span><span class="n">na</span>           <span class="c1"># prec//na groups of na digits to compute in base a</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">prna</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">prna</span><span class="o">//</span><span class="mi">2</span>        <span class="c1"># Euler&#39;s pi series requires about 3.5 steps for one more pi decimal</span>
-    <span class="n">e</span> <span class="o">=</span> <span class="mi">0</span>                                       <span class="c1"># gathers the next ng pi-decimals in base a</span>
+    <span class="n">na</span> <span class="o">=</span>    <span class="n">decimalWordLength</span>  <span class="c1"># maximal string length of a number expressed in base a</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="n">na</span>                             <span class="c1"># base of the integer computations of the decimals</span>
+    <span class="n">prna</span> <span class="o">=</span> <span class="n">nbrOfWords</span> <span class="o">*</span> <span class="n">na</span>        <span class="c1"># total number of  decimals to compute in base a</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">prna</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">prna</span><span class="o">//</span><span class="mi">2</span>              <span class="c1"># Euler&#39;s pi series requires about 3.5 steps for one more pi decimal</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="mi">0</span>                                       <span class="c1"># gathers the next na pi-decimals in base a</span>
     <span class="n">h</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="o">//</span><span class="mi">5</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>   <span class="c1"># Accumulator for Horner transform of Euler&#39;s pi series</span>
                                                     <span class="c1"># a/10 pi = a/5( 1 + 1/3(1 + 2/5(1 + 3/7(...))))</span>
                                                     <span class="c1"># index runs on f  from c to 1 ! f[0] is ignored !</span>
@@ -538,7 +538,7 @@
         
     <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
     <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-    <span class="n">piDecimals</span> <span class="o">=</span> <span class="n">computePiDecimals</span><span class="p">(</span><span class="n">prec</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span><span class="n">modulus</span><span class="o">=</span><span class="mi">100000</span><span class="p">)</span>
+    <span class="n">piDecimals</span> <span class="o">=</span> <span class="n">computePiDecimals</span><span class="p">(</span><span class="n">decimalWordLength</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">nbrOfWords</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s1">&#39; sec.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;pi = &#39;</span><span class="o">+</span><span class="n">piDecimals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">piDecimals</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
