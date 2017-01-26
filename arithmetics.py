@@ -396,7 +396,7 @@ def computePiDecimals(prec=2400,modulus=10000,Comments=False):
     na = len(str(a))-1              # maximal string length of a number expressed in base a
     prna = prec//na*na           # prec//na groups of na digits to compute in base a
     c = prna*3 + prna//2        # Euler's pi series requires about 3.5 steps for one more pi decimal
-    e = 0                                       # gathers the next ng pi-decimals in base a
+    e = 0                                       # gathers the next na pi-decimals in base a
     h = [a//5 for i in range(c+1)]   # Accumulator for Horner transform of Euler's pi series
                                                     # a/10 pi = a/5( 1 + 1/3(1 + 2/5(1 + 3/7(...))))
                                                     # index runs on f  from c to 1 ! f[0] is ignored !
