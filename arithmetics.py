@@ -410,7 +410,8 @@ def computePiDecimals(decimalWordLength=4,nbrOfWords=600,Comments=False):
     prna = nbrOfWords * na        # total number of  decimals to compute in base a
     c = prna*3 + prna//2              # Euler's pi series requires about 3.5 steps for one more pi decimal
     e = 0                                       # gathers the next na pi-decimals in base a
-    h = [a//5 for i in range(c+1)]   # vectrized accumulator for the Horner transform of Euler's pi series
+    x = a//5
+    h = [x for i in range(c+1)]   # vectrized accumulator for the Horner transform of Euler's pi series
                                                     # a/10 pi = a/5( 1 + 1/3(1 + 2/5(1 + 3/7(...))))
                                                     # ! h index runs from 1 to c; f[0] is ignored !
     piDecimals = ''
@@ -501,7 +502,7 @@ if __name__ == '__main__':
         
     from time import time
     t0 = time()
-    piDecimals = computePiDecimals(decimalWordLength=4,nbrOfWords=600)
+    piDecimals = computePiDecimals(decimalWordLength=5,nbrOfWords=1000)
     print(time()-t0,end=' sec.\n')
     print('pi = '+piDecimals[0]+'.')
     print(piDecimals[1:])

@@ -52,7 +52,7 @@ def testComputePiDecimals():
     print('==>> Testing computePiDecimals')
     from time import time
     t0 = time()
-    piDecimals = computePiDecimals(prec=5000,modulus=100000)
+    piDecimals = computePiDecimals(decimalWordLength=5,nbrOfWords=1000)
     print(time()-t0,end=' sec.\n')
     print('pi = '+piDecimals[0]+'.')
     print(piDecimals[1:])

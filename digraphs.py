@@ -519,7 +519,7 @@ class Digraph(object):
 
     """
     def __init__(self,file=None,order=7):
-        import digraphs,sys,copy
+        #import digraphs,sys,copy
         from randomDigraphs import RandomValuationDigraph
         from decimal import Decimal
         if file == None:
