@@ -4962,8 +4962,8 @@ a performance tableau with a set of decision alternatives, performance criteria 
 by the <a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a> class.</p>
 <p>A given object of this class consists at least in:</p>
 <ol class="arabic simple">
-<li>a potential set of decision <strong>actions</strong> : an ordered dictionary describing the potential decision actions or alternatives with &#8216;name&#8217; and &#8216;comment&#8217; attributes,</li>
-<li>a coherent family of <strong>criteria</strong>: an ordered dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,</li>
+<li>a potential set of decision <strong>actions</strong> : an (ordered) dictionary describing the potential decision actions or alternatives with &#8216;name&#8217; and &#8216;comment&#8217; attributes,</li>
+<li>a coherent family of <strong>criteria</strong>: an (ordered) dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,</li>
 <li>the <strong>evaluations</strong>: a dictionary of performance evaluations for each decision action or alternative on each criterion function.</li>
 <li>the digraph <strong>valuationdomain</strong>, a dictionary with three entries: the <em>minimum</em> (-100, means certainly no link), the <em>median</em> (0, means missing information) and the <em>maximum</em> characteristic value (+100, means certainly a link),</li>
 <li>the <strong>outranking relation</strong> : a double dictionary defined on the Cartesian product of the set of decision alternatives capturing the credibility of the pairwise <em>outranking situation</em> computed on the basis of the performance differences observed between couples of decision alternatives on the given family if criteria functions.</li>

@@ -41,8 +41,8 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
 
     A given object of this class consists at least in:
 
-    1. a potential set of decision **actions** : an ordered dictionary describing the potential decision actions or alternatives with 'name' and 'comment' attributes,
-    2. a coherent family of **criteria**: an ordered dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,
+    1. a potential set of decision **actions** : an (ordered) dictionary describing the potential decision actions or alternatives with 'name' and 'comment' attributes,
+    2. a coherent family of **criteria**: an (ordered) dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,
     3. the **evaluations**: a dictionary of performance evaluations for each decision action or alternative on each criterion function. 
     4. the digraph **valuationdomain**, a dictionary with three entries: the *minimum* (-100, means certainly no link), the *median* (0, means missing information) and the *maximum* characteristic value (+100, means certainly a link),
     5. the **outranking relation** : a double dictionary defined on the Cartesian product of the set of decision alternatives capturing the credibility of the pairwise *outranking situation* computed on the basis of the performance differences observed between couples of decision alternatives on the given family if criteria functions.   
