@@ -497,25 +497,38 @@ class Digraph(object):
     Genuine root class of all Digraph3 modules.
     See `tutorial working with the digraphs module <http://leopold-loewenheim.uni.lu/docDigraph3/tutorial.html#digraph-object-structure>`_ 
 
-    Python data file format:
-       * actionset = {'1': {'name': 'a1', 'shortName': ...},
-                      '2': {'name': 'a1', ...},
-                      ... }
-       * valuationdomain = { 'min':-1, 'med':0, 'max': 1}
-       * relation = { '1': { '1':0, '2': 1, ...}, ...}
+    All :py:class:`digraphs.Digraph` object *dg* contains at least the following components: 
 
-    Example python3 (3.5+ recommended) session::
-       >>> from digraphs import Digraph
-       >>> g = Digraph('tempdigraph')
-       >>> g.showShort()
-       *----- show short --------------*
-       Digraph          : tempdigraph
-       Actions          : ['1', '2', '3']
-       Valuation domain : {'med': Decimal("-1.0"), 'max': Decimal("1.0"), 'min': Decimal("0.0")}
-       *--- Connected Components ---*
-       1: ['1', '2', '3']
+    1. A collection of digraph nodes called **actions** (decision actions): a list, set or (ordered) dictionary of nodes with 'name' and 'shortname' attributes,
+    2. A logical characteristic **valuationdomain**, a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true),
+    3. The digraph **relation** : a double dictionary indexed by an oriented pair of actions (nodes) and carrying a characteristic value in the range of the previous valuation domain,
+    4. Its associated **gamma function** : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor,
+    5. Its associated **notGamma function** : a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor.
 
-      
+    A previously stored :py:class:`digraphs.Digraph` instance may be reloaded with the *file* argument::
+    
+        >>> from randomDigraphs import RandomValuationDigraph
+        >>> dg = RandomValuationDigraph(order=3,Normalized=True,seed=1)
+        >>> dg.save('testdigraph')
+        Saving digraph in file: <testdigraph.py> 
+        >>> from digraphs import Digraph
+        >>> dg = Digraph(file='testdigraph') # without the .py extenseion
+        >>> dg.__dict__
+        {'name': 'testdigraph',
+        'actions': {'a1': {'name': 'random decision action', 'shortName': 'a1'},
+                    'a2': {'name': 'random decision action', 'shortName': 'a2'},
+                    'a3': {'name': 'random decision action', 'shortName': 'a3'}},
+        'valuationdomain': {'min': Decimal('-1.0'), 'med': Decimal('0.0'),
+                                'max': Decimal('1.0'), 'hasIntegerValuation': False,},
+        'relation': {'a1': {'a1': Decimal('0.0'), 'a2': Decimal('-0.66'), 'a3': Decimal('0.44')},
+                     'a2': {'a1': Decimal('0.94'), 'a2': Decimal('0.0'), 'a3': Decimal('-0.84')},
+                     'a3': {'a1': Decimal('-0.36'), 'a2': Decimal('-0.70'), 'a3': Decimal('0.0')}},
+        'order': 3,
+        'gamma': {'a1': ({'a3'}, {'a2'}), 'a2': ({'a1'}, set()), 'a3': (set(), {'a1'})},
+        'notGamma': {'a1': ({'a2'}, {'a3'}),
+                     'a2': ({'a3'}, {'a1', 'a3'}),
+                     'a3': ({'a1', 'a2'}, {'a2'})}}
+        >>>
 
     """
     def __init__(self,file=None,order=7):

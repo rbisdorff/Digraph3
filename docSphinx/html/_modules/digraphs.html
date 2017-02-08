@@ -547,25 +547,38 @@
 <span class="sd">    Genuine root class of all Digraph3 modules.</span>
 <span class="sd">    See `tutorial working with the digraphs module &lt;http://leopold-loewenheim.uni.lu/docDigraph3/tutorial.html#digraph-object-structure&gt;`_ </span>
 
-<span class="sd">    Python data file format:</span>
-<span class="sd">       * actionset = {&#39;1&#39;: {&#39;name&#39;: &#39;a1&#39;, &#39;shortName&#39;: ...},</span>
-<span class="sd">                      &#39;2&#39;: {&#39;name&#39;: &#39;a1&#39;, ...},</span>
-<span class="sd">                      ... }</span>
-<span class="sd">       * valuationdomain = { &#39;min&#39;:-1, &#39;med&#39;:0, &#39;max&#39;: 1}</span>
-<span class="sd">       * relation = { &#39;1&#39;: { &#39;1&#39;:0, &#39;2&#39;: 1, ...}, ...}</span>
+<span class="sd">    All :py:class:`digraphs.Digraph` object *dg* contains at least the following components: </span>
 
-<span class="sd">    Example python3 (3.5+ recommended) session::</span>
-<span class="sd">       &gt;&gt;&gt; from digraphs import Digraph</span>
-<span class="sd">       &gt;&gt;&gt; g = Digraph(&#39;tempdigraph&#39;)</span>
-<span class="sd">       &gt;&gt;&gt; g.showShort()</span>
-<span class="sd">       *----- show short --------------*</span>
-<span class="sd">       Digraph          : tempdigraph</span>
-<span class="sd">       Actions          : [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]</span>
-<span class="sd">       Valuation domain : {&#39;med&#39;: Decimal(&quot;-1.0&quot;), &#39;max&#39;: Decimal(&quot;1.0&quot;), &#39;min&#39;: Decimal(&quot;0.0&quot;)}</span>
-<span class="sd">       *--- Connected Components ---*</span>
-<span class="sd">       1: [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]</span>
+<span class="sd">    1. A collection of digraph nodes called **actions** (decision actions): a list, set or (ordered) dictionary of nodes with &#39;name&#39; and &#39;shortname&#39; attributes,</span>
+<span class="sd">    2. A logical characteristic **valuationdomain**, a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true),</span>
+<span class="sd">    3. The digraph **relation** : a double dictionary indexed by an oriented pair of actions (nodes) and carrying a characteristic value in the range of the previous valuation domain,</span>
+<span class="sd">    4. Its associated **gamma function** : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor,</span>
+<span class="sd">    5. Its associated **notGamma function** : a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor.</span>
 
-<span class="sd">      </span>
+<span class="sd">    A previously stored :py:class:`digraphs.Digraph` instance may be reloaded with the *file* argument::</span>
+<span class="sd">    </span>
+<span class="sd">        &gt;&gt;&gt; from randomDigraphs import RandomValuationDigraph</span>
+<span class="sd">        &gt;&gt;&gt; dg = RandomValuationDigraph(order=3,Normalized=True,seed=1)</span>
+<span class="sd">        &gt;&gt;&gt; dg.save(&#39;testdigraph&#39;)</span>
+<span class="sd">        Saving digraph in file: &lt;testdigraph.py&gt; </span>
+<span class="sd">        &gt;&gt;&gt; from digraphs import Digraph</span>
+<span class="sd">        &gt;&gt;&gt; dg = Digraph(file=&#39;testdigraph&#39;) # without the .py extenseion</span>
+<span class="sd">        &gt;&gt;&gt; dg.__dict__</span>
+<span class="sd">        {&#39;name&#39;: &#39;testdigraph&#39;,</span>
+<span class="sd">        &#39;actions&#39;: {&#39;a1&#39;: {&#39;name&#39;: &#39;random decision action&#39;, &#39;shortName&#39;: &#39;a1&#39;},</span>
+<span class="sd">                    &#39;a2&#39;: {&#39;name&#39;: &#39;random decision action&#39;, &#39;shortName&#39;: &#39;a2&#39;},</span>
+<span class="sd">                    &#39;a3&#39;: {&#39;name&#39;: &#39;random decision action&#39;, &#39;shortName&#39;: &#39;a3&#39;}},</span>
+<span class="sd">        &#39;valuationdomain&#39;: {&#39;min&#39;: Decimal(&#39;-1.0&#39;), &#39;med&#39;: Decimal(&#39;0.0&#39;),</span>
+<span class="sd">                                &#39;max&#39;: Decimal(&#39;1.0&#39;), &#39;hasIntegerValuation&#39;: False,},</span>
+<span class="sd">        &#39;relation&#39;: {&#39;a1&#39;: {&#39;a1&#39;: Decimal(&#39;0.0&#39;), &#39;a2&#39;: Decimal(&#39;-0.66&#39;), &#39;a3&#39;: Decimal(&#39;0.44&#39;)},</span>
+<span class="sd">                     &#39;a2&#39;: {&#39;a1&#39;: Decimal(&#39;0.94&#39;), &#39;a2&#39;: Decimal(&#39;0.0&#39;), &#39;a3&#39;: Decimal(&#39;-0.84&#39;)},</span>
+<span class="sd">                     &#39;a3&#39;: {&#39;a1&#39;: Decimal(&#39;-0.36&#39;), &#39;a2&#39;: Decimal(&#39;-0.70&#39;), &#39;a3&#39;: Decimal(&#39;0.0&#39;)}},</span>
+<span class="sd">        &#39;order&#39;: 3,</span>
+<span class="sd">        &#39;gamma&#39;: {&#39;a1&#39;: ({&#39;a3&#39;}, {&#39;a2&#39;}), &#39;a2&#39;: ({&#39;a1&#39;}, set()), &#39;a3&#39;: (set(), {&#39;a1&#39;})},</span>
+<span class="sd">        &#39;notGamma&#39;: {&#39;a1&#39;: ({&#39;a2&#39;}, {&#39;a3&#39;}),</span>
+<span class="sd">                     &#39;a2&#39;: ({&#39;a3&#39;}, {&#39;a1&#39;, &#39;a3&#39;}),</span>
+<span class="sd">                     &#39;a3&#39;: ({&#39;a1&#39;, &#39;a2&#39;}, {&#39;a2&#39;})}}</span>
+<span class="sd">        &gt;&gt;&gt;</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">):</span>
