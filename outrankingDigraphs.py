@@ -30,8 +30,23 @@ from outrankingDigraphs import *
         
 class OutrankingDigraph(Digraph,PerformanceTableau):
     """
-    Abstract class for outranking digraphs.
-    Provides common methods to all specialized models of outranking digraphs.
+    Abstract root class for **outranking digraphs** inheritating methods both from the generic :py:class:`digraphs.Digraph`
+    and from the generic :py:class:`perfTabs.PerformanceTableau` root classes.
+    As such, our genuine outranking digraph model is a hybrid object appearing on the one side as digraph with a
+    nodes set (the decision alternatives) and a binary relation (outranking situations) and, on the other side, as
+    a performance tableau with a set of decision alternatives, performance criteria and a table of performance measurements.
+
+    Provides common methods to all specialized models of outranking digraphs, the standard outranking digraph model being provided
+        by the :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class. 
+
+    A given object of this class consists at least in:
+
+    1. a potential set of decision **actions** : an ordered dictionary describing the potential decision actions or alternatives with 'name' and 'comment' attributes,
+    2. a coherent family of **criteria**: an ordered dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,
+    3. the **evaluations**: a dictionary of performance evaluations for each decision action or alternative on each criterion function. 
+    4. the digraph **valuationdomain**, a dictionary with three entries: the *minimum* (-100, means certainly no link), the *median* (0, means missing information) and the *maximum* characteristic value (+100, means certainly a link),
+    5. the **outranking relation** : a double dictionary defined on the Cartesian product of the set of decision alternatives capturing the credibility of the pairwise *outranking situation* computed on the basis of the performance differences observed between couples of decision alternatives on the given family if criteria functions.   
+
 
     .. warning::
 
@@ -3669,8 +3684,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
     .. warning::
 
         If Threading is True, WithConcordanceRelation and WithVetoCounts flags are automatically set both to False.
-        Removing this limitation is on the todo list and will be done soon.
-       
+    
     """
     def __repr__(self):
         """
@@ -6536,7 +6550,12 @@ class RandomOutrankingDigraph(RandomBipolarOutrankingDigraph):
         
 class PolarisedOutrankingDigraph(PolarisedDigraph,OutrankingDigraph,PerformanceTableau):
     """
-    polarised Digraph instance for Outranking Digraphs.
+    Specilised :py:class:`digraphs.PolarisedDigraph` instance for Outranking Digraphs.
+
+    .. warning::
+
+        If called with argument *digraph=None*, a RandomBipolarOutrankingDigraph instance is generated first.
+        
     """
     def __init__(self,digraph=None,level=None,KeepValues=True,AlphaCut=False,StrictCut=False):
         import copy

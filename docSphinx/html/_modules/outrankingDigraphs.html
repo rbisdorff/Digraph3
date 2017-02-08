@@ -80,8 +80,23 @@
         
 <div class="viewcode-block" id="OutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.OutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">OutrankingDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Abstract class for outranking digraphs.</span>
-<span class="sd">    Provides common methods to all specialized models of outranking digraphs.</span>
+<span class="sd">    Abstract root class for **outranking digraphs** inheritating methods both from the generic :py:class:`digraphs.Digraph`</span>
+<span class="sd">    and from the generic :py:class:`perfTabs.PerformanceTableau` root classes.</span>
+<span class="sd">    As such, our genuine outranking digraph model is a hybrid object appearing on the one side as digraph with a</span>
+<span class="sd">    nodes set (the decision alternatives) and a binary relation (outranking situations) and, on the other side, as</span>
+<span class="sd">    a performance tableau with a set of decision alternatives, performance criteria and a table of performance measurements.</span>
+
+<span class="sd">    Provides common methods to all specialized models of outranking digraphs, the standard outranking digraph model being provided</span>
+<span class="sd">        by the :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class. </span>
+
+<span class="sd">    A given object of this class consists at least in:</span>
+
+<span class="sd">    1. a potential set of decision **actions** : an ordered dictionary describing the potential decision actions or alternatives with &#39;name&#39; and &#39;comment&#39; attributes,</span>
+<span class="sd">    2. a coherent family of **criteria**: an ordered dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,</span>
+<span class="sd">    3. the **evaluations**: a dictionary of performance evaluations for each decision action or alternative on each criterion function. </span>
+<span class="sd">    4. the digraph **valuationdomain**, a dictionary with three entries: the *minimum* (-100, means certainly no link), the *median* (0, means missing information) and the *maximum* characteristic value (+100, means certainly a link),</span>
+<span class="sd">    5. the **outranking relation** : a double dictionary defined on the Cartesian product of the set of decision alternatives capturing the credibility of the pairwise *outranking situation* computed on the basis of the performance differences observed between couples of decision alternatives on the given family if criteria functions.   </span>
+
 
 <span class="sd">    .. warning::</span>
 
@@ -3719,8 +3734,7 @@
 <span class="sd">    .. warning::</span>
 
 <span class="sd">        If Threading is True, WithConcordanceRelation and WithVetoCounts flags are automatically set both to False.</span>
-<span class="sd">        Removing this limitation is on the todo list and will be done soon.</span>
-<span class="sd">       </span>
+<span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -6586,7 +6600,12 @@
         
 <div class="viewcode-block" id="PolarisedOutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.PolarisedOutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">PolarisedOutrankingDigraph</span><span class="p">(</span><span class="n">PolarisedDigraph</span><span class="p">,</span><span class="n">OutrankingDigraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    polarised Digraph instance for Outranking Digraphs.</span>
+<span class="sd">    Specilised :py:class:`digraphs.PolarisedDigraph` instance for Outranking Digraphs.</span>
+
+<span class="sd">    .. warning::</span>
+
+<span class="sd">        If called with argument *digraph=None*, a RandomBipolarOutrankingDigraph instance is generated first.</span>
+<span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">KeepValues</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">AlphaCut</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">StrictCut</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">copy</span>

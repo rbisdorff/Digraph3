@@ -4784,8 +4784,7 @@ If None is given, the os.cpu_count method is used in order to determine the numb
 </dl>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">If Threading is True, WithConcordanceRelation and WithVetoCounts flags are automatically set both to False.
-Removing this limitation is on the todo list and will be done soon.</p>
+<p class="last">If Threading is True, WithConcordanceRelation and WithVetoCounts flags are automatically set both to False.</p>
 </div>
 <dl class="method">
 <dt id="outrankingDigraphs.BipolarOutrankingDigraph.computeCriterionRelation">
@@ -4954,8 +4953,23 @@ temporary ordinal outranking digraphs</p>
 <dt id="outrankingDigraphs.OutrankingDigraph">
 <em class="property">class </em><code class="descclassname">outrankingDigraphs.</code><code class="descname">OutrankingDigraph</code><span class="sig-paren">(</span><em>file=None</em>, <em>order=7</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#OutrankingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
-<p>Abstract class for outranking digraphs.
-Provides common methods to all specialized models of outranking digraphs.</p>
+<p>Abstract root class for <strong>outranking digraphs</strong> inheritating methods both from the generic <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a>
+and from the generic <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a> root classes.
+As such, our genuine outranking digraph model is a hybrid object appearing on the one side as digraph with a
+nodes set (the decision alternatives) and a binary relation (outranking situations) and, on the other side, as
+a performance tableau with a set of decision alternatives, performance criteria and a table of performance measurements.</p>
+<dl class="docutils">
+<dt>Provides common methods to all specialized models of outranking digraphs, the standard outranking digraph model being provided</dt>
+<dd>by the <a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a> class.</dd>
+</dl>
+<p>A given object of this class consists at least in:</p>
+<ol class="arabic simple">
+<li>a potential set of decision <strong>actions</strong> : an ordered dictionary describing the potential decision actions or alternatives with &#8216;name&#8217; and &#8216;comment&#8217; attributes,</li>
+<li>a coherent family of <strong>criteria</strong>: an ordered dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,</li>
+<li>the <strong>evaluations</strong>: a dictionary of performance evaluations for each decision action or alternative on each criterion function.</li>
+<li>the digraph <strong>valuationdomain</strong>, a dictionary with three entries: the <em>minimum</em> (-100, means certainly no link), the <em>median</em> (0, means missing information) and the <em>maximum</em> characteristic value (+100, means certainly a link),</li>
+<li>the <strong>outranking relation</strong> : a double dictionary defined on the Cartesian product of the set of decision alternatives capturing the credibility of the pairwise <em>outranking situation</em> computed on the basis of the performance differences observed between couples of decision alternatives on the given family if criteria functions.</li>
+</ol>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">Cannot be called directly ! No __init__(self,...) method defined.</p>
@@ -5229,7 +5243,11 @@ res = ((netdet,sigleton,dom,absorb)+)</p>
 <dt id="outrankingDigraphs.PolarisedOutrankingDigraph">
 <em class="property">class </em><code class="descclassname">outrankingDigraphs.</code><code class="descname">PolarisedOutrankingDigraph</code><span class="sig-paren">(</span><em>digraph=None</em>, <em>level=None</em>, <em>KeepValues=True</em>, <em>AlphaCut=False</em>, <em>StrictCut=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#PolarisedOutrankingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.PolarisedOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.PolarisedDigraph" title="digraphs.PolarisedDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.PolarisedDigraph</span></code></a>, <a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.OutrankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
-<p>polarised Digraph instance for Outranking Digraphs.</p>
+<p>Specilised <a class="reference internal" href="#digraphs.PolarisedDigraph" title="digraphs.PolarisedDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.PolarisedDigraph</span></code></a> instance for Outranking Digraphs.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If called with argument <em>digraph=None</em>, a RandomBipolarOutrankingDigraph instance is generated first.</p>
+</div>
 </dd></dl>
 
 <dl class="class">
