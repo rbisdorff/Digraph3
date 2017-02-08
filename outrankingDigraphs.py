@@ -37,7 +37,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
     a performance tableau with a set of decision alternatives, performance criteria and a table of performance measurements.
 
     Provides common methods to all specialized models of outranking digraphs, the standard outranking digraph model being provided
-        by the :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class. 
+    by the :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class. 
 
     A given object of this class consists at least in:
 
