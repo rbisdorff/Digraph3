@@ -95,7 +95,7 @@
 <span class="sd">       </span>
 <span class="sd">    Example python3 session:</span>
 <span class="sd">       &gt;&gt;&gt; from graphs import Graph</span>
-<span class="sd">       &gt;&gt;&gt; g = Graph(numberOfVertices=5,edgeProbability=0.5)</span>
+<span class="sd">       &gt;&gt;&gt; g = Graph(numberOfVertices=5,edgeProbability=0.5) # random instance</span>
 <span class="sd">       &gt;&gt;&gt; g.showShort()</span>
 <span class="sd">       *----- show short --------------*</span>
 <span class="sd">       *---- short description of the graph ----*</span>
@@ -2241,6 +2241,7 @@
 <span class="sd">    using Kruskal&#39;s greedy algorithm on the dual valuation.</span>
 
 <span class="sd">    Example Python session:</span>
+<span class="sd">       &gt;&gt;&gt; from graphs import *</span>
 <span class="sd">       &gt;&gt;&gt; g = RandomValuationGraph(seed=2)</span>
 <span class="sd">       &gt;&gt;&gt; g.showShort()</span>
 <span class="sd">       *---- short description of the graph ----*</span>
@@ -2357,6 +2358,7 @@
 <span class="sd">    nSim simulation steps (default = len(graph.edges)).</span>
 <span class="sd">    </span>
 <span class="sd">        Example 3-coloring of a grid 6x6 :</span>
+<span class="sd">           &gt;&gt;&gt; from graphs import *</span>
 <span class="sd">           &gt;&gt;&gt; g = GridGraph(n=6,m=6)</span>
 <span class="sd">           &gt;&gt;&gt; g.showShort()</span>
 <span class="sd">           &gt;&gt;&gt; g.exportGraphViz()</span>
@@ -2580,6 +2582,7 @@
 <span class="sd">    Specialisation of a Gibbs Sampler for the Ising model</span>
 
 <span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from graphs import GridGraph, IsingModel</span>
 <span class="sd">        &gt;&gt;&gt; g = GridGraph(n=15,m=15)</span>
 <span class="sd">        &gt;&gt;&gt; g.showShort()</span>
 <span class="sd">        *----- show short --------------*</span>
@@ -2752,6 +2755,7 @@
 <span class="sd">    probs = {&#39;v1&#39;: x, &#39;v2&#39;: y, ...}</span>
 
 <span class="sd">    Usage example:</span>
+<span class="sd">        &gt;&gt;&gt; from graphs import *</span>
 <span class="sd">        &gt;&gt;&gt; g = Graph(numberOfVertices=5,edgeProbability=0.5)</span>
 <span class="sd">        &gt;&gt;&gt; g.showShort()</span>
 <span class="sd">        *---- short description of the graph ----*</span>
@@ -2956,6 +2960,7 @@
 <span class="sd">    that is a random MIS generator.</span>
 
 <span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; from graphs import MISModel</span>
 <span class="sd">        &gt;&gt;&gt; from digraphs import CirculantDigraph        </span>
 <span class="sd">        &gt;&gt;&gt; dg = CirculantDigraph(order=15)</span>
 <span class="sd">        &gt;&gt;&gt; g = dg.digraph2Graph()</span>

@@ -45,7 +45,7 @@ class Graph(object):
        
     Example python3 session:
        >>> from graphs import Graph
-       >>> g = Graph(numberOfVertices=5,edgeProbability=0.5)
+       >>> g = Graph(numberOfVertices=5,edgeProbability=0.5) # random instance
        >>> g.showShort()
        *----- show short --------------*
        *---- short description of the graph ----*
@@ -2191,6 +2191,7 @@ class BestDeterminedSpanningForest(RandomTree):
     using Kruskal's greedy algorithm on the dual valuation.
 
     Example Python session:
+       >>> from graphs import *
        >>> g = RandomValuationGraph(seed=2)
        >>> g.showShort()
        *---- short description of the graph ----*
@@ -2307,6 +2308,7 @@ class Q_Coloring(Graph):
     nSim simulation steps (default = len(graph.edges)).
     
         Example 3-coloring of a grid 6x6 :
+           >>> from graphs import *
            >>> g = GridGraph(n=6,m=6)
            >>> g.showShort()
            >>> g.exportGraphViz()
@@ -2530,6 +2532,7 @@ class IsingModel(Graph):
     Specialisation of a Gibbs Sampler for the Ising model
 
     Example:
+        >>> from graphs import GridGraph, IsingModel
         >>> g = GridGraph(n=15,m=15)
         >>> g.showShort()
         *----- show short --------------*
@@ -2702,6 +2705,7 @@ class MetropolisChain(Graph):
     probs = {'v1': x, 'v2': y, ...}
 
     Usage example:
+        >>> from graphs import *
         >>> g = Graph(numberOfVertices=5,edgeProbability=0.5)
         >>> g.showShort()
         *---- short description of the graph ----*
@@ -2906,6 +2910,7 @@ class MISModel(Graph):
     that is a random MIS generator.
 
     Example:
+        >>> from graphs import MISModel
         >>> from digraphs import CirculantDigraph        
         >>> dg = CirculantDigraph(order=15)
         >>> g = dg.digraph2Graph()

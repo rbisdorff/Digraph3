@@ -2775,7 +2775,8 @@ else valuation domain = [-1.0,1.0]</li>
 using Kruskal&#8217;s greedy algorithm on the dual valuation.</p>
 <dl class="docutils">
 <dt>Example Python session:</dt>
-<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomValuationGraph</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomValuationGraph</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*---- short description of the graph ----*</span>
 <span class="go">Name             : &#39;randomGraph&#39;</span>
@@ -2888,7 +2889,7 @@ where Max (resp. Min) equals valuation maximum (resp. minimum).</dd>
 <dl class="docutils">
 <dt>Example python3 session:</dt>
 <dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="k">import</span> <span class="n">Graph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">numberOfVertices</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">numberOfVertices</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span> <span class="c1"># random instance</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*----- show short --------------*</span>
 <span class="go">*---- short description of the graph ----*</span>
@@ -3147,7 +3148,8 @@ temporary Grid graphs of dimension n times m.</p>
 <p>Specialisation of a Gibbs Sampler for the Ising model</p>
 <dl class="docutils">
 <dt>Example:</dt>
-<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">GridGraph</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="k">import</span> <span class="n">GridGraph</span><span class="p">,</span> <span class="n">IsingModel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">GridGraph</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*----- show short --------------*</span>
 <span class="go">Grid graph    :  grid-6-6</span>
@@ -3193,7 +3195,8 @@ H(c) = -sum_{{x,y} in self.edges}[spin_c(x)*spin_c(y)]</p>
 that is a random MIS generator.</p>
 <dl class="docutils">
 <dt>Example:</dt>
-<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">CirculantDigraph</span>        
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="k">import</span> <span class="n">MISModel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">CirculantDigraph</span>        
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">CirculantDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">dg</span><span class="o">.</span><span class="n">digraph2Graph</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
@@ -3266,7 +3269,8 @@ Metropolis Markov Chain Monte Carlo sampler with a given probability distributio
 probs = {&#8216;v1&#8217;: x, &#8216;v2&#8217;: y, ...}</p>
 <dl class="docutils">
 <dt>Usage example:</dt>
-<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">numberOfVertices</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">numberOfVertices</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*---- short description of the graph ----*</span>
 <span class="go">Name             : &#39;randomGraph&#39;</span>
@@ -3348,7 +3352,8 @@ nSim simulation steps (default = len(graph.edges)).</p>
 <blockquote>
 <div><dl class="docutils">
 <dt>Example 3-coloring of a grid 6x6 :</dt>
-<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">GridGraph</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">GridGraph</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
 <span class="go">*----- show short --------------*</span>
