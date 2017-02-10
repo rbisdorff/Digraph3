@@ -4,6 +4,18 @@ Documentation of the Digraph3 resources
 :Version: Revision: Python 3.5
 :Copyright: `R. Bisdorff <http://leopold-loewenheim.uni.lu/bisdorff/>`_ 2013-2017
 
+.. _Documents:
+
+Documents
+---------
+
+* `Introduction <index.html>`_
+* `Tutorial <tutorial.html>`_
+* `Reference manual <techDoc.html>`_
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+
 .. _Introduction-label:
 
 Introduction
@@ -27,15 +39,8 @@ The second part concerns the reference manual of the proposed Python3 modules, c
 .. toctree:: techDoc
    :maxdepth: 2
 
-Indices and tables
-------------------
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
 References
-----------
+..........
 .. [1] R. Bisdorff, L.C. Dias, P. Meyer, V. Mousseau and M. Pirlot (Eds.) (2015). *Evaluation and decision models with multiple criteria: Case studies*. Springer-Verlag Berlin Heidelberg, International Handbooks on Information Systems, `ISBN 978-3-662-46815-9 <http://link.springer.com/book/10.1007/978-3-662-46816-6>`_, 643 pages (downloadable content extract `PDF file 401.4 kB <http://leopold-loewenheim.uni.lu/bisdorff/documents/MCDAApplicationsContent.pdf>`_).
 
 .. [2] R. Bisdorff (2013) "On Polarizing Outranking Relations with Large Performance Differences" *Journal of Multi-Criteria Decision Analysis* (Wiley) **20**:3-12 (Preprint `PDF file 403.5kB <http://leopold-loewenheim.uni.lu/bisdorff/documents/MCDA-10-0059-PrePeerReview.pdf>`_)
