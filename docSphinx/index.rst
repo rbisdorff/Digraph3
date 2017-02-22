@@ -6,8 +6,8 @@ Documentation of the Digraph3 resources
 
 .. _Documents:
 
-Documents
----------
+Contents
+--------
 
 * `Introduction <index.html>`_
 * `Tutorial <tutorial.html>`_
