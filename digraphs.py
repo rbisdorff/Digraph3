@@ -2590,6 +2590,12 @@ class Digraph(object):
 
         return k2Distance
 
+    def computeWeakCondorcetWinners(self):
+        """
+        Wrapper for weakCondorcetWinners().
+        """
+        return self.weakCondorcetWinners()
+
     def weakCondorcetWinners(self):
         """
         Renders the set of decision actions x such that
@@ -2615,6 +2621,12 @@ class Digraph(object):
         except:
             pass
         return wCW
+
+    def computeCondorcetWinners(self):
+        """
+        Wrapper for condorcetWinners().
+        """
+        return self.condorcetWinners()
 
     def condorcetWinners(self):
         """
