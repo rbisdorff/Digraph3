@@ -10,7 +10,7 @@ Contents
 --------
 
 * `Introduction <index.html>`_
-* `Tutorial <tutorial.html>`_
+* `Tutorials <tutorial.html>`_
 * `Reference manual <techDoc.html>`_
 * :ref:`genindex`
 * :ref:`modindex`
