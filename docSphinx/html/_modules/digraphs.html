@@ -2640,6 +2640,12 @@
 
         <span class="k">return</span> <span class="n">k2Distance</span></div>
 
+<div class="viewcode-block" id="Digraph.computeWeakCondorcetWinners"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeWeakCondorcetWinners">[docs]</a>    <span class="k">def</span> <span class="nf">computeWeakCondorcetWinners</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Wrapper for weakCondorcetWinners().</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">weakCondorcetWinners</span><span class="p">()</span></div>
+
 <div class="viewcode-block" id="Digraph.weakCondorcetWinners"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.weakCondorcetWinners">[docs]</a>    <span class="k">def</span> <span class="nf">weakCondorcetWinners</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the set of decision actions x such that</span>
@@ -2665,6 +2671,12 @@
         <span class="k">except</span><span class="p">:</span>
             <span class="k">pass</span>
         <span class="k">return</span> <span class="n">wCW</span></div>
+
+<div class="viewcode-block" id="Digraph.computeCondorcetWinners"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeCondorcetWinners">[docs]</a>    <span class="k">def</span> <span class="nf">computeCondorcetWinners</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Wrapper for condorcetWinners().</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">condorcetWinners</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="Digraph.condorcetWinners"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.condorcetWinners">[docs]</a>    <span class="k">def</span> <span class="nf">condorcetWinners</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
