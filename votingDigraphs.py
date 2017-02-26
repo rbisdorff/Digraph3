@@ -33,12 +33,12 @@ class VotingProfile(object):
 
     General structure::
 
-	candidates = {'a': ...,'b': ...,'c': ...,  ... }
-	voters = {
-        '1':{'weight':1.0},
-        '2':{'weight':1.0},
+	candidates = OrderedDict([('a', ...),('b', ...),('c', ...), ( ... ) ])
+	voters = OrderedDict([
+        ('1', {'weight':1.0}),
+        ('2', {'weight':1.0}),
         ...,
-        }
+        ])
     	ballot = {     # voters x candidates x candidates
             '1': {     # bipolar characteristic {-1,0,1} of each voter's
                   'a': { 'a':0,'b':-1,'c':0, ...},   # pairwise preferences
@@ -153,8 +153,8 @@ class LinearVotingProfile(VotingProfile):
 
     Structure::
 
-        candidates = {'a': ,'b':  ,'c', ..., ...}
-        voters = {'1':{'weight':1.0},'2':{'weight':1.0}, ...}
+        candidates = OrderedDict([('a', ...) ,('b', ...),('c', ...), ...])
+        voters = OrderedDict([('1',{'weight':1.0}), ('2',{'weight':1.0}), ...])
         ## each specifies a a ranked list of candidates
         ## from the best to the worst
         linearBallot = {
