@@ -55,7 +55,7 @@ class VotingProfile(object):
     	}
 
     """
-    def __init__(self,fileVotingProfile=None):
+    def __init__(self,fileVotingProfile=None,seed=None):
 
         if fileVotingProfile != None:
             fileName = fileVotingProfile+'.py'
@@ -66,7 +66,7 @@ class VotingProfile(object):
             self.voters = argDict['voters']
             self.ballot = argDict['ballot']
         else:
-            randv = RandomVotingProfile()
+            randv = RandomVotingProfile(seed=seed)
             self.name = 'randomCondorcet'
             self.candidates = randv.candidates
             self.voters = randv.voters
@@ -120,20 +120,21 @@ class VotingProfile(object):
         saveFileName = str(name)+str('.py')
         fo = open(saveFileName, 'w')
         fo.write('# Saved voting profile: \n')
-        fo.write('candidates = {\n')
+        fo.write('from collections import OrderedDict \n')
+        fo.write('candidates = OrderedDict([\n')
         for x in candidates:
             try:
                 candidateName = candidates[x]['name']
             except:
                 candidateName = x
             #fo.write('\'' + str(x) + '\': {\'name\': \'' + candidateName + '\'},\n')
-            fo.write('\'%s\': {\'name\': \'%s\'},\n' % (x,candidateName) )
-        fo.write('}\n')
-        fo.write('voters = {\n')
+            fo.write('(\'%s\', {\'name\', \'%s\'}),\n' % (x,candidateName) )
+        fo.write('])\n')
+        fo.write('voters = OrderedDict([\n')
         for v in voters:
-            fo.write('\'' +str(v)+'\': {\n')
-            fo.write('\'weight\':'+str(voters[v]['weight'])+'},\n')
-        fo.write('}\n')
+            fo.write('(\'' +str(v)+'\', {\n')
+            fo.write('\'weight\':'+str(voters[v]['weight'])+'}),\n')
+        fo.write('])\n')
         fo.write('ballot = {\n')
         for v in ballot:
             fo.write('\'' +str(v)+'\': {\n')
@@ -196,7 +197,7 @@ class LinearVotingProfile(VotingProfile):
     ['a1']
 
     """
-    def __init__(self,fileVotingProfile=None,numberOfCandidates=5,numberOfVoters=9):
+    def __init__(self,fileVotingProfile=None,numberOfCandidates=5,numberOfVoters=9,seed=None):
         if fileVotingProfile != None:
             fileName = fileVotingProfile + '.py'
         ## else:
@@ -210,7 +211,7 @@ class LinearVotingProfile(VotingProfile):
             self.ballot = self.computeBallot()
         else:
             randv = RandomLinearVotingProfile(numberOfCandidates=numberOfCandidates,
-                                              numberOfVoters=numberOfVoters)
+                                              numberOfVoters=numberOfVoters,seed=seed)
             self.name = 'randLinearVotingProfile'
             self.candidates = randv.candidates
             self.voters = randv.voters
@@ -221,7 +222,7 @@ class LinearVotingProfile(VotingProfile):
         """
         Computes a complete ballot from the linear Ballot.
         """
-        candidates = set(self.candidates)
+        candidates = [x for x in self.candidates]
         linearBallot = self.linearBallot
         ballot = {}
         for v in linearBallot:
@@ -254,20 +255,21 @@ class LinearVotingProfile(VotingProfile):
         saveFileName = str(name)+str('.py')
         fo = open(saveFileName, 'w')
         fo.write('# Saved linear voting profile: \n')
-        fo.write('candidates = {\n')
+        fo.write('from collections import OrderedDict \n')
+        fo.write('candidates = OrderedDict([\n')
         for x in candidates:
             try:
                 candidateName = candidates[x]['name']
             except:
                 candidateName = x
             #fo.write('\'' + str(x) + '\': {\'name\': \'' + str(x)+ '\'},\n')
-            fo.write('\'%s\': {\'name\': \'%s\'},\n' % (x,candidateName) )
-        fo.write('}\n')
-        fo.write('voters = {\n')
+            fo.write('(\'%s\', {\'name\': \'%s\'}),\n' % (x,candidateName) )
+        fo.write('])\n')
+        fo.write('voters = OrderedDict([\n')
         for v in voters:
-            fo.write('\'' +str(v)+'\': {\n')
-            fo.write('\'weight\':'+str(voters[v]['weight'])+'},\n')
-        fo.write('}\n')
+            fo.write('(\'' +str(v)+'\', {\n')
+            fo.write('\'weight\':'+str(voters[v]['weight'])+'}),\n')
+        fo.write('])\n')
         fo.write('linearBallot = {\n')
         for v in linearBallot:
             fo.write('\'' +str(v)+'\': [\n')
@@ -661,14 +663,14 @@ class RandomLinearVotingProfile(LinearVotingProfile):
         Random profile creation parameters:
             | numberOfVoters=9, numberOfCandidates=5,
         """
-        import random
+        from collections import OrderedDict
         votersList = [x for x in range(1,numberOfVoters + 1)]
-        voters = {}
+        voters = OrderedDict()
         for v in votersList:
             voterID = 'v%d' % v
             voters[voterID] = {'weight':1.0}
         candidatesList = [x for x in range(1,numberOfCandidates + 1)]
-        candidates = {}
+        candidates = OrderedDict()
         for c in candidatesList:
             candidateID = 'a%d' % c
             candidates[candidateID] = {'name': candidateID}
@@ -683,11 +685,8 @@ class RandomLinearVotingProfile(LinearVotingProfile):
         """
         Renders a randomly generated linear ballot.
         """
-        import random,copy
-        if seed == None:
-            random.seed()
-        else:
-            random.seed(seed)
+        import random
+        random.seed(seed)
         linearBallot = {}
         voters = self.voters
         candidateList = [x for x in self.candidates]
@@ -695,14 +694,15 @@ class RandomLinearVotingProfile(LinearVotingProfile):
         for v in voters:
             random.shuffle(candidateList)
             #print candidateList
-            linearBallot[v] = copy.copy(candidateList)
+            linearBallot[v] = candidateList.copy()
         return linearBallot
 
 class RandomVotingProfile(VotingProfile):
     """
     A subclass for generating random voting profiles.
     """
-    def __init__(self,numberOfVoters=9,numberOfCandidates=5,hasRandomWeights=False,maxWeight=10,seed=None,Debug=False):
+    def __init__(self,numberOfVoters=9,numberOfCandidates=5,\
+                 hasRandomWeights=False,maxWeight=10,seed=None,Debug=False):
         """
         Random profile creation parameters:
 
@@ -710,12 +710,11 @@ class RandomVotingProfile(VotingProfile):
             | numberOfCandidates=5
 
         """
+        from collections import OrderedDict
         import random
-        if seed != None:
-            random.seed(seed)
-
+        random.seed(seed)
         votersList = [x for x in range(1,numberOfVoters + 1)]
-        voters = {}
+        voters = OrderedDict()
         for v in votersList:
             voterID = 'v%d' % v
             if hasRandomWeights:
@@ -723,7 +722,7 @@ class RandomVotingProfile(VotingProfile):
             else:
                 voters[voterID] = {'weight':1}
         candidatesList = [x for x in range(1,numberOfCandidates + 1)]
-        candidates = {}
+        candidates = OrderedDict()
         for x in candidatesList:
             candidateID = 'a%d' % x
             candidates[candidateID] = {'name': candidateID}
@@ -1089,15 +1088,18 @@ if __name__ == "__main__":
     ## for x in arrowRaynaudRanking:
     ##     print '%s: %d (%.2f)' % (x[1], x[0], aar[x[1]]['majorityMargin'])
 
-    lvp = LinearVotingProfile(numberOfCandidates=5,numberOfVoters=9)
+    lvp = LinearVotingProfile(numberOfCandidates=5,numberOfVoters=9,seed=1)
     ## lvp = LinearVotingProfile('templinearprofile')
     lvp.save()
+    lvp1 = LinearVotingProfile('templinearprofile')
+    lvp1.computeBallot()
     ## for x in lvp.voters:
     ##    print x, lvp.linearBallot[x]
     lvp.showLinearBallots()
     print(lvp.computeRankAnalysis())
     lvp.showRankAnalysisTable(Debug=True)
     print(lvp.computeBordaScores())
+    
 ##    print(lvp.computeBordaWinners())
 ##    print(lvp.computeUninominalVotes(lvp.candidates,lvp.linearBallot))
 ##    print(lvp.computeInstantRunoffWinner(Comments=True))
