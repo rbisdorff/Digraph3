@@ -11668,8 +11668,8 @@ class BrokenCocsDigraph(Digraph):
         currentCircuits = list(circuitsList)
         for (cycleList,cycle) in circuitsList:
             degP,degN,minLink = self.circuitCredibilities(cycleList,Debug=Comments)
-            #if Comments:
-            print(cycleList,cycle,degP,degN,minLink)
+            if Comments:
+                print(cycleList,cycle,degP,degN,minLink)
             if Comments:
                 print('Breaking:',cycleList,degP,degN)
             actionsSubset = [x for x in flatten(cycle)]
