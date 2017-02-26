@@ -36,6 +36,8 @@ def testVotingProfiles():
 def testApprovalVotingProfiles():
     print('*==>> testing approval voting profiles ----*')
     vt = RandomApprovalVotingProfile(minSizeOfBallot=3,maxSizeOfBallot=3)
+    vt.save('testAP')
+    vt = ApprovalVotingProfile('testAP')
     print('Candidates: ', vt.candidates)
     print('Voters: ',vt.voters)
     print('Approval Ballot: ', vt.approvalBallot)

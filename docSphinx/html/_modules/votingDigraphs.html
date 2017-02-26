@@ -531,10 +531,10 @@
 
 <span class="sd">    Structure::</span>
 
-<span class="sd">        candidates = {&#39;a&#39;: {&#39;name&#39;: ...},</span>
-<span class="sd">                      &#39;b&#39;: {&#39;name&#39;: ...},</span>
-<span class="sd">                      ..., ...}</span>
-<span class="sd">        voters = {&#39;v1&#39;:{&#39;weight&#39;:1.0},&#39;v2&#39;:{&#39;weight&#39;:1.0}, ...}</span>
+<span class="sd">        candidates = OrderedDict([(&#39;a&#39;, {&#39;name&#39;: ...}),</span>
+<span class="sd">                      (&#39;b&#39;, {&#39;name&#39;: ...}),</span>
+<span class="sd">                      ..., ...])</span>
+<span class="sd">        voters = OrderedDict([(&#39;v1&#39;,{&#39;weight&#39;:1.0}),(&#39;v2&#39;:{&#39;weight&#39;:1.0}), ...])</span>
 <span class="sd">        ## each specifies the subset of candidates he approves on</span>
 <span class="sd">        approvalBallot = {</span>
 <span class="sd">            &#39;v1&#39; : [&#39;b&#39;],</span>
@@ -543,7 +543,7 @@
 <span class="sd">            }</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileVotingProfile</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileVotingProfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">fileVotingProfile</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="n">fileVotingProfile</span> <span class="o">+</span> <span class="s1">&#39;.py&#39;</span>
         <span class="c1">## else:</span>
@@ -556,7 +556,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">approvalBallot</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;approvalBallot&#39;</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ballot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeBallot</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">randv</span> <span class="o">=</span> <span class="n">RandomApprovalVotingProfile</span><span class="p">()</span>
+            <span class="n">randv</span> <span class="o">=</span> <span class="n">RandomApprovalVotingProfile</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;randApprovalVotingProfile&#39;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">candidates</span> <span class="o">=</span> <span class="n">randv</span><span class="o">.</span><span class="n">candidates</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">voters</span> <span class="o">=</span> <span class="n">randv</span><span class="o">.</span><span class="n">voters</span>
@@ -568,7 +568,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Voting results&#39;</span><span class="p">)</span>
         <span class="n">candidates</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidates</span><span class="p">]</span>
-        <span class="n">candidates</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="c1">#candidates.sort()</span>
         <span class="n">votesPerCandidate</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
             <span class="n">votesPerCandidate</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">=</span><span class="mf">0.0</span>
@@ -632,20 +632,21 @@
         <span class="n">saveFileName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;.py&#39;</span><span class="p">)</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">saveFileName</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;# Saved approval voting profile: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;candidates = {</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;from collections import OrderedDict </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;candidates = OrderedDict([</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">candidateName</span> <span class="o">=</span> <span class="n">candidates</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="n">candidateName</span> <span class="o">=</span> <span class="n">x</span>
             <span class="c1">#fo.write(&#39;\&#39;&#39; + str(x) + &#39;\&#39;: {\&#39;name\&#39;: \&#39;&#39; + str(x)+ &#39;\&#39;},\n&#39;)</span>
-            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">: {</span><span class="se">\&#39;</span><span class="s1">name</span><span class="se">\&#39;</span><span class="s1">: </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">},</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">candidateName</span><span class="p">)</span> <span class="p">)</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;voters = {</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;(</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">, {</span><span class="se">\&#39;</span><span class="s1">name</span><span class="se">\&#39;</span><span class="s1">: </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">}),</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">candidateName</span><span class="p">)</span> <span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;])</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;voters = OrderedDict([</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">voters</span><span class="p">:</span>
-            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">: {</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">weight</span><span class="se">\&#39;</span><span class="s1">:&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">voters</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;},</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;(</span><span class="se">\&#39;</span><span class="s1">&#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">, {</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">weight</span><span class="se">\&#39;</span><span class="s1">:&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">voters</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;}),</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;])</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;approvalBallot = {</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">approvalBallot</span><span class="p">:</span>
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">: [</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -660,35 +661,37 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A specialized class for approval voting profiles.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">minSizeOfBallot</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">maxSizeOfBallot</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">minSizeOfBallot</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">maxSizeOfBallot</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Random profile creation parameters:</span>
 <span class="sd">            | numberOfVoters=9, numberOfCandidates=5,</span>
 <span class="sd">            | minSizeOfBallot=1, maxSizeOfBallot=2.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span> <span class="nn">random</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+<span class="c1">##        import random</span>
+<span class="c1">##        random.seed(seed)</span>
         <span class="n">votersList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">numberOfVoters</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
-        <span class="n">voters</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">voters</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">votersList</span><span class="p">:</span>
             <span class="n">voterID</span> <span class="o">=</span> <span class="s1">&#39;v</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">v</span>
             <span class="n">voters</span><span class="p">[</span><span class="n">voterID</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">}</span>
         <span class="n">candidatesList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">numberOfCandidates</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
-        <span class="n">candidates</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">candidates</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">candidatesList</span><span class="p">:</span>
             <span class="n">candidateID</span> <span class="o">=</span> <span class="s1">&#39;a</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">c</span>
             <span class="n">candidates</span><span class="p">[</span><span class="n">candidateID</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">candidateID</span><span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="s1">&#39;randAVProfile&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">candidates</span> <span class="o">=</span> <span class="n">candidates</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">voters</span> <span class="o">=</span> <span class="n">voters</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">approvalBallot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generateRandomApprovalBallot</span><span class="p">(</span><span class="n">minSizeOfBallot</span><span class="p">,</span><span class="n">maxSizeOfBallot</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">approvalBallot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generateRandomApprovalBallot</span><span class="p">(</span><span class="n">minSizeOfBallot</span><span class="p">,</span><span class="n">maxSizeOfBallot</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ballot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeBallot</span><span class="p">()</span>
 
-<div class="viewcode-block" id="RandomApprovalVotingProfile.generateRandomApprovalBallot"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.RandomApprovalVotingProfile.generateRandomApprovalBallot">[docs]</a>    <span class="k">def</span> <span class="nf">generateRandomApprovalBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">minSizeOfBallot</span><span class="p">,</span><span class="n">maxSizeOfBallot</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomApprovalVotingProfile.generateRandomApprovalBallot"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.RandomApprovalVotingProfile.generateRandomApprovalBallot">[docs]</a>    <span class="k">def</span> <span class="nf">generateRandomApprovalBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">minSizeOfBallot</span><span class="p">,</span><span class="n">maxSizeOfBallot</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a randomly generated approval ballot.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">copy</span>
-        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">()</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="n">approvalBallot</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">voters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span>
         <span class="n">candidates</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidates</span>
@@ -708,7 +711,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A specialized class for random linwear voting profiles.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Random profile creation parameters:</span>
 <span class="sd">            | numberOfVoters=9, numberOfCandidates=5,</span>

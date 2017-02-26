@@ -481,10 +481,10 @@ class ApprovalVotingProfile(VotingProfile):
 
     Structure::
 
-        candidates = {'a': {'name': ...},
-                      'b': {'name': ...},
-                      ..., ...}
-        voters = {'v1':{'weight':1.0},'v2':{'weight':1.0}, ...}
+        candidates = OrderedDict([('a', {'name': ...}),
+                      ('b', {'name': ...}),
+                      ..., ...])
+        voters = OrderedDict([('v1',{'weight':1.0}),('v2':{'weight':1.0}), ...])
         ## each specifies the subset of candidates he approves on
         approvalBallot = {
             'v1' : ['b'],
@@ -493,7 +493,7 @@ class ApprovalVotingProfile(VotingProfile):
             }
 
     """
-    def __init__(self,fileVotingProfile=None):
+    def __init__(self,fileVotingProfile=None,seed=None):
         if fileVotingProfile != None:
             fileName = fileVotingProfile + '.py'
         ## else:
@@ -506,7 +506,7 @@ class ApprovalVotingProfile(VotingProfile):
             self.approvalBallot = argDict['approvalBallot']
             self.ballot = self.computeBallot()
         else:
-            randv = RandomApprovalVotingProfile()
+            randv = RandomApprovalVotingProfile(seed=seed)
             self.name = 'randApprovalVotingProfile'
             self.candidates = randv.candidates
             self.voters = randv.voters
@@ -518,7 +518,7 @@ class ApprovalVotingProfile(VotingProfile):
         """
         print('Voting results')
         candidates = [x for x in self.candidates]
-        candidates.sort()
+        #candidates.sort()
         votesPerCandidate = {}
         for c in candidates:
             votesPerCandidate[c]=0.0
@@ -582,20 +582,21 @@ class ApprovalVotingProfile(VotingProfile):
         saveFileName = str(name)+str('.py')
         fo = open(saveFileName, 'w')
         fo.write('# Saved approval voting profile: \n')
-        fo.write('candidates = {\n')
+        fo.write('from collections import OrderedDict \n')
+        fo.write('candidates = OrderedDict([\n')
         for x in candidates:
             try:
                 candidateName = candidates[x]['name']
             except:
                 candidateName = x
             #fo.write('\'' + str(x) + '\': {\'name\': \'' + str(x)+ '\'},\n')
-            fo.write('\'%s\': {\'name\': \'%s\'},\n' % (x,candidateName) )
-        fo.write('}\n')
-        fo.write('voters = {\n')
+            fo.write('(\'%s\', {\'name\': \'%s\'}),\n' % (x,candidateName) )
+        fo.write('])\n')
+        fo.write('voters = OrderedDict([\n')
         for v in voters:
-            fo.write('\'' +str(v)+'\': {\n')
-            fo.write('\'weight\':'+str(voters[v]['weight'])+'},\n')
-        fo.write('}\n')
+            fo.write('(\'' +str(v)+'\', {\n')
+            fo.write('\'weight\':'+str(voters[v]['weight'])+'}),\n')
+        fo.write('])\n')
         fo.write('approvalBallot = {\n')
         for v in approvalBallot:
             fo.write('\'' +str(v)+'\': [\n')
@@ -610,35 +611,37 @@ class RandomApprovalVotingProfile(ApprovalVotingProfile):
     """
     A specialized class for approval voting profiles.
     """
-    def __init__(self,numberOfVoters=9,numberOfCandidates=5,minSizeOfBallot=1,maxSizeOfBallot=2):
+    def __init__(self,numberOfVoters=9,numberOfCandidates=5,minSizeOfBallot=1,maxSizeOfBallot=2,seed=None):
         """
         Random profile creation parameters:
             | numberOfVoters=9, numberOfCandidates=5,
             | minSizeOfBallot=1, maxSizeOfBallot=2.
         """
-        import random
+        from collections import OrderedDict
+##        import random
+##        random.seed(seed)
         votersList = [x for x in range(1,numberOfVoters + 1)]
-        voters = {}
+        voters = OrderedDict()
         for v in votersList:
             voterID = 'v%d' % v
             voters[voterID] = {'weight':1.0}
         candidatesList = [x for x in range(1,numberOfCandidates + 1)]
-        candidates = {}
+        candidates = OrderedDict()
         for c in candidatesList:
             candidateID = 'a%d' % c
             candidates[candidateID] = {'name': candidateID}
         self.name = str('randAVProfile')
         self.candidates = candidates
         self.voters = voters
-        self.approvalBallot = self.generateRandomApprovalBallot(minSizeOfBallot,maxSizeOfBallot)
+        self.approvalBallot = self.generateRandomApprovalBallot(minSizeOfBallot,maxSizeOfBallot,seed=seed)
         self.ballot = self.computeBallot()
 
-    def generateRandomApprovalBallot(self,minSizeOfBallot,maxSizeOfBallot):
+    def generateRandomApprovalBallot(self,minSizeOfBallot,maxSizeOfBallot,seed=None):
         """
         Renders a randomly generated approval ballot.
         """
         import random,copy
-        random.seed()
+        random.seed(seed)
         approvalBallot = {}
         voters = self.voters
         candidates = self.candidates
@@ -658,7 +661,7 @@ class RandomLinearVotingProfile(LinearVotingProfile):
     """
     A specialized class for random linwear voting profiles.
     """
-    def __init__(self,seed=None,numberOfVoters=9,numberOfCandidates=5):
+    def __init__(self,numberOfVoters=9,numberOfCandidates=5,seed=None):
         """
         Random profile creation parameters:
             | numberOfVoters=9, numberOfCandidates=5,
