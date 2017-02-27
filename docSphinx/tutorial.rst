@@ -921,13 +921,13 @@ Linear voting profiles
 
 The :ref:`votingDigraphs-label` provides resources for handling election results [ADT-L2]_, like the :py:class:`votingDigraphs.LinearVotingProfile` class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two ordered dictionaries, one for the voters and another one for the candidates. The linear ballots are stored in a standard dictionary::
 
-    candidates = OrderedDict([('a',...), ('b',...), ('c', ...), ...}
-    voters = OrderedDict([('1',{'weight':1.0}), ('2',{'weight':1.0}), ...}
+    candidates = OrderedDict([('a1',...), ('a2',...), ('a3', ...), ...}
+    voters = OrderedDict([('v1',{'weight':1.0}), ('v2',{'weight':1.0}), ...}
     ## each voter specifies a linearly ranked list of candidates
     ## from the best to the worst (without ties
     linearBallot = {
-    '1' : ['b','c','a', ...],
-    '2' : ['a','b','c', ...],
+    'v1' : ['a2','a3','a1', ...],
+    'v2' : ['a1','a2','a3', ...],
     ...
     }
 
@@ -935,11 +935,11 @@ The module provides a :py:class:`votingDigraphs.RandomLinearVotingProfile` class
     >>> from votingDigraphs import RandomLinearVotingProfile
     >>> v = RandomLinearVotingProfile(numberOfVoters=5,numberOfCandidates=3)
     >>> v.candidates
-    {'a2': {'name': 'a2'}, 'a3': {'name': 'a3'}, 'a1': {'name': 'a1'}}
+    OrderedDict(['a1',{'name':'a1}), ('a2',{'name':'a2'}), ('a3':{'name':'a3'})])
     >>> v.voters
-    {'v4': {'weight': 1.0}, 'v3': {'weight': 1.0}, 
-     'v1': {'weight': 1.0}, 'v5': {'weight': 1.0}, 
-     'v2': {'weight': 1.0}}
+    OrderedDict([('v1',{'weight': 1.0}), ('v2':{'weight': 1.0}), 
+     ('v3',{'weight': 1.0}), ('v4':{'weight': 1.0}), 
+     ('v5',{'weight': 1.0})])
     >>> v.linearBallot
     {'v4': ['a1', 'a3', 'a2'], 'v3': ['a1', 'a3', 'a2'], 'v1': ['a1', 'a2', 'a3'],
      'v5': ['a2', 'a3', 'a1'], 'v2': ['a3', 'a2', 'a1']}
@@ -948,11 +948,11 @@ The module provides a :py:class:`votingDigraphs.RandomLinearVotingProfile` class
 Notice that in this example, all voters are considered to be equi-significant. Their linear ballots can be viewed with the ``showLinearBallots`` method:
     >>> v.showLinearBallots()
     voters(weight)	 candidates rankings
-    v4(1.0): 	 ['a1', 'a2', 'a3']
-    v3(1.0): 	 ['a1', 'a3', 'a2']
     v1(1.0): 	 ['a2', 'a1', 'a3']
-    v5(1.0): 	 ['a3', 'a1', 'a2']
     v2(1.0): 	 ['a3', 'a1', 'a2']
+    v3(1.0): 	 ['a1', 'a3', 'a2']
+    v4(1.0): 	 ['a1', 'a2', 'a3']
+    v5(1.0): 	 ['a3', 'a1', 'a2']
     >>> ...
 
 Editing of the linear voting profile may be achieved by storing the data in a file, edit it, and reload it again:

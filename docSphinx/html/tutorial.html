@@ -1620,13 +1620,13 @@
 6
 7
 8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">candidates</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="o">...</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="o">...</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span> <span class="o">...</span><span class="p">}</span>
-<span class="n">voters</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="s1">&#39;1&#39;</span><span class="p">,{</span><span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">}),</span> <span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">,{</span><span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">}),</span> <span class="o">...</span><span class="p">}</span>
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">candidates</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span><span class="o">...</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span><span class="o">...</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;a3&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span> <span class="o">...</span><span class="p">}</span>
+<span class="n">voters</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="s1">&#39;v1&#39;</span><span class="p">,{</span><span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">}),</span> <span class="p">(</span><span class="s1">&#39;v2&#39;</span><span class="p">,{</span><span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">}),</span> <span class="o">...</span><span class="p">}</span>
 <span class="c1">## each voter specifies a linearly ranked list of candidates</span>
 <span class="c1">## from the best to the worst (without ties</span>
 <span class="n">linearBallot</span> <span class="o">=</span> <span class="p">{</span>
-<span class="s1">&#39;1&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
-<span class="s1">&#39;2&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+<span class="s1">&#39;v1&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span><span class="s1">&#39;a3&#39;</span><span class="p">,</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+<span class="s1">&#39;v2&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span><span class="s1">&#39;a3&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
 <span class="o">...</span>
 <span class="p">}</span>
 </pre></div>
@@ -1647,11 +1647,11 @@
 12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">votingDigraphs</span> <span class="kn">import</span> <span class="n">RandomLinearVotingProfile</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">candidates</span>
-<span class="go">{&#39;a2&#39;: {&#39;name&#39;: &#39;a2&#39;}, &#39;a3&#39;: {&#39;name&#39;: &#39;a3&#39;}, &#39;a1&#39;: {&#39;name&#39;: &#39;a1&#39;}}</span>
+<span class="go">OrderedDict([&#39;a1&#39;,{&#39;name&#39;:&#39;a1}), (&#39;a2&#39;,{&#39;name&#39;:&#39;a2&#39;}), (&#39;a3&#39;:{&#39;name&#39;:&#39;a3&#39;})])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">voters</span>
-<span class="go">{&#39;v4&#39;: {&#39;weight&#39;: 1.0}, &#39;v3&#39;: {&#39;weight&#39;: 1.0},</span>
-<span class="go"> &#39;v1&#39;: {&#39;weight&#39;: 1.0}, &#39;v5&#39;: {&#39;weight&#39;: 1.0},</span>
-<span class="go"> &#39;v2&#39;: {&#39;weight&#39;: 1.0}}</span>
+<span class="go">OrderedDict([(&#39;v1&#39;,{&#39;weight&#39;: 1.0}), (&#39;v2&#39;:{&#39;weight&#39;: 1.0}),</span>
+<span class="go"> (&#39;v3&#39;,{&#39;weight&#39;: 1.0}), (&#39;v4&#39;:{&#39;weight&#39;: 1.0}),</span>
+<span class="go"> (&#39;v5&#39;,{&#39;weight&#39;: 1.0})])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">linearBallot</span>
 <span class="go">{&#39;v4&#39;: [&#39;a1&#39;, &#39;a3&#39;, &#39;a2&#39;], &#39;v3&#39;: [&#39;a1&#39;, &#39;a3&#39;, &#39;a2&#39;], &#39;v1&#39;: [&#39;a1&#39;, &#39;a2&#39;, &#39;a3&#39;],</span>
 <span class="go"> &#39;v5&#39;: [&#39;a2&#39;, &#39;a3&#39;, &#39;a1&#39;], &#39;v2&#39;: [&#39;a3&#39;, &#39;a2&#39;, &#39;a1&#39;]}</span>
@@ -1669,11 +1669,11 @@
 7
 8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">showLinearBallots</span><span class="p">()</span>
 <span class="go">voters(weight)       candidates rankings</span>
-<span class="go">v4(1.0):     [&#39;a1&#39;, &#39;a2&#39;, &#39;a3&#39;]</span>
-<span class="go">v3(1.0):     [&#39;a1&#39;, &#39;a3&#39;, &#39;a2&#39;]</span>
 <span class="go">v1(1.0):     [&#39;a2&#39;, &#39;a1&#39;, &#39;a3&#39;]</span>
-<span class="go">v5(1.0):     [&#39;a3&#39;, &#39;a1&#39;, &#39;a2&#39;]</span>
 <span class="go">v2(1.0):     [&#39;a3&#39;, &#39;a1&#39;, &#39;a2&#39;]</span>
+<span class="go">v3(1.0):     [&#39;a1&#39;, &#39;a3&#39;, &#39;a2&#39;]</span>
+<span class="go">v4(1.0):     [&#39;a1&#39;, &#39;a2&#39;, &#39;a3&#39;]</span>
+<span class="go">v5(1.0):     [&#39;a3&#39;, &#39;a1&#39;, &#39;a2&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
 </pre></div>
 </td></tr></table></div>
