@@ -919,10 +919,10 @@ Computing the winner of an election
 Linear voting profiles
 ......................
 
-The :ref:`votingDigraphs-label` provides resources for handling election results [ADT-L2]_, like the :py:class:`votingDigraphs.LinearVotingProfile` class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two Python dictionaries, one for the candidates and another one for the linear ballots::
+The :ref:`votingDigraphs-label` provides resources for handling election results [ADT-L2]_, like the :py:class:`votingDigraphs.LinearVotingProfile` class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two ordered dictionaries, one for the voters and another one for the candidates. The linear ballots are stored in a standard dictionary::
 
-    candidates = {'a': ,'b':  ,'c', ..., ...}
-    voters = {'1':{'weight':1.0},'2':{'weight':1.0}, ...}
+    candidates = OrderedDict([('a',...), ('b',...), ('c', ...), ...}
+    voters = OrderedDict([('1',{'weight':1.0}), ('2',{'weight':1.0}), ...}
     ## each voter specifies a linearly ranked list of candidates
     ## from the best to the worst (without ties
     linearBallot = {
