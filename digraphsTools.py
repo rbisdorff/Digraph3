@@ -144,6 +144,7 @@ def powerset(S):
         for X in powerset(E):
             yield set([e]) | X
             yield X
+
 # generate the Gray code of length n by middle reflection
 # RB Feb 2017
 def grayCode(n):
@@ -163,6 +164,28 @@ def grayCode(n):
         G = _grayReflection(G)
     return G
 
+def generateGrayCode(n):
+    a = [0 for j in range(n)]
+    ainf = 0
+    n2 = 2**n 
+    for i in range(n2):
+        #print(i, a)
+        a1 = a.copy()
+        yield a1
+        ainf = 1 - ainf
+        if ainf == 1:
+            j = 0
+        else:
+            for j in range(1,n):
+                if a[j-1] == 1:
+                    break
+            #print(j)
+        if j < n:
+            a[j] = 1 - a[j]
+        else:
+            break
+        
+        
 # transforms a ranking (list from best to worst) into
 # a preorder ( a list of list from worst to best)
 def ranking2preorder(R):
@@ -493,7 +516,8 @@ def total_size(o, handlers={}, verbose=False):
 if __name__ == '__main__':
     ######  scratch pad for testing the module components
    
-    print(grayCode(5))
+    print(grayCode(3))
+    generateGrayCode(3)
     
     from outrankingDigraphs import *
     t = RandomPerformanceTableau()
