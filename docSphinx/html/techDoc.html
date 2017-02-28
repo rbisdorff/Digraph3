@@ -7278,88 +7278,6 @@ disjunctive fusion (omax operator) of a list of rankings.</p>
 </div>
 <div class="section" id="module-digraphsTools">
 <span id="digraphstools-module"></span><span id="digraphstools-label"></span><h2>digraphsTools module<a class="headerlink" href="#module-digraphsTools" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="digraphsTools.Arithmetics">
-<em class="property">class </em><code class="descclassname">digraphsTools.</code><code class="descname">Arithmetics</code><a class="reference internal" href="_modules/digraphsTools.html#Arithmetics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.Arithmetics" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
-<p>Tools gathered from the internet for doing arithmetics.</p>
-<dl class="method">
-<dt id="digraphsTools.Arithmetics.bezout">
-<code class="descname">bezout</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#Arithmetics.bezout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.Arithmetics.bezout" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders d = gcd(a,b) and the
-Bezout coefficient x, y such that
-d = ax + by.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="digraphsTools.Arithmetics.factorization">
-<code class="descname">factorization</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#Arithmetics.factorization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.Arithmetics.factorization" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="digraphsTools.Arithmetics.gcd">
-<code class="descname">gcd</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#Arithmetics.gcd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.Arithmetics.gcd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the greatest common divisor of a and b.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="digraphsTools.Arithmetics.isprime">
-<code class="descname">isprime</code><span class="sig-paren">(</span><em>n</em>, <em>precision=7</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#Arithmetics.isprime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.Arithmetics.isprime" title="Permalink to this definition">¶</a></dt>
-<dd><p><a class="reference external" href="http://en.wikipedia.org/wiki/Miller-Rabin_primality_test#Algorithm_and_running_time">http://en.wikipedia.org/wiki/Miller-Rabin_primality_test#Algorithm_and_running_time</a></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="digraphsTools.Arithmetics.lcm">
-<code class="descname">lcm</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#Arithmetics.lcm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.Arithmetics.lcm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the least common multiple of a and b.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="digraphsTools.Arithmetics.pollard_brent">
-<code class="descname">pollard_brent</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#Arithmetics.pollard_brent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.Arithmetics.pollard_brent" title="Permalink to this definition">¶</a></dt>
-<dd><p><a class="reference external" href="https://comeoncodeon.wordpress.com/2010/09/18/pollard-rho-brent-integer-factorization/">https://comeoncodeon.wordpress.com/2010/09/18/pollard-rho-brent-integer-factorization/</a></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="digraphsTools.Arithmetics.primefactors">
-<code class="descname">primefactors</code><span class="sig-paren">(</span><em>n</em>, <em>sort=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#Arithmetics.primefactors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.Arithmetics.primefactors" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="digraphsTools.Arithmetics.primesbelow">
-<code class="descname">primesbelow</code><span class="sig-paren">(</span><em>N</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#Arithmetics.primesbelow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.Arithmetics.primesbelow" title="Permalink to this definition">¶</a></dt>
-<dd><p><a class="reference external" href="http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188">http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188</a>
-Input N&gt;=6, Returns a list of primes, 2 &lt;= p &lt; N</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="digraphsTools.Arithmetics.solPartEqnDioph">
-<code class="descname">solPartEqnDioph</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>c</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#Arithmetics.solPartEqnDioph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.Arithmetics.solPartEqnDioph" title="Permalink to this definition">¶</a></dt>
-<dd><p>renders a particular integer solution of the Diophantian equation
-ax + by = c.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="digraphsTools.Arithmetics.totient">
-<code class="descname">totient</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#Arithmetics.totient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.Arithmetics.totient" title="Permalink to this definition">¶</a></dt>
-<dd><p>Implements the totient function rendering
-Euler&#8217;s number of coprime elements a in Zn.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="digraphsTools.Arithmetics.zn_squareroots">
-<code class="descname">zn_squareroots</code><span class="sig-paren">(</span><em>n</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#Arithmetics.zn_squareroots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.Arithmetics.zn_squareroots" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the quadratic residues of Zn as a dictionary.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="digraphsTools.Arithmetics.zn_units">
-<code class="descname">zn_units</code><span class="sig-paren">(</span><em>n</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#Arithmetics.zn_units"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.Arithmetics.zn_units" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the set of units of Zn.</p>
-</dd></dl>
-
-</dd></dl>
-
 <dl class="function">
 <dt id="digraphsTools.all_perms">
 <code class="descclassname">digraphsTools.</code><code class="descname">all_perms</code><span class="sig-paren">(</span><em>str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#all_perms"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.all_perms" title="Permalink to this definition">¶</a></dt>
@@ -7376,6 +7294,11 @@ Euler&#8217;s number of coprime elements a in Zn.</p>
 </pre></div>
 </div>
 </dd></dl>
+
+<dl class="function">
+<dt id="digraphsTools.grayCode">
+<code class="descclassname">digraphsTools.</code><code class="descname">grayCode</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#grayCode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.grayCode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="function">
 <dt id="digraphsTools.omax">
