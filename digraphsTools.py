@@ -570,7 +570,16 @@ if __name__ == '__main__':
     #print(list(generateBipolarGrayCode(4)))
     print(list(generateGrayCode(4)))
     print(list(generateLooplessGrayCode(4)))
-    
+
+    X = list(range(4))
+    n = len(X)
+    for g in generateGrayCode(n):
+        Xg = set()
+        for i in range(n):
+            if g[i] == 1:
+                Xg.add(X[i])
+        print(Xg)
+        
     from outrankingDigraphs import *
     t = RandomPerformanceTableau()
     g = BipolarOutrankingDigraph(t)
