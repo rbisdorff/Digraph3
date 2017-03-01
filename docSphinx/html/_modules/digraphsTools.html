@@ -194,6 +194,7 @@
         <span class="k">for</span> <span class="n">X</span> <span class="ow">in</span> <span class="n">powerset</span><span class="p">(</span><span class="n">E</span><span class="p">):</span>
             <span class="k">yield</span> <span class="nb">set</span><span class="p">([</span><span class="n">e</span><span class="p">])</span> <span class="o">|</span> <span class="n">X</span>
             <span class="k">yield</span> <span class="n">X</span></div>
+
 <span class="c1"># generate the Gray code of length n by middle reflection</span>
 <span class="c1"># RB Feb 2017</span>
 <div class="viewcode-block" id="grayCode"><a class="viewcode-back" href="../techDoc.html#digraphsTools.grayCode">[docs]</a><span class="k">def</span> <span class="nf">grayCode</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -213,6 +214,28 @@
         <span class="n">G</span> <span class="o">=</span> <span class="n">_grayReflection</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">G</span></div>
 
+<div class="viewcode-block" id="generateGrayCode"><a class="viewcode-back" href="../techDoc.html#digraphsTools.generateGrayCode">[docs]</a><span class="k">def</span> <span class="nf">generateGrayCode</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+    <span class="n">ainf</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">n2</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="n">n</span> 
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n2</span><span class="p">):</span>
+        <span class="c1">#print(i, a)</span>
+        <span class="n">a1</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">yield</span> <span class="n">a1</span>
+        <span class="n">ainf</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">ainf</span>
+        <span class="k">if</span> <span class="n">ainf</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">break</span>
+            <span class="c1">#print(j)</span>
+        <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+            <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">break</span></div>
+        
+        
 <span class="c1"># transforms a ranking (list from best to worst) into</span>
 <span class="c1"># a preorder ( a list of list from worst to best)</span>
 <div class="viewcode-block" id="ranking2preorder"><a class="viewcode-back" href="../techDoc.html#digraphsTools.ranking2preorder">[docs]</a><span class="k">def</span> <span class="nf">ranking2preorder</span><span class="p">(</span><span class="n">R</span><span class="p">):</span>
@@ -543,7 +566,8 @@
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="c1">######  scratch pad for testing the module components</span>
    
-    <span class="nb">print</span><span class="p">(</span><span class="n">grayCode</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">grayCode</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+    <span class="n">generateGrayCode</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
     
     <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">()</span>

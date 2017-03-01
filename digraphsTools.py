@@ -164,7 +164,12 @@ def grayCode(n):
         G = _grayReflection(G)
     return G
 
+#@timefn
 def generateGrayCode(n):
+    """
+    Knuth ACP (4) 7.2.1.1. p.6
+    Algorithm G
+    """
     a = [0 for j in range(n)]
     ainf = 0
     n2 = 2**n 
@@ -184,7 +189,52 @@ def generateGrayCode(n):
             a[j] = 1 - a[j]
         else:
             break
-        
+
+#@timefn
+def generateLooplessGrayCode(n):
+    """
+    Knuth ACP (4) 7.2.1.1. p.7
+    Algorithm L
+    """
+    a = [0 for j in range(n)]
+    f = [j for j in range(n+1)]
+    n2 = 2**n 
+    for i in range(n2):
+        a1 = a.copy()
+        yield a1
+        j = f[0]
+        f[0] = 0
+        if j == n:
+            break
+        else:
+            f[j] = f[j+1]
+            f[j+1] = j+1
+        a[j] = 1 - a[j]
+
+def generateBipolarGrayCode(n):
+    """
+    Bipolar version of generateGrayCode.
+    X is a partially determined -1 vector.
+    """
+    a = [-1 for j in range(n)]
+    ainf = -1
+    n2 = 2**n 
+    for i in range(n2):
+        a1 = a.copy()
+        yield a1
+        ainf = -ainf
+        if ainf == 1:
+            j = 0
+        else:
+            for j in range(1,n):
+                if a[j-1] == 1:
+                    break
+             #print(j)
+        if j < n:
+            a[j] = -a[j]
+        else:
+            break
+     
         
 # transforms a ranking (list from best to worst) into
 # a preorder ( a list of list from worst to best)
@@ -516,8 +566,10 @@ def total_size(o, handlers={}, verbose=False):
 if __name__ == '__main__':
     ######  scratch pad for testing the module components
    
-    print(grayCode(3))
-    generateGrayCode(3)
+    print(grayCode(4))
+    #print(list(generateBipolarGrayCode(4)))
+    print(list(generateGrayCode(4)))
+    print(list(generateLooplessGrayCode(4)))
     
     from outrankingDigraphs import *
     t = RandomPerformanceTableau()
