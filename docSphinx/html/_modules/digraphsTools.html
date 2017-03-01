@@ -214,7 +214,12 @@
         <span class="n">G</span> <span class="o">=</span> <span class="n">_grayReflection</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">G</span></div>
 
+<span class="c1">#@timefn</span>
 <div class="viewcode-block" id="generateGrayCode"><a class="viewcode-back" href="../techDoc.html#digraphsTools.generateGrayCode">[docs]</a><span class="k">def</span> <span class="nf">generateGrayCode</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Knuth ACP (4) 7.2.1.1. p.6</span>
+<span class="sd">    Algorithm G</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
     <span class="n">ainf</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">n2</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="n">n</span> 
@@ -234,7 +239,52 @@
             <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">break</span></div>
-        
+
+<span class="c1">#@timefn</span>
+<div class="viewcode-block" id="generateLooplessGrayCode"><a class="viewcode-back" href="../techDoc.html#digraphsTools.generateLooplessGrayCode">[docs]</a><span class="k">def</span> <span class="nf">generateLooplessGrayCode</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Knuth ACP (4) 7.2.1.1. p.7</span>
+<span class="sd">    Algorithm L</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="n">j</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="n">n2</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="n">n</span> 
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n2</span><span class="p">):</span>
+        <span class="n">a1</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">yield</span> <span class="n">a1</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span>
+        <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="generateBipolarGrayCode"><a class="viewcode-back" href="../techDoc.html#digraphsTools.generateBipolarGrayCode">[docs]</a><span class="k">def</span> <span class="nf">generateBipolarGrayCode</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Bipolar version of generateGrayCode.</span>
+<span class="sd">    X is a partially determined -1 vector.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+    <span class="n">ainf</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">n2</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="n">n</span> 
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n2</span><span class="p">):</span>
+        <span class="n">a1</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">yield</span> <span class="n">a1</span>
+        <span class="n">ainf</span> <span class="o">=</span> <span class="o">-</span><span class="n">ainf</span>
+        <span class="k">if</span> <span class="n">ainf</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">break</span>
+             <span class="c1">#print(j)</span>
+        <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+            <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">break</span></div>
+     
         
 <span class="c1"># transforms a ranking (list from best to worst) into</span>
 <span class="c1"># a preorder ( a list of list from worst to best)</span>
@@ -566,8 +616,10 @@
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="c1">######  scratch pad for testing the module components</span>
    
-    <span class="nb">print</span><span class="p">(</span><span class="n">grayCode</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
-    <span class="n">generateGrayCode</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">grayCode</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+    <span class="c1">#print(list(generateBipolarGrayCode(4)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">generateGrayCode</span><span class="p">(</span><span class="mi">4</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">generateLooplessGrayCode</span><span class="p">(</span><span class="mi">4</span><span class="p">)))</span>
     
     <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">()</span>
