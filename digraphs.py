@@ -497,7 +497,7 @@ class Digraph(object):
     Genuine root class of all Digraph3 modules.
     See `tutorial working with the digraphs module <http://leopold-loewenheim.uni.lu/docDigraph3/tutorial.html#digraph-object-structure>`_ 
 
-    All :py:class:`digraphs.Digraph` objects *dg* contain at least the following components: 
+    All instances of the :py:class:`digraphs.Digraph` class contain at least the following components: 
 
     1. A collection of digraph nodes called **actions** (decision alternatives): a list, set or (ordered) dictionary of nodes with 'name' and 'shortname' attributes,
     2. A logical characteristic **valuationdomain**, a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true),
