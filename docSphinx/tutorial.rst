@@ -2387,7 +2387,7 @@ In the coding example, we generate for instance, by using multiprocessing techni
     Ordering          : 0.00000
     <class 'sparseOutrankingDigraphs.PreRankedOutrankingDigraph'> instance
 
-The total run time of the :py:class:`PreRankedOutrankingDigraph` constructor (see class documentation `<http://leopold-loewenheim.uni.lu/docDigraph3/techDoc.html#module-sparseOutrankingDigraphs>`_ ) is less than a fifth of a second. The corresponding multiple criteria deciles sorting leads to 20 quantiles equivalence classes. The corresponding pre-ranked decomposition may be visualized as follows::
+The total run time of the :py:class:`sparseOutrankingDigraphs.PreRankedOutrankingDigraph` constructor is less than a fifth of a second. The corresponding multiple criteria deciles sorting leads to 20 quantiles equivalence classes. The corresponding pre-ranked decomposition may be visualized as follows::
 
     >>> bg.showDecomposition()
     *--- quantiles decomposition in decreasing order---*
