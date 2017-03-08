@@ -2131,21 +2131,21 @@ To estimate how difficult this ranking problem may be, we can have a look at the
    :width: 400 px
    :align: center
 
-The shown strict outranking relation is apparently not transitive: for instance, alternative *a9* outranks alternative *a5* and alternative *a5* outranks *a2*, however *a9* does not outrank *a2*. We may compute the transitivity degree of the outranking digraph, ie the ratio of the number of outranking arcs over the number of arcs of the transitive closue of the digraph *g*::
+The shown strict outranking relation is apparently not transitive: for instance, alternative *a9* outranks alternative *a5* and alternative *a5* outranks *a2*, however *a9* does not outrank *a2*. We may compute the transitivity degree of the outranking digraph, ie the ratio of the number of outranking arcs over the number of arcs of the transitive closue of the digraph *gcd*::
 
-    >>> g.computeTransitivityDegree()
+    >>> gcd.computeTransitivityDegree()
     Decimal('0.508')
     
 The outranking relation is hence very far from being transitive; a serious problem when a linear ordering of the decision alternatives is looked for. Let us furthermore see if there are any cyclic outrankings::
     
-    >>> len(g.computeChordlessCircuits())
+    >>> len(gcd.computeChordlessCircuits())
     1
-    >>> g.showChordlessCircuits()
+    >>> gcd.showChordlessCircuits()
     *---- Chordless circuits ----*    
     ['a4', 'a9', 'a8'] , credibility : 0.024
 
 
-There is one chordless circuit detected in the given outranking digraph *g*, namely *a4* outranks *a9*, the latter outranks *a8*, and *a8* outranks again *a4*. Any potential linear ordering of these three alternatives will, in fact, always contradict somehow the given outranking relation.
+There is one chordless circuit detected in the given strict outranking digraph *gcd*, namely *a4* outranks *a9*, the latter outranks *a8*, and *a8* outranks again *a4*. Any potential linear ordering of these three alternatives will, in fact, always contradict somehow the given outranking relation.
 
 Several heuristic ranking rules have been proposed for constructing a linear ordering which is closest in some specific sense to a given outranking relation.
 

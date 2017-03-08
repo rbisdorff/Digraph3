@@ -3737,8 +3737,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 <a class="reference internal image-reference" href="_images/rankingTutorial.png"><img alt="_images/rankingTutorial.png" class="align-center" src="_images/rankingTutorial.png" style="width: 400px;" /></a>
-<p>The shown strict outranking relation is apparently not transitive: for instance, alternative <em>a9</em> outranks alternative <em>a5</em> and alternative <em>a5</em> outranks <em>a2</em>, however <em>a9</em> does not outrank <em>a2</em>. We may compute the transitivity degree of the outranking digraph, ie the ratio of the number of outranking arcs over the number of arcs of the transitive closue of the digraph <em>g</em>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span>
+<p>The shown strict outranking relation is apparently not transitive: for instance, alternative <em>a9</em> outranks alternative <em>a5</em> and alternative <em>a5</em> outranks <em>a2</em>, however <em>a9</em> does not outrank <em>a2</em>. We may compute the transitivity degree of the outranking digraph, ie the ratio of the number of outranking arcs over the number of arcs of the transitive closue of the digraph <em>gcd</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span>
 <span class="go">Decimal(&#39;0.508&#39;)</span>
 </pre></div>
 </div>
@@ -3747,14 +3747,14 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 2
 3
 4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeChordlessCircuits</span><span class="p">())</span>
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">gcd</span><span class="o">.</span><span class="n">computeChordlessCircuits</span><span class="p">())</span>
 <span class="go">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showChordlessCircuits</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">showChordlessCircuits</span><span class="p">()</span>
 <span class="go">*---- Chordless circuits ----*</span>
 <span class="go">[&#39;a4&#39;, &#39;a9&#39;, &#39;a8&#39;] , credibility : 0.024</span>
 </pre></div>
 </td></tr></table></div>
-<p>There is one chordless circuit detected in the given outranking digraph <em>g</em>, namely <em>a4</em> outranks <em>a9</em>, the latter outranks <em>a8</em>, and <em>a8</em> outranks again <em>a4</em>. Any potential linear ordering of these three alternatives will, in fact, always contradict somehow the given outranking relation.</p>
+<p>There is one chordless circuit detected in the given strict outranking digraph <em>gcd</em>, namely <em>a4</em> outranks <em>a9</em>, the latter outranks <em>a8</em>, and <em>a8</em> outranks again <em>a4</em>. Any potential linear ordering of these three alternatives will, in fact, always contradict somehow the given outranking relation.</p>
 <p>Several heuristic ranking rules have been proposed for constructing a linear ordering which is closest in some specific sense to a given outranking relation.</p>
 <p>The Digraph3 resources provide some of the most common of these ranking rules, like Copeland&#8217;s, Kemeny&#8217;s, Slater&#8217;s, Kohler and Tideman&#8217;s ranking rules.</p>
 </div>
