@@ -192,7 +192,7 @@ Back to the :ref:`Technical-label`
 votingDigraphs module
 ---------------------
 
-A tutorial with coding examples is available here: :ref:`VotingDigraphs-label`
+A tutorial with coding examples is available here: :ref:`LinearVoting-Tutorial-label`
 
 .. automodule:: votingDigraphs
    :member-order: alphabetical
