@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module digraphsTools</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>digraphsTools</strong></big></big> (version Branch: 3.5 $)</font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/digraphsTools.py">/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/digraphsTools.py</a></font></td></tr></table>
+    <p><tt>#&nbsp;Python3+&nbsp;implementation&nbsp;of&nbsp;Digraph3&nbsp;tools<br>
+#&nbsp;Copyright&nbsp;(C)&nbsp;2006-2013&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
+#<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;it&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;as&nbsp;published&nbsp;by<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation;&nbsp;either&nbsp;version&nbsp;3&nbsp;of&nbsp;the&nbsp;License,&nbsp;or<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;(at&nbsp;your&nbsp;option)&nbsp;any&nbsp;later&nbsp;version.<br>
+#<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;distributed&nbsp;in&nbsp;the&nbsp;hope&nbsp;that&nbsp;it&nbsp;will&nbsp;be&nbsp;useful,<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;but&nbsp;WITHOUT&nbsp;ANY&nbsp;WARRANTY;&nbsp;without&nbsp;even&nbsp;the&nbsp;implied&nbsp;warranty&nbsp;of<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;MERCHANTABILITY&nbsp;or&nbsp;FITNESS&nbsp;FOR&nbsp;A&nbsp;PARTICULAR&nbsp;PURPOSE.&nbsp;&nbsp;See&nbsp;the<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;for&nbsp;more&nbsp;details.<br>
+#<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;You&nbsp;should&nbsp;have&nbsp;received&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;along<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;this&nbsp;program;&nbsp;if&nbsp;not,&nbsp;write&nbsp;to&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation,&nbsp;Inc.,<br>
+#&nbsp;&nbsp;&nbsp;&nbsp;51&nbsp;Franklin&nbsp;Street,&nbsp;Fifth&nbsp;Floor,&nbsp;Boston,&nbsp;MA&nbsp;02110-1301&nbsp;USA.<br>
+#<br>
+#######################</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="itertools.html">itertools</a><br>
+</td><td width="25%" valign=top><a href="collections.html">collections</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="digraphsTools.html#Arithmetics">Arithmetics</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Arithmetics">class <strong>Arithmetics</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Tools&nbsp;gathered&nbsp;from&nbsp;the&nbsp;internet&nbsp;for&nbsp;doing&nbsp;arithmetics.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Arithmetics-bezout"><strong>bezout</strong></a>(a, b)</dt><dd><tt>Renders&nbsp;d&nbsp;=&nbsp;<a href="#Arithmetics-gcd">gcd</a>(a,b)&nbsp;and&nbsp;the<br>
+Bezout&nbsp;coefficient&nbsp;x,&nbsp;y&nbsp;such&nbsp;that<br>
+d&nbsp;=&nbsp;ax&nbsp;+&nbsp;by.</tt></dd></dl>
+
+<dl><dt><a name="Arithmetics-factorization"><strong>factorization</strong></a>(n)</dt></dl>
+
+<dl><dt><a name="Arithmetics-gcd"><strong>gcd</strong></a>(a, b)</dt><dd><tt>Renders&nbsp;the&nbsp;greatest&nbsp;common&nbsp;divisor&nbsp;of&nbsp;a&nbsp;and&nbsp;b.</tt></dd></dl>
+
+<dl><dt><a name="Arithmetics-isprime"><strong>isprime</strong></a>(n, precision=7)</dt><dd><tt><a href="http://en.wikipedia.org/wiki/Miller-Rabin_primality_test#Algorithm_and_running_time">http://en.wikipedia.org/wiki/Miller-Rabin_primality_test#Algorithm_and_running_time</a></tt></dd></dl>
+
+<dl><dt><a name="Arithmetics-lcm"><strong>lcm</strong></a>(a, b)</dt><dd><tt>Renders&nbsp;the&nbsp;least&nbsp;common&nbsp;multiple&nbsp;of&nbsp;a&nbsp;and&nbsp;b.</tt></dd></dl>
+
+<dl><dt><a name="Arithmetics-pollard_brent"><strong>pollard_brent</strong></a>(n)</dt><dd><tt>https://comeoncodeon.wordpress.com/2010/09/18/pollard-rho-brent-integer-factorization/</tt></dd></dl>
+
+<dl><dt><a name="Arithmetics-primefactors"><strong>primefactors</strong></a>(n, sort=False)</dt></dl>
+
+<dl><dt><a name="Arithmetics-primesbelow"><strong>primesbelow</strong></a>(N)</dt><dd><tt><a href="http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188">http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188</a><br>
+Input&nbsp;N&gt;=6,&nbsp;Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;primes,&nbsp;2&nbsp;&lt;=&nbsp;p&nbsp;&lt;&nbsp;N</tt></dd></dl>
+
+<dl><dt><a name="Arithmetics-solPartEqnDioph"><strong>solPartEqnDioph</strong></a>(a, b, c)</dt><dd><tt>renders&nbsp;a&nbsp;particular&nbsp;integer&nbsp;solution&nbsp;of&nbsp;the&nbsp;Diophantian&nbsp;equation<br>
+ax&nbsp;+&nbsp;by&nbsp;=&nbsp;c.</tt></dd></dl>
+
+<dl><dt><a name="Arithmetics-totient"><strong>totient</strong></a>(n)</dt><dd><tt>Implements&nbsp;the&nbsp;totient&nbsp;function&nbsp;rendering<br>
+Euler's&nbsp;number&nbsp;of&nbsp;coprime&nbsp;elements&nbsp;a&nbsp;in&nbsp;Zn.</tt></dd></dl>
+
+<dl><dt><a name="Arithmetics-zn_squareroots"><strong>zn_squareroots</strong></a>(n, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;quadratic&nbsp;residues&nbsp;of&nbsp;Zn&nbsp;as&nbsp;a&nbsp;dictionary.</tt></dd></dl>
+
+<dl><dt><a name="Arithmetics-zn_units"><strong>zn_units</strong></a>(n, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;units&nbsp;of&nbsp;Zn.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-all_perms"><strong>all_perms</strong></a>(str)</dt><dd><tt>#&nbsp;generate&nbsp;all&nbsp;permutations&nbsp;from&nbsp;a&nbsp;string&nbsp;or&nbsp;a&nbsp;list<br>
+#&nbsp;From&nbsp;Michael&nbsp;Davies's&nbsp;recipe:<br>
+#&nbsp;<a href="http://snippets.dzone.com/posts/show/753">http://snippets.dzone.com/posts/show/753</a></tt></dd></dl>
+ <dl><dt><a name="-flatten"><strong>flatten</strong></a>(iterable, ltypes=&lt;class 'collections.abc.Iterable'&gt;)</dt><dd><tt>Flattens&nbsp;a&nbsp;list&nbsp;of&nbsp;lists&nbsp;into&nbsp;a&nbsp;flat&nbsp;list.<br>
+&nbsp;<br>
+Main&nbsp;usage:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;listOfLists&nbsp;=&nbsp;[[1,2],[3],[4]]<br>
+&gt;&gt;&gt;&nbsp;[x&nbsp;for&nbsp;x&nbsp;in&nbsp;<a href="#-flatten">flatten</a>(listOfLists)]<br>
+[1,2,3,4]</tt></dd></dl>
+ <dl><dt><a name="-omax"><strong>omax</strong></a>(Med, L, Debug=False)</dt><dd><tt>epistemic&nbsp;disjunction&nbsp;for&nbsp;bipolar&nbsp;outranking&nbsp;characteristics<br>
+computation:&nbsp;Med&nbsp;is&nbsp;the&nbsp;valuation&nbsp;domain&nbsp;median&nbsp;and&nbsp;L&nbsp;is&nbsp;a&nbsp;list&nbsp;of<br>
+r-valued&nbsp;statement&nbsp;characteristics.</tt></dd></dl>
+ <dl><dt><a name="-omin"><strong>omin</strong></a>(Med, L, Debug=False)</dt><dd><tt>epistemic&nbsp;conjunction&nbsp;of&nbsp;a&nbsp;list&nbsp;L&nbsp;of&nbsp;bipolar&nbsp;outranking&nbsp;characteristics.<br>
+Med&nbsp;is&nbsp;the&nbsp;given&nbsp;valuation&nbsp;domain&nbsp;median.</tt></dd></dl>
+ <dl><dt><a name="-powerset"><strong>powerset</strong></a>(S)</dt><dd><tt>Power&nbsp;set&nbsp;generator&nbsp;iterator.<br>
+&nbsp;<br>
+Parameter&nbsp;S&nbsp;may&nbsp;be&nbsp;any&nbsp;<a href="builtins.html#object">object</a>&nbsp;that&nbsp;is&nbsp;accepted&nbsp;as&nbsp;input&nbsp;by&nbsp;the&nbsp;set&nbsp;class&nbsp;constructor.</tt></dd></dl>
+ <dl><dt><a name="-ranking2preorder"><strong>ranking2preorder</strong></a>(R)</dt><dd><tt>#&nbsp;transforms&nbsp;a&nbsp;ranking&nbsp;(list&nbsp;from&nbsp;best&nbsp;to&nbsp;worst)&nbsp;into<br>
+#&nbsp;a&nbsp;preorder&nbsp;(&nbsp;a&nbsp;list&nbsp;of&nbsp;list&nbsp;from&nbsp;worst&nbsp;to&nbsp;best)</tt></dd></dl>
+ <dl><dt><a name="-time"><strong>time</strong></a>(...)</dt><dd><tt><a href="#-time">time</a>()&nbsp;-&gt;&nbsp;floating&nbsp;point&nbsp;number<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;current&nbsp;time&nbsp;in&nbsp;seconds&nbsp;since&nbsp;the&nbsp;Epoch.<br>
+Fractions&nbsp;of&nbsp;a&nbsp;second&nbsp;may&nbsp;be&nbsp;present&nbsp;if&nbsp;the&nbsp;system&nbsp;clock&nbsp;provides&nbsp;them.</tt></dd></dl>
+ <dl><dt><a name="-timefn"><strong>timefn</strong></a>(fn)</dt><dd><tt>A&nbsp;decorator&nbsp;for&nbsp;automate&nbsp;run&nbsp;time&nbsp;measurements<br>
+from&nbsp;"High&nbsp;Performance&nbsp;Python"&nbsp;by&nbsp;&nbsp;M&nbsp;Gorelick&nbsp;&amp;&nbsp;I&nbsp;Ozswald<br>
+O'Reilly&nbsp;2014&nbsp;p.27</tt></dd></dl>
+ <dl><dt><a name="-total_size"><strong>total_size</strong></a>(o, handlers={}, verbose=False)</dt><dd><tt>Returns&nbsp;the&nbsp;approximate&nbsp;memory&nbsp;footprint&nbsp;of&nbsp;an&nbsp;<a href="builtins.html#object">object</a>&nbsp;and&nbsp;all&nbsp;of&nbsp;its&nbsp;contents.<br>
+&nbsp;<br>
+Automatically&nbsp;finds&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;following&nbsp;containers&nbsp;and<br>
+their&nbsp;subclasses:&nbsp;&nbsp;tuple,&nbsp;list,&nbsp;deque,&nbsp;dict,&nbsp;set,&nbsp;frozenset,&nbsp;Digraph&nbsp;and&nbsp;BigDigraph.<br>
+To&nbsp;search&nbsp;other&nbsp;containers,&nbsp;add&nbsp;handlers&nbsp;to&nbsp;iterate&nbsp;over&nbsp;their&nbsp;contents:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;handlers&nbsp;=&nbsp;{SomeContainerClass:&nbsp;iter,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OtherContainerClass:&nbsp;OtherContainerClass.get_elements}<br>
+&nbsp;<br>
+See&nbsp;<a href="http://code.activestate.com/recipes/577504/">http://code.activestate.com/recipes/577504/</a></tt></dd></dl>
+</td></tr></table>
+</body></html>
