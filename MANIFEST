@@ -14,7 +14,7 @@ graphs.py
 randomNumbers.py
 randomDigraphs.py
 randomPerfTabs.py
-sparseOutrankingDigraph.py
+sparseOutrankingDigraphs.py
 htmlmodel.py
 makefile
 MANIFEST
@@ -40,7 +40,7 @@ test/noseTestsLinearOrder.py
 test/noseTestsWeakOrders.py
 test/noseTestsRandomNumbers.py
 test/noseTestsRandomDigraph.py
-test/noseTestsRandomPerfTabs.py
+test/noseTestsRandomPerfTab.py
 test/noseTestsSparseOutrankingDigraph.py
 test/testAVprofile.py
 test/testapprovalvotingprofile.py
