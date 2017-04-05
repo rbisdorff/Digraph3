@@ -348,28 +348,36 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` class provides a generic **performance table model**. A given object of this class consists in:</span>
 
-<span class="sd">     1. a potential set of decision **actions** : an ordered dictionary describing the potential decision actions or alternatives with &#39;name&#39; and &#39;comment&#39; attributes,</span>
-<span class="sd">     2. a coherent family of **criteria**: a ordered dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,</span>
-<span class="sd">     3. the **evaluations**: a dictionary of performance evaluations for each decision action or alternative on each criterion function.</span>
+<span class="sd">     1. a set of potential decision **actions** : an ordered dictionary describing the potential decision actions or alternatives with &#39;name&#39; and &#39;comment&#39; attributes,</span>
+<span class="sd">     2. an optional set of decision **objectives**: an ordered dictionary with name, comment, weight and list of concerned criteria per objective,</span>
+<span class="sd">     3. a coherent family of **criteria**: a ordered dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,</span>
+<span class="sd">     4. the **evaluations**: a dictionary of performance evaluations for each decision action or alternative on each criterion function.</span>
 
 <span class="sd">Structure::</span>
 
-<span class="sd">       actions = OrderedDict[(&#39;a1&#39;, {&#39;name&#39;: ..., &#39;comment&#39;: ...}),</span>
+<span class="sd">       actions = OrderedDict8[(&#39;a1&#39;, {&#39;name&#39;: ..., &#39;comment&#39;: ...}),</span>
 <span class="sd">                  (&#39;a2&#39;, {&#39;name&#39;: ..., &#39;comment&#39;: ...}),</span>
 <span class="sd">                  ...])</span>
+<span class="sd">       objectives = OrderedDict8[</span>
+<span class="sd">                   (&#39;obj1&#39;, {&#39;name&#39;: ..., &#39;comment&#39;: ..., &#39;weight&#39;: ..., &#39;criteria&#39;: [&#39;g1&#39;, ...]}),</span>
+<span class="sd">                   (&#39;obj2&#39;, {&#39;name&#39;: ..., &#39;comment&#39;, ..., &#39;weight&#39;: ..., &#39;criteria&#39;: [&#39;g2&#39;, ...]}),</span>
+<span class="sd">                   ...])</span>
 <span class="sd">       criteria = OrderedDict([</span>
 <span class="sd">            (&#39;g1&#39;, {&#39;weight&#39;:Decimal(&quot;3.00&quot;),</span>
 <span class="sd">                    &#39;scale&#39;: (Decimal(&quot;0.00&quot;),Decimal(&quot;100.00&quot;)),</span>
 <span class="sd">                    &#39;thresholds&#39; : {&#39;pref&#39;: (Decimal(&#39;20.0&#39;), Decimal(&#39;0.0&#39;)),</span>
 <span class="sd">                                    &#39;ind&#39;: (Decimal(&#39;10.0&#39;), Decimal(&#39;0.0&#39;)),</span>
-<span class="sd">                                    &#39;veto&#39;: (Decimal(&#39;80.0&#39;), Decimal(&#39;0.0&#39;))}</span>
+<span class="sd">                                    &#39;veto&#39;: (Decimal(&#39;80.0&#39;), Decimal(&#39;0.0&#39;))},</span>
+<span class="sd">                    &#39;objective&#39;: &#39;obj1&#39;,</span>
 <span class="sd">                    }),</span>
 <span class="sd">            (&#39;g2&#39;, {&#39;weight&#39;:Decimal(&quot;5.00&quot;),</span>
-<span class="sd">                          &#39;scale&#39;: (Decimal(&quot;0.00&quot;),Decimal(&quot;100.00&quot;)),</span>
-<span class="sd">                          &#39;thresholds&#39; : {&#39;pref&#39;: (Decimal(&#39;20.0&#39;), Decimal(&#39;0.0&#39;)),</span>
+<span class="sd">                    &#39;scale&#39;: (Decimal(&quot;0.00&quot;),Decimal(&quot;100.00&quot;)),</span>
+<span class="sd">                    &#39;thresholds&#39; : {&#39;pref&#39;: (Decimal(&#39;20.0&#39;), Decimal(&#39;0.0&#39;)),</span>
 <span class="sd">                                          &#39;ind&#39;: (Decimal(&#39;10.0&#39;), Decimal(&#39;0.0&#39;)),</span>
-<span class="sd">                                          &#39;veto&#39;: (Decimal(&#39;80.0&#39;), Decimal(&#39;0.0&#39;))}}),</span>
-<span class="sd">                     ...])</span>
+<span class="sd">                                          &#39;veto&#39;: (Decimal(&#39;80.0&#39;), Decimal(&#39;0.0&#39;))},</span>
+<span class="sd">                    &#39;objective&#39;: &#39;obj2&#39;,</span>
+<span class="sd">                    }),</span>
+<span class="sd">            ...])</span>
 <span class="sd">       evaluation = {&#39;g1&#39;: {&#39;a1&#39;:Decimal(&quot;57.28&quot;),&#39;a2&#39;:Decimal(&quot;99.85&quot;), ...},</span>
 <span class="sd">                     &#39;g2&#39;: {&#39;a1&#39;:Decimal(&quot;88.12&quot;),&#39;a2&#39;:Decimal(&quot;33.25&quot;), ...},</span>
 <span class="sd">                     ...}</span>

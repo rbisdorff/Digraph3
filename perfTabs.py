@@ -298,28 +298,36 @@ class PerformanceTableau(object):
     """
 In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` class provides a generic **performance table model**. A given object of this class consists in:
 
-     1. a potential set of decision **actions** : an ordered dictionary describing the potential decision actions or alternatives with 'name' and 'comment' attributes,
-     2. a coherent family of **criteria**: a ordered dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,
-     3. the **evaluations**: a dictionary of performance evaluations for each decision action or alternative on each criterion function.
+     1. a set of potential decision **actions** : an ordered dictionary describing the potential decision actions or alternatives with 'name' and 'comment' attributes,
+     2. an optional set of decision **objectives**: an ordered dictionary with name, comment, weight and list of concerned criteria per objective,
+     3. a coherent family of **criteria**: a ordered dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,
+     4. the **evaluations**: a dictionary of performance evaluations for each decision action or alternative on each criterion function.
 
 Structure::
 
-       actions = OrderedDict[('a1', {'name': ..., 'comment': ...}),
+       actions = OrderedDict8[('a1', {'name': ..., 'comment': ...}),
                   ('a2', {'name': ..., 'comment': ...}),
                   ...])
+       objectives = OrderedDict8[
+                   ('obj1', {'name': ..., 'comment': ..., 'weight': ..., 'criteria': ['g1', ...]}),
+                   ('obj2', {'name': ..., 'comment', ..., 'weight': ..., 'criteria': ['g2', ...]}),
+                   ...])
        criteria = OrderedDict([
             ('g1', {'weight':Decimal("3.00"),
                     'scale': (Decimal("0.00"),Decimal("100.00")),
                     'thresholds' : {'pref': (Decimal('20.0'), Decimal('0.0')),
                                     'ind': (Decimal('10.0'), Decimal('0.0')),
-                                    'veto': (Decimal('80.0'), Decimal('0.0'))}
+                                    'veto': (Decimal('80.0'), Decimal('0.0'))},
+                    'objective': 'obj1',
                     }),
             ('g2', {'weight':Decimal("5.00"),
-                          'scale': (Decimal("0.00"),Decimal("100.00")),
-                          'thresholds' : {'pref': (Decimal('20.0'), Decimal('0.0')),
+                    'scale': (Decimal("0.00"),Decimal("100.00")),
+                    'thresholds' : {'pref': (Decimal('20.0'), Decimal('0.0')),
                                           'ind': (Decimal('10.0'), Decimal('0.0')),
-                                          'veto': (Decimal('80.0'), Decimal('0.0'))}}),
-                     ...])
+                                          'veto': (Decimal('80.0'), Decimal('0.0'))},
+                    'objective': 'obj2',
+                    }),
+            ...])
        evaluation = {'g1': {'a1':Decimal("57.28"),'a2':Decimal("99.85"), ...},
                      'g2': {'a1':Decimal("88.12"),'a2':Decimal("33.25"), ...},
                      ...}
