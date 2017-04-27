@@ -3422,9 +3422,18 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </dl>
 <p>We notice in line 7 above that the most significantly supported best choice recommendation is indeed the Condorcet winner <em>D</em> with a majority of 56% of the criteria significance (see line 13). Both other recommendation candidates, as well as the worst choice candidate are not positively validated as best choices. They may or may not be considered so. Alternative <em>A</em>, with extreme contradictory performances, appears both, in a best and a worst choice recommendation (see lines 27 and 37) and seams hence not actually comparable to its competitors.</p>
 <dl class="docutils">
-<dt>The same Rubis best choice recommendation, encoded in XMCDA 2.0 and presented in the default system browser, is provided by the <a class="reference internal" href="techDoc.html#module-xmcda" title="xmcda"><code class="xref py py-mod docutils literal"><span class="pre">xmcda</span></code></a> module:</dt>
+<dt>The same Rubis best choice recommendation, encoded in XMCDA 2.0 and presented in the default system browser, is provided by the <a class="reference internal" href="techDoc.html#module-xmcda" title="xmcda"><code class="xref py py-mod docutils literal"><span class="pre">xmcda</span></code></a> module. The <code class="code docutils literal"><span class="pre">valuationType</span></code> parameter allows to work:</dt>
+<dd><ul class="first last simple">
+<li>on the standard bipolar outranking digraph (valutaionType = &#8216;standard&#8217;),</li>
+<li>ignoring considerable performances differences (valuationType = &#8216;noVeto&#8217;),</li>
+<li>on the confident outranking digraph (valuationType = &#8216;noVeto&#8217;).</li>
+</ul>
+</dd>
+<dt>In a python3 session working in the directory where the XMCDA encoded problem data is stored, we may proceed as follows:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">xmcda</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">xmcda</span><span class="o">.</span><span class="n">showXMCDARubisBestChoiveRecommendation</span><span class="p">(</span><span class="s1">&#39;officeChoice&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xmcda</span><span class="o">.</span><span class="n">showXMCDARubisBestChoiveRecommendation</span><span class="p">(</span>\
+<span class="go">                           prolemFileName=&#39;officeChoice&#39;,\</span>
+<span class="go">                           valuationType=&#39;standard&#39;)</span>
 </pre></div>
 </div>
 </dd>
