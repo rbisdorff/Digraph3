@@ -86,6 +86,7 @@
 using&nbsp;Kruskal's&nbsp;greedy&nbsp;algorithm&nbsp;on&nbsp;the&nbsp;dual&nbsp;valuation.<br>
 &nbsp;<br>
 Example&nbsp;Python&nbsp;session:<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;graphs&nbsp;import&nbsp;*<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#RandomValuationGraph">RandomValuationGraph</a>(seed=2)<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#BestDeterminedSpanningForest-showShort">showShort</a>()<br>
 &nbsp;&nbsp;&nbsp;*----&nbsp;short&nbsp;description&nbsp;of&nbsp;the&nbsp;graph&nbsp;----*<br>
@@ -828,7 +829,7 @@ General&nbsp;structure::<br>
 &nbsp;&nbsp;&nbsp;<br>
 Example&nbsp;python3&nbsp;session:<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;graphs&nbsp;import&nbsp;<a href="#Graph">Graph</a><br>
-&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.5)<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.5)&nbsp;#&nbsp;random&nbsp;instance<br>
 &nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#Graph-showShort">showShort</a>()<br>
 &nbsp;&nbsp;&nbsp;*-----&nbsp;show&nbsp;short&nbsp;--------------*<br>
 &nbsp;&nbsp;&nbsp;*----&nbsp;short&nbsp;description&nbsp;of&nbsp;the&nbsp;graph&nbsp;----*<br>
@@ -1120,6 +1121,7 @@ Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 <td colspan=2><tt>Specialisation&nbsp;of&nbsp;a&nbsp;Gibbs&nbsp;Sampler&nbsp;for&nbsp;the&nbsp;Ising&nbsp;model<br>
 &nbsp;<br>
 Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;graphs&nbsp;import&nbsp;<a href="#GridGraph">GridGraph</a>,&nbsp;<a href="#IsingModel">IsingModel</a><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#GridGraph">GridGraph</a>(n=15,m=15)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#IsingModel-showShort">showShort</a>()<br>
 &nbsp;&nbsp;&nbsp;&nbsp;*-----&nbsp;show&nbsp;short&nbsp;--------------*<br>
@@ -1271,6 +1273,7 @@ Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 that&nbsp;is&nbsp;a&nbsp;random&nbsp;MIS&nbsp;generator.<br>
 &nbsp;<br>
 Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;graphs&nbsp;import&nbsp;<a href="#MISModel">MISModel</a><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;digraphs&nbsp;import&nbsp;CirculantDigraph&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;dg&nbsp;=&nbsp;CirculantDigraph(order=15)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;dg.digraph2Graph()<br>
@@ -1448,6 +1451,7 @@ Metropolis&nbsp;Markov&nbsp;Chain&nbsp;Monte&nbsp;Carlo&nbsp;sampler&nbsp;with&n
 probs&nbsp;=&nbsp;{'v1':&nbsp;x,&nbsp;'v2':&nbsp;y,&nbsp;...}<br>
 &nbsp;<br>
 Usage&nbsp;example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;graphs&nbsp;import&nbsp;*<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Graph">Graph</a>(numberOfVertices=5,edgeProbability=0.5)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#MetropolisChain-showShort">showShort</a>()<br>
 &nbsp;&nbsp;&nbsp;&nbsp;*----&nbsp;short&nbsp;description&nbsp;of&nbsp;the&nbsp;graph&nbsp;----*<br>
@@ -1635,6 +1639,7 @@ Data descriptors inherited from <a href="graphs.html#Graph">Graph</a>:<br>
 nSim&nbsp;simulation&nbsp;steps&nbsp;(default&nbsp;=&nbsp;len(graph.edges)).<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Example&nbsp;3-coloring&nbsp;of&nbsp;a&nbsp;grid&nbsp;6x6&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;graphs&nbsp;import&nbsp;*<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#GridGraph">GridGraph</a>(n=6,m=6)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#Q_Coloring-showShort">showShort</a>()<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#Q_Coloring-exportGraphViz">exportGraphViz</a>()<br>

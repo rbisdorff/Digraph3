@@ -11,7 +11,7 @@
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/votingDigraphs.py">/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/votingDigraphs.py</a></font></td></tr></table>
     <p><tt>#&nbsp;Python&nbsp;3&nbsp;implementation&nbsp;of&nbsp;voting&nbsp;digraphs<br>
 #&nbsp;Refactored&nbsp;from&nbsp;revision&nbsp;1.549&nbsp;of&nbsp;the&nbsp;digraphs&nbsp;module<br>
-#&nbsp;Current&nbsp;revision&nbsp;$Revision:&nbsp;2093&nbsp;$<br>
+#&nbsp;Current&nbsp;revision&nbsp;$Revision:&nbsp;2154&nbsp;$<br>
 #&nbsp;Copyright&nbsp;(C)&nbsp;2011&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
 #<br>
 #&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify<br>
@@ -91,10 +91,10 @@
 &nbsp;<br>
 Structure::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;candidates&nbsp;=&nbsp;{'a':&nbsp;{'name':&nbsp;...},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'b':&nbsp;{'name':&nbsp;...},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...,&nbsp;...}<br>
-&nbsp;&nbsp;&nbsp;&nbsp;voters&nbsp;=&nbsp;{'v1':{'weight':1.0},'v2':{'weight':1.0},&nbsp;...}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;candidates&nbsp;=&nbsp;OrderedDict([('a',&nbsp;{'name':&nbsp;...}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;('b',&nbsp;{'name':&nbsp;...}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...,&nbsp;...])<br>
+&nbsp;&nbsp;&nbsp;&nbsp;voters&nbsp;=&nbsp;OrderedDict([('v1',{'weight':1.0}),('v2':{'weight':1.0}),&nbsp;...])<br>
 &nbsp;&nbsp;&nbsp;&nbsp;##&nbsp;each&nbsp;specifies&nbsp;the&nbsp;subset&nbsp;of&nbsp;candidates&nbsp;he&nbsp;approves&nbsp;on<br>
 &nbsp;&nbsp;&nbsp;&nbsp;approvalBallot&nbsp;=&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'v1'&nbsp;:&nbsp;['b'],<br>
@@ -109,7 +109,7 @@ Structure::<br>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="ApprovalVotingProfile-__init__"><strong>__init__</strong></a>(self, fileVotingProfile=None)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+<dl><dt><a name="ApprovalVotingProfile-__init__"><strong>__init__</strong></a>(self, fileVotingProfile=None, seed=None)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
 
 <dl><dt><a name="ApprovalVotingProfile-computeBallot"><strong>computeBallot</strong></a>(self, approvalEquivalence=False, disapprovalEquivalence=False)</dt><dd><tt>Computes&nbsp;a&nbsp;complete&nbsp;ballot&nbsp;from&nbsp;the&nbsp;approval&nbsp;Ballot.<br>
 &nbsp;<br>
@@ -337,6 +337,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 <dl><dt><a name="CondorcetDigraph-computeConcentrationIndexTrapez"><strong>computeConcentrationIndexTrapez</strong></a>(self, X, N)</dt><dd><tt>Renders&nbsp;the&nbsp;Gini&nbsp;concentration&nbsp;index&nbsp;of&nbsp;the&nbsp;X&nbsp;serie.<br>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
+
+<dl><dt><a name="CondorcetDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#CondorcetDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
@@ -617,6 +619,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="CondorcetDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="CondorcetDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#CondorcetDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="CondorcetDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -669,7 +673,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="CondorcetDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="CondorcetDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="CondorcetDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -1165,8 +1169,8 @@ Data descriptors inherited from <a href="digraphs.html#Digraph">digraphs.Digraph
 &nbsp;<br>
 Structure::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;candidates&nbsp;=&nbsp;{'a':&nbsp;,'b':&nbsp;&nbsp;,'c',&nbsp;...,&nbsp;...}<br>
-&nbsp;&nbsp;&nbsp;&nbsp;voters&nbsp;=&nbsp;{'1':{'weight':1.0},'2':{'weight':1.0},&nbsp;...}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;candidates&nbsp;=&nbsp;OrderedDict([('a',&nbsp;...)&nbsp;,('b',&nbsp;...),('c',&nbsp;...),&nbsp;...])<br>
+&nbsp;&nbsp;&nbsp;&nbsp;voters&nbsp;=&nbsp;OrderedDict([('1',{'weight':1.0}),&nbsp;('2',{'weight':1.0}),&nbsp;...])<br>
 &nbsp;&nbsp;&nbsp;&nbsp;##&nbsp;each&nbsp;specifies&nbsp;a&nbsp;a&nbsp;ranked&nbsp;list&nbsp;of&nbsp;candidates<br>
 &nbsp;&nbsp;&nbsp;&nbsp;##&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst<br>
 &nbsp;&nbsp;&nbsp;&nbsp;linearBallot&nbsp;=&nbsp;{<br>
@@ -1215,7 +1219,7 @@ v3(1.0):&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['a1',&nbsp;'a3',&nbsp;'a2']<br>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="LinearVotingProfile-__init__"><strong>__init__</strong></a>(self, fileVotingProfile=None, numberOfCandidates=5, numberOfVoters=9)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+<dl><dt><a name="LinearVotingProfile-__init__"><strong>__init__</strong></a>(self, fileVotingProfile=None, numberOfCandidates=5, numberOfVoters=9, seed=None)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
 
 <dl><dt><a name="LinearVotingProfile-computeBallot"><strong>computeBallot</strong></a>(self)</dt><dd><tt>Computes&nbsp;a&nbsp;complete&nbsp;ballot&nbsp;from&nbsp;the&nbsp;linear&nbsp;Ballot.</tt></dd></dl>
 
@@ -1279,11 +1283,11 @@ Data descriptors inherited from <a href="votingDigraphs.html#VotingProfile">Voti
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="RandomApprovalVotingProfile-__init__"><strong>__init__</strong></a>(self, numberOfVoters=9, numberOfCandidates=5, minSizeOfBallot=1, maxSizeOfBallot=2)</dt><dd><tt>Random&nbsp;profile&nbsp;creation&nbsp;parameters:<br>
+<dl><dt><a name="RandomApprovalVotingProfile-__init__"><strong>__init__</strong></a>(self, numberOfVoters=9, numberOfCandidates=5, minSizeOfBallot=1, maxSizeOfBallot=2, seed=None)</dt><dd><tt>Random&nbsp;profile&nbsp;creation&nbsp;parameters:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;numberOfVoters=9,&nbsp;numberOfCandidates=5,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;minSizeOfBallot=1,&nbsp;maxSizeOfBallot=2.</tt></dd></dl>
 
-<dl><dt><a name="RandomApprovalVotingProfile-generateRandomApprovalBallot"><strong>generateRandomApprovalBallot</strong></a>(self, minSizeOfBallot, maxSizeOfBallot)</dt><dd><tt>Renders&nbsp;a&nbsp;randomly&nbsp;generated&nbsp;approval&nbsp;ballot.</tt></dd></dl>
+<dl><dt><a name="RandomApprovalVotingProfile-generateRandomApprovalBallot"><strong>generateRandomApprovalBallot</strong></a>(self, minSizeOfBallot, maxSizeOfBallot, seed=None)</dt><dd><tt>Renders&nbsp;a&nbsp;randomly&nbsp;generated&nbsp;approval&nbsp;ballot.</tt></dd></dl>
 
 <hr>
 Methods inherited from <a href="votingDigraphs.html#ApprovalVotingProfile">ApprovalVotingProfile</a>:<br>
@@ -1330,7 +1334,7 @@ Data descriptors inherited from <a href="votingDigraphs.html#VotingProfile">Voti
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="RandomLinearVotingProfile-__init__"><strong>__init__</strong></a>(self, seed=None, numberOfVoters=9, numberOfCandidates=5)</dt><dd><tt>Random&nbsp;profile&nbsp;creation&nbsp;parameters:<br>
+<dl><dt><a name="RandomLinearVotingProfile-__init__"><strong>__init__</strong></a>(self, numberOfVoters=9, numberOfCandidates=5, seed=None)</dt><dd><tt>Random&nbsp;profile&nbsp;creation&nbsp;parameters:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;numberOfVoters=9,&nbsp;numberOfCandidates=5,</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearVotingProfile-generateRandomLinearBallot"><strong>generateRandomLinearBallot</strong></a>(self, seed)</dt><dd><tt>Renders&nbsp;a&nbsp;randomly&nbsp;generated&nbsp;linear&nbsp;ballot.</tt></dd></dl>
@@ -1433,12 +1437,12 @@ Data descriptors inherited from <a href="votingDigraphs.html#VotingProfile">Voti
 &nbsp;<br>
 General&nbsp;structure::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;candidates&nbsp;=&nbsp;{'a':&nbsp;...,'b':&nbsp;...,'c':&nbsp;...,&nbsp;&nbsp;...&nbsp;}<br>
-&nbsp;&nbsp;&nbsp;&nbsp;voters&nbsp;=&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;'1':{'weight':1.0},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;'2':{'weight':1.0},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;candidates&nbsp;=&nbsp;OrderedDict([('a',&nbsp;...),('b',&nbsp;...),('c',&nbsp;...),&nbsp;(&nbsp;...&nbsp;)&nbsp;])<br>
+&nbsp;&nbsp;&nbsp;&nbsp;voters&nbsp;=&nbsp;OrderedDict([<br>
+&nbsp;&nbsp;&nbsp;&nbsp;('1',&nbsp;{'weight':1.0}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;('2',&nbsp;{'weight':1.0}),<br>
 &nbsp;&nbsp;&nbsp;&nbsp;...,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;])<br>
 &nbsp;&nbsp;&nbsp;&nbsp;ballot&nbsp;=&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;voters&nbsp;x&nbsp;candidates&nbsp;x&nbsp;candidates<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'1':&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;bipolar&nbsp;characteristic&nbsp;{-1,0,1}&nbsp;of&nbsp;each&nbsp;voter's<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'a':&nbsp;{&nbsp;'a':0,'b':-1,'c':0,&nbsp;...},&nbsp;&nbsp;&nbsp;#&nbsp;pairwise&nbsp;preferences<br>
@@ -1455,7 +1459,7 @@ General&nbsp;structure::<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%">Methods defined here:<br>
-<dl><dt><a name="VotingProfile-__init__"><strong>__init__</strong></a>(self, fileVotingProfile=None)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+<dl><dt><a name="VotingProfile-__init__"><strong>__init__</strong></a>(self, fileVotingProfile=None, seed=None)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
 
 <dl><dt><a name="VotingProfile-save"><strong>save</strong></a>(self, name='tempVprofile')</dt><dd><tt>Persistant&nbsp;storage&nbsp;of&nbsp;an&nbsp;approval&nbsp;voting&nbsp;profile.</tt></dd></dl>
 

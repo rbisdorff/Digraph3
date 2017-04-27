@@ -30,45 +30,29 @@ from outrankingDigraphs import *
         
 class OutrankingDigraph(Digraph,PerformanceTableau):
     """
-    Abstract class for methods common to all
-    outranking digraphs
-    """
-    def __init__(self,argPerfTab=None,coalition=None,hasNoVeto=False):
-        import copy
-        if isinstance(argPerfTab, (PerformanceTableau,RandomPerformanceTableau)):
-            perfTab = argPerfTab
-        else:
-            if argPerfTab == None:
-                perfTab = RandomPerformanceTableau()
-            else:
-                perfTab = PerformanceTableau(argPerfTab)
-        self.performanceTableau = perfTab
-        self.name = 'rel_' + perfTab.name
-        self.actions = copy.deepcopy(perfTab.actions)
-        Min = Decimal('0.0')
-        Med = Decimal('50.0')
-        Max = Decimal('100.0')
-        self.valuationdomain = {'min':Min,'med':Med,'max':Max}
-        #self.weightPreorder = perfTab.computeWeightPreorder()
-        if coalition == None:
-            criteria = copy.deepcopy(perfTab.criteria)
-        else:
-            criteria = {}
-            for g in coalition:
-                criteria[g] = perfTab.criteria[g]
-        #self.relation = self._constructRelation(criteria,perfTab.evaluation, self.weightPreorder)
-        self.criteria = criteria
-        self.convertWeightFloatToDecimal()
-        self.evaluation = copy.deepcopy(perfTab.evaluation)
-        self.convertEvaluationFloatToDecimal()
-        self.relation = self._constructRelation(criteria,perfTab.evaluation,hasNoVeto=hasNoVeto)
-        methodData = {}
-        methodData['parameter'] = {'valuationType':'normalized','variant':'unipolar'}
-        self.methodData = methodData
-        self.order = len(self.actions)
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
+    Abstract root class for **outranking digraphs** inheritating methods both from the generic :py:class:`digraphs.Digraph`
+    and from the generic :py:class:`perfTabs.PerformanceTableau` root classes.
+    As such, our genuine outranking digraph model is a hybrid object appearing on the one side as digraph with a
+    nodes set (the decision alternatives) and a binary relation (outranking situations) and, on the other side, as
+    a performance tableau with a set of decision alternatives, performance criteria and a table of performance measurements.
 
+    Provides common methods to all specialized models of outranking digraphs, the standard outranking digraph model being provided
+    by the :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class. 
+
+    A given object of this class consists at least in:
+
+    1. a potential set of decision **actions** : an (ordered) dictionary describing the potential decision actions or alternatives with 'name' and 'comment' attributes,
+    2. a coherent family of **criteria**: an (ordered) dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,
+    3. the **evaluations**: a dictionary of performance evaluations for each decision action or alternative on each criterion function. 
+    4. the digraph **valuationdomain**, a dictionary with three entries: the *minimum* (-100, means certainly no link), the *median* (0, means missing information) and the *maximum* characteristic value (+100, means certainly a link),
+    5. the **outranking relation** : a double dictionary defined on the Cartesian product of the set of decision alternatives capturing the credibility of the pairwise *outranking situation* computed on the basis of the performance differences observed between couples of decision alternatives on the given family if criteria functions.   
+
+
+    .. warning::
+
+        Cannot be called directly ! No __init__(self,...) method defined.
+        
+    """
     def computeMarginalCorrelation(self,args,Threading=False,\
                                     nbrOfCPUs=None,Debug=False,
                                     Comments=False):
@@ -293,29 +277,6 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     print(rankingRelation[x][y],rankingRelation[y][x])
         return rankingRelation        
 
-##    def convertWeightFloatToDecimal(self):
-##        """
-##        Convert significance weights from obsolete float format
-##        to decimal.Decimal format.
-##        """
-##        criteria = self.criteria
-##        criteriaList = [x for x in self.criteria]
-##        for g in criteriaList:
-##            criteria[g]['weight'] = Decimal(str(criteria[g]['weight']))
-##        self.criteria = criteria
-##
-##    def convertEvaluationFloatToDecimal(self):
-##        """
-##        Convert evaluations from obsolete float format to decimal format
-##        """
-##        evaluation = self.evaluation
-##        actionsList = [x for x in self.actions]
-##        criteriaList = [x for x in self.criteria]
-##        for g in criteriaList:
-##            for x in actionsList:
-##                evaluation[g][x] = Decimal(str(evaluation[g][x]))
-##        self.evaluation = evaluation
-
     def showCriterionRelationTable(self,criterion, actionsSubset= None):
         """
         prints the relation valuation in actions X actions table format.
@@ -358,9 +319,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     else:
                         value = self.computeCriterionRelation(c,x,y)
                     print('%.1f' % (value), end=' ')
-                print()
-
-                
+                print()         
 
     def computeCriterionRelation(self,c,a,b):
         """
@@ -848,8 +807,6 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         g.gamma = g.gammaSets()
         g.notGamma = g.notGammaSets()
         return g
-
-
         
     def showCriteriaHierarchy(self):
         """
@@ -3727,8 +3684,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
     .. warning::
 
         If Threading is True, WithConcordanceRelation and WithVetoCounts flags are automatically set both to False.
-        Removing this limitation is on the todo list and will be done soon.
-       
+    
     """
     def __repr__(self):
         """
@@ -6594,7 +6550,12 @@ class RandomOutrankingDigraph(RandomBipolarOutrankingDigraph):
         
 class PolarisedOutrankingDigraph(PolarisedDigraph,OutrankingDigraph,PerformanceTableau):
     """
-    polarised Digraph instance for Outranking Digraphs.
+    Specilised :py:class:`digraphs.PolarisedDigraph` instance for Outranking Digraphs.
+
+    .. warning::
+
+        If called with argument *digraph=None*, a RandomBipolarOutrankingDigraph instance is generated first.
+        
     """
     def __init__(self,digraph=None,level=None,KeepValues=True,AlphaCut=False,StrictCut=False):
         import copy
@@ -6721,6 +6682,41 @@ class OrdinalOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
     Specialization of the general OutrankingDigraph class for 
     temporary ordinal outranking digraphs
     """
+    def __init__(self,argPerfTab=None,coalition=None,hasNoVeto=False):
+        """Generic constructor for many outranking digraph models."""
+        import copy
+        if isinstance(argPerfTab, (PerformanceTableau,RandomPerformanceTableau)):
+            perfTab = argPerfTab
+        else:
+            if argPerfTab == None:
+                perfTab = RandomPerformanceTableau()
+            else:
+                perfTab = PerformanceTableau(argPerfTab)
+        self.performanceTableau = perfTab
+        self.name = 'rel_' + perfTab.name
+        self.actions = copy.deepcopy(perfTab.actions)
+        Min = Decimal('0.0')
+        Med = Decimal('50.0')
+        Max = Decimal('100.0')
+        self.valuationdomain = {'min':Min,'med':Med,'max':Max}
+        #self.weightPreorder = perfTab.computeWeightPreorder()
+        if coalition == None:
+            criteria = copy.deepcopy(perfTab.criteria)
+        else:
+            criteria = {}
+            for g in coalition:
+                criteria[g] = perfTab.criteria[g]
+        self.criteria = criteria
+        self.convertWeightFloatToDecimal()
+        self.evaluation = copy.deepcopy(perfTab.evaluation)
+        self.convertEvaluationFloatToDecimal()
+        self.relation = self._constructRelation(criteria,perfTab.evaluation,hasNoVeto=hasNoVeto)
+        methodData = {}
+        methodData['parameter'] = {'valuationType':'decimal','variant':'none'}
+        self.methodData = methodData
+        self.order = len(self.actions)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
     
 
     def _constructRelation(self,criteria,evaluation,hasSymmetricThresholds=True,hasNoVeto=False):
@@ -7039,6 +7035,41 @@ class UnanimousOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
     Specialization of the general OutrankingDigraph class for 
     temporary unanimous outranking digraphs
     """
+    def __init__(self,argPerfTab=None,coalition=None,hasNoVeto=False):
+        """Generic constructor for many outranking digraph models."""
+        import copy
+        if isinstance(argPerfTab, (PerformanceTableau,RandomPerformanceTableau)):
+            perfTab = argPerfTab
+        else:
+            if argPerfTab == None:
+                perfTab = RandomPerformanceTableau()
+            else:
+                perfTab = PerformanceTableau(argPerfTab)
+        self.performanceTableau = perfTab
+        self.name = 'rel_' + perfTab.name
+        self.actions = copy.deepcopy(perfTab.actions)
+        Min = Decimal('0.0')
+        Med = Decimal('50.0')
+        Max = Decimal('100.0')
+        self.valuationdomain = {'min':Min,'med':Med,'max':Max}
+        #self.weightPreorder = perfTab.computeWeightPreorder()
+        if coalition == None:
+            criteria = copy.deepcopy(perfTab.criteria)
+        else:
+            criteria = {}
+            for g in coalition:
+                criteria[g] = perfTab.criteria[g]
+        self.criteria = criteria
+        self.convertWeightFloatToDecimal()
+        self.evaluation = copy.deepcopy(perfTab.evaluation)
+        self.convertEvaluationFloatToDecimal()
+        self.relation = self._constructRelation(criteria,perfTab.evaluation,hasNoVeto=hasNoVeto)
+        methodData = {}
+        methodData['parameter'] = {'valuationType':'decimal','variant':'none'}
+        self.methodData = methodData
+        self.order = len(self.actions)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
 
     def _constructRelation(self,criteria,evaluation,hasSymmetricThresholds=True,hasNoVeto=True):
         """

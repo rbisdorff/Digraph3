@@ -163,6 +163,18 @@ A tutorial with coding examples is available here: :ref:`OutrankingDigraphs-Tuto
 
 Back to the :ref:`Technical-label`
 
+.. _xmcda-label:
+
+xmcda module
+------------
+
+.. automodule:: xmcda
+   :member-order: alphabetical
+   :no-inherited-members:
+   :members:
+
+Back to the :ref:`Technical-label`
+
 .. _sparseOutrankingDigraphs-label:
 
 sparseOutrankingDigraphs module

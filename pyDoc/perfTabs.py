@@ -298,28 +298,36 @@ class PerformanceTableau(object):
     """
 In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` class provides a generic **performance table model**. A given object of this class consists in:
 
-     1. a potential set of decision **actions** : an ordered dictionary describing the potential decision actions or alternatives with 'name' and 'comment' attributes,
-     2. a coherent family of **criteria**: a ordered dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,
-     3. the **evaluations**: a dictionary of performance evaluations for each decision action or alternative on each criterion function.
+     1. a set of potential decision **actions** : an ordered dictionary describing the potential decision actions or alternatives with 'name' and 'comment' attributes,
+     2. an optional set of decision **objectives**: an ordered dictionary with name, comment, weight and list of concerned criteria per objective,
+     3. a coherent family of **criteria**: a ordered dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,
+     4. the **evaluations**: a dictionary of performance evaluations for each decision action or alternative on each criterion function.
 
 Structure::
 
-       actions = OrderedDict[('a1', {'name': ..., 'comment': ...}),
+       actions = OrderedDict8[('a1', {'name': ..., 'comment': ...}),
                   ('a2', {'name': ..., 'comment': ...}),
                   ...])
+       objectives = OrderedDict8[
+                   ('obj1', {'name': ..., 'comment': ..., 'weight': ..., 'criteria': ['g1', ...]}),
+                   ('obj2', {'name': ..., 'comment', ..., 'weight': ..., 'criteria': ['g2', ...]}),
+                   ...])
        criteria = OrderedDict([
             ('g1', {'weight':Decimal("3.00"),
                     'scale': (Decimal("0.00"),Decimal("100.00")),
                     'thresholds' : {'pref': (Decimal('20.0'), Decimal('0.0')),
                                     'ind': (Decimal('10.0'), Decimal('0.0')),
-                                    'veto': (Decimal('80.0'), Decimal('0.0'))}
+                                    'veto': (Decimal('80.0'), Decimal('0.0'))},
+                    'objective': 'obj1',
                     }),
             ('g2', {'weight':Decimal("5.00"),
-                          'scale': (Decimal("0.00"),Decimal("100.00")),
-                          'thresholds' : {'pref': (Decimal('20.0'), Decimal('0.0')),
+                    'scale': (Decimal("0.00"),Decimal("100.00")),
+                    'thresholds' : {'pref': (Decimal('20.0'), Decimal('0.0')),
                                           'ind': (Decimal('10.0'), Decimal('0.0')),
-                                          'veto': (Decimal('80.0'), Decimal('0.0'))}}),
-                     ...])
+                                          'veto': (Decimal('80.0'), Decimal('0.0'))},
+                    'objective': 'obj2',
+                    }),
+            ...])
        evaluation = {'g1': {'a1':Decimal("57.28"),'a2':Decimal("99.85"), ...},
                      'g2': {'a1':Decimal("88.12"),'a2':Decimal("33.25"), ...},
                      ...}
@@ -382,15 +390,15 @@ In this example we consider furthermore a family of seven equisignificant cardin
 The performance evaluations of each decision alternative on each criterion are gathered in a *performance tableau*:
     >>> rt.showPerformanceTableau()
         *----  performance tableau -----*
-        criteria | weights |    'a01'     'a02'     'a03'   ...     'a12'    'a13'   
-        ----------|---------------------------------------------------------------------
-           'g1'   |      1       |   14.57   45.49   77.08    ...   93.30   94.71  
-           'g2'   |      1       |   33.54   30.94   76.80    ...   55.54   90.12  
-           'g3'   |      1       |   81.80   16.04   64.85    ...   23.72   44.82  
-           'g4'   |      1       |   63.78   90.23   12.66    ...  52.82   34.33  
-           'g5'   |      1       |   85.42   36.30   48.36    ...   76.70   51.36  
-           'g6'   |      1       |   49.35   58.27   14.72    ...   21.91   30.99  
-           'g7'   |      1       |   62.12   65.08   74.87    ...   38.98   93.64  
+        criteria | weights |   'a01'   'a02'   'a03'    ...   'a12'   'a13'   
+        ---------|----------------------------------------------------------------
+           'g1'  |   1     |   14.57   45.49   77.08    ...   93.30   94.71  
+           'g2'  |   1     |   33.54   30.94   76.80    ...   55.54   90.12  
+           'g3'  |   1     |   81.80   16.04   64.85    ...   23.72   44.82  
+           'g4'  |   1     |   63.78   90.23   12.66    ...   52.82   34.33  
+           'g5'  |   1     |   85.42   36.30   48.36    ...   76.70   51.36  
+           'g6'  |   1     |   49.35   58.27   14.72    ...   21.91   30.99  
+           'g7'  |   1     |   62.12   65.08   74.87    ...   38.98   93.64  
     >>> ...
 
     """

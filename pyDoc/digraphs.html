@@ -62,7 +62,6 @@
 </font></dt><dt><font face="helvetica, arial"><a href="digraphs.html#CirculantDigraph">CirculantDigraph</a>
 </font></dt><dt><font face="helvetica, arial"><a href="digraphs.html#CoDualDigraph">CoDualDigraph</a>
 </font></dt><dt><font face="helvetica, arial"><a href="digraphs.html#CocaDigraph">CocaDigraph</a>
-</font></dt><dt><font face="helvetica, arial"><a href="digraphs.html#CoceDigraph">CoceDigraph</a>
 </font></dt><dt><font face="helvetica, arial"><a href="digraphs.html#CompleteDigraph">CompleteDigraph</a>
 </font></dt><dt><font face="helvetica, arial"><a href="digraphs.html#ConverseDigraph">ConverseDigraph</a>
 </font></dt><dt><font face="helvetica, arial"><a href="digraphs.html#CoverDigraph">CoverDigraph</a>
@@ -242,6 +241,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 <dl><dt><a name="AsymmetricPartialDigraph-computeConcentrationIndexTrapez"><strong>computeConcentrationIndexTrapez</strong></a>(self, X, N)</dt><dd><tt>Renders&nbsp;the&nbsp;Gini&nbsp;concentration&nbsp;index&nbsp;of&nbsp;the&nbsp;X&nbsp;serie.<br>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
+
+<dl><dt><a name="AsymmetricPartialDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#AsymmetricPartialDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
 
 <dl><dt><a name="AsymmetricPartialDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
@@ -524,6 +525,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="AsymmetricPartialDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="AsymmetricPartialDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#AsymmetricPartialDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="AsymmetricPartialDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -576,7 +579,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="AsymmetricPartialDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="AsymmetricPartialDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="AsymmetricPartialDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="AsymmetricPartialDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -1227,6 +1230,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="BreakAddCocsDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#BreakAddCocsDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="BreakAddCocsDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -1508,6 +1513,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="BreakAddCocsDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="BreakAddCocsDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#BreakAddCocsDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="BreakAddCocsDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -1560,7 +1567,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="BreakAddCocsDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="BreakAddCocsDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="BreakAddCocsDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="BreakAddCocsDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -2058,7 +2065,7 @@ Specialization&nbsp;of&nbsp;general&nbsp;<a href="#Digraph">Digraph</a>&nbsp;cla
 of&nbsp;chordless&nbsp;odd&nbsp;circuits&nbsp;broken&nbsp;digraphs.<br>
 &nbsp;<br>
 All&nbsp;chordless&nbsp;odd&nbsp;circuits&nbsp;are&nbsp;broken&nbsp;at&nbsp;the&nbsp;weakest&nbsp;asymmetric&nbsp;link,<br>
-i.e.&nbsp;a&nbsp;link&nbsp;(*x*,&nbsp;*y*)&nbsp;with&nbsp;minimal&nbsp;difference&nbsp;between&nbsp;r(*x*&nbsp;S&nbsp;*y*)&nbsp;-&nbsp;r(*y*&nbsp;S&nbsp;*x*).<br>&nbsp;</tt></td></tr>
+i.e.&nbsp;a&nbsp;link&nbsp;:math:`(x,&nbsp;y)`&nbsp;with&nbsp;minimal&nbsp;difference&nbsp;between&nbsp;:math:`r(x&nbsp;S&nbsp;y)`&nbsp;and&nbsp;:math:`r(y&nbsp;S&nbsp;x)`.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="digraphs.html#BrokenCocsDigraph">BrokenCocsDigraph</a></dd>
@@ -2203,6 +2210,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 <dl><dt><a name="BrokenCocsDigraph-computeConcentrationIndexTrapez"><strong>computeConcentrationIndexTrapez</strong></a>(self, X, N)</dt><dd><tt>Renders&nbsp;the&nbsp;Gini&nbsp;concentration&nbsp;index&nbsp;of&nbsp;the&nbsp;X&nbsp;serie.<br>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
+
+<dl><dt><a name="BrokenCocsDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#BrokenCocsDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
 
 <dl><dt><a name="BrokenCocsDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
@@ -2485,6 +2494,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="BrokenCocsDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="BrokenCocsDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#BrokenCocsDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="BrokenCocsDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -2537,7 +2548,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="BrokenCocsDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="BrokenCocsDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="BrokenCocsDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="BrokenCocsDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -3173,6 +3184,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="CSVDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#CSVDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="CSVDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -3454,6 +3467,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="CSVDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="CSVDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#CSVDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="CSVDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -3506,7 +3521,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="CSVDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="CSVDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="CSVDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="CSVDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -4185,6 +4200,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="CirculantDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#CirculantDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="CirculantDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -4466,6 +4483,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="CirculantDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="CirculantDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#CirculantDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="CirculantDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -4518,7 +4537,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="CirculantDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="CirculantDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="CirculantDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="CirculantDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -5155,6 +5174,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="CoDualDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#CoDualDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="CoDualDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -5436,6 +5457,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="CoDualDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="CoDualDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#CoDualDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="CoDualDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -5488,7 +5511,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="CoDualDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="CoDualDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="CoDualDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="CoDualDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -5984,8 +6007,8 @@ Data descriptors inherited from <a href="digraphs.html#Digraph">Digraph</a>:<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;OBSOLETE:&nbsp;Gives&nbsp;inconsistent&nbsp;results&nbsp;when&nbsp;an&nbsp;autranking&nbsp;digraph&nbsp;shows&nbsp;loads&nbsp;of&nbsp;chordless&nbsp;cuircuits.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;It&nbsp;is&nbsp;recommended&nbsp;to&nbsp;use&nbsp;instead&nbsp;either&nbsp;the&nbsp;<a href="#BrokenCocsDigraph">BrokenCocsDigraph</a>&nbsp;class&nbsp;(preferred&nbsp;option)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;May&nbsp;sometimes&nbsp;give&nbsp;inconsistent&nbsp;results&nbsp;when&nbsp;an&nbsp;autranking&nbsp;digraph&nbsp;shows&nbsp;loads&nbsp;of&nbsp;chordless&nbsp;cuircuits.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;It&nbsp;is&nbsp;recommended&nbsp;in&nbsp;this&nbsp;case&nbsp;to&nbsp;use&nbsp;instead&nbsp;either&nbsp;the&nbsp;<a href="#BrokenCocsDigraph">BrokenCocsDigraph</a>&nbsp;class&nbsp;(preferred&nbsp;option)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;the&nbsp;&nbsp;<a href="#BreakAddCocsDigraph">BreakAddCocsDigraph</a>&nbsp;class.<br>
 &nbsp;<br>
 Parameters:<br>
@@ -6142,6 +6165,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 <dl><dt><a name="CocaDigraph-computeConcentrationIndexTrapez"><strong>computeConcentrationIndexTrapez</strong></a>(self, X, N)</dt><dd><tt>Renders&nbsp;the&nbsp;Gini&nbsp;concentration&nbsp;index&nbsp;of&nbsp;the&nbsp;X&nbsp;serie.<br>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
+
+<dl><dt><a name="CocaDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#CocaDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
 
 <dl><dt><a name="CocaDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
@@ -6424,6 +6449,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="CocaDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="CocaDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#CocaDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="CocaDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -6476,7 +6503,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="CocaDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="CocaDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="CocaDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="CocaDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -6961,984 +6988,6 @@ Data descriptors inherited from <a href="digraphs.html#Digraph">Digraph</a>:<br>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="CoceDigraph">class <strong>CoceDigraph</strong></a>(<a href="digraphs.html#Digraph">Digraph</a>)</font></td></tr>
-    
-<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Parameters:<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;digraph:&nbsp;Stored&nbsp;or&nbsp;memory&nbsp;resident&nbsp;digraph&nbsp;instance.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Cpp:&nbsp;using&nbsp;a&nbsp;C++/Agrum&nbsp;version&nbsp;of&nbsp;the&nbsp;Digraoh.<a href="#CoceDigraph-computeChordlessCircuits">computeChordlessCircuits</a>()&nbsp;method.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Piping:&nbsp;using&nbsp;OS&nbsp;pipes&nbsp;for&nbsp;data&nbsp;in-&nbsp;and&nbsp;output&nbsp;between&nbsp;Python&nbsp;and&nbsp;C++.<br>
-&nbsp;<br>
-Specialization&nbsp;of&nbsp;general&nbsp;<a href="#Digraph">Digraph</a>&nbsp;class&nbsp;for&nbsp;instantiation<br>
-of&nbsp;chordless&nbsp;odd&nbsp;circuits&nbsp;eliminated&nbsp;digraphs.<br>&nbsp;</tt></td></tr>
-<tr><td>&nbsp;</td>
-<td width="100%"><dl><dt>Method resolution order:</dt>
-<dd><a href="digraphs.html#CoceDigraph">CoceDigraph</a></dd>
-<dd><a href="digraphs.html#Digraph">Digraph</a></dd>
-<dd><a href="builtins.html#object">builtins.object</a></dd>
-</dl>
-<hr>
-Methods defined here:<br>
-<dl><dt><a name="CoceDigraph-__init__"><strong>__init__</strong></a>(self, digraph=None, Cpp=False, Piping=False, Comments=False, Debug=False)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-iterateCocElimination"><strong>iterateCocElimination</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Eliminates&nbsp;all&nbsp;chordless&nbsp;odd&nbsp;circuits&nbsp;with&nbsp;rising&nbsp;valuation&nbsp;cut&nbsp;levels.<br>
-Renders&nbsp;a&nbsp;tuple&nbsp;(level,polarisedDigraph)&nbsp;where&nbsp;level&nbsp;is&nbsp;the<br>
-necessary&nbsp;bipolar&nbsp;cut&nbsp;level&nbsp;for&nbsp;eliminating&nbsp;all&nbsp;chordless&nbsp;odd&nbsp;circuits,<br>
-and&nbsp;polarisedDigraph&nbsp;is&nbsp;the&nbsp;resulting&nbsp;digraph&nbsp;instance.<br>
-Renders&nbsp;(None,None)&nbsp;if&nbsp;no&nbsp;chordless&nbsp;odd&nbsp;circuit&nbsp;is&nbsp;detected.</tt></dd></dl>
-
-<hr>
-Methods inherited from <a href="digraphs.html#Digraph">Digraph</a>:<br>
-<dl><dt><a name="CoceDigraph-MISgen"><strong>MISgen</strong></a>(self, S, I)</dt><dd><tt>generator&nbsp;of&nbsp;maximal&nbsp;independent&nbsp;choices&nbsp;(voir&nbsp;Byskov&nbsp;2004):<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;S&nbsp;::=&nbsp;remaining&nbsp;nodes;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;I&nbsp;::=&nbsp;current&nbsp;independent&nbsp;choice<br>
-&nbsp;<br>
-..&nbsp;note::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inititalize:&nbsp;self.<a href="#CoceDigraph-MISgen">MISgen</a>(self.<strong>actions</strong>.copy(),set())</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-__invert__"><strong>__invert__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;inverting&nbsp;operator&nbsp;~self&nbsp;available&nbsp;for&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;<a href="#ConverseDigraph">ConverseDigraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;<a href="#DualDigraph">DualDigraph</a>&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-absirred"><strong>absirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;-irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-absirredundant"><strong>absirredundant</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;-irredundant&nbsp;choices&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-absirredval"><strong>absirredval</strong></a>(self, choice, relation)</dt><dd><tt>Renders&nbsp;the&nbsp;valued&nbsp;-irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-absirredx"><strong>absirredx</strong></a>(self, choice, x)</dt><dd><tt>Computes&nbsp;the&nbsp;crips&nbsp;-irredundance&nbsp;degree&nbsp;of&nbsp;node&nbsp;x&nbsp;in&nbsp;a&nbsp;choice.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-abskernelrestrict"><strong>abskernelrestrict</strong></a>(self, choice)</dt><dd><tt>Parameter:&nbsp;prekernel<br>
-Renders&nbsp;absorbent&nbsp;prekernel&nbsp;restricted&nbsp;relation.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-absorb"><strong>absorb</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;absorbency&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-absorbentChoices"><strong>absorbentChoices</strong></a>(self, S)</dt><dd><tt>Generates&nbsp;all&nbsp;minimal&nbsp;absorbent&nbsp;choices&nbsp;of&nbsp;a&nbsp;bipolar&nbsp;valued&nbsp;digraph.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-agglomerationDistribution"><strong>agglomerationDistribution</strong></a>(self)</dt><dd><tt>Output:&nbsp;aggloCoeffDistribution,&nbsp;meanCoeff<br>
-Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-aneighbors"><strong>aneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Add&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;digraph.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
-ie&nbsp;the&nbsp;average&nbsp;number&nbsp;of&nbsp;choice&nbsp;members&nbsp;that&nbsp;cover&nbsp;each<br>
-non&nbsp;selected&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-bestRanks"><strong>bestRanks</strong></a>(self)</dt><dd><tt>renders&nbsp;best&nbsp;possible&nbsp;ranks&nbsp;from&nbsp;indegrees&nbsp;account</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-bipolarKCorrelation"><strong>bipolarKCorrelation</strong></a>(self, digraph, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar&nbsp;Kendall&nbsp;correlation&nbsp;between&nbsp;two&nbsp;bipolar&nbsp;valued<br>
-digraphs&nbsp;computed&nbsp;from&nbsp;the&nbsp;average&nbsp;valuation&nbsp;of&nbsp;the<br>
-<a href="#XORDigraph">XORDigraph</a>(self,digraph)&nbsp;instance.<br>
-&nbsp;<br>
-..&nbsp;warning::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#CoceDigraph-computeBipolarCorrelation">computeBipolarCorrelation</a>(other)&nbsp;<a href="#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-bipolarKDistance"><strong>bipolarKDistance</strong></a>(self, digraph, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar&nbsp;crisp&nbsp;Kendall&nbsp;distance&nbsp;between&nbsp;two&nbsp;bipolar&nbsp;valued<br>
-digraphs.<br>
-&nbsp;<br>
-..&nbsp;warning::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#CoceDigraph-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-chordlessPaths"><strong>chordlessPaths</strong></a>(self, Pk, n2, Odd=False, Comments=False, Debug=False)</dt><dd><tt>New&nbsp;procedure&nbsp;from&nbsp;Agrum&nbsp;study&nbsp;April&nbsp;2009<br>
-recursive&nbsp;chordless&nbsp;path&nbsp;extraction&nbsp;strating&nbsp;from&nbsp;path<br>
-Pk&nbsp;=&nbsp;[n2,&nbsp;....,&nbsp;n1]&nbsp;and&nbsp;ending&nbsp;in&nbsp;node&nbsp;n2.<br>
-Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-circuitAverageCredibility"><strong>circuitAverageCredibility</strong></a>(self, circ)</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;linking&nbsp;credibility&nbsp;of&nbsp;a&nbsp;COC.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-circuitCredibilities"><strong>circuitCredibilities</strong></a>(self, circuit, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;linking&nbsp;credibilities&nbsp;and&nbsp;the&nbsp;minimal&nbsp;link&nbsp;of&nbsp;a&nbsp;COC.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-circuitMaxCredibility"><strong>circuitMaxCredibility</strong></a>(self, circ)</dt><dd><tt>Renders&nbsp;the&nbsp;minimal&nbsp;linking&nbsp;credibility&nbsp;of&nbsp;a&nbsp;COC.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-circuitMinCredibility"><strong>circuitMinCredibility</strong></a>(self, circ)</dt><dd><tt>Renders&nbsp;the&nbsp;minimal&nbsp;linking&nbsp;credibility&nbsp;of&nbsp;a&nbsp;COC.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-closeSymmetric"><strong>closeSymmetric</strong></a>(self)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Irreflexive=True, Reverse=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-collectcomps"><strong>collectcomps</strong></a>(self, x, A, ncomp)</dt><dd><tt>Recursive&nbsp;subroutine&nbsp;of&nbsp;the&nbsp;components&nbsp;method.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeAllDensities"><strong>computeAllDensities</strong></a>(self, choice=None)</dt><dd><tt>parameter:&nbsp;choice&nbsp;in&nbsp;self<br>
-renders&nbsp;six&nbsp;densitiy&nbsp;parameters:<br>
-arc&nbsp;density,&nbsp;double&nbsp;arc&nbsp;density,<br>
-single&nbsp;arc&nbsp;density,&nbsp;strict&nbsp;single&nbsp;arc&nbsp;density,<br>
-absence&nbsp;arc&nbsp;density,&nbsp;strict&nbsp;absence&nbsp;arc&nbsp;densitiy.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeArrowRaynaudOrder"><strong>computeArrowRaynaudOrder</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ordering&nbsp;from&nbsp;worst&nbsp;to&nbsp;best&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Arrow&amp;Raynaud's&nbsp;rule.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeArrowRaynaudRanking"><strong>computeArrowRaynaudRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Arrow&amp;Raynaud's&nbsp;rule.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeAverageValuation"><strong>computeAverageValuation</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;bipolar&nbsp;average&nbsp;correlation&nbsp;between<br>
-self&nbsp;and&nbsp;the&nbsp;crisp&nbsp;complete&nbsp;digraph&nbsp;of&nbsp;same&nbsp;order<br>
-of&nbsp;the&nbsp;irreflexive&nbsp;and&nbsp;determined&nbsp;arcs&nbsp;of&nbsp;the&nbsp;digraph</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeBadChoices"><strong>computeBadChoices</strong></a>(self, Comments=False)</dt><dd><tt>|&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;bad&nbsp;choices.<br>
-|&nbsp;[(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)absvec]</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeBadPirlotChoices"><strong>computeBadPirlotChoices</strong></a>(self, Comments=False)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;bad&nbsp;choices<br>
-using&nbsp;the&nbsp;Pirlot's&nbsp;fixpoint&nbsp;algorithm.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeBipolarCorrelation"><strong>computeBipolarCorrelation</strong></a>(self, other, MedianCut=False, filterRelation=None, Debug=False)</dt><dd><tt>obsolete:&nbsp;dummy&nbsp;replacement&nbsp;for&nbsp;<a href="#Digraph">Digraph</a>.computeOrdinalCorrelation&nbsp;method</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeChordlessCircuits"><strong>computeChordlessCircuits</strong></a>(self, Odd=False, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;odd&nbsp;circuits&nbsp;detected&nbsp;in&nbsp;a&nbsp;digraph.<br>
-Result&nbsp;(possible&nbsp;empty&nbsp;list)&nbsp;stored&nbsp;in&nbsp;&lt;self.<strong>circuitsList</strong>&gt;<br>
-holding&nbsp;a&nbsp;possibly&nbsp;empty&nbsp;list&nbsp;tuples&nbsp;with&nbsp;at&nbsp;position&nbsp;0&nbsp;the<br>
-list&nbsp;of&nbsp;adjacent&nbsp;actions&nbsp;of&nbsp;the&nbsp;circuit&nbsp;and&nbsp;at&nbsp;position&nbsp;1<br>
-the&nbsp;set&nbsp;of&nbsp;actions&nbsp;in&nbsp;the&nbsp;stored&nbsp;circuit.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeChordlessCircuitsMP"><strong>computeChordlessCircuitsMP</strong></a>(self, Odd=False, Threading=False, nbrOfCPUs=None, Comments=False, Debug=False)</dt><dd><tt>Multiprocessing&nbsp;version&nbsp;of&nbsp;<a href="#CoceDigraph-computeChordlessCircuits">computeChordlessCircuits</a>().<br>
-&nbsp;<br>
-Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;all&nbsp;chordless&nbsp;odd&nbsp;circuits&nbsp;detected&nbsp;in&nbsp;a&nbsp;digraph.<br>
-Result&nbsp;(possible&nbsp;empty&nbsp;list)&nbsp;stored&nbsp;in&nbsp;&lt;self.<strong>circuitsList</strong>&gt;<br>
-holding&nbsp;a&nbsp;possibly&nbsp;empty&nbsp;list&nbsp;tuples&nbsp;with&nbsp;at&nbsp;position&nbsp;0&nbsp;the<br>
-list&nbsp;of&nbsp;adjacent&nbsp;actions&nbsp;of&nbsp;the&nbsp;circuit&nbsp;and&nbsp;at&nbsp;position&nbsp;1<br>
-the&nbsp;set&nbsp;of&nbsp;actions&nbsp;in&nbsp;the&nbsp;stored&nbsp;circuit.<br>
-Inspired&nbsp;by&nbsp;Dias,&nbsp;Castonguay,&nbsp;Longo,&nbsp;Jradi,&nbsp;Algorithmica&nbsp;(2015).<br>
-&nbsp;<br>
-Returns&nbsp;a&nbsp;possibly&nbsp;empty&nbsp;list&nbsp;of&nbsp;tuples&nbsp;(circuit,frozenset(circuit)).<br>
-&nbsp;<br>
-If&nbsp;Odd&nbsp;==&nbsp;True,&nbsp;only&nbsp;circuits&nbsp;of&nbsp;odd&nbsp;length&nbsp;are&nbsp;retained&nbsp;in&nbsp;the&nbsp;result.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeCoSize"><strong>computeCoSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;non&nbsp;validated&nbsp;non&nbsp;reflexive&nbsp;arcs</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeConcentrationIndex"><strong>computeConcentrationIndex</strong></a>(self, X, N)</dt><dd><tt>Renders&nbsp;the&nbsp;Gini&nbsp;concentration&nbsp;index&nbsp;of&nbsp;the&nbsp;X&nbsp;serie.<br>
-N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
-Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeConcentrationIndexTrapez"><strong>computeConcentrationIndexTrapez</strong></a>(self, X, N)</dt><dd><tt>Renders&nbsp;the&nbsp;Gini&nbsp;concentration&nbsp;index&nbsp;of&nbsp;the&nbsp;X&nbsp;serie.<br>
-N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
-Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
-following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeCppChordlessCircuits"><strong>computeCppChordlessCircuits</strong></a>(self, Odd=False, Debug=False)</dt><dd><tt>python&nbsp;wrapper&nbsp;for&nbsp;the&nbsp;C++/Agrum&nbsp;based&nbsp;chordless&nbsp;circuits&nbsp;enumeration<br>
-exchange&nbsp;arguments&nbsp;with&nbsp;external&nbsp;temporary&nbsp;files</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeCppInOutPipingChordlessCircuits"><strong>computeCppInOutPipingChordlessCircuits</strong></a>(self, Odd=False, Debug=False)</dt><dd><tt>python&nbsp;wrapper&nbsp;for&nbsp;the&nbsp;C++/Agrum&nbsp;based&nbsp;chordless&nbsp;circuits&nbsp;enumeration<br>
-exchange&nbsp;arguments&nbsp;with&nbsp;external&nbsp;temporary&nbsp;files</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeCutLevelDensities"><strong>computeCutLevelDensities</strong></a>(self, choice, level)</dt><dd><tt>parameter:&nbsp;choice&nbsp;in&nbsp;self,&nbsp;robustness&nbsp;level<br>
-renders&nbsp;three&nbsp;robust&nbsp;densitiy&nbsp;parameters:<br>
-robust&nbsp;double&nbsp;arc&nbsp;density,<br>
-robust&nbsp;single&nbsp;arc&nbsp;density,<br>
-robust&nbsp;absence&nbsp;arc&nbsp;densitiy.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeDensities"><strong>computeDensities</strong></a>(self, choice)</dt><dd><tt>parameter:&nbsp;choice&nbsp;in&nbsp;self<br>
-renders&nbsp;the&nbsp;four&nbsp;densitiy&nbsp;parameters:<br>
-arc&nbsp;density,&nbsp;double&nbsp;arc&nbsp;density,&nbsp;single&nbsp;arc&nbsp;density,&nbsp;absence&nbsp;arc&nbsp;density.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeDeterminateness"><strong>computeDeterminateness</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;Kendalll&nbsp;distance&nbsp;in&nbsp;%&nbsp;of&nbsp;self<br>
-with&nbsp;the&nbsp;all&nbsp;median&nbsp;valued&nbsp;(indeterminate)&nbsp;digraph.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeGoodChoiceVector"><strong>computeGoodChoiceVector</strong></a>(self, ker, Comments=False)</dt><dd><tt>|&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.<br>
-|&nbsp;[(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec]</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeGoodChoices"><strong>computeGoodChoices</strong></a>(self, Comments=False)</dt><dd><tt>|&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.<br>
-|&nbsp;[(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec,(7)cover]</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeGoodPirlotChoices"><strong>computeGoodPirlotChoices</strong></a>(self, Comments=False)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices<br>
-using&nbsp;the&nbsp;Pirlot&nbsp;fixpoint&nbsp;algorithm.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeKemenyIndex"><strong>computeKemenyIndex</strong></a>(self, otherRelation)</dt><dd><tt>renders&nbsp;the&nbsp;Kemeny&nbsp;index&nbsp;of&nbsp;the&nbsp;self.<strong>relation</strong><br>
-compared&nbsp;with&nbsp;a&nbsp;given&nbsp;crisp&nbsp;valued&nbsp;relation&nbsp;of&nbsp;a&nbsp;compatible<br>
-other&nbsp;digraph&nbsp;(same&nbsp;nodes&nbsp;or&nbsp;actions).</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeKemenyOrder"><strong>computeKemenyOrder</strong></a>(self, orderLimit=7, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ordering&nbsp;from&nbsp;worst&nbsp;to&nbsp;best&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;maximal&nbsp;Kemeny&nbsp;index.<br>
-Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;best),&nbsp;kemenyIndex</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeKemenyRanking"><strong>computeKemenyRanking</strong></a>(self, isProbabilistic=False, orderLimit=7, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ordering&nbsp;from&nbsp;worst&nbsp;to&nbsp;best&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;maximal&nbsp;Kemeny&nbsp;index.<br>
-Return&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
-
-<dl><dt><a name="CoceDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
-
-<dl><dt><a name="CoceDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
-!!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeMeanOutDegree"><strong>computeMeanOutDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;degree&nbsp;of&nbsp;self.<br>
-!!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeMeanSymDegree"><strong>computeMeanSymDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;degree&nbsp;of&nbsp;self.<br>
-!!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeMedianOutDegree"><strong>computeMedianOutDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;median&nbsp;outdegree&nbsp;of&nbsp;self.<br>
-!!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeMedianSymDegree"><strong>computeMedianSymDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;median&nbsp;symmetric&nbsp;degree&nbsp;of&nbsp;self.<br>
-!!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeMoreOrLessUnrelatedPairs"><strong>computeMoreOrLessUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeNetFlowsOrder"><strong>computeNetFlowsOrder</strong></a>(self)</dt><dd><tt>renders&nbsp;an&nbsp;ordered&nbsp;list&nbsp;(from&nbsp;worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions<br>
-following&nbsp;the&nbsp;net&nbsp;flows&nbsp;ranking&nbsp;rule.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeNetFlowsRanking"><strong>computeNetFlowsRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;an&nbsp;ordered&nbsp;list&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions<br>
-following&nbsp;the&nbsp;net&nbsp;flows&nbsp;ranking&nbsp;rule.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeODistance"><strong>computeODistance</strong></a>(self, op2, comments=False)</dt><dd><tt>renders&nbsp;the&nbsp;squared&nbsp;normalized&nbsp;distance&nbsp;of<br>
-two&nbsp;digraph&nbsp;valuations.<br>
-Parameters:&nbsp;op2&nbsp;digraphs&nbsp;of&nbsp;same&nbsp;order&nbsp;as&nbsp;self.<br>
-The&nbsp;digraphs&nbsp;must&nbsp;be&nbsp;of&nbsp;same&nbsp;order.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeOrbit"><strong>computeOrbit</strong></a>(self, choice, withListing=False)</dt><dd><tt>renders&nbsp;the&nbsp;set&nbsp;of&nbsp;isomorph&nbsp;copies&nbsp;of&nbsp;a&nbsp;choice&nbsp;following<br>
-the&nbsp;automorphism&nbsp;of&nbsp;the&nbsp;digraph&nbsp;self</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeOrderCorrelation"><strong>computeOrderCorrelation</strong></a>(self, order, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordinal&nbsp;correlation&nbsp;K&nbsp;of&nbsp;a&nbsp;digraph&nbsp;instance<br>
-when&nbsp;compared&nbsp;with&nbsp;a&nbsp;given&nbsp;linear&nbsp;order&nbsp;(from&nbsp;worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;its&nbsp;actions<br>
-&nbsp;<br>
-K&nbsp;=&nbsp;sum_{x&nbsp;!=&nbsp;y}&nbsp;[&nbsp;min(&nbsp;max(-self.relation(x,y)),other.relation(x,y),&nbsp;max(self.relation(x,y),-other.relation(x,y))&nbsp;]<br>
-&nbsp;<br>
-K&nbsp;/=&nbsp;sum_{x!=y}&nbsp;[&nbsp;min(abs(self.relation(x,y),abs(other.relation(x,y))&nbsp;]<br>
-&nbsp;<br>
-..&nbsp;note::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renders&nbsp;a&nbsp;dictionary&nbsp;with&nbsp;the&nbsp;key&nbsp;'correlation'&nbsp;containing&nbsp;the&nbsp;actual&nbsp;bipolar&nbsp;correlation&nbsp;index&nbsp;and&nbsp;the&nbsp;key&nbsp;'determination'&nbsp;containing&nbsp;the&nbsp;minimal&nbsp;determination&nbsp;level&nbsp;D&nbsp;of&nbsp;self&nbsp;and&nbsp;the&nbsp;other&nbsp;relation.<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D&nbsp;=&nbsp;sum_{x&nbsp;!=&nbsp;y}&nbsp;min(abs(self.relation(x,y)),abs(other.relation(x,y))&nbsp;/&nbsp;n(n-1)<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;where&nbsp;n&nbsp;is&nbsp;the&nbsp;number&nbsp;of&nbsp;actions&nbsp;considered.<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;correlation&nbsp;index&nbsp;with&nbsp;a&nbsp;completely&nbsp;indeterminate&nbsp;relation<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;by&nbsp;convention&nbsp;0.0&nbsp;at&nbsp;determination&nbsp;level&nbsp;0.0&nbsp;.<br>
-&nbsp;<br>
-..&nbsp;warning::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self&nbsp;must&nbsp;be&nbsp;a&nbsp;normalized&nbsp;outranking&nbsp;digraph&nbsp;instance&nbsp;!</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeOrdinalCorrelation"><strong>computeOrdinalCorrelation</strong></a>(self, other, MedianCut=False, filterRelation=None, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar&nbsp;correlation&nbsp;K&nbsp;of&nbsp;a<br>
-self.<strong>relation</strong>&nbsp;when&nbsp;compared<br>
-with&nbsp;a&nbsp;given&nbsp;compatible&nbsp;(same&nbsp;actions&nbsp;set))&nbsp;digraph&nbsp;or<br>
-a&nbsp;[-1,1]&nbsp;valued&nbsp;compatible&nbsp;relation&nbsp;(same&nbsp;actions&nbsp;set).<br>
-&nbsp;<br>
-If&nbsp;MedianCut=True,&nbsp;the&nbsp;correlation&nbsp;is&nbsp;computed&nbsp;on&nbsp;the&nbsp;median&nbsp;polarized&nbsp;relations.<br>
-&nbsp;<br>
-If&nbsp;filterRelation&nbsp;!=&nbsp;None,&nbsp;the&nbsp;correlation&nbsp;is&nbsp;computed&nbsp;on&nbsp;the&nbsp;partial&nbsp;domain&nbsp;corresponding&nbsp;to&nbsp;the&nbsp;determined&nbsp;part&nbsp;of&nbsp;the&nbsp;filter&nbsp;relation.<br>
-&nbsp;<br>
-..&nbsp;warning::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Notice&nbsp;that&nbsp;the&nbsp;'other'&nbsp;relation&nbsp;and/or&nbsp;the&nbsp;'filterRelation',<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;case&nbsp;given,&nbsp;must&nbsp;both&nbsp;be&nbsp;normalized,&nbsp;ie&nbsp;[-1,1]-valued&nbsp;!<br>
-&nbsp;<br>
-K&nbsp;=&nbsp;sum_{x&nbsp;!=&nbsp;y}&nbsp;[&nbsp;min(&nbsp;max(-self.<strong>relation</strong>[x][y]),other.relation[x][y]),&nbsp;max(self.<strong>relation</strong>[x][y],-other.relation[x][y])&nbsp;]<br>
-&nbsp;<br>
-K&nbsp;/=&nbsp;sum_{x!=y}&nbsp;[&nbsp;min(abs(self.<strong>relation</strong>[x][y]),abs(other.relation[x][y]))&nbsp;]<br>
-&nbsp;<br>
-..&nbsp;note::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renders&nbsp;a&nbsp;tuple&nbsp;with&nbsp;at&nbsp;position&nbsp;0&nbsp;the&nbsp;actual&nbsp;bipolar&nbsp;correlation&nbsp;index<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;in&nbsp;position&nbsp;1&nbsp;the&nbsp;minimal&nbsp;determination&nbsp;level&nbsp;D&nbsp;of&nbsp;self&nbsp;and<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;other&nbsp;relation.<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D&nbsp;=&nbsp;sum_{x&nbsp;!=&nbsp;y}&nbsp;min(abs(self.<strong>relation</strong>[x][y]),abs(other.relation[x][y]))&nbsp;/&nbsp;n(n-1)<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;where&nbsp;n&nbsp;is&nbsp;the&nbsp;number&nbsp;of&nbsp;actions&nbsp;considered.<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;correlation&nbsp;index&nbsp;with&nbsp;a&nbsp;completely&nbsp;indeterminate&nbsp;relation<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;by&nbsp;convention&nbsp;0.0&nbsp;at&nbsp;determination&nbsp;level&nbsp;0.0&nbsp;.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeOrdinalCorrelationMP"><strong>computeOrdinalCorrelationMP</strong></a>(self, other, MedianCut=False, Threading=True, nbrOfCPUs=None, Comments=False, Debug=False)</dt><dd><tt>Multi&nbsp;processing&nbsp;version&nbsp;of&nbsp;the&nbsp;digraphs.<a href="#CoceDigraph-computeOrdinalCorrelation">computeOrdinalCorrelation</a>()&nbsp;method.<br>
-&nbsp;<br>
-..&nbsp;note::<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;relation&nbsp;filtering&nbsp;and&nbsp;the&nbsp;MedinaCut&nbsp;option&nbsp;are&nbsp;not&nbsp;implemented&nbsp;in&nbsp;the&nbsp;MP&nbsp;version.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computePairwiseClusterComparison"><strong>computePairwiseClusterComparison</strong></a>(self, K1, K2, Debug=False)</dt><dd><tt>compute&nbsp;the&nbsp;pairwise&nbsp;cluster&nbsp;comparison&nbsp;credibility&nbsp;vector<br>
-from&nbsp;bipolar-valued&nbsp;digraph&nbsp;g.&nbsp;with&nbsp;K1&nbsp;and&nbsp;K2&nbsp;disjoint<br>
-lists&nbsp;of&nbsp;action&nbsp;keys&nbsp;from&nbsp;g&nbsp;actions&nbsp;disctionary.<br>
-Returns&nbsp;the&nbsp;dictionary<br>
-{'I':&nbsp;Decimal(),'P+':Decimal(),'P-':Decimal(),'R'&nbsp;:Decimal()}<br>
-where&nbsp;one&nbsp;and&nbsp;only&nbsp;one&nbsp;item&nbsp;is&nbsp;strictly&nbsp;positive.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computePreKernels"><strong>computePreKernels</strong></a>(self)</dt><dd><tt>computing&nbsp;dominant&nbsp;and&nbsp;absorbent&nbsp;preKernels:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>dompreKernels</strong>&nbsp;and&nbsp;self.<strong>abspreKernels</strong></tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computePreRankingRelation"><strong>computePreRankingRelation</strong></a>(self, preRanking, Normalized=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar-valued&nbsp;relation&nbsp;obtained&nbsp;from<br>
-a&nbsp;given&nbsp;preRanking&nbsp;in&nbsp;decreasing&nbsp;levels&nbsp;(list&nbsp;of&nbsp;lists)&nbsp;result.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computePreorderRelation"><strong>computePreorderRelation</strong></a>(self, preorder, Normalized=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar-valued&nbsp;relation&nbsp;obtained&nbsp;from<br>
-a&nbsp;given&nbsp;preordering&nbsp;in&nbsp;increasing&nbsp;levels&nbsp;(list&nbsp;of&nbsp;lists)&nbsp;result.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computePrincipalOrder"><strong>computePrincipalOrder</strong></a>(self, plotFileName=None, Colwise=False, imageType=None, TempDir=None, Comments=False, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ordered&nbsp;list&nbsp;of&nbsp;self.<strong>actions</strong>&nbsp;using&nbsp;the&nbsp;decreasing&nbsp;scores&nbsp;from&nbsp;the<br>
-first&nbsp;rincipal&nbsp;eigenvector&nbsp;of&nbsp;the&nbsp;covariance&nbsp;of&nbsp;the&nbsp;valued&nbsp;outdegrees&nbsp;of&nbsp;self.<br>
-&nbsp;<br>
-..&nbsp;note::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;The&nbsp;method,&nbsp;relying&nbsp;on&nbsp;writing&nbsp;and&nbsp;reading&nbsp;temporary&nbsp;files&nbsp;by&nbsp;default&nbsp;in&nbsp;a&nbsp;temporary&nbsp;directory&nbsp;is&nbsp;threading&nbsp;and&nbsp;multiprocessing&nbsp;safe&nbsp;!<br>
-&nbsp;&nbsp;&nbsp;(see&nbsp;<a href="#Digraph">Digraph</a>.exportPrincipalImage&nbsp;method)</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computePrudentBetaLevel"><strong>computePrudentBetaLevel</strong></a>(self, Debug=False)</dt><dd><tt>computes&nbsp;alpha,&nbsp;ie&nbsp;the&nbsp;lowest&nbsp;valuation&nbsp;level,&nbsp;for&nbsp;which&nbsp;the<br>
-bipolarly&nbsp;polarised&nbsp;digraph&nbsp;doesn't&nbsp;contain&nbsp;a&nbsp;chordless&nbsp;circuit.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeRankedPairsOrder"><strong>computeRankedPairsOrder</strong></a>(self, Cpp=False, Debug=False)</dt><dd><tt>renders&nbsp;an&nbsp;actions&nbsp;ordering&nbsp;from&nbsp;the&nbsp;worst&nbsp;to&nbsp;the&nbsp;best&nbsp;obtained&nbsp;from&nbsp;the<br>
-ranked&nbsp;pairs&nbsp;rule.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeRankedPairsRanking"><strong>computeRankedPairsRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;an&nbsp;actions&nbsp;ordering&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst&nbsp;obtained&nbsp;from&nbsp;the<br>
-ranked&nbsp;pairs&nbsp;rule.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeRankingByBestChoosing"><strong>computeRankingByBestChoosing</strong></a>(self, CoDual=False, CppAgrum=False, Debug=False)</dt><dd><tt>Computes&nbsp;a&nbsp;weak&nbsp;preordering&nbsp;of&nbsp;the&nbsp;self.<strong>actions</strong>&nbsp;by&nbsp;recursive<br>
-best&nbsp;choice&nbsp;elagations.<br>
-&nbsp;<br>
-Stores&nbsp;in&nbsp;self.<strong>rankingByBestChoosing</strong>['result']&nbsp;a&nbsp;list&nbsp;of&nbsp;(P+,bestChoice)&nbsp;tuples<br>
-where&nbsp;P+&nbsp;gives&nbsp;the&nbsp;best&nbsp;choice&nbsp;complement&nbsp;outranking<br>
-average&nbsp;valuation&nbsp;via&nbsp;the&nbsp;computePairwiseClusterComparison<br>
-method.<br>
-&nbsp;<br>
-If&nbsp;self.<strong>rankingByBestChoosing</strong>['CoDual']&nbsp;is&nbsp;True,&nbsp;<br>
-the&nbsp;ranking-by-choosing&nbsp;was&nbsp;computed&nbsp;on&nbsp;the&nbsp;codual&nbsp;of&nbsp;self.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeRankingByBestChoosingRelation"><strong>computeRankingByBestChoosingRelation</strong></a>(self, rankingByBestChoosing=None, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar-valued&nbsp;relation&nbsp;obtained&nbsp;from<br>
-the&nbsp;self.<strong>rankingByBestChoosing</strong>&nbsp;result.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeRankingByChoosing"><strong>computeRankingByChoosing</strong></a>(self, actionsSubset=None, CppAgrum=False, Debug=False, CoDual=False)</dt><dd><tt>Computes&nbsp;a&nbsp;weak&nbsp;preordring&nbsp;of&nbsp;the&nbsp;self.<strong>actions</strong>&nbsp;by&nbsp;iterating<br>
-jointly&nbsp;best&nbsp;and&nbsp;worst&nbsp;choice&nbsp;elagations.<br>
-&nbsp;<br>
-Stores&nbsp;in&nbsp;self.<strong>rankingByChoosing</strong>['result']&nbsp;a&nbsp;list&nbsp;of&nbsp;((P+,bestChoice),(P-,worstChoice))&nbsp;pairs<br>
-where&nbsp;P+&nbsp;(resp.&nbsp;P-)&nbsp;gives&nbsp;the&nbsp;best&nbsp;(resp.&nbsp;worst)&nbsp;choice&nbsp;complement&nbsp;outranking<br>
-(resp.&nbsp;outranked)&nbsp;average&nbsp;valuation&nbsp;via&nbsp;the&nbsp;computePairwiseClusterComparison<br>
-method.<br>
-&nbsp;<br>
-If&nbsp;self.<strong>rankingByChoosing</strong>['CoDual']&nbsp;is&nbsp;True,&nbsp;the&nbsp;ranking-by-choosing&nbsp;was&nbsp;computed&nbsp;on&nbsp;the&nbsp;codual&nbsp;of&nbsp;self.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeRankingByChoosingRelation"><strong>computeRankingByChoosingRelation</strong></a>(self, rankingByChoosing=None, actionsSubset=None, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar-valued&nbsp;relation&nbsp;obtained&nbsp;from<br>
-the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;result.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeRankingByLastChoosing"><strong>computeRankingByLastChoosing</strong></a>(self, CoDual=False, CppAgrum=False, Debug=False)</dt><dd><tt>Computes&nbsp;a&nbsp;weak&nbsp;preordring&nbsp;of&nbsp;the&nbsp;self.<strong>actions</strong>&nbsp;by&nbsp;iterating<br>
-worst&nbsp;choice&nbsp;elagations.<br>
-&nbsp;<br>
-Stores&nbsp;in&nbsp;self.<strong>rankingByLastChoosing</strong>['result']&nbsp;a&nbsp;list&nbsp;of&nbsp;(P-,worstChoice)&nbsp;pairs<br>
-where&nbsp;P-&nbsp;gives&nbsp;the&nbsp;worst&nbsp;choice&nbsp;complement&nbsp;outranked<br>
-average&nbsp;valuation&nbsp;via&nbsp;the&nbsp;computePairwiseClusterComparison<br>
-method.<br>
-&nbsp;<br>
-If&nbsp;self.<strong>rankingByChoosing</strong>['CoDual']&nbsp;is&nbsp;True,&nbsp;the&nbsp;ranking-by-last-chossing&nbsp;<br>
-was&nbsp;computed&nbsp;on&nbsp;the&nbsp;codual&nbsp;of&nbsp;self.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeRankingByLastChoosingRelation"><strong>computeRankingByLastChoosingRelation</strong></a>(self, rankingByLastChoosing=None, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar-valued&nbsp;relation&nbsp;obtained&nbsp;from<br>
-the&nbsp;self.<strong>rankingByLastChoosing</strong>&nbsp;result.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeRankingCorrelation"><strong>computeRankingCorrelation</strong></a>(self, ranking, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordinal&nbsp;correlation&nbsp;K&nbsp;of&nbsp;a&nbsp;digraph&nbsp;instance<br>
-when&nbsp;compared&nbsp;with&nbsp;a&nbsp;given&nbsp;linear&nbsp;ranking&nbsp;of&nbsp;its&nbsp;actions<br>
-&nbsp;<br>
-K&nbsp;=&nbsp;sum_{x&nbsp;!=&nbsp;y}&nbsp;[&nbsp;min(&nbsp;max(-self.relation(x,y)),other.relation(x,y),&nbsp;max(self.relation(x,y),-other.relation(x,y))&nbsp;]<br>
-&nbsp;<br>
-K&nbsp;/=&nbsp;sum_{x!=y}&nbsp;[&nbsp;min(abs(self.relation(x,y),abs(other.relation(x,y))&nbsp;]<br>
-&nbsp;<br>
-..&nbsp;note::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renders&nbsp;a&nbsp;tuple&nbsp;with&nbsp;at&nbsp;position&nbsp;0&nbsp;the&nbsp;actual&nbsp;bipolar&nbsp;correlation&nbsp;index<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;in&nbsp;position&nbsp;1&nbsp;the&nbsp;minimal&nbsp;determination&nbsp;level&nbsp;D&nbsp;of&nbsp;self&nbsp;and<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;other&nbsp;relation.<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D&nbsp;=&nbsp;sum_{x&nbsp;!=&nbsp;y}&nbsp;min(abs(self.relation(x,y)),abs(other.relation(x,y))&nbsp;/&nbsp;n(n-1)<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;where&nbsp;n&nbsp;is&nbsp;the&nbsp;number&nbsp;of&nbsp;actions&nbsp;considered.<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;correlation&nbsp;index&nbsp;with&nbsp;a&nbsp;completely&nbsp;indeterminate&nbsp;relation<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;by&nbsp;convention&nbsp;0.0&nbsp;at&nbsp;determination&nbsp;level&nbsp;0.0&nbsp;.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeRelationalStructure"><strong>computeRelationalStructure</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;counted&nbsp;decomposition&nbsp;of&nbsp;the&nbsp;valued&nbsp;relations&nbsp;into<br>
-the&nbsp;following&nbsp;type&nbsp;of&nbsp;links:<br>
-gt&nbsp;'&gt;',&nbsp;eq&nbsp;'=',&nbsp;lt&nbsp;'&lt;',&nbsp;incomp&nbsp;'&lt;&gt;',<br>
-leq&nbsp;'&lt;=',&nbsp;geq&nbsp;'&gt;=',&nbsp;indeterm&nbsp;'?'</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeRubisChoice"><strong>computeRubisChoice</strong></a>(self, CppAgrum=False, Comments=False, _OldCoca=False, BrokenCocs=True, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;self.<strong>strictGoodChoices</strong>,&nbsp;self.<strong>nullChoices</strong><br>
-self.<strong>strictBadChoices</strong>,&nbsp;self.<strong>nonRobustChoices</strong>.<br>
-&nbsp;<br>
-CppgArum&nbsp;=&nbsp;False&nbsp;(default&nbsp;|&nbsp;true&nbsp;:&nbsp;use&nbsp;C++/Agrum&nbsp;digraph&nbsp;library<br>
-for&nbsp;computing&nbsp;chordless&nbsp;circuits&nbsp;in&nbsp;self.<br>
-&nbsp;<br>
-..&nbsp;warning::<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Changes&nbsp;in&nbsp;site&nbsp;the&nbsp;outranking&nbsp;digraph&nbsp;by<br>
-&nbsp;&nbsp;&nbsp;&nbsp;adding&nbsp;or&nbsp;braking&nbsp;chordless&nbsp;odd&nbsp;outranking&nbsp;circuits.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeRubyChoice"><strong>computeRubyChoice</strong></a>(self, CppAgrum=False, Comments=False, _OldCoca=False)</dt><dd><tt>dummy&nbsp;for&nbsp;<a href="#CoceDigraph-computeRubisChoice">computeRubisChoice</a>()<br>
-old&nbsp;versions&nbsp;compatibility.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeSingletonRanking"><strong>computeSingletonRanking</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;sorted&nbsp;bipolar&nbsp;net&nbsp;determinatation&nbsp;of&nbsp;outrankingness<br>
-minus&nbsp;outrankedness&nbsp;credibilities&nbsp;of&nbsp;all&nbsp;singleton&nbsp;choices.<br>
-res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeSize"><strong>computeSize</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;number&nbsp;of&nbsp;validated&nbsp;non&nbsp;reflexive&nbsp;arcs</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeSizeTransitiveClosure"><strong>computeSizeTransitiveClosure</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeSlaterOrder"><strong>computeSlaterOrder</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>reversed&nbsp;return&nbsp;from&nbsp;computeSlaterRanking&nbsp;method.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
-Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeValuationLevels"><strong>computeValuationLevels</strong></a>(self, choice=None, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;the<br>
-apparent&nbsp;valuations&nbsp;levels&nbsp;of&nbsp;self<br>
-in&nbsp;an&nbsp;increasingly&nbsp;ordered&nbsp;list.<br>
-If&nbsp;parameter&nbsp;choice&nbsp;is&nbsp;given,&nbsp;the<br>
-computation&nbsp;is&nbsp;limited&nbsp;to&nbsp;the&nbsp;actions<br>
-of&nbsp;the&nbsp;choice.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeValuationPercentages"><strong>computeValuationPercentages</strong></a>(self, choice, percentiles, withValues=False)</dt><dd><tt>Parameters:&nbsp;choice&nbsp;and&nbsp;list&nbsp;of&nbsp;percentages.<br>
-renders&nbsp;a&nbsp;series&nbsp;of&nbsp;quantiles&nbsp;of&nbsp;the&nbsp;characteristics&nbsp;valuation&nbsp;of<br>
-the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeValuationPercentiles"><strong>computeValuationPercentiles</strong></a>(self, choice, percentages, withValues=False)</dt><dd><tt>Parameters:&nbsp;choice&nbsp;and&nbsp;list&nbsp;of&nbsp;percentages.<br>
-renders&nbsp;a&nbsp;series&nbsp;of&nbsp;quantiles&nbsp;of&nbsp;the&nbsp;characteristics&nbsp;valuation&nbsp;of<br>
-the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
-of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
-fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeupdown2"><strong>computeupdown2</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB1&nbsp;method.<br>
-fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-computeupdown2irred"><strong>computeupdown2irred</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB1&nbsp;method.<br>
-fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-condorcetWinners"><strong>condorcetWinners</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
-self.<strong>relation</strong>[x][y]&nbsp;&gt;&nbsp;self.<strong>valuationdomain</strong>['med']<br>
-for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-contra"><strong>contra</strong></a>(self, v)</dt><dd><tt>Parameter:&nbsp;choice.<br>
-Renders&nbsp;the&nbsp;negation&nbsp;of&nbsp;a&nbsp;choice&nbsp;v&nbsp;characteristic's&nbsp;vector.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-convertRelationToDecimal"><strong>convertRelationToDecimal</strong></a>(self)</dt><dd><tt>Converts&nbsp;the&nbsp;float&nbsp;valued&nbsp;self.<strong>relation</strong>&nbsp;in&nbsp;a&nbsp;decimal&nbsp;valued&nbsp;one.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-convertValuationToDecimal"><strong>convertValuationToDecimal</strong></a>(self)</dt><dd><tt>Convert&nbsp;the&nbsp;float&nbsp;valuation&nbsp;limits&nbsp;to&nbsp;Decimals.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-coveringIndex"><strong>coveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
-ie&nbsp;the&nbsp;minimum&nbsp;number&nbsp;of&nbsp;choice&nbsp;members&nbsp;that&nbsp;cover&nbsp;each<br>
-non&nbsp;selected&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-crispKDistance"><strong>crispKDistance</strong></a>(self, digraph, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;crisp&nbsp;Kendall&nbsp;distance&nbsp;between&nbsp;two&nbsp;bipolar&nbsp;valued<br>
-digraphs.<br>
-&nbsp;<br>
-..&nbsp;warning::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obsolete!&nbsp;Is&nbsp;replaced&nbsp;by&nbsp;the&nbsp;self.<a href="#CoceDigraph-computeBipolarCorrelation">computeBipolarCorrelation</a>(other,&nbsp;MedianCut=True)&nbsp;<a href="#Digraph">Digraph</a>&nbsp;method</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-detectChordlessCircuits"><strong>detectChordlessCircuits</strong></a>(self, Comments=False, Debug=False)</dt><dd><tt>Detects&nbsp;a&nbsp;chordless&nbsp;circuit&nbsp;in&nbsp;a&nbsp;digraph.<br>
-Returns&nbsp;a&nbsp;Boolean</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-detectChordlessPath"><strong>detectChordlessPath</strong></a>(self, Pk, n2, Comments=False, Debug=False)</dt><dd><tt>New&nbsp;procedure&nbsp;from&nbsp;Agrum&nbsp;study&nbsp;April&nbsp;2009<br>
-recursive&nbsp;chordless&nbsp;path&nbsp;extraction&nbsp;starting&nbsp;from&nbsp;path<br>
-Pk&nbsp;=&nbsp;[n2,&nbsp;....,&nbsp;n1]&nbsp;and&nbsp;ending&nbsp;in&nbsp;node&nbsp;n2.<br>
-Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-detectCppChordlessCircuits"><strong>detectCppChordlessCircuits</strong></a>(self, Debug=False)</dt><dd><tt>python&nbsp;wrapper&nbsp;for&nbsp;the&nbsp;C++/Agrum&nbsp;based&nbsp;chordless&nbsp;circuits&nbsp;detection<br>
-exchange&nbsp;arguments&nbsp;with&nbsp;external&nbsp;temporary&nbsp;files.<br>
-Returns&nbsp;a&nbsp;boolean&nbsp;value</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-determinateness"><strong>determinateness</strong></a>(self, vec, inPercent=True)</dt><dd><tt>Renders&nbsp;the&nbsp;determinateness&nbsp;of&nbsp;a&nbsp;bipolar&nbsp;characteristic&nbsp;vector<br>
-[(r(x),x),(r(y),y),&nbsp;...]&nbsp;of&nbsp;length&nbsp;n&nbsp;in&nbsp;valuationdomain&nbsp;[Min,Max]:<br>
-&nbsp;<br>
-result&nbsp;=&nbsp;sum_x&nbsp;abs(r(x))/(n*(Max-Min)<br>
-&nbsp;<br>
-If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp;(/2)&nbsp;to&nbsp;[0,1].</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-domin"><strong>domin</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;dominance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-dominantChoices"><strong>dominantChoices</strong></a>(self, S)</dt><dd><tt>Generates&nbsp;all&nbsp;minimal&nbsp;dominant&nbsp;choices&nbsp;of&nbsp;a&nbsp;bipolar&nbsp;valued&nbsp;digraph.<br>
-&nbsp;<br>
-..&nbsp;note::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiate&nbsp;with&nbsp;S&nbsp;=&nbsp;self.<strong>actions</strong>,copy().</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-domirred"><strong>domirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;+irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-domirredval"><strong>domirredval</strong></a>(self, choice, relation)</dt><dd><tt>Renders&nbsp;the&nbsp;valued&nbsp;+irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-domirredx"><strong>domirredx</strong></a>(self, choice, x)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;+irredundance&nbsp;degree&nbsp;of&nbsp;node&nbsp;x&nbsp;in&nbsp;a&nbsp;choice.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-domkernelrestrict"><strong>domkernelrestrict</strong></a>(self, choice)</dt><dd><tt>Parameter:&nbsp;prekernel<br>
-Renders&nbsp;dominant&nbsp;prekernel&nbsp;restricted&nbsp;relation.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-exportD3"><strong>exportD3</strong></a>(self, fileName='index', Comments=True)</dt><dd><tt>This&nbsp;function&nbsp;was&nbsp;designed&nbsp;and&nbsp;implemented&nbsp;by&nbsp;Gary&nbsp;Cornelius,&nbsp;2014&nbsp;for&nbsp;his&nbsp;bachelor&nbsp;thesis&nbsp;at&nbsp;the&nbsp;University&nbsp;of&nbsp;Luxembourg.&nbsp;<br>
-The&nbsp;thesis&nbsp;document&nbsp;with&nbsp;more&nbsp;explanations&nbsp;can&nbsp;be&nbsp;found<br>
-`here&nbsp;&lt;<a href="http://leopold-loewenheim.uni.lu/Digraph3/literature/&gt;`_">http://leopold-loewenheim.uni.lu/Digraph3/literature/&gt;`_</a>&nbsp;.<br>
-&nbsp;<br>
-*Parameters*:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;fileName,&nbsp;name&nbsp;of&nbsp;the&nbsp;generated&nbsp;html&nbsp;file,&nbsp;default&nbsp;=&nbsp;None&nbsp;(graph&nbsp;name&nbsp;as&nbsp;defined&nbsp;in&nbsp;python);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Comments,&nbsp;True&nbsp;=&nbsp;default;<br>
-&nbsp;<br>
-The&nbsp;idea&nbsp;of&nbsp;the&nbsp;project&nbsp;was&nbsp;to&nbsp;find&nbsp;a&nbsp;way&nbsp;that&nbsp;allows&nbsp;you&nbsp;to&nbsp;easily&nbsp;get&nbsp;details&nbsp;about&nbsp;certain&nbsp;nodes&nbsp;or&nbsp;edges&nbsp;of&nbsp;a&nbsp;directed&nbsp;graph&nbsp;in&nbsp;a&nbsp;dynamic&nbsp;format.&nbsp;<br>
-Therefore&nbsp;this&nbsp;function&nbsp;allows&nbsp;you&nbsp;to&nbsp;export&nbsp;a&nbsp;html&nbsp;file&nbsp;together&nbsp;with&nbsp;all&nbsp;the&nbsp;needed&nbsp;libraries,&nbsp;including&nbsp;the&nbsp;<br>
-D3&nbsp;Library&nbsp;which&nbsp;we&nbsp;use&nbsp;for&nbsp;graph&nbsp;generation&nbsp;and&nbsp;the&nbsp;physics&nbsp;between&nbsp;nodes,&nbsp;which&nbsp;attracts&nbsp;or&nbsp;pushes&nbsp;nodes&nbsp;away&nbsp;from&nbsp;each&nbsp;other.<br>
-&nbsp;<br>
-Features&nbsp;of&nbsp;our&nbsp;graph&nbsp;include&nbsp;i.e.&nbsp;:&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;A&nbsp;way&nbsp;to&nbsp;only&nbsp;inspect&nbsp;a&nbsp;node&nbsp;and&nbsp;it's&nbsp;neighbours&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Dynamic&nbsp;draging&nbsp;and&nbsp;freezing&nbsp;of&nbsp;the&nbsp;graph<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Export&nbsp;of&nbsp;a&nbsp;newly&nbsp;created&nbsp;general&nbsp;graph<br>
-&nbsp;<br>
-You&nbsp;can&nbsp;find&nbsp;the&nbsp;list&nbsp;of&nbsp;fututres&nbsp;in&nbsp;the&nbsp;Section&nbsp;below&nbsp;which&nbsp;is&nbsp;arranged&nbsp;according&nbsp;to&nbsp;the&nbsp;graph&nbsp;type.<br>
-&nbsp;<br>
-*If&nbsp;the&nbsp;graph&nbsp;is&nbsp;an&nbsp;outrankingdigraphs*:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Nodes&nbsp;can&nbsp;be&nbsp;dragged&nbsp;and&nbsp;only&nbsp;the&nbsp;name&nbsp;and&nbsp;comment&nbsp;can&nbsp;be&nbsp;edited.&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Edges&nbsp;can&nbsp;be&nbsp;inspected&nbsp;but&nbsp;not&nbsp;edited&nbsp;for&nbsp;this&nbsp;purpose&nbsp;a&nbsp;special&nbsp;json&nbsp;array&nbsp;containing&nbsp;all&nbsp;possible&nbsp;pairwiseComparisions&nbsp;is&nbsp;generated.<br>
-&nbsp;<br>
-*If&nbsp;the&nbsp;graph&nbsp;is&nbsp;a&nbsp;general&nbsp;graph*:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Nodes&nbsp;can&nbsp;be&nbsp;dragged,&nbsp;added,&nbsp;removed&nbsp;and&nbsp;edited.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Edges&nbsp;can&nbsp;be&nbsp;added,&nbsp;removed,&nbsp;inverted&nbsp;and&nbsp;edited.&nbsp;But&nbsp;edges&nbsp;cannot&nbsp;be&nbsp;inspected.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;The&nbsp;pairwiseComparisions&nbsp;key&nbsp;leads&nbsp;to&nbsp;an&nbsp;empty&nbsp;array&nbsp;{}.<br>
-&nbsp;<br>
-In&nbsp;both&nbsp;cases,&nbsp;undefined&nbsp;edges&nbsp;can&nbsp;be&nbsp;hidden&nbsp;and&nbsp;reappear&nbsp;after&nbsp;a&nbsp;simple&nbsp;reload.(right&nbsp;click&nbsp;-&nbsp;reload)<br>
-&nbsp;<br>
-*The&nbsp;generated&nbsp;files*:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;d3.v3.js,&nbsp;contains&nbsp;the&nbsp;D3&nbsp;Data-driven&nbsp;Documents&nbsp;source&nbsp;code,&nbsp;containing&nbsp;one&nbsp;small&nbsp;addition&nbsp;that&nbsp;we&nbsp;made&nbsp;in&nbsp;order&nbsp;to&nbsp;be&nbsp;able&nbsp;to&nbsp;easyly&nbsp;import&nbsp;links&nbsp;with&nbsp;a&nbsp;different&nbsp;formatself.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;digraph3lib.js,&nbsp;contains&nbsp;our&nbsp;library.&nbsp;This&nbsp;file&nbsp;contains&nbsp;everything&nbsp;that&nbsp;we&nbsp;need&nbsp;from&nbsp;import&nbsp;of&nbsp;an&nbsp;XMCDA2&nbsp;file,&nbsp;visualization&nbsp;of&nbsp;the&nbsp;graph&nbsp;to&nbsp;export&nbsp;of&nbsp;the&nbsp;changed&nbsp;graph.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;d3export.json,&nbsp;usually&nbsp;named&nbsp;after&nbsp;the&nbsp;python&nbsp;graph&nbsp;name&nbsp;followed&nbsp;by&nbsp;a&nbsp;ticket&nbsp;number&nbsp;if&nbsp;the&nbsp;file&nbsp;is&nbsp;already&nbsp;present.&nbsp;It&nbsp;is&nbsp;the&nbsp;JSON&nbsp;file&nbsp;that&nbsp;is&nbsp;exported&nbsp;with&nbsp;the&nbsp;format&nbsp;"{"xmcda2":&nbsp;"some&nbsp;xml","pairwiseComparisions":"{"a01":&nbsp;"some&nbsp;html",...}"}.<br>
-&nbsp;<br>
-*Example&nbsp;1*:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;#.&nbsp;python3&nbsp;session:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;digraphs&nbsp;import&nbsp;RandomValuationDigraph<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;dg&nbsp;=&nbsp;RandomValuationDigraph(order=5,Normalized=True)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;dg.<a href="#CoceDigraph-exportD3">exportD3</a>()<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&nbsp;dg.<a href="#CoceDigraph-showInteractiveGraph">showInteractiveGraph</a>()<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;#.&nbsp;index.html:&nbsp;&nbsp;&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Main&nbsp;Screen:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;image::&nbsp;randomvaluation_d3_main.png<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Inspect&nbsp;function:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;image::&nbsp;randomvaluation_d3_inspect.png<br>
-&nbsp;<br>
-..&nbsp;note::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;you&nbsp;want&nbsp;to&nbsp;use&nbsp;the&nbsp;automatic&nbsp;load&nbsp;in&nbsp;Chrome,&nbsp;try&nbsp;using&nbsp;the&nbsp;command:&nbsp;"python&nbsp;-m&nbsp;SimpleHTTPServer"<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;then&nbsp;access&nbsp;the&nbsp;index.html&nbsp;via&nbsp;"<a href="http://0.0.0.0:8000/index.html">http://0.0.0.0:8000/index.html</a>".<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In&nbsp;order&nbsp;to&nbsp;load&nbsp;the&nbsp;CSS&nbsp;an&nbsp;active&nbsp;internet&nbsp;connection&nbsp;is&nbsp;needed!</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, actionsSubset=None, bestChoice=set(), worstChoice=set(), noSilent=True, graphType='png', graphSize='7,7', relation=None)</dt><dd><tt>export&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-exportPrincipalImage"><strong>exportPrincipalImage</strong></a>(self, Reduced=False, Colwise=False, plotFileName=None, Type='png', TempDir='.', Comments=False)</dt><dd><tt>Export&nbsp;as&nbsp;PNG&nbsp;(default)&nbsp;or&nbsp;PDF&nbsp;the&nbsp;principal&nbsp;projection&nbsp;of<br>
-the&nbsp;valued&nbsp;relation&nbsp;using&nbsp;the&nbsp;three&nbsp;principal&nbsp;eigen&nbsp;vectors.<br>
-&nbsp;<br>
-..&nbsp;warning::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;method,&nbsp;writing&nbsp;and&nbsp;reading&nbsp;temporary&nbsp;files:&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;tempCol.r&nbsp;and&nbsp;rotationCol.csv,&nbsp;resp.&nbsp;tempRow.r&nbsp;and&nbsp;rotationRow.csv,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;by&nbsp;default&nbsp;in&nbsp;the&nbsp;working&nbsp;directory&nbsp;(./),<br>
-&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;hence&nbsp;not&nbsp;safe&nbsp;for&nbsp;multiprocessing&nbsp;programs,&nbsp;unless&nbsp;a<br>
-&nbsp;&nbsp;&nbsp;&nbsp;temporary&nbsp;dirctory&nbsp;is&nbsp;provided</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-flatChoice"><strong>flatChoice</strong></a>(self, ch, Debug=False)</dt><dd><tt>Converts&nbsp;set&nbsp;or&nbsp;list&nbsp;ch&nbsp;recursively&nbsp;to&nbsp;a&nbsp;flat&nbsp;list&nbsp;of&nbsp;items.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-forcedBestSingleChoice"><strong>forcedBestSingleChoice</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;most&nbsp;determined&nbsp;outranking&nbsp;singletons&nbsp;in&nbsp;self.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-gammaSets"><strong>gammaSets</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;dictionary&nbsp;of&nbsp;neighborhoods&nbsp;{node:&nbsp;(dx,ax)}<br>
-with&nbsp;set&nbsp;*dx*&nbsp;gathering&nbsp;the&nbsp;dominated,&nbsp;and&nbsp;set&nbsp;*ax*&nbsp;gathering<br>
-the&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-generateAbsPreKernels"><strong>generateAbsPreKernels</strong></a>(self)</dt><dd><tt>Generate&nbsp;all&nbsp;absorbent&nbsp;prekernels&nbsp;from&nbsp;independent&nbsp;choices&nbsp;generator.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-generateDomPreKernels"><strong>generateDomPreKernels</strong></a>(self)</dt><dd><tt>Generate&nbsp;all&nbsp;dominant&nbsp;prekernels&nbsp;from&nbsp;independent&nbsp;choices&nbsp;generator.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-graphDetermination"><strong>graphDetermination</strong></a>(self, Normalized=True)</dt><dd><tt>Output:&nbsp;average&nbsp;normalized&nbsp;(by&nbsp;default)&nbsp;arc&nbsp;determination:<br>
-&nbsp;<br>
-averageDeterm&nbsp;=&nbsp;(&nbsp;sum_(x,y)&nbsp;[&nbsp;abs(&nbsp;relf-relation[x][y]&nbsp;-&nbsp;Med&nbsp;)]&nbsp;/&nbsp;n&nbsp;)&nbsp;/&nbsp;[(&nbsp;Max-Med&nbsp;)&nbsp;if&nbsp;Normalized],<br>
-&nbsp;<br>
-where&nbsp;Med&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['med']&nbsp;and&nbsp;Max&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['max'].</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-independentChoices"><strong>independentChoices</strong></a>(self, U)</dt><dd><tt>Generator&nbsp;for&nbsp;all&nbsp;independent&nbsp;choices&nbsp;with&nbsp;neighborhoods&nbsp;of&nbsp;a&nbsp;bipolar&nbsp;valued&nbsp;digraph:<br>
-&nbsp;<br>
-..&nbsp;note::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;U&nbsp;=&nbsp;self.<a href="#CoceDigraph-singletons">singletons</a>().<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Yields&nbsp;[(independent&nbsp;choice,&nbsp;domnb,&nbsp;absnb,&nbsp;indnb)].</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-inner_prod"><strong>inner_prod</strong></a>(self, v1, v2)</dt><dd><tt>Parameters:&nbsp;two&nbsp;choice&nbsp;characteristic&nbsp;vectors<br>
-Renders&nbsp;the&nbsp;inner&nbsp;product&nbsp;of&nbsp;two&nbsp;characteristic&nbsp;vetors.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-intstab"><strong>intstab</strong></a>(self, choice)</dt><dd><tt>Computes&nbsp;the&nbsp;independence&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-irreflex"><strong>irreflex</strong></a>(self, mat)</dt><dd><tt>puts&nbsp;diagonal&nbsp;entries&nbsp;of&nbsp;mat&nbsp;to&nbsp;valuationdomain['min']</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-isComplete"><strong>isComplete</strong></a>(self, Debug=False)</dt><dd><tt>checks&nbsp;the&nbsp;completeness&nbsp;property&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
-for&nbsp;the&nbsp;absence&nbsp;of&nbsp;a&nbsp;link&nbsp;between&nbsp;two&nbsp;actions!!<br>
-&nbsp;<br>
-..&nbsp;warning::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;reflexive&nbsp;links&nbsp;are&nbsp;ignored&nbsp;!!</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-isCyclic"><strong>isCyclic</strong></a>(self, Debug=False)</dt><dd><tt>checks&nbsp;the&nbsp;cyclicity&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
-for&nbsp;a&nbsp;reflexive&nbsp;loop&nbsp;in&nbsp;its&nbsp;transitive&nbsp;closure<br>
-!!&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;supposed&nbsp;to&nbsp;be&nbsp;irreflexive&nbsp;!!</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-isWeaklyComplete"><strong>isWeaklyComplete</strong></a>(self, Debug=False)</dt><dd><tt>checks&nbsp;the&nbsp;weakly&nbsp;completeness&nbsp;property&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
-for&nbsp;the&nbsp;absence&nbsp;of&nbsp;a&nbsp;link&nbsp;between&nbsp;two&nbsp;actions!!<br>
-&nbsp;<br>
-..&nbsp;warning::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;reflexive&nbsp;links&nbsp;are&nbsp;ignored&nbsp;!!</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-iterateRankingByChoosing"><strong>iterateRankingByChoosing</strong></a>(self, Odd=False, CoDual=False, Comments=True, Debug=False, Limited=None)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;by&nbsp;choosing&nbsp;result&nbsp;when&nbsp;progressively&nbsp;eliminating<br>
-all&nbsp;chordless&nbsp;(odd&nbsp;only)&nbsp;circuits&nbsp;with&nbsp;rising&nbsp;valuation&nbsp;cut&nbsp;levels.<br>
-&nbsp;<br>
-Parameters<br>
-&nbsp;&nbsp;&nbsp;&nbsp;CoDual&nbsp;=&nbsp;False&nbsp;(default)/True<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Limited&nbsp;=&nbsp;proportion&nbsp;(in&nbsp;[0,1])&nbsp;*&nbsp;(max&nbsp;-&nbsp;med)&nbsp;valuationdomain</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-kChoices"><strong>kChoices</strong></a>(self, A, k)</dt><dd><tt>Renders&nbsp;all&nbsp;choices&nbsp;of&nbsp;length&nbsp;k&nbsp;from&nbsp;set&nbsp;A</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-matmult2"><strong>matmult2</strong></a>(self, m, v)</dt><dd><tt>Parameters:&nbsp;digraph&nbsp;relation&nbsp;and&nbsp;choice&nbsp;characteristic&nbsp;vector<br>
-matrix&nbsp;multiply&nbsp;vector&nbsp;by&nbsp;inner&nbsp;production</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-meanDegree"><strong>meanDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;degree&nbsp;of&nbsp;self.<br>
-!!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-meanLength"><strong>meanLength</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;mean&nbsp;neighbourhoor&nbsp;depth&nbsp;of&nbsp;self.<br>
-!!!&nbsp;self.<strong>order</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-minimalChoices"><strong>minimalChoices</strong></a>(self, S)</dt><dd><tt>Generates&nbsp;all&nbsp;dominant&nbsp;or&nbsp;absorbent&nbsp;choices&nbsp;of&nbsp;a&nbsp;bipolar<br>
-valued&nbsp;digraph.<br>
-&nbsp;<br>
-..&nbsp;note:<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;Initiate&nbsp;with&nbsp;S&nbsp;=&nbsp;(actions,&nbsp;dict&nbsp;of&nbsp;dominant&nbsp;or&nbsp;absorbent&nbsp;closed&nbsp;neighborhoods)<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;See&nbsp;showMinDom&nbsp;and&nbsp;showMinAbs&nbsp;methods.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-minimalValuationLevelForCircuitsElimination"><strong>minimalValuationLevelForCircuitsElimination</strong></a>(self, Odd=True, Debug=False, Comments=False)</dt><dd><tt>renders&nbsp;the&nbsp;minimal&nbsp;valuation&nbsp;level&nbsp;&lt;lambda&gt;&nbsp;that&nbsp;eliminates&nbsp;all<br>
-self.<strong>circuitsList</strong>&nbsp;stored&nbsp;odd&nbsp;chordless&nbsp;circuits&nbsp;from&nbsp;self.<br>
-&nbsp;<br>
-..&nbsp;warning::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;&lt;lambda&gt;&nbsp;level&nbsp;polarised&nbsp;may&nbsp;still&nbsp;contain&nbsp;newly&nbsp;appearing&nbsp;chordless&nbsp;odd&nbsp;circuits&nbsp;!</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-neighbourhoodCollection"><strong>neighbourhoodCollection</strong></a>(self, Oriented=False, Potential=False)</dt><dd><tt>Renders&nbsp;the&nbsp;neighbourhood.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-neighbourhoodDepthDistribution"><strong>neighbourhoodDepthDistribution</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;distribtion&nbsp;of&nbsp;neighbourhood&nbsp;depths.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-notGammaSets"><strong>notGammaSets</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;dictionary&nbsp;of&nbsp;neighborhoods&nbsp;{node:&nbsp;(dx,ax)}<br>
-with&nbsp;set&nbsp;*dx*&nbsp;gathering&nbsp;the&nbsp;not&nbsp;dominated,&nbsp;and&nbsp;set&nbsp;*ax*&nbsp;gathering<br>
-the&nbsp;not&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-notaneighbors"><strong>notaneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;not&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-notdneighbors"><strong>notdneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;not&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-omax"><strong>omax</strong></a>(self, L, Debug=False)</dt><dd><tt>epistemic&nbsp;disjunction&nbsp;for&nbsp;bipolar&nbsp;outranking&nbsp;characteristics<br>
-computation</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-omin"><strong>omin</strong></a>(self, L, Debug=False)</dt><dd><tt>epistemic&nbsp;conjunction&nbsp;for&nbsp;bipolar&nbsp;outranking&nbsp;characteristics<br>
-computation</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-outDegrees"><strong>outDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;outdegrees</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-outDegreesDistribution"><strong>outDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;outdegrees.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-plusirredundant"><strong>plusirredundant</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;+irredundant&nbsp;choices&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-powerset"><strong>powerset</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;subsets&nbsp;of&nbsp;a&nbsp;set.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-readPerrinMisset"><strong>readPerrinMisset</strong></a>(self, file)</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;from&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;file.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-readPerrinMissetOpt"><strong>readPerrinMissetOpt</strong></a>(self, file)</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;from&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;file.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-readabsvector"><strong>readabsvector</strong></a>(self, x, relation)</dt><dd><tt>Parameter:&nbsp;action&nbsp;x<br>
-absorbent&nbsp;in&nbsp;vector.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-readdomvector"><strong>readdomvector</strong></a>(self, x, relation)</dt><dd><tt>Parameter:&nbsp;action&nbsp;x<br>
-dominant&nbsp;out&nbsp;vector.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-recodeValuation"><strong>recodeValuation</strong></a>(self, newMin=-1.0, newMax=1.0, Debug=False)</dt><dd><tt>Recodes&nbsp;the&nbsp;characteristic&nbsp;valuation&nbsp;domain&nbsp;according<br>
-to&nbsp;the&nbsp;parameters&nbsp;given.<br>
-&nbsp;<br>
-..&nbsp;note::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;values&nbsp;gives&nbsp;a&nbsp;normalized&nbsp;valuation&nbsp;domain</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-relationFct"><strong>relationFct</strong></a>(self, x, y)</dt><dd><tt>wrapper&nbsp;for&nbsp;self.<strong>relation</strong>&nbsp;dictionary&nbsp;access&nbsp;to&nbsp;ensure&nbsp;interoperability<br>
-with&nbsp;the&nbsp;sparse&nbsp;and&nbsp;big&nbsp;outranking&nbsp;digraph&nbsp;implementation&nbsp;model.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-save"><strong>save</strong></a>(self, fileName='tempdigraph', option=None, DecimalValuation=True, decDigits=2)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of<br>
-a&nbsp;python&nbsp;source&nbsp;code&nbsp;file</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-saveCSV"><strong>saveCSV</strong></a>(self, fileName='tempdigraph', Normalized=False, Dual=False, Converse=False, Diagonal=False, Debug=False)</dt><dd><tt>Persistent&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;class&nbsp;instance&nbsp;in&nbsp;the&nbsp;form&nbsp;of<br>
-a&nbsp;csv&nbsp;file.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-saveXMCDA"><strong>saveXMCDA</strong></a>(self, fileName='temp', relationName='R', category='random', subcategory='valued', author='digraphs Module (RB)', reference='saved from Python', valuationType='standard', servingD3=False)</dt><dd><tt>save&nbsp;digraph&nbsp;in&nbsp;XMCDA&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-saveXMCDA2"><strong>saveXMCDA2</strong></a>(self, fileName='temp', fileExt='xmcda2', Comments=True, relationName='R', relationType='binary', category='random', subcategory='valued', author='digraphs Module (RB)', reference='saved from Python', valuationType='standard', digits=2, servingD3=False)</dt><dd><tt>save&nbsp;digraph&nbsp;in&nbsp;XMCDA&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-saveXML"><strong>saveXML</strong></a>(self, name='temp', category='general', subcategory='general', author='digraphs Module (RB)', reference='saved from Python')</dt><dd><tt>save&nbsp;digraph&nbsp;in&nbsp;XML&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-savedre"><strong>savedre</strong></a>(self, name='temp')</dt><dd><tt>save&nbsp;digraph&nbsp;in&nbsp;nauty&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-sharp"><strong>sharp</strong></a>(self, x, y)</dt><dd><tt>Paramaters:&nbsp;choice&nbsp;characteristic&nbsp;values.<br>
-Renders&nbsp;the&nbsp;sharpest&nbsp;of&nbsp;two&nbsp;characteristic&nbsp;values&nbsp;x&nbsp;and&nbsp;y.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-sharpvec"><strong>sharpvec</strong></a>(self, v, w)</dt><dd><tt>Paramaters:&nbsp;choice&nbsp;characteristic&nbsp;vectors.<br>
-Renders&nbsp;the&nbsp;sharpest&nbsp;of&nbsp;two&nbsp;characteristic&nbsp;vectors&nbsp;v&nbsp;and&nbsp;w.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showActions"><strong>showActions</strong></a>(self)</dt><dd><tt>presentation&nbsp;methods&nbsp;for&nbsp;digraphs&nbsp;actions</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showAll"><strong>showAll</strong></a>(self)</dt></dl>
-
-<dl><dt><a name="CoceDigraph-showAutomorphismGenerators"><strong>showAutomorphismGenerators</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;generators&nbsp;of&nbsp;the&nbsp;automorphism&nbsp;group.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showBadChoices"><strong>showBadChoices</strong></a>(self, Recompute=True)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;bad&nbsp;choices.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showChoiceVector"><strong>showChoiceVector</strong></a>(self, ch, ChoiceVector=True)</dt><dd><tt>show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showChordlessCircuits"><strong>showChordlessCircuits</strong></a>(self)</dt><dd><tt>show&nbsp;methods&nbsp;for&nbsp;(chordless)&nbsp;circuits&nbsp;in&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>.<br>
-Dummy&nbsp;for&nbsp;<a href="#CoceDigraph-showCircuits">showCircuits</a>().</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showCircuits"><strong>showCircuits</strong></a>(self)</dt><dd><tt>show&nbsp;methods&nbsp;for&nbsp;circuits&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showComponents"><strong>showComponents</strong></a>(self)</dt></dl>
-
-<dl><dt><a name="CoceDigraph-showGoodChoices"><strong>showGoodChoices</strong></a>(self, Recompute=True)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showHTMLRelationMap"><strong>showHTMLRelationMap</strong></a>(self, actionsList=None, rankingRule='Copeland', Colored=True, tableTitle='Relation Map', relationName='r(x S y)', symbols=['+', '&amp;middot;', '&amp;nbsp;', '&amp;#150;', '&amp;#151'])</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;map&nbsp;of&nbsp;self.<br>
-See&nbsp;corresponding&nbsp;<a href="#Digraph">Digraph</a>.<a href="#CoceDigraph-showRelationMap">showRelationMap</a>()&nbsp;method.<br>
-&nbsp;<br>
-Example::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;RandomCBPerformanceTableau(numberOfActions=25,seed=1)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;BipolarOutrankingDigraph(t,Normalized=True)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;gcd&nbsp;=&nbsp;~(-g)&nbsp;&nbsp;#&nbsp;strict&nbsp;outranking&nbsp;relation<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;gcd.<a href="#CoceDigraph-showHTMLRelationMap">showHTMLRelationMap</a>(rankingRule="netFlows")<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
-..&nbsp;image::&nbsp;relationMap.png<br>
-&nbsp;&nbsp;&nbsp;:alt:&nbsp;Browser&nbsp;view&nbsp;of&nbsp;a&nbsp;relation&nbsp;map<br>
-&nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
-&nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#CoceDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
-For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showMIS"><strong>showMIS</strong></a>(self, withListing=True)</dt><dd><tt>Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;choices:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>misset</strong>.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showMIS_AH"><strong>showMIS_AH</strong></a>(self, withListing=True)</dt><dd><tt>Prints&nbsp;all&nbsp;MIS&nbsp;using&nbsp;the&nbsp;Hertz&nbsp;method.<br>
-Result&nbsp;saved&nbsp;in&nbsp;self.<strong>hertzmisset</strong>.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showMIS_HB2"><strong>showMIS_HB2</strong></a>(self, withListing=True)</dt><dd><tt>Prints&nbsp;all&nbsp;MIS&nbsp;using&nbsp;the&nbsp;Hertz-Bisdorff&nbsp;method.<br>
-Result&nbsp;saved&nbsp;in&nbsp;self.<strong>newmisset</strong>.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showMIS_RB"><strong>showMIS_RB</strong></a>(self, withListing=True)</dt><dd><tt>Prints&nbsp;all&nbsp;MIS&nbsp;using&nbsp;the&nbsp;Bisdorff&nbsp;method.<br>
-Result&nbsp;saved&nbsp;in&nbsp;self.<strong>newmisset</strong>.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showMIS_UD"><strong>showMIS_UD</strong></a>(self, withListing=True)</dt><dd><tt>Prints&nbsp;all&nbsp;MIS&nbsp;using&nbsp;the&nbsp;Hertz-Bisdorff&nbsp;method.<br>
-Result&nbsp;saved&nbsp;in&nbsp;self.<strong>newmisset</strong>.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showMaxAbsIrred"><strong>showMaxAbsIrred</strong></a>(self, withListing=True)</dt><dd><tt>Computing&nbsp;maximal&nbsp;-irredundant&nbsp;choices:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>absirset</strong>.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showMaxDomIrred"><strong>showMaxDomIrred</strong></a>(self, withListing=True)</dt><dd><tt>Computing&nbsp;maximal&nbsp;+irredundant&nbsp;choices:<br>
-&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>domirset</strong>.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showMinAbs"><strong>showMinAbs</strong></a>(self, withListing=True)</dt><dd><tt>Prints&nbsp;minimal&nbsp;absorbent&nbsp;choices:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>absset</strong>.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showMinDom"><strong>showMinDom</strong></a>(self, withListing=True)</dt><dd><tt>Prints&nbsp;all&nbsp;minimal&nbsp;dominant&nbsp;choices:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>domset</strong>.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showNeighborhoods"><strong>showNeighborhoods</strong></a>(self)</dt><dd><tt>Lists&nbsp;the&nbsp;gamma&nbsp;and&nbsp;the&nbsp;notGamma&nbsp;function&nbsp;of&nbsp;self.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showOrbits"><strong>showOrbits</strong></a>(self, InChoices, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;self.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showOrbitsFromFile"><strong>showOrbitsFromFile</strong></a>(self, InFile, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showPreKernels"><strong>showPreKernels</strong></a>(self, withListing=True)</dt><dd><tt>Printing&nbsp;dominant&nbsp;and&nbsp;absorbent&nbsp;preKernels:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>dompreKernels</strong>&nbsp;and&nbsp;self.<strong>abspreKernels</strong></tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showRankingByBestChoosing"><strong>showRankingByBestChoosing</strong></a>(self, rankingByBestChoosing=None)</dt><dd><tt>A&nbsp;show&nbsp;method&nbsp;for&nbsp;self.<strong>rankinByBestChoosing</strong>&nbsp;result.<br>
-&nbsp;<br>
-..&nbsp;warning::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#CoceDigraph-computeRankingByBestChoosing">computeRankingByBestChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByBestChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showRankingByChoosing"><strong>showRankingByChoosing</strong></a>(self, rankingByChoosing=None)</dt><dd><tt>A&nbsp;show&nbsp;method&nbsp;for&nbsp;self.<strong>rankinByChoosing</strong>&nbsp;result.<br>
-&nbsp;<br>
-..&nbsp;warning::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#CoceDigraph-computeRankingByChoosing">computeRankingByChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showRankingByLastChoosing"><strong>showRankingByLastChoosing</strong></a>(self, rankingByLastChoosing=None, Debug=None)</dt><dd><tt>A&nbsp;show&nbsp;method&nbsp;for&nbsp;self.<strong>rankinByChoosing</strong>&nbsp;result.<br>
-&nbsp;<br>
-..&nbsp;warning::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;self.<a href="#CoceDigraph-computeRankingByLastChoosing">computeRankingByLastChoosing</a>(CoDual=False/True)&nbsp;method&nbsp;instantiating&nbsp;the&nbsp;self.<strong>rankingByChoosing</strong>&nbsp;slot&nbsp;is&nbsp;pre-required&nbsp;!</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showRelation"><strong>showRelation</strong></a>(self)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;##.##&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showRelationMap"><strong>showRelationMap</strong></a>(self, symbols=None, rankingRule='Copeland')</dt><dd><tt>Prints&nbsp;on&nbsp;the&nbsp;console,&nbsp;in&nbsp;text&nbsp;map&nbsp;format,&nbsp;the&nbsp;location&nbsp;of<br>
-certainly&nbsp;validated&nbsp;and&nbsp;certainly&nbsp;invalidated&nbsp;outranking&nbsp;situations.<br>
-&nbsp;<br>
-By&nbsp;default,&nbsp;symbols&nbsp;=&nbsp;{'max':'┬','positive':&nbsp;'+',&nbsp;'median':&nbsp;'&nbsp;',<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'negative':&nbsp;'-',&nbsp;'min':&nbsp;'┴'}<br>
-&nbsp;<br>
-The&nbsp;default&nbsp;ordering&nbsp;of&nbsp;the&nbsp;output&nbsp;is&nbsp;following&nbsp;the&nbsp;Copeland&nbsp;ranking&nbsp;rule<br>
-from&nbsp;best&nbsp;to&nbsp;worst&nbsp;actions.&nbsp;Further&nbsp;available&nbsp;ranking&nbsp;rules&nbsp;are&nbsp;net&nbsp;flows&nbsp;(rankingRule="netFlows"),<br>
-Kohler's&nbsp;(rankingRule="kohler"),&nbsp;and&nbsp;Tideman's&nbsp;ranked&nbsp;pairs&nbsp;rule&nbsp;(rankingRule="rankedPairs").<br>
-&nbsp;<br>
-Example::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;RandomCBPerformanceTableau(numberOfActions=25,seed=1)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;BipolarOutrankingDigraph(t,Normalized=True)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;gcd&nbsp;=&nbsp;~(-g)&nbsp;&nbsp;#&nbsp;strict&nbsp;outranking&nbsp;relation<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;gcd.<a href="#CoceDigraph-showRelationMap">showRelationMap</a>(rankingRule="netFlows")<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;++++++++&nbsp;&nbsp;+++++┬+┬┬+<br>
-&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;-&nbsp;&nbsp;&nbsp;+&nbsp;+++++&nbsp;++┬+┬+++┬++<br>
-&nbsp;&nbsp;&nbsp;&nbsp;┴+&nbsp;&nbsp;┴&nbsp;+&nbsp;++&nbsp;&nbsp;++++┬+┬┬++┬++<br>
-&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;++&nbsp;-&nbsp;++++-++++++┬++┬+<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;-&nbsp;-&nbsp;++-&nbsp;┬-&nbsp;+&nbsp;-+┬+-┬┬<br>
-&nbsp;&nbsp;&nbsp;&nbsp;-----&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-┬┬┬-+&nbsp;&nbsp;-┬┬<br>
-&nbsp;&nbsp;&nbsp;&nbsp;----&nbsp;&nbsp;&nbsp;&nbsp;--+-+++++++++++++<br>
-&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;--+-&nbsp;--++&nbsp;++&nbsp;+++-┬+-┬┬<br>
-&nbsp;&nbsp;&nbsp;&nbsp;----&nbsp;&nbsp;-&nbsp;&nbsp;-+--&nbsp;++--+++++&nbsp;+<br>
-&nbsp;&nbsp;&nbsp;&nbsp;-----&nbsp;++-&nbsp;---&nbsp;+---++++┬&nbsp;+<br>
-&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;--&nbsp;---+&nbsp;-++-+++-+&nbsp;+-++<br>
-&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;--┴---+&nbsp;&nbsp;+&nbsp;+-++-+&nbsp;-&nbsp;&nbsp;+<br>
-&nbsp;&nbsp;&nbsp;&nbsp;----&nbsp;┴---+--&nbsp;++--++++&nbsp;-&nbsp;+<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--┴┴--&nbsp;&nbsp;---&nbsp;-&nbsp;&nbsp;--+&nbsp;--┬┬<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;---------+--+&nbsp;-----&nbsp;+-┬┬<br>
-&nbsp;&nbsp;&nbsp;&nbsp;-┴---┴-&nbsp;---+-&nbsp;+&nbsp;---+++┬&nbsp;+<br>
-&nbsp;&nbsp;&nbsp;&nbsp;-┴┴--┴---+---&nbsp;++&nbsp;-++--+++<br>
-&nbsp;&nbsp;&nbsp;&nbsp;-----┴---&nbsp;---+-+-&nbsp;++---+&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;-┴┴---------------&nbsp;--++┬&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;--┴----------------&nbsp;--+┬&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;┴--┴┴&nbsp;-┴--┴┴-┴&nbsp;--++&nbsp;&nbsp;++-+<br>
-&nbsp;&nbsp;&nbsp;&nbsp;----┴┴---------------&nbsp;-&nbsp;&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;┴┴┴----+-┴+┴---┴-+---+&nbsp;┴+<br>
-&nbsp;&nbsp;&nbsp;&nbsp;┴┴-┴┴┴-┴-&nbsp;-&nbsp;-┴┴---┴┴+&nbsp;┬&nbsp;-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;----┴┴-┴-----┴┴---&nbsp;&nbsp;-&nbsp;--&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Ranking&nbsp;rule:&nbsp;netFlows<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showRelationTable"><strong>showRelationTable</strong></a>(self, Sorted=True, IntegerValues=False, actionsSubset=None, relation=None, ndigits=2, ReflexiveTerms=True)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
-&nbsp;<br>
-..&nbsp;note::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Computes&nbsp;by&nbsp;default&nbsp;the&nbsp;Rubis&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;on&nbsp;the&nbsp;corresponding&nbsp;strict&nbsp;(codual)&nbsp;outranking&nbsp;digraph.<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;In&nbsp;case&nbsp;of&nbsp;chordless&nbsp;circuits,&nbsp;if&nbsp;supporting&nbsp;arcs&nbsp;are&nbsp;more&nbsp;credible<br>
-&nbsp;&nbsp;&nbsp;&nbsp;than&nbsp;the&nbsp;reversed&nbsp;negating&nbsp;arcs,&nbsp;we&nbsp;collapse&nbsp;the&nbsp;circuits&nbsp;into&nbsp;hyper&nbsp;nodes.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Inversely,&nbsp;&nbsp;if&nbsp;supporting&nbsp;arcs&nbsp;are&nbsp;not&nbsp;more&nbsp;credible&nbsp;than&nbsp;the&nbsp;reversed&nbsp;negating&nbsp;arcs,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;we&nbsp;brake&nbsp;the&nbsp;circuits&nbsp;on&nbsp;their&nbsp;weakest&nbsp;arc.<br>
-&nbsp;<br>
-Usage&nbsp;example:<br>
-&nbsp;<br>
-&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
-&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(seed=5)<br>
-&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;BipolarOutrankingDigraph(t)<br>
-&gt;&gt;&gt;&nbsp;g.<a href="#CoceDigraph-showRubisBestChoiceRecommendation">showRubisBestChoiceRecommendation</a>()<br>
-***********************<br>
-RuBis&nbsp;Best&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
-(in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;determinateness)&nbsp;&nbsp;&nbsp;<br>
-Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
-===&nbsp;&gt;&gt;&nbsp;potential&nbsp;vest&nbsp;choices<br>
-*&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a04',&nbsp;'a14',&nbsp;'a19',&nbsp;'a20']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
-&nbsp;&nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
-&nbsp;&nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
-&nbsp;&nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-59.52<br>
-&nbsp;&nbsp;&nbsp;covering&nbsp;(%)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;75.00<br>
-&nbsp;&nbsp;&nbsp;determinateness&nbsp;(%)&nbsp;:&nbsp;57.86<br>
-&nbsp;&nbsp;&nbsp;-&nbsp;most&nbsp;credible&nbsp;action(s)&nbsp;=&nbsp;{&nbsp;'a14':&nbsp;23.81,&nbsp;'a19':&nbsp;11.90,&nbsp;'a04':&nbsp;2.38,&nbsp;'a20':&nbsp;1.19,&nbsp;}&nbsp;&nbsp;<br>
-===&nbsp;&gt;&gt;&nbsp;potential&nbsp;worst&nbsp;choices&nbsp;<br>
-*&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a03',&nbsp;'a12',&nbsp;'a17']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
-&nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
-&nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-76.19<br>
-&nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
-&nbsp;&nbsp;covering&nbsp;(%)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;0.00<br>
-&nbsp;&nbsp;determinateness&nbsp;(%)&nbsp;:&nbsp;65.39<br>
-&nbsp;&nbsp;-&nbsp;most&nbsp;credible&nbsp;action(s)&nbsp;=&nbsp;{&nbsp;'a03':&nbsp;38.10,&nbsp;'a12':&nbsp;13.10,&nbsp;'a17':&nbsp;4.76,&nbsp;}<br>
-Execution&nbsp;time:&nbsp;0.024&nbsp;seconds<br>
-*****************************</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showRubyChoice"><strong>showRubyChoice</strong></a>(self, Comments=False, _OldCoca=True)</dt><dd><tt>dummy&nbsp;for&nbsp;<a href="#CoceDigraph-showRubisBestChoiceRecommendation">showRubisBestChoiceRecommendation</a>()<br>
-older&nbsp;versions&nbsp;compatibility</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>concise&nbsp;presentation&nbsp;method&nbsp;for&nbsp;genuine&nbsp;digraphs.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showSingletonRanking"><strong>showSingletonRanking</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>Calls&nbsp;self.<a href="#CoceDigraph-computeSingletonRanking">computeSingletonRanking</a>(comments=True,Debug&nbsp;=&nbsp;False).<br>
-Renders&nbsp;and&nbsp;prints&nbsp;the&nbsp;sorted&nbsp;bipolar&nbsp;net&nbsp;determinatation&nbsp;of&nbsp;outrankingness<br>
-minus&nbsp;outrankedness&nbsp;credibilities&nbsp;of&nbsp;all&nbsp;singleton&nbsp;choices.<br>
-res&nbsp;=&nbsp;((netdet,sigleton,dom,absorb)+)</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showStatistics"><strong>showStatistics</strong></a>(self)</dt><dd><tt>Computes&nbsp;digraph&nbsp;statistics&nbsp;like&nbsp;order,&nbsp;size&nbsp;and&nbsp;arc-density.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-showdre"><strong>showdre</strong></a>(self)</dt><dd><tt>Shows&nbsp;relation&nbsp;in&nbsp;nauty&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-singletons"><strong>singletons</strong></a>(self)</dt><dd><tt>list&nbsp;of&nbsp;singletons&nbsp;and&nbsp;neighborhoods<br>
-[(singx1,&nbsp;+nx1,&nbsp;-nx1,&nbsp;not(+nx1&nbsp;or&nbsp;-nx1)),....&nbsp;]</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-sizeSubGraph"><strong>sizeSubGraph</strong></a>(self, choice)</dt><dd><tt>Output:&nbsp;(size,&nbsp;undeterm,arcDensity).<br>
-Renders&nbsp;the&nbsp;arc&nbsp;density&nbsp;of&nbsp;the&nbsp;induced&nbsp;subgraph.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-strongComponents"><strong>strongComponents</strong></a>(self, setPotential=False)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;strong&nbsp;components&nbsp;of&nbsp;self.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-symDegreesDistribution"><strong>symDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;symmetric&nbsp;degrees.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-topologicalSort"><strong>topologicalSort</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
-and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
-Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
-Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-weakAneighbors"><strong>weakAneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-weakCondorcetWinners"><strong>weakCondorcetWinners</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
-self.<strong>relation</strong>[x][y]&nbsp;&gt;=&nbsp;self.<strong>valuationdomain</strong>['med']<br>
-for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-weakDneighbors"><strong>weakDneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-weakGammaSets"><strong>weakGammaSets</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;dictionary&nbsp;of&nbsp;neighborhoods&nbsp;{node:&nbsp;(dx,ax)}</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-worstRanks"><strong>worstRanks</strong></a>(self)</dt><dd><tt>renders&nbsp;worst&nbsp;possible&nbsp;ranks&nbsp;from&nbsp;outdegrees&nbsp;account</tt></dd></dl>
-
-<dl><dt><a name="CoceDigraph-zoomValuation"><strong>zoomValuation</strong></a>(self, zoomFactor=1.0)</dt><dd><tt>Zooms&nbsp;in&nbsp;or&nbsp;out,&nbsp;depending&nbsp;on&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;zoomFactor&nbsp;provided,<br>
-the&nbsp;bipolar&nbsp;valuation&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
-
-<hr>
-Data descriptors inherited from <a href="digraphs.html#Digraph">Digraph</a>:<br>
-<dl><dt><strong>__dict__</strong></dt>
-<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
-</dl>
-<dl><dt><strong>__weakref__</strong></dt>
-<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
-</dl>
-</td></tr></table> <p>
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#ffc8d8">
-<td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="CompleteDigraph">class <strong>CompleteDigraph</strong></a>(<a href="digraphs.html#Digraph">Digraph</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
@@ -8085,6 +7134,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 <dl><dt><a name="CompleteDigraph-computeConcentrationIndexTrapez"><strong>computeConcentrationIndexTrapez</strong></a>(self, X, N)</dt><dd><tt>Renders&nbsp;the&nbsp;Gini&nbsp;concentration&nbsp;index&nbsp;of&nbsp;the&nbsp;X&nbsp;serie.<br>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
+
+<dl><dt><a name="CompleteDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#CompleteDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
 
 <dl><dt><a name="CompleteDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
@@ -8367,6 +7418,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="CompleteDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="CompleteDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#CompleteDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="CompleteDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -8419,7 +7472,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="CompleteDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="CompleteDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="CompleteDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="CompleteDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -9057,6 +8110,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="ConverseDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#ConverseDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="ConverseDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -9338,6 +8393,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="ConverseDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="ConverseDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#ConverseDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="ConverseDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -9390,7 +8447,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="ConverseDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="ConverseDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="ConverseDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="ConverseDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -10030,6 +9087,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="CoverDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#CoverDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="CoverDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -10311,6 +9370,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="CoverDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="CoverDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#CoverDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="CoverDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -10363,7 +9424,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="CoverDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="CoverDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="CoverDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="CoverDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -10858,23 +9919,38 @@ Data descriptors inherited from <a href="digraphs.html#Digraph">Digraph</a>:<br>
 <td colspan=2><tt>Genuine&nbsp;root&nbsp;class&nbsp;of&nbsp;all&nbsp;Digraph3&nbsp;modules.<br>
 See&nbsp;`tutorial&nbsp;working&nbsp;with&nbsp;the&nbsp;digraphs&nbsp;module&nbsp;&lt;<a href="http://leopold-loewenheim.uni.lu/docDigraph3/tutorial.html#digraph-object-structure&gt;`_">http://leopold-loewenheim.uni.lu/docDigraph3/tutorial.html#digraph-object-structure&gt;`_</a>&nbsp;<br>
 &nbsp;<br>
-Python&nbsp;data&nbsp;file&nbsp;format:<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;actionset&nbsp;=&nbsp;{'1':&nbsp;{'name':&nbsp;'a1',&nbsp;'shortName':&nbsp;...},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'2':&nbsp;{'name':&nbsp;'a1',&nbsp;...},<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;}<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;valuationdomain&nbsp;=&nbsp;{&nbsp;'min':-1,&nbsp;'med':0,&nbsp;'max':&nbsp;1}<br>
-&nbsp;&nbsp;&nbsp;*&nbsp;relation&nbsp;=&nbsp;{&nbsp;'1':&nbsp;{&nbsp;'1':0,&nbsp;'2':&nbsp;1,&nbsp;...},&nbsp;...}<br>
+All&nbsp;instances&nbsp;of&nbsp;the&nbsp;:py:class:`digraphs.<a href="#Digraph">Digraph</a>`&nbsp;class&nbsp;contain&nbsp;at&nbsp;least&nbsp;the&nbsp;following&nbsp;components:&nbsp;<br>
 &nbsp;<br>
-Example&nbsp;python3&nbsp;(3.5+&nbsp;recommended)&nbsp;session::<br>
-&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;digraphs&nbsp;import&nbsp;<a href="#Digraph">Digraph</a><br>
-&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="#Digraph">Digraph</a>('tempdigraph')<br>
-&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;g.<a href="#Digraph-showShort">showShort</a>()<br>
-&nbsp;&nbsp;&nbsp;*-----&nbsp;show&nbsp;short&nbsp;--------------*<br>
-&nbsp;&nbsp;&nbsp;<a href="#Digraph">Digraph</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;tempdigraph<br>
-&nbsp;&nbsp;&nbsp;Actions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['1',&nbsp;'2',&nbsp;'3']<br>
-&nbsp;&nbsp;&nbsp;Valuation&nbsp;domain&nbsp;:&nbsp;{'med':&nbsp;Decimal("-1.0"),&nbsp;'max':&nbsp;Decimal("1.0"),&nbsp;'min':&nbsp;Decimal("0.0")}<br>
-&nbsp;&nbsp;&nbsp;*---&nbsp;Connected&nbsp;Components&nbsp;---*<br>
-&nbsp;&nbsp;&nbsp;1:&nbsp;['1',&nbsp;'2',&nbsp;'3']<br>&nbsp;</tt></td></tr>
+1.&nbsp;A&nbsp;collection&nbsp;of&nbsp;digraph&nbsp;nodes&nbsp;called&nbsp;**actions**&nbsp;(decision&nbsp;alternatives):&nbsp;a&nbsp;list,&nbsp;set&nbsp;or&nbsp;(ordered)&nbsp;dictionary&nbsp;of&nbsp;nodes&nbsp;with&nbsp;'name'&nbsp;and&nbsp;'shortname'&nbsp;attributes,<br>
+2.&nbsp;A&nbsp;logical&nbsp;characteristic&nbsp;**valuationdomain**,&nbsp;a&nbsp;dictionary&nbsp;with&nbsp;three&nbsp;decimal&nbsp;entries:&nbsp;the&nbsp;minimum&nbsp;(-1.0,&nbsp;means&nbsp;certainly&nbsp;false),&nbsp;the&nbsp;median&nbsp;(0.0,&nbsp;means&nbsp;missing&nbsp;information)&nbsp;and&nbsp;the&nbsp;maximum&nbsp;characteristic&nbsp;value&nbsp;(+1.0,&nbsp;means&nbsp;certainly&nbsp;true),<br>
+3.&nbsp;The&nbsp;digraph&nbsp;**relation**&nbsp;:&nbsp;a&nbsp;double&nbsp;dictionary&nbsp;indexed&nbsp;by&nbsp;an&nbsp;oriented&nbsp;pair&nbsp;of&nbsp;actions&nbsp;(nodes)&nbsp;and&nbsp;carrying&nbsp;a&nbsp;characteristic&nbsp;value&nbsp;in&nbsp;the&nbsp;range&nbsp;of&nbsp;the&nbsp;previous&nbsp;valuation&nbsp;domain,<br>
+4.&nbsp;Its&nbsp;associated&nbsp;**gamma&nbsp;function**&nbsp;:&nbsp;a&nbsp;dictionary&nbsp;containing&nbsp;the&nbsp;direct&nbsp;successors,&nbsp;respectively&nbsp;predecessors&nbsp;of&nbsp;each&nbsp;action,&nbsp;automatically&nbsp;added&nbsp;by&nbsp;the&nbsp;<a href="builtins.html#object">object</a>&nbsp;constructor,<br>
+5.&nbsp;Its&nbsp;associated&nbsp;**notGamma&nbsp;function**&nbsp;:&nbsp;a&nbsp;dictionary&nbsp;containing&nbsp;the&nbsp;actions&nbsp;that&nbsp;are&nbsp;not&nbsp;direct&nbsp;successors&nbsp;respectively&nbsp;predecessors&nbsp;of&nbsp;each&nbsp;action,&nbsp;automatically&nbsp;added&nbsp;by&nbsp;the&nbsp;<a href="builtins.html#object">object</a>&nbsp;constructor.<br>
+&nbsp;<br>
+A&nbsp;previously&nbsp;stored&nbsp;:py:class:`digraphs.<a href="#Digraph">Digraph</a>`&nbsp;instance&nbsp;may&nbsp;be&nbsp;reloaded&nbsp;with&nbsp;the&nbsp;*file*&nbsp;argument::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;randomDigraphs&nbsp;import&nbsp;RandomValuationDigraph<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;dg&nbsp;=&nbsp;RandomValuationDigraph(order=3,Normalized=True,seed=1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;dg.<a href="#Digraph-save">save</a>('testdigraph')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Saving&nbsp;digraph&nbsp;in&nbsp;file:&nbsp;&lt;testdigraph.py&gt;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;digraphs&nbsp;import&nbsp;<a href="#Digraph">Digraph</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;dg&nbsp;=&nbsp;<a href="#Digraph">Digraph</a>(file='testdigraph')&nbsp;#&nbsp;without&nbsp;the&nbsp;.py&nbsp;extenseion<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;dg.__dict__<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{'name':&nbsp;'testdigraph',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'actions':&nbsp;{'a1':&nbsp;{'name':&nbsp;'random&nbsp;decision&nbsp;action',&nbsp;'shortName':&nbsp;'a1'},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'a2':&nbsp;{'name':&nbsp;'random&nbsp;decision&nbsp;action',&nbsp;'shortName':&nbsp;'a2'},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'a3':&nbsp;{'name':&nbsp;'random&nbsp;decision&nbsp;action',&nbsp;'shortName':&nbsp;'a3'}},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'valuationdomain':&nbsp;{'min':&nbsp;Decimal('-1.0'),&nbsp;'med':&nbsp;Decimal('0.0'),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'max':&nbsp;Decimal('1.0'),&nbsp;'hasIntegerValuation':&nbsp;False,},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'relation':&nbsp;{'a1':&nbsp;{'a1':&nbsp;Decimal('0.0'),&nbsp;'a2':&nbsp;Decimal('-0.66'),&nbsp;'a3':&nbsp;Decimal('0.44')},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'a2':&nbsp;{'a1':&nbsp;Decimal('0.94'),&nbsp;'a2':&nbsp;Decimal('0.0'),&nbsp;'a3':&nbsp;Decimal('-0.84')},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'a3':&nbsp;{'a1':&nbsp;Decimal('-0.36'),&nbsp;'a2':&nbsp;Decimal('-0.70'),&nbsp;'a3':&nbsp;Decimal('0.0')}},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'order':&nbsp;3,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'gamma':&nbsp;{'a1':&nbsp;({'a3'},&nbsp;{'a2'}),&nbsp;'a2':&nbsp;({'a1'},&nbsp;set()),&nbsp;'a3':&nbsp;(set(),&nbsp;{'a1'})},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'notGamma':&nbsp;{'a1':&nbsp;({'a2'},&nbsp;{'a3'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'a2':&nbsp;({'a3'},&nbsp;{'a1',&nbsp;'a3'}),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'a3':&nbsp;({'a1',&nbsp;'a2'},&nbsp;{'a2'})}}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%">Methods defined here:<br>
 <dl><dt><a name="Digraph-MISgen"><strong>MISgen</strong></a>(self, S, I)</dt><dd><tt>generator&nbsp;of&nbsp;maximal&nbsp;independent&nbsp;choices&nbsp;(voir&nbsp;Byskov&nbsp;2004):<br>
@@ -11005,6 +10081,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 <dl><dt><a name="Digraph-computeConcentrationIndexTrapez"><strong>computeConcentrationIndexTrapez</strong></a>(self, X, N)</dt><dd><tt>Renders&nbsp;the&nbsp;Gini&nbsp;concentration&nbsp;index&nbsp;of&nbsp;the&nbsp;X&nbsp;serie.<br>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
+
+<dl><dt><a name="Digraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#Digraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
 
 <dl><dt><a name="Digraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
@@ -11287,6 +10365,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="Digraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="Digraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#Digraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="Digraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -11339,7 +10419,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="Digraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="Digraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="Digraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="Digraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -11975,6 +11055,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="DualDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#DualDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="DualDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -12256,6 +11338,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="DualDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="DualDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#DualDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="DualDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -12308,7 +11392,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="DualDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="DualDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="DualDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="DualDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -12944,6 +12028,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="EmptyDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#EmptyDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="EmptyDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -13225,6 +12311,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="EmptyDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="EmptyDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#EmptyDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="EmptyDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -13277,7 +12365,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="EmptyDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="EmptyDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="EmptyDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="EmptyDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -13913,6 +13001,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="EquivalenceDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#EquivalenceDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="EquivalenceDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -14194,6 +13284,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="EquivalenceDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="EquivalenceDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#EquivalenceDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="EquivalenceDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -14246,7 +13338,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="EquivalenceDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="EquivalenceDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="EquivalenceDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="EquivalenceDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -14883,6 +13975,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="FusionDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#FusionDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="FusionDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -15164,6 +14258,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="FusionDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="FusionDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#FusionDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="FusionDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -15216,7 +14312,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="FusionDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="FusionDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="FusionDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="FusionDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -15852,6 +14948,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="FusionLDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#FusionLDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="FusionLDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -16133,6 +15231,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="FusionLDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="FusionLDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#FusionLDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="FusionLDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -16185,7 +15285,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="FusionLDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="FusionLDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="FusionLDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="FusionLDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -16828,6 +15928,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="GridDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#GridDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="GridDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -17109,6 +16211,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="GridDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="GridDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#GridDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="GridDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -17161,7 +16265,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="GridDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="GridDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="GridDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="GridDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -17793,6 +16897,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="IndeterminateDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#IndeterminateDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="IndeterminateDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -18074,6 +17180,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="IndeterminateDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="IndeterminateDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#IndeterminateDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="IndeterminateDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -18126,7 +17234,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="IndeterminateDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="IndeterminateDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="IndeterminateDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="IndeterminateDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -18768,6 +17876,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="KneserDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#KneserDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="KneserDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -19049,6 +18159,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="KneserDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="KneserDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#KneserDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="KneserDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -19101,7 +18213,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="KneserDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="KneserDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="KneserDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="KneserDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -19738,6 +18850,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="PolarisedDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#PolarisedDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="PolarisedDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -20019,6 +19133,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="PolarisedDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="PolarisedDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#PolarisedDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="PolarisedDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -20071,7 +19187,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="PolarisedDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="PolarisedDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="PolarisedDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="PolarisedDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -20709,6 +19825,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="Preorder-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#Preorder-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="Preorder-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -20990,6 +20108,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="Preorder-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="Preorder-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#Preorder-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="Preorder-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -21042,7 +20162,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="Preorder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="Preorder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="Preorder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="Preorder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -21679,6 +20799,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="RandomTree-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RandomTree-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="RandomTree-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -21960,6 +21082,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="RandomTree-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="RandomTree-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RandomTree-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="RandomTree-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -22012,7 +21136,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="RandomTree-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="RandomTree-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RandomTree-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RandomTree-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -22648,6 +21772,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="RedhefferDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RedhefferDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="RedhefferDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -22929,6 +22055,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="RedhefferDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="RedhefferDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RedhefferDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="RedhefferDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -22981,7 +22109,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="RedhefferDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="RedhefferDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RedhefferDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RedhefferDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -23615,6 +22743,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="StrongComponentsCollapsedDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#StrongComponentsCollapsedDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="StrongComponentsCollapsedDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -23896,6 +23026,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="StrongComponentsCollapsedDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="StrongComponentsCollapsedDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#StrongComponentsCollapsedDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="StrongComponentsCollapsedDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -23948,7 +23080,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="StrongComponentsCollapsedDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="StrongComponentsCollapsedDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="StrongComponentsCollapsedDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="StrongComponentsCollapsedDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -24582,6 +23714,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="SymmetricPartialDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#SymmetricPartialDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="SymmetricPartialDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -24863,6 +23997,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="SymmetricPartialDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="SymmetricPartialDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#SymmetricPartialDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="SymmetricPartialDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -24915,7 +24051,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="SymmetricPartialDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="SymmetricPartialDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="SymmetricPartialDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="SymmetricPartialDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -25554,6 +24690,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="XMCDA2Digraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#XMCDA2Digraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="XMCDA2Digraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -25835,6 +24973,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="XMCDA2Digraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="XMCDA2Digraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#XMCDA2Digraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="XMCDA2Digraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -25887,7 +25027,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="XMCDA2Digraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="XMCDA2Digraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="XMCDA2Digraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="XMCDA2Digraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -26524,6 +25664,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="XMCDADigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#XMCDADigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="XMCDADigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -26805,6 +25947,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="XMCDADigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="XMCDADigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#XMCDADigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="XMCDADigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -26857,7 +26001,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="XMCDADigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="XMCDADigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="XMCDADigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="XMCDADigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -27492,6 +26636,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="XMLDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#XMLDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="XMLDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -27773,6 +26919,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="XMLDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="XMLDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#XMLDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="XMLDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -27825,7 +26973,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="XMLDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="XMLDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="XMLDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="XMLDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -28460,6 +27608,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="XMLDigraph24-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#XMLDigraph24-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="XMLDigraph24-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -28741,6 +27891,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="XMLDigraph24-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="XMLDigraph24-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#XMLDigraph24-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="XMLDigraph24-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -28793,7 +27945,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="XMLDigraph24-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="XMLDigraph24-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="XMLDigraph24-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="XMLDigraph24-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -29424,6 +28576,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="XORDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#XORDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="XORDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -29705,6 +28859,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="XORDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="XORDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#XORDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="XORDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -29757,7 +28913,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="XORDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="XORDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="XORDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="XORDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -30394,6 +29550,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="kChoicesDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#kChoicesDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="kChoicesDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -30675,6 +29833,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="kChoicesDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="kChoicesDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#kChoicesDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="kChoicesDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -30727,7 +29887,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="kChoicesDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="kChoicesDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="kChoicesDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="kChoicesDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 

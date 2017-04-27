@@ -5495,6 +5495,46 @@ temporary unanimous outranking digraphs</p>
 
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
+<div class="section" id="module-xmcda">
+<span id="xmcda-module"></span><span id="xmcda-label"></span><h2>xmcda module<a class="headerlink" href="#module-xmcda" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="xmcda.saveRobustRubisChoiceXSL">
+<code class="descclassname">xmcda.</code><code class="descname">saveRobustRubisChoiceXSL</code><span class="sig-paren">(</span><em>FileName='xmcda2RubisRobustChoice.xsl'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/xmcda.html#saveRobustRubisChoiceXSL"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xmcda.saveRobustRubisChoiceXSL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="xmcda.saveRubisChoiceXSL">
+<code class="descclassname">xmcda.</code><code class="descname">saveRubisChoiceXSL</code><span class="sig-paren">(</span><em>FileName='xmcda2RubisChoice.xsl'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/xmcda.html#saveRubisChoiceXSL"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xmcda.saveRubisChoiceXSL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="xmcda.saveRubisXSL">
+<code class="descclassname">xmcda.</code><code class="descname">saveRubisXSL</code><span class="sig-paren">(</span><em>FileName='xmcda2Rubis.xsl'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/xmcda.html#saveRubisXSL"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xmcda.saveRubisXSL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="xmcda.saveXMCDARubisBestChoiceRecommendation">
+<code class="descclassname">xmcda.</code><code class="descname">saveXMCDARubisBestChoiceRecommendation</code><span class="sig-paren">(</span><em>problemFileName=None</em>, <em>tempDir='.'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/xmcda.html#saveXMCDARubisBestChoiceRecommendation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xmcda.saveXMCDARubisBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Store an XMCDA2 encoded solution file of the Rubis best-choice recommendation</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="xmcda.showXMCDARubisBestChoiceRecommendation">
+<code class="descclassname">xmcda.</code><code class="descname">showXMCDARubisBestChoiceRecommendation</code><span class="sig-paren">(</span><em>problemFileName=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/xmcda.html#showXMCDARubisBestChoiceRecommendation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xmcda.showXMCDARubisBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Launches a browser window with the XMCDA2 solution of the
+Rubis Solver computed from a stored XMCDA2 encoded performance tableau.</p>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">xmcda</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">saveXMCDA2</span><span class="p">(</span><span class="s1">&#39;example&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xmcda</span><span class="o">.</span><span class="n">showXMCDARubisBestChoiceRecommendation</span><span class="p">(</span><span class="n">problemFileName</span><span class="o">=</span><span class="s1">&#39;example&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
+</div>
 <div class="section" id="module-sparseOutrankingDigraphs">
 <span id="sparseoutrankingdigraphs-module"></span><span id="sparseoutrankingdigraphs-label"></span><h2>sparseOutrankingDigraphs module<a class="headerlink" href="#module-sparseOutrankingDigraphs" title="Permalink to this headline">¶</a></h2>
 <p>Digraph3 collection of python3 modules for Algorithmic Decision Theory applications</p>
@@ -7578,6 +7618,7 @@ Euler&#8217;s number of coprime elements a in Zn.</p>
 <li><a class="reference internal" href="#module-perfTabs">perfTabs module</a></li>
 <li><a class="reference internal" href="#randomperftabs-module">randomPerfTabs module</a></li>
 <li><a class="reference internal" href="#outrankingdigraphs-module">outrankingDigraphs module</a></li>
+<li><a class="reference internal" href="#module-xmcda">xmcda module</a></li>
 <li><a class="reference internal" href="#module-sparseOutrankingDigraphs">sparseOutrankingDigraphs module</a></li>
 <li><a class="reference internal" href="#module-sortingDigraphs">sortingDigraphs module</a></li>
 <li><a class="reference internal" href="#votingdigraphs-module">votingDigraphs module</a></li>

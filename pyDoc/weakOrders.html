@@ -235,6 +235,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="KemenyWeakOrder-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#KemenyWeakOrder-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="KemenyWeakOrder-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -516,6 +518,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="KemenyWeakOrder-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="KemenyWeakOrder-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#KemenyWeakOrder-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="KemenyWeakOrder-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -568,7 +572,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="KemenyWeakOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="KemenyWeakOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="KemenyWeakOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="KemenyWeakOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -1208,6 +1212,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="KohlerArrowRaynaudFusionDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#KohlerArrowRaynaudFusionDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="KohlerArrowRaynaudFusionDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -1489,6 +1495,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="KohlerArrowRaynaudFusionDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="KohlerArrowRaynaudFusionDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#KohlerArrowRaynaudFusionDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="KohlerArrowRaynaudFusionDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -1541,7 +1549,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="KohlerArrowRaynaudFusionDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="KohlerArrowRaynaudFusionDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="KohlerArrowRaynaudFusionDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="KohlerArrowRaynaudFusionDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -2216,6 +2224,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="PrincipalInOutDegreesOrdering-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#PrincipalInOutDegreesOrdering-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="PrincipalInOutDegreesOrdering-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -2497,6 +2507,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="PrincipalInOutDegreesOrdering-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="PrincipalInOutDegreesOrdering-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#PrincipalInOutDegreesOrdering-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="PrincipalInOutDegreesOrdering-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -2549,7 +2561,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="PrincipalInOutDegreesOrdering-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="PrincipalInOutDegreesOrdering-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="PrincipalInOutDegreesOrdering-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalInOutDegreesOrdering-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -3193,6 +3205,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="RankingByBestChoosingDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RankingByBestChoosingDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="RankingByBestChoosingDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -3452,6 +3466,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="RankingByBestChoosingDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="RankingByBestChoosingDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RankingByBestChoosingDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="RankingByBestChoosingDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -3504,7 +3520,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="RankingByBestChoosingDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="RankingByBestChoosingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RankingByBestChoosingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RankingByBestChoosingDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -4196,6 +4212,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="RankingByChoosingDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RankingByChoosingDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="RankingByChoosingDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -4455,6 +4473,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="RankingByChoosingDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="RankingByChoosingDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RankingByChoosingDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="RankingByChoosingDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -4507,7 +4527,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="RankingByChoosingDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="RankingByChoosingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RankingByChoosingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RankingByChoosingDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -5151,6 +5171,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="RankingByLastChoosingDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RankingByLastChoosingDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="RankingByLastChoosingDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -5410,6 +5432,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="RankingByLastChoosingDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="RankingByLastChoosingDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RankingByLastChoosingDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="RankingByLastChoosingDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -5462,7 +5486,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="RankingByLastChoosingDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="RankingByLastChoosingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RankingByLastChoosingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RankingByLastChoosingDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -6108,6 +6132,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="RankingByPrudentChoosingDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RankingByPrudentChoosingDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="RankingByPrudentChoosingDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -6367,6 +6393,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="RankingByPrudentChoosingDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="RankingByPrudentChoosingDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RankingByPrudentChoosingDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="RankingByPrudentChoosingDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -6419,7 +6447,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="RankingByPrudentChoosingDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="RankingByPrudentChoosingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RankingByPrudentChoosingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RankingByPrudentChoosingDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -7053,6 +7081,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="WeakOrder-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#WeakOrder-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="WeakOrder-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -7334,6 +7364,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="WeakOrder-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="WeakOrder-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#WeakOrder-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="WeakOrder-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -7386,7 +7418,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="WeakOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="WeakOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="WeakOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="WeakOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -8039,6 +8071,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
+<dl><dt><a name="WeakRankingOrder-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#WeakRankingOrder-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="WeakRankingOrder-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
 following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
@@ -8320,6 +8354,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="WeakRankingOrder-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="WeakRankingOrder-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#WeakRankingOrder-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
+
 <dl><dt><a name="WeakRankingOrder-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
 fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
 
@@ -8372,7 +8408,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="WeakRankingOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="WeakRankingOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'med': 0, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="WeakRankingOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="WeakRankingOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 

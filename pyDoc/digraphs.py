@@ -497,29 +497,42 @@ class Digraph(object):
     Genuine root class of all Digraph3 modules.
     See `tutorial working with the digraphs module <http://leopold-loewenheim.uni.lu/docDigraph3/tutorial.html#digraph-object-structure>`_ 
 
-    Python data file format:
-       * actionset = {'1': {'name': 'a1', 'shortName': ...},
-                      '2': {'name': 'a1', ...},
-                      ... }
-       * valuationdomain = { 'min':-1, 'med':0, 'max': 1}
-       * relation = { '1': { '1':0, '2': 1, ...}, ...}
+    All instances of the :py:class:`digraphs.Digraph` class contain at least the following components: 
 
-    Example python3 (3.5+ recommended) session::
-       >>> from digraphs import Digraph
-       >>> g = Digraph('tempdigraph')
-       >>> g.showShort()
-       *----- show short --------------*
-       Digraph          : tempdigraph
-       Actions          : ['1', '2', '3']
-       Valuation domain : {'med': Decimal("-1.0"), 'max': Decimal("1.0"), 'min': Decimal("0.0")}
-       *--- Connected Components ---*
-       1: ['1', '2', '3']
+    1. A collection of digraph nodes called **actions** (decision alternatives): a list, set or (ordered) dictionary of nodes with 'name' and 'shortname' attributes,
+    2. A logical characteristic **valuationdomain**, a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true),
+    3. The digraph **relation** : a double dictionary indexed by an oriented pair of actions (nodes) and carrying a characteristic value in the range of the previous valuation domain,
+    4. Its associated **gamma function** : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor,
+    5. Its associated **notGamma function** : a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor.
 
-      
+    A previously stored :py:class:`digraphs.Digraph` instance may be reloaded with the *file* argument::
+    
+        >>> from randomDigraphs import RandomValuationDigraph
+        >>> dg = RandomValuationDigraph(order=3,Normalized=True,seed=1)
+        >>> dg.save('testdigraph')
+        Saving digraph in file: <testdigraph.py> 
+        >>> from digraphs import Digraph
+        >>> dg = Digraph(file='testdigraph') # without the .py extenseion
+        >>> dg.__dict__
+        {'name': 'testdigraph',
+        'actions': {'a1': {'name': 'random decision action', 'shortName': 'a1'},
+                    'a2': {'name': 'random decision action', 'shortName': 'a2'},
+                    'a3': {'name': 'random decision action', 'shortName': 'a3'}},
+        'valuationdomain': {'min': Decimal('-1.0'), 'med': Decimal('0.0'),
+                                'max': Decimal('1.0'), 'hasIntegerValuation': False,},
+        'relation': {'a1': {'a1': Decimal('0.0'), 'a2': Decimal('-0.66'), 'a3': Decimal('0.44')},
+                     'a2': {'a1': Decimal('0.94'), 'a2': Decimal('0.0'), 'a3': Decimal('-0.84')},
+                     'a3': {'a1': Decimal('-0.36'), 'a2': Decimal('-0.70'), 'a3': Decimal('0.0')}},
+        'order': 3,
+        'gamma': {'a1': ({'a3'}, {'a2'}), 'a2': ({'a1'}, set()), 'a3': (set(), {'a1'})},
+        'notGamma': {'a1': ({'a2'}, {'a3'}),
+                     'a2': ({'a3'}, {'a1', 'a3'}),
+                     'a3': ({'a1', 'a2'}, {'a2'})}}
+        >>>
 
     """
     def __init__(self,file=None,order=7):
-        import digraphs,sys,copy
+        #import digraphs,sys,copy
         from randomDigraphs import RandomValuationDigraph
         from decimal import Decimal
         if file == None:
@@ -2577,6 +2590,12 @@ class Digraph(object):
 
         return k2Distance
 
+    def computeWeakCondorcetWinners(self):
+        """
+        Wrapper for weakCondorcetWinners().
+        """
+        return self.weakCondorcetWinners()
+
     def weakCondorcetWinners(self):
         """
         Renders the set of decision actions x such that
@@ -2602,6 +2621,12 @@ class Digraph(object):
         except:
             pass
         return wCW
+
+    def computeCondorcetWinners(self):
+        """
+        Wrapper for condorcetWinners().
+        """
+        return self.condorcetWinners()
 
     def condorcetWinners(self):
         """
@@ -6948,6 +6973,7 @@ class Digraph(object):
     def circuitCredibilities(self,circuit,Debug=False):
         """
         Renders the average linking credibilities and the minimal link of a COC.
+
         """
         if Debug:
             print(circuit)
@@ -6956,36 +6982,68 @@ class Digraph(object):
         Med = self.valuationdomain['med']
         Max = self.valuationdomain['max']
         Min = self.valuationdomain['min']
-        maxAmplitude = abs(Max) + abs(Min)
-        degP = Med
-        degN = Med
-        nParcs = 0
-        nNarcs = 0
-        minAmplitude = maxAmplitude
-        minLink = None
-        nc = len(circuit)
-        for i in range(nc):
-            x = circuit[i]
-            #for j in range(i+1,nc):
-            if i != nc -1:
-                y = circuit[i+1]
-            else:
-                y = circuit[0]
-            if Debug:
-                print(x,y,end=',')
-            degP += relation[x][y]
-            nParcs += 1
-            diffxy = abs(relation[x][y]) + abs(relation[y][x])
-            #diffxy = abs(relation[x][y]) + abs(relation[y][x])
-            if Debug:
-                print(relation[x][y],relation[y][x],diffxy,end=',')
-            if minAmplitude >= diffxy:
-                minAmplitude = diffxy
-                minLink = (x,y)
-            if Debug:
-                print(minLink)
-            degN += relation[y][x]
-            nNarcs += 1
+        if Min != -Max:
+            # the characteristic valuation is not bipolar !
+            maxAmplitude = abs(Max-Med) + abs(Min-Med)
+            degP = Decimal('0')
+            degN = Decimal('0')
+            nParcs = 0
+            nNarcs = 0
+            minAmplitude = maxAmplitude
+            minLink = None
+            nc = len(circuit)
+            for i in range(nc):
+                x = circuit[i]
+                #for j in range(i+1,nc):
+                if i != nc -1:
+                    y = circuit[i+1]
+                else:
+                    y = circuit[0]
+                if Debug:
+                    print(x,y,end=',')
+                degP += (relation[x][y]-Med)
+                nParcs += 1
+                diffxy = abs(relation[x][y]-Med) + abs(relation[y][x]-Med)
+                if Debug:
+                    print(relation[x][y],relation[y][x],diffxy,end=',')
+                if minAmplitude >= diffxy:
+                    minAmplitude = diffxy
+                    minLink = (x,y)
+                if Debug:
+                    print(minLink)
+                degN += (relation[y][x]-Med)
+                nNarcs += 1
+        else:
+            # the characteristic valuation is bipolar !
+            maxAmplitude = abs(Max) + abs(Min)
+            degP = Med
+            degN = Med
+            nParcs = 0
+            nNarcs = 0
+            minAmplitude = maxAmplitude
+            minLink = None
+            nc = len(circuit)
+            for i in range(nc):
+                x = circuit[i]
+                #for j in range(i+1,nc):
+                if i != nc -1:
+                    y = circuit[i+1]
+                else:
+                    y = circuit[0]
+                if Debug:
+                    print(x,y,end=',')
+                degP += relation[x][y]
+                nParcs += 1
+                diffxy = abs(relation[x][y]) + abs(relation[y][x])
+                if Debug:
+                    print(relation[x][y],relation[y][x],diffxy,end=',')
+                if minAmplitude >= diffxy:
+                    minAmplitude = diffxy
+                    minLink = (x,y)
+                if Debug:
+                    print(minLink)
+                degN += relation[y][x]
+                nNarcs += 1            
         if nParcs != 0:
             degP /= Decimal(str(nParcs))
         if nNarcs != 0:
@@ -11397,16 +11455,21 @@ class _WeakCocaDigraph(Digraph):
             print(list(circ), ', credibility :', deg)
 
 #--------------------
-class CoceDigraph(Digraph):
+class _CoceDigraph(Digraph):
     """
+    Specialization of general Digraph class for instantiation of digraphs where
+    all chordless odd circuits are eliminated by appropriate cuts of the valuation of the arcs.
+
+    .. note::
+
+        The method is only experimental and may easily lead to very sparse outranking digraphs with loads of undeterminate arcs.
+        It is recommended to use instead the :py:class:`digraphs.BrokenCocsDigraph` class.
+        
     Parameters:
 
         - digraph: Stored or memory resident digraph instance.
-        - Cpp: using a C++/Agrum version of the Digraoh.computeChordlessCircuits() method.
+        - Cpp: using a C++/Agrum version of the Digraph.computeChordlessCircuits() method.
         - Piping: using OS pipes for data in- and output between Python and C++.
-
-    Specialization of general Digraph class for instantiation
-    of chordless odd circuits eliminated digraphs.
 
     """
     def __init__(self,digraph=None,Cpp=False,Piping=False,Comments=False,Debug=False):
@@ -11504,7 +11567,7 @@ class BrokenCocsDigraph(Digraph):
     of chordless odd circuits broken digraphs.
 
     All chordless odd circuits are broken at the weakest asymmetric link,
-    i.e. a link (*x*, *y*) with minimal difference between r(*x* S *y*) - r(*y* S *x*).
+    i.e. a link :math:`(x, y)` with minimal difference between :math:`r(x S y)` and :math:`r(y S x)`.
 
     """
     def __init__(self,digraph=None,Cpp=False,Piping=False,\
@@ -11901,8 +11964,8 @@ class CocaDigraph(Digraph):
 
     .. warning::
 
-        OBSOLETE: Gives inconsistent results when an autranking digraph shows loads of chordless cuircuits.
-        It is recommended to use instead either the BrokenCocsDigraph class (preferred option)
+        May sometimes give inconsistent results when an autranking digraph shows loads of chordless cuircuits.
+        It is recommended in this case to use instead either the BrokenCocsDigraph class (preferred option)
         or the  BreakAddCocsDigraph class.
     
     Parameters:
@@ -12599,14 +12662,20 @@ if __name__ == "__main__":
         from outrankingDigraphs import BipolarOutrankingDigraph
         from randomPerfTabs import RandomCBPerformanceTableau
         from linearOrders import CopelandOrder
-        t1 = RandomCBPerformanceTableau(numberOfActions=20,seed=1)
-        g = BipolarOutrankingDigraph(t1,Normalized=True)
-        g.showRubisBestChoiceRecommendation()
-        gcd = ~(-g)
-        cocb = BrokenCocsDigraph(gcd,Comments=True)
-        print(cocb.brokenLinks)
-        gcd.computeRubisChoice()
-        gcd.showGoodChoices()
+##        t1 = RandomCBPerformanceTableau(numberOfActions=20,seed=1)
+##        g = BipolarOutrankingDigraph(t1,Normalized=True)
+##        g.showRubisBestChoiceRecommendation()
+##        gcd = ~(-g)
+##        cocb = BrokenCocsDigraph(gcd,Comments=True)
+##        print(cocb.brokenLinks)
+##        gcd.computeRubisChoice()
+##        gcd.showGoodChoices()
+        g = RandomValuationDigraph(order=10,seed=3)
+        g.recodeValuation()
+        h3 = BrokenCocsDigraph(digraph=g,Comments=False)
+        h3.save('resbreakco2')
+        h3.showAll()
+
 ##        cop = CopelandOrder(g)
 ##        #g.showHTMLRelationMap(rankingRule='rankedPairs')
 ##        gcd = CoDualDigraph(g)
