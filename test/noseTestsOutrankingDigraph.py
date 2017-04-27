@@ -651,6 +651,25 @@ def testComputeMarginalVersusGlobalRankingCorrelations():
     print(time()-t0)
     print(criteriaCorrelations)
 
+def testXMCDARubisSolver():
+    print('*------ test xmcda module ----*')
+    t = RandomCBPerformanceTableau(numberOfActions=5,\
+                                   numberOfCriteria=7,\
+                                   weightDistribution='equiobjectives',\
+                                   )
+    t.saveXMCDA2('testXMCDA')
+    import xmcda
+    xmcda.showXMCDARubisBestChoiceRecommendation(\
+        problemFileName='testXMCDA',\
+        valuationType=None)
+    xmcda.showXMCDARubisBestChoiceRecommendation(\
+        problemFileName='testXMCDA',\
+        valuationType='noVeto')
+    xmcda.showXMCDARubisBestChoiceRecommendation(\
+        problemFileName='testXMCDA',\
+        valuationType='confident')
+
+                 
 
 ##def testRubisRestServer():
 ##    print('*------ test RubisRestServer class ----*')
