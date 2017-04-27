@@ -1939,7 +1939,7 @@ The same Rubis best choice recommendation, encoded in XMCDA 2.0 and presented in
 
 and, in a system browser window, browse the `solution file_1`_.
 
-   .. _solution file_1: _static/solution-officeChoice.xmcda2
+   .. _solution file_1: _static/officeChoice.xml1BYyGVwV866hSNZoSolution.html
 
 The :code:`valuationType` parameter allows to work:
   - on the standard bipolar outranking digraph (valutaionType = 'standard'),
