@@ -1937,9 +1937,9 @@ The same Rubis best choice recommendation, encoded in XMCDA 2.0 and presented in
                                prolemFileName='officeChoice',\
                                valuationType='standard')
 
-and, in a system browser window, browse the `solution file`_.
+and, in a system browser window, browse the `solution file_1`_.
 
-   .. _solution file: _static/officeChoice.xml1BYyGVwV866hSNZoSolution.html
+   .. _solution file_1: _static/solution-officeChoice.xmcda2
 
 The :code:`valuationType` parameter allows to work:
   - on the standard bipolar outranking digraph (valutaionType = 'standard'),
@@ -1967,7 +1967,7 @@ We may submit the given performance tableau:
 With the given ticket, saved in a text file in the working directory, we may request from the Rubis solver the corresponding best choice recommendation:
     >>> solver.showSolution()
 
-and, in a system browser window, browse the `solution file`_.
+and, in a system browser window, browse again the `solution file`_.
 
    .. _solution file: _static/officeChoice.xml1BYyGVwV866hSNZoSolution.html
 
