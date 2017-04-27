@@ -12,7 +12,7 @@ setup(name='Digraph3',
         'sortingDigraphs','votingDigraphs',\
         'linearOrders','weakOrders',\
         'iqagent','graphs','htmlmodel','randomNumbers','randomDigraphs','randomPerfTabs',
-        'bigOutrankingDigraphs','sparseOutrankingDigraphs'],
+        'bigOutrankingDigraphs','sparseOutrankingDigraphs','xmcda'],
       license='http://leopold-loewenheim.uni.lu/Digraph3/digraph3_copyright.html',
       url='http://leoopold-loewenheim.uni.lu/docDigraph3/',
       description='Lets you add bipolar graph and digraphs methods to your applications',

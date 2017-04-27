@@ -16,6 +16,7 @@ randomDigraphs.py
 randomPerfTabs.py
 sparseOutrankingDigraphs.py
 htmlmodel.py
+xmcda.py
 makefile
 MANIFEST
 perrinMIS.c

@@ -3,7 +3,7 @@
   
 <!-- 
 XMCDA 2.0 Default XSLT tranformation to HTML, RB 2009
-$Revision: 1.1 $
+$Revision: 1.7 $
 The ressource comes with ABSOLUTELY NO WARRANTY 
 to the extent permitted by the applicable law.
 This is free software, and you are welcome to 
@@ -22,10 +22,11 @@ Copyright (C) 2009 DECISION DECK Consortium
     
     <xsl:apply-templates />
     <hr />
-    <p><b>Rubis XSLT to HTML stylesheet (R. Bisdorff):</b> $Revision: 1.1 $ <br/>
+    <p><b>Rubis XSLT to HTML stylesheet (R. Bisdorff):</b> $Revision: 1.7 $ <br/>
           UMCDA-ML <a href="http://www.decision-deck.org/xmcda">XMCDA 2.0 Schema</a><br/>
           Raymond Bisdorff (University of Luxembourg), Patrick Meyer (Telecom Bretagne) and Thomas Veneziano (University of Luxembourg)March 2009<br/>
-          Copyright © 2009 <a href="http://www.decision-deck.org/">DECISION DECK Consortium</a></p>
+          Copyright © 2009 <a href="http://www.decision-deck.org/">DECISION DECK Consortium</a><br/>
+          <a href="javascript:void(document.location='view-source:'+document.location)">View the source of this document.</a></p>
    </body>
   </html>
 </xsl:template>
@@ -508,7 +509,6 @@ Copyright (C) 2009 DECISION DECK Consortium
   <xsl:template match="integer">
   <xsl:value-of select="format-number(.,'#')" />
 </xsl:template>
-
 <!--<xsl:template match="value/real">
   <xsl:value-of select="format-number(.,'#.##')"/>
 </xsl:template>
@@ -565,9 +565,8 @@ Copyright (C) 2009 DECISION DECK Consortium
    <xsl:for-each select="key('currentCriterion', $allCriteria)">
       <xsl:variable name="currentCriterion" select="./@id"></xsl:variable>
        <xsl:call-template name="performanceRow">
-         <xsl:with-param name="currentAlternative" select="$currentAlternative">
-         </xsl:with-param>
-         <xsl:with-param name="currentCriterion" select="$currentCriterion"></xsl:with-param>
+         <xsl:with-param name="currentAlternative" select="$currentAlternative" />
+         <xsl:with-param name="currentCriterion" select="$currentCriterion"/>
        </xsl:call-template>
       </xsl:for-each>
   </tr>
@@ -615,5 +614,5 @@ Copyright (C) 2009 DECISION DECK Consortium
    </table>
 </xsl:template>
  
-
 </xsl:stylesheet>
+    

@@ -215,7 +215,7 @@ Copyright (C) 2009 DECISION DECK Consortium
     <xsl:variable name="tiret" select=" '-' " />
     <xsl:variable name="dot" select=" '.' " />
     <xsl:variable name="name" select ="/xmcda:XMCDA/@instanceID" />
-    <xsl:variable name="path" select=" 'http://leopold-loewenheim.uni.lu/rubisServer/Images/rubisGraph-' " />
+    <xsl:variable name="path" select=" 'rubisGraph-' " />
     <xsl:variable name="extensionPNG" select=" '.png' " />
     <xsl:variable name="extensionPDF" select=" '.pdf' " />
     <div style="text-align: left;">	
@@ -242,7 +242,7 @@ Copyright (C) 2009 DECISION DECK Consortium
     <xsl:variable name="tiret" select=" '-' " />
     <xsl:variable name="dot" select=" '.' " />
     <xsl:variable name="name" select ="/xmcda:XMCDA/@instanceID" />
-    <xsl:variable name="path" select=" 'http://leopold-loewenheim.uni.lu/rubisServer/Images/similarityPlot-' " />
+    <xsl:variable name="path" select=" 'similarityPlot-' " />
     <xsl:variable name="extensionPDF" select=" '.pdf' " />
     <xsl:variable name="extensionJPG" select=" '.jpg' " />
     <h3><font color="#bb0000">Principal component analysis of the criteria correlation index</font></h3>
@@ -751,3 +751,4 @@ Copyright (C) 2009 DECISION DECK Consortium
 </xsl:template>
  
 </xsl:stylesheet>
+    
