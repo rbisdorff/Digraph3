@@ -2244,7 +2244,7 @@ def saveRobustRubisChoiceXSL(FileName='xmcda2RubisRobustChoice.xsl'):
     fo.write(xmcda.robustRubisXSL)
     fo.close()
 
-def saveXMCDARubisBestChoiceRecommendation(problemFileName=None,tempDir='.'):
+def saveXMCDARubisBestChoiceRecommendation(problemFileName=None,tempDir='.',valuationType=None):
     """
     Store an XMCDA2 encoded solution file of the Rubis best-choice recommendation
     """
@@ -2281,6 +2281,7 @@ def saveXMCDARubisBestChoiceRecommendation(problemFileName=None,tempDir='.'):
         return
 
     #########   main #################
+    # get XML file type and load problem data
     try:
             problemFileNameExt = problemFileName+'.xml'
             fo = codecs.open(problemFileNameExt,mode='r',encoding='utf-8')
@@ -2316,31 +2317,44 @@ def saveXMCDARubisBestChoiceRecommendation(problemFileName=None,tempDir='.'):
             errorExit(tempDir,problemFileName, 1, 'UMCDA-ML XMCDA 1.0 input error', 'Error when reading XML input data file !')
     else:
         errorExit(tempDir,problemFileName, 1, 'Input error', 'Error when reading input data file !')
-        
 
-    try:
-        isRobust = False
-        if rootTag != 'rubisPerformanceTableau':
-            if t.parameter['valuationType'] == 'integer':
-                g = BipolarIntegerOutrankingDigraph(t)
-            elif t.parameter['valuationType'] == 'electre3':
-                g = Electre3OutrankingDigraph(t)
-            elif t.parameter['valuationType'] == 'normalized':
+    # contruct outranking digraph
+    isRobust = False  
+    if valuationType == None:
+        try:
+            if rootTag != 'rubisPerformanceTableau':
+                if t.parameter['valuationType'] == 'integer':
+                    g = BipolarIntegerOutrankingDigraph(t)
+                elif t.parameter['valuationType'] == 'electre3':
+                    g = Electre3OutrankingDigraph(t)
+                elif t.parameter['valuationType'] == 'normalized':
+                    g = BipolarOutrankingDigraph(t)
+                    g.recodeValuation(-1.0,1.0)
+                elif t.parameter['valuationType'] == 'bipolar':
+                    g = BipolarOutrankingDigraph(t,hasBipolarVeto=True)
+                elif t.parameter['valuationType'] == 'confident':
+                    g = ConfidentBipolarOutrankingDigraph(t,hasBipolarVeto=True)
+                elif t.parameter['valuationType'] == 'electreVeto':
+                    g = BipolarOutrankingDigraph(t,hasBipolarVeto=False)
+                elif t.parameter['valuationType'] == 'noVeto':
+                    g = BipolarOutrankingDigraph(t,hasNoVeto=True)
+                elif t.parameter['valuationType'] == 'robust':
+                    g = RobustOutrankingDigraph(t)
+                    isRobust = True			
+            else:
                 g = BipolarOutrankingDigraph(t)
-                g.recodeValuation(-1.0,1.0)
-            elif t.parameter['valuationType'] == 'bipolar':
-                g = BipolarOutrankingDigraph(t,hasBipolarVeto=True)
-            elif t.parameter['valuationType'] == 'electreVeto':
-                g = BipolarOutrankingDigraph(t,hasBipolarVeto=False)
-            elif t.parameter['valuationType'] == 'noVeto':
-                g = BipolarOutrankingDigraph(t,hasNoVeto=True)
-            elif t.parameter['valuationType'] == 'robust':
-                g = RobustOutrankingDigraph(t)
-                isRobust = True			
-        else:
-            g = BipolarOutrankingDigraph(t)
-    except:
-        errorExit(tempDir,problemFileName, 2, 'Corrupt problem data', 'Error when computing outranking digraph !')
+        except:
+            errorExit(tempDir,problemFileName, 2, 'Corrupt problem data', 'Error when computing outranking digraph !')
+    elif valuationType == 'rubust':
+        g = RobustOutrankingDigraph(t)
+        isRobust = True
+    elif valuationType == 'confident':
+        g = ConfidentBipolarOutrankingDigraph(t)
+    elif valuationType == 'noVeto':
+        g = BipolarOutrankingDigraph(t,hasNoVeto=True)
+    else:
+        g = BipolarOutrankingDigraph(t)
+
     # save Rubis solution file
     g_orig = copy.deepcopy(g)
     solutionFileName = str(tempDir)+'/solution-' + str(problemFileName)
@@ -2415,7 +2429,7 @@ def saveXMCDARubisBestChoiceRecommendation(problemFileName=None,tempDir='.'):
     else:
         xmcda.saveRubisChoiceXSL(str(tempDir)+'/xmcda2RubisChoice.xsl')
 
-def showXMCDARubisBestChoiceRecommendation(problemFileName=None):
+def showXMCDARubisBestChoiceRecommendation(problemFileName=None,valuationType=None):
     """
     Launches a browser window with the XMCDA2 solution of the
     Rubis Solver computed from a stored XMCDA2 encoded performance tableau.
@@ -2436,7 +2450,7 @@ def showXMCDARubisBestChoiceRecommendation(problemFileName=None):
     os.system(commandString)
     currDir = os.getcwd()
     os.chdir(tempDirName)
-    xmcda.saveXMCDARubisBestChoiceRecommendation(problemFileName,tempDirName)
+    xmcda.saveXMCDARubisBestChoiceRecommendation(problemFileName,tempDirName,valuationType)
     os.chdir(currDir)
     url = tempDirName+'/solution-'+problemFileName+'.xmcda2'
     print(url)
@@ -2446,10 +2460,10 @@ def showXMCDARubisBestChoiceRecommendation(problemFileName=None):
 if __name__ == '__main__':
     ######  scratch pad for testing the module components
     from randomPerfTabs import RandomCBPerformanceTableau
-    t = RandomCBPerformanceTableau()
+    t = RandomCBPerformanceTableau(seed=1)
     t.saveXMCDA2('example')
     import xmcda
-    xmcda.showXMCDARubisBestChoiceRecommendation(problemFileName='example')
+    xmcda.showXMCDARubisBestChoiceRecommendation(problemFileName='example',valuationType='noVeto')
 
 ##    import xmcda
 ##    xmcda.saveRubisXSL()
