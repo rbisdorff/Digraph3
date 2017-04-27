@@ -1931,17 +1931,21 @@ We notice three potential best choice recommendations: the Condorcet winner *D* 
 
 We notice in line 7 above that the most significantly supported best choice recommendation is indeed the Condorcet winner *D* with a majority of 56% of the criteria significance (see line 13). Both other recommendation candidates, as well as the worst choice candidate are not positively validated as best choices. They may or may not be considered so. Alternative *A*, with extreme contradictory performances, appears both, in a best and a worst choice recommendation (see lines 27 and 37) and seams hence not actually comparable to its competitors.
 
-The same Rubis best choice recommendation, encoded in XMCDA 2.0 and presented in the default system browser, is provided by the :py:mod:`xmcda` module. The :code:`valuationType` parameter allows to work:
-  - on the standard bipolar outranking digraph (valutaionType = 'standard'),
-  - ignoring considerable performances differences (valuationType = 'noVeto'),
-  - on the confident outranking digraph (valuationType = 'noVeto').
-
-In a python3 session working in the directory where the XMCDA encoded problem data is stored, we may proceed as follows:
+The same Rubis best choice recommendation, encoded in XMCDA 2.0 and presented in the default system browser, is provided by the :py:mod:`xmcda` module. In a python3 session working in the directory where the XMCDA encoded problem data is stored, we may proceed as follows:
     >>> import xmcda
     >>> xmcda.showXMCDARubisBestChoiveRecommendation(\
                                prolemFileName='officeChoice',\
                                valuationType='standard')
- 
+
+and, in a system browser window, browse the `solution file`_.
+
+   .. _solution file: _static/officeChoice.xml1BYyGVwV866hSNZoSolution.html
+
+The :code:`valuationType` parameter allows to work:
+  - on the standard bipolar outranking digraph (valutaionType = 'standard'),
+  - ignoring considerable performances differences (valuationType = 'noVeto'),
+  - on the confident outranking digraph (valuationType = 'noVeto').
+
 One may as well use the Rubis XMCDA 2.0 Web services available at the Leopold-Loewenheim Apache Server of the University of Luxembourg:
     >>> from outrankingDigraphs import RubisRestServer
     >>> solver = RubisRestServer()
