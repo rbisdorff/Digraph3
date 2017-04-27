@@ -3422,7 +3422,13 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </dl>
 <p>We notice in line 7 above that the most significantly supported best choice recommendation is indeed the Condorcet winner <em>D</em> with a majority of 56% of the criteria significance (see line 13). Both other recommendation candidates, as well as the worst choice candidate are not positively validated as best choices. They may or may not be considered so. Alternative <em>A</em>, with extreme contradictory performances, appears both, in a best and a worst choice recommendation (see lines 27 and 37) and seams hence not actually comparable to its competitors.</p>
 <dl class="docutils">
-<dt>The same Rubis best choice recommendation, encoded in XMCDA 2.0, is as well provided by the Rubis XMCDA 2.0 Web services available at the Leopold-Loewenheim Apache Server of the University of Luxembourg:</dt>
+<dt>The same Rubis best choice recommendation, encoded in XMCDA 2.0 and presented in the default system browser, is provided by the <a class="reference internal" href="techDoc.html#module-xmcda" title="xmcda"><code class="xref py py-mod docutils literal"><span class="pre">xmcda</span></code></a> module:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">xmcda</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xmcda</span><span class="o">.</span><span class="n">showXMCDARubisBestChoiveRecommendation</span><span class="p">(</span><span class="s1">&#39;officeChoice&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt>One may as well use the Rubis XMCDA 2.0 Web services available at the Leopold-Loewenheim Apache Server of the University of Luxembourg:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -3446,7 +3452,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </td></tr></table></div>
 </dd>
 <dt>We may submit the given performance tableau:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span><span class="o">.</span><span class="n">submitProblem</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">XMCDA2PerformanceTableau</span><span class="p">(</span><span class="s1">&#39;officeChoice&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span><span class="o">.</span><span class="n">submitProblem</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="go">The problem submission was successful !</span>
 <span class="go">Server ticket: 1BYyGVwV866hSNZo</span>
 </pre></div>

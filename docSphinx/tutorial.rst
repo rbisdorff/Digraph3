@@ -1930,8 +1930,12 @@ We notice three potential best choice recommendations: the Condorcet winner *D* 
                  'D': 0.00, 'A': 0.00, 'G': 0.00, 'C': 0.00 }
 
 We notice in line 7 above that the most significantly supported best choice recommendation is indeed the Condorcet winner *D* with a majority of 56% of the criteria significance (see line 13). Both other recommendation candidates, as well as the worst choice candidate are not positively validated as best choices. They may or may not be considered so. Alternative *A*, with extreme contradictory performances, appears both, in a best and a worst choice recommendation (see lines 27 and 37) and seams hence not actually comparable to its competitors.
+
+The same Rubis best choice recommendation, encoded in XMCDA 2.0 and presented in the default system browser, is provided by the :py:mod:`xmcda` module:
+    >>> import xmcda
+    >>> xmcda.showXMCDARubisBestChoiveRecommendation('officeChoice')
  
-The same Rubis best choice recommendation, encoded in XMCDA 2.0, is as well provided by the Rubis XMCDA 2.0 Web services available at the Leopold-Loewenheim Apache Server of the University of Luxembourg:
+One may as well use the Rubis XMCDA 2.0 Web services available at the Leopold-Loewenheim Apache Server of the University of Luxembourg:
     >>> from outrankingDigraphs import RubisRestServer
     >>> solver = RubisRestServer()
     >>> solver.ping()
@@ -1944,6 +1948,7 @@ The same Rubis best choice recommendation, encoded in XMCDA 2.0, is as well prov
     *************************************************
 
 We may submit the given performance tableau:
+    >>> t = XMCDA2PerformanceTableau('officeChoice')
     >>> solver.submitProblem(t)
     The problem submission was successful !
     Server ticket: 1BYyGVwV866hSNZo
