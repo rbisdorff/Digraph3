@@ -668,8 +668,9 @@ def testXMCDARubisSolver():
     xmcda.showXMCDARubisBestChoiceRecommendation(\
         problemFileName='testXMCDA',\
         valuationType='confident')
-
-                 
+    xmcda.showXMCDARubisBestChoiceRecommendation(\
+        problemFileName='testXMCDA',\
+        valuationType='robust')
 
 ##def testRubisRestServer():
 ##    print('*------ test RubisRestServer class ----*')
