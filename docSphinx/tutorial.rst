@@ -1937,9 +1937,9 @@ The same Rubis best choice recommendation, encoded in XMCDA 2.0 and presented in
                                prolemFileName='officeChoice',\
                                valuationType='standard')
 
-and, in a system browser window, browse the `solution file_1`_.
+and, in a system browser window, browse the `solution file`_.
 
-   .. _solution file_1: _static/officeChoice.xml1BYyGVwV866hSNZoSolution.html
+   .. _solution file: _static/officeChoice.xml1BYyGVwV866hSNZoSolution.html
 
 The :code:`valuationType` parameter allows to work:
   - on the standard bipolar outranking digraph (valutaionType = 'standard'),
@@ -1968,8 +1968,6 @@ With the given ticket, saved in a text file in the working directory, we may req
     >>> solver.showSolution()
 
 and, in a system browser window, browse again the `solution file`_.
-
-   .. _solution file: _static/officeChoice.xml1BYyGVwV866hSNZoSolution.html
 
 Here, we find confirmed again that alternative *D*, indeed, appears to be the most significant best choice candidate. 
 
