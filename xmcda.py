@@ -2345,7 +2345,7 @@ def saveXMCDARubisBestChoiceRecommendation(problemFileName=None,tempDir='.',valu
                 g = BipolarOutrankingDigraph(t)
         except:
             errorExit(tempDir,problemFileName, 2, 'Corrupt problem data', 'Error when computing outranking digraph !')
-    elif valuationType == 'rubust':
+    elif valuationType == 'robust':
         g = RobustOutrankingDigraph(t)
         isRobust = True
     elif valuationType == 'confident':
