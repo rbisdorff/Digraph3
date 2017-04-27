@@ -2294,7 +2294,7 @@
     <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">xmcda</span><span class="o">.</span><span class="n">robustRubisXSL</span><span class="p">)</span>
     <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="saveXMCDARubisBestChoiceRecommendation"><a class="viewcode-back" href="../techDoc.html#xmcda.saveXMCDARubisBestChoiceRecommendation">[docs]</a><span class="k">def</span> <span class="nf">saveXMCDARubisBestChoiceRecommendation</span><span class="p">(</span><span class="n">problemFileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">tempDir</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="saveXMCDARubisBestChoiceRecommendation"><a class="viewcode-back" href="../techDoc.html#xmcda.saveXMCDARubisBestChoiceRecommendation">[docs]</a><span class="k">def</span> <span class="nf">saveXMCDARubisBestChoiceRecommendation</span><span class="p">(</span><span class="n">problemFileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">tempDir</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="n">valuationType</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Store an XMCDA2 encoded solution file of the Rubis best-choice recommendation</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -2331,6 +2331,7 @@
         <span class="k">return</span>
 
     <span class="c1">#########   main #################</span>
+    <span class="c1"># get XML file type and load problem data</span>
     <span class="k">try</span><span class="p">:</span>
             <span class="n">problemFileNameExt</span> <span class="o">=</span> <span class="n">problemFileName</span><span class="o">+</span><span class="s1">&#39;.xml&#39;</span>
             <span class="n">fo</span> <span class="o">=</span> <span class="n">codecs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">problemFileNameExt</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
@@ -2366,31 +2367,44 @@
             <span class="n">errorExit</span><span class="p">(</span><span class="n">tempDir</span><span class="p">,</span><span class="n">problemFileName</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;UMCDA-ML XMCDA 1.0 input error&#39;</span><span class="p">,</span> <span class="s1">&#39;Error when reading XML input data file !&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">errorExit</span><span class="p">(</span><span class="n">tempDir</span><span class="p">,</span><span class="n">problemFileName</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Input error&#39;</span><span class="p">,</span> <span class="s1">&#39;Error when reading input data file !&#39;</span><span class="p">)</span>
-        
 
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">isRobust</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="k">if</span> <span class="n">rootTag</span> <span class="o">!=</span> <span class="s1">&#39;rubisPerformanceTableau&#39;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="s1">&#39;valuationType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;integer&#39;</span><span class="p">:</span>
-                <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarIntegerOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">t</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="s1">&#39;valuationType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;electre3&#39;</span><span class="p">:</span>
-                <span class="n">g</span> <span class="o">=</span> <span class="n">Electre3OutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">t</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="s1">&#39;valuationType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;normalized&#39;</span><span class="p">:</span>
+    <span class="c1"># contruct outranking digraph</span>
+    <span class="n">isRobust</span> <span class="o">=</span> <span class="kc">False</span>  
+    <span class="k">if</span> <span class="n">valuationType</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">rootTag</span> <span class="o">!=</span> <span class="s1">&#39;rubisPerformanceTableau&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="s1">&#39;valuationType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;integer&#39;</span><span class="p">:</span>
+                    <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarIntegerOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">t</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="s1">&#39;valuationType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;electre3&#39;</span><span class="p">:</span>
+                    <span class="n">g</span> <span class="o">=</span> <span class="n">Electre3OutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">t</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="s1">&#39;valuationType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;normalized&#39;</span><span class="p">:</span>
+                    <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+                    <span class="n">g</span><span class="o">.</span><span class="n">recodeValuation</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">t</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="s1">&#39;valuationType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;bipolar&#39;</span><span class="p">:</span>
+                    <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">hasBipolarVeto</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">t</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="s1">&#39;valuationType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;confident&#39;</span><span class="p">:</span>
+                    <span class="n">g</span> <span class="o">=</span> <span class="n">ConfidentBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">hasBipolarVeto</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">t</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="s1">&#39;valuationType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;electreVeto&#39;</span><span class="p">:</span>
+                    <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">hasBipolarVeto</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">t</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="s1">&#39;valuationType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;noVeto&#39;</span><span class="p">:</span>
+                    <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">t</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="s1">&#39;valuationType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;robust&#39;</span><span class="p">:</span>
+                    <span class="n">g</span> <span class="o">=</span> <span class="n">RobustOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+                    <span class="n">isRobust</span> <span class="o">=</span> <span class="kc">True</span>			
+            <span class="k">else</span><span class="p">:</span>
                 <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-                <span class="n">g</span><span class="o">.</span><span class="n">recodeValuation</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">t</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="s1">&#39;valuationType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;bipolar&#39;</span><span class="p">:</span>
-                <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">hasBipolarVeto</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">t</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="s1">&#39;valuationType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;electreVeto&#39;</span><span class="p">:</span>
-                <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">hasBipolarVeto</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">t</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="s1">&#39;valuationType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;noVeto&#39;</span><span class="p">:</span>
-                <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">t</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="s1">&#39;valuationType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;robust&#39;</span><span class="p">:</span>
-                <span class="n">g</span> <span class="o">=</span> <span class="n">RobustOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-                <span class="n">isRobust</span> <span class="o">=</span> <span class="kc">True</span>			
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-    <span class="k">except</span><span class="p">:</span>
-        <span class="n">errorExit</span><span class="p">(</span><span class="n">tempDir</span><span class="p">,</span><span class="n">problemFileName</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Corrupt problem data&#39;</span><span class="p">,</span> <span class="s1">&#39;Error when computing outranking digraph !&#39;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">errorExit</span><span class="p">(</span><span class="n">tempDir</span><span class="p">,</span><span class="n">problemFileName</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Corrupt problem data&#39;</span><span class="p">,</span> <span class="s1">&#39;Error when computing outranking digraph !&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">valuationType</span> <span class="o">==</span> <span class="s1">&#39;rubust&#39;</span><span class="p">:</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">RobustOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">isRobust</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">elif</span> <span class="n">valuationType</span> <span class="o">==</span> <span class="s1">&#39;confident&#39;</span><span class="p">:</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">ConfidentBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">valuationType</span> <span class="o">==</span> <span class="s1">&#39;noVeto&#39;</span><span class="p">:</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
     <span class="c1"># save Rubis solution file</span>
     <span class="n">g_orig</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
     <span class="n">solutionFileName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">tempDir</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;/solution-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">problemFileName</span><span class="p">)</span>
@@ -2465,7 +2479,7 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">xmcda</span><span class="o">.</span><span class="n">saveRubisChoiceXSL</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tempDir</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;/xmcda2RubisChoice.xsl&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="showXMCDARubisBestChoiceRecommendation"><a class="viewcode-back" href="../techDoc.html#xmcda.showXMCDARubisBestChoiceRecommendation">[docs]</a><span class="k">def</span> <span class="nf">showXMCDARubisBestChoiceRecommendation</span><span class="p">(</span><span class="n">problemFileName</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="showXMCDARubisBestChoiceRecommendation"><a class="viewcode-back" href="../techDoc.html#xmcda.showXMCDARubisBestChoiceRecommendation">[docs]</a><span class="k">def</span> <span class="nf">showXMCDARubisBestChoiceRecommendation</span><span class="p">(</span><span class="n">problemFileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">valuationType</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Launches a browser window with the XMCDA2 solution of the</span>
 <span class="sd">    Rubis Solver computed from a stored XMCDA2 encoded performance tableau.</span>
@@ -2486,7 +2500,7 @@
     <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
     <span class="n">currDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
     <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">tempDirName</span><span class="p">)</span>
-    <span class="n">xmcda</span><span class="o">.</span><span class="n">saveXMCDARubisBestChoiceRecommendation</span><span class="p">(</span><span class="n">problemFileName</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">)</span>
+    <span class="n">xmcda</span><span class="o">.</span><span class="n">saveXMCDARubisBestChoiceRecommendation</span><span class="p">(</span><span class="n">problemFileName</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">,</span><span class="n">valuationType</span><span class="p">)</span>
     <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">currDir</span><span class="p">)</span>
     <span class="n">url</span> <span class="o">=</span> <span class="n">tempDirName</span><span class="o">+</span><span class="s1">&#39;/solution-&#39;</span><span class="o">+</span><span class="n">problemFileName</span><span class="o">+</span><span class="s1">&#39;.xmcda2&#39;</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
@@ -2496,10 +2510,10 @@
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="c1">######  scratch pad for testing the module components</span>
     <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">()</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">t</span><span class="o">.</span><span class="n">saveXMCDA2</span><span class="p">(</span><span class="s1">&#39;example&#39;</span><span class="p">)</span>
     <span class="kn">import</span> <span class="nn">xmcda</span>
-    <span class="n">xmcda</span><span class="o">.</span><span class="n">showXMCDARubisBestChoiceRecommendation</span><span class="p">(</span><span class="n">problemFileName</span><span class="o">=</span><span class="s1">&#39;example&#39;</span><span class="p">)</span>
+    <span class="n">xmcda</span><span class="o">.</span><span class="n">showXMCDARubisBestChoiceRecommendation</span><span class="p">(</span><span class="n">problemFileName</span><span class="o">=</span><span class="s1">&#39;example&#39;</span><span class="p">,</span><span class="n">valuationType</span><span class="o">=</span><span class="s1">&#39;noVeto&#39;</span><span class="p">)</span>
 
 <span class="c1">##    import xmcda</span>
 <span class="c1">##    xmcda.saveRubisXSL()</span>
