@@ -2250,6 +2250,7 @@ def saveXMCDARubisBestChoiceRecommendation(problemFileName=None,tempDir='.',valu
     """
     from xml.etree import ElementTree
     import os
+    from sys import platform
     
     def errorExit(tempDir,problemFileName,Number,Name,Message):
         """
@@ -2416,7 +2417,10 @@ def saveXMCDARubisBestChoiceRecommendation(problemFileName=None,tempDir='.',valu
         import os.path
         if os.path.isfile(inFile):
             outFile = str(tempDir)+'/similarityPlot-' + str(problemFileName)+'.jpg'
-            commandString = 'pdftoppm -r 85 < ' + inFile + ' > /tmp/temp.ppm ; ppmtojpeg < /tmp/temp.ppm > /tmp/temp.jpg; cp /tmp/temp.jpg ' + outFile
+            if platform == 'darwin':
+                commandString = 'pdftoppm -r 85 %s %s/temp ; ppmtojpeg %s/temp-000001.ppm > %s/temp.jpg; cp %s/temp.jpg %s' % ( inFile,str(tempDir),str(tempDir),str(tempDir),str(tempDir),outFile)
+            else:
+                commandString = 'pdftoppm -r 85 < ' + inFile + ' > /tmp/temp.ppm ; ppmtojpeg < /tmp/temp.ppm > /tmp/temp.jpg; cp /tmp/temp.jpg ' + outFile
             try:
                 os.system(commandString)
             except:
@@ -2454,7 +2458,7 @@ def showXMCDARubisBestChoiceRecommendation(problemFileName=None,valuationType=No
     os.chdir(currDir)
     url = tempDirName+'/solution-'+problemFileName+'.xmcda2'
     print(url)
-    webbrowser.open_new(url)    
+    webbrowser.open_new('file://'+url)    
    
 ###############################
 if __name__ == '__main__':
@@ -2465,6 +2469,3 @@ if __name__ == '__main__':
     import xmcda
     xmcda.showXMCDARubisBestChoiceRecommendation(problemFileName='example',valuationType='noVeto')
 
-##    import xmcda
-##    xmcda.saveRubisXSL()
-##    xmcda.saveRubisBestChoiceRecommendation()
