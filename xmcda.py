@@ -2449,10 +2449,10 @@ def showXMCDARubisBestChoiceRecommendation(problemFileName=None,valuationType=No
     """
     
     import webbrowser, xmcda, tempfile, os
-    tempDirName = tempfile.mkdtemp()
+    currDir = os.getcwd()
+    tempDirName = tempfile.mkdtemp(dir=currDir)
     commandString = 'cp %s.* %s' % (problemFileName,tempDirName)
     os.system(commandString)
-    currDir = os.getcwd()
     os.chdir(tempDirName)
     xmcda.saveXMCDARubisBestChoiceRecommendation(problemFileName,tempDirName,valuationType)
     os.chdir(currDir)
