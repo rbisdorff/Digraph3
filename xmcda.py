@@ -2226,21 +2226,48 @@ Copyright (C) 2009 DECISION DECK Consortium
 </xsl:stylesheet>
     """
 
-def saveRubisXSL(FileName='xmcda2Rubis.xsl'):
+def saveRubisXSL(fileName='xmcda2Rubis.xsl'):
+    """
+    Save the standard Rubis XMCDA 2.0 XSL style sheet in the current working directory.
+    This style sheet allows to visualize an XMCDA 2.0 encoded performance tableau in a browser.
+
+    .. note::
+
+        The XSL styles heet must be present in the same working directory as the X;CDA encoded data file.
+    
+    """
     import xmcda
-    fo = open(FileName,'w')
+    fo = open(fileName,'w')
     fo.write(xmcda.rubisXSL)
     fo.close()
 
-def saveRubisChoiceXSL(FileName='xmcda2RubisChoice.xsl'):
+def saveRubisChoiceXSL(fileName='xmcda2RubisChoice.xsl'):
+    """
+    Save the local Rubis Best-Choice XMCDA 2.0 XSL style sheet in the current working directory
+    This style sheet allows to browse an XMCDA 2.0 encoded Rubis Best-Choice recommendation.
+
+    .. note::
+
+        The XSL styles heet must be present in the same working directory as the X;CDA encoded data file. 
+      
+    """
     import xmcda
-    fo = open(FileName,'w')
+    fo = open(fileName,'w')
     fo.write(xmcda.rubisChoiceXSL)
     fo.close()
 
-def saveRobustRubisChoiceXSL(FileName='xmcda2RubisRobustChoice.xsl'):
+def saveRobustRubisChoiceXSL(fileName='xmcda2RubisRobustChoice.xsl'):
+    """
+    Save the robust version of the Rubis Best-Choice XMCDA 2.0 XSL style sheet in the current working directory
+    This style sheet allows to browse an XMCDA 2.0 encoded robust Rubis Best-Choice recommendation.
+
+    .. note::
+
+        The XSL styles heet must be present in the same working directory as the X;CDA encoded data file.
+    
+    """
     import xmcda
-    fo = open(FileName,'w')
+    fo = open(fileName,'w')
     fo.write(xmcda.robustRubisXSL)
     fo.close()
 
@@ -2464,8 +2491,8 @@ def showXMCDARubisBestChoiceRecommendation(problemFileName=None,valuationType=No
 if __name__ == '__main__':
     ######  scratch pad for testing the module components
     from randomPerfTabs import RandomCBPerformanceTableau
-    t = RandomCBPerformanceTableau(seed=1)
+    t = RandomCBPerformanceTableau(seed=10)
     t.saveXMCDA2('example')
     import xmcda
-    xmcda.showXMCDARubisBestChoiceRecommendation(problemFileName='example',valuationType='noVeto')
+    xmcda.showXMCDARubisBestChoiceRecommendation(problemFileName='example',valuationType=None)
 

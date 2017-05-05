@@ -2276,21 +2276,48 @@
 <span class="sd">&lt;/xsl:stylesheet&gt;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="saveRubisXSL"><a class="viewcode-back" href="../techDoc.html#xmcda.saveRubisXSL">[docs]</a><span class="k">def</span> <span class="nf">saveRubisXSL</span><span class="p">(</span><span class="n">FileName</span><span class="o">=</span><span class="s1">&#39;xmcda2Rubis.xsl&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="saveRubisXSL"><a class="viewcode-back" href="../techDoc.html#xmcda.saveRubisXSL">[docs]</a><span class="k">def</span> <span class="nf">saveRubisXSL</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;xmcda2Rubis.xsl&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Save the standard Rubis XMCDA 2.0 XSL style sheet in the current working directory.</span>
+<span class="sd">    This style sheet allows to visualize an XMCDA 2.0 encoded performance tableau in a browser.</span>
+
+<span class="sd">    .. note::</span>
+
+<span class="sd">        The XSL styles heet must be present in the same working directory as the X;CDA encoded data file.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">xmcda</span>
-    <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">FileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
     <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">xmcda</span><span class="o">.</span><span class="n">rubisXSL</span><span class="p">)</span>
     <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="saveRubisChoiceXSL"><a class="viewcode-back" href="../techDoc.html#xmcda.saveRubisChoiceXSL">[docs]</a><span class="k">def</span> <span class="nf">saveRubisChoiceXSL</span><span class="p">(</span><span class="n">FileName</span><span class="o">=</span><span class="s1">&#39;xmcda2RubisChoice.xsl&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="saveRubisChoiceXSL"><a class="viewcode-back" href="../techDoc.html#xmcda.saveRubisChoiceXSL">[docs]</a><span class="k">def</span> <span class="nf">saveRubisChoiceXSL</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;xmcda2RubisChoice.xsl&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Save the local Rubis Best-Choice XMCDA 2.0 XSL style sheet in the current working directory</span>
+<span class="sd">    This style sheet allows to browse an XMCDA 2.0 encoded Rubis Best-Choice recommendation.</span>
+
+<span class="sd">    .. note::</span>
+
+<span class="sd">        The XSL styles heet must be present in the same working directory as the X;CDA encoded data file. </span>
+<span class="sd">      </span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">xmcda</span>
-    <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">FileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
     <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">xmcda</span><span class="o">.</span><span class="n">rubisChoiceXSL</span><span class="p">)</span>
     <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="saveRobustRubisChoiceXSL"><a class="viewcode-back" href="../techDoc.html#xmcda.saveRobustRubisChoiceXSL">[docs]</a><span class="k">def</span> <span class="nf">saveRobustRubisChoiceXSL</span><span class="p">(</span><span class="n">FileName</span><span class="o">=</span><span class="s1">&#39;xmcda2RubisRobustChoice.xsl&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="saveRobustRubisChoiceXSL"><a class="viewcode-back" href="../techDoc.html#xmcda.saveRobustRubisChoiceXSL">[docs]</a><span class="k">def</span> <span class="nf">saveRobustRubisChoiceXSL</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;xmcda2RubisRobustChoice.xsl&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Save the robust version of the Rubis Best-Choice XMCDA 2.0 XSL style sheet in the current working directory</span>
+<span class="sd">    This style sheet allows to browse an XMCDA 2.0 encoded robust Rubis Best-Choice recommendation.</span>
+
+<span class="sd">    .. note::</span>
+
+<span class="sd">        The XSL styles heet must be present in the same working directory as the X;CDA encoded data file.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">xmcda</span>
-    <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">FileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
     <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">xmcda</span><span class="o">.</span><span class="n">robustRubisXSL</span><span class="p">)</span>
     <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
@@ -2300,6 +2327,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">xml.etree</span> <span class="k">import</span> <span class="n">ElementTree</span>
     <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">from</span> <span class="nn">sys</span> <span class="k">import</span> <span class="n">platform</span>
     
     <span class="k">def</span> <span class="nf">errorExit</span><span class="p">(</span><span class="n">tempDir</span><span class="p">,</span><span class="n">problemFileName</span><span class="p">,</span><span class="n">Number</span><span class="p">,</span><span class="n">Name</span><span class="p">,</span><span class="n">Message</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -2395,7 +2423,7 @@
                 <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="n">errorExit</span><span class="p">(</span><span class="n">tempDir</span><span class="p">,</span><span class="n">problemFileName</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Corrupt problem data&#39;</span><span class="p">,</span> <span class="s1">&#39;Error when computing outranking digraph !&#39;</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">valuationType</span> <span class="o">==</span> <span class="s1">&#39;rubust&#39;</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">valuationType</span> <span class="o">==</span> <span class="s1">&#39;robust&#39;</span><span class="p">:</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">RobustOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
         <span class="n">isRobust</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="k">elif</span> <span class="n">valuationType</span> <span class="o">==</span> <span class="s1">&#39;confident&#39;</span><span class="p">:</span>
@@ -2466,7 +2494,10 @@
         <span class="kn">import</span> <span class="nn">os.path</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">inFile</span><span class="p">):</span>
             <span class="n">outFile</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">tempDir</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;/similarityPlot-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">problemFileName</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.jpg&#39;</span>
-            <span class="n">commandString</span> <span class="o">=</span> <span class="s1">&#39;pdftoppm -r 85 &lt; &#39;</span> <span class="o">+</span> <span class="n">inFile</span> <span class="o">+</span> <span class="s1">&#39; &gt; /tmp/temp.ppm ; ppmtojpeg &lt; /tmp/temp.ppm &gt; /tmp/temp.jpg; cp /tmp/temp.jpg &#39;</span> <span class="o">+</span> <span class="n">outFile</span>
+            <span class="k">if</span> <span class="n">platform</span> <span class="o">==</span> <span class="s1">&#39;darwin&#39;</span><span class="p">:</span>
+                <span class="n">commandString</span> <span class="o">=</span> <span class="s1">&#39;pdftoppm -r 85 </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">/temp ; ppmtojpeg </span><span class="si">%s</span><span class="s1">/temp-000001.ppm &gt; </span><span class="si">%s</span><span class="s1">/temp.jpg; cp </span><span class="si">%s</span><span class="s1">/temp.jpg </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span> <span class="n">inFile</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">tempDir</span><span class="p">),</span><span class="nb">str</span><span class="p">(</span><span class="n">tempDir</span><span class="p">),</span><span class="nb">str</span><span class="p">(</span><span class="n">tempDir</span><span class="p">),</span><span class="nb">str</span><span class="p">(</span><span class="n">tempDir</span><span class="p">),</span><span class="n">outFile</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">commandString</span> <span class="o">=</span> <span class="s1">&#39;pdftoppm -r 85 &lt; &#39;</span> <span class="o">+</span> <span class="n">inFile</span> <span class="o">+</span> <span class="s1">&#39; &gt; /tmp/temp.ppm ; ppmtojpeg &lt; /tmp/temp.ppm &gt; /tmp/temp.jpg; cp /tmp/temp.jpg &#39;</span> <span class="o">+</span> <span class="n">outFile</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
             <span class="k">except</span><span class="p">:</span>
@@ -2495,29 +2526,26 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="kn">import</span> <span class="nn">webbrowser</span><span class="o">,</span> <span class="nn">xmcda</span><span class="o">,</span> <span class="nn">tempfile</span><span class="o">,</span> <span class="nn">os</span>
-    <span class="n">tempDirName</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span>
+    <span class="n">currDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+    <span class="n">tempDirName</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">(</span><span class="nb">dir</span><span class="o">=</span><span class="n">currDir</span><span class="p">)</span>
     <span class="n">commandString</span> <span class="o">=</span> <span class="s1">&#39;cp </span><span class="si">%s</span><span class="s1">.* </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">problemFileName</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">)</span>
     <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
-    <span class="n">currDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
     <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">tempDirName</span><span class="p">)</span>
     <span class="n">xmcda</span><span class="o">.</span><span class="n">saveXMCDARubisBestChoiceRecommendation</span><span class="p">(</span><span class="n">problemFileName</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">,</span><span class="n">valuationType</span><span class="p">)</span>
     <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">currDir</span><span class="p">)</span>
     <span class="n">url</span> <span class="o">=</span> <span class="n">tempDirName</span><span class="o">+</span><span class="s1">&#39;/solution-&#39;</span><span class="o">+</span><span class="n">problemFileName</span><span class="o">+</span><span class="s1">&#39;.xmcda2&#39;</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-    <span class="n">webbrowser</span><span class="o">.</span><span class="n">open_new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>    </div>
+    <span class="n">webbrowser</span><span class="o">.</span><span class="n">open_new</span><span class="p">(</span><span class="s1">&#39;file://&#39;</span><span class="o">+</span><span class="n">url</span><span class="p">)</span>    </div>
    
 <span class="c1">###############################</span>
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="c1">######  scratch pad for testing the module components</span>
     <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
     <span class="n">t</span><span class="o">.</span><span class="n">saveXMCDA2</span><span class="p">(</span><span class="s1">&#39;example&#39;</span><span class="p">)</span>
     <span class="kn">import</span> <span class="nn">xmcda</span>
-    <span class="n">xmcda</span><span class="o">.</span><span class="n">showXMCDARubisBestChoiceRecommendation</span><span class="p">(</span><span class="n">problemFileName</span><span class="o">=</span><span class="s1">&#39;example&#39;</span><span class="p">,</span><span class="n">valuationType</span><span class="o">=</span><span class="s1">&#39;noVeto&#39;</span><span class="p">)</span>
+    <span class="n">xmcda</span><span class="o">.</span><span class="n">showXMCDARubisBestChoiceRecommendation</span><span class="p">(</span><span class="n">problemFileName</span><span class="o">=</span><span class="s1">&#39;example&#39;</span><span class="p">,</span><span class="n">valuationType</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
-<span class="c1">##    import xmcda</span>
-<span class="c1">##    xmcda.saveRubisXSL()</span>
-<span class="c1">##    xmcda.saveRubisBestChoiceRecommendation()</span>
 </pre></div>
 
           </div>
