@@ -2273,7 +2273,16 @@ def saveRobustRubisChoiceXSL(fileName='xmcda2RubisRobustChoice.xsl'):
 
 def saveXMCDARubisBestChoiceRecommendation(problemFileName=None,tempDir='.',valuationType=None):
     """
-    Store an XMCDA2 encoded solution file of the Rubis best-choice recommendation
+    Store an XMCDA2 encoded solution file of the Rubis best-choice recommendation.
+
+    .. note::
+
+         The method requires an Unix like OS like Ubuntu or Mac OSX and depends on:
+
+              - the R statistics package for Principal Component Analysis tools,
+              - the calmat matrix interpreter (see http://leopold-loewenheim.uni.lu/svn/repos/Calmat/Readme)
+              - the xpdf ressources ( ...$ apt-get install xpdf on Ubuntu) for converting pdf files to ppm format, and ppm files to png format.  
+        
     """
     from xml.etree import ElementTree
     import os
