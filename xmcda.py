@@ -2280,7 +2280,7 @@ def saveXMCDARubisBestChoiceRecommendation(problemFileName=None,tempDir='.',valu
          The method requires an Unix like OS like Ubuntu or Mac OSX and depends on:
 
               - the R statistics package for Principal Component Analysis tools,
-              - the calmat matrix interpreter (see http://leopold-loewenheim.uni.lu/svn/repos/Calmat/Readme)
+              - the calmat matrix interpreter (On http://leopold-loewenheim.uni.lu/svn/repos/Calmat/  see README)
               - the xpdf ressources ( ...$ apt-get install xpdf on Ubuntu) for converting pdf files to ppm format, and ppm files to png format.  
         
     """
