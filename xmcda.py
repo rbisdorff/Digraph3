@@ -17,7 +17,6 @@
 #    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 #######################
-
 __version__ = "Branch: 3.5 $"
 # ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
 
