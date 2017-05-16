@@ -1509,11 +1509,11 @@
 <span class="sd">    Specialisation of the sortingDigraph Class</span>
 <span class="sd">    for sorting of a large set of alternatives into</span>
 <span class="sd">    quantiles delimited ordered classes.</span>
-<span class="sd">    </span>
+<span class="sd">      </span>
 <span class="sd">    .. note::</span>
 
-<span class="sd">        We generally require an PerformanceTableau instance or a valid filename.</span>
-<span class="sd">        If none is given, then a default profile with the limiting quartiles Q0,Q1,Q2, Q3 and Q4 is used on each criteria.</span>
+<span class="sd">        The constructor requires a valid PerformanceTableau instance.</span>
+<span class="sd">        If no number of limiting quantiles is given, then a default profile with the limiting quartiles Q0,Q1,Q2, Q3 and Q4 is used on each criteria.</span>
 <span class="sd">        By default upper closed limits of categories are supposed to be used in the sorting.</span>
 
 <span class="sd">    Example Python3 session:</span>
@@ -3086,7 +3086,7 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">sorting</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sorting</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="n">sorting</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeSortingCharacteristics</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="n">action</span><span class="p">,</span><span class="n">StoreSorting</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">sorting</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeSortingCharacteristics</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="n">action</span><span class="p">,</span><span class="n">StoreSorting</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
         <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getActionsKeys</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
             
