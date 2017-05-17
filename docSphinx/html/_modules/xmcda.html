@@ -2539,11 +2539,16 @@
     <span class="n">commandString</span> <span class="o">=</span> <span class="s1">&#39;cp </span><span class="si">%s</span><span class="s1">.* </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">problemFileName</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">)</span>
     <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
     <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">tempDirName</span><span class="p">)</span>
-    <span class="n">xmcda</span><span class="o">.</span><span class="n">saveXMCDARubisBestChoiceRecommendation</span><span class="p">(</span><span class="n">problemFileName</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">,</span><span class="n">valuationType</span><span class="p">)</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">currDir</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">xmcda</span><span class="o">.</span><span class="n">saveXMCDARubisBestChoiceRecommendation</span><span class="p">(</span><span class="n">problemFileName</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">,</span><span class="n">valuationType</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">currDir</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: file </span><span class="si">%s</span><span class="s1"> not found!&#39;</span> <span class="o">%</span> <span class="n">problemFileName</span><span class="p">)</span>
+        <span class="k">return</span>
     <span class="n">url</span> <span class="o">=</span> <span class="n">tempDirName</span><span class="o">+</span><span class="s1">&#39;/solution-&#39;</span><span class="o">+</span><span class="n">problemFileName</span><span class="o">+</span><span class="s1">&#39;.xmcda2&#39;</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-    <span class="n">webbrowser</span><span class="o">.</span><span class="n">open_new</span><span class="p">(</span><span class="s1">&#39;file://&#39;</span><span class="o">+</span><span class="n">url</span><span class="p">)</span>    </div>
+    <span class="n">webbrowser</span><span class="o">.</span><span class="n">open_new</span><span class="p">(</span><span class="s1">&#39;file://&#39;</span><span class="o">+</span><span class="n">url</span><span class="p">)</span>    
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">currDir</span><span class="p">)</span></div>
    
 <span class="c1">###############################</span>
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
