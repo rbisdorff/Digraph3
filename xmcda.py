@@ -2489,11 +2489,16 @@ def showXMCDARubisBestChoiceRecommendation(problemFileName=None,valuationType=No
     commandString = 'cp %s.* %s' % (problemFileName,tempDirName)
     os.system(commandString)
     os.chdir(tempDirName)
-    xmcda.saveXMCDARubisBestChoiceRecommendation(problemFileName,tempDirName,valuationType)
-    os.chdir(currDir)
+    try:
+        xmcda.saveXMCDARubisBestChoiceRecommendation(problemFileName,tempDirName,valuationType)
+    except:
+        os.chdir(currDir)
+        print('Error: file %s not found!' % problemFileName)
+        return
     url = tempDirName+'/solution-'+problemFileName+'.xmcda2'
     print(url)
     webbrowser.open_new('file://'+url)    
+    os.chdir(currDir)
    
 ###############################
 if __name__ == '__main__':
