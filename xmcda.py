@@ -468,11 +468,11 @@ Copyright (C) 2009-2017 Raymond Bisdorff Luxembourg
   <xsl:apply-templates  select="description"/>
    <table border="1">
      <tr bgcolor="#9acd32">
-        <th rowspan="2">#</th>
-        <th rowspan="2">Identifyer</th>
-        <th rowspan="2">Name</th>
-        <th rowspan="2">Comment</th>
-        <th rowspan="2">Criteria list</th>
+        <th rowspan="1">#</th>
+        <th rowspan="1">Identifyer</th>
+        <th rowspan="1">Name</th>
+        <th rowspan="1">Comment</th>
+        <th rowspan="1">Criteria list</th>
      </tr>
      <xsl:for-each select="objective">
        <tr>
@@ -481,6 +481,7 @@ Copyright (C) 2009-2017 Raymond Bisdorff Luxembourg
 	   <td><xsl:value-of select="@name"/></td>
 	   <td><xsl:value-of select="description/comment"/></td>        
          <td align="center"><xsl:value-of select="objectiveCriteria"/></td>
+       </tr>
      </xsl:for-each>
    </table>
 </xsl:template>
