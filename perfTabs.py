@@ -6775,38 +6775,41 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
                     pass
         self.actions = actions
         
-        objectives = OrderedDict()
-        # get objectives' description
-        if XMCDA.find('objectives').find('description') != None:
-            description = {}
-            for elem in [x for x in XMCDA.find('criteria').find('description').getchildren()]:
-                description[elem.tag] = elem.text
-            self.objectivesDescription = description
-        ## get objectives
-        for g in XMCDA.find('objectives').findall('objective'):
-            if Debug:
-                print('converting objective %s data' % g.attrib['id'])
-            try:             
-                if g.find('active').text == 'true':
-                    Active = True
-                else:
-                    Active = False
-            except:
-                Active = True
-            if Active:
-                objectives[g.attrib['id']] = {}
-                #name
-                objectives[g.attrib['id']]['name'] =g.attrib['name']
-                #description
-                for elem in [y for y in g.find('description').getchildren()]:
-                    objectives[g.attrib['id']][elem.tag] = elem.text
-                try:
-                    objectives[g.attrib['id']]['weight'] = Decimal(g.find('weight').find('value').find('real').text)
+        if XMCDA.find('objectives') != None:  # objectives are defined
+            objectives = OrderedDict()
+            # get objectives' description
+            if XMCDA.find('objectives').find('description') != None:
+                description = {}
+                for elem in [x for x in XMCDA.find('criteria').find('description').getchildren()]:
+                    description[elem.tag] = elem.text
+                self.objectivesDescription = description
+            ## get objectives
+            for g in XMCDA.find('objectives').findall('objective'):
+                if Debug:
+                    print('converting objective %s data' % g.attrib['id'])
+                try:             
+                    if g.find('active').text == 'true':
+                        Active = True
+                    else:
+                        Active = False
                 except:
-                    criteria[g.attrib['id']]['weight'] = Decimal(g.find('weight').find('value').find('integer').text)
+                    Active = True
+                if Active:
+                    objectives[g.attrib['id']] = {}
+                    #name
+                    objectives[g.attrib['id']]['name'] =g.attrib['name']
+                    #description
+                    for elem in [y for y in g.find('description').getchildren()]:
+                        objectives[g.attrib['id']][elem.tag] = elem.text
+                    try:
+                        objectives[g.attrib['id']]['weight'] = Decimal(g.find('weight').find('value').find('real').text)
+                    except:
+                        criteria[g.attrib['id']]['weight'] = Decimal(g.find('weight').find('value').find('integer').text)
 
-                objectives[g.attrib['id']]['criteria'] = literal_eval(g.find('objectiveCriteria').text)
-        self.objectives = objectives
+                    objectives[g.attrib['id']]['criteria'] = literal_eval(g.find('objectiveCriteria').text)
+            self.objectives = objectives
+        else:  # no objectives are given
+            pass
         
         criteria = OrderedDict()
         # get criteria' description

@@ -213,11 +213,20 @@ def testXMCDA2SaveReadPerformanceTableau():
     t1 = XMCDAPerformanceTableau('testXMCDA')
     g1 = BipolarOutrankingDigraph(t1)
     g1.showRelationTable()
-    t1.saveXMCDA2('testXMCDA2')
+    t1.saveXMCDA2('testXMCDA2',servingD3=False)
     t2 = XMCDA2PerformanceTableau('testXMCDA2')
     g2 = BipolarOutrankingDigraph(t2)
     g2.showRelationTable()
-    
+
+def testXMCDA2ExtendedPerformanceTableau():
+    print('*==>> save and read XMCDA-2.0 Extended PerformanceTableau instances ----*')
+    t = RandomCBPerformanceTableau()
+    t.saveXMCDA2Ext('testXMCDA2Ext')
+    t1 = XMCDA2PerformanceTableau('testXMCDA2Ext')
+    t1.showObjectives()
+    from xmcda import saveRubisXSL
+    saveRubisXSL(Extended=True)
+
 def testStringIOXMCDA2Encoding():
     print('*---- test mapped memory XMCDA2 encoding for performanceTableau ---*')
     T = RandomPerformanceTableau()
