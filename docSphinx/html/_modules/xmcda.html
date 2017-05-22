@@ -79,7 +79,653 @@
 <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="kn">import</span> <span class="nn">xmcda</span>
 
-<span class="c1">#class xmcda2Sheets():</span>
+<span class="c1">############################</span>
+<span class="n">rubisExtXSL</span> <span class="o">=</span>\
+<span class="sd">&quot;&quot;&quot;&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="sd">&lt;xsl:stylesheet version=&quot;1.0&quot; xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:xmcda=&quot;http://www.decision-deck.org/2009/XMCDA-2.0.0&quot;&gt;</span>
+<span class="sd">  </span>
+<span class="sd">&lt;!-- </span>
+<span class="sd">XMCDA 2.0 Rubis XSLT tranformation to HTML, RB 2017</span>
+<span class="sd">$Revision: 1.0 $</span>
+<span class="sd">The ressource comes with ABSOLUTELY NO WARRANTY </span>
+<span class="sd">to the extent permitted by the applicable law.</span>
+<span class="sd">This is free software, and you are welcome to </span>
+<span class="sd">redistribute it if it remains free software. </span>
+<span class="sd">Copyright (C) 2009 DECISION DECK Consortium</span>
+<span class="sd">Copyright (C) 2009-2017 Raymond Bisdorff Luxembourg</span>
+<span class="sd">--&gt;</span>
+
+
+<span class="sd"> &lt;!-- Main start of the transform --&gt;</span>
+<span class="sd">  </span>
+<span class="sd">&lt;xsl:template match=&quot;/&quot; &gt;</span>
+<span class="sd"> &lt;html&gt;</span>
+<span class="sd">  &lt;head&gt;&lt;title&gt;D2-Decision-Deck UMCDA-ML XMCDA-2.0 application&lt;/title&gt;&lt;/head&gt;</span>
+<span class="sd">  &lt;body&gt;</span>
+<span class="sd">    &lt;h2&gt;&lt;font color=&quot;#0000bb&quot;&gt;Decision-Deck UMCDA-ML XMCDA 2.0 application&lt;/font&gt;&lt;/h2&gt;</span>
+<span class="sd">    </span>
+<span class="sd">    &lt;xsl:apply-templates /&gt;</span>
+<span class="sd">    &lt;hr /&gt;</span>
+<span class="sd">    &lt;p&gt;&lt;b&gt;Rubis XSLT to HTML stylesheet (R. Bisdorff):&lt;/b&gt; $Revision: 1.7 $ &lt;br/&gt;</span>
+<span class="sd">          UMCDA-ML &lt;a href=&quot;http://www.decision-deck.org/xmcda&quot;&gt;XMCDA 2.0 Schema&lt;/a&gt;&lt;br/&gt;</span>
+<span class="sd">          Raymond Bisdorff (University of Luxembourg), Patrick Meyer (Telecom Bretagne) and Thomas Veneziano (University of Luxembourg)March 2009&lt;br/&gt;</span>
+<span class="sd">          Copyright © 2009 &lt;a href=&quot;http://www.decision-deck.org/&quot;&gt;DECISION DECK Consortium&lt;/a&gt;&lt;br/&gt;</span>
+<span class="sd">          &lt;a href=&quot;javascript:void(document.location=&#39;view-source:&#39;+document.location)&quot;&gt;View the source of this document.&lt;/a&gt;&lt;/p&gt;</span>
+<span class="sd">   &lt;/body&gt;</span>
+<span class="sd">  &lt;/html&gt;</span>
+<span class="sd">&lt;/xsl:template&gt;</span>
+<span class="sd"> </span>
+<span class="sd">  &lt;xsl:template match=&quot;alternativesComparisions[@mcdaConcept=&#39;outrankingDigraph&#39;]&quot; mode=&quot;toc&quot;&gt;</span>
+<span class="sd">     &lt;!-- &lt;xsl:apply-templates select=&quot;.&quot;/&gt; --&gt;</span>
+<span class="sd">    &lt;li&gt;&lt;a href=&quot;#digraph&quot;&gt;Outranking Digraph&lt;/a&gt;&lt;/li&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd"> </span>
+<span class="sd">  &lt;xsl:template match=&quot;alternativesComparisions[@mcdaConcept=&#39;ValuedDigraph&#39;]&quot; mode=&quot;toc&quot;&gt;</span>
+<span class="sd">     &lt;!-- &lt;xsl:apply-templates select=&quot;.&quot;/&gt; --&gt;</span>
+<span class="sd">    &lt;li&gt;&lt;a href=&quot;#digraph&quot;&gt;Valued Digraph&lt;/a&gt;&lt;/li&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd"> </span>
+<span class="sd"> &lt;!--  generic description layout: must fit all element description !!! --&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template match=&quot;description&quot; mode=&quot;bipolar&quot;&gt;</span>
+<span class="sd">     &lt;xsl:apply-templates select=&quot;.&quot;/&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd"> </span>
+<span class="sd">  &lt;xsl:template match=&quot;description&quot; mode=&quot;veto&quot;&gt;</span>
+<span class="sd">     &lt;xsl:apply-templates select=&quot;.&quot;/&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template match=&quot;description&quot; mode=&quot;simil&quot;&gt;</span>
+<span class="sd">     &lt;xsl:apply-templates select=&quot;.&quot;/&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template match=&quot;title&quot;&gt;</span>
+<span class="sd">    &lt;h1&gt;&lt;font color=&quot;#bb0000&quot;&gt;&lt;xsl:value-of select=&quot;text()&quot;/&gt;&lt;/font&gt;&lt;/h1&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template match=&quot;subTitle&quot;&gt;</span>
+<span class="sd">    &lt;h2&gt;&lt;font color=&quot;#0000bb&quot;&gt;&lt;xsl:value-of select=&quot;text()&quot;/&gt;&lt;/font&gt;&lt;/h2&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template match=&quot;subSubTitle&quot;&gt;</span>
+<span class="sd">    &lt;h3&gt;&lt;font color=&quot;#0000bb&quot;&gt;&lt;xsl:value-of select=&quot;text()&quot;/&gt;&lt;/font&gt;&lt;/h3&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template match=&quot;id&quot;&gt;</span>
+<span class="sd">    Identifier: &lt;font color=&quot;#0000bb&quot;&gt;&lt;xsl:value-of select=&quot;text()&quot; /&gt;&lt;/font&gt;&lt;br/&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template match=&quot;approach&quot;&gt;</span>
+<span class="sd">    Approach: &lt;font color=&quot;#0000bb&quot;&gt;&lt;xsl:value-of select=&quot;text()&quot; /&gt;&lt;/font&gt;&lt;br/&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template match=&quot;methodology&quot;&gt;</span>
+<span class="sd">    Methodology: &lt;font color=&quot;#0000bb&quot;&gt;&lt;xsl:value-of select=&quot;text()&quot; /&gt;&lt;/font&gt;&lt;br/&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template match=&quot;problematique&quot;&gt;</span>
+<span class="sd">    Problematique: &lt;font color=&quot;#0000bb&quot;&gt;&lt;xsl:value-of select=&quot;text()&quot; /&gt;&lt;/font&gt;&lt;br/&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template match=&quot;shortName&quot;&gt;</span>
+<span class="sd">    Short name: &lt;xsl:value-of select=&quot;text()&quot; /&gt;&lt;br/&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template match=&quot;name&quot;&gt;</span>
+<span class="sd">    Name: &lt;font color=&quot;#0000bb&quot;&gt;&lt;xsl:value-of select=&quot;text()&quot; /&gt;&lt;/font&gt;&lt;br/&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template match=&quot;comment&quot;&gt;</span>
+<span class="sd">    Comment: &lt;em&gt;&lt;xsl:value-of select=&quot;text()&quot; /&gt;&lt;/em&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template match=&quot;author&quot;&gt;</span>
+<span class="sd">    Author: &lt;xsl:apply-templates/&gt;&lt;br/&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template match=&quot;user&quot;&gt;</span>
+<span class="sd">    User: &lt;xsl:apply-templates/&gt;&lt;br/&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template match=&quot;type&quot;&gt;</span>
+<span class="sd"> &lt;!--    &lt;tr&gt;&lt;th align=&quot;left&quot;&gt;Type: &lt;/th&gt;&lt;td&gt;&lt;xsl:apply-templates/&gt;&lt;/td&gt;&lt;/tr&gt; --&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template match=&quot;version&quot;&gt;</span>
+<span class="sd">    Version: &lt;xsl:apply-templates/&gt;&lt;br/&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template match=&quot;abstract&quot;&gt;</span>
+<span class="sd">    Abstract: &lt;em&gt;&lt;xsl:value-of select=&quot;text()&quot; /&gt;&lt;/em&gt;&lt;br/&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template match=&quot;keywords&quot;&gt;</span>
+<span class="sd">    Key Words: &lt;xsl:value-of select=&quot;text()&quot; /&gt;&lt;br/&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template match=&quot;bibliography&quot;&gt;</span>
+<span class="sd">    &lt;xsl:apply-templates  select=&quot;description&quot;/&gt;</span>
+<span class="sd">    &lt;table border=&quot;0&quot;&gt;</span>
+<span class="sd">    &lt;xsl:for-each select=&quot;bibEntry&quot;&gt;</span>
+<span class="sd">      &lt;tr&gt;</span>
+<span class="sd">        &lt;td&gt;&lt;xsl:number format=&quot;1&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">        &lt;td&gt;&lt;xsl:value-of select=&quot;text()&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">      &lt;/tr&gt;</span>
+<span class="sd">    &lt;/xsl:for-each&gt;</span>
+<span class="sd">    &lt;/table&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template match=&quot;dateTime&quot;&gt;</span>
+<span class="sd">    Date: &lt;xsl:value-of select=&quot;text()&quot; /&gt;&lt;br/&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">&lt;!-- Method Data --&gt;</span>
+<span class="sd">&lt;xsl:template match=&quot;methodParameters&quot;&gt;</span>
+<span class="sd">   &lt;xsl:apply-templates/&gt;</span>
+<span class="sd">&lt;/xsl:template&gt;</span>
+
+<span class="sd">  &lt;xsl:template match=&quot;parameters&quot;&gt;</span>
+<span class="sd">    &lt;table cellpadding=&quot;1&quot; border=&quot;1&quot;&gt;</span>
+<span class="sd">      &lt;tr&gt;&lt;th bgcolor=&quot;#9acd32&quot;&gt;Parameter&lt;/th&gt;&lt;th bgcolor=&quot;#9acd32&quot;&gt;Value&lt;/th&gt;&lt;th bgcolor=&quot;#9acd32&quot;&gt;Comment&lt;/th&gt;&lt;/tr&gt;</span>
+<span class="sd">      &lt;xsl:apply-templates/&gt;</span>
+<span class="sd">    &lt;/table&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template match=&quot;parameter[value]&quot;&gt;</span>
+<span class="sd">    &lt;tr&gt;&lt;td bgcolor=&quot;#FFF79B&quot;&gt;&lt;xsl:value-of select=&quot;@name&quot;/&gt;&lt;/td&gt;&lt;td&gt;&lt;xsl:value-of select=&quot;value&quot;/&gt;&lt;/td&gt;&lt;td&gt;&lt;xsl:value-of select=&quot;description/comment&quot;/&gt;&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  &lt;xsl:template match=&quot;parameter[function/constant]&quot;&gt;</span>
+<span class="sd">    &lt;tr&gt;&lt;td bgcolor=&quot;#FFF79B&quot;&gt;&lt;xsl:value-of select=&quot;@name&quot;/&gt;&lt;/td&gt;&lt;td&gt;&lt;xsl:value-of select=&quot;function&quot;/&gt;&lt;/td&gt;&lt;td&gt;&lt;xsl:value-of select=&quot;description/comment&quot;/&gt;&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  &lt;xsl:template match=&quot;parameter[function/linear]&quot;&gt;</span>
+<span class="sd">    &lt;tr&gt;&lt;td bgcolor=&quot;#FFF79B&quot;&gt;&lt;xsl:value-of select=&quot;@name&quot;/&gt;&lt;/td&gt;&lt;td&gt;&lt;xsl:value-of select=&quot;function/linear/intercept&quot;/&gt;+&lt;xsl:value-of select=&quot;function/linear/slope&quot;/&gt;x&lt;/td&gt;&lt;td&gt;&lt;xsl:value-of select=&quot;description/comment&quot;/&gt;&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template match=&quot;errorMessage&quot;&gt;</span>
+<span class="sd"> &lt;table cellpadding=&quot;1&quot; border=&quot;1&quot;&gt;</span>
+<span class="sd">   &lt;tr&gt;&lt;th bgcolor=&quot;#9acd32&quot;&gt;Number&lt;/th&gt;&lt;th bgcolor=&quot;#9acd32&quot;&gt;Name&lt;/th&gt;&lt;th bgcolor=&quot;#9acd32&quot;&gt;Text&lt;/th&gt;&lt;/tr&gt;</span>
+<span class="sd">   &lt;tr&gt;&lt;td bgcolor=&quot;#FFF79B&quot;&gt;&lt;xsl:value-of select=&quot;number&quot;/&gt;&lt;/td&gt;&lt;td&gt;&lt;xsl:value-of select=&quot;@name&quot;/&gt;&lt;/td&gt;&lt;td&gt;&lt;xsl:value-of select=&quot;text&quot;/&gt;&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="sd">   &lt;/table&gt;</span>
+<span class="sd">&lt;/xsl:template&gt;</span>
+
+
+<span class="sd">&lt;xsl:template match=&quot;alternatives&quot;&gt;</span>
+<span class="sd">  &lt;a name=&quot;alternatives&quot;/&gt;</span>
+<span class="sd">   &lt;xsl:apply-templates  select=&quot;description&quot;/&gt;</span>
+<span class="sd">   &lt;table border=&quot;1&quot;&gt;</span>
+<span class="sd">      &lt;tr bgcolor=&quot;#9acd32&quot;&gt;</span>
+<span class="sd">        &lt;th&gt;#&lt;/th&gt;</span>
+<span class="sd">        &lt;th&gt;Identifyer&lt;/th&gt;</span>
+<span class="sd">        &lt;th&gt;Name&lt;/th&gt;</span>
+<span class="sd">        &lt;th&gt;Comment&lt;/th&gt;</span>
+<span class="sd">      &lt;/tr&gt;</span>
+<span class="sd">   &lt;xsl:for-each select=&quot;alternative&quot;&gt;</span>
+<span class="sd">       &lt;tr&gt;&lt;td&gt;&lt;xsl:number format=&quot;1&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">         &lt;th bgcolor=&quot;#FFF79B&quot;&gt;&lt;xsl:value-of select=&quot;@id&quot;/&gt;&lt;/th&gt;</span>
+<span class="sd">           &lt;td&gt;&lt;xsl:value-of select=&quot;@name&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">           &lt;td&gt;&lt;xsl:value-of select=&quot;description/comment&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">	&lt;/tr&gt;</span>
+<span class="sd">   &lt;/xsl:for-each&gt;</span>
+<span class="sd">   &lt;/table&gt;</span>
+<span class="sd">&lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd"> </span>
+<span class="sd">  &lt;xsl:template match=&quot;alternativesComparisons&quot;&gt;</span>
+<span class="sd">    &lt;a name=&quot;digraph&quot;/&gt;</span>
+<span class="sd">    &lt;xsl:choose&gt;</span>
+<span class="sd">      &lt;xsl:when test=&quot;valuation/valuationType=&#39;bipolar&#39;&quot;&gt;</span>
+<span class="sd">        &lt;xsl:apply-templates mode=&quot;bipolar&quot;/&gt;</span>
+<span class="sd">      &lt;/xsl:when&gt;</span>
+<span class="sd">      &lt;xsl:otherwise&gt;</span>
+<span class="sd">        &lt;xsl:apply-templates/&gt;</span>
+<span class="sd">      &lt;/xsl:otherwise&gt;</span>
+<span class="sd">    &lt;/xsl:choose&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd"> </span>
+<span class="sd">  &lt;xsl:template match=&quot;relationOnCriteria&quot;&gt;</span>
+<span class="sd">    &lt;a name=&quot;correlation&quot;/&gt;</span>
+<span class="sd">     &lt;xsl:apply-templates mode=&quot;simil&quot;/&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd"> </span>
+<span class="sd">  &lt;xsl:template match=&quot;relationOnAlternatives[description/type=&#39;Vetoes&#39;]&quot; &gt;</span>
+<span class="sd">        &lt;xsl:apply-templates mode=&quot;veto&quot;/&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template match=&quot;valuation&quot; mode=&quot;bipolar&quot;&gt;</span>
+<span class="sd">       &lt;xsl:apply-templates select=&quot;description&quot;/&gt;</span>
+<span class="sd">       &lt;xsl:variable name=&quot;median&quot; select=&quot;quantitative/minimum + (quantitative/maximum - quantitative/minimum) div 2&quot;&gt;&lt;/xsl:variable&gt;</span>
+<span class="sd">       &lt;table cellpadding=&quot;1&quot; border=&quot;1&quot;&gt;</span>
+<span class="sd">         &lt;tr&gt;&lt;td bgcolor=&quot;#FFF79B&quot;&gt;Maximum&lt;/td&gt;&lt;td bgcolor=&quot;#ddffdd&quot; align=&quot;right&quot;&gt;&lt;xsl:value-of select=&quot;quantitative/maximum&quot;/&gt;&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="sd">         &lt;tr&gt;&lt;td bgcolor=&quot;#FFF79B&quot;&gt;Median&lt;/td&gt;&lt;td bgcolor=&quot;#dddddd&quot;  align=&quot;right&quot;&gt;&lt;xsl:value-of select=&quot;$median&quot; /&gt;&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="sd">         &lt;tr&gt;&lt;td bgcolor=&quot;#FFF79B&quot;&gt;Minimum&lt;/td&gt;&lt;td bgcolor=&quot;#ffddff&quot;  align=&quot;right&quot;&gt;&lt;xsl:value-of select=&quot;quantitative/minimum&quot;/&gt;&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="sd">       &lt;/table&gt;</span>
+<span class="sd">    </span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">   </span>
+<span class="sd">  &lt;xsl:template match=&quot;valuation&quot;&gt;</span>
+<span class="sd">       &lt;xsl:apply-templates select=&quot;description&quot;/&gt;</span>
+<span class="sd">        &lt;table cellpadding=&quot;1&quot; border=&quot;1&quot;&gt;</span>
+<span class="sd">         &lt;tr&gt;&lt;td bgcolor=&quot;#FFF79B&quot;&gt;Minimum&lt;/td&gt;&lt;td align=&quot;right&quot;&gt;&lt;xsl:value-of select=&quot;quantitative/minimum&quot;/&gt;&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="sd">         &lt;tr&gt;&lt;td bgcolor=&quot;#FFF79B&quot;&gt;Maximum&lt;/td&gt;&lt;td align=&quot;right&quot;&gt;&lt;xsl:value-of select=&quot;quantitative/maximum&quot;/&gt;&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="sd">        &lt;/table&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template match=&quot;comparisonType&quot;&gt;</span>
+<span class="sd">    </span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd"> </span>
+<span class="sd">  &lt;xsl:template match=&quot;comparisonType&quot; mode=&quot;bipolar&quot;&gt;</span>
+<span class="sd">    </span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd"> </span>
+<span class="sd">  &lt;xsl:template match=&quot;pairs&quot; mode=&quot;veto&quot;&gt;</span>
+<span class="sd">       &lt;xsl:variable name=&quot;Veto&quot; select=&#39;.&#39; /&gt;</span>
+<span class="sd">       &lt;xsl:apply-templates select=&quot;description&quot;/&gt;</span>
+<span class="sd">       &lt;ol&gt;</span>
+<span class="sd">        &lt;xsl:for-each select=&quot;$Veto/pair&quot;&gt;</span>
+<span class="sd">           &lt;li&gt;Veto against &lt;b&gt;&lt;xsl:value-of select=&quot;initial/alternativeID&quot;/&gt; outranks</span>
+<span class="sd">            &lt;xsl:value-of select=&quot;terminal/alternativeID&quot;/&gt; &lt;/b&gt; (</span>
+<span class="sd">          &lt;xsl:value-of select=&quot;description/comment&quot;/&gt;)</span>
+<span class="sd">           &lt;table border=&quot;1&quot;&gt;</span>
+<span class="sd">             &lt;tr bgcolor=&quot;#9acd32&quot;&gt;&lt;th&gt;criterion&lt;/th&gt;&lt;th&gt;performance difference&lt;/th&gt;&lt;th&gt;status&lt;/th&gt;&lt;th&gt;characteristic&lt;/th&gt;&lt;/tr&gt;</span>
+<span class="sd">             &lt;xsl:for-each select=&quot;values&quot;&gt;</span>
+<span class="sd">               &lt;tr&gt;</span>
+<span class="sd">                 &lt;th bgcolor=&quot;#FFF79B&quot; align=&quot;center&quot;&gt;&lt;xsl:value-of select=&quot;@id&quot;/&gt;&lt;/th&gt;</span>
+<span class="sd">                 &lt;td align=&quot;center&quot;&gt;&lt;xsl:value-of select=&quot;value[@name=&#39;performanceDifference&#39;]/real&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">                 &lt;td&gt;&lt;xsl:value-of select=&quot;description/comment&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">                 &lt;td align=&quot;center&quot;&gt;&lt;xsl:value-of select=&quot;value[@name=&#39;vetoCharacteristic&#39;]/real&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">               &lt;/tr&gt;</span>
+<span class="sd">             &lt;/xsl:for-each&gt;</span>
+<span class="sd">             &lt;/table&gt;&lt;br/&gt;</span>
+<span class="sd">           &lt;/li&gt;</span>
+<span class="sd">        &lt;/xsl:for-each&gt;</span>
+<span class="sd">         &lt;/ol&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">   </span>
+<span class="sd">  &lt;xsl:template match=&quot;pairs&quot;&gt;</span>
+<span class="sd">    &lt;xsl:variable name=&quot;currentArcs&quot; select=&quot;.&quot;/&gt;</span>
+<span class="sd">    &lt;xsl:variable name=&quot;allAlternatives&quot; select=&quot;/xmcda:XMCDA/alternatives/alternative&quot;/&gt;</span>
+<span class="sd">    &lt;xsl:apply-templates select=&quot;description&quot;/&gt;</span>
+<span class="sd">    --&gt;</span>
+<span class="sd">    &lt;table border=&quot;1&quot;&gt;</span>
+<span class="sd">      &lt;tr bgcolor=&quot;#9acd32&quot;&gt;</span>
+<span class="sd">        &lt;th&gt;&lt;xsl:value-of select=&quot;preceding::comparisonType&quot;/&gt;&lt;/th&gt;</span>
+<span class="sd">        &lt;xsl:for-each select=&quot;$allAlternatives&quot;&gt;</span>
+<span class="sd">          &lt;th bgcolor=&quot;#FFF79B&quot;&gt;&lt;xsl:value-of select=&quot;@id&quot;/&gt;&lt;/th&gt;</span>
+<span class="sd">        &lt;/xsl:for-each&gt;</span>
+<span class="sd">      &lt;/tr&gt;</span>
+<span class="sd">      </span>
+<span class="sd">      &lt;xsl:for-each select=&quot;$allAlternatives&quot;&gt;</span>
+<span class="sd">                   &lt;xsl:variable name=&quot;currentRow&quot; select=&#39;@id&#39; /&gt;</span>
+<span class="sd">       &lt;tr&gt;</span>
+<span class="sd">        &lt;th bgcolor=&quot;#FFF79B&quot;&gt;&lt;xsl:value-of select=&quot;$currentRow&quot;/&gt;&lt;/th&gt;</span>
+<span class="sd">         &lt;xsl:for-each select=&quot;$allAlternatives&quot;&gt;</span>
+<span class="sd">          &lt;xsl:variable name=&quot;currentColumn&quot; select=&#39;@id&#39; /&gt;</span>
+<span class="sd">          &lt;xsl:for-each select=&quot;$currentArcs/pair[initial/alternativeID=$currentRow]&quot;&gt;</span>
+<span class="sd">            &lt;xsl:variable name=&quot;currentArc&quot; select=&quot;.&quot;&gt;&lt;/xsl:variable&gt;</span>
+<span class="sd">            &lt;xsl:call-template name=&quot;currentValue&quot; &gt;</span>
+<span class="sd">              &lt;xsl:with-param name=&quot;currentRow&quot; select=&quot;$currentRow&quot; /&gt;   </span>
+<span class="sd">              &lt;xsl:with-param name=&quot;currentColumn&quot; select=&quot;$currentColumn&quot;/&gt;                  </span>
+<span class="sd">              &lt;xsl:with-param name=&quot;currentArc&quot; select=&quot;$currentArc&quot; /&gt;</span>
+<span class="sd">             &lt;/xsl:call-template&gt;</span>
+<span class="sd">           &lt;/xsl:for-each&gt;</span>
+<span class="sd">        &lt;/xsl:for-each&gt;</span>
+<span class="sd">      &lt;/tr&gt;</span>
+<span class="sd">      &lt;/xsl:for-each&gt;</span>
+<span class="sd">    &lt;/table&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template match=&quot;pairs&quot; mode=&quot;bipolar&quot;&gt;</span>
+<span class="sd">    &lt;xsl:variable name=&quot;currentArcs&quot; select=&quot;.&quot;/&gt;</span>
+<span class="sd">    &lt;xsl:variable name=&quot;allAlternatives&quot; select=&quot;/xmcda:XMCDA/alternatives/alternative&quot;/&gt;</span>
+<span class="sd">    &lt;xsl:apply-templates select=&quot;description&quot;/&gt;</span>
+<span class="sd">    </span>
+<span class="sd">    &lt;table border=&quot;1&quot;&gt;</span>
+<span class="sd">      &lt;tr bgcolor=&quot;#9acd32&quot;&gt;</span>
+<span class="sd">        &lt;th&gt;&lt;xsl:value-of select=&quot;preceding::comparisonType&quot;/&gt;&lt;/th&gt;</span>
+<span class="sd">        &lt;xsl:for-each select=&quot;$allAlternatives&quot;&gt;</span>
+<span class="sd">          &lt;th bgcolor=&quot;#FFF79B&quot;&gt;&lt;xsl:value-of select=&quot;@id&quot;/&gt;&lt;/th&gt;</span>
+<span class="sd">        &lt;/xsl:for-each&gt;</span>
+<span class="sd">      &lt;/tr&gt;</span>
+<span class="sd">      </span>
+<span class="sd">      &lt;xsl:variable name=&quot;Min&quot; select=&quot;parent::node()/valuation/quantitative/minimum&quot;/&gt;</span>
+<span class="sd">      &lt;xsl:variable name=&quot;Max&quot; select=&quot;parent::node()/valuation/quantitative/maximum&quot;/&gt;</span>
+<span class="sd">      &lt;xsl:variable name=&quot;Med&quot; select=&quot;$Min + ($Max - $Min) div 2&quot;/&gt;</span>
+<span class="sd">      </span>
+<span class="sd">      &lt;xsl:for-each select=&quot;$allAlternatives&quot;&gt;</span>
+<span class="sd">        &lt;xsl:variable name=&quot;currentRow&quot; select=&#39;@id&#39; /&gt;</span>
+<span class="sd">        &lt;tr&gt;</span>
+<span class="sd">          &lt;th bgcolor=&quot;#FFF79B&quot;&gt;&lt;xsl:value-of select=&quot;$currentRow&quot;/&gt;&lt;/th&gt;</span>
+<span class="sd">          &lt;xsl:for-each select=&quot;$allAlternatives&quot;&gt;</span>
+<span class="sd">            &lt;xsl:variable name=&quot;currentColumn&quot; select=&#39;@id&#39; /&gt;</span>
+<span class="sd">            &lt;xsl:for-each select=&quot;$currentArcs/pair[initial/alternativeID=$currentRow]&quot;&gt;</span>
+<span class="sd">              &lt;xsl:variable name=&quot;currentArc&quot; select=&quot;.&quot;&gt;&lt;/xsl:variable&gt;</span>
+<span class="sd">              &lt;xsl:call-template name=&quot;currentBipolarValue&quot; &gt;</span>
+<span class="sd">                &lt;xsl:with-param name=&quot;currentRow&quot; select=&quot;$currentRow&quot; /&gt;   </span>
+<span class="sd">                &lt;xsl:with-param name=&quot;currentColumn&quot; select=&quot;$currentColumn&quot;/&gt;                  </span>
+<span class="sd">                &lt;xsl:with-param name=&quot;currentArc&quot; select=&quot;$currentArc&quot; /&gt;</span>
+<span class="sd">                &lt;xsl:with-param name=&quot;Med&quot; select=&quot;$Med&quot; /&gt;</span>
+<span class="sd">              &lt;/xsl:call-template&gt;</span>
+<span class="sd">            &lt;/xsl:for-each&gt;</span>
+<span class="sd">          &lt;/xsl:for-each&gt;</span>
+<span class="sd">        &lt;/tr&gt;</span>
+<span class="sd">      &lt;/xsl:for-each&gt;</span>
+<span class="sd">    &lt;/table&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template match=&quot;pairs&quot; mode=&quot;simil&quot;&gt;</span>
+<span class="sd">    &lt;xsl:variable name=&quot;currentArcs&quot; select=&quot;.&quot;/&gt;</span>
+<span class="sd">    &lt;xsl:apply-templates select=&quot;description&quot;/&gt;</span>
+
+<span class="sd">    &lt;table border=&quot;1&quot;&gt;</span>
+<span class="sd">      &lt;tr bgcolor=&quot;#9acd32&quot;&gt;</span>
+<span class="sd">        &lt;th&gt;relation&lt;/th&gt;</span>
+<span class="sd">        &lt;xsl:for-each select=&quot;/xmcda:XMCDA/criteria/criterion&quot;&gt;</span>
+<span class="sd">          &lt;th bgcolor=&quot;#FFF79B&quot;&gt;&lt;xsl:value-of select=&quot;@id&quot;/&gt;&lt;/th&gt;</span>
+<span class="sd">        &lt;/xsl:for-each&gt;</span>
+<span class="sd">      &lt;/tr&gt;</span>
+<span class="sd">      </span>
+<span class="sd">      &lt;xsl:for-each select=&quot;/xmcda:XMCDA/criteria/criterion&quot;&gt;</span>
+<span class="sd">                   &lt;xsl:variable name=&quot;currentRow&quot; select=&#39;@id&#39; /&gt;</span>
+<span class="sd">       &lt;tr&gt;</span>
+<span class="sd">        &lt;th bgcolor=&quot;#FFF79B&quot;&gt;&lt;xsl:value-of select=&quot;$currentRow&quot;/&gt;&lt;/th&gt;</span>
+<span class="sd">         &lt;xsl:for-each select=&quot;/xmcda:XMCDA/criteria/criterion&quot;&gt;</span>
+<span class="sd">          &lt;xsl:variable name=&quot;currentColumn&quot; select=&#39;@id&#39; /&gt;</span>
+<span class="sd">          &lt;xsl:for-each select=&quot;$currentArcs/arc[from/criterionID=$currentRow]&quot;&gt;</span>
+<span class="sd">            &lt;xsl:variable name=&quot;currentArc&quot; select=&quot;.&quot;&gt;&lt;/xsl:variable&gt;</span>
+<span class="sd">            &lt;xsl:call-template name=&quot;currentSimilValue&quot; &gt;</span>
+<span class="sd">              &lt;xsl:with-param name=&quot;currentRow&quot; select=&quot;$currentRow&quot; /&gt;   </span>
+<span class="sd">              &lt;xsl:with-param name=&quot;currentColumn&quot; select=&quot;$currentColumn&quot;/&gt;                  </span>
+<span class="sd">              &lt;xsl:with-param name=&quot;currentArc&quot; select=&quot;$currentArc&quot; /&gt;</span>
+<span class="sd">             &lt;/xsl:call-template&gt;</span>
+<span class="sd">           &lt;/xsl:for-each&gt;</span>
+<span class="sd">        &lt;/xsl:for-each&gt;</span>
+<span class="sd">      &lt;/tr&gt;</span>
+<span class="sd">      &lt;/xsl:for-each&gt;</span>
+<span class="sd">    &lt;/table&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+
+<span class="sd"> </span>
+<span class="sd">  &lt;xsl:template name=&quot;currentSimilValue&quot; match=&quot;pair&quot;&gt;</span>
+<span class="sd">    &lt;xsl:param name=&quot;currentRow&quot;/&gt;</span>
+<span class="sd">    &lt;xsl:param name=&quot;currentColumn&quot;/&gt;</span>
+<span class="sd">    &lt;xsl:param name=&quot;currentArc&quot;/&gt;</span>
+<span class="sd">    &lt;xsl:if test=&quot;$currentArc[initial/criterionID=$currentRow]&quot;&gt;</span>
+<span class="sd">      &lt;xsl:if test=&quot;$currentArc[terminal/criterionID=$currentColumn]&quot;&gt;</span>
+<span class="sd">        &lt;xsl:variable name=&quot;arcValue&quot; select=&quot;$currentArc/value&quot;&gt;&lt;/xsl:variable&gt;</span>
+<span class="sd">        &lt;xsl:choose&gt;</span>
+<span class="sd">          &lt;xsl:when test=&quot;$arcValue &amp;gt; 0.0&quot;&gt;</span>
+<span class="sd">            &lt;td bgcolor=&quot;#ddffdd&quot; align=&quot;right&quot; &gt;</span>
+<span class="sd">              &lt;xsl:value-of select=&quot;$arcValue&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">          &lt;/xsl:when&gt;</span>
+<span class="sd">          &lt;xsl:when test=&quot;$arcValue &amp;lt; 0.0&quot;&gt;</span>
+<span class="sd">            &lt;td bgcolor=&quot;#ffddff&quot;  align=&quot;right&quot;&gt;</span>
+<span class="sd">              &lt;xsl:value-of select=&quot;$arcValue&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">          &lt;/xsl:when&gt;</span>
+<span class="sd">          &lt;xsl:otherwise&gt;</span>
+<span class="sd">            &lt;td bgcolor=&quot;#dddddd&quot; align=&quot;right&quot; &gt;</span>
+<span class="sd">              &lt;xsl:value-of select=&quot;$arcValue&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">          &lt;/xsl:otherwise&gt;</span>
+<span class="sd">        &lt;/xsl:choose&gt;</span>
+<span class="sd">      &lt;/xsl:if&gt;</span>
+<span class="sd">    &lt;/xsl:if&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template name=&quot;currentValue&quot; match=&quot;pair&quot; &gt;</span>
+<span class="sd">    &lt;xsl:param name=&quot;currentRow&quot;/&gt;</span>
+<span class="sd">    &lt;xsl:param name=&quot;currentColumn&quot;/&gt;</span>
+<span class="sd">    &lt;xsl:param name=&quot;currentArc&quot;/&gt;</span>
+<span class="sd">    &lt;xsl:if test=&quot;$currentArc[initial/alternativeID=$currentRow]&quot;&gt;</span>
+<span class="sd">      &lt;xsl:if test=&quot;$currentArc[terminal/alternativeID=$currentColumn]&quot;&gt;</span>
+<span class="sd">        &lt;td align=&quot;right&quot; &gt;&lt;xsl:value-of select=&quot;./value&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">      &lt;/xsl:if&gt;</span>
+<span class="sd">    &lt;/xsl:if&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:template name=&quot;currentBipolarValue&quot; match=&quot;pair&quot;&gt;</span>
+<span class="sd">    &lt;xsl:param name=&quot;currentRow&quot;/&gt;</span>
+<span class="sd">    &lt;xsl:param name=&quot;currentColumn&quot;/&gt;</span>
+<span class="sd">    &lt;xsl:param name=&quot;currentArc&quot;/&gt;</span>
+<span class="sd">      &lt;xsl:param name=&quot;Med&quot;/&gt;</span>
+<span class="sd">    &lt;xsl:if test=&quot;$currentArc[initial/alternativeID=$currentRow]&quot;&gt;</span>
+<span class="sd">      &lt;xsl:if test=&quot;$currentArc[terminal/alternativeID=$currentColumn]&quot;&gt;</span>
+<span class="sd">        &lt;xsl:variable name=&quot;arcValue&quot; select=&quot;$currentArc/value&quot;&gt;&lt;/xsl:variable&gt;</span>
+<span class="sd">        &lt;xsl:choose&gt;</span>
+<span class="sd">          &lt;xsl:when test=&quot;$arcValue &amp;gt; $Med&quot;&gt;</span>
+<span class="sd">            &lt;td bgcolor=&quot;#ddffdd&quot; align=&quot;right&quot; &gt;</span>
+<span class="sd">              &lt;xsl:value-of select=&quot;$arcValue&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">          &lt;/xsl:when&gt;</span>
+<span class="sd">          &lt;xsl:when test=&quot;$arcValue &amp;lt; $Med&quot;&gt;</span>
+<span class="sd">            &lt;td bgcolor=&quot;#ffddff&quot;  align=&quot;right&quot;&gt;</span>
+<span class="sd">              &lt;xsl:value-of select=&quot;$arcValue&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">          &lt;/xsl:when&gt;</span>
+<span class="sd">          &lt;xsl:otherwise&gt;</span>
+<span class="sd">            &lt;td bgcolor=&quot;#dddddd&quot; align=&quot;right&quot; &gt;</span>
+<span class="sd">              &lt;xsl:value-of select=&quot;$arcValue&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">          &lt;/xsl:otherwise&gt;</span>
+<span class="sd">        &lt;/xsl:choose&gt;</span>
+<span class="sd">      &lt;/xsl:if&gt;</span>
+<span class="sd">    &lt;/xsl:if&gt;</span>
+<span class="sd">  &lt;/xsl:template&gt;</span>
+
+
+<span class="sd">&lt;!-- presentation of the objectives--&gt;</span>
+<span class="sd">  </span>
+<span class="sd">&lt;xsl:template match=&quot;objectives&quot;&gt;</span>
+<span class="sd">  &lt;a name=&quot;objectives&quot;/&gt;</span>
+<span class="sd">  &lt;xsl:apply-templates  select=&quot;description&quot;/&gt;</span>
+<span class="sd">   &lt;table border=&quot;1&quot;&gt;</span>
+<span class="sd">     &lt;tr bgcolor=&quot;#9acd32&quot;&gt;</span>
+<span class="sd">        &lt;th rowspan=&quot;1&quot;&gt;#&lt;/th&gt;</span>
+<span class="sd">        &lt;th rowspan=&quot;1&quot;&gt;Identifyer&lt;/th&gt;</span>
+<span class="sd">        &lt;th rowspan=&quot;1&quot;&gt;Name&lt;/th&gt;</span>
+<span class="sd">        &lt;th rowspan=&quot;1&quot;&gt;Comment&lt;/th&gt;</span>
+<span class="sd">        &lt;th rowspan=&quot;1&quot;&gt;Criteria list&lt;/th&gt;</span>
+<span class="sd">     &lt;/tr&gt;</span>
+<span class="sd">     &lt;xsl:for-each select=&quot;objective&quot;&gt;</span>
+<span class="sd">       &lt;tr&gt;</span>
+<span class="sd">         &lt;td align=&quot;center&quot;&gt;&lt;xsl:number format=&quot;1&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">         &lt;th bgcolor=&quot;#FFF79B&quot;&gt;&lt;xsl:value-of select=&quot;@id&quot;/&gt;&lt;/th&gt;</span>
+<span class="sd">	   &lt;td&gt;&lt;xsl:value-of select=&quot;@name&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">	   &lt;td&gt;&lt;xsl:value-of select=&quot;description/comment&quot;/&gt;&lt;/td&gt;        </span>
+<span class="sd">         &lt;td align=&quot;center&quot;&gt;&lt;xsl:value-of select=&quot;objectiveCriteria&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">       &lt;/tr&gt;</span>
+<span class="sd">     &lt;/xsl:for-each&gt;</span>
+<span class="sd">   &lt;/table&gt;</span>
+<span class="sd">&lt;/xsl:template&gt;</span>
+
+<span class="sd">&lt;!-- presentation of the coalitions --&gt;</span>
+<span class="sd">&lt;xsl:template match=&quot;criteriaSets&quot;&gt;</span>
+<span class="sd">  &lt;a name=&quot;coalitions&quot;/&gt;</span>
+<span class="sd">  &lt;xsl:apply-templates  select=&quot;description&quot;/&gt;</span>
+<span class="sd">  &lt;table border=&quot;1&quot;&gt;</span>
+<span class="sd">    &lt;tr bgcolor=&quot;#9acd32&quot;&gt;</span>
+<span class="sd">      &lt;th rowspan=&quot;1&quot;&gt;#&lt;/th&gt;</span>
+<span class="sd">      &lt;th rowspan=&quot;1&quot;&gt;Identifyer&lt;/th&gt;</span>
+<span class="sd">      &lt;th rowspan=&quot;1&quot;&gt;Name&lt;/th&gt;</span>
+<span class="sd">      &lt;th rowspan=&quot;1&quot;&gt;Criteria&lt;/th&gt;</span>
+<span class="sd">      &lt;th rowspan=&quot;1&quot;&gt;Comment&lt;/th&gt;</span>
+<span class="sd">    &lt;/tr&gt;</span>
+<span class="sd">   &lt;xsl:for-each select=&quot;criteriaSet&quot;&gt;</span>
+<span class="sd">      &lt;tr&gt;</span>
+<span class="sd">        &lt;td align=&quot;center&quot;&gt;&lt;xsl:number format=&quot;1&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">        &lt;th bgcolor=&quot;#FFF79B&quot;&gt;&lt;xsl:value-of select=&quot;@id&quot;/&gt;&lt;/th&gt;</span>
+<span class="sd">        &lt;td&gt;&lt;xsl:value-of select=&quot;@name&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">       &lt;td&gt;{</span>
+<span class="sd">          &lt;xsl:for-each select=&quot;element&quot;&gt;&lt;xsl:value-of select=&quot;criterionID&quot;/&gt;, &lt;/xsl:for-each&gt;</span>
+<span class="sd">          }&lt;/td&gt;</span>
+<span class="sd">        &lt;td&gt;&lt;xsl:value-of select=&quot;description/comment&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">        &lt;/tr&gt;</span>
+<span class="sd">    &lt;/xsl:for-each&gt;</span>
+<span class="sd">  &lt;/table&gt;</span>
+<span class="sd">&lt;/xsl:template&gt;</span>
+<span class="sd">  </span>
+<span class="sd">&lt;!-- presentation of the criteria --&gt;</span>
+<span class="sd">  </span>
+<span class="sd">&lt;xsl:template match=&quot;criteria&quot;&gt;</span>
+<span class="sd">  &lt;a name=&quot;criteria&quot;/&gt;</span>
+<span class="sd">  &lt;xsl:apply-templates  select=&quot;description&quot;/&gt;</span>
+<span class="sd">   &lt;table border=&quot;1&quot;&gt;</span>
+<span class="sd">     &lt;tr bgcolor=&quot;#9acd32&quot;&gt;</span>
+<span class="sd">        &lt;th rowspan=&quot;2&quot;&gt;#&lt;/th&gt;</span>
+<span class="sd">        &lt;th rowspan=&quot;2&quot;&gt;Identifyer&lt;/th&gt;</span>
+<span class="sd">        &lt;th rowspan=&quot;2&quot;&gt;Name&lt;/th&gt;</span>
+<span class="sd">        &lt;th rowspan=&quot;2&quot;&gt;Comment&lt;/th&gt;</span>
+<span class="sd">        &lt;th rowspan=&quot;2&quot;&gt;Weight&lt;/th&gt;</span>
+<span class="sd">	&lt;th colspan=&quot;3&quot;&gt;Scale&lt;/th&gt;</span>
+<span class="sd">	&lt;th colspan=&quot;5&quot;&gt;Thresholds&lt;/th&gt;</span>
+<span class="sd">     &lt;/tr&gt;</span>
+<span class="sd">     &lt;tr bgcolor=&quot;#9acd32&quot;&gt;</span>
+<span class="sd">       &lt;th&gt;direction&lt;/th&gt;</span>
+<span class="sd">       &lt;th&gt;min&lt;/th&gt;</span>
+<span class="sd">       &lt;th&gt;max&lt;/th&gt;</span>
+<span class="sd">       &lt;th&gt;indifference&lt;/th&gt;</span>
+<span class="sd">       &lt;th&gt;weak preference&lt;/th&gt;</span>
+<span class="sd">       &lt;th&gt;preference&lt;/th&gt;</span>
+<span class="sd">       &lt;th&gt;weak veto&lt;/th&gt;</span>
+<span class="sd">       &lt;th&gt;veto&lt;/th&gt;</span>
+<span class="sd">      &lt;/tr&gt;</span>
+<span class="sd">     &lt;xsl:for-each select=&quot;criterion&quot;&gt;</span>
+<span class="sd">       &lt;tr&gt;</span>
+<span class="sd">         &lt;td align=&quot;center&quot;&gt;&lt;xsl:number format=&quot;1&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">         &lt;th bgcolor=&quot;#FFF79B&quot;&gt;&lt;xsl:value-of select=&quot;@id&quot;/&gt;&lt;/th&gt;</span>
+<span class="sd">	   &lt;td&gt;&lt;xsl:value-of select=&quot;@name&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">	   &lt;td&gt;&lt;xsl:value-of select=&quot;description/comment&quot;/&gt;&lt;/td&gt;        </span>
+<span class="sd">         &lt;td align=&quot;center&quot;&gt;&lt;xsl:value-of select=&quot;criterionValue/.&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">	   &lt;td align=&quot;center&quot;&gt;&lt;xsl:value-of select=&quot;scale/quantitative/preferenceDirection&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">         &lt;td align=&quot;center&quot;&gt;&lt;xsl:value-of select=&quot;scale/quantitative/minimum/.&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">         &lt;td align=&quot;center&quot;&gt;&lt;xsl:value-of select=&quot;scale/quantitative/maximum/.&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">         &lt;td align=&quot;center&quot;&gt;&lt;xsl:apply-templates select=&quot;thresholds/threshold[@id=&#39;ind&#39;]&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">         &lt;td align=&quot;center&quot;&gt;&lt;xsl:apply-templates select=&quot;thresholds/threshold[@id=&#39;weakPreference&#39;]&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">         &lt;td align=&quot;center&quot;&gt;&lt;xsl:apply-templates select=&quot;thresholds/threshold[@id=&#39;pref&#39;]&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">         &lt;td align=&quot;center&quot;&gt;&lt;xsl:apply-templates select=&quot;thresholds/threshold[@id=&#39;weakVeto&#39;]&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">         &lt;td align=&quot;center&quot;&gt;&lt;xsl:apply-templates select=&quot;thresholds/threshold[@id=&#39;veto&#39;]&quot;/&gt;&lt;/td&gt;&lt;/tr&gt;</span>
+<span class="sd">     &lt;/xsl:for-each&gt;</span>
+<span class="sd">   &lt;/table&gt;</span>
+<span class="sd">&lt;/xsl:template&gt;</span>
+
+<span class="sd">&lt;xsl:template match=&quot;constant&quot;&gt;</span>
+<span class="sd">  &lt;!--&lt;xsl:if test=&quot;descendant::*name()= &#39;linear&#39;&quot;&gt;integer&lt;xsl:value-of select=&quot;.&quot;/&gt;&lt;/xsl:if&gt;</span>
+<span class="sd">  &lt;xsl:value-of select=&quot;.&quot;/&gt; --&gt;</span>
+<span class="sd">  &lt;xsl:apply-templates/&gt;</span>
+<span class="sd">&lt;/xsl:template&gt;</span>
+
+<span class="sd">&lt;!--&lt;xsl:template match=&quot;value/integer&quot;&gt;</span>
+<span class="sd">  &lt;xsl:value-of select=&quot;format-number(.,&#39;#&#39;)&quot; /&gt;</span>
+<span class="sd">&lt;/xsl:template&gt;</span>
+<span class="sd">--&gt;</span>
+<span class="sd">  &lt;xsl:template match=&quot;integer&quot;&gt;</span>
+<span class="sd">  &lt;xsl:value-of select=&quot;format-number(.,&#39;#&#39;)&quot; /&gt;</span>
+<span class="sd">&lt;/xsl:template&gt;</span>
+<span class="sd">&lt;!--&lt;xsl:template match=&quot;value/real&quot;&gt;</span>
+<span class="sd">  &lt;xsl:value-of select=&quot;format-number(.,&#39;#.##&#39;)&quot;/&gt;</span>
+<span class="sd">&lt;/xsl:template&gt;</span>
+<span class="sd">--&gt;</span>
+<span class="sd">  &lt;xsl:template match=&quot;real&quot;&gt;</span>
+<span class="sd">  &lt;xsl:value-of select=&quot;format-number(.,&#39;#.##&#39;)&quot;/&gt;</span>
+<span class="sd">&lt;/xsl:template&gt;</span>
+
+<span class="sd">  &lt;!--&lt;xsl:template match=&quot;value/rational&quot;&gt;</span>
+<span class="sd">  &lt;xsl:value-of select=&quot;//numerator&quot; /&gt; &lt;xsl.text&gt;/&lt;/xsl.text&gt;&lt;xsl:value-of select=&quot;//denominator&quot;/&gt;</span>
+<span class="sd">&lt;/xsl:template&gt;</span>
+<span class="sd">--&gt;</span>
+<span class="sd">&lt;xsl:template match=&quot;rational&quot;&gt;</span>
+<span class="sd">  &lt;xsl:value-of select=&quot;//numerator&quot; /&gt; &lt;xsl.text&gt;/&lt;/xsl.text&gt;&lt;xsl:value-of select=&quot;//denominator&quot;/&gt;</span>
+<span class="sd">&lt;/xsl:template&gt;</span>
+
+<span class="sd">&lt;xsl:template match=&quot;linear&quot;&gt;</span>
+<span class="sd">  &lt;xsl:value-of select=&quot;intercept/.&quot;/&gt; + &lt;xsl:value-of select=&quot;slope/.&quot;/&gt;x</span>
+<span class="sd">&lt;/xsl:template&gt;</span>
+
+
+
+<span class="sd">  &lt;!-- Controlling the presentation of the performance table --&gt;</span>
+<span class="sd">  &lt;xsl:key name=&quot;currentCriterion&quot; match=&quot;/xmcda:XMCDA/criteria/criterion&quot; use=&#39;.&#39;  /&gt;</span>
+<span class="sd">  </span>
+<span class="sd">  &lt;xsl:variable name=&quot;allCriteria&quot; </span>
+<span class="sd">    select=&quot;/xmcda:XMCDA/criteria/criterion[</span>
+<span class="sd">    generate-id() = </span>
+<span class="sd">    generate-id(key(&#39;currentCriterion&#39;,.)[1] </span>
+<span class="sd">    )</span>
+<span class="sd">    ]&quot; /&gt;  </span>
+<span class="sd">  </span>
+<span class="sd">  </span>
+<span class="sd">&lt;xsl:template match=&quot;performanceTable&quot;&gt;</span>
+<span class="sd">  &lt;xsl:variable name=&quot;root&quot; select=&quot;/xmcda:XMCDA/criteria&quot;&gt;&lt;/xsl:variable&gt;</span>
+<span class="sd">   &lt;xsl:variable name=&quot;currentTable&quot; select=&quot;.&quot;&gt;&lt;/xsl:variable&gt;</span>
+<span class="sd">    &lt;xsl:apply-templates  select=&quot;description&quot;/&gt;</span>
+<span class="sd">    &lt;table border=&quot;1&quot;&gt;</span>
+<span class="sd">      &lt;tr bgcolor=&quot;#9acd32&quot;&gt;</span>
+<span class="sd">        &lt;th&gt;alternative&lt;/th&gt;</span>
+<span class="sd">        &lt;xsl:for-each select=&quot;$root/criterion&quot;&gt;</span>
+<span class="sd">	  &lt;th bgcolor=&quot;#FFF79B&quot;&gt;&lt;xsl:value-of select=&quot;@id&quot;/&gt;&lt;/th&gt;</span>
+<span class="sd">        &lt;/xsl:for-each&gt;</span>
+<span class="sd">      &lt;/tr&gt;</span>
+<span class="sd">      &lt;xsl:apply-templates select=&quot;$currentTable/alternativePerformances&quot;/&gt; </span>
+<span class="sd">    &lt;/table&gt;</span>
+<span class="sd">&lt;/xsl:template&gt;</span>
+
+<span class="sd">&lt;xsl:template match=&quot;alternativePerformances&quot;&gt;</span>
+<span class="sd">  &lt;tr&gt;</span>
+<span class="sd">    &lt;th bgcolor=&quot;#FFF79B&quot;&gt;&lt;xsl:value-of select=&quot;alternativeID&quot;/&gt;&lt;/th&gt;</span>
+<span class="sd">    &lt;xsl:variable name=&quot;currentAlternative&quot; select=&quot;.&quot;&gt;&lt;/xsl:variable&gt;</span>
+
+<span class="sd">   &lt;xsl:for-each select=&quot;key(&#39;currentCriterion&#39;, $allCriteria)&quot;&gt;</span>
+<span class="sd">      &lt;xsl:variable name=&quot;currentCriterion&quot; select=&quot;./@id&quot;&gt;&lt;/xsl:variable&gt;</span>
+<span class="sd">       &lt;xsl:call-template name=&quot;performanceRow&quot;&gt;</span>
+<span class="sd">         &lt;xsl:with-param name=&quot;currentAlternative&quot; select=&quot;$currentAlternative&quot; /&gt;</span>
+<span class="sd">         &lt;xsl:with-param name=&quot;currentCriterion&quot; select=&quot;$currentCriterion&quot;/&gt;</span>
+<span class="sd">       &lt;/xsl:call-template&gt;</span>
+<span class="sd">      &lt;/xsl:for-each&gt;</span>
+<span class="sd">  &lt;/tr&gt;</span>
+<span class="sd">&lt;/xsl:template&gt;</span>
+
+<span class="sd">&lt;xsl:template name=&quot;performanceRow&quot;&gt;</span>
+<span class="sd">      &lt;xsl:param name=&quot;currentAlternative&quot;&gt;&lt;/xsl:param&gt;</span>
+<span class="sd">      &lt;xsl:param name=&quot;currentCriterion&quot;&gt;&lt;/xsl:param&gt;</span>
+<span class="sd">      &lt;xsl:variable name=&quot;currentPerformance&quot; select=&quot;$currentAlternative/performance[criterionID=$currentCriterion]&quot;&gt;&lt;/xsl:variable&gt;</span>
+<span class="sd">     &lt;td align=&quot;right&quot;&gt;&lt;xsl:apply-templates select=&quot;$currentPerformance/value&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">&lt;/xsl:template&gt;</span>
+
+<span class="sd">&lt;!-- &lt;xsl:template match=&quot;comment&quot;&gt; --&gt;</span>
+<span class="sd">  &lt;!-- no comments --&gt;</span>
+<span class="sd">&lt;!-- &lt;/xsl:template&gt; --&gt;</span>
+<span class="sd">&lt;xsl:template match=&quot;XMCDA/alternatives/description&quot;&gt;</span>
+<span class="sd">  &lt;!-- no comments --&gt;</span>
+<span class="sd">&lt;/xsl:template&gt;</span>
+
+<span class="sd">&lt;xsl:template match=&quot;choices&quot;&gt;</span>
+<span class="sd">    &lt;a name=&quot;choices&quot;&gt;&lt;/a&gt;</span>
+<span class="sd">   &lt;xsl:apply-templates  select=&quot;description&quot;/&gt;</span>
+<span class="sd">   &lt;table border=&quot;1&quot;&gt;</span>
+<span class="sd">      &lt;tr bgcolor=&quot;#9acd32&quot;&gt;</span>
+<span class="sd">        &lt;th&gt;#&lt;/th&gt;</span>
+<span class="sd">        &lt;th&gt;Choice set&lt;/th&gt;</span>
+<span class="sd">        &lt;th&gt;Determinateness&lt;/th&gt;</span>
+<span class="sd">        &lt;th&gt;Outrankingness&lt;/th&gt;</span>
+<span class="sd">        &lt;th&gt;Outrankedness&lt;/th&gt;</span>
+<span class="sd">        &lt;th&gt;Comment&lt;/th&gt;</span>
+<span class="sd">      &lt;/tr&gt;</span>
+<span class="sd">   &lt;xsl:for-each select=&quot;choice&quot;&gt;</span>
+<span class="sd">       &lt;tr&gt;&lt;td&gt;&lt;xsl:number format=&quot;1&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">         &lt;th bgcolor=&quot;#FFF79B&quot;&gt;{</span>
+<span class="sd">           &lt;xsl:for-each select=&quot;choiceMembersList/choiceMember&quot;&gt;</span>
+<span class="sd">             &lt;xsl:value-of select=&quot;./alternativeID&quot;/&gt;,</span>
+<span class="sd">           &lt;/xsl:for-each&gt;}</span>
+<span class="sd">           &lt;/th&gt;</span>
+<span class="sd">           &lt;td align=&quot;center&quot;&gt;&lt;xsl:value-of select=&quot;qualities/parameter[name=&#39;determinateness&#39;]/value&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">           &lt;td align=&quot;center&quot;&gt;&lt;xsl:value-of select=&quot;qualities/parameter[name=&#39;outranking&#39;]/value&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">         &lt;td align=&quot;center&quot;&gt;&lt;xsl:value-of select=&quot;qualities/parameter[name=&#39;outranked&#39;]/value&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">         &lt;td&gt;&lt;xsl:value-of select=&quot;description/comment&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">	&lt;/tr&gt;</span>
+<span class="sd">   &lt;/xsl:for-each&gt;</span>
+<span class="sd">   &lt;/table&gt;</span>
+<span class="sd">&lt;/xsl:template&gt;</span>
+<span class="sd"> </span>
+<span class="sd">&lt;/xsl:stylesheet&gt;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
 <span class="n">rubisXSL</span> <span class="o">=</span>\
 <span class="sd">&quot;&quot;&quot;&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
@@ -700,7 +1346,7 @@
 <span class="sd"> </span>
 <span class="sd">&lt;/xsl:stylesheet&gt;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
+<span class="c1">####################</span>
 <span class="n">rubisChoiceXSL</span> <span class="o">=</span>\
 <span class="sd">&quot;&quot;&quot;&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="sd">&lt;xsl:stylesheet version=&quot;1.0&quot; xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; </span>
@@ -2275,7 +2921,7 @@
 <span class="sd">&lt;/xsl:stylesheet&gt;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="saveRubisXSL"><a class="viewcode-back" href="../techDoc.html#xmcda.saveRubisXSL">[docs]</a><span class="k">def</span> <span class="nf">saveRubisXSL</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;xmcda2Rubis.xsl&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="saveRubisXSL"><a class="viewcode-back" href="../techDoc.html#xmcda.saveRubisXSL">[docs]</a><span class="k">def</span> <span class="nf">saveRubisXSL</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;xmcda2Rubis.xsl&#39;</span><span class="p">,</span><span class="n">Extended</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Save the standard Rubis XMCDA 2.0 XSL style sheet in the current working directory.</span>
 <span class="sd">    This style sheet allows to visualize an XMCDA 2.0 encoded performance tableau in a browser.</span>
@@ -2287,7 +2933,10 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">xmcda</span>
     <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-    <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">xmcda</span><span class="o">.</span><span class="n">rubisXSL</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">Extended</span><span class="p">:</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">xmcda</span><span class="o">.</span><span class="n">rubisExtXSL</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">xmcda</span><span class="o">.</span><span class="n">rubisXSL</span><span class="p">)</span>
     <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="saveRubisChoiceXSL"><a class="viewcode-back" href="../techDoc.html#xmcda.saveRubisChoiceXSL">[docs]</a><span class="k">def</span> <span class="nf">saveRubisChoiceXSL</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;xmcda2RubisChoice.xsl&#39;</span><span class="p">):</span>
