@@ -1091,8 +1091,6 @@
 <span class="sd">      &lt;/xsl:for-each&gt;</span>
 <span class="sd">    &lt;/table&gt;</span>
 <span class="sd">  &lt;/xsl:template&gt;</span>
-<span class="sd">  </span>
-
 <span class="sd"> </span>
 <span class="sd">  &lt;xsl:template name=&quot;currentSimilValue&quot; match=&quot;pair&quot;&gt;</span>
 <span class="sd">    &lt;xsl:param name=&quot;currentRow&quot;/&gt;</span>
@@ -1155,6 +1153,30 @@
 <span class="sd">      &lt;/xsl:if&gt;</span>
 <span class="sd">    &lt;/xsl:if&gt;</span>
 <span class="sd">  &lt;/xsl:template&gt;</span>
+
+<span class="sd">&lt;!-- presentation of the objectives--&gt;</span>
+<span class="sd">&lt;xsl:template match=&quot;objectives&quot;&gt;</span>
+<span class="sd">  &lt;a name=&quot;objectives&quot;/&gt;</span>
+<span class="sd">  &lt;xsl:apply-templates  select=&quot;description&quot;/&gt;</span>
+<span class="sd">   &lt;table border=&quot;1&quot;&gt;</span>
+<span class="sd">     &lt;tr bgcolor=&quot;#9acd32&quot;&gt;</span>
+<span class="sd">        &lt;th rowspan=&quot;1&quot;&gt;#&lt;/th&gt;</span>
+<span class="sd">        &lt;th rowspan=&quot;1&quot;&gt;Identifyer&lt;/th&gt;</span>
+<span class="sd">        &lt;th rowspan=&quot;1&quot;&gt;Name&lt;/th&gt;</span>
+<span class="sd">        &lt;th rowspan=&quot;1&quot;&gt;Comment&lt;/th&gt;</span>
+<span class="sd">        &lt;th rowspan=&quot;1&quot;&gt;Criteria list&lt;/th&gt;</span>
+<span class="sd">     &lt;/tr&gt;</span>
+<span class="sd">     &lt;xsl:for-each select=&quot;objective&quot;&gt;</span>
+<span class="sd">       &lt;tr&gt;</span>
+<span class="sd">         &lt;td align=&quot;center&quot;&gt;&lt;xsl:number format=&quot;1&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">         &lt;th bgcolor=&quot;#FFF79B&quot;&gt;&lt;xsl:value-of select=&quot;@id&quot;/&gt;&lt;/th&gt;</span>
+<span class="sd">	   &lt;td&gt;&lt;xsl:value-of select=&quot;@name&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">	   &lt;td&gt;&lt;xsl:value-of select=&quot;description/comment&quot;/&gt;&lt;/td&gt;        </span>
+<span class="sd">         &lt;td align=&quot;center&quot;&gt;&lt;xsl:value-of select=&quot;objectiveCriteria&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">       &lt;/tr&gt;</span>
+<span class="sd">     &lt;/xsl:for-each&gt;</span>
+<span class="sd">   &lt;/table&gt;</span>
+<span class="sd">&lt;/xsl:template&gt;</span>
 
 <span class="sd">&lt;!-- presentation of the coalitions --&gt;</span>
 <span class="sd">&lt;xsl:template match=&quot;criteriaSets&quot;&gt;</span>
@@ -1827,7 +1849,31 @@
 <span class="sd">      &lt;/xsl:if&gt;</span>
 <span class="sd">    &lt;/xsl:if&gt;</span>
 <span class="sd">  &lt;/xsl:template&gt;</span>
-<span class="sd">  </span>
+
+<span class="sd">&lt;!-- presentation of the objectives--&gt;</span>
+<span class="sd">&lt;xsl:template match=&quot;objectives&quot;&gt;</span>
+<span class="sd">  &lt;a name=&quot;objectives&quot;/&gt;</span>
+<span class="sd">  &lt;xsl:apply-templates  select=&quot;description&quot;/&gt;</span>
+<span class="sd">   &lt;table border=&quot;1&quot;&gt;</span>
+<span class="sd">     &lt;tr bgcolor=&quot;#9acd32&quot;&gt;</span>
+<span class="sd">        &lt;th rowspan=&quot;1&quot;&gt;#&lt;/th&gt;</span>
+<span class="sd">        &lt;th rowspan=&quot;1&quot;&gt;Identifyer&lt;/th&gt;</span>
+<span class="sd">        &lt;th rowspan=&quot;1&quot;&gt;Name&lt;/th&gt;</span>
+<span class="sd">        &lt;th rowspan=&quot;1&quot;&gt;Comment&lt;/th&gt;</span>
+<span class="sd">        &lt;th rowspan=&quot;1&quot;&gt;Criteria list&lt;/th&gt;</span>
+<span class="sd">     &lt;/tr&gt;</span>
+<span class="sd">     &lt;xsl:for-each select=&quot;objective&quot;&gt;</span>
+<span class="sd">       &lt;tr&gt;</span>
+<span class="sd">         &lt;td align=&quot;center&quot;&gt;&lt;xsl:number format=&quot;1&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">         &lt;th bgcolor=&quot;#FFF79B&quot;&gt;&lt;xsl:value-of select=&quot;@id&quot;/&gt;&lt;/th&gt;</span>
+<span class="sd">	   &lt;td&gt;&lt;xsl:value-of select=&quot;@name&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">	   &lt;td&gt;&lt;xsl:value-of select=&quot;description/comment&quot;/&gt;&lt;/td&gt;        </span>
+<span class="sd">         &lt;td align=&quot;center&quot;&gt;&lt;xsl:value-of select=&quot;objectiveCriteria&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">       &lt;/tr&gt;</span>
+<span class="sd">     &lt;/xsl:for-each&gt;</span>
+<span class="sd">   &lt;/table&gt;</span>
+<span class="sd">&lt;/xsl:template&gt;</span>
+
 <span class="sd"> &lt;!-- presentation of the coalitions --&gt;</span>
 <span class="sd">  &lt;xsl:template match=&quot;criteriaSets&quot;&gt;</span>
 <span class="sd">    &lt;a name=&quot;coalitions&quot;/&gt;</span>
@@ -2645,7 +2691,31 @@
 <span class="sd">      &lt;/xsl:if&gt;</span>
 <span class="sd">    &lt;/xsl:if&gt;</span>
 <span class="sd">  &lt;/xsl:template&gt;</span>
-<span class="sd">  </span>
+
+<span class="sd">&lt;!-- presentation of the objectives--&gt;</span>
+<span class="sd">&lt;xsl:template match=&quot;objectives&quot;&gt;</span>
+<span class="sd">  &lt;a name=&quot;objectives&quot;/&gt;</span>
+<span class="sd">  &lt;xsl:apply-templates  select=&quot;description&quot;/&gt;</span>
+<span class="sd">   &lt;table border=&quot;1&quot;&gt;</span>
+<span class="sd">     &lt;tr bgcolor=&quot;#9acd32&quot;&gt;</span>
+<span class="sd">        &lt;th rowspan=&quot;1&quot;&gt;#&lt;/th&gt;</span>
+<span class="sd">        &lt;th rowspan=&quot;1&quot;&gt;Identifyer&lt;/th&gt;</span>
+<span class="sd">        &lt;th rowspan=&quot;1&quot;&gt;Name&lt;/th&gt;</span>
+<span class="sd">        &lt;th rowspan=&quot;1&quot;&gt;Comment&lt;/th&gt;</span>
+<span class="sd">        &lt;th rowspan=&quot;1&quot;&gt;Criteria list&lt;/th&gt;</span>
+<span class="sd">     &lt;/tr&gt;</span>
+<span class="sd">     &lt;xsl:for-each select=&quot;objective&quot;&gt;</span>
+<span class="sd">       &lt;tr&gt;</span>
+<span class="sd">         &lt;td align=&quot;center&quot;&gt;&lt;xsl:number format=&quot;1&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">         &lt;th bgcolor=&quot;#FFF79B&quot;&gt;&lt;xsl:value-of select=&quot;@id&quot;/&gt;&lt;/th&gt;</span>
+<span class="sd">	   &lt;td&gt;&lt;xsl:value-of select=&quot;@name&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">	   &lt;td&gt;&lt;xsl:value-of select=&quot;description/comment&quot;/&gt;&lt;/td&gt;        </span>
+<span class="sd">         &lt;td align=&quot;center&quot;&gt;&lt;xsl:value-of select=&quot;objectiveCriteria&quot;/&gt;&lt;/td&gt;</span>
+<span class="sd">       &lt;/tr&gt;</span>
+<span class="sd">     &lt;/xsl:for-each&gt;</span>
+<span class="sd">   &lt;/table&gt;</span>
+<span class="sd">&lt;/xsl:template&gt;</span>
+
 <span class="sd"> &lt;!-- presentation of the coalitions --&gt;</span>
 <span class="sd">  &lt;xsl:template match=&quot;criteriaSets&quot;&gt;</span>
 <span class="sd">    &lt;a name=&quot;coalitions&quot;/&gt;</span>
@@ -2921,7 +2991,7 @@
 <span class="sd">&lt;/xsl:stylesheet&gt;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="saveRubisXSL"><a class="viewcode-back" href="../techDoc.html#xmcda.saveRubisXSL">[docs]</a><span class="k">def</span> <span class="nf">saveRubisXSL</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;xmcda2Rubis.xsl&#39;</span><span class="p">,</span><span class="n">Extended</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="saveRubisXSL"><a class="viewcode-back" href="../techDoc.html#xmcda.saveRubisXSL">[docs]</a><span class="k">def</span> <span class="nf">saveRubisXSL</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;xmcda2Rubis.xsl&#39;</span><span class="p">,</span><span class="n">Extended</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Save the standard Rubis XMCDA 2.0 XSL style sheet in the current working directory.</span>
 <span class="sd">    This style sheet allows to visualize an XMCDA 2.0 encoded performance tableau in a browser.</span>
