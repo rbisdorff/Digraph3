@@ -230,8 +230,8 @@ def testXMCDA2ExtendedPerformanceTableau():
 def testStringIOXMCDA2Encoding():
     print('*---- test mapped memory XMCDA2 encoding for performanceTableau ---*')
     T = RandomPerformanceTableau()
-    problemTextmmap = T.saveXMCDA2(isStringIO=True)
-    problemText = T.saveXMCDA2String()
+    problemTextmmap = T.saveXMCDA2(isStringIO=True,servingD3=False)
+    problemText = T.saveXMCDA2String(servingD3=False)
     if problemTextmmap != problemText:
         print('Error')
         fo = open('problemTextmmap.txt','w')
