@@ -56,10 +56,10 @@ Copyright (C) 2009-2017 Raymond Bisdorff Luxembourg
     
     <xsl:apply-templates />
     <hr />
-    <p><b>Rubis XSLT to HTML stylesheet (R. Bisdorff):</b> $Revision: 1.7 $ <br/>
-          UMCDA-ML <a href="http://www.decision-deck.org/xmcda">XMCDA 2.0 Schema</a><br/>
+    <p><b>Rubis XSLT to HTML stylesheet (R. Bisdorff):</b> $Revision: 1.0$ <br/>
+          UMCDA-ML <a href="http://www.decision-deck.org/xmcda">XMCDA 2.0 Extended Schema</a><br/>
           Raymond Bisdorff (University of Luxembourg), Patrick Meyer (Telecom Bretagne) and Thomas Veneziano (University of Luxembourg)March 2009<br/>
-          Copyright © 2009 <a href="http://www.decision-deck.org/">DECISION DECK Consortium</a><br/>
+          Copyright © 2009-2017 <a href="http://www.decision-deck.org/">DECISION DECK Consortium</a><br/>
           <a href="javascript:void(document.location='view-source:'+document.location)">View the source of this document.</a></p>
    </body>
   </html>
