@@ -644,22 +644,22 @@ def testEquiSignificanceMajorityOutrankingDigraph():
     gr = NewRobustOutrankingDigraph(t)
     gr.showRelationTable()
 
-def testStringIOXMCDA2Encoding():
-    print('*---- test mapped memory XMCDA2 encoding for performanceTableau ---*')
-    T = PerformanceTableau()
-    problemTextmmap = T.saveXMCDA2(isStringIO=True)
-    problemText = T.saveXMCDA2String()
-    if problemTextmmap != problemText:
-
-        print('Error')
-        fo = open('problemTextmmap.txt','w')
-        fo.write(problemTextmmap)
-        fo.close()
-        fo = open('problemText.txt','w')
-        fo.write(problemText)
-        fo.close()
-
-        exit(1)
+##def testStringIOXMCDA2Encoding():
+##    print('*---- test mapped memory XMCDA2 encoding for performanceTableau ---*')
+##    T = PerformanceTableau()
+##    problemTextmmap = T.saveXMCDA2(isStringIO=True)
+##    problemText = T.saveXMCDA2String()
+##    if problemTextmmap != problemText:
+##
+##        print('Error')
+##        fo = open('problemTextmmap.txt','w')
+##        fo.write(problemTextmmap)
+##        fo.close()
+##        fo = open('problemText.txt','w')
+##        fo.write(problemText)
+##        fo.close()
+##
+##        exit(1)
 
 
 def testHTMLTables():

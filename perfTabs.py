@@ -3087,7 +3087,7 @@ The performance evaluations of each decision alternative on each criterion are g
         fo.close()
         print('File: ' + nameExt + ' saved !')
 
-    def saveXMCDA2Ext(self,fileName='temp',\
+    def saveXMCDA2(self,fileName='temp',\
                    category='XMCDA 2.0 Extended format',\
                    user='digraphs Module (RB)',\
                    version='saved from Python session',\
@@ -3204,8 +3204,11 @@ The performance evaluations of each decision alternative on each criterion are g
                 fo.write('</description>\n')
                 fo.write('<active>true</active>\n')
                 fo.write('<weight><value><real>%.2f</real></value></weight>\n' % (objectives[obj]['weight']) )
-                objCriteria = [x for x in self.criteria if self.criteria[x]['objective'] == obj]
-                fo.write('<objectiveCriteria>%s</objectiveCriteria>\n' % (str(objCriteria)) )
+                try:
+                    objCriteria = [x for x in self.criteria if self.criteria[x]['objective'] == obj]
+                    fo.write('<objectiveCriteria>%s</objectiveCriteria>\n' % (str(objCriteria)) )
+                except:
+                    pass
                 fo.write('</objective>\n')
             fo.write('</objectives>\n')
         except:
@@ -3234,6 +3237,10 @@ The performance evaluations of each decision alternative on each criterion are g
             fo.write('<version>%s</version>\n' % ('performance') )
             fo.write('</description>\n')
             fo.write('<active>true</active>\n')
+            try:
+                fo.write('<criterionObjective>%s</criterionObjective>\n' %(criteria[g]['objective']) )
+            except:
+                pass
             try:
                 if criteria[g]['IntegerWeights']:
                     fo.write('<criterionValue><value><integer>%d</integer></value></criterionValue>\n' % (criteria[g]['weight']) )
@@ -3393,7 +3400,7 @@ The performance evaluations of each decision alternative on each criterion are g
             fo.close()
             print('File: ' + nameExt + ' saved !')
 
-    def saveXMCDA2(self,fileName='temp',\
+    def _saveXMCDA2(self,fileName='temp',\
                    category='XMCDA 2.0 format',\
                    user='digraphs Module (RB)',\
                    version='saved from Python session',\
@@ -3667,7 +3674,11 @@ The performance evaluations of each decision alternative on each criterion are g
             fo.close()
             print('File: ' + nameExt + ' saved !')
 
-    def saveXMCDA2String(self,fileName='temp',category='XMCDA 2.0 format',user='digraphs Module (RB)',version='saved from Python session',title='Performance Tableau in XMCDA-2.0 format.',variant='Rubis',valuationType='bipolar',servingD3=True,comment='produced by stringIO()',stringNA='NA'):
+    def saveXMCDA2String(self,fileName='temp',category='XMCDA 2.0 format',\
+                         user='digraphs Module (RB)',version='saved from Python session',\
+                         title='Performance Tableau in XMCDA-2.0 format.',variant='Rubis',\
+                         valuationType='bipolar',servingD3=True,comment='produced by stringIO()',\
+                         stringNA='NA'):
         """
         save performance tableau object self in XMCDA 2.0 format.
         !!! obsolete: replaced by the isStringIO in the saveXMCDA2 method !!!
@@ -3738,6 +3749,41 @@ The performance evaluations of each decision alternative on each criterion are g
             fo += '</alternative>\n'
         fo += '</alternatives>\n'
 
+        # save objectives
+
+        try:
+            objectivesList = [x for x in self.objectives]
+            objectivesList.sort()
+            objectives = self.objectives
+            fo += '<objectives mcdaConcept="objectives">\n'
+            fo += '<description>\n'
+            fo += '<subTitle>Set of decision objectives</subTitle>\n'
+            fo += '</description>\n'
+            for obj in objectivesList:
+                try:
+                    objectiveName = str(objectives[obj]['name'])
+                except:
+                    objectiveName = str(obj)
+                fo += '<objective id="%s" name="%s" mcdaConcept="%s">\n' % (str(obj),objectiveName,'objective' ) 
+                fo += '<description>\n'
+                try:
+                    fo += '<comment>%s</comment>\n' % (str(objective[obj]['comment'])) 
+                except:
+                    fo += '<comment>%s</comment>\n' % ('No comment')
+                fo += '<version>%s</version>\n' % ('Rubis')
+                fo += '</description>\n'
+                fo += '<active>true</active>\n'
+                fo += '<weight><value><real>%.2f</real></value></weight>\n' % (objectives[obj]['weight'])
+                try:
+                    objCriteria = [x for x in self.criteria if self.criteria[x]['objective'] == obj]
+                    fo += '<objectiveCriteria>%s</objectiveCriteria>\n' % (str(objCriteria))
+                except:
+                    pass
+                fo += '</objective>\n'
+            fo += '</objectives>\n'
+        except:
+            pass
+
         # save criteria
         criteriaList = [x for x in self.criteria]
         criteriaList.sort()
@@ -3761,6 +3807,10 @@ The performance evaluations of each decision alternative on each criterion are g
             fo += '<version>%s</version>\n' % ('performance')
             fo += '</description>\n'
             fo += '<active>true</active>\n'
+            try:
+                fo += '<criterionObjective>%s</criterionObjective>\n' %(criteria[g]['objective'])
+            except:
+                pass
             try:
                 if criteria[g]['IntegerWeights']:
                     fo += '<criterionValue><value><integer>%d</integer></value></criterionValue>\n' % (criteria[g]['weight'])
@@ -6836,6 +6886,10 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
                 #description
                 for elem in [y for y in g.find('description').getchildren()]:
                     criteria[g.attrib['id']][elem.tag] = elem.text
+                try:
+                    criteria[g.attrib['id']]['objective'] = g.find('criterionObjective').text
+                except:
+                    pass
                 #prefrenceDirection
                 criteria[g.attrib['id']]['preferenceDirection'] = g.find('scale').find('quantitative').find('preferenceDirection').text
                 if criteria[g.attrib['id']]['preferenceDirection'] == 'min':

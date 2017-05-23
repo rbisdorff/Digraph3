@@ -2,13 +2,14 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xmcda="http://www.decision-deck.org/2009/XMCDA-2.0.0">
   
 <!-- 
-XMCDA 2.0 Default XSLT tranformation to HTML, RB 2009
-$Revision: 1.7 $
+XMCDA 2.0 Rubis XSLT tranformation to HTML, RB 2017
+$Revision: 1.0 $
 The ressource comes with ABSOLUTELY NO WARRANTY 
 to the extent permitted by the applicable law.
 This is free software, and you are welcome to 
 redistribute it if it remains free software. 
 Copyright (C) 2009 DECISION DECK Consortium
+Copyright (C) 2009-2017 Raymond Bisdorff Luxembourg
 -->
 
 
@@ -425,6 +426,32 @@ Copyright (C) 2009 DECISION DECK Consortium
       </xsl:if>
     </xsl:if>
   </xsl:template>
+
+
+<!-- presentation of the objectives-->
+  
+<xsl:template match="objectives">
+  <a name="objectives"/>
+  <xsl:apply-templates  select="description"/>
+   <table border="1">
+     <tr bgcolor="#9acd32">
+        <th rowspan="1">#</th>
+        <th rowspan="1">Identifyer</th>
+        <th rowspan="1">Name</th>
+        <th rowspan="1">Comment</th>
+        <th rowspan="1">Criteria list</th>
+     </tr>
+     <xsl:for-each select="objective">
+       <tr>
+         <td align="center"><xsl:number format="1"/></td>
+         <th bgcolor="#FFF79B"><xsl:value-of select="@id"/></th>
+	   <td><xsl:value-of select="@name"/></td>
+	   <td><xsl:value-of select="description/comment"/></td>        
+         <td align="center"><xsl:value-of select="objectiveCriteria"/></td>
+       </tr>
+     </xsl:for-each>
+   </table>
+</xsl:template>
 
 <!-- presentation of the coalitions -->
 <xsl:template match="criteriaSets">

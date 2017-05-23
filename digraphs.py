@@ -4366,7 +4366,11 @@ class Digraph(object):
         fo.close()
         print('File: ' + nameExt + ' saved !')
 
-    def saveXMCDA2(self,fileName='temp',fileExt='xmcda2',Comments=True,relationName='R',relationType='binary',category='random',subcategory='valued',author='digraphs Module (RB)',reference='saved from Python',valuationType='standard',digits=2,servingD3=False):
+    def saveXMCDA2(self,fileName='temp',fileExt='xmcda2',
+                   Comments=True,relationName='R',relationType='binary',
+                   category='random',subcategory='valued',
+                   author='digraphs Module (RB)',reference='saved from Python',
+                   valuationType='standard',digits=2,servingD3=False):
         """
         save digraph in XMCDA format.
         """

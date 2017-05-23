@@ -221,7 +221,7 @@ def testXMCDA2SaveReadPerformanceTableau():
 def testXMCDA2ExtendedPerformanceTableau():
     print('*==>> save and read XMCDA-2.0 Extended PerformanceTableau instances ----*')
     t = RandomCBPerformanceTableau()
-    t.saveXMCDA2Ext('testXMCDA2Ext')
+    t.saveXMCDA2('testXMCDA2Ext')
     t1 = XMCDA2PerformanceTableau('testXMCDA2Ext')
     t1.showObjectives()
     from xmcda import saveRubisXSL
