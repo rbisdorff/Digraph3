@@ -11180,17 +11180,15 @@ class AsymmetricPartialDigraph(Digraph):
 
     .. note::
 
-         The non asymmetric links are all put to the median indeterminate
-         characteristic value!
+         - The non asymmetric links are all put to the median indeterminate characteristic value!
+         - The constructor makes a deep copy of the given Digraph instance!
 
     """
     def __init__(self,digraph):
-        from copy import deepcopy as copy
-        self.valuationdomain = copy(digraph.valuationdomain)
-        Max = self.valuationdomain['max']
-        Med = self.valuationdomain['med']
+        from copy import deepcopy
+        self.valuationdomain = deepcopy(digraph.valuationdomain)
         self.name = 'asymmetric_' + str(digraph.name)
-        self.actions = copy(digraph.actions)
+        self.actions = deepcopy(digraph.actions)
         self.relation = self._constructRelation(digraph.relation)
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
@@ -11201,8 +11199,6 @@ class AsymmetricPartialDigraph(Digraph):
         Returns the asymmetric part of the relationIn
         """
         actions = self.actions
-        Min = self.valuationdomain['min']
-        Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         relationOut = {}
         for a in actions:
@@ -11226,16 +11222,15 @@ class SymmetricPartialDigraph(Digraph):
     
     .. note::
 
-           The not symmetric links are all put to the meadian characteristics value!.
-           
+          - The not symmetric links are all put to the meadian characteristics value!.
+          - The constructor makes a deep copy of the given Digraph instance!
+          
     """
     def __init__(self,digraph):
-        from copy import deepcopy as copy
-        self.valuationdomain = copy(digraph.valuationdomain)
-        Max = self.valuationdomain['max']
-        Med = self.valuationdomain['med']
+        from copy import deepcopy
+        self.valuationdomain = deepcopy(digraph.valuationdomain)
         self.name = 'symmetric_' + str(digraph.name)
-        self.actions = copy(digraph.actions)
+        self.actions = deepcopy(digraph.actions)
         self.relation = self._constructRelation(digraph.relation)
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
@@ -11247,8 +11242,6 @@ class SymmetricPartialDigraph(Digraph):
 
         """
         actions = self.actions
-        Min = self.valuationdomain['min']
-        Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         relationOut = {}
         for a in actions:
@@ -11263,7 +11256,7 @@ class SymmetricPartialDigraph(Digraph):
                         relationOut[a][b] = Med
                     ## relationOut[a][b] = min(relationIn[a][b],relationIn[b][a])
                 else:
-                    relationOut[a][b] = Min
+                    relationOut[a][b] = Med
         return relationOut
 
 class kChoicesDigraph(Digraph):
