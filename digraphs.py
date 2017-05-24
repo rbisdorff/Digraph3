@@ -11180,7 +11180,7 @@ class AsymmetricPartialDigraph(Digraph):
 
     .. note::
 
-         - The non asymmetric links are all put to the median indeterminate characteristic value!
+         - The non asymmetric and the reflexive links are all put to the median indeterminate characteristic value!
          - The constructor makes a deep copy of the given Digraph instance!
 
     """
@@ -11211,8 +11211,7 @@ class AsymmetricPartialDigraph(Digraph):
                         relationOut[a][b] = relationIn[a][b]
                     else:
                         relationOut[a][b] = Med
-                    ## relationOut[a][b] = min(relationIn[a][b],Max-relationIn[b][a]+Min)
-                else:
+                else:  # reflexive terms are ignored
                     relationOut[a][b] = Med
         return relationOut
 
@@ -11222,7 +11221,7 @@ class SymmetricPartialDigraph(Digraph):
     
     .. note::
 
-          - The not symmetric links are all put to the meadian characteristics value!.
+          - The not symmetric and the reflexive links are all put to the median indeterminate characteristics value!.
           - The constructor makes a deep copy of the given Digraph instance!
           
     """

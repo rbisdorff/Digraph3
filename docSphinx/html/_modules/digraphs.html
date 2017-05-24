@@ -11230,7 +11230,7 @@
 
 <span class="sd">    .. note::</span>
 
-<span class="sd">         - The non asymmetric links are all put to the median indeterminate characteristic value!</span>
+<span class="sd">         - The non asymmetric and the reflexive links are all put to the median indeterminate characteristic value!</span>
 <span class="sd">         - The constructor makes a deep copy of the given Digraph instance!</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -11261,8 +11261,7 @@
                         <span class="n">relationOut</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">b</span><span class="p">]</span> <span class="o">=</span> <span class="n">relationIn</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">b</span><span class="p">]</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">relationOut</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">b</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
-                    <span class="c1">## relationOut[a][b] = min(relationIn[a][b],Max-relationIn[b][a]+Min)</span>
-                <span class="k">else</span><span class="p">:</span>
+                <span class="k">else</span><span class="p">:</span>  <span class="c1"># reflexive terms are ignored</span>
                     <span class="n">relationOut</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">b</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
         <span class="k">return</span> <span class="n">relationOut</span></div>
 
@@ -11272,7 +11271,7 @@
 <span class="sd">    </span>
 <span class="sd">    .. note::</span>
 
-<span class="sd">          - The not symmetric links are all put to the meadian characteristics value!.</span>
+<span class="sd">          - The not symmetric and the reflexive links are all put to the median indeterminate characteristics value!.</span>
 <span class="sd">          - The constructor makes a deep copy of the given Digraph instance!</span>
 <span class="sd">          </span>
 <span class="sd">    &quot;&quot;&quot;</span>
