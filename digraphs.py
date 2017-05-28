@@ -11127,7 +11127,7 @@ class _MedianExtendedDigraph(Digraph):
 
 class DualDigraph(Digraph):
     """
-    Instantiates the dual ( = negagted valuation) Digraph object of a given other Digraph instance.
+    Instantiates the dual ( = negated valuation) Digraph object from a deep copy of a given other Digraph instance.
 
     The relation constructor returns the dual of self.relation with generic formula:
         relationOut[a][b] = Max - self.relation[a][b] + Min

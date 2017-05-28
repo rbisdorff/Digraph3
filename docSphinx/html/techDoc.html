@@ -2328,7 +2328,7 @@ the bipolar valuation of a digraph.</p>
 <dt id="digraphs.DualDigraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">DualDigraph</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#DualDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.DualDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
-<p>Instantiates the dual ( = negagted valuation) Digraph object of a given other Digraph instance.</p>
+<p>Instantiates the dual ( = negated valuation) Digraph object from a deep copy of a given other Digraph instance.</p>
 <dl class="docutils">
 <dt>The relation constructor returns the dual of self.relation with generic formula:</dt>
 <dd>relationOut[a][b] = Max - self.relation[a][b] + Min
