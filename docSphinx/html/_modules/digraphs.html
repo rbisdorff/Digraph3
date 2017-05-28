@@ -7683,8 +7683,14 @@
                                 
 <div class="viewcode-block" id="Digraph.computeGoodChoices"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeGoodChoices">[docs]</a>    <span class="k">def</span> <span class="nf">computeGoodChoices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        | Characteristic values for potentially good choices.</span>
-<span class="sd">        | [(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec,(7)cover]</span>
+<span class="sd">        Computes characteristic values for potentially good choices.</span>
+
+<span class="sd">        ..note::</span>
+
+<span class="sd">             Return a tuple with following content:</span>
+
+<span class="sd">             [(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec,(7)cover]</span>
+<span class="sd">             </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">copy</span>
         <span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">itemgetter</span>
@@ -7877,11 +7883,11 @@
 <div class="viewcode-block" id="Digraph.determinateness"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.determinateness">[docs]</a>    <span class="k">def</span> <span class="nf">determinateness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">vec</span><span class="p">,</span><span class="n">inPercent</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the determinateness of a bipolar characteristic vector</span>
-<span class="sd">        [(r(x),x),(r(y),y), ...] of length n in valuationdomain [Min,Max]:</span>
+<span class="sd">        [(r(x),x),(r(y),y), ...] of length *n* in valuationdomain [Min,Max]:</span>
 <span class="sd">        </span>
 <span class="sd">        result = sum_x abs(r(x))/(n*(Max-Min)</span>
 
-<span class="sd">        If inPercent, result shifted (+1) and reduced (/2) to [0,1]. </span>
+<span class="sd">        If inPercent, result shifted (+1) and reduced (/2) to [0,1] range. </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Min</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]))</span>
         <span class="n">Max</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]))</span>
@@ -7904,8 +7910,14 @@
 
 <div class="viewcode-block" id="Digraph.computeBadChoices"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeBadChoices">[docs]</a>    <span class="k">def</span> <span class="nf">computeBadChoices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        | Characteristic values for potentially bad choices.</span>
-<span class="sd">        | [(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)absvec]</span>
+<span class="sd">        Computes characteristic values for potentially bad choices.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">             Returns a tuple with following content:</span>
+
+<span class="sd">             [(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)absvec]</span>
+<span class="sd">             </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">copy</span>
         <span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">itemgetter</span>
@@ -7987,7 +7999,7 @@
 
 <div class="viewcode-block" id="Digraph.showChoiceVector"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.showChoiceVector">[docs]</a>    <span class="k">def</span> <span class="nf">showChoiceVector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ch</span><span class="p">,</span><span class="n">ChoiceVector</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        show procedure for annotated bipolar choices</span>
+<span class="sd">        Show procedure for annotated bipolar choices.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="n">flatten</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
@@ -8103,7 +8115,7 @@
 
 <div class="viewcode-block" id="Digraph.irreflex"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.irreflex">[docs]</a>    <span class="k">def</span> <span class="nf">irreflex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">mat</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        puts diagonal entries of mat to valuationdomain[&#39;min&#39;]</span>
+<span class="sd">        Puts diagonal entries of mat to valuationdomain[&#39;min&#39;]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">mat</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -8181,6 +8193,7 @@
 <div class="viewcode-block" id="Digraph.showMIS_AH"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.showMIS_AH">[docs]</a>    <span class="k">def</span> <span class="nf">showMIS_AH</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">withListing</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prints all MIS using the Hertz method.</span>
+
 <span class="sd">        Result saved in self.hertzmisset.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">random</span><span class="o">,</span><span class="nn">copy</span><span class="o">,</span><span class="nn">time</span>
@@ -8320,6 +8333,7 @@
 <div class="viewcode-block" id="Digraph.showMIS_RB"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.showMIS_RB">[docs]</a>    <span class="k">def</span> <span class="nf">showMIS_RB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">withListing</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prints all MIS using the Bisdorff method.</span>
+
 <span class="sd">        Result saved in self.newmisset.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">random</span><span class="o">,</span><span class="nn">copy</span><span class="o">,</span><span class="nn">time</span>
@@ -8451,6 +8465,7 @@
 <div class="viewcode-block" id="Digraph.showMIS_UD"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.showMIS_UD">[docs]</a>    <span class="k">def</span> <span class="nf">showMIS_UD</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">withListing</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prints all MIS using the Hertz-Bisdorff method.</span>
+
 <span class="sd">        Result saved in self.newmisset.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">random</span><span class="o">,</span><span class="nn">copy</span><span class="o">,</span><span class="nn">time</span>
@@ -8616,6 +8631,7 @@
 <div class="viewcode-block" id="Digraph.showMIS_HB2"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.showMIS_HB2">[docs]</a>    <span class="k">def</span> <span class="nf">showMIS_HB2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">withListing</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prints all MIS using the Hertz-Bisdorff method.</span>
+
 <span class="sd">        Result saved in self.newmisset.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">random</span><span class="o">,</span><span class="nn">copy</span><span class="o">,</span><span class="nn">time</span>
@@ -8757,7 +8773,7 @@
 <div class="viewcode-block" id="Digraph.computeupdown2irred"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeupdown2irred">[docs]</a>    <span class="k">def</span> <span class="nf">computeupdown2irred</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">S</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Help method for show_MIS_HB1 method.</span>
-<span class="sd">        fills self.newmisset, self.upmis, self.downmis.</span>
+<span class="sd">        Fills self.newmisset, self.upmis, self.downmis.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1">#import copy</span>
         <span class="n">newmis</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="nb">frozenset</span><span class="p">(</span><span class="n">S</span><span class="p">)])</span>
@@ -8798,7 +8814,7 @@
 <div class="viewcode-block" id="Digraph.computeupdown2"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeupdown2">[docs]</a>    <span class="k">def</span> <span class="nf">computeupdown2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">S</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Help method for show_MIS_HB1 method.</span>
-<span class="sd">        fills self.newmisset, self.upmis, self.downmis.</span>
+<span class="sd">        Fills self.newmisset, self.upmis, self.downmis.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1">#import copy</span>
         <span class="n">newmis</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="nb">frozenset</span><span class="p">(</span><span class="n">S</span><span class="p">)])</span>
@@ -8839,8 +8855,11 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders the squared normalized distance of</span>
 <span class="sd">        two digraph valuations.</span>
-<span class="sd">        Parameters: op2 digraphs of same order as self.</span>
-<span class="sd">        The digraphs must be of same order.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">             op2 = digraphs of same order as self.</span>
+<span class="sd">             </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">math</span><span class="o">,</span><span class="nn">copy</span>
 
@@ -8891,7 +8910,9 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the sorted bipolar net determinatation of outrankingness</span>
 <span class="sd">        minus outrankedness credibilities of all singleton choices.</span>
+
 <span class="sd">        res = ((netdet,singleton,dom,absorb)+)</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">copy</span>
 
@@ -8927,6 +8948,7 @@
 <span class="sd">        Calls self.computeSingletonRanking(comments=True,Debug = False).</span>
 <span class="sd">        Renders and prints the sorted bipolar net determinatation of outrankingness</span>
 <span class="sd">        minus outrankedness credibilities of all singleton choices.</span>
+
 <span class="sd">        res = ((netdet,sigleton,dom,absorb)+)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -8935,8 +8957,8 @@
 
 <div class="viewcode-block" id="Digraph.omax"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.omax">[docs]</a>    <span class="k">def</span> <span class="nf">omax</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">L</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        epistemic disjunction for bipolar outranking characteristics</span>
-<span class="sd">        computation</span>
+<span class="sd">        Epistemic disjunction for bipolar outranking characteristics</span>
+<span class="sd">        computation.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
         <span class="n">terms</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
@@ -8966,8 +8988,8 @@
 
 <div class="viewcode-block" id="Digraph.omin"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.omin">[docs]</a>    <span class="k">def</span> <span class="nf">omin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">L</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        epistemic conjunction for bipolar outranking characteristics</span>
-<span class="sd">        computation</span>
+<span class="sd">        Epistemic conjunction for bipolar outranking characteristics</span>
+<span class="sd">        computation.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
         <span class="n">terms</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
@@ -9001,7 +9023,7 @@
 
     <span class="k">def</span> <span class="nf">_computeNetFlowsRankingDict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Stored</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        renders an ordered dictionary of the actions (from best to worst)</span>
+<span class="sd">        Tenders an ordered dictionary of the actions (from best to worst)</span>
 <span class="sd">        following the net flows ranking rule with rank and net flow attributes.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span>
@@ -9040,7 +9062,7 @@
 
 <div class="viewcode-block" id="Digraph.computeNetFlowsRanking"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeNetFlowsRanking">[docs]</a>    <span class="k">def</span> <span class="nf">computeNetFlowsRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        renders an ordered list (from best to worst) of the actions</span>
+<span class="sd">        Renders an ordered list (from best to worst) of the actions</span>
 <span class="sd">        following the net flows ranking rule.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
@@ -9051,7 +9073,7 @@
 
 <div class="viewcode-block" id="Digraph.computeNetFlowsOrder"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeNetFlowsOrder">[docs]</a>    <span class="k">def</span> <span class="nf">computeNetFlowsOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        renders an ordered list (from worst to best) of the actions</span>
+<span class="sd">        Renders an ordered list (from worst to best) of the actions</span>
 <span class="sd">        following the net flows ranking rule.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
@@ -9062,7 +9084,7 @@
         
     <span class="k">def</span> <span class="nf">_computeKohlerRankingDict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        renders a ranking from the best to the worst of the actions following Kohler&#39;s rule as an</span>
+<span class="sd">        Renders a ranking from the best to the worst of the actions following Kohler&#39;s rule as an</span>
 <span class="sd">        ordered dictionary with rank and majorityMargin attributes.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
@@ -9103,7 +9125,7 @@
 
     <span class="k">def</span> <span class="nf">_computeArrowRaynaudRankingDict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        renders a ranking of the actions following Arrow&amp;Raynaud&#39;s rule.</span>
+<span class="sd">        Renders a ranking of the actions following Arrow&amp;Raynaud&#39;s rule.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
         <span class="n">actionsList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
@@ -9136,7 +9158,7 @@
 
 <div class="viewcode-block" id="Digraph.computeArrowRaynaudOrder"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeArrowRaynaudOrder">[docs]</a>    <span class="k">def</span> <span class="nf">computeArrowRaynaudOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        renders a linear ordering from worst to best of the actions following Arrow&amp;Raynaud&#39;s rule.</span>
+<span class="sd">        Renders a linear ordering from worst to best of the actions following Arrow&amp;Raynaud&#39;s rule.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ranking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computeArrowRaynaudRankingDict</span><span class="p">()</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">ranking</span><span class="p">))</span></div>
@@ -9150,7 +9172,7 @@
 
 <div class="viewcode-block" id="Digraph.computeCopelandRanking"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeCopelandRanking">[docs]</a>    <span class="k">def</span> <span class="nf">computeCopelandRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        renders a linear ranking from best to worst of the actions</span>
+<span class="sd">        Renders a linear ranking from best to worst of the actions</span>
 <span class="sd">        following Copelands&#39;s rule.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span>
@@ -9167,7 +9189,7 @@
 
 <div class="viewcode-block" id="Digraph.computeRankedPairsOrder"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeRankedPairsOrder">[docs]</a>    <span class="k">def</span> <span class="nf">computeRankedPairsOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        renders an actions ordering from the worst to the best obtained from the</span>
+<span class="sd">        Renders an actions ordering from the worst to the best obtained from the</span>
 <span class="sd">        ranked pairs rule.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span>
@@ -9238,7 +9260,7 @@
 
 <div class="viewcode-block" id="Digraph.computeRankedPairsRanking"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeRankedPairsRanking">[docs]</a>    <span class="k">def</span> <span class="nf">computeRankedPairsRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        renders an actions ordering from the best to the worst obtained from the</span>
+<span class="sd">        Renders an actions ordering from the best to the worst obtained from the</span>
 <span class="sd">        ranked pairs rule.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ordering</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeRankedPairsOrder</span><span class="p">()</span>
@@ -9248,8 +9270,12 @@
                            <span class="n">orderLimit</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                            <span class="n">sampleSize</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        renders a ordering from worst to best of the actions with maximal Kemeny index.</span>
-<span class="sd">        Return a tuple: kemenyRanking (from best to worst), kemenyIndex</span>
+<span class="sd">        Renders a ordering from worst to best of the actions with maximal Kemeny index.</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">        </span>
+<span class="sd">             Returns a tuple: kemenyRanking (from best to worst), kemenyIndex.</span>
+<span class="sd">             </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">seed</span><span class="p">,</span> <span class="n">shuffle</span>
         <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="n">all_perms</span>
@@ -9347,7 +9373,7 @@
                               <span class="n">TempDir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                               <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        renders a ordered list of self.actions using the decreasing scores from the</span>
+<span class="sd">        Renders a ordered list of self.actions using the decreasing scores from the</span>
 <span class="sd">        first rincipal eigenvector of the covariance of the valued outdegrees of self.</span>
 
 <span class="sd">        .. note::</span>
@@ -9387,7 +9413,7 @@
 
 <div class="viewcode-block" id="Digraph.computeSlaterRanking"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeSlaterRanking">[docs]</a>    <span class="k">def</span> <span class="nf">computeSlaterRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">isProbabilistic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sampleSize</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        renders a ranking of the actions with minimal Slater index.</span>
+<span class="sd">        Renders a ranking of the actions with minimal Slater index.</span>
 <span class="sd">        Return a tuple: slaterOrder, slaterIndex</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">seed</span><span class="p">,</span> <span class="n">shuffle</span>
@@ -9490,7 +9516,7 @@
 
 <div class="viewcode-block" id="Digraph.computeSlaterOrder"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeSlaterOrder">[docs]</a>    <span class="k">def</span> <span class="nf">computeSlaterOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">isProbabilistic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sampleSize</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        reversed return from computeSlaterRanking method.</span>
+<span class="sd">        Reversed return from computeSlaterRanking method.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">slaterOrder</span><span class="p">,</span><span class="n">slaterIndex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeSlaterRanking</span><span class="p">(</span><span class="n">isProbabilistic</span><span class="o">=</span><span class="n">isProbabilistic</span><span class="p">,</span>
                                                           <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span> <span class="n">sampleSize</span><span class="o">=</span><span class="n">sampleSize</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
@@ -9499,7 +9525,7 @@
 
 <div class="viewcode-block" id="Digraph.computePairwiseClusterComparison"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computePairwiseClusterComparison">[docs]</a>    <span class="k">def</span> <span class="nf">computePairwiseClusterComparison</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">K1</span><span class="p">,</span> <span class="n">K2</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        compute the pairwise cluster comparison credibility vector</span>
+<span class="sd">        Computes the pairwise cluster comparison credibility vector</span>
 <span class="sd">        from bipolar-valued digraph g. with K1 and K2 disjoint</span>
 <span class="sd">        lists of action keys from g actions disctionary.</span>
 <span class="sd">        Returns the dictionary</span>
@@ -9540,7 +9566,7 @@
 
 <div class="viewcode-block" id="CoDualDigraph"><a class="viewcode-back" href="../techDoc.html#digraphs.CoDualDigraph">[docs]</a><span class="k">class</span> <span class="nc">CoDualDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Instantiates the associated codual -converse of the negation- (deep) copy of</span>
+<span class="sd">    Instantiates the associated codual -converse of the negation- from a deep copy of</span>
 <span class="sd">    a given Digraph instance called *other*.</span>
 
 <span class="sd">    .. note::</span>
@@ -9588,7 +9614,7 @@
 <div class="viewcode-block" id="CoverDigraph"><a class="viewcode-back" href="../techDoc.html#digraphs.CoverDigraph">[docs]</a><span class="k">class</span> <span class="nc">CoverDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Instantiates the associated cover relation -immediate neighbours- from</span>
-<span class="sd">    a given Digraph called *other*. The Hasse diagram for instance is the cover</span>
+<span class="sd">    a deep copy of a given Digraph called *other*. The Hasse diagram for instance is the cover</span>
 <span class="sd">    relation of a transitive digraph.</span>
 
 <span class="sd">    .. note::</span>
@@ -9596,6 +9622,7 @@
 <span class="sd">        Instantiates as other.__class__ !</span>
 <span class="sd">        Copies the case given the other.description, the other.criteria</span>
 <span class="sd">        and the other.evaluation dictionaries into self.</span>
+<span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -9651,12 +9678,12 @@
 
 <div class="viewcode-block" id="ConverseDigraph"><a class="viewcode-back" href="../techDoc.html#digraphs.ConverseDigraph">[docs]</a><span class="k">class</span> <span class="nc">ConverseDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Instantiates the associated converse orreciprocal version from</span>
-<span class="sd">    a given Digraph called other.</span>
+<span class="sd">    Instantiates the associated converse or reciprocal version from</span>
+<span class="sd">    a deep copy of a given Digraph called other.</span>
 
 <span class="sd">    Instantiates as other.__class__ !</span>
 
-<span class="sd">    Copies the case given the description, the criteria</span>
+<span class="sd">    Depp copies the case given the description, the criteria</span>
 <span class="sd">    and the evaluation dictionary into self.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -11611,14 +11638,14 @@
 <span class="c1">#--------------------</span>
 <div class="viewcode-block" id="BrokenCocsDigraph"><a class="viewcode-back" href="../techDoc.html#digraphs.BrokenCocsDigraph">[docs]</a><span class="k">class</span> <span class="nc">BrokenCocsDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Specialization of general Digraph class for instantiation</span>
+<span class="sd">    of chordless odd circuits broken digraphs.</span>
+
 <span class="sd">    Parameters:</span>
 
 <span class="sd">        - digraph: stored or memory resident digraph instance.</span>
 <span class="sd">        - Cpp: using a C++/Agrum version of the Digraph.computeChordlessCircuits() method.</span>
 <span class="sd">        - Piping: using OS pipes for data in- and output between Python and C++.</span>
-
-<span class="sd">    Specialization of general Digraph class for instantiation</span>
-<span class="sd">    of chordless odd circuits broken digraphs.</span>
 
 <span class="sd">    All chordless odd circuits are broken at the weakest asymmetric link,</span>
 <span class="sd">    i.e. a link :math:`(x, y)` with minimal difference between :math:`r(x S y)` and :math:`r(y S x)`.</span>
@@ -11762,14 +11789,14 @@
 <span class="c1">#--------------------</span>
 <div class="viewcode-block" id="BreakAddCocsDigraph"><a class="viewcode-back" href="../techDoc.html#digraphs.BreakAddCocsDigraph">[docs]</a><span class="k">class</span> <span class="nc">BreakAddCocsDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Specialization of general Digraph class for instantiation</span>
+<span class="sd">    of chordless odd circuits augmented digraphs.</span>
+
 <span class="sd">    Parameters:</span>
 
 <span class="sd">        - digraph: Stored or memory resident digraph instance.</span>
 <span class="sd">        - Cpp: using a C++/Agrum version of the Digraph.computeChordlessCircuits() method.</span>
 <span class="sd">        - Piping: using OS pipes for data in- and output between Python and C++.</span>
-
-<span class="sd">    Specialization of general Digraph class for instantiation</span>
-<span class="sd">    of chordless odd circuits augmented digraphs.</span>
 
 <span class="sd">    A chordless odd circuit is added if the cumulated credibility of the circuit supporting arcs is larger or</span>
 <span class="sd">    equal to the cumulated credibility of the converse arcs. Otherwise, the circuit is broken at the weakest asymmetric link,</span>

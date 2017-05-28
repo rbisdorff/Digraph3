@@ -202,6 +202,8 @@
 <dt id="digraphs.BreakAddCocsDigraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">BreakAddCocsDigraph</code><span class="sig-paren">(</span><em>digraph=None</em>, <em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#BreakAddCocsDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.BreakAddCocsDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
+<p>Specialization of general Digraph class for instantiation
+of chordless odd circuits augmented digraphs.</p>
 <p>Parameters:</p>
 <blockquote>
 <div><ul class="simple">
@@ -210,8 +212,6 @@
 <li>Piping: using OS pipes for data in- and output between Python and C++.</li>
 </ul>
 </div></blockquote>
-<p>Specialization of general Digraph class for instantiation
-of chordless odd circuits augmented digraphs.</p>
 <p>A chordless odd circuit is added if the cumulated credibility of the circuit supporting arcs is larger or
 equal to the cumulated credibility of the converse arcs. Otherwise, the circuit is broken at the weakest asymmetric link,
 i.e. a link (<em>x</em>, <em>y</em>) with minimal difference between r(<em>x</em> S <em>y</em>) - r(<em>y</em> S <em>x</em>).</p>
@@ -244,6 +244,8 @@ i.e. a link (<em>x</em>, <em>y</em>) with minimal difference between r(<em>x</em
 <dt id="digraphs.BrokenCocsDigraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">BrokenCocsDigraph</code><span class="sig-paren">(</span><em>digraph=None</em>, <em>Cpp=False</em>, <em>Piping=False</em>, <em>Comments=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#BrokenCocsDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.BrokenCocsDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
+<p>Specialization of general Digraph class for instantiation
+of chordless odd circuits broken digraphs.</p>
 <p>Parameters:</p>
 <blockquote>
 <div><ul class="simple">
@@ -252,8 +254,6 @@ i.e. a link (<em>x</em>, <em>y</em>) with minimal difference between r(<em>x</em
 <li>Piping: using OS pipes for data in- and output between Python and C++.</li>
 </ul>
 </div></blockquote>
-<p>Specialization of general Digraph class for instantiation
-of chordless odd circuits broken digraphs.</p>
 <p>All chordless odd circuits are broken at the weakest asymmetric link,
 i.e. a link <img class="math" src="_images/math/b7c48905409677f888c39e46ee27f2d17a3530fd.png" alt="(x, y)"/> with minimal difference between <img class="math" src="_images/math/6f86de060493eed77b8d8e308aa176938c975319.png" alt="r(x S y)"/> and <img class="math" src="_images/math/7418a94cc7a90e3e78712f33509db665b47021dc.png" alt="r(y S x)"/>.</p>
 <dl class="method">
@@ -357,7 +357,7 @@ and/or negative circular shifts of value 1 to n.</div>
 <dt id="digraphs.CoDualDigraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CoDualDigraph</code><span class="sig-paren">(</span><em>other</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CoDualDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.CoDualDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
-<p>Instantiates the associated codual -converse of the negation- (deep) copy of
+<p>Instantiates the associated codual -converse of the negation- from a deep copy of
 a given Digraph instance called <em>other</em>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -429,10 +429,10 @@ temporary complete graphs of order 5 in {-1,0,1} by default.</p>
 <dt id="digraphs.ConverseDigraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">ConverseDigraph</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#ConverseDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.ConverseDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
-<p>Instantiates the associated converse orreciprocal version from
-a given Digraph called other.</p>
+<p>Instantiates the associated converse or reciprocal version from
+a deep copy of a given Digraph called other.</p>
 <p>Instantiates as other.__class__ !</p>
-<p>Copies the case given the description, the criteria
+<p>Depp copies the case given the description, the criteria
 and the evaluation dictionary into self.</p>
 </dd></dl>
 
@@ -441,7 +441,7 @@ and the evaluation dictionary into self.</p>
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CoverDigraph</code><span class="sig-paren">(</span><em>other</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CoverDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.CoverDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <p>Instantiates the associated cover relation -immediate neighbours- from
-a given Digraph called <em>other</em>. The Hasse diagram for instance is the cover
+a deep copy of a given Digraph called <em>other</em>. The Hasse diagram for instance is the cover
 relation of a transitive digraph.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -676,7 +676,7 @@ absence arc density, strict absence arc densitiy.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.computeArrowRaynaudOrder">
 <code class="descname">computeArrowRaynaudOrder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeArrowRaynaudOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeArrowRaynaudOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>renders a linear ordering from worst to best of the actions following Arrow&amp;Raynaud&#8217;s rule.</p>
+<dd><p>Renders a linear ordering from worst to best of the actions following Arrow&amp;Raynaud&#8217;s rule.</p>
 </dd></dl>
 
 <dl class="method">
@@ -696,9 +696,11 @@ of the irreflexive and determined arcs of the digraph</p>
 <dl class="method">
 <dt id="digraphs.Digraph.computeBadChoices">
 <code class="descname">computeBadChoices</code><span class="sig-paren">(</span><em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeBadChoices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeBadChoices" title="Permalink to this definition">¶</a></dt>
-<dd><div class="line-block">
-<div class="line">Characteristic values for potentially bad choices.</div>
-<div class="line">[(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)absvec]</div>
+<dd><p>Computes characteristic values for potentially bad choices.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Returns a tuple with following content:</p>
+<p class="last">[(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)absvec]</p>
 </div>
 </dd></dl>
 
@@ -770,7 +772,7 @@ Based on the triangles summation formula.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.computeCopelandRanking">
 <code class="descname">computeCopelandRanking</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeCopelandRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeCopelandRanking" title="Permalink to this definition">¶</a></dt>
-<dd><p>renders a linear ranking from best to worst of the actions
+<dd><p>Renders a linear ranking from best to worst of the actions
 following Copelands&#8217;s rule.</p>
 </dd></dl>
 
@@ -825,9 +827,12 @@ with the all median valued (indeterminate) digraph.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.computeGoodChoices">
 <code class="descname">computeGoodChoices</code><span class="sig-paren">(</span><em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeGoodChoices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeGoodChoices" title="Permalink to this definition">¶</a></dt>
-<dd><div class="line-block">
-<div class="line">Characteristic values for potentially good choices.</div>
-<div class="line">[(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec,(7)cover]</div>
+<dd><p>Computes characteristic values for potentially good choices.</p>
+<p>..note:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Return</span> <span class="n">a</span> <span class="nb">tuple</span> <span class="k">with</span> <span class="n">following</span> <span class="n">content</span><span class="p">:</span>
+
+<span class="p">[(</span><span class="mi">0</span><span class="p">)</span><span class="o">-</span><span class="n">determ</span><span class="p">,(</span><span class="mi">1</span><span class="p">)</span><span class="n">degirred</span><span class="p">,(</span><span class="mi">2</span><span class="p">)</span><span class="n">degi</span><span class="p">,(</span><span class="mi">3</span><span class="p">)</span><span class="n">degd</span><span class="p">,(</span><span class="mi">4</span><span class="p">)</span><span class="n">dega</span><span class="p">,(</span><span class="mi">5</span><span class="p">)</span><span class="nb">str</span><span class="p">(</span><span class="n">choice</span><span class="p">),(</span><span class="mi">6</span><span class="p">)</span><span class="n">domvec</span><span class="p">,(</span><span class="mi">7</span><span class="p">)</span><span class="n">cover</span><span class="p">]</span>
+</pre></div>
 </div>
 </dd></dl>
 
@@ -856,8 +861,11 @@ Return a tuple: kemenyOrder (from worst to best), kemenyIndex</p>
 <dl class="method">
 <dt id="digraphs.Digraph.computeKemenyRanking">
 <code class="descname">computeKemenyRanking</code><span class="sig-paren">(</span><em>isProbabilistic=False</em>, <em>orderLimit=7</em>, <em>seed=None</em>, <em>sampleSize=1000</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeKemenyRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeKemenyRanking" title="Permalink to this definition">¶</a></dt>
-<dd><p>renders a ordering from worst to best of the actions with maximal Kemeny index.
-Return a tuple: kemenyRanking (from best to worst), kemenyIndex</p>
+<dd><p>Renders a ordering from worst to best of the actions with maximal Kemeny index.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Returns a tuple: kemenyRanking (from best to worst), kemenyIndex.</p>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -914,14 +922,14 @@ Return a tuple: kemenyRanking (from best to worst), kemenyIndex</p>
 <dl class="method">
 <dt id="digraphs.Digraph.computeNetFlowsOrder">
 <code class="descname">computeNetFlowsOrder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeNetFlowsOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeNetFlowsOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>renders an ordered list (from worst to best) of the actions
+<dd><p>Renders an ordered list (from worst to best) of the actions
 following the net flows ranking rule.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="digraphs.Digraph.computeNetFlowsRanking">
 <code class="descname">computeNetFlowsRanking</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeNetFlowsRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeNetFlowsRanking" title="Permalink to this definition">¶</a></dt>
-<dd><p>renders an ordered list (from best to worst) of the actions
+<dd><p>Renders an ordered list (from best to worst) of the actions
 following the net flows ranking rule.</p>
 </dd></dl>
 
@@ -929,9 +937,11 @@ following the net flows ranking rule.</p>
 <dt id="digraphs.Digraph.computeODistance">
 <code class="descname">computeODistance</code><span class="sig-paren">(</span><em>op2</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeODistance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeODistance" title="Permalink to this definition">¶</a></dt>
 <dd><p>renders the squared normalized distance of
-two digraph valuations.
-Parameters: op2 digraphs of same order as self.
-The digraphs must be of same order.</p>
+two digraph valuations.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">op2 = digraphs of same order as self.</p>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -1003,7 +1013,7 @@ is by convention 0.0 at determination level 0.0 .</p>
 <dl class="method">
 <dt id="digraphs.Digraph.computePairwiseClusterComparison">
 <code class="descname">computePairwiseClusterComparison</code><span class="sig-paren">(</span><em>K1</em>, <em>K2</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computePairwiseClusterComparison"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computePairwiseClusterComparison" title="Permalink to this definition">¶</a></dt>
-<dd><p>compute the pairwise cluster comparison credibility vector
+<dd><p>Computes the pairwise cluster comparison credibility vector
 from bipolar-valued digraph g. with K1 and K2 disjoint
 lists of action keys from g actions disctionary.
 Returns the dictionary
@@ -1037,7 +1047,7 @@ a given preordering in increasing levels (list of lists) result.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.computePrincipalOrder">
 <code class="descname">computePrincipalOrder</code><span class="sig-paren">(</span><em>plotFileName=None</em>, <em>Colwise=False</em>, <em>imageType=None</em>, <em>TempDir=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computePrincipalOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computePrincipalOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>renders a ordered list of self.actions using the decreasing scores from the
+<dd><p>Renders a ordered list of self.actions using the decreasing scores from the
 first rincipal eigenvector of the covariance of the valued outdegrees of self.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -1056,14 +1066,14 @@ bipolarly polarised digraph doesn&#8217;t contain a chordless circuit.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.computeRankedPairsOrder">
 <code class="descname">computeRankedPairsOrder</code><span class="sig-paren">(</span><em>Cpp=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeRankedPairsOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeRankedPairsOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>renders an actions ordering from the worst to the best obtained from the
+<dd><p>Renders an actions ordering from the worst to the best obtained from the
 ranked pairs rule.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="digraphs.Digraph.computeRankedPairsRanking">
 <code class="descname">computeRankedPairsRanking</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeRankedPairsRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeRankedPairsRanking" title="Permalink to this definition">¶</a></dt>
-<dd><p>renders an actions ordering from the best to the worst obtained from the
+<dd><p>Renders an actions ordering from the best to the worst obtained from the
 ranked pairs rule.</p>
 </dd></dl>
 
@@ -1179,8 +1189,8 @@ old versions compatibility.</p>
 <dt id="digraphs.Digraph.computeSingletonRanking">
 <code class="descname">computeSingletonRanking</code><span class="sig-paren">(</span><em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeSingletonRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeSingletonRanking" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the sorted bipolar net determinatation of outrankingness
-minus outrankedness credibilities of all singleton choices.
-res = ((netdet,singleton,dom,absorb)+)</p>
+minus outrankedness credibilities of all singleton choices.</p>
+<p>res = ((netdet,singleton,dom,absorb)+)</p>
 </dd></dl>
 
 <dl class="method">
@@ -1198,13 +1208,13 @@ res = ((netdet,singleton,dom,absorb)+)</p>
 <dl class="method">
 <dt id="digraphs.Digraph.computeSlaterOrder">
 <code class="descname">computeSlaterOrder</code><span class="sig-paren">(</span><em>isProbabilistic=False</em>, <em>seed=None</em>, <em>sampleSize=1000</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeSlaterOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeSlaterOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>reversed return from computeSlaterRanking method.</p>
+<dd><p>Reversed return from computeSlaterRanking method.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="digraphs.Digraph.computeSlaterRanking">
 <code class="descname">computeSlaterRanking</code><span class="sig-paren">(</span><em>isProbabilistic=False</em>, <em>seed=None</em>, <em>sampleSize=1000</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeSlaterRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeSlaterRanking" title="Permalink to this definition">¶</a></dt>
-<dd><p>renders a ranking of the actions with minimal Slater index.
+<dd><p>Renders a ranking of the actions with minimal Slater index.
 Return a tuple: slaterOrder, slaterIndex</p>
 </dd></dl>
 
@@ -1271,14 +1281,14 @@ fills self.newmisset, self.upmis, self.downmis.</p>
 <dt id="digraphs.Digraph.computeupdown2">
 <code class="descname">computeupdown2</code><span class="sig-paren">(</span><em>s</em>, <em>S</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeupdown2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeupdown2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Help method for show_MIS_HB1 method.
-fills self.newmisset, self.upmis, self.downmis.</p>
+Fills self.newmisset, self.upmis, self.downmis.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="digraphs.Digraph.computeupdown2irred">
 <code class="descname">computeupdown2irred</code><span class="sig-paren">(</span><em>s</em>, <em>S</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeupdown2irred"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeupdown2irred" title="Permalink to this definition">¶</a></dt>
 <dd><p>Help method for show_MIS_HB1 method.
-fills self.newmisset, self.upmis, self.downmis.</p>
+Fills self.newmisset, self.upmis, self.downmis.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1355,9 +1365,9 @@ Returns a boolean value</p>
 <dt id="digraphs.Digraph.determinateness">
 <code class="descname">determinateness</code><span class="sig-paren">(</span><em>vec</em>, <em>inPercent=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.determinateness"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.determinateness" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the determinateness of a bipolar characteristic vector
-[(r(x),x),(r(y),y), ...] of length n in valuationdomain [Min,Max]:</p>
+[(r(x),x),(r(y),y), ...] of length <em>n</em> in valuationdomain [Min,Max]:</p>
 <p>result = sum_x abs(r(x))/(n*(Max-Min)</p>
-<p>If inPercent, result shifted (+1) and reduced (/2) to [0,1].</p>
+<p>If inPercent, result shifted (+1) and reduced (/2) to [0,1] range.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1628,7 +1638,7 @@ Renders the inner product of two characteristic vetors.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.irreflex">
 <code class="descname">irreflex</code><span class="sig-paren">(</span><em>mat</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.irreflex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.irreflex" title="Permalink to this definition">¶</a></dt>
-<dd><p>puts diagonal entries of mat to valuationdomain[&#8216;min&#8217;]</p>
+<dd><p>Puts diagonal entries of mat to valuationdomain[&#8216;min&#8217;]</p>
 </dd></dl>
 
 <dl class="method">
@@ -1753,15 +1763,15 @@ the not absorbed neighborhood.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.omax">
 <code class="descname">omax</code><span class="sig-paren">(</span><em>L</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.omax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.omax" title="Permalink to this definition">¶</a></dt>
-<dd><p>epistemic disjunction for bipolar outranking characteristics
-computation</p>
+<dd><p>Epistemic disjunction for bipolar outranking characteristics
+computation.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="digraphs.Digraph.omin">
 <code class="descname">omin</code><span class="sig-paren">(</span><em>L</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.omin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.omin" title="Permalink to this definition">¶</a></dt>
-<dd><p>epistemic conjunction for bipolar outranking characteristics
-computation</p>
+<dd><p>Epistemic conjunction for bipolar outranking characteristics
+computation.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1910,7 +1920,7 @@ Renders the sharpest of two characteristic vectors v and w.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.showChoiceVector">
 <code class="descname">showChoiceVector</code><span class="sig-paren">(</span><em>ch</em>, <em>ChoiceVector=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showChoiceVector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showChoiceVector" title="Permalink to this definition">¶</a></dt>
-<dd><p>show procedure for annotated bipolar choices</p>
+<dd><p>Show procedure for annotated bipolar choices.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1978,29 +1988,29 @@ For best experience make sure to use Firefox, because other browser restrict the
 <dl class="method">
 <dt id="digraphs.Digraph.showMIS_AH">
 <code class="descname">showMIS_AH</code><span class="sig-paren">(</span><em>withListing=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showMIS_AH"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showMIS_AH" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prints all MIS using the Hertz method.
-Result saved in self.hertzmisset.</p>
+<dd><p>Prints all MIS using the Hertz method.</p>
+<p>Result saved in self.hertzmisset.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="digraphs.Digraph.showMIS_HB2">
 <code class="descname">showMIS_HB2</code><span class="sig-paren">(</span><em>withListing=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showMIS_HB2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showMIS_HB2" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prints all MIS using the Hertz-Bisdorff method.
-Result saved in self.newmisset.</p>
+<dd><p>Prints all MIS using the Hertz-Bisdorff method.</p>
+<p>Result saved in self.newmisset.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="digraphs.Digraph.showMIS_RB">
 <code class="descname">showMIS_RB</code><span class="sig-paren">(</span><em>withListing=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showMIS_RB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showMIS_RB" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prints all MIS using the Bisdorff method.
-Result saved in self.newmisset.</p>
+<dd><p>Prints all MIS using the Bisdorff method.</p>
+<p>Result saved in self.newmisset.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="digraphs.Digraph.showMIS_UD">
 <code class="descname">showMIS_UD</code><span class="sig-paren">(</span><em>withListing=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showMIS_UD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showMIS_UD" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prints all MIS using the Hertz-Bisdorff method.
-Result saved in self.newmisset.</p>
+<dd><p>Prints all MIS using the Hertz-Bisdorff method.</p>
+<p>Result saved in self.newmisset.</p>
 </dd></dl>
 
 <dl class="method">
@@ -2222,8 +2232,8 @@ older versions compatibility</p>
 <code class="descname">showSingletonRanking</code><span class="sig-paren">(</span><em>Comments=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showSingletonRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showSingletonRanking" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calls self.computeSingletonRanking(comments=True,Debug = False).
 Renders and prints the sorted bipolar net determinatation of outrankingness
-minus outrankedness credibilities of all singleton choices.
-res = ((netdet,sigleton,dom,absorb)+)</p>
+minus outrankedness credibilities of all singleton choices.</p>
+<p>res = ((netdet,sigleton,dom,absorb)+)</p>
 </dd></dl>
 
 <dl class="method">
