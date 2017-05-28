@@ -10567,14 +10567,14 @@
 
 <div class="viewcode-block" id="CirculantDigraph"><a class="viewcode-back" href="../techDoc.html#digraphs.CirculantDigraph">[docs]</a><span class="k">class</span> <span class="nc">CirculantDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Specialization of the general Digraph class for generating</span>
+<span class="sd">    temporary circulant digraphs.</span>
+
 <span class="sd">    Parameters:</span>
 <span class="sd">        | order &gt; 0;</span>
 <span class="sd">        | valuationdomain ={&#39;min&#39;:m, &#39;max&#39;:M};</span>
 <span class="sd">        | circulant connections = list of positive</span>
 <span class="sd">               and/or negative circular shifts of value 1 to n.</span>
-
-<span class="sd">    Specialization of the general Digraph class for generating</span>
-<span class="sd">    temporary circulant digraphs.</span>
 
 <span class="sd">    Default instantiation C_7:</span>
 <span class="sd">        | order = 7,</span>
@@ -10661,12 +10661,12 @@
 
 <div class="viewcode-block" id="KneserDigraph"><a class="viewcode-back" href="../techDoc.html#digraphs.KneserDigraph">[docs]</a><span class="k">class</span> <span class="nc">KneserDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Specialization of the general Digraph class for generating</span>
+<span class="sd">    temporary Kneser digraphs</span>
+
 <span class="sd">    Parameters:</span>
 <span class="sd">        | n &gt; 0; n &gt; j &gt; 0;</span>
 <span class="sd">        | valuationdomain ={&#39;min&#39;:m, &#39;max&#39;:M}.</span>
-
-<span class="sd">    Specialization of the general Digraph class for generating</span>
-<span class="sd">    temporary Kneser digraphs</span>
 
 <span class="sd">    Default instantiation as Petersen graph:</span>
 <span class="sd">        n = 5, j = 2, valuationdomain = {&#39;min&#39;:-1.0,&#39;max&#39;:1.0}.</span>
@@ -10721,11 +10721,11 @@
 
 <div class="viewcode-block" id="GridDigraph"><a class="viewcode-back" href="../techDoc.html#digraphs.GridDigraph">[docs]</a><span class="k">class</span> <span class="nc">GridDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Parameters:</span>
-<span class="sd">        n,m &gt; 0; valuationdomain ={&#39;min&#39;:m, &#39;max&#39;:M}.</span>
-
 <span class="sd">    Specialization of the general Digraph class for generating</span>
 <span class="sd">    temporary Grid digraphs of dimension n times m.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        n,m &gt; 0; valuationdomain ={&#39;min&#39;:m, &#39;max&#39;:M}.</span>
 
 <span class="sd">    Default instantiation (5 times 5 Grid Digraph):</span>
 <span class="sd">        n = 5, m=5, valuationdomain = {&#39;min&#39;:-1.0,&#39;max&#39;:1.0}.</span>
@@ -10879,11 +10879,11 @@
 
 <div class="viewcode-block" id="CompleteDigraph"><a class="viewcode-back" href="../techDoc.html#digraphs.CompleteDigraph">[docs]</a><span class="k">class</span> <span class="nc">CompleteDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Parameters:</span>
-<span class="sd">        order &gt; 0; valuationdomain=(Min,Max).</span>
-
 <span class="sd">    Specialization of the general Digraph class for generating</span>
 <span class="sd">    temporary complete graphs of order 5 in {-1,0,1} by default.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        order &gt; 0; valuationdomain=(Min,Max).</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">)):</span>
@@ -10914,11 +10914,14 @@
 
 <div class="viewcode-block" id="RedhefferDigraph"><a class="viewcode-back" href="../techDoc.html#digraphs.RedhefferDigraph">[docs]</a><span class="k">class</span> <span class="nc">RedhefferDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Specialization of the general Digraph class for generating</span>
+<span class="sd">    temporary Redheffer digraphs.</span>
+
+<span class="sd">    https://en.wikipedia.org/wiki/Redheffer_matrix</span>
+
 <span class="sd">    Parameters:</span>
 <span class="sd">        order &gt; 0; valuationdomain=(Min,Max).</span>
 
-<span class="sd">    Specialization of the general Digraph class for generating</span>
-<span class="sd">    temporary Redheffer digraphs.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">############### helper functions</span>
 
@@ -10958,7 +10961,7 @@
 <span class="sd">    Renders the polarised valuation of a Digraph class instance:</span>
 
 <span class="sd">    *Parameters*:</span>
-<span class="sd">         * If level = None, a default 75% cut level (0.5 in a normalized valuation domain) is used.</span>
+<span class="sd">         * If level = None, a default 75% cut level (0.5 in a normalized [-1,+1] valuation domain) is used.</span>
 <span class="sd">         * If KeepValues = False, the polarisation results in  a three valued crisp result.</span>
 <span class="sd">         * If AlphaCut = True a genuine one-sided True-oriented cut is operated.</span>
 <span class="sd">         * If StrictCut = True, the cut level value is excluded resulting in an open polarised valuation domain.</span>
@@ -11147,12 +11150,15 @@
 
 <div class="viewcode-block" id="DualDigraph"><a class="viewcode-back" href="../techDoc.html#digraphs.DualDigraph">[docs]</a><span class="k">class</span> <span class="nc">DualDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Instantiates the dual Digraph object of a given other Digraph instance.</span>
+<span class="sd">    Instantiates the dual ( = negagted valuation) Digraph object of a given other Digraph instance.</span>
 
-<span class="sd">    The relation constructor returns the dual of self.relation with formula:</span>
+<span class="sd">    The relation constructor returns the dual of self.relation with generic formula:</span>
 <span class="sd">        relationOut[a][b] = Max - self.relation[a][b] + Min</span>
 <span class="sd">        where Max (resp. Min) equals valuation maximum (resp. minimum).</span>
 
+<span class="sd">    .. note::</span>
+
+<span class="sd">        In a bipolar valuation, the dual operator correspond to a simple changing of signs.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
@@ -11199,7 +11205,8 @@
 
 <span class="k">class</span> <span class="nc">_PreferenceDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Initiates the valued difference S(a,b) - S(b,a) of a Digraph instance.</span>
+<span class="sd">    Obsolete constructor. Initiates the valued difference S(a,b) - S(b,a) of a Digraph instance.</span>
+<span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">valuationdomain</span>
@@ -11226,7 +11233,7 @@
 
 <div class="viewcode-block" id="AsymmetricPartialDigraph"><a class="viewcode-back" href="../techDoc.html#digraphs.AsymmetricPartialDigraph">[docs]</a><span class="k">class</span> <span class="nc">AsymmetricPartialDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Renders the asymmetric part of a Digraph instance</span>
+<span class="sd">    Renders the asymmetric part of a Digraph instance.</span>
 
 <span class="sd">    .. note::</span>
 
@@ -11310,25 +11317,26 @@
 
 <div class="viewcode-block" id="kChoicesDigraph"><a class="viewcode-back" href="../techDoc.html#digraphs.kChoicesDigraph">[docs]</a><span class="k">class</span> <span class="nc">kChoicesDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Specialization of general Digraph class for instantiation</span>
+<span class="sd">    a digraph of all k-choices collapsed actions.</span>
+
 <span class="sd">    Parameters:</span>
 <span class="sd">        | digraph := Stored or memory resident digraph instance</span>
 <span class="sd">        | k := cardinality of the choices</span>
 
-<span class="sd">    Specialization of general Digraph class for instantiation</span>
-<span class="sd">    of chordless odd circuits augmented digraphs.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">sys</span><span class="o">,</span><span class="nn">array</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span> <span class="k">as</span> <span class="n">copy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">OutrankingDigraph</span><span class="p">,</span> <span class="n">RandomOutrankingDigraph</span><span class="p">,</span> <span class="n">BipolarOutrankingDigraph</span>
         <span class="k">if</span> <span class="n">digraph</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">digraph</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">digraph</span><span class="p">,(</span><span class="n">Digraph</span><span class="p">,</span><span class="n">OutrankingDigraph</span><span class="p">,</span><span class="n">RandomOutrankingDigraph</span><span class="p">)):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
         <span class="n">dactions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">digraph</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
         <span class="n">drelation</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">relation</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="p">{}</span>
@@ -11606,7 +11614,7 @@
 <span class="sd">    Parameters:</span>
 
 <span class="sd">        - digraph: stored or memory resident digraph instance.</span>
-<span class="sd">        - Cpp: using a C++/Agrum version of the Digraoh.computeChordlessCircuits() method.</span>
+<span class="sd">        - Cpp: using a C++/Agrum version of the Digraph.computeChordlessCircuits() method.</span>
 <span class="sd">        - Piping: using OS pipes for data in- and output between Python and C++.</span>
 
 <span class="sd">    Specialization of general Digraph class for instantiation</span>
@@ -11757,7 +11765,7 @@
 <span class="sd">    Parameters:</span>
 
 <span class="sd">        - digraph: Stored or memory resident digraph instance.</span>
-<span class="sd">        - Cpp: using a C++/Agrum version of the Digraoh.computeChordlessCircuits() method.</span>
+<span class="sd">        - Cpp: using a C++/Agrum version of the Digraph.computeChordlessCircuits() method.</span>
 <span class="sd">        - Piping: using OS pipes for data in- and output between Python and C++.</span>
 
 <span class="sd">    Specialization of general Digraph class for instantiation</span>
@@ -12017,7 +12025,7 @@
 <span class="sd">    Parameters:</span>
 
 <span class="sd">        - digraph: Stored or memory resident digraph instance.</span>
-<span class="sd">        - Cpp: using a C++/Agrum version of the Digraoh.computeChordlessCircuits() method.</span>
+<span class="sd">        - Cpp: using a C++/Agrum version of the Digraph.computeChordlessCircuits() method.</span>
 <span class="sd">        - Piping: using OS pipes for data in- and output between Python and C++.</span>
 
 <span class="sd">    Specialization of general Digraph class for instantiation</span>

@@ -188,7 +188,7 @@
 <dt id="digraphs.AsymmetricPartialDigraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">AsymmetricPartialDigraph</code><span class="sig-paren">(</span><em>digraph</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#AsymmetricPartialDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.AsymmetricPartialDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
-<p>Renders the asymmetric part of a Digraph instance</p>
+<p>Renders the asymmetric part of a Digraph instance.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <ul class="last simple">
@@ -206,7 +206,7 @@
 <blockquote>
 <div><ul class="simple">
 <li>digraph: Stored or memory resident digraph instance.</li>
-<li>Cpp: using a C++/Agrum version of the Digraoh.computeChordlessCircuits() method.</li>
+<li>Cpp: using a C++/Agrum version of the Digraph.computeChordlessCircuits() method.</li>
 <li>Piping: using OS pipes for data in- and output between Python and C++.</li>
 </ul>
 </div></blockquote>
@@ -248,7 +248,7 @@ i.e. a link (<em>x</em>, <em>y</em>) with minimal difference between r(<em>x</em
 <blockquote>
 <div><ul class="simple">
 <li>digraph: stored or memory resident digraph instance.</li>
-<li>Cpp: using a C++/Agrum version of the Digraoh.computeChordlessCircuits() method.</li>
+<li>Cpp: using a C++/Agrum version of the Digraph.computeChordlessCircuits() method.</li>
 <li>Piping: using OS pipes for data in- and output between Python and C++.</li>
 </ul>
 </div></blockquote>
@@ -296,6 +296,8 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 <dt id="digraphs.CirculantDigraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CirculantDigraph</code><span class="sig-paren">(</span><em>order=7, valuationdomain={'min': Decimal('-1.0'), 'max': Decimal('1.0')}, circulants=[-1, 1]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CirculantDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.CirculantDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
+<p>Specialization of the general Digraph class for generating
+temporary circulant digraphs.</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd><div class="first last line-block">
@@ -305,10 +307,6 @@ stored csv formatted digraphs. Using the inbuilt module csv.</p>
 and/or negative circular shifts of value 1 to n.</div>
 </div>
 </dd>
-</dl>
-<p>Specialization of the general Digraph class for generating
-temporary circulant digraphs.</p>
-<dl class="docutils">
 <dt>Default instantiation C_7:</dt>
 <dd><div class="first last line-block">
 <div class="line">order = 7,</div>
@@ -384,7 +382,7 @@ or the  BreakAddCocsDigraph class.</p>
 <blockquote>
 <div><ul class="simple">
 <li>digraph: Stored or memory resident digraph instance.</li>
-<li>Cpp: using a C++/Agrum version of the Digraoh.computeChordlessCircuits() method.</li>
+<li>Cpp: using a C++/Agrum version of the Digraph.computeChordlessCircuits() method.</li>
 <li>Piping: using OS pipes for data in- and output between Python and C++.</li>
 </ul>
 </div></blockquote>
@@ -419,12 +417,12 @@ of chordless odd circuits augmented digraphs.</p>
 <dt id="digraphs.CompleteDigraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">CompleteDigraph</code><span class="sig-paren">(</span><em>order=5</em>, <em>valuationdomain=(-1.0</em>, <em>1.0)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CompleteDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.CompleteDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
+<p>Specialization of the general Digraph class for generating
+temporary complete graphs of order 5 in {-1,0,1} by default.</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd>order &gt; 0; valuationdomain=(Min,Max).</dd>
 </dl>
-<p>Specialization of the general Digraph class for generating
-temporary complete graphs of order 5 in {-1,0,1} by default.</p>
 </dd></dl>
 
 <dl class="class">
@@ -2320,12 +2318,16 @@ the bipolar valuation of a digraph.</p>
 <dt id="digraphs.DualDigraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">DualDigraph</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#DualDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.DualDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
-<p>Instantiates the dual Digraph object of a given other Digraph instance.</p>
+<p>Instantiates the dual ( = negagted valuation) Digraph object of a given other Digraph instance.</p>
 <dl class="docutils">
-<dt>The relation constructor returns the dual of self.relation with formula:</dt>
+<dt>The relation constructor returns the dual of self.relation with generic formula:</dt>
 <dd>relationOut[a][b] = Max - self.relation[a][b] + Min
 where Max (resp. Min) equals valuation maximum (resp. minimum).</dd>
 </dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In a bipolar valuation, the dual operator correspond to a simple changing of signs.</p>
+</div>
 </dd></dl>
 
 <dl class="class">
@@ -2386,13 +2388,11 @@ called dg1 and dg2.</p>
 <dt id="digraphs.GridDigraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">GridDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>m=5</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em>, <em>hasRandomOrientation=False</em>, <em>hasMedianSplitOrientation=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#GridDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.GridDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
-<dl class="docutils">
-<dt>Parameters:</dt>
-<dd>n,m &gt; 0; valuationdomain ={&#8216;min&#8217;:m, &#8216;max&#8217;:M}.</dd>
-</dl>
 <p>Specialization of the general Digraph class for generating
 temporary Grid digraphs of dimension n times m.</p>
 <dl class="docutils">
+<dt>Parameters:</dt>
+<dd>n,m &gt; 0; valuationdomain ={&#8216;min&#8217;:m, &#8216;max&#8217;:M}.</dd>
 <dt>Default instantiation (5 times 5 Grid Digraph):</dt>
 <dd>n = 5, m=5, valuationdomain = {&#8216;min&#8217;:-1.0,&#8217;max&#8217;:1.0}.</dd>
 </dl>
@@ -2417,6 +2417,8 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 <dt id="digraphs.KneserDigraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">KneserDigraph</code><span class="sig-paren">(</span><em>n=5</em>, <em>j=2</em>, <em>valuationdomain={'min': -1.0</em>, <em>'max': 1.0}</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#KneserDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.KneserDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
+<p>Specialization of the general Digraph class for generating
+temporary Kneser digraphs</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd><div class="first last line-block">
@@ -2424,10 +2426,6 @@ temporary empty graphs of order 5 in {-1,0,1}.</p>
 <div class="line">valuationdomain ={&#8216;min&#8217;:m, &#8216;max&#8217;:M}.</div>
 </div>
 </dd>
-</dl>
-<p>Specialization of the general Digraph class for generating
-temporary Kneser digraphs</p>
-<dl class="docutils">
 <dt>Default instantiation as Petersen graph:</dt>
 <dd>n = 5, j = 2, valuationdomain = {&#8216;min&#8217;:-1.0,&#8217;max&#8217;:1.0}.</dd>
 </dl>
@@ -2446,7 +2444,7 @@ temporary Kneser digraphs</p>
 <dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
-<li>If level = None, a default 75% cut level (0.5 in a normalized valuation domain) is used.</li>
+<li>If level = None, a default 75% cut level (0.5 in a normalized [-1,+1] valuation domain) is used.</li>
 <li>If KeepValues = False, the polarisation results in  a three valued crisp result.</li>
 <li>If AlphaCut = True a genuine one-sided True-oriented cut is operated.</li>
 <li>If StrictCut = True, the cut level value is excluded resulting in an open polarised valuation domain.
@@ -2487,12 +2485,13 @@ the new <a class="reference internal" href="#graphs.RandomTree" title="graphs.Ra
 <dt id="digraphs.RedhefferDigraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">RedhefferDigraph</code><span class="sig-paren">(</span><em>order=5</em>, <em>valuationdomain=(-1.0</em>, <em>1.0)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#RedhefferDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.RedhefferDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
+<p>Specialization of the general Digraph class for generating
+temporary Redheffer digraphs.</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Redheffer_matrix">https://en.wikipedia.org/wiki/Redheffer_matrix</a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd>order &gt; 0; valuationdomain=(Min,Max).</dd>
 </dl>
-<p>Specialization of the general Digraph class for generating
-temporary Redheffer digraphs.</p>
 </dd></dl>
 
 <dl class="class">
@@ -2595,6 +2594,8 @@ digraphs d1 and d2 of same order.</p>
 <dt id="digraphs.kChoicesDigraph">
 <em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">kChoicesDigraph</code><span class="sig-paren">(</span><em>digraph=None</em>, <em>k=3</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#kChoicesDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.kChoicesDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
+<p>Specialization of general Digraph class for instantiation
+a digraph of all k-choices collapsed actions.</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd><div class="first last line-block">
@@ -2603,8 +2604,6 @@ digraphs d1 and d2 of same order.</p>
 </div>
 </dd>
 </dl>
-<p>Specialization of general Digraph class for instantiation
-of chordless odd circuits augmented digraphs.</p>
 </dd></dl>
 
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>

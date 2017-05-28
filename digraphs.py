@@ -10517,14 +10517,14 @@ class IndeterminateDigraph(Digraph):
 
 class CirculantDigraph(Digraph):
     """
+    Specialization of the general Digraph class for generating
+    temporary circulant digraphs.
+
     Parameters:
         | order > 0;
         | valuationdomain ={'min':m, 'max':M};
         | circulant connections = list of positive
                and/or negative circular shifts of value 1 to n.
-
-    Specialization of the general Digraph class for generating
-    temporary circulant digraphs.
 
     Default instantiation C_7:
         | order = 7,
@@ -10611,12 +10611,12 @@ class CirculantDigraph(Digraph):
 
 class KneserDigraph(Digraph):
     """
+    Specialization of the general Digraph class for generating
+    temporary Kneser digraphs
+
     Parameters:
         | n > 0; n > j > 0;
         | valuationdomain ={'min':m, 'max':M}.
-
-    Specialization of the general Digraph class for generating
-    temporary Kneser digraphs
 
     Default instantiation as Petersen graph:
         n = 5, j = 2, valuationdomain = {'min':-1.0,'max':1.0}.
@@ -10671,11 +10671,11 @@ class KneserDigraph(Digraph):
 
 class GridDigraph(Digraph):
     """
-    Parameters:
-        n,m > 0; valuationdomain ={'min':m, 'max':M}.
-
     Specialization of the general Digraph class for generating
     temporary Grid digraphs of dimension n times m.
+
+    Parameters:
+        n,m > 0; valuationdomain ={'min':m, 'max':M}.
 
     Default instantiation (5 times 5 Grid Digraph):
         n = 5, m=5, valuationdomain = {'min':-1.0,'max':1.0}.
@@ -10829,11 +10829,11 @@ class GridDigraph(Digraph):
 
 class CompleteDigraph(Digraph):
     """
-    Parameters:
-        order > 0; valuationdomain=(Min,Max).
-
     Specialization of the general Digraph class for generating
     temporary complete graphs of order 5 in {-1,0,1} by default.
+
+    Parameters:
+        order > 0; valuationdomain=(Min,Max).
 
     """
     def __init__(self,order=5,valuationdomain = (-1.0,1.0)):
@@ -10864,11 +10864,14 @@ class CompleteDigraph(Digraph):
 
 class RedhefferDigraph(Digraph):
     """
+    Specialization of the general Digraph class for generating
+    temporary Redheffer digraphs.
+
+    https://en.wikipedia.org/wiki/Redheffer_matrix
+
     Parameters:
         order > 0; valuationdomain=(Min,Max).
 
-    Specialization of the general Digraph class for generating
-    temporary Redheffer digraphs.
     """
     ############### helper functions
 
@@ -10908,7 +10911,7 @@ class PolarisedDigraph(Digraph):
     Renders the polarised valuation of a Digraph class instance:
 
     *Parameters*:
-         * If level = None, a default 75% cut level (0.5 in a normalized valuation domain) is used.
+         * If level = None, a default 75% cut level (0.5 in a normalized [-1,+1] valuation domain) is used.
          * If KeepValues = False, the polarisation results in  a three valued crisp result.
          * If AlphaCut = True a genuine one-sided True-oriented cut is operated.
          * If StrictCut = True, the cut level value is excluded resulting in an open polarised valuation domain.
@@ -11097,12 +11100,15 @@ class _MedianExtendedDigraph(Digraph):
 
 class DualDigraph(Digraph):
     """
-    Instantiates the dual Digraph object of a given other Digraph instance.
+    Instantiates the dual ( = negagted valuation) Digraph object of a given other Digraph instance.
 
-    The relation constructor returns the dual of self.relation with formula:
+    The relation constructor returns the dual of self.relation with generic formula:
         relationOut[a][b] = Max - self.relation[a][b] + Min
         where Max (resp. Min) equals valuation maximum (resp. minimum).
 
+    .. note::
+
+        In a bipolar valuation, the dual operator correspond to a simple changing of signs.
 
     """
     def __init__(self,other):
@@ -11149,7 +11155,8 @@ class DualDigraph(Digraph):
 
 class _PreferenceDigraph(Digraph):
     """
-    Initiates the valued difference S(a,b) - S(b,a) of a Digraph instance.
+    Obsolete constructor. Initiates the valued difference S(a,b) - S(b,a) of a Digraph instance.
+    
     """
     def __init__(self,digraph):
         self.valuationdomain = digraph.valuationdomain
@@ -11176,7 +11183,7 @@ class _PreferenceDigraph(Digraph):
 
 class AsymmetricPartialDigraph(Digraph):
     """
-    Renders the asymmetric part of a Digraph instance
+    Renders the asymmetric part of a Digraph instance.
 
     .. note::
 
@@ -11260,25 +11267,26 @@ class SymmetricPartialDigraph(Digraph):
 
 class kChoicesDigraph(Digraph):
     """
+    Specialization of general Digraph class for instantiation
+    a digraph of all k-choices collapsed actions.
+
     Parameters:
         | digraph := Stored or memory resident digraph instance
         | k := cardinality of the choices
 
-    Specialization of general Digraph class for instantiation
-    of chordless odd circuits augmented digraphs.
     """
     def __init__(self,digraph=None,k=3):
         import random,sys,array
-        from copy import deepcopy as copy
+        from copy import deepcopy
         from outrankingDigraphs import OutrankingDigraph, RandomOutrankingDigraph, BipolarOutrankingDigraph
         if digraph == None:
             digraph = RandomValuationDigraph()
             self.name = str(digraph.name)
 
         elif isinstance(digraph,(Digraph,OutrankingDigraph,RandomOutrankingDigraph)):
-            self.name = copy(digraph.name)
+            self.name = deepcopy(digraph.name)
 
-        self.valuationdomain = copy(digraph.valuationdomain)
+        self.valuationdomain = deepcopy(digraph.valuationdomain)
         dactions = [x for x in digraph.actions]
         drelation = digraph.relation
         actions = {}
@@ -11556,7 +11564,7 @@ class BrokenCocsDigraph(Digraph):
     Parameters:
 
         - digraph: stored or memory resident digraph instance.
-        - Cpp: using a C++/Agrum version of the Digraoh.computeChordlessCircuits() method.
+        - Cpp: using a C++/Agrum version of the Digraph.computeChordlessCircuits() method.
         - Piping: using OS pipes for data in- and output between Python and C++.
 
     Specialization of general Digraph class for instantiation
@@ -11707,7 +11715,7 @@ class BreakAddCocsDigraph(Digraph):
     Parameters:
 
         - digraph: Stored or memory resident digraph instance.
-        - Cpp: using a C++/Agrum version of the Digraoh.computeChordlessCircuits() method.
+        - Cpp: using a C++/Agrum version of the Digraph.computeChordlessCircuits() method.
         - Piping: using OS pipes for data in- and output between Python and C++.
 
     Specialization of general Digraph class for instantiation
@@ -11967,7 +11975,7 @@ class CocaDigraph(Digraph):
     Parameters:
 
         - digraph: Stored or memory resident digraph instance.
-        - Cpp: using a C++/Agrum version of the Digraoh.computeChordlessCircuits() method.
+        - Cpp: using a C++/Agrum version of the Digraph.computeChordlessCircuits() method.
         - Piping: using OS pipes for data in- and output between Python and C++.
 
     Specialization of general Digraph class for instantiation
