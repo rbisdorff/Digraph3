@@ -6834,29 +6834,30 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
                     description[elem.tag] = elem.text
                 self.objectivesDescription = description
             ## get objectives
-            for g in XMCDA.find('objectives').findall('objective'):
+            for obj in XMCDA.find('objectives').findall('objective'):
                 if Debug:
-                    print('converting objective %s data' % g.attrib['id'])
+                    print('converting objective %s data' % obj.attrib['id'])
                 try:             
-                    if g.find('active').text == 'true':
+                    if obj.find('active').text == 'true':
                         Active = True
                     else:
                         Active = False
                 except:
                     Active = True
                 if Active:
-                    objectives[g.attrib['id']] = {}
+                    objectives[obj.attrib['id']] = {}
                     #name
-                    objectives[g.attrib['id']]['name'] =g.attrib['name']
+                    objectives[obj.attrib['id']]['name'] =obj.attrib['name']
                     #description
-                    for elem in [y for y in g.find('description').getchildren()]:
-                        objectives[g.attrib['id']][elem.tag] = elem.text
-                    try:
-                        objectives[g.attrib['id']]['weight'] = Decimal(g.find('weight').find('value').find('real').text)
-                    except:
-                        criteria[g.attrib['id']]['weight'] = Decimal(g.find('weight').find('value').find('integer').text)
-
-                    objectives[g.attrib['id']]['criteria'] = literal_eval(g.find('objectiveCriteria').text)
+                    for elem in [y for y in obj.find('description').getchildren()]:
+                        objectives[obj.attrib['id']][elem.tag] = elem.text
+                    if obj.find('weight') != None:
+                        try:
+                            objectives[obj.attrib['id']]['weight'] = Decimal(obj.find('weight').find('value').find('real').text)
+                        except:
+                            criteria[obj.attrib['id']]['weight'] = Decimal(obj.find('weight').find('value').find('integer').text)
+                    if obj.find('objectiveCriteria') != None:
+                        objectives[obj.attrib['id']]['criteria'] = literal_eval(obj.find('objectiveCriteria').text)
             self.objectives = objectives
         else:  # no objectives are given
             pass

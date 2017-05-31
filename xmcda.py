@@ -27,7 +27,7 @@ for the Rubis best-choice recommendation.
 import sys,copy,string,os,tempfile
 import codecs
 from outrankingDigraphs import *
-import xmcda
+from xmcda import *
 
 ############################
 rubisExtXSL =\
@@ -3003,13 +3003,17 @@ def saveXMCDARubisBestChoiceRecommendation(problemFileName=None,tempDir='.',valu
         
     """
     from xml.etree import ElementTree
-    import os
+    import os, copy, xmcda
     from sys import platform
+    from outrankingDigraphs import BipolarOutrankingDigraph,\
+         ConfidentBipolarOutrankingDigraph, RobustOutrankingDigraph
+    
     
     def errorExit(tempDir,problemFileName,Number,Name,Message):
         """
         XMCDA 2.0 Error message
         """
+        #print(tempDir,problemFileName,Number,Name,Message)
         solutionFileName = str(tempDir)+'/solution-' + str(problemFileName) + '.xmcda2'
         fo = open(solutionFileName,'w')
         fo.write('<?xml version="1.0" encoding="UTF-8"?>\n')
@@ -3025,7 +3029,7 @@ def saveXMCDARubisBestChoiceRecommendation(problemFileName=None,tempDir='.',valu
         fo.write('<text>%s</text>\n' % (Message) )
         fo.write('</errorMessage>\n')
         fo.write('</methodMessages>\n')
-        fo.write('</xmcda:XMCDA>\n')         
+        fo.write('</xmcda:XMCDA>\n')
         fo.close()
         return Number
         #exit(Number)
@@ -3054,34 +3058,51 @@ def saveXMCDARubisBestChoiceRecommendation(problemFileName=None,tempDir='.',valu
                     rootTag = ElementTree.parse(fo).getroot().tag
                     fo.close()
 
+##    try:
+##        t = XMCDA2PerformanceTableau(problemFileName)
+##        
+##    except:
+##        errorExit(tempDir,problemFileName, 1, 'UMCDA-ML XMCDA 2.0 input error', 'Error when reading XML input data file !')
+##        return
+        
+
+
     if rootTag == 'RubisPerformanceTableau':
         try:
             t = XMLRubisPerformanceTableau(problemFileName)
         except:
             errorExit(tempDir,problemFileName, 1, 'Rubis XML input error', 'Error when reading XML input data file !')
+            return
     elif rootTag == '{http://www.decision-deck.org/2009/XMCDA-2.0.0}XMCDA':
         try:
             t = XMCDA2PerformanceTableau(problemFileName)
         except:
             errorExit(tempDir,problemFileName, 1, 'UMCDA-ML XMCDA 2.0 input error', 'Error when reading XML input data file !')
+            return
     elif rootTag == '{http://www.decision-deck.org/2008/UMCDA-ML-1.0}XMCDA':
-        #print(rootTag)
         try:
             t = XMCDAPerformanceTableau(problemFileName)
         except:
             errorExit(tempDir,problemFileName, 1, 'UMCDA-ML XMCDA 1.0 input error', 'Error when reading XML input data file !')
+            return
     else:
         errorExit(tempDir,problemFileName, 1, 'Input error', 'Error when reading input data file !')
+        return
+
+##    t = XMCDA2PerformanceTableau(problemFileName)
+##    print(rootTag,t)
+    
 
     # contruct outranking digraph
-    isRobust = False  
+    isRobust = False
+    #print(isRobust)
     if valuationType == None:
         try:
             if rootTag != 'rubisPerformanceTableau':
                 if t.parameter['valuationType'] == 'integer':
                     g = BipolarIntegerOutrankingDigraph(t)
-                elif t.parameter['valuationType'] == 'electre3':
-                    g = Electre3OutrankingDigraph(t)
+##                elif t.parameter['valuationType'] == 'electre3':
+##                    g = Electre3OutrankingDigraph(t)
                 elif t.parameter['valuationType'] == 'normalized':
                     g = BipolarOutrankingDigraph(t)
                     g.recodeValuation(-1.0,1.0)
@@ -3098,8 +3119,10 @@ def saveXMCDARubisBestChoiceRecommendation(problemFileName=None,tempDir='.',valu
                     isRobust = True			
             else:
                 g = BipolarOutrankingDigraph(t)
+                #print(g)
         except:
             errorExit(tempDir,problemFileName, 2, 'Corrupt problem data', 'Error when computing outranking digraph !')
+            return
     elif valuationType == 'robust':
         g = RobustOutrankingDigraph(t)
         isRobust = True
@@ -3110,6 +3133,9 @@ def saveXMCDARubisBestChoiceRecommendation(problemFileName=None,tempDir='.',valu
     else:
         g = BipolarOutrankingDigraph(t)
 
+##    g = BipolarOutrankingDigraph(t)
+##    print(g)
+
     # save Rubis solution file
     g_orig = copy.deepcopy(g)
     solutionFileName = str(tempDir)+'/solution-' + str(problemFileName)
@@ -3119,6 +3145,7 @@ def saveXMCDARubisBestChoiceRecommendation(problemFileName=None,tempDir='.',valu
             servingD3=False,comment=True,instanceID=problemFileName)
     except:
         errorExit(tempDir,problemFileName, 3, 'Rubis Solver error', 'Error when computing Rubis choice recommendation !')
+        return
 
     g_orig.goodChoices=[]
     try:
@@ -3155,6 +3182,7 @@ def saveXMCDARubisBestChoiceRecommendation(problemFileName=None,tempDir='.',valu
                                   graphType='pdf',graphSize='10,10')
     except: 
         errorExit(tempDir,problemFileName, 4, 'GraphViz export error', 'Error when computing the outranking digraph image.')
+        return
 
     # criteria correlation
 
@@ -3164,6 +3192,7 @@ def saveXMCDARubisBestChoiceRecommendation(problemFileName=None,tempDir='.',valu
             g_orig.export3DplotOfCriteriaCorrelation(plotFileName=similarityPlotFileName,Type="pdf",Comments=True,bipolarFlag=True,dist=False,centeredFlag=True)
     except:
         errorExit(tempDir,problemFileName,5, 'Calmat or R error', 'Error when generating the criteria correlation png plot.')
+        return
 
     # copy similarity jpg in place
     if not isRobust:
@@ -3179,6 +3208,7 @@ def saveXMCDARubisBestChoiceRecommendation(problemFileName=None,tempDir='.',valu
                 os.system(commandString)
             except:
                 errorExit(tempDir,problemFileName,6, 'system error', 'Error when generating the criteria correlation jpeg plot.')
+                return
 
     # copy Rubis styles sheet
     xmcda.saveRubisXSL(str(tempDir)+'/xmcda2Rubis.xsl')
@@ -3208,12 +3238,7 @@ def showXMCDARubisBestChoiceRecommendation(problemFileName=None,valuationType=No
     commandString = 'cp %s.* %s' % (problemFileName,tempDirName)
     os.system(commandString)
     os.chdir(tempDirName)
-    try:
-        xmcda.saveXMCDARubisBestChoiceRecommendation(problemFileName,tempDirName,valuationType)
-    except:
-        os.chdir(currDir)
-        print('Error: file %s not found!' % problemFileName)
-        return
+    xmcda.saveXMCDARubisBestChoiceRecommendation(problemFileName,tempDirName,valuationType)
     url = tempDirName+'/solution-'+problemFileName+'.xmcda2'
     print(url)
     webbrowser.open_new('file://'+url)    
