@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # Python implementation of digraphs
-# Current revision $Revision: 2093 $
+# Current revision $Revision: 2196 $
 # Copyright (C) 2006-2008  Raymond Bisdorff
 #
 #    This program is free software; you can redistribute it and/or modify
@@ -1459,11 +1459,11 @@ class QuantilesSortingDigraph(SortingDigraph):
     Specialisation of the sortingDigraph Class
     for sorting of a large set of alternatives into
     quantiles delimited ordered classes.
-    
+      
     .. note::
 
-        We generally require an PerformanceTableau instance or a valid filename.
-        If none is given, then a default profile with the limiting quartiles Q0,Q1,Q2, Q3 and Q4 is used on each criteria.
+        The constructor requires a valid PerformanceTableau instance.
+        If no number of limiting quantiles is given, then a default profile with the limiting quartiles Q0,Q1,Q2, Q3 and Q4 is used on each criteria.
         By default upper closed limits of categories are supposed to be used in the sorting.
 
     Example Python3 session:
@@ -3036,7 +3036,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         try:
             sorting = self.sorting
         except:
-            sorting = self.computeSortingCharacteristics(action=action,StoreSorting=True)
+            sorting = self.computeSortingCharacteristics(action=action,StoreSorting=False)
 
         actions = self.getActionsKeys(action)
             
@@ -3827,7 +3827,7 @@ if __name__ == "__main__":
     ****************************************************
     * Python sortingDigraphs module                    *
     * depends on BipolarOutrankingDigraph and          *
-    * $Revision: 2093 $                                 *
+    * $Revision: 2196 $                                 *
     * Copyright (C) 2010 Raymond Bisdorff              *
     * The module comes with ABSOLUTELY NO WARRANTY     *
     * to the extent permitted by the applicable law.   *
@@ -3936,7 +3936,7 @@ if __name__ == "__main__":
 
     print('*************************************')
     print('* R.B. december 2010                *')
-    print('* $Revision: 2093 $                  *')
+    print('* $Revision: 2196 $                  *')
     print('*************************************')
 
 #############################

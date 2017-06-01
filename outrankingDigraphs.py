@@ -2894,7 +2894,8 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 fo.write('<version>%s</version>\n' % ('Rubis') )
                 fo.write('</description>\n')
                 fo.write('<active>true</active>\n')
-                fo.write('<weight><value><real>%.2f</real></value></weight>\n' % (objectives[obj]['weight']) )
+                fo.write('<weight><value><real>%.2f</real></value></weight>\n' \
+                         % (objectives[obj]['weight']) )
                 try:
                     objCriteria = [x for x in self.criteria if self.criteria[x]['objective'] == obj]
                     fo.write('<objectiveCriteria>%s</objectiveCriteria>\n' % (str(objCriteria)) )

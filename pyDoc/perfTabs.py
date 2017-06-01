@@ -31,6 +31,7 @@ import decimal
 from digraphsTools import *
 from decimal import Decimal
 from collections import OrderedDict
+from ast import literal_eval
 
 # ----------  old XML handling ------------------
 try:
@@ -3087,6 +3088,319 @@ The performance evaluations of each decision alternative on each criterion are g
         print('File: ' + nameExt + ' saved !')
 
     def saveXMCDA2(self,fileName='temp',\
+                   category='XMCDA 2.0 Extended format',\
+                   user='digraphs Module (RB)',\
+                   version='saved from Python session',\
+                   title='Performance Tableau in XMCDA-2.0 format.',\
+                   variant='Rubis',\
+                   valuationType='bipolar',\
+                   servingD3=False,\
+                   isStringIO=False,\
+                   stringNA='NA',\
+                   comment='produced by saveXMCDA2()',\
+                   hasVeto=True):
+        """
+        save performance tableau object self in XMCDA 2.0 format including decision objectives, the case given.
+        """
+        import codecs
+        if not isStringIO:
+            print('*----- saving performance tableau in XMCDA 2.0 format  -------------*')
+        nameExt = fileName+'.xml'
+        if isStringIO:
+            comment='produced by stringIO()'
+            import io
+            ## ms = 100 * len(self.actions) + 500 * len(self.criteria) * 20 * len(self.evaluation)
+            ## print 'estimated mapped memory size = %d' % (ms)
+            ##fo = mmap.mmap(-1,ms)
+            fo = io.StringIO()
+        else:
+            #nameExt = fileName+'.xmcda2'
+            fo = codecs.open(nameExt,'w',encoding='utf-8')
+        fo.write('<?xml version="1.0" encoding="UTF-8"?>\n')
+        if servingD3:
+            fo.write('<!-- ?xml-stylesheet type="text/xsl" href="xmcda2Rubis.xsl"? -->\n')
+        else:
+            fo.write('<?xml-stylesheet type="text/xsl" href="xmcda2Rubis.xsl"?>\n')
+        fo.write(str('<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.decision-deck.org/2009/XMCDA-2.0.0 http://www.decision-deck.org/xmcda/_downloads/XMCDA-2.0.0.xsd" xmlns:xmcda="http://www.decision-deck.org/2009/XMCDA-2.0.0" instanceID="void">\n'))
+
+        # write description
+        fo.write('<projectReference id="%s" name="%s">\n' % (fileName,nameExt))
+        fo.write('<title>%s</title>\n' % (str(title)) )  
+        fo.write('<author>%s</author>\n' % (user) )
+        fo.write('<version>%s</version>\n' % (version) )
+        fo.write('<comment>%s</comment>\n' % (str(comment)) )
+        fo.write('</projectReference>\n')
+
+        # write methodParameters
+        fo.write('<methodParameters id="%s" name="%s" mcdaConcept="%s">\n' % ('Rubis','Rubis best choice method','methodData'))
+        fo.write('<description>\n')
+        fo.write('<subTitle>Method parameters</subTitle>\n')   
+        fo.write('<version>%s</version>\n' % ('1.0'))
+        fo.write('</description>\n')
+        fo.write('<parameters>\n')
+        fo.write('<parameter name="%s">\n' % ('variant'))
+        fo.write('<value>\n')
+        fo.write('<label>%s</label>\n' % (variant))
+        fo.write('</value>\n')
+        fo.write('</parameter>\n')
+        fo.write('<parameter name="%s">\n' % ('valuationType') )
+        fo.write('<value>\n')
+        fo.write('<label>%s</label>\n' % (valuationType) )
+        fo.write('</value>\n')
+        fo.write('</parameter>\n')
+        fo.write('</parameters>\n')
+        fo.write('</methodParameters>\n')
+
+        #  save alternatives
+        actionsList = [x for x in self.actions]
+        actionsList.sort()
+        na = len(actionsList)
+        actions = self.actions
+        fo.write('<alternatives mcdaConcept="%s">\n' % ('alternatives'))
+        fo.write('<description>\n')
+        fo.write('<subTitle>Potential decision actions.</subTitle>\n')
+        fo.write('</description>\n')                  
+        for i in range(na):
+            try:
+                actionName = str(actions[actionsList[i]]['name'])
+            except:
+                actionName = ''
+            fo.write('<alternative id="%s" name="%s" mcdaConcept="%s">\n' % (actionsList[i],actionName,'potentialDecisionAction'))
+            fo.write('<description>\n')
+            fo.write('<comment>')
+            try:
+                fo.write(str(actions[actionsList[i]]['comment']))
+            except:
+                pass
+            fo.write('</comment>\n')
+            fo.write('</description>\n')                  
+            fo.write('<type>real</type>\n')  
+            fo.write('<active>true</active>\n')
+            fo.write('</alternative>\n')
+        fo.write('</alternatives>\n')
+
+        # save objectives
+
+        try:
+            objectivesList = [x for x in self.objectives]
+            objectivesList.sort()
+            objectives = self.objectives
+            fo.write('<objectives mcdaConcept="objectives">\n')
+            fo.write('<description>\n')
+            fo.write('<subTitle>Set of decision objectives</subTitle>\n')
+            fo.write('</description>\n')
+            for obj in objectivesList:
+                try:
+                    objectiveName = str(objectives[obj]['name'])
+                except:
+                    objectiveName = str(obj)
+                fo.write('<objective id="%s" name="%s" mcdaConcept="%s">\n' % (str(obj),objectiveName,'objective' ) )
+                fo.write('<description>\n')                
+                try:
+                    fo.write('<comment>%s</comment>\n' % (str(objective[obj]['comment'])) )
+                except:
+                    fo.write('<comment>%s</comment>\n' % ('No comment') )
+                fo.write('<version>%s</version>\n' % ('Rubis') )
+                fo.write('</description>\n')
+                fo.write('<active>true</active>\n')
+                fo.write('<weight><value><real>%.2f</real></value></weight>\n' % (objectives[obj]['weight']) )
+                try:
+                    objCriteria = [x for x in self.criteria if self.criteria[x]['objective'] == obj]
+                    fo.write('<objectiveCriteria>%s</objectiveCriteria>\n' % (str(objCriteria)) )
+                except:
+                    pass
+                fo.write('</objective>\n')
+            fo.write('</objectives>\n')
+        except:
+            pass
+
+        # save criteria
+        criteriaList = [x for x in self.criteria]
+        criteriaList.sort()
+        criteria = self.criteria
+        fo.write('<criteria mcdaConcept="criteria">\n')
+        fo.write('<description>\n')
+        fo.write('<subTitle>Family of criteria.</subTitle>\n')
+        fo.write('</description>\n')       
+        for g in criteriaList:
+            try:
+                criterionName = str(criteria[g]['name'])
+            except:
+                criterionName = str(g)
+
+            fo.write('<criterion id="%s" name="%s" mcdaConcept="%s">\n' % (str(g),criterionName,'criterion' ) )
+            fo.write('<description>\n')                
+            try:
+                fo.write('<comment>%s</comment>\n' % (str(criteria[g]['comment'])) )
+            except:
+                fo.write('<comment>%s</comment>\n' % ('No comment') )
+            fo.write('<version>%s</version>\n' % ('performance') )
+            fo.write('</description>\n')
+            fo.write('<active>true</active>\n')
+            try:
+                fo.write('<criterionObjective>%s</criterionObjective>\n' %(criteria[g]['objective']) )
+            except:
+                pass
+            try:
+                if criteria[g]['IntegerWeights']:
+                    fo.write('<criterionValue><value><integer>%d</integer></value></criterionValue>\n' % (criteria[g]['weight']) )
+                else:
+                    fo.write('<criterionValue><value><real>%.2f</real></value></criterionValue>\n' % (criteria[g]['weight']) )
+            except:
+                fo.write('<criterionValue><value><real>%.2f</real></value></criterionValue>\n' % (criteria[g]['weight']) )
+            fo.write('<scale>\n')
+            fo.write('<quantitative>\n')
+            try:
+                fo.write('<preferenceDirection>%s</preferenceDirection>\n' % (criteria[g]['preferenceDirection']) )
+                if criteria[g]['preferenceDirection'] == 'min':
+                    #pdir = -1
+                    pdir = 1
+                else:
+                    pdir = 1
+
+            except:
+                fo.write('<preferenceDirection>%s</preferenceDirection>\n' % ('max') )
+                pdir = 1
+            fo.write('<minimum><real>%.2f</real></minimum>\n' % (criteria[g]['scale'][0]) )
+            fo.write('<maximum><real>%.2f</real></maximum>\n' % (criteria[g]['scale'][1]) )
+
+            fo.write('</quantitative>\n')
+            fo.write('</scale>\n')
+            try:
+                if len(criteria[g]['thresholds']) != 0:
+                    fo.write('<thresholds>\n')
+            except:
+                pass
+            try:
+                if criteria[g]['thresholds']['ind'] != None:
+                    fo.write('<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">\n')
+                    if criteria[g]['thresholds']['ind'][1] != 0.0:
+                        fo.write('<linear>\n')
+                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*criteria[g]['thresholds']['ind'][1]) )
+                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (criteria[g]['thresholds']['ind'][0]) )
+                        fo.write('</linear>\n')
+                    else:
+                        fo.write('<constant>\n')
+                        fo.write('<real>%.2f</real>\n' % (criteria[g]['thresholds']['ind'][0]) )
+                        fo.write('</constant>\n')                       
+                    fo.write('</threshold>\n')
+                
+            except:
+                pass
+            try:
+                if criteria[g]['thresholds']['weakPreference'] != None:
+                    fo.write('<threshold id="weakPreference" name="weak Preference" mcdaConcept="performanceDiscriminationThreshold">\n')
+                    if criteria[g]['thresholds']['weakPreference'][1] != 0.0:
+                        fo.write('<linear>\n')
+                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*criteria[g]['thresholds']['weakPreference'][1]) )
+                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (criteria[g]['thresholds']['weakPreference'][0]) )
+                        fo.write('</linear>\n')
+                    else:
+                        fo.write('<constant>\n')
+                        fo.write('<real>%.2f</real>\n' % (criteria[g]['thresholds']['weakPreference'][0]) )
+                        fo.write('</constant>\n')                       
+                    fo.write('</threshold>\n')
+            except:
+                pass
+            try:
+                if criteria[g]['thresholds']['pref'] != None:
+                    fo.write('<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">\n')
+                    if criteria[g]['thresholds']['pref'][1] != 0.0:
+                        fo.write('<linear>\n')
+                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*criteria[g]['thresholds']['pref'][1]) )
+                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (criteria[g]['thresholds']['pref'][0]) )
+                        fo.write('</linear>\n')
+                    else:
+                        fo.write('<constant>\n')
+                        fo.write('<real>%.2f</real>\n' % (criteria[g]['thresholds']['pref'][0]) )
+                        fo.write('</constant>\n')                       
+                    fo.write('</threshold>\n')
+            except:
+                pass
+            if hasVeto:
+                try:
+                    if criteria[g]['thresholds']['weakVeto'] != None:
+                        fo.write('<threshold id="weakVeto" name="weak veto" mcdaConcept="performanceDiscriminationThreshold">\n')
+                        if criteria[g]['thresholds']['weakVeto'][1] != 0.0:
+                            fo.write('<linear>\n')
+                            fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*criteria[g]['thresholds']['weakVeto'][1]) )
+                            fo.write('<intercept><real>%.2f</real></intercept>\n' % (criteria[g]['thresholds']['weakVeto'][0]) )
+                            fo.write('</linear>\n')
+                        else:
+                            fo.write('<constant>\n')
+                            fo.write('<real>%.2f</real>\n' % (criteria[g]['thresholds']['weakVeto'][0]) )
+                            fo.write('</constant>\n')                       
+                        fo.write('</threshold>\n')
+                except:
+                    pass
+                try:
+                    if criteria[g]['thresholds']['veto'] != None:
+                        fo.write('<threshold id="veto" name="veto" mcdaConcept="performanceDiscriminationThreshold">\n')
+                        if criteria[g]['thresholds']['veto'][1] != 0.0:
+                            fo.write('<linear>\n')
+                            fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*criteria[g]['thresholds']['veto'][1]) )
+                            fo.write('<intercept><real>%.2f</real></intercept>\n' % (criteria[g]['thresholds']['veto'][0]) )
+                            fo.write('</linear>\n')
+                        else:
+                            fo.write('<constant>\n')
+                            fo.write('<real>%.2f</real>\n' % (criteria[g]['thresholds']['veto'][0]) )
+                            fo.write('</constant>\n')                       
+                        fo.write('</threshold>\n')
+                except:
+                    pass
+            try:
+                if len(criteria[g]['thresholds']) != 0:
+                    fo.write('</thresholds>\n')
+            except:
+                pass
+            fo.write('</criterion>\n')
+        fo.write('</criteria>\n')
+
+        # save performance table
+        evaluation = self.evaluation
+        fo.write('<performanceTable mcdaConcept="performanceTable">\n')
+        fo.write('<description>\n')
+        fo.write('<subTitle>Rubis Performance Table.</subTitle>\n')
+        fo.write('</description>\n')
+        for i in range(len(actionsList)):
+            fo.write('<alternativePerformances>\n')
+            fo.write('<alternativeID>'+str(actionsList[i])+'</alternativeID>\n')
+            for g in criteriaList:
+                try:
+                    if self.criteria[g]['preferenceDirection'] == 'min':
+                        pdir = Decimal('-1')
+                    else:
+                        pdir = Decimal('1')
+                except:
+                    pdir = Decimal('1')
+
+                fo.write('<performance>\n')
+                fo.write('<criterionID>')       
+                fo.write(g)
+                fo.write('</criterionID>\n')
+                val = pdir*evaluation[g][actionsList[i]]
+                if val == Decimal("-999"):
+                    fo.write('<value><NA>')
+                    fo.write('%s' % stringNA )
+                    fo.write('</NA></value>\n')
+                    fo.write('</performance>\n')
+                else:
+                    fo.write('<value><real>')
+                    fo.write('%.2f' % val )
+                    fo.write('</real></value>\n')
+                    fo.write('</performance>\n')                    
+            fo.write('</alternativePerformances>\n')
+        fo.write('</performanceTable>\n')        
+        fo.write('</xmcda:XMCDA>\n')
+        if isStringIO:
+            problemText = fo.getvalue()
+            fo.close            
+            return problemText
+        else:
+            fo.close()
+            print('File: ' + nameExt + ' saved !')
+
+    def _saveXMCDA2(self,fileName='temp',\
                    category='XMCDA 2.0 format',\
                    user='digraphs Module (RB)',\
                    version='saved from Python session',\
@@ -3360,7 +3674,11 @@ The performance evaluations of each decision alternative on each criterion are g
             fo.close()
             print('File: ' + nameExt + ' saved !')
 
-    def saveXMCDA2String(self,fileName='temp',category='XMCDA 2.0 format',user='digraphs Module (RB)',version='saved from Python session',title='Performance Tableau in XMCDA-2.0 format.',variant='Rubis',valuationType='bipolar',servingD3=True,comment='produced by stringIO()',stringNA='NA'):
+    def saveXMCDA2String(self,fileName='temp',category='XMCDA 2.0 format',\
+                         user='digraphs Module (RB)',version='saved from Python session',\
+                         title='Performance Tableau in XMCDA-2.0 format.',variant='Rubis',\
+                         valuationType='bipolar',servingD3=True,comment='produced by stringIO()',\
+                         stringNA='NA'):
         """
         save performance tableau object self in XMCDA 2.0 format.
         !!! obsolete: replaced by the isStringIO in the saveXMCDA2 method !!!
@@ -3431,6 +3749,41 @@ The performance evaluations of each decision alternative on each criterion are g
             fo += '</alternative>\n'
         fo += '</alternatives>\n'
 
+        # save objectives
+
+        try:
+            objectivesList = [x for x in self.objectives]
+            objectivesList.sort()
+            objectives = self.objectives
+            fo += '<objectives mcdaConcept="objectives">\n'
+            fo += '<description>\n'
+            fo += '<subTitle>Set of decision objectives</subTitle>\n'
+            fo += '</description>\n'
+            for obj in objectivesList:
+                try:
+                    objectiveName = str(objectives[obj]['name'])
+                except:
+                    objectiveName = str(obj)
+                fo += '<objective id="%s" name="%s" mcdaConcept="%s">\n' % (str(obj),objectiveName,'objective' ) 
+                fo += '<description>\n'
+                try:
+                    fo += '<comment>%s</comment>\n' % (str(objective[obj]['comment'])) 
+                except:
+                    fo += '<comment>%s</comment>\n' % ('No comment')
+                fo += '<version>%s</version>\n' % ('Rubis')
+                fo += '</description>\n'
+                fo += '<active>true</active>\n'
+                fo += '<weight><value><real>%.2f</real></value></weight>\n' % (objectives[obj]['weight'])
+                try:
+                    objCriteria = [x for x in self.criteria if self.criteria[x]['objective'] == obj]
+                    fo += '<objectiveCriteria>%s</objectiveCriteria>\n' % (str(objCriteria))
+                except:
+                    pass
+                fo += '</objective>\n'
+            fo += '</objectives>\n'
+        except:
+            pass
+
         # save criteria
         criteriaList = [x for x in self.criteria]
         criteriaList.sort()
@@ -3454,6 +3807,10 @@ The performance evaluations of each decision alternative on each criterion are g
             fo += '<version>%s</version>\n' % ('performance')
             fo += '</description>\n'
             fo += '<active>true</active>\n'
+            try:
+                fo += '<criterionObjective>%s</criterionObjective>\n' %(criteria[g]['objective'])
+            except:
+                pass
             try:
                 if criteria[g]['IntegerWeights']:
                     fo += '<criterionValue><value><integer>%d</integer></value></criterionValue>\n' % (criteria[g]['weight'])
@@ -6467,6 +6824,44 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
                 except:
                     pass
         self.actions = actions
+        
+        if XMCDA.find('objectives') != None:  # objectives are defined
+            objectives = OrderedDict()
+            # get objectives' description
+            if XMCDA.find('objectives').find('description') != None:
+                description = {}
+                for elem in [x for x in XMCDA.find('criteria').find('description').getchildren()]:
+                    description[elem.tag] = elem.text
+                self.objectivesDescription = description
+            ## get objectives
+            for obj in XMCDA.find('objectives').findall('objective'):
+                if Debug:
+                    print('converting objective %s data' % obj.attrib['id'])
+                try:             
+                    if obj.find('active').text == 'true':
+                        Active = True
+                    else:
+                        Active = False
+                except:
+                    Active = True
+                if Active:
+                    objectives[obj.attrib['id']] = {}
+                    #name
+                    objectives[obj.attrib['id']]['name'] =obj.attrib['name']
+                    #description
+                    for elem in [y for y in obj.find('description').getchildren()]:
+                        objectives[obj.attrib['id']][elem.tag] = elem.text
+                    if obj.find('weight') != None:
+                        try:
+                            objectives[obj.attrib['id']]['weight'] = Decimal(obj.find('weight').find('value').find('real').text)
+                        except:
+                            criteria[obj.attrib['id']]['weight'] = Decimal(obj.find('weight').find('value').find('integer').text)
+                    if obj.find('objectiveCriteria') != None:
+                        objectives[obj.attrib['id']]['criteria'] = literal_eval(obj.find('objectiveCriteria').text)
+            self.objectives = objectives
+        else:  # no objectives are given
+            pass
+        
         criteria = OrderedDict()
         # get criteria' description
         if XMCDA.find('criteria').find('description') != None:
@@ -6492,6 +6887,10 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
                 #description
                 for elem in [y for y in g.find('description').getchildren()]:
                     criteria[g.attrib['id']][elem.tag] = elem.text
+                try:
+                    criteria[g.attrib['id']]['objective'] = g.find('criterionObjective').text
+                except:
+                    pass
                 #prefrenceDirection
                 criteria[g.attrib['id']]['preferenceDirection'] = g.find('scale').find('quantitative').find('preferenceDirection').text
                 if criteria[g.attrib['id']]['preferenceDirection'] == 'min':
@@ -6640,7 +7039,9 @@ if __name__ == "__main__":
                                    Debug=False,
                                    missingDataProbability=0.1,
                                    seed=100,Threading=False)
-    
+    t.saveXMCDA2Ext('test')
+    t1 = XMCDA2PerformanceTableau('test')
+    t1.showObjectives()
 ##    t = ConstantPerformanceTableau(t,
 ##                                   actionsSubset=['a01','a02','a03'],
 ##                                   criteriaSubset=['g01','g02','g03'],
@@ -6692,8 +7093,8 @@ if __name__ == "__main__":
 ##    qsrbc = QuantilesRankingDigraph(t,LowerClosed=False,PrefThresholds=False,Threading=False)
 ##    qsrbc.showSorting()
 ##    t.showHTMLPerformanceHeatmap(Threading=False,Correlations=True,ndigits=0)
-    t.showHTMLPerformanceHeatmap(quantiles=11,Threading=False,RankingRule=None,
-                                 Correlations=True,ndigits=0)
+##    t.showHTMLPerformanceHeatmap(quantiles=11,Threading=False,RankingRule=None,
+##                                 Correlations=True,ndigits=0)
 ##    t.showHTMLPerformanceHeatmap(actionsList=list(t.actions),criteriaList=list(t.criteria.keys()),
 ##                                 Threading=False,RankingRule=None,SparseModel=False,
 ##                                Correlations=True,ndigits=0,

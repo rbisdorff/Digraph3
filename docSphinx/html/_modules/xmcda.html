@@ -77,7 +77,7 @@
 <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">copy</span><span class="o">,</span><span class="nn">string</span><span class="o">,</span><span class="nn">os</span><span class="o">,</span><span class="nn">tempfile</span>
 <span class="kn">import</span> <span class="nn">codecs</span>
 <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">import</span> <span class="nn">xmcda</span>
+<span class="kn">from</span> <span class="nn">xmcda</span> <span class="k">import</span> <span class="o">*</span>
 
 <span class="c1">############################</span>
 <span class="n">rubisExtXSL</span> <span class="o">=</span>\
@@ -3053,13 +3053,17 @@
 <span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">xml.etree</span> <span class="k">import</span> <span class="n">ElementTree</span>
-    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">copy</span><span class="o">,</span> <span class="nn">xmcda</span>
     <span class="kn">from</span> <span class="nn">sys</span> <span class="k">import</span> <span class="n">platform</span>
+    <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">,</span>\
+         <span class="n">ConfidentBipolarOutrankingDigraph</span><span class="p">,</span> <span class="n">RobustOutrankingDigraph</span>
+    
     
     <span class="k">def</span> <span class="nf">errorExit</span><span class="p">(</span><span class="n">tempDir</span><span class="p">,</span><span class="n">problemFileName</span><span class="p">,</span><span class="n">Number</span><span class="p">,</span><span class="n">Name</span><span class="p">,</span><span class="n">Message</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        XMCDA 2.0 Error message</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#print(tempDir,problemFileName,Number,Name,Message)</span>
         <span class="n">solutionFileName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">tempDir</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;/solution-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">problemFileName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.xmcda2&#39;</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">solutionFileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -3075,7 +3079,7 @@
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&lt;text&gt;</span><span class="si">%s</span><span class="s1">&lt;/text&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">Message</span><span class="p">)</span> <span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&lt;/errorMessage&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&lt;/methodMessages&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&lt;/xmcda:XMCDA&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>         
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&lt;/xmcda:XMCDA&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">Number</span>
         <span class="c1">#exit(Number)</span>
@@ -3104,34 +3108,51 @@
                     <span class="n">rootTag</span> <span class="o">=</span> <span class="n">ElementTree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">fo</span><span class="p">)</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span><span class="o">.</span><span class="n">tag</span>
                     <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
+<span class="c1">##    try:</span>
+<span class="c1">##        t = XMCDA2PerformanceTableau(problemFileName)</span>
+<span class="c1">##        </span>
+<span class="c1">##    except:</span>
+<span class="c1">##        errorExit(tempDir,problemFileName, 1, &#39;UMCDA-ML XMCDA 2.0 input error&#39;, &#39;Error when reading XML input data file !&#39;)</span>
+<span class="c1">##        return</span>
+        
+
+
     <span class="k">if</span> <span class="n">rootTag</span> <span class="o">==</span> <span class="s1">&#39;RubisPerformanceTableau&#39;</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">t</span> <span class="o">=</span> <span class="n">XMLRubisPerformanceTableau</span><span class="p">(</span><span class="n">problemFileName</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="n">errorExit</span><span class="p">(</span><span class="n">tempDir</span><span class="p">,</span><span class="n">problemFileName</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Rubis XML input error&#39;</span><span class="p">,</span> <span class="s1">&#39;Error when reading XML input data file !&#39;</span><span class="p">)</span>
+            <span class="k">return</span>
     <span class="k">elif</span> <span class="n">rootTag</span> <span class="o">==</span> <span class="s1">&#39;{http://www.decision-deck.org/2009/XMCDA-2.0.0}XMCDA&#39;</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">t</span> <span class="o">=</span> <span class="n">XMCDA2PerformanceTableau</span><span class="p">(</span><span class="n">problemFileName</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="n">errorExit</span><span class="p">(</span><span class="n">tempDir</span><span class="p">,</span><span class="n">problemFileName</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;UMCDA-ML XMCDA 2.0 input error&#39;</span><span class="p">,</span> <span class="s1">&#39;Error when reading XML input data file !&#39;</span><span class="p">)</span>
+            <span class="k">return</span>
     <span class="k">elif</span> <span class="n">rootTag</span> <span class="o">==</span> <span class="s1">&#39;{http://www.decision-deck.org/2008/UMCDA-ML-1.0}XMCDA&#39;</span><span class="p">:</span>
-        <span class="c1">#print(rootTag)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">t</span> <span class="o">=</span> <span class="n">XMCDAPerformanceTableau</span><span class="p">(</span><span class="n">problemFileName</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="n">errorExit</span><span class="p">(</span><span class="n">tempDir</span><span class="p">,</span><span class="n">problemFileName</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;UMCDA-ML XMCDA 1.0 input error&#39;</span><span class="p">,</span> <span class="s1">&#39;Error when reading XML input data file !&#39;</span><span class="p">)</span>
+            <span class="k">return</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">errorExit</span><span class="p">(</span><span class="n">tempDir</span><span class="p">,</span><span class="n">problemFileName</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Input error&#39;</span><span class="p">,</span> <span class="s1">&#39;Error when reading input data file !&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+<span class="c1">##    t = XMCDA2PerformanceTableau(problemFileName)</span>
+<span class="c1">##    print(rootTag,t)</span>
+    
 
     <span class="c1"># contruct outranking digraph</span>
-    <span class="n">isRobust</span> <span class="o">=</span> <span class="kc">False</span>  
+    <span class="n">isRobust</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="c1">#print(isRobust)</span>
     <span class="k">if</span> <span class="n">valuationType</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">rootTag</span> <span class="o">!=</span> <span class="s1">&#39;rubisPerformanceTableau&#39;</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="s1">&#39;valuationType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;integer&#39;</span><span class="p">:</span>
                     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarIntegerOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-                <span class="k">elif</span> <span class="n">t</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="s1">&#39;valuationType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;electre3&#39;</span><span class="p">:</span>
-                    <span class="n">g</span> <span class="o">=</span> <span class="n">Electre3OutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="c1">##                elif t.parameter[&#39;valuationType&#39;] == &#39;electre3&#39;:</span>
+<span class="c1">##                    g = Electre3OutrankingDigraph(t)</span>
                 <span class="k">elif</span> <span class="n">t</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="s1">&#39;valuationType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;normalized&#39;</span><span class="p">:</span>
                     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
                     <span class="n">g</span><span class="o">.</span><span class="n">recodeValuation</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">)</span>
@@ -3148,8 +3169,10 @@
                     <span class="n">isRobust</span> <span class="o">=</span> <span class="kc">True</span>			
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+                <span class="c1">#print(g)</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="n">errorExit</span><span class="p">(</span><span class="n">tempDir</span><span class="p">,</span><span class="n">problemFileName</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Corrupt problem data&#39;</span><span class="p">,</span> <span class="s1">&#39;Error when computing outranking digraph !&#39;</span><span class="p">)</span>
+            <span class="k">return</span>
     <span class="k">elif</span> <span class="n">valuationType</span> <span class="o">==</span> <span class="s1">&#39;robust&#39;</span><span class="p">:</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">RobustOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
         <span class="n">isRobust</span> <span class="o">=</span> <span class="kc">True</span>
@@ -3160,6 +3183,9 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 
+<span class="c1">##    g = BipolarOutrankingDigraph(t)</span>
+<span class="c1">##    print(g)</span>
+
     <span class="c1"># save Rubis solution file</span>
     <span class="n">g_orig</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
     <span class="n">solutionFileName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">tempDir</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;/solution-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">problemFileName</span><span class="p">)</span>
@@ -3169,6 +3195,7 @@
             <span class="n">servingD3</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">comment</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">instanceID</span><span class="o">=</span><span class="n">problemFileName</span><span class="p">)</span>
     <span class="k">except</span><span class="p">:</span>
         <span class="n">errorExit</span><span class="p">(</span><span class="n">tempDir</span><span class="p">,</span><span class="n">problemFileName</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Rubis Solver error&#39;</span><span class="p">,</span> <span class="s1">&#39;Error when computing Rubis choice recommendation !&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
 
     <span class="n">g_orig</span><span class="o">.</span><span class="n">goodChoices</span><span class="o">=</span><span class="p">[]</span>
     <span class="k">try</span><span class="p">:</span>
@@ -3205,6 +3232,7 @@
                                   <span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;10,10&#39;</span><span class="p">)</span>
     <span class="k">except</span><span class="p">:</span> 
         <span class="n">errorExit</span><span class="p">(</span><span class="n">tempDir</span><span class="p">,</span><span class="n">problemFileName</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;GraphViz export error&#39;</span><span class="p">,</span> <span class="s1">&#39;Error when computing the outranking digraph image.&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
 
     <span class="c1"># criteria correlation</span>
 
@@ -3214,6 +3242,7 @@
             <span class="n">g_orig</span><span class="o">.</span><span class="n">export3DplotOfCriteriaCorrelation</span><span class="p">(</span><span class="n">plotFileName</span><span class="o">=</span><span class="n">similarityPlotFileName</span><span class="p">,</span><span class="n">Type</span><span class="o">=</span><span class="s2">&quot;pdf&quot;</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">bipolarFlag</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">dist</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">centeredFlag</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">except</span><span class="p">:</span>
         <span class="n">errorExit</span><span class="p">(</span><span class="n">tempDir</span><span class="p">,</span><span class="n">problemFileName</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;Calmat or R error&#39;</span><span class="p">,</span> <span class="s1">&#39;Error when generating the criteria correlation png plot.&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
 
     <span class="c1"># copy similarity jpg in place</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">isRobust</span><span class="p">:</span>
@@ -3229,6 +3258,7 @@
                 <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="n">errorExit</span><span class="p">(</span><span class="n">tempDir</span><span class="p">,</span><span class="n">problemFileName</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;system error&#39;</span><span class="p">,</span> <span class="s1">&#39;Error when generating the criteria correlation jpeg plot.&#39;</span><span class="p">)</span>
+                <span class="k">return</span>
 
     <span class="c1"># copy Rubis styles sheet</span>
     <span class="n">xmcda</span><span class="o">.</span><span class="n">saveRubisXSL</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tempDir</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;/xmcda2Rubis.xsl&#39;</span><span class="p">)</span>
@@ -3258,12 +3288,7 @@
     <span class="n">commandString</span> <span class="o">=</span> <span class="s1">&#39;cp </span><span class="si">%s</span><span class="s1">.* </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">problemFileName</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">)</span>
     <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
     <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">tempDirName</span><span class="p">)</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">xmcda</span><span class="o">.</span><span class="n">saveXMCDARubisBestChoiceRecommendation</span><span class="p">(</span><span class="n">problemFileName</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">,</span><span class="n">valuationType</span><span class="p">)</span>
-    <span class="k">except</span><span class="p">:</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">currDir</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: file </span><span class="si">%s</span><span class="s1"> not found!&#39;</span> <span class="o">%</span> <span class="n">problemFileName</span><span class="p">)</span>
-        <span class="k">return</span>
+    <span class="n">xmcda</span><span class="o">.</span><span class="n">saveXMCDARubisBestChoiceRecommendation</span><span class="p">(</span><span class="n">problemFileName</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">,</span><span class="n">valuationType</span><span class="p">)</span>
     <span class="n">url</span> <span class="o">=</span> <span class="n">tempDirName</span><span class="o">+</span><span class="s1">&#39;/solution-&#39;</span><span class="o">+</span><span class="n">problemFileName</span><span class="o">+</span><span class="s1">&#39;.xmcda2&#39;</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
     <span class="n">webbrowser</span><span class="o">.</span><span class="n">open_new</span><span class="p">(</span><span class="s1">&#39;file://&#39;</span><span class="o">+</span><span class="n">url</span><span class="p">)</span>    

@@ -2870,6 +2870,41 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 fo.write('<type>fictive</type>\n')
                 fo.write('</alternative>\n')
             fo.write('</alternatives>\n')
+
+        # save objectives if there are any
+        try:
+            objectivesList = [x for x in self.objectives]
+            objectivesList.sort()
+            objectives = self.objectives
+            fo.write('<objectives mcdaConcept="objectives">\n')
+            fo.write('<description>\n')
+            fo.write('<subTitle>Set of decision objectives</subTitle>\n')
+            fo.write('</description>\n')
+            for obj in objectivesList:
+                try:
+                    objectiveName = str(objectives[obj]['name'])
+                except:
+                    objectiveName = str(obj)
+                fo.write('<objective id="%s" name="%s" mcdaConcept="%s">\n' % (str(obj),objectiveName,'objective' ) )
+                fo.write('<description>\n')                
+                try:
+                    fo.write('<comment>%s</comment>\n' % (str(objective[obj]['comment'])) )
+                except:
+                    fo.write('<comment>%s</comment>\n' % ('No comment') )
+                fo.write('<version>%s</version>\n' % ('Rubis') )
+                fo.write('</description>\n')
+                fo.write('<active>true</active>\n')
+                fo.write('<weight><value><real>%.2f</real></value></weight>\n' \
+                         % (objectives[obj]['weight']) )
+                try:
+                    objCriteria = [x for x in self.criteria if self.criteria[x]['objective'] == obj]
+                    fo.write('<objectiveCriteria>%s</objectiveCriteria>\n' % (str(objCriteria)) )
+                except:
+                    pass
+                fo.write('</objective>\n')
+            fo.write('</objectives>\n')
+        except:
+            pass
         
         # save criteria
         criteriaList = [x for x in self.criteria]
@@ -2896,6 +2931,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             fo.write('<version>%s</version>\n' % ('performance') )
             fo.write('</description>\n')
             fo.write('<active>true</active>\n')
+            try:
+                fo.write('<criterionObjective>%s</criterionObjective>\n' % critg['objective'])
+            except:
+                pass
             try:
                 if critg['IntegerWeights']:
                     fo.write('<criterionValue><value><integer>%d</integer></value></criterionValue>\n' % (critg['weight']) )

@@ -4366,7 +4366,11 @@ class Digraph(object):
         fo.close()
         print('File: ' + nameExt + ' saved !')
 
-    def saveXMCDA2(self,fileName='temp',fileExt='xmcda2',Comments=True,relationName='R',relationType='binary',category='random',subcategory='valued',author='digraphs Module (RB)',reference='saved from Python',valuationType='standard',digits=2,servingD3=False):
+    def saveXMCDA2(self,fileName='temp',fileExt='xmcda2',
+                   Comments=True,relationName='R',relationType='binary',
+                   category='random',subcategory='valued',
+                   author='digraphs Module (RB)',reference='saved from Python',
+                   valuationType='standard',digits=2,servingD3=False):
         """
         save digraph in XMCDA format.
         """
@@ -7629,8 +7633,14 @@ class Digraph(object):
                                 
     def computeGoodChoices(self,Comments=False):
         """
-        | Characteristic values for potentially good choices.
-        | [(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec,(7)cover]
+        Computes characteristic values for potentially good choices.
+
+        ..note::
+
+             Return a tuple with following content:
+
+             [(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec,(7)cover]
+             
         """
         import copy
         from operator import itemgetter
@@ -7823,11 +7833,11 @@ class Digraph(object):
     def determinateness(self,vec,inPercent = True):
         """
         Renders the determinateness of a bipolar characteristic vector
-        [(r(x),x),(r(y),y), ...] of length n in valuationdomain [Min,Max]:
+        [(r(x),x),(r(y),y), ...] of length *n* in valuationdomain [Min,Max]:
         
         result = sum_x abs(r(x))/(n*(Max-Min)
 
-        If inPercent, result shifted (+1) and reduced (/2) to [0,1]. 
+        If inPercent, result shifted (+1) and reduced (/2) to [0,1] range. 
         """
         Min = Decimal(str(self.valuationdomain['min']))
         Max = Decimal(str(self.valuationdomain['max']))
@@ -7850,8 +7860,14 @@ class Digraph(object):
 
     def computeBadChoices(self,Comments=False):
         """
-        | Characteristic values for potentially bad choices.
-        | [(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)absvec]
+        Computes characteristic values for potentially bad choices.
+
+        .. note::
+
+             Returns a tuple with following content:
+
+             [(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)absvec]
+             
         """
         import copy
         from operator import itemgetter
@@ -7933,7 +7949,7 @@ class Digraph(object):
 
     def showChoiceVector(self,ch,ChoiceVector=True):
         """
-        show procedure for annotated bipolar choices
+        Show procedure for annotated bipolar choices.
         """
         from digraphsTools import flatten
         actions = [x for x in self.actions]
@@ -8049,7 +8065,7 @@ class Digraph(object):
 
     def irreflex(self,mat):
         """
-        puts diagonal entries of mat to valuationdomain['min']
+        Puts diagonal entries of mat to valuationdomain['min']
         """
         Min = self.valuationdomain['min']
         n = len(mat[0])
@@ -8127,6 +8143,7 @@ class Digraph(object):
     def showMIS_AH(self,withListing=True):
         """
         Prints all MIS using the Hertz method.
+
         Result saved in self.hertzmisset.
         """
         import sys,random,copy,time
@@ -8266,6 +8283,7 @@ class Digraph(object):
     def showMIS_RB(self,withListing=True):
         """
         Prints all MIS using the Bisdorff method.
+
         Result saved in self.newmisset.
         """
         import sys,random,copy,time
@@ -8397,6 +8415,7 @@ class Digraph(object):
     def showMIS_UD(self,withListing=True):
         """
         Prints all MIS using the Hertz-Bisdorff method.
+
         Result saved in self.newmisset.
         """
         import sys,random,copy,time
@@ -8562,6 +8581,7 @@ class Digraph(object):
     def showMIS_HB2(self,withListing=True):
         """
         Prints all MIS using the Hertz-Bisdorff method.
+
         Result saved in self.newmisset.
         """
         import sys,random,copy,time
@@ -8703,7 +8723,7 @@ class Digraph(object):
     def computeupdown2irred(self, s, S):
         """
         Help method for show_MIS_HB1 method.
-        fills self.newmisset, self.upmis, self.downmis.
+        Fills self.newmisset, self.upmis, self.downmis.
         """
         #import copy
         newmis = set([frozenset(S)])
@@ -8744,7 +8764,7 @@ class Digraph(object):
     def computeupdown2(self, s, S):
         """
         Help method for show_MIS_HB1 method.
-        fills self.newmisset, self.upmis, self.downmis.
+        Fills self.newmisset, self.upmis, self.downmis.
         """
         #import copy
         newmis = set([frozenset(S)])
@@ -8785,8 +8805,11 @@ class Digraph(object):
         """
         renders the squared normalized distance of
         two digraph valuations.
-        Parameters: op2 digraphs of same order as self.
-        The digraphs must be of same order.
+
+        .. note::
+
+             op2 = digraphs of same order as self.
+             
         """
         import math,copy
 
@@ -8837,7 +8860,9 @@ class Digraph(object):
         """
         Renders the sorted bipolar net determinatation of outrankingness
         minus outrankedness credibilities of all singleton choices.
+
         res = ((netdet,singleton,dom,absorb)+)
+
         """
         import copy
 
@@ -8873,6 +8898,7 @@ class Digraph(object):
         Calls self.computeSingletonRanking(comments=True,Debug = False).
         Renders and prints the sorted bipolar net determinatation of outrankingness
         minus outrankedness credibilities of all singleton choices.
+
         res = ((netdet,sigleton,dom,absorb)+)
 
         """
@@ -8881,8 +8907,8 @@ class Digraph(object):
 
     def omax(self,L, Debug=False):
         """
-        epistemic disjunction for bipolar outranking characteristics
-        computation
+        Epistemic disjunction for bipolar outranking characteristics
+        computation.
         """
         Med = self.valuationdomain['med']
         terms = list(L)
@@ -8912,8 +8938,8 @@ class Digraph(object):
 
     def omin(self,L, Debug=False):
         """
-        epistemic conjunction for bipolar outranking characteristics
-        computation
+        Epistemic conjunction for bipolar outranking characteristics
+        computation.
         """
         Med = self.valuationdomain['med']
         terms = list(L)
@@ -8947,7 +8973,7 @@ class Digraph(object):
 
     def _computeNetFlowsRankingDict(self,Stored=True,Debug=False):
         """
-        renders an ordered dictionary of the actions (from best to worst)
+        Tenders an ordered dictionary of the actions (from best to worst)
         following the net flows ranking rule with rank and net flow attributes.
         """
         relation = self.relation
@@ -8986,7 +9012,7 @@ class Digraph(object):
 
     def computeNetFlowsRanking(self):
         """
-        renders an ordered list (from best to worst) of the actions
+        Renders an ordered list (from best to worst) of the actions
         following the net flows ranking rule.
         """
         try:
@@ -8997,7 +9023,7 @@ class Digraph(object):
 
     def computeNetFlowsOrder(self):
         """
-        renders an ordered list (from worst to best) of the actions
+        Renders an ordered list (from worst to best) of the actions
         following the net flows ranking rule.
         """
         try:
@@ -9008,7 +9034,7 @@ class Digraph(object):
         
     def _computeKohlerRankingDict(self,Debug=False):
         """
-        renders a ranking from the best to the worst of the actions following Kohler's rule as an
+        Renders a ranking from the best to the worst of the actions following Kohler's rule as an
         ordered dictionary with rank and majorityMargin attributes.
         """
         Max = self.valuationdomain['max']
@@ -9049,7 +9075,7 @@ class Digraph(object):
 
     def _computeArrowRaynaudRankingDict(self,Debug=False):
         """
-        renders a ranking of the actions following Arrow&Raynaud's rule.
+        Renders a ranking of the actions following Arrow&Raynaud's rule.
         """
         Min = self.valuationdomain['min']
         actionsList = [x for x in self.actions]
@@ -9082,7 +9108,7 @@ class Digraph(object):
 
     def computeArrowRaynaudOrder(self):
         """
-        renders a linear ordering from worst to best of the actions following Arrow&Raynaud's rule.
+        Renders a linear ordering from worst to best of the actions following Arrow&Raynaud's rule.
         """
         ranking = self._computeArrowRaynaudRankingDict()
         return list(reversed(ranking))
@@ -9096,7 +9122,7 @@ class Digraph(object):
 
     def computeCopelandRanking(self):
         """
-        renders a linear ranking from best to worst of the actions
+        Renders a linear ranking from best to worst of the actions
         following Copelands's rule.
         """
         gamma = self.gamma
@@ -9113,7 +9139,7 @@ class Digraph(object):
 
     def computeRankedPairsOrder(self,Cpp=False,Debug=False):
         """
-        renders an actions ordering from the worst to the best obtained from the
+        Renders an actions ordering from the worst to the best obtained from the
         ranked pairs rule.
         """
         relation = self.relation
@@ -9184,7 +9210,7 @@ class Digraph(object):
 
     def computeRankedPairsRanking(self):
         """
-        renders an actions ordering from the best to the worst obtained from the
+        Renders an actions ordering from the best to the worst obtained from the
         ranked pairs rule.
         """
         ordering = self.computeRankedPairsOrder()
@@ -9194,8 +9220,12 @@ class Digraph(object):
                            orderLimit=7, seed=None,
                            sampleSize=1000, Debug=False):
         """
-        renders a ordering from worst to best of the actions with maximal Kemeny index.
-        Return a tuple: kemenyRanking (from best to worst), kemenyIndex
+        Renders a ordering from worst to best of the actions with maximal Kemeny index.
+
+        .. note::
+        
+             Returns a tuple: kemenyRanking (from best to worst), kemenyIndex.
+             
         """
         from random import seed, shuffle
         from digraphsTools import all_perms
@@ -9293,7 +9323,7 @@ class Digraph(object):
                               TempDir=None,\
                               Comments=False, Debug=False):
         """
-        renders a ordered list of self.actions using the decreasing scores from the
+        Renders a ordered list of self.actions using the decreasing scores from the
         first rincipal eigenvector of the covariance of the valued outdegrees of self.
 
         .. note::
@@ -9333,7 +9363,7 @@ class Digraph(object):
 
     def computeSlaterRanking(self,isProbabilistic=False, seed=None, sampleSize=1000, Debug=False):
         """
-        renders a ranking of the actions with minimal Slater index.
+        Renders a ranking of the actions with minimal Slater index.
         Return a tuple: slaterOrder, slaterIndex
         """
         from random import seed, shuffle
@@ -9436,7 +9466,7 @@ class Digraph(object):
 
     def computeSlaterOrder(self,isProbabilistic=False, seed=None, sampleSize=1000, Debug=False):
         """
-        reversed return from computeSlaterRanking method.
+        Reversed return from computeSlaterRanking method.
         """
         slaterOrder,slaterIndex = self.computeSlaterRanking(isProbabilistic=isProbabilistic,
                                                           seed=seed, sampleSize=sampleSize, Debug=Debug)
@@ -9445,7 +9475,7 @@ class Digraph(object):
 
     def computePairwiseClusterComparison(self, K1, K2, Debug=False):
         """
-        compute the pairwise cluster comparison credibility vector
+        Computes the pairwise cluster comparison credibility vector
         from bipolar-valued digraph g. with K1 and K2 disjoint
         lists of action keys from g actions disctionary.
         Returns the dictionary
@@ -9486,7 +9516,7 @@ class Digraph(object):
 
 class CoDualDigraph(Digraph):
     """
-    Instantiates the associated codual -converse of the negation- (deep) copy of
+    Instantiates the associated codual -converse of the negation- from a deep copy of
     a given Digraph instance called *other*.
 
     .. note::
@@ -9534,7 +9564,7 @@ class CoDualDigraph(Digraph):
 class CoverDigraph(Digraph):
     """
     Instantiates the associated cover relation -immediate neighbours- from
-    a given Digraph called *other*. The Hasse diagram for instance is the cover
+    a deep copy of a given Digraph called *other*. The Hasse diagram for instance is the cover
     relation of a transitive digraph.
 
     .. note::
@@ -9542,6 +9572,7 @@ class CoverDigraph(Digraph):
         Instantiates as other.__class__ !
         Copies the case given the other.description, the other.criteria
         and the other.evaluation dictionaries into self.
+        
     """
 
     def __init__(self,other, Debug=False):
@@ -9597,12 +9628,12 @@ class CoverDigraph(Digraph):
 
 class ConverseDigraph(Digraph):
     """
-    Instantiates the associated converse orreciprocal version from
-    a given Digraph called other.
+    Instantiates the associated converse or reciprocal version from
+    a deep copy of a given Digraph called other.
 
     Instantiates as other.__class__ !
 
-    Copies the case given the description, the criteria
+    Depp copies the case given the description, the criteria
     and the evaluation dictionary into self.
     """
 
@@ -10513,14 +10544,14 @@ class IndeterminateDigraph(Digraph):
 
 class CirculantDigraph(Digraph):
     """
+    Specialization of the general Digraph class for generating
+    temporary circulant digraphs.
+
     Parameters:
         | order > 0;
         | valuationdomain ={'min':m, 'max':M};
         | circulant connections = list of positive
                and/or negative circular shifts of value 1 to n.
-
-    Specialization of the general Digraph class for generating
-    temporary circulant digraphs.
 
     Default instantiation C_7:
         | order = 7,
@@ -10607,12 +10638,12 @@ class CirculantDigraph(Digraph):
 
 class KneserDigraph(Digraph):
     """
+    Specialization of the general Digraph class for generating
+    temporary Kneser digraphs
+
     Parameters:
         | n > 0; n > j > 0;
         | valuationdomain ={'min':m, 'max':M}.
-
-    Specialization of the general Digraph class for generating
-    temporary Kneser digraphs
 
     Default instantiation as Petersen graph:
         n = 5, j = 2, valuationdomain = {'min':-1.0,'max':1.0}.
@@ -10667,11 +10698,11 @@ class KneserDigraph(Digraph):
 
 class GridDigraph(Digraph):
     """
-    Parameters:
-        n,m > 0; valuationdomain ={'min':m, 'max':M}.
-
     Specialization of the general Digraph class for generating
     temporary Grid digraphs of dimension n times m.
+
+    Parameters:
+        n,m > 0; valuationdomain ={'min':m, 'max':M}.
 
     Default instantiation (5 times 5 Grid Digraph):
         n = 5, m=5, valuationdomain = {'min':-1.0,'max':1.0}.
@@ -10825,11 +10856,11 @@ class GridDigraph(Digraph):
 
 class CompleteDigraph(Digraph):
     """
-    Parameters:
-        order > 0; valuationdomain=(Min,Max).
-
     Specialization of the general Digraph class for generating
     temporary complete graphs of order 5 in {-1,0,1} by default.
+
+    Parameters:
+        order > 0; valuationdomain=(Min,Max).
 
     """
     def __init__(self,order=5,valuationdomain = (-1.0,1.0)):
@@ -10860,11 +10891,14 @@ class CompleteDigraph(Digraph):
 
 class RedhefferDigraph(Digraph):
     """
+    Specialization of the general Digraph class for generating
+    temporary Redheffer digraphs.
+
+    https://en.wikipedia.org/wiki/Redheffer_matrix
+
     Parameters:
         order > 0; valuationdomain=(Min,Max).
 
-    Specialization of the general Digraph class for generating
-    temporary Redheffer digraphs.
     """
     ############### helper functions
 
@@ -10904,7 +10938,7 @@ class PolarisedDigraph(Digraph):
     Renders the polarised valuation of a Digraph class instance:
 
     *Parameters*:
-         * If level = None, a default 75% cut level (0.5 in a normalized valuation domain) is used.
+         * If level = None, a default 75% cut level (0.5 in a normalized [-1,+1] valuation domain) is used.
          * If KeepValues = False, the polarisation results in  a three valued crisp result.
          * If AlphaCut = True a genuine one-sided True-oriented cut is operated.
          * If StrictCut = True, the cut level value is excluded resulting in an open polarised valuation domain.
@@ -11093,12 +11127,15 @@ class _MedianExtendedDigraph(Digraph):
 
 class DualDigraph(Digraph):
     """
-    Instantiates the dual Digraph object of a given other Digraph instance.
+    Instantiates the dual ( = negated valuation) Digraph object from a deep copy of a given other Digraph instance.
 
-    The relation constructor returns the dual of self.relation with formula:
+    The relation constructor returns the dual of self.relation with generic formula:
         relationOut[a][b] = Max - self.relation[a][b] + Min
         where Max (resp. Min) equals valuation maximum (resp. minimum).
 
+    .. note::
+
+        In a bipolar valuation, the dual operator correspond to a simple changing of signs.
 
     """
     def __init__(self,other):
@@ -11145,7 +11182,8 @@ class DualDigraph(Digraph):
 
 class _PreferenceDigraph(Digraph):
     """
-    Initiates the valued difference S(a,b) - S(b,a) of a Digraph instance.
+    Obsolete constructor. Initiates the valued difference S(a,b) - S(b,a) of a Digraph instance.
+    
     """
     def __init__(self,digraph):
         self.valuationdomain = digraph.valuationdomain
@@ -11172,21 +11210,19 @@ class _PreferenceDigraph(Digraph):
 
 class AsymmetricPartialDigraph(Digraph):
     """
-    Renders the asymmetric part of a Digraph instance
+    Renders the asymmetric part of a Digraph instance.
 
     .. note::
 
-         The non asymmetric links are all put to the median indeterminate
-         characteristic value!
+         - The non asymmetric and the reflexive links are all put to the median indeterminate characteristic value!
+         - The constructor makes a deep copy of the given Digraph instance!
 
     """
     def __init__(self,digraph):
-        from copy import deepcopy as copy
-        self.valuationdomain = copy(digraph.valuationdomain)
-        Max = self.valuationdomain['max']
-        Med = self.valuationdomain['med']
+        from copy import deepcopy
+        self.valuationdomain = deepcopy(digraph.valuationdomain)
         self.name = 'asymmetric_' + str(digraph.name)
-        self.actions = copy(digraph.actions)
+        self.actions = deepcopy(digraph.actions)
         self.relation = self._constructRelation(digraph.relation)
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
@@ -11197,8 +11233,6 @@ class AsymmetricPartialDigraph(Digraph):
         Returns the asymmetric part of the relationIn
         """
         actions = self.actions
-        Min = self.valuationdomain['min']
-        Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         relationOut = {}
         for a in actions:
@@ -11211,8 +11245,7 @@ class AsymmetricPartialDigraph(Digraph):
                         relationOut[a][b] = relationIn[a][b]
                     else:
                         relationOut[a][b] = Med
-                    ## relationOut[a][b] = min(relationIn[a][b],Max-relationIn[b][a]+Min)
-                else:
+                else:  # reflexive terms are ignored
                     relationOut[a][b] = Med
         return relationOut
 
@@ -11222,16 +11255,15 @@ class SymmetricPartialDigraph(Digraph):
     
     .. note::
 
-           The not symmetric links are all put to the meadian characteristics value!.
-           
+          - The not symmetric and the reflexive links are all put to the median indeterminate characteristics value!.
+          - The constructor makes a deep copy of the given Digraph instance!
+          
     """
     def __init__(self,digraph):
-        from copy import deepcopy as copy
-        self.valuationdomain = copy(digraph.valuationdomain)
-        Max = self.valuationdomain['max']
-        Med = self.valuationdomain['med']
+        from copy import deepcopy
+        self.valuationdomain = deepcopy(digraph.valuationdomain)
         self.name = 'symmetric_' + str(digraph.name)
-        self.actions = copy(digraph.actions)
+        self.actions = deepcopy(digraph.actions)
         self.relation = self._constructRelation(digraph.relation)
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
@@ -11243,8 +11275,6 @@ class SymmetricPartialDigraph(Digraph):
 
         """
         actions = self.actions
-        Min = self.valuationdomain['min']
-        Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         relationOut = {}
         for a in actions:
@@ -11259,30 +11289,31 @@ class SymmetricPartialDigraph(Digraph):
                         relationOut[a][b] = Med
                     ## relationOut[a][b] = min(relationIn[a][b],relationIn[b][a])
                 else:
-                    relationOut[a][b] = Min
+                    relationOut[a][b] = Med
         return relationOut
 
 class kChoicesDigraph(Digraph):
     """
+    Specialization of general Digraph class for instantiation
+    a digraph of all k-choices collapsed actions.
+
     Parameters:
         | digraph := Stored or memory resident digraph instance
         | k := cardinality of the choices
 
-    Specialization of general Digraph class for instantiation
-    of chordless odd circuits augmented digraphs.
     """
     def __init__(self,digraph=None,k=3):
         import random,sys,array
-        from copy import deepcopy as copy
+        from copy import deepcopy
         from outrankingDigraphs import OutrankingDigraph, RandomOutrankingDigraph, BipolarOutrankingDigraph
         if digraph == None:
             digraph = RandomValuationDigraph()
             self.name = str(digraph.name)
 
         elif isinstance(digraph,(Digraph,OutrankingDigraph,RandomOutrankingDigraph)):
-            self.name = copy(digraph.name)
+            self.name = deepcopy(digraph.name)
 
-        self.valuationdomain = copy(digraph.valuationdomain)
+        self.valuationdomain = deepcopy(digraph.valuationdomain)
         dactions = [x for x in digraph.actions]
         drelation = digraph.relation
         actions = {}
@@ -11557,14 +11588,14 @@ class _CoceDigraph(Digraph):
 #--------------------
 class BrokenCocsDigraph(Digraph):
     """
+    Specialization of general Digraph class for instantiation
+    of chordless odd circuits broken digraphs.
+
     Parameters:
 
         - digraph: stored or memory resident digraph instance.
-        - Cpp: using a C++/Agrum version of the Digraoh.computeChordlessCircuits() method.
+        - Cpp: using a C++/Agrum version of the Digraph.computeChordlessCircuits() method.
         - Piping: using OS pipes for data in- and output between Python and C++.
-
-    Specialization of general Digraph class for instantiation
-    of chordless odd circuits broken digraphs.
 
     All chordless odd circuits are broken at the weakest asymmetric link,
     i.e. a link :math:`(x, y)` with minimal difference between :math:`r(x S y)` and :math:`r(y S x)`.
@@ -11708,14 +11739,14 @@ class BrokenCocsDigraph(Digraph):
 #--------------------
 class BreakAddCocsDigraph(Digraph):
     """
+    Specialization of general Digraph class for instantiation
+    of chordless odd circuits augmented digraphs.
+
     Parameters:
 
         - digraph: Stored or memory resident digraph instance.
-        - Cpp: using a C++/Agrum version of the Digraoh.computeChordlessCircuits() method.
+        - Cpp: using a C++/Agrum version of the Digraph.computeChordlessCircuits() method.
         - Piping: using OS pipes for data in- and output between Python and C++.
-
-    Specialization of general Digraph class for instantiation
-    of chordless odd circuits augmented digraphs.
 
     A chordless odd circuit is added if the cumulated credibility of the circuit supporting arcs is larger or
     equal to the cumulated credibility of the converse arcs. Otherwise, the circuit is broken at the weakest asymmetric link,
@@ -11971,7 +12002,7 @@ class CocaDigraph(Digraph):
     Parameters:
 
         - digraph: Stored or memory resident digraph instance.
-        - Cpp: using a C++/Agrum version of the Digraoh.computeChordlessCircuits() method.
+        - Cpp: using a C++/Agrum version of the Digraph.computeChordlessCircuits() method.
         - Piping: using OS pipes for data in- and output between Python and C++.
 
     Specialization of general Digraph class for instantiation
