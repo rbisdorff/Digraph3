@@ -2993,7 +2993,7 @@ def saveXMCDARubisBestChoiceRecommendation(problemFileName=None,tempDir='.',valu
     """
     Store an XMCDA2 encoded solution file of the Rubis best-choice recommendation.
 
-      The :code:`valuationType` parameter allows to work:
+      The valuationType parameter allows to work:
     
         - on the standard bipolar outranking digraph (valuationType = 'bipolar', default),
         - on the normalized --[-1,1] valued-- bipolar outranking digraph (valuationType = 'normalized'),
@@ -3230,7 +3230,7 @@ def showXMCDARubisBestChoiceRecommendation(problemFileName=None,valuationType=No
     Launches a browser window with the XMCDA2 solution of the
     Rubis Solver computed from a stored XMCDA2 encoded performance tableau.
 
-    The :code:`valuationType` parameter allows to work:
+    The valuationType parameter allows to work:
     
         - on the standard bipolar outranking digraph (valuationType = 'bipolar', default),
         - on the normalized --[-1,1] valued-- bipolar outranking digraph (valuationType = 'normalized'),
