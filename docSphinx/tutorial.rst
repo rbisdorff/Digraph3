@@ -1934,16 +1934,18 @@ The same Rubis best choice recommendation, encoded in XMCDA 2.0 and presented in
     >>> import xmcda
     >>> xmcda.showXMCDARubisBestChoiveRecommendation(\
                                prolemFileName='officeChoice',\
-                               valuationType='standard')
+                               valuationType='bipolar')
 
 and, in a system browser window, browse the `solution file`_.
 
    .. _solution file: _static/officeChoice.xml1BYyGVwV866hSNZoSolution.html
 
-The :code:`valuationType` parameter allows to work:
-  - on the standard bipolar outranking digraph (valutaionType = 'standard'),
-  - ignoring considerable performances differences (valuationType = 'noVeto'),
-  - on the confident outranking digraph (valuationType = 'noVeto').
+ The :code:`valuationType` parameter allows to work:
+    - on the standard bipolar outranking digraph (valuationType = 'bipolar', default),
+    - on the normalized --[-1,1] valued-- bipolar outranking digraph (valuationType = 'normalized'),
+    - on the robust --ordinal criteria weights-- bipolar outranking digraph (valuationType = 'robust'),
+    - on the confident outranking digraph (valuationType = 'confident'),
+    - ignoring considerable performances differences (valuationType = 'noVeto').
 
 One may as well use the Rubis XMCDA 2.0 Web services available at the Leopold-Loewenheim Apache Server of the University of Luxembourg:
     >>> from outrankingDigraphs import RubisRestServer

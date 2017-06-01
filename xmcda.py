@@ -2993,6 +2993,14 @@ def saveXMCDARubisBestChoiceRecommendation(problemFileName=None,tempDir='.',valu
     """
     Store an XMCDA2 encoded solution file of the Rubis best-choice recommendation.
 
+      The :code:`valuationType` parameter allows to work:
+    
+        - on the standard bipolar outranking digraph (valuationType = 'bipolar', default),
+        - on the normalized --[-1,1] valued-- bipolar outranking digraph (valuationType = 'normalized'),
+        - on the robust --ordinal criteria weights-- bipolar outranking digraph (valuationType = 'robust'),
+        - on the confident outranking digraph (valuationType = 'confident'),
+        - ignoring considerable performances differences (valuationType = 'noVeto').  
+
     .. note::
 
          The method requires an Unix like OS like Ubuntu or Mac OSX and depends on:
@@ -3110,8 +3118,8 @@ def saveXMCDARubisBestChoiceRecommendation(problemFileName=None,tempDir='.',valu
                     g = BipolarOutrankingDigraph(t,hasBipolarVeto=True)
                 elif t.parameter['valuationType'] == 'confident':
                     g = ConfidentBipolarOutrankingDigraph(t,hasBipolarVeto=True)
-                elif t.parameter['valuationType'] == 'electreVeto':
-                    g = BipolarOutrankingDigraph(t,hasBipolarVeto=False)
+##                elif t.parameter['valuationType'] == 'electreVeto':
+##                    g = BipolarOutrankingDigraph(t,hasBipolarVeto=False)
                 elif t.parameter['valuationType'] == 'noVeto':
                     g = BipolarOutrankingDigraph(t,hasNoVeto=True)
                 elif t.parameter['valuationType'] == 'robust':
@@ -3221,6 +3229,14 @@ def showXMCDARubisBestChoiceRecommendation(problemFileName=None,valuationType=No
     """
     Launches a browser window with the XMCDA2 solution of the
     Rubis Solver computed from a stored XMCDA2 encoded performance tableau.
+
+    The :code:`valuationType` parameter allows to work:
+    
+        - on the standard bipolar outranking digraph (valuationType = 'bipolar', default),
+        - on the normalized --[-1,1] valued-- bipolar outranking digraph (valuationType = 'normalized'),
+        - on the robust --ordinal criteria weights-- bipolar outranking digraph (valuationType = 'robust'),
+        - on the confident outranking digraph (valuationType = 'confident'),
+        - ignoring considerable performances differences (valuationType = 'noVeto').
 
     Example::
 

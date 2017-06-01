@@ -3425,22 +3425,28 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">xmcda</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">xmcda</span><span class="o">.</span><span class="n">showXMCDARubisBestChoiveRecommendation</span><span class="p">(</span>\
 <span class="go">                           prolemFileName=&#39;officeChoice&#39;,\</span>
-<span class="go">                           valuationType=&#39;standard&#39;)</span>
+<span class="go">                           valuationType=&#39;bipolar&#39;)</span>
 </pre></div>
 </div>
 </dd>
 </dl>
 <p>and, in a system browser window, browse the <a class="reference external" href="_static/officeChoice.xml1BYyGVwV866hSNZoSolution.html">solution file</a>.</p>
 <blockquote>
+<div><blockquote>
 <div></div></blockquote>
 <dl class="docutils">
 <dt>The <code class="code docutils literal"><span class="pre">valuationType</span></code> parameter allows to work:</dt>
 <dd><ul class="first last simple">
-<li>on the standard bipolar outranking digraph (valutaionType = &#8216;standard&#8217;),</li>
-<li>ignoring considerable performances differences (valuationType = &#8216;noVeto&#8217;),</li>
-<li>on the confident outranking digraph (valuationType = &#8216;noVeto&#8217;).</li>
+<li>on the standard bipolar outranking digraph (valuationType = &#8216;bipolar&#8217;, default),</li>
+<li>on the normalized &#8211;[-1,1] valued&#8211; bipolar outranking digraph (valuationType = &#8216;normalized&#8217;),</li>
+<li>on the robust &#8211;ordinal criteria weights&#8211; bipolar outranking digraph (valuationType = &#8216;robust&#8217;),</li>
+<li>on the confident outranking digraph (valuationType = &#8216;confident&#8217;),</li>
+<li>ignoring considerable performances differences (valuationType = &#8216;noVeto&#8217;).</li>
 </ul>
 </dd>
+</dl>
+</div></blockquote>
+<dl class="docutils">
 <dt>One may as well use the Rubis XMCDA 2.0 Web services available at the Leopold-Loewenheim Apache Server of the University of Luxembourg:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2

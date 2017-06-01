@@ -3043,6 +3043,14 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Store an XMCDA2 encoded solution file of the Rubis best-choice recommendation.</span>
 
+<span class="sd">      The :code:`valuationType` parameter allows to work:</span>
+<span class="sd">    </span>
+<span class="sd">        - on the standard bipolar outranking digraph (valuationType = &#39;bipolar&#39;, default),</span>
+<span class="sd">        - on the normalized --[-1,1] valued-- bipolar outranking digraph (valuationType = &#39;normalized&#39;),</span>
+<span class="sd">        - on the robust --ordinal criteria weights-- bipolar outranking digraph (valuationType = &#39;robust&#39;),</span>
+<span class="sd">        - on the confident outranking digraph (valuationType = &#39;confident&#39;),</span>
+<span class="sd">        - ignoring considerable performances differences (valuationType = &#39;noVeto&#39;).  </span>
+
 <span class="sd">    .. note::</span>
 
 <span class="sd">         The method requires an Unix like OS like Ubuntu or Mac OSX and depends on:</span>
@@ -3160,8 +3168,8 @@
                     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">hasBipolarVeto</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
                 <span class="k">elif</span> <span class="n">t</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="s1">&#39;valuationType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;confident&#39;</span><span class="p">:</span>
                     <span class="n">g</span> <span class="o">=</span> <span class="n">ConfidentBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">hasBipolarVeto</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-                <span class="k">elif</span> <span class="n">t</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="s1">&#39;valuationType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;electreVeto&#39;</span><span class="p">:</span>
-                    <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">hasBipolarVeto</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1">##                elif t.parameter[&#39;valuationType&#39;] == &#39;electreVeto&#39;:</span>
+<span class="c1">##                    g = BipolarOutrankingDigraph(t,hasBipolarVeto=False)</span>
                 <span class="k">elif</span> <span class="n">t</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="s1">&#39;valuationType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;noVeto&#39;</span><span class="p">:</span>
                     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
                 <span class="k">elif</span> <span class="n">t</span><span class="o">.</span><span class="n">parameter</span><span class="p">[</span><span class="s1">&#39;valuationType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;robust&#39;</span><span class="p">:</span>
@@ -3271,6 +3279,14 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Launches a browser window with the XMCDA2 solution of the</span>
 <span class="sd">    Rubis Solver computed from a stored XMCDA2 encoded performance tableau.</span>
+
+<span class="sd">    The :code:`valuationType` parameter allows to work:</span>
+<span class="sd">    </span>
+<span class="sd">        - on the standard bipolar outranking digraph (valuationType = &#39;bipolar&#39;, default),</span>
+<span class="sd">        - on the normalized --[-1,1] valued-- bipolar outranking digraph (valuationType = &#39;normalized&#39;),</span>
+<span class="sd">        - on the robust --ordinal criteria weights-- bipolar outranking digraph (valuationType = &#39;robust&#39;),</span>
+<span class="sd">        - on the confident outranking digraph (valuationType = &#39;confident&#39;),</span>
+<span class="sd">        - ignoring considerable performances differences (valuationType = &#39;noVeto&#39;).</span>
 
 <span class="sd">    Example::</span>
 
