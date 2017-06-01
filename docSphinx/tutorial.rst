@@ -1170,8 +1170,7 @@ We may visualize the same performance tableau in a two-colors setting in the def
 It is worthwhile noticing that *green* and *red* marked evaluations indicate *best*, respectively *worst*, performances of an alternative on a criterion. In this example, we may hence notice that alternative *a03* is in fact best performing on *four* out of *seven* criteria.
 
 We may, furthermore, rank the alternatives on the basis of the weighted marginal quintiles and visualize the same performance tableau in an even more colorful and sorted setting:
-        >>> from weakOrders import QuantilesRankingDigraph
-        >>> odg.showHTMLPerformanceHeatmap(ordering,colorLevels=5)
+        >>> odg.showHTMLPerformanceHeatmap(quantiles=5,colorLevels=5)
         >>> ...
 
 .. image:: tutorialHeatmap.png
