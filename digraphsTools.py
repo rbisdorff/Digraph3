@@ -1,6 +1,5 @@
 #!/Usr/bin/env python3
 """
------------------------------------
 Python3+ implementation of Digraph3 tools
 
 Copyright (C) 2016-2017 Raymond Bisdorff
@@ -18,8 +17,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along
 with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-
-------------------------------------
 """
 __version__ = "Branch: 3.5 $"
 # ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
