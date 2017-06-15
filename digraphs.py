@@ -1,5 +1,5 @@
 #!/Usr/bin/env python3
-# Python3+ implementation of digraphs
+""" Python3+ implementation of digraphs
 # Based on Python 2 $Revision: 1.697 $
 # Copyright (C) 2006-2013  Raymond Bisdorff
 #
@@ -16,7 +16,7 @@
 #    You should have received a copy of the GNU General Public License along
 #    with this program; if not, write to the Free Software Foundation, Inc.,
 #    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-#
+"""
 #######################
 
 __version__ = "Branch: 3.5 $"

@@ -1940,7 +1940,7 @@ and, in a system browser window, browse the `solution file`_.
 
    .. _solution file: _static/officeChoice.xml1BYyGVwV866hSNZoSolution.html
 
- The *aluationType* parameter allows to work:
+ The :code:`valuationType` parameter allows to work:
     - on the standard bipolar outranking digraph (valuationType = 'bipolar', default),
     - on the normalized --[-1,1] valued-- bipolar outranking digraph (valuationType = 'normalized'),
     - on the robust --ordinal criteria weights-- bipolar outranking digraph (valuationType = 'robust'),
