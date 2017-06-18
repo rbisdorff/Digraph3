@@ -4213,15 +4213,17 @@ class PartialPerformanceTableau(PerformanceTableau):
                 HasObjectives = False
             if criteriaSubset != None:
                 criteria = OrderedDict()
-##                if HasObjectives:
-##                    for obj in objectives.keys():
-##                        objectives[obj]['criteria'] = []
+                if HasObjectives:
+                    for obj in objectives.keys():
+                        objectives[obj]['criteria'] = []
                 for g in criteriaSubset:
                     criteria[g] = deepcopy(inPerfTab.criteria[g])
 ##                    if HasObjectives:
-##                        try:
-##                        obj = criteria[g]['objective']
-##                        objectives[obj]['criteria'].append(g)
+                    try:
+                        obj = inPerfTab.criteria[g]['objective']
+                        objectives[obj]['criteria'].append(g)
+                    except:
+                        pass
             else:
                 criteria = deepcopy(inPerfTab.criteria)
         else:
