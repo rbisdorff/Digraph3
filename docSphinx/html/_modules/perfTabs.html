@@ -4263,15 +4263,17 @@
                 <span class="n">HasObjectives</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="k">if</span> <span class="n">criteriaSubset</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">criteria</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
-<span class="c1">##                if HasObjectives:</span>
-<span class="c1">##                    for obj in objectives.keys():</span>
-<span class="c1">##                        objectives[obj][&#39;criteria&#39;] = []</span>
+                <span class="k">if</span> <span class="n">HasObjectives</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">objectives</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                        <span class="n">objectives</span><span class="p">[</span><span class="n">obj</span><span class="p">][</span><span class="s1">&#39;criteria&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
                 <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaSubset</span><span class="p">:</span>
                     <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">inPerfTab</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">])</span>
 <span class="c1">##                    if HasObjectives:</span>
-<span class="c1">##                        try:</span>
-<span class="c1">##                        obj = criteria[g][&#39;objective&#39;]</span>
-<span class="c1">##                        objectives[obj][&#39;criteria&#39;].append(g)</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">obj</span> <span class="o">=</span> <span class="n">inPerfTab</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;objective&#39;</span><span class="p">]</span>
+                        <span class="n">objectives</span><span class="p">[</span><span class="n">obj</span><span class="p">][</span><span class="s1">&#39;criteria&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+                    <span class="k">except</span><span class="p">:</span>
+                        <span class="k">pass</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">criteria</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">inPerfTab</span><span class="o">.</span><span class="n">criteria</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
