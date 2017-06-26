@@ -306,10 +306,10 @@ In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` clas
 
 Structure::
 
-       actions = OrderedDict8[('a1', {'name': ..., 'comment': ...}),
+       actions = OrderedDict([('a1', {'name': ..., 'comment': ...}),
                   ('a2', {'name': ..., 'comment': ...}),
                   ...])
-       objectives = OrderedDict8[
+       objectives = OrderedDict([
                    ('obj1', {'name': ..., 'comment': ..., 'weight': ..., 'criteria': ['g1', ...]}),
                    ('obj2', {'name': ..., 'comment', ..., 'weight': ..., 'criteria': ['g2', ...]}),
                    ...])
@@ -4218,9 +4218,12 @@ class PartialPerformanceTableau(PerformanceTableau):
                         objectives[obj]['criteria'] = []
                 for g in criteriaSubset:
                     criteria[g] = deepcopy(inPerfTab.criteria[g])
-                    if HasObjectives:
-                        obj = criteria[g]['objective']
+##                    if HasObjectives:
+                    try:
+                        obj = inPerfTab.criteria[g]['objective']
                         objectives[obj]['criteria'].append(g)
+                    except:
+                        pass
             else:
                 criteria = deepcopy(inPerfTab.criteria)
         else:

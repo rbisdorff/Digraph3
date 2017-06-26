@@ -1250,6 +1250,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         keys = []
         for c in categories.keys():
         #for c in self.orderedCategoryKeys():
+            print(action, c,sortinga[c])
             Above = False
             if sortinga[c]['categoryMembership'] >= Med:
                 Above = True
@@ -1262,13 +1263,27 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                     print(action, c, sortinga[c])
             elif Above:
                 break
-        n = len(keys)
         try:
             credibility = min(lowLimit,notHighLimit)
         except:
             credibility = Med
+            notHighLimit = Med
+        print('==>>',action,\
+               keys[0],\
+               keys[0],\
+               credibility,\
+               lowLimit,\
+               notHighLimit)
+        n = len(keys)
         if n == 0:
+##            print('==>>',action,\
+##                   [],\
+##                   [],\
+##                   credibility,\
+##                   lowLimit,\
+##                   notHighLimit)
             return None
+        
         elif n == 1:
             if Show:
                 print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
@@ -2586,39 +2601,43 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
 if __name__ == "__main__":
     
     from time import time
-    MP  = False
-    nbrActions=20
-##    t0 = time()
-    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,seed=105)
-##    tp = XMCDA2PerformanceTableau('the_cs_2016')
-
-##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
-##                                     seed=100)
-    bg1 = PreRankedConfidentOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,
-                                 quantilesOrderingStrategy='average',
-                                 componentRankingRule='Copeland',
-                                 LowerClosed=False,
-                                 minimalComponentSize=1,
-                                 Threading=MP,nbrOfCPUs=8,
-                                 #tempDir='.',
-                                 nbrOfThreads=8,
-                                 Comments=False,Debug=False,
-                                 save2File='testbgMP')
-    print(bg1)
-    bg1.showComponents(direction='descending')
-    #bg1.showRelationTable()
-    bg2 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,
-                                 quantilesOrderingStrategy='average',
-                                 componentRankingRule='Copeland',
-                                 LowerClosed=False,
-                                 minimalComponentSize=1,
-                                 Threading=MP,nbrOfCPUs=8,
-                                 #tempDir='.',
-                                 nbrOfThreads=8,
-                                 Comments=False,Debug=False,
-                                 save2File='testbgMP')
-    print(bg2)
-    bg2.showComponents(direction='descending')
+    t = XMCDA2PerformanceTableau('project_7')
+    tenv = PartialPerformanceTableau(t,objectivesSubset=['Env'])
+    pre = PreRankedOutrankingDigraph(tenv,Debug=True)
+    tenv.showHTMLPerformanceHeatmap()
+##    MP  = False
+##    nbrActions=20
+####    t0 = time()
+##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,seed=105)
+####    tp = XMCDA2PerformanceTableau('the_cs_2016')
+##
+####    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
+####                                     seed=100)
+##    bg1 = PreRankedConfidentOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,
+##                                 quantilesOrderingStrategy='average',
+##                                 componentRankingRule='Copeland',
+##                                 LowerClosed=False,
+##                                 minimalComponentSize=1,
+##                                 Threading=MP,nbrOfCPUs=8,
+##                                 #tempDir='.',
+##                                 nbrOfThreads=8,
+##                                 Comments=False,Debug=False,
+##                                 save2File='testbgMP')
+##    print(bg1)
+##    bg1.showComponents(direction='descending')
+##    #bg1.showRelationTable()
+##    bg2 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,
+##                                 quantilesOrderingStrategy='average',
+##                                 componentRankingRule='Copeland',
+##                                 LowerClosed=False,
+##                                 minimalComponentSize=1,
+##                                 Threading=MP,nbrOfCPUs=8,
+##                                 #tempDir='.',
+##                                 nbrOfThreads=8,
+##                                 Comments=False,Debug=False,
+##                                 save2File='testbgMP')
+##    print(bg2)
+##    bg2.showComponents(direction='descending')
 ##    from weakOrders import WeakRankingOrder
 ##    wr = WeakRankingOrder(bg1,[bg1.boostedRanking,bg2.boostedRanking])
 ##    wr.exportGraphViz('fusion-cpr-pr',graphType="pdf")

@@ -1300,6 +1300,7 @@
         <span class="n">keys</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">categories</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
         <span class="c1">#for c in self.orderedCategoryKeys():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span><span class="n">sortinga</span><span class="p">[</span><span class="n">c</span><span class="p">])</span>
             <span class="n">Above</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="k">if</span> <span class="n">sortinga</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;categoryMembership&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">Med</span><span class="p">:</span>
                 <span class="n">Above</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1312,13 +1313,27 @@
                     <span class="nb">print</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">sortinga</span><span class="p">[</span><span class="n">c</span><span class="p">])</span>
             <span class="k">elif</span> <span class="n">Above</span><span class="p">:</span>
                 <span class="k">break</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">credibility</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">lowLimit</span><span class="p">,</span><span class="n">notHighLimit</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="n">credibility</span> <span class="o">=</span> <span class="n">Med</span>
+            <span class="n">notHighLimit</span> <span class="o">=</span> <span class="n">Med</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt;&#39;</span><span class="p">,</span><span class="n">action</span><span class="p">,</span>\
+               <span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>\
+               <span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>\
+               <span class="n">credibility</span><span class="p">,</span>\
+               <span class="n">lowLimit</span><span class="p">,</span>\
+               <span class="n">notHighLimit</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="c1">##            print(&#39;==&gt;&gt;&#39;,action,\</span>
+<span class="c1">##                   [],\</span>
+<span class="c1">##                   [],\</span>
+<span class="c1">##                   credibility,\</span>
+<span class="c1">##                   lowLimit,\</span>
+<span class="c1">##                   notHighLimit)</span>
             <span class="k">return</span> <span class="kc">None</span>
+        
         <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">Show</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> - </span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1"> with credibility: </span><span class="si">%.2f</span><span class="s1"> = min(</span><span class="si">%.2f</span><span class="s1">,</span><span class="si">%.2f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span>\
@@ -2636,39 +2651,43 @@
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     
     <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
-    <span class="n">MP</span>  <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">nbrActions</span><span class="o">=</span><span class="mi">20</span>
-<span class="c1">##    t0 = time()</span>
-    <span class="n">tp</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
-<span class="c1">##    tp = XMCDA2PerformanceTableau(&#39;the_cs_2016&#39;)</span>
-
-<span class="c1">##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,</span>
-<span class="c1">##                                     seed=100)</span>
-    <span class="n">bg1</span> <span class="o">=</span> <span class="n">PreRankedConfidentOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">CopyPerfTab</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-                                 <span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
-                                 <span class="n">componentRankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">,</span>
-                                 <span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                 <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                                 <span class="n">Threading</span><span class="o">=</span><span class="n">MP</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
-                                 <span class="c1">#tempDir=&#39;.&#39;,</span>
-                                 <span class="n">nbrOfThreads</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
-                                 <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                 <span class="n">save2File</span><span class="o">=</span><span class="s1">&#39;testbgMP&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">bg1</span><span class="p">)</span>
-    <span class="n">bg1</span><span class="o">.</span><span class="n">showComponents</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;descending&#39;</span><span class="p">)</span>
-    <span class="c1">#bg1.showRelationTable()</span>
-    <span class="n">bg2</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">CopyPerfTab</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-                                 <span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
-                                 <span class="n">componentRankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">,</span>
-                                 <span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                 <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                                 <span class="n">Threading</span><span class="o">=</span><span class="n">MP</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
-                                 <span class="c1">#tempDir=&#39;.&#39;,</span>
-                                 <span class="n">nbrOfThreads</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
-                                 <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                 <span class="n">save2File</span><span class="o">=</span><span class="s1">&#39;testbgMP&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">bg2</span><span class="p">)</span>
-    <span class="n">bg2</span><span class="o">.</span><span class="n">showComponents</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;descending&#39;</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">XMCDA2PerformanceTableau</span><span class="p">(</span><span class="s1">&#39;project_7&#39;</span><span class="p">)</span>
+    <span class="n">tenv</span> <span class="o">=</span> <span class="n">PartialPerformanceTableau</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">objectivesSubset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Env&#39;</span><span class="p">])</span>
+    <span class="n">pre</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">tenv</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">tenv</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">()</span>
+<span class="c1">##    MP  = False</span>
+<span class="c1">##    nbrActions=20</span>
+<span class="c1">####    t0 = time()</span>
+<span class="c1">##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,seed=105)</span>
+<span class="c1">####    tp = XMCDA2PerformanceTableau(&#39;the_cs_2016&#39;)</span>
+<span class="c1">##</span>
+<span class="c1">####    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,</span>
+<span class="c1">####                                     seed=100)</span>
+<span class="c1">##    bg1 = PreRankedConfidentOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,</span>
+<span class="c1">##                                 quantilesOrderingStrategy=&#39;average&#39;,</span>
+<span class="c1">##                                 componentRankingRule=&#39;Copeland&#39;,</span>
+<span class="c1">##                                 LowerClosed=False,</span>
+<span class="c1">##                                 minimalComponentSize=1,</span>
+<span class="c1">##                                 Threading=MP,nbrOfCPUs=8,</span>
+<span class="c1">##                                 #tempDir=&#39;.&#39;,</span>
+<span class="c1">##                                 nbrOfThreads=8,</span>
+<span class="c1">##                                 Comments=False,Debug=False,</span>
+<span class="c1">##                                 save2File=&#39;testbgMP&#39;)</span>
+<span class="c1">##    print(bg1)</span>
+<span class="c1">##    bg1.showComponents(direction=&#39;descending&#39;)</span>
+<span class="c1">##    #bg1.showRelationTable()</span>
+<span class="c1">##    bg2 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,</span>
+<span class="c1">##                                 quantilesOrderingStrategy=&#39;average&#39;,</span>
+<span class="c1">##                                 componentRankingRule=&#39;Copeland&#39;,</span>
+<span class="c1">##                                 LowerClosed=False,</span>
+<span class="c1">##                                 minimalComponentSize=1,</span>
+<span class="c1">##                                 Threading=MP,nbrOfCPUs=8,</span>
+<span class="c1">##                                 #tempDir=&#39;.&#39;,</span>
+<span class="c1">##                                 nbrOfThreads=8,</span>
+<span class="c1">##                                 Comments=False,Debug=False,</span>
+<span class="c1">##                                 save2File=&#39;testbgMP&#39;)</span>
+<span class="c1">##    print(bg2)</span>
+<span class="c1">##    bg2.showComponents(direction=&#39;descending&#39;)</span>
 <span class="c1">##    from weakOrders import WeakRankingOrder</span>
 <span class="c1">##    wr = WeakRankingOrder(bg1,[bg1.boostedRanking,bg2.boostedRanking])</span>
 <span class="c1">##    wr.exportGraphViz(&#39;fusion-cpr-pr&#39;,graphType=&quot;pdf&quot;)</span>
