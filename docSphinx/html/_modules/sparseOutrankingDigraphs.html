@@ -1300,7 +1300,8 @@
         <span class="n">keys</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">categories</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
         <span class="c1">#for c in self.orderedCategoryKeys():</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span><span class="n">sortinga</span><span class="p">[</span><span class="n">c</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span><span class="n">sortinga</span><span class="p">[</span><span class="n">c</span><span class="p">])</span>
             <span class="n">Above</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="k">if</span> <span class="n">sortinga</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;categoryMembership&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">Med</span><span class="p">:</span>
                 <span class="n">Above</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1318,20 +1319,8 @@
         <span class="k">except</span><span class="p">:</span>
             <span class="n">credibility</span> <span class="o">=</span> <span class="n">Med</span>
             <span class="n">notHighLimit</span> <span class="o">=</span> <span class="n">Med</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt;&#39;</span><span class="p">,</span><span class="n">action</span><span class="p">,</span>\
-               <span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>\
-               <span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>\
-               <span class="n">credibility</span><span class="p">,</span>\
-               <span class="n">lowLimit</span><span class="p">,</span>\
-               <span class="n">notHighLimit</span><span class="p">)</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<span class="c1">##            print(&#39;==&gt;&gt;&#39;,action,\</span>
-<span class="c1">##                   [],\</span>
-<span class="c1">##                   [],\</span>
-<span class="c1">##                   credibility,\</span>
-<span class="c1">##                   lowLimit,\</span>
-<span class="c1">##                   notHighLimit)</span>
             <span class="k">return</span> <span class="kc">None</span>
         
         <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>

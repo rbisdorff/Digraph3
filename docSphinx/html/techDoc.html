@@ -4172,17 +4172,17 @@ the values observed in the performance Tableau.</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap">
-<code class="descname">showHTMLPerformanceHeatmap</code><span class="sig-paren">(</span><em>actionsList=None</em>, <em>criteriaList=None</em>, <em>colorLevels=7</em>, <em>pageTitle=None</em>, <em>ndigits=2</em>, <em>SparseModel=True</em>, <em>minimalComponentSize=1</em>, <em>RankingRule='Copeland'</em>, <em>quantiles=None</em>, <em>strategy='average'</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.showHTMLPerformanceHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showHTMLPerformanceHeatmap</code><span class="sig-paren">(</span><em>actionsList=None</em>, <em>criteriaList=None</em>, <em>colorLevels=7</em>, <em>pageTitle=None</em>, <em>ndigits=2</em>, <em>SparseModel=False</em>, <em>minimalComponentSize=1</em>, <em>RankingRule='Copeland'</em>, <em>quantiles=None</em>, <em>strategy='average'</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.showHTMLPerformanceHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
 <dd><p>shows the html heatmap version of the performance tableau in a browser window
 (see perfTabs.htmlPerformanceHeatMap() method ).</p>
 <p><strong>Parameters</strong>:</p>
 <blockquote>
 <div><ul class="simple">
-<li><em>actionsList</em> and <em>criteriaList</em>, if provided,  give the possibility to show partial performance tableaux.</li>
+<li><em>actionsList</em> and <em>criteriaList</em>, if provided,  give the possibility to show the decision alternatives, resp. criteria, in a given ordering.</li>
 <li><em>ndigits</em> = 0 may be used to show integer evaluation values.</li>
 <li>If no <em>actionsList</em> is provided, the decision actions are ordered from the best to the worst. This
-ranking is obtained by default with a sparse <em>PreRankedOutrankingDigraph</em> construction.
-A standard <em>BipolarOutrankingDigraph</em> is used instead when the <em>SparseModel</em> flag is put to <em>False</em>.</li>
+ranking is obtained with a sparse <em>PreRankedOutrankingDigraph</em> construction .when the <em>SparseModel</em> flag is put to <em>True</em>.
+By default, a standard <em>BipolarOutrankingDigraph</em> is used instead.</li>
 <li>The <em>minimalComponentSize</em> allows to control the fill rate of the pre-ranked model.
 If <em>minimalComponentSize</em> = <em>n</em> (the number of decision actions) both the pre-ranked model will be
 in fact equivalent to the standard model.</li>

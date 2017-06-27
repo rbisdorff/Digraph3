@@ -2174,7 +2174,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                    colorLevels=7,
                                    pageTitle=None,
                                    ndigits=2,
-                                   SparseModel=True,
+                                   SparseModel=False,
                                    minimalComponentSize=1,
                                    RankingRule='Copeland',
                                    quantiles=None,
@@ -2189,11 +2189,11 @@ The performance evaluations of each decision alternative on each criterion are g
 
         **Parameters**:
 
-              - *actionsList* and *criteriaList*, if provided,  give the possibility to show partial performance tableaux.
+              - *actionsList* and *criteriaList*, if provided,  give the possibility to show the decision alternatives, resp. criteria, in a given ordering.
               - *ndigits* = 0 may be used to show integer evaluation values.
               - If no *actionsList* is provided, the decision actions are ordered from the best to the worst. This
-                ranking is obtained by default with a sparse *PreRankedOutrankingDigraph* construction.
-                A standard *BipolarOutrankingDigraph* is used instead when the *SparseModel* flag is put to *False*.
+                ranking is obtained with a sparse *PreRankedOutrankingDigraph* construction .when the *SparseModel* flag is put to *True*.
+                By default, a standard *BipolarOutrankingDigraph* is used instead.
               - The *minimalComponentSize* allows to control the fill rate of the pre-ranked model.
                 If *minimalComponentSize* = *n* (the number of decision actions) both the pre-ranked model will be
                 in fact equivalent to the standard model.
@@ -7042,7 +7042,7 @@ if __name__ == "__main__":
                                    Debug=False,
                                    missingDataProbability=0.1,
                                    seed=100,Threading=False)
-    t.saveXMCDA2Ext('test')
+    t.saveXMCDA2('test')
     t1 = XMCDA2PerformanceTableau('test')
     t1.showObjectives()
 ##    t = ConstantPerformanceTableau(t,

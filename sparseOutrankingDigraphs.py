@@ -1250,7 +1250,8 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         keys = []
         for c in categories.keys():
         #for c in self.orderedCategoryKeys():
-            print(action, c,sortinga[c])
+            if Debug:
+                print(action, c,sortinga[c])
             Above = False
             if sortinga[c]['categoryMembership'] >= Med:
                 Above = True
@@ -1268,20 +1269,8 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         except:
             credibility = Med
             notHighLimit = Med
-        print('==>>',action,\
-               keys[0],\
-               keys[0],\
-               credibility,\
-               lowLimit,\
-               notHighLimit)
         n = len(keys)
         if n == 0:
-##            print('==>>',action,\
-##                   [],\
-##                   [],\
-##                   credibility,\
-##                   lowLimit,\
-##                   notHighLimit)
             return None
         
         elif n == 1:
