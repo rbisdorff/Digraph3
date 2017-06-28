@@ -2192,8 +2192,8 @@ The performance evaluations of each decision alternative on each criterion are g
               - *actionsList* and *criteriaList*, if provided,  give the possibility to show the decision alternatives, resp. criteria, in a given ordering.
               - *ndigits* = 0 may be used to show integer evaluation values.
               - If no *actionsList* is provided, the decision actions are ordered from the best to the worst. This
-                ranking is obtained with a sparse *PreRankedOutrankingDigraph* construction .when the *SparseModel* flag is put to *True*.
-                By default, a standard *BipolarOutrankingDigraph* is used instead.
+                ranking is obtained by default with the Copeland rule applied on a standard *BipolarOutrankingDigraph*.
+                When the *SparseModel* flag is put to *True*, a sparse *PreRankedOutrankingDigraph* construction is used instead.                
               - The *minimalComponentSize* allows to control the fill rate of the pre-ranked model.
                 If *minimalComponentSize* = *n* (the number of decision actions) both the pre-ranked model will be
                 in fact equivalent to the standard model.

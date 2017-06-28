@@ -2242,8 +2242,8 @@
 <span class="sd">              - *actionsList* and *criteriaList*, if provided,  give the possibility to show the decision alternatives, resp. criteria, in a given ordering.</span>
 <span class="sd">              - *ndigits* = 0 may be used to show integer evaluation values.</span>
 <span class="sd">              - If no *actionsList* is provided, the decision actions are ordered from the best to the worst. This</span>
-<span class="sd">                ranking is obtained with a sparse *PreRankedOutrankingDigraph* construction .when the *SparseModel* flag is put to *True*.</span>
-<span class="sd">                By default, a standard *BipolarOutrankingDigraph* is used instead.</span>
+<span class="sd">                ranking is obtained by default with the Copeland rule applied on a standard *BipolarOutrankingDigraph*.</span>
+<span class="sd">                When the *SparseModel* flag is put to *True*, a sparse *PreRankedOutrankingDigraph* construction is used instead.                </span>
 <span class="sd">              - The *minimalComponentSize* allows to control the fill rate of the pre-ranked model.</span>
 <span class="sd">                If *minimalComponentSize* = *n* (the number of decision actions) both the pre-ranked model will be</span>
 <span class="sd">                in fact equivalent to the standard model.</span>

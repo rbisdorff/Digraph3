@@ -4181,8 +4181,8 @@ the values observed in the performance Tableau.</p>
 <li><em>actionsList</em> and <em>criteriaList</em>, if provided,  give the possibility to show the decision alternatives, resp. criteria, in a given ordering.</li>
 <li><em>ndigits</em> = 0 may be used to show integer evaluation values.</li>
 <li>If no <em>actionsList</em> is provided, the decision actions are ordered from the best to the worst. This
-ranking is obtained with a sparse <em>PreRankedOutrankingDigraph</em> construction .when the <em>SparseModel</em> flag is put to <em>True</em>.
-By default, a standard <em>BipolarOutrankingDigraph</em> is used instead.</li>
+ranking is obtained by default with the Copeland rule applied on a standard <em>BipolarOutrankingDigraph</em>.
+When the <em>SparseModel</em> flag is put to <em>True</em>, a sparse <em>PreRankedOutrankingDigraph</em> construction is used instead.</li>
 <li>The <em>minimalComponentSize</em> allows to control the fill rate of the pre-ranked model.
 If <em>minimalComponentSize</em> = <em>n</em> (the number of decision actions) both the pre-ranked model will be
 in fact equivalent to the standard model.</li>
