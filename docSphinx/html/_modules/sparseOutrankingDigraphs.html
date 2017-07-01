@@ -145,6 +145,72 @@
         <span class="n">deter</span> <span class="o">=</span> <span class="p">(</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">deter</span><span class="p">))</span> <span class="o">/</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">((</span><span class="n">order</span> <span class="o">*</span> <span class="p">(</span><span class="n">order</span><span class="o">-</span><span class="mi">1</span><span class="p">))))</span> <span class="p">)</span>
         <span class="k">return</span> <span class="n">deter</span><span class="o">/</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Max</span><span class="o">-</span><span class="n">Med</span><span class="p">)))</span><span class="o">*</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;100&#39;</span><span class="p">)</span></div>
 
+<div class="viewcode-block" id="SparseOutrankingDigraph.computeOrderCorrelation"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.computeOrderCorrelation">[docs]</a>    <span class="k">def</span> <span class="nf">computeOrderCorrelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders the ordinal correlation K of a sparse digraph instance</span>
+<span class="sd">        when compared with a given linear order (from worst to best) of its actions</span>
+<span class="sd">        </span>
+<span class="sd">        K = sum_{x != y} [ min( max(-self.relation(x,y)),other.relation(x,y), max(self.relation(x,y),-other.relation(x,y)) ]</span>
+
+<span class="sd">        K /= sum_{x!=y} [ min(abs(self.relation(x,y),abs(other.relation(x,y)) ]</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">             Renders a dictionary with the key &#39;correlation&#39; containing the actual bipolar correlation index and the key &#39;determination&#39; containing the minimal determination level D of self and the other relation.</span>
+
+<span class="sd">             D = sum_{x != y} min(abs(self.relation(x,y)),abs(other.relation(x,y)) / n(n-1)</span>
+
+<span class="sd">             where n is the number of actions considered.</span>
+
+<span class="sd">             The correlation index with a completely indeterminate relation</span>
+<span class="sd">             is by convention 0.0 at determination level 0.0 .</span>
+
+<span class="sd">        .. warning::</span>
+
+<span class="sd">             self must be a normalized outranking digraph instance !</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">selfMax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">selfMax</span> <span class="o">!=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: self&#39;s valuationdomain  must be normalized !&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+        <span class="n">corrSum</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
+        <span class="n">determSum</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">order</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="n">order</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="c1"># x &lt; y</span>
+                <span class="n">selfRelation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+                <span class="n">otherRelation</span> <span class="o">=</span> <span class="o">-</span><span class="n">selfMax</span>
+                <span class="n">corr</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span> <span class="nb">max</span><span class="p">(</span><span class="o">-</span><span class="n">selfRelation</span><span class="p">,</span><span class="n">otherRelation</span><span class="p">),</span>\
+                            <span class="nb">max</span><span class="p">(</span><span class="n">selfRelation</span><span class="p">,</span><span class="o">-</span><span class="n">otherRelation</span><span class="p">)</span> <span class="p">)</span>
+                <span class="n">corrSum</span> <span class="o">+=</span> <span class="n">corr</span>
+                <span class="n">determ</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span> <span class="nb">abs</span><span class="p">(</span><span class="n">selfRelation</span><span class="p">),</span><span class="nb">abs</span><span class="p">(</span><span class="n">otherRelation</span><span class="p">)</span> <span class="p">)</span>
+                <span class="n">determSum</span> <span class="o">+=</span> <span class="n">determ</span>
+                <span class="c1"># y &gt; x</span>
+                <span class="n">selfRelation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+                <span class="n">otherRelation</span> <span class="o">=</span> <span class="n">selfMax</span>
+                <span class="n">corr</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span> <span class="nb">max</span><span class="p">(</span><span class="o">-</span><span class="n">selfRelation</span><span class="p">,</span><span class="n">otherRelation</span><span class="p">),</span>\
+                            <span class="nb">max</span><span class="p">(</span><span class="n">selfRelation</span><span class="p">,</span><span class="o">-</span><span class="n">otherRelation</span><span class="p">)</span> <span class="p">)</span>
+                <span class="n">corrSum</span> <span class="o">+=</span> <span class="n">corr</span>
+                <span class="n">determ</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span> <span class="nb">abs</span><span class="p">(</span><span class="n">selfRelation</span><span class="p">),</span><span class="nb">abs</span><span class="p">(</span><span class="n">otherRelation</span><span class="p">)</span> <span class="p">)</span>
+                <span class="n">determSum</span> <span class="o">+=</span> <span class="n">determ</span>
+
+        <span class="k">if</span> <span class="n">determSum</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">correlation</span> <span class="o">=</span> <span class="n">corrSum</span> <span class="o">/</span> <span class="n">determSum</span>
+            <span class="n">n2</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span>
+            <span class="n">determination</span> <span class="o">=</span> <span class="n">determSum</span> <span class="o">/</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n2</span><span class="p">))</span>
+            <span class="n">determination</span> <span class="o">/=</span> <span class="n">selfMax</span>
+            
+            <span class="k">return</span> <span class="p">{</span> <span class="s1">&#39;correlation&#39;</span><span class="p">:</span> <span class="n">correlation</span><span class="p">,</span>\
+                     <span class="s1">&#39;determination&#39;</span><span class="p">:</span> <span class="n">determination</span> <span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span> <span class="s1">&#39;correlation&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>\
+                     <span class="s1">&#39;determination&#39;</span><span class="p">:</span> <span class="mf">0.0</span> <span class="p">}</span></div>
+    
 <div class="viewcode-block" id="SparseOutrankingDigraph.sortingRelation"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.sortingRelation">[docs]</a>    <span class="k">def</span> <span class="nf">sortingRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dynamic construction of the quantiles sorting characteristic function *r(x QS y)*.</span>
@@ -2641,8 +2707,9 @@
     
     <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">XMCDA2PerformanceTableau</span><span class="p">(</span><span class="s1">&#39;project_7&#39;</span><span class="p">)</span>
-    <span class="n">tenv</span> <span class="o">=</span> <span class="n">PartialPerformanceTableau</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">objectivesSubset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Env&#39;</span><span class="p">])</span>
+    <span class="n">tenv</span> <span class="o">=</span> <span class="n">PartialPerformanceTableau</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">objectivesSubset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Eco&#39;</span><span class="p">])</span>
     <span class="n">pre</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">tenv</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pre</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="n">pre</span><span class="o">.</span><span class="n">boostedOrder</span><span class="p">))</span>
     <span class="n">tenv</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">()</span>
 <span class="c1">##    MP  = False</span>
 <span class="c1">##    nbrActions=20</span>

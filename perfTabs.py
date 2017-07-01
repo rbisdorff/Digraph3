@@ -2355,7 +2355,10 @@ The performance evaluations of each decision alternative on each criterion are g
                 from outrankingDigraphs import BipolarOutrankingDigraph
                 from linearOrders import NetFlowsOrder
                 g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
-                actionsList = g.computeNetFlowsRanking()
+                if argActionsList == None:
+                    actionsList = g.computeNetFlowsRanking()
+                else:
+                    actionsList = argActionsList
             else:
 ##                if quantiles == None:
 ##                    quantiles = na
@@ -2364,11 +2367,17 @@ The performance evaluations of each decision alternative on each criterion are g
                 g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
                 #actionsList = g.computeNetFlowsRanking()
                 cop = CopelandOrder(g)
-                actionsList = cop.computeRanking()
-
+                if argActionsList == None:
+                    actionsList = cop.computeRanking()
+                else:
+                    actionsList = argActionsList
+        if SparseModel:
+            rankCorrelation = None
+        else:
+            rankCorrelation = g.computeOrderCorrelation(list(reversed(actionsList)))
         if Debug:
             print('1',actionsList)
-       
+            print('2',rankCorrelation)
 
         criteria = self.criteria
         if criteriaList == None:
@@ -2471,7 +2480,9 @@ The performance evaluations of each decision alternative on each criterion are g
         html += '</tr>\n'
         html += '</table>\n'
         if criteriaCorrelation != None:
-            html += '<i>(*) tau: Ordinal (Kendall) correlation between marginal criterion and global ranking relation.</i>\n'
+            html += '<i>(*) tau: Ordinal (Kendall) correlation between marginal criterion and global ranking relation.</i><br/>\n'
+        if rankCorrelation != None:
+            html += '<i>Ordinal (Kendall) correlation between global ranking and outranking relation: %.2f.</i><br/>\n' % (rankCorrelation['correlation'])
         html += '</body></html>'
         return html
 
@@ -7036,7 +7047,7 @@ if __name__ == "__main__":
 ##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
     t = RandomCBPerformanceTableau(numberOfCriteria=13,
-                                   numberOfActions=30,
+                                   numberOfActions=40,
                                    weightDistribution='equiobjectives',
                                    integerWeights=True,
                                    Debug=False,
@@ -7045,6 +7056,7 @@ if __name__ == "__main__":
     t.saveXMCDA2('test')
     t1 = XMCDA2PerformanceTableau('test')
     t1.showObjectives()
+    t1.showHTMLPerformanceHeatmap(Correlations=True,SparseModel=False)
 ##    t = ConstantPerformanceTableau(t,
 ##                                   actionsSubset=['a01','a02','a03'],
 ##                                   criteriaSubset=['g01','g02','g03'],

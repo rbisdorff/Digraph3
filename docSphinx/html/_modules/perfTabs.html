@@ -2405,7 +2405,10 @@
                 <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">BipolarOutrankingDigraph</span>
                 <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="k">import</span> <span class="n">NetFlowsOrder</span>
                 <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">argActionsList</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-                <span class="n">actionsList</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">argActionsList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">actionsList</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">actionsList</span> <span class="o">=</span> <span class="n">argActionsList</span>
             <span class="k">else</span><span class="p">:</span>
 <span class="c1">##                if quantiles == None:</span>
 <span class="c1">##                    quantiles = na</span>
@@ -2414,11 +2417,17 @@
                 <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">argActionsList</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
                 <span class="c1">#actionsList = g.computeNetFlowsRanking()</span>
                 <span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-                <span class="n">actionsList</span> <span class="o">=</span> <span class="n">cop</span><span class="o">.</span><span class="n">computeRanking</span><span class="p">()</span>
-
+                <span class="k">if</span> <span class="n">argActionsList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">actionsList</span> <span class="o">=</span> <span class="n">cop</span><span class="o">.</span><span class="n">computeRanking</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">actionsList</span> <span class="o">=</span> <span class="n">argActionsList</span>
+        <span class="k">if</span> <span class="n">SparseModel</span><span class="p">:</span>
+            <span class="n">rankCorrelation</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rankCorrelation</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)))</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">actionsList</span><span class="p">)</span>
-       
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="n">rankCorrelation</span><span class="p">)</span>
 
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="k">if</span> <span class="n">criteriaList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
@@ -2521,7 +2530,9 @@
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="k">if</span> <span class="n">criteriaCorrelation</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;i&gt;(*) tau: Ordinal (Kendall) correlation between marginal criterion and global ranking relation.&lt;/i&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;i&gt;(*) tau: Ordinal (Kendall) correlation between marginal criterion and global ranking relation.&lt;/i&gt;&lt;br/&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">if</span> <span class="n">rankCorrelation</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;i&gt;Ordinal (Kendall) correlation between global ranking and outranking relation: </span><span class="si">%.2f</span><span class="s1">.&lt;/i&gt;&lt;br/&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">rankCorrelation</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">])</span>
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/body&gt;&lt;/html&gt;&#39;</span>
         <span class="k">return</span> <span class="n">html</span></div>
 
@@ -7086,7 +7097,7 @@
 <span class="c1">##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=(&#39;triangular&#39;,30.0,0.7))</span>
     <span class="c1">## t.showStatistics()</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
-                                   <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+                                   <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
                                    <span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span>
                                    <span class="n">integerWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                    <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -7095,6 +7106,7 @@
     <span class="n">t</span><span class="o">.</span><span class="n">saveXMCDA2</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
     <span class="n">t1</span> <span class="o">=</span> <span class="n">XMCDA2PerformanceTableau</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
     <span class="n">t1</span><span class="o">.</span><span class="n">showObjectives</span><span class="p">()</span>
+    <span class="n">t1</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">SparseModel</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="c1">##    t = ConstantPerformanceTableau(t,</span>
 <span class="c1">##                                   actionsSubset=[&#39;a01&#39;,&#39;a02&#39;,&#39;a03&#39;],</span>
 <span class="c1">##                                   criteriaSubset=[&#39;g01&#39;,&#39;g02&#39;,&#39;g03&#39;],</span>
