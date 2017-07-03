@@ -6811,15 +6811,17 @@ and restricted linear ballots</p>
 <dl class="method">
 <dt id="votingDigraphs.LinearVotingProfile.save2PerfTab">
 <code class="descname">save2PerfTab</code><span class="sig-paren">(</span><em>fileName='votingPerfTab'</em>, <em>isDecimal=True</em>, <em>valueDigits=2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#LinearVotingProfile.save2PerfTab"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.LinearVotingProfile.save2PerfTab" title="Permalink to this definition">¶</a></dt>
-<dd><p>Persistant storage of a linear voring as a Performance Tableaux.</p>
+<dd><p>Persistant storage of a linear voting profile in the format of a rank performance Tableau.
+For each voter <em>v</em>, the rank performance of candidate <em>x</em> corresponds to:</p>
+<p>number of candidates - linearProfile[v].index(x)</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="votingDigraphs.LinearVotingProfile.showHTMLVotingHeatmap">
 <code class="descname">showHTMLVotingHeatmap</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>actionsList=None</em>, <em>SparseModel=False</em>, <em>minimalComponentSize=1</em>, <em>RankingRule='Copeland'</em>, <em>quantiles=None</em>, <em>strategy='average'</em>, <em>ndigits=0</em>, <em>colorLevels=None</em>, <em>pageTitle='Voting Heatmap'</em>, <em>Correlations=True</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#LinearVotingProfile.showHTMLVotingHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.LinearVotingProfile.showHTMLVotingHeatmap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show the linear voting profile as a rank performance heatmap.
-The linear voting profile is first saved to a stored Performance Tableau.
-(see perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap() )</p>
+The linear voting profile is previously saved to a stored Performance Tableau.</p>
+<p>(see perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap() )</p>
 </dd></dl>
 
 <dl class="method">

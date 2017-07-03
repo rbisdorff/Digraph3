@@ -51,7 +51,7 @@
 <span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="c1"># Python 3 implementation of voting digraphs</span>
 <span class="c1"># Refactored from revision 1.549 of the digraphs module</span>
-<span class="c1"># Current revision $Revision: 2154 $</span>
+<span class="c1"># Current revision $Revision: 2234 $</span>
 <span class="c1"># Copyright (C) 2011  Raymond Bisdorff</span>
 <span class="c1">#</span>
 <span class="c1">#    This program is free software; you can redistribute it and/or modify</span>
@@ -488,7 +488,10 @@
 
 <div class="viewcode-block" id="LinearVotingProfile.save2PerfTab"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.LinearVotingProfile.save2PerfTab">[docs]</a>    <span class="k">def</span> <span class="nf">save2PerfTab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;votingPerfTab&#39;</span><span class="p">,</span><span class="n">isDecimal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">valueDigits</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Persistant storage of a linear voring as a Performance Tableaux.</span>
+<span class="sd">        Persistant storage of a linear voting profile in the format of a rank performance Tableau.</span>
+<span class="sd">        For each voter *v*, the rank performance of candidate *x* corresponds to:</span>
+
+<span class="sd">        number of candidates - linearProfile[v].index(x)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*--- Saving as performance tableau in file: &lt;&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.py&gt; ---*&#39;</span><span class="p">)</span>
@@ -543,7 +546,8 @@
                               <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Show the linear voting profile as a rank performance heatmap.</span>
-<span class="sd">        The linear voting profile is first saved to a stored Performance Tableau.</span>
+<span class="sd">        The linear voting profile is previously saved to a stored Performance Tableau.</span>
+<span class="sd">        </span>
 <span class="sd">        (see perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap() )</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">tempfile</span> <span class="k">import</span> <span class="n">mkdtemp</span>
@@ -1188,7 +1192,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;****************************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* Python voting digraphs module                    *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2154 $                                   *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2234 $                                   *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* Copyright (C) 2006-2007 University of Luxembourg *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* The module comes with ABSOLUTELY NO WARRANTY     *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* to the extent permitted by the applicable law.   *&#39;</span><span class="p">)</span>
@@ -1250,7 +1254,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. September 2008               *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2154 $                   *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2234 $                   *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>

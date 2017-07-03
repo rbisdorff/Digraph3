@@ -438,7 +438,10 @@ class LinearVotingProfile(VotingProfile):
 
     def save2PerfTab(self,fileName='votingPerfTab',isDecimal=True,valueDigits=2):
         """
-        Persistant storage of a linear voring as a Performance Tableaux.
+        Persistant storage of a linear voting profile in the format of a rank performance Tableau.
+        For each voter *v*, the rank performance of candidate *x* corresponds to:
+
+        number of candidates - linearProfile[v].index(x)
         """
         from copy import deepcopy
         print('*--- Saving as performance tableau in file: <' + str(fileName) + '.py> ---*')
@@ -493,7 +496,8 @@ class LinearVotingProfile(VotingProfile):
                               Correlations=True, Threading=False, nbrOfCPUs=1, Debug=False):
         """
         Show the linear voting profile as a rank performance heatmap.
-        The linear voting profile is first saved to a stored Performance Tableau.
+        The linear voting profile is previously saved to a stored Performance Tableau.
+        
         (see perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap() )
         """
         from tempfile import mkdtemp
