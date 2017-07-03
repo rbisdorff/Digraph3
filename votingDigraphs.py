@@ -436,6 +436,80 @@ class LinearVotingProfile(VotingProfile):
                         return [x]
         return remainingCandidates
 
+    def save2PerfTab(self,fileName='votingPerfTab',isDecimal=True,valueDigits=2):
+        """
+        Persistant storage of a linear voring as a Performance Tableaux.
+        """
+        from copy import deepcopy
+        print('*--- Saving as performance tableau in file: <' + str(fileName) + '.py> ---*')
+        objectives = {}
+        fileNameExt = str(fileName)+str('.py')
+        fo = open(fileNameExt, 'w')
+        fo.write('# Saved performance Tableau: \n')
+        fo.write('from decimal import Decimal\n')
+        fo.write('from collections import OrderedDict\n')
+        # actions
+        nc = len(self.candidates)
+        fo.write('actions = OrderedDict([\n')
+        for x in self.candidates:
+            fo.write('(\'%s\', {\n' % str(x))
+            for it in self.candidates[x].keys():
+                fo.write('\'%s\': %s,\n' % (it,repr(self.candidates[x][it])) )
+            fo.write('}),\n')
+        fo.write('])\n')
+        # no objectives
+        fo.write('objectives = OrderedDict()\n')            
+        # criteria
+        fo.write('criteria = OrderedDict([\n') 
+        for g in self.voters:
+            fo.write('(\'%s\', {\n' % str(g))
+            for it in self.voters[g].keys():
+                fo.write('\'%s\': %s,\n' % (it,repr(self.voters[g][it])))
+                fo.write("\'scale\':(Decimal(0),Decimal(%d)),\n" % nc)
+            fo.write('}),\n')
+        fo.write('])\n')
+        # evaluation
+        fo.write('evaluation = {\n')
+        for g in self.voters:
+            fo.write('\'' +str(g)+'\': {\n')
+            for x in self.candidates:
+                if Decimal:
+                    #fo.write('\'' + str(x) + '\':Decimal("' + str(evaluation[g][x]) + '"),\n')
+                    evaluationString = '\'%%s\':Decimal("%%.%df"),\n' % (valueDigits)
+                    xval = nc - self.linearBallot[g].index(x)
+                    fo.write(evaluationString % (x,Decimal(str(xval))))
+                else:
+                    fo.write('\'' + str(x) + '\':' + str(evaluation[g][x]) + ',\n')
+                    
+            fo.write('},\n')
+        fo.write( '}\n')
+        fo.close()
+
+    def showHTMLVotingHeatmap(self,criteriaList=None, actionsList=None,\
+                              SparseModel=False, minimalComponentSize=1, \
+                              RankingRule='Copeland', quantiles=None, strategy='average', \
+                              ndigits=0, colorLevels=None, \
+                              pageTitle='Voting Heatmap', \
+                              Correlations=True, Threading=False, nbrOfCPUs=1, Debug=False):
+        """
+        Show the linear voting profile as a rank performance heatmap.
+        The linear voting profile is first saved to a stored Performance Tableau.
+        (see perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap() )
+        """
+        from tempfile import mkdtemp
+        tempDir = mkdtemp()
+        perfTabFileName = '%s/votingPerfTab' % tempDir
+        self.save2PerfTab(perfTabFileName)
+        t = PerformanceTableau(perfTabFileName)
+        t.showHTMLPerformanceHeatmap(criteriaList=criteriaList, actionsList=actionsList,\
+                              SparseModel=SparseModel, minimalComponentSize=minimalComponentSize, \
+                              RankingRule=RankingRule, quantiles=quantiles, strategy=strategy, \
+                              ndigits=ndigits, colorLevels=None, \
+                              pageTitle='Voting Heatmap', \
+                              Correlations=True, Threading=Threading, nbrOfCPUs=nbrOfCPUs, Debug=Debug)
+    
+
+
     def computeUninominalVotes(self,candidates=None,linearBallot=None):
         """
         compute uninominal votes for each candidate in candidates sublist
@@ -1102,6 +1176,10 @@ if __name__ == "__main__":
     print(lvp.computeRankAnalysis())
     lvp.showRankAnalysisTable(Debug=True)
     print(lvp.computeBordaScores())
+    lvp.save2PerfTab()
+##    t = PerformanceTableau('votingPerfTab')
+##    t.showHTMLPerformanceHeatmap()
+    lvp.showHTMLVotingHeatmap()
     
 ##    print(lvp.computeBordaWinners())
 ##    print(lvp.computeUninominalVotes(lvp.candidates,lvp.linearBallot))
