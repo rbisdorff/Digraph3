@@ -133,7 +133,12 @@ def testLinearVotingBallots():
     c = CondorcetDigraph(lvp)
     c.exportGraphViz()
     print(c.computeChordlessCircuits())
-
+    lvp.save2PerfTab()
+    t = PerformanceTableau('votingPerfTab')
+    from outrankingDigraphs import BipolarOutrankingDigraph
+    g = BipolarOutrankingDigraph(t)
+    lvp.showHTMLVotingHeatmap()
+    
 def testInstantRunoffVoting():
     print('*==> test instant runoff voting ---*')
     lvp = LinearVotingProfile()
