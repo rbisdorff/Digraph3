@@ -488,12 +488,20 @@ class LinearVotingProfile(VotingProfile):
         fo.write( '}\n')
         fo.close()
 
-    def showHTMLVotingHeatmap(self,criteriaList=None, actionsList=None,\
-                              SparseModel=False, minimalComponentSize=1, \
-                              RankingRule='Copeland', quantiles=None, strategy='average', \
-                              ndigits=0, colorLevels=None, \
+    def showHTMLVotingHeatmap(self,criteriaList=None, \
+                              actionsList=None,\
+                              SparseModel=False,\
+                              minimalComponentSize=1, \
+                              RankingRule='Copeland',\
+                              quantiles=None,\
+                              strategy='average', \
+                              ndigits=0,\
+                              colorLevels=None, \
                               pageTitle='Voting Heatmap', \
-                              Correlations=True, Threading=False, nbrOfCPUs=1, Debug=False):
+                              Correlations=True,\
+                              Threading=False,\
+                              nbrOfCPUs=1,\
+                              Debug=False):
         """
         Show the linear voting profile as a rank performance heatmap.
         The linear voting profile is previously saved to a stored Performance Tableau.
@@ -508,7 +516,7 @@ class LinearVotingProfile(VotingProfile):
         t.showHTMLPerformanceHeatmap(criteriaList=criteriaList, actionsList=actionsList,\
                               SparseModel=SparseModel, minimalComponentSize=minimalComponentSize, \
                               RankingRule=RankingRule, quantiles=quantiles, strategy=strategy, \
-                              ndigits=ndigits, colorLevels=None, \
+                              ndigits=ndigits, colorLevels=colorLevels, \
                               pageTitle='Voting Heatmap', \
                               Correlations=True, Threading=Threading, nbrOfCPUs=nbrOfCPUs, Debug=Debug)
     
