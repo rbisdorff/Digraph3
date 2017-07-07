@@ -95,6 +95,72 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         deter = ( Decimal(str(deter)) / Decimal(str((order * (order-1)))) )
         return deter/(Decimal(str(Max-Med)))*Decimal('100')
 
+    def computeOrderCorrelation(self, order, Debug=False):
+        """
+        Renders the ordinal correlation K of a sparse digraph instance
+        when compared with a given linear order (from worst to best) of its actions
+        
+        K = sum_{x != y} [ min( max(-self.relation(x,y)),other.relation(x,y), max(self.relation(x,y),-other.relation(x,y)) ]
+
+        K /= sum_{x!=y} [ min(abs(self.relation(x,y),abs(other.relation(x,y)) ]
+
+        .. note::
+
+             Renders a dictionary with the key 'correlation' containing the actual bipolar correlation index and the key 'determination' containing the minimal determination level D of self and the other relation.
+
+             D = sum_{x != y} min(abs(self.relation(x,y)),abs(other.relation(x,y)) / n(n-1)
+
+             where n is the number of actions considered.
+
+             The correlation index with a completely indeterminate relation
+             is by convention 0.0 at determination level 0.0 .
+
+        .. warning::
+
+             self must be a normalized outranking digraph instance !
+
+        """
+        
+        selfMax = self.valuationdomain['max']
+        if selfMax != Decimal('1'):
+            print("Error: self's valuationdomain  must be normalized !")
+            return
+        n = len(order)
+        corrSum = Decimal('0')
+        determSum = Decimal('0')
+        for i in range(n):
+            x = order[i]
+            for j in range(i+1,n):
+                y = order[j]
+                # x < y
+                selfRelation = self.relation(x,y)
+                otherRelation = -selfMax
+                corr = min( max(-selfRelation,otherRelation),\
+                            max(selfRelation,-otherRelation) )
+                corrSum += corr
+                determ = min( abs(selfRelation),abs(otherRelation) )
+                determSum += determ
+                # y > x
+                selfRelation = self.relation(y,x)
+                otherRelation = selfMax
+                corr = min( max(-selfRelation,otherRelation),\
+                            max(selfRelation,-otherRelation) )
+                corrSum += corr
+                determ = min( abs(selfRelation),abs(otherRelation) )
+                determSum += determ
+
+        if determSum > 0:
+            correlation = corrSum / determSum
+            n2 = (self.order*self.order) - self.order
+            determination = determSum / Decimal(str(n2))
+            determination /= selfMax
+            
+            return { 'correlation': correlation,\
+                     'determination': determination }
+        else:
+            return { 'correlation': 0.0,\
+                     'determination': 0.0 }
+    
     def sortingRelation(self,x,y,Debug=False):
         """
         Dynamic construction of the quantiles sorting characteristic function *r(x QS y)*.
@@ -1250,7 +1316,8 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         keys = []
         for c in categories.keys():
         #for c in self.orderedCategoryKeys():
-            print(action, c,sortinga[c])
+            if Debug:
+                print(action, c,sortinga[c])
             Above = False
             if sortinga[c]['categoryMembership'] >= Med:
                 Above = True
@@ -1268,20 +1335,8 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         except:
             credibility = Med
             notHighLimit = Med
-        print('==>>',action,\
-               keys[0],\
-               keys[0],\
-               credibility,\
-               lowLimit,\
-               notHighLimit)
         n = len(keys)
         if n == 0:
-##            print('==>>',action,\
-##                   [],\
-##                   [],\
-##                   credibility,\
-##                   lowLimit,\
-##                   notHighLimit)
             return None
         
         elif n == 1:
@@ -2602,8 +2657,9 @@ if __name__ == "__main__":
     
     from time import time
     t = XMCDA2PerformanceTableau('project_7')
-    tenv = PartialPerformanceTableau(t,objectivesSubset=['Env'])
+    tenv = PartialPerformanceTableau(t,objectivesSubset=['Eco'])
     pre = PreRankedOutrankingDigraph(tenv,Debug=True)
+    print(pre.computeOrderCorrelation(pre.boostedOrder))
     tenv.showHTMLPerformanceHeatmap()
 ##    MP  = False
 ##    nbrActions=20

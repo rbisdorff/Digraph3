@@ -11,7 +11,7 @@
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/votingDigraphs.py">/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/votingDigraphs.py</a></font></td></tr></table>
     <p><tt>#&nbsp;Python&nbsp;3&nbsp;implementation&nbsp;of&nbsp;voting&nbsp;digraphs<br>
 #&nbsp;Refactored&nbsp;from&nbsp;revision&nbsp;1.549&nbsp;of&nbsp;the&nbsp;digraphs&nbsp;module<br>
-#&nbsp;Current&nbsp;revision&nbsp;$Revision:&nbsp;2154&nbsp;$<br>
+#&nbsp;Current&nbsp;revision&nbsp;$Revision:&nbsp;2239&nbsp;$<br>
 #&nbsp;Copyright&nbsp;(C)&nbsp;2011&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
 #<br>
 #&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify<br>
@@ -100,6 +100,13 @@ Structure::<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'v1'&nbsp;:&nbsp;['b'],<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'v2'&nbsp;:&nbsp;['a','b'],<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;##&nbsp;each&nbsp;specifies&nbsp;the&nbsp;subset&nbsp;-disjoint&nbsp;from&nbsp;the&nbsp;approvalBallot-&nbsp;&nbsp;of&nbsp;candidates&nbsp;he&nbsp;disapproves&nbsp;on<br>
+&nbsp;&nbsp;&nbsp;&nbsp;disApprovalBallot&nbsp;=&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'v1'&nbsp;:&nbsp;['a'],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'v2'&nbsp;:&nbsp;[],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -111,7 +118,7 @@ Structure::<br>
 Methods defined here:<br>
 <dl><dt><a name="ApprovalVotingProfile-__init__"><strong>__init__</strong></a>(self, fileVotingProfile=None, seed=None)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
 
-<dl><dt><a name="ApprovalVotingProfile-computeBallot"><strong>computeBallot</strong></a>(self, approvalEquivalence=False, disapprovalEquivalence=False)</dt><dd><tt>Computes&nbsp;a&nbsp;complete&nbsp;ballot&nbsp;from&nbsp;the&nbsp;approval&nbsp;Ballot.<br>
+<dl><dt><a name="ApprovalVotingProfile-computeBallot"><strong>computeBallot</strong></a>(self)</dt><dd><tt>Computes&nbsp;a&nbsp;complete&nbsp;ballot&nbsp;from&nbsp;the&nbsp;approval&nbsp;Ballot.<br>
 &nbsp;<br>
 Parameters:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;approvalEquivalence=False,&nbsp;disapprovalEquivalence=False.</tt></dd></dl>
@@ -121,7 +128,11 @@ Parameters:<br>
 Parameter:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;of&nbsp;file&nbsp;(without&nbsp;&lt;.py&gt;&nbsp;extension!).</tt></dd></dl>
 
-<dl><dt><a name="ApprovalVotingProfile-showResults"><strong>showResults</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;votes&nbsp;obtained&nbsp;by&nbsp;each&nbsp;candidates.</tt></dd></dl>
+<dl><dt><a name="ApprovalVotingProfile-showApprovalResults"><strong>showApprovalResults</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;approval&nbsp;obtained&nbsp;by&nbsp;each&nbsp;candidates.</tt></dd></dl>
+
+<dl><dt><a name="ApprovalVotingProfile-showDisApprovalResults"><strong>showDisApprovalResults</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;disapprovals&nbsp;obtained&nbsp;by&nbsp;each&nbsp;candidates.</tt></dd></dl>
+
+<dl><dt><a name="ApprovalVotingProfile-showResults"><strong>showResults</strong></a>(self)</dt></dl>
 
 <hr>
 Methods inherited from <a href="votingDigraphs.html#VotingProfile">VotingProfile</a>:<br>
@@ -689,7 +700,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="CondorcetDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="CondorcetDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'max': 1, 'min': -1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="CondorcetDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'max': 1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -1263,6 +1274,16 @@ and&nbsp;restricted&nbsp;linear&nbsp;ballots</tt></dd></dl>
 Parameter:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;of&nbsp;file&nbsp;(without&nbsp;&lt;.py&gt;&nbsp;extension!).</tt></dd></dl>
 
+<dl><dt><a name="LinearVotingProfile-save2PerfTab"><strong>save2PerfTab</strong></a>(self, fileName='votingPerfTab', isDecimal=True, valueDigits=2)</dt><dd><tt>Persistant&nbsp;storage&nbsp;of&nbsp;a&nbsp;linear&nbsp;voting&nbsp;profile&nbsp;in&nbsp;the&nbsp;format&nbsp;of&nbsp;a&nbsp;rank&nbsp;performance&nbsp;Tableau.<br>
+For&nbsp;each&nbsp;voter&nbsp;*v*,&nbsp;the&nbsp;rank&nbsp;performance&nbsp;of&nbsp;candidate&nbsp;*x*&nbsp;corresponds&nbsp;to:<br>
+&nbsp;<br>
+number&nbsp;of&nbsp;candidates&nbsp;-&nbsp;linearProfile[v].index(x)</tt></dd></dl>
+
+<dl><dt><a name="LinearVotingProfile-showHTMLVotingHeatmap"><strong>showHTMLVotingHeatmap</strong></a>(self, criteriaList=None, actionsList=None, SparseModel=False, minimalComponentSize=1, RankingRule='Copeland', quantiles=None, strategy='average', ndigits=0, colorLevels=None, pageTitle='Voting Heatmap', Correlations=True, Threading=False, nbrOfCPUs=1, Debug=False)</dt><dd><tt>Show&nbsp;the&nbsp;linear&nbsp;voting&nbsp;profile&nbsp;as&nbsp;a&nbsp;rank&nbsp;performance&nbsp;heatmap.<br>
+The&nbsp;linear&nbsp;voting&nbsp;profile&nbsp;is&nbsp;previously&nbsp;saved&nbsp;to&nbsp;a&nbsp;stored&nbsp;Performance&nbsp;Tableau.<br>
+&nbsp;<br>
+(see&nbsp;perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap()&nbsp;)</tt></dd></dl>
+
 <dl><dt><a name="LinearVotingProfile-showLinearBallots"><strong>showLinearBallots</strong></a>(self)</dt><dd><tt>show&nbsp;the&nbsp;linear&nbsp;ballots</tt></dd></dl>
 
 <dl><dt><a name="LinearVotingProfile-showRankAnalysisTable"><strong>showRankAnalysisTable</strong></a>(self, Sorted=True, ndigits=0, Debug=False)</dt><dd><tt>Print&nbsp;the&nbsp;rank&nbsp;analysis&nbsp;tableau.<br>
@@ -1310,9 +1331,11 @@ Methods defined here:<br>
 
 <dl><dt><a name="RandomApprovalVotingProfile-generateRandomApprovalBallot"><strong>generateRandomApprovalBallot</strong></a>(self, minSizeOfBallot, maxSizeOfBallot, seed=None)</dt><dd><tt>Renders&nbsp;a&nbsp;randomly&nbsp;generated&nbsp;approval&nbsp;ballot.</tt></dd></dl>
 
+<dl><dt><a name="RandomApprovalVotingProfile-generateRandomDisApprovalBallot"><strong>generateRandomDisApprovalBallot</strong></a>(self, minSizeOfBallot, maxSizeOfBallot, seed=None)</dt><dd><tt>Renders&nbsp;a&nbsp;randomly&nbsp;generated&nbsp;approval&nbsp;ballot.</tt></dd></dl>
+
 <hr>
 Methods inherited from <a href="votingDigraphs.html#ApprovalVotingProfile">ApprovalVotingProfile</a>:<br>
-<dl><dt><a name="RandomApprovalVotingProfile-computeBallot"><strong>computeBallot</strong></a>(self, approvalEquivalence=False, disapprovalEquivalence=False)</dt><dd><tt>Computes&nbsp;a&nbsp;complete&nbsp;ballot&nbsp;from&nbsp;the&nbsp;approval&nbsp;Ballot.<br>
+<dl><dt><a name="RandomApprovalVotingProfile-computeBallot"><strong>computeBallot</strong></a>(self)</dt><dd><tt>Computes&nbsp;a&nbsp;complete&nbsp;ballot&nbsp;from&nbsp;the&nbsp;approval&nbsp;Ballot.<br>
 &nbsp;<br>
 Parameters:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;approvalEquivalence=False,&nbsp;disapprovalEquivalence=False.</tt></dd></dl>
@@ -1322,7 +1345,11 @@ Parameters:<br>
 Parameter:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;of&nbsp;file&nbsp;(without&nbsp;&lt;.py&gt;&nbsp;extension!).</tt></dd></dl>
 
-<dl><dt><a name="RandomApprovalVotingProfile-showResults"><strong>showResults</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;votes&nbsp;obtained&nbsp;by&nbsp;each&nbsp;candidates.</tt></dd></dl>
+<dl><dt><a name="RandomApprovalVotingProfile-showApprovalResults"><strong>showApprovalResults</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;approval&nbsp;obtained&nbsp;by&nbsp;each&nbsp;candidates.</tt></dd></dl>
+
+<dl><dt><a name="RandomApprovalVotingProfile-showDisApprovalResults"><strong>showDisApprovalResults</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;disapprovals&nbsp;obtained&nbsp;by&nbsp;each&nbsp;candidates.</tt></dd></dl>
+
+<dl><dt><a name="RandomApprovalVotingProfile-showResults"><strong>showResults</strong></a>(self)</dt></dl>
 
 <hr>
 Methods inherited from <a href="votingDigraphs.html#VotingProfile">VotingProfile</a>:<br>
@@ -1382,6 +1409,16 @@ and&nbsp;restricted&nbsp;linear&nbsp;ballots</tt></dd></dl>
 &nbsp;<br>
 Parameter:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;of&nbsp;file&nbsp;(without&nbsp;&lt;.py&gt;&nbsp;extension!).</tt></dd></dl>
+
+<dl><dt><a name="RandomLinearVotingProfile-save2PerfTab"><strong>save2PerfTab</strong></a>(self, fileName='votingPerfTab', isDecimal=True, valueDigits=2)</dt><dd><tt>Persistant&nbsp;storage&nbsp;of&nbsp;a&nbsp;linear&nbsp;voting&nbsp;profile&nbsp;in&nbsp;the&nbsp;format&nbsp;of&nbsp;a&nbsp;rank&nbsp;performance&nbsp;Tableau.<br>
+For&nbsp;each&nbsp;voter&nbsp;*v*,&nbsp;the&nbsp;rank&nbsp;performance&nbsp;of&nbsp;candidate&nbsp;*x*&nbsp;corresponds&nbsp;to:<br>
+&nbsp;<br>
+number&nbsp;of&nbsp;candidates&nbsp;-&nbsp;linearProfile[v].index(x)</tt></dd></dl>
+
+<dl><dt><a name="RandomLinearVotingProfile-showHTMLVotingHeatmap"><strong>showHTMLVotingHeatmap</strong></a>(self, criteriaList=None, actionsList=None, SparseModel=False, minimalComponentSize=1, RankingRule='Copeland', quantiles=None, strategy='average', ndigits=0, colorLevels=None, pageTitle='Voting Heatmap', Correlations=True, Threading=False, nbrOfCPUs=1, Debug=False)</dt><dd><tt>Show&nbsp;the&nbsp;linear&nbsp;voting&nbsp;profile&nbsp;as&nbsp;a&nbsp;rank&nbsp;performance&nbsp;heatmap.<br>
+The&nbsp;linear&nbsp;voting&nbsp;profile&nbsp;is&nbsp;previously&nbsp;saved&nbsp;to&nbsp;a&nbsp;stored&nbsp;Performance&nbsp;Tableau.<br>
+&nbsp;<br>
+(see&nbsp;perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap()&nbsp;)</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearVotingProfile-showLinearBallots"><strong>showLinearBallots</strong></a>(self)</dt><dd><tt>show&nbsp;the&nbsp;linear&nbsp;ballots</tt></dd></dl>
 
