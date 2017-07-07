@@ -51,7 +51,7 @@
 <span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="c1"># Python 3 implementation of voting digraphs</span>
 <span class="c1"># Refactored from revision 1.549 of the digraphs module</span>
-<span class="c1"># Current revision $Revision: 2237 $</span>
+<span class="c1"># Current revision $Revision: 2239 $</span>
 <span class="c1"># Copyright (C) 2011  Raymond Bisdorff</span>
 <span class="c1">#</span>
 <span class="c1">#    This program is free software; you can redistribute it and/or modify</span>
@@ -628,6 +628,12 @@
 <span class="sd">            ...</span>
 <span class="sd">            }</span>
 
+<span class="sd">        ## each specifies the subset -disjoint from the approvalBallot-  of candidates he disapproves on</span>
+<span class="sd">        disApprovalBallot = {</span>
+<span class="sd">            &#39;v1&#39; : [&#39;a&#39;],</span>
+<span class="sd">            &#39;v2&#39; : [],</span>
+<span class="sd">            ...</span>
+<span class="sd">            }</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileVotingProfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">fileVotingProfile</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
@@ -640,6 +646,12 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">candidates</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;candidates&#39;</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">voters</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;voters&#39;</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">approvalBallot</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;approvalBallot&#39;</span><span class="p">]</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">disApprovalBallot</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;disApprovalBallot&#39;</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">disApprovalBallot</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">approvalBallot</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">disApprovalBallot</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ballot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeBallot</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">randv</span> <span class="o">=</span> <span class="n">RandomApprovalVotingProfile</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
@@ -648,11 +660,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">voters</span> <span class="o">=</span> <span class="n">randv</span><span class="o">.</span><span class="n">voters</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ballot</span> <span class="o">=</span> <span class="n">randv</span><span class="o">.</span><span class="n">ballot</span>
 
-<div class="viewcode-block" id="ApprovalVotingProfile.showResults"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.ApprovalVotingProfile.showResults">[docs]</a>    <span class="k">def</span> <span class="nf">showResults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ApprovalVotingProfile.showApprovalResults"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.ApprovalVotingProfile.showApprovalResults">[docs]</a>    <span class="k">def</span> <span class="nf">showApprovalResults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Renders the votes obtained by each candidates.</span>
+<span class="sd">        Renders the approval obtained by each candidates.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Voting results&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Approval results&#39;</span><span class="p">)</span>
         <span class="n">candidates</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidates</span><span class="p">]</span>
         <span class="c1">#candidates.sort()</span>
         <span class="n">votesPerCandidate</span> <span class="o">=</span> <span class="p">{}</span>
@@ -669,7 +681,32 @@
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;candidate: </span><span class="si">%s</span><span class="s1"> obtains </span><span class="si">%d</span><span class="s1"> votes&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">))</span></div>
 
-<div class="viewcode-block" id="ApprovalVotingProfile.computeBallot"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.ApprovalVotingProfile.computeBallot">[docs]</a>    <span class="k">def</span> <span class="nf">computeBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">approvalEquivalence</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">disapprovalEquivalence</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="ApprovalVotingProfile.showDisApprovalResults"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.ApprovalVotingProfile.showDisApprovalResults">[docs]</a>    <span class="k">def</span> <span class="nf">showDisApprovalResults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders the disapprovals obtained by each candidates.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Disapproval results&#39;</span><span class="p">)</span>
+        <span class="n">candidates</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidates</span><span class="p">]</span>
+        <span class="c1">#candidates.sort()</span>
+        <span class="n">votesPerCandidate</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
+            <span class="n">votesPerCandidate</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">=</span><span class="mf">0.0</span>
+        <span class="n">ballot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">disApprovalBallot</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">ballot</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">ballot</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+                <span class="n">votesPerCandidate</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">1.0</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">int</span><span class="p">(</span><span class="n">votesPerCandidate</span><span class="p">[</span><span class="n">c</span><span class="p">]),</span><span class="n">c</span><span class="p">))</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;candidate: </span><span class="si">%s</span><span class="s1"> obtains </span><span class="si">%d</span><span class="s1"> votes&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">))</span></div>
+
+<div class="viewcode-block" id="ApprovalVotingProfile.showResults"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.ApprovalVotingProfile.showResults">[docs]</a>    <span class="k">def</span> <span class="nf">showResults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">showApprovalResults</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">showDisApprovalResults</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ApprovalVotingProfile.computeBallot"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.ApprovalVotingProfile.computeBallot">[docs]</a>    <span class="k">def</span> <span class="nf">computeBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes a complete ballot from the approval Ballot.</span>
 
@@ -678,6 +715,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">candidates</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">candidates</span><span class="p">)</span>
         <span class="n">AVballot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">approvalBallot</span>
+        <span class="n">DAVBallot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">disApprovalBallot</span>
         <span class="n">ballot</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">AVballot</span><span class="p">:</span>
             <span class="n">ballot</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
@@ -686,23 +724,66 @@
                 <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
                     <span class="n">ballot</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.0&quot;</span><span class="p">)</span>
             <span class="n">voted</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">AVballot</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
-            <span class="n">non_voted</span> <span class="o">=</span> <span class="n">candidates</span> <span class="o">-</span> <span class="n">voted</span>
-            <span class="k">if</span> <span class="n">approvalEquivalence</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">voted</span><span class="p">:</span>
-                    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">voted</span><span class="p">:</span>
-                        <span class="n">ballot</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;1.0&quot;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">disapprovalEquivalence</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">non_voted</span><span class="p">:</span>
-                    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">non_voted</span><span class="p">:</span>
-                        <span class="n">ballot</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;1.0&quot;</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">voted</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">non_voted</span><span class="p">:</span>
-                    <span class="n">ballot</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;1.0&quot;</span><span class="p">)</span>
-                    <span class="n">ballot</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;-1.0&quot;</span><span class="p">)</span>
+            <span class="n">non_voted</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">DAVBallot</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+            <span class="n">maybe</span> <span class="o">=</span> <span class="n">candidates</span> <span class="o">-</span> <span class="p">(</span><span class="n">voted</span> <span class="o">|</span> <span class="n">non_voted</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
-                <span class="n">ballot</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">x</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;-1.0&quot;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">y</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">voted</span> <span class="ow">and</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">voted</span><span class="p">:</span>
+                            <span class="n">ballot</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.0&quot;</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">voted</span> <span class="ow">and</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">maybe</span><span class="p">:</span>
+                            <span class="n">ballot</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;1.0&quot;</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">voted</span> <span class="ow">and</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">non_voted</span><span class="p">:</span>
+                            <span class="n">ballot</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;1.0&quot;</span><span class="p">)</span>   
+                        <span class="k">elif</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">maybe</span> <span class="ow">and</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">voted</span><span class="p">:</span>
+                            <span class="n">ballot</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;-1.0&quot;</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">maybe</span> <span class="ow">and</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">maybe</span><span class="p">:</span>
+                            <span class="n">ballot</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.0&quot;</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">maybe</span> <span class="ow">and</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">non_voted</span><span class="p">:</span>
+                            <span class="n">ballot</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;1.0&quot;</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">non_voted</span> <span class="ow">and</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">voted</span><span class="p">:</span>
+                            <span class="n">ballot</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;-1.0&quot;</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">non_voted</span> <span class="ow">and</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">maybe</span><span class="p">:</span>
+                            <span class="n">ballot</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;-1.0&quot;</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">non_voted</span> <span class="ow">and</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">non_voted</span><span class="p">:</span>
+                            <span class="n">ballot</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.0&quot;</span><span class="p">)</span>    
         <span class="bp">self</span><span class="o">.</span><span class="n">ballot</span> <span class="o">=</span> <span class="n">ballot</span>
         <span class="k">return</span> <span class="n">ballot</span></div>
+
+<span class="c1">##    def computeBallot(self,approvalEquivalence=False,disapprovalEquivalence=False):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Computes a complete ballot from the approval Ballot.</span>
+<span class="c1">##</span>
+<span class="c1">##        Parameters:</span>
+<span class="c1">##            approvalEquivalence=False, disapprovalEquivalence=False.</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        candidates = set(self.candidates)</span>
+<span class="c1">##        AVballot = self.approvalBallot</span>
+<span class="c1">##        ballot = {}</span>
+<span class="c1">##        for v in AVballot:</span>
+<span class="c1">##            ballot[v] = {}</span>
+<span class="c1">##            for x in candidates:</span>
+<span class="c1">##                ballot[v][x] = {}</span>
+<span class="c1">##                for y in candidates:</span>
+<span class="c1">##                    ballot[v][x][y] = Decimal(&quot;0.0&quot;)</span>
+<span class="c1">##            voted = set(AVballot[v])</span>
+<span class="c1">##            non_voted = candidates - voted</span>
+<span class="c1">##            if approvalEquivalence:</span>
+<span class="c1">##                for x in voted:</span>
+<span class="c1">##                    for y in voted:</span>
+<span class="c1">##                        ballot[v][x][y] = Decimal(&quot;1.0&quot;)</span>
+<span class="c1">##            if disapprovalEquivalence:</span>
+<span class="c1">##                for x in non_voted:</span>
+<span class="c1">##                    for y in non_voted:</span>
+<span class="c1">##                        ballot[v][x][y] = Decimal(&quot;1.0&quot;)</span>
+<span class="c1">##            for x in voted:</span>
+<span class="c1">##                for y in non_voted:</span>
+<span class="c1">##                    ballot[v][x][y] = Decimal(&quot;1.0&quot;)</span>
+<span class="c1">##                    ballot[v][y][x] = Decimal(&quot;-1.0&quot;)</span>
+<span class="c1">##            for x in candidates:</span>
+<span class="c1">##                ballot[v][x][x] = Decimal(&quot;-1.0&quot;)</span>
+<span class="c1">##        self.ballot = ballot</span>
+<span class="c1">##        return ballot</span>
 
 <div class="viewcode-block" id="ApprovalVotingProfile.save"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.ApprovalVotingProfile.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;tempAVprofile&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -770,6 +851,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">candidates</span> <span class="o">=</span> <span class="n">candidates</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">voters</span> <span class="o">=</span> <span class="n">voters</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">approvalBallot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generateRandomApprovalBallot</span><span class="p">(</span><span class="n">minSizeOfBallot</span><span class="p">,</span><span class="n">maxSizeOfBallot</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">disApprovalBallot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generateRandomDisApprovalBallot</span><span class="p">(</span><span class="n">minSizeOfBallot</span><span class="p">,</span><span class="n">maxSizeOfBallot</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ballot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeBallot</span><span class="p">()</span>
 
 <div class="viewcode-block" id="RandomApprovalVotingProfile.generateRandomApprovalBallot"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.RandomApprovalVotingProfile.generateRandomApprovalBallot">[docs]</a>    <span class="k">def</span> <span class="nf">generateRandomApprovalBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">minSizeOfBallot</span><span class="p">,</span><span class="n">maxSizeOfBallot</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -791,7 +873,29 @@
                     <span class="n">bx</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">candidatesList</span><span class="p">)</span>
                     <span class="n">approvalBallot</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bx</span><span class="p">)</span>
                     <span class="n">candidatesList</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">bx</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">approvalBallot</span></div></div>
+        <span class="k">return</span> <span class="n">approvalBallot</span></div>
+
+<div class="viewcode-block" id="RandomApprovalVotingProfile.generateRandomDisApprovalBallot"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.RandomApprovalVotingProfile.generateRandomDisApprovalBallot">[docs]</a>    <span class="k">def</span> <span class="nf">generateRandomDisApprovalBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">minSizeOfBallot</span><span class="p">,</span><span class="n">maxSizeOfBallot</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders a randomly generated approval ballot.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">copy</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="n">disApprovalBallot</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">voters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span>
+        <span class="n">candidates</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidates</span>
+        <span class="n">nc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">candidates</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">voters</span><span class="p">:</span>
+            <span class="n">candidatesList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">candidates</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="n">disApprovalBallot</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">nb</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">minSizeOfBallot</span><span class="p">,</span><span class="n">maxSizeOfBallot</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">candidatesList</span> <span class="o">!=</span> <span class="p">[]:</span>
+                    <span class="n">bx</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">candidatesList</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">bx</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">approvalBallot</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+                        <span class="n">disApprovalBallot</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bx</span><span class="p">)</span>
+                    <span class="n">candidatesList</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">bx</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">disApprovalBallot</span></div></div>
 
 <div class="viewcode-block" id="RandomLinearVotingProfile"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.RandomLinearVotingProfile">[docs]</a><span class="k">class</span> <span class="nc">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">LinearVotingProfile</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -1200,7 +1304,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;****************************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* Python voting digraphs module                    *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2237 $                                   *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2239 $                                   *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* Copyright (C) 2006-2007 University of Luxembourg *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* The module comes with ABSOLUTELY NO WARRANTY     *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* to the extent permitted by the applicable law.   *&#39;</span><span class="p">)</span>
@@ -1227,22 +1331,22 @@
     <span class="c1">## for x in arrowRaynaudRanking:</span>
     <span class="c1">##     print &#39;%s: %d (%.2f)&#39; % (x[1], x[0], aar[x[1]][&#39;majorityMargin&#39;])</span>
 
-    <span class="n">lvp</span> <span class="o">=</span> <span class="n">LinearVotingProfile</span><span class="p">(</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="c1">## lvp = LinearVotingProfile(&#39;templinearprofile&#39;)</span>
-    <span class="n">lvp</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-    <span class="n">lvp1</span> <span class="o">=</span> <span class="n">LinearVotingProfile</span><span class="p">(</span><span class="s1">&#39;templinearprofile&#39;</span><span class="p">)</span>
-    <span class="n">lvp1</span><span class="o">.</span><span class="n">computeBallot</span><span class="p">()</span>
-    <span class="c1">## for x in lvp.voters:</span>
-    <span class="c1">##    print x, lvp.linearBallot[x]</span>
-    <span class="n">lvp</span><span class="o">.</span><span class="n">showLinearBallots</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">lvp</span><span class="o">.</span><span class="n">computeRankAnalysis</span><span class="p">())</span>
-    <span class="n">lvp</span><span class="o">.</span><span class="n">showRankAnalysisTable</span><span class="p">(</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">lvp</span><span class="o">.</span><span class="n">computeBordaScores</span><span class="p">())</span>
-    <span class="n">lvp</span><span class="o">.</span><span class="n">save2PerfTab</span><span class="p">()</span>
-<span class="c1">##    t = PerformanceTableau(&#39;votingPerfTab&#39;)</span>
-<span class="c1">##    t.showHTMLPerformanceHeatmap()</span>
-    <span class="n">lvp</span><span class="o">.</span><span class="n">showHTMLVotingHeatmap</span><span class="p">()</span>
-    
+<span class="c1">##    lvp = LinearVotingProfile(numberOfCandidates=5,numberOfVoters=9,seed=1)</span>
+<span class="c1">##    ## lvp = LinearVotingProfile(&#39;templinearprofile&#39;)</span>
+<span class="c1">##    lvp.save()</span>
+<span class="c1">##    lvp1 = LinearVotingProfile(&#39;templinearprofile&#39;)</span>
+<span class="c1">##    lvp1.computeBallot()</span>
+<span class="c1">##    ## for x in lvp.voters:</span>
+<span class="c1">##    ##    print x, lvp.linearBallot[x]</span>
+<span class="c1">##    lvp.showLinearBallots()</span>
+<span class="c1">##    print(lvp.computeRankAnalysis())</span>
+<span class="c1">##    lvp.showRankAnalysisTable(Debug=True)</span>
+<span class="c1">##    print(lvp.computeBordaScores())</span>
+<span class="c1">##    lvp.save2PerfTab()</span>
+<span class="c1">####    t = PerformanceTableau(&#39;votingPerfTab&#39;)</span>
+<span class="c1">####    t.showHTMLPerformanceHeatmap()</span>
+<span class="c1">##    lvp.showHTMLVotingHeatmap()</span>
+<span class="c1">##    </span>
 <span class="c1">##    print(lvp.computeBordaWinners())</span>
 <span class="c1">##    print(lvp.computeUninominalVotes(lvp.candidates,lvp.linearBallot))</span>
 <span class="c1">##    print(lvp.computeInstantRunoffWinner(Comments=True))</span>
@@ -1256,13 +1360,16 @@
 <span class="c1">##    c.recodeValuation(-m,m)</span>
 <span class="c1">##    c.showRelationTable()</span>
 
+    <span class="n">av</span> <span class="o">=</span> <span class="n">ApprovalVotingProfile</span><span class="p">(</span><span class="s1">&#39;approvalInvitation&#39;</span><span class="p">)</span>
+    
+
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enjoy !&#39;</span><span class="p">)</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. September 2008               *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2237 $                   *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2239 $                   *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>

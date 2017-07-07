@@ -6586,11 +6586,18 @@ the high category limit.</p>
     <span class="s1">&#39;v2&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">],</span>
     <span class="o">...</span>
     <span class="p">}</span>
+
+<span class="c1">## each specifies the subset -disjoint from the approvalBallot-  of candidates he disapproves on</span>
+<span class="n">disApprovalBallot</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;v1&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;v2&#39;</span> <span class="p">:</span> <span class="p">[],</span>
+    <span class="o">...</span>
+    <span class="p">}</span>
 </pre></div>
 </div>
 <dl class="method">
 <dt id="votingDigraphs.ApprovalVotingProfile.computeBallot">
-<code class="descname">computeBallot</code><span class="sig-paren">(</span><em>approvalEquivalence=False</em>, <em>disapprovalEquivalence=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#ApprovalVotingProfile.computeBallot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.ApprovalVotingProfile.computeBallot" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeBallot</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#ApprovalVotingProfile.computeBallot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.ApprovalVotingProfile.computeBallot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes a complete ballot from the approval Ballot.</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -6609,10 +6616,21 @@ the high category limit.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="votingDigraphs.ApprovalVotingProfile.showApprovalResults">
+<code class="descname">showApprovalResults</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#ApprovalVotingProfile.showApprovalResults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.ApprovalVotingProfile.showApprovalResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the approval obtained by each candidates.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="votingDigraphs.ApprovalVotingProfile.showDisApprovalResults">
+<code class="descname">showDisApprovalResults</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#ApprovalVotingProfile.showDisApprovalResults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.ApprovalVotingProfile.showDisApprovalResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the disapprovals obtained by each candidates.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="votingDigraphs.ApprovalVotingProfile.showResults">
 <code class="descname">showResults</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#ApprovalVotingProfile.showResults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.ApprovalVotingProfile.showResults" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the votes obtained by each candidates.</p>
-</dd></dl>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -6850,6 +6868,12 @@ to format the decimal precision of the numerical output.</p>
 <dl class="method">
 <dt id="votingDigraphs.RandomApprovalVotingProfile.generateRandomApprovalBallot">
 <code class="descname">generateRandomApprovalBallot</code><span class="sig-paren">(</span><em>minSizeOfBallot</em>, <em>maxSizeOfBallot</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#RandomApprovalVotingProfile.generateRandomApprovalBallot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.RandomApprovalVotingProfile.generateRandomApprovalBallot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a randomly generated approval ballot.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="votingDigraphs.RandomApprovalVotingProfile.generateRandomDisApprovalBallot">
+<code class="descname">generateRandomDisApprovalBallot</code><span class="sig-paren">(</span><em>minSizeOfBallot</em>, <em>maxSizeOfBallot</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#RandomApprovalVotingProfile.generateRandomDisApprovalBallot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.RandomApprovalVotingProfile.generateRandomDisApprovalBallot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders a randomly generated approval ballot.</p>
 </dd></dl>
 
