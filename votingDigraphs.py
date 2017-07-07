@@ -578,6 +578,12 @@ class ApprovalVotingProfile(VotingProfile):
             ...
             }
 
+        ## each specifies the subset -disjoint from the approvalBallot-  of candidates he disapproves on
+        disApprovalBallot = {
+            'v1' : ['a'],
+            'v2' : [],
+            ...
+            }
     """
     def __init__(self,fileVotingProfile=None,seed=None):
         if fileVotingProfile != None:
@@ -590,6 +596,12 @@ class ApprovalVotingProfile(VotingProfile):
             self.candidates = argDict['candidates']
             self.voters = argDict['voters']
             self.approvalBallot = argDict['approvalBallot']
+            try:
+                self.disApprovalBallot = argDict['disApprovalBallot']
+            except:
+                self.disApprovalBallot = {}
+                for v in self.approvalBallot:
+                    self.disApprovalBallot[v] = []
             self.ballot = self.computeBallot()
         else:
             randv = RandomApprovalVotingProfile(seed=seed)
@@ -598,11 +610,11 @@ class ApprovalVotingProfile(VotingProfile):
             self.voters = randv.voters
             self.ballot = randv.ballot
 
-    def showResults(self):
+    def showApprovalResults(self):
         """
-        Renders the votes obtained by each candidates.
+        Renders the approval obtained by each candidates.
         """
-        print('Voting results')
+        print('Approval results')
         candidates = [x for x in self.candidates]
         #candidates.sort()
         votesPerCandidate = {}
@@ -619,7 +631,32 @@ class ApprovalVotingProfile(VotingProfile):
         for c in results:
             print('candidate: %s obtains %d votes' % (c[1],c[0] ))
 
-    def computeBallot(self,approvalEquivalence=False,disapprovalEquivalence=False):
+    def showDisApprovalResults(self):
+        """
+        Renders the disapprovals obtained by each candidates.
+        """
+        print('Disapproval results')
+        candidates = [x for x in self.candidates]
+        #candidates.sort()
+        votesPerCandidate = {}
+        for c in candidates:
+            votesPerCandidate[c]=0.0
+        ballot = self.disApprovalBallot
+        for v in ballot:
+            for c in ballot[v]:
+                votesPerCandidate[c] += 1.0
+        results = []
+        for c in candidates:
+            results.append((int(votesPerCandidate[c]),c))
+        results.sort(reverse=True)
+        for c in results:
+            print('candidate: %s obtains %d votes' % (c[1],c[0] ))
+
+    def showResults(self):
+        self.showApprovalResults()
+        self.showDisApprovalResults()
+
+    def computeBallot(self):
         """
         Computes a complete ballot from the approval Ballot.
 
@@ -628,6 +665,7 @@ class ApprovalVotingProfile(VotingProfile):
         """
         candidates = set(self.candidates)
         AVballot = self.approvalBallot
+        DAVBallot = self.disApprovalBallot
         ballot = {}
         for v in AVballot:
             ballot[v] = {}
@@ -636,23 +674,66 @@ class ApprovalVotingProfile(VotingProfile):
                 for y in candidates:
                     ballot[v][x][y] = Decimal("0.0")
             voted = set(AVballot[v])
-            non_voted = candidates - voted
-            if approvalEquivalence:
-                for x in voted:
-                    for y in voted:
-                        ballot[v][x][y] = Decimal("1.0")
-            if disapprovalEquivalence:
-                for x in non_voted:
-                    for y in non_voted:
-                        ballot[v][x][y] = Decimal("1.0")
-            for x in voted:
-                for y in non_voted:
-                    ballot[v][x][y] = Decimal("1.0")
-                    ballot[v][y][x] = Decimal("-1.0")
+            non_voted = set(DAVBallot[v])
+            maybe = candidates - (voted | non_voted)
             for x in candidates:
-                ballot[v][x][x] = Decimal("-1.0")
+                for y in candidates:
+                    if x != y:
+                        if x in voted and y in voted:
+                            ballot[v][x][y] = Decimal("0.0")
+                        elif x in voted and y in maybe:
+                            ballot[v][x][y] = Decimal("1.0")
+                        elif x in voted and y in non_voted:
+                            ballot[v][x][y] = Decimal("1.0")   
+                        elif x in maybe and y in voted:
+                            ballot[v][x][y] = Decimal("-1.0")
+                        elif x in maybe and y in maybe:
+                            ballot[v][x][y] = Decimal("0.0")
+                        elif x in maybe and y in non_voted:
+                            ballot[v][x][y] = Decimal("1.0")
+                        elif x in non_voted and y in voted:
+                            ballot[v][x][y] = Decimal("-1.0")
+                        elif x in non_voted and y in maybe:
+                            ballot[v][x][y] = Decimal("-1.0")
+                        elif x in non_voted and y in non_voted:
+                            ballot[v][x][y] = Decimal("0.0")    
         self.ballot = ballot
         return ballot
+
+##    def computeBallot(self,approvalEquivalence=False,disapprovalEquivalence=False):
+##        """
+##        Computes a complete ballot from the approval Ballot.
+##
+##        Parameters:
+##            approvalEquivalence=False, disapprovalEquivalence=False.
+##        """
+##        candidates = set(self.candidates)
+##        AVballot = self.approvalBallot
+##        ballot = {}
+##        for v in AVballot:
+##            ballot[v] = {}
+##            for x in candidates:
+##                ballot[v][x] = {}
+##                for y in candidates:
+##                    ballot[v][x][y] = Decimal("0.0")
+##            voted = set(AVballot[v])
+##            non_voted = candidates - voted
+##            if approvalEquivalence:
+##                for x in voted:
+##                    for y in voted:
+##                        ballot[v][x][y] = Decimal("1.0")
+##            if disapprovalEquivalence:
+##                for x in non_voted:
+##                    for y in non_voted:
+##                        ballot[v][x][y] = Decimal("1.0")
+##            for x in voted:
+##                for y in non_voted:
+##                    ballot[v][x][y] = Decimal("1.0")
+##                    ballot[v][y][x] = Decimal("-1.0")
+##            for x in candidates:
+##                ballot[v][x][x] = Decimal("-1.0")
+##        self.ballot = ballot
+##        return ballot
 
     def save(self,name='tempAVprofile'):
         """
@@ -720,6 +801,7 @@ class RandomApprovalVotingProfile(ApprovalVotingProfile):
         self.candidates = candidates
         self.voters = voters
         self.approvalBallot = self.generateRandomApprovalBallot(minSizeOfBallot,maxSizeOfBallot,seed=seed)
+        self.disApprovalBallot = self.generateRandomDisApprovalBallot(minSizeOfBallot,maxSizeOfBallot,seed=seed)
         self.ballot = self.computeBallot()
 
     def generateRandomApprovalBallot(self,minSizeOfBallot,maxSizeOfBallot,seed=None):
@@ -742,6 +824,28 @@ class RandomApprovalVotingProfile(ApprovalVotingProfile):
                     approvalBallot[v].append(bx)
                     candidatesList.remove(bx)
         return approvalBallot
+
+    def generateRandomDisApprovalBallot(self,minSizeOfBallot,maxSizeOfBallot,seed=None):
+        """
+        Renders a randomly generated approval ballot.
+        """
+        import random,copy
+        random.seed(seed)
+        disApprovalBallot = {}
+        voters = self.voters
+        candidates = self.candidates
+        nc = len(candidates)
+        for v in voters:
+            candidatesList = list(candidates.keys())
+            disApprovalBallot[v] = []
+            nb = random.randint(minSizeOfBallot,maxSizeOfBallot)
+            for x in range(nb):
+                if candidatesList != []:
+                    bx = random.choice(candidatesList)
+                    if bx not in self.approvalBallot[v]:
+                        disApprovalBallot[v].append(bx)
+                    candidatesList.remove(bx)
+        return disApprovalBallot
 
 class RandomLinearVotingProfile(LinearVotingProfile):
     """
@@ -1177,22 +1281,22 @@ if __name__ == "__main__":
     ## for x in arrowRaynaudRanking:
     ##     print '%s: %d (%.2f)' % (x[1], x[0], aar[x[1]]['majorityMargin'])
 
-    lvp = LinearVotingProfile(numberOfCandidates=5,numberOfVoters=9,seed=1)
-    ## lvp = LinearVotingProfile('templinearprofile')
-    lvp.save()
-    lvp1 = LinearVotingProfile('templinearprofile')
-    lvp1.computeBallot()
-    ## for x in lvp.voters:
-    ##    print x, lvp.linearBallot[x]
-    lvp.showLinearBallots()
-    print(lvp.computeRankAnalysis())
-    lvp.showRankAnalysisTable(Debug=True)
-    print(lvp.computeBordaScores())
-    lvp.save2PerfTab()
-##    t = PerformanceTableau('votingPerfTab')
-##    t.showHTMLPerformanceHeatmap()
-    lvp.showHTMLVotingHeatmap()
-    
+##    lvp = LinearVotingProfile(numberOfCandidates=5,numberOfVoters=9,seed=1)
+##    ## lvp = LinearVotingProfile('templinearprofile')
+##    lvp.save()
+##    lvp1 = LinearVotingProfile('templinearprofile')
+##    lvp1.computeBallot()
+##    ## for x in lvp.voters:
+##    ##    print x, lvp.linearBallot[x]
+##    lvp.showLinearBallots()
+##    print(lvp.computeRankAnalysis())
+##    lvp.showRankAnalysisTable(Debug=True)
+##    print(lvp.computeBordaScores())
+##    lvp.save2PerfTab()
+####    t = PerformanceTableau('votingPerfTab')
+####    t.showHTMLPerformanceHeatmap()
+##    lvp.showHTMLVotingHeatmap()
+##    
 ##    print(lvp.computeBordaWinners())
 ##    print(lvp.computeUninominalVotes(lvp.candidates,lvp.linearBallot))
 ##    print(lvp.computeInstantRunoffWinner(Comments=True))
@@ -1205,6 +1309,9 @@ if __name__ == "__main__":
 ##    m = len(lvp.voters)
 ##    c.recodeValuation(-m,m)
 ##    c.showRelationTable()
+
+    av = ApprovalVotingProfile('approvalInvitation')
+    
 
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')

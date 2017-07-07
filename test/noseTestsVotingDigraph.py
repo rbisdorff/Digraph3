@@ -49,7 +49,7 @@ def testApprovalVotingProfiles():
     g.showPreKernels()
     g.showRubyChoice()
     g.showBadChoices()
-    vt.computeBallot(approvalEquivalence=True,disapprovalEquivalence=True)
+    vt.computeBallot()
     vt.showAll()
     g1 = CondorcetDigraph(vt)
     g1.showStatistics()
