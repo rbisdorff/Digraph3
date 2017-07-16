@@ -773,6 +773,69 @@ class ApprovalVotingProfile(VotingProfile):
         fo.write( '}\n')
         fo.close()
 
+    def save2PerfTab(self,fileName='votingPerfTab',isDecimal=True,valueDigits=2):
+        """
+        Persistant storage of an approval voting profile in the format of a standard performance tableau.
+        For each voter *v*, the performance of candidate *x* corresponds to:
+
+              2 is approved;
+              0, if disapproved;
+              1, otherwise,
+        """
+        from copy import deepcopy
+        print('*--- Saving as performance tableau in file: <' + str(fileName) + '.py> ---*')
+        objectives = {}
+        fileNameExt = str(fileName)+str('.py')
+        fo = open(fileNameExt, 'w')
+        fo.write('# Saved performance Tableau: \n')
+        fo.write('from decimal import Decimal\n')
+        fo.write('from collections import OrderedDict\n')
+        # actions
+        fo.write('actions = OrderedDict([\n')
+        for x in self.candidates:
+            fo.write('(\'%s\', {\n' % str(x))
+            for it in self.candidates[x].keys():
+                fo.write('\'%s\': %s,\n' % (it,repr(self.candidates[x][it])) )
+            fo.write('}),\n')
+        fo.write('])\n')
+        # no objectives
+        fo.write('objectives = OrderedDict()\n')            
+        # criteria
+        fo.write('criteria = OrderedDict([\n') 
+        for g in self.voters:
+            fo.write('(\'%s\', {\n' % str(g))
+            for it in self.voters[g].keys():
+                fo.write('\'%s\': %s,\n' % (it,repr(self.voters[g][it])))
+                fo.write("\'scale\':(Decimal(\'0\'),Decimal(\'2\')),\n")
+            fo.write('}),\n')
+        fo.write('])\n')
+        # evaluation
+        AVballot = self.approvalBallot
+        DAVBallot = self.disApprovalBallot
+
+        fo.write('evaluation = {\n')
+        for g in self.voters:
+            fo.write('\'' +str(g)+'\': {\n')
+            approved = AVballot[g]
+            disapproved = DAVBallot[g]
+            for x in self.candidates:
+                if Decimal:
+                    #fo.write('\'' + str(x) + '\':Decimal("' + str(evaluation[g][x]) + '"),\n')
+                    evaluationString = '\'%%s\':Decimal("%%.%df"),\n' % (valueDigits)
+                    if x in approved:
+                        xval = 2
+                    elif x in disapproved:
+                        xval = 0
+                    else:
+                        xval = 1
+                    fo.write(evaluationString % (x,Decimal(str(xval))))
+                else:
+                    fo.write('\'' + str(x) + '\':' + str(evaluation[g][x]) + ',\n')
+                    
+            fo.write('},\n')
+        fo.write( '}\n')
+        fo.close()
+
 
 class RandomApprovalVotingProfile(ApprovalVotingProfile):
     """
@@ -1310,7 +1373,8 @@ if __name__ == "__main__":
 ##    c.recodeValuation(-m,m)
 ##    c.showRelationTable()
 
-    av = ApprovalVotingProfile('approvalInvitation')
+##    av = ApprovalVotingProfile('approvalInvitation')
+##    av.save2PerfTab()
     
 
     print('*------------------*')
