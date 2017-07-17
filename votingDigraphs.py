@@ -801,18 +801,19 @@ class ApprovalVotingProfile(VotingProfile):
         # no objectives
         fo.write('objectives = OrderedDict()\n')            
         # criteria
+        minScale = 0
+        maxScale = 1
         fo.write('criteria = OrderedDict([\n') 
         for g in self.voters:
             fo.write('(\'%s\', {\n' % str(g))
             for it in self.voters[g].keys():
                 fo.write('\'%s\': %s,\n' % (it,repr(self.voters[g][it])))
-                fo.write("\'scale\':(Decimal(\'0\'),Decimal(\'2\')),\n")
+                fo.write("\'scale\':(Decimal(\'%d\'),Decimal(\'%d\')),\n" % (minScale,maxScale) )
             fo.write('}),\n')
         fo.write('])\n')
         # evaluation
         AVballot = self.approvalBallot
         DAVBallot = self.disApprovalBallot
-
         fo.write('evaluation = {\n')
         for g in self.voters:
             fo.write('\'' +str(g)+'\': {\n')
@@ -823,11 +824,11 @@ class ApprovalVotingProfile(VotingProfile):
                     #fo.write('\'' + str(x) + '\':Decimal("' + str(evaluation[g][x]) + '"),\n')
                     evaluationString = '\'%%s\':Decimal("%%.%df"),\n' % (valueDigits)
                     if x in approved:
-                        xval = 2
+                        xval = maxScale
                     elif x in disapproved:
-                        xval = 0
-                    else:
-                        xval = 1
+                        xval = minScale
+                    else:  # ,issing evaluation
+                        xval = -999
                     fo.write(evaluationString % (x,Decimal(str(xval))))
                 else:
                     fo.write('\'' + str(x) + '\':' + str(evaluation[g][x]) + ',\n')
@@ -1373,8 +1374,11 @@ if __name__ == "__main__":
 ##    c.recodeValuation(-m,m)
 ##    c.showRelationTable()
 
-##    av = ApprovalVotingProfile('approvalInvitation')
-##    av.save2PerfTab()
+    av = ApprovalVotingProfile('approvalInvitation')
+    av.save2PerfTab()
+    t = PerformanceTableau('votingPerfTab')
+    t.showHTMLPerformanceTableau()
+    
     
 
     print('*------------------*')
