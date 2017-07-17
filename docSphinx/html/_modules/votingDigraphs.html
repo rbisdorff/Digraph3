@@ -51,7 +51,7 @@
 <span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="c1"># Python 3 implementation of voting digraphs</span>
 <span class="c1"># Refactored from revision 1.549 of the digraphs module</span>
-<span class="c1"># Current revision $Revision: 2242 $</span>
+<span class="c1"># Current revision $Revision: 2244 $</span>
 <span class="c1"># Copyright (C) 2011  Raymond Bisdorff</span>
 <span class="c1">#</span>
 <span class="c1">#    This program is free software; you can redistribute it and/or modify</span>
@@ -851,18 +851,19 @@
         <span class="c1"># no objectives</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;objectives = OrderedDict()</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>            
         <span class="c1"># criteria</span>
+        <span class="n">minScale</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">maxScale</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;criteria = OrderedDict([</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span> 
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span><span class="p">:</span>
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;(</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">, {</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
             <span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span><span class="p">[</span><span class="n">g</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
                 <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">: </span><span class="si">%s</span><span class="s1">,</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">it</span><span class="p">,</span><span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">voters</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">it</span><span class="p">])))</span>
-                <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&#39;</span><span class="s2">scale</span><span class="se">\&#39;</span><span class="s2">:(Decimal(</span><span class="se">\&#39;</span><span class="s2">0</span><span class="se">\&#39;</span><span class="s2">),Decimal(</span><span class="se">\&#39;</span><span class="s2">2</span><span class="se">\&#39;</span><span class="s2">)),</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&#39;</span><span class="s2">scale</span><span class="se">\&#39;</span><span class="s2">:(Decimal(</span><span class="se">\&#39;</span><span class="si">%d</span><span class="se">\&#39;</span><span class="s2">),Decimal(</span><span class="se">\&#39;</span><span class="si">%d</span><span class="se">\&#39;</span><span class="s2">)),</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">minScale</span><span class="p">,</span><span class="n">maxScale</span><span class="p">)</span> <span class="p">)</span>
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;}),</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;])</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="c1"># evaluation</span>
         <span class="n">AVballot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">approvalBallot</span>
         <span class="n">DAVBallot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">disApprovalBallot</span>
-
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;evaluation = {</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span><span class="p">:</span>
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">g</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">: {</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -873,11 +874,11 @@
                     <span class="c1">#fo.write(&#39;\&#39;&#39; + str(x) + &#39;\&#39;:Decimal(&quot;&#39; + str(evaluation[g][x]) + &#39;&quot;),\n&#39;)</span>
                     <span class="n">evaluationString</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\&#39;</span><span class="si">%%</span><span class="s1">s</span><span class="se">\&#39;</span><span class="s1">:Decimal(&quot;</span><span class="si">%%</span><span class="s1">.</span><span class="si">%d</span><span class="s1">f&quot;),</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">valueDigits</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">approved</span><span class="p">:</span>
-                        <span class="n">xval</span> <span class="o">=</span> <span class="mi">2</span>
+                        <span class="n">xval</span> <span class="o">=</span> <span class="n">maxScale</span>
                     <span class="k">elif</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">disapproved</span><span class="p">:</span>
-                        <span class="n">xval</span> <span class="o">=</span> <span class="mi">0</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">xval</span> <span class="o">=</span> <span class="mi">1</span>
+                        <span class="n">xval</span> <span class="o">=</span> <span class="n">minScale</span>
+                    <span class="k">else</span><span class="p">:</span>  <span class="c1"># ,issing evaluation</span>
+                        <span class="n">xval</span> <span class="o">=</span> <span class="o">-</span><span class="mi">999</span>
                     <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">evaluationString</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">xval</span><span class="p">))))</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;,</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -1367,7 +1368,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;****************************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* Python voting digraphs module                    *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2242 $                                   *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2244 $                                   *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* Copyright (C) 2006-2007 University of Luxembourg *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* The module comes with ABSOLUTELY NO WARRANTY     *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* to the extent permitted by the applicable law.   *&#39;</span><span class="p">)</span>
@@ -1423,8 +1424,11 @@
 <span class="c1">##    c.recodeValuation(-m,m)</span>
 <span class="c1">##    c.showRelationTable()</span>
 
-<span class="c1">##    av = ApprovalVotingProfile(&#39;approvalInvitation&#39;)</span>
-<span class="c1">##    av.save2PerfTab()</span>
+    <span class="n">av</span> <span class="o">=</span> <span class="n">ApprovalVotingProfile</span><span class="p">(</span><span class="s1">&#39;approvalInvitation&#39;</span><span class="p">)</span>
+    <span class="n">av</span><span class="o">.</span><span class="n">save2PerfTab</span><span class="p">()</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">PerformanceTableau</span><span class="p">(</span><span class="s1">&#39;votingPerfTab&#39;</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceTableau</span><span class="p">()</span>
+    
     
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
@@ -1433,7 +1437,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. September 2008               *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2242 $                   *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2244 $                   *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>
