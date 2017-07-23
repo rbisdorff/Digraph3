@@ -3715,11 +3715,15 @@ class Digraph(object):
             actionsList.sort()
         #print actionsList
         #actionsList.sort()
-
-        try:
-            hasIntegerValuation = self.valuationdomain['hasIntegerValuation']
-        except KeyError:
+        if not hasIntegerValues: 
+            try:
+                hasIntegerValuation = self.valuationdomain['hasIntegerValuation']
+            except KeyError:
+                hasIntegerValuation = hasIntegerValues
+                self.valuationdomain['hasIntegerValuation'] = hasIntegerValuation
+        else:
             hasIntegerValuation = hasIntegerValues
+            self.valuationdomain['hasIntegerValuation'] = hasIntegerValuation
 
         for x in actionsList:
             if isColored:
@@ -5972,8 +5976,6 @@ class Digraph(object):
         self.valuationdomain['med'] = newMed
         self.valuationdomain['precision'] = newPrecision
         self.valuationdomain['hasIntegerValuation'] = False
-        
-
         self.relation = newrelation
 
     def dominantChoices(self,S):
@@ -12694,19 +12696,24 @@ if __name__ == "__main__":
         from outrankingDigraphs import BipolarOutrankingDigraph
         from randomPerfTabs import RandomCBPerformanceTableau
         from linearOrders import CopelandOrder
-##        t1 = RandomCBPerformanceTableau(numberOfActions=20,seed=1)
-##        g = BipolarOutrankingDigraph(t1,Normalized=True)
+        t1 = RandomCBPerformanceTableau(numberOfActions=10,seed=1)
+        g = BipolarOutrankingDigraph(t1,Normalized=False)
 ##        g.showRubisBestChoiceRecommendation()
 ##        gcd = ~(-g)
 ##        cocb = BrokenCocsDigraph(gcd,Comments=True)
 ##        print(cocb.brokenLinks)
 ##        gcd.computeRubisChoice()
 ##        gcd.showGoodChoices()
-        g = RandomValuationDigraph(order=10,seed=3)
-        g.recodeValuation()
-        h3 = BrokenCocsDigraph(digraph=g,Comments=False)
-        h3.save('resbreakco2')
-        h3.showAll()
+##        g = RandomValuationDigraph(order=10,seed=3)
+##        g.showHTMLPerformanceTableau(ndigits=0)
+        g.showHTMLRelationTable(IntegerValues=True)
+##        g.recodeValuation()
+##        g.showHTMLRelationTable(IntegerValues=True)
+##        g.showHTMLPerformanceTableau(ndigits=0)
+        
+##        h3 = BrokenCocsDigraph(digraph=g,Comments=False)
+##        h3.save('resbreakco2')
+##        h3.showAll()
 
 ##        cop = CopelandOrder(g)
 ##        #g.showHTMLRelationMap(rankingRule='rankedPairs')
