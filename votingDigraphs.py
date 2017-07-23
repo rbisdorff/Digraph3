@@ -1064,7 +1064,7 @@ class CondorcetDigraph(Digraph):
     
     
     """
-    def __init__(self,argVotingProfile=None,approvalVoting=False,coalition=None,majorityMargins=False,hasIntegerValuation=False):
+    def __init__(self,argVotingProfile=None,approvalVoting=False,coalition=None,majorityMargins=True,hasIntegerValuation=True):
         from copy import copy
         if isinstance(argVotingProfile, (VotingProfile,ApprovalVotingProfile)):
             votingProfile = argVotingProfile
@@ -1377,7 +1377,7 @@ if __name__ == "__main__":
     av = ApprovalVotingProfile('approvalInvitation')
     av.save2PerfTab()
     t = PerformanceTableau('votingPerfTab')
-    t.showHTMLPerformanceTableau()
+    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0)
     
     
 
