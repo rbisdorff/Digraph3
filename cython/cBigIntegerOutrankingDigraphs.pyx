@@ -110,11 +110,11 @@ class BigIntegerDigraph(object):
         t0 = time.time()
         n0 = g1.order
         if _OldCoca:
-            _selfwcoc = _CocaDigraph(g1,Cpp=Cpp,Comments=Comments)
+            _selfwcoc = CocaDigraph(g1,Cpp=Cpp,Comments=Comments)
             b1 = 0
         else:
-            _selfwcoc = CocaDigraph(g1,Cpp=Cpp,Comments=Comments)
-            b1 = _selfwcoc.brakings
+            _selfwcoc = BrokenCocsDigraph(g1,Cpp=Cpp,Comments=Comments)
+            b1 = _selfwcoc.breakings
         n1 = _selfwcoc.order
         nc = n1 - n0
         
@@ -248,11 +248,11 @@ class BigIntegerDigraph(object):
         t0 = time.time()
         n0 = g1.order
         if _OldCoca:
-            _selfwcoc = _CocaDigraph(g1,Cpp=Cpp,Comments=Comments)
+            _selfwcoc = CocaDigraph(g1,Cpp=Cpp,Comments=Comments)
             b1 = 0
         else:
-            _selfwcoc = CocaDigraph(g1,Cpp=Cpp,Comments=Comments)
-            b1 = _selfwcoc.brakings
+            _selfwcoc = BrokenCocsDigraph(g1,Cpp=Cpp,Comments=Comments)
+            b1 = _selfwcoc.breakings
         n1 = _selfwcoc.order
         nc = n1 - n0
         

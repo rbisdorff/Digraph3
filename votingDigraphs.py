@@ -778,9 +778,9 @@ class ApprovalVotingProfile(VotingProfile):
         Persistant storage of an approval voting profile in the format of a standard performance tableau.
         For each voter *v*, the performance of candidate *x* corresponds to:
 
-              2 is approved;
+              1, if approved;
               0, if disapproved;
-              1, otherwise,
+              -999, miising evalaution otherwise,
         """
         from copy import deepcopy
         print('*--- Saving as performance tableau in file: <' + str(fileName) + '.py> ---*')

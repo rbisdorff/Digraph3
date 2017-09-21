@@ -22,10 +22,10 @@ inplace:
 		python3 csetupSOInteger.py build_ext ${FLAG}
 		python3 csetupBGInteger.py build_ext ${FLAG}
 install:
-		sudo python3.5 csetupRandPerfTabs.py install
-		sudo python3.5 csetupODGInteger.py install
-		sudo python3.5 csetupSOInteger.py install
-		sudo python3.5 csetupBGInteger.py install
+		sudo python3 csetupRandPerfTabs.py install
+		sudo python3 csetupODGInteger.py install
+		sudo python3 csetupSOInteger.py install
+		sudo python3 csetupBGInteger.py install
 installVenv:
 		python3 csetupRandPerfTabs.py install
 		python3 csetupODGInteger.py install
