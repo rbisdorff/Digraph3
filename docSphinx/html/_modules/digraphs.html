@@ -3765,11 +3765,15 @@
             <span class="n">actionsList</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
         <span class="c1">#print actionsList</span>
         <span class="c1">#actionsList.sort()</span>
-
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">hasIntegerValuation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;hasIntegerValuation&#39;</span><span class="p">]</span>
-        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">hasIntegerValues</span><span class="p">:</span> 
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">hasIntegerValuation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;hasIntegerValuation&#39;</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="n">hasIntegerValuation</span> <span class="o">=</span> <span class="n">hasIntegerValues</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;hasIntegerValuation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hasIntegerValuation</span>
+        <span class="k">else</span><span class="p">:</span>
             <span class="n">hasIntegerValuation</span> <span class="o">=</span> <span class="n">hasIntegerValues</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;hasIntegerValuation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hasIntegerValuation</span>
 
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionsList</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">isColored</span><span class="p">:</span>
@@ -6022,8 +6026,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">newMed</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;precision&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">newPrecision</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;hasIntegerValuation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
-        
-
         <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">newrelation</span></div>
 
 <div class="viewcode-block" id="Digraph.dominantChoices"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.dominantChoices">[docs]</a>    <span class="k">def</span> <span class="nf">dominantChoices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">S</span><span class="p">):</span>
@@ -12744,19 +12746,24 @@
         <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">BipolarOutrankingDigraph</span>
         <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
         <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="k">import</span> <span class="n">CopelandOrder</span>
-<span class="c1">##        t1 = RandomCBPerformanceTableau(numberOfActions=20,seed=1)</span>
-<span class="c1">##        g = BipolarOutrankingDigraph(t1,Normalized=True)</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="c1">##        g.showRubisBestChoiceRecommendation()</span>
 <span class="c1">##        gcd = ~(-g)</span>
 <span class="c1">##        cocb = BrokenCocsDigraph(gcd,Comments=True)</span>
 <span class="c1">##        print(cocb.brokenLinks)</span>
 <span class="c1">##        gcd.computeRubisChoice()</span>
 <span class="c1">##        gcd.showGoodChoices()</span>
-        <span class="n">g</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">recodeValuation</span><span class="p">()</span>
-        <span class="n">h3</span> <span class="o">=</span> <span class="n">BrokenCocsDigraph</span><span class="p">(</span><span class="n">digraph</span><span class="o">=</span><span class="n">g</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="n">h3</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;resbreakco2&#39;</span><span class="p">)</span>
-        <span class="n">h3</span><span class="o">.</span><span class="n">showAll</span><span class="p">()</span>
+<span class="c1">##        g = RandomValuationDigraph(order=10,seed=3)</span>
+<span class="c1">##        g.showHTMLPerformanceTableau(ndigits=0)</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">(</span><span class="n">IntegerValues</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1">##        g.recodeValuation()</span>
+<span class="c1">##        g.showHTMLRelationTable(IntegerValues=True)</span>
+<span class="c1">##        g.showHTMLPerformanceTableau(ndigits=0)</span>
+        
+<span class="c1">##        h3 = BrokenCocsDigraph(digraph=g,Comments=False)</span>
+<span class="c1">##        h3.save(&#39;resbreakco2&#39;)</span>
+<span class="c1">##        h3.showAll()</span>
 
 <span class="c1">##        cop = CopelandOrder(g)</span>
 <span class="c1">##        #g.showHTMLRelationMap(rankingRule=&#39;rankedPairs&#39;)</span>
