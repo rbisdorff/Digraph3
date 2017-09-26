@@ -2,6 +2,8 @@
 ## R Bisdorff May 2014
 ## version 3.3
 ########################
+PYTHON=python3
+NOSETESTS=nosetests3
 
 readme:
 		echo -n " Digraph3 python3 modules' installer \n (c) R Bisdorff 2013-2014 University of Luxembourg\n Usage: \n ..> make install # installs in Python3, Python3.3 and Python3.4 (Linux, Mac OS)\n ..> make tests # runs the nose tests\n ..> make verbosetests # runs the verbose nose tests\n ..> make pTests # runs all available nose tests with GNU parallel\n\n Technical documentation available here:\n http://leopold-loewenheim.uni.lu/Digraph3/docSphinx/html/index.html \n"
@@ -32,7 +34,7 @@ pydocs:
 
 pTests:
 		parallel --gnu cp {}.py test/ ::: arithmetics digraphsTools digraphs outrankingDigraphs perfTabs sortingDigraphs votingDigraphs linearOrders weakOrders graphs randomNumbers randomDigraphs randomPerfTabs bigOutrankingDigraphs sparseOutrankingDigraphs xmcda iqagent
-		(cd test; parallel --gnu -k nosetests3 -v ::: noseTests*.py )
+		(cd test; parallel --gnu -k ${NOSETESTS} -v ::: noseTests*.py )
 
 tests:
 		cp digraphsTools.py test/
@@ -52,20 +54,20 @@ tests:
 		cp sparseOutrankingDigraphs.py test/
 		cp xmcda.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -v noseTestsArithmetics.py)
-		(cd test; nosetests3 -v noseTestsDigraph.py)
-		(cd test; nosetests3 -v noseTestsOutrankingDigraph.py)
-		(cd test; nosetests3 -v noseTestsPerfTab.py)
-		(cd test; nosetests3 -v noseTestsRandomPerfTab.py)
-		(cd test; nosetests3 -v noseTestsSortingDigraph.py)
-		(cd test; nosetests3 -v noseTestsVotingDigraph.py)
-		(cd test; nosetests3 -v noseTestsLinearOrder.py)
-		(cd test; nosetests3 -v noseTestsWeakOrders.py)
-		(cd test; nosetests3 -v noseTestsGraph.py)
-		(cd test; nosetests3 -v noseTestsRandomNumbers.py)
-		(cd test; nosetests3 -v noseTestsRandomDigraph.py)
-#		(cd test; nosetests3 -v noseTestsBigOutrankingDigraph.py)
-		(cd test; nosetests3 -v noseTestsSparseOutrankingDigraph.py)
+		(cd test; ${NOSETESTS} -v noseTestsArithmetics.py)
+		(cd test; ${NOSETESTS} -v noseTestsDigraph.py)
+		(cd test; ${NOSETESTS} -v noseTestsOutrankingDigraph.py)
+		(cd test; ${NOSETESTS} -v noseTestsPerfTab.py)
+		(cd test; ${NOSETESTS} -v noseTestsRandomPerfTab.py)
+		(cd test; ${NOSETESTS} -v noseTestsSortingDigraph.py)
+		(cd test; ${NOSETESTS} -v noseTestsVotingDigraph.py)
+		(cd test; ${NOSETESTS} -v noseTestsLinearOrder.py)
+		(cd test; ${NOSETESTS} -v noseTestsWeakOrders.py)
+		(cd test; ${NOSETESTS} -v noseTestsGraph.py)
+		(cd test; ${NOSETESTS} -v noseTestsRandomNumbers.py)
+		(cd test; ${NOSETESTS} -v noseTestsRandomDigraph.py)
+#		(cd test; ${NOSETESTS} -v noseTestsBigOutrankingDigraph.py)
+		(cd test; ${NOSETESTS} -v noseTestsSparseOutrankingDigraph.py)
 
 
 verboseTests:
@@ -86,20 +88,20 @@ verboseTests:
 		cp sparseOutrankingDigraphs.py test/
 		cp xmcda.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -vs noseTestsArithmetics.py)
-		(cd test; nosetests3 -vs noseTestsDigraph.py)
-		(cd test; nosetests3 -vs noseTestsOutrankingDigraph.py)
-		(cd test; nosetests3 -vs noseTestsPerfTab.py)
-		(cd test; nosetests3 -vs noseTestsRandomPerfTab.py)
-		(cd test; nosetests3 -vs noseTestsSortingDigraph.py)
-		(cd test; nosetests3 -vs noseTestsVotingDigraph.py)
-		(cd test; nosetests3 -vs noseTestsLinearOrder.py)
-		(cd test; nosetests3 -vs noseTestsWeakOrders.py)
-		(cd test; nosetests3 -vs noseTestsGraph.py)
-		(cd test; nosetests3 -vs noseTestsRandomNumbers.py)
-		(cd test; nosetests3 -vs noseTestsRandomDigraph.py)
-		#(cd test; nosetests3 -vs noseTestsBigOutrankingDigraph.py)
-		(cd test; nosetests3 -vs noseTestsSparseOutrankingDigraph.py)
+		(cd test; ${NOSETESTS} -vs noseTestsArithmetics.py)
+		(cd test; ${NOSETESTS} -vs noseTestsDigraph.py)
+		(cd test; ${NOSETESTS} -vs noseTestsOutrankingDigraph.py)
+		(cd test; ${NOSETESTS} -vs noseTestsPerfTab.py)
+		(cd test; ${NOSETESTS} -vs noseTestsRandomPerfTab.py)
+		(cd test; ${NOSETESTS} -vs noseTestsSortingDigraph.py)
+		(cd test; ${NOSETESTS} -vs noseTestsVotingDigraph.py)
+		(cd test; ${NOSETESTS} -vs noseTestsLinearOrder.py)
+		(cd test; ${NOSETESTS} -vs noseTestsWeakOrders.py)
+		(cd test; ${NOSETESTS} -vs noseTestsGraph.py)
+		(cd test; ${NOSETESTS} -vs noseTestsRandomNumbers.py)
+		(cd test; ${NOSETESTS} -vs noseTestsRandomDigraph.py)
+		#(cd test; ${NOSETESTS} -vs noseTestsBigOutrankingDigraph.py)
+		(cd test; ${NOSETESTS} -vs noseTestsSparseOutrankingDigraph.py)
 
 digraphsTests:
 		cp digraphsTools.py test/
@@ -118,7 +120,7 @@ digraphsTests:
 		cp sparseOutrankingDigraphs.py test/
 		cp xmcda.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -v noseTestsDigraph.py)
+		(cd test; ${NOSETESTS} -v noseTestsDigraph.py)
 
 verboseDigraphsTests:
 		cp digraphsTools.py test/
@@ -135,7 +137,7 @@ verboseDigraphsTests:
 		cp randomPerfTabs.py test/
 		cp xmcda.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -vs noseTestsDigraph.py)
+		(cd test; ${NOSETESTS} -vs noseTestsDigraph.py)
 
 sparseOutrankingDigraphsTests:
 		cp digraphsTools.py test/
@@ -153,7 +155,7 @@ sparseOutrankingDigraphsTests:
 		cp sparseOutrankingDigraphs.py test/
 		cp xmcda.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -v noseTestsSparseOutrankingDigraph.py)
+		(cd test; ${NOSETESTS} -v noseTestsSparseOutrankingDigraph.py)
 
 verboseSparseOutrankingDigraphsTests:
 		cp digraphsTools.py test/
@@ -171,7 +173,7 @@ verboseSparseOutrankingDigraphsTests:
 		cp sparseOutrankingDigraphs.py test/
 		cp xmcda.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -vs noseTestsSparseOutrankingDigraph.py)
+		(cd test; ${NOSETESTS} -vs noseTestsSparseOutrankingDigraph.py)
 
 bigOutrankingDigraphsTests:
 		cp digraphsTools.py test/
@@ -189,7 +191,7 @@ bigOutrankingDigraphsTests:
 		cp bigOutrankingDigraphs.py test/
 		cp xmcda.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -v noseTestsBigOutrankingDigraph.py)
+		(cd test; ${NOSETESTS} -v noseTestsBigOutrankingDigraph.py)
 
 verboseBigOutrankingDigraphsTests:
 		cp digraphsTools.py test/
@@ -207,7 +209,7 @@ verboseBigOutrankingDigraphsTests:
 		cp bigOutrankingDigraphs.py test/
 		cp xmcda.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -vs noseTestsBigOutrankingDigraph.py)
+		(cd test; ${NOSETESTS} -vs noseTestsBigOutrankingDigraph.py)
 
 graphsTests:
 		cp digraphsTools.py test/
@@ -226,7 +228,7 @@ graphsTests:
 		cp sparseOutrankingDigraphs.py test/
 		cp xmcda.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -v noseTestsGraph.py)
+		(cd test; ${NOSETESTS} -v noseTestsGraph.py)
 
 verboseGraphsTests:
 		cp digraphsTools.py test/
@@ -245,7 +247,7 @@ verboseGraphsTests:
 		cp sparseOutrankingDigraphs.py test/
 		cp xmcda.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -vs noseTestsGraph.py)
+		(cd test; ${NOSETESTS} -vs noseTestsGraph.py)
 
 perfTabsTests:
 		cp digraphsTools.py test/
@@ -264,7 +266,7 @@ perfTabsTests:
 		cp sparseOutrankingDigraphs.py test/
 		cp xmcda.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -v noseTestsPerfTab.py)
+		(cd test; ${NOSETESTS} -v noseTestsPerfTab.py)
 
 randomPerfTabsTests:
 		cp digraphsTools.py test/
@@ -284,7 +286,7 @@ randomPerfTabsTests:
 		cp sparseOutrankingDigraphs.py test/
 		cp xmcda.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -v noseTestsRandomPerfTab.py)
+		(cd test; ${NOSETESTS} -v noseTestsRandomPerfTab.py)
 
 verbosePerfTabsTests:
 		cp digraphsTools.py test/
@@ -303,7 +305,7 @@ verbosePerfTabsTests:
 		cp sparseOutrankingDigraphs.py test/
 		cp xmcda.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -vs noseTestsPerfTab.py)
+		(cd test; ${NOSETESTS} -vs noseTestsPerfTab.py)
 
 verboseRandomPerfTabsTests:
 		cp digraphsTools.py test/
@@ -322,7 +324,7 @@ verboseRandomPerfTabsTests:
 		cp bigOutrankingDigraphs.py test/
 		cp sparseOutrankingDigraphs.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -vs noseTestsRandomPerfTab.py)
+		(cd test; ${NOSETESTS} -vs noseTestsRandomPerfTab.py)
 
 outrankingDigraphsTests:
 		cp digraphsTools.py test/
@@ -341,7 +343,7 @@ outrankingDigraphsTests:
 		cp sparseOutrankingDigraphs.py test/
 		cp xmcda.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -v noseTestsOutrankingDigraph.py)
+		(cd test; ${NOSETESTS} -v noseTestsOutrankingDigraph.py)
 
 verboseOutrankingDigraphsTests:
 		cp digraphsTools.py test/
@@ -360,7 +362,7 @@ verboseOutrankingDigraphsTests:
 		cp sparseOutrankingDigraphs.py test/
 		cp xmcda.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -vs noseTestsOutrankingDigraph.py)
+		(cd test; ${NOSETESTS} -vs noseTestsOutrankingDigraph.py)
 
 sortingDigraphsTests:
 		cp digraphsTools.py test/
@@ -379,7 +381,7 @@ sortingDigraphsTests:
 		cp sparseOutrankingDigraphs.py test/
 		cp xmcda.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -v noseTestsSortingDigraph.py)
+		(cd test; ${NOSETESTS} -v noseTestsSortingDigraph.py)
 
 verboseSortingDigraphsTests:
 		cp digraphsTools.py test/
@@ -398,7 +400,7 @@ verboseSortingDigraphsTests:
 		cp sparseOutrankingDigraphs.py test/
 		cp xmcda.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -vs noseTestsSortingDigraph.py)
+		(cd test; ${NOSETESTS} -vs noseTestsSortingDigraph.py)
 
 votingDigraphsTests:
 		cp digraphsTools.py test/
@@ -416,7 +418,7 @@ votingDigraphsTests:
 		cp sparseOutrankingDigraphs.py test/
 		cp xmcda.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -v noseTestsVotingDigraph.py)
+		(cd test; ${NOSETESTS} -v noseTestsVotingDigraph.py)
 
 verboseVotingDigraphsTests:
 		cp digraphsTools.py test/
@@ -435,7 +437,7 @@ verboseVotingDigraphsTests:
 		cp sparseOutrankingDigraphs.py test/
 		cp xmcda.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -vs noseTestsVotingDigraph.py)
+		(cd test; ${NOSETESTS} -vs noseTestsVotingDigraph.py)
 
 linearOrdersTests:
 		cp digraphsTools.py test/
@@ -454,7 +456,7 @@ linearOrdersTests:
 		cp sparseOutrankingDigraphs.py test/
 		cp xmcda.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -v noseTestsLinearOrder.py)
+		(cd test; ${NOSETESTS} -v noseTestsLinearOrder.py)
 
 verboseLinearOrdersTests:
 		cp digraphsTools.py test/
@@ -470,7 +472,7 @@ verboseLinearOrdersTests:
 		cp randomDigraphs.py test/
 		cp randomPerfTabs.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -vs noseTestsLinearOrder.py)
+		(cd test; ${NOSETESTS} -vs noseTestsLinearOrder.py)
 
 weakOrdersTests:
 		cp digraphsTools.py test/
@@ -489,7 +491,7 @@ weakOrdersTests:
 		cp sparseOutrankingDigraphs.py test/
 		cp xmcda.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -v noseTestsWeakOrders.py)
+		(cd test; ${NOSETESTS} -v noseTestsWeakOrders.py)
 
 verboseWeakOrdersTests:
 		cp digraphsTools.py test/
@@ -508,7 +510,7 @@ verboseWeakOrdersTests:
 		cp sparseOutrankingDigraphs.py test/
 		cp xmcda.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -vs noseTestsWeakOrders.py)
+		(cd test; ${NOSETESTS} -vs noseTestsWeakOrders.py)
 
 randomDigraphsTests:
 		cp digraphsTools.py test/
@@ -525,7 +527,7 @@ randomDigraphsTests:
 		cp randomPerfTabs.py test/
 		cp xmcda.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -v noseTestsRandomDigraph.py)
+		(cd test; ${NOSETESTS} -v noseTestsRandomDigraph.py)
 
 verboseRandomDigraphsTests:
 		cp digraphsTools.py test/
@@ -544,37 +546,32 @@ verboseRandomDigraphsTests:
 		cp sparseOutrankingDigraphs.py test/
 		cp xmcda.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -vs noseTestsRandomDigraph.py)
+		(cd test; ${NOSETESTS} -vs noseTestsRandomDigraph.py)
 
 randomNumbersTests:
 		cp digraphsTools.py test/
 		cp randomNumbers.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -v noseTestsRandomNumbers.py)
+		(cd test; ${NOSETESTS} -v noseTestsRandomNumbers.py)
 
 verboseRandomNumbersTests:
 		cp digraphsTools.py test/
 		cp randomNumbers.py test/
 		cp iqagent.py test/
-		(cd test; nosetests3 -vs noseTestsRandomNumbers.py)
+		(cd test; ${NOSETESTS} -vs noseTestsRandomNumbers.py)
 
 arithmeticsTests:
 		cp arithmetics.py test/
-		(cd test; nosetests3 -v noseTestsArithmetics.py)
+		(cd test; ${NOSETESTS} -v noseTestsArithmetics.py)
 verboseArithmeticsTests:
 		cp arithmetics.py test/
-		(cd test; nosetests3 -vs noseTestsArithmetics.py)
+		(cd test; ${NOSETESTS} -vs noseTestsArithmetics.py)
 
 install:
-		sudo python3 setup.py install
+		sudo ${PYTHON} setup.py install
 #		sudo python3.3 setup.py install
 		sudo python3.5 setup.py install
 		sudo python3.6 setup.py install
 
 installVenv:
-		python3 setup.py install
-#		python3.3 setup.py install
-#		python3.4 setup.py install
-
-#installPyPy:
-#		pypy3 setup.py install
+		${PYTHON} setup.py install
