@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+#
 # Python 3 implementation of voting digraphs
 # Refactored from revision 1.549 of the digraphs module
 # Current revision $Revision$
