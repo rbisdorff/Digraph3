@@ -973,6 +973,8 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
     With each quantile equivalence class is associated a BipolarOutrankingDigraph object
     which is restricted to the decision actions gathered in this quantile equivalence class.
 
+    See http://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RB-2016.pdf
+    
     By default, the number of quantiles is set to a tenth of the number of decision actions,
     i.e. quantiles = order//10. The effective number of quantiles can be much lower for large orders;
     for instance quantiles = 250 gives good results for a digraph of order 25000.
