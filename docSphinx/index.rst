@@ -21,7 +21,7 @@ Contents
 Introduction
 ------------
 
-This documentation, also available at the |location_link1|, describes the Python3 resources for implementing decision aid algorithms in the context of a bipolarly-valued outranking approach ([1]_, [2]_). These computing resources are useful in the field of *Algorithmic Decision Theory* (http://www.algodec.org/) and more specifically in outranking based *Multiple Criteria Decision Aid* (MCDA).
+This documentation, also available on the `Read The Docs <https://readthedocs.org/>`_ site: |location_link1|, describes the Python3 resources for implementing decision aid algorithms in the context of a bipolarly-valued outranking approach ([1]_, [2]_). These computing resources are useful in the field of *Algorithmic Decision Theory* (http://www.algodec.org/) and more specifically in outranking based *Multiple Criteria Decision Aid* (MCDA).
 
 .. |location_link1| raw:: html
 
