@@ -249,7 +249,8 @@ i.e. a link (<em>x</em>, <em>y</em>) with minimal difference between r(<em>x</em
 <dl class="method">
 <dt id="digraphs.BreakAddCocsDigraph.showComponents">
 <code class="descname">showComponents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#BreakAddCocsDigraph.showComponents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.BreakAddCocsDigraph.showComponents" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Shows the list of connected components of the digraph instance.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -284,7 +285,8 @@ i.e. a link <img class="math" src="_images/math/b7c48905409677f888c39e46ee27f2d1
 <dl class="method">
 <dt id="digraphs.BrokenCocsDigraph.showComponents">
 <code class="descname">showComponents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#BrokenCocsDigraph.showComponents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.BrokenCocsDigraph.showComponents" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Shows the list of connected components of the digraph instance.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -422,7 +424,8 @@ of chordless odd circuits augmented digraphs.</p>
 <dl class="method">
 <dt id="digraphs.CocaDigraph.showComponents">
 <code class="descname">showComponents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CocaDigraph.showComponents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.CocaDigraph.showComponents" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Shows the list of connected components of the digraph instance.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -579,7 +582,7 @@ Renders the distribution of agglomeration coefficients.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.automorphismGenerators">
 <code class="descname">automorphismGenerators</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.automorphismGenerators"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.automorphismGenerators" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add automorphism group generators to digraph.</p>
+<dd><p>Adds automorphism group generators to the digraph instance.</p>
 </dd></dl>
 
 <dl class="method">
@@ -1669,8 +1672,11 @@ for the absence of a link between two actions!!</p>
 <dt id="digraphs.Digraph.isCyclic">
 <code class="descname">isCyclic</code><span class="sig-paren">(</span><em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.isCyclic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.isCyclic" title="Permalink to this definition">¶</a></dt>
 <dd><p>checks the cyclicity of self.relation by checking
-for a reflexive loop in its transitive closure
-!! self.relation is supposed to be irreflexive !!</p>
+for a reflexive loop in its transitive closure-</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">self.relation is supposed to be irreflexive !</p>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -1916,7 +1922,8 @@ Renders the sharpest of two characteristic vectors v and w.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.showAll">
 <code class="descname">showAll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showAll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showAll" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Detailed show method for genuine digraphs.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="digraphs.Digraph.showAutomorphismGenerators">
@@ -1952,7 +1959,8 @@ Dummy for showCircuits().</p>
 <dl class="method">
 <dt id="digraphs.Digraph.showComponents">
 <code class="descname">showComponents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showComponents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showComponents" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Shows the list of connected components of the digraph instance.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="digraphs.Digraph.showGoodChoices">
@@ -2072,14 +2080,15 @@ For best experience make sure to use Firefox, because other browser restrict the
 <dt id="digraphs.Digraph.showOrbits">
 <code class="descname">showOrbits</code><span class="sig-paren">(</span><em>InChoices</em>, <em>withListing=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showOrbits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showOrbits" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prints the orbits of Choices along the automorphisms of
-the digraph self.</p>
+the digraph instance.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="digraphs.Digraph.showOrbitsFromFile">
 <code class="descname">showOrbitsFromFile</code><span class="sig-paren">(</span><em>InFile</em>, <em>withListing=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showOrbitsFromFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showOrbitsFromFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prints the orbits of Choices along the automorphisms of
-the digraph self by reading in the 0-1 misset file format.</p>
+the digraph self by reading in the 0-1 misset file format.
+See the :py:method:: readPerrinMisset(file) method.</p>
 </dd></dl>
 
 <dl class="method">
@@ -2525,7 +2534,8 @@ temporary Redheffer digraphs.</p>
 <dl class="method">
 <dt id="digraphs.StrongComponentsCollapsedDigraph.showComponents">
 <code class="descname">showComponents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#StrongComponentsCollapsedDigraph.showComponents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.StrongComponentsCollapsedDigraph.showComponents" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Shows the list of connected components of the digraph instance.</p>
+</dd></dl>
 
 </dd></dl>
 

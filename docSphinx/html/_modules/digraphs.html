@@ -2866,8 +2866,11 @@
 <div class="viewcode-block" id="Digraph.isCyclic"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.isCyclic">[docs]</a>    <span class="k">def</span> <span class="nf">isCyclic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        checks the cyclicity of self.relation by checking</span>
-<span class="sd">        for a reflexive loop in its transitive closure</span>
-<span class="sd">        !! self.relation is supposed to be irreflexive !!</span>
+<span class="sd">        for a reflexive loop in its transitive closure-</span>
+
+<span class="sd">        .. warning::</span>
+
+<span class="sd">             self.relation is supposed to be irreflexive !</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">copy</span>
         <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
@@ -2956,7 +2959,7 @@
 
 <div class="viewcode-block" id="Digraph.automorphismGenerators"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.automorphismGenerators">[docs]</a>    <span class="k">def</span> <span class="nf">automorphismGenerators</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Add automorphism group generators to digraph.</span>
+<span class="sd">        Adds automorphism group generators to the digraph instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">os</span>
         <span class="n">Name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
@@ -3046,7 +3049,7 @@
 <div class="viewcode-block" id="Digraph.showOrbits"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.showOrbits">[docs]</a>    <span class="k">def</span> <span class="nf">showOrbits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">InChoices</span><span class="p">,</span><span class="n">withListing</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prints the orbits of Choices along the automorphisms of</span>
-<span class="sd">        the digraph self.</span>
+<span class="sd">        the digraph instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">reflections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reflections</span>
@@ -3120,6 +3123,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prints the orbits of Choices along the automorphisms of</span>
 <span class="sd">        the digraph self by reading in the 0-1 misset file format.</span>
+<span class="sd">        See the :py:method:: readPerrinMisset(file) method.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">reflections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reflections</span>
@@ -3328,9 +3332,10 @@
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Digraph          :&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Actions          :&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Valuation domain :&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">showComponents</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="Digraph.showAll"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.showAll">[docs]</a>    <span class="k">def</span> <span class="nf">showAll</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Detailed show method for genuine digraphs.&quot;&quot;&quot;</span> 
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*----- show detail -------------*&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Digraph          :&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- Actions ----*&#39;</span><span class="p">)</span>
@@ -5630,6 +5635,7 @@
         <span class="k">return</span> <span class="n">ConComp</span></div>
 
 <div class="viewcode-block" id="Digraph.showComponents"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.showComponents">[docs]</a>    <span class="k">def</span> <span class="nf">showComponents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Shows the list of connected components of the digraph instance.&quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*--- Connected Components ---*&#39;</span><span class="p">)</span>
         <span class="n">k</span><span class="o">=</span><span class="mi">1</span>
         <span class="k">for</span> <span class="n">Comp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">():</span>
@@ -11780,6 +11786,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">breakings</span> <span class="o">+=</span> <span class="n">newBreakings</span></div>
 
 <div class="viewcode-block" id="BrokenCocsDigraph.showComponents"><a class="viewcode-back" href="../techDoc.html#digraphs.BrokenCocsDigraph.showComponents">[docs]</a>    <span class="k">def</span> <span class="nf">showComponents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Shows the list of connected components of the digraph instance.&quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*--- Connected Components ---*&#39;</span><span class="p">)</span>
         <span class="n">k</span><span class="o">=</span><span class="mi">1</span>
         <span class="k">for</span> <span class="n">Comp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">():</span>
@@ -12032,6 +12039,7 @@
         <span class="c1">#print len(aself.circuitsList),&#39; cirduits</span>
 
 <div class="viewcode-block" id="BreakAddCocsDigraph.showComponents"><a class="viewcode-back" href="../techDoc.html#digraphs.BreakAddCocsDigraph.showComponents">[docs]</a>    <span class="k">def</span> <span class="nf">showComponents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Shows the list of connected components of the digraph instance.&quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*--- Connected Components ---*&#39;</span><span class="p">)</span>
         <span class="n">k</span><span class="o">=</span><span class="mi">1</span>
         <span class="k">for</span> <span class="n">Comp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">():</span>
@@ -12220,6 +12228,7 @@
         <span class="c1">#print len(aself.circuitsList),&#39; cirduits</span>
 
 <div class="viewcode-block" id="CocaDigraph.showComponents"><a class="viewcode-back" href="../techDoc.html#digraphs.CocaDigraph.showComponents">[docs]</a>    <span class="k">def</span> <span class="nf">showComponents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Shows the list of connected components of the digraph instance.&quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*--- Connected Components ---*&#39;</span><span class="p">)</span>
         <span class="n">k</span><span class="o">=</span><span class="mi">1</span>
         <span class="k">for</span> <span class="n">Comp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">():</span>
@@ -12278,6 +12287,7 @@
            <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
 
 <div class="viewcode-block" id="StrongComponentsCollapsedDigraph.showComponents"><a class="viewcode-back" href="../techDoc.html#digraphs.StrongComponentsCollapsedDigraph.showComponents">[docs]</a>    <span class="k">def</span> <span class="nf">showComponents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Shows the list of connected components of the digraph instance.&quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;short&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">],</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">])</span></div></div>
