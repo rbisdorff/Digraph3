@@ -3073,7 +3073,7 @@ class Digraph(object):
         """
         Prints the orbits of Choices along the automorphisms of
         the digraph self by reading in the 0-1 misset file format.
-        See the `:py:method:: readPerrinMisset(file)` method.
+        See the :py:function::`readPerrinMisset(file)` method.
         """
         try:
             reflections = self.reflections
