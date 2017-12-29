@@ -4,6 +4,7 @@ digraphsTools.py
 arithmetics.py
 digraphs.py
 perfTabs.py
+performanceQuantiles.py
 outrankingDigraphs.py
 sortingDigraphs.py
 votingDigraphs.py

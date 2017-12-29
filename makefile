@@ -18,6 +18,7 @@ pydocs:
 		cp digraphs.py pyDoc/
 		cp outrankingDigraphs.py pyDoc/
 		cp perfTabs.py pyDoc/
+		cp performaceQuantiles.py pyDoc/
 		cp sortingDigraphs.py pyDoc/
 		cp votingDigraphs.py pyDoc/
 		cp linearOrders.py pyDoc/
