@@ -1184,10 +1184,10 @@ The performance evaluations of each decision alternative on each criterion are g
                 if rq == 0:
                     if self.criteria[g]['preferenceDirection'] == 'min':
                         #quantile = Decimal('-200.0')
-                        quantile = gValue[0] - (gValues[-1] * 2)
+                        quantile = gValues[0] - (gValues[-1] * 2)
                     else:
                         #quantile = Decimal('-100.0')
-                        quantile = gValues[0] . gValues[-1]
+                        quantile = gValues[0] - gValues[-1]
                 elif rq < (n-1):
                     quantile = gValues[rq]\
                         + ((r-Decimal(str(rq)))*(gValues[rq+1]-gValues[rq]))
