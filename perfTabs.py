@@ -1113,6 +1113,103 @@ The performance evaluations of each decision alternative on each criterion are g
         else:
             return 'NA'
 
+    def _computeLimitingQuantiles(self,g,frequencies,LowerClosed=True,Debug=False,PrefThresholds=True):
+        """
+        Renders the list of limiting quantiles *q(p)* on criteria *g* for *p* in *frequencies* 
+        """
+        from math import floor
+        from copy import copy, deepcopy
+        gValues = []
+        for x in self.actions:
+            if Debug:
+                print('g,x,evaluation[g][x]',g,x,self.evaluation[g][x])
+            if self.evaluation[g][x] != Decimal('-999'):
+                gValues.append(self.evaluation[g][x])
+        gValues.sort()
+        if PrefThresholds:
+            try:
+                gPrefThrCst = self.criteria[g]['thresholds']['pref'][0]
+                gPrefThrSlope = self.criteria[g]['thresholds']['pref'][1]
+            except:
+                gPrefThrCst = Decimal('0')
+                gPrefThrSlope = Decimal('0')            
+        n = len(gValues)
+        if Debug:
+            print('g,n,gValues',g,n,gValues)
+##        if n > 0:
+##        nf = Decimal(str(n+1))
+        nf = Decimal(str(n))
+        limitingQuantiles = [Decimal(str(q)) for q in frequencies]
+        limitingQuantiles.sort()
+        if Debug:
+            print(limitingQuantiles)
+        if LowerClosed:
+            limitingQuantiles = limitingQuantiles[:-1]
+        else:
+            limitingQuantiles = limitingQuantiles[1:]
+        if Debug:
+            print(limitingQuantiles)
+        # computing the quantiles on criterion g
+        gQuantiles = []
+        if LowerClosed:
+            # we ignore the 1.00 quantile and replace it with +infty
+            for q in limitingQuantiles:
+                r = (Decimal(str(nf)) * q)
+                rq = int(floor(r))
+                if Debug:
+                    print('r,rq',r,rq, end=' ')
+                if rq < (n-1):
+                    quantile = gValues[rq]\
+                        + ((r-Decimal(str(rq)))*(gValues[rq+1]-gValues[rq]))
+                    if rq > 0 and PrefThresholds:
+                        quantile += gPrefThrCst + quantile*gPrefThrSlope
+                else :
+                    if self.criteria[g]['preferenceDirection'] == 'min':
+                        #quantile = Decimal('100.0')
+                        quantile = gValues[-1]
+                    else:
+                        #quantile = Decimal('200.0')
+                        quantile = gValues[-1] * 2
+                if Debug:
+                    print('quantile',quantile)
+                gQuantiles.append(quantile)               
+
+        else:  # upper closed categories
+            # we ignore the quantile 0.0 and replace it with -\infty            
+            for q in limitingQuantiles:
+                r = (Decimal(str(nf)) * q)
+                rq = int(floor(r))
+                if Debug:
+                    print('r,rq',r,rq, end=' ')
+                if rq == 0:
+                    if self.criteria[g]['preferenceDirection'] == 'min':
+                        #quantile = Decimal('-200.0')
+                        quantile = gValue[0] - (gValues[-1] * 2)
+                    else:
+                        #quantile = Decimal('-100.0')
+                        quantile = gValues[0] . gValues[-1]
+                elif rq < (n-1):
+                    quantile = gValues[rq]\
+                        + ((r-Decimal(str(rq)))*(gValues[rq+1]-gValues[rq]))
+                    if PrefThresholds:
+                        quantile -= gPrefThrCst - quantile*gPrefThrSlope
+                else:
+                    if n > 0:
+                        quantile = gValues[n-1]
+                    else:
+                        if self.criteria[g]['preferenceDirection'] == 'min':
+                            quantile = Decimal('-200.0')
+                        else:
+                            quantile = Decimal('-100.0')     
+                if Debug:
+                    print('quantile',quantile)
+                gQuantiles.append(quantile)
+##        else:
+##            gQuantiles = []
+        if Debug:
+            print(g,LowerClosed,self.criteria[g]['preferenceDirection'],gQuantiles)
+        return gQuantiles
+
     def computeQuantiles(self,Debug=False):
         """
         renders a quantiles matrix action x criterion with the performance quantile of action on criterion
@@ -7053,10 +7150,12 @@ if __name__ == "__main__":
                                    Debug=False,
                                    missingDataProbability=0.1,
                                    seed=100,Threading=False)
-    t.saveXMCDA2('test')
-    t1 = XMCDA2PerformanceTableau('test')
-    t1.showObjectives()
-    t1.showHTMLPerformanceHeatmap(Correlations=True,SparseModel=False)
+    for g in t.criteria:
+        t._computeLimitingQuantiles(g,frequencies=[0.0,0.25,0.5,0.75,1.0],LowerClosed=False,Debug=True)
+##    t.saveXMCDA2('test')
+##    t1 = XMCDA2PerformanceTableau('test')
+##    t1.showObjectives()
+##    t1.showHTMLPerformanceHeatmap(Correlations=True,SparseModel=False)
 ##    t = ConstantPerformanceTableau(t,
 ##                                   actionsSubset=['a01','a02','a03'],
 ##                                   criteriaSubset=['g01','g02','g03'],
