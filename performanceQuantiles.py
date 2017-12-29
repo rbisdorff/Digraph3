@@ -479,7 +479,7 @@ The number of so far observed evaluations is %d.
 if __name__ == "__main__":
 
     import performanceQuantiles
-    from randomPerfTabs import RandomCBPerformanceTableau, 
+    from randomPerfTabs import RandomCBPerformanceTableau
     from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
 
     frequencies = [0.0,0.25,0.5,0.75,1.0]
