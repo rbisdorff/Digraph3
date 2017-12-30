@@ -99,7 +99,7 @@ class PerformanceQuantiles(object):
         self.cdf = cdf
         
 
-    def _computeLimitingQuantiles(self,perfTab,g,frequencies,LowerClosed=True,Debug=False,PrefThresholds=True):
+    def _computeLimitingQuantiles(self,perfTab,g,frequencies,LowerClosed=True,Debug=False,PrefThresholds=False):
         """
         Renders the list of limiting quantiles *q(p)* on criteria *g* for *p* in *frequencies* 
         """
@@ -190,9 +190,9 @@ class PerformanceQuantiles(object):
                         quantile = gValues[n-1]
                     else:
                         if self.criteria[g]['preferenceDirection'] == 'min':
-                            quantile = gValues[0]
+                            quantile = gValues[-1]
                         else:
-                            quantile = gValues[0]     
+                            quantile = gValues[-1]     
                 if Debug:
                     print('quantile',quantile)
                 gQuantiles.append(quantile)
@@ -685,7 +685,7 @@ if __name__ == "__main__":
     nbrCrit = 21
     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
                                     numberOfCriteria=nbrCrit,seed=None)
-    pq = PerformanceQuantiles(tp,frequencies,LowerClosed=False,Debug=False)
+    pq = PerformanceQuantiles(tp,frequencies,LowerClosed=True,Debug=False)
     #print(pq.limitingQuantiles)
     pq.showLimitingQuantiles(ByObjectives=False)
     pq.showHTMLLimitingQuantiles(Transposed=True)
