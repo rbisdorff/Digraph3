@@ -2816,8 +2816,11 @@ class Digraph(object):
     def isCyclic(self, Debug=False):
         """
         checks the cyclicity of self.relation by checking
-        for a reflexive loop in its transitive closure
-        !! self.relation is supposed to be irreflexive !!
+        for a reflexive loop in its transitive closure-
+
+        .. warning::
+
+             self.relation is supposed to be irreflexive !
         """
         import copy
         Med = self.valuationdomain['med']
@@ -2906,7 +2909,7 @@ class Digraph(object):
 
     def automorphismGenerators(self):
         """
-        Add automorphism group generators to digraph.
+        Adds automorphism group generators to the digraph instance.
         """
         import os
         Name = self.name
@@ -2996,7 +2999,7 @@ class Digraph(object):
     def showOrbits(self,InChoices,withListing=True):
         """
         Prints the orbits of Choices along the automorphisms of
-        the digraph self.
+        the digraph instance.
         """
         try:
             reflections = self.reflections
@@ -3070,6 +3073,7 @@ class Digraph(object):
         """
         Prints the orbits of Choices along the automorphisms of
         the digraph self by reading in the 0-1 misset file format.
+        See the digraphs.Digraph.readPerrinMisset() method.
         """
         try:
             reflections = self.reflections
@@ -3278,9 +3282,10 @@ class Digraph(object):
         print('Digraph          :', self.name)
         print('Actions          :', self.actions)
         print('Valuation domain :', self.valuationdomain)
-        self.showComponents()
+        self.components()
 
     def showAll(self):
+        """Detailed show method for genuine digraphs.""" 
         print('*----- show detail -------------*')
         print('Digraph          :', self.name)
         print('*---- Actions ----*')
@@ -3715,11 +3720,15 @@ class Digraph(object):
             actionsList.sort()
         #print actionsList
         #actionsList.sort()
-
-        try:
-            hasIntegerValuation = self.valuationdomain['hasIntegerValuation']
-        except KeyError:
+        if not hasIntegerValues: 
+            try:
+                hasIntegerValuation = self.valuationdomain['hasIntegerValuation']
+            except KeyError:
+                hasIntegerValuation = hasIntegerValues
+                self.valuationdomain['hasIntegerValuation'] = hasIntegerValuation
+        else:
             hasIntegerValuation = hasIntegerValues
+            self.valuationdomain['hasIntegerValuation'] = hasIntegerValuation
 
         for x in actionsList:
             if isColored:
@@ -5576,6 +5585,7 @@ class Digraph(object):
         return ConComp
 
     def showComponents(self):
+        """Shows the list of connected components of the digraph instance."""
         print('*--- Connected Components ---*')
         k=1
         for Comp in self.components():
@@ -5972,8 +5982,6 @@ class Digraph(object):
         self.valuationdomain['med'] = newMed
         self.valuationdomain['precision'] = newPrecision
         self.valuationdomain['hasIntegerValuation'] = False
-        
-
         self.relation = newrelation
 
     def dominantChoices(self,S):
@@ -11728,6 +11736,7 @@ class BrokenCocsDigraph(Digraph):
         self.breakings += newBreakings
 
     def showComponents(self):
+        """Shows the list of connected components of the digraph instance."""
         print('*--- Connected Components ---*')
         k=1
         for Comp in self.components():
@@ -11980,6 +11989,7 @@ class BreakAddCocsDigraph(Digraph):
         #print len(aself.circuitsList),' cirduits
 
     def showComponents(self):
+        """Shows the list of connected components of the digraph instance."""
         print('*--- Connected Components ---*')
         k=1
         for Comp in self.components():
@@ -12168,6 +12178,7 @@ class CocaDigraph(Digraph):
         #print len(aself.circuitsList),' cirduits
 
     def showComponents(self):
+        """Shows the list of connected components of the digraph instance."""
         print('*--- Connected Components ---*')
         k=1
         for Comp in self.components():
@@ -12226,6 +12237,7 @@ class StrongComponentsCollapsedDigraph(Digraph):
            self.notGamma = self.notGammaSets()
 
     def showComponents(self):
+        """Shows the list of connected components of the digraph instance."""
         print('short', '\t', 'content')
         for x in self.actions:
             print(self.actions[x]['shortName'], '\t', self.actions[x]['name'])
@@ -12694,19 +12706,24 @@ if __name__ == "__main__":
         from outrankingDigraphs import BipolarOutrankingDigraph
         from randomPerfTabs import RandomCBPerformanceTableau
         from linearOrders import CopelandOrder
-##        t1 = RandomCBPerformanceTableau(numberOfActions=20,seed=1)
-##        g = BipolarOutrankingDigraph(t1,Normalized=True)
+        t1 = RandomCBPerformanceTableau(numberOfActions=10,seed=1)
+        g = BipolarOutrankingDigraph(t1,Normalized=False)
 ##        g.showRubisBestChoiceRecommendation()
 ##        gcd = ~(-g)
 ##        cocb = BrokenCocsDigraph(gcd,Comments=True)
 ##        print(cocb.brokenLinks)
 ##        gcd.computeRubisChoice()
 ##        gcd.showGoodChoices()
-        g = RandomValuationDigraph(order=10,seed=3)
-        g.recodeValuation()
-        h3 = BrokenCocsDigraph(digraph=g,Comments=False)
-        h3.save('resbreakco2')
-        h3.showAll()
+##        g = RandomValuationDigraph(order=10,seed=3)
+##        g.showHTMLPerformanceTableau(ndigits=0)
+        g.showHTMLRelationTable(IntegerValues=True)
+##        g.recodeValuation()
+##        g.showHTMLRelationTable(IntegerValues=True)
+##        g.showHTMLPerformanceTableau(ndigits=0)
+        
+##        h3 = BrokenCocsDigraph(digraph=g,Comments=False)
+##        h3.save('resbreakco2')
+##        h3.showAll()
 
 ##        cop = CopelandOrder(g)
 ##        #g.showHTMLRelationMap(rankingRule='rankedPairs')

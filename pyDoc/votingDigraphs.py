@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
+#
 # Python 3 implementation of voting digraphs
 # Refactored from revision 1.549 of the digraphs module
-# Current revision $Revision: 2239 $
+# Current revision $Revision: 2254 $
 # Copyright (C) 2011  Raymond Bisdorff
 #
 #    This program is free software; you can redistribute it and/or modify
@@ -773,6 +774,70 @@ class ApprovalVotingProfile(VotingProfile):
         fo.write( '}\n')
         fo.close()
 
+    def save2PerfTab(self,fileName='votingPerfTab',isDecimal=True,valueDigits=2):
+        """
+        Persistant storage of an approval voting profile in the format of a standard performance tableau.
+        For each voter *v*, the performance of candidate *x* corresponds to:
+
+              1, if approved;
+              0, if disapproved;
+              -999, miising evalaution otherwise,
+        """
+        from copy import deepcopy
+        print('*--- Saving as performance tableau in file: <' + str(fileName) + '.py> ---*')
+        objectives = {}
+        fileNameExt = str(fileName)+str('.py')
+        fo = open(fileNameExt, 'w')
+        fo.write('# Saved performance Tableau: \n')
+        fo.write('from decimal import Decimal\n')
+        fo.write('from collections import OrderedDict\n')
+        # actions
+        fo.write('actions = OrderedDict([\n')
+        for x in self.candidates:
+            fo.write('(\'%s\', {\n' % str(x))
+            for it in self.candidates[x].keys():
+                fo.write('\'%s\': %s,\n' % (it,repr(self.candidates[x][it])) )
+            fo.write('}),\n')
+        fo.write('])\n')
+        # no objectives
+        fo.write('objectives = OrderedDict()\n')            
+        # criteria
+        minScale = 0
+        maxScale = 1
+        fo.write('criteria = OrderedDict([\n') 
+        for g in self.voters:
+            fo.write('(\'%s\', {\n' % str(g))
+            for it in self.voters[g].keys():
+                fo.write('\'%s\': %s,\n' % (it,repr(self.voters[g][it])))
+                fo.write("\'scale\':(Decimal(\'%d\'),Decimal(\'%d\')),\n" % (minScale,maxScale) )
+            fo.write('}),\n')
+        fo.write('])\n')
+        # evaluation
+        AVballot = self.approvalBallot
+        DAVBallot = self.disApprovalBallot
+        fo.write('evaluation = {\n')
+        for g in self.voters:
+            fo.write('\'' +str(g)+'\': {\n')
+            approved = AVballot[g]
+            disapproved = DAVBallot[g]
+            for x in self.candidates:
+                if Decimal:
+                    #fo.write('\'' + str(x) + '\':Decimal("' + str(evaluation[g][x]) + '"),\n')
+                    evaluationString = '\'%%s\':Decimal("%%.%df"),\n' % (valueDigits)
+                    if x in approved:
+                        xval = maxScale
+                    elif x in disapproved:
+                        xval = minScale
+                    else:  # ,issing evaluation
+                        xval = -999
+                    fo.write(evaluationString % (x,Decimal(str(xval))))
+                else:
+                    fo.write('\'' + str(x) + '\':' + str(evaluation[g][x]) + ',\n')
+                    
+            fo.write('},\n')
+        fo.write( '}\n')
+        fo.close()
+
 
 class RandomApprovalVotingProfile(ApprovalVotingProfile):
     """
@@ -1000,7 +1065,7 @@ class CondorcetDigraph(Digraph):
     
     
     """
-    def __init__(self,argVotingProfile=None,approvalVoting=False,coalition=None,majorityMargins=False,hasIntegerValuation=False):
+    def __init__(self,argVotingProfile=None,approvalVoting=False,coalition=None,majorityMargins=True,hasIntegerValuation=True):
         from copy import copy
         if isinstance(argVotingProfile, (VotingProfile,ApprovalVotingProfile)):
             votingProfile = argVotingProfile
@@ -1254,7 +1319,7 @@ if __name__ == "__main__":
 
     print('****************************************************')
     print('* Python voting digraphs module                    *')
-    print('* $Revision: 2239 $                                   *')
+    print('* $Revision: 2254 $                                   *')
     print('* Copyright (C) 2006-2007 University of Luxembourg *')
     print('* The module comes with ABSOLUTELY NO WARRANTY     *')
     print('* to the extent permitted by the applicable law.   *')
@@ -1311,6 +1376,10 @@ if __name__ == "__main__":
 ##    c.showRelationTable()
 
     av = ApprovalVotingProfile('approvalInvitation')
+    av.save2PerfTab()
+    t = PerformanceTableau('votingPerfTab')
+    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0)
+    
     
 
     print('*------------------*')
@@ -1319,7 +1388,7 @@ if __name__ == "__main__":
 
     print('*************************************')
     print('* R.B. September 2008               *')
-    print('* $Revision: 2239 $                   *')
+    print('* $Revision: 2254 $                   *')
     print('*************************************')
 
 #############################

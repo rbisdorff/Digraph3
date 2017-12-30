@@ -117,7 +117,7 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 
 <dl><dt><a name="QuadraticResiduesDigraph-aneighbors"><strong>aneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
-<dl><dt><a name="QuadraticResiduesDigraph-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Add&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="QuadraticResiduesDigraph-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="QuadraticResiduesDigraph-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
 ie&nbsp;the&nbsp;average&nbsp;number&nbsp;of&nbsp;choice&nbsp;members&nbsp;that&nbsp;cover&nbsp;each<br>
@@ -565,7 +565,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="QuadraticResiduesDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="QuadraticResiduesDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'max': 1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="QuadraticResiduesDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="QuadraticResiduesDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -702,8 +702,11 @@ for&nbsp;the&nbsp;absence&nbsp;of&nbsp;a&nbsp;link&nbsp;between&nbsp;two&nbsp;ac
 &nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;reflexive&nbsp;links&nbsp;are&nbsp;ignored&nbsp;!!</tt></dd></dl>
 
 <dl><dt><a name="QuadraticResiduesDigraph-isCyclic"><strong>isCyclic</strong></a>(self, Debug=False)</dt><dd><tt>checks&nbsp;the&nbsp;cyclicity&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
-for&nbsp;a&nbsp;reflexive&nbsp;loop&nbsp;in&nbsp;its&nbsp;transitive&nbsp;closure<br>
-!!&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;supposed&nbsp;to&nbsp;be&nbsp;irreflexive&nbsp;!!</tt></dd></dl>
+for&nbsp;a&nbsp;reflexive&nbsp;loop&nbsp;in&nbsp;its&nbsp;transitive&nbsp;closure-<br>
+&nbsp;<br>
+..&nbsp;warning::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;supposed&nbsp;to&nbsp;be&nbsp;irreflexive&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="QuadraticResiduesDigraph-isWeaklyComplete"><strong>isWeaklyComplete</strong></a>(self, Debug=False)</dt><dd><tt>checks&nbsp;the&nbsp;weakly&nbsp;completeness&nbsp;property&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
 for&nbsp;the&nbsp;absence&nbsp;of&nbsp;a&nbsp;link&nbsp;between&nbsp;two&nbsp;actions!!<br>
@@ -813,7 +816,7 @@ Renders&nbsp;the&nbsp;sharpest&nbsp;of&nbsp;two&nbsp;characteristic&nbsp;vectors
 
 <dl><dt><a name="QuadraticResiduesDigraph-showActions"><strong>showActions</strong></a>(self)</dt><dd><tt>presentation&nbsp;methods&nbsp;for&nbsp;digraphs&nbsp;actions</tt></dd></dl>
 
-<dl><dt><a name="QuadraticResiduesDigraph-showAll"><strong>showAll</strong></a>(self)</dt></dl>
+<dl><dt><a name="QuadraticResiduesDigraph-showAll"><strong>showAll</strong></a>(self)</dt><dd><tt>Detailed&nbsp;show&nbsp;method&nbsp;for&nbsp;genuine&nbsp;digraphs.</tt></dd></dl>
 
 <dl><dt><a name="QuadraticResiduesDigraph-showAutomorphismGenerators"><strong>showAutomorphismGenerators</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;generators&nbsp;of&nbsp;the&nbsp;automorphism&nbsp;group.</tt></dd></dl>
 
@@ -826,7 +829,7 @@ Dummy&nbsp;for&nbsp;<a href="#QuadraticResiduesDigraph-showCircuits">showCircuit
 
 <dl><dt><a name="QuadraticResiduesDigraph-showCircuits"><strong>showCircuits</strong></a>(self)</dt><dd><tt>show&nbsp;methods&nbsp;for&nbsp;circuits&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance.</tt></dd></dl>
 
-<dl><dt><a name="QuadraticResiduesDigraph-showComponents"><strong>showComponents</strong></a>(self)</dt></dl>
+<dl><dt><a name="QuadraticResiduesDigraph-showComponents"><strong>showComponents</strong></a>(self)</dt><dd><tt>Shows&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="QuadraticResiduesDigraph-showGoodChoices"><strong>showGoodChoices</strong></a>(self, Recompute=True)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.</tt></dd></dl>
 
@@ -885,10 +888,11 @@ Result&nbsp;saved&nbsp;in&nbsp;self.<strong>newmisset</strong>.</tt></dd></dl>
 <dl><dt><a name="QuadraticResiduesDigraph-showNeighborhoods"><strong>showNeighborhoods</strong></a>(self)</dt><dd><tt>Lists&nbsp;the&nbsp;gamma&nbsp;and&nbsp;the&nbsp;notGamma&nbsp;function&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="QuadraticResiduesDigraph-showOrbits"><strong>showOrbits</strong></a>(self, InChoices, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;self.</tt></dd></dl>
+the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="QuadraticResiduesDigraph-showOrbitsFromFile"><strong>showOrbitsFromFile</strong></a>(self, InFile, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.</tt></dd></dl>
+the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.<br>
+See&nbsp;the&nbsp;digraphs.<a href="digraphs.html#Digraph">Digraph</a>.<a href="#QuadraticResiduesDigraph-readPerrinMisset">readPerrinMisset</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="QuadraticResiduesDigraph-showPreKernels"><strong>showPreKernels</strong></a>(self, withListing=True)</dt><dd><tt>Printing&nbsp;dominant&nbsp;and&nbsp;absorbent&nbsp;preKernels:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>dompreKernels</strong>&nbsp;and&nbsp;self.<strong>abspreKernels</strong></tt></dd></dl>

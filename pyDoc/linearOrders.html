@@ -151,7 +151,7 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 
 <dl><dt><a name="CopelandOrder-aneighbors"><strong>aneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
-<dl><dt><a name="CopelandOrder-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Add&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="CopelandOrder-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
 ie&nbsp;the&nbsp;average&nbsp;number&nbsp;of&nbsp;choice&nbsp;members&nbsp;that&nbsp;cover&nbsp;each<br>
@@ -595,7 +595,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="CopelandOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="CopelandOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'max': 1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="CopelandOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -730,8 +730,11 @@ for&nbsp;the&nbsp;absence&nbsp;of&nbsp;a&nbsp;link&nbsp;between&nbsp;two&nbsp;ac
 &nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;reflexive&nbsp;links&nbsp;are&nbsp;ignored&nbsp;!!</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-isCyclic"><strong>isCyclic</strong></a>(self, Debug=False)</dt><dd><tt>checks&nbsp;the&nbsp;cyclicity&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
-for&nbsp;a&nbsp;reflexive&nbsp;loop&nbsp;in&nbsp;its&nbsp;transitive&nbsp;closure<br>
-!!&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;supposed&nbsp;to&nbsp;be&nbsp;irreflexive&nbsp;!!</tt></dd></dl>
+for&nbsp;a&nbsp;reflexive&nbsp;loop&nbsp;in&nbsp;its&nbsp;transitive&nbsp;closure-<br>
+&nbsp;<br>
+..&nbsp;warning::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;supposed&nbsp;to&nbsp;be&nbsp;irreflexive&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-isWeaklyComplete"><strong>isWeaklyComplete</strong></a>(self, Debug=False)</dt><dd><tt>checks&nbsp;the&nbsp;weakly&nbsp;completeness&nbsp;property&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
 for&nbsp;the&nbsp;absence&nbsp;of&nbsp;a&nbsp;link&nbsp;between&nbsp;two&nbsp;actions!!<br>
@@ -841,7 +844,7 @@ Renders&nbsp;the&nbsp;sharpest&nbsp;of&nbsp;two&nbsp;characteristic&nbsp;vectors
 
 <dl><dt><a name="CopelandOrder-showActions"><strong>showActions</strong></a>(self)</dt><dd><tt>presentation&nbsp;methods&nbsp;for&nbsp;digraphs&nbsp;actions</tt></dd></dl>
 
-<dl><dt><a name="CopelandOrder-showAll"><strong>showAll</strong></a>(self)</dt></dl>
+<dl><dt><a name="CopelandOrder-showAll"><strong>showAll</strong></a>(self)</dt><dd><tt>Detailed&nbsp;show&nbsp;method&nbsp;for&nbsp;genuine&nbsp;digraphs.</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-showAutomorphismGenerators"><strong>showAutomorphismGenerators</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;generators&nbsp;of&nbsp;the&nbsp;automorphism&nbsp;group.</tt></dd></dl>
 
@@ -854,7 +857,7 @@ Dummy&nbsp;for&nbsp;<a href="#CopelandOrder-showCircuits">showCircuits</a>().</t
 
 <dl><dt><a name="CopelandOrder-showCircuits"><strong>showCircuits</strong></a>(self)</dt><dd><tt>show&nbsp;methods&nbsp;for&nbsp;circuits&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance.</tt></dd></dl>
 
-<dl><dt><a name="CopelandOrder-showComponents"><strong>showComponents</strong></a>(self)</dt></dl>
+<dl><dt><a name="CopelandOrder-showComponents"><strong>showComponents</strong></a>(self)</dt><dd><tt>Shows&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-showGoodChoices"><strong>showGoodChoices</strong></a>(self, Recompute=True)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.</tt></dd></dl>
 
@@ -913,10 +916,11 @@ Result&nbsp;saved&nbsp;in&nbsp;self.<strong>newmisset</strong>.</tt></dd></dl>
 <dl><dt><a name="CopelandOrder-showNeighborhoods"><strong>showNeighborhoods</strong></a>(self)</dt><dd><tt>Lists&nbsp;the&nbsp;gamma&nbsp;and&nbsp;the&nbsp;notGamma&nbsp;function&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-showOrbits"><strong>showOrbits</strong></a>(self, InChoices, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;self.</tt></dd></dl>
+the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-showOrbitsFromFile"><strong>showOrbitsFromFile</strong></a>(self, InFile, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.</tt></dd></dl>
+the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.<br>
+See&nbsp;the&nbsp;digraphs.<a href="digraphs.html#Digraph">Digraph</a>.<a href="#CopelandOrder-readPerrinMisset">readPerrinMisset</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-showPreKernels"><strong>showPreKernels</strong></a>(self, withListing=True)</dt><dd><tt>Printing&nbsp;dominant&nbsp;and&nbsp;absorbent&nbsp;preKernels:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>dompreKernels</strong>&nbsp;and&nbsp;self.<strong>abspreKernels</strong></tt></dd></dl>
@@ -1139,7 +1143,7 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 
 <dl><dt><a name="ExtendedPrudentDigraph-aneighbors"><strong>aneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
-<dl><dt><a name="ExtendedPrudentDigraph-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Add&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="ExtendedPrudentDigraph-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="ExtendedPrudentDigraph-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
 ie&nbsp;the&nbsp;average&nbsp;number&nbsp;of&nbsp;choice&nbsp;members&nbsp;that&nbsp;cover&nbsp;each<br>
@@ -1587,7 +1591,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="ExtendedPrudentDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="ExtendedPrudentDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'max': 1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="ExtendedPrudentDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="ExtendedPrudentDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -1724,8 +1728,11 @@ for&nbsp;the&nbsp;absence&nbsp;of&nbsp;a&nbsp;link&nbsp;between&nbsp;two&nbsp;ac
 &nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;reflexive&nbsp;links&nbsp;are&nbsp;ignored&nbsp;!!</tt></dd></dl>
 
 <dl><dt><a name="ExtendedPrudentDigraph-isCyclic"><strong>isCyclic</strong></a>(self, Debug=False)</dt><dd><tt>checks&nbsp;the&nbsp;cyclicity&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
-for&nbsp;a&nbsp;reflexive&nbsp;loop&nbsp;in&nbsp;its&nbsp;transitive&nbsp;closure<br>
-!!&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;supposed&nbsp;to&nbsp;be&nbsp;irreflexive&nbsp;!!</tt></dd></dl>
+for&nbsp;a&nbsp;reflexive&nbsp;loop&nbsp;in&nbsp;its&nbsp;transitive&nbsp;closure-<br>
+&nbsp;<br>
+..&nbsp;warning::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;supposed&nbsp;to&nbsp;be&nbsp;irreflexive&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="ExtendedPrudentDigraph-isWeaklyComplete"><strong>isWeaklyComplete</strong></a>(self, Debug=False)</dt><dd><tt>checks&nbsp;the&nbsp;weakly&nbsp;completeness&nbsp;property&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
 for&nbsp;the&nbsp;absence&nbsp;of&nbsp;a&nbsp;link&nbsp;between&nbsp;two&nbsp;actions!!<br>
@@ -1835,7 +1842,7 @@ Renders&nbsp;the&nbsp;sharpest&nbsp;of&nbsp;two&nbsp;characteristic&nbsp;vectors
 
 <dl><dt><a name="ExtendedPrudentDigraph-showActions"><strong>showActions</strong></a>(self)</dt><dd><tt>presentation&nbsp;methods&nbsp;for&nbsp;digraphs&nbsp;actions</tt></dd></dl>
 
-<dl><dt><a name="ExtendedPrudentDigraph-showAll"><strong>showAll</strong></a>(self)</dt></dl>
+<dl><dt><a name="ExtendedPrudentDigraph-showAll"><strong>showAll</strong></a>(self)</dt><dd><tt>Detailed&nbsp;show&nbsp;method&nbsp;for&nbsp;genuine&nbsp;digraphs.</tt></dd></dl>
 
 <dl><dt><a name="ExtendedPrudentDigraph-showAutomorphismGenerators"><strong>showAutomorphismGenerators</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;generators&nbsp;of&nbsp;the&nbsp;automorphism&nbsp;group.</tt></dd></dl>
 
@@ -1848,7 +1855,7 @@ Dummy&nbsp;for&nbsp;<a href="#ExtendedPrudentDigraph-showCircuits">showCircuits<
 
 <dl><dt><a name="ExtendedPrudentDigraph-showCircuits"><strong>showCircuits</strong></a>(self)</dt><dd><tt>show&nbsp;methods&nbsp;for&nbsp;circuits&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance.</tt></dd></dl>
 
-<dl><dt><a name="ExtendedPrudentDigraph-showComponents"><strong>showComponents</strong></a>(self)</dt></dl>
+<dl><dt><a name="ExtendedPrudentDigraph-showComponents"><strong>showComponents</strong></a>(self)</dt><dd><tt>Shows&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="ExtendedPrudentDigraph-showGoodChoices"><strong>showGoodChoices</strong></a>(self, Recompute=True)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.</tt></dd></dl>
 
@@ -1907,10 +1914,11 @@ Result&nbsp;saved&nbsp;in&nbsp;self.<strong>newmisset</strong>.</tt></dd></dl>
 <dl><dt><a name="ExtendedPrudentDigraph-showNeighborhoods"><strong>showNeighborhoods</strong></a>(self)</dt><dd><tt>Lists&nbsp;the&nbsp;gamma&nbsp;and&nbsp;the&nbsp;notGamma&nbsp;function&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="ExtendedPrudentDigraph-showOrbits"><strong>showOrbits</strong></a>(self, InChoices, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;self.</tt></dd></dl>
+the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="ExtendedPrudentDigraph-showOrbitsFromFile"><strong>showOrbitsFromFile</strong></a>(self, InFile, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.</tt></dd></dl>
+the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.<br>
+See&nbsp;the&nbsp;digraphs.<a href="digraphs.html#Digraph">Digraph</a>.<a href="#ExtendedPrudentDigraph-readPerrinMisset">readPerrinMisset</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="ExtendedPrudentDigraph-showPreKernels"><strong>showPreKernels</strong></a>(self, withListing=True)</dt><dd><tt>Printing&nbsp;dominant&nbsp;and&nbsp;absorbent&nbsp;preKernels:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>dompreKernels</strong>&nbsp;and&nbsp;self.<strong>abspreKernels</strong></tt></dd></dl>
@@ -2157,7 +2165,7 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 
 <dl><dt><a name="KemenyOrder-aneighbors"><strong>aneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
-<dl><dt><a name="KemenyOrder-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Add&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="KemenyOrder-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
 ie&nbsp;the&nbsp;average&nbsp;number&nbsp;of&nbsp;choice&nbsp;members&nbsp;that&nbsp;cover&nbsp;each<br>
@@ -2601,7 +2609,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="KemenyOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="KemenyOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'max': 1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="KemenyOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -2736,8 +2744,11 @@ for&nbsp;the&nbsp;absence&nbsp;of&nbsp;a&nbsp;link&nbsp;between&nbsp;two&nbsp;ac
 &nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;reflexive&nbsp;links&nbsp;are&nbsp;ignored&nbsp;!!</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-isCyclic"><strong>isCyclic</strong></a>(self, Debug=False)</dt><dd><tt>checks&nbsp;the&nbsp;cyclicity&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
-for&nbsp;a&nbsp;reflexive&nbsp;loop&nbsp;in&nbsp;its&nbsp;transitive&nbsp;closure<br>
-!!&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;supposed&nbsp;to&nbsp;be&nbsp;irreflexive&nbsp;!!</tt></dd></dl>
+for&nbsp;a&nbsp;reflexive&nbsp;loop&nbsp;in&nbsp;its&nbsp;transitive&nbsp;closure-<br>
+&nbsp;<br>
+..&nbsp;warning::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;supposed&nbsp;to&nbsp;be&nbsp;irreflexive&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-isWeaklyComplete"><strong>isWeaklyComplete</strong></a>(self, Debug=False)</dt><dd><tt>checks&nbsp;the&nbsp;weakly&nbsp;completeness&nbsp;property&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
 for&nbsp;the&nbsp;absence&nbsp;of&nbsp;a&nbsp;link&nbsp;between&nbsp;two&nbsp;actions!!<br>
@@ -2847,7 +2858,7 @@ Renders&nbsp;the&nbsp;sharpest&nbsp;of&nbsp;two&nbsp;characteristic&nbsp;vectors
 
 <dl><dt><a name="KemenyOrder-showActions"><strong>showActions</strong></a>(self)</dt><dd><tt>presentation&nbsp;methods&nbsp;for&nbsp;digraphs&nbsp;actions</tt></dd></dl>
 
-<dl><dt><a name="KemenyOrder-showAll"><strong>showAll</strong></a>(self)</dt></dl>
+<dl><dt><a name="KemenyOrder-showAll"><strong>showAll</strong></a>(self)</dt><dd><tt>Detailed&nbsp;show&nbsp;method&nbsp;for&nbsp;genuine&nbsp;digraphs.</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-showAutomorphismGenerators"><strong>showAutomorphismGenerators</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;generators&nbsp;of&nbsp;the&nbsp;automorphism&nbsp;group.</tt></dd></dl>
 
@@ -2860,7 +2871,7 @@ Dummy&nbsp;for&nbsp;<a href="#KemenyOrder-showCircuits">showCircuits</a>().</tt>
 
 <dl><dt><a name="KemenyOrder-showCircuits"><strong>showCircuits</strong></a>(self)</dt><dd><tt>show&nbsp;methods&nbsp;for&nbsp;circuits&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance.</tt></dd></dl>
 
-<dl><dt><a name="KemenyOrder-showComponents"><strong>showComponents</strong></a>(self)</dt></dl>
+<dl><dt><a name="KemenyOrder-showComponents"><strong>showComponents</strong></a>(self)</dt><dd><tt>Shows&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-showGoodChoices"><strong>showGoodChoices</strong></a>(self, Recompute=True)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.</tt></dd></dl>
 
@@ -2919,10 +2930,11 @@ Result&nbsp;saved&nbsp;in&nbsp;self.<strong>newmisset</strong>.</tt></dd></dl>
 <dl><dt><a name="KemenyOrder-showNeighborhoods"><strong>showNeighborhoods</strong></a>(self)</dt><dd><tt>Lists&nbsp;the&nbsp;gamma&nbsp;and&nbsp;the&nbsp;notGamma&nbsp;function&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-showOrbits"><strong>showOrbits</strong></a>(self, InChoices, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;self.</tt></dd></dl>
+the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-showOrbitsFromFile"><strong>showOrbitsFromFile</strong></a>(self, InFile, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.</tt></dd></dl>
+the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.<br>
+See&nbsp;the&nbsp;digraphs.<a href="digraphs.html#Digraph">Digraph</a>.<a href="#KemenyOrder-readPerrinMisset">readPerrinMisset</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-showPreKernels"><strong>showPreKernels</strong></a>(self, withListing=True)</dt><dd><tt>Printing&nbsp;dominant&nbsp;and&nbsp;absorbent&nbsp;preKernels:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>dompreKernels</strong>&nbsp;and&nbsp;self.<strong>abspreKernels</strong></tt></dd></dl>
@@ -3169,7 +3181,7 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 
 <dl><dt><a name="KohlerOrder-aneighbors"><strong>aneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
-<dl><dt><a name="KohlerOrder-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Add&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="KohlerOrder-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
 ie&nbsp;the&nbsp;average&nbsp;number&nbsp;of&nbsp;choice&nbsp;members&nbsp;that&nbsp;cover&nbsp;each<br>
@@ -3613,7 +3625,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="KohlerOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="KohlerOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'max': 1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="KohlerOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -3748,8 +3760,11 @@ for&nbsp;the&nbsp;absence&nbsp;of&nbsp;a&nbsp;link&nbsp;between&nbsp;two&nbsp;ac
 &nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;reflexive&nbsp;links&nbsp;are&nbsp;ignored&nbsp;!!</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-isCyclic"><strong>isCyclic</strong></a>(self, Debug=False)</dt><dd><tt>checks&nbsp;the&nbsp;cyclicity&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
-for&nbsp;a&nbsp;reflexive&nbsp;loop&nbsp;in&nbsp;its&nbsp;transitive&nbsp;closure<br>
-!!&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;supposed&nbsp;to&nbsp;be&nbsp;irreflexive&nbsp;!!</tt></dd></dl>
+for&nbsp;a&nbsp;reflexive&nbsp;loop&nbsp;in&nbsp;its&nbsp;transitive&nbsp;closure-<br>
+&nbsp;<br>
+..&nbsp;warning::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;supposed&nbsp;to&nbsp;be&nbsp;irreflexive&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-isWeaklyComplete"><strong>isWeaklyComplete</strong></a>(self, Debug=False)</dt><dd><tt>checks&nbsp;the&nbsp;weakly&nbsp;completeness&nbsp;property&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
 for&nbsp;the&nbsp;absence&nbsp;of&nbsp;a&nbsp;link&nbsp;between&nbsp;two&nbsp;actions!!<br>
@@ -3859,7 +3874,7 @@ Renders&nbsp;the&nbsp;sharpest&nbsp;of&nbsp;two&nbsp;characteristic&nbsp;vectors
 
 <dl><dt><a name="KohlerOrder-showActions"><strong>showActions</strong></a>(self)</dt><dd><tt>presentation&nbsp;methods&nbsp;for&nbsp;digraphs&nbsp;actions</tt></dd></dl>
 
-<dl><dt><a name="KohlerOrder-showAll"><strong>showAll</strong></a>(self)</dt></dl>
+<dl><dt><a name="KohlerOrder-showAll"><strong>showAll</strong></a>(self)</dt><dd><tt>Detailed&nbsp;show&nbsp;method&nbsp;for&nbsp;genuine&nbsp;digraphs.</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-showAutomorphismGenerators"><strong>showAutomorphismGenerators</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;generators&nbsp;of&nbsp;the&nbsp;automorphism&nbsp;group.</tt></dd></dl>
 
@@ -3872,7 +3887,7 @@ Dummy&nbsp;for&nbsp;<a href="#KohlerOrder-showCircuits">showCircuits</a>().</tt>
 
 <dl><dt><a name="KohlerOrder-showCircuits"><strong>showCircuits</strong></a>(self)</dt><dd><tt>show&nbsp;methods&nbsp;for&nbsp;circuits&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance.</tt></dd></dl>
 
-<dl><dt><a name="KohlerOrder-showComponents"><strong>showComponents</strong></a>(self)</dt></dl>
+<dl><dt><a name="KohlerOrder-showComponents"><strong>showComponents</strong></a>(self)</dt><dd><tt>Shows&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-showGoodChoices"><strong>showGoodChoices</strong></a>(self, Recompute=True)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.</tt></dd></dl>
 
@@ -3931,10 +3946,11 @@ Result&nbsp;saved&nbsp;in&nbsp;self.<strong>newmisset</strong>.</tt></dd></dl>
 <dl><dt><a name="KohlerOrder-showNeighborhoods"><strong>showNeighborhoods</strong></a>(self)</dt><dd><tt>Lists&nbsp;the&nbsp;gamma&nbsp;and&nbsp;the&nbsp;notGamma&nbsp;function&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-showOrbits"><strong>showOrbits</strong></a>(self, InChoices, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;self.</tt></dd></dl>
+the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-showOrbitsFromFile"><strong>showOrbitsFromFile</strong></a>(self, InFile, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.</tt></dd></dl>
+the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.<br>
+See&nbsp;the&nbsp;digraphs.<a href="digraphs.html#Digraph">Digraph</a>.<a href="#KohlerOrder-readPerrinMisset">readPerrinMisset</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-showPreKernels"><strong>showPreKernels</strong></a>(self, withListing=True)</dt><dd><tt>Printing&nbsp;dominant&nbsp;and&nbsp;absorbent&nbsp;preKernels:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>dompreKernels</strong>&nbsp;and&nbsp;self.<strong>abspreKernels</strong></tt></dd></dl>
@@ -4176,7 +4192,7 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 
 <dl><dt><a name="LinearOrder-aneighbors"><strong>aneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
-<dl><dt><a name="LinearOrder-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Add&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="LinearOrder-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
 ie&nbsp;the&nbsp;average&nbsp;number&nbsp;of&nbsp;choice&nbsp;members&nbsp;that&nbsp;cover&nbsp;each<br>
@@ -4620,7 +4636,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="LinearOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="LinearOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'max': 1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="LinearOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -4755,8 +4771,11 @@ for&nbsp;the&nbsp;absence&nbsp;of&nbsp;a&nbsp;link&nbsp;between&nbsp;two&nbsp;ac
 &nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;reflexive&nbsp;links&nbsp;are&nbsp;ignored&nbsp;!!</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-isCyclic"><strong>isCyclic</strong></a>(self, Debug=False)</dt><dd><tt>checks&nbsp;the&nbsp;cyclicity&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
-for&nbsp;a&nbsp;reflexive&nbsp;loop&nbsp;in&nbsp;its&nbsp;transitive&nbsp;closure<br>
-!!&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;supposed&nbsp;to&nbsp;be&nbsp;irreflexive&nbsp;!!</tt></dd></dl>
+for&nbsp;a&nbsp;reflexive&nbsp;loop&nbsp;in&nbsp;its&nbsp;transitive&nbsp;closure-<br>
+&nbsp;<br>
+..&nbsp;warning::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;supposed&nbsp;to&nbsp;be&nbsp;irreflexive&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-isWeaklyComplete"><strong>isWeaklyComplete</strong></a>(self, Debug=False)</dt><dd><tt>checks&nbsp;the&nbsp;weakly&nbsp;completeness&nbsp;property&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
 for&nbsp;the&nbsp;absence&nbsp;of&nbsp;a&nbsp;link&nbsp;between&nbsp;two&nbsp;actions!!<br>
@@ -4866,7 +4885,7 @@ Renders&nbsp;the&nbsp;sharpest&nbsp;of&nbsp;two&nbsp;characteristic&nbsp;vectors
 
 <dl><dt><a name="LinearOrder-showActions"><strong>showActions</strong></a>(self)</dt><dd><tt>presentation&nbsp;methods&nbsp;for&nbsp;digraphs&nbsp;actions</tt></dd></dl>
 
-<dl><dt><a name="LinearOrder-showAll"><strong>showAll</strong></a>(self)</dt></dl>
+<dl><dt><a name="LinearOrder-showAll"><strong>showAll</strong></a>(self)</dt><dd><tt>Detailed&nbsp;show&nbsp;method&nbsp;for&nbsp;genuine&nbsp;digraphs.</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-showAutomorphismGenerators"><strong>showAutomorphismGenerators</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;generators&nbsp;of&nbsp;the&nbsp;automorphism&nbsp;group.</tt></dd></dl>
 
@@ -4879,7 +4898,7 @@ Dummy&nbsp;for&nbsp;<a href="#LinearOrder-showCircuits">showCircuits</a>().</tt>
 
 <dl><dt><a name="LinearOrder-showCircuits"><strong>showCircuits</strong></a>(self)</dt><dd><tt>show&nbsp;methods&nbsp;for&nbsp;circuits&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance.</tt></dd></dl>
 
-<dl><dt><a name="LinearOrder-showComponents"><strong>showComponents</strong></a>(self)</dt></dl>
+<dl><dt><a name="LinearOrder-showComponents"><strong>showComponents</strong></a>(self)</dt><dd><tt>Shows&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-showGoodChoices"><strong>showGoodChoices</strong></a>(self, Recompute=True)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.</tt></dd></dl>
 
@@ -4938,10 +4957,11 @@ Result&nbsp;saved&nbsp;in&nbsp;self.<strong>newmisset</strong>.</tt></dd></dl>
 <dl><dt><a name="LinearOrder-showNeighborhoods"><strong>showNeighborhoods</strong></a>(self)</dt><dd><tt>Lists&nbsp;the&nbsp;gamma&nbsp;and&nbsp;the&nbsp;notGamma&nbsp;function&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-showOrbits"><strong>showOrbits</strong></a>(self, InChoices, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;self.</tt></dd></dl>
+the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-showOrbitsFromFile"><strong>showOrbitsFromFile</strong></a>(self, InFile, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.</tt></dd></dl>
+the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.<br>
+See&nbsp;the&nbsp;digraphs.<a href="digraphs.html#Digraph">Digraph</a>.<a href="#LinearOrder-readPerrinMisset">readPerrinMisset</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-showPreKernels"><strong>showPreKernels</strong></a>(self, withListing=True)</dt><dd><tt>Printing&nbsp;dominant&nbsp;and&nbsp;absorbent&nbsp;preKernels:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>dompreKernels</strong>&nbsp;and&nbsp;self.<strong>abspreKernels</strong></tt></dd></dl>
@@ -5188,7 +5208,7 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 
 <dl><dt><a name="NetFlowsOrder-aneighbors"><strong>aneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
-<dl><dt><a name="NetFlowsOrder-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Add&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="NetFlowsOrder-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
 ie&nbsp;the&nbsp;average&nbsp;number&nbsp;of&nbsp;choice&nbsp;members&nbsp;that&nbsp;cover&nbsp;each<br>
@@ -5632,7 +5652,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="NetFlowsOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="NetFlowsOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'max': 1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="NetFlowsOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -5767,8 +5787,11 @@ for&nbsp;the&nbsp;absence&nbsp;of&nbsp;a&nbsp;link&nbsp;between&nbsp;two&nbsp;ac
 &nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;reflexive&nbsp;links&nbsp;are&nbsp;ignored&nbsp;!!</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-isCyclic"><strong>isCyclic</strong></a>(self, Debug=False)</dt><dd><tt>checks&nbsp;the&nbsp;cyclicity&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
-for&nbsp;a&nbsp;reflexive&nbsp;loop&nbsp;in&nbsp;its&nbsp;transitive&nbsp;closure<br>
-!!&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;supposed&nbsp;to&nbsp;be&nbsp;irreflexive&nbsp;!!</tt></dd></dl>
+for&nbsp;a&nbsp;reflexive&nbsp;loop&nbsp;in&nbsp;its&nbsp;transitive&nbsp;closure-<br>
+&nbsp;<br>
+..&nbsp;warning::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;supposed&nbsp;to&nbsp;be&nbsp;irreflexive&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-isWeaklyComplete"><strong>isWeaklyComplete</strong></a>(self, Debug=False)</dt><dd><tt>checks&nbsp;the&nbsp;weakly&nbsp;completeness&nbsp;property&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
 for&nbsp;the&nbsp;absence&nbsp;of&nbsp;a&nbsp;link&nbsp;between&nbsp;two&nbsp;actions!!<br>
@@ -5878,7 +5901,7 @@ Renders&nbsp;the&nbsp;sharpest&nbsp;of&nbsp;two&nbsp;characteristic&nbsp;vectors
 
 <dl><dt><a name="NetFlowsOrder-showActions"><strong>showActions</strong></a>(self)</dt><dd><tt>presentation&nbsp;methods&nbsp;for&nbsp;digraphs&nbsp;actions</tt></dd></dl>
 
-<dl><dt><a name="NetFlowsOrder-showAll"><strong>showAll</strong></a>(self)</dt></dl>
+<dl><dt><a name="NetFlowsOrder-showAll"><strong>showAll</strong></a>(self)</dt><dd><tt>Detailed&nbsp;show&nbsp;method&nbsp;for&nbsp;genuine&nbsp;digraphs.</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-showAutomorphismGenerators"><strong>showAutomorphismGenerators</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;generators&nbsp;of&nbsp;the&nbsp;automorphism&nbsp;group.</tt></dd></dl>
 
@@ -5891,7 +5914,7 @@ Dummy&nbsp;for&nbsp;<a href="#NetFlowsOrder-showCircuits">showCircuits</a>().</t
 
 <dl><dt><a name="NetFlowsOrder-showCircuits"><strong>showCircuits</strong></a>(self)</dt><dd><tt>show&nbsp;methods&nbsp;for&nbsp;circuits&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance.</tt></dd></dl>
 
-<dl><dt><a name="NetFlowsOrder-showComponents"><strong>showComponents</strong></a>(self)</dt></dl>
+<dl><dt><a name="NetFlowsOrder-showComponents"><strong>showComponents</strong></a>(self)</dt><dd><tt>Shows&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-showGoodChoices"><strong>showGoodChoices</strong></a>(self, Recompute=True)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.</tt></dd></dl>
 
@@ -5950,10 +5973,11 @@ Result&nbsp;saved&nbsp;in&nbsp;self.<strong>newmisset</strong>.</tt></dd></dl>
 <dl><dt><a name="NetFlowsOrder-showNeighborhoods"><strong>showNeighborhoods</strong></a>(self)</dt><dd><tt>Lists&nbsp;the&nbsp;gamma&nbsp;and&nbsp;the&nbsp;notGamma&nbsp;function&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-showOrbits"><strong>showOrbits</strong></a>(self, InChoices, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;self.</tt></dd></dl>
+the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-showOrbitsFromFile"><strong>showOrbitsFromFile</strong></a>(self, InFile, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.</tt></dd></dl>
+the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.<br>
+See&nbsp;the&nbsp;digraphs.<a href="digraphs.html#Digraph">Digraph</a>.<a href="#NetFlowsOrder-readPerrinMisset">readPerrinMisset</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-showPreKernels"><strong>showPreKernels</strong></a>(self, withListing=True)</dt><dd><tt>Printing&nbsp;dominant&nbsp;and&nbsp;absorbent&nbsp;preKernels:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>dompreKernels</strong>&nbsp;and&nbsp;self.<strong>abspreKernels</strong></tt></dd></dl>
@@ -6200,7 +6224,7 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 
 <dl><dt><a name="OutFlowsOrder-aneighbors"><strong>aneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
-<dl><dt><a name="OutFlowsOrder-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Add&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="OutFlowsOrder-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="OutFlowsOrder-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
 ie&nbsp;the&nbsp;average&nbsp;number&nbsp;of&nbsp;choice&nbsp;members&nbsp;that&nbsp;cover&nbsp;each<br>
@@ -6644,7 +6668,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="OutFlowsOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="OutFlowsOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'max': 1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="OutFlowsOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="OutFlowsOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -6779,8 +6803,11 @@ for&nbsp;the&nbsp;absence&nbsp;of&nbsp;a&nbsp;link&nbsp;between&nbsp;two&nbsp;ac
 &nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;reflexive&nbsp;links&nbsp;are&nbsp;ignored&nbsp;!!</tt></dd></dl>
 
 <dl><dt><a name="OutFlowsOrder-isCyclic"><strong>isCyclic</strong></a>(self, Debug=False)</dt><dd><tt>checks&nbsp;the&nbsp;cyclicity&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
-for&nbsp;a&nbsp;reflexive&nbsp;loop&nbsp;in&nbsp;its&nbsp;transitive&nbsp;closure<br>
-!!&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;supposed&nbsp;to&nbsp;be&nbsp;irreflexive&nbsp;!!</tt></dd></dl>
+for&nbsp;a&nbsp;reflexive&nbsp;loop&nbsp;in&nbsp;its&nbsp;transitive&nbsp;closure-<br>
+&nbsp;<br>
+..&nbsp;warning::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;supposed&nbsp;to&nbsp;be&nbsp;irreflexive&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="OutFlowsOrder-isWeaklyComplete"><strong>isWeaklyComplete</strong></a>(self, Debug=False)</dt><dd><tt>checks&nbsp;the&nbsp;weakly&nbsp;completeness&nbsp;property&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
 for&nbsp;the&nbsp;absence&nbsp;of&nbsp;a&nbsp;link&nbsp;between&nbsp;two&nbsp;actions!!<br>
@@ -6890,7 +6917,7 @@ Renders&nbsp;the&nbsp;sharpest&nbsp;of&nbsp;two&nbsp;characteristic&nbsp;vectors
 
 <dl><dt><a name="OutFlowsOrder-showActions"><strong>showActions</strong></a>(self)</dt><dd><tt>presentation&nbsp;methods&nbsp;for&nbsp;digraphs&nbsp;actions</tt></dd></dl>
 
-<dl><dt><a name="OutFlowsOrder-showAll"><strong>showAll</strong></a>(self)</dt></dl>
+<dl><dt><a name="OutFlowsOrder-showAll"><strong>showAll</strong></a>(self)</dt><dd><tt>Detailed&nbsp;show&nbsp;method&nbsp;for&nbsp;genuine&nbsp;digraphs.</tt></dd></dl>
 
 <dl><dt><a name="OutFlowsOrder-showAutomorphismGenerators"><strong>showAutomorphismGenerators</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;generators&nbsp;of&nbsp;the&nbsp;automorphism&nbsp;group.</tt></dd></dl>
 
@@ -6903,7 +6930,7 @@ Dummy&nbsp;for&nbsp;<a href="#OutFlowsOrder-showCircuits">showCircuits</a>().</t
 
 <dl><dt><a name="OutFlowsOrder-showCircuits"><strong>showCircuits</strong></a>(self)</dt><dd><tt>show&nbsp;methods&nbsp;for&nbsp;circuits&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance.</tt></dd></dl>
 
-<dl><dt><a name="OutFlowsOrder-showComponents"><strong>showComponents</strong></a>(self)</dt></dl>
+<dl><dt><a name="OutFlowsOrder-showComponents"><strong>showComponents</strong></a>(self)</dt><dd><tt>Shows&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="OutFlowsOrder-showGoodChoices"><strong>showGoodChoices</strong></a>(self, Recompute=True)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.</tt></dd></dl>
 
@@ -6962,10 +6989,11 @@ Result&nbsp;saved&nbsp;in&nbsp;self.<strong>newmisset</strong>.</tt></dd></dl>
 <dl><dt><a name="OutFlowsOrder-showNeighborhoods"><strong>showNeighborhoods</strong></a>(self)</dt><dd><tt>Lists&nbsp;the&nbsp;gamma&nbsp;and&nbsp;the&nbsp;notGamma&nbsp;function&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="OutFlowsOrder-showOrbits"><strong>showOrbits</strong></a>(self, InChoices, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;self.</tt></dd></dl>
+the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="OutFlowsOrder-showOrbitsFromFile"><strong>showOrbitsFromFile</strong></a>(self, InFile, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.</tt></dd></dl>
+the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.<br>
+See&nbsp;the&nbsp;digraphs.<a href="digraphs.html#Digraph">Digraph</a>.<a href="#OutFlowsOrder-readPerrinMisset">readPerrinMisset</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="OutFlowsOrder-showPreKernels"><strong>showPreKernels</strong></a>(self, withListing=True)</dt><dd><tt>Printing&nbsp;dominant&nbsp;and&nbsp;absorbent&nbsp;preKernels:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>dompreKernels</strong>&nbsp;and&nbsp;self.<strong>abspreKernels</strong></tt></dd></dl>
@@ -7220,7 +7248,7 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 
 <dl><dt><a name="PrincipalOrder-aneighbors"><strong>aneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
-<dl><dt><a name="PrincipalOrder-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Add&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="PrincipalOrder-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
 ie&nbsp;the&nbsp;average&nbsp;number&nbsp;of&nbsp;choice&nbsp;members&nbsp;that&nbsp;cover&nbsp;each<br>
@@ -7664,7 +7692,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="PrincipalOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="PrincipalOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'max': 1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="PrincipalOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -7799,8 +7827,11 @@ for&nbsp;the&nbsp;absence&nbsp;of&nbsp;a&nbsp;link&nbsp;between&nbsp;two&nbsp;ac
 &nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;reflexive&nbsp;links&nbsp;are&nbsp;ignored&nbsp;!!</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-isCyclic"><strong>isCyclic</strong></a>(self, Debug=False)</dt><dd><tt>checks&nbsp;the&nbsp;cyclicity&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
-for&nbsp;a&nbsp;reflexive&nbsp;loop&nbsp;in&nbsp;its&nbsp;transitive&nbsp;closure<br>
-!!&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;supposed&nbsp;to&nbsp;be&nbsp;irreflexive&nbsp;!!</tt></dd></dl>
+for&nbsp;a&nbsp;reflexive&nbsp;loop&nbsp;in&nbsp;its&nbsp;transitive&nbsp;closure-<br>
+&nbsp;<br>
+..&nbsp;warning::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;supposed&nbsp;to&nbsp;be&nbsp;irreflexive&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-isWeaklyComplete"><strong>isWeaklyComplete</strong></a>(self, Debug=False)</dt><dd><tt>checks&nbsp;the&nbsp;weakly&nbsp;completeness&nbsp;property&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
 for&nbsp;the&nbsp;absence&nbsp;of&nbsp;a&nbsp;link&nbsp;between&nbsp;two&nbsp;actions!!<br>
@@ -7910,7 +7941,7 @@ Renders&nbsp;the&nbsp;sharpest&nbsp;of&nbsp;two&nbsp;characteristic&nbsp;vectors
 
 <dl><dt><a name="PrincipalOrder-showActions"><strong>showActions</strong></a>(self)</dt><dd><tt>presentation&nbsp;methods&nbsp;for&nbsp;digraphs&nbsp;actions</tt></dd></dl>
 
-<dl><dt><a name="PrincipalOrder-showAll"><strong>showAll</strong></a>(self)</dt></dl>
+<dl><dt><a name="PrincipalOrder-showAll"><strong>showAll</strong></a>(self)</dt><dd><tt>Detailed&nbsp;show&nbsp;method&nbsp;for&nbsp;genuine&nbsp;digraphs.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-showAutomorphismGenerators"><strong>showAutomorphismGenerators</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;generators&nbsp;of&nbsp;the&nbsp;automorphism&nbsp;group.</tt></dd></dl>
 
@@ -7923,7 +7954,7 @@ Dummy&nbsp;for&nbsp;<a href="#PrincipalOrder-showCircuits">showCircuits</a>().</
 
 <dl><dt><a name="PrincipalOrder-showCircuits"><strong>showCircuits</strong></a>(self)</dt><dd><tt>show&nbsp;methods&nbsp;for&nbsp;circuits&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance.</tt></dd></dl>
 
-<dl><dt><a name="PrincipalOrder-showComponents"><strong>showComponents</strong></a>(self)</dt></dl>
+<dl><dt><a name="PrincipalOrder-showComponents"><strong>showComponents</strong></a>(self)</dt><dd><tt>Shows&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-showGoodChoices"><strong>showGoodChoices</strong></a>(self, Recompute=True)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.</tt></dd></dl>
 
@@ -7982,10 +8013,11 @@ Result&nbsp;saved&nbsp;in&nbsp;self.<strong>newmisset</strong>.</tt></dd></dl>
 <dl><dt><a name="PrincipalOrder-showNeighborhoods"><strong>showNeighborhoods</strong></a>(self)</dt><dd><tt>Lists&nbsp;the&nbsp;gamma&nbsp;and&nbsp;the&nbsp;notGamma&nbsp;function&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-showOrbits"><strong>showOrbits</strong></a>(self, InChoices, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;self.</tt></dd></dl>
+the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-showOrbitsFromFile"><strong>showOrbitsFromFile</strong></a>(self, InFile, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.</tt></dd></dl>
+the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.<br>
+See&nbsp;the&nbsp;digraphs.<a href="digraphs.html#Digraph">Digraph</a>.<a href="#PrincipalOrder-readPerrinMisset">readPerrinMisset</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-showPreKernels"><strong>showPreKernels</strong></a>(self, withListing=True)</dt><dd><tt>Printing&nbsp;dominant&nbsp;and&nbsp;absorbent&nbsp;preKernels:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>dompreKernels</strong>&nbsp;and&nbsp;self.<strong>abspreKernels</strong></tt></dd></dl>
@@ -8229,7 +8261,7 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 
 <dl><dt><a name="RandomLinearOrder-aneighbors"><strong>aneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
-<dl><dt><a name="RandomLinearOrder-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Add&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="RandomLinearOrder-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
 ie&nbsp;the&nbsp;average&nbsp;number&nbsp;of&nbsp;choice&nbsp;members&nbsp;that&nbsp;cover&nbsp;each<br>
@@ -8673,7 +8705,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="RandomLinearOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="RandomLinearOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'max': 1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RandomLinearOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -8808,8 +8840,11 @@ for&nbsp;the&nbsp;absence&nbsp;of&nbsp;a&nbsp;link&nbsp;between&nbsp;two&nbsp;ac
 &nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;reflexive&nbsp;links&nbsp;are&nbsp;ignored&nbsp;!!</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-isCyclic"><strong>isCyclic</strong></a>(self, Debug=False)</dt><dd><tt>checks&nbsp;the&nbsp;cyclicity&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
-for&nbsp;a&nbsp;reflexive&nbsp;loop&nbsp;in&nbsp;its&nbsp;transitive&nbsp;closure<br>
-!!&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;supposed&nbsp;to&nbsp;be&nbsp;irreflexive&nbsp;!!</tt></dd></dl>
+for&nbsp;a&nbsp;reflexive&nbsp;loop&nbsp;in&nbsp;its&nbsp;transitive&nbsp;closure-<br>
+&nbsp;<br>
+..&nbsp;warning::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;supposed&nbsp;to&nbsp;be&nbsp;irreflexive&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-isWeaklyComplete"><strong>isWeaklyComplete</strong></a>(self, Debug=False)</dt><dd><tt>checks&nbsp;the&nbsp;weakly&nbsp;completeness&nbsp;property&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
 for&nbsp;the&nbsp;absence&nbsp;of&nbsp;a&nbsp;link&nbsp;between&nbsp;two&nbsp;actions!!<br>
@@ -8919,7 +8954,7 @@ Renders&nbsp;the&nbsp;sharpest&nbsp;of&nbsp;two&nbsp;characteristic&nbsp;vectors
 
 <dl><dt><a name="RandomLinearOrder-showActions"><strong>showActions</strong></a>(self)</dt><dd><tt>presentation&nbsp;methods&nbsp;for&nbsp;digraphs&nbsp;actions</tt></dd></dl>
 
-<dl><dt><a name="RandomLinearOrder-showAll"><strong>showAll</strong></a>(self)</dt></dl>
+<dl><dt><a name="RandomLinearOrder-showAll"><strong>showAll</strong></a>(self)</dt><dd><tt>Detailed&nbsp;show&nbsp;method&nbsp;for&nbsp;genuine&nbsp;digraphs.</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-showAutomorphismGenerators"><strong>showAutomorphismGenerators</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;generators&nbsp;of&nbsp;the&nbsp;automorphism&nbsp;group.</tt></dd></dl>
 
@@ -8932,7 +8967,7 @@ Dummy&nbsp;for&nbsp;<a href="#RandomLinearOrder-showCircuits">showCircuits</a>()
 
 <dl><dt><a name="RandomLinearOrder-showCircuits"><strong>showCircuits</strong></a>(self)</dt><dd><tt>show&nbsp;methods&nbsp;for&nbsp;circuits&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance.</tt></dd></dl>
 
-<dl><dt><a name="RandomLinearOrder-showComponents"><strong>showComponents</strong></a>(self)</dt></dl>
+<dl><dt><a name="RandomLinearOrder-showComponents"><strong>showComponents</strong></a>(self)</dt><dd><tt>Shows&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-showGoodChoices"><strong>showGoodChoices</strong></a>(self, Recompute=True)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.</tt></dd></dl>
 
@@ -8991,10 +9026,11 @@ Result&nbsp;saved&nbsp;in&nbsp;self.<strong>newmisset</strong>.</tt></dd></dl>
 <dl><dt><a name="RandomLinearOrder-showNeighborhoods"><strong>showNeighborhoods</strong></a>(self)</dt><dd><tt>Lists&nbsp;the&nbsp;gamma&nbsp;and&nbsp;the&nbsp;notGamma&nbsp;function&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-showOrbits"><strong>showOrbits</strong></a>(self, InChoices, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;self.</tt></dd></dl>
+the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-showOrbitsFromFile"><strong>showOrbitsFromFile</strong></a>(self, InFile, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.</tt></dd></dl>
+the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.<br>
+See&nbsp;the&nbsp;digraphs.<a href="digraphs.html#Digraph">Digraph</a>.<a href="#RandomLinearOrder-readPerrinMisset">readPerrinMisset</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-showPreKernels"><strong>showPreKernels</strong></a>(self, withListing=True)</dt><dd><tt>Printing&nbsp;dominant&nbsp;and&nbsp;absorbent&nbsp;preKernels:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>dompreKernels</strong>&nbsp;and&nbsp;self.<strong>abspreKernels</strong></tt></dd></dl>
@@ -9242,7 +9278,7 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 
 <dl><dt><a name="RankedPairsOrder-aneighbors"><strong>aneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
-<dl><dt><a name="RankedPairsOrder-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Add&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="RankedPairsOrder-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
 ie&nbsp;the&nbsp;average&nbsp;number&nbsp;of&nbsp;choice&nbsp;members&nbsp;that&nbsp;cover&nbsp;each<br>
@@ -9686,7 +9722,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="RankedPairsOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="RankedPairsOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'max': 1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RankedPairsOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -9821,8 +9857,11 @@ for&nbsp;the&nbsp;absence&nbsp;of&nbsp;a&nbsp;link&nbsp;between&nbsp;two&nbsp;ac
 &nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;reflexive&nbsp;links&nbsp;are&nbsp;ignored&nbsp;!!</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-isCyclic"><strong>isCyclic</strong></a>(self, Debug=False)</dt><dd><tt>checks&nbsp;the&nbsp;cyclicity&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
-for&nbsp;a&nbsp;reflexive&nbsp;loop&nbsp;in&nbsp;its&nbsp;transitive&nbsp;closure<br>
-!!&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;supposed&nbsp;to&nbsp;be&nbsp;irreflexive&nbsp;!!</tt></dd></dl>
+for&nbsp;a&nbsp;reflexive&nbsp;loop&nbsp;in&nbsp;its&nbsp;transitive&nbsp;closure-<br>
+&nbsp;<br>
+..&nbsp;warning::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;supposed&nbsp;to&nbsp;be&nbsp;irreflexive&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-isWeaklyComplete"><strong>isWeaklyComplete</strong></a>(self, Debug=False)</dt><dd><tt>checks&nbsp;the&nbsp;weakly&nbsp;completeness&nbsp;property&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;by&nbsp;checking<br>
 for&nbsp;the&nbsp;absence&nbsp;of&nbsp;a&nbsp;link&nbsp;between&nbsp;two&nbsp;actions!!<br>
@@ -9932,7 +9971,7 @@ Renders&nbsp;the&nbsp;sharpest&nbsp;of&nbsp;two&nbsp;characteristic&nbsp;vectors
 
 <dl><dt><a name="RankedPairsOrder-showActions"><strong>showActions</strong></a>(self)</dt><dd><tt>presentation&nbsp;methods&nbsp;for&nbsp;digraphs&nbsp;actions</tt></dd></dl>
 
-<dl><dt><a name="RankedPairsOrder-showAll"><strong>showAll</strong></a>(self)</dt></dl>
+<dl><dt><a name="RankedPairsOrder-showAll"><strong>showAll</strong></a>(self)</dt><dd><tt>Detailed&nbsp;show&nbsp;method&nbsp;for&nbsp;genuine&nbsp;digraphs.</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-showAutomorphismGenerators"><strong>showAutomorphismGenerators</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;generators&nbsp;of&nbsp;the&nbsp;automorphism&nbsp;group.</tt></dd></dl>
 
@@ -9945,7 +9984,7 @@ Dummy&nbsp;for&nbsp;<a href="#RankedPairsOrder-showCircuits">showCircuits</a>().
 
 <dl><dt><a name="RankedPairsOrder-showCircuits"><strong>showCircuits</strong></a>(self)</dt><dd><tt>show&nbsp;methods&nbsp;for&nbsp;circuits&nbsp;observed&nbsp;in&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance.</tt></dd></dl>
 
-<dl><dt><a name="RankedPairsOrder-showComponents"><strong>showComponents</strong></a>(self)</dt></dl>
+<dl><dt><a name="RankedPairsOrder-showComponents"><strong>showComponents</strong></a>(self)</dt><dd><tt>Shows&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-showGoodChoices"><strong>showGoodChoices</strong></a>(self, Recompute=True)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.</tt></dd></dl>
 
@@ -10004,10 +10043,11 @@ Result&nbsp;saved&nbsp;in&nbsp;self.<strong>newmisset</strong>.</tt></dd></dl>
 <dl><dt><a name="RankedPairsOrder-showNeighborhoods"><strong>showNeighborhoods</strong></a>(self)</dt><dd><tt>Lists&nbsp;the&nbsp;gamma&nbsp;and&nbsp;the&nbsp;notGamma&nbsp;function&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-showOrbits"><strong>showOrbits</strong></a>(self, InChoices, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;self.</tt></dd></dl>
+the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-showOrbitsFromFile"><strong>showOrbitsFromFile</strong></a>(self, InFile, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.</tt></dd></dl>
+the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.<br>
+See&nbsp;the&nbsp;digraphs.<a href="digraphs.html#Digraph">Digraph</a>.<a href="#RankedPairsOrder-readPerrinMisset">readPerrinMisset</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-showPreKernels"><strong>showPreKernels</strong></a>(self, withListing=True)</dt><dd><tt>Printing&nbsp;dominant&nbsp;and&nbsp;absorbent&nbsp;preKernels:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>dompreKernels</strong>&nbsp;and&nbsp;self.<strong>abspreKernels</strong></tt></dd></dl>

@@ -29,7 +29,7 @@ from sparseOutrankingDigraphs import *
 
 class PerformanceQuantiles(object):
     """
-    Gathers the incremental performance quantiles representation of a
+    Implements the incremental performance quantiles representation of a
     given performance tableau.
 
     Example python session:
@@ -58,7 +58,6 @@ class PerformanceQuantiles(object):
         from copy import deepcopy
         from collections import OrderedDict
         self.Debug = Debug
-        self.T = len(perfTab.actions)
         try:
             self.objectives = perfTab.objectives
         except:
@@ -69,13 +68,15 @@ class PerformanceQuantiles(object):
         np = len(self.quantilesFrequencies)
         limitingQuantiles = {}
         cdf = {}
+        self.sampleSizes = {}
         for g in self.criteria:
+            self.sampleSizes[g] = 0
             limitingQuantiles[g] = self._computeLimitingQuantiles(perfTab,g,
                                                                      frequencies,
                                                                      LowerClosed=LowerClosed)
             if self.Debug:
                 print(g,limitingQuantiles[g])
-            cdf[g] = OrderedDict([(limitingQuantiles[g][i],self.quantilesFrequencies[i]) for i in range(np)]) 
+            cdf[g] = OrderedDict([(limitingQuantiles[g][i],self.quantilesFrequencies[i]) for i in range(np)])
         self.limitingQuantiles = limitingQuantiles
         self.cdf = cdf
         
@@ -105,6 +106,7 @@ class PerformanceQuantiles(object):
                 gPrefThrCst = Decimal('0')
                 gPrefThrSlope = Decimal('0')            
         n = len(gValues)
+        self.sampleSizes[g] = n
         if Debug:
             print('g,n,gValues',g,n,gValues)
 ##        if n > 0:
@@ -215,10 +217,12 @@ class PerformanceQuantiles(object):
         print("""No decision actions are actually being stored!
 Only the cumulated density function per criteria of so far
 observed performance evaluations are kept.
-The number of so far observed evaluations is %d.
-        """ % self.T)
+The number of so far observed evaluations per criteria are the following:
+        """ )
+        for g in self.criteria:
+            print(g,self.sampleSizes[g])
 
-    def showCriteria(self,IntegerWeights=False,Alphabetic=False,ByObjectives=False,Debug=False):
+    def showCriteria(self,IntegerWeights=False,Alphabetic=False,ByObjectives=True,Debug=False):
         """
         print Criteria with thresholds and weights.
         """
@@ -260,20 +264,40 @@ The number of so far observed evaluations is %d.
                             if Debug:
                                 print('-->>>', th,criteria[g]['thresholds'][th][0],criteria[g]['thresholds'][th][1])
                             print('  Threshold %s : %.2f + %.2fx' %\
-                                  (th,criteria[g]['thresholds'][th][0],criteria[g]['thresholds'][th][1]), end=' ')
+                                  (th,criteria[g]['thresholds'][th][0],criteria[g]['thresholds'][th][1]))
                             #print self.criteria[g]['thresholds'][th]
                             #print('; percentile: ',self.computeVariableThresholdPercentile(g,th,Debug))
                     except:
                         pass
                     #print(self.limitingQuantiles[g])
-                    
-                    for i in range(len(self.quantilesFrequencies)):
-                        q = self.quantilesFrequencies[i]
-                        if i > 0:
-                            print('%.2f : %.2f' % (q,self.limitingQuantiles[g][i]) )
-                        else:
-                            print('%.2f : %.2f' % (q,self.criteria[g]['minValue']) )
-                            
+                    print('  Sample size: %d' % self.sampleSizes[g])
+                    print('  p    : quantile(p)')
+                    if self.LowerClosed:
+                        nq = len(self.quantilesFrequencies)
+                        for i in range(nq):
+                            q = self.quantilesFrequencies[i]
+                            #print(q,self.limitingQuantiles[g])
+                            if i < (nq-1):
+                                print('%.2f :  %.2f' % (q,self.limitingQuantiles[g][i]) )
+                            else:
+                                print('%.2f :  %.2f' % (q,self.criteria[g]['maxValue'])   )                 
+                    else:  # upperclosed quantile bins
+                        nq = len(self.quantilesFrequencies)
+                        for i in range(nq):
+                            q = self.quantilesFrequencies[i]
+                            #print(q,self.limitingQuantiles[g])
+                            if i > 0:
+                                print('%.2f : %.2f' % (q,self.limitingQuantiles[g][i]) )
+                            else:
+                                print('%.2f : %.2f' % (q,self.criteria[g]['minValue'])   )                 
+                       
+##                        for i in range(len(self.quantilesFrequencies)):
+##                            q = self.quantilesFrequencies[i]
+##                            if i > 0:
+##                                print('%.2f : %.2f' % (q,self.limitingQuantiles[g][i]) )
+##                            else:
+##                                print('%.2f : %.2f' % (q,self.criteria[g]['minValue']) )
+                                
                     print()
         else:
             criteriaList = list(self.criteria.keys())
@@ -301,22 +325,23 @@ The number of so far observed evaluations is %d.
                         if Debug:
                             print('-->>>', th,criteria[g]['thresholds'][th][0],criteria[g]['thresholds'][th][1])
                         print('  Threshold %s : %.2f + %.2fx'\
-                              % (th,criteria[g]['thresholds'][th][0],criteria[g]['thresholds'][th][1]), end=' ')
+                              % (th,criteria[g]['thresholds'][th][0],criteria[g]['thresholds'][th][1]))
                         #print self.criteria[g]['thresholds'][th]
                         #print('; percentile: ',self.computeVariableThresholdPercentile(g,th,Debug))
                 except:
                     pass
                 #print(self.limitingQuantiles[g])
-                print('  p    : q(p')
+                print('  Sample size: %d' % self.sampleSizes[g])
+                print('  p    :  qantile(p')
                 if self.LowerClosed:
                     nq = len(self.quantilesFrequencies)
                     for i in range(nq):
                         q = self.quantilesFrequencies[i]
                         #print(q,self.limitingQuantiles[g])
                         if i < (nq-1):
-                            print('%.2f : %.2f' % (q,self.limitingQuantiles[g][i]) )
+                            print('%.2f :  %.2f' % (q,self.limitingQuantiles[g][i]) )
                         else:
-                            print('%.2f : %.2f' % (q,self.criteria[g]['maxValue'])   )                 
+                            print('%.2f :  %.2f' % (q,self.criteria[g]['maxValue'])   )                 
                 else:  # upperclosed quantile bins
                     nq = len(self.quantilesFrequencies)
                     for i in range(nq):
@@ -328,7 +353,7 @@ The number of so far observed evaluations is %d.
                             print('%.2f : %.2f' % (q,self.criteria[g]['minValue'])   )                 
                 print()
 
-    def _updateCriterionQuantiles(self,g,newValues):
+    def _updateCriterionQuantiles(self,g,newValues,historySize=None):
 ##        newValues.sort()
 ##        print(g,newValues)
         #self.Debug = True
@@ -339,7 +364,10 @@ The number of so far observed evaluations is %d.
         np = len(p)
         q = self.limitingQuantiles[g]
         cdf = self.cdf[g]
-        t = self.T
+        if historySize == None:
+            t = self.sampleSizes[g]
+        else:
+            t = historySize
         oldfrq = [p[i]*(t+1) for i in range(np)]
         if self.Debug:
             print(q)
@@ -348,7 +376,11 @@ The number of so far observed evaluations is %d.
             print(oldfrq)
             print(t)
         # new observations
-        nv = sorted(newValues)
+        nv = []
+        for x in newValues:
+            if x != -999:
+                nv.append(x)
+        nv.sort()
         nt = len(nv)
         if self.Debug:
             print(nv,nt)
@@ -450,9 +482,10 @@ The number of so far observed evaluations is %d.
         for p in state:
             cdf[state[p]] = p
         self.cdf[g] = cdf
+        self.sampleSizes[g] = t
 
         
-    def updateQuantiles(self,newActions,t=None):
+    def updateQuantiles(self,newActions,historySize=None):
         """
         Update the PerformanceQuantiles with a set of new random decision actions.
         Parameter *t* allows to take more or less into account the historical situtaion.
@@ -460,14 +493,14 @@ The number of so far observed evaluations is %d.
         Otherwise, if *t=None* (the default setting), the new observations become less and less
         influential compared to the historical data.
        """
-        if t != None:
-            self.T = t
+##        if t != None:
+##            self.sampleSizes = t
         for g in self.criteria:
             gNewValues = []
             for x in newActions:
                 gNewValues.append(x['evaluation'][g])
-            self._updateCriterionQuantiles(g,gNewValues)
-        self.T += len(newActions)  
+            self._updateCriterionQuantiles(g,gNewValues,historySize=historySize)
+##        self.T += len(newActions)  
     
 
 
@@ -482,7 +515,8 @@ if __name__ == "__main__":
     from randomPerfTabs import RandomCBPerformanceTableau
     from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
 
-    frequencies = [0.0,0.25,0.5,0.75,1.0]
+    #frequencies = [0.0,0.25,0.5,0.75,1.0]
+    frequencies = [0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0]
     nbrActions=100
     nbrCrit = 7
     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
@@ -490,18 +524,18 @@ if __name__ == "__main__":
     pq = PerformanceQuantiles(tp,frequencies,LowerClosed=True,Debug=False)
     #print(pq.limitingQuantiles)
     pq.showActions()
-    pq.showCriteria()
+    pq.showCriteria(ByObjectives=True)
     tpg = PerfTabGenerator(tp,seed=105)
     newActions = []
     for i in range(100):
         newAction = tpg.randomAction()
         newActions.append(newAction)
     #print(newActions)
-    pq.updateQuantiles(newActions,t=None)
+    pq.updateQuantiles(newActions,historySize=0)
     pq.showActions()
     pq.showCriteria()
     newActions = []
-    for i in range(5):
+    for i in range(50):
         newAction = tpg.randomAction()
         newActions.append(newAction)
     #print(newActions)
