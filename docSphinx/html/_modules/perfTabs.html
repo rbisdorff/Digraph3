@@ -1163,6 +1163,103 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="s1">&#39;NA&#39;</span></div>
 
+    <span class="k">def</span> <span class="nf">_computeLimitingQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">frequencies</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">PrefThresholds</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders the list of limiting quantiles *q(p)* on criteria *g* for *p* in *frequencies* </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">floor</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="n">gValues</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;g,x,evaluation[g][x]&#39;</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">])</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">):</span>
+                <span class="n">gValues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">])</span>
+        <span class="n">gValues</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">PrefThresholds</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">gPrefThrCst</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;thresholds&#39;</span><span class="p">][</span><span class="s1">&#39;pref&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">gPrefThrSlope</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;thresholds&#39;</span><span class="p">][</span><span class="s1">&#39;pref&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">gPrefThrCst</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
+                <span class="n">gPrefThrSlope</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>            
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">gValues</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;g,n,gValues&#39;</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">gValues</span><span class="p">)</span>
+<span class="c1">##        if n &gt; 0:</span>
+<span class="c1">##        nf = Decimal(str(n+1))</span>
+        <span class="n">nf</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+        <span class="n">limitingQuantiles</span> <span class="o">=</span> <span class="p">[</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">q</span><span class="p">))</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">frequencies</span><span class="p">]</span>
+        <span class="n">limitingQuantiles</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">limitingQuantiles</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">LowerClosed</span><span class="p">:</span>
+            <span class="n">limitingQuantiles</span> <span class="o">=</span> <span class="n">limitingQuantiles</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">limitingQuantiles</span> <span class="o">=</span> <span class="n">limitingQuantiles</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">limitingQuantiles</span><span class="p">)</span>
+        <span class="c1"># computing the quantiles on criterion g</span>
+        <span class="n">gQuantiles</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">LowerClosed</span><span class="p">:</span>
+            <span class="c1"># we ignore the 1.00 quantile and replace it with +infty</span>
+            <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">limitingQuantiles</span><span class="p">:</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">nf</span><span class="p">))</span> <span class="o">*</span> <span class="n">q</span><span class="p">)</span>
+                <span class="n">rq</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;r,rq&#39;</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">rq</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">rq</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="n">quantile</span> <span class="o">=</span> <span class="n">gValues</span><span class="p">[</span><span class="n">rq</span><span class="p">]</span>\
+                        <span class="o">+</span> <span class="p">((</span><span class="n">r</span><span class="o">-</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">rq</span><span class="p">)))</span><span class="o">*</span><span class="p">(</span><span class="n">gValues</span><span class="p">[</span><span class="n">rq</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">gValues</span><span class="p">[</span><span class="n">rq</span><span class="p">]))</span>
+                    <span class="k">if</span> <span class="n">rq</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">PrefThresholds</span><span class="p">:</span>
+                        <span class="n">quantile</span> <span class="o">+=</span> <span class="n">gPrefThrCst</span> <span class="o">+</span> <span class="n">quantile</span><span class="o">*</span><span class="n">gPrefThrSlope</span>
+                <span class="k">else</span> <span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span>
+                        <span class="c1">#quantile = Decimal(&#39;100.0&#39;)</span>
+                        <span class="n">quantile</span> <span class="o">=</span> <span class="n">gValues</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="c1">#quantile = Decimal(&#39;200.0&#39;)</span>
+                        <span class="n">quantile</span> <span class="o">=</span> <span class="n">gValues</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span>
+                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;quantile&#39;</span><span class="p">,</span><span class="n">quantile</span><span class="p">)</span>
+                <span class="n">gQuantiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">quantile</span><span class="p">)</span>               
+
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># upper closed categories</span>
+            <span class="c1"># we ignore the quantile 0.0 and replace it with -\infty            </span>
+            <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">limitingQuantiles</span><span class="p">:</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">nf</span><span class="p">))</span> <span class="o">*</span> <span class="n">q</span><span class="p">)</span>
+                <span class="n">rq</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;r,rq&#39;</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">rq</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">rq</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span>
+                        <span class="c1">#quantile = Decimal(&#39;-200.0&#39;)</span>
+                        <span class="n">quantile</span> <span class="o">=</span> <span class="n">gValues</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="n">gValues</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="c1">#quantile = Decimal(&#39;-100.0&#39;)</span>
+                        <span class="n">quantile</span> <span class="o">=</span> <span class="n">gValues</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">gValues</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="k">elif</span> <span class="n">rq</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="n">quantile</span> <span class="o">=</span> <span class="n">gValues</span><span class="p">[</span><span class="n">rq</span><span class="p">]</span>\
+                        <span class="o">+</span> <span class="p">((</span><span class="n">r</span><span class="o">-</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">rq</span><span class="p">)))</span><span class="o">*</span><span class="p">(</span><span class="n">gValues</span><span class="p">[</span><span class="n">rq</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">gValues</span><span class="p">[</span><span class="n">rq</span><span class="p">]))</span>
+                    <span class="k">if</span> <span class="n">PrefThresholds</span><span class="p">:</span>
+                        <span class="n">quantile</span> <span class="o">-=</span> <span class="n">gPrefThrCst</span> <span class="o">-</span> <span class="n">quantile</span><span class="o">*</span><span class="n">gPrefThrSlope</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">quantile</span> <span class="o">=</span> <span class="n">gValues</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span>
+                            <span class="n">quantile</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-200.0&#39;</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">quantile</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-100.0&#39;</span><span class="p">)</span>     
+                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;quantile&#39;</span><span class="p">,</span><span class="n">quantile</span><span class="p">)</span>
+                <span class="n">gQuantiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">quantile</span><span class="p">)</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            gQuantiles = []</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">LowerClosed</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">],</span><span class="n">gQuantiles</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">gQuantiles</span>
+
 <div class="viewcode-block" id="PerformanceTableau.computeQuantiles"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeQuantiles">[docs]</a>    <span class="k">def</span> <span class="nf">computeQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders a quantiles matrix action x criterion with the performance quantile of action on criterion</span>
@@ -7103,10 +7200,12 @@
                                    <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
                                    <span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">saveXMCDA2</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
-    <span class="n">t1</span> <span class="o">=</span> <span class="n">XMCDA2PerformanceTableau</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
-    <span class="n">t1</span><span class="o">.</span><span class="n">showObjectives</span><span class="p">()</span>
-    <span class="n">t1</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">SparseModel</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">criteria</span><span class="p">:</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">_computeLimitingQuantiles</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">frequencies</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.25</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.75</span><span class="p">,</span><span class="mf">1.0</span><span class="p">],</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1">##    t.saveXMCDA2(&#39;test&#39;)</span>
+<span class="c1">##    t1 = XMCDA2PerformanceTableau(&#39;test&#39;)</span>
+<span class="c1">##    t1.showObjectives()</span>
+<span class="c1">##    t1.showHTMLPerformanceHeatmap(Correlations=True,SparseModel=False)</span>
 <span class="c1">##    t = ConstantPerformanceTableau(t,</span>
 <span class="c1">##                                   actionsSubset=[&#39;a01&#39;,&#39;a02&#39;,&#39;a03&#39;],</span>
 <span class="c1">##                                   criteriaSubset=[&#39;g01&#39;,&#39;g02&#39;,&#39;g03&#39;],</span>

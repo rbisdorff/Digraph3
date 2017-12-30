@@ -32,26 +32,27 @@ class PerformanceQuantiles(object):
     Implements the incremental performance quantiles representation of a
     given performance tableau.
 
-    Example python session:
-    >>> import performanceQuantiles
-    >>> from randomPerfTabs import RandomCBPerformanceTableau, 
-    >>> from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
-    >>> frequencies = [0.0,0.25,0.5,0.75,1.0]
-    >>> nbrActions=1000
-    >>> nbrCrit = 7
-    >>> tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
-                                    numberOfCriteria=nbrCrit,seed=105)
-    >>> pq = PerformanceQuantiles(tp,frequencies,LowerClosed=True,Debug=False)
-    >>> pq.showActions()
-    >>> pq.showCriteria()
-    >>> tpg = PerfTabGenerator(tp,seed=105)
-    >>> newActions = []
-    >>> for i in range(100):
-    >>>     newAction = tpg.randomAction()
-    >>>     newActions.append(newAction)
-    >>>     pq.updateQuantiles(newActions,t=None)
-    >>> pq.showActions()
-    >>> pq.showCriteria()
+    Example python session::
+        >>> import performanceQuantiles
+        >>> from randomPerfTabs import RandomCBPerformanceTableau, 
+        >>> from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
+        >>> frequencies = [0.0,0.25,0.5,0.75,1.0]
+        >>> nbrActions=1000
+        >>> nbrCrit = 7
+        >>> tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
+                                        numberOfCriteria=nbrCrit,seed=105)
+        >>> pq = PerformanceQuantiles(tp,frequencies,LowerClosed=True,Debug=False)
+        >>> pq.showActions()
+        >>> pq.showCriteria()
+        >>> tpg = PerfTabGenerator(tp,seed=105)
+        >>> newActions = []
+        >>> for i in range(100):
+        >>>     newAction = tpg.randomAction()
+        >>>     newActions.append(newAction)
+        >>>     pq.updateQuantiles(newActions,t=None)
+        >>> pq.showActions()
+        >>> pq.showCriteria()
+    
     """
     
     def __init__(self,perfTab,frequencies,LowerClosed=True,Debug=False):

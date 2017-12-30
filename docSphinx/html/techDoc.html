@@ -128,12 +128,12 @@
 </li>
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#sparseoutrankingdigraphs-label"><span class="std std-ref">sparseOutrankingDigraphs module</span></a></dt>
-<dd>Sparse implementation design for large outranking digraphs (order &gt; 1000).</dd>
+<dd>Sparse implementation design for large outranking digraphs (order &gt; 1000);</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="#perftabs-label"><span class="std std-ref">perfTabs module</span></a></dt>
-<dd>Everything needed for handling Multiple Criteria Decision Aid performance tableaux with root <a class="reference external" href="techDoc.html#perfTabs.PerformanceTableau">PerformaceTableau</a> class;</dd>
+<dt><a class="reference internal" href="#performancequantiles-label"><span class="std std-ref">performanceQuantiles module</span></a></dt>
+<dd>Incremental representation of large performance tableaux via binned cumulated density functions per criteria;</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
@@ -4396,6 +4396,78 @@ xml.etree (for Python 2.5+).</p>
 
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
+<div class="section" id="module-performanceQuantiles">
+<span id="performancequantiles-module"></span><span id="performancequantiles-label"></span><h2>performanceQuantiles module<a class="headerlink" href="#module-performanceQuantiles" title="Permalink to this headline">¶</a></h2>
+<p>Digraph3 collection of python3 modules for Algorithmic Decision Theory applications</p>
+<p>Module for incremental outranking digraphs</p>
+<p>Copyright (C) 2016  Raymond Bisdorff</p>
+<p>This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 3 of the License, or
+(at your option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR ANY PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</p>
+<dl class="class">
+<dt id="performanceQuantiles.PerformanceQuantiles">
+<em class="property">class </em><code class="descclassname">performanceQuantiles.</code><code class="descname">PerformanceQuantiles</code><span class="sig-paren">(</span><em>perfTab</em>, <em>frequencies</em>, <em>LowerClosed=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/performanceQuantiles.html#PerformanceQuantiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#performanceQuantiles.PerformanceQuantiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Implements the incremental performance quantiles representation of a
+given performance tableau.</p>
+<dl class="docutils">
+<dt>Example python session::</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">performanceQuantiles</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">,</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">frequencies</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.25</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.75</span><span class="p">,</span><span class="mf">1.0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>
+<span class="go">                                numberOfCriteria=nbrCrit,seed=105)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">frequencies</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">showActions</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">showCriteria</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newActions</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">newAction</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomAction</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">newActions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newAction</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">showActions</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">showCriteria</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="method">
+<dt id="performanceQuantiles.PerformanceQuantiles.showActions">
+<code class="descname">showActions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/performanceQuantiles.html#PerformanceQuantiles.showActions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#performanceQuantiles.PerformanceQuantiles.showActions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="performanceQuantiles.PerformanceQuantiles.showCriteria">
+<code class="descname">showCriteria</code><span class="sig-paren">(</span><em>IntegerWeights=False</em>, <em>Alphabetic=False</em>, <em>ByObjectives=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/performanceQuantiles.html#PerformanceQuantiles.showCriteria"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#performanceQuantiles.PerformanceQuantiles.showCriteria" title="Permalink to this definition">¶</a></dt>
+<dd><p>print Criteria with thresholds and weights.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="performanceQuantiles.PerformanceQuantiles.updateQuantiles">
+<code class="descname">updateQuantiles</code><span class="sig-paren">(</span><em>newActions</em>, <em>historySize=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/performanceQuantiles.html#PerformanceQuantiles.updateQuantiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#performanceQuantiles.PerformanceQuantiles.updateQuantiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the PerformanceQuantiles with a set of new random decision actions.
+Parameter <em>t</em> allows to take more or less into account the historical situtaion.
+For instance, <em>t=0</em> does not take into account at all any past observations.
+Otherwise, if <em>t=None</em> (the default setting), the new observations become less and less
+influential compared to the historical data.</p>
+</dd></dl>
+
+</dd></dl>
+
+<p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
+</div>
 <div class="section" id="randomperftabs-module">
 <span id="randomperftabs-label"></span><h2>randomPerfTabs module<a class="headerlink" href="#randomperftabs-module" title="Permalink to this headline">¶</a></h2>
 <p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#randomperformacetableau-tutorial-label"><span class="std std-ref">Generating random performance tableaux</span></a></p>
@@ -7803,6 +7875,7 @@ Euler&#8217;s number of coprime elements a in Zn.</p>
 <li><a class="reference internal" href="#module-randomDigraphs">randomDigraphs module</a></li>
 <li><a class="reference internal" href="#graphs-module">graphs module</a></li>
 <li><a class="reference internal" href="#module-perfTabs">perfTabs module</a></li>
+<li><a class="reference internal" href="#module-performanceQuantiles">performanceQuantiles module</a></li>
 <li><a class="reference internal" href="#randomperftabs-module">randomPerfTabs module</a></li>
 <li><a class="reference internal" href="#outrankingdigraphs-module">outrankingDigraphs module</a></li>
 <li><a class="reference internal" href="#module-xmcda">xmcda module</a></li>

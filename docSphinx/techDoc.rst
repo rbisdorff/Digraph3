@@ -58,9 +58,9 @@ The Digraph3 source code is split into several interdependent modules of which t
 * :ref:`outrankingDigraphs-label`
      New Python3 specific root `OutrankingDigraph <techDoc.html#outrankingDigraphs.OutrankingDigraph>`_ class and specializations; 
 * :ref:`sparseOutrankingDigraphs-label` 
-     Sparse implementation design for large outranking digraphs (order > 1000).
-* :ref:`perfTabs-label` 
-     Everything needed for handling Multiple Criteria Decision Aid performance tableaux with root `PerformaceTableau <techDoc.html#perfTabs.PerformanceTableau>`_ class;
+     Sparse implementation design for large outranking digraphs (order > 1000);
+* :ref:`performanceQuantiles-label` 
+     Incremental representation of large performance tableaux via binned cumulated density functions per criteria;
 * :ref:`randomPerfTabs-label` 
      Various implemented random performance tableau models.
 * :ref:`votingDigraphs-label` 
@@ -129,6 +129,18 @@ perfTabs module
 ---------------
 
 .. automodule:: perfTabs
+   :member-order: alphabetical
+   :no-inherited-members:
+   :members:
+
+Back to the :ref:`Technical-label`
+
+.. _performanceQuantiles-label:
+
+performanceQuantiles module
+---------------------------
+
+.. automodule:: performanceQuantiles
    :member-order: alphabetical
    :no-inherited-members:
    :members:
