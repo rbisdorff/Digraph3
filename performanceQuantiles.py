@@ -34,27 +34,44 @@ class PerformanceQuantiles(object):
 
     Example python session::
         >>> import performanceQuantiles
-        >>> from randomPerfTabs import RandomCBPerformanceTableau, 
+        >>> from randomPerfTabs import RandomCBPerformanceTableau
         >>> from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
         >>> frequencies = [0.0,0.25,0.5,0.75,1.0]
         >>> nbrActions=1000
         >>> nbrCrit = 7
         >>> tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
-                                        numberOfCriteria=nbrCrit,seed=105)
-        >>> pq = PerformanceQuantiles(tp,frequencies,LowerClosed=True,Debug=False)
-        >>> pq.showActions()
-        >>> pq.showCriteria()
+        ...                                numberOfCriteria=nbrCrit,seed=105)
+        >>> pq = performanceQuantiles.PerformanceQuantiles(tp,
+        ...                                frequencies,LowerClosed=True,Debug=False)
+        >>> pq.showLimitingQuantiles(ByObjectives=True)
+        *----  performance quantiles -----*
+        Costs
+        criteria | weights |    '0.0'     '0.25'   '0.5'      '0.75'   '1.0'   
+        ----------|--------------------------------------------------------------
+             'c1'  |   6         |  -97.12  -65.70  -46.08  -24.96  -1.85  
+        Benefits
+        criteria | weights |   '0.0'    '0.25'   '0.5'      '0.75'     '1.0'   
+         ---------|---------------------------------------------------------------
+            'b1'  |   1          |   2.11   32.42   53.25   73.44   100.00  
+            'b2'  |   1          |   0.00     3.00     5.00     7.00     10.00  
+            'b3'  |   1          |   1.08   34.64   54.80   73.24   100.00  
+            'b4'  |   1          |   0.00     3.00     5.00     7.00     10.00  
+            'b5'  |   1          |   1.84   34.25   55.11   74.62   100.00  
+            'b6'  |   1          |   0.00     3.00     5.00     7.00     10.00  
         >>> tpg = PerfTabGenerator(tp,seed=105)
         >>> newActions = []
         >>> for i in range(100):
         >>>     newAction = tpg.randomAction()
         >>>     newActions.append(newAction)
-        >>>     pq.updateQuantiles(newActions,t=None)
-        >>> pq.showActions()
-        >>> pq.showCriteria()
-    
+        >>> pq.updateQuantiles(newActions,historySize=None)      
+        >>> pq.showHTMLLimitingQuantiles(Transposed=True)
+
+    .. image:: examplePerfQuantiles.png
+        :alt: Example limiting quantiles html show method
+        :width: 300 px
+        :align: center
+
     """
-    
     def __init__(self,perfTab,frequencies,LowerClosed=True,Debug=False):
         from copy import deepcopy
         from collections import OrderedDict

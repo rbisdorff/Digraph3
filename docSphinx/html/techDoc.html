@@ -4421,28 +4421,42 @@ given performance tableau.</p>
 <dl class="docutils">
 <dt>Example python session::</dt>
 <dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">performanceQuantiles</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">,</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">frequencies</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.25</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.75</span><span class="p">,</span><span class="mf">1.0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">7</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>
-<span class="go">                                numberOfCriteria=nbrCrit,seed=105)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">frequencies</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">showActions</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">showCriteria</span><span class="p">()</span>
+<span class="gp">... </span>                               <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span> <span class="o">=</span> <span class="n">performanceQuantiles</span><span class="o">.</span><span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="n">frequencies</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">showLimitingQuantiles</span><span class="p">(</span><span class="n">ByObjectives</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">*----  performance quantiles -----*</span>
+<span class="go">Costs</span>
+<span class="go">criteria | weights |    &#39;0.0&#39;     &#39;0.25&#39;   &#39;0.5&#39;      &#39;0.75&#39;   &#39;1.0&#39;   </span>
+<span class="go">----------|--------------------------------------------------------------</span>
+<span class="go">     &#39;c1&#39;  |   6         |  -97.12  -65.70  -46.08  -24.96  -1.85  </span>
+<span class="go">Benefits</span>
+<span class="go">criteria | weights |   &#39;0.0&#39;    &#39;0.25&#39;   &#39;0.5&#39;      &#39;0.75&#39;     &#39;1.0&#39;   </span>
+<span class="go"> ---------|---------------------------------------------------------------</span>
+<span class="go">    &#39;b1&#39;  |   1          |   2.11   32.42   53.25   73.44   100.00  </span>
+<span class="go">    &#39;b2&#39;  |   1          |   0.00     3.00     5.00     7.00     10.00  </span>
+<span class="go">    &#39;b3&#39;  |   1          |   1.08   34.64   54.80   73.24   100.00  </span>
+<span class="go">    &#39;b4&#39;  |   1          |   0.00     3.00     5.00     7.00     10.00  </span>
+<span class="go">    &#39;b5&#39;  |   1          |   1.84   34.25   55.11   74.62   100.00  </span>
+<span class="go">    &#39;b6&#39;  |   1          |   0.00     3.00     5.00     7.00     10.00  </span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">newActions</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">newAction</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomAction</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">newActions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newAction</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">showActions</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">showCriteria</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>      
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">showHTMLLimitingQuantiles</span><span class="p">(</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd>
 </dl>
+<a class="reference internal image-reference" href="_images/examplePerfQuantiles.png"><img alt="Example limiting quantiles html show method" class="align-center" src="_images/examplePerfQuantiles.png" style="width: 300px;" /></a>
 <dl class="method">
 <dt id="performanceQuantiles.PerformanceQuantiles.htmlLimitingQuantiles">
 <code class="descname">htmlLimitingQuantiles</code><span class="sig-paren">(</span><em>Sorted=False</em>, <em>Transposed=False</em>, <em>ndigits=2</em>, <em>ContentCentered=True</em>, <em>title=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/performanceQuantiles.html#PerformanceQuantiles.htmlLimitingQuantiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#performanceQuantiles.PerformanceQuantiles.htmlLimitingQuantiles" title="Permalink to this definition">¶</a></dt>
