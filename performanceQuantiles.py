@@ -68,7 +68,7 @@ class PerformanceQuantiles(object):
 
     .. image:: examplePerfQuantiles.png
         :alt: Example limiting quantiles html show method
-        :width: 300 px
+        :width: 400 px
         :align: center
 
     """
