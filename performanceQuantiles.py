@@ -354,6 +354,151 @@ The number of so far observed evaluations per criteria are the following:
                             print('%.2f : %.2f' % (q,self.criteria[g]['minValue'])   )                 
                 print()
 
+    def showHTMLLimitingQuantiles(self,Sorted=True,\
+                                   Transposed=False,ndigits=2,\
+                                   ContentCentered=True,title=None):
+        """
+        shows the html version of the limiting quantiles in a browser window.
+        """
+        import webbrowser
+        fileName = '/tmp/performanceTable.html'
+        fo = open(fileName,'w')
+        fo.write(self.htmlLimitingQuantiles(Sorted=Sorted,\
+                                           Transposed=Transposed,\
+                                           ndigits=ndigits,
+                                           ContentCentered=ContentCentered,
+                                           title=title))
+        fo.close()
+        url = 'file://'+fileName
+        webbrowser.open_new(url)
+           
+            
+    def htmlLimitingQuantiles(self,Sorted=False,\
+                             Transposed=False,ndigits=2,\
+                             ContentCentered=True,
+                             title=None):
+        """
+        Renders the limiting quantiles in table format:  citerion x limitss in html format.
+        """
+        criteria = self.criteria
+        if title == None:
+            html = '<h1>Performance quantiles</h1>'
+        else:
+            html = '<h1>%s</h1>' % title
+        html += '<h2>Minimal sampling size: %d</h2>' % (min([self.sampleSizes[g] for g in self.sampleSizes]))
+        if self.LowerClosed:
+            html += '<h3>Quantile bins %s</h3>' % ('lowerclosed')
+        else:
+            html += '<h3>Quantile bins %s</h3>' % ('upperclosed')
+           
+        criteriaKeys = [g for g in self.criteria]
+        if Sorted:
+            criteriaKeys.sort()
+        limitingQuantiles = self.limitingQuantiles
+        quantilesFrequencies = self.quantilesFrequencies
+        nq = len(quantilesFrequencies)
+        if ContentCentered:
+            alignFormat = 'center'
+        else:
+            alignFormat = 'right'
+        if Transposed:
+            html += '<table style="background-color:White;" border="1">'
+            html += '<tr bgcolor="#9acd32"><th>criterion</th>'
+            for x in quantilesFrequencies:
+                xName = str(x)
+                html += '<th bgcolor="#FFF79B">%s</th>' % (xName)
+            html += '</tr>'
+            for g in criteriaKeys:
+                try:
+                    gName = criteria[g]['shortName']
+                except:
+                    gName = str(g)
+                html += '<tr><th bgcolor="#FFF79B">%s</th>' % (gName)
+                for i in range(nq):
+                    formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                    if criteria[g]['preferenceDirection'] == 'max':
+                        value = min(criteria[g]['scale'][1],max(criteria[g]['scale'][0],limitingQuantiles[g][i]))
+                    else:
+                        value = max(-criteria[g]['scale'][1],min(-criteria[g]['scale'][0],limitingQuantiles[g][i]))
+                    html += formatString % (value)
+                html += '</tr>'
+            html += '</table>'
+        else:
+            html += '<table style="background-color:White;" border="1">'
+            html += '<tr bgcolor="#9acd32"><th>criterion</th>'
+            for g in criteriaKeys:
+                try:
+                    gName = criteria[g]['shortName']
+                except:
+                    gName = str(g)
+                html += '<th bgcolor="#FFF79B">%s</th>' % (gName)
+            html += '</tr>'
+            for i in range(nq):
+                xName = str(quantilesFrequencies[i])
+                html += '<tr><th bgcolor="#FFF79B">%s</th>' % (xName)
+                for g in criteriaKeys:
+                    formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                    if criteria[g]['preferenceDirection'] == 'max':
+                        value = min(criteria[g]['scale'][1],max(criteria[g]['scale'][0],limitingQuantiles[g][i]))
+                    else:
+                        value = max(-criteria[g]['scale'][1],min(-criteria[g]['scale'][0],limitingQuantiles[g][i]))
+                    html += formatString % (value)
+                html += '</tr>'
+            html += '</table>'        
+        return html
+
+
+
+    def showLimitingQuantiles(self,ByObjectives=False,Sorted=False,ndigits=2):
+        """
+        Prints the performance quantile limits in table format: criteria x limits.
+        """
+        criteria = self.criteria
+        print('*----  performance quantiles -----*')
+        quantiles = self.quantilesFrequencies
+        nq = len(quantiles)
+        limitingQuantiles = self.limitingQuantiles
+        if ByObjectives:
+            objectives = self.objectives
+            for obj in objectives:
+                print(objectives[obj]['name'])
+                criteriaList = [g for g in criteria if criteria[g]['objective']==obj]
+                if Sorted:
+                    criteriaList.sort()
+                print('criteria | weights |', end=' ')
+                for x in quantiles:
+                    print('\''+str(x)+'\'  ', end=' ')
+                print('\n---------|-----------------------------------------')
+                for g in criteriaList:
+                    print('   \''+str(g)+'\'  |   '+str(criteria[g]['weight'])+'   | ', end=' ')
+                    for i in range(nq):
+                        formatString = '%% .%df ' % ndigits
+                        if criteria[g]['preferenceDirection'] == 'max':
+                            value = min(criteria[g]['scale'][1],max(criteria[g]['scale'][0],limitingQuantiles[g][i]))
+                        else:
+                            value = max(-criteria[g]['scale'][1],min(-criteria[g]['scale'][0],limitingQuantiles[g][i]))
+                        print(formatString % (value), end=' ')
+                    print()      
+        else: 
+            criteriaList = list(self.criteria)
+            if sorted:
+                criteriaList.sort()
+            print('criteria | weights |', end=' ')
+            for x in quantiles:
+                print('\''+str(x)+'\'  ', end=' ')
+            print('\n---------|-----------------------------------------')
+            for g in criteriaList:
+                print('   \''+str(g)+'\'  |   '+str(self.criteria[g]['weight'])+'   | ', end=' ')
+                for i in range(nq):
+                    formatString = '%% .%df ' % ndigits
+                    if criteria[g]['preferenceDirection'] == 'max':
+                        value = min(criteria[g]['scale'][1],max(criteria[g]['scale'][0],limitingQuantiles[g][i]))
+                    else:
+                        value = max(-criteria[g]['scale'][1],min(-criteria[g]['scale'][0],limitingQuantiles[g][i]))
+                    print(formatString % (value), end=' ')
+                print()      
+
+###   update quantiles
     def _updateCriterionQuantiles(self,g,newValues,historySize=None):
 ##        newValues.sort()
 ##        print(g,newValues)
@@ -519,28 +664,30 @@ if __name__ == "__main__":
     #frequencies = [0.0,0.25,0.5,0.75,1.0]
     frequencies = [0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0]
     nbrActions=100
-    nbrCrit = 7
+    nbrCrit = 21
     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
-                                    numberOfCriteria=nbrCrit,seed=105)
+                                    numberOfCriteria=nbrCrit,seed=None)
     pq = PerformanceQuantiles(tp,frequencies,LowerClosed=True,Debug=False)
     #print(pq.limitingQuantiles)
-    pq.showActions()
-    pq.showCriteria(ByObjectives=True)
-    tpg = PerfTabGenerator(tp,seed=105)
-    newActions = []
-    for i in range(100):
-        newAction = tpg.randomAction()
-        newActions.append(newAction)
-    #print(newActions)
-    pq.updateQuantiles(newActions,historySize=0)
-    pq.showActions()
-    pq.showCriteria()
-    newActions = []
-    for i in range(50):
-        newAction = tpg.randomAction()
-        newActions.append(newAction)
-    #print(newActions)
-    pq.updateQuantiles(newActions)
-    pq.showActions()
-    pq.showCriteria()
+    pq.showLimitingQuantiles(ByObjectives=False)
+    pq.showHTMLLimitingQuantiles(Transposed=True)
+##    pq.showActions()
+##    pq.showCriteria(ByObjectives=True)
+##    tpg = PerfTabGenerator(tp,seed=105)
+##    newActions = []
+##    for i in range(100):
+##        newAction = tpg.randomAction()
+##        newActions.append(newAction)
+##    #print(newActions)
+##    pq.updateQuantiles(newActions,historySize=0)
+##    pq.showActions()
+##    pq.showCriteria()
+##    newActions = []
+##    for i in range(50):
+##        newAction = tpg.randomAction()
+##        newActions.append(newAction)
+##    #print(newActions)
+##    pq.updateQuantiles(newActions)
+##    pq.showActions()
+##    pq.showCriteria()
 
