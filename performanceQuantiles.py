@@ -402,11 +402,12 @@ The number of so far observed evaluations per criteria are the following:
             html = '<h1>Performance quantiles</h1>'
         else:
             html = '<h1>%s</h1>' % title
-        html += '<h2>Minimal sampling size: %d</h2>' % (min([self.sampleSizes[g] for g in self.sampleSizes]))
-        if self.LowerClosed:
-            html += '<h3>Quantile bins %s</h3>' % ('lowerclosed')
-        else:
-            html += '<h3>Quantile bins %s</h3>' % ('upperclosed')
+        sampleSizes = [self.sampleSizes[g] for g in self.sampleSizes]
+        html += '<p>Sampling sizes between %d and %d.</p>' % ( min(sampleSizes),max(sampleSizes))
+##        if self.LowerClosed:
+##            html += '<p>Quantile bins %s.</p>' % ('lowerclosed')
+##        else:
+##            html += '<p>Quantile bins %s.</p>' % ('upperclosed')
            
         criteriaKeys = [g for g in self.criteria]
         if Sorted:
@@ -680,11 +681,11 @@ if __name__ == "__main__":
 
     #frequencies = [0.0,0.25,0.5,0.75,1.0]
     frequencies = [0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0]
-    nbrActions=100
+    nbrActions=1000
     nbrCrit = 21
     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
                                     numberOfCriteria=nbrCrit,seed=None)
-    pq = PerformanceQuantiles(tp,frequencies,LowerClosed=True,Debug=False)
+    pq = PerformanceQuantiles(tp,frequencies,LowerClosed=False,Debug=False)
     #print(pq.limitingQuantiles)
     pq.showLimitingQuantiles(ByObjectives=False)
     pq.showHTMLLimitingQuantiles(Transposed=True)
