@@ -4433,18 +4433,18 @@ given performance tableau.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">showLimitingQuantiles</span><span class="p">(</span><span class="n">ByObjectives</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">*----  performance quantiles -----*</span>
 <span class="go">Costs</span>
-<span class="go">criteria | weights |  &#39;0.0&#39;   &#39;0.25&#39;   &#39;0.5&#39;  &#39;0.75&#39;  &#39;1.0&#39;   </span>
+<span class="go">criteria | weights |  &#39;0.0&#39;  &#39;0.25&#39;  &#39;0.5&#39;  &#39;0.75&#39;  &#39;1.0&#39;   </span>
 <span class="go"> --------|--------------------------------------------------------------</span>
-<span class="go">    &#39;c1&#39; |   6     |  -97.12  -65.70  -46.08  -24.96  -1.85  </span>
+<span class="go">    &#39;c1&#39; |   6   |  -97.12  -65.70  -46.08  -24.96  -1.85  </span>
 <span class="go">Benefits</span>
-<span class="go">criteria | weights |   &#39;0.0&#39;  &#39;0.25&#39;  &#39;0.5&#39;   &#39;0.75&#39;  &#39;1.0&#39;   </span>
-<span class="go"> --------|---------------------------------------------------------------</span>
-<span class="go">    &#39;b1&#39; |   1     |   2.11   32.42   53.25   73.44   100.00  </span>
-<span class="go">    &#39;b2&#39; |   1     |   0.00    3.00    5.00    7.00    10.00  </span>
-<span class="go">    &#39;b3&#39; |   1     |   1.08   34.64   54.80   73.24   100.00  </span>
-<span class="go">    &#39;b4&#39; |   1     |   0.00    3.00    5.00    7.00    10.00  </span>
-<span class="go">    &#39;b5&#39; |   1     |   1.84   34.25   55.11   74.62   100.00  </span>
-<span class="go">    &#39;b6&#39; |   1     |   0.00    3.00    5.00    7.00    10.00  </span>
+<span class="go">criteria  | weights  |   &#39;0.0&#39;  &#39;0.25&#39;  &#39;0.5&#39;  &#39;0.75&#39;  &#39;1.0&#39;   </span>
+<span class="go"> ---------|---------------------------------------------------------------</span>
+<span class="go">    &#39;b1&#39;  |   1      |   2.11   32.42   53.25   73.44   100.00  </span>
+<span class="go">    &#39;b2&#39;  |   1      |   0.00   3.00    5.00    7.00    10.00  </span>
+<span class="go">    &#39;b3&#39;  |   1      |   1.08   34.64   54.80   73.24   100.00  </span>
+<span class="go">    &#39;b4&#39;  |   1      |   0.00   3.00    5.00    7.00    10.00  </span>
+<span class="go">    &#39;b5&#39;  |   1      |   1.84   34.25   55.11   74.62   100.00  </span>
+<span class="go">    &#39;b6&#39;  |   1      |   0.00   3.00    5.00    7.00    10.00  </span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">newActions</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
@@ -4457,6 +4457,12 @@ given performance tableau.</p>
 </dd>
 </dl>
 <a class="reference internal image-reference" href="_images/examplePerfQuantiles.png"><img alt="Example limiting quantiles html show method" class="align-center" src="_images/examplePerfQuantiles.png" style="width: 400px;" /></a>
+<dl class="method">
+<dt id="performanceQuantiles.PerformanceQuantiles.htmlLimitingQuantiles">
+<code class="descname">htmlLimitingQuantiles</code><span class="sig-paren">(</span><em>Sorted=False</em>, <em>Transposed=False</em>, <em>ndigits=2</em>, <em>ContentCentered=True</em>, <em>title=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/performanceQuantiles.html#PerformanceQuantiles.htmlLimitingQuantiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#performanceQuantiles.PerformanceQuantiles.htmlLimitingQuantiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the limiting quantiles in table format:  citerion x limitss in html format.</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="performanceQuantiles.PerformanceQuantiles.showActions">
 <code class="descname">showActions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/performanceQuantiles.html#PerformanceQuantiles.showActions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#performanceQuantiles.PerformanceQuantiles.showActions" title="Permalink to this definition">¶</a></dt>

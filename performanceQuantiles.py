@@ -46,18 +46,18 @@ class PerformanceQuantiles(object):
         >>> pq.showLimitingQuantiles(ByObjectives=True)
         *----  performance quantiles -----*
         Costs
-        criteria | weights |  '0.0'   '0.25'   '0.5'  '0.75'  '1.0'   
+        criteria | weights |  '0.0'  '0.25'  '0.5'  '0.75'  '1.0'   
          --------|--------------------------------------------------------------
-            'c1' |   6     |  -97.12  -65.70  -46.08  -24.96  -1.85  
+            'c1' |   6   |  -97.12  -65.70  -46.08  -24.96  -1.85  
         Benefits
-        criteria | weights |   '0.0'  '0.25'  '0.5'   '0.75'  '1.0'   
-         --------|---------------------------------------------------------------
-            'b1' |   1     |   2.11   32.42   53.25   73.44   100.00  
-            'b2' |   1     |   0.00    3.00    5.00    7.00    10.00  
-            'b3' |   1     |   1.08   34.64   54.80   73.24   100.00  
-            'b4' |   1     |   0.00    3.00    5.00    7.00    10.00  
-            'b5' |   1     |   1.84   34.25   55.11   74.62   100.00  
-            'b6' |   1     |   0.00    3.00    5.00    7.00    10.00  
+        criteria  | weights  |   '0.0'  '0.25'  '0.5'  '0.75'  '1.0'   
+         ---------|---------------------------------------------------------------
+            'b1'  |   1      |   2.11   32.42   53.25   73.44   100.00  
+            'b2'  |   1      |   0.00   3.00    5.00    7.00    10.00  
+            'b3'  |   1      |   1.08   34.64   54.80   73.24   100.00  
+            'b4'  |   1      |   0.00   3.00    5.00    7.00    10.00  
+            'b5'  |   1      |   1.84   34.25   55.11   74.62   100.00  
+            'b6'  |   1      |   0.00   3.00    5.00    7.00    10.00  
         >>> tpg = PerfTabGenerator(tp,seed=105)
         >>> newActions = []
         >>> for i in range(100):
@@ -90,12 +90,11 @@ class PerformanceQuantiles(object):
         for g in self.criteria:
             self.sampleSizes[g] = 0
             limitingQuantiles[g] = self._computeLimitingQuantiles(perfTab,g,
-                            frequencies,
-                            LowerClosed=LowerClosed)
+                                                                     frequencies,
+                                                                     LowerClosed=LowerClosed)
             if self.Debug:
                 print(g,limitingQuantiles[g])
-            cdf[g] = OrderedDict([(limitingQuantiles[g][i],self.quantilesFrequencies[i])\
-                                  for i in range(np)])
+            cdf[g] = OrderedDict([(limitingQuantiles[g][i],self.quantilesFrequencies[i]) for i in range(np)])
         self.limitingQuantiles = limitingQuantiles
         self.cdf = cdf
         
@@ -128,11 +127,18 @@ class PerformanceQuantiles(object):
         self.sampleSizes[g] = n
         if Debug:
             print('g,n,gValues',g,n,gValues)
+##        if n > 0:
+##        nf = Decimal(str(n+1))
         nf = Decimal(str(n))
         limitingQuantiles = [Decimal(str(q)) for q in frequencies]
         limitingQuantiles.sort()
+        #self.limitingQuantiles = limitingQuantiles
         if Debug:
             print(limitingQuantiles)
+##        if LowerClosed:
+##            limitingQuantiles = limitingQuantiles[:-1]
+##        else:
+##            limitingQuantiles = limitingQuantiles[1:]
         if Debug:
             print(limitingQuantiles)
         # computing the quantiles on criterion g
@@ -155,7 +161,7 @@ class PerformanceQuantiles(object):
                         quantile = gValues[-1]
                     else:
                         #quantile = Decimal('200.0')
-                        quantile = gValues[-1] * 2
+                        quantile = gValues[-1] 
                 if Debug:
                     print('quantile',quantile)
                 gQuantiles.append(quantile)               
@@ -170,10 +176,10 @@ class PerformanceQuantiles(object):
                 if rq == 0:
                     if self.criteria[g]['preferenceDirection'] == 'min':
                         #quantile = Decimal('-200.0')
-                        quantile = gValues[0] - (gValues[-1] * 2)
+                        quantile = gValues[0] 
                     else:
                         #quantile = Decimal('-100.0')
-                        quantile = gValues[0] - gValues[-1]
+                        quantile = gValues[0] 
                 elif rq < (n-1):
                     quantile = gValues[rq]\
                         + ((r-Decimal(str(rq)))*(gValues[rq+1]-gValues[rq]))
@@ -184,11 +190,9 @@ class PerformanceQuantiles(object):
                         quantile = gValues[n-1]
                     else:
                         if self.criteria[g]['preferenceDirection'] == 'min':
-                            #quantile = Decimal('-200.0')
-                            quantile = gValues[0] - (gValues[-1] * 2)
+                            quantile = gValues[0]
                         else:
-                            #quantile = Decimal('-100.0')     
-                            quantile = gValues[0] - gValues[-1]
+                            quantile = gValues[0]     
                 if Debug:
                     print('quantile',quantile)
                 gQuantiles.append(quantile)
@@ -376,7 +380,7 @@ The number of so far observed evaluations per criteria are the following:
         import webbrowser
         fileName = '/tmp/performanceTable.html'
         fo = open(fileName,'w')
-        fo.write(self._htmlLimitingQuantiles(Sorted=Sorted,\
+        fo.write(self.htmlLimitingQuantiles(Sorted=Sorted,\
                                            Transposed=Transposed,\
                                            ndigits=ndigits,
                                            ContentCentered=ContentCentered,
@@ -386,7 +390,7 @@ The number of so far observed evaluations per criteria are the following:
         webbrowser.open_new(url)
            
             
-    def _htmlLimitingQuantiles(self,Sorted=False,\
+    def htmlLimitingQuantiles(self,Sorted=False,\
                              Transposed=False,ndigits=2,\
                              ContentCentered=True,
                              title=None):
@@ -394,16 +398,15 @@ The number of so far observed evaluations per criteria are the following:
         Renders the limiting quantiles in table format:  citerion x limitss in html format.
         """
         criteria = self.criteria
-        sampleSizes = [self.sampleSizes[g] for g in self.sampleSizes]
         if title == None:
             html = '<h1>Performance quantiles</h1>'
         else:
             html = '<h1>%s</h1>' % title
-        html += '<p>Sampling sizes between %d and %d.</p>' % (min(sampleSizes), max(sampleSizes))
+        html += '<h2>Minimal sampling size: %d</h2>' % (min([self.sampleSizes[g] for g in self.sampleSizes]))
         if self.LowerClosed:
-            html += '<p>Quantile bins %s.</p>' % ('lowerclosed')
+            html += '<h3>Quantile bins %s</h3>' % ('lowerclosed')
         else:
-            html += '<p>Quantile bins %s.</p>' % ('upperclosed')
+            html += '<h3>Quantile bins %s</h3>' % ('upperclosed')
            
         criteriaKeys = [g for g in self.criteria]
         if Sorted:
@@ -431,11 +434,9 @@ The number of so far observed evaluations per criteria are the following:
                 for i in range(nq):
                     formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
                     if criteria[g]['preferenceDirection'] == 'max':
-                        value = min(criteria[g]['scale'][1],\
-                                    max(criteria[g]['scale'][0],limitingQuantiles[g][i]))
+                        value = min(criteria[g]['scale'][1],max(criteria[g]['scale'][0],limitingQuantiles[g][i]))
                     else:
-                        value = min(-criteria[g]['scale'][0],\
-                                    max(-criteria[g]['scale'][1],limitingQuantiles[g][i]))
+                        value = max(-criteria[g]['scale'][1],min(-criteria[g]['scale'][0],limitingQuantiles[g][i]))
                     html += formatString % (value)
                 html += '</tr>'
             html += '</table>'
@@ -454,17 +455,16 @@ The number of so far observed evaluations per criteria are the following:
                 html += '<tr><th bgcolor="#FFF79B">%s</th>' % (xName)
                 for g in criteriaKeys:
                     formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
-                    
                     if criteria[g]['preferenceDirection'] == 'max':
-                        value = min(criteria[g]['scale'][1],\
-                                    max(criteria[g]['scale'][0],limitingQuantiles[g][i]))
+                        value = min(criteria[g]['scale'][1],max(criteria[g]['scale'][0],limitingQuantiles[g][i]))
                     else:
-                        value = min(-criteria[g]['scale'][0],\
-                                    max(-criteria[g]['scale'][1],limitingQuantiles[g][i]))
+                        value = max(-criteria[g]['scale'][1],min(-criteria[g]['scale'][0],limitingQuantiles[g][i]))
                     html += formatString % (value)
                 html += '</tr>'
             html += '</table>'        
         return html
+
+
 
     def showLimitingQuantiles(self,ByObjectives=False,Sorted=False,ndigits=2):
         """
@@ -482,8 +482,7 @@ The number of so far observed evaluations per criteria are the following:
                 criteriaList = [g for g in criteria if criteria[g]['objective']==obj]
                 if Sorted:
                     criteriaList.sort()
-                print('criteria | sample |', end=' ')
-                print('         | size   |', end=' ')
+                print('criteria | weights |', end=' ')
                 for x in quantiles:
                     print('\''+str(x)+'\'  ', end=' ')
                 print('\n---------|-----------------------------------------')
@@ -494,15 +493,14 @@ The number of so far observed evaluations per criteria are the following:
                         if criteria[g]['preferenceDirection'] == 'max':
                             value = min(criteria[g]['scale'][1],max(criteria[g]['scale'][0],limitingQuantiles[g][i]))
                         else:
-                            value = min(-criteria[g]['scale'][0],max(-criteria[g]['scale'][1],limitingQuantiles[g][i]))
+                            value = max(-criteria[g]['scale'][1],min(-criteria[g]['scale'][0],limitingQuantiles[g][i]))
                         print(formatString % (value), end=' ')
                     print()      
         else: 
             criteriaList = list(self.criteria)
             if sorted:
                 criteriaList.sort()
-            print('criteria | sample |', end=' ')
-            print('         | size   |', end=' ')
+            print('criteria | weights |', end=' ')
             for x in quantiles:
                 print('\''+str(x)+'\'  ', end=' ')
             print('\n---------|-----------------------------------------')
@@ -513,7 +511,7 @@ The number of so far observed evaluations per criteria are the following:
                     if criteria[g]['preferenceDirection'] == 'max':
                         value = min(criteria[g]['scale'][1],max(criteria[g]['scale'][0],limitingQuantiles[g][i]))
                     else:
-                        value = min(-criteria[g]['scale'][0],max(-criteria[g]['scale'][1],limitingQuantiles[g][i]))
+                        value = max(-criteria[g]['scale'][1],min(-criteria[g]['scale'][0],limitingQuantiles[g][i]))
                     print(formatString % (value), end=' ')
                 print()      
 
