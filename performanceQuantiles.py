@@ -52,17 +52,17 @@ class PerformanceQuantiles(object):
         Benefits
         criteria  | weights  |   '0.0'  '0.25'  '0.5'  '0.75'  '1.0'   
          ---------|---------------------------------------------------------------
-            'b1'  |   1      |   2.11   32.42   53.25   73.44   100.00  
+            'b1'  |   1      |   2.11   32.42   53.25   73.44   98.69 
             'b2'  |   1      |   0.00   3.00    5.00    7.00    10.00  
-            'b3'  |   1      |   1.08   34.64   54.80   73.24   100.00  
+            'b3'  |   1      |   1.08   34.64   54.80   73.24   97.23  
             'b4'  |   1      |   0.00   3.00    5.00    7.00    10.00  
-            'b5'  |   1      |   1.84   34.25   55.11   74.62   100.00  
+            'b5'  |   1      |   1.84   34.25   55.11   74.62   96.40  
             'b6'  |   1      |   0.00   3.00    5.00    7.00    10.00  
         >>> tpg = PerfTabGenerator(tp,seed=105)
         >>> newActions = []
         >>> for i in range(100):
-        >>>     newAction = tpg.randomAction()
-        >>>     newActions.append(newAction)
+        ...     newAction = tpg.randomAction()
+        ...     newActions.append(newAction)
         >>> pq.updateQuantiles(newActions,historySize=None)      
         >>> pq.showHTMLLimitingQuantiles(Transposed=True)
 

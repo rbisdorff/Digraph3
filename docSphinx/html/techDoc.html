@@ -4439,17 +4439,17 @@ given performance tableau.</p>
 <span class="go">Benefits</span>
 <span class="go">criteria  | weights  |   &#39;0.0&#39;  &#39;0.25&#39;  &#39;0.5&#39;  &#39;0.75&#39;  &#39;1.0&#39;   </span>
 <span class="go"> ---------|---------------------------------------------------------------</span>
-<span class="go">    &#39;b1&#39;  |   1      |   2.11   32.42   53.25   73.44   100.00  </span>
+<span class="go">    &#39;b1&#39;  |   1      |   2.11   32.42   53.25   73.44   98.69 </span>
 <span class="go">    &#39;b2&#39;  |   1      |   0.00   3.00    5.00    7.00    10.00  </span>
-<span class="go">    &#39;b3&#39;  |   1      |   1.08   34.64   54.80   73.24   100.00  </span>
+<span class="go">    &#39;b3&#39;  |   1      |   1.08   34.64   54.80   73.24   97.23  </span>
 <span class="go">    &#39;b4&#39;  |   1      |   0.00   3.00    5.00    7.00    10.00  </span>
-<span class="go">    &#39;b5&#39;  |   1      |   1.84   34.25   55.11   74.62   100.00  </span>
+<span class="go">    &#39;b5&#39;  |   1      |   1.84   34.25   55.11   74.62   96.40  </span>
 <span class="go">    &#39;b6&#39;  |   1      |   0.00   3.00    5.00    7.00    10.00  </span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">newActions</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">newAction</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomAction</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span>    <span class="n">newActions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newAction</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">newAction</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomAction</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="n">newActions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newAction</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>      
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">showHTMLLimitingQuantiles</span><span class="p">(</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
