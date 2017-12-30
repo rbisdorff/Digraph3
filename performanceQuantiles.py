@@ -32,7 +32,7 @@ class PerformanceQuantiles(object):
     Implements the incremental performance quantiles representation of a
     given performance tableau.
 
-    Example python session::
+    Example python session:
         >>> import performanceQuantiles
         >>> from randomPerfTabs import RandomCBPerformanceTableau
         >>> from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
@@ -53,11 +53,11 @@ class PerformanceQuantiles(object):
         criteria | weights |   '0.0'    '0.25'   '0.5'      '0.75'     '1.0'   
          ---------|---------------------------------------------------------------
             'b1'  |   1          |   2.11   32.42   53.25   73.44   100.00  
-            'b2'  |   1          |   0.00     3.00     5.00     7.00     10.00  
+            'b2'  |   1          |   0.00   3.00    5.00    7.00    10.00  
             'b3'  |   1          |   1.08   34.64   54.80   73.24   100.00  
-            'b4'  |   1          |   0.00     3.00     5.00     7.00     10.00  
+            'b4'  |   1          |   0.00   3.00    5.00    7.00    10.00  
             'b5'  |   1          |   1.84   34.25   55.11   74.62   100.00  
-            'b6'  |   1          |   0.00     3.00     5.00     7.00     10.00  
+            'b6'  |   1          |   0.00   3.00    5.00    7.00    10.00  
         >>> tpg = PerfTabGenerator(tp,seed=105)
         >>> newActions = []
         >>> for i in range(100):

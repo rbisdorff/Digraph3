@@ -4419,7 +4419,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 <p>Implements the incremental performance quantiles representation of a
 given performance tableau.</p>
 <dl class="docutils">
-<dt>Example python session::</dt>
+<dt>Example python session:</dt>
 <dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">performanceQuantiles</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
@@ -4440,11 +4440,11 @@ given performance tableau.</p>
 <span class="go">criteria | weights |   &#39;0.0&#39;    &#39;0.25&#39;   &#39;0.5&#39;      &#39;0.75&#39;     &#39;1.0&#39;   </span>
 <span class="go"> ---------|---------------------------------------------------------------</span>
 <span class="go">    &#39;b1&#39;  |   1          |   2.11   32.42   53.25   73.44   100.00  </span>
-<span class="go">    &#39;b2&#39;  |   1          |   0.00     3.00     5.00     7.00     10.00  </span>
+<span class="go">    &#39;b2&#39;  |   1          |   0.00   3.00    5.00    7.00    10.00  </span>
 <span class="go">    &#39;b3&#39;  |   1          |   1.08   34.64   54.80   73.24   100.00  </span>
-<span class="go">    &#39;b4&#39;  |   1          |   0.00     3.00     5.00     7.00     10.00  </span>
+<span class="go">    &#39;b4&#39;  |   1          |   0.00   3.00    5.00    7.00    10.00  </span>
 <span class="go">    &#39;b5&#39;  |   1          |   1.84   34.25   55.11   74.62   100.00  </span>
-<span class="go">    &#39;b6&#39;  |   1          |   0.00     3.00     5.00     7.00     10.00  </span>
+<span class="go">    &#39;b6&#39;  |   1          |   0.00   3.00    5.00    7.00    10.00  </span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">newActions</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
