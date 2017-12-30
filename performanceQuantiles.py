@@ -46,18 +46,18 @@ class PerformanceQuantiles(object):
         >>> pq.showLimitingQuantiles(ByObjectives=True)
         *----  performance quantiles -----*
         Costs
-        criteria | weights |  '0.0'  '0.25'  '0.5'  '0.75'  '1.0'   
+        criteria | weights |  '0.0'   '0.25'   '0.5'  '0.75'  '1.0'   
          --------|--------------------------------------------------------------
-            'c1' |   6   |  -97.12  -65.70  -46.08  -24.96  -1.85  
+            'c1' |   6     |  -97.12  -65.70  -46.08  -24.96  -1.85  
         Benefits
-        criteria  | weights  |   '0.0'  '0.25'  '0.5'  '0.75'  '1.0'   
-         ---------|---------------------------------------------------------------
-            'b1'  |   1      |   2.11   32.42   53.25   73.44   100.00  
-            'b2'  |   1      |   0.00   3.00    5.00    7.00    10.00  
-            'b3'  |   1      |   1.08   34.64   54.80   73.24   100.00  
-            'b4'  |   1      |   0.00   3.00    5.00    7.00    10.00  
-            'b5'  |   1      |   1.84   34.25   55.11   74.62   100.00  
-            'b6'  |   1      |   0.00   3.00    5.00    7.00    10.00  
+        criteria | weights |   '0.0'  '0.25'  '0.5'   '0.75'  '1.0'   
+         --------|---------------------------------------------------------------
+            'b1' |   1     |   2.11   32.42   53.25   73.44   100.00  
+            'b2' |   1     |   0.00    3.00    5.00    7.00    10.00  
+            'b3' |   1     |   1.08   34.64   54.80   73.24   100.00  
+            'b4' |   1     |   0.00    3.00    5.00    7.00    10.00  
+            'b5' |   1     |   1.84   34.25   55.11   74.62   100.00  
+            'b6' |   1     |   0.00    3.00    5.00    7.00    10.00  
         >>> tpg = PerfTabGenerator(tp,seed=105)
         >>> newActions = []
         >>> for i in range(100):
@@ -380,7 +380,7 @@ The number of so far observed evaluations per criteria are the following:
         import webbrowser
         fileName = '/tmp/performanceTable.html'
         fo = open(fileName,'w')
-        fo.write(self.htmlLimitingQuantiles(Sorted=Sorted,\
+        fo.write(self._htmlLimitingQuantiles(Sorted=Sorted,\
                                            Transposed=Transposed,\
                                            ndigits=ndigits,
                                            ContentCentered=ContentCentered,
@@ -390,7 +390,7 @@ The number of so far observed evaluations per criteria are the following:
         webbrowser.open_new(url)
            
             
-    def htmlLimitingQuantiles(self,Sorted=False,\
+    def _htmlLimitingQuantiles(self,Sorted=False,\
                              Transposed=False,ndigits=2,\
                              ContentCentered=True,
                              title=None):
@@ -464,8 +464,6 @@ The number of so far observed evaluations per criteria are the following:
             html += '</table>'        
         return html
 
-
-
     def showLimitingQuantiles(self,ByObjectives=False,Sorted=False,ndigits=2):
         """
         Prints the performance quantile limits in table format: criteria x limits.
@@ -482,7 +480,8 @@ The number of so far observed evaluations per criteria are the following:
                 criteriaList = [g for g in criteria if criteria[g]['objective']==obj]
                 if Sorted:
                     criteriaList.sort()
-                print('criteria | weights |', end=' ')
+                print('criteria | sample |', end=' ')
+                print('         | size   |', end=' ')
                 for x in quantiles:
                     print('\''+str(x)+'\'  ', end=' ')
                 print('\n---------|-----------------------------------------')
@@ -500,7 +499,8 @@ The number of so far observed evaluations per criteria are the following:
             criteriaList = list(self.criteria)
             if sorted:
                 criteriaList.sort()
-            print('criteria | weights |', end=' ')
+            print('criteria | sample |', end=' ')
+            print('         | size   |', end=' ')
             for x in quantiles:
                 print('\''+str(x)+'\'  ', end=' ')
             print('\n---------|-----------------------------------------')

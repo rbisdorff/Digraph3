@@ -96,18 +96,18 @@
 <span class="sd">        &gt;&gt;&gt; pq.showLimitingQuantiles(ByObjectives=True)</span>
 <span class="sd">        *----  performance quantiles -----*</span>
 <span class="sd">        Costs</span>
-<span class="sd">        criteria | weights |  &#39;0.0&#39;  &#39;0.25&#39;  &#39;0.5&#39;  &#39;0.75&#39;  &#39;1.0&#39;   </span>
+<span class="sd">        criteria | weights |  &#39;0.0&#39;   &#39;0.25&#39;   &#39;0.5&#39;  &#39;0.75&#39;  &#39;1.0&#39;   </span>
 <span class="sd">         --------|--------------------------------------------------------------</span>
-<span class="sd">            &#39;c1&#39; |   6   |  -97.12  -65.70  -46.08  -24.96  -1.85  </span>
+<span class="sd">            &#39;c1&#39; |   6     |  -97.12  -65.70  -46.08  -24.96  -1.85  </span>
 <span class="sd">        Benefits</span>
-<span class="sd">        criteria  | weights  |   &#39;0.0&#39;  &#39;0.25&#39;  &#39;0.5&#39;  &#39;0.75&#39;  &#39;1.0&#39;   </span>
-<span class="sd">         ---------|---------------------------------------------------------------</span>
-<span class="sd">            &#39;b1&#39;  |   1      |   2.11   32.42   53.25   73.44   100.00  </span>
-<span class="sd">            &#39;b2&#39;  |   1      |   0.00   3.00    5.00    7.00    10.00  </span>
-<span class="sd">            &#39;b3&#39;  |   1      |   1.08   34.64   54.80   73.24   100.00  </span>
-<span class="sd">            &#39;b4&#39;  |   1      |   0.00   3.00    5.00    7.00    10.00  </span>
-<span class="sd">            &#39;b5&#39;  |   1      |   1.84   34.25   55.11   74.62   100.00  </span>
-<span class="sd">            &#39;b6&#39;  |   1      |   0.00   3.00    5.00    7.00    10.00  </span>
+<span class="sd">        criteria | weights |   &#39;0.0&#39;  &#39;0.25&#39;  &#39;0.5&#39;   &#39;0.75&#39;  &#39;1.0&#39;   </span>
+<span class="sd">         --------|---------------------------------------------------------------</span>
+<span class="sd">            &#39;b1&#39; |   1     |   2.11   32.42   53.25   73.44   100.00  </span>
+<span class="sd">            &#39;b2&#39; |   1     |   0.00    3.00    5.00    7.00    10.00  </span>
+<span class="sd">            &#39;b3&#39; |   1     |   1.08   34.64   54.80   73.24   100.00  </span>
+<span class="sd">            &#39;b4&#39; |   1     |   0.00    3.00    5.00    7.00    10.00  </span>
+<span class="sd">            &#39;b5&#39; |   1     |   1.84   34.25   55.11   74.62   100.00  </span>
+<span class="sd">            &#39;b6&#39; |   1     |   0.00    3.00    5.00    7.00    10.00  </span>
 <span class="sd">        &gt;&gt;&gt; tpg = PerfTabGenerator(tp,seed=105)</span>
 <span class="sd">        &gt;&gt;&gt; newActions = []</span>
 <span class="sd">        &gt;&gt;&gt; for i in range(100):</span>
@@ -430,7 +430,7 @@
         <span class="kn">import</span> <span class="nn">webbrowser</span>
         <span class="n">fileName</span> <span class="o">=</span> <span class="s1">&#39;/tmp/performanceTable.html&#39;</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">htmlLimitingQuantiles</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="n">Sorted</span><span class="p">,</span>\
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_htmlLimitingQuantiles</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="n">Sorted</span><span class="p">,</span>\
                                            <span class="n">Transposed</span><span class="o">=</span><span class="n">Transposed</span><span class="p">,</span>\
                                            <span class="n">ndigits</span><span class="o">=</span><span class="n">ndigits</span><span class="p">,</span>
                                            <span class="n">ContentCentered</span><span class="o">=</span><span class="n">ContentCentered</span><span class="p">,</span>
@@ -440,7 +440,7 @@
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open_new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
            
             
-<div class="viewcode-block" id="PerformanceQuantiles.htmlLimitingQuantiles"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.htmlLimitingQuantiles">[docs]</a>    <span class="k">def</span> <span class="nf">htmlLimitingQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="nf">_htmlLimitingQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                              <span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>\
                              <span class="n">ContentCentered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                              <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -512,9 +512,7 @@
                     <span class="n">html</span> <span class="o">+=</span> <span class="n">formatString</span> <span class="o">%</span> <span class="p">(</span><span class="n">value</span><span class="p">)</span>
                 <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;&#39;</span>
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;&#39;</span>        
-        <span class="k">return</span> <span class="n">html</span></div>
-
-
+        <span class="k">return</span> <span class="n">html</span>
 
 <div class="viewcode-block" id="PerformanceQuantiles.showLimitingQuantiles"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.showLimitingQuantiles">[docs]</a>    <span class="k">def</span> <span class="nf">showLimitingQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ByObjectives</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -532,7 +530,8 @@
                 <span class="n">criteriaList</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span> <span class="k">if</span> <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;objective&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">obj</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">Sorted</span><span class="p">:</span>
                     <span class="n">criteriaList</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;criteria | weights |&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;criteria | sample |&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;         | size   |&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">quantiles</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">  &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">---------|-----------------------------------------&#39;</span><span class="p">)</span>
@@ -550,7 +549,8 @@
             <span class="n">criteriaList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">sorted</span><span class="p">:</span>
                 <span class="n">criteriaList</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;criteria | weights |&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;criteria | sample |&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;         | size   |&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">quantiles</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">  &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">---------|-----------------------------------------&#39;</span><span class="p">)</span>
