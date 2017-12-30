@@ -380,7 +380,7 @@ The number of so far observed evaluations per criteria are the following:
         import webbrowser
         fileName = '/tmp/performanceTable.html'
         fo = open(fileName,'w')
-        fo.write(self.htmlLimitingQuantiles(Sorted=Sorted,\
+        fo.write(self._htmlLimitingQuantiles(Sorted=Sorted,\
                                            Transposed=Transposed,\
                                            ndigits=ndigits,
                                            ContentCentered=ContentCentered,
@@ -390,7 +390,7 @@ The number of so far observed evaluations per criteria are the following:
         webbrowser.open_new(url)
            
             
-    def htmlLimitingQuantiles(self,Sorted=False,\
+    def _htmlLimitingQuantiles(self,Sorted=False,\
                              Transposed=False,ndigits=2,\
                              ContentCentered=True,
                              title=None):

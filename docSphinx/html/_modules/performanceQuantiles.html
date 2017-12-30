@@ -430,7 +430,7 @@
         <span class="kn">import</span> <span class="nn">webbrowser</span>
         <span class="n">fileName</span> <span class="o">=</span> <span class="s1">&#39;/tmp/performanceTable.html&#39;</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">htmlLimitingQuantiles</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="n">Sorted</span><span class="p">,</span>\
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_htmlLimitingQuantiles</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="n">Sorted</span><span class="p">,</span>\
                                            <span class="n">Transposed</span><span class="o">=</span><span class="n">Transposed</span><span class="p">,</span>\
                                            <span class="n">ndigits</span><span class="o">=</span><span class="n">ndigits</span><span class="p">,</span>
                                            <span class="n">ContentCentered</span><span class="o">=</span><span class="n">ContentCentered</span><span class="p">,</span>
@@ -440,7 +440,7 @@
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open_new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
            
             
-<div class="viewcode-block" id="PerformanceQuantiles.htmlLimitingQuantiles"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.htmlLimitingQuantiles">[docs]</a>    <span class="k">def</span> <span class="nf">htmlLimitingQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="nf">_htmlLimitingQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                              <span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>\
                              <span class="n">ContentCentered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                              <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -513,7 +513,7 @@
                     <span class="n">html</span> <span class="o">+=</span> <span class="n">formatString</span> <span class="o">%</span> <span class="p">(</span><span class="n">value</span><span class="p">)</span>
                 <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;&#39;</span>
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;&#39;</span>        
-        <span class="k">return</span> <span class="n">html</span></div>
+        <span class="k">return</span> <span class="n">html</span>
 
 
 
