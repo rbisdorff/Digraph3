@@ -3240,6 +3240,7 @@ class _IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
         self.limitingQuantiles = deepcopy(perfQuantiles.limitingQuantiles)
         self.historySizes = deepcopy(perfQuantiles.historySizes)
         self.cdf = deepcopy(perfQuantiles.cdf)
+        self.name = 'Incremental Rating Agent'
         # import the actions to rate
         newActions = OrderedDict()
         evaluation = {}
@@ -3253,7 +3254,8 @@ class _IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
                                 'name':newData[i]['action']['name'],
                                 'type': newData[i]['action']['type'],
                                 'commemt': newData[i]['action']['comment']}
-                evaluation[g][key] = newData[i]['evaluation'][g]
+                for g in self.criteria:
+                    evaluation[g][key] = newData[i]['evaluation'][g]
         self.newActions = newActions
         self.evaluation = evaluation
         
@@ -3375,7 +3377,7 @@ class _IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
         if Debug:
             perfTab.showActions()
             perfTab.showCriteria()
-            perfTab.showPerformanceTableau()
+            #perfTab.showPerformanceTableau()
         
         if CompleteOutranking:
             g = BipolarOutrankingDigraph(perfTab,hasNoVeto=hasNoVeto,
@@ -3392,7 +3394,7 @@ class _IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
 ##                Max = Decimal('100')
         Med = (Max + Min)/Decimal('2.0')
         self.valuationdomain = {'min': Min, 'med':Med ,'max':Max }
-        if LowerClosed:
+        if self.LowerClosed:
             initial=newActions
             terminal=profiles
         else:
@@ -3474,11 +3476,11 @@ class _IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
 
         self.runTimes['totalTime'] = time() - tt
 
-##        else:
-##            self.computeCategoryContents(StoreSorting=StoreSorting,\
-##                                         Threading=Threading,\
-##                                         nbrOfCPUs=nbrOfProcesses,\
-##                                         Comments=Comments)
+####        else:
+####            self.computeCategoryContents(StoreSorting=StoreSorting,\
+####                                         Threading=Threading,\
+####                                         nbrOfCPUs=nbrOfProcesses,\
+####                                         Comments=Comments)
 
     def _constructRelationWithThreading(self,criteria,\
                            evaluation,\
@@ -3500,7 +3502,8 @@ class _IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
         """
         from multiprocessing import cpu_count
         
-        LowerClosed = self.criteriaCategoryLimits['LowerClosed']        
+        #LowerClosed = self.criteriaCategoryLimits['LowerClosed']
+        LowerClosed = self.LowerClosed
 
         if not Threading or cpu_count() < 2:
             # set parameters for non threading
@@ -3537,7 +3540,7 @@ class _IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
                 actions = terminal
             categories = self.categories.keys()
             sorting = {}
-            nq = len(self.limitingQuantiles) - 1
+            nq = len(self.quantilesFrequencies) - 1
             for x in actions:
                 sorting[x] = {}
                 for c in categories:
@@ -4228,7 +4231,7 @@ class _IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
             eq.sort()
             for x in eq:
                 actionsList.append(x)
-        if len(actionsList) != len(self.actions):
+        if len(actionsList) != len(self.newActions):
             print('Error !: missing action(s) %s in ordered table.')
             
         Digraph.showRelationTable(self,actionsSubset=actionsList,\
@@ -4237,9 +4240,9 @@ class _IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
                                 ReflexiveTerms=False)
         
 
-    def _computeQuantiles(self,x,Debug=False):
+    def _computeQuantilesFrequencies(self,x,Debug=False):
         """
-        renders the limiting quantiles
+        renders the quantiles frequencies
         """
         from math import floor
         if isinstance(x,int):
@@ -4281,11 +4284,11 @@ class _IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
                 print('Detected preference thresholds = ',pth)
                 print('amplitude, n',amp,n)
 
-        limitingQuantiles = []
+        quantilesFrequencies = []
         for i in range(n+1):
-            limitingQuantiles.append( Decimal(str(i)) / Decimal(str(n)) )
+            quantilesFrequencies.append( Decimal(str(i)) / Decimal(str(n)) )
         self.name = 'sorting_with_%d-tile_limits' % n
-        return limitingQuantiles
+        return quantilesFrequencies
                                          
     def _computeLimitingQuantiles(self,g,Debug=True):
         """
@@ -4316,7 +4319,7 @@ class _IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
         """
         profiles = set([x for x in list(self.profiles.keys())])
         if action == None:
-            actionsExt = set([x for x in list(self.actions.keys())])
+            actionsExt = set([x for x in list(self.newActions.keys())])
             if withoutProfiles:
                 return actionsExt - profiles
             else:
@@ -5575,18 +5578,19 @@ if __name__ == "__main__":
     from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
     frequencies = [0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0]
     nbrActions=100
-    nbrCrit = 21
+    nbrCrit = 13
     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
                                     numberOfCriteria=nbrCrit,seed=None)
     pq = PerformanceQuantiles(tp,frequencies,LowerClosed=True,Debug=False)
-    tpg = PerfTabGenerator(tp,seed=105)
+    tpg = PerfTabGenerator(tp,instanceCounter=0,seed=105)
     newActions = []
-    for i in range(100):
+    for i in range(10):
         newAction = tpg.randomAction()
         newActions.append(newAction)
 
-    ira = _IncrementalRatingAgent(pq,newActions)
-
+    ira = _IncrementalRatingAgent(pq,newActions,CompleteOutranking=True)
+    ira.showSorting()
+    ira.showHTMLPerformanceHeatmap(Correlations=True)
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')
