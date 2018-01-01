@@ -86,9 +86,9 @@ class PerformanceQuantiles(object):
         np = len(self.quantilesFrequencies)
         limitingQuantiles = {}
         cdf = {}
-        self.sampleSizes = {}
+        self.historySizes = {}
         for g in self.criteria:
-            self.sampleSizes[g] = 0
+            self.historySizes[g] = 0
             limitingQuantiles[g] = self._computeLimitingQuantiles(perfTab,g,
                                                                      frequencies,
                                                                      LowerClosed=LowerClosed)
@@ -124,7 +124,7 @@ class PerformanceQuantiles(object):
                 gPrefThrCst = Decimal('0')
                 gPrefThrSlope = Decimal('0')            
         n = len(gValues)
-        self.sampleSizes[g] = n
+        self.historySizes[g] = n
         if Debug:
             print('g,n,gValues',g,n,gValues)
 ##        if n > 0:
@@ -238,7 +238,7 @@ observed performance evaluations are kept.
 The number of so far observed evaluations per criteria are the following:
         """ )
         for g in self.criteria:
-            print(g,self.sampleSizes[g])
+            print(g,self.historySizes[g])
 
     def showCriteria(self,IntegerWeights=False,Alphabetic=False,ByObjectives=True,Debug=False):
         """
@@ -288,7 +288,7 @@ The number of so far observed evaluations per criteria are the following:
                     except:
                         pass
                     #print(self.limitingQuantiles[g])
-                    print('  Sample size: %d' % self.sampleSizes[g])
+                    print('  history size: %d' % self.historySizes[g])
                     print('  p    : quantile(p)')
                     if self.LowerClosed:
                         nq = len(self.quantilesFrequencies)
@@ -349,7 +349,7 @@ The number of so far observed evaluations per criteria are the following:
                 except:
                     pass
                 #print(self.limitingQuantiles[g])
-                print('  Sample size: %d' % self.sampleSizes[g])
+                print('  history size: %d' % self.historySizes[g])
                 print('  p    :  qantile(p')
                 if self.LowerClosed:
                     nq = len(self.quantilesFrequencies)
@@ -402,8 +402,8 @@ The number of so far observed evaluations per criteria are the following:
             html = '<h1>Performance quantiles</h1>'
         else:
             html = '<h1>%s</h1>' % title
-        sampleSizes = [self.sampleSizes[g] for g in self.sampleSizes]
-        html += '<p>Sampling sizes between %d and %d.</p>' % ( min(sampleSizes),max(sampleSizes))
+        historySizes = [self.historySizes[g] for g in self.historySizes]
+        html += '<p>Sampling sizes between %d and %d.</p>' % ( min(historySizes),max(historySizes))
 ##        if self.LowerClosed:
 ##            html += '<p>Quantile bins %s.</p>' % ('lowerclosed')
 ##        else:
@@ -529,7 +529,7 @@ The number of so far observed evaluations per criteria are the following:
         q = self.limitingQuantiles[g]
         cdf = self.cdf[g]
         if historySize == None:
-            t = self.sampleSizes[g]
+            t = self.historySizes[g]
         else:
             t = historySize
         oldfrq = [p[i]*(t+1) for i in range(np)]
@@ -646,19 +646,19 @@ The number of so far observed evaluations per criteria are the following:
         for p in state:
             cdf[state[p]] = p
         self.cdf[g] = cdf
-        self.sampleSizes[g] = t
+        self.historySizes[g] = t
 
         
     def updateQuantiles(self,newActions,historySize=None):
         """
         Update the PerformanceQuantiles with a set of new random decision actions.
-        Parameter *t* allows to take more or less into account the historical situtaion.
-        For instance, *t=0* does not take into account at all any past observations.
-        Otherwise, if *t=None* (the default setting), the new observations become less and less
+        Parameter *historysize* allows to take more or less into account the historical situtaion.
+        For instance, *historySize=0* does not take into account at all any past observations.
+        Otherwise, if *historySize=None* (the default setting), the new observations become less and less
         influential compared to the historical data.
        """
 ##        if t != None:
-##            self.sampleSizes = t
+##            self.historySizes = t
         for g in self.criteria:
             gNewValues = []
             for x in newActions:
@@ -689,14 +689,14 @@ if __name__ == "__main__":
     #print(pq.limitingQuantiles)
     pq.showLimitingQuantiles(ByObjectives=False)
     pq.showHTMLLimitingQuantiles(Transposed=True)
-##    pq.showActions()
-##    pq.showCriteria(ByObjectives=True)
-##    tpg = PerfTabGenerator(tp,seed=105)
-##    newActions = []
-##    for i in range(100):
-##        newAction = tpg.randomAction()
-##        newActions.append(newAction)
-##    #print(newActions)
+    pq.showActions()
+    pq.showCriteria(ByObjectives=True)
+    tpg = PerfTabGenerator(tp,seed=105)
+    newActions = []
+    for i in range(100):
+        newAction = tpg.randomAction()
+        newActions.append(newAction)
+    #print(newActions)
 ##    pq.updateQuantiles(newActions,historySize=0)
 ##    pq.showActions()
 ##    pq.showCriteria()
