@@ -2585,7 +2585,7 @@ class RandomCBPerformanceGenerator(object):
 
     """
     def __init__(self,argPerfTab,actionNamePrefix='a',
-                 instanceCounter=0,seed=None):
+                 instanceCounter=None,seed=None):
         """
         Set the initial state of the random generator.
         """
@@ -2595,7 +2595,7 @@ class RandomCBPerformanceGenerator(object):
         self.random = random
         self.perfTab = argPerfTab
         self.actionNamePrefix = actionNamePrefix
-        if instanceCounter == 0:
+        if instanceCounter == None:
             self.counter = len(argPerfTab.actions)
         else:
             self.counter = instanceCounter
