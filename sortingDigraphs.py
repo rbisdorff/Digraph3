@@ -3325,39 +3325,30 @@ class IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
         self.criteriaCategoryLimits['LowerClosed'] = self.LowerClosed
         criteriaCategoryLimits = self.criteriaCategoryLimits
 
-        # add the catogory limits to the actions set
-        #evaluation = {}
+        # add the profiles, ie catogory limits, to the actions set
         profiles = OrderedDict()
-        #profileLimits = set()
         for c in categories:
             if LowerClosed:
                 cKey = c+'-m'
             else:
                 cKey = c+'-M'
-            #profileLimits.add(cKey)
             if LowerClosed:
-                #actions[cKey] = {'name': 'categorical low limits', 'comment': 'Inferior or equal limits for category membership assessment'}
-                profiles[cKey] = {'category': c, 'name': 'categorical low limits', 'comment': 'Inferior or equal limits for category membership assessment'}
+                profiles[cKey] = {'category': c, 'name': 'categorical low limits',\
+                                  'comment': 'Inferior or equal limits for category membership assessment'}
             else:
-                #actions[cKey] = {'name': 'categorical high limits', 'comment': 'Lower or equal limits for category membership assessment'}
-                profiles[cKey] = {'category': c, 'name': 'categorical high limits', 'comment': 'Lower or equal limits for category membership assessment'}
+                profiles[cKey] = {'category': c, 'name': 'categorical high limits',\
+                                  'comment': 'Lower or equal limits for category membership assessment'}
             for g in criteria:
-                #evaluation[g] = {}
                 if LowerClosed:
                     self.evaluation[g][cKey] = Decimal(str(self.criteriaCategoryLimits[g][int(c)-1]))
                 else:
                     self.evaluation[g][cKey] = Decimal(str(self.criteriaCategoryLimits[g][int(c)]))
 
-        #self.actions = actions
         self.profiles = profiles
-        #evaluation = self.profiles.update(newEvaluations)
-        #self.evaluation = evaluation
         profileLimits = list(profiles.keys())
-        #profileLimits.sort()
         self.profileLimits = profileLimits
         
         if Debug:
-            #print('self.actions',actions)
             print('self.profiles',profiles)
             print('self.profileLimits',profileLimits)
             
@@ -3368,6 +3359,7 @@ class IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
         self.hasNoVeto = hasNoVeto
         minValuation = valuationScale[0]
         maxValuation = valuationScale[1]
+        # construct the corresponding perfTab
         perfTab = PerformanceTableau(isEmpty=True)
         perfTab.actions = deepcopy(self.newActions)
         perfTab.actions.update(self.profiles)
@@ -3377,44 +3369,47 @@ class IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
         if Debug:
             perfTab.showActions()
             perfTab.showCriteria()
-            #perfTab.showPerformanceTableau()
+            perfTab.showPerformanceTableau()
         
         if CompleteOutranking:
             g = BipolarOutrankingDigraph(perfTab,hasNoVeto=hasNoVeto,
                                          Threading=Threading,nbrCores=nbrCores)
             g.recodeValuation(minValuation,maxValuation)
-            self.relationOrig = g.relation
+            if Debug:
+                g.showHTMLRelationTable()
+            self.actions = g.actions
+            self.completRelation = g.relation
+            self.relation = g.relation
             Min = g.valuationdomain['min']
             Max = g.valuationdomain['max']
+            Med = g.valuationdomain['med']
             self.valuationdomain = g.valuationdomain
         else:
             Min = Decimal(str(minValuation))
             Max = Decimal(str(maxValuation))
-##                Min = Decimal('-100')
-##                Max = Decimal('100')
-        Med = (Max + Min)/Decimal('2.0')
-        self.valuationdomain = {'min': Min, 'med':Med ,'max':Max }
-        if self.LowerClosed:
-            initial=newActions
-            terminal=profiles
-        else:
-            initial=profiles
-            terminal=newActions
-        relation = self._constructRelationWithThreading(criteria,
-                                                   evaluation,
-                                                   initial=initial,
-                                                   terminal=terminal,
-                                                   hasNoVeto=hasNoVeto,
-                                                   hasBipolarVeto=True,
-                                                   WithConcordanceRelation=False,
-                                                   WithVetoCounts=False,       
-                                                    Threading=Threading,
-                                                        tempDir=tempDir,
-                                                    nbrCores=nbrCores,
-                                                    Comments=Comments,
-                                                    WithSortingRelation=WithSortingRelation,
-                                                    StoreSorting=StoreSorting)
-        if WithSortingRelation:
+            Med = (Max + Min)/Decimal('2.0')
+            self.valuationdomain = {'min': Min, 'med':Med ,'max':Max }
+            if self.LowerClosed:
+                initial=newActions
+                terminal=profiles
+            else:
+                initial=profiles
+                terminal=newActions
+            relation = self._constructRelationWithThreading(criteria,
+                                                       evaluation,
+                                                       initial=initial,
+                                                       terminal=terminal,
+                                                       hasNoVeto=hasNoVeto,
+                                                       hasBipolarVeto=True,
+                                                       WithConcordanceRelation=False,
+                                                       WithVetoCounts=False,       
+                                                        Threading=Threading,
+                                                            tempDir=tempDir,
+                                                        nbrCores=nbrCores,
+                                                        Comments=Comments,
+                                                        WithSortingRelation=WithSortingRelation,
+                                                        StoreSorting=StoreSorting)
+        #if WithSortingRelation:
             if LowerClosed:
                 for x in newActions:
                     rx = relation[x]
@@ -3423,7 +3418,8 @@ class IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
                 for x in profiles:
                     relation[x] = {}
                     rx = relation[x]
-                    for y in newActions:
+                    #for y in self.getActionsKeys(WithoutProfiles=False):
+                    for y in self.newActions:
                         rx[y] = Med
             else:
                 for x in newActions:
@@ -3432,35 +3428,39 @@ class IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
                     for y in newActions:
                         rx[y] = Med
                 for y in profiles:
-                    for x in newActions:
-                        relation[x][y] = Med          
+                    #for x in self.getActionsKeys(WithoutProfiles=False):
+                    for x in self.newActions:
+                        relation[x][y] = Med
+            
             self.sortingRelation = relation
-        else:
+            self.relation = relation
             self.actions = self.newActions
-            self.relation = self.relationOrig
+##        else:
+##            #self.actions = self.newActions
+##            self.relation = self.completeRelation
         
         self.runTimes['computeRelation'] = time() - t0
 
-        # compute weak ordering
-        t0 = time()
-        if WithSortingRelation:
-            if nbrOfProcesses == None:
-                nbrOfProcesses = nbrCores
-
-            sortingRelation = self.computeSortingRelation(StoreSorting=StoreSorting,\
-                                                          Debug=Debug,Comments=Comments,\
-                                                          Threading=Threading,\
-                                                          nbrOfCPUs=nbrOfProcesses)
-            for x in dict.keys(newActions):
-                rx = self.relation[x]
-                srx = sortingRelation[x]
-                for y in dict.keys(newActions):
-                    rx[y] = srx[y]
-                    
-        self.runTimes['weakOrdering'] = time() - t0
-        # reset original action set
+##        # compute weak ordering
+##        t0 = time()
+##        if WithSortingRelation:
+##            if nbrOfProcesses == None:
+##                nbrOfProcesses = nbrCores
+##
+##            sortingRelation = self.computeSortingRelation(StoreSorting=StoreSorting,\
+##                                                          Debug=Debug,Comments=Comments,\
+##                                                          Threading=Threading,\
+##                                                          nbrOfCPUs=nbrOfProcesses)
+##            for x in dict.keys(newActions):
+##                rx = self.relation[x]
+##                srx = sortingRelation[x]
+##                for y in dict.keys(newActions):
+##                    rx[y] = srx[y]
+##                    
+##        self.runTimes['weakOrdering'] = time() - t0
+##        # reset original action set
         #if WithSortingRelation:
-        self.actions = newActions
+##        self.actions = newActions
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -4020,7 +4020,7 @@ class IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
         
         """
         if strategy == None:
-            strategy = 'optimistic'
+            strategy = 'average'
         if HTML:
             html = '<h1>Quantiles preordering</h1>'
             html += '<table style="background-color:White;" border="1">'
@@ -4304,14 +4304,14 @@ class IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
             print(g,self.LowerClosed,self.criteria[g]['preferenceDirection'],gQuantiles)
         return gQuantiles
 
-    def getActionsKeys(self,action=None,withoutProfiles=True):
+    def getActionsKeys(self,action=None,WithoutProfiles=True):
         """
         extract normal actions keys()
         """
         profiles = set([x for x in list(self.profiles.keys())])
         if action == None:
             actionsExt = set([x for x in list(self.newActions.keys())])
-            if withoutProfiles:
+            if WithoutProfiles:
                 return actionsExt - profiles
             else:
                 return actionsExt | profiles
@@ -4362,7 +4362,9 @@ class IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
             pass
         if action != None:
             storeSorting = False
-        actions = list(self.getActionsKeys(action))
+            actions = [action]
+        else:
+            actions = self.newActions
         na = len(actions)
 ##        if Debug:
 ##            print(actions)
@@ -4545,7 +4547,7 @@ class IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
         # end of Threading
         else: # with out Threading 
             sorting = {}
-            nq = len(self.limitingQuantiles) - 1
+            nq = len(self.quantilesFrequencies) - 1
             for x in actions:
                 sorting[x] = {}
                 for c in categories:
@@ -4814,7 +4816,7 @@ class IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
                     sortingRelation[y][x] = Max
             currActions = currActions - ibch
         return sortingRelation
-           
+
 #----------test SortingDigraph class ----------------
 if __name__ == "__main__":
     from time import time
@@ -4947,7 +4949,7 @@ if __name__ == "__main__":
         newAction = tpg.randomAction()
         newActions.append(newAction)
 
-    ira = IncrementalRatingAgent(pq,newActions,CompleteOutranking=True)
+    ira = IncrementalRatingAgent(pq,newActions,CompleteOutranking=True,Debug=True)
     ira.showSorting()
     ira.showActionsSortingResult()
     ira.showQuantileOrdering()
