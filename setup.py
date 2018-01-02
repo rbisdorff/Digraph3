@@ -9,7 +9,7 @@ setup(name='Digraph3',
       version="Python3.5+",
       #version_command='svn info --show-item revision',
       py_modules=['arithmetics','digraphsTools','digraphs','perfTabs',
-                  'outrankingDigraphs','performaceQuantiles',\
+                  'outrankingDigraphs','performanceQuantiles',\
         'sortingDigraphs','votingDigraphs',\
         'linearOrders','weakOrders',\
         'iqagent','graphs','htmlmodel','randomNumbers','randomDigraphs','randomPerfTabs',

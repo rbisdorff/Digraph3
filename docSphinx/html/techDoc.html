@@ -4484,9 +4484,9 @@ given performance tableau.</p>
 <dt id="performanceQuantiles.PerformanceQuantiles.updateQuantiles">
 <code class="descname">updateQuantiles</code><span class="sig-paren">(</span><em>newActions</em>, <em>historySize=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/performanceQuantiles.html#PerformanceQuantiles.updateQuantiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#performanceQuantiles.PerformanceQuantiles.updateQuantiles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update the PerformanceQuantiles with a set of new random decision actions.
-Parameter <em>t</em> allows to take more or less into account the historical situtaion.
-For instance, <em>t=0</em> does not take into account at all any past observations.
-Otherwise, if <em>t=None</em> (the default setting), the new observations become less and less
+Parameter <em>historysize</em> allows to take more or less into account the historical situtaion.
+For instance, <em>historySize=0</em> does not take into account at all any past observations.
+Otherwise, if <em>historySize=None</em> (the default setting), the new observations become less and less
 influential compared to the historical data.</p>
 </dd></dl>
 
@@ -4613,7 +4613,7 @@ on each of the three objectives.</p>
 
 <dl class="class">
 <dt id="randomPerfTabs.RandomCBPerformanceGenerator">
-<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomCBPerformanceGenerator</code><span class="sig-paren">(</span><em>argPerfTab</em>, <em>actionNamePrefix='a'</em>, <em>instanceCounter=0</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomCBPerformanceGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomCBPerformanceGenerator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomCBPerformanceGenerator</code><span class="sig-paren">(</span><em>argPerfTab</em>, <em>actionNamePrefix='a'</em>, <em>instanceCounter=None</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomCBPerformanceGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomCBPerformanceGenerator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Instantiates a generator of new decision actions with associated random evaluations using the model parameters provided by a given RandomCBPerformanceTableau instance.</p>
 <dl class="method">
@@ -6330,7 +6330,7 @@ By default upper closed limits of categories are supposed to be used in the sort
 <span class="gp">&gt;&gt;&gt; </span><span class="n">qs</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;quantilesSorting&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="_images/quantilesSorting.png" src="_images/quantilesSorting.png" />
+<a class="reference internal image-reference" href="_images/quantilesSorting.png"><img alt="Example of quantiles sorting digraph" class="align-center" src="_images/quantilesSorting.png" style="width: 400px;" /></a>
 <dl class="method">
 <dt id="sortingDigraphs.QuantilesSortingDigraph.computeCategoryContents">
 <code class="descname">computeCategoryContents</code><span class="sig-paren">(</span><em>Reverse=False</em>, <em>Comments=False</em>, <em>StoreSorting=True</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#QuantilesSortingDigraph.computeCategoryContents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph.computeCategoryContents" title="Permalink to this definition">¶</a></dt>

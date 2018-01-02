@@ -70,11 +70,8 @@
 <span class="sd">with this program; if not, write to the Free Software Foundation, Inc.,</span>
 <span class="sd">51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
 <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
-<span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 
 
 <div class="viewcode-block" id="PerformanceQuantiles"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles">[docs]</a><span class="k">class</span> <span class="nc">PerformanceQuantiles</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -136,9 +133,9 @@
         <span class="n">np</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span><span class="p">)</span>
         <span class="n">limitingQuantiles</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">cdf</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sampleSizes</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">sampleSizes</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computeLimitingQuantiles</span><span class="p">(</span><span class="n">perfTab</span><span class="p">,</span><span class="n">g</span><span class="p">,</span>
                                                                      <span class="n">frequencies</span><span class="p">,</span>
                                                                      <span class="n">LowerClosed</span><span class="o">=</span><span class="n">LowerClosed</span><span class="p">)</span>
@@ -174,7 +171,7 @@
                 <span class="n">gPrefThrCst</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
                 <span class="n">gPrefThrSlope</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>            
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">gValues</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sampleSizes</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;g,n,gValues&#39;</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">gValues</span><span class="p">)</span>
 <span class="c1">##        if n &gt; 0:</span>
@@ -288,7 +285,7 @@
 <span class="s2">The number of so far observed evaluations per criteria are the following:</span>
 <span class="s2">        &quot;&quot;&quot;</span> <span class="p">)</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">sampleSizes</span><span class="p">[</span><span class="n">g</span><span class="p">])</span></div>
+            <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span><span class="p">[</span><span class="n">g</span><span class="p">])</span></div>
 
 <div class="viewcode-block" id="PerformanceQuantiles.showCriteria"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.showCriteria">[docs]</a>    <span class="k">def</span> <span class="nf">showCriteria</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">IntegerWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Alphabetic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ByObjectives</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -338,7 +335,7 @@
                     <span class="k">except</span><span class="p">:</span>
                         <span class="k">pass</span>
                     <span class="c1">#print(self.limitingQuantiles[g])</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  Sample size: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">sampleSizes</span><span class="p">[</span><span class="n">g</span><span class="p">])</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  history size: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span><span class="p">[</span><span class="n">g</span><span class="p">])</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  p    : quantile(p)&#39;</span><span class="p">)</span>
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span><span class="p">:</span>
                         <span class="n">nq</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span><span class="p">)</span>
@@ -399,7 +396,7 @@
                 <span class="k">except</span><span class="p">:</span>
                     <span class="k">pass</span>
                 <span class="c1">#print(self.limitingQuantiles[g])</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  Sample size: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">sampleSizes</span><span class="p">[</span><span class="n">g</span><span class="p">])</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  history size: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span><span class="p">[</span><span class="n">g</span><span class="p">])</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  p    :  qantile(p&#39;</span><span class="p">)</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span><span class="p">:</span>
                     <span class="n">nq</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span><span class="p">)</span>
@@ -452,8 +449,8 @@
             <span class="n">html</span> <span class="o">=</span> <span class="s1">&#39;&lt;h1&gt;Performance quantiles&lt;/h1&gt;&#39;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">html</span> <span class="o">=</span> <span class="s1">&#39;&lt;h1&gt;</span><span class="si">%s</span><span class="s1">&lt;/h1&gt;&#39;</span> <span class="o">%</span> <span class="n">title</span>
-        <span class="n">sampleSizes</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">sampleSizes</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sampleSizes</span><span class="p">]</span>
-        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;p&gt;Sampling sizes between </span><span class="si">%d</span><span class="s1"> and </span><span class="si">%d</span><span class="s1">.&lt;/p&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span> <span class="nb">min</span><span class="p">(</span><span class="n">sampleSizes</span><span class="p">),</span><span class="nb">max</span><span class="p">(</span><span class="n">sampleSizes</span><span class="p">))</span>
+        <span class="n">historySizes</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span><span class="p">]</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;p&gt;Sampling sizes between </span><span class="si">%d</span><span class="s1"> and </span><span class="si">%d</span><span class="s1">.&lt;/p&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span> <span class="nb">min</span><span class="p">(</span><span class="n">historySizes</span><span class="p">),</span><span class="nb">max</span><span class="p">(</span><span class="n">historySizes</span><span class="p">))</span>
 <span class="c1">##        if self.LowerClosed:</span>
 <span class="c1">##            html += &#39;&lt;p&gt;Quantile bins %s.&lt;/p&gt;&#39; % (&#39;lowerclosed&#39;)</span>
 <span class="c1">##        else:</span>
@@ -579,7 +576,7 @@
         <span class="n">q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
         <span class="n">cdf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cdf</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">historySize</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sampleSizes</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">t</span> <span class="o">=</span> <span class="n">historySize</span>
         <span class="n">oldfrq</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="p">)]</span>
@@ -696,19 +693,19 @@
         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">state</span><span class="p">:</span>
             <span class="n">cdf</span><span class="p">[</span><span class="n">state</span><span class="p">[</span><span class="n">p</span><span class="p">]]</span> <span class="o">=</span> <span class="n">p</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cdf</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">cdf</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sampleSizes</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
 
         
 <div class="viewcode-block" id="PerformanceQuantiles.updateQuantiles"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.updateQuantiles">[docs]</a>    <span class="k">def</span> <span class="nf">updateQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Update the PerformanceQuantiles with a set of new random decision actions.</span>
-<span class="sd">        Parameter *t* allows to take more or less into account the historical situtaion.</span>
-<span class="sd">        For instance, *t=0* does not take into account at all any past observations.</span>
-<span class="sd">        Otherwise, if *t=None* (the default setting), the new observations become less and less</span>
+<span class="sd">        Parameter *historysize* allows to take more or less into account the historical situtaion.</span>
+<span class="sd">        For instance, *historySize=0* does not take into account at all any past observations.</span>
+<span class="sd">        Otherwise, if *historySize=None* (the default setting), the new observations become less and less</span>
 <span class="sd">        influential compared to the historical data.</span>
 <span class="sd">       &quot;&quot;&quot;</span>
 <span class="c1">##        if t != None:</span>
-<span class="c1">##            self.sampleSizes = t</span>
+<span class="c1">##            self.historySizes = t</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">:</span>
             <span class="n">gNewValues</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">newActions</span><span class="p">:</span>
@@ -739,14 +736,14 @@
     <span class="c1">#print(pq.limitingQuantiles)</span>
     <span class="n">pq</span><span class="o">.</span><span class="n">showLimitingQuantiles</span><span class="p">(</span><span class="n">ByObjectives</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">pq</span><span class="o">.</span><span class="n">showHTMLLimitingQuantiles</span><span class="p">(</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="c1">##    pq.showActions()</span>
-<span class="c1">##    pq.showCriteria(ByObjectives=True)</span>
-<span class="c1">##    tpg = PerfTabGenerator(tp,seed=105)</span>
-<span class="c1">##    newActions = []</span>
-<span class="c1">##    for i in range(100):</span>
-<span class="c1">##        newAction = tpg.randomAction()</span>
-<span class="c1">##        newActions.append(newAction)</span>
-<span class="c1">##    #print(newActions)</span>
+    <span class="n">pq</span><span class="o">.</span><span class="n">showActions</span><span class="p">()</span>
+    <span class="n">pq</span><span class="o">.</span><span class="n">showCriteria</span><span class="p">(</span><span class="n">ByObjectives</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
+    <span class="n">newActions</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+        <span class="n">newAction</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomAction</span><span class="p">()</span>
+        <span class="n">newActions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newAction</span><span class="p">)</span>
+    <span class="c1">#print(newActions)</span>
 <span class="c1">##    pq.updateQuantiles(newActions,historySize=0)</span>
 <span class="c1">##    pq.showActions()</span>
 <span class="c1">##    pq.showCriteria()</span>
