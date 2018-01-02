@@ -3188,7 +3188,7 @@ class QuantilesSortingDigraph(SortingDigraph):
 
 #-------------
 from performanceQuantiles import PerformanceQuantiles  
-class _IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
+class IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
     """
     Specialisation of the sortingDigraph Class
     for rating a set of decision actions with
@@ -3203,7 +3203,7 @@ class _IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
                  hasNoVeto=True,\
                  outrankingType = "bipolar",\
                  valuationScale = (-1,1),\
-                 WithSortingRelation=True,\
+                 WithSortingRelation=False,\
                  CompleteOutranking = True,\
                  StoreSorting=True,\
                  CopyPerfTab=False,\
@@ -3433,8 +3433,12 @@ class _IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
                         rx[y] = Med
                 for y in profiles:
                     for x in newActions:
-                        relation[x][y] = Med
-            self.relation = relation
+                        relation[x][y] = Med          
+            self.sortingRelation = relation
+        else:
+            self.actions = self.newActions
+            self.relation = self.relationOrig
+        
         self.runTimes['computeRelation'] = time() - t0
 
         # compute weak ordering
@@ -3455,11 +3459,11 @@ class _IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
                     
         self.runTimes['weakOrdering'] = time() - t0
         # reset original action set
-        if WithSortingRelation:
-            self.actions = newActions
-            self.order = len(self.actions)
-            self.gamma = self.gammaSets()
-            self.notGamma = self.notGammaSets()
+        #if WithSortingRelation:
+        self.actions = newActions
+        self.order = len(self.actions)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
 
         self.runTimes['totalTime'] = time() - tt
 
@@ -3878,7 +3882,7 @@ class _IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
         shows the quantiles sorting result all (default) of a subset of the decision actions.
         """
         if actionSubset == None:
-            actions = [x for x in self.actions]
+            actions = [x for x in self.getActionsKeys()]
             actions.sort()
         else:
             actions = [x for x in flatten(actionSubset)]
@@ -4024,7 +4028,7 @@ class _IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
             html += '<th>%s sorting</th>' % strategy
             html += '</tr>'
         actionsCategories = {}
-        for x in self.actions:
+        for x in self.getActionsKeys():
             a,lowCateg,highCateg,credibility =\
                      self.showActionCategories(x,Comments=Debug)
             if strategy == "optimistic":
@@ -4943,7 +4947,7 @@ if __name__ == "__main__":
         newAction = tpg.randomAction()
         newActions.append(newAction)
 
-    ira = _IncrementalRatingAgent(pq,newActions,CompleteOutranking=True)
+    ira = IncrementalRatingAgent(pq,newActions,CompleteOutranking=True)
     ira.showSorting()
     ira.showActionsSortingResult()
     ira.showQuantileOrdering()
