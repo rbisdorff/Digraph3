@@ -6294,6 +6294,137 @@ the diagonal outranking components of the sparse outranking digraph.</p>
 <div class="section" id="module-sortingDigraphs">
 <span id="sortingdigraphs-module"></span><span id="sortingdigraphs-label"></span><h2>sortingDigraphs module<a class="headerlink" href="#module-sortingDigraphs" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
+<dt id="sortingDigraphs.IncrementalRatingAgent">
+<em class="property">class </em><code class="descclassname">sortingDigraphs.</code><code class="descname">IncrementalRatingAgent</code><span class="sig-paren">(</span><em>argPerfQuantiles=None</em>, <em>newData=None</em>, <em>hasNoVeto=True</em>, <em>outrankingType='bipolar'</em>, <em>valuationScale=(-1</em>, <em>1)</em>, <em>WithSortingRelation=False</em>, <em>CompleteOutranking=True</em>, <em>StoreSorting=True</em>, <em>CopyPerfTab=False</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrCores=None</em>, <em>nbrOfProcesses=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingAgent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingAgent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sortingDigraphs.SortingDigraph" title="sortingDigraphs.SortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.SortingDigraph</span></code></a>, <a class="reference internal" href="#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a></p>
+<p>Specialisation of the sortingDigraph Class
+for rating a set of decision actions with
+incremental performance quantiles</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The constructor requires a valid PerformanceQuantiles instance.</p>
+</div>
+<dl class="method">
+<dt id="sortingDigraphs.IncrementalRatingAgent.computeCategoryContents">
+<code class="descname">computeCategoryContents</code><span class="sig-paren">(</span><em>Reverse=False</em>, <em>Comments=False</em>, <em>StoreSorting=True</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingAgent.computeCategoryContents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingAgent.computeCategoryContents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the sorting results per category.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.IncrementalRatingAgent.computeQuantileOrdering">
+<code class="descname">computeQuantileOrdering</code><span class="sig-paren">(</span><em>strategy=None</em>, <em>Descending=True</em>, <em>HTML=False</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingAgent.computeQuantileOrdering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingAgent.computeQuantileOrdering" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last simple">
+<li>Descending: listing in <em>decreasing</em> (default) or <em>increasing</em> quantile order.</li>
+<li>strategy: ordering in an {&#8216;optimistic&#8217; (default) | &#8216;pessimistic&#8217; | &#8216;average&#8217;}
+in the uppest, the lowest or the average potential quantile.</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.IncrementalRatingAgent.computeSortingCharacteristics">
+<code class="descname">computeSortingCharacteristics</code><span class="sig-paren">(</span><em>action=None</em>, <em>Comments=False</em>, <em>StoreSorting=False</em>, <em>Debug=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingAgent.computeSortingCharacteristics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingAgent.computeSortingCharacteristics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a bipolar-valued bi-dictionary relation
+representing the degree of credibility of the
+assertion that &#8220;action x in A belongs to category c in C&#8221;,
+ie x outranks low category limit and does not outrank
+the high category limit.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.IncrementalRatingAgent.computeSortingRelation">
+<code class="descname">computeSortingRelation</code><span class="sig-paren">(</span><em>categoryContents=None</em>, <em>Debug=False</em>, <em>StoreSorting=True</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingAgent.computeSortingRelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingAgent.computeSortingRelation" title="Permalink to this definition">¶</a></dt>
+<dd><p>constructs a bipolar sorting relation using the category contents.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.IncrementalRatingAgent.computeWeakOrder">
+<code class="descname">computeWeakOrder</code><span class="sig-paren">(</span><em>Descending=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingAgent.computeWeakOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingAgent.computeWeakOrder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specialisation for QuantilesSortingDigraphs.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.IncrementalRatingAgent.getActionsKeys">
+<code class="descname">getActionsKeys</code><span class="sig-paren">(</span><em>action=None</em>, <em>withoutProfiles=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingAgent.getActionsKeys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingAgent.getActionsKeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>extract normal actions keys()</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.IncrementalRatingAgent.showActionCategories">
+<code class="descname">showActionCategories</code><span class="sig-paren">(</span><em>action</em>, <em>Debug=False</em>, <em>Comments=True</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingAgent.showActionCategories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingAgent.showActionCategories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the union of categories in which the given action is sorted positively or null into.
+Returns a tuple : action, lowest category key, highest category key, membership credibility !</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.IncrementalRatingAgent.showActionsSortingResult">
+<code class="descname">showActionsSortingResult</code><span class="sig-paren">(</span><em>actionSubset=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingAgent.showActionsSortingResult"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingAgent.showActionsSortingResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>shows the quantiles sorting result all (default) of a subset of the decision actions.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.IncrementalRatingAgent.showHTMLQuantileOrdering">
+<code class="descname">showHTMLQuantileOrdering</code><span class="sig-paren">(</span><em>Descending=True</em>, <em>strategy='optimistic'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingAgent.showHTMLQuantileOrdering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingAgent.showHTMLQuantileOrdering" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shows the html version of the quantile preordering in a browser window.</p>
+<dl class="docutils">
+<dt>The ordring strategy is either:</dt>
+<dd><ul class="first last simple">
+<li><strong>optimistic</strong>, following the upper quantile limits (default),</li>
+<li><strong>pessimistic</strong>, following the lower quantile limits,</li>
+<li><strong>average</strong>, following the averag of the upper and lower quantile limits.</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.IncrementalRatingAgent.showHTMLSorting">
+<code class="descname">showHTMLSorting</code><span class="sig-paren">(</span><em>Reverse=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingAgent.showHTMLSorting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingAgent.showHTMLSorting" title="Permalink to this definition">¶</a></dt>
+<dd><p>shows the html version of the sorting result in a browser window.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.IncrementalRatingAgent.showOrderedRelationTable">
+<code class="descname">showOrderedRelationTable</code><span class="sig-paren">(</span><em>direction='decreasing'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingAgent.showOrderedRelationTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingAgent.showOrderedRelationTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Showing the relation table in decreasing (default) or increasing order.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.IncrementalRatingAgent.showQuantileOrdering">
+<code class="descname">showQuantileOrdering</code><span class="sig-paren">(</span><em>strategy=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingAgent.showQuantileOrdering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingAgent.showQuantileOrdering" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dummy show method for the commenting computeQuantileOrdering() method.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.IncrementalRatingAgent.showSorting">
+<code class="descname">showSorting</code><span class="sig-paren">(</span><em>Reverse=True</em>, <em>isReturningHTML=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingAgent.showSorting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingAgent.showSorting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shows sorting results in decreasing or increasing (Reverse=False)
+order of the categories. If isReturningHTML is True (default = False)
+the method returns a htlm table with the sorting result.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.IncrementalRatingAgent.showSortingCharacteristics">
+<code class="descname">showSortingCharacteristics</code><span class="sig-paren">(</span><em>action=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingAgent.showSortingCharacteristics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingAgent.showSortingCharacteristics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a bipolar-valued bi-dictionary relation
+representing the degree of credibility of the
+assertion that &#8220;action x in A belongs to category c in C&#8221;,
+ie x outranks low category limit and does not outrank
+the high category limit.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.IncrementalRatingAgent.showWeakOrder">
+<code class="descname">showWeakOrder</code><span class="sig-paren">(</span><em>Descending=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingAgent.showWeakOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingAgent.showWeakOrder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specialisation for QuantilesSortingDigraphs.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="sortingDigraphs.QuantilesSortingDigraph">
 <em class="property">class </em><code class="descclassname">sortingDigraphs.</code><code class="descname">QuantilesSortingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>limitingQuantiles=None</em>, <em>LowerClosed=False</em>, <em>PrefThresholds=True</em>, <em>hasNoVeto=False</em>, <em>outrankingType='bipolar'</em>, <em>WithSortingRelation=True</em>, <em>CompleteOutranking=False</em>, <em>StoreSorting=False</em>, <em>CopyPerfTab=False</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrCores=None</em>, <em>nbrOfProcesses=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#QuantilesSortingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#sortingDigraphs.SortingDigraph" title="sortingDigraphs.SortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.SortingDigraph</span></code></a></p>

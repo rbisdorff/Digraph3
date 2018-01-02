@@ -51,7 +51,7 @@
 <span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># Python implementation of digraphs</span>
-<span class="c1"># Current revision $Revision: 2308 $</span>
+<span class="c1"># Current revision $Revision: 2310 $</span>
 <span class="c1"># Copyright (C) 2006-2008  Raymond Bisdorff</span>
 <span class="c1">#</span>
 <span class="c1">#    This program is free software; you can redistribute it and/or modify</span>
@@ -3238,7 +3238,7 @@
 
 <span class="c1">#-------------</span>
 <span class="kn">from</span> <span class="nn">performanceQuantiles</span> <span class="k">import</span> <span class="n">PerformanceQuantiles</span>  
-<span class="k">class</span> <span class="nc">_IncrementalRatingAgent</span><span class="p">(</span><span class="n">SortingDigraph</span><span class="p">,</span><span class="n">PerformanceQuantiles</span><span class="p">):</span>
+<div class="viewcode-block" id="IncrementalRatingAgent"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingAgent">[docs]</a><span class="k">class</span> <span class="nc">IncrementalRatingAgent</span><span class="p">(</span><span class="n">SortingDigraph</span><span class="p">,</span><span class="n">PerformanceQuantiles</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialisation of the sortingDigraph Class</span>
 <span class="sd">    for rating a set of decision actions with</span>
@@ -3253,7 +3253,7 @@
                  <span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                  <span class="n">outrankingType</span> <span class="o">=</span> <span class="s2">&quot;bipolar&quot;</span><span class="p">,</span>\
                  <span class="n">valuationScale</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>\
-                 <span class="n">WithSortingRelation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
+                 <span class="n">WithSortingRelation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                  <span class="n">CompleteOutranking</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>\
                  <span class="n">StoreSorting</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                  <span class="n">CopyPerfTab</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
@@ -3483,8 +3483,12 @@
                         <span class="n">rx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
                 <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">profiles</span><span class="p">:</span>
                     <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">newActions</span><span class="p">:</span>
-                        <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">relation</span>
+                        <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>          
+            <span class="bp">self</span><span class="o">.</span><span class="n">sortingRelation</span> <span class="o">=</span> <span class="n">relation</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">newActions</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relationOrig</span>
+        
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;computeRelation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
 
         <span class="c1"># compute weak ordering</span>
@@ -3505,11 +3509,11 @@
                     
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;weakOrdering&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
         <span class="c1"># reset original action set</span>
-        <span class="k">if</span> <span class="n">WithSortingRelation</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">newActions</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
+        <span class="c1">#if WithSortingRelation:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">newActions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;totalTime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tt</span>
 
@@ -3881,7 +3885,7 @@
                 <span class="k">if</span> <span class="n">WithSortingRelation</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">relation</span>
 
-    <span class="k">def</span> <span class="nf">showActionCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
+<div class="viewcode-block" id="IncrementalRatingAgent.showActionCategories"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingAgent.showActionCategories">[docs]</a>    <span class="k">def</span> <span class="nf">showActionCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                              <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the union of categories in which the given action is sorted positively or null into.</span>
@@ -3921,23 +3925,23 @@
         <span class="k">return</span> <span class="n">action</span><span class="p">,</span>\
                 <span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>\
                 <span class="n">keys</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>\
-                <span class="n">credibility</span>            
+                <span class="n">credibility</span>            </div>
 
-    <span class="k">def</span> <span class="nf">showActionsSortingResult</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="IncrementalRatingAgent.showActionsSortingResult"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingAgent.showActionsSortingResult">[docs]</a>    <span class="k">def</span> <span class="nf">showActionsSortingResult</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        shows the quantiles sorting result all (default) of a subset of the decision actions.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">actionSubset</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
+            <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">getActionsKeys</span><span class="p">()]</span>
             <span class="n">actions</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">flatten</span><span class="p">(</span><span class="n">actionSubset</span><span class="p">)]</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Quantiles sorting result per decision action&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">showActionCategories</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">showActionCategories</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span></div>
  
 
-    <span class="k">def</span> <span class="nf">showWeakOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="IncrementalRatingAgent.showWeakOrder"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingAgent.showWeakOrder">[docs]</a>    <span class="k">def</span> <span class="nf">showWeakOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Specialisation for QuantilesSortingDigraphs.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -3996,7 +4000,7 @@
         
         <span class="n">weakOrdering</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;result&#39;</span><span class="p">:</span><span class="n">ordering</span><span class="p">}</span>
 
-        <span class="n">WeakOrder</span><span class="o">.</span><span class="n">showWeakOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">weakOrdering</span><span class="p">)</span>
+        <span class="n">WeakOrder</span><span class="o">.</span><span class="n">showWeakOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">weakOrdering</span><span class="p">)</span></div>
 
 <span class="c1">##        return orderingList</span>
 
@@ -4053,7 +4057,7 @@
         <span class="k">return</span> <span class="n">actionsCategIntervals</span>
 
 
-    <span class="k">def</span> <span class="nf">computeQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="IncrementalRatingAgent.computeQuantileOrdering"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingAgent.computeQuantileOrdering">[docs]</a>    <span class="k">def</span> <span class="nf">computeQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                 <span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                 <span class="n">HTML</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                 <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -4074,7 +4078,7 @@
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;th&gt;</span><span class="si">%s</span><span class="s1"> sorting&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="n">strategy</span>
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;&#39;</span>
         <span class="n">actionsCategories</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">getActionsKeys</span><span class="p">():</span>
             <span class="n">a</span><span class="p">,</span><span class="n">lowCateg</span><span class="p">,</span><span class="n">highCateg</span><span class="p">,</span><span class="n">credibility</span> <span class="o">=</span>\
                      <span class="bp">self</span><span class="o">.</span><span class="n">showActionCategories</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s2">&quot;optimistic&quot;</span><span class="p">:</span>
@@ -4173,16 +4177,16 @@
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;&#39;</span>
             <span class="k">return</span> <span class="n">html</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">weakOrdering</span>
+            <span class="k">return</span> <span class="n">weakOrdering</span></div>
 
-    <span class="k">def</span> <span class="nf">showQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="IncrementalRatingAgent.showQuantileOrdering"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingAgent.showQuantileOrdering">[docs]</a>    <span class="k">def</span> <span class="nf">showQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dummy show method for the commenting computeQuantileOrdering() method.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">computeQuantileOrdering</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="n">strategy</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">computeQuantileOrdering</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="n">strategy</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">computeWeakOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="IncrementalRatingAgent.computeWeakOrder"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingAgent.computeWeakOrder">[docs]</a>    <span class="k">def</span> <span class="nf">computeWeakOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Specialisation for QuantilesSortingDigraphs.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -4249,9 +4253,9 @@
 <span class="c1">##</span>
 <span class="c1">##        WeakOrder.showWeakOrder(self,weakOrdering)</span>
 
-        <span class="k">return</span> <span class="n">orderingList</span>
+        <span class="k">return</span> <span class="n">orderingList</span></div>
 
-    <span class="k">def</span> <span class="nf">showOrderedRelationTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;decreasing&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="IncrementalRatingAgent.showOrderedRelationTable"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingAgent.showOrderedRelationTable">[docs]</a>    <span class="k">def</span> <span class="nf">showOrderedRelationTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;decreasing&quot;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Showing the relation table in decreasing (default) or increasing order.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -4274,7 +4278,7 @@
         <span class="n">Digraph</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">actionsList</span><span class="p">,</span>\
                                 <span class="n">relation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">,</span>\
                                 <span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
-                                <span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                                <span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
         
 
     <span class="k">def</span> <span class="nf">_computeQuantilesFrequencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -4350,7 +4354,7 @@
             <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">],</span><span class="n">gQuantiles</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">gQuantiles</span>
 
-    <span class="k">def</span> <span class="nf">getActionsKeys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">withoutProfiles</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="IncrementalRatingAgent.getActionsKeys"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingAgent.getActionsKeys">[docs]</a>    <span class="k">def</span> <span class="nf">getActionsKeys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">withoutProfiles</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        extract normal actions keys()</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -4362,9 +4366,9 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">actionsExt</span> <span class="o">|</span> <span class="n">profiles</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nb">set</span><span class="p">([</span><span class="n">action</span><span class="p">])</span>           
+            <span class="k">return</span> <span class="nb">set</span><span class="p">([</span><span class="n">action</span><span class="p">])</span>           </div>
 
-    <span class="k">def</span> <span class="nf">computeCategoryContents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">StoreSorting</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
+<div class="viewcode-block" id="IncrementalRatingAgent.computeCategoryContents"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingAgent.computeCategoryContents">[docs]</a>    <span class="k">def</span> <span class="nf">computeCategoryContents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">StoreSorting</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                                 <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes the sorting results per category.</span>
@@ -4386,9 +4390,9 @@
                 <span class="k">if</span> <span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;categoryMembership&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]:</span>
                     <span class="n">categoryContent</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         
-        <span class="k">return</span> <span class="n">categoryContent</span>
+        <span class="k">return</span> <span class="n">categoryContent</span></div>
 
-    <span class="k">def</span> <span class="nf">computeSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
+<div class="viewcode-block" id="IncrementalRatingAgent.computeSortingCharacteristics"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingAgent.computeSortingCharacteristics">[docs]</a>    <span class="k">def</span> <span class="nf">computeSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                                       <span class="n">StoreSorting</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                                         <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -4634,7 +4638,7 @@
 <span class="c1">##                        print(&#39;\t %.2f \t %.2f \t %.2f&#39; % (sorting[x][c][&#39;lowLimit&#39;], sorting[x][c][&#39;notHighLimit&#39;], sorting[x][c][&#39;categoryMembership&#39;]))</span>
         <span class="k">if</span> <span class="n">StoreSorting</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">sorting</span> <span class="o">=</span> <span class="n">sorting</span>
-        <span class="k">return</span> <span class="n">sorting</span>
+        <span class="k">return</span> <span class="n">sorting</span></div>
 
     <span class="k">def</span> <span class="nf">_computeSortingCharacteristicsOld</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -4703,7 +4707,7 @@
 
         <span class="k">return</span> <span class="n">sorting</span>
 
-    <span class="k">def</span> <span class="nf">showSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="IncrementalRatingAgent.showSortingCharacteristics"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingAgent.showSortingCharacteristics">[docs]</a>    <span class="k">def</span> <span class="nf">showSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a bipolar-valued bi-dictionary relation</span>
 <span class="sd">        representing the degree of credibility of the</span>
@@ -4736,10 +4740,10 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%.2f</span><span class="se">\t\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="se">\t\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span>\
                       <span class="p">(</span><span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">],</span>\
                        <span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;notHighLimit&#39;</span><span class="p">],</span> <span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;categoryMembership&#39;</span><span class="p">]))</span>
-            <span class="nb">print</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">()</span></div>
 
 
-    <span class="k">def</span> <span class="nf">showHTMLQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;optimistic&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="IncrementalRatingAgent.showHTMLQuantileOrdering"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingAgent.showHTMLQuantileOrdering">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;optimistic&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shows the html version of the quantile preordering in a browser window.</span>
 
@@ -4757,10 +4761,10 @@
                                               <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;file://&#39;</span><span class="o">+</span><span class="n">fileName</span>
-        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open_new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open_new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">showHTMLSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="IncrementalRatingAgent.showHTMLSorting"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingAgent.showHTMLSorting">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        shows the html version of the sorting result in a browser window.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -4770,10 +4774,10 @@
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">showSorting</span><span class="p">(</span><span class="n">Reverse</span><span class="o">=</span><span class="n">Reverse</span><span class="p">,</span><span class="n">isReturningHTML</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;file://&#39;</span><span class="o">+</span><span class="n">fileName</span>
-        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open_new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open_new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">showSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">isReturningHTML</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="IncrementalRatingAgent.showSorting"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingAgent.showSorting">[docs]</a>    <span class="k">def</span> <span class="nf">showSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">isReturningHTML</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shows sorting results in decreasing or increasing (Reverse=False)</span>
 <span class="sd">        order of the categories. If isReturningHTML is True (default = False)</span>
@@ -4816,9 +4820,9 @@
 
         <span class="k">if</span> <span class="n">isReturningHTML</span><span class="p">:</span>
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;&#39;</span>
-            <span class="k">return</span> <span class="n">html</span>
+            <span class="k">return</span> <span class="n">html</span></div>
 
-    <span class="k">def</span> <span class="nf">computeSortingRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">categoryContents</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">StoreSorting</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<div class="viewcode-block" id="IncrementalRatingAgent.computeSortingRelation"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingAgent.computeSortingRelation">[docs]</a>    <span class="k">def</span> <span class="nf">computeSortingRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">categoryContents</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">StoreSorting</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        constructs a bipolar sorting relation using the category contents.</span>
@@ -4859,7 +4863,7 @@
                     <span class="n">sortingRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
                     <span class="n">sortingRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Max</span>
             <span class="n">currActions</span> <span class="o">=</span> <span class="n">currActions</span> <span class="o">-</span> <span class="n">ibch</span>
-        <span class="k">return</span> <span class="n">sortingRelation</span>
+        <span class="k">return</span> <span class="n">sortingRelation</span></div></div>
            
 <span class="c1">#----------test SortingDigraph class ----------------</span>
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
@@ -4874,7 +4878,7 @@
 <span class="s2">    ****************************************************</span>
 <span class="s2">    * Python sortingDigraphs module                    *</span>
 <span class="s2">    * depends on BipolarOutrankingDigraph and          *</span>
-<span class="s2">    * $Revision: 2308 $                                 *</span>
+<span class="s2">    * $Revision: 2310 $                                 *</span>
 <span class="s2">    * Copyright (C) 2010 Raymond Bisdorff              *</span>
 <span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
 <span class="s2">    * to the extent permitted by the applicable law.   *</span>
@@ -4993,7 +4997,7 @@
         <span class="n">newAction</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomAction</span><span class="p">()</span>
         <span class="n">newActions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newAction</span><span class="p">)</span>
 
-    <span class="n">ira</span> <span class="o">=</span> <span class="n">_IncrementalRatingAgent</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">CompleteOutranking</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ira</span> <span class="o">=</span> <span class="n">IncrementalRatingAgent</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">CompleteOutranking</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">ira</span><span class="o">.</span><span class="n">showSorting</span><span class="p">()</span>
     <span class="n">ira</span><span class="o">.</span><span class="n">showActionsSortingResult</span><span class="p">()</span>
     <span class="n">ira</span><span class="o">.</span><span class="n">showQuantileOrdering</span><span class="p">()</span>
@@ -5006,7 +5010,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. december 2010                *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2308 $                  *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2310 $                  *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>
