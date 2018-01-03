@@ -3216,14 +3216,14 @@ class IncrementalRatingDigraph(SortingDigraph,PerformanceQuantiles):
         >>> # rating the new set of decision actions after
         >>> # updating the historical performance quantiles
         >>> pq.updateQuantiles(newActions,historySize=None)
-        >>> ira = IncrementalRatingDigraph(pq,newActions,CompleteOutranking=True,Debug=True)
+        >>> ird = IncrementalRatingDigraph(pq,newActions,CompleteOutranking=True,Debug=True)
         >>> # inspecting the rating result
-        >>> ira.showSorting()
-        >>> ira.showActionsSortingResult()
-        >>> ira.showQuantileOrdering()
-        >>> ira.showOrderedRelationTable()
-        >>> ira.showSortingCharacteristics()
-        >>> ira.showHTMLPerformanceHeatmap(Correlations=True)
+        >>> ird.showSorting()
+        >>> ird.showActionsSortingResult()
+        >>> ird.showQuantileOrdering()
+        >>> ird.showOrderedRelationTable()
+        >>> ird.showSortingCharacteristics()
+        >>> ird.showHTMLPerformanceHeatmap(Correlations=True)
 
     """
     def __init__(self,argPerfQuantiles=None,newData=None,\
@@ -3861,7 +3861,250 @@ class IncrementalRatingDigraph(SortingDigraph,PerformanceQuantiles):
                     self.sorting = sorting
                 if WithSortingRelation:
                     return relation
+    def htmlPerformanceHeatmap(self,argCriteriaList=None,
+                               argActionsList=None,
+                               SparseModel=True,
+                               minimalComponentSize=1,
+                               RankingRule='Copeland',
+                               quantiles=None,
+                               strategy='average',
+                               ndigits=2,
+                               contentCentered=True,
+                               colorLevels=None,
+                               pageTitle='Performance Heatmap',
+                               Correlations=False,
+                               Threading=False,
+                               nbrOfCPUs=1,
+                               Debug=False):
+        """       
+        Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table
+        actions x criteria in html format.
 
+        See the corresponding perfTabs.showHTMLPerformanceHeatMap() method.
+        """
+        from decimal import Decimal
+                    
+        brewerRdYlGn9Colors = [(Decimal('0.1111'),'"#D53E4F"'),
+                               (Decimal('0.2222'),'"#F46D43"'),
+                               (Decimal('0.3333'),'"#FDAE61"'),
+                               (Decimal('0.4444'),'"#FEE08B"'),
+                               (Decimal('0.5555'),'"#FFFFBF"'),
+                               (Decimal('0.6666'),'"#D9EF8B"'),
+                               (Decimal('0.7777'),'"#A6D96A"'),
+                               (Decimal('0.8888'),'"#65BD63"'),
+                               (Decimal('1.000'),'"#1A9850"')]
+        brewerRdYlGn7Colors = [
+                               (Decimal('0.1429'),'"#F46D43"'),
+                               (Decimal('0.2857'),'"#FDAE61"'),
+                               (Decimal('0.4286'),'"#FEE08B"'),
+                               (Decimal('0.5714'),'"#FFFFBF"'),
+                               (Decimal('0.7143'),'"#D9EF8B"'),
+                               (Decimal('0.8571'),'"#A6D96A"'),
+                               (Decimal('1.0000'),'"#65BD63"')
+                               ]
+        brewerRdYlGn5Colors = [
+                               (Decimal('0.2'),'"#FDAE61"'),
+                               (Decimal('0.4'),'"#FEE08B"'),
+                               (Decimal('0.6'),'"#FFFFBF"'),
+                               (Decimal('0.8'),'"#D9EF8B"'),
+                               (Decimal('1.0'),'"#A6D96A"')
+                               ]
+        if colorLevels == None:
+            colorLevels = 7
+        if colorLevels == 7:
+            colorPalette = brewerRdYlGn7Colors
+        elif colorLevels == 9:
+            colorPalette = brewerRdYlGn9Colors
+        elif colorLevels == 5:
+            colorPalette = brewerRdYlGn5Colors
+        else:
+            colorPalette = brewerRdYlGn7Colors
+        nc = len(colorPalette)
+        backGroundColor   = '"#FFFFFF"'
+        naColor           = '"#FFFFFF"'
+        columnHeaderColor = '"#CCFFFF"'
+        rowHeaderColor    = '"#FFFFFF"'
+
+        html = '<!DOCTYPE html><html><head>\n'
+        html += '<title>%s</title>\n' % 'Digraph3 performance heat map'
+        html += '<style type="text/css">\n'
+        #html += 'table {border-collapse: collapse;}'
+        if contentCentered:
+            html += 'td {text-align: center;}\n'
+        html += 'td.na {color: rgb(192,192,192);}\n'
+        html += 'tr.quantile {color: rgb(100,100,100);}\n'
+        html += '</style>\n'
+        html += '</head>\n<body>\n'
+        html += '<h2>%s</h2>\n' % pageTitle
+        
+        from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
+        if argCriteriaList == None:
+            argCriteriaList = list(self.criteria.keys())
+            criteriaList = None
+        else:
+            criteriaList = argCriteriaList
+
+        if RankingRule == None:
+            RankingRule = 'Copeland'
+        na = len(self.actions)
+        profiles = self.profiles
+        if SparseModel:
+            if quantiles == None:
+                if na < 100:
+                    q = 5
+                else:
+                    q = None
+            else:
+                q = quantiles
+            g = PreRankedOutrankingDigraph(self,quantiles=q,LowerClosed=False,
+                                           minimalComponentSize=minimalComponentSize,
+                                       componentRankingRule=RankingRule,Threading=Threading,
+                                       nbrOfCPUs=nbrOfCPUs)
+            if argActionsList == None:
+                actionsList = g.boostedRanking
+            else:
+                actionsList = argActionsList
+        else: # standard outranking model
+            if RankingRule == 'NetFlows':
+##                if quantiles == None:
+##                    quantiles = na
+                from outrankingDigraphs import BipolarOutrankingDigraph
+                from linearOrders import NetFlowsOrder
+                g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
+                if argActionsList == None:
+                    actionsList = g.computeNetFlowsRanking()
+                else:
+                    actionsList = argActionsList
+            else:
+##                if quantiles == None:
+##                    quantiles = na
+                from outrankingDigraphs import BipolarOutrankingDigraph
+                from linearOrders import CopelandOrder
+                g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
+                #actionsList = g.computeNetFlowsRanking()
+                cop = CopelandOrder(g)
+                if argActionsList == None:
+                    actionsList = cop.computeRanking()
+                else:
+                    actionsList = argActionsList
+        if SparseModel:
+            rankCorrelation = None
+        else:
+            rankCorrelation = g.computeOrderCorrelation(list(reversed(actionsList)))
+        if Debug:
+            print('1',actionsList)
+            print('2',rankCorrelation)
+
+        criteria = self.criteria
+        if criteriaList == None:
+            if Correlations:
+                criteriaCorrelation =\
+                        g.computeMarginalVersusGlobalRankingCorrelations(\
+                                actionsList,ValuedCorrelation=True,Threading=Threading,
+                                nbrCores=nbrOfCPUs)
+                criteriaList = [c[1] for c in criteriaCorrelation]
+            else:
+                criteriaList = list(criteria.keys())
+                criteriaList.sort()
+                criteriaWeightsList = [(-criteria[g]['weight'],g) for g in criteriaList]
+                criteriaWeightsList.sort(reverse=False)
+                criteriaList = [g[1] for g in criteriaWeightsList]
+                criteriaCorrelation = None
+        else:
+            criteriaList = list(criteria.keys())
+            if Correlations:
+                criteriaCorrelation =\
+                        g.computeMarginalVersusGlobalRankingCorrelations(\
+                                actionsList,ValuedCorrelation=True,Threading=Threading,
+                                nbrCores=nbrOfCPUs)
+            else:
+                criteriaCorrelation = None
+            
+        quantileColor={}
+        for x in actionsList:
+            quantileColor[x] = {}
+            for g in criteriaList:
+                quantilexg = self.computeActionCriterionQuantile(x,g)
+                if Debug:
+                    print(x,g,quantilexg)
+                if quantilexg != 'NA':
+                    for i in range(nc):
+                        if Debug:
+                            print(i, colorPalette[i][0])
+                        
+                        if quantilexg <= colorPalette[i][0]:
+                            quantileColor[x][g] = colorPalette[i][1]
+                            break
+                else:
+                    quantileColor[x][g] = naColor
+                if Debug:
+                    print(x,g,quantileColor[x][g])
+        # legend            
+##        html += '<i>Color legend: </i>\n'
+##        html += '<table style="background-color:%s; border-collapse: collapse;" border="1">\n' % (backGroundColor) 
+##        html += '<tr bgcolor=%s><th>quantile</th>' % (columnHeaderColor)
+##        for col in range(nc):
+##            html += '<td bgcolor=%s>%s</td>' % (colorPalette[col][1],str(colorPalette[col][0]))
+##        html += '</tr>\n'
+##        html += '</table>\n'
+        # heatmap
+        html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
+        html += '<tr bgcolor=%s><th>criteria</th>' % (columnHeaderColor)
+        for g in criteriaList:
+            try:
+                gName = self.criteria[g]['shortName']
+            except:
+                gName = str(g)
+            html += '<th>%s</th>' % (gName)
+        html += '</tr>\n'
+        html += '<tr><th bgcolor=%s>weights</th>' % (columnHeaderColor)
+        for g in criteriaList:
+            html += '<td align="center">%s</td>' % (str(self.criteria[g]['weight']))
+        html += '</tr>\n'
+        if criteriaCorrelation != None:
+            html += '<tr><th bgcolor=%s>tau<sup>(*)</sup></th>' % (columnHeaderColor)
+            for cg in criteriaCorrelation:
+                html += '<td align="center">%.2f</td>' % (cg[0])
+            html += '</tr>\n'
+        if Debug:
+            print(html)
+        for x in actionsList:
+            try:
+                xName = self.actions[x]['shortName']
+            except:
+                xName = str(x)
+            if x in profiles:
+                html += '<tr class="quantile"><th bgcolor=%s>%s</th>' % (rowHeaderColor,xName)
+            else:
+                html += '<tr><th bgcolor=%s>%s</th>' % (rowHeaderColor,xName)                
+            for g in criteriaList:
+                if self.evaluation[g][x] != Decimal("-999"):
+                    formatString = '<td bgcolor=%s align="right">%% .%df</td>' % (quantileColor[x][g],ndigits)
+                    html += formatString % (self.evaluation[g][x])
+                else:
+                    html += '<td bgcolor=%s class="na">NA</td>' % naColor
+                if Debug:
+                    print(html)
+            html += '</tr>\n'
+        html += '</table>\n'
+        # legend
+        html += '<i>Color legend: </i>\n'
+        html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
+        html += '<tr bgcolor=%s><th>quantile</th>' % (columnHeaderColor)
+        #html += '<td bgcolor=%s>&nbsp;[%.2f - %.2f[&nbsp;</td>' % (colorPalette[0][1],0.0,colorPalette[0][0])
+        for col in range(0,nc):
+            html += '<td bgcolor=%s>&nbsp;%.2f&#037;</td>' % (colorPalette[col][1],
+                                                                   #colorPalette[col-1][0],
+                                                                   colorPalette[col][0]*Decimal('100.0'))
+        html += '</tr>\n'
+        html += '</table>\n'
+        if criteriaCorrelation != None:
+            html += '<i>(*) tau: Ordinal (Kendall) correlation between marginal criterion and global ranking relation.</i><br/>\n'
+        if rankCorrelation != None:
+            html += '<i>Ordinal (Kendall) correlation between global ranking and outranking relation: %.2f.</i><br/>\n' % (rankCorrelation['correlation'])
+        html += '</body></html>'
+        return html
+    
     def showActionCategories(self,action,Debug=False,Comments=True,\
                              Threading=False,nbrOfCPUs=None):
         """

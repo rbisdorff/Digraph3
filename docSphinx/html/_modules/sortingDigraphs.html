@@ -51,7 +51,7 @@
 <span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># Python implementation of digraphs</span>
-<span class="c1"># Current revision $Revision: 2319 $</span>
+<span class="c1"># Current revision $Revision: 2312 $</span>
 <span class="c1"># Copyright (C) 2006-2008  Raymond Bisdorff</span>
 <span class="c1">#</span>
 <span class="c1">#    This program is free software; you can redistribute it and/or modify</span>
@@ -3266,14 +3266,14 @@
 <span class="sd">        &gt;&gt;&gt; # rating the new set of decision actions after</span>
 <span class="sd">        &gt;&gt;&gt; # updating the historical performance quantiles</span>
 <span class="sd">        &gt;&gt;&gt; pq.updateQuantiles(newActions,historySize=None)</span>
-<span class="sd">        &gt;&gt;&gt; ira = IncrementalRatingDigraph(pq,newActions,CompleteOutranking=True,Debug=True)</span>
+<span class="sd">        &gt;&gt;&gt; ird = IncrementalRatingDigraph(pq,newActions,CompleteOutranking=True,Debug=True)</span>
 <span class="sd">        &gt;&gt;&gt; # inspecting the rating result</span>
-<span class="sd">        &gt;&gt;&gt; ira.showSorting()</span>
-<span class="sd">        &gt;&gt;&gt; ira.showActionsSortingResult()</span>
-<span class="sd">        &gt;&gt;&gt; ira.showQuantileOrdering()</span>
-<span class="sd">        &gt;&gt;&gt; ira.showOrderedRelationTable()</span>
-<span class="sd">        &gt;&gt;&gt; ira.showSortingCharacteristics()</span>
-<span class="sd">        &gt;&gt;&gt; ira.showHTMLPerformanceHeatmap(Correlations=True)</span>
+<span class="sd">        &gt;&gt;&gt; ird.showSorting()</span>
+<span class="sd">        &gt;&gt;&gt; ird.showActionsSortingResult()</span>
+<span class="sd">        &gt;&gt;&gt; ird.showQuantileOrdering()</span>
+<span class="sd">        &gt;&gt;&gt; ird.showOrderedRelationTable()</span>
+<span class="sd">        &gt;&gt;&gt; ird.showSortingCharacteristics()</span>
+<span class="sd">        &gt;&gt;&gt; ird.showHTMLPerformanceHeatmap(Correlations=True)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfQuantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">newData</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
@@ -3911,7 +3911,250 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">sorting</span> <span class="o">=</span> <span class="n">sorting</span>
                 <span class="k">if</span> <span class="n">WithSortingRelation</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">relation</span>
+<div class="viewcode-block" id="IncrementalRatingDigraph.htmlPerformanceHeatmap"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingDigraph.htmlPerformanceHeatmap">[docs]</a>    <span class="k">def</span> <span class="nf">htmlPerformanceHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argCriteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                               <span class="n">argActionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                               <span class="n">SparseModel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                               <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                               <span class="n">RankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">,</span>
+                               <span class="n">quantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                               <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
+                               <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                               <span class="n">contentCentered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                               <span class="n">colorLevels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                               <span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Performance Heatmap&#39;</span><span class="p">,</span>
+                               <span class="n">Correlations</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                               <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                               <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                               <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;       </span>
+<span class="sd">        Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table</span>
+<span class="sd">        actions x criteria in html format.</span>
 
+<span class="sd">        See the corresponding perfTabs.showHTMLPerformanceHeatMap() method.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
+                    
+        <span class="n">brewerRdYlGn9Colors</span> <span class="o">=</span> <span class="p">[(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.1111&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#D53E4F&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.2222&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#F46D43&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.3333&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#FDAE61&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.4444&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#FEE08B&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.5555&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#FFFFBF&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.6666&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#D9EF8B&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.7777&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#A6D96A&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.8888&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#65BD63&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.000&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#1A9850&quot;&#39;</span><span class="p">)]</span>
+        <span class="n">brewerRdYlGn7Colors</span> <span class="o">=</span> <span class="p">[</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.1429&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#F46D43&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.2857&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#FDAE61&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.4286&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#FEE08B&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.5714&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#FFFFBF&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.7143&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#D9EF8B&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.8571&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#A6D96A&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0000&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#65BD63&quot;&#39;</span><span class="p">)</span>
+                               <span class="p">]</span>
+        <span class="n">brewerRdYlGn5Colors</span> <span class="o">=</span> <span class="p">[</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.2&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#FDAE61&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.4&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#FEE08B&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.6&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#FFFFBF&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.8&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#D9EF8B&quot;&#39;</span><span class="p">),</span>
+                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#A6D96A&quot;&#39;</span><span class="p">)</span>
+                               <span class="p">]</span>
+        <span class="k">if</span> <span class="n">colorLevels</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">colorLevels</span> <span class="o">=</span> <span class="mi">7</span>
+        <span class="k">if</span> <span class="n">colorLevels</span> <span class="o">==</span> <span class="mi">7</span><span class="p">:</span>
+            <span class="n">colorPalette</span> <span class="o">=</span> <span class="n">brewerRdYlGn7Colors</span>
+        <span class="k">elif</span> <span class="n">colorLevels</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
+            <span class="n">colorPalette</span> <span class="o">=</span> <span class="n">brewerRdYlGn9Colors</span>
+        <span class="k">elif</span> <span class="n">colorLevels</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="n">colorPalette</span> <span class="o">=</span> <span class="n">brewerRdYlGn5Colors</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">colorPalette</span> <span class="o">=</span> <span class="n">brewerRdYlGn7Colors</span>
+        <span class="n">nc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">colorPalette</span><span class="p">)</span>
+        <span class="n">backGroundColor</span>   <span class="o">=</span> <span class="s1">&#39;&quot;#FFFFFF&quot;&#39;</span>
+        <span class="n">naColor</span>           <span class="o">=</span> <span class="s1">&#39;&quot;#FFFFFF&quot;&#39;</span>
+        <span class="n">columnHeaderColor</span> <span class="o">=</span> <span class="s1">&#39;&quot;#CCFFFF&quot;&#39;</span>
+        <span class="n">rowHeaderColor</span>    <span class="o">=</span> <span class="s1">&#39;&quot;#FFFFFF&quot;&#39;</span>
+
+        <span class="n">html</span> <span class="o">=</span> <span class="s1">&#39;&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;title&gt;</span><span class="si">%s</span><span class="s1">&lt;/title&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="s1">&#39;Digraph3 performance heat map&#39;</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;style type=&quot;text/css&quot;&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="c1">#html += &#39;table {border-collapse: collapse;}&#39;</span>
+        <span class="k">if</span> <span class="n">contentCentered</span><span class="p">:</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;td {text-align: center;}</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;td.na {color: rgb(192,192,192);}</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;tr.quantile {color: rgb(100,100,100);}</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/style&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/head&gt;</span><span class="se">\n</span><span class="s1">&lt;body&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;h2&gt;</span><span class="si">%s</span><span class="s1">&lt;/h2&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">pageTitle</span>
+        
+        <span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="k">import</span> <span class="n">PreRankedOutrankingDigraph</span>
+        <span class="k">if</span> <span class="n">argCriteriaList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">argCriteriaList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="n">criteriaList</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">criteriaList</span> <span class="o">=</span> <span class="n">argCriteriaList</span>
+
+        <span class="k">if</span> <span class="n">RankingRule</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">RankingRule</span> <span class="o">=</span> <span class="s1">&#39;Copeland&#39;</span>
+        <span class="n">na</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
+        <span class="n">profiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span>
+        <span class="k">if</span> <span class="n">SparseModel</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">quantiles</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">na</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+                    <span class="n">q</span> <span class="o">=</span> <span class="mi">5</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">q</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">q</span> <span class="o">=</span> <span class="n">quantiles</span>
+            <span class="n">g</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="n">q</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                           <span class="n">minimalComponentSize</span><span class="o">=</span><span class="n">minimalComponentSize</span><span class="p">,</span>
+                                       <span class="n">componentRankingRule</span><span class="o">=</span><span class="n">RankingRule</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span>
+                                       <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">argActionsList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">actionsList</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">boostedRanking</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">actionsList</span> <span class="o">=</span> <span class="n">argActionsList</span>
+        <span class="k">else</span><span class="p">:</span> <span class="c1"># standard outranking model</span>
+            <span class="k">if</span> <span class="n">RankingRule</span> <span class="o">==</span> <span class="s1">&#39;NetFlows&#39;</span><span class="p">:</span>
+<span class="c1">##                if quantiles == None:</span>
+<span class="c1">##                    quantiles = na</span>
+                <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">BipolarOutrankingDigraph</span>
+                <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="k">import</span> <span class="n">NetFlowsOrder</span>
+                <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">argActionsList</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">argActionsList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">actionsList</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">actionsList</span> <span class="o">=</span> <span class="n">argActionsList</span>
+            <span class="k">else</span><span class="p">:</span>
+<span class="c1">##                if quantiles == None:</span>
+<span class="c1">##                    quantiles = na</span>
+                <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">BipolarOutrankingDigraph</span>
+                <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="k">import</span> <span class="n">CopelandOrder</span>
+                <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">argActionsList</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="c1">#actionsList = g.computeNetFlowsRanking()</span>
+                <span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">argActionsList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">actionsList</span> <span class="o">=</span> <span class="n">cop</span><span class="o">.</span><span class="n">computeRanking</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">actionsList</span> <span class="o">=</span> <span class="n">argActionsList</span>
+        <span class="k">if</span> <span class="n">SparseModel</span><span class="p">:</span>
+            <span class="n">rankCorrelation</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rankCorrelation</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">actionsList</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="n">rankCorrelation</span><span class="p">)</span>
+
+        <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
+        <span class="k">if</span> <span class="n">criteriaList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Correlations</span><span class="p">:</span>
+                <span class="n">criteriaCorrelation</span> <span class="o">=</span>\
+                        <span class="n">g</span><span class="o">.</span><span class="n">computeMarginalVersusGlobalRankingCorrelations</span><span class="p">(</span>\
+                                <span class="n">actionsList</span><span class="p">,</span><span class="n">ValuedCorrelation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span>
+                                <span class="n">nbrCores</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
+                <span class="n">criteriaList</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">criteriaCorrelation</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">criteriaList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">criteria</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+                <span class="n">criteriaList</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+                <span class="n">criteriaWeightsList</span> <span class="o">=</span> <span class="p">[(</span><span class="o">-</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">],</span><span class="n">g</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="p">]</span>
+                <span class="n">criteriaWeightsList</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="n">criteriaList</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaWeightsList</span><span class="p">]</span>
+                <span class="n">criteriaCorrelation</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">criteriaList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">criteria</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">Correlations</span><span class="p">:</span>
+                <span class="n">criteriaCorrelation</span> <span class="o">=</span>\
+                        <span class="n">g</span><span class="o">.</span><span class="n">computeMarginalVersusGlobalRankingCorrelations</span><span class="p">(</span>\
+                                <span class="n">actionsList</span><span class="p">,</span><span class="n">ValuedCorrelation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span>
+                                <span class="n">nbrCores</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">criteriaCorrelation</span> <span class="o">=</span> <span class="kc">None</span>
+            
+        <span class="n">quantileColor</span><span class="o">=</span><span class="p">{}</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionsList</span><span class="p">:</span>
+            <span class="n">quantileColor</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="p">:</span>
+                <span class="n">quantilexg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeActionCriterionQuantile</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">g</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">quantilexg</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">quantilexg</span> <span class="o">!=</span> <span class="s1">&#39;NA&#39;</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">colorPalette</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+                        
+                        <span class="k">if</span> <span class="n">quantilexg</span> <span class="o">&lt;=</span> <span class="n">colorPalette</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+                            <span class="n">quantileColor</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">colorPalette</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+                            <span class="k">break</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">quantileColor</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">naColor</span>
+                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">quantileColor</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">g</span><span class="p">])</span>
+        <span class="c1"># legend            </span>
+<span class="c1">##        html += &#39;&lt;i&gt;Color legend: &lt;/i&gt;\n&#39;</span>
+<span class="c1">##        html += &#39;&lt;table style=&quot;background-color:%s; border-collapse: collapse;&quot; border=&quot;1&quot;&gt;\n&#39; % (backGroundColor) </span>
+<span class="c1">##        html += &#39;&lt;tr bgcolor=%s&gt;&lt;th&gt;quantile&lt;/th&gt;&#39; % (columnHeaderColor)</span>
+<span class="c1">##        for col in range(nc):</span>
+<span class="c1">##            html += &#39;&lt;td bgcolor=%s&gt;%s&lt;/td&gt;&#39; % (colorPalette[col][1],str(colorPalette[col][0]))</span>
+<span class="c1">##        html += &#39;&lt;/tr&gt;\n&#39;</span>
+<span class="c1">##        html += &#39;&lt;/table&gt;\n&#39;</span>
+        <span class="c1"># heatmap</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;table style=&quot;background-color:</span><span class="si">%s</span><span class="s1">;&quot; border=&quot;1&quot;&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">backGroundColor</span><span class="p">)</span> 
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr bgcolor=</span><span class="si">%s</span><span class="s1">&gt;&lt;th&gt;criteria&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">columnHeaderColor</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">gName</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">gName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;th&gt;</span><span class="si">%s</span><span class="s1">&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">gName</span><span class="p">)</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;th bgcolor=</span><span class="si">%s</span><span class="s1">&gt;weights&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">columnHeaderColor</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="p">:</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;td align=&quot;center&quot;&gt;</span><span class="si">%s</span><span class="s1">&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]))</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">if</span> <span class="n">criteriaCorrelation</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;th bgcolor=</span><span class="si">%s</span><span class="s1">&gt;tau&lt;sup&gt;(*)&lt;/sup&gt;&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">columnHeaderColor</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">cg</span> <span class="ow">in</span> <span class="n">criteriaCorrelation</span><span class="p">:</span>
+                <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;td align=&quot;center&quot;&gt;</span><span class="si">%.2f</span><span class="s1">&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cg</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionsList</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">xName</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">xName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">profiles</span><span class="p">:</span>
+                <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr class=&quot;quantile&quot;&gt;&lt;th bgcolor=</span><span class="si">%s</span><span class="s1">&gt;</span><span class="si">%s</span><span class="s1">&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">rowHeaderColor</span><span class="p">,</span><span class="n">xName</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;th bgcolor=</span><span class="si">%s</span><span class="s1">&gt;</span><span class="si">%s</span><span class="s1">&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">rowHeaderColor</span><span class="p">,</span><span class="n">xName</span><span class="p">)</span>                
+            <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;-999&quot;</span><span class="p">):</span>
+                    <span class="n">formatString</span> <span class="o">=</span> <span class="s1">&#39;&lt;td bgcolor=</span><span class="si">%s</span><span class="s1"> align=&quot;right&quot;&gt;</span><span class="si">%%</span><span class="s1"> .</span><span class="si">%d</span><span class="s1">f&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">quantileColor</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">g</span><span class="p">],</span><span class="n">ndigits</span><span class="p">)</span>
+                    <span class="n">html</span> <span class="o">+=</span> <span class="n">formatString</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;td bgcolor=</span><span class="si">%s</span><span class="s1"> class=&quot;na&quot;&gt;NA&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="n">naColor</span>
+                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="c1"># legend</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;i&gt;Color legend: &lt;/i&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;table style=&quot;background-color:</span><span class="si">%s</span><span class="s1">;&quot; border=&quot;1&quot;&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">backGroundColor</span><span class="p">)</span> 
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr bgcolor=</span><span class="si">%s</span><span class="s1">&gt;&lt;th&gt;quantile&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">columnHeaderColor</span><span class="p">)</span>
+        <span class="c1">#html += &#39;&lt;td bgcolor=%s&gt;&amp;nbsp;[%.2f - %.2f[&amp;nbsp;&lt;/td&gt;&#39; % (colorPalette[0][1],0.0,colorPalette[0][0])</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">nc</span><span class="p">):</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;td bgcolor=</span><span class="si">%s</span><span class="s1">&gt;&amp;nbsp;</span><span class="si">%.2f</span><span class="s1">&amp;#037;&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">colorPalette</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+                                                                   <span class="c1">#colorPalette[col-1][0],</span>
+                                                                   <span class="n">colorPalette</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;100.0&#39;</span><span class="p">))</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">if</span> <span class="n">criteriaCorrelation</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;i&gt;(*) tau: Ordinal (Kendall) correlation between marginal criterion and global ranking relation.&lt;/i&gt;&lt;br/&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">if</span> <span class="n">rankCorrelation</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;i&gt;Ordinal (Kendall) correlation between global ranking and outranking relation: </span><span class="si">%.2f</span><span class="s1">.&lt;/i&gt;&lt;br/&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">rankCorrelation</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">])</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/body&gt;&lt;/html&gt;&#39;</span>
+        <span class="k">return</span> <span class="n">html</span></div>
+    
 <div class="viewcode-block" id="IncrementalRatingDigraph.showActionCategories"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingDigraph.showActionCategories">[docs]</a>    <span class="k">def</span> <span class="nf">showActionCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                              <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -4907,7 +5150,7 @@
 <span class="s2">    ****************************************************</span>
 <span class="s2">    * Python sortingDigraphs module                    *</span>
 <span class="s2">    * depends on BipolarOutrankingDigraph and          *</span>
-<span class="s2">    * $Revision: 2319 $                                 *</span>
+<span class="s2">    * $Revision: 2312 $                                 *</span>
 <span class="s2">    * Copyright (C) 2010 Raymond Bisdorff              *</span>
 <span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
 <span class="s2">    * to the extent permitted by the applicable law.   *</span>
@@ -5039,7 +5282,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. december 2010                *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2319 $                  *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2312 $                  *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>

@@ -6323,14 +6323,14 @@ incremental performance quantiles gathered from historical data.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># rating the new set of decision actions after</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># updating the historical performance quantiles</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ira</span> <span class="o">=</span> <span class="n">IncrementalRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">CompleteOutranking</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span> <span class="o">=</span> <span class="n">IncrementalRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">CompleteOutranking</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># inspecting the rating result</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ira</span><span class="o">.</span><span class="n">showSorting</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ira</span><span class="o">.</span><span class="n">showActionsSortingResult</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ira</span><span class="o">.</span><span class="n">showQuantileOrdering</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ira</span><span class="o">.</span><span class="n">showOrderedRelationTable</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ira</span><span class="o">.</span><span class="n">showSortingCharacteristics</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ira</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span><span class="o">.</span><span class="n">showSorting</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span><span class="o">.</span><span class="n">showActionsSortingResult</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span><span class="o">.</span><span class="n">showQuantileOrdering</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span><span class="o">.</span><span class="n">showOrderedRelationTable</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span><span class="o">.</span><span class="n">showSortingCharacteristics</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd>
@@ -6381,6 +6381,14 @@ the high category limit.</p>
 <dt id="sortingDigraphs.IncrementalRatingDigraph.getActionsKeys">
 <code class="descname">getActionsKeys</code><span class="sig-paren">(</span><em>action=None</em>, <em>WithoutProfiles=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.getActionsKeys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.getActionsKeys" title="Permalink to this definition">¶</a></dt>
 <dd><p>extract normal actions keys()</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.IncrementalRatingDigraph.htmlPerformanceHeatmap">
+<code class="descname">htmlPerformanceHeatmap</code><span class="sig-paren">(</span><em>argCriteriaList=None</em>, <em>argActionsList=None</em>, <em>SparseModel=True</em>, <em>minimalComponentSize=1</em>, <em>RankingRule='Copeland'</em>, <em>quantiles=None</em>, <em>strategy='average'</em>, <em>ndigits=2</em>, <em>contentCentered=True</em>, <em>colorLevels=None</em>, <em>pageTitle='Performance Heatmap'</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.htmlPerformanceHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.htmlPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table
+actions x criteria in html format.</p>
+<p>See the corresponding perfTabs.showHTMLPerformanceHeatMap() method.</p>
 </dd></dl>
 
 <dl class="method">
