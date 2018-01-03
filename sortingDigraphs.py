@@ -3188,7 +3188,7 @@ class QuantilesSortingDigraph(SortingDigraph):
 
 #-------------
 from performanceQuantiles import PerformanceQuantiles  
-class IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
+class IncrementalRatingDigraph(SortingDigraph,PerformanceQuantiles):
     """
     Specialisation of the sortingDigraph Class
     for absolute rating of a new set of decision actions with
@@ -3219,7 +3219,7 @@ class IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
         >>> # rating the new set of decision actions after
         >>> # updating the historical performance quantiles
         >>> pq.updateQuantiles(newActions,historySize=None)
-        >>> ira = IncrementalRatingAgent(pq,newActions,\
+        >>> ira = IncrementalRatingDigraph(pq,newActions,\
         ...                              CompleteOutranking=True,\
         ...                              Debug=True)
         >>> # inspecting the rating result
@@ -4980,7 +4980,7 @@ if __name__ == "__main__":
         newAction = tpg.randomAction()
         newActions.append(newAction)
     pq.updateQuantiles(newActions,historySize=None)
-    ira = IncrementalRatingAgent(pq,newActions,CompleteOutranking=True,Debug=True)
+    ira = IncrementalRatingDigraph(pq,newActions,CompleteOutranking=True,Debug=True)
     ira.showSorting()
     ira.showActionsSortingResult()
     ira.showQuantileOrdering()

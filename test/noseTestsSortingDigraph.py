@@ -146,8 +146,8 @@ def testActionsSortingResult():
     s1.showActionsSortingResult()
     s1.exportGraphViz('tests1',graphType="pdf")
     
-def testIncrementalRatingResult():
-    print('*-------- Testing IncrementalRatingAgent class -------')
+def testIncrementalRatingDigraph():
+    print('*-------- Testing IncrementalRatingDigraph class -------')
     from randomPerfTabs import RandomCBPerformanceTableau
     from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
     nbrActions=1000
@@ -161,7 +161,7 @@ def testIncrementalRatingResult():
         newAction = tpg.randomAction()
         newActions.append(newAction)
     pq.updateQuantiles(newActions,historySize=None)
-    ira = IncrementalRatingAgent(pq,newActions,CompleteOutranking=True,Debug=True)
+    ira = IncrementalRatingDigraph(pq,newActions,CompleteOutranking=True,Debug=True)
     ira.showSorting()
     ira.showActionsSortingResult()
     ira.showQuantileOrdering()
