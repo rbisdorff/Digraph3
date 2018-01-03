@@ -3241,13 +3241,42 @@
 <div class="viewcode-block" id="IncrementalRatingAgent"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingAgent">[docs]</a><span class="k">class</span> <span class="nc">IncrementalRatingAgent</span><span class="p">(</span><span class="n">SortingDigraph</span><span class="p">,</span><span class="n">PerformanceQuantiles</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialisation of the sortingDigraph Class</span>
-<span class="sd">    for rating a set of decision actions with</span>
-<span class="sd">    incremental performance quantiles</span>
+<span class="sd">    for absolute rating of a new set of decision actions with</span>
+<span class="sd">    incremental performance quantiles gathered from historical data.</span>
 <span class="sd">      </span>
 <span class="sd">    .. note::</span>
 
-<span class="sd">        The constructor requires a valid PerformanceQuantiles instance. </span>
-<span class="sd">        </span>
+<span class="sd">        The constructor requires a valid</span>
+<span class="sd">        :py:class:`performanceQuantiles.PerformanceQuantiles` instance.</span>
+
+<span class="sd">    Examle Python session:</span>
+<span class="sd">        &gt;&gt;&gt; # historical data</span>
+<span class="sd">        &gt;&gt;&gt; from randomPerfTabs import RandomCBPerformanceTableau</span>
+<span class="sd">        &gt;&gt;&gt; nbrActions=1000</span>
+<span class="sd">        &gt;&gt;&gt; nbrCrit = 13</span>
+<span class="sd">        &gt;&gt;&gt; tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\</span>
+<span class="sd">        ...                                 numberOfCriteria=nbrCrit,seed=None)</span>
+<span class="sd">        &gt;&gt;&gt; pq = PerformanceQuantiles(tp,numberOfBins=&#39;deciles&#39;,\</span>
+<span class="sd">        ...                           LowerClosed=True,Debug=False)</span>
+<span class="sd">        &gt;&gt;&gt; # new incoming decision actions of the same kind</span>
+<span class="sd">        &gt;&gt;&gt; from randomPerfTabs import RandomCBPerformanceGenerator\</span>
+<span class="sd">        ...                         as PerfTabGenerator</span>
+<span class="sd">        &gt;&gt;&gt; tpg = PerfTabGenerator(tp,instanceCounter=0,seed=105)</span>
+<span class="sd">        &gt;&gt;&gt; newActions = []</span>
+<span class="sd">        &gt;&gt;&gt; for i in range(10):</span>
+<span class="sd">        ...     newAction = tpg.randomAction()</span>
+<span class="sd">        ...     newActions.append(newAction)</span>
+<span class="sd">        &gt;&gt;&gt; # rating the new set of decision actions</span>
+<span class="sd">        &gt;&gt;&gt; ira = IncrementalRatingAgent(pq,newActions,\</span>
+<span class="sd">        ...                              CompleteOutranking=True,\</span>
+<span class="sd">        ...                              Debug=True)</span>
+<span class="sd">        ... ira.showSorting()</span>
+<span class="sd">        ... ira.showActionsSortingResult()</span>
+<span class="sd">        ... ira.showQuantileOrdering()</span>
+<span class="sd">        ... ira.showOrderedRelationTable()</span>
+<span class="sd">        ... ira.showSortingCharacteristics()</span>
+<span class="sd">        ... ira.showHTMLPerformanceHeatmap(Correlations=True)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfQuantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">newData</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\

@@ -6298,12 +6298,40 @@ the diagonal outranking components of the sparse outranking digraph.</p>
 <em class="property">class </em><code class="descclassname">sortingDigraphs.</code><code class="descname">IncrementalRatingAgent</code><span class="sig-paren">(</span><em>argPerfQuantiles=None</em>, <em>newData=None</em>, <em>hasNoVeto=True</em>, <em>outrankingType='bipolar'</em>, <em>valuationScale=(-1</em>, <em>1)</em>, <em>WithSortingRelation=False</em>, <em>CompleteOutranking=True</em>, <em>StoreSorting=True</em>, <em>CopyPerfTab=False</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrCores=None</em>, <em>nbrOfProcesses=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingAgent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingAgent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#sortingDigraphs.SortingDigraph" title="sortingDigraphs.SortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.SortingDigraph</span></code></a>, <a class="reference internal" href="#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a></p>
 <p>Specialisation of the sortingDigraph Class
-for rating a set of decision actions with
-incremental performance quantiles</p>
+for absolute rating of a new set of decision actions with
+incremental performance quantiles gathered from historical data.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The constructor requires a valid PerformanceQuantiles instance.</p>
+<p class="last">The constructor requires a valid
+<a class="reference internal" href="#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a> instance.</p>
 </div>
+<dl class="docutils">
+<dt>Examle Python session:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># historical data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">13</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>        <span class="o">...</span>                                 <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">numberOfBins</span><span class="o">=</span><span class="s1">&#39;deciles&#39;</span><span class="p">,</span>        <span class="o">...</span>                           <span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># new incoming decision actions of the same kind</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceGenerator</span>        <span class="o">...</span>                         <span class="k">as</span> <span class="n">PerfTabGenerator</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">newActions</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">newAction</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomAction</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="n">newActions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newAction</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># rating the new set of decision actions</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ira</span> <span class="o">=</span> <span class="n">IncrementalRatingAgent</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span>        <span class="o">...</span>                              <span class="n">CompleteOutranking</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>        <span class="o">...</span>                              <span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">... </span><span class="n">ira</span><span class="o">.</span><span class="n">showSorting</span><span class="p">()</span>
+<span class="gp">... </span><span class="n">ira</span><span class="o">.</span><span class="n">showActionsSortingResult</span><span class="p">()</span>
+<span class="gp">... </span><span class="n">ira</span><span class="o">.</span><span class="n">showQuantileOrdering</span><span class="p">()</span>
+<span class="gp">... </span><span class="n">ira</span><span class="o">.</span><span class="n">showOrderedRelationTable</span><span class="p">()</span>
+<span class="gp">... </span><span class="n">ira</span><span class="o">.</span><span class="n">showSortingCharacteristics</span><span class="p">()</span>
+<span class="gp">... </span><span class="n">ira</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 <dl class="method">
 <dt id="sortingDigraphs.IncrementalRatingAgent.computeCategoryContents">
 <code class="descname">computeCategoryContents</code><span class="sig-paren">(</span><em>Reverse=False</em>, <em>Comments=False</em>, <em>StoreSorting=True</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingAgent.computeCategoryContents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingAgent.computeCategoryContents" title="Permalink to this definition">¶</a></dt>

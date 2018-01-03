@@ -3191,13 +3191,42 @@ from performanceQuantiles import PerformanceQuantiles
 class IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
     """
     Specialisation of the sortingDigraph Class
-    for rating a set of decision actions with
-    incremental performance quantiles
+    for absolute rating of a new set of decision actions with
+    incremental performance quantiles gathered from historical data.
       
     .. note::
 
-        The constructor requires a valid PerformanceQuantiles instance. 
-        
+        The constructor requires a valid
+        :py:class:`performanceQuantiles.PerformanceQuantiles` instance.
+
+    Examle Python session:
+        >>> # historical data
+        >>> from randomPerfTabs import RandomCBPerformanceTableau
+        >>> nbrActions=1000
+        >>> nbrCrit = 13
+        >>> tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
+        ...                                 numberOfCriteria=nbrCrit,seed=None)
+        >>> pq = PerformanceQuantiles(tp,numberOfBins='deciles',\
+        ...                           LowerClosed=True,Debug=False)
+        >>> # new incoming decision actions of the same kind
+        >>> from randomPerfTabs import RandomCBPerformanceGenerator\
+        ...                         as PerfTabGenerator
+        >>> tpg = PerfTabGenerator(tp,instanceCounter=0,seed=105)
+        >>> newActions = []
+        >>> for i in range(10):
+        ...     newAction = tpg.randomAction()
+        ...     newActions.append(newAction)
+        >>> # rating the new set of decision actions
+        >>> ira = IncrementalRatingAgent(pq,newActions,\
+        ...                              CompleteOutranking=True,\
+        ...                              Debug=True)
+        ... ira.showSorting()
+        ... ira.showActionsSortingResult()
+        ... ira.showQuantileOrdering()
+        ... ira.showOrderedRelationTable()
+        ... ira.showSortingCharacteristics()
+        ... ira.showHTMLPerformanceHeatmap(Correlations=True)
+
     """
     def __init__(self,argPerfQuantiles=None,newData=None,\
                  hasNoVeto=True,\
