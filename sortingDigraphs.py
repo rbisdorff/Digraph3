@@ -3267,7 +3267,7 @@ class IncrementalRatingDigraph(SortingDigraph,PerformanceQuantiles):
         self.limitingQuantiles = deepcopy(perfQuantiles.limitingQuantiles)
         self.historySizes = deepcopy(perfQuantiles.historySizes)
         self.cdf = deepcopy(perfQuantiles.cdf)
-        self.name = 'Incremental Rating Agent'
+        self.name = 'Incremental Rating Digraph'
         # import the actions to rate
         newActions = OrderedDict()
         evaluation = {}
@@ -3326,7 +3326,7 @@ class IncrementalRatingDigraph(SortingDigraph,PerformanceQuantiles):
                 %(quantFreq[i],quantFreq[i+1]), 'order':i+1,
                         'lowLimit': ']%.2f' % (quantFreq[i]),
                         'highLimit': '%.2f]' % (quantFreq[i+1]),
-                                        'quantile': quantfreq[i+1]}
+                                        'quantile': quantFreq[i+1]}
         self.categories = categories
         self.runTimes = {'categories': time()-tt}
 ##
@@ -3924,6 +3924,7 @@ class IncrementalRatingDigraph(SortingDigraph,PerformanceQuantiles):
         naColor           = '"#FFFFFF"'
         columnHeaderColor = '"#CCFFFF"'
         rowHeaderColor    = '"#FFFFFF"'
+        actionRowHeaderColor = '#FFF79B'
 
         html = '<!DOCTYPE html><html><head>\n'
         html += '<title>%s</title>\n' % 'Digraph3 performance heat map'
@@ -3948,6 +3949,7 @@ class IncrementalRatingDigraph(SortingDigraph,PerformanceQuantiles):
             RankingRule = 'Copeland'
         na = len(self.actions)
         profiles = self.profiles
+        categories = self.categories
         if SparseModel:
             if quantiles == None:
                 if na < 100:
@@ -4069,14 +4071,18 @@ class IncrementalRatingDigraph(SortingDigraph,PerformanceQuantiles):
         if Debug:
             print(html)
         for x in actionsList:
-            try:
-                xName = self.actions[x]['shortName']
-            except:
-                xName = str(x)
+            if x in profiles:
+                xcat = profiles[x]['category']
+                xName = categories[xcat]['name']
+            else:
+                try:
+                    xName = self.actions[x]['shortName']
+                except:
+                    xName = str(x)
             if x in profiles:
                 html += '<tr class="quantile"><th bgcolor=%s>%s</th>' % (rowHeaderColor,xName)
             else:
-                html += '<tr><th bgcolor=%s>%s</th>' % (rowHeaderColor,xName)                
+                html += '<tr><th bgcolor=%s>%s</th>' % (actionRowHeaderColor,xName)                
             for g in criteriaList:
                 if self.evaluation[g][x] != Decimal("-999"):
                     formatString = '<td bgcolor=%s align="right">%% .%df</td>' % (quantileColor[x][g],ndigits)
@@ -5210,7 +5216,7 @@ if __name__ == "__main__":
     nbrActions=1000
     nbrCrit = 13
     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
-                                    numberOfCriteria=nbrCrit,seed=None)
+                                    numberOfCriteria=nbrCrit,seed=105)
     pq = PerformanceQuantiles(tp,'deciles',LowerClosed=True,Debug=False)
     tpg = PerfTabGenerator(tp,instanceCounter=0,seed=105)
     newActions = []
@@ -5221,11 +5227,12 @@ if __name__ == "__main__":
     ira = IncrementalRatingDigraph(pq,newActions,\
                                    CompleteOutranking=True,Debug=True)
     ira.showSorting()
+    ira.showHTMLSorting()
     ira.showActionsSortingResult()
     ira.showQuantileOrdering()
     ira.showOrderedRelationTable()
     ira.showSortingCharacteristics()
-    ira.showHTMLPerformanceHeatmap(Correlations=True)
+    ira.showHTMLPerformanceHeatmap(pageTitle='Heat map of performances',Correlations=True)
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')

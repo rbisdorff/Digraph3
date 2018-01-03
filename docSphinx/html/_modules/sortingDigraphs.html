@@ -51,7 +51,7 @@
 <span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># Python implementation of digraphs</span>
-<span class="c1"># Current revision $Revision: 2312 $</span>
+<span class="c1"># Current revision $Revision: 2321 $</span>
 <span class="c1"># Copyright (C) 2006-2008  Raymond Bisdorff</span>
 <span class="c1">#</span>
 <span class="c1">#    This program is free software; you can redistribute it and/or modify</span>
@@ -3317,7 +3317,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">limitingQuantiles</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfQuantiles</span><span class="o">.</span><span class="n">limitingQuantiles</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfQuantiles</span><span class="o">.</span><span class="n">historySizes</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cdf</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfQuantiles</span><span class="o">.</span><span class="n">cdf</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Incremental Rating Agent&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Incremental Rating Digraph&#39;</span>
         <span class="c1"># import the actions to rate</span>
         <span class="n">newActions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
         <span class="n">evaluation</span> <span class="o">=</span> <span class="p">{}</span>
@@ -3376,7 +3376,7 @@
                 <span class="o">%</span><span class="p">(</span><span class="n">quantFreq</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">quantFreq</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]),</span> <span class="s1">&#39;order&#39;</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span>
                         <span class="s1">&#39;lowLimit&#39;</span><span class="p">:</span> <span class="s1">&#39;]</span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">quantFreq</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span>
                         <span class="s1">&#39;highLimit&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">%.2f</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">quantFreq</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]),</span>
-                                        <span class="s1">&#39;quantile&#39;</span><span class="p">:</span> <span class="n">quantfreq</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]}</span>
+                                        <span class="s1">&#39;quantile&#39;</span><span class="p">:</span> <span class="n">quantFreq</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">categories</span> <span class="o">=</span> <span class="n">categories</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;categories&#39;</span><span class="p">:</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">tt</span><span class="p">}</span>
 <span class="c1">##</span>
@@ -3974,6 +3974,7 @@
         <span class="n">naColor</span>           <span class="o">=</span> <span class="s1">&#39;&quot;#FFFFFF&quot;&#39;</span>
         <span class="n">columnHeaderColor</span> <span class="o">=</span> <span class="s1">&#39;&quot;#CCFFFF&quot;&#39;</span>
         <span class="n">rowHeaderColor</span>    <span class="o">=</span> <span class="s1">&#39;&quot;#FFFFFF&quot;&#39;</span>
+        <span class="n">actionRowHeaderColor</span> <span class="o">=</span> <span class="s1">&#39;#FFF79B&#39;</span>
 
         <span class="n">html</span> <span class="o">=</span> <span class="s1">&#39;&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;title&gt;</span><span class="si">%s</span><span class="s1">&lt;/title&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="s1">&#39;Digraph3 performance heat map&#39;</span>
@@ -3998,6 +3999,7 @@
             <span class="n">RankingRule</span> <span class="o">=</span> <span class="s1">&#39;Copeland&#39;</span>
         <span class="n">na</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
         <span class="n">profiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span>
+        <span class="n">categories</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">categories</span>
         <span class="k">if</span> <span class="n">SparseModel</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">quantiles</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">na</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
@@ -4119,14 +4121,18 @@
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionsList</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">xName</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">]</span>
-            <span class="k">except</span><span class="p">:</span>
-                <span class="n">xName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">profiles</span><span class="p">:</span>
+                <span class="n">xcat</span> <span class="o">=</span> <span class="n">profiles</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;category&#39;</span><span class="p">]</span>
+                <span class="n">xName</span> <span class="o">=</span> <span class="n">categories</span><span class="p">[</span><span class="n">xcat</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">xName</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">]</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="n">xName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">profiles</span><span class="p">:</span>
                 <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr class=&quot;quantile&quot;&gt;&lt;th bgcolor=</span><span class="si">%s</span><span class="s1">&gt;</span><span class="si">%s</span><span class="s1">&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">rowHeaderColor</span><span class="p">,</span><span class="n">xName</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;th bgcolor=</span><span class="si">%s</span><span class="s1">&gt;</span><span class="si">%s</span><span class="s1">&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">rowHeaderColor</span><span class="p">,</span><span class="n">xName</span><span class="p">)</span>                
+                <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;th bgcolor=</span><span class="si">%s</span><span class="s1">&gt;</span><span class="si">%s</span><span class="s1">&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">actionRowHeaderColor</span><span class="p">,</span><span class="n">xName</span><span class="p">)</span>                
             <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;-999&quot;</span><span class="p">):</span>
                     <span class="n">formatString</span> <span class="o">=</span> <span class="s1">&#39;&lt;td bgcolor=</span><span class="si">%s</span><span class="s1"> align=&quot;right&quot;&gt;</span><span class="si">%%</span><span class="s1"> .</span><span class="si">%d</span><span class="s1">f&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">quantileColor</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">g</span><span class="p">],</span><span class="n">ndigits</span><span class="p">)</span>
@@ -5150,7 +5156,7 @@
 <span class="s2">    ****************************************************</span>
 <span class="s2">    * Python sortingDigraphs module                    *</span>
 <span class="s2">    * depends on BipolarOutrankingDigraph and          *</span>
-<span class="s2">    * $Revision: 2312 $                                 *</span>
+<span class="s2">    * $Revision: 2321 $                                 *</span>
 <span class="s2">    * Copyright (C) 2010 Raymond Bisdorff              *</span>
 <span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
 <span class="s2">    * to the extent permitted by the applicable law.   *</span>
@@ -5260,7 +5266,7 @@
     <span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
     <span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">13</span>
     <span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>\
-                                    <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+                                    <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
     <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="s1">&#39;deciles&#39;</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
     <span class="n">newActions</span> <span class="o">=</span> <span class="p">[]</span>
@@ -5271,18 +5277,19 @@
     <span class="n">ira</span> <span class="o">=</span> <span class="n">IncrementalRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span>\
                                    <span class="n">CompleteOutranking</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">ira</span><span class="o">.</span><span class="n">showSorting</span><span class="p">()</span>
+    <span class="n">ira</span><span class="o">.</span><span class="n">showHTMLSorting</span><span class="p">()</span>
     <span class="n">ira</span><span class="o">.</span><span class="n">showActionsSortingResult</span><span class="p">()</span>
     <span class="n">ira</span><span class="o">.</span><span class="n">showQuantileOrdering</span><span class="p">()</span>
     <span class="n">ira</span><span class="o">.</span><span class="n">showOrderedRelationTable</span><span class="p">()</span>
     <span class="n">ira</span><span class="o">.</span><span class="n">showSortingCharacteristics</span><span class="p">()</span>
-    <span class="n">ira</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ira</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heat map of performances&#39;</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enjoy !&#39;</span><span class="p">)</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. december 2010                *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2312 $                  *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2321 $                  *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>
