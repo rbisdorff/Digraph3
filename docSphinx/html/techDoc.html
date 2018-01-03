@@ -4414,21 +4414,21 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</p>
 <dl class="class">
 <dt id="performanceQuantiles.PerformanceQuantiles">
-<em class="property">class </em><code class="descclassname">performanceQuantiles.</code><code class="descname">PerformanceQuantiles</code><span class="sig-paren">(</span><em>perfTab</em>, <em>frequencies</em>, <em>LowerClosed=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/performanceQuantiles.html#PerformanceQuantiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#performanceQuantiles.PerformanceQuantiles" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">performanceQuantiles.</code><code class="descname">PerformanceQuantiles</code><span class="sig-paren">(</span><em>perfTab</em>, <em>numberOfBins=4</em>, <em>LowerClosed=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/performanceQuantiles.html#PerformanceQuantiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#performanceQuantiles.PerformanceQuantiles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Implements the incremental performance quantiles representation of a
 given performance tableau.</p>
+<p><em>NumberOfBins</em> may be either &#8216;quartiles&#8217;, &#8216;deciles&#8217;, ... or &#8216;n&#8217;, the integer number of bins.</p>
 <dl class="docutils">
 <dt>Example python session:</dt>
 <dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">performanceQuantiles</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">frequencies</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.25</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.75</span><span class="p">,</span><span class="mf">1.0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">7</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>
 <span class="gp">... </span>                               <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span> <span class="o">=</span> <span class="n">performanceQuantiles</span><span class="o">.</span><span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span> <span class="o">=</span> <span class="n">performanceQuantiles</span><span class="o">.</span><span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="s1">&#39;quintiles&#39;</span><span class="p">,</span>
 <span class="gp">... </span>                               <span class="n">frequencies</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">showLimitingQuantiles</span><span class="p">(</span><span class="n">ByObjectives</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">*----  performance quantiles -----*</span>

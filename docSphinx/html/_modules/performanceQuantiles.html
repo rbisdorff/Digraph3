@@ -79,16 +79,17 @@
 <span class="sd">    Implements the incremental performance quantiles representation of a</span>
 <span class="sd">    given performance tableau.</span>
 
+<span class="sd">    *NumberOfBins* may be either &#39;quartiles&#39;, &#39;deciles&#39;, ... or &#39;n&#39;, the integer number of bins.</span>
+
 <span class="sd">    Example python session:</span>
 <span class="sd">        &gt;&gt;&gt; import performanceQuantiles</span>
 <span class="sd">        &gt;&gt;&gt; from randomPerfTabs import RandomCBPerformanceTableau</span>
 <span class="sd">        &gt;&gt;&gt; from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator</span>
-<span class="sd">        &gt;&gt;&gt; frequencies = [0.0,0.25,0.5,0.75,1.0]</span>
 <span class="sd">        &gt;&gt;&gt; nbrActions=1000</span>
 <span class="sd">        &gt;&gt;&gt; nbrCrit = 7</span>
 <span class="sd">        &gt;&gt;&gt; tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,</span>
 <span class="sd">        ...                                numberOfCriteria=nbrCrit,seed=105)</span>
-<span class="sd">        &gt;&gt;&gt; pq = performanceQuantiles.PerformanceQuantiles(tp,</span>
+<span class="sd">        &gt;&gt;&gt; pq = performanceQuantiles.PerformanceQuantiles(tp,&#39;quintiles&#39;,</span>
 <span class="sd">        ...                                frequencies,LowerClosed=True,Debug=False)</span>
 <span class="sd">        &gt;&gt;&gt; pq.showLimitingQuantiles(ByObjectives=True)</span>
 <span class="sd">        *----  performance quantiles -----*</span>
@@ -119,7 +120,7 @@
 <span class="sd">        :align: center</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">perfTab</span><span class="p">,</span><span class="n">frequencies</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">perfTab</span><span class="p">,</span><span class="n">numberOfBins</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
@@ -129,24 +130,58 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">objectives</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">criteria</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span> <span class="o">=</span> <span class="n">LowerClosed</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span> <span class="o">=</span> <span class="p">[</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">q</span><span class="p">))</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computeQuantilesFrequencies</span><span class="p">(</span><span class="n">numberOfBins</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
         <span class="n">np</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span><span class="p">)</span>
         <span class="n">limitingQuantiles</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">cdf</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computeLimitingQuantiles</span><span class="p">(</span><span class="n">perfTab</span><span class="p">,</span><span class="n">g</span><span class="p">,</span>
-                                                                     <span class="n">frequencies</span><span class="p">,</span>
-                                                                     <span class="n">LowerClosed</span><span class="o">=</span><span class="n">LowerClosed</span><span class="p">)</span>
+            <span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computeLimitingQuantiles</span><span class="p">(</span><span class="n">perfTab</span><span class="p">,</span><span class="n">g</span><span class="p">)</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">])</span>
             <span class="n">cdf</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="p">)])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">limitingQuantiles</span> <span class="o">=</span> <span class="n">limitingQuantiles</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cdf</span> <span class="o">=</span> <span class="n">cdf</span>
         
+    <span class="k">def</span> <span class="nf">_computeQuantilesFrequencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        renders the quantiles frequencies</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">floor</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="nb">int</span><span class="p">):</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;quartiles&#39;</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="mi">4</span>
+        <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;quintiles&#39;</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="mi">5</span>
+        <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;sextiles&#39;</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="mi">6</span>
+        <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;heptiles&#39;</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="mi">7</span>
+        <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;octiles&#39;</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="mi">8</span>
+        <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;deciles&#39;</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;dodeciles&#39;</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="mi">20</span>
+        <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;centiles&#39;</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Error: numberOfBins must be either an integer, None or</span>
+<span class="s2">a string out of [&#39;quartiles&#39;,&#39;quintiles&#39;,&#39;sextiles&#39;,&#39;heptiles</span>
+<span class="s2">&#39;octiles&#39;,&#39;deciles&#39;,&#39;dodeciles&#39;,&#39;centiles&#39;]&quot;&quot;&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="n">quantilesFrequencies</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">freqStr</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="o">/</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
+            <span class="n">quantilesFrequencies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="n">freqStr</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1">-tiled_performances&#39;</span> <span class="o">%</span> <span class="n">n</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">quantilesFrequencies</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">quantilesFrequencies</span>
 
-    <span class="k">def</span> <span class="nf">_computeLimitingQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">perfTab</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">frequencies</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">PrefThresholds</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_computeLimitingQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">perfTab</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">PrefThresholds</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the list of limiting quantiles *q(p)* on criteria *g* for *p* in *frequencies* </span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -177,22 +212,17 @@
 <span class="c1">##        if n &gt; 0:</span>
 <span class="c1">##        nf = Decimal(str(n+1))</span>
         <span class="n">nf</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
-        <span class="n">limitingQuantiles</span> <span class="o">=</span> <span class="p">[</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">q</span><span class="p">))</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">frequencies</span><span class="p">]</span>
-        <span class="n">limitingQuantiles</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="n">quantilesFrequencies</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span>
+        <span class="c1">#limitingQuantiles = [Decimal(str(q)) for q in frequencies]</span>
+        <span class="c1">#limitingQuantiles.sort()</span>
         <span class="c1">#self.limitingQuantiles = limitingQuantiles</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">limitingQuantiles</span><span class="p">)</span>
-<span class="c1">##        if LowerClosed:</span>
-<span class="c1">##            limitingQuantiles = limitingQuantiles[:-1]</span>
-<span class="c1">##        else:</span>
-<span class="c1">##            limitingQuantiles = limitingQuantiles[1:]</span>
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">limitingQuantiles</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">quantilesFrequencies</span><span class="p">)</span>
         <span class="c1"># computing the quantiles on criterion g</span>
         <span class="n">gQuantiles</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">if</span> <span class="n">LowerClosed</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span><span class="p">:</span>
             <span class="c1"># we ignore the 1.00 quantile and replace it with +infty</span>
-            <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">limitingQuantiles</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">quantilesFrequencies</span><span class="p">:</span>
                 <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">nf</span><span class="p">))</span> <span class="o">*</span> <span class="n">q</span><span class="p">)</span>
                 <span class="n">rq</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
@@ -215,7 +245,7 @@
 
         <span class="k">else</span><span class="p">:</span>  <span class="c1"># upper closed categories</span>
             <span class="c1"># we ignore the quantile 0.0 and replace it with -\infty            </span>
-            <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">limitingQuantiles</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">quantilesFrequencies</span><span class="p">:</span>
                 <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">nf</span><span class="p">))</span> <span class="o">*</span> <span class="n">q</span><span class="p">)</span>
                 <span class="n">rq</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
@@ -246,7 +276,7 @@
 <span class="c1">##        else:</span>
 <span class="c1">##            gQuantiles = []</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">LowerClosed</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">],</span><span class="n">gQuantiles</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">],</span><span class="n">gQuantiles</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">gQuantiles</span>
 
 
@@ -725,14 +755,11 @@
     <span class="kn">import</span> <span class="nn">performanceQuantiles</span>
     <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
     <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
-
-    <span class="c1">#frequencies = [0.0,0.25,0.5,0.75,1.0]</span>
-    <span class="n">frequencies</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">0.3</span><span class="p">,</span><span class="mf">0.4</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.6</span><span class="p">,</span><span class="mf">0.7</span><span class="p">,</span><span class="mf">0.8</span><span class="p">,</span><span class="mf">0.9</span><span class="p">,</span><span class="mf">1.0</span><span class="p">]</span>
-    <span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
-    <span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">21</span>
+    <span class="n">nbrActions</span><span class="o">=</span><span class="mi">100</span>
+    <span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">13</span>
     <span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>
                                     <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">frequencies</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="c1">#print(pq.limitingQuantiles)</span>
     <span class="n">pq</span><span class="o">.</span><span class="n">showLimitingQuantiles</span><span class="p">(</span><span class="n">ByObjectives</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">pq</span><span class="o">.</span><span class="n">showHTMLLimitingQuantiles</span><span class="p">(</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -744,9 +771,10 @@
         <span class="n">newAction</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomAction</span><span class="p">()</span>
         <span class="n">newActions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newAction</span><span class="p">)</span>
     <span class="c1">#print(newActions)</span>
-<span class="c1">##    pq.updateQuantiles(newActions,historySize=0)</span>
+    <span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 <span class="c1">##    pq.showActions()</span>
-<span class="c1">##    pq.showCriteria()</span>
+    <span class="n">pq</span><span class="o">.</span><span class="n">showCriteria</span><span class="p">()</span>
+    <span class="n">pq</span><span class="o">.</span><span class="n">showHTMLLimitingQuantiles</span><span class="p">(</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="c1">##    newActions = []</span>
 <span class="c1">##    for i in range(50):</span>
 <span class="c1">##        newAction = tpg.randomAction()</span>
