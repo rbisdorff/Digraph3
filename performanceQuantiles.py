@@ -29,16 +29,17 @@ class PerformanceQuantiles(object):
     Implements the incremental performance quantiles representation of a
     given performance tableau.
 
+    *NumberOfBins* may be either 'quartiles', 'deciles', ... or 'n', the integer number of bins.
+
     Example python session:
         >>> import performanceQuantiles
         >>> from randomPerfTabs import RandomCBPerformanceTableau
         >>> from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
-        >>> frequencies = [0.0,0.25,0.5,0.75,1.0]
         >>> nbrActions=1000
         >>> nbrCrit = 7
         >>> tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
         ...                                numberOfCriteria=nbrCrit,seed=105)
-        >>> pq = performanceQuantiles.PerformanceQuantiles(tp,
+        >>> pq = performanceQuantiles.PerformanceQuantiles(tp,'quintiles',
         ...                                frequencies,LowerClosed=True,Debug=False)
         >>> pq.showLimitingQuantiles(ByObjectives=True)
         *----  performance quantiles -----*
@@ -69,7 +70,7 @@ class PerformanceQuantiles(object):
         :align: center
 
     """
-    def __init__(self,perfTab,frequencies,LowerClosed=True,Debug=False):
+    def __init__(self,perfTab,numberOfBins=4,LowerClosed=True,Debug=False):
         from copy import deepcopy
         from collections import OrderedDict
         self.Debug = Debug
@@ -79,24 +80,58 @@ class PerformanceQuantiles(object):
             self.objectives = None
         self.criteria = deepcopy(perfTab.criteria)
         self.LowerClosed = LowerClosed
-        self.quantilesFrequencies = [Decimal(str(q)) for q in sorted(frequencies)]
+        self.quantilesFrequencies = self._computeQuantilesFrequencies(numberOfBins,Debug=Debug)
         np = len(self.quantilesFrequencies)
         limitingQuantiles = {}
         cdf = {}
         self.historySizes = {}
         for g in self.criteria:
             self.historySizes[g] = 0
-            limitingQuantiles[g] = self._computeLimitingQuantiles(perfTab,g,
-                                                                     frequencies,
-                                                                     LowerClosed=LowerClosed)
+            limitingQuantiles[g] = self._computeLimitingQuantiles(perfTab,g)
             if self.Debug:
                 print(g,limitingQuantiles[g])
             cdf[g] = OrderedDict([(limitingQuantiles[g][i],self.quantilesFrequencies[i]) for i in range(np)])
         self.limitingQuantiles = limitingQuantiles
         self.cdf = cdf
         
+    def _computeQuantilesFrequencies(self,x,Debug=False):
+        """
+        renders the quantiles frequencies
+        """
+        from math import floor
+        if isinstance(x,int):
+            n = x
+        elif x == 'quartiles':
+            n = 4
+        elif x == 'quintiles':
+            n = 5
+        elif x == 'sextiles':
+            n = 6
+        elif x == 'heptiles':
+            n = 7
+        elif x == 'octiles':
+            n = 8
+        elif x == 'deciles':
+            n = 10
+        elif x == 'dodeciles':
+            n = 20
+        elif x == 'centiles':
+            n = 100
+        else:
+            print("""Error: numberOfBins must be either an integer, None or
+a string out of ['quartiles','quintiles','sextiles','heptiles
+'octiles','deciles','dodeciles','centiles']""")
+            return
+        quantilesFrequencies = []
+        for i in range(n+1):
+            freqStr = '%.2f' % (Decimal(str(i)) / Decimal(str(n)))
+            quantilesFrequencies.append(Decimal(freqStr))
+        self.name = '%d-tiled_performances' % n
+        if Debug:
+            print(x,quantilesFrequencies)
+        return quantilesFrequencies
 
-    def _computeLimitingQuantiles(self,perfTab,g,frequencies,LowerClosed=True,Debug=False,PrefThresholds=False):
+    def _computeLimitingQuantiles(self,perfTab,g,Debug=False,PrefThresholds=False):
         """
         Renders the list of limiting quantiles *q(p)* on criteria *g* for *p* in *frequencies* 
         """
@@ -127,22 +162,17 @@ class PerformanceQuantiles(object):
 ##        if n > 0:
 ##        nf = Decimal(str(n+1))
         nf = Decimal(str(n))
-        limitingQuantiles = [Decimal(str(q)) for q in frequencies]
-        limitingQuantiles.sort()
+        quantilesFrequencies = self.quantilesFrequencies
+        #limitingQuantiles = [Decimal(str(q)) for q in frequencies]
+        #limitingQuantiles.sort()
         #self.limitingQuantiles = limitingQuantiles
         if Debug:
-            print(limitingQuantiles)
-##        if LowerClosed:
-##            limitingQuantiles = limitingQuantiles[:-1]
-##        else:
-##            limitingQuantiles = limitingQuantiles[1:]
-        if Debug:
-            print(limitingQuantiles)
+            print(quantilesFrequencies)
         # computing the quantiles on criterion g
         gQuantiles = []
-        if LowerClosed:
+        if self.LowerClosed:
             # we ignore the 1.00 quantile and replace it with +infty
-            for q in limitingQuantiles:
+            for q in quantilesFrequencies:
                 r = (Decimal(str(nf)) * q)
                 rq = int(floor(r))
                 if Debug:
@@ -165,7 +195,7 @@ class PerformanceQuantiles(object):
 
         else:  # upper closed categories
             # we ignore the quantile 0.0 and replace it with -\infty            
-            for q in limitingQuantiles:
+            for q in quantilesFrequencies:
                 r = (Decimal(str(nf)) * q)
                 rq = int(floor(r))
                 if Debug:
@@ -196,7 +226,7 @@ class PerformanceQuantiles(object):
 ##        else:
 ##            gQuantiles = []
         if Debug:
-            print(g,LowerClosed,self.criteria[g]['preferenceDirection'],gQuantiles)
+            print(g,self.LowerClosed,self.criteria[g]['preferenceDirection'],gQuantiles)
         return gQuantiles
 
 
@@ -675,14 +705,11 @@ if __name__ == "__main__":
     import performanceQuantiles
     from randomPerfTabs import RandomCBPerformanceTableau
     from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
-
-    #frequencies = [0.0,0.25,0.5,0.75,1.0]
-    frequencies = [0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0]
-    nbrActions=1000
-    nbrCrit = 21
+    nbrActions=100
+    nbrCrit = 13
     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
                                     numberOfCriteria=nbrCrit,seed=None)
-    pq = PerformanceQuantiles(tp,frequencies,LowerClosed=True,Debug=False)
+    pq = PerformanceQuantiles(tp,10,LowerClosed=True,Debug=False)
     #print(pq.limitingQuantiles)
     pq.showLimitingQuantiles(ByObjectives=False)
     pq.showHTMLLimitingQuantiles(Transposed=True)
@@ -694,9 +721,10 @@ if __name__ == "__main__":
         newAction = tpg.randomAction()
         newActions.append(newAction)
     #print(newActions)
-##    pq.updateQuantiles(newActions,historySize=0)
+    pq.updateQuantiles(newActions,historySize=None)
 ##    pq.showActions()
-##    pq.showCriteria()
+    pq.showCriteria()
+    pq.showHTMLLimitingQuantiles(Transposed=True)
 ##    newActions = []
 ##    for i in range(50):
 ##        newAction = tpg.randomAction()
