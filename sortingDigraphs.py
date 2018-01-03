@@ -3204,13 +3204,10 @@ class IncrementalRatingDigraph(SortingDigraph,PerformanceQuantiles):
         >>> from randomPerfTabs import RandomCBPerformanceTableau
         >>> nbrActions=1000
         >>> nbrCrit = 13
-        >>> tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
-        ...                                 numberOfCriteria=nbrCrit,seed=None)
-        >>> pq = PerformanceQuantiles(tp,numberOfBins='deciles',\
-        ...                           LowerClosed=True,Debug=False)
+        >>> tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,numberOfCriteria=nbrCrit,seed=None)
+        >>> pq = PerformanceQuantiles(tp,numberOfBins='deciles',LowerClosed=True,Debug=False)
         >>> # new incoming decision actions of the same kind
-        >>> from randomPerfTabs import RandomCBPerformanceGenerator\
-        ...                         as PerfTabGenerator
+        >>> from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
         >>> tpg = PerfTabGenerator(tp,instanceCounter=0,seed=105)
         >>> newActions = []
         >>> for i in range(10):
@@ -3219,9 +3216,7 @@ class IncrementalRatingDigraph(SortingDigraph,PerformanceQuantiles):
         >>> # rating the new set of decision actions after
         >>> # updating the historical performance quantiles
         >>> pq.updateQuantiles(newActions,historySize=None)
-        >>> ira = IncrementalRatingDigraph(pq,newActions,\
-        ...                              CompleteOutranking=True,\
-        ...                              Debug=True)
+        >>> ira = IncrementalRatingDigraph(pq,newActions,CompleteOutranking=True,Debug=True)
         >>> # inspecting the rating result
         >>> ira.showSorting()
         >>> ira.showActionsSortingResult()
@@ -4971,7 +4966,7 @@ if __name__ == "__main__":
     from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
     nbrActions=1000
     nbrCrit = 13
-    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
+    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
                                     numberOfCriteria=nbrCrit,seed=None)
     pq = PerformanceQuantiles(tp,'deciles',LowerClosed=True,Debug=False)
     tpg = PerfTabGenerator(tp,instanceCounter=0,seed=105)
@@ -4980,7 +4975,8 @@ if __name__ == "__main__":
         newAction = tpg.randomAction()
         newActions.append(newAction)
     pq.updateQuantiles(newActions,historySize=None)
-    ira = IncrementalRatingDigraph(pq,newActions,CompleteOutranking=True,Debug=True)
+    ira = IncrementalRatingDigraph(pq,newActions,\
+                                   CompleteOutranking=True,Debug=True)
     ira.showSorting()
     ira.showActionsSortingResult()
     ira.showQuantileOrdering()
