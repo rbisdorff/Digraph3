@@ -3216,16 +3216,19 @@ class IncrementalRatingAgent(SortingDigraph,PerformanceQuantiles):
         >>> for i in range(10):
         ...     newAction = tpg.randomAction()
         ...     newActions.append(newAction)
-        >>> # rating the new set of decision actions
+        >>> # rating the new set of decision actions after
+        >>> # updating the historical performance quantiles
+        >>> pq.updateQuantiles(newActions,historySize=None)
         >>> ira = IncrementalRatingAgent(pq,newActions,\
         ...                              CompleteOutranking=True,\
         ...                              Debug=True)
-        ... ira.showSorting()
-        ... ira.showActionsSortingResult()
-        ... ira.showQuantileOrdering()
-        ... ira.showOrderedRelationTable()
-        ... ira.showSortingCharacteristics()
-        ... ira.showHTMLPerformanceHeatmap(Correlations=True)
+        >>> # inspecting the rating result
+        >>> ira.showSorting()
+        >>> ira.showActionsSortingResult()
+        >>> ira.showQuantileOrdering()
+        >>> ira.showOrderedRelationTable()
+        >>> ira.showSortingCharacteristics()
+        >>> ira.showHTMLPerformanceHeatmap(Correlations=True)
 
     """
     def __init__(self,argPerfQuantiles=None,newData=None,\
@@ -4966,18 +4969,17 @@ if __name__ == "__main__":
     # test incremental rating agent
     from randomPerfTabs import RandomCBPerformanceTableau
     from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
-    frequencies = [0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0]
     nbrActions=1000
     nbrCrit = 13
     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
                                     numberOfCriteria=nbrCrit,seed=None)
-    pq = PerformanceQuantiles(tp,frequencies,LowerClosed=True,Debug=False)
+    pq = PerformanceQuantiles(tp,'deciles',LowerClosed=True,Debug=False)
     tpg = PerfTabGenerator(tp,instanceCounter=0,seed=105)
     newActions = []
     for i in range(10):
         newAction = tpg.randomAction()
         newActions.append(newAction)
-
+    pq.updateQuantiles(newActions,historySize=None)
     ira = IncrementalRatingAgent(pq,newActions,CompleteOutranking=True,Debug=True)
     ira.showSorting()
     ira.showActionsSortingResult()

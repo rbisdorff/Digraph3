@@ -3266,16 +3266,19 @@
 <span class="sd">        &gt;&gt;&gt; for i in range(10):</span>
 <span class="sd">        ...     newAction = tpg.randomAction()</span>
 <span class="sd">        ...     newActions.append(newAction)</span>
-<span class="sd">        &gt;&gt;&gt; # rating the new set of decision actions</span>
+<span class="sd">        &gt;&gt;&gt; # rating the new set of decision actions after</span>
+<span class="sd">        &gt;&gt;&gt; # updating the historical performance quantiles</span>
+<span class="sd">        &gt;&gt;&gt; pq.updateQuantiles(newActions,historySize=None)</span>
 <span class="sd">        &gt;&gt;&gt; ira = IncrementalRatingAgent(pq,newActions,\</span>
 <span class="sd">        ...                              CompleteOutranking=True,\</span>
 <span class="sd">        ...                              Debug=True)</span>
-<span class="sd">        ... ira.showSorting()</span>
-<span class="sd">        ... ira.showActionsSortingResult()</span>
-<span class="sd">        ... ira.showQuantileOrdering()</span>
-<span class="sd">        ... ira.showOrderedRelationTable()</span>
-<span class="sd">        ... ira.showSortingCharacteristics()</span>
-<span class="sd">        ... ira.showHTMLPerformanceHeatmap(Correlations=True)</span>
+<span class="sd">        &gt;&gt;&gt; # inspecting the rating result</span>
+<span class="sd">        &gt;&gt;&gt; ira.showSorting()</span>
+<span class="sd">        &gt;&gt;&gt; ira.showActionsSortingResult()</span>
+<span class="sd">        &gt;&gt;&gt; ira.showQuantileOrdering()</span>
+<span class="sd">        &gt;&gt;&gt; ira.showOrderedRelationTable()</span>
+<span class="sd">        &gt;&gt;&gt; ira.showSortingCharacteristics()</span>
+<span class="sd">        &gt;&gt;&gt; ira.showHTMLPerformanceHeatmap(Correlations=True)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfQuantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">newData</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
@@ -5016,18 +5019,17 @@
     <span class="c1"># test incremental rating agent</span>
     <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
     <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
-    <span class="n">frequencies</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">0.3</span><span class="p">,</span><span class="mf">0.4</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.6</span><span class="p">,</span><span class="mf">0.7</span><span class="p">,</span><span class="mf">0.8</span><span class="p">,</span><span class="mf">0.9</span><span class="p">,</span><span class="mf">1.0</span><span class="p">]</span>
     <span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
     <span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">13</span>
     <span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>
                                     <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">frequencies</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="s1">&#39;deciles&#39;</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
     <span class="n">newActions</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
         <span class="n">newAction</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomAction</span><span class="p">()</span>
         <span class="n">newActions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newAction</span><span class="p">)</span>
-
+    <span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
     <span class="n">ira</span> <span class="o">=</span> <span class="n">IncrementalRatingAgent</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">CompleteOutranking</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">ira</span><span class="o">.</span><span class="n">showSorting</span><span class="p">()</span>
     <span class="n">ira</span><span class="o">.</span><span class="n">showActionsSortingResult</span><span class="p">()</span>

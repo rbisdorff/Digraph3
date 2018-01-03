@@ -6320,14 +6320,17 @@ incremental performance quantiles gathered from historical data.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">newAction</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomAction</span><span class="p">()</span>
 <span class="gp">... </span>    <span class="n">newActions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newAction</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># rating the new set of decision actions</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># rating the new set of decision actions after</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># updating the historical performance quantiles</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ira</span> <span class="o">=</span> <span class="n">IncrementalRatingAgent</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span>        <span class="o">...</span>                              <span class="n">CompleteOutranking</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>        <span class="o">...</span>                              <span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">... </span><span class="n">ira</span><span class="o">.</span><span class="n">showSorting</span><span class="p">()</span>
-<span class="gp">... </span><span class="n">ira</span><span class="o">.</span><span class="n">showActionsSortingResult</span><span class="p">()</span>
-<span class="gp">... </span><span class="n">ira</span><span class="o">.</span><span class="n">showQuantileOrdering</span><span class="p">()</span>
-<span class="gp">... </span><span class="n">ira</span><span class="o">.</span><span class="n">showOrderedRelationTable</span><span class="p">()</span>
-<span class="gp">... </span><span class="n">ira</span><span class="o">.</span><span class="n">showSortingCharacteristics</span><span class="p">()</span>
-<span class="gp">... </span><span class="n">ira</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># inspecting the rating result</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ira</span><span class="o">.</span><span class="n">showSorting</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ira</span><span class="o">.</span><span class="n">showActionsSortingResult</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ira</span><span class="o">.</span><span class="n">showQuantileOrdering</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ira</span><span class="o">.</span><span class="n">showOrderedRelationTable</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ira</span><span class="o">.</span><span class="n">showSortingCharacteristics</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ira</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd>

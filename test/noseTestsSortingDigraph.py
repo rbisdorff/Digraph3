@@ -146,3 +146,26 @@ def testActionsSortingResult():
     s1.showActionsSortingResult()
     s1.exportGraphViz('tests1',graphType="pdf")
     
+def testIncrementalRatingResult():
+    print('*-------- Testing IncrementalRatingAgent class -------')
+    from randomPerfTabs import RandomCBPerformanceTableau
+    from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
+    nbrActions=1000
+    nbrCrit = 13
+    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
+                                    numberOfCriteria=nbrCrit,seed=None)
+    pq = PerformanceQuantiles(tp,'deciles',LowerClosed=True,Debug=False)
+    tpg = PerfTabGenerator(tp,instanceCounter=0,seed=105)
+    newActions = []
+    for i in range(10):
+        newAction = tpg.randomAction()
+        newActions.append(newAction)
+    pq.updateQuantiles(newActions,historySize=None)
+    ira = IncrementalRatingAgent(pq,newActions,CompleteOutranking=True,Debug=True)
+    ira.showSorting()
+    ira.showActionsSortingResult()
+    ira.showQuantileOrdering()
+    ira.showOrderedRelationTable()
+    ira.showSortingCharacteristics()
+    ira.showHTMLPerformanceHeatmap(Correlations=True)
+
