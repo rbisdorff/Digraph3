@@ -51,7 +51,7 @@
 <span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># Python implementation of digraphs</span>
-<span class="c1"># Current revision $Revision: 2317 $</span>
+<span class="c1"># Current revision $Revision: 2319 $</span>
 <span class="c1"># Copyright (C) 2006-2008  Raymond Bisdorff</span>
 <span class="c1">#</span>
 <span class="c1">#    This program is free software; you can redistribute it and/or modify</span>
@@ -3254,13 +3254,10 @@
 <span class="sd">        &gt;&gt;&gt; from randomPerfTabs import RandomCBPerformanceTableau</span>
 <span class="sd">        &gt;&gt;&gt; nbrActions=1000</span>
 <span class="sd">        &gt;&gt;&gt; nbrCrit = 13</span>
-<span class="sd">        &gt;&gt;&gt; tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\</span>
-<span class="sd">        ...                                 numberOfCriteria=nbrCrit,seed=None)</span>
-<span class="sd">        &gt;&gt;&gt; pq = PerformanceQuantiles(tp,numberOfBins=&#39;deciles&#39;,\</span>
-<span class="sd">        ...                           LowerClosed=True,Debug=False)</span>
+<span class="sd">        &gt;&gt;&gt; tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,numberOfCriteria=nbrCrit,seed=None)</span>
+<span class="sd">        &gt;&gt;&gt; pq = PerformanceQuantiles(tp,numberOfBins=&#39;deciles&#39;,LowerClosed=True,Debug=False)</span>
 <span class="sd">        &gt;&gt;&gt; # new incoming decision actions of the same kind</span>
-<span class="sd">        &gt;&gt;&gt; from randomPerfTabs import RandomCBPerformanceGenerator\</span>
-<span class="sd">        ...                         as PerfTabGenerator</span>
+<span class="sd">        &gt;&gt;&gt; from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator</span>
 <span class="sd">        &gt;&gt;&gt; tpg = PerfTabGenerator(tp,instanceCounter=0,seed=105)</span>
 <span class="sd">        &gt;&gt;&gt; newActions = []</span>
 <span class="sd">        &gt;&gt;&gt; for i in range(10):</span>
@@ -3269,9 +3266,7 @@
 <span class="sd">        &gt;&gt;&gt; # rating the new set of decision actions after</span>
 <span class="sd">        &gt;&gt;&gt; # updating the historical performance quantiles</span>
 <span class="sd">        &gt;&gt;&gt; pq.updateQuantiles(newActions,historySize=None)</span>
-<span class="sd">        &gt;&gt;&gt; ira = IncrementalRatingDigraph(pq,newActions,\</span>
-<span class="sd">        ...                              CompleteOutranking=True,\</span>
-<span class="sd">        ...                              Debug=True)</span>
+<span class="sd">        &gt;&gt;&gt; ira = IncrementalRatingDigraph(pq,newActions,CompleteOutranking=True,Debug=True)</span>
 <span class="sd">        &gt;&gt;&gt; # inspecting the rating result</span>
 <span class="sd">        &gt;&gt;&gt; ira.showSorting()</span>
 <span class="sd">        &gt;&gt;&gt; ira.showActionsSortingResult()</span>
@@ -4912,7 +4907,7 @@
 <span class="s2">    ****************************************************</span>
 <span class="s2">    * Python sortingDigraphs module                    *</span>
 <span class="s2">    * depends on BipolarOutrankingDigraph and          *</span>
-<span class="s2">    * $Revision: 2317 $                                 *</span>
+<span class="s2">    * $Revision: 2319 $                                 *</span>
 <span class="s2">    * Copyright (C) 2010 Raymond Bisdorff              *</span>
 <span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
 <span class="s2">    * to the extent permitted by the applicable law.   *</span>
@@ -5021,7 +5016,7 @@
     <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
     <span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
     <span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">13</span>
-    <span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>
+    <span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>\
                                     <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
     <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="s1">&#39;deciles&#39;</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
@@ -5030,7 +5025,8 @@
         <span class="n">newAction</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomAction</span><span class="p">()</span>
         <span class="n">newActions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newAction</span><span class="p">)</span>
     <span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">ira</span> <span class="o">=</span> <span class="n">IncrementalRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">CompleteOutranking</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ira</span> <span class="o">=</span> <span class="n">IncrementalRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span>\
+                                   <span class="n">CompleteOutranking</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">ira</span><span class="o">.</span><span class="n">showSorting</span><span class="p">()</span>
     <span class="n">ira</span><span class="o">.</span><span class="n">showActionsSortingResult</span><span class="p">()</span>
     <span class="n">ira</span><span class="o">.</span><span class="n">showQuantileOrdering</span><span class="p">()</span>
@@ -5043,7 +5039,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. december 2010                *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2317 $                  *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2319 $                  *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>
