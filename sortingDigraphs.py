@@ -3262,11 +3262,11 @@ class IncrementalRatingDigraph(SortingDigraph,PerformanceQuantiles):
          'a6' |  -0.12	 0.06	-0.02	-0.05	 0.04	 0.10	 0.10	  - 	 0.12	 0.30	 
          'a7' |  -0.45	-0.24	 0.12	-0.24	-0.10	 0.05	-0.12	-0.12	  - 	 0.27	 
          'a9' |  -0.35	-0.25	-0.08	-0.27	-0.11	-0.30	-0.46	-0.15	-0.19	  - 	 
-        >>> ird.showHTMLPerformanceHeatmap(Correlations=True)
+        >>> ird.showHTMLPerformanceHeatmap(pageTitle='Heatmap of Quantiles Rating',Correlations=True)
 
-    .. image:: exampleIncTarDigraph.png
+    .. image:: exampleIncRatDigraph.png
         :alt: usage example of Incremental Rating Digraph
-        :width: 400 px
+        :width: 500 px
         :align: center
 
     """
