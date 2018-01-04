@@ -6307,7 +6307,8 @@ incremental performance quantiles gathered from historical data.</p>
 </div>
 <dl class="docutils">
 <dt>Examle Python session:</dt>
-<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># historical data</span>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">From</span> <span class="n">sortingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># historical data</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">13</span>
@@ -6325,16 +6326,55 @@ incremental performance quantiles gathered from historical data.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span> <span class="o">=</span> <span class="n">IncrementalRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">CompleteOutranking</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># inspecting the rating result</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span><span class="o">.</span><span class="n">showSorting</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span><span class="o">.</span><span class="n">showActionsSortingResult</span><span class="p">()</span>
+<span class="go">  Quantiles sorting result per decision action</span>
+<span class="go">  [0.40 - 0.50[: a1 with credibility: 0.07 = min(0.10,0.07)</span>
+<span class="go">  [0.50 - 0.60[: a2 with credibility: 0.14 = min(0.17,0.14)</span>
+<span class="go">  [0.40 - 0.50[: a3 with credibility: 0.10 = min(0.10,0.14)</span>
+<span class="go">  [0.60 - 0.70[: a4 with credibility: 0.14 = min(0.14,0.19)</span>
+<span class="go">  [0.40 - 0.50[: a5 with credibility: 0.19 = min(0.40,0.19)</span>
+<span class="go">  [0.30 - 0.40[: a6 with credibility: 0.02 = min(0.33,0.02)</span>
+<span class="go">  [0.30 - 0.40[: a7 with credibility: 0.12 = min(0.44,0.12)</span>
+<span class="go">  [0.50 - 0.60[: a8 with credibility: 0.05 = min(0.05,0.26)</span>
+<span class="go">  [0.20 - 0.30[: a9 with credibility: 0.18 = min(0.18,0.18)</span>
+<span class="go">  [0.50 - 0.60[: a10 with credibility: 0.04 = min(0.19,0.04)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span><span class="o">.</span><span class="n">showSorting</span><span class="p">()</span>
+<span class="go">  [0.90 - &lt;[:    []</span>
+<span class="go">  [0.80 - 0.90[:         []</span>
+<span class="go">  [0.70 - 0.80[:         []</span>
+<span class="go">  [0.60 - 0.70[:         [&#39;a4&#39;]</span>
+<span class="go">  [0.50 - 0.60[:         [&#39;a10&#39;, &#39;a2&#39;, &#39;a8&#39;]</span>
+<span class="go">  [0.40 - 0.50[:         [&#39;a1&#39;, &#39;a3&#39;, &#39;a5&#39;]</span>
+<span class="go">  [0.30 - 0.40[:         [&#39;a6&#39;, &#39;a7&#39;]</span>
+<span class="go">  [0.20 - 0.30[:         [&#39;a9&#39;]</span>
+<span class="go">  [0.10 - 0.20[:         []</span>
+<span class="go">  [0.00 - 0.10[:         []    </span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span><span class="o">.</span><span class="n">showQuantileOrdering</span><span class="p">()</span>
+<span class="go">  [0.60-0.70[ : [&#39;a4&#39;]</span>
+<span class="go">  [0.50-0.60[ : [&#39;a10&#39;, &#39;a8&#39;, &#39;a2&#39;]</span>
+<span class="go">  [0.40-0.50[ : [&#39;a1&#39;, &#39;a5&#39;, &#39;a3&#39;]</span>
+<span class="go">  [0.30-0.40[ : [&#39;a6&#39;, &#39;a7&#39;]</span>
+<span class="go">  [0.20-0.30[ : [&#39;a9&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span><span class="o">.</span><span class="n">showOrderedRelationTable</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span><span class="o">.</span><span class="n">showSortingCharacteristics</span><span class="p">()</span>
+<span class="go">  * ---- Relation Table -----</span>
+<span class="go">  xRy |  &#39;a4&#39;   &#39;a10&#39;    &#39;a2&#39;    &#39;a8&#39;    &#39;a1&#39;    &#39;a3&#39;    &#39;a5&#39;    &#39;a6&#39;    &#39;a7&#39;    &#39;a9&#39;     </span>
+<span class="go"> -----|--------------------------------------------------------------------------------</span>
+<span class="go"> &#39;a4&#39; |   -      0.31    0.48    0.62    0.31    0.31    0.12    0.12    0.62    0.35    </span>
+<span class="go"> &#39;a10&#39;|  -0.17    -      0.24    0.11    0.15   -0.12    0.33    0.19    0.24    0.25    </span>
+<span class="go"> &#39;a2&#39; |  -0.48  -0.24     -      0.02    0.05   -0.14    0.00    0.02    0.05    0.08    </span>
+<span class="go"> &#39;a8&#39; |  -0.62  -0.02    0.12     -      0.07    0.21    0.19    0.05    0.38    0.27    </span>
+<span class="go"> &#39;a1&#39; |  -0.31  -0.07   -0.05   -0.07     -      0.07   -0.10    0.05    0.10    0.18    </span>
+<span class="go"> &#39;a3&#39; |  -0.31   0.12    0.14   -0.21   -0.07     -     -0.10   -0.10    0.12    0.30    </span>
+<span class="go"> &#39;a5&#39; |  -0.12  -0.33    0.07   -0.05    0.10    0.26     -     -0.10    0.29    0.46    </span>
+<span class="go"> &#39;a6&#39; |  -0.12   0.06   -0.02   -0.05    0.04    0.10    0.10     -      0.12    0.30    </span>
+<span class="go"> &#39;a7&#39; |  -0.45  -0.24    0.12   -0.24   -0.10    0.05   -0.12   -0.12     -      0.27    </span>
+<span class="go"> &#39;a9&#39; |  -0.35  -0.25   -0.08   -0.27   -0.11   -0.30   -0.46   -0.15   -0.19     -      </span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd>
 </dl>
+<a class="reference internal image-reference" href="_images/exampleIncTarDigraph.png"><img alt="usage example of Incremental Rating Digraph" class="align-center" src="_images/exampleIncTarDigraph.png" style="width: 400px;" /></a>
 <dl class="method">
 <dt id="sortingDigraphs.IncrementalRatingDigraph.computeCategoryContents">
 <code class="descname">computeCategoryContents</code><span class="sig-paren">(</span><em>Reverse=False</em>, <em>Comments=False</em>, <em>StoreSorting=True</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.computeCategoryContents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.computeCategoryContents" title="Permalink to this definition">¶</a></dt>

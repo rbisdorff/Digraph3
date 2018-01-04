@@ -51,7 +51,7 @@
 <span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># Python implementation of digraphs</span>
-<span class="c1"># Current revision $Revision: 2321 $</span>
+<span class="c1"># Current revision $Revision: 2322 $</span>
 <span class="c1"># Copyright (C) 2006-2008  Raymond Bisdorff</span>
 <span class="c1">#</span>
 <span class="c1">#    This program is free software; you can redistribute it and/or modify</span>
@@ -3250,6 +3250,7 @@
 <span class="sd">        :py:class:`performanceQuantiles.PerformanceQuantiles` instance.</span>
 
 <span class="sd">    Examle Python session:</span>
+<span class="sd">        &gt;&gt;&gt; From sortingDigraphs import *</span>
 <span class="sd">        &gt;&gt;&gt; # historical data</span>
 <span class="sd">        &gt;&gt;&gt; from randomPerfTabs import RandomCBPerformanceTableau</span>
 <span class="sd">        &gt;&gt;&gt; nbrActions=1000</span>
@@ -3268,12 +3269,55 @@
 <span class="sd">        &gt;&gt;&gt; pq.updateQuantiles(newActions,historySize=None)</span>
 <span class="sd">        &gt;&gt;&gt; ird = IncrementalRatingDigraph(pq,newActions,CompleteOutranking=True,Debug=True)</span>
 <span class="sd">        &gt;&gt;&gt; # inspecting the rating result</span>
-<span class="sd">        &gt;&gt;&gt; ird.showSorting()</span>
 <span class="sd">        &gt;&gt;&gt; ird.showActionsSortingResult()</span>
+<span class="sd">          Quantiles sorting result per decision action</span>
+<span class="sd">          [0.40 - 0.50[: a1 with credibility: 0.07 = min(0.10,0.07)</span>
+<span class="sd">          [0.50 - 0.60[: a2 with credibility: 0.14 = min(0.17,0.14)</span>
+<span class="sd">          [0.40 - 0.50[: a3 with credibility: 0.10 = min(0.10,0.14)</span>
+<span class="sd">          [0.60 - 0.70[: a4 with credibility: 0.14 = min(0.14,0.19)</span>
+<span class="sd">          [0.40 - 0.50[: a5 with credibility: 0.19 = min(0.40,0.19)</span>
+<span class="sd">          [0.30 - 0.40[: a6 with credibility: 0.02 = min(0.33,0.02)</span>
+<span class="sd">          [0.30 - 0.40[: a7 with credibility: 0.12 = min(0.44,0.12)</span>
+<span class="sd">          [0.50 - 0.60[: a8 with credibility: 0.05 = min(0.05,0.26)</span>
+<span class="sd">          [0.20 - 0.30[: a9 with credibility: 0.18 = min(0.18,0.18)</span>
+<span class="sd">          [0.50 - 0.60[: a10 with credibility: 0.04 = min(0.19,0.04)</span>
+<span class="sd">        &gt;&gt;&gt; ird.showSorting()</span>
+<span class="sd">          [0.90 - &lt;[: 	 []</span>
+<span class="sd">          [0.80 - 0.90[: 	 []</span>
+<span class="sd">          [0.70 - 0.80[: 	 []</span>
+<span class="sd">          [0.60 - 0.70[: 	 [&#39;a4&#39;]</span>
+<span class="sd">          [0.50 - 0.60[: 	 [&#39;a10&#39;, &#39;a2&#39;, &#39;a8&#39;]</span>
+<span class="sd">          [0.40 - 0.50[: 	 [&#39;a1&#39;, &#39;a3&#39;, &#39;a5&#39;]</span>
+<span class="sd">          [0.30 - 0.40[: 	 [&#39;a6&#39;, &#39;a7&#39;]</span>
+<span class="sd">          [0.20 - 0.30[: 	 [&#39;a9&#39;]</span>
+<span class="sd">          [0.10 - 0.20[: 	 []</span>
+<span class="sd">          [0.00 - 0.10[: 	 []    </span>
 <span class="sd">        &gt;&gt;&gt; ird.showQuantileOrdering()</span>
+<span class="sd">          [0.60-0.70[ : [&#39;a4&#39;]</span>
+<span class="sd">          [0.50-0.60[ : [&#39;a10&#39;, &#39;a8&#39;, &#39;a2&#39;]</span>
+<span class="sd">          [0.40-0.50[ : [&#39;a1&#39;, &#39;a5&#39;, &#39;a3&#39;]</span>
+<span class="sd">          [0.30-0.40[ : [&#39;a6&#39;, &#39;a7&#39;]</span>
+<span class="sd">          [0.20-0.30[ : [&#39;a9&#39;]</span>
 <span class="sd">        &gt;&gt;&gt; ird.showOrderedRelationTable()</span>
-<span class="sd">        &gt;&gt;&gt; ird.showSortingCharacteristics()</span>
+<span class="sd">          * ---- Relation Table -----</span>
+<span class="sd">          xRy |  &#39;a4&#39;	&#39;a10&#39;	 &#39;a2&#39;	 &#39;a8&#39;	 &#39;a1&#39;	 &#39;a3&#39;	 &#39;a5&#39;	 &#39;a6&#39;	 &#39;a7&#39;	 &#39;a9&#39;	  </span>
+<span class="sd">         -----|--------------------------------------------------------------------------------</span>
+<span class="sd">         &#39;a4&#39; |   - 	 0.31	 0.48	 0.62	 0.31	 0.31	 0.12	 0.12	 0.62	 0.35	 </span>
+<span class="sd">         &#39;a10&#39;|  -0.17	  - 	 0.24	 0.11	 0.15	-0.12	 0.33	 0.19	 0.24	 0.25	 </span>
+<span class="sd">         &#39;a2&#39; |  -0.48	-0.24	  - 	 0.02	 0.05	-0.14	 0.00	 0.02	 0.05	 0.08	 </span>
+<span class="sd">         &#39;a8&#39; |  -0.62	-0.02	 0.12	  - 	 0.07	 0.21	 0.19	 0.05	 0.38	 0.27	 </span>
+<span class="sd">         &#39;a1&#39; |  -0.31	-0.07	-0.05	-0.07	  - 	 0.07	-0.10	 0.05	 0.10	 0.18	 </span>
+<span class="sd">         &#39;a3&#39; |  -0.31	 0.12	 0.14	-0.21	-0.07	  - 	-0.10	-0.10	 0.12	 0.30	 </span>
+<span class="sd">         &#39;a5&#39; |  -0.12	-0.33	 0.07	-0.05	 0.10	 0.26	  - 	-0.10	 0.29	 0.46	 </span>
+<span class="sd">         &#39;a6&#39; |  -0.12	 0.06	-0.02	-0.05	 0.04	 0.10	 0.10	  - 	 0.12	 0.30	 </span>
+<span class="sd">         &#39;a7&#39; |  -0.45	-0.24	 0.12	-0.24	-0.10	 0.05	-0.12	-0.12	  - 	 0.27	 </span>
+<span class="sd">         &#39;a9&#39; |  -0.35	-0.25	-0.08	-0.27	-0.11	-0.30	-0.46	-0.15	-0.19	  - 	 </span>
 <span class="sd">        &gt;&gt;&gt; ird.showHTMLPerformanceHeatmap(Correlations=True)</span>
+
+<span class="sd">    .. image:: exampleIncTarDigraph.png</span>
+<span class="sd">        :alt: usage example of Incremental Rating Digraph</span>
+<span class="sd">        :width: 400 px</span>
+<span class="sd">        :align: center</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfQuantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">newData</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
@@ -3327,10 +3371,11 @@
             <span class="n">na</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">newData</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">na</span><span class="p">):</span>
                 <span class="n">key</span> <span class="o">=</span> <span class="n">newData</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;action&#39;</span><span class="p">][</span><span class="s1">&#39;key&#39;</span><span class="p">]</span>
-                <span class="n">newActions</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;shortName&#39;</span><span class="p">:</span><span class="n">newData</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;action&#39;</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">],</span>
-                                <span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="n">newData</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;action&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">],</span>
-                                <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="n">newData</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;action&#39;</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">],</span>
-                                <span class="s1">&#39;commemt&#39;</span><span class="p">:</span> <span class="n">newData</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;action&#39;</span><span class="p">][</span><span class="s1">&#39;comment&#39;</span><span class="p">]}</span>
+<span class="c1">##                newActions[key] = {&#39;shortName&#39;:newData[i][&#39;action&#39;][&#39;shortName&#39;],</span>
+<span class="c1">##                                &#39;name&#39;:newData[i][&#39;action&#39;][&#39;name&#39;],</span>
+<span class="c1">##                                &#39;type&#39;: newData[i][&#39;action&#39;][&#39;type&#39;],</span>
+<span class="c1">##                                &#39;commemt&#39;: newData[i][&#39;action&#39;][&#39;comment&#39;]}</span>
+                <span class="n">newActions</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">newData</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;action&#39;</span><span class="p">]</span>
                 <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">:</span>
                     <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">newData</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;evaluation&#39;</span><span class="p">][</span><span class="n">g</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">newActions</span> <span class="o">=</span> <span class="n">newActions</span>
@@ -5156,7 +5201,7 @@
 <span class="s2">    ****************************************************</span>
 <span class="s2">    * Python sortingDigraphs module                    *</span>
 <span class="s2">    * depends on BipolarOutrankingDigraph and          *</span>
-<span class="s2">    * $Revision: 2321 $                                 *</span>
+<span class="s2">    * $Revision: 2322 $                                 *</span>
 <span class="s2">    * Copyright (C) 2010 Raymond Bisdorff              *</span>
 <span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
 <span class="s2">    * to the extent permitted by the applicable law.   *</span>
@@ -5261,14 +5306,20 @@
 <span class="c1">##    print(g.computeOrdinalCorrelation(qsrbc))</span>
     
     <span class="c1"># test incremental rating agent</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
+<span class="c1">##    from randomPerfTabs import RandomCBPerformanceTableau</span>
+<span class="c1">##    from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator</span>
+<span class="c1">##    nbrActions=1000</span>
+<span class="c1">##    nbrCrit = 13</span>
+<span class="c1">##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\</span>
+<span class="c1">##                                    numberOfCriteria=nbrCrit,seed=105)</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">Random3ObjectivesPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
     <span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
-    <span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">13</span>
-    <span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>\
+    <span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">21</span>
+    <span class="n">tp</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>\
                                     <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
-    <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="s1">&#39;deciles&#39;</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
+    <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="s1">&#39;heptiles&#39;</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">instanceCounter</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
     <span class="n">newActions</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
         <span class="n">newAction</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomAction</span><span class="p">()</span>
@@ -5289,7 +5340,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. december 2010                *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2321 $                  *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2322 $                  *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>
