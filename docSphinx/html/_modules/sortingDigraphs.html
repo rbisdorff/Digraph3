@@ -51,7 +51,7 @@
 <span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># Python implementation of digraphs</span>
-<span class="c1"># Current revision $Revision: 2326 $</span>
+<span class="c1"># Current revision $Revision: 2328 $</span>
 <span class="c1"># Copyright (C) 2006-2008  Raymond Bisdorff</span>
 <span class="c1">#</span>
 <span class="c1">#    This program is free software; you can redistribute it and/or modify</span>
@@ -4602,55 +4602,55 @@
                                 <span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
         
 
-    <span class="k">def</span> <span class="nf">_computeQuantilesFrequencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        renders the quantiles frequencies</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">floor</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="nb">int</span><span class="p">):</span>
-            <span class="n">n</span> <span class="o">=</span> <span class="n">x</span>
-        <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">n</span> <span class="o">=</span> <span class="mi">4</span>
-        <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;bitiles&#39;</span><span class="p">:</span>
-            <span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
-        <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;tritiles&#39;</span><span class="p">:</span>
-            <span class="n">n</span> <span class="o">=</span> <span class="mi">3</span>
-        <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;quartiles&#39;</span><span class="p">:</span>
-            <span class="n">n</span> <span class="o">=</span> <span class="mi">4</span>
-        <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;quintiles&#39;</span><span class="p">:</span>
-            <span class="n">n</span> <span class="o">=</span> <span class="mi">5</span>
-        <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;sextiles&#39;</span><span class="p">:</span>
-            <span class="n">n</span> <span class="o">=</span> <span class="mi">6</span>
-        <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;septiles&#39;</span><span class="p">:</span>
-            <span class="n">n</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;octiles&#39;</span><span class="p">:</span>
-            <span class="n">n</span> <span class="o">=</span> <span class="mi">8</span>
-        <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;deciles&#39;</span><span class="p">:</span>
-            <span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
-        <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;dodeciles&#39;</span><span class="p">:</span>
-            <span class="n">n</span> <span class="o">=</span> <span class="mi">20</span>
-        <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;centiles&#39;</span><span class="p">:</span>
-            <span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
-        <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;automatic&#39;</span><span class="p">:</span>
-            <span class="n">pth</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">:</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">pref</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;thresholds&#39;</span><span class="p">][</span><span class="s1">&#39;ind&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> \
-                           <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;thresholds&#39;</span><span class="p">][</span><span class="s1">&#39;ind&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;100&#39;</span><span class="p">))</span>
-                    <span class="n">pth</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pref</span><span class="p">)</span>
-                <span class="k">except</span><span class="p">:</span>
-                    <span class="k">pass</span>
-            <span class="n">amp</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">),</span><span class="nb">min</span><span class="p">(</span><span class="n">pth</span><span class="p">))</span>
-            <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;100&#39;</span><span class="p">)</span><span class="o">/</span><span class="n">amp</span><span class="p">))</span>
-            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Detected preference thresholds = &#39;</span><span class="p">,</span><span class="n">pth</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;amplitude, n&#39;</span><span class="p">,</span><span class="n">amp</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
-
-        <span class="n">quantilesFrequencies</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-            <span class="n">quantilesFrequencies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="o">/</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;sorting_with_</span><span class="si">%d</span><span class="s1">-tile_limits&#39;</span> <span class="o">%</span> <span class="n">n</span>
-        <span class="k">return</span> <span class="n">quantilesFrequencies</span>
+<span class="c1">##    def _computeQuantilesFrequencies(self,x,Debug=False):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        renders the quantiles frequencies</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        from math import floor</span>
+<span class="c1">##        if isinstance(x,int):</span>
+<span class="c1">##            n = x</span>
+<span class="c1">##        elif x == None:</span>
+<span class="c1">##            n = 4</span>
+<span class="c1">##        elif x == &#39;bitiles&#39;:</span>
+<span class="c1">##            n = 2</span>
+<span class="c1">##        elif x == &#39;tritiles&#39;:</span>
+<span class="c1">##            n = 3</span>
+<span class="c1">##        elif x == &#39;quartiles&#39;:</span>
+<span class="c1">##            n = 4</span>
+<span class="c1">##        elif x == &#39;quintiles&#39;:</span>
+<span class="c1">##            n = 5</span>
+<span class="c1">##        elif x == &#39;sextiles&#39;:</span>
+<span class="c1">##            n = 6</span>
+<span class="c1">##        elif x == &#39;septiles&#39;:</span>
+<span class="c1">##            n = 7</span>
+<span class="c1">##        elif x == &#39;octiles&#39;:</span>
+<span class="c1">##            n = 8</span>
+<span class="c1">##        elif x == &#39;deciles&#39;:</span>
+<span class="c1">##            n = 10</span>
+<span class="c1">##        elif x == &#39;dodeciles&#39;:</span>
+<span class="c1">##            n = 20</span>
+<span class="c1">##        elif x == &#39;centiles&#39;:</span>
+<span class="c1">##            n = 100</span>
+<span class="c1">##        elif x == &#39;automatic&#39;:</span>
+<span class="c1">##            pth = [5]</span>
+<span class="c1">##            for g in self.criteria:</span>
+<span class="c1">##                try:</span>
+<span class="c1">##                    pref = self.criteria[g][&#39;thresholds&#39;][&#39;ind&#39;][0] + \</span>
+<span class="c1">##                           (self.criteria[g][&#39;thresholds&#39;][&#39;ind&#39;][1]*Decimal(&#39;100&#39;))</span>
+<span class="c1">##                    pth.append(pref)</span>
+<span class="c1">##                except:</span>
+<span class="c1">##                    pass</span>
+<span class="c1">##            amp = max(Decimal(&#39;1&#39;),min(pth))</span>
+<span class="c1">##            n = int(floor(Decimal(&#39;100&#39;)/amp))</span>
+<span class="c1">##            if Debug:</span>
+<span class="c1">##                print(&#39;Detected preference thresholds = &#39;,pth)</span>
+<span class="c1">##                print(&#39;amplitude, n&#39;,amp,n)</span>
+<span class="c1">##</span>
+<span class="c1">##        quantilesFrequencies = []</span>
+<span class="c1">##        for i in range(n+1):</span>
+<span class="c1">##            quantilesFrequencies.append( Decimal(str(i)) / Decimal(str(n)) )</span>
+<span class="c1">##        self.name = &#39;sorting_with_%d-tile_limits&#39; % n</span>
+<span class="c1">##        return quantilesFrequencies</span>
                                          
     <span class="k">def</span> <span class="nf">_computeLimitingQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -4741,7 +4741,7 @@
 <span class="c1">##            print(actions)</span>
             
         <span class="c1">#categories = list(self.orderedCategoryKeys())</span>
-        <span class="n">categories</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">categories</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">categories</span>
         <span class="n">selfRelation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">LowerClosed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteriaCategoryLimits</span><span class="p">[</span><span class="s1">&#39;LowerClosed&#39;</span><span class="p">]</span>
@@ -4963,73 +4963,6 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">sorting</span> <span class="o">=</span> <span class="n">sorting</span>
         <span class="k">return</span> <span class="n">sorting</span></div>
 
-    <span class="k">def</span> <span class="nf">_computeSortingCharacteristicsOld</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Renders a bipolar-valued bi-dictionary relation</span>
-<span class="sd">        representing the degree of credibility of the</span>
-<span class="sd">        assertion that &quot;action x in A belongs to category c in C&quot;,</span>
-<span class="sd">        ie x outranks low category limit and does not outrank</span>
-<span class="sd">        the high category limit.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">Min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
-        <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
-        <span class="n">Max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
-
-        <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getActionsKeys</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
-            
-        <span class="n">categories</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">orderedCategoryKeys</span><span class="p">()</span>
-
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">LowerClosed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteriaCategoryLimits</span><span class="p">[</span><span class="s1">&#39;LowerClosed&#39;</span><span class="p">]</span>
-        <span class="k">except</span><span class="p">:</span>
-            <span class="n">LowerClosed</span> <span class="o">=</span> <span class="kc">True</span>
-
-        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">LowerClosed</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x  in  K_k</span><span class="se">\t</span><span class="s1"> r(x &gt;= m_k)</span><span class="se">\t</span><span class="s1"> r(x &lt; M_k)</span><span class="se">\t</span><span class="s1"> r(x in K_k)&#39;</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x  in  K_k</span><span class="se">\t</span><span class="s1"> r(m_k &lt; x)</span><span class="se">\t</span><span class="s1"> r(M_k &gt;= x)</span><span class="se">\t</span><span class="s1"> r(x in K_k)&#39;</span><span class="p">)</span>
-
-        <span class="n">sorting</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">nq</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">limitingQuantiles</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
-            <span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">categories</span><span class="p">:</span>
-                <span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-                <span class="k">if</span> <span class="n">LowerClosed</span><span class="p">:</span>
-                    <span class="n">cKey</span><span class="o">=</span> <span class="n">c</span><span class="o">+</span><span class="s1">&#39;-m&#39;</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">cKey</span><span class="o">=</span> <span class="n">c</span><span class="o">+</span><span class="s1">&#39;-M&#39;</span>
-                <span class="k">if</span> <span class="n">LowerClosed</span><span class="p">:</span>
-                    <span class="n">lowLimit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">cKey</span><span class="p">]</span>
-                    <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">nq</span><span class="p">:</span>
-                        <span class="n">cMaxKey</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-m&#39;</span>
-                        <span class="n">notHighLimit</span> <span class="o">=</span> <span class="n">Max</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">cMaxKey</span><span class="p">]</span> <span class="o">+</span> <span class="n">Min</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">notHighLimit</span> <span class="o">=</span> <span class="n">Max</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-                        <span class="n">cMinKey</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-M&#39;</span>
-                        <span class="n">lowLimit</span> <span class="o">=</span> <span class="n">Max</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">cMinKey</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">+</span> <span class="n">Min</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">lowLimit</span> <span class="o">=</span> <span class="n">Max</span>
-                    <span class="n">notHighLimit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">cKey</span><span class="p">][</span><span class="n">x</span><span class="p">]</span>
-                <span class="c1">#if Comments:</span>
-                <span class="c1">#    print(&#39;%s in %s: low = %.2f, high = %.2f&#39; % \</span>
-                <span class="c1">#          (x, c,lowLimit,notHighLimit), end=&#39; &#39;)</span>
-                <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> in </span><span class="si">%s</span><span class="s1"> - </span><span class="si">%s</span><span class="se">\t</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;highLimit&#39;</span><span class="p">],),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-                <span class="n">categoryMembership</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">lowLimit</span><span class="p">,</span><span class="n">notHighLimit</span><span class="p">)</span>
-                <span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lowLimit</span>
-                <span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;notHighLimit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">notHighLimit</span>
-                <span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;categoryMembership&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">categoryMembership</span>
-
-                <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-                    <span class="c1">#print(&#39;\t %.2f \t %.2f \t %.2f&#39; % (sorting[x][c][&#39;lowLimit&#39;], sorting[x][c][&#39;notHighLimit&#39;], sorting[x][c][&#39;categoryMembership&#39;]))</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%.2f</span><span class="se">\t\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="se">\t\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">],</span> <span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;notHighLimit&#39;</span><span class="p">],</span> <span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;categoryMembership&#39;</span><span class="p">]))</span>
-
-        <span class="k">return</span> <span class="n">sorting</span>
-
 <div class="viewcode-block" id="IncrementalRatingDigraph.showSortingCharacteristics"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingDigraph.showSortingCharacteristics">[docs]</a>    <span class="k">def</span> <span class="nf">showSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a bipolar-valued bi-dictionary relation</span>
@@ -5201,7 +5134,7 @@
 <span class="s2">    ****************************************************</span>
 <span class="s2">    * Python sortingDigraphs module                    *</span>
 <span class="s2">    * depends on BipolarOutrankingDigraph and          *</span>
-<span class="s2">    * $Revision: 2326 $                                 *</span>
+<span class="s2">    * $Revision: 2328 $                                 *</span>
 <span class="s2">    * Copyright (C) 2010 Raymond Bisdorff              *</span>
 <span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
 <span class="s2">    * to the extent permitted by the applicable law.   *</span>
@@ -5340,7 +5273,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. december 2010                *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2326 $                  *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2328 $                  *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>
