@@ -3311,7 +3311,7 @@ class IncrementalRatingDigraph(SortingDigraph,PerformanceQuantiles):
         self.limitingQuantiles = deepcopy(perfQuantiles.limitingQuantiles)
         self.historySizes = deepcopy(perfQuantiles.historySizes)
         self.cdf = deepcopy(perfQuantiles.cdf)
-        self.name = 'Incremental Rating Digraph'
+        self.name = 'ratingDigraph'
         # import the actions to rate
         newActions = OrderedDict()
         evaluation = {}
@@ -3908,7 +3908,7 @@ class IncrementalRatingDigraph(SortingDigraph,PerformanceQuantiles):
                     return relation
     def htmlPerformanceHeatmap(self,argCriteriaList=None,
                                argActionsList=None,
-                               SparseModel=True,
+                               SparseModel=False,
                                minimalComponentSize=1,
                                RankingRule='Copeland',
                                quantiles=None,
@@ -4015,29 +4015,29 @@ class IncrementalRatingDigraph(SortingDigraph,PerformanceQuantiles):
             if RankingRule == 'NetFlows':
 ##                if quantiles == None:
 ##                    quantiles = na
-                from outrankingDigraphs import BipolarOutrankingDigraph
-                from linearOrders import NetFlowsOrder
-                g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
+##                from outrankingDigraphs import BipolarOutrankingDigraph
+##                from linearOrders import NetFlowsOrder
+##                g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
                 if argActionsList == None:
-                    actionsList = g.computeNetFlowsRanking()
+                    actionsList = self.computeNetFlowsRanking()
                 else:
                     actionsList = argActionsList
             else:
 ##                if quantiles == None:
 ##                    quantiles = na
-                from outrankingDigraphs import BipolarOutrankingDigraph
-                from linearOrders import CopelandOrder
-                g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
-                #actionsList = g.computeNetFlowsRanking()
-                cop = CopelandOrder(g)
+##                from outrankingDigraphs import BipolarOutrankingDigraph
+##                from linearOrders import CopelandOrder
+##                g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
+##                #actionsList = g.computeNetFlowsRanking()
+##                cop = CopelandOrder(g)
                 if argActionsList == None:
-                    actionsList = cop.computeRanking()
+                    actionsList = self.computeCopelandRanking()
                 else:
                     actionsList = argActionsList
         if SparseModel:
             rankCorrelation = None
         else:
-            rankCorrelation = g.computeOrderCorrelation(list(reversed(actionsList)))
+            rankCorrelation = self.computeOrderCorrelation(list(reversed(actionsList)))
         if Debug:
             print('1',actionsList)
             print('2',rankCorrelation)
@@ -4046,7 +4046,7 @@ class IncrementalRatingDigraph(SortingDigraph,PerformanceQuantiles):
         if criteriaList == None:
             if Correlations:
                 criteriaCorrelation =\
-                        g.computeMarginalVersusGlobalRankingCorrelations(\
+                        self.computeMarginalVersusGlobalRankingCorrelations(\
                                 actionsList,ValuedCorrelation=True,Threading=Threading,
                                 nbrCores=nbrOfCPUs)
                 criteriaList = [c[1] for c in criteriaCorrelation]
@@ -4061,7 +4061,7 @@ class IncrementalRatingDigraph(SortingDigraph,PerformanceQuantiles):
             criteriaList = list(criteria.keys())
             if Correlations:
                 criteriaCorrelation =\
-                        g.computeMarginalVersusGlobalRankingCorrelations(\
+                        self.computeMarginalVersusGlobalRankingCorrelations(\
                                 actionsList,ValuedCorrelation=True,Threading=Threading,
                                 nbrCores=nbrOfCPUs)
             else:
