@@ -4552,55 +4552,55 @@ class IncrementalRatingDigraph(SortingDigraph,PerformanceQuantiles):
                                 ReflexiveTerms=False)
         
 
-    def _computeQuantilesFrequencies(self,x,Debug=False):
-        """
-        renders the quantiles frequencies
-        """
-        from math import floor
-        if isinstance(x,int):
-            n = x
-        elif x == None:
-            n = 4
-        elif x == 'bitiles':
-            n = 2
-        elif x == 'tritiles':
-            n = 3
-        elif x == 'quartiles':
-            n = 4
-        elif x == 'quintiles':
-            n = 5
-        elif x == 'sextiles':
-            n = 6
-        elif x == 'septiles':
-            n = 7
-        elif x == 'octiles':
-            n = 8
-        elif x == 'deciles':
-            n = 10
-        elif x == 'dodeciles':
-            n = 20
-        elif x == 'centiles':
-            n = 100
-        elif x == 'automatic':
-            pth = [5]
-            for g in self.criteria:
-                try:
-                    pref = self.criteria[g]['thresholds']['ind'][0] + \
-                           (self.criteria[g]['thresholds']['ind'][1]*Decimal('100'))
-                    pth.append(pref)
-                except:
-                    pass
-            amp = max(Decimal('1'),min(pth))
-            n = int(floor(Decimal('100')/amp))
-            if Debug:
-                print('Detected preference thresholds = ',pth)
-                print('amplitude, n',amp,n)
-
-        quantilesFrequencies = []
-        for i in range(n+1):
-            quantilesFrequencies.append( Decimal(str(i)) / Decimal(str(n)) )
-        self.name = 'sorting_with_%d-tile_limits' % n
-        return quantilesFrequencies
+##    def _computeQuantilesFrequencies(self,x,Debug=False):
+##        """
+##        renders the quantiles frequencies
+##        """
+##        from math import floor
+##        if isinstance(x,int):
+##            n = x
+##        elif x == None:
+##            n = 4
+##        elif x == 'bitiles':
+##            n = 2
+##        elif x == 'tritiles':
+##            n = 3
+##        elif x == 'quartiles':
+##            n = 4
+##        elif x == 'quintiles':
+##            n = 5
+##        elif x == 'sextiles':
+##            n = 6
+##        elif x == 'septiles':
+##            n = 7
+##        elif x == 'octiles':
+##            n = 8
+##        elif x == 'deciles':
+##            n = 10
+##        elif x == 'dodeciles':
+##            n = 20
+##        elif x == 'centiles':
+##            n = 100
+##        elif x == 'automatic':
+##            pth = [5]
+##            for g in self.criteria:
+##                try:
+##                    pref = self.criteria[g]['thresholds']['ind'][0] + \
+##                           (self.criteria[g]['thresholds']['ind'][1]*Decimal('100'))
+##                    pth.append(pref)
+##                except:
+##                    pass
+##            amp = max(Decimal('1'),min(pth))
+##            n = int(floor(Decimal('100')/amp))
+##            if Debug:
+##                print('Detected preference thresholds = ',pth)
+##                print('amplitude, n',amp,n)
+##
+##        quantilesFrequencies = []
+##        for i in range(n+1):
+##            quantilesFrequencies.append( Decimal(str(i)) / Decimal(str(n)) )
+##        self.name = 'sorting_with_%d-tile_limits' % n
+##        return quantilesFrequencies
                                          
     def _computeLimitingQuantiles(self,g,Debug=True):
         """
@@ -4691,7 +4691,7 @@ class IncrementalRatingDigraph(SortingDigraph,PerformanceQuantiles):
 ##            print(actions)
             
         #categories = list(self.orderedCategoryKeys())
-        categories = list(self.categories.keys())
+        categories = self.categories
         selfRelation = self.relation
         try:
             LowerClosed = self.criteriaCategoryLimits['LowerClosed']
@@ -4911,73 +4911,6 @@ class IncrementalRatingDigraph(SortingDigraph,PerformanceQuantiles):
 ##                        print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
         if StoreSorting:
             self.sorting = sorting
-        return sorting
-
-    def _computeSortingCharacteristicsOld(self, action=None, Comments=False):
-        """
-        Renders a bipolar-valued bi-dictionary relation
-        representing the degree of credibility of the
-        assertion that "action x in A belongs to category c in C",
-        ie x outranks low category limit and does not outrank
-        the high category limit.
-        """
-        Min = self.valuationdomain['min']
-        Med = self.valuationdomain['med']
-        Max = self.valuationdomain['max']
-
-        actions = self.getActionsKeys(action)
-            
-        categories = self.orderedCategoryKeys()
-
-        try:
-            LowerClosed = self.criteriaCategoryLimits['LowerClosed']
-        except:
-            LowerClosed = True
-
-        if Comments:
-            if LowerClosed:
-                print('x  in  K_k\t r(x >= m_k)\t r(x < M_k)\t r(x in K_k)')
-            else:
-                print('x  in  K_k\t r(m_k < x)\t r(M_k >= x)\t r(x in K_k)')
-
-        sorting = {}
-        nq = len(self.limitingQuantiles) - 1
-        for x in actions:
-            sorting[x] = {}
-            for c in categories:
-                sorting[x][c] = {}
-                if LowerClosed:
-                    cKey= c+'-m'
-                else:
-                    cKey= c+'-M'
-                if LowerClosed:
-                    lowLimit = self.relation[x][cKey]
-                    if int(c) < nq:
-                        cMaxKey = str(int(c)+1)+'-m'
-                        notHighLimit = Max - self.relation[x][cMaxKey] + Min
-                    else:
-                        notHighLimit = Max
-                else:
-                    if int(c) > 1:
-                        cMinKey = str(int(c)-1)+'-M'
-                        lowLimit = Max - self.relation[cMinKey][x] + Min
-                    else:
-                        lowLimit = Max
-                    notHighLimit = self.relation[cKey][x]
-                #if Comments:
-                #    print('%s in %s: low = %.2f, high = %.2f' % \
-                #          (x, c,lowLimit,notHighLimit), end=' ')
-                if Comments:
-                    print('%s in %s - %s\t' % (x, self.categories[c]['lowLimit'],self.categories[c]['highLimit'],), end=' ')
-                categoryMembership = min(lowLimit,notHighLimit)
-                sorting[x][c]['lowLimit'] = lowLimit
-                sorting[x][c]['notHighLimit'] = notHighLimit
-                sorting[x][c]['categoryMembership'] = categoryMembership
-
-                if Comments:
-                    #print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
-                    print('%.2f\t\t %.2f\t\t %.2f\n' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
-
         return sorting
 
     def showSortingCharacteristics(self, action=None):
