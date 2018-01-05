@@ -3271,7 +3271,7 @@ class IncrementalRatingDigraph(SortingDigraph,PerformanceQuantiles):
 
     """
     def __init__(self,argPerfQuantiles=None,newData=None,\
-                 hasNoVeto=True,\
+                 hasNoVeto=False,\
                  outrankingType = "bipolar",\
                  valuationScale = (-1,1),\
                  WithSortingRelation=False,\
@@ -4155,8 +4155,18 @@ class IncrementalRatingDigraph(SortingDigraph,PerformanceQuantiles):
             html += '<i>Ordinal (Kendall) correlation between global ranking and outranking relation: %.2f.</i><br/>\n' % (rankCorrelation['correlation'])
         html += '</body></html>'
         return html
-    
+
     def showActionCategories(self,action,Debug=False,Comments=True,\
+                             Threading=False,nbrOfCPUs=None):
+        """
+        Renders the union of categories in which the given action is sorted positively or null into.
+        Returns a tuple : action, lowest category key, highest category key, membership credibility !
+        """
+        self.computeActionCategories(action,Comments=True,Debug=Debug,\
+                                     Threading=Threading,nbrOfCPUs=nbrOfCPUs)
+
+    
+    def computeActionCategories(self,action,Debug=False,Comments=False,\
                              Threading=False,nbrOfCPUs=None):
         """
         Renders the union of categories in which the given action is sorted positively or null into.
@@ -4210,122 +4220,288 @@ class IncrementalRatingDigraph(SortingDigraph,PerformanceQuantiles):
         print('Quantiles sorting result per decision action')
         for x in actions:
             self.showActionCategories(x,Debug=Debug)
- 
 
-    def showWeakOrder(self,Descending=True):
-        """
-        Specialisation for QuantilesSortingDigraphs.
-        """
-        from decimal import Decimal
-        from weakOrders import WeakOrder
-        try:
-            cC = self.categoryContent
-        except:
-            cC = self.computeCategoryContents(StoreSorting=True)
-        
-        if Descending:
-            cCKeys = self.orderedCategoryKeys(Reverse = True)
-        else:
-            cCKeys = self.orderedCategoryKeys(Reverse = False)
-        n = len(cC)
-        n2 = n//2
-        ordering = []
-        
-        for i in range(n2):
-            if i == 0:
-                x = cC[cCKeys[i]]
-                y = cC[cCKeys[n-i-1]]
-                setx = set(x)
-                sety = set(y) - setx
-            else:
-                x = list(set(cC[cCKeys[i]]) - (setx | sety))
-                setx = setx | set(x)
-                y = list(set(cC[cCKeys[n-i-1]]) - (setx | sety))
-                sety = sety | set(y)
-            if x != [] or y != []:
-                ordering.append( ( (Decimal(str(i+1)),x),(Decimal(str(n-i)),y) ) )
-        if 2*n2 < n:
-            if n2 == 0:
-                x = cC[cCKeys[n2]]
-            else:
-                x = list(set(cC[cCKeys[n2]]) - (setx | sety))
-            ordering.append( ( (Decimal(str(n2+1)),x),(Decimal(str(n2+1)),x) ) )
-
-##        orderingList = []
+##  obsolete 
+##    def showWeakOrder(self,Descending=True):
+##        """
+##        Specialisation for QuantilesSortingDigraphs.
+##        """
+##        from decimal import Decimal
+##        from weakOrders import WeakOrder
+##        try:
+##            cC = self.categoryContent
+##        except:
+##            cC = self.computeCategoryContents(StoreSorting=True)
+##        
+##        if Descending:
+##            cCKeys = self.orderedCategoryKeys(Reverse = True)
+##        else:
+##            cCKeys = self.orderedCategoryKeys(Reverse = False)
+##        n = len(cC)
+##        n2 = n//2
+##        ordering = []
+##        
 ##        for i in range(n2):
-##            x = ordering[i][0][1]
-##            if x != []:
-##                orderingList.append(x)
+##            if i == 0:
+##                x = cC[cCKeys[i]]
+##                y = cC[cCKeys[n-i-1]]
+##                setx = set(x)
+##                sety = set(y) - setx
+##            else:
+##                x = list(set(cC[cCKeys[i]]) - (setx | sety))
+##                setx = setx | set(x)
+##                y = list(set(cC[cCKeys[n-i-1]]) - (setx | sety))
+##                sety = sety | set(y)
+##            if x != [] or y != []:
+##                ordering.append( ( (Decimal(str(i+1)),x),(Decimal(str(n-i)),y) ) )
 ##        if 2*n2 < n:
-##            x = ordering[i][0][1]
-##            y = ordering[i][1][1]
-##            if x != []:
-##                orderingList.append(x)
-##            if y != []:
-##                orderingList.append(y)
-##        for i in range(n2):
-##            y = ordering[n2-i-1][1][1]
-##            if y != []:
-##                orderingList.append(y)
-##            
-        
-        weakOrdering = {'result':ordering}
+##            if n2 == 0:
+##                x = cC[cCKeys[n2]]
+##            else:
+##                x = list(set(cC[cCKeys[n2]]) - (setx | sety))
+##            ordering.append( ( (Decimal(str(n2+1)),x),(Decimal(str(n2+1)),x) ) )
+##
+####        orderingList = []
+####        for i in range(n2):
+####            x = ordering[i][0][1]
+####            if x != []:
+####                orderingList.append(x)
+####        if 2*n2 < n:
+####            x = ordering[i][0][1]
+####            y = ordering[i][1][1]
+####            if x != []:
+####                orderingList.append(x)
+####            if y != []:
+####                orderingList.append(y)
+####        for i in range(n2):
+####            y = ordering[n2-i-1][1][1]
+####            if y != []:
+####                orderingList.append(y)
+####            
+##        
+##        weakOrdering = {'result':ordering}
+##
+##        WeakOrder.showWeakOrder(self,weakOrdering)
+##
+####        return orderingList
 
-        WeakOrder.showWeakOrder(self,weakOrdering)
+##    def _computeQuantileOrdering(self,strategy=None,
+##                                Descending=True,
+##                                Debug=False):
+##        """
+##        Renders the 
+##        *Parameters*:
+##            * Descending: listing in *decreasing* (default) or *increasing* quantile order.
+##            * strategy: ordering in an {'optimistic' | 'pessimistic' | 'average' (default)}
+##              in the uppest, the lowest or the average potential quantile.
+##        
+##        """
+##        if strategy == None:
+##            try:
+##                strategy = self.sortingParameters['strategy']
+##            except:
+##                strategy = 'average'
+##        actionsCategories = {}
+##        for x in self.actions:
+##            a,lowCateg,highCateg,credibility =\
+##                     self.showActionCategories(x,Comments=Debug)
+##            if strategy == "optimistic":
+##                try:
+##                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
+##                except:
+##                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]
+##            elif strategy == "pessimistic":
+##                try:
+##                    actionsCategories[(int(lowCateg),int(highCateg))].append(a)
+##                except:
+##                    actionsCategories[(int(lowCateg),int(highCateg))] = [a]
+##            elif strategy == "average":
+##                lc = float(lowCateg)
+##                hc = float(highCateg)
+##                ac = (lc+hc)/2.0
+##                try:
+##                    actionsCategories[(ac,int(highCateg),int(lowCateg))].append(a)
+##                except:
+##                    actionsCategories[(ac,int(highCateg),int(lowCateg))] = [a]
+##            else:  # optimistic by default
+##                try:
+##                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
+##                except:
+##                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]      
+##                
+##        actionsCategIntervals = []
+##        for interval in actionsCategories:
+##            actionsCategIntervals.append([interval,\
+##                                          actionsCategories[interval]])
+##        actionsCategIntervals.sort(reverse=Descending)
+##
+##        return actionsCategIntervals
 
-##        return orderingList
-
-    def _computeQuantileOrdering(self,strategy=None,
-                                Descending=True,
-                                Debug=False):
+    def computeRefinedActionCategories(self,action,Show=False,Debug=False,Comments=False,\
+                             Threading=False,nbrOfCPUs=None):
         """
-        Renders the 
+        Renders the union of categories in which the given action is sorted positively or null into.
+        Returns a tuple : action, lowest category key, highest category key, membership credibility !
+        """
+        #qs = self.qs
+        #qs = self
+        Med = self.valuationdomain['med']
+        categories = self.categories
+        
+        try:
+            sortinga = self.sorting[action]
+        except:
+            sorting = self.computeSortingCharacteristics(action=action,Comments=Comments,\
+                                                   Threading=Threading,\
+                                                   nbrOfCPUs=nbrOfCPUs)
+            sortinga = sorting[action]
+            
+        keys = []
+        for c in categories.keys():
+        #for c in self.orderedCategoryKeys():
+            if Debug:
+                print(action, c,sortinga[c])
+            Above = False
+            if sortinga[c]['categoryMembership'] >= Med:
+                Above = True
+                if sortinga[c]['lowLimit'] > Med:
+                    lowLimit = sortinga[c]['lowLimit']
+                if sortinga[c]['notHighLimit'] > Med:
+                    notHighLimit = sortinga[c]['notHighLimit']    
+                keys.append(c)
+                if Debug:
+                    print(action, c, sortinga[c])
+            elif Above:
+                break
+        try:
+            credibility = min(lowLimit,notHighLimit)
+        except:
+            credibility = Med
+            notHighLimit = Med
+        n = len(keys)
+        if n == 0:
+            return None
+        
+        elif n == 1:
+            if Show:
+                print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
+                                     categories[keys[0]]['lowLimit'],\
+                                     categories[keys[0]]['highLimit'],\
+                                     action,\
+                                     credibility,lowLimit,notHighLimit) )
+            return action,\
+                    keys[0],\
+                    keys[0],\
+                    credibility,\
+                    lowLimit,\
+                    notHighLimit
+        else:
+            if Show:
+                print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
+                                     categories[keys[0]]['lowLimit'],\
+                                     categories[keys[-1]]['highLimit'],\
+                                     action,\
+                                     credibility,lowLimit,notHighLimit) )
+            return action,\
+                    keys[0],\
+                    keys[-1],\
+                    credibility,\
+                    lowLimit,\
+                    notHighLimit
+
+
+    def computeRefinedQuantileOrdering(self,strategy=None,
+                                       minimalComponentSize=1,
+                                Descending=True,
+                                 Threading=False,
+                                 nbrOfCPUs=None,
+                                Debug=False,
+                                 Comments=False):
+        """
+        Renders the quantile interval of the decision actions.
+        
         *Parameters*:
+            * QuantilesdSortingDigraph instance
             * Descending: listing in *decreasing* (default) or *increasing* quantile order.
             * strategy: ordering in an {'optimistic' | 'pessimistic' | 'average' (default)}
               in the uppest, the lowest or the average potential quantile.
         
         """
+        from operator import itemgetter
         if strategy == None:
-            try:
-                strategy = self.sortingParameters['strategy']
-            except:
-                strategy = 'average'
+            strategy = 'average'
         actionsCategories = {}
-        for x in self.actions:
-            a,lowCateg,highCateg,credibility =\
-                     self.showActionCategories(x,Comments=Debug)
+        for x in self.newActions:
+            a,lowCateg,highCateg,credibility,lowLimit,notHighLimit =\
+                     self.computeRefinedActionCategories(x,\
+                                               Threading=Threading,\
+                                               nbrOfCPUs = nbrOfCPUs)
+            lowQtileLimit = self.categories[lowCateg]['lowLimit']
+            highQtileLimit = self.categories[highCateg]['highLimit']
             if strategy == "optimistic":
-                try:
-                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
-                except:
-                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]
+                score1 = float(highCateg)
+                score2 = -notHighLimit
+                score3 = float(lowCateg)
+                score4 = lowLimit
             elif strategy == "pessimistic":
-                try:
-                    actionsCategories[(int(lowCateg),int(highCateg))].append(a)
-                except:
-                    actionsCategories[(int(lowCateg),int(highCateg))] = [a]
-            elif strategy == "average":
+                score1 = float(lowCateg)
+                score2 = lowLimit
+                score3 = float(highCateg)
+                score4 = -notHighLimit
+            else:   #strategy == "average":
                 lc = float(lowCateg)
                 hc = float(highCateg)
-                ac = (lc+hc)/2.0
-                try:
-                    actionsCategories[(ac,int(highCateg),int(lowCateg))].append(a)
-                except:
-                    actionsCategories[(ac,int(highCateg),int(lowCateg))] = [a]
-            else:  # optimistic by default
-                try:
-                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
-                except:
-                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]      
-                
-        actionsCategIntervals = []
-        for interval in actionsCategories:
-            actionsCategIntervals.append([interval,\
-                                          actionsCategories[interval]])
-        actionsCategIntervals.sort(reverse=Descending)
+                score1 = (lc+hc)/2.0
+                score2 = float(highCateg)
+                score3 = lowLimit - notHighLimit
+                score4 = -notHighLimit
+            #print(score1,highQtileLimit,lowQtileLimit,lowCateg,highCateg,score2,score3,score4)
+            try:
+                actionsCategories[(score1,highQtileLimit,\
+                                   lowQtileLimit,lowCateg,highCateg,score2,score3,score4)].append(a)
+            except:
+                actionsCategories[(score1,highQtileLimit,\
+                                   lowQtileLimit,lowCateg,highCateg,score2,score3,score4)] = [a]
 
-        return actionsCategIntervals
+        actionsCategIntervals = sorted(actionsCategories,key=itemgetter(0,5,6,7), reverse=True)
+        if Debug:
+            print(actionsCategIntervals)
+        compSize = minimalComponentSize
+        
+        if compSize == 1:
+            if Descending:
+                componentsIntervals = [[(item[1],item[2]),actionsCategories[item],item[0],item[3],item[4]]\
+                                   for item in actionsCategIntervals]
+            else:
+                componentsIntervals = [[(item[2],item[1]),actionsCategories[item],item[0],item[3],item[4]]\
+                                   for item in actionsCategIntervals]
+                
+        else:
+            componentsIntervals = []
+            nc = len(actionsCategIntervals)
+            compContent = []
+            for i in range(nc):
+                currContLength = len(compContent)
+                comp = actionsCategIntervals[i]
+                #print(comp)
+                if currContLength == 0:
+                    lowQtileLimit = comp[2]
+                highQtileLimit = comp[1]             
+                compContent += actionsCategories[comp]
+                if len(compContent) >= compSize or i == nc-1:
+                    score = comp[0]
+                    lowCateg = comp[3]
+                    highCateg = comp[4]
+                    if Descending:
+                        componentsIntervals.append([(highQtileLimit,lowQtileLimit),compContent,\
+                                                    score,lowCateg,highCateg])
+                    else:
+                        componentsIntervals.append([(lowQtileLimit,highQtileLimit),compContent,\
+                                                    score,lowCateg,highCateg])
+                    compContent = []
+        if Debug:
+            print(componentsIntervals)
+        return componentsIntervals        
 
 
     def computeQuantileOrdering(self,strategy=None,
@@ -4351,7 +4527,7 @@ class IncrementalRatingDigraph(SortingDigraph,PerformanceQuantiles):
         actionsCategories = {}
         for x in self.getActionsKeys():
             a,lowCateg,highCateg,credibility =\
-                     self.showActionCategories(x,Comments=Debug)
+                     self.computeActionCategories(x,Comments=Debug)
             if strategy == "optimistic":
                 try:
                     actionsCategories[(int(highCateg),int(lowCateg))].append(a)
@@ -4455,6 +4631,12 @@ class IncrementalRatingDigraph(SortingDigraph,PerformanceQuantiles):
         Dummy show method for the commenting computeQuantileOrdering() method.
         """
         self.computeQuantileOrdering(strategy=strategy,Comments=True)
+
+    def showRefinedQuantileOrdering(self,strategy=None):
+        """
+        Dummy show method for the commenting computeQuantileOrdering() method.
+        """
+        self.computeRefinedQuantileOrdering(strategy=strategy)
 
 
     def computeWeakOrder(self,Descending=True,Debug=False):
@@ -5200,11 +5382,11 @@ if __name__ == "__main__":
     nbrActions=1000
     nbrCrit = 21
     tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
-                                    numberOfCriteria=nbrCrit,seed=105)
-    pq = PerformanceQuantiles(tp,'heptiles',LowerClosed=True,Debug=False)
-    tpg = PerfTabGenerator(tp,instanceCounter=1,seed=105)
+                                    numberOfCriteria=nbrCrit,seed=100)
+    pq = PerformanceQuantiles(tp,10,LowerClosed=True,Debug=False)
+    tpg = PerfTabGenerator(tp,instanceCounter=0,seed=100)
     newActions = []
-    for i in range(10):
+    for i in range(20):
         newAction = tpg.randomAction()
         newActions.append(newAction)
     pq.updateQuantiles(newActions,historySize=None)
@@ -5212,10 +5394,11 @@ if __name__ == "__main__":
                                    CompleteOutranking=True,Debug=True)
     ira.showSorting()
     ira.showHTMLSorting()
-    ira.showActionsSortingResult()
-    ira.showQuantileOrdering()
-    ira.showOrderedRelationTable()
-    ira.showSortingCharacteristics()
+    #ira.showActionsSortingResult()
+    #ira.showQuantileOrdering()
+    ira.showRefinedQuantileOrdering()
+    #ira.showOrderedRelationTable()
+    #ira.showSortingCharacteristics()
     ira.showHTMLPerformanceHeatmap(pageTitle='Heat map of performances',Correlations=True)
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
