@@ -9177,8 +9177,8 @@ if __name__ == "__main__":
 
 
     ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
-    Threading = True
-    t1 = Random3ObjectivesPerformanceTableau(numberOfActions=500,\
+    Threading = False
+    t1 = Random3ObjectivesPerformanceTableau(numberOfActions=50,\
                                    numberOfCriteria=21,\
                                    weightDistribution='equiobjectives',
                                    seed=100)
