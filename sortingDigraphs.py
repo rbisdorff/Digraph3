@@ -5275,7 +5275,7 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
         >>> nbrCrit = 13
         >>> seed = 100
         >>> tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,numberOfCriteria=nbrCrit,seed=seed)
-        >>> pq = PerformanceQuantiles(tp,numberOfBins='dodeciles',LowerClosed=True,Debug=False)
+        >>> pq = PerformanceQuantiles(tp,numberOfBins='deciles',LowerClosed=True,Debug=False)
         >>> # new incoming decision actions of the same kind
         >>> from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
         >>> tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
@@ -5290,10 +5290,9 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
         >>> # inspecting the rating result
         >>> nqr.showQuantileRating()
          *-------- Normed quantiles rating result ---------
-         [0.50 - 0.55[ ['a9', 'a2', 'a3', 'a1', 'a7']
-         [0.45 - 0.50[ ['a6', 'a10']
-         [0.40 - 0.45[ ['a8']
-         [0.20 - 0.25[ ['a5', 'a4']
+         [0.50 - 0.60[ ['a1', 'a7', 'a3', 'a10', 'a2']
+         [0.40 - 0.50[ ['a6', 'a9', 'a8']
+         [0.20 - 0.30[ ['a4', 'a5']
         >>> ird.showHTMLPerformanceHeatmap(pageTitle='Heatmap of Quantiles Rating',Correlations=True)
 
     .. image:: exampleIncRatDigraph.png

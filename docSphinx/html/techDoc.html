@@ -6314,7 +6314,7 @@ normed performance quantiles gathered from historical data.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">13</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">seed</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">numberOfBins</span><span class="o">=</span><span class="s1">&#39;dodeciles&#39;</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">numberOfBins</span><span class="o">=</span><span class="s1">&#39;deciles&#39;</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># new incoming decision actions of the same kind</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
@@ -6329,10 +6329,9 @@ normed performance quantiles gathered from historical data.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># inspecting the rating result</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showQuantileRating</span><span class="p">()</span>
 <span class="go"> *-------- Normed quantiles rating result ---------</span>
-<span class="go"> [0.50 - 0.55[ [&#39;a9&#39;, &#39;a2&#39;, &#39;a3&#39;, &#39;a1&#39;, &#39;a7&#39;]</span>
-<span class="go"> [0.45 - 0.50[ [&#39;a6&#39;, &#39;a10&#39;]</span>
-<span class="go"> [0.40 - 0.45[ [&#39;a8&#39;]</span>
-<span class="go"> [0.20 - 0.25[ [&#39;a5&#39;, &#39;a4&#39;]</span>
+<span class="go"> [0.50 - 0.60[ [&#39;a1&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a10&#39;, &#39;a2&#39;]</span>
+<span class="go"> [0.40 - 0.50[ [&#39;a6&#39;, &#39;a9&#39;, &#39;a8&#39;]</span>
+<span class="go"> [0.20 - 0.30[ [&#39;a4&#39;, &#39;a5&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of Quantiles Rating&#39;</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
