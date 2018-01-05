@@ -51,7 +51,7 @@
 <span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># Python implementation of digraphs</span>
-<span class="c1"># Current revision $Revision: 2328 $</span>
+<span class="c1"># Current revision $Revision: 2330 $</span>
 <span class="c1"># Copyright (C) 2006-2008  Raymond Bisdorff</span>
 <span class="c1">#</span>
 <span class="c1">#    This program is free software; you can redistribute it and/or modify</span>
@@ -3321,7 +3321,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfQuantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">newData</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
-                 <span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
+                 <span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                  <span class="n">outrankingType</span> <span class="o">=</span> <span class="s2">&quot;bipolar&quot;</span><span class="p">,</span>\
                  <span class="n">valuationScale</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>\
                  <span class="n">WithSortingRelation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
@@ -4205,8 +4205,18 @@
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;i&gt;Ordinal (Kendall) correlation between global ranking and outranking relation: </span><span class="si">%.2f</span><span class="s1">.&lt;/i&gt;&lt;br/&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">rankCorrelation</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">])</span>
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/body&gt;&lt;/html&gt;&#39;</span>
         <span class="k">return</span> <span class="n">html</span></div>
-    
+
 <div class="viewcode-block" id="IncrementalRatingDigraph.showActionCategories"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingDigraph.showActionCategories">[docs]</a>    <span class="k">def</span> <span class="nf">showActionCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
+                             <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders the union of categories in which the given action is sorted positively or null into.</span>
+<span class="sd">        Returns a tuple : action, lowest category key, highest category key, membership credibility !</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">computeActionCategories</span><span class="p">(</span><span class="n">action</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">,</span>\
+                                     <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="IncrementalRatingDigraph.computeActionCategories"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingDigraph.computeActionCategories">[docs]</a>    <span class="k">def</span> <span class="nf">computeActionCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                              <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the union of categories in which the given action is sorted positively or null into.</span>
@@ -4260,122 +4270,288 @@
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Quantiles sorting result per decision action&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">showActionCategories</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span></div>
- 
 
-<div class="viewcode-block" id="IncrementalRatingDigraph.showWeakOrder"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingDigraph.showWeakOrder">[docs]</a>    <span class="k">def</span> <span class="nf">showWeakOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Specialisation for QuantilesSortingDigraphs.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
-        <span class="kn">from</span> <span class="nn">weakOrders</span> <span class="k">import</span> <span class="n">WeakOrder</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">cC</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">categoryContent</span>
-        <span class="k">except</span><span class="p">:</span>
-            <span class="n">cC</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeCategoryContents</span><span class="p">(</span><span class="n">StoreSorting</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        
-        <span class="k">if</span> <span class="n">Descending</span><span class="p">:</span>
-            <span class="n">cCKeys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">orderedCategoryKeys</span><span class="p">(</span><span class="n">Reverse</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">cCKeys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">orderedCategoryKeys</span><span class="p">(</span><span class="n">Reverse</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cC</span><span class="p">)</span>
-        <span class="n">n2</span> <span class="o">=</span> <span class="n">n</span><span class="o">//</span><span class="mi">2</span>
-        <span class="n">ordering</span> <span class="o">=</span> <span class="p">[]</span>
-        
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n2</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">x</span> <span class="o">=</span> <span class="n">cC</span><span class="p">[</span><span class="n">cCKeys</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
-                <span class="n">y</span> <span class="o">=</span> <span class="n">cC</span><span class="p">[</span><span class="n">cCKeys</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
-                <span class="n">setx</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-                <span class="n">sety</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="n">setx</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">cC</span><span class="p">[</span><span class="n">cCKeys</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span> <span class="o">-</span> <span class="p">(</span><span class="n">setx</span> <span class="o">|</span> <span class="n">sety</span><span class="p">))</span>
-                <span class="n">setx</span> <span class="o">=</span> <span class="n">setx</span> <span class="o">|</span> <span class="nb">set</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-                <span class="n">y</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">cC</span><span class="p">[</span><span class="n">cCKeys</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span> <span class="o">-</span> <span class="p">(</span><span class="n">setx</span> <span class="o">|</span> <span class="n">sety</span><span class="p">))</span>
-                <span class="n">sety</span> <span class="o">=</span> <span class="n">sety</span> <span class="o">|</span> <span class="nb">set</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="p">[]</span> <span class="ow">or</span> <span class="n">y</span> <span class="o">!=</span> <span class="p">[]:</span>
-                <span class="n">ordering</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">(</span> <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)),</span><span class="n">x</span><span class="p">),(</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="p">)),</span><span class="n">y</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span>
-        <span class="k">if</span> <span class="mi">2</span><span class="o">*</span><span class="n">n2</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">n2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">x</span> <span class="o">=</span> <span class="n">cC</span><span class="p">[</span><span class="n">cCKeys</span><span class="p">[</span><span class="n">n2</span><span class="p">]]</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">cC</span><span class="p">[</span><span class="n">cCKeys</span><span class="p">[</span><span class="n">n2</span><span class="p">]])</span> <span class="o">-</span> <span class="p">(</span><span class="n">setx</span> <span class="o">|</span> <span class="n">sety</span><span class="p">))</span>
-            <span class="n">ordering</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">(</span> <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n2</span><span class="o">+</span><span class="mi">1</span><span class="p">)),</span><span class="n">x</span><span class="p">),(</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n2</span><span class="o">+</span><span class="mi">1</span><span class="p">)),</span><span class="n">x</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span>
-
-<span class="c1">##        orderingList = []</span>
+<span class="c1">##  obsolete </span>
+<span class="c1">##    def showWeakOrder(self,Descending=True):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Specialisation for QuantilesSortingDigraphs.</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        from decimal import Decimal</span>
+<span class="c1">##        from weakOrders import WeakOrder</span>
+<span class="c1">##        try:</span>
+<span class="c1">##            cC = self.categoryContent</span>
+<span class="c1">##        except:</span>
+<span class="c1">##            cC = self.computeCategoryContents(StoreSorting=True)</span>
+<span class="c1">##        </span>
+<span class="c1">##        if Descending:</span>
+<span class="c1">##            cCKeys = self.orderedCategoryKeys(Reverse = True)</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            cCKeys = self.orderedCategoryKeys(Reverse = False)</span>
+<span class="c1">##        n = len(cC)</span>
+<span class="c1">##        n2 = n//2</span>
+<span class="c1">##        ordering = []</span>
+<span class="c1">##        </span>
 <span class="c1">##        for i in range(n2):</span>
-<span class="c1">##            x = ordering[i][0][1]</span>
-<span class="c1">##            if x != []:</span>
-<span class="c1">##                orderingList.append(x)</span>
+<span class="c1">##            if i == 0:</span>
+<span class="c1">##                x = cC[cCKeys[i]]</span>
+<span class="c1">##                y = cC[cCKeys[n-i-1]]</span>
+<span class="c1">##                setx = set(x)</span>
+<span class="c1">##                sety = set(y) - setx</span>
+<span class="c1">##            else:</span>
+<span class="c1">##                x = list(set(cC[cCKeys[i]]) - (setx | sety))</span>
+<span class="c1">##                setx = setx | set(x)</span>
+<span class="c1">##                y = list(set(cC[cCKeys[n-i-1]]) - (setx | sety))</span>
+<span class="c1">##                sety = sety | set(y)</span>
+<span class="c1">##            if x != [] or y != []:</span>
+<span class="c1">##                ordering.append( ( (Decimal(str(i+1)),x),(Decimal(str(n-i)),y) ) )</span>
 <span class="c1">##        if 2*n2 &lt; n:</span>
-<span class="c1">##            x = ordering[i][0][1]</span>
-<span class="c1">##            y = ordering[i][1][1]</span>
-<span class="c1">##            if x != []:</span>
-<span class="c1">##                orderingList.append(x)</span>
-<span class="c1">##            if y != []:</span>
-<span class="c1">##                orderingList.append(y)</span>
-<span class="c1">##        for i in range(n2):</span>
-<span class="c1">##            y = ordering[n2-i-1][1][1]</span>
-<span class="c1">##            if y != []:</span>
-<span class="c1">##                orderingList.append(y)</span>
-<span class="c1">##            </span>
-        
-        <span class="n">weakOrdering</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;result&#39;</span><span class="p">:</span><span class="n">ordering</span><span class="p">}</span>
+<span class="c1">##            if n2 == 0:</span>
+<span class="c1">##                x = cC[cCKeys[n2]]</span>
+<span class="c1">##            else:</span>
+<span class="c1">##                x = list(set(cC[cCKeys[n2]]) - (setx | sety))</span>
+<span class="c1">##            ordering.append( ( (Decimal(str(n2+1)),x),(Decimal(str(n2+1)),x) ) )</span>
+<span class="c1">##</span>
+<span class="c1">####        orderingList = []</span>
+<span class="c1">####        for i in range(n2):</span>
+<span class="c1">####            x = ordering[i][0][1]</span>
+<span class="c1">####            if x != []:</span>
+<span class="c1">####                orderingList.append(x)</span>
+<span class="c1">####        if 2*n2 &lt; n:</span>
+<span class="c1">####            x = ordering[i][0][1]</span>
+<span class="c1">####            y = ordering[i][1][1]</span>
+<span class="c1">####            if x != []:</span>
+<span class="c1">####                orderingList.append(x)</span>
+<span class="c1">####            if y != []:</span>
+<span class="c1">####                orderingList.append(y)</span>
+<span class="c1">####        for i in range(n2):</span>
+<span class="c1">####            y = ordering[n2-i-1][1][1]</span>
+<span class="c1">####            if y != []:</span>
+<span class="c1">####                orderingList.append(y)</span>
+<span class="c1">####            </span>
+<span class="c1">##        </span>
+<span class="c1">##        weakOrdering = {&#39;result&#39;:ordering}</span>
+<span class="c1">##</span>
+<span class="c1">##        WeakOrder.showWeakOrder(self,weakOrdering)</span>
+<span class="c1">##</span>
+<span class="c1">####        return orderingList</span>
 
-        <span class="n">WeakOrder</span><span class="o">.</span><span class="n">showWeakOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">weakOrdering</span><span class="p">)</span></div>
+<span class="c1">##    def _computeQuantileOrdering(self,strategy=None,</span>
+<span class="c1">##                                Descending=True,</span>
+<span class="c1">##                                Debug=False):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Renders the </span>
+<span class="c1">##        *Parameters*:</span>
+<span class="c1">##            * Descending: listing in *decreasing* (default) or *increasing* quantile order.</span>
+<span class="c1">##            * strategy: ordering in an {&#39;optimistic&#39; | &#39;pessimistic&#39; | &#39;average&#39; (default)}</span>
+<span class="c1">##              in the uppest, the lowest or the average potential quantile.</span>
+<span class="c1">##        </span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        if strategy == None:</span>
+<span class="c1">##            try:</span>
+<span class="c1">##                strategy = self.sortingParameters[&#39;strategy&#39;]</span>
+<span class="c1">##            except:</span>
+<span class="c1">##                strategy = &#39;average&#39;</span>
+<span class="c1">##        actionsCategories = {}</span>
+<span class="c1">##        for x in self.actions:</span>
+<span class="c1">##            a,lowCateg,highCateg,credibility =\</span>
+<span class="c1">##                     self.showActionCategories(x,Comments=Debug)</span>
+<span class="c1">##            if strategy == &quot;optimistic&quot;:</span>
+<span class="c1">##                try:</span>
+<span class="c1">##                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)</span>
+<span class="c1">##                except:</span>
+<span class="c1">##                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]</span>
+<span class="c1">##            elif strategy == &quot;pessimistic&quot;:</span>
+<span class="c1">##                try:</span>
+<span class="c1">##                    actionsCategories[(int(lowCateg),int(highCateg))].append(a)</span>
+<span class="c1">##                except:</span>
+<span class="c1">##                    actionsCategories[(int(lowCateg),int(highCateg))] = [a]</span>
+<span class="c1">##            elif strategy == &quot;average&quot;:</span>
+<span class="c1">##                lc = float(lowCateg)</span>
+<span class="c1">##                hc = float(highCateg)</span>
+<span class="c1">##                ac = (lc+hc)/2.0</span>
+<span class="c1">##                try:</span>
+<span class="c1">##                    actionsCategories[(ac,int(highCateg),int(lowCateg))].append(a)</span>
+<span class="c1">##                except:</span>
+<span class="c1">##                    actionsCategories[(ac,int(highCateg),int(lowCateg))] = [a]</span>
+<span class="c1">##            else:  # optimistic by default</span>
+<span class="c1">##                try:</span>
+<span class="c1">##                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)</span>
+<span class="c1">##                except:</span>
+<span class="c1">##                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]      </span>
+<span class="c1">##                </span>
+<span class="c1">##        actionsCategIntervals = []</span>
+<span class="c1">##        for interval in actionsCategories:</span>
+<span class="c1">##            actionsCategIntervals.append([interval,\</span>
+<span class="c1">##                                          actionsCategories[interval]])</span>
+<span class="c1">##        actionsCategIntervals.sort(reverse=Descending)</span>
+<span class="c1">##</span>
+<span class="c1">##        return actionsCategIntervals</span>
 
-<span class="c1">##        return orderingList</span>
-
-    <span class="k">def</span> <span class="nf">_computeQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                                <span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="IncrementalRatingDigraph.computeRefinedActionCategories"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingDigraph.computeRefinedActionCategories">[docs]</a>    <span class="k">def</span> <span class="nf">computeRefinedActionCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">Show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
+                             <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Renders the </span>
+<span class="sd">        Renders the union of categories in which the given action is sorted positively or null into.</span>
+<span class="sd">        Returns a tuple : action, lowest category key, highest category key, membership credibility !</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#qs = self.qs</span>
+        <span class="c1">#qs = self</span>
+        <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
+        <span class="n">categories</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">categories</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">sortinga</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sorting</span><span class="p">[</span><span class="n">action</span><span class="p">]</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">sorting</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeSortingCharacteristics</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="n">action</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span>\
+                                                   <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span>\
+                                                   <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
+            <span class="n">sortinga</span> <span class="o">=</span> <span class="n">sorting</span><span class="p">[</span><span class="n">action</span><span class="p">]</span>
+            
+        <span class="n">keys</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">categories</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="c1">#for c in self.orderedCategoryKeys():</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span><span class="n">sortinga</span><span class="p">[</span><span class="n">c</span><span class="p">])</span>
+            <span class="n">Above</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="n">sortinga</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;categoryMembership&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">Med</span><span class="p">:</span>
+                <span class="n">Above</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">if</span> <span class="n">sortinga</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
+                    <span class="n">lowLimit</span> <span class="o">=</span> <span class="n">sortinga</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">sortinga</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;notHighLimit&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
+                    <span class="n">notHighLimit</span> <span class="o">=</span> <span class="n">sortinga</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;notHighLimit&#39;</span><span class="p">]</span>    
+                <span class="n">keys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">sortinga</span><span class="p">[</span><span class="n">c</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">Above</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">credibility</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">lowLimit</span><span class="p">,</span><span class="n">notHighLimit</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">credibility</span> <span class="o">=</span> <span class="n">Med</span>
+            <span class="n">notHighLimit</span> <span class="o">=</span> <span class="n">Med</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        
+        <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Show</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> - </span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1"> with credibility: </span><span class="si">%.2f</span><span class="s1"> = min(</span><span class="si">%.2f</span><span class="s1">,</span><span class="si">%.2f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span>\
+                                     <span class="n">categories</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">],</span>\
+                                     <span class="n">categories</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="s1">&#39;highLimit&#39;</span><span class="p">],</span>\
+                                     <span class="n">action</span><span class="p">,</span>\
+                                     <span class="n">credibility</span><span class="p">,</span><span class="n">lowLimit</span><span class="p">,</span><span class="n">notHighLimit</span><span class="p">)</span> <span class="p">)</span>
+            <span class="k">return</span> <span class="n">action</span><span class="p">,</span>\
+                    <span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>\
+                    <span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>\
+                    <span class="n">credibility</span><span class="p">,</span>\
+                    <span class="n">lowLimit</span><span class="p">,</span>\
+                    <span class="n">notHighLimit</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Show</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> - </span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1"> with credibility: </span><span class="si">%.2f</span><span class="s1"> = min(</span><span class="si">%.2f</span><span class="s1">,</span><span class="si">%.2f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span>\
+                                     <span class="n">categories</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">],</span>\
+                                     <span class="n">categories</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;highLimit&#39;</span><span class="p">],</span>\
+                                     <span class="n">action</span><span class="p">,</span>\
+                                     <span class="n">credibility</span><span class="p">,</span><span class="n">lowLimit</span><span class="p">,</span><span class="n">notHighLimit</span><span class="p">)</span> <span class="p">)</span>
+            <span class="k">return</span> <span class="n">action</span><span class="p">,</span>\
+                    <span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>\
+                    <span class="n">keys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>\
+                    <span class="n">credibility</span><span class="p">,</span>\
+                    <span class="n">lowLimit</span><span class="p">,</span>\
+                    <span class="n">notHighLimit</span></div>
+
+
+<div class="viewcode-block" id="IncrementalRatingDigraph.computeRefinedQuantileOrdering"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingDigraph.computeRefinedQuantileOrdering">[docs]</a>    <span class="k">def</span> <span class="nf">computeRefinedQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                       <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                <span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                 <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                 <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                 <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders the quantile interval of the decision actions.</span>
+<span class="sd">        </span>
 <span class="sd">        *Parameters*:</span>
+<span class="sd">            * QuantilesdSortingDigraph instance</span>
 <span class="sd">            * Descending: listing in *decreasing* (default) or *increasing* quantile order.</span>
 <span class="sd">            * strategy: ordering in an {&#39;optimistic&#39; | &#39;pessimistic&#39; | &#39;average&#39; (default)}</span>
 <span class="sd">              in the uppest, the lowest or the average potential quantile.</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">itemgetter</span>
         <span class="k">if</span> <span class="n">strategy</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">strategy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sortingParameters</span><span class="p">[</span><span class="s1">&#39;strategy&#39;</span><span class="p">]</span>
-            <span class="k">except</span><span class="p">:</span>
-                <span class="n">strategy</span> <span class="o">=</span> <span class="s1">&#39;average&#39;</span>
+            <span class="n">strategy</span> <span class="o">=</span> <span class="s1">&#39;average&#39;</span>
         <span class="n">actionsCategories</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
-            <span class="n">a</span><span class="p">,</span><span class="n">lowCateg</span><span class="p">,</span><span class="n">highCateg</span><span class="p">,</span><span class="n">credibility</span> <span class="o">=</span>\
-                     <span class="bp">self</span><span class="o">.</span><span class="n">showActionCategories</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">newActions</span><span class="p">:</span>
+            <span class="n">a</span><span class="p">,</span><span class="n">lowCateg</span><span class="p">,</span><span class="n">highCateg</span><span class="p">,</span><span class="n">credibility</span><span class="p">,</span><span class="n">lowLimit</span><span class="p">,</span><span class="n">notHighLimit</span> <span class="o">=</span>\
+                     <span class="bp">self</span><span class="o">.</span><span class="n">computeRefinedActionCategories</span><span class="p">(</span><span class="n">x</span><span class="p">,</span>\
+                                               <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span>\
+                                               <span class="n">nbrOfCPUs</span> <span class="o">=</span> <span class="n">nbrOfCPUs</span><span class="p">)</span>
+            <span class="n">lowQtileLimit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="n">lowCateg</span><span class="p">][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">]</span>
+            <span class="n">highQtileLimit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="n">highCateg</span><span class="p">][</span><span class="s1">&#39;highLimit&#39;</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s2">&quot;optimistic&quot;</span><span class="p">:</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">actionsCategories</span><span class="p">[(</span><span class="nb">int</span><span class="p">(</span><span class="n">highCateg</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">lowCateg</span><span class="p">))]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-                <span class="k">except</span><span class="p">:</span>
-                    <span class="n">actionsCategories</span><span class="p">[(</span><span class="nb">int</span><span class="p">(</span><span class="n">highCateg</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">lowCateg</span><span class="p">))]</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+                <span class="n">score1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">highCateg</span><span class="p">)</span>
+                <span class="n">score2</span> <span class="o">=</span> <span class="o">-</span><span class="n">notHighLimit</span>
+                <span class="n">score3</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">lowCateg</span><span class="p">)</span>
+                <span class="n">score4</span> <span class="o">=</span> <span class="n">lowLimit</span>
             <span class="k">elif</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s2">&quot;pessimistic&quot;</span><span class="p">:</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">actionsCategories</span><span class="p">[(</span><span class="nb">int</span><span class="p">(</span><span class="n">lowCateg</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">highCateg</span><span class="p">))]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-                <span class="k">except</span><span class="p">:</span>
-                    <span class="n">actionsCategories</span><span class="p">[(</span><span class="nb">int</span><span class="p">(</span><span class="n">lowCateg</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">highCateg</span><span class="p">))]</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
-            <span class="k">elif</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s2">&quot;average&quot;</span><span class="p">:</span>
+                <span class="n">score1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">lowCateg</span><span class="p">)</span>
+                <span class="n">score2</span> <span class="o">=</span> <span class="n">lowLimit</span>
+                <span class="n">score3</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">highCateg</span><span class="p">)</span>
+                <span class="n">score4</span> <span class="o">=</span> <span class="o">-</span><span class="n">notHighLimit</span>
+            <span class="k">else</span><span class="p">:</span>   <span class="c1">#strategy == &quot;average&quot;:</span>
                 <span class="n">lc</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">lowCateg</span><span class="p">)</span>
                 <span class="n">hc</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">highCateg</span><span class="p">)</span>
-                <span class="n">ac</span> <span class="o">=</span> <span class="p">(</span><span class="n">lc</span><span class="o">+</span><span class="n">hc</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">actionsCategories</span><span class="p">[(</span><span class="n">ac</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">highCateg</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">lowCateg</span><span class="p">))]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-                <span class="k">except</span><span class="p">:</span>
-                    <span class="n">actionsCategories</span><span class="p">[(</span><span class="n">ac</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">highCateg</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">lowCateg</span><span class="p">))]</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
-            <span class="k">else</span><span class="p">:</span>  <span class="c1"># optimistic by default</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">actionsCategories</span><span class="p">[(</span><span class="nb">int</span><span class="p">(</span><span class="n">highCateg</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">lowCateg</span><span class="p">))]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-                <span class="k">except</span><span class="p">:</span>
-                    <span class="n">actionsCategories</span><span class="p">[(</span><span class="nb">int</span><span class="p">(</span><span class="n">highCateg</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">lowCateg</span><span class="p">))]</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>      
-                
-        <span class="n">actionsCategIntervals</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">actionsCategories</span><span class="p">:</span>
-            <span class="n">actionsCategIntervals</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">interval</span><span class="p">,</span>\
-                                          <span class="n">actionsCategories</span><span class="p">[</span><span class="n">interval</span><span class="p">]])</span>
-        <span class="n">actionsCategIntervals</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="n">Descending</span><span class="p">)</span>
+                <span class="n">score1</span> <span class="o">=</span> <span class="p">(</span><span class="n">lc</span><span class="o">+</span><span class="n">hc</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span>
+                <span class="n">score2</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">highCateg</span><span class="p">)</span>
+                <span class="n">score3</span> <span class="o">=</span> <span class="n">lowLimit</span> <span class="o">-</span> <span class="n">notHighLimit</span>
+                <span class="n">score4</span> <span class="o">=</span> <span class="o">-</span><span class="n">notHighLimit</span>
+            <span class="c1">#print(score1,highQtileLimit,lowQtileLimit,lowCateg,highCateg,score2,score3,score4)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">actionsCategories</span><span class="p">[(</span><span class="n">score1</span><span class="p">,</span><span class="n">highQtileLimit</span><span class="p">,</span>\
+                                   <span class="n">lowQtileLimit</span><span class="p">,</span><span class="n">lowCateg</span><span class="p">,</span><span class="n">highCateg</span><span class="p">,</span><span class="n">score2</span><span class="p">,</span><span class="n">score3</span><span class="p">,</span><span class="n">score4</span><span class="p">)]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">actionsCategories</span><span class="p">[(</span><span class="n">score1</span><span class="p">,</span><span class="n">highQtileLimit</span><span class="p">,</span>\
+                                   <span class="n">lowQtileLimit</span><span class="p">,</span><span class="n">lowCateg</span><span class="p">,</span><span class="n">highCateg</span><span class="p">,</span><span class="n">score2</span><span class="p">,</span><span class="n">score3</span><span class="p">,</span><span class="n">score4</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
 
-        <span class="k">return</span> <span class="n">actionsCategIntervals</span>
+        <span class="n">actionsCategIntervals</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">actionsCategories</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">actionsCategIntervals</span><span class="p">)</span>
+        <span class="n">compSize</span> <span class="o">=</span> <span class="n">minimalComponentSize</span>
+        
+        <span class="k">if</span> <span class="n">compSize</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Descending</span><span class="p">:</span>
+                <span class="n">componentsIntervals</span> <span class="o">=</span> <span class="p">[[(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span><span class="n">actionsCategories</span><span class="p">[</span><span class="n">item</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="mi">4</span><span class="p">]]</span>\
+                                   <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">actionsCategIntervals</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">componentsIntervals</span> <span class="o">=</span> <span class="p">[[(</span><span class="n">item</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span><span class="n">actionsCategories</span><span class="p">[</span><span class="n">item</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="mi">4</span><span class="p">]]</span>\
+                                   <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">actionsCategIntervals</span><span class="p">]</span>
+                
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">componentsIntervals</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">nc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actionsCategIntervals</span><span class="p">)</span>
+            <span class="n">compContent</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc</span><span class="p">):</span>
+                <span class="n">currContLength</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">compContent</span><span class="p">)</span>
+                <span class="n">comp</span> <span class="o">=</span> <span class="n">actionsCategIntervals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="c1">#print(comp)</span>
+                <span class="k">if</span> <span class="n">currContLength</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">lowQtileLimit</span> <span class="o">=</span> <span class="n">comp</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="n">highQtileLimit</span> <span class="o">=</span> <span class="n">comp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>             
+                <span class="n">compContent</span> <span class="o">+=</span> <span class="n">actionsCategories</span><span class="p">[</span><span class="n">comp</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">compContent</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">compSize</span> <span class="ow">or</span> <span class="n">i</span> <span class="o">==</span> <span class="n">nc</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">score</span> <span class="o">=</span> <span class="n">comp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">lowCateg</span> <span class="o">=</span> <span class="n">comp</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+                    <span class="n">highCateg</span> <span class="o">=</span> <span class="n">comp</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">Descending</span><span class="p">:</span>
+                        <span class="n">componentsIntervals</span><span class="o">.</span><span class="n">append</span><span class="p">([(</span><span class="n">highQtileLimit</span><span class="p">,</span><span class="n">lowQtileLimit</span><span class="p">),</span><span class="n">compContent</span><span class="p">,</span>\
+                                                    <span class="n">score</span><span class="p">,</span><span class="n">lowCateg</span><span class="p">,</span><span class="n">highCateg</span><span class="p">])</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">componentsIntervals</span><span class="o">.</span><span class="n">append</span><span class="p">([(</span><span class="n">lowQtileLimit</span><span class="p">,</span><span class="n">highQtileLimit</span><span class="p">),</span><span class="n">compContent</span><span class="p">,</span>\
+                                                    <span class="n">score</span><span class="p">,</span><span class="n">lowCateg</span><span class="p">,</span><span class="n">highCateg</span><span class="p">])</span>
+                    <span class="n">compContent</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">componentsIntervals</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">componentsIntervals</span>        </div>
 
 
 <div class="viewcode-block" id="IncrementalRatingDigraph.computeQuantileOrdering"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingDigraph.computeQuantileOrdering">[docs]</a>    <span class="k">def</span> <span class="nf">computeQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -4401,7 +4577,7 @@
         <span class="n">actionsCategories</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">getActionsKeys</span><span class="p">():</span>
             <span class="n">a</span><span class="p">,</span><span class="n">lowCateg</span><span class="p">,</span><span class="n">highCateg</span><span class="p">,</span><span class="n">credibility</span> <span class="o">=</span>\
-                     <span class="bp">self</span><span class="o">.</span><span class="n">showActionCategories</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
+                     <span class="bp">self</span><span class="o">.</span><span class="n">computeActionCategories</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s2">&quot;optimistic&quot;</span><span class="p">:</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">actionsCategories</span><span class="p">[(</span><span class="nb">int</span><span class="p">(</span><span class="n">highCateg</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">lowCateg</span><span class="p">))]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
@@ -4505,6 +4681,12 @@
 <span class="sd">        Dummy show method for the commenting computeQuantileOrdering() method.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">computeQuantileOrdering</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="n">strategy</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IncrementalRatingDigraph.showRefinedQuantileOrdering"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingDigraph.showRefinedQuantileOrdering">[docs]</a>    <span class="k">def</span> <span class="nf">showRefinedQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Dummy show method for the commenting computeQuantileOrdering() method.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">computeRefinedQuantileOrdering</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="n">strategy</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="IncrementalRatingDigraph.computeWeakOrder"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.IncrementalRatingDigraph.computeWeakOrder">[docs]</a>    <span class="k">def</span> <span class="nf">computeWeakOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -5134,7 +5316,7 @@
 <span class="s2">    ****************************************************</span>
 <span class="s2">    * Python sortingDigraphs module                    *</span>
 <span class="s2">    * depends on BipolarOutrankingDigraph and          *</span>
-<span class="s2">    * $Revision: 2328 $                                 *</span>
+<span class="s2">    * $Revision: 2330 $                                 *</span>
 <span class="s2">    * Copyright (C) 2010 Raymond Bisdorff              *</span>
 <span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
 <span class="s2">    * to the extent permitted by the applicable law.   *</span>
@@ -5250,11 +5432,11 @@
     <span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
     <span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">21</span>
     <span class="n">tp</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>\
-                                    <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
-    <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="s1">&#39;heptiles&#39;</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">instanceCounter</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
+                                    <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
     <span class="n">newActions</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
         <span class="n">newAction</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomAction</span><span class="p">()</span>
         <span class="n">newActions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newAction</span><span class="p">)</span>
     <span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
@@ -5262,10 +5444,11 @@
                                    <span class="n">CompleteOutranking</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">ira</span><span class="o">.</span><span class="n">showSorting</span><span class="p">()</span>
     <span class="n">ira</span><span class="o">.</span><span class="n">showHTMLSorting</span><span class="p">()</span>
-    <span class="n">ira</span><span class="o">.</span><span class="n">showActionsSortingResult</span><span class="p">()</span>
-    <span class="n">ira</span><span class="o">.</span><span class="n">showQuantileOrdering</span><span class="p">()</span>
-    <span class="n">ira</span><span class="o">.</span><span class="n">showOrderedRelationTable</span><span class="p">()</span>
-    <span class="n">ira</span><span class="o">.</span><span class="n">showSortingCharacteristics</span><span class="p">()</span>
+    <span class="c1">#ira.showActionsSortingResult()</span>
+    <span class="c1">#ira.showQuantileOrdering()</span>
+    <span class="n">ira</span><span class="o">.</span><span class="n">showRefinedQuantileOrdering</span><span class="p">()</span>
+    <span class="c1">#ira.showOrderedRelationTable()</span>
+    <span class="c1">#ira.showSortingCharacteristics()</span>
     <span class="n">ira</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heat map of performances&#39;</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
@@ -5273,7 +5456,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. december 2010                *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2328 $                  *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2330 $                  *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>

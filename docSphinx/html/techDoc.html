@@ -6295,7 +6295,7 @@ the diagonal outranking components of the sparse outranking digraph.</p>
 <span id="sortingdigraphs-module"></span><span id="sortingdigraphs-label"></span><h2>sortingDigraphs module<a class="headerlink" href="#module-sortingDigraphs" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="sortingDigraphs.IncrementalRatingDigraph">
-<em class="property">class </em><code class="descclassname">sortingDigraphs.</code><code class="descname">IncrementalRatingDigraph</code><span class="sig-paren">(</span><em>argPerfQuantiles=None</em>, <em>newData=None</em>, <em>hasNoVeto=True</em>, <em>outrankingType='bipolar'</em>, <em>valuationScale=(-1</em>, <em>1)</em>, <em>WithSortingRelation=False</em>, <em>CompleteOutranking=True</em>, <em>StoreSorting=True</em>, <em>CopyPerfTab=False</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrCores=None</em>, <em>nbrOfProcesses=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sortingDigraphs.</code><code class="descname">IncrementalRatingDigraph</code><span class="sig-paren">(</span><em>argPerfQuantiles=None</em>, <em>newData=None</em>, <em>hasNoVeto=False</em>, <em>outrankingType='bipolar'</em>, <em>valuationScale=(-1</em>, <em>1)</em>, <em>WithSortingRelation=False</em>, <em>CompleteOutranking=True</em>, <em>StoreSorting=True</em>, <em>CopyPerfTab=False</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrCores=None</em>, <em>nbrOfProcesses=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#sortingDigraphs.SortingDigraph" title="sortingDigraphs.SortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.SortingDigraph</span></code></a>, <a class="reference internal" href="#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a></p>
 <p>Specialisation of the sortingDigraph Class
 for absolute rating of a new set of decision actions with
@@ -6376,6 +6376,13 @@ incremental performance quantiles gathered from historical data.</p>
 </dl>
 <a class="reference internal image-reference" href="_images/exampleIncRatDigraph.png"><img alt="usage example of Incremental Rating Digraph" class="align-center" src="_images/exampleIncRatDigraph.png" style="width: 500px;" /></a>
 <dl class="method">
+<dt id="sortingDigraphs.IncrementalRatingDigraph.computeActionCategories">
+<code class="descname">computeActionCategories</code><span class="sig-paren">(</span><em>action</em>, <em>Debug=False</em>, <em>Comments=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.computeActionCategories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.computeActionCategories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the union of categories in which the given action is sorted positively or null into.
+Returns a tuple : action, lowest category key, highest category key, membership credibility !</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="sortingDigraphs.IncrementalRatingDigraph.computeCategoryContents">
 <code class="descname">computeCategoryContents</code><span class="sig-paren">(</span><em>Reverse=False</em>, <em>Comments=False</em>, <em>StoreSorting=True</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.computeCategoryContents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.computeCategoryContents" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the sorting results per category.</p>
@@ -6389,6 +6396,29 @@ incremental performance quantiles gathered from historical data.</p>
 <dd><ul class="first last simple">
 <li>Descending: listing in <em>decreasing</em> (default) or <em>increasing</em> quantile order.</li>
 <li>strategy: ordering in an {&#8216;optimistic&#8217; (default) | &#8216;pessimistic&#8217; | &#8216;average&#8217;}
+in the uppest, the lowest or the average potential quantile.</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.IncrementalRatingDigraph.computeRefinedActionCategories">
+<code class="descname">computeRefinedActionCategories</code><span class="sig-paren">(</span><em>action</em>, <em>Show=False</em>, <em>Debug=False</em>, <em>Comments=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.computeRefinedActionCategories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.computeRefinedActionCategories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the union of categories in which the given action is sorted positively or null into.
+Returns a tuple : action, lowest category key, highest category key, membership credibility !</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.IncrementalRatingDigraph.computeRefinedQuantileOrdering">
+<code class="descname">computeRefinedQuantileOrdering</code><span class="sig-paren">(</span><em>strategy=None</em>, <em>minimalComponentSize=1</em>, <em>Descending=True</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.computeRefinedQuantileOrdering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.computeRefinedQuantileOrdering" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the quantile interval of the decision actions.</p>
+<dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last simple">
+<li>QuantilesdSortingDigraph instance</li>
+<li>Descending: listing in <em>decreasing</em> (default) or <em>increasing</em> quantile order.</li>
+<li>strategy: ordering in an {&#8216;optimistic&#8217; | &#8216;pessimistic&#8217; | &#8216;average&#8217; (default)}
 in the uppest, the lowest or the average potential quantile.</li>
 </ul>
 </dd>
@@ -6478,6 +6508,12 @@ Returns a tuple : action, lowest category key, highest category key, membership 
 </dd></dl>
 
 <dl class="method">
+<dt id="sortingDigraphs.IncrementalRatingDigraph.showRefinedQuantileOrdering">
+<code class="descname">showRefinedQuantileOrdering</code><span class="sig-paren">(</span><em>strategy=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.showRefinedQuantileOrdering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.showRefinedQuantileOrdering" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dummy show method for the commenting computeQuantileOrdering() method.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="sortingDigraphs.IncrementalRatingDigraph.showSorting">
 <code class="descname">showSorting</code><span class="sig-paren">(</span><em>Reverse=True</em>, <em>isReturningHTML=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.showSorting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.showSorting" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shows sorting results in decreasing or increasing (Reverse=False)
@@ -6493,12 +6529,6 @@ representing the degree of credibility of the
 assertion that &#8220;action x in A belongs to category c in C&#8221;,
 ie x outranks low category limit and does not outrank
 the high category limit.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="sortingDigraphs.IncrementalRatingDigraph.showWeakOrder">
-<code class="descname">showWeakOrder</code><span class="sig-paren">(</span><em>Descending=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.showWeakOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.showWeakOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Specialisation for QuantilesSortingDigraphs.</p>
 </dd></dl>
 
 </dd></dl>
