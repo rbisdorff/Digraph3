@@ -51,7 +51,7 @@
 <span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># Python implementation of digraphs</span>
-<span class="c1"># Current revision $Revision: 2332 $</span>
+<span class="c1"># Current revision $Revision: 2334 $</span>
 <span class="c1"># Copyright (C) 2006-2008  Raymond Bisdorff</span>
 <span class="c1">#</span>
 <span class="c1">#    This program is free software; you can redistribute it and/or modify</span>
@@ -5323,11 +5323,12 @@
 <span class="sd">        &gt;&gt;&gt; from randomPerfTabs import RandomCBPerformanceTableau</span>
 <span class="sd">        &gt;&gt;&gt; nbrActions=1000</span>
 <span class="sd">        &gt;&gt;&gt; nbrCrit = 13</span>
-<span class="sd">        &gt;&gt;&gt; tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,numberOfCriteria=nbrCrit,seed=None)</span>
+<span class="sd">        &gt;&gt;&gt; seed = 100</span>
+<span class="sd">        &gt;&gt;&gt; tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,numberOfCriteria=nbrCrit,seed=seed)</span>
 <span class="sd">        &gt;&gt;&gt; pq = PerformanceQuantiles(tp,numberOfBins=&#39;deciles&#39;,LowerClosed=True,Debug=False)</span>
 <span class="sd">        &gt;&gt;&gt; # new incoming decision actions of the same kind</span>
 <span class="sd">        &gt;&gt;&gt; from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator</span>
-<span class="sd">        &gt;&gt;&gt; tpg = PerfTabGenerator(tp,instanceCounter=0,seed=105)</span>
+<span class="sd">        &gt;&gt;&gt; tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)</span>
 <span class="sd">        &gt;&gt;&gt; newActions = []</span>
 <span class="sd">        &gt;&gt;&gt; for i in range(10):</span>
 <span class="sd">        ...     newAction = tpg.randomAction()</span>
@@ -5335,51 +5336,13 @@
 <span class="sd">        &gt;&gt;&gt; # rating the new set of decision actions after</span>
 <span class="sd">        &gt;&gt;&gt; # updating the historical performance quantiles</span>
 <span class="sd">        &gt;&gt;&gt; pq.updateQuantiles(newActions,historySize=None)</span>
-<span class="sd">        &gt;&gt;&gt; ird = IncrementalRatingDigraph(pq,newActions,CompleteOutranking=True,Debug=True)</span>
+<span class="sd">        &gt;&gt;&gt; neq = NormeQuantilesRatingDigraph(pq,newActions,Debug=True)</span>
 <span class="sd">        &gt;&gt;&gt; # inspecting the rating result</span>
-<span class="sd">        &gt;&gt;&gt; ird.showActionsSortingResult()</span>
-<span class="sd">          Quantiles sorting result per decision action</span>
-<span class="sd">          [0.40 - 0.50[: a1 with credibility: 0.07 = min(0.10,0.07)</span>
-<span class="sd">          [0.50 - 0.60[: a2 with credibility: 0.14 = min(0.17,0.14)</span>
-<span class="sd">          [0.40 - 0.50[: a3 with credibility: 0.10 = min(0.10,0.14)</span>
-<span class="sd">          [0.60 - 0.70[: a4 with credibility: 0.14 = min(0.14,0.19)</span>
-<span class="sd">          [0.40 - 0.50[: a5 with credibility: 0.19 = min(0.40,0.19)</span>
-<span class="sd">          [0.30 - 0.40[: a6 with credibility: 0.02 = min(0.33,0.02)</span>
-<span class="sd">          [0.30 - 0.40[: a7 with credibility: 0.12 = min(0.44,0.12)</span>
-<span class="sd">          [0.50 - 0.60[: a8 with credibility: 0.05 = min(0.05,0.26)</span>
-<span class="sd">          [0.20 - 0.30[: a9 with credibility: 0.18 = min(0.18,0.18)</span>
-<span class="sd">          [0.50 - 0.60[: a10 with credibility: 0.04 = min(0.19,0.04)</span>
-<span class="sd">        &gt;&gt;&gt; ird.showSorting()</span>
-<span class="sd">          [0.90 - &lt;[: 	 []</span>
-<span class="sd">          [0.80 - 0.90[: 	 []</span>
-<span class="sd">          [0.70 - 0.80[: 	 []</span>
-<span class="sd">          [0.60 - 0.70[: 	 [&#39;a4&#39;]</span>
-<span class="sd">          [0.50 - 0.60[: 	 [&#39;a10&#39;, &#39;a2&#39;, &#39;a8&#39;]</span>
-<span class="sd">          [0.40 - 0.50[: 	 [&#39;a1&#39;, &#39;a3&#39;, &#39;a5&#39;]</span>
-<span class="sd">          [0.30 - 0.40[: 	 [&#39;a6&#39;, &#39;a7&#39;]</span>
-<span class="sd">          [0.20 - 0.30[: 	 [&#39;a9&#39;]</span>
-<span class="sd">          [0.10 - 0.20[: 	 []</span>
-<span class="sd">          [0.00 - 0.10[: 	 []    </span>
-<span class="sd">        &gt;&gt;&gt; ird.showQuantileOrdering()</span>
-<span class="sd">          [0.60-0.70[ : [&#39;a4&#39;]</span>
-<span class="sd">          [0.50-0.60[ : [&#39;a10&#39;, &#39;a8&#39;, &#39;a2&#39;]</span>
-<span class="sd">          [0.40-0.50[ : [&#39;a1&#39;, &#39;a5&#39;, &#39;a3&#39;]</span>
-<span class="sd">          [0.30-0.40[ : [&#39;a6&#39;, &#39;a7&#39;]</span>
-<span class="sd">          [0.20-0.30[ : [&#39;a9&#39;]</span>
-<span class="sd">        &gt;&gt;&gt; ird.showOrderedRelationTable()</span>
-<span class="sd">          * ---- Relation Table -----</span>
-<span class="sd">          xRy |  &#39;a4&#39;	&#39;a10&#39;	 &#39;a2&#39;	 &#39;a8&#39;	 &#39;a1&#39;	 &#39;a3&#39;	 &#39;a5&#39;	 &#39;a6&#39;	 &#39;a7&#39;	 &#39;a9&#39;	  </span>
-<span class="sd">         -----|--------------------------------------------------------------------------------</span>
-<span class="sd">         &#39;a4&#39; |   - 	 0.31	 0.48	 0.62	 0.31	 0.31	 0.12	 0.12	 0.62	 0.35	 </span>
-<span class="sd">         &#39;a10&#39;|  -0.17	  - 	 0.24	 0.11	 0.15	-0.12	 0.33	 0.19	 0.24	 0.25	 </span>
-<span class="sd">         &#39;a2&#39; |  -0.48	-0.24	  - 	 0.02	 0.05	-0.14	 0.00	 0.02	 0.05	 0.08	 </span>
-<span class="sd">         &#39;a8&#39; |  -0.62	-0.02	 0.12	  - 	 0.07	 0.21	 0.19	 0.05	 0.38	 0.27	 </span>
-<span class="sd">         &#39;a1&#39; |  -0.31	-0.07	-0.05	-0.07	  - 	 0.07	-0.10	 0.05	 0.10	 0.18	 </span>
-<span class="sd">         &#39;a3&#39; |  -0.31	 0.12	 0.14	-0.21	-0.07	  - 	-0.10	-0.10	 0.12	 0.30	 </span>
-<span class="sd">         &#39;a5&#39; |  -0.12	-0.33	 0.07	-0.05	 0.10	 0.26	  - 	-0.10	 0.29	 0.46	 </span>
-<span class="sd">         &#39;a6&#39; |  -0.12	 0.06	-0.02	-0.05	 0.04	 0.10	 0.10	  - 	 0.12	 0.30	 </span>
-<span class="sd">         &#39;a7&#39; |  -0.45	-0.24	 0.12	-0.24	-0.10	 0.05	-0.12	-0.12	  - 	 0.27	 </span>
-<span class="sd">         &#39;a9&#39; |  -0.35	-0.25	-0.08	-0.27	-0.11	-0.30	-0.46	-0.15	-0.19	  - 	 </span>
+<span class="sd">        &gt;&gt;&gt; nrq.showQuantilesRating()</span>
+<span class="sd">         *-------- Normed quantiles rating result ---------</span>
+<span class="sd">         [0.50 - 0.60[ [&#39;a1&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a10&#39;, &#39;a2&#39;]</span>
+<span class="sd">         [0.40 - 0.50[ [&#39;a6&#39;, &#39;a9&#39;, &#39;a8&#39;]</span>
+<span class="sd">         [0.20 - 0.30[ [&#39;a4&#39;, &#39;a5&#39;]</span>
 <span class="sd">        &gt;&gt;&gt; ird.showHTMLPerformanceHeatmap(pageTitle=&#39;Heatmap of Quantiles Rating&#39;,Correlations=True)</span>
 
 <span class="sd">    .. image:: exampleIncRatDigraph.png</span>
@@ -5834,7 +5797,7 @@
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/body&gt;&lt;/html&gt;&#39;</span>
         <span class="k">return</span> <span class="n">html</span></div>
 
-<div class="viewcode-block" id="NormedQuantilesRatingDigraph.computeQuantileSorting"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.computeQuantileSorting">[docs]</a>    <span class="k">def</span> <span class="nf">computeQuantileSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="NormedQuantilesRatingDigraph.computeQuantilesRating"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.computeQuantilesRating">[docs]</a>    <span class="k">def</span> <span class="nf">computeQuantilesRating</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">          Renders an ordered dictionary of non empty quantiles in ascending order.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -5852,16 +5815,16 @@
                     <span class="n">quantileCategories</span><span class="p">[</span><span class="n">ranking</span><span class="p">[</span><span class="n">c</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="n">ranking</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
                     <span class="n">New</span> <span class="o">=</span> <span class="kc">False</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">quantileCategories</span><span class="p">[</span><span class="n">ranking</span><span class="p">[</span><span class="n">c</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ranking</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                    <span class="n">quantileCategories</span><span class="p">[</span><span class="n">ranking</span><span class="p">[</span><span class="n">c</span><span class="p">]]</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">ranking</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">New</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">quantileCategories</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">quantileCategories</span></div>
 
-<div class="viewcode-block" id="NormedQuantilesRatingDigraph.showQuantileSorting"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.showQuantileSorting">[docs]</a>    <span class="k">def</span> <span class="nf">showQuantileSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="n">quantileCategories</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeQuantileSorting</span><span class="p">(</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Quantile sorting result ---------&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="NormedQuantilesRatingDigraph.showQuantilesRating"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.showQuantilesRating">[docs]</a>    <span class="k">def</span> <span class="nf">showQuantilesRating</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">quantileCategories</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeQuantilesRating</span><span class="p">(</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Normed quantiles rating result ---------&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Descending</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">cat</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">quantileCategories</span><span class="p">):</span>
                 <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span><span class="p">[</span><span class="n">cat</span><span class="p">][</span><span class="s1">&#39;category&#39;</span><span class="p">]</span>
@@ -6344,7 +6307,7 @@
 <span class="s2">    ****************************************************</span>
 <span class="s2">    * Python sortingDigraphs module                    *</span>
 <span class="s2">    * depends on BipolarOutrankingDigraph and          *</span>
-<span class="s2">    * $Revision: 2332 $                                 *</span>
+<span class="s2">    * $Revision: 2334 $                                 *</span>
 <span class="s2">    * Copyright (C) 2010 Raymond Bisdorff              *</span>
 <span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
 <span class="s2">    * to the extent permitted by the applicable law.   *</span>
@@ -6449,18 +6412,18 @@
 <span class="c1">##    print(g.computeOrdinalCorrelation(qsrbc))</span>
     
     <span class="c1"># test incremental rating agent</span>
-<span class="c1">##    from randomPerfTabs import RandomCBPerformanceTableau</span>
-<span class="c1">##    from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator</span>
-<span class="c1">##    nbrActions=1000</span>
-<span class="c1">##    nbrCrit = 13</span>
-<span class="c1">##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\</span>
-<span class="c1">##                                    numberOfCriteria=nbrCrit,seed=105)</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">Random3ObjectivesPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
     <span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
-    <span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">21</span>
-    <span class="n">tp</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>\
-                                    <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">13</span>
+    <span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>\
+                                    <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
+<span class="c1">##    from randomPerfTabs import Random3ObjectivesPerformanceTableau</span>
+<span class="c1">##    from randomPerfTabs import Random3ObjectivesPerformanceGenerator as PerfTabGenerator</span>
+<span class="c1">##    nbrActions=1000</span>
+<span class="c1">##    nbrCrit = 21</span>
+<span class="c1">##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\</span>
+<span class="c1">##                                    numberOfCriteria=nbrCrit,seed=100)</span>
     <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
     <span class="n">newActions</span> <span class="o">=</span> <span class="p">[]</span>
@@ -6470,7 +6433,7 @@
     <span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
     <span class="n">ira</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span>\
                                    <span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">ira</span><span class="o">.</span><span class="n">showQuantileSorting</span><span class="p">()</span>
+    <span class="n">ira</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
     <span class="c1">#ira.showSorting()</span>
     <span class="c1">#ira.showHTMLSorting()</span>
     <span class="c1">#ira.showActionsSortingResult()</span>
@@ -6478,14 +6441,14 @@
     <span class="c1">#ira.showRefinedQuantileOrdering()</span>
     <span class="c1">#ira.showOrderedRelationTable()</span>
     <span class="c1">#ira.showSortingCharacteristics()</span>
-    <span class="n">ira</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heat map of performances&#39;</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ira</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heat map of quantiles rating&#39;</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enjoy !&#39;</span><span class="p">)</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. december 2010                *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2332 $                  *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2334 $                  *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>

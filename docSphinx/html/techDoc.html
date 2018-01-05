@@ -6552,11 +6552,12 @@ incremental performance quantiles gathered from historical data.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">13</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">seed</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">numberOfBins</span><span class="o">=</span><span class="s1">&#39;deciles&#39;</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># new incoming decision actions of the same kind</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">newActions</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">newAction</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomAction</span><span class="p">()</span>
@@ -6564,51 +6565,13 @@ incremental performance quantiles gathered from historical data.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># rating the new set of decision actions after</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># updating the historical performance quantiles</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span> <span class="o">=</span> <span class="n">IncrementalRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">CompleteOutranking</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">neq</span> <span class="o">=</span> <span class="n">NormeQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># inspecting the rating result</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span><span class="o">.</span><span class="n">showActionsSortingResult</span><span class="p">()</span>
-<span class="go">  Quantiles sorting result per decision action</span>
-<span class="go">  [0.40 - 0.50[: a1 with credibility: 0.07 = min(0.10,0.07)</span>
-<span class="go">  [0.50 - 0.60[: a2 with credibility: 0.14 = min(0.17,0.14)</span>
-<span class="go">  [0.40 - 0.50[: a3 with credibility: 0.10 = min(0.10,0.14)</span>
-<span class="go">  [0.60 - 0.70[: a4 with credibility: 0.14 = min(0.14,0.19)</span>
-<span class="go">  [0.40 - 0.50[: a5 with credibility: 0.19 = min(0.40,0.19)</span>
-<span class="go">  [0.30 - 0.40[: a6 with credibility: 0.02 = min(0.33,0.02)</span>
-<span class="go">  [0.30 - 0.40[: a7 with credibility: 0.12 = min(0.44,0.12)</span>
-<span class="go">  [0.50 - 0.60[: a8 with credibility: 0.05 = min(0.05,0.26)</span>
-<span class="go">  [0.20 - 0.30[: a9 with credibility: 0.18 = min(0.18,0.18)</span>
-<span class="go">  [0.50 - 0.60[: a10 with credibility: 0.04 = min(0.19,0.04)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span><span class="o">.</span><span class="n">showSorting</span><span class="p">()</span>
-<span class="go">  [0.90 - &lt;[:    []</span>
-<span class="go">  [0.80 - 0.90[:         []</span>
-<span class="go">  [0.70 - 0.80[:         []</span>
-<span class="go">  [0.60 - 0.70[:         [&#39;a4&#39;]</span>
-<span class="go">  [0.50 - 0.60[:         [&#39;a10&#39;, &#39;a2&#39;, &#39;a8&#39;]</span>
-<span class="go">  [0.40 - 0.50[:         [&#39;a1&#39;, &#39;a3&#39;, &#39;a5&#39;]</span>
-<span class="go">  [0.30 - 0.40[:         [&#39;a6&#39;, &#39;a7&#39;]</span>
-<span class="go">  [0.20 - 0.30[:         [&#39;a9&#39;]</span>
-<span class="go">  [0.10 - 0.20[:         []</span>
-<span class="go">  [0.00 - 0.10[:         []    </span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span><span class="o">.</span><span class="n">showQuantileOrdering</span><span class="p">()</span>
-<span class="go">  [0.60-0.70[ : [&#39;a4&#39;]</span>
-<span class="go">  [0.50-0.60[ : [&#39;a10&#39;, &#39;a8&#39;, &#39;a2&#39;]</span>
-<span class="go">  [0.40-0.50[ : [&#39;a1&#39;, &#39;a5&#39;, &#39;a3&#39;]</span>
-<span class="go">  [0.30-0.40[ : [&#39;a6&#39;, &#39;a7&#39;]</span>
-<span class="go">  [0.20-0.30[ : [&#39;a9&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span><span class="o">.</span><span class="n">showOrderedRelationTable</span><span class="p">()</span>
-<span class="go">  * ---- Relation Table -----</span>
-<span class="go">  xRy |  &#39;a4&#39;   &#39;a10&#39;    &#39;a2&#39;    &#39;a8&#39;    &#39;a1&#39;    &#39;a3&#39;    &#39;a5&#39;    &#39;a6&#39;    &#39;a7&#39;    &#39;a9&#39;     </span>
-<span class="go"> -----|--------------------------------------------------------------------------------</span>
-<span class="go"> &#39;a4&#39; |   -      0.31    0.48    0.62    0.31    0.31    0.12    0.12    0.62    0.35    </span>
-<span class="go"> &#39;a10&#39;|  -0.17    -      0.24    0.11    0.15   -0.12    0.33    0.19    0.24    0.25    </span>
-<span class="go"> &#39;a2&#39; |  -0.48  -0.24     -      0.02    0.05   -0.14    0.00    0.02    0.05    0.08    </span>
-<span class="go"> &#39;a8&#39; |  -0.62  -0.02    0.12     -      0.07    0.21    0.19    0.05    0.38    0.27    </span>
-<span class="go"> &#39;a1&#39; |  -0.31  -0.07   -0.05   -0.07     -      0.07   -0.10    0.05    0.10    0.18    </span>
-<span class="go"> &#39;a3&#39; |  -0.31   0.12    0.14   -0.21   -0.07     -     -0.10   -0.10    0.12    0.30    </span>
-<span class="go"> &#39;a5&#39; |  -0.12  -0.33    0.07   -0.05    0.10    0.26     -     -0.10    0.29    0.46    </span>
-<span class="go"> &#39;a6&#39; |  -0.12   0.06   -0.02   -0.05    0.04    0.10    0.10     -      0.12    0.30    </span>
-<span class="go"> &#39;a7&#39; |  -0.45  -0.24    0.12   -0.24   -0.10    0.05   -0.12   -0.12     -      0.27    </span>
-<span class="go"> &#39;a9&#39; |  -0.35  -0.25   -0.08   -0.27   -0.11   -0.30   -0.46   -0.15   -0.19     -      </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nrq</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
+<span class="go"> *-------- Normed quantiles rating result ---------</span>
+<span class="go"> [0.50 - 0.60[ [&#39;a1&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a10&#39;, &#39;a2&#39;]</span>
+<span class="go"> [0.40 - 0.50[ [&#39;a6&#39;, &#39;a9&#39;, &#39;a8&#39;]</span>
+<span class="go"> [0.20 - 0.30[ [&#39;a4&#39;, &#39;a5&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of Quantiles Rating&#39;</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -6616,8 +6579,8 @@ incremental performance quantiles gathered from historical data.</p>
 </dl>
 <a class="reference internal image-reference" href="_images/exampleIncRatDigraph.png"><img alt="usage example of Incremental Rating Digraph" class="align-center" src="_images/exampleIncRatDigraph.png" style="width: 500px;" /></a>
 <dl class="method">
-<dt id="sortingDigraphs.NormedQuantilesRatingDigraph.computeQuantileSorting">
-<code class="descname">computeQuantileSorting</code><span class="sig-paren">(</span><em>Debug=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.computeQuantileSorting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.computeQuantileSorting" title="Permalink to this definition">¶</a></dt>
+<dt id="sortingDigraphs.NormedQuantilesRatingDigraph.computeQuantilesRating">
+<code class="descname">computeQuantilesRating</code><span class="sig-paren">(</span><em>Debug=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.computeQuantilesRating"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.computeQuantilesRating" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders an ordered dictionary of non empty quantiles in ascending order.</p>
 </dd></dl>
 
@@ -6642,8 +6605,8 @@ actions x criteria in html format.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="sortingDigraphs.NormedQuantilesRatingDigraph.showQuantileSorting">
-<code class="descname">showQuantileSorting</code><span class="sig-paren">(</span><em>Descending=True</em>, <em>Debug=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.showQuantileSorting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.showQuantileSorting" title="Permalink to this definition">¶</a></dt>
+<dt id="sortingDigraphs.NormedQuantilesRatingDigraph.showQuantilesRating">
+<code class="descname">showQuantilesRating</code><span class="sig-paren">(</span><em>Descending=True</em>, <em>Debug=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.showQuantilesRating"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.showQuantilesRating" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
