@@ -5273,11 +5273,12 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
         >>> from randomPerfTabs import RandomCBPerformanceTableau
         >>> nbrActions=1000
         >>> nbrCrit = 13
-        >>> tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,numberOfCriteria=nbrCrit,seed=None)
+        >>> seed = 100
+        >>> tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,numberOfCriteria=nbrCrit,seed=seed)
         >>> pq = PerformanceQuantiles(tp,numberOfBins='deciles',LowerClosed=True,Debug=False)
         >>> # new incoming decision actions of the same kind
         >>> from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
-        >>> tpg = PerfTabGenerator(tp,instanceCounter=0,seed=105)
+        >>> tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
         >>> newActions = []
         >>> for i in range(10):
         ...     newAction = tpg.randomAction()
@@ -5285,51 +5286,13 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
         >>> # rating the new set of decision actions after
         >>> # updating the historical performance quantiles
         >>> pq.updateQuantiles(newActions,historySize=None)
-        >>> ird = IncrementalRatingDigraph(pq,newActions,CompleteOutranking=True,Debug=True)
+        >>> neq = NormeQuantilesRatingDigraph(pq,newActions,Debug=True)
         >>> # inspecting the rating result
-        >>> ird.showActionsSortingResult()
-          Quantiles sorting result per decision action
-          [0.40 - 0.50[: a1 with credibility: 0.07 = min(0.10,0.07)
-          [0.50 - 0.60[: a2 with credibility: 0.14 = min(0.17,0.14)
-          [0.40 - 0.50[: a3 with credibility: 0.10 = min(0.10,0.14)
-          [0.60 - 0.70[: a4 with credibility: 0.14 = min(0.14,0.19)
-          [0.40 - 0.50[: a5 with credibility: 0.19 = min(0.40,0.19)
-          [0.30 - 0.40[: a6 with credibility: 0.02 = min(0.33,0.02)
-          [0.30 - 0.40[: a7 with credibility: 0.12 = min(0.44,0.12)
-          [0.50 - 0.60[: a8 with credibility: 0.05 = min(0.05,0.26)
-          [0.20 - 0.30[: a9 with credibility: 0.18 = min(0.18,0.18)
-          [0.50 - 0.60[: a10 with credibility: 0.04 = min(0.19,0.04)
-        >>> ird.showSorting()
-          [0.90 - <[: 	 []
-          [0.80 - 0.90[: 	 []
-          [0.70 - 0.80[: 	 []
-          [0.60 - 0.70[: 	 ['a4']
-          [0.50 - 0.60[: 	 ['a10', 'a2', 'a8']
-          [0.40 - 0.50[: 	 ['a1', 'a3', 'a5']
-          [0.30 - 0.40[: 	 ['a6', 'a7']
-          [0.20 - 0.30[: 	 ['a9']
-          [0.10 - 0.20[: 	 []
-          [0.00 - 0.10[: 	 []    
-        >>> ird.showQuantileOrdering()
-          [0.60-0.70[ : ['a4']
-          [0.50-0.60[ : ['a10', 'a8', 'a2']
-          [0.40-0.50[ : ['a1', 'a5', 'a3']
-          [0.30-0.40[ : ['a6', 'a7']
-          [0.20-0.30[ : ['a9']
-        >>> ird.showOrderedRelationTable()
-          * ---- Relation Table -----
-          xRy |  'a4'	'a10'	 'a2'	 'a8'	 'a1'	 'a3'	 'a5'	 'a6'	 'a7'	 'a9'	  
-         -----|--------------------------------------------------------------------------------
-         'a4' |   - 	 0.31	 0.48	 0.62	 0.31	 0.31	 0.12	 0.12	 0.62	 0.35	 
-         'a10'|  -0.17	  - 	 0.24	 0.11	 0.15	-0.12	 0.33	 0.19	 0.24	 0.25	 
-         'a2' |  -0.48	-0.24	  - 	 0.02	 0.05	-0.14	 0.00	 0.02	 0.05	 0.08	 
-         'a8' |  -0.62	-0.02	 0.12	  - 	 0.07	 0.21	 0.19	 0.05	 0.38	 0.27	 
-         'a1' |  -0.31	-0.07	-0.05	-0.07	  - 	 0.07	-0.10	 0.05	 0.10	 0.18	 
-         'a3' |  -0.31	 0.12	 0.14	-0.21	-0.07	  - 	-0.10	-0.10	 0.12	 0.30	 
-         'a5' |  -0.12	-0.33	 0.07	-0.05	 0.10	 0.26	  - 	-0.10	 0.29	 0.46	 
-         'a6' |  -0.12	 0.06	-0.02	-0.05	 0.04	 0.10	 0.10	  - 	 0.12	 0.30	 
-         'a7' |  -0.45	-0.24	 0.12	-0.24	-0.10	 0.05	-0.12	-0.12	  - 	 0.27	 
-         'a9' |  -0.35	-0.25	-0.08	-0.27	-0.11	-0.30	-0.46	-0.15	-0.19	  - 	 
+        >>> nrq.showQuantilesRating()
+         *-------- Normed quantiles rating result ---------
+         [0.50 - 0.60[ ['a1', 'a7', 'a3', 'a10', 'a2']
+         [0.40 - 0.50[ ['a6', 'a9', 'a8']
+         [0.20 - 0.30[ ['a4', 'a5']
         >>> ird.showHTMLPerformanceHeatmap(pageTitle='Heatmap of Quantiles Rating',Correlations=True)
 
     .. image:: exampleIncRatDigraph.png
@@ -5784,7 +5747,7 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
         html += '</body></html>'
         return html
 
-    def computeQuantileSorting(self,Debug=True):
+    def computeQuantilesRating(self,Debug=True):
         """
           Renders an ordered dictionary of non empty quantiles in ascending order.
         """
@@ -5802,16 +5765,16 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
                     quantileCategories[ranking[c]] = [ranking[i]]
                     New = False
                 else:
-                    quantileCategories[ranking[c]].append(ranking[i])
+                    quantileCategories[ranking[c]].insert(0,ranking[i])
             else:
                 New = True
         if Debug:
             print(quantileCategories)
         return quantileCategories
 
-    def showQuantileSorting(self,Descending=True,Debug=True):
-        quantileCategories = self.computeQuantileSorting(Debug=Debug)
-        print('*-------- Quantile sorting result ---------')
+    def showQuantilesRating(self,Descending=True,Debug=True):
+        quantileCategories = self.computeQuantilesRating(Debug=Debug)
+        print('*-------- Normed quantiles rating result ---------')
         if Descending:
             for cat in reversed(quantileCategories):
                 c = self.profiles[cat]['category']
@@ -6399,18 +6362,18 @@ if __name__ == "__main__":
 ##    print(g.computeOrdinalCorrelation(qsrbc))
     
     # test incremental rating agent
-##    from randomPerfTabs import RandomCBPerformanceTableau
-##    from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
-##    nbrActions=1000
-##    nbrCrit = 13
-##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
-##                                    numberOfCriteria=nbrCrit,seed=105)
-    from randomPerfTabs import Random3ObjectivesPerformanceTableau
-    from randomPerfTabs import Random3ObjectivesPerformanceGenerator as PerfTabGenerator
+    from randomPerfTabs import RandomCBPerformanceTableau
+    from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
     nbrActions=1000
-    nbrCrit = 21
-    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
-                                    numberOfCriteria=nbrCrit,seed=100)
+    nbrCrit = 13
+    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
+                                    numberOfCriteria=nbrCrit,seed=105)
+##    from randomPerfTabs import Random3ObjectivesPerformanceTableau
+##    from randomPerfTabs import Random3ObjectivesPerformanceGenerator as PerfTabGenerator
+##    nbrActions=1000
+##    nbrCrit = 21
+##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
+##                                    numberOfCriteria=nbrCrit,seed=100)
     pq = PerformanceQuantiles(tp,10,LowerClosed=True,Debug=False)
     tpg = PerfTabGenerator(tp,instanceCounter=0,seed=100)
     newActions = []
@@ -6420,7 +6383,7 @@ if __name__ == "__main__":
     pq.updateQuantiles(newActions,historySize=None)
     ira = NormedQuantilesRatingDigraph(pq,newActions,\
                                    Debug=True)
-    ira.showQuantileSorting()
+    ira.showQuantilesRating()
     #ira.showSorting()
     #ira.showHTMLSorting()
     #ira.showActionsSortingResult()
@@ -6428,7 +6391,7 @@ if __name__ == "__main__":
     #ira.showRefinedQuantileOrdering()
     #ira.showOrderedRelationTable()
     #ira.showSortingCharacteristics()
-    ira.showHTMLPerformanceHeatmap(pageTitle='Heat map of performances',Correlations=True)
+    ira.showHTMLPerformanceHeatmap(pageTitle='Heat map of quantiles rating',Correlations=True)
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')
