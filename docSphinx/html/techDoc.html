@@ -6294,12 +6294,12 @@ the diagonal outranking components of the sparse outranking digraph.</p>
 <div class="section" id="module-sortingDigraphs">
 <span id="sortingdigraphs-module"></span><span id="sortingdigraphs-label"></span><h2>sortingDigraphs module<a class="headerlink" href="#module-sortingDigraphs" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="sortingDigraphs.IncrementalRatingDigraph">
-<em class="property">class </em><code class="descclassname">sortingDigraphs.</code><code class="descname">IncrementalRatingDigraph</code><span class="sig-paren">(</span><em>argPerfQuantiles=None</em>, <em>newData=None</em>, <em>hasNoVeto=False</em>, <em>outrankingType='bipolar'</em>, <em>valuationScale=(-1</em>, <em>1)</em>, <em>WithSortingRelation=False</em>, <em>CompleteOutranking=True</em>, <em>StoreSorting=True</em>, <em>CopyPerfTab=False</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrCores=None</em>, <em>nbrOfProcesses=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph" title="Permalink to this definition">¶</a></dt>
+<dt id="sortingDigraphs.NormedQuantilesRatingDigraph">
+<em class="property">class </em><code class="descclassname">sortingDigraphs.</code><code class="descname">NormedQuantilesRatingDigraph</code><span class="sig-paren">(</span><em>argPerfQuantiles=None</em>, <em>newData=None</em>, <em>hasNoVeto=False</em>, <em>valuationScale=(-1</em>, <em>1)</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrCores=None</em>, <em>nbrOfProcesses=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#sortingDigraphs.SortingDigraph" title="sortingDigraphs.SortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.SortingDigraph</span></code></a>, <a class="reference internal" href="#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a></p>
 <p>Specialisation of the sortingDigraph Class
 for absolute rating of a new set of decision actions with
-incremental performance quantiles gathered from historical data.</p>
+normed performance quantiles gathered from historical data.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">The constructor requires a valid
@@ -6312,11 +6312,12 @@ incremental performance quantiles gathered from historical data.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">13</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">numberOfBins</span><span class="o">=</span><span class="s1">&#39;deciles&#39;</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">seed</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">numberOfBins</span><span class="o">=</span><span class="s1">&#39;dodeciles&#39;</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># new incoming decision actions of the same kind</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">newActions</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">newAction</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomAction</span><span class="p">()</span>
@@ -6324,21 +6325,9 @@ incremental performance quantiles gathered from historical data.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># rating the new set of decision actions after</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># updating the historical performance quantiles</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span> <span class="o">=</span> <span class="n">IncrementalRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">CompleteOutranking</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># inspecting the rating result</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span><span class="o">.</span><span class="n">showActionsSortingResult</span><span class="p">()</span>
-<span class="go">  Quantiles sorting result per decision action</span>
-<span class="go">  [0.40 - 0.50[: a1 with credibility: 0.07 = min(0.10,0.07)</span>
-<span class="go">  [0.50 - 0.60[: a2 with credibility: 0.14 = min(0.17,0.14)</span>
-<span class="go">  [0.40 - 0.50[: a3 with credibility: 0.10 = min(0.10,0.14)</span>
-<span class="go">  [0.60 - 0.70[: a4 with credibility: 0.14 = min(0.14,0.19)</span>
-<span class="go">  [0.40 - 0.50[: a5 with credibility: 0.19 = min(0.40,0.19)</span>
-<span class="go">  [0.30 - 0.40[: a6 with credibility: 0.02 = min(0.33,0.02)</span>
-<span class="go">  [0.30 - 0.40[: a7 with credibility: 0.12 = min(0.44,0.12)</span>
-<span class="go">  [0.50 - 0.60[: a8 with credibility: 0.05 = min(0.05,0.26)</span>
-<span class="go">  [0.20 - 0.30[: a9 with credibility: 0.18 = min(0.18,0.18)</span>
-<span class="go">  [0.50 - 0.60[: a10 with credibility: 0.04 = min(0.19,0.04)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span><span class="o">.</span><span class="n">showSorting</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showQuantileRating</span><span class="p">()</span>
 <span class="go">  [0.90 - &lt;[:    []</span>
 <span class="go">  [0.80 - 0.90[:         []</span>
 <span class="go">  [0.70 - 0.80[:         []</span>
@@ -6376,211 +6365,8 @@ incremental performance quantiles gathered from historical data.</p>
 </dl>
 <a class="reference internal image-reference" href="_images/exampleIncRatDigraph.png"><img alt="usage example of Incremental Rating Digraph" class="align-center" src="_images/exampleIncRatDigraph.png" style="width: 500px;" /></a>
 <dl class="method">
-<dt id="sortingDigraphs.IncrementalRatingDigraph.computeActionCategories">
-<code class="descname">computeActionCategories</code><span class="sig-paren">(</span><em>action</em>, <em>Debug=False</em>, <em>Comments=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.computeActionCategories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.computeActionCategories" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the union of categories in which the given action is sorted positively or null into.
-Returns a tuple : action, lowest category key, highest category key, membership credibility !</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="sortingDigraphs.IncrementalRatingDigraph.computeCategoryContents">
-<code class="descname">computeCategoryContents</code><span class="sig-paren">(</span><em>Reverse=False</em>, <em>Comments=False</em>, <em>StoreSorting=True</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.computeCategoryContents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.computeCategoryContents" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the sorting results per category.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="sortingDigraphs.IncrementalRatingDigraph.computeQuantileOrdering">
-<code class="descname">computeQuantileOrdering</code><span class="sig-paren">(</span><em>strategy=None</em>, <em>Descending=True</em>, <em>HTML=False</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.computeQuantileOrdering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.computeQuantileOrdering" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt><em>Parameters</em>:</dt>
-<dd><ul class="first last simple">
-<li>Descending: listing in <em>decreasing</em> (default) or <em>increasing</em> quantile order.</li>
-<li>strategy: ordering in an {&#8216;optimistic&#8217; (default) | &#8216;pessimistic&#8217; | &#8216;average&#8217;}
-in the uppest, the lowest or the average potential quantile.</li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="sortingDigraphs.IncrementalRatingDigraph.computeRefinedActionCategories">
-<code class="descname">computeRefinedActionCategories</code><span class="sig-paren">(</span><em>action</em>, <em>Show=False</em>, <em>Debug=False</em>, <em>Comments=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.computeRefinedActionCategories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.computeRefinedActionCategories" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the union of categories in which the given action is sorted positively or null into.
-Returns a tuple : action, lowest category key, highest category key, membership credibility !</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="sortingDigraphs.IncrementalRatingDigraph.computeRefinedQuantileOrdering">
-<code class="descname">computeRefinedQuantileOrdering</code><span class="sig-paren">(</span><em>strategy=None</em>, <em>minimalComponentSize=1</em>, <em>Descending=True</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.computeRefinedQuantileOrdering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.computeRefinedQuantileOrdering" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the quantile interval of the decision actions.</p>
-<dl class="docutils">
-<dt><em>Parameters</em>:</dt>
-<dd><ul class="first last simple">
-<li>QuantilesdSortingDigraph instance</li>
-<li>Descending: listing in <em>decreasing</em> (default) or <em>increasing</em> quantile order.</li>
-<li>strategy: ordering in an {&#8216;optimistic&#8217; | &#8216;pessimistic&#8217; | &#8216;average&#8217; (default)}
-in the uppest, the lowest or the average potential quantile.</li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="sortingDigraphs.IncrementalRatingDigraph.computeSortingCharacteristics">
-<code class="descname">computeSortingCharacteristics</code><span class="sig-paren">(</span><em>action=None</em>, <em>Comments=False</em>, <em>StoreSorting=False</em>, <em>Debug=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.computeSortingCharacteristics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.computeSortingCharacteristics" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders a bipolar-valued bi-dictionary relation
-representing the degree of credibility of the
-assertion that &#8220;action x in A belongs to category c in C&#8221;,
-ie x outranks low category limit and does not outrank
-the high category limit.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="sortingDigraphs.IncrementalRatingDigraph.computeSortingRelation">
-<code class="descname">computeSortingRelation</code><span class="sig-paren">(</span><em>categoryContents=None</em>, <em>Debug=False</em>, <em>StoreSorting=True</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.computeSortingRelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.computeSortingRelation" title="Permalink to this definition">¶</a></dt>
-<dd><p>constructs a bipolar sorting relation using the category contents.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="sortingDigraphs.IncrementalRatingDigraph.computeWeakOrder">
-<code class="descname">computeWeakOrder</code><span class="sig-paren">(</span><em>Descending=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.computeWeakOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.computeWeakOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Specialisation for QuantilesSortingDigraphs.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="sortingDigraphs.IncrementalRatingDigraph.getActionsKeys">
-<code class="descname">getActionsKeys</code><span class="sig-paren">(</span><em>action=None</em>, <em>WithoutProfiles=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.getActionsKeys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.getActionsKeys" title="Permalink to this definition">¶</a></dt>
-<dd><p>extract normal actions keys()</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="sortingDigraphs.IncrementalRatingDigraph.htmlPerformanceHeatmap">
-<code class="descname">htmlPerformanceHeatmap</code><span class="sig-paren">(</span><em>argCriteriaList=None</em>, <em>argActionsList=None</em>, <em>SparseModel=False</em>, <em>minimalComponentSize=1</em>, <em>RankingRule='Copeland'</em>, <em>quantiles=None</em>, <em>strategy='average'</em>, <em>ndigits=2</em>, <em>contentCentered=True</em>, <em>colorLevels=None</em>, <em>pageTitle='Performance Heatmap'</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.htmlPerformanceHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.htmlPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table
-actions x criteria in html format.</p>
-<p>See the corresponding perfTabs.showHTMLPerformanceHeatMap() method.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="sortingDigraphs.IncrementalRatingDigraph.showActionCategories">
-<code class="descname">showActionCategories</code><span class="sig-paren">(</span><em>action</em>, <em>Debug=False</em>, <em>Comments=True</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.showActionCategories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.showActionCategories" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the union of categories in which the given action is sorted positively or null into.
-Returns a tuple : action, lowest category key, highest category key, membership credibility !</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="sortingDigraphs.IncrementalRatingDigraph.showActionsSortingResult">
-<code class="descname">showActionsSortingResult</code><span class="sig-paren">(</span><em>actionSubset=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.showActionsSortingResult"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.showActionsSortingResult" title="Permalink to this definition">¶</a></dt>
-<dd><p>shows the quantiles sorting result all (default) of a subset of the decision actions.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="sortingDigraphs.IncrementalRatingDigraph.showHTMLQuantileOrdering">
-<code class="descname">showHTMLQuantileOrdering</code><span class="sig-paren">(</span><em>Descending=True</em>, <em>strategy='optimistic'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.showHTMLQuantileOrdering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.showHTMLQuantileOrdering" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shows the html version of the quantile preordering in a browser window.</p>
-<dl class="docutils">
-<dt>The ordring strategy is either:</dt>
-<dd><ul class="first last simple">
-<li><strong>optimistic</strong>, following the upper quantile limits (default),</li>
-<li><strong>pessimistic</strong>, following the lower quantile limits,</li>
-<li><strong>average</strong>, following the averag of the upper and lower quantile limits.</li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="sortingDigraphs.IncrementalRatingDigraph.showHTMLSorting">
-<code class="descname">showHTMLSorting</code><span class="sig-paren">(</span><em>Reverse=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.showHTMLSorting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.showHTMLSorting" title="Permalink to this definition">¶</a></dt>
-<dd><p>shows the html version of the sorting result in a browser window.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="sortingDigraphs.IncrementalRatingDigraph.showOrderedRelationTable">
-<code class="descname">showOrderedRelationTable</code><span class="sig-paren">(</span><em>direction='decreasing'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.showOrderedRelationTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.showOrderedRelationTable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Showing the relation table in decreasing (default) or increasing order.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="sortingDigraphs.IncrementalRatingDigraph.showQuantileOrdering">
-<code class="descname">showQuantileOrdering</code><span class="sig-paren">(</span><em>strategy=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.showQuantileOrdering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.showQuantileOrdering" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dummy show method for the commenting computeQuantileOrdering() method.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="sortingDigraphs.IncrementalRatingDigraph.showRefinedQuantileOrdering">
-<code class="descname">showRefinedQuantileOrdering</code><span class="sig-paren">(</span><em>strategy=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.showRefinedQuantileOrdering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.showRefinedQuantileOrdering" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dummy show method for the commenting computeQuantileOrdering() method.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="sortingDigraphs.IncrementalRatingDigraph.showSorting">
-<code class="descname">showSorting</code><span class="sig-paren">(</span><em>Reverse=True</em>, <em>isReturningHTML=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.showSorting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.showSorting" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shows sorting results in decreasing or increasing (Reverse=False)
-order of the categories. If isReturningHTML is True (default = False)
-the method returns a htlm table with the sorting result.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="sortingDigraphs.IncrementalRatingDigraph.showSortingCharacteristics">
-<code class="descname">showSortingCharacteristics</code><span class="sig-paren">(</span><em>action=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#IncrementalRatingDigraph.showSortingCharacteristics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.IncrementalRatingDigraph.showSortingCharacteristics" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders a bipolar-valued bi-dictionary relation
-representing the degree of credibility of the
-assertion that &#8220;action x in A belongs to category c in C&#8221;,
-ie x outranks low category limit and does not outrank
-the high category limit.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="sortingDigraphs.NormedQuantilesRatingDigraph">
-<em class="property">class </em><code class="descclassname">sortingDigraphs.</code><code class="descname">NormedQuantilesRatingDigraph</code><span class="sig-paren">(</span><em>argPerfQuantiles=None</em>, <em>newData=None</em>, <em>hasNoVeto=False</em>, <em>valuationScale=(-1</em>, <em>1)</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrCores=None</em>, <em>nbrOfProcesses=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#sortingDigraphs.SortingDigraph" title="sortingDigraphs.SortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.SortingDigraph</span></code></a>, <a class="reference internal" href="#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a></p>
-<p>Specialisation of the sortingDigraph Class
-for absolute rating of a new set of decision actions with
-incremental performance quantiles gathered from historical data.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The constructor requires a valid
-<a class="reference internal" href="#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a> instance.</p>
-</div>
-<dl class="docutils">
-<dt>Examle Python session:</dt>
-<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">From</span> <span class="n">sortingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># historical data</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">13</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">seed</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">numberOfBins</span><span class="o">=</span><span class="s1">&#39;deciles&#39;</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># new incoming decision actions of the same kind</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">newActions</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="n">newAction</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomAction</span><span class="p">()</span>
-<span class="gp">... </span>    <span class="n">newActions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newAction</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># rating the new set of decision actions after</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># updating the historical performance quantiles</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">neq</span> <span class="o">=</span> <span class="n">NormeQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># inspecting the rating result</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nrq</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
-<span class="go"> *-------- Normed quantiles rating result ---------</span>
-<span class="go"> [0.50 - 0.60[ [&#39;a1&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a10&#39;, &#39;a2&#39;]</span>
-<span class="go"> [0.40 - 0.50[ [&#39;a6&#39;, &#39;a9&#39;, &#39;a8&#39;]</span>
-<span class="go"> [0.20 - 0.30[ [&#39;a4&#39;, &#39;a5&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of Quantiles Rating&#39;</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-<a class="reference internal image-reference" href="_images/exampleIncRatDigraph.png"><img alt="usage example of Incremental Rating Digraph" class="align-center" src="_images/exampleIncRatDigraph.png" style="width: 500px;" /></a>
-<dl class="method">
-<dt id="sortingDigraphs.NormedQuantilesRatingDigraph.computeQuantilesRating">
-<code class="descname">computeQuantilesRating</code><span class="sig-paren">(</span><em>Debug=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.computeQuantilesRating"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.computeQuantilesRating" title="Permalink to this definition">¶</a></dt>
+<dt id="sortingDigraphs.NormedQuantilesRatingDigraph.computeQuantileSorting">
+<code class="descname">computeQuantileSorting</code><span class="sig-paren">(</span><em>Debug=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.computeQuantileSorting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.computeQuantileSorting" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders an ordered dictionary of non empty quantiles in ascending order.</p>
 </dd></dl>
 
@@ -6605,8 +6391,8 @@ actions x criteria in html format.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="sortingDigraphs.NormedQuantilesRatingDigraph.showQuantilesRating">
-<code class="descname">showQuantilesRating</code><span class="sig-paren">(</span><em>Descending=True</em>, <em>Debug=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.showQuantilesRating"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.showQuantilesRating" title="Permalink to this definition">¶</a></dt>
+<dt id="sortingDigraphs.NormedQuantilesRatingDigraph.showQuantileSorting">
+<code class="descname">showQuantileSorting</code><span class="sig-paren">(</span><em>Descending=True</em>, <em>Debug=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.showQuantileSorting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.showQuantileSorting" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
