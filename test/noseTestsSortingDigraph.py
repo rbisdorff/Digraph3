@@ -161,6 +161,6 @@ def testNormesQuantilesRatingDigraph():
         newAction = tpg.randomAction()
         newActions.append(newAction)
     pq.updateQuantiles(newActions,historySize=None)
-    nrq = NormedQuantilesRatingDigraph(pq,newActions,CompleteOutranking=True,Debug=True)
+    nrq = NormedQuantilesRatingDigraph(pq,newActions,Debug=True)
     nrq.showQuantilesRating()
 

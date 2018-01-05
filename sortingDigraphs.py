@@ -5748,7 +5748,7 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
         html += '</body></html>'
         return html
 
-    def computeQuantileSorting(self,Debug=True):
+    def computeQuantilesRating(self,Debug=True):
         """
           Renders an ordered dictionary of non empty quantiles in ascending order.
         """
@@ -5766,15 +5766,15 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
                     quantileCategories[ranking[c]] = [ranking[i]]
                     New = False
                 else:
-                    quantileCategories[ranking[c]].append(ranking[i])
+                    quantileCategories[ranking[c]].insert(0,ranking[i])
             else:
                 New = True
         if Debug:
             print(quantileCategories)
         return quantileCategories
 
-    def showQuantileSorting(self,Descending=True,Debug=True):
-        quantileCategories = self.computeQuantileSorting(Debug=Debug)
+    def showQuantilesRating(self,Descending=True,Debug=True):
+        quantileCategories = self.computeQuantilesRating(Debug=Debug)
         print('*-------- Quantile sorting result ---------')
         if Descending:
             for cat in reversed(quantileCategories):
@@ -6384,7 +6384,7 @@ if __name__ == "__main__":
     pq.updateQuantiles(newActions,historySize=None)
     ira = NormedQuantilesRatingDigraph(pq,newActions,\
                                    Debug=True)
-    ira.showQuantileSorting()
+    ira.showQuantilesRating()
     #ira.showSorting()
     #ira.showHTMLSorting()
     #ira.showActionsSortingResult()

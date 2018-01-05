@@ -5339,36 +5339,11 @@
 <span class="sd">        &gt;&gt;&gt; nqr = NormedQuantilesRatingDigraph(pq,newActions,Debug=True)</span>
 <span class="sd">        &gt;&gt;&gt; # inspecting the rating result</span>
 <span class="sd">        &gt;&gt;&gt; nqr.showQuantileRating()</span>
-<span class="sd">          [0.90 - &lt;[: 	 []</span>
-<span class="sd">          [0.80 - 0.90[: 	 []</span>
-<span class="sd">          [0.70 - 0.80[: 	 []</span>
-<span class="sd">          [0.60 - 0.70[: 	 [&#39;a4&#39;]</span>
-<span class="sd">          [0.50 - 0.60[: 	 [&#39;a10&#39;, &#39;a2&#39;, &#39;a8&#39;]</span>
-<span class="sd">          [0.40 - 0.50[: 	 [&#39;a1&#39;, &#39;a3&#39;, &#39;a5&#39;]</span>
-<span class="sd">          [0.30 - 0.40[: 	 [&#39;a6&#39;, &#39;a7&#39;]</span>
-<span class="sd">          [0.20 - 0.30[: 	 [&#39;a9&#39;]</span>
-<span class="sd">          [0.10 - 0.20[: 	 []</span>
-<span class="sd">          [0.00 - 0.10[: 	 []    </span>
-<span class="sd">        &gt;&gt;&gt; ird.showQuantileOrdering()</span>
-<span class="sd">          [0.60-0.70[ : [&#39;a4&#39;]</span>
-<span class="sd">          [0.50-0.60[ : [&#39;a10&#39;, &#39;a8&#39;, &#39;a2&#39;]</span>
-<span class="sd">          [0.40-0.50[ : [&#39;a1&#39;, &#39;a5&#39;, &#39;a3&#39;]</span>
-<span class="sd">          [0.30-0.40[ : [&#39;a6&#39;, &#39;a7&#39;]</span>
-<span class="sd">          [0.20-0.30[ : [&#39;a9&#39;]</span>
-<span class="sd">        &gt;&gt;&gt; ird.showOrderedRelationTable()</span>
-<span class="sd">          * ---- Relation Table -----</span>
-<span class="sd">          xRy |  &#39;a4&#39;	&#39;a10&#39;	 &#39;a2&#39;	 &#39;a8&#39;	 &#39;a1&#39;	 &#39;a3&#39;	 &#39;a5&#39;	 &#39;a6&#39;	 &#39;a7&#39;	 &#39;a9&#39;	  </span>
-<span class="sd">         -----|--------------------------------------------------------------------------------</span>
-<span class="sd">         &#39;a4&#39; |   - 	 0.31	 0.48	 0.62	 0.31	 0.31	 0.12	 0.12	 0.62	 0.35	 </span>
-<span class="sd">         &#39;a10&#39;|  -0.17	  - 	 0.24	 0.11	 0.15	-0.12	 0.33	 0.19	 0.24	 0.25	 </span>
-<span class="sd">         &#39;a2&#39; |  -0.48	-0.24	  - 	 0.02	 0.05	-0.14	 0.00	 0.02	 0.05	 0.08	 </span>
-<span class="sd">         &#39;a8&#39; |  -0.62	-0.02	 0.12	  - 	 0.07	 0.21	 0.19	 0.05	 0.38	 0.27	 </span>
-<span class="sd">         &#39;a1&#39; |  -0.31	-0.07	-0.05	-0.07	  - 	 0.07	-0.10	 0.05	 0.10	 0.18	 </span>
-<span class="sd">         &#39;a3&#39; |  -0.31	 0.12	 0.14	-0.21	-0.07	  - 	-0.10	-0.10	 0.12	 0.30	 </span>
-<span class="sd">         &#39;a5&#39; |  -0.12	-0.33	 0.07	-0.05	 0.10	 0.26	  - 	-0.10	 0.29	 0.46	 </span>
-<span class="sd">         &#39;a6&#39; |  -0.12	 0.06	-0.02	-0.05	 0.04	 0.10	 0.10	  - 	 0.12	 0.30	 </span>
-<span class="sd">         &#39;a7&#39; |  -0.45	-0.24	 0.12	-0.24	-0.10	 0.05	-0.12	-0.12	  - 	 0.27	 </span>
-<span class="sd">         &#39;a9&#39; |  -0.35	-0.25	-0.08	-0.27	-0.11	-0.30	-0.46	-0.15	-0.19	  - 	 </span>
+<span class="sd">         *-------- Normed quantiles rating result ---------</span>
+<span class="sd">         [0.50 - 0.55[ [&#39;a9&#39;, &#39;a2&#39;, &#39;a3&#39;, &#39;a1&#39;, &#39;a7&#39;]</span>
+<span class="sd">         [0.45 - 0.50[ [&#39;a6&#39;, &#39;a10&#39;]</span>
+<span class="sd">         [0.40 - 0.45[ [&#39;a8&#39;]</span>
+<span class="sd">         [0.20 - 0.25[ [&#39;a5&#39;, &#39;a4&#39;]</span>
 <span class="sd">        &gt;&gt;&gt; ird.showHTMLPerformanceHeatmap(pageTitle=&#39;Heatmap of Quantiles Rating&#39;,Correlations=True)</span>
 
 <span class="sd">    .. image:: exampleIncRatDigraph.png</span>
@@ -5823,7 +5798,7 @@
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/body&gt;&lt;/html&gt;&#39;</span>
         <span class="k">return</span> <span class="n">html</span></div>
 
-<div class="viewcode-block" id="NormedQuantilesRatingDigraph.computeQuantileSorting"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.computeQuantileSorting">[docs]</a>    <span class="k">def</span> <span class="nf">computeQuantileSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="NormedQuantilesRatingDigraph.computeQuantilesRating"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.computeQuantilesRating">[docs]</a>    <span class="k">def</span> <span class="nf">computeQuantilesRating</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">          Renders an ordered dictionary of non empty quantiles in ascending order.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -5841,15 +5816,15 @@
                     <span class="n">quantileCategories</span><span class="p">[</span><span class="n">ranking</span><span class="p">[</span><span class="n">c</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="n">ranking</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
                     <span class="n">New</span> <span class="o">=</span> <span class="kc">False</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">quantileCategories</span><span class="p">[</span><span class="n">ranking</span><span class="p">[</span><span class="n">c</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ranking</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                    <span class="n">quantileCategories</span><span class="p">[</span><span class="n">ranking</span><span class="p">[</span><span class="n">c</span><span class="p">]]</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">ranking</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">New</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">quantileCategories</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">quantileCategories</span></div>
 
-<div class="viewcode-block" id="NormedQuantilesRatingDigraph.showQuantileSorting"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.showQuantileSorting">[docs]</a>    <span class="k">def</span> <span class="nf">showQuantileSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="n">quantileCategories</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeQuantileSorting</span><span class="p">(</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
+<div class="viewcode-block" id="NormedQuantilesRatingDigraph.showQuantilesRating"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.showQuantilesRating">[docs]</a>    <span class="k">def</span> <span class="nf">showQuantilesRating</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">quantileCategories</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeQuantilesRating</span><span class="p">(</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Quantile sorting result ---------&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Descending</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">cat</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">quantileCategories</span><span class="p">):</span>
@@ -6459,7 +6434,7 @@
     <span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
     <span class="n">ira</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span>\
                                    <span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">ira</span><span class="o">.</span><span class="n">showQuantileSorting</span><span class="p">()</span>
+    <span class="n">ira</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
     <span class="c1">#ira.showSorting()</span>
     <span class="c1">#ira.showHTMLSorting()</span>
     <span class="c1">#ira.showActionsSortingResult()</span>
