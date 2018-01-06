@@ -5293,17 +5293,17 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
          [0.50 - 0.60[ ['a1', 'a7', 'a3', 'a10', 'a2']
          [0.40 - 0.50[ ['a6', 'a9', 'a8']
          [0.20 - 0.30[ ['a4', 'a5']
-        >>> ird.showHTMLPerformanceHeatmap(pageTitle='Heatmap of Quantiles Rating',Correlations=True)
+        >>> nqr.showHTMLPerformanceHeatmap(pageTitle='Heatmap of Quantiles Rating',Correlations=True)
 
     .. image:: exampleIncRatDigraph.png
-        :alt: usage example of Incremental Rating Digraph
+        :alt: usage example of Normed Quantiles Rating Digraph
         :width: 500 px
         :align: center
 
     """
     def __init__(self,argPerfQuantiles=None,newData=None,\
                  hasNoVeto=False,\
-                 valuationScale = (-1,1),\
+                 valuationScale=(-1,1),\
                  Threading=False,\
                  tempDir=None,\
                  nbrCores=None,\
@@ -5501,7 +5501,7 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
                                argActionsList=None,
                                SparseModel=False,
                                minimalComponentSize=1,
-                               RankingRule='Copeland',
+                               RankingRule='NetFlows',
                                quantiles=None,
                                strategy='average',
                                ndigits=2,
@@ -5747,12 +5747,17 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
         html += '</body></html>'
         return html
 
-    def computeQuantilesRating(self,Debug=True):
+    def computeQuantilesRating(self,rankingRule='NetFlows',Debug=True):
         """
           Renders an ordered dictionary of non empty quantiles in ascending order.
         """
-        ranking = self.computeCopelandRanking()
-        ranking.reverse()
+        if rankingRule == 'NetFlows':
+            ranking = self.computeNetFlowsRanking()
+        else:
+            ranking = self.computeCopelandRanking()
+        print(ranking)
+        if self.LowerClosed: # lower closed quantiles
+            ranking.reverse()
         if Debug:
             print(ranking)
         n = len(ranking)
@@ -5765,7 +5770,10 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
                     quantileCategories[ranking[c]] = [ranking[i]]
                     New = False
                 else:
-                    quantileCategories[ranking[c]].insert(0,ranking[i])
+                    if self.LowerClosed:
+                        quantileCategories[ranking[c]].insert(0,ranking[i])
+                    else:
+                        quantileCategories[ranking[c]].append(ranking[i])
             else:
                 New = True
         if Debug:
@@ -5775,14 +5783,24 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
     def showQuantilesRating(self,Descending=True,Debug=True):
         quantileCategories = self.computeQuantilesRating(Debug=Debug)
         print('*-------- Quantile sorting result ---------')
-        if Descending:
-            for cat in reversed(quantileCategories):
-                c = self.profiles[cat]['category']
-                print(self.categories[c]['name'],quantileCategories[cat])
+        if self.LowerClosed:
+            if Descending:
+                for cat in reversed(quantileCategories):
+                    c = self.profiles[cat]['category']
+                    print(self.categories[c]['name'],quantileCategories[cat])
+            else:
+                for cat in quantileCategories:
+                    c = self.profiles[cat]['category']
+                    print(self.categories[c]['name'],quantileCategories[cat])
         else:
-            for cat in quantileCategories:
-                c = self.profiles[cat]['category']
-                print(self.categories[c]['name'],quantileCategories[cat])
+            if Descending:
+                for cat in quantileCategories:
+                    c = self.profiles[cat]['category']
+                    print(self.categories[c]['name'],quantileCategories[cat])
+            else:
+                for cat in reversed(quantileCategories):
+                    c = self.profiles[cat]['category']
+                    print(self.categories[c]['name'],quantileCategories[cat])
             
     def showOrderedRelationTable(self,direction="decreasing"):
         """
@@ -6374,7 +6392,7 @@ if __name__ == "__main__":
     nbrCrit = 21
     tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
                                     numberOfCriteria=nbrCrit,seed=100)
-    pq = PerformanceQuantiles(tp,10,LowerClosed=True,Debug=False)
+    pq = PerformanceQuantiles(tp,10,LowerClosed=False,Debug=False)
     tpg = PerfTabGenerator(tp,instanceCounter=0,seed=100)
     newActions = []
     for i in range(10):
@@ -6391,7 +6409,7 @@ if __name__ == "__main__":
     #ira.showRefinedQuantileOrdering()
     #ira.showOrderedRelationTable()
     #ira.showSortingCharacteristics()
-    ira.showHTMLPerformanceHeatmap(pageTitle='Heat map of performances',Correlations=True)
+    ira.showHTMLPerformanceHeatmap(RankingRule='NetFlows',pageTitle='Heat map of performances',Correlations=True)
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')
