@@ -5582,7 +5582,7 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
             criteriaList = argCriteriaList
 
         if RankingRule == None:
-            RankingRule = 'Copeland'
+            RankingRule = 'NetFlows'
         na = len(self.actions)
         profiles = self.profiles
         categories = self.categories
@@ -5755,7 +5755,6 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
             ranking = self.computeNetFlowsRanking()
         else:
             ranking = self.computeCopelandRanking()
-        print(ranking)
         if self.LowerClosed: # lower closed quantiles
             ranking.reverse()
         if Debug:
@@ -5780,7 +5779,7 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
             print(quantileCategories)
         return quantileCategories
 
-    def showQuantilesRating(self,Descending=True,Debug=True):
+    def showQuantilesRating(self,Descending=True,Debug=False):
         quantileCategories = self.computeQuantilesRating(Debug=Debug)
         print('*-------- Quantile sorting result ---------')
         if self.LowerClosed:
@@ -5806,7 +5805,7 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
         """
         Showing the relation table in decreasing (default) or increasing order.
         """
-        actionsList = self.computeCopelandRanking()
+        actionsList = self.computeNetFlowsRanking()
         
         if direction != "decreasing":
             actionsList.reverse()
