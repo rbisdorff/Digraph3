@@ -6356,6 +6356,18 @@ normed performance quantiles gathered from historical data.</p>
 <dd><p>The rating drawing is using the weakOrders.WeakOrder exportGraphViz() method for
 drawing oriented Hasse diagrams of weak orderings, ie the negation
 of the corresponding preorder relation.</p>
+<p>Continuing the prevous Python session:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
+<span class="go">*-------- Quantile sorting result ---------</span>
+<span class="go"> [0.40 - 0.60[ [&#39;a1&#39;, &#39;a2&#39;, &#39;a3&#39;]</span>
+<span class="go"> [0.20 - 0.40[ [&#39;a4&#39;, &#39;a5&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ird</span><span class="o">.</span><span class="n">exportRatingGraphViz</span><span class="p">(</span><span class="n">noSilent</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
+<span class="go"> Exporting to quantilesRatingDigraph.dot</span>
+<span class="go"> dot -Grankdir=TB -Tpng quantilesRatingDigraph.dot -o quantilesRatingDigraph.png</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/quantilesRatingDigraph.png"><img alt="usage example of Normed Quantiles Rating Digraph" class="align-center" src="_images/quantilesRatingDigraph.png" style="width: 200px;" /></a>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">Node or action keys of the digraph must start with a letter

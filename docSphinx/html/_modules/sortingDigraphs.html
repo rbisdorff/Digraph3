@@ -51,7 +51,7 @@
 <span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># Python implementation of digraphs</span>
-<span class="c1"># Current revision $Revision: 2345 $</span>
+<span class="c1"># Current revision $Revision: 2349 $</span>
 <span class="c1"># Copyright (C) 2006-2008  Raymond Bisdorff</span>
 <span class="c1">#</span>
 <span class="c1">#    This program is free software; you can redistribute it and/or modify</span>
@@ -5616,6 +5616,22 @@
 <span class="sd">        drawing oriented Hasse diagrams of weak orderings, ie the negation</span>
 <span class="sd">        of the corresponding preorder relation.</span>
 
+<span class="sd">        Continuing the prevous Python session:</span>
+<span class="sd">        </span>
+<span class="sd">           &gt;&gt;&gt; ird.showQuantilesRating()</span>
+<span class="sd">           *-------- Quantile sorting result ---------</span>
+<span class="sd">            [0.40 - 0.60[ [&#39;a1&#39;, &#39;a2&#39;, &#39;a3&#39;]</span>
+<span class="sd">            [0.20 - 0.40[ [&#39;a4&#39;, &#39;a5&#39;]</span>
+<span class="sd">           &gt;&gt;&gt; ird.exportRatingGraphViz(noSilent=False)</span>
+<span class="sd">           *---- exporting a dot file for GraphViz tools ---------*</span>
+<span class="sd">            Exporting to quantilesRatingDigraph.dot</span>
+<span class="sd">            dot -Grankdir=TB -Tpng quantilesRatingDigraph.dot -o quantilesRatingDigraph.png</span>
+
+<span class="sd">        .. image:: quantilesRatingDigraph.png</span>
+<span class="sd">            :alt: usage example of Normed Quantiles Rating Digraph</span>
+<span class="sd">            :width: 200 px</span>
+<span class="sd">            :align: center</span>
+<span class="sd">        </span>
 <span class="sd">        .. warning::</span>
 
 <span class="sd">             Node or action keys of the digraph must start with a letter</span>
@@ -5630,7 +5646,7 @@
         <span class="n">WeakOrder</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="n">fileName</span><span class="p">,</span>\
                              <span class="n">direction</span><span class="o">=</span><span class="n">direction</span><span class="p">,</span><span class="n">noSilent</span><span class="o">=</span><span class="n">noSilent</span><span class="p">,</span>\
                              <span class="n">graphType</span><span class="o">=</span><span class="n">graphType</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="n">graphSize</span><span class="p">,</span>\
-                                 <span class="n">digraphClass</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">,</span>\
+                             <span class="n">digraphClass</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">,</span>\
                              <span class="n">fontSize</span><span class="o">=</span><span class="n">fontSize</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relationOrig</span></div>
         
@@ -6421,7 +6437,7 @@
 <span class="s2">    ****************************************************</span>
 <span class="s2">    * Python sortingDigraphs module                    *</span>
 <span class="s2">    * depends on BipolarOutrankingDigraph and          *</span>
-<span class="s2">    * $Revision: 2345 $                                 *</span>
+<span class="s2">    * $Revision: 2349 $                                 *</span>
 <span class="s2">    * Copyright (C) 2010 Raymond Bisdorff              *</span>
 <span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
 <span class="s2">    * to the extent permitted by the applicable law.   *</span>
@@ -6572,7 +6588,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. december 2010                *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2345 $                  *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2349 $                  *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>
