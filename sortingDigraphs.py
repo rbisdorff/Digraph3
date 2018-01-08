@@ -5563,7 +5563,7 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
                              fontSize=10):
         """
         The method is using the weakOrders.WeakOrder exportGraphViz for
-        drawing priented Hasse diagrams of weak orderings, ie the negation
+        drawing oriented Hasse diagrams of weak orderings, ie the negation
         of the corresponding preorder relation.
 
         .. warning::
