@@ -143,7 +143,7 @@ class WeakOrder(Digraph):
         """
         Digraph.exportGraphViz(self, fileName=fileName, bestChoice=bestChoice,worstChoice=worstChoice,noSilent=noSilent,graphType=graphType,graphSize=graphSize)
 
-    def exportGraphViz(self,fileName=None,relation=None,direction='best',\
+    def exportGraphViz(self,digraphClass=None,fileName=None,relation=None,direction='best',\
                        noSilent=True,graphType='png',\
                        graphSize='7,7',\
                        fontSize=10):
@@ -152,7 +152,7 @@ class WeakOrder(Digraph):
         """
         import os
         from copy import copy as deepcopy
-
+        from sortingDigraphs import NormedQuantilesRatingDigraph
             
         def _safeName(t0):
             t = t0.split(sep="-")
@@ -202,12 +202,28 @@ class WeakOrder(Digraph):
         fo.write(graphSize),fo.write('",fontsize=%d];\n' % fontSize)
         # nodes
         for x in actionKeys:
-            try:
-                nodeName = self.actions[x]['shortName']
-            except:
-                nodeName = str(x)
-            node = '%s [shape = "circle", label = "%s", fontsize=%d];\n'\
-                   % (str(_safeName(x)),_safeName(nodeName),fontSize)
+            if digraphClass == NormedQuantilesRatingDigraph:
+                print(digraphClass)
+                if x in self.profiles:
+                    cat = self.profiles[x]['category']
+                    nodeName = self.categories[cat]['name']
+                    node = '%s [shape = "box", fillcolor=lightcoral, style=filled, label = "%s", fontsize=%d];\n'\
+                           % (str(x),nodeName,fontSize)           
+                else:
+                    try:
+                        nodeName = self.actions[x]['shortName']
+                    except:
+                        nodeName = str(x)
+                    node = '%s [shape = "circle", label = "%s", fontsize=%d];\n'\
+                           % (str(_safeName(x)),_safeName(nodeName),fontSize)
+                   
+            else: # standard WeakOrders  
+                try:
+                    nodeName = self.actions[x]['shortName']
+                except:
+                    nodeName = str(x)
+                node = '%s [shape = "circle", label = "%s", fontsize=%d];\n'\
+                       % (str(_safeName(x)),_safeName(nodeName),fontSize)
             fo.write(node)
         # same ranks for Hasses equivalence classes
         k = len(rankingByChoosing)

@@ -6346,14 +6346,22 @@ normed performance quantiles gathered from historical data.</p>
 
 <dl class="method">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph.computeRatingRelation">
-<code class="descname">computeRatingRelation</code><span class="sig-paren">(</span><em>Debug=True</em>, <em>StoreRating=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.computeRatingRelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.computeRatingRelation" title="Permalink to this definition">¶</a></dt>
-<dd><p>constructs a bipolar sorting relation using the category contents.</p>
+<code class="descname">computeRatingRelation</code><span class="sig-paren">(</span><em>Debug=False</em>, <em>StoreRating=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.computeRatingRelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.computeRatingRelation" title="Permalink to this definition">¶</a></dt>
+<dd><p>constructs a bipolar rating relation using a preRanking list of lists.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph.exportRatingGraphViz">
-<code class="descname">exportRatingGraphViz</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.exportRatingGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.exportRatingGraphViz" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">exportRatingGraphViz</code><span class="sig-paren">(</span><em>fileName=None</em>, <em>relation=None</em>, <em>direction='best'</em>, <em>noSilent=True</em>, <em>graphType='png'</em>, <em>graphSize='7</em>, <em>7'</em>, <em>fontSize=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.exportRatingGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.exportRatingGraphViz" title="Permalink to this definition">¶</a></dt>
+<dd><p>The method is using the weakOrders.WeakOrder exportGraphViz for
+drawing priented Hasse diagrams of weak orderings, ie the negation
+of the corresponding preorder relation.</p>
+<p>..warning:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Node</span> <span class="ow">or</span> <span class="n">action</span> <span class="n">keys</span> <span class="n">of</span> <span class="n">the</span> <span class="n">digraph</span> <span class="n">must</span> <span class="n">start</span> <span class="k">with</span> <span class="n">a</span> <span class="n">letter</span>
+<span class="ow">and</span> <span class="n">may</span> <span class="ow">not</span> <span class="n">contain</span> <span class="n">a</span> <span class="n">special</span> <span class="n">character</span> <span class="n">like</span> <span class="s1">&#39;-&#39;</span> <span class="ow">or</span> <span class="s1">&#39;_&#39;</span><span class="o">.</span>
+</pre></div>
+</div>
+</dd></dl>
 
 <dl class="method">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph.getActionsKeys">
@@ -7523,7 +7531,7 @@ valued self relation.</p>
 
 <dl class="method">
 <dt id="weakOrders.WeakOrder.exportGraphViz">
-<code class="descname">exportGraphViz</code><span class="sig-paren">(</span><em>fileName=None</em>, <em>relation=None</em>, <em>direction='best'</em>, <em>noSilent=True</em>, <em>graphType='png'</em>, <em>graphSize='7</em>, <em>7'</em>, <em>fontSize=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/weakOrders.html#WeakOrder.exportGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#weakOrders.WeakOrder.exportGraphViz" title="Permalink to this definition">¶</a></dt>
+<code class="descname">exportGraphViz</code><span class="sig-paren">(</span><em>digraphClass=None</em>, <em>fileName=None</em>, <em>relation=None</em>, <em>direction='best'</em>, <em>noSilent=True</em>, <em>graphType='png'</em>, <em>graphSize='7</em>, <em>7'</em>, <em>fontSize=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/weakOrders.html#WeakOrder.exportGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#weakOrders.WeakOrder.exportGraphViz" title="Permalink to this definition">¶</a></dt>
 <dd><p>export GraphViz dot file for weak order (Hasse diagram) drawing filtering.</p>
 </dd></dl>
 

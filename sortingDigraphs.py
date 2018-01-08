@@ -5514,23 +5514,20 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
 
 # ------------  class methods ------------------
 
-    def computeRatingRelation(self,Debug=True,StoreRating=True):
+    def computeRatingRelation(self,Debug=False,StoreRating=True):
         """
-        constructs a bipolar sorting relation using the category contents.
+        constructs a bipolar rating relation using a preRanking list of lists.
         """
         try:
             ratingCategories = self.ratingCategories
         except:
             ratingCategories = self.computeQuantilesRating(Debug=Debug)
-        #categoryKeys = self.orderedCategoryKeys()
-        #categoryKeys = list(self.categories.keys())
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         Min = self.valuationdomain['min']
         print(Max,Med,Min)
 
         profiles = self.profiles
-        categories = self.categories
         preRanking = []
         for c in reversed(profiles):
             preRanking.append([c])
@@ -5538,7 +5535,7 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
                 preRanking.append(ratingCategories[c])
         if Debug:
             print('preRanking',preRanking)
-        #ratingRelation = Digraph.computePreRankingRelation(self,preOrdering)
+
         actions = [x for x in self.actions]
         currentActions = set(actions)
         ratingRelation = {}
@@ -5546,17 +5543,10 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
             ratingRelation[x] = {}
             for y in actions:
                 ratingRelation[x][y] = Med
-
         for eqcl in preRanking:
             currRest = currentActions - set(eqcl)
             if Debug:
                 print(currentActions, eqcl, currRest)
-##            for x in eqcl:
-##                for y in eqcl:
-##                    if x != y:
-##                        preRankingRelation[x][y] = Max
-##                        preRankingRelation[y][x] = Max
-
             for x in eqcl:
                 for y in currRest:
                     ratingRelation[x][y] = Max
@@ -5567,13 +5557,31 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
             self.ratingRelation = ratingRelation
         return ratingRelation
 
-    def exportRatingGraphViz(self):
+    def exportRatingGraphViz(self,fileName=None,relation=None,\
+                             direction='best',noSilent=True,\
+                             graphType='png',graphSize='7,7',\
+                             fontSize=10):
+        """
+        The method is using the weakOrders.WeakOrder exportGraphViz for
+        drawing priented Hasse diagrams of weak orderings, ie the negation
+        of the corresponding preorder relation.
+
+        ..warning::
+
+             Node or action keys of the digraph must start with a letter
+             and may not contain a special character like '-' or '_'.
+             
+        """
         from weakOrders import WeakOrder
         from copy import deepcopy
         ratingRelation = self.computeRatingRelation()
         self.relationOrig = deepcopy(self.relation)
         self.relation = ratingRelation
-        WeakOrder.exportGraphViz(self)
+        WeakOrder.exportGraphViz(self,fileName=fileName,\
+                             direction=direction,noSilent=noSilent,\
+                             graphType=graphType,graphSize=graphSize,\
+                                 digraphClass=self.__class__,\
+                             fontSize=fontSize)
         self.relation = self.relationOrig
         
     def htmlPerformanceHeatmap(self,argCriteriaList=None,
@@ -6499,7 +6507,7 @@ if __name__ == "__main__":
 ##    #ira.closeTransitive(Irreflexive=True,Reverse=True)
 ##    ira.showHTMLRelationTable(actionsList=ira.actionsRanking)
 ##    from weakOrders import WeakOrder
-    ira.exportRatingGraphViz()
+    ira.exportRatingGraphViz(graphType='pdf')
     #ira.showSorting()
     #ira.showHTMLSorting()
     #ira.showActionsSortingResult()
