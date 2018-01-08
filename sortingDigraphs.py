@@ -5566,7 +5566,7 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
         drawing priented Hasse diagrams of weak orderings, ie the negation
         of the corresponding preorder relation.
 
-        ..warning::
+        .. warning::
 
              Node or action keys of the digraph must start with a letter
              and may not contain a special character like '-' or '_'.
