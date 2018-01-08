@@ -203,7 +203,7 @@ class WeakOrder(Digraph):
         # nodes
         for x in actionKeys:
             if digraphClass == NormedQuantilesRatingDigraph:
-                print(digraphClass)
+                #print(digraphClass)
                 if x in self.profiles:
                     cat = self.profiles[x]['category']
                     nodeName = self.categories[cat]['name']

@@ -5566,6 +5566,22 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
         drawing oriented Hasse diagrams of weak orderings, ie the negation
         of the corresponding preorder relation.
 
+        Continuing the prevous Python session:
+        
+           >>> ird.showQuantilesRating()
+           *-------- Quantile sorting result ---------
+            [0.40 - 0.60[ ['a1', 'a2', 'a3']
+            [0.20 - 0.40[ ['a4', 'a5']
+           >>> ird.exportRatingGraphViz(noSilent=False)
+           *---- exporting a dot file for GraphViz tools ---------*
+            Exporting to quantilesRatingDigraph.dot
+            dot -Grankdir=TB -Tpng quantilesRatingDigraph.dot -o quantilesRatingDigraph.png
+
+        .. image:: quantilesRatingDigraph.png
+            :alt: usage example of Normed Quantiles Rating Digraph
+            :width: 200 px
+            :align: center
+        
         .. warning::
 
              Node or action keys of the digraph must start with a letter
@@ -5580,7 +5596,7 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
         WeakOrder.exportGraphViz(self,fileName=fileName,\
                              direction=direction,noSilent=noSilent,\
                              graphType=graphType,graphSize=graphSize,\
-                                 digraphClass=self.__class__,\
+                             digraphClass=self.__class__,\
                              fontSize=fontSize)
         self.relation = self.relationOrig
         
