@@ -5572,7 +5572,7 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
         drawing oriented Hasse diagrams of weak orderings, ie the negation
         of the corresponding preorder relation.
 
-        Continuing the prevous Python session:
+        Continuing the previous Python session:
            >>> nqr.showQuantilesRating()
            *-------- Quantile sorting result ---------
             [0.40 - 0.60[ ['a1', 'a2', 'a3']
