@@ -5573,11 +5573,11 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
         of the corresponding preorder relation.
 
         Continuing the prevous Python session:
-           >>> ird.showQuantilesRating()
+           >>> nqr.showQuantilesRating()
            *-------- Quantile sorting result ---------
             [0.40 - 0.60[ ['a1', 'a2', 'a3']
             [0.20 - 0.40[ ['a4', 'a5']
-           >>> ird.exportRatingGraphViz(noSilent=False)
+           >>> nqr.exportRatingGraphViz(noSilent=False)
            *---- exporting a dot file for GraphViz tools ---------*
             Exporting to quantilesRatingDigraph.dot
             dot -Grankdir=TB -Tpng quantilesRatingDigraph.dot -o quantilesRatingDigraph.png
