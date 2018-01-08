@@ -5514,7 +5514,7 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
 
 # ------------  class methods ------------------
 
-    def computeRatingRelation(self,Debug=False,StoreRating=True):
+    def computeRatingRelation(self,Debug=True,StoreRating=True):
         """
         constructs a bipolar rating relation using a preRanking list of lists.
         """
@@ -5529,10 +5529,16 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
 
         profiles = self.profiles
         preRanking = []
-        for c in reversed(profiles):
-            preRanking.append([c])
-            if c in ratingCategories:
-                preRanking.append(ratingCategories[c])
+        if self.LowerClosed:
+            for c in profiles:
+                preRanking.insert(0,[c])
+                if c in ratingCategories:
+                    preRanking.insert(0,ratingCategories[c])
+        else:
+            for c in reversed(profiles):
+                preRanking.append([c])
+                if c in ratingCategories:
+                    preRanking.append(ratingCategories[c])
         if Debug:
             print('preRanking',preRanking)
 
@@ -5567,7 +5573,6 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
         of the corresponding preorder relation.
 
         Continuing the prevous Python session:
-        
            >>> ird.showQuantilesRating()
            *-------- Quantile sorting result ---------
             [0.40 - 0.60[ ['a1', 'a2', 'a3']
