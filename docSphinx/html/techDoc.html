@@ -6295,7 +6295,7 @@ the diagonal outranking components of the sparse outranking digraph.</p>
 <span id="sortingdigraphs-module"></span><span id="sortingdigraphs-label"></span><h2>sortingDigraphs module<a class="headerlink" href="#module-sortingDigraphs" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph">
-<em class="property">class </em><code class="descclassname">sortingDigraphs.</code><code class="descname">NormedQuantilesRatingDigraph</code><span class="sig-paren">(</span><em>argPerfQuantiles=None</em>, <em>newData=None</em>, <em>hasNoVeto=False</em>, <em>valuationScale=(-1</em>, <em>1)</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrCores=None</em>, <em>nbrOfProcesses=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sortingDigraphs.</code><code class="descname">NormedQuantilesRatingDigraph</code><span class="sig-paren">(</span><em>argPerfQuantiles=None</em>, <em>newData=None</em>, <em>hasNoVeto=False</em>, <em>valuationScale=(-1</em>, <em>1)</em>, <em>rankingRule='NetFolws'</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrCores=None</em>, <em>nbrOfProcesses=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#sortingDigraphs.SortingDigraph" title="sortingDigraphs.SortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.SortingDigraph</span></code></a>, <a class="reference internal" href="#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a></p>
 <p>Specialisation of the sortingDigraph Class
 for absolute rating of a new set of decision actions with
@@ -6340,9 +6340,20 @@ normed performance quantiles gathered from historical data.</p>
 <a class="reference internal image-reference" href="_images/exampleIncRatDigraph.png"><img alt="usage example of Normed Quantiles Rating Digraph" class="align-center" src="_images/exampleIncRatDigraph.png" style="width: 500px;" /></a>
 <dl class="method">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph.computeQuantilesRating">
-<code class="descname">computeQuantilesRating</code><span class="sig-paren">(</span><em>rankingRule='NetFlows'</em>, <em>Debug=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.computeQuantilesRating"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.computeQuantilesRating" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeQuantilesRating</code><span class="sig-paren">(</span><em>Debug=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.computeQuantilesRating"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.computeQuantilesRating" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders an ordered dictionary of non empty quantiles in ascending order.</p>
 </dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.NormedQuantilesRatingDigraph.computeRatingRelation">
+<code class="descname">computeRatingRelation</code><span class="sig-paren">(</span><em>Debug=True</em>, <em>StoreRating=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.computeRatingRelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.computeRatingRelation" title="Permalink to this definition">¶</a></dt>
+<dd><p>constructs a bipolar sorting relation using the category contents.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.NormedQuantilesRatingDigraph.exportRatingGraphViz">
+<code class="descname">exportRatingGraphViz</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.exportRatingGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.exportRatingGraphViz" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph.getActionsKeys">
@@ -6352,7 +6363,7 @@ normed performance quantiles gathered from historical data.</p>
 
 <dl class="method">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph.htmlPerformanceHeatmap">
-<code class="descname">htmlPerformanceHeatmap</code><span class="sig-paren">(</span><em>argCriteriaList=None</em>, <em>argActionsList=None</em>, <em>SparseModel=False</em>, <em>minimalComponentSize=1</em>, <em>RankingRule='NetFlows'</em>, <em>quantiles=None</em>, <em>strategy='average'</em>, <em>ndigits=2</em>, <em>contentCentered=True</em>, <em>colorLevels=None</em>, <em>pageTitle='Performance Heatmap'</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.htmlPerformanceHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.htmlPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
+<code class="descname">htmlPerformanceHeatmap</code><span class="sig-paren">(</span><em>argCriteriaList=None</em>, <em>argActionsList=None</em>, <em>SparseModel=False</em>, <em>RankingRule='NetFlows'</em>, <em>minimalComponentSize=1</em>, <em>quantiles=None</em>, <em>strategy='average'</em>, <em>ndigits=2</em>, <em>contentCentered=True</em>, <em>colorLevels=None</em>, <em>pageTitle='Performance Heatmap'</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.htmlPerformanceHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.htmlPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table
 actions x criteria in html format.</p>
 <p>See the corresponding perfTabs.showHTMLPerformanceHeatMap() method.</p>
@@ -6360,7 +6371,7 @@ actions x criteria in html format.</p>
 
 <dl class="method">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph.showOrderedRelationTable">
-<code class="descname">showOrderedRelationTable</code><span class="sig-paren">(</span><em>direction='decreasing'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.showOrderedRelationTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.showOrderedRelationTable" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showOrderedRelationTable</code><span class="sig-paren">(</span><em>relation=None</em>, <em>direction='decreasing'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.showOrderedRelationTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.showOrderedRelationTable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Showing the relation table in decreasing (default) or increasing order.</p>
 </dd></dl>
 

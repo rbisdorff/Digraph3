@@ -163,4 +163,5 @@ def testNormesQuantilesRatingDigraph():
     pq.updateQuantiles(newActions,historySize=None)
     nrq = NormedQuantilesRatingDigraph(pq,newActions,Debug=True)
     nrq.showQuantilesRating()
+    nrq.exportRatingGraphViz()
 

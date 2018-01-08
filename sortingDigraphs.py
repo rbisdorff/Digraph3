@@ -5304,6 +5304,7 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
     def __init__(self,argPerfQuantiles=None,newData=None,\
                  hasNoVeto=False,\
                  valuationScale=(-1,1),\
+                 rankingRule='NetFolws',\
                  Threading=False,\
                  tempDir=None,\
                  nbrCores=None,\
@@ -5368,6 +5369,7 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
 
         # instantiate sorting categories
         tt = time()
+        self.rankingRule = rankingRule
         quantFreq = self.quantilesFrequencies
         limitingQuantiles = self.limitingQuantiles
         LowerClosed = self.LowerClosed
@@ -5427,9 +5429,9 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
         profiles = OrderedDict()
         for c in categories:
             if LowerClosed:
-                cKey = c+'-m'
+                cKey = 'm'+c
             else:
-                cKey = c+'-M'
+                cKey = 'M'+c
             if LowerClosed:
                 profiles[cKey] = {'category': c, 'name': 'categorical low limits',\
                                   'comment': 'Inferior or equal limits for category membership assessment'}
@@ -5476,7 +5478,7 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
             ranking = g.computeCopelandRanking()
             g.showHTMLRelationTable(actionsList=ranking)
         self.actions = g.actions
-        self.completRelation = g.relation
+        self.completeRelation = g.relation
         self.relation = g.relation
         try:
             self.concordanceRelation = g.concordanceRelation
@@ -5492,16 +5494,93 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
-
         self.runTimes['computeRelation'] = time() - t0
+
+        # compute rating categories
+        t0 = time()
+        if rankingRule == 'NetFlows':
+            self.actionsRanking = self.computeNetFlowsRanking()
+        else:
+            self.actionsRanking = self.computeCopelandRanking()
+        self.ratingCategories = self.computeQuantilesRating(Debug=Debug)
+        if Debug:
+            print('Ranking rule     :', self.rankingRule)
+            print('Actions ranking  :', self.actionsRanking)
+            print('Rating categories:', self.ratingCategories)
+        self.runTimes['quantilesRating'] = time() - t0
+               
+
         self.runTimes['totalTime'] = time() - tt
 
+# ------------  class methods ------------------
 
+    def computeRatingRelation(self,Debug=True,StoreRating=True):
+        """
+        constructs a bipolar sorting relation using the category contents.
+        """
+        try:
+            ratingCategories = self.ratingCategories
+        except:
+            ratingCategories = self.computeQuantilesRating(Debug=Debug)
+        #categoryKeys = self.orderedCategoryKeys()
+        #categoryKeys = list(self.categories.keys())
+        Max = self.valuationdomain['max']
+        Med = self.valuationdomain['med']
+        Min = self.valuationdomain['min']
+        print(Max,Med,Min)
+
+        profiles = self.profiles
+        categories = self.categories
+        preRanking = []
+        for c in reversed(profiles):
+            preRanking.append([c])
+            if c in ratingCategories:
+                preRanking.append(ratingCategories[c])
+        if Debug:
+            print('preRanking',preRanking)
+        #ratingRelation = Digraph.computePreRankingRelation(self,preOrdering)
+        actions = [x for x in self.actions]
+        currentActions = set(actions)
+        ratingRelation = {}
+        for x in actions:
+            ratingRelation[x] = {}
+            for y in actions:
+                ratingRelation[x][y] = Med
+
+        for eqcl in preRanking:
+            currRest = currentActions - set(eqcl)
+            if Debug:
+                print(currentActions, eqcl, currRest)
+##            for x in eqcl:
+##                for y in eqcl:
+##                    if x != y:
+##                        preRankingRelation[x][y] = Max
+##                        preRankingRelation[y][x] = Max
+
+            for x in eqcl:
+                for y in currRest:
+                    ratingRelation[x][y] = Max
+                    ratingRelation[y][x] = Min
+            currentActions = currentActions - set(eqcl)
+        
+        if StoreRating:
+            self.ratingRelation = ratingRelation
+        return ratingRelation
+
+    def exportRatingGraphViz(self):
+        from weakOrders import WeakOrder
+        from copy import deepcopy
+        ratingRelation = self.computeRatingRelation()
+        self.relationOrig = deepcopy(self.relation)
+        self.relation = ratingRelation
+        WeakOrder.exportGraphViz(self)
+        self.relation = self.relationOrig
+        
     def htmlPerformanceHeatmap(self,argCriteriaList=None,
                                argActionsList=None,
                                SparseModel=False,
-                               minimalComponentSize=1,
                                RankingRule='NetFlows',
+                               minimalComponentSize=1,
                                quantiles=None,
                                strategy='average',
                                ndigits=2,
@@ -5596,14 +5675,14 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
                 q = quantiles
             g = PreRankedOutrankingDigraph(self,quantiles=q,LowerClosed=False,
                                            minimalComponentSize=minimalComponentSize,
-                                       componentRankingRule=RankingRule,Threading=Threading,
+                                       componentRankingRule=self.rankingRule,Threading=Threading,
                                        nbrOfCPUs=nbrOfCPUs)
             if argActionsList == None:
                 actionsList = g.boostedRanking
             else:
                 actionsList = argActionsList
         else: # standard outranking model
-            if RankingRule == 'NetFlows':
+            if self.rankingRule == 'NetFlows':
 ##                if quantiles == None:
 ##                    quantiles = na
 ##                from outrankingDigraphs import BipolarOutrankingDigraph
@@ -5747,11 +5826,12 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
         html += '</body></html>'
         return html
 
-    def computeQuantilesRating(self,rankingRule='NetFlows',Debug=True):
+    def computeQuantilesRating(self,Debug=True):
         """
           Renders an ordered dictionary of non empty quantiles in ascending order.
         """
-        if rankingRule == 'NetFlows':
+        
+        if self.rankingRule == 'NetFlows':
             ranking = self.computeNetFlowsRanking()
         else:
             ranking = self.computeCopelandRanking()
@@ -5760,58 +5840,67 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
         if Debug:
             print(ranking)
         n = len(ranking)
-        quantileCategories = OrderedDict()
+        ratingCategories = OrderedDict()
         New = True
         for i in range(n):
             if ranking[i] in self.newActions:
                 if New:
                     c = i-1
-                    quantileCategories[ranking[c]] = [ranking[i]]
+                    ratingCategories[ranking[c]] = [ranking[i]]
                     New = False
                 else:
                     if self.LowerClosed:
-                        quantileCategories[ranking[c]].insert(0,ranking[i])
+                        ratingCategories[ranking[c]].insert(0,ranking[i])
                     else:
-                        quantileCategories[ranking[c]].append(ranking[i])
+                        ratingCategories[ranking[c]].append(ranking[i])
             else:
                 New = True
         if Debug:
-            print(quantileCategories)
-        return quantileCategories
+            print(ratingCategories)
+        return ratingCategories
 
     def showQuantilesRating(self,Descending=True,Debug=False):
-        quantileCategories = self.computeQuantilesRating(Debug=Debug)
+        try:
+            ratingCategories = self.ratingCategories
+        except:
+            ratingCategories = self.computeQuantilesRating(Debug=Debug)
         print('*-------- Quantile sorting result ---------')
         if self.LowerClosed:
             if Descending:
-                for cat in reversed(quantileCategories):
+                for cat in reversed(ratingCategories):
                     c = self.profiles[cat]['category']
-                    print(self.categories[c]['name'],quantileCategories[cat])
+                    print(self.categories[c]['name'],ratingCategories[cat])
             else:
-                for cat in quantileCategories:
+                for cat in ratingCategories:
                     c = self.profiles[cat]['category']
-                    print(self.categories[c]['name'],quantileCategories[cat])
+                    print(self.categories[c]['name'],ratingCategories[cat])
         else:
             if Descending:
-                for cat in quantileCategories:
+                for cat in ratingCategories:
                     c = self.profiles[cat]['category']
-                    print(self.categories[c]['name'],quantileCategories[cat])
+                    print(self.categories[c]['name'],ratingCategories[cat])
             else:
-                for cat in reversed(quantileCategories):
+                for cat in reversed(ratingCategories):
                     c = self.profiles[cat]['category']
-                    print(self.categories[c]['name'],quantileCategories[cat])
+                    print(self.categories[c]['name'],ratingCategories[cat])
             
-    def showOrderedRelationTable(self,direction="decreasing"):
+    def showOrderedRelationTable(self,relation=None,direction="decreasing"):
         """
         Showing the relation table in decreasing (default) or increasing order.
         """
-        actionsList = self.computeNetFlowsRanking()
+        try:
+            actionsList = self.actionsRanking
+        except:
+            actionsList = self.computeNetFlowsRanking()
         
         if direction != "decreasing":
             actionsList.reverse()
 
+        if relation == None:
+            relation = self.relation
+
         Digraph.showRelationTable(self,actionsSubset=actionsList,\
-                                relation=self.relation,\
+                                relation=relation,\
                                 Sorted=False,\
                                 ReflexiveTerms=False)
         
@@ -6379,28 +6468,38 @@ if __name__ == "__main__":
 ##    print(g.computeOrdinalCorrelation(qsrbc))
     
     # test incremental rating agent
+    seed = 101
+
 ##    from randomPerfTabs import RandomCBPerformanceTableau
 ##    from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
 ##    nbrActions=1000
 ##    nbrCrit = 13
 ##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
 ##                                    numberOfCriteria=nbrCrit,seed=105)
+
     from randomPerfTabs import Random3ObjectivesPerformanceTableau
     from randomPerfTabs import Random3ObjectivesPerformanceGenerator as PerfTabGenerator
     nbrActions=1000
     nbrCrit = 21
     tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
-                                    numberOfCriteria=nbrCrit,seed=100)
-    pq = PerformanceQuantiles(tp,10,LowerClosed=False,Debug=False)
-    tpg = PerfTabGenerator(tp,instanceCounter=0,seed=100)
+                                    numberOfCriteria=nbrCrit,seed=seed)
+
+    pq = PerformanceQuantiles(tp,10,LowerClosed=True,Debug=False)
+    tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
     newActions = []
-    for i in range(10):
+    for i in range(20):
         newAction = tpg.randomAction()
         newActions.append(newAction)
     pq.updateQuantiles(newActions,historySize=None)
     ira = NormedQuantilesRatingDigraph(pq,newActions,\
-                                   Debug=True)
+                                   Debug=False)
     ira.showQuantilesRating()
+##    ratingRelation = ira.computeRatingRelation()
+##    ira.relation = ratingRelation
+##    #ira.closeTransitive(Irreflexive=True,Reverse=True)
+##    ira.showHTMLRelationTable(actionsList=ira.actionsRanking)
+##    from weakOrders import WeakOrder
+    ira.exportRatingGraphViz()
     #ira.showSorting()
     #ira.showHTMLSorting()
     #ira.showActionsSortingResult()
@@ -6408,7 +6507,7 @@ if __name__ == "__main__":
     #ira.showRefinedQuantileOrdering()
     #ira.showOrderedRelationTable()
     #ira.showSortingCharacteristics()
-    ira.showHTMLPerformanceHeatmap(RankingRule='NetFlows',pageTitle='Heat map of performances',Correlations=True)
+    #ira.showHTMLPerformanceHeatmap(pageTitle='Heat map of performances',Correlations=True)
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')
