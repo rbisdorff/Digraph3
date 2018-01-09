@@ -6811,10 +6811,10 @@ if __name__ == "__main__":
 
     pq = PerformanceQuantiles(tp,10,LowerClosed=True,Debug=False)
     tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
-    newActions = []
-    for i in range(20):
-        newAction = tpg.randomAction()
-        newActions.append(newAction)
+    newActions = tpg.randomActions(20)
+##    for i in range(20):
+##        newAction = tpg.randomAction()
+##        newActions.append(newAction)
     pq.updateQuantiles(newActions,historySize=None)
     ira = NormedQuantilesRatingDigraph(pq,newActions,PrefThresholds=True,\
                                    Debug=False,Threading=True)

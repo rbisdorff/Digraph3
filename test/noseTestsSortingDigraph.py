@@ -146,7 +146,7 @@ def testActionsSortingResult():
     s1.showActionsSortingResult()
     s1.exportGraphViz('tests1',graphType="pdf")
     
-def testNormesQuantilesRatingDigraph():
+def testNormedQuantilesRatingDigraph():
     print('*-------- Testing NormedQuantilesRatingDigraph class -------')
     from randomPerfTabs import RandomCBPerformanceTableau
     from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
