@@ -676,7 +676,7 @@ The number of so far observed evaluations per criteria are the following:
         self.historySizes[g] = t
 
         
-    def updateQuantiles(self,newActions,historySize=None):
+    def updateQuantiles(self,newData,historySize=None):
         """
         Update the PerformanceQuantiles with a set of new random decision actions.
         Parameter *historysize* allows to take more or less into account the historical situtaion.
@@ -686,10 +686,12 @@ The number of so far observed evaluations per criteria are the following:
        """
 ##        if t != None:
 ##            self.historySizes = t
+        newActions = newData['actions']
         for g in self.criteria:
             gNewValues = []
+            newEvaluation = newData['evaluation']
             for x in newActions:
-                gNewValues.append(x['evaluation'][g])
+                gNewValues.append(newEvaluation[g][x])
             self._updateCriterionQuantiles(g,gNewValues,historySize=historySize)
 ##        self.T += len(newActions)  
     
@@ -716,10 +718,10 @@ if __name__ == "__main__":
     pq.showActions()
     pq.showCriteria(ByObjectives=True)
     tpg = PerfTabGenerator(tp,seed=105)
-    newActions = []
-    for i in range(100):
-        newAction = tpg.randomAction()
-        newActions.append(newAction)
+    newActions = tpg.randomActions(100)
+##    for i in range(100):
+##        newAction = tpg.randomAction()
+##        newActions.append(newAction)
     #print(newActions)
     pq.updateQuantiles(newActions,historySize=None)
 ##    pq.showActions()

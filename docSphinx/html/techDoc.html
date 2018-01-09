@@ -4482,7 +4482,7 @@ given performance tableau.</p>
 
 <dl class="method">
 <dt id="performanceQuantiles.PerformanceQuantiles.updateQuantiles">
-<code class="descname">updateQuantiles</code><span class="sig-paren">(</span><em>newActions</em>, <em>historySize=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/performanceQuantiles.html#PerformanceQuantiles.updateQuantiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#performanceQuantiles.PerformanceQuantiles.updateQuantiles" title="Permalink to this definition">¶</a></dt>
+<code class="descname">updateQuantiles</code><span class="sig-paren">(</span><em>newData</em>, <em>historySize=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/performanceQuantiles.html#PerformanceQuantiles.updateQuantiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#performanceQuantiles.PerformanceQuantiles.updateQuantiles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update the PerformanceQuantiles with a set of new random decision actions.
 Parameter <em>historysize</em> allows to take more or less into account the historical situtaion.
 For instance, <em>historySize=0</em> does not take into account at all any past observations.
@@ -4513,17 +4513,9 @@ influential compared to the historical data.</p>
 <dl class="class">
 <dt id="randomPerfTabs.Random3ObjectivesPerformanceGenerator">
 <em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">Random3ObjectivesPerformanceGenerator</code><span class="sig-paren">(</span><em>argPerfTab</em>, <em>actionNamePrefix='a'</em>, <em>instanceCounter=0</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#Random3ObjectivesPerformanceGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.Random3ObjectivesPerformanceGenerator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#randomPerfTabs.RandomPerformanceGenerator" title="randomPerfTabs.RandomPerformanceGenerator"><code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.RandomPerformanceGenerator</span></code></a></p>
 <p>Generates and/or new decision actions with random evaluation for a
 given Random3ObjectivesPerformanceTableau instance.</p>
-<dl class="method">
-<dt id="randomPerfTabs.Random3ObjectivesPerformanceGenerator.randomAction">
-<code class="descname">randomAction</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#Random3ObjectivesPerformanceGenerator.randomAction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.Random3ObjectivesPerformanceGenerator.randomAction" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a dictionary with following content:</p>
-<p>{ &#8216;action&#8217;: { &#8216;key&#8217;: actionKey, &#8216;shortName&#8217;: ..., &#8216;name&#8217;: ...,  ... },                        
-&#8216;evaluation&#8217;: {&#8216;g1&#8217;: Decimal(...), &#8216;g2&#8217;: Decimal(...), ... }  }</p>
-</dd></dl>
-
 <dl class="method">
 <dt id="randomPerfTabs.Random3ObjectivesPerformanceGenerator.randomUpdate">
 <code class="descname">randomUpdate</code><span class="sig-paren">(</span><em>nbrOfRandomActions=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#Random3ObjectivesPerformanceGenerator.randomUpdate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.Random3ObjectivesPerformanceGenerator.randomUpdate" title="Permalink to this definition">¶</a></dt>
@@ -4614,20 +4606,8 @@ on each of the three objectives.</p>
 <dl class="class">
 <dt id="randomPerfTabs.RandomCBPerformanceGenerator">
 <em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomCBPerformanceGenerator</code><span class="sig-paren">(</span><em>argPerfTab</em>, <em>actionNamePrefix='a'</em>, <em>instanceCounter=None</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomCBPerformanceGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomCBPerformanceGenerator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#randomPerfTabs.RandomPerformanceGenerator" title="randomPerfTabs.RandomPerformanceGenerator"><code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.RandomPerformanceGenerator</span></code></a></p>
 <p>Instantiates a generator of new decision actions with associated random evaluations using the model parameters provided by a given RandomCBPerformanceTableau instance.</p>
-<dl class="method">
-<dt id="randomPerfTabs.RandomCBPerformanceGenerator.randomAction">
-<code class="descname">randomAction</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomCBPerformanceGenerator.randomAction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomCBPerformanceGenerator.randomAction" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a dictionary with following content:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span> <span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">actionKey</span><span class="p">,</span> <span class="s1">&#39;shortName&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">,</span>  
-         <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;neutral&#39;</span><span class="o">|</span><span class="s1">&#39;advantageous&#39;</span><span class="o">|</span><span class="s1">&#39;cheap&#39;</span><span class="p">},</span>
-         <span class="s1">&#39;evaluation&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;g1&#39;</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="o">...</span><span class="p">),</span> 
-                        <span class="s1">&#39;g2&#39;</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="o">...</span><span class="p">),</span> <span class="o">...</span> <span class="p">}}</span><span class="o">.</span>
-</pre></div>
-</div>
-</dd></dl>
-
 <dl class="method">
 <dt id="randomPerfTabs.RandomCBPerformanceGenerator.randomUpdate">
 <code class="descname">randomUpdate</code><span class="sig-paren">(</span><em>nbrOfRandomActions=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomCBPerformanceGenerator.randomUpdate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomCBPerformanceGenerator.randomUpdate" title="Permalink to this definition">¶</a></dt>
@@ -4738,10 +4718,9 @@ with probabilities 2/3, respectively 1/3.</dd>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Generates and/or new decision actions with random evaluation for a given RandomPerformanceTableau instance.</p>
 <dl class="method">
-<dt id="randomPerfTabs.RandomPerformanceGenerator.randomAction">
-<code class="descname">randomAction</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomPerformanceGenerator.randomAction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomPerformanceGenerator.randomAction" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns
-<code class="docutils literal"><span class="pre">{'action':</span> <span class="pre">key,</span> <span class="pre">'evaluation':</span> <span class="pre">{'g1':</span> <span class="pre">Decimal(...),</span> <span class="pre">'g2':</span> <span class="pre">Decimal(...),</span> <span class="pre">...</span> <span class="pre">}}</span></code></p>
+<dt id="randomPerfTabs.RandomPerformanceGenerator.randomActions">
+<code class="descname">randomActions</code><span class="sig-paren">(</span><em>nbrOfRandomActions=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomPerformanceGenerator.randomActions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomPerformanceGenerator.randomActions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates nbrOfRandomActions.</p>
 </dd></dl>
 
 <dl class="method">

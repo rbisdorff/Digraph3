@@ -726,7 +726,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
 
         
-<div class="viewcode-block" id="PerformanceQuantiles.updateQuantiles"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.updateQuantiles">[docs]</a>    <span class="k">def</span> <span class="nf">updateQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="PerformanceQuantiles.updateQuantiles"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.updateQuantiles">[docs]</a>    <span class="k">def</span> <span class="nf">updateQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">newData</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Update the PerformanceQuantiles with a set of new random decision actions.</span>
 <span class="sd">        Parameter *historysize* allows to take more or less into account the historical situtaion.</span>
@@ -736,10 +736,12 @@
 <span class="sd">       &quot;&quot;&quot;</span>
 <span class="c1">##        if t != None:</span>
 <span class="c1">##            self.historySizes = t</span>
+        <span class="n">newActions</span> <span class="o">=</span> <span class="n">newData</span><span class="p">[</span><span class="s1">&#39;actions&#39;</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">:</span>
             <span class="n">gNewValues</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">newEvaluation</span> <span class="o">=</span> <span class="n">newData</span><span class="p">[</span><span class="s1">&#39;evaluation&#39;</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">newActions</span><span class="p">:</span>
-                <span class="n">gNewValues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;evaluation&#39;</span><span class="p">][</span><span class="n">g</span><span class="p">])</span>
+                <span class="n">gNewValues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newEvaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">])</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_updateCriterionQuantiles</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">gNewValues</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="n">historySize</span><span class="p">)</span></div></div>
 <span class="c1">##        self.T += len(newActions)  </span>
     
@@ -766,10 +768,10 @@
     <span class="n">pq</span><span class="o">.</span><span class="n">showActions</span><span class="p">()</span>
     <span class="n">pq</span><span class="o">.</span><span class="n">showCriteria</span><span class="p">(</span><span class="n">ByObjectives</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
-    <span class="n">newActions</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
-        <span class="n">newAction</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomAction</span><span class="p">()</span>
-        <span class="n">newActions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newAction</span><span class="p">)</span>
+    <span class="n">newActions</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="c1">##    for i in range(100):</span>
+<span class="c1">##        newAction = tpg.randomAction()</span>
+<span class="c1">##        newActions.append(newAction)</span>
     <span class="c1">#print(newActions)</span>
     <span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 <span class="c1">##    pq.showActions()</span>

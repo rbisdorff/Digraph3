@@ -5340,23 +5340,26 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         self.cdf = deepcopy(perfQuantiles.cdf)
         self.name = 'quantilesRatingDigraph'
         # import the actions to rate
-        newActions = OrderedDict()
-        evaluation = {}
-        for g in self.criteria:
-            evaluation[g] = {}
+##        newActions = OrderedDict()
+##        evaluation = {}
+##        for g in self.criteria:
+##            evaluation[g] = {}
         if newData != None:
-            na = len(newData)
-            for i in range(na):
-                key = newData[i]['action']['key']
-##                newActions[key] = {'shortName':newData[i]['action']['shortName'],
-##                                'name':newData[i]['action']['name'],
-##                                'type': newData[i]['action']['type'],
-##                                'commemt': newData[i]['action']['comment']}
-                newActions[key] = newData[i]['action']
-                for g in self.criteria:
-                    evaluation[g][key] = newData[i]['evaluation'][g]
-        self.newActions = newActions
-        self.evaluation = evaluation
+##            na = len(newData)
+##            for i in range(na):
+##                key = newData[i]['action']['key']
+####                newActions[key] = {'shortName':newData[i]['action']['shortName'],
+####                                'name':newData[i]['action']['name'],
+####                                'type': newData[i]['action']['type'],
+####                                'commemt': newData[i]['action']['comment']}
+##                newActions[key] = newData[i]['action']
+##                for g in self.criteria:
+##                    evaluation[g][key] = newData[i]['evaluation'][g]
+            self.newActions = newData['actions']
+            self.evaluation = newData['evaluation']
+        else:
+            self.newActions = OrderedDict()
+            self.evaluation = {}     
         
         self.runTimes = {'dataInput': time()-tt}
         

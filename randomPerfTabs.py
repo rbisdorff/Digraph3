@@ -339,8 +339,27 @@ class RandomPerformanceGenerator(object):
             self.rng = RNGTr(m,M,xm,r,seed=rdseed)
             
         self.commonScale = argPerfTab.commonScale
-        
-    def randomAction(self):
+
+    def randomActions(self,nbrOfRandomActions=1):
+        """
+        Generates nbrOfRandomActions.
+        """
+        from collections import OrderedDict
+        criteria = self.perfTab.criteria
+        newActions = OrderedDict()
+        newEvaluation ={}
+        for g in criteria:
+            newEvaluation[g] = {}
+        for i in range(nbrOfRandomActions):
+            newAction = self._randomAction()
+            newKey = newAction['action'].pop('key')
+            newActions[newKey] = newAction['action']
+            for g in criteria:
+                newEvaluation[g][newKey] = newAction['evaluation'][g]
+        return {'actions': newActions, 'evaluation': newEvaluation}
+
+      
+    def _randomAction(self):
         """
         Returns
         ``{'action': key, 'evaluation': {'g1': Decimal(...), 'g2': Decimal(...), ... }}``
@@ -434,7 +453,7 @@ class RandomPerformanceGenerator(object):
         criteria = self.perfTab.criteria
         evaluation = self.perfTab.evaluation
         for i in range(nbrOfRandomActions):
-            newAction = self.randomAction()
+            newAction = self._randomAction()
             newEvaluation = newAction['evaluation']
             newKey = newAction['action']
             actions[newKey] = {'name':newKey}
@@ -1670,7 +1689,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                 print('  name:      ',actions[x]['name'])
                 print('  profile:   ',actions[x]['profile'])
 
-class Random3ObjectivesPerformanceGenerator(object):
+class Random3ObjectivesPerformanceGenerator(RandomPerformanceGenerator):
     """
     Generates and/or new decision actions with random evaluation for a
     given Random3ObjectivesPerformanceTableau instance.
@@ -1694,7 +1713,7 @@ class Random3ObjectivesPerformanceGenerator(object):
         self.nd = len(str(self.counter))
         self.Debug = Debug
         
-    def randomAction(self):
+    def _randomAction(self):
         """
         Returns a dictionary with following content:
 
@@ -1882,7 +1901,7 @@ class Random3ObjectivesPerformanceGenerator(object):
         criteria = self.perfTab.criteria
         evaluation = self.perfTab.evaluation
         for i in range(nbrOfRandomActions):
-            newAction = self.randomAction()
+            newAction = self._randomAction()
             newEvaluation = newAction['evaluation']
             newKey = newAction['action'].pop('key')
             actions[newKey] = newAction['action']
@@ -2579,7 +2598,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                 print('criteria',g,' default thresholds:')
                 print(criteria[g]['thresholds'])
 
-class RandomCBPerformanceGenerator(object):
+class RandomCBPerformanceGenerator(RandomPerformanceGenerator):
     """
     Instantiates a generator of new decision actions with associated random evaluations using the model parameters provided by a given RandomCBPerformanceTableau instance.
 
@@ -2601,7 +2620,7 @@ class RandomCBPerformanceGenerator(object):
             self.counter = instanceCounter
         self.nd = len(str(self.counter))
        
-    def randomAction(self):
+    def _randomAction(self):
         """
         Returns a dictionary with following content::
 
@@ -2750,7 +2769,7 @@ class RandomCBPerformanceGenerator(object):
 
         # return a new random decision alternative
         return {'action': action,'evaluation':evaluation}
-
+    
     def randomUpdate(self,nbrOfRandomActions=1):
         """
         Updates *self.perfTab* with *n* = *nbrOfActions* new random decision alternatives.
@@ -2765,7 +2784,7 @@ class RandomCBPerformanceGenerator(object):
         criteria = self.perfTab.criteria
         evaluation = self.perfTab.evaluation
         for i in range(nbrOfRandomActions):
-            newAction = self.randomAction()
+            newAction = self._randomAction()
             newEvaluation = newAction['evaluation']
             newKey = newAction['action'].pop('key')
             actions[newKey] = newAction['action']
@@ -2849,7 +2868,8 @@ if __name__ == "__main__":
     #t.showHTMLPerformanceHeatmap(Correlations=True)
     rag2 = Random3ObjectivesPerformanceGenerator(t,actionNamePrefix='c',seed=110)
     rag2.randomUpdate(nbrOfRandomActions=5)
-    t.showHTMLPerformanceHeatmap(ndigits=0,Correlations=True)
+    print(rag2.randomActions(2))
+    #t.showHTMLPerformanceHeatmap(ndigits=0,Correlations=True)
     # t.updateDiscriminationThresholds(Comments=True,Debug=True)
     
     

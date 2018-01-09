@@ -183,7 +183,7 @@ def testRandomPerformanceGenerators():
     rag1 = RandomPerformanceGenerator(t,actionNamePrefix='b',seed=100)
     sampleSize = 5
     for s in range(sampleSize):
-        newAction = rag1.randomAction()
+        newAction = rag1._randomAction()
         ak = newAction['action']
         t.actions[ak] = {'name': ak}
         for ev in t.evaluation:
@@ -201,7 +201,7 @@ def testRandomCBPerformanceGenerators():
     rag1 = RandomCBPerformanceGenerator(t,actionNamePrefix='b',seed=100)
     sampleSize = 5
     for s in range(sampleSize):
-        newAction = rag1.randomAction()
+        newAction = rag1._randomAction()
         ak = newAction['action'].pop('key')
         t.actions[ak] = newAction['action']
         for ev in t.evaluation:
@@ -220,7 +220,7 @@ def testRandom3ObjectivesPerformanceGenerators():
     rag1 = Random3ObjectivesPerformanceGenerator(t,actionNamePrefix='b',seed=100)
     sampleSize = 5
     for s in range(sampleSize):
-        newAction = rag1.randomAction()
+        newAction = rag1._randomAction()
         ak = newAction['action'].pop('key')
         t.actions[ak] = newAction['action']
         for ev in t.evaluation:
@@ -228,4 +228,5 @@ def testRandom3ObjectivesPerformanceGenerators():
                 t.evaluation[g][ak] = newAction['evaluation'][g]
     rag2 = Random3ObjectivesPerformanceGenerator(t,actionNamePrefix='c',seed=110)
     rag2.randomUpdate(nbrOfRandomActions=5)
+    print(rag2.randomActions(2))
     #t.showHTMLPerformanceHeatmap(ndigits=0,Correlations=True)

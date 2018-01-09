@@ -51,7 +51,7 @@
 <span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># Python implementation of digraphs</span>
-<span class="c1"># Current revision $Revision: 2355 $</span>
+<span class="c1"># Current revision $Revision: 2356 $</span>
 <span class="c1"># Copyright (C) 2006-2008  Raymond Bisdorff</span>
 <span class="c1">#</span>
 <span class="c1">#    This program is free software; you can redistribute it and/or modify</span>
@@ -5390,23 +5390,26 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">cdf</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfQuantiles</span><span class="o">.</span><span class="n">cdf</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;quantilesRatingDigraph&#39;</span>
         <span class="c1"># import the actions to rate</span>
-        <span class="n">newActions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
-        <span class="n">evaluation</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">:</span>
-            <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="c1">##        newActions = OrderedDict()</span>
+<span class="c1">##        evaluation = {}</span>
+<span class="c1">##        for g in self.criteria:</span>
+<span class="c1">##            evaluation[g] = {}</span>
         <span class="k">if</span> <span class="n">newData</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">na</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">newData</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">na</span><span class="p">):</span>
-                <span class="n">key</span> <span class="o">=</span> <span class="n">newData</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;action&#39;</span><span class="p">][</span><span class="s1">&#39;key&#39;</span><span class="p">]</span>
-<span class="c1">##                newActions[key] = {&#39;shortName&#39;:newData[i][&#39;action&#39;][&#39;shortName&#39;],</span>
-<span class="c1">##                                &#39;name&#39;:newData[i][&#39;action&#39;][&#39;name&#39;],</span>
-<span class="c1">##                                &#39;type&#39;: newData[i][&#39;action&#39;][&#39;type&#39;],</span>
-<span class="c1">##                                &#39;commemt&#39;: newData[i][&#39;action&#39;][&#39;comment&#39;]}</span>
-                <span class="n">newActions</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">newData</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;action&#39;</span><span class="p">]</span>
-                <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">:</span>
-                    <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">newData</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;evaluation&#39;</span><span class="p">][</span><span class="n">g</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">newActions</span> <span class="o">=</span> <span class="n">newActions</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">evaluation</span>
+<span class="c1">##            na = len(newData)</span>
+<span class="c1">##            for i in range(na):</span>
+<span class="c1">##                key = newData[i][&#39;action&#39;][&#39;key&#39;]</span>
+<span class="c1">####                newActions[key] = {&#39;shortName&#39;:newData[i][&#39;action&#39;][&#39;shortName&#39;],</span>
+<span class="c1">####                                &#39;name&#39;:newData[i][&#39;action&#39;][&#39;name&#39;],</span>
+<span class="c1">####                                &#39;type&#39;: newData[i][&#39;action&#39;][&#39;type&#39;],</span>
+<span class="c1">####                                &#39;commemt&#39;: newData[i][&#39;action&#39;][&#39;comment&#39;]}</span>
+<span class="c1">##                newActions[key] = newData[i][&#39;action&#39;]</span>
+<span class="c1">##                for g in self.criteria:</span>
+<span class="c1">##                    evaluation[g][key] = newData[i][&#39;evaluation&#39;][g]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">newActions</span> <span class="o">=</span> <span class="n">newData</span><span class="p">[</span><span class="s1">&#39;actions&#39;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">newData</span><span class="p">[</span><span class="s1">&#39;evaluation&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">newActions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="p">{}</span>     
         
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;dataInput&#39;</span><span class="p">:</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">tt</span><span class="p">}</span>
         
@@ -6735,7 +6738,7 @@
 <span class="s2">    ****************************************************</span>
 <span class="s2">    * Python sortingDigraphs module                    *</span>
 <span class="s2">    * depends on BipolarOutrankingDigraph and          *</span>
-<span class="s2">    * $Revision: 2355 $                                 *</span>
+<span class="s2">    * $Revision: 2356 $                                 *</span>
 <span class="s2">    * Copyright (C) 2010 Raymond Bisdorff              *</span>
 <span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
 <span class="s2">    * to the extent permitted by the applicable law.   *</span>
@@ -6891,7 +6894,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. december 2010                *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2355 $                  *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2356 $                  *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>

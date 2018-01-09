@@ -43,6 +43,7 @@ tests:
 		cp digraphs.py test/
 		cp outrankingDigraphs.py test/
 		cp perfTabs.py test/
+		cp performanceQuantiles.py test/
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
 		cp linearOrders.py test/
@@ -77,6 +78,7 @@ verboseTests:
 		cp digraphs.py test/
 		cp outrankingDigraphs.py test/
 		cp perfTabs.py test/
+		cp performanceQuantiles.py test/
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
 		cp linearOrders.py test/
@@ -108,6 +110,7 @@ digraphsTests:
 		cp digraphsTools.py test/
 		cp digraphs.py test/
 		cp perfTabs.py test/
+		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
@@ -127,6 +130,7 @@ verboseDigraphsTests:
 		cp digraphsTools.py test/
 		cp digraphs.py test/
 		cp perfTabs.py test/
+		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
@@ -144,6 +148,7 @@ sparseOutrankingDigraphsTests:
 		cp digraphsTools.py test/
 		cp digraphs.py test/
 		cp perfTabs.py test/
+		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
@@ -162,6 +167,7 @@ verboseSparseOutrankingDigraphsTests:
 		cp digraphsTools.py test/
 		cp digraphs.py test/
 		cp perfTabs.py test/
+		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
@@ -180,6 +186,7 @@ bigOutrankingDigraphsTests:
 		cp digraphsTools.py test/
 		cp digraphs.py test/
 		cp perfTabs.py test/
+		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
@@ -198,6 +205,7 @@ verboseBigOutrankingDigraphsTests:
 		cp digraphsTools.py test/
 		cp digraphs.py test/
 		cp perfTabs.py test/
+		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
@@ -216,6 +224,7 @@ graphsTests:
 		cp digraphsTools.py test/
 		cp digraphs.py test/
 		cp perfTabs.py test/
+		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
@@ -235,6 +244,7 @@ verboseGraphsTests:
 		cp digraphsTools.py test/
 		cp digraphs.py test/
 		cp perfTabs.py test/
+		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
@@ -254,6 +264,7 @@ perfTabsTests:
 		cp digraphsTools.py test/
 		cp digraphs.py test/
 		cp perfTabs.py test/
+		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
@@ -273,6 +284,7 @@ randomPerfTabsTests:
 		cp digraphsTools.py test/
 		cp digraphs.py test/
 		cp perfTabs.py test/
+		cp performanceQuantiles.py test/
 		cp randomPerfTabs.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
@@ -293,6 +305,7 @@ verbosePerfTabsTests:
 		cp digraphsTools.py test/
 		cp digraphs.py test/
 		cp perfTabs.py test/
+		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
@@ -312,6 +325,7 @@ verboseRandomPerfTabsTests:
 		cp digraphsTools.py test/
 		cp digraphs.py test/
 		cp perfTabs.py test/
+		cp performanceQuantiles.py test/
 		cp randomPerfTabs.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
@@ -331,6 +345,7 @@ outrankingDigraphsTests:
 		cp digraphsTools.py test/
 		cp digraphs.py test/
 		cp perfTabs.py test/
+		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
@@ -350,6 +365,7 @@ verboseOutrankingDigraphsTests:
 		cp digraphsTools.py test/
 		cp digraphs.py test/
 		cp perfTabs.py test/
+		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
@@ -369,6 +385,7 @@ sortingDigraphsTests:
 		cp digraphsTools.py test/
 		cp digraphs.py test/
 		cp perfTabs.py test/
+		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
@@ -388,6 +405,7 @@ verboseSortingDigraphsTests:
 		cp digraphsTools.py test/
 		cp digraphs.py test/
 		cp perfTabs.py test/
+		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
@@ -407,6 +425,7 @@ votingDigraphsTests:
 		cp digraphsTools.py test/
 		cp digraphs.py test/
 		cp perfTabs.py test/
+		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
@@ -425,6 +444,7 @@ verboseVotingDigraphsTests:
 		cp digraphsTools.py test/
 		cp digraphs.py test/
 		cp perfTabs.py test/
+		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
@@ -444,6 +464,7 @@ linearOrdersTests:
 		cp digraphsTools.py test/
 		cp digraphs.py test/
 		cp perfTabs.py test/
+		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
@@ -463,6 +484,7 @@ verboseLinearOrdersTests:
 		cp digraphsTools.py test/
 		cp digraphs.py test/
 		cp perfTabs.py test/
+		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
@@ -480,6 +502,7 @@ weakOrdersTests:
 		cp digraphs.py test/
 		cp outrankingDigraphs.py test/
 		cp perfTabs.py test/
+		cp performanceQuantiles.py test/
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
 		cp linearOrders.py test/
@@ -499,6 +522,7 @@ verboseWeakOrdersTests:
 		cp digraphs.py test/
 		cp outrankingDigraphs.py test/
 		cp perfTabs.py test/
+		cp performanceQuantiles.py test/
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
 		cp linearOrders.py test/
@@ -518,6 +542,7 @@ randomDigraphsTests:
 		cp digraphs.py test/
 		cp outrankingDigraphs.py test/
 		cp perfTabs.py test/
+		cp performanceQuantiles.py test/
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
 		cp linearOrders.py test/
@@ -535,6 +560,7 @@ verboseRandomDigraphsTests:
 		cp digraphs.py test/
 		cp outrankingDigraphs.py test/
 		cp perfTabs.py test/
+		cp performanceQuantiles.py test/
 		cp sortingDigraphs.py test/
 		cp votingDigraphs.py test/
 		cp linearOrders.py test/
