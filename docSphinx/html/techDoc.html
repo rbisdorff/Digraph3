@@ -6296,7 +6296,7 @@ the diagonal outranking components of the sparse outranking digraph.</p>
 <dl class="class">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph">
 <em class="property">class </em><code class="descclassname">sortingDigraphs.</code><code class="descname">NormedQuantilesRatingDigraph</code><span class="sig-paren">(</span><em>argPerfQuantiles=None</em>, <em>newData=None</em>, <em>hasNoVeto=False</em>, <em>valuationScale=(-1</em>, <em>1)</em>, <em>rankingRule='NetFolws'</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrCores=None</em>, <em>nbrOfProcesses=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#sortingDigraphs.SortingDigraph" title="sortingDigraphs.SortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.SortingDigraph</span></code></a>, <a class="reference internal" href="#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.QuantilesSortingDigraph</span></code></a>, <a class="reference internal" href="#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a></p>
 <p>Specialisation of the sortingDigraph Class
 for absolute rating of a new set of decision actions with
 normed performance quantiles gathered from historical data.</p>
@@ -6339,6 +6339,12 @@ normed performance quantiles gathered from historical data.</p>
 </dl>
 <a class="reference internal image-reference" href="_images/exampleIncRatDigraph.png"><img alt="usage example of Normed Quantiles Rating Digraph" class="align-center" src="_images/exampleIncRatDigraph.png" style="width: 500px;" /></a>
 <dl class="method">
+<dt id="sortingDigraphs.NormedQuantilesRatingDigraph.computeCategoryContents">
+<code class="descname">computeCategoryContents</code><span class="sig-paren">(</span><em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.computeCategoryContents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.computeCategoryContents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the sorting results per category.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph.computeQuantilesRating">
 <code class="descname">computeQuantilesRating</code><span class="sig-paren">(</span><em>Debug=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.computeQuantilesRating"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.computeQuantilesRating" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders an ordered dictionary of non empty quantiles in ascending order.</p>
@@ -6348,6 +6354,16 @@ normed performance quantiles gathered from historical data.</p>
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph.computeRatingRelation">
 <code class="descname">computeRatingRelation</code><span class="sig-paren">(</span><em>Debug=True</em>, <em>StoreRating=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.computeRatingRelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.computeRatingRelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>constructs a bipolar rating relation using a preRanking list of lists.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.NormedQuantilesRatingDigraph.computeSortingCharacteristics">
+<code class="descname">computeSortingCharacteristics</code><span class="sig-paren">(</span><em>action=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.computeSortingCharacteristics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.computeSortingCharacteristics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a bipolar-valued bi-dictionary relation
+representing the degree of credibility of the
+assertion that &#8220;action x in A belongs to category c in C&#8221;,
+ie x outranks low category limit and does not outrank
+the high category limit.</p>
 </dd></dl>
 
 <dl class="method">

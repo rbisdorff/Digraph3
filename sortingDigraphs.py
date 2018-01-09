@@ -5256,7 +5256,7 @@ class _IncrementalRatingDigraph(SortingDigraph,PerformanceQuantiles):
 
 #-------------
 from performanceQuantiles import PerformanceQuantiles  
-class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
+class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles):
     """
     Specialisation of the sortingDigraph Class
     for absolute rating of a new set of decision actions with
@@ -5562,6 +5562,92 @@ class NormedQuantilesRatingDigraph(SortingDigraph,PerformanceQuantiles):
         if StoreRating:
             self.ratingRelation = ratingRelation
         return ratingRelation
+
+    def computeCategoryContents(self,Debug=False):
+        """
+        Computes the sorting results per category.
+        """
+        if self.LowerClosed:
+            Reverse=False
+        else:
+            Reverse=True
+        actions = self.newActions
+        sorting = self.computeSortingCharacteristics(Debug=Debug)
+        categoryContent = {}
+        for c in self.orderedCategoryKeys(Reverse=Reverse):
+            categoryContent[c] = []
+            for x in actions:
+                if sorting[x][c]['categoryMembership'] >= self.valuationdomain['med']:
+                    categoryContent[c].append(x)
+        return categoryContent
+
+
+    def computeSortingCharacteristics(self, action=None, Debug=False):
+        """
+        Renders a bipolar-valued bi-dictionary relation
+        representing the degree of credibility of the
+        assertion that "action x in A belongs to category c in C",
+        ie x outranks low category limit and does not outrank
+        the high category limit.
+        """
+        Min = self.valuationdomain['min']
+        Med = self.valuationdomain['med']
+        Max = self.valuationdomain['max']
+
+        actions = self.newActions
+            
+        categories = self.categories
+
+        try:
+            LowerClosed = self.LowerClosed
+        except:
+            LowerClosed = True
+
+        if Debug:
+            if LowerClosed:
+                print('x  in  K_k\t r(x >= m_k)\t r(x < M_k)\t r(x in K_k)')
+            else:
+                print('x  in  K_k\t r(m_k < x)\t r(M_k >= x)\t r(x in K_k)')
+
+        sorting = {}
+        nq = len(self.quantilesFrequencies) - 1
+        for x in actions:
+            sorting[x] = {}
+            for c in categories:
+                sorting[x][c] = {}
+                if LowerClosed:
+                    cKey= 'm'+c
+                else:
+                    cKey= 'M'+c
+                if LowerClosed:
+                    lowLimit = self.relation[x][cKey]
+                    if int(c) < nq:
+                        cMaxKey = 'm'+str(int(c)+1)
+                        notHighLimit = Max - self.relation[x][cMaxKey] + Min
+                    else:
+                        notHighLimit = Max
+                else:
+                    if int(c) > 1:
+                        cMinKey = 'M'+str(int(c)-1)
+                        lowLimit = Max - self.relation[cMinKey][x] + Min
+                    else:
+                        lowLimit = Max
+                    notHighLimit = self.relation[cKey][x]
+                #if Comments:
+                #    print('%s in %s: low = %.2f, high = %.2f' % \
+                #          (x, c,lowLimit,notHighLimit), end=' ')
+                if Debug:
+                    print('%s in %s - %s\t' % (x, self.categories[c]['lowLimit'],self.categories[c]['highLimit'],), end=' ')
+                categoryMembership = min(lowLimit,notHighLimit)
+                sorting[x][c]['lowLimit'] = lowLimit
+                sorting[x][c]['notHighLimit'] = notHighLimit
+                sorting[x][c]['categoryMembership'] = categoryMembership
+
+                if Debug:
+                    #print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+                    print('%.2f\t\t %.2f\t\t %.2f\n' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+
+        return sorting
 
     def exportRatingGraphViz(self,fileName=None,relation=None,\
                              direction='best',noSilent=True,\
@@ -6523,12 +6609,15 @@ if __name__ == "__main__":
     ira = NormedQuantilesRatingDigraph(pq,newActions,\
                                    Debug=False)
     ira.showQuantilesRating()
+    ira.sorting = ira.computeSortingCharacteristics()
+    ira.categoryContent = ira.computeCategoryContents()
+    ira.showSorting()
 ##    ratingRelation = ira.computeRatingRelation()
 ##    ira.relation = ratingRelation
 ##    #ira.closeTransitive(Irreflexive=True,Reverse=True)
 ##    ira.showHTMLRelationTable(actionsList=ira.actionsRanking)
 ##    from weakOrders import WeakOrder
-    ira.exportRatingGraphViz(graphType='pdf')
+##    ira.exportRatingGraphViz(graphType='pdf')
     #ira.showSorting()
     #ira.showHTMLSorting()
     #ira.showActionsSortingResult()
@@ -6536,7 +6625,7 @@ if __name__ == "__main__":
     #ira.showRefinedQuantileOrdering()
     #ira.showOrderedRelationTable()
     #ira.showSortingCharacteristics()
-    #ira.showHTMLPerformanceHeatmap(pageTitle='Heat map of performances',Correlations=True)
+    ira.showHTMLPerformanceHeatmap(pageTitle='Heat map of performances',Correlations=True)
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')
