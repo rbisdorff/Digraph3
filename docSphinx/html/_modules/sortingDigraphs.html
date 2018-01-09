@@ -51,7 +51,7 @@
 <span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># Python implementation of digraphs</span>
-<span class="c1"># Current revision $Revision: 2353 $</span>
+<span class="c1"># Current revision $Revision: 2355 $</span>
 <span class="c1"># Copyright (C) 2006-2008  Raymond Bisdorff</span>
 <span class="c1">#</span>
 <span class="c1">#    This program is free software; you can redistribute it and/or modify</span>
@@ -1236,7 +1236,7 @@
         <span class="k">except</span><span class="p">:</span>
             <span class="n">LowerClosed</span> <span class="o">=</span> <span class="n">true</span>
         <span class="k">if</span> <span class="n">Reverse</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">*--- Sorting results in descending order ---*</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">*--- Quantiles Sorting results in descending order ---*</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="n">prev_c</span> <span class="o">=</span> <span class="s1">&#39;&gt;&#39;</span>
             <span class="k">if</span> <span class="n">isReturningHTML</span><span class="p">:</span>
                 <span class="n">prev_c</span> <span class="o">=</span> <span class="s1">&#39;&amp;gt;&#39;</span>
@@ -5353,12 +5353,12 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfQuantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">newData</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
+                 <span class="n">PrefThresholds</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                  <span class="n">valuationScale</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>\
                  <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFolws&#39;</span><span class="p">,</span>\
                  <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                  <span class="n">tempDir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">nbrCores</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
-                 <span class="n">nbrOfProcesses</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         
@@ -5466,6 +5466,7 @@
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">criteriaCategoryLimits</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
             <span class="n">gQuantiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computeLimitingQuantiles</span><span class="p">(</span><span class="n">g</span><span class="p">,</span>\
+                            <span class="n">PrefThresholds</span><span class="o">=</span><span class="n">PrefThresholds</span><span class="p">,</span>\
                             <span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">criteriaCategoryLimits</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">gQuantiles</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
@@ -5564,7 +5565,59 @@
 
 <span class="c1"># ------------  class methods ------------------</span>
 
-<div class="viewcode-block" id="NormedQuantilesRatingDigraph.computeRatingRelation"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.computeRatingRelation">[docs]</a>    <span class="k">def</span> <span class="nf">computeRatingRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">StoreRating</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="NormedQuantilesRatingDigraph.showActionCategories"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.showActionCategories">[docs]</a>    <span class="k">def</span> <span class="nf">showActionCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders the union of categories in which the given action is sorted positively or null into.</span>
+<span class="sd">        Returns a tuple : action, lowest category key, highest category key, membership credibility !</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">sorting</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sorting</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">sorting</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeSortingCharacteristics</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="n">action</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
+        <span class="n">catKeys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">orderedCategoryKeys</span><span class="p">()</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">catKeys</span><span class="p">[</span><span class="mi">0</span><span class="p">],[</span><span class="n">catKeys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]]</span>
+        <span class="n">lowLimit</span> <span class="o">=</span> <span class="n">sorting</span><span class="p">[</span><span class="n">action</span><span class="p">][</span><span class="n">catKeys</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">]</span>
+        <span class="n">notHighLimit</span> <span class="o">=</span> <span class="n">sorting</span><span class="p">[</span><span class="n">action</span><span class="p">][</span><span class="n">catKeys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">orderedCategoryKeys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">sorting</span><span class="p">[</span><span class="n">action</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;categoryMembership&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">Med</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">sorting</span><span class="p">[</span><span class="n">action</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
+                    <span class="n">lowLimit</span> <span class="o">=</span> <span class="n">sorting</span><span class="p">[</span><span class="n">action</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">]</span>
+                    <span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span>
+                <span class="k">if</span> <span class="n">sorting</span><span class="p">[</span><span class="n">action</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;notHighLimit&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
+                    <span class="n">notHighLimit</span> <span class="o">=</span> <span class="n">sorting</span><span class="p">[</span><span class="n">action</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;notHighLimit&#39;</span><span class="p">]</span>
+                    <span class="n">keys</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span>
+                <span class="c1">#keys.append(c)</span>
+                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">sorting</span><span class="p">[</span><span class="n">action</span><span class="p">][</span><span class="n">c</span><span class="p">],</span> <span class="n">keys</span><span class="p">)</span>
+        <span class="n">credibility</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">lowLimit</span><span class="p">,</span><span class="n">notHighLimit</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> - </span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1"> with credibility: </span><span class="si">%.2f</span><span class="s1"> = min(</span><span class="si">%.2f</span><span class="s1">,</span><span class="si">%.2f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span>\
+                                 <span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">],</span>\
+                                 <span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;highLimit&#39;</span><span class="p">],</span>\
+                                 <span class="n">action</span><span class="p">,</span>\
+                                 <span class="n">credibility</span><span class="p">,</span><span class="n">lowLimit</span><span class="p">,</span><span class="n">notHighLimit</span><span class="p">)</span> <span class="p">)</span>
+        <span class="k">return</span> <span class="n">action</span><span class="p">,</span>\
+                <span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>\
+                <span class="n">keys</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>\
+                <span class="n">credibility</span>            </div>
+
+
+<div class="viewcode-block" id="NormedQuantilesRatingDigraph.showActionsSortingResult"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.showActionsSortingResult">[docs]</a>    <span class="k">def</span> <span class="nf">showActionsSortingResult</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        shows the quantiles sorting result all (default) of a subset of the decision actions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">actionSubset</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">newActions</span><span class="p">]</span>
+            <span class="c1">#actions.sort()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">flatten</span><span class="p">(</span><span class="n">actionSubset</span><span class="p">)]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Quantiles sorting result per decision action&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">showActionCategories</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="NormedQuantilesRatingDigraph.computeRatingRelation"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.computeRatingRelation">[docs]</a>    <span class="k">def</span> <span class="nf">computeRatingRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">StoreRating</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        constructs a bipolar rating relation using a preRanking list of lists.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -5575,7 +5628,7 @@
         <span class="n">Max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
         <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
         <span class="n">Min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">Max</span><span class="p">,</span><span class="n">Med</span><span class="p">,</span><span class="n">Min</span><span class="p">)</span>
+        <span class="c1">#print(Max,Med,Min)</span>
 
         <span class="n">profiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span>
         <span class="n">preRanking</span> <span class="o">=</span> <span class="p">[]</span>
@@ -5621,15 +5674,145 @@
             <span class="n">Reverse</span><span class="o">=</span><span class="kc">False</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">Reverse</span><span class="o">=</span><span class="kc">True</span>
+        <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">newActions</span>
         <span class="n">sorting</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeSortingCharacteristics</span><span class="p">(</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
         <span class="n">categoryContent</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">orderedCategoryKeys</span><span class="p">(</span><span class="n">Reverse</span><span class="o">=</span><span class="n">Reverse</span><span class="p">):</span>
             <span class="n">categoryContent</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;categoryMembership&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;categoryMembership&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">Med</span><span class="p">:</span>
                     <span class="n">categoryContent</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">categoryContent</span></div>
+
+<div class="viewcode-block" id="NormedQuantilesRatingDigraph.computeQuantileOrdering"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.computeQuantileOrdering">[docs]</a>    <span class="k">def</span> <span class="nf">computeQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                <span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                <span class="n">HTML</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        *Parameters*:</span>
+<span class="sd">            * Descending: listing in *decreasing* (default) or *increasing* quantile order.</span>
+<span class="sd">            * strategy: ordering in an {&#39;optimistic&#39; (default) | &#39;pessimistic&#39; | &#39;average&#39;}</span>
+<span class="sd">              in the uppest, the lowest or the average potential quantile.</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">strategy</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">strategy</span> <span class="o">=</span> <span class="s1">&#39;average&#39;</span>
+        <span class="k">if</span> <span class="n">HTML</span><span class="p">:</span>
+            <span class="n">html</span> <span class="o">=</span> <span class="s1">&#39;&lt;h1&gt;Quantiles preordering&lt;/h1&gt;&#39;</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;table style=&quot;background-color:White;&quot; border=&quot;1&quot;&gt;&#39;</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr bgcolor=&quot;#9acd32&quot;&gt;&lt;th&gt;quantile limits&lt;/th&gt;&#39;</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;th&gt;</span><span class="si">%s</span><span class="s1"> sorting&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="n">strategy</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;&#39;</span>
+        <span class="n">actionsCategories</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">newActions</span><span class="p">:</span>
+            <span class="n">a</span><span class="p">,</span><span class="n">lowCateg</span><span class="p">,</span><span class="n">highCateg</span><span class="p">,</span><span class="n">credibility</span> <span class="o">=</span>\
+                     <span class="bp">self</span><span class="o">.</span><span class="n">showActionCategories</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s2">&quot;optimistic&quot;</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">actionsCategories</span><span class="p">[(</span><span class="nb">int</span><span class="p">(</span><span class="n">highCateg</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">lowCateg</span><span class="p">))]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="n">actionsCategories</span><span class="p">[(</span><span class="nb">int</span><span class="p">(</span><span class="n">highCateg</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">lowCateg</span><span class="p">))]</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s2">&quot;pessimistic&quot;</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">actionsCategories</span><span class="p">[(</span><span class="nb">int</span><span class="p">(</span><span class="n">lowCateg</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">highCateg</span><span class="p">))]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="n">actionsCategories</span><span class="p">[(</span><span class="nb">int</span><span class="p">(</span><span class="n">lowCateg</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">highCateg</span><span class="p">))]</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s2">&quot;average&quot;</span><span class="p">:</span>
+                <span class="n">lc</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">lowCateg</span><span class="p">)</span>
+                <span class="n">hc</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">highCateg</span><span class="p">)</span>
+                <span class="n">ac</span> <span class="o">=</span> <span class="p">(</span><span class="n">lc</span><span class="o">+</span><span class="n">hc</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">actionsCategories</span><span class="p">[(</span><span class="n">ac</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">highCateg</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">lowCateg</span><span class="p">))]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="n">actionsCategories</span><span class="p">[(</span><span class="n">ac</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">highCateg</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">lowCateg</span><span class="p">))]</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>  <span class="c1"># optimistic by default</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">actionsCategories</span><span class="p">[(</span><span class="nb">int</span><span class="p">(</span><span class="n">highCateg</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">lowCateg</span><span class="p">))]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="n">actionsCategories</span><span class="p">[(</span><span class="nb">int</span><span class="p">(</span><span class="n">highCateg</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">lowCateg</span><span class="p">))]</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>      
+                
+        <span class="n">actionsCategIntervals</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">actionsCategories</span><span class="p">:</span>
+            <span class="n">actionsCategIntervals</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">interval</span><span class="p">,</span>\
+                                          <span class="n">actionsCategories</span><span class="p">[</span><span class="n">interval</span><span class="p">]])</span>
+        <span class="n">actionsCategIntervals</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="n">Descending</span><span class="p">)</span>
+        <span class="n">weakOrdering</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">actionsCategIntervals</span><span class="p">:</span>
+        <span class="c1">#print(item)</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s2">&quot;optimistic&quot;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">HTML</span><span class="p">:</span>
+                            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;tdbgcolor=&quot;#FFF79B&quot;&gt;</span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1">&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">],</span>\
+                                                <span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])][</span><span class="s1">&#39;highLimit&#39;</span><span class="p">])</span>
+                            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;td&gt;</span><span class="si">%s</span><span class="s1">&lt;/td&gt;&lt;/tr&gt;&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1"> : </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">],</span>\
+                                                <span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])][</span><span class="s1">&#39;highLimit&#39;</span><span class="p">],</span>\
+                                                <span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">HTML</span><span class="p">:</span>
+                            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;td bgcolor=&quot;#FFF79B&quot;&gt;</span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1">&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">],</span>\
+                                                <span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])][</span><span class="s1">&#39;highLimit&#39;</span><span class="p">])</span>
+                            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;td&gt;</span><span class="si">%s</span><span class="s1">&lt;/td&gt;&lt;/tr&gt;&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>                            
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1"> : </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">],</span>\
+                                                <span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])][</span><span class="s1">&#39;highLimit&#39;</span><span class="p">],</span>\
+                                                <span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="p">)</span>
+                <span class="k">elif</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s2">&quot;pessimistic&quot;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">HTML</span><span class="p">:</span>
+                            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;td bgcolor=&quot;#FFF79B&quot;&gt;</span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1">&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">],</span>\
+                                                <span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])][</span><span class="s1">&#39;highLimit&#39;</span><span class="p">])</span>
+                            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;td&gt;</span><span class="si">%s</span><span class="s1">&lt;/td&gt;&lt;/tr&gt;&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1"> : </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">],</span>\
+                                                <span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])][</span><span class="s1">&#39;highLimit&#39;</span><span class="p">],</span>\
+                                                <span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">HTML</span><span class="p">:</span>
+                            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;td bgcolor=&quot;#FFF79B&quot;&gt;</span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1">&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">],</span>\
+                                                <span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])][</span><span class="s1">&#39;highLimit&#39;</span><span class="p">])</span>
+                            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;td&gt;</span><span class="si">%s</span><span class="s1">&lt;/td&gt;&lt;/tr&gt;&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1"> : </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">],</span>\
+                                                <span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])][</span><span class="s1">&#39;highLimit&#39;</span><span class="p">],</span>\
+                                                <span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="p">)</span>                   
+                <span class="k">elif</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s2">&quot;average&quot;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">HTML</span><span class="p">:</span>
+                            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;td bgcolor=&quot;#FFF79B&quot;&gt;</span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1">&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">])][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">],</span>\
+                                                <span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])][</span><span class="s1">&#39;highLimit&#39;</span><span class="p">])</span>
+                            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;td&gt;</span><span class="si">%s</span><span class="s1">&lt;/td&gt;&lt;/tr&gt;&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1"> : </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">])][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">],</span>\
+                                                <span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])][</span><span class="s1">&#39;highLimit&#39;</span><span class="p">],</span>\
+                                                <span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">HTML</span><span class="p">:</span>
+                            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;td bgcolor=&quot;#FFF79B&quot;&gt;</span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1">&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">])][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">],</span>\
+                                                <span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">])][</span><span class="s1">&#39;highLimit&#39;</span><span class="p">])</span>
+                            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;td&gt;</span><span class="si">%s</span><span class="s1">&lt;/td&gt;&lt;/tr&gt;&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1"> : </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">])][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">],</span>\
+                                                <span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])][</span><span class="s1">&#39;highLimit&#39;</span><span class="p">],</span>\
+                                                <span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="p">)</span>
+            <span class="n">weakOrdering</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">HTML</span><span class="p">:</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;&#39;</span>
+            <span class="k">return</span> <span class="n">html</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">weakOrdering</span></div>
+
+<div class="viewcode-block" id="NormedQuantilesRatingDigraph.showQuantileOrdering"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.showQuantileOrdering">[docs]</a>    <span class="k">def</span> <span class="nf">showQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Dummy show method for the commenting computeQuantileOrdering() method.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">computeQuantileOrdering</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="n">strategy</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
 
 
 <div class="viewcode-block" id="NormedQuantilesRatingDigraph.computeSortingCharacteristics"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.computeSortingCharacteristics">[docs]</a>    <span class="k">def</span> <span class="nf">computeSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -5648,10 +5831,7 @@
             
         <span class="n">categories</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">categories</span>
 
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">LowerClosed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span>
-        <span class="k">except</span><span class="p">:</span>
-            <span class="n">LowerClosed</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">LowerClosed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span>
 
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">LowerClosed</span><span class="p">:</span>
@@ -5662,6 +5842,8 @@
         <span class="n">sorting</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">nq</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;action&#39;</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
             <span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">categories</span><span class="p">:</span>
                 <span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
@@ -5695,7 +5877,7 @@
 
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                     <span class="c1">#print(&#39;\t %.2f \t %.2f \t %.2f&#39; % (sorting[x][c][&#39;lowLimit&#39;], sorting[x][c][&#39;notHighLimit&#39;], sorting[x][c][&#39;categoryMembership&#39;]))</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%.2f</span><span class="se">\t\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="se">\t\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">],</span> <span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;notHighLimit&#39;</span><span class="p">],</span> <span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;categoryMembership&#39;</span><span class="p">]))</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%.2f</span><span class="se">\t\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="se">\t\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">],</span> <span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;notHighLimit&#39;</span><span class="p">],</span> <span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;categoryMembership&#39;</span><span class="p">]))</span>
 
         <span class="k">return</span> <span class="n">sorting</span></div>
 
@@ -6029,7 +6211,7 @@
             <span class="n">ratingCategories</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ratingCategories</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="n">ratingCategories</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeQuantilesRating</span><span class="p">(</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Quantile sorting result ---------&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Quantiles rating result ---------&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">Descending</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">cat</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">ratingCategories</span><span class="p">):</span>
@@ -6070,18 +6252,37 @@
                                 <span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
         
                                          
-    <span class="k">def</span> <span class="nf">_computeLimitingQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_computeLimitingQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">PrefThresholds</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the list of limiting quantiles on criteria g</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">PrefThresholds</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">gPrefThrCst</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;thresholds&#39;</span><span class="p">][</span><span class="s1">&#39;pref&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">gPrefThrSlope</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;thresholds&#39;</span><span class="p">][</span><span class="s1">&#39;pref&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">gPrefThrCst</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
+                <span class="n">gPrefThrSlope</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>            
+<span class="c1">##        else:</span>
+<span class="c1">##            gPrefThrCst = Decimal(&#39;0&#39;)</span>
+<span class="c1">##            gPrefThrSlope = Decimal(&#39;1&#39;)            </span>
         
         <span class="n">gQuantiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteriaCategoryLimits</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">gQuantiles</span><span class="p">)</span>
+        <span class="n">nq</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">gQuantiles</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">PrefThresholds</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nq</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span> <span class="c1"># quantile limits raised by the preference thershold</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span>
+                        <span class="n">gQuantiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">gPrefThrCst</span> <span class="o">-</span> <span class="n">gQuantiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">gPrefThrSlope</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">gQuantiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-=</span> <span class="n">gPrefThrCst</span> <span class="o">+</span> <span class="n">gQuantiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">gPrefThrSlope</span>
             <span class="c1"># we ignore the 1.00 quantile and replace it with +infty        </span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span>
                 <span class="n">gQuantiles</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">gQuantiles</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span> <span class="o">*</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">)</span>         
+                <span class="n">gQuantiles</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span> <span class="o">*</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">)</span>       
 
         <span class="k">else</span><span class="p">:</span>  <span class="c1"># upper closed categories</span>
             <span class="c1"># we ignore the quantile 0.0 and replace it with -\infty            </span>
@@ -6089,6 +6290,12 @@
                 <span class="n">gQuantiles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span> <span class="o">*</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">gQuantiles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span>
+            <span class="k">if</span> <span class="n">PrefThresholds</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">nq</span><span class="p">):</span> <span class="c1"># quantile limits raised by the preference thershold</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span>
+                        <span class="n">gQuantiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">gPrefThrCst</span> <span class="o">-</span> <span class="n">gQuantiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">gPrefThrSlope</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">gQuantiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-=</span> <span class="n">gPrefThrCst</span> <span class="o">+</span> <span class="n">gQuantiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">gPrefThrSlope</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">],</span><span class="n">gQuantiles</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">gQuantiles</span>
@@ -6528,7 +6735,7 @@
 <span class="s2">    ****************************************************</span>
 <span class="s2">    * Python sortingDigraphs module                    *</span>
 <span class="s2">    * depends on BipolarOutrankingDigraph and          *</span>
-<span class="s2">    * $Revision: 2353 $                                 *</span>
+<span class="s2">    * $Revision: 2355 $                                 *</span>
 <span class="s2">    * Copyright (C) 2010 Raymond Bisdorff              *</span>
 <span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
 <span class="s2">    * to the extent permitted by the applicable law.   *</span>
@@ -6635,19 +6842,19 @@
     <span class="c1"># test incremental rating agent</span>
     <span class="n">seed</span> <span class="o">=</span> <span class="mi">101</span>
 
-<span class="c1">##    from randomPerfTabs import RandomCBPerformanceTableau</span>
-<span class="c1">##    from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator</span>
-<span class="c1">##    nbrActions=1000</span>
-<span class="c1">##    nbrCrit = 13</span>
-<span class="c1">##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\</span>
-<span class="c1">##                                    numberOfCriteria=nbrCrit,seed=105)</span>
-
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">Random3ObjectivesPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
     <span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
-    <span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">21</span>
-    <span class="n">tp</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>\
-                                    <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">13</span>
+    <span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>\
+                                    <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
+
+<span class="c1">##    from randomPerfTabs import Random3ObjectivesPerformanceTableau</span>
+<span class="c1">##    from randomPerfTabs import Random3ObjectivesPerformanceGenerator as PerfTabGenerator</span>
+<span class="c1">##    nbrActions=1000</span>
+<span class="c1">##    nbrCrit = 21</span>
+<span class="c1">##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\</span>
+<span class="c1">##                                    numberOfCriteria=nbrCrit,seed=seed)</span>
 
     <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
@@ -6656,12 +6863,14 @@
         <span class="n">newAction</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomAction</span><span class="p">()</span>
         <span class="n">newActions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newAction</span><span class="p">)</span>
     <span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">ira</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span>\
-                                   <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">ira</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">PrefThresholds</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
+                                   <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">ira</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
     <span class="n">ira</span><span class="o">.</span><span class="n">sorting</span> <span class="o">=</span> <span class="n">ira</span><span class="o">.</span><span class="n">computeSortingCharacteristics</span><span class="p">()</span>
     <span class="n">ira</span><span class="o">.</span><span class="n">categoryContent</span> <span class="o">=</span> <span class="n">ira</span><span class="o">.</span><span class="n">computeCategoryContents</span><span class="p">()</span>
     <span class="n">ira</span><span class="o">.</span><span class="n">showSorting</span><span class="p">()</span>
+<span class="c1">##    for x in ira.newActions:</span>
+<span class="c1">##        ira.showActionCategories(x,Comments=True)</span>
 <span class="c1">##    ratingRelation = ira.computeRatingRelation()</span>
 <span class="c1">##    ira.relation = ratingRelation</span>
 <span class="c1">##    #ira.closeTransitive(Irreflexive=True,Reverse=True)</span>
@@ -6670,8 +6879,8 @@
 <span class="c1">##    ira.exportRatingGraphViz(graphType=&#39;pdf&#39;)</span>
     <span class="c1">#ira.showSorting()</span>
     <span class="c1">#ira.showHTMLSorting()</span>
-    <span class="c1">#ira.showActionsSortingResult()</span>
-    <span class="c1">#ira.showQuantileOrdering()</span>
+    <span class="n">ira</span><span class="o">.</span><span class="n">showActionsSortingResult</span><span class="p">()</span>
+    <span class="n">ira</span><span class="o">.</span><span class="n">showQuantileOrdering</span><span class="p">()</span>
     <span class="c1">#ira.showRefinedQuantileOrdering()</span>
     <span class="c1">#ira.showOrderedRelationTable()</span>
     <span class="c1">#ira.showSortingCharacteristics()</span>
@@ -6682,7 +6891,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. december 2010                *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2353 $                  *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2355 $                  *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>

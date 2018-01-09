@@ -1186,7 +1186,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         except:
             LowerClosed = true
         if Reverse:
-            print('\n*--- Sorting results in descending order ---*\n')
+            print('\n*--- Quantiles Sorting results in descending order ---*\n')
             prev_c = '>'
             if isReturningHTML:
                 prev_c = '&gt;'
@@ -5303,12 +5303,12 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
     """
     def __init__(self,argPerfQuantiles=None,newData=None,\
                  hasNoVeto=False,\
+                 PrefThresholds=True,\
                  valuationScale=(-1,1),\
                  rankingRule='NetFolws',\
                  Threading=False,\
                  tempDir=None,\
                  nbrCores=None,\
-                 nbrOfProcesses=None,\
                  Comments=False,
                  Debug=False):
         
@@ -5416,6 +5416,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         for g in criteria:
             self.criteriaCategoryLimits[g] = limitingQuantiles[g]
             gQuantiles = self._computeLimitingQuantiles(g,\
+                            PrefThresholds=PrefThresholds,\
                             Debug=Debug)
             self.criteriaCategoryLimits[g] = gQuantiles
         if Debug:
@@ -5514,7 +5515,59 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 
 # ------------  class methods ------------------
 
-    def computeRatingRelation(self,Debug=True,StoreRating=True):
+    def showActionCategories(self,action,Debug=False,Comments=False):
+        """
+        Renders the union of categories in which the given action is sorted positively or null into.
+        Returns a tuple : action, lowest category key, highest category key, membership credibility !
+        """
+        Med = self.valuationdomain['med']
+        try:
+            sorting = self.sorting
+        except:
+            sorting = self.computeSortingCharacteristics(action=action,Debug=Debug)
+        catKeys = self.orderedCategoryKeys()
+        keys = [catKeys[0],[catKeys[-1]]]
+        lowLimit = sorting[action][catKeys[0]]['lowLimit']
+        notHighLimit = sorting[action][catKeys[-1]]['lowLimit']
+        for c in self.orderedCategoryKeys():
+            if sorting[action][c]['categoryMembership'] >= Med:
+                if sorting[action][c]['lowLimit'] > Med:
+                    lowLimit = sorting[action][c]['lowLimit']
+                    keys[0] = c
+                if sorting[action][c]['notHighLimit'] > Med:
+                    notHighLimit = sorting[action][c]['notHighLimit']
+                    keys[1] = c
+                #keys.append(c)
+                if Debug:
+                    print(action, c, sorting[action][c], keys)
+        credibility = min(lowLimit,notHighLimit)
+        if Comments:
+            print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
+                                 self.categories[keys[0]]['lowLimit'],\
+                                 self.categories[keys[-1]]['highLimit'],\
+                                 action,\
+                                 credibility,lowLimit,notHighLimit) )
+        return action,\
+                keys[0],\
+                keys[1],\
+                credibility            
+
+
+    def showActionsSortingResult(self,actionSubset=None,Debug=False):
+        """
+        shows the quantiles sorting result all (default) of a subset of the decision actions.
+        """
+        if actionSubset == None:
+            actions = [x for x in self.newActions]
+            #actions.sort()
+        else:
+            actions = [x for x in flatten(actionSubset)]
+        print('Quantiles sorting result per decision action')
+        for x in actions:
+            self.showActionCategories(x,Debug=Debug)
+
+
+    def computeRatingRelation(self,Debug=False,StoreRating=True):
         """
         constructs a bipolar rating relation using a preRanking list of lists.
         """
@@ -5525,7 +5578,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         Min = self.valuationdomain['min']
-        print(Max,Med,Min)
+        #print(Max,Med,Min)
 
         profiles = self.profiles
         preRanking = []
@@ -5571,15 +5624,145 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             Reverse=False
         else:
             Reverse=True
+        Med = self.valuationdomain['med']
         actions = self.newActions
         sorting = self.computeSortingCharacteristics(Debug=Debug)
         categoryContent = {}
         for c in self.orderedCategoryKeys(Reverse=Reverse):
             categoryContent[c] = []
             for x in actions:
-                if sorting[x][c]['categoryMembership'] >= self.valuationdomain['med']:
+                if sorting[x][c]['categoryMembership'] >= Med:
                     categoryContent[c].append(x)
         return categoryContent
+
+    def computeQuantileOrdering(self,strategy=None,
+                                Descending=True,
+                                HTML=False,
+                                Comments=False,
+                                Debug=False):
+        """
+        *Parameters*:
+            * Descending: listing in *decreasing* (default) or *increasing* quantile order.
+            * strategy: ordering in an {'optimistic' (default) | 'pessimistic' | 'average'}
+              in the uppest, the lowest or the average potential quantile.
+        
+        """
+        if strategy == None:
+            strategy = 'average'
+        if HTML:
+            html = '<h1>Quantiles preordering</h1>'
+            html += '<table style="background-color:White;" border="1">'
+            html += '<tr bgcolor="#9acd32"><th>quantile limits</th>'
+            html += '<th>%s sorting</th>' % strategy
+            html += '</tr>'
+        actionsCategories = {}
+        for x in self.newActions:
+            a,lowCateg,highCateg,credibility =\
+                     self.showActionCategories(x,Comments=Debug)
+            if strategy == "optimistic":
+                try:
+                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
+                except:
+                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]
+            elif strategy == "pessimistic":
+                try:
+                    actionsCategories[(int(lowCateg),int(highCateg))].append(a)
+                except:
+                    actionsCategories[(int(lowCateg),int(highCateg))] = [a]
+            elif strategy == "average":
+                lc = float(lowCateg)
+                hc = float(highCateg)
+                ac = (lc+hc)/2.0
+                try:
+                    actionsCategories[(ac,int(highCateg),int(lowCateg))].append(a)
+                except:
+                    actionsCategories[(ac,int(highCateg),int(lowCateg))] = [a]
+            else:  # optimistic by default
+                try:
+                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
+                except:
+                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]      
+                
+        actionsCategIntervals = []
+        for interval in actionsCategories:
+            actionsCategIntervals.append([interval,\
+                                          actionsCategories[interval]])
+        actionsCategIntervals.sort(reverse=Descending)
+        weakOrdering = []
+        for item in actionsCategIntervals:
+        #print(item)
+            if Comments:
+                if strategy == "optimistic":
+                    if self.LowerClosed:
+                        if HTML:
+                            html += '<tr><tdbgcolor="#FFF79B">%s-%s</td>' % (self.categories[str(item[0][1])]['lowLimit'],\
+                                                self.categories[str(item[0][0])]['highLimit'])
+                            html += '<td>%s</td></tr>' % str(item[1])
+                        else:
+                            print('%s-%s : %s' % (self.categories[str(item[0][1])]['lowLimit'],\
+                                                self.categories[str(item[0][0])]['highLimit'],\
+                                                str(item[1])) )
+                    else:
+                        if HTML:
+                            html += '<tr><td bgcolor="#FFF79B">%s-%s</td>' % (self.categories[str(item[0][1])]['lowLimit'],\
+                                                self.categories[str(item[0][0])]['highLimit'])
+                            html += '<td>%s</td></tr>' % str(item[1])                            
+                        else:
+                            print('%s-%s : %s' % (self.categories[str(item[0][1])]['lowLimit'],\
+                                                self.categories[str(item[0][0])]['highLimit'],\
+                                                str(item[1])) )
+                elif strategy == "pessimistic":
+                    if self.LowerClosed:
+                        if HTML:
+                            html += '<tr><td bgcolor="#FFF79B">%s-%s</td>' % (self.categories[str(item[0][0])]['lowLimit'],\
+                                                self.categories[str(item[0][1])]['highLimit'])
+                            html += '<td>%s</td></tr>' % str(item[1])
+                        else:
+                            print('%s-%s : %s' % (self.categories[str(item[0][0])]['lowLimit'],\
+                                                self.categories[str(item[0][1])]['highLimit'],\
+                                                str(item[1])) )
+                    else:
+                        if HTML:
+                            html += '<tr><td bgcolor="#FFF79B">%s-%s</td>' % (self.categories[str(item[0][0])]['lowLimit'],\
+                                                self.categories[str(item[0][1])]['highLimit'])
+                            html += '<td>%s</td></tr>' % str(item[1])
+
+                        else:
+                            print('%s-%s : %s' % (self.categories[str(item[0][0])]['lowLimit'],\
+                                                self.categories[str(item[0][1])]['highLimit'],\
+                                                str(item[1])) )                   
+                elif strategy == "average":
+                    if self.LowerClosed:
+                        if HTML:
+                            html += '<tr><td bgcolor="#FFF79B">%s-%s</td>' % (self.categories[str(item[0][2])]['lowLimit'],\
+                                                self.categories[str(item[0][1])]['highLimit'])
+                            html += '<td>%s</td></tr>' % str(item[1])
+                        else:
+                            print('%s-%s : %s' % (self.categories[str(item[0][2])]['lowLimit'],\
+                                                self.categories[str(item[0][1])]['highLimit'],\
+                                                str(item[1])) )
+                    else:
+                        if HTML:
+                            html += '<tr><td bgcolor="#FFF79B">%s-%s</td>' % (self.categories[str(item[0][2])]['lowLimit'],\
+                                                self.categories[str(item[0][2])]['highLimit'])
+                            html += '<td>%s</td></tr>' % str(item[1])
+                        else:
+                            print('%s-%s : %s' % (self.categories[str(item[0][2])]['lowLimit'],\
+                                                self.categories[str(item[0][1])]['highLimit'],\
+                                                str(item[1])) )
+            weakOrdering.append(item[1])
+        if HTML:
+            html += '</table>'
+            return html
+        else:
+            return weakOrdering
+
+    def showQuantileOrdering(self,strategy=None):
+        """
+        Dummy show method for the commenting computeQuantileOrdering() method.
+        """
+        self.computeQuantileOrdering(strategy=strategy,Comments=True)
+
 
 
     def computeSortingCharacteristics(self, action=None, Debug=False):
@@ -5598,10 +5781,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             
         categories = self.categories
 
-        try:
-            LowerClosed = self.LowerClosed
-        except:
-            LowerClosed = True
+        LowerClosed = self.LowerClosed
 
         if Debug:
             if LowerClosed:
@@ -5612,6 +5792,8 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         sorting = {}
         nq = len(self.quantilesFrequencies) - 1
         for x in actions:
+            if Debug:
+                print('action',x)
             sorting[x] = {}
             for c in categories:
                 sorting[x][c] = {}
@@ -5645,7 +5827,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 
                 if Debug:
                     #print('\t %.2f \t %.2f \t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
-                    print('%.2f\t\t %.2f\t\t %.2f\n' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+                    print('%.2f\t\t %.2f\t\t %.2f' % (sorting[x][c]['lowLimit'], sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
 
         return sorting
 
@@ -5979,7 +6161,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             ratingCategories = self.ratingCategories
         except:
             ratingCategories = self.computeQuantilesRating(Debug=Debug)
-        print('*-------- Quantile sorting result ---------')
+        print('*-------- Quantiles rating result ---------')
         if self.LowerClosed:
             if Descending:
                 for cat in reversed(ratingCategories):
@@ -6020,18 +6202,37 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                                 ReflexiveTerms=False)
         
                                          
-    def _computeLimitingQuantiles(self,g,Debug=True):
+    def _computeLimitingQuantiles(self,g,PrefThresholds=False,Debug=True):
         """
         Renders the list of limiting quantiles on criteria g
         """
+        if PrefThresholds:
+            try:
+                gPrefThrCst = self.criteria[g]['thresholds']['pref'][0]
+                gPrefThrSlope = self.criteria[g]['thresholds']['pref'][1]
+            except:
+                gPrefThrCst = Decimal('0')
+                gPrefThrSlope = Decimal('0')            
+##        else:
+##            gPrefThrCst = Decimal('0')
+##            gPrefThrSlope = Decimal('1')            
         
         gQuantiles = self.criteriaCategoryLimits[g]
+        if Debug:
+            print(g,gQuantiles)
+        nq = len(gQuantiles)
         if self.LowerClosed:
+            if PrefThresholds:
+                for i in range(nq-1): # quantile limits raised by the preference thershold
+                    if self.criteria[g]['preferenceDirection'] == 'min':
+                        gQuantiles[i] += gPrefThrCst - gQuantiles[i]*gPrefThrSlope
+                    else:
+                        gQuantiles[i] -= gPrefThrCst + gQuantiles[i]*gPrefThrSlope
             # we ignore the 1.00 quantile and replace it with +infty        
             if self.criteria[g]['preferenceDirection'] == 'min':
                 gQuantiles[-1] = Decimal(str(self.criteria[g]['scale'][1]))
             else:
-                gQuantiles[-1] = Decimal(str(self.criteria[g]['scale'][1])) * Decimal('2')         
+                gQuantiles[-1] = Decimal(str(self.criteria[g]['scale'][1])) * Decimal('2')       
 
         else:  # upper closed categories
             # we ignore the quantile 0.0 and replace it with -\infty            
@@ -6039,6 +6240,12 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                 gQuantiles[0] = -Decimal(str(self.criteria[g]['scale'][1])) * Decimal('2')
             else:
                 gQuantiles[0] = -Decimal(str(self.criteria[g]['scale'][1]))
+            if PrefThresholds:
+                for i in range(1,nq): # quantile limits raised by the preference thershold
+                    if self.criteria[g]['preferenceDirection'] == 'min':
+                        gQuantiles[i] += gPrefThrCst - gQuantiles[i]*gPrefThrSlope
+                    else:
+                        gQuantiles[i] -= gPrefThrCst + gQuantiles[i]*gPrefThrSlope
         if Debug:
             print(g,self.LowerClosed,self.criteria[g]['preferenceDirection'],gQuantiles)
         return gQuantiles
@@ -6585,19 +6792,19 @@ if __name__ == "__main__":
     # test incremental rating agent
     seed = 101
 
-##    from randomPerfTabs import RandomCBPerformanceTableau
-##    from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
-##    nbrActions=1000
-##    nbrCrit = 13
-##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
-##                                    numberOfCriteria=nbrCrit,seed=105)
-
-    from randomPerfTabs import Random3ObjectivesPerformanceTableau
-    from randomPerfTabs import Random3ObjectivesPerformanceGenerator as PerfTabGenerator
+    from randomPerfTabs import RandomCBPerformanceTableau
+    from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
     nbrActions=1000
-    nbrCrit = 21
-    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
-                                    numberOfCriteria=nbrCrit,seed=seed)
+    nbrCrit = 13
+    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
+                                    numberOfCriteria=nbrCrit,seed=105)
+
+##    from randomPerfTabs import Random3ObjectivesPerformanceTableau
+##    from randomPerfTabs import Random3ObjectivesPerformanceGenerator as PerfTabGenerator
+##    nbrActions=1000
+##    nbrCrit = 21
+##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
+##                                    numberOfCriteria=nbrCrit,seed=seed)
 
     pq = PerformanceQuantiles(tp,10,LowerClosed=True,Debug=False)
     tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
@@ -6606,12 +6813,14 @@ if __name__ == "__main__":
         newAction = tpg.randomAction()
         newActions.append(newAction)
     pq.updateQuantiles(newActions,historySize=None)
-    ira = NormedQuantilesRatingDigraph(pq,newActions,\
-                                   Debug=False)
+    ira = NormedQuantilesRatingDigraph(pq,newActions,PrefThresholds=True,\
+                                   Debug=False,Threading=True)
     ira.showQuantilesRating()
     ira.sorting = ira.computeSortingCharacteristics()
     ira.categoryContent = ira.computeCategoryContents()
     ira.showSorting()
+##    for x in ira.newActions:
+##        ira.showActionCategories(x,Comments=True)
 ##    ratingRelation = ira.computeRatingRelation()
 ##    ira.relation = ratingRelation
 ##    #ira.closeTransitive(Irreflexive=True,Reverse=True)
@@ -6620,8 +6829,8 @@ if __name__ == "__main__":
 ##    ira.exportRatingGraphViz(graphType='pdf')
     #ira.showSorting()
     #ira.showHTMLSorting()
-    #ira.showActionsSortingResult()
-    #ira.showQuantileOrdering()
+    ira.showActionsSortingResult()
+    ira.showQuantileOrdering()
     #ira.showRefinedQuantileOrdering()
     #ira.showOrderedRelationTable()
     #ira.showSortingCharacteristics()
