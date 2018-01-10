@@ -3679,7 +3679,7 @@ normed performance quantiles gathered from historical data. The constructor requ
 </dl>
 <a class="reference internal image-reference" href="_images/exampleIncRatDigraph.png"><img alt="usage example of Normed Quantiles Rating Digraph" class="align-center" src="_images/exampleIncRatDigraph.png" style="width: 500px;" /></a>
 <dl class="docutils">
-<dt>Using a specialised version the <a class="reference internal" href="techDoc.html#weakOrders.WeakOrder.exportGraphViz" title="weakOrders.WeakOrder.exportGraphViz"><code class="xref py py-meth docutils literal"><span class="pre">weakOrders.WeakOrder.exportGraphViz()</span></code></a> method allows to drwa the rating result in a Hasse diagram format. For instance, the follwing rating result:</dt>
+<dt>Using a specialised version the <a class="reference internal" href="techDoc.html#weakOrders.WeakOrder.exportGraphViz" title="weakOrders.WeakOrder.exportGraphViz"><code class="xref py py-meth docutils literal"><span class="pre">weakOrders.WeakOrder.exportGraphViz()</span></code></a> method allows drawing the rating result in a Hasse diagram format. Consider the follwing rating result:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
 <span class="go"> *-------- Quantile sorting result ---------</span>
 <span class="go">  [0.40 - 0.60[ [&#39;a1&#39;, &#39;a2&#39;, &#39;a3&#39;]</span>
@@ -3687,7 +3687,7 @@ normed performance quantiles gathered from historical data. The constructor requ
 </pre></div>
 </div>
 </dd>
-<dt>may result in the following diagram:</dt>
+<dt>It will result in the following Hasse diagram, where the lower quantile bin limits appear boxed and colored:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">exportRatingGraphViz</span><span class="p">(</span><span class="n">noSilent</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go"> Exporting to quantilesRatingDigraph.dot</span>

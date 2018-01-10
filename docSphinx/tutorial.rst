@@ -2174,13 +2174,13 @@ Example Python session:
     :width: 500 px
     :align: center
 
-Using a specialised version the :py:meth:`weakOrders.WeakOrder.exportGraphViz` method allows to drwa the rating result in a Hasse diagram format. For instance, the follwing rating result: 	    
+Using a specialised version the :py:meth:`weakOrders.WeakOrder.exportGraphViz` method allows drawing the rating result in a Hasse diagram format. Consider the follwing rating result: 	    
    >>> nqr.showQuantilesRating()
     *-------- Quantile sorting result ---------
      [0.40 - 0.60[ ['a1', 'a2', 'a3']
      [0.20 - 0.40[ ['a4', 'a5']
 
-may result in the following diagram:
+It will result in the following Hasse diagram, where the lower quantile bin limits appear boxed and colored:
     >>> nqr.exportRatingGraphViz(noSilent=False)
     *---- exporting a dot file for GraphViz tools ---------*
      Exporting to quantilesRatingDigraph.dot
