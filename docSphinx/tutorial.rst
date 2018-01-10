@@ -517,395 +517,6 @@ Let us finally mention some special universal classes of digraphs that are readi
 
 Back to :ref:`Tutorial-label`
 
-.. _Graphs-Tutorial-label:
-
-Working with the :code:`graphs` module
---------------------------------------
-
-.. contents:: 
-	:depth: 2
-	:local:
-
-See also the technical documentation of the :ref:`graphs-label`.
-
-Structure of a ``Graph`` object
-...............................
-
-In the :py:mod:`graphs` module, the root :py:class:`graphs.Graph` class provides a generic **simple graph model**, without loops and multiple links. A given object of this class consists in:
-
-1. the graph **vertices** : a dictionary of vertices with 'name' and 'shortname' attributes,
-2. the graph **valuationDomain** , a dictionary with three entries: the minimum (-1, means certainly no link), the median (0, means missing information) and the maximum characteristic value (+1, means certainly a link),
-3. the graph **edges** : a dictionary with frozensets of pairs of vertices as entries carrying a characteristic value in the range of the previous valuation domain,
-4. and its associated **gamma function** : a dictionary containing the direct neighbors of each vertice, automatically added by the object constructor.
-
-See the technical documentation of the :ref:`graphs-label`.
-
-Example Python3 session:
-    >>> from graphs import Graph
-    >>> g = Graph(numberOfVertices=7,edgeProbability=0.5)
-    >>> g.save(fileName='tutorialGraph')
-
-The saved Graph instance named :code:`tutorialGraph.py` is encoded in python3 as follows::
-
-	# Graph instance saved in Python format
-	vertices = {
-	'v1': {'shortName': 'v1', 'name': 'random vertex'},
-	'v2': {'shortName': 'v2', 'name': 'random vertex'},
-	'v3': {'shortName': 'v3', 'name': 'random vertex'},
-	'v4': {'shortName': 'v4', 'name': 'random vertex'},
-	'v5': {'shortName': 'v5', 'name': 'random vertex'},
-	'v6': {'shortName': 'v6', 'name': 'random vertex'},
-	'v7': {'shortName': 'v7', 'name': 'random vertex'},
-	}
-	valuationDomain = {'min':-1,'med':0,'max':1}
-	edges = {
-	frozenset(['v1','v2']) : -1, 
-	frozenset(['v1','v3']) : -1, 
-	frozenset(['v1','v4']) : -1, 
-	frozenset(['v1','v5']) : 1, 
-	frozenset(['v1','v6']) : -1, 
-	frozenset(['v1','v7']) : -1, 
-	frozenset(['v2','v3']) : 1, 
-	frozenset(['v2','v4']) : 1, 
-	frozenset(['v2','v5']) : -1, 
-	frozenset(['v2','v6']) : 1, 
-	frozenset(['v2','v7']) : -1, 
-	frozenset(['v3','v4']) : -1, 
-	frozenset(['v3','v5']) : -1, 
-	frozenset(['v3','v6']) : -1, 
-	frozenset(['v3','v7']) : -1, 
-	frozenset(['v4','v5']) : 1, 
-	frozenset(['v4','v6']) : -1, 
-	frozenset(['v4','v7']) : 1, 
-	frozenset(['v5','v6']) : 1, 
-	frozenset(['v5','v7']) : -1, 
-	frozenset(['v6','v7']) : -1, 
-	}
-
-The stored graph can be recalled and plotted with the generic :py:func:`graphs.Graph.exportGraphViz()` [1]_ method as follows:
-	>>> g = Graph('tutorialGraph')
-	>>> g.exportGraphViz()
-	*---- exporting a dot file for GraphViz tools ---------*
-	Exporting to tutorialGraph.dot
-	fdp -Tpng tutorialGraph.dot -o tutorialGraph.png
-        >>> ...
-
-.. image:: tutorialGraph.png
-   :width: 400 px
-   :align: center
-
-Properties, like the gamma function and vertex degrees and neighbourhooddepths may be shown with a `graphs.Graph.showShort()` method:
-        >>> g.showShort()
-        *---- short description of the graph ----*
-        Name             : 'tutorialGraph'
-        Vertices         :  ['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7']
-        Valuation domain :  {'min': -1, 'med': 0, 'max': 1}
-        Gamma function   : 
-        v1 -> ['v5']
-        v2 -> ['v6', 'v4', 'v3']
-        v3 -> ['v2']
-        v4 -> ['v5', 'v2', 'v7']
-        v5 -> ['v1', 'v6', 'v4']
-        v6 -> ['v2', 'v5']
-        v7 -> ['v4']
-        degrees      :  [0, 1, 2, 3, 4, 5, 6]
-        distribution :  [0, 3, 1, 3, 0, 0, 0]
-        nbh depths   :  [0, 1, 2, 3, 4, 5, 6, 'inf.']
-        distribution :  [0, 0, 1, 4, 2, 0, 0, 0]
-        >>> ...
-
-A ``Graph`` instance corresponds bijectively to a symmetric ``Digraph`` instance and we may easily convert from one to the other with the :py:func:`graphs.Graph.graph2Digraph()`, and vice versa with the :py:func:`digraphs.Digraph.digraph2Graph()` method. Thus, all resources of the :py:class:`digraphs.Digraph` class, suitable for symmetric digraphs, become readily available, and vice versa:
-	>>> dg = g.graph2Digraph()
-	>>> dg.showRelationTable(ndigits=0,ReflexiveTerms=False)
-	* ---- Relation Table -----
-	  S  |  'v1'  'v2'  'v3'  'v4'  'v5'  'v6'  'v7'	  
-	-----|------------------------------------------
-	'v1' |    -    -1    -1    -1     1    -1    -1	 
-	'v2' |   -1     -     1     1    -1     1    -1	 
-	'v3' |   -1     1     -    -1    -1    -1    -1	 
-	'v4' |   -1     1    -1     -     1    -1     1	 
-	'v5' |    1    -1    -1     1     -     1    -1	 
-	'v6' |   -1     1    -1    -1     1     -    -1	 
-	'v7' |   -1    -1    -1     1    -1    -1     -
-	>>> g1 = dg.digraph2Graph()
-	>>> g1.showShort()
-	*---- short description of the graph ----*
-	Name             : 'tutorialGraph'
-	Vertices         :  ['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7']
-	Valuation domain :  {'med': 0, 'min': -1, 'max': 1}
-	Gamma function   : 
-	v1 -> ['v5']
-	v2 -> ['v3', 'v6', 'v4']
-	v3 -> ['v2']
-	v4 -> ['v5', 'v7', 'v2']
-	v5 -> ['v6', 'v1', 'v4']
-	v6 -> ['v5', 'v2']
-	v7 -> ['v4']
-        degrees      :  [0, 1, 2, 3, 4, 5, 6]
-        distribution :  [0, 3, 1, 3, 0, 0, 0]
-        nbh depths   :  [0, 1, 2, 3, 4, 5, 6, 'inf.']
-        distribution :  [0, 0, 1, 4, 2, 0, 0, 0]
-	>>> ...
-
-q-coloring of a graph
-.....................
-
-A 3-coloring of the tutorial graph *g* may for instance be computed and plotted with the :py:class:`graphs.Q_Coloring` class as follows:
-	>>> from graphs import Q_Coloring
-	>>> qc = Q_Coloring(g)
-	Running a Gibbs Sampler for 42 step !
-	The q-coloring with 3 colors is feasible !!
-	>>> qc.showConfiguration()
-	v5 lightblue
-	v3 gold
-	v7 gold
-	v2 lightblue
-	v4 lightcoral
-	v1 gold
-	v6 lightcoral
-	>>> qc.exportGraphViz('tutorial-3-coloring')
-	*---- exporting a dot file for GraphViz tools ---------*
-	Exporting to tutorial-3-coloring.dot
-	fdp -Tpng tutorial-3-coloring.dot -o tutorial-3-coloring.png
-
-.. image:: tutorial-3-coloring.png
-   :width: 400 px
-   :align: center
-
-Actually, with the given tutorial graph instance, a 2-coloring is already feasible:
-	>>> qc = Q_Coloring(g,colors=['gold','coral'])
-	Running a Gibbs Sampler for 42 step !
-	The q-coloring with 2 colors is feasible !!
-	>>> qc.showConfiguration()
-	v5 gold
-	v3 coral
-	v7 gold
-	v2 gold
-	v4 coral
-	v1 coral
-	v6 coral
-	>>> qc.exportGraphViz('tutorial-2-coloring')
-	*---- exporting a dot file for GraphViz tools ---------*
-	Exporting to tutorial-2-coloring.dot
-	fdp -Tpng tutorial-2-coloring.dot -o tutorial-2-coloring.png
-
-.. image:: tutorial-2-coloring.png
-   :width: 400 px
-   :align: center
-
-MIS and Clique enumeration
-..........................
-
-2-colorings define independent sets of vertices that are maximal in cardinality; for short called a **MIS**. Computing such MISs in a given :code:`Graph` instance may be achieved by the `graphs.Graph.showMIS()` method;
-	>>> g = Graph('tutorialGraph')
-	>>> g.showMIS()
-        *---  Maximal Independent Sets ---*
-        ['v2', 'v5', 'v7']
-        ['v3', 'v5', 'v7']
-        ['v1', 'v2', 'v7']
-        ['v1', 'v3', 'v6', 'v7']
-        ['v1', 'v3', 'v4', 'v6']
-        number of solutions:  5
-        cardinality distribution
-        card.:  [0, 1, 2, 3, 4, 5, 6, 7]
-        freq.:  [0, 0, 0, 3, 2, 0, 0, 0]
-        execution time: 0.00032 sec.
-        Results in self.misset
-        >>> g.misset
-        [frozenset({'v7', 'v2', 'v5'}), 
-         frozenset({'v3', 'v7', 'v5'}), 
-         frozenset({'v1', 'v2', 'v7'}), 
-         frozenset({'v1', 'v6', 'v7', 'v3'}), 
-         frozenset({'v1', 'v6', 'v4', 'v3'})]
-
-A MIS in the dual of a graph instance $g$ (its negation $-g$ ), corresponds to a maximal **clique**, ie a maximal complete subgraph in $g$. Maximal cliques may be directly enumerated with the `graphs.Graph.showCliques()` method:
-      >>> g.showCliques()
-      *---  Maximal Cliques ---*
-      ['v2', 'v3']
-      ['v4', 'v7']
-      ['v2', 'v4']
-      ['v4', 'v5']
-      ['v1', 'v5']
-      ['v2', 'v6']
-      ['v5', 'v6']
-      number of solutions:  7
-      cardinality distribution
-      card.:  [0, 1, 2, 3, 4, 5, 6, 7]
-      freq.:  [0, 0, 7, 0, 0, 0, 0, 0]
-      execution time: 0.00049 sec.
-      Results in self.cliques
-      >>> g.cliques
-      [frozenset({'v2', 'v3'}), frozenset({'v4', 'v7'}), 
-       frozenset({'v2', 'v4'}), frozenset({'v4', 'v5'}), 
-       frozenset({'v1', 'v5'}), frozenset({'v6', 'v2'}), 
-       frozenset({'v6', 'v5'})]
-      >>> ...
-
-Grids and the Ising model
-.........................
-
-Special classes of graphs, like *n* x *m* **rectangular** or **triangular grids** (:py:class:`graphs.GridGraph` and :py:class:`graphs.IsingModel`) are available in the :py:mod:`graphs` module. For instance, we may use a Gibbs sampler again for simulating an **Ising Model** on such a grid:
-	>>> from graphs import GridGraph, IsingModel
-	>>> g = GridGraph(n=15,m=15)
-	>>> g.showShort()
-	*----- show short --------------*
-	Grid graph    :  grid-6-6
-	n             :  6
-	m             :  6
-	order         :  36
-	>>> im = IsingModel(g,beta=0.3,nSim=100000,Debug=False)
-	Running a Gibbs Sampler for 100000 step !
-	>>> im.exportGraphViz(colors=['lightblue','lightcoral'])
-	*---- exporting a dot file for GraphViz tools ---------*
-	Exporting to grid-15-15-ising.dot
-	fdp -Tpng grid-15-15-ising.dot -o grid-15-15-ising.png
-
-.. image:: grid-15-15-ising.png
-   :width: 600 px
-   :align: center
-
-Simulating Metropolis random walks
-..................................
-
-Finally, we provide the :py:class:`graphs.MetropolisChain` class, a specialization of the :py:class:`graphs.Graph` class, for implementing a generic **Metropolis MCMC** (Monte Carlo Markov Chain) sampler for simulating random walks on a given graph following a given probability  :code:`probs = {‘v1’: x, ‘v2’: y, ...}` for visiting each vertex (see lines 14-22). 
-        >>> from graphs import MetropolisChain
-	>>> g = Graph(numberOfVertices=5,edgeProbability=0.5)
-	>>> g.showShort()
-	*---- short description of the graph ----*
-	Name             : 'randomGraph'
-	Vertices         :  ['v1', 'v2', 'v3', 'v4', 'v5']
-	Valuation domain :  {'max': 1, 'med': 0, 'min': -1}
-	Gamma function   :
-	v1 -> ['v2', 'v3', 'v4']
-	v2 -> ['v1', 'v4']
-	v3 -> ['v5', 'v1']
-	v4 -> ['v2', 'v5', 'v1']
-	v5 -> ['v3', 'v4']
-	>>> probs = {}  # initialize a potential stationary probability vector 
-	>>> n = g.order # for instance: probs[v_i] = n-i/Sum(1:n) for i in 1:n
-	>>> i = 0
-	>>> verticesList = [x for x in g.vertices]
-	>>> verticesList.sort()
-	>>> for v in verticesList:
-	...     probs[v] = (n - i)/(n*(n+1)/2)
-	...     i += 1
-	>>> met = MetropolisChain(g,probs)
-	>>> frequency = met.checkSampling(verticesList[0],nSim=30000)
-	>>> for v in verticesList:
-	...     print(v,probs[v],frequency[v])
-	v1 0.3333 0.3343
-	v2 0.2666 0.2680
-	v3 0.2    0.2030
-	v4 0.1333 0.1311
-	v5 0.0666 0.0635
-	>>> met.showTransitionMatrix()
-	* ---- Transition Matrix -----
-	  Pij  | 'v1'    'v2'    'v3'    'v4'    'v5'
-	  -----|-------------------------------------
-	  'v1' |  0.23   0.33    0.30    0.13    0.00
-	  'v2' |  0.42   0.42    0.00    0.17    0.00
-	  'v3' |  0.50   0.00    0.33    0.00    0.17
-	  'v4' |  0.33   0.33    0.00    0.08    0.25
-	  'v5' |  0.00   0.00    0.50    0.50    0.00
-
-The ``checkSampling()`` method (see line 23) generates a random walk of *nSim=30000* steps on the given graph and records by the way the observed relative frequency with which each vertex is passed by. In this example, the stationary transition probability distribution, shown by the ``showTransitionMatrix()`` method above (see lines 31-), is quite adequately simulated.
-
-For more technical information and more code examples, look into the technical documentation of the :ref:`graphs-label`. For the readers interested in algorithmic applications of Markov Chains we may recommend consulting O. Häggström's 2002 book: [FMCAA]_.
-
-The Berge mystery story: Who is the lier ?
-..........................................
-Suppose that the file ``berge.py`` contains the following :py:class:`graphs.Graph` instance data::
-
-    vertices = {
-    'A': {'name': 'Abe', 'shortName': 'A'},
-    'B': {'name': 'Burt', 'shortName': 'B'},
-    'C': {'name': 'Charlotte', 'shortName': 'C'},
-    'D': {'name': 'Desmond', 'shortName': 'D'},
-    'E': {'name': 'Eddie', 'shortName': 'E'},
-    'I': {'name': 'Ida', 'shortName': 'I'},
-    }
-    valuationDomain = {'min':-1,'med':0,'max':1}
-    edges = {
-    frozenset(['A','B']) : 1, 
-    frozenset(['A','C']) : -1, 
-    frozenset(['A','D']) : 1, 
-    frozenset(['A','E']) : 1, 
-    frozenset(['A','I']) : -1, 
-    frozenset(['B','C']) : -1, 
-    frozenset(['B','D']) : -1, 
-    frozenset(['B','E']) : 1, 
-    frozenset(['B','I']) : 1, 
-    frozenset(['C','D']) : 1, 
-    frozenset(['C','E']) : 1, 
-    frozenset(['C','I']) : 1, 
-    frozenset(['D','E']) : -1, 
-    frozenset(['D','I']) : 1, 
-    frozenset(['E','I']) : 1, 
-    }
-
-This data concerns the famous *Berge mystery story* (see Golumbic, M. C. Algorithmic Graph Theory and Perfect Graphs, *Annals of Discrete Mathematics* 57 p. 20) Six professors (labeled *A*, *B*, *C*, *D*, *E* and *I*) had been to the library on the day that a rare tractate was stolen. Each entered once, stayed for some time, and then left. If two professors were in the library at the same time, then at least one of them saw the other. Detectives questioned the professors and gathered the testimonies that *A* saw *B* and *E*; *B* saw *A* and *I*; *C* saw *D* and *I*; *D* saw *A* and *I*; *E* saw *B* and *I*; and *I* saw *C* and *E*. This data is gathered in the previous file, where each positive edge :math:`\{x,y\}` models the testimony that, either *x* saw *y*, or, *y* saw *x*.
-
-Example Python3 session:
-    >>> from graphs import Graph
-    >>> g = Graph('berge')
-    >>> g.showShort()
-    *---- short description of the graph ----*
-    Name             : 'berge'
-    Vertices         :  ['A', 'B', 'C', 'D', 'E', 'I']
-    Valuation domain :  {'min': -1, 'med': 0, 'max': 1}
-    Gamma function   : 
-    A -> ['D', 'B', 'E']
-    B -> ['E', 'I', 'A']
-    C -> ['E', 'D', 'I']
-    D -> ['C', 'I', 'A']
-    E -> ['C', 'B', 'I', 'A']
-    I -> ['C', 'E', 'B', 'D']
-
- The graph data can be plotted as follows:
-	>>> g.exportGraphViz('berge1')
-	*---- exporting a dot file for GraphViz tools ---------*
-	Exporting to berge1.dot
-	fdp -Tpng berge1.dot -o berge1.png
-
-.. image:: berge1.png
-   :width: 400 px
-   :align: center
-
-From graph theory we know that time interval intersection graphs must in fact be triangulated. The testimonies graph should therefore not contain any chordless cycles of four and more vertices. Now, the presence or not of chordless cycles may be checked as follows:
-	>>> g.computeChordlessCycles()
-	Chordless cycle certificate -->>>  ['D', 'C', 'E', 'A', 'D']
-	Chordless cycle certificate -->>>  ['D', 'I', 'E', 'A', 'D']
-	Chordless cycle certificate -->>>  ['D', 'I', 'B', 'A', 'D']
-	[(['D', 'C', 'E', 'A', 'D'], frozenset({'C', 'D', 'E', 'A'})),
-        (['D', 'I', 'E', 'A', 'D'], frozenset({'D', 'E', 'I', 'A'})), 
-        (['D', 'I', 'B', 'A', 'D'], frozenset({'D', 'B', 'I', 'A'}))]
-
-We see three intersection cycles of length 4, which is impossible to occur on the linear time line. Obviously one professor lied! And it is *D* ; if we put to doubt the testimony that he indeed saw *A*, we obtain a correctly triangulated graph:
-	>>> g.setEdgeValue( ('D','A'), 0)
-	>>> g.showShort()
-	*---- short description of the graph ----*
-	Name             : 'berge'
-	Vertices         :  ['A', 'B', 'C', 'D', 'E', 'I']
-	Valuation domain :  {'med': 0, 'min': -1, 'max': 1}
-	Gamma function   : 
-	A -> ['B', 'E']
-	B -> ['A', 'I', 'E']
-	C -> ['I', 'E', 'D']
-	D -> ['I', 'C']
-	E -> ['A', 'I', 'B', 'C']
-	I -> ['B', 'E', 'D', 'C']
-	>>> g.computeChordlessCycles()
-	[]
-	>>> g.exportGraphViz('berge2')
-	*---- exporting a dot file for GraphViz tools ---------*
-	Exporting to berge2.dot
-	fdp -Tpng berge2.dot -o berge2.png
-
-.. image:: berge2.png
-   :width: 400 px
-   :align: center
-
-Back to :ref:`Tutorial-label`
 
 .. _LinearVoting-Tutorial-label:
 
@@ -2452,6 +2063,492 @@ Alternative *52* appears first ranked, whereas alternative *59* is last ranked. 
 
 This ranking heuristic is readily scalable with ad hoc HPC tuning to several millions of decision alternatives (see [BIS-2016]_).
 
+Back to :ref:`Tutorial-label`   
+
+.. _Rating-Tutorial-label:
+
+Rating with learned quantile norms
+----------------------------------
+
+.. contents:: 
+	:depth: 2
+	:local:
+
+See also the technical documentation of the :ref:`performanceQuantiles-label`.
+
+Incremental learning of quantile norms
+......................................
+
+We are inspired by [CHAM-2006]_, who present an efficient algorithm for incrementally updating a quantile-binned cumulative density function (CDF) with newly observed CDFs.
+
+The :py:class:`performanceQuantiles.PerformanceQuantiles` class implements the incremental performance quantiles representation of a given performance tableau. The constructor parameter *NumberOfBins*, choosing the wished number of quantiles, may be either 'quartiles' (4 bins), 'quintiles' (5 bins), 'deciles' (10 bins) , 'dodeciles' (20 bins) or any other integer number of quantile bins.
+
+Example python session:
+    >>> import performanceQuantiles
+    >>> from randomPerfTabs import RandomCBPerformanceTableau
+    >>> nbrActions=1000
+    >>> nbrCrit = 7
+    >>> tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
+    ...                                numberOfCriteria=nbrCrit,seed=105)
+    >>> pq = performanceQuantiles.PerformanceQuantiles(tp,'quintiles',
+    ...                                LowerClosed=True,Debug=False)
+    >>> pq.showLimitingQuantiles(ByObjectives=True)
+    *----  performance quantiles -----*
+    Costs
+    criteria  | weights |  '0.0'   '0.25'  '0.5'   '0.75'  '1.0'   
+     ---------|--------------------------------------------------
+	'c1'  |   6     | -97.12  -65.70  -46.08  -24.96   -1.85  
+    Benefits
+    criteria  | weights |  '0.0'   '0.25'  '0.5'   '0.75'  '1.0'   
+     ---------|--------------------------------------------------
+	'b1'  |   1     |   2.11   32.42   53.25   73.44   98.69 
+	'b2'  |   1     |   0.00    3.00    5.00    7.00   10.00  
+	'b3'  |   1     |   1.08   34.64   54.80   73.24   97.23  
+	'b4'  |   1     |   0.00    3.00    5.00    7.00   10.00  
+	'b5'  |   1     |   1.84   34.25   55.11   74.62   96.40  
+	'b6'  |   1     |   0.00    3.00    5.00    7.00   10.00  
+    >>> # Importing a random generator for new decision actions
+    >>> from randomPerfTabs import RandomCBPerformanceGenerator
+    >>> tpg = RandomCBPerformanceGenerator(tp,seed=105)
+    >>> newActions = tpg.randomActions(100)
+    >>> # Updating the quintile norms 
+    >>> pq.updateQuantiles(newActions,historySize=None)      
+    >>> pq.showHTMLLimitingQuantiles(Transposed=True)
+
+Parameter *historySize* of the :py:meth:`performanceQuantiles.PerformanceQuantiles.updateQuantiles` method allows to balance the new observations against the historical data. With *historySize = None* (the default setting), the balance in the example above is 1000/1100 (91%, weight of historical data) against 100/1100 (9%, weight of the new incoming observations). Putting *historySize = 0*, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile norms.
+
+.. image:: examplePerfQuantiles.png
+    :alt: Example limiting quantiles html show method
+    :width: 400 px
+    :align: center
+
+Rating performances with quantile norms
+.......................................
+
+We provide the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class, a specialisation of the :py:class:`sortingDigraphs.QuantilesSortingDigraph` class
+for **absolute rating** of a newly given set of decision actions with
+normed performance quantiles gathered from historical data. The constructor requires a valid :py:class:`performanceQuantiles.PerformanceQuantiles` instance.
+
+Examle Python session:
+    >>> From sortingDigraphs import *
+    >>> # historical data
+    >>> from randomPerfTabs import RandomCBPerformanceTableau
+    >>> nbrActions=1000
+    >>> nbrCrit = 13
+    >>> seed = 100
+    >>> tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,numberOfCriteria=nbrCrit,seed=seed)
+    >>> pq = PerformanceQuantiles(tp,numberOfBins='deciles',LowerClosed=True,Debug=False)
+    >>> # new incoming decision actions of the same kind
+    >>> from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
+    >>> tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
+    >>> newActions = tpg.randomActions(10)
+    >>> # updating the historical performance quantiles
+    >>> pq.updateQuantiles(newActions,historySize=None)
+    >>> # rating the new set of decision actions
+    >>> nqr = NormedQuantilesRatingDigraph(pq,newActions,Debug=True)
+    >>> # inspecting the rating result
+    >>> nqr.showQuantileRating()
+     *-------- Normed quantiles rating result ---------
+     [0.50 - 0.60[ ['a1', 'a7', 'a3', 'a10', 'a2']
+     [0.40 - 0.50[ ['a6', 'a9', 'a8']
+     [0.20 - 0.30[ ['a4', 'a5']
+    >>> nqr.showHTMLPerformanceHeatmap(pageTitle='Heatmap of Quantiles Rating',Correlations=True)
+
+.. image:: exampleIncRatDigraph.png
+    :alt: usage example of Normed Quantiles Rating Digraph
+    :width: 500 px
+    :align: center
+
+Back to :ref:`Tutorial-label`   
+
+.. _Graphs-Tutorial-label:
+
+Working with the :py:mod:`graphs` module
+----------------------------------------
+
+.. contents:: 
+	:depth: 2
+	:local:
+
+See also the technical documentation of the :ref:`graphs-label`.
+
+Structure of a ``Graph`` object
+...............................
+
+In the :py:mod:`graphs` module, the root :py:class:`graphs.Graph` class provides a generic **simple graph model**, without loops and multiple links. A given object of this class consists in:
+
+1. the graph **vertices** : a dictionary of vertices with 'name' and 'shortname' attributes,
+2. the graph **valuationDomain** , a dictionary with three entries: the minimum (-1, means certainly no link), the median (0, means missing information) and the maximum characteristic value (+1, means certainly a link),
+3. the graph **edges** : a dictionary with frozensets of pairs of vertices as entries carrying a characteristic value in the range of the previous valuation domain,
+4. and its associated **gamma function** : a dictionary containing the direct neighbors of each vertice, automatically added by the object constructor.
+
+See the technical documentation of the :ref:`graphs-label`.
+
+Example Python3 session:
+    >>> from graphs import Graph
+    >>> g = Graph(numberOfVertices=7,edgeProbability=0.5)
+    >>> g.save(fileName='tutorialGraph')
+
+The saved Graph instance named :code:`tutorialGraph.py` is encoded in python3 as follows::
+
+	# Graph instance saved in Python format
+	vertices = {
+	'v1': {'shortName': 'v1', 'name': 'random vertex'},
+	'v2': {'shortName': 'v2', 'name': 'random vertex'},
+	'v3': {'shortName': 'v3', 'name': 'random vertex'},
+	'v4': {'shortName': 'v4', 'name': 'random vertex'},
+	'v5': {'shortName': 'v5', 'name': 'random vertex'},
+	'v6': {'shortName': 'v6', 'name': 'random vertex'},
+	'v7': {'shortName': 'v7', 'name': 'random vertex'},
+	}
+	valuationDomain = {'min':-1,'med':0,'max':1}
+	edges = {
+	frozenset(['v1','v2']) : -1, 
+	frozenset(['v1','v3']) : -1, 
+	frozenset(['v1','v4']) : -1, 
+	frozenset(['v1','v5']) : 1, 
+	frozenset(['v1','v6']) : -1, 
+	frozenset(['v1','v7']) : -1, 
+	frozenset(['v2','v3']) : 1, 
+	frozenset(['v2','v4']) : 1, 
+	frozenset(['v2','v5']) : -1, 
+	frozenset(['v2','v6']) : 1, 
+	frozenset(['v2','v7']) : -1, 
+	frozenset(['v3','v4']) : -1, 
+	frozenset(['v3','v5']) : -1, 
+	frozenset(['v3','v6']) : -1, 
+	frozenset(['v3','v7']) : -1, 
+	frozenset(['v4','v5']) : 1, 
+	frozenset(['v4','v6']) : -1, 
+	frozenset(['v4','v7']) : 1, 
+	frozenset(['v5','v6']) : 1, 
+	frozenset(['v5','v7']) : -1, 
+	frozenset(['v6','v7']) : -1, 
+	}
+
+The stored graph can be recalled and plotted with the generic :py:func:`graphs.Graph.exportGraphViz()` [1]_ method as follows:
+	>>> g = Graph('tutorialGraph')
+	>>> g.exportGraphViz()
+	*---- exporting a dot file for GraphViz tools ---------*
+	Exporting to tutorialGraph.dot
+	fdp -Tpng tutorialGraph.dot -o tutorialGraph.png
+        >>> ...
+
+.. image:: tutorialGraph.png
+   :width: 400 px
+   :align: center
+
+Properties, like the gamma function and vertex degrees and neighbourhooddepths may be shown with a `graphs.Graph.showShort()` method:
+        >>> g.showShort()
+        *---- short description of the graph ----*
+        Name             : 'tutorialGraph'
+        Vertices         :  ['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7']
+        Valuation domain :  {'min': -1, 'med': 0, 'max': 1}
+        Gamma function   : 
+        v1 -> ['v5']
+        v2 -> ['v6', 'v4', 'v3']
+        v3 -> ['v2']
+        v4 -> ['v5', 'v2', 'v7']
+        v5 -> ['v1', 'v6', 'v4']
+        v6 -> ['v2', 'v5']
+        v7 -> ['v4']
+        degrees      :  [0, 1, 2, 3, 4, 5, 6]
+        distribution :  [0, 3, 1, 3, 0, 0, 0]
+        nbh depths   :  [0, 1, 2, 3, 4, 5, 6, 'inf.']
+        distribution :  [0, 0, 1, 4, 2, 0, 0, 0]
+        >>> ...
+
+A ``Graph`` instance corresponds bijectively to a symmetric ``Digraph`` instance and we may easily convert from one to the other with the :py:func:`graphs.Graph.graph2Digraph()`, and vice versa with the :py:func:`digraphs.Digraph.digraph2Graph()` method. Thus, all resources of the :py:class:`digraphs.Digraph` class, suitable for symmetric digraphs, become readily available, and vice versa:
+	>>> dg = g.graph2Digraph()
+	>>> dg.showRelationTable(ndigits=0,ReflexiveTerms=False)
+	* ---- Relation Table -----
+	  S  |  'v1'  'v2'  'v3'  'v4'  'v5'  'v6'  'v7'	  
+	-----|------------------------------------------
+	'v1' |    -    -1    -1    -1     1    -1    -1	 
+	'v2' |   -1     -     1     1    -1     1    -1	 
+	'v3' |   -1     1     -    -1    -1    -1    -1	 
+	'v4' |   -1     1    -1     -     1    -1     1	 
+	'v5' |    1    -1    -1     1     -     1    -1	 
+	'v6' |   -1     1    -1    -1     1     -    -1	 
+	'v7' |   -1    -1    -1     1    -1    -1     -
+	>>> g1 = dg.digraph2Graph()
+	>>> g1.showShort()
+	*---- short description of the graph ----*
+	Name             : 'tutorialGraph'
+	Vertices         :  ['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7']
+	Valuation domain :  {'med': 0, 'min': -1, 'max': 1}
+	Gamma function   : 
+	v1 -> ['v5']
+	v2 -> ['v3', 'v6', 'v4']
+	v3 -> ['v2']
+	v4 -> ['v5', 'v7', 'v2']
+	v5 -> ['v6', 'v1', 'v4']
+	v6 -> ['v5', 'v2']
+	v7 -> ['v4']
+        degrees      :  [0, 1, 2, 3, 4, 5, 6]
+        distribution :  [0, 3, 1, 3, 0, 0, 0]
+        nbh depths   :  [0, 1, 2, 3, 4, 5, 6, 'inf.']
+        distribution :  [0, 0, 1, 4, 2, 0, 0, 0]
+	>>> ...
+
+q-coloring of a graph
+.....................
+
+A 3-coloring of the tutorial graph *g* may for instance be computed and plotted with the :py:class:`graphs.Q_Coloring` class as follows:
+	>>> from graphs import Q_Coloring
+	>>> qc = Q_Coloring(g)
+	Running a Gibbs Sampler for 42 step !
+	The q-coloring with 3 colors is feasible !!
+	>>> qc.showConfiguration()
+	v5 lightblue
+	v3 gold
+	v7 gold
+	v2 lightblue
+	v4 lightcoral
+	v1 gold
+	v6 lightcoral
+	>>> qc.exportGraphViz('tutorial-3-coloring')
+	*---- exporting a dot file for GraphViz tools ---------*
+	Exporting to tutorial-3-coloring.dot
+	fdp -Tpng tutorial-3-coloring.dot -o tutorial-3-coloring.png
+
+.. image:: tutorial-3-coloring.png
+   :width: 400 px
+   :align: center
+
+Actually, with the given tutorial graph instance, a 2-coloring is already feasible:
+	>>> qc = Q_Coloring(g,colors=['gold','coral'])
+	Running a Gibbs Sampler for 42 step !
+	The q-coloring with 2 colors is feasible !!
+	>>> qc.showConfiguration()
+	v5 gold
+	v3 coral
+	v7 gold
+	v2 gold
+	v4 coral
+	v1 coral
+	v6 coral
+	>>> qc.exportGraphViz('tutorial-2-coloring')
+	*---- exporting a dot file for GraphViz tools ---------*
+	Exporting to tutorial-2-coloring.dot
+	fdp -Tpng tutorial-2-coloring.dot -o tutorial-2-coloring.png
+
+.. image:: tutorial-2-coloring.png
+   :width: 400 px
+   :align: center
+
+MIS and Clique enumeration
+..........................
+
+2-colorings define independent sets of vertices that are maximal in cardinality; for short called a **MIS**. Computing such MISs in a given :code:`Graph` instance may be achieved by the `graphs.Graph.showMIS()` method;
+	>>> g = Graph('tutorialGraph')
+	>>> g.showMIS()
+        *---  Maximal Independent Sets ---*
+        ['v2', 'v5', 'v7']
+        ['v3', 'v5', 'v7']
+        ['v1', 'v2', 'v7']
+        ['v1', 'v3', 'v6', 'v7']
+        ['v1', 'v3', 'v4', 'v6']
+        number of solutions:  5
+        cardinality distribution
+        card.:  [0, 1, 2, 3, 4, 5, 6, 7]
+        freq.:  [0, 0, 0, 3, 2, 0, 0, 0]
+        execution time: 0.00032 sec.
+        Results in self.misset
+        >>> g.misset
+        [frozenset({'v7', 'v2', 'v5'}), 
+         frozenset({'v3', 'v7', 'v5'}), 
+         frozenset({'v1', 'v2', 'v7'}), 
+         frozenset({'v1', 'v6', 'v7', 'v3'}), 
+         frozenset({'v1', 'v6', 'v4', 'v3'})]
+
+A MIS in the dual of a graph instance $g$ (its negation $-g$ ), corresponds to a maximal **clique**, ie a maximal complete subgraph in $g$. Maximal cliques may be directly enumerated with the `graphs.Graph.showCliques()` method:
+      >>> g.showCliques()
+      *---  Maximal Cliques ---*
+      ['v2', 'v3']
+      ['v4', 'v7']
+      ['v2', 'v4']
+      ['v4', 'v5']
+      ['v1', 'v5']
+      ['v2', 'v6']
+      ['v5', 'v6']
+      number of solutions:  7
+      cardinality distribution
+      card.:  [0, 1, 2, 3, 4, 5, 6, 7]
+      freq.:  [0, 0, 7, 0, 0, 0, 0, 0]
+      execution time: 0.00049 sec.
+      Results in self.cliques
+      >>> g.cliques
+      [frozenset({'v2', 'v3'}), frozenset({'v4', 'v7'}), 
+       frozenset({'v2', 'v4'}), frozenset({'v4', 'v5'}), 
+       frozenset({'v1', 'v5'}), frozenset({'v6', 'v2'}), 
+       frozenset({'v6', 'v5'})]
+      >>> ...
+
+Grids and the Ising model
+.........................
+
+Special classes of graphs, like *n* x *m* **rectangular** or **triangular grids** (:py:class:`graphs.GridGraph` and :py:class:`graphs.IsingModel`) are available in the :py:mod:`graphs` module. For instance, we may use a Gibbs sampler again for simulating an **Ising Model** on such a grid:
+	>>> from graphs import GridGraph, IsingModel
+	>>> g = GridGraph(n=15,m=15)
+	>>> g.showShort()
+	*----- show short --------------*
+	Grid graph    :  grid-6-6
+	n             :  6
+	m             :  6
+	order         :  36
+	>>> im = IsingModel(g,beta=0.3,nSim=100000,Debug=False)
+	Running a Gibbs Sampler for 100000 step !
+	>>> im.exportGraphViz(colors=['lightblue','lightcoral'])
+	*---- exporting a dot file for GraphViz tools ---------*
+	Exporting to grid-15-15-ising.dot
+	fdp -Tpng grid-15-15-ising.dot -o grid-15-15-ising.png
+
+.. image:: grid-15-15-ising.png
+   :width: 600 px
+   :align: center
+
+Simulating Metropolis random walks
+..................................
+
+Finally, we provide the :py:class:`graphs.MetropolisChain` class, a specialization of the :py:class:`graphs.Graph` class, for implementing a generic **Metropolis MCMC** (Monte Carlo Markov Chain) sampler for simulating random walks on a given graph following a given probability  :code:`probs = {‘v1’: x, ‘v2’: y, ...}` for visiting each vertex (see lines 14-22). 
+        >>> from graphs import MetropolisChain
+	>>> g = Graph(numberOfVertices=5,edgeProbability=0.5)
+	>>> g.showShort()
+	*---- short description of the graph ----*
+	Name             : 'randomGraph'
+	Vertices         :  ['v1', 'v2', 'v3', 'v4', 'v5']
+	Valuation domain :  {'max': 1, 'med': 0, 'min': -1}
+	Gamma function   :
+	v1 -> ['v2', 'v3', 'v4']
+	v2 -> ['v1', 'v4']
+	v3 -> ['v5', 'v1']
+	v4 -> ['v2', 'v5', 'v1']
+	v5 -> ['v3', 'v4']
+	>>> probs = {}  # initialize a potential stationary probability vector 
+	>>> n = g.order # for instance: probs[v_i] = n-i/Sum(1:n) for i in 1:n
+	>>> i = 0
+	>>> verticesList = [x for x in g.vertices]
+	>>> verticesList.sort()
+	>>> for v in verticesList:
+	...     probs[v] = (n - i)/(n*(n+1)/2)
+	...     i += 1
+	>>> met = MetropolisChain(g,probs)
+	>>> frequency = met.checkSampling(verticesList[0],nSim=30000)
+	>>> for v in verticesList:
+	...     print(v,probs[v],frequency[v])
+	v1 0.3333 0.3343
+	v2 0.2666 0.2680
+	v3 0.2    0.2030
+	v4 0.1333 0.1311
+	v5 0.0666 0.0635
+	>>> met.showTransitionMatrix()
+	* ---- Transition Matrix -----
+	  Pij  | 'v1'    'v2'    'v3'    'v4'    'v5'
+	  -----|-------------------------------------
+	  'v1' |  0.23   0.33    0.30    0.13    0.00
+	  'v2' |  0.42   0.42    0.00    0.17    0.00
+	  'v3' |  0.50   0.00    0.33    0.00    0.17
+	  'v4' |  0.33   0.33    0.00    0.08    0.25
+	  'v5' |  0.00   0.00    0.50    0.50    0.00
+
+The ``checkSampling()`` method (see line 23) generates a random walk of *nSim=30000* steps on the given graph and records by the way the observed relative frequency with which each vertex is passed by. In this example, the stationary transition probability distribution, shown by the ``showTransitionMatrix()`` method above (see lines 31-), is quite adequately simulated.
+
+For more technical information and more code examples, look into the technical documentation of the :ref:`graphs-label`. For the readers interested in algorithmic applications of Markov Chains we may recommend consulting O. Häggström's 2002 book: [FMCAA]_.
+
+The Berge mystery story: Who is the lier ?
+..........................................
+Suppose that the file ``berge.py`` contains the following :py:class:`graphs.Graph` instance data::
+
+    vertices = {
+    'A': {'name': 'Abe', 'shortName': 'A'},
+    'B': {'name': 'Burt', 'shortName': 'B'},
+    'C': {'name': 'Charlotte', 'shortName': 'C'},
+    'D': {'name': 'Desmond', 'shortName': 'D'},
+    'E': {'name': 'Eddie', 'shortName': 'E'},
+    'I': {'name': 'Ida', 'shortName': 'I'},
+    }
+    valuationDomain = {'min':-1,'med':0,'max':1}
+    edges = {
+    frozenset(['A','B']) : 1, 
+    frozenset(['A','C']) : -1, 
+    frozenset(['A','D']) : 1, 
+    frozenset(['A','E']) : 1, 
+    frozenset(['A','I']) : -1, 
+    frozenset(['B','C']) : -1, 
+    frozenset(['B','D']) : -1, 
+    frozenset(['B','E']) : 1, 
+    frozenset(['B','I']) : 1, 
+    frozenset(['C','D']) : 1, 
+    frozenset(['C','E']) : 1, 
+    frozenset(['C','I']) : 1, 
+    frozenset(['D','E']) : -1, 
+    frozenset(['D','I']) : 1, 
+    frozenset(['E','I']) : 1, 
+    }
+
+This data concerns the famous *Berge mystery story* (see Golumbic, M. C. Algorithmic Graph Theory and Perfect Graphs, *Annals of Discrete Mathematics* 57 p. 20) Six professors (labeled *A*, *B*, *C*, *D*, *E* and *I*) had been to the library on the day that a rare tractate was stolen. Each entered once, stayed for some time, and then left. If two professors were in the library at the same time, then at least one of them saw the other. Detectives questioned the professors and gathered the testimonies that *A* saw *B* and *E*; *B* saw *A* and *I*; *C* saw *D* and *I*; *D* saw *A* and *I*; *E* saw *B* and *I*; and *I* saw *C* and *E*. This data is gathered in the previous file, where each positive edge :math:`\{x,y\}` models the testimony that, either *x* saw *y*, or, *y* saw *x*.
+
+Example Python3 session:
+    >>> from graphs import Graph
+    >>> g = Graph('berge')
+    >>> g.showShort()
+    *---- short description of the graph ----*
+    Name             : 'berge'
+    Vertices         :  ['A', 'B', 'C', 'D', 'E', 'I']
+    Valuation domain :  {'min': -1, 'med': 0, 'max': 1}
+    Gamma function   : 
+    A -> ['D', 'B', 'E']
+    B -> ['E', 'I', 'A']
+    C -> ['E', 'D', 'I']
+    D -> ['C', 'I', 'A']
+    E -> ['C', 'B', 'I', 'A']
+    I -> ['C', 'E', 'B', 'D']
+
+ The graph data can be plotted as follows:
+	>>> g.exportGraphViz('berge1')
+	*---- exporting a dot file for GraphViz tools ---------*
+	Exporting to berge1.dot
+	fdp -Tpng berge1.dot -o berge1.png
+
+.. image:: berge1.png
+   :width: 400 px
+   :align: center
+
+From graph theory we know that time interval intersection graphs must in fact be triangulated. The testimonies graph should therefore not contain any chordless cycles of four and more vertices. Now, the presence or not of chordless cycles may be checked as follows:
+	>>> g.computeChordlessCycles()
+	Chordless cycle certificate -->>>  ['D', 'C', 'E', 'A', 'D']
+	Chordless cycle certificate -->>>  ['D', 'I', 'E', 'A', 'D']
+	Chordless cycle certificate -->>>  ['D', 'I', 'B', 'A', 'D']
+	[(['D', 'C', 'E', 'A', 'D'], frozenset({'C', 'D', 'E', 'A'})),
+        (['D', 'I', 'E', 'A', 'D'], frozenset({'D', 'E', 'I', 'A'})), 
+        (['D', 'I', 'B', 'A', 'D'], frozenset({'D', 'B', 'I', 'A'}))]
+
+We see three intersection cycles of length 4, which is impossible to occur on the linear time line. Obviously one professor lied! And it is *D* ; if we put to doubt the testimony that he indeed saw *A*, we obtain a correctly triangulated graph:
+	>>> g.setEdgeValue( ('D','A'), 0)
+	>>> g.showShort()
+	*---- short description of the graph ----*
+	Name             : 'berge'
+	Vertices         :  ['A', 'B', 'C', 'D', 'E', 'I']
+	Valuation domain :  {'med': 0, 'min': -1, 'max': 1}
+	Gamma function   : 
+	A -> ['B', 'E']
+	B -> ['A', 'I', 'E']
+	C -> ['I', 'E', 'D']
+	D -> ['I', 'C']
+	E -> ['A', 'I', 'B', 'C']
+	I -> ['B', 'E', 'D', 'C']
+	>>> g.computeChordlessCycles()
+	[]
+	>>> g.exportGraphViz('berge2')
+	*---- exporting a dot file for GraphViz tools ---------*
+	Exporting to berge2.dot
+	fdp -Tpng berge2.dot -o berge2.png
+
+.. image:: berge2.png
+   :width: 400 px
+   :align: center
+
 Links and appendices
 --------------------
 
@@ -2478,16 +2575,17 @@ References
 
 .. [ADT-L7] R. Bisdorff (2014)  *Best multiple criteria choice: the Rubis outranking method*. MICS Algorithmic Decision Theory course, Lecture 7. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 (`downloadable here <_static/adtOutranking-2x2.pdf>`_)
 
+.. [BIS-2016] R. Bisdorff (2016). On linear ranking from trillions of pairwise outranking situations. Research Note 16-1, FSTC/ILIAS Decision Systems Group, University of Luxembourg pp. 1-6 (dowloadable  `PDF file 625.3 kB <http://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RB.pdf>`_)
+
 .. [BIS-2013] R. Bisdorff (2013) "On Polarizing Outranking Relations with Large Performance Differences" *Journal of Multi-Criteria Decision Analysis* (Wiley) **20**:3-12 (downloadable preprint `PDF file 403.5 Kb <http://leopold-loewenheim.uni.lu/bisdorff/documents/MCDA-10-0059-PrePeerReview.pdf>`_)
 
 .. [Bis-2012] R. Bisdorff (2012). On measuring and testing the ordinal correlation between bipolar outranking relations. In Proceedings of DA2PL’2012 *From Multiple Criteria Decision Aid to Preference Learning*, University of Mons 91-100. (downloadable preliminary version `PDF file <http://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RBisdorffMons.pdf>`_ 408.5 kB)
 
-.. [BIS-2008] R. Bisdorff, P. Meyer and M. Roubens (2008) "RUBIS: a bipolar-valued outranking method for the choice problem". 4OR, *A Quarterly Journal of Operations Research* Springer-Verlag Volume 6 Number 2 pp. 143-165. (Online) Electronic version: DOI: 10.1007/s10288-007-0045-5 (downloadable preliminary version `PDF file 271.5Kb <http://leopold-loewenheim.uni.lu/bisdorff/documents/HyperKernels.pdf>`_) 
+.. [BIS-2008] R. Bisdorff, P. Meyer and M. Roubens (2008) "RUBIS: a bipolar-valued outranking method for the choice problem". 4OR, *A Quarterly Journal of Operations Research* Springer-Verlag, Volume 6,  Number 2 pp. 143-165. (Online) Electronic version: DOI: 10.1007/s10288-007-0045-5 (downloadable preliminary version `PDF file 271.5Kb <http://leopold-loewenheim.uni.lu/bisdorff/documents/HyperKernels.pdf>`_) 
 
 .. [BIS-2006] R. Bisdorff, M. Pirlot and M. Roubens (2006). Choices and kernels from bipolar valued digraphs. *European Journal of Operational Research*, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version `PDF file 257.3Kb <http://sma.uni.lu/bisdorff/documents/BisdorffPirlotRoubens05.pdf>`_)
 
-.. [BIS-2016] R. Bisdorff (2016). On linear ranking from trillions of pairwise outranking situations. Research Note 16-1, FSTC/ILIAS Decision Systems Group, University of Luxembourg pp. 1-6 (dowloadable  `PDF file 625.3 kB <http://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RB.pdf>`_)
-
+.. [CHAM-2006] J.M. Chambers, D.A. James, D. Lambert and S. Vander Wiel (2006) "Monitoring Networked Applications with Incremental Quantile Estimation". *Statistical Science*, Vol. 21, No.4, pp.463-475. DOI: 10 12140/088342306000000583.
 
 Footnotes
 .........

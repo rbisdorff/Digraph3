@@ -40,7 +40,7 @@ class PerformanceQuantiles(object):
         >>> tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
         ...                                numberOfCriteria=nbrCrit,seed=105)
         >>> pq = performanceQuantiles.PerformanceQuantiles(tp,'quintiles',
-        ...                                frequencies,LowerClosed=True,Debug=False)
+        ...                                LowerClosed=True,Debug=False)
         >>> pq.showLimitingQuantiles(ByObjectives=True)
         *----  performance quantiles -----*
         Costs
@@ -57,10 +57,7 @@ class PerformanceQuantiles(object):
             'b5'  |   1     |   1.84   34.25   55.11   74.62   96.40  
             'b6'  |   1     |   0.00    3.00    5.00    7.00   10.00  
         >>> tpg = PerfTabGenerator(tp,seed=105)
-        >>> newActions = []
-        >>> for i in range(100):
-        ...     newAction = tpg.randomAction()
-        ...     newActions.append(newAction)
+        >>> newActions = tpg.randomActions(100)
         >>> pq.updateQuantiles(newActions,historySize=None)      
         >>> pq.showHTMLLimitingQuantiles(Transposed=True)
 
@@ -131,7 +128,7 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
             print(x,quantilesFrequencies)
         return quantilesFrequencies
 
-    def _computeLimitingQuantiles(self,perfTab,g,Debug=False,PrefThresholds=False):
+    def _computeLimitingQuantiles(self,perfTab,g,Debug=False):
         """
         Renders the list of limiting quantiles *q(p)* on criteria *g* for *p* in *frequencies* 
         """
@@ -148,13 +145,13 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
         gValues.sort()
         self.criteria[g]['minValue'] = gValues[0]
         self.criteria[g]['maxValue'] = gValues[-1]
-        if PrefThresholds:
-            try:
-                gPrefThrCst = self.criteria[g]['thresholds']['pref'][0]
-                gPrefThrSlope = self.criteria[g]['thresholds']['pref'][1]
-            except:
-                gPrefThrCst = Decimal('0')
-                gPrefThrSlope = Decimal('0')            
+##        if PrefThresholds:
+##            try:
+##                gPrefThrCst = self.criteria[g]['thresholds']['pref'][0]
+##                gPrefThrSlope = self.criteria[g]['thresholds']['pref'][1]
+##            except:
+##                gPrefThrCst = Decimal('0')
+##                gPrefThrSlope = Decimal('0')            
         n = len(gValues)
         self.historySizes[g] = n
         if Debug:
@@ -180,8 +177,8 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
                 if rq < (n-1):
                     quantile = gValues[rq]\
                         + ((r-Decimal(str(rq)))*(gValues[rq+1]-gValues[rq]))
-                    if rq > 0 and PrefThresholds:
-                        quantile += gPrefThrCst + quantile*gPrefThrSlope
+##                    if rq > 0 and PrefThresholds:
+##                        quantile += gPrefThrCst + quantile*gPrefThrSlope
                 else :
                     if self.criteria[g]['preferenceDirection'] == 'min':
                         #quantile = Decimal('100.0')
@@ -210,8 +207,8 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
                 elif rq < (n-1):
                     quantile = gValues[rq]\
                         + ((r-Decimal(str(rq)))*(gValues[rq+1]-gValues[rq]))
-                    if PrefThresholds:
-                        quantile -= gPrefThrCst - quantile*gPrefThrSlope
+##                    if PrefThresholds:
+##                        quantile -= gPrefThrCst - quantile*gPrefThrSlope
                 else:
                     if n > 0:
                         quantile = gValues[n-1]
