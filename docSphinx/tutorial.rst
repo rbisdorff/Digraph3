@@ -2159,6 +2159,23 @@ Examle Python session:
     :width: 500 px
     :align: center
 
+Using a specialised version the :py:meth:`weakOrders.WeakOrder.exportGraphViz` method allows to drwa the rating result in a Hasse diagram format. For instance, the follwing rating result: 	    
+   >>> nqr.showQuantilesRating()
+    *-------- Quantile sorting result ---------
+     [0.40 - 0.60[ ['a1', 'a2', 'a3']
+     [0.20 - 0.40[ ['a4', 'a5']
+
+may result in the following diagram:
+    >>> nqr.exportRatingGraphViz(noSilent=False)
+    *---- exporting a dot file for GraphViz tools ---------*
+     Exporting to quantilesRatingDigraph.dot
+     dot -Grankdir=TB -Tpng quantilesRatingDigraph.dot -o quantilesRatingDigraph.png
+
+.. image:: quantilesRatingDigraph.png
+    :alt: usage example of Normed Quantiles Rating Digraph
+    :width: 200 px
+    :align: center
+ 
 Back to :ref:`Tutorial-label`   
 
 .. _Graphs-Tutorial-label:
