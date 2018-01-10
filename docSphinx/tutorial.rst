@@ -2121,16 +2121,17 @@ Example python session:
     >>> pq.updateQuantiles(newActions,historySize=None)      
     >>> pq.showHTMLLimitingQuantiles(Transposed=True)
 
+.. image:: examplePerfQuantiles.png
+    :alt: Example limiting quantiles html show method
+    :width: 400 px
+    :align: center
+
 The constructor parameter *numberOfBins* (see Lines 7-9 above), choosing the wished number of quantile frequencies, may be either 'quartiles', 'quintiles' (5 bins), 'deciles' (10 bins) , 'dodeciles' (20 bins) or any other integer number of quantile bins. The quantile bins may be either **lower closed** (default) or **upper-closed**.
 
 We use a random generator for **new decision actions** based on a given random performance tableau model (see Lines 25-28 and the :py:mod:`randomPerfTabs` module). 
 
 Parameter *historySize* (see Line 30) of the :py:meth:`performanceQuantiles.PerformanceQuantiles.updateQuantiles` method allows to **balance the new observations against the historical evaluations**. With *historySize = None* (the default setting), the balance in the example above is 1000/1100 (91%, weight of historical data) against 100/1100 (9%, weight of the new incoming observations). Putting *historySize = 0*, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile norms.
 
-.. image:: examplePerfQuantiles.png
-    :alt: Example limiting quantiles html show method
-    :width: 400 px
-    :align: center
 
 Rating performances with quantile norms
 .......................................
