@@ -3539,13 +3539,12 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>The <a class="reference internal" href="techDoc.html#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a> class implements the incremental performance quantiles representation of a given performance tableau. The components are:</p>
 <blockquote>
 <div><ul class="simple">
-<li>A set of criteria from a valid performance tableau instance;</li>
-<li>A list of quantile frequencies like quartiles or deciles, for instance;</li>
-<li>A dictionary of quantile limits for each frequency per criterion;</li>
-<li>A dictionary of history sizes keeping the number of evaluations seen so far per criterion. Missing data make these sizes vary from criterion to criterion.</li>
+<li>A <strong>criteria dictionary</strong> from a valid performance tableau instance;</li>
+<li>A list of <strong>quantile frequencies</strong> like <em>quartiles</em> (0.0, 0.25, 05, 0.75,1.0), or <em>deciles</em>, for instance;</li>
+<li>A dictionary of <strong>quantile limits</strong> for each frequency per criterion;</li>
+<li>A dictionary of <strong>history sizes</strong> keeping track of the number of evaluations seen so far per criterion. Missing data make these sizes vary from criterion to criterion.</li>
 </ul>
 </div></blockquote>
-<p>The constructor parameter <em>NumberOfBins</em>, choosing the wished number of quantile frequencies, may be either &#8216;quartiles&#8217; (0.0, 0.25, 05, 0.75,1.0), &#8216;quintiles&#8217; (5 bins), &#8216;deciles&#8217; (10 bins) , &#8216;dodeciles&#8217; (20 bins) or any other integer number of quantile bins. The quantile bin may be either <strong>lower closed</strong> (default) or <strong>upper-closed</strong>.</p>
 <dl class="docutils">
 <dt>Example python session:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -3577,14 +3576,16 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 27
 28
 29
-30</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">performanceQuantiles</span>
+30
+31</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">performanceQuantiles</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">7</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>
 <span class="gp">... </span>                               <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span> <span class="o">=</span> <span class="n">performanceQuantiles</span><span class="o">.</span><span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="s1">&#39;quintiles&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                               <span class="n">LowerClosed</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span> <span class="o">=</span> <span class="n">performanceQuantiles</span><span class="o">.</span><span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="n">numberOfBins</span> <span class="o">=</span> <span class="s1">&#39;quintiles&#39;</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="n">LowerClosed</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">showLimitingQuantiles</span><span class="p">(</span><span class="n">ByObjectives</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="go">*----  performance quantiles -----*</span>
 <span class="go">Costs</span>
@@ -3611,7 +3612,9 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </td></tr></table></div>
 </dd>
 </dl>
-<p>Parameter <em>historySize</em> of the <a class="reference internal" href="techDoc.html#performanceQuantiles.PerformanceQuantiles.updateQuantiles" title="performanceQuantiles.PerformanceQuantiles.updateQuantiles"><code class="xref py py-meth docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles.updateQuantiles()</span></code></a> method allows to balance the new observations against the historical data. With <em>historySize = None</em> (the default setting), the balance in the example above is 1000/1100 (91%, weight of historical data) against 100/1100 (9%, weight of the new incoming observations). Putting <em>historySize = 0</em>, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile norms.</p>
+<p>The constructor parameter <em>numberOfBins</em> (see Line 8 above), choosing the wished number of quantile frequencies, may be either &#8216;quartiles&#8217;, &#8216;quintiles&#8217; (5 bins), &#8216;deciles&#8217; (10 bins) , &#8216;dodeciles&#8217; (20 bins) or any other integer number of quantile bins. The quantile bins may be either <strong>lower closed</strong> (default) or <strong>upper-closed</strong>.</p>
+<p>We use a random generator for new decision actions based on a given random performance tableau model (see Line 24-27 and the <a class="reference internal" href="techDoc.html#module-randomPerfTabs" title="randomPerfTabs"><code class="xref py py-mod docutils literal"><span class="pre">randomPerfTabs</span></code></a> module).</p>
+<p>Parameter <em>historySize</em> (see line 29) of the <a class="reference internal" href="techDoc.html#performanceQuantiles.PerformanceQuantiles.updateQuantiles" title="performanceQuantiles.PerformanceQuantiles.updateQuantiles"><code class="xref py py-meth docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles.updateQuantiles()</span></code></a> method allows to <strong>balance the new observations against the historical data</strong>. With <em>historySize = None</em> (the default setting), the balance in the example above is 1000/1100 (91%, weight of historical data) against 100/1100 (9%, weight of the new incoming observations). Putting <em>historySize = 0</em>, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile norms.</p>
 <a class="reference internal image-reference" href="_images/examplePerfQuantiles.png"><img alt="Example limiting quantiles html show method" class="align-center" src="_images/examplePerfQuantiles.png" style="width: 400px;" /></a>
 </div>
 <div class="section" id="rating-performances-with-quantile-norms">

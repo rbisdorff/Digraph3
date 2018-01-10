@@ -2083,12 +2083,10 @@ We are inspired by [CHAM-2006]_, who present an efficient algorithm for incremen
 
 The :py:class:`performanceQuantiles.PerformanceQuantiles` class implements the incremental performance quantiles representation of a given performance tableau. The components are:
 
-  * A set of criteria from a valid performance tableau instance;
-  * A list of quantile frequencies like quartiles or deciles, for instance;
-  * A dictionary of quantile limits for each frequency per criterion;
-  * A dictionary of history sizes keeping the number of evaluations seen so far per criterion. Missing data make these sizes vary from criterion to criterion.
-
-The constructor parameter *NumberOfBins*, choosing the wished number of quantile frequencies, may be either 'quartiles' (0.0, 0.25, 05, 0.75,1.0), 'quintiles' (5 bins), 'deciles' (10 bins) , 'dodeciles' (20 bins) or any other integer number of quantile bins. The quantile bin may be either **lower closed** (default) or **upper-closed**. 
+  * A **criteria dictionary** from a valid performance tableau instance;
+  * A list of **quantile frequencies** like *quartiles* (0.0, 0.25, 05, 0.75,1.0), or *deciles*, for instance;
+  * A dictionary of **quantile limits** for each frequency per criterion;
+  * A dictionary of **history sizes** keeping track of the number of evaluations seen so far per criterion. Missing data make these sizes vary from criterion to criterion.
 
 Example python session:
     >>> import performanceQuantiles
@@ -2097,8 +2095,9 @@ Example python session:
     >>> nbrCrit = 7
     >>> tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
     ...                                numberOfCriteria=nbrCrit,seed=105)
-    >>> pq = performanceQuantiles.PerformanceQuantiles(tp,'quintiles',
-    ...                                LowerClosed=True,Debug=False)
+    >>> pq = performanceQuantiles.PerformanceQuantiles(tp,
+    ...               numberOfBins = 'quintiles',
+    ...               LowerClosed=True,Debug=False)
     >>> pq.showLimitingQuantiles(ByObjectives=True)
     *----  performance quantiles -----*
     Costs
@@ -2122,7 +2121,11 @@ Example python session:
     >>> pq.updateQuantiles(newActions,historySize=None)      
     >>> pq.showHTMLLimitingQuantiles(Transposed=True)
 
-Parameter *historySize* of the :py:meth:`performanceQuantiles.PerformanceQuantiles.updateQuantiles` method allows to balance the new observations against the historical data. With *historySize = None* (the default setting), the balance in the example above is 1000/1100 (91%, weight of historical data) against 100/1100 (9%, weight of the new incoming observations). Putting *historySize = 0*, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile norms.
+The constructor parameter *numberOfBins* (see Line 8 above), choosing the wished number of quantile frequencies, may be either 'quartiles', 'quintiles' (5 bins), 'deciles' (10 bins) , 'dodeciles' (20 bins) or any other integer number of quantile bins. The quantile bins may be either **lower closed** (default) or **upper-closed**.
+
+We use a random generator for new decision actions based on a given random performance tableau model (see Line 24-27 and the :py:mod:`randomPerfTabs` module). 
+
+Parameter *historySize* (see line 29) of the :py:meth:`performanceQuantiles.PerformanceQuantiles.updateQuantiles` method allows to **balance the new observations against the historical data**. With *historySize = None* (the default setting), the balance in the example above is 1000/1100 (91%, weight of historical data) against 100/1100 (9%, weight of the new incoming observations). Putting *historySize = 0*, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile norms.
 
 .. image:: examplePerfQuantiles.png
     :alt: Example limiting quantiles html show method
