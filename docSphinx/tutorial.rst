@@ -2081,7 +2081,14 @@ Incremental learning of quantile norms
 
 We are inspired by [CHAM-2006]_, who present an efficient algorithm for incrementally updating a quantile-binned cumulative density function (CDF) with newly observed CDFs.
 
-The :py:class:`performanceQuantiles.PerformanceQuantiles` class implements the incremental performance quantiles representation of a given performance tableau. The constructor parameter *NumberOfBins*, choosing the wished number of quantiles, may be either 'quartiles' (4 bins), 'quintiles' (5 bins), 'deciles' (10 bins) , 'dodeciles' (20 bins) or any other integer number of quantile bins.
+The :py:class:`performanceQuantiles.PerformanceQuantiles` class implements the incremental performance quantiles representation of a given performance tableau. The components are:
+
+  * A set of criteria from a valid performance tableau instance;
+  * A list of quantile frequencies like quartiles or deciles, for instance;
+  * A dictionary of quantile limits for each frequency per criterion;
+  * A dictionary of history sizes keeping the number of evaluations seen so far per criterion. Missing data make these sizes vary from criterion to criterion.
+
+The constructor parameter *NumberOfBins*, choosing the wished number of quantile frequencies, may be either 'quartiles' (0.0, 0.25, 05, 0.75,1.0), 'quintiles' (5 bins), 'deciles' (10 bins) , 'dodeciles' (20 bins) or any other integer number of quantile bins. The quantile bin may be either **lower closed** (default) or **upper-closed**. 
 
 Example python session:
     >>> import performanceQuantiles
@@ -2129,7 +2136,11 @@ We provide the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class, a
 for **absolute rating** of a newly given set of decision actions with
 normed performance quantiles gathered from historical data. The constructor requires a valid :py:class:`performanceQuantiles.PerformanceQuantiles` instance.
 
-Examle Python session:
+.. note::
+
+   It is important to notice that a :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class instance, contrary to a generic :py:class:`outrankingDigraphs.OutrankingDigraph` instance does not inherit from the generic :py:class:`perfTabs.PerformanceTableau` class, but instead from the :py:class:`performanceQuantiles.PerformanceQuantiles` class. 
+
+Example Python session:
     >>> From sortingDigraphs import *
     >>> # historical data
     >>> from randomPerfTabs import RandomCBPerformanceTableau
