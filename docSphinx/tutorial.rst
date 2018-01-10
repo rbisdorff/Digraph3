@@ -2142,7 +2142,7 @@ normed performance quantiles gathered from historical data. The constructor requ
 
 .. note::
 
-   It is important to notice that a :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class instance, contrary to a generic :py:class:`outrankingDigraphs.OutrankingDigraph` instance does not inherit from the generic :py:class:`perfTabs.PerformanceTableau` class, but instead from the :py:class:`performanceQuantiles.PerformanceQuantiles` class. 
+   It is important to notice that the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class, contrary to the generic :py:class:`outrankingDigraphs.OutrankingDigraph` class, does not inherit from the generic :py:class:`perfTabs.PerformanceTableau` class, but instead from the :py:class:`performanceQuantiles.PerformanceQuantiles` class. The **actions** in such a class instance do contain both a set of newly given decision actions, as well as the quantile profiles, ie the quantile bins' performance limits.
 
 Example Python session:
     >>> From sortingDigraphs import *
