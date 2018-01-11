@@ -5306,6 +5306,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                  PrefThresholds=False,\
                  valuationScale=(-1,1),\
                  rankingRule='NetFolws',\
+                 WithSorting=False,\
                  Threading=False,\
                  tempDir=None,\
                  nbrCores=None,\
@@ -5340,21 +5341,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         self.cdf = deepcopy(perfQuantiles.cdf)
         self.name = 'quantilesRatingDigraph'
         # import the actions to rate
-##        newActions = OrderedDict()
-##        evaluation = {}
-##        for g in self.criteria:
-##            evaluation[g] = {}
         if newData != None:
-##            na = len(newData)
-##            for i in range(na):
-##                key = newData[i]['action']['key']
-####                newActions[key] = {'shortName':newData[i]['action']['shortName'],
-####                                'name':newData[i]['action']['name'],
-####                                'type': newData[i]['action']['type'],
-####                                'commemt': newData[i]['action']['comment']}
-##                newActions[key] = newData[i]['action']
-##                for g in self.criteria:
-##                    evaluation[g][key] = newData[i]['evaluation'][g]
             self.newActions = newData['actions']
             self.evaluation = newData['evaluation']
         else:
@@ -5370,8 +5357,8 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             print('limitingQuantiles',self.limitingQuantiles)
             print()
 
-        # instantiate sorting categories
-        tt = time()
+        # instantiate rating categories
+        t0 = time()
         self.rankingRule = rankingRule
         quantFreq = self.quantilesFrequencies
         limitingQuantiles = self.limitingQuantiles
@@ -5404,7 +5391,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                         'highLimit': '%.2f]' % (quantFreq[i+1]),
                                         'quantile': quantFreq[i+1]}
         self.categories = categories
-        self.runTimes = {'categories': time()-tt}
+        self.runTimes = {'categories': time()-t0}
 ##
         if Debug:
             print('categories',self.categories)
@@ -5489,12 +5476,10 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             self.largeDifferencesCount = g.largeDifferencesCount
         except:
             pass
-        Min = g.valuationdomain['min']
-        Max = g.valuationdomain['max']
-        Med = g.valuationdomain['med']
+##        Min = g.valuationdomain['min']
+##        Max = g.valuationdomain['max']
+##        Med = g.valuationdomain['med']
         self.valuationdomain = g.valuationdomain
-       
-
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -5513,7 +5498,18 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             print('Rating categories:', self.ratingCategories)
         self.runTimes['quantilesRating'] = time() - t0
                
+        # compute quantiles sorting
+        if WithSorting:
+            t0 = time()
+            self.sorting = self.computeSortingCharacteristics()
+            self.categoryContent = self.computeCategoryContents()
+            if Debug:
+                self.showSorting()
+                self.showActionsSortingResult()
+                self.showQuantileOrdering()
+            self.runTimes['quantilesSorting'] = time() - t0
 
+        # end of the construction
         self.runTimes['totalTime'] = time() - tt
 
 # ------------  class methods ------------------
@@ -6056,14 +6052,6 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                     quantileColor[x][g] = naColor
                 if Debug:
                     print(x,g,quantileColor[x][g])
-        # legend            
-##        html += '<i>Color legend: </i>\n'
-##        html += '<table style="background-color:%s; border-collapse: collapse;" border="1">\n' % (backGroundColor) 
-##        html += '<tr bgcolor=%s><th>quantile</th>' % (columnHeaderColor)
-##        for col in range(nc):
-##            html += '<td bgcolor=%s>%s</td>' % (colorPalette[col][1],str(colorPalette[col][0]))
-##        html += '</tr>\n'
-##        html += '</table>\n'
         # heatmap
         html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
         html += '<tr bgcolor=%s><th>criteria</th>' % (columnHeaderColor)
@@ -6407,10 +6395,10 @@ if __name__ == "__main__":
 ##        newActions.append(newAction)
     pq.updateQuantiles(newActions,historySize=None)
     ira = NormedQuantilesRatingDigraph(pq,newActions,PrefThresholds=True,\
-                                   Debug=False,Threading=False)
+                                   WithSorting=True,Debug=False,Threading=False)
     ira.showQuantilesRating()
-    ira.sorting = ira.computeSortingCharacteristics()
-    ira.categoryContent = ira.computeCategoryContents()
+    #ira.sorting = ira.computeSortingCharacteristics()
+    #ira.categoryContent = ira.computeCategoryContents()
     ira.showSorting()
 ##    for x in ira.newActions:
 ##        ira.showActionCategories(x,Comments=True)

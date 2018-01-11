@@ -53,7 +53,7 @@ class RandomPerformanceTableau(PerformanceTableau):
              | ('uniform',Min,Max), uniformly distributed between min and max values. 
              | ('normal',mu,sigma), truncated Gaussion distribution. 
              | ('triangular',mode,repartition), generalized triangular distribution 
-             | ('beta',alpha,beta).
+             | ('beta',mod,(alpha,beta)), mode in ]0,1[.
         * valueDigits := <integer>, precision of performance measurements
           (2 decimal digits by default).
         
@@ -170,8 +170,9 @@ class RandomPerformanceTableau(PerformanceTableau):
         for i in range(numberOfCriteria):
             g = ('g%%0%dd' % ngd) % (i+1)
             criteria[g] = {}
-            criteria[g]['name']='RandomPerformanceTableau() instance'
-            criteria[g]['comment']=commentString
+            criteria[g]['name'] = 'RandomPerformanceTableau() instance'
+            criteria[g]['comment'] = commentString
+            criteria[g]['preferenceDirection'] = 'max'
             try:
                 veto = round(commonThresholds[3][0]*commonAmplitude/100.0,digits)
                 ind = round(commonThresholds[0][0]*commonAmplitude/100.0,digits)
@@ -359,7 +360,7 @@ class RandomPerformanceGenerator(object):
         return {'actions': newActions, 'evaluation': newEvaluation}
 
       
-    def _randomAction(self):
+    def _randomAction(self,Debug=False):
         """
         Returns
         ``{'action': key, 'evaluation': {'g1': Decimal(...), 'g2': Decimal(...), ... }}``
@@ -367,6 +368,11 @@ class RandomPerformanceGenerator(object):
         # generate action key
         self.counter += 1
         actionKey = ('%s%%0%dd' % (self.actionNamePrefix,self.nd)) % (self.counter)
+        action = {'shortName':actionKey,
+                        'name': 'random decision action',
+                        'comment': 'RandomPerformanceGenerator',
+                        #'type': actionType,
+                        'key': actionKey}
 
         # generate random evaluation
 
@@ -437,7 +443,7 @@ class RandomPerformanceGenerator(object):
                 evaluation[c] = Decimal('-999')
 
         # return a new random decision alternative
-        return {'action': actionKey,'evaluation':evaluation}
+        return {'action': {'key': actionKey},'evaluation':evaluation}
 
     def randomUpdate(self,nbrOfRandomActions=1):
         """
