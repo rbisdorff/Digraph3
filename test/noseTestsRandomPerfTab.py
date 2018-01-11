@@ -182,13 +182,7 @@ def testRandomPerformanceGenerators():
     t.showAll()
     rag1 = RandomPerformanceGenerator(t,actionNamePrefix='b',seed=100)
     sampleSize = 5
-    for s in range(sampleSize):
-        newAction = rag1._randomAction()
-        ak = newAction['action']
-        t.actions[ak] = {'name': ak}
-        for ev in t.evaluation:
-            for g in t.evaluation:
-                t.evaluation[g][ak] = newAction['evaluation'][g]
+    rag1.randomActions(sampleSize)
     rag2 = RandomPerformanceGenerator(t,actionNamePrefix='c',seed=110)
     rag2.randomUpdate(nbrOfRandomActions=5)
     #t.showHTMLPerformanceHeatmap(Correlations=True)

@@ -4736,7 +4736,7 @@ or updating the performances of already existing decision actions.</p>
 
 <dl class="class">
 <dt id="randomPerfTabs.RandomPerformanceTableau">
-<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=13</em>, <em>actionNamePrefix='a'</em>, <em>numberOfCriteria=7</em>, <em>weightDistribution='equisignificant'</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=(0.0</em>, <em>100.0)</em>, <em>commonThresholds=((10.0</em>, <em>0.0)</em>, <em>(20.0</em>, <em>0.0)</em>, <em>(80.0</em>, <em>0.0))</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>missingDataProbability=0.0</em>, <em>BigData=False</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomPerformanceTableau"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=13</em>, <em>actionNamePrefix='a'</em>, <em>numberOfCriteria=7</em>, <em>weightDistribution='equisignificant'</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=(0.0</em>, <em>100.0)</em>, <em>commonThresholds=((2.5</em>, <em>0.0)</em>, <em>(5.0</em>, <em>0.0)</em>, <em>(80.0</em>, <em>0.0))</em>, <em>commonMode=('beta'</em>, <em>None</em>, <em>(2</em>, <em>2))</em>, <em>valueDigits=2</em>, <em>missingDataProbability=0.025</em>, <em>BigData=False</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomPerformanceTableau"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>Specialization of the generic <code class="xref py py-class docutils literal"><span class="pre">perftabs.PerformanceTableau</span></code> class for generating a temporary random performance tableau.</p>
 <dl class="docutils">
@@ -6385,12 +6385,6 @@ and may not contain a special character like &#8216;-&#8216; or &#8216;_&#8217;.
 </dd></dl>
 
 <dl class="method">
-<dt id="sortingDigraphs.NormedQuantilesRatingDigraph.getActionsKeys">
-<code class="descname">getActionsKeys</code><span class="sig-paren">(</span><em>action=None</em>, <em>WithoutProfiles=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.getActionsKeys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.getActionsKeys" title="Permalink to this definition">¶</a></dt>
-<dd><p>extract normal actions keys()</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph.htmlPerformanceHeatmap">
 <code class="descname">htmlPerformanceHeatmap</code><span class="sig-paren">(</span><em>argCriteriaList=None</em>, <em>argActionsList=None</em>, <em>SparseModel=False</em>, <em>RankingRule='NetFlows'</em>, <em>minimalComponentSize=1</em>, <em>quantiles=None</em>, <em>strategy='average'</em>, <em>ndigits=2</em>, <em>contentCentered=True</em>, <em>colorLevels=None</em>, <em>pageTitle='Performance Heatmap'</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.htmlPerformanceHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.htmlPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table
@@ -6412,21 +6406,36 @@ Returns a tuple : action, lowest category key, highest category key, membership 
 </dd></dl>
 
 <dl class="method">
+<dt id="sortingDigraphs.NormedQuantilesRatingDigraph.showHTMLQuantilesSorting">
+<code class="descname">showHTMLQuantilesSorting</code><span class="sig-paren">(</span><em>Descending=True</em>, <em>strategy='average'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.showHTMLQuantilesSorting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.showHTMLQuantilesSorting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shows the html version of the quantile preordering in a browser window.</p>
+<dl class="docutils">
+<dt>The ordring strategy is either:</dt>
+<dd><ul class="first last simple">
+<li><strong>optimistic</strong>, following the upper quantile limits (default),</li>
+<li><strong>pessimistic</strong>, following the lower quantile limits,</li>
+<li><strong>average</strong>, following the averag of the upper and lower quantile limits.</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph.showOrderedRelationTable">
 <code class="descname">showOrderedRelationTable</code><span class="sig-paren">(</span><em>relation=None</em>, <em>direction='decreasing'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.showOrderedRelationTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.showOrderedRelationTable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Showing the relation table in decreasing (default) or increasing order.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="sortingDigraphs.NormedQuantilesRatingDigraph.showQuantileOrdering">
-<code class="descname">showQuantileOrdering</code><span class="sig-paren">(</span><em>strategy=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.showQuantileOrdering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.showQuantileOrdering" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dummy show method for the commenting computeQuantileOrdering() method.</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph.showQuantilesRating">
 <code class="descname">showQuantilesRating</code><span class="sig-paren">(</span><em>Descending=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.showQuantilesRating"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.showQuantilesRating" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.NormedQuantilesRatingDigraph.showQuantilesSorting">
+<code class="descname">showQuantilesSorting</code><span class="sig-paren">(</span><em>strategy='average'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.showQuantilesSorting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.showQuantilesSorting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dummy show method for the commenting computeQuantileOrdering() method.</p>
+</dd></dl>
 
 </dd></dl>
 

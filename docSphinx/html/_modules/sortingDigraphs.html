@@ -51,7 +51,7 @@
 <span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># Python implementation of digraphs</span>
-<span class="c1"># Current revision $Revision: 2359 $</span>
+<span class="c1"># Current revision $Revision: 2367 $</span>
 <span class="c1"># Copyright (C) 2006-2008  Raymond Bisdorff</span>
 <span class="c1">#</span>
 <span class="c1">#    This program is free software; you can redistribute it and/or modify</span>
@@ -5806,12 +5806,33 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">weakOrdering</span></div>
 
-<div class="viewcode-block" id="NormedQuantilesRatingDigraph.showQuantileOrdering"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.showQuantileOrdering">[docs]</a>    <span class="k">def</span> <span class="nf">showQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="NormedQuantilesRatingDigraph.showQuantilesSorting"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.showQuantilesSorting">[docs]</a>    <span class="k">def</span> <span class="nf">showQuantilesSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dummy show method for the commenting computeQuantileOrdering() method.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*----- Quantiles sorting result ----&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">computeQuantileOrdering</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="n">strategy</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
+
+<div class="viewcode-block" id="NormedQuantilesRatingDigraph.showHTMLQuantilesSorting"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.showHTMLQuantilesSorting">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLQuantilesSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Shows the html version of the quantile preordering in a browser window.</span>
+
+<span class="sd">        The ordring strategy is either:</span>
+<span class="sd">            * **optimistic**, following the upper quantile limits (default),</span>
+<span class="sd">            * **pessimistic**, following the lower quantile limits,</span>
+<span class="sd">            * **average**, following the averag of the upper and lower quantile limits.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">webbrowser</span>
+        <span class="n">fileName</span> <span class="o">=</span> <span class="s1">&#39;/tmp/preOrdering.html&#39;</span>
+        <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">computeQuantileOrdering</span><span class="p">(</span><span class="n">Descending</span><span class="o">=</span><span class="n">Descending</span><span class="p">,</span>
+                                              <span class="n">strategy</span><span class="o">=</span><span class="n">strategy</span><span class="p">,</span>
+                                              <span class="n">HTML</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                              <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;file://&#39;</span><span class="o">+</span><span class="n">fileName</span>
+        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open_new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="NormedQuantilesRatingDigraph.computeSortingCharacteristics"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.computeSortingCharacteristics">[docs]</a>    <span class="k">def</span> <span class="nf">computeSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -6286,21 +6307,21 @@
                         <span class="n">gQuantiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-=</span> <span class="n">gPrefThrCst</span> <span class="o">+</span> <span class="n">gQuantiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">gPrefThrSlope</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">],</span><span class="n">gQuantiles</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">gQuantiles</span>
+        <span class="k">return</span> <span class="n">gQuantiles</span></div>
 
-<div class="viewcode-block" id="NormedQuantilesRatingDigraph.getActionsKeys"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.getActionsKeys">[docs]</a>    <span class="k">def</span> <span class="nf">getActionsKeys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">WithoutProfiles</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        extract normal actions keys()</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">profiles</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">profiles</span><span class="o">.</span><span class="n">keys</span><span class="p">())])</span>
-        <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">actionsExt</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">newActions</span><span class="o">.</span><span class="n">keys</span><span class="p">())])</span>
-            <span class="k">if</span> <span class="n">WithoutProfiles</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">actionsExt</span> <span class="o">-</span> <span class="n">profiles</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">actionsExt</span> <span class="o">|</span> <span class="n">profiles</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nb">set</span><span class="p">([</span><span class="n">action</span><span class="p">])</span>           </div></div>
+<span class="c1">##    def getActionsKeys(self,action=None,WithoutProfiles=True):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        extract normal actions keys()</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        profiles = set([x for x in list(self.profiles.keys())])</span>
+<span class="c1">##        if action == None:</span>
+<span class="c1">##            actionsExt = set([x for x in list(self.newActions.keys())])</span>
+<span class="c1">##            if WithoutProfiles:</span>
+<span class="c1">##                return actionsExt - profiles</span>
+<span class="c1">##            else:</span>
+<span class="c1">##                return actionsExt | profiles</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            return set([action])           </span>
 
 <span class="c1">##########################################################3</span>
 <span class="c1">#----------test SortingDigraph class ----------------</span>
@@ -6316,7 +6337,7 @@
 <span class="s2">    ****************************************************</span>
 <span class="s2">    * Python sortingDigraphs module                    *</span>
 <span class="s2">    * depends on BipolarOutrankingDigraph and          *</span>
-<span class="s2">    * $Revision: 2359 $                                 *</span>
+<span class="s2">    * $Revision: 2367 $                                 *</span>
 <span class="s2">    * Copyright (C) 2010 Raymond Bisdorff              *</span>
 <span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
 <span class="s2">    * to the extent permitted by the applicable law.   *</span>
@@ -6461,7 +6482,8 @@
     <span class="c1">#ira.showSorting()</span>
     <span class="c1">#ira.showHTMLSorting()</span>
     <span class="n">ira</span><span class="o">.</span><span class="n">showActionsSortingResult</span><span class="p">()</span>
-    <span class="n">ira</span><span class="o">.</span><span class="n">showQuantileOrdering</span><span class="p">()</span>
+    <span class="n">ira</span><span class="o">.</span><span class="n">showQuantilesSorting</span><span class="p">()</span>
+    <span class="n">ira</span><span class="o">.</span><span class="n">showHTMLQuantilesSorting</span><span class="p">()</span>
     <span class="c1">#ira.showRefinedQuantileOrdering()</span>
     <span class="c1">#ira.showOrderedRelationTable()</span>
     <span class="c1">#ira.showSortingCharacteristics()</span>
@@ -6472,7 +6494,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. december 2010                *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2359 $                  *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2367 $                  *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>

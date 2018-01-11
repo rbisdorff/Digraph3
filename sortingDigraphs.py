@@ -5756,12 +5756,33 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         else:
             return weakOrdering
 
-    def showQuantileOrdering(self,strategy=None):
+    def showQuantilesSorting(self,strategy='average'):
         """
         Dummy show method for the commenting computeQuantileOrdering() method.
         """
+        print('*----- Quantiles sorting result ----')
         self.computeQuantileOrdering(strategy=strategy,Comments=True)
 
+
+    def showHTMLQuantilesSorting(self,Descending=True,strategy='average'):
+        """
+        Shows the html version of the quantile preordering in a browser window.
+
+        The ordring strategy is either:
+            * **optimistic**, following the upper quantile limits (default),
+            * **pessimistic**, following the lower quantile limits,
+            * **average**, following the averag of the upper and lower quantile limits.
+        """
+        import webbrowser
+        fileName = '/tmp/preOrdering.html'
+        fo = open(fileName,'w')
+        fo.write(self.computeQuantileOrdering(Descending=Descending,
+                                              strategy=strategy,
+                                              HTML=True,
+                                              Comments=True))
+        fo.close()
+        url = 'file://'+fileName
+        webbrowser.open_new(url)
 
 
     def computeSortingCharacteristics(self, action=None, Debug=False):
@@ -6238,19 +6259,19 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             print(g,self.LowerClosed,self.criteria[g]['preferenceDirection'],gQuantiles)
         return gQuantiles
 
-    def getActionsKeys(self,action=None,WithoutProfiles=True):
-        """
-        extract normal actions keys()
-        """
-        profiles = set([x for x in list(self.profiles.keys())])
-        if action == None:
-            actionsExt = set([x for x in list(self.newActions.keys())])
-            if WithoutProfiles:
-                return actionsExt - profiles
-            else:
-                return actionsExt | profiles
-        else:
-            return set([action])           
+##    def getActionsKeys(self,action=None,WithoutProfiles=True):
+##        """
+##        extract normal actions keys()
+##        """
+##        profiles = set([x for x in list(self.profiles.keys())])
+##        if action == None:
+##            actionsExt = set([x for x in list(self.newActions.keys())])
+##            if WithoutProfiles:
+##                return actionsExt - profiles
+##            else:
+##                return actionsExt | profiles
+##        else:
+##            return set([action])           
 
 ##########################################################3
 #----------test SortingDigraph class ----------------
@@ -6411,7 +6432,8 @@ if __name__ == "__main__":
     #ira.showSorting()
     #ira.showHTMLSorting()
     ira.showActionsSortingResult()
-    ira.showQuantileOrdering()
+    ira.showQuantilesSorting()
+    ira.showHTMLQuantilesSorting()
     #ira.showRefinedQuantileOrdering()
     #ira.showOrderedRelationTable()
     #ira.showSortingCharacteristics()

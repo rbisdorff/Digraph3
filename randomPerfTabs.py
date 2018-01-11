@@ -88,10 +88,10 @@ class RandomPerformanceTableau(PerformanceTableau):
                  weightScale=None,\
                  integerWeights=True,\
                  commonScale = (0.0,100.0),\
-                 commonThresholds = ((10.0,0.0),(20.0,0.0),(80.0,0.0)),\
-                 commonMode = None,\
+                 commonThresholds = ((2.5,0.0),(5.0,0.0),(80.0,0.0)),\
+                 commonMode = ('beta',None,(2,2)),\
                  valueDigits = 2,\
-                 missingDataProbability = 0.0,\
+                 missingDataProbability = 0.025,\
                  BigData=False,\
                  seed = None,\
                  Debug = False):
@@ -443,7 +443,7 @@ class RandomPerformanceGenerator(object):
                 evaluation[c] = Decimal('-999')
 
         # return a new random decision alternative
-        return {'action': {'key': actionKey},'evaluation':evaluation}
+        return {'action': action,'evaluation':evaluation}
 
     def randomUpdate(self,nbrOfRandomActions=1):
         """
@@ -461,8 +461,8 @@ class RandomPerformanceGenerator(object):
         for i in range(nbrOfRandomActions):
             newAction = self._randomAction()
             newEvaluation = newAction['evaluation']
-            newKey = newAction['action']
-            actions[newKey] = {'name':newKey}
+            newKey = newAction['action']['key']
+            actions[newKey] = newAction['action']
             for g in criteria:
                 evaluation[g][newKey] = newEvaluation[g]
                 
@@ -2864,13 +2864,7 @@ if __name__ == "__main__":
     t.showAll()
     rag1 = Random3ObjectivesPerformanceGenerator(t,actionNamePrefix='b',seed=100)
     sampleSize = 5
-    for s in range(sampleSize):
-        newAction = rag1.randomAction()
-        ak = newAction['action'].pop('key')
-        t.actions[ak] = newAction['action']
-        for ev in t.evaluation:
-            for g in t.evaluation:
-                t.evaluation[g][ak] = newAction['evaluation'][g]
+    rag1.randomActions(sampleSize)
     #t.showHTMLPerformanceHeatmap(Correlations=True)
     rag2 = Random3ObjectivesPerformanceGenerator(t,actionNamePrefix='c',seed=110)
     rag2.randomUpdate(nbrOfRandomActions=5)
