@@ -158,7 +158,13 @@ def testNormedQuantilesRatingDigraph():
     tpg = PerfTabGenerator(tp,instanceCounter=0,seed=105)
     newActions = tpg.randomActions(10)
     pq.updateQuantiles(newActions,historySize=None)
-    nrq = NormedQuantilesRatingDigraph(pq,newActions,Debug=True)
+    nrq = NormedQuantilesRatingDigraph(pq,newActions,
+                                       WithSorting=True,
+                                       PrefThresholds=True,Debug=True)
     nrq.showQuantilesRating()
     nrq.exportRatingGraphViz()
+    nrq.showSorting()
+    nrq.showActionsSortingResult()
+    nrq.showQuantilesSorting()
+    
 

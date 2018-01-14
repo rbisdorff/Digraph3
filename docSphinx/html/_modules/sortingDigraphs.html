@@ -51,7 +51,7 @@
 <span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># Python implementation of digraphs</span>
-<span class="c1"># Current revision $Revision: 2367 $</span>
+<span class="c1"># Current revision $Revision: 2368 $</span>
 <span class="c1"># Copyright (C) 2006-2008  Raymond Bisdorff</span>
 <span class="c1">#</span>
 <span class="c1">#    This program is free software; you can redistribute it and/or modify</span>
@@ -5964,6 +5964,7 @@
 
 <span class="sd">        See the corresponding perfTabs.showHTMLPerformanceHeatMap() method.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;see browser&#39;</span><span class="p">)</span>
         <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
                     
         <span class="n">brewerRdYlGn9Colors</span> <span class="o">=</span> <span class="p">[(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.1111&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#D53E4F&quot;&#39;</span><span class="p">),</span>
@@ -6049,28 +6050,18 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">actionsList</span> <span class="o">=</span> <span class="n">argActionsList</span>
         <span class="k">else</span><span class="p">:</span> <span class="c1"># standard outranking model</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;NetFlows&#39;</span><span class="p">:</span>
-<span class="c1">##                if quantiles == None:</span>
-<span class="c1">##                    quantiles = na</span>
-<span class="c1">##                from outrankingDigraphs import BipolarOutrankingDigraph</span>
-<span class="c1">##                from linearOrders import NetFlowsOrder</span>
-<span class="c1">##                g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)</span>
-                <span class="k">if</span> <span class="n">argActionsList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">actionsList</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">()</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">actionsList</span> <span class="o">=</span> <span class="n">argActionsList</span>
+            <span class="k">if</span> <span class="n">quantiles</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">quantiles</span> <span class="o">=</span> <span class="n">na</span>
+            <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">BipolarOutrankingDigraph</span>
+            <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">argActionsList</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">RankingRule</span> <span class="o">==</span> <span class="s1">&#39;NetFlows&#39;</span><span class="p">:</span>
+                <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="k">import</span> <span class="n">NetFlowsOrder</span>
+                <span class="n">lo</span> <span class="o">=</span> <span class="n">NetFlowsOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+                <span class="n">actionsList</span> <span class="o">=</span> <span class="n">lo</span><span class="o">.</span><span class="n">netFlowsRanking</span>
             <span class="k">else</span><span class="p">:</span>
-<span class="c1">##                if quantiles == None:</span>
-<span class="c1">##                    quantiles = na</span>
-<span class="c1">##                from outrankingDigraphs import BipolarOutrankingDigraph</span>
-<span class="c1">##                from linearOrders import CopelandOrder</span>
-<span class="c1">##                g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)</span>
-<span class="c1">##                #actionsList = g.computeNetFlowsRanking()</span>
-<span class="c1">##                cop = CopelandOrder(g)</span>
-                <span class="k">if</span> <span class="n">argActionsList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">actionsList</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">actionsList</span> <span class="o">=</span> <span class="n">argActionsList</span>
+                <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="k">import</span> <span class="n">CopelandOrder</span>
+                <span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+                <span class="n">actionsList</span> <span class="o">=</span> <span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span>
         <span class="k">if</span> <span class="n">SparseModel</span><span class="p">:</span>
             <span class="n">rankCorrelation</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">else</span><span class="p">:</span>
@@ -6275,7 +6266,6 @@
             <span class="k">except</span><span class="p">:</span>
                 <span class="n">gPrefThrCst</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
                 <span class="n">gPrefThrSlope</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>            
-        
         <span class="n">gQuantiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteriaCategoryLimits</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">gQuantiles</span><span class="p">)</span>
@@ -6337,7 +6327,7 @@
 <span class="s2">    ****************************************************</span>
 <span class="s2">    * Python sortingDigraphs module                    *</span>
 <span class="s2">    * depends on BipolarOutrankingDigraph and          *</span>
-<span class="s2">    * $Revision: 2367 $                                 *</span>
+<span class="s2">    * $Revision: 2368 $                                 *</span>
 <span class="s2">    * Copyright (C) 2010 Raymond Bisdorff              *</span>
 <span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
 <span class="s2">    * to the extent permitted by the applicable law.   *</span>
@@ -6442,14 +6432,21 @@
 <span class="c1">##    print(g.computeOrdinalCorrelation(qsrbc))</span>
     
     <span class="c1"># test incremental rating agent</span>
-    <span class="n">seed</span> <span class="o">=</span> <span class="mi">101</span>
+    <span class="n">seed</span> <span class="o">=</span> <span class="mi">105</span>
+
+<span class="c1">##    from randomPerfTabs import RandomPerformanceTableau</span>
+<span class="c1">##    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator</span>
+<span class="c1">##    nbrActions=1000</span>
+<span class="c1">##    nbrCrit = 13</span>
+<span class="c1">##    tp = RandomPerformanceTableau(numberOfActions=nbrActions,\</span>
+<span class="c1">##                                    numberOfCriteria=nbrCrit,seed=seed)</span>
 
     <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
     <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
     <span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
     <span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">13</span>
     <span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>\
-                                    <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
+                                    <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
 
 <span class="c1">##    from randomPerfTabs import Random3ObjectivesPerformanceTableau</span>
 <span class="c1">##    from randomPerfTabs import Random3ObjectivesPerformanceGenerator as PerfTabGenerator</span>
@@ -6458,7 +6455,7 @@
 <span class="c1">##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\</span>
 <span class="c1">##                                    numberOfCriteria=nbrCrit,seed=seed)</span>
 
-    <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">newActions</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
 <span class="c1">##    for i in range(20):</span>
@@ -6494,7 +6491,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. december 2010                *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2367 $                  *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2368 $                  *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>

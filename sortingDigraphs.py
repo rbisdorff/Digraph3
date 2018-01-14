@@ -5914,6 +5914,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 
         See the corresponding perfTabs.showHTMLPerformanceHeatMap() method.
         """
+        print('see browser')
         from decimal import Decimal
                     
         brewerRdYlGn9Colors = [(Decimal('0.1111'),'"#D53E4F"'),
@@ -5999,28 +6000,18 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             else:
                 actionsList = argActionsList
         else: # standard outranking model
-            if self.rankingRule == 'NetFlows':
-##                if quantiles == None:
-##                    quantiles = na
-##                from outrankingDigraphs import BipolarOutrankingDigraph
-##                from linearOrders import NetFlowsOrder
-##                g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
-                if argActionsList == None:
-                    actionsList = self.computeNetFlowsRanking()
-                else:
-                    actionsList = argActionsList
+            if quantiles == None:
+                quantiles = na
+            from outrankingDigraphs import BipolarOutrankingDigraph
+            g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
+            if RankingRule == 'NetFlows':
+                from linearOrders import NetFlowsOrder
+                lo = NetFlowsOrder(g)
+                actionsList = lo.netFlowsRanking
             else:
-##                if quantiles == None:
-##                    quantiles = na
-##                from outrankingDigraphs import BipolarOutrankingDigraph
-##                from linearOrders import CopelandOrder
-##                g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
-##                #actionsList = g.computeNetFlowsRanking()
-##                cop = CopelandOrder(g)
-                if argActionsList == None:
-                    actionsList = self.computeCopelandRanking()
-                else:
-                    actionsList = argActionsList
+                from linearOrders import CopelandOrder
+                cop = CopelandOrder(g)
+                actionsList = cop.copelandRanking
         if SparseModel:
             rankCorrelation = None
         else:
@@ -6225,7 +6216,6 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             except:
                 gPrefThrCst = Decimal('0')
                 gPrefThrSlope = Decimal('0')            
-        
         gQuantiles = self.criteriaCategoryLimits[g]
         if Debug:
             print(g,gQuantiles)
@@ -6392,14 +6382,21 @@ if __name__ == "__main__":
 ##    print(g.computeOrdinalCorrelation(qsrbc))
     
     # test incremental rating agent
-    seed = 101
+    seed = 105
+
+##    from randomPerfTabs import RandomPerformanceTableau
+##    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
+##    nbrActions=1000
+##    nbrCrit = 13
+##    tp = RandomPerformanceTableau(numberOfActions=nbrActions,\
+##                                    numberOfCriteria=nbrCrit,seed=seed)
 
     from randomPerfTabs import RandomCBPerformanceTableau
     from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
     nbrActions=1000
     nbrCrit = 13
     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
-                                    numberOfCriteria=nbrCrit,seed=105)
+                                    numberOfCriteria=nbrCrit,seed=seed)
 
 ##    from randomPerfTabs import Random3ObjectivesPerformanceTableau
 ##    from randomPerfTabs import Random3ObjectivesPerformanceGenerator as PerfTabGenerator
@@ -6408,7 +6405,7 @@ if __name__ == "__main__":
 ##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
 ##                                    numberOfCriteria=nbrCrit,seed=seed)
 
-    pq = PerformanceQuantiles(tp,10,LowerClosed=False,Debug=False)
+    pq = PerformanceQuantiles(tp,10,LowerClosed=True,Debug=False)
     tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
     newActions = tpg.randomActions(20)
 ##    for i in range(20):
