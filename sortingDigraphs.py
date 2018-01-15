@@ -5652,7 +5652,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             html = '<h1>Quantiles preordering</h1>'
             html += '<table style="background-color:White;" border="1">'
             html += '<tr bgcolor="#9acd32"><th>quantile limits</th>'
-            html += '<th>%s sorting</th>' % strategy
+            html += '<th>Ordering by %s quantile class limits</th>' % strategy
             html += '</tr>'
         actionsCategories = {}
         for x in self.newActions:
@@ -5980,6 +5980,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 
         if RankingRule == None:
             RankingRule = 'NetFlows'
+        html += '<i>Ranking rule: <b>%s</b></i>\n' % RankingRule
         na = len(self.actions)
         profiles = self.profiles
         categories = self.categories
@@ -6108,21 +6109,21 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                     print(html)
             html += '</tr>\n'
         html += '</table>\n'
-        # legend
-        html += '<i>Color legend: </i>\n'
+        # table legend
+        html += '<b>Color legend: </b><br/>\n'
         html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
         html += '<tr bgcolor=%s><th>quantile</th>' % (columnHeaderColor)
         #html += '<td bgcolor=%s>&nbsp;[%.2f - %.2f[&nbsp;</td>' % (colorPalette[0][1],0.0,colorPalette[0][0])
         for col in range(0,nc):
             html += '<td bgcolor=%s>&nbsp;%.2f&#037;</td>' % (colorPalette[col][1],
-                                                                   #colorPalette[col-1][0],
+                                                                  #colorPalette[col-1][0],
                                                                    colorPalette[col][0]*Decimal('100.0'))
         html += '</tr>\n'
         html += '</table>\n'
         if criteriaCorrelation != None:
             html += '<i>(*) tau: Ordinal (Kendall) correlation between marginal criterion and global ranking relation.</i><br/>\n'
         if rankCorrelation != None:
-            html += '<i>Ordinal (Kendall) correlation between global ranking and outranking relation: %.2f.</i><br/>\n' % (rankCorrelation['correlation'])
+            html += '<i>Ordinal (Kendall) correlation between global ranking and outranking relation: %.2f.</i>' % (rankCorrelation['correlation'])
         html += '</body></html>'
         return html
 
@@ -6434,7 +6435,9 @@ if __name__ == "__main__":
     #ira.showRefinedQuantileOrdering()
     #ira.showOrderedRelationTable()
     #ira.showSortingCharacteristics()
-    ira.showHTMLPerformanceHeatmap(pageTitle='Heat map of performances',Correlations=True)
+    ira.showHTMLPerformanceHeatmap(pageTitle='Heat map of performances',
+                                   Correlations=True,
+                                   RankingRule='NetFlows')
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')
