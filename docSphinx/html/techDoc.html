@@ -6318,13 +6318,14 @@ normed performance quantiles gathered from historical data.</p>
 <dl class="method">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph.computeCategoryContents">
 <code class="descname">computeCategoryContents</code><span class="sig-paren">(</span><em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.computeCategoryContents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.computeCategoryContents" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the sorting results per category.</p>
+<dd><p>Computes the quantiles sorting results per quantile category.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph.computeQuantileOrdering">
 <code class="descname">computeQuantileOrdering</code><span class="sig-paren">(</span><em>strategy=None</em>, <em>Descending=True</em>, <em>HTML=False</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.computeQuantileOrdering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.computeQuantileOrdering" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
+<dd><p>Orders the quantiles sorting result of self.newActions.</p>
+<dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
 <li>Descending: listing in <em>decreasing</em> (default) or <em>increasing</em> quantile order.</li>
@@ -6344,17 +6345,20 @@ in the uppest, the lowest or the average potential quantile.</li>
 <dl class="method">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph.computeRatingRelation">
 <code class="descname">computeRatingRelation</code><span class="sig-paren">(</span><em>Debug=False</em>, <em>StoreRating=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.computeRatingRelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.computeRatingRelation" title="Permalink to this definition">¶</a></dt>
-<dd><p>constructs a bipolar rating relation using a preRanking list of lists.</p>
+<dd><p>Computes a bipolar rating relation using a pre-ranking (list of lists)
+of the self-actions (self.newActions + self.profiles).</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph.computeSortingCharacteristics">
 <code class="descname">computeSortingCharacteristics</code><span class="sig-paren">(</span><em>action=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.computeSortingCharacteristics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.computeSortingCharacteristics" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders a bipolar-valued bi-dictionary relation
+<dd><p>Renders a bipolar-valued bi-dictionary relation (newActions x profiles)
 representing the degree of credibility of the
-assertion that &#8220;action x in A belongs to category c in C&#8221;,
-ie x outranks low category limit and does not outrank
-the high category limit.</p>
+assertion that &#8220;action x in A belongs to quantile category c profiles&#8221;,
+If LowerClosed is True, x outranks the category low limit
+and x does not outrank the category high limit, or
+If LowerClosed is False, ie UPPERCLosed is True, the category
+low limit does not outrank x and the category high limit does outrank x.</p>
 </dd></dl>
 
 <dl class="method">
@@ -6380,8 +6384,8 @@ of the corresponding preorder relation.</p>
 <a class="reference internal image-reference" href="_images/quantilesRatingDigraph.png"><img alt="usage example of Normed Quantiles Rating Digraph" class="align-center" src="_images/quantilesRatingDigraph.png" style="width: 200px;" /></a>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Node or action keys of the digraph must start with a letter
-and may not contain a special character like &#8216;-&#8216; or &#8216;_&#8217;.</p>
+<p class="last">For graphviz, nodes or action keys of the digraph must start with a letter
+and may not contain special characters like &#8216;-&#8216; or &#8216;_&#8217;.</p>
 </div>
 </dd></dl>
 
@@ -6403,13 +6407,14 @@ Returns a tuple : action, lowest category key, highest category key, membership 
 <dl class="method">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph.showActionsSortingResult">
 <code class="descname">showActionsSortingResult</code><span class="sig-paren">(</span><em>actionSubset=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.showActionsSortingResult"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.showActionsSortingResult" title="Permalink to this definition">¶</a></dt>
-<dd><p>shows the quantiles sorting result all (default) of a subset of the decision actions.</p>
+<dd><p>Shows the quantiles sorting result of all (default) or
+a subset of the decision actions.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph.showHTMLQuantilesSorting">
 <code class="descname">showHTMLQuantilesSorting</code><span class="sig-paren">(</span><em>Descending=True</em>, <em>strategy='average'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.showHTMLQuantilesSorting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.showHTMLQuantilesSorting" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shows the html version of the quantile preordering in a browser window.</p>
+<dd><p>Shows the html version of the quantile sorting result in a browser window.</p>
 <dl class="docutils">
 <dt>The ordring strategy is either:</dt>
 <dd><ul class="first last simple">

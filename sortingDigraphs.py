@@ -5554,7 +5554,8 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 
     def showActionsSortingResult(self,actionSubset=None,Debug=False):
         """
-        shows the quantiles sorting result all (default) of a subset of the decision actions.
+        Shows the quantiles sorting result of all (default) or
+        a subset of the decision actions.
         """
         if actionSubset == None:
             actions = [x for x in self.newActions]
@@ -5568,7 +5569,8 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 
     def computeRatingRelation(self,Debug=False,StoreRating=True):
         """
-        constructs a bipolar rating relation using a preRanking list of lists.
+        Computes a bipolar rating relation using a pre-ranking (list of lists)
+        of the self-actions (self.newActions + self.profiles).
         """
         try:
             ratingCategories = self.ratingCategories
@@ -5577,16 +5579,16 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         Min = self.valuationdomain['min']
-        #print(Max,Med,Min)
 
+        # pre-ranking self.actions
         profiles = self.profiles
         preRanking = []
-        if self.LowerClosed:
+        if self.LowerClosed: #  in ascending order
             for c in profiles:
                 preRanking.insert(0,[c])
                 if c in ratingCategories:
                     preRanking.insert(0,ratingCategories[c])
-        else:
+        else: # computing in descending order
             for c in reversed(profiles):
                 preRanking.append([c])
                 if c in ratingCategories:
@@ -5594,13 +5596,16 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         if Debug:
             print('preRanking',preRanking)
 
+        
         actions = [x for x in self.actions]
         currentActions = set(actions)
         ratingRelation = {}
+        # init the relation decitionaries
         for x in actions:
             ratingRelation[x] = {}
             for y in actions:
                 ratingRelation[x][y] = Med
+        # computing the relation in descending order
         for eqcl in preRanking:
             currRest = currentActions - set(eqcl)
             if Debug:
@@ -5617,7 +5622,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 
     def computeCategoryContents(self,Debug=False):
         """
-        Computes the sorting results per category.
+        Computes the quantiles sorting results per quantile category.
         """
         if self.LowerClosed:
             Reverse=False
@@ -5640,6 +5645,8 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                                 Comments=False,
                                 Debug=False):
         """
+        Orders the quantiles sorting result of self.newActions.
+
         *Parameters*:
             * Descending: listing in *decreasing* (default) or *increasing* quantile order.
             * strategy: ordering in an {'optimistic' (default) | 'pessimistic' | 'average'}
@@ -5766,7 +5773,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 
     def showHTMLQuantilesSorting(self,Descending=True,strategy='average'):
         """
-        Shows the html version of the quantile preordering in a browser window.
+        Shows the html version of the quantile sorting result in a browser window.
 
         The ordring strategy is either:
             * **optimistic**, following the upper quantile limits (default),
@@ -5787,11 +5794,13 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 
     def computeSortingCharacteristics(self, action=None, Debug=False):
         """
-        Renders a bipolar-valued bi-dictionary relation
+        Renders a bipolar-valued bi-dictionary relation (newActions x profiles)
         representing the degree of credibility of the
-        assertion that "action x in A belongs to category c in C",
-        ie x outranks low category limit and does not outrank
-        the high category limit.
+        assertion that "action x in A belongs to quantile category c profiles",
+        If LowerClosed is True, x outranks the category low limit
+        and x does not outrank the category high limit, or
+        If LowerClosed is False, ie UPPERCLosed is True, the category
+        low limit does not outrank x and the category high limit does outrank x. 
         """
         Min = self.valuationdomain['min']
         Med = self.valuationdomain['med']
@@ -5877,8 +5886,8 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         
         .. warning::
 
-             Node or action keys of the digraph must start with a letter
-             and may not contain a special character like '-' or '_'.
+             For graphviz, nodes or action keys of the digraph must start with a letter
+             and may not contain special characters like '-' or '_'.
              
         """
         from weakOrders import WeakOrder
@@ -6383,7 +6392,7 @@ if __name__ == "__main__":
 ##    print(g.computeOrdinalCorrelation(qsrbc))
     
     # test incremental rating agent
-    seed = 106
+    seed = 105
 
 ##    from randomPerfTabs import RandomPerformanceTableau
 ##    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
