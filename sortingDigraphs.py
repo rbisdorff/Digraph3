@@ -5305,7 +5305,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                  hasNoVeto=False,\
                  PrefThresholds=False,\
                  valuationScale=(-1,1),\
-                 rankingRule='NetFolws',\
+                 rankingRule='NetFlows',\
                  WithSorting=False,\
                  Threading=False,\
                  tempDir=None,\
@@ -5979,7 +5979,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             criteriaList = argCriteriaList
 
         if RankingRule == None:
-            RankingRule = 'NetFlows'
+            RankingRule = self.rankingRule
         html += '<i>Ranking rule: <b>%s</b></i>\n' % RankingRule
         na = len(self.actions)
         profiles = self.profiles
@@ -6383,7 +6383,7 @@ if __name__ == "__main__":
 ##    print(g.computeOrdinalCorrelation(qsrbc))
     
     # test incremental rating agent
-    seed = 105
+    seed = 106
 
 ##    from randomPerfTabs import RandomPerformanceTableau
 ##    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
@@ -6406,14 +6406,14 @@ if __name__ == "__main__":
 ##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
 ##                                    numberOfCriteria=nbrCrit,seed=seed)
 
-    pq = PerformanceQuantiles(tp,10,LowerClosed=True,Debug=False)
+    pq = PerformanceQuantiles(tp,5,LowerClosed=True,Debug=False)
     tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
     newActions = tpg.randomActions(20)
 ##    for i in range(20):
 ##        newAction = tpg.randomAction()
 ##        newActions.append(newAction)
     pq.updateQuantiles(newActions,historySize=None)
-    ira = NormedQuantilesRatingDigraph(pq,newActions,PrefThresholds=True,\
+    ira = NormedQuantilesRatingDigraph(pq,newActions,PrefThresholds=False,\
                                    WithSorting=True,Debug=False,Threading=False)
     ira.showQuantilesRating()
     #ira.sorting = ira.computeSortingCharacteristics()
@@ -6437,7 +6437,8 @@ if __name__ == "__main__":
     #ira.showSortingCharacteristics()
     ira.showHTMLPerformanceHeatmap(pageTitle='Heat map of performances',
                                    Correlations=True,
-                                   RankingRule='NetFlows')
+                                   RankingRule='NetFlows',
+                                   )
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')
