@@ -622,105 +622,108 @@
         <span class="n">nt</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nv</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">nv</span><span class="p">,</span><span class="n">nt</span><span class="p">)</span>
-
-        <span class="c1"># Init results newq and newp</span>
-        <span class="c1"># Init indexes: i in q &amp; p &amp; oldfrq, j in nv, ins = # insertions</span>
-        <span class="n">newp</span> <span class="o">=</span> <span class="p">[</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)]</span>
-        <span class="k">if</span> <span class="n">nv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-            <span class="n">newq</span><span class="o">=</span> <span class="p">[</span><span class="n">nv</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
-            <span class="n">ins</span> <span class="o">=</span> <span class="mi">1</span>
-            <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span>
-            <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">elif</span> <span class="n">nv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:</span>
-            <span class="n">newq</span> <span class="o">=</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
-            <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="n">ins</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">newq</span> <span class="o">=</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
-            <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span>
-            <span class="n">ins</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
-     
-
-        <span class="c1"># compute new cumulative densities</span>
-        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">np</span><span class="p">:</span>
-            <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">nt</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">np</span><span class="p">:</span>
-                <span class="c1">#print(i,j)</span>
-                <span class="k">if</span> <span class="n">nv</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-                    <span class="n">newq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-                    <span class="c1"># ins += 0</span>
-                    <span class="n">newp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cdf</span><span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">+</span><span class="n">ins</span><span class="p">)</span>
-                    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>                        
-                <span class="k">elif</span> <span class="n">nv</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-                    <span class="k">if</span> <span class="n">nv</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">newq</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
-                        <span class="n">newq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nv</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
-                        <span class="c1"># ins += 1</span>
-                        <span class="c1"># interpolate cdf of nv[j]</span>
-                        <span class="n">cdfnv</span> <span class="o">=</span> <span class="n">cdf</span><span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+</span> <span class="p">(</span><span class="n">nv</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="n">cdf</span><span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">+</span> <span class="n">ins</span>
-                        <span class="n">newp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cdfnv</span><span class="p">)</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">newp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-                    <span class="n">ins</span> <span class="o">+=</span> <span class="mi">1</span>
-                    <span class="n">j</span> <span class="o">+=</span><span class="mi">1</span>
-                <span class="k">else</span><span class="p">:</span> <span class="c1"># nv[j] = q[i]</span>
-                    <span class="n">newp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-                    <span class="n">ins</span> <span class="o">+=</span> <span class="mi">1</span>
-                    <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">nt</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">ni</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">np</span><span class="p">):</span>
-                    <span class="n">newq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">ni</span><span class="p">])</span>
-                    <span class="n">newp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cdf</span><span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="n">ni</span><span class="p">]]</span><span class="o">+</span><span class="n">ins</span><span class="p">)</span>
-                    <span class="c1">#ins += 0</span>
-                <span class="n">i</span> <span class="o">=</span> <span class="n">np</span>
-        <span class="k">for</span> <span class="n">nj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">nt</span><span class="p">):</span>
-            <span class="n">ins</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="k">if</span> <span class="n">newq</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">nv</span><span class="p">[</span><span class="n">nj</span><span class="p">]:</span>
-                <span class="n">newq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nv</span><span class="p">[</span><span class="n">nj</span><span class="p">])</span>
-                <span class="n">newp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1">###</span>
+        <span class="k">if</span> <span class="n">nt</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># there may be solely missing values observed on g</span>
+            <span class="c1"># Init results newq and newp</span>
+            <span class="c1"># Init indexes: i in q &amp; p &amp; oldfrq, j in nv, ins = # insertions</span>
+            <span class="n">newp</span> <span class="o">=</span> <span class="p">[</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)]</span>
+            <span class="k">if</span> <span class="n">nv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;minValue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">newq</span><span class="o">=</span> <span class="p">[</span><span class="n">nv</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+                <span class="n">ins</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">elif</span> <span class="n">nv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:</span>
+                <span class="n">newq</span> <span class="o">=</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">ins</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">newp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">newp</span> <span class="o">=</span> <span class="n">newp</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">newq</span> <span class="o">=</span> <span class="n">newq</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">newp</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">newq</span><span class="p">)</span>
-                    
-        <span class="c1"># renormalising frequencies</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;#inserts = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">ins</span><span class="p">)</span>
-        <span class="n">t</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nv</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">newq</span><span class="p">)):</span>
-            <span class="n">newp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/=</span> <span class="n">newp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p </span><span class="se">\t</span><span class="s1"> q \ (t+1)*q&#39;</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">newq</span><span class="p">)):</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%.3f</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">newp</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">newq</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">newp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;t = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">t</span><span class="p">)</span>
+                <span class="n">newq</span> <span class="o">=</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">ins</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">nv</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">q</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;maxValue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nv</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
-        <span class="c1"># compute new state by interpolation</span>
-        <span class="n">ns</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">newq</span><span class="p">[</span><span class="mi">0</span><span class="p">])])</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-        <span class="n">np</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">np</span><span class="p">):</span>
-            <span class="n">x</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="c1"># compute new cumulative densities</span>
+            <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">np</span><span class="p">:</span>
+                <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">nt</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">np</span><span class="p">:</span>
+                    <span class="c1">#print(i,j)</span>
+                    <span class="k">if</span> <span class="n">nv</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                        <span class="n">newq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                        <span class="c1"># ins += 0</span>
+                        <span class="n">newp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cdf</span><span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">+</span><span class="n">ins</span><span class="p">)</span>
+                        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>                        
+                    <span class="k">elif</span> <span class="n">nv</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                        <span class="k">if</span> <span class="n">nv</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">newq</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                            <span class="n">newq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nv</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                            <span class="c1"># ins += 1</span>
+                            <span class="c1"># interpolate cdf of nv[j]</span>
+                            <span class="n">cdfnv</span> <span class="o">=</span> <span class="n">cdf</span><span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+</span> <span class="p">(</span><span class="n">nv</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="n">cdf</span><span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">+</span> <span class="n">ins</span>
+                            <span class="n">newp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cdfnv</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">newp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="n">ins</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="n">j</span> <span class="o">+=</span><span class="mi">1</span>
+                    <span class="k">else</span><span class="p">:</span> <span class="c1"># nv[j] = q[i]</span>
+                        <span class="n">newp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="n">ins</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">nt</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">ni</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">np</span><span class="p">):</span>
+                        <span class="n">newq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">ni</span><span class="p">])</span>
+                        <span class="n">newp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cdf</span><span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="n">ni</span><span class="p">]]</span><span class="o">+</span><span class="n">ins</span><span class="p">)</span>
+                        <span class="c1">#ins += 0</span>
+                    <span class="n">i</span> <span class="o">=</span> <span class="n">np</span>
+            <span class="k">for</span> <span class="n">nj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">nt</span><span class="p">):</span>
+                <span class="n">ins</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">newq</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">nv</span><span class="p">[</span><span class="n">nj</span><span class="p">]:</span>
+                    <span class="n">newq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nv</span><span class="p">[</span><span class="n">nj</span><span class="p">])</span>
+                    <span class="n">newp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">newp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-            <span class="n">ns</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolateQuantile</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">newq</span><span class="p">,</span><span class="n">newp</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">ns</span><span class="p">)</span>
-        
-        <span class="c1"># store new state</span>
-        <span class="n">state</span> <span class="o">=</span> <span class="n">ns</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">state</span>
-        <span class="n">q</span> <span class="o">=</span> <span class="p">[</span><span class="n">state</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">state</span><span class="p">]</span>
-        <span class="n">q</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">q</span>
-        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">state</span><span class="p">:</span>
-            <span class="n">cdf</span><span class="p">[</span><span class="n">state</span><span class="p">[</span><span class="n">p</span><span class="p">]]</span> <span class="o">=</span> <span class="n">p</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cdf</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">cdf</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">newp</span> <span class="o">=</span> <span class="n">newp</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">newq</span> <span class="o">=</span> <span class="n">newq</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">newp</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">newq</span><span class="p">)</span>
+                    
+            <span class="c1"># renormalising frequencies</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;#inserts = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">ins</span><span class="p">)</span>
+            <span class="n">t</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nv</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">newq</span><span class="p">)):</span>
+                <span class="n">newp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/=</span> <span class="n">newp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p </span><span class="se">\t</span><span class="s1"> q \ (t+1)*q&#39;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">newq</span><span class="p">)):</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%.3f</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">newp</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">newq</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">newp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;t = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">t</span><span class="p">)</span>
+
+            <span class="c1"># compute new state by interpolation</span>
+            <span class="n">ns</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">newq</span><span class="p">[</span><span class="mi">0</span><span class="p">])])</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+            <span class="n">np</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">np</span><span class="p">):</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                <span class="n">ns</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolateQuantile</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">newq</span><span class="p">,</span><span class="n">newp</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">ns</span><span class="p">)</span>
+            
+            <span class="c1"># store new state</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="n">ns</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">state</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="p">[</span><span class="n">state</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">state</span><span class="p">]</span>
+            <span class="n">q</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">q</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">state</span><span class="p">:</span>
+                <span class="n">cdf</span><span class="p">[</span><span class="n">state</span><span class="p">[</span><span class="n">p</span><span class="p">]]</span> <span class="o">=</span> <span class="n">p</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cdf</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">cdf</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
 
         
 <div class="viewcode-block" id="PerformanceQuantiles.updateQuantiles"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.updateQuantiles">[docs]</a>    <span class="k">def</span> <span class="nf">updateQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">newData</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>

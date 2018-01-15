@@ -4336,8 +4336,9 @@ is raised.</p>
 
 <dl class="method">
 <dt id="perfTabs.XMCDA2PerformanceTableau.OrderedDict.popitem">
-<code class="descname">popitem</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; (k, v), return and remove a (key, value) pair.<a class="headerlink" href="#perfTabs.XMCDA2PerformanceTableau.OrderedDict.popitem" title="Permalink to this definition">¶</a></dt>
-<dd><p>Pairs are returned in LIFO order if last is true or FIFO order if false.</p>
+<code class="descname">popitem</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#perfTabs.XMCDA2PerformanceTableau.OrderedDict.popitem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove and return a (key, value) pair from the dictionary.</p>
+<p>Pairs are returned in LIFO order if last is true or FIFO order if false.</p>
 </dd></dl>
 
 <dl class="method">
@@ -6271,7 +6272,7 @@ the diagonal outranking components of the sparse outranking digraph.</p>
 <span id="sortingdigraphs-module"></span><span id="sortingdigraphs-label"></span><h2>sortingDigraphs module<a class="headerlink" href="#module-sortingDigraphs" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph">
-<em class="property">class </em><code class="descclassname">sortingDigraphs.</code><code class="descname">NormedQuantilesRatingDigraph</code><span class="sig-paren">(</span><em>argPerfQuantiles=None</em>, <em>newData=None</em>, <em>hasNoVeto=False</em>, <em>PrefThresholds=False</em>, <em>valuationScale=(-1</em>, <em>1)</em>, <em>rankingRule='NetFolws'</em>, <em>WithSorting=False</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrCores=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sortingDigraphs.</code><code class="descname">NormedQuantilesRatingDigraph</code><span class="sig-paren">(</span><em>argPerfQuantiles=None</em>, <em>newData=None</em>, <em>hasNoVeto=False</em>, <em>PrefThresholds=False</em>, <em>valuationScale=(-1</em>, <em>1)</em>, <em>rankingRule='NetFlows'</em>, <em>WithSorting=False</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrCores=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.QuantilesSortingDigraph</span></code></a>, <a class="reference internal" href="#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a></p>
 <p>Specialisation of the sortingDigraph Class
 for absolute rating of a new set of decision actions with

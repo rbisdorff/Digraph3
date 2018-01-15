@@ -51,7 +51,7 @@
 <span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1"># Python implementation of digraphs</span>
-<span class="c1"># Current revision $Revision: 2368 $</span>
+<span class="c1"># Current revision $Revision: 2372 $</span>
 <span class="c1"># Copyright (C) 2006-2008  Raymond Bisdorff</span>
 <span class="c1">#</span>
 <span class="c1">#    This program is free software; you can redistribute it and/or modify</span>
@@ -5355,7 +5355,7 @@
                  <span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                  <span class="n">PrefThresholds</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                  <span class="n">valuationScale</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>\
-                 <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFolws&#39;</span><span class="p">,</span>\
+                 <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span>\
                  <span class="n">WithSorting</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                  <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                  <span class="n">tempDir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
@@ -5702,7 +5702,7 @@
             <span class="n">html</span> <span class="o">=</span> <span class="s1">&#39;&lt;h1&gt;Quantiles preordering&lt;/h1&gt;&#39;</span>
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;table style=&quot;background-color:White;&quot; border=&quot;1&quot;&gt;&#39;</span>
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr bgcolor=&quot;#9acd32&quot;&gt;&lt;th&gt;quantile limits&lt;/th&gt;&#39;</span>
-            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;th&gt;</span><span class="si">%s</span><span class="s1"> sorting&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="n">strategy</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;th&gt;Ordering by </span><span class="si">%s</span><span class="s1"> quantile class limits&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="n">strategy</span>
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;&#39;</span>
         <span class="n">actionsCategories</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">newActions</span><span class="p">:</span>
@@ -6029,7 +6029,8 @@
             <span class="n">criteriaList</span> <span class="o">=</span> <span class="n">argCriteriaList</span>
 
         <span class="k">if</span> <span class="n">RankingRule</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">RankingRule</span> <span class="o">=</span> <span class="s1">&#39;NetFlows&#39;</span>
+            <span class="n">RankingRule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankingRule</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;i&gt;Ranking rule: &lt;b&gt;</span><span class="si">%s</span><span class="s1">&lt;/b&gt;&lt;/i&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">RankingRule</span>
         <span class="n">na</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
         <span class="n">profiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span>
         <span class="n">categories</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">categories</span>
@@ -6158,21 +6159,21 @@
                     <span class="nb">print</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="c1"># legend</span>
-        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;i&gt;Color legend: &lt;/i&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="c1"># table legend</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;b&gt;Color legend: &lt;/b&gt;&lt;br/&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;table style=&quot;background-color:</span><span class="si">%s</span><span class="s1">;&quot; border=&quot;1&quot;&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">backGroundColor</span><span class="p">)</span> 
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr bgcolor=</span><span class="si">%s</span><span class="s1">&gt;&lt;th&gt;quantile&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">columnHeaderColor</span><span class="p">)</span>
         <span class="c1">#html += &#39;&lt;td bgcolor=%s&gt;&amp;nbsp;[%.2f - %.2f[&amp;nbsp;&lt;/td&gt;&#39; % (colorPalette[0][1],0.0,colorPalette[0][0])</span>
         <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">nc</span><span class="p">):</span>
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;td bgcolor=</span><span class="si">%s</span><span class="s1">&gt;&amp;nbsp;</span><span class="si">%.2f</span><span class="s1">&amp;#037;&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">colorPalette</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
-                                                                   <span class="c1">#colorPalette[col-1][0],</span>
+                                                                  <span class="c1">#colorPalette[col-1][0],</span>
                                                                    <span class="n">colorPalette</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;100.0&#39;</span><span class="p">))</span>
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="k">if</span> <span class="n">criteriaCorrelation</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;i&gt;(*) tau: Ordinal (Kendall) correlation between marginal criterion and global ranking relation.&lt;/i&gt;&lt;br/&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="k">if</span> <span class="n">rankCorrelation</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;i&gt;Ordinal (Kendall) correlation between global ranking and outranking relation: </span><span class="si">%.2f</span><span class="s1">.&lt;/i&gt;&lt;br/&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">rankCorrelation</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">])</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;i&gt;Ordinal (Kendall) correlation between global ranking and outranking relation: </span><span class="si">%.2f</span><span class="s1">.&lt;/i&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">rankCorrelation</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">])</span>
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/body&gt;&lt;/html&gt;&#39;</span>
         <span class="k">return</span> <span class="n">html</span></div>
 
@@ -6327,7 +6328,7 @@
 <span class="s2">    ****************************************************</span>
 <span class="s2">    * Python sortingDigraphs module                    *</span>
 <span class="s2">    * depends on BipolarOutrankingDigraph and          *</span>
-<span class="s2">    * $Revision: 2368 $                                 *</span>
+<span class="s2">    * $Revision: 2372 $                                 *</span>
 <span class="s2">    * Copyright (C) 2010 Raymond Bisdorff              *</span>
 <span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
 <span class="s2">    * to the extent permitted by the applicable law.   *</span>
@@ -6432,7 +6433,7 @@
 <span class="c1">##    print(g.computeOrdinalCorrelation(qsrbc))</span>
     
     <span class="c1"># test incremental rating agent</span>
-    <span class="n">seed</span> <span class="o">=</span> <span class="mi">105</span>
+    <span class="n">seed</span> <span class="o">=</span> <span class="mi">106</span>
 
 <span class="c1">##    from randomPerfTabs import RandomPerformanceTableau</span>
 <span class="c1">##    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator</span>
@@ -6455,14 +6456,14 @@
 <span class="c1">##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\</span>
 <span class="c1">##                                    numberOfCriteria=nbrCrit,seed=seed)</span>
 
-    <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">newActions</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
 <span class="c1">##    for i in range(20):</span>
 <span class="c1">##        newAction = tpg.randomAction()</span>
 <span class="c1">##        newActions.append(newAction)</span>
     <span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">ira</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">PrefThresholds</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
+    <span class="n">ira</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">PrefThresholds</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                                    <span class="n">WithSorting</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">ira</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
     <span class="c1">#ira.sorting = ira.computeSortingCharacteristics()</span>
@@ -6484,14 +6485,17 @@
     <span class="c1">#ira.showRefinedQuantileOrdering()</span>
     <span class="c1">#ira.showOrderedRelationTable()</span>
     <span class="c1">#ira.showSortingCharacteristics()</span>
-    <span class="n">ira</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heat map of performances&#39;</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ira</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heat map of performances&#39;</span><span class="p">,</span>
+                                   <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                   <span class="n">RankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span>
+                                   <span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enjoy !&#39;</span><span class="p">)</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. december 2010                *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2368 $                  *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2372 $                  *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>
