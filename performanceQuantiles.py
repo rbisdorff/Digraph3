@@ -572,105 +572,108 @@ The number of so far observed evaluations per criteria are the following:
         nt = len(nv)
         if self.Debug:
             print(nv,nt)
-
-        # Init results newq and newp
-        # Init indexes: i in q & p & oldfrq, j in nv, ins = # insertions
-        newp = [Decimal('0.0')]
-        if nv[0] < q[0]:
-            newq= [nv[0]]
-            ins = 1
-            j = 1
-            i = 0
-        elif nv[0] > q[0] :
-            newq = [q[0]]
-            j = 0
-            ins = 0
-            i = 1
-        else:
-            newq = [q[0]]
-            j = 1
-            ins = 0
-            i = 1
-     
-
-        # compute new cumulative densities
-        while i < np:
-            while j < nt and i < np:
-                #print(i,j)
-                if nv[j] > q[i]:
-                    newq.append(q[i])
-                    # ins += 0
-                    newp.append(cdf[q[i]]+ins)
-                    i += 1                        
-                elif nv[j] < q[i]:
-                    if nv[j] > newq[-1]:
-                        newq.append(nv[j])
-                        # ins += 1
-                        # interpolate cdf of nv[j]
-                        cdfnv = cdf[q[i-1]] + (nv[j]-q[i-1])/(q[i]-q[i-1])*cdf[q[i]] + ins
-                        newp.append(cdfnv)
-                    else:
-                        newp[-1] += 1
-                    ins += 1
-                    j +=1
-                else: # nv[j] = q[i]
-                    newp[-1] += 1
-                    ins += 1
-                    j += 1
-            if j == nt:
-                for ni in range(i,np):
-                    newq.append(q[ni])
-                    newp.append(cdf[q[ni]]+ins)
-                    #ins += 0
-                i = np
-        for nj in range(j,nt):
-            ins += 1
-            if newq[-1] < nv[nj]:
-                newq.append(nv[nj])
-                newp.append(newp[-1]+1)
+        ###
+        if nt > 0: # there may be solely missing values observed on g
+            # Init results newq and newp
+            # Init indexes: i in q & p & oldfrq, j in nv, ins = # insertions
+            newp = [Decimal('0.0')]
+            if nv[0] < q[0]:
+                self.criteria[g]['minValue'] = nv[0]
+                newq= [nv[0]]
+                ins = 1
+                j = 1
+                i = 0
+            elif nv[0] > q[0] :
+                newq = [q[0]]
+                j = 0
+                ins = 0
+                i = 1
             else:
-                newp[-1] += 1
-        if self.Debug:
-            self.newp = newp
-            self.newq = newq
-            print(newp)
-            print(newq)
-                    
-        # renormalising frequencies
-        if self.Debug:
-            print('#inserts = %d' % ins)
-        t += len(nv)
-        for i in range(len(newq)):
-            newp[i] /= newp[-1]
-        if self.Debug:
-            print('p \t q \ (t+1)*q')
-            for i in range(len(newq)):
-                print('%.3f \t %.2f \t %.2f' % (newp[i],newq[i],newp[i]*(t)) )
-            print('t = %d' % t)
+                newq = [q[0]]
+                j = 1
+                ins = 0
+                i = 1
+            if nv[-1] > q[-1]:
+                self.criteria[g]['maxValue'] = nv[-1]
 
-        # compute new state by interpolation
-        ns = OrderedDict([(p[0],newq[0])])
-        if self.Debug:
-            print(p)
-        np = len(p)
-        for i in range(1,np):
-            x = p[i]
+            # compute new cumulative densities
+            while i < np:
+                while j < nt and i < np:
+                    #print(i,j)
+                    if nv[j] > q[i]:
+                        newq.append(q[i])
+                        # ins += 0
+                        newp.append(cdf[q[i]]+ins)
+                        i += 1                        
+                    elif nv[j] < q[i]:
+                        if nv[j] > newq[-1]:
+                            newq.append(nv[j])
+                            # ins += 1
+                            # interpolate cdf of nv[j]
+                            cdfnv = cdf[q[i-1]] + (nv[j]-q[i-1])/(q[i]-q[i-1])*cdf[q[i]] + ins
+                            newp.append(cdfnv)
+                        else:
+                            newp[-1] += 1
+                        ins += 1
+                        j +=1
+                    else: # nv[j] = q[i]
+                        newp[-1] += 1
+                        ins += 1
+                        j += 1
+                if j == nt:
+                    for ni in range(i,np):
+                        newq.append(q[ni])
+                        newp.append(cdf[q[ni]]+ins)
+                        #ins += 0
+                    i = np
+            for nj in range(j,nt):
+                ins += 1
+                if newq[-1] < nv[nj]:
+                    newq.append(nv[nj])
+                    newp.append(newp[-1]+1)
+                else:
+                    newp[-1] += 1
             if self.Debug:
-                print(x)
-            ns[x] = self._interpolateQuantile(x,newq,newp)
-        if self.Debug:
-            print(ns)
-        
-        # store new state
-        state = ns
-        self.state = state
-        q = [state[x] for x in state]
-        q.sort()
-        self.limitingQuantiles[g] = q
-        for p in state:
-            cdf[state[p]] = p
-        self.cdf[g] = cdf
-        self.historySizes[g] = t
+                self.newp = newp
+                self.newq = newq
+                print(newp)
+                print(newq)
+                    
+            # renormalising frequencies
+            if self.Debug:
+                print('#inserts = %d' % ins)
+            t += len(nv)
+            for i in range(len(newq)):
+                newp[i] /= newp[-1]
+            if self.Debug:
+                print('p \t q \ (t+1)*q')
+                for i in range(len(newq)):
+                    print('%.3f \t %.2f \t %.2f' % (newp[i],newq[i],newp[i]*(t)) )
+                print('t = %d' % t)
+
+            # compute new state by interpolation
+            ns = OrderedDict([(p[0],newq[0])])
+            if self.Debug:
+                print(p)
+            np = len(p)
+            for i in range(1,np):
+                x = p[i]
+                if self.Debug:
+                    print(x)
+                ns[x] = self._interpolateQuantile(x,newq,newp)
+            if self.Debug:
+                print(ns)
+            
+            # store new state
+            state = ns
+            self.state = state
+            q = [state[x] for x in state]
+            q.sort()
+            self.limitingQuantiles[g] = q
+            for p in state:
+                cdf[state[p]] = p
+            self.cdf[g] = cdf
+            self.historySizes[g] = t
 
         
     def updateQuantiles(self,newData,historySize=None):
