@@ -983,10 +983,20 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
         <span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;totalTime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tt</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span> <span class="o">=</span> <span class="n">runTimes</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span> <span class="o">=</span> <span class="n">runTimes</span>
 <span class="c1">##        if Debug:</span>
 <span class="c1">##            self.showRelationTable()</span>
 <span class="c1">##            self.showOrdering()</span>
+
+<div class="viewcode-block" id="NetFlowsOrder.showScores"><a class="viewcode-back" href="../techDoc.html#linearOrders.NetFlowsOrder.showScores">[docs]</a>    <span class="k">def</span> <span class="nf">showScores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;descending&#39;</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Net flow scores in </span><span class="si">%s</span><span class="s1"> order&#39;</span> <span class="o">%</span> <span class="n">direction</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;action </span><span class="se">\t</span><span class="s1"> score&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;descending&#39;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">netFlows</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">netFlows</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span></div></div>
 
 <div class="viewcode-block" id="OutFlowsOrder"><a class="viewcode-back" href="../techDoc.html#linearOrders.OutFlowsOrder">[docs]</a><span class="k">class</span> <span class="nc">OutFlowsOrder</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -1086,10 +1096,20 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
         <span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;totalTime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tt</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span> <span class="o">=</span> <span class="n">runTimes</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span> <span class="o">=</span> <span class="n">runTimes</span>
 <span class="c1">##        if Debug:</span>
 <span class="c1">##            self.showRelationTable()</span>
 <span class="c1">##            self.showOrdering()</span>
+
+<div class="viewcode-block" id="OutFlowsOrder.showScores"><a class="viewcode-back" href="../techDoc.html#linearOrders.OutFlowsOrder.showScores">[docs]</a>    <span class="k">def</span> <span class="nf">showScores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;descending&#39;</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Out flow scores in </span><span class="si">%s</span><span class="s1"> order&#39;</span> <span class="o">%</span> <span class="n">direction</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;action </span><span class="se">\t</span><span class="s1"> score&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;descending&#39;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">outFlows</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outFlows</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span></div></div>
 
 <div class="viewcode-block" id="CopelandOrder"><a class="viewcode-back" href="../techDoc.html#linearOrders.CopelandOrder">[docs]</a><span class="k">class</span> <span class="nc">CopelandOrder</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -1139,13 +1159,13 @@
             <span class="n">copelandScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">copelandScore</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
         <span class="c1"># reversed sorting with keeping the actions initial ordering</span>
         <span class="c1"># in case of ties</span>
-        <span class="n">copelandScores</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">copelandScores</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">copelandScores</span> <span class="o">=</span> <span class="n">copelandScores</span>
 
-        <span class="n">copelandOrder</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">copelandScores</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">copelandOrder</span> <span class="o">=</span> <span class="n">copelandOrder</span>
-        <span class="n">copelandRanking</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">copelandOrder</span><span class="p">))</span>
+        <span class="n">copelandRanking</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">copelandScores</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">copelandRanking</span> <span class="o">=</span> <span class="n">copelandRanking</span>
+        <span class="n">copelandOrder</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">copelandRanking</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">copelandOrder</span> <span class="o">=</span> <span class="n">copelandOrder</span>
         <span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;copeland&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tnf</span>
 
         <span class="c1"># init relation</span>
@@ -1171,94 +1191,106 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
         <span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;totalTime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tt</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span> <span class="o">=</span> <span class="n">runTimes</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span> <span class="o">=</span> <span class="n">runTimes</span>
 
-<span class="k">class</span> <span class="nc">_CopelandOrder</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    instantiates the net Copeland Order from</span>
-<span class="sd">    a given bipolar-valued Digraph instance.</span>
-<span class="sd">    The Copeland ordering rule ranks the decision actions in decreasing order of the Copeland score,</span>
-<span class="sd">    which is the difference between the crisp outranking degree and crisp outranked degree;</span>
-<span class="sd">    actually the net flows orering of the corresponding Condorcet digraph.  </span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">coDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        constructor for generating a linear order</span>
-<span class="sd">        from a given other digraph following</span>
-<span class="sd">        the Copeland ordering rule</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span><span class="n">deepcopy</span>
-        <span class="c1"># construct ranked pairs</span>
-        <span class="k">if</span> <span class="n">coDual</span><span class="p">:</span>
-            <span class="n">otherCoDual</span> <span class="o">=</span> <span class="n">CoDualDigraph</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
-            <span class="n">relation</span> <span class="o">=</span> <span class="n">otherCoDual</span><span class="o">.</span><span class="n">relation</span>
-            <span class="c1">#netFlows = otherCoDual.computeSingleCriteriaNetflows()</span>
-            <span class="n">Max</span> <span class="o">=</span> <span class="n">otherCoDual</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                <span class="n">otherCoDual</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">otherCoDual</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
-                <span class="c1">#print netFlows</span>
+<div class="viewcode-block" id="CopelandOrder.showScores"><a class="viewcode-back" href="../techDoc.html#linearOrders.CopelandOrder.showScores">[docs]</a>    <span class="k">def</span> <span class="nf">showScores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;descending&#39;</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Copeland scores in </span><span class="si">%s</span><span class="s1"> order&#39;</span> <span class="o">%</span> <span class="n">direction</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;action </span><span class="se">\t</span><span class="s1"> score&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;descending&#39;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">copelandScores</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">relation</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">relation</span><span class="p">)</span>
-            <span class="c1">#netFlows = other.computeSingleCriteriaNetflows()</span>
-            <span class="n">Max</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                <span class="n">other</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
-                <span class="c1">#print netFlows</span>
-                
-            
-        <span class="c1">#actions = list(dict.keys(other.actions))</span>
-        <span class="c1">#actions.sort()</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
-        
-        <span class="c1"># instatiates a Digraph template</span>
-        <span class="n">g</span> <span class="o">=</span> <span class="n">IndeterminateDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-1&#39;</span><span class="p">),</span> <span class="s1">&#39;med&#39;</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">),</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)}</span>
-        <span class="n">Med</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
-        <span class="n">Max</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
-        <span class="n">Min</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">dict</span><span class="o">.</span><span class="n">keys</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">):</span>
-            <span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">dict</span><span class="o">.</span><span class="n">keys</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">):</span>
-                <span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
-
-        <span class="n">copelandScores</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">copelandScoresList</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
-            <span class="n">xoutDegree</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">gamma</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
-            <span class="n">xinDegree</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">gamma</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
-            <span class="n">copelandScores</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">xinDegree</span> <span class="o">-</span> <span class="n">xoutDegree</span><span class="p">)</span> <span class="c1"># reversed sort</span>
-            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Copeland score for </span><span class="si">%s</span><span class="s1"> = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">copelandScores</span><span class="p">[</span><span class="n">x</span><span class="p">]))</span>
-            <span class="n">copelandScoresList</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">copelandScores</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">x</span><span class="p">))</span>
-        <span class="n">copelandScoresList</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-        <span class="n">copelandRanking</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">copelandScoresList</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">copelandRanking</span> <span class="o">=</span> <span class="n">copelandRanking</span>
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">copelandRanking</span><span class="p">)</span>
-            
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
-                <span class="n">x</span> <span class="o">=</span> <span class="n">copelandScoresList</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-                <span class="n">y</span> <span class="o">=</span> <span class="n">copelandScoresList</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-                <span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Max</span>
-                <span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
-                
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">copelandScores</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span></div></div>
          
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_ranked&#39;</span>        
-        <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">actions</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">n</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">relation</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">copelandOrder</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">copelandRanking</span><span class="p">)))</span>
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">showOrdering</span><span class="p">()</span>
+
+
+<span class="c1">##class _CopelandOrder(LinearOrder):</span>
+<span class="c1">##    &quot;&quot;&quot;</span>
+<span class="c1">##    instantiates the net Copeland Order from</span>
+<span class="c1">##    a given bipolar-valued Digraph instance.</span>
+<span class="c1">##    The Copeland ordering rule ranks the decision actions in decreasing order of the Copeland score,</span>
+<span class="c1">##    which is the difference between the crisp outranking degree and crisp outranked degree;</span>
+<span class="c1">##    actually the net flows orering of the corresponding Condorcet digraph.  </span>
+<span class="c1">##    &quot;&quot;&quot;</span>
+<span class="c1">##    def __init__(self,other,coDual=False,Debug=False):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        constructor for generating a linear order</span>
+<span class="c1">##        from a given other digraph following</span>
+<span class="c1">##        the Copeland ordering rule</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        from copy import copy,deepcopy</span>
+<span class="c1">##        # construct ranked pairs</span>
+<span class="c1">##        if coDual:</span>
+<span class="c1">##            otherCoDual = CoDualDigraph(other)</span>
+<span class="c1">##            relation = otherCoDual.relation</span>
+<span class="c1">##            #netFlows = otherCoDual.computeSingleCriteriaNetflows()</span>
+<span class="c1">##            Max = otherCoDual.valuationdomain[&#39;max&#39;]</span>
+<span class="c1">##            if Debug:</span>
+<span class="c1">##                otherCoDual.showRelationTable()</span>
+<span class="c1">##                print(otherCoDual.valuationdomain)</span>
+<span class="c1">##                #print netFlows</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            relation = deepcopy(other.relation)</span>
+<span class="c1">##            #netFlows = other.computeSingleCriteriaNetflows()</span>
+<span class="c1">##            Max = other.valuationdomain[&#39;max&#39;]</span>
+<span class="c1">##            if Debug:</span>
+<span class="c1">##                other.showRelationTable()</span>
+<span class="c1">##                print(other.valuationdomain)</span>
+<span class="c1">##                #print netFlows</span>
+<span class="c1">##                </span>
+<span class="c1">##            </span>
+<span class="c1">##        #actions = list(dict.keys(other.actions))</span>
+<span class="c1">##        #actions.sort()</span>
+<span class="c1">##        n = len(other.actions)</span>
+<span class="c1">##        </span>
+<span class="c1">##        # instatiates a Digraph template</span>
+<span class="c1">##        g = IndeterminateDigraph(order=n)</span>
+<span class="c1">##        g.actions = deepcopy(other.actions)</span>
+<span class="c1">##        g.valuationdomain = {&#39;min&#39;:Decimal(&#39;-1&#39;), &#39;med&#39;: Decimal(&#39;0&#39;), &#39;max&#39;: Decimal(&#39;1&#39;)}</span>
+<span class="c1">##        Med = g.valuationdomain[&#39;med&#39;]</span>
+<span class="c1">##        Max = g.valuationdomain[&#39;max&#39;]</span>
+<span class="c1">##        Min = g.valuationdomain[&#39;min&#39;]</span>
+<span class="c1">##        g.relation = {}</span>
+<span class="c1">##        for x in dict.keys(g.actions):</span>
+<span class="c1">##            g.relation[x] = {}</span>
+<span class="c1">##            for y in dict.keys(g.actions):</span>
+<span class="c1">##                g.relation[x][y] = Med</span>
+<span class="c1">##</span>
+<span class="c1">##        copelandScores = {}</span>
+<span class="c1">##        copelandScoresList = []</span>
+<span class="c1">##        for x in g.actions:</span>
+<span class="c1">##            xoutDegree = len(other.gamma[x][0])</span>
+<span class="c1">##            xinDegree = len(other.gamma[x][1])</span>
+<span class="c1">##            copelandScores[x] = (xinDegree - xoutDegree) # reversed sort</span>
+<span class="c1">##            if Debug:</span>
+<span class="c1">##                print(&#39;Copeland score for %s = %d&#39; % (x, copelandScores[x]))</span>
+<span class="c1">##            copelandScoresList.append((copelandScores[x],x))</span>
+<span class="c1">##        copelandScoresList.sort()</span>
+<span class="c1">##        copelandRanking = [x[1] for x in copelandScoresList]</span>
+<span class="c1">##        self.copelandRanking = copelandRanking</span>
+<span class="c1">##        if Debug:</span>
+<span class="c1">##            print(copelandRanking)</span>
+<span class="c1">##            </span>
+<span class="c1">##        for i in range(n):</span>
+<span class="c1">##            for j in range(i+1,n):</span>
+<span class="c1">##                x = copelandScoresList[i][1]</span>
+<span class="c1">##                y = copelandScoresList[j][1]</span>
+<span class="c1">##                g.relation[x][y] = Max</span>
+<span class="c1">##                g.relation[y][x] = Min</span>
+<span class="c1">##                </span>
+<span class="c1">##         </span>
+<span class="c1">##        self.name = other.name + &#39;_ranked&#39;        </span>
+<span class="c1">##        self.actions = g.actions</span>
+<span class="c1">##        self.order = n</span>
+<span class="c1">##        self.valuationdomain = g.valuationdomain</span>
+<span class="c1">##        self.relation = g.relation</span>
+<span class="c1">##        self.gamma = self.gammaSets()</span>
+<span class="c1">##        self.notGamma = self.notGammaSets()</span>
+<span class="c1">##        self.copelandOrder = list(reversed(list(copelandRanking)))</span>
+<span class="c1">##        if Debug:</span>
+<span class="c1">##            self.showRelationTable()</span>
+<span class="c1">##            self.showOrdering()</span>
 
 <span class="c1">########  instantiates optimal linear orderings</span>
 
@@ -1480,7 +1512,7 @@
 
     <span class="n">Threading</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Testing KemenyOrder class -------&#39;</span><span class="p">)</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
     <span class="c1">#t = PerformanceTableau(&#39;testLin&#39;)    </span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
@@ -1500,7 +1532,7 @@
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; principal ordering:&#39;</span><span class="p">)</span>
     <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>    
     <span class="n">pri</span> <span class="o">=</span> <span class="n">PrincipalOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-    <span class="c1">#g.showRelationTable()</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">pri</span><span class="o">.</span><span class="n">principalRanking</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">pri</span><span class="o">.</span><span class="n">principalRanking</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">pri</span><span class="o">.</span><span class="n">principalOrder</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">pri</span><span class="p">))</span>
@@ -1509,7 +1541,7 @@
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; net flows ordering:&#39;</span><span class="p">)</span>
     <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
     <span class="n">nf</span> <span class="o">=</span> <span class="n">NetFlowsOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-    <span class="c1">#g.showRelationTable()</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">nf</span><span class="o">.</span><span class="n">netFlowsRanking</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">nf</span><span class="o">.</span><span class="n">netFlowsRanking</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">nf</span><span class="o">.</span><span class="n">netFlowsOrder</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">nf</span><span class="p">))</span>
@@ -1518,7 +1550,7 @@
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; out flows ordering:&#39;</span><span class="p">)</span>
     <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
     <span class="n">of</span> <span class="o">=</span> <span class="n">OutFlowsOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-    <span class="c1">#g.showRelationTable()</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">of</span><span class="o">.</span><span class="n">outFlowsRanking</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">of</span><span class="o">.</span><span class="n">outFlowsRanking</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">of</span><span class="o">.</span><span class="n">outFlowsOrder</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">of</span><span class="p">))</span>
@@ -1527,7 +1559,7 @@
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; Copeland ordering:&#39;</span><span class="p">)</span>
     <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
     <span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-    <span class="c1">#g.showRelationTable()</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandOrder</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">cop</span><span class="p">))</span>
@@ -1536,7 +1568,7 @@
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; Kohler ordering:&#39;</span><span class="p">)</span>
     <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
     <span class="n">ko</span> <span class="o">=</span> <span class="n">KohlerOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-    <span class="c1">#g.showRelationTable()</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">ko</span><span class="o">.</span><span class="n">kohlerRanking</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">ko</span><span class="o">.</span><span class="n">kohlerRanking</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">ko</span><span class="o">.</span><span class="n">kohlerOrder</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">ko</span><span class="p">))</span>
@@ -1545,7 +1577,7 @@
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; ranked pairs ordering:&#39;</span><span class="p">)</span>
     <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
     <span class="n">rp</span> <span class="o">=</span> <span class="n">RankedPairsOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-    <span class="c1">#g.showRelationTable()</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">rp</span><span class="o">.</span><span class="n">rankedPairsRanking</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">rp</span><span class="o">.</span><span class="n">rankedPairsRanking</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">rp</span><span class="o">.</span><span class="n">rankedPairsOrder</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">rp</span><span class="p">))</span>
