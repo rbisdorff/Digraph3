@@ -2162,7 +2162,7 @@ Example Python session:
     >>> # rating the new set of decision actions
     >>> nqr = NormedQuantilesRatingDigraph(pq,newActions,Debug=True)
     >>> # inspecting the rating result
-    >>> nqr.showQuantileRating()
+    >>> nqr.showQuantilesRating()
      *-------- Normed quantiles rating result ---------
      [0.50 - 0.60[ ['a1', 'a7', 'a3', 'a10', 'a2']
      [0.40 - 0.50[ ['a6', 'a9', 'a8']
