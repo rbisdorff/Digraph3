@@ -5267,7 +5267,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         The constructor requires a valid
         :py:class:`performanceQuantiles.PerformanceQuantiles` instance.
 
-    Examle Python session:
+    Example Python session:
         >>> From sortingDigraphs import *
         >>> # historical data
         >>> from randomPerfTabs import RandomCBPerformanceTableau
