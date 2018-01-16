@@ -90,7 +90,9 @@ class PerformanceQuantiles(object):
             cdf[g] = OrderedDict([(limitingQuantiles[g][i],self.quantilesFrequencies[i]) for i in range(np)])
         self.limitingQuantiles = limitingQuantiles
         self.cdf = cdf
-        
+
+#---------  private class methods
+
     def _computeQuantilesFrequencies(self,x,Debug=False):
         """
         renders the quantiles frequencies
@@ -226,6 +228,80 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
             print(g,self.LowerClosed,self.criteria[g]['preferenceDirection'],gQuantiles)
         return gQuantiles
 
+    def _htmlLimitingQuantiles(self,Sorted=False,\
+                             Transposed=False,ndigits=2,\
+                             ContentCentered=True,
+                             title=None):
+        """
+        Renders the limiting quantiles in table format:  citerion x limitss in html format.
+        """
+        criteria = self.criteria
+        if title == None:
+            html = '<h1>Performance quantiles</h1>'
+        else:
+            html = '<h1>%s</h1>' % title
+        historySizes = [self.historySizes[g] for g in self.historySizes]
+        html += '<p>Sampling sizes between %d and %d.</p>' % ( min(historySizes),max(historySizes))
+##        if self.LowerClosed:
+##            html += '<p>Quantile bins %s.</p>' % ('lowerclosed')
+##        else:
+##            html += '<p>Quantile bins %s.</p>' % ('upperclosed')
+           
+        criteriaKeys = [g for g in self.criteria]
+        if Sorted:
+            criteriaKeys.sort()
+        limitingQuantiles = self.limitingQuantiles
+        quantilesFrequencies = self.quantilesFrequencies
+        nq = len(quantilesFrequencies)
+        if ContentCentered:
+            alignFormat = 'center'
+        else:
+            alignFormat = 'right'
+        if Transposed:
+            html += '<table style="background-color:White;" border="1">'
+            html += '<tr bgcolor="#9acd32"><th>criterion</th>'
+            for x in quantilesFrequencies:
+                xName = str(x)
+                html += '<th bgcolor="#FFF79B">%s</th>' % (xName)
+            html += '</tr>'
+            for g in criteriaKeys:
+                try:
+                    gName = criteria[g]['shortName']
+                except:
+                    gName = str(g)
+                html += '<tr><th bgcolor="#FFF79B">%s</th>' % (gName)
+                for i in range(nq):
+                    formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                    if criteria[g]['preferenceDirection'] == 'max':
+                        value = min(criteria[g]['scale'][1],max(criteria[g]['scale'][0],limitingQuantiles[g][i]))
+                    else:
+                        value = max(-criteria[g]['scale'][1],min(-criteria[g]['scale'][0],limitingQuantiles[g][i]))
+                    html += formatString % (value)
+                html += '</tr>'
+            html += '</table>'
+        else:
+            html += '<table style="background-color:White;" border="1">'
+            html += '<tr bgcolor="#9acd32"><th>criterion</th>'
+            for g in criteriaKeys:
+                try:
+                    gName = criteria[g]['shortName']
+                except:
+                    gName = str(g)
+                html += '<th bgcolor="#FFF79B">%s</th>' % (gName)
+            html += '</tr>'
+            for i in range(nq):
+                xName = str(quantilesFrequencies[i])
+                html += '<tr><th bgcolor="#FFF79B">%s</th>' % (xName)
+                for g in criteriaKeys:
+                    formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                    if criteria[g]['preferenceDirection'] == 'max':
+                        value = min(criteria[g]['scale'][1],max(criteria[g]['scale'][0],limitingQuantiles[g][i]))
+                    else:
+                        value = max(-criteria[g]['scale'][1],min(-criteria[g]['scale'][0],limitingQuantiles[g][i]))
+                    html += formatString % (value)
+                html += '</tr>'
+            html += '</table>'        
+        return html
 
     def _interpolateQuantile(self,x,newq,newp):
         if self.Debug:
@@ -253,7 +329,142 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
                 ix = i
                 i += 1       
 
-##    def showCriteriaQuantiles(self):
+    def _updateCriterionQuantiles(self,g,newValues,historySize=None):
+        """
+        See lecture about the iq-agent of the MICS-3 Computational Statistics Course.
+        """
+        #self.Debug = True
+        from collections import OrderedDict
+        # get present state of the quantiles
+        #s = self.state
+        p = self.quantilesFrequencies
+        np = len(p)
+        q = self.limitingQuantiles[g]
+        cdf = self.cdf[g]
+        if historySize == None:
+            t = self.historySizes[g]
+        else:
+            t = historySize
+        oldfrq = [p[i]*(t+1) for i in range(np)]
+        if self.Debug:
+            print(q)
+            print(p)
+            print(cdf)
+            print(oldfrq)
+            print(t)
+        # new observations
+        nv = []
+        for x in newValues:
+            if x != -999:
+                nv.append(x)
+        nv.sort()
+        nt = len(nv)
+        if self.Debug:
+            print(nv,nt)
+        ###
+        if nt > 0: # there may be solely missing values observed on g
+            # Init results newq and newp
+            # Init indexes: i in q & p & oldfrq, j in nv, ins = # insertions
+            newp = [Decimal('0.0')]
+            if nv[0] < q[0]:
+                self.criteria[g]['minValue'] = nv[0]
+                newq= [nv[0]]
+                ins = 1
+                j = 1
+                i = 0
+            elif nv[0] > q[0] :
+                newq = [q[0]]
+                j = 0
+                ins = 0
+                i = 1
+            else:
+                newq = [q[0]]
+                j = 1
+                ins = 0
+                i = 1
+            if nv[-1] > q[-1]:
+                self.criteria[g]['maxValue'] = nv[-1]
+
+            # compute new cumulative densities
+            while i < np:
+                while j < nt and i < np:
+                    #print(i,j)
+                    if nv[j] > q[i]:
+                        newq.append(q[i])
+                        # ins += 0
+                        newp.append(cdf[q[i]]+ins)
+                        i += 1                        
+                    elif nv[j] < q[i]:
+                        if nv[j] > newq[-1]:
+                            newq.append(nv[j])
+                            # ins += 1
+                            # interpolate cdf of nv[j]
+                            cdfnv = cdf[q[i-1]] + (nv[j]-q[i-1])/(q[i]-q[i-1])*cdf[q[i]] + ins
+                            newp.append(cdfnv)
+                        else:
+                            newp[-1] += 1
+                        ins += 1
+                        j +=1
+                    else: # nv[j] = q[i]
+                        newp[-1] += 1
+                        ins += 1
+                        j += 1
+                if j == nt:
+                    for ni in range(i,np):
+                        newq.append(q[ni])
+                        newp.append(cdf[q[ni]]+ins)
+                        #ins += 0
+                    i = np
+            for nj in range(j,nt):
+                ins += 1
+                if newq[-1] < nv[nj]:
+                    newq.append(nv[nj])
+                    newp.append(newp[-1]+1)
+                else:
+                    newp[-1] += 1
+            if self.Debug:
+                self.newp = newp
+                self.newq = newq
+                print(newp)
+                print(newq)
+                    
+            # renormalising frequencies
+            if self.Debug:
+                print('#inserts = %d' % ins)
+            t += len(nv)
+            for i in range(len(newq)):
+                newp[i] /= newp[-1]
+            if self.Debug:
+                print('p \t q \ (t+1)*q')
+                for i in range(len(newq)):
+                    print('%.3f \t %.2f \t %.2f' % (newp[i],newq[i],newp[i]*(t)) )
+                print('t = %d' % t)
+
+            # compute new state by interpolation
+            ns = OrderedDict([(p[0],newq[0])])
+            if self.Debug:
+                print(p)
+            np = len(p)
+            for i in range(1,np):
+                x = p[i]
+                if self.Debug:
+                    print(x)
+                ns[x] = self._interpolateQuantile(x,newq,newp)
+            if self.Debug:
+                print(ns)
+            
+            # store new state
+            state = ns
+            self.state = state
+            q = [state[x] for x in state]
+            q.sort()
+            self.limitingQuantiles[g] = q
+            for p in state:
+                cdf[state[p]] = p
+            self.cdf[g] = cdf
+            self.historySizes[g] = t
+
+#------------- public class methods 
         
     def showActions(self):
         print("""No decision actions are actually being stored!
@@ -414,81 +625,6 @@ The number of so far observed evaluations per criteria are the following:
         webbrowser.open_new(url)
            
             
-    def _htmlLimitingQuantiles(self,Sorted=False,\
-                             Transposed=False,ndigits=2,\
-                             ContentCentered=True,
-                             title=None):
-        """
-        Renders the limiting quantiles in table format:  citerion x limitss in html format.
-        """
-        criteria = self.criteria
-        if title == None:
-            html = '<h1>Performance quantiles</h1>'
-        else:
-            html = '<h1>%s</h1>' % title
-        historySizes = [self.historySizes[g] for g in self.historySizes]
-        html += '<p>Sampling sizes between %d and %d.</p>' % ( min(historySizes),max(historySizes))
-##        if self.LowerClosed:
-##            html += '<p>Quantile bins %s.</p>' % ('lowerclosed')
-##        else:
-##            html += '<p>Quantile bins %s.</p>' % ('upperclosed')
-           
-        criteriaKeys = [g for g in self.criteria]
-        if Sorted:
-            criteriaKeys.sort()
-        limitingQuantiles = self.limitingQuantiles
-        quantilesFrequencies = self.quantilesFrequencies
-        nq = len(quantilesFrequencies)
-        if ContentCentered:
-            alignFormat = 'center'
-        else:
-            alignFormat = 'right'
-        if Transposed:
-            html += '<table style="background-color:White;" border="1">'
-            html += '<tr bgcolor="#9acd32"><th>criterion</th>'
-            for x in quantilesFrequencies:
-                xName = str(x)
-                html += '<th bgcolor="#FFF79B">%s</th>' % (xName)
-            html += '</tr>'
-            for g in criteriaKeys:
-                try:
-                    gName = criteria[g]['shortName']
-                except:
-                    gName = str(g)
-                html += '<tr><th bgcolor="#FFF79B">%s</th>' % (gName)
-                for i in range(nq):
-                    formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
-                    if criteria[g]['preferenceDirection'] == 'max':
-                        value = min(criteria[g]['scale'][1],max(criteria[g]['scale'][0],limitingQuantiles[g][i]))
-                    else:
-                        value = max(-criteria[g]['scale'][1],min(-criteria[g]['scale'][0],limitingQuantiles[g][i]))
-                    html += formatString % (value)
-                html += '</tr>'
-            html += '</table>'
-        else:
-            html += '<table style="background-color:White;" border="1">'
-            html += '<tr bgcolor="#9acd32"><th>criterion</th>'
-            for g in criteriaKeys:
-                try:
-                    gName = criteria[g]['shortName']
-                except:
-                    gName = str(g)
-                html += '<th bgcolor="#FFF79B">%s</th>' % (gName)
-            html += '</tr>'
-            for i in range(nq):
-                xName = str(quantilesFrequencies[i])
-                html += '<tr><th bgcolor="#FFF79B">%s</th>' % (xName)
-                for g in criteriaKeys:
-                    formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
-                    if criteria[g]['preferenceDirection'] == 'max':
-                        value = min(criteria[g]['scale'][1],max(criteria[g]['scale'][0],limitingQuantiles[g][i]))
-                    else:
-                        value = max(-criteria[g]['scale'][1],min(-criteria[g]['scale'][0],limitingQuantiles[g][i]))
-                    html += formatString % (value)
-                html += '</tr>'
-            html += '</table>'        
-        return html
-
 
 
     def showLimitingQuantiles(self,ByObjectives=False,Sorted=False,ndigits=2):
@@ -540,140 +676,42 @@ The number of so far observed evaluations per criteria are the following:
                     print(formatString % (value), end=' ')
                 print()      
 
-###   update quantiles
-    def _updateCriterionQuantiles(self,g,newValues,historySize=None):
-##        newValues.sort()
-##        print(g,newValues)
-        #self.Debug = True
-        from collections import OrderedDict
-        # get present state of the quantiles
-        #s = self.state
-        p = self.quantilesFrequencies
-        np = len(p)
-        q = self.limitingQuantiles[g]
-        cdf = self.cdf[g]
-        if historySize == None:
-            t = self.historySizes[g]
+    def showCriterionStatistics(self,g,Debug=False):
+        """
+        show statistics concerning the evaluation distributions
+        on each criteria.
+        """
+        import math
+        criteria = self.criteria
+        qFreq = self.quantilesFrequencies
+        nc = len(qFreq)
+        frequencies = ['%.2f' % p for p in qFreq]
+        glimitingQuantiles = self.limitingQuantiles[g]
+        #actions = self.actions
+        #n = len(actions)
+        print('*-------- Performance Quantiles statistics -------*')
+        print('Instance name         :', self.name)
+        print('Quantiles frequencies :', frequencies)
+        print('Summary for criterion : %s' % g)
+        print('  Criterion name      : %s' % criteria[g]['name'])
+        print('  Comment             : %s' % self.criteria[g]['comment'])
+        if criteria[g]['preferenceDirection'] == 'max':
+            print('  Performance range   : [%.2f-%.2f]'\
+              % (self.criteria[g]['scale'][0],self.criteria[g]['scale'][1]) )
         else:
-            t = historySize
-        oldfrq = [p[i]*(t+1) for i in range(np)]
-        if self.Debug:
-            print(q)
-            print(p)
-            print(cdf)
-            print(oldfrq)
-            print(t)
-        # new observations
-        nv = []
-        for x in newValues:
-            if x != -999:
-                nv.append(x)
-        nv.sort()
-        nt = len(nv)
-        if self.Debug:
-            print(nv,nt)
-        ###
-        if nt > 0: # there may be solely missing values observed on g
-            # Init results newq and newp
-            # Init indexes: i in q & p & oldfrq, j in nv, ins = # insertions
-            newp = [Decimal('0.0')]
-            if nv[0] < q[0]:
-                self.criteria[g]['minValue'] = nv[0]
-                newq= [nv[0]]
-                ins = 1
-                j = 1
-                i = 0
-            elif nv[0] > q[0] :
-                newq = [q[0]]
-                j = 0
-                ins = 0
-                i = 1
-            else:
-                newq = [q[0]]
-                j = 1
-                ins = 0
-                i = 1
-            if nv[-1] > q[-1]:
-                self.criteria[g]['maxValue'] = nv[-1]
-
-            # compute new cumulative densities
-            while i < np:
-                while j < nt and i < np:
-                    #print(i,j)
-                    if nv[j] > q[i]:
-                        newq.append(q[i])
-                        # ins += 0
-                        newp.append(cdf[q[i]]+ins)
-                        i += 1                        
-                    elif nv[j] < q[i]:
-                        if nv[j] > newq[-1]:
-                            newq.append(nv[j])
-                            # ins += 1
-                            # interpolate cdf of nv[j]
-                            cdfnv = cdf[q[i-1]] + (nv[j]-q[i-1])/(q[i]-q[i-1])*cdf[q[i]] + ins
-                            newp.append(cdfnv)
-                        else:
-                            newp[-1] += 1
-                        ins += 1
-                        j +=1
-                    else: # nv[j] = q[i]
-                        newp[-1] += 1
-                        ins += 1
-                        j += 1
-                if j == nt:
-                    for ni in range(i,np):
-                        newq.append(q[ni])
-                        newp.append(cdf[q[ni]]+ins)
-                        #ins += 0
-                    i = np
-            for nj in range(j,nt):
-                ins += 1
-                if newq[-1] < nv[nj]:
-                    newq.append(nv[nj])
-                    newp.append(newp[-1]+1)
-                else:
-                    newp[-1] += 1
-            if self.Debug:
-                self.newp = newp
-                self.newq = newq
-                print(newp)
-                print(newq)
-                    
-            # renormalising frequencies
-            if self.Debug:
-                print('#inserts = %d' % ins)
-            t += len(nv)
-            for i in range(len(newq)):
-                newp[i] /= newp[-1]
-            if self.Debug:
-                print('p \t q \ (t+1)*q')
-                for i in range(len(newq)):
-                    print('%.3f \t %.2f \t %.2f' % (newp[i],newq[i],newp[i]*(t)) )
-                print('t = %d' % t)
-
-            # compute new state by interpolation
-            ns = OrderedDict([(p[0],newq[0])])
-            if self.Debug:
-                print(p)
-            np = len(p)
-            for i in range(1,np):
-                x = p[i]
-                if self.Debug:
-                    print(x)
-                ns[x] = self._interpolateQuantile(x,newq,newp)
-            if self.Debug:
-                print(ns)
-            
-            # store new state
-            state = ns
-            self.state = state
-            q = [state[x] for x in state]
-            q.sort()
-            self.limitingQuantiles[g] = q
-            for p in state:
-                cdf[state[p]] = p
-            self.cdf[g] = cdf
-            self.historySizes[g] = t
+            print('  Performance range   : [%.2f;%.2f]'\
+              % (-self.criteria[g]['scale'][1],-self.criteria[g]['scale'][0]) )
+        print('  Quantiles repartition :')
+        print('    p%\t q(p)')  
+        for i in range(nc):
+            print('   %.0f\t %.2f' % (qFreq[i]*100, glimitingQuantiles[i]))               
+##                print('  mean evaluation       : %.2f' % (averageEvaluation))
+##                print('  standard deviation    : %.2f' % (stdDevEvaluation))
+##                print('  maximal evaluation    : %.2f' % (maxEvaluation))
+##                print('  quantile Q3 (x_75)    : %.2f' % (quantileQ3))
+##                print('  median evaluation     : %.2f' % (quantileQ2))
+##                print('  quantile Q1 (x_25)    : %.2f' % (quantileQ1))
+##                print('  minimal evaluation    : %.2f' % (minEvaluation))
 
         
     def updateQuantiles(self,newData,historySize=None):
@@ -704,20 +742,21 @@ The number of so far observed evaluations per criteria are the following:
 #----------test classes and methods ----------------
 if __name__ == "__main__":
 
-    import performanceQuantiles
+    from performanceQuantiles import *
+    seed = 105
     from randomPerfTabs import RandomCBPerformanceTableau
     from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
-    nbrActions=100
+    nbrActions=1000
     nbrCrit = 13
     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
-                                    numberOfCriteria=nbrCrit,seed=None)
-    pq = PerformanceQuantiles(tp,10,LowerClosed=True,Debug=False)
+                                    numberOfCriteria=nbrCrit,seed=seed)
+    pq = PerformanceQuantiles(tp,20,LowerClosed=True,Debug=False)
     #print(pq.limitingQuantiles)
-    pq.showLimitingQuantiles(ByObjectives=False)
-    pq.showHTMLLimitingQuantiles(Transposed=True)
-    pq.showActions()
-    pq.showCriteria(ByObjectives=True)
-    tpg = PerfTabGenerator(tp,seed=105)
+    #pq.showLimitingQuantiles(ByObjectives=False)
+    #pq.showHTMLLimitingQuantiles(Transposed=True)
+    #pq.showActions()
+    #pq.showCriteria(ByObjectives=True)
+    tpg = PerfTabGenerator(tp,seed=seed)
     newActions = tpg.randomActions(100)
 ##    for i in range(100):
 ##        newAction = tpg.randomAction()
@@ -725,14 +764,8 @@ if __name__ == "__main__":
     #print(newActions)
     pq.updateQuantiles(newActions,historySize=None)
 ##    pq.showActions()
-    pq.showCriteria()
+    #pq.showCriteria()
     pq.showHTMLLimitingQuantiles(Transposed=True)
-##    newActions = []
-##    for i in range(50):
-##        newAction = tpg.randomAction()
-##        newActions.append(newAction)
-##    #print(newActions)
-##    pq.updateQuantiles(newActions)
-##    pq.showActions()
-##    pq.showCriteria()
+    pq.showCriterionStatistics('c01')
+    pq.showCriterionStatistics('b01')
 
