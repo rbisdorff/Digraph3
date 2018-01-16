@@ -5308,7 +5308,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                  hasNoVeto=False,\
                  PrefThresholds=False,\
                  valuationScale=(-1,1),\
-                 rankingRule='NetFlows',\
+                 rankingRule='best',\
                  WithSorting=False,\
                  Threading=False,\
                  tempDir=None,\
@@ -5490,14 +5490,40 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 
         # compute rating categories
         t0 = time()
-        if rankingRule == 'NetFlows':
-            self.actionsRanking = self.computeNetFlowsRanking()
-        else:
-            self.actionsRanking = self.computeCopelandRanking()
+        if rankingRule == 'best':
+            from linearOrders import NetFlowsOrder,CopelandOrder
+            nf = NetFlowsOrder(g)           
+            cop = CopelandOrder(g)
+            corrnf = g.computeOrderCorrelation(nf.netFlowsOrder)
+            print('nf:', corrnf)
+            corrcop = g.computeOrderCorrelation(cop.copelandOrder)
+            print('cop', corrcop)
+            if corrnf['correlation'] >= corrcop['correlation']:
+                actionsList = nf.netFlowsRanking
+                self.rankingRule = 'NetFlows'
+                self.rankingCorrelation = corrnf
+            else:
+                actionsList = cop.copelandRanking
+                self.rankingRule = 'Copeland'
+                self.rankingCorrelation = corrcop
+        elif rankingRule == 'Copeland':
+            from linearOrders import CopelandOrder
+            cop = CopelandOrder(g)
+            actionsList = cop.copelandRanking
+            self.rankingRule = 'Copeland'
+        else: # net flows by default
+            from linearOrders import NetFlowsOrder
+            nf = NetFlowsOrder(g)
+            actionsList = nf.netFlowsRanking
+            self.rankingRule = 'NetFlows'
+        if rankingRule != 'best':
+            self.rankingCorrelation = g.computeOrderCorrelation(list(reversed(actionsList)))
+        self.actionsRanking = actionsList
         self.ratingCategories = self.computeQuantilesRating(Debug=Debug)
         if Debug:
-            print('Ranking rule     :', self.rankingRule)
-            print('Actions ranking  :', self.actionsRanking)
+            print('Ranking rule        :', self.rankingRule)
+            print('Actions ranking     :', self.actionsRanking)
+            print('Ranking correlation :', self.rankingCorrelation)
             print('Rating categories:', self.ratingCategories)
         self.runTimes['quantilesRating'] = time() - t0
                
@@ -5515,113 +5541,53 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         # end of the construction
         self.runTimes['totalTime'] = time() - tt
 
-# ------------  class methods ------------------
+# ------------ private methods ------------------
 
-    def showActionCategories(self,action,Debug=False,Comments=True):
+    def _computeLimitingQuantiles(self,g,PrefThresholds=False,Debug=True):
         """
-        Renders the union of categories in which the given action is sorted positively or null into.
-        Returns a tuple : action, lowest category key, highest category key, membership credibility !
+        Renders the list of limiting quantiles on criteria g
         """
-        Med = self.valuationdomain['med']
-        try:
-            sorting = self.sorting
-        except:
-            sorting = self.computeSortingCharacteristics(action=action,Debug=Debug)
-        catKeys = self.orderedCategoryKeys()
-        keys = [catKeys[0],[catKeys[-1]]]
-        lowLimit = sorting[action][catKeys[0]]['lowLimit']
-        notHighLimit = sorting[action][catKeys[-1]]['lowLimit']
-        for c in self.orderedCategoryKeys():
-            if sorting[action][c]['categoryMembership'] >= Med:
-                if sorting[action][c]['lowLimit'] > Med:
-                    lowLimit = sorting[action][c]['lowLimit']
-                    keys[0] = c
-                if sorting[action][c]['notHighLimit'] > Med:
-                    notHighLimit = sorting[action][c]['notHighLimit']
-                    keys[1] = c
-                #keys.append(c)
-                if Debug:
-                    print(action, c, sorting[action][c], keys)
-        credibility = min(lowLimit,notHighLimit)
-        if Comments:
-            print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
-                                 self.categories[keys[0]]['lowLimit'],\
-                                 self.categories[keys[-1]]['highLimit'],\
-                                 action,\
-                                 credibility,lowLimit,notHighLimit) )
-        return action,\
-                keys[0],\
-                keys[1],\
-                credibility            
-
-
-    def showActionsSortingResult(self,actionSubset=None,Debug=False):
-        """
-        Shows the quantiles sorting result of all (default) or
-        a subset of the decision actions.
-        """
-        if actionSubset == None:
-            actions = [x for x in self.newActions]
-            #actions.sort()
-        else:
-            actions = [x for x in flatten(actionSubset)]
-        print('Quantiles sorting result per decision action')
-        for x in actions:
-            self.showActionCategories(x,Debug=Debug)
-
-
-    def computeRatingRelation(self,Debug=False,StoreRating=True):
-        """
-        Computes a bipolar rating relation using a pre-ranking (list of lists)
-        of the self-actions (self.newActions + self.profiles).
-        """
-        try:
-            ratingCategories = self.ratingCategories
-        except:
-            ratingCategories = self.computeQuantilesRating(Debug=Debug)
-        Max = self.valuationdomain['max']
-        Med = self.valuationdomain['med']
-        Min = self.valuationdomain['min']
-
-        # pre-ranking self.actions
-        profiles = self.profiles
-        preRanking = []
-        if self.LowerClosed: #  in ascending order
-            for c in profiles:
-                preRanking.insert(0,[c])
-                if c in ratingCategories:
-                    preRanking.insert(0,ratingCategories[c])
-        else: # computing in descending order
-            for c in reversed(profiles):
-                preRanking.append([c])
-                if c in ratingCategories:
-                    preRanking.append(ratingCategories[c])
+        if PrefThresholds:
+            try:
+                gPrefThrCst = self.criteria[g]['thresholds']['pref'][0]
+                gPrefThrSlope = self.criteria[g]['thresholds']['pref'][1]
+            except:
+                gPrefThrCst = Decimal('0')
+                gPrefThrSlope = Decimal('0')            
+        gQuantiles = self.criteriaCategoryLimits[g]
         if Debug:
-            print('preRanking',preRanking)
+            print(g,gQuantiles)
+        nq = len(gQuantiles)
+        if self.LowerClosed:
+            if PrefThresholds:
+                for i in range(nq-1): # quantile limits raised by the preference thershold
+                    if self.criteria[g]['preferenceDirection'] == 'min':
+                        gQuantiles[i] += gPrefThrCst - gQuantiles[i]*gPrefThrSlope
+                    else:
+                        gQuantiles[i] -= gPrefThrCst + gQuantiles[i]*gPrefThrSlope
+            # we ignore the 1.00 quantile and replace it with +infty        
+            if self.criteria[g]['preferenceDirection'] == 'min':
+                gQuantiles[-1] = Decimal(str(self.criteria[g]['scale'][1]))
+            else:
+                gQuantiles[-1] = Decimal(str(self.criteria[g]['scale'][1])) * Decimal('2')       
 
-        
-        actions = [x for x in self.actions]
-        currentActions = set(actions)
-        ratingRelation = {}
-        # init the relation decitionaries
-        for x in actions:
-            ratingRelation[x] = {}
-            for y in actions:
-                ratingRelation[x][y] = Med
-        # computing the relation in descending order
-        for eqcl in preRanking:
-            currRest = currentActions - set(eqcl)
-            if Debug:
-                print(currentActions, eqcl, currRest)
-            for x in eqcl:
-                for y in currRest:
-                    ratingRelation[x][y] = Max
-                    ratingRelation[y][x] = Min
-            currentActions = currentActions - set(eqcl)
-        
-        if StoreRating:
-            self.ratingRelation = ratingRelation
-        return ratingRelation
+        else:  # upper closed categories
+            # we ignore the quantile 0.0 and replace it with -\infty            
+            if self.criteria[g]['preferenceDirection'] == 'min':
+                gQuantiles[0] = -Decimal(str(self.criteria[g]['scale'][1])) * Decimal('2')
+            else:
+                gQuantiles[0] = -Decimal(str(self.criteria[g]['scale'][1]))
+            if PrefThresholds:
+                for i in range(1,nq): # quantile limits raised by the preference thershold
+                    if self.criteria[g]['preferenceDirection'] == 'min':
+                        gQuantiles[i] += gPrefThrCst - gQuantiles[i]*gPrefThrSlope
+                    else:
+                        gQuantiles[i] -= gPrefThrCst + gQuantiles[i]*gPrefThrSlope
+        if Debug:
+            print(g,self.LowerClosed,self.criteria[g]['preferenceDirection'],gQuantiles)
+        return gQuantiles
+
+# ------------ public methods ------------------
 
     def computeCategoryContents(self,Debug=False):
         """
@@ -5766,34 +5732,91 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         else:
             return weakOrdering
 
-    def showQuantilesSorting(self,strategy='average'):
+    def computeQuantilesRating(self,Debug=True):
         """
-        Dummy show method for the commenting computeQuantileOrdering() method.
+          Renders an ordered dictionary of non empty quantiles in ascending order.
         """
-        print('*----- Quantiles sorting result ----')
-        self.computeQuantileOrdering(strategy=strategy,Comments=True)
+        
+        if self.rankingRule == 'NetFlows':
+            ranking = self.computeNetFlowsRanking()
+        else:
+            ranking = self.computeCopelandRanking()
+        if self.LowerClosed: # lower closed quantiles
+            ranking.reverse()
+        if Debug:
+            print(ranking)
+        n = len(ranking)
+        ratingCategories = OrderedDict()
+        New = True
+        for i in range(n):
+            if ranking[i] in self.newActions:
+                if New:
+                    c = i-1
+                    ratingCategories[ranking[c]] = [ranking[i]]
+                    New = False
+                else:
+                    if self.LowerClosed:
+                        ratingCategories[ranking[c]].insert(0,ranking[i])
+                    else:
+                        ratingCategories[ranking[c]].append(ranking[i])
+            else:
+                New = True
+        if Debug:
+            print(ratingCategories)
+        return ratingCategories
 
-
-    def showHTMLQuantilesSorting(self,Descending=True,strategy='average'):
+    def computeRatingRelation(self,Debug=False,StoreRating=True):
         """
-        Shows the html version of the quantile sorting result in a browser window.
-
-        The ordring strategy is either:
-            * **optimistic**, following the upper quantile limits (default),
-            * **pessimistic**, following the lower quantile limits,
-            * **average**, following the averag of the upper and lower quantile limits.
+        Computes a bipolar rating relation using a pre-ranking (list of lists)
+        of the self-actions (self.newActions + self.profiles).
         """
-        import webbrowser
-        fileName = '/tmp/preOrdering.html'
-        fo = open(fileName,'w')
-        fo.write(self.computeQuantileOrdering(Descending=Descending,
-                                              strategy=strategy,
-                                              HTML=True,
-                                              Comments=True))
-        fo.close()
-        url = 'file://'+fileName
-        webbrowser.open_new(url)
+        try:
+            ratingCategories = self.ratingCategories
+        except:
+            ratingCategories = self.computeQuantilesRating(Debug=Debug)
+        Max = self.valuationdomain['max']
+        Med = self.valuationdomain['med']
+        Min = self.valuationdomain['min']
 
+        # pre-ranking self.actions
+        profiles = self.profiles
+        preRanking = []
+        if self.LowerClosed: #  in ascending order
+            for c in profiles:
+                preRanking.insert(0,[c])
+                if c in ratingCategories:
+                    preRanking.insert(0,ratingCategories[c])
+        else: # computing in descending order
+            for c in reversed(profiles):
+                preRanking.append([c])
+                if c in ratingCategories:
+                    preRanking.append(ratingCategories[c])
+        if Debug:
+            print('preRanking',preRanking)
+
+        
+        actions = [x for x in self.actions]
+        currentActions = set(actions)
+        ratingRelation = {}
+        # init the relation decitionaries
+        for x in actions:
+            ratingRelation[x] = {}
+            for y in actions:
+                ratingRelation[x][y] = Med
+        # computing the relation in descending order
+        for eqcl in preRanking:
+            currRest = currentActions - set(eqcl)
+            if Debug:
+                print(currentActions, eqcl, currRest)
+            for x in eqcl:
+                for y in currRest:
+                    ratingRelation[x][y] = Max
+                    ratingRelation[y][x] = Min
+            currentActions = currentActions - set(eqcl)
+        
+        if StoreRating:
+            self.ratingRelation = ratingRelation
+        return ratingRelation
 
     def computeSortingCharacteristics(self, action=None, Debug=False):
         """
@@ -5904,11 +5927,11 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                              digraphClass=self.__class__,\
                              fontSize=fontSize)
         self.relation = self.relationOrig
-        
+
     def htmlPerformanceHeatmap(self,argCriteriaList=None,
                                argActionsList=None,
-                               SparseModel=False,
-                               RankingRule='NetFlows',
+                               #SparseModel=False,
+                               #rankingRule='best',
                                minimalComponentSize=1,
                                quantiles=None,
                                strategy='average',
@@ -5990,44 +6013,63 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         else:
             criteriaList = argCriteriaList
 
-        if RankingRule == None:
-            RankingRule = self.rankingRule
-        html += '<i>Ranking rule: <b>%s</b></i>\n' % RankingRule
-        na = len(self.actions)
+        #if rankingRule == None:
+        rankingRule = self.rankingRule
+        if argActionsList == None:
+            actionsList = self.actionsRanking
+        else:
+            actionsList = argActionsList
+        na = len(actionsList)
         profiles = self.profiles
         categories = self.categories
-        if SparseModel:
-            if quantiles == None:
-                if na < 100:
-                    q = 5
-                else:
-                    q = None
-            else:
-                q = quantiles
-            g = PreRankedOutrankingDigraph(self,quantiles=q,LowerClosed=False,
-                                           minimalComponentSize=minimalComponentSize,
-                                       componentRankingRule=self.rankingRule,Threading=Threading,
-                                       nbrOfCPUs=nbrOfCPUs)
-            if argActionsList == None:
-                actionsList = g.boostedRanking
-            else:
-                actionsList = argActionsList
-        else: # standard outranking model
-            if quantiles == None:
-                quantiles = na
-            from outrankingDigraphs import BipolarOutrankingDigraph
-            g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
-            if RankingRule == 'NetFlows':
-                from linearOrders import NetFlowsOrder
-                lo = NetFlowsOrder(g)
-                actionsList = lo.netFlowsRanking
-            else:
-                from linearOrders import CopelandOrder
-                cop = CopelandOrder(g)
-                actionsList = cop.copelandRanking
-        if SparseModel:
-            rankCorrelation = None
-        else:
+##        if SparseModel:
+##            if quantiles == None:
+##                if na < 100:
+##                    q = 5
+##                else:
+##                    q = None
+##            else:
+##                q = quantiles
+##            g = PreRankedOutrankingDigraph(self,quantiles=q,LowerClosed=False,
+##                                           minimalComponentSize=minimalComponentSize,
+##                                       componentRankingRule=rankingRule,Threading=Threading,
+##                                       nbrOfCPUs=nbrOfCPUs)
+##            if argActionsList == None:
+##                actionsList = g.boostedRanking
+##            else:
+##                actionsList = argActionsList
+##        else: # standard outranking model
+##            if quantiles == None:
+##                quantiles = na
+##            from outrankingDigraphs import BipolarOutrankingDigraph
+##            g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
+##            if rankingRule == 'best':
+##                from linearOrders import NetFlowsOrder,CopelandOrder
+##                nf = NetFlowsOrder(g)           
+##                cop = CopelandOrder(g)
+##                corrnf = g.computeOrderCorrelation(nf.netFlowsOrder)
+##                print('nf:', corrnf)
+##                corrcop = g.computeOrderCorrelation(cop.copelandOrder)
+##                print('cop', corrcop)
+##                if corrnf['correlation'] >= corrcop['correlation']:
+##                    actionsList = nf.netFlowsRanking
+##                    self.rankingRule = 'NetFlows'
+##                else:
+##                    actionsList = cop.copelandRanking
+##                    self.rankingRule = 'Copeland'
+##            elif rankingRule == 'Copeland':
+##                from linearOrders import CopelandOrder
+##                cop = CopelandOrder(g)
+##                actionsList = cop.copelandRanking
+##            else: # net flows by default
+##                from linearOrders import NetFlowsOrder
+##                nf = NetFlowsOrder(g)
+##                actionsList = nf.netFlowsRanking
+              
+##        if SparseModel:
+##            rankCorrelation = None
+##        else:
+        if Correlations:
             rankCorrelation = self.computeOrderCorrelation(list(reversed(actionsList)))
         if Debug:
             print('1',actionsList)
@@ -6078,6 +6120,8 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                 if Debug:
                     print(x,g,quantileColor[x][g])
         # heatmap
+        html += '<i>Ranking rule</i>: <b>%s</b>; <i>Ranking correlation</i>: <b>%.3f</b>\n'\
+                % (self.rankingRule,self.rankingCorrelation['correlation'])
         html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
         html += '<tr bgcolor=%s><th>criteria</th>' % (columnHeaderColor)
         for g in criteriaList:
@@ -6096,8 +6140,8 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             for cg in criteriaCorrelation:
                 html += '<td align="center">%.2f</td>' % (cg[0])
             html += '</tr>\n'
-        if Debug:
-            print(html)
+##        if Debug:
+##            print(html)
         for x in actionsList:
             if x in profiles:
                 xcat = profiles[x]['category']
@@ -6117,8 +6161,8 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                     html += formatString % (self.evaluation[g][x])
                 else:
                     html += '<td bgcolor=%s class="na">NA</td>' % naColor
-                if Debug:
-                    print(html)
+##                if Debug:
+##                    print(html)
             html += '</tr>\n'
         html += '</table>\n'
         # table legend
@@ -6139,38 +6183,155 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         html += '</body></html>'
         return html
 
-    def computeQuantilesRating(self,Debug=True):
+    def showActionCategories(self,action,Debug=False,Comments=True):
         """
-          Renders an ordered dictionary of non empty quantiles in ascending order.
+        Renders the union of categories in which the given action is sorted positively or null into.
+        Returns a tuple : action, lowest category key, highest category key, membership credibility !
         """
-        
-        if self.rankingRule == 'NetFlows':
-            ranking = self.computeNetFlowsRanking()
+        Med = self.valuationdomain['med']
+        try:
+            sorting = self.sorting
+        except:
+            sorting = self.computeSortingCharacteristics(action=action,Debug=Debug)
+        catKeys = self.orderedCategoryKeys()
+        keys = [catKeys[0],[catKeys[-1]]]
+        lowLimit = sorting[action][catKeys[0]]['lowLimit']
+        notHighLimit = sorting[action][catKeys[-1]]['lowLimit']
+        for c in self.orderedCategoryKeys():
+            if sorting[action][c]['categoryMembership'] >= Med:
+                if sorting[action][c]['lowLimit'] > Med:
+                    lowLimit = sorting[action][c]['lowLimit']
+                    keys[0] = c
+                if sorting[action][c]['notHighLimit'] > Med:
+                    notHighLimit = sorting[action][c]['notHighLimit']
+                    keys[1] = c
+                #keys.append(c)
+                if Debug:
+                    print(action, c, sorting[action][c], keys)
+        credibility = min(lowLimit,notHighLimit)
+        if Comments:
+            print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
+                                 self.categories[keys[0]]['lowLimit'],\
+                                 self.categories[keys[-1]]['highLimit'],\
+                                 action,\
+                                 credibility,lowLimit,notHighLimit) )
+        return action,\
+                keys[0],\
+                keys[1],\
+                credibility            
+
+
+    def showActionsSortingResult(self,actionSubset=None,Debug=False):
+        """
+        Shows the quantiles sorting result of all (default) or
+        a subset of the decision actions.
+        """
+        if actionSubset == None:
+            actions = [x for x in self.newActions]
+            #actions.sort()
         else:
-            ranking = self.computeCopelandRanking()
-        if self.LowerClosed: # lower closed quantiles
-            ranking.reverse()
-        if Debug:
-            print(ranking)
-        n = len(ranking)
-        ratingCategories = OrderedDict()
-        New = True
-        for i in range(n):
-            if ranking[i] in self.newActions:
-                if New:
-                    c = i-1
-                    ratingCategories[ranking[c]] = [ranking[i]]
-                    New = False
-                else:
-                    if self.LowerClosed:
-                        ratingCategories[ranking[c]].insert(0,ranking[i])
-                    else:
-                        ratingCategories[ranking[c]].append(ranking[i])
-            else:
-                New = True
-        if Debug:
-            print(ratingCategories)
-        return ratingCategories
+            actions = [x for x in flatten(actionSubset)]
+        print('Quantiles sorting result per decision action')
+        for x in actions:
+            self.showActionCategories(x,Debug=Debug)
+
+    def showHTMLPerformanceHeatmap(self,actionsList=None,
+                                   criteriaList=None,
+                                   colorLevels=7,
+                                   pageTitle=None,
+                                   ndigits=2,
+                                   #SparseModel=False,
+                                   minimalComponentSize=1,
+                                   #rankingRule='NetFlows',
+                                   quantiles=None,
+                                   strategy='average',
+                                   Correlations=False,
+                                   Threading=False,
+                                   nbrOfCPUs=None,
+                                   Debug=False):
+        """
+        shows the html heatmap version of the performance tableau in a browser window
+        (see perfTabs.htmlPerformanceHeatMap() method ).
+
+        **Parameters**:
+
+              - *actionsList* and *criteriaList*, if provided,  give the possibility to show the decision alternatives, resp. criteria, in a given ordering.
+              - *ndigits* = 0 may be used to show integer evaluation values.
+              - If no *actionsList* is provided, the decision actions are ordered from the best to the worst. This
+                ranking is obtained by default with the Copeland rule applied on a standard *BipolarOutrankingDigraph*.
+                When the *SparseModel* flag is put to *True*, a sparse *PreRankedOutrankingDigraph* construction is used instead.                
+              - The *minimalComponentSize* allows to control the fill rate of the pre-ranked model.
+                If *minimalComponentSize* = *n* (the number of decision actions) both the pre-ranked model will be
+                in fact equivalent to the standard model.
+              - It may interesting in some cases to use *RankingRule* = 'NetFlows'.
+              - Quantiles used for the pre-ranked decomposition are put by default to *n*
+                (the number of decision alternatives) for *n* < 50. For larger cardinalities up to 1000, quantiles = *n* /10.
+                For bigger performance tableaux the *quantiles* parameter may be set to a much lower value
+                not exceeding usually 1000.
+              - The pre-ranking may be obtained with three ordering strategies for the
+                quantiles equivalence classes: 'average' (default), 'optimistic' or  'pessimistic'.
+              - With *Correlations* = *True* and *criteriaList* = *None*, the criteria will be presented from left to right in decreasing
+                order of the correlations between the marginal criterion based ranking and the global ranking used for
+                presenting the decision alternatives.
+              - For large performance Tableaux, *multiprocessing* techniques may be used by setting
+                *Threading* = *True* in order to speed up the computations; especially when *Correlations* = *True*.
+              - By default, the number of cores available, will be detected. It may be efficient in a HPC context
+                to indicate the exact number of singled threaded cores in fact allocated to the job.
+
+
+        >>> from randomPerfTabs import RandomPerformanceTableau
+        >>> rt = RandomPerformanceTableau(seed=100)
+        >>> rt.showHTMLPerformanceHeatmap(colorLevels=5,Correlations=True)
+
+        .. image:: perfTabsExample.png
+           :alt: HTML heat map of the performance tableau
+           :width: 600 px
+           :align: center
+        
+        """
+        import webbrowser
+        fileName = '/tmp/performanceHeatmap.html'
+        fo = open(fileName,'w')
+        if pageTitle == None:
+            pageTitle = 'Heatmap of Performance Tableau \'%s\'' % self.name
+            
+        fo.write(self.htmlPerformanceHeatmap(argCriteriaList=criteriaList,
+                                             argActionsList=actionsList,
+                                             #SparseModel=SparseModel,
+                                             minimalComponentSize=minimalComponentSize,
+                                             #rankingRule=rankingRule,
+                                             quantiles=quantiles,
+                                             strategy=strategy,
+                                             ndigits=ndigits,
+                                             colorLevels=colorLevels,
+                                             pageTitle=pageTitle,
+                                             Correlations=Correlations,
+                                             Threading=Threading,
+                                             nbrOfCPUs=1,
+                                             Debug=Debug))
+        fo.close()
+        url = 'file://'+fileName
+        webbrowser.open_new(url)
+
+    def showHTMLQuantilesSorting(self,Descending=True,strategy='average'):
+        """
+        Shows the html version of the quantile sorting result in a browser window.
+
+        The ordring strategy is either:
+            * **optimistic**, following the upper quantile limits (default),
+            * **pessimistic**, following the lower quantile limits,
+            * **average**, following the averag of the upper and lower quantile limits.
+        """
+        import webbrowser
+        fileName = '/tmp/preOrdering.html'
+        fo = open(fileName,'w')
+        fo.write(self.computeQuantileOrdering(Descending=Descending,
+                                              strategy=strategy,
+                                              HTML=True,
+                                              Comments=True))
+        fo.close()
+        url = 'file://'+fileName
+        webbrowser.open_new(url)
 
     def showQuantilesRating(self,Descending=True,Debug=False):
         try:
@@ -6196,6 +6357,13 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                 for cat in reversed(ratingCategories):
                     c = self.profiles[cat]['category']
                     print(self.categories[c]['name'],ratingCategories[cat])
+
+    def showQuantilesSorting(self,strategy='average'):
+        """
+        Dummy show method for the commenting computeQuantileOrdering() method.
+        """
+        print('*----- Quantiles sorting result ----')
+        self.computeQuantileOrdering(strategy=strategy,Comments=True)
             
     def showOrderedRelationTable(self,relation=None,direction="decreasing"):
         """
@@ -6218,50 +6386,6 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                                 ReflexiveTerms=False)
         
                                          
-    def _computeLimitingQuantiles(self,g,PrefThresholds=False,Debug=True):
-        """
-        Renders the list of limiting quantiles on criteria g
-        """
-        if PrefThresholds:
-            try:
-                gPrefThrCst = self.criteria[g]['thresholds']['pref'][0]
-                gPrefThrSlope = self.criteria[g]['thresholds']['pref'][1]
-            except:
-                gPrefThrCst = Decimal('0')
-                gPrefThrSlope = Decimal('0')            
-        gQuantiles = self.criteriaCategoryLimits[g]
-        if Debug:
-            print(g,gQuantiles)
-        nq = len(gQuantiles)
-        if self.LowerClosed:
-            if PrefThresholds:
-                for i in range(nq-1): # quantile limits raised by the preference thershold
-                    if self.criteria[g]['preferenceDirection'] == 'min':
-                        gQuantiles[i] += gPrefThrCst - gQuantiles[i]*gPrefThrSlope
-                    else:
-                        gQuantiles[i] -= gPrefThrCst + gQuantiles[i]*gPrefThrSlope
-            # we ignore the 1.00 quantile and replace it with +infty        
-            if self.criteria[g]['preferenceDirection'] == 'min':
-                gQuantiles[-1] = Decimal(str(self.criteria[g]['scale'][1]))
-            else:
-                gQuantiles[-1] = Decimal(str(self.criteria[g]['scale'][1])) * Decimal('2')       
-
-        else:  # upper closed categories
-            # we ignore the quantile 0.0 and replace it with -\infty            
-            if self.criteria[g]['preferenceDirection'] == 'min':
-                gQuantiles[0] = -Decimal(str(self.criteria[g]['scale'][1])) * Decimal('2')
-            else:
-                gQuantiles[0] = -Decimal(str(self.criteria[g]['scale'][1]))
-            if PrefThresholds:
-                for i in range(1,nq): # quantile limits raised by the preference thershold
-                    if self.criteria[g]['preferenceDirection'] == 'min':
-                        gQuantiles[i] += gPrefThrCst - gQuantiles[i]*gPrefThrSlope
-                    else:
-                        gQuantiles[i] -= gPrefThrCst + gQuantiles[i]*gPrefThrSlope
-        if Debug:
-            print(g,self.LowerClosed,self.criteria[g]['preferenceDirection'],gQuantiles)
-        return gQuantiles
-
 ##    def getActionsKeys(self,action=None,WithoutProfiles=True):
 ##        """
 ##        extract normal actions keys()
@@ -6395,7 +6519,7 @@ if __name__ == "__main__":
 ##    print(g.computeOrdinalCorrelation(qsrbc))
     
     # test incremental rating agent
-    seed = 105
+    seed = 106
 
 ##    from randomPerfTabs import RandomPerformanceTableau
 ##    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
@@ -6404,21 +6528,21 @@ if __name__ == "__main__":
 ##    tp = RandomPerformanceTableau(numberOfActions=nbrActions,\
 ##                                    numberOfCriteria=nbrCrit,seed=seed)
 
-    from randomPerfTabs import RandomCBPerformanceTableau
-    from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
-    nbrActions=1000
-    nbrCrit = 13
-    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
-                                    numberOfCriteria=nbrCrit,seed=seed)
-
-##    from randomPerfTabs import Random3ObjectivesPerformanceTableau
-##    from randomPerfTabs import Random3ObjectivesPerformanceGenerator as PerfTabGenerator
+##    from randomPerfTabs import RandomCBPerformanceTableau
+##    from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
 ##    nbrActions=1000
-##    nbrCrit = 21
-##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
+##    nbrCrit = 13
+##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
 ##                                    numberOfCriteria=nbrCrit,seed=seed)
 
-    pq = PerformanceQuantiles(tp,5,LowerClosed=True,Debug=False)
+    from randomPerfTabs import Random3ObjectivesPerformanceTableau
+    from randomPerfTabs import Random3ObjectivesPerformanceGenerator as PerfTabGenerator
+    nbrActions=1000
+    nbrCrit = 21
+    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
+                                    numberOfCriteria=nbrCrit,seed=seed)
+
+    pq = PerformanceQuantiles(tp,7,LowerClosed=True,Debug=False)
     tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
     newActions = tpg.randomActions(20)
 ##    for i in range(20):
@@ -6449,7 +6573,7 @@ if __name__ == "__main__":
     #ira.showSortingCharacteristics()
     ira.showHTMLPerformanceHeatmap(pageTitle='Heat map of performances',
                                    Correlations=True,
-                                   RankingRule='NetFlows',
+                                   #rankingRule='best',
                                    )
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
