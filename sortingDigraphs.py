@@ -5468,9 +5468,6 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         g = BipolarOutrankingDigraph(perfTab,hasNoVeto=hasNoVeto,Normalized=True,
                                      Threading=Threading,nbrCores=nbrCores)
         g.recodeValuation(minValuation,maxValuation)
-        if Debug:
-            ranking = g.computeCopelandRanking()
-            g.showHTMLRelationTable(actionsList=ranking)
         self.actions = g.actions
         self.completeRelation = g.relation
         self.relation = g.relation
@@ -5495,9 +5492,9 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             nf = NetFlowsOrder(g)           
             cop = CopelandOrder(g)
             corrnf = g.computeOrderCorrelation(nf.netFlowsOrder)
-            print('nf:', corrnf)
+            #print('nf:', corrnf)
             corrcop = g.computeOrderCorrelation(cop.copelandOrder)
-            print('cop', corrcop)
+            #print('cop', corrcop)
             if corrnf['correlation'] >= corrcop['correlation']:
                 actionsList = nf.netFlowsRanking
                 self.rankingRule = 'NetFlows'
@@ -5564,7 +5561,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                     if self.criteria[g]['preferenceDirection'] == 'min':
                         gQuantiles[i] += gPrefThrCst - gQuantiles[i]*gPrefThrSlope
                     else:
-                        gQuantiles[i] -= gPrefThrCst + gQuantiles[i]*gPrefThrSlope
+                        gQuantiles[i] += gPrefThrCst + gQuantiles[i]*gPrefThrSlope
             # we ignore the 1.00 quantile and replace it with +infty        
             if self.criteria[g]['preferenceDirection'] == 'min':
                 gQuantiles[-1] = Decimal(str(self.criteria[g]['scale'][1]))
@@ -5582,7 +5579,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                     if self.criteria[g]['preferenceDirection'] == 'min':
                         gQuantiles[i] += gPrefThrCst - gQuantiles[i]*gPrefThrSlope
                     else:
-                        gQuantiles[i] -= gPrefThrCst + gQuantiles[i]*gPrefThrSlope
+                        gQuantiles[i] += gPrefThrCst + gQuantiles[i]*gPrefThrSlope
         if Debug:
             print(g,self.LowerClosed,self.criteria[g]['preferenceDirection'],gQuantiles)
         return gQuantiles
@@ -5928,17 +5925,13 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                              fontSize=fontSize)
         self.relation = self.relationOrig
 
-    def htmlPerformanceHeatmap(self,argCriteriaList=None,
+    def htmlRatingHeatmap(self,argCriteriaList=None,
                                argActionsList=None,
-                               #SparseModel=False,
-                               #rankingRule='best',
-                               minimalComponentSize=1,
                                quantiles=None,
-                               strategy='average',
                                ndigits=2,
                                contentCentered=True,
                                colorLevels=None,
-                               pageTitle='Performance Heatmap',
+                               pageTitle='Rating Heatmap',
                                Correlations=False,
                                Threading=False,
                                nbrOfCPUs=1,
@@ -5947,7 +5940,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table
         actions x criteria in html format.
 
-        See the corresponding perfTabs.showHTMLPerformanceHeatMap() method.
+        See the corresponding :py:math:`perfTabs.showHTMLPerformanceHeatMap` method.
         """
         print('see browser')
         from decimal import Decimal
@@ -6006,14 +5999,13 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         html += '</head>\n<body>\n'
         html += '<h2>%s</h2>\n' % pageTitle
         
-        from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
+##        from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
         if argCriteriaList == None:
             argCriteriaList = list(self.criteria.keys())
             criteriaList = None
         else:
             criteriaList = argCriteriaList
 
-        #if rankingRule == None:
         rankingRule = self.rankingRule
         if argActionsList == None:
             actionsList = self.actionsRanking
@@ -6022,53 +6014,6 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         na = len(actionsList)
         profiles = self.profiles
         categories = self.categories
-##        if SparseModel:
-##            if quantiles == None:
-##                if na < 100:
-##                    q = 5
-##                else:
-##                    q = None
-##            else:
-##                q = quantiles
-##            g = PreRankedOutrankingDigraph(self,quantiles=q,LowerClosed=False,
-##                                           minimalComponentSize=minimalComponentSize,
-##                                       componentRankingRule=rankingRule,Threading=Threading,
-##                                       nbrOfCPUs=nbrOfCPUs)
-##            if argActionsList == None:
-##                actionsList = g.boostedRanking
-##            else:
-##                actionsList = argActionsList
-##        else: # standard outranking model
-##            if quantiles == None:
-##                quantiles = na
-##            from outrankingDigraphs import BipolarOutrankingDigraph
-##            g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
-##            if rankingRule == 'best':
-##                from linearOrders import NetFlowsOrder,CopelandOrder
-##                nf = NetFlowsOrder(g)           
-##                cop = CopelandOrder(g)
-##                corrnf = g.computeOrderCorrelation(nf.netFlowsOrder)
-##                print('nf:', corrnf)
-##                corrcop = g.computeOrderCorrelation(cop.copelandOrder)
-##                print('cop', corrcop)
-##                if corrnf['correlation'] >= corrcop['correlation']:
-##                    actionsList = nf.netFlowsRanking
-##                    self.rankingRule = 'NetFlows'
-##                else:
-##                    actionsList = cop.copelandRanking
-##                    self.rankingRule = 'Copeland'
-##            elif rankingRule == 'Copeland':
-##                from linearOrders import CopelandOrder
-##                cop = CopelandOrder(g)
-##                actionsList = cop.copelandRanking
-##            else: # net flows by default
-##                from linearOrders import NetFlowsOrder
-##                nf = NetFlowsOrder(g)
-##                actionsList = nf.netFlowsRanking
-              
-##        if SparseModel:
-##            rankCorrelation = None
-##        else:
         if Correlations:
             rankCorrelation = self.computeOrderCorrelation(list(reversed(actionsList)))
         if Debug:
@@ -6235,49 +6180,31 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         for x in actions:
             self.showActionCategories(x,Debug=Debug)
 
-    def showHTMLPerformanceHeatmap(self,actionsList=None,
+    def showHTMLRatingHeatmap(self,actionsList=None,
                                    criteriaList=None,
                                    colorLevels=7,
                                    pageTitle=None,
                                    ndigits=2,
-                                   #SparseModel=False,
-                                   minimalComponentSize=1,
-                                   #rankingRule='NetFlows',
                                    quantiles=None,
-                                   strategy='average',
                                    Correlations=False,
                                    Threading=False,
                                    nbrOfCPUs=None,
                                    Debug=False):
         """
-        shows the html heatmap version of the performance tableau in a browser window
-        (see perfTabs.htmlPerformanceHeatMap() method ).
+        Specialisation of html heatmap version showing the performance tableau in a browser window;
+        see :py:meth:`perfTabs.showHTMLPerformanceHeatMap` method.
 
         **Parameters**:
 
               - *actionsList* and *criteriaList*, if provided,  give the possibility to show the decision alternatives, resp. criteria, in a given ordering.
               - *ndigits* = 0 may be used to show integer evaluation values.
-              - If no *actionsList* is provided, the decision actions are ordered from the best to the worst. This
-                ranking is obtained by default with the Copeland rule applied on a standard *BipolarOutrankingDigraph*.
-                When the *SparseModel* flag is put to *True*, a sparse *PreRankedOutrankingDigraph* construction is used instead.                
-              - The *minimalComponentSize* allows to control the fill rate of the pre-ranked model.
-                If *minimalComponentSize* = *n* (the number of decision actions) both the pre-ranked model will be
-                in fact equivalent to the standard model.
-              - It may interesting in some cases to use *RankingRule* = 'NetFlows'.
-              - Quantiles used for the pre-ranked decomposition are put by default to *n*
-                (the number of decision alternatives) for *n* < 50. For larger cardinalities up to 1000, quantiles = *n* /10.
-                For bigger performance tableaux the *quantiles* parameter may be set to a much lower value
-                not exceeding usually 1000.
-              - The pre-ranking may be obtained with three ordering strategies for the
-                quantiles equivalence classes: 'average' (default), 'optimistic' or  'pessimistic'.
+              - If no *actionsList* is provided, the decision actions are ordered from
+                the best to the worst following the ranking of the NormedQuatilesRatingDigraph instance.              - It may interesting in some cases to use *RankingRule* = 'NetFlows'.
               - With *Correlations* = *True* and *criteriaList* = *None*, the criteria will be presented from left to right in decreasing
                 order of the correlations between the marginal criterion based ranking and the global ranking used for
                 presenting the decision alternatives.
-              - For large performance Tableaux, *multiprocessing* techniques may be used by setting
-                *Threading* = *True* in order to speed up the computations; especially when *Correlations* = *True*.
-              - By default, the number of cores available, will be detected. It may be efficient in a HPC context
-                to indicate the exact number of singled threaded cores in fact allocated to the job.
-
+              - Computing the marginal correlations may be boosted with Threading = True,
+                if multiple parallel computing cores are available.
 
         >>> from randomPerfTabs import RandomPerformanceTableau
         >>> rt = RandomPerformanceTableau(seed=100)
@@ -6295,13 +6222,9 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         if pageTitle == None:
             pageTitle = 'Heatmap of Performance Tableau \'%s\'' % self.name
             
-        fo.write(self.htmlPerformanceHeatmap(argCriteriaList=criteriaList,
+        fo.write(self.htmlRatingHeatmap(argCriteriaList=criteriaList,
                                              argActionsList=actionsList,
-                                             #SparseModel=SparseModel,
-                                             minimalComponentSize=minimalComponentSize,
-                                             #rankingRule=rankingRule,
                                              quantiles=quantiles,
-                                             strategy=strategy,
                                              ndigits=ndigits,
                                              colorLevels=colorLevels,
                                              pageTitle=pageTitle,
@@ -6571,7 +6494,7 @@ if __name__ == "__main__":
     #ira.showRefinedQuantileOrdering()
     #ira.showOrderedRelationTable()
     #ira.showSortingCharacteristics()
-    ira.showHTMLPerformanceHeatmap(pageTitle='Heat map of performances',
+    ira.showHTMLRatingHeatmap(pageTitle='Heat map of the ratings',
                                    Correlations=True,
                                    #rankingRule='best',
                                    )

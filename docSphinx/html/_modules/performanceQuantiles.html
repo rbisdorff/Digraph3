@@ -140,7 +140,9 @@
             <span class="n">cdf</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="p">)])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">limitingQuantiles</span> <span class="o">=</span> <span class="n">limitingQuantiles</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cdf</span> <span class="o">=</span> <span class="n">cdf</span>
-        
+
+<span class="c1">#---------  private class methods</span>
+
     <span class="k">def</span> <span class="nf">_computeQuantilesFrequencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders the quantiles frequencies</span>
@@ -276,6 +278,80 @@
             <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">],</span><span class="n">gQuantiles</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">gQuantiles</span>
 
+    <span class="k">def</span> <span class="nf">_htmlLimitingQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
+                             <span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>\
+                             <span class="n">ContentCentered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                             <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders the limiting quantiles in table format:  citerion x limitss in html format.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
+        <span class="k">if</span> <span class="n">title</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">html</span> <span class="o">=</span> <span class="s1">&#39;&lt;h1&gt;Performance quantiles&lt;/h1&gt;&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">html</span> <span class="o">=</span> <span class="s1">&#39;&lt;h1&gt;</span><span class="si">%s</span><span class="s1">&lt;/h1&gt;&#39;</span> <span class="o">%</span> <span class="n">title</span>
+        <span class="n">historySizes</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span><span class="p">]</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;p&gt;Sampling sizes between </span><span class="si">%d</span><span class="s1"> and </span><span class="si">%d</span><span class="s1">.&lt;/p&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span> <span class="nb">min</span><span class="p">(</span><span class="n">historySizes</span><span class="p">),</span><span class="nb">max</span><span class="p">(</span><span class="n">historySizes</span><span class="p">))</span>
+<span class="c1">##        if self.LowerClosed:</span>
+<span class="c1">##            html += &#39;&lt;p&gt;Quantile bins %s.&lt;/p&gt;&#39; % (&#39;lowerclosed&#39;)</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            html += &#39;&lt;p&gt;Quantile bins %s.&lt;/p&gt;&#39; % (&#39;upperclosed&#39;)</span>
+           
+        <span class="n">criteriaKeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">Sorted</span><span class="p">:</span>
+            <span class="n">criteriaKeys</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="n">limitingQuantiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">limitingQuantiles</span>
+        <span class="n">quantilesFrequencies</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span>
+        <span class="n">nq</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">quantilesFrequencies</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ContentCentered</span><span class="p">:</span>
+            <span class="n">alignFormat</span> <span class="o">=</span> <span class="s1">&#39;center&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">alignFormat</span> <span class="o">=</span> <span class="s1">&#39;right&#39;</span>
+        <span class="k">if</span> <span class="n">Transposed</span><span class="p">:</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;table style=&quot;background-color:White;&quot; border=&quot;1&quot;&gt;&#39;</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr bgcolor=&quot;#9acd32&quot;&gt;&lt;th&gt;criterion&lt;/th&gt;&#39;</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">quantilesFrequencies</span><span class="p">:</span>
+                <span class="n">xName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;th bgcolor=&quot;#FFF79B&quot;&gt;</span><span class="si">%s</span><span class="s1">&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">xName</span><span class="p">)</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;&#39;</span>
+            <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaKeys</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">gName</span> <span class="o">=</span> <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">]</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="n">gName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+                <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;th bgcolor=&quot;#FFF79B&quot;&gt;</span><span class="si">%s</span><span class="s1">&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">gName</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nq</span><span class="p">):</span>
+                    <span class="n">formatString</span> <span class="o">=</span> <span class="s1">&#39;&lt;td align=&quot;</span><span class="si">%s</span><span class="s1">&quot;&gt;</span><span class="si">%%</span><span class="s1"> .</span><span class="si">%d</span><span class="s1">f&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">alignFormat</span><span class="p">,</span><span class="n">ndigits</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="nb">max</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">i</span><span class="p">]))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="o">-</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="nb">min</span><span class="p">(</span><span class="o">-</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">i</span><span class="p">]))</span>
+                    <span class="n">html</span> <span class="o">+=</span> <span class="n">formatString</span> <span class="o">%</span> <span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;&#39;</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;table style=&quot;background-color:White;&quot; border=&quot;1&quot;&gt;&#39;</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr bgcolor=&quot;#9acd32&quot;&gt;&lt;th&gt;criterion&lt;/th&gt;&#39;</span>
+            <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaKeys</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">gName</span> <span class="o">=</span> <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">]</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="n">gName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+                <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;th bgcolor=&quot;#FFF79B&quot;&gt;</span><span class="si">%s</span><span class="s1">&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">gName</span><span class="p">)</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;&#39;</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nq</span><span class="p">):</span>
+                <span class="n">xName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">quantilesFrequencies</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;th bgcolor=&quot;#FFF79B&quot;&gt;</span><span class="si">%s</span><span class="s1">&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">xName</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaKeys</span><span class="p">:</span>
+                    <span class="n">formatString</span> <span class="o">=</span> <span class="s1">&#39;&lt;td align=&quot;</span><span class="si">%s</span><span class="s1">&quot;&gt;</span><span class="si">%%</span><span class="s1"> .</span><span class="si">%d</span><span class="s1">f&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">alignFormat</span><span class="p">,</span><span class="n">ndigits</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="nb">max</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">i</span><span class="p">]))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="o">-</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="nb">min</span><span class="p">(</span><span class="o">-</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">i</span><span class="p">]))</span>
+                    <span class="n">html</span> <span class="o">+=</span> <span class="n">formatString</span> <span class="o">%</span> <span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;&#39;</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;&#39;</span>        
+        <span class="k">return</span> <span class="n">html</span>
 
     <span class="k">def</span> <span class="nf">_interpolateQuantile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">newq</span><span class="p">,</span><span class="n">newp</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
@@ -303,7 +379,142 @@
                 <span class="n">ix</span> <span class="o">=</span> <span class="n">i</span>
                 <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>       
 
-<span class="c1">##    def showCriteriaQuantiles(self):</span>
+    <span class="k">def</span> <span class="nf">_updateCriterionQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">newValues</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        See lecture about the iq-agent of the MICS-3 Computational Statistics Course.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#self.Debug = True</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+        <span class="c1"># get present state of the quantiles</span>
+        <span class="c1">#s = self.state</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span>
+        <span class="n">np</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
+        <span class="n">cdf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cdf</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">historySize</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">historySize</span>
+        <span class="n">oldfrq</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">cdf</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">oldfrq</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="c1"># new observations</span>
+        <span class="n">nv</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">newValues</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">999</span><span class="p">:</span>
+                <span class="n">nv</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">nv</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="n">nt</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nv</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">nv</span><span class="p">,</span><span class="n">nt</span><span class="p">)</span>
+        <span class="c1">###</span>
+        <span class="k">if</span> <span class="n">nt</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># there may be solely missing values observed on g</span>
+            <span class="c1"># Init results newq and newp</span>
+            <span class="c1"># Init indexes: i in q &amp; p &amp; oldfrq, j in nv, ins = # insertions</span>
+            <span class="n">newp</span> <span class="o">=</span> <span class="p">[</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)]</span>
+            <span class="k">if</span> <span class="n">nv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;minValue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">newq</span><span class="o">=</span> <span class="p">[</span><span class="n">nv</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+                <span class="n">ins</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">elif</span> <span class="n">nv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:</span>
+                <span class="n">newq</span> <span class="o">=</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">ins</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">newq</span> <span class="o">=</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">ins</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">nv</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">q</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;maxValue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nv</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="c1"># compute new cumulative densities</span>
+            <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">np</span><span class="p">:</span>
+                <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">nt</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">np</span><span class="p">:</span>
+                    <span class="c1">#print(i,j)</span>
+                    <span class="k">if</span> <span class="n">nv</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                        <span class="n">newq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                        <span class="c1"># ins += 0</span>
+                        <span class="n">newp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cdf</span><span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">+</span><span class="n">ins</span><span class="p">)</span>
+                        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>                        
+                    <span class="k">elif</span> <span class="n">nv</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                        <span class="k">if</span> <span class="n">nv</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">newq</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                            <span class="n">newq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nv</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                            <span class="c1"># ins += 1</span>
+                            <span class="c1"># interpolate cdf of nv[j]</span>
+                            <span class="n">cdfnv</span> <span class="o">=</span> <span class="n">cdf</span><span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+</span> <span class="p">(</span><span class="n">nv</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="n">cdf</span><span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">+</span> <span class="n">ins</span>
+                            <span class="n">newp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cdfnv</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">newp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="n">ins</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="n">j</span> <span class="o">+=</span><span class="mi">1</span>
+                    <span class="k">else</span><span class="p">:</span> <span class="c1"># nv[j] = q[i]</span>
+                        <span class="n">newp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="n">ins</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">nt</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">ni</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">np</span><span class="p">):</span>
+                        <span class="n">newq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">ni</span><span class="p">])</span>
+                        <span class="n">newp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cdf</span><span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="n">ni</span><span class="p">]]</span><span class="o">+</span><span class="n">ins</span><span class="p">)</span>
+                        <span class="c1">#ins += 0</span>
+                    <span class="n">i</span> <span class="o">=</span> <span class="n">np</span>
+            <span class="k">for</span> <span class="n">nj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">nt</span><span class="p">):</span>
+                <span class="n">ins</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">newq</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">nv</span><span class="p">[</span><span class="n">nj</span><span class="p">]:</span>
+                    <span class="n">newq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nv</span><span class="p">[</span><span class="n">nj</span><span class="p">])</span>
+                    <span class="n">newp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">newp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">newp</span> <span class="o">=</span> <span class="n">newp</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">newq</span> <span class="o">=</span> <span class="n">newq</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">newp</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">newq</span><span class="p">)</span>
+                    
+            <span class="c1"># renormalising frequencies</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;#inserts = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">ins</span><span class="p">)</span>
+            <span class="n">t</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nv</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">newq</span><span class="p">)):</span>
+                <span class="n">newp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/=</span> <span class="n">newp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p </span><span class="se">\t</span><span class="s1"> q \ (t+1)*q&#39;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">newq</span><span class="p">)):</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%.3f</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">newp</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">newq</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">newp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;t = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">t</span><span class="p">)</span>
+
+            <span class="c1"># compute new state by interpolation</span>
+            <span class="n">ns</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">newq</span><span class="p">[</span><span class="mi">0</span><span class="p">])])</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+            <span class="n">np</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">np</span><span class="p">):</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                <span class="n">ns</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolateQuantile</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">newq</span><span class="p">,</span><span class="n">newp</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">ns</span><span class="p">)</span>
+            
+            <span class="c1"># store new state</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="n">ns</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">state</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="p">[</span><span class="n">state</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">state</span><span class="p">]</span>
+            <span class="n">q</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">q</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">state</span><span class="p">:</span>
+                <span class="n">cdf</span><span class="p">[</span><span class="n">state</span><span class="p">[</span><span class="n">p</span><span class="p">]]</span> <span class="o">=</span> <span class="n">p</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cdf</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">cdf</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
+
+<span class="c1">#------------- public class methods </span>
         
 <div class="viewcode-block" id="PerformanceQuantiles.showActions"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.showActions">[docs]</a>    <span class="k">def</span> <span class="nf">showActions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;No decision actions are actually being stored!</span>
@@ -464,81 +675,6 @@
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open_new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
            
             
-    <span class="k">def</span> <span class="nf">_htmlLimitingQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
-                             <span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>\
-                             <span class="n">ContentCentered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                             <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Renders the limiting quantiles in table format:  citerion x limitss in html format.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
-        <span class="k">if</span> <span class="n">title</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">html</span> <span class="o">=</span> <span class="s1">&#39;&lt;h1&gt;Performance quantiles&lt;/h1&gt;&#39;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">html</span> <span class="o">=</span> <span class="s1">&#39;&lt;h1&gt;</span><span class="si">%s</span><span class="s1">&lt;/h1&gt;&#39;</span> <span class="o">%</span> <span class="n">title</span>
-        <span class="n">historySizes</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span><span class="p">]</span>
-        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;p&gt;Sampling sizes between </span><span class="si">%d</span><span class="s1"> and </span><span class="si">%d</span><span class="s1">.&lt;/p&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span> <span class="nb">min</span><span class="p">(</span><span class="n">historySizes</span><span class="p">),</span><span class="nb">max</span><span class="p">(</span><span class="n">historySizes</span><span class="p">))</span>
-<span class="c1">##        if self.LowerClosed:</span>
-<span class="c1">##            html += &#39;&lt;p&gt;Quantile bins %s.&lt;/p&gt;&#39; % (&#39;lowerclosed&#39;)</span>
-<span class="c1">##        else:</span>
-<span class="c1">##            html += &#39;&lt;p&gt;Quantile bins %s.&lt;/p&gt;&#39; % (&#39;upperclosed&#39;)</span>
-           
-        <span class="n">criteriaKeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">Sorted</span><span class="p">:</span>
-            <span class="n">criteriaKeys</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-        <span class="n">limitingQuantiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">limitingQuantiles</span>
-        <span class="n">quantilesFrequencies</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span>
-        <span class="n">nq</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">quantilesFrequencies</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">ContentCentered</span><span class="p">:</span>
-            <span class="n">alignFormat</span> <span class="o">=</span> <span class="s1">&#39;center&#39;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">alignFormat</span> <span class="o">=</span> <span class="s1">&#39;right&#39;</span>
-        <span class="k">if</span> <span class="n">Transposed</span><span class="p">:</span>
-            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;table style=&quot;background-color:White;&quot; border=&quot;1&quot;&gt;&#39;</span>
-            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr bgcolor=&quot;#9acd32&quot;&gt;&lt;th&gt;criterion&lt;/th&gt;&#39;</span>
-            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">quantilesFrequencies</span><span class="p">:</span>
-                <span class="n">xName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-                <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;th bgcolor=&quot;#FFF79B&quot;&gt;</span><span class="si">%s</span><span class="s1">&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">xName</span><span class="p">)</span>
-            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;&#39;</span>
-            <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaKeys</span><span class="p">:</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">gName</span> <span class="o">=</span> <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">]</span>
-                <span class="k">except</span><span class="p">:</span>
-                    <span class="n">gName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-                <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;th bgcolor=&quot;#FFF79B&quot;&gt;</span><span class="si">%s</span><span class="s1">&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">gName</span><span class="p">)</span>
-                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nq</span><span class="p">):</span>
-                    <span class="n">formatString</span> <span class="o">=</span> <span class="s1">&#39;&lt;td align=&quot;</span><span class="si">%s</span><span class="s1">&quot;&gt;</span><span class="si">%%</span><span class="s1"> .</span><span class="si">%d</span><span class="s1">f&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">alignFormat</span><span class="p">,</span><span class="n">ndigits</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span>
-                        <span class="n">value</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="nb">max</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">i</span><span class="p">]))</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">value</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="o">-</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="nb">min</span><span class="p">(</span><span class="o">-</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">i</span><span class="p">]))</span>
-                    <span class="n">html</span> <span class="o">+=</span> <span class="n">formatString</span> <span class="o">%</span> <span class="p">(</span><span class="n">value</span><span class="p">)</span>
-                <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;&#39;</span>
-            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;&#39;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;table style=&quot;background-color:White;&quot; border=&quot;1&quot;&gt;&#39;</span>
-            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr bgcolor=&quot;#9acd32&quot;&gt;&lt;th&gt;criterion&lt;/th&gt;&#39;</span>
-            <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaKeys</span><span class="p">:</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">gName</span> <span class="o">=</span> <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">]</span>
-                <span class="k">except</span><span class="p">:</span>
-                    <span class="n">gName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-                <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;th bgcolor=&quot;#FFF79B&quot;&gt;</span><span class="si">%s</span><span class="s1">&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">gName</span><span class="p">)</span>
-            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;&#39;</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nq</span><span class="p">):</span>
-                <span class="n">xName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">quantilesFrequencies</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-                <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;th bgcolor=&quot;#FFF79B&quot;&gt;</span><span class="si">%s</span><span class="s1">&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">xName</span><span class="p">)</span>
-                <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaKeys</span><span class="p">:</span>
-                    <span class="n">formatString</span> <span class="o">=</span> <span class="s1">&#39;&lt;td align=&quot;</span><span class="si">%s</span><span class="s1">&quot;&gt;</span><span class="si">%%</span><span class="s1"> .</span><span class="si">%d</span><span class="s1">f&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">alignFormat</span><span class="p">,</span><span class="n">ndigits</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span>
-                        <span class="n">value</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="nb">max</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">i</span><span class="p">]))</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">value</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="o">-</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="nb">min</span><span class="p">(</span><span class="o">-</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">i</span><span class="p">]))</span>
-                    <span class="n">html</span> <span class="o">+=</span> <span class="n">formatString</span> <span class="o">%</span> <span class="p">(</span><span class="n">value</span><span class="p">)</span>
-                <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;&#39;</span>
-            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;&#39;</span>        
-        <span class="k">return</span> <span class="n">html</span>
-
 
 
 <div class="viewcode-block" id="PerformanceQuantiles.showLimitingQuantiles"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.showLimitingQuantiles">[docs]</a>    <span class="k">def</span> <span class="nf">showLimitingQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ByObjectives</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
@@ -590,140 +726,42 @@
                     <span class="nb">print</span><span class="p">(</span><span class="n">formatString</span> <span class="o">%</span> <span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">()</span>      </div>
 
-<span class="c1">###   update quantiles</span>
-    <span class="k">def</span> <span class="nf">_updateCriterionQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">newValues</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="c1">##        newValues.sort()</span>
-<span class="c1">##        print(g,newValues)</span>
-        <span class="c1">#self.Debug = True</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
-        <span class="c1"># get present state of the quantiles</span>
-        <span class="c1">#s = self.state</span>
-        <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span>
-        <span class="n">np</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-        <span class="n">q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
-        <span class="n">cdf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cdf</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">historySize</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
+<div class="viewcode-block" id="PerformanceQuantiles.showCriterionStatistics"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.showCriterionStatistics">[docs]</a>    <span class="k">def</span> <span class="nf">showCriterionStatistics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        show statistics concerning the evaluation distributions</span>
+<span class="sd">        on each criteria.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">math</span>
+        <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
+        <span class="n">qFreq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span>
+        <span class="n">nc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">qFreq</span><span class="p">)</span>
+        <span class="n">frequencies</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;</span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">qFreq</span><span class="p">]</span>
+        <span class="n">glimitingQuantiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
+        <span class="c1">#actions = self.actions</span>
+        <span class="c1">#n = len(actions)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Performance Quantiles statistics -------*&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Instance name         :&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Quantiles frequencies :&#39;</span><span class="p">,</span> <span class="n">frequencies</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Summary for criterion : </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">g</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  Criterion name      : </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  Comment             : </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;comment&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  Performance range   : [</span><span class="si">%.2f</span><span class="s1">-</span><span class="si">%.2f</span><span class="s1">]&#39;</span>\
+              <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">t</span> <span class="o">=</span> <span class="n">historySize</span>
-        <span class="n">oldfrq</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="p">)]</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">cdf</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">oldfrq</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-        <span class="c1"># new observations</span>
-        <span class="n">nv</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">newValues</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">999</span><span class="p">:</span>
-                <span class="n">nv</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">nv</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-        <span class="n">nt</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nv</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">nv</span><span class="p">,</span><span class="n">nt</span><span class="p">)</span>
-        <span class="c1">###</span>
-        <span class="k">if</span> <span class="n">nt</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># there may be solely missing values observed on g</span>
-            <span class="c1"># Init results newq and newp</span>
-            <span class="c1"># Init indexes: i in q &amp; p &amp; oldfrq, j in nv, ins = # insertions</span>
-            <span class="n">newp</span> <span class="o">=</span> <span class="p">[</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)]</span>
-            <span class="k">if</span> <span class="n">nv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;minValue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-                <span class="n">newq</span><span class="o">=</span> <span class="p">[</span><span class="n">nv</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
-                <span class="n">ins</span> <span class="o">=</span> <span class="mi">1</span>
-                <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span>
-                <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="k">elif</span> <span class="n">nv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:</span>
-                <span class="n">newq</span> <span class="o">=</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
-                <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
-                <span class="n">ins</span> <span class="o">=</span> <span class="mi">0</span>
-                <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">newq</span> <span class="o">=</span> <span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
-                <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span>
-                <span class="n">ins</span> <span class="o">=</span> <span class="mi">0</span>
-                <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
-            <span class="k">if</span> <span class="n">nv</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">q</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;maxValue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nv</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-
-            <span class="c1"># compute new cumulative densities</span>
-            <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">np</span><span class="p">:</span>
-                <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">nt</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">np</span><span class="p">:</span>
-                    <span class="c1">#print(i,j)</span>
-                    <span class="k">if</span> <span class="n">nv</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-                        <span class="n">newq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-                        <span class="c1"># ins += 0</span>
-                        <span class="n">newp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cdf</span><span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">+</span><span class="n">ins</span><span class="p">)</span>
-                        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>                        
-                    <span class="k">elif</span> <span class="n">nv</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-                        <span class="k">if</span> <span class="n">nv</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">newq</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
-                            <span class="n">newq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nv</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
-                            <span class="c1"># ins += 1</span>
-                            <span class="c1"># interpolate cdf of nv[j]</span>
-                            <span class="n">cdfnv</span> <span class="o">=</span> <span class="n">cdf</span><span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+</span> <span class="p">(</span><span class="n">nv</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="n">cdf</span><span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">+</span> <span class="n">ins</span>
-                            <span class="n">newp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cdfnv</span><span class="p">)</span>
-                        <span class="k">else</span><span class="p">:</span>
-                            <span class="n">newp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-                        <span class="n">ins</span> <span class="o">+=</span> <span class="mi">1</span>
-                        <span class="n">j</span> <span class="o">+=</span><span class="mi">1</span>
-                    <span class="k">else</span><span class="p">:</span> <span class="c1"># nv[j] = q[i]</span>
-                        <span class="n">newp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-                        <span class="n">ins</span> <span class="o">+=</span> <span class="mi">1</span>
-                        <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">nt</span><span class="p">:</span>
-                    <span class="k">for</span> <span class="n">ni</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">np</span><span class="p">):</span>
-                        <span class="n">newq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">ni</span><span class="p">])</span>
-                        <span class="n">newp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cdf</span><span class="p">[</span><span class="n">q</span><span class="p">[</span><span class="n">ni</span><span class="p">]]</span><span class="o">+</span><span class="n">ins</span><span class="p">)</span>
-                        <span class="c1">#ins += 0</span>
-                    <span class="n">i</span> <span class="o">=</span> <span class="n">np</span>
-            <span class="k">for</span> <span class="n">nj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">nt</span><span class="p">):</span>
-                <span class="n">ins</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="k">if</span> <span class="n">newq</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">nv</span><span class="p">[</span><span class="n">nj</span><span class="p">]:</span>
-                    <span class="n">newq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nv</span><span class="p">[</span><span class="n">nj</span><span class="p">])</span>
-                    <span class="n">newp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">newp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">newp</span> <span class="o">=</span> <span class="n">newp</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">newq</span> <span class="o">=</span> <span class="n">newq</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">newp</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">newq</span><span class="p">)</span>
-                    
-            <span class="c1"># renormalising frequencies</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;#inserts = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">ins</span><span class="p">)</span>
-            <span class="n">t</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nv</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">newq</span><span class="p">)):</span>
-                <span class="n">newp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/=</span> <span class="n">newp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p </span><span class="se">\t</span><span class="s1"> q \ (t+1)*q&#39;</span><span class="p">)</span>
-                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">newq</span><span class="p">)):</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%.3f</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">newp</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">newq</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">newp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;t = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">t</span><span class="p">)</span>
-
-            <span class="c1"># compute new state by interpolation</span>
-            <span class="n">ns</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">newq</span><span class="p">[</span><span class="mi">0</span><span class="p">])])</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-            <span class="n">np</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">np</span><span class="p">):</span>
-                <span class="n">x</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-                <span class="n">ns</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolateQuantile</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">newq</span><span class="p">,</span><span class="n">newp</span><span class="p">)</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">ns</span><span class="p">)</span>
-            
-            <span class="c1"># store new state</span>
-            <span class="n">state</span> <span class="o">=</span> <span class="n">ns</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">state</span>
-            <span class="n">q</span> <span class="o">=</span> <span class="p">[</span><span class="n">state</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">state</span><span class="p">]</span>
-            <span class="n">q</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">q</span>
-            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">state</span><span class="p">:</span>
-                <span class="n">cdf</span><span class="p">[</span><span class="n">state</span><span class="p">[</span><span class="n">p</span><span class="p">]]</span> <span class="o">=</span> <span class="n">p</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">cdf</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">cdf</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  Performance range   : [</span><span class="si">%.2f</span><span class="s1">;</span><span class="si">%.2f</span><span class="s1">]&#39;</span>\
+              <span class="o">%</span> <span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  Quantiles repartition :&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    p%</span><span class="se">\t</span><span class="s1"> q(p)&#39;</span><span class="p">)</span>  
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   </span><span class="si">%.0f</span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">qFreq</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">glimitingQuantiles</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>               </div>
+<span class="c1">##                print(&#39;  mean evaluation       : %.2f&#39; % (averageEvaluation))</span>
+<span class="c1">##                print(&#39;  standard deviation    : %.2f&#39; % (stdDevEvaluation))</span>
+<span class="c1">##                print(&#39;  maximal evaluation    : %.2f&#39; % (maxEvaluation))</span>
+<span class="c1">##                print(&#39;  quantile Q3 (x_75)    : %.2f&#39; % (quantileQ3))</span>
+<span class="c1">##                print(&#39;  median evaluation     : %.2f&#39; % (quantileQ2))</span>
+<span class="c1">##                print(&#39;  quantile Q1 (x_25)    : %.2f&#39; % (quantileQ1))</span>
+<span class="c1">##                print(&#39;  minimal evaluation    : %.2f&#39; % (minEvaluation))</span>
 
         
 <div class="viewcode-block" id="PerformanceQuantiles.updateQuantiles"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.updateQuantiles">[docs]</a>    <span class="k">def</span> <span class="nf">updateQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">newData</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -754,20 +792,21 @@
 <span class="c1">#----------test classes and methods ----------------</span>
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
 
-    <span class="kn">import</span> <span class="nn">performanceQuantiles</span>
+    <span class="kn">from</span> <span class="nn">performanceQuantiles</span> <span class="k">import</span> <span class="o">*</span>
+    <span class="n">seed</span> <span class="o">=</span> <span class="mi">105</span>
     <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
     <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
-    <span class="n">nbrActions</span><span class="o">=</span><span class="mi">100</span>
+    <span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
     <span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">13</span>
     <span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>
-                                    <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                                    <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="c1">#print(pq.limitingQuantiles)</span>
-    <span class="n">pq</span><span class="o">.</span><span class="n">showLimitingQuantiles</span><span class="p">(</span><span class="n">ByObjectives</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">pq</span><span class="o">.</span><span class="n">showHTMLLimitingQuantiles</span><span class="p">(</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">pq</span><span class="o">.</span><span class="n">showActions</span><span class="p">()</span>
-    <span class="n">pq</span><span class="o">.</span><span class="n">showCriteria</span><span class="p">(</span><span class="n">ByObjectives</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
+    <span class="c1">#pq.showLimitingQuantiles(ByObjectives=False)</span>
+    <span class="c1">#pq.showHTMLLimitingQuantiles(Transposed=True)</span>
+    <span class="c1">#pq.showActions()</span>
+    <span class="c1">#pq.showCriteria(ByObjectives=True)</span>
+    <span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">newActions</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 <span class="c1">##    for i in range(100):</span>
 <span class="c1">##        newAction = tpg.randomAction()</span>
@@ -775,16 +814,10 @@
     <span class="c1">#print(newActions)</span>
     <span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 <span class="c1">##    pq.showActions()</span>
-    <span class="n">pq</span><span class="o">.</span><span class="n">showCriteria</span><span class="p">()</span>
+    <span class="c1">#pq.showCriteria()</span>
     <span class="n">pq</span><span class="o">.</span><span class="n">showHTMLLimitingQuantiles</span><span class="p">(</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="c1">##    newActions = []</span>
-<span class="c1">##    for i in range(50):</span>
-<span class="c1">##        newAction = tpg.randomAction()</span>
-<span class="c1">##        newActions.append(newAction)</span>
-<span class="c1">##    #print(newActions)</span>
-<span class="c1">##    pq.updateQuantiles(newActions)</span>
-<span class="c1">##    pq.showActions()</span>
-<span class="c1">##    pq.showCriteria()</span>
+    <span class="n">pq</span><span class="o">.</span><span class="n">showCriterionStatistics</span><span class="p">(</span><span class="s1">&#39;c01&#39;</span><span class="p">)</span>
+    <span class="n">pq</span><span class="o">.</span><span class="n">showCriterionStatistics</span><span class="p">(</span><span class="s1">&#39;b01&#39;</span><span class="p">)</span>
 
 </pre></div>
 

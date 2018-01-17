@@ -4467,6 +4467,13 @@ given performance tableau.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="performanceQuantiles.PerformanceQuantiles.showCriterionStatistics">
+<code class="descname">showCriterionStatistics</code><span class="sig-paren">(</span><em>g</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/performanceQuantiles.html#PerformanceQuantiles.showCriterionStatistics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#performanceQuantiles.PerformanceQuantiles.showCriterionStatistics" title="Permalink to this definition">¶</a></dt>
+<dd><p>show statistics concerning the evaluation distributions
+on each criteria.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="performanceQuantiles.PerformanceQuantiles.showHTMLLimitingQuantiles">
 <code class="descname">showHTMLLimitingQuantiles</code><span class="sig-paren">(</span><em>Sorted=True</em>, <em>Transposed=False</em>, <em>ndigits=2</em>, <em>ContentCentered=True</em>, <em>title=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/performanceQuantiles.html#PerformanceQuantiles.showHTMLLimitingQuantiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#performanceQuantiles.PerformanceQuantiles.showHTMLLimitingQuantiles" title="Permalink to this definition">¶</a></dt>
 <dd><p>shows the html version of the limiting quantiles in a browser window.</p>
@@ -6405,11 +6412,11 @@ and may not contain special characters like &#8216;-&#8216; or &#8216;_&#8217;.<
 </dd></dl>
 
 <dl class="method">
-<dt id="sortingDigraphs.NormedQuantilesRatingDigraph.htmlPerformanceHeatmap">
-<code class="descname">htmlPerformanceHeatmap</code><span class="sig-paren">(</span><em>argCriteriaList=None</em>, <em>argActionsList=None</em>, <em>minimalComponentSize=1</em>, <em>quantiles=None</em>, <em>strategy='average'</em>, <em>ndigits=2</em>, <em>contentCentered=True</em>, <em>colorLevels=None</em>, <em>pageTitle='Performance Heatmap'</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.htmlPerformanceHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.htmlPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
+<dt id="sortingDigraphs.NormedQuantilesRatingDigraph.htmlRatingHeatmap">
+<code class="descname">htmlRatingHeatmap</code><span class="sig-paren">(</span><em>argCriteriaList=None</em>, <em>argActionsList=None</em>, <em>quantiles=None</em>, <em>ndigits=2</em>, <em>contentCentered=True</em>, <em>colorLevels=None</em>, <em>pageTitle='Rating Heatmap'</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.htmlRatingHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.htmlRatingHeatmap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table
 actions x criteria in html format.</p>
-<p>See the corresponding perfTabs.showHTMLPerformanceHeatMap() method.</p>
+<p>See the corresponding <a href="#id2"><span class="problematic" id="id3">:py:math:`perfTabs.showHTMLPerformanceHeatMap`</span></a> method.</p>
 </dd></dl>
 
 <dl class="method">
@@ -6427,46 +6434,6 @@ a subset of the decision actions.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="sortingDigraphs.NormedQuantilesRatingDigraph.showHTMLPerformanceHeatmap">
-<code class="descname">showHTMLPerformanceHeatmap</code><span class="sig-paren">(</span><em>actionsList=None</em>, <em>criteriaList=None</em>, <em>colorLevels=7</em>, <em>pageTitle=None</em>, <em>ndigits=2</em>, <em>minimalComponentSize=1</em>, <em>quantiles=None</em>, <em>strategy='average'</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.showHTMLPerformanceHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.showHTMLPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
-<dd><p>shows the html heatmap version of the performance tableau in a browser window
-(see perfTabs.htmlPerformanceHeatMap() method ).</p>
-<p><strong>Parameters</strong>:</p>
-<blockquote>
-<div><ul class="simple">
-<li><em>actionsList</em> and <em>criteriaList</em>, if provided,  give the possibility to show the decision alternatives, resp. criteria, in a given ordering.</li>
-<li><em>ndigits</em> = 0 may be used to show integer evaluation values.</li>
-<li>If no <em>actionsList</em> is provided, the decision actions are ordered from the best to the worst. This
-ranking is obtained by default with the Copeland rule applied on a standard <em>BipolarOutrankingDigraph</em>.
-When the <em>SparseModel</em> flag is put to <em>True</em>, a sparse <em>PreRankedOutrankingDigraph</em> construction is used instead.</li>
-<li>The <em>minimalComponentSize</em> allows to control the fill rate of the pre-ranked model.
-If <em>minimalComponentSize</em> = <em>n</em> (the number of decision actions) both the pre-ranked model will be
-in fact equivalent to the standard model.</li>
-<li>It may interesting in some cases to use <em>RankingRule</em> = &#8216;NetFlows&#8217;.</li>
-<li>Quantiles used for the pre-ranked decomposition are put by default to <em>n</em>
-(the number of decision alternatives) for <em>n</em> &lt; 50. For larger cardinalities up to 1000, quantiles = <em>n</em> /10.
-For bigger performance tableaux the <em>quantiles</em> parameter may be set to a much lower value
-not exceeding usually 1000.</li>
-<li>The pre-ranking may be obtained with three ordering strategies for the
-quantiles equivalence classes: &#8216;average&#8217; (default), &#8216;optimistic&#8217; or  &#8216;pessimistic&#8217;.</li>
-<li>With <em>Correlations</em> = <em>True</em> and <em>criteriaList</em> = <em>None</em>, the criteria will be presented from left to right in decreasing
-order of the correlations between the marginal criterion based ranking and the global ranking used for
-presenting the decision alternatives.</li>
-<li>For large performance Tableaux, <em>multiprocessing</em> techniques may be used by setting
-<em>Threading</em> = <em>True</em> in order to speed up the computations; especially when <em>Correlations</em> = <em>True</em>.</li>
-<li>By default, the number of cores available, will be detected. It may be efficient in a HPC context
-to indicate the exact number of singled threaded cores in fact allocated to the job.</li>
-</ul>
-</div></blockquote>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceTableau</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/perfTabsExample.png"><img alt="HTML heat map of the performance tableau" class="align-center" src="_images/perfTabsExample.png" style="width: 600px;" /></a>
-</dd></dl>
-
-<dl class="method">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph.showHTMLQuantilesSorting">
 <code class="descname">showHTMLQuantilesSorting</code><span class="sig-paren">(</span><em>Descending=True</em>, <em>strategy='average'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.showHTMLQuantilesSorting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.showHTMLQuantilesSorting" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shows the html version of the quantile sorting result in a browser window.</p>
@@ -6479,6 +6446,33 @@ to indicate the exact number of singled threaded cores in fact allocated to the 
 </ul>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.NormedQuantilesRatingDigraph.showHTMLRatingHeatmap">
+<code class="descname">showHTMLRatingHeatmap</code><span class="sig-paren">(</span><em>actionsList=None</em>, <em>criteriaList=None</em>, <em>colorLevels=7</em>, <em>pageTitle=None</em>, <em>ndigits=2</em>, <em>quantiles=None</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.showHTMLRatingHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.showHTMLRatingHeatmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specialisation of html heatmap version showing the performance tableau in a browser window;
+see <code class="xref py py-meth docutils literal"><span class="pre">perfTabs.showHTMLPerformanceHeatMap()</span></code> method.</p>
+<p><strong>Parameters</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>actionsList</em> and <em>criteriaList</em>, if provided,  give the possibility to show the decision alternatives, resp. criteria, in a given ordering.</li>
+<li><em>ndigits</em> = 0 may be used to show integer evaluation values.</li>
+<li>If no <em>actionsList</em> is provided, the decision actions are ordered from
+the best to the worst following the ranking of the NormedQuatilesRatingDigraph instance.              - It may interesting in some cases to use <em>RankingRule</em> = &#8216;NetFlows&#8217;.</li>
+<li>With <em>Correlations</em> = <em>True</em> and <em>criteriaList</em> = <em>None</em>, the criteria will be presented from left to right in decreasing
+order of the correlations between the marginal criterion based ranking and the global ranking used for
+presenting the decision alternatives.</li>
+<li>Computing the marginal correlations may be boosted with Threading = True,
+if multiple parallel computing cores are available.</li>
+</ul>
+</div></blockquote>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceTableau</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/perfTabsExample.png"><img alt="HTML heat map of the performance tableau" class="align-center" src="_images/perfTabsExample.png" style="width: 600px;" /></a>
 </dd></dl>
 
 <dl class="method">
@@ -7970,7 +7964,7 @@ d = ax + by.</p>
 <dt id="arithmetics.computePiDecimals">
 <code class="descclassname">arithmetics.</code><code class="descname">computePiDecimals</code><span class="sig-paren">(</span><em>decimalWordLength=4</em>, <em>nbrOfWords=600</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#computePiDecimals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#arithmetics.computePiDecimals" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders at least decimalWordLenght * nbrOfWords (default: 4x600=2400) decimals of <img class="math" src="_images/math/b7793e4f08d00aca47e272dcdfeb70f933dac222.png" alt="\pi"/>.
-The Python transcription here recodes an original C code of unknown author (see <a class="footnote-reference" href="#id3" id="id2">[*]</a>).</p>
+The Python transcription here recodes an original C code of unknown author (see <a class="footnote-reference" href="#id5" id="id4">[*]</a>).</p>
 <p>Uses the following infinite Euler series:</p>
 <blockquote>
 <div><img class="math" src="_images/math/c9284725ffe2f18f2df36650b5c0fd56ff2cfcff.png" alt="\pi = 2 * \sum_{n=0}^{\infty} [ (n !) / (1 * 3  * 5 ... * (2n+1)) ]."/></div></blockquote>
@@ -7990,10 +7984,10 @@ The Python transcription here recodes an original C code of unknown author (see 
 <span class="go">0.0338 sec.</span>
 </pre></div>
 </div>
-<table class="docutils footnote" frame="void" id="id3" rules="none">
+<table class="docutils footnote" frame="void" id="id5" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[*]</a></td><td><em>Source:</em> J.-P. Delahaye &#8220;<em>Le fascinant nombre</em> <img class="math" src="_images/math/b7793e4f08d00aca47e272dcdfeb70f933dac222.png" alt="\pi"/>&#8221;, Pour la science Belin 1997 p.95.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id4">[*]</a></td><td><em>Source:</em> J.-P. Delahaye &#8220;<em>Le fascinant nombre</em> <img class="math" src="_images/math/b7793e4f08d00aca47e272dcdfeb70f933dac222.png" alt="\pi"/>&#8221;, Pour la science Belin 1997 p.95.</td></tr>
 </tbody>
 </table>
 </dd></dl>

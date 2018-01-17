@@ -5518,9 +5518,6 @@
         <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">perfTab</span><span class="p">,</span><span class="n">hasNoVeto</span><span class="o">=</span><span class="n">hasNoVeto</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                      <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="n">nbrCores</span><span class="p">)</span>
         <span class="n">g</span><span class="o">.</span><span class="n">recodeValuation</span><span class="p">(</span><span class="n">minValuation</span><span class="p">,</span><span class="n">maxValuation</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="n">ranking</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
-            <span class="n">g</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">(</span><span class="n">actionsList</span><span class="o">=</span><span class="n">ranking</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">actions</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">completeRelation</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">relation</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">relation</span>
@@ -5545,9 +5542,9 @@
             <span class="n">nf</span> <span class="o">=</span> <span class="n">NetFlowsOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>           
             <span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
             <span class="n">corrnf</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="n">nf</span><span class="o">.</span><span class="n">netFlowsOrder</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;nf:&#39;</span><span class="p">,</span> <span class="n">corrnf</span><span class="p">)</span>
+            <span class="c1">#print(&#39;nf:&#39;, corrnf)</span>
             <span class="n">corrcop</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandOrder</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cop&#39;</span><span class="p">,</span> <span class="n">corrcop</span><span class="p">)</span>
+            <span class="c1">#print(&#39;cop&#39;, corrcop)</span>
             <span class="k">if</span> <span class="n">corrnf</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">corrcop</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]:</span>
                 <span class="n">actionsList</span> <span class="o">=</span> <span class="n">nf</span><span class="o">.</span><span class="n">netFlowsRanking</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">rankingRule</span> <span class="o">=</span> <span class="s1">&#39;NetFlows&#39;</span>
@@ -5614,7 +5611,7 @@
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span>
                         <span class="n">gQuantiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">gPrefThrCst</span> <span class="o">-</span> <span class="n">gQuantiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">gPrefThrSlope</span>
                     <span class="k">else</span><span class="p">:</span>
-                        <span class="n">gQuantiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-=</span> <span class="n">gPrefThrCst</span> <span class="o">+</span> <span class="n">gQuantiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">gPrefThrSlope</span>
+                        <span class="n">gQuantiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">gPrefThrCst</span> <span class="o">+</span> <span class="n">gQuantiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">gPrefThrSlope</span>
             <span class="c1"># we ignore the 1.00 quantile and replace it with +infty        </span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span>
                 <span class="n">gQuantiles</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span>
@@ -5632,7 +5629,7 @@
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span>
                         <span class="n">gQuantiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">gPrefThrCst</span> <span class="o">-</span> <span class="n">gQuantiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">gPrefThrSlope</span>
                     <span class="k">else</span><span class="p">:</span>
-                        <span class="n">gQuantiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-=</span> <span class="n">gPrefThrCst</span> <span class="o">+</span> <span class="n">gQuantiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">gPrefThrSlope</span>
+                        <span class="n">gQuantiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">gPrefThrCst</span> <span class="o">+</span> <span class="n">gQuantiles</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">gPrefThrSlope</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">],</span><span class="n">gQuantiles</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">gQuantiles</span>
@@ -5978,17 +5975,13 @@
                              <span class="n">fontSize</span><span class="o">=</span><span class="n">fontSize</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relationOrig</span></div>
 
-<div class="viewcode-block" id="NormedQuantilesRatingDigraph.htmlPerformanceHeatmap"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.htmlPerformanceHeatmap">[docs]</a>    <span class="k">def</span> <span class="nf">htmlPerformanceHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argCriteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="NormedQuantilesRatingDigraph.htmlRatingHeatmap"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.htmlRatingHeatmap">[docs]</a>    <span class="k">def</span> <span class="nf">htmlRatingHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argCriteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                <span class="n">argActionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                               <span class="c1">#SparseModel=False,</span>
-                               <span class="c1">#rankingRule=&#39;best&#39;,</span>
-                               <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                                <span class="n">quantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                               <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
                                <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
                                <span class="n">contentCentered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                <span class="n">colorLevels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                               <span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Performance Heatmap&#39;</span><span class="p">,</span>
+                               <span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Rating Heatmap&#39;</span><span class="p">,</span>
                                <span class="n">Correlations</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
@@ -5997,7 +5990,7 @@
 <span class="sd">        Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table</span>
 <span class="sd">        actions x criteria in html format.</span>
 
-<span class="sd">        See the corresponding perfTabs.showHTMLPerformanceHeatMap() method.</span>
+<span class="sd">        See the corresponding :py:math:`perfTabs.showHTMLPerformanceHeatMap` method.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;see browser&#39;</span><span class="p">)</span>
         <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
@@ -6056,14 +6049,13 @@
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/head&gt;</span><span class="se">\n</span><span class="s1">&lt;body&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;h2&gt;</span><span class="si">%s</span><span class="s1">&lt;/h2&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">pageTitle</span>
         
-        <span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="k">import</span> <span class="n">PreRankedOutrankingDigraph</span>
+<span class="c1">##        from sparseOutrankingDigraphs import PreRankedOutrankingDigraph</span>
         <span class="k">if</span> <span class="n">argCriteriaList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">argCriteriaList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
             <span class="n">criteriaList</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">criteriaList</span> <span class="o">=</span> <span class="n">argCriteriaList</span>
 
-        <span class="c1">#if rankingRule == None:</span>
         <span class="n">rankingRule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankingRule</span>
         <span class="k">if</span> <span class="n">argActionsList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">actionsList</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actionsRanking</span>
@@ -6072,53 +6064,6 @@
         <span class="n">na</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)</span>
         <span class="n">profiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span>
         <span class="n">categories</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">categories</span>
-<span class="c1">##        if SparseModel:</span>
-<span class="c1">##            if quantiles == None:</span>
-<span class="c1">##                if na &lt; 100:</span>
-<span class="c1">##                    q = 5</span>
-<span class="c1">##                else:</span>
-<span class="c1">##                    q = None</span>
-<span class="c1">##            else:</span>
-<span class="c1">##                q = quantiles</span>
-<span class="c1">##            g = PreRankedOutrankingDigraph(self,quantiles=q,LowerClosed=False,</span>
-<span class="c1">##                                           minimalComponentSize=minimalComponentSize,</span>
-<span class="c1">##                                       componentRankingRule=rankingRule,Threading=Threading,</span>
-<span class="c1">##                                       nbrOfCPUs=nbrOfCPUs)</span>
-<span class="c1">##            if argActionsList == None:</span>
-<span class="c1">##                actionsList = g.boostedRanking</span>
-<span class="c1">##            else:</span>
-<span class="c1">##                actionsList = argActionsList</span>
-<span class="c1">##        else: # standard outranking model</span>
-<span class="c1">##            if quantiles == None:</span>
-<span class="c1">##                quantiles = na</span>
-<span class="c1">##            from outrankingDigraphs import BipolarOutrankingDigraph</span>
-<span class="c1">##            g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)</span>
-<span class="c1">##            if rankingRule == &#39;best&#39;:</span>
-<span class="c1">##                from linearOrders import NetFlowsOrder,CopelandOrder</span>
-<span class="c1">##                nf = NetFlowsOrder(g)           </span>
-<span class="c1">##                cop = CopelandOrder(g)</span>
-<span class="c1">##                corrnf = g.computeOrderCorrelation(nf.netFlowsOrder)</span>
-<span class="c1">##                print(&#39;nf:&#39;, corrnf)</span>
-<span class="c1">##                corrcop = g.computeOrderCorrelation(cop.copelandOrder)</span>
-<span class="c1">##                print(&#39;cop&#39;, corrcop)</span>
-<span class="c1">##                if corrnf[&#39;correlation&#39;] &gt;= corrcop[&#39;correlation&#39;]:</span>
-<span class="c1">##                    actionsList = nf.netFlowsRanking</span>
-<span class="c1">##                    self.rankingRule = &#39;NetFlows&#39;</span>
-<span class="c1">##                else:</span>
-<span class="c1">##                    actionsList = cop.copelandRanking</span>
-<span class="c1">##                    self.rankingRule = &#39;Copeland&#39;</span>
-<span class="c1">##            elif rankingRule == &#39;Copeland&#39;:</span>
-<span class="c1">##                from linearOrders import CopelandOrder</span>
-<span class="c1">##                cop = CopelandOrder(g)</span>
-<span class="c1">##                actionsList = cop.copelandRanking</span>
-<span class="c1">##            else: # net flows by default</span>
-<span class="c1">##                from linearOrders import NetFlowsOrder</span>
-<span class="c1">##                nf = NetFlowsOrder(g)</span>
-<span class="c1">##                actionsList = nf.netFlowsRanking</span>
-              
-<span class="c1">##        if SparseModel:</span>
-<span class="c1">##            rankCorrelation = None</span>
-<span class="c1">##        else:</span>
         <span class="k">if</span> <span class="n">Correlations</span><span class="p">:</span>
             <span class="n">rankCorrelation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)))</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
@@ -6285,49 +6230,31 @@
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">showActionCategories</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="NormedQuantilesRatingDigraph.showHTMLPerformanceHeatmap"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.showHTMLPerformanceHeatmap">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="NormedQuantilesRatingDigraph.showHTMLRatingHeatmap"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.showHTMLRatingHeatmap">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLRatingHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">criteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">colorLevels</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
                                    <span class="n">pageTitle</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-                                   <span class="c1">#SparseModel=False,</span>
-                                   <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                                   <span class="c1">#rankingRule=&#39;NetFlows&#39;,</span>
                                    <span class="n">quantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                                   <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
                                    <span class="n">Correlations</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        shows the html heatmap version of the performance tableau in a browser window</span>
-<span class="sd">        (see perfTabs.htmlPerformanceHeatMap() method ).</span>
+<span class="sd">        Specialisation of html heatmap version showing the performance tableau in a browser window;</span>
+<span class="sd">        see :py:meth:`perfTabs.showHTMLPerformanceHeatMap` method.</span>
 
 <span class="sd">        **Parameters**:</span>
 
 <span class="sd">              - *actionsList* and *criteriaList*, if provided,  give the possibility to show the decision alternatives, resp. criteria, in a given ordering.</span>
 <span class="sd">              - *ndigits* = 0 may be used to show integer evaluation values.</span>
-<span class="sd">              - If no *actionsList* is provided, the decision actions are ordered from the best to the worst. This</span>
-<span class="sd">                ranking is obtained by default with the Copeland rule applied on a standard *BipolarOutrankingDigraph*.</span>
-<span class="sd">                When the *SparseModel* flag is put to *True*, a sparse *PreRankedOutrankingDigraph* construction is used instead.                </span>
-<span class="sd">              - The *minimalComponentSize* allows to control the fill rate of the pre-ranked model.</span>
-<span class="sd">                If *minimalComponentSize* = *n* (the number of decision actions) both the pre-ranked model will be</span>
-<span class="sd">                in fact equivalent to the standard model.</span>
-<span class="sd">              - It may interesting in some cases to use *RankingRule* = &#39;NetFlows&#39;.</span>
-<span class="sd">              - Quantiles used for the pre-ranked decomposition are put by default to *n*</span>
-<span class="sd">                (the number of decision alternatives) for *n* &lt; 50. For larger cardinalities up to 1000, quantiles = *n* /10.</span>
-<span class="sd">                For bigger performance tableaux the *quantiles* parameter may be set to a much lower value</span>
-<span class="sd">                not exceeding usually 1000.</span>
-<span class="sd">              - The pre-ranking may be obtained with three ordering strategies for the</span>
-<span class="sd">                quantiles equivalence classes: &#39;average&#39; (default), &#39;optimistic&#39; or  &#39;pessimistic&#39;.</span>
+<span class="sd">              - If no *actionsList* is provided, the decision actions are ordered from</span>
+<span class="sd">                the best to the worst following the ranking of the NormedQuatilesRatingDigraph instance.              - It may interesting in some cases to use *RankingRule* = &#39;NetFlows&#39;.</span>
 <span class="sd">              - With *Correlations* = *True* and *criteriaList* = *None*, the criteria will be presented from left to right in decreasing</span>
 <span class="sd">                order of the correlations between the marginal criterion based ranking and the global ranking used for</span>
 <span class="sd">                presenting the decision alternatives.</span>
-<span class="sd">              - For large performance Tableaux, *multiprocessing* techniques may be used by setting</span>
-<span class="sd">                *Threading* = *True* in order to speed up the computations; especially when *Correlations* = *True*.</span>
-<span class="sd">              - By default, the number of cores available, will be detected. It may be efficient in a HPC context</span>
-<span class="sd">                to indicate the exact number of singled threaded cores in fact allocated to the job.</span>
-
+<span class="sd">              - Computing the marginal correlations may be boosted with Threading = True,</span>
+<span class="sd">                if multiple parallel computing cores are available.</span>
 
 <span class="sd">        &gt;&gt;&gt; from randomPerfTabs import RandomPerformanceTableau</span>
 <span class="sd">        &gt;&gt;&gt; rt = RandomPerformanceTableau(seed=100)</span>
@@ -6345,13 +6272,9 @@
         <span class="k">if</span> <span class="n">pageTitle</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">pageTitle</span> <span class="o">=</span> <span class="s1">&#39;Heatmap of Performance Tableau </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
             
-        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">htmlPerformanceHeatmap</span><span class="p">(</span><span class="n">argCriteriaList</span><span class="o">=</span><span class="n">criteriaList</span><span class="p">,</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">htmlRatingHeatmap</span><span class="p">(</span><span class="n">argCriteriaList</span><span class="o">=</span><span class="n">criteriaList</span><span class="p">,</span>
                                              <span class="n">argActionsList</span><span class="o">=</span><span class="n">actionsList</span><span class="p">,</span>
-                                             <span class="c1">#SparseModel=SparseModel,</span>
-                                             <span class="n">minimalComponentSize</span><span class="o">=</span><span class="n">minimalComponentSize</span><span class="p">,</span>
-                                             <span class="c1">#rankingRule=rankingRule,</span>
                                              <span class="n">quantiles</span><span class="o">=</span><span class="n">quantiles</span><span class="p">,</span>
-                                             <span class="n">strategy</span><span class="o">=</span><span class="n">strategy</span><span class="p">,</span>
                                              <span class="n">ndigits</span><span class="o">=</span><span class="n">ndigits</span><span class="p">,</span>
                                              <span class="n">colorLevels</span><span class="o">=</span><span class="n">colorLevels</span><span class="p">,</span>
                                              <span class="n">pageTitle</span><span class="o">=</span><span class="n">pageTitle</span><span class="p">,</span>
@@ -6464,7 +6387,7 @@
 <span class="s2">    ****************************************************</span>
 <span class="s2">    * Python sortingDigraphs module                    *</span>
 <span class="s2">    * depends on BipolarOutrankingDigraph and          *</span>
-<span class="s2">    * $Revision: 2380 $                                 *</span>
+<span class="s2">    * $Revision: 2381 $                                 *</span>
 <span class="s2">    * Copyright (C) 2010 Raymond Bisdorff              *</span>
 <span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
 <span class="s2">    * to the extent permitted by the applicable law.   *</span>
@@ -6621,7 +6544,7 @@
     <span class="c1">#ira.showRefinedQuantileOrdering()</span>
     <span class="c1">#ira.showOrderedRelationTable()</span>
     <span class="c1">#ira.showSortingCharacteristics()</span>
-    <span class="n">ira</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heat map of performances&#39;</span><span class="p">,</span>
+    <span class="n">ira</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heat map of the ratings&#39;</span><span class="p">,</span>
                                    <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                    <span class="c1">#rankingRule=&#39;best&#39;,</span>
                                    <span class="p">)</span>
@@ -6631,7 +6554,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. december 2010                *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2380 $                  *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2381 $                  *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>
