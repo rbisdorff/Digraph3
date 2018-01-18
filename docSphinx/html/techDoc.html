@@ -6294,7 +6294,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</p>
 <dl class="class">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph">
-<em class="property">class </em><code class="descclassname">sortingDigraphs.</code><code class="descname">NormedQuantilesRatingDigraph</code><span class="sig-paren">(</span><em>argPerfQuantiles=None</em>, <em>newData=None</em>, <em>hasNoVeto=False</em>, <em>PrefThresholds=False</em>, <em>valuationScale=(-1</em>, <em>1)</em>, <em>rankingRule='best'</em>, <em>WithSorting=False</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrCores=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">sortingDigraphs.</code><code class="descname">NormedQuantilesRatingDigraph</code><span class="sig-paren">(</span><em>argPerfQuantiles=None</em>, <em>newData=None</em>, <em>hasNoVeto=False</em>, <em>PrefThresholds=False</em>, <em>valuationScale=(-1</em>, <em>1)</em>, <em>rankingRule='best'</em>, <em>WithSorting=False</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrOfCPUs=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.QuantilesSortingDigraph</span></code></a>, <a class="reference internal" href="#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a></p>
 <p>Specialisation of the sortingDigraph Class
 for absolute rating of a new set of decision actions with
@@ -6416,7 +6416,7 @@ and may not contain special characters like &#8216;-&#8216; or &#8216;_&#8217;.<
 <code class="descname">htmlRatingHeatmap</code><span class="sig-paren">(</span><em>argCriteriaList=None</em>, <em>argActionsList=None</em>, <em>quantiles=None</em>, <em>ndigits=2</em>, <em>contentCentered=True</em>, <em>colorLevels=None</em>, <em>pageTitle='Rating Heatmap'</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.htmlRatingHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.htmlRatingHeatmap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table
 actions x criteria in html format.</p>
-<p>See the corresponding <a href="#id2"><span class="problematic" id="id3">:py:math:`perfTabs.showHTMLPerformanceHeatMap`</span></a> method.</p>
+<p>See the corresponding <code class="xref py py-meth docutils literal"><span class="pre">perfTabs.showHTMLPerformanceHeatMap()</span></code> method.</p>
 </dd></dl>
 
 <dl class="method">
@@ -6490,6 +6490,14 @@ if multiple parallel computing cores are available.</li>
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph.showQuantilesSorting">
 <code class="descname">showQuantilesSorting</code><span class="sig-paren">(</span><em>strategy='average'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.showQuantilesSorting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.showQuantilesSorting" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dummy show method for the commenting computeQuantileOrdering() method.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.NormedQuantilesRatingDigraph.showRankingScores">
+<code class="descname">showRankingScores</code><span class="sig-paren">(</span><em>direction='descending'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.showRankingScores"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.showRankingScores" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shows the ranking scores of the Copeland or the netflows ranking rule,
+the number of incoming arcs minus the number of outgoing arcs, resp.
+the sum of inflows minus the outflows.</p>
 </dd></dl>
 
 </dd></dl>
@@ -7964,7 +7972,7 @@ d = ax + by.</p>
 <dt id="arithmetics.computePiDecimals">
 <code class="descclassname">arithmetics.</code><code class="descname">computePiDecimals</code><span class="sig-paren">(</span><em>decimalWordLength=4</em>, <em>nbrOfWords=600</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#computePiDecimals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#arithmetics.computePiDecimals" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders at least decimalWordLenght * nbrOfWords (default: 4x600=2400) decimals of <img class="math" src="_images/math/b7793e4f08d00aca47e272dcdfeb70f933dac222.png" alt="\pi"/>.
-The Python transcription here recodes an original C code of unknown author (see <a class="footnote-reference" href="#id5" id="id4">[*]</a>).</p>
+The Python transcription here recodes an original C code of unknown author (see <a class="footnote-reference" href="#id3" id="id2">[*]</a>).</p>
 <p>Uses the following infinite Euler series:</p>
 <blockquote>
 <div><img class="math" src="_images/math/c9284725ffe2f18f2df36650b5c0fd56ff2cfcff.png" alt="\pi = 2 * \sum_{n=0}^{\infty} [ (n !) / (1 * 3  * 5 ... * (2n+1)) ]."/></div></blockquote>
@@ -7984,10 +7992,10 @@ The Python transcription here recodes an original C code of unknown author (see 
 <span class="go">0.0338 sec.</span>
 </pre></div>
 </div>
-<table class="docutils footnote" frame="void" id="id5" rules="none">
+<table class="docutils footnote" frame="void" id="id3" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id4">[*]</a></td><td><em>Source:</em> J.-P. Delahaye &#8220;<em>Le fascinant nombre</em> <img class="math" src="_images/math/b7793e4f08d00aca47e272dcdfeb70f933dac222.png" alt="\pi"/>&#8221;, Pour la science Belin 1997 p.95.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id2">[*]</a></td><td><em>Source:</em> J.-P. Delahaye &#8220;<em>Le fascinant nombre</em> <img class="math" src="_images/math/b7793e4f08d00aca47e272dcdfeb70f933dac222.png" alt="\pi"/>&#8221;, Pour la science Belin 1997 p.95.</td></tr>
 </tbody>
 </table>
 </dd></dl>

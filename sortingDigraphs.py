@@ -5304,6 +5304,33 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         :align: center
 
     """
+    def __repr__(self):
+        """
+        Default presentation method for BipolarOutrankingDigraph instance.
+        """
+        print('*----- show short --------------*')
+        print('Instance name       : %s' % self.name )
+        print('# Criteria          : %d' % len(self.criteria) )
+        print('# Quantile profiles : %d' % len(self.profiles) )
+        print('# New actions       : %d' % len(self.newActions) )
+        print('Size                : %d' % self.computeSize() )
+        print('Determinateness     : %.3f' % self.computeDeterminateness() )
+        print('----  Constructor run times (in sec.) ----')
+        try:
+            print('#Threads         : %d' % self.nbrThreads)
+        except:
+            self.nbrThreads = 1
+            print('#Threads         : %d' % self.nbrThreads)
+        print('Total time       : %.5f' % self.runTimes['totalTime'])
+        print('Data input       : %.5f' % self.runTimes['dataInput'])
+        print('Quantile classes : %.5f' % self.runTimes['categories'])
+        print('Compute profiles : %.5f' % self.runTimes['profiles'])
+        print('Compute relation : %.5f' % self.runTimes['computeRelation'])
+        print('Compute rating   : %.5f' % self.runTimes['rating'])
+        print('Compute sorting  : %.5f' % self.runTimes['sorting'])
+        return '%s instance' % str(self.__class__)
+    
+
     def __init__(self,argPerfQuantiles=None,newData=None,\
                  hasNoVeto=False,\
                  PrefThresholds=False,\
@@ -5312,17 +5339,17 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                  WithSorting=False,\
                  Threading=False,\
                  tempDir=None,\
-                 nbrCores=None,\
+                 nbrOfCPUs=None,\
                  Comments=False,
                  Debug=False):
         
         # constructor for incremental rating agents
         from copy import copy,deepcopy        
         from time import time
-        self.runTimes = {}
         from decimal import Decimal
 
         # import the performance quantiles
+        self.runTimes = {}
         tt = time()
         if argPerfQuantiles == None:
             print('Error: valid performance quantiles are required!')
@@ -5351,7 +5378,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             self.newActions = OrderedDict()
             self.evaluation = {}     
         
-        self.runTimes = {'dataInput': time()-tt}
+        self.runTimes['dataInput'] = time()-tt
         
         if Debug:
             print('new actions',self.newActions)
@@ -5394,7 +5421,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                         'highLimit': '%.2f]' % (quantFreq[i+1]),
                                         'quantile': quantFreq[i+1]}
         self.categories = categories
-        self.runTimes = {'categories': time()-t0}
+        self.runTimes['categories'] = time()-t0
 ##
         if Debug:
             print('categories',self.categories)
@@ -5446,10 +5473,12 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             print('self.profiles',profiles)
             print('self.profileLimits',profileLimits)
             
-        self.runTimes['computeProfiles'] = time() - t0
+        self.runTimes['profiles'] = time() - t0
         
         # construct outranking relation
         t0 = time()
+        if Threading:
+            self.nbrThreads = nbrOfCPUs
         self.hasNoVeto = hasNoVeto
         minValuation = valuationScale[0]
         maxValuation = valuationScale[1]
@@ -5466,7 +5495,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             perfTab.showPerformanceTableau()
         
         g = BipolarOutrankingDigraph(perfTab,hasNoVeto=hasNoVeto,Normalized=True,
-                                     Threading=Threading,nbrCores=nbrCores)
+                                     Threading=Threading,nbrCores=nbrOfCPUs)
         g.recodeValuation(minValuation,maxValuation)
         self.actions = g.actions
         self.completeRelation = g.relation
@@ -5499,20 +5528,24 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                 actionsList = nf.netFlowsRanking
                 self.rankingRule = 'NetFlows'
                 self.rankingCorrelation = corrnf
+                self.rankingScores = nf.netFlows
             else:
                 actionsList = cop.copelandRanking
                 self.rankingRule = 'Copeland'
                 self.rankingCorrelation = corrcop
+                self.rankingScores = cop.copelandScores
         elif rankingRule == 'Copeland':
             from linearOrders import CopelandOrder
             cop = CopelandOrder(g)
             actionsList = cop.copelandRanking
             self.rankingRule = 'Copeland'
+            self.rankingScores = cop.copelandScores
         else: # net flows by default
             from linearOrders import NetFlowsOrder
             nf = NetFlowsOrder(g)
             actionsList = nf.netFlowsRanking
             self.rankingRule = 'NetFlows'
+            self.rankingScores = nf.netFlows
         if rankingRule != 'best':
             self.rankingCorrelation = g.computeOrderCorrelation(list(reversed(actionsList)))
         self.actionsRanking = actionsList
@@ -5522,18 +5555,18 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             print('Actions ranking     :', self.actionsRanking)
             print('Ranking correlation :', self.rankingCorrelation)
             print('Rating categories:', self.ratingCategories)
-        self.runTimes['quantilesRating'] = time() - t0
+        self.runTimes['rating'] = time() - t0
                
         # compute quantiles sorting
+        t0 = time()
         if WithSorting:
-            t0 = time()
             self.sorting = self.computeSortingCharacteristics()
             self.categoryContent = self.computeCategoryContents()
             if Debug:
                 self.showSorting()
                 self.showActionsSortingResult()
                 self.showQuantileOrdering()
-            self.runTimes['quantilesSorting'] = time() - t0
+        self.runTimes['sorting'] = time() - t0
 
         # end of the construction
         self.runTimes['totalTime'] = time() - tt
@@ -5940,7 +5973,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table
         actions x criteria in html format.
 
-        See the corresponding :py:math:`perfTabs.showHTMLPerformanceHeatMap` method.
+        See the corresponding :py:meth:`perfTabs.showHTMLPerformanceHeatMap` method.
         """
         print('see browser')
         from decimal import Decimal
@@ -6256,6 +6289,26 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         url = 'file://'+fileName
         webbrowser.open_new(url)
 
+    def showOrderedRelationTable(self,relation=None,direction="decreasing"):
+        """
+        Showing the relation table in decreasing (default) or increasing order.
+        """
+        try:
+            actionsList = self.actionsRanking
+        except:
+            actionsList = self.computeNetFlowsRanking()
+        
+        if direction != "decreasing":
+            actionsList.reverse()
+
+        if relation == None:
+            relation = self.relation
+
+        Digraph.showRelationTable(self,actionsSubset=actionsList,\
+                                relation=relation,\
+                                Sorted=False,\
+                                ReflexiveTerms=False)
+        
     def showQuantilesRating(self,Descending=True,Debug=False):
         try:
             ratingCategories = self.ratingCategories
@@ -6288,26 +6341,20 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         print('*----- Quantiles sorting result ----')
         self.computeQuantileOrdering(strategy=strategy,Comments=True)
             
-    def showOrderedRelationTable(self,relation=None,direction="decreasing"):
+    def showRankingScores(self,direction='descending'):
         """
-        Showing the relation table in decreasing (default) or increasing order.
+        Shows the ranking scores of the Copeland or the netflows ranking rule,
+        the number of incoming arcs minus the number of outgoing arcs, resp.
+        the sum of inflows minus the outflows.
         """
-        try:
-            actionsList = self.actionsRanking
-        except:
-            actionsList = self.computeNetFlowsRanking()
-        
-        if direction != "decreasing":
-            actionsList.reverse()
-
-        if relation == None:
-            relation = self.relation
-
-        Digraph.showRelationTable(self,actionsSubset=actionsList,\
-                                relation=relation,\
-                                Sorted=False,\
-                                ReflexiveTerms=False)
-        
+        print('Ranking scores in %s order' % direction)
+        print('action \t score')
+        if direction == 'descending':
+            for x in self.rankingScores:
+                print('%s \t %.2f' %(x[1],-x[0]))
+        else:
+            for x in reversed(self.outFlows):
+                print('%s \t %.2f' %(x[1],-x[0]))
                                          
 ##    def getActionsKeys(self,action=None,WithoutProfiles=True):
 ##        """
@@ -6442,7 +6489,9 @@ if __name__ == "__main__":
 ##    print(g.computeOrdinalCorrelation(qsrbc))
     
     # test incremental rating agent
-    seed = 106
+    MP = False
+    seed = 105
+    nbrOfCPUs = 4
 
 ##    from randomPerfTabs import RandomPerformanceTableau
 ##    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
@@ -6465,15 +6514,16 @@ if __name__ == "__main__":
     tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
                                     numberOfCriteria=nbrCrit,seed=seed)
 
-    pq = PerformanceQuantiles(tp,7,LowerClosed=True,Debug=False)
+    pq = PerformanceQuantiles(tp,20,LowerClosed=False,Debug=False)
     tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
-    newActions = tpg.randomActions(20)
+    newActions = tpg.randomActions(50)
 ##    for i in range(20):
 ##        newAction = tpg.randomAction()
 ##        newActions.append(newAction)
     pq.updateQuantiles(newActions,historySize=None)
     ira = NormedQuantilesRatingDigraph(pq,newActions,PrefThresholds=False,\
-                                   WithSorting=True,Debug=False,Threading=False)
+                                   WithSorting=True,Debug=False,\
+                                       Threading=MP,nbrOfCPUs=nbrOfCPUs)
     ira.showQuantilesRating()
     #ira.sorting = ira.computeSortingCharacteristics()
     #ira.categoryContent = ira.computeCategoryContents()
@@ -6498,6 +6548,9 @@ if __name__ == "__main__":
                                    Correlations=True,
                                    #rankingRule='best',
                                    )
+    ira.showRankingScores()
+    print(ira)
+    
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')
