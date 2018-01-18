@@ -6434,7 +6434,7 @@
 <span class="s2">    ****************************************************</span>
 <span class="s2">    * Python sortingDigraphs module                    *</span>
 <span class="s2">    * depends on BipolarOutrankingDigraph and          *</span>
-<span class="s2">    * $Revision: 2383 $                                 *</span>
+<span class="s2">    * $Revision: 2384 $                                 *</span>
 <span class="s2">    * Copyright (C) 2010 Raymond Bisdorff              *</span>
 <span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
 <span class="s2">    * to the extent permitted by the applicable law.   *</span>
@@ -6564,7 +6564,7 @@
     <span class="n">tp</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>\
                                     <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
 
-    <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">newActions</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
 <span class="c1">##    for i in range(20):</span>
@@ -6600,6 +6600,9 @@
                                    <span class="p">)</span>
     <span class="n">ira</span><span class="o">.</span><span class="n">showRankingScores</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">ira</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ira</span><span class="o">.</span><span class="n">computeQuantileProfile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ira</span><span class="o">.</span><span class="n">computeQuantileProfile</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ira</span><span class="o">.</span><span class="n">computeQuantileProfile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">))</span>
     
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
@@ -6607,7 +6610,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. december 2010                *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2383 $                  *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2384 $                  *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>

@@ -304,16 +304,16 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
         return html
 
     def _interpolateQuantile(self,x,newq,newp):
-        if self.Debug:
-            print(x,newq,newp)
+##        if self.Debug:
+##            print(x,newq,newp)
         np = len(newp)
         i = 0
         while i < np:
             if x < newp[i]:
                 ix = i
-                if self.Debug:
-                    print(ix, newp[ix-1],newq[ix-1],newp[ix],newq[ix])
-                            # nsq[0] 
+##                if self.Debug:
+##                    print(ix, newp[ix-1],newq[ix-1],newp[ix],newq[ix])
+##                            # nsq[0] 
                 diffq = newp[ix]-newp[ix-1]
                 if diffq > 0.0:
                     return newq[ix-1]+ (x-newp[ix-1])/diffq*(newq[ix]-newq[ix-1])
@@ -322,8 +322,8 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
                 i = np
             elif x == newp[i]:
                 ix = i
-                if self.Debug:
-                    print(ix, newp[ix],newq[ix])
+##                if self.Debug:
+##                    print(ix, newp[ix],newq[ix])
                 return newq[ix]
             else: # x > newp[i]
                 ix = i
@@ -464,7 +464,23 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
             self.cdf[g] = cdf
             self.historySizes[g] = t
 
-#------------- public class methods 
+#------------- public class methods
+    def computeQuantileProfile(self,p,Debug=False):
+        """
+        Renders the quantile *q(p)* on all the criteria.
+        """
+        from collections import OrderedDict
+        from decimal import Decimal
+        
+        x = Decimal('%.2f' % p)
+        qFreq = self.quantilesFrequencies
+        quantiles = OrderedDict()
+        for g in self.criteria:
+            q = self.limitingQuantiles[g]
+            quantiles[g] = self._interpolateQuantile(x,q,qFreq)
+            if Debug:
+                print(x, quantiles[g], q)
+        return quantiles
         
     def showActions(self):
         print("""No decision actions are actually being stored!
@@ -750,14 +766,14 @@ if __name__ == "__main__":
     nbrCrit = 13
     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
                                     numberOfCriteria=nbrCrit,seed=seed)
-    pq = PerformanceQuantiles(tp,20,LowerClosed=True,Debug=False)
+    pq = PerformanceQuantiles(tp,5,LowerClosed=True,Debug=False)
     #print(pq.limitingQuantiles)
     #pq.showLimitingQuantiles(ByObjectives=False)
     #pq.showHTMLLimitingQuantiles(Transposed=True)
     #pq.showActions()
     #pq.showCriteria(ByObjectives=True)
     tpg = PerfTabGenerator(tp,seed=seed)
-    newActions = tpg.randomActions(100)
+    newActions = tpg.randomActions(1)
 ##    for i in range(100):
 ##        newAction = tpg.randomAction()
 ##        newActions.append(newAction)
@@ -768,4 +784,5 @@ if __name__ == "__main__":
     pq.showHTMLLimitingQuantiles(Transposed=True)
     pq.showCriterionStatistics('c01')
     pq.showCriterionStatistics('b01')
+    print(pq.computeQuantileProfile(0.5))
 

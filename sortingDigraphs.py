@@ -6514,7 +6514,7 @@ if __name__ == "__main__":
     tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
                                     numberOfCriteria=nbrCrit,seed=seed)
 
-    pq = PerformanceQuantiles(tp,20,LowerClosed=False,Debug=False)
+    pq = PerformanceQuantiles(tp,11,LowerClosed=False,Debug=False)
     tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
     newActions = tpg.randomActions(50)
 ##    for i in range(20):
@@ -6550,6 +6550,9 @@ if __name__ == "__main__":
                                    )
     ira.showRankingScores()
     print(ira)
+    print(ira.computeQuantileProfile(0.25))
+    print(ira.computeQuantileProfile(0.5))
+    print(ira.computeQuantileProfile(0.75))
     
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
