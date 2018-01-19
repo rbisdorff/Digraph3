@@ -465,7 +465,7 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
             self.historySizes[g] = t
 
 #------------- public class methods
-    def computeQuantileProfile(self,p,Debug=False):
+    def computeQuantileProfile(self,p,qFreq=None,Debug=False):
         """
         Renders the quantile *q(p)* on all the criteria.
         """
@@ -473,7 +473,8 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
         from decimal import Decimal
         
         x = Decimal('%.2f' % p)
-        qFreq = self.quantilesFrequencies
+        if qFreq == None:
+            qFreq = self.quantilesFrequencies
         quantiles = OrderedDict()
         for g in self.criteria:
             q = self.limitingQuantiles[g]

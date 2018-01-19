@@ -515,7 +515,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
 
 <span class="c1">#------------- public class methods</span>
-<div class="viewcode-block" id="PerformanceQuantiles.computeQuantileProfile"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.computeQuantileProfile">[docs]</a>    <span class="k">def</span> <span class="nf">computeQuantileProfile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="PerformanceQuantiles.computeQuantileProfile"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.computeQuantileProfile">[docs]</a>    <span class="k">def</span> <span class="nf">computeQuantileProfile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">qFreq</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the quantile *q(p)* on all the criteria.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -523,7 +523,8 @@
         <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
         
         <span class="n">x</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">p</span><span class="p">)</span>
-        <span class="n">qFreq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span>
+        <span class="k">if</span> <span class="n">qFreq</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">qFreq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span>
         <span class="n">quantiles</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">:</span>
             <span class="n">q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>

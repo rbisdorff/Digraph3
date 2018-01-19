@@ -5332,6 +5332,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
     
 
     def __init__(self,argPerfQuantiles=None,newData=None,\
+                 quantiles=None,\
                  hasNoVeto=False,\
                  PrefThresholds=False,\
                  valuationScale=(-1,1),\
@@ -5389,9 +5390,28 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 
         # instantiate rating categories
         t0 = time()
-        self.rankingRule = rankingRule
+
+        # check if new quantile limits should be interpolated
+        if quantiles != None:
+            oldFreq = self.quantilesFrequencies
+            newFreq = self._computeQuantilesFrequencies(quantiles)
+            newLimitingQuantiles = {}
+            for g in self.criteria:
+                newLimitingQuantiles[g] = []
+            for p in newFreq:
+                newQuantiles = self.computeQuantileProfile(p,oldFreq)
+                for g in self.criteria:
+                    newLimitingQuantiles[g].append(newQuantiles[g])
+            self.limitingQuantiles = newLimitingQuantiles
+            self.quantilesFrequencies = newFreq
+            
         quantFreq = self.quantilesFrequencies
         limitingQuantiles = self.limitingQuantiles
+
+        if Debug:
+            print(quantFreq)
+            print(limitingQuantiles)
+            
         LowerClosed = self.LowerClosed
         categories = OrderedDict()
         k = len(quantFreq)-1
@@ -5766,15 +5786,12 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         """
           Renders an ordered dictionary of non empty quantiles in ascending order.
         """
-        
-        if self.rankingRule == 'NetFlows':
-            ranking = self.computeNetFlowsRanking()
-        else:
-            ranking = self.computeCopelandRanking()
+        ranking = self.actionsRanking
         if self.LowerClosed: # lower closed quantiles
             ranking.reverse()
         if Debug:
             print(ranking)
+        
         n = len(ranking)
         ratingCategories = OrderedDict()
         New = True
@@ -6347,7 +6364,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         the number of incoming arcs minus the number of outgoing arcs, resp.
         the sum of inflows minus the outflows.
         """
-        print('Ranking scores in %s order' % direction)
+        print('%s Ranking Scores in %s Order' % (self.rankingRule,direction))
         print('action \t score')
         if direction == 'descending':
             for x in self.rankingScores:
@@ -6510,18 +6527,16 @@ if __name__ == "__main__":
     from randomPerfTabs import Random3ObjectivesPerformanceTableau
     from randomPerfTabs import Random3ObjectivesPerformanceGenerator as PerfTabGenerator
     nbrActions=1000
-    nbrCrit = 21
+    nbrCrit = 13
     tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
                                     numberOfCriteria=nbrCrit,seed=seed)
 
-    pq = PerformanceQuantiles(tp,11,LowerClosed=False,Debug=False)
+    pq = PerformanceQuantiles(tp,10,LowerClosed=False,Debug=False)
     tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
-    newActions = tpg.randomActions(50)
-##    for i in range(20):
-##        newAction = tpg.randomAction()
-##        newActions.append(newAction)
+    newActions = tpg.randomActions(10)
     pq.updateQuantiles(newActions,historySize=None)
-    ira = NormedQuantilesRatingDigraph(pq,newActions,PrefThresholds=False,\
+    ira = NormedQuantilesRatingDigraph(pq,newActions,quantiles=None,\
+                                       PrefThresholds=False,\
                                    WithSorting=True,Debug=False,\
                                        Threading=MP,nbrOfCPUs=nbrOfCPUs)
     ira.showQuantilesRating()
@@ -6549,10 +6564,10 @@ if __name__ == "__main__":
                                    #rankingRule='best',
                                    )
     ira.showRankingScores()
-    print(ira)
-    print(ira.computeQuantileProfile(0.25))
-    print(ira.computeQuantileProfile(0.5))
-    print(ira.computeQuantileProfile(0.75))
+##    print(ira)
+##    print(ira.computeQuantileProfile(0.25))
+##    print(ira.computeQuantileProfile(0.5))
+##    print(ira.computeQuantileProfile(0.75))
     
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
