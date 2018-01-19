@@ -5304,32 +5304,6 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         :align: center
 
     """
-    def __repr__(self):
-        """
-        Default presentation method for BipolarOutrankingDigraph instance.
-        """
-        print('*----- show short --------------*')
-        print('Instance name       : %s' % self.name )
-        print('# Criteria          : %d' % len(self.criteria) )
-        print('# Quantile profiles : %d' % len(self.profiles) )
-        print('# New actions       : %d' % len(self.newActions) )
-        print('Size                : %d' % self.computeSize() )
-        print('Determinateness     : %.3f' % self.computeDeterminateness() )
-        print('----  Constructor run times (in sec.) ----')
-        try:
-            print('#Threads         : %d' % self.nbrThreads)
-        except:
-            self.nbrThreads = 1
-            print('#Threads         : %d' % self.nbrThreads)
-        print('Total time       : %.5f' % self.runTimes['totalTime'])
-        print('Data input       : %.5f' % self.runTimes['dataInput'])
-        print('Quantile classes : %.5f' % self.runTimes['categories'])
-        print('Compute profiles : %.5f' % self.runTimes['profiles'])
-        print('Compute relation : %.5f' % self.runTimes['computeRelation'])
-        print('Compute rating   : %.5f' % self.runTimes['rating'])
-        print('Compute sorting  : %.5f' % self.runTimes['sorting'])
-        return '%s instance' % str(self.__class__)
-    
 
     def __init__(self,argPerfQuantiles=None,newData=None,\
                  quantiles=None,\
@@ -5370,7 +5344,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         self.limitingQuantiles = deepcopy(perfQuantiles.limitingQuantiles)
         self.historySizes = deepcopy(perfQuantiles.historySizes)
         self.cdf = deepcopy(perfQuantiles.cdf)
-        self.name = 'quantilesRatingDigraph'
+        self.name = 'normedRatingDigraph'
         # import the actions to rate
         if newData != None:
             self.newActions = newData['actions']
@@ -5590,6 +5564,32 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 
         # end of the construction
         self.runTimes['totalTime'] = time() - tt
+
+    def __repr__(self):
+        """
+        Default presentation method for BipolarOutrankingDigraph instance.
+        """
+        String = 'Instance class      : %s\n' % self.__class__.name
+        String += 'Instance name       : %s\n' % self.name
+        String += '# Criteria          : %d\n' % len(self.criteria)
+        String += '# Quantile profiles : %d\n' % len(self.profiles)
+        String += '# New actions       : %d\n' % len(self.newActions)
+        String += 'Size                : %d\n' % self.computeSize()
+        String += 'Determinateness     : %.3f\n' % self.computeDeterminateness()
+        String += '----  Constructor run times (in sec.) ----\n'
+        try:
+            String += '#Threads         : %d\n' % self.nbrThreads
+        except:
+            self.nbrThreads = 1
+            String += '#Threads         : %d\n' % self.nbrThreads
+        String += 'Total time       : %.5f\n' % self.runTimes['totalTime']
+        String += 'Data input       : %.5f\n' % self.runTimes['dataInput']
+        String += 'Quantile classes : %.5f\n' % self.runTimes['categories']
+        String += 'Compute profiles : %.5f\n' % self.runTimes['profiles']
+        String += 'Compute relation : %.5f\n' % self.runTimes['computeRelation']
+        String += 'Compute rating   : %.5f\n' % self.runTimes['rating']
+        String += 'Compute sorting  : %.5f\n>' % self.runTimes['sorting']
+        return String 
 
 # ------------ private methods ------------------
 
