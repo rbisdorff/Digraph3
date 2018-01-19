@@ -386,27 +386,52 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         self.runTimes['totalTime'] = time()-tt
 
 #########
-
     def __repr__(self):
         """
-        Default presentation method for SortingDigraph instance.
+        Default presentation method for BipolarOutrankingDigraph instance.
         """
-        print('*----- show short --------------*')
-        print('Instance name    : %s' % self.name)
-        print('# Actions        : %d' % self.order)
-        print('# Criteria       : %d' % len(self.criteria))
-        print('# Categories     : %d' % len(self.categories))
-        print('Lowerclosed      : %s' % str(self.criteriaCategoryLimits['LowerClosed']))
-        print('Size             : %d' % self.computeSize())
-        print('Determinateness  : %.3f' % (self.computeDeterminateness()) )
-        print('----  Constructor run times (in sec.) ----')
-        print('#Threads         : %d' % self.nbrThreads)
-        print('Total time       : %.5f' % self.runTimes['totalTime'])
-        print('Data input       : %.5f' % self.runTimes['dataInput'])
-        print('Compute profiles : %.5f' % self.runTimes['computeProfiles'])
-        print('Compute relation : %.5f' % self.runTimes['computeRelation'])
-        print('weak ordering    : %.5f' % self.runTimes['weakOrdering'])
-        return '%s instance' % str(self.__class__)
+        String =  '*-----  Object instance description -----------*\n'
+        String += 'Instance class      : %s\n' % self.__class__.__name__
+        String += 'Instance name       : %s\n' % self.name
+        String += '# # Actions         : %d\n' % self.order
+        String += '# Criteria          : %d\n' % len(self.criteria)
+        String += '# Categories        : %d\n' % len(self.categories)
+        String += 'Lowerclosed         : %s\n' % str(self.criteriaCategoryLimits['LowerClosed'])
+        String += 'Size                : %d\n' % self.computeSize()
+        String += 'Determinateness     : %.3f\n' % self.computeDeterminateness()
+        String += '*------  Constructor run times (in sec.) ------*\n'
+        try:
+            String += '#Threads         : %d\n' % self.nbrThreads
+        except:
+            self.nbrThreads = 1
+            String += '#Threads         : %d\n' % self.nbrThreads
+        String += 'Total time       : %.5f\n' % self.runTimes['totalTime']
+        String += 'Data input       : %.5f\n' % self.runTimes['dataInput']
+        String += 'Compute profiles : %.5f\n' % self.runTimes['computeProfiles']
+        String += 'Compute relation : %.5f\n' % self.runTimes['computeRelation']
+        String += 'Weak Ordering    : %.5f\n' % self.runTimes['weakOrdering']
+        return String 
+
+##    def __repr__(self):
+##        """
+##        Default presentation method for SortingDigraph instance.
+##        """
+##        print('*----- show short --------------*')
+##        print('Instance name    : %s' % self.name)
+##        print('# Actions        : %d' % self.order)
+##        print('# Criteria       : %d' % len(self.criteria))
+##        print('# Categories     : %d' % len(self.categories))
+##        print('Lowerclosed      : %s' % str(self.criteriaCategoryLimits['LowerClosed']))
+##        print('Size             : %d' % self.computeSize())
+##        print('Determinateness  : %.3f' % (self.computeDeterminateness()) )
+##        print('----  Constructor run times (in sec.) ----')
+##        print('#Threads         : %d' % self.nbrThreads)
+##        print('Total time       : %.5f' % self.runTimes['totalTime'])
+##        print('Data input       : %.5f' % self.runTimes['dataInput'])
+##        print('Compute profiles : %.5f' % self.runTimes['computeProfiles'])
+##        print('Compute relation : %.5f' % self.runTimes['computeRelation'])
+##        print('weak ordering    : %.5f' % self.runTimes['weakOrdering'])
+##        return '%s instance' % str(self.__class__)
 
     def saveCategories(self,fileName='tempCategories'):
 
@@ -5569,14 +5594,15 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         """
         Default presentation method for BipolarOutrankingDigraph instance.
         """
-        String = 'Instance class      : %s\n' % self.__class__.name
+        String =  '*-----  Object instance description -----------*\n'
+        String += 'Instance class      : %s\n' % self.__class__.__name__
         String += 'Instance name       : %s\n' % self.name
         String += '# Criteria          : %d\n' % len(self.criteria)
         String += '# Quantile profiles : %d\n' % len(self.profiles)
         String += '# New actions       : %d\n' % len(self.newActions)
         String += 'Size                : %d\n' % self.computeSize()
         String += 'Determinateness     : %.3f\n' % self.computeDeterminateness()
-        String += '----  Constructor run times (in sec.) ----\n'
+        String += '*------  Constructor run times (in sec.) ------*\n'
         try:
             String += '#Threads         : %d\n' % self.nbrThreads
         except:
@@ -5588,7 +5614,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         String += 'Compute profiles : %.5f\n' % self.runTimes['profiles']
         String += 'Compute relation : %.5f\n' % self.runTimes['computeRelation']
         String += 'Compute rating   : %.5f\n' % self.runTimes['rating']
-        String += 'Compute sorting  : %.5f\n>' % self.runTimes['sorting']
+        String += 'Compute sorting  : %.5f\n' % self.runTimes['sorting']
         return String 
 
 # ------------ private methods ------------------
@@ -6418,13 +6444,13 @@ if __name__ == "__main__":
 ##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)
 ##    t = XMCDA2PerformanceTableau('spiegel2004')
 ##    t = XMCDA2PerformanceTableau('ex1')
-##    t = Random3ObjectivesPerformanceTableau(numberOfActions=25,
-##                                    numberOfCriteria=13,
-##                                    weightDistribution='equiobjectives',
-##                                    missingDataProbability=0.05,
-##                                    seed=1)
-##    nt = NormalizedPerformanceTableau(t)
-##    so = SortingDigraph(t,scaleSteps=5,LowerClosed=True,Debug=True)
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=25,
+                                    numberOfCriteria=13,
+                                    weightDistribution='equiobjectives',
+                                    missingDataProbability=0.05,
+                                    seed=1)
+    nt = NormalizedPerformanceTableau(t)
+    so = SortingDigraph(t,scaleSteps=5,LowerClosed=True,Debug=True)
 ####    so = SortingDigraph('grafittiPerfTab','grafittiCategories')
 ####    so = SortingDigraph(t,scaleSteps=7,Debug=True)
 ##    print(so.categories)
@@ -6517,28 +6543,30 @@ if __name__ == "__main__":
 ##    tp = RandomPerformanceTableau(numberOfActions=nbrActions,\
 ##                                    numberOfCriteria=nbrCrit,seed=seed)
 
-##    from randomPerfTabs import RandomCBPerformanceTableau
-##    from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
-##    nbrActions=1000
-##    nbrCrit = 13
-##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
-##                                    numberOfCriteria=nbrCrit,seed=seed)
-
-    from randomPerfTabs import Random3ObjectivesPerformanceTableau
-    from randomPerfTabs import Random3ObjectivesPerformanceGenerator as PerfTabGenerator
+    from randomPerfTabs import RandomCBPerformanceTableau
+    from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
     nbrActions=1000
     nbrCrit = 13
-    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
-                                    numberOfCriteria=nbrCrit,seed=seed)
+    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
+                                    numberOfCriteria=nbrCrit,\
+                                    Threading=MP,seed=seed)
 
-    pq = PerformanceQuantiles(tp,10,LowerClosed=False,Debug=False)
+##    from randomPerfTabs import Random3ObjectivesPerformanceTableau
+##    from randomPerfTabs import Random3ObjectivesPerformanceGenerator as PerfTabGenerator
+##    nbrActions=1000
+##    nbrCrit = 21
+##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
+##                                    numberOfCriteria=nbrCrit,seed=seed)
+##
+    pq = PerformanceQuantiles(tp,20,LowerClosed=False,Debug=False)
     tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
-    newActions = tpg.randomActions(10)
+    newActions = tpg.randomActions(100)
     pq.updateQuantiles(newActions,historySize=None)
     ira = NormedQuantilesRatingDigraph(pq,newActions,quantiles=None,\
                                        PrefThresholds=False,\
                                    WithSorting=True,Debug=False,\
                                        Threading=MP,nbrOfCPUs=nbrOfCPUs)
+    print(ira)
     ira.showQuantilesRating()
     #ira.sorting = ira.computeSortingCharacteristics()
     #ira.categoryContent = ira.computeCategoryContents()
