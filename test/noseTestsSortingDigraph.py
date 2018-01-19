@@ -155,16 +155,24 @@ def testNormedQuantilesRatingDigraph():
     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
                                     numberOfCriteria=nbrCrit,seed=None)
     pq = PerformanceQuantiles(tp,'deciles',LowerClosed=True,Debug=False)
-    tpg = PerfTabGenerator(tp,instanceCounter=0,seed=105)
+    tpg = PerfTabGenerator(tp,instanceCounter=0,seed=None)
     newActions = tpg.randomActions(10)
     pq.updateQuantiles(newActions,historySize=None)
     nrq = NormedQuantilesRatingDigraph(pq,newActions,
                                        WithSorting=True,
                                        PrefThresholds=True,Debug=True)
     nrq.showQuantilesRating()
-    nrq.exportRatingGraphViz()
+    nrq.exportRatingGraphViz(graphType='pdf')
     nrq.showSorting()
     nrq.showActionsSortingResult()
     nrq.showQuantilesSorting()
-    
+    nrq = NormedQuantilesRatingDigraph(pq,newActions,quantiles='heptiles',
+                                       WithSorting=True,
+                                       PrefThresholds=False,Debug=False)
+    nrq.showQuantilesRating()
+    nrq.exportRatingGraphViz(graphType='pdf')
+    nrq.showSorting()
+    nrq.showActionsSortingResult()
+    nrq.showQuantilesSorting()
+
 
