@@ -3729,23 +3729,24 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         """
         Default presentation method for BipolarOutrankingDigraph instance.
         """
-        print('*----- show short --------------*')
-        print('Instance name    : %s' % self.name)
-        print('# Actions        : %d' % self.order)
-        print('# Criteria       : %d' % len(self.criteria))
-        print('Size             : %d' % self.computeSize())
-        print('Determinateness  : %.3f' % (self.computeDeterminateness()) )
-        print('----  Constructor run times (in sec.) ----')
+        reprString = '*------- Object instance description ------*\n'
+        reprString += 'Instance class   : %s\n' % self.__class__.__name__
+        reprString += 'Instance name    : %s\n' % self.name
+        reprString += '# Actions        : %d\n' % self.order
+        reprString += '# Criteria       : %d\n' % len(self.criteria)
+        reprString += 'Size             : %d\n' % self.computeSize()
+        reprString += 'Determinateness  : %.3f\n' % self.computeDeterminateness()
+        reprString += '----  Constructor run times (in sec.) ----\n'
         try:
-            print('#Threads         : %d' % self.nbrThreads)
+            reprString += '#Threads         : %d\n' % self.nbrThreads
         except:
             self.nbrThreads = 1
-            print('#Threads         : %d' % self.nbrThreads)
-        print('Total time       : %.5f' % self.runTimes['totalTime'])
-        print('Data input       : %.5f' % self.runTimes['dataInput'])
-        print('Compute relation : %.5f' % self.runTimes['computeRelation'])
-        print('Gamma sets       : %.5f' % self.runTimes['gammaSets'])
-        return '%s instance' % str(self.__class__)
+            reprString += '#Threads         : %d\n' % self.nbrThreads
+        reprString += 'Total time       : %.5f\n' % self.runTimes['totalTime']
+        reprString += 'Data input       : %.5f\n' % self.runTimes['dataInput']
+        reprString += 'Compute relation : %.5f\n' % self.runTimes['computeRelation']
+        reprString += 'Gamma sets       : %.5f\n' % self.runTimes['gammaSets']
+        return reprString
     
     def __init__(self,argPerfTab=None,\
                  coalition=None,\

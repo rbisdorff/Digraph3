@@ -34,29 +34,36 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         """
         Default presentation method for pre-ranked sparse digraphs instances.
         """
-        print('*----- show short --------------*')
-        print('Instance name     : %s' % self.name)
-        print('# Actions         : %d' % self.order)
-        print('# Criteria        : %d' % self.dimension)
-        print('Sorting by        : %d-Tiling' % self.sortingParameters['limitingQuantiles'] )
-        print('Ordering strategy : %s' % self.sortingParameters['strategy'] )
-        print('Ranking rule      : %s' % self.componentRankingRule)
-        print('# Components      : %d' % self.nbrComponents)
-        print('Minimal order     : %d' % self.minimalComponentSize)
-        print('Maximal order     : %d' % self.maximalComponentSize)
-        print('Average order     : %.1f' % (self.order/self.nbrComponents) )
-        print('fill rate         : %.3f%%' % (self.fillRate*100.0) )     
-        print('----  Constructor run times (in sec.) ----')
-        print('Total time        : %.5f' % self.runTimes['totalTime'])
-        print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
-        print('Preordering       : %.5f' % self.runTimes['preordering'])
-        print('Decomposing       : %.5f' % self.runTimes['decomposing'])
+        reprString = '*----- Object instance description ------*\n'
+        reprString += 'Instance class    : %s\n' % self.__class__.__name__
+        reprString += 'Instance name     : %s\n' % self.name
+        reprString += '# Actions         : %d\n' % self.order
+        reprString += '# Criteria        : %d\n' % self.dimension
+        reprString += 'Sorting by        : %d-Tiling\n' % self.sortingParameters['limitingQuantiles']
+        reprString += 'Ordering strategy : %s\n' % self.sortingParameters['strategy']
+        reprString += 'Ranking rule      : %s\n' % self.componentRankingRule
+        reprString += '# Components      : %d\n' % self.nbrComponents
+        reprString += 'Minimal order     : %d\n' % self.minimalComponentSize
+        reprString += 'Maximal order     : %d\n' % self.maximalComponentSize
+        reprString += 'Average order     : %.1f\n' % (self.order/self.nbrComponents)
+        reprString += 'fill rate         : %.3f%%\n' % (self.fillRate*100.0)
+        reprString += '----  Constructor run times (in sec.) ----\n'
         try:
-            print('Ordering          : %.5f' % self.runTimes['ordering'])
+            reprString += '#Threads          : %d\n' % self.nbrThreads
+        except:
+            self.nbrThreads = 1
+            reprString += '#Threads          : %d\n' % self.nbrThreads
+        reprString += 'Total time        : %.5f\n' % self.runTimes['totalTime']
+        reprString += 'Data imput        : %.5f\n' % self.runTimes['dataInput']
+        reprString += 'QuantilesSorting  : %.5f\n' % self.runTimes['sorting']
+        reprString += 'Preordering       : %.5f\n' % self.runTimes['preordering']
+        reprString += 'Decomposing       : %.5f\n' % self.runTimes['decomposing']
+        try:
+            reprString += 'Ordering          : %.5f\n' % self.runTimes['ordering']
         except:
             pass
-        return '%s instance' % str(self.__class__)
-    
+        return reprString
+
     def relation(self,x,y,Debug=False):
         """
         Dynamic construction of the global outranking characteristic function *r(x S y)*.
@@ -64,14 +71,14 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         Min = self.valuationdomain['min']
         Med = self.valuationdomain['med']
         Max = self.valuationdomain['max']
-        
+
         if x == y:
             return Med
         cx = self.actions[x]['component']
         cy = self.actions[y]['component']
         #print(x,cx,y,cy)
         if cx == cy:
-            return self.components[cx]['subGraph'].relation[x][y]        
+            return self.components[cx]['subGraph'].relation[x][y]
         elif self.components[cx]['rank'] > self.components[cy]['rank']:
             return Min
         else:
@@ -99,7 +106,7 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         """
         Renders the ordinal correlation K of a sparse digraph instance
         when compared with a given linear order (from worst to best) of its actions
-        
+
         K = sum_{x != y} [ min( max(-self.relation(x,y)),other.relation(x,y), max(self.relation(x,y),-other.relation(x,y)) ]
 
         K /= sum_{x!=y} [ min(abs(self.relation(x,y),abs(other.relation(x,y)) ]
@@ -120,7 +127,7 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
              self must be a normalized outranking digraph instance !
 
         """
-        
+
         selfMax = self.valuationdomain['max']
         if selfMax != Decimal('1'):
             print("Error: self's valuationdomain  must be normalized !")
@@ -154,13 +161,13 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
             n2 = (self.order*self.order) - self.order
             determination = determSum / Decimal(str(n2))
             determination /= selfMax
-            
+
             return { 'correlation': correlation,\
                      'determination': determination }
         else:
             return { 'correlation': 0.0,\
                      'determination': 0.0 }
-    
+
     def sortingRelation(self,x,y,Debug=False):
         """
         Dynamic construction of the quantiles sorting characteristic function *r(x QS y)*.
@@ -168,14 +175,14 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         Min = self.valuationdomain['min']
         Med = self.valuationdomain['med']
         Max = self.valuationdomain['max']
-        
+
         if x == y:
             return Med
         cx = self.actions[x]['component']
         cy = self.actions[y]['component']
         #print(x,cx,y,cy)
         if cx == cy:
-            return Med      
+            return Med
         elif self.components[cx]['rank'] > self.components[cy]['rank']:
             return Min
         else:
@@ -188,7 +195,7 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
 
         By default, symbols = {'max':'┬','positive': '+', 'median': ' ',
                                'negative': '-', 'min': '┴'}
-        
+
         Example::
 
             >>> from sparseOutrankingDigraphs import *
@@ -213,7 +220,7 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
             Preordering       : 0.00034
             Decomposing       : 0.03989
             Ordering          : 0.00024
-            <class 'sparseOutrankingDigraphs.PreRankedOutrankingDigraph'> instance         
+            <class 'sparseOutrankingDigraphs.PreRankedOutrankingDigraph'> instance
             >>> bg.showRelationMap()
              ┬+++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
             ┴ ++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
@@ -264,9 +271,9 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
             ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ - -┬┬
             ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ -+  ┬
             ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴  ┴  ┬
-            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ 
+            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴
             Component ranking rule: Copeland
-            >>> 
+            >>>
         """
         if symbols == None:
             symbols = {'max':'┬','positive': '+', 'median': ' ',
@@ -311,7 +318,7 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
             self.profiles[x]['shortName']= '%.2f' % self.categories[catKey]['quantile']
         self.showHTMLPerformanceTableau(actionsSubset=self.profiles,
                                         title='Marginal performance quantiles')
-        
+
     def showHTMLRelationMap(self,actionsSubset=None,\
                             Colored=True,\
                             tableTitle='Relation Map',\
@@ -333,8 +340,8 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         fo.close()
         url = 'file://'+fileName
         webbrowser.open_new(url)
-        
-        
+
+
     def htmlRelationMap(self,actionsSubset=None,
                           tableTitle='Relation Map',
                           relationName='r(x R y)',
@@ -430,12 +437,12 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         s += '</body>\n'
         s += '</html>\n'
         return s
-    
+
     def computeOrdinalCorrelation(self, other, Debug=False):
         """
         Renders the ordinal correlation K of a SpareOutrakingDigraph instance
         when compared with a given compatible (same actions set) other Digraph instance.
-        
+
         K = sum_{x != y} [ min( max(-self.relation(x,y)),other.relation(x,y), max(self.relation(x,y),-other.relation(x,y)) ]
 
         K /= sum_{x!=y} [ min(abs(self.relation(x,y),abs(other.relation(x,y)) ]
@@ -460,7 +467,7 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
                 print('Error: the BigDigraph instance must be normalized !!')
                 print(self.valuationdomain)
                 return
-        
+
         if issubclass(other.__class__,(Digraph)):
             # if Debug:
             #     print('other is a Digraph instance')
@@ -475,7 +482,7 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
                 print('Error: the other bigDigraph instance must be normalized !!')
                 print(other.valuationdomain)
                 return
-                
+
         correlation = Decimal('0.0')
         determination = Decimal('0.0')
 
@@ -493,7 +500,7 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
                     corr = min( max(-selfRelation,otherRelation), max(selfRelation,-otherRelation) )
                     correlation += corr
                     determination += min( abs(selfRelation),abs(otherRelation) )
-                    
+
         if determination > Decimal('0.0'):
             correlation /= determination
             n2 = (self.order*self.order) - self.order
@@ -502,13 +509,13 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         else:
             return {'correlation': Decimal('0.0'),\
                     'determination': determination}
-        
+
     def showDecomposition(self,direction='decreasing'):
         """
         Prints on the console the decomposition structure of the sparse outranking digraph instance
         in *decreasing* (default) or *increasing* preference direction.
         """
-        
+
         print('*--- Relation decomposition in %s order---*' % (direction) )
         compKeys = [compKey for compKey in self.components]
         if direction != 'increasing':
@@ -527,7 +534,7 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         """
         Returns the summary of the distribution of the length of
         the components as follows::
-        
+
             summary = {'max': maxLength,
                        'median':medianLength,
                        'mean':meanLength,
@@ -540,7 +547,7 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         except:
             print('Error importing the statistics module.')
             print('You need to upgrade your Python to version 3.4+ !')
-            return      
+            return
         nc = self.nbrComponents
         compLengths = [comp['subGraph'].order\
                        for comp in self.components.values()]
@@ -575,9 +582,9 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
             print(newMin, newMed, newMax, newAmplitude)
         # loop over all components
         print('Recoding the valuation of a BigDigraph instance')
-        for cki in self.components.keys(): 
+        for cki in self.components.keys():
             self.components[cki]['subGraph'].recodeValuation(newMin=newMin,newMax=newMax)
-       # update valuation domain                       
+       # update valuation domain
         Min = Decimal(str(newMin))
         Max = Decimal(str(newMax))
         Med = (Min+Max)/Decimal('2')
@@ -602,7 +609,7 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
     def computeFillRate(self):
         """
         Renders the sum of the squares (without diagonal) of the orders of the component's subgraphs
-        over the square (without diagonal) of the big digraph order. 
+        over the square (without diagonal) of the big digraph order.
         """
         fillRate = sum((comp['subGraph'].order*(comp['subGraph'].order-1))\
                         for comp in self.components.values())
@@ -810,7 +817,7 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
             2: ['a019', 'a080', 'a087']
             1: ['a046']
             0: ['a011', 'a050', 'a053']
-            >>> bg.exportSortingGraphViz(actionsSubset=bg.boostedRanking[:100])     
+            >>> bg.exportSortingGraphViz(actionsSubset=bg.boostedRanking[:100])
 
         .. image:: preRankedDigraph.png
            :alt: pre-ranked digraph
@@ -832,13 +839,13 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
             except:
                 print('Error in nodeName: %s !!' % t0, type(t0))
                 return t0
-                
+
         compKeys = list(self.components.keys())
         if direction != 'decreasing':
             compKeys.reverse()
         if Debug:
             print(compKeys)
-                    
+
         if noSilent:
             print('*---- exporting a dot file for GraphViz tools ---------*')
         if actionsSubset == None:
@@ -902,7 +909,7 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
                         arcColor = 'black'
                         edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' % (_safeName(y),_safeName(x),1,arcColor)
                         fo.write(edge)
-                                                  
+
         fo.write('}\n \n')
         fo.close()
         # restore original relation
@@ -966,7 +973,7 @@ def _decompose(i, nc,tempDirName,componentRankingRule):
 class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
     """
     Main class for the multiprocessing implementation of pre-ranked sparse outranking digraphs.
-    
+
     The sparse outranking digraph instance is decomposed with a q-tiling sort into a partition
     of quantile equivalence classes which are linearly ordered by average quantile limits (default).
 
@@ -974,11 +981,11 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
     which is restricted to the decision actions gathered in this quantile equivalence class.
 
     See http://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RB-2016.pdf
-    
+
     By default, the number of quantiles is set to a tenth of the number of decision actions,
     i.e. quantiles = order//10. The effective number of quantiles can be much lower for large orders;
     for instance quantiles = 250 gives good results for a digraph of order 25000.
-    
+
     For other parameters settings, see the corresponding :py:class:`sortingDigraphs.QuantilesSortingDigraph` class.
 
     """
@@ -997,26 +1004,31 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                  CopyPerfTab=True,\
                  Comments=False,\
                  Debug=False):
-
+        """
+        Constructor
+        """
         global perfTab
         global decomposition
-        
+
         from collections import OrderedDict
         from time import time
         from os import cpu_count
         from multiprocessing import Pool
         from copy import copy, deepcopy
-        
+
         ttot = time()
 
-        # setting name
+        # data input
+        print('Data input')
+        
+        t0 = time()
         perfTab = argPerfTab
         # setting quantiles sorting parameters
         if CopyPerfTab:
-            self.__dict__ = deepcopy(perfTab.__dict__)
-##            self.actions = deepcopy(perfTab.actions)
-##            self.criteria = deepcopy(perfTab.criteria)
-##            self.evaluation = deepcopy(perfTab.evaluation)
+##            self.__dict__ = deepcopy(perfTab.__dict__)
+            self.actions = deepcopy(perfTab.actions)
+            self.criteria = deepcopy(perfTab.criteria)
+            self.evaluation = deepcopy(perfTab.evaluation)
         else:
             self.__dict__.update(perfTab.__dict__)
 ##            self.actions = perfTab.actions
@@ -1025,8 +1037,13 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         self.name = perfTab.name + '_pr'
         na = len(self.actions)
         self.order = na
+        self.runTimes = {}
         self.dimension = len(perfTab.criteria)
-        
+        self.runTimes = {'dataInput': (time() - t0) }
+        #if Comments:
+        print(self.runTimes)
+        print('data input time: %.4f' % (self.runTimes['dataInput']))
+
         #######
         if quantiles == None:
             quantiles = na//10
@@ -1040,7 +1057,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         self.nbrOfCPUs = nbrOfCPUs
         # quantiles sorting
         t0 = time()
-        if Comments:        
+        if Comments:
             print('Computing the %d-quantiles sorting digraph of order %d ...' % (quantiles,na))
         qs = QuantilesSortingDigraph(argPerfTab=perfTab,\
                                      limitingQuantiles=quantiles,\
@@ -1055,16 +1072,15 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                                      nbrOfProcesses=nbrOfThreads,\
                                      Comments=Comments,\
                                      Debug=Debug)
-        self.runTimes = {'sorting': time() - t0}
         self.valuationdomain = qs.valuationdomain
         self.profiles = qs.profiles
         self.categories = qs.categories
         self.sorting = qs.sorting
         self.evaluation = qs.evaluation
-        #self.evaluation = self.restoreOriginalEvaluations()
-        
+        self.runTimes['sorting'] =  time() - t0
         if Comments:
-            print('execution time: %.4f' % (self.runTimes['sorting']))
+            print('sorting time: %.4f' % (self.runTimes['sorting']))
+        
         # preordering
         if minimalComponentSize == None:
             minimalComponentSize = 1
@@ -1089,6 +1105,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         self.nbrComponents = nc
         self.nd = len(str(nc))
         if not self.sortingParameters['Threading']:
+            self.nbrThreads = 1
             components = OrderedDict()
             for i in range(1,nc+1):
                 comp = decomposition[i-1]
@@ -1109,50 +1126,51 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                 components[compKey]['subGraph'] = pg
                 components[compKey]['score']=(comp[2],comp[3],comp[4])
         else:   # if self.sortingParameters['Threading'] == True:
-                from copy import copy, deepcopy
-                from pickle import dumps, loads, load, dump
-                from multiprocessing import Process, Queue,active_children, cpu_count                 
-                if Comments:
-                    print('Processing the %d components' % nc )
-                    print('Threading ...')
-                #tdump = time()
-                from tempfile import TemporaryDirectory,mkdtemp
-                with TemporaryDirectory(dir=tempDir) as tempDirName:
-                    ## tasks queue and workers launching
-                    NUMBER_OF_WORKERS = nbrOfCPUs
-                    tasksIndex = [(i,len(decomposition[i][1])) for i in range(nc)]
-                    tasksIndex.sort(key=lambda pos: pos[1],reverse=True)
-                    TASKS = [(Comments,(pos[0],nc,tempDirName,componentRankingRule)) for pos in tasksIndex]
-                    task_queue = Queue()
-                    for task in TASKS:
-                        task_queue.put(task)
-                    for i in range(NUMBER_OF_WORKERS):
-                        Process(target=_worker,args=(task_queue,)).start()
-                    #print('started')
-                    for i in range(NUMBER_OF_WORKERS):
-                        task_queue.put('STOP')                   
+            from copy import copy, deepcopy
+            from pickle import dumps, loads, load, dump
+            from multiprocessing import Process, Queue,active_children, cpu_count
+            self.nbrThreads = nbrOfCPUs
+            if Comments:
+                print('Processing the %d components' % nc )
+                print('with %d cores' % self.nbrThreads)
+            #tdump = time()
+            from tempfile import TemporaryDirectory,mkdtemp
+            with TemporaryDirectory(dir=tempDir) as tempDirName:
+                ## tasks queue and workers launching
+                NUMBER_OF_WORKERS = nbrOfCPUs
+                tasksIndex = [(i,len(decomposition[i][1])) for i in range(nc)]
+                tasksIndex.sort(key=lambda pos: pos[1],reverse=True)
+                TASKS = [(Comments,(pos[0],nc,tempDirName,componentRankingRule)) for pos in tasksIndex]
+                task_queue = Queue()
+                for task in TASKS:
+                    task_queue.put(task)
+                for i in range(NUMBER_OF_WORKERS):
+                    Process(target=_worker,args=(task_queue,)).start()
+                #print('started')
+                for i in range(NUMBER_OF_WORKERS):
+                    task_queue.put('STOP')
 
-                    while active_children() != []:
-                        pass
-                    if Comments:
-                        print('Exit %d threads' % NUMBER_OF_WORKERS)
-                        
-                    components = OrderedDict()
-                    #componentsList = []
-                    boostedRanking = []
-                    for j in range(nc):
-                        if Debug:
-                            print('job',j)
-                        fiName = tempDirName+'/splitComponent-'+str(j)+'.py'
-                        fi = open(fiName,'rb')
-                        splitComponent = loads(fi.read())
-                        if Debug:
-                            print('splitComponent',splitComponent)
-                        components[splitComponent['compKey']] = splitComponent['compDict']
-                        boostedRanking += splitComponent['compDict']['subGraph'].ranking
-                    self.boostedRanking = boostedRanking
-                    self.boostedOrder = list(reversed(self.boostedRanking))
-                    
+                while active_children() != []:
+                    pass
+                if Comments:
+                    print('Exit %d threads' % NUMBER_OF_WORKERS)
+
+                components = OrderedDict()
+                #componentsList = []
+                boostedRanking = []
+                for j in range(nc):
+                    if Debug:
+                        print('job',j)
+                    fiName = tempDirName+'/splitComponent-'+str(j)+'.py'
+                    fi = open(fiName,'rb')
+                    splitComponent = loads(fi.read())
+                    if Debug:
+                        print('splitComponent',splitComponent)
+                    components[splitComponent['compKey']] = splitComponent['compDict']
+                    boostedRanking += splitComponent['compDict']['subGraph'].ranking
+                self.boostedRanking = boostedRanking
+                self.boostedOrder = list(reversed(self.boostedRanking))
+
         # storing components, fillRate and maximalComponentSize
 
         self.components = components
@@ -1176,7 +1194,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         self.valuationdomain = {'min':Decimal('-1'),
                                 'med':Decimal('0'),
                                 'max':Decimal('1')}
-       
+
         self.runTimes['decomposing'] = time() - t0
         if Comments:
             print('decomposing time: %.4f' % self.runTimes['decomposing']  )
@@ -1198,7 +1216,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             print(self.runTimes)
         if save2File != None:
             self.showShort(fileName=save2File)
-            
+
 
     # ----- class methods ------------
 
@@ -1212,13 +1230,13 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                                  Comments=False):
         """
         Renders the quantile interval of the decision actions.
-        
+
         *Parameters*:
             * QuantilesdSortingDigraph instance
             * Descending: listing in *decreasing* (default) or *increasing* quantile order.
             * strategy: ordering in an {'optimistic' | 'pessimistic' | 'average' (default)}
               in the uppest, the lowest or the average potential quantile.
-        
+
         """
         from operator import itemgetter
         if strategy == None:
@@ -1260,7 +1278,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         if Debug:
             print(actionsCategIntervals)
         compSize = self.minimalComponentSize
-        
+
         if compSize == 1:
             if Descending:
                 componentsIntervals = [[(item[1],item[2]),actionsCategories[item],item[0],item[3],item[4]]\
@@ -1268,7 +1286,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             else:
                 componentsIntervals = [[(item[2],item[1]),actionsCategories[item],item[0],item[3],item[4]]\
                                    for item in actionsCategIntervals]
-                
+
         else:
             componentsIntervals = []
             nc = len(actionsCategIntervals)
@@ -1279,7 +1297,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                 #print(comp)
                 if currContLength == 0:
                     lowQtileLimit = comp[2]
-                highQtileLimit = comp[1]             
+                highQtileLimit = comp[1]
                 compContent += actionsCategories[comp]
                 if len(compContent) >= compSize or i == nc-1:
                     score = comp[0]
@@ -1294,7 +1312,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                     compContent = []
         if Debug:
             print(componentsIntervals)
-        return componentsIntervals        
+        return componentsIntervals
 
     def computeActionCategories(self,action,Show=False,Debug=False,Comments=False,\
                              Threading=False,nbrOfCPUs=None):
@@ -1306,7 +1324,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         #qs = self
         Med = self.valuationdomain['med']
         categories = self.categories
-        
+
         try:
             sortinga = self.sorting[action]
         except:
@@ -1314,7 +1332,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                                                    Threading=Threading,\
                                                    nbrOfCPUs=nbrOfCPUs)
             sortinga = sorting[action]
-            
+
         keys = []
         for c in categories.keys():
         #for c in self.orderedCategoryKeys():
@@ -1326,7 +1344,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                 if sortinga[c]['lowLimit'] > Med:
                     lowLimit = sortinga[c]['lowLimit']
                 if sortinga[c]['notHighLimit'] > Med:
-                    notHighLimit = sortinga[c]['notHighLimit']    
+                    notHighLimit = sortinga[c]['notHighLimit']
                 keys.append(c)
                 if Debug:
                     print(action, c, sortinga[c])
@@ -1340,7 +1358,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         n = len(keys)
         if n == 0:
             return None
-        
+
         elif n == 1:
             if Show:
                 print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
@@ -1376,7 +1394,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         """
         Renders the ordinal correlation coefficient between
         the global linar ranking and the marginal criterion relation.
-        
+
         """
         #print(criterion)
         gc = BipolarOutrankingDigraph(self,coalition=[criterion],
@@ -1395,7 +1413,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                                                           Comments=False):
         """
         Method for computing correlations between each individual criterion relation with the corresponding global ranking relation.
-        
+
         Returns a list of tuples (correlation,criterionKey) sorted by default in decreasing order of the correlation.
 
         If Threading is True, a multiprocessing Pool class is used with a parallel equivalent of the built-in map function.
@@ -1408,7 +1426,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             if nbrCores == None:
                 nbrCores= cpu_count()
             criteriaList = [x for x in self.criteria]
-            with Pool(nbrCores) as proc:   
+            with Pool(nbrCores) as proc:
                 correlations = proc.map(self.computeCriterion2RankingCorrelation,criteriaList)
             if ValuedCorrelation:
                 criteriaCorrelation = [(correlations[i]['correlation']*\
@@ -1422,12 +1440,12 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             for c in dict.keys(criteria):
                 corr = self.computeCriterion2RankingCorrelation(c,Threading=False)
                 if ValuedCorrelation:
-                    criteriaCorrelation.append((corr['correlation']*corr['determination'],c))            
+                    criteriaCorrelation.append((corr['correlation']*corr['determination'],c))
                 else:
-                    criteriaCorrelation.append((corr['correlation'],c))            
+                    criteriaCorrelation.append((corr['correlation'],c))
         if Sorted:
             criteriaCorrelation.sort(reverse=True)
-        return criteriaCorrelation   
+        return criteriaCorrelation
 
     def showMarginalVersusGlobalRankingCorrelation(self,Sorted=True,\
                                                       Threading=False,\
@@ -1458,12 +1476,12 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         print('Quantiles sorting result per decision action')
         res = self.sorting[action]
         for categ in self.categories.keys():
-            if res[categ]['categoryMembership'] >= Med: 
+            if res[categ]['categoryMembership'] >= Med:
                 print('%s: %.2f (%.2f,%.2f)' % (self.categories[categ]['name'],
                                                 res[categ]['categoryMembership'],
                                                 res[categ]['lowLimit'],
                                                 res[categ]['notHighLimit'] ) )
-            
+
 ##    def showActionsSortingResult(self,actionsSubset=None):
 ##        """
 ##        shows the quantiles sorting result all (default) of a subset of the decision actions.
@@ -1479,7 +1497,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
     def showShort(self,fileName=None,WithFileSize=True):
         """
         Default (__repr__) presentation method for big outranking digraphs instances:
-        
+
         >>> from sparseOutrankingDigraphs import *
         >>> t = RandomCBPerformanceTableau(numberOfActions=100,seed=1)
         >>> g = PreRankedOutrankingDigraph(t,quantiles=10)
@@ -1502,7 +1520,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         Preordering       : 0.00071
         Decomposing       : 0.07366
         Ordering          : 0.00130
-        <class 'sparseOutrankingDigraphs.PreRankedOutrankingDigraph'> instance        
+        <class 'sparseOutrankingDigraphs.PreRankedOutrankingDigraph'> instance
         """
         #summaryStats = self.computeDecompositionSummaryStatistics()
         if fileName == None:
@@ -1615,12 +1633,12 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         SparseOutrankingDigraph.showDecomposition(self,direction=direction)
 
     def showDecomposition(self,direction='decreasing'):
-        
+
         print('*--- quantiles decomposition in %s order---*' % (direction) )
         #compKeys = [compKey for compKey in self.components.keys()]
         # the components are ordered from best (1) to worst (n)
         compKeys = [c for c in self.components]
-        if direction != 'decreasing':    
+        if direction != 'decreasing':
             compKeys.sort(reverse=True)
         else:
             pass
@@ -1632,7 +1650,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             #print('%s. %s-%s : %s' % (compKey,comp['lowQtileLimit'],comp['highQtileLimit'],actions))
             #else:
             print('%s. %s-%s : %s' % (compKey,comp['lowQtileLimit'],comp['highQtileLimit'],actions))
-                
+
     def computeCategoryContents(self,Reverse=False,Comments=False,StoreSorting=True,\
                                 Threading=False,nbrOfCPUs=None):
         """
@@ -1652,7 +1670,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             for x in self.actions:
                 if sorting[x][c]['categoryMembership'] >= self.valuationdomain['med']:
                     categoryContent[c].append(x)
-        
+
         return categoryContent
 
     def showSorting(self,Descending=True,isReturningHTML=False,Debug=False):
@@ -1660,7 +1678,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         Shows sorting results in decreasing or increasing (Reverse=False)
         order of the categories. If isReturningHTML is True (default = False)
         the method returns a htlm table with the sorting result.
-        
+
         """
         #from string import replace
         #from copy import copy, deepcopy
@@ -1719,7 +1737,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                 print('%s' % actions)
                 if pg.order > 1:
                     pg.showRelationTable()
-                    
+
         else:
             for compKey in compKeys:
                 comp = components[compkey]
@@ -1728,7 +1746,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                 actions = [ x for x in pg.actions.keys()]
                 print('%s' % actions)
                 if pg.order > 1:
-                    pg.showRelationTable()                
+                    pg.showRelationTable()
 
 
     def computeBoostedRanking(self,rankingRule='Copeland'):
@@ -1808,7 +1826,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         """
         from decimal import Decimal
         from digraphs import flatten
-                    
+
         brewerRdYlGn9Colors = [(Decimal('0.1111'),'"#D53E4F"'),
                                (Decimal('0.2222'),'"#F46D43"'),
                                (Decimal('0.3333'),'"#FDAE61"'),
@@ -1865,7 +1883,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         else:
             actionsList = argActionsList
         na = len(actionsList)
-        
+
         if Debug:
             print('1',actionsList)
 
@@ -1882,11 +1900,11 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                 criteriaWeightsList = [(-criteria[g]['weight'],g) for g in criteriaList]
                 criteriaWeightsList.sort(reverse=False)
                 criteriaList = [g[1] for g in criteriaWeightsList]
-                criteriaCorrelation = None    
+                criteriaCorrelation = None
         else:
             criteria = argCriteriaList
             criteriaCorrelation = None
-            
+
         quantileColor={}
         for x in actionsList:
             quantileColor[x] = {}
@@ -1898,7 +1916,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                     for i in range(nc):
                         if Debug:
                             print(i, colorPalette[i][0])
-                        
+
                         if quantilexg <= colorPalette[i][0]:
                             quantileColor[x][g] = colorPalette[i][1]
                             break
@@ -1906,16 +1924,16 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                     quantileColor[x][g] = naColor
                 if Debug:
                     print(x,g,quantileColor[x][g])
-        # legend            
+        # legend
 ##        html += '<i>Color legend: </i>\n'
-##        html += '<table style="background-color:%s; border-collapse: collapse;" border="1">\n' % (backGroundColor) 
+##        html += '<table style="background-color:%s; border-collapse: collapse;" border="1">\n' % (backGroundColor)
 ##        html += '<tr bgcolor=%s><th>quantile</th>' % (columnHeaderColor)
 ##        for col in range(nc):
 ##            html += '<td bgcolor=%s>%s</td>' % (colorPalette[col][1],str(colorPalette[col][0]))
 ##        html += '</tr>\n'
 ##        html += '</table>\n'
         # heatmap
-        html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
+        html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor)
         html += '<tr bgcolor=%s><th>criteria</th>' % (columnHeaderColor)
         for g in criteriaList:
             try:
@@ -1953,7 +1971,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         html += '</table>\n'
         # legend
         html += '<i>Color legend: </i>\n'
-        html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
+        html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor)
         html += '<tr bgcolor=%s><th>quantile</th>' % (columnHeaderColor)
         #html += '<td bgcolor=%s>&nbsp;[%.2f - %.2f[&nbsp;</td>' % (colorPalette[0][1],0.0,colorPalette[0][0])
         for col in range(0,nc):
@@ -2073,7 +2091,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             return action,\
                     keys[0],\
                     keys[-1],\
-                    credibility            
+                    credibility
 
     def showNewActionCategories(self,action,sorting):
         """
@@ -2081,7 +2099,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         """
         self.computeNewActionCategories(action,sorting,Comments=True)
 
-        
+
     def showNewActionsSortingResult(self,actions,sorting,Debug=False):
         """
         shows the quantiles sorting result all (default) of a subset of the decision actions.
@@ -2094,7 +2112,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
 class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,PerformanceTableau):
     """
     Main class for the multiprocessing implementation of pre-ranked sparse confident outranking digraphs.
-    
+
     The sparse outranking digraph instance is decomposed with a confident q-tiling sort into a partition
     of quantile equivalence classes which are linearly ordered by average quantile limits (default).
 
@@ -2104,7 +2122,7 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
     By default, the number of quantiles is set to a tenth of the number of decision actions,
     i.e. quantiles = order//10. The effective number of quantiles can be much lower for large orders;
     for instance quantiles = 250 gives good results for a digraph of order 25000.
-    
+
     For other parameters settings, see the corresponding classes:
     :py:class:`sortingDigraphs.QuantilesSortingDigraph` and :py:class:`outrankingDigraphs.ConfidentBipolarOutrankingDigraph` .
 
@@ -2130,16 +2148,17 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
 
         global perfTab
         global decomposition
-        
+
         from collections import OrderedDict
         from time import time
         from os import cpu_count
         from multiprocessing import Pool
         from copy import copy, deepcopy
-        
+
         ttot = time()
 
         # setting name
+        t0 = time()
         perfTab = argPerfTab
         # setting quantiles sorting parameters
         if CopyPerfTab:
@@ -2157,6 +2176,8 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
         self.order = na
         self.dimension = len(perfTab.criteria)
         self.componentRankingRule = componentRankingRule
+        self.runTimes = {}
+        self.runTimes['dataInput'] = time() - t0
 
         #######
         if quantiles == None:
@@ -2171,7 +2192,7 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
         self.nbrOfCPUs = nbrOfCPUs
         # quantiles sorting
         t0 = time()
-        if Comments:        
+        if Comments:
             print('Computing the %d-quantiles sorting digraph of order %d ...' % (quantiles,na))
         qs = QuantilesSortingDigraph(argPerfTab=perfTab,\
                                      limitingQuantiles=quantiles,\
@@ -2187,17 +2208,17 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
                                      nbrOfProcesses=nbrOfThreads,\
                                      Comments=Comments,\
                                      Debug=Debug)
-        self.runTimes = {'sorting': time() - t0}
+        self.runTimes['sorting'] = time() - t0
         self.valuationdomain = qs.valuationdomain
         self.profiles = qs.profiles
         self.categories = qs.categories
         # compute sorting likelyhoods
-        self.bipolarConfidenceLevel = (confidence/100.0)*2.0 -1.0 
+        self.bipolarConfidenceLevel = (confidence/100.0)*2.0 -1.0
         self.distribution = distribution
         self.betaParameter = betaParameter
         self.evaluation = qs.evaluation
         self.sortingRelation = qs.relation
-        
+
         self.likelihoods = self.computeCLTLikelihoods(distribution=distribution,
                                                       betaParameter=betaParameter,
                                                       Debug=Debug)
@@ -2250,13 +2271,13 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
                 if sorting[x][c]['categoryMembership'] >= self.valuationdomain['med']:
                     categoryContent[c].append(x)
         self.categoryContent = categoryContent
-        
-        
+
+
         if CopyPerfTab:
             self.evaluation = deepcopy(perfTab.evaluation)
         else:
-            self.evaluation = perfTab.evaluation         
-        
+            self.evaluation = perfTab.evaluation
+
         if Comments:
             print('execution time: %.4f' % (self.runTimes['sorting']))
         # preordering
@@ -2305,7 +2326,7 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
         else:   # if self.sortingParameters['Threading'] == True:
                 from copy import copy, deepcopy
                 from pickle import dumps, loads, load, dump
-                from multiprocessing import Process, Queue,active_children, cpu_count                 
+                from multiprocessing import Process, Queue,active_children, cpu_count
                 if Comments:
                     print('Processing the %d components' % nc )
                     print('Threading ...')
@@ -2324,13 +2345,13 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
                         Process(target=_worker,args=(task_queue,)).start()
                     print('started')
                     for i in range(NUMBER_OF_WORKERS):
-                        task_queue.put('STOP')                   
+                        task_queue.put('STOP')
 
                     while active_children() != []:
                         pass
                     if Comments:
                         print('Exit %d threads' % NUMBER_OF_WORKERS)
-                        
+
                     components = OrderedDict()
                     #componentsList = []
                     boostedRanking = []
@@ -2346,7 +2367,7 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
                         boostedRanking += splitComponent['compDict']['subGraph'].ranking
                     self.boostedRanking = boostedRanking
                     self.boostedOrder = list(reversed(self.boostedRanking))
-                    
+
         # storing components, fillRate and maximalComponentSize
 
         self.components = components
@@ -2370,7 +2391,7 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
         self.valuationdomain = {'min':Decimal('-1'),
                                 'med':Decimal('0'),
                                 'max':Decimal('1')}
-       
+
         self.runTimes['decomposing'] = time() - t0
         if Comments:
             print('decomposing time: %.4f' % self.runTimes['decomposing']  )
@@ -2391,11 +2412,11 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
             print(self.runTimes)
         if save2File != None:
             self.showShort(fileName=save2File)
-            
+
 
     # ----- class methods ------------
 
-    
+
     def computeCLTLikelihoods(self,distribution="triangular",
                               betaParameter=None,
                               Debug=False):
@@ -2409,7 +2430,7 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
         sumWeights = Decimal('0')
         criteriaList = [x for x in self.criteria]
         m = len(criteriaList)
-        
+
         weightSquares = {}
         for g in criteriaList:
             gWeight = self.criteria[g]['weight']
@@ -2462,7 +2483,7 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
         """
         Renders the relation cut at likelihood level.
         """
-        
+
         Med = self.valuationdomain['med']
         Max = self.valuationdomain['max']
         Min = self.valuationdomain['min']
@@ -2491,7 +2512,7 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
                     print(x,y,sortingRelation[x][y],self.likelihoods[x][y],confidentRelation[x][y])
             self.confidenceCutLevel = confidenceCutLevel
         return confidentRelation
-        
+
     def _recodeConcordanceValuation(self,oldRelation,sumWeights,Debug=False):
         """
         Recodes the characteristic valuation according
@@ -2500,7 +2521,7 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
         if Debug:
             print(oldRelation,sumWeights)
         from copy import copy as deepcopy
-        
+
 ##        oldMax = Decimal('1')
 ##        oldMin = Decimal('-1')
 ##        oldMed = Decimal('0')
@@ -2577,10 +2598,10 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
             actions = self.actions
         else:
             actions = actionsSubset
-            
+
         if relation == None:
             relation = self.confidentRelation
-            
+
         print('* ---- Outranking Relation Table -----')
         if LikelihoodDenotation:
             print('r/(lh) | ', end=' ')
@@ -2603,7 +2624,7 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
             hasIntegerValuation = self.valuationdomain['hasIntegerValuation']
         except KeyError:
             hasIntegerValuation = IntegerValues
-        
+
         for x in actionsList:
             print("'"+x[0]+"'\t", end=' ')
         print('\n-------|------------------------------------------------------------')
@@ -2620,10 +2641,10 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
                         print('%+d' % (relation[x[1]][y[1]]), end=' ')
                 else:
                     if hasLatexFormat:
-                        print('$%+.2f$ & ' % (relation[x[1]][y[1]]), end=' ')       
+                        print('$%+.2f$ & ' % (relation[x[1]][y[1]]), end=' ')
                     else:
                         print(' %+.2f ' % (relation[x[1]][y[1]]), end=' ')
-                
+
             if hasLatexFormat:
                 print(' \\cr')
             else:
@@ -2648,40 +2669,40 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
         print('Likelihood domain: [-1.0;+1.0] ')
         print('Likelihood level : %.2f (%.2f%%) ' % (self.bipolarConfidenceLevel,
                                                      (self.bipolarConfidenceLevel+1.0)/2.0))
-        
+
         print('Determinateness  : %.3f ' % self.computeDeterminateness() )
         print('\n')
-    
+
 #######################################################################
 #######################################################################
 #----------test classes and methods ----------------
 if __name__ == "__main__":
-    
+
     from time import time
-    t = XMCDA2PerformanceTableau('project_7')
-    tenv = PartialPerformanceTableau(t,objectivesSubset=['Eco'])
-    pre = PreRankedOutrankingDigraph(tenv,Debug=True)
-    print(pre.computeOrderCorrelation(pre.boostedOrder))
-    tenv.showHTMLPerformanceHeatmap()
-##    MP  = False
-##    nbrActions=20
-####    t0 = time()
-##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,seed=105)
-####    tp = XMCDA2PerformanceTableau('the_cs_2016')
-##
-####    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
-####                                     seed=100)
-##    bg1 = PreRankedConfidentOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,
-##                                 quantilesOrderingStrategy='average',
-##                                 componentRankingRule='Copeland',
-##                                 LowerClosed=False,
-##                                 minimalComponentSize=1,
-##                                 Threading=MP,nbrOfCPUs=8,
-##                                 #tempDir='.',
-##                                 nbrOfThreads=8,
-##                                 Comments=False,Debug=False,
-##                                 save2File='testbgMP')
-##    print(bg1)
+##    t = XMCDA2PerformanceTableau('project_7')
+##    tenv = PartialPerformanceTableau(t,objectivesSubset=['Eco'])
+##    pre = PreRankedOutrankingDigraph(tenv,Debug=True)
+##    print(pre.computeOrderCorrelation(pre.boostedOrder))
+##    tenv.showHTMLPerformanceHeatmap()
+    MP  = True
+    nbrActions=500
+##    t0 = time()
+    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,seed=105)
+##    tp = XMCDA2PerformanceTableau('the_cs_2016')
+
+##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
+##                                     seed=100)
+    bg1 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,
+                                 quantilesOrderingStrategy='average',
+                                 componentRankingRule='Copeland',
+                                 LowerClosed=False,
+                                 minimalComponentSize=1,
+                                 Threading=MP,nbrOfCPUs=8,
+                                 #tempDir='.',
+                                 nbrOfThreads=8,
+                                 Comments=True,Debug=False,
+                                 save2File='testbgMP')
+    print(bg1)
 ##    bg1.showComponents(direction='descending')
 ##    #bg1.showRelationTable()
 ##    bg2 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,
@@ -2699,7 +2720,7 @@ if __name__ == "__main__":
 ##    from weakOrders import WeakRankingOrder
 ##    wr = WeakRankingOrder(bg1,[bg1.boostedRanking,bg2.boostedRanking])
 ##    wr.exportGraphViz('fusion-cpr-pr',graphType="pdf")
-    
+
 ##    rag = RandomCBPerformanceGenerator(bg1,actionNamePrefix='t')
 ##    rag = Random3ObjectivesPerformanceGenerator(bg1,actionNamePrefix='t')
 ##    rag.randomUpdate(2)
@@ -2725,7 +2746,7 @@ if __name__ == "__main__":
 ##            score = float(res[2])
 ##        else:
 ##            score = (float(res[1])+float(res[2]))/2.0
-##            
+##
 ##        bg1.showNewActionCategories(x,newSorting)
 ##        for compKey in bg1.components:
 ##            comp = bg1.components[compKey]
@@ -2746,17 +2767,17 @@ if __name__ == "__main__":
 ##    bg1.showDecomposition(direction='decreasing')
 ##    bg1.showSorting()
 ##    bg1.showActionSortingResult('a001')
-    
+
 ##    bg1.sorting.update(newSorting)
 ##    bg1.showActionsSortingResult()
 
-    
-    
+
+
     #bg1.exportSortingGraphViz(actionsSubset=bg1.boostedRanking[:100])
-    
+
 ##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
 ##                                      seed=100)
-##    
+##
 ##    bg2 = PreRankedOutrankingDigraph(tp,CopyPerfTab=False,quantiles=10,
 ##                                 quantilesOrderingStrategy='average',
 ##                                 componentRankingRule='NetFlows',

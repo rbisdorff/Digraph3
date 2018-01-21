@@ -532,6 +532,23 @@ class Digraph(object):
         >>>
 
     """
+
+    def __repr__(self):
+        """
+        Default presentation method for BipolarOutrankingDigraph instance.
+        """
+        reprString = '*------- Object instance description ------*\n'
+        reprString += 'Instance class   : %s\n' % self.__class__.__name__
+        reprString += 'Instance name    : %s\n' % self.name
+        reprString += 'Graph Order      : %d\n' % self.order
+        reprString += 'Graph Size       : %d\n' % self.computeSize()
+        reprString += 'Valuation domain : [%.2f - %.2f]\n'\
+                      % (self.valuationdomain['min'],self.valuationdomain['max'])
+        reprString += 'Determinateness  : %.3f\n' % self.computeDeterminateness()
+        reprString += 'Attributes       : %s\n' % list(self.__dict__.keys())
+       
+        return reprString
+    
     def __init__(self,file=None,order=7):
         #import digraphs,sys,copy
         from randomDigraphs import RandomValuationDigraph
@@ -12702,12 +12719,13 @@ if __name__ == "__main__":
         from digraphsTools import *
         ##dg = RedhefferDigraph(order=113)
         #g = RandomTournament(order=5,seed=1)
-        #g = RandomValuationDigraph(seed=1)
-        from outrankingDigraphs import BipolarOutrankingDigraph
-        from randomPerfTabs import RandomCBPerformanceTableau
-        from linearOrders import CopelandOrder
-        t1 = RandomCBPerformanceTableau(numberOfActions=10,seed=1)
-        g = BipolarOutrankingDigraph(t1,Normalized=False)
+        g = RandomValuationDigraph(seed=1)
+        print(g)
+##        from outrankingDigraphs import BipolarOutrankingDigraph
+##        from randomPerfTabs import RandomCBPerformanceTableau
+##        from linearOrders import CopelandOrder
+##        t1 = RandomCBPerformanceTableau(numberOfActions=10,seed=1)
+##        g = BipolarOutrankingDigraph(t1,Normalized=False)
 ##        g.showRubisBestChoiceRecommendation()
 ##        gcd = ~(-g)
 ##        cocb = BrokenCocsDigraph(gcd,Comments=True)
@@ -12716,7 +12734,7 @@ if __name__ == "__main__":
 ##        gcd.showGoodChoices()
 ##        g = RandomValuationDigraph(order=10,seed=3)
 ##        g.showHTMLPerformanceTableau(ndigits=0)
-        g.showHTMLRelationTable(IntegerValues=True)
+##        g.showHTMLRelationTable(IntegerValues=True)
 ##        g.recodeValuation()
 ##        g.showHTMLRelationTable(IntegerValues=True)
 ##        g.showHTMLPerformanceTableau(ndigits=0)
