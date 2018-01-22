@@ -2816,7 +2816,23 @@ else valuation domain = [-1.0,1.0]</li>
 <div class="section" id="graphs-module">
 <span id="graphs-label"></span><h2>graphs module<a class="headerlink" href="#graphs-module" title="Permalink to this headline">¶</a></h2>
 <p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#graphs-tutorial-label"><span class="std std-ref">Working with the graphs module</span></a></p>
-<span class="target" id="module-graphs"></span><dl class="class">
+<span class="target" id="module-graphs"></span><p>Digraph3 graphs.py module
+Python3.3+ computing resources
+Copyright (C)  2011-2015 Raymond Bisdorff</p>
+<blockquote>
+<div><p>This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 3 of the License, or
+(at your option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</p>
+</div></blockquote>
+<dl class="class">
 <dt id="graphs.BestDeterminedSpanningForest">
 <em class="property">class </em><code class="descclassname">graphs.</code><code class="descname">BestDeterminedSpanningForest</code><span class="sig-paren">(</span><em>g</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#BestDeterminedSpanningForest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.BestDeterminedSpanningForest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#graphs.RandomTree" title="graphs.RandomTree"><code class="xref py py-class docutils literal"><span class="pre">graphs.RandomTree</span></code></a></p>
@@ -5951,7 +5967,7 @@ Components are stored in an ordered dictionary.</p>
 <span class="go">Preordering       : 0.00071</span>
 <span class="go">Decomposing       : 0.07366</span>
 <span class="go">Ordering          : 0.00130</span>
-<span class="go">&lt;class &#39;sparseOutrankingDigraphs.PreRankedOutrankingDigraph&#39;&gt; instance        </span>
+<span class="go">&lt;class &#39;sparseOutrankingDigraphs.PreRankedOutrankingDigraph&#39;&gt; instance</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -6125,7 +6141,7 @@ filtering from SortingDigraph instances.</p>
 <span class="go">2: [&#39;a019&#39;, &#39;a080&#39;, &#39;a087&#39;]</span>
 <span class="go">1: [&#39;a046&#39;]</span>
 <span class="go">0: [&#39;a011&#39;, &#39;a050&#39;, &#39;a053&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span><span class="o">.</span><span class="n">exportSortingGraphViz</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">bg</span><span class="o">.</span><span class="n">boostedRanking</span><span class="p">[:</span><span class="mi">100</span><span class="p">])</span>     
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span><span class="o">.</span><span class="n">exportSortingGraphViz</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">bg</span><span class="o">.</span><span class="n">boostedRanking</span><span class="p">[:</span><span class="mi">100</span><span class="p">])</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/preRankedDigraph.png"><img alt="pre-ranked digraph" class="align-center" src="_images/preRankedDigraph.png" style="width: 400px;" /></a>
@@ -6213,7 +6229,7 @@ the diagonal outranking components of the sparse outranking digraph.</p>
 <span class="go">Preordering       : 0.00034</span>
 <span class="go">Decomposing       : 0.03989</span>
 <span class="go">Ordering          : 0.00024</span>
-<span class="go">&lt;class &#39;sparseOutrankingDigraphs.PreRankedOutrankingDigraph&#39;&gt; instance         </span>
+<span class="go">&lt;class &#39;sparseOutrankingDigraphs.PreRankedOutrankingDigraph&#39;&gt; instance</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span><span class="o">.</span><span class="n">showRelationMap</span><span class="p">()</span>
 <span class="go"> ┬+++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
 <span class="go">┴ ++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
@@ -6264,9 +6280,9 @@ the diagonal outranking components of the sparse outranking digraph.</p>
 <span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ - -┬┬</span>
 <span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ -+  ┬</span>
 <span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴  ┴  ┬</span>
-<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ </span>
+<span class="go">┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴</span>
 <span class="go">Component ranking rule: Copeland</span>
-<span class="gp">&gt;&gt;&gt; </span>
+<span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
 </dd></dl>

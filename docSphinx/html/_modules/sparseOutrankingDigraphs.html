@@ -84,29 +84,36 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Default presentation method for pre-ranked sparse digraphs instances.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*----- show short --------------*&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Instance name     : </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;# Actions         : </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;# Criteria        : </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimension</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sorting by        : </span><span class="si">%d</span><span class="s1">-Tiling&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">sortingParameters</span><span class="p">[</span><span class="s1">&#39;limitingQuantiles&#39;</span><span class="p">]</span> <span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ordering strategy : </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">sortingParameters</span><span class="p">[</span><span class="s1">&#39;strategy&#39;</span><span class="p">]</span> <span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ranking rule      : </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">componentRankingRule</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;# Components      : </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbrComponents</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Minimal order     : </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimalComponentSize</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Maximal order     : </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">maximalComponentSize</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Average order     : </span><span class="si">%.1f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">nbrComponents</span><span class="p">)</span> <span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;fill rate         : </span><span class="si">%.3f%%</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fillRate</span><span class="o">*</span><span class="mf">100.0</span><span class="p">)</span> <span class="p">)</span>     
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;----  Constructor run times (in sec.) ----&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total time        : </span><span class="si">%.5f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;totalTime&#39;</span><span class="p">])</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;QuantilesSorting  : </span><span class="si">%.5f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;sorting&#39;</span><span class="p">])</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Preordering       : </span><span class="si">%.5f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;preordering&#39;</span><span class="p">])</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Decomposing       : </span><span class="si">%.5f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;decomposing&#39;</span><span class="p">])</span>
+        <span class="n">reprString</span> <span class="o">=</span> <span class="s1">&#39;*----- Object instance description ------*</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Instance class    : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Instance name     : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;# Actions         : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;# Criteria        : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimension</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Sorting by        : </span><span class="si">%d</span><span class="s1">-Tiling</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">sortingParameters</span><span class="p">[</span><span class="s1">&#39;limitingQuantiles&#39;</span><span class="p">]</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Ordering strategy : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">sortingParameters</span><span class="p">[</span><span class="s1">&#39;strategy&#39;</span><span class="p">]</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Ranking rule      : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">componentRankingRule</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;# Components      : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbrComponents</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Minimal order     : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimalComponentSize</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Maximal order     : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">maximalComponentSize</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Average order     : </span><span class="si">%.1f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">nbrComponents</span><span class="p">)</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;fill rate         : </span><span class="si">%.3f%%</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fillRate</span><span class="o">*</span><span class="mf">100.0</span><span class="p">)</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;----  Constructor run times (in sec.) ----</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ordering          : </span><span class="si">%.5f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;ordering&#39;</span><span class="p">])</span>
+            <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;#Threads          : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;#Threads          : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Total time        : </span><span class="si">%.5f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;totalTime&#39;</span><span class="p">]</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Data imput        : </span><span class="si">%.5f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;dataInput&#39;</span><span class="p">]</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;QuantilesSorting  : </span><span class="si">%.5f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;sorting&#39;</span><span class="p">]</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Preordering       : </span><span class="si">%.5f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;preordering&#39;</span><span class="p">]</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Decomposing       : </span><span class="si">%.5f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;decomposing&#39;</span><span class="p">]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Ordering          : </span><span class="si">%.5f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;ordering&#39;</span><span class="p">]</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="k">pass</span>
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> instance&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">)</span>
-    
+        <span class="k">return</span> <span class="n">reprString</span>
+
 <div class="viewcode-block" id="SparseOutrankingDigraph.relation"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.relation">[docs]</a>    <span class="k">def</span> <span class="nf">relation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dynamic construction of the global outranking characteristic function *r(x S y)*.</span>
@@ -114,14 +121,14 @@
         <span class="n">Min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
         <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
         <span class="n">Max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
-        
+
         <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">Med</span>
         <span class="n">cx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;component&#39;</span><span class="p">]</span>
         <span class="n">cy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="s1">&#39;component&#39;</span><span class="p">]</span>
         <span class="c1">#print(x,cx,y,cy)</span>
         <span class="k">if</span> <span class="n">cx</span> <span class="o">==</span> <span class="n">cy</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">cx</span><span class="p">][</span><span class="s1">&#39;subGraph&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span>        
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">cx</span><span class="p">][</span><span class="s1">&#39;subGraph&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">cx</span><span class="p">][</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">cy</span><span class="p">][</span><span class="s1">&#39;rank&#39;</span><span class="p">]:</span>
             <span class="k">return</span> <span class="n">Min</span>
         <span class="k">else</span><span class="p">:</span>
@@ -149,7 +156,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the ordinal correlation K of a sparse digraph instance</span>
 <span class="sd">        when compared with a given linear order (from worst to best) of its actions</span>
-<span class="sd">        </span>
+
 <span class="sd">        K = sum_{x != y} [ min( max(-self.relation(x,y)),other.relation(x,y), max(self.relation(x,y),-other.relation(x,y)) ]</span>
 
 <span class="sd">        K /= sum_{x!=y} [ min(abs(self.relation(x,y),abs(other.relation(x,y)) ]</span>
@@ -170,7 +177,7 @@
 <span class="sd">             self must be a normalized outranking digraph instance !</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        
+
         <span class="n">selfMax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">selfMax</span> <span class="o">!=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: self&#39;s valuationdomain  must be normalized !&quot;</span><span class="p">)</span>
@@ -204,13 +211,13 @@
             <span class="n">n2</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span>
             <span class="n">determination</span> <span class="o">=</span> <span class="n">determSum</span> <span class="o">/</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n2</span><span class="p">))</span>
             <span class="n">determination</span> <span class="o">/=</span> <span class="n">selfMax</span>
-            
+
             <span class="k">return</span> <span class="p">{</span> <span class="s1">&#39;correlation&#39;</span><span class="p">:</span> <span class="n">correlation</span><span class="p">,</span>\
                      <span class="s1">&#39;determination&#39;</span><span class="p">:</span> <span class="n">determination</span> <span class="p">}</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">{</span> <span class="s1">&#39;correlation&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>\
                      <span class="s1">&#39;determination&#39;</span><span class="p">:</span> <span class="mf">0.0</span> <span class="p">}</span></div>
-    
+
 <div class="viewcode-block" id="SparseOutrankingDigraph.sortingRelation"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.sortingRelation">[docs]</a>    <span class="k">def</span> <span class="nf">sortingRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dynamic construction of the quantiles sorting characteristic function *r(x QS y)*.</span>
@@ -218,14 +225,14 @@
         <span class="n">Min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
         <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
         <span class="n">Max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
-        
+
         <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">Med</span>
         <span class="n">cx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;component&#39;</span><span class="p">]</span>
         <span class="n">cy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="s1">&#39;component&#39;</span><span class="p">]</span>
         <span class="c1">#print(x,cx,y,cy)</span>
         <span class="k">if</span> <span class="n">cx</span> <span class="o">==</span> <span class="n">cy</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">Med</span>      
+            <span class="k">return</span> <span class="n">Med</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">cx</span><span class="p">][</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">cy</span><span class="p">][</span><span class="s1">&#39;rank&#39;</span><span class="p">]:</span>
             <span class="k">return</span> <span class="n">Min</span>
         <span class="k">else</span><span class="p">:</span>
@@ -238,7 +245,7 @@
 
 <span class="sd">        By default, symbols = {&#39;max&#39;:&#39;┬&#39;,&#39;positive&#39;: &#39;+&#39;, &#39;median&#39;: &#39; &#39;,</span>
 <span class="sd">                               &#39;negative&#39;: &#39;-&#39;, &#39;min&#39;: &#39;┴&#39;}</span>
-<span class="sd">        </span>
+
 <span class="sd">        Example::</span>
 
 <span class="sd">            &gt;&gt;&gt; from sparseOutrankingDigraphs import *</span>
@@ -263,7 +270,7 @@
 <span class="sd">            Preordering       : 0.00034</span>
 <span class="sd">            Decomposing       : 0.03989</span>
 <span class="sd">            Ordering          : 0.00024</span>
-<span class="sd">            &lt;class &#39;sparseOutrankingDigraphs.PreRankedOutrankingDigraph&#39;&gt; instance         </span>
+<span class="sd">            &lt;class &#39;sparseOutrankingDigraphs.PreRankedOutrankingDigraph&#39;&gt; instance</span>
 <span class="sd">            &gt;&gt;&gt; bg.showRelationMap()</span>
 <span class="sd">             ┬+++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
 <span class="sd">            ┴ ++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬</span>
@@ -314,9 +321,9 @@
 <span class="sd">            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ - -┬┬</span>
 <span class="sd">            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ -+  ┬</span>
 <span class="sd">            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴  ┴  ┬</span>
-<span class="sd">            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ </span>
+<span class="sd">            ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴</span>
 <span class="sd">            Component ranking rule: Copeland</span>
-<span class="sd">            &gt;&gt;&gt; </span>
+<span class="sd">            &gt;&gt;&gt;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">symbols</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">symbols</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="s1">&#39;┬&#39;</span><span class="p">,</span><span class="s1">&#39;positive&#39;</span><span class="p">:</span> <span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="s1">&#39;median&#39;</span><span class="p">:</span> <span class="s1">&#39; &#39;</span><span class="p">,</span>
@@ -361,7 +368,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">]</span><span class="o">=</span> <span class="s1">&#39;</span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="n">catKey</span><span class="p">][</span><span class="s1">&#39;quantile&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showHTMLPerformanceTableau</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">profiles</span><span class="p">,</span>
                                         <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Marginal performance quantiles&#39;</span><span class="p">)</span></div>
-        
+
 <div class="viewcode-block" id="SparseOutrankingDigraph.showHTMLRelationMap"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.showHTMLRelationMap">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLRelationMap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                             <span class="n">Colored</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                             <span class="n">tableTitle</span><span class="o">=</span><span class="s1">&#39;Relation Map&#39;</span><span class="p">,</span>\
@@ -383,8 +390,8 @@
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;file://&#39;</span><span class="o">+</span><span class="n">fileName</span>
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open_new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
-        
-        
+
+
 <div class="viewcode-block" id="SparseOutrankingDigraph.htmlRelationMap"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.htmlRelationMap">[docs]</a>    <span class="k">def</span> <span class="nf">htmlRelationMap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                           <span class="n">tableTitle</span><span class="o">=</span><span class="s1">&#39;Relation Map&#39;</span><span class="p">,</span>
                           <span class="n">relationName</span><span class="o">=</span><span class="s1">&#39;r(x R y)&#39;</span><span class="p">,</span>
@@ -480,12 +487,12 @@
         <span class="n">s</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/body&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="n">s</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/html&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="k">return</span> <span class="n">s</span></div>
-    
+
 <div class="viewcode-block" id="SparseOutrankingDigraph.computeOrdinalCorrelation"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.computeOrdinalCorrelation">[docs]</a>    <span class="k">def</span> <span class="nf">computeOrdinalCorrelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the ordinal correlation K of a SpareOutrakingDigraph instance</span>
 <span class="sd">        when compared with a given compatible (same actions set) other Digraph instance.</span>
-<span class="sd">        </span>
+
 <span class="sd">        K = sum_{x != y} [ min( max(-self.relation(x,y)),other.relation(x,y), max(self.relation(x,y),-other.relation(x,y)) ]</span>
 
 <span class="sd">        K /= sum_{x!=y} [ min(abs(self.relation(x,y),abs(other.relation(x,y)) ]</span>
@@ -510,7 +517,7 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: the BigDigraph instance must be normalized !!&#39;</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
                 <span class="k">return</span>
-        
+
         <span class="k">if</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">__class__</span><span class="p">,(</span><span class="n">Digraph</span><span class="p">)):</span>
             <span class="c1"># if Debug:</span>
             <span class="c1">#     print(&#39;other is a Digraph instance&#39;)</span>
@@ -525,7 +532,7 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: the other bigDigraph instance must be normalized !!&#39;</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
                 <span class="k">return</span>
-                
+
         <span class="n">correlation</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
         <span class="n">determination</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
 
@@ -543,7 +550,7 @@
                     <span class="n">corr</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span> <span class="nb">max</span><span class="p">(</span><span class="o">-</span><span class="n">selfRelation</span><span class="p">,</span><span class="n">otherRelation</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">selfRelation</span><span class="p">,</span><span class="o">-</span><span class="n">otherRelation</span><span class="p">)</span> <span class="p">)</span>
                     <span class="n">correlation</span> <span class="o">+=</span> <span class="n">corr</span>
                     <span class="n">determination</span> <span class="o">+=</span> <span class="nb">min</span><span class="p">(</span> <span class="nb">abs</span><span class="p">(</span><span class="n">selfRelation</span><span class="p">),</span><span class="nb">abs</span><span class="p">(</span><span class="n">otherRelation</span><span class="p">)</span> <span class="p">)</span>
-                    
+
         <span class="k">if</span> <span class="n">determination</span> <span class="o">&gt;</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">):</span>
             <span class="n">correlation</span> <span class="o">/=</span> <span class="n">determination</span>
             <span class="n">n2</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span>
@@ -552,13 +559,13 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;correlation&#39;</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">),</span>\
                     <span class="s1">&#39;determination&#39;</span><span class="p">:</span> <span class="n">determination</span><span class="p">}</span></div>
-        
+
 <div class="viewcode-block" id="SparseOutrankingDigraph.showDecomposition"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.showDecomposition">[docs]</a>    <span class="k">def</span> <span class="nf">showDecomposition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;decreasing&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prints on the console the decomposition structure of the sparse outranking digraph instance</span>
 <span class="sd">        in *decreasing* (default) or *increasing* preference direction.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        
+
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*--- Relation decomposition in </span><span class="si">%s</span><span class="s1"> order---*&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">direction</span><span class="p">)</span> <span class="p">)</span>
         <span class="n">compKeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">compKey</span> <span class="k">for</span> <span class="n">compKey</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">direction</span> <span class="o">!=</span> <span class="s1">&#39;increasing&#39;</span><span class="p">:</span>
@@ -577,7 +584,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the summary of the distribution of the length of</span>
 <span class="sd">        the components as follows::</span>
-<span class="sd">        </span>
+
 <span class="sd">            summary = {&#39;max&#39;: maxLength,</span>
 <span class="sd">                       &#39;median&#39;:medianLength,</span>
 <span class="sd">                       &#39;mean&#39;:meanLength,</span>
@@ -590,7 +597,7 @@
         <span class="k">except</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error importing the statistics module.&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;You need to upgrade your Python to version 3.4+ !&#39;</span><span class="p">)</span>
-            <span class="k">return</span>      
+            <span class="k">return</span>
         <span class="n">nc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbrComponents</span>
         <span class="n">compLengths</span> <span class="o">=</span> <span class="p">[</span><span class="n">comp</span><span class="p">[</span><span class="s1">&#39;subGraph&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">order</span>\
                        <span class="k">for</span> <span class="n">comp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
@@ -625,9 +632,9 @@
             <span class="nb">print</span><span class="p">(</span><span class="n">newMin</span><span class="p">,</span> <span class="n">newMed</span><span class="p">,</span> <span class="n">newMax</span><span class="p">,</span> <span class="n">newAmplitude</span><span class="p">)</span>
         <span class="c1"># loop over all components</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Recoding the valuation of a BigDigraph instance&#39;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">cki</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> 
+        <span class="k">for</span> <span class="n">cki</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">cki</span><span class="p">][</span><span class="s1">&#39;subGraph&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">recodeValuation</span><span class="p">(</span><span class="n">newMin</span><span class="o">=</span><span class="n">newMin</span><span class="p">,</span><span class="n">newMax</span><span class="o">=</span><span class="n">newMax</span><span class="p">)</span>
-       <span class="c1"># update valuation domain                       </span>
+       <span class="c1"># update valuation domain</span>
         <span class="n">Min</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">newMin</span><span class="p">))</span>
         <span class="n">Max</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">newMax</span><span class="p">))</span>
         <span class="n">Med</span> <span class="o">=</span> <span class="p">(</span><span class="n">Min</span><span class="o">+</span><span class="n">Max</span><span class="p">)</span><span class="o">/</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">)</span>
@@ -652,7 +659,7 @@
 <div class="viewcode-block" id="SparseOutrankingDigraph.computeFillRate"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.computeFillRate">[docs]</a>    <span class="k">def</span> <span class="nf">computeFillRate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the sum of the squares (without diagonal) of the orders of the component&#39;s subgraphs</span>
-<span class="sd">        over the square (without diagonal) of the big digraph order. </span>
+<span class="sd">        over the square (without diagonal) of the big digraph order.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">fillRate</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">comp</span><span class="p">[</span><span class="s1">&#39;subGraph&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">order</span><span class="o">*</span><span class="p">(</span><span class="n">comp</span><span class="p">[</span><span class="s1">&#39;subGraph&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">order</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>\
                         <span class="k">for</span> <span class="n">comp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
@@ -860,7 +867,7 @@
 <span class="sd">            2: [&#39;a019&#39;, &#39;a080&#39;, &#39;a087&#39;]</span>
 <span class="sd">            1: [&#39;a046&#39;]</span>
 <span class="sd">            0: [&#39;a011&#39;, &#39;a050&#39;, &#39;a053&#39;]</span>
-<span class="sd">            &gt;&gt;&gt; bg.exportSortingGraphViz(actionsSubset=bg.boostedRanking[:100])     </span>
+<span class="sd">            &gt;&gt;&gt; bg.exportSortingGraphViz(actionsSubset=bg.boostedRanking[:100])</span>
 
 <span class="sd">        .. image:: preRankedDigraph.png</span>
 <span class="sd">           :alt: pre-ranked digraph</span>
@@ -882,13 +889,13 @@
             <span class="k">except</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error in nodeName: </span><span class="si">%s</span><span class="s1"> !!&#39;</span> <span class="o">%</span> <span class="n">t0</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">t0</span><span class="p">))</span>
                 <span class="k">return</span> <span class="n">t0</span>
-                
+
         <span class="n">compKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
         <span class="k">if</span> <span class="n">direction</span> <span class="o">!=</span> <span class="s1">&#39;decreasing&#39;</span><span class="p">:</span>
             <span class="n">compKeys</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">compKeys</span><span class="p">)</span>
-                    
+
         <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- exporting a dot file for GraphViz tools ---------*&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">actionsSubset</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
@@ -952,7 +959,7 @@
                         <span class="n">arcColor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span>
                         <span class="n">edge</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-&gt; </span><span class="si">%s</span><span class="s1"> [style=&quot;setlinewidth(</span><span class="si">%d</span><span class="s1">)&quot;,color=</span><span class="si">%s</span><span class="s1">] ;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">_safeName</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="n">_safeName</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="mi">1</span><span class="p">,</span><span class="n">arcColor</span><span class="p">)</span>
                         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>
-                                                  
+
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;}</span><span class="se">\n</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="c1"># restore original relation</span>
@@ -1016,7 +1023,7 @@
 <div class="viewcode-block" id="PreRankedOutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">SparseOutrankingDigraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Main class for the multiprocessing implementation of pre-ranked sparse outranking digraphs.</span>
-<span class="sd">    </span>
+
 <span class="sd">    The sparse outranking digraph instance is decomposed with a q-tiling sort into a partition</span>
 <span class="sd">    of quantile equivalence classes which are linearly ordered by average quantile limits (default).</span>
 
@@ -1024,11 +1031,11 @@
 <span class="sd">    which is restricted to the decision actions gathered in this quantile equivalence class.</span>
 
 <span class="sd">    See http://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RB-2016.pdf</span>
-<span class="sd">    </span>
+
 <span class="sd">    By default, the number of quantiles is set to a tenth of the number of decision actions,</span>
 <span class="sd">    i.e. quantiles = order//10. The effective number of quantiles can be much lower for large orders;</span>
 <span class="sd">    for instance quantiles = 250 gives good results for a digraph of order 25000.</span>
-<span class="sd">    </span>
+
 <span class="sd">    For other parameters settings, see the corresponding :py:class:`sortingDigraphs.QuantilesSortingDigraph` class.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1047,26 +1054,31 @@
                  <span class="n">CopyPerfTab</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                  <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">global</span> <span class="n">perfTab</span>
         <span class="k">global</span> <span class="n">decomposition</span>
-        
+
         <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
         <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
         <span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">cpu_count</span>
         <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">Pool</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
-        
+
         <span class="n">ttot</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 
-        <span class="c1"># setting name</span>
+        <span class="c1"># data input</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Data input&#39;</span><span class="p">)</span>
+        
+        <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="n">perfTab</span> <span class="o">=</span> <span class="n">argPerfTab</span>
         <span class="c1"># setting quantiles sorting parameters</span>
         <span class="k">if</span> <span class="n">CopyPerfTab</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">__dict__</span><span class="p">)</span>
-<span class="c1">##            self.actions = deepcopy(perfTab.actions)</span>
-<span class="c1">##            self.criteria = deepcopy(perfTab.criteria)</span>
-<span class="c1">##            self.evaluation = deepcopy(perfTab.evaluation)</span>
+<span class="c1">##            self.__dict__ = deepcopy(perfTab.__dict__)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">criteria</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">evaluation</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">__dict__</span><span class="p">)</span>
 <span class="c1">##            self.actions = perfTab.actions</span>
@@ -1075,8 +1087,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_pr&#39;</span>
         <span class="n">na</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">na</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dimension</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">criteria</span><span class="p">)</span>
-        
+        <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;dataInput&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span> <span class="p">}</span>
+        <span class="c1">#if Comments:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;data input time: </span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;dataInput&#39;</span><span class="p">]))</span>
+
         <span class="c1">#######</span>
         <span class="k">if</span> <span class="n">quantiles</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">quantiles</span> <span class="o">=</span> <span class="n">na</span><span class="o">//</span><span class="mi">10</span>
@@ -1090,7 +1107,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">nbrOfCPUs</span> <span class="o">=</span> <span class="n">nbrOfCPUs</span>
         <span class="c1"># quantiles sorting</span>
         <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>        
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Computing the </span><span class="si">%d</span><span class="s1">-quantiles sorting digraph of order </span><span class="si">%d</span><span class="s1"> ...&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">quantiles</span><span class="p">,</span><span class="n">na</span><span class="p">))</span>
         <span class="n">qs</span> <span class="o">=</span> <span class="n">QuantilesSortingDigraph</span><span class="p">(</span><span class="n">argPerfTab</span><span class="o">=</span><span class="n">perfTab</span><span class="p">,</span>\
                                      <span class="n">limitingQuantiles</span><span class="o">=</span><span class="n">quantiles</span><span class="p">,</span>\
@@ -1105,16 +1122,15 @@
                                      <span class="n">nbrOfProcesses</span><span class="o">=</span><span class="n">nbrOfThreads</span><span class="p">,</span>\
                                      <span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span>\
                                      <span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;sorting&#39;</span><span class="p">:</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">qs</span><span class="o">.</span><span class="n">valuationdomain</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span> <span class="o">=</span> <span class="n">qs</span><span class="o">.</span><span class="n">profiles</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">categories</span> <span class="o">=</span> <span class="n">qs</span><span class="o">.</span><span class="n">categories</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sorting</span> <span class="o">=</span> <span class="n">qs</span><span class="o">.</span><span class="n">sorting</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">qs</span><span class="o">.</span><span class="n">evaluation</span>
-        <span class="c1">#self.evaluation = self.restoreOriginalEvaluations()</span>
-        
+        <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;sorting&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;execution time: </span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;sorting&#39;</span><span class="p">]))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;sorting time: </span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;sorting&#39;</span><span class="p">]))</span>
+        
         <span class="c1"># preordering</span>
         <span class="k">if</span> <span class="n">minimalComponentSize</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">minimalComponentSize</span> <span class="o">=</span> <span class="mi">1</span>
@@ -1139,6 +1155,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">nbrComponents</span> <span class="o">=</span> <span class="n">nc</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nd</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">nc</span><span class="p">))</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">sortingParameters</span><span class="p">[</span><span class="s1">&#39;Threading&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="mi">1</span>
             <span class="n">components</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">nc</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
                 <span class="n">comp</span> <span class="o">=</span> <span class="n">decomposition</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -1159,50 +1176,51 @@
                 <span class="n">components</span><span class="p">[</span><span class="n">compKey</span><span class="p">][</span><span class="s1">&#39;subGraph&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pg</span>
                 <span class="n">components</span><span class="p">[</span><span class="n">compKey</span><span class="p">][</span><span class="s1">&#39;score&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">comp</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">comp</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">comp</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>   <span class="c1"># if self.sortingParameters[&#39;Threading&#39;] == True:</span>
-                <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
-                <span class="kn">from</span> <span class="nn">pickle</span> <span class="k">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span><span class="p">,</span> <span class="n">dump</span>
-                <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Queue</span><span class="p">,</span><span class="n">active_children</span><span class="p">,</span> <span class="n">cpu_count</span>                 
-                <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Processing the </span><span class="si">%d</span><span class="s1"> components&#39;</span> <span class="o">%</span> <span class="n">nc</span> <span class="p">)</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Threading ...&#39;</span><span class="p">)</span>
-                <span class="c1">#tdump = time()</span>
-                <span class="kn">from</span> <span class="nn">tempfile</span> <span class="k">import</span> <span class="n">TemporaryDirectory</span><span class="p">,</span><span class="n">mkdtemp</span>
-                <span class="k">with</span> <span class="n">TemporaryDirectory</span><span class="p">(</span><span class="nb">dir</span><span class="o">=</span><span class="n">tempDir</span><span class="p">)</span> <span class="k">as</span> <span class="n">tempDirName</span><span class="p">:</span>
-                    <span class="c1">## tasks queue and workers launching</span>
-                    <span class="n">NUMBER_OF_WORKERS</span> <span class="o">=</span> <span class="n">nbrOfCPUs</span>
-                    <span class="n">tasksIndex</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">decomposition</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc</span><span class="p">)]</span>
-                    <span class="n">tasksIndex</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">pos</span><span class="p">:</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-                    <span class="n">TASKS</span> <span class="o">=</span> <span class="p">[(</span><span class="n">Comments</span><span class="p">,(</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">nc</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">,</span><span class="n">componentRankingRule</span><span class="p">))</span> <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">tasksIndex</span><span class="p">]</span>
-                    <span class="n">task_queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
-                    <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">TASKS</span><span class="p">:</span>
-                        <span class="n">task_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
-                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUMBER_OF_WORKERS</span><span class="p">):</span>
-                        <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">_worker</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">task_queue</span><span class="p">,))</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-                    <span class="c1">#print(&#39;started&#39;)</span>
-                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUMBER_OF_WORKERS</span><span class="p">):</span>
-                        <span class="n">task_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s1">&#39;STOP&#39;</span><span class="p">)</span>                   
+            <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+            <span class="kn">from</span> <span class="nn">pickle</span> <span class="k">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span><span class="p">,</span> <span class="n">dump</span>
+            <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Queue</span><span class="p">,</span><span class="n">active_children</span><span class="p">,</span> <span class="n">cpu_count</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="n">nbrOfCPUs</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Processing the </span><span class="si">%d</span><span class="s1"> components&#39;</span> <span class="o">%</span> <span class="n">nc</span> <span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;with </span><span class="si">%d</span><span class="s1"> cores&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span><span class="p">)</span>
+            <span class="c1">#tdump = time()</span>
+            <span class="kn">from</span> <span class="nn">tempfile</span> <span class="k">import</span> <span class="n">TemporaryDirectory</span><span class="p">,</span><span class="n">mkdtemp</span>
+            <span class="k">with</span> <span class="n">TemporaryDirectory</span><span class="p">(</span><span class="nb">dir</span><span class="o">=</span><span class="n">tempDir</span><span class="p">)</span> <span class="k">as</span> <span class="n">tempDirName</span><span class="p">:</span>
+                <span class="c1">## tasks queue and workers launching</span>
+                <span class="n">NUMBER_OF_WORKERS</span> <span class="o">=</span> <span class="n">nbrOfCPUs</span>
+                <span class="n">tasksIndex</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">decomposition</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc</span><span class="p">)]</span>
+                <span class="n">tasksIndex</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">pos</span><span class="p">:</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">TASKS</span> <span class="o">=</span> <span class="p">[(</span><span class="n">Comments</span><span class="p">,(</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">nc</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">,</span><span class="n">componentRankingRule</span><span class="p">))</span> <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">tasksIndex</span><span class="p">]</span>
+                <span class="n">task_queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">TASKS</span><span class="p">:</span>
+                    <span class="n">task_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUMBER_OF_WORKERS</span><span class="p">):</span>
+                    <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">_worker</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">task_queue</span><span class="p">,))</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+                <span class="c1">#print(&#39;started&#39;)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUMBER_OF_WORKERS</span><span class="p">):</span>
+                    <span class="n">task_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s1">&#39;STOP&#39;</span><span class="p">)</span>
 
-                    <span class="k">while</span> <span class="n">active_children</span><span class="p">()</span> <span class="o">!=</span> <span class="p">[]:</span>
-                        <span class="k">pass</span>
-                    <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exit </span><span class="si">%d</span><span class="s1"> threads&#39;</span> <span class="o">%</span> <span class="n">NUMBER_OF_WORKERS</span><span class="p">)</span>
-                        
-                    <span class="n">components</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
-                    <span class="c1">#componentsList = []</span>
-                    <span class="n">boostedRanking</span> <span class="o">=</span> <span class="p">[]</span>
-                    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc</span><span class="p">):</span>
-                        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;job&#39;</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
-                        <span class="n">fiName</span> <span class="o">=</span> <span class="n">tempDirName</span><span class="o">+</span><span class="s1">&#39;/splitComponent-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.py&#39;</span>
-                        <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fiName</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
-                        <span class="n">splitComponent</span> <span class="o">=</span> <span class="n">loads</span><span class="p">(</span><span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-                        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;splitComponent&#39;</span><span class="p">,</span><span class="n">splitComponent</span><span class="p">)</span>
-                        <span class="n">components</span><span class="p">[</span><span class="n">splitComponent</span><span class="p">[</span><span class="s1">&#39;compKey&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">splitComponent</span><span class="p">[</span><span class="s1">&#39;compDict&#39;</span><span class="p">]</span>
-                        <span class="n">boostedRanking</span> <span class="o">+=</span> <span class="n">splitComponent</span><span class="p">[</span><span class="s1">&#39;compDict&#39;</span><span class="p">][</span><span class="s1">&#39;subGraph&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">ranking</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">boostedRanking</span> <span class="o">=</span> <span class="n">boostedRanking</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">boostedOrder</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">boostedRanking</span><span class="p">))</span>
-                    
+                <span class="k">while</span> <span class="n">active_children</span><span class="p">()</span> <span class="o">!=</span> <span class="p">[]:</span>
+                    <span class="k">pass</span>
+                <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exit </span><span class="si">%d</span><span class="s1"> threads&#39;</span> <span class="o">%</span> <span class="n">NUMBER_OF_WORKERS</span><span class="p">)</span>
+
+                <span class="n">components</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+                <span class="c1">#componentsList = []</span>
+                <span class="n">boostedRanking</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;job&#39;</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+                    <span class="n">fiName</span> <span class="o">=</span> <span class="n">tempDirName</span><span class="o">+</span><span class="s1">&#39;/splitComponent-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.py&#39;</span>
+                    <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fiName</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+                    <span class="n">splitComponent</span> <span class="o">=</span> <span class="n">loads</span><span class="p">(</span><span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+                    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;splitComponent&#39;</span><span class="p">,</span><span class="n">splitComponent</span><span class="p">)</span>
+                    <span class="n">components</span><span class="p">[</span><span class="n">splitComponent</span><span class="p">[</span><span class="s1">&#39;compKey&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">splitComponent</span><span class="p">[</span><span class="s1">&#39;compDict&#39;</span><span class="p">]</span>
+                    <span class="n">boostedRanking</span> <span class="o">+=</span> <span class="n">splitComponent</span><span class="p">[</span><span class="s1">&#39;compDict&#39;</span><span class="p">][</span><span class="s1">&#39;subGraph&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">ranking</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">boostedRanking</span> <span class="o">=</span> <span class="n">boostedRanking</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">boostedOrder</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">boostedRanking</span><span class="p">))</span>
+
         <span class="c1"># storing components, fillRate and maximalComponentSize</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">components</span> <span class="o">=</span> <span class="n">components</span>
@@ -1226,7 +1244,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-1&#39;</span><span class="p">),</span>
                                 <span class="s1">&#39;med&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">),</span>
                                 <span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)}</span>
-       
+
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;decomposing&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;decomposing time: </span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;decomposing&#39;</span><span class="p">]</span>  <span class="p">)</span>
@@ -1248,7 +1266,7 @@
             <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">save2File</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">showShort</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="n">save2File</span><span class="p">)</span>
-            
+
 
     <span class="c1"># ----- class methods ------------</span>
 
@@ -1262,13 +1280,13 @@
                                  <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the quantile interval of the decision actions.</span>
-<span class="sd">        </span>
+
 <span class="sd">        *Parameters*:</span>
 <span class="sd">            * QuantilesdSortingDigraph instance</span>
 <span class="sd">            * Descending: listing in *decreasing* (default) or *increasing* quantile order.</span>
 <span class="sd">            * strategy: ordering in an {&#39;optimistic&#39; | &#39;pessimistic&#39; | &#39;average&#39; (default)}</span>
 <span class="sd">              in the uppest, the lowest or the average potential quantile.</span>
-<span class="sd">        </span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">itemgetter</span>
         <span class="k">if</span> <span class="n">strategy</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
@@ -1310,7 +1328,7 @@
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">actionsCategIntervals</span><span class="p">)</span>
         <span class="n">compSize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimalComponentSize</span>
-        
+
         <span class="k">if</span> <span class="n">compSize</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">Descending</span><span class="p">:</span>
                 <span class="n">componentsIntervals</span> <span class="o">=</span> <span class="p">[[(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span><span class="n">actionsCategories</span><span class="p">[</span><span class="n">item</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="mi">4</span><span class="p">]]</span>\
@@ -1318,7 +1336,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">componentsIntervals</span> <span class="o">=</span> <span class="p">[[(</span><span class="n">item</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span><span class="n">actionsCategories</span><span class="p">[</span><span class="n">item</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="mi">4</span><span class="p">]]</span>\
                                    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">actionsCategIntervals</span><span class="p">]</span>
-                
+
         <span class="k">else</span><span class="p">:</span>
             <span class="n">componentsIntervals</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">nc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actionsCategIntervals</span><span class="p">)</span>
@@ -1329,7 +1347,7 @@
                 <span class="c1">#print(comp)</span>
                 <span class="k">if</span> <span class="n">currContLength</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="n">lowQtileLimit</span> <span class="o">=</span> <span class="n">comp</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-                <span class="n">highQtileLimit</span> <span class="o">=</span> <span class="n">comp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>             
+                <span class="n">highQtileLimit</span> <span class="o">=</span> <span class="n">comp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
                 <span class="n">compContent</span> <span class="o">+=</span> <span class="n">actionsCategories</span><span class="p">[</span><span class="n">comp</span><span class="p">]</span>
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">compContent</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">compSize</span> <span class="ow">or</span> <span class="n">i</span> <span class="o">==</span> <span class="n">nc</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
                     <span class="n">score</span> <span class="o">=</span> <span class="n">comp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -1344,7 +1362,7 @@
                     <span class="n">compContent</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">componentsIntervals</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">componentsIntervals</span>        
+        <span class="k">return</span> <span class="n">componentsIntervals</span>
 
 <div class="viewcode-block" id="PreRankedOutrankingDigraph.computeActionCategories"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeActionCategories">[docs]</a>    <span class="k">def</span> <span class="nf">computeActionCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">Show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                              <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -1356,7 +1374,7 @@
         <span class="c1">#qs = self</span>
         <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
         <span class="n">categories</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">categories</span>
-        
+
         <span class="k">try</span><span class="p">:</span>
             <span class="n">sortinga</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sorting</span><span class="p">[</span><span class="n">action</span><span class="p">]</span>
         <span class="k">except</span><span class="p">:</span>
@@ -1364,7 +1382,7 @@
                                                    <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span>\
                                                    <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
             <span class="n">sortinga</span> <span class="o">=</span> <span class="n">sorting</span><span class="p">[</span><span class="n">action</span><span class="p">]</span>
-            
+
         <span class="n">keys</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">categories</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
         <span class="c1">#for c in self.orderedCategoryKeys():</span>
@@ -1376,7 +1394,7 @@
                 <span class="k">if</span> <span class="n">sortinga</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
                     <span class="n">lowLimit</span> <span class="o">=</span> <span class="n">sortinga</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">sortinga</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;notHighLimit&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
-                    <span class="n">notHighLimit</span> <span class="o">=</span> <span class="n">sortinga</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;notHighLimit&#39;</span><span class="p">]</span>    
+                    <span class="n">notHighLimit</span> <span class="o">=</span> <span class="n">sortinga</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;notHighLimit&#39;</span><span class="p">]</span>
                 <span class="n">keys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">sortinga</span><span class="p">[</span><span class="n">c</span><span class="p">])</span>
@@ -1390,7 +1408,7 @@
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
-        
+
         <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">Show</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> - </span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1"> with credibility: </span><span class="si">%.2f</span><span class="s1"> = min(</span><span class="si">%.2f</span><span class="s1">,</span><span class="si">%.2f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span>\
@@ -1426,7 +1444,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the ordinal correlation coefficient between</span>
 <span class="sd">        the global linar ranking and the marginal criterion relation.</span>
-<span class="sd">        </span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1">#print(criterion)</span>
         <span class="n">gc</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">coalition</span><span class="o">=</span><span class="p">[</span><span class="n">criterion</span><span class="p">],</span>
@@ -1445,7 +1463,7 @@
                                                           <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Method for computing correlations between each individual criterion relation with the corresponding global ranking relation.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Returns a list of tuples (correlation,criterionKey) sorted by default in decreasing order of the correlation.</span>
 
 <span class="sd">        If Threading is True, a multiprocessing Pool class is used with a parallel equivalent of the built-in map function.</span>
@@ -1458,7 +1476,7 @@
             <span class="k">if</span> <span class="n">nbrCores</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">nbrCores</span><span class="o">=</span> <span class="n">cpu_count</span><span class="p">()</span>
             <span class="n">criteriaList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">]</span>
-            <span class="k">with</span> <span class="n">Pool</span><span class="p">(</span><span class="n">nbrCores</span><span class="p">)</span> <span class="k">as</span> <span class="n">proc</span><span class="p">:</span>   
+            <span class="k">with</span> <span class="n">Pool</span><span class="p">(</span><span class="n">nbrCores</span><span class="p">)</span> <span class="k">as</span> <span class="n">proc</span><span class="p">:</span>
                 <span class="n">correlations</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">computeCriterion2RankingCorrelation</span><span class="p">,</span><span class="n">criteriaList</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">ValuedCorrelation</span><span class="p">:</span>
                 <span class="n">criteriaCorrelation</span> <span class="o">=</span> <span class="p">[(</span><span class="n">correlations</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span><span class="o">*</span>\
@@ -1472,12 +1490,12 @@
             <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">dict</span><span class="o">.</span><span class="n">keys</span><span class="p">(</span><span class="n">criteria</span><span class="p">):</span>
                 <span class="n">corr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeCriterion2RankingCorrelation</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">ValuedCorrelation</span><span class="p">:</span>
-                    <span class="n">criteriaCorrelation</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">corr</span><span class="p">[</span><span class="s1">&#39;determination&#39;</span><span class="p">],</span><span class="n">c</span><span class="p">))</span>            
+                    <span class="n">criteriaCorrelation</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">corr</span><span class="p">[</span><span class="s1">&#39;determination&#39;</span><span class="p">],</span><span class="n">c</span><span class="p">))</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">criteriaCorrelation</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">],</span><span class="n">c</span><span class="p">))</span>            
+                    <span class="n">criteriaCorrelation</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">],</span><span class="n">c</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">Sorted</span><span class="p">:</span>
             <span class="n">criteriaCorrelation</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">criteriaCorrelation</span>   </div>
+        <span class="k">return</span> <span class="n">criteriaCorrelation</span></div>
 
 <div class="viewcode-block" id="PreRankedOutrankingDigraph.showMarginalVersusGlobalRankingCorrelation"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showMarginalVersusGlobalRankingCorrelation">[docs]</a>    <span class="k">def</span> <span class="nf">showMarginalVersusGlobalRankingCorrelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                                                       <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
@@ -1508,12 +1526,12 @@
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Quantiles sorting result per decision action&#39;</span><span class="p">)</span>
         <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sorting</span><span class="p">[</span><span class="n">action</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">categ</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="n">categ</span><span class="p">][</span><span class="s1">&#39;categoryMembership&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">Med</span><span class="p">:</span> 
+            <span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="n">categ</span><span class="p">][</span><span class="s1">&#39;categoryMembership&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">Med</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%.2f</span><span class="s1"> (</span><span class="si">%.2f</span><span class="s1">,</span><span class="si">%.2f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="n">categ</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">],</span>
                                                 <span class="n">res</span><span class="p">[</span><span class="n">categ</span><span class="p">][</span><span class="s1">&#39;categoryMembership&#39;</span><span class="p">],</span>
                                                 <span class="n">res</span><span class="p">[</span><span class="n">categ</span><span class="p">][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">],</span>
                                                 <span class="n">res</span><span class="p">[</span><span class="n">categ</span><span class="p">][</span><span class="s1">&#39;notHighLimit&#39;</span><span class="p">]</span> <span class="p">)</span> <span class="p">)</span></div>
-            
+
 <span class="c1">##    def showActionsSortingResult(self,actionsSubset=None):</span>
 <span class="c1">##        &quot;&quot;&quot;</span>
 <span class="c1">##        shows the quantiles sorting result all (default) of a subset of the decision actions.</span>
@@ -1529,7 +1547,7 @@
 <div class="viewcode-block" id="PreRankedOutrankingDigraph.showShort"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showShort">[docs]</a>    <span class="k">def</span> <span class="nf">showShort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">WithFileSize</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Default (__repr__) presentation method for big outranking digraphs instances:</span>
-<span class="sd">        </span>
+
 <span class="sd">        &gt;&gt;&gt; from sparseOutrankingDigraphs import *</span>
 <span class="sd">        &gt;&gt;&gt; t = RandomCBPerformanceTableau(numberOfActions=100,seed=1)</span>
 <span class="sd">        &gt;&gt;&gt; g = PreRankedOutrankingDigraph(t,quantiles=10)</span>
@@ -1552,7 +1570,7 @@
 <span class="sd">        Preordering       : 0.00071</span>
 <span class="sd">        Decomposing       : 0.07366</span>
 <span class="sd">        Ordering          : 0.00130</span>
-<span class="sd">        &lt;class &#39;sparseOutrankingDigraphs.PreRankedOutrankingDigraph&#39;&gt; instance        </span>
+<span class="sd">        &lt;class &#39;sparseOutrankingDigraphs.PreRankedOutrankingDigraph&#39;&gt; instance</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1">#summaryStats = self.computeDecompositionSummaryStatistics()</span>
         <span class="k">if</span> <span class="n">fileName</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
@@ -1665,12 +1683,12 @@
         <span class="n">SparseOutrankingDigraph</span><span class="o">.</span><span class="n">showDecomposition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="n">direction</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PreRankedOutrankingDigraph.showDecomposition"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showDecomposition">[docs]</a>    <span class="k">def</span> <span class="nf">showDecomposition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;decreasing&#39;</span><span class="p">):</span>
-        
+
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*--- quantiles decomposition in </span><span class="si">%s</span><span class="s1"> order---*&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">direction</span><span class="p">)</span> <span class="p">)</span>
         <span class="c1">#compKeys = [compKey for compKey in self.components.keys()]</span>
         <span class="c1"># the components are ordered from best (1) to worst (n)</span>
         <span class="n">compKeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">direction</span> <span class="o">!=</span> <span class="s1">&#39;decreasing&#39;</span><span class="p">:</span>    
+        <span class="k">if</span> <span class="n">direction</span> <span class="o">!=</span> <span class="s1">&#39;decreasing&#39;</span><span class="p">:</span>
             <span class="n">compKeys</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">pass</span>
@@ -1682,7 +1700,7 @@
             <span class="c1">#print(&#39;%s. %s-%s : %s&#39; % (compKey,comp[&#39;lowQtileLimit&#39;],comp[&#39;highQtileLimit&#39;],actions))</span>
             <span class="c1">#else:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">. </span><span class="si">%s</span><span class="s1">-</span><span class="si">%s</span><span class="s1"> : </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">compKey</span><span class="p">,</span><span class="n">comp</span><span class="p">[</span><span class="s1">&#39;lowQtileLimit&#39;</span><span class="p">],</span><span class="n">comp</span><span class="p">[</span><span class="s1">&#39;highQtileLimit&#39;</span><span class="p">],</span><span class="n">actions</span><span class="p">))</span></div>
-                
+
 <div class="viewcode-block" id="PreRankedOutrankingDigraph.computeCategoryContents"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeCategoryContents">[docs]</a>    <span class="k">def</span> <span class="nf">computeCategoryContents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">StoreSorting</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                                 <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1702,7 +1720,7 @@
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;categoryMembership&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]:</span>
                     <span class="n">categoryContent</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        
+
         <span class="k">return</span> <span class="n">categoryContent</span></div>
 
 <div class="viewcode-block" id="PreRankedOutrankingDigraph.showSorting"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showSorting">[docs]</a>    <span class="k">def</span> <span class="nf">showSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">isReturningHTML</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -1710,7 +1728,7 @@
 <span class="sd">        Shows sorting results in decreasing or increasing (Reverse=False)</span>
 <span class="sd">        order of the categories. If isReturningHTML is True (default = False)</span>
 <span class="sd">        the method returns a htlm table with the sorting result.</span>
-<span class="sd">        </span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1">#from string import replace</span>
         <span class="c1">#from copy import copy, deepcopy</span>
@@ -1769,7 +1787,7 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">actions</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">pg</span><span class="o">.</span><span class="n">order</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
                     <span class="n">pg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
-                    
+
         <span class="k">else</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">compKey</span> <span class="ow">in</span> <span class="n">compKeys</span><span class="p">:</span>
                 <span class="n">comp</span> <span class="o">=</span> <span class="n">components</span><span class="p">[</span><span class="n">compkey</span><span class="p">]</span>
@@ -1778,7 +1796,7 @@
                 <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">pg</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">actions</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">pg</span><span class="o">.</span><span class="n">order</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-                    <span class="n">pg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>                </div>
+                    <span class="n">pg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="PreRankedOutrankingDigraph.computeBoostedRanking"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeBoostedRanking">[docs]</a>    <span class="k">def</span> <span class="nf">computeBoostedRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">):</span>
@@ -1858,7 +1876,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
         <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">flatten</span>
-                    
+
         <span class="n">brewerRdYlGn9Colors</span> <span class="o">=</span> <span class="p">[(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.1111&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#D53E4F&quot;&#39;</span><span class="p">),</span>
                                <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.2222&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#F46D43&quot;&#39;</span><span class="p">),</span>
                                <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.3333&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#FDAE61&quot;&#39;</span><span class="p">),</span>
@@ -1915,7 +1933,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">actionsList</span> <span class="o">=</span> <span class="n">argActionsList</span>
         <span class="n">na</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)</span>
-        
+
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">actionsList</span><span class="p">)</span>
 
@@ -1932,11 +1950,11 @@
                 <span class="n">criteriaWeightsList</span> <span class="o">=</span> <span class="p">[(</span><span class="o">-</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">],</span><span class="n">g</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="p">]</span>
                 <span class="n">criteriaWeightsList</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
                 <span class="n">criteriaList</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaWeightsList</span><span class="p">]</span>
-                <span class="n">criteriaCorrelation</span> <span class="o">=</span> <span class="kc">None</span>    
+                <span class="n">criteriaCorrelation</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">criteria</span> <span class="o">=</span> <span class="n">argCriteriaList</span>
             <span class="n">criteriaCorrelation</span> <span class="o">=</span> <span class="kc">None</span>
-            
+
         <span class="n">quantileColor</span><span class="o">=</span><span class="p">{}</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionsList</span><span class="p">:</span>
             <span class="n">quantileColor</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1948,7 +1966,7 @@
                     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc</span><span class="p">):</span>
                         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                             <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">colorPalette</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
-                        
+
                         <span class="k">if</span> <span class="n">quantilexg</span> <span class="o">&lt;=</span> <span class="n">colorPalette</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
                             <span class="n">quantileColor</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">colorPalette</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
                             <span class="k">break</span>
@@ -1956,16 +1974,16 @@
                     <span class="n">quantileColor</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">naColor</span>
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">quantileColor</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">g</span><span class="p">])</span>
-        <span class="c1"># legend            </span>
+        <span class="c1"># legend</span>
 <span class="c1">##        html += &#39;&lt;i&gt;Color legend: &lt;/i&gt;\n&#39;</span>
-<span class="c1">##        html += &#39;&lt;table style=&quot;background-color:%s; border-collapse: collapse;&quot; border=&quot;1&quot;&gt;\n&#39; % (backGroundColor) </span>
+<span class="c1">##        html += &#39;&lt;table style=&quot;background-color:%s; border-collapse: collapse;&quot; border=&quot;1&quot;&gt;\n&#39; % (backGroundColor)</span>
 <span class="c1">##        html += &#39;&lt;tr bgcolor=%s&gt;&lt;th&gt;quantile&lt;/th&gt;&#39; % (columnHeaderColor)</span>
 <span class="c1">##        for col in range(nc):</span>
 <span class="c1">##            html += &#39;&lt;td bgcolor=%s&gt;%s&lt;/td&gt;&#39; % (colorPalette[col][1],str(colorPalette[col][0]))</span>
 <span class="c1">##        html += &#39;&lt;/tr&gt;\n&#39;</span>
 <span class="c1">##        html += &#39;&lt;/table&gt;\n&#39;</span>
         <span class="c1"># heatmap</span>
-        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;table style=&quot;background-color:</span><span class="si">%s</span><span class="s1">;&quot; border=&quot;1&quot;&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">backGroundColor</span><span class="p">)</span> 
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;table style=&quot;background-color:</span><span class="si">%s</span><span class="s1">;&quot; border=&quot;1&quot;&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">backGroundColor</span><span class="p">)</span>
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr bgcolor=</span><span class="si">%s</span><span class="s1">&gt;&lt;th&gt;criteria&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">columnHeaderColor</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
@@ -2003,7 +2021,7 @@
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="c1"># legend</span>
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;i&gt;Color legend: &lt;/i&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;table style=&quot;background-color:</span><span class="si">%s</span><span class="s1">;&quot; border=&quot;1&quot;&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">backGroundColor</span><span class="p">)</span> 
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;table style=&quot;background-color:</span><span class="si">%s</span><span class="s1">;&quot; border=&quot;1&quot;&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">backGroundColor</span><span class="p">)</span>
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr bgcolor=</span><span class="si">%s</span><span class="s1">&gt;&lt;th&gt;quantile&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">columnHeaderColor</span><span class="p">)</span>
         <span class="c1">#html += &#39;&lt;td bgcolor=%s&gt;&amp;nbsp;[%.2f - %.2f[&amp;nbsp;&lt;/td&gt;&#39; % (colorPalette[0][1],0.0,colorPalette[0][0])</span>
         <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">nc</span><span class="p">):</span>
@@ -2123,7 +2141,7 @@
             <span class="k">return</span> <span class="n">action</span><span class="p">,</span>\
                     <span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>\
                     <span class="n">keys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>\
-                    <span class="n">credibility</span>            </div>
+                    <span class="n">credibility</span></div>
 
 <div class="viewcode-block" id="PreRankedOutrankingDigraph.showNewActionCategories"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showNewActionCategories">[docs]</a>    <span class="k">def</span> <span class="nf">showNewActionCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">sorting</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -2131,7 +2149,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">computeNewActionCategories</span><span class="p">(</span><span class="n">action</span><span class="p">,</span><span class="n">sorting</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
-        
+
 <div class="viewcode-block" id="PreRankedOutrankingDigraph.showNewActionsSortingResult"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showNewActionsSortingResult">[docs]</a>    <span class="k">def</span> <span class="nf">showNewActionsSortingResult</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actions</span><span class="p">,</span><span class="n">sorting</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        shows the quantiles sorting result all (default) of a subset of the decision actions.</span>
@@ -2144,7 +2162,7 @@
 <div class="viewcode-block" id="PreRankedConfidentOutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedConfidentOutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">PreRankedConfidentOutrankingDigraph</span><span class="p">(</span><span class="n">PreRankedOutrankingDigraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Main class for the multiprocessing implementation of pre-ranked sparse confident outranking digraphs.</span>
-<span class="sd">    </span>
+
 <span class="sd">    The sparse outranking digraph instance is decomposed with a confident q-tiling sort into a partition</span>
 <span class="sd">    of quantile equivalence classes which are linearly ordered by average quantile limits (default).</span>
 
@@ -2154,7 +2172,7 @@
 <span class="sd">    By default, the number of quantiles is set to a tenth of the number of decision actions,</span>
 <span class="sd">    i.e. quantiles = order//10. The effective number of quantiles can be much lower for large orders;</span>
 <span class="sd">    for instance quantiles = 250 gives good results for a digraph of order 25000.</span>
-<span class="sd">    </span>
+
 <span class="sd">    For other parameters settings, see the corresponding classes:</span>
 <span class="sd">    :py:class:`sortingDigraphs.QuantilesSortingDigraph` and :py:class:`outrankingDigraphs.ConfidentBipolarOutrankingDigraph` .</span>
 
@@ -2180,16 +2198,17 @@
 
         <span class="k">global</span> <span class="n">perfTab</span>
         <span class="k">global</span> <span class="n">decomposition</span>
-        
+
         <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
         <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
         <span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">cpu_count</span>
         <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">Pool</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
-        
+
         <span class="n">ttot</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 
         <span class="c1"># setting name</span>
+        <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="n">perfTab</span> <span class="o">=</span> <span class="n">argPerfTab</span>
         <span class="c1"># setting quantiles sorting parameters</span>
         <span class="k">if</span> <span class="n">CopyPerfTab</span><span class="p">:</span>
@@ -2207,6 +2226,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">na</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dimension</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">criteria</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">componentRankingRule</span> <span class="o">=</span> <span class="n">componentRankingRule</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;dataInput&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
 
         <span class="c1">#######</span>
         <span class="k">if</span> <span class="n">quantiles</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
@@ -2221,7 +2242,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">nbrOfCPUs</span> <span class="o">=</span> <span class="n">nbrOfCPUs</span>
         <span class="c1"># quantiles sorting</span>
         <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>        
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Computing the </span><span class="si">%d</span><span class="s1">-quantiles sorting digraph of order </span><span class="si">%d</span><span class="s1"> ...&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">quantiles</span><span class="p">,</span><span class="n">na</span><span class="p">))</span>
         <span class="n">qs</span> <span class="o">=</span> <span class="n">QuantilesSortingDigraph</span><span class="p">(</span><span class="n">argPerfTab</span><span class="o">=</span><span class="n">perfTab</span><span class="p">,</span>\
                                      <span class="n">limitingQuantiles</span><span class="o">=</span><span class="n">quantiles</span><span class="p">,</span>\
@@ -2237,17 +2258,17 @@
                                      <span class="n">nbrOfProcesses</span><span class="o">=</span><span class="n">nbrOfThreads</span><span class="p">,</span>\
                                      <span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span>\
                                      <span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;sorting&#39;</span><span class="p">:</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;sorting&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">qs</span><span class="o">.</span><span class="n">valuationdomain</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span> <span class="o">=</span> <span class="n">qs</span><span class="o">.</span><span class="n">profiles</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">categories</span> <span class="o">=</span> <span class="n">qs</span><span class="o">.</span><span class="n">categories</span>
         <span class="c1"># compute sorting likelyhoods</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bipolarConfidenceLevel</span> <span class="o">=</span> <span class="p">(</span><span class="n">confidence</span><span class="o">/</span><span class="mf">100.0</span><span class="p">)</span><span class="o">*</span><span class="mf">2.0</span> <span class="o">-</span><span class="mf">1.0</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">bipolarConfidenceLevel</span> <span class="o">=</span> <span class="p">(</span><span class="n">confidence</span><span class="o">/</span><span class="mf">100.0</span><span class="p">)</span><span class="o">*</span><span class="mf">2.0</span> <span class="o">-</span><span class="mf">1.0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">distribution</span> <span class="o">=</span> <span class="n">distribution</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">betaParameter</span> <span class="o">=</span> <span class="n">betaParameter</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">qs</span><span class="o">.</span><span class="n">evaluation</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sortingRelation</span> <span class="o">=</span> <span class="n">qs</span><span class="o">.</span><span class="n">relation</span>
-        
+
         <span class="bp">self</span><span class="o">.</span><span class="n">likelihoods</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeCLTLikelihoods</span><span class="p">(</span><span class="n">distribution</span><span class="o">=</span><span class="n">distribution</span><span class="p">,</span>
                                                       <span class="n">betaParameter</span><span class="o">=</span><span class="n">betaParameter</span><span class="p">,</span>
                                                       <span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
@@ -2300,13 +2321,13 @@
                 <span class="k">if</span> <span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;categoryMembership&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]:</span>
                     <span class="n">categoryContent</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">categoryContent</span> <span class="o">=</span> <span class="n">categoryContent</span>
-        
-        
+
+
         <span class="k">if</span> <span class="n">CopyPerfTab</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">evaluation</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">evaluation</span>         
-        
+            <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">evaluation</span>
+
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;execution time: </span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;sorting&#39;</span><span class="p">]))</span>
         <span class="c1"># preordering</span>
@@ -2355,7 +2376,7 @@
         <span class="k">else</span><span class="p">:</span>   <span class="c1"># if self.sortingParameters[&#39;Threading&#39;] == True:</span>
                 <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
                 <span class="kn">from</span> <span class="nn">pickle</span> <span class="k">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span><span class="p">,</span> <span class="n">dump</span>
-                <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Queue</span><span class="p">,</span><span class="n">active_children</span><span class="p">,</span> <span class="n">cpu_count</span>                 
+                <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Queue</span><span class="p">,</span><span class="n">active_children</span><span class="p">,</span> <span class="n">cpu_count</span>
                 <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Processing the </span><span class="si">%d</span><span class="s1"> components&#39;</span> <span class="o">%</span> <span class="n">nc</span> <span class="p">)</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Threading ...&#39;</span><span class="p">)</span>
@@ -2374,13 +2395,13 @@
                         <span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">_worker</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">task_queue</span><span class="p">,))</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;started&#39;</span><span class="p">)</span>
                     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUMBER_OF_WORKERS</span><span class="p">):</span>
-                        <span class="n">task_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s1">&#39;STOP&#39;</span><span class="p">)</span>                   
+                        <span class="n">task_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s1">&#39;STOP&#39;</span><span class="p">)</span>
 
                     <span class="k">while</span> <span class="n">active_children</span><span class="p">()</span> <span class="o">!=</span> <span class="p">[]:</span>
                         <span class="k">pass</span>
                     <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exit </span><span class="si">%d</span><span class="s1"> threads&#39;</span> <span class="o">%</span> <span class="n">NUMBER_OF_WORKERS</span><span class="p">)</span>
-                        
+
                     <span class="n">components</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
                     <span class="c1">#componentsList = []</span>
                     <span class="n">boostedRanking</span> <span class="o">=</span> <span class="p">[]</span>
@@ -2396,7 +2417,7 @@
                         <span class="n">boostedRanking</span> <span class="o">+=</span> <span class="n">splitComponent</span><span class="p">[</span><span class="s1">&#39;compDict&#39;</span><span class="p">][</span><span class="s1">&#39;subGraph&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">ranking</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">boostedRanking</span> <span class="o">=</span> <span class="n">boostedRanking</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">boostedOrder</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">boostedRanking</span><span class="p">))</span>
-                    
+
         <span class="c1"># storing components, fillRate and maximalComponentSize</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">components</span> <span class="o">=</span> <span class="n">components</span>
@@ -2420,7 +2441,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-1&#39;</span><span class="p">),</span>
                                 <span class="s1">&#39;med&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">),</span>
                                 <span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)}</span>
-       
+
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;decomposing&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;decomposing time: </span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;decomposing&#39;</span><span class="p">]</span>  <span class="p">)</span>
@@ -2441,11 +2462,11 @@
             <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">save2File</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">showShort</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="n">save2File</span><span class="p">)</span>
-            
+
 
     <span class="c1"># ----- class methods ------------</span>
 
-    
+
 <div class="viewcode-block" id="PreRankedConfidentOutrankingDigraph.computeCLTLikelihoods"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedConfidentOutrankingDigraph.computeCLTLikelihoods">[docs]</a>    <span class="k">def</span> <span class="nf">computeCLTLikelihoods</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">distribution</span><span class="o">=</span><span class="s2">&quot;triangular&quot;</span><span class="p">,</span>
                               <span class="n">betaParameter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                               <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -2459,7 +2480,7 @@
         <span class="n">sumWeights</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
         <span class="n">criteriaList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">]</span>
         <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">criteriaList</span><span class="p">)</span>
-        
+
         <span class="n">weightSquares</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="p">:</span>
             <span class="n">gWeight</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
@@ -2512,7 +2533,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the relation cut at likelihood level.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        
+
         <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
         <span class="n">Max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
         <span class="n">Min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
@@ -2541,7 +2562,7 @@
                     <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">sortingRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">likelihoods</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">],</span><span class="n">confidentRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">confidenceCutLevel</span> <span class="o">=</span> <span class="n">confidenceCutLevel</span>
         <span class="k">return</span> <span class="n">confidentRelation</span>
-        
+
     <span class="k">def</span> <span class="nf">_recodeConcordanceValuation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">oldRelation</span><span class="p">,</span><span class="n">sumWeights</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Recodes the characteristic valuation according</span>
@@ -2550,7 +2571,7 @@
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">oldRelation</span><span class="p">,</span><span class="n">sumWeights</span><span class="p">)</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span> <span class="k">as</span> <span class="n">deepcopy</span>
-        
+
 <span class="c1">##        oldMax = Decimal(&#39;1&#39;)</span>
 <span class="c1">##        oldMin = Decimal(&#39;-1&#39;)</span>
 <span class="c1">##        oldMed = Decimal(&#39;0&#39;)</span>
@@ -2627,10 +2648,10 @@
             <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">actions</span> <span class="o">=</span> <span class="n">actionsSubset</span>
-            
+
         <span class="k">if</span> <span class="n">relation</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">confidentRelation</span>
-            
+
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* ---- Outranking Relation Table -----&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">LikelihoodDenotation</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;r/(lh) | &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
@@ -2653,7 +2674,7 @@
             <span class="n">hasIntegerValuation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;hasIntegerValuation&#39;</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="n">hasIntegerValuation</span> <span class="o">=</span> <span class="n">IntegerValues</span>
-        
+
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionsList</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="o">+</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s2">&quot;&#39;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">-------|------------------------------------------------------------&#39;</span><span class="p">)</span>
@@ -2670,10 +2691,10 @@
                         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%+d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]]),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">hasLatexFormat</span><span class="p">:</span>
-                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;$</span><span class="si">%+.2f</span><span class="s1">$ &amp; &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]]),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>       
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;$</span><span class="si">%+.2f</span><span class="s1">$ &amp; &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]]),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; </span><span class="si">%+.2f</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]]),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-                
+
             <span class="k">if</span> <span class="n">hasLatexFormat</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; </span><span class="se">\\</span><span class="s1">cr&#39;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
@@ -2698,40 +2719,40 @@
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Likelihood domain: [-1.0;+1.0] &#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Likelihood level : </span><span class="si">%.2f</span><span class="s1"> (</span><span class="si">%.2f%%</span><span class="s1">) &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bipolarConfidenceLevel</span><span class="p">,</span>
                                                      <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bipolarConfidenceLevel</span><span class="o">+</span><span class="mf">1.0</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span><span class="p">))</span>
-        
+
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Determinateness  : </span><span class="si">%.3f</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeDeterminateness</span><span class="p">()</span> <span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div></div>
-    
+
 <span class="c1">#######################################################################</span>
 <span class="c1">#######################################################################</span>
 <span class="c1">#----------test classes and methods ----------------</span>
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    
+
     <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">XMCDA2PerformanceTableau</span><span class="p">(</span><span class="s1">&#39;project_7&#39;</span><span class="p">)</span>
-    <span class="n">tenv</span> <span class="o">=</span> <span class="n">PartialPerformanceTableau</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">objectivesSubset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Eco&#39;</span><span class="p">])</span>
-    <span class="n">pre</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">tenv</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">pre</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="n">pre</span><span class="o">.</span><span class="n">boostedOrder</span><span class="p">))</span>
-    <span class="n">tenv</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">()</span>
-<span class="c1">##    MP  = False</span>
-<span class="c1">##    nbrActions=20</span>
-<span class="c1">####    t0 = time()</span>
-<span class="c1">##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,seed=105)</span>
-<span class="c1">####    tp = XMCDA2PerformanceTableau(&#39;the_cs_2016&#39;)</span>
-<span class="c1">##</span>
-<span class="c1">####    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,</span>
-<span class="c1">####                                     seed=100)</span>
-<span class="c1">##    bg1 = PreRankedConfidentOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,</span>
-<span class="c1">##                                 quantilesOrderingStrategy=&#39;average&#39;,</span>
-<span class="c1">##                                 componentRankingRule=&#39;Copeland&#39;,</span>
-<span class="c1">##                                 LowerClosed=False,</span>
-<span class="c1">##                                 minimalComponentSize=1,</span>
-<span class="c1">##                                 Threading=MP,nbrOfCPUs=8,</span>
-<span class="c1">##                                 #tempDir=&#39;.&#39;,</span>
-<span class="c1">##                                 nbrOfThreads=8,</span>
-<span class="c1">##                                 Comments=False,Debug=False,</span>
-<span class="c1">##                                 save2File=&#39;testbgMP&#39;)</span>
-<span class="c1">##    print(bg1)</span>
+<span class="c1">##    t = XMCDA2PerformanceTableau(&#39;project_7&#39;)</span>
+<span class="c1">##    tenv = PartialPerformanceTableau(t,objectivesSubset=[&#39;Eco&#39;])</span>
+<span class="c1">##    pre = PreRankedOutrankingDigraph(tenv,Debug=True)</span>
+<span class="c1">##    print(pre.computeOrderCorrelation(pre.boostedOrder))</span>
+<span class="c1">##    tenv.showHTMLPerformanceHeatmap()</span>
+    <span class="n">MP</span>  <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">nbrActions</span><span class="o">=</span><span class="mi">500</span>
+<span class="c1">##    t0 = time()</span>
+    <span class="n">tp</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
+<span class="c1">##    tp = XMCDA2PerformanceTableau(&#39;the_cs_2016&#39;)</span>
+
+<span class="c1">##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,</span>
+<span class="c1">##                                     seed=100)</span>
+    <span class="n">bg1</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">CopyPerfTab</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                                 <span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
+                                 <span class="n">componentRankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">,</span>
+                                 <span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                 <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                 <span class="n">Threading</span><span class="o">=</span><span class="n">MP</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+                                 <span class="c1">#tempDir=&#39;.&#39;,</span>
+                                 <span class="n">nbrOfThreads</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+                                 <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                 <span class="n">save2File</span><span class="o">=</span><span class="s1">&#39;testbgMP&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">bg1</span><span class="p">)</span>
 <span class="c1">##    bg1.showComponents(direction=&#39;descending&#39;)</span>
 <span class="c1">##    #bg1.showRelationTable()</span>
 <span class="c1">##    bg2 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,</span>
@@ -2749,7 +2770,7 @@
 <span class="c1">##    from weakOrders import WeakRankingOrder</span>
 <span class="c1">##    wr = WeakRankingOrder(bg1,[bg1.boostedRanking,bg2.boostedRanking])</span>
 <span class="c1">##    wr.exportGraphViz(&#39;fusion-cpr-pr&#39;,graphType=&quot;pdf&quot;)</span>
-    
+
 <span class="c1">##    rag = RandomCBPerformanceGenerator(bg1,actionNamePrefix=&#39;t&#39;)</span>
 <span class="c1">##    rag = Random3ObjectivesPerformanceGenerator(bg1,actionNamePrefix=&#39;t&#39;)</span>
 <span class="c1">##    rag.randomUpdate(2)</span>
@@ -2775,7 +2796,7 @@
 <span class="c1">##            score = float(res[2])</span>
 <span class="c1">##        else:</span>
 <span class="c1">##            score = (float(res[1])+float(res[2]))/2.0</span>
-<span class="c1">##            </span>
+<span class="c1">##</span>
 <span class="c1">##        bg1.showNewActionCategories(x,newSorting)</span>
 <span class="c1">##        for compKey in bg1.components:</span>
 <span class="c1">##            comp = bg1.components[compKey]</span>
@@ -2796,17 +2817,17 @@
 <span class="c1">##    bg1.showDecomposition(direction=&#39;decreasing&#39;)</span>
 <span class="c1">##    bg1.showSorting()</span>
 <span class="c1">##    bg1.showActionSortingResult(&#39;a001&#39;)</span>
-    
+
 <span class="c1">##    bg1.sorting.update(newSorting)</span>
 <span class="c1">##    bg1.showActionsSortingResult()</span>
 
-    
-    
+
+
     <span class="c1">#bg1.exportSortingGraphViz(actionsSubset=bg1.boostedRanking[:100])</span>
-    
+
 <span class="c1">##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,</span>
 <span class="c1">##                                      seed=100)</span>
-<span class="c1">##    </span>
+<span class="c1">##</span>
 <span class="c1">##    bg2 = PreRankedOutrankingDigraph(tp,CopyPerfTab=False,quantiles=10,</span>
 <span class="c1">##                                 quantilesOrderingStrategy=&#39;average&#39;,</span>
 <span class="c1">##                                 componentRankingRule=&#39;NetFlows&#39;,</span>
