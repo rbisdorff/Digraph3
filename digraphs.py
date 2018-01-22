@@ -1,4 +1,5 @@
 #!/Usr/bin/env python3
+
 """
 Python3+ implementation of digraphs
 
@@ -18,6 +19,7 @@ You should have received a copy of the GNU General Public License along
 with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 """
+
 #######################
 
 __version__ = "Branch: 3.5 $"
