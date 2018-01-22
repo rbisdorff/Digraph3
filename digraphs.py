@@ -494,6 +494,7 @@ class _XMLDigraphHandler(ContentHandler):
 #----------Digraph classes -----------------
 
 class Digraph(object):
+    
     """
     Genuine root class of all Digraph3 modules.
     See `tutorial working with the digraphs module <http://leopold-loewenheim.uni.lu/docDigraph3/tutorial.html#digraph-object-structure>`_ 
@@ -535,13 +536,13 @@ class Digraph(object):
 
     def __repr__(self):
         """
-        Default presentation method for BipolarOutrankingDigraph instance.
+        Default presentation method for Digraph instances.
         """
-        reprString = '*------- Object instance description ------*\n'
+        reprString = '*------- Digraph instance description ------*\n'
         reprString += 'Instance class   : %s\n' % self.__class__.__name__
         reprString += 'Instance name    : %s\n' % self.name
-        reprString += 'Graph Order      : %d\n' % self.order
-        reprString += 'Graph Size       : %d\n' % self.computeSize()
+        reprString += 'Digraph Order      : %d\n' % self.order
+        reprString += 'Digraph Size       : %d\n' % self.computeSize()
         reprString += 'Valuation domain : [%.2f - %.2f]\n'\
                       % (self.valuationdomain['min'],self.valuationdomain['max'])
         reprString += 'Determinateness  : %.3f\n' % self.computeDeterminateness()

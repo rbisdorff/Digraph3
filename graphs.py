@@ -60,6 +60,21 @@ class Graph(object):
        v5 -> []
        
     """
+    def __repr__(self):
+        """
+        Default presentation method for Graph instances.
+        """
+        reprString = '*------- Graph instance description ------*\n'
+        reprString += 'Instance class   : %s\n' % self.__class__.__name__
+        reprString += 'Instance name    : %s\n' % self.name
+        reprString += 'Graph Order      : %d\n' % self.order
+        reprString += 'Graph Size       : %d\n' % self.computeSize()
+        reprString += 'Valuation domain : [%.2f - %.2f]\n'\
+                      % (self.valuationDomain['min'],self.valuationDomain['max'])
+        reprString += 'Attributes       : %s\n' % list(self.__dict__.keys())
+       
+        return reprString
+
     def __init__(self, fileName=None, Empty=False, numberOfVertices=7, edgeProbability=0.5):
         """
         Constructor for Graph objects.
@@ -1782,13 +1797,14 @@ class SnakeGraph(GridGraph):
         """
         Show method for SnakeGraph instances.
         """
-        print('*---- short description of the snake graph ----*')
-        print('Name             : \'%s\'' % (self.name) )
-        print('Rational p/q     : %d/%d' % (self.m,self.n))
-        print('Christoffel words:')
-        print('Upper word       : ',self.cw[1])
-        print('Lower word       : ',self.cw[0])
-        return 'graphs.SnakeGraph(GridGraph) instance'
+        reprString = Graph.__repr__(self)
+        reprString += '*---- Snake graph specific data ----*\n'
+        #reprString += 'Name             : \'%s\'\n' % (self.name)
+        reprString += 'Rational p/q     : %d/%d\n' % (self.m,self.n)
+        reprString += 'Christoffel words:\n'
+        reprString += 'Upper word       : %s\n' % self.cw[1]
+        reprString += 'Lower word       : %s\n' % self.cw[0]
+        return reprString
         
 #---------------------
 class TriangulatedGrid(Graph):
@@ -1886,6 +1902,16 @@ class RandomTree(Graph):
        :align: center
    
     """
+
+    def __repr__(self):
+        """
+        Show method for RandomTree instances.
+        """
+        reprString = Graph.__repr__(self)
+        reprString += '*---- RandomTree specific data ----*\n'
+        reprString += 'Prüfer code  : %s\n' % self.prueferCode
+        return reprString
+
     def __init__(self,order=None, vertices= None,
                  prueferCode = None, seed = None, Debug=False):
         import random
