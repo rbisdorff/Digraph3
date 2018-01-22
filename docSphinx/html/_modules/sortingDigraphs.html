@@ -5425,8 +5425,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">newActions</span> <span class="o">=</span> <span class="n">newData</span><span class="p">[</span><span class="s1">&#39;actions&#39;</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">newData</span><span class="p">[</span><span class="s1">&#39;evaluation&#39;</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">newActions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="p">{}</span>     
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error !!!: a non empty set of newly observed decision actions is required !!&#39;</span><span class="p">)</span>
+            <span class="k">return</span>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;dataInput&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">tt</span>
         
@@ -5652,6 +5652,7 @@
         <span class="n">String</span> <span class="o">+=</span> <span class="s1">&#39;# New actions       : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">newActions</span><span class="p">)</span>
         <span class="n">String</span> <span class="o">+=</span> <span class="s1">&#39;Size                : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeSize</span><span class="p">()</span>
         <span class="n">String</span> <span class="o">+=</span> <span class="s1">&#39;Determinateness     : </span><span class="si">%.3f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeDeterminateness</span><span class="p">()</span>
+        <span class="n">String</span> <span class="o">+=</span> <span class="s1">&#39;Attributes: </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
         <span class="n">String</span> <span class="o">+=</span> <span class="s1">&#39;*------  Constructor run times (in sec.) ------*</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">String</span> <span class="o">+=</span> <span class="s1">&#39;#Threads         : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span>
@@ -6494,13 +6495,13 @@
 <span class="c1">##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)</span>
 <span class="c1">##    t = XMCDA2PerformanceTableau(&#39;spiegel2004&#39;)</span>
 <span class="c1">##    t = XMCDA2PerformanceTableau(&#39;ex1&#39;)</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>
-                                    <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
-                                    <span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span>
-                                    <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
-                                    <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">nt</span> <span class="o">=</span> <span class="n">NormalizedPerformanceTableau</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-    <span class="n">so</span> <span class="o">=</span> <span class="n">SortingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">scaleSteps</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1">##    t = Random3ObjectivesPerformanceTableau(numberOfActions=25,</span>
+<span class="c1">##                                    numberOfCriteria=13,</span>
+<span class="c1">##                                    weightDistribution=&#39;equiobjectives&#39;,</span>
+<span class="c1">##                                    missingDataProbability=0.05,</span>
+<span class="c1">##                                    seed=1)</span>
+<span class="c1">##    nt = NormalizedPerformanceTableau(t)</span>
+<span class="c1">##    so = SortingDigraph(t,scaleSteps=5,LowerClosed=True,Debug=True)</span>
 <span class="c1">####    so = SortingDigraph(&#39;grafittiPerfTab&#39;,&#39;grafittiCategories&#39;)</span>
 <span class="c1">####    so = SortingDigraph(t,scaleSteps=7,Debug=True)</span>
 <span class="c1">##    print(so.categories)</span>
@@ -6595,7 +6596,7 @@
 
     <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
     <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
-    <span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
+    <span class="n">nbrActions</span><span class="o">=</span><span class="mi">100</span>
     <span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">13</span>
     <span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>\
                                     <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span>\
@@ -6610,7 +6611,7 @@
 <span class="c1">##</span>
     <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
-    <span class="n">newActions</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">newActions</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
     <span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
     <span class="n">ira</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                                        <span class="n">PrefThresholds</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\

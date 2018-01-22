@@ -22,9 +22,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 """
 from time import time
 from decimal import Decimal
+from perfTabs import PerformanceTableau
 
-
-class PerformanceQuantiles(object):
+class PerformanceQuantiles(PerformanceTableau):
     """
     Implements the incremental performance quantiles representation of a
     given performance tableau.
@@ -67,29 +67,64 @@ class PerformanceQuantiles(object):
         :align: center
 
     """
-    def __init__(self,perfTab,numberOfBins=4,LowerClosed=True,Debug=False):
+    def __init__(self,perfTab=None,numberOfBins=4,LowerClosed=True,filePerfQuant=None,Debug=False):
         from copy import deepcopy
         from collections import OrderedDict
         self.Debug = Debug
-        try:
-            self.objectives = perfTab.objectives
-        except:
-            self.objectives = None
-        self.criteria = deepcopy(perfTab.criteria)
-        self.LowerClosed = LowerClosed
-        self.quantilesFrequencies = self._computeQuantilesFrequencies(numberOfBins,Debug=Debug)
-        np = len(self.quantilesFrequencies)
-        limitingQuantiles = {}
-        cdf = {}
-        self.historySizes = {}
-        for g in self.criteria:
-            self.historySizes[g] = 0
-            limitingQuantiles[g] = self._computeLimitingQuantiles(perfTab,g)
-            if self.Debug:
-                print(g,limitingQuantiles[g])
-            cdf[g] = OrderedDict([(limitingQuantiles[g][i],self.quantilesFrequencies[i]) for i in range(np)])
-        self.limitingQuantiles = limitingQuantiles
-        self.cdf = cdf
+        if filePerfQuant == None:
+            try:
+                self.objectives = perfTab.objectives
+            except:
+                self.objectives = None
+            self.criteria = deepcopy(perfTab.criteria)
+            self.LowerClosed = LowerClosed
+            self.quantilesFrequencies = self._computeQuantilesFrequencies(numberOfBins,Debug=Debug)
+            np = len(self.quantilesFrequencies)
+            limitingQuantiles = {}
+            cdf = {}
+            self.historySizes = {}
+            for g in self.criteria:
+                self.historySizes[g] = 0
+                limitingQuantiles[g] = self._computeLimitingQuantiles(perfTab,g)
+                if self.Debug:
+                    print(g,limitingQuantiles[g])
+                cdf[g] = OrderedDict([(limitingQuantiles[g][i],self.quantilesFrequencies[i]) for i in range(np)])
+            self.limitingQuantiles = limitingQuantiles
+            self.cdf = cdf
+            if perfTab.__class__.__name__ == 'RandomPerformanceTableau':
+                from randomPerfTabs import RandomPerformanceGenerator
+                self.randomActionsGenerator = RandomPerformanceGenerator(perfTab)
+            elif perfTab.__class__.__name__ == 'RandomCBPerformanceTableau':
+                from randomPerfTabs import RandomCBPerformanceGenerator
+                self.randomActionsGenerator = RandomCBPerformanceGenerator(perfTab)
+            elif perfTab.__class__.__name__ == 'Random3ObjectivesPerformanceTableau':
+                from randomPerfTabs import Random3ObjectivesPerformanceGenerator
+                self.randomActionsGenerator = Random3ObjectivesPerformanceGenerator(perfTab)
+            else:
+                print('!!! Warning: the proposed performance tableau model does not provide a random decision actions generator !!!')
+                self.randomActionsGenerator = None
+        else: # a stored instance file name is given
+            print(filePerfQuant)
+            fileName = filePerfQuant + '.py'
+            argDict = {}
+            exec(compile(open(fileName).read(), fileName, 'exec'),argDict)
+            self.name = str(filePerfQuant)
+            try:
+                self.objectives = argDict['objectives']
+            except:
+                pass
+            self.criteria = argDict['criteria']
+            self.quantilesFrequencies = argDict['quantilesFrequencies']
+            self.historySizes = argDict['historySizes']
+            self.LowerClosed = argDict['LowerClosed']
+            self.limitingQuantiles = argDict['limitingQuantiles']
+            cdf = {}
+            np = len(self.quantilesFrequencies)
+            for g in self.criteria:
+                cdf[g] = OrderedDict([(self.limitingQuantiles[g][i],self.quantilesFrequencies[i]) for i in range(np)])
+            self.cdf = cdf
+            self.randomActionsGenerator = None
+          
 
 #---------  private class methods
 
@@ -482,6 +517,64 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
             if Debug:
                 print(x, quantiles[g], q)
         return quantiles
+
+    def save(self,fileName='tempPerfQuant',valueDigits=2):
+        """
+        Persistant storage of a PerformanceQuantiles instance.
+        """
+        print('*--- Saving performance quantiles in file: <' + str(fileName) + '.py> ---*')
+        valueString = 'Decimal("%%.%df"),\n' % (valueDigits)
+        try:
+            objectives = self.objectives
+        except:
+            objectives = {}
+        fileNameExt = str(fileName)+str('.py')
+        with open(fileNameExt, 'w') as fo:
+            fo.write('# Saved performance quantiles: \n')
+            fo.write('from decimal import Decimal\n')
+            fo.write('from collections import OrderedDict\n')
+            # objectives
+            fo.write('objectives = OrderedDict([\n')
+            for obj in objectives:
+                fo.write('(\'%s\', {\n' % str(obj))
+                for it in self.objectives[obj].keys():
+                    fo.write('\'%s\': %s,\n' % (it,repr(self.objectives[obj][it])))
+                fo.write('}),\n')
+            fo.write('])\n')            
+            # criteria
+            criteria = self.criteria
+            fo.write('criteria = OrderedDict([\n') 
+            for g in criteria:
+                fo.write('(\'%s\', {\n' % str(g))
+                for it in self.criteria[g].keys():
+                    fo.write('\'%s\': %s,\n' % (it,repr(self.criteria[g][it])))
+                fo.write('}),\n')
+            fo.write('])\n')
+            # quanties frequencies
+            quantilesFrequencies = self.quantilesFrequencies
+            np = len(quantilesFrequencies)
+            fo.write('quantilesFrequencies = [\n')
+            for i in range(np):
+                fo.write(valueString % quantilesFrequencies[i] )
+            fo.write( ']\n')
+            # history sizes
+            historySizes = self.historySizes
+            fo.write('historySizes = {\n')
+            for g in criteria:
+                fo.write('\'%s\': %d,' % (g,historySizes[g]) )
+            fo.write( '}\n')
+            # quantile limits
+            fo.write('LowerClosed = %s\n' % repr(self.LowerClosed))
+            limitingQuantiles = self.limitingQuantiles
+            fo.write('limitingQuantiles = {\n')
+            for g in criteria:
+                fo.write('\'%s\': [\n' % g )
+                for i in range(np):
+                    fo.write(valueString % limitingQuantiles[g][i] )
+                fo.write('],\n')
+            fo.write( '}\n')       
+
+        # fo.close() automatic
         
     def showActions(self):
         print("""No decision actions are actually being stored!
@@ -786,4 +879,7 @@ if __name__ == "__main__":
     pq.showCriterionStatistics('c01')
     pq.showCriterionStatistics('b01')
     print(pq.computeQuantileProfile(0.5))
+    pq.save(fileName='testPerfQuant')
 
+    pq1 = PerformanceQuantiles(filePerfQuant='testPerfQuant')
+    

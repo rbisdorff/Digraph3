@@ -5375,8 +5375,8 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             self.newActions = newData['actions']
             self.evaluation = newData['evaluation']
         else:
-            self.newActions = OrderedDict()
-            self.evaluation = {}     
+            print('Error !!!: a non empty set of newly observed decision actions is required !!')
+            return
         
         self.runTimes['dataInput'] = time()-tt
         
@@ -5602,6 +5602,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         String += '# New actions       : %d\n' % len(self.newActions)
         String += 'Size                : %d\n' % self.computeSize()
         String += 'Determinateness     : %.3f\n' % self.computeDeterminateness()
+        String += 'Attributes: %s\n' % list(self.__dict__.keys())
         String += '*------  Constructor run times (in sec.) ------*\n'
         try:
             String += '#Threads         : %d\n' % self.nbrThreads
@@ -6444,13 +6445,13 @@ if __name__ == "__main__":
 ##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)
 ##    t = XMCDA2PerformanceTableau('spiegel2004')
 ##    t = XMCDA2PerformanceTableau('ex1')
-    t = Random3ObjectivesPerformanceTableau(numberOfActions=25,
-                                    numberOfCriteria=13,
-                                    weightDistribution='equiobjectives',
-                                    missingDataProbability=0.05,
-                                    seed=1)
-    nt = NormalizedPerformanceTableau(t)
-    so = SortingDigraph(t,scaleSteps=5,LowerClosed=True,Debug=True)
+##    t = Random3ObjectivesPerformanceTableau(numberOfActions=25,
+##                                    numberOfCriteria=13,
+##                                    weightDistribution='equiobjectives',
+##                                    missingDataProbability=0.05,
+##                                    seed=1)
+##    nt = NormalizedPerformanceTableau(t)
+##    so = SortingDigraph(t,scaleSteps=5,LowerClosed=True,Debug=True)
 ####    so = SortingDigraph('grafittiPerfTab','grafittiCategories')
 ####    so = SortingDigraph(t,scaleSteps=7,Debug=True)
 ##    print(so.categories)
@@ -6545,7 +6546,7 @@ if __name__ == "__main__":
 
     from randomPerfTabs import RandomCBPerformanceTableau
     from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
-    nbrActions=1000
+    nbrActions=100
     nbrCrit = 13
     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
                                     numberOfCriteria=nbrCrit,\
@@ -6560,7 +6561,7 @@ if __name__ == "__main__":
 ##
     pq = PerformanceQuantiles(tp,20,LowerClosed=False,Debug=False)
     tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
-    newActions = tpg.randomActions(100)
+    newActions = tpg.randomActions(10)
     pq.updateQuantiles(newActions,historySize=None)
     ira = NormedQuantilesRatingDigraph(pq,newActions,quantiles=None,\
                                        PrefThresholds=False,\
