@@ -2130,7 +2130,7 @@ New  decision actions with random multiple criteria performance vectors from the
     >>> # generate 100 new random decision actions
     >>> from randomPerfTabs import RandomCBPerformanceGenerator
     >>> rpg = RandomCBPerformanceGenerator(tp)
-    >>> newActions = rpg.randomActions(100)
+    >>> newActions = rpg.randomActions(10)
     >>> # Updating the quartile norms shown above 
     >>> pq.updateQuantiles(newActions,historySize=None)
 
@@ -2147,17 +2147,188 @@ Parameter *historySize* (see Line 6) of the :py:meth:`performanceQuantiles.Perfo
 Rating performances with quantile norms
 .......................................
 
-We provide the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class, a specialisation of the :py:class:`sortingDigraphs.QuantilesSortingDigraph` class
-for **absolute rating** of a newly given set of decision actions with
-normed performance quantiles gathered from historical data. The constructor requires therefore a valid :py:class:`performanceQuantiles.PerformanceQuantiles` instance.
+For **absolute rating** of a newly given set of decision actions with the help of
+performance quantiles estimated from historical data, we provide the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class, a specialisation of the :py:class:`sortingDigraphs.QuantilesSortingDigraph` class. The constructor requires therefore a valid :py:class:`performanceQuantiles.PerformanceQuantiles` instance.
 
-It is important to notice that the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class, contrary to the generic :py:class:`outrankingDigraphs.OutrankingDigraph` class, does not inherit from the generic :py:class:`perfTabs.PerformanceTableau` class, but instead from the :py:class:`performanceQuantiles.PerformanceQuantiles` class. The **actions** in such a :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class instance do contain both a set of newly given decision actions, as well as the historical quantile profiles from a given :py:class:`performanceQuantiles.PerformanceQuantiles` class instance, ie estimated quantile bins' performance limits from historical performance vectors.
+It is important to notice that the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class, contrary to the generic :py:class:`outrankingDigraphs.OutrankingDigraph` class, does not inherit from the generic :py:class:`perfTabs.PerformanceTableau` class, but instead from the :py:class:`performanceQuantiles.PerformanceQuantiles` class. The **actions** in such a :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class instance contain not only the newly given decision actions, but also the historical quantile profiles obtained from a given :py:class:`performanceQuantiles.PerformanceQuantiles` class instance, ie estimated quantile bins' performance limits from historical performance data.
 
-Example Python session:
-    >>> From sortingDigraphs import NormedQuantilesRatingDigraph
+We consider given a :code:`PerformanceQuantiles` object instance *pq* as computed in the previous section:
+    >>> from sortingDigraphs import NormedQuantilesRatingDigraph
     >>> nqr = NormedQuantilesRatingDigraph(pq,newActions)
+    >>> nqr
+    *-----  Object instance description -----------*
+    Instance class      : NormedQuantilesRatingDigraph
+    Instance name       : normedRatingDigraph
+    # Criteria          : 7
+    # Quantile profiles : 4
+    # New actions       : 10
+    Digraph Size        : 86
+    Determinateness     : 65.52%
+    Attributes: [
+     'LowerClosed', 'actions', 'actionsRanking', 'categories', 'cdf', 'completeRelation',
+     'concordanceRelation', 'criteria', 'criteriaCategoryLimits', 'evaluation', 'gamma',
+     'hasNoVeto', 'historySizes', 'limitingQuantiles', 'name', 'nbrThreads',
+     'newActions', 'notGamma', 'objectives', 'order', 'profileLimits',
+     'profiles', 'quantilesFrequencies', 'rankingCorrelation', 'rankingRule',
+     'rankingScores', 'ratingCategories', 'relation', 'runTimes', 'valuationdomain'] 
+    *------  Constructor run times (in sec.) ------*
+    #Threads         : 1
+    Total time       : 0.02254
+    Data input       : 0.00053
+    Quantile classes : 0.00003
+    Compute profiles : 0.00006
+    Compute relation : 0.02040
+    Compute rating   : 0.00152
+    Compute sorting  : 0.00000
 
-Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class constructor are a valid PerformanceQuantiles object *pq* and corresponding set *newActions* of new decision actions. The result may be shown as follows:
+
+Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class constructor (see Line 2) are a valid PerformanceQuantiles object *pq* and a compatible set *newActions* of new decision actions generated from the same random model.
+    >>> nqr.showActions()
+    *----- show digraphs actions --------------*
+    key:  a1001
+      short name: a1001c
+      name:       random cheap decision action
+      comment:    Cost-Benefit
+    key:  a1002
+      short name: a1002c
+      name:       random cheap decision action
+      comment:    Cost-Benefit
+    key:  a1003
+      short name: a1003a
+      name:       random advantageous decision action
+      comment:    Cost-Benefit
+    key:  a1004
+      short name: a1004c
+      name:       random cheap decision action
+      comment:    Cost-Benefit
+    key:  a1005
+      short name: a1005n
+      name:       random neutral decision action
+      comment:    Cost-Benefit
+    key:  a1006
+      short name: a1006c
+      name:       random cheap decision action
+      comment:    Cost-Benefit
+    key:  a1007
+      short name: a1007n
+      name:       random neutral decision action
+      comment:    Cost-Benefit
+    key:  a1008
+      short name: a1008n
+      name:       random neutral decision action
+      comment:    Cost-Benefit
+    key:  a1009
+      short name: a1009a
+      name:       random advantageous decision action
+      comment:    Cost-Benefit
+    key:  a1010
+      short name: a1010a
+      name:       random advantageous decision action
+      comment:    Cost-Benefit
+    key:  m1
+      name:       categorical low limits
+      comment:    Inferior or equal limits for category membership assessment
+    key:  m2
+      name:       categorical low limits
+      comment:    Inferior or equal limits for category membership assessment
+    key:  m3
+      name:       categorical low limits
+      comment:    Inferior or equal limits for category membership assessment
+    key:  m4
+      name:       categorical low limits
+      comment:    Inferior or equal limits for category membership assessment
+
+Among the new decision actions there are 3 advantageous (high benefits, but also high costs), 4 cheap (low costs, buts also low benfits) and 4 neutral decision actions. The digraph actions also contain the closed lower limits of the four quartile classes: [0.0-0.25[, [0.25-0.50[, [0.50- 0.75[, [0.75 - 1.0[.
+
+We may as well inspect the family of preference criteria with their respective preference thresholds and quartiles:
+    >>> pq.showCriteria()
+    *----  criteria -----*
+    c1 'Costs/random cardinal cost criterion'
+      Scale = (0.0, 100.0)
+      Weight = 0.500 
+      Threshold ind : 1.99 + 0.00x
+      Threshold veto : 59.94 + 0.00x
+      Threshold pref : 4.00 + 0.00x
+      history size: 1000
+      p    : quantile(p)
+    0.00 :  -97.12
+    0.25 :  -72.56
+    0.50 :  -36.00
+    0.75 :  -22.93
+    1.00 :  -1.85
+    b1 'Benefits/random cardinal benefit criterion'
+      Scale = (0.0, 100.0)
+      Weight = 0.083 
+      Threshold ind : 2.26 + 0.00x
+      Threshold veto : 66.40 + 0.00x
+      Threshold pref : 4.50 + 0.00x
+      history size: 997
+      p    : quantile(p)
+    0.00 :  2.11
+    0.25 :  27.05
+    0.50 :  60.40
+    0.75 :  87.67
+    1.00 :  98.69
+    b2 'Benefits/random ordinal benefit criterion'
+      Scale = (0, 10)
+      Weight = 0.083 
+      history size: 1000
+      p    : quantile(p)
+    0.00 :  0.00
+    0.25 :  2.83
+    0.50 :  4.52
+    0.75 :  6.92
+    1.00 :  10.00
+    b3 'Benefits/random cardinal benefit criterion'
+      Scale = (0.0, 100.0)
+      Weight = 0.083 
+      Threshold ind : 2.09 + 0.00x
+      Threshold veto : 62.49 + 0.00x
+      Threshold pref : 4.23 + 0.00x
+      history size: 1000
+      p    : quantile(p)
+    0.00 :  1.08
+    0.25 :  24.94
+    0.50 :  50.28
+    0.75 :  67.94
+    1.00 :  97.23
+    b4 'Benefits/random ordinal benefit criterion'
+      Scale = (0, 10)
+      Weight = 0.083 
+      history size: 994
+      p    : quantile(p)
+    0.00 :  0.00
+    0.25 :  3.32
+    0.50 :  4.04
+    0.75 :  6.87
+    1.00 :  10.00
+    b5 'Benefits/random cardinal benefit criterion'
+      Scale = (0.0, 100.0)
+      Weight = 0.083 
+      Threshold ind : 2.29 + 0.00x
+      Threshold veto : 64.92 + 0.00x
+      Threshold pref : 4.48 + 0.00x
+      history size: 1001
+      p    : quantile(p)
+    0.00 :  1.84
+    0.25 :  28.36
+    0.50 :  50.62
+    0.75 :  76.04
+    1.00 :  96.40
+    b6 'Benefits/random ordinal benefit criterion'
+      Scale = (0, 10)
+      Weight = 0.083 
+      history size: 1004
+      p    : quantile(p)
+    0.00 :  0.00
+    0.25 :  4.25
+    0.50 :  5.56
+    0.75 :  8.50
+    1.00 :  10.00
+
+Only cardinal cost or benfit criteria, like *c1* and *b1*, admit preference discrimination thresholds. The respective sampling size are for the quartile estimation may slightly vary due the presence of sporadic missing data.
+    
+The rating result may be shown as follows:
     >>> nqr.showQuantilesRating()
      *-------- Normed quantiles rating result ---------
      [0.50 - 0.60[ ['a1', 'a7', 'a3', 'a10', 'a2']
