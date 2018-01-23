@@ -3612,17 +3612,20 @@ we are inspired by <a class="reference internal" href="#cham-2006" id="id32">[CH
 </pre></div>
 </td></tr></table></div>
 </dd>
+</dl>
+<p>The preference direction of the cost criterion <em>c01</em> is negative; the lesser the costs the better it is, wheras all the benefit criteria show a positive preference direction. Both objectives are equi-important (see column 2). The columns entitled &#8216;0.0&#8217;, resp. &#8216;1.0&#8217; show the quartile <em>Q0</em>, resp. <em>Q4</em>, ie the worst, resp. best performance observed on each criterion. Column entitles &#8216;0.5&#8217;, actually shows the median performances observed on the criteria.</p>
+<dl class="docutils">
 <dt>New  decision actions with random multiple criteria performance vectors from the same random performance tableau model my be generated with ad hoc random performance generators. We provide for experimental purpose, in the <a class="reference internal" href="techDoc.html#module-randomPerfTabs" title="randomPerfTabs"><code class="xref py py-mod docutils literal"><span class="pre">randomPerfTabs</span></code></a> module, three such generators: one for the standard <a class="reference internal" href="techDoc.html#randomPerfTabs.RandomPerformanceTableau" title="randomPerfTabs.RandomPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.RandomPerformanceTableau</span></code></a> model, one the for the two objectives <a class="reference internal" href="techDoc.html#randomPerfTabs.RandomCBPerformanceTableau" title="randomPerfTabs.RandomCBPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.RandomCBPerformanceTableau</span></code></a> Cost-Benefit model, and one for the <a class="reference internal" href="techDoc.html#randomPerfTabs.Random3ObjectivesPerformanceTableau" title="randomPerfTabs.Random3ObjectivesPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.Random3ObjectivesPerformanceTableau</span></code></a> model with three objectives concerning respectively  economic, environmental or social aspects. Given a set of 100 new decision actions with generated random performance evaluations, the so far estimated historical quantile limits may be updated as follows:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
 5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># generate new random decision actions</span>
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># generate 100 new random decision actions</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceGenerator</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rpg</span> <span class="o">=</span> <span class="n">RandomCBPerformanceGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">newActions</span> <span class="o">=</span> <span class="n">rpg</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Updating the quantile norms</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Updating the quartile norms shown above</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>

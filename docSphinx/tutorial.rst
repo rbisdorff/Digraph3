@@ -2124,12 +2124,14 @@ The constructor parameter *numberOfBins* (see Lines 7-9 above), choosing the wis
 	'b5'  |   1     |   1.84   34.25   55.11   74.62   96.40  
         'b6'  |   1     |   0.00    3.00    5.00    7.00   10.00
 
+The preference direction of the cost criterion *c01* is negative; the lesser the costs the better it is, wheras all the benefit criteria show a positive preference direction. Both objectives are equi-important (see column 2). The columns entitled '0.0', resp. '1.0' show the quartile *Q0*, resp. *Q4*, ie the worst, resp. best performance observed on each criterion. Column entitles '0.5', actually shows the median performances observed on the criteria.  
+
 New  decision actions with random multiple criteria performance vectors from the same random performance tableau model my be generated with ad hoc random performance generators. We provide for experimental purpose, in the :py:mod:`randomPerfTabs` module, three such generators: one for the standard :py:class:`randomPerfTabs.RandomPerformanceTableau` model, one the for the two objectives :py:class:`randomPerfTabs.RandomCBPerformanceTableau` Cost-Benefit model, and one for the :py:class:`randomPerfTabs.Random3ObjectivesPerformanceTableau` model with three objectives concerning respectively  economic, environmental or social aspects. Given a set of 100 new decision actions with generated random performance evaluations, the so far estimated historical quantile limits may be updated as follows: 
-    >>> # generate new random decision actions
+    >>> # generate 100 new random decision actions
     >>> from randomPerfTabs import RandomCBPerformanceGenerator
     >>> rpg = RandomCBPerformanceGenerator(tp)
     >>> newActions = rpg.randomActions(100)
-    >>> # Updating the quantile norms 
+    >>> # Updating the quartile norms shown above 
     >>> pq.updateQuantiles(newActions,historySize=None)
 
 Parameter *historySize* (see Line 6) of the :py:meth:`performanceQuantiles.PerformanceQuantiles.updateQuantiles` method allows to **balance** the **new** evaluations against the **historical** ones. With **historySize = None** (the default setting), the balance in the example above is 1000/1100 (91%, weight of historical data) against 100/1100 (9%, weight of the new incoming observations). Putting **historySize = 0**, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile estimation with solely the new incomping data. The updated quantile limits may be shown in a browser view:
