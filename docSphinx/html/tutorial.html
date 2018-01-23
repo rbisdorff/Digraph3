@@ -3568,7 +3568,7 @@ we are inspired by <a class="reference internal" href="#cham-2006" id="id32">[CH
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>\
 <span class="gp">... </span>              <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span>\
-<span class="gp">... </span>              <span class="n">numberOfBins</span> <span class="o">=</span> <span class="s1">&#39;quintiles&#39;</span><span class="p">,</span>\
+<span class="gp">... </span>              <span class="n">numberOfBins</span> <span class="o">=</span> <span class="s1">&#39;quartiles&#39;</span><span class="p">,</span>\
 <span class="gp">... </span>              <span class="n">LowerClosed</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 <span class="go">dict_keys([&#39;objectives&#39;, &#39;LowerClosed&#39;, &#39;name&#39;,</span>
@@ -3593,7 +3593,7 @@ we are inspired by <a class="reference internal" href="#cham-2006" id="id32">[CH
 13
 14
 15
-16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Printing out the estimated quantile limits</span>
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Printing out the estimated quartile limits</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">showLimitingQuantiles</span><span class="p">(</span><span class="n">ByObjectives</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="go">*----  performance quantiles -----*</span>
 <span class="go">Costs</span>

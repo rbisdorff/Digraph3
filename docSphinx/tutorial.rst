@@ -2099,7 +2099,7 @@ Example python session:
     >>> tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
     ...               numberOfCriteria=nbrCrit,seed=105)
     >>> pq = PerformanceQuantiles(tp,\
-    ...               numberOfBins = 'quintiles',\
+    ...               numberOfBins = 'quartiles',\
     ...               LowerClosed=True,Debug=False)
     >>> pq.__dict__.keys()
     dict_keys(['objectives', 'LowerClosed', 'name',
@@ -2107,7 +2107,7 @@ Example python session:
     'limitingQuantiles', ... ])
 
 The constructor parameter *numberOfBins* (see Lines 7-9 above), choosing the wished number of quantile frequencies, may be either **quartiles**, **quintiles** (5 bins), **deciles** (10 bins) , **dodeciles** (20 bins) or any other integer number of quantile bins. The quantile bins may be either **lower closed** (default) or **upper-closed**.
-    >>> # Printing out the estimated quantile limits 
+    >>> # Printing out the estimated quartile limits 
     >>> pq.showLimitingQuantiles(ByObjectives=True)
     *----  performance quantiles -----*
     Costs
