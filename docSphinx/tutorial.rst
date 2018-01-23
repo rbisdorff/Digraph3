@@ -3,7 +3,7 @@
 Tutorials of the Digraph3 resources
 ===================================
 :Author: Raymond Bisdorff, University of Luxembourg FSTC/CSC
-:Version: Revision: Python 3.5
+:Version: Revision: Python 3.6
 :Copyright: `R. Bisdorff <http://leopold-loewenheim.uni.lu/bisdorff/>`_ 2013-2016
 
 .. contents:: Table of Contents
@@ -2147,7 +2147,7 @@ Rating performances with quantile norms
 
 We provide the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class, a specialisation of the :py:class:`sortingDigraphs.QuantilesSortingDigraph` class
 for **absolute rating** of a newly given set of decision actions with
-normed performance quantiles gathered from historical data. The constructor requires a valid :py:class:`performanceQuantiles.PerformanceQuantiles` instance.
+normed performance quantiles gathered from historical data. The constructor requires therefore a valid :py:class:`performanceQuantiles.PerformanceQuantiles` instance.
 
 It is important to notice that the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class, contrary to the generic :py:class:`outrankingDigraphs.OutrankingDigraph` class, does not inherit from the generic :py:class:`perfTabs.PerformanceTableau` class, but instead from the :py:class:`performanceQuantiles.PerformanceQuantiles` class. The **actions** in such a :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class instance do contain both a set of newly given decision actions, as well as the historical quantile profiles from a given :py:class:`performanceQuantiles.PerformanceQuantiles` class instance, ie estimated quantile bins' performance limits from historical performance vectors.
 

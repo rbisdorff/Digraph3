@@ -1,7 +1,7 @@
 Documentation of the Digraph3 resources
 =======================================
 :Author: Raymond Bisdorff, University of Luxembourg FSTC - CSC/ILIAS
-:Version: Revision: Python 3.5
+:Version: Revision: Python 3.6
 :Copyright: `R. Bisdorff <http://leopold-loewenheim.uni.lu/bisdorff/>`_ 2013-2017
 
 .. _Documents:
