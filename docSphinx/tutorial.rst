@@ -2084,14 +2084,14 @@ Suppose that we see flying in random multiple criteria performances from a given
 The question we address here is to rate a newly incoming performance vector on the basis of the quantiles of the so far observed performance vectors. To do so,
 we are inspired by [CHAM-2006]_, who present an efficient algorithm for incrementally updating a quantile-binned cumulative density function (CDF) with newly observed CDFs.
 
-The :py:class:`performanceQuantiles.PerformanceQuantiles` class implements the performance quantiles estimation of a given performance tableau. The components are:
+The :py:class:`performanceQuantiles.PerformanceQuantiles` class implements the performance quantiles estimation of a given performance tableau. The main components are:
 
   * An **objectives** and a **criteria** ordered dictionary from a valid performance tableau instance;
-  * A list **quantileFrequencies** of quntile frequencies like *quartiles* [0.0, 0.25, 05, 0.75,1.0], *quintiles* [0.0, 0.2, 0.4, 0.6, 0.8, 1.0] or *deciles* [0.0, 0.1, 0.2, ..., 0.9, 1.0] for instance;
+  * A list **quantileFrequencies** of quantile frequencies like *quartiles* [0.0, 0.25, 05, 0.75,1.0], *quintiles* [0.0, 0.2, 0.4, 0.6, 0.8, 1.0] or *deciles* [0.0, 0.1, 0.2, ... 1.0] for instance;
   * An ordered  dictionary **limitingQuantiles** of so far estimated *lower* (default) or *upper* quantile class limits for each frequency per criterion;
   * An ordered dictionary **historySizes** for keeping track of the number of evaluations seen so far per criterion. Missing data may make these sizes vary from criterion to criterion.
 
-Example python session:
+Example python session: 
     >>> from performanceQuantiles import PerformanceQuantiles
     >>> from randomPerfTabs import RandomCBPerformanceTableau
     >>> nbrActions=1000
@@ -2107,7 +2107,6 @@ Example python session:
     'limitingQuantiles', ... ])
 
 The constructor parameter *numberOfBins* (see Lines 7-9 above), choosing the wished number of quantile frequencies, may be either **quartiles**, **quintiles** (5 bins), **deciles** (10 bins) , **dodeciles** (20 bins) or any other integer number of quantile bins. The quantile bins may be either **lower closed** (default) or **upper-closed**.
-
     >>> # Printing out the estimated quantile limits 
     >>> pq.showLimitingQuantiles(ByObjectives=True)
     *----  performance quantiles -----*
@@ -2125,17 +2124,15 @@ The constructor parameter *numberOfBins* (see Lines 7-9 above), choosing the wis
 	'b5'  |   1     |   1.84   34.25   55.11   74.62   96.40  
         'b6'  |   1     |   0.00    3.00    5.00    7.00   10.00
 
-New  decision actions with random multiple criteria performance vectors from the same random performance tableau model my be generated with ad hoc random performance generators. We provide, for experimental purpose, in the :py:mod:`randomPerfTabs` module three such generators: one for the standard :py:class:`randomPerfTabs.RandomPerformaTableau` model, one the for the two objectives :py:class:`randomPrefTabs.RandomCBPerformaTableau` Cost-Benefit model, and one for the :py:class:`randomPerfTabs.Random3ObjectivesPerformaTableau` model. With a set of 100 new decision actions and performance evaluations, the so far estimated historical quantile limits may be updated as follows: 
-
+New  decision actions with random multiple criteria performance vectors from the same random performance tableau model my be generated with ad hoc random performance generators. We provide for experimental purpose, in the :py:mod:`randomPerfTabs` module, three such generators: one for the standard :py:class:`randomPerfTabs.RandomPerformanceTableau` model, one the for the two objectives :py:class:`randomPrefTabs.RandomCBPerformanceTableau` Cost-Benefit model, and one for the :py:class:`randomPerfTabs.Random3ObjectivesPerformanceTableau` model. With a set of 100 new decision actions with random performance evaluations, the so far estimated historical quantile limits may be updated as follows: 
     >>> # generate new random decision actions
     >>> from randomPerfTabs import RandomCBPerformanceGenerator
     >>> rpg = RandomCBPerformanceGenerator(tp)
     >>> newActions = rpg.randomActions(100)
-    >>> # Updating the quintile norms 
+    >>> # Updating the quantile norms 
     >>> pq.updateQuantiles(newActions,historySize=None)
 
-Parameter *historySize* (see Line 6) of the :py:meth:`performanceQuantiles.PerformanceQuantiles.updateQuantiles` method allows to **balance the new observations against the historical evaluations**. With *historySize = None* (the default setting), the balance in the example above is 1000/1100 (91%, weight of historical data) against 100/1100 (9%, weight of the new incoming observations). Putting *historySize = 0*, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile norms. The updated quantile limits may be shown in a browser view:
-
+Parameter *historySize* (see Line 6) of the :py:meth:`performanceQuantiles.PerformanceQuantiles.updateQuantiles` method allows to **balance** the **new** evaluations against the **historical** ones. With **historySize = None** (the default setting), the balance in the example above is 1000/1100 (91%, weight of historical data) against 100/1100 (9%, weight of the new incoming observations). Putting **historySize = 0**, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile estimation with solely the new incomping data. The updated quantile limits may be shown in a browser view:
     >>> # showing the updated quantile limits in a browser view
     >>> pq.showHTMLLimitingQuantiles(Transposed=True)
 

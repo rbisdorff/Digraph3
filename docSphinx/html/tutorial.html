@@ -3538,11 +3538,11 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>Suppose that we see flying in random multiple criteria performances from a given model of random performance tableau (see the <a class="reference internal" href="techDoc.html#module-randomPerfTabs" title="randomPerfTabs"><code class="xref py py-mod docutils literal"><span class="pre">randomPerfTabs</span></code></a> module).</p>
 <p>The question we address here is to rate a newly incoming performance vector on the basis of the quantiles of the so far observed performance vectors. To do so,
 we are inspired by <a class="reference internal" href="#cham-2006" id="id32">[CHAM-2006]</a>, who present an efficient algorithm for incrementally updating a quantile-binned cumulative density function (CDF) with newly observed CDFs.</p>
-<p>The <a class="reference internal" href="techDoc.html#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a> class implements the performance quantiles estimation of a given performance tableau. The components are:</p>
+<p>The <a class="reference internal" href="techDoc.html#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a> class implements the performance quantiles estimation of a given performance tableau. The main components are:</p>
 <blockquote>
 <div><ul class="simple">
 <li>An <strong>objectives</strong> and a <strong>criteria</strong> ordered dictionary from a valid performance tableau instance;</li>
-<li>A list <strong>quantileFrequencies</strong> of quntile frequencies like <em>quartiles</em> [0.0, 0.25, 05, 0.75,1.0], <em>quintiles</em> [0.0, 0.2, 0.4, 0.6, 0.8, 1.0] or <em>deciles</em> [0.0, 0.1, 0.2, ..., 0.9, 1.0] for instance;</li>
+<li>A list <strong>quantileFrequencies</strong> of quantile frequencies like <em>quartiles</em> [0.0, 0.25, 05, 0.75,1.0], <em>quintiles</em> [0.0, 0.2, 0.4, 0.6, 0.8, 1.0] or <em>deciles</em> [0.0, 0.1, 0.2, ... 1.0] for instance;</li>
 <li>An ordered  dictionary <strong>limitingQuantiles</strong> of so far estimated <em>lower</em> (default) or <em>upper</em> quantile class limits for each frequency per criterion;</li>
 <li>An ordered dictionary <strong>historySizes</strong> for keeping track of the number of evaluations seen so far per criterion. Missing data may make these sizes vary from criterion to criterion.</li>
 </ul>
@@ -3577,9 +3577,8 @@ we are inspired by <a class="reference internal" href="#cham-2006" id="id32">[CH
 </pre></div>
 </td></tr></table></div>
 </dd>
-</dl>
-<p>The constructor parameter <em>numberOfBins</em> (see Lines 7-9 above), choosing the wished number of quantile frequencies, may be either <strong>quartiles</strong>, <strong>quintiles</strong> (5 bins), <strong>deciles</strong> (10 bins) , <strong>dodeciles</strong> (20 bins) or any other integer number of quantile bins. The quantile bins may be either <strong>lower closed</strong> (default) or <strong>upper-closed</strong>.</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<dt>The constructor parameter <em>numberOfBins</em> (see Lines 7-9 above), choosing the wished number of quantile frequencies, may be either <strong>quartiles</strong>, <strong>quintiles</strong> (5 bins), <strong>deciles</strong> (10 bins) , <strong>dodeciles</strong> (20 bins) or any other integer number of quantile bins. The quantile bins may be either <strong>lower closed</strong> (default) or <strong>upper-closed</strong>.</dt>
+<dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -3612,8 +3611,9 @@ we are inspired by <a class="reference internal" href="#cham-2006" id="id32">[CH
 <span class="go">    &#39;b6&#39;  |   1     |   0.00    3.00    5.00    7.00   10.00</span>
 </pre></div>
 </td></tr></table></div>
-<p>New  decision actions with random multiple criteria performance vectors from the same random performance tableau model my be generated with ad hoc random performance generators. We provide, for experimental purpose, in the <a class="reference internal" href="techDoc.html#module-randomPerfTabs" title="randomPerfTabs"><code class="xref py py-mod docutils literal"><span class="pre">randomPerfTabs</span></code></a> module three such generators: one for the standard <code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.RandomPerformaTableau</span></code> model, one the for the two objectives <code class="xref py py-class docutils literal"><span class="pre">randomPrefTabs.RandomCBPerformaTableau</span></code> Cost-Benefit model, and one for the <code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.Random3ObjectivesPerformaTableau</span></code> model. With a set of 100 new decision actions and performance evaluations, the so far estimated historical quantile limits may be updated as follows:</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+</dd>
+<dt>New  decision actions with random multiple criteria performance vectors from the same random performance tableau model my be generated with ad hoc random performance generators. We provide for experimental purpose, in the <a class="reference internal" href="techDoc.html#module-randomPerfTabs" title="randomPerfTabs"><code class="xref py py-mod docutils literal"><span class="pre">randomPerfTabs</span></code></a> module, three such generators: one for the standard <a class="reference internal" href="techDoc.html#randomPerfTabs.RandomPerformanceTableau" title="randomPerfTabs.RandomPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.RandomPerformanceTableau</span></code></a> model, one the for the two objectives <code class="xref py py-class docutils literal"><span class="pre">randomPrefTabs.RandomCBPerformanceTableau</span></code> Cost-Benefit model, and one for the <a class="reference internal" href="techDoc.html#randomPerfTabs.Random3ObjectivesPerformanceTableau" title="randomPerfTabs.Random3ObjectivesPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.Random3ObjectivesPerformanceTableau</span></code></a> model. With a set of 100 new decision actions with random performance evaluations, the so far estimated historical quantile limits may be updated as follows:</dt>
+<dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -3622,15 +3622,18 @@ we are inspired by <a class="reference internal" href="#cham-2006" id="id32">[CH
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceGenerator</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rpg</span> <span class="o">=</span> <span class="n">RandomCBPerformanceGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">newActions</span> <span class="o">=</span> <span class="n">rpg</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Updating the quintile norms</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Updating the quantile norms</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
-<p>Parameter <em>historySize</em> (see Line 6) of the <a class="reference internal" href="techDoc.html#performanceQuantiles.PerformanceQuantiles.updateQuantiles" title="performanceQuantiles.PerformanceQuantiles.updateQuantiles"><code class="xref py py-meth docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles.updateQuantiles()</span></code></a> method allows to <strong>balance the new observations against the historical evaluations</strong>. With <em>historySize = None</em> (the default setting), the balance in the example above is 1000/1100 (91%, weight of historical data) against 100/1100 (9%, weight of the new incoming observations). Putting <em>historySize = 0</em>, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile norms. The updated quantile limits may be shown in a browser view:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># showing the updated quantile limits in a browser view</span>
+</dd>
+<dt>Parameter <em>historySize</em> (see Line 6) of the <a class="reference internal" href="techDoc.html#performanceQuantiles.PerformanceQuantiles.updateQuantiles" title="performanceQuantiles.PerformanceQuantiles.updateQuantiles"><code class="xref py py-meth docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles.updateQuantiles()</span></code></a> method allows to <strong>balance</strong> the <strong>new</strong> evaluations against the <strong>historical</strong> ones. With <strong>historySize = None</strong> (the default setting), the balance in the example above is 1000/1100 (91%, weight of historical data) against 100/1100 (9%, weight of the new incoming observations). Putting <strong>historySize = 0</strong>, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile estimation with solely the new incomping data. The updated quantile limits may be shown in a browser view:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># showing the updated quantile limits in a browser view</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">showHTMLLimitingQuantiles</span><span class="p">(</span><span class="n">Transposed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd>
+</dl>
 <a class="reference internal image-reference" href="_images/examplePerfQuantiles.png"><img alt="Example limiting quantiles html show method" class="align-center" src="_images/examplePerfQuantiles.png" style="width: 400px;" /></a>
 </div>
 <div class="section" id="rating-performances-with-quantile-norms">
