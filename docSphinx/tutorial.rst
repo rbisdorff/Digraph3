@@ -2153,7 +2153,7 @@ It is important to notice that the :py:class:`sortingDigraphs.NormedQuantilesRat
 
 Example Python session:
     >>> From sortingDigraphs import NormedQuantilesRatingDigraph
-    >>> nqr = NormedQuantilesRatingDigraph(pq,newActions,Debug=True)
+    >>> nqr = NormedQuantilesRatingDigraph(pq,newActions)
 
 Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class constructor are a valid PerformanceQuantiles object *pq* and corresponding set *newActions* of new decision actions. The result may be shown as follows:
     >>> nqr.showQuantilesRating()
@@ -2167,7 +2167,7 @@ The same result may be seen in a browser view in a specialised heatmap format ( 
 
 .. image:: exampleIncRatDigraph.png
     :alt: usage example of Normed Quantiles Rating Digraph
-    :width: 500 px
+    :width: 700 px
     :align: center
 
 Using a specialised version the :py:meth:`weakOrders.WeakOrder.exportGraphViz` method allows drawing the rating result in a Hasse diagram format. Consider the follwing rating result: 	    
