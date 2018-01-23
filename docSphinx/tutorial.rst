@@ -2167,7 +2167,7 @@ The same result may be seen in a browser view in a specialised heatmap format ( 
 
 .. image:: exampleIncRatDigraph.png
     :alt: usage example of Normed Quantiles Rating Digraph
-    :width: 700 px
+    :width: 500 px
     :align: center
 
 Using a specialised version the :py:meth:`weakOrders.WeakOrder.exportGraphViz` method allows drawing the rating result in a Hasse diagram format. Consider the follwing rating result: 	    
