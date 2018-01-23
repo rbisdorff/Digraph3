@@ -69,9 +69,26 @@ class PerformanceQuantiles(PerformanceTableau):
     """
     def __init__(self,perfTab=None,numberOfBins=4,LowerClosed=True,filePerfQuant=None,Debug=False):
         from copy import deepcopy
-        from collections import OrderedDict
+        from collections import OrderedDict, defaultdict
+        from randomPerfTabs import RandomCBPerformanceTableau,\
+                                   Random3ObjectivesPerformanceTableau
         self.Debug = Debug
-        if filePerfQuant == None:
+        if perfTab != None:
+            actionsTypeStatistics = {}
+            for x in perfTab.actions:
+                if type(perfTab) == RandomCBPerformanceTableau:
+                    xType = perfTab.actions[x]['type']
+                elif type(perfTab) == Random3ObjectivesPerformanceTableau:
+                    xType = 'Soc' + perfTab.actions[x]['profile']['Soc']
+                    xType += 'Eco' + perfTab.actions[x]['profile']['Eco']
+                    xType += 'Env' + perfTab.actions[x]['profile']['Env']
+                else:
+                    xType = 'NA'
+                try:
+                    actionsTypeStatistics[xType] += 1
+                except:
+                    actionsTypeStatistics[xType] = 1
+            self.actionsTypeStatistics = actionsTypeStatistics
             try:
                 self.objectives = perfTab.objectives
             except:
@@ -91,18 +108,18 @@ class PerformanceQuantiles(PerformanceTableau):
                 cdf[g] = OrderedDict([(limitingQuantiles[g][i],self.quantilesFrequencies[i]) for i in range(np)])
             self.limitingQuantiles = limitingQuantiles
             self.cdf = cdf
-            if perfTab.__class__.__name__ == 'RandomPerformanceTableau':
-                from randomPerfTabs import RandomPerformanceGenerator
-                self.randomActionsGenerator = RandomPerformanceGenerator(perfTab)
-            elif perfTab.__class__.__name__ == 'RandomCBPerformanceTableau':
-                from randomPerfTabs import RandomCBPerformanceGenerator
-                self.randomActionsGenerator = RandomCBPerformanceGenerator(perfTab)
-            elif perfTab.__class__.__name__ == 'Random3ObjectivesPerformanceTableau':
-                from randomPerfTabs import Random3ObjectivesPerformanceGenerator
-                self.randomActionsGenerator = Random3ObjectivesPerformanceGenerator(perfTab)
-            else:
-                print('!!! Warning: the proposed performance tableau model does not provide a random decision actions generator !!!')
-                self.randomActionsGenerator = None
+##            if perfTab.__class__.__name__ == 'RandomPerformanceTableau':
+##                from randomPerfTabs import RandomPerformanceGenerator
+##                self.randomActionsGenerator = RandomPerformanceGenerator(perfTab)
+##            elif perfTab.__class__.__name__ == 'RandomCBPerformanceTableau':
+##                from randomPerfTabs import RandomCBPerformanceGenerator
+##                self.randomActionsGenerator = RandomCBPerformanceGenerator(perfTab)
+##            elif perfTab.__class__.__name__ == 'Random3ObjectivesPerformanceTableau':
+##                from randomPerfTabs import Random3ObjectivesPerformanceGenerator
+##                self.randomActionsGenerator = Random3ObjectivesPerformanceGenerator(perfTab)
+##            else:
+##                print('!!! Warning: the proposed performance tableau model does not provide a random decision actions generator !!!')
+##                self.randomActionsGenerator = None
         else: # a stored instance file name is given
             print(filePerfQuant)
             fileName = filePerfQuant + '.py'
@@ -524,10 +541,7 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
         """
         print('*--- Saving performance quantiles in file: <' + str(fileName) + '.py> ---*')
         valueString = 'Decimal("%%.%df"),\n' % (valueDigits)
-        try:
-            objectives = self.objectives
-        except:
-            objectives = {}
+        objectives = self.objectives
         fileNameExt = str(fileName)+str('.py')
         with open(fileNameExt, 'w') as fo:
             fo.write('# Saved performance quantiles: \n')
@@ -535,11 +549,12 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
             fo.write('from collections import OrderedDict\n')
             # objectives
             fo.write('objectives = OrderedDict([\n')
-            for obj in objectives:
-                fo.write('(\'%s\', {\n' % str(obj))
-                for it in self.objectives[obj].keys():
-                    fo.write('\'%s\': %s,\n' % (it,repr(self.objectives[obj][it])))
-                fo.write('}),\n')
+            if objectives != None:
+                for obj in objectives:
+                    fo.write('(\'%s\', {\n' % str(obj))
+                    for it in self.objectives[obj].keys():
+                        fo.write('\'%s\': %s,\n' % (it,repr(self.objectives[obj][it])))
+                    fo.write('}),\n')
             fo.write('])\n')            
             # criteria
             criteria = self.criteria
@@ -854,13 +869,28 @@ if __name__ == "__main__":
 
     from performanceQuantiles import *
     seed = 105
-    from randomPerfTabs import RandomCBPerformanceTableau
-    from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
-    nbrActions=1000
-    nbrCrit = 13
-    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
+    nbrActions = 1000
+    nbrCrit = 21
+##    from randomPerfTabs import RandomPerformanceTableau
+##    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
+##    nbrActions=nbrActions
+##    nbrCrit = nbrCrit
+##    tp = RandomPerformanceTableau(numberOfActions=nbrActions,
+##                                    numberOfCriteria=nbrCrit,seed=seed)
+##    from randomPerfTabs import RandomCBPerformanceTableau
+##    from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
+##    nbrActions=nbrActions
+##    nbrCrit = nbrCrit
+##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
+##                                    numberOfCriteria=nbrCrit,seed=seed)
+    from randomPerfTabs import Random3ObjectivesPerformanceTableau
+    from randomPerfTabs import Random3ObjectivesPerformanceGenerator as PerfTabGenerator
+    nbrActions=nbrActions
+    nbrCrit = nbrCrit
+    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,
                                     numberOfCriteria=nbrCrit,seed=seed)
     pq = PerformanceQuantiles(tp,5,LowerClosed=True,Debug=False)
+    print(pq.actionsTypeStatistics)
     #print(pq.limitingQuantiles)
     #pq.showLimitingQuantiles(ByObjectives=False)
     #pq.showHTMLLimitingQuantiles(Transposed=True)
@@ -876,8 +906,8 @@ if __name__ == "__main__":
 ##    pq.showActions()
     #pq.showCriteria()
     pq.showHTMLLimitingQuantiles(Transposed=True)
-    pq.showCriterionStatistics('c01')
-    pq.showCriterionStatistics('b01')
+##    pq.showCriterionStatistics('c01')
+##    pq.showCriterionStatistics('b01')
     print(pq.computeQuantileProfile(0.5))
     pq.save(fileName='testPerfQuant')
 

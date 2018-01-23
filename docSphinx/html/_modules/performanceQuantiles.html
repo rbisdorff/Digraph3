@@ -119,9 +119,26 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">perfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">numberOfBins</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">filePerfQuant</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span><span class="p">,</span> <span class="n">defaultdict</span>
+        <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">,</span>\
+                                   <span class="n">Random3ObjectivesPerformanceTableau</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
-        <span class="k">if</span> <span class="n">filePerfQuant</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">perfTab</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">actionsTypeStatistics</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">perfTab</span><span class="p">)</span> <span class="o">==</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">:</span>
+                    <span class="n">xType</span> <span class="o">=</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>
+                <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">perfTab</span><span class="p">)</span> <span class="o">==</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">:</span>
+                    <span class="n">xType</span> <span class="o">=</span> <span class="s1">&#39;Soc&#39;</span> <span class="o">+</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">][</span><span class="s1">&#39;Soc&#39;</span><span class="p">]</span>
+                    <span class="n">xType</span> <span class="o">+=</span> <span class="s1">&#39;Eco&#39;</span> <span class="o">+</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">][</span><span class="s1">&#39;Eco&#39;</span><span class="p">]</span>
+                    <span class="n">xType</span> <span class="o">+=</span> <span class="s1">&#39;Env&#39;</span> <span class="o">+</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">][</span><span class="s1">&#39;Env&#39;</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">xType</span> <span class="o">=</span> <span class="s1">&#39;NA&#39;</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">actionsTypeStatistics</span><span class="p">[</span><span class="n">xType</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="n">actionsTypeStatistics</span><span class="p">[</span><span class="n">xType</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">actionsTypeStatistics</span> <span class="o">=</span> <span class="n">actionsTypeStatistics</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">objectives</span> <span class="o">=</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">objectives</span>
             <span class="k">except</span><span class="p">:</span>
@@ -141,18 +158,18 @@
                 <span class="n">cdf</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="p">)])</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">limitingQuantiles</span> <span class="o">=</span> <span class="n">limitingQuantiles</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">cdf</span> <span class="o">=</span> <span class="n">cdf</span>
-            <span class="k">if</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;RandomPerformanceTableau&#39;</span><span class="p">:</span>
-                <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceGenerator</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">randomActionsGenerator</span> <span class="o">=</span> <span class="n">RandomPerformanceGenerator</span><span class="p">(</span><span class="n">perfTab</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;RandomCBPerformanceTableau&#39;</span><span class="p">:</span>
-                <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceGenerator</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">randomActionsGenerator</span> <span class="o">=</span> <span class="n">RandomCBPerformanceGenerator</span><span class="p">(</span><span class="n">perfTab</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;Random3ObjectivesPerformanceTableau&#39;</span><span class="p">:</span>
-                <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">Random3ObjectivesPerformanceGenerator</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">randomActionsGenerator</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceGenerator</span><span class="p">(</span><span class="n">perfTab</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;!!! Warning: the proposed performance tableau model does not provide a random decision actions generator !!!&#39;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">randomActionsGenerator</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="c1">##            if perfTab.__class__.__name__ == &#39;RandomPerformanceTableau&#39;:</span>
+<span class="c1">##                from randomPerfTabs import RandomPerformanceGenerator</span>
+<span class="c1">##                self.randomActionsGenerator = RandomPerformanceGenerator(perfTab)</span>
+<span class="c1">##            elif perfTab.__class__.__name__ == &#39;RandomCBPerformanceTableau&#39;:</span>
+<span class="c1">##                from randomPerfTabs import RandomCBPerformanceGenerator</span>
+<span class="c1">##                self.randomActionsGenerator = RandomCBPerformanceGenerator(perfTab)</span>
+<span class="c1">##            elif perfTab.__class__.__name__ == &#39;Random3ObjectivesPerformanceTableau&#39;:</span>
+<span class="c1">##                from randomPerfTabs import Random3ObjectivesPerformanceGenerator</span>
+<span class="c1">##                self.randomActionsGenerator = Random3ObjectivesPerformanceGenerator(perfTab)</span>
+<span class="c1">##            else:</span>
+<span class="c1">##                print(&#39;!!! Warning: the proposed performance tableau model does not provide a random decision actions generator !!!&#39;)</span>
+<span class="c1">##                self.randomActionsGenerator = None</span>
         <span class="k">else</span><span class="p">:</span> <span class="c1"># a stored instance file name is given</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">filePerfQuant</span><span class="p">)</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="n">filePerfQuant</span> <span class="o">+</span> <span class="s1">&#39;.py&#39;</span>
@@ -574,10 +591,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*--- Saving performance quantiles in file: &lt;&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.py&gt; ---*&#39;</span><span class="p">)</span>
         <span class="n">valueString</span> <span class="o">=</span> <span class="s1">&#39;Decimal(&quot;</span><span class="si">%%</span><span class="s1">.</span><span class="si">%d</span><span class="s1">f&quot;),</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">valueDigits</span><span class="p">)</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">objectives</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">objectives</span>
-        <span class="k">except</span><span class="p">:</span>
-            <span class="n">objectives</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">objectives</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">objectives</span>
         <span class="n">fileNameExt</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;.py&#39;</span><span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileNameExt</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fo</span><span class="p">:</span>
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;# Saved performance quantiles: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -585,11 +599,12 @@
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;from collections import OrderedDict</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="c1"># objectives</span>
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;objectives = OrderedDict([</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">objectives</span><span class="p">:</span>
-                <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;(</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">, {</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span>
-                <span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">objectives</span><span class="p">[</span><span class="n">obj</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                    <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">: </span><span class="si">%s</span><span class="s1">,</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">it</span><span class="p">,</span><span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objectives</span><span class="p">[</span><span class="n">obj</span><span class="p">][</span><span class="n">it</span><span class="p">])))</span>
-                <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;}),</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">objectives</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">objectives</span><span class="p">:</span>
+                    <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;(</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">, {</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span>
+                    <span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">objectives</span><span class="p">[</span><span class="n">obj</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">: </span><span class="si">%s</span><span class="s1">,</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">it</span><span class="p">,</span><span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objectives</span><span class="p">[</span><span class="n">obj</span><span class="p">][</span><span class="n">it</span><span class="p">])))</span>
+                    <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;}),</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;])</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>            
             <span class="c1"># criteria</span>
             <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
@@ -904,13 +919,28 @@
 
     <span class="kn">from</span> <span class="nn">performanceQuantiles</span> <span class="k">import</span> <span class="o">*</span>
     <span class="n">seed</span> <span class="o">=</span> <span class="mi">105</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
-    <span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
-    <span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">13</span>
-    <span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>
+    <span class="n">nbrActions</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">21</span>
+<span class="c1">##    from randomPerfTabs import RandomPerformanceTableau</span>
+<span class="c1">##    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator</span>
+<span class="c1">##    nbrActions=nbrActions</span>
+<span class="c1">##    nbrCrit = nbrCrit</span>
+<span class="c1">##    tp = RandomPerformanceTableau(numberOfActions=nbrActions,</span>
+<span class="c1">##                                    numberOfCriteria=nbrCrit,seed=seed)</span>
+<span class="c1">##    from randomPerfTabs import RandomCBPerformanceTableau</span>
+<span class="c1">##    from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator</span>
+<span class="c1">##    nbrActions=nbrActions</span>
+<span class="c1">##    nbrCrit = nbrCrit</span>
+<span class="c1">##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,</span>
+<span class="c1">##                                    numberOfCriteria=nbrCrit,seed=seed)</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">Random3ObjectivesPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
+    <span class="n">nbrActions</span><span class="o">=</span><span class="n">nbrActions</span>
+    <span class="n">nbrCrit</span> <span class="o">=</span> <span class="n">nbrCrit</span>
+    <span class="n">tp</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>
                                     <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pq</span><span class="o">.</span><span class="n">actionsTypeStatistics</span><span class="p">)</span>
     <span class="c1">#print(pq.limitingQuantiles)</span>
     <span class="c1">#pq.showLimitingQuantiles(ByObjectives=False)</span>
     <span class="c1">#pq.showHTMLLimitingQuantiles(Transposed=True)</span>
@@ -926,8 +956,8 @@
 <span class="c1">##    pq.showActions()</span>
     <span class="c1">#pq.showCriteria()</span>
     <span class="n">pq</span><span class="o">.</span><span class="n">showHTMLLimitingQuantiles</span><span class="p">(</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">pq</span><span class="o">.</span><span class="n">showCriterionStatistics</span><span class="p">(</span><span class="s1">&#39;c01&#39;</span><span class="p">)</span>
-    <span class="n">pq</span><span class="o">.</span><span class="n">showCriterionStatistics</span><span class="p">(</span><span class="s1">&#39;b01&#39;</span><span class="p">)</span>
+<span class="c1">##    pq.showCriterionStatistics(&#39;c01&#39;)</span>
+<span class="c1">##    pq.showCriterionStatistics(&#39;b01&#39;)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">pq</span><span class="o">.</span><span class="n">computeQuantileProfile</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
     <span class="n">pq</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;testPerfQuant&#39;</span><span class="p">)</span>
 
