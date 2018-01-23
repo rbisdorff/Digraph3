@@ -3644,53 +3644,28 @@ normed performance quantiles gathered from historical data. The constructor requ
 <p>It is important to notice that the <a class="reference internal" href="techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph" title="sortingDigraphs.NormedQuantilesRatingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.NormedQuantilesRatingDigraph</span></code></a> class, contrary to the generic <a class="reference internal" href="techDoc.html#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.OutrankingDigraph</span></code></a> class, does not inherit from the generic <a class="reference internal" href="techDoc.html#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a> class, but instead from the <a class="reference internal" href="techDoc.html#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a> class. The <strong>actions</strong> in such a <a class="reference internal" href="techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph" title="sortingDigraphs.NormedQuantilesRatingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.NormedQuantilesRatingDigraph</span></code></a> class instance do contain both a set of newly given decision actions, as well as the historical quantile profiles from a given <a class="reference internal" href="techDoc.html#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a> class instance, ie estimated quantile bins&#8217; performance limits from historical performance vectors.</p>
 <dl class="docutils">
 <dt>Example Python session:</dt>
-<dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">From</span> <span class="n">sortingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># historical data</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">13</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">seed</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">numberOfBins</span><span class="o">=</span><span class="s1">&#39;deciles&#39;</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># new incoming decision actions of the same kind</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">newActions</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># updating the historical performance quantiles</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># rating the new set of decision actions</span>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">From</span> <span class="n">sortingDigraphs</span> <span class="kn">import</span> <span class="nn">NormedQuantilesRatingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># inspecting the rating result</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+<dt>Data input to the <a class="reference internal" href="techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph" title="sortingDigraphs.NormedQuantilesRatingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.NormedQuantilesRatingDigraph</span></code></a> class constructor are a valid PerformanceQuantiles object <em>pq</em> and corresponding set <em>newActions</em> of new decision actions. The result may be shown as follows:</dt>
+<dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
 <span class="go"> *-------- Normed quantiles rating result ---------</span>
 <span class="go"> [0.50 - 0.60[ [&#39;a1&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a10&#39;, &#39;a2&#39;]</span>
 <span class="go"> [0.40 - 0.50[ [&#39;a6&#39;, &#39;a9&#39;, &#39;a8&#39;]</span>
 <span class="go"> [0.20 - 0.30[ [&#39;a4&#39;, &#39;a5&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of Quantiles Rating&#39;</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
+</dd>
+<dt>The same result may be seen in a browser view in a specialised heatmap format ( see <code class="xref py py-meth docutils literal"><span class="pre">perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap()</span></code> method:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of Quantiles Rating&#39;</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 <a class="reference internal image-reference" href="_images/exampleIncRatDigraph.png"><img alt="usage example of Normed Quantiles Rating Digraph" class="align-center" src="_images/exampleIncRatDigraph.png" style="width: 500px;" /></a>

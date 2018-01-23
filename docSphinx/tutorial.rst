@@ -2152,28 +2152,17 @@ normed performance quantiles gathered from historical data. The constructor requ
 It is important to notice that the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class, contrary to the generic :py:class:`outrankingDigraphs.OutrankingDigraph` class, does not inherit from the generic :py:class:`perfTabs.PerformanceTableau` class, but instead from the :py:class:`performanceQuantiles.PerformanceQuantiles` class. The **actions** in such a :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class instance do contain both a set of newly given decision actions, as well as the historical quantile profiles from a given :py:class:`performanceQuantiles.PerformanceQuantiles` class instance, ie estimated quantile bins' performance limits from historical performance vectors.
 
 Example Python session:
-    >>> From sortingDigraphs import *
-    >>> # historical data
-    >>> from randomPerfTabs import RandomCBPerformanceTableau
-    >>> nbrActions=1000
-    >>> nbrCrit = 13
-    >>> seed = 100
-    >>> tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,numberOfCriteria=nbrCrit,seed=seed)
-    >>> pq = PerformanceQuantiles(tp,numberOfBins='deciles',LowerClosed=True,Debug=False)
-    >>> # new incoming decision actions of the same kind
-    >>> from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
-    >>> tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
-    >>> newActions = tpg.randomActions(10)
-    >>> # updating the historical performance quantiles
-    >>> pq.updateQuantiles(newActions,historySize=None)
-    >>> # rating the new set of decision actions
+    >>> From sortingDigraphs import NormedQuantilesRatingDigraph
     >>> nqr = NormedQuantilesRatingDigraph(pq,newActions,Debug=True)
-    >>> # inspecting the rating result
+
+Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class constructor are a valid PerformanceQuantiles object *pq* and corresponding set *newActions* of new decision actions. The result may be shown as follows:
     >>> nqr.showQuantilesRating()
      *-------- Normed quantiles rating result ---------
      [0.50 - 0.60[ ['a1', 'a7', 'a3', 'a10', 'a2']
      [0.40 - 0.50[ ['a6', 'a9', 'a8']
      [0.20 - 0.30[ ['a4', 'a5']
+
+The same result may be seen in a browser view in a specialised heatmap format ( see :py:meth:`perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap` method:
     >>> nqr.showHTMLPerformanceHeatmap(pageTitle='Heatmap of Quantiles Rating',Correlations=True)
 
 .. image:: exampleIncRatDigraph.png
