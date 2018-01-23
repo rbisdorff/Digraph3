@@ -2079,25 +2079,36 @@ See also the technical documentation of the :ref:`performanceQuantiles-label`.
 Incremental learning of quantile norms
 ......................................
 
-We are inspired by [CHAM-2006]_, who present an efficient algorithm for incrementally updating a quantile-binned cumulative density function (CDF) with newly observed CDFs.
+Suppose that we see flying in random multiple criteria performances from a given model of random performance tableau (see the :py:mod:`randomPerfTabs` module).
 
-The :py:class:`performanceQuantiles.PerformanceQuantiles` class implements the incremental performance quantiles estimation of a given performance tableau. The components are:
+The question we address here is to rate a newly incoming performance vector on the basis of the quantiles of the so far observed performance vectors. To do so,
+we are inspired by [CHAM-2006]_, who present an efficient algorithm for incrementally updating a quantile-binned cumulative density function (CDF) with newly observed CDFs.
 
-  * A **criteria dictionary** from a valid performance tableau instance;
-  * A list of **quantile frequencies** like *quartiles* (0.0, 0.25, 05, 0.75,1.0), or *deciles*, for instance;
-  * A dictionary of so far estimated **quantile limits** for each frequency per criterion;
-  * A dictionary of **history sizes** keeping track of the number of evaluations seen so far per criterion. Missing data make these sizes vary from criterion to criterion.
+The :py:class:`performanceQuantiles.PerformanceQuantiles` class implements the performance quantiles estimation of a given performance tableau. The components are:
+
+  * An **objectives** and a **criteria** ordered dictionary from a valid performance tableau instance;
+  * A list **quantileFrequencies** of quntile frequencies like *quartiles* [0.0, 0.25, 05, 0.75,1.0], *quintiles* [0.0, 0.2, 0.4, 0.6, 0.8, 1.0] or *deciles* [0.0, 0.1, 0.2, ..., 0.9, 1.0] for instance;
+  * An ordered  dictionary **limitingQuantiles** of so far estimated *lower* (default) or *upper* quantile class limits for each frequency per criterion;
+  * An ordered dictionary **historySizes** for keeping track of the number of evaluations seen so far per criterion. Missing data may make these sizes vary from criterion to criterion.
 
 Example python session:
-    >>> import performanceQuantiles
+    >>> from performanceQuantiles import PerformanceQuantiles
     >>> from randomPerfTabs import RandomCBPerformanceTableau
     >>> nbrActions=1000
     >>> nbrCrit = 7
-    >>> tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
-    ...                                numberOfCriteria=nbrCrit,seed=105)
-    >>> pq = performanceQuantiles.PerformanceQuantiles(tp,
-    ...               numberOfBins = 'quintiles',
+    >>> tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
+    ...               numberOfCriteria=nbrCrit,seed=105)
+    >>> pq = PerformanceQuantiles(tp,\
+    ...               numberOfBins = 'quintiles',\
     ...               LowerClosed=True,Debug=False)
+    >>> pq.__dict__.keys()
+    dict_keys(['objectives', 'LowerClosed', 'name',
+    'quantilesFrequencies', 'criteria', 'historySizes',
+    'limitingQuantiles', ... ])
+
+The constructor parameter *numberOfBins* (see Lines 7-9 above), choosing the wished number of quantile frequencies, may be either **quartiles**, **quintiles** (5 bins), **deciles** (10 bins) , **dodeciles** (20 bins) or any other integer number of quantile bins. The quantile bins may be either **lower closed** (default) or **upper-closed**.
+
+    >>> # Printing out the estimated quantile limits 
     >>> pq.showLimitingQuantiles(ByObjectives=True)
     *----  performance quantiles -----*
     Costs
@@ -2112,26 +2123,27 @@ Example python session:
 	'b3'  |   1     |   1.08   34.64   54.80   73.24   97.23  
 	'b4'  |   1     |   0.00    3.00    5.00    7.00   10.00  
 	'b5'  |   1     |   1.84   34.25   55.11   74.62   96.40  
-	'b6'  |   1     |   0.00    3.00    5.00    7.00   10.00  
-    >>> # Importing a random generator for new decision actions
+        'b6'  |   1     |   0.00    3.00    5.00    7.00   10.00
+
+New  decision actions with random multiple criteria performance vectors from the same random performance tableau model my be generated with ad hoc random performance generators. We provide, for experimental purpose, in the :py:mod:`randomPerfTabs` module three such generators: one for the standard :py:class:`randomPerfTabs.RandomPerformaTableau` model, one the for the two objectives :py:class:`randomPrefTabs.RandomCBPerformaTableau` Cost-Benefit model, and one for the :py:class:`randomPerfTabs.Random3ObjectivesPerformaTableau` model. With a set of 100 new decision actions and performance evaluations, the so far estimated historical quantile limits may be updated as follows: 
+
+    >>> # generate new random decision actions
     >>> from randomPerfTabs import RandomCBPerformanceGenerator
-    >>> tpg = RandomCBPerformanceGenerator(tp,seed=105)
-    >>> newActions = tpg.randomActions(100)
+    >>> rpg = RandomCBPerformanceGenerator(tp)
+    >>> newActions = rpg.randomActions(100)
     >>> # Updating the quintile norms 
-    >>> pq.updateQuantiles(newActions,historySize=None)      
+    >>> pq.updateQuantiles(newActions,historySize=None)
+
+Parameter *historySize* (see Line 6) of the :py:meth:`performanceQuantiles.PerformanceQuantiles.updateQuantiles` method allows to **balance the new observations against the historical evaluations**. With *historySize = None* (the default setting), the balance in the example above is 1000/1100 (91%, weight of historical data) against 100/1100 (9%, weight of the new incoming observations). Putting *historySize = 0*, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile norms. The updated quantile limits may be shown in a browser view:
+
+    >>> # showing the updated quantile limits in a browser view
     >>> pq.showHTMLLimitingQuantiles(Transposed=True)
 
 .. image:: examplePerfQuantiles.png
     :alt: Example limiting quantiles html show method
     :width: 400 px
     :align: center
-
-The constructor parameter *numberOfBins* (see Lines 7-9 above), choosing the wished number of quantile frequencies, may be either 'quartiles', 'quintiles' (5 bins), 'deciles' (10 bins) , 'dodeciles' (20 bins) or any other integer number of quantile bins. The quantile bins may be either **lower closed** (default) or **upper-closed**.
-
-We use a random generator for **new decision actions** based on a given random performance tableau model (see Lines 25-28 and the :py:mod:`randomPerfTabs` module). 
-
-Parameter *historySize* (see Line 30) of the :py:meth:`performanceQuantiles.PerformanceQuantiles.updateQuantiles` method allows to **balance the new observations against the historical evaluations**. With *historySize = None* (the default setting), the balance in the example above is 1000/1100 (91%, weight of historical data) against 100/1100 (9%, weight of the new incoming observations). Putting *historySize = 0*, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile norms.
-
+    
 
 Rating performances with quantile norms
 .......................................
@@ -2140,9 +2152,7 @@ We provide the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class, a
 for **absolute rating** of a newly given set of decision actions with
 normed performance quantiles gathered from historical data. The constructor requires a valid :py:class:`performanceQuantiles.PerformanceQuantiles` instance.
 
-.. note::
-
-   It is important to notice that the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class, contrary to the generic :py:class:`outrankingDigraphs.OutrankingDigraph` class, does not inherit from the generic :py:class:`perfTabs.PerformanceTableau` class, but instead from the :py:class:`performanceQuantiles.PerformanceQuantiles` class. The **actions** in such a class instance do contain both a set of newly given decision actions, as well as the quantile profiles, ie the quantile bins' performance limits.
+It is important to notice that the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class, contrary to the generic :py:class:`outrankingDigraphs.OutrankingDigraph` class, does not inherit from the generic :py:class:`perfTabs.PerformanceTableau` class, but instead from the :py:class:`performanceQuantiles.PerformanceQuantiles` class. The **actions** in such a :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class instance do contain both a set of newly given decision actions, as well as the historical quantile profiles from a given :py:class:`performanceQuantiles.PerformanceQuantiles` class instance, ie estimated quantile bins' performance limits from historical performance vectors.
 
 Example Python session:
     >>> From sortingDigraphs import *
