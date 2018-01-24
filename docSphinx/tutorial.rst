@@ -2258,7 +2258,7 @@ The same result may even more conviently be consulted in a browser view via a sp
     :width: 550 px
     :align: center
 
-Due the fact that the importance weight (6) of the unique cost criterion is balancing the sum of the six benefit criteria (6), the marginal cost criteria ranking is highly correlated (*tau* = 0.80) with the proposed rating of the new decision actions. Action **a1008c**, of **cheap** type (low costs, but several good benfits), appears first ranked in the third quartile class ([0.50-0.75[). The worst ranked action appears to be action **a1007a**, of **advantageous** type (excellent benefits but also highest costs).
+Due the fact that the importance weight (6) of the unique cost criterion is balancing the sum of the six benefit criteria (6), the marginal cost criteria ranking is highly correlated (*tau* = 0.80) with the proposed rating of the new decision actions. Is is not a surprise than, that decision action **a1008c**, of **cheap** type (low costs, but several good benfits), appears first ranked in the third quartile class [0.50-0.75[. Whereas, action **a1007a**, of **advantageous** type (excellent benefits but also highest costs), appears worst ranked in the first quartile class [0.0 - 0.25[.
 
 Using furthermore a specialised version of the :py:meth:`weakOrders.WeakOrder.exportGraphViz` method allows drawing the rating result in a Hasse diagram format.
    >>> nqr.exportRatingGraphViz()
