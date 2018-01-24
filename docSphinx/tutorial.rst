@@ -2166,12 +2166,12 @@ We consider given a :code:`PerformanceQuantiles` object instance *pq* as compute
     Digraph Size        : 85
     Determinateness     : 64.44%
     Attributes: [
-     'LowerClosed', 'actions', 'actionsRanking', 'categories', 'cdf', 'completeRelation',
-     'concordanceRelation', 'criteria', 'criteriaCategoryLimits', 'evaluation', 'gamma',
-     'hasNoVeto', 'historySizes', 'limitingQuantiles', 'name', 'nbrThreads',
-     'newActions', 'notGamma', 'objectives', 'order', 'profileLimits',
-     'profiles', 'quantilesFrequencies', 'rankingCorrelation', 'rankingRule',
-     'rankingScores', 'ratingCategories', 'relation', 'runTimes', 'valuationdomain'] 
+     'LowerClosed', 'actions', 'actionsRanking', 'categories', 'cdf',
+     'completeRelation', 'concordanceRelation', 'criteria', 'criteriaCategoryLimits',
+     'evaluation', 'gamma', 'hasNoVeto', 'historySizes', 'limitingQuantiles', 'name',
+     'nbrThreads', 'newActions', 'notGamma', 'objectives', 'order', 'profileLimits', 'profiles',
+     'quantilesFrequencies', 'rankingCorrelation', 'rankingRule', 'rankingScores',
+     'ratingCategories', 'relation', 'runTimes', 'valuationdomain'] 
     *------  Constructor run times (in sec.) ------*
     #Threads         : 1
     Total time       : 0.54058
@@ -2182,7 +2182,7 @@ We consider given a :code:`PerformanceQuantiles` object instance *pq* as compute
     Compute rating   : 0.01617
     Compute sorting  : 0.00000
 
-Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class constructor (see Line 2) are a valid PerformanceQuantiles object *pq* and a compatible set *newActions* of new decision actions generated from the same random model. We 
+Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class constructor (see Line 2) are a valid PerformanceQuantiles object *pq* and a compatible set *newActions* of new decision actions generated from the same random model.
     >>> nqr.showActions()
     *----- show digraphs actions --------------*
     key:  a1001
@@ -2214,31 +2214,43 @@ Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class
 
 Among the 10 new incoming decision actions (see Line 4 above) there are 3 advantageous (high benefits, but also high costs), 4 cheap (low costs, buts also low benefits) and 4 neutral decision actions. The digraph actions also contain the closed lower limits of the four quartile classes: [0.0-0.25[, [0.25-0.5[, [0.5 - 0.75[, [0.75 - 1.0[.
 
-The main time (0.4 out of 0.5 sec. , see Lines 21-27 above) is spent by the class constructor in computing the outranking relation on the extended actions set including both the new actions as well as the quartile class limits. The actual rating procedure will rely on a complete ranking obtained from this outranking digraph. Two efficient and scalable ranking rules, the **Copeland** and its valued version, the **Netflows** rule may be used. The *rankingRule* parameter allows to choose one of both. With *rankingRule='best'* (see Line 2 above) the :py:`NormedQuantilesRatingDigraph` constructor will choose the one that shows the highest ordinal correlation with the given outranking relation. In this example we obtain the following:
-    >>> print('Ranking rule        :', self.rankingRule)
-    Ranking rule        : Copeland
+The main time (0.4 out of 0.5 sec. , see Lines 21-27 above) is spent by the class constructor in computing the outranking relation on the extended actions set including both the new actions as well as the quartile class limits. The actual rating procedure will rely on a complete ranking obtained from this outranking digraph. Two efficient and scalable ranking rules, the **Copeland** and its valued version, the **Netflows** rule may be used. The *rankingRule* parameter allows to choose one of both. With *rankingRule='best'* (see Line 2 above) the :code:`NormedQuantilesRatingDigraph` constructor will choose the ranking rule that results in the highest ordinal correlation with the given outranking relation. In this rating example we obtain the Copeland rule:
     >>> print('Actions ranking     :', self.actionsRanking)
     Actions ranking     : [
-    'm4', 'a1008', 'a1006', 'a1005', 'a1001',
-    'a1003', 'a1010', 'm3', 'a1002', 'm2',
-    'a1004', 'a1009', 'a1007', 'm1']
+    'm4', 'a1008', 'a1006', 'a1005', 'a1001', 'a1003', 'a1010',
+    'm3', 'a1002', 'm2', 'a1004', 'a1009', 'a1007', 'm1']
+    >>> print('Ranking rule        :', self.rankingRule)
+    Ranking rule        : Copeland
     >>> print('Ranking correlation :', self.rankingCorrelation)
     Ranking correlation : {
-    'determination': Decimal('0.544'),
-    'correlation': Decimal('0.966') }
+     'determination': Decimal('0.544'),
+     'correlation': Decimal('0.966') }
+
+And the Copeland rule achieves here a ranking (from vest to worst) which is very close (*tau* = 0.97) to the underlying outranking relation. With the NetFloes rule we would get the following slightly different ranking result:
+    >>> from linearOrders import NetFlowsOrder
+    >>> nf = NetFlowsOrder(nqr)
+    >>> nf.netFlowsRanking
+    ['m4', 'a1008', 'a1001', 'a1006', 'a1003', 'a1005', 'm3',
+     'a1010', 'a1002', 'a1007', 'a1009', 'm2', 'a1004', 'm1']
+    >>> nqr.computeOrderCorrelation(nf.netFlowsOrder)
+    {'determination': Decimal('0.544'),
+     'correlation': Decimal('0.892')}
+
+which is indeed much less correlated (*tau* = 0.89) with the underlying outranking relation.
+
+The rating procedure is based en lower closed quantile classes, such that we collect the rating classes in increasing order:    
     >>> print('Rating categories:', self.ratingCategories)
     Rating categories: OrderedDict([
-    ('m1', ['a1004', 'a1009', 'a1007']),
-    ('m2', ['a1002']),
-    ('m3', ['a1008', 'a1006', 'a1005', 'a1001', 'a1003', 'a1010']) ])
+     ('m1', ['a1004', 'a1009', 'a1007']), ('m2', ['a1002']),
+     ('m3', ['a1008', 'a1006', 'a1005', 'a1001', 'a1003', 'a1010']) ])
 
-The rating result may be more conveniently shown in descending order as follows:
+The effective rating result is better shown in descending order as follows:
     >>> nqr.showQuantilesRating()
     [0.50 - 0.75[ ['a1008', 'a1006', 'a1005', 'a1001', 'a1003', 'a1010']
     [0.25 - 0.50[ ['a1002']
     [0.00 - 0.25[ ['a1004', 'a1009', 'a1007']
     
-The same result may be seen in a browser view in a specialised heatmap format ( see :py:meth:`perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap` method:
+The same result may even more conviently be consulted in a browser view via a specialised heatmap format ( see :py:meth:`perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap` method:
     >>> nqr.showHTMLPerformanceHeatmap(pageTitle='Heatmap of Quantiles Rating',Correlations=True)
 
 .. image:: exampleIncRatDigraphTut.png
@@ -2246,21 +2258,15 @@ The same result may be seen in a browser view in a specialised heatmap format ( 
     :width: 550 px
     :align: center
 
-Using a specialised version the :py:meth:`weakOrders.WeakOrder.exportGraphViz` method allows drawing the rating result in a Hasse diagram format. Consider the follwing rating result: 	    
-   >>> nqr.showQuantilesRating()
-    *-------- Quantile sorting result ---------
-     [0.40 - 0.60[ ['a1', 'a2', 'a3']
-     [0.20 - 0.40[ ['a4', 'a5']
-
-It will result in the following Hasse diagram, where the lower quantile bin limits appear boxed and colored:
-    >>> nqr.exportRatingGraphViz()
+Using furthermore a specialised version of the :py:meth:`weakOrders.WeakOrder.exportGraphViz` method allows drawing the rating result in a Hasse diagram format.
+   >>> nqr.exportRatingGraphViz()
     *---- exporting a dot file for GraphViz tools ---------*
      Exporting to quantilesRatingDigraph.dot
      dot -Grankdir=TB -Tpng quantilesRatingDigraph.dot -o quantilesRatingDigraph.png
 
 .. image:: normedRatingDigraph.png
-    :alt: usage example of Normed Quantiles Rating Digraph
-    :width: 200 px
+    :alt: usage example of Normed Quartiles Rating Digraph
+    :width: 400 px
     :align: center
  
 Back to :ref:`Tutorial-label`   

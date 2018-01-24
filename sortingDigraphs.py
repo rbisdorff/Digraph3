@@ -6628,6 +6628,7 @@ if __name__ == "__main__":
                                        )
     nqr.showQuantilesRating()
     nqr.exportRatingGraphViz(noSilent=False)
+    print(nqr.actionsTypeStatistics)
     
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
