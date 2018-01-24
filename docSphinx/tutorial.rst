@@ -2238,13 +2238,13 @@ And the Copeland rule achieves here a ranking (from vest to worst) which is very
 
 which is indeed much less correlated (*tau* = 0.89) with the underlying outranking relation.
 
-The rating procedure is based en lower closed quantile classes, such that we collect the rating classes in increasing order:    
+The rating procedure is based on lower closed quantile classes, such that we collect the rating classes' contents in increasing order of the quartiles:    
     >>> print('Rating categories:', self.ratingCategories)
     Rating categories: OrderedDict([
      ('m1', ['a1004', 'a1009', 'a1007']), ('m2', ['a1002']),
      ('m3', ['a1008', 'a1006', 'a1005', 'a1001', 'a1003', 'a1010']) ])
 
-The effective rating result is better shown in descending order as follows:
+We notice that no decision action is rated above the lower limit of the highest quartile class [0.75 - 1.0]. Indeed, the effective rating result is better shown in descending order as follows:
     >>> nqr.showQuantilesRating()
     [0.50 - 0.75[ ['a1008', 'a1006', 'a1005', 'a1001', 'a1003', 'a1010']
     [0.25 - 0.50[ ['a1002']
@@ -2257,6 +2257,8 @@ The same result may even more conviently be consulted in a browser view via a sp
     :alt: usage example of Normed Quantiles Rating Digraph
     :width: 550 px
     :align: center
+
+Due the fact that the importance weight (6) of the unique cost criterion is balancing the sum of the six benefit criteria (6), the marginal cost criteria ranking is highly correlated (*tau* = 0.80) with the proposed rating of the new decision actions. Action **a1008c**, of **cheap** type (low costs, but several good benfits), appears first ranked in the third quartile class ([0.50-0.75[). The worst ranked action appears to be action **a1007a**, of **advantageous** type (excellent benefits but also highest costs).
 
 Using furthermore a specialised version of the :py:meth:`weakOrders.WeakOrder.exportGraphViz` method allows drawing the rating result in a Hasse diagram format.
    >>> nqr.exportRatingGraphViz()

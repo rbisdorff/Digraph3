@@ -3811,7 +3811,7 @@ performance quantiles estimated from historical data, we provide the <a class="r
 </dl>
 <p>which is indeed much less correlated (<em>tau</em> = 0.89) with the underlying outranking relation.</p>
 <dl class="docutils">
-<dt>The rating procedure is based en lower closed quantile classes, such that we collect the rating classes in increasing order:</dt>
+<dt>The rating procedure is based on lower closed quantile classes, such that we collect the rating classes&#8217; contents in increasing order of the quartiles:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Rating categories:&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ratingCategories</span><span class="p">)</span>
 <span class="go">Rating categories: OrderedDict([</span>
 <span class="go"> (&#39;m1&#39;, [&#39;a1004&#39;, &#39;a1009&#39;, &#39;a1007&#39;]), (&#39;m2&#39;, [&#39;a1002&#39;]),</span>
@@ -3819,7 +3819,7 @@ performance quantiles estimated from historical data, we provide the <a class="r
 </pre></div>
 </div>
 </dd>
-<dt>The effective rating result is better shown in descending order as follows:</dt>
+<dt>We notice that no decision action is rated above the lower limit of the highest quartile class [0.75 - 1.0]. Indeed, the effective rating result is better shown in descending order as follows:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
 <span class="go">[0.50 - 0.75[ [&#39;a1008&#39;, &#39;a1006&#39;, &#39;a1005&#39;, &#39;a1001&#39;, &#39;a1003&#39;, &#39;a1010&#39;]</span>
 <span class="go">[0.25 - 0.50[ [&#39;a1002&#39;]</span>
@@ -3834,6 +3834,7 @@ performance quantiles estimated from historical data, we provide the <a class="r
 </dd>
 </dl>
 <a class="reference internal image-reference" href="_images/exampleIncRatDigraphTut.png"><img alt="usage example of Normed Quantiles Rating Digraph" class="align-center" src="_images/exampleIncRatDigraphTut.png" style="width: 550px;" /></a>
+<p>Due the fact that the importance weight (6) of the unique cost criterion is balancing the sum of the six benefit criteria (6), the marginal cost criteria ranking is highly correlated (<em>tau</em> = 0.80) with the proposed rating of the new decision actions. Action <strong>a1008c</strong>, of <strong>cheap</strong> type (low costs, but several good benfits), appears first ranked in the third quartile class ([0.50-0.75[). The worst ranked action appears to be action <strong>a1007a</strong>, of <strong>advantageous</strong> type (excellent benefits but also highest costs).</p>
 <dl class="docutils">
 <dt>Using furthermore a specialised version of the <a class="reference internal" href="techDoc.html#weakOrders.WeakOrder.exportGraphViz" title="weakOrders.WeakOrder.exportGraphViz"><code class="xref py py-meth docutils literal"><span class="pre">weakOrders.WeakOrder.exportGraphViz()</span></code></a> method allows drawing the rating result in a Hasse diagram format.</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">exportRatingGraphViz</span><span class="p">()</span>
