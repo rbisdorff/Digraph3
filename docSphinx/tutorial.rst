@@ -2268,7 +2268,7 @@ Using furthermore a specialised version of the :py:meth:`weakOrders.WeakOrder.ex
 
 .. image:: normedRatingDigraph.png
     :alt: usage example of Normed Quartiles Rating Digraph
-    :width: 400 px
+    :width: 500 px
     :align: center
  
 Back to :ref:`Tutorial-label`   
