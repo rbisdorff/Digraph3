@@ -6495,13 +6495,14 @@ presenting the decision alternatives.</li>
 if multiple parallel computing cores are available.</li>
 </ul>
 </div></blockquote>
-<p>Suppose ew observe the following rating reslut:
-&gt;&gt;&gt; nqr.showQuantilesRating()</p>
-<blockquote>
-<div>[0.50 - 0.75[ [&#8216;a1008&#8217;, &#8216;a1006&#8217;, &#8216;a1005&#8217;, &#8216;a1001&#8217;, &#8216;a1003&#8217;, &#8216;a1010&#8217;]
-[0.25 - 0.50[ [&#8216;a1002&#8217;]
-[0.00 - 0.25[ [&#8216;a1004&#8217;, &#8216;a1009&#8217;, &#8216;a1007&#8217;]</div></blockquote>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of Quantiles Rating&#39;</span><span class="p">,</span>        <span class="o">...</span>                           <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>        <span class="o">...</span>                           <span class="n">colorLevels</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+<p>Suppose ew observe the following rating reslut:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
+<span class="go"> [0.50 - 0.75[ [&#39;a1008&#39;, &#39;a1006&#39;, &#39;a1005&#39;, &#39;a1001&#39;, &#39;a1003&#39;, &#39;a1010&#39;]</span>
+<span class="go"> [0.25 - 0.50[ [&#39;a1002&#39;]</span>
+<span class="go"> [0.00 - 0.25[ [&#39;a1004&#39;, &#39;a1009&#39;, &#39;a1007&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of Quantiles Rating&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                          <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">... </span>                          <span class="n">colorLevels</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/exampleIncRatDigraphTut.png"><img alt="usage example of Normed Quantiles Rating Digraph" class="align-center" src="_images/exampleIncRatDigraphTut.png" style="width: 550px;" /></a>

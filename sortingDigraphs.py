@@ -6288,13 +6288,14 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                 if multiple parallel computing cores are available.
 
         Suppose ew observe the following rating reslut:
-        >>> nqr.showQuantilesRating()
-         [0.50 - 0.75[ ['a1008', 'a1006', 'a1005', 'a1001', 'a1003', 'a1010']
-         [0.25 - 0.50[ ['a1002']
-         [0.00 - 0.25[ ['a1004', 'a1009', 'a1007']
-        >>> nqr.showHTMLRatingHeatmap(pageTitle='Heatmap of Quantiles Rating',\
-        ...                           Correlations=True,\
-        ...                           colorLevels = 5)
+        
+            >>> nqr.showQuantilesRating()
+             [0.50 - 0.75[ ['a1008', 'a1006', 'a1005', 'a1001', 'a1003', 'a1010']
+             [0.25 - 0.50[ ['a1002']
+             [0.00 - 0.25[ ['a1004', 'a1009', 'a1007']
+            >>> nqr.showHTMLRatingHeatmap(pageTitle='Heatmap of Quantiles Rating',
+            ...                           Correlations=True,
+            ...                           colorLevels = 5)
 
         .. image:: exampleIncRatDigraphTut.png
             :alt: usage example of Normed Quantiles Rating Digraph
