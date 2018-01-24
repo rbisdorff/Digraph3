@@ -6287,14 +6287,20 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
               - Computing the marginal correlations may be boosted with Threading = True,
                 if multiple parallel computing cores are available.
 
-        >>> from randomPerfTabs import RandomPerformanceTableau
-        >>> rt = RandomPerformanceTableau(seed=100)
-        >>> rt.showHTMLPerformanceHeatmap(colorLevels=5,Correlations=True)
+        Suppose ew observe the following rating reslut:
+        >>> nqr.showQuantilesRating()
+         [0.50 - 0.75[ ['a1008', 'a1006', 'a1005', 'a1001', 'a1003', 'a1010']
+         [0.25 - 0.50[ ['a1002']
+         [0.00 - 0.25[ ['a1004', 'a1009', 'a1007']
+        >>> nqr.showHTMLRatingHeatmap(pageTitle='Heatmap of Quantiles Rating',\
+        ...                           Correlations=True,\
+        ...                           colorLevels = 5)
 
-        .. image:: perfTabsExample.png
-           :alt: HTML heat map of the performance tableau
-           :width: 600 px
-           :align: center
+        .. image:: exampleIncRatDigraphTut.png
+            :alt: usage example of Normed Quantiles Rating Digraph
+            :width: 550 px
+            :align: center
+
         
         """
         import webbrowser

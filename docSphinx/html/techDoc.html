@@ -6495,12 +6495,16 @@ presenting the decision alternatives.</li>
 if multiple parallel computing cores are available.</li>
 </ul>
 </div></blockquote>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceTableau</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<p>Suppose ew observe the following rating reslut:
+&gt;&gt;&gt; nqr.showQuantilesRating()</p>
+<blockquote>
+<div>[0.50 - 0.75[ [&#8216;a1008&#8217;, &#8216;a1006&#8217;, &#8216;a1005&#8217;, &#8216;a1001&#8217;, &#8216;a1003&#8217;, &#8216;a1010&#8217;]
+[0.25 - 0.50[ [&#8216;a1002&#8217;]
+[0.00 - 0.25[ [&#8216;a1004&#8217;, &#8216;a1009&#8217;, &#8216;a1007&#8217;]</div></blockquote>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of Quantiles Rating&#39;</span><span class="p">,</span>        <span class="o">...</span>                           <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>        <span class="o">...</span>                           <span class="n">colorLevels</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/perfTabsExample.png"><img alt="HTML heat map of the performance tableau" class="align-center" src="_images/perfTabsExample.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/exampleIncRatDigraphTut.png"><img alt="usage example of Normed Quantiles Rating Digraph" class="align-center" src="_images/exampleIncRatDigraphTut.png" style="width: 550px;" /></a>
 </dd></dl>
 
 <dl class="method">
