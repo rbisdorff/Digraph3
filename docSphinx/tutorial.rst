@@ -2096,8 +2096,9 @@ Example python session:
     >>> from randomPerfTabs import RandomCBPerformanceTableau
     >>> nbrActions=1000
     >>> nbrCrit = 7
+    >>> seed = 105
     >>> tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
-    ...               numberOfCriteria=nbrCrit,seed=105)
+    ...               numberOfCriteria=nbrCrit,seed=seed)
     >>> pq = PerformanceQuantiles(tp,\
     ...               numberOfBins = 'quartiles',\
     ...               LowerClosed=True,Debug=False)
@@ -2113,15 +2114,15 @@ The constructor parameter *numberOfBins* (see Lines 7-9 above), choosing the wis
     Costs
     criteria  | weights |  '0.0'   '0.25'  '0.5'   '0.75'  '1.0'   
      ---------|--------------------------------------------------
-	'c1'  |   6     | -97.12  -65.70  -46.08  -24.96   -1.85  
+	'c1'  |   6     | -97.12  -69.69  -50.08  -28.95  -1.85  
     Benefits
     criteria  | weights |  '0.0'   '0.25'  '0.5'   '0.75'  '1.0'   
      ---------|--------------------------------------------------
-	'b1'  |   1     |   2.11   32.42   53.25   73.44   98.69 
+	'b1'  |   1     |   2.11   27.92   48.76   68.94   98.69 
 	'b2'  |   1     |   0.00    3.00    5.00    7.00   10.00  
-	'b3'  |   1     |   1.08   34.64   54.80   73.24   97.23  
+	'b3'  |   1     |   1.08   30.41   50.57   69.01   97.23  
 	'b4'  |   1     |   0.00    3.00    5.00    7.00   10.00  
-	'b5'  |   1     |   1.84   34.25   55.11   74.62   96.40  
+	'b5'  |   1     |   1.84   29.77   50.62   70.14   96.40  
         'b6'  |   1     |   0.00    3.00    5.00    7.00   10.00
 
 Both objectives are equi-important; the weight (6) of the cost criterion balances the sum of weights (6) of the benefit criteria (see column 2). The preference direction of the cost criterion *c1* is negative; the lesser the costs the better it is, wheras all the benefit criteria *b1* to *b6* show positive preference directions, ie the higher the benefits the better it is. The columns entitled '0.0', resp. '1.0' show the quartile *Q0*, resp. *Q4*, ie the **worst**, resp. **best** performance observed so far on each criterion. Column '0.5' shows the **median** (*Q2*) observed on the criteria.  
@@ -2129,7 +2130,7 @@ Both objectives are equi-important; the weight (6) of the cost criterion balance
 New  decision actions with random multiple criteria performance vectors from the same random performance tableau model may now be generated with ad hoc random performance generators. We provide for experimental purpose, in the :py:mod:`randomPerfTabs` module, three such generators: one for the standard :py:class:`randomPerfTabs.RandomPerformanceTableau` model, one the for the two objectives :py:class:`randomPerfTabs.RandomCBPerformanceTableau` Cost-Benefit model, and one for the :py:class:`randomPerfTabs.Random3ObjectivesPerformanceTableau` model with three objectives concerning respectively  economic, environmental or social aspects. Given a set of 100 new decision actions with generated random performance evaluations, the so far estimated historical quantile limits may be updated as follows: 
     >>> # generate 100 new random decision actions
     >>> from randomPerfTabs import RandomCBPerformanceGenerator
-    >>> rpg = RandomCBPerformanceGenerator(tp)
+    >>> rpg = RandomCBPerformanceGenerator(tp,seed=seed)
     >>> newActions = rpg.randomActions(10)
     >>> # Updating the quartile norms shown above 
     >>> pq.updateQuantiles(newActions,historySize=None)
@@ -2154,16 +2155,16 @@ It is important to notice that the :py:class:`sortingDigraphs.NormedQuantilesRat
 
 We consider given a :code:`PerformanceQuantiles` object instance *pq* as computed in the previous section:
     >>> from sortingDigraphs import NormedQuantilesRatingDigraph
-    >>> nqr = NormedQuantilesRatingDigraph(pq,newActions)
+    >>> nqr = NormedQuantilesRatingDigraph(pq,newActions,rankingRule='best')
     >>> nqr
     *-----  Object instance description -----------*
     Instance class      : NormedQuantilesRatingDigraph
     Instance name       : normedRatingDigraph
     # Criteria          : 7
-    # Quantile profiles : 4
+    # Quantile classes  : 4
     # New actions       : 10
-    Digraph Size        : 86
-    Determinateness     : 65.52%
+    Digraph Size        : 85
+    Determinateness     : 64.44%
     Attributes: [
      'LowerClosed', 'actions', 'actionsRanking', 'categories', 'cdf', 'completeRelation',
      'concordanceRelation', 'criteria', 'criteriaCategoryLimits', 'evaluation', 'gamma',
@@ -2173,16 +2174,15 @@ We consider given a :code:`PerformanceQuantiles` object instance *pq* as compute
      'rankingScores', 'ratingCategories', 'relation', 'runTimes', 'valuationdomain'] 
     *------  Constructor run times (in sec.) ------*
     #Threads         : 1
-    Total time       : 0.02254
-    Data input       : 0.00053
-    Quantile classes : 0.00003
-    Compute profiles : 0.00006
-    Compute relation : 0.02040
-    Compute rating   : 0.00152
+    Total time       : 0.54058
+    Data input       : 0.00191
+    Quantile classes : 0.00361
+    Compute profiles : 0.07990
+    Compute relation : 0.41333
+    Compute rating   : 0.01617
     Compute sorting  : 0.00000
 
-
-Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class constructor (see Line 2) are a valid PerformanceQuantiles object *pq* and a compatible set *newActions* of new decision actions generated from the same random model.
+Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class constructor (see Line 2) are a valid PerformanceQuantiles object *pq* and a compatible set *newActions* of new decision actions generated from the same random model. We 
     >>> nqr.showActions()
     *----- show digraphs actions --------------*
     key:  a1001
@@ -2193,34 +2193,8 @@ Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class
       short name: a1002c
       name:       random cheap decision action
       comment:    Cost-Benefit
-    key:  a1003
-      short name: a1003a
-      name:       random advantageous decision action
-      comment:    Cost-Benefit
-    key:  a1004
-      short name: a1004c
-      name:       random cheap decision action
-      comment:    Cost-Benefit
-    key:  a1005
-      short name: a1005n
-      name:       random neutral decision action
-      comment:    Cost-Benefit
-    key:  a1006
-      short name: a1006c
-      name:       random cheap decision action
-      comment:    Cost-Benefit
-    key:  a1007
-      short name: a1007n
-      name:       random neutral decision action
-      comment:    Cost-Benefit
-    key:  a1008
-      short name: a1008n
-      name:       random neutral decision action
-      comment:    Cost-Benefit
-    key:  a1009
-      short name: a1009a
-      name:       random advantageous decision action
-      comment:    Cost-Benefit
+    ...
+    ...
     key:  a1010
       short name: a1010a
       name:       random advantageous decision action
@@ -2238,107 +2212,36 @@ Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class
       name:       categorical low limits
       comment:    Inferior or equal limits for category membership assessment
 
-Among the new decision actions there are 3 advantageous (high benefits, but also high costs), 4 cheap (low costs, buts also low benfits) and 4 neutral decision actions. The digraph actions also contain the closed lower limits of the four quartile classes: [0.0-0.25[, [0.25-0.50[, [0.50- 0.75[, [0.75 - 1.0[.
+Among the 10 new incoming decision actions (see Line 4 above) there are 3 advantageous (high benefits, but also high costs), 4 cheap (low costs, buts also low benefits) and 4 neutral decision actions. The digraph actions also contain the closed lower limits of the four quartile classes: [0.0-0.25[, [0.25-0.5[, [0.5 - 0.75[, [0.75 - 1.0[.
 
-We may as well inspect the family of preference criteria with their respective preference thresholds and quartiles:
-    >>> pq.showCriteria()
-    *----  criteria -----*
-    c1 'Costs/random cardinal cost criterion'
-      Scale = (0.0, 100.0)
-      Weight = 0.500 
-      Threshold ind : 1.99 + 0.00x
-      Threshold veto : 59.94 + 0.00x
-      Threshold pref : 4.00 + 0.00x
-      history size: 1000
-      p    : quantile(p)
-    0.00 :  -97.12
-    0.25 :  -72.56
-    0.50 :  -36.00
-    0.75 :  -22.93
-    1.00 :  -1.85
-    b1 'Benefits/random cardinal benefit criterion'
-      Scale = (0.0, 100.0)
-      Weight = 0.083 
-      Threshold ind : 2.26 + 0.00x
-      Threshold veto : 66.40 + 0.00x
-      Threshold pref : 4.50 + 0.00x
-      history size: 997
-      p    : quantile(p)
-    0.00 :  2.11
-    0.25 :  27.05
-    0.50 :  60.40
-    0.75 :  87.67
-    1.00 :  98.69
-    b2 'Benefits/random ordinal benefit criterion'
-      Scale = (0, 10)
-      Weight = 0.083 
-      history size: 1000
-      p    : quantile(p)
-    0.00 :  0.00
-    0.25 :  2.83
-    0.50 :  4.52
-    0.75 :  6.92
-    1.00 :  10.00
-    b3 'Benefits/random cardinal benefit criterion'
-      Scale = (0.0, 100.0)
-      Weight = 0.083 
-      Threshold ind : 2.09 + 0.00x
-      Threshold veto : 62.49 + 0.00x
-      Threshold pref : 4.23 + 0.00x
-      history size: 1000
-      p    : quantile(p)
-    0.00 :  1.08
-    0.25 :  24.94
-    0.50 :  50.28
-    0.75 :  67.94
-    1.00 :  97.23
-    b4 'Benefits/random ordinal benefit criterion'
-      Scale = (0, 10)
-      Weight = 0.083 
-      history size: 994
-      p    : quantile(p)
-    0.00 :  0.00
-    0.25 :  3.32
-    0.50 :  4.04
-    0.75 :  6.87
-    1.00 :  10.00
-    b5 'Benefits/random cardinal benefit criterion'
-      Scale = (0.0, 100.0)
-      Weight = 0.083 
-      Threshold ind : 2.29 + 0.00x
-      Threshold veto : 64.92 + 0.00x
-      Threshold pref : 4.48 + 0.00x
-      history size: 1001
-      p    : quantile(p)
-    0.00 :  1.84
-    0.25 :  28.36
-    0.50 :  50.62
-    0.75 :  76.04
-    1.00 :  96.40
-    b6 'Benefits/random ordinal benefit criterion'
-      Scale = (0, 10)
-      Weight = 0.083 
-      history size: 1004
-      p    : quantile(p)
-    0.00 :  0.00
-    0.25 :  4.25
-    0.50 :  5.56
-    0.75 :  8.50
-    1.00 :  10.00
+The main time (0.4 out of 0.5 sec. , see Lines 21-27 above) is spent by the class constructor in computing the outranking relation on the extended actions set including both the new actions as well as the quartile class limits. The actual rating procedure will rely on a complete ranking obtained from this outranking digraph. Two efficient and scalable ranking rules, the **Copeland** and its valued version, the **Netflows** rule may be used. The *rankingRule* parameter allows to choose one of both. With *rankingRule='best'* (see Line 2 above) the :py:`NormedQuantilesRatingDigraph` constructor will choose the one that shows the highest ordinal correlation with the given outranking relation. In this example we obtain the following:
+    >>> print('Ranking rule        :', self.rankingRule)
+    Ranking rule        : Copeland
+    >>> print('Actions ranking     :', self.actionsRanking)
+    Actions ranking     : [
+    'm4', 'a1008', 'a1006', 'a1005', 'a1001',
+    'a1003', 'a1010', 'm3', 'a1002', 'm2',
+    'a1004', 'a1009', 'a1007', 'm1']
+    >>> print('Ranking correlation :', self.rankingCorrelation)
+    Ranking correlation : {
+    'determination': Decimal('0.544'),
+    'correlation': Decimal('0.966') }
+    >>> print('Rating categories:', self.ratingCategories)
+    Rating categories: OrderedDict([
+    ('m1', ['a1004', 'a1009', 'a1007']),
+    ('m2', ['a1002']),
+    ('m3', ['a1008', 'a1006', 'a1005', 'a1001', 'a1003', 'a1010']) ])
 
-Only cardinal cost or benfit criteria, like *c1* and *b1*, admit preference discrimination thresholds. The respective sampling size are for the quartile estimation may slightly vary due the presence of sporadic missing data.
-    
-The rating result may be shown as follows:
+The rating result may be more conveniently shown in descending order as follows:
     >>> nqr.showQuantilesRating()
-     *-------- Normed quantiles rating result ---------
-     [0.50 - 0.60[ ['a1', 'a7', 'a3', 'a10', 'a2']
-     [0.40 - 0.50[ ['a6', 'a9', 'a8']
-     [0.20 - 0.30[ ['a4', 'a5']
-
+    [0.50 - 0.75[ ['a1008', 'a1006', 'a1005', 'a1001', 'a1003', 'a1010']
+    [0.25 - 0.50[ ['a1002']
+    [0.00 - 0.25[ ['a1004', 'a1009', 'a1007']
+    
 The same result may be seen in a browser view in a specialised heatmap format ( see :py:meth:`perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap` method:
     >>> nqr.showHTMLPerformanceHeatmap(pageTitle='Heatmap of Quantiles Rating',Correlations=True)
 
-.. image:: exampleIncRatDigraph.png
+.. image:: exampleIncRatDigraphTut.png
     :alt: usage example of Normed Quantiles Rating Digraph
     :width: 550 px
     :align: center
@@ -2350,12 +2253,12 @@ Using a specialised version the :py:meth:`weakOrders.WeakOrder.exportGraphViz` m
      [0.20 - 0.40[ ['a4', 'a5']
 
 It will result in the following Hasse diagram, where the lower quantile bin limits appear boxed and colored:
-    >>> nqr.exportRatingGraphViz(noSilent=False)
+    >>> nqr.exportRatingGraphViz()
     *---- exporting a dot file for GraphViz tools ---------*
      Exporting to quantilesRatingDigraph.dot
      dot -Grankdir=TB -Tpng quantilesRatingDigraph.dot -o quantilesRatingDigraph.png
 
-.. image:: quantilesRatingDigraph.png
+.. image:: normedRatingDigraph.png
     :alt: usage example of Normed Quantiles Rating Digraph
     :width: 200 px
     :align: center

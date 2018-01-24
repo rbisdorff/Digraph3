@@ -5566,8 +5566,12 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             self.rankingRule = 'NetFlows'
             self.rankingScores = nf.netFlows
         if rankingRule != 'best':
-            self.rankingCorrelation = g.computeOrderCorrelation(list(reversed(actionsList)))
+            actionsOrdering = list(actionsList)
+            actionsOrdering.reverse()
+            self.rankingCorrelation = g.computeOrderCorrelation(actionsOrdering)
         self.actionsRanking = actionsList
+        if Debug:
+            print('*',self.actionsRanking)
         self.ratingCategories = self.computeQuantilesRating(Debug=Debug)
         if Debug:
             print('Ranking rule        :', self.rankingRule)
@@ -5813,7 +5817,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         """
           Renders an ordered dictionary of non empty quantiles in ascending order.
         """
-        ranking = self.actionsRanking
+        ranking = list(self.actionsRanking)
         if self.LowerClosed: # lower closed quantiles
             ranking.reverse()
         if Debug:
@@ -6532,10 +6536,10 @@ if __name__ == "__main__":
 ##    print(g.computeOrdinalCorrelation(qs0))
 ##    print(g.computeOrdinalCorrelation(qsrbc))
     
-    # test incremental rating agent
-    MP = False
-    seed = 105
-    nbrOfCPUs = 4
+##    # test incremental rating agent
+##    MP = False
+##    seed = 105
+##    nbrOfCPUs = 4
 
 ##    from randomPerfTabs import RandomPerformanceTableau
 ##    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
@@ -6544,13 +6548,13 @@ if __name__ == "__main__":
 ##    tp = RandomPerformanceTableau(numberOfActions=nbrActions,\
 ##                                    numberOfCriteria=nbrCrit,seed=seed)
 
-    from randomPerfTabs import RandomCBPerformanceTableau
-    from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
-    nbrActions=100
-    nbrCrit = 13
-    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
-                                    numberOfCriteria=nbrCrit,\
-                                    Threading=MP,seed=seed)
+##    from randomPerfTabs import RandomCBPerformanceTableau
+##    from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
+##    nbrActions=100
+##    nbrCrit = 13
+##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
+##                                    numberOfCriteria=nbrCrit,\
+##                                    Threading=MP,seed=seed)
 
 ##    from randomPerfTabs import Random3ObjectivesPerformanceTableau
 ##    from randomPerfTabs import Random3ObjectivesPerformanceGenerator as PerfTabGenerator
@@ -6559,19 +6563,19 @@ if __name__ == "__main__":
 ##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
 ##                                    numberOfCriteria=nbrCrit,seed=seed)
 ##
-    pq = PerformanceQuantiles(tp,20,LowerClosed=False,Debug=False)
-    tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
-    newActions = tpg.randomActions(10)
-    pq.updateQuantiles(newActions,historySize=None)
-    ira = NormedQuantilesRatingDigraph(pq,newActions,quantiles=None,\
-                                       PrefThresholds=False,\
-                                   WithSorting=True,Debug=False,\
-                                       Threading=MP,nbrOfCPUs=nbrOfCPUs)
-    print(ira)
-    ira.showQuantilesRating()
-    #ira.sorting = ira.computeSortingCharacteristics()
-    #ira.categoryContent = ira.computeCategoryContents()
-    ira.showSorting()
+##    pq = PerformanceQuantiles(tp,20,LowerClosed=False,Debug=False)
+##    tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
+##    newActions = tpg.randomActions(10)
+##    pq.updateQuantiles(newActions,historySize=None)
+##    ira = NormedQuantilesRatingDigraph(pq,newActions,quantiles=10,\
+##                                       PrefThresholds=False,\
+##                                   WithSorting=True,Debug=False,\
+##                                       Threading=MP,nbrOfCPUs=nbrOfCPUs)
+##    print(ira)
+##    ira.showQuantilesRating()
+##    #ira.sorting = ira.computeSortingCharacteristics()
+##    #ira.categoryContent = ira.computeCategoryContents()
+##    ira.showSorting()
 ##    for x in ira.newActions:
 ##        ira.showActionCategories(x,Comments=True)
 ##    ratingRelation = ira.computeRatingRelation()
@@ -6580,23 +6584,50 @@ if __name__ == "__main__":
 ##    ira.showHTMLRelationTable(actionsList=ira.actionsRanking)
 ##    from weakOrders import WeakOrder
 ##    ira.exportRatingGraphViz(graphType='pdf')
-    #ira.showSorting()
-    #ira.showHTMLSorting()
-    ira.showActionsSortingResult()
-    ira.showQuantilesSorting()
-    ira.showHTMLQuantilesSorting()
-    #ira.showRefinedQuantileOrdering()
-    #ira.showOrderedRelationTable()
-    #ira.showSortingCharacteristics()
-    ira.showHTMLRatingHeatmap(pageTitle='Heat map of the ratings',
-                                   Correlations=True,
-                                   #rankingRule='best',
-                                   )
-    ira.showRankingScores()
+##    #ira.showSorting()
+##    #ira.showHTMLSorting()
+##    ira.showActionsSortingResult()
+##    ira.showQuantilesSorting()
+##    ira.showHTMLQuantilesSorting()
+##    #ira.showRefinedQuantileOrdering()
+##    #ira.showOrderedRelationTable()
+##    #ira.showSortingCharacteristics()
+##    ira.showHTMLRatingHeatmap(pageTitle='Heat map of the ratings',
+##                                   Correlations=True,
+##                                   #rankingRule='best',
+##                                   )
+##    ira.showRankingScores()
 ##    print(ira)
 ##    print(ira.computeQuantileProfile(0.25))
 ##    print(ira.computeQuantileProfile(0.5))
 ##    print(ira.computeQuantileProfile(0.75))
+
+    from performanceQuantiles import PerformanceQuantiles
+    from randomPerfTabs import RandomCBPerformanceTableau
+    nbrActions=1000
+    nbrCrit = 7
+    seed = 105
+    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
+                   numberOfCriteria=nbrCrit,seed=seed)
+    pq = PerformanceQuantiles(tp,\
+                   numberOfBins = 'quartiles',\
+                  LowerClosed=True,Debug=False)
+    pq.showLimitingQuantiles(ByObjectives=True)
+    # generate 100 new random decision actions
+    from randomPerfTabs import RandomCBPerformanceGenerator
+    rpg = RandomCBPerformanceGenerator(tp,seed=seed)
+    newActions = rpg.randomActions(10)
+    # Updating the quartile norms shown above
+    pq.updateQuantiles(newActions,historySize=None)
+    pq.showHTMLLimitingQuantiles(Transposed=True)
+    from sortingDigraphs import NormedQuantilesRatingDigraph
+    nqr = NormedQuantilesRatingDigraph(pq,newActions,rankingRule='best',Debug=True)
+    print(nqr)
+    nqr.showHTMLRatingHeatmap(pageTitle='Heat map of the ratings', colorLevels=5,
+                                       Correlations=True,
+                                       )
+    nqr.showQuantilesRating()
+    nqr.exportRatingGraphViz(noSilent=False)
     
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')

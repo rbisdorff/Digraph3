@@ -5616,8 +5616,12 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">rankingRule</span> <span class="o">=</span> <span class="s1">&#39;NetFlows&#39;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rankingScores</span> <span class="o">=</span> <span class="n">nf</span><span class="o">.</span><span class="n">netFlows</span>
         <span class="k">if</span> <span class="n">rankingRule</span> <span class="o">!=</span> <span class="s1">&#39;best&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">rankingCorrelation</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)))</span>
+            <span class="n">actionsOrdering</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)</span>
+            <span class="n">actionsOrdering</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rankingCorrelation</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="n">actionsOrdering</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">actionsRanking</span> <span class="o">=</span> <span class="n">actionsList</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">actionsRanking</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ratingCategories</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeQuantilesRating</span><span class="p">(</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ranking rule        :&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankingRule</span><span class="p">)</span>
@@ -5863,7 +5867,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">          Renders an ordered dictionary of non empty quantiles in ascending order.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">ranking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actionsRanking</span>
+        <span class="n">ranking</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actionsRanking</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span><span class="p">:</span> <span class="c1"># lower closed quantiles</span>
             <span class="n">ranking</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
@@ -6582,10 +6586,10 @@
 <span class="c1">##    print(g.computeOrdinalCorrelation(qs0))</span>
 <span class="c1">##    print(g.computeOrdinalCorrelation(qsrbc))</span>
     
-    <span class="c1"># test incremental rating agent</span>
-    <span class="n">MP</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">seed</span> <span class="o">=</span> <span class="mi">105</span>
-    <span class="n">nbrOfCPUs</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="c1">##    # test incremental rating agent</span>
+<span class="c1">##    MP = False</span>
+<span class="c1">##    seed = 105</span>
+<span class="c1">##    nbrOfCPUs = 4</span>
 
 <span class="c1">##    from randomPerfTabs import RandomPerformanceTableau</span>
 <span class="c1">##    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator</span>
@@ -6594,13 +6598,13 @@
 <span class="c1">##    tp = RandomPerformanceTableau(numberOfActions=nbrActions,\</span>
 <span class="c1">##                                    numberOfCriteria=nbrCrit,seed=seed)</span>
 
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
-    <span class="n">nbrActions</span><span class="o">=</span><span class="mi">100</span>
-    <span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">13</span>
-    <span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>\
-                                    <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span>\
-                                    <span class="n">Threading</span><span class="o">=</span><span class="n">MP</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+<span class="c1">##    from randomPerfTabs import RandomCBPerformanceTableau</span>
+<span class="c1">##    from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator</span>
+<span class="c1">##    nbrActions=100</span>
+<span class="c1">##    nbrCrit = 13</span>
+<span class="c1">##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\</span>
+<span class="c1">##                                    numberOfCriteria=nbrCrit,\</span>
+<span class="c1">##                                    Threading=MP,seed=seed)</span>
 
 <span class="c1">##    from randomPerfTabs import Random3ObjectivesPerformanceTableau</span>
 <span class="c1">##    from randomPerfTabs import Random3ObjectivesPerformanceGenerator as PerfTabGenerator</span>
@@ -6609,19 +6613,19 @@
 <span class="c1">##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\</span>
 <span class="c1">##                                    numberOfCriteria=nbrCrit,seed=seed)</span>
 <span class="c1">##</span>
-    <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
-    <span class="n">newActions</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-    <span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">ira</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
-                                       <span class="n">PrefThresholds</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
-                                   <span class="n">WithSorting</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
-                                       <span class="n">Threading</span><span class="o">=</span><span class="n">MP</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">ira</span><span class="p">)</span>
-    <span class="n">ira</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
-    <span class="c1">#ira.sorting = ira.computeSortingCharacteristics()</span>
-    <span class="c1">#ira.categoryContent = ira.computeCategoryContents()</span>
-    <span class="n">ira</span><span class="o">.</span><span class="n">showSorting</span><span class="p">()</span>
+<span class="c1">##    pq = PerformanceQuantiles(tp,20,LowerClosed=False,Debug=False)</span>
+<span class="c1">##    tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)</span>
+<span class="c1">##    newActions = tpg.randomActions(10)</span>
+<span class="c1">##    pq.updateQuantiles(newActions,historySize=None)</span>
+<span class="c1">##    ira = NormedQuantilesRatingDigraph(pq,newActions,quantiles=10,\</span>
+<span class="c1">##                                       PrefThresholds=False,\</span>
+<span class="c1">##                                   WithSorting=True,Debug=False,\</span>
+<span class="c1">##                                       Threading=MP,nbrOfCPUs=nbrOfCPUs)</span>
+<span class="c1">##    print(ira)</span>
+<span class="c1">##    ira.showQuantilesRating()</span>
+<span class="c1">##    #ira.sorting = ira.computeSortingCharacteristics()</span>
+<span class="c1">##    #ira.categoryContent = ira.computeCategoryContents()</span>
+<span class="c1">##    ira.showSorting()</span>
 <span class="c1">##    for x in ira.newActions:</span>
 <span class="c1">##        ira.showActionCategories(x,Comments=True)</span>
 <span class="c1">##    ratingRelation = ira.computeRatingRelation()</span>
@@ -6630,23 +6634,50 @@
 <span class="c1">##    ira.showHTMLRelationTable(actionsList=ira.actionsRanking)</span>
 <span class="c1">##    from weakOrders import WeakOrder</span>
 <span class="c1">##    ira.exportRatingGraphViz(graphType=&#39;pdf&#39;)</span>
-    <span class="c1">#ira.showSorting()</span>
-    <span class="c1">#ira.showHTMLSorting()</span>
-    <span class="n">ira</span><span class="o">.</span><span class="n">showActionsSortingResult</span><span class="p">()</span>
-    <span class="n">ira</span><span class="o">.</span><span class="n">showQuantilesSorting</span><span class="p">()</span>
-    <span class="n">ira</span><span class="o">.</span><span class="n">showHTMLQuantilesSorting</span><span class="p">()</span>
-    <span class="c1">#ira.showRefinedQuantileOrdering()</span>
-    <span class="c1">#ira.showOrderedRelationTable()</span>
-    <span class="c1">#ira.showSortingCharacteristics()</span>
-    <span class="n">ira</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heat map of the ratings&#39;</span><span class="p">,</span>
-                                   <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                   <span class="c1">#rankingRule=&#39;best&#39;,</span>
-                                   <span class="p">)</span>
-    <span class="n">ira</span><span class="o">.</span><span class="n">showRankingScores</span><span class="p">()</span>
+<span class="c1">##    #ira.showSorting()</span>
+<span class="c1">##    #ira.showHTMLSorting()</span>
+<span class="c1">##    ira.showActionsSortingResult()</span>
+<span class="c1">##    ira.showQuantilesSorting()</span>
+<span class="c1">##    ira.showHTMLQuantilesSorting()</span>
+<span class="c1">##    #ira.showRefinedQuantileOrdering()</span>
+<span class="c1">##    #ira.showOrderedRelationTable()</span>
+<span class="c1">##    #ira.showSortingCharacteristics()</span>
+<span class="c1">##    ira.showHTMLRatingHeatmap(pageTitle=&#39;Heat map of the ratings&#39;,</span>
+<span class="c1">##                                   Correlations=True,</span>
+<span class="c1">##                                   #rankingRule=&#39;best&#39;,</span>
+<span class="c1">##                                   )</span>
+<span class="c1">##    ira.showRankingScores()</span>
 <span class="c1">##    print(ira)</span>
 <span class="c1">##    print(ira.computeQuantileProfile(0.25))</span>
 <span class="c1">##    print(ira.computeQuantileProfile(0.5))</span>
 <span class="c1">##    print(ira.computeQuantileProfile(0.75))</span>
+
+    <span class="kn">from</span> <span class="nn">performanceQuantiles</span> <span class="k">import</span> <span class="n">PerformanceQuantiles</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
+    <span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
+    <span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">7</span>
+    <span class="n">seed</span> <span class="o">=</span> <span class="mi">105</span>
+    <span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>\
+                   <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span>\
+                   <span class="n">numberOfBins</span> <span class="o">=</span> <span class="s1">&#39;quartiles&#39;</span><span class="p">,</span>\
+                  <span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">pq</span><span class="o">.</span><span class="n">showLimitingQuantiles</span><span class="p">(</span><span class="n">ByObjectives</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># generate 100 new random decision actions</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceGenerator</span>
+    <span class="n">rpg</span> <span class="o">=</span> <span class="n">RandomCBPerformanceGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">newActions</span> <span class="o">=</span> <span class="n">rpg</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    <span class="c1"># Updating the quartile norms shown above</span>
+    <span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">pq</span><span class="o">.</span><span class="n">showHTMLLimitingQuantiles</span><span class="p">(</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="k">import</span> <span class="n">NormedQuantilesRatingDigraph</span>
+    <span class="n">nqr</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">nqr</span><span class="p">)</span>
+    <span class="n">nqr</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heat map of the ratings&#39;</span><span class="p">,</span> <span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                                       <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                       <span class="p">)</span>
+    <span class="n">nqr</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
+    <span class="n">nqr</span><span class="o">.</span><span class="n">exportRatingGraphViz</span><span class="p">(</span><span class="n">noSilent</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
