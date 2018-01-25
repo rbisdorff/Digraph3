@@ -2076,15 +2076,14 @@ Rating with learned quantile norms
 
 See also the technical documentation of the :ref:`performanceQuantiles-label`.
 
-Incremental learning of quantile norms
-......................................
+In this tutorial we address the problem of **rating multiple criteria performances** of a set of potential decision actions with respect to empirical order statistics, ie performance quantiles learned from historic data concerning similar decision actions (see [CPSTAT-L5]_).
 
-Suppose that we see flying in random multiple criteria performances from a given model of random performance tableau (see the :py:mod:`randomPerfTabs` module).
+Incremental learning of performace quantiles
+............................................
 
-The question we address here is to rate a newly incoming performance vector on the basis of the quantiles of the so far observed performance vectors (see [CPSTAT-L5]_). To do so,
-we are inspired by [CHAM-2006]_ and [NR3-2007]_, who present an efficient algorithm for incrementally updating a quantile-binned cumulative density function (CDF) with newly observed CDFs.
+Suppose that we see flying in random multiple criteria performances from a given model of random performance tableau (see the :py:mod:`randomPerfTabs` module). The question we address here is to estimate empirical performance quantiles on the basis of so far observed performance vectors. For this task, we are inspired by [CHAM-2006]_ and [NR3-2007]_, who present an efficient algorithm for incrementally updating a quantile-binned cumulative density function (CDF) with newly observed CDFs.
 
-The :py:class:`performanceQuantiles.PerformanceQuantiles` class implements the performance quantiles estimation of a given performance tableau. The main components are:
+The :py:class:`performanceQuantiles.PerformanceQuantiles` class implements such a performance quantiles estimation based on a given performance tableau. Its main components are:
 
   * An **objectives** and a **criteria** ordered dictionary from a valid performance tableau instance;
   * A list **quantileFrequencies** of quantile frequencies like *quartiles* [0.0, 0.25, 05, 0.75,1.0], *quintiles* [0.0, 0.2, 0.4, 0.6, 0.8, 1.0] or *deciles* [0.0, 0.1, 0.2, ... 1.0] for instance;
