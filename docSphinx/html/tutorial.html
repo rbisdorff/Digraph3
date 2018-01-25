@@ -3847,7 +3847,7 @@ performance quantiles estimated from historical data, we provide the <a class="r
 </dl>
 <a class="reference internal image-reference" href="_images/normedRatingDigraph.png"><img alt="usage example of Normed Quartiles Rating Digraph" class="align-center" src="_images/normedRatingDigraph.png" style="width: 500px;" /></a>
 <dl class="docutils">
-<dt>A more precise rating result could be achieved when using deciles instead of quartiles for estimating the historical cumulative density functions:</dt>
+<dt>A more precise rating result could be achieved when using <strong>deciles</strong> instead of quartiles for estimating the historical cumulative density functions:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -3875,16 +3875,16 @@ performance quantiles estimated from historical data, we provide the <a class="r
 </td></tr></table></div>
 </dd>
 </dl>
-<p>Compared with the quartiles rating result, we notice that the six alternatives rated into the third quartile class [0.50 - 0.75[, are now divided up: action a1008 attains the 8th decile class [0.7 - 0.8[, a1006 and a1006 the 7th decile class [06 - 0.7[, and actions a1001, a1005 and a1003 remain in the 6th decile class [0.5-0.6[. Of the three lowest rated actions: a1004, a1009 and a1007 in quartile class [0.0 - 0.25[, a1004 is rated in the third  decile class [0.2 - 0.3[ and a1009 and a1007 in [0.1 - 0.2[.</p>
+<p>Compared with the quartiles rating result, we notice that the six alternatives rated into the third quartile class [0.50 - 0.75[, are now divided up: action <em>a1008</em> attains the 8th decile class [0.7 - 0.8[, actions <em>a1006</em> and <em>a1005</em> the 7th decile class [06 - 0.7[, and actions <em>a1001</em>, <em>a1010</em> and <em>a1003</em> remain in the 6th decile class [0.5-0.6[. Of the three lowest [0.0 - 0.25[ rated actions: <em>a1004</em>, <em>a1009</em> and <em>a1007</em>, <em>a1004</em> is rated in the third decile class [0.2 - 0.3[, and <em>a1009</em> and <em>a1007</em> in [0.1 - 0.2[.</p>
 <dl class="docutils">
-<dt>The corresponding rating heatmap conveniently illustrates this more precise rating result:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr1</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heat map of the ratings&#39;</span><span class="p">,</span>\
+<dt>The corresponding rating heatmap browser view may conveniently illustrate this preciser deciles rating result:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr1</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heat map of the deciles rating&#39;</span><span class="p">,</span>\
 <span class="gp">... </span>                           <span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd>
 </dl>
-<a class="reference internal image-reference" href="_images/exampleIncRatDigraphTutBis.png"><img alt="usage example of Normed Quantiles Rating Digraph" class="align-center" src="_images/exampleIncRatDigraphTutBis.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/exampleIncRatDigraphTutBis.png"><img alt="usage example of Normed Feciles Rating Digraph" class="align-center" src="_images/exampleIncRatDigraphTutBis.png" style="width: 550px;" /></a>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Tutorials of the Digraph3 resources</span></a></p>
 </div>
 </div>
