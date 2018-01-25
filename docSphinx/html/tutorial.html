@@ -3828,7 +3828,7 @@ performance quantiles estimated from historical data, we provide the <a class="r
 </div>
 </dd>
 <dt>The same result may even more conviently be consulted in a browser view via a specialised heatmap format ( see <code class="xref py py-meth docutils literal"><span class="pre">perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap()</span></code> method:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of Quantiles Rating&#39;</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of Quantiles Rating&#39;</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd>
@@ -3846,6 +3846,45 @@ performance quantiles estimated from historical data, we provide the <a class="r
 </dd>
 </dl>
 <a class="reference internal image-reference" href="_images/normedRatingDigraph.png"><img alt="usage example of Normed Quartiles Rating Digraph" class="align-center" src="_images/normedRatingDigraph.png" style="width: 500px;" /></a>
+<dl class="docutils">
+<dt>A more precise rating result could be achieved when using deciles instead of quartiles for estimating the historical cumulative density functions:</dt>
+<dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pq1</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="n">numberOfBins</span> <span class="o">=</span> <span class="s1">&#39;deciles&#39;</span><span class="p">,</span>\
+<span class="gp">... </span>             <span class="n">LowerClosed</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nqr1</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq1</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nqr1</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
+<span class="go">*-------- Quantiles rating result ---------</span>
+<span class="go"> [0.70 - 0.80[ [&#39;a1008&#39;]</span>
+<span class="go"> [0.60 - 0.70[ [&#39;a1006&#39;, &#39;a1005&#39;]</span>
+<span class="go"> [0.50 - 0.60[ [&#39;a1001&#39;, &#39;a1010&#39;, &#39;a1003&#39;]</span>
+<span class="go"> [0.30 - 0.40[ [&#39;a1002&#39;]</span>
+<span class="go"> [0.20 - 0.30[ [&#39;a1004&#39;]</span>
+<span class="go"> [0.10 - 0.20[ [&#39;a1009&#39;, &#39;a1007&#39;]</span>
+</pre></div>
+</td></tr></table></div>
+</dd>
+</dl>
+<p>Compared with the quartiles rating result, we notice that the six alternatives rated into the third quartile class [0.50 - 0.75[, are now divided up: action a1008 attains the 8th decile class [0.7 - 0.8[, a1006 and a1006 the 7th decile class [06 - 0.7[, and actions a1001, a1005 and a1003 remain in the 6th decile class [0.5-0.6[. Of the three lowest rated actions: a1004, a1009 and a1007 in quartile class [0.0 - 0.25[, a1004 is rated in the third  decile class [0.2 - 0.3[ and a1009 and a1007 in [0.1 - 0.2[.</p>
+<dl class="docutils">
+<dt>The corresponding rating heatmap conveniently illustrates this more precise rating result:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr1</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heat map of the ratings&#39;</span><span class="p">,</span>\
+<span class="gp">... </span>                           <span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<a class="reference internal image-reference" href="_images/exampleIncRatDigraphTutBis.png"><img alt="usage example of Normed Quantiles Rating Digraph" class="align-center" src="_images/exampleIncRatDigraphTutBis.png" style="width: 550px;" /></a>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Tutorials of the Digraph3 resources</span></a></p>
 </div>
 </div>

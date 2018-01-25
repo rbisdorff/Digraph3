@@ -2251,7 +2251,7 @@ We notice that no decision action is rated above the lower limit of the highest 
     [0.00 - 0.25[ ['a1004', 'a1009', 'a1007']
     
 The same result may even more conviently be consulted in a browser view via a specialised heatmap format ( see :py:meth:`perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap` method:
-    >>> nqr.showHTMLPerformanceHeatmap(pageTitle='Heatmap of Quantiles Rating',Correlations=True)
+    >>> nqr.showHTMLRatingHeatmap(pageTitle='Heatmap of Quantiles Rating',Correlations=True)
 
 .. image:: exampleIncRatDigraphTut.png
     :alt: usage example of Normed Quantiles Rating Digraph
@@ -2270,7 +2270,33 @@ Using furthermore a specialised version of the :py:meth:`weakOrders.WeakOrder.ex
     :alt: usage example of Normed Quartiles Rating Digraph
     :width: 500 px
     :align: center
- 
+
+A more precise rating result could be achieved when using deciles instead of quartiles for estimating the historical cumulative density functions:
+    >>> pq1 = PerformanceQuantiles(tp, numberOfBins = 'deciles',\
+    ...              LowerClosed=True,Debug=False)
+    ...
+    >>> nqr1 = NormedQuantilesRatingDigraph(pq1,newActions,rankingRule='best')
+    >>> nqr1.showQuantilesRating()
+    *-------- Quantiles rating result ---------
+     [0.70 - 0.80[ ['a1008']
+     [0.60 - 0.70[ ['a1006', 'a1005']
+     [0.50 - 0.60[ ['a1001', 'a1010', 'a1003']
+     [0.30 - 0.40[ ['a1002']
+     [0.20 - 0.30[ ['a1004']
+     [0.10 - 0.20[ ['a1009', 'a1007']
+
+Compared with the quartiles rating result, we notice that the six alternatives rated into the third quartile class [0.50 - 0.75[, are now divided up: action a1008 attains the 8th decile class [0.7 - 0.8[, a1006 and a1006 the 7th decile class [06 - 0.7[, and actions a1001, a1005 and a1003 remain in the 6th decile class [0.5-0.6[. Of the three lowest rated actions: a1004, a1009 and a1007 in quartile class [0.0 - 0.25[, a1004 is rated in the third  decile class [0.2 - 0.3[ and a1009 and a1007 in [0.1 - 0.2[.
+
+The corresponding rating heatmap conveniently illustrates this more precise rating result:     
+    >>> nqr1.showHTMLRatingHeatmap(pageTitle='Heat map of the ratings',\
+    ...                            colorLevels=5,Correlations=True)
+
+.. image:: exampleIncRatDigraphTutBis.png
+    :alt: usage example of Normed Quantiles Rating Digraph
+    :width: 550 px
+    :align: center
+
+
 Back to :ref:`Tutorial-label`   
 
 .. _Graphs-Tutorial-label:
