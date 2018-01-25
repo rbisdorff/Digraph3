@@ -2078,7 +2078,7 @@ See also the technical documentation of the :ref:`performanceQuantiles-label`.
 
 In this tutorial we address the problem of **rating multiple criteria performances** of a set of potential decision actions with respect to empirical order statistics, ie performance quantiles learned from historic data concerning similar decision actions (see [CPSTAT-L5]_).
 
-Consider that, in a given decision aid study, we observe for instance the performances of two potential decision actions, named *a1* and *a2*, measured on on 7 seven preferential incommensurable criteria: a unique cost criterion *c1* to minimize and 6 benefit criteria *b1* to *b6* to maximize:
+To illustrate the decision problem we face, consider for a moment that, in a given decision aid study, we observe, for instance, the performances of two potential decision actions, named *a1* and *a2*, measured on on 7 seven **incommensurable** preference criteria: a unique **costs** criterion *c1* (to **minimize**) and 6 **benefit** criteria *b1* to *b6* (to **maximize**):
 
    ============= ======== ======== ======== ======== ======== ======== ======== 
      Criterion      c1        b1      b2       b3       b4       b5       b6
@@ -2089,13 +2089,15 @@ Consider that, in a given decision aid study, we observe for instance the perfor
         a2         -96.9      70.6     8.9     82.5      5.2     34.0     8.3
    ============= ======== ======== ======== ======== ======== ======== ========
 
-The performance on the cost criterion *c1* is measured on a cardinal negative scale from -100.00 (worst) to 0.0 (best). The benefit criteria *b1*, *b3* and *b5* are measured on a cardinal scale from 0.0 (worst) to 100.00 (best), wheras the performances on benefit criteria *b2*, *b4* and *b6* are measured on an ordinal scale from 0 (worst) to 10 (best).
+The performance on the cost criterion *c1* is measured on a cardinal negative scale from -100.00 (worst) to 0.0 (best). The performances on the benefit criteria *b1*, *b3* and *b5* are measured on a cardinal scale from 0.0 (worst) to 100.00 (best), wheras the performances on benefit criteria *b2*, *b4* and *b6* are measured on an ordinal scale from 0 (worst) to 10 (best).
    
-The decision problem we face is to decide how the multi-criteria performances of *a1*, respectively *a2*,  may be rated (**excellent** ? **good** ?, or **fair**, or, even, **weak** or **very weak** ?) when compared with all potential similar multi-criteria performances one could encounter in this kind of decision problem.       
-  
+The non trivial decision problem we face here, is to decide, how the multi-criteria performances of *a1*, respectively *a2*,  may be rated (**excellent** ? **good** ?, or **fair**, or, even, **weak** or **very weak** ?) in an **order statistical sense**, when compared with all potential similar multi-criteria performances one could encounter in such a similar kind of decision problem. 
 
-Incremental learning of performace quantiles
-............................................
+To solve this absolute rating decision problem, we compare auch a multi-criteria performance vectore to actual performance quantiles estimated from pas historical performance records.  
+
+
+Incremental learning of historical performace quantiles
+.......................................................
 
 Suppose that we see flying in random multiple criteria performances from a given model of random performance tableau (see the :py:mod:`randomPerfTabs` module). The question we address here is to estimate empirical performance quantiles on the basis of so far observed performance vectors. For this task, we are inspired by [CHAM-2006]_ and [NR3-2007]_, who present an efficient algorithm for incrementally updating a quantile-binned cumulative density function (CDF) with newly observed CDFs.
 
