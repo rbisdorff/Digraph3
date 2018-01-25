@@ -6648,7 +6648,7 @@ if __name__ == "__main__":
     nqr1 = NormedQuantilesRatingDigraph(pq1,newActions,rankingRule='best',Debug=False)
     print(nqr1)
     nqr1.showHTMLRatingHeatmap(pageTitle='Heat map of the deciles rating',
-                                       colorLevels=9,
+                                       colorLevels=7,
                                        Correlations=True,
                                        )
     nqr1.showQuantilesRating()
