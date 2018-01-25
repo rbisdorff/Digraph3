@@ -204,6 +204,9 @@ Back to the :ref:`Technical-label`
 sortingDigraphs module
 ----------------------
 
+A tutorial with coding examples for solving multi-criteria rating problems is available here: :ref:`Rating-Tutorial-label`
+
+
 .. automodule:: sortingDigraphs
    :member-order: alphabetical
    :no-inherited-members:
