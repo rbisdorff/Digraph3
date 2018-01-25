@@ -2078,6 +2078,22 @@ See also the technical documentation of the :ref:`performanceQuantiles-label`.
 
 In this tutorial we address the problem of **rating multiple criteria performances** of a set of potential decision actions with respect to empirical order statistics, ie performance quantiles learned from historic data concerning similar decision actions (see [CPSTAT-L5]_).
 
+Consider that, in a given decision aid study, we observe for instance the performances of two potential decision actions, named *a1* and *a2*, measured on on 7 seven preferential incommensurable criteria: a unique cost criterion *c1* to minimize and 6 benefit criteria *b1* to *b6* to maximize:
+
+   ============= ======== ======== ======== ======== ======== ======== ======== 
+     Criterion      c1        b1      b2       b3       b4       b5       b6
+   ============= ======== ======== ======== ======== ======== ======== ========
+       weight        6         1       1        1        1        1       1
+         \           \         \       \        \        \        \       \
+        a1         -35.7       9.4     5.0     61.5      6.2     50.5     4.2
+        a2         -96.9      70.6     8.9     82.5      5.2     34.0     8.3
+   ============= ======== ======== ======== ======== ======== ======== ========
+
+The performance on the cost criterion *c1* is measured on a cardinal negative scale from -100.00 (worst) to 0.0 (best). The benefit criteria *b1*, *b3* and *b5* are measured on a cardinal scale from 0.0 (worst) to 100.00 (best), wheras the performances on benefit criteria *b2*, *b4* and *b6* are measured on an ordinal scale from 0 (worst) to 10 (best).
+   
+The decision problem we face is to decide how the multi-criteria performances of *a1*, respectively *a2*,  may be rated (**excellent** ? **good** ?, or **fair**, or, even, **weak** or **very weak** ?) when compared with all potential similar multi-criteria performances one could encounter in this kind of decision problem.       
+  
+
 Incremental learning of performace quantiles
 ............................................
 
@@ -2147,7 +2163,9 @@ Parameter *historySize* (see Line 6) of the :py:meth:`performanceQuantiles.Perfo
 Rating performances with quantile norms
 .......................................
 
-For **absolute rating** of a newly given set of decision actions with the help of empirical performance quantiles estimated from historical data, we provide the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class, a specialisation of the :py:class:`sortingDigraphs.QuantilesSortingDigraph` class. The constructor requires a valid :py:class:`performanceQuantiles.PerformanceQuantiles` instance.
+For **absolute rating** of a newly given set of decision actions with the help of empirical performance quantiles estimated from historical data, we provide the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class, a specialisation of the :py:class:`sortingDigraphs.QuantilesSortingDigraph` class.
+
+The constructor requires a valid :py:class:`performanceQuantiles.PerformanceQuantiles` instance.
 
 .. note::
 
@@ -2183,7 +2201,7 @@ We reconsider the :code:`PerformanceQuantiles` object instance *pq* as computed 
     Compute rating   : 0.01617
     Compute sorting  : 0.00000
 
-Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class constructor (see Line 2) are a valid PerformanceQuantiles object *pq* and a compatible set *newActions* of new decision actions generated from the same random origin. Let have a look at the digraph's nodes, here called *actions*:
+Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class constructor (see Line 2) are a valid PerformanceQuantiles object *pq* and a compatible set *newActions* of new decision actions generated from the same random origin. Let us have a look at the digraph's nodes, here called **actions**:
     >>> nqr.showActions()
     *----- show digraphs actions --------------*
     key:  a1001
@@ -2213,7 +2231,7 @@ Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class
       name:       categorical low limits
       comment:    Inferior or equal limits for category membership assessment
 
-Among the 10 new incoming decision actions (see Line 4 above) there are 3 advantageous (high benefits, but also high costs), 4 cheap (low costs, buts also low benefits) and 4 neutral decision actions. The digraph's actions also contain the closed lower limits of the four quartile classes: [0.0-0.25[, [0.25-0.5[, [0.5 - 0.75[, [0.75 - 1.0[.
+Among the 10 new incoming decision actions (see Line 4 above) there are 3 advantageous (high benefits, but also high costs), 4 cheap (low costs, buts also low benefits) and 4 neutral decision actions. The digraph's actions also contain the closed lower limits of the four quartile classes: *m1* = [0.0-0.25[, *m2* = [0.25-0.5[, *m3* =[0.5 - 0.75[, *m4* = [0.75 - 1.0[.
 
 The main time (0.4 out of 0.5 sec. , see Lines 21-27 above) is spent by the class constructor in computing the outranking relation on the extended actions set including both the new actions as well as the quartile class limits. In case of large volumes, ie many new decision actions and centile classes for instance, a multi-threading version may be used when multiple processing cores are available (see the technical description of the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class).
 
