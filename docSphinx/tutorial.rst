@@ -2082,7 +2082,7 @@ Incremental learning of quantile norms
 Suppose that we see flying in random multiple criteria performances from a given model of random performance tableau (see the :py:mod:`randomPerfTabs` module).
 
 The question we address here is to rate a newly incoming performance vector on the basis of the quantiles of the so far observed performance vectors. To do so,
-we are inspired by [CHAM-2006]_, who present an efficient algorithm for incrementally updating a quantile-binned cumulative density function (CDF) with newly observed CDFs.
+we are inspired by [CHAM-2006]_ and [NumRec-2007]_, who present an efficient algorithm for incrementally updating a quantile-binned cumulative density function (CDF) with newly observed CDFs.
 
 The :py:class:`performanceQuantiles.PerformanceQuantiles` class implements the performance quantiles estimation of a given performance tableau. The main components are:
 
@@ -2285,9 +2285,9 @@ A more precise rating result could be achieved when using **deciles** instead of
      [0.20 - 0.30[ ['a1004']
      [0.10 - 0.20[ ['a1009', 'a1007']
 
-Compared with the quartiles rating result, we notice that the six alternatives rated into the third quartile class [0.50 - 0.75[, are now divided up: action *a1008* attains the 8th decile class [0.7 - 0.8[, actions *a1006* and *a1005* the 7th decile class [06 - 0.7[, and actions *a1001*, *a1010* and *a1003* remain in the 6th decile class [0.5-0.6[. Of the three lowest [0.0 - 0.25[ rated actions: *a1004*, *a1009* and *a1007*, *a1004* is rated in the third decile class [0.2 - 0.3[, and *a1009* and *a1007* in [0.1 - 0.2[.
+Compared with the quartiles rating result, we notice that the six alternatives rated before into the third quartile class [0.50 - 0.75[, are now divided up: action *a1008* attains the 8th decile class [0.7 - 0.8[, actions *a1006* and *a1005* the 7th decile class [06 - 0.7[, and actions *a1001*, *a1010* and *a1003* the 6th decile class [0.5 - 0.6[. Of the three lowest [0.0 - 0.25[ rated actions: *a1004*, *a1009* and *a1007*, *a1004* is rated in the third decile class [0.2 - 0.3[, and *a1009* and *a1007* in the second decile class [0.1 - 0.2[.
 
-The corresponding rating heatmap browser view may conveniently illustrate this preciser deciles rating result:     
+A browser view may again more conveniently illustrate this preciser deciles rating result:     
     >>> nqr1.showHTMLRatingHeatmap(pageTitle='Heat map of the deciles rating',\
     ...                            colorLevels=5,Correlations=True)
 
@@ -2296,6 +2296,7 @@ The corresponding rating heatmap browser view may conveniently illustrate this p
     :width: 550 px
     :align: center
 
+In the case of industrial production monitoring, where large volumes of historical performance data may be available, it could become interesting to estimate even more precisely the marginal cumulative density functions with **dodeciles** or even **centiles**. Especially if **tail** rating results, ie distinguishing **very best**, or **very worst** multiple criteria performances, becomes a critical purpose. Similarly, the *historySize* parameter may be used for monitoring on the fly unstable random multiple criteria performance data.  	    
 
 Back to :ref:`Tutorial-label`   
 
@@ -2724,6 +2725,8 @@ References
 .. [BIS-2006] R. Bisdorff, M. Pirlot and M. Roubens (2006). Choices and kernels from bipolar valued digraphs. *European Journal of Operational Research*, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version `PDF file 257.3Kb <http://sma.uni.lu/bisdorff/documents/BisdorffPirlotRoubens05.pdf>`_)
 
 .. [CHAM-2006] J.M. Chambers, D.A. James, D. Lambert and S. Vander Wiel (2006) "Monitoring Networked Applications with Incremental Quantile Estimation". *Statistical Science*, Vol. 21, No.4, pp.463-475. DOI: 10 12140/088342306000000583.
+
+.. [NumRec-2007] W.H. Press, S.A. Teukolsky, W.T. Vetterling and B.P. Flannery (2007) "Single-Pass Estimation of Arbitrary Quantiles" Section 5.8.2 in *Numerical Recipes: The Art of Scientific Computing 3rd Ed.*, Cambridge University Press, pp 435-438.		     
 
 Footnotes
 .........
