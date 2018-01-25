@@ -6204,8 +6204,8 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         html += '</table>\n'
         if criteriaCorrelation != None:
             html += '<i>(*) tau: Ordinal (Kendall) correlation between marginal criterion and global ranking relation.</i><br/>\n'
-        if rankCorrelation != None:
-            html += '<i>Ordinal (Kendall) correlation between global ranking and outranking relation: %.2f.</i>' % (rankCorrelation['correlation'])
+##        if rankCorrelation != None:
+##            html += '<i>Ordinal (Kendall) correlation between global ranking and outranking relation: %.2f.</i>' % (rankCorrelation['correlation'])
         html += '</body></html>'
         return html
 
