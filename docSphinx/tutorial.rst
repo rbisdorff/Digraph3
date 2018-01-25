@@ -1801,7 +1801,7 @@ Alternative *a3* has the best score (+7), followed by alternative *a1* (+3). Alt
 
 Notice by the way that Copeland scores, as computed in the associated Condorcet relation table or similarly in the codual digraph drawing above, are in fact invariant under a codual - converse of the negation ~(-g) - transform of the outranking digraph. 
 
-Copeland's rule actually renders a linear order which is indeed highly correlated, in the ordinal Kendall sense (see [Bis-2012]_), with the given pairwise outranking relation::
+Copeland's rule actually renders a linear order which is indeed highly correlated, in the ordinal Kendall sense (see [BIS-2012]_), with the given pairwise outranking relation::
 
     >>> corr = g.computeOrdinalCorrelation(cop)
     >>> print("Fitness of Copeland's ranking: %.3f" % corr['correlation'])
@@ -1837,7 +1837,7 @@ To appreciate the effective quality of both the Copeland and the Net-Flows ranki
 Kemeny rankings
 ...............
 
-A **Kemeny** ranking is a linear order which is closest, in the sense of the ordinal Kendall distance (see [Bis-2012]_), to the given valued outranking digraph *g*::
+A **Kemeny** ranking is a linear order which is closest, in the sense of the ordinal Kendall distance (see [BIS-2012]_), to the given valued outranking digraph *g*::
 
     >>> from linearOrders import KemenyOrder
     >>> ke = KemenyOrder(g,orderLimit=9) # default orderLimit is 7
@@ -2126,11 +2126,11 @@ The constructor parameter *numberOfBins* (see Lines 7-9 above), choosing the wis
 
 Both objectives are equi-important; the weight (6) of the cost criterion balances the sum of weights (6) of the benefit criteria (see column 2). The preference direction of the cost criterion *c1* is negative; the lesser the costs the better it is, wheras all the benefit criteria *b1* to *b6* show positive preference directions, ie the higher the benefits the better it is. The columns entitled '0.0', resp. '1.0' show the quartile *Q0*, resp. *Q4*, ie the **worst**, resp. **best** performance observed so far on each criterion. Column '0.5' shows the **median** (*Q2*) observed on the criteria.  
 
-New  decision actions with random multiple criteria performance vectors from the same random performance tableau model may now be generated with ad hoc random performance generators. We provide for experimental purpose, in the :py:mod:`randomPerfTabs` module, three such generators: one for the standard :py:class:`randomPerfTabs.RandomPerformanceTableau` model, one the for the two objectives :py:class:`randomPerfTabs.RandomCBPerformanceTableau` Cost-Benefit model, and one for the :py:class:`randomPerfTabs.Random3ObjectivesPerformanceTableau` model with three objectives concerning respectively  economic, environmental or social aspects. Given a set of 100 new decision actions with generated random performance evaluations, the so far estimated historical quantile limits may be updated as follows: 
+New  decision actions with random multiple criteria performance vectors from the same random performance tableau model may now be generated with ad hoc random performance generators. We provide for experimental purpose, in the :py:mod:`randomPerfTabs` module, three such generators: one for the standard :py:class:`randomPerfTabs.RandomPerformanceTableau` model, one the for the two objectives :py:class:`randomPerfTabs.RandomCBPerformanceTableau` Cost-Benefit model, and one for the :py:class:`randomPerfTabs.Random3ObjectivesPerformanceTableau` model with three objectives concerning respectively  economic, environmental or social aspects. Given a set of 10 new decision actions with generated random performance evaluations, the so far estimated historical quantile limits may be updated as follows: 
     >>> # generate 100 new random decision actions
     >>> from randomPerfTabs import RandomCBPerformanceGenerator
     >>> rpg = RandomCBPerformanceGenerator(tp,seed=seed)
-    >>> newActions = rpg.randomActions(10)
+    >>> newActions = rpg.randomActions(100)
     >>> # Updating the quartile norms shown above 
     >>> pq.updateQuantiles(newActions,historySize=None)
 
@@ -2147,13 +2147,13 @@ Parameter *historySize* (see Line 6) of the :py:meth:`performanceQuantiles.Perfo
 Rating performances with quantile norms
 .......................................
 
-For **absolute rating** of a newly given set of decision actions with the help of
-performance quantiles estimated from historical data, we provide the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class, a specialisation of the :py:class:`sortingDigraphs.QuantilesSortingDigraph` class. The constructor requires therefore a valid :py:class:`performanceQuantiles.PerformanceQuantiles` instance.
+For **absolute rating** of a newly given set of 10 decision actions with the help of performance quantiles estimated from historical data, we provide the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class, a specialisation of the :py:class:`sortingDigraphs.QuantilesSortingDigraph` class. The constructor requires therefore a valid :py:class:`performanceQuantiles.PerformanceQuantiles` instance.
 
 It is important to notice that the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class, contrary to the generic :py:class:`outrankingDigraphs.OutrankingDigraph` class, does not inherit from the generic :py:class:`perfTabs.PerformanceTableau` class, but instead from the :py:class:`performanceQuantiles.PerformanceQuantiles` class. The **actions** in such a :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class instance contain not only the newly given decision actions, but also the historical quantile profiles obtained from a given :py:class:`performanceQuantiles.PerformanceQuantiles` class instance, ie estimated quantile bins' performance limits from historical performance data.
 
-We consider given a :code:`PerformanceQuantiles` object instance *pq* as computed in the previous section:
+We reconsider the :code:`PerformanceQuantiles` object instance *pq* as computed in the previous section. Let *newActions* be a set of 10 random generated new decision actions of the same kind:
     >>> from sortingDigraphs import NormedQuantilesRatingDigraph
+    >>> newActions = rpg.randomActions(10)
     >>> nqr = NormedQuantilesRatingDigraph(pq,newActions,rankingRule='best')
     >>> nqr
     *-----  Object instance description -----------*
@@ -2181,7 +2181,7 @@ We consider given a :code:`PerformanceQuantiles` object instance *pq* as compute
     Compute rating   : 0.01617
     Compute sorting  : 0.00000
 
-Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class constructor (see Line 2) are a valid PerformanceQuantiles object *pq* and a compatible set *newActions* of new decision actions generated from the same random model.
+Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class constructor (see Line 2) are a valid PerformanceQuantiles object *pq* and a compatible set *newActions* of new decision actions generated from the same random origin. Let have a look at the digraph's nodes, here called *actions*:
     >>> nqr.showActions()
     *----- show digraphs actions --------------*
     key:  a1001
@@ -2211,21 +2211,25 @@ Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class
       name:       categorical low limits
       comment:    Inferior or equal limits for category membership assessment
 
-Among the 10 new incoming decision actions (see Line 4 above) there are 3 advantageous (high benefits, but also high costs), 4 cheap (low costs, buts also low benefits) and 4 neutral decision actions. The digraph actions also contain the closed lower limits of the four quartile classes: [0.0-0.25[, [0.25-0.5[, [0.5 - 0.75[, [0.75 - 1.0[.
+Among the 10 new incoming decision actions (see Line 4 above) there are 3 advantageous (high benefits, but also high costs), 4 cheap (low costs, buts also low benefits) and 4 neutral decision actions. The digraph's actions also contain the closed lower limits of the four quartile classes: [0.0-0.25[, [0.25-0.5[, [0.5 - 0.75[, [0.75 - 1.0[.
 
-The main time (0.4 out of 0.5 sec. , see Lines 21-27 above) is spent by the class constructor in computing the outranking relation on the extended actions set including both the new actions as well as the quartile class limits. The actual rating procedure will rely on a complete ranking obtained from this outranking digraph. Two efficient and scalable ranking rules, the **Copeland** and its valued version, the **Netflows** rule may be used. The *rankingRule* parameter allows to choose one of both. With *rankingRule='best'* (see Line 2 above) the :code:`NormedQuantilesRatingDigraph` constructor will choose the ranking rule that results in the highest ordinal correlation with the given outranking relation. In this rating example we obtain the Copeland rule:
+The main time (0.4 out of 0.5 sec. , see Lines 21-27 above) is spent by the class constructor in computing the outranking relation on the extended actions set including both the new actions as well as the quartile class limits. In case of large volumes, ie many new decision actions and centile classes for instance, a multi-threading version may be used when multiple processing cores are available (see the technical description of the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class).
+
+The actual rating procedure will rely on a complete ranking of the new decision actions as well ass the quantile class limits obtained from the corresponding bipolar valued outranking digraph. Two efficient and scalable ranking rules, the **Copeland** and its valued version, the **Netflows** rule may be used for this purpose. The *rankingRule* parameter allows to choose one of both. With *rankingRule='best'* (see Line 2 above) the :code:`NormedQuantilesRatingDigraph` constructor will choose the ranking rule that results in the highest ordinal correlation with the given outranking relation (see [BIS-2012]_).
+
+In this rating example, the Copeland rule appears to be the more appropriate ranking rule:
+    >>> print('Ranking rule        :', self.rankingRule)
+    Ranking rule        : Copeland
     >>> print('Actions ranking     :', self.actionsRanking)
     Actions ranking     : [
     'm4', 'a1008', 'a1006', 'a1005', 'a1001', 'a1003', 'a1010',
     'm3', 'a1002', 'm2', 'a1004', 'a1009', 'a1007', 'm1']
-    >>> print('Ranking rule        :', self.rankingRule)
-    Ranking rule        : Copeland
     >>> print('Ranking correlation :', self.rankingCorrelation)
     Ranking correlation : {
      'determination': Decimal('0.544'),
      'correlation': Decimal('0.966') }
 
-And the Copeland rule achieves here a ranking (from vest to worst) which is very close (*tau* = 0.97) to the underlying outranking relation. With the NetFloes rule we would get the following slightly different ranking result:
+We achieve here a linear ranking without ties (from best to worst) of the digraph's actions, ie including the new decision actions as well as the quartile limits *m1* to *m4*, which is very close in an ordinal sense (*tau* = 0.97) to the underlying valued outranking relation. With the *NetFlows* rule we would get the following slightly different ranking result:
     >>> from linearOrders import NetFlowsOrder
     >>> nf = NetFlowsOrder(nqr)
     >>> nf.netFlowsRanking
@@ -2235,15 +2239,15 @@ And the Copeland rule achieves here a ranking (from vest to worst) which is very
     {'determination': Decimal('0.544'),
      'correlation': Decimal('0.892')}
 
-which is indeed much less correlated (*tau* = 0.89) with the underlying outranking relation.
+which is, however, less correlated (*tau* = 0.89) with the underlying outranking relation.
 
-The rating procedure is based on lower closed quantile classes, such that we collect the rating classes' contents in increasing order of the quartiles:    
+The eventual rating procedure is based on the lower quantile limits, such that we collect the rating classes' contents in increasing order of the quartiles:    
     >>> print('Rating categories:', self.ratingCategories)
     Rating categories: OrderedDict([
      ('m1', ['a1004', 'a1009', 'a1007']), ('m2', ['a1002']),
-     ('m3', ['a1008', 'a1006', 'a1005', 'a1001', 'a1003', 'a1010']) ])
+     ('m3', ['a1008', 'a1006', 'a1005', 'a1001', 'a1003', 'a1010']),('m4',[]) ])
 
-We notice that no decision action is rated above the lower limit of the highest quartile class [0.75 - 1.0]. Indeed, the effective rating result is better shown in descending order as follows:
+We notice above that no decision action is rated in the highest quartile class [0.75 - 1.0]. Indeed, the rating result is better shown in descending order as follows:
     >>> nqr.showQuantilesRating()
     [0.50 - 0.75[ ['a1008', 'a1006', 'a1005', 'a1001', 'a1003', 'a1010']
     [0.25 - 0.50[ ['a1002']
@@ -2257,7 +2261,7 @@ The same result may even more conviently be consulted in a browser view via a sp
     :width: 550 px
     :align: center
 
-Due the fact that the importance weight (6) of the unique cost criterion is balancing the sum of the six benefit criteria (6), the marginal cost criteria ranking is highly correlated (*tau* = 0.80) with the proposed rating of the new decision actions. Is is not a surprise than, that decision action **a1008c**, of **cheap** type (low costs, but several good benfits), appears first ranked in the third quartile class [0.50-0.75[. Whereas, action **a1007a**, of **advantageous** type (excellent benefits but also highest costs), appears worst ranked in the first quartile class [0.0 - 0.25[.
+Due the fact that the importance weight (6) of the unique cost criterion *c1* is balancing the sum of the six benefit criteria (6) *b1* to *b6*, the marginal cost criteria ranking is highly correlated (*tau* = 0.80) with the proposed rating of the new decision actions. Is is not a surprise than, that decision action **a1008c**, of **cheap** type (low costs, but several good benfits), appears first ranked in the third quartile class [0.50-0.75[. Whereas, action **a1007a**, of **advantageous** type (excellent benefits but also highest costs), appears worst ranked in the first quartile class [0.0 - 0.25[.
 
 Using furthermore a specialised version of the :py:meth:`weakOrders.WeakOrder.exportGraphViz` method allows drawing the rating result in a Hasse diagram format.
    >>> nqr.exportRatingGraphViz()
@@ -2270,7 +2274,7 @@ Using furthermore a specialised version of the :py:meth:`weakOrders.WeakOrder.ex
     :width: 500 px
     :align: center
 
-A more precise rating result could be achieved when using **deciles** instead of quartiles for estimating the historical cumulative density functions:
+A more precise rating result may be achieved when we use **deciles** instead of quartiles for estimating the historical cumulative density functions:
     >>> pq1 = PerformanceQuantiles(tp, numberOfBins = 'deciles',\
     ...              LowerClosed=True,Debug=False)
     ...
@@ -2284,7 +2288,7 @@ A more precise rating result could be achieved when using **deciles** instead of
      [0.20 - 0.30[ ['a1004']
      [0.10 - 0.20[ ['a1009', 'a1007']
 
-Compared with the quartiles rating result, we notice that the six alternatives rated before into the third quartile class [0.50 - 0.75[, are now divided up: action *a1008* attains the 8th decile class [0.7 - 0.8[, actions *a1006* and *a1005* the 7th decile class [06 - 0.7[, and actions *a1001*, *a1010* and *a1003* the 6th decile class [0.5 - 0.6[. Of the three lowest [0.0 - 0.25[ rated actions: *a1004*, *a1009* and *a1007*, *a1004* is rated in the third decile class [0.2 - 0.3[, and *a1009* and *a1007* in the second decile class [0.1 - 0.2[.
+Compared with the previous quartiles rating result, we notice that the six alternatives rated before into the third quartile class [0.50 - 0.75[, are now divided up: action *a1008* attains the 8th decile class [0.7 - 0.8[, actions *a1006* and *a1005* the 7th decile class [06 - 0.7[, and actions *a1001*, *a1010* and *a1003* only the 6th decile class [0.5 - 0.6[. Of the three lowest [0.0 - 0.25[ rated actions (*a1004*, *a1009* and *a1007*), action *a1004* is now rated in the third decile class [0.2 - 0.3[, and *a1009* and *a1007* in the second decile class [0.1 - 0.2[.
 
 A browser view may again more conveniently illustrate this preciser deciles rating result:     
     >>> nqr1.showHTMLRatingHeatmap(pageTitle='Heat map of the deciles rating',\
@@ -2295,7 +2299,7 @@ A browser view may again more conveniently illustrate this preciser deciles rati
     :width: 550 px
     :align: center
 
-In the case of industrial production monitoring, where large volumes of historical performance data may be available, it could become interesting to estimate even more precisely the marginal cumulative density functions with **dodeciles** or even **centiles**. Especially if **tail** rating results, ie distinguishing **very best**, or **very worst** multiple criteria performances, becomes a critical purpose. Similarly, the *historySize* parameter may be used for monitoring on the fly unstable random multiple criteria performance data.  	    
+In the case of industrial production monitoring problems, where large volumes of historical performance data may be available, it could become interesting to estimate even more precisely the marginal cumulative density functions with **dodeciles** or even **centiles**. Especially if **tail** rating results, ie distinguishing **very best**, or **very worst** multiple criteria performances, becomes a critical purpose. Similarly, the *historySize* parameter may be used for monitoring on the fly **unstable** random multiple criteria performance data.  	    
 
 Back to :ref:`Tutorial-label`   
 
@@ -2717,7 +2721,7 @@ References
 
 .. [BIS-2013] R. Bisdorff (2013) "On Polarizing Outranking Relations with Large Performance Differences" *Journal of Multi-Criteria Decision Analysis* (Wiley) **20**:3-12 (downloadable preprint `PDF file 403.5 Kb <http://leopold-loewenheim.uni.lu/bisdorff/documents/MCDA-10-0059-PrePeerReview.pdf>`_)
 
-.. [Bis-2012] R. Bisdorff (2012). "On measuring and testing the ordinal correlation between bipolar outranking relations". In Proceedings of DA2PL’2012 *From Multiple Criteria Decision Aid to Preference Learning*, University of Mons 91-100. (downloadable preliminary version `PDF file 408.5 kB <http://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RBisdorffMons.pdf>`_ )
+.. [BIS-2012] R. Bisdorff (2012). "On measuring and testing the ordinal correlation between bipolar outranking relations". In Proceedings of DA2PL’2012 *From Multiple Criteria Decision Aid to Preference Learning*, University of Mons 91-100. (downloadable preliminary version `PDF file 408.5 kB <http://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RBisdorffMons.pdf>`_ )
 
 .. [BIS-2008] R. Bisdorff, P. Meyer and M. Roubens (2008) "RUBIS: a bipolar-valued outranking method for the choice problem". 4OR, *A Quarterly Journal of Operations Research* Springer-Verlag, Volume 6,  Number 2 pp. 143-165. (Online) Electronic version: DOI: 10.1007/s10288-007-0045-5 (downloadable preliminary version `PDF file 271.5Kb <http://leopold-loewenheim.uni.lu/bisdorff/documents/HyperKernels.pdf>`_) 
 
