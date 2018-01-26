@@ -2074,24 +2074,24 @@ Rating with learned quantile norms
 	:depth: 2
 	:local:
 
-In this tutorial we address the problem of **rating multiple criteria performances** of a set of potential decision actions with respect to empirical order statistics, ie performance quantiles learned from historic data concerning similar decision actions (see [CPSTAT-L5]_).
+In this tutorial we address the problem of **rating multiple criteria performances** of a set of potential decision actions with respect to empirical order statistics, ie performance quantiles learned from historical performance data gathered from similar decision actions observed in the past (see [CPSTAT-L5]_).
 
-To illustrate the decision problem we face, consider for a moment that, in a given decision aid study, we observe, for instance, the performances of two potential decision actions, named *a1* and *a2*, measured on on 7 seven **incommensurable** preference criteria: a unique **costs** criterion *c1* (to **minimize**) and 6 **benefit** criteria *b1* to *b6* (to **maximize**):
+To illustrate the decision problem we face, consider for a moment that, in a given decision aid study, we observe, for instance in the Table below, the multi-criteria performances of two potential decision actions, named *a1007* and *a1008*, marked on 7 seven **incommensurable** preference criteria: a unique **costs** criterion *c1* (to **minimize**) and 6 **benefit** criteria *b1* to *b6* (to **maximize**). 
 
    ============= ======== ======== ======== ======== ======== ======== ======== 
      Criterion      c1        b1      b2       b3       b4       b5       b6
    ============= ======== ======== ======== ======== ======== ======== ========
        weight        6         1       1        1        1        1       1
          \           \         \       \        \        \        \       \
-        a1         -35.7       9.4     5.0     61.5      6.2     50.5     4.2
-        a2         -96.9      70.6     8.9     82.5      5.2     34.0     8.3
+        a1007     -96.9      70.6     8.9     82.5      5.2     34.0     8.3
+        a1008     -35.7       9.4     5.0     61.5      6.2     50.5     4.2
    ============= ======== ======== ======== ======== ======== ======== ========
 
-The performance on the cost criterion *c1* is measured on a cardinal negative scale from -100.00 (worst) to 0.0 (best). The performances on the benefit criteria *b1*, *b3* and *b5* are measured on a cardinal scale from 0.0 (worst) to 100.00 (best), wheras the performances on benefit criteria *b2*, *b4* and *b6* are measured on an ordinal scale from 0 (worst) to 10 (best).
+The performance on the cost criterion *c1* is measured on a cardinal negative scale from -100.00 (worst) to 0.0 (best). The performances on the benefit criteria *b1*, *b3* and *b5* are measured on a cardinal scale from 0.0 (worst) to 100.00 (best), wheras the performances on benefit criteria *b2*, *b4* and *b6* are measured on an ordinal scale from 0 (worst) to 10 (best). The importance (weight) of the costs criterion is equal to the importance (sum of weights) of the benefit criteria taken all together.
    
-The non trivial decision problem we face here, is to decide, how the multi-criteria performances of *a1*, respectively *a2*,  may be rated (**excellent** ? **good** ?, or **fair**, or, even, **weak** or **very weak** ?) in an **order statistical sense**, when compared with all potential similar multi-criteria performances one could encounter in such a similar kind of decision problem. 
+The non trivial decision problem we now face here, is to decide, how the multi-criteria performances of *a1007*, respectively *a1008*,  may be rated (**excellent** ? **good** ?, or **fair** ?; perhaps even, **weak** ? or **very weak** ?) in an **order statistical sense**, when compared with all potential similar multi-criteria performances one has encountered, or may encounter in the future. 
 
-To solve this absolute rating decision problem, first, we need to estimate multi-criteria performance quantiles from historical performance records.  
+To solve this absolute rating decision problem, first, we need to estimate multi-criteria **performance quantiles** from historical records.  
 
 Incremental learning of historical performace quantiles
 .......................................................

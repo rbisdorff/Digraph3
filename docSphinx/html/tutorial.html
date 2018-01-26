@@ -3532,8 +3532,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <li><a class="reference internal" href="#rating-performances-with-quantile-norms" id="id98">Rating performances with quantile norms</a></li>
 </ul>
 </div>
-<p>In this tutorial we address the problem of <strong>rating multiple criteria performances</strong> of a set of potential decision actions with respect to empirical order statistics, ie performance quantiles learned from historic data concerning similar decision actions (see <a class="reference internal" href="#cpstat-l5" id="id32">[CPSTAT-L5]</a>).</p>
-<p>To illustrate the decision problem we face, consider for a moment that, in a given decision aid study, we observe, for instance, the performances of two potential decision actions, named <em>a1</em> and <em>a2</em>, measured on on 7 seven <strong>incommensurable</strong> preference criteria: a unique <strong>costs</strong> criterion <em>c1</em> (to <strong>minimize</strong>) and 6 <strong>benefit</strong> criteria <em>b1</em> to <em>b6</em> (to <strong>maximize</strong>):</p>
+<p>In this tutorial we address the problem of <strong>rating multiple criteria performances</strong> of a set of potential decision actions with respect to empirical order statistics, ie performance quantiles learned from historical performance data gathered from similar decision actions observed in the past (see <a class="reference internal" href="#cpstat-l5" id="id32">[CPSTAT-L5]</a>).</p>
+<p>To illustrate the decision problem we face, consider for a moment that, in a given decision aid study, we observe, for instance in the Table below, the multi-criteria performances of two potential decision actions, named <em>a1007</em> and <em>a1008</em>, marked on 7 seven <strong>incommensurable</strong> preference criteria: a unique <strong>costs</strong> criterion <em>c1</em> (to <strong>minimize</strong>) and 6 <strong>benefit</strong> criteria <em>b1</em> to <em>b6</em> (to <strong>maximize</strong>).</p>
 <blockquote>
 <div><table border="1" class="docutils">
 <colgroup>
@@ -3576,16 +3576,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <td></td>
 <td></td>
 </tr>
-<tr class="row-even"><td>a1</td>
-<td>-35.7</td>
-<td>9.4</td>
-<td>5.0</td>
-<td>61.5</td>
-<td>6.2</td>
-<td>50.5</td>
-<td>4.2</td>
-</tr>
-<tr class="row-odd"><td>a2</td>
+<tr class="row-even"><td>a1007</td>
 <td>-96.9</td>
 <td>70.6</td>
 <td>8.9</td>
@@ -3594,12 +3585,21 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <td>34.0</td>
 <td>8.3</td>
 </tr>
+<tr class="row-odd"><td>a1008</td>
+<td>-35.7</td>
+<td>9.4</td>
+<td>5.0</td>
+<td>61.5</td>
+<td>6.2</td>
+<td>50.5</td>
+<td>4.2</td>
+</tr>
 </tbody>
 </table>
 </div></blockquote>
-<p>The performance on the cost criterion <em>c1</em> is measured on a cardinal negative scale from -100.00 (worst) to 0.0 (best). The performances on the benefit criteria <em>b1</em>, <em>b3</em> and <em>b5</em> are measured on a cardinal scale from 0.0 (worst) to 100.00 (best), wheras the performances on benefit criteria <em>b2</em>, <em>b4</em> and <em>b6</em> are measured on an ordinal scale from 0 (worst) to 10 (best).</p>
-<p>The non trivial decision problem we face here, is to decide, how the multi-criteria performances of <em>a1</em>, respectively <em>a2</em>,  may be rated (<strong>excellent</strong> ? <strong>good</strong> ?, or <strong>fair</strong>, or, even, <strong>weak</strong> or <strong>very weak</strong> ?) in an <strong>order statistical sense</strong>, when compared with all potential similar multi-criteria performances one could encounter in such a similar kind of decision problem.</p>
-<p>To solve this absolute rating decision problem, first, we need to estimate multi-criteria performance quantiles from historical performance records.</p>
+<p>The performance on the cost criterion <em>c1</em> is measured on a cardinal negative scale from -100.00 (worst) to 0.0 (best). The performances on the benefit criteria <em>b1</em>, <em>b3</em> and <em>b5</em> are measured on a cardinal scale from 0.0 (worst) to 100.00 (best), wheras the performances on benefit criteria <em>b2</em>, <em>b4</em> and <em>b6</em> are measured on an ordinal scale from 0 (worst) to 10 (best). The importance (weight) of the costs criterion is equal to the importance (sum of weights) of the benefit criteria taken all together.</p>
+<p>The non trivial decision problem we now face here, is to decide, how the multi-criteria performances of <em>a1007</em>, respectively <em>a1008</em>,  may be rated (<strong>excellent</strong> ? <strong>good</strong> ?, or <strong>fair</strong> ?; perhaps even, <strong>weak</strong> ? or <strong>very weak</strong> ?) in an <strong>order statistical sense</strong>, when compared with all potential similar multi-criteria performances one has encountered, or may encounter in the future.</p>
+<p>To solve this absolute rating decision problem, first, we need to estimate multi-criteria <strong>performance quantiles</strong> from historical records.</p>
 <div class="section" id="incremental-learning-of-historical-performace-quantiles">
 <h3><a class="toc-backref" href="#id97">Incremental learning of historical performace quantiles</a><a class="headerlink" href="#incremental-learning-of-historical-performace-quantiles" title="Permalink to this headline">¶</a></h3>
 <p>See also the technical documentation of the <a class="reference internal" href="techDoc.html#performancequantiles-label"><span class="std std-ref">performanceQuantiles module</span></a>.</p>
