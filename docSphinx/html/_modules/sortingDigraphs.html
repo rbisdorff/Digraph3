@@ -6612,14 +6612,14 @@
 <span class="c1">##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\</span>
 <span class="c1">##                                    numberOfCriteria=nbrCrit,\</span>
 <span class="c1">##                                    Threading=MP,seed=seed)</span>
-
+<span class="c1">##</span>
 <span class="c1">##    from randomPerfTabs import Random3ObjectivesPerformanceTableau</span>
 <span class="c1">##    from randomPerfTabs import Random3ObjectivesPerformanceGenerator as PerfTabGenerator</span>
 <span class="c1">##    nbrActions=1000</span>
 <span class="c1">##    nbrCrit = 21</span>
 <span class="c1">##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\</span>
 <span class="c1">##                                    numberOfCriteria=nbrCrit,seed=seed)</span>
-<span class="c1">##</span>
+
 <span class="c1">##    pq = PerformanceQuantiles(tp,20,LowerClosed=False,Debug=False)</span>
 <span class="c1">##    tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)</span>
 <span class="c1">##    newActions = tpg.randomActions(10)</span>
@@ -6667,42 +6667,43 @@
     <span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>\
                    <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span>\
-                   <span class="n">numberOfBins</span> <span class="o">=</span> <span class="s1">&#39;quartiles&#39;</span><span class="p">,</span>\
+                   <span class="n">numberOfBins</span> <span class="o">=</span> <span class="s1">&#39;deciles&#39;</span><span class="p">,</span>\
                   <span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">pq</span><span class="o">.</span><span class="n">showLimitingQuantiles</span><span class="p">(</span><span class="n">ByObjectives</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1">##    pq.showLimitingQuantiles(ByObjectives=True)</span>
     <span class="c1"># generate 100 new random decision actions</span>
     <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceGenerator</span>
     <span class="n">rpg</span> <span class="o">=</span> <span class="n">RandomCBPerformanceGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">newActions</span> <span class="o">=</span> <span class="n">rpg</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
     <span class="c1"># Updating the quartile norms shown above</span>
     <span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">pq</span><span class="o">.</span><span class="n">showHTMLLimitingQuantiles</span><span class="p">(</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="k">import</span> <span class="n">NormedQuantilesRatingDigraph</span>
-    <span class="n">nqr</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1">##    pq.showHTMLLimitingQuantiles(Transposed=True)</span>
+<span class="c1">##    from sortingDigraphs import NormedQuantilesRatingDigraph</span>
+    <span class="n">nqr</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span>\
+                                       <span class="n">quantiles</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">nqr</span><span class="p">)</span>
-    <span class="n">nqr</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heat map of the ratings&#39;</span><span class="p">,</span> <span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-                                       <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                       <span class="p">)</span>
+<span class="c1">##    nqr.showHTMLRatingHeatmap(pageTitle=&#39;Heat map of the ratings&#39;, colorLevels=5,</span>
+<span class="c1">##                                       Correlations=True,</span>
+<span class="c1">##                                       )</span>
     <span class="n">nqr</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
-    <span class="n">nqr</span><span class="o">.</span><span class="n">exportRatingGraphViz</span><span class="p">(</span><span class="n">noSilent</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-
-    <span class="n">pq1</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span>\
-                   <span class="n">numberOfBins</span> <span class="o">=</span> <span class="s1">&#39;deciles&#39;</span><span class="p">,</span>\
-                  <span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">pq1</span><span class="o">.</span><span class="n">showLimitingQuantiles</span><span class="p">(</span><span class="n">ByObjectives</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="c1"># Updating the quartile norms shown above</span>
-    <span class="n">pq1</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">pq1</span><span class="o">.</span><span class="n">showHTMLLimitingQuantiles</span><span class="p">(</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="k">import</span> <span class="n">NormedQuantilesRatingDigraph</span>
-    <span class="n">nqr1</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq1</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">nqr1</span><span class="p">)</span>
-    <span class="n">nqr1</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heat map of the deciles rating&#39;</span><span class="p">,</span>
-                                       <span class="n">colorLevels</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
-                                       <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                       <span class="p">)</span>
-    <span class="n">nqr1</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
-    <span class="n">nqr1</span><span class="o">.</span><span class="n">exportRatingGraphViz</span><span class="p">(</span><span class="n">noSilent</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1">##    nqr.exportRatingGraphViz(noSilent=False)</span>
+<span class="c1">##</span>
+<span class="c1">##</span>
+<span class="c1">##    pq1 = PerformanceQuantiles(tp,\</span>
+<span class="c1">##                   numberOfBins = &#39;deciles&#39;,\</span>
+<span class="c1">##                  LowerClosed=True,Debug=False)</span>
+<span class="c1">##    pq1.showLimitingQuantiles(ByObjectives=True)</span>
+<span class="c1">##    # Updating the quartile norms shown above</span>
+<span class="c1">##    pq1.updateQuantiles(newActions,historySize=None)</span>
+<span class="c1">##    pq1.showHTMLLimitingQuantiles(Transposed=True)</span>
+<span class="c1">##    from sortingDigraphs import NormedQuantilesRatingDigraph</span>
+<span class="c1">##    nqr1 = NormedQuantilesRatingDigraph(pq1,newActions,rankingRule=&#39;best&#39;,Debug=False)</span>
+<span class="c1">##    print(nqr1)</span>
+<span class="c1">##    nqr1.showHTMLRatingHeatmap(pageTitle=&#39;Heat map of the deciles rating&#39;,</span>
+<span class="c1">##                                       colorLevels=7,</span>
+<span class="c1">##                                       Correlations=True,</span>
+<span class="c1">##                                       )</span>
+<span class="c1">##    nqr1.showQuantilesRating()</span>
+<span class="c1">##    nqr1.exportRatingGraphViz(noSilent=False)</span>
     
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>

@@ -6562,14 +6562,14 @@ if __name__ == "__main__":
 ##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
 ##                                    numberOfCriteria=nbrCrit,\
 ##                                    Threading=MP,seed=seed)
-
+##
 ##    from randomPerfTabs import Random3ObjectivesPerformanceTableau
 ##    from randomPerfTabs import Random3ObjectivesPerformanceGenerator as PerfTabGenerator
 ##    nbrActions=1000
 ##    nbrCrit = 21
 ##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
 ##                                    numberOfCriteria=nbrCrit,seed=seed)
-##
+
 ##    pq = PerformanceQuantiles(tp,20,LowerClosed=False,Debug=False)
 ##    tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
 ##    newActions = tpg.randomActions(10)
@@ -6617,42 +6617,43 @@ if __name__ == "__main__":
     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
                    numberOfCriteria=nbrCrit,seed=seed)
     pq = PerformanceQuantiles(tp,\
-                   numberOfBins = 'quartiles',\
+                   numberOfBins = 'deciles',\
                   LowerClosed=True,Debug=False)
-    pq.showLimitingQuantiles(ByObjectives=True)
+##    pq.showLimitingQuantiles(ByObjectives=True)
     # generate 100 new random decision actions
     from randomPerfTabs import RandomCBPerformanceGenerator
     rpg = RandomCBPerformanceGenerator(tp,seed=seed)
     newActions = rpg.randomActions(10)
     # Updating the quartile norms shown above
     pq.updateQuantiles(newActions,historySize=None)
-    pq.showHTMLLimitingQuantiles(Transposed=True)
-    from sortingDigraphs import NormedQuantilesRatingDigraph
-    nqr = NormedQuantilesRatingDigraph(pq,newActions,rankingRule='best',Debug=False)
+##    pq.showHTMLLimitingQuantiles(Transposed=True)
+##    from sortingDigraphs import NormedQuantilesRatingDigraph
+    nqr = NormedQuantilesRatingDigraph(pq,newActions,rankingRule='best',\
+                                       quantiles=4,Debug=False)
     print(nqr)
-    nqr.showHTMLRatingHeatmap(pageTitle='Heat map of the ratings', colorLevels=5,
-                                       Correlations=True,
-                                       )
+##    nqr.showHTMLRatingHeatmap(pageTitle='Heat map of the ratings', colorLevels=5,
+##                                       Correlations=True,
+##                                       )
     nqr.showQuantilesRating()
-    nqr.exportRatingGraphViz(noSilent=False)
-
-
-    pq1 = PerformanceQuantiles(tp,\
-                   numberOfBins = 'deciles',\
-                  LowerClosed=True,Debug=False)
-    pq1.showLimitingQuantiles(ByObjectives=True)
-    # Updating the quartile norms shown above
-    pq1.updateQuantiles(newActions,historySize=None)
-    pq1.showHTMLLimitingQuantiles(Transposed=True)
-    from sortingDigraphs import NormedQuantilesRatingDigraph
-    nqr1 = NormedQuantilesRatingDigraph(pq1,newActions,rankingRule='best',Debug=False)
-    print(nqr1)
-    nqr1.showHTMLRatingHeatmap(pageTitle='Heat map of the deciles rating',
-                                       colorLevels=7,
-                                       Correlations=True,
-                                       )
-    nqr1.showQuantilesRating()
-    nqr1.exportRatingGraphViz(noSilent=False)
+##    nqr.exportRatingGraphViz(noSilent=False)
+##
+##
+##    pq1 = PerformanceQuantiles(tp,\
+##                   numberOfBins = 'deciles',\
+##                  LowerClosed=True,Debug=False)
+##    pq1.showLimitingQuantiles(ByObjectives=True)
+##    # Updating the quartile norms shown above
+##    pq1.updateQuantiles(newActions,historySize=None)
+##    pq1.showHTMLLimitingQuantiles(Transposed=True)
+##    from sortingDigraphs import NormedQuantilesRatingDigraph
+##    nqr1 = NormedQuantilesRatingDigraph(pq1,newActions,rankingRule='best',Debug=False)
+##    print(nqr1)
+##    nqr1.showHTMLRatingHeatmap(pageTitle='Heat map of the deciles rating',
+##                                       colorLevels=7,
+##                                       Correlations=True,
+##                                       )
+##    nqr1.showQuantilesRating()
+##    nqr1.exportRatingGraphViz(noSilent=False)
     
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
