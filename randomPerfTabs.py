@@ -2666,6 +2666,8 @@ class RandomCBPerformanceGenerator(RandomPerformanceGenerator):
         for g in criteria:
             criterionScale = criteria[g]['scale']
             amplitude = criterionScale[1] - criterionScale[0]
+            if amplitude < Decimal('11.0'):
+                digits = 0
             x30=criterionScale[0] + amplitude*0.3
             x50=criterionScale[0] + amplitude*0.5
             x70=criterionScale[0] + amplitude*0.7
@@ -2676,9 +2678,9 @@ class RandomCBPerformanceGenerator(RandomPerformanceGenerator):
             if str(randomMode[0]) == 'uniform':          
                 randeval = random.uniform(criterionScale[0],criterionScale[1])
                 if criteria[g]['preferenceDirection'] == 'max':
-                        evaluation[g] = Decimal(str(round(randeval,digits)))
+                    evaluation[g] = Decimal(str(round(randeval,digits)))
                 else:
-                        evaluation[g] = Decimal(str(-round(randeval,digits)))
+                    evaluation[g] = Decimal(str(-round(randeval,digits)))
             elif str(randomMode[0]) == 'triangular':
                 from math import sqrt
                 m = criterionScale[0]

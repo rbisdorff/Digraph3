@@ -2083,8 +2083,8 @@ To illustrate the decision problem we face, consider for a moment that, in a giv
    ============= ======== ======== ======== ======== ======== ======== ========
        weight        6         1       1        1        1        1       1
          \           \         \       \        \        \        \       \
-        a1007     -96.9      70.6     8.9     82.5      5.2     34.0     8.3
-        a1008     -35.7       9.4     5.0     61.5      6.2     50.5     4.2
+        a1007     -96.9      70.6      9      82.0       5      34.0      8
+        a1008     -35.7       9.4      5      62.9       6      51.0      4
    ============= ======== ======== ======== ======== ======== ======== ========
 
 The performance on the cost criterion *c1* is measured on a cardinal negative scale from -100.00 (worst) to 0.0 (best). The performances on the benefit criteria *b1*, *b3* and *b5* are measured on a cardinal scale from 0.0 (worst) to 100.00 (best), wheras the performances on benefit criteria *b2*, *b4* and *b6* are measured on an ordinal scale from 0 (worst) to 10 (best). The importance (weight) of the costs criterion is equal to the importance (sum of weights) of the benefit criteria taken all together.
@@ -2202,39 +2202,34 @@ We reconsider the :code:`PerformanceQuantiles` object instance *pq* as computed 
     Compute rating   : 0.01617
     Compute sorting  : 0.00000
 
-Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class constructor (see Line 2) are a valid PerformanceQuantiles object *pq* and a compatible set *newActions* of new decision actions generated from the same random origin. Let us have a look at the digraph's nodes, here called **actions**:
-    >>> nqr.showActions()
-    *----- show digraphs actions --------------*
-    key:  a1001
-      short name: a1001c
-      name:       random cheap decision action
-      comment:    Cost-Benefit
-    key:  a1002
-      short name: a1002c
-      name:       random cheap decision action
-      comment:    Cost-Benefit
-    ...
-    ...
-    key:  a1010
-      short name: a1010a
-      name:       random advantageous decision action
-      comment:    Cost-Benefit
-    key:  m1
-      name:       categorical low limits
-      comment:    Inferior or equal limits for category membership assessment
-    key:  m2
-      name:       categorical low limits
-      comment:    Inferior or equal limits for category membership assessment
-    key:  m3
-      name:       categorical low limits
-      comment:    Inferior or equal limits for category membership assessment
-    key:  m4
-      name:       categorical low limits
-      comment:    Inferior or equal limits for category membership assessment
+Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class constructor (see Line 2) are a valid PerformanceQuantiles object *pq* and a compatible set *newActions* of new decision actions generated from the same random origin. Let us have a look at the digraph's nodes, here called **actions**. Among the 10 new incoming decision actions (see Line 4 above) there are 3 advantageous (high benefits, but also high costs), 4 cheap (low costs, buts also low benefits) and 4 neutral decision actions. Among the new decision actions shown in the performace tableau below, we recognize actions *a1007* and *a1008* we have mentioned in our introduction.
 
-Among the 10 new incoming decision actions (see Line 4 above) there are 3 advantageous (high benefits, but also high costs), 4 cheap (low costs, buts also low benefits) and 4 neutral decision actions. The digraph's actions also contain the closed lower limits of the four quartile classes: *m1* = [0.0-0.25[, *m2* = [0.25-0.5[, *m3* =[0.5 - 0.75[, *m4* = [0.75 - 1.0[.
+    >>> nqr.showPerformanceTableau(actionsSubset=nqr.newActions)
+    *----  performance tableau -----*
+    criteria |  'a1001'  'a1002'  'a1003'  'a1004'  'a1005'  'a1006'  'a1007'  'a1008'  'a1009'  'a1010'   
+    ---------|------------------------------------------------------------------------------------------
+       'c1'  |   -58.5    -70.9    -70.3    -76.7    -38.1    -45.5    -96.9    -35.7    -79.1    -48.5  
+       'b1'  |    80.6     49.8     65.7     34.9     18.3     20.4     70.6      9.4     69.0     48.8  
+       'b2'  |     9        7        8        6        5        7        9        5        2        5  
+       'b3'  |    55.0     60.0     89.0     53.0     28.0     80.0     82.0     62.0     59.0     11.0  
+       'b4'  |     8        6        9        5        5        5        5        6        3        7  
+       'b5'  |    57.0    30.0     64.0     35.0     30.0     29.0      34.0     51.0     86.0     39.0  
+       'b6'  |     4       4        4        3        2        7         8        4        9        5  
 
-The main time (0.4 out of 0.5 sec. , see Lines 21-27 above) is spent by the class constructor in computing the outranking relation on the extended actions set including both the new actions as well as the quartile class limits. In case of large volumes, ie many new decision actions and centile classes for instance, a multi-threading version may be used when multiple processing cores are available (see the technical description of the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class).
+The :code:`NormedQuantilesRatingDigraphdigraph` instance's actions dictionary also contains the closed lower limits of the four quartile classes: *m1* = [0.0-0.25[, *m2* = [0.25-0.5[, *m3* =[0.5 - 0.75[, *m4* = [0.75 - 1.0[.
+    >>> nqr.showPerformanceTableau(actionsSubset=nqr.profiles)
+    *----  performance tableau -----*
+    criteria |  'm1'   'm2'   'm3'   'm4'   
+    ---------|-----------------------------------------
+       'c1'  | -97.1  -73.7  -60.5  -42.5,   
+       'b1'  |   2.1   26.4   49.8   68.9  
+       'b2'  |   0.0    4.0    5.0    6.8  
+       'b3'  |   1.1   44.4   59.8   73.5  
+       'b4'  |   0.0    3.4    4.0    6.1  
+       'b5'  |   1.8   31.9   38.9   57.9  
+       'b6'  |   0.0    2.2    2.8    5.7  
+
+The main time (0.4 out of 0.5 sec. , see Lines 21-27 of the object description above) is spent by the class constructor in computing a bipolar valued outranking relation on the extended actions set including both the new actions as well as the quartile class limits. In case of large volumes, ie many new decision actions and centile classes for instance, a multi-threading version may be used when multiple processing cores are available (see the technical description of the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class).
 
 The actual rating procedure will rely on a complete ranking of the new decision actions as well ass the quantile class limits obtained from the corresponding bipolar valued outranking digraph. Two efficient and scalable ranking rules, the **Copeland** and its valued version, the **Netflows** rule may be used for this purpose. The *rankingRule* parameter allows to choose one of both. With *rankingRule='best'* (see Line 2 above) the :code:`NormedQuantilesRatingDigraph` constructor will choose the ranking rule that results in the highest ordinal correlation with the given outranking relation (see [BIS-2012]_).
 
@@ -2262,13 +2257,13 @@ We achieve here a linear ranking without ties (from best to worst) of the digrap
 
 which is, however, less correlated (*tau* = 0.89) with the underlying outranking relation.
 
-The eventual rating procedure is based on the lower quantile limits, such that we collect the rating classes' contents in increasing order of the quartiles:    
+The eventual rating procedure is based on the lower quantile limits, such that we may collect the quartile classes' contents in increasing order of the quartiles lower limits:    
     >>> print('Rating categories:', self.ratingCategories)
     Rating categories: OrderedDict([
      ('m1', ['a1004', 'a1009', 'a1007']), ('m2', ['a1002']),
      ('m3', ['a1008', 'a1006', 'a1005', 'a1001', 'a1003', 'a1010']),('m4',[]) ])
 
-We notice above that no decision action is rated in the highest quartile class [0.75 - 1.0]. Indeed, the rating result is better shown in descending order as follows:
+We notice above that no decision action is rated in the highest quartile class [0.75 - 1.0]. Indeed, the rating result is shown in descending order as follows:
     >>> nqr.showQuantilesRating()
     [0.50 - 0.75[ ['a1008', 'a1006', 'a1005', 'a1001', 'a1003', 'a1010']
     [0.25 - 0.50[ ['a1002']
