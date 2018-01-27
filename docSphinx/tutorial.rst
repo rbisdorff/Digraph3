@@ -934,11 +934,10 @@ Generating random performance tableaux
 	:depth: 2
 	:local:
 
+Introduction
+............
 
-The `randomPerfTabs <techDoc.html#randomPerfTabs>`_ module
-..........................................................
-
-This module provides several random performance tableaux generators, i.e. PerformanceTableau class instances (see the `perfTabs <techDoc.html#perftabs-label>`_ module), mainly for the purpose of testing implemented versions of methods and tools presented and discussed in the Algorithmic Decision Theory course at the University of Luxembourg. This tutorial concerns the four most useful generators:
+The :py:mod:`randomPerfTabs` module provides several constructors for random performance tableaux generators of different kind, mainly for the purpose of testing implemented methods and tools presented and discussed in the Algorithmic Decision Theory course at the University of Luxembourg. This tutorial concerns the four most useful generators:
 
     1. The simplest model, called **RandomPerformaceTableau**, generates
        a set of *n* decision actions, a set of *m* real-valued
@@ -958,10 +957,10 @@ This module provides several random performance tableaux generators, i.e. Perfor
        tableau model, we provide a specific generator, called **Random3ObjectivesPerformanceTableau**.
  
 
-The `RandomPerformanceTableau <techDoc.html#randomPerfTabs.RandomPerformanceTableau>`_ generator
-................................................................................................
+Generating standard random performance tableaux 
+...............................................
     
-The ``RandomPerformanceTableau generator``, the simplest of the kind, specializes the ``PerformanceTableau`` class and takes the following parameters:
+The :py:class:`randomPerfTabs.RandomPerformanceTableau` class, the simplest of the kind, specializes the generic :py:class:`refTabs.PerformanceTableau` class, and takes the following parameters:
     * numberOfActions := nbr of decision actions.
     * numberOfCriteria := number performance criteria.
     * weightDistribution := 'random' (default) | 'fixed' | 'equisignificant'.
@@ -1004,31 +1003,10 @@ Code example:
                     }
             }
 
-The `RandomRankPerformanceTableau <techDoc.html#randomPerfTabs.RandomRankPerformanceTableau>`_ generator
-........................................................................................................
+Generating Cost-Benefit random performance tableaux
+...................................................
 
-Random generator for multiple criteria ranked (without ties) performances of a
-given number of decision actions. On each criterion,
-all decision actions are hence linearly ordered. The ``RandomRankPerformanceTableau`` class is
-matching the ``RandomLinearVotingProfile`` class provided by  the `votingDigraphs <techDoc.html#votingDigraphs-label>`_ module.  
-        
-*Parameters*:
-    * number of actions,
-    * number of performance criteria,
-    * weightDistribution := equisignificant | random (default, see `above <tutorial.html#the-randomperformancetableau-generator>`_ above)
-    * weightScale := (1, 1 | numberOfCriteria (default when random))
-    * integerWeights := Boolean (True = default) 
-    * commonThresholds (default) := {
-        | 'ind':(0,0),
-        | 'pref':(1,0),
-        | 'veto':(numberOfActions,0)
-        | } (default)
-
-
-The `RandomCBPerformanceTableau <techDoc.html#randomPerfTabs.RandomCBPerformanceTableau>`_ generator
-....................................................................................................
-
-Random generation of *Cost* versus *Benefit* oriented performance tableaux follows the directives below:
+We provide the :py:class:`randomPerfTabs.RandomCBPerformanceTableau` class for generating random *Cost* versus *Benefit* organized performance tableaux following the directives below:
 
     * We distinguish three types of decision actions: *cheap*, *neutral* and *expensive* ones with an equal proportion of 1/3. We also distinguish two types of weighted criteria: *cost* criteria to be *minimized*, and *benefit* criteria to be *maximized*; in the proportions 1/3 respectively 2/3. 
     * Random performances on each type of criteria  are drawn, either from an ordinal scale [0;10], or from a cardinal scale [0.0;100.0], following a parametric triangular law of mode: 30\% performance for cheap, 50\% for neutral, and$70\% performance for expensive decision actions, with constant probability repartition 0.5 on each side of the respective mode. 
@@ -1147,10 +1125,10 @@ If needed for instance in an R session, a CSV version of the performance tableau
 
 Back to :ref:`Tutorial-label`
 
-The `Random3ObjectivesPerformanceTableau <techDoc.html#randomPerfTabs.Random3ObjectivesPerformanceTableau>`_ generator
-......................................................................................................................
+Generating three objectives random performance tableaux
+.......................................................
 
-The class provides a generator of random performance tableaux concerning three preferential decision objectives which take into account *economical*, *societal* as well as *environmental* aspects.
+We provide the :py:class:`randomPerfTabs.Random3ObjectivesPerformaceTableau` class for generating random performance tableaux concerning three preferential decision objectives which take respectively into account *economical*, *societal* as well as *environmental* aspects.
 
 Each decision action is qualified randomly as performing *weak* (-), *fair* (~) or *good* (+) on each of the three objectives. 
 
@@ -1282,6 +1260,25 @@ A graphviz drawing illustrates the apparent preferential links between the stron
    :align: center
 
 Decision action *a26* (Eco+ Soc+ Env-) appears dominating the other decision alternatives, whereas decision action *a30* (Eco- Soc- Env-) appears to be dominated by all the others.
+
+Generating random rank performance tableaux
+...........................................	    
+
+Finally, we provide the :py:class:`randomPerfTabs.RandomRankPerformanceTableau` class for generating multiple criteria ranked performances, ie on each criterion, all decision actions appear linearly ordered without ties.
+
+This type of random performance tabeau is matching the :py:class:`votingDigrahs.RandomLinearVotingProfile` class provided by the :py:mod:`votingDigraphs` module.  
+        
+*Parameters*:
+    * number of actions,
+    * number of performance criteria,
+    * weightDistribution := equisignificant | random (default, see `above <tutorial.html#the-randomperformancetableau-generator>`_ above)
+    * weightScale := (1, 1 | numberOfCriteria (default when random))
+    * integerWeights := Boolean (True = default) 
+    * commonThresholds (default) := {
+        | 'ind':(0,0),
+        | 'pref':(1,0),
+        | 'veto':(numberOfActions,0)
+        | } (default)
 
 Back to :ref:`Tutorial-label`
 
