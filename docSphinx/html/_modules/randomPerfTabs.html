@@ -521,28 +521,28 @@
                 <span class="n">evaluation</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">)</span>
 
         <span class="c1"># return a new random decision alternative</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="n">action</span><span class="p">,</span><span class="s1">&#39;evaluation&#39;</span><span class="p">:</span><span class="n">evaluation</span><span class="p">}</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="n">action</span><span class="p">,</span><span class="s1">&#39;evaluation&#39;</span><span class="p">:</span><span class="n">evaluation</span><span class="p">}</span></div>
 
-<div class="viewcode-block" id="RandomPerformanceGenerator.randomUpdate"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomPerformanceGenerator.randomUpdate">[docs]</a>    <span class="k">def</span> <span class="nf">randomUpdate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nbrOfRandomActions</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Updates *self.perfTab* with *n* = *nbrOfActions* new random decision alternatives.</span>
-
-<span class="sd">        .. note::</span>
-
-<span class="sd">            The update will modify the generator&#39;s given performance tableau instance by,</span>
-<span class="sd">            either adding new actions with their random evaluations,</span>
-<span class="sd">            or updating the performances of already existing decision actions.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">actions</span>
-        <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">criteria</span>
-        <span class="n">evaluation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">evaluation</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nbrOfRandomActions</span><span class="p">):</span>
-            <span class="n">newAction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_randomAction</span><span class="p">()</span>
-            <span class="n">newEvaluation</span> <span class="o">=</span> <span class="n">newAction</span><span class="p">[</span><span class="s1">&#39;evaluation&#39;</span><span class="p">]</span>
-            <span class="n">newKey</span> <span class="o">=</span> <span class="n">newAction</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">][</span><span class="s1">&#39;key&#39;</span><span class="p">]</span>
-            <span class="n">actions</span><span class="p">[</span><span class="n">newKey</span><span class="p">]</span> <span class="o">=</span> <span class="n">newAction</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
-                <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">newKey</span><span class="p">]</span> <span class="o">=</span> <span class="n">newEvaluation</span><span class="p">[</span><span class="n">g</span><span class="p">]</span></div></div>
+<span class="c1">##    def randomUpdate(self,nbrOfRandomActions=1):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Updates *self.perfTab* with *n* = *nbrOfActions* new random decision alternatives.</span>
+<span class="c1">##</span>
+<span class="c1">##        .. note::</span>
+<span class="c1">##</span>
+<span class="c1">##            The update will modify the generator&#39;s given performance tableau instance by,</span>
+<span class="c1">##            either adding new actions with their random evaluations,</span>
+<span class="c1">##            or updating the performances of already existing decision actions.</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        actions = self.perfTab.actions</span>
+<span class="c1">##        criteria = self.perfTab.criteria</span>
+<span class="c1">##        evaluation = self.perfTab.evaluation</span>
+<span class="c1">##        for i in range(nbrOfRandomActions):</span>
+<span class="c1">##            newAction = self._randomAction()</span>
+<span class="c1">##            newEvaluation = newAction[&#39;evaluation&#39;]</span>
+<span class="c1">##            newKey = newAction[&#39;action&#39;][&#39;key&#39;]</span>
+<span class="c1">##            actions[newKey] = newAction[&#39;action&#39;]</span>
+<span class="c1">##            for g in criteria:</span>
+<span class="c1">##                evaluation[g][newKey] = newEvaluation[g]</span>
                 
 <span class="c1">##################</span>
 <span class="c1">#-----------------</span>
@@ -1969,28 +1969,28 @@
                 <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">)</span>
 
         <span class="c1"># return a new random decision alternative</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="n">action</span><span class="p">,</span><span class="s1">&#39;evaluation&#39;</span><span class="p">:</span><span class="n">evaluation</span><span class="p">}</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="n">action</span><span class="p">,</span><span class="s1">&#39;evaluation&#39;</span><span class="p">:</span><span class="n">evaluation</span><span class="p">}</span></div>
 
-<div class="viewcode-block" id="Random3ObjectivesPerformanceGenerator.randomUpdate"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.Random3ObjectivesPerformanceGenerator.randomUpdate">[docs]</a>    <span class="k">def</span> <span class="nf">randomUpdate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nbrOfRandomActions</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Updates *self.perfTab* with *n* = *nbrOfActions* new random decision alternatives.</span>
-
-<span class="sd">        .. note::</span>
-
-<span class="sd">            The update will modify the generator&#39;s given performance tableau instance by,</span>
-<span class="sd">            either adding new actions with their random evaluations,</span>
-<span class="sd">            or updating the performances of already existing decision actions.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">actions</span>
-        <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">criteria</span>
-        <span class="n">evaluation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">evaluation</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nbrOfRandomActions</span><span class="p">):</span>
-            <span class="n">newAction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_randomAction</span><span class="p">()</span>
-            <span class="n">newEvaluation</span> <span class="o">=</span> <span class="n">newAction</span><span class="p">[</span><span class="s1">&#39;evaluation&#39;</span><span class="p">]</span>
-            <span class="n">newKey</span> <span class="o">=</span> <span class="n">newAction</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;key&#39;</span><span class="p">)</span>
-            <span class="n">actions</span><span class="p">[</span><span class="n">newKey</span><span class="p">]</span> <span class="o">=</span> <span class="n">newAction</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
-                <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">newKey</span><span class="p">]</span> <span class="o">=</span> <span class="n">newEvaluation</span><span class="p">[</span><span class="n">g</span><span class="p">]</span></div></div>
+<span class="c1">##    def randomUpdate(self,nbrOfRandomActions=1):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Updates *self.perfTab* with *n* = *nbrOfActions* new random decision alternatives.</span>
+<span class="c1">##</span>
+<span class="c1">##        .. note::</span>
+<span class="c1">##</span>
+<span class="c1">##            The update will modify the generator&#39;s given performance tableau instance by,</span>
+<span class="c1">##            either adding new actions with their random evaluations,</span>
+<span class="c1">##            or updating the performances of already existing decision actions.</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        actions = self.perfTab.actions</span>
+<span class="c1">##        criteria = self.perfTab.criteria</span>
+<span class="c1">##        evaluation = self.perfTab.evaluation</span>
+<span class="c1">##        for i in range(nbrOfRandomActions):</span>
+<span class="c1">##            newAction = self._randomAction()</span>
+<span class="c1">##            newEvaluation = newAction[&#39;evaluation&#39;]</span>
+<span class="c1">##            newKey = newAction[&#39;action&#39;].pop(&#39;key&#39;)</span>
+<span class="c1">##            actions[newKey] = newAction[&#39;action&#39;]</span>
+<span class="c1">##            for g in criteria:</span>
+<span class="c1">##                evaluation[g][newKey] = newEvaluation[g]</span>
 
 
 <span class="c1">#---------------</span>
@@ -2854,28 +2854,28 @@
                 <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">)</span>
 
         <span class="c1"># return a new random decision alternative</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="n">action</span><span class="p">,</span><span class="s1">&#39;evaluation&#39;</span><span class="p">:</span><span class="n">evaluation</span><span class="p">}</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="n">action</span><span class="p">,</span><span class="s1">&#39;evaluation&#39;</span><span class="p">:</span><span class="n">evaluation</span><span class="p">}</span></div>
     
-<div class="viewcode-block" id="RandomCBPerformanceGenerator.randomUpdate"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomCBPerformanceGenerator.randomUpdate">[docs]</a>    <span class="k">def</span> <span class="nf">randomUpdate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nbrOfRandomActions</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Updates *self.perfTab* with *n* = *nbrOfActions* new random decision alternatives.</span>
-
-<span class="sd">        .. note::</span>
-
-<span class="sd">            The update will modify the generator&#39;s given performance tableau instance by,</span>
-<span class="sd">            either adding new actions with their random evaluations,</span>
-<span class="sd">            or updating the performances of already existing decision actions.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">actions</span>
-        <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">criteria</span>
-        <span class="n">evaluation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">evaluation</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nbrOfRandomActions</span><span class="p">):</span>
-            <span class="n">newAction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_randomAction</span><span class="p">()</span>
-            <span class="n">newEvaluation</span> <span class="o">=</span> <span class="n">newAction</span><span class="p">[</span><span class="s1">&#39;evaluation&#39;</span><span class="p">]</span>
-            <span class="n">newKey</span> <span class="o">=</span> <span class="n">newAction</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;key&#39;</span><span class="p">)</span>
-            <span class="n">actions</span><span class="p">[</span><span class="n">newKey</span><span class="p">]</span> <span class="o">=</span> <span class="n">newAction</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
-                <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">newKey</span><span class="p">]</span> <span class="o">=</span> <span class="n">newEvaluation</span><span class="p">[</span><span class="n">g</span><span class="p">]</span></div></div>
+<span class="c1">##    def randomUpdate(self,nbrOfRandomActions=1):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Updates *self.perfTab* with *n* = *nbrOfActions* new random decision alternatives.</span>
+<span class="c1">##</span>
+<span class="c1">##        .. note::</span>
+<span class="c1">##</span>
+<span class="c1">##            The update will modify the generator&#39;s given performance tableau instance by,</span>
+<span class="c1">##            either adding new actions with their random evaluations,</span>
+<span class="c1">##            or updating the performances of already existing decision actions.</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        actions = self.perfTab.actions</span>
+<span class="c1">##        criteria = self.perfTab.criteria</span>
+<span class="c1">##        evaluation = self.perfTab.evaluation</span>
+<span class="c1">##        for i in range(nbrOfRandomActions):</span>
+<span class="c1">##            newAction = self._randomAction()</span>
+<span class="c1">##            newEvaluation = newAction[&#39;evaluation&#39;]</span>
+<span class="c1">##            newKey = newAction[&#39;action&#39;].pop(&#39;key&#39;)</span>
+<span class="c1">##            actions[newKey] = newAction[&#39;action&#39;]</span>
+<span class="c1">##            for g in criteria:</span>
+<span class="c1">##                evaluation[g][newKey] = newEvaluation[g]</span>
 
         
 

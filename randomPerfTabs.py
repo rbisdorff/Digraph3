@@ -473,26 +473,26 @@ class RandomPerformanceGenerator(object):
         # return a new random decision alternative
         return {'action': action,'evaluation':evaluation}
 
-    def randomUpdate(self,nbrOfRandomActions=1):
-        """
-        Updates *self.perfTab* with *n* = *nbrOfActions* new random decision alternatives.
-
-        .. note::
-
-            The update will modify the generator's given performance tableau instance by,
-            either adding new actions with their random evaluations,
-            or updating the performances of already existing decision actions.
-        """
-        actions = self.perfTab.actions
-        criteria = self.perfTab.criteria
-        evaluation = self.perfTab.evaluation
-        for i in range(nbrOfRandomActions):
-            newAction = self._randomAction()
-            newEvaluation = newAction['evaluation']
-            newKey = newAction['action']['key']
-            actions[newKey] = newAction['action']
-            for g in criteria:
-                evaluation[g][newKey] = newEvaluation[g]
+##    def randomUpdate(self,nbrOfRandomActions=1):
+##        """
+##        Updates *self.perfTab* with *n* = *nbrOfActions* new random decision alternatives.
+##
+##        .. note::
+##
+##            The update will modify the generator's given performance tableau instance by,
+##            either adding new actions with their random evaluations,
+##            or updating the performances of already existing decision actions.
+##        """
+##        actions = self.perfTab.actions
+##        criteria = self.perfTab.criteria
+##        evaluation = self.perfTab.evaluation
+##        for i in range(nbrOfRandomActions):
+##            newAction = self._randomAction()
+##            newEvaluation = newAction['evaluation']
+##            newKey = newAction['action']['key']
+##            actions[newKey] = newAction['action']
+##            for g in criteria:
+##                evaluation[g][newKey] = newEvaluation[g]
                 
 ##################
 #-----------------
@@ -1921,26 +1921,26 @@ class Random3ObjectivesPerformanceGenerator(RandomPerformanceGenerator):
         # return a new random decision alternative
         return {'action': action,'evaluation':evaluation}
 
-    def randomUpdate(self,nbrOfRandomActions=1):
-        """
-        Updates *self.perfTab* with *n* = *nbrOfActions* new random decision alternatives.
-
-        .. note::
-
-            The update will modify the generator's given performance tableau instance by,
-            either adding new actions with their random evaluations,
-            or updating the performances of already existing decision actions.
-        """
-        actions = self.perfTab.actions
-        criteria = self.perfTab.criteria
-        evaluation = self.perfTab.evaluation
-        for i in range(nbrOfRandomActions):
-            newAction = self._randomAction()
-            newEvaluation = newAction['evaluation']
-            newKey = newAction['action'].pop('key')
-            actions[newKey] = newAction['action']
-            for g in criteria:
-                evaluation[g][newKey] = newEvaluation[g]
+##    def randomUpdate(self,nbrOfRandomActions=1):
+##        """
+##        Updates *self.perfTab* with *n* = *nbrOfActions* new random decision alternatives.
+##
+##        .. note::
+##
+##            The update will modify the generator's given performance tableau instance by,
+##            either adding new actions with their random evaluations,
+##            or updating the performances of already existing decision actions.
+##        """
+##        actions = self.perfTab.actions
+##        criteria = self.perfTab.criteria
+##        evaluation = self.perfTab.evaluation
+##        for i in range(nbrOfRandomActions):
+##            newAction = self._randomAction()
+##            newEvaluation = newAction['evaluation']
+##            newKey = newAction['action'].pop('key')
+##            actions[newKey] = newAction['action']
+##            for g in criteria:
+##                evaluation[g][newKey] = newEvaluation[g]
 
 
 #---------------
@@ -2806,26 +2806,26 @@ class RandomCBPerformanceGenerator(RandomPerformanceGenerator):
         # return a new random decision alternative
         return {'action': action,'evaluation':evaluation}
     
-    def randomUpdate(self,nbrOfRandomActions=1):
-        """
-        Updates *self.perfTab* with *n* = *nbrOfActions* new random decision alternatives.
-
-        .. note::
-
-            The update will modify the generator's given performance tableau instance by,
-            either adding new actions with their random evaluations,
-            or updating the performances of already existing decision actions.
-        """
-        actions = self.perfTab.actions
-        criteria = self.perfTab.criteria
-        evaluation = self.perfTab.evaluation
-        for i in range(nbrOfRandomActions):
-            newAction = self._randomAction()
-            newEvaluation = newAction['evaluation']
-            newKey = newAction['action'].pop('key')
-            actions[newKey] = newAction['action']
-            for g in criteria:
-                evaluation[g][newKey] = newEvaluation[g]
+##    def randomUpdate(self,nbrOfRandomActions=1):
+##        """
+##        Updates *self.perfTab* with *n* = *nbrOfActions* new random decision alternatives.
+##
+##        .. note::
+##
+##            The update will modify the generator's given performance tableau instance by,
+##            either adding new actions with their random evaluations,
+##            or updating the performances of already existing decision actions.
+##        """
+##        actions = self.perfTab.actions
+##        criteria = self.perfTab.criteria
+##        evaluation = self.perfTab.evaluation
+##        for i in range(nbrOfRandomActions):
+##            newAction = self._randomAction()
+##            newEvaluation = newAction['evaluation']
+##            newKey = newAction['action'].pop('key')
+##            actions[newKey] = newAction['action']
+##            for g in criteria:
+##                evaluation[g][newKey] = newEvaluation[g]
 
         
 
