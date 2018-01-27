@@ -1584,9 +1584,9 @@
 <ul class="simple">
 <li><a class="reference internal" href="#introduction" id="id79">Introduction</a></li>
 <li><a class="reference internal" href="#generating-standard-random-performance-tableaux" id="id80">Generating standard random performance tableaux</a></li>
-<li><a class="reference internal" href="#generating-cost-benefit-random-performance-tableaux" id="id81">Generating Cost-Benefit random performance tableaux</a></li>
-<li><a class="reference internal" href="#generating-three-objectives-random-performance-tableaux" id="id82">Generating three objectives random performance tableaux</a></li>
-<li><a class="reference internal" href="#generating-random-rank-performance-tableaux" id="id83">Generating random rank performance tableaux</a></li>
+<li><a class="reference internal" href="#generating-random-cost-benefit-tableaux" id="id81">Generating random Cost-Benefit tableaux</a></li>
+<li><a class="reference internal" href="#generating-three-objectives-tableaux" id="id82">Generating three objectives tableaux</a></li>
+<li><a class="reference internal" href="#generating-random-linearly-ranked-performances" id="id83">Generating random linearly ranked performances</a></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -1597,19 +1597,30 @@
 <li>The simplest model, called <strong>RandomPerformaceTableau</strong>, generates
 a set of <em>n</em> decision actions, a set of <em>m</em> real-valued
 performance criteria, ranging by default from 0.0 to 100.0,
-associated with default discrimination thresholds: 10.0 (ind.), 20.0 (pref.) and 80.0 (veto). The generated performances are uniformly distributed on each measurement scale.</li>
-<li>In order to study aggregation of linear orders, we provide a model called <strong>RandomRankPerformanceTableau</strong> which provides linearly ordered performances without ties on multiple criteria for a given number of decision actions.</li>
+associated with default discrimination thresholds: 10.0 (ind.),
+20.0 (pref.) and 80.0 (veto). The generated performances are
+uniformly distributed on each measurement scale.</li>
+</ol>
+<ol class="arabic simple" start="3">
 <li>One of the most useful random generator, called
 <strong>RandomCBPerformanceTableau</strong>, proposes two decision objectives,
 named <em>Costs</em> (to be minimized) respectively <em>Benefits</em> (to be
 maximized) model; its purpose being to generate more or less
 contradictory performances on these two, usually opposed,
 objectives. <em>Low costs</em> will randomly be coupled with <em>low
-benefits</em>, whereas <em>high costs</em> will randomly be coupled with high benefits.</li>
+benefits</em>, whereas <em>high costs</em> will randomly be coupled
+with high benefits.</li>
+</ol>
+<ol class="arabic simple" start="3">
 <li>Many multiple criteria decision problems concern three decision
-objectives which take into account <em>economical</em>, <em>societal</em> as
-well as <em>environmental</em> aspects. For this type of performance
-tableau model, we provide a specific generator, called <strong>Random3ObjectivesPerformanceTableau</strong>.</li>
+objectives which take into account <em>economical</em>, <em>societal</em> as well
+as <em>environmental</em> aspects. For this type of performance tableau model,
+we provide a specific generator,
+called <strong>Random3ObjectivesPerformanceTableau</strong>.</li>
+<li>In order to study aggregation of linear orders, we provide a model
+called <strong>RandomRankPerformanceTableau</strong> which provides linearly
+ordered performances without ties on multiple criteria for
+a given number of decision actions.</li>
 </ol>
 </div></blockquote>
 </div>
@@ -1704,8 +1715,8 @@ tableau model, we provide a specific generator, called <strong>Random3Objectives
 </dd>
 </dl>
 </div>
-<div class="section" id="generating-cost-benefit-random-performance-tableaux">
-<h3><a class="toc-backref" href="#id81">Generating Cost-Benefit random performance tableaux</a><a class="headerlink" href="#generating-cost-benefit-random-performance-tableaux" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="generating-random-cost-benefit-tableaux">
+<h3><a class="toc-backref" href="#id81">Generating random Cost-Benefit tableaux</a><a class="headerlink" href="#generating-random-cost-benefit-tableaux" title="Permalink to this headline">¶</a></h3>
 <p>We provide the <a class="reference internal" href="techDoc.html#randomPerfTabs.RandomCBPerformanceTableau" title="randomPerfTabs.RandomCBPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.RandomCBPerformanceTableau</span></code></a> class for generating random <em>Cost</em> versus <em>Benefit</em> organized performance tableaux following the directives below:</p>
 <blockquote>
 <div><ul class="simple">
@@ -1913,8 +1924,8 @@ tableau model, we provide a specific generator, called <strong>Random3Objectives
 </dl>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Tutorials of the Digraph3 resources</span></a></p>
 </div>
-<div class="section" id="generating-three-objectives-random-performance-tableaux">
-<h3><a class="toc-backref" href="#id82">Generating three objectives random performance tableaux</a><a class="headerlink" href="#generating-three-objectives-random-performance-tableaux" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="generating-three-objectives-tableaux">
+<h3><a class="toc-backref" href="#id82">Generating three objectives tableaux</a><a class="headerlink" href="#generating-three-objectives-tableaux" title="Permalink to this headline">¶</a></h3>
 <p>We provide the <code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.Random3ObjectivesPerformaceTableau</span></code> class for generating random performance tableaux concerning three preferential decision objectives which take respectively into account <em>economical</em>, <em>societal</em> as well as <em>environmental</em> aspects.</p>
 <p>Each decision action is qualified randomly as performing <em>weak</em> (-), <em>fair</em> (~) or <em>good</em> (+) on each of the three objectives.</p>
 <dl class="docutils">
@@ -2128,8 +2139,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <a class="reference internal image-reference" href="_images/sccFusionObjectives.png"><img alt="_images/sccFusionObjectives.png" class="align-center" src="_images/sccFusionObjectives.png" style="width: 300px;" /></a>
 <p>Decision action <em>a26</em> (Eco+ Soc+ Env-) appears dominating the other decision alternatives, whereas decision action <em>a30</em> (Eco- Soc- Env-) appears to be dominated by all the others.</p>
 </div>
-<div class="section" id="generating-random-rank-performance-tableaux">
-<h3><a class="toc-backref" href="#id83">Generating random rank performance tableaux</a><a class="headerlink" href="#generating-random-rank-performance-tableaux" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="generating-random-linearly-ranked-performances">
+<h3><a class="toc-backref" href="#id83">Generating random linearly ranked performances</a><a class="headerlink" href="#generating-random-linearly-ranked-performances" title="Permalink to this headline">¶</a></h3>
 <p>Finally, we provide the <a class="reference internal" href="techDoc.html#randomPerfTabs.RandomRankPerformanceTableau" title="randomPerfTabs.RandomRankPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.RandomRankPerformanceTableau</span></code></a> class for generating multiple criteria ranked performances, ie on each criterion, all decision actions appear linearly ordered without ties.</p>
 <p>This type of random performance tabeau is matching the <code class="xref py py-class docutils literal"><span class="pre">votingDigrahs.RandomLinearVotingProfile</span></code> class provided by the <a class="reference internal" href="techDoc.html#module-votingDigraphs" title="votingDigraphs"><code class="xref py py-mod docutils literal"><span class="pre">votingDigraphs</span></code></a> module.</p>
 <dl class="docutils">
@@ -4814,9 +4825,9 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <li><a class="reference internal" href="#generating-random-performance-tableaux">Generating random performance tableaux</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
 <li><a class="reference internal" href="#generating-standard-random-performance-tableaux">Generating standard random performance tableaux</a></li>
-<li><a class="reference internal" href="#generating-cost-benefit-random-performance-tableaux">Generating Cost-Benefit random performance tableaux</a></li>
-<li><a class="reference internal" href="#generating-three-objectives-random-performance-tableaux">Generating three objectives random performance tableaux</a></li>
-<li><a class="reference internal" href="#generating-random-rank-performance-tableaux">Generating random rank performance tableaux</a></li>
+<li><a class="reference internal" href="#generating-random-cost-benefit-tableaux">Generating random Cost-Benefit tableaux</a></li>
+<li><a class="reference internal" href="#generating-three-objectives-tableaux">Generating three objectives tableaux</a></li>
+<li><a class="reference internal" href="#generating-random-linearly-ranked-performances">Generating random linearly ranked performances</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#computing-a-best-choice-recommendation">Computing a best choice recommendation</a><ul>

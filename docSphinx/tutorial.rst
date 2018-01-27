@@ -940,23 +940,29 @@ Introduction
 The :py:mod:`randomPerfTabs` module provides several constructors for random performance tableaux generators of different kind, mainly for the purpose of testing implemented methods and tools presented and discussed in the Algorithmic Decision Theory course at the University of Luxembourg. This tutorial concerns the four most useful generators:
 
     1. The simplest model, called **RandomPerformaceTableau**, generates
-       a set of *n* decision actions, a set of *m* real-valued
-       performance criteria, ranging by default from 0.0 to 100.0,
-       associated with default discrimination thresholds: 10.0 (ind.), 20.0 (pref.) and 80.0 (veto). The generated performances are uniformly distributed on each measurement scale. 
-    2. In order to study aggregation of linear orders, we provide a model called **RandomRankPerformanceTableau** which provides linearly ordered performances without ties on multiple criteria for a given number of decision actions.
-    3. One of the most useful random generator, called
-       **RandomCBPerformanceTableau**, proposes two decision objectives,
-       named *Costs* (to be minimized) respectively *Benefits* (to be
-       maximized) model; its purpose being to generate more or less
-       contradictory performances on these two, usually opposed,
-       objectives. *Low costs* will randomly be coupled with *low
-       benefits*, whereas *high costs* will randomly be coupled with high benefits. 
-    4. Many multiple criteria decision problems concern three decision
-       objectives which take into account *economical*, *societal* as
-       well as *environmental* aspects. For this type of performance
-       tableau model, we provide a specific generator, called **Random3ObjectivesPerformanceTableau**.
+    a set of *n* decision actions, a set of *m* real-valued
+    performance criteria, ranging by default from 0.0 to 100.0,
+    associated with default discrimination thresholds: 10.0 (ind.),
+    20.0 (pref.) and 80.0 (veto). The generated performances are
+    uniformly distributed on each measurement scale.
+    2. One of the most useful random generator, called
+    **RandomCBPerformanceTableau**, proposes two decision objectives,
+    named *Costs* (to be minimized) respectively *Benefits* (to be
+    maximized) model; its purpose being to generate more or less
+    contradictory performances on these two, usually opposed,
+    objectives. *Low costs* will randomly be coupled with *low
+    benefits*, whereas *high costs* will randomly be coupled
+    with high benefits. 
+    3. Many multiple criteria decision problems concern three decision
+    objectives which take into account *economical*, *societal* as well
+    as *environmental* aspects. For this type of performance tableau model,
+    we provide a specific generator,
+    called **Random3ObjectivesPerformanceTableau**.
+    4. In order to study aggregation of linear orders, we provide a model
+    called **RandomRankPerformanceTableau** which provides linearly
+    ordered performances without ties on multiple criteria for
+    a given number of decision actions.
  
-
 Generating standard random performance tableaux 
 ...............................................
     
@@ -1003,8 +1009,8 @@ Code example:
                     }
             }
 
-Generating Cost-Benefit random performance tableaux
-...................................................
+Generating random Cost-Benefit tableaux
+.......................................
 
 We provide the :py:class:`randomPerfTabs.RandomCBPerformanceTableau` class for generating random *Cost* versus *Benefit* organized performance tableaux following the directives below:
 
@@ -1125,8 +1131,8 @@ If needed for instance in an R session, a CSV version of the performance tableau
 
 Back to :ref:`Tutorial-label`
 
-Generating three objectives random performance tableaux
-.......................................................
+Generating three objectives tableaux
+....................................
 
 We provide the :py:class:`randomPerfTabs.Random3ObjectivesPerformaceTableau` class for generating random performance tableaux concerning three preferential decision objectives which take respectively into account *economical*, *societal* as well as *environmental* aspects.
 
@@ -1261,8 +1267,8 @@ A graphviz drawing illustrates the apparent preferential links between the stron
 
 Decision action *a26* (Eco+ Soc+ Env-) appears dominating the other decision alternatives, whereas decision action *a30* (Eco- Soc- Env-) appears to be dominated by all the others.
 
-Generating random rank performance tableaux
-...........................................	    
+Generating random linearly ranked performances
+..............................................	    
 
 Finally, we provide the :py:class:`randomPerfTabs.RandomRankPerformanceTableau` class for generating multiple criteria ranked performances, ie on each criterion, all decision actions appear linearly ordered without ties.
 
