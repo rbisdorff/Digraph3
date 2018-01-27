@@ -945,6 +945,7 @@ The :py:mod:`randomPerfTabs` module provides several constructors for random per
     associated with default discrimination thresholds: 10.0 (ind.),
     20.0 (pref.) and 80.0 (veto). The generated performances are
     uniformly distributed on each measurement scale.
+       
     2. One of the most useful random generator, called
     **RandomCBPerformanceTableau**, proposes two decision objectives,
     named *Costs* (to be minimized) respectively *Benefits* (to be
@@ -952,12 +953,14 @@ The :py:mod:`randomPerfTabs` module provides several constructors for random per
     contradictory performances on these two, usually opposed,
     objectives. *Low costs* will randomly be coupled with *low
     benefits*, whereas *high costs* will randomly be coupled
-    with high benefits. 
+    with high benefits.
+       
     3. Many multiple criteria decision problems concern three decision
     objectives which take into account *economical*, *societal* as well
     as *environmental* aspects. For this type of performance tableau model,
     we provide a specific generator,
     called **Random3ObjectivesPerformanceTableau**.
+       
     4. In order to study aggregation of linear orders, we provide a model
     called **RandomRankPerformanceTableau** which provides linearly
     ordered performances without ties on multiple criteria for
