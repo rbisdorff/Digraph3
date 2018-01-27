@@ -1593,36 +1593,29 @@
 <h3><a class="toc-backref" href="#id79">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="techDoc.html#module-randomPerfTabs" title="randomPerfTabs"><code class="xref py py-mod docutils literal"><span class="pre">randomPerfTabs</span></code></a> module provides several constructors for random performance tableaux generators of different kind, mainly for the purpose of testing implemented methods and tools presented and discussed in the Algorithmic Decision Theory course at the University of Luxembourg. This tutorial concerns the four most useful generators:</p>
 <blockquote>
-<div><ol class="arabic simple">
-<li>The simplest model, called <strong>RandomPerformaceTableau</strong>, generates
+<div>1. The simplest model, called <strong>RandomPerformaceTableau</strong>, generates
 a set of <em>n</em> decision actions, a set of <em>m</em> real-valued
 performance criteria, ranging by default from 0.0 to 100.0,
 associated with default discrimination thresholds: 10.0 (ind.),
 20.0 (pref.) and 80.0 (veto). The generated performances are
-uniformly distributed on each measurement scale.</li>
-</ol>
-<ol class="arabic simple" start="3">
-<li>One of the most useful random generator, called
+uniformly distributed on each measurement scale.
+2. One of the most useful random generator, called
 <strong>RandomCBPerformanceTableau</strong>, proposes two decision objectives,
 named <em>Costs</em> (to be minimized) respectively <em>Benefits</em> (to be
 maximized) model; its purpose being to generate more or less
 contradictory performances on these two, usually opposed,
 objectives. <em>Low costs</em> will randomly be coupled with <em>low
 benefits</em>, whereas <em>high costs</em> will randomly be coupled
-with high benefits.</li>
-</ol>
-<ol class="arabic simple" start="3">
-<li>Many multiple criteria decision problems concern three decision
+with high benefits.
+3. Many multiple criteria decision problems concern three decision
 objectives which take into account <em>economical</em>, <em>societal</em> as well
 as <em>environmental</em> aspects. For this type of performance tableau model,
 we provide a specific generator,
-called <strong>Random3ObjectivesPerformanceTableau</strong>.</li>
-<li>In order to study aggregation of linear orders, we provide a model
+called <strong>Random3ObjectivesPerformanceTableau</strong>.
+4. In order to study aggregation of linear orders, we provide a model
 called <strong>RandomRankPerformanceTableau</strong> which provides linearly
 ordered performances without ties on multiple criteria for
-a given number of decision actions.</li>
-</ol>
-</div></blockquote>
+a given number of decision actions.</div></blockquote>
 </div>
 <div class="section" id="generating-standard-random-performance-tableaux">
 <h3><a class="toc-backref" href="#id80">Generating standard random performance tableaux</a><a class="headerlink" href="#generating-standard-random-performance-tableaux" title="Permalink to this headline">¶</a></h3>
