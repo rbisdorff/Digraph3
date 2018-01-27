@@ -4730,9 +4730,9 @@ with probabilities 2/3, respectively 1/3.</dd>
 
 <dl class="class">
 <dt id="randomPerfTabs.RandomPerformanceGenerator">
-<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomPerformanceGenerator</code><span class="sig-paren">(</span><em>argPerfTab</em>, <em>actionNamePrefix='a'</em>, <em>instanceCounter=0</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomPerformanceGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomPerformanceGenerator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomPerformanceGenerator</code><span class="sig-paren">(</span><em>argPerfTab</em>, <em>actionNamePrefix='a'</em>, <em>instanceCounter=None</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomPerformanceGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomPerformanceGenerator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
-<p>Generates and/or new decision actions with random evaluation for a given RandomPerformanceTableau instance.</p>
+<p>Wrapper for generating new decision actions with random evaluation for a given RandomPerformanceTableau instance.</p>
 <dl class="method">
 <dt id="randomPerfTabs.RandomPerformanceGenerator.randomActions">
 <code class="descname">randomActions</code><span class="sig-paren">(</span><em>nbrOfRandomActions=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomPerformanceGenerator.randomActions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomPerformanceGenerator.randomActions" title="Permalink to this definition">¶</a></dt>
@@ -4868,6 +4868,13 @@ matching the RandomLinearVotingProfiles class (see the votingDigraphs module)</p
 <em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomS3PerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=None</em>, <em>numberOfCriteria=None</em>, <em>weightDistribution=None</em>, <em>weightScale=None</em>, <em>integerWeights=True</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>Coalitions=True</em>, <em>VariableGenerators=True</em>, <em>OrdinalScales=False</em>, <em>Debug=False</em>, <em>RandomCoalitions=False</em>, <em>vetoProbability=None</em>, <em>BigData=False</em>, <em>seed=None</em>, <em>Electre3=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomS3PerformanceTableau"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomS3PerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#randomPerfTabs.RandomCoalitionsPerformanceTableau" title="randomPerfTabs.RandomCoalitionsPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.RandomCoalitionsPerformanceTableau</span></code></a></p>
 <p>Obsolete dummy class for backports.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="randomPerfTabs.RandomStdPerformanceGenerator">
+<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomStdPerformanceGenerator</code><span class="sig-paren">(</span><em>argPerfTab</em>, <em>actionNamePrefix='a'</em>, <em>instanceCounter=0</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomStdPerformanceGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomStdPerformanceGenerator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#randomPerfTabs.RandomPerformanceGenerator" title="randomPerfTabs.RandomPerformanceGenerator"><code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.RandomPerformanceGenerator</span></code></a></p>
+<p>Generates for a given standard RandomPerformanceTableau instance.</p>
 </dd></dl>
 
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>

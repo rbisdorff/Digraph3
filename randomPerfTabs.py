@@ -312,34 +312,32 @@ class RandomPerformanceTableau(PerformanceTableau):
         # store weights preorder
         self.weightPreorder = self.computeWeightPreorder()
 
+
 class RandomPerformanceGenerator(object):
     """
-    Generates and/or new decision actions with random evaluation for a given RandomPerformanceTableau instance.
+    Wrapper for generating new decision actions with random evaluation for a given RandomPerformanceTableau instance.
+    
     """
-    def __init__(self,argPerfTab,actionNamePrefix='a',
-                 instanceCounter=0,seed=None):
-        """
-        Set the initial state of the random generator.
-        """
-        import random
-        random.seed(seed)
-
-        self.random = random
-        self.perfTab = argPerfTab
-        self.actionNamePrefix = actionNamePrefix
-        if instanceCounter == 0:
-            self.counter = len(argPerfTab.actions)
-        else:
-            self.counter = instanceCounter
-        self.nd = len(str(self.counter))
-
-        self.commonMode = argPerfTab.commonMode
-        if str(self.commonMode[0]) == 'triangular':
-            from randomNumbers import ExtendedTriangularRandomVariable as RNGTr
-            rdseed = random.random()
-            self.rng = RNGTr(m,M,xm,r,seed=rdseed)
-            
-        self.commonScale = argPerfTab.commonScale
+    def __init__(self,argPerfTab,actionNamePrefix='a',\
+                 instanceCounter=None,seed=None):
+        from randomPerfTabs import RandomStdPerformanceGenerator,\
+                                  RandomCBPerformanceGenerator,\
+                                  Random3ObjectivesPerformanceGenerator
+        if argPerfTab.__class__ == RandomPerformanceTableau:
+            self.__class__ = RandomStdPerformanceGenerator
+            return RandomStdPerformanceGenerator.__init__(self,argPerfTab,\
+                            actionNamePrefix=actionNamePrefix,\
+                            instanceCounter=instanceCounter,seed=seed)
+        elif argPerfTab.__class__ == RandomCBPerformanceTableau:
+            self.__class__ = RandomCBPerformanceGenerator
+            return RandomCBPerformanceGenerator.__init__(self,argPerfTab,\
+                            actionNamePrefix=actionNamePrefix,\
+                            instanceCounter=instanceCounter,seed=seed)
+        elif argPerfTab.__class__ == Random3ObjectivesPerformanceTableau:
+            self.__class__ = Random3ObjectivesPerformaceGenerator
+            return Random3ObjectivesPerformanceGenerator.__init__(self,argPerfTab,\
+                            actionNamePrefix=actionNamePrefix,\
+                            instanceCounter=instanceCounter,seed=seed)    
 
     def randomActions(self,nbrOfRandomActions=1):
         """
@@ -387,6 +385,37 @@ class RandomPerformanceGenerator(object):
         newPerfTab.actions = newActions
         newPerfTab.evaluation = newEvaluation
         return newPerfTab
+
+
+class RandomStdPerformanceGenerator(RandomPerformanceGenerator):
+    """
+    Generates for a given standard RandomPerformanceTableau instance.
+    """
+    def __init__(self,argPerfTab,actionNamePrefix='a',
+                 instanceCounter=0,seed=None):
+        """
+        Set the initial state of the random generator.
+        """
+        import random
+        random.seed(seed)
+
+        self.random = random
+        self.perfTab = argPerfTab
+        self.actionNamePrefix = actionNamePrefix
+        if instanceCounter == None:
+            self.counter = len(argPerfTab.actions)
+        else:
+            self.counter = instanceCounter
+        self.nd = len(str(self.counter))
+
+        self.commonMode = argPerfTab.commonMode
+        if str(self.commonMode[0]) == 'triangular':
+            from randomNumbers import ExtendedTriangularRandomVariable as RNGTr
+            rdseed = random.random()
+            self.rng = RNGTr(m,M,xm,r,seed=rdseed)
+            
+        self.commonScale = argPerfTab.commonScale
+
       
     def _randomAction(self,Debug=False):
         """
@@ -1740,7 +1769,7 @@ class Random3ObjectivesPerformanceGenerator(RandomPerformanceGenerator):
         self.RNGTr = RNGTr
         self.perfTab = argPerfTab
         self.actionNamePrefix = actionNamePrefix
-        if instanceCounter == 0:
+        if instanceCounter == None:
             self.counter = len(argPerfTab.actions)
         else:
             self.counter = instanceCounter
@@ -2897,7 +2926,7 @@ if __name__ == "__main__":
     rag1.randomActions(sampleSize)
     #t.showHTMLPerformanceHeatmap(Correlations=True)
     rag2 = Random3ObjectivesPerformanceGenerator(t,actionNamePrefix='c',seed=110)
-    rag2.randomUpdate(nbrOfRandomActions=5)
+    #rag2.randomUpdate(nbrOfRandomActions=5)
     print(rag2.randomActions(2))
     ntp = rag2.randomPerformanceTableau(nbrOfRandomActions=10)
     #t.showHTMLPerformanceHeatmap(ndigits=0,Correlations=True)

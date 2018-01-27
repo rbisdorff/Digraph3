@@ -184,7 +184,7 @@ def testRandomPerformanceGenerators():
     sampleSize = 5
     rag1.randomActions(sampleSize)
     rag2 = RandomPerformanceGenerator(t,actionNamePrefix='c',seed=110)
-    rag2.randomUpdate(nbrOfRandomActions=5)
+    newActions = rag2.randomActions(nbrOfRandomActions=5)
     #t.showHTMLPerformanceHeatmap(Correlations=True)
  
 def testRandomCBPerformanceGenerators():
@@ -202,9 +202,9 @@ def testRandomCBPerformanceGenerators():
             for g in t.evaluation:
                 t.evaluation[g][ak] = newAction['evaluation'][g]
     rag2 = RandomCBPerformanceGenerator(t,actionNamePrefix='c',seed=110)
-    rag2.randomUpdate(nbrOfRandomActions=5)
+    newPerfTab= rag2.randomPerformanceTableau(nbrOfRandomActions=10)
     t.updateDiscriminationThresholds(Comments=True)
-    #t.showHTMLPerformanceHeatmap(Correlations=True)
+    newPerfTab.showHTMLPerformanceHeatmap(Correlations=True)
 
 def testRandom3ObjectivesPerformanceGenerators():
     print('*---------- test dynamic updates of a random 3 Objectives performance tableau --------*') 
@@ -221,6 +221,6 @@ def testRandom3ObjectivesPerformanceGenerators():
             for g in t.evaluation:
                 t.evaluation[g][ak] = newAction['evaluation'][g]
     rag2 = Random3ObjectivesPerformanceGenerator(t,actionNamePrefix='c',seed=110)
-    rag2.randomUpdate(nbrOfRandomActions=5)
+    rag2.randomActions(nbrOfRandomActions=5)
     print(rag2.randomActions(2))
     #t.showHTMLPerformanceHeatmap(ndigits=0,Correlations=True)

@@ -6438,6 +6438,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 if __name__ == "__main__":
     from time import time
     from perfTabs import *
+    from randomPerfTabs import *
     from outrankingDigraphs import *
     from sortingDigraphs import *
     from weakOrders import *
@@ -6617,20 +6618,19 @@ if __name__ == "__main__":
 ##    print(ira.computeQuantileProfile(0.5))
 ##    print(ira.computeQuantileProfile(0.75))
 
-    from performanceQuantiles import PerformanceQuantiles
-    from randomPerfTabs import RandomCBPerformanceTableau
     nbrActions=1000
     nbrCrit = 7
     seed = 105
-    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
+    tp = RandomPerformanceTableau(numberOfActions=nbrActions,\
                    numberOfCriteria=nbrCrit,seed=seed)
+    from performanceQuantiles import PerformanceQuantiles
     pq = PerformanceQuantiles(tp,\
                    numberOfBins = 'deciles',\
                   LowerClosed=True,Debug=False)
 ##    pq.showLimitingQuantiles(ByObjectives=True)
     # generate 100 new random decision actions
-    from randomPerfTabs import RandomCBPerformanceGenerator
-    rpg = RandomCBPerformanceGenerator(tp,seed=seed)
+    from randomPerfTabs import RandomPerformanceGenerator
+    rpg = RandomPerformanceGenerator(tp,seed=seed)
     newActions = rpg.randomPerformanceTableau(10)
     # Updating the quartile norms shown above
     pq.updateQuantiles(newActions,historySize=None)
