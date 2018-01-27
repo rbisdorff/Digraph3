@@ -1209,9 +1209,9 @@ In the example code above, we notice that 5 *equisignificant* criteria (g06, g07
       profile:    {'Eco': 'weak', 'Soc': 'weak', 'Env': 'weak'}
     ...
 
-Variable triangular modes (0.3, 0.5 or 0.7 of the span of the measure scale) for each objective result in different performance status for each decision action with respect to the three objectives. For instance, action *a01* will probably show *good* performances wrt the *economical*  and environmental aspects, and *weak* performances wrt the *societal* aspect.
+Variable triangular modes (0.3, 0.5 or 0.7 of the span of the measure scale) for each objective result in different performance status for each decision action with respect to the three objectives. Action *a01* , for instance, will probably show *good* performances wrt the *economical*  and environmental aspects, and *weak* performances wrt the *societal* aspect.
 
-For testing purposes a special constructor is provided for extracting partial performance tableaux from a given tableau instance. In this example we may construct the partial performance tableaux corresponding to each objective:
+For testing purposes we provifde a special :py:class:`perfTabs.PartialPerformanceTableau` class for extracting a **partial performance tableau** from a given tableau instance. In the example blow, we construct the partial performance tableaux corresponding to each on of the three decision objectives:
 
     >>> from perfTabs import PartialPerformanceTableau
     >>> teco = PartialPerformanceTableau(t,criteriaSubset=\
@@ -1221,14 +1221,14 @@ For testing purposes a special constructor is provided for extracting partial pe
     >>> tenv = PartialPerformanceTableau(t,criteriaSubset=\
                               t.objectives['Env']['criteria'])
 
-One may now compute partial bipolar outranking digraphs for each objective as follows:
+One may this compute partial a bipolar outranking digraph for each individual objective:
 
     >>> from outrankingDigraphs import BipolarOutrankingDigraph
     >>> geco = BipolarOutrankingDigraph(teco)
     >>> gsoc = BipolarOutrankingDigraph(tsoc)
     >>> genv = BipolarOutrankingDigraph(tenv)
 
-These three partial digraphs model the preferences represented in each of the partial performance tableaux. One may aggregate these three preferential with an epistemic fusion operator:
+The three partial digraphs: *geco*, *gsoc* and *genv*,  hence model the preferences represented in each one of the partial performance tableaux. And, we may aggregate these three outranking digraphs with an epistemic fusion operator:
     >>> from digraphs import FusionLDigraph
     >>> gfus = FusionLDigraph([geco,gsoc,genv])
     >>> gfus.strongComponents()

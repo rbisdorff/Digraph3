@@ -2037,8 +2037,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="gp">...</span>
 </pre></div>
 </td></tr></table></div>
-<p>Variable triangular modes (0.3, 0.5 or 0.7 of the span of the measure scale) for each objective result in different performance status for each decision action with respect to the three objectives. For instance, action <em>a01</em> will probably show <em>good</em> performances wrt the <em>economical</em>  and environmental aspects, and <em>weak</em> performances wrt the <em>societal</em> aspect.</p>
-<p>For testing purposes a special constructor is provided for extracting partial performance tableaux from a given tableau instance. In this example we may construct the partial performance tableaux corresponding to each objective:</p>
+<p>Variable triangular modes (0.3, 0.5 or 0.7 of the span of the measure scale) for each objective result in different performance status for each decision action with respect to the three objectives. Action <em>a01</em> , for instance, will probably show <em>good</em> performances wrt the <em>economical</em>  and environmental aspects, and <em>weak</em> performances wrt the <em>societal</em> aspect.</p>
+<p>For testing purposes we provifde a special <a class="reference internal" href="techDoc.html#perfTabs.PartialPerformanceTableau" title="perfTabs.PartialPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PartialPerformanceTableau</span></code></a> class for extracting a <strong>partial performance tableau</strong> from a given tableau instance. In the example blow, we construct the partial performance tableaux corresponding to each on of the three decision objectives:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -2054,7 +2054,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go">                          t.objectives[&#39;Env&#39;][&#39;criteria&#39;])</span>
 </pre></div>
 </td></tr></table></div>
-<p>One may now compute partial bipolar outranking digraphs for each objective as follows:</p>
+<p>One may this compute partial a bipolar outranking digraph for each individual objective:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">geco</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">teco</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gsoc</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">tsoc</span><span class="p">)</span>
@@ -2062,7 +2062,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </div>
 <dl class="docutils">
-<dt>These three partial digraphs model the preferences represented in each of the partial performance tableaux. One may aggregate these three preferential with an epistemic fusion operator:</dt>
+<dt>The three partial digraphs: <em>geco</em>, <em>gsoc</em> and <em>genv</em>,  hence model the preferences represented in each one of the partial performance tableaux. And, we may aggregate these three outranking digraphs with an epistemic fusion operator:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
