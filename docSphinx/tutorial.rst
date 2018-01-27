@@ -1069,7 +1069,7 @@ We provide the :py:class:`randomPerfTabs.RandomCBPerformanceTableau` class for g
       Threshold veto : 73.19 + 0.00x ; percentile:  0.952
     ...
 
-In this example we notice the three types of decision actions, as well as two types of criteria with either an ordinal or a cardinal performance measuring scale. In the latter case, by default about 5% of the random performance differences will be below the *indifference* and 10% below the *preference* discriminating threshold. About 5% will be considered as *considerably large*. More statistics about the generated performances is available as follows:
+In the example above, we may notice the three types of decision actions (Lines 10-19), as well as the two types (Lines 22-25) of criteria with either an **ordinal** or a **cardinal** performance measuring scale. In the latter case, by default about 5% of the random performance differences will be below the **indifference** and 10% below the **preference discriminating threshold**. About 5% will be considered as **considerably large**. More statistics about the generated performances is available as follows:
 
     >>> t.showStatistics()
     *-------- Performance tableau summary statistics -------*
@@ -1139,7 +1139,7 @@ Generating three objectives tableaux
 
 We provide the :py:class:`randomPerfTabs.Random3ObjectivesPerformaceTableau` class for generating random performance tableaux concerning three preferential decision objectives which take respectively into account *economical*, *societal* as well as *environmental* aspects.
 
-Each decision action is qualified randomly as performing *weak* (-), *fair* (~) or *good* (+) on each of the three objectives. 
+Each decision action is qualified randomly as performing **weak** (-), **fair** (~) or **good** (+) on each of the three objectives. 
 
 Generator directives are the following:
     * numberOfActions = 20 (default),
@@ -1156,7 +1156,7 @@ Generator directives are the following:
 
 .. note::
 
-    If the mode of the *triangular* distribution is set to '*variable*',
+    If the mode of the **triangular** distribution is set to '*variable*',
     three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span are set at random for each coalition and action.
     
 .. warning::
@@ -1192,7 +1192,7 @@ Generator directives are the following:
        g12 criterion of objective Env 20
       Total weight: 80.00 (4 criteria)
 
-In this example we notice that 5 equisignificant criteria (g06, g07, g09, g10, g13) evaluate for instance the performance of the decision actions from the societal point of view. 4 equisignificant criteria do the same from the economical, respectively the environmental point of view. The 'equiobjectives' directive results hence in a balanced total weight (80.00) for each decision objective. 
+In the example code above, we notice that 5 *equisignificant* criteria (g06, g07, g09, g10, g13) evaluate for instance the performance of the decision actions from the **societal** point of view. 4 *equisignificant* criteria do the same from the **economical**, respectively the **environmental** point of view. The *equiobjectives* directive results hence in a balanced total weight (80.00) for each decision objective. 
 
     >>> t.showActions()
     key:  a01
