@@ -6621,7 +6621,7 @@ if __name__ == "__main__":
     nbrActions=1000
     nbrCrit = 7
     seed = 105
-    tp = RandomPerformanceTableau(numberOfActions=nbrActions,\
+    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
                    numberOfCriteria=nbrCrit,seed=seed)
     from performanceQuantiles import PerformanceQuantiles
     pq = PerformanceQuantiles(tp,\

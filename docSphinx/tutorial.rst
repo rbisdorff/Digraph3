@@ -2145,8 +2145,8 @@ Both objectives are equi-important; the weight (6) of the cost criterion balance
 
 New  decision actions with random multiple criteria performance vectors from the same random performance tableau model may now be generated with ad hoc random performance generators. We provide for experimental purpose, in the :py:mod:`randomPerfTabs` module, three such generators: one for the standard :py:class:`randomPerfTabs.RandomPerformanceTableau` model, one the for the two objectives :py:class:`randomPerfTabs.RandomCBPerformanceTableau` Cost-Benefit model, and one for the :py:class:`randomPerfTabs.Random3ObjectivesPerformanceTableau` model with three objectives concerning respectively  economic, environmental or social aspects. Given a set of 10 new decision actions with generated random performance evaluations, the so far estimated historical quantile limits may be updated as follows: 
     >>> # generate 100 new random decision actions
-    >>> from randomPerfTabs import RandomCBPerformanceGenerator
-    >>> rpg = RandomCBPerformanceGenerator(tp,seed=seed)
+    >>> from randomPerfTabs import RandomPerformanceGenerator
+    >>> rpg = RandomPerformanceGenerator(tp,seed=seed)
     >>> newActions = rpg.randomActions(100)
     >>> # Updating the quartile norms shown above 
     >>> pq.updateQuantiles(newActions,historySize=None)
