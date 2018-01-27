@@ -409,6 +409,34 @@
                 <span class="n">newEvaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">newKey</span><span class="p">]</span> <span class="o">=</span> <span class="n">newAction</span><span class="p">[</span><span class="s1">&#39;evaluation&#39;</span><span class="p">][</span><span class="n">g</span><span class="p">]</span>
         <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;actions&#39;</span><span class="p">:</span> <span class="n">newActions</span><span class="p">,</span> <span class="s1">&#39;evaluation&#39;</span><span class="p">:</span> <span class="n">newEvaluation</span><span class="p">}</span></div>
 
+<div class="viewcode-block" id="RandomPerformanceGenerator.randomPerformanceTableau"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomPerformanceGenerator.randomPerformanceTableau">[docs]</a>    <span class="k">def</span> <span class="nf">randomPerformanceTableau</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nbrOfRandomActions</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates nbrOfRandomActions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span> <span class="nn">perfTabs</span> <span class="k">import</span> <span class="n">EmptyPerformanceTableau</span>
+        <span class="n">newPerfTab</span> <span class="o">=</span> <span class="n">EmptyPerformanceTableau</span><span class="p">()</span>
+        <span class="n">newPerfTab</span><span class="o">.</span><span class="n">__class__</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">__class__</span>
+        <span class="n">newPerfTab</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">newPerfTab</span><span class="o">.</span><span class="n">objectives</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">objectives</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">newPerfTab</span><span class="o">.</span><span class="n">objectives</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">criteria</span> 
+        <span class="n">newPerfTab</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">criteria</span>
+        <span class="n">newActions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="n">newEvaluation</span> <span class="o">=</span><span class="p">{}</span>
+        <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
+            <span class="n">newEvaluation</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nbrOfRandomActions</span><span class="p">):</span>
+            <span class="n">newAction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_randomAction</span><span class="p">()</span>
+            <span class="n">newKey</span> <span class="o">=</span> <span class="n">newAction</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;key&#39;</span><span class="p">)</span>
+            <span class="n">newActions</span><span class="p">[</span><span class="n">newKey</span><span class="p">]</span> <span class="o">=</span> <span class="n">newAction</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
+                <span class="n">newEvaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">newKey</span><span class="p">]</span> <span class="o">=</span> <span class="n">newAction</span><span class="p">[</span><span class="s1">&#39;evaluation&#39;</span><span class="p">][</span><span class="n">g</span><span class="p">]</span>
+        <span class="n">newPerfTab</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">newActions</span>
+        <span class="n">newPerfTab</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">newEvaluation</span>
+        <span class="k">return</span> <span class="n">newPerfTab</span></div>
       
     <span class="k">def</span> <span class="nf">_randomAction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -2911,7 +2939,7 @@
 <span class="c1">##    print(&#39;*---------- test percentiles of variable thresholds --------*&#39;) </span>
 <span class="c1">####    t = RandomCoalitionsPerformanceTableau(weightDistribution=&#39;equicoalitions&#39;,</span>
 <span class="c1">####                                           seed=100)</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">OrdinalScales</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">OrdinalScales</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                            <span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
     <span class="n">t</span><span class="o">.</span><span class="n">showAll</span><span class="p">()</span>
     <span class="n">rag1</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceGenerator</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">actionNamePrefix</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
@@ -2921,6 +2949,7 @@
     <span class="n">rag2</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceGenerator</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">actionNamePrefix</span><span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">110</span><span class="p">)</span>
     <span class="n">rag2</span><span class="o">.</span><span class="n">randomUpdate</span><span class="p">(</span><span class="n">nbrOfRandomActions</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">rag2</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">ntp</span> <span class="o">=</span> <span class="n">rag2</span><span class="o">.</span><span class="n">randomPerformanceTableau</span><span class="p">(</span><span class="n">nbrOfRandomActions</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
     <span class="c1">#t.showHTMLPerformanceHeatmap(ndigits=0,Correlations=True)</span>
     <span class="c1"># t.updateDiscriminationThresholds(Comments=True,Debug=True)</span>
     

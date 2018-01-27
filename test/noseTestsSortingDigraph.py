@@ -166,6 +166,10 @@ def testNormedQuantilesRatingDigraph():
     nrq.showSorting()
     nrq.showActionsSortingResult()
     nrq.showQuantilesSorting()
+    newActions = tpg.randomPerformanceTableau(1000)
+    pq.updateQuantiles(newActions,historySize=0)
+    newActions = tpg.randomActions(10)
+    pq.updateQuantiles(newActions,historySize=None)
     nrq = NormedQuantilesRatingDigraph(pq,newActions,quantiles='heptiles',
                                        WithSorting=True,
                                        PrefThresholds=False,Debug=False)

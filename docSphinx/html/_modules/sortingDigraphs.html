@@ -5422,10 +5422,18 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;normedRatingDigraph&#39;</span>
         <span class="c1"># import the actions to rate</span>
         <span class="k">if</span> <span class="n">newData</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">newActions</span> <span class="o">=</span> <span class="n">newData</span><span class="p">[</span><span class="s1">&#39;actions&#39;</span><span class="p">]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">newData</span><span class="p">[</span><span class="s1">&#39;evaluation&#39;</span><span class="p">]</span>
+            <span class="k">try</span><span class="p">:</span>  <span class="c1"># randomActions format {&#39;actions&#39;: .., &#39;evaluation&#39;:..}</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">newActions</span> <span class="o">=</span> <span class="n">newData</span><span class="p">[</span><span class="s1">&#39;actions&#39;</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">newData</span><span class="p">[</span><span class="s1">&#39;evaluation&#39;</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">try</span><span class="p">:</span>  <span class="c1">#  randomPerformanceTableau format</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">newActions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">newData</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">newData</span><span class="o">.</span><span class="n">evaluation</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error !!!: valid new Actions or valid new PerformanceTableau required&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error !!!: a non empty set of newly observed decision actions is required !!&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error !!!: newly observed decision actions with performance evaluations are required !!&#39;</span><span class="p">)</span>
             <span class="k">return</span>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;dataInput&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">tt</span>
@@ -6673,7 +6681,7 @@
     <span class="c1"># generate 100 new random decision actions</span>
     <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceGenerator</span>
     <span class="n">rpg</span> <span class="o">=</span> <span class="n">RandomCBPerformanceGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
-    <span class="n">newActions</span> <span class="o">=</span> <span class="n">rpg</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">newActions</span> <span class="o">=</span> <span class="n">rpg</span><span class="o">.</span><span class="n">randomPerformanceTableau</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
     <span class="c1"># Updating the quartile norms shown above</span>
     <span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 <span class="c1">##    pq.showHTMLLimitingQuantiles(Transposed=True)</span>

@@ -5372,10 +5372,18 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         self.name = 'normedRatingDigraph'
         # import the actions to rate
         if newData != None:
-            self.newActions = newData['actions']
-            self.evaluation = newData['evaluation']
+            try:  # randomActions format {'actions': .., 'evaluation':..}
+                self.newActions = newData['actions']
+                self.evaluation = newData['evaluation']
+            except:
+                pass
+            try:  #  randomPerformanceTableau format
+                self.newActions = deepcopy(newData.actions)
+                self.evaluation = deepcopy(newData.evaluation)
+            except:
+                print('Error !!!: valid new Actions or valid new PerformanceTableau required')
         else:
-            print('Error !!!: a non empty set of newly observed decision actions is required !!')
+            print('Error !!!: newly observed decision actions with performance evaluations are required !!')
             return
         
         self.runTimes['dataInput'] = time()-tt
@@ -6623,7 +6631,7 @@ if __name__ == "__main__":
     # generate 100 new random decision actions
     from randomPerfTabs import RandomCBPerformanceGenerator
     rpg = RandomCBPerformanceGenerator(tp,seed=seed)
-    newActions = rpg.randomActions(10)
+    newActions = rpg.randomPerformanceTableau(10)
     # Updating the quartile norms shown above
     pq.updateQuantiles(newActions,historySize=None)
 ##    pq.showHTMLLimitingQuantiles(Transposed=True)

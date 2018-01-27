@@ -359,6 +359,34 @@ class RandomPerformanceGenerator(object):
                 newEvaluation[g][newKey] = newAction['evaluation'][g]
         return {'actions': newActions, 'evaluation': newEvaluation}
 
+    def randomPerformanceTableau(self,nbrOfRandomActions=1):
+        """
+        Generates nbrOfRandomActions.
+        """
+        from collections import OrderedDict
+        from perfTabs import EmptyPerformanceTableau
+        newPerfTab = EmptyPerformanceTableau()
+        newPerfTab.__class__ = self.perfTab.__class__
+        newPerfTab.name = self.perfTab.name
+        try:
+            newPerfTab.objectives = self.perfTab.objectives
+        except:
+            newPerfTab.objectives = OrderedDict()
+        criteria = self.perfTab.criteria 
+        newPerfTab.criteria = criteria
+        newActions = OrderedDict()
+        newEvaluation ={}
+        for g in criteria:
+            newEvaluation[g] = {}
+        for i in range(nbrOfRandomActions):
+            newAction = self._randomAction()
+            newKey = newAction['action'].pop('key')
+            newActions[newKey] = newAction['action']
+            for g in criteria:
+                newEvaluation[g][newKey] = newAction['evaluation'][g]
+        newPerfTab.actions = newActions
+        newPerfTab.evaluation = newEvaluation
+        return newPerfTab
       
     def _randomAction(self,Debug=False):
         """
@@ -2861,7 +2889,7 @@ if __name__ == "__main__":
 ##    print('*---------- test percentiles of variable thresholds --------*') 
 ####    t = RandomCoalitionsPerformanceTableau(weightDistribution='equicoalitions',
 ####                                           seed=100)
-    t = Random3ObjectivesPerformanceTableau(numberOfActions=10,OrdinalScales=True,
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=10,OrdinalScales=False,
                                            seed=100)
     t.showAll()
     rag1 = Random3ObjectivesPerformanceGenerator(t,actionNamePrefix='b',seed=100)
@@ -2871,6 +2899,7 @@ if __name__ == "__main__":
     rag2 = Random3ObjectivesPerformanceGenerator(t,actionNamePrefix='c',seed=110)
     rag2.randomUpdate(nbrOfRandomActions=5)
     print(rag2.randomActions(2))
+    ntp = rag2.randomPerformanceTableau(nbrOfRandomActions=10)
     #t.showHTMLPerformanceHeatmap(ndigits=0,Correlations=True)
     # t.updateDiscriminationThresholds(Comments=True,Debug=True)
     

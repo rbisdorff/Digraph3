@@ -4294,6 +4294,19 @@ The performance evaluations of each decision alternative on each criterion are g
         return restoredEvaluation
 
 #-----------------------
+class EmptyPerformanceTableau(PerformanceTableau):
+    """
+    Template for PerformanceTableau objects.
+    """
+    def __init__(self):
+        from collections import OrderedDict
+        self.name = 'PerfTab-template'
+        self.objectives = OrderedDict()
+        self.criteria = OrderedDict()
+        self.actions = OrderedDict()
+        self.evaluation = {}
+
+#-----------------------
 class PartialPerformanceTableau(PerformanceTableau):
     """
     Constructor for partial performance tableaux concerning a subset of actions and/or criteria and/or objectives

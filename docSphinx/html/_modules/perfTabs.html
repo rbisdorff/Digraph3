@@ -4344,6 +4344,19 @@
         <span class="k">return</span> <span class="n">restoredEvaluation</span></div></div>
 
 <span class="c1">#-----------------------</span>
+<div class="viewcode-block" id="EmptyPerformanceTableau"><a class="viewcode-back" href="../techDoc.html#perfTabs.EmptyPerformanceTableau">[docs]</a><span class="k">class</span> <span class="nc">EmptyPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Template for PerformanceTableau objects.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;PerfTab-template&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">objectives</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="p">{}</span></div>
+
+<span class="c1">#-----------------------</span>
 <div class="viewcode-block" id="PartialPerformanceTableau"><a class="viewcode-back" href="../techDoc.html#perfTabs.PartialPerformanceTableau">[docs]</a><span class="k">class</span> <span class="nc">PartialPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Constructor for partial performance tableaux concerning a subset of actions and/or criteria and/or objectives</span>

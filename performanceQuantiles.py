@@ -849,12 +849,18 @@ The number of so far observed evaluations per criteria are the following:
        """
 ##        if t != None:
 ##            self.historySizes = t
-        newActions = newData['actions']
+        try:
+            newActions = newData['actions']
+            newEvaluation = newData['evaluation']
+        except:
+            newActions = newData.actions
+            newEvaluation = newData.evaluation
+            
         for g in self.criteria:
             gNewValues = []
-            newEvaluation = newData['evaluation']
+            gNewEvaluation = newEvaluation[g]
             for x in newActions:
-                gNewValues.append(newEvaluation[g][x])
+                gNewValues.append(gNewEvaluation[x])
             self._updateCriterionQuantiles(g,gNewValues,historySize=historySize)
 ##        self.T += len(newActions)  
     

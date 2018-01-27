@@ -899,12 +899,18 @@
 <span class="sd">       &quot;&quot;&quot;</span>
 <span class="c1">##        if t != None:</span>
 <span class="c1">##            self.historySizes = t</span>
-        <span class="n">newActions</span> <span class="o">=</span> <span class="n">newData</span><span class="p">[</span><span class="s1">&#39;actions&#39;</span><span class="p">]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">newActions</span> <span class="o">=</span> <span class="n">newData</span><span class="p">[</span><span class="s1">&#39;actions&#39;</span><span class="p">]</span>
+            <span class="n">newEvaluation</span> <span class="o">=</span> <span class="n">newData</span><span class="p">[</span><span class="s1">&#39;evaluation&#39;</span><span class="p">]</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">newActions</span> <span class="o">=</span> <span class="n">newData</span><span class="o">.</span><span class="n">actions</span>
+            <span class="n">newEvaluation</span> <span class="o">=</span> <span class="n">newData</span><span class="o">.</span><span class="n">evaluation</span>
+            
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">:</span>
             <span class="n">gNewValues</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="n">newEvaluation</span> <span class="o">=</span> <span class="n">newData</span><span class="p">[</span><span class="s1">&#39;evaluation&#39;</span><span class="p">]</span>
+            <span class="n">gNewEvaluation</span> <span class="o">=</span> <span class="n">newEvaluation</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">newActions</span><span class="p">:</span>
-                <span class="n">gNewValues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newEvaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">])</span>
+                <span class="n">gNewValues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gNewEvaluation</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_updateCriterionQuantiles</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">gNewValues</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="n">historySize</span><span class="p">)</span></div></div>
 <span class="c1">##        self.T += len(newActions)  </span>
     
