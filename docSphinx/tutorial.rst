@@ -2080,6 +2080,9 @@ Rating with learned quantile norms
 	:depth: 2
 	:local:
 
+Introduction
+............	   
+	  
 In this tutorial we address the problem of **rating multiple criteria performances** of a set of potential decision actions with respect to empirical order statistics, ie performance quantiles learned from historical performance data gathered from similar decision actions observed in the past (see [CPSTAT-L5]_).
 
 To illustrate the decision problem we face, consider for a moment that, in a given decision aid study, we observe, for instance in the Table below, the multi-criteria performances of two potential decision actions, named *a1007* and *a1008*, marked on 7 seven **incommensurable** preference criteria: a unique **costs** criterion *c1* (to **minimize**) and 6 **benefit** criteria *b1* to *b6* (to **maximize**). 
