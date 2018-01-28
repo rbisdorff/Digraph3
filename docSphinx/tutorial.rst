@@ -2,9 +2,9 @@
 
 Tutorials of the Digraph3 resources
 ===================================
-:Author: Raymond Bisdorff, University of Luxembourg FSTC/CSC
+:Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg FSTC/CSC
 :Version: Revision: Python 3.6
-:Copyright: `R. Bisdorff <http://leopold-loewenheim.uni.lu/bisdorff/>`_ 2013-2016
+:Copyright: `R. Bisdorff <http://leopold-loewenheim.uni.lu/bisdorff/>`_ 2013-2018
 
 .. contents:: Table of Contents
 	:depth: 1
