@@ -5376,12 +5376,11 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                 self.newActions = newData['actions']
                 self.evaluation = newData['evaluation']
             except:
-                pass
-            try:  #  randomPerformanceTableau format
-                self.newActions = deepcopy(newData.actions)
-                self.evaluation = deepcopy(newData.evaluation)
-            except:
-                print('Error !!!: valid new Actions or valid new PerformanceTableau required')
+                try:  #  randomPerformanceTableau format
+                    self.newActions = deepcopy(newData.actions)
+                    self.evaluation = deepcopy(newData.evaluation)
+                except:
+                    print('Error !!!: valid new Actions or valid new PerformanceTableau required')
         else:
             print('Error !!!: newly observed decision actions with performance evaluations are required !!')
             return

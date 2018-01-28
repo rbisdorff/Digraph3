@@ -334,7 +334,7 @@ class RandomPerformanceGenerator(object):
                             actionNamePrefix=actionNamePrefix,\
                             instanceCounter=instanceCounter,seed=seed)
         elif argPerfTab.__class__ == Random3ObjectivesPerformanceTableau:
-            self.__class__ = Random3ObjectivesPerformaceGenerator
+            self.__class__ = Random3ObjectivesPerformanceGenerator
             return Random3ObjectivesPerformanceGenerator.__init__(self,argPerfTab,\
                             actionNamePrefix=actionNamePrefix,\
                             instanceCounter=instanceCounter,seed=seed)    
@@ -2140,7 +2140,7 @@ class _Random3ObjectivesPerformanceTableau(RandomCoalitionsPerformanceTableau):
             elif 'A+ B+ C+' in self.actions[x]['name']:
                 self.actions[x]['name'] = 'random decision action (Eco+ Soc+ Env+)'
                 self.actions[x]['profile'] ={'Eco': 'good', 'Soc': 'good','Env': 'good'}
-            self.actions[x]['comment'] = 'Random3ObjectivesPerformaceTableau() generated'
+            self.actions[x]['comment'] = 'Random3ObjectivesPerformanceTableau() generated'
 
 ##        criteriaList = [g for g in self.criteria]
 ##        criteriaList.sort()
