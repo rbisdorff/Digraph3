@@ -175,7 +175,7 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
             return
         quantilesFrequencies = []
         for i in range(n+1):
-            freqStr = '%.2f' % (Decimal(str(i)) / Decimal(str(n)))
+            freqStr = '%.6f' % (Decimal(str(i)) / Decimal(str(n)))
             quantilesFrequencies.append(Decimal(freqStr))
         self.name = '%d-tiled_performances' % n
         if Debug:
