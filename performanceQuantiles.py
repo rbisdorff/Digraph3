@@ -313,7 +313,7 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
             html += '<table style="background-color:White;" border="1">'
             html += '<tr bgcolor="#9acd32"><th>criterion</th>'
             for x in quantilesFrequencies:
-                xName = str(x)
+                xName = '%.2f' % x
                 html += '<th bgcolor="#FFF79B">%s</th>' % (xName)
             html += '</tr>'
             for g in criteriaKeys:
@@ -342,7 +342,7 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
                 html += '<th bgcolor="#FFF79B">%s</th>' % (gName)
             html += '</tr>'
             for i in range(nq):
-                xName = str(quantilesFrequencies[i])
+                xName = '%.2f' % quantilesFrequencies[i]
                 html += '<tr><th bgcolor="#FFF79B">%s</th>' % (xName)
                 for g in criteriaKeys:
                     formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
