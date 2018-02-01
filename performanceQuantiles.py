@@ -391,7 +391,6 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
         #self.Debug = True
         from collections import OrderedDict
         # get present state of the quantiles
-        #s = self.state
         p = self.quantilesFrequencies
         np = len(p)
         q = self.limitingQuantiles[g]
@@ -496,7 +495,7 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
                 print('t = %d' % t)
 
             # compute new state by interpolation
-            ns = {p[0]:newq[0]}
+            nstate = {p[0]:newq[0]}
             if self.Debug:
                 print(p)
             np = len(p)
@@ -504,19 +503,17 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
                 x = p[i]
                 if self.Debug:
                     print(x)
-                ns[x] = self._interpolateQuantile(x,newq,newp)
+                nstate[x] = self._interpolateQuantile(x,newq,newp)
             if self.Debug:
-                print(ns)
+                print(nstate)
             
             # store new state
-            state = ns
-            #self.state = state
-            q = [state[x] for x in state]
+            q = [nstate[x] for x in nstate]
             q.sort()
             self.limitingQuantiles[g] = q
             cdf = {}
-            for p in state:
-                cdf[state[p]] = p
+            for p in nstate:
+                cdf[nstate[p]] = p
             self.cdf[g] = cdf
             self.historySizes[g] = t
 

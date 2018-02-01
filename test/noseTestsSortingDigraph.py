@@ -178,5 +178,13 @@ def testNormedQuantilesRatingDigraph():
     nrq.showSorting()
     nrq.showActionsSortingResult()
     nrq.showQuantilesSorting()
+    print(pq.computeQuantileProfile(0.5))
+    pq.save(fileName='testPerfQuant')
+    pq1 = PerformanceQuantiles(filePerfQuant='testPerfQuant')
+    nrq1 = NormedQuantilesRatingDigraph(pq1,newActions,
+                                       WithSorting=False,
+                                       PrefThresholds=False,Debug=False)
+    nrq1.showQuantilesRating()
+
 
 
