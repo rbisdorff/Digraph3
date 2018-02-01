@@ -441,7 +441,6 @@
         <span class="c1">#self.Debug = True</span>
         <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
         <span class="c1"># get present state of the quantiles</span>
-        <span class="c1">#s = self.state</span>
         <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span>
         <span class="n">np</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
         <span class="n">q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
@@ -546,7 +545,7 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;t = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">t</span><span class="p">)</span>
 
             <span class="c1"># compute new state by interpolation</span>
-            <span class="n">ns</span> <span class="o">=</span> <span class="p">{</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">newq</span><span class="p">[</span><span class="mi">0</span><span class="p">]}</span>
+            <span class="n">nstate</span> <span class="o">=</span> <span class="p">{</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">newq</span><span class="p">[</span><span class="mi">0</span><span class="p">]}</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
             <span class="n">np</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
@@ -554,19 +553,17 @@
                 <span class="n">x</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-                <span class="n">ns</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolateQuantile</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">newq</span><span class="p">,</span><span class="n">newp</span><span class="p">)</span>
+                <span class="n">nstate</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolateQuantile</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">newq</span><span class="p">,</span><span class="n">newp</span><span class="p">)</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">ns</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">nstate</span><span class="p">)</span>
             
             <span class="c1"># store new state</span>
-            <span class="n">state</span> <span class="o">=</span> <span class="n">ns</span>
-            <span class="c1">#self.state = state</span>
-            <span class="n">q</span> <span class="o">=</span> <span class="p">[</span><span class="n">state</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">state</span><span class="p">]</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="p">[</span><span class="n">nstate</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nstate</span><span class="p">]</span>
             <span class="n">q</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">q</span>
             <span class="n">cdf</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">state</span><span class="p">:</span>
-                <span class="n">cdf</span><span class="p">[</span><span class="n">state</span><span class="p">[</span><span class="n">p</span><span class="p">]]</span> <span class="o">=</span> <span class="n">p</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">nstate</span><span class="p">:</span>
+                <span class="n">cdf</span><span class="p">[</span><span class="n">nstate</span><span class="p">[</span><span class="n">p</span><span class="p">]]</span> <span class="o">=</span> <span class="n">p</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">cdf</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">cdf</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
 
