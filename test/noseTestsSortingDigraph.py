@@ -160,7 +160,7 @@ def testNormedQuantilesRatingDigraph():
     pq.updateQuantiles(newActions,historySize=None)
     nrq = NormedQuantilesRatingDigraph(pq,newActions,
                                        WithSorting=True,
-                                       PrefThresholds=True,Debug=True)
+                                       Debug=True)
     nrq.showQuantilesRating()
     nrq.exportRatingGraphViz(graphType='pdf')
     nrq.showSorting()
@@ -172,7 +172,7 @@ def testNormedQuantilesRatingDigraph():
     pq.updateQuantiles(newActions,historySize=None)
     nrq = NormedQuantilesRatingDigraph(pq,newActions,quantiles='heptiles',
                                        WithSorting=True,
-                                       PrefThresholds=False,Debug=False)
+                                       Debug=False)
     nrq.showQuantilesRating()
     nrq.exportRatingGraphViz(graphType='pdf')
     nrq.showSorting()
@@ -183,7 +183,7 @@ def testNormedQuantilesRatingDigraph():
     pq1 = PerformanceQuantiles(filePerfQuant='testPerfQuant')
     nrq1 = NormedQuantilesRatingDigraph(pq1,newActions,
                                        WithSorting=False,
-                                       PrefThresholds=False,Debug=False)
+                                       Debug=False)
     nrq1.showQuantilesRating()
 
 
