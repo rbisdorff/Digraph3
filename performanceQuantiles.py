@@ -138,7 +138,10 @@ class PerformanceQuantiles(PerformanceTableau):
             cdf = {}
             np = len(self.quantilesFrequencies)
             for g in self.criteria:
-                cdf[g] = OrderedDict([(self.limitingQuantiles[g][i],self.quantilesFrequencies[i]) for i in range(np)])
+                cdf[g] = {}
+                for i in range(np):
+                    cdf[g][self.limitingQuantiles[g][i]] = self.quantilesFrequencies[i]
+                #cdf[g] = OrderedDict([(self.limitingQuantiles[g][i],self.quantilesFrequencies[i]) for i in range(np)])
             self.cdf = cdf
             self.randomActionsGenerator = None
           
@@ -493,7 +496,7 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
                 print('t = %d' % t)
 
             # compute new state by interpolation
-            ns = OrderedDict([(p[0],newq[0])])
+            ns = {p[0]:newq[0]}
             if self.Debug:
                 print(p)
             np = len(p)
@@ -507,10 +510,11 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
             
             # store new state
             state = ns
-            self.state = state
+            #self.state = state
             q = [state[x] for x in state]
             q.sort()
             self.limitingQuantiles[g] = q
+            cdf = {}
             for p in state:
                 cdf[state[p]] = p
             self.cdf[g] = cdf
