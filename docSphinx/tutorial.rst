@@ -2222,8 +2222,8 @@ Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class
        'b2'  |     9        7        8        6        5        7        9        5        2        5  
        'b3'  |    55.0     60.0     89.0     53.0     28.0     80.0     82.0     62.0     59.0     11.0  
        'b4'  |     8        6        9        5        5        5        5        6        3        7  
-       'b5'  |    57.0    30.0     64.0     35.0     30.0     29.0      34.0     51.0     86.0     39.0  
-       'b6'  |     4       4        4        3        2        7         8        4        9        5  
+       'b5'  |    57.0     30.0     64.0     35.0     30.0     29.0     34.0     51.0     86.0     39.0  
+       'b6'  |     4        4        4        3        2        7        8        4        9        5  
 
 The :code:`NormedQuantilesRatingDigraphdigraph` instance's actions dictionary also contains the closed lower limits of the four quartile classes: *m1* = [0.0-0.25[, *m2* = [0.25-0.5[, *m3* =[0.5 - 0.75[, *m4* = [0.75 - 1.0[.
     >>> nqr.showPerformanceTableau(actionsSubset=nqr.profiles)

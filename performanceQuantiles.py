@@ -2,7 +2,7 @@
 """
 Digraph3 collection of python3 modules for Algorithmic Decision Theory applications
 
-Module for incremental outranking digraphs
+Module for incremental performance quantiles computation
 
 Copyright (C) 2016  Raymond Bisdorff
 
