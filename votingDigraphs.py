@@ -280,13 +280,18 @@ class LinearVotingProfile(VotingProfile):
         fo.write( '}\n')
         fo.close()
 
-    def showLinearBallots(self):
+    def showLinearBallots(self,IntegerWeights=True):
         """
         show the linear ballots
         """
+        if IntegerWeights:
+            formStr = '%s(%.0f): \t %s'
+        else:
+            formStr = '%s(%.f): \t %s'
         print('voters(weight)\t candidates rankings')
+        
         for v in self.voters:
-            print('%s(%s): \t %s' % (str(v),str(self.voters[v]['weight']),str(self.linearBallot[v])))
+            print(formStr % (str(v),self.voters[v]['weight'],str(self.linearBallot[v])))
 
 
     def computeRankAnalysis(self):
@@ -916,6 +921,7 @@ class RandomLinearVotingProfile(LinearVotingProfile):
     """
     A specialized class for random linwear voting profiles.
     """
+    from decimal import Decimal
     def __init__(self,numberOfVoters=9,numberOfCandidates=5,seed=None):
         """
         Random profile creation parameters:
@@ -926,7 +932,7 @@ class RandomLinearVotingProfile(LinearVotingProfile):
         voters = OrderedDict()
         for v in votersList:
             voterID = 'v%d' % v
-            voters[voterID] = {'weight':1.0}
+            voters[voterID] = {'weight':Decimal('1')}
         candidatesList = [x for x in range(1,numberOfCandidates + 1)]
         candidates = OrderedDict()
         for c in candidatesList:
@@ -1349,18 +1355,19 @@ if __name__ == "__main__":
 ##    lvp = LinearVotingProfile(numberOfCandidates=5,numberOfVoters=9,seed=1)
 ##    ## lvp = LinearVotingProfile('templinearprofile')
 ##    lvp.save()
-##    lvp1 = LinearVotingProfile('templinearprofile')
-##    lvp1.computeBallot()
-##    ## for x in lvp.voters:
-##    ##    print x, lvp.linearBallot[x]
-##    lvp.showLinearBallots()
+    lvp1 = LinearVotingProfile('templinearprofile')
+    lvp1.computeBallot()
+    ## for x in lvp.voters:
+    ##    print x, lvp.linearBallot[x]
+    lvp1.showLinearBallots(IntegerWeights=True)
+    lvp1.showVoterBallot('v1')
 ##    print(lvp.computeRankAnalysis())
-##    lvp.showRankAnalysisTable(Debug=True)
-##    print(lvp.computeBordaScores())
-##    lvp.save2PerfTab()
-####    t = PerformanceTableau('votingPerfTab')
-####    t.showHTMLPerformanceHeatmap()
-##    lvp.showHTMLVotingHeatmap()
+    lvp1.showRankAnalysisTable(Debug=True)
+    print(lvp1.computeBordaScores())
+    lvp1.save2PerfTab('votingPerfTab')
+    t = PerformanceTableau('votingPerfTab')
+    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0)
+##    lvp1.showHTMLVotingHeatmap()
 ##    
 ##    print(lvp.computeBordaWinners())
 ##    print(lvp.computeUninominalVotes(lvp.candidates,lvp.linearBallot))
@@ -1375,10 +1382,10 @@ if __name__ == "__main__":
 ##    c.recodeValuation(-m,m)
 ##    c.showRelationTable()
 
-    av = ApprovalVotingProfile('approvalInvitation')
-    av.save2PerfTab()
-    t = PerformanceTableau('votingPerfTab')
-    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0)
+##    av = ApprovalVotingProfile('approvalInvitation')
+##    av.save2PerfTab()
+##    t = PerformanceTableau('votingPerfTab')
+##    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0)
     
     
 
