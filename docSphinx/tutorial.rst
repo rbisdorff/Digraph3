@@ -559,11 +559,11 @@ The module provides a :py:class:`votingDigraphs.RandomLinearVotingProfile` class
 Notice that in this example, all voters are considered to be equi-significant. Their linear ballots can be viewed with the ``showLinearBallots`` method:
     >>> v.showLinearBallots()
     voters(weight)	 candidates rankings
-    v1(1.0): 	 ['a2', 'a1', 'a3']
-    v2(1.0): 	 ['a3', 'a1', 'a2']
-    v3(1.0): 	 ['a1', 'a3', 'a2']
-    v4(1.0): 	 ['a1', 'a2', 'a3']
-    v5(1.0): 	 ['a3', 'a1', 'a2']
+    v1(1): 	 ['a2', 'a1', 'a3']
+    v2(1): 	 ['a3', 'a1', 'a2']
+    v3(1): 	 ['a1', 'a3', 'a2']
+    v4(1): 	 ['a1', 'a2', 'a3']
+    v5(1): 	 ['a3', 'a1', 'a2']
     >>> ...
 
 Editing of the linear voting profile may be achieved by storing the data in a file, edit it, and reload it again:
@@ -647,15 +647,15 @@ Cyclic social preferences
 Usually, when aggregating linear ballots, there appear cyclic social preferences. Let us consider for instance the following linear voting profile and construct the corresponding Condorcet digraph:
     >>> v.showLinearBallots()
     voters(weight)	 candidates rankings
-    v1(1.0): 	 ['a1', 'a3', 'a5', 'a2', 'a4']
-    v2(1.0): 	 ['a1', 'a2', 'a4', 'a3', 'a5']
-    v3(1.0): 	 ['a5', 'a2', 'a4', 'a3', 'a1']
-    v4(1.0): 	 ['a3', 'a4', 'a1', 'a5', 'a2']
-    v5(1.0): 	 ['a4', 'a2', 'a3', 'a5', 'a1']
-    v6(1.0): 	 ['a2', 'a4', 'a5', 'a1', 'a3']
-    v7(1.0): 	 ['a5', 'a4', 'a3', 'a1', 'a2']
-    v8(1.0): 	 ['a2', 'a4', 'a5', 'a1', 'a3']
-    v9(1.0): 	 ['a5', 'a3', 'a4', 'a1', 'a2']
+    v1(1): 	 ['a1', 'a3', 'a5', 'a2', 'a4']
+    v2(1): 	 ['a1', 'a2', 'a4', 'a3', 'a5']
+    v3(1): 	 ['a5', 'a2', 'a4', 'a3', 'a1']
+    v4(1): 	 ['a3', 'a4', 'a1', 'a5', 'a2']
+    v5(1): 	 ['a4', 'a2', 'a3', 'a5', 'a1']
+    v6(1): 	 ['a2', 'a4', 'a5', 'a1', 'a3']
+    v7(1): 	 ['a5', 'a4', 'a3', 'a1', 'a2']
+    v8(1): 	 ['a2', 'a4', 'a5', 'a1', 'a3']
+    v9(1): 	 ['a5', 'a3', 'a4', 'a1', 'a2']
     >>> cdg = CondorcetDigraph(v)
     >>> cdg.showRelationTable()
     * ---- Relation Table -----
