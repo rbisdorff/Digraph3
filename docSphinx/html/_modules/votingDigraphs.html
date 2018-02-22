@@ -974,7 +974,6 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A specialized class for random linwear voting profiles.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Random profile creation parameters:</span>
@@ -1124,7 +1123,9 @@
 <span class="sd">    </span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argVotingProfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">approvalVoting</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">coalition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">majorityMargins</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">hasIntegerValuation</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argVotingProfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+                 <span class="n">approvalVoting</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">coalition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+                 <span class="n">majorityMargins</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">hasIntegerValuation</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">argVotingProfile</span><span class="p">,</span> <span class="p">(</span><span class="n">VotingProfile</span><span class="p">,</span><span class="n">ApprovalVotingProfile</span><span class="p">)):</span>
             <span class="n">votingProfile</span> <span class="o">=</span> <span class="n">argVotingProfile</span>

@@ -924,7 +924,6 @@ class RandomLinearVotingProfile(LinearVotingProfile):
     """
     A specialized class for random linwear voting profiles.
     """
-    from decimal import Decimal
     def __init__(self,numberOfVoters=9,numberOfCandidates=5,seed=None):
         """
         Random profile creation parameters:
@@ -1074,7 +1073,9 @@ class CondorcetDigraph(Digraph):
     
     
     """
-    def __init__(self,argVotingProfile=None,approvalVoting=False,coalition=None,majorityMargins=True,hasIntegerValuation=True):
+    def __init__(self,argVotingProfile=None,\
+                 approvalVoting=False,coalition=None,\
+                 majorityMargins=True,hasIntegerValuation=True):
         from copy import copy
         if isinstance(argVotingProfile, (VotingProfile,ApprovalVotingProfile)):
             votingProfile = argVotingProfile
