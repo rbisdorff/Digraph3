@@ -305,6 +305,7 @@ class LinearVotingProfile(VotingProfile):
             ranks[x] = [0 for i in range(n)]
         for v in self.voters:
             for i in range(n):
+                #print(v,i)
                 x = self.linearBallot[v][i]
                 #ranks[x][i] += 1
                 ranks[x][i] += self.voters[v]['weight']
@@ -391,19 +392,21 @@ class LinearVotingProfile(VotingProfile):
         """
         compute the instant runoff winner from a linear voting ballot
         """
-        from copy import copy
+        from copy import deepcopy,copy
         from decimal import Decimal
-        voters = [x for x in self.voters]
+        voters = copy(self.voters)
+        votersList = [x for x in self.voters]
         totalWeight = Decimal("0.0")
-        for v in voters:
-            totalWeight += Decimal('%.3f' % (self.voters[v]['weight']) )
+        for v in votersList:
+            totalWeight += Decimal('%.3f' % (voters[v]['weight']) )
         halfWeight = totalWeight/Decimal("2.0")
         if Comments:
             print('Total number of votes = ', totalWeight)
             print('Half of the Votes = ', halfWeight)
-        candidatesList = [x for x in self.candidates]
+        candidates = copy(self.candidates)
+        candidatesList = [x for x in candidates]
         remainingCandidates = copy(candidatesList)
-        remainingLinearBallot = copy(self.linearBallot)
+        remainingLinearBallot = deepcopy(self.linearBallot)
         stage = 1
         while len(remainingCandidates) > 1:
             uninominalVotes = self.computeUninominalVotes(remainingCandidates,remainingLinearBallot)
@@ -1362,6 +1365,7 @@ if __name__ == "__main__":
     lvp1.showLinearBallots(IntegerWeights=True)
     lvp1.showVoterBallot('v1')
 ##    print(lvp.computeRankAnalysis())
+    lvp1.computeInstantRunoffWinner()
     lvp1.showRankAnalysisTable(Debug=True)
     print(lvp1.computeBordaScores())
     lvp1.save2PerfTab('votingPerfTab')
