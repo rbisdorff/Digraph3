@@ -360,16 +360,29 @@ class LinearVotingProfile(VotingProfile):
         """
         compute Borda scores from the rank analysis
         """
+        from collections import defaultdict, OrderedDict
         ranks = self.computeRankAnalysis()
-        BordaScores={}
+        scores = []
         candidatesList = [x for x in self.candidates]
         n = len(candidatesList)
         for x in candidatesList:
-            BordaScores[x] = 0
+            BordaScore_x = 0
             for i in range(n):
-                BordaScores[x] += (i+1)*ranks[x][i]
+                BordaScore_x += (i+1)*ranks[x][i]
+            scores.append((BordaScore_x,x))
+        scores.sort()
+        BordaScores = OrderedDict([(x[1],x[0]) for x in scores])
         return BordaScores
 
+    def showBordaRanking(self):
+        """
+        show Borda ranking in increasing order of the Borda score
+        """
+        BordaScores = self.computeBordaScores()
+        print('Borda ranking of the candidates')
+        for x in BordaScores:
+            print(x,': ',BordaScores[x])
+                  
     def computeBordaWinners(self):
         """
         compute the Borda winner from the Borda scores, ie the list of
@@ -1367,8 +1380,9 @@ if __name__ == "__main__":
     lvp1.showVoterBallot('v1')
 ##    print(lvp.computeRankAnalysis())
     lvp1.computeInstantRunoffWinner()
-    lvp1.showRankAnalysisTable(Debug=True)
-    print(lvp1.computeBordaScores())
+    lvp1.showRankAnalysisTable(Debug=False)
+    lvp1.showBordaRanking()
+    lvp1.computeBordaWinners()
     lvp1.save2PerfTab('votingPerfTab')
     t = PerformanceTableau('votingPerfTab')
     t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0)
