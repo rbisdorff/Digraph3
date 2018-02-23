@@ -403,6 +403,23 @@ The performance evaluations of each decision alternative on each criterion are g
     >>> ...
 
     """
+
+    def __repr__(self):
+        """
+        Default presentation method for PerformanceTableau instances.
+        """
+        reprString = '*------- PerformanceTableau instance description ------*\n'
+        reprString += 'Instance class   : %s\n' % self.__class__.__name__
+        reprString += 'Instance name    : %s\n' % self.name
+        reprString += '# Actions        : %d\n' % len(self.actions)
+        try:
+            reprString += '# Objectives     : %d\n' % len(self.objectives)
+        except:
+            pass       
+        reprString += '# Criteria       : %d\n' % len(self.criteria)
+        reprString += 'Attributes       : %s\n' % list(self.__dict__.keys())     
+        return reprString
+
     def __init__(self,filePerfTab=None,isEmpty=False):
         from decimal import Decimal
         from collections import OrderedDict
