@@ -56,6 +56,19 @@ class VotingProfile(object):
     	}
 
     """
+    def __repr__(self):
+        """
+        Default description for VotingProfile instances.
+        """
+        reprString = '*------- VotingProfile instance description ------*\n'
+        reprString += 'Instance class   : %s\n' % self.__class__.__name__
+        reprString += 'Instance name    : %s\n' % self.name
+        reprString += '# Candidates     : %d\n' % len(self.candidates)
+        reprString += '# Voters         : %d\n' % len(self.voters)
+        reprString += 'Attributes       : %s\n' % list(self.__dict__.keys())
+       
+        return reprString
+    
     def __init__(self,fileVotingProfile=None,seed=None):
 
         if fileVotingProfile != None:
