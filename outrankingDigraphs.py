@@ -3736,16 +3736,23 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         reprString += '# Criteria       : %d\n' % len(self.criteria)
         reprString += 'Size             : %d\n' % self.computeSize()
         reprString += 'Determinateness  : %.3f\n' % self.computeDeterminateness()
-        reprString += '----  Constructor run times (in sec.) ----\n'
         try:
-            reprString += '#Threads         : %d\n' % self.nbrThreads
+            val1 = self.runTimes['totalTime']
+            val2 = self.runTimes['dataInput']
+            val3 = self.runTimes['computeRelation']
+            val4 = self.runTimes['gammaSets']
+            reprString += '----  Constructor run times (in sec.) ----\n'
+            reprString += 'Total time       : %.5f\n' % val1
+            reprString += 'Data input       : %.5f\n' % val2
+            reprString += 'Compute relation : %.5f\n' % val3
+            reprString += 'Gamma sets       : %.5f\n' % val4
+            try:
+                reprString += '#Threads         : %d\n' % self.nbrThreads
+            except:
+                self.nbrThreads = 1
+                reprString += '#Threads         : %d\n' % self.nbrThreads
         except:
-            self.nbrThreads = 1
-            reprString += '#Threads         : %d\n' % self.nbrThreads
-        reprString += 'Total time       : %.5f\n' % self.runTimes['totalTime']
-        reprString += 'Data input       : %.5f\n' % self.runTimes['dataInput']
-        reprString += 'Compute relation : %.5f\n' % self.runTimes['computeRelation']
-        reprString += 'Gamma sets       : %.5f\n' % self.runTimes['gammaSets']
+            pass
         return reprString
     
     def __init__(self,argPerfTab=None,\
