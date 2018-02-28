@@ -7041,6 +7041,16 @@ renders always a, potentially empty, list</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="votingDigraphs.CondorcetDigraph.computeCopelandRanking">
+<code class="descname">computeCopelandRanking</code><span class="sig-paren">(</span><em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#CondorcetDigraph.computeCopelandRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.CondorcetDigraph.computeCopelandRanking" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a ranking of the actions following Copeland&#8217;s rule.
+Score(x_i) = Sum_j{ [[x_i &gt; x_j]] - [[x_j &gt; x_i]]}, where
+[[x &gt; y]] = 1 if x&gt;y is true, otherwise 0.</p>
+<p>The alternatives are ranked in decreasing order of their Scores.</p>
+<p>In case of a tie, we use a lexicographic rule applied to the identifiers.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="votingDigraphs.CondorcetDigraph.computeKohlerRanking">
 <code class="descname">computeKohlerRanking</code><span class="sig-paren">(</span><em>linearOrdered=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#CondorcetDigraph.computeKohlerRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.CondorcetDigraph.computeKohlerRanking" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders a ranking of the actions following Kohler&#8217;s rule.</p>

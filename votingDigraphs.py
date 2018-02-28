@@ -1284,6 +1284,40 @@ class CondorcetDigraph(Digraph):
             relation[x][x] = Med
         return relation
 
+    def computeCopelandRanking(self,Debug=False):
+        """
+        Renders a ranking of the actions following Copeland's rule.
+        Score(x_i) = Sum_j{ [[x_i > x_j]] - [[x_j > x_i]]}, where
+        [[x > y]] = 1 if x>y is true, otherwise 0.
+
+        The alternatives are ranked in decreasing order of their Scores.
+
+        In case of a tie, we use a lexicographic rule applied to the identifiers.
+        """
+        from collections import OrderedDict
+        from operator import itemgetter
+        Med = self.valuationdomain['med']
+        actions = [x for x in self.actions]
+        relation = self.relation
+        scores = OrderedDict()
+        for x in actions:
+            scores[x] = 0
+        for x in actions:
+            for y in actions:
+                if relation[x][y] > Med:
+                    scores[x] += 1
+                if relation[y][x] > Med:
+                    scores[x] -= 1
+        scoresRanking = [(x,scores[x]) for x in scores]
+        scoresRanking = sorted(scoresRanking,key = itemgetter(1),reverse=True)
+        ranking = [x[0] for x in scoresRanking]
+        if Debug:
+            print(actions)
+            print(scores)
+            print(scoresRanking)
+            print(ranking)
+        return ranking
+
     def computeKohlerRanking(self,linearOrdered=True,Debug=False):
         """
         Renders a ranking of the actions following Kohler's rule.
@@ -1399,6 +1433,9 @@ if __name__ == "__main__":
     lvp1.save2PerfTab('votingPerfTab')
     t = PerformanceTableau('votingPerfTab')
     t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0)
+    c = CondorcetDigraph(lvp1)
+    print(c.computeCopelandRanking(Debug=True))
+    
 ##    lvp1.showHTMLVotingHeatmap()
 ##    
 ##    print(lvp.computeBordaWinners())

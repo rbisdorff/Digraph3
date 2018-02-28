@@ -1334,6 +1334,40 @@
             <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
         <span class="k">return</span> <span class="n">relation</span></div>
 
+<div class="viewcode-block" id="CondorcetDigraph.computeCopelandRanking"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.CondorcetDigraph.computeCopelandRanking">[docs]</a>    <span class="k">def</span> <span class="nf">computeCopelandRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders a ranking of the actions following Copeland&#39;s rule.</span>
+<span class="sd">        Score(x_i) = Sum_j{ [[x_i &gt; x_j]] - [[x_j &gt; x_i]]}, where</span>
+<span class="sd">        [[x &gt; y]] = 1 if x&gt;y is true, otherwise 0.</span>
+
+<span class="sd">        The alternatives are ranked in decreasing order of their Scores.</span>
+
+<span class="sd">        In case of a tie, we use a lexicographic rule applied to the identifiers.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">itemgetter</span>
+        <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
+        <span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+            <span class="n">scores</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
+                    <span class="n">scores</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
+                    <span class="n">scores</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="n">scoresRanking</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span><span class="n">scores</span><span class="p">[</span><span class="n">x</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">scores</span><span class="p">]</span>
+        <span class="n">scoresRanking</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">scoresRanking</span><span class="p">,</span><span class="n">key</span> <span class="o">=</span> <span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">ranking</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">scoresRanking</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">scoresRanking</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">ranking</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ranking</span></div>
+
 <div class="viewcode-block" id="CondorcetDigraph.computeKohlerRanking"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.CondorcetDigraph.computeKohlerRanking">[docs]</a>    <span class="k">def</span> <span class="nf">computeKohlerRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">linearOrdered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a ranking of the actions following Kohler&#39;s rule.</span>
@@ -1449,6 +1483,9 @@
     <span class="n">lvp1</span><span class="o">.</span><span class="n">save2PerfTab</span><span class="p">(</span><span class="s1">&#39;votingPerfTab&#39;</span><span class="p">)</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">PerformanceTableau</span><span class="p">(</span><span class="s1">&#39;votingPerfTab&#39;</span><span class="p">)</span>
     <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">CondorcetDigraph</span><span class="p">(</span><span class="n">lvp1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">(</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    
 <span class="c1">##    lvp1.showHTMLVotingHeatmap()</span>
 <span class="c1">##    </span>
 <span class="c1">##    print(lvp.computeBordaWinners())</span>
