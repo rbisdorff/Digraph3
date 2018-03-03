@@ -138,6 +138,7 @@ def testLinearVotingBallots():
     from outrankingDigraphs import BipolarOutrankingDigraph
     g = BipolarOutrankingDigraph(t)
     lvp.showHTMLVotingHeatmap()
+    c.computeCopelandRanking(Debug=True)
     
 def testInstantRunoffVoting():
     print('*==> test instant runoff voting ---*')

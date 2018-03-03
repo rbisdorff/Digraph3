@@ -1105,11 +1105,11 @@ class CopelandOrder(LinearOrder):
         tnf = time()
         copelandScores = []
         for x in actions:
-            copelandScore = len(gamma[x][1]) - len(gamma[x][0])
+            copelandScore = len(gamma[x][0]) - len(gamma[x][1])
             copelandScores.append((copelandScore,x))
         # reversed sorting with keeping the actions initial ordering
         # in case of ties
-        copelandScores.sort()
+        copelandScores.sort(reverse=True)
         self.copelandScores = copelandScores
 
         copelandRanking = [x[1] for x in copelandScores]
