@@ -297,15 +297,18 @@ class LinearVotingProfile(VotingProfile):
         """
         show the linear ballots
         """
+        sumWeights = Decimal('0')
         if IntegerWeights:
             formStr = '%s(%.0f): \t %s'
         else:
             formStr = '%s(%.f): \t %s'
-        print('voters(weight)\t candidates rankings')
+        print(' voters \t       marginal     ')
+        print('(weight)\t candidates rankings')
         
         for v in self.voters:
+            sumWeights += self.voters[v]['weight']
             print(formStr % (str(v),self.voters[v]['weight'],str(self.linearBallot[v])))
-
+        print('# voters: ',str(sumWeights))
 
     def computeRankAnalysis(self):
         """
