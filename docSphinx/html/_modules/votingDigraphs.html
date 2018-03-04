@@ -52,7 +52,7 @@
 <span class="c1">#</span>
 <span class="c1"># Python 3 implementation of voting digraphs</span>
 <span class="c1"># Refactored from revision 1.549 of the digraphs module</span>
-<span class="c1"># Current revision $Revision: 2478 $</span>
+<span class="c1"># Current revision $Revision: 2482 $</span>
 <span class="c1"># Copyright (C) 2011  Raymond Bisdorff</span>
 <span class="c1">#</span>
 <span class="c1">#    This program is free software; you can redistribute it and/or modify</span>
@@ -281,6 +281,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">voters</span> <span class="o">=</span> <span class="n">randv</span><span class="o">.</span><span class="n">voters</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">linearBallot</span> <span class="o">=</span> <span class="n">randv</span><span class="o">.</span><span class="n">linearBallot</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ballot</span> <span class="o">=</span> <span class="n">randv</span><span class="o">.</span><span class="n">ballot</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sumWeights</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sumWeights</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
 
 <div class="viewcode-block" id="LinearVotingProfile.computeBallot"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.LinearVotingProfile.computeBallot">[docs]</a>    <span class="k">def</span> <span class="nf">computeBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -347,15 +350,18 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        show the linear ballots</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+<span class="c1">##        sumWeights = Decimal(&#39;0&#39;)</span>
         <span class="k">if</span> <span class="n">IntegerWeights</span><span class="p">:</span>
-            <span class="n">formStr</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">(</span><span class="si">%.0f</span><span class="s1">): </span><span class="se">\t</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span>
+            <span class="n">formStr</span> <span class="o">=</span> <span class="s1">&#39; </span><span class="si">%s</span><span class="s1">(</span><span class="si">%.0f</span><span class="s1">):</span><span class="se">\t</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">formStr</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">(%.f): </span><span class="se">\t</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;voters(weight)</span><span class="se">\t</span><span class="s1"> candidates rankings&#39;</span><span class="p">)</span>
+            <span class="n">formStr</span> <span class="o">=</span> <span class="s1">&#39; </span><span class="si">%s</span><span class="s1">(%.f):</span><span class="se">\t</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; voters </span><span class="se">\t</span><span class="s1">      marginal     &#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;(weight)</span><span class="se">\t</span><span class="s1"> candidates rankings&#39;</span><span class="p">)</span>
         
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">formStr</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">voters</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">],</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">linearBallot</span><span class="p">[</span><span class="n">v</span><span class="p">])))</span></div>
-
+<span class="c1">##            sumWeights += self.voters[v][&#39;weight&#39;]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">formStr</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">voters</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">],</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">linearBallot</span><span class="p">[</span><span class="n">v</span><span class="p">])))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;# voters: &#39;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sumWeights</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="LinearVotingProfile.computeRankAnalysis"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.LinearVotingProfile.computeRankAnalysis">[docs]</a>    <span class="k">def</span> <span class="nf">computeRankAnalysis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -386,9 +392,9 @@
 <span class="sd">        to format the decimal precision of the numerical output.</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*----  Rank analysis tableau -----*&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*----  Borda rank analysis tableau -----*&#39;</span><span class="p">)</span>
         <span class="n">bordaScores</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeBordaScores</span><span class="p">()</span> 
-        <span class="n">candidatesList</span> <span class="o">=</span> <span class="p">[(</span><span class="n">bordaScores</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidates</span><span class="p">]</span>
+        <span class="n">candidatesList</span> <span class="o">=</span> <span class="p">[(</span><span class="n">bordaScores</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;BordaScore&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidates</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">Sorted</span><span class="p">:</span>
             <span class="n">candidatesList</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
@@ -404,19 +410,20 @@
             <span class="nb">print</span><span class="p">(</span><span class="n">bordaScores</span><span class="p">)</span>
             
         <span class="c1">## print table</span>
-
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; ranks | &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; candi- | alternative-to-rank       |      Borda&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; dates  | &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rankIndex</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;   &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;| Borda score&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-------|-----------------------------------------&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;| score  average&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-------|-------------------------------------------------&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">candidatesList</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  </span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1"> |&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">rankIndex</span><span class="p">:</span>
                 <span class="n">formatString</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%%</span><span class="s1"> .</span><span class="si">%d</span><span class="s1">f &#39;</span> <span class="o">%</span> <span class="n">ndigits</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">formatString</span> <span class="o">%</span> <span class="p">(</span><span class="n">ranks</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]][(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)]),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;  &#39;</span><span class="p">)</span>
-            <span class="n">formatString</span> <span class="o">=</span> <span class="s1">&#39; |  </span><span class="si">%%</span><span class="s1"> .</span><span class="si">%d</span><span class="s1">f&#39;</span> <span class="o">%</span> <span class="n">ndigits</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">formatString</span> <span class="o">%</span> <span class="p">(</span><span class="n">bordaScores</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span> <span class="p">)</span>      </div>
+            <span class="n">formatString</span> <span class="o">=</span> <span class="s1">&#39; | </span><span class="si">%%</span><span class="s1"> .</span><span class="si">%d</span><span class="s1">f     </span><span class="si">%%</span><span class="s1">.2f&#39;</span> <span class="o">%</span> <span class="n">ndigits</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">formatString</span> <span class="o">%</span> <span class="p">(</span><span class="n">bordaScores</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;BordaScore&#39;</span><span class="p">],</span>\
+                                  <span class="n">bordaScores</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;averageBordaScore&#39;</span><span class="p">]))</span>      </div>
 
 
 <div class="viewcode-block" id="LinearVotingProfile.computeBordaScores"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.LinearVotingProfile.computeBordaScores">[docs]</a>    <span class="k">def</span> <span class="nf">computeBordaScores</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -432,9 +439,10 @@
             <span class="n">BordaScore_x</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
                 <span class="n">BordaScore_x</span> <span class="o">+=</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">ranks</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
-            <span class="n">scores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">BordaScore_x</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
+            <span class="n">averageBordaScore_x</span> <span class="o">=</span> <span class="n">BordaScore_x</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">sumWeights</span>
+            <span class="n">scores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">BordaScore_x</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">averageBordaScore_x</span><span class="p">))</span>
         <span class="n">scores</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-        <span class="n">BordaScores</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">scores</span><span class="p">])</span>
+        <span class="n">BordaScores</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],{</span><span class="s1">&#39;BordaScore&#39;</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;averageBordaScore&#39;</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]})</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">scores</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">BordaScores</span></div>
 
 <div class="viewcode-block" id="LinearVotingProfile.showBordaRanking"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.LinearVotingProfile.showBordaRanking">[docs]</a>    <span class="k">def</span> <span class="nf">showBordaRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -459,9 +467,9 @@
         <span class="n">BordaMinimum</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">m</span>
         <span class="n">candidatesList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidates</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">candidatesList</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">BordaMinimum</span> <span class="o">&gt;</span> <span class="n">BordaScores</span><span class="p">[</span><span class="n">x</span><span class="p">]:</span>
-                <span class="n">BordaMinimum</span> <span class="o">=</span> <span class="n">BordaScores</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
-        <span class="n">winners</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">BordaScores</span> <span class="k">if</span> <span class="n">BordaScores</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="n">BordaMinimum</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">BordaMinimum</span> <span class="o">&gt;</span> <span class="n">BordaScores</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;BordaScore&#39;</span><span class="p">]:</span>
+                <span class="n">BordaMinimum</span> <span class="o">=</span> <span class="n">BordaScores</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;BordaScore&#39;</span><span class="p">]</span>
+        <span class="n">winners</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">BordaScores</span> <span class="k">if</span> <span class="n">BordaScores</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;BordaScore&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">BordaMinimum</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">winners</span></div>
 
 <div class="viewcode-block" id="LinearVotingProfile.computeInstantRunoffWinner"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.LinearVotingProfile.computeInstantRunoffWinner">[docs]</a>    <span class="k">def</span> <span class="nf">computeInstantRunoffWinner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -1188,6 +1196,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
 
+
 <div class="viewcode-block" id="CondorcetDigraph.constructApprovalBallotRelation"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.CondorcetDigraph.constructApprovalBallotRelation">[docs]</a>    <span class="k">def</span> <span class="nf">constructApprovalBallotRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">hasIntegerValuation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the votes differences between candidates</span>
@@ -1277,6 +1286,17 @@
                         <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">/=</span> <span class="n">Max</span>
         <span class="k">return</span> <span class="n">relation</span></div>
 
+<div class="viewcode-block" id="CondorcetDigraph.showMajorityMargins"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.CondorcetDigraph.showMajorityMargins">[docs]</a>    <span class="k">def</span> <span class="nf">showMajorityMargins</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Wrapper for the</span>
+<span class="sd">        Digraph.showRelationTable(Sorted=True, IntegerValues=False,</span>
+<span class="sd">        actionsSubset=None, relation=None, ndigits=2,</span>
+<span class="sd">        ReflexiveTerms=True)</span>
+
+<span class="sd">        See the :py:meth:`digraphs.Digraph.showRelationTable` description.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Digraph</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">args</span><span class="p">)</span></div>
+        
 <div class="viewcode-block" id="CondorcetDigraph.computeCondorcetWinner"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.CondorcetDigraph.computeCondorcetWinner">[docs]</a>    <span class="k">def</span> <span class="nf">computeCondorcetWinner</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        compute the Condorcet winner(s)</span>
@@ -1439,7 +1459,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;****************************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* Python voting digraphs module                    *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2478 $                                   *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2482 $                                   *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* Copyright (C) 2006-2007 University of Luxembourg *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* The module comes with ABSOLUTELY NO WARRANTY     *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* to the extent permitted by the applicable law.   *&#39;</span><span class="p">)</span>
@@ -1514,7 +1534,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. September 2008               *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2478 $                   *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2482 $                   *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>
