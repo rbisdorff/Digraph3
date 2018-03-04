@@ -231,6 +231,9 @@ class LinearVotingProfile(VotingProfile):
             self.voters = randv.voters
             self.linearBallot = randv.linearBallot
             self.ballot = randv.ballot
+        self.sumWeights = Decimal('0')
+        for v in self.voters:
+            self.sumWeights += self.voters[v]['weight']
 
     def computeBallot(self):
         """
@@ -297,18 +300,18 @@ class LinearVotingProfile(VotingProfile):
         """
         show the linear ballots
         """
-        sumWeights = Decimal('0')
+##        sumWeights = Decimal('0')
         if IntegerWeights:
-            formStr = '%s(%.0f): \t %s'
+            formStr = ' %s(%.0f):\t %s'
         else:
-            formStr = '%s(%.f): \t %s'
-        print(' voters \t       marginal     ')
+            formStr = ' %s(%.f):\t %s'
+        print(' voters \t      marginal     ')
         print('(weight)\t candidates rankings')
         
         for v in self.voters:
-            sumWeights += self.voters[v]['weight']
+##            sumWeights += self.voters[v]['weight']
             print(formStr % (str(v),self.voters[v]['weight'],str(self.linearBallot[v])))
-        print('# voters: ',str(sumWeights))
+        print('# voters: ',str(self.sumWeights))
 
     def computeRankAnalysis(self):
         """
@@ -339,9 +342,9 @@ class LinearVotingProfile(VotingProfile):
         to format the decimal precision of the numerical output.
         
         """
-        print('*----  Rank analysis tableau -----*')
+        print('*----  Borda rank analysis tableau -----*')
         bordaScores = self.computeBordaScores() 
-        candidatesList = [(bordaScores[x],x) for x in self.candidates]
+        candidatesList = [(bordaScores[x]['BordaScore'],x) for x in self.candidates]
         if Sorted:
             candidatesList.sort()
         if Debug:
@@ -357,19 +360,20 @@ class LinearVotingProfile(VotingProfile):
             print(bordaScores)
             
         ## print table
-
-        print(' ranks | ', end=' ')
+        print(' candi- | alternative-to-rank       |      Borda')
+        print(' dates  | ', end=' ')
         for x in rankIndex:
             print( str(x) + '   ', end=' ')
-        print('| Borda score')
-        print('-------|-----------------------------------------')
+        print('| score  average')
+        print('-------|-------------------------------------------------')
         for c in candidatesList:
             print('  \''+str(c[1])+'\' |', end=' ')
             for i in rankIndex:
                 formatString = '%% .%df ' % ndigits
                 print(formatString % (ranks[c[1]][(i-1)]), end='  ')
-            formatString = ' |  %% .%df' % ndigits
-            print(formatString % (bordaScores[c[1]]) )      
+            formatString = ' | %% .%df     %%.2f' % ndigits
+            print(formatString % (bordaScores[c[1]]['BordaScore'],\
+                                  bordaScores[c[1]]['averageBordaScore']))      
 
 
     def computeBordaScores(self):
@@ -385,9 +389,10 @@ class LinearVotingProfile(VotingProfile):
             BordaScore_x = 0
             for i in range(n):
                 BordaScore_x += (i+1)*ranks[x][i]
-            scores.append((BordaScore_x,x))
+            averageBordaScore_x = BordaScore_x/self.sumWeights
+            scores.append((BordaScore_x,x,averageBordaScore_x))
         scores.sort()
-        BordaScores = OrderedDict([(x[1],x[0]) for x in scores])
+        BordaScores = OrderedDict([(x[1],{'BordaScore':x[0],'averageBordaScore':x[2]}) for x in scores])
         return BordaScores
 
     def showBordaRanking(self):
@@ -412,9 +417,9 @@ class LinearVotingProfile(VotingProfile):
         BordaMinimum = n * m
         candidatesList = [x for x in self.candidates]
         for x in candidatesList:
-            if BordaMinimum > BordaScores[x]:
-                BordaMinimum = BordaScores[x]
-        winners = [x for x in BordaScores if BordaScores[x] == BordaMinimum]
+            if BordaMinimum > BordaScores[x]['BordaScore']:
+                BordaMinimum = BordaScores[x]['BordaScore']
+        winners = [x for x in BordaScores if BordaScores[x]['BordaScore'] == BordaMinimum]
         return winners
 
     def computeInstantRunoffWinner(self,Comments=False):
@@ -1141,6 +1146,7 @@ class CondorcetDigraph(Digraph):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
+
     def constructApprovalBallotRelation(self,hasIntegerValuation=False):
         """
         Renders the votes differences between candidates
@@ -1230,6 +1236,17 @@ class CondorcetDigraph(Digraph):
                         relation[x][y] /= Max
         return relation
 
+    def showMajorityMargins(self,**args):
+        """
+        Wrapper for the
+        Digraph.showRelationTable(Sorted=True, IntegerValues=False,
+        actionsSubset=None, relation=None, ndigits=2,
+        ReflexiveTerms=True)
+
+        See the :py:meth:`digraphs.Digraph.showRelationTable` description.
+        """
+        Digraph.showRelationTable(self,**args)
+        
     def computeCondorcetWinner(self):
         """
         compute the Condorcet winner(s)

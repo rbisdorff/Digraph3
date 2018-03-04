@@ -3495,9 +3495,9 @@ class Digraph(object):
 
         for x in actionsList:
             print("'"+x[0]+"'\t ", end=' ')
-        print('\n-----|------------------------------------------------------------')
+        print('\n------|-------------------------------------------')
         for x in actionsList:
-            print("'"+x[0]+"' | ", end=' ')
+            print(" '"+x[0]+"' | ", end=' ')
             for y in actionsList:
                 if x != y:
                     if hasIntegerValuation:
@@ -3515,9 +3515,7 @@ class Digraph(object):
                     else:  
                         formatString = ' - \t'
                         print(formatString, end=' ')
-                    
-            print()
-        print('\n')
+            print('')
         if hasIntegerValuation:
             print('Valuation domain: [%d;%+d]'% (self.valuationdomain['min'],
                                                  self.valuationdomain['max']))
