@@ -325,9 +325,12 @@ class LinearVotingProfile(VotingProfile):
         for v in self.voters:
             for i in range(n):
                 #print(v,i)
-                x = self.linearBallot[v][i]
-                #ranks[x][i] += 1
-                ranks[x][i] += self.voters[v]['weight']
+                try:
+                    x = self.linearBallot[v][i]
+                    #ranks[x][i] += 1
+                    ranks[x][i] += self.voters[v]['weight']
+                except:
+                    pass
         #print ranks
         return ranks
 
@@ -466,7 +469,10 @@ class LinearVotingProfile(VotingProfile):
                             print('    candidate to remove = ', x)
                         remainingCandidates.remove(x)
                         for v in voters:
-                            remainingLinearBallot[v].remove(x)
+                            try:
+                                remainingLinearBallot[v].remove(x)
+                            except:
+                                pass
                 if Comments:
                     print('    remaining candidates = ', remainingCandidates)
                     #print '    remaining ballots    = ', remainingLinearBallot
@@ -522,7 +528,10 @@ class LinearVotingProfile(VotingProfile):
                 if Decimal:
                     #fo.write('\'' + str(x) + '\':Decimal("' + str(evaluation[g][x]) + '"),\n')
                     evaluationString = '\'%%s\':Decimal("%%.%df"),\n' % (valueDigits)
-                    xval = nc - self.linearBallot[g].index(x)
+                    try:
+                        xval = nc - self.linearBallot[g].index(x)
+                    except:
+                        xval = -999
                     fo.write(evaluationString % (x,Decimal(str(xval))))
                 else:
                     fo.write('\'' + str(x) + '\':' + str(evaluation[g][x]) + ',\n')
@@ -560,7 +569,7 @@ class LinearVotingProfile(VotingProfile):
                               SparseModel=SparseModel, minimalComponentSize=minimalComponentSize, \
                               RankingRule=RankingRule, quantiles=quantiles, strategy=strategy, \
                               ndigits=ndigits, colorLevels=colorLevels, \
-                              pageTitle='Voting Heatmap', \
+                              pageTitle=pageTitle, \
                               Correlations=True, Threading=Threading, nbrOfCPUs=nbrOfCPUs, Debug=Debug)
     
 
@@ -1436,9 +1445,9 @@ if __name__ == "__main__":
     ## for x in arrowRaynaudRanking:
     ##     print '%s: %d (%.2f)' % (x[1], x[0], aar[x[1]]['majorityMargin'])
 
-##    lvp = LinearVotingProfile(numberOfCandidates=5,numberOfVoters=9,seed=1)
+    lvp = LinearVotingProfile(numberOfCandidates=5,numberOfVoters=9,seed=1)
 ##    ## lvp = LinearVotingProfile('templinearprofile')
-##    lvp.save()
+    lvp.save()
     lvp1 = LinearVotingProfile('templinearprofile')
     lvp1.computeBallot()
     ## for x in lvp.voters:

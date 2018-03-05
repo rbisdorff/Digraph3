@@ -375,9 +375,12 @@
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
                 <span class="c1">#print(v,i)</span>
-                <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linearBallot</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
-                <span class="c1">#ranks[x][i] += 1</span>
-                <span class="n">ranks</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linearBallot</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+                    <span class="c1">#ranks[x][i] += 1</span>
+                    <span class="n">ranks</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="k">pass</span>
         <span class="c1">#print ranks</span>
         <span class="k">return</span> <span class="n">ranks</span></div>
 
@@ -516,7 +519,10 @@
                             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    candidate to remove = &#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
                         <span class="n">remainingCandidates</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
                         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">voters</span><span class="p">:</span>
-                            <span class="n">remainingLinearBallot</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                            <span class="k">try</span><span class="p">:</span>
+                                <span class="n">remainingLinearBallot</span><span class="p">[</span><span class="n">v</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                            <span class="k">except</span><span class="p">:</span>
+                                <span class="k">pass</span>
                 <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    remaining candidates = &#39;</span><span class="p">,</span> <span class="n">remainingCandidates</span><span class="p">)</span>
                     <span class="c1">#print &#39;    remaining ballots    = &#39;, remainingLinearBallot</span>
@@ -572,7 +578,10 @@
                 <span class="k">if</span> <span class="n">Decimal</span><span class="p">:</span>
                     <span class="c1">#fo.write(&#39;\&#39;&#39; + str(x) + &#39;\&#39;:Decimal(&quot;&#39; + str(evaluation[g][x]) + &#39;&quot;),\n&#39;)</span>
                     <span class="n">evaluationString</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\&#39;</span><span class="si">%%</span><span class="s1">s</span><span class="se">\&#39;</span><span class="s1">:Decimal(&quot;</span><span class="si">%%</span><span class="s1">.</span><span class="si">%d</span><span class="s1">f&quot;),</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">valueDigits</span><span class="p">)</span>
-                    <span class="n">xval</span> <span class="o">=</span> <span class="n">nc</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">linearBallot</span><span class="p">[</span><span class="n">g</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">xval</span> <span class="o">=</span> <span class="n">nc</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">linearBallot</span><span class="p">[</span><span class="n">g</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                    <span class="k">except</span><span class="p">:</span>
+                        <span class="n">xval</span> <span class="o">=</span> <span class="o">-</span><span class="mi">999</span>
                     <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">evaluationString</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">xval</span><span class="p">))))</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">:&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;,</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -610,7 +619,7 @@
                               <span class="n">SparseModel</span><span class="o">=</span><span class="n">SparseModel</span><span class="p">,</span> <span class="n">minimalComponentSize</span><span class="o">=</span><span class="n">minimalComponentSize</span><span class="p">,</span> \
                               <span class="n">RankingRule</span><span class="o">=</span><span class="n">RankingRule</span><span class="p">,</span> <span class="n">quantiles</span><span class="o">=</span><span class="n">quantiles</span><span class="p">,</span> <span class="n">strategy</span><span class="o">=</span><span class="n">strategy</span><span class="p">,</span> \
                               <span class="n">ndigits</span><span class="o">=</span><span class="n">ndigits</span><span class="p">,</span> <span class="n">colorLevels</span><span class="o">=</span><span class="n">colorLevels</span><span class="p">,</span> \
-                              <span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Voting Heatmap&#39;</span><span class="p">,</span> \
+                              <span class="n">pageTitle</span><span class="o">=</span><span class="n">pageTitle</span><span class="p">,</span> \
                               <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span> <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span></div>
     
 
@@ -1486,9 +1495,9 @@
     <span class="c1">## for x in arrowRaynaudRanking:</span>
     <span class="c1">##     print &#39;%s: %d (%.2f)&#39; % (x[1], x[0], aar[x[1]][&#39;majorityMargin&#39;])</span>
 
-<span class="c1">##    lvp = LinearVotingProfile(numberOfCandidates=5,numberOfVoters=9,seed=1)</span>
+    <span class="n">lvp</span> <span class="o">=</span> <span class="n">LinearVotingProfile</span><span class="p">(</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="c1">##    ## lvp = LinearVotingProfile(&#39;templinearprofile&#39;)</span>
-<span class="c1">##    lvp.save()</span>
+    <span class="n">lvp</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
     <span class="n">lvp1</span> <span class="o">=</span> <span class="n">LinearVotingProfile</span><span class="p">(</span><span class="s1">&#39;templinearprofile&#39;</span><span class="p">)</span>
     <span class="n">lvp1</span><span class="o">.</span><span class="n">computeBallot</span><span class="p">()</span>
     <span class="c1">## for x in lvp.voters:</span>
