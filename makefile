@@ -6,8 +6,7 @@ PYTHON=python3
 NOSETESTS=nosetests3
 
 readme:
-		echo -n " Digraph3 python3 modules' installer \n (c) R Bisdorff 2013-2014 University of Luxembourg\n Usage: \n ..> make install # installs in Python3, Python3.3 and Python3.4 (Linux, Mac OS)\n ..> make tests # runs the nose tests\n ..> make verbosetests # runs the verbose nose tests\n ..> make pTests # runs all available nose tests with GNU parallel\n\n Technical documentation available here:\n http://leopold-loewenheim.uni.lu/Digraph3/docSphinx/html/index.html \n"
-
+		echo -n " Digraph3 python3 modules' installer \n (c) R Bisdorff 2013-2014 University of Luxembourg\n Usage: \n ..> make install # installs in Python3, Python3.3 and Python3.4 (Linux, Mac OS)\n ..> make tests # runs the nose tests\n ..> make verbosetests # runs the verbose nose tests\n ..> make pTests # runs all available nose tests with GNU parallel\n\n Technical documentation available here:\n http://digraph3.readthedocs.io/en/latest/ or here:\n http://leopold-loewenheim.uni.lu/docDigraph3/ \n"
 sphinx:
 		(cd docSphinx; \
 		sphinx-build -E . html/ )
@@ -20,7 +19,7 @@ pydocs:
 		cp perfTabs.py pyDoc/
 		cp performanceQuantiles.py pyDoc/
 		cp sortingDigraphs.py pyDoc/
-		cp votingDigraphs.py pyDoc/
+		cp votingProfiles.py pyDoc/
 		cp linearOrders.py pyDoc/
 		cp weakOrders.py pyDoc/
 		cp graphs.py pyDoc/
@@ -34,7 +33,7 @@ pydocs:
 		(cd pyDoc; pydoc3 -w ./)
 
 pTests:
-		parallel --gnu cp {}.py test/ ::: arithmetics digraphsTools digraphs outrankingDigraphs perfTabs performanceQuantiles sortingDigraphs votingDigraphs linearOrders weakOrders graphs randomNumbers randomDigraphs randomPerfTabs bigOutrankingDigraphs sparseOutrankingDigraphs xmcda iqagent
+		parallel --gnu cp {}.py test/ ::: arithmetics digraphsTools digraphs outrankingDigraphs perfTabs performanceQuantiles sortingDigraphs votingProfiles linearOrders weakOrders graphs randomNumbers randomDigraphs randomPerfTabs bigOutrankingDigraphs sparseOutrankingDigraphs xmcda iqagent
 		(cd test; parallel --gnu -k ${NOSETESTS} -v ::: noseTests*.py )
 
 tests:
@@ -45,7 +44,7 @@ tests:
 		cp perfTabs.py test/
 		cp performanceQuantiles.py test/
 		cp sortingDigraphs.py test/
-		cp votingDigraphs.py test/
+		cp votingProfiles.py test/
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/
@@ -80,7 +79,7 @@ verboseTests:
 		cp perfTabs.py test/
 		cp performanceQuantiles.py test/
 		cp sortingDigraphs.py test/
-		cp votingDigraphs.py test/
+		cp votingProfiles.py test/
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/
@@ -113,7 +112,7 @@ digraphsTests:
 		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
-		cp votingDigraphs.py test/
+		cp votingProfiles.py test/
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/
@@ -133,7 +132,7 @@ verboseDigraphsTests:
 		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
-		cp votingDigraphs.py test/
+		cp votingProfiles.py test/
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/
@@ -151,7 +150,7 @@ sparseOutrankingDigraphsTests:
 		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
-		cp votingDigraphs.py test/
+		cp votingProfiles.py test/
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/
@@ -170,7 +169,7 @@ verboseSparseOutrankingDigraphsTests:
 		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
-		cp votingDigraphs.py test/
+		cp votingProfiles.py test/
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/
@@ -189,7 +188,7 @@ bigOutrankingDigraphsTests:
 		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
-		cp votingDigraphs.py test/
+		cp votingProfiles.py test/
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/
@@ -208,7 +207,7 @@ verboseBigOutrankingDigraphsTests:
 		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
-		cp votingDigraphs.py test/
+		cp votingProfiles.py test/
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/
@@ -227,7 +226,7 @@ graphsTests:
 		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
-		cp votingDigraphs.py test/
+		cp votingProfiles.py test/
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/		
@@ -247,7 +246,7 @@ verboseGraphsTests:
 		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
-		cp votingDigraphs.py test/
+		cp votingProfiles.py test/
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/
@@ -267,7 +266,7 @@ perfTabsTests:
 		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
-		cp votingDigraphs.py test/
+		cp votingProfiles.py test/
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/
@@ -288,7 +287,7 @@ randomPerfTabsTests:
 		cp randomPerfTabs.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
-		cp votingDigraphs.py test/
+		cp votingProfiles.py test/
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/
@@ -308,7 +307,7 @@ verbosePerfTabsTests:
 		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
-		cp votingDigraphs.py test/
+		cp votingProfiles.py test/
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/
@@ -329,7 +328,7 @@ verboseRandomPerfTabsTests:
 		cp randomPerfTabs.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
-		cp votingDigraphs.py test/
+		cp votingProfiles.py test/
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/
@@ -348,7 +347,7 @@ outrankingDigraphsTests:
 		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
-		cp votingDigraphs.py test/
+		cp votingProfiles.py test/
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/
@@ -368,7 +367,7 @@ verboseOutrankingDigraphsTests:
 		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
-		cp votingDigraphs.py test/
+		cp votingProfiles.py test/
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/
@@ -388,7 +387,7 @@ sortingDigraphsTests:
 		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
-		cp votingDigraphs.py test/
+		cp votingProfiles.py test/
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/
@@ -408,7 +407,7 @@ verboseSortingDigraphsTests:
 		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
-		cp votingDigraphs.py test/
+		cp votingProfiles.py test/
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/
@@ -421,14 +420,14 @@ verboseSortingDigraphsTests:
 		cp iqagent.py test/
 		(cd test; ${NOSETESTS} -vs noseTestsSortingDigraph.py)
 
-votingDigraphsTests:
+votingProfilesTests:
 		cp digraphsTools.py test/
 		cp digraphs.py test/
 		cp perfTabs.py test/
 		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
-		cp votingDigraphs.py test/
+		cp votingProfiles.py test/
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/
@@ -438,16 +437,16 @@ votingDigraphsTests:
 		cp sparseOutrankingDigraphs.py test/
 		cp xmcda.py test/
 		cp iqagent.py test/
-		(cd test; ${NOSETESTS} -v noseTestsVotingDigraph.py)
+		(cd test; ${NOSETESTS} -v noseTestsVotingProfile.py)
 
-verboseVotingDigraphsTests:
+verboseVotingProfilesTests:
 		cp digraphsTools.py test/
 		cp digraphs.py test/
 		cp perfTabs.py test/
 		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
-		cp votingDigraphs.py test/
+		cp votingProfiles.py test/
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/
@@ -458,7 +457,7 @@ verboseVotingDigraphsTests:
 		cp sparseOutrankingDigraphs.py test/
 		cp xmcda.py test/
 		cp iqagent.py test/
-		(cd test; ${NOSETESTS} -vs noseTestsVotingDigraph.py)
+		(cd test; ${NOSETESTS} -vs noseTestsVotingProfile.py)
 
 linearOrdersTests:
 		cp digraphsTools.py test/
@@ -467,7 +466,7 @@ linearOrdersTests:
 		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
-		cp votingDigraphs.py test/
+		cp votingProfiles.py test/
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/
@@ -487,7 +486,7 @@ verboseLinearOrdersTests:
 		cp performanceQuantiles.py test/
 		cp outrankingDigraphs.py test/
 		cp sortingDigraphs.py test/
-		cp votingDigraphs.py test/
+		cp votingProfiles.py test/
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/
@@ -504,7 +503,7 @@ weakOrdersTests:
 		cp perfTabs.py test/
 		cp performanceQuantiles.py test/
 		cp sortingDigraphs.py test/
-		cp votingDigraphs.py test/
+		cp votingProfiles.py test/
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/
@@ -524,7 +523,7 @@ verboseWeakOrdersTests:
 		cp perfTabs.py test/
 		cp performanceQuantiles.py test/
 		cp sortingDigraphs.py test/
-		cp votingDigraphs.py test/
+		cp votingProfiles.py test/
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/
@@ -544,7 +543,7 @@ randomDigraphsTests:
 		cp perfTabs.py test/
 		cp performanceQuantiles.py test/
 		cp sortingDigraphs.py test/
-		cp votingDigraphs.py test/
+		cp votingProfiles.py test/
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/
@@ -562,7 +561,7 @@ verboseRandomDigraphsTests:
 		cp perfTabs.py test/
 		cp performanceQuantiles.py test/
 		cp sortingDigraphs.py test/
-		cp votingDigraphs.py test/
+		cp votingProfiles.py test/
 		cp linearOrders.py test/
 		cp weakOrders.py test/
 		cp graphs.py test/
@@ -596,7 +595,7 @@ verboseArithmeticsTests:
 
 install:
 		sudo ${PYTHON} setup.py install
-#		sudo python3.3 setup.py install
+		sudo python3 setup.py install
 		sudo python3.5 setup.py install
 		sudo python3.6 setup.py install
 

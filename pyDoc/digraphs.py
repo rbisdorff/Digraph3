@@ -1,4 +1,5 @@
 #!/Usr/bin/env python3
+
 """
 Python3+ implementation of digraphs
 
@@ -18,6 +19,7 @@ You should have received a copy of the GNU General Public License along
 with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 """
+
 #######################
 
 __version__ = "Branch: 3.5 $"
@@ -494,6 +496,7 @@ class _XMLDigraphHandler(ContentHandler):
 #----------Digraph classes -----------------
 
 class Digraph(object):
+    
     """
     Genuine root class of all Digraph3 modules.
     See `tutorial working with the digraphs module <http://leopold-loewenheim.uni.lu/docDigraph3/tutorial.html#digraph-object-structure>`_ 
@@ -532,6 +535,23 @@ class Digraph(object):
         >>>
 
     """
+
+    def __repr__(self):
+        """
+        Default presentation method for Digraph instances.
+        """
+        reprString = '*------- Digraph instance description ------*\n'
+        reprString += 'Instance class   : %s\n' % self.__class__.__name__
+        reprString += 'Instance name    : %s\n' % self.name
+        reprString += 'Digraph Order      : %d\n' % self.order
+        reprString += 'Digraph Size       : %d\n' % self.computeSize()
+        reprString += 'Valuation domain : [%.2f - %.2f]\n'\
+                      % (self.valuationdomain['min'],self.valuationdomain['max'])
+        reprString += 'Determinateness  : %.3f\n' % self.computeDeterminateness()
+        reprString += 'Attributes       : %s\n' % list(self.__dict__.keys())
+       
+        return reprString
+    
     def __init__(self,file=None,order=7):
         #import digraphs,sys,copy
         from randomDigraphs import RandomValuationDigraph
@@ -3475,9 +3495,9 @@ class Digraph(object):
 
         for x in actionsList:
             print("'"+x[0]+"'\t ", end=' ')
-        print('\n-----|------------------------------------------------------------')
+        print('\n------|-------------------------------------------')
         for x in actionsList:
-            print("'"+x[0]+"' | ", end=' ')
+            print(" '"+x[0]+"' | ", end=' ')
             for y in actionsList:
                 if x != y:
                     if hasIntegerValuation:
@@ -3495,9 +3515,7 @@ class Digraph(object):
                     else:  
                         formatString = ' - \t'
                         print(formatString, end=' ')
-                    
-            print()
-        print('\n')
+            print('')
         if hasIntegerValuation:
             print('Valuation domain: [%d;%+d]'% (self.valuationdomain['min'],
                                                  self.valuationdomain['max']))
@@ -12702,12 +12720,13 @@ if __name__ == "__main__":
         from digraphsTools import *
         ##dg = RedhefferDigraph(order=113)
         #g = RandomTournament(order=5,seed=1)
-        #g = RandomValuationDigraph(seed=1)
-        from outrankingDigraphs import BipolarOutrankingDigraph
-        from randomPerfTabs import RandomCBPerformanceTableau
-        from linearOrders import CopelandOrder
-        t1 = RandomCBPerformanceTableau(numberOfActions=10,seed=1)
-        g = BipolarOutrankingDigraph(t1,Normalized=False)
+        g = RandomValuationDigraph(seed=1)
+        print(g)
+##        from outrankingDigraphs import BipolarOutrankingDigraph
+##        from randomPerfTabs import RandomCBPerformanceTableau
+##        from linearOrders import CopelandOrder
+##        t1 = RandomCBPerformanceTableau(numberOfActions=10,seed=1)
+##        g = BipolarOutrankingDigraph(t1,Normalized=False)
 ##        g.showRubisBestChoiceRecommendation()
 ##        gcd = ~(-g)
 ##        cocb = BrokenCocsDigraph(gcd,Comments=True)
@@ -12716,7 +12735,7 @@ if __name__ == "__main__":
 ##        gcd.showGoodChoices()
 ##        g = RandomValuationDigraph(order=10,seed=3)
 ##        g.showHTMLPerformanceTableau(ndigits=0)
-        g.showHTMLRelationTable(IntegerValues=True)
+##        g.showHTMLRelationTable(IntegerValues=True)
 ##        g.recodeValuation()
 ##        g.showHTMLRelationTable(IntegerValues=True)
 ##        g.showHTMLPerformanceTableau(ndigits=0)

@@ -938,6 +938,16 @@ class NetFlowsOrder(LinearOrder):
 ##            self.showRelationTable()
 ##            self.showOrdering()
 
+    def showScores(self,direction='descending'):
+        print('Net flow scores in %s order' % direction)
+        print('action \t score')
+        if direction == 'descending':
+            for x in self.netFlows:
+                print('%s \t %.2f' %(x[1],x[0]))
+        else:
+            for x in reversed(self.netFlows):
+                print('%s \t %.2f' %(x[1],x[0]))
+
 class OutFlowsOrder(LinearOrder):
     """
     instantiates the out flows Order from
@@ -1041,6 +1051,16 @@ class OutFlowsOrder(LinearOrder):
 ##            self.showRelationTable()
 ##            self.showOrdering()
 
+    def showScores(self,direction='descending'):
+        print('Out flow scores in %s order' % direction)
+        print('action \t score')
+        if direction == 'descending':
+            for x in self.outFlows:
+                print('%s \t %.2f' %(x[1],x[0]))
+        else:
+            for x in reversed(self.outFlows):
+                print('%s \t %.2f' %(x[1],x[0]))
+
 class CopelandOrder(LinearOrder):
     """
     instantiates the Copèeland Order from
@@ -1085,17 +1105,17 @@ class CopelandOrder(LinearOrder):
         tnf = time()
         copelandScores = []
         for x in actions:
-            copelandScore = len(gamma[x][1]) - len(gamma[x][0])
+            copelandScore = len(gamma[x][0]) - len(gamma[x][1])
             copelandScores.append((copelandScore,x))
         # reversed sorting with keeping the actions initial ordering
         # in case of ties
         copelandScores.sort(reverse=True)
         self.copelandScores = copelandScores
 
-        copelandOrder = [x[1] for x in copelandScores]
-        self.copelandOrder = copelandOrder
-        copelandRanking = list(reversed(copelandOrder))
+        copelandRanking = [x[1] for x in copelandScores]
         self.copelandRanking = copelandRanking
+        copelandOrder = list(reversed(copelandRanking))
+        self.copelandOrder = copelandOrder
         runTimes['copeland'] = time() - tnf
 
         # init relation
@@ -1123,92 +1143,104 @@ class CopelandOrder(LinearOrder):
         runTimes['totalTime'] = time() - tt
         self.runTimes = runTimes
 
-class _CopelandOrder(LinearOrder):
-    """
-    instantiates the net Copeland Order from
-    a given bipolar-valued Digraph instance.
-    The Copeland ordering rule ranks the decision actions in decreasing order of the Copeland score,
-    which is the difference between the crisp outranking degree and crisp outranked degree;
-    actually the net flows orering of the corresponding Condorcet digraph.  
-    """
-    def __init__(self,other,coDual=False,Debug=False):
-        """
-        constructor for generating a linear order
-        from a given other digraph following
-        the Copeland ordering rule
-        """
-        from copy import copy,deepcopy
-        # construct ranked pairs
-        if coDual:
-            otherCoDual = CoDualDigraph(other)
-            relation = otherCoDual.relation
-            #netFlows = otherCoDual.computeSingleCriteriaNetflows()
-            Max = otherCoDual.valuationdomain['max']
-            if Debug:
-                otherCoDual.showRelationTable()
-                print(otherCoDual.valuationdomain)
-                #print netFlows
+    def showScores(self,direction='descending'):
+        print('Copeland scores in %s order' % direction)
+        print('action \t score')
+        if direction == 'descending':
+            for x in self.copelandScores:
+                print('%s \t %.2f' %(x[1],x[0]))
         else:
-            relation = deepcopy(other.relation)
-            #netFlows = other.computeSingleCriteriaNetflows()
-            Max = other.valuationdomain['max']
-            if Debug:
-                other.showRelationTable()
-                print(other.valuationdomain)
-                #print netFlows
-                
-            
-        #actions = list(dict.keys(other.actions))
-        #actions.sort()
-        n = len(other.actions)
-        
-        # instatiates a Digraph template
-        g = IndeterminateDigraph(order=n)
-        g.actions = deepcopy(other.actions)
-        g.valuationdomain = {'min':Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
-        Med = g.valuationdomain['med']
-        Max = g.valuationdomain['max']
-        Min = g.valuationdomain['min']
-        g.relation = {}
-        for x in dict.keys(g.actions):
-            g.relation[x] = {}
-            for y in dict.keys(g.actions):
-                g.relation[x][y] = Med
-
-        copelandScores = {}
-        copelandScoresList = []
-        for x in g.actions:
-            xoutDegree = len(other.gamma[x][0])
-            xinDegree = len(other.gamma[x][1])
-            copelandScores[x] = (xinDegree - xoutDegree) # reversed sort
-            if Debug:
-                print('Copeland score for %s = %d' % (x, copelandScores[x]))
-            copelandScoresList.append((copelandScores[x],x))
-        copelandScoresList.sort()
-        copelandRanking = [x[1] for x in copelandScoresList]
-        self.copelandRanking = copelandRanking
-        if Debug:
-            print(copelandRanking)
-            
-        for i in range(n):
-            for j in range(i+1,n):
-                x = copelandScoresList[i][1]
-                y = copelandScoresList[j][1]
-                g.relation[x][y] = Max
-                g.relation[y][x] = Min
-                
+            for x in reversed(self.copelandScores):
+                print('%s \t %.2f' %(x[1],x[0]))
          
-        self.name = other.name + '_ranked'        
-        self.actions = g.actions
-        self.order = n
-        self.valuationdomain = g.valuationdomain
-        self.relation = g.relation
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
-        self.copelandOrder = list(reversed(list(copelandRanking)))
-        if Debug:
-            self.showRelationTable()
-            self.showOrdering()
+
+
+##class _CopelandOrder(LinearOrder):
+##    """
+##    instantiates the net Copeland Order from
+##    a given bipolar-valued Digraph instance.
+##    The Copeland ordering rule ranks the decision actions in decreasing order of the Copeland score,
+##    which is the difference between the crisp outranking degree and crisp outranked degree;
+##    actually the net flows orering of the corresponding Condorcet digraph.  
+##    """
+##    def __init__(self,other,coDual=False,Debug=False):
+##        """
+##        constructor for generating a linear order
+##        from a given other digraph following
+##        the Copeland ordering rule
+##        """
+##        from copy import copy,deepcopy
+##        # construct ranked pairs
+##        if coDual:
+##            otherCoDual = CoDualDigraph(other)
+##            relation = otherCoDual.relation
+##            #netFlows = otherCoDual.computeSingleCriteriaNetflows()
+##            Max = otherCoDual.valuationdomain['max']
+##            if Debug:
+##                otherCoDual.showRelationTable()
+##                print(otherCoDual.valuationdomain)
+##                #print netFlows
+##        else:
+##            relation = deepcopy(other.relation)
+##            #netFlows = other.computeSingleCriteriaNetflows()
+##            Max = other.valuationdomain['max']
+##            if Debug:
+##                other.showRelationTable()
+##                print(other.valuationdomain)
+##                #print netFlows
+##                
+##            
+##        #actions = list(dict.keys(other.actions))
+##        #actions.sort()
+##        n = len(other.actions)
+##        
+##        # instatiates a Digraph template
+##        g = IndeterminateDigraph(order=n)
+##        g.actions = deepcopy(other.actions)
+##        g.valuationdomain = {'min':Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
+##        Med = g.valuationdomain['med']
+##        Max = g.valuationdomain['max']
+##        Min = g.valuationdomain['min']
+##        g.relation = {}
+##        for x in dict.keys(g.actions):
+##            g.relation[x] = {}
+##            for y in dict.keys(g.actions):
+##                g.relation[x][y] = Med
+##
+##        copelandScores = {}
+##        copelandScoresList = []
+##        for x in g.actions:
+##            xoutDegree = len(other.gamma[x][0])
+##            xinDegree = len(other.gamma[x][1])
+##            copelandScores[x] = (xinDegree - xoutDegree) # reversed sort
+##            if Debug:
+##                print('Copeland score for %s = %d' % (x, copelandScores[x]))
+##            copelandScoresList.append((copelandScores[x],x))
+##        copelandScoresList.sort()
+##        copelandRanking = [x[1] for x in copelandScoresList]
+##        self.copelandRanking = copelandRanking
+##        if Debug:
+##            print(copelandRanking)
+##            
+##        for i in range(n):
+##            for j in range(i+1,n):
+##                x = copelandScoresList[i][1]
+##                y = copelandScoresList[j][1]
+##                g.relation[x][y] = Max
+##                g.relation[y][x] = Min
+##                
+##         
+##        self.name = other.name + '_ranked'        
+##        self.actions = g.actions
+##        self.order = n
+##        self.valuationdomain = g.valuationdomain
+##        self.relation = g.relation
+##        self.gamma = self.gammaSets()
+##        self.notGamma = self.notGammaSets()
+##        self.copelandOrder = list(reversed(list(copelandRanking)))
+##        if Debug:
+##            self.showRelationTable()
+##            self.showOrdering()
 
 ########  instantiates optimal linear orderings
 
@@ -1430,7 +1462,7 @@ if __name__ == "__main__":
 
     Threading = False
     print('*-------- Testing KemenyOrder class -------')
-    t = RandomCBPerformanceTableau(numberOfActions=9,numberOfCriteria=13,seed=2)
+    t = RandomCBPerformanceTableau(numberOfActions=9,numberOfCriteria=13,seed=None)
     #t = PerformanceTableau('testLin')    
     g = BipolarOutrankingDigraph(t,Normalized=True)
     g.showRelationTable()
@@ -1450,7 +1482,7 @@ if __name__ == "__main__":
     print('==>> principal ordering:')
     t0 = time()    
     pri = PrincipalOrder(g)
-    #g.showRelationTable()
+    g.showRelationTable(actionsSubset=pri.principalRanking)
     print(pri.principalRanking)
     print(pri.principalOrder)
     print(g.computeOrdinalCorrelation(pri))
@@ -1459,7 +1491,7 @@ if __name__ == "__main__":
     print('==>> net flows ordering:')
     t0 = time()
     nf = NetFlowsOrder(g)
-    #g.showRelationTable()
+    g.showRelationTable(actionsSubset=nf.netFlowsRanking)
     print(nf.netFlowsRanking)
     print(nf.netFlowsOrder)
     print(g.computeOrdinalCorrelation(nf))
@@ -1468,7 +1500,7 @@ if __name__ == "__main__":
     print('==>> out flows ordering:')
     t0 = time()
     of = OutFlowsOrder(g)
-    #g.showRelationTable()
+    g.showRelationTable(actionsSubset=of.outFlowsRanking)
     print(of.outFlowsRanking)
     print(of.outFlowsOrder)
     print(g.computeOrdinalCorrelation(of))
@@ -1477,7 +1509,7 @@ if __name__ == "__main__":
     print('==>> Copeland ordering:')
     t0 = time()
     cop = CopelandOrder(g)
-    #g.showRelationTable()
+    g.showRelationTable(actionsSubset=cop.copelandRanking)
     print(cop.copelandRanking)
     print(cop.copelandOrder)
     print(g.computeOrdinalCorrelation(cop))
@@ -1486,7 +1518,7 @@ if __name__ == "__main__":
     print('==>> Kohler ordering:')
     t0 = time()
     ko = KohlerOrder(g)
-    #g.showRelationTable()
+    g.showRelationTable(actionsSubset=ko.kohlerRanking)
     print(ko.kohlerRanking)
     print(ko.kohlerOrder)
     print(g.computeOrdinalCorrelation(ko))
@@ -1495,7 +1527,7 @@ if __name__ == "__main__":
     print('==>> ranked pairs ordering:')
     t0 = time()
     rp = RankedPairsOrder(g)
-    #g.showRelationTable()
+    g.showRelationTable(actionsSubset=rp.rankedPairsRanking)
     print(rp.rankedPairsRanking)
     print(rp.rankedPairsOrder)
     print(g.computeOrdinalCorrelation(rp))

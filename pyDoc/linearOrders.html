@@ -93,6 +93,8 @@ Methods defined here:<br>
 from&nbsp;a&nbsp;given&nbsp;other&nbsp;digraph&nbsp;following<br>
 the&nbsp;Copeland&nbsp;ordering&nbsp;rule</tt></dd></dl>
 
+<dl><dt><a name="CopelandOrder-showScores"><strong>showScores</strong></a>(self, direction='descending')</dt></dl>
+
 <hr>
 Methods inherited from <a href="linearOrders.html#LinearOrder">LinearOrder</a>:<br>
 <dl><dt><a name="CopelandOrder-computeKemenyIndex"><strong>computeKemenyIndex</strong></a>(self, other)</dt><dd><tt>renders&nbsp;the&nbsp;Kemeny&nbsp;index&nbsp;of&nbsp;the&nbsp;self.<strong>relation</strong>&nbsp;(linear&nbsp;order)<br>
@@ -130,6 +132,8 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 <dl><dt><a name="CopelandOrder-__invert__"><strong>__invert__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;inverting&nbsp;operator&nbsp;~self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;ConverseDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;DualDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="CopelandOrder-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Default&nbsp;presentation&nbsp;method&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-absirred"><strong>absirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;-irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
@@ -595,7 +599,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="CopelandOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="CopelandOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="CopelandOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'min': -1, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -1123,6 +1127,8 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 
 <dl><dt><a name="ExtendedPrudentDigraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;DualDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
+<dl><dt><a name="ExtendedPrudentDigraph-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Default&nbsp;presentation&nbsp;method&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.</tt></dd></dl>
+
 <dl><dt><a name="ExtendedPrudentDigraph-absirred"><strong>absirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;-irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
 <dl><dt><a name="ExtendedPrudentDigraph-absirredundant"><strong>absirredundant</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;-irredundant&nbsp;choices&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -1591,7 +1597,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="ExtendedPrudentDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="ExtendedPrudentDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="ExtendedPrudentDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'min': -1, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="ExtendedPrudentDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -2145,6 +2151,8 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 
 <dl><dt><a name="KemenyOrder-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;DualDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
+<dl><dt><a name="KemenyOrder-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Default&nbsp;presentation&nbsp;method&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.</tt></dd></dl>
+
 <dl><dt><a name="KemenyOrder-absirred"><strong>absirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;-irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-absirredundant"><strong>absirredundant</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;-irredundant&nbsp;choices&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -2609,7 +2617,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="KemenyOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="KemenyOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="KemenyOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'min': -1, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -3161,6 +3169,8 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 
 <dl><dt><a name="KohlerOrder-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;DualDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
+<dl><dt><a name="KohlerOrder-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Default&nbsp;presentation&nbsp;method&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.</tt></dd></dl>
+
 <dl><dt><a name="KohlerOrder-absirred"><strong>absirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;-irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-absirredundant"><strong>absirredundant</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;-irredundant&nbsp;choices&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -3625,7 +3635,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="KohlerOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="KohlerOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="KohlerOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'min': -1, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -4172,6 +4182,8 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 
 <dl><dt><a name="LinearOrder-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;DualDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
+<dl><dt><a name="LinearOrder-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Default&nbsp;presentation&nbsp;method&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.</tt></dd></dl>
+
 <dl><dt><a name="LinearOrder-absirred"><strong>absirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;-irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-absirredundant"><strong>absirredundant</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;-irredundant&nbsp;choices&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -4636,7 +4648,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="LinearOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="LinearOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="LinearOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'min': -1, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -5150,6 +5162,8 @@ Methods defined here:<br>
 from&nbsp;a&nbsp;given&nbsp;other&nbsp;digraph&nbsp;following<br>
 the&nbsp;net&nbsp;flows&nbsp;ordering&nbsp;rule</tt></dd></dl>
 
+<dl><dt><a name="NetFlowsOrder-showScores"><strong>showScores</strong></a>(self, direction='descending')</dt></dl>
+
 <hr>
 Methods inherited from <a href="linearOrders.html#LinearOrder">LinearOrder</a>:<br>
 <dl><dt><a name="NetFlowsOrder-computeKemenyIndex"><strong>computeKemenyIndex</strong></a>(self, other)</dt><dd><tt>renders&nbsp;the&nbsp;Kemeny&nbsp;index&nbsp;of&nbsp;the&nbsp;self.<strong>relation</strong>&nbsp;(linear&nbsp;order)<br>
@@ -5187,6 +5201,8 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 <dl><dt><a name="NetFlowsOrder-__invert__"><strong>__invert__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;inverting&nbsp;operator&nbsp;~self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;ConverseDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;DualDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="NetFlowsOrder-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Default&nbsp;presentation&nbsp;method&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-absirred"><strong>absirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;-irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
@@ -5652,7 +5668,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="NetFlowsOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="NetFlowsOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="NetFlowsOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'min': -1, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -6166,6 +6182,8 @@ Methods defined here:<br>
 from&nbsp;a&nbsp;given&nbsp;other&nbsp;digraph&nbsp;following<br>
 the&nbsp;out&nbsp;flows&nbsp;ordering&nbsp;rule</tt></dd></dl>
 
+<dl><dt><a name="OutFlowsOrder-showScores"><strong>showScores</strong></a>(self, direction='descending')</dt></dl>
+
 <hr>
 Methods inherited from <a href="linearOrders.html#LinearOrder">LinearOrder</a>:<br>
 <dl><dt><a name="OutFlowsOrder-computeKemenyIndex"><strong>computeKemenyIndex</strong></a>(self, other)</dt><dd><tt>renders&nbsp;the&nbsp;Kemeny&nbsp;index&nbsp;of&nbsp;the&nbsp;self.<strong>relation</strong>&nbsp;(linear&nbsp;order)<br>
@@ -6203,6 +6221,8 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 <dl><dt><a name="OutFlowsOrder-__invert__"><strong>__invert__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;inverting&nbsp;operator&nbsp;~self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;ConverseDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="OutFlowsOrder-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;DualDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="OutFlowsOrder-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Default&nbsp;presentation&nbsp;method&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="OutFlowsOrder-absirred"><strong>absirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;-irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
@@ -6668,7 +6688,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="OutFlowsOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="OutFlowsOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="OutFlowsOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'min': -1, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="OutFlowsOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -7228,6 +7248,8 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 
 <dl><dt><a name="PrincipalOrder-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;DualDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
+<dl><dt><a name="PrincipalOrder-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Default&nbsp;presentation&nbsp;method&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.</tt></dd></dl>
+
 <dl><dt><a name="PrincipalOrder-absirred"><strong>absirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;-irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-absirredundant"><strong>absirredundant</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;-irredundant&nbsp;choices&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -7692,7 +7714,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="PrincipalOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="PrincipalOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="PrincipalOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'min': -1, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -8241,6 +8263,8 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 
 <dl><dt><a name="RandomLinearOrder-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;DualDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
+<dl><dt><a name="RandomLinearOrder-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Default&nbsp;presentation&nbsp;method&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.</tt></dd></dl>
+
 <dl><dt><a name="RandomLinearOrder-absirred"><strong>absirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;-irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-absirredundant"><strong>absirredundant</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;-irredundant&nbsp;choices&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -8705,7 +8729,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="RandomLinearOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="RandomLinearOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RandomLinearOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'min': -1, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -9258,6 +9282,8 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 
 <dl><dt><a name="RankedPairsOrder-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;DualDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
+<dl><dt><a name="RankedPairsOrder-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Default&nbsp;presentation&nbsp;method&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.</tt></dd></dl>
+
 <dl><dt><a name="RankedPairsOrder-absirred"><strong>absirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;-irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-absirredundant"><strong>absirredundant</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;-irredundant&nbsp;choices&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -9722,7 +9748,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="RankedPairsOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="RankedPairsOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RankedPairsOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'min': -1, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 

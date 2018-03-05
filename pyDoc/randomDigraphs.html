@@ -107,6 +107,8 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 
 <dl><dt><a name="RandomDigraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;DualDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
+<dl><dt><a name="RandomDigraph-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Default&nbsp;presentation&nbsp;method&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.</tt></dd></dl>
+
 <dl><dt><a name="RandomDigraph-absirred"><strong>absirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;-irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
 <dl><dt><a name="RandomDigraph-absirredundant"><strong>absirredundant</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;-irredundant&nbsp;choices&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -575,7 +577,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="RandomDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="RandomDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RandomDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'min': -1, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RandomDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -1109,6 +1111,8 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 
 <dl><dt><a name="RandomFixedDegreeSequenceDigraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;DualDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
+<dl><dt><a name="RandomFixedDegreeSequenceDigraph-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Default&nbsp;presentation&nbsp;method&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.</tt></dd></dl>
+
 <dl><dt><a name="RandomFixedDegreeSequenceDigraph-absirred"><strong>absirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;-irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
 <dl><dt><a name="RandomFixedDegreeSequenceDigraph-absirredundant"><strong>absirredundant</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;-irredundant&nbsp;choices&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -1577,7 +1581,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="RandomFixedDegreeSequenceDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="RandomFixedDegreeSequenceDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RandomFixedDegreeSequenceDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'min': -1, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RandomFixedDegreeSequenceDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -2104,6 +2108,8 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 
 <dl><dt><a name="RandomFixedSizeDigraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;DualDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
+<dl><dt><a name="RandomFixedSizeDigraph-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Default&nbsp;presentation&nbsp;method&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.</tt></dd></dl>
+
 <dl><dt><a name="RandomFixedSizeDigraph-absirred"><strong>absirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;-irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
 <dl><dt><a name="RandomFixedSizeDigraph-absirredundant"><strong>absirredundant</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;-irredundant&nbsp;choices&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -2572,7 +2578,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="RandomFixedSizeDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="RandomFixedSizeDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RandomFixedSizeDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'min': -1, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RandomFixedSizeDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -3109,6 +3115,8 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 
 <dl><dt><a name="RandomGridDigraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;DualDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
+<dl><dt><a name="RandomGridDigraph-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Default&nbsp;presentation&nbsp;method&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.</tt></dd></dl>
+
 <dl><dt><a name="RandomGridDigraph-absirred"><strong>absirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;-irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
 <dl><dt><a name="RandomGridDigraph-absirredundant"><strong>absirredundant</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;-irredundant&nbsp;choices&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -3577,7 +3585,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="RandomGridDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="RandomGridDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RandomGridDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'min': -1, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RandomGridDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -4104,6 +4112,8 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 
 <dl><dt><a name="RandomRegularDigraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;DualDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
+<dl><dt><a name="RandomRegularDigraph-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Default&nbsp;presentation&nbsp;method&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.</tt></dd></dl>
+
 <dl><dt><a name="RandomRegularDigraph-absirred"><strong>absirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;-irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
 <dl><dt><a name="RandomRegularDigraph-absirredundant"><strong>absirredundant</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;-irredundant&nbsp;choices&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -4572,7 +4582,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="RandomRegularDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="RandomRegularDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RandomRegularDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'min': -1, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RandomRegularDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -5104,6 +5114,8 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 
 <dl><dt><a name="RandomTournament-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;DualDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
+<dl><dt><a name="RandomTournament-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Default&nbsp;presentation&nbsp;method&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.</tt></dd></dl>
+
 <dl><dt><a name="RandomTournament-absirred"><strong>absirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;-irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
 <dl><dt><a name="RandomTournament-absirredundant"><strong>absirredundant</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;-irredundant&nbsp;choices&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -5572,7 +5584,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="RandomTournament-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="RandomTournament-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RandomTournament-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'min': -1, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RandomTournament-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -6147,6 +6159,8 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 
 <dl><dt><a name="RandomValuationDigraph-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;DualDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
+<dl><dt><a name="RandomValuationDigraph-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Default&nbsp;presentation&nbsp;method&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.</tt></dd></dl>
+
 <dl><dt><a name="RandomValuationDigraph-absirred"><strong>absirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;-irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
 <dl><dt><a name="RandomValuationDigraph-absirredundant"><strong>absirredundant</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;-irredundant&nbsp;choices&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -6615,7 +6629,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="RandomValuationDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="RandomValuationDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RandomValuationDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'min': -1, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RandomValuationDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -7150,6 +7164,8 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 
 <dl><dt><a name="RandomWeakTournament-__neg__"><strong>__neg__</strong></a>(self)</dt><dd><tt>Make&nbsp;the&nbsp;negation&nbsp;operator&nbsp;-self&nbsp;available&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.&nbsp;Returns&nbsp;a&nbsp;DualDigraph&nbsp;instance&nbsp;of&nbsp;self.</tt></dd></dl>
 
+<dl><dt><a name="RandomWeakTournament-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Default&nbsp;presentation&nbsp;method&nbsp;for&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instances.</tt></dd></dl>
+
 <dl><dt><a name="RandomWeakTournament-absirred"><strong>absirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;-irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
 <dl><dt><a name="RandomWeakTournament-absirredundant"><strong>absirredundant</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;-irredundant&nbsp;choices&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -7618,7 +7634,7 @@ If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp
 
 <dl><dt><a name="RandomWeakTournament-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="RandomWeakTournament-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RandomWeakTournament-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'med': 0, 'min': -1, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RandomWeakTournament-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 

@@ -6,11 +6,11 @@ from distutils.core import setup
 #from setuptools import setup
 
 setup(name='Digraph3',
-      version="Python3.5+",
+      version="Python3.6",
       #version_command='svn info --show-item revision',
       py_modules=['arithmetics','digraphsTools','digraphs','perfTabs',
                   'outrankingDigraphs','performanceQuantiles',\
-        'sortingDigraphs','votingDigraphs',\
+        'sortingDigraphs','votingProfiles',\
         'linearOrders','weakOrders',\
         'iqagent','graphs','htmlmodel','randomNumbers','randomDigraphs','randomPerfTabs',
         'bigOutrankingDigraphs','sparseOutrankingDigraphs','xmcda'],

@@ -530,7 +530,7 @@ Computing the winner of an election
 Linear voting profiles
 ......................
 
-The :ref:`votingDigraphs-label` provides resources for handling election results [ADT-L2]_, like the :py:class:`votingDigraphs.LinearVotingProfile` class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two ordered dictionaries, one for the voters and another one for the candidates. The linear ballots are stored in a standard dictionary::
+The :ref:`votingProfiles-label` provides resources for handling election results [ADT-L2]_, like the :py:class:`votingProfiles.LinearVotingProfile` class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two ordered dictionaries, one for the voters and another one for the candidates. The linear ballots are stored in a standard dictionary::
 
     candidates = OrderedDict([('a1',...), ('a2',...), ('a3', ...), ...}
     voters = OrderedDict([('v1',{'weight':1.0}), ('v2',{'weight':1.0}), ...}
@@ -542,8 +542,8 @@ The :ref:`votingDigraphs-label` provides resources for handling election results
     ...
     }
 
-The module provides a :py:class:`votingDigraphs.RandomLinearVotingProfile` class for generating random instances of the :py:class:`votingDigraphs.LinearVotingProfile` class. In an interactive Python session we may obtain for the election of 3 candidates by 5 voters the following result:
-    >>> from votingDigraphs import RandomLinearVotingProfile
+The module provides a :py:class:`votingProfiles.RandomLinearVotingProfile` class for generating random instances of the :py:class:`votingProfiles.LinearVotingProfile` class. In an interactive Python session we may obtain for the election of 3 candidates by 5 voters the following result:
+    >>> from votingProfiles import RandomLinearVotingProfile
     >>> v = RandomLinearVotingProfile(numberOfVoters=5,numberOfCandidates=3)
     >>> v.candidates
     OrderedDict(['a1',{'name':'a1}), ('a2',{'name':'a2'}), ('a3':{'name':'a3'})])
@@ -607,8 +607,8 @@ The Borda **rank analysis table** my be printed out with a corresponding ``show`
 The Condorcet winner
 ....................
 
-In our randomly generated election results, we are lucky: The instant runoff winner and the Borda winner both are candidate *a1*. However, we could also follow the Marquis de Condorcet's advice, and compute the **majority margins** obtained by voting for each individual pair of candidates. For instance, candidate *a1* is ranked four times before and once behind candidate *a2*. Hence the majority margin *M(a1,a2)* is 4 - 1 = +3. These majority margins define on the set of candidates what we call the **Condorcet digraph**. The :py:class:`votingDigraphs.CondorcetDigraph` class (a specialization of the :py:class:`digraphs.Digraph` class) is available for handling such pairwise majority margins:
-    >>> from votingDigraphs import CondorcetDigraph
+In our randomly generated election results, we are lucky: The instant runoff winner and the Borda winner both are candidate *a1*. However, we could also follow the Marquis de Condorcet's advice, and compute the **majority margins** obtained by voting for each individual pair of candidates. For instance, candidate *a1* is ranked four times before and once behind candidate *a2*. Hence the majority margin *M(a1,a2)* is 4 - 1 = +3. These majority margins define on the set of candidates what we call the **Condorcet digraph**. The :py:class:`votingProfiles.CondorcetDigraph` class (a specialization of the :py:class:`digraphs.Digraph` class) is available for handling such pairwise majority margins:
+    >>> from votingProfiles import CondorcetDigraph
     >>> cdg = CondorcetDigraph(v,hasIntegerValuation=True)
     >>> cdg.showAll()
     *----- show detail -------------*
@@ -685,7 +685,7 @@ But, there may be many cycles appearing in a digraph, and, we may detect and enu
 
 Condorcet's approach for determining the winner of an election is hence not decisive in all circumstances and we need to exploit more sophisticated approaches for finding the winner of the election on the basis of the majority margins of the given linear ballots (see [BIS-2008]_). 
 
-Many more tools for exploiting voting results are available, see the technical documentation of the :ref:`votingDiGraphs-label`.
+Many more tools for exploiting voting results are available, see the technical documentation of the :ref:`votingProfiles-label`.
 
 Back to :ref:`Tutorial-label`
 
@@ -1275,7 +1275,7 @@ Generating random linearly ranked performances
 
 Finally, we provide the :py:class:`randomPerfTabs.RandomRankPerformanceTableau` class for generating multiple criteria ranked performances, ie on each criterion, all decision actions appear linearly ordered without ties.
 
-This type of random performance tabeau is matching the :py:class:`votingDigrahs.RandomLinearVotingProfile` class provided by the :py:mod:`votingDigraphs` module.  
+This type of random performance tabeau is matching the :py:class:`votingDigrahs.RandomLinearVotingProfile` class provided by the :py:mod:`votingProfiles` module.  
         
 *Parameters*:
     * number of actions,

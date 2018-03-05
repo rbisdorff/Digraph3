@@ -142,8 +142,8 @@
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="#votingdigraphs-label"><span class="std std-ref">votingDigraphs module</span></a></dt>
-<dd>Additional classes and methods for computing election results with main <a class="reference external" href="techDoc.html#votingDigraphs.LinearVotingProfile">LinearVotingProfile</a> class;</dd>
+<dt><a class="reference internal" href="#votingprofiles-label"><span class="std std-ref">votingProfiles module</span></a></dt>
+<dd>Additional classes and methods for computing election results with main <a class="reference external" href="techDoc.html#votingProfiles.LinearVotingProfile">LinearVotingProfile</a> class;</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
@@ -6903,13 +6903,13 @@ the high category limit.</p>
 
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
-<div class="section" id="votingdigraphs-module">
-<span id="votingdigraphs-label"></span><h2>votingDigraphs module<a class="headerlink" href="#votingdigraphs-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="votingprofiles-module">
+<span id="votingprofiles-label"></span><h2>votingProfiles module<a class="headerlink" href="#votingprofiles-module" title="Permalink to this headline">¶</a></h2>
 <p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#linearvoting-tutorial-label"><span class="std std-ref">Computing the winner of an election</span></a></p>
-<span class="target" id="module-votingDigraphs"></span><dl class="class">
-<dt id="votingDigraphs.ApprovalVotingProfile">
-<em class="property">class </em><code class="descclassname">votingDigraphs.</code><code class="descname">ApprovalVotingProfile</code><span class="sig-paren">(</span><em>fileVotingProfile=None</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#ApprovalVotingProfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.ApprovalVotingProfile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#votingDigraphs.VotingProfile" title="votingDigraphs.VotingProfile"><code class="xref py py-class docutils literal"><span class="pre">votingDigraphs.VotingProfile</span></code></a></p>
+<span class="target" id="module-votingProfiles"></span><dl class="class">
+<dt id="votingProfiles.ApprovalVotingProfile">
+<em class="property">class </em><code class="descclassname">votingProfiles.</code><code class="descname">ApprovalVotingProfile</code><span class="sig-paren">(</span><em>fileVotingProfile=None</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#ApprovalVotingProfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.ApprovalVotingProfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#votingProfiles.VotingProfile" title="votingProfiles.VotingProfile"><code class="xref py py-class docutils literal"><span class="pre">votingProfiles.VotingProfile</span></code></a></p>
 <p>A specialised class for approval voting profiles</p>
 <p>Structure:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">candidates</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="o">...</span><span class="p">}),</span>
@@ -6932,8 +6932,8 @@ the high category limit.</p>
 </pre></div>
 </div>
 <dl class="method">
-<dt id="votingDigraphs.ApprovalVotingProfile.computeBallot">
-<code class="descname">computeBallot</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#ApprovalVotingProfile.computeBallot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.ApprovalVotingProfile.computeBallot" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.ApprovalVotingProfile.computeBallot">
+<code class="descname">computeBallot</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#ApprovalVotingProfile.computeBallot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.ApprovalVotingProfile.computeBallot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes a complete ballot from the approval Ballot.</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -6942,8 +6942,8 @@ the high category limit.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.ApprovalVotingProfile.save">
-<code class="descname">save</code><span class="sig-paren">(</span><em>name='tempAVprofile'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#ApprovalVotingProfile.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.ApprovalVotingProfile.save" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.ApprovalVotingProfile.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>name='tempAVprofile'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#ApprovalVotingProfile.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.ApprovalVotingProfile.save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Persistant storage of an approval voting profile.</p>
 <dl class="docutils">
 <dt>Parameter:</dt>
@@ -6952,8 +6952,8 @@ the high category limit.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.ApprovalVotingProfile.save2PerfTab">
-<code class="descname">save2PerfTab</code><span class="sig-paren">(</span><em>fileName='votingPerfTab'</em>, <em>isDecimal=True</em>, <em>valueDigits=2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#ApprovalVotingProfile.save2PerfTab"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.ApprovalVotingProfile.save2PerfTab" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.ApprovalVotingProfile.save2PerfTab">
+<code class="descname">save2PerfTab</code><span class="sig-paren">(</span><em>fileName='votingPerfTab'</em>, <em>isDecimal=True</em>, <em>valueDigits=2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#ApprovalVotingProfile.save2PerfTab"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.ApprovalVotingProfile.save2PerfTab" title="Permalink to this definition">¶</a></dt>
 <dd><p>Persistant storage of an approval voting profile in the format of a standard performance tableau.
 For each voter <em>v</em>, the performance of candidate <em>x</em> corresponds to:</p>
 <blockquote>
@@ -6963,27 +6963,27 @@ For each voter <em>v</em>, the performance of candidate <em>x</em> corresponds t
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.ApprovalVotingProfile.showApprovalResults">
-<code class="descname">showApprovalResults</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#ApprovalVotingProfile.showApprovalResults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.ApprovalVotingProfile.showApprovalResults" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.ApprovalVotingProfile.showApprovalResults">
+<code class="descname">showApprovalResults</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#ApprovalVotingProfile.showApprovalResults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.ApprovalVotingProfile.showApprovalResults" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the approval obtained by each candidates.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.ApprovalVotingProfile.showDisApprovalResults">
-<code class="descname">showDisApprovalResults</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#ApprovalVotingProfile.showDisApprovalResults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.ApprovalVotingProfile.showDisApprovalResults" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.ApprovalVotingProfile.showDisApprovalResults">
+<code class="descname">showDisApprovalResults</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#ApprovalVotingProfile.showDisApprovalResults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.ApprovalVotingProfile.showDisApprovalResults" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the disapprovals obtained by each candidates.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.ApprovalVotingProfile.showResults">
-<code class="descname">showResults</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#ApprovalVotingProfile.showResults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.ApprovalVotingProfile.showResults" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.ApprovalVotingProfile.showResults">
+<code class="descname">showResults</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#ApprovalVotingProfile.showResults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.ApprovalVotingProfile.showResults" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="votingDigraphs.CondorcetDigraph">
-<em class="property">class </em><code class="descclassname">votingDigraphs.</code><code class="descname">CondorcetDigraph</code><span class="sig-paren">(</span><em>argVotingProfile=None</em>, <em>approvalVoting=False</em>, <em>coalition=None</em>, <em>majorityMargins=True</em>, <em>hasIntegerValuation=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#CondorcetDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.CondorcetDigraph" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.CondorcetDigraph">
+<em class="property">class </em><code class="descclassname">votingProfiles.</code><code class="descname">CondorcetDigraph</code><span class="sig-paren">(</span><em>argVotingProfile=None</em>, <em>approvalVoting=False</em>, <em>coalition=None</em>, <em>majorityMargins=True</em>, <em>hasIntegerValuation=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#CondorcetDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.CondorcetDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <p>Specialization of the general Digraph class for generating
 bipolar-valued marginal pairwise majority difference digraphs.</p>
@@ -7028,21 +7028,21 @@ bipolar-valued marginal pairwise majority difference digraphs.</p>
 </div>
 <img alt="_images/rel_randLinearProfile.png" src="_images/rel_randLinearProfile.png" />
 <dl class="method">
-<dt id="votingDigraphs.CondorcetDigraph.computeArrowRaynaudRanking">
-<code class="descname">computeArrowRaynaudRanking</code><span class="sig-paren">(</span><em>linearOrdered=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#CondorcetDigraph.computeArrowRaynaudRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.CondorcetDigraph.computeArrowRaynaudRanking" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.CondorcetDigraph.computeArrowRaynaudRanking">
+<code class="descname">computeArrowRaynaudRanking</code><span class="sig-paren">(</span><em>linearOrdered=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#CondorcetDigraph.computeArrowRaynaudRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.CondorcetDigraph.computeArrowRaynaudRanking" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders a ranking of the actions following Arrow&amp;Raynaud&#8217;s rule.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.CondorcetDigraph.computeCondorcetWinner">
-<code class="descname">computeCondorcetWinner</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#CondorcetDigraph.computeCondorcetWinner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.CondorcetDigraph.computeCondorcetWinner" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.CondorcetDigraph.computeCondorcetWinner">
+<code class="descname">computeCondorcetWinner</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#CondorcetDigraph.computeCondorcetWinner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.CondorcetDigraph.computeCondorcetWinner" title="Permalink to this definition">¶</a></dt>
 <dd><p>compute the Condorcet winner(s)
 renders always a, potentially empty, list</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.CondorcetDigraph.computeCopelandRanking">
-<code class="descname">computeCopelandRanking</code><span class="sig-paren">(</span><em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#CondorcetDigraph.computeCopelandRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.CondorcetDigraph.computeCopelandRanking" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.CondorcetDigraph.computeCopelandRanking">
+<code class="descname">computeCopelandRanking</code><span class="sig-paren">(</span><em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#CondorcetDigraph.computeCopelandRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.CondorcetDigraph.computeCopelandRanking" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders a ranking of the actions following Copeland&#8217;s rule.
 Score(x_i) = Sum_j{ [[x_i &gt; x_j]] - [[x_j &gt; x_i]]}, where
 [[x &gt; y]] = 1 if x&gt;y is true, otherwise 0.</p>
@@ -7051,35 +7051,35 @@ Score(x_i) = Sum_j{ [[x_i &gt; x_j]] - [[x_j &gt; x_i]]}, where
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.CondorcetDigraph.computeKohlerRanking">
-<code class="descname">computeKohlerRanking</code><span class="sig-paren">(</span><em>linearOrdered=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#CondorcetDigraph.computeKohlerRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.CondorcetDigraph.computeKohlerRanking" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.CondorcetDigraph.computeKohlerRanking">
+<code class="descname">computeKohlerRanking</code><span class="sig-paren">(</span><em>linearOrdered=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#CondorcetDigraph.computeKohlerRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.CondorcetDigraph.computeKohlerRanking" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders a ranking of the actions following Kohler&#8217;s rule.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.CondorcetDigraph.constructApprovalBallotRelation">
-<code class="descname">constructApprovalBallotRelation</code><span class="sig-paren">(</span><em>hasIntegerValuation=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#CondorcetDigraph.constructApprovalBallotRelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.CondorcetDigraph.constructApprovalBallotRelation" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.CondorcetDigraph.constructApprovalBallotRelation">
+<code class="descname">constructApprovalBallotRelation</code><span class="sig-paren">(</span><em>hasIntegerValuation=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#CondorcetDigraph.constructApprovalBallotRelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.CondorcetDigraph.constructApprovalBallotRelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the votes differences between candidates
 on the basis of an approval ballot.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.CondorcetDigraph.constructBallotRelation">
-<code class="descname">constructBallotRelation</code><span class="sig-paren">(</span><em>hasIntegerValuation</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#CondorcetDigraph.constructBallotRelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.CondorcetDigraph.constructBallotRelation" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.CondorcetDigraph.constructBallotRelation">
+<code class="descname">constructBallotRelation</code><span class="sig-paren">(</span><em>hasIntegerValuation</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#CondorcetDigraph.constructBallotRelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.CondorcetDigraph.constructBallotRelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the marginal majority between candidates
 on the basis of a complete ballot.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.CondorcetDigraph.constructMajorityMarginsRelation">
-<code class="descname">constructMajorityMarginsRelation</code><span class="sig-paren">(</span><em>hasIntegerValuation=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#CondorcetDigraph.constructMajorityMarginsRelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.CondorcetDigraph.constructMajorityMarginsRelation" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.CondorcetDigraph.constructMajorityMarginsRelation">
+<code class="descname">constructMajorityMarginsRelation</code><span class="sig-paren">(</span><em>hasIntegerValuation=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#CondorcetDigraph.constructMajorityMarginsRelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.CondorcetDigraph.constructMajorityMarginsRelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the marginal majority between candidates
 on the basis of an approval ballot.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.CondorcetDigraph.showMajorityMargins">
-<code class="descname">showMajorityMargins</code><span class="sig-paren">(</span><em>**args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#CondorcetDigraph.showMajorityMargins"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.CondorcetDigraph.showMajorityMargins" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.CondorcetDigraph.showMajorityMargins">
+<code class="descname">showMajorityMargins</code><span class="sig-paren">(</span><em>**args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#CondorcetDigraph.showMajorityMargins"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.CondorcetDigraph.showMajorityMargins" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wrapper for the
 Digraph.showRelationTable(Sorted=True, IntegerValues=False,
 actionsSubset=None, relation=None, ndigits=2,
@@ -7090,9 +7090,9 @@ ReflexiveTerms=True)</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="votingDigraphs.LinearVotingProfile">
-<em class="property">class </em><code class="descclassname">votingDigraphs.</code><code class="descname">LinearVotingProfile</code><span class="sig-paren">(</span><em>fileVotingProfile=None</em>, <em>numberOfCandidates=5</em>, <em>numberOfVoters=9</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#LinearVotingProfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.LinearVotingProfile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#votingDigraphs.VotingProfile" title="votingDigraphs.VotingProfile"><code class="xref py py-class docutils literal"><span class="pre">votingDigraphs.VotingProfile</span></code></a></p>
+<dt id="votingProfiles.LinearVotingProfile">
+<em class="property">class </em><code class="descclassname">votingProfiles.</code><code class="descname">LinearVotingProfile</code><span class="sig-paren">(</span><em>fileVotingProfile=None</em>, <em>numberOfCandidates=5</em>, <em>numberOfVoters=9</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#LinearVotingProfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.LinearVotingProfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#votingProfiles.VotingProfile" title="votingProfiles.VotingProfile"><code class="xref py py-class docutils literal"><span class="pre">votingProfiles.VotingProfile</span></code></a></p>
 <p>A specialised class for linear voting profiles</p>
 <p>Structure:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">candidates</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span> <span class="p">,(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">),(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span> <span class="o">...</span><span class="p">])</span>
@@ -7140,52 +7140,52 @@ ReflexiveTerms=True)</p>
 </pre></div>
 </div>
 <dl class="method">
-<dt id="votingDigraphs.LinearVotingProfile.computeBallot">
-<code class="descname">computeBallot</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#LinearVotingProfile.computeBallot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.LinearVotingProfile.computeBallot" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.LinearVotingProfile.computeBallot">
+<code class="descname">computeBallot</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#LinearVotingProfile.computeBallot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.LinearVotingProfile.computeBallot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes a complete ballot from the linear Ballot.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.LinearVotingProfile.computeBordaScores">
-<code class="descname">computeBordaScores</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#LinearVotingProfile.computeBordaScores"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.LinearVotingProfile.computeBordaScores" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.LinearVotingProfile.computeBordaScores">
+<code class="descname">computeBordaScores</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#LinearVotingProfile.computeBordaScores"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.LinearVotingProfile.computeBordaScores" title="Permalink to this definition">¶</a></dt>
 <dd><p>compute Borda scores from the rank analysis</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.LinearVotingProfile.computeBordaWinners">
-<code class="descname">computeBordaWinners</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#LinearVotingProfile.computeBordaWinners"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.LinearVotingProfile.computeBordaWinners" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.LinearVotingProfile.computeBordaWinners">
+<code class="descname">computeBordaWinners</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#LinearVotingProfile.computeBordaWinners"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.LinearVotingProfile.computeBordaWinners" title="Permalink to this definition">¶</a></dt>
 <dd><p>compute the Borda winner from the Borda scores, ie the list of
 candidates with the minimal Borda score.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.LinearVotingProfile.computeInstantRunoffWinner">
-<code class="descname">computeInstantRunoffWinner</code><span class="sig-paren">(</span><em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#LinearVotingProfile.computeInstantRunoffWinner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.LinearVotingProfile.computeInstantRunoffWinner" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.LinearVotingProfile.computeInstantRunoffWinner">
+<code class="descname">computeInstantRunoffWinner</code><span class="sig-paren">(</span><em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#LinearVotingProfile.computeInstantRunoffWinner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.LinearVotingProfile.computeInstantRunoffWinner" title="Permalink to this definition">¶</a></dt>
 <dd><p>compute the instant runoff winner from a linear voting ballot</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.LinearVotingProfile.computeRankAnalysis">
-<code class="descname">computeRankAnalysis</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#LinearVotingProfile.computeRankAnalysis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.LinearVotingProfile.computeRankAnalysis" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.LinearVotingProfile.computeRankAnalysis">
+<code class="descname">computeRankAnalysis</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#LinearVotingProfile.computeRankAnalysis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.LinearVotingProfile.computeRankAnalysis" title="Permalink to this definition">¶</a></dt>
 <dd><p>compute the number of ranks each candidate obtains</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.LinearVotingProfile.computeSimpleMajorityWinner">
-<code class="descname">computeSimpleMajorityWinner</code><span class="sig-paren">(</span><em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#LinearVotingProfile.computeSimpleMajorityWinner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.LinearVotingProfile.computeSimpleMajorityWinner" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.LinearVotingProfile.computeSimpleMajorityWinner">
+<code class="descname">computeSimpleMajorityWinner</code><span class="sig-paren">(</span><em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#LinearVotingProfile.computeSimpleMajorityWinner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.LinearVotingProfile.computeSimpleMajorityWinner" title="Permalink to this definition">¶</a></dt>
 <dd><p>compute the winner in a uninominal Election from a linear ballot</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.LinearVotingProfile.computeUninominalVotes">
-<code class="descname">computeUninominalVotes</code><span class="sig-paren">(</span><em>candidates=None</em>, <em>linearBallot=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#LinearVotingProfile.computeUninominalVotes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.LinearVotingProfile.computeUninominalVotes" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.LinearVotingProfile.computeUninominalVotes">
+<code class="descname">computeUninominalVotes</code><span class="sig-paren">(</span><em>candidates=None</em>, <em>linearBallot=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#LinearVotingProfile.computeUninominalVotes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.LinearVotingProfile.computeUninominalVotes" title="Permalink to this definition">¶</a></dt>
 <dd><p>compute uninominal votes for each candidate in candidates sublist
 and restricted linear ballots</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.LinearVotingProfile.save">
-<code class="descname">save</code><span class="sig-paren">(</span><em>name='templinearprofile'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#LinearVotingProfile.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.LinearVotingProfile.save" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.LinearVotingProfile.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>name='templinearprofile'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#LinearVotingProfile.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.LinearVotingProfile.save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Persistant storage of a linear voting profile.</p>
 <dl class="docutils">
 <dt>Parameter:</dt>
@@ -7194,36 +7194,36 @@ and restricted linear ballots</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.LinearVotingProfile.save2PerfTab">
-<code class="descname">save2PerfTab</code><span class="sig-paren">(</span><em>fileName='votingPerfTab'</em>, <em>isDecimal=True</em>, <em>valueDigits=2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#LinearVotingProfile.save2PerfTab"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.LinearVotingProfile.save2PerfTab" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.LinearVotingProfile.save2PerfTab">
+<code class="descname">save2PerfTab</code><span class="sig-paren">(</span><em>fileName='votingPerfTab'</em>, <em>isDecimal=True</em>, <em>valueDigits=2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#LinearVotingProfile.save2PerfTab"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.LinearVotingProfile.save2PerfTab" title="Permalink to this definition">¶</a></dt>
 <dd><p>Persistant storage of a linear voting profile in the format of a rank performance Tableau.
 For each voter <em>v</em>, the rank performance of candidate <em>x</em> corresponds to:</p>
 <p>number of candidates - linearProfile[v].index(x)</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.LinearVotingProfile.showBordaRanking">
-<code class="descname">showBordaRanking</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#LinearVotingProfile.showBordaRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.LinearVotingProfile.showBordaRanking" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.LinearVotingProfile.showBordaRanking">
+<code class="descname">showBordaRanking</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#LinearVotingProfile.showBordaRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.LinearVotingProfile.showBordaRanking" title="Permalink to this definition">¶</a></dt>
 <dd><p>show Borda ranking in increasing order of the Borda score</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.LinearVotingProfile.showHTMLVotingHeatmap">
-<code class="descname">showHTMLVotingHeatmap</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>actionsList=None</em>, <em>SparseModel=False</em>, <em>minimalComponentSize=1</em>, <em>RankingRule='Copeland'</em>, <em>quantiles=None</em>, <em>strategy='average'</em>, <em>ndigits=0</em>, <em>colorLevels=None</em>, <em>pageTitle='Voting Heatmap'</em>, <em>Correlations=True</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#LinearVotingProfile.showHTMLVotingHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.LinearVotingProfile.showHTMLVotingHeatmap" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.LinearVotingProfile.showHTMLVotingHeatmap">
+<code class="descname">showHTMLVotingHeatmap</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>actionsList=None</em>, <em>SparseModel=False</em>, <em>minimalComponentSize=1</em>, <em>RankingRule='Copeland'</em>, <em>quantiles=None</em>, <em>strategy='average'</em>, <em>ndigits=0</em>, <em>colorLevels=None</em>, <em>pageTitle='Voting Heatmap'</em>, <em>Correlations=True</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#LinearVotingProfile.showHTMLVotingHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.LinearVotingProfile.showHTMLVotingHeatmap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show the linear voting profile as a rank performance heatmap.
 The linear voting profile is previously saved to a stored Performance Tableau.</p>
 <p>(see perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap() )</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.LinearVotingProfile.showLinearBallots">
-<code class="descname">showLinearBallots</code><span class="sig-paren">(</span><em>IntegerWeights=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#LinearVotingProfile.showLinearBallots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.LinearVotingProfile.showLinearBallots" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.LinearVotingProfile.showLinearBallots">
+<code class="descname">showLinearBallots</code><span class="sig-paren">(</span><em>IntegerWeights=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#LinearVotingProfile.showLinearBallots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.LinearVotingProfile.showLinearBallots" title="Permalink to this definition">¶</a></dt>
 <dd><p>show the linear ballots</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.LinearVotingProfile.showRankAnalysisTable">
-<code class="descname">showRankAnalysisTable</code><span class="sig-paren">(</span><em>Sorted=True</em>, <em>ndigits=0</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#LinearVotingProfile.showRankAnalysisTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.LinearVotingProfile.showRankAnalysisTable" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.LinearVotingProfile.showRankAnalysisTable">
+<code class="descname">showRankAnalysisTable</code><span class="sig-paren">(</span><em>Sorted=True</em>, <em>ndigits=0</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#LinearVotingProfile.showRankAnalysisTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.LinearVotingProfile.showRankAnalysisTable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print the rank analysis tableau.</p>
 <p>If Sorted (True by default), the candidates
 are ordered by increasing Borda Scores.</p>
@@ -7234,45 +7234,45 @@ to format the decimal precision of the numerical output.</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="votingDigraphs.RandomApprovalVotingProfile">
-<em class="property">class </em><code class="descclassname">votingDigraphs.</code><code class="descname">RandomApprovalVotingProfile</code><span class="sig-paren">(</span><em>numberOfVoters=9</em>, <em>numberOfCandidates=5</em>, <em>minSizeOfBallot=1</em>, <em>maxSizeOfBallot=2</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#RandomApprovalVotingProfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.RandomApprovalVotingProfile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#votingDigraphs.ApprovalVotingProfile" title="votingDigraphs.ApprovalVotingProfile"><code class="xref py py-class docutils literal"><span class="pre">votingDigraphs.ApprovalVotingProfile</span></code></a></p>
+<dt id="votingProfiles.RandomApprovalVotingProfile">
+<em class="property">class </em><code class="descclassname">votingProfiles.</code><code class="descname">RandomApprovalVotingProfile</code><span class="sig-paren">(</span><em>numberOfVoters=9</em>, <em>numberOfCandidates=5</em>, <em>minSizeOfBallot=1</em>, <em>maxSizeOfBallot=2</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#RandomApprovalVotingProfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.RandomApprovalVotingProfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#votingProfiles.ApprovalVotingProfile" title="votingProfiles.ApprovalVotingProfile"><code class="xref py py-class docutils literal"><span class="pre">votingProfiles.ApprovalVotingProfile</span></code></a></p>
 <p>A specialized class for approval voting profiles.</p>
 <dl class="method">
-<dt id="votingDigraphs.RandomApprovalVotingProfile.generateRandomApprovalBallot">
-<code class="descname">generateRandomApprovalBallot</code><span class="sig-paren">(</span><em>minSizeOfBallot</em>, <em>maxSizeOfBallot</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#RandomApprovalVotingProfile.generateRandomApprovalBallot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.RandomApprovalVotingProfile.generateRandomApprovalBallot" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.RandomApprovalVotingProfile.generateRandomApprovalBallot">
+<code class="descname">generateRandomApprovalBallot</code><span class="sig-paren">(</span><em>minSizeOfBallot</em>, <em>maxSizeOfBallot</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#RandomApprovalVotingProfile.generateRandomApprovalBallot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.RandomApprovalVotingProfile.generateRandomApprovalBallot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders a randomly generated approval ballot.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.RandomApprovalVotingProfile.generateRandomDisApprovalBallot">
-<code class="descname">generateRandomDisApprovalBallot</code><span class="sig-paren">(</span><em>minSizeOfBallot</em>, <em>maxSizeOfBallot</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#RandomApprovalVotingProfile.generateRandomDisApprovalBallot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.RandomApprovalVotingProfile.generateRandomDisApprovalBallot" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.RandomApprovalVotingProfile.generateRandomDisApprovalBallot">
+<code class="descname">generateRandomDisApprovalBallot</code><span class="sig-paren">(</span><em>minSizeOfBallot</em>, <em>maxSizeOfBallot</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#RandomApprovalVotingProfile.generateRandomDisApprovalBallot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.RandomApprovalVotingProfile.generateRandomDisApprovalBallot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders a randomly generated approval ballot.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="votingDigraphs.RandomLinearVotingProfile">
-<em class="property">class </em><code class="descclassname">votingDigraphs.</code><code class="descname">RandomLinearVotingProfile</code><span class="sig-paren">(</span><em>numberOfVoters=9</em>, <em>numberOfCandidates=5</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#RandomLinearVotingProfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.RandomLinearVotingProfile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#votingDigraphs.LinearVotingProfile" title="votingDigraphs.LinearVotingProfile"><code class="xref py py-class docutils literal"><span class="pre">votingDigraphs.LinearVotingProfile</span></code></a></p>
+<dt id="votingProfiles.RandomLinearVotingProfile">
+<em class="property">class </em><code class="descclassname">votingProfiles.</code><code class="descname">RandomLinearVotingProfile</code><span class="sig-paren">(</span><em>numberOfVoters=9</em>, <em>numberOfCandidates=5</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#RandomLinearVotingProfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.RandomLinearVotingProfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#votingProfiles.LinearVotingProfile" title="votingProfiles.LinearVotingProfile"><code class="xref py py-class docutils literal"><span class="pre">votingProfiles.LinearVotingProfile</span></code></a></p>
 <p>A specialized class for random linwear voting profiles.</p>
 <dl class="method">
-<dt id="votingDigraphs.RandomLinearVotingProfile.generateRandomLinearBallot">
-<code class="descname">generateRandomLinearBallot</code><span class="sig-paren">(</span><em>seed</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#RandomLinearVotingProfile.generateRandomLinearBallot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.RandomLinearVotingProfile.generateRandomLinearBallot" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.RandomLinearVotingProfile.generateRandomLinearBallot">
+<code class="descname">generateRandomLinearBallot</code><span class="sig-paren">(</span><em>seed</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#RandomLinearVotingProfile.generateRandomLinearBallot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.RandomLinearVotingProfile.generateRandomLinearBallot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders a randomly generated linear ballot.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="votingDigraphs.RandomVotingProfile">
-<em class="property">class </em><code class="descclassname">votingDigraphs.</code><code class="descname">RandomVotingProfile</code><span class="sig-paren">(</span><em>numberOfVoters=9</em>, <em>numberOfCandidates=5</em>, <em>hasRandomWeights=False</em>, <em>maxWeight=10</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#RandomVotingProfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.RandomVotingProfile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#votingDigraphs.VotingProfile" title="votingDigraphs.VotingProfile"><code class="xref py py-class docutils literal"><span class="pre">votingDigraphs.VotingProfile</span></code></a></p>
+<dt id="votingProfiles.RandomVotingProfile">
+<em class="property">class </em><code class="descclassname">votingProfiles.</code><code class="descname">RandomVotingProfile</code><span class="sig-paren">(</span><em>numberOfVoters=9</em>, <em>numberOfCandidates=5</em>, <em>hasRandomWeights=False</em>, <em>maxWeight=10</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#RandomVotingProfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.RandomVotingProfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#votingProfiles.VotingProfile" title="votingProfiles.VotingProfile"><code class="xref py py-class docutils literal"><span class="pre">votingProfiles.VotingProfile</span></code></a></p>
 <p>A subclass for generating random voting profiles.</p>
 <dl class="method">
-<dt id="votingDigraphs.RandomVotingProfile.generateRandomBallot">
-<code class="descname">generateRandomBallot</code><span class="sig-paren">(</span><em>seed</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#RandomVotingProfile.generateRandomBallot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.RandomVotingProfile.generateRandomBallot" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.RandomVotingProfile.generateRandomBallot">
+<code class="descname">generateRandomBallot</code><span class="sig-paren">(</span><em>seed</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#RandomVotingProfile.generateRandomBallot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.RandomVotingProfile.generateRandomBallot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders a randomly generated approval ballot
 from a shuffled list of candidates for each voter.</p>
 </dd></dl>
@@ -7280,10 +7280,10 @@ from a shuffled list of candidates for each voter.</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="votingDigraphs.VotingProfile">
-<em class="property">class </em><code class="descclassname">votingDigraphs.</code><code class="descname">VotingProfile</code><span class="sig-paren">(</span><em>fileVotingProfile=None</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#VotingProfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.VotingProfile" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.VotingProfile">
+<em class="property">class </em><code class="descclassname">votingProfiles.</code><code class="descname">VotingProfile</code><span class="sig-paren">(</span><em>fileVotingProfile=None</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#VotingProfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.VotingProfile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
-<p>A general class for storing voting profiles.</p>
+<p>A generic class for storing voting profiles.</p>
 <p>General structure:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">candidates</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">),(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">),(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span> <span class="p">(</span> <span class="o">...</span> <span class="p">)</span> <span class="p">])</span>
 <span class="n">voters</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([</span>
@@ -7308,20 +7308,20 @@ from a shuffled list of candidates for each voter.</p>
 </pre></div>
 </div>
 <dl class="method">
-<dt id="votingDigraphs.VotingProfile.save">
-<code class="descname">save</code><span class="sig-paren">(</span><em>name='tempVprofile'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#VotingProfile.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.VotingProfile.save" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.VotingProfile.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>name='tempVprofile'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#VotingProfile.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.VotingProfile.save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Persistant storage of an approval voting profile.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.VotingProfile.showAll">
-<code class="descname">showAll</code><span class="sig-paren">(</span><em>WithBallots=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#VotingProfile.showAll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.VotingProfile.showAll" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.VotingProfile.showAll">
+<code class="descname">showAll</code><span class="sig-paren">(</span><em>WithBallots=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#VotingProfile.showAll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.VotingProfile.showAll" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show method for &lt;VotingProfile&gt; instances.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="votingDigraphs.VotingProfile.showVoterBallot">
-<code class="descname">showVoterBallot</code><span class="sig-paren">(</span><em>voter</em>, <em>hasIntegerValuation=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingDigraphs.html#VotingProfile.showVoterBallot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingDigraphs.VotingProfile.showVoterBallot" title="Permalink to this definition">¶</a></dt>
+<dt id="votingProfiles.VotingProfile.showVoterBallot">
+<code class="descname">showVoterBallot</code><span class="sig-paren">(</span><em>voter</em>, <em>hasIntegerValuation=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#VotingProfile.showVoterBallot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.VotingProfile.showVoterBallot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show the actual voting of a voter.</p>
 </dd></dl>
 
@@ -8175,7 +8175,7 @@ Euler&#8217;s number of coprime elements a in Zn.</p>
 <li><a class="reference internal" href="#module-xmcda">xmcda module</a></li>
 <li><a class="reference internal" href="#module-sparseOutrankingDigraphs">sparseOutrankingDigraphs module</a></li>
 <li><a class="reference internal" href="#sortingdigraphs-module">sortingDigraphs module</a></li>
-<li><a class="reference internal" href="#votingdigraphs-module">votingDigraphs module</a></li>
+<li><a class="reference internal" href="#votingprofiles-module">votingProfiles module</a></li>
 <li><a class="reference internal" href="#linearorders-module">linearOrders module</a></li>
 <li><a class="reference internal" href="#module-weakOrders">weakOrders module</a></li>
 <li><a class="reference internal" href="#module-randomNumbers">randomNumbers module</a></li>

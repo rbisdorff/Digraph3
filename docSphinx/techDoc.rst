@@ -63,8 +63,8 @@ The Digraph3 source code is split into several interdependent modules of which t
      Incremental representation of large performance tableaux via binned cumulated density functions per criteria;
 * :ref:`randomPerfTabs-label` 
      Various implemented random performance tableau models.
-* :ref:`votingDigraphs-label` 
-     Additional classes and methods for computing election results with main `LinearVotingProfile <techDoc.html#votingDigraphs.LinearVotingProfile>`_ class;
+* :ref:`votingProfiles-label` 
+     Additional classes and methods for computing election results with main `LinearVotingProfile <techDoc.html#votingProfiles.LinearVotingProfile>`_ class;
 * :ref:`sortingDigraphs-label`
      Additional tools for solving sorting problems with the root `SortingDigraph <techDoc.html#sortingDigraphs.SortingDigraph>`_ class;
 * :ref:`linearOrders-label` 
@@ -214,14 +214,14 @@ A tutorial with coding examples for solving multi-criteria rating problems is av
 
 Back to the :ref:`Technical-label`
 
-.. _votingDigraphs-label:
+.. _votingProfiles-label:
 
-votingDigraphs module
+votingProfiles module
 ---------------------
 
 A tutorial with coding examples is available here: :ref:`LinearVoting-Tutorial-label`
 
-.. automodule:: votingDigraphs
+.. automodule:: votingProfiles
    :member-order: alphabetical
    :no-inherited-members:
    :members:

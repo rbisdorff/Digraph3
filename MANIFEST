@@ -7,7 +7,7 @@ perfTabs.py
 performanceQuantiles.py
 outrankingDigraphs.py
 sortingDigraphs.py
-votingDigraphs.py
+votingProfiles.py
 linearOrders.py
 weakOrders.py
 iqagent.py
@@ -37,7 +37,7 @@ test/noseTestsDigraph.py
 test/noseTestsOutrankingDigraph.py
 test/noseTestsSortingDigraph.py
 test/noseTestsPerfTab.py
-test/noseTestsVotingDigraph.py
+test/noseTestsVotingProfile.py
 test/noseTestsLinearOrder.py
 test/noseTestsWeakOrders.py
 test/noseTestsRandomNumbers.py

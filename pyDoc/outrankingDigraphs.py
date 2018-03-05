@@ -1261,17 +1261,17 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 print(' %s  %s | %.2f %.2f %.2f %.2f %.2f | %.2f' % (a[i],a[j],pc[a[i]][a[j]]['lt'],pc[a[i]][a[j]]['leq'],pc[a[i]][a[j]]['eq'],pc[a[i]][a[j]]['geq'],pc[a[i]][a[j]]['gt'],self.relation[a[i]][a[j]]))
                 print(' %s  %s | %.2f %.2f %.2f %.2f %.2f | %.2f' % (a[j],a[i],pc[a[j]][a[i]]['lt'],pc[a[j]][a[i]]['leq'],pc[a[j]][a[i]]['eq'],pc[a[j]][a[i]]['geq'],pc[a[j]][a[i]]['gt'],self.relation[a[j]][a[i]]))
 
-    def showPairwiseOutrankings(self,a,b,hasSymetricThresholds=True,\
+    def showPairwiseOutrankings(self,a,b,\
                                Debug=False,isReturningHTML=False,\
                                hasSymmetricThresholds=True):
-        self.showPairwiseComparison(a,b,hasSymetricThresholds=hasSymmetricThresholds,\
+        self.showPairwiseComparison(a,b,\
                                Debug=Debug,isReturningHTML=isReturningHTML,\
                                hasSymmetricThresholds=hasSymmetricThresholds)
-        self.showPairwiseComparison(b,a,hasSymetricThresholds=hasSymmetricThresholds,\
+        self.showPairwiseComparison(b,a,\
                                Debug=Debug,isReturningHTML=isReturningHTML,\
                                hasSymmetricThresholds=hasSymmetricThresholds)
 
-    def showPairwiseComparison(self,a,b,hasSymetricThresholds=True,\
+    def showPairwiseComparison(self,a,b,\
                                Debug=False,isReturningHTML=False,\
                                hasSymmetricThresholds=True):
         """
@@ -3729,23 +3729,31 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         """
         Default presentation method for BipolarOutrankingDigraph instance.
         """
-        print('*----- show short --------------*')
-        print('Instance name    : %s' % self.name)
-        print('# Actions        : %d' % self.order)
-        print('# Criteria       : %d' % len(self.criteria))
-        print('Size             : %d' % self.computeSize())
-        print('Determinateness  : %.3f' % (self.computeDeterminateness()) )
-        print('----  Constructor run times (in sec.) ----')
+        reprString = '*------- Object instance description ------*\n'
+        reprString += 'Instance class   : %s\n' % self.__class__.__name__
+        reprString += 'Instance name    : %s\n' % self.name
+        reprString += '# Actions        : %d\n' % self.order
+        reprString += '# Criteria       : %d\n' % len(self.criteria)
+        reprString += 'Size             : %d\n' % self.computeSize()
+        reprString += 'Determinateness  : %.3f\n' % self.computeDeterminateness()
         try:
-            print('#Threads         : %d' % self.nbrThreads)
+            val1 = self.runTimes['totalTime']
+            val2 = self.runTimes['dataInput']
+            val3 = self.runTimes['computeRelation']
+            val4 = self.runTimes['gammaSets']
+            reprString += '----  Constructor run times (in sec.) ----\n'
+            reprString += 'Total time       : %.5f\n' % val1
+            reprString += 'Data input       : %.5f\n' % val2
+            reprString += 'Compute relation : %.5f\n' % val3
+            reprString += 'Gamma sets       : %.5f\n' % val4
+            try:
+                reprString += '#Threads         : %d\n' % self.nbrThreads
+            except:
+                self.nbrThreads = 1
+                reprString += '#Threads         : %d\n' % self.nbrThreads
         except:
-            self.nbrThreads = 1
-            print('#Threads         : %d' % self.nbrThreads)
-        print('Total time       : %.5f' % self.runTimes['totalTime'])
-        print('Data input       : %.5f' % self.runTimes['dataInput'])
-        print('Compute relation : %.5f' % self.runTimes['computeRelation'])
-        print('Gamma sets       : %.5f' % self.runTimes['gammaSets'])
-        return '%s instance' % str(self.__class__)
+            pass
+        return reprString
     
     def __init__(self,argPerfTab=None,\
                  coalition=None,\
@@ -9177,8 +9185,8 @@ if __name__ == "__main__":
 
 
     ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
-    Threading = True
-    t1 = Random3ObjectivesPerformanceTableau(numberOfActions=500,\
+    Threading = False
+    t1 = Random3ObjectivesPerformanceTableau(numberOfActions=50,\
                                    numberOfCriteria=21,\
                                    weightDistribution='equiobjectives',
                                    seed=100)
