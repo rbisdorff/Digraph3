@@ -2,7 +2,7 @@
 #
 # Python 3 implementation of voting digraphs
 # Refactored from revision 1.549 of the digraphs module
-# Current revision $Revision: 2254 $
+# Current revision $Revision: 2484 $
 # Copyright (C) 2011  Raymond Bisdorff
 #
 #    This program is free software; you can redistribute it and/or modify
@@ -30,7 +30,7 @@ from decimal import Decimal
 
 class VotingProfile(object):
     """
-    A general class for storing voting profiles.
+    A generic class for storing voting profiles.
 
     General structure::
 
@@ -56,6 +56,19 @@ class VotingProfile(object):
     	}
 
     """
+    def __repr__(self):
+        """
+        Default description for VotingProfile instances.
+        """
+        reprString = '*------- VotingProfile instance description ------*\n'
+        reprString += 'Instance class   : %s\n' % self.__class__.__name__
+        reprString += 'Instance name    : %s\n' % self.name
+        reprString += '# Candidates     : %d\n' % len(self.candidates)
+        reprString += '# Voters         : %d\n' % len(self.voters)
+        reprString += 'Attributes       : %s\n' % list(self.__dict__.keys())
+       
+        return reprString
+    
     def __init__(self,fileVotingProfile=None,seed=None):
 
         if fileVotingProfile != None:
@@ -218,6 +231,9 @@ class LinearVotingProfile(VotingProfile):
             self.voters = randv.voters
             self.linearBallot = randv.linearBallot
             self.ballot = randv.ballot
+        self.sumWeights = Decimal('0')
+        for v in self.voters:
+            self.sumWeights += self.voters[v]['weight']
 
     def computeBallot(self):
         """
@@ -280,14 +296,22 @@ class LinearVotingProfile(VotingProfile):
         fo.write( '}\n')
         fo.close()
 
-    def showLinearBallots(self):
+    def showLinearBallots(self,IntegerWeights=True):
         """
         show the linear ballots
         """
-        print('voters(weight)\t candidates rankings')
+##        sumWeights = Decimal('0')
+        if IntegerWeights:
+            formStr = ' %s(%.0f):\t %s'
+        else:
+            formStr = ' %s(%.f):\t %s'
+        print(' voters \t      marginal     ')
+        print('(weight)\t candidates rankings')
+        
         for v in self.voters:
-            print('%s(%s): \t %s' % (str(v),str(self.voters[v]['weight']),str(self.linearBallot[v])))
-
+##            sumWeights += self.voters[v]['weight']
+            print(formStr % (str(v),self.voters[v]['weight'],str(self.linearBallot[v])))
+        print('# voters: ',str(self.sumWeights))
 
     def computeRankAnalysis(self):
         """
@@ -300,9 +324,13 @@ class LinearVotingProfile(VotingProfile):
             ranks[x] = [0 for i in range(n)]
         for v in self.voters:
             for i in range(n):
-                x = self.linearBallot[v][i]
-                #ranks[x][i] += 1
-                ranks[x][i] += self.voters[v]['weight']
+                #print(v,i)
+                try:
+                    x = self.linearBallot[v][i]
+                    #ranks[x][i] += 1
+                    ranks[x][i] += self.voters[v]['weight']
+                except:
+                    pass
         #print ranks
         return ranks
 
@@ -317,9 +345,9 @@ class LinearVotingProfile(VotingProfile):
         to format the decimal precision of the numerical output.
         
         """
-        print('*----  Rank analysis tableau -----*')
+        print('*----  Borda rank analysis tableau -----*')
         bordaScores = self.computeBordaScores() 
-        candidatesList = [(bordaScores[x],x) for x in self.candidates]
+        candidatesList = [(bordaScores[x]['BordaScore'],x) for x in self.candidates]
         if Sorted:
             candidatesList.sort()
         if Debug:
@@ -335,35 +363,50 @@ class LinearVotingProfile(VotingProfile):
             print(bordaScores)
             
         ## print table
-
-        print(' ranks | ', end=' ')
+        print(' candi- | alternative-to-rank       |      Borda')
+        print(' dates  | ', end=' ')
         for x in rankIndex:
             print( str(x) + '   ', end=' ')
-        print('| Borda score')
-        print('-------|-----------------------------------------')
+        print('| score  average')
+        print('-------|-------------------------------------------------')
         for c in candidatesList:
             print('  \''+str(c[1])+'\' |', end=' ')
             for i in rankIndex:
                 formatString = '%% .%df ' % ndigits
                 print(formatString % (ranks[c[1]][(i-1)]), end='  ')
-            formatString = ' |  %% .%df' % ndigits
-            print(formatString % (bordaScores[c[1]]) )      
+            formatString = ' | %% .%df     %%.2f' % ndigits
+            print(formatString % (bordaScores[c[1]]['BordaScore'],\
+                                  bordaScores[c[1]]['averageBordaScore']))      
 
 
     def computeBordaScores(self):
         """
         compute Borda scores from the rank analysis
         """
+        from collections import defaultdict, OrderedDict
         ranks = self.computeRankAnalysis()
-        BordaScores={}
+        scores = []
         candidatesList = [x for x in self.candidates]
         n = len(candidatesList)
         for x in candidatesList:
-            BordaScores[x] = 0
+            BordaScore_x = 0
             for i in range(n):
-                BordaScores[x] += (i+1)*ranks[x][i]
+                BordaScore_x += (i+1)*ranks[x][i]
+            averageBordaScore_x = BordaScore_x/self.sumWeights
+            scores.append((BordaScore_x,x,averageBordaScore_x))
+        scores.sort()
+        BordaScores = OrderedDict([(x[1],{'BordaScore':x[0],'averageBordaScore':x[2]}) for x in scores])
         return BordaScores
 
+    def showBordaRanking(self):
+        """
+        show Borda ranking in increasing order of the Borda score
+        """
+        BordaScores = self.computeBordaScores()
+        print('Borda ranking of the candidates')
+        for x in BordaScores:
+            print(x,': ',BordaScores[x])
+                  
     def computeBordaWinners(self):
         """
         compute the Borda winner from the Borda scores, ie the list of
@@ -377,28 +420,30 @@ class LinearVotingProfile(VotingProfile):
         BordaMinimum = n * m
         candidatesList = [x for x in self.candidates]
         for x in candidatesList:
-            if BordaMinimum > BordaScores[x]:
-                BordaMinimum = BordaScores[x]
-        winners = [x for x in BordaScores if BordaScores[x] == BordaMinimum]
+            if BordaMinimum > BordaScores[x]['BordaScore']:
+                BordaMinimum = BordaScores[x]['BordaScore']
+        winners = [x for x in BordaScores if BordaScores[x]['BordaScore'] == BordaMinimum]
         return winners
 
     def computeInstantRunoffWinner(self,Comments=False):
         """
         compute the instant runoff winner from a linear voting ballot
         """
-        from copy import copy
+        from copy import deepcopy,copy
         from decimal import Decimal
-        voters = [x for x in self.voters]
+        voters = copy(self.voters)
+        votersList = [x for x in self.voters]
         totalWeight = Decimal("0.0")
-        for v in voters:
-            totalWeight += Decimal('%.3f' % (self.voters[v]['weight']) )
+        for v in votersList:
+            totalWeight += Decimal('%.3f' % (voters[v]['weight']) )
         halfWeight = totalWeight/Decimal("2.0")
         if Comments:
             print('Total number of votes = ', totalWeight)
             print('Half of the Votes = ', halfWeight)
-        candidatesList = [x for x in self.candidates]
+        candidates = copy(self.candidates)
+        candidatesList = [x for x in candidates]
         remainingCandidates = copy(candidatesList)
-        remainingLinearBallot = copy(self.linearBallot)
+        remainingLinearBallot = deepcopy(self.linearBallot)
         stage = 1
         while len(remainingCandidates) > 1:
             uninominalVotes = self.computeUninominalVotes(remainingCandidates,remainingLinearBallot)
@@ -424,7 +469,10 @@ class LinearVotingProfile(VotingProfile):
                             print('    candidate to remove = ', x)
                         remainingCandidates.remove(x)
                         for v in voters:
-                            remainingLinearBallot[v].remove(x)
+                            try:
+                                remainingLinearBallot[v].remove(x)
+                            except:
+                                pass
                 if Comments:
                     print('    remaining candidates = ', remainingCandidates)
                     #print '    remaining ballots    = ', remainingLinearBallot
@@ -480,7 +528,10 @@ class LinearVotingProfile(VotingProfile):
                 if Decimal:
                     #fo.write('\'' + str(x) + '\':Decimal("' + str(evaluation[g][x]) + '"),\n')
                     evaluationString = '\'%%s\':Decimal("%%.%df"),\n' % (valueDigits)
-                    xval = nc - self.linearBallot[g].index(x)
+                    try:
+                        xval = nc - self.linearBallot[g].index(x)
+                    except:
+                        xval = -999
                     fo.write(evaluationString % (x,Decimal(str(xval))))
                 else:
                     fo.write('\'' + str(x) + '\':' + str(evaluation[g][x]) + ',\n')
@@ -518,7 +569,7 @@ class LinearVotingProfile(VotingProfile):
                               SparseModel=SparseModel, minimalComponentSize=minimalComponentSize, \
                               RankingRule=RankingRule, quantiles=quantiles, strategy=strategy, \
                               ndigits=ndigits, colorLevels=colorLevels, \
-                              pageTitle='Voting Heatmap', \
+                              pageTitle=pageTitle, \
                               Correlations=True, Threading=Threading, nbrOfCPUs=nbrOfCPUs, Debug=Debug)
     
 
@@ -926,7 +977,7 @@ class RandomLinearVotingProfile(LinearVotingProfile):
         voters = OrderedDict()
         for v in votersList:
             voterID = 'v%d' % v
-            voters[voterID] = {'weight':1.0}
+            voters[voterID] = {'weight':Decimal('1')}
         candidatesList = [x for x in range(1,numberOfCandidates + 1)]
         candidates = OrderedDict()
         for c in candidatesList:
@@ -1065,7 +1116,9 @@ class CondorcetDigraph(Digraph):
     
     
     """
-    def __init__(self,argVotingProfile=None,approvalVoting=False,coalition=None,majorityMargins=True,hasIntegerValuation=True):
+    def __init__(self,argVotingProfile=None,\
+                 approvalVoting=False,coalition=None,\
+                 majorityMargins=True,hasIntegerValuation=True):
         from copy import copy
         if isinstance(argVotingProfile, (VotingProfile,ApprovalVotingProfile)):
             votingProfile = argVotingProfile
@@ -1101,6 +1154,7 @@ class CondorcetDigraph(Digraph):
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
+
 
     def constructApprovalBallotRelation(self,hasIntegerValuation=False):
         """
@@ -1191,6 +1245,17 @@ class CondorcetDigraph(Digraph):
                         relation[x][y] /= Max
         return relation
 
+    def showMajorityMargins(self,**args):
+        """
+        Wrapper for the
+        Digraph.showRelationTable(Sorted=True, IntegerValues=False,
+        actionsSubset=None, relation=None, ndigits=2,
+        ReflexiveTerms=True)
+
+        See the :py:meth:`digraphs.Digraph.showRelationTable` description.
+        """
+        Digraph.showRelationTable(self,**args)
+        
     def computeCondorcetWinner(self):
         """
         compute the Condorcet winner(s)
@@ -1247,6 +1312,40 @@ class CondorcetDigraph(Digraph):
         for x in actions:
             relation[x][x] = Med
         return relation
+
+    def computeCopelandRanking(self,Debug=False):
+        """
+        Renders a ranking of the actions following Copeland's rule.
+        Score(x_i) = Sum_j{ [[x_i > x_j]] - [[x_j > x_i]]}, where
+        [[x > y]] = 1 if x>y is true, otherwise 0.
+
+        The alternatives are ranked in decreasing order of their Scores.
+
+        In case of a tie, we use a lexicographic rule applied to the identifiers.
+        """
+        from collections import OrderedDict
+        from operator import itemgetter
+        Med = self.valuationdomain['med']
+        actions = [x for x in self.actions]
+        relation = self.relation
+        scores = OrderedDict()
+        for x in actions:
+            scores[x] = 0
+        for x in actions:
+            for y in actions:
+                if relation[x][y] > Med:
+                    scores[x] += 1
+                if relation[y][x] > Med:
+                    scores[x] -= 1
+        scoresRanking = [(x,scores[x]) for x in scores]
+        scoresRanking = sorted(scoresRanking,key = itemgetter(1),reverse=True)
+        ranking = [x[0] for x in scoresRanking]
+        if Debug:
+            print(actions)
+            print(scores)
+            print(scoresRanking)
+            print(ranking)
+        return ranking
 
     def computeKohlerRanking(self,linearOrdered=True,Debug=False):
         """
@@ -1319,7 +1418,7 @@ if __name__ == "__main__":
 
     print('****************************************************')
     print('* Python voting digraphs module                    *')
-    print('* $Revision: 2254 $                                   *')
+    print('* $Revision: 2484 $                                   *')
     print('* Copyright (C) 2006-2007 University of Luxembourg *')
     print('* The module comes with ABSOLUTELY NO WARRANTY     *')
     print('* to the extent permitted by the applicable law.   *')
@@ -1346,21 +1445,27 @@ if __name__ == "__main__":
     ## for x in arrowRaynaudRanking:
     ##     print '%s: %d (%.2f)' % (x[1], x[0], aar[x[1]]['majorityMargin'])
 
-##    lvp = LinearVotingProfile(numberOfCandidates=5,numberOfVoters=9,seed=1)
+    lvp = LinearVotingProfile(numberOfCandidates=5,numberOfVoters=9,seed=1)
 ##    ## lvp = LinearVotingProfile('templinearprofile')
-##    lvp.save()
-##    lvp1 = LinearVotingProfile('templinearprofile')
-##    lvp1.computeBallot()
-##    ## for x in lvp.voters:
-##    ##    print x, lvp.linearBallot[x]
-##    lvp.showLinearBallots()
+    lvp.save()
+    lvp1 = LinearVotingProfile('templinearprofile')
+    lvp1.computeBallot()
+    ## for x in lvp.voters:
+    ##    print x, lvp.linearBallot[x]
+    lvp1.showLinearBallots(IntegerWeights=True)
+    lvp1.showVoterBallot('v1')
 ##    print(lvp.computeRankAnalysis())
-##    lvp.showRankAnalysisTable(Debug=True)
-##    print(lvp.computeBordaScores())
-##    lvp.save2PerfTab()
-####    t = PerformanceTableau('votingPerfTab')
-####    t.showHTMLPerformanceHeatmap()
-##    lvp.showHTMLVotingHeatmap()
+    lvp1.computeInstantRunoffWinner()
+    lvp1.showRankAnalysisTable(Debug=False)
+    lvp1.showBordaRanking()
+    lvp1.computeBordaWinners()
+    lvp1.save2PerfTab('votingPerfTab')
+    t = PerformanceTableau('votingPerfTab')
+    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0)
+    c = CondorcetDigraph(lvp1)
+    print(c.computeCopelandRanking(Debug=True))
+    
+##    lvp1.showHTMLVotingHeatmap()
 ##    
 ##    print(lvp.computeBordaWinners())
 ##    print(lvp.computeUninominalVotes(lvp.candidates,lvp.linearBallot))
@@ -1375,10 +1480,10 @@ if __name__ == "__main__":
 ##    c.recodeValuation(-m,m)
 ##    c.showRelationTable()
 
-    av = ApprovalVotingProfile('approvalInvitation')
-    av.save2PerfTab()
-    t = PerformanceTableau('votingPerfTab')
-    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0)
+##    av = ApprovalVotingProfile('approvalInvitation')
+##    av.save2PerfTab()
+##    t = PerformanceTableau('votingPerfTab')
+##    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0)
     
     
 
@@ -1388,7 +1493,7 @@ if __name__ == "__main__":
 
     print('*************************************')
     print('* R.B. September 2008               *')
-    print('* $Revision: 2254 $                   *')
+    print('* $Revision: 2484 $                   *')
     print('*************************************')
 
 #############################

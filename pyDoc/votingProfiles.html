@@ -1,17 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head><title>Python: module votingDigraphs</title>
+<html><head><title>Python: module votingProfiles</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head><body bgcolor="#f0f0f8">
 
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
 <tr bgcolor="#7799ee">
 <td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>votingDigraphs</strong></big></big></font></td
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>votingProfiles</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/votingDigraphs.py">/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/votingDigraphs.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/votingProfiles.py">/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/votingProfiles.py</a></font></td></tr></table>
     <p><tt>#&nbsp;Python&nbsp;3&nbsp;implementation&nbsp;of&nbsp;voting&nbsp;digraphs<br>
 #&nbsp;Refactored&nbsp;from&nbsp;revision&nbsp;1.549&nbsp;of&nbsp;the&nbsp;digraphs&nbsp;module<br>
-#&nbsp;Current&nbsp;revision&nbsp;$Revision:&nbsp;2254&nbsp;$<br>
+#&nbsp;Current&nbsp;revision&nbsp;$Revision:&nbsp;2484&nbsp;$<br>
 #&nbsp;Copyright&nbsp;(C)&nbsp;2011&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
 #<br>
 #&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify<br>
@@ -53,22 +53,22 @@
 <dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
 </font></dt><dd>
 <dl>
-<dt><font face="helvetica, arial"><a href="votingDigraphs.html#VotingProfile">VotingProfile</a>
+<dt><font face="helvetica, arial"><a href="votingProfiles.html#VotingProfile">VotingProfile</a>
 </font></dt><dd>
 <dl>
-<dt><font face="helvetica, arial"><a href="votingDigraphs.html#ApprovalVotingProfile">ApprovalVotingProfile</a>
+<dt><font face="helvetica, arial"><a href="votingProfiles.html#ApprovalVotingProfile">ApprovalVotingProfile</a>
 </font></dt><dd>
 <dl>
-<dt><font face="helvetica, arial"><a href="votingDigraphs.html#RandomApprovalVotingProfile">RandomApprovalVotingProfile</a>
+<dt><font face="helvetica, arial"><a href="votingProfiles.html#RandomApprovalVotingProfile">RandomApprovalVotingProfile</a>
 </font></dt></dl>
 </dd>
-<dt><font face="helvetica, arial"><a href="votingDigraphs.html#LinearVotingProfile">LinearVotingProfile</a>
+<dt><font face="helvetica, arial"><a href="votingProfiles.html#LinearVotingProfile">LinearVotingProfile</a>
 </font></dt><dd>
 <dl>
-<dt><font face="helvetica, arial"><a href="votingDigraphs.html#RandomLinearVotingProfile">RandomLinearVotingProfile</a>
+<dt><font face="helvetica, arial"><a href="votingProfiles.html#RandomLinearVotingProfile">RandomLinearVotingProfile</a>
 </font></dt></dl>
 </dd>
-<dt><font face="helvetica, arial"><a href="votingDigraphs.html#RandomVotingProfile">RandomVotingProfile</a>
+<dt><font face="helvetica, arial"><a href="votingProfiles.html#RandomVotingProfile">RandomVotingProfile</a>
 </font></dt></dl>
 </dd>
 </dl>
@@ -76,7 +76,7 @@
 <dt><font face="helvetica, arial"><a href="digraphs.html#Digraph">digraphs.Digraph</a>(<a href="builtins.html#object">builtins.object</a>)
 </font></dt><dd>
 <dl>
-<dt><font face="helvetica, arial"><a href="votingDigraphs.html#CondorcetDigraph">CondorcetDigraph</a>
+<dt><font face="helvetica, arial"><a href="votingProfiles.html#CondorcetDigraph">CondorcetDigraph</a>
 </font></dt></dl>
 </dd>
 </dl>
@@ -84,7 +84,7 @@
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="ApprovalVotingProfile">class <strong>ApprovalVotingProfile</strong></a>(<a href="votingDigraphs.html#VotingProfile">VotingProfile</a>)</font></td></tr>
+<font color="#000000" face="helvetica, arial"><a name="ApprovalVotingProfile">class <strong>ApprovalVotingProfile</strong></a>(<a href="votingProfiles.html#VotingProfile">VotingProfile</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt>A&nbsp;specialised&nbsp;class&nbsp;for&nbsp;approval&nbsp;voting&nbsp;profiles<br>
@@ -110,8 +110,8 @@ Structure::<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
-<dd><a href="votingDigraphs.html#ApprovalVotingProfile">ApprovalVotingProfile</a></dd>
-<dd><a href="votingDigraphs.html#VotingProfile">VotingProfile</a></dd>
+<dd><a href="votingProfiles.html#ApprovalVotingProfile">ApprovalVotingProfile</a></dd>
+<dd><a href="votingProfiles.html#VotingProfile">VotingProfile</a></dd>
 <dd><a href="builtins.html#object">builtins.object</a></dd>
 </dl>
 <hr>
@@ -142,13 +142,15 @@ For&nbsp;each&nbsp;voter&nbsp;*v*,&nbsp;the&nbsp;performance&nbsp;of&nbsp;candid
 <dl><dt><a name="ApprovalVotingProfile-showResults"><strong>showResults</strong></a>(self)</dt></dl>
 
 <hr>
-Methods inherited from <a href="votingDigraphs.html#VotingProfile">VotingProfile</a>:<br>
+Methods inherited from <a href="votingProfiles.html#VotingProfile">VotingProfile</a>:<br>
+<dl><dt><a name="ApprovalVotingProfile-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Default&nbsp;description&nbsp;for&nbsp;<a href="#VotingProfile">VotingProfile</a>&nbsp;instances.</tt></dd></dl>
+
 <dl><dt><a name="ApprovalVotingProfile-showAll"><strong>showAll</strong></a>(self, WithBallots=True)</dt><dd><tt>Show&nbsp;method&nbsp;for&nbsp;&lt;<a href="#VotingProfile">VotingProfile</a>&gt;&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="ApprovalVotingProfile-showVoterBallot"><strong>showVoterBallot</strong></a>(self, voter, hasIntegerValuation=False)</dt><dd><tt>Show&nbsp;the&nbsp;actual&nbsp;voting&nbsp;of&nbsp;a&nbsp;voter.</tt></dd></dl>
 
 <hr>
-Data descriptors inherited from <a href="votingDigraphs.html#VotingProfile">VotingProfile</a>:<br>
+Data descriptors inherited from <a href="votingProfiles.html#VotingProfile">VotingProfile</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
 <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
@@ -205,7 +207,7 @@ dot&nbsp;-Grankdir=BT&nbsp;-Tpng&nbsp;rel_randLinearProfile.dot&nbsp;-o&nbsp;rel
 ..&nbsp;image::&nbsp;rel_randLinearProfile.png<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
-<dd><a href="votingDigraphs.html#CondorcetDigraph">CondorcetDigraph</a></dd>
+<dd><a href="votingProfiles.html#CondorcetDigraph">CondorcetDigraph</a></dd>
 <dd><a href="digraphs.html#Digraph">digraphs.Digraph</a></dd>
 <dd><a href="builtins.html#object">builtins.object</a></dd>
 </dl>
@@ -218,6 +220,14 @@ Methods defined here:<br>
 <dl><dt><a name="CondorcetDigraph-computeCondorcetWinner"><strong>computeCondorcetWinner</strong></a>(self)</dt><dd><tt>compute&nbsp;the&nbsp;Condorcet&nbsp;winner(s)<br>
 renders&nbsp;always&nbsp;a,&nbsp;potentially&nbsp;empty,&nbsp;list</tt></dd></dl>
 
+<dl><dt><a name="CondorcetDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Copeland's&nbsp;rule.<br>
+Score(x_i)&nbsp;=&nbsp;Sum_j{&nbsp;[[x_i&nbsp;&gt;&nbsp;x_j]]&nbsp;-&nbsp;[[x_j&nbsp;&gt;&nbsp;x_i]]},&nbsp;where<br>
+[[x&nbsp;&gt;&nbsp;y]]&nbsp;=&nbsp;1&nbsp;if&nbsp;x&gt;y&nbsp;is&nbsp;true,&nbsp;otherwise&nbsp;0.<br>
+&nbsp;<br>
+The&nbsp;alternatives&nbsp;are&nbsp;ranked&nbsp;in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;their&nbsp;Scores.<br>
+&nbsp;<br>
+In&nbsp;case&nbsp;of&nbsp;a&nbsp;tie,&nbsp;we&nbsp;use&nbsp;a&nbsp;lexicographic&nbsp;rule&nbsp;applied&nbsp;to&nbsp;the&nbsp;identifiers.</tt></dd></dl>
+
 <dl><dt><a name="CondorcetDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self, linearOrdered=True, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-constructApprovalBallotRelation"><strong>constructApprovalBallotRelation</strong></a>(self, hasIntegerValuation=False)</dt><dd><tt>Renders&nbsp;the&nbsp;votes&nbsp;differences&nbsp;between&nbsp;candidates<br>
@@ -228,6 +238,13 @@ on&nbsp;the&nbsp;basis&nbsp;of&nbsp;a&nbsp;complete&nbsp;ballot.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-constructMajorityMarginsRelation"><strong>constructMajorityMarginsRelation</strong></a>(self, hasIntegerValuation=True)</dt><dd><tt>Renders&nbsp;the&nbsp;marginal&nbsp;majority&nbsp;between&nbsp;candidates<br>
 on&nbsp;the&nbsp;basis&nbsp;of&nbsp;an&nbsp;approval&nbsp;ballot.</tt></dd></dl>
+
+<dl><dt><a name="CondorcetDigraph-showMajorityMargins"><strong>showMajorityMargins</strong></a>(self, **args)</dt><dd><tt>Wrapper&nbsp;for&nbsp;the<br>
+<a href="digraphs.html#Digraph">Digraph</a>.<a href="#CondorcetDigraph-showRelationTable">showRelationTable</a>(Sorted=True,&nbsp;IntegerValues=False,<br>
+actionsSubset=None,&nbsp;relation=None,&nbsp;ndigits=2,<br>
+ReflexiveTerms=True)<br>
+&nbsp;<br>
+See&nbsp;the&nbsp;:py:meth:`digraphs.<a href="digraphs.html#Digraph">Digraph</a>.showRelationTable`&nbsp;description.</tt></dd></dl>
 
 <hr>
 Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
@@ -364,9 +381,6 @@ N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#CondorcetDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
-
-<dl><dt><a name="CondorcetDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
-following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-computeCppChordlessCircuits"><strong>computeCppChordlessCircuits</strong></a>(self, Odd=False, Debug=False)</dt><dd><tt>python&nbsp;wrapper&nbsp;for&nbsp;the&nbsp;C++/Agrum&nbsp;based&nbsp;chordless&nbsp;circuits&nbsp;enumeration<br>
 exchange&nbsp;arguments&nbsp;with&nbsp;external&nbsp;temporary&nbsp;files</tt></dd></dl>
@@ -1207,7 +1221,7 @@ Data descriptors inherited from <a href="digraphs.html#Digraph">digraphs.Digraph
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="LinearVotingProfile">class <strong>LinearVotingProfile</strong></a>(<a href="votingDigraphs.html#VotingProfile">VotingProfile</a>)</font></td></tr>
+<font color="#000000" face="helvetica, arial"><a name="LinearVotingProfile">class <strong>LinearVotingProfile</strong></a>(<a href="votingProfiles.html#VotingProfile">VotingProfile</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt>A&nbsp;specialised&nbsp;class&nbsp;for&nbsp;linear&nbsp;voting&nbsp;profiles<br>
@@ -1258,8 +1272,8 @@ v3(1.0):&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;['a1',&nbsp;'a3',&nbsp;'a2']<br>
 ['a1']<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
-<dd><a href="votingDigraphs.html#LinearVotingProfile">LinearVotingProfile</a></dd>
-<dd><a href="votingDigraphs.html#VotingProfile">VotingProfile</a></dd>
+<dd><a href="votingProfiles.html#LinearVotingProfile">LinearVotingProfile</a></dd>
+<dd><a href="votingProfiles.html#VotingProfile">VotingProfile</a></dd>
 <dd><a href="builtins.html#object">builtins.object</a></dd>
 </dl>
 <hr>
@@ -1292,12 +1306,14 @@ For&nbsp;each&nbsp;voter&nbsp;*v*,&nbsp;the&nbsp;rank&nbsp;performance&nbsp;of&n
 &nbsp;<br>
 number&nbsp;of&nbsp;candidates&nbsp;-&nbsp;linearProfile[v].index(x)</tt></dd></dl>
 
+<dl><dt><a name="LinearVotingProfile-showBordaRanking"><strong>showBordaRanking</strong></a>(self)</dt><dd><tt>show&nbsp;Borda&nbsp;ranking&nbsp;in&nbsp;increasing&nbsp;order&nbsp;of&nbsp;the&nbsp;Borda&nbsp;score</tt></dd></dl>
+
 <dl><dt><a name="LinearVotingProfile-showHTMLVotingHeatmap"><strong>showHTMLVotingHeatmap</strong></a>(self, criteriaList=None, actionsList=None, SparseModel=False, minimalComponentSize=1, RankingRule='Copeland', quantiles=None, strategy='average', ndigits=0, colorLevels=None, pageTitle='Voting Heatmap', Correlations=True, Threading=False, nbrOfCPUs=1, Debug=False)</dt><dd><tt>Show&nbsp;the&nbsp;linear&nbsp;voting&nbsp;profile&nbsp;as&nbsp;a&nbsp;rank&nbsp;performance&nbsp;heatmap.<br>
 The&nbsp;linear&nbsp;voting&nbsp;profile&nbsp;is&nbsp;previously&nbsp;saved&nbsp;to&nbsp;a&nbsp;stored&nbsp;Performance&nbsp;Tableau.<br>
 &nbsp;<br>
 (see&nbsp;perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap()&nbsp;)</tt></dd></dl>
 
-<dl><dt><a name="LinearVotingProfile-showLinearBallots"><strong>showLinearBallots</strong></a>(self)</dt><dd><tt>show&nbsp;the&nbsp;linear&nbsp;ballots</tt></dd></dl>
+<dl><dt><a name="LinearVotingProfile-showLinearBallots"><strong>showLinearBallots</strong></a>(self, IntegerWeights=True)</dt><dd><tt>show&nbsp;the&nbsp;linear&nbsp;ballots</tt></dd></dl>
 
 <dl><dt><a name="LinearVotingProfile-showRankAnalysisTable"><strong>showRankAnalysisTable</strong></a>(self, Sorted=True, ndigits=0, Debug=False)</dt><dd><tt>Print&nbsp;the&nbsp;rank&nbsp;analysis&nbsp;tableau.<br>
 &nbsp;<br>
@@ -1308,13 +1324,15 @@ In&nbsp;case&nbsp;of&nbsp;decimal&nbsp;voters&nbsp;weights,&nbsp;ndigits&nbsp;al
 to&nbsp;format&nbsp;the&nbsp;decimal&nbsp;precision&nbsp;of&nbsp;the&nbsp;numerical&nbsp;output.</tt></dd></dl>
 
 <hr>
-Methods inherited from <a href="votingDigraphs.html#VotingProfile">VotingProfile</a>:<br>
+Methods inherited from <a href="votingProfiles.html#VotingProfile">VotingProfile</a>:<br>
+<dl><dt><a name="LinearVotingProfile-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Default&nbsp;description&nbsp;for&nbsp;<a href="#VotingProfile">VotingProfile</a>&nbsp;instances.</tt></dd></dl>
+
 <dl><dt><a name="LinearVotingProfile-showAll"><strong>showAll</strong></a>(self, WithBallots=True)</dt><dd><tt>Show&nbsp;method&nbsp;for&nbsp;&lt;<a href="#VotingProfile">VotingProfile</a>&gt;&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="LinearVotingProfile-showVoterBallot"><strong>showVoterBallot</strong></a>(self, voter, hasIntegerValuation=False)</dt><dd><tt>Show&nbsp;the&nbsp;actual&nbsp;voting&nbsp;of&nbsp;a&nbsp;voter.</tt></dd></dl>
 
 <hr>
-Data descriptors inherited from <a href="votingDigraphs.html#VotingProfile">VotingProfile</a>:<br>
+Data descriptors inherited from <a href="votingProfiles.html#VotingProfile">VotingProfile</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
 <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
@@ -1325,15 +1343,15 @@ Data descriptors inherited from <a href="votingDigraphs.html#VotingProfile">Voti
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="RandomApprovalVotingProfile">class <strong>RandomApprovalVotingProfile</strong></a>(<a href="votingDigraphs.html#ApprovalVotingProfile">ApprovalVotingProfile</a>)</font></td></tr>
+<font color="#000000" face="helvetica, arial"><a name="RandomApprovalVotingProfile">class <strong>RandomApprovalVotingProfile</strong></a>(<a href="votingProfiles.html#ApprovalVotingProfile">ApprovalVotingProfile</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt>A&nbsp;specialized&nbsp;class&nbsp;for&nbsp;approval&nbsp;voting&nbsp;profiles.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
-<dd><a href="votingDigraphs.html#RandomApprovalVotingProfile">RandomApprovalVotingProfile</a></dd>
-<dd><a href="votingDigraphs.html#ApprovalVotingProfile">ApprovalVotingProfile</a></dd>
-<dd><a href="votingDigraphs.html#VotingProfile">VotingProfile</a></dd>
+<dd><a href="votingProfiles.html#RandomApprovalVotingProfile">RandomApprovalVotingProfile</a></dd>
+<dd><a href="votingProfiles.html#ApprovalVotingProfile">ApprovalVotingProfile</a></dd>
+<dd><a href="votingProfiles.html#VotingProfile">VotingProfile</a></dd>
 <dd><a href="builtins.html#object">builtins.object</a></dd>
 </dl>
 <hr>
@@ -1347,7 +1365,7 @@ Methods defined here:<br>
 <dl><dt><a name="RandomApprovalVotingProfile-generateRandomDisApprovalBallot"><strong>generateRandomDisApprovalBallot</strong></a>(self, minSizeOfBallot, maxSizeOfBallot, seed=None)</dt><dd><tt>Renders&nbsp;a&nbsp;randomly&nbsp;generated&nbsp;approval&nbsp;ballot.</tt></dd></dl>
 
 <hr>
-Methods inherited from <a href="votingDigraphs.html#ApprovalVotingProfile">ApprovalVotingProfile</a>:<br>
+Methods inherited from <a href="votingProfiles.html#ApprovalVotingProfile">ApprovalVotingProfile</a>:<br>
 <dl><dt><a name="RandomApprovalVotingProfile-computeBallot"><strong>computeBallot</strong></a>(self)</dt><dd><tt>Computes&nbsp;a&nbsp;complete&nbsp;ballot&nbsp;from&nbsp;the&nbsp;approval&nbsp;Ballot.<br>
 &nbsp;<br>
 Parameters:<br>
@@ -1372,13 +1390,15 @@ For&nbsp;each&nbsp;voter&nbsp;*v*,&nbsp;the&nbsp;performance&nbsp;of&nbsp;candid
 <dl><dt><a name="RandomApprovalVotingProfile-showResults"><strong>showResults</strong></a>(self)</dt></dl>
 
 <hr>
-Methods inherited from <a href="votingDigraphs.html#VotingProfile">VotingProfile</a>:<br>
+Methods inherited from <a href="votingProfiles.html#VotingProfile">VotingProfile</a>:<br>
+<dl><dt><a name="RandomApprovalVotingProfile-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Default&nbsp;description&nbsp;for&nbsp;<a href="#VotingProfile">VotingProfile</a>&nbsp;instances.</tt></dd></dl>
+
 <dl><dt><a name="RandomApprovalVotingProfile-showAll"><strong>showAll</strong></a>(self, WithBallots=True)</dt><dd><tt>Show&nbsp;method&nbsp;for&nbsp;&lt;<a href="#VotingProfile">VotingProfile</a>&gt;&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="RandomApprovalVotingProfile-showVoterBallot"><strong>showVoterBallot</strong></a>(self, voter, hasIntegerValuation=False)</dt><dd><tt>Show&nbsp;the&nbsp;actual&nbsp;voting&nbsp;of&nbsp;a&nbsp;voter.</tt></dd></dl>
 
 <hr>
-Data descriptors inherited from <a href="votingDigraphs.html#VotingProfile">VotingProfile</a>:<br>
+Data descriptors inherited from <a href="votingProfiles.html#VotingProfile">VotingProfile</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
 <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
@@ -1389,15 +1409,15 @@ Data descriptors inherited from <a href="votingDigraphs.html#VotingProfile">Voti
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="RandomLinearVotingProfile">class <strong>RandomLinearVotingProfile</strong></a>(<a href="votingDigraphs.html#LinearVotingProfile">LinearVotingProfile</a>)</font></td></tr>
+<font color="#000000" face="helvetica, arial"><a name="RandomLinearVotingProfile">class <strong>RandomLinearVotingProfile</strong></a>(<a href="votingProfiles.html#LinearVotingProfile">LinearVotingProfile</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt>A&nbsp;specialized&nbsp;class&nbsp;for&nbsp;random&nbsp;linwear&nbsp;voting&nbsp;profiles.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
-<dd><a href="votingDigraphs.html#RandomLinearVotingProfile">RandomLinearVotingProfile</a></dd>
-<dd><a href="votingDigraphs.html#LinearVotingProfile">LinearVotingProfile</a></dd>
-<dd><a href="votingDigraphs.html#VotingProfile">VotingProfile</a></dd>
+<dd><a href="votingProfiles.html#RandomLinearVotingProfile">RandomLinearVotingProfile</a></dd>
+<dd><a href="votingProfiles.html#LinearVotingProfile">LinearVotingProfile</a></dd>
+<dd><a href="votingProfiles.html#VotingProfile">VotingProfile</a></dd>
 <dd><a href="builtins.html#object">builtins.object</a></dd>
 </dl>
 <hr>
@@ -1408,7 +1428,7 @@ Methods defined here:<br>
 <dl><dt><a name="RandomLinearVotingProfile-generateRandomLinearBallot"><strong>generateRandomLinearBallot</strong></a>(self, seed)</dt><dd><tt>Renders&nbsp;a&nbsp;randomly&nbsp;generated&nbsp;linear&nbsp;ballot.</tt></dd></dl>
 
 <hr>
-Methods inherited from <a href="votingDigraphs.html#LinearVotingProfile">LinearVotingProfile</a>:<br>
+Methods inherited from <a href="votingProfiles.html#LinearVotingProfile">LinearVotingProfile</a>:<br>
 <dl><dt><a name="RandomLinearVotingProfile-computeBallot"><strong>computeBallot</strong></a>(self)</dt><dd><tt>Computes&nbsp;a&nbsp;complete&nbsp;ballot&nbsp;from&nbsp;the&nbsp;linear&nbsp;Ballot.</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearVotingProfile-computeBordaScores"><strong>computeBordaScores</strong></a>(self)</dt><dd><tt>compute&nbsp;Borda&nbsp;scores&nbsp;from&nbsp;the&nbsp;rank&nbsp;analysis</tt></dd></dl>
@@ -1435,12 +1455,14 @@ For&nbsp;each&nbsp;voter&nbsp;*v*,&nbsp;the&nbsp;rank&nbsp;performance&nbsp;of&n
 &nbsp;<br>
 number&nbsp;of&nbsp;candidates&nbsp;-&nbsp;linearProfile[v].index(x)</tt></dd></dl>
 
+<dl><dt><a name="RandomLinearVotingProfile-showBordaRanking"><strong>showBordaRanking</strong></a>(self)</dt><dd><tt>show&nbsp;Borda&nbsp;ranking&nbsp;in&nbsp;increasing&nbsp;order&nbsp;of&nbsp;the&nbsp;Borda&nbsp;score</tt></dd></dl>
+
 <dl><dt><a name="RandomLinearVotingProfile-showHTMLVotingHeatmap"><strong>showHTMLVotingHeatmap</strong></a>(self, criteriaList=None, actionsList=None, SparseModel=False, minimalComponentSize=1, RankingRule='Copeland', quantiles=None, strategy='average', ndigits=0, colorLevels=None, pageTitle='Voting Heatmap', Correlations=True, Threading=False, nbrOfCPUs=1, Debug=False)</dt><dd><tt>Show&nbsp;the&nbsp;linear&nbsp;voting&nbsp;profile&nbsp;as&nbsp;a&nbsp;rank&nbsp;performance&nbsp;heatmap.<br>
 The&nbsp;linear&nbsp;voting&nbsp;profile&nbsp;is&nbsp;previously&nbsp;saved&nbsp;to&nbsp;a&nbsp;stored&nbsp;Performance&nbsp;Tableau.<br>
 &nbsp;<br>
 (see&nbsp;perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap()&nbsp;)</tt></dd></dl>
 
-<dl><dt><a name="RandomLinearVotingProfile-showLinearBallots"><strong>showLinearBallots</strong></a>(self)</dt><dd><tt>show&nbsp;the&nbsp;linear&nbsp;ballots</tt></dd></dl>
+<dl><dt><a name="RandomLinearVotingProfile-showLinearBallots"><strong>showLinearBallots</strong></a>(self, IntegerWeights=True)</dt><dd><tt>show&nbsp;the&nbsp;linear&nbsp;ballots</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearVotingProfile-showRankAnalysisTable"><strong>showRankAnalysisTable</strong></a>(self, Sorted=True, ndigits=0, Debug=False)</dt><dd><tt>Print&nbsp;the&nbsp;rank&nbsp;analysis&nbsp;tableau.<br>
 &nbsp;<br>
@@ -1451,13 +1473,15 @@ In&nbsp;case&nbsp;of&nbsp;decimal&nbsp;voters&nbsp;weights,&nbsp;ndigits&nbsp;al
 to&nbsp;format&nbsp;the&nbsp;decimal&nbsp;precision&nbsp;of&nbsp;the&nbsp;numerical&nbsp;output.</tt></dd></dl>
 
 <hr>
-Methods inherited from <a href="votingDigraphs.html#VotingProfile">VotingProfile</a>:<br>
+Methods inherited from <a href="votingProfiles.html#VotingProfile">VotingProfile</a>:<br>
+<dl><dt><a name="RandomLinearVotingProfile-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Default&nbsp;description&nbsp;for&nbsp;<a href="#VotingProfile">VotingProfile</a>&nbsp;instances.</tt></dd></dl>
+
 <dl><dt><a name="RandomLinearVotingProfile-showAll"><strong>showAll</strong></a>(self, WithBallots=True)</dt><dd><tt>Show&nbsp;method&nbsp;for&nbsp;&lt;<a href="#VotingProfile">VotingProfile</a>&gt;&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearVotingProfile-showVoterBallot"><strong>showVoterBallot</strong></a>(self, voter, hasIntegerValuation=False)</dt><dd><tt>Show&nbsp;the&nbsp;actual&nbsp;voting&nbsp;of&nbsp;a&nbsp;voter.</tt></dd></dl>
 
 <hr>
-Data descriptors inherited from <a href="votingDigraphs.html#VotingProfile">VotingProfile</a>:<br>
+Data descriptors inherited from <a href="votingProfiles.html#VotingProfile">VotingProfile</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
 <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
@@ -1468,14 +1492,14 @@ Data descriptors inherited from <a href="votingDigraphs.html#VotingProfile">Voti
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="RandomVotingProfile">class <strong>RandomVotingProfile</strong></a>(<a href="votingDigraphs.html#VotingProfile">VotingProfile</a>)</font></td></tr>
+<font color="#000000" face="helvetica, arial"><a name="RandomVotingProfile">class <strong>RandomVotingProfile</strong></a>(<a href="votingProfiles.html#VotingProfile">VotingProfile</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt>A&nbsp;subclass&nbsp;for&nbsp;generating&nbsp;random&nbsp;voting&nbsp;profiles.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
-<dd><a href="votingDigraphs.html#RandomVotingProfile">RandomVotingProfile</a></dd>
-<dd><a href="votingDigraphs.html#VotingProfile">VotingProfile</a></dd>
+<dd><a href="votingProfiles.html#RandomVotingProfile">RandomVotingProfile</a></dd>
+<dd><a href="votingProfiles.html#VotingProfile">VotingProfile</a></dd>
 <dd><a href="builtins.html#object">builtins.object</a></dd>
 </dl>
 <hr>
@@ -1489,7 +1513,9 @@ Methods defined here:<br>
 from&nbsp;a&nbsp;shuffled&nbsp;list&nbsp;of&nbsp;candidates&nbsp;for&nbsp;each&nbsp;voter.</tt></dd></dl>
 
 <hr>
-Methods inherited from <a href="votingDigraphs.html#VotingProfile">VotingProfile</a>:<br>
+Methods inherited from <a href="votingProfiles.html#VotingProfile">VotingProfile</a>:<br>
+<dl><dt><a name="RandomVotingProfile-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Default&nbsp;description&nbsp;for&nbsp;<a href="#VotingProfile">VotingProfile</a>&nbsp;instances.</tt></dd></dl>
+
 <dl><dt><a name="RandomVotingProfile-save"><strong>save</strong></a>(self, name='tempVprofile')</dt><dd><tt>Persistant&nbsp;storage&nbsp;of&nbsp;an&nbsp;approval&nbsp;voting&nbsp;profile.</tt></dd></dl>
 
 <dl><dt><a name="RandomVotingProfile-showAll"><strong>showAll</strong></a>(self, WithBallots=True)</dt><dd><tt>Show&nbsp;method&nbsp;for&nbsp;&lt;<a href="#VotingProfile">VotingProfile</a>&gt;&nbsp;instances.</tt></dd></dl>
@@ -1497,7 +1523,7 @@ Methods inherited from <a href="votingDigraphs.html#VotingProfile">VotingProfile
 <dl><dt><a name="RandomVotingProfile-showVoterBallot"><strong>showVoterBallot</strong></a>(self, voter, hasIntegerValuation=False)</dt><dd><tt>Show&nbsp;the&nbsp;actual&nbsp;voting&nbsp;of&nbsp;a&nbsp;voter.</tt></dd></dl>
 
 <hr>
-Data descriptors inherited from <a href="votingDigraphs.html#VotingProfile">VotingProfile</a>:<br>
+Data descriptors inherited from <a href="votingProfiles.html#VotingProfile">VotingProfile</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
 <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
@@ -1511,7 +1537,7 @@ Data descriptors inherited from <a href="votingDigraphs.html#VotingProfile">Voti
 <font color="#000000" face="helvetica, arial"><a name="VotingProfile">class <strong>VotingProfile</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>A&nbsp;general&nbsp;class&nbsp;for&nbsp;storing&nbsp;voting&nbsp;profiles.<br>
+<td colspan=2><tt>A&nbsp;generic&nbsp;class&nbsp;for&nbsp;storing&nbsp;voting&nbsp;profiles.<br>
 &nbsp;<br>
 General&nbsp;structure::<br>
 &nbsp;<br>
@@ -1538,6 +1564,8 @@ General&nbsp;structure::<br>
 <tr><td>&nbsp;</td>
 <td width="100%">Methods defined here:<br>
 <dl><dt><a name="VotingProfile-__init__"><strong>__init__</strong></a>(self, fileVotingProfile=None, seed=None)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="VotingProfile-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Default&nbsp;description&nbsp;for&nbsp;<a href="#VotingProfile">VotingProfile</a>&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="VotingProfile-save"><strong>save</strong></a>(self, name='tempVprofile')</dt><dd><tt>Persistant&nbsp;storage&nbsp;of&nbsp;an&nbsp;approval&nbsp;voting&nbsp;profile.</tt></dd></dl>
 
