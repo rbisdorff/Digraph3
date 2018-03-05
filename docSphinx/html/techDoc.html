@@ -7057,6 +7057,15 @@ Score(x_i) = Sum_j{ [[x_i &gt; x_j]] - [[x_j &gt; x_i]]}, where
 </dd></dl>
 
 <dl class="method">
+<dt id="votingProfiles.CondorcetDigraph.computeNetFlowsRanking">
+<code class="descname">computeNetFlowsRanking</code><span class="sig-paren">(</span><em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#CondorcetDigraph.computeNetFlowsRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.CondorcetDigraph.computeNetFlowsRanking" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a ranking of the actions following the Net Flows rule.
+Score(x_i) = Sum_j{M(x_i,x_j)} for i,j = 1..n</p>
+<p>The alternatives are ranked in decreasing order of their Scores.</p>
+<p>In case of a tie, we use a lexicographic rule applied to the identifiers.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="votingProfiles.CondorcetDigraph.constructApprovalBallotRelation">
 <code class="descname">constructApprovalBallotRelation</code><span class="sig-paren">(</span><em>hasIntegerValuation=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#CondorcetDigraph.constructApprovalBallotRelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.CondorcetDigraph.constructApprovalBallotRelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the votes differences between candidates
