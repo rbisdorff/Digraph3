@@ -881,10 +881,10 @@ class NetFlowsOrder(LinearOrder):
         netFlows = []
         if other.valuationdomain['med'] == Med:
             for x in actions:
-##                xnetflows = sum((otherRelation[x][y] - otherRelation[y][x])\
-##                                 for y in actions)
-                xnetflows = sum((otherRelation[x][y])\
+                xnetflows = sum((otherRelation[x][y] - otherRelation[y][x])\
                                  for y in actions)
+##                xnetflows = sum((otherRelation[x][y])\
+##                                 for y in actions)
                 netFlows.append((xnetflows,x))
                 if Debug:
                     print(x,xnetflows)

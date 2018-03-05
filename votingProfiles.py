@@ -1475,11 +1475,11 @@ if __name__ == "__main__":
     ## for x in arrowRaynaudRanking:
     ##     print '%s: %d (%.2f)' % (x[1], x[0], aar[x[1]]['majorityMargin'])
 
-##    lvp = LinearVotingProfile(numberOfCandidates=5,numberOfVoters=9,seed=1)
-####    ## lvp = LinearVotingProfile('templinearprofile')
-##    lvp.save()
-##    lvp1 = LinearVotingProfile('templinearprofile')
-    lvp1 = LinearVotingProfile('example1')
+    lvp = LinearVotingProfile(numberOfCandidates=5,numberOfVoters=9,seed=1)
+##    ## lvp = LinearVotingProfile('templinearprofile')
+    lvp.save()
+    lvp1 = LinearVotingProfile('templinearprofile')
+##    lvp1 = LinearVotingProfile('example1')
     lvp1.computeBallot()
     ## for x in lvp.voters:
     ##    print x, lvp.linearBallot[x]
