@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>votingDigraphs &#8212; Digraph3 3.5-2000+ documentation</title>
+    <title>votingProfiles &#8212; Digraph3 3.5-2000+ documentation</title>
     
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -47,13 +47,13 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <h1>Source code for votingDigraphs</h1><div class="highlight"><pre>
+  <h1>Source code for votingProfiles</h1><div class="highlight"><pre>
 <span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="c1">#</span>
 <span class="c1"># Python 3 implementation of voting digraphs</span>
 <span class="c1"># Refactored from revision 1.549 of the digraphs module</span>
-<span class="c1"># Current revision $Revision: 2482 $</span>
-<span class="c1"># Copyright (C) 2011  Raymond Bisdorff</span>
+<span class="c1"># Current revision $Revision: 2484 $</span>
+<span class="c1"># Copyright (C) 2011-2018 Raymond Bisdorff</span>
 <span class="c1">#</span>
 <span class="c1">#    This program is free software; you can redistribute it and/or modify</span>
 <span class="c1">#    it under the terms of the GNU General Public License as published by</span>
@@ -78,9 +78,9 @@
 
 <span class="c1">#---------- voting profiles</span>
 
-<div class="viewcode-block" id="VotingProfile"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.VotingProfile">[docs]</a><span class="k">class</span> <span class="nc">VotingProfile</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="VotingProfile"><a class="viewcode-back" href="../techDoc.html#votingProfiles.VotingProfile">[docs]</a><span class="k">class</span> <span class="nc">VotingProfile</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    A general class for storing voting profiles.</span>
+<span class="sd">    A generic class for storing voting profiles.</span>
 
 <span class="sd">    General structure::</span>
 
@@ -136,7 +136,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">voters</span> <span class="o">=</span> <span class="n">randv</span><span class="o">.</span><span class="n">voters</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ballot</span> <span class="o">=</span> <span class="n">randv</span><span class="o">.</span><span class="n">ballot</span>
 
-<div class="viewcode-block" id="VotingProfile.showAll"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.VotingProfile.showAll">[docs]</a>    <span class="k">def</span> <span class="nf">showAll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">WithBallots</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="VotingProfile.showAll"><a class="viewcode-back" href="../techDoc.html#votingProfiles.VotingProfile.showAll">[docs]</a>    <span class="k">def</span> <span class="nf">showAll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">WithBallots</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Show method for &lt;VotingProfile&gt; instances.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -154,7 +154,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">showVoterBallot</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;----------------------&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="VotingProfile.showVoterBallot"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.VotingProfile.showVoterBallot">[docs]</a>    <span class="k">def</span> <span class="nf">showVoterBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">voter</span><span class="p">,</span> <span class="n">hasIntegerValuation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="VotingProfile.showVoterBallot"><a class="viewcode-back" href="../techDoc.html#votingProfiles.VotingProfile.showVoterBallot">[docs]</a>    <span class="k">def</span> <span class="nf">showVoterBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">voter</span><span class="p">,</span> <span class="n">hasIntegerValuation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Show the actual voting of a voter.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -173,7 +173,7 @@
             <span class="nb">print</span><span class="p">()</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="VotingProfile.save"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.VotingProfile.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;tempVprofile&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="VotingProfile.save"><a class="viewcode-back" href="../techDoc.html#votingProfiles.VotingProfile.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;tempVprofile&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Persistant storage of an approval voting profile.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -211,7 +211,7 @@
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="s1">&#39;}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div></div>
 
-<div class="viewcode-block" id="LinearVotingProfile"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.LinearVotingProfile">[docs]</a><span class="k">class</span> <span class="nc">LinearVotingProfile</span><span class="p">(</span><span class="n">VotingProfile</span><span class="p">):</span>
+<div class="viewcode-block" id="LinearVotingProfile"><a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile">[docs]</a><span class="k">class</span> <span class="nc">LinearVotingProfile</span><span class="p">(</span><span class="n">VotingProfile</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A specialised class for linear voting profiles</span>
 
@@ -274,18 +274,13 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">linearBallot</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;linearBallot&#39;</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ballot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeBallot</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">randv</span> <span class="o">=</span> <span class="n">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="n">numberOfCandidates</span><span class="p">,</span>
-                                              <span class="n">numberOfVoters</span><span class="o">=</span><span class="n">numberOfVoters</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;randLinearVotingProfile&#39;</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">candidates</span> <span class="o">=</span> <span class="n">randv</span><span class="o">.</span><span class="n">candidates</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">voters</span> <span class="o">=</span> <span class="n">randv</span><span class="o">.</span><span class="n">voters</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">linearBallot</span> <span class="o">=</span> <span class="n">randv</span><span class="o">.</span><span class="n">linearBallot</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">ballot</span> <span class="o">=</span> <span class="n">randv</span><span class="o">.</span><span class="n">ballot</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;!!! Error: The name of a stored linear voting profile is required !!!&#39;</span><span class="p">)</span>
+            <span class="k">return</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sumWeights</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">sumWeights</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
 
-<div class="viewcode-block" id="LinearVotingProfile.computeBallot"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.LinearVotingProfile.computeBallot">[docs]</a>    <span class="k">def</span> <span class="nf">computeBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="LinearVotingProfile.computeBallot"><a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.computeBallot">[docs]</a>    <span class="k">def</span> <span class="nf">computeBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes a complete ballot from the linear Ballot.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -308,7 +303,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ballot</span> <span class="o">=</span> <span class="n">ballot</span>
         <span class="k">return</span> <span class="n">ballot</span></div>
 
-<div class="viewcode-block" id="LinearVotingProfile.save"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.LinearVotingProfile.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;templinearprofile&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="LinearVotingProfile.save"><a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;templinearprofile&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Persistant storage of a linear voting profile.</span>
 
@@ -346,7 +341,7 @@
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="s1">&#39;}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="LinearVotingProfile.showLinearBallots"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.LinearVotingProfile.showLinearBallots">[docs]</a>    <span class="k">def</span> <span class="nf">showLinearBallots</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">IntegerWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="LinearVotingProfile.showLinearBallots"><a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.showLinearBallots">[docs]</a>    <span class="k">def</span> <span class="nf">showLinearBallots</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">IntegerWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        show the linear ballots</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -363,7 +358,7 @@
             <span class="nb">print</span><span class="p">(</span><span class="n">formStr</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">voters</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">],</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">linearBallot</span><span class="p">[</span><span class="n">v</span><span class="p">])))</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;# voters: &#39;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sumWeights</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="LinearVotingProfile.computeRankAnalysis"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.LinearVotingProfile.computeRankAnalysis">[docs]</a>    <span class="k">def</span> <span class="nf">computeRankAnalysis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="LinearVotingProfile.computeRankAnalysis"><a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.computeRankAnalysis">[docs]</a>    <span class="k">def</span> <span class="nf">computeRankAnalysis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        compute the number of ranks each candidate obtains</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -384,7 +379,7 @@
         <span class="c1">#print ranks</span>
         <span class="k">return</span> <span class="n">ranks</span></div>
 
-<div class="viewcode-block" id="LinearVotingProfile.showRankAnalysisTable"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.LinearVotingProfile.showRankAnalysisTable">[docs]</a>    <span class="k">def</span> <span class="nf">showRankAnalysisTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="LinearVotingProfile.showRankAnalysisTable"><a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.showRankAnalysisTable">[docs]</a>    <span class="k">def</span> <span class="nf">showRankAnalysisTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Print the rank analysis tableau.</span>
 <span class="sd">        </span>
@@ -429,7 +424,7 @@
                                   <span class="n">bordaScores</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;averageBordaScore&#39;</span><span class="p">]))</span>      </div>
 
 
-<div class="viewcode-block" id="LinearVotingProfile.computeBordaScores"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.LinearVotingProfile.computeBordaScores">[docs]</a>    <span class="k">def</span> <span class="nf">computeBordaScores</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="LinearVotingProfile.computeBordaScores"><a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.computeBordaScores">[docs]</a>    <span class="k">def</span> <span class="nf">computeBordaScores</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        compute Borda scores from the rank analysis</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -448,7 +443,7 @@
         <span class="n">BordaScores</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],{</span><span class="s1">&#39;BordaScore&#39;</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;averageBordaScore&#39;</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]})</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">scores</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">BordaScores</span></div>
 
-<div class="viewcode-block" id="LinearVotingProfile.showBordaRanking"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.LinearVotingProfile.showBordaRanking">[docs]</a>    <span class="k">def</span> <span class="nf">showBordaRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="LinearVotingProfile.showBordaRanking"><a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.showBordaRanking">[docs]</a>    <span class="k">def</span> <span class="nf">showBordaRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        show Borda ranking in increasing order of the Borda score</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -457,7 +452,7 @@
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">BordaScores</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="s1">&#39;: &#39;</span><span class="p">,</span><span class="n">BordaScores</span><span class="p">[</span><span class="n">x</span><span class="p">])</span></div>
                   
-<div class="viewcode-block" id="LinearVotingProfile.computeBordaWinners"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.LinearVotingProfile.computeBordaWinners">[docs]</a>    <span class="k">def</span> <span class="nf">computeBordaWinners</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="LinearVotingProfile.computeBordaWinners"><a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.computeBordaWinners">[docs]</a>    <span class="k">def</span> <span class="nf">computeBordaWinners</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        compute the Borda winner from the Borda scores, ie the list of</span>
 <span class="sd">        candidates with the minimal Borda score.</span>
@@ -475,7 +470,7 @@
         <span class="n">winners</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">BordaScores</span> <span class="k">if</span> <span class="n">BordaScores</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;BordaScore&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">BordaMinimum</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">winners</span></div>
 
-<div class="viewcode-block" id="LinearVotingProfile.computeInstantRunoffWinner"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.LinearVotingProfile.computeInstantRunoffWinner">[docs]</a>    <span class="k">def</span> <span class="nf">computeInstantRunoffWinner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="LinearVotingProfile.computeInstantRunoffWinner"><a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.computeInstantRunoffWinner">[docs]</a>    <span class="k">def</span> <span class="nf">computeInstantRunoffWinner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        compute the instant runoff winner from a linear voting ballot</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -535,7 +530,7 @@
                         <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">remainingCandidates</span></div>
 
-<div class="viewcode-block" id="LinearVotingProfile.save2PerfTab"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.LinearVotingProfile.save2PerfTab">[docs]</a>    <span class="k">def</span> <span class="nf">save2PerfTab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;votingPerfTab&#39;</span><span class="p">,</span><span class="n">isDecimal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">valueDigits</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<div class="viewcode-block" id="LinearVotingProfile.save2PerfTab"><a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.save2PerfTab">[docs]</a>    <span class="k">def</span> <span class="nf">save2PerfTab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;votingPerfTab&#39;</span><span class="p">,</span><span class="n">isDecimal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">valueDigits</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Persistant storage of a linear voting profile in the format of a rank performance Tableau.</span>
 <span class="sd">        For each voter *v*, the rank performance of candidate *x* corresponds to:</span>
@@ -590,7 +585,7 @@
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="s1">&#39;}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="LinearVotingProfile.showHTMLVotingHeatmap"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.LinearVotingProfile.showHTMLVotingHeatmap">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLVotingHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> \
+<div class="viewcode-block" id="LinearVotingProfile.showHTMLVotingHeatmap"><a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.showHTMLVotingHeatmap">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLVotingHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> \
                               <span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                               <span class="n">SparseModel</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                               <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> \
@@ -624,7 +619,7 @@
     
 
 
-<div class="viewcode-block" id="LinearVotingProfile.computeUninominalVotes"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.LinearVotingProfile.computeUninominalVotes">[docs]</a>    <span class="k">def</span> <span class="nf">computeUninominalVotes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">candidates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">linearBallot</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="LinearVotingProfile.computeUninominalVotes"><a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.computeUninominalVotes">[docs]</a>    <span class="k">def</span> <span class="nf">computeUninominalVotes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">candidates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">linearBallot</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        compute uninominal votes for each candidate in candidates sublist</span>
 <span class="sd">        and restricted linear ballots</span>
@@ -641,7 +636,7 @@
                     <span class="n">uninominalVotes</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">uninominalVotes</span></div>
 
-<div class="viewcode-block" id="LinearVotingProfile.computeSimpleMajorityWinner"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.LinearVotingProfile.computeSimpleMajorityWinner">[docs]</a>    <span class="k">def</span> <span class="nf">computeSimpleMajorityWinner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="LinearVotingProfile.computeSimpleMajorityWinner"><a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.computeSimpleMajorityWinner">[docs]</a>    <span class="k">def</span> <span class="nf">computeSimpleMajorityWinner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        compute the winner in a uninominal Election from a linear ballot</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -663,7 +658,7 @@
         <span class="k">return</span> <span class="n">simpleMajorityWinner</span></div></div>
 
 
-<div class="viewcode-block" id="ApprovalVotingProfile"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.ApprovalVotingProfile">[docs]</a><span class="k">class</span> <span class="nc">ApprovalVotingProfile</span><span class="p">(</span><span class="n">VotingProfile</span><span class="p">):</span>
+<div class="viewcode-block" id="ApprovalVotingProfile"><a class="viewcode-back" href="../techDoc.html#votingProfiles.ApprovalVotingProfile">[docs]</a><span class="k">class</span> <span class="nc">ApprovalVotingProfile</span><span class="p">(</span><span class="n">VotingProfile</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A specialised class for approval voting profiles</span>
 
@@ -712,7 +707,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">voters</span> <span class="o">=</span> <span class="n">randv</span><span class="o">.</span><span class="n">voters</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ballot</span> <span class="o">=</span> <span class="n">randv</span><span class="o">.</span><span class="n">ballot</span>
 
-<div class="viewcode-block" id="ApprovalVotingProfile.showApprovalResults"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.ApprovalVotingProfile.showApprovalResults">[docs]</a>    <span class="k">def</span> <span class="nf">showApprovalResults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ApprovalVotingProfile.showApprovalResults"><a class="viewcode-back" href="../techDoc.html#votingProfiles.ApprovalVotingProfile.showApprovalResults">[docs]</a>    <span class="k">def</span> <span class="nf">showApprovalResults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the approval obtained by each candidates.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -733,7 +728,7 @@
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;candidate: </span><span class="si">%s</span><span class="s1"> obtains </span><span class="si">%d</span><span class="s1"> votes&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">))</span></div>
 
-<div class="viewcode-block" id="ApprovalVotingProfile.showDisApprovalResults"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.ApprovalVotingProfile.showDisApprovalResults">[docs]</a>    <span class="k">def</span> <span class="nf">showDisApprovalResults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ApprovalVotingProfile.showDisApprovalResults"><a class="viewcode-back" href="../techDoc.html#votingProfiles.ApprovalVotingProfile.showDisApprovalResults">[docs]</a>    <span class="k">def</span> <span class="nf">showDisApprovalResults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the disapprovals obtained by each candidates.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -754,11 +749,11 @@
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;candidate: </span><span class="si">%s</span><span class="s1"> obtains </span><span class="si">%d</span><span class="s1"> votes&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">))</span></div>
 
-<div class="viewcode-block" id="ApprovalVotingProfile.showResults"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.ApprovalVotingProfile.showResults">[docs]</a>    <span class="k">def</span> <span class="nf">showResults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ApprovalVotingProfile.showResults"><a class="viewcode-back" href="../techDoc.html#votingProfiles.ApprovalVotingProfile.showResults">[docs]</a>    <span class="k">def</span> <span class="nf">showResults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showApprovalResults</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showDisApprovalResults</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="ApprovalVotingProfile.computeBallot"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.ApprovalVotingProfile.computeBallot">[docs]</a>    <span class="k">def</span> <span class="nf">computeBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ApprovalVotingProfile.computeBallot"><a class="viewcode-back" href="../techDoc.html#votingProfiles.ApprovalVotingProfile.computeBallot">[docs]</a>    <span class="k">def</span> <span class="nf">computeBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes a complete ballot from the approval Ballot.</span>
 
@@ -837,7 +832,7 @@
 <span class="c1">##        self.ballot = ballot</span>
 <span class="c1">##        return ballot</span>
 
-<div class="viewcode-block" id="ApprovalVotingProfile.save"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.ApprovalVotingProfile.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;tempAVprofile&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="ApprovalVotingProfile.save"><a class="viewcode-back" href="../techDoc.html#votingProfiles.ApprovalVotingProfile.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;tempAVprofile&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Persistant storage of an approval voting profile.</span>
 
@@ -875,7 +870,7 @@
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="s1">&#39;}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="ApprovalVotingProfile.save2PerfTab"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.ApprovalVotingProfile.save2PerfTab">[docs]</a>    <span class="k">def</span> <span class="nf">save2PerfTab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;votingPerfTab&#39;</span><span class="p">,</span><span class="n">isDecimal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">valueDigits</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<div class="viewcode-block" id="ApprovalVotingProfile.save2PerfTab"><a class="viewcode-back" href="../techDoc.html#votingProfiles.ApprovalVotingProfile.save2PerfTab">[docs]</a>    <span class="k">def</span> <span class="nf">save2PerfTab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;votingPerfTab&#39;</span><span class="p">,</span><span class="n">isDecimal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">valueDigits</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Persistant storage of an approval voting profile in the format of a standard performance tableau.</span>
 <span class="sd">        For each voter *v*, the performance of candidate *x* corresponds to:</span>
@@ -940,7 +935,7 @@
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div></div>
 
 
-<div class="viewcode-block" id="RandomApprovalVotingProfile"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.RandomApprovalVotingProfile">[docs]</a><span class="k">class</span> <span class="nc">RandomApprovalVotingProfile</span><span class="p">(</span><span class="n">ApprovalVotingProfile</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomApprovalVotingProfile"><a class="viewcode-back" href="../techDoc.html#votingProfiles.RandomApprovalVotingProfile">[docs]</a><span class="k">class</span> <span class="nc">RandomApprovalVotingProfile</span><span class="p">(</span><span class="n">ApprovalVotingProfile</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A specialized class for approval voting profiles.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -970,7 +965,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">disApprovalBallot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generateRandomDisApprovalBallot</span><span class="p">(</span><span class="n">minSizeOfBallot</span><span class="p">,</span><span class="n">maxSizeOfBallot</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ballot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeBallot</span><span class="p">()</span>
 
-<div class="viewcode-block" id="RandomApprovalVotingProfile.generateRandomApprovalBallot"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.RandomApprovalVotingProfile.generateRandomApprovalBallot">[docs]</a>    <span class="k">def</span> <span class="nf">generateRandomApprovalBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">minSizeOfBallot</span><span class="p">,</span><span class="n">maxSizeOfBallot</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomApprovalVotingProfile.generateRandomApprovalBallot"><a class="viewcode-back" href="../techDoc.html#votingProfiles.RandomApprovalVotingProfile.generateRandomApprovalBallot">[docs]</a>    <span class="k">def</span> <span class="nf">generateRandomApprovalBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">minSizeOfBallot</span><span class="p">,</span><span class="n">maxSizeOfBallot</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a randomly generated approval ballot.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -991,7 +986,7 @@
                     <span class="n">candidatesList</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">bx</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">approvalBallot</span></div>
 
-<div class="viewcode-block" id="RandomApprovalVotingProfile.generateRandomDisApprovalBallot"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.RandomApprovalVotingProfile.generateRandomDisApprovalBallot">[docs]</a>    <span class="k">def</span> <span class="nf">generateRandomDisApprovalBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">minSizeOfBallot</span><span class="p">,</span><span class="n">maxSizeOfBallot</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomApprovalVotingProfile.generateRandomDisApprovalBallot"><a class="viewcode-back" href="../techDoc.html#votingProfiles.RandomApprovalVotingProfile.generateRandomDisApprovalBallot">[docs]</a>    <span class="k">def</span> <span class="nf">generateRandomDisApprovalBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">minSizeOfBallot</span><span class="p">,</span><span class="n">maxSizeOfBallot</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a randomly generated approval ballot.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1013,21 +1008,29 @@
                     <span class="n">candidatesList</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">bx</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">disApprovalBallot</span></div></div>
 
-<div class="viewcode-block" id="RandomLinearVotingProfile"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.RandomLinearVotingProfile">[docs]</a><span class="k">class</span> <span class="nc">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">LinearVotingProfile</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomLinearVotingProfile"><a class="viewcode-back" href="../techDoc.html#votingProfiles.RandomLinearVotingProfile">[docs]</a><span class="k">class</span> <span class="nc">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">LinearVotingProfile</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A specialized class for random linwear voting profiles.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">votersWeights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Random profile creation parameters:</span>
 <span class="sd">            | numberOfVoters=9, numberOfCandidates=5,</span>
+<span class="sd">            | votersWeights = list of positive integers [2,3,4, ...]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
         <span class="n">votersList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">numberOfVoters</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
         <span class="n">voters</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">votersList</span><span class="p">:</span>
             <span class="n">voterID</span> <span class="o">=</span> <span class="s1">&#39;v</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">v</span>
-            <span class="n">voters</span><span class="p">[</span><span class="n">voterID</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)}</span>
+            <span class="k">if</span> <span class="n">votersWeights</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">weight</span> <span class="o">=</span> <span class="n">votersWeights</span><span class="p">[</span><span class="n">v</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="n">weight</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">weight</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">voters</span><span class="p">[</span><span class="n">voterID</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">weight</span><span class="p">)}</span>
         <span class="n">candidatesList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">numberOfCandidates</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
         <span class="n">candidates</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">candidatesList</span><span class="p">:</span>
@@ -1036,11 +1039,15 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="s1">&#39;randLinearProfile&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">candidates</span> <span class="o">=</span> <span class="n">candidates</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">voters</span> <span class="o">=</span> <span class="n">voters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sumWeights</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sumWeights</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">linearBallot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generateRandomLinearBallot</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="c1">#print self.linearBallot</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ballot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeBallot</span><span class="p">()</span>
 
-<div class="viewcode-block" id="RandomLinearVotingProfile.generateRandomLinearBallot"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.RandomLinearVotingProfile.generateRandomLinearBallot">[docs]</a>    <span class="k">def</span> <span class="nf">generateRandomLinearBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">seed</span><span class="p">):</span>
+
+<div class="viewcode-block" id="RandomLinearVotingProfile.generateRandomLinearBallot"><a class="viewcode-back" href="../techDoc.html#votingProfiles.RandomLinearVotingProfile.generateRandomLinearBallot">[docs]</a>    <span class="k">def</span> <span class="nf">generateRandomLinearBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">seed</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a randomly generated linear ballot.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1056,7 +1063,7 @@
             <span class="n">linearBallot</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">candidateList</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">linearBallot</span></div></div>
 
-<div class="viewcode-block" id="RandomVotingProfile"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.RandomVotingProfile">[docs]</a><span class="k">class</span> <span class="nc">RandomVotingProfile</span><span class="p">(</span><span class="n">VotingProfile</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomVotingProfile"><a class="viewcode-back" href="../techDoc.html#votingProfiles.RandomVotingProfile">[docs]</a><span class="k">class</span> <span class="nc">RandomVotingProfile</span><span class="p">(</span><span class="n">VotingProfile</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A subclass for generating random voting profiles.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1092,7 +1099,7 @@
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">showAll</span><span class="p">()</span>
 
-<div class="viewcode-block" id="RandomVotingProfile.generateRandomBallot"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.RandomVotingProfile.generateRandomBallot">[docs]</a>    <span class="k">def</span> <span class="nf">generateRandomBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">seed</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomVotingProfile.generateRandomBallot"><a class="viewcode-back" href="../techDoc.html#votingProfiles.RandomVotingProfile.generateRandomBallot">[docs]</a>    <span class="k">def</span> <span class="nf">generateRandomBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">seed</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a randomly generated approval ballot</span>
 <span class="sd">        from a shuffled list of candidates for each voter.</span>
@@ -1120,7 +1127,7 @@
         <span class="k">return</span> <span class="n">ballot</span></div></div>
 
 <span class="c1">#--------------------------------</span>
-<div class="viewcode-block" id="CondorcetDigraph"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.CondorcetDigraph">[docs]</a><span class="k">class</span> <span class="nc">CondorcetDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<div class="viewcode-block" id="CondorcetDigraph"><a class="viewcode-back" href="../techDoc.html#votingProfiles.CondorcetDigraph">[docs]</a><span class="k">class</span> <span class="nc">CondorcetDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the general Digraph class for generating</span>
 <span class="sd">    bipolar-valued marginal pairwise majority difference digraphs.</span>
@@ -1206,7 +1213,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
 
 
-<div class="viewcode-block" id="CondorcetDigraph.constructApprovalBallotRelation"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.CondorcetDigraph.constructApprovalBallotRelation">[docs]</a>    <span class="k">def</span> <span class="nf">constructApprovalBallotRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">hasIntegerValuation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="CondorcetDigraph.constructApprovalBallotRelation"><a class="viewcode-back" href="../techDoc.html#votingProfiles.CondorcetDigraph.constructApprovalBallotRelation">[docs]</a>    <span class="k">def</span> <span class="nf">constructApprovalBallotRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">hasIntegerValuation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the votes differences between candidates</span>
 <span class="sd">        on the basis of an approval ballot.</span>
@@ -1248,7 +1255,7 @@
 
         <span class="k">return</span> <span class="n">relation</span></div>
 
-<div class="viewcode-block" id="CondorcetDigraph.constructMajorityMarginsRelation"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.CondorcetDigraph.constructMajorityMarginsRelation">[docs]</a>    <span class="k">def</span> <span class="nf">constructMajorityMarginsRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">hasIntegerValuation</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="CondorcetDigraph.constructMajorityMarginsRelation"><a class="viewcode-back" href="../techDoc.html#votingProfiles.CondorcetDigraph.constructMajorityMarginsRelation">[docs]</a>    <span class="k">def</span> <span class="nf">constructMajorityMarginsRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">hasIntegerValuation</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the marginal majority between candidates</span>
 <span class="sd">        on the basis of an approval ballot.</span>
@@ -1295,7 +1302,7 @@
                         <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">/=</span> <span class="n">Max</span>
         <span class="k">return</span> <span class="n">relation</span></div>
 
-<div class="viewcode-block" id="CondorcetDigraph.showMajorityMargins"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.CondorcetDigraph.showMajorityMargins">[docs]</a>    <span class="k">def</span> <span class="nf">showMajorityMargins</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">args</span><span class="p">):</span>
+<div class="viewcode-block" id="CondorcetDigraph.showMajorityMargins"><a class="viewcode-back" href="../techDoc.html#votingProfiles.CondorcetDigraph.showMajorityMargins">[docs]</a>    <span class="k">def</span> <span class="nf">showMajorityMargins</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Wrapper for the</span>
 <span class="sd">        Digraph.showRelationTable(Sorted=True, IntegerValues=False,</span>
@@ -1306,7 +1313,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Digraph</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">args</span><span class="p">)</span></div>
         
-<div class="viewcode-block" id="CondorcetDigraph.computeCondorcetWinner"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.CondorcetDigraph.computeCondorcetWinner">[docs]</a>    <span class="k">def</span> <span class="nf">computeCondorcetWinner</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="CondorcetDigraph.computeCondorcetWinner"><a class="viewcode-back" href="../techDoc.html#votingProfiles.CondorcetDigraph.computeCondorcetWinner">[docs]</a>    <span class="k">def</span> <span class="nf">computeCondorcetWinner</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        compute the Condorcet winner(s)</span>
 <span class="sd">        renders always a, potentially empty, list</span>
@@ -1314,18 +1321,18 @@
         <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
         <span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span>
         <span class="n">candidatesList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
-        <span class="n">CondorcetWinner</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">condorcetWinners</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">candidatesList</span><span class="p">:</span>
-            <span class="n">winner</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">Winner</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">candidatesList</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">y</span> <span class="ow">and</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">Med</span><span class="p">:</span>
-                    <span class="n">winner</span> <span class="o">=</span> <span class="kc">False</span>
-            <span class="k">if</span> <span class="n">winner</span><span class="p">:</span>
-                <span class="n">CondorcetWinner</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">CondorcetWinner</span></div>
+                    <span class="n">Winner</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="n">Winner</span><span class="p">:</span>
+                <span class="n">condorcetWinners</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">condorcetWinners</span></div>
 
 
-<div class="viewcode-block" id="CondorcetDigraph.constructBallotRelation"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.CondorcetDigraph.constructBallotRelation">[docs]</a>    <span class="k">def</span> <span class="nf">constructBallotRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">hasIntegerValuation</span><span class="p">):</span>
+<div class="viewcode-block" id="CondorcetDigraph.constructBallotRelation"><a class="viewcode-back" href="../techDoc.html#votingProfiles.CondorcetDigraph.constructBallotRelation">[docs]</a>    <span class="k">def</span> <span class="nf">constructBallotRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">hasIntegerValuation</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the marginal majority between candidates</span>
 <span class="sd">        on the basis of a complete ballot.</span>
@@ -1363,7 +1370,7 @@
             <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
         <span class="k">return</span> <span class="n">relation</span></div>
 
-<div class="viewcode-block" id="CondorcetDigraph.computeCopelandRanking"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.CondorcetDigraph.computeCopelandRanking">[docs]</a>    <span class="k">def</span> <span class="nf">computeCopelandRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="CondorcetDigraph.computeCopelandRanking"><a class="viewcode-back" href="../techDoc.html#votingProfiles.CondorcetDigraph.computeCopelandRanking">[docs]</a>    <span class="k">def</span> <span class="nf">computeCopelandRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a ranking of the actions following Copeland&#39;s rule.</span>
 <span class="sd">        Score(x_i) = Sum_j{ [[x_i &gt; x_j]] - [[x_j &gt; x_i]]}, where</span>
@@ -1397,7 +1404,37 @@
             <span class="nb">print</span><span class="p">(</span><span class="n">ranking</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ranking</span></div>
 
-<div class="viewcode-block" id="CondorcetDigraph.computeKohlerRanking"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.CondorcetDigraph.computeKohlerRanking">[docs]</a>    <span class="k">def</span> <span class="nf">computeKohlerRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">linearOrdered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="CondorcetDigraph.computeNetFlowsRanking"><a class="viewcode-back" href="../techDoc.html#votingProfiles.CondorcetDigraph.computeNetFlowsRanking">[docs]</a>    <span class="k">def</span> <span class="nf">computeNetFlowsRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders a ranking of the actions following the Net Flows rule.</span>
+<span class="sd">        Score(x_i) = Sum_j{M(x_i,x_j)} for i,j = 1..n</span>
+
+<span class="sd">        The alternatives are ranked in decreasing order of their Scores.</span>
+
+<span class="sd">        In case of a tie, we use a lexicographic rule applied to the identifiers.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">itemgetter</span>
+        <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
+        <span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+            <span class="n">scores</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+                <span class="n">scores</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">+=</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span>
+        <span class="n">scoresRanking</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span><span class="n">scores</span><span class="p">[</span><span class="n">x</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">scores</span><span class="p">]</span>
+        <span class="n">scoresRanking</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">scoresRanking</span><span class="p">,</span><span class="n">key</span> <span class="o">=</span> <span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">ranking</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">scoresRanking</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">scoresRanking</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">ranking</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ranking</span></div>
+
+<div class="viewcode-block" id="CondorcetDigraph.computeKohlerRanking"><a class="viewcode-back" href="../techDoc.html#votingProfiles.CondorcetDigraph.computeKohlerRanking">[docs]</a>    <span class="k">def</span> <span class="nf">computeKohlerRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">linearOrdered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a ranking of the actions following Kohler&#39;s rule.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1429,7 +1466,7 @@
             <span class="nb">print</span><span class="p">(</span><span class="n">rank</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">rank</span></div>
 
-<div class="viewcode-block" id="CondorcetDigraph.computeArrowRaynaudRanking"><a class="viewcode-back" href="../techDoc.html#votingDigraphs.CondorcetDigraph.computeArrowRaynaudRanking">[docs]</a>    <span class="k">def</span> <span class="nf">computeArrowRaynaudRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">linearOrdered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="CondorcetDigraph.computeArrowRaynaudRanking"><a class="viewcode-back" href="../techDoc.html#votingProfiles.CondorcetDigraph.computeArrowRaynaudRanking">[docs]</a>    <span class="k">def</span> <span class="nf">computeArrowRaynaudRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">linearOrdered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a ranking of the actions following Arrow&amp;Raynaud&#39;s rule.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1468,7 +1505,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;****************************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* Python voting digraphs module                    *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2482 $                                   *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2484 $                                   *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* Copyright (C) 2006-2007 University of Luxembourg *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* The module comes with ABSOLUTELY NO WARRANTY     *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* to the extent permitted by the applicable law.   *&#39;</span><span class="p">)</span>
@@ -1495,10 +1532,13 @@
     <span class="c1">## for x in arrowRaynaudRanking:</span>
     <span class="c1">##     print &#39;%s: %d (%.2f)&#39; % (x[1], x[0], aar[x[1]][&#39;majorityMargin&#39;])</span>
 
-    <span class="n">lvp</span> <span class="o">=</span> <span class="n">LinearVotingProfile</span><span class="p">(</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">lvp</span> <span class="o">=</span> <span class="n">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                              <span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
+                              <span class="n">votersWeights</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="c1">##    ## lvp = LinearVotingProfile(&#39;templinearprofile&#39;)</span>
     <span class="n">lvp</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
     <span class="n">lvp1</span> <span class="o">=</span> <span class="n">LinearVotingProfile</span><span class="p">(</span><span class="s1">&#39;templinearprofile&#39;</span><span class="p">)</span>
+<span class="c1">##    lvp1 = LinearVotingProfile(&#39;example1&#39;)</span>
     <span class="n">lvp1</span><span class="o">.</span><span class="n">computeBallot</span><span class="p">()</span>
     <span class="c1">## for x in lvp.voters:</span>
     <span class="c1">##    print x, lvp.linearBallot[x]</span>
@@ -1513,7 +1553,19 @@
     <span class="n">t</span> <span class="o">=</span> <span class="n">PerformanceTableau</span><span class="p">(</span><span class="s1">&#39;votingPerfTab&#39;</span><span class="p">)</span>
     <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">CondorcetDigraph</span><span class="p">(</span><span class="n">lvp1</span><span class="p">)</span>
+    <span class="c1">#c.recodeValuation()</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">(</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">(</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    
+<span class="c1">##    from linearOrders import NetFlowsOrder</span>
+<span class="c1">##    nf = NetFlowsOrder(c,Debug=True)</span>
+<span class="c1">##    from outrankingDigraphs import *</span>
+<span class="c1">##    t1 = RandomCBPerformanceTableau(numberOfActions=5)</span>
+<span class="c1">##    g1 = BipolarOutrankingDigraph(t1)</span>
+<span class="c1">##    g1.showRelationTable()</span>
+<span class="c1">##    nf1 = NetFlowsOrder(g1,Debug=True)</span>
+    
     
 <span class="c1">##    lvp1.showHTMLVotingHeatmap()</span>
 <span class="c1">##    </span>
@@ -1543,7 +1595,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. September 2008               *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2482 $                   *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2484 $                   *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>
