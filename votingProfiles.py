@@ -224,13 +224,8 @@ class LinearVotingProfile(VotingProfile):
             self.linearBallot = argDict['linearBallot']
             self.ballot = self.computeBallot()
         else:
-            randv = RandomLinearVotingProfile(numberOfCandidates=numberOfCandidates,
-                                              numberOfVoters=numberOfVoters,seed=seed)
-            self.name = 'randLinearVotingProfile'
-            self.candidates = randv.candidates
-            self.voters = randv.voters
-            self.linearBallot = randv.linearBallot
-            self.ballot = randv.ballot
+            print('!!! Error: The name of a stored linear voting profile is required !!!')
+            return
         self.sumWeights = Decimal('0')
         for v in self.voters:
             self.sumWeights += self.voters[v]['weight']
@@ -967,17 +962,25 @@ class RandomLinearVotingProfile(LinearVotingProfile):
     """
     A specialized class for random linwear voting profiles.
     """
-    def __init__(self,numberOfVoters=9,numberOfCandidates=5,seed=None):
+    def __init__(self,numberOfVoters=9,numberOfCandidates=5,votersWeights=None,seed=None):
         """
         Random profile creation parameters:
             | numberOfVoters=9, numberOfCandidates=5,
+            | votersWeights = list of positive integers [2,3,4, ...]
         """
         from collections import OrderedDict
         votersList = [x for x in range(1,numberOfVoters + 1)]
         voters = OrderedDict()
         for v in votersList:
             voterID = 'v%d' % v
-            voters[voterID] = {'weight':Decimal('1')}
+            if votersWeights != None:
+                try:
+                    weight = votersWeights[v-1]
+                except:
+                    weight = 1
+            else:
+                weight = 1
+            voters[voterID] = {'weight':Decimal('%d' % weight)}
         candidatesList = [x for x in range(1,numberOfCandidates + 1)]
         candidates = OrderedDict()
         for c in candidatesList:
@@ -986,9 +989,13 @@ class RandomLinearVotingProfile(LinearVotingProfile):
         self.name = str('randLinearProfile')
         self.candidates = candidates
         self.voters = voters
+        self.sumWeights = Decimal('0')
+        for v in self.voters:
+            self.sumWeights += self.voters[v]['weight']
         self.linearBallot = self.generateRandomLinearBallot(seed)
         #print self.linearBallot
         self.ballot = self.computeBallot()
+
 
     def generateRandomLinearBallot(self,seed):
         """
@@ -1475,7 +1482,9 @@ if __name__ == "__main__":
     ## for x in arrowRaynaudRanking:
     ##     print '%s: %d (%.2f)' % (x[1], x[0], aar[x[1]]['majorityMargin'])
 
-    lvp = LinearVotingProfile(numberOfCandidates=5,numberOfVoters=9,seed=1)
+    lvp = RandomLinearVotingProfile(numberOfCandidates=5,
+                              numberOfVoters=9,
+                              votersWeights=[1,2,3,4,3,2,1,3,2],seed=1)
 ##    ## lvp = LinearVotingProfile('templinearprofile')
     lvp.save()
     lvp1 = LinearVotingProfile('templinearprofile')

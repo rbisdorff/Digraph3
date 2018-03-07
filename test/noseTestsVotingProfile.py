@@ -122,7 +122,7 @@ def testNonPrudentRankings():
 
 def testLinearVotingBallots():
     print("*==>> testing linear voting profiles ----*")
-    lvp = LinearVotingProfile()
+    lvp = RandomLinearVotingProfile(votersWeights=[5,3,2])
     lvp.save()
     lvp = LinearVotingProfile('templinearprofile')
     lvp.showLinearBallots()
@@ -142,7 +142,7 @@ def testLinearVotingBallots():
     
 def testInstantRunoffVoting():
     print('*==> test instant runoff voting ---*')
-    lvp = LinearVotingProfile()
+    lvp = RandomLinearVotingProfile(votersWeights=[5,3,2])
     lvp.save()
     lvp.showLinearBallots()
     print(lvp.computeRankAnalysis())

@@ -931,10 +931,10 @@
         <span class="n">netFlows</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="n">other</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">Med</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
-<span class="c1">##                xnetflows = sum((otherRelation[x][y] - otherRelation[y][x])\</span>
-<span class="c1">##                                 for y in actions)</span>
-                <span class="n">xnetflows</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">otherRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span>\
+                <span class="n">xnetflows</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">otherRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">-</span> <span class="n">otherRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">])</span>\
                                  <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">)</span>
+<span class="c1">##                xnetflows = sum((otherRelation[x][y])\</span>
+<span class="c1">##                                 for y in actions)</span>
                 <span class="n">netFlows</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">xnetflows</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">xnetflows</span><span class="p">)</span>
