@@ -961,12 +961,14 @@ class RandomApprovalVotingProfile(ApprovalVotingProfile):
 class RandomLinearVotingProfile(LinearVotingProfile):
     """
     A specialized class for random linwear voting profiles.
+    Random reation parameters:
+    
+        numberOfVoters=5, numberOfCandidates=5,
+        votersWeights = optional list of positive integers for instance [2,3,4,1,5].
+        
     """
     def __init__(self,numberOfVoters=9,numberOfCandidates=5,votersWeights=None,seed=None):
         """
-        Random profile creation parameters:
-            | numberOfVoters=9, numberOfCandidates=5,
-            | votersWeights = list of positive integers [2,3,4, ...]
         """
         from collections import OrderedDict
         votersList = [x for x in range(1,numberOfVoters + 1)]

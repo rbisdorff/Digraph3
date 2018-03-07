@@ -1011,12 +1011,14 @@
 <div class="viewcode-block" id="RandomLinearVotingProfile"><a class="viewcode-back" href="../techDoc.html#votingProfiles.RandomLinearVotingProfile">[docs]</a><span class="k">class</span> <span class="nc">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">LinearVotingProfile</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A specialized class for random linwear voting profiles.</span>
+<span class="sd">    Random reation parameters:</span>
+<span class="sd">    </span>
+<span class="sd">        numberOfVoters=5, numberOfCandidates=5,</span>
+<span class="sd">        votersWeights = optional list of positive integers for instance [2,3,4,1,5].</span>
+<span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">votersWeights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Random profile creation parameters:</span>
-<span class="sd">            | numberOfVoters=9, numberOfCandidates=5,</span>
-<span class="sd">            | votersWeights = list of positive integers [2,3,4, ...]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
         <span class="n">votersList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">numberOfVoters</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
