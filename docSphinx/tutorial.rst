@@ -606,7 +606,7 @@ The Borda **rank analysis table** my be printed out with a corresponding ``show`
     -------|-------------------------------------
      'a1'  |   6     9     0     |  24     1.60
      'a3'  |   7     1     7     |  30     2.00
-      'a2' |   2     5     8     |  36     2.40
+     'a2'  |   2     5     8     |  36     2.40
     >>> ...
 
 The Condorcet winner
