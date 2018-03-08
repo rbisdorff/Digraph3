@@ -534,7 +534,7 @@ Linear voting profiles
 The :ref:`votingProfiles-label` provides resources for handling election results [ADT-L2]_, like the :py:class:`votingProfiles.LinearVotingProfile` class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two ordered dictionaries, one for the voters and another one for the candidates. The linear ballots are stored in a standard dictionary::
 
     candidates = OrderedDict([('a1',...), ('a2',...), ('a3', ...), ...}
-    voters = OrderedDict([('v1',{'weight':1.0}), ('v2',{'weight':1.0}), ...}
+    voters = OrderedDict([('v1',{'weight':10}), ('v2',{'weight':3}), ...}
     ## each voter specifies a linearly ranked list of candidates
     ## from the best to the worst (without ties
     linearBallot = {
@@ -545,13 +545,15 @@ The :ref:`votingProfiles-label` provides resources for handling election results
 
 The module provides a :py:class:`votingProfiles.RandomLinearVotingProfile` class for generating random instances of the :py:class:`votingProfiles.LinearVotingProfile` class. In an interactive Python session we may obtain for the election of 3 candidates by 5 voters the following result:
     >>> from votingProfiles import RandomLinearVotingProfile
-    >>> v = RandomLinearVotingProfile(numberOfVoters=5,numberOfCandidates=3)
+    >>> v = RandomLinearVotingProfile(numberOfVoters=5,
+    ...                               numberOfCandidates=3
+    ...                               votersWeights=[2,3,1,5,4])
     >>> v.candidates
     OrderedDict(['a1',{'name':'a1}), ('a2',{'name':'a2'}), ('a3':{'name':'a3'})])
     >>> v.voters
-    OrderedDict([('v1',{'weight': 1.0}), ('v2':{'weight': 1.0}), 
-     ('v3',{'weight': 1.0}), ('v4':{'weight': 1.0}), 
-     ('v5',{'weight': 1.0})])
+    OrderedDict([('v1',{'weight': 2}), ('v2':{'weight': 3}), 
+     ('v3',{'weight': 1}), ('v4':{'weight': 5}), 
+     ('v5',{'weight': 4})])
     >>> v.linearBallot
     {'v4': ['a1', 'a3', 'a2'], 'v3': ['a1', 'a3', 'a2'], 'v1': ['a1', 'a2', 'a3'],
      'v5': ['a2', 'a3', 'a1'], 'v2': ['a3', 'a2', 'a1']}
@@ -560,11 +562,12 @@ The module provides a :py:class:`votingProfiles.RandomLinearVotingProfile` class
 Notice that in this example, all voters are considered to be equi-significant. Their linear ballots can be viewed with the ``showLinearBallots`` method:
     >>> v.showLinearBallots()
     voters(weight)	 candidates rankings
-    v1(1): 	 ['a2', 'a1', 'a3']
-    v2(1): 	 ['a3', 'a1', 'a2']
+    v1(2): 	 ['a2', 'a1', 'a3']
+    v2(3): 	 ['a3', 'a1', 'a2']
     v3(1): 	 ['a1', 'a3', 'a2']
-    v4(1): 	 ['a1', 'a2', 'a3']
-    v5(1): 	 ['a3', 'a1', 'a2']
+    v4(5): 	 ['a1', 'a2', 'a3']
+    v5(4): 	 ['a3', 'a1', 'a2']
+    # voters: 15
     >>> ...
 
 Editing of the linear voting profile may be achieved by storing the data in a file, edit it, and reload it again:
@@ -577,32 +580,33 @@ Computing the winner
 
 We may easily compute **uni-nominal votes**, i.e. how many times a candidate was ranked first, and see who is consequently the **simple majority** winner(s) in this election. 
     >>> v.computeUninominalVotes()
-    {'a2': 1.0, 'a1': 2.0, 'a3': 2.0}
+    {'a2': 2, 'a1': 6, 'a3': 7}
     >>> v.computeSimpleMajorityWinner()
-    ['a1','a3']
+    ['a3']
     >>> ...
 
-As we observe no absolute majority (3/5) of votes for any of the three candidate, we may look for the **instant runoff** winner instead (see [ADT-L2]_):
+As we observe no absolute majority (8/15) of votes for any of the three candidate, we may look for the **instant runoff** winner instead (see [ADT-L2]_):
     >>> v.computeInstantRunoffWinner()
     ['a1']
     >>> ...
 
 We may also follow the Chevalier de Borda's advice and, after a **rank analysis** of the linear ballots, compute the **Borda score** of each candidate and hence determine the **Borda winner(s)**:
     >>> v.computeRankAnalysis()
-    {'a2': [1.0, 1.0, 3.0], 'a1': [2.0, 3.0, 0], 'a3': [2.0, 1.0, 2.0]}
+    {'a2': [2, 5, 8], 'a1': [6, 9, 0], 'a3': [7, 1, 7]}
     >>> v.computeBordaScores()
-    {'a2': 12.0, 'a1': 8.0, 'a3': 10.0}
+    {'a2': 36, 'a1': 24, 'a3': 30}
     >>> v.computeBordaWinners()
     ['a1']
 
 The Borda **rank analysis table** my be printed out with a corresponding ``show`` command:
     >>> v.showRankAnalysisTable()
-    *----  Rank analysis tableau -----*
-      ranks |  1    2    3    | Borda score
-     -------|------------------------------
-       'a1' |  2    3    0    |   8
-       'a3' |  2    1    2    |   10
-       'a2' |  1    1    3    |   12
+    *----  Borda rank analysis tableau -----*
+    candi- | alternative-to-rank |      Borda
+    dates  |   1     2     3     | score  average
+    -------|-------------------------------------
+     'a1'  |   6     9     0     |  24     1.60
+     'a3'  |   7     1     7     |  30     2.00
+      'a2' |   2     5     8     |  36     2.40
     >>> ...
 
 The Condorcet winner
@@ -617,16 +621,15 @@ In our randomly generated election results, we are lucky: The instant runoff win
     *---- Actions ----*
     ['a1', 'a2', 'a3']
     *---- Characteristic valuation domain ----*
-    {'hasIntegerValuation': True, 
-    'max': Decimal('5.0'), 
-    'min': Decimal('-5.0'), 
-    'med': Decimal('0')}
-    * ---- Relation Table ----
-     M(x,y) |  'a1' 'a2' 'a3'	  
-     -------|-----------------
-       'a1' |   -    3	  1	 
-       'a2' |  -3    -	 -1	 
-       'a3' |  -1    1	  -	 
+    {'max': Decimal('15.0'), 'med': Decimal('0'),
+     'min': Decimal('-15.0'), 'hasIntegerValuation': True}
+    * ---- majority margins -----
+       M(x,y)   |  'a1'	  'a2'  'a3'	  
+      ----------|-------------------------------------------
+        'a1'    |    0     11     1	 
+        'a2'    |  -11      0    -1	 
+        'a3'    |   -1      1     0	 
+    Valuation domain: [-15;+15]
 
 A candidate *x*, showing a positive majority margin *M(x,y)*, is beating candidate *y*  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in her row in the Condorcet digraph relation table, beats all other candidates with absolute majority of votes. Condorcet recommends to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate *a1* who is hence the **Condorcet winner**:
     >>> cdg.computeCondorcetWinner()
