@@ -35,11 +35,11 @@ nbrOfThreads = 4
 nbrOfSubProcesses = 2
 #set_start_method('fork')
 componentThreadingThreshold = 50
-nbrActions = 2500
+nbrActions = 10000
 nbrCriteria = 21
 commonPar=('beta','variable',None)
-qtiles = 75
-minimalSize = 10
+qtiles = 10
+minimalSize = 1
 seed = 10
 fileName = 'CythonA%dObj21q%ds%dc%dhome.csv' % (nbrActions,qtiles,minimalSize,nbrOfCPUs)
 # write header row

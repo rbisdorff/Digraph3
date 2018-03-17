@@ -1252,7 +1252,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                 else:
                     ind = indx +indy * absFloat(evalca)
             except:
-                ind = None
+                ind = -1
             try:
                 wpx = crit['thresholds']['weakPreference'][0]
                 wpy = crit['thresholds']['weakPreference'][1]
