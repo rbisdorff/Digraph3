@@ -1261,7 +1261,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                 else:
                     wp = wpx + wpy * abs(evalca)
             except:
-                wp = None
+                wp = -1.0
             try:
                 px = crit['thresholds']['pref'][0]
                 py = crit['thresholds']['pref'][1]
@@ -1270,7 +1270,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                 else:
                     p = px + py * abs(evalca)
             except:
-                p = None
+                p = -1.0
             d = evalca - evalcb
             return self._localConcordance(d,ind,wp,p)
         else:
