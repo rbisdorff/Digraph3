@@ -1,39 +1,41 @@
 FLAG = --inplace
+PYTHON = python3
+NOSETESTS = nosetests3
 
 codg:
 		cython -3 -X boundscheck=True cIntegerOutrankingDigraphs.pyx
 bodg:
-		python3 csetupODGInteger.py build_ext ${FLAG}
+		${PYTHON} csetupODGInteger.py build_ext ${FLAG}
 cso:
 		cython -3 -X boundscheck=True cIntegerSortingDigraphs.pyx
 bso:
-		python3 csetupSOInteger.py build_ext ${FLAG}
+		${PYTHON} csetupSOInteger.py build_ext ${FLAG}
 cbg:
 		cython -3 -X boundscheck=True cBigIntegerOutrankingDigraphs.py
 bbg:
-		python3 csetupBGInteger.py build_ext ${FLAG}
+		${PYTHON} csetupBGInteger.py build_ext ${FLAG}
 call:
 		cython -3 -X boundscheck=True cIntegerOutrankingDigraphs.pyx
 		cython -3 -X boundscheck=True cIntegerSortingDigraphs.pyx
 		cython -3 -X boundscheck=True cBigIntegerOutrankingDigraphs.pyx
 inplace:
-		python3 csetupRandPerfTabs.py build_ext ${FLAG}
-		python3 csetupODGInteger.py build_ext ${FLAG}
-		python3 csetupSOInteger.py build_ext ${FLAG}
-		python3 csetupBGInteger.py build_ext ${FLAG}
+		${PYTHON} csetupRandPerfTabs.py build_ext ${FLAG}
+		${PYTHON} csetupODGInteger.py build_ext ${FLAG}
+		${PYTHON} csetupSOInteger.py build_ext ${FLAG}
+		${PYTHON} csetupBGInteger.py build_ext ${FLAG}
 install:
-		sudo python3 csetupRandPerfTabs.py install
-		sudo python3 csetupODGInteger.py install
-		sudo python3 csetupSOInteger.py install
-		sudo python3 csetupBGInteger.py install
+		sudo ${PYTHON} csetupRandPerfTabs.py install
+		sudo ${PYTHON} csetupODGInteger.py install
+		sudo ${PYTHON} csetupSOInteger.py install
+		sudo ${PYTHON} csetupBGInteger.py install
 installVenv:
-		python3 csetupRandPerfTabs.py install
-		python3 csetupODGInteger.py install
-		python3 csetupSOInteger.py install
-		python3 csetupBGInteger.py install
+		${PYTHON} csetupRandPerfTabs.py install
+		${PYTHON} csetupODGInteger.py install
+		${PYTHON} csetupSOInteger.py install
+		${PYTHON} csetupBGInteger.py install
 
 tests:
-		(cd Test; nosetests3 -vs noseTestsBigIntegerOutrankingDigraph.py)
-		(cd Test; nosetests3 -vs noseTestsIntegerOutrankingDigraph.py)
-		(cd Test; nosetests3 -vs noseTestsVerifyFitness.py)
+		(cd Test; ${NOSETESTS} -vs noseTestsBigIntegerOutrankingDigraph.py)
+		(cd Test; ${NOSETESTS} -vs noseTestsIntegerOutrankingDigraph.py)
+		(cd Test; ${NOSETESTS} -vs noseTestsVerifyFitness.py)
 

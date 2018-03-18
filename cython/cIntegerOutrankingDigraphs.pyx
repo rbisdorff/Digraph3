@@ -926,6 +926,15 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         return { 'correlation': correlation,\
                      'determination': determination }
 
+    def computeOrderCorrelation(self, argOrder, bint Debug=False):
+        """
+        wrapper for the computeRankingCorrelation. 
+        The given argOrder is previously reversed.
+        """
+        order = list(argOrder) # copy
+        ranking = reversed(order)
+        return(self.computeRankingCorrelation(ranking,Dubug))
+
     def computeRankingCorrelation(self, ranking, bint Debug=False):
         """
         Renders the ordinal correlation K of an integer digraph instance
