@@ -3736,6 +3736,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         reprString += '# Criteria       : %d\n' % len(self.criteria)
         reprString += 'Size             : %d\n' % self.computeSize()
         reprString += 'Determinateness  : %.3f\n' % self.computeDeterminateness()
+        reprString += 'Valuation domain : %s\n' % str(self.valuationdomain)
         try:
             val1 = self.runTimes['totalTime']
             val2 = self.runTimes['dataInput']

@@ -178,23 +178,23 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
        
     """
 
-    def __repr__(self):
-        """
-        Default presentation method for BipolarOutrankingDigraph instance.
-        """
-        print('*----- show short --------------*')
-        print('Instance name    : %s' % self.name)
-        print('# Actions        : %d' % self.order)
-        print('# Criteria       : %d' % len(self.criteria))
-        #print('Size             : %d' % self.computeSize())
-        print('Determinateness  : %.3f' % (self.computeDeterminateness()) )
-        print('----  Constructor run times (in sec.) ----')
-        print('#Threads         : %d' % self.nbrThreads)
-        print('Total time       : %.5f' % self.runTimes['totalTime'])
-        print('Data input       : %.5f' % self.runTimes['dataInput'])
-        print('Compute relation : %.5f' % self.runTimes['computeRelation'])
-        print('Gamma sets       : %.5f' % self.runTimes['gammaSets'])
-        return '%s instance' % str(self.__class__)
+    # def __repr__(self):
+    #     """
+    #     Default presentation method for BipolarOutrankingDigraph instance.
+    #     """
+    #     print('*----- show short --------------*')
+    #     print('Instance name    : %s' % self.name)
+    #     print('# Actions        : %d' % self.order)
+    #     print('# Criteria       : %d' % len(self.criteria))
+    #     #print('Size             : %d' % self.computeSize())
+    #     print('Determinateness  : %.3f' % (self.computeDeterminateness()) )
+    #     print('----  Constructor run times (in sec.) ----')
+    #     print('#Threads         : %d' % self.nbrThreads)
+    #     print('Total time       : %.5f' % self.runTimes['totalTime'])
+    #     print('Data input       : %.5f' % self.runTimes['dataInput'])
+    #     print('Compute relation : %.5f' % self.runTimes['computeRelation'])
+    #     print('Gamma sets       : %.5f' % self.runTimes['gammaSets'])
+    #     return '%s instance' % str(self.__class__)
     
     def __init__(self,argPerfTab=None,\
                  coalition=None,\
