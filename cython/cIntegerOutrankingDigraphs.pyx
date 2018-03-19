@@ -725,7 +725,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
 ##        totalweight = Decimal('0.0')
 ##        for c in dict.keys(criteria):
 ##            totalweight = totalweight + criteria[c]['weight']
-        totalweight = sum(crit['weight'] for crit in criteria.values())
+        totalWeight = sum(crit['weight'] for crit in criteria.values())
 
         relation = {}
         vetos = []
@@ -826,16 +826,19 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                         if negativeVeto[c][0] >= 0:
                             abNegativeVetoes.append((c,negativeVeto[c]))
                                          
-                    vetoes = [-veto[c][0] for c in veto\
+                    vetoes = [-veto[c][0]*totalWeight for c in veto\
                                if veto[c][0] > -1]
-                    negativeVetoes = [negativeVeto[c][0] for c in negativeVeto\
+                    negativeVetoes = [negativeVeto[c][0]*totalWeight for c in negativeVeto\
                                       if negativeVeto[c][0] > -1]
-##                    if Debug:
-##                        print('vetoes = ', vetoes)
-##                        print('negativeVetoes = ', negativeVetoes)
                     omaxList = [concordindex] + vetoes + negativeVetoes
                     outrankindex = omax(Med,omaxList,Debug=Debug)
-                                                                 
+                    if Debug:
+                        print(a,b)
+                        print('vetoes = ', vetoes)
+                        print('negativeVetoes = ', negativeVetoes)
+                        print('omaxList',omaxList)
+                        print('outrankindex',outrankindex)
+                                                                
                     if abVetoes != []:
                         vetos.append(([a,b,concordindex],abVetoes))
                     if abNegativeVetoes != []:

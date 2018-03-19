@@ -34,8 +34,16 @@ installVenv:
 		${PYTHON} csetupSOInteger.py install
 		${PYTHON} csetupBGInteger.py install
 
+testsBig:
+		(cd Test; ${NOSETESTS} -vs noseTestsBigIntegerOutrankingDigraph.py)
+testsInteger:
+		(cd Test; ${NOSETESTS} -vs noseTestsIntegerOutrankingDigraph.py)
+testsCorrelation:
+		(cd Test; ${NOSETESTS} -vs noseTestsVerifyFitness.py)
+
 tests:
 		(cd Test; ${NOSETESTS} -vs noseTestsBigIntegerOutrankingDigraph.py)
 		(cd Test; ${NOSETESTS} -vs noseTestsIntegerOutrankingDigraph.py)
 		(cd Test; ${NOSETESTS} -vs noseTestsVerifyFitness.py)
+
 
