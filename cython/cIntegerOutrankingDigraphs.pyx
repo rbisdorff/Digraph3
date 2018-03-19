@@ -832,12 +832,12 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                                       if negativeVeto[c][0] > -1]
                     omaxList = [concordindex] + vetoes + negativeVetoes
                     outrankindex = omax(Med,omaxList,Debug=Debug)
-                    if Debug:
-                        print(a,b)
-                        print('vetoes = ', vetoes)
-                        print('negativeVetoes = ', negativeVetoes)
-                        print('omaxList',omaxList)
-                        print('outrankindex',outrankindex)
+                    # if Debug:
+                    #     print(a,b)
+                    #     print('vetoes = ', vetoes)
+                    #     print('negativeVetoes = ', negativeVetoes)
+                    #     print('omaxList',omaxList)
+                    #     print('outrankindex',outrankindex)
                                                                 
                     if abVetoes != []:
                         vetos.append(([a,b,concordindex],abVetoes))
