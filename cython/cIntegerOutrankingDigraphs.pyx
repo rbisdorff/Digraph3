@@ -728,8 +728,8 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         totalWeight = sum(crit['weight'] for crit in criteria.values())
 
         relation = {}
-        vetos = []
-        negativeVetos = []
+        #vetos = []
+        #negativeVetos = []
         
         #nc = len(criteria)
         Max = self.valuationdomain['max']
@@ -831,7 +831,10 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                     negativeVetoes = [negativeVeto[c][0]*totalWeight for c in negativeVeto\
                                       if negativeVeto[c][0] > -1]
                     omaxList = [concordindex] + vetoes + negativeVetoes
-                    outrankindex = omax(Med,omaxList,Debug=Debug)
+                    if hasNoVeto:
+                        outrankindex = concordindex
+                    else:
+                        outrankindex = omax(Med,omaxList,Debug=Debug)
                     # if Debug:
                     #     print(a,b)
                     #     print('vetoes = ', vetoes)
@@ -839,10 +842,10 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                     #     print('omaxList',omaxList)
                     #     print('outrankindex',outrankindex)
                                                                 
-                    if abVetoes != []:
-                        vetos.append(([a,b,concordindex],abVetoes))
-                    if abNegativeVetoes != []:
-                        negativeVetos.append(([a,b,concordindex],abNegativeVetoes))
+                    #if abVetoes != []:
+                    #    vetos.append(([a,b,concordindex],abVetoes))
+                    #if abNegativeVetoes != []:
+                    #    negativeVetos.append(([a,b,concordindex],abNegativeVetoes))
                     ra[b] = outrankindex
 
         # return outranking relation    
