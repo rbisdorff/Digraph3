@@ -1325,5 +1325,39 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         from outrankingDigraphs import BipolarOutrankingDigraph
         self.__class__ = BipolarOutrankingDigraph
         
-
+    def showActions(self,Alphabetic=False):
+        """
+        presentation methods for decision actions or alternatives
+        """
+        print('*----- show decision action --------------*')
+        actions = self.actions
+        if Alphabetic:
+            actionsKeys = [x for x in self.actions.keys()]
+            actionsKeys.sort()
+            for x in actionsKeys:
+                print('key: ',x)
+                try:
+                    print('  short name:',actions[x]['shortName'])
+                except KeyError:
+                    pass
+                print('  name:      ',actions[x]['name'])
+                try:
+                    print('  comment:   ',actions[x]['comment'])
+                except KeyError:
+                    pass
+                print()
+        else:
+            for x in self.actions:
+                print('key: ',x)
+                try:
+                    print('  short name:',actions[x]['shortName'])
+                except KeyError:
+                    pass
+                print('  name:      ',actions[x]['name'])
+                try:
+                    print('  comment:   ',actions[x]['comment'])
+                except KeyError:
+                    pass
+                print()
+                
 ############################

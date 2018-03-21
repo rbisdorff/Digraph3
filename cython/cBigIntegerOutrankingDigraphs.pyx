@@ -43,29 +43,30 @@ class BigIntegerDigraph(object):
         """
         Default presentation method for bigDigraphs instances.
         """
-        print('*----- show short --------------*')
-        print('Instance name     : %s' % self.name)
-        print('# Actions         : %d' % self.order)
-        print('# Criteria        : %d' % self.dimension)
-        print('Sorting by        : %d-Tiling' % self.sortingParameters['limitingQuantiles'] )
-        print('Ordering strategy : %s' % self.sortingParameters['strategy'] )
-        print('Ranking rule      : %s' % self.componentRankingRule)
-        print('# Components      : %d' % self.nbrComponents)
-        print('Minimal order     : %d' % self.minimalComponentSize)
-        print('Maximal order     : %d' % self.maximalComponentSize)
-        print('Average order     : %.1f' % (self.order/self.nbrComponents) )
-        print('fill rate         : %.3f%%' % (self.fillRate*100.0) )     
-        print('----  Constructor run times (in sec.) ----')
-        print('Nbr of threads    : %d' % self.nbrOfCPUs)
-        print('Total time        : %.5f' % self.runTimes['totalTime'])
-        print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
-        print('Preordering       : %.5f' % self.runTimes['preordering'])
-        print('Decomposing       : %.5f' % self.runTimes['decomposing'])
+        reprString = '*----- Object instance description --------------*'
+        reprString += 'Instance class    : %s\n' % self.__class__.__name__
+        reprString += 'Instance name     : %s\n' % self.name
+        reprString += '# Actions         : %d\n' % self.order
+        reprString += '# Criteria        : %d\n' % self.dimension
+        reprString += 'Sorting by        : %d-Tiling\n' % self.sortingParameters['limitingQuantiles']
+        reprString += 'Ordering strategy : %s\n' % self.sortingParameters['strategy']
+        reprString += 'Ranking rule      : %s\n' % self.componentRankingRule
+        reprString += '# Components      : %d\n' % self.nbrComponents
+        reprString += 'Minimal order     : %d\n' % self.minimalComponentSize
+        reprString += 'Maximal order     : %d\n' % self.maximalComponentSize
+        reprString += 'Average order     : %.1f' % (self.order/self.nbrComponents)
+        reprString += 'fill rate         : %.3f%%\n' % (self.fillRate*100.0)    
+        reprString += '----  Constructor run times (in sec.) ----\n'
+        reprString += 'Nbr of threads    : %d\n' % self.nbrOfCPUs
+        reprString += 'Total time        : %.5f\n' % self.runTimes['totalTime']
+        reprString += 'QuantilesSorting  : %.5f\n' % self.runTimes['sorting']
+        reprString += 'Preordering       : %.5f\n' % self.runTimes['preordering']
+        reprString += 'Decomposing       : %.5f\n' % self.runTimes['decomposing']
         try:
-            print('Ordering          : %.5f' % self.runTimes['ordering'])
+            reprString += 'Ordering          : %.5f\n' % self.runTimes['ordering']
         except:
             pass
-        return '%s instance' % str(self.__class__)
+        return reprString
 
     def showBestChoiceRecommendation(self,Comments=False,ChoiceVector=False,Debug=False):
         """
