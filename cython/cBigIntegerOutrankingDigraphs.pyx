@@ -86,7 +86,7 @@ class BigIntegerDigraph(object):
             print('Worst choice recommendation: \'%s\'' % (actionsNames[-1]))
 
 
-    def showRubisBestChoiceRecommendation(self,g1,
+    def showRubisBestChoiceRecommendation(self,g1=None,
                                           bint Comments=False,
                                           bint ChoiceVector=True,
                                           bint Debug=False,
@@ -111,6 +111,9 @@ class BigIntegerDigraph(object):
         if Comments:
             print('All comments !!!')
         t0 = time.time()
+        if g1 == None:
+            c1 = (list(self.components.keys()))[0]
+            g1 = self.components[c1]['subGraph']
         n0 = g1.order
         if _OldCoca:
             _selfwcoc = CocaDigraph(g1,Cpp=Cpp,Comments=Comments)
@@ -182,7 +185,7 @@ class BigIntegerDigraph(object):
             else:
                 if Comments:
                     print('non robust best choice ')
-                    g1.showChoiceVector(gch,ChoiceVector=ChoiceVector)
+                g1.showChoiceVector(gch,ChoiceVector=ChoiceVector)
         print()
         print('Execution time: %.3f seconds' % (t1-t0))
         print('*****************************')
@@ -195,7 +198,7 @@ class BigIntegerDigraph(object):
             g1.gamma = g1.gammaSets()
             g1.notGamma = g1.notGammaSets()
 
-    def showRubisWorstChoiceRecommendation(self,g1,
+    def showRubisWorstChoiceRecommendation(self,gn=None,
                                           Comments=False,
                                           ChoiceVector=True,
                                           Debug=False,
@@ -203,7 +206,7 @@ class BigIntegerDigraph(object):
                                           Cpp=False):
         """
         *Parameters*:
-            * g1 (last component of self)
+            * gn (last component of self)
             * Comments=False,
             * ChoiceVector=True,
             * Debug=False,
@@ -220,126 +223,97 @@ class BigIntegerDigraph(object):
         if Comments:
             print('All comments !!!')
         t0 = time.time()
-        n0 = g1.order
+        if gn == None:
+            cn = (list(self.components.keys()))[-1]
+            gn = self.components[c1]['subGraph']
+
+        n0 = gn.order
         if _OldCoca:
-            _selfwcoc = CocaDigraph(g1,Cpp=Cpp,Comments=Comments)
+            _selfwcoc = CocaDigraph(gn,Cpp=Cpp,Comments=Comments)
             b1 = 0
         else:
-            _selfwcoc = BrokenCocsDigraph(g1,Cpp=Cpp,Comments=Comments)
+            _selfwcoc = BrokenCocsDigraph(gn,Cpp=Cpp,Comments=Comments)
             b1 = _selfwcoc.breakings
         n1 = _selfwcoc.order
         nc = n1 - n0
         
-        g1.relation_orig = copy.deepcopy(g1.relation)
+        gn.relation_orig = copy.deepcopy(gn.relation)
         if nc > 0 or b1 > 0:
-            g1.actions_orig = copy.deepcopy(g1.actions)
-            g1.actions = copy.deepcopy(_selfwcoc.actions)
-            g1.order = len(g1.actions)
-            g1.relation = copy.deepcopy(_selfwcoc.relation)
+            gn.actions_orig = copy.deepcopy(gn.actions)
+            gn.actions = copy.deepcopy(_selfwcoc.actions)
+            gn.order = len(gn.actions)
+            gn.relation = copy.deepcopy(_selfwcoc.relation)
         if Comments:
             print('List of pseudo-independent choices')
-            print(g1.actions)
-        g1.gamma = g1.gammaSets()
-        g1.notGamma = g1.notGammaSets()
+            print(gn.actions)
+        gn.gamma = gn.gammaSets()
+        gn.notGamma = gn.notGammaSets()
         if Debug:
-            g1.showRelationTable()
+            gn.showRelationTable()
         #self.showPreKernels()
-        actions = set([x for x in g1.actions])
-        g1.computePreKernels()
+        actions = set([x for x in gn.actions])
+        gn.computePreKernels()
         #if Debug:
         #    print(self.dompreKernels,self.abspreKernels)
-        g1.computeGoodChoices(Comments=Comments)
-        g1.computeBadChoices(Comments=Comments)
+        gn.computeGoodChoices(Comments=Comments)
+        gn.computeBadChoices(Comments=Comments)
         if Debug:
-            print('good and bad choices: ',g1.goodChoices,g1.badChoices)
+            print('good and bad choices: ',gn.goodChoices,gn.badChoices)
         t1 = time.time()
         print('* --- Best choice recommendation(s) ---*')
         print('  (in decreasing order of determinateness)   ')
-        print('Credibility domain: ', g1.valuationdomain)
-        Med = g1.valuationdomain['med']
+        print('Credibility domain: ', gn.valuationdomain)
+        Med = gn.valuationdomain['med']
         bestChoice = set()
         worstChoice = set()
-        # for gch in g1.goodChoices:
-        #     if gch[0] <= Med:
-        #         goodChoice = True
-        #         for bch in g1.badChoices:
-        #             if gch[5] == bch[5]:
-        #                 #if gch[0] == bch[0]:
-        #                 if gch[3] == gch[4]:
-        #                     if Comments:
-        #                         print('null choice ')
-        #                         g1.showChoiceVector(gch,
-        #                                               ChoiceVector=ChoiceVector)
-        #                         g1.showChoiceVector(bch,
-        #                                               ChoiceVector=ChoiceVector)
-        #                     goodChoice = False
-        #                 elif gch[4] > gch[3]:
-        #                     if Comments:
-        #                         print('outranked choice ')
-        #                         g1.showChoiceVector(gch,
-        #                                               ChoiceVector=ChoiceVector)
-        #                         g1.showChoiceVector(bch,
-        #                                               ChoiceVector=ChoiceVector)
-        #                     goodChoice = False
-        #                 else:
-        #                     goodChoice = True
-        #         if goodChoice:
-        #             print(' === >> potential BCR ')
-        #             g1.showChoiceVector(gch,ChoiceVector=ChoiceVector)
-        #             if bestChoice == set():
-        #                 bestChoice = gch[5]
-        #     else:
-        #         if Comments:
-        #             print('non robust best choice ')
-        #             g1.showChoiceVector(gch,ChoiceVector=ChoiceVector)
-        for bch in g1.badChoices:
+        for bch in gn.badChoices:
             if bch[0] <= Med:
                 badChoice = True
                 nullChoice = False
-                for gch in g1.goodChoices:
+                for gch in gn.goodChoices:
                     if bch[5] == gch[5]:
                         #if gch[0] == bch[0]:
                         if bch[3] == bch[4]:
                             if Comments:
                                 print('null choice ')
-                                g1.showChoiceVector(gch,ChoiceVector=ChoiceVector)
-                                g1.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                                gn.showChoiceVector(gch,ChoiceVector=ChoiceVector)
+                                gn.showChoiceVector(bch,ChoiceVector=ChoiceVector)
                             badChoice = False
                             nullChoice = True
                         elif bch[3] > bch[4]:
                             if Comments:
                                 print('outranking choice ')
-                                g1.showChoiceVector(gch,ChoiceVector=ChoiceVector)
-                                g1.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                                gn.showChoiceVector(gch,ChoiceVector=ChoiceVector)
+                                gn.showChoiceVector(bch,ChoiceVector=ChoiceVector)
                             badChoice = False
                         else:
                             badChoice = True
                 if badChoice:
                     print(' === >> potential worst choice ')
-                    g1.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                    gn.showChoiceVector(bch,ChoiceVector=ChoiceVector)
                     if worstChoice == set():
                         worstChoice = bch[5]
                 elif nullChoice:
                     print(' === >> ambiguous choice ')
-                    g1.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                    gn.showChoiceVector(bch,ChoiceVector=ChoiceVector)
                     if worstChoice == set():
                         worstChoice = bch[5]
 
             else:
                 if Comments:
                     print('non robust worst choice ')
-                    g1.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                gn.showChoiceVector(bch,ChoiceVector=ChoiceVector)
         print()
         print('Execution time: %.3f seconds' % (t1-t0))
         print('*****************************')
         #self.bestChoice = bestChoice
         self.worstChoice = worstChoice
         if nc > 0 or b1 > 0:
-            g1.actions = copy.deepcopy(g1.actions_orig)
-            g1.relation = copy.deepcopy(g1.relation_orig)
-            g1.order = len(g1.actions)
-            g1.gamma = g1.gammaSets()
-            g1.notGamma = g1.notGammaSets()
+            gn.actions = copy.deepcopy(gn.actions_orig)
+            gn.relation = copy.deepcopy(gn.relation_orig)
+            gn.order = len(gn.actions)
+            gn.gamma = gn.gammaSets()
+            gn.notGamma = gn.notGammaSets()
 
                   
     def relation(self, int x, int y):
