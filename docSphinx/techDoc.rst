@@ -292,10 +292,10 @@ Back to the :ref:`Technical-label`
 
 .. _cythonized-label:
 
-Cythonized modules for big data
--------------------------------
+Cythonized modules for big digraphs
+-----------------------------------
 
-The following modules a C-compiled using the Cython compiler. No code source is provided for inspection.
+The following modules are compiled C-extensions using the Cython pre-compiler. No Python code source is provided for inspection. To distinguish them from the corresponding pure Python modules, a c- prefix is used.
 
 .. _cRandPerfTabs-label:
 
@@ -303,7 +303,6 @@ cRandPerfTabs module
 ....................
 
 .. automodule:: cRandPerfTabs
-   :member-order: alphabetical
    :no-inherited-members:
    :members:
 

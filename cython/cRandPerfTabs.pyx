@@ -236,7 +236,7 @@ class cPerformanceTableau(PerformanceTableau):
 
 class RandomPerformanceTableau(cPerformanceTableau):
     """
-    Specialization of the PerformanceTableau class for generating a temporary
+    Specialization of the cPerformanceTableau class for generating a temporary
     random performance tableau.
 
     Parameters:
@@ -262,26 +262,26 @@ class RandomPerformanceTableau(cPerformanceTableau):
           (2 decimal digits by default).
         
     Code example::
-        >>> from randomPerfTabs import RandomPerformanceTableau
+        >>> from cRandPerfTabs import RandomPerformanceTableau
         >>> t = RandomPerformanceTableau(numberOfActions=3,numberOfCriteria=1,seed=100)
         >>> t.actions
-            {'a1': {'comment': 'RandomPerformanceTableau() generated.', 'name': 'random decision action'},
-             'a2': {'comment': 'RandomPerformanceTableau() generated.', 'name': 'random decision action'},
-             'a3': {'comment': 'RandomPerformanceTableau() generated.', 'name': 'random decision action'}}
+            {1: {'comment': 'RandomPerformanceTableau() generated.', 'name': 'random decision action'},
+             2: {'comment': 'RandomPerformanceTableau() generated.', 'name': 'random decision action'},
+             3: {'comment': 'RandomPerformanceTableau() generated.', 'name': 'random decision action'}}
         >>> t.criteria
-            {'g1': {'thresholds': {'ind' : (Decimal('10.0'), Decimal('0.0')),
-                                   'veto': (Decimal('80.0'), Decimal('0.0')),
-                                   'pref': (Decimal('20.0'), Decimal('0.0'))},
+            {'g1': {'thresholds': {'ind' : (10.0, 0.0) ),
+                                   'veto': (80.0, 0.0) ),
+                                   'pref': (20.0, 0.0) },
                     'scale': [0.0, 100.0],
-                    'weight': Decimal('1'),
-                    'name': 'digraphs.RandomPerformanceTableau() instance',
+                    'weight': 1,
+                    'name': 'cRandPerfTabs.RandomPerformanceTableau() instance',
                     'comment': 'Arguments: ; weightDistribution=random;
                         weightScale=(1, 1); commonMode=None'}}
 
         >>> t.evaluation
-            {'g01': {'a01': Decimal('45.95'),
-                     'a02': Decimal('95.17'),
-                     'a03': Decimal('17.47')
+            {'g01': {1: 45.95,
+                     2: 95.17,
+                     3: 17.47.
                     }
             }
 
@@ -497,7 +497,7 @@ class RandomPerformanceTableau(cPerformanceTableau):
 # -----------------
 class RandomRankPerformanceTableau(cPerformanceTableau):
     """
-    Specialization of the PerformanceTableau class for generating a temporary
+    Specialization of the cPerformanceTableau class for generating a temporary
     random performance tableau.
 
     Random generator for multiple criteria ranked (without ties) performances of a
@@ -610,297 +610,6 @@ class RandomRankPerformanceTableau(cPerformanceTableau):
 
 # ------------------------------
 
-
-## class FullRandomPerformanceTableau(PerformanceTableau):
-##     """
-##     Full automatic generation of random performance tableaux
-##     """
-
-##     def __init__(self,numberOfActions = None,
-##                  numberOfCriteria = None,
-##                  weightDistribution = None,
-##                  weightScale=None,
-##                  integerWeights = True,
-##                  commonScale = None,
-##                  commonThresholds = None,
-##                  commonMode = None,
-##                  valueDigits=2,
-##                  seed = None,
-##                  Debug = False):
-##         # import OrderedDict container
-##         from collections import OrderedDict
-##         # set name
-##         self.name = 'fullrandomperftab'
-
-##         # set random seaad
-##         import random
-##         random.seed(seed)
-
-##         # generate random actions
-##         if numberOfActions == None:
-##             numberOfActions = random.randint(7,30)
-##         nd = len(str(numberOfActions))
-##         actions = OrderedDict()
-##         for i in range(numberOfActions):
-##             actionKey = ('a%%0%dd' % (nd)) % (i+1)
-##             actions[actionKey] = {'shortName':actionKey,
-##                     'name': 'random decision action',
-##                     'comment': 'RandomRankPerformanceTableau() generated.' }
-##         self.actions = actions
-##         actionsList = [x for x in actions.keys()]
-
-##         # generate criterialist
-##         if numberOfCriteria == None:
-##             numberOfCriteria = random.randint(5,21)
-            
-##         ng = len(str(numberOfCriteria))
-##         criteriaList = [('g%%0%dd' % ng) % (i+1)\
-##                         for i in range(numberOfCriteria)]               
-##         criteriaList.sort()
-
-##         # generate random weights
-##         if weightDistribution == None:
-##             majorityWeight = numberOfCriteria + 1
-##             weightModesList = [('fixed',[1,1],1),
-##                                ('random',[1,3],2),
-##                                ('random',[1,numberOfCriteria],3)]
-##             weightMode = random.choice(weightModesList)
-##             weightDistribution = weightMode[0]
-##             weightScale =  weightMode[1]
-##         else:
-##             if weightScale == None:
-##                 weightScale = (1,numberOfCriteria)
-##             weightMode=[weightDistribution,weightScale]
-##         if weightDistribution == 'random':
-##             weightsList = []
-##             sumWeights = 0.0
-##             for i in range(len(criteriaList)):
-##                 g = criteriaList[i]
-##                 weightsList.append(random.randint(weightScale[0],weightScale[1]))
-##                 sumWeights += weightsList[i]
-##             weightsList.reverse()
-##         elif weightDistribution == 'fixed':
-##             weightsList = []
-##             sumWeights = 0.0
-##             for i in range(len(criteriaList)):
-##                 if i == 0:
-##                     weightsList.append(weightScale[1])
-##                     sumWeights += weightScale[1]
-##                 else:
-##                     weightsList.append(weightScale[0])
-##                     sumWeights += weightScale[0]
-##             weightsList.reverse()
-##         elif weightDistribution == 'equisignificant' or weightDistribution == 'equiobjectives':
-##             weightScale = (1,1)
-##             weightsList = []
-##             sumWeights = 0.0
-##             for i in range(len(criteriaList)):
-##                 if i == 0:
-##                     weightsList.append(weightScale[1])
-##                     sumWeights += weightScale[1]
-##                 else:
-##                     weightsList.append(weightScale[0])
-##                     sumWeights += weightScale[0]
-##             weightsList.reverse()
-##         else:
-##             print('!!! Error: wrong criteria weight distribution mode: %s !!!!' % (weightDistribution))
-
-##         # generate criteria dictionary with random thresholds
-##         if commonScale == None:
-##             commonScale = [0.0,100.0]
-##         criteria = OrderedDict()
-##         for i in range(len(criteriaList)):
-##             g = criteriaList[i]
-##             criteria[g] = {}
-##             criteria[g]['name'] = 'random criterion'
-##             #t = time.time()
-##             if commonThresholds == None:        
-##                 thresholds = []
-##                 thresholds.append((round(random.uniform(0.0,commonScale[1]/5.0),valueDigits),0.0))
-##                 thresholds.append((round(random.uniform(thresholds[0][0],commonScale[1]/3.0),valueDigits),0.0))
-##                 thresholds.append((round(random.uniform(commonScale[1]*2.0/3.0,commonScale[1]),valueDigits),0.0))
-##                 thresholds.append((round(random.uniform(thresholds[2][0],commonScale[1]),valueDigits),0.0))
-                
-##             else:
-##                 thresholds = commonThresholds
-##             ## print thresholds
-##             try:
-##                 criteria[g]['thresholds'] = {
-##                     'ind':(Decimal(str(thresholds[0][0])),Decimal(str(thresholds[0][1]))),
-##                     'pref':(Decimal(str(thresholds[1][0])),Decimal(str(thresholds[1][1]))),
-##                     'weakVeto':(Decimal(str(thresholds[2][0])),Decimal(str(thresholds[2][1]))),
-##                     'veto':(Decimal(str(thresholds[3][0])),Decimal(str(thresholds[3][1]))),
-##                     }
-##             except:
-##                 criteria[g]['thresholds'] = {
-##                     'ind':(Decimal(str(thresholds[0][0])),Decimal(str(thresholds[0][1]))),
-##                     'pref':(Decimal(str(thresholds[1][0])),Decimal(str(thresholds[1][1]))),
-##                     'veto':(Decimal(str(thresholds[2][0])),Decimal(str(thresholds[2][1]))),
-##                     }               
-##             criteria[g]['scale'] = commonScale
-##             if integerWeights:
-##                 criteria[g]['weight'] = Decimal(str(weightsList[i]))
-##             else:
-##                 criteria[g]['weight'] = Decimal(str(weightsList[i]))/Decimal(str(sumWeights))
-
-##         # generate random evaluations
-##         x30=commonScale[1]*0.3
-##         x50=commonScale[1]*0.5
-##         x70=commonScale[1]*0.7
-##         randomLawsList = [['uniform',commonScale[0],commonScale[1]],
-##                           ('triangular',x30,0.33),('triangular',x30,0.50),('triangular',x30,0.75),
-##                           ('triangular',x50,0.33),('triangular',x50,0.50),('triangular',x50,0.75),
-##                           ('triangular',x70,0.33),('triangular',x70,0.50),('triangular',x70,0.75),
-##                           ('normal',x30,20.0),('normal',x30,25.0),('normal',x30,30.0),
-##                           ('normal',x50,20.0),('normal',x50,25.0),('normal',x50,30.0),
-##                           ('normal',x70,20.0),('normal',x70,25.0),('normal',x70,30.0)]
-##         evaluation = {}
-##         for i in range(len(criteriaList)):
-##             g = criteriaList[i]
-##             evaluation[g] = {}
-##             if commonMode == None:
-##                 randomMode = random.choice(randomLawsList)
-##             else:
-##                 randomMode = commonMode
-##             if randomMode[0] == 'uniform':
-##                 randomMode[1] = commonScale[0]
-##                 randomMode[2] = commonScale[1]
-##             criteria[g]['randomMode'] = randomMode
-##             if randomMode[0] != 'beta':
-##                 if randomMode[1] == None and randomMode[2] == None:
-##                     commentString = randomMode[0] + ', default, default'
-##                 elif randomMode[1] != None and randomMode[2] == None:
-##                     commentString = randomMode[0]+', %.2f, default' % float(randomMode[1])
-##                 elif randomMode[1] == None and randomMode[2] != None:
-##                     commentString = randomMode[0]+', default, %.2f' % (float(randomMode[2]))
-##                 else:
-##                     commentString = randomMode[0]+', %.2f, %.2f' % (float(randomMode[1]),float(randomMode[2]))
-##             else:
-##                 if randomMode[1] != None and randomMode[2] != None:
-##                     commentString = randomMode[0]+', %.2f, (%.4f,%.4f)' % (float(randomMode[1]),float(randomMode[2][0]),float(randomMode[2][1]))
-##                 elif randomMode[1] == None and randomMode[2] != None:
-##                     commentString = randomMode[0]+', default, (%.4f,%.4f)' % (float(randomMode[2][0]),float(randomMode[2][1]))
-##                 if randomMode[1] != None and randomMode[2] == None:
-##                     commentString = randomMode[0]+', %.2f, default' % (float(randomMode[1]))
-##                 else:
-##                     commentString = randomMode[0]+', default,default'
-                    
-                
-##             criteria[g]['comment'] = 'Evaluation generator: '+commentString
-##             digits = valueDigits
-##             if str(randomMode[0]) == 'uniform':          
-##                 evaluation[g] = {}
-##                 for a in actionsList:
-##                     randeval = random.uniform(commonScale[0],commonScale[1])
-##                     evaluation[g][a] = Decimal(str(round(randeval,digits)))
-##             elif str(randomMode[0]) == 'triangular':
-##                 from randomNumbers import ExtendedTriangularRandomVariable as RNG
-##                 m = commonScale[0]
-##                 M = commonScale[1]
-##                 try:
-##                     if commonMode[1] == None:
-##                         xm = (M-m)/2.0
-##                     else:
-##                         xm = commonMode[1]
-##                 except:
-##                     xm = (M-m)/2.0
-##                 try:    
-##                     if commonMode[2] == None:
-##                         r  = 0.5
-##                     else:
-##                         r  = commonMode[2]
-##                 except:
-##                     r  = 0.5
-##                 rng = RNG(m,M,xm,r)
-##                 for a in actionsList:
-## ##                    u = random.random()
-## ##                    if u < r:
-## ##                        randeval = m + math.sqrt(u/r)*(xm-m)                
-## ##                    else:
-## ##                        randeval = M - math.sqrt((1-u)/(1-r))*(M-xm)
-## ##                    evaluation[g][a] = Decimal(str(round(randeval,digits)))
-##                     evaluation[g][a] = Decimal(str(round(rng.random(),digits)))
-
-##             elif str(randomMode[0]) == 'normal':
-##                 try:
-##                     if commonMode[1] == None:
-##                         mu = (commonScale[1]-commonScale[0])/2.0
-##                     else:
-##                         mu = commonMode[1]
-##                 except:
-##                     mu = (commonScale[1]-commonScale[0])/2.0
-##                 try:
-##                     if commonMode[2] == None:
-##                         sigma = (commonScale[1]-commonScale[0])/4.0
-##                     else:
-##                         sigma = commonMode[2]
-##                 except:
-##                     sigma = (commonScale[1]-commonScale[0])/4.0
-##                 for a in actionsList:
-##                     notfound = True 
-##                     while notfound:
-##                         randeval = random.normalvariate(mu,sigma)
-##                         if randeval >= commonScale[0] and  randeval <= commonScale[1]:
-##                             notfound = False
-##                     evaluation[g][a] = Decimal(str(round(randeval,digits)))
-
-##             elif str(randomMode[0]) == 'beta':
-##                 m = commonScale[0]
-##                 M = commonScale[1]
-##                 if commonMode[1] == None:
-##                     xm = 0.5
-##                 else:
-##                     xm = commonMode[1]
-                
-##                 if commonMode[2] == None:
-##                     if xm > 0.5:
-##                         beta = 2.0
-##                         alpha = 1.0/(1.0 - xm)
-##                     else:
-##                         alpha = 2.0
-##                         beta = 1.0/xm
-##                 else:
-##                     alpha = commonMode[2][0]
-##                     beta = commonMode[2][1]
-##                 if Debug:
-##                     print('alpha,beta', alpha,beta)
-##                 for a in actionsList:
-##                     u = random.betavariate(alpha,beta)
-##                     randeval = (u * (M-m)) + m
-##                     evaluation[g][a] = Decimal(str(round(randeval,digits)))
-##                     if Debug:
-##                         print('xm,alpha,beta,u,m,M,randeval',xm,alpha,beta,u,m,M,randeval)
-                    
-##         # install self object attributes
-
-##         self.criteriaWeightMode = weightMode
-##         self.criteria = criteria
-##         self.evaluation = evaluation
-##         self.weightPreorder = self.computeWeightPreorder()
-
-
-##     def showAll(self):
-##         """
-##         Show fonction for performance tableau of full random outranking digraph.
-##         """
-##         criteria = self.criteria
-##         evaluation = self.evaluation
-##         print('*-------- show performance tableau -------*')
-##         print('Name         :', self.name)
-##         print('Actions      :', self.actions)
-##         print('Criteria     :')       
-##         for g in criteria:
-##             print('  criterion name:', g, end=' ')
-##             print(', scale: ', criteria[g]['scale'], end=' ')
-##             print(', weight: %.3f ' % (criteria[g]['weight']))
-##             print('  thresholds:', criteria[g]['thresholds'])
-##             print('  evaluations generation mode: ', criteria[g]['randomMode'])
-##             print()
-##         print('  Weights generation mode: ', self.criteriaWeightMode)
-##         print('  Weights preorder       : ', self.weightPreorder)
-##         print('Evaluations            :')
-##         for g in evaluation:
-##             print(g, evaluation[g])
 
 class RandomCoalitionsPerformanceTableau(cPerformanceTableau):
     """
@@ -1269,7 +978,7 @@ class RandomCoalitionsPerformanceTableau(cPerformanceTableau):
 
 class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
     """
-    Specialization of the PerformanceTableau
+    Specialization of the cPerformanceTableau
     for 3 objectives: *Eco*, *Soc* and *Env*.
 
     Each decision action is qualified at random as weak (-), fair (~) or good (+)
@@ -2018,9 +1727,9 @@ class RandomCBPerformanceTableau(cPerformanceTableau):
         # update criteria
         self.criteria = criteria
 # ----------------------
-class NormalizedPerformanceTableau(PerformanceTableau):
+class NormalizedPerformanceTableau(cPerformanceTableau):
     """
-    specialsation of the PerformanceTableau class for
+    specialsation of the cPerformanceTableau class for
     constructing normalized, 0 - 100, valued PerformanceTableau
     instances from a given argPerfTab instance.
     """
@@ -2105,118 +1814,5 @@ class NormalizedPerformanceTableau(PerformanceTableau):
                     normEvaluation[g][x] = Decimal('-999')
                     
         return normEvaluation
-
-
-
-## class RandomS3PerformanceTableau(RandomCoalitionsPerformanceTableau):
-##     """
-##     Obsolete dummy class for backports.
-##     """
-
-## #----------test Digraph class ----------------
-## if __name__ == "__main__":
-    
-##     print('*-------- Testing classes and methods -------')
-
-##     from digraphs import *
-##     from outrankingDigraphs import BipolarOutrankingDigraph
-##     from weakOrders import QuantilesRankingDigraph
-##     from randomPerfTabs import *
-##     from time import time
-##     t0 = time()
-##     t = RandomCBPerformanceTableau(numberOfActions=20,
-##                                    numberOfCriteria=13,
-##                                    samplingSize=100000,
-##                                    BigData=True,
-##                                    seed=100)
-##     print(time()-t0)
-##     t.saveXMCDA2('test2')
-##    t.showCriteria()
-##    t = Random3ObjectivesPerformanceTableau(numberOfActions=100,
-##                                            numberOfCriteria=13,
-##                                            OrdinalScales=False,
-##                                            commonScale=None,
-##                                            weightDistribution='equiobjectives',
-##     #weightScale=(1,5),
-##                                            commonMode=('beta','variable',None),
-##                                            vetoProbability=0.5,
-##                                            seed=120)
-
-    ## t.showObjectives()
-    ## t.showCriteria()
-    ## t.csvAllQuantiles('q')
-    ## print(t.showAllQuantiles())
-    
-##    #t.showActions(Debug=True)
-##    teco = PartialPerformanceTableau(t,criteriaSubset=t.objectives['Eco']['criteria'])
-##    tenv = PartialPerformanceTableau(t,criteriaSubset=t.objectives['Env']['criteria'])
-##    tsoc = PartialPerformanceTableau(t,criteriaSubset=t.objectives['Soc']['criteria'])
-##    geco = BipolarOutrankingDigraph(teco)
-##    genv = BipolarOutrankingDigraph(tenv)
-##    gsoc = BipolarOutrankingDigraph(tsoc)
-##    gfus = FusionLDigraph([geco,genv,gsoc])
-##    scc = StrongComponentsCollapsedDigraph(gfus)
-##    scc.showActions()
-##    scc.exportGraphViz('sccFusionObjectives')
-    
-    
-##    t.showStatistics()
-##    t.showHTMLPerformanceTableau()
-    
-##    print('*---------- test percentiles of variable thresholds --------*') 
-####    t = RandomCoalitionsPerformanceTableau(weightDistribution='equicoalitions',
-####                                           seed=100)
-##    t = RandomPerformanceTableau(commonThresholds=[(90,0),(100,0),(110,0)],
-##                                           seed=100)
-##    t.showAll()
-##
-##    t.computeDefaultDiscriminationThresholds(quantile={'ind':10.0,'pref':20.0,'weakVeto':90.0,'veto':95.0})
-##    for g in [y for y in t.criteria]:
-##        print(g, t.criteria[g]['thresholds'])
-##        for th in t.criteria[g]['thresholds']:
-##            print(th)
-##            print(' variable:', end=' ')
-##            print(t.computeVariableThresholdPercentile(g,th,Debug=False))
-##            print(' constant:', end=' ') 
-##            print(t.computeThresholdPercentile(g,th))
-##    t.showPerformanceTableau()
-##    t.showCriteria(Debug=False)
-##    t.saveXMCDA2('testPerc',servingD3=False)
-##    t.showHTMLPerformanceHeatmap(Correlations=True)
-##
-    
-
-##    t = RandomPerformanceTableau(weightScale=(1,10),
-##                                 commonScale=(0.0,50),
-##                                 commonMode=('triangular',30,0.5),
-##                                 seed=100)
-####    t = RandomCoalitionsPerformanceTableau(numberOfActions=10,
-####                                           numberOfCriteria=7,
-####                                           commonMode=('beta',None,None),
-####                                           weightDistribution='equicoalitions',
-####                                           seed=100)
-##    t.showAll()
-##    t.showStatistics()
-##    t.showCriteria()
-##    
-##    t = RandomRankPerformanceTableau(seed=100)
-##    t.showAll()
-##    t.showStatistics()
-##    t.showCriteria()
-    # t = RandomCBPerformanceTableau(seed=100)
-    # t.showAll()
-    # t.showStatistics()
-    #  #t.showHTMLPerformanceHeatmap(Correlations=True)
-    # g = BipolarOutrankingDigraph(t,Normalized=True)
-    # g.showAll()
-     
-    ## print('*------------------*')
-    ## print('If you see this line all tests were passed successfully :-)')
-    ## print('Enjoy !')
-
-    ## print('*************************************')
-    ## print('* R.B. August 2011                    *')
-    ## print('* $Revision: 1.37 $                *')                   
-    ## print('*************************************')
 
 #############################
