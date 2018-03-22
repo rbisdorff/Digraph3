@@ -86,7 +86,7 @@ class BigIntegerDigraph(object):
             print('Worst choice recommendation: \'%s\'' % (actionsNames[-1]))
 
 
-    def showRubisBestChoiceRecommendation(self,g1=None,
+    def showRubisBestChoiceRecommendation(self,g0=None,
                                           bint Comments=False,
                                           bint ChoiceVector=True,
                                           bint Debug=False,
@@ -94,7 +94,7 @@ class BigIntegerDigraph(object):
                                           bint Cpp=False):
         """
         *Parameters*:
-            * g1 (first component of self)
+            * g0 (first component of self)
             * Comments=False,
             * ChoiceVector=True,
             * Debug=False,
@@ -111,10 +111,12 @@ class BigIntegerDigraph(object):
         if Comments:
             print('All comments !!!')
         t0 = time.time()
-        if g1 == None:
+        if g0 == None:
             c1 = (list(self.components.keys()))[0]
-            g1 = self.components[c1]['subGraph']
-        g1 = ~(-g)
+            g0 = self.components[c1]['subGraph']
+        g1 = ~(-g0)
+        if Comments:
+            print(g1)
         n0 = g1.order
         if _OldCoca:
             _selfwcoc = CocaDigraph(g1,Cpp=Cpp,Comments=Comments)
@@ -199,7 +201,7 @@ class BigIntegerDigraph(object):
             g1.gamma = g1.gammaSets()
             g1.notGamma = g1.notGammaSets()
 
-    def showRubisWorstChoiceRecommendation(self,gn=None,
+    def showRubisWorstChoiceRecommendation(self,g0=None,
                                           Comments=False,
                                           ChoiceVector=True,
                                           Debug=False,
@@ -207,7 +209,7 @@ class BigIntegerDigraph(object):
                                           Cpp=False):
         """
         *Parameters*:
-            * gn (last component of self)
+            * g0 (last component of self)
             * Comments=False,
             * ChoiceVector=True,
             * Debug=False,
@@ -224,10 +226,12 @@ class BigIntegerDigraph(object):
         if Comments:
             print('All comments !!!')
         t0 = time.time()
-        if gn == None:
+        if g0 == None:
             cn = (list(self.components.keys()))[-1]
-            gn = self.components[c1]['subGraph']
-
+            g0 = self.components[c1]['subGraph']
+        gn = ~(-g0)
+        if Comments:
+            print(gn)
         n0 = gn.order
         if _OldCoca:
             _selfwcoc = CocaDigraph(gn,Cpp=Cpp,Comments=Comments)
@@ -261,7 +265,7 @@ class BigIntegerDigraph(object):
         if Debug:
             print('good and bad choices: ',gn.goodChoices,gn.badChoices)
         t1 = time.time()
-        print('* --- Best choice recommendation(s) ---*')
+        print('* --- Worst choice recommendation(s) ---*')
         print('  (in decreasing order of determinateness)   ')
         print('Credibility domain: ', gn.valuationdomain)
         Med = gn.valuationdomain['med']
