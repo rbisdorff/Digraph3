@@ -9187,16 +9187,7 @@ in <em>decreasing</em> (default) or <em>increasing</em> preference direction.</p
 </dd>
 </dl>
 <p>Launches a browser window with the colored relation map of self.
-See corresponding Digraph.showRelationMap() method.</p>
-<p>Example:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span>  <span class="c1"># strict outranking relation</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">showHTMLRelationMap</span><span class="p">(</span><span class="n">rankingRule</span><span class="o">=</span><span class="s2">&quot;netFlows&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/relationMap.png"><img alt="Browser view of a relation map" class="align-center" src="_images/relationMap.png" style="width: 600px;" /></a>
+See corresponding <a class="reference internal" href="#digraphs.Digraph.showRelationMap" title="digraphs.Digraph.showRelationMap"><code class="xref py py-meth docutils literal"><span class="pre">digraphs.Digraph.showRelationMap()</span></code></a> method.</p>
 </dd></dl>
 
 <dl class="method">
@@ -9297,14 +9288,33 @@ for instance quantiles = 250 may give good results for a digraph of order 25000.
 <dl class="method">
 <dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeActionCategories">
 <code class="descname">computeActionCategories</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeActionCategories" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the union of categories in which the given action is sorted positively or null into.
+<dd><dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last simple">
+<li>action (int key),</li>
+<li>Show=False,</li>
+<li>Debug=False,</li>
+<li>Comments=False,</li>
+<li>Threading=False,</li>
+<li>nbrOfCPUs=None.</li>
+</ul>
+</dd>
+</dl>
+<p>Renders the union of categories in which the given action is sorted positively or null into.
 Returns a tuple : action, lowest category key, highest category key, membership credibility !</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeBoostedOrdering">
 <code class="descname">computeBoostedOrdering</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeBoostedOrdering" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders an ordred list of decision actions ranked in
+<dd><dl class="docutils">
+<dt><em>Parameter</em>:</dt>
+<dd><ul class="first last simple">
+<li>orderingRule=&#8217;Copeland&#8217;.</li>
+</ul>
+</dd>
+</dl>
+<p>Renders an ordred list of decision actions ranked in
 increasing preference direction following by default the Copeland rule
 on each component.</p>
 </dd></dl>
@@ -9312,7 +9322,14 @@ on each component.</p>
 <dl class="method">
 <dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeBoostedRanking">
 <code class="descname">computeBoostedRanking</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeBoostedRanking" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders an ordred list of decision actions ranked in
+<dd><dl class="docutils">
+<dt><em>Parameter</em>:</dt>
+<dd><ul class="first last simple">
+<li>rankingRule=&#8217;Copeland&#8217;.</li>
+</ul>
+</dd>
+</dl>
+<p>Renders an ordred list of decision actions ranked in
 decreasing preference direction following the net flows rule
 on each component.</p>
 </dd></dl>
@@ -9320,14 +9337,32 @@ on each component.</p>
 <dl class="method">
 <dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeCriterion2RankingCorrelation">
 <code class="descname">computeCriterion2RankingCorrelation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeCriterion2RankingCorrelation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the ordinal correlation coefficient between
+<dd><dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last simple">
+<li>criterion,</li>
+<li>Threading=False,</li>
+<li>nbrOfCPUs=None,</li>
+<li>Debug=False,</li>
+<li>Comments=False.</li>
+</ul>
+</dd>
+</dl>
+<p>Renders the ordinal correlation coefficient between
 the global outranking and the marginal criterion relation.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeDeterminateness">
 <code class="descname">computeDeterminateness</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeDeterminateness" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the Kendalll distance in % of self
+<dd><dl class="docutils">
+<dt><em>Parameter</em>:</dt>
+<dd><ul class="first last simple">
+<li>InPercent=True.</li>
+</ul>
+</dd>
+</dl>
+<p>Computes the Kendalll distance in % of self
 with the all median valued (indeterminate) digraph.</p>
 <p>deter = (sum_{x,y in X} abs[r(xSy) - Med])/(oder*order-1)</p>
 </dd></dl>
@@ -9335,7 +9370,18 @@ with the all median valued (indeterminate) digraph.</p>
 <dl class="method">
 <dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeMarginalVersusGlobalOutrankingCorrelations">
 <code class="descname">computeMarginalVersusGlobalOutrankingCorrelations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeMarginalVersusGlobalOutrankingCorrelations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method for computing correlations between each individual criterion relation with the corresponding
+<dd><dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last simple">
+<li>Sorted=True,</li>
+<li>ValuedCorrelation=False,</li>
+<li>Threading=False,</li>
+<li>nbrCores=None,</li>
+<li>Comments=False.</li>
+</ul>
+</dd>
+</dl>
+<p>Method for computing correlations between each individual criterion relation with the corresponding
 global outranking relation.</p>
 <p>Returns a list of tuples (correlation,criterionKey) sorted by default in decreasing order of the correlation.</p>
 <p>If Threading is True, a multiprocessing Pool class is used with a parallel equivalent of the built-in map function.</p>
@@ -9352,42 +9398,96 @@ available cores.</p>
 <dl class="method">
 <dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showActionsSortingResult">
 <code class="descname">showActionsSortingResult</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showActionsSortingResult" title="Permalink to this definition">¶</a></dt>
-<dd><p>shows the quantiles sorting result all (default) of a subset of the decision actions.</p>
+<dd><dl class="docutils">
+<dt><em>Parameter</em>:</dt>
+<dd><ul class="first last simple">
+<li>actionsSubset=None.</li>
+</ul>
+</dd>
+</dl>
+<p>Shows the quantiles sorting result all (default) of a subset of the decision actions.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showComponents">
 <code class="descname">showComponents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showComponents" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="docutils">
+<dt><em>Parameter</em>:</dt>
+<dd><ul class="first last simple">
+<li>direction=&#8217;increasing&#8217;.</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showCriteria">
 <code class="descname">showCriteria</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showCriteria" title="Permalink to this definition">¶</a></dt>
-<dd><p>print Criteria with thresholds and weights.</p>
+<dd><dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last simple">
+<li>IntegerWeights=False,</li>
+<li>Debug=False.</li>
+</ul>
+</dd>
+</dl>
+<p>print Criteria with thresholds and weights.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showDecomposition">
 <code class="descname">showDecomposition</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showDecomposition" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="docutils">
+<dt><em>Parameter</em>:</dt>
+<dd><ul class="first last simple">
+<li>direction=&#8217;increasing&#8217;.</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showMarginalVersusGlobalOutrankingCorrelation">
 <code class="descname">showMarginalVersusGlobalOutrankingCorrelation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showMarginalVersusGlobalOutrankingCorrelation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Show method for computeCriterionCorrelation results.</p>
+<dd><dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last simple">
+<li>Sorted=True,</li>
+<li>Threading=False,</li>
+<li>nbrOfCPUs=None,</li>
+<li>Comments=True.</li>
+</ul>
+</dd>
+</dl>
+<p>Show method for computeCriterionCorrelation results.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showRelationTable">
 <code class="descname">showRelationTable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showRelationTable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Specialized for showing the quantiles decomposed relation table.
+<dd><dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last simple">
+<li>IntegerValues=True,</li>
+<li>compKeys=None.</li>
+</ul>
+</dd>
+</dl>
+<p>Specialized for showing the quantiles decomposed relation table.
 Components are stored in an ordered dictionary.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showShort">
 <code class="descname">showShort</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showShort" title="Permalink to this definition">¶</a></dt>
-<dd><p>Default (__repr__) presentation method for big outranking digraphs instances:</p>
+<dd><dl class="docutils">
+<dt><em>Parameter</em>:</dt>
+<dd><ul class="first last simple">
+<li>WithFileSize=False.</li>
+</ul>
+</dd>
+</dl>
+<p>Default (__repr__) presentation method for big outranking digraphs instances:</p>
 </dd></dl>
 
 </dd></dl>

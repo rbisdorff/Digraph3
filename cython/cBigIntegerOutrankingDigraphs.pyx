@@ -435,21 +435,8 @@ class BigIntegerDigraph(object):
             * symbols=['+','&middot;','&nbsp;','&#150;','&#151'].
 
         Launches a browser window with the colored relation map of self.
-        See corresponding Digraph.showRelationMap() method.
-
-        Example::
-
-            >>> from outrankingDigraphs import *
-            >>> t = RandomCBPerformanceTableau(numberOfActions=25,seed=1)
-            >>> g = BipolarOutrankingDigraph(t,Normalized=True)
-            >>> gcd = ~(-g)  # strict outranking relation
-            >>> gcd.showHTMLRelationMap(rankingRule="netFlows")
-            
-        .. image:: relationMap.png
-           :alt: Browser view of a relation map
-           :width: 600 px
-           :align: center
-    
+        See corresponding :py:meth:`digraphs.Digraph.showRelationMap` method.
+        
    
         """
         import webbrowser
@@ -470,7 +457,6 @@ class BigIntegerDigraph(object):
     def _htmlRelationMap(self,int fromIndex=0,int toIndex=0,\
                             tableTitle='Big Relation Map',\
                           relationName='r(x R y)',\
-                          #rankingRule='Copeland',\
                           symbols=['+','&middot;','&nbsp;','-','_'],\
                           bint Colored=True,\
                           bint ContentCentered=True):
@@ -1261,55 +1247,20 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
             print(componentsIntervals)
         return componentsIntervals        
 
-        # actionsCategIntervals = []
-        # for interval in actionsCategories:
-        #     actionsCategIntervals.append([interval,\
-        #                                   actionsCategories[interval]])
-        # actionsCategIntervals.sort(reverse=Descending)
-        # if Debug:
-        #     print(actionsCategIntervals)
-        # CompSize = self.minimalComponentSize 
-        # if CompSize == 1:
-        #     if Descending:
-        #         componentsIntervals = [[(item[0][1],item[0][2]),item[1],item[0][0],item[0][3],item[0][4]]\
-        #                            for item in actionsCategIntervals]
-        #     else:
-        #         componentsIntervals = [[(item[0][2],item[0][1]),item[1],item[0][0],item[0][3],item[0][4]]\
-        #                            for item in actionsCategIntervals]
-                
-        # else:
-        #     componentsIntervals = []
-        #     nc = len(actionsCategIntervals)
-        #     compContent = []
-        #     for i in range(nc):
-        #         currContLength = len(compContent)
-        #         comp = actionsCategIntervals[i]
-        #         #print(comp)
-        #         if currContLength == 0:
-        #             lowQtileLimit = comp[0][2]
-        #         highQtileLimit = comp[0][1]             
-        #         compContent += comp[1]
-        #         if len(compContent) >= CompSize or i == nc-1:
-        #             score = comp[0][0]
-        #             lowCateg = comp[0][3]
-        #             highCateg = comp[0][4]
-        #             if Descending:
-        #                 componentsIntervals.append([(highQtileLimit,lowQtileLimit),compContent,\
-        #                                             score,lowCateg,highCateg])
-        #             else:
-        #                 componentsIntervals.append([(lowQtileLimit,highQtileLimit),compContent,\
-        #                                             score,lowCateg,highCateg])
-        #             compContent = []
-        # #if Debug:
-        # #    print(componentsIntervals)
-        # return componentsIntervals        
-
     def computeActionCategories(self,int action,
                                     bint Show=False,
                                     bint Debug=False,
                                     bint Comments=False,\
                              bint Threading=False,nbrOfCPUs=None):
         """
+        *Parameters*:
+            * action (int key),
+            * Show=False,
+            * Debug=False,
+            * Comments=False,
+            * Threading=False,
+            * nbrOfCPUs=None.
+
         Renders the union of categories in which the given action is sorted positively or null into.
         Returns a tuple : action, lowest category key, highest category key, membership credibility !
         """
@@ -1388,190 +1339,23 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
             #         lowLimit,\
             #         notHighLimit
 
-
-    # ## @cython.locals(x=cython.int,
-    # ##                i=cython.int,
-    # ##                nc=cython.int,
-    # ##                Descending=cython.bint,
-    # ##                Threading=cython.bint,
-    # ##                Debug=cython.bint,
-    # ##                Comments=cython.bint)
-    # def _computeQuantileOrdering(self,strategy=None,
-    #                             bint Descending=True,
-    #                              bint Threading=False,
-    #                              nbrOfCPUs=None,
-    #                             bint Debug=False,
-    #                              bint Comments=False):
-    #     """
-    #     Renders the quantile interval of the decision actions.
-        
-    #     *Parameters*:
-    #         * QuantilesdSortingDigraph instance
-    #         * Descending: listing in *decreasing* (default) or *increasing* quantile order.
-    #         * strategy: ordering in an {'optimistic' | 'pessimistic' | 'average' (default)}
-    #           in the uppest, the lowest or the average potential quantile.
-        
-    #     """
-    #     cdef int x,i,nc,compSize
-    #     cdef double ac
-    #     if strategy == None:
-    #         strategy = self.sortingParameters['strategy']
-    #     actionsCategories = {}
-    #     for x in self.actions:
-    #         a,lowCateg,highCateg,credibility =\
-    #                  self.computeActionCategories(x,Comments=Comments,Debug=False,\
-    #                                            Threading=Threading,\
-    #                                            nbrOfCPUs = nbrOfCPUs)
-    #         lowQtileLimit = self.categories[lowCateg]['lowLimit']
-    #         highQtileLimit = self.categories[highCateg]['highLimit']
-    #         if strategy == "optimistic":
-    #             try:
-    #                 actionsCategories[(highQtileLimit,highQtileLimit,lowQtileLimit)].append(a)
-    #             except:
-    #                 actionsCategories[(highQtileLimit,highQtileLimit,lowQtileLimit)] = [a]
-    #         elif strategy == "pessimistic":
-    #             try:
-    #                 actionsCategories[(lowQtileLimit,highQtileLimit,lowQtileLimit)].append(a)
-    #             except:
-    #                 actionsCategories[(lowQtileLimit,highQtileLimit,lowQtileLimit)] = [a]
-    #         elif strategy == "average":
-    #             lc = float(lowCateg)
-    #             hc = float(highCateg)
-    #             ac = (lc+hc)/2.0
-    #             try:
-    #                 actionsCategories[(ac,highQtileLimit,lowQtileLimit)].append(a)
-    #             except:
-    #                 actionsCategories[(ac,highQtileLimit,lowQtileLimit)] = [a]
-    #         else:
-    #             print('Error: startegy %s unkonwon' % strategy)
-    #         #if Debug:
-    #         #    print('action',a)
-    #         #    print('actionsCategories',actionsCategories)
-                
-    #     actionsCategIntervals = []
-    #     for interval in actionsCategories:
-    #         actionsCategIntervals.append([interval,\
-    #                                       actionsCategories[interval]])
-    #     actionsCategIntervals.sort(reverse=Descending)
-    #     #if Debug:
-    #     #    print(actionsCategIntervals)
-    #     CompSize = self.minimalComponentSize 
-    #     if CompSize == 1:
-    #         if Descending:
-    #             componentsIntervals = [[(item[0][1],item[0][2]),item[1]]\
-    #                                for item in actionsCategIntervals]
-    #         else:
-    #             componentsIntervals = [[(item[0][2],item[0][1]),item[1]]\
-    #                                for item in actionsCategIntervals]
-                
-    #     else:
-    #         componentsIntervals = []
-    #         nc = len(actionsCategIntervals)
-    #         compContent = []
-    #         for i in range(nc):
-    #             currContLength = len(compContent)
-    #             comp = actionsCategIntervals[i]
-    #             if currContLength == 0:
-    #                 if Descending:
-    #                     lowQtileLimit = comp[0][1]
-    #                 else:
-    #                     lowQtileLimit = comp[0][2]
-    #             if Descending:
-    #                 highQtileLimit = comp[0][2]
-    #             else:
-    #                 highQtileLimit = comp[0][1]
-    #             compContent += comp[1]
-    #             if len(compContent) >= CompSize or i == nc-1:
-    #                 #if Descending:
-    #                 #componentsIntervals.append([(highQtileLimit,lowQtileLimit),compContent])
-    #                 #else:
-    #                 compContent.sort()
-    #                 componentsIntervals.append([(lowQtileLimit,highQtileLimit),compContent])
-    #                 compContent = []
-    #     if Debug:
-    #         print(componentsIntervals)
-    #     return componentsIntervals
-        
-    # ## @cython.locals(action=cython.int,
-    # ##                Show=cython.bint,
-    # ##                Debug=cython.bint,
-    # ##                Comments=cython.bint)
-    # def computeActionCategories(self,int action,
-    #                             bint Show=False,
-    #                             bint Debug=False,
-    #                             bint Comments=False,\
-    #                             bint Threading=False,nbrOfCPUs=None):
-    #     """
-    #     Renders the union of categories in which the given action is sorted positively or null into.
-    #     Returns a tuple : action, lowest category key, highest category key, membership credibility !
-    #     """
-    #     cdef int n,Med,lowLimit=0,notHighLimit=0,credibility
-    #     #qs = self.qs
-    #     #qs = self
-    #     Med = self.valuationdomain['med']
-    #     categories = self.categories
-    #     try:
-    #         sorting = self.sorting
-    #     except:
-    #         sorting = self.computeSortingCharacteristics(action=action,Comments=Comments,\
-    #                                                Threading=Threading,\
-    #                                                nbrOfCPUs=nbrOfCPUs)      
-    #     keys = []
-    #     for c in categories.keys():
-    #     #for c in self.orderedCategoryKeys():
-    #         Above = False
-    #         if sorting[action][c]['categoryMembership'] >= Med:
-    #             Above = True
-    #             if sorting[action][c]['lowLimit'] > Med:
-    #                 lowLimit = sorting[action][c]['lowLimit']
-    #             if sorting[action][c]['notHighLimit'] > Med:
-    #                 notHighLimit = sorting[action][c]['notHighLimit']    
-    #             keys.append(c)
-    #             if Debug:
-    #                 print(action, c, sorting[action][c])
-    #         elif Above:
-    #             break
-    #     n = len(keys)
-    #     try:
-    #         credibility = min(lowLimit,notHighLimit)
-    #     except:
-    #         credibility = Med
-    #     if n == 0:
-    #         return None
-    #     elif n == 1:
-    #         if Show:
-    #             print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
-    #                                  self.categories[keys[0]]['lowLimit'],\
-    #                                  self.categories[keys[0]]['highLimit'],\
-    #                                  action,\
-    #                                  credibility,lowLimit,notHighLimit) )
-    #         return action,\
-    #                 keys[0],\
-    #                 keys[0],\
-    #                 credibility
-    #     else:
-    #         if Show:
-    #             print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
-    #                                  self.categories[keys[0]]['lowLimit'],\
-    #                                  self.categories[keys[-1]]['highLimit'],\
-    #                                  action,\
-    #                                  credibility,lowLimit,notHighLimit) )
-    #         return action,\
-    #                 keys[0],\
-    #                 keys[-1],\
-    #                 credibility            
-
     def computeCriterion2RankingCorrelation(self,criterion,
                                             bint Threading=False,\
                                     nbrOfCPUs=None,
                                     bint Debug=False,
                                     bint Comments=False):
         """
+        *Parameters*:
+            * criterion,
+            * Threading=False,
+            * nbrOfCPUs=None,
+            * Debug=False,
+            * Comments=False.
+
         Renders the ordinal correlation coefficient between
         the global outranking and the marginal criterion relation.
         
         """
-        #print(criterion)
         gc = BipolarOutrankingDigraph(self,coalition=[criterion],
                                       Normalized=True,CopyPerfTab=False,
                                       Threading=Threading,nbrCores=nbrOfCPUs,
@@ -1589,6 +1373,13 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                                 bint Threading=False,nbrCores=None,\
                                 bint Comments=False):
         """
+        *Parameters*:
+            * Sorted=True,
+            * ValuedCorrelation=False,
+            * Threading=False,
+            * nbrCores=None,
+            * Comments=False.
+
         Method for computing correlations between each individual criterion relation with the corresponding
         global outranking relation.
         
@@ -1633,6 +1424,12 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                                                       nbrOfCPUs=None,\
                                                       bint Comments=True):
         """
+        *Parameters*:
+            * Sorted=True,
+            * Threading=False,
+            * nbrOfCPUs=None,
+            * Comments=True.
+
         Show method for computeCriterionCorrelation results.
         """
         criteria = self.criteria
@@ -1652,7 +1449,10 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
 
     def showActionsSortingResult(self,actionsSubset=None):
         """
-        shows the quantiles sorting result all (default) of a subset of the decision actions.
+        *Parameter*:
+            * actionsSubset=None.
+
+        Shows the quantiles sorting result all (default) of a subset of the decision actions.
         """
         print('Quantiles sorting result per decision action')
         if actionsSubset==None:
@@ -1664,6 +1464,9 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
 
     def showShort(self,fileName=None,bint WithFileSize=False):
         """
+        *Parameter*:
+            * WithFileSize=False.
+
         Default (__repr__) presentation method for big outranking digraphs instances:
         """
         #summaryStats = self.computeDecompositionSummaryStatistics()
@@ -1735,6 +1538,10 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
 
     def showCriteria(self, bint IntegerWeights=False, bint Debug=False):
         """
+        *Parameters*:
+            * IntegerWeights=False,
+            * Debug=False.
+
         print Criteria with thresholds and weights.
         """
         cdef int sumWeights = 0
@@ -1770,10 +1577,19 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
             print()
 
     def showComponents(self, direction='increasing'):
+        """
+        *Parameter*:
+            * direction='increasing'.
+
+        """
         BigIntegerOutrankingDigraph.showDecomposition(self,direction=direction)
 
     def showDecomposition(self, direction='decreasing'):
-        
+        """
+        *Parameter*:
+            * direction='increasing'.
+
+        """        
         print('*--- quantiles decomposition in %s order---*' % (direction) )
         #compKeys = [compKey for compKey in self.components.keys()]
         # the components are ordered from best (1) to worst (n)
@@ -1794,6 +1610,10 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
 
     def showRelationTable(self, bint IntegerValues=True, compKeys=None):
         """
+        *Parameters*:
+            * IntegerValues=True,
+            * compKeys=None.
+
         Specialized for showing the quantiles decomposed relation table.
         Components are stored in an ordered dictionary.
         """
@@ -1824,6 +1644,9 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
 
     def computeBoostedRanking(self, rankingRule='Copeland'):
         """
+        *Parameter*:
+            * rankingRule='Copeland'.
+
         Renders an ordred list of decision actions ranked in
         decreasing preference direction following the net flows rule
         on each component.
@@ -1848,6 +1671,9 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
 
     def computeBoostedOrdering(self, orderingRule='Copeland'):
         """
+        *Parameter*:
+            * orderingRule='Copeland'.
+
         Renders an ordred list of decision actions ranked in
         increasing preference direction following by default the Copeland rule
         on each component.
@@ -1872,6 +1698,9 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
 
     def computeDeterminateness(self, bint InPercent=True):
         """
+        *Parameter*:
+            * InPercent=True.
+
         Computes the Kendalll distance in % of self
         with the all median valued (indeterminate) digraph.
 
