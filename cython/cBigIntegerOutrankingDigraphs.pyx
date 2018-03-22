@@ -114,6 +114,7 @@ class BigIntegerDigraph(object):
         if g1 == None:
             c1 = (list(self.components.keys()))[0]
             g1 = self.components[c1]['subGraph']
+        g1 = ~(-g)
         n0 = g1.order
         if _OldCoca:
             _selfwcoc = CocaDigraph(g1,Cpp=Cpp,Comments=Comments)
