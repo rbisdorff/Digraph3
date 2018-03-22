@@ -36,16 +36,17 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         * Comments=False,
         * Debug=False.
 
-    c-Extension of the :py:class:`sortingDigraphs.QuantilesSortingDigraph` class  for the 
+    Cythonized c-Extension of the :py:class:`sortingDigraphs.QuantilesSortingDigraph` class  for the
     sorting of very large sets of alternatives into quantiles delimited ordered classes.
 
-    :py:class:`cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph` class specialisation
+    A :py:class:`cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph` class specialisation.
    
     .. note::
 
         We generally require an PerformanceTableau instance or a valid filename.
-        If none is given, then a default profile with the limiting quartiles Q0,Q1,Q2, Q3 and Q4 is used on each criteria.
-        By default upper closed limits of categories are supposed to be used in the sorting.
+        If none is given, then a default profile with the limiting quartiles 
+        Q0,Q1,Q2, Q3 and Q4 is used on each criteria. By default, upper closed limits 
+        of categories are used in the sorting algorithm.
 
     """
     def __init__(self,argPerfTab=None,\
@@ -55,7 +56,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                  bint hasNoVeto=False,\
                  outrankingType = "bipolar",\
                  #bint IntegerValued=True,\
-                 #bint WithSortingRelation=False,\
+                 #WithSortingRelation=False,\
                  bint CompleteOutranking = False,\
                  bint StoreSorting=False,\
                  bint CopyPerfTab=False,\
@@ -86,8 +87,6 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         # import the performance tableau
         if argPerfTab == None:
             print('Error: a valid performance tableau is required!')
-##            perfTab = RandomPerformanceTableau(numberOfActions=10,
-##                                               numberOfCriteria=13)
         else:
             perfTab = argPerfTab
         # normalize the actions as a dictionary construct
@@ -138,6 +137,9 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         if Debug:
             print('limitingQuantiles',self.limitingQuantiles)
 
+        self.runTimes['computeLimits'] = time() - t0
+
+        t0 = time()
         # supposing all criteria scales between 0.0 and 100.0
         # with preference direction = max
         self.LowerClosed = LowerClosed
@@ -191,10 +193,13 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         if Debug:
             print('CriteriaCategoryLimits',criteriaCategoryLimits)
 
+        self.runTimes['categories'] = time() - t0
+
         # set the category limits type (LowerClosed = True is default)
         # self.criteriaCategoryLimits['LowerClosed'] = LowerClosed
         # print 'LowerClosed', LowerClosed
 
+        t0 = time()
         # add the catogory limits to the actions set
         profiles = OrderedDict()
         #profileLimits = set()
@@ -242,7 +247,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         else:
             initialArg  = profiles
             terminalArg = actionsOrig
-        relation = self._constructRelationWithThreading(criteria,
+        self.relation = self._constructRelationWithThreading(criteria,
                                                    evaluation,
                                                    initial=initialArg,
                                                    terminal=terminalArg,
@@ -264,28 +269,33 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         self.order = len(self.actions)
 
         self.runTimes['totalTime'] = time() - tt
-        ## if Comments:
-        ##     print('total time for construction the %s instance: %.4f' % (str(self.__class__),time()-tt))
 
 ### --------  class methods
 
     def __repr__(self):
         """
-        Default presentation method for QuantilesSortingDigraph instance.
+        Default presentation method for IntegerQuantilesSortingDigraph instance.
         """
-        print('*----- show short --------------*')
-        print('Instance name    : %s' % self.name)
-        print('# Actions        : %d' % self.order)
-        print('# Criteria       : %d' % len(self.criteria))
-        print('Size             : %d' % self.computeSize())
-        print('Determinateness  : %.3f' % (self.computeDeterminateness()) )
-        print('----  Constructor run times (in sec.) ----')
-        print('#Threads         : %d' % self.nbrThreads)
-        print('Total time       : %.5f' % self.runTimes['totalTime'])
-        print('Data input       : %.5f' % self.runTimes['dataInput'])
-        print('Compute profiles : %.5f' % self.runTimes['computeProfiles'])
-        print('Compute relation : %.5f' % self.runTimes['computeRelation'])
-        return '%s instance' % str(self.__class__)
+        String =  '*-----  Object instance description -----------*\n'
+        String += 'Instance class      : %s\n' % self.__class__.__name__
+        String += 'Instance name       : %s\n' % self.name
+        String += '# Actions           : %d\n' % len(self.actions)
+        String += '# Criteria          : %d\n' % len(self.criteria)
+        String += '# Quantile profiles : %d\n' % len(self.profiles)
+        String += 'Attributes: %s\n' % list(self.__dict__.keys())
+        String += '*------  Constructor run times (in sec.) ------*\n'
+        try:
+            String += '#Threads         : %d\n' % self.nbrThreads
+        except:
+            self.nbrThreads = 1
+            String += '#Threads         : %d\n' % self.nbrThreads
+        String += 'Total time       : %.5f\n' % self.runTimes['totalTime']
+        String += 'Data input       : %.5f\n' % self.runTimes['dataInput']
+        String += 'Quantile limits  : %.5f\n' % self.runTimes['computeLimits']
+        String += 'Quantile classes : %.5f\n' % self.runTimes['categories']
+        String += 'Limit profiles   : %.5f\n' % self.runTimes['computeProfiles']
+        String += 'Sorting relation : %.5f\n' % self.runTimes['computeRelation']
+        return String 
 
     def _constructRelationWithThreading(self,criteria,\
                            evaluation,\
@@ -624,9 +634,16 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                 if StoreSorting:
                     self.sorting = sorting
                 
-    def showActionCategories(self,action,Debug=False,Comments=True,\
-                             Threading=False,nbrOfCPUs=None):
+    def showActionCategories(self,int action,bint Debug=False,bint Comments=True,\
+                             bint Threading=False,nbrOfCPUs=None):
         """
+        *Parameters":
+            * action,
+            * Debug=False,
+            * Comments=True,
+            * Threading=False,
+            * nbrOfCPUs=None.
+
         Renders the union of categories in which the given action is sorted positively or null into.
         Returns a tuple : action, lowest category key, highest category key, membership credibility !
         """
@@ -665,8 +682,12 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                 keys[1],\
                 credibility            
 
-    def showActionsSortingResult(self,actionSubset=None,Debug=False):
+    def showActionsSortingResult(self,actionSubset=None,bint Debug=False):
         """
+        *Parameters*:
+            * actionSubset=None,
+            * Debug=False.
+
         shows the quantiles sorting result all (default) of a subset of the decision actions.
         """
         if actionSubset == None:
@@ -732,11 +753,13 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                                      Threading=False,
                                      nbrOfCPUs=None):
         """
-        Renders the 
         *Parameters*:
-            * Descending: listing in *decreasing* (default) or *increasing* quantile order.
+            * Descending: listing in *decreasing* (default) or *increasing* quantile order,
             * strategy: ordering in an {'optimistic' | 'pessimistic' | 'average' (default)}
-              in the uppest, the lowest or the average potential quantile.
+              in the uppest, the lowest or the average potential quantile,
+            * Debug=False,
+            * Threading=False,
+            * nbrOfCPUs=None.
         
         """
         if strategy == None:
@@ -1014,7 +1037,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                                 ReflexiveTerms=False)
         
 
-    def _computeQuantiles(self,x,Debug=False):
+    def _computeQuantiles(self,x,bint Debug=False):
         """
         renders the limiting quantiles
         """
@@ -1064,7 +1087,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         self.name = 'sorting_with_%d-tile_limits' % n
         return limitingQuantiles
                                          
-    def _computeLimitingQuantiles(self,g,Debug=False,PrefThresholds=True):
+    def _computeLimitingQuantiles(self,g,bint Debug=False,bint PrefThresholds=True):
         """
         Renders the list of limiting quantiles on criteria g
         """
