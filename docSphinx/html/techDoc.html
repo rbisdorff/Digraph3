@@ -8157,11 +8157,27 @@ Euler&#8217;s number of coprime elements a in Zn.</p>
 <p>The following modules are compiled C-extensions using the Cython pre-compiler. No Python code source is provided for inspection. To distinguish them from the corresponding pure Python modules, a c- prefix is used.</p>
 <div class="section" id="module-cRandPerfTabs">
 <span id="crandperftabs-module"></span><span id="crandperftabs-label"></span><h3>cRandPerfTabs module<a class="headerlink" href="#module-cRandPerfTabs" title="Permalink to this headline">¶</a></h3>
+<p>c-Extension for the Digraph3 collection.
+Module cRandPerfTabs.py is a c-compiled version of the <a href="#id4"><span class="problematic" id="id5">:py:mod:`randomPerfTabs`_</span></a> module for generating random performance tableaux of Big Data type,
+ie with integer action keys and float performance evaluations. Conversions methods are provided
+to switch from the standard to the BigData format and back.  
+Copyright (C) 2018  Raymond Bisdorff</p>
+<p>This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 3 of the License, or
+(at your option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</p>
 <dl class="class">
 <dt id="cRandPerfTabs.NormalizedPerformanceTableau">
 <em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">NormalizedPerformanceTableau</code><a class="headerlink" href="#cRandPerfTabs.NormalizedPerformanceTableau" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
-<p>specialsation of the PerformanceTableau class for
+<dd><p>Bases: <a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau" title="cRandPerfTabs.cPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">cRandPerfTabs.cPerformanceTableau</span></code></a></p>
+<p>specialsation of the cPerformanceTableau class for
 constructing normalized, 0 - 100, valued PerformanceTableau
 instances from a given argPerfTab instance.</p>
 <dl class="method">
@@ -8176,7 +8192,7 @@ instances from a given argPerfTab instance.</p>
 <dt id="cRandPerfTabs.Random3ObjectivesPerformanceTableau">
 <em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">Random3ObjectivesPerformanceTableau</code><a class="headerlink" href="#cRandPerfTabs.Random3ObjectivesPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau" title="cRandPerfTabs.cPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">cRandPerfTabs.cPerformanceTableau</span></code></a></p>
-<p>Specialization of the PerformanceTableau
+<p>Specialization of the cPerformanceTableau
 for 3 objectives: <em>Eco</em>, <em>Soc</em> and <em>Env</em>.</p>
 <p>Each decision action is qualified at random as weak (-), fair (~) or good (+)
 on each of the three objectives.</p>
@@ -8303,7 +8319,7 @@ Cost versus Benefit oriented performance tableaux.</p>
 <dt id="cRandPerfTabs.RandomPerformanceTableau">
 <em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">RandomPerformanceTableau</code><a class="headerlink" href="#cRandPerfTabs.RandomPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau" title="cRandPerfTabs.cPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">cRandPerfTabs.cPerformanceTableau</span></code></a></p>
-<p>Specialization of the PerformanceTableau class for generating a temporary
+<p>Specialization of the cPerformanceTableau class for generating a temporary
 random performance tableau.</p>
 <dl class="docutils">
 <dt>Parameters:</dt>
@@ -8350,27 +8366,27 @@ and considerable performance difference discrimination thresholds.</p>
 </ul>
 </dd>
 <dt>Code example::</dt>
-<dd><div class="first highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceTableau</span>
+<dd><div class="first highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">actions</span>
-<span class="go">    {&#39;a1&#39;: {&#39;comment&#39;: &#39;RandomPerformanceTableau() generated.&#39;, &#39;name&#39;: &#39;random decision action&#39;},</span>
-<span class="go">     &#39;a2&#39;: {&#39;comment&#39;: &#39;RandomPerformanceTableau() generated.&#39;, &#39;name&#39;: &#39;random decision action&#39;},</span>
-<span class="go">     &#39;a3&#39;: {&#39;comment&#39;: &#39;RandomPerformanceTableau() generated.&#39;, &#39;name&#39;: &#39;random decision action&#39;}}</span>
+<span class="go">    {1: {&#39;comment&#39;: &#39;RandomPerformanceTableau() generated.&#39;, &#39;name&#39;: &#39;random decision action&#39;},</span>
+<span class="go">     2: {&#39;comment&#39;: &#39;RandomPerformanceTableau() generated.&#39;, &#39;name&#39;: &#39;random decision action&#39;},</span>
+<span class="go">     3: {&#39;comment&#39;: &#39;RandomPerformanceTableau() generated.&#39;, &#39;name&#39;: &#39;random decision action&#39;}}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">criteria</span>
-<span class="go">    {&#39;g1&#39;: {&#39;thresholds&#39;: {&#39;ind&#39; : (Decimal(&#39;10.0&#39;), Decimal(&#39;0.0&#39;)),</span>
-<span class="go">                           &#39;veto&#39;: (Decimal(&#39;80.0&#39;), Decimal(&#39;0.0&#39;)),</span>
-<span class="go">                           &#39;pref&#39;: (Decimal(&#39;20.0&#39;), Decimal(&#39;0.0&#39;))},</span>
+<span class="go">    {&#39;g1&#39;: {&#39;thresholds&#39;: {&#39;ind&#39; : (10.0, 0.0) ),</span>
+<span class="go">                           &#39;veto&#39;: (80.0, 0.0) ),</span>
+<span class="go">                           &#39;pref&#39;: (20.0, 0.0) },</span>
 <span class="go">            &#39;scale&#39;: [0.0, 100.0],</span>
-<span class="go">            &#39;weight&#39;: Decimal(&#39;1&#39;),</span>
-<span class="go">            &#39;name&#39;: &#39;digraphs.RandomPerformanceTableau() instance&#39;,</span>
+<span class="go">            &#39;weight&#39;: 1,</span>
+<span class="go">            &#39;name&#39;: &#39;cRandPerfTabs.RandomPerformanceTableau() instance&#39;,</span>
 <span class="go">            &#39;comment&#39;: &#39;Arguments: ; weightDistribution=random;</span>
 <span class="go">                weightScale=(1, 1); commonMode=None&#39;}}</span>
 </pre></div>
 </div>
 <div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">evaluation</span>
-<span class="go">    {&#39;g01&#39;: {&#39;a01&#39;: Decimal(&#39;45.95&#39;),</span>
-<span class="go">             &#39;a02&#39;: Decimal(&#39;95.17&#39;),</span>
-<span class="go">             &#39;a03&#39;: Decimal(&#39;17.47&#39;)</span>
+<span class="go">    {&#39;g01&#39;: {1: 45.95,</span>
+<span class="go">             2: 95.17,</span>
+<span class="go">             3: 17.47.</span>
 <span class="go">            }</span>
 <span class="go">    }</span>
 </pre></div>
@@ -8383,7 +8399,7 @@ and considerable performance difference discrimination thresholds.</p>
 <dt id="cRandPerfTabs.RandomRankPerformanceTableau">
 <em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">RandomRankPerformanceTableau</code><a class="headerlink" href="#cRandPerfTabs.RandomRankPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau" title="cRandPerfTabs.cPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">cRandPerfTabs.cPerformanceTableau</span></code></a></p>
-<p>Specialization of the PerformanceTableau class for generating a temporary
+<p>Specialization of the cPerformanceTableau class for generating a temporary
 random performance tableau.</p>
 <p>Random generator for multiple criteria ranked (without ties) performances of a
 given number of decision actions. On each criterion,
