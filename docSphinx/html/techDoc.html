@@ -8152,6 +8152,886 @@ Euler&#8217;s number of coprime elements a in Zn.</p>
 
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
+<div class="section" id="cythonized-modules-for-big-data">
+<span id="cythonized-label"></span><h2>Cythonized modules for big data<a class="headerlink" href="#cythonized-modules-for-big-data" title="Permalink to this headline">¶</a></h2>
+<p>The following modules a C-compiled using the Cython compiler. No code source is provided for inspection.</p>
+<div class="section" id="module-cRandPerfTabs">
+<span id="crandperftabs-module"></span><span id="crandperftabs-label"></span><h3>cRandPerfTabs module<a class="headerlink" href="#module-cRandPerfTabs" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="cRandPerfTabs.NormalizedPerformanceTableau">
+<em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">NormalizedPerformanceTableau</code><a class="headerlink" href="#cRandPerfTabs.NormalizedPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
+<p>specialsation of the PerformanceTableau class for
+constructing normalized, 0 - 100, valued PerformanceTableau
+instances from a given argPerfTab instance.</p>
+<dl class="method">
+<dt id="cRandPerfTabs.NormalizedPerformanceTableau.normalizeEvaluations">
+<code class="descname">normalizeEvaluations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.NormalizedPerformanceTableau.normalizeEvaluations" title="Permalink to this definition">¶</a></dt>
+<dd><p>recode the evaluations between lowValue and highValue on all criteria</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cRandPerfTabs.Random3ObjectivesPerformanceTableau">
+<em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">Random3ObjectivesPerformanceTableau</code><a class="headerlink" href="#cRandPerfTabs.Random3ObjectivesPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau" title="cRandPerfTabs.cPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">cRandPerfTabs.cPerformanceTableau</span></code></a></p>
+<p>Specialization of the PerformanceTableau
+for 3 objectives: <em>Eco</em>, <em>Soc</em> and <em>Env</em>.</p>
+<p>Each decision action is qualified at random as weak (-), fair (~) or good (+)
+on each of the three objectives.</p>
+<dl class="docutils">
+<dt>Generator arguments:</dt>
+<dd><ul class="first last">
+<li><p class="first">numberOf Actions := 20 (default)</p>
+</li>
+<li><p class="first">number of Criteria := 13 (default)</p>
+</li>
+<li><dl class="first docutils">
+<dt>weightDistribution := &#8216;equiobjectives&#8217; (default)</dt>
+<dd><div class="first last line-block">
+<div class="line">&#8216;equisignificant&#8217; (weights set all to 1)</div>
+<div class="line">&#8216;random&#8217; (in the range 1 to numberOfCriteria)</div>
+</div>
+</dd>
+</dl>
+</li>
+<li><p class="first">weightScale := [1,numerOfCriteria] (random default)</p>
+</li>
+<li><p class="first">integerWeights := True (default) / False</p>
+</li>
+<li><p class="first">OrdinalScales := True / False (default), if True commonScale is set to (0,10)</p>
+</li>
+<li><p class="first">commonScale := (0.0, 100.0) (default if OrdinalScales == False)</p>
+</li>
+<li><dl class="first docutils">
+<dt>commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalScales == True, otherwise</dt>
+<dd><div class="first last line-block">
+<div class="line">[(0.10001*span,0.0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].</div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>commonMode := [&#8216;triangular&#8217;,&#8217;variable&#8217;,0.50] (default), A constant mode may be provided.</dt>
+<dd><div class="first last line-block">
+<div class="line">[&#8216;uniform&#8217;,&#8217;variable&#8217;,None], a constant range may be provided.</div>
+<div class="line">[&#8216;beta&#8217;,&#8217;variable&#8217;,None] (three alpha, beta combinations (5.8661,2.62203)</div>
+<div class="line-block">
+<div class="line">chosen by default for &#8216;good&#8217;, &#8216;fair&#8217; and &#8216;weak&#8217; evaluations. Constant parameters may be provided.</div>
+</div>
+</div>
+</dd>
+</dl>
+</li>
+<li><p class="first">valueDigits := 2 (default, for cardinal scales only)</p>
+</li>
+<li><p class="first">vetoProbability := x in ]0.0-1.0[ (0.5 default), probability that a cardinal criterion shows a veto preference discrimination threshold.</p>
+</li>
+<li><p class="first">Debug := True / False (default)</p>
+</li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="cRandPerfTabs.Random3ObjectivesPerformanceTableau.showActions">
+<code class="descname">showActions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.Random3ObjectivesPerformanceTableau.showActions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="cRandPerfTabs.Random3ObjectivesPerformanceTableau.showObjectives">
+<code class="descname">showObjectives</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.Random3ObjectivesPerformanceTableau.showObjectives" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cRandPerfTabs.RandomCBPerformanceTableau">
+<em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">RandomCBPerformanceTableau</code><a class="headerlink" href="#cRandPerfTabs.RandomCBPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau" title="cRandPerfTabs.cPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">cRandPerfTabs.cPerformanceTableau</span></code></a></p>
+<p>Full automatic generation of random
+Cost versus Benefit oriented performance tableaux.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li>If numberOfActions == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated</li>
+<li>If numberOfCriteria == None, a uniform random number between 5 and 21 of cost or benefit criteria (1/3 respectively 2/3 probability) is instantiated</li>
+<li>weightDistribution := {&#8216;equiobjectives&#8217;|&#8217;fixed&#8217;|&#8217;random&#8217;|&#8217;equisignificant&#8217; (default = &#8216;equisignificant&#8217;)}</li>
+<li>default weightScale for &#8216;random&#8217; weightDistribution is 1 - numberOfCriteria</li>
+<li>commonScale parameter is obsolete. The scale of cost criteria is cardinal or ordinal (0-10) with proabailities 1/4 respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal with probabilities 2/3, respectively 1/3.</li>
+<li>All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.</li>
+<li>commonThresholds is obsolete. Preference discrimination is specified as percentiles of concerned performance differences (see below).</li>
+<li>CommonPercentiles = {&#8216;ind&#8217;:0.05, &#8216;pref&#8217;:0.10, [&#8216;weakveto&#8217;:0.90,] &#8216;veto&#8217;:&#8216;95} are expressed in centiless (reversed for vetoes) and only concern cardinal criteria.</li>
+</ul>
+</div></blockquote>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Minimal number of decision actions required is 3 !</p>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="cRandPerfTabs.RandomCoalitionsPerformanceTableau">
+<em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">RandomCoalitionsPerformanceTableau</code><a class="headerlink" href="#cRandPerfTabs.RandomCoalitionsPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau" title="cRandPerfTabs.cPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">cRandPerfTabs.cPerformanceTableau</span></code></a></p>
+<p>Full automatic generation of performance tableaux with random coalitions of criteria</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><div class="first last line-block">
+<div class="line">numberOf Actions := 20 (default)</div>
+<div class="line">number of Criteria := 13 (default)</div>
+<div class="line">weightDistribution := &#8216;equisignificant&#8217; (default with all weights = 1.0), &#8216;random&#8217;, &#8216;fixed&#8217; (default w_1 = numberOfCriteria-1, w_{i!=1} = 1</div>
+<div class="line">weightScale := [1,numerOfCriteria] (random default), [w_1, w_{i!=1] (fixed)</div>
+<div class="line">integerWeights := True (default) / False</div>
+<div class="line">commonScale := (0.0, 100.0) (default)</div>
+<div class="line">commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalSacles, [(0.10001*span,0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].</div>
+<div class="line">commonMode := [&#8216;triangular&#8217;,50.0,0.50] (default), [&#8216;uniform&#8217;,None,None], [&#8216;beta&#8217;, None,None] (three alpha, beta combinations (5.8661,2.62203) chosen by default for high(&#8216;+&#8217;), medium (&#8216;~&#8217;) and low (&#8216;-&#8216;) evaluations.</div>
+<div class="line">valueDigits := 2 (default, for cardinal scales only)</div>
+<div class="line">Coalitions := True (default)/False, three coalitions if True</div>
+<div class="line">VariableGenerators := True (default) / False, variable high(&#8216;+&#8217;), medium (&#8216;~&#8217;) or low (&#8216;-&#8216;) law generated evaluations.</div>
+<div class="line">OrdinalScales := True / False (default)</div>
+<div class="line">Debug := True / False (default)</div>
+<div class="line">RandomCoalitions = True / False (default) zero or more than three coalitions if Coalitions == False.</div>
+<div class="line">vetoProbability := x in ]0.0-1.0[ / None (default), probability that a cardinal criterion shows a veto preference discrimination threshold.</div>
+<div class="line">Electre3 := True (default) / False, no weakveto if True (obsolete)</div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="cRandPerfTabs.RandomPerformanceTableau">
+<em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">RandomPerformanceTableau</code><a class="headerlink" href="#cRandPerfTabs.RandomPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau" title="cRandPerfTabs.cPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">cRandPerfTabs.cPerformanceTableau</span></code></a></p>
+<p>Specialization of the PerformanceTableau class for generating a temporary
+random performance tableau.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last">
+<li><p class="first">numberOfActions := nbr of decision actions.</p>
+</li>
+<li><p class="first">numberOfCriteria := number performance criteria.</p>
+</li>
+<li><dl class="first docutils">
+<dt>weightDistribution := &#8216;random&#8217; (default) | &#8216;fixed&#8217; | &#8216;equisignificant&#8217;.</dt>
+<dd><div class="first last line-block">
+<div class="line">If &#8216;random&#8217;, weights are uniformly selected randomly</div>
+<div class="line">form the given weight scale;</div>
+<div class="line">If &#8216;fixed&#8217;, the weightScale must provided a corresponding weights</div>
+<div class="line">distribution;</div>
+<div class="line">If &#8216;equisignificant&#8217;, all criterion weights are put to unity.</div>
+</div>
+</dd>
+</dl>
+</li>
+<li><p class="first">weightScale := [Min,Max] (default =[1,numberOfCriteria].</p>
+</li>
+<li><p class="first">IntegerWeights := True (default) | False (normalized to proportions of 1.0).</p>
+</li>
+<li><p class="first">commonScale := [Min;Max]; common performance measuring scales (default = [0;100])</p>
+</li>
+<li><p class="first">commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p)
+and considerable performance difference discrimination thresholds.</p>
+</li>
+<li><dl class="first docutils">
+<dt>commonMode := common random distribution of random performance measurements:</dt>
+<dd><div class="first last line-block">
+<div class="line">(&#8216;uniform&#8217;,Min,Max), uniformly distributed between min and max values. </div>
+<div class="line">(&#8216;normal&#8217;,mu,sigma), truncated Gaussion distribution. </div>
+<div class="line">(&#8216;triangular&#8217;,mode,repartition), generalized triangular distribution </div>
+<div class="line">(&#8216;beta&#8217;,alpha,beta).</div>
+</div>
+</dd>
+</dl>
+</li>
+<li><p class="first">valueDigits := &lt;integer&gt;, precision of performance measurements
+(2 decimal digits by default).</p>
+</li>
+</ul>
+</dd>
+<dt>Code example::</dt>
+<dd><div class="first highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceTableau</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">actions</span>
+<span class="go">    {&#39;a1&#39;: {&#39;comment&#39;: &#39;RandomPerformanceTableau() generated.&#39;, &#39;name&#39;: &#39;random decision action&#39;},</span>
+<span class="go">     &#39;a2&#39;: {&#39;comment&#39;: &#39;RandomPerformanceTableau() generated.&#39;, &#39;name&#39;: &#39;random decision action&#39;},</span>
+<span class="go">     &#39;a3&#39;: {&#39;comment&#39;: &#39;RandomPerformanceTableau() generated.&#39;, &#39;name&#39;: &#39;random decision action&#39;}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">criteria</span>
+<span class="go">    {&#39;g1&#39;: {&#39;thresholds&#39;: {&#39;ind&#39; : (Decimal(&#39;10.0&#39;), Decimal(&#39;0.0&#39;)),</span>
+<span class="go">                           &#39;veto&#39;: (Decimal(&#39;80.0&#39;), Decimal(&#39;0.0&#39;)),</span>
+<span class="go">                           &#39;pref&#39;: (Decimal(&#39;20.0&#39;), Decimal(&#39;0.0&#39;))},</span>
+<span class="go">            &#39;scale&#39;: [0.0, 100.0],</span>
+<span class="go">            &#39;weight&#39;: Decimal(&#39;1&#39;),</span>
+<span class="go">            &#39;name&#39;: &#39;digraphs.RandomPerformanceTableau() instance&#39;,</span>
+<span class="go">            &#39;comment&#39;: &#39;Arguments: ; weightDistribution=random;</span>
+<span class="go">                weightScale=(1, 1); commonMode=None&#39;}}</span>
+</pre></div>
+</div>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">evaluation</span>
+<span class="go">    {&#39;g01&#39;: {&#39;a01&#39;: Decimal(&#39;45.95&#39;),</span>
+<span class="go">             &#39;a02&#39;: Decimal(&#39;95.17&#39;),</span>
+<span class="go">             &#39;a03&#39;: Decimal(&#39;17.47&#39;)</span>
+<span class="go">            }</span>
+<span class="go">    }</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="cRandPerfTabs.RandomRankPerformanceTableau">
+<em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">RandomRankPerformanceTableau</code><a class="headerlink" href="#cRandPerfTabs.RandomRankPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau" title="cRandPerfTabs.cPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">cRandPerfTabs.cPerformanceTableau</span></code></a></p>
+<p>Specialization of the PerformanceTableau class for generating a temporary
+random performance tableau.</p>
+<p>Random generator for multiple criteria ranked (without ties) performances of a
+given number of decision actions. On each criterion,
+all decision actions are hence lineraly ordered. The RandomRankPerformanceTableau class is
+matching the RandomLinearVotingProfiles class (see the votingDigraphs module)</p>
+<dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last">
+<li><p class="first">number of actions,</p>
+</li>
+<li><p class="first">number of performance criteria,</p>
+</li>
+<li><p class="first">weightDistribution := equisignificant | random (default, see RandomPerformanceTableau)</p>
+</li>
+<li><p class="first">weightScale := (1, 1 | numberOfCriteria (default when random))</p>
+</li>
+<li><p class="first">integerWeights := Boolean (True = default)</p>
+</li>
+<li><dl class="first docutils">
+<dt>commonThresholds (default) := {</dt>
+<dd><div class="first last line-block">
+<div class="line">&#8216;ind&#8217;:(0,0),</div>
+<div class="line">&#8216;pref&#8217;:(1,0),</div>
+<div class="line">&#8216;veto&#8217;:(numberOfActions,0)</div>
+<div class="line">} (default)</div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="cRandPerfTabs.cPerformanceTableau">
+<em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">cPerformanceTableau</code><span class="sig-paren">(</span><em>filePerfTab=None</em>, <em>isEmpty=False</em><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
+<p>Abstract root class for cythenized performace tableau methods.</p>
+<dl class="method">
+<dt id="cRandPerfTabs.cPerformanceTableau.convert2BigData">
+<code class="descname">convert2BigData</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.convert2BigData" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="cRandPerfTabs.cPerformanceTableau.convert2Standard">
+<code class="descname">convert2Standard</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.convert2Standard" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="cRandPerfTabs.cPerformanceTableau.convertDiscriminationThresholds2Decimal">
+<code class="descname">convertDiscriminationThresholds2Decimal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.convertDiscriminationThresholds2Decimal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="cRandPerfTabs.cPerformanceTableau.convertDiscriminationThresholds2Float">
+<code class="descname">convertDiscriminationThresholds2Float</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.convertDiscriminationThresholds2Float" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="cRandPerfTabs.cPerformanceTableau.convertEvaluation2Decimal">
+<code class="descname">convertEvaluation2Decimal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.convertEvaluation2Decimal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert evaluations from decimal format to float</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cRandPerfTabs.cPerformanceTableau.convertEvaluation2Float">
+<code class="descname">convertEvaluation2Float</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.convertEvaluation2Float" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert evaluations from decimal format to float</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cRandPerfTabs.cPerformanceTableau.convertWeight2Decimal">
+<code class="descname">convertWeight2Decimal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.convertWeight2Decimal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert significance weights from Decimal format
+to int format.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cRandPerfTabs.cPerformanceTableau.convertWeight2Integer">
+<code class="descname">convertWeight2Integer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.convertWeight2Integer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert significance weights from Decimal format
+to int format.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cRandPerfTabs.cPerformanceTableau.normalizeEvaluations">
+<code class="descname">normalizeEvaluations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.normalizeEvaluations" title="Permalink to this definition">¶</a></dt>
+<dd><p>recode the evaluations between lowValue and highValue on all criteria</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cRandPerfTabs.cPerformanceTableau.showCriteria">
+<code class="descname">showCriteria</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.showCriteria" title="Permalink to this definition">¶</a></dt>
+<dd><p>print Criteria with thresholds and weights.</p>
+</dd></dl>
+
+</dd></dl>
+
+<p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
+</div>
+<div class="section" id="module-cIntegerOutrankingDigraphs">
+<span id="cintegeroutrankingdigraphs-module"></span><span id="cintegeroutrankingdigraphs-label"></span><h3>cIntegerOutrankingDigraphs module<a class="headerlink" href="#module-cIntegerOutrankingDigraphs" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph">
+<em class="property">class </em><code class="descclassname">cIntegerOutrankingDigraphs.</code><code class="descname">IntegerBipolarOutrankingDigraph</code><a class="headerlink" href="#cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
+<p>Specialization of the abstract OutrankingDigraph root class for generating
+integer-valued bipolar outranking digraphs.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li>argPerfTab: instance of PerformanceTableau class.
+If a file name string is given, the performance tableau will directly be loaded first.</li>
+<li>coalition: subset of criteria to be used for contruction the outranking digraph.</li>
+<li>hasNoVeto: veto desactivation flag (False by default).</li>
+<li>hasBipolarVeto: bipolar versus electre veto activation (true by default).</li>
+<li>Normalized: the valuation domain is set by default to [-100,+100] (bipolar percents).
+If True, the valuation domain is recoded to [-1.0,+1.0].</li>
+<li>WithConcordanceRelation: True by default when not threading.
+The self.concordanceRelation contains the significance majority margin of the &#8220;at least as good relation as&#8221;
+without the large performance difference polarization.</li>
+<li>WithVetoCounts: True by default when not threading. All vetos and countervetos
+are stored in self.vetos and self.negativeVetos slots,
+as well the counts of large performance differences in self.largePerformanceDifferencesCount slot.</li>
+<li>Threading: False by default. Allows to profit from SMP machines via the Python multiprocessing module.</li>
+<li>nbrCores: controls the maximal number of cores that will be used in the multiprocessing phases.
+If None is given, the os.cpu_count method is used in order to determine the number of availble cores on the SMP machine.</li>
+</ul>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If Threading is True, WithConcordanceRelation and WithVetoCounts flags are automatically set both to False.
+Removing this limitation is on the todo list and will be done soon.</p>
+</div>
+<dl class="method">
+<dt id="cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph.computeCriterionRelation">
+<code class="descname">computeCriterionRelation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph.computeCriterionRelation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the outranking characteristic for actions x and y
+on criterion c.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph.computeDeterminateness">
+<code class="descname">computeDeterminateness</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph.computeDeterminateness" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the Kendalll distance in % of self
+with the all median valued (indeterminate) digraph.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph.computeOrderCorrelation">
+<code class="descname">computeOrderCorrelation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph.computeOrderCorrelation" title="Permalink to this definition">¶</a></dt>
+<dd><p>wrapper for the self.computeRankingCorrelation method
+The given argOrder is previously reversed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph.computeOrdinalCorrelation">
+<code class="descname">computeOrdinalCorrelation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph.computeOrdinalCorrelation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the ordinal correlation K of an integer Digraph instance
+when compared with a given compatible (same actions set) other integer Digraph or
+Digraph instance.</p>
+<p>K = sum_{x != y} [ min( max(-self.relation(x,y)),other.relation(x,y), max(self.relation(x,y),-other.relation(x,y)) ]</p>
+<p>K /= sum_{x!=y} [ min(abs(self.relation(x,y),abs(other.relation(x,y)) ]</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The global outranking relation of BigDigraph instances is contructed on the fly
+from the ordered dictionary of the components.</p>
+<p>Renders a tuple with at position 0 the actual bipolar correlation index
+and in position 1 the minimal determination level D of self and
+the other relation.</p>
+<p>D = sum_{x != y} min(abs(self.relation(x,y)),abs(other.relation(x,y)) / n(n-1)</p>
+<p>where n is the number of actions considered.</p>
+<p class="last">The correlation index with a completely indeterminate relation
+is by convention 0.0 at determination level 0.0 .</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph.computeOrdinalCorrelationMP">
+<code class="descname">computeOrdinalCorrelationMP</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph.computeOrdinalCorrelationMP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multi processing version of the digraphs.computeOrdinalCorrelation() method.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The relation filtering and the MedinaCut option are not implemented in the MP version.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph.computeRankingCorrelation">
+<code class="descname">computeRankingCorrelation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph.computeRankingCorrelation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the ordinal correlation K of an integer digraph instance
+when compared with a given linear ranking of its actions</p>
+<p>K = sum_{x != y} [ min( max(-self.relation(x,y)),other.relation(x,y), max(self.relation(x,y),-other.relation(x,y)) ]</p>
+<p>K /= sum_{x!=y} [ min(abs(self.relation(x,y),abs(other.relation(x,y)) ]</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The global outranking relation of BigDigraph instances is contructed on the fly
+from the ordered dictionary of the components.</p>
+<p>Renders a tuple with at position 0 the actual bipolar correlation index
+and in position 1 the minimal determination level D of self and
+the other relation.</p>
+<p>D = sum_{x != y} min(abs(self.relation(x,y)),abs(other.relation(x,y)) / n(n-1)</p>
+<p>where n is the number of actions considered.</p>
+<p class="last">The correlation index with a completely indeterminate relation
+is by convention 0.0 at determination level 0.0 .</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph.convertValuation2Decimal">
+<code class="descname">convertValuation2Decimal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph.convertValuation2Decimal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph.criterionCharacteristicFunction">
+<code class="descname">criterionCharacteristicFunction</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph.criterionCharacteristicFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the characteristic value of the comparison of a and b on criterion c.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph.showActions">
+<code class="descname">showActions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph.showActions" title="Permalink to this definition">¶</a></dt>
+<dd><p>presentation methods for decision actions or alternatives</p>
+</dd></dl>
+
+</dd></dl>
+
+<p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
+</div>
+<div class="section" id="module-cIntegerSortingDigraphs">
+<span id="cintegersortingdigraphs-module"></span><span id="cintegersortingdigraphs-label"></span><h3>cIntegerSortingDigraphs module<a class="headerlink" href="#module-cIntegerSortingDigraphs" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph">
+<em class="property">class </em><code class="descclassname">cIntegerSortingDigraphs.</code><code class="descname">IntegerQuantilesSortingDigraph</code><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph" title="cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph</span></code></a></p>
+<p>IntegerBipolarOutrankingDigraph class specialisation
+for the sorting of a large set of alternatives into
+quantiles delimited ordered classes.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We generally require an PerformanceTableau instance or a valid filename.
+If none is given, then a default profile with the limiting quartiles Q0,Q1,Q2, Q3 and Q4 is used on each criteria.
+By default upper closed limits of categories are supposed to be used in the sorting.</p>
+</div>
+<dl class="method">
+<dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.computeCategoryContents">
+<code class="descname">computeCategoryContents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.computeCategoryContents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the sorting results per category.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.computeQuantileOrdering">
+<code class="descname">computeQuantileOrdering</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.computeQuantileOrdering" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last simple">
+<li>Descending: listing in <em>decreasing</em> (default) or <em>increasing</em> quantile order.</li>
+<li>strategy: ordering in an {&#8216;optimistic&#8217; (default) | &#8216;pessimistic&#8217; | &#8216;average&#8217;}
+in the uppest, the lowest or the average potential quantile.</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.computeSortingCharacteristics">
+<code class="descname">computeSortingCharacteristics</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.computeSortingCharacteristics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a bipolar-valued bi-dictionary relation
+representing the degree of credibility of the
+assertion that &#8220;action x in A belongs to category c in C&#8221;,
+ie x outranks low category limit and does not outrank
+the high category limit.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.computeSortingRelation">
+<code class="descname">computeSortingRelation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.computeSortingRelation" title="Permalink to this definition">¶</a></dt>
+<dd><p>constructs a bipolar sorting relation using the category contents.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.computeWeakOrder">
+<code class="descname">computeWeakOrder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.computeWeakOrder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specialisation for QuantilesSortingDigraphs.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.getActionsKeys">
+<code class="descname">getActionsKeys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.getActionsKeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>extract normal actions keys()</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.orderedCategoryKeys">
+<code class="descname">orderedCategoryKeys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.orderedCategoryKeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the ordered list of category keys
+based on self.categories[&#8216;order&#8217;] numeric values.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showActionCategories">
+<code class="descname">showActionCategories</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showActionCategories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the union of categories in which the given action is sorted positively or null into.
+Returns a tuple : action, lowest category key, highest category key, membership credibility !</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showActionsSortingResult">
+<code class="descname">showActionsSortingResult</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showActionsSortingResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>shows the quantiles sorting result all (default) of a subset of the decision actions.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showHTMLQuantileOrdering">
+<code class="descname">showHTMLQuantileOrdering</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showHTMLQuantileOrdering" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shows the html version of the quantile preordering in a browser window.</p>
+<dl class="docutils">
+<dt>The ordring strategy is either:</dt>
+<dd><ul class="first last simple">
+<li><strong>optimistic</strong>, following the upper quantile limits (default),</li>
+<li><strong>pessimistic</strong>, following the lower quantile limits,</li>
+<li><strong>average</strong>, following the averag of the upper and lower quantile limits.</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showHTMLSorting">
+<code class="descname">showHTMLSorting</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showHTMLSorting" title="Permalink to this definition">¶</a></dt>
+<dd><p>shows the html version of the sorting result in a browser window.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showOrderedRelationTable">
+<code class="descname">showOrderedRelationTable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showOrderedRelationTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Showing the relation table in decreasing (default) or increasing order.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showQuantileOrdering">
+<code class="descname">showQuantileOrdering</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showQuantileOrdering" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dummy show method for the commenting computeQuantileOrdering() method.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showSorting">
+<code class="descname">showSorting</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showSorting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shows sorting results in decreasing or increasing (Reverse=False)
+order of the categories. If isReturningHTML is True (default = False)
+the method returns a htlm table with the sorting result.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showSortingCharacteristics">
+<code class="descname">showSortingCharacteristics</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showSortingCharacteristics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a bipolar-valued bi-dictionary relation
+representing the degree of credibility of the
+assertion that &#8220;action x in A belongs to category c in C&#8221;,
+ie x outranks low category limit and does not outrank
+the high category limit.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showWeakOrder">
+<code class="descname">showWeakOrder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showWeakOrder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specialisation for QuantilesSortingDigraphs.</p>
+</dd></dl>
+
+</dd></dl>
+
+<p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
+</div>
+<div class="section" id="module-cBigIntegerOutrankingDigraphs">
+<span id="cbigintegeroutrankingdigraphs-module"></span><span id="cbigintegeroutrankingdigraphs-label"></span><h3>cBigIntegerOutrankingDigraphs module<a class="headerlink" href="#module-cBigIntegerOutrankingDigraphs" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph">
+<em class="property">class </em><code class="descclassname">cBigIntegerOutrankingDigraphs.</code><code class="descname">BigIntegerDigraph</code><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Abstract root class for linearly decomposed big digraphs (order &gt; 1000)
+using multiprocessing ressources.</p>
+<dl class="method">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph.computeDecompositionSummaryStatistics">
+<code class="descname">computeDecompositionSummaryStatistics</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph.computeDecompositionSummaryStatistics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the summary of the distribution of the length of
+the components as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">summary</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="n">maxLength</span><span class="p">,</span>
+           <span class="s1">&#39;median&#39;</span><span class="p">:</span><span class="n">medianLength</span><span class="p">,</span>
+           <span class="s1">&#39;mean&#39;</span><span class="p">:</span><span class="n">meanLength</span><span class="p">,</span>
+           <span class="s1">&#39;stdev&#39;</span><span class="p">:</span> <span class="n">stdLength</span><span class="p">,</span>
+           <span class="s1">&#39;fillrate&#39;</span><span class="p">:</span> <span class="n">fillrate</span><span class="p">,</span>
+                      <span class="p">(</span><span class="n">see</span> <span class="n">computeFillRate</span><span class="p">()}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph.computeFillRate">
+<code class="descname">computeFillRate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph.computeFillRate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the sum of the squares (without diagonal) of the orders of the component&#8217;s subgraphs
+over the square (without diagonal) of the big digraph order.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph.computeOrdinalCorrelation">
+<code class="descname">computeOrdinalCorrelation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph.computeOrdinalCorrelation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the ordinal correlation K of a BigDigraph instance
+when compared with a given compatible (same actions set) other Digraph or
+BigDigraph instance.</p>
+<p>K = sum_{x != y} [ min( max(-self.relation(x,y)),other.relation(x,y), max(self.relation(x,y),-other.relation(x,y)) ]</p>
+<p>K /= sum_{x!=y} [ min(abs(self.relation(x,y),abs(other.relation(x,y)) ]</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The global outranking relation of BigDigraph instances is contructed on the fly
+from the ordered dictionary of the components.</p>
+<p>Renders a tuple with at position 0 the actual bipolar correlation index
+and in position 1 the minimal determination level D of self and
+the other relation.</p>
+<p>D = sum_{x != y} min(abs(self.relation(x,y)),abs(other.relation(x,y)) / n(n-1)</p>
+<p>where n is the number of actions considered.</p>
+<p class="last">The correlation index with a completely indeterminate relation
+is by convention 0.0 at determination level 0.0 .</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph.computeRankingCorrelation">
+<code class="descname">computeRankingCorrelation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph.computeRankingCorrelation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the ordinal correlation K of a BigDigraph instance
+when compared with a given linear ranking of its actions</p>
+<p>K = sum_{x != y} [ min( max(-self.relation(x,y)),other.relation(x,y), max(self.relation(x,y),-other.relation(x,y)) ]</p>
+<p>K /= sum_{x!=y} [ min(abs(self.relation(x,y),abs(other.relation(x,y)) ]</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The global outranking relation of BigDigraph instances is contructed on the fly
+from the ordered dictionary of the components.</p>
+<p>Renders a tuple with at position 0 the actual bipolar correlation index
+and in position 1 the minimal determination level D of self and
+the other relation.</p>
+<p>D = sum_{x != y} min(abs(self.relation(x,y)),abs(other.relation(x,y)) / n(n-1)</p>
+<p>where n is the number of actions considered.</p>
+<p class="last">The correlation index with a completely indeterminate relation
+is by convention 0.0 at determination level 0.0 .</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph.ordering2Preorder">
+<code class="descname">ordering2Preorder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph.ordering2Preorder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a preordering (a list of list) of a linar order (worst to best) of decision actions in increasing preference direction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph.ranking2Preorder">
+<code class="descname">ranking2Preorder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph.ranking2Preorder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a preordering (a list of list) of a ranking (best to worst) of decision actions in increasing preference direction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph.relation">
+<code class="descname">relation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph.relation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic construction of the global outranking characteristic function <em>r(x S y)</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph.showBestChoiceRecommendation">
+<code class="descname">showBestChoiceRecommendation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph.showBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update of rubisBestChoice Recommendation for big digraphs.
+To do: limit to best choice; worst choice should be a separate method()</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph.showDecomposition">
+<code class="descname">showDecomposition</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph.showDecomposition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints on the console the decomposition structure of the sparse outranking digraph instance
+in <em>decreasing</em> (default) or <em>increasing</em> preference direction.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph.showHTMLRelationMap">
+<code class="descname">showHTMLRelationMap</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph.showHTMLRelationMap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Launches a browser window with the colored relation map of self.
+See corresponding Digraph.showRelationMap() method.</p>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span>  <span class="c1"># strict outranking relation</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">showHTMLRelationMap</span><span class="p">(</span><span class="n">rankingRule</span><span class="o">=</span><span class="s2">&quot;netFlows&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/relationMap.png"><img alt="Browser view of a relation map" class="align-center" src="_images/relationMap.png" style="width: 600px;" /></a>
+</dd></dl>
+
+<dl class="method">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph.showRelationMap">
+<code class="descname">showRelationMap</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph.showRelationMap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints on the console, in text map format, the location of
+the diagonal outranking components of the big outranking digraph.</p>
+<dl class="docutils">
+<dt>By default, symbols = {&#8216;max&#8217;:&#8217;┬&#8217;,&#8217;positive&#8217;: &#8216;+&#8217;, &#8216;median&#8217;: &#8216; &#8216;,</dt>
+<dd>&#8216;negative&#8217;: &#8216;-&#8216;, &#8216;min&#8217;: &#8216;┴&#8217;}</dd>
+</dl>
+<p>The default ordering of the output is following the quantiles sorted boosted net flows ranking rule
+from best to worst actions. Further available ranking rules are Kohler&#8217;s (rankingRule=&#8221;kohler&#8221;)
+and Tideman&#8217;s ranked pairs rule (rankingRule=&#8221;rankedPairs&#8221;).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph.showRubisBestChoiceRecommendation">
+<code class="descname">showRubisBestChoiceRecommendation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph.showRubisBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the Rubis Best choice recommendation of the first component.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph.showRubisWorstChoiceRecommendation">
+<code class="descname">showRubisWorstChoiceRecommendation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph.showRubisWorstChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the Rubis Worst choice recommendation of the first component.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph">
+<em class="property">class </em><code class="descclassname">cBigIntegerOutrankingDigraphs.</code><code class="descname">BigIntegerOutrankingDigraph</code><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph" title="cBigIntegerOutrankingDigraphs.BigIntegerDigraph"><code class="xref py py-class docutils literal"><span class="pre">cBigIntegerOutrankingDigraphs.BigIntegerDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
+<p>Main class for the multiprocessing implementation of big outranking digraphs.</p>
+<p>The big outranking digraph instance is decomposed with a q-tiling sort into a partition
+of quantile equivalence classes which are linearly ordered by average quantile limits (default).</p>
+<p>With each quantile equivalence class is associated a BipolarOutrankingDigraph object
+which is restricted to the decision actions gathered in this quantile equivalence class.</p>
+<p>By default, the number of quantiles q is set to a twentieth of the number of decision actions,
+ie q = order//10. The effective number of quantiles may be much lower for large orders;
+for instance quantiles = 250 may give good results for a digraph of order 25000.</p>
+<p>For other parameters settings, see the corresponding <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.QuantilesSortingDigraph</span></code></a> class.</p>
+<dl class="method">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeActionCategories">
+<code class="descname">computeActionCategories</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeActionCategories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the union of categories in which the given action is sorted positively or null into.
+Returns a tuple : action, lowest category key, highest category key, membership credibility !</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeBoostedOrdering">
+<code class="descname">computeBoostedOrdering</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeBoostedOrdering" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders an ordred list of decision actions ranked in
+increasing preference direction following by default the Copeland rule
+on each component.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeBoostedRanking">
+<code class="descname">computeBoostedRanking</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeBoostedRanking" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders an ordred list of decision actions ranked in
+decreasing preference direction following the net flows rule
+on each component.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeCriterion2RankingCorrelation">
+<code class="descname">computeCriterion2RankingCorrelation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeCriterion2RankingCorrelation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the ordinal correlation coefficient between
+the global outranking and the marginal criterion relation.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeDeterminateness">
+<code class="descname">computeDeterminateness</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeDeterminateness" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the Kendalll distance in % of self
+with the all median valued (indeterminate) digraph.</p>
+<p>deter = (sum_{x,y in X} abs[r(xSy) - Med])/(oder*order-1)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeMarginalVersusGlobalOutrankingCorrelations">
+<code class="descname">computeMarginalVersusGlobalOutrankingCorrelations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeMarginalVersusGlobalOutrankingCorrelations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method for computing correlations between each individual criterion relation with the corresponding
+global outranking relation.</p>
+<p>Returns a list of tuples (correlation,criterionKey) sorted by default in decreasing order of the correlation.</p>
+<p>If Threading is True, a multiprocessing Pool class is used with a parallel equivalent of the built-in map function.</p>
+<p>If nbrCores is not set, the os.cpu_count() function is used to determine the number of
+available cores.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showActions">
+<code class="descname">showActions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showActions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints out the actions disctionary.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showActionsSortingResult">
+<code class="descname">showActionsSortingResult</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showActionsSortingResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>shows the quantiles sorting result all (default) of a subset of the decision actions.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showComponents">
+<code class="descname">showComponents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showComponents" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showCriteria">
+<code class="descname">showCriteria</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showCriteria" title="Permalink to this definition">¶</a></dt>
+<dd><p>print Criteria with thresholds and weights.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showDecomposition">
+<code class="descname">showDecomposition</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showDecomposition" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showMarginalVersusGlobalOutrankingCorrelation">
+<code class="descname">showMarginalVersusGlobalOutrankingCorrelation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showMarginalVersusGlobalOutrankingCorrelation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show method for computeCriterionCorrelation results.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showRelationTable">
+<code class="descname">showRelationTable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showRelationTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specialized for showing the quantiles decomposed relation table.
+Components are stored in an ordered dictionary.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showShort">
+<code class="descname">showShort</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showShort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default (__repr__) presentation method for big outranking digraphs instances:</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="cBigIntegerOutrankingDigraphs.decompose">
+<code class="descclassname">cBigIntegerOutrankingDigraphs.</code><code class="descname">decompose</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.decompose" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="cBigIntegerOutrankingDigraphs.worker">
+<code class="descclassname">cBigIntegerOutrankingDigraphs.</code><code class="descname">worker</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.worker" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
+</div>
+</div>
 <div class="section" id="indices-and-tables">
 <h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -8194,6 +9074,13 @@ Euler&#8217;s number of coprime elements a in Zn.</p>
 <li><a class="reference internal" href="#module-randomNumbers">randomNumbers module</a></li>
 <li><a class="reference internal" href="#module-digraphsTools">digraphsTools module</a></li>
 <li><a class="reference internal" href="#module-arithmetics">arithmetics module</a></li>
+<li><a class="reference internal" href="#cythonized-modules-for-big-data">Cythonized modules for big data</a><ul>
+<li><a class="reference internal" href="#module-cRandPerfTabs">cRandPerfTabs module</a></li>
+<li><a class="reference internal" href="#module-cIntegerOutrankingDigraphs">cIntegerOutrankingDigraphs module</a></li>
+<li><a class="reference internal" href="#module-cIntegerSortingDigraphs">cIntegerSortingDigraphs module</a></li>
+<li><a class="reference internal" href="#module-cBigIntegerOutrankingDigraphs">cBigIntegerOutrankingDigraphs module</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 <li><a class="reference internal" href="#tutorials">Tutorials</a></li>
 </ul>

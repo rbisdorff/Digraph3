@@ -22,7 +22,8 @@ def testbigOutrankingDigraph():
                                 LowerClosed=True,
                                 CopyPerfTab=True,
                                minimalComponentSize=1,
-                                    Threading=MP,Debug=False)
+                                    Threading=MP,Debug=False,
+                                      Comments=True)
     print(bg1.computeDecompositionSummaryStatistics())
     bg1.showDecomposition()
     print(bg1)

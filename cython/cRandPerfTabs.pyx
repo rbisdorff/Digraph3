@@ -1,26 +1,28 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# cPython implementation of digraphs
-# submodule randomPerfTabs.py  for generating random performance tableaux  
-# Copyright (C) 2015  Raymond Bisdorff
-#
-#    This program is free software; you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation; either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License along
-#    with this program; if not, write to the Free Software Foundation, Inc.,
-#    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-#
-#######################
+"""
+c-Extension for the Digraph3 collection.
+Module cRandPerfTabs.py is a c-compiled version of the :py:mod:`randomPerfTabs`_ module for generating random performance tableaux of Big Data type,
+ie with integer action keys and float performance evaluations. Conversions methods are provided
+to switch from the standard to the BigData format and back.  
+Copyright (C) 2018  Raymond Bisdorff
 
-__version__ = "cython 1.0"
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+"""
+__version__ = "cython 0.27.3"
 
 from perfTabs import *
 #from decimal import Decimal

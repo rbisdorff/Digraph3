@@ -281,9 +281,64 @@ Back to the :ref:`Technical-label`
 .. _arithmetics-label:
 
 arithmetics module
---------------------
+------------------
 
 .. automodule:: arithmetics
+   :member-order: alphabetical
+   :no-inherited-members:
+   :members:
+
+Back to the :ref:`Technical-label`
+
+.. _cythonized-label:
+
+Cythonized modules for big data
+-------------------------------
+
+The following modules a C-compiled using the Cython compiler. No code source is provided for inspection.
+
+.. _cRandPerfTabs-label:
+
+cRandPerfTabs module
+....................
+
+.. automodule:: cRandPerfTabs
+   :member-order: alphabetical
+   :no-inherited-members:
+   :members:
+
+Back to the :ref:`Technical-label`
+
+.. _cIntegerOutrankingDigraphs-label:
+
+cIntegerOutrankingDigraphs module
+.................................
+
+.. automodule:: cIntegerOutrankingDigraphs
+   :member-order: alphabetical
+   :no-inherited-members:
+   :members:
+
+Back to the :ref:`Technical-label`
+
+.. _cIntegerSortingDigraphs-label:
+
+cIntegerSortingDigraphs module
+..............................
+
+.. automodule:: cIntegerSortingDigraphs
+   :member-order: alphabetical
+   :no-inherited-members:
+   :members:
+
+Back to the :ref:`Technical-label`
+
+.. _cBigIntegerOutrankingDigraphs-label:
+
+cBigIntegerOutrankingDigraphs module
+....................................
+
+.. automodule:: cBigIntegerOutrankingDigraphs
    :member-order: alphabetical
    :no-inherited-members:
    :members:

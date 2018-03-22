@@ -43,7 +43,7 @@ class BigIntegerDigraph(object):
         """
         Default presentation method for bigDigraphs instances.
         """
-        reprString = '*----- Object instance description --------------*'
+        reprString = '*----- Object instance description --------------*\n'
         reprString += 'Instance class    : %s\n' % self.__class__.__name__
         reprString += 'Instance name     : %s\n' % self.name
         reprString += '# Actions         : %d\n' % self.order
@@ -54,7 +54,7 @@ class BigIntegerDigraph(object):
         reprString += '# Components      : %d\n' % self.nbrComponents
         reprString += 'Minimal order     : %d\n' % self.minimalComponentSize
         reprString += 'Maximal order     : %d\n' % self.maximalComponentSize
-        reprString += 'Average order     : %.1f' % (self.order/self.nbrComponents)
+        reprString += 'Average order     : %.1f\n' % (self.order/self.nbrComponents)
         reprString += 'fill rate         : %.3f%%\n' % (self.fillRate*100.0)    
         reprString += '----  Constructor run times (in sec.) ----\n'
         reprString += 'Nbr of threads    : %d\n' % self.nbrOfCPUs
@@ -934,7 +934,8 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
         from copy import copy, deepcopy
         from cIntegerOutrankingDigraphs import IntegerBipolarOutrankingDigraph
 
-        print('Cythonized BigIntegerOutrankingDigraph class')
+        if Comments:
+            print('Cythonized BigIntegerOutrankingDigraph class')
    
         ttot = time()
 
@@ -1060,7 +1061,8 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                     task_queue.put(task)
                 for i in range(NUMBER_OF_WORKERS):
                     Process(target=worker,args=(task_queue,)).start()
-                print('started')
+                if Comments:
+                    print('started')
                 for i in range(NUMBER_OF_WORKERS):
                     task_queue.put('STOP')                   
 
