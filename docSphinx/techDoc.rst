@@ -303,7 +303,6 @@ cRandPerfTabs module
 ....................
 
 .. automodule:: cRandPerfTabs
-   :members:
    :no-inherited-members:
    :members:
 
