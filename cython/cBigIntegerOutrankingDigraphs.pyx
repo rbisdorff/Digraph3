@@ -959,9 +959,10 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
       covering (%)        : 0.00
       determinateness (%) : 58.33
       - most credible action(s) = { '312': 4.00, }
-    >>> print(bg.boostedRanking[:10],' ...\n', '     ...  ', bg.boostedRanking[-10:] )
-      [388, 131, 151, 275, 679, 406, 741, 623, 579, 894]  ...  
-                 ...   [278, 886, 202, 473, 841, 878, 713, 62, 17, 312]
+    >>> print(bg.boostedRanking[:10],' ... ',bg.boostedRanking[-10:] )
+      [388, 131, 151, 275, 679, 406, 741, 623, 579, 894]  ... 
+      [278, 886, 202, 473, 841, 878, 713, 62, 17, 312]
+    >>>
 
     """
     
