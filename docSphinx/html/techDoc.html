@@ -9219,7 +9219,7 @@ and Tideman&#8217;s ranked pairs rule (rankingRule=&#8221;rankedPairs&#8221;).</
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
-<li>g0 (first component of self)</li>
+<li>g0=None (first component of self by default),</li>
 <li>Comments=False,</li>
 <li>ChoiceVector=True,</li>
 <li>Debug=False,</li>
@@ -9237,7 +9237,7 @@ and Tideman&#8217;s ranked pairs rule (rankingRule=&#8221;rankedPairs&#8221;).</
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
-<li>g0 (last component of self)</li>
+<li>g0=None (last component of self by default),</li>
 <li>Comments=False,</li>
 <li>ChoiceVector=True,</li>
 <li>Debug=False,</li>
@@ -9255,11 +9255,12 @@ and Tideman&#8217;s ranked pairs rule (rankingRule=&#8221;rankedPairs&#8221;).</
 <dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph">
 <em class="property">class </em><code class="descclassname">cBigIntegerOutrankingDigraphs.</code><code class="descname">BigIntegerOutrankingDigraph</code><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph" title="cBigIntegerOutrankingDigraphs.BigIntegerDigraph"><code class="xref py py-class docutils literal"><span class="pre">cBigIntegerOutrankingDigraphs.BigIntegerDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
-<dl class="docutils">
+<blockquote>
+<div><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
 <li>argPerfTab,</li>
-<li>quantiles=0,</li>
+<li>quantiles=4,</li>
 <li>quantilesOrderingStrategy=&#8221;average&#8221;,</li>
 <li>LowerClosed=False,</li>
 <li>componentRankingRule=&#8221;Copeland&#8221;,</li>
@@ -9281,13 +9282,12 @@ and Tideman&#8217;s ranked pairs rule (rankingRule=&#8221;rankedPairs&#8221;).</
 of quantile equivalence classes which are linearly ordered by average quantile limits (default).</p>
 <p>With each quantile equivalence class is associated a BipolarOutrankingDigraph object
 which is restricted to the decision actions gathered in this quantile equivalence class.</p>
-<p>By default, the number of quantiles q is set to a twentieth of the number of decision actions,
-ie q = order//10. The effective number of quantiles may be much lower for large orders;
-for instance quantiles = 250 may give good results for a digraph of order 25000.</p>
+<p>By default, the number of quantiles q is set to quartiles. However, the ranking quality and the best choice results get better with a finer grained quantiles decomposition.</p>
 <p>For other parameters settings, see the corresponding <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.QuantilesSortingDigraph</span></code></a> class.</p>
 <p>Example python3.6 session:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="k">import</span> <span class="o">*</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>                                        <span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+<span class="go">                                    Threading=True,seed=100)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span>
 <span class="go">*------- PerformanceTableau instance description ------*</span>
 <span class="go">Instance class   : RandomCBPerformanceTableau</span>
@@ -9298,7 +9298,7 @@ for instance quantiles = 250 may give good results for a digraph of order 25000.
 <span class="go">Attributes       : [&#39;name&#39;, &#39;actions&#39;, &#39;objectives&#39;, </span>
 <span class="go">                    &#39;criteriaWeightMode&#39;, &#39;criteria&#39;, </span>
 <span class="go">                    &#39;evaluation&#39;, &#39;weightPreorder&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">cBigIntegerOutrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cBigIntegerOutrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span> <span class="o">=</span> <span class="n">BigIntegerOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">35</span><span class="p">,</span>
 <span class="gp">... </span>                       <span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
 <span class="gp">... </span>                       <span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -9353,11 +9353,18 @@ for instance quantiles = 250 may give good results for a digraph of order 25000.
 <span class="go">  covering (%)        : 0.00</span>
 <span class="go">  determinateness (%) : 58.33</span>
 <span class="go">  - most credible action(s) = { &#39;312&#39;: 4.00, }</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">bg</span><span class="o">.</span><span class="n">boostedRanking</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span><span class="s1">&#39; ... &#39;</span><span class="p">,</span> <span class="n">bg</span><span class="o">.</span><span class="n">boostedRanking</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]</span> <span class="p">)</span>
-<span class="go">[388, 131, 151, 275, 679, 406, 741, 623, 579, 894]  ...  </span>
-<span class="go">             ...   [278, 886, 202, 473, 841, 878, 713, 62, 17, 312]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">bg</span><span class="o">.</span><span class="n">boostedRanking</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span><span class="s1">&#39; ...</span>
 </pre></div>
 </div>
+</div></blockquote>
+<dl class="docutils">
+<dt>&#8216;, &#8216;     ...  &#8216;, bg.boostedRanking[-10:] )</dt>
+<dd><dl class="first last docutils">
+<dt>[388, 131, 151, 275, 679, 406, 741, 623, 579, 894]  ...  </dt>
+<dd>...   [278, 886, 202, 473, 841, 878, 713, 62, 17, 312]</dd>
+</dl>
+</dd>
+</dl>
 <dl class="method">
 <dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeActionCategories">
 <code class="descname">computeActionCategories</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeActionCategories" title="Permalink to this definition">¶</a></dt>

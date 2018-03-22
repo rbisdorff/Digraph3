@@ -94,7 +94,7 @@ class BigIntegerDigraph(object):
                                           bint Cpp=False):
         """
         *Parameters*:
-            * g0 (first component of self)
+            * g0=None (first component of self by default),
             * Comments=False,
             * ChoiceVector=True,
             * Debug=False,
@@ -209,7 +209,7 @@ class BigIntegerDigraph(object):
                                           Cpp=False):
         """
         *Parameters*:
-            * g0 (last component of self)
+            * g0=None (last component of self by default),
             * Comments=False,
             * ChoiceVector=True,
             * Debug=False,
@@ -861,7 +861,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
     """
     *Parameters*:
         * argPerfTab,
-        * quantiles=0,
+        * quantiles=4,
         * quantilesOrderingStrategy="average",
         * LowerClosed=False,
         * componentRankingRule="Copeland",
@@ -885,16 +885,14 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
     With each quantile equivalence class is associated a BipolarOutrankingDigraph object
     which is restricted to the decision actions gathered in this quantile equivalence class.
 
-    By default, the number of quantiles q is set to a twentieth of the number of decision actions,
-    ie q = order//10. The effective number of quantiles may be much lower for large orders;
-    for instance quantiles = 250 may give good results for a digraph of order 25000.
+    By default, the number of quantiles q is set to quartiles. However, the ranking quality and the best choice results get better with a finer grained quantiles decomposition. 
     
     For other parameters settings, see the corresponding :py:class:`sortingDigraphs.QuantilesSortingDigraph` class.
 
     Example python3.6 session:
 
     >>> from cRandPerfTabs import *
-    >>> tp = RandomCBPerformanceTableau(numberOfActions=1000,\
+    >>> tp = RandomCBPerformanceTableau(numberOfActions=1000,
                                         Threading=True,seed=100)
     >>> tp
     *------- PerformanceTableau instance description ------*
@@ -906,7 +904,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
     Attributes       : ['name', 'actions', 'objectives', 
                         'criteriaWeightMode', 'criteria', 
                         'evaluation', 'weightPreorder']
-    >>> >>> from cBigIntegerOutrankingDigraphs import *
+    >>> from cBigIntegerOutrankingDigraphs import *
     >>> bg = BigIntegerOutrankingDigraph(tp,quantiles=35,
     ...                        quantilesOrderingStrategy='average',
     ...                        LowerClosed=False,
@@ -961,14 +959,14 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
       covering (%)        : 0.00
       determinateness (%) : 58.33
       - most credible action(s) = { '312': 4.00, }
-    >>> print(bg.boostedRanking[:10],' ... ', bg.boostedRanking[-10:] )
-    [388, 131, 151, 275, 679, 406, 741, 623, 579, 894]  ...  
+    >>> print(bg.boostedRanking[:10],' ...\n', '     ...  ', bg.boostedRanking[-10:] )
+      [388, 131, 151, 275, 679, 406, 741, 623, 579, 894]  ...  
                  ...   [278, 886, 202, 473, 841, 878, 713, 62, 17, 312]
 
     """
     
     def __init__(self,argPerfTab,\
-                 int quantiles=0,\
+                 int quantiles=4,\
                  quantilesOrderingStrategy="average",\
                  bint LowerClosed=False,\
                  componentRankingRule="Copeland",\
@@ -1030,8 +1028,6 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
             totalWeight += self.criteria[g]['weight']
         
         #######
-        if quantiles == 0:
-            quantiles = na//10
         self.sortingParameters = {}
         self.sortingParameters['limitingQuantiles'] = quantiles
         self.sortingParameters['strategy'] = quantilesOrderingStrategy
