@@ -8171,10 +8171,30 @@ to switch from the standard to the BigData format and back.</p>
 <p>specialsation of the cPerformanceTableau class for
 constructing normalized, 0 - 100, valued PerformanceTableau
 instances from a given argPerfTab instance.</p>
+<dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last simple">
+<li>argPerfTab=None,</li>
+<li>lowValue=0,</li>
+<li>highValue=100,</li>
+<li>coalition=None,</li>
+<li>Debug=False</li>
+</ul>
+</dd>
+</dl>
 <dl class="method">
 <dt id="cRandPerfTabs.NormalizedPerformanceTableau.normalizeEvaluations">
 <code class="descname">normalizeEvaluations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.NormalizedPerformanceTableau.normalizeEvaluations" title="Permalink to this definition">¶</a></dt>
-<dd><p>recode the evaluations between lowValue and highValue on all criteria</p>
+<dd><p>recode the evaluations between lowValue and highValue on all criteria.</p>
+<dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last simple">
+<li>lowValue=0.0,</li>
+<li>highValue=100.0,</li>
+<li>Debug=False</li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -8205,10 +8225,6 @@ on each of the three objectives.</p>
 </li>
 <li><p class="first">weightScale := [1,numerOfCriteria] (random default)</p>
 </li>
-<li><p class="first">integerWeights := True (default) / False</p>
-</li>
-<li><p class="first">OrdinalScales := True / False (default), if True commonScale is set to (0,10)</p>
-</li>
 <li><p class="first">commonScale := (0.0, 100.0) (default if OrdinalScales == False)</p>
 </li>
 <li><dl class="first docutils">
@@ -8235,6 +8251,8 @@ on each of the three objectives.</p>
 </li>
 <li><p class="first">vetoProbability := x in ]0.0-1.0[ (0.5 default), probability that a cardinal criterion shows a veto preference discrimination threshold.</p>
 </li>
+<li><p class="first">missingDataProbability := x in ]0.0-1.0[ (0.05 default), probability that an action x criterion evaluation is missing.</p>
+</li>
 <li><p class="first">Debug := True / False (default)</p>
 </li>
 </ul>
@@ -8243,7 +8261,14 @@ on each of the three objectives.</p>
 <dl class="method">
 <dt id="cRandPerfTabs.Random3ObjectivesPerformanceTableau.showActions">
 <code class="descname">showActions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.Random3ObjectivesPerformanceTableau.showActions" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="docutils">
+<dt><em>Parameter</em>:</dt>
+<dd><ul class="first last simple">
+<li>Alphabetic=False</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="cRandPerfTabs.Random3ObjectivesPerformanceTableau.showObjectives">
@@ -8269,6 +8294,7 @@ Cost versus Benefit oriented performance tableaux.</p>
 <li>All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.</li>
 <li>commonThresholds is obsolete. Preference discrimination is specified as percentiles of concerned performance differences (see below).</li>
 <li>CommonPercentiles = {&#8216;ind&#8217;:0.05, &#8216;pref&#8217;:0.10, [&#8216;weakveto&#8217;:0.90,] &#8216;veto&#8217;:&#8216;95} are expressed in centiless (reversed for vetoes) and only concern cardinal criteria.</li>
+<li>missingDataProbability := x in ]0.0-1.0[ (0.05 default), probability that an action x criterion evaluation is missing.</li>
 </ul>
 </div></blockquote>
 <div class="admonition warning">
@@ -8283,25 +8309,23 @@ Cost versus Benefit oriented performance tableaux.</p>
 <dd><p>Bases: <a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau" title="cRandPerfTabs.cPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">cRandPerfTabs.cPerformanceTableau</span></code></a></p>
 <p>Full automatic generation of performance tableaux with random coalitions of criteria</p>
 <dl class="docutils">
-<dt>Parameters:</dt>
-<dd><div class="first last line-block">
-<div class="line">numberOf Actions := 20 (default)</div>
-<div class="line">number of Criteria := 13 (default)</div>
-<div class="line">weightDistribution := &#8216;equisignificant&#8217; (default with all weights = 1.0), &#8216;random&#8217;, &#8216;fixed&#8217; (default w_1 = numberOfCriteria-1, w_{i!=1} = 1</div>
-<div class="line">weightScale := [1,numerOfCriteria] (random default), [w_1, w_{i!=1] (fixed)</div>
-<div class="line">integerWeights := True (default) / False</div>
-<div class="line">commonScale := (0.0, 100.0) (default)</div>
-<div class="line">commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalSacles, [(0.10001*span,0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].</div>
-<div class="line">commonMode := [&#8216;triangular&#8217;,50.0,0.50] (default), [&#8216;uniform&#8217;,None,None], [&#8216;beta&#8217;, None,None] (three alpha, beta combinations (5.8661,2.62203) chosen by default for high(&#8216;+&#8217;), medium (&#8216;~&#8217;) and low (&#8216;-&#8216;) evaluations.</div>
-<div class="line">valueDigits := 2 (default, for cardinal scales only)</div>
-<div class="line">Coalitions := True (default)/False, three coalitions if True</div>
-<div class="line">VariableGenerators := True (default) / False, variable high(&#8216;+&#8217;), medium (&#8216;~&#8217;) or low (&#8216;-&#8216;) law generated evaluations.</div>
-<div class="line">OrdinalScales := True / False (default)</div>
-<div class="line">Debug := True / False (default)</div>
-<div class="line">RandomCoalitions = True / False (default) zero or more than three coalitions if Coalitions == False.</div>
-<div class="line">vetoProbability := x in ]0.0-1.0[ / None (default), probability that a cardinal criterion shows a veto preference discrimination threshold.</div>
-<div class="line">Electre3 := True (default) / False, no weakveto if True (obsolete)</div>
-</div>
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last simple">
+<li>numberOf Actions := 20 (default)</li>
+<li>number of Criteria := 13 (default)</li>
+<li>weightDistribution := &#8216;equisignificant&#8217; (default with all weights = 1.0), &#8216;random&#8217;, &#8216;fixed&#8217; (default w_1 = numberOfCriteria-1, w_{i!=1} = 1</li>
+<li>weightScale := [1,numerOfCriteria] (random default), [w_1, w_{i!=1] (fixed)</li>
+<li>commonScale := (0.0, 100.0) (default)</li>
+<li>commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalSacles, [(0.10001*span,0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].</li>
+<li>commonMode := [&#8216;triangular&#8217;,50.0,0.50] (default), [&#8216;uniform&#8217;,None,None], [&#8216;beta&#8217;, None,None] (three alpha, beta combinations (5.8661,2.62203) chosen by default for high(&#8216;+&#8217;), medium (&#8216;~&#8217;) and low (&#8216;-&#8216;) evaluations.</li>
+<li>valueDigits := 2 (default, for cardinal scales only)</li>
+<li>Coalitions := True (default)/False, three coalitions if True</li>
+<li>VariableGenerators := True (default) / False, variable high(&#8216;+&#8217;), medium (&#8216;~&#8217;) or low (&#8216;-&#8216;) law generated evaluations.</li>
+<li>OrdinalScales := True / False (default)</li>
+<li>Debug := True / False (default)</li>
+<li>RandomCoalitions = True / False (default) zero or more than three coalitions if Coalitions == False.</li>
+<li>vetoProbability := x in ]0.0-1.0[ / None (default), probability that a cardinal criterion shows a veto preference discrimination threshold.</li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -8313,7 +8337,7 @@ Cost versus Benefit oriented performance tableaux.</p>
 <p>Specialization of the cPerformanceTableau class for generating a temporary
 random performance tableau.</p>
 <dl class="docutils">
-<dt>Parameters:</dt>
+<dt><em>Parameters</em>:</dt>
 <dd><ul class="first last">
 <li><p class="first">numberOfActions := nbr of decision actions.</p>
 </li>
@@ -8333,7 +8357,7 @@ random performance tableau.</p>
 </li>
 <li><p class="first">weightScale := [Min,Max] (default =[1,numberOfCriteria].</p>
 </li>
-<li><p class="first">IntegerWeights := True (default) | False (normalized to proportions of 1.0).</p>
+<li><p class="first">IntegerWeights := True (in the BigData format)</p>
 </li>
 <li><p class="first">commonScale := [Min;Max]; common performance measuring scales (default = [0;100])</p>
 </li>
@@ -8357,29 +8381,27 @@ and considerable performance difference discrimination thresholds.</p>
 </ul>
 </dd>
 <dt>Code example::</dt>
-<dd><div class="first highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceTableau</span>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">actions</span>
-<span class="go">    {1: {&#39;comment&#39;: &#39;RandomPerformanceTableau() generated.&#39;, &#39;name&#39;: &#39;random decision action&#39;},</span>
-<span class="go">     2: {&#39;comment&#39;: &#39;RandomPerformanceTableau() generated.&#39;, &#39;name&#39;: &#39;random decision action&#39;},</span>
-<span class="go">     3: {&#39;comment&#39;: &#39;RandomPerformanceTableau() generated.&#39;, &#39;name&#39;: &#39;random decision action&#39;}}</span>
+<span class="go">OrderedDict([</span>
+<span class="go">(0: {&#39;name&#39;: &#39;a1&#39;}),</span>
+<span class="go">(1: {&#39;name&#39;: &#39;a2&#39;}),</span>
+<span class="go">(3: {&#39;name&#39;: &#39;a3&#39;})</span>
+<span class="go">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">criteria</span>
-<span class="go">    {&#39;g1&#39;: {&#39;thresholds&#39;: {&#39;ind&#39; : (10.0, 0.0) ),</span>
+<span class="go">OrderedDict([</span>
+<span class="go">(&#39;g1&#39;: {&#39;thresholds&#39;: {&#39;ind&#39; : (10.0, 0.0) ),</span>
 <span class="go">                           &#39;veto&#39;: (80.0, 0.0) ),</span>
 <span class="go">                           &#39;pref&#39;: (20.0, 0.0) },</span>
-<span class="go">            &#39;scale&#39;: [0.0, 100.0],</span>
+<span class="go">            &#39;scale&#39;: (0.0, 100.0),</span>
 <span class="go">            &#39;weight&#39;: 1,</span>
 <span class="go">            &#39;name&#39;: &#39;cRandPerfTabs.RandomPerformanceTableau() instance&#39;,</span>
-<span class="go">            &#39;comment&#39;: &#39;Arguments: ; weightDistribution=random;</span>
-<span class="go">                weightScale=(1, 1); commonMode=None&#39;}}</span>
-</pre></div>
-</div>
-<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">evaluation</span>
-<span class="go">    {&#39;g01&#39;: {1: 45.95,</span>
-<span class="go">             2: 95.17,</span>
-<span class="go">             3: 17.47.</span>
-<span class="go">            }</span>
-<span class="go">    }</span>
+<span class="go">            &#39;comment&#39;: &#39;Arguments: weightDistribution=random;</span>
+<span class="go">                weightScale=(1, 1); commonMode=None&#39;}).</span>
+<span class="go">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">evaluation</span>
+<span class="go">{&#39;g01&#39;: {0: 45.95, 1: 95.17, 2: 17.47.}}</span>
 </pre></div>
 </div>
 </dd>
@@ -8479,13 +8501,32 @@ to int format.</p>
 <dl class="method">
 <dt id="cRandPerfTabs.cPerformanceTableau.normalizeEvaluations">
 <code class="descname">normalizeEvaluations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.normalizeEvaluations" title="Permalink to this definition">¶</a></dt>
-<dd><p>recode the evaluations between lowValue and highValue on all criteria</p>
+<dd><p>recode the evaluations between lowValue and highValue on all criteria.</p>
+<dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last simple">
+<li>lowValue=0.0,</li>
+<li>highValue=100.0,</li>
+<li>Debug=False</li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="cRandPerfTabs.cPerformanceTableau.showCriteria">
 <code class="descname">showCriteria</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.showCriteria" title="Permalink to this definition">¶</a></dt>
 <dd><p>print Criteria with thresholds and weights.</p>
+<dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last simple">
+<li>IntegerWeights=True,</li>
+<li>Alphabetic=False,</li>
+<li>ByObjectives=True,</li>
+<li>Debug=False</li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

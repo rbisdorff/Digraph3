@@ -100,6 +100,13 @@ class cPerformanceTableau(PerformanceTableau):
     def showCriteria(self,IntegerWeights=True,Alphabetic=False,ByObjectives=True,Debug=False):
         """
         print Criteria with thresholds and weights.
+
+        *Parameters*:
+            * IntegerWeights=True,
+            * Alphabetic=False,
+            * ByObjectives=True,
+            * Debug=False
+        
         """
         criteria = self.criteria
         try:
@@ -177,7 +184,13 @@ class cPerformanceTableau(PerformanceTableau):
 
     def normalizeEvaluations(self,lowValue=0.0,highValue=100.0,Debug=False):
         """
-        recode the evaluations between lowValue and highValue on all criteria
+        recode the evaluations between lowValue and highValue on all criteria.
+
+        *Parameters*:
+            * lowValue=0.0,
+            * highValue=100.0,
+            * Debug=False
+            
         """
         ##from math import copysign
         criteria = self.criteria
@@ -229,7 +242,7 @@ class RandomPerformanceTableau(cPerformanceTableau):
     Specialization of the cPerformanceTableau class for generating a temporary
     random performance tableau.
 
-    Parameters:
+    *Parameters*:
         * numberOfActions := nbr of decision actions.
         * numberOfCriteria := number performance criteria.
         * weightDistribution := 'random' (default) | 'fixed' | 'equisignificant'.
@@ -239,7 +252,7 @@ class RandomPerformanceTableau(cPerformanceTableau):
              | distribution;
              | If 'equisignificant', all criterion weights are put to unity.
         * weightScale := [Min,Max] (default =[1,numberOfCriteria].
-        * IntegerWeights := True (default) | False (normalized to proportions of 1.0).
+        * IntegerWeights := True (in the BigData format)
         * commonScale := [Min;Max]; common performance measuring scales (default = [0;100])
         * commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p)
           and considerable performance difference discrimination thresholds.
@@ -255,32 +268,30 @@ class RandomPerformanceTableau(cPerformanceTableau):
         >>> from cRandPerfTabs import RandomPerformanceTableau
         >>> t = RandomPerformanceTableau(numberOfActions=3,numberOfCriteria=1,seed=100)
         >>> t.actions
-            {1: {'comment': 'RandomPerformanceTableau() generated.', 'name': 'random decision action'},
-             2: {'comment': 'RandomPerformanceTableau() generated.', 'name': 'random decision action'},
-             3: {'comment': 'RandomPerformanceTableau() generated.', 'name': 'random decision action'}}
+        OrderedDict([
+        (0: {'name': 'a1'}),
+        (1: {'name': 'a2'}),
+        (3: {'name': 'a3'})
+        ])
         >>> t.criteria
-            {'g1': {'thresholds': {'ind' : (10.0, 0.0) ),
+        OrderedDict([
+        ('g1': {'thresholds': {'ind' : (10.0, 0.0) ),
                                    'veto': (80.0, 0.0) ),
                                    'pref': (20.0, 0.0) },
-                    'scale': [0.0, 100.0],
+                    'scale': (0.0, 100.0),
                     'weight': 1,
                     'name': 'cRandPerfTabs.RandomPerformanceTableau() instance',
-                    'comment': 'Arguments: ; weightDistribution=random;
-                        weightScale=(1, 1); commonMode=None'}}
-
+                    'comment': 'Arguments: weightDistribution=random;
+                        weightScale=(1, 1); commonMode=None'}).
+        ])
         >>> t.evaluation
-            {'g01': {1: 45.95,
-                     2: 95.17,
-                     3: 17.47.
-                    }
-            }
+        {'g01': {0: 45.95, 1: 95.17, 2: 17.47.}}
 
     """
     def __init__(self,long numberOfActions = 13,\
                  int numberOfCriteria = 7,\
                  weightDistribution = 'equisignificant',\
                  weightScale=None,\
-                 bint integerWeights=True,\
                  commonScale = (0.0,100.0),\
                  commonThresholds = ((10.0,0.0),(20.0,0.0),(80.0,0.0)),\
                  commonMode = None,\
@@ -605,23 +616,21 @@ class RandomCoalitionsPerformanceTableau(cPerformanceTableau):
     """
     Full automatic generation of performance tableaux with random coalitions of criteria
 
-    Parameters:
-        | numberOf Actions := 20 (default)
-        | number of Criteria := 13 (default)
-        | weightDistribution := 'equisignificant' (default with all weights = 1.0), 'random', 'fixed' (default w_1 = numberOfCriteria-1, w_{i!=1} = 1
-        | weightScale := [1,numerOfCriteria] (random default), [w_1, w_{i!=1] (fixed)
-        | integerWeights := True (default) / False
-        | commonScale := (0.0, 100.0) (default)
-        | commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalSacles, [(0.10001*span,0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].
-        | commonMode := ['triangular',50.0,0.50] (default), ['uniform',None,None], ['beta', None,None] (three alpha, beta combinations (5.8661,2.62203) chosen by default for high('+'), medium ('~') and low ('-') evaluations.
-        | valueDigits := 2 (default, for cardinal scales only)
-        | Coalitions := True (default)/False, three coalitions if True
-        | VariableGenerators := True (default) / False, variable high('+'), medium ('~') or low ('-') law generated evaluations.
-        | OrdinalScales := True / False (default)
-        | Debug := True / False (default)
-        | RandomCoalitions = True / False (default) zero or more than three coalitions if Coalitions == False.
-        | vetoProbability := x in ]0.0-1.0[ / None (default), probability that a cardinal criterion shows a veto preference discrimination threshold.
-        | Electre3 := True (default) / False, no weakveto if True (obsolete)
+    *Parameters*:
+        * numberOf Actions := 20 (default)
+        * number of Criteria := 13 (default)
+        * weightDistribution := 'equisignificant' (default with all weights = 1.0), 'random', 'fixed' (default w_1 = numberOfCriteria-1, w_{i!=1} = 1
+        * weightScale := [1,numerOfCriteria] (random default), [w_1, w_{i!=1] (fixed)
+        * commonScale := (0.0, 100.0) (default)
+        * commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalSacles, [(0.10001*span,0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].
+        * commonMode := ['triangular',50.0,0.50] (default), ['uniform',None,None], ['beta', None,None] (three alpha, beta combinations (5.8661,2.62203) chosen by default for high('+'), medium ('~') and low ('-') evaluations.
+        * valueDigits := 2 (default, for cardinal scales only)
+        * Coalitions := True (default)/False, three coalitions if True
+        * VariableGenerators := True (default) / False, variable high('+'), medium ('~') or low ('-') law generated evaluations.
+        * OrdinalScales := True / False (default)
+        * Debug := True / False (default)
+        * RandomCoalitions = True / False (default) zero or more than three coalitions if Coalitions == False.
+        * vetoProbability := x in ]0.0-1.0[ / None (default), probability that a cardinal criterion shows a veto preference discrimination threshold.
         
     """
 
@@ -981,8 +990,6 @@ class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
                               | 'equisignificant' (weights set all to 1)
                               | 'random' (in the range 1 to numberOfCriteria)
         * weightScale := [1,numerOfCriteria] (random default)
-        * integerWeights := True (default) / False
-        * OrdinalScales := True / False (default), if True commonScale is set to (0,10)
         * commonScale := (0.0, 100.0) (default if OrdinalScales == False)
         * commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalScales == True, otherwise
                             | [(0.10001*span,0.0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].
@@ -992,6 +999,7 @@ class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
                       |   chosen by default for 'good', 'fair' and 'weak' evaluations. Constant parameters may be provided.
         * valueDigits := 2 (default, for cardinal scales only)
         * vetoProbability := x in ]0.0-1.0[ (0.5 default), probability that a cardinal criterion shows a veto preference discrimination threshold.
+        * missingDataProbability := x in ]0.0-1.0[ (0.05 default), probability that an action x criterion evaluation is missing.
         * Debug := True / False (default)
         
     """
@@ -1004,7 +1012,7 @@ class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
                  commonThresholds = None, commonMode = None,\
                  int valueDigits=2,\
                  float vetoProbability=0.5,\
-                 float missingProbability = 0.05,\
+                 float missingDataProbability = 0.05,\
                  #BigData=False,\
                  seed= None,\
                  bint Debug=False):
@@ -1284,7 +1292,7 @@ class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
         for g in criteria:
             sevalg = self.evaluation[g]
             for x in actions:
-                if random.random() < missingProbability:
+                if random.random() < missingDataProbability:
                     sevalg[x] = Decimal('-999')
 
     def showObjectives(self):
@@ -1300,6 +1308,11 @@ class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
                   % (self.objectives[obj]['weight'],len(self.objectives[obj]['criteria'])))
 
     def showActions(self,Alphabetic=False):
+        """
+        *Parameter*:
+            * Alphabetic=False
+            
+        """
         print('*----- show decision action --------------*')
         actions = self.actions
         if Alphabetic:
@@ -1339,6 +1352,7 @@ class RandomCBPerformanceTableau(cPerformanceTableau):
         * All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.
         * commonThresholds is obsolete. Preference discrimination is specified as percentiles of concerned performance differences (see below).
         * CommonPercentiles = {'ind':0.05, 'pref':0.10, ['weakveto':0.90,] 'veto':'95} are expressed in centiless (reversed for vetoes) and only concern cardinal criteria.
+        * missingDataProbability := x in ]0.0-1.0[ (0.05 default), probability that an action x criterion evaluation is missing.
 
     .. warning::
 
@@ -1722,8 +1736,16 @@ class NormalizedPerformanceTableau(cPerformanceTableau):
     specialsation of the cPerformanceTableau class for
     constructing normalized, 0 - 100, valued PerformanceTableau
     instances from a given argPerfTab instance.
+
+    *Parameters*:
+        * argPerfTab=None,
+        * lowValue=0,
+        * highValue=100,
+        * coalition=None,
+        * Debug=False
+        
     """
-    def __init__(self,argPerfTab=None,lowValue=0,highValue=100,coalition=None,Debug=False):
+    def __init__(self,argPerfTab=None,float lowValue=0.0,float highValue=100.0,coalition=None,bint Debug=False):
         import copy
         if isinstance(argPerfTab,(str)):
             perfTab = PerformanceTableau(argPerfTab)
@@ -1756,7 +1778,13 @@ class NormalizedPerformanceTableau(cPerformanceTableau):
 
     def normalizeEvaluations(self,float lowValue=0.0,float highValue=100.0,bint Debug=False):
         """
-        recode the evaluations between lowValue and highValue on all criteria
+        recode the evaluations between lowValue and highValue on all criteria.
+
+        *Parameters*:
+            * lowValue=0.0,
+            * highValue=100.0,
+            * Debug=False
+            
         """
         cdef int x
         cdef float amplitude
