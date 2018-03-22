@@ -1,23 +1,13 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-# Python implementation of digraphs
-# Current revision $Revision: 1722 $
-# Copyright (C) 2006-2008  Raymond Bisdorff
-#
-#    This program is free software; you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation; either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License along
-#    with this program; if not, write to the Free Software Foundation, Inc.,
-#    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-#
+"""
+c-Extension for the Digraph3 collection.
+Module cIntegerOutrankingDigraphs.py is a c-compiled part of the
+:py:mod:`outrankingDigraphs` module for handling random performance tableaux of Big Data type,
+ie with integer action keys and float performance evaluations.  
+
+Copyright (C) 2018  Raymond Bisdorff
+
+"""
 #######################
 #import cython
 
@@ -29,10 +19,28 @@ from cIntegerSortingDigraphs import *
       
 class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
     """
-    IntegerBipolarOutrankingDigraph class specialisation
-    for the sorting of a large set of alternatives into
-    quantiles delimited ordered classes.
-    
+    *Parameters*:
+        * argPerfTab=None,
+        * limitingQuantiles=4,
+        * LowerClosed=False,
+        * PrefThresholds=True,
+        * hasNoVeto=False,
+        * outrankingType = "bipolar",
+        * CompleteOutranking = False,
+        * StoreSorting=False,
+        * CopyPerfTab=False,
+        * Threading=False,
+        * tempDir=None,
+        * nbrCores=None,
+        * nbrOfProcesses=None,
+        * Comments=False,
+        * Debug=False.
+
+    c-Extension of the :py:class:`sortingDigraphs.QuantilesSortingDigraph` class  for the 
+    sorting of very large sets of alternatives into quantiles delimited ordered classes.
+
+    :py:class:`cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph` class specialisation
+   
     .. note::
 
         We generally require an PerformanceTableau instance or a valid filename.
@@ -41,7 +49,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
 
     """
     def __init__(self,argPerfTab=None,\
-                 limitingQuantiles=None,\
+                 limitingQuantiles=4,\
                  bint LowerClosed=False,\
                  bint PrefThresholds=True,\
                  bint hasNoVeto=False,\
@@ -657,47 +665,6 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                 keys[1],\
                 credibility            
 
-
-        #     keys = []
-        # for c in self.orderedCategoryKeys():
-        #     if sorting[action][c]['categoryMembership'] >= Med:
-        #         if sorting[action][c]['lowLimit'] > Med:
-        #             lowLimit = sorting[action][c]['lowLimit']
-        #         if sorting[action][c]['notHighLimit'] > Med:
-        #             notHighLimit = sorting[action][c]['notHighLimit']
-        #         keys.append(c)
-        #         if Debug:
-        #             print(action, c, sorting[action][c])
-        # n = len(keys)
-        # try:
-        #     credibility = min(lowLimit,notHighLimit)
-        # except:
-        #     credibility = Med
-        # if n == 0:
-        #     return None
-        # elif n == 1:
-        #     if Comments:
-        #         print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
-        #                              self.categories[keys[0]]['lowLimit'],\
-        #                              self.categories[keys[0]]['highLimit'],\
-        #                              action,\
-        #                              credibility,lowLimit,notHighLimit) )
-        #     return action,\
-        #             keys[0],\
-        #             keys[0],\
-        #             credibility
-        # else:
-        #     if Comments:
-        #         print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
-        #                              self.categories[keys[0]]['lowLimit'],\
-        #                              self.categories[keys[-1]]['highLimit'],\
-        #                              action,\
-        #                              credibility,lowLimit,notHighLimit) )
-        #     return action,\
-        #             keys[0],\
-        #             keys[-1],\
-        #             credibility            
-
     def showActionsSortingResult(self,actionSubset=None,Debug=False):
         """
         shows the quantiles sorting result all (default) of a subset of the decision actions.
@@ -714,6 +681,9 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
 
     def showWeakOrder(self,Descending=True):
         """
+        *Parameter*:
+            * Descending=True.
+
         Specialisation for QuantilesSortingDigraphs.
         """
         from decimal import Decimal
@@ -750,30 +720,11 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
             else:
                 x = list(set(cC[cCKeys[n2]]) - (setx | sety))
             ordering.append( ( (Decimal(str(n2+1)),x),(Decimal(str(n2+1)),x) ) )
-
-##        orderingList = []
-##        for i in range(n2):
-##            x = ordering[i][0][1]
-##            if x != []:
-##                orderingList.append(x)
-##        if 2*n2 < n:
-##            x = ordering[i][0][1]
-##            y = ordering[i][1][1]
-##            if x != []:
-##                orderingList.append(x)
-##            if y != []:
-##                orderingList.append(y)
-##        for i in range(n2):
-##            y = ordering[n2-i-1][1][1]
-##            if y != []:
-##                orderingList.append(y)
-##            
         
         weakOrdering = {'result':ordering}
 
         WeakOrder.showWeakOrder(self,weakOrdering)
 
-##        return orderingList
 
     def _computeQuantileOrdering(self,strategy=None,
                                 Descending=True,
@@ -841,6 +792,9 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
             * Descending: listing in *decreasing* (default) or *increasing* quantile order.
             * strategy: ordering in an {'optimistic' (default) | 'pessimistic' | 'average'}
               in the uppest, the lowest or the average potential quantile.
+            * HTML=False (for generating a HTML version of the result)
+            * Comments=False,
+            * Debug=False
         
         """
         if strategy == None:
@@ -955,6 +909,9 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
 
     def showQuantileOrdering(self,strategy=None):
         """
+        *Parameter*:
+            * strategy=None ('average' by default').
+
         Dummy show method for the commenting computeQuantileOrdering() method.
         """
         self.computeQuantileOrdering(strategy=strategy,Comments=True)
@@ -962,6 +919,10 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
 
     def computeWeakOrder(self,Descending=True,Debug=False):
         """
+        *Parameters*:
+            * Descending=True,
+            * Debug=False.
+
         Specialisation for QuantilesSortingDigraphs.
         """
         from decimal import Decimal
@@ -1021,16 +982,14 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
             y = ordering[n-i-1][1][1]
             if y != []:
                 orderingList.append(y)
-##            
-##        
-##        weakOrdering = {'result':ordering}
-##
-##        WeakOrder.showWeakOrder(self,weakOrdering)
 
         return orderingList
 
     def showOrderedRelationTable(self,direction="decreasing"):
         """
+        *Parameter*:
+            * direction="decreasing".
+
         Showing the relation table in decreasing (default) or increasing order.
         """
         if direction == "decreasing":
@@ -1200,9 +1159,13 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
             print(g,LowerClosed,self.criteria[g]['preferenceDirection'],gQuantiles)
         return gQuantiles
 
-    def getActionsKeys(self,action=None,withoutProfiles=True):
+    def getActionsKeys(self,action=None,bint withoutProfiles=True):
         """
-        extract normal actions keys()
+        *Parameters*:
+            * action=None,
+            * withoutProfiles=True.
+ 
+        Extract normal actions keys()
         """
         profiles = set([x for x in list(self.profiles.keys())])
         if action == None:
@@ -1216,6 +1179,9 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
 
     def orderedCategoryKeys(self,bint Reverse=False):
         """
+        *Parameter*:
+            * Reverse=False.
+
         Renders the ordered list of category keys
         based on self.categories['order'] numeric values.
         """
@@ -1227,6 +1193,13 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
     def computeCategoryContents(self,bint Reverse=False,bint Comments=False,bint StoreSorting=True,\
                                 Threading=False,nbrOfCPUs=None):
         """
+        *Parameters*:
+            *  Reverse=False,
+            * Comments=False,
+            * StoreSorting=True,
+            * Threading=False,
+            * nbrOfCPUs=None.
+
         Computes the sorting results per category.
         """
         cdef int x
@@ -1253,6 +1226,14 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                                       StoreSorting=False,Debug=False,\
                                         Threading=False, nbrOfCPUs=None):
         """
+        *Parameters*:
+            * action=None,
+            * Comments=False,
+            * StoreSorting=False,
+            * Debug=False,
+            * Threading=False,
+            * nbrOfCPUs=None.
+
         Renders a bipolar-valued bi-dictionary relation
         representing the degree of credibility of the
         assertion that "action x in A belongs to category c in C",
@@ -1500,6 +1481,9 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
 
     def showSortingCharacteristics(self, action=None):
         """
+        *Parameter*:
+            * action=None.
+
         Renders a bipolar-valued bi-dictionary relation
         representing the degree of credibility of the
         assertion that "action x in A belongs to category c in C",
@@ -1534,8 +1518,12 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
             print()
 
 
-    def showHTMLQuantileOrdering(self,Descending=True,strategy='optimistic'):
+    def showHTMLQuantileOrdering(self,bint Descending=True,strategy='average'):
         """
+        *Parameters*:
+            * Descending=True,
+            * strategy='average'.
+
         Shows the html version of the quantile preordering in a browser window.
 
         The ordring strategy is either:
@@ -1555,9 +1543,12 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         webbrowser.open_new(url)
 
 
-    def showHTMLSorting(self,Reverse=True):
+    def showHTMLSorting(self,bint Reverse=True):
         """
-        shows the html version of the sorting result in a browser window.
+        "Parameter*:
+            * Reverse=True.
+
+        Shows the html version of the sorting result in a browser window.
         """
         import webbrowser
         fileName = '/tmp/sorting.html'
@@ -1568,8 +1559,13 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         webbrowser.open_new(url)
 
 
-    def showSorting(self,Reverse=True,isReturningHTML=False,Debug=False):
+    def showSorting(self,bint Reverse=True,bint isReturningHTML=False,bint Debug=False):
         """
+        *Parameters*:
+            * Reverse=True,
+            * isReturningHTML=False,
+            * Debug=False.
+
         Shows sorting results in decreasing or increasing (Reverse=False)
         order of the categories. If isReturningHTML is True (default = False)
         the method returns a htlm table with the sorting result.
@@ -1613,9 +1609,17 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
             html += '</table>'
             return html
 
-    def computeSortingRelation(self,categoryContents=None,Debug=False,StoreSorting=True,
-                               Threading=False,nbrOfCPUs=None,Comments=False):
+    def computeSortingRelation(self,categoryContents=None,bint Debug=False,bint StoreSorting=True,
+                               bint Threading=False,nbrOfCPUs=None,bint Comments=False):
         """
+        *Parameters*:
+            * categoryContents=None,
+            * Debug=False,
+            * StoreSorting=True,
+            * Threading=False,
+            * nbrOfCPUs=None,
+            * Comments=False.
+
         constructs a bipolar sorting relation using the category contents.
         """
         try:

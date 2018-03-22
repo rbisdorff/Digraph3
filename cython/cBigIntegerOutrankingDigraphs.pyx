@@ -1,22 +1,11 @@
 #!/usr/bin/env python3
-# Python 3 implementation of digraphs
-# sub-module for big outranking digraphs
-# Copyright (C) 2015  Raymond Bisdorff
-#
-#    This program is free software; you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation; either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License along
-#    with this program; if not, write to the Free Software Foundation, Inc.,
-#    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-#
+"""
+c-Extension for the Digraph3 collection.
+Module cBigIntegerOutrankingDigraphs.py is a c-compiled partial version of the
+:py:mod:`sparseOutrankingDigraphs` module for handling outranking digraphs of very large order.
+
+Copyright (C) 2018  Raymond Bisdorff
+"""
 ######################
 
 #import cython
@@ -68,8 +57,13 @@ class BigIntegerDigraph(object):
             pass
         return reprString
 
-    def showBestChoiceRecommendation(self,Comments=False,ChoiceVector=False,Debug=False):
+    def showBestChoiceRecommendation(self,bint Comments=False,bint ChoiceVector=False,bint Debug=False):
         """
+        *Parameters*:
+            * Comments=False,
+            * ChoiceVector=False,
+            * Debug=False.
+
         Update of rubisBestChoice Recommendation for big digraphs.
         To do: limit to best choice; worst choice should be a separate method()
         """
@@ -93,12 +87,20 @@ class BigIntegerDigraph(object):
 
 
     def showRubisBestChoiceRecommendation(self,g1,
-                                          Comments=False,
-                                          ChoiceVector=True,
-                                          Debug=False,
-                                          _OldCoca=False,
-                                          Cpp=False):
+                                          bint Comments=False,
+                                          bint ChoiceVector=True,
+                                          bint Debug=False,
+                                          bint _OldCoca=False,
+                                          bint Cpp=False):
         """
+        *Parameters*:
+            * g1 (first component of self)
+            * Comments=False,
+            * ChoiceVector=True,
+            * Debug=False,
+            * _OldCoca=False,
+            * Cpp=False.
+
         Renders the Rubis Best choice recommendation of the first component.
         """
         import copy,time
@@ -181,43 +183,6 @@ class BigIntegerDigraph(object):
                 if Comments:
                     print('non robust best choice ')
                     g1.showChoiceVector(gch,ChoiceVector=ChoiceVector)
-        # for bch in self.badChoices:
-        #     if bch[0] <= Med:
-        #         badChoice = True
-        #         nullChoice = False
-        #         for gch in self.goodChoices:
-        #             if bch[5] == gch[5]:
-        #                 #if gch[0] == bch[0]:
-        #                 if bch[3] == bch[4]:
-        #                     if Comments:
-        #                         print('null choice ')
-        #                         self.showChoiceVector(gch,ChoiceVector=ChoiceVector)
-        #                         self.showChoiceVector(bch,ChoiceVector=ChoiceVector)
-        #                     badChoice = False
-        #                     nullChoice = True
-        #                 elif bch[3] > bch[4]:
-        #                     if Comments:
-        #                         print('outranking choice ')
-        #                         self.showChoiceVector(gch,ChoiceVector=ChoiceVector)
-        #                         self.showChoiceVector(bch,ChoiceVector=ChoiceVector)
-        #                     badChoice = False
-        #                 else:
-        #                     badChoice = True
-        #         if badChoice:
-        #             print(' === >> potential worst choice ')
-        #             self.showChoiceVector(bch,ChoiceVector=ChoiceVector)
-        #             if worstChoice == set():
-        #                 worstChoice = bch[5]
-        #         elif nullChoice:
-        #             print(' === >> ambiguous choice ')
-        #             self.showChoiceVector(bch,ChoiceVector=ChoiceVector)
-        #             if worstChoice == set():
-        #                 worstChoice = bch[5]
-
-        #     else:
-        #         if Comments:
-        #             print('non robust worst choice ')
-        #             self.showChoiceVector(bch,ChoiceVector=ChoiceVector)
         print()
         print('Execution time: %.3f seconds' % (t1-t0))
         print('*****************************')
@@ -237,6 +202,14 @@ class BigIntegerDigraph(object):
                                           _OldCoca=False,
                                           Cpp=False):
         """
+        *Parameters*:
+            * g1 (last component of self)
+            * Comments=False,
+            * ChoiceVector=True,
+            * Debug=False,
+            * _OldCoca=False,
+            * Cpp=False.
+
         Renders the Rubis Worst choice recommendation of the first component.
         """
         import copy,time
@@ -371,6 +344,10 @@ class BigIntegerDigraph(object):
                   
     def relation(self, int x, int y):
         """
+        *Parameters*:
+            * x (int action key),
+            * y (int action key).
+
         Dynamic construction of the global outranking characteristic function *r(x S y)*.
         """
         cdef int Min, Med, Max, rx, ry
@@ -399,10 +376,15 @@ class BigIntegerDigraph(object):
     #@cython.locals(x=cython.int)
     def showRelationMap(self,int fromIndex=0,int toIndex=0, symbols=None):
         """
+        *Parameters*:
+            * fromIndex=0,
+            * toIndex=0,
+            * symbols=None.
+
         Prints on the console, in text map format, the location of
         the diagonal outranking components of the big outranking digraph.
 
-        By default, symbols = {'max':'┬','positive': '+', 'median': ' ',
+        By default, symbols := {'max':'┬','positive': '+', 'median': ' ',
                                'negative': '-', 'min': '┴'}
 
         The default ordering of the output is following the quantiles sorted boosted net flows ranking rule
@@ -444,6 +426,14 @@ class BigIntegerDigraph(object):
                             symbols=['+','&middot;','&nbsp;','&#150;','&#151']
                             ):
         """
+        *Parameters*:
+            * fromIndex=0,
+            * toIndex=0,
+            * Colored=True,
+            * tableTitle='Big Relation Map',
+            * relationName='r(x S y)',
+            * symbols=['+','&middot;','&nbsp;','&#150;','&#151'].
+
         Launches a browser window with the colored relation map of self.
         See corresponding Digraph.showRelationMap() method.
 
@@ -580,6 +570,10 @@ class BigIntegerDigraph(object):
     #@cython.locals(x=cython.int,y=cython.int)
     def computeOrdinalCorrelation(self, other, bint Debug=False):
         """
+        *Parameters*:
+            * other (digraph instance),
+            * Debug=False.
+
         Renders the ordinal correlation K of a BigDigraph instance
         when compared with a given compatible (same actions set) other Digraph or
         BigDigraph instance.
@@ -666,8 +660,12 @@ class BigIntegerDigraph(object):
                      'determination': 0.0 }
 
     #@cython.locals(x=cython.int,y=cython.int)
-    def computeRankingCorrelation(self, ranking, bint Debug=False):
+    def computeRankingCorrelation(self, list ranking, bint Debug=False):
         """
+        *Parameters*:
+            * ranking (ordered list from best to worst),
+            * Debug=False.
+
         Renders the ordinal correlation K of a BigDigraph instance
         when compared with a given linear ranking of its actions
         
@@ -735,6 +733,9 @@ class BigIntegerDigraph(object):
         
     def showDecomposition(self,direction='decreasing'):
         """
+        *Parameter*:
+            * direction='decreasing'.
+
         Prints on the console the decomposition structure of the sparse outranking digraph instance
         in *decreasing* (default) or *increasing* preference direction.
         """
@@ -785,25 +786,31 @@ class BigIntegerDigraph(object):
                    'fillrate': self.fillRate}
         return summary
 
-    def _recodeIntegerValuation(self,int otherMax=1,Debug=False):
+    def _recodeIntegerValuation(self,int multiplier=1):
         """
+        *Parameter*:
+            * multiplier= 1.
+
         Specialization for recoding the valuation of all the partial digraphs and the component relation.
         """
         # update valuation domain
-        self.valuationdomain['max'] *= otherMax
-        self.valuationdomain['min'] *= otherMax
+        self.valuationdomain['max'] *= multiplier
+        self.valuationdomain['min'] *= multiplier
         # update components' valuation domain and relation
         for cki in self.components.keys(): 
             pg = self.components[cki]['subGraph']
-            pg.valuationdomain['min'] *= otherMax
-            pg.valuationdomain['max'] *= otherMax
+            pg.valuationdomain['min'] *= multiplier
+            pg.valuationdomain['max'] *= multiplier
             for x in pg.actions:
                 for y in pg.actions:
-                    pg.relation[x][y] *= otherMax 
+                    pg.relation[x][y] *= multiplier
 
     #@cython.locals(x=cython.int)
-    def ranking2Preorder(self,ranking):
+    def ranking2Preorder(self,list ranking):
         """
+        *Parameter*:
+            * ranking (list from best to worst).
+
         Renders a preordering (a list of list) of a ranking (best to worst) of decision actions in increasing preference direction.
         """
         cdef int x
@@ -813,8 +820,11 @@ class BigIntegerDigraph(object):
         return preordering
 
     #@cython.locals(x=cython.int)
-    def ordering2Preorder(self,ordering):
+    def ordering2Preorder(self,list ordering):
         """
+        *Parameter*:
+            * ordering (list from worst to best).
+
         Renders a preordering (a list of list) of a linar order (worst to best) of decision actions in increasing preference direction.
         """
         cdef int x
@@ -822,8 +832,11 @@ class BigIntegerDigraph(object):
         return preordering
 
     #@cython.locals(fillRate=cython.double)
-    def computeFillRate(self,Debug=False):
+    def computeFillRate(self,bint Debug=False):
         """
+        *Parameters*:
+            * Debug=False.
+
         Renders the sum of the squares (without diagonal) of the orders of the component's subgraphs
         over the square (without diagonal) of the big digraph order. 
         """
@@ -837,9 +850,9 @@ class BigIntegerDigraph(object):
 
 ########################
 # multiprocessing workers
-def worker(input):
+def _worker(input):
     for Comments,args in iter(input.get, 'STOP'):
-        result = decompose(*args)
+        result = _decompose(*args)
         if Comments:
             print(result)
 
@@ -848,7 +861,7 @@ def worker(input):
 #     print( '%d/%d = %s' % \
 #            (args[1], args[2],result))
 
-def decompose(int i, int nc,tempDirName):
+def _decompose(int i, int nc,tempDirName):
     cdef int nd
     global perfTab
     global decomposition
@@ -881,6 +894,24 @@ def decompose(int i, int nc,tempDirName):
 from cRandPerfTabs import PerformanceTableau
 class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
     """
+    *Parameters*:
+        * argPerfTab,
+        * quantiles=0,
+        * quantilesOrderingStrategy="average",
+        * LowerClosed=False,
+        * componentRankingRule="Copeland",
+        * minimalComponentSize=1,
+        * Threading=False,
+        * tempDir=None,
+        * componentThreadingThreshold=1000,\
+        * nbrOfSubProcesses=0,
+        * nbrOfCPUs=1,
+        * nbrOfThreads=1,
+        * save2File=None,
+        * CopyPerfTab=False,
+        * Comments=False,
+        * Debug=False.
+
     Main class for the multiprocessing implementation of big outranking digraphs.
     
     The big outranking digraph instance is decomposed with a q-tiling sort into a partition
@@ -1060,7 +1091,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
                 for task in TASKS:
                     task_queue.put(task)
                 for i in range(NUMBER_OF_WORKERS):
-                    Process(target=worker,args=(task_queue,)).start()
+                    Process(target=_worker,args=(task_queue,)).start()
                 if Comments:
                     print('started')
                 for i in range(NUMBER_OF_WORKERS):
@@ -1185,21 +1216,6 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
             except:
                 actionsCategories[(score1,highQtileLimit,\
                                    lowQtileLimit,lowCateg,highCateg,score2,score3,score4)] = [a]
-            # if strategy == "optimistic":
-            #     score = highQtileLimit
-            # elif strategy == "pessimistic":
-            #     score = lowQtileLimit
-            # else:   #strategy == "average":
-            #     lc = float(lowCateg)
-            #     hc = float(highCateg)
-            #     score = (lc+hc)/2.0
-            # # if Debug:
-            # #     print(x,score,highQtileLimit,lowQtileLimit,lowCateg,highCateg)
-            # try:
-            #     actionsCategories[(score,highQtileLimit,lowQtileLimit,lowCateg,highCateg)].append(a)
-            # except:
-            #     actionsCategories[(score,highQtileLimit,lowQtileLimit,lowCateg,highCateg)] = [a]
-
         if Debug:
             print(actionsCategories)
 

@@ -1,22 +1,12 @@
 #!/usr/bin/env python3
-# Python implementation of digraphs
-# sub-module for outranking digraphs
-# Copyright (C) 2006-20015  Raymond Bisdorff
-#
-#    This program is free software; you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation; either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License along
-#    with this program; if not, write to the Free Software Foundation, Inc.,
-#    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-#
+"""
+c-Extension for the Digraph3 collection.
+Module cIntegerOutrankingDigraphs.py is a c-compiled part of the
+:py:mod:`outrankingDigraphs` module for handling random performance tableaux of Big Data type,
+ie with integer action keys and float performance evaluations.  
+
+Copyright (C) 2018  Raymond Bisdorff
+"""
 #######################
 cimport cython
 from cpython cimport array
@@ -159,49 +149,17 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         * coalition: subset of criteria to be used for contruction the outranking digraph.
         * hasNoVeto: veto desactivation flag (False by default).
         * hasBipolarVeto: bipolar versus electre veto activation (true by default).
-        * Normalized: the valuation domain is set by default to [-100,+100] (bipolar percents).
-          If True, the valuation domain is recoded to [-1.0,+1.0].
-        * WithConcordanceRelation: True by default when not threading.
-          The self.concordanceRelation contains the significance majority margin of the "at least as good relation as"
-          without the large performance difference polarization.
-        * WithVetoCounts: True by default when not threading. All vetos and countervetos
-          are stored in self.vetos and self.negativeVetos slots,
-          as well the counts of large performance differences in self.largePerformanceDifferencesCount slot.
         * Threading: False by default. Allows to profit from SMP machines via the Python multiprocessing module.
         * nbrCores: controls the maximal number of cores that will be used in the multiprocessing phases.
           If None is given, the os.cpu_count method is used in order to determine the number of availble cores on the SMP machine.
-
-    .. warning::
-
-        If Threading is True, WithConcordanceRelation and WithVetoCounts flags are automatically set both to False.
-        Removing this limitation is on the todo list and will be done soon.
-       
+      
     """
-
-    # def __repr__(self):
-    #     """
-    #     Default presentation method for BipolarOutrankingDigraph instance.
-    #     """
-    #     print('*----- show short --------------*')
-    #     print('Instance name    : %s' % self.name)
-    #     print('# Actions        : %d' % self.order)
-    #     print('# Criteria       : %d' % len(self.criteria))
-    #     #print('Size             : %d' % self.computeSize())
-    #     print('Determinateness  : %.3f' % (self.computeDeterminateness()) )
-    #     print('----  Constructor run times (in sec.) ----')
-    #     print('#Threads         : %d' % self.nbrThreads)
-    #     print('Total time       : %.5f' % self.runTimes['totalTime'])
-    #     print('Data input       : %.5f' % self.runTimes['dataInput'])
-    #     print('Compute relation : %.5f' % self.runTimes['computeRelation'])
-    #     print('Gamma sets       : %.5f' % self.runTimes['gammaSets'])
-    #     return '%s instance' % str(self.__class__)
     
     def __init__(self,argPerfTab=None,\
                  coalition=None,\
                  actionsSubset=None,\
                  bint hasNoVeto=False,\
                  bint hasBipolarVeto=True,\
-                 #bint Normalized=False,\
                  bint CopyPerfTab=True,\
                  bint BigData=False,\
                  bint Threading=False,\
@@ -228,11 +186,6 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
             perfTab = PerformanceTableau(argPerfTab)
         else:
             perfTab = argPerfTab
-
-        # set Threading parameters
-        ## if Threading:
-        ##     WithConcordanceRelation = False
-        ##     WithVetoCounts = False
             
         # transfering the performance tableau data to self
         self.name = 'rel_' + perfTab.name
@@ -359,51 +312,18 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         self.runTimes['totalTime'] = time() - tt
         if Comments:
             print(self)
-
-    ## def convertWeightsToIntegers(self):
-    ##     cdef int intWeight
-    ##     for g in self.criteria:
-    ##         self.criteria[g]['weight'] = int(self.criteria[g]['weight'])
-
-    # def convertValuation2Decimal(self,Normalized=False):
-    #     """
-    #     Convert integer valuation to Decimal.
-    #     """
-    #     from decimal import Decimal
-    #     oldMax = self.valuationdomain['max']
-    #     oldMin = self.valuationdomain['min']
-    #     oldAmplitude = oldMax - oldMin
-    #     if Normalized:
-    #         newMax = Decimal('1')
-    #         newMed = Decimal('0')
-    #         newMin = Decimal('-1')
-    #     else:
-    #         newMax = Decimal(str(oldMax))
-    #         newMin = Decimal('0')
-    #         newMin = Decimal(str(oldMin))
-    #     relation = self.relation
-    #     newRelation = {}
-    #     if Normalized:
-    #         for x in relation:
-    #             rx = relation[x]
-    #             newRelation[x] = {}
-    #             for y in rx:
-    #                 newRelation[x][y] = Decimal( '%.4f' % ( rx[y]/oldMax ) )
-    #     else:
-    #         for x in relation:
-    #             rx = relation[x]
-    #             newRelation[x] = {}
-    #             for y in rx:
-    #                 newRelation[x][y] = Decimal( str(rx[y]) )
-    #     self.valuationdomain['max'] = newMax
-    #     self.valuationdomain['med'] = newMed
-    #     self.valuationdomain['min'] = newMin
-    #     self.relation = newRelation
         
     def computeCriterionRelation(self,c, a,b,hasSymmetricThresholds=True):
         """
+        *Parameters*:
+             * c, 
+             * a,
+             * b,
+             * hasSymmetricThresholds=True.
+
         Compute the outranking characteristic for actions x and y
         on criterion c.
+
         """
         if a == b:
             return 1
@@ -705,13 +625,13 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                            bint hasSymmetricThresholds=True,\
                            bint Debug=False):
         """
-        Renders the biploar valued outranking relation from the data
-        of a given performance tableau instantiation PerfTab.
-
         Parameters:
             * PerfTab.criteria, PerfTab.evaluation,
             * inital nodes, terminal nodes, for restricted purposes 
             
+        Renders the biploar valued outranking relation from the data
+        of a given performance tableau instantiation PerfTab.
+
         """
 
         cdef int totalWeight, Max, Med, concordance=0, lc0
@@ -855,10 +775,16 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
 
     def computeOrdinalCorrelation(self, other, bint Debug=False):
         """
+        *Parameters*:
+            * other,
+            * Debug=False.
+        
         Renders the ordinal correlation K of an integer Digraph instance
         when compared with a given compatible (same actions set) other integer Digraph or
         Digraph instance.
-        
+
+        *Formulas*:
+
         K = sum_{x != y} [ min( max(-self.relation(x,y)),other.relation(x,y), max(self.relation(x,y),-other.relation(x,y)) ]
 
         K /= sum_{x!=y} [ min(abs(self.relation(x,y),abs(other.relation(x,y)) ]
@@ -885,11 +811,6 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         cdef int corrSum=0, determSum=0
         cdef double correlation=0.0, determination=0.0
         
-        ## if self.valuationdomain['min'] != Decimal('-1.0'):
-        ##         print('Error: the BigDigraph instance must be normalized !!')
-        ##         print(self.valuationdomain)
-        ##         return
-
         sMax = self.valuationdomain['max']
         oMax = int(other.valuationdomain['max'])
         if Debug:
@@ -902,10 +823,6 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
             print('self', selfMultiple)
             print('other', otherMultiple)
         
-        #     print('Error: the other digraph must be recoded !!')
-        #     print('self', self.valuationdomain)
-        #     print('other', other.valuationdomain)
-        #     return
         for x in self.actions:
             for y in self.actions:
                 if x != y:
@@ -934,14 +851,23 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
 
     def computeOrderCorrelation(self, order, bint Debug=False):
         """
+        *Parameters*:
+            * order (ordered sequence from worst to best of action keys), 
+            * bint Debug=False.
+
         wrapper for the self.computeRankingCorrelation method
         The given argOrder is previously reversed.
+     
         """
         ranking = list(reversed(order))
         return(self.computeRankingCorrelation(ranking,Debug))
 
     def computeRankingCorrelation(self, ranking, bint Debug=False):
         """
+        *Parameters*:
+            * ranking (ordered sequence from best to worst of action keys),
+            * Debug=False.
+
         Renders the ordinal correlation K of an integer digraph instance
         when compared with a given linear ranking of its actions
         
@@ -1011,6 +937,13 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                                     bint Threading=True, int nbrOfCPUs=0,
                                     bint Comments=False, bint Debug=False):
         """
+        *Parameters*:
+            * other (digraph instance),
+            * Threading=True,
+            * nbrOfCPUs=True,
+            * Comments=False,
+            * Debug=False.
+
         Multi processing version of the digraphs.computeOrdinalCorrelation() method.
         
         .. note::
@@ -1245,6 +1178,12 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
     
     def criterionCharacteristicFunction(self,c,a,b,hasSymmetricThresholds=True):
         """
+        *Parameters*:
+             * c, 
+             * a,
+             * b,
+             * hasSymmetricThresholds=True.
+
         Renders the characteristic value of the comparison of a and b on criterion c.
         """
         cdef int Min, Max
@@ -1327,7 +1266,11 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         
     def showActions(self,Alphabetic=False):
         """
-        presentation methods for decision actions or alternatives
+        *Parameter*:
+            * Alphabetic=False.
+
+        Presentation methods for decision actions or alternatives.
+
         """
         print('*----- show decision action --------------*')
         actions = self.actions

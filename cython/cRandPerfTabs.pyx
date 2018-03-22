@@ -983,24 +983,24 @@ class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
     Each decision action is qualified at random as weak (-), fair (~) or good (+)
     on each of the three objectives.
     
-    Generator arguments:
-        * numberOf Actions := 20 (default)
-        * number of Criteria := 13 (default)
+    *Parameters*:
+        * numberOf Actions := 20 (default),
+        * number of Criteria := 13 (default),
         * weightDistribution := 'equiobjectives' (default)
                               | 'equisignificant' (weights set all to 1)
-                              | 'random' (in the range 1 to numberOfCriteria)
-        * weightScale := [1,numerOfCriteria] (random default)
-        * commonScale := (0.0, 100.0) (default if OrdinalScales == False)
+                              | 'random' (in the range 1 to numberOfCriteria),
+        * weightScale := [1,numerOfCriteria] (random default),
+        * commonScale := (0.0, 100.0) (default if OrdinalScales == False),
         * commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalScales == True, otherwise
-                            | [(0.10001*span,0.0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].
+                            | [(0.10001*span,0.0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].,
         * commonMode := ['triangular','variable',0.50] (default), A constant mode may be provided.
                       | ['uniform','variable',None], a constant range may be provided.
                       | ['beta','variable',None] (three alpha, beta combinations (5.8661,2.62203)
                       |   chosen by default for 'good', 'fair' and 'weak' evaluations. Constant parameters may be provided.
-        * valueDigits := 2 (default, for cardinal scales only)
+        * valueDigits := 2 (default, for cardinal scales only),
         * vetoProbability := x in ]0.0-1.0[ (0.5 default), probability that a cardinal criterion shows a veto preference discrimination threshold.
         * missingDataProbability := x in ]0.0-1.0[ (0.05 default), probability that an action x criterion evaluation is missing.
-        * Debug := True / False (default)
+        * Debug := True / False (default).
         
     """
 
@@ -1739,8 +1739,8 @@ class NormalizedPerformanceTableau(cPerformanceTableau):
 
     *Parameters*:
         * argPerfTab=None,
-        * lowValue=0,
-        * highValue=100,
+        * lowValue=0.0,
+        * highValue=100.0,
         * coalition=None,
         * Debug=False
         
