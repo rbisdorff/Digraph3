@@ -152,6 +152,75 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         * Threading: False by default. Allows to profit from SMP machines via the Python multiprocessing module.
         * nbrCores: controls the maximal number of cores that will be used in the multiprocessing phases.
           If None is given, the os.cpu_count method is used in order to determine the number of availble cores on the SMP machine.
+
+    Example Python session:
+        >>> from cRandPerfTabs import *
+        >>> t = RandomPerformanceTableau(numberOfActions=9,seed=100)
+        >>> t
+        *------- PerformanceTableau instance description ------*
+        Instance class   : RandomPerformanceTableau
+        Instance name    : cRandomperftab
+        # Actions        : 9
+        # Criteria       : 7
+        Attributes       : ['name', 'actions', 'criteria', 'evaluation', 'weightPreorder']
+        >>> from cIntegerOutrankingDigraphs import *
+        >>> ig = IntegerBipolarOutrankingDigraph(t)
+        >>> ig
+        *------- Object instance description ------*
+        Instance class   : IntegerBipolarOutrankingDigraph
+        Instance name    : rel_cRandomperftab
+        # Actions        : 9
+        # Criteria       : 7
+        Size             : 57
+        Determinateness  : 37.302
+        Valuation domain : {'min': -7, 'med': 0, 'max': 7, 
+                            'hasIntegerValuation': True}
+        ----  Constructor run times (in sec.) ----
+        Total time       : 0.00243
+        Data input       : 0.00034
+        Compute relation : 0.00202
+        Gamma sets       : 0.00006
+        #Threads         : 1
+        >>> ig.showRelationTable()
+        * ---- Relation Table -----
+         R  |   '0' '1' '2' '3' '4' '5' '6' '7' '8'   
+        ----|--------------------------------------
+        '0' |   +0  +0  -1  -1  +2  +1  -3  +0  +1  
+        '1' |   +3  +0  -7  -7  +1  +2  -1  +1  +1  
+        '2' |   +3  +7  +0  +4  +3  +3  +4  +1  +3  
+        '3' |   +2  +7  +4  +0  +1  +3  +5  +2  +0  
+        '4' |   +5  +2  +2  +1  +0  +3  +1  +1  +3  
+        '5' |   +1  +2  -1  -1  +1  +0  -1  +0  +3  
+        '6' |   +3  +5  +5  +4  +3  +2  +0  +1  +3  
+        '7' |   +5  +5  +3  +4  +3  +7  +1  +0  +5  
+        '8' |   +1  +3  +2  +7  +0  +2  +2  +0  +0  
+        >>> ig.showRubisBestChoiceRecommendation()
+        ***********************
+        Rubis best choice recommendation(s) (BCR)
+         (in decreasing order of determinateness)   
+        Credibility domain: [-7.00,7.00]
+         === >> potential best choice(s)
+        * choice              : [2, 3, 4, 6, 7, 8]
+          +-irredundancy      : 0.00
+          independence        : 0.00
+          dominance           : 1.00
+          absorbency          : -2.00
+          covering (%)        : 50.00
+          determinateness (%) : 55.56
+          - most credible action(s) = { '7': 1.00, '6': 1.00, '4': 1.00, '2': 1.00, }
+         === >> potential worst choice(s) 
+        * choice              : [0, 1, 4, 5, 7, 8]
+          +-irredundancy      : 0.00
+          independence        : 0.00
+          dominance           : -1.00
+          absorbency          : 3.00
+          covering (%)        : 0.00
+          determinateness (%) : 54.76
+          - most credible action(s) = { '8': 1.00, '5': 1.00, '0': 1.00, }
+        Execution time: 0.005 seconds
+        *****************************
+        >>> ig.computeCopelandRanking()
+        [2, 6, 7, 3, 4, 8, 1, 5, 0]
       
     """
     
