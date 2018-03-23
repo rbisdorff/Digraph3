@@ -36,17 +36,44 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         * Comments=False,
         * Debug=False.
 
-    Cythonized c-Extension of the :py:class:`sortingDigraphs.QuantilesSortingDigraph` class  for the
-    sorting of very large sets of alternatives into quantiles delimited ordered classes.
+    Cythonized c-Extension of the :py:class:`sortingDigraphs.QuantilesSortingDigraph` class  for the sorting of very large sets of alternatives into quantiles delimited ordered classes.
 
     A :py:class:`cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph` class specialisation.
    
     .. note::
 
         We generally require an PerformanceTableau instance or a valid filename.
-        If none is given, then a default profile with the limiting quartiles 
-        Q0,Q1,Q2, Q3 and Q4 is used on each criteria. By default, upper closed limits 
-        of categories are used in the sorting algorithm.
+        If no limitingQuantiles parameter quantity is given, a default profile with the limiting quartiles Q0,Q1,Q2, Q3 and Q4 is used on each criteria. 
+
+        By default, upper closed limits of categories are used in the sorting algorithm.
+
+    Example Python session:
+        >>> from cRandPerfTabs import *
+        >>> t = RandomPerformanceTableau(numberOfActions=25)
+        >>> from cIntegerSortingDigraphs import *
+        >>> so = IntegerQuantilesSortingDigraph(t,limitingQuantiles='quintiles')
+        >>> so.showSorting()
+        *--- Sorting results in descending order ---*
+        ]0.80 - 1.00]: 	 [10, 17, 23, 24]
+        ]0.60 - 0.80]: 	 [0, 2, 4, 5, 6, 10, 11, 12, 17, 19, 23]
+        ]0.40 - 0.60]: 	 [1, 2, 3, 8, 9, 12, 13, 14, 16, 18, 19, 20, 21, 22]
+        ]0.20 - 0.40]: 	 [7, 13, 15, 20]
+        ]< - 0.20]: 	 []
+        >>> so.showSorting(Reverse=False)
+        *--- Sorting results in ascending order ---*
+        ]< - 0.20]: 	 []
+        ]0.20 - 0.40]: 	 [7, 13, 15, 20]
+        ]0.40 - 0.60]: 	 [1, 2, 3, 8, 9, 12, 13, 14, 16, 18, 19, 20, 21, 22]
+        ]0.60 - 0.80]: 	 [0, 2, 4, 5, 6, 10, 11, 12, 17, 19, 23]
+        ]0.80 - 1.00]: 	 [10, 17, 23, 24]
+        >>> so.showQuantileOrdering(strategy='average')
+        ]0.80-1.00] : [24]
+        ]0.60-1.00] : [10, 17, 23]
+        ]0.60-0.80] : [0, 4, 5, 6, 11]
+        ]0.40-0.80] : [2, 12, 19]
+        ]0.40-0.60] : [1, 3, 8, 9, 14, 16, 18, 21, 22]
+        ]0.20-0.60] : [13, 20]
+        ]0.20-0.40] : [7, 15]
 
     """
     def __init__(self,argPerfTab=None,\

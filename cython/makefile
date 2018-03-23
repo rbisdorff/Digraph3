@@ -24,10 +24,10 @@ inplace:
 		${PYTHON} csetupSOInteger.py build_ext ${FLAG}
 		${PYTHON} csetupSparseInteger.py build_ext ${FLAG}
 install:
-		sudo ${PYTHON} csetupRandPerfTabs.py install
-		sudo ${PYTHON} csetupODGInteger.py install
-		sudo ${PYTHON} csetupSOInteger.py install
-		sudo ${PYTHON} csetupSparseInteger.py install
+		sudo -H ${PYTHON} csetupRandPerfTabs.py install
+		sudo -H ${PYTHON} csetupODGInteger.py install
+		sudo -H ${PYTHON} csetupSOInteger.py install
+		sudo -H ${PYTHON} csetupSparseInteger.py install
 installVenv:
 		${PYTHON} csetupRandPerfTabs.py install
 		${PYTHON} csetupODGInteger.py install

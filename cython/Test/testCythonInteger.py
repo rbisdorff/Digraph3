@@ -19,8 +19,8 @@
 #
 #######################
 import outrankingDigraphs as ODG
-import cBigIntegerOutrankingDigraphs as iBg
-#from bigOutrankingDigraphs import *
+import cSparseIntegerOutrankingDigraphs as iBg
+#from SparseOutrankingDigraphs import *
 from time import time
 from os import path
 from cRandPerfTabs import Random3ObjectivesPerformanceTableau as cR3ObjPT
@@ -67,7 +67,7 @@ for s in range(sampleSize):
 ##    print(tp1.name)
 ##    print(time()-t0)
 ##    #t0 = time()
-##    bg1 = Bg.BigOutrankingDigraph(tp1,quantiles=qtiles,
+##    bg1 = Bg.SparseOutrankingDigraph(tp1,quantiles=qtiles,
 ##                               quantilesOrderingStrategy='average',
 ##                               minimalComponentSize=minimalSize,
 ##                               LowerClosed=False,
@@ -91,7 +91,7 @@ for s in range(sampleSize):
                                         seed=seed)
     print(tp2.name)
     print(time()-t0)
-    bg2 = iBg.BigIntegerOutrankingDigraph(tp2,quantiles=qtiles,
+    bg2 = iBg.SparseIntegerOutrankingDigraph(tp2,quantiles=qtiles,
                                quantilesOrderingStrategy='average',
                                minimalComponentSize=minimalSize,
                                LowerClosed=False,

@@ -8,7 +8,7 @@
 ########################
 
 from cIntegerOutrankingDigraphs import *
-from cBigIntegerOutrankingDigraphs import *
+from cSparseIntegerOutrankingDigraphs import *
 from cRandPerfTabs import *
 from time import time
 
@@ -22,13 +22,13 @@ def testSparseModelFitness():
     for s in range(Nsim):
         print(s)
         tp = RandomCBPerformanceTableau(numberOfActions=nbrOfActions,seed=s)
-        bg1 = BigIntegerOutrankingDigraph(tp,quantiles=35,quantilesOrderingStrategy='average',
+        bg1 = SparseIntegerOutrankingDigraph(tp,quantiles=35,quantilesOrderingStrategy='average',
                                 LowerClosed=False,
                                 CopyPerfTab=True,
                                minimalComponentSize=minimalComponentSize,
                                     Threading=MP,Debug=False)
         #bg1.showDecomposition()
-        bg2 = BigIntegerOutrankingDigraph(tp,quantiles=35,quantilesOrderingStrategy='average',
+        bg2 = SparseIntegerOutrankingDigraph(tp,quantiles=35,quantilesOrderingStrategy='average',
                                 LowerClosed=False,
                                minimalComponentSize=100,
                                     Threading=MP,Comments=False,Debug=False)
