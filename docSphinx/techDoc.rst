@@ -59,6 +59,8 @@ The Digraph3 source code is split into several interdependent modules of which t
      New Python3 specific root `OutrankingDigraph <techDoc.html#outrankingDigraphs.OutrankingDigraph>`_ class and specializations; 
 * :ref:`sparseOutrankingDigraphs-label` 
      Sparse implementation design for large outranking digraphs (order > 1000);
+* :ref:`cythonized-label` 
+     Cythonized C implementation for sparse outranking digraphs (order > 1000);
 * :ref:`performanceQuantiles-label` 
      Incremental representation of large performance tableaux via binned cumulated density functions per criteria;
 * :ref:`randomPerfTabs-label` 
@@ -332,12 +334,12 @@ cIntegerSortingDigraphs module
 
 Back to the :ref:`Technical-label`
 
-.. _cBigIntegerOutrankingDigraphs-label:
+.. _cSparseIntegerOutrankingDigraphs-label:
 
-cBigIntegerOutrankingDigraphs module
-....................................
+cSparseIntegerOutrankingDigraphs module
+.......................................
 
-.. automodule:: cBigIntegerOutrankingDigraphs
+.. automodule:: cSparseIntegerOutrankingDigraphs
    :member-order: alphabetical
    :no-inherited-members:
    :members:

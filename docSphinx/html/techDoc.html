@@ -132,6 +132,11 @@
 </dl>
 </li>
 <li><dl class="first docutils">
+<dt><a class="reference internal" href="#cythonized-label"><span class="std std-ref">Cythonized modules for big digraphs</span></a></dt>
+<dd>Cythonized C implementation for sparse outranking digraphs (order &gt; 1000);</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
 <dt><a class="reference internal" href="#performancequantiles-label"><span class="std std-ref">performanceQuantiles module</span></a></dt>
 <dd>Incremental representation of large performance tableaux via binned cumulated density functions per criteria;</dd>
 </dl>
@@ -8784,7 +8789,7 @@ of categories are used in the sorting algorithm.</p>
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
 <li>Descending: listing in <em>decreasing</em> (default) or <em>increasing</em> quantile order.</li>
-<li>strategy: ordering in an {&#8216;optimistic&#8217; (default) | &#8216;pessimistic&#8217; | &#8216;average&#8217;}
+<li>strategy: ordering in an {&#8216;optimistic&#8217; | &#8216;pessimistic&#8217; | &#8216;average&#8217;(default) }
 in the uppest, the lowest or the average potential quantile.</li>
 <li>HTML=False (for generating a HTML version of the result)</li>
 <li>Comments=False,</li>
@@ -8880,7 +8885,7 @@ based on self.categories[&#8216;order&#8217;] numeric values.</p>
 <dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showActionCategories">
 <code class="descname">showActionCategories</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showActionCategories" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
-<dt><a href="#id4"><span class="problematic" id="id5">*</span></a>Parameters&#8221;:</dt>
+<dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
 <li>action,</li>
 <li>Debug=False,</li>
@@ -8925,7 +8930,7 @@ Returns a tuple : action, lowest category key, highest category key, membership 
 <dd><ul class="first last simple">
 <li><strong>optimistic</strong>, following the upper quantile limits (default),</li>
 <li><strong>pessimistic</strong>, following the lower quantile limits,</li>
-<li><strong>average</strong>, following the averag of the upper and lower quantile limits.</li>
+<li><strong>average</strong>, following the average of the upper and lower quantile limits.</li>
 </ul>
 </dd>
 </dl>
@@ -9021,21 +9026,21 @@ the high category limit.</p>
 
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
-<div class="section" id="module-cBigIntegerOutrankingDigraphs">
-<span id="cbigintegeroutrankingdigraphs-module"></span><span id="cbigintegeroutrankingdigraphs-label"></span><h3>cBigIntegerOutrankingDigraphs module<a class="headerlink" href="#module-cBigIntegerOutrankingDigraphs" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="module-cSparseIntegerOutrankingDigraphs">
+<span id="csparseintegeroutrankingdigraphs-module"></span><span id="csparseintegeroutrankingdigraphs-label"></span><h3>cSparseIntegerOutrankingDigraphs module<a class="headerlink" href="#module-cSparseIntegerOutrankingDigraphs" title="Permalink to this headline">¶</a></h3>
 <p>c-Extension for the Digraph3 collection.
 Module cBigIntegerOutrankingDigraphs.py is a c-compiled partial version of the
 <a class="reference internal" href="#module-sparseOutrankingDigraphs" title="sparseOutrankingDigraphs"><code class="xref py py-mod docutils literal"><span class="pre">sparseOutrankingDigraphs</span></code></a> module for handling outranking digraphs of very large order.</p>
 <p>Copyright (C) 2018  Raymond Bisdorff</p>
 <dl class="class">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph">
-<em class="property">class </em><code class="descclassname">cBigIntegerOutrankingDigraphs.</code><code class="descname">BigIntegerDigraph</code><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph">
+<em class="property">class </em><code class="descclassname">cSparseIntegerOutrankingDigraphs.</code><code class="descname">SparseIntegerDigraph</code><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Abstract root class for linearly decomposed big digraphs (order &gt; 1000)
 using multiprocessing ressources.</p>
 <dl class="method">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph.computeDecompositionSummaryStatistics">
-<code class="descname">computeDecompositionSummaryStatistics</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph.computeDecompositionSummaryStatistics" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.computeDecompositionSummaryStatistics">
+<code class="descname">computeDecompositionSummaryStatistics</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.computeDecompositionSummaryStatistics" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the summary of the distribution of the length of
 the components as follows:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">summary</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="n">maxLength</span><span class="p">,</span>
@@ -9049,8 +9054,8 @@ the components as follows:</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph.computeFillRate">
-<code class="descname">computeFillRate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph.computeFillRate" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.computeFillRate">
+<code class="descname">computeFillRate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.computeFillRate" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -9063,8 +9068,8 @@ over the square (without diagonal) of the big digraph order.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph.computeOrdinalCorrelation">
-<code class="descname">computeOrdinalCorrelation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph.computeOrdinalCorrelation" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.computeOrdinalCorrelation">
+<code class="descname">computeOrdinalCorrelation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.computeOrdinalCorrelation" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -9073,14 +9078,14 @@ over the square (without diagonal) of the big digraph order.</p>
 </ul>
 </dd>
 </dl>
-<p>Renders the ordinal correlation K of a BigDigraph instance
+<p>Renders the ordinal correlation K of a SparseDigraph instance
 when compared with a given compatible (same actions set) other Digraph or
-BigDigraph instance.</p>
+SparseDigraph instance.</p>
 <p>K = sum_{x != y} [ min( max(-self.relation(x,y)),other.relation(x,y), max(self.relation(x,y),-other.relation(x,y)) ]</p>
 <p>K /= sum_{x!=y} [ min(abs(self.relation(x,y),abs(other.relation(x,y)) ]</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>The global outranking relation of BigDigraph instances is contructed on the fly
+<p>The global outranking relation of SparseDigraph instances is contructed on the fly
 from the ordered dictionary of the components.</p>
 <p>Renders a tuple with at position 0 the actual bipolar correlation index
 and in position 1 the minimal determination level D of self and
@@ -9093,8 +9098,8 @@ is by convention 0.0 at determination level 0.0 .</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph.computeRankingCorrelation">
-<code class="descname">computeRankingCorrelation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph.computeRankingCorrelation" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.computeRankingCorrelation">
+<code class="descname">computeRankingCorrelation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.computeRankingCorrelation" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -9103,13 +9108,13 @@ is by convention 0.0 at determination level 0.0 .</p>
 </ul>
 </dd>
 </dl>
-<p>Renders the ordinal correlation K of a BigDigraph instance
+<p>Renders the ordinal correlation K of a SparseDigraph instance
 when compared with a given linear ranking of its actions</p>
 <p>K = sum_{x != y} [ min( max(-self.relation(x,y)),other.relation(x,y), max(self.relation(x,y),-other.relation(x,y)) ]</p>
 <p>K /= sum_{x!=y} [ min(abs(self.relation(x,y),abs(other.relation(x,y)) ]</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>The global outranking relation of BigDigraph instances is contructed on the fly
+<p>The global outranking relation of SparseDigraph instances is contructed on the fly
 from the ordered dictionary of the components.</p>
 <p>Renders a tuple with at position 0 the actual bipolar correlation index
 and in position 1 the minimal determination level D of self and
@@ -9122,8 +9127,8 @@ is by convention 0.0 at determination level 0.0 .</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph.ordering2Preorder">
-<code class="descname">ordering2Preorder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph.ordering2Preorder" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.ordering2Preorder">
+<code class="descname">ordering2Preorder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.ordering2Preorder" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameter</em>:</dt>
 <dd><ul class="first last simple">
@@ -9135,8 +9140,8 @@ is by convention 0.0 at determination level 0.0 .</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph.ranking2Preorder">
-<code class="descname">ranking2Preorder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph.ranking2Preorder" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.ranking2Preorder">
+<code class="descname">ranking2Preorder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.ranking2Preorder" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameter</em>:</dt>
 <dd><ul class="first last simple">
@@ -9148,8 +9153,8 @@ is by convention 0.0 at determination level 0.0 .</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph.relation">
-<code class="descname">relation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph.relation" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.relation">
+<code class="descname">relation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.relation" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -9162,8 +9167,8 @@ is by convention 0.0 at determination level 0.0 .</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph.showBestChoiceRecommendation">
-<code class="descname">showBestChoiceRecommendation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph.showBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.showBestChoiceRecommendation">
+<code class="descname">showBestChoiceRecommendation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.showBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -9178,8 +9183,8 @@ To do: limit to best choice; worst choice should be a separate method()</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph.showDecomposition">
-<code class="descname">showDecomposition</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph.showDecomposition" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.showDecomposition">
+<code class="descname">showDecomposition</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.showDecomposition" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameter</em>:</dt>
 <dd><ul class="first last simple">
@@ -9192,15 +9197,15 @@ in <em>decreasing</em> (default) or <em>increasing</em> preference direction.</p
 </dd></dl>
 
 <dl class="method">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph.showHTMLRelationMap">
-<code class="descname">showHTMLRelationMap</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph.showHTMLRelationMap" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.showHTMLRelationMap">
+<code class="descname">showHTMLRelationMap</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.showHTMLRelationMap" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
 <li>fromIndex=0,</li>
 <li>toIndex=0,</li>
 <li>Colored=True,</li>
-<li>tableTitle=&#8217;Big Relation Map&#8217;,</li>
+<li>tableTitle=&#8217;Sparse Relation Map&#8217;,</li>
 <li>relationName=&#8217;r(x S y)&#8217;,</li>
 <li>symbols=[&#8216;+&#8217;,&#8217;&amp;middot;&#8217;,&#8217;&amp;nbsp;&#8217;,&#8217;&amp;#150;&#8217;,&#8217;&amp;#151&#8217;].</li>
 </ul>
@@ -9211,8 +9216,8 @@ See corresponding <a class="reference internal" href="#digraphs.Digraph.showRela
 </dd></dl>
 
 <dl class="method">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph.showRelationMap">
-<code class="descname">showRelationMap</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph.showRelationMap" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.showRelationMap">
+<code class="descname">showRelationMap</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.showRelationMap" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -9234,8 +9239,8 @@ and Tideman&#8217;s ranked pairs rule (rankingRule=&#8221;rankedPairs&#8221;).</
 </dd></dl>
 
 <dl class="method">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph.showRubisBestChoiceRecommendation">
-<code class="descname">showRubisBestChoiceRecommendation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph.showRubisBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.showRubisBestChoiceRecommendation">
+<code class="descname">showRubisBestChoiceRecommendation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.showRubisBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -9252,8 +9257,8 @@ and Tideman&#8217;s ranked pairs rule (rankingRule=&#8221;rankedPairs&#8221;).</
 </dd></dl>
 
 <dl class="method">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerDigraph.showRubisWorstChoiceRecommendation">
-<code class="descname">showRubisWorstChoiceRecommendation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph.showRubisWorstChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.showRubisWorstChoiceRecommendation">
+<code class="descname">showRubisWorstChoiceRecommendation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.showRubisWorstChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -9272,9 +9277,9 @@ and Tideman&#8217;s ranked pairs rule (rankingRule=&#8221;rankedPairs&#8221;).</
 </dd></dl>
 
 <dl class="class">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph">
-<em class="property">class </em><code class="descclassname">cBigIntegerOutrankingDigraphs.</code><code class="descname">BigIntegerOutrankingDigraph</code><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cBigIntegerOutrankingDigraphs.BigIntegerDigraph" title="cBigIntegerOutrankingDigraphs.BigIntegerDigraph"><code class="xref py py-class docutils literal"><span class="pre">cBigIntegerOutrankingDigraphs.BigIntegerDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph">
+<em class="property">class </em><code class="descclassname">cSparseIntegerOutrankingDigraphs.</code><code class="descname">SparseIntegerOutrankingDigraph</code><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph" title="cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph"><code class="xref py py-class docutils literal"><span class="pre">cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -9317,15 +9322,15 @@ which is restricted to the decision actions gathered in this quantile equivalenc
 <span class="go">Attributes       : [&#39;name&#39;, &#39;actions&#39;, &#39;objectives&#39;, </span>
 <span class="go">                    &#39;criteriaWeightMode&#39;, &#39;criteria&#39;, </span>
 <span class="go">                    &#39;evaluation&#39;, &#39;weightPreorder&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cBigIntegerOutrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span> <span class="o">=</span> <span class="n">BigIntegerOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">35</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cSparseIntegerOutrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span> <span class="o">=</span> <span class="n">SparseIntegerOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">35</span><span class="p">,</span>
 <span class="gp">... </span>                       <span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
 <span class="gp">... </span>                       <span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="gp">... </span>                       <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
 <span class="gp">... </span>                       <span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span>
 <span class="go">  *----- Object instance description --------------*</span>
-<span class="go">  Instance class    : BigIntegerOutrankingDigraph</span>
+<span class="go">  Instance class    : SparseIntegerOutrankingDigraph</span>
 <span class="go">  Instance name     : randomCBperftab_mp</span>
 <span class="go">  # Actions         : 1000</span>
 <span class="go">  # Criteria        : 7</span>
@@ -9379,8 +9384,8 @@ which is restricted to the decision actions gathered in this quantile equivalenc
 </pre></div>
 </div>
 <dl class="method">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeActionCategories">
-<code class="descname">computeActionCategories</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeActionCategories" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.computeActionCategories">
+<code class="descname">computeActionCategories</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.computeActionCategories" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -9398,8 +9403,8 @@ Returns a tuple : action, lowest category key, highest category key, membership 
 </dd></dl>
 
 <dl class="method">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeBoostedOrdering">
-<code class="descname">computeBoostedOrdering</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeBoostedOrdering" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.computeBoostedOrdering">
+<code class="descname">computeBoostedOrdering</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.computeBoostedOrdering" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameter</em>:</dt>
 <dd><ul class="first last simple">
@@ -9413,8 +9418,8 @@ on each component.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeBoostedRanking">
-<code class="descname">computeBoostedRanking</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeBoostedRanking" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.computeBoostedRanking">
+<code class="descname">computeBoostedRanking</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.computeBoostedRanking" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameter</em>:</dt>
 <dd><ul class="first last simple">
@@ -9428,8 +9433,8 @@ on each component.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeCriterion2RankingCorrelation">
-<code class="descname">computeCriterion2RankingCorrelation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeCriterion2RankingCorrelation" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.computeCriterion2RankingCorrelation">
+<code class="descname">computeCriterion2RankingCorrelation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.computeCriterion2RankingCorrelation" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -9446,8 +9451,8 @@ the global outranking and the marginal criterion relation.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeDeterminateness">
-<code class="descname">computeDeterminateness</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeDeterminateness" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.computeDeterminateness">
+<code class="descname">computeDeterminateness</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.computeDeterminateness" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameter</em>:</dt>
 <dd><ul class="first last simple">
@@ -9461,8 +9466,8 @@ with the all median valued (indeterminate) digraph.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeMarginalVersusGlobalOutrankingCorrelations">
-<code class="descname">computeMarginalVersusGlobalOutrankingCorrelations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.computeMarginalVersusGlobalOutrankingCorrelations" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.computeMarginalVersusGlobalOutrankingCorrelations">
+<code class="descname">computeMarginalVersusGlobalOutrankingCorrelations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.computeMarginalVersusGlobalOutrankingCorrelations" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -9483,14 +9488,14 @@ available cores.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showActions">
-<code class="descname">showActions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showActions" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.showActions">
+<code class="descname">showActions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.showActions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prints out the actions disctionary.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showActionsSortingResult">
-<code class="descname">showActionsSortingResult</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showActionsSortingResult" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.showActionsSortingResult">
+<code class="descname">showActionsSortingResult</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.showActionsSortingResult" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameter</em>:</dt>
 <dd><ul class="first last simple">
@@ -9502,8 +9507,8 @@ available cores.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showComponents">
-<code class="descname">showComponents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showComponents" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.showComponents">
+<code class="descname">showComponents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.showComponents" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameter</em>:</dt>
 <dd><ul class="first last simple">
@@ -9514,8 +9519,8 @@ available cores.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showCriteria">
-<code class="descname">showCriteria</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showCriteria" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.showCriteria">
+<code class="descname">showCriteria</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.showCriteria" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -9528,8 +9533,8 @@ available cores.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showDecomposition">
-<code class="descname">showDecomposition</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showDecomposition" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.showDecomposition">
+<code class="descname">showDecomposition</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.showDecomposition" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameter</em>:</dt>
 <dd><ul class="first last simple">
@@ -9540,8 +9545,8 @@ available cores.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showMarginalVersusGlobalOutrankingCorrelation">
-<code class="descname">showMarginalVersusGlobalOutrankingCorrelation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showMarginalVersusGlobalOutrankingCorrelation" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.showMarginalVersusGlobalOutrankingCorrelation">
+<code class="descname">showMarginalVersusGlobalOutrankingCorrelation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.showMarginalVersusGlobalOutrankingCorrelation" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -9556,8 +9561,8 @@ available cores.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showRelationTable">
-<code class="descname">showRelationTable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showRelationTable" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.showRelationTable">
+<code class="descname">showRelationTable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.showRelationTable" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -9571,8 +9576,8 @@ Components are stored in an ordered dictionary.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showShort">
-<code class="descname">showShort</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cBigIntegerOutrankingDigraphs.BigIntegerOutrankingDigraph.showShort" title="Permalink to this definition">¶</a></dt>
+<dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.showShort">
+<code class="descname">showShort</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.showShort" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameter</em>:</dt>
 <dd><ul class="first last simple">
@@ -9634,7 +9639,7 @@ Components are stored in an ordered dictionary.</p>
 <li><a class="reference internal" href="#module-cRandPerfTabs">cRandPerfTabs module</a></li>
 <li><a class="reference internal" href="#module-cIntegerOutrankingDigraphs">cIntegerOutrankingDigraphs module</a></li>
 <li><a class="reference internal" href="#module-cIntegerSortingDigraphs">cIntegerSortingDigraphs module</a></li>
-<li><a class="reference internal" href="#module-cBigIntegerOutrankingDigraphs">cBigIntegerOutrankingDigraphs module</a></li>
+<li><a class="reference internal" href="#module-cSparseIntegerOutrankingDigraphs">cSparseIntegerOutrankingDigraphs module</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
