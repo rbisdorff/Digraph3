@@ -17,28 +17,22 @@ bbg:
 call:
 		cython -3 -X boundscheck=True cIntegerOutrankingDigraphs.pyx
 		cython -3 -X boundscheck=True cIntegerSortingDigraphs.pyx
-		cython -3 -X boundscheck=True cBigIntegerOutrankingDigraphs.pyx
 		cython -3 -X boundscheck=True cSparseIntegerOutrankingDigraphs.pyx
 inplace:
 		${PYTHON} csetupRandPerfTabs.py build_ext ${FLAG}
 		${PYTHON} csetupODGInteger.py build_ext ${FLAG}
 		${PYTHON} csetupSOInteger.py build_ext ${FLAG}
-		${PYTHON} csetupBGInteger.py build_ext ${FLAG}
 		${PYTHON} csetupSparseInteger.py build_ext ${FLAG}
 install:
 		sudo ${PYTHON} csetupRandPerfTabs.py install
 		sudo ${PYTHON} csetupODGInteger.py install
 		sudo ${PYTHON} csetupSOInteger.py install
-		sudo ${PYTHON} csetupBGInteger.py install
 		sudo ${PYTHON} csetupSparseInteger.py install
 installVenv:
 		${PYTHON} csetupRandPerfTabs.py install
 		${PYTHON} csetupODGInteger.py install
 		${PYTHON} csetupSOInteger.py install
-		${PYTHON} csetupBGInteger.py install
 		${PYTHON} csetupSparseInteger.py install
-testsBig:
-		(cd Test; ${NOSETESTS} -vs noseTestsBigIntegerOutrankingDigraph.py)
 testsSparse:
 		(cd Test; ${NOSETESTS} -vs noseTestsSparseIntegerOutrankingDigraph.py)
 testsInteger:
@@ -47,7 +41,7 @@ testsCorrelation:
 		(cd Test; ${NOSETESTS} -vs noseTestsVerifyFitness.py)
 
 tests:
-		(cd Test; ${NOSETESTS} -vs noseTestsBigIntegerOutrankingDigraph.py)
+		(cd Test; ${NOSETESTS} -vs noseTestsSparseIntegerOutrankingDigraph.py)
 		(cd Test; ${NOSETESTS} -vs noseTestsIntegerOutrankingDigraph.py)
 		(cd Test; ${NOSETESTS} -vs noseTestsVerifyFitness.py)
 
