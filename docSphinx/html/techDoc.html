@@ -8750,14 +8750,15 @@ ie with integer action keys and float performance evaluations.</p>
 </ul>
 </dd>
 </dl>
-<p>c-Extension of the <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.QuantilesSortingDigraph</span></code></a> class  for the 
+<p>Cythonized c-Extension of the <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.QuantilesSortingDigraph</span></code></a> class  for the
 sorting of very large sets of alternatives into quantiles delimited ordered classes.</p>
-<p><a class="reference internal" href="#cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph" title="cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph</span></code></a> class specialisation</p>
+<p>A <a class="reference internal" href="#cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph" title="cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph</span></code></a> class specialisation.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">We generally require an PerformanceTableau instance or a valid filename.
-If none is given, then a default profile with the limiting quartiles Q0,Q1,Q2, Q3 and Q4 is used on each criteria.
-By default upper closed limits of categories are supposed to be used in the sorting.</p>
+If none is given, then a default profile with the limiting quartiles 
+Q0,Q1,Q2, Q3 and Q4 is used on each criteria. By default, upper closed limits 
+of categories are used in the sorting algorithm.</p>
 </div>
 <dl class="method">
 <dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.computeCategoryContents">
@@ -8878,14 +8879,33 @@ based on self.categories[&#8216;order&#8217;] numeric values.</p>
 <dl class="method">
 <dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showActionCategories">
 <code class="descname">showActionCategories</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showActionCategories" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the union of categories in which the given action is sorted positively or null into.
+<dd><dl class="docutils">
+<dt><a href="#id4"><span class="problematic" id="id5">*</span></a>Parameters&#8221;:</dt>
+<dd><ul class="first last simple">
+<li>action,</li>
+<li>Debug=False,</li>
+<li>Comments=True,</li>
+<li>Threading=False,</li>
+<li>nbrOfCPUs=None.</li>
+</ul>
+</dd>
+</dl>
+<p>Renders the union of categories in which the given action is sorted positively or null into.
 Returns a tuple : action, lowest category key, highest category key, membership credibility !</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showActionsSortingResult">
 <code class="descname">showActionsSortingResult</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showActionsSortingResult" title="Permalink to this definition">¶</a></dt>
-<dd><p>shows the quantiles sorting result all (default) of a subset of the decision actions.</p>
+<dd><dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last simple">
+<li>actionSubset=None,</li>
+<li>Debug=False.</li>
+</ul>
+</dd>
+</dl>
+<p>shows the quantiles sorting result all (default) of a subset of the decision actions.</p>
 </dd></dl>
 
 <dl class="method">

@@ -3,8 +3,8 @@
 from distutils.core import setup, Extension
 from Cython.Build import cythonize
 
-ext = Extension(name="cBigIntegerOutrankingDigraphs",
-                          sources=["cBigIntegerOutrankingDigraphs.pyx"],
+ext = Extension(name="cSparseIntegerOutrankingDigraphs",
+                          sources=["cSparseIntegerOutrankingDigraphs.pyx"],
 			  )
 
 setup(name='cDigraph3',

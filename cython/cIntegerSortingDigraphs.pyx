@@ -637,7 +637,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
     def showActionCategories(self,int action,bint Debug=False,bint Comments=True,\
                              bint Threading=False,nbrOfCPUs=None):
         """
-        *Parameters":
+        *Parameters*:
             * action,
             * Debug=False,
             * Comments=True,
@@ -813,7 +813,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         """
         *Parameters*:
             * Descending: listing in *decreasing* (default) or *increasing* quantile order.
-            * strategy: ordering in an {'optimistic' (default) | 'pessimistic' | 'average'}
+            * strategy: ordering in an {'optimistic' | 'pessimistic' | 'average'(default) }
               in the uppest, the lowest or the average potential quantile.
             * HTML=False (for generating a HTML version of the result)
             * Comments=False,
@@ -821,7 +821,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         
         """
         if strategy == None:
-            strategy = 'optimistic'
+            strategy = 'average'
         if HTML:
             html = '<h1>Quantiles preordering</h1>'
             html += '<table style="background-color:White;" border="1">'
@@ -1552,7 +1552,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         The ordring strategy is either:
             * **optimistic**, following the upper quantile limits (default),
             * **pessimistic**, following the lower quantile limits,
-            * **average**, following the averag of the upper and lower quantile limits.
+            * **average**, following the average of the upper and lower quantile limits.
         """
         import webbrowser
         fileName = '/tmp/preOrdering.html'

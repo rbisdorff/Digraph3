@@ -2,23 +2,23 @@
 # R. Bisdorff 2016
 # cythonized OutrankingDigraphs tests for nose
 # (..$ pip3 install nose   # installing the nose test environment)
-# ..$ nosetests3 -vs noseTestsBigOutrankingDigraph.py
+# ..$ nosetests3 -vs noseTestsSparseOutrankingDigraph.py
 # # Current $Revision: 1.8 $
 ########################
 
 from cIntegerOutrankingDigraphs import *
-from cBigIntegerOutrankingDigraphs import *
+from cSparseIntegerOutrankingDigraphs import *
 from cRandPerfTabs import *
 from time import time
 
-def testbigOutrankingDigraph():
-    print('==>> Testing bigOutrankingDigraph instantiation')
+def testSparseOutrankingDigraph():
+    print('==>> Testing SparseOutrankingDigraph instantiation')
     MP = True
     t0 = time()
     ctp = Random3ObjectivesPerformanceTableau(numberOfActions=100,seed=100)
     print(time()-t0)
     print(total_size(ctp.evaluation))
-    bg1 = BigIntegerOutrankingDigraph(ctp,quantiles=10,quantilesOrderingStrategy='average',
+    bg1 = SparseIntegerOutrankingDigraph(ctp,quantiles=10,quantilesOrderingStrategy='average',
                                 LowerClosed=True,
                                 CopyPerfTab=True,
                                minimalComponentSize=1,
@@ -32,18 +32,18 @@ def testbigOutrankingDigraph():
     print(time()-t0)
     print(total_size(gi))
     t0 = time()
-    print("Big outranking digraph's correlation with standard outranking digraph")
+    print("Sparse outranking digraph's correlation with standard outranking digraph")
     print(bg1.computeOrdinalCorrelation(gi,Debug=False))
     print(time()-t0)
 
 def testMinimalComponentSize():
-    print('==>> Testing bigOutrankingDigraph with minimal Component Size instantiation')
+    print('==>> Testing SparseOutrankingDigraph with minimal Component Size instantiation')
     MP = True
     t0 = time()
     tp = RandomCBPerformanceTableau(numberOfActions=200,Threading=MP,seed=None)
     print(time()-t0)
     print(total_size(tp.evaluation))
-    bg1 = BigIntegerOutrankingDigraph(tp,quantiles=5,quantilesOrderingStrategy='average',
+    bg1 = SparseIntegerOutrankingDigraph(tp,quantiles=5,quantilesOrderingStrategy='average',
                                 LowerClosed=True,
                                 CopyPerfTab=True,
                                minimalComponentSize=5,
@@ -53,7 +53,7 @@ def testMinimalComponentSize():
     print(bg1)
     bg1.showRelationTable()
     tp = RandomPerformanceTableau(numberOfActions=200,seed=None)
-    bg2 = BigIntegerOutrankingDigraph(tp,quantiles=35,quantilesOrderingStrategy='average',
+    bg2 = SparseIntegerOutrankingDigraph(tp,quantiles=35,quantilesOrderingStrategy='average',
                                 LowerClosed=False,
                                minimalComponentSize=20,
                                     Threading=MP,Debug=False)
@@ -69,7 +69,7 @@ def testBestChoiceRecommendation():
     print('==>> Testing ordinal correlations')
     MP = True
     tp = RandomCBPerformanceTableau(numberOfActions=200,Threading=MP,seed=None)
-    bg2 = BigIntegerOutrankingDigraph(tp,quantiles=35,quantilesOrderingStrategy='average',
+    bg2 = SparseIntegerOutrankingDigraph(tp,quantiles=35,quantilesOrderingStrategy='average',
                                 LowerClosed=False,
                                minimalComponentSize=10,
                                     Threading=MP,Debug=False)
@@ -93,12 +93,12 @@ def testSparseModelFitness():
         print(s)
         tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrOfActions,numberOfCriteria=nbrOfCriteria)
         tp.showObjectives()
-        bg1 = BigIntegerOutrankingDigraph(tp,quantiles=qTiles,quantilesOrderingStrategy='average',
+        bg1 = SparseIntegerOutrankingDigraph(tp,quantiles=qTiles,quantilesOrderingStrategy='average',
                                 LowerClosed=False,
                                 CopyPerfTab=True,
                                minimalComponentSize=minimalComponentSize,
                                     Threading=MP,Debug=False)
-        bg2 = BigIntegerOutrankingDigraph(tp,quantiles=qTiles,quantilesOrderingStrategy='average',
+        bg2 = SparseIntegerOutrankingDigraph(tp,quantiles=qTiles,quantilesOrderingStrategy='average',
                                 LowerClosed=False,
                                minimalComponentSize=nbrOfActions,
                                     Threading=MP,Comments=False,Debug=False)

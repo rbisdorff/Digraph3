@@ -21,9 +21,9 @@ from cIntegerOutrankingDigraphs import *
 from cIntegerSortingDigraphs import *
 from time import time
 from decimal import Decimal
-from cBigIntegerOutrankingDigraphs import *
+from cSparseIntegerOutrankingDigraphs import *
 
-class BigIntegerDigraph(object):
+class SparseIntegerDigraph(object):
     """
     Abstract root class for linearly decomposed big digraphs (order > 1000)
     using multiprocessing ressources.
@@ -400,7 +400,7 @@ class BigIntegerDigraph(object):
 
     def showHTMLRelationMap(self,int fromIndex=0,int toIndex=0,\
                             bint Colored=True,\
-                            tableTitle='Big Relation Map',\
+                            tableTitle='Sparse Relation Map',\
                             relationName='r(x S y)',\
                             symbols=['+','&middot;','&nbsp;','&#150;','&#151']
                             ):
@@ -409,7 +409,7 @@ class BigIntegerDigraph(object):
             * fromIndex=0,
             * toIndex=0,
             * Colored=True,
-            * tableTitle='Big Relation Map',
+            * tableTitle='Sparse Relation Map',
             * relationName='r(x S y)',
             * symbols=['+','&middot;','&nbsp;','&#150;','&#151'].
 
@@ -434,7 +434,7 @@ class BigIntegerDigraph(object):
         
         
     def _htmlRelationMap(self,int fromIndex=0,int toIndex=0,\
-                            tableTitle='Big Relation Map',\
+                            tableTitle='Sparse Relation Map',\
                           relationName='r(x R y)',\
                           symbols=['+','&middot;','&nbsp;','-','_'],\
                           bint Colored=True,\
@@ -539,9 +539,9 @@ class BigIntegerDigraph(object):
             * other (digraph instance),
             * Debug=False.
 
-        Renders the ordinal correlation K of a BigDigraph instance
+        Renders the ordinal correlation K of a SparseDigraph instance
         when compared with a given compatible (same actions set) other Digraph or
-        BigDigraph instance.
+        SparseDigraph instance.
         
         K = sum_{x != y} [ min( max(-self.relation(x,y)),other.relation(x,y), max(self.relation(x,y),-other.relation(x,y)) ]
 
@@ -549,7 +549,7 @@ class BigIntegerDigraph(object):
 
         .. note::
 
-             The global outranking relation of BigDigraph instances is contructed on the fly
+             The global outranking relation of SparseDigraph instances is contructed on the fly
              from the ordered dictionary of the components.
 
              Renders a tuple with at position 0 the actual bipolar correlation index
@@ -570,7 +570,7 @@ class BigIntegerDigraph(object):
         cdef double correlation=0.0, determination=0.0
         
         ## if self.valuationdomain['min'] != Decimal('-1.0'):
-        ##         print('Error: the BigDigraph instance must be normalized !!')
+        ##         print('Error: the SparseDigraph instance must be normalized !!')
         ##         print(self.valuationdomain)
         ##         return
 
@@ -579,7 +579,7 @@ class BigIntegerDigraph(object):
         #if Debug:
         #    print('self Max', sMax)
         #    print('other Max', oMax)
-        #if issubclass(other.__class__,(Digraph,BigIntegerDigraph)):
+        #if issubclass(other.__class__,(Digraph,SparseIntegerDigraph)):
         #    if Debug:
         #        print('other is a %s instance' % other.__class__)
                 #print('self', self.valuationdomain)
@@ -631,7 +631,7 @@ class BigIntegerDigraph(object):
             * ranking (ordered list from best to worst),
             * Debug=False.
 
-        Renders the ordinal correlation K of a BigDigraph instance
+        Renders the ordinal correlation K of a SparseDigraph instance
         when compared with a given linear ranking of its actions
         
         K = sum_{x != y} [ min( max(-self.relation(x,y)),other.relation(x,y), max(self.relation(x,y),-other.relation(x,y)) ]
@@ -640,7 +640,7 @@ class BigIntegerDigraph(object):
 
         .. note::
 
-             The global outranking relation of BigDigraph instances is contructed on the fly
+             The global outranking relation of SparseDigraph instances is contructed on the fly
              from the ordered dictionary of the components.
 
              Renders a tuple with at position 0 the actual bipolar correlation index
@@ -857,7 +857,7 @@ def _decompose(int i, int nc,tempDirName):
 
 #from weakOrders import QuantilesRankingDigraph
 from cRandPerfTabs import PerformanceTableau
-class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
+class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,PerformanceTableau):
     """
     *Parameters*:
         * argPerfTab,
@@ -904,15 +904,15 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
     Attributes       : ['name', 'actions', 'objectives', 
                         'criteriaWeightMode', 'criteria', 
                         'evaluation', 'weightPreorder']
-    >>> from cBigIntegerOutrankingDigraphs import *
-    >>> bg = BigIntegerOutrankingDigraph(tp,quantiles=35,
+    >>> from cSparseIntegerOutrankingDigraphs import *
+    >>> bg = SparseIntegerOutrankingDigraph(tp,quantiles=35,
     ...                        quantilesOrderingStrategy='average',
     ...                        LowerClosed=False,
     ...                        minimalComponentSize=10,
     ...                        Threading=True,Debug=False)
     >>> bg
       *----- Object instance description --------------*
-      Instance class    : BigIntegerOutrankingDigraph
+      Instance class    : SparseIntegerOutrankingDigraph
       Instance name     : randomCBperftab_mp
       # Actions         : 1000
       # Criteria        : 7
@@ -1004,7 +1004,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
         from cIntegerOutrankingDigraphs import IntegerBipolarOutrankingDigraph
 
         if Comments:
-            print('Cythonized BigIntegerOutrankingDigraph class')
+            print('Cythonized SparseIntegerOutrankingDigraph class')
    
         ttot = time()
 
@@ -1632,7 +1632,7 @@ class BigIntegerOutrankingDigraph(BigIntegerDigraph,PerformanceTableau):
             * direction='increasing'.
 
         """
-        BigIntegerOutrankingDigraph.showDecomposition(self,direction=direction)
+        SparseIntegerOutrankingDigraph.showDecomposition(self,direction=direction)
 
     def showDecomposition(self, direction='decreasing'):
         """
