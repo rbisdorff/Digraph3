@@ -24,12 +24,12 @@ Installation instructions:
 ../Digraph3/cython$ make install
 installs (with sudo !!) cythonized Digraph3 modules in the current running python3 environment. 
 
-Pythhon 3.5 (or later) environment is recommemded and a cython compiler is required (pip3 install cython). 
+Pythhon 3.5+ environment is recommemded and a cython compiler is required (...$pip3.5+ install cython). 
 
-In case of a virual environment, use:
+In case of a virtual environment, use:
 ../Digraph3/cython$ make installVenv
 
-Nose tests are gathered in the Digraph3/cython/Test directory (..$ pip3 install nose ):
+Nose tests are gathered in the Digraph3/cython/Test directory (...$ pip3 install nose ):
 .. /Digraph3/cython$ make tests
 Runs a nose test suite providing programming examples
 

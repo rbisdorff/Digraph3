@@ -30,21 +30,24 @@ Installation instructions:
 
 On a (Unix, Mac OSX) command line using git or subversion:
 
-..$git clone https://github.com/rbisdorff/Digraph3
+...$git clone https://github.com/rbisdorff/Digraph3
 
 or,
 
-..$svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
+...$svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
 
-cd to the extracted <Digraph3> directory:
+cd to the extracted Digraph3 directory:
 
 ../Digraph3$ make install
 installs (with sudo !!) the digraphs module in the current running python environment. 
-Pythhon 3.5 (or later) environment is recoomemded.
+Pythhon 3.5+ environment is recommemded. 
+
+If the cython C-compiled modules for BigData are required, the Cython package must previously be 
+installed in the running Python environment (...$ pip3.5+ install cython )
 
 .. /Digraph3$ make tests
 runs a nose test suite in the ./test directory
-(python3 nose package required  ..$ pip3 install nose )
+(python3 nose package required  ..$ pip3.5+ install nose )
 
 .. /Digraph3$ make verboseTests
 runs a verbose (with stdout not captured) nose test suite 
