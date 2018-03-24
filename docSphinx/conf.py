@@ -19,7 +19,6 @@ import sys, os
 sys.path.insert(0, os.path.abspath('..'))
 sys.path.insert(0, os.path.abspath('../cython'))
 # print sys.path
-# sys.path.insert(0,'/home/bisdorff/documents/LoewSVN/Digraph3')
 
 # -- General configuration -----------------------------------------------------
 
