@@ -29,7 +29,9 @@ On Linux or Mac OS, ..$ cd to the extracted <Digraph3> directory::
 
      ../Digraph3$ make install
 
-     installs (with sudo !!) the digraphs module in the current running python environment. Pythhon 3.5 (or later) environment is recommended. If the cyton C-compiled modules for Big Data applications are required, it is necessary to previously install the Cython package in the running Python environment::
+installs (with sudo !!) the digraphs module in the current running python environment. Pythhon 3.5 (or later) environment is recommended.
+
+If the cyton C-compiled modules for Big Data applications are required, it is necessary to previously install the Cython package in the running Python environment::
 
      ...$pip3.5+ install cython
 
