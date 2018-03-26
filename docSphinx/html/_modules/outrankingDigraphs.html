@@ -4035,6 +4035,8 @@
         
         <span class="k">if</span> <span class="ow">not</span> <span class="n">Threading</span> <span class="ow">or</span> <span class="n">cpu_count</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
             <span class="c1"># set threading parameter</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Computing without threading ...&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="mi">1</span>
 
             <span class="c1"># !! concordance relation and veto counts need a complex constructor</span>
@@ -4062,13 +4064,14 @@
                                         <span class="n">active_children</span><span class="p">,</span> <span class="n">cpu_count</span>
             <span class="c1">#Debug=True</span>
             <span class="k">class</span> <span class="nc">myThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
-                <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span>\
+                <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span><span class="n">digraph</span><span class="p">,</span>\
                              <span class="n">InitialSplit</span><span class="p">,</span> <span class="n">tempDirName</span><span class="p">,</span>\
                              <span class="n">splitActions</span><span class="p">,</span>\
                              <span class="n">hasNoVeto</span><span class="p">,</span> <span class="n">hasBipolarVeto</span><span class="p">,</span>\
                              <span class="n">hasSymmetricThresholds</span><span class="p">,</span> <span class="n">Debug</span><span class="p">):</span>
                     <span class="n">Process</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">threadID</span> <span class="o">=</span> <span class="n">threadID</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">digraph</span> <span class="o">=</span> <span class="n">digraph</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">InitialSplit</span> <span class="o">=</span> <span class="n">InitialSplit</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span> <span class="o">=</span> <span class="n">tempDirName</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">splitActions</span> <span class="o">=</span> <span class="n">splitActions</span>
@@ -4083,9 +4086,10 @@
                     <span class="n">chdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">)</span>
 <span class="c1">##                    if Debug:</span>
 <span class="c1">##                        print(&quot;Starting working in %s on thread %s&quot; % (self.workingDirectory, str(self.threadId)))</span>
-                    <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;dumpSelf.py&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
-                    <span class="n">digraph</span> <span class="o">=</span> <span class="n">loads</span><span class="p">(</span><span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-                    <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="c1">##                    fi = open(&#39;dumpSelf.py&#39;,&#39;rb&#39;)</span>
+<span class="c1">##                    digraph = loads(fi.read())</span>
+<span class="c1">##                    fi.close()</span>
+                    <span class="n">digraph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">digraph</span>
                     <span class="n">splitActions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">splitActions</span>
 <span class="c1">##                    fiName = &#39;splitActions-&#39;+str(self.threadID)+&#39;.py&#39;</span>
 <span class="c1">##                    fi = open(fiName,&#39;rb&#39;)</span>
@@ -4135,13 +4139,13 @@
             <span class="k">with</span> <span class="n">TemporaryDirectory</span><span class="p">(</span><span class="nb">dir</span><span class="o">=</span><span class="n">tempDir</span><span class="p">)</span> <span class="k">as</span> <span class="n">tempDirName</span><span class="p">:</span>
                 <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
 
-                <span class="c1">#selfDp = copy(self)</span>
-                <span class="n">selfFileName</span> <span class="o">=</span> <span class="n">tempDirName</span> <span class="o">+</span><span class="s1">&#39;/dumpSelf.py&#39;</span>
-                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;temDirName, selfFileName&#39;</span><span class="p">,</span> <span class="n">tempDirName</span><span class="p">,</span><span class="n">selfFileName</span><span class="p">)</span>
-                <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">selfFileName</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
-                <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-                <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="c1">##                #selfDp = copy(self)</span>
+<span class="c1">##                selfFileName = tempDirName +&#39;/dumpSelf.py&#39;</span>
+<span class="c1">##                if Debug:</span>
+<span class="c1">##                    print(&#39;temDirName, selfFileName&#39;, tempDirName,selfFileName)</span>
+<span class="c1">##                fo = open(selfFileName,&#39;wb&#39;)</span>
+<span class="c1">##                fo.write(dumps(self,-1))</span>
+<span class="c1">##                fo.close()</span>
 
                 <span class="k">if</span> <span class="n">nbrCores</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="n">nbrCores</span> <span class="o">=</span> <span class="n">cpu_count</span><span class="p">()</span>
@@ -4205,7 +4209,7 @@
 <span class="c1">##                    spa = dumps(splitActions,-1)</span>
 <span class="c1">##                    fo.write(spa)</span>
 <span class="c1">##                    fo.close()</span>
-                    <span class="n">splitThread</span> <span class="o">=</span> <span class="n">myThread</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">InitialSplit</span><span class="p">,</span>
+                    <span class="n">splitThread</span> <span class="o">=</span> <span class="n">myThread</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="bp">self</span><span class="p">,</span><span class="n">InitialSplit</span><span class="p">,</span>
                                            <span class="n">tempDirName</span><span class="p">,</span><span class="n">splitActions</span><span class="p">,</span>
                                            <span class="n">hasNoVeto</span><span class="p">,</span><span class="n">hasBipolarVeto</span><span class="p">,</span>
                                            <span class="n">hasSymmetricThresholds</span><span class="p">,</span><span class="n">Debug</span><span class="p">)</span>
@@ -9237,14 +9241,14 @@
 
     <span class="c1">## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution=&#39;random&#39;)</span>
     <span class="n">Threading</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">t1</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>\
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>\
                                    <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span>\
                                    <span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span>
                                    <span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
     
     <span class="n">g1</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span>
                                   <span class="n">tempDir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">g1</span><span class="p">)</span>
+    <span class="c1">#print(g1)</span>
     <span class="c1">#g1.saveXMCDA2RubisChoiceRecommendation()</span>
     <span class="c1">#g1.showRelationTable()</span>
 <span class="c1">##    t2 = Random3ObjectivesPerformanceTableau(numberOfActions=300,\</span>
