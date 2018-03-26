@@ -3985,6 +3985,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         
         if not Threading or cpu_count() < 2:
             # set threading parameter
+            if Comments:
+                print('Computing without threading ...')
             self.nbrThreads = 1
 
             # !! concordance relation and veto counts need a complex constructor
@@ -4012,13 +4014,14 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                                         active_children, cpu_count
             #Debug=True
             class myThread(Process):
-                def __init__(self, threadID,\
+                def __init__(self, threadID,digraph,\
                              InitialSplit, tempDirName,\
                              splitActions,\
                              hasNoVeto, hasBipolarVeto,\
                              hasSymmetricThresholds, Debug):
                     Process.__init__(self)
                     self.threadID = threadID
+                    self.digraph = digraph
                     self.InitialSplit = InitialSplit
                     self.workingDirectory = tempDirName
                     self.splitActions = splitActions
@@ -4033,9 +4036,10 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                     chdir(self.workingDirectory)
 ##                    if Debug:
 ##                        print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadId)))
-                    fi = open('dumpSelf.py','rb')
-                    digraph = loads(fi.read())
-                    fi.close()
+##                    fi = open('dumpSelf.py','rb')
+##                    digraph = loads(fi.read())
+##                    fi.close()
+                    digraph = self.digraph
                     splitActions = self.splitActions
 ##                    fiName = 'splitActions-'+str(self.threadID)+'.py'
 ##                    fi = open(fiName,'rb')
@@ -4085,13 +4089,13 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             with TemporaryDirectory(dir=tempDir) as tempDirName:
                 from copy import copy, deepcopy
 
-                #selfDp = copy(self)
-                selfFileName = tempDirName +'/dumpSelf.py'
-                if Debug:
-                    print('temDirName, selfFileName', tempDirName,selfFileName)
-                fo = open(selfFileName,'wb')
-                fo.write(dumps(self,-1))
-                fo.close()
+##                #selfDp = copy(self)
+##                selfFileName = tempDirName +'/dumpSelf.py'
+##                if Debug:
+##                    print('temDirName, selfFileName', tempDirName,selfFileName)
+##                fo = open(selfFileName,'wb')
+##                fo.write(dumps(self,-1))
+##                fo.close()
 
                 if nbrCores == None:
                     nbrCores = cpu_count()
@@ -4155,7 +4159,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 ##                    spa = dumps(splitActions,-1)
 ##                    fo.write(spa)
 ##                    fo.close()
-                    splitThread = myThread(j,InitialSplit,
+                    splitThread = myThread(j,self,InitialSplit,
                                            tempDirName,splitActions,
                                            hasNoVeto,hasBipolarVeto,
                                            hasSymmetricThresholds,Debug)
@@ -9187,14 +9191,14 @@ if __name__ == "__main__":
 
     ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
     Threading = False
-    t1 = Random3ObjectivesPerformanceTableau(numberOfActions=50,\
+    t1 = Random3ObjectivesPerformanceTableau(numberOfActions=500,\
                                    numberOfCriteria=21,\
                                    weightDistribution='equiobjectives',
                                    seed=100)
     
     g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=Threading,
                                   tempDir=None,nbrCores=8,Comments=True,Debug=False)
-    print(g1)
+    #print(g1)
     #g1.saveXMCDA2RubisChoiceRecommendation()
     #g1.showRelationTable()
 ##    t2 = Random3ObjectivesPerformanceTableau(numberOfActions=300,\
