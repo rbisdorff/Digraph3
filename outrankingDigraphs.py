@@ -4333,10 +4333,14 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                             abVetoes.append((c,veto[c]))
                         if negativeVeto[c][0] >= Decimal('0'):
                             abNegativeVetoes.append((c,negativeVeto[c]))
-                                         
-                    vetoes = [-veto[c][0] for c in veto if veto[c][0] > Decimal('-1')]
-                    negativeVetoes = [negativeVeto[c][0] for c in negativeVeto\
-                                      if negativeVeto[c][0] > Decimal('-1')]
+                    if not hasNoVeto:                     
+                        vetoes = [-veto[c][0] for c in veto if veto[c][0] > Decimal('-1')]
+                        negativeVetoes = [negativeVeto[c][0] for c in negativeVeto\
+                                          if negativeVeto[c][0] > Decimal('-1')]
+                    else:
+                        vetoes = []
+                        negativeVetoes = []
+                    
 ##                    if Debug:
 ##                        print('vetoes = ', vetoes)
 ##                        print('negativeVetoes = ', negativeVetoes)

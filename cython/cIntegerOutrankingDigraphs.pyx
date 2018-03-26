@@ -525,7 +525,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                     ## if (not hasBipolarVeto) or WithConcordanceRelation or WithVetoCounts:
                     ##     constructRelation = IntegerBipolarOutrankingDigraph._constructRelation
                     ## else:
-                    constructRelation = IntegerBipolarOutrankingDigraph._constructRelationSimple
+                    #constructRelation = IntegerBipolarOutrankingDigraph._constructRelationSimple
                     if self.InitialSplit:
                         initialIn = splitActions
                         terminalIn = None
@@ -533,8 +533,8 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                         initialIn = None
                         terminalIn = splitActions
                         #splitRelation = BipolarOutrankingDigraph._constructRelation(
-                    splitRelation = constructRelation(
-                                            digraph,digraph.criteria,\
+                    splitRelation = digraph._constructRelationSimple(
+                                            digraph.criteria,\
                                             digraph.evaluation,
                                             initial=initialIn,
                                             terminal=terminalIn,
