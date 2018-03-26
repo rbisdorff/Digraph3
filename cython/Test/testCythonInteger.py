@@ -29,16 +29,16 @@ from multiprocessing import set_start_method
 
 # parameters
 sampleSize = 10
-MP = True
+MP = False
 nbrOfCPUs = 4
 nbrOfThreads = 4
 nbrOfSubProcesses = 2
 #set_start_method('fork')
 componentThreadingThreshold = 50
-nbrActions = 10000
+nbrActions = 50000
 nbrCriteria = 21
 commonPar=('beta','variable',None)
-qtiles = 3
+qtiles = 5
 minimalSize = 1
 seed = 10
 fileName = 'CythonA%dObj21q%ds%dc%dhome.csv' % (nbrActions,qtiles,minimalSize,nbrOfCPUs)

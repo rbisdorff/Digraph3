@@ -42,7 +42,7 @@ cd to the extracted Digraph3 directory:
 installs (with sudo !!) the digraphs module in the current running python environment. 
 Pythhon 3.5+ environment is recommemded. 
 
-If the cython C-compiled modules for BigData are required, the Cython package must previously be 
+If the cython C-compiled modules for Big Data are required, the Cython package must previously be 
 installed in the running Python environment (...$ pip3.5+ install cython )
 
 .. /Digraph3$ make tests

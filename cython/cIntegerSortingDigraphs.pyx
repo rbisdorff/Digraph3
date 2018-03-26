@@ -101,6 +101,13 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         cdef double tt,t0,
         cdef float q, lowValue=0.0, highValue=100.0
         from cRandPerfTabs import NormalizedPerformanceTableau
+        global actions
+        global criteria
+        global evaluation
+        global valuationdomain
+        global categories
+        global profiles
+        
         
         from time import time
         from copy import copy, deepcopy
@@ -266,7 +273,8 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         Min = -totalWeight
         Max = totalWeight
         Med = 0
-        self.valuationdomain = {'min': Min, 'med':Med ,'max':Max }
+        valuationdomain = {'min': Min, 'med':Med ,'max':Max }
+        self.valuationdomain = valuationdomain
 
         if LowerClosed:
             initialArg = actionsOrig
@@ -274,8 +282,9 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         else:
             initialArg  = profiles
             terminalArg = actionsOrig
-        self.relation = self._constructRelationWithThreading(criteria,
-                                                   evaluation,
+        self.relation = self._constructRelationWithThreading(
+                                                   #criteria, global
+                                                   #evaluation, global
                                                    initial=initialArg,
                                                    terminal=terminalArg,
                                                    hasNoVeto=hasNoVeto,
@@ -324,8 +333,9 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         String += 'Sorting relation : %.5f\n' % self.runTimes['computeRelation']
         return String 
 
-    def _constructRelationWithThreading(self,criteria,\
-                           evaluation,\
+    def _constructRelationWithThreading(self,
+                           #criteria,\ global
+                           # evaluation,\ global
                            initial=None,\
                            terminal=None,\
                            bint hasNoVeto=False,\
@@ -343,6 +353,12 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         """
         cdef int x, n, ns, nq, ni, nt, nbrOfJobs, nit, i, j, Min, Max, Med
         cdef bint LowerClosed, InitialSplit
+        global actions
+        global criteria
+        global evaluation
+        global valuationdomain
+        global categories
+        global profiles
         
         from array import array        
         from multiprocessing import cpu_count
@@ -353,9 +369,9 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         if not Threading or cpu_count() < 2:
             # set parameters for non threading
             self.nbrThreads = 1
-            Min = self.valuationdomain['min']
-            Med = self.valuationdomain['med']
-            Max = self.valuationdomain['max']
+            Min = valuationdomain['min']
+            Med = valuationdomain['med']
+            Max = valuationdomain['max']
             
 
             # compute sorting relation
@@ -365,7 +381,8 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
             ## else:
             constructRelation = IntegerBipolarOutrankingDigraph._constructRelationSimple
 
-            relation = constructRelation(self, criteria,\
+            relation = constructRelation(self,
+                                    criteria,\
                                     evaluation,\
                                     initial=initial,\
                                     terminal=terminal,\
@@ -432,7 +449,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                                         active_children, cpu_count
             #Debug=True
             class myThread(Process):
-                def __init__(self, int threadID,\
+                def __init__(self, int threadID,digraph,\
                              bint InitialSplit, tempDirName,\
                              splitActions,\
                              bint hasNoVeto=False,
@@ -442,6 +459,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                     
                     Process.__init__(self)
                     self.threadID = threadID
+                    self.digraph = digraph
                     self.InitialSplit = InitialSplit
                     self.workingDirectory = tempDirName
                     self.splitActions = splitActions
@@ -453,7 +471,13 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                 def run(self):
 
                     cdef int x, nq, Min, Med, Max, lowLimit, notHighLimit
-                    cdef bint LowerClosed                    
+                    cdef bint LowerClosed
+                    global actions
+                    global criteria
+                    global evaluation
+                    global valuationdomain
+                    global categories
+                    global profiles
 
                     from io import BytesIO
                     from pickle import Pickler, dumps, loads
@@ -464,23 +488,21 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                     chdir(self.workingDirectory)
 ##                    if Debug:
 ##                        print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadId)))
-                    fi = open('dumpSelf.py','rb')
-                    digraph = loads(fi.read())
-                    fi.close()
-                    Min = digraph.valuationdomain['min']
-                    Med = digraph.valuationdomain['med']
-                    Max = digraph.valuationdomain['max']
+                    #fi = open('dumpSelf.py','rb')
+                    #digraph = loads(fi.read())
+                    #fi.close()
+                    Min = valuationdomain['min']
+                    Med = valuationdomain['med']
+                    Max = valuationdomain['max']
                     splitActions = self.splitActions
                     constructRelation = IntegerBipolarOutrankingDigraph._constructRelationSimple
                     if self.InitialSplit:
                         initialIn = splitActions
-                        terminalIn = digraph.profiles
+                        terminalIn = profiles
                     else:
-                        initialIn = digraph.profiles
+                        initialIn = profiles
                         terminalIn = splitActions
-                    splitRelation = constructRelation(
-                                            digraph,digraph.criteria,\
-                                            digraph.evaluation,\
+                    splitRelation = constructRelation(self.digraph,criteria,evaluation,\
                                             initial=initialIn,\
                                             terminal=terminalIn,\
                                             hasNoVeto=self.hasNoVeto,\
@@ -492,11 +514,11 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                     fo.write(dumps(splitRelation,-1))
                     fo.close()
                     # compute quantiles sorting result
-                    LowerClosed = digraph.criteriaCategoryLimits['LowerClosed']
-                    nq = len(digraph.limitingQuantiles) - 1
-                    categories = digraph.categories.keys()
+                    LowerClosed = self.digraph.criteriaCategoryLimits['LowerClosed']
+                    nq = len(self.digraph.limitingQuantiles) - 1
+                    categories = self.digraph.categories.keys()
                     sorting = {}
-                    nq = len(digraph.limitingQuantiles) - 1
+                    nq = len(self.digraph.limitingQuantiles) - 1
                     for x in splitActions:
                         sorting[x] = {}
                         for c in categories:
@@ -533,7 +555,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
 
                     # compute category contents
                     categoryContent = {}
-                    for c in digraph.orderedCategoryKeys():
+                    for c in self.digraph.orderedCategoryKeys():
                         categoryContent[c] = array('i')
                         for x in splitActions:
                             if sorting[x][c]['categoryMembership'] >= Med:
@@ -553,13 +575,13 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
             with TemporaryDirectory(dir=tempDir) as tempDirName:
                 from copy import copy, deepcopy
 
-                #selfDp = copy(self)
-                selfFileName = tempDirName +'/dumpSelf.py'
-                if Debug:
-                    print('temDirName, selfFileName', tempDirName,selfFileName)
-                fo = open(selfFileName,'wb')
-                fo.write(dumps(self,-1))
-                fo.close()
+                # #selfDp = copy(self)
+                # selfFileName = tempDirName +'/dumpSelf.py'
+                # if Debug:
+                #     print('temDirName, selfFileName', tempDirName,selfFileName)
+                # fo = open(selfFileName,'wb')
+                # fo.write(dumps(self,-1))
+                # fo.close()
 
                 if nbrCores == None:
                     nbrCores = cpu_count()
@@ -593,7 +615,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                     print('nbr of splitActions = ',nit)
 
                 relation = {}
-                Med = self.valuationdomain['med']
+                Med = valuationdomain['med']
                 for ix in initial:
                     relation[ix] = {}
                     rx = relation[ix]
@@ -627,7 +649,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
 ##                    spa = dumps(splitActions,-1)
 ##                    fo.write(spa)
 ##                    fo.close()
-                    splitThread = myThread(j,InitialSplit,
+                    splitThread = myThread(j,self,InitialSplit,
                                            tempDirName,splitActions,
                                            hasNoVeto,hasBipolarVeto,
                                            hasSymmetricThresholds,Debug)
