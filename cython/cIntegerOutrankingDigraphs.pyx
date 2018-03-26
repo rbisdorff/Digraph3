@@ -487,13 +487,14 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                                         active_children, cpu_count
             #Debug=True
             class myThread(Process):
-                def __init__(self, int threadID,\
+                def __init__(self, int threadID,digraph,\
                              InitialSplit, tempDirName,\
                              splitActions,\
                              bint hasNoVeto, bint hasBipolarVeto,\
                              bint hasSymmetricThresholds, bint Debug):
                     Process.__init__(self)
                     self.threadID = threadID
+                    self.digraph = digraph
                     self.InitialSplit = InitialSplit
                     self.workingDirectory = tempDirName
                     self.splitActions = splitActions
@@ -506,12 +507,15 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                     from pickle import Pickler, dumps, loads
                     from os import chdir
                     from array import array
+
+                    digraph = self.digraph
+                    
                     chdir(self.workingDirectory)
 ##                    if Debug:
 ##                        print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadId)))
-                    fi = open('dumpSelf.py','rb')
-                    digraph = loads(fi.read())
-                    fi.close()
+                    #fi = open('dumpSelf.py','rb')
+                    #digraph = loads(fi.read())
+                    #fi.close()
                     splitActions = self.splitActions
 ##                    fiName = 'splitActions-'+str(self.threadID)+'.py'
 ##                    fi = open(fiName,'rb')
@@ -636,7 +640,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
 ##                    spa = dumps(splitActions,-1)
 ##                    fo.write(spa)
 ##                    fo.close()
-                    splitThread = myThread(j,InitialSplit,
+                    splitThread = myThread(j,self,InitialSplit,
                                            tempDirName,splitActions,
                                            hasNoVeto,hasBipolarVeto,
                                            hasSymmetricThresholds,Debug)

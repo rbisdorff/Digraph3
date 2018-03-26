@@ -202,11 +202,11 @@ class SparseIntegerDigraph(object):
             g1.notGamma = g1.notGammaSets()
 
     def showRubisWorstChoiceRecommendation(self,g0=None,
-                                          Comments=False,
-                                          ChoiceVector=True,
-                                          Debug=False,
-                                          _OldCoca=False,
-                                          Cpp=False):
+                                          bint Comments=False,
+                                          bint ChoiceVector=True,
+                                          bint Debug=False,
+                                          bint _OldCoca=False,
+                                          bint Cpp=False):
         """
         *Parameters*:
             * g0=None (last component of self by default),
@@ -1089,6 +1089,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,PerformanceTableau):
         nd = len(str(nc))
         self.nd = nd
         if not self.sortingParameters['Threading']:
+            self.nbrOfCPUs = 1
             components = OrderedDict()
             boostedRanking = []
             for i in range(1,nc+1):
@@ -1200,7 +1201,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,PerformanceTableau):
     def _computeQuantileOrdering(self,strategy=None,
                                 bint Descending=True,
                                 bint  Threading=False,
-                                 nbrOfCPUs=None,
+                                int nbrOfCPUs=1,
                                 bint Debug=False,
                                 bint Comments=False):
         """
@@ -1301,7 +1302,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,PerformanceTableau):
                                     bint Show=False,
                                     bint Debug=False,
                                     bint Comments=False,\
-                             bint Threading=False,nbrOfCPUs=None):
+                             bint Threading=False,int nbrOfCPUs=1):
         """
         *Parameters*:
             * action (int key),
@@ -1309,7 +1310,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,PerformanceTableau):
             * Debug=False,
             * Comments=False,
             * Threading=False,
-            * nbrOfCPUs=None.
+            * nbrOfCPUs=1.
 
         Renders the union of categories in which the given action is sorted positively or null into.
         Returns a tuple : action, lowest category key, highest category key, membership credibility !
@@ -1391,14 +1392,14 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,PerformanceTableau):
 
     def computeCriterion2RankingCorrelation(self,criterion,
                                             bint Threading=False,\
-                                    nbrOfCPUs=None,
+                                    int nbrOfCPUs=1,
                                     bint Debug=False,
                                     bint Comments=False):
         """
         *Parameters*:
             * criterion,
             * Threading=False,
-            * nbrOfCPUs=None,
+            * nbrOfCPUs=1,
             * Debug=False,
             * Comments=False.
 
@@ -1471,13 +1472,13 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,PerformanceTableau):
     def showMarginalVersusGlobalOutrankingCorrelation(self,
                                                       bint Sorted=True,\
                                                       bint Threading=False,\
-                                                      nbrOfCPUs=None,\
+                                                      int nbrOfCPUs=1,\
                                                       bint Comments=True):
         """
         *Parameters*:
             * Sorted=True,
             * Threading=False,
-            * nbrOfCPUs=None,
+            * nbrOfCPUs=1,
             * Comments=True.
 
         Show method for computeCriterionCorrelation results.

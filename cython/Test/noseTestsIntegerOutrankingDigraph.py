@@ -16,7 +16,7 @@ from time import time
 
 def testcIntegerOutrankingDigraph():
     tc = cR3ObjPT(seed=1)
-    gi = IntegerBipolarOutrankingDigraph(tc,Threading=False)
+    gi = IntegerBipolarOutrankingDigraph(tc,Threading=True,nbrCores=4)
     print(gi)
     gi.showRelationTable()
     tc.convertBigData2Standard()
