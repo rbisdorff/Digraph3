@@ -14,8 +14,9 @@ from cpython cimport array
 import array
 
 cdef extern from "detertest.h":
-    inline int ABS(int a)
-
+    int ABS(int a);
+    int cMAX(int a, int b);
+    int cMIN(int a, int b)
 
 from cIntegerOutrankingDigraphs import *
 from cIntegerSortingDigraphs import *
@@ -606,8 +607,8 @@ class SparseIntegerDigraph(object):
                     #if Debug:
                     #   print(x,y,'self', selfRelation)
                     #   print(x,y,'other', otherRelation)
-                    corr = min( max(-selfRelation,otherRelation),\
-                                 max(selfRelation,-otherRelation) )
+                    corr = min( cMAX(-selfRelation,otherRelation),\
+                                 cMAX(selfRelation,-otherRelation) )
                     corrSum += corr
                     determ = min( ABS(selfRelation),ABS(otherRelation) )
                     determSum += determ
@@ -670,17 +671,17 @@ class SparseIntegerDigraph(object):
                 y = ranking[j]
                 selfRelation = self.relation(x,y)
                 otherRelation = sMax
-                corr = min( max(-selfRelation,otherRelation),\
-                            max(selfRelation,-otherRelation) )
+                corr = cMIN( cMAX(-selfRelation,otherRelation),\
+                            cMAX(selfRelation,-otherRelation) )
                 corrSum += corr
-                determ = min( abs(selfRelation),abs(otherRelation) )
+                determ = cMIN( ABS(selfRelation),ABS(otherRelation) )
                 determSum += determ
                 selfRelation = self.relation(y,x)
                 otherRelation = -sMax
-                corr = min( max(-selfRelation,otherRelation),\
-                            max(selfRelation,-otherRelation) )
+                corr = cMIN( cMAX(-selfRelation,otherRelation),\
+                            cMmax(selfRelation,-otherRelation) )
                 corrSum += corr
-                determ = min( ABS(selfRelation),ABS(otherRelation) )
+                determ = cMIN( ABS(selfRelation),ABS(otherRelation) )
                 determSum += determ
 
         if determSum > 0:
