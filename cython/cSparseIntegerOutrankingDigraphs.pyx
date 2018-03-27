@@ -609,7 +609,7 @@ class SparseIntegerDigraph(object):
                     corr = min( max(-selfRelation,otherRelation),\
                                  max(selfRelation,-otherRelation) )
                     corrSum += corr
-                    determ = min( abs(selfRelation),abs(otherRelation) )
+                    determ = min( ABS(selfRelation),ABS(otherRelation) )
                     determSum += determ
 
         if determSum > 0:
@@ -680,7 +680,7 @@ class SparseIntegerDigraph(object):
                 corr = min( max(-selfRelation,otherRelation),\
                             max(selfRelation,-otherRelation) )
                 corrSum += corr
-                determ = min( abs(selfRelation),abs(otherRelation) )
+                determ = min( ABS(selfRelation),ABS(otherRelation) )
                 determSum += determ
 
         if determSum > 0:

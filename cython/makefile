@@ -2,22 +2,6 @@ FLAG = --inplace
 PYTHON = python3
 NOSETESTS = nosetests3
 
-codg:
-		cython -3 -X boundscheck=True cIntegerOutrankingDigraphs.pyx
-bodg:
-		${PYTHON} csetupODGInteger.py build_ext ${FLAG}
-cso:
-		cython -3 -X boundscheck=True cIntegerSortingDigraphs.pyx
-bso:
-		${PYTHON} csetupSOInteger.py build_ext ${FLAG}
-cbg:
-		cython -3 -X boundscheck=True cBigIntegerOutrankingDigraphs.py
-bbg:
-		${PYTHON} csetupBGInteger.py build_ext ${FLAG}
-call:
-		cython -3 -X boundscheck=True cIntegerOutrankingDigraphs.pyx
-		cython -3 -X boundscheck=True cIntegerSortingDigraphs.pyx
-		cython -3 -X boundscheck=True cSparseIntegerOutrankingDigraphs.pyx
 inplace:
 		${PYTHON} csetupRandPerfTabs.py build_ext ${FLAG}
 		${PYTHON} csetupODGInteger.py build_ext ${FLAG}
