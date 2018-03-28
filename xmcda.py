@@ -2948,7 +2948,8 @@ def saveRubisXSL(fileName='xmcda2Rubis.xsl',Extended=True):
 
     .. note::
 
-        The XSL styles heet must be present in the same working directory as the XMCDA encoded data file.
+        When accessing an XMCDA encoded data file in a browser, for safety reasons, the corresponding XSL style sheet
+        must be present in the same working directory.
     
     """
     import xmcda
@@ -2966,7 +2967,8 @@ def saveRubisChoiceXSL(fileName='xmcda2RubisChoice.xsl'):
 
     .. note::
 
-        The XSL styles heet must be present in the same working directory as the XMCDA encoded data file. 
+        When accessing an XMCDA encoded data file in a browser, for safety reasons, the corresponding XSL style sheet
+        must be present in the same working directory.
       
     """
     import xmcda
@@ -2981,7 +2983,8 @@ def saveRobustRubisChoiceXSL(fileName='xmcda2RubisRobustChoice.xsl'):
 
     .. note::
 
-        The XSL styles heet must be present in the same working directory as the XMCDA encoded data file.
+        When accessing an XMCDA encoded data file in a browser, for safety reasons, the corresponding XSL style sheet
+        must be present in the same working directory.
     
     """
     import xmcda
