@@ -59,7 +59,7 @@ For further scientific documentation of the Digraph3 ressources, see |location_l
 
 .. |location_link3| raw:: html
 
-   <a href="http://leopold-loewenheim.uni.lu/Digraph3/digraph3_copyright.htm" target="_blank">Copyright</a>
+   <a href="http://leopold-loewenheim.uni.lu/Digraph3/digraph3_copyright.html" target="_blank">Copyright</a>
 
 
 
