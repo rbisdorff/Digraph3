@@ -4,6 +4,10 @@ Technical Reference of the Digraph3 modules
 :Version: Revision: Python 3.6
 :Copyright: `R. Bisdorff <http://leopold-loewenheim.uni.lu/bisdorff/>`_ 2013-2018
 
+.. contents:: Table of Contents
+	:depth: 2
+	:local:	    
+
 .. _Technical-label:
 
 Installation
@@ -49,9 +53,12 @@ runs a verbose (with stdout not captured) nose test suite::
 
 runs the nose test suite in multiple processing mode when the GNU `parallel <https://www.gnu.org/software/parallel/>`_ shell tool is installed and multiple cores are detected.
 
-To be fully functional, the Digraph3 resources mainly need the `graphviz <http://graphviz.org>`_ tools and the `R statistics resources <http://www.r-project.org>`_ to be installed. When exploring digraph isomorphisms, the `nauty <http://www.cs.sunysb.edu/~algorith/implement/nauty/implement.shtml>`_ isomorphism testing program is required. Two specific criteria and actions clustering methods of the `OutrankingDigraph <techDoc.html#outrankingDigraphs.OutrankingDigraph>`_ class furthermore require the `calmat <http://leopold-loewenheim.uni.lu/svn/repos/Calmat/>`_ matrix computing resource to be installed. 
+**Dependencies**: To be fully functional, the Digraph3 resources mainly need the `graphviz <http://graphviz.org>`_ tools and the `R statistics resources <http://www.r-project.org>`_ to be installed. When exploring digraph isomorphisms, the `nauty <http://www.cs.sunysb.edu/~algorith/implement/nauty/implement.shtml>`_ isomorphism testing program is required. Two specific criteria and actions clustering methods of the `OutrankingDigraph <techDoc.html#outrankingDigraphs.OutrankingDigraph>`_ class furthermore require the `calmat <http://leopold-loewenheim.uni.lu/svn/repos/Calmat/>`_ matrix computing resource to be installed. 
 
-**Organisation of the Digraph3 python3 source code**
+.. _Modules-organisation-label:
+
+Organisation of the Digraph3 modules
+------------------------------------
 
 The Digraph3 source code is split into several interdependent modules of which the ``digraphs`` module is the master module.
 

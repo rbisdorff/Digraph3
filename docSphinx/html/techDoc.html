@@ -64,8 +64,40 @@
 </tr>
 </tbody>
 </table>
+<div class="contents local topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#installation" id="id4">Installation</a></li>
+<li><a class="reference internal" href="#organisation-of-the-digraph3-modules" id="id5">Organisation of the Digraph3 modules</a></li>
+<li><a class="reference internal" href="#digraphs-module" id="id6">digraphs module</a></li>
+<li><a class="reference internal" href="#module-randomDigraphs" id="id7">randomDigraphs module</a></li>
+<li><a class="reference internal" href="#graphs-module" id="id8">graphs module</a></li>
+<li><a class="reference internal" href="#module-perfTabs" id="id9">perfTabs module</a></li>
+<li><a class="reference internal" href="#module-performanceQuantiles" id="id10">performanceQuantiles module</a></li>
+<li><a class="reference internal" href="#randomperftabs-module" id="id11">randomPerfTabs module</a></li>
+<li><a class="reference internal" href="#outrankingdigraphs-module" id="id12">outrankingDigraphs module</a></li>
+<li><a class="reference internal" href="#module-xmcda" id="id13">xmcda module</a></li>
+<li><a class="reference internal" href="#module-sparseOutrankingDigraphs" id="id14">sparseOutrankingDigraphs module</a></li>
+<li><a class="reference internal" href="#sortingdigraphs-module" id="id15">sortingDigraphs module</a></li>
+<li><a class="reference internal" href="#votingprofiles-module" id="id16">votingProfiles module</a></li>
+<li><a class="reference internal" href="#linearorders-module" id="id17">linearOrders module</a></li>
+<li><a class="reference internal" href="#module-weakOrders" id="id18">weakOrders module</a></li>
+<li><a class="reference internal" href="#module-randomNumbers" id="id19">randomNumbers module</a></li>
+<li><a class="reference internal" href="#module-digraphsTools" id="id20">digraphsTools module</a></li>
+<li><a class="reference internal" href="#module-arithmetics" id="id21">arithmetics module</a></li>
+<li><a class="reference internal" href="#cythonized-modules-for-big-digraphs" id="id22">Cythonized modules for big digraphs</a><ul>
+<li><a class="reference internal" href="#module-cRandPerfTabs" id="id23">cRandPerfTabs module</a></li>
+<li><a class="reference internal" href="#module-cIntegerOutrankingDigraphs" id="id24">cIntegerOutrankingDigraphs module</a></li>
+<li><a class="reference internal" href="#module-cIntegerSortingDigraphs" id="id25">cIntegerSortingDigraphs module</a></li>
+<li><a class="reference internal" href="#module-cSparseIntegerOutrankingDigraphs" id="id26">cSparseIntegerOutrankingDigraphs module</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables" id="id27">Indices and tables</a></li>
+<li><a class="reference internal" href="#tutorials" id="id28">Tutorials</a></li>
+</ul>
+</div>
 <div class="section" id="installation">
-<span id="technical-label"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<span id="technical-label"></span><h2><a class="toc-backref" href="#id4">Installation</a><a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p><strong>Dowloading the Digraph3 ressources</strong></p>
 <p>Three download options are given:</p>
 <ol class="arabic">
@@ -107,8 +139,10 @@
 </pre></div>
 </div>
 <p>runs the nose test suite in multiple processing mode when the GNU <a class="reference external" href="https://www.gnu.org/software/parallel/">parallel</a> shell tool is installed and multiple cores are detected.</p>
-<p>To be fully functional, the Digraph3 resources mainly need the <a class="reference external" href="http://graphviz.org">graphviz</a> tools and the <a class="reference external" href="http://www.r-project.org">R statistics resources</a> to be installed. When exploring digraph isomorphisms, the <a class="reference external" href="http://www.cs.sunysb.edu/~algorith/implement/nauty/implement.shtml">nauty</a> isomorphism testing program is required. Two specific criteria and actions clustering methods of the <a class="reference external" href="techDoc.html#outrankingDigraphs.OutrankingDigraph">OutrankingDigraph</a> class furthermore require the <a class="reference external" href="http://leopold-loewenheim.uni.lu/svn/repos/Calmat/">calmat</a> matrix computing resource to be installed.</p>
-<p><strong>Organisation of the Digraph3 python3 source code</strong></p>
+<p><strong>Dependencies</strong>: To be fully functional, the Digraph3 resources mainly need the <a class="reference external" href="http://graphviz.org">graphviz</a> tools and the <a class="reference external" href="http://www.r-project.org">R statistics resources</a> to be installed. When exploring digraph isomorphisms, the <a class="reference external" href="http://www.cs.sunysb.edu/~algorith/implement/nauty/implement.shtml">nauty</a> isomorphism testing program is required. Two specific criteria and actions clustering methods of the <a class="reference external" href="techDoc.html#outrankingDigraphs.OutrankingDigraph">OutrankingDigraph</a> class furthermore require the <a class="reference external" href="http://leopold-loewenheim.uni.lu/svn/repos/Calmat/">calmat</a> matrix computing resource to be installed.</p>
+</div>
+<div class="section" id="organisation-of-the-digraph3-modules">
+<span id="modules-organisation-label"></span><h2><a class="toc-backref" href="#id5">Organisation of the Digraph3 modules</a><a class="headerlink" href="#organisation-of-the-digraph3-modules" title="Permalink to this headline">¶</a></h2>
 <p>The Digraph3 source code is split into several interdependent modules of which the <code class="docutils literal"><span class="pre">digraphs</span></code> module is the master module.</p>
 <ul class="simple">
 <li><dl class="first docutils">
@@ -192,7 +226,7 @@
 </div>
 </div>
 <div class="section" id="digraphs-module">
-<span id="digraphs-label"></span><h2>digraphs module<a class="headerlink" href="#digraphs-module" title="Permalink to this headline">¶</a></h2>
+<span id="digraphs-label"></span><h2><a class="toc-backref" href="#id6">digraphs module</a><a class="headerlink" href="#digraphs-module" title="Permalink to this headline">¶</a></h2>
 <p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#digraphs-tutorial-label"><span class="std std-ref">Working with the Digraph3 software ressources</span></a></p>
 <span class="target" id="module-digraphs"></span><p>Python3+ implementation of digraphs</p>
 <p>Copyright (C) 2006-2017  Raymond Bisdorff</p>
@@ -1404,7 +1438,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.digraph2Graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.digraph2Graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -2652,7 +2686,7 @@ a digraph of all k-choices collapsed actions.</p>
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="module-randomDigraphs">
-<span id="randomdigraphs-module"></span><span id="randomdigraphs-label"></span><h2>randomDigraphs module<a class="headerlink" href="#module-randomDigraphs" title="Permalink to this headline">¶</a></h2>
+<span id="randomdigraphs-module"></span><span id="randomdigraphs-label"></span><h2><a class="toc-backref" href="#id7">randomDigraphs module</a><a class="headerlink" href="#module-randomDigraphs" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="randomDigraphs.RandomDigraph">
 <em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomDigraph</code><span class="sig-paren">(</span><em>order=9</em>, <em>arcProbability=0.5</em>, <em>hasIntegerValuation=True</em>, <em>Bipolar=True</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomDigraphs.html#RandomDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomDigraphs.RandomDigraph" title="Permalink to this definition">¶</a></dt>
@@ -2824,7 +2858,7 @@ else valuation domain = [-1.0,1.0]</li>
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="graphs-module">
-<span id="graphs-label"></span><h2>graphs module<a class="headerlink" href="#graphs-module" title="Permalink to this headline">¶</a></h2>
+<span id="graphs-label"></span><h2><a class="toc-backref" href="#id8">graphs module</a><a class="headerlink" href="#graphs-module" title="Permalink to this headline">¶</a></h2>
 <p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#graphs-tutorial-label"><span class="std std-ref">Working with the graphs module</span></a></p>
 <span class="target" id="module-graphs"></span><p>Digraph3 graphs.py module
 Python3.3+ computing resources
@@ -3661,7 +3695,7 @@ temporary triangulated grids of dimension n times m.</p>
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="module-perfTabs">
-<span id="perftabs-module"></span><span id="perftabs-label"></span><h2>perfTabs module<a class="headerlink" href="#module-perfTabs" title="Permalink to this headline">¶</a></h2>
+<span id="perftabs-module"></span><span id="perftabs-label"></span><h2><a class="toc-backref" href="#id9">perfTabs module</a><a class="headerlink" href="#module-perfTabs" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="perfTabs.ConstantPerformanceTableau">
 <em class="property">class </em><code class="descclassname">perfTabs.</code><code class="descname">ConstantPerformanceTableau</code><span class="sig-paren">(</span><em>inPerfTab</em>, <em>actionsSubset=None</em>, <em>criteriaSubset=None</em>, <em>position=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#ConstantPerformanceTableau"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.ConstantPerformanceTableau" title="Permalink to this definition">¶</a></dt>
@@ -3862,7 +3896,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.computeDefaultDiscriminationThresholds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.computeDefaultDiscriminationThresholds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -4361,7 +4395,7 @@ xml.etree (for Python 2.5+).</p>
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="module-performanceQuantiles">
-<span id="performancequantiles-module"></span><span id="performancequantiles-label"></span><h2>performanceQuantiles module<a class="headerlink" href="#module-performanceQuantiles" title="Permalink to this headline">¶</a></h2>
+<span id="performancequantiles-module"></span><span id="performancequantiles-label"></span><h2><a class="toc-backref" href="#id10">performanceQuantiles module</a><a class="headerlink" href="#module-performanceQuantiles" title="Permalink to this headline">¶</a></h2>
 <p>Digraph3 collection of python3 modules for Algorithmic Decision Theory applications</p>
 <p>Module for incremental performance quantiles computation</p>
 <p>Copyright (C) 2016  Raymond Bisdorff</p>
@@ -4475,7 +4509,7 @@ influential compared to the historical data.</p>
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="randomperftabs-module">
-<span id="randomperftabs-label"></span><h2>randomPerfTabs module<a class="headerlink" href="#randomperftabs-module" title="Permalink to this headline">¶</a></h2>
+<span id="randomperftabs-label"></span><h2><a class="toc-backref" href="#id11">randomPerfTabs module</a><a class="headerlink" href="#randomperftabs-module" title="Permalink to this headline">¶</a></h2>
 <p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#randomperformacetableau-tutorial-label"><span class="std std-ref">Generating random performance tableaux</span></a></p>
 <span class="target" id="module-randomPerfTabs"></span><dl class="class">
 <dt id="randomPerfTabs.FullRandomPerformanceTableau">
@@ -4820,7 +4854,7 @@ matching the RandomLinearVotingProfiles class (see the votingDigraphs module)</p
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="outrankingdigraphs-module">
-<span id="outrankingdigraphs-label"></span><h2>outrankingDigraphs module<a class="headerlink" href="#outrankingdigraphs-module" title="Permalink to this headline">¶</a></h2>
+<span id="outrankingdigraphs-label"></span><h2><a class="toc-backref" href="#id12">outrankingDigraphs module</a><a class="headerlink" href="#outrankingdigraphs-module" title="Permalink to this headline">¶</a></h2>
 <p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#outrankingdigraphs-tutorial-label"><span class="std std-ref">Working with the outrankingDigraphs module</span></a></p>
 <span class="target" id="module-outrankingDigraphs"></span><p>Python implementation of outranking digraphs.</p>
 <p>Copyright (C) 2006-20017  Raymond Bisdorff</p>
@@ -5209,7 +5243,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'ind': 10</em>, <em>'pref': 20</em>, <em>'weakVeto': 60</em>, <em>'veto': 80}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#OutrankingDigraph.defaultDiscriminationThresholds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'veto': 80</em>, <em>'weakVeto': 60</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#OutrankingDigraph.defaultDiscriminationThresholds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -5580,7 +5614,7 @@ temporary unanimous outranking digraphs</p>
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="module-xmcda">
-<span id="xmcda-module"></span><span id="xmcda-label"></span><h2>xmcda module<a class="headerlink" href="#module-xmcda" title="Permalink to this headline">¶</a></h2>
+<span id="xmcda-module"></span><span id="xmcda-label"></span><h2><a class="toc-backref" href="#id13">xmcda module</a><a class="headerlink" href="#module-xmcda" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="xmcda.saveRobustRubisChoiceXSL">
 <code class="descclassname">xmcda.</code><code class="descname">saveRobustRubisChoiceXSL</code><span class="sig-paren">(</span><em>fileName='xmcda2RubisRobustChoice.xsl'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/xmcda.html#saveRobustRubisChoiceXSL"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#xmcda.saveRobustRubisChoiceXSL" title="Permalink to this definition">¶</a></dt>
@@ -5674,7 +5708,7 @@ Rubis Solver computed from a stored XMCDA2 encoded performance tableau.</p>
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="module-sparseOutrankingDigraphs">
-<span id="sparseoutrankingdigraphs-module"></span><span id="sparseoutrankingdigraphs-label"></span><h2>sparseOutrankingDigraphs module<a class="headerlink" href="#module-sparseOutrankingDigraphs" title="Permalink to this headline">¶</a></h2>
+<span id="sparseoutrankingdigraphs-module"></span><span id="sparseoutrankingdigraphs-label"></span><h2><a class="toc-backref" href="#id14">sparseOutrankingDigraphs module</a><a class="headerlink" href="#module-sparseOutrankingDigraphs" title="Permalink to this headline">¶</a></h2>
 <p>Digraph3 collection of python3 modules for Algorithmic Decision Theory applications</p>
 <p>Module for sparse pre-ranked outranking digraphs</p>
 <p>Copyright (C) 2016  Raymond Bisdorff</p>
@@ -6231,7 +6265,7 @@ the diagonal outranking components of the sparse outranking digraph.</p>
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="sortingdigraphs-module">
-<span id="sortingdigraphs-label"></span><h2>sortingDigraphs module<a class="headerlink" href="#sortingdigraphs-module" title="Permalink to this headline">¶</a></h2>
+<span id="sortingdigraphs-label"></span><h2><a class="toc-backref" href="#id15">sortingDigraphs module</a><a class="headerlink" href="#sortingdigraphs-module" title="Permalink to this headline">¶</a></h2>
 <p>A tutorial with coding examples for solving multi-criteria rating problems is available here: <a class="reference internal" href="tutorial.html#rating-tutorial-label"><span class="std std-ref">Rating with learned quantile norms</span></a></p>
 <span class="target" id="module-sortingDigraphs"></span><p>Digraph3 collection of python3 modules for
 Algorithmic Decision Theory applications.</p>
@@ -6847,7 +6881,7 @@ the high category limit.</p>
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="votingprofiles-module">
-<span id="votingprofiles-label"></span><h2>votingProfiles module<a class="headerlink" href="#votingprofiles-module" title="Permalink to this headline">¶</a></h2>
+<span id="votingprofiles-label"></span><h2><a class="toc-backref" href="#id16">votingProfiles module</a><a class="headerlink" href="#votingprofiles-module" title="Permalink to this headline">¶</a></h2>
 <p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#linearvoting-tutorial-label"><span class="std std-ref">Computing the winner of an election</span></a></p>
 <span class="target" id="module-votingProfiles"></span><dl class="class">
 <dt id="votingProfiles.ApprovalVotingProfile">
@@ -7286,7 +7320,7 @@ from a shuffled list of candidates for each voter.</p>
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="linearorders-module">
-<span id="linearorders-label"></span><h2>linearOrders module<a class="headerlink" href="#linearorders-module" title="Permalink to this headline">¶</a></h2>
+<span id="linearorders-label"></span><h2><a class="toc-backref" href="#id17">linearOrders module</a><a class="headerlink" href="#linearorders-module" title="Permalink to this headline">¶</a></h2>
 <p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#linearvoting-tutorial-label"><span class="std std-ref">Computing the winner of an election</span></a></p>
 <span class="target" id="module-linearOrders"></span><dl class="class">
 <dt id="linearOrders.CopelandOrder">
@@ -7447,7 +7481,7 @@ a given bipolar-valued Digraph instance</p>
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="module-weakOrders">
-<span id="weakorders-module"></span><span id="weakorders-label"></span><h2>weakOrders module<a class="headerlink" href="#module-weakOrders" title="Permalink to this headline">¶</a></h2>
+<span id="weakorders-module"></span><span id="weakorders-label"></span><h2><a class="toc-backref" href="#id18">weakOrders module</a><a class="headerlink" href="#module-weakOrders" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="weakOrders.KemenyWeakOrder">
 <em class="property">class </em><code class="descclassname">weakOrders.</code><code class="descname">KemenyWeakOrder</code><span class="sig-paren">(</span><em>other</em>, <em>orderLimit=7</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/weakOrders.html#KemenyWeakOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#weakOrders.KemenyWeakOrder" title="Permalink to this definition">¶</a></dt>
@@ -7708,7 +7742,7 @@ disjunctive fusion (omax operator) of a list of rankings.</p>
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="module-randomNumbers">
-<span id="randomnumbers-module"></span><span id="randomnumbers-label"></span><h2>randomNumbers module<a class="headerlink" href="#module-randomNumbers" title="Permalink to this headline">¶</a></h2>
+<span id="randomnumbers-module"></span><span id="randomnumbers-label"></span><h2><a class="toc-backref" href="#id19">randomNumbers module</a><a class="headerlink" href="#module-randomNumbers" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="randomNumbers.CauchyRandomVariable">
 <em class="property">class </em><code class="descclassname">randomNumbers.</code><code class="descname">CauchyRandomVariable</code><span class="sig-paren">(</span><em>position=0.0</em>, <em>scale=1.0</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#CauchyRandomVariable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.CauchyRandomVariable" title="Permalink to this definition">¶</a></dt>
@@ -7821,7 +7855,7 @@ disjunctive fusion (omax operator) of a list of rankings.</p>
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="module-digraphsTools">
-<span id="digraphstools-module"></span><span id="digraphstools-label"></span><h2>digraphsTools module<a class="headerlink" href="#module-digraphsTools" title="Permalink to this headline">¶</a></h2>
+<span id="digraphstools-module"></span><span id="digraphstools-label"></span><h2><a class="toc-backref" href="#id20">digraphsTools module</a><a class="headerlink" href="#module-digraphsTools" title="Permalink to this headline">¶</a></h2>
 <p>Python3+ implementation of Digraph3 tools</p>
 <p>Copyright (C) 2016-2017 Raymond Bisdorff</p>
 <p>This program is free software; you can redistribute it and/or modify
@@ -7932,7 +7966,7 @@ To search other containers, add handlers to iterate over their contents:</p>
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="module-arithmetics">
-<span id="arithmetics-module"></span><span id="arithmetics-label"></span><h2>arithmetics module<a class="headerlink" href="#module-arithmetics" title="Permalink to this headline">¶</a></h2>
+<span id="arithmetics-module"></span><span id="arithmetics-label"></span><h2><a class="toc-backref" href="#id21">arithmetics module</a><a class="headerlink" href="#module-arithmetics" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="arithmetics.QuadraticResiduesDigraph">
 <em class="property">class </em><code class="descclassname">arithmetics.</code><code class="descname">QuadraticResiduesDigraph</code><span class="sig-paren">(</span><em>integers=[3, 5, 7, 11, 13, 17, 19]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#QuadraticResiduesDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#arithmetics.QuadraticResiduesDigraph" title="Permalink to this definition">¶</a></dt>
@@ -8096,10 +8130,10 @@ Euler&#8217;s number of coprime elements a in Zn.</p>
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="cythonized-modules-for-big-digraphs">
-<span id="cythonized-label"></span><h2>Cythonized modules for big digraphs<a class="headerlink" href="#cythonized-modules-for-big-digraphs" title="Permalink to this headline">¶</a></h2>
+<span id="cythonized-label"></span><h2><a class="toc-backref" href="#id22">Cythonized modules for big digraphs</a><a class="headerlink" href="#cythonized-modules-for-big-digraphs" title="Permalink to this headline">¶</a></h2>
 <p>The following modules are compiled C-extensions using the Cython pre-compiler. No Python code source is provided for inspection. To distinguish them from the corresponding pure Python modules, a c- prefix is used.</p>
 <div class="section" id="module-cRandPerfTabs">
-<span id="crandperftabs-module"></span><span id="crandperftabs-label"></span><h3>cRandPerfTabs module<a class="headerlink" href="#module-cRandPerfTabs" title="Permalink to this headline">¶</a></h3>
+<span id="crandperftabs-module"></span><span id="crandperftabs-label"></span><h3><a class="toc-backref" href="#id23">cRandPerfTabs module</a><a class="headerlink" href="#module-cRandPerfTabs" title="Permalink to this headline">¶</a></h3>
 <p>c-Extension for the Digraph3 collection.
 Module cRandPerfTabs.py is a c-compiled version of the
 <a class="reference internal" href="#module-randomPerfTabs" title="randomPerfTabs"><code class="xref py py-mod docutils literal"><span class="pre">randomPerfTabs</span></code></a> module for generating random performance tableaux of Big Data type,
@@ -8477,7 +8511,7 @@ to int format.</p>
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="module-cIntegerOutrankingDigraphs">
-<span id="cintegeroutrankingdigraphs-module"></span><span id="cintegeroutrankingdigraphs-label"></span><h3>cIntegerOutrankingDigraphs module<a class="headerlink" href="#module-cIntegerOutrankingDigraphs" title="Permalink to this headline">¶</a></h3>
+<span id="cintegeroutrankingdigraphs-module"></span><span id="cintegeroutrankingdigraphs-label"></span><h3><a class="toc-backref" href="#id24">cIntegerOutrankingDigraphs module</a><a class="headerlink" href="#module-cIntegerOutrankingDigraphs" title="Permalink to this headline">¶</a></h3>
 <p>c-Extension for the Digraph3 collection.
 Module cIntegerOutrankingDigraphs.py is a c-compiled part of the
 <a class="reference internal" href="#module-outrankingDigraphs" title="outrankingDigraphs"><code class="xref py py-mod docutils literal"><span class="pre">outrankingDigraphs</span></code></a> module for handling random performance tableaux of Big Data type,
@@ -8733,7 +8767,7 @@ is by convention 0.0 at determination level 0.0 .</p>
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="module-cIntegerSortingDigraphs">
-<span id="cintegersortingdigraphs-module"></span><span id="cintegersortingdigraphs-label"></span><h3>cIntegerSortingDigraphs module<a class="headerlink" href="#module-cIntegerSortingDigraphs" title="Permalink to this headline">¶</a></h3>
+<span id="cintegersortingdigraphs-module"></span><span id="cintegersortingdigraphs-label"></span><h3><a class="toc-backref" href="#id25">cIntegerSortingDigraphs module</a><a class="headerlink" href="#module-cIntegerSortingDigraphs" title="Permalink to this headline">¶</a></h3>
 <p>c-Extension for the Digraph3 collection.
 Module cIntegerOutrankingDigraphs.py is a c-compiled part of the
 <a class="reference internal" href="#module-outrankingDigraphs" title="outrankingDigraphs"><code class="xref py py-mod docutils literal"><span class="pre">outrankingDigraphs</span></code></a> module for handling random performance tableaux of Big Data type,
@@ -9066,7 +9100,7 @@ the high category limit.</p>
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
 </div>
 <div class="section" id="module-cSparseIntegerOutrankingDigraphs">
-<span id="csparseintegeroutrankingdigraphs-module"></span><span id="csparseintegeroutrankingdigraphs-label"></span><h3>cSparseIntegerOutrankingDigraphs module<a class="headerlink" href="#module-cSparseIntegerOutrankingDigraphs" title="Permalink to this headline">¶</a></h3>
+<span id="csparseintegeroutrankingdigraphs-module"></span><span id="csparseintegeroutrankingdigraphs-label"></span><h3><a class="toc-backref" href="#id26">cSparseIntegerOutrankingDigraphs module</a><a class="headerlink" href="#module-cSparseIntegerOutrankingDigraphs" title="Permalink to this headline">¶</a></h3>
 <p>c-Extension for the Digraph3 collection.
 Module cBigIntegerOutrankingDigraphs.py is a c-compiled partial version of the
 <a class="reference internal" href="#module-sparseOutrankingDigraphs" title="sparseOutrankingDigraphs"><code class="xref py py-mod docutils literal"><span class="pre">sparseOutrankingDigraphs</span></code></a> module for handling outranking digraphs of very large order.</p>
@@ -9633,7 +9667,7 @@ Components are stored in an ordered dictionary.</p>
 </div>
 </div>
 <div class="section" id="indices-and-tables">
-<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id27">Indices and tables</a><a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
 <li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
@@ -9641,7 +9675,7 @@ Components are stored in an ordered dictionary.</p>
 </ul>
 </div>
 <div class="section" id="tutorials">
-<h2>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id28">Tutorials</a><a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><a class="reference external" href="tutorial.html">Tutorial</a></li>
 </ul>
@@ -9658,6 +9692,7 @@ Components are stored in an ordered dictionary.</p>
   <ul>
 <li><a class="reference internal" href="#">Technical Reference of the Digraph3 modules</a><ul>
 <li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#organisation-of-the-digraph3-modules">Organisation of the Digraph3 modules</a></li>
 <li><a class="reference internal" href="#digraphs-module">digraphs module</a></li>
 <li><a class="reference internal" href="#module-randomDigraphs">randomDigraphs module</a></li>
 <li><a class="reference internal" href="#graphs-module">graphs module</a></li>
