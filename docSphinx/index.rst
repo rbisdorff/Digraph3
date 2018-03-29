@@ -37,7 +37,7 @@ The documentation contains, first, a set of tutorials introducing the main objec
 The second part concerns the reference manual of the proposed Python3 modules, classes and methods. The main generic root classes in this collection are the :py:class:`digraphs.Digraph` class, the :py:class:`perfTabs.PerformanceTableau` class and the :py:class:`outrankingDigraphs.OutrankingDigraph` class. The technical documentation also provides links to the complete source code of all modules, classes and methods.
 
 .. toctree:: techDoc
-   :maxdepth: 3
+   :maxdepth: 2
 
 References
 ..........

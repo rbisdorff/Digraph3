@@ -62,36 +62,93 @@ Organisation of the Digraph3 modules
 
 The Digraph3 source code is split into several interdependent modules of which the ``digraphs`` module is the master module.
 
+Basic modules
+.............
+
 * :ref:`digraphs-label`  
-     Main part of the Digraph3 source code with the root `Digraph <techDoc.html#digraphs.Digraph>`_ class;
+     Main part of the Digraph3 source code with the root `Digraph
+     <techDoc.html#digraphs.Digraph>`_ class.
+     
+* :ref:`graphs-label`
+     Ressources for handling undirected graphs with the root `Graph
+     <techDoc.html#graphs.Graph>`_ class and a brigde to the
+     ``digraphs`` module resources.
+     
+* :ref:`perfTabs-label`
+     Tools for handling multiple criteria performance tableaux with
+     root `PerformanceTableau
+     <techDoc.html#perfTabs.PerformanceTableau>`_ class.
+     
+* :ref:`outrankingDigraphs-label`
+     Root module for handling outranking digraphs with the main
+     `BipolarOutrankingDigraph
+     <techDoc.html#outrankingDigraphs.BipolarOutrankingDigraph>`_
+     class and its specializations.
+
+* :ref:`votingProfiles-label` 
+     Classes and methods for handling voting ballots and computing election results
+     with main `LinearVotingProfile
+     <techDoc.html#votingProfiles.LinearVotingProfile>`_ class.
+     
+
+Various Random generators
+.........................
+
 * :ref:`randomDigraphs-label` 
      Various implemented random digraph models.
-* :ref:`graphs-label`
-     Specialization for undirected graphs with the root `Graph <techDoc.html#graphs.Graph>`_ class and a brigde to the ``digraphs`` module resources;
-* :ref:`outrankingDigraphs-label`
-     New Python3 specific root `OutrankingDigraph <techDoc.html#outrankingDigraphs.OutrankingDigraph>`_ class and specializations; 
-* :ref:`sparseOutrankingDigraphs-label` 
-     Sparse implementation design for large outranking digraphs (order > 1000);
-* :ref:`cythonized-label` 
-     Cythonized C implementation for sparse outranking digraphs (order > 1000);
-* :ref:`performanceQuantiles-label` 
-     Incremental representation of large performance tableaux via binned cumulated density functions per criteria;
+
 * :ref:`randomPerfTabs-label` 
      Various implemented random performance tableau models.
-* :ref:`votingProfiles-label` 
-     Additional classes and methods for computing election results with main `LinearVotingProfile <techDoc.html#votingProfiles.LinearVotingProfile>`_ class;
-* :ref:`sortingDigraphs-label`
-     Additional tools for solving sorting problems with the root `SortingDigraph <techDoc.html#sortingDigraphs.SortingDigraph>`_ class;
-* :ref:`linearOrders-label` 
-     Additional tools for solving linearly ranking problems with the root `LinearOrder <techDoc.html#linearOrders.LinearOrder>`_ class;
-* :ref:`weakOrders-label` 
-     Additional tools for solving ranking by choosing problems with root `WeakOrder <techDoc.html#weakOrders.WeakOrder>`_ class.
+
 * :ref:`randomNumbers-label` 
-     Additional random number generators, not available in the standard python library.
+     Additional random number generators, not available in the
+     standard python random.py library.
+
+Handling big data
+.................
+
+* :ref:`performanceQuantiles-label` 
+     Incremental representation of large performance tableaux via
+     binned cumulated density functions per criteria. Depends on the
+     :py:mod:`randomPerfTabs` module.     
+
+* :ref:`sparseOutrankingDigraphs-label` 
+     Sparse implementation design for large bipolar outranking digraphs (order
+     > 1000);
+
+Cythonized modules
+..................
+
+* :ref:`cythonized-label` 
+     Cythonized C implementation for handling big performance tableaux
+     and bipolar outranking digraphs (order
+     > 1000).
+
+Sorting, rating and ranking tools
+.................................
+
+* :ref:`sortingDigraphs-label`
+     Additional tools for solving sorting problems with the root
+     `SortingDigraph <techDoc.html#sortingDigraphs.SortingDigraph>`_
+     class;
+     
+* :ref:`linearOrders-label` 
+     Additional tools for solving linearly ranking problems with the
+     root `LinearOrder <techDoc.html#linearOrders.LinearOrder>`_
+     class;
+     
+* :ref:`weakOrders-label` 
+     Additional tools for solving ranking by choosing problems with
+     root `WeakOrder <techDoc.html#weakOrders.WeakOrder>`_ class.
+
+Miscellaneous tools
+...................
+
 * :ref:`digraphsTools-label` 
-     Additional various methods and tools.
+     Additional various methods and tools for handling digraphs.
+     
 * :ref:`arithmetics-label` 
-     Additional various methods and tools.
+     Additional various methods and tools for computing with integer numbers.
 
 Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff <http://leopold-loewenheim.uni.lu/bisdorff/>, University of Luxembourg.
 
