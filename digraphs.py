@@ -3733,7 +3733,7 @@ class Digraph(object):
                 except:
                     actionsList += [(actions[x]['name'],x)]
             else:
-                actionsList += [(str(x),str(x))]
+                actionsList += [(str(x),x)]
         if actionsSubset == None:
             actionsList.sort()
         #print actionsList
