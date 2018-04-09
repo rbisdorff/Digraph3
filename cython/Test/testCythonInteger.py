@@ -28,18 +28,18 @@ from randomPerfTabs import Random3ObjectivesPerformanceTableau as R3ObjPT
 from multiprocessing import set_start_method
 
 # parameters
-sampleSize = 10
-MP = False
+sampleSize = 1
+MP = True
 nbrOfCPUs = 8
 nbrOfThreads = 8
 nbrOfSubProcesses = 2
 #set_start_method('fork')
 componentThreadingThreshold = 500
-nbrActions = 100
+nbrActions = 10000
 nbrCriteria = 21
 commonPar=('beta','variable',None)
 qtiles = 5
-minimalSize = 1
+minimalSize = 5
 seed = 10
 fileName = 'CythonA%dObj21q%ds%dc%dhome.csv' % (nbrActions,qtiles,minimalSize,nbrOfCPUs)
 # write header row
@@ -91,12 +91,13 @@ for s in range(sampleSize):
                                         seed=seed)
     print(tp2.name)
     print(time()-t0)
-    bg2 = iBg.SparseIntegerOutrankingDigraph(tp2,quantiles=qtiles,
+#    bg2 = iBg.SparseIntegerOutrankingDigraph(tp2,quantiles=qtiles,
+    bg2 = iBg.cQuantilesRankingDigraph(tp2,quantiles=qtiles,
                                quantilesOrderingStrategy='average',
                                minimalComponentSize=minimalSize,
                                LowerClosed=False,
                                Threading=MP,
-                               CopyPerfTab=False,
+                               #CopyPerfTab=False,
                                nbrOfCPUs=nbrOfCPUs,
                                nbrOfThreads=nbrOfCPUs,
                                nbrOfSubProcesses=nbrOfSubProcesses,
@@ -105,6 +106,15 @@ for s in range(sampleSize):
                                Debug=False)
 
     print(bg2)
+    print(bg2.boostedRanking[:100])
+    bg2.showActions()
+    bg2.showCriteria()
+    bg2.showDecomposition()
+    bg2.showComponents()
+    bg2.showRelationTable()
+    
+    #tp2.convertBigData2Standard()
+    #tp2.showHTMLPerformanceHeatmap(Correlations=True)
     ## bg2.showActions()
     ## bg2.showCriteria()
     ## bg2.showDecomposition()
