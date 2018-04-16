@@ -1828,113 +1828,106 @@ def _decompose1(int i, int nc,tempDirName):
 #from cRandPerfTabs import PerformanceTableau
 #from cIntegerOutrankingDigraphs import IntegerBipolarOutrankingDigraph
 class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
-    # """
-    # *Parameters*:
-    #     * argPerfTab,
-    #     * quantiles=4,
-    #     * quantilesOrderingStrategy="average",
-    #     * LowerClosed=False,
-    #     * componentRankingRule="Copeland",
-    #     * minimalComponentSize=1,
-    #     * Threading=False,
-    #     * tempDir=None,
-    #     * componentThreadingThreshold=1000,\
-    #     * nbrOfSubProcesses=0,
-    #     * nbrOfCPUs=1,
-    #     * nbrOfThreads=1,
-    #     * save2File=None,
-    #     * CopyPerfTab=False,
-    #     * Comments=False,
-    #     * Debug=False.
+    """
+    *Parameters*:
+        * argPerfTab,
+        * quantiles=4,
+        * quantilesOrderingStrategy="average",
+        * LowerClosed=False,
+        * componentRankingRule="Copeland",
+        * minimalComponentSize=1,
+        * Threading=False,
+        * tempDir=None,
+        * componentThreadingThreshold=1000,\
+        * nbrOfSubProcesses=0,
+        * nbrOfCPUs=1,
+        * nbrOfThreads=1,
+        * save2File=None,
+        * CopyPerfTab=False,
+        * Comments=False,
+        * Debug=False.
 
-    # Main class for the multiprocessing implementation of big outranking digraphs.
+    Cythonized class for the multiprocessing implementation of multiple criteria quantiles ranking of very big performance tableaux - > 100000.
     
-    # The big outranking digraph instance is decomposed with a q-tiling sort into a partition
-    # of quantile equivalence classes which are linearly ordered by average quantile limits (default).
-
-    # With each quantile equivalence class is associated a BipolarOutrankingDigraph object
-    # which is restricted to the decision actions gathered in this quantile equivalence class.
-
-    # By default, the number of quantiles q is set to quartiles. However, the ranking quality and the best choice results get better with a finer grained quantiles decomposition. 
+    By default, the number of quantiles q is set to quartiles. However, the ranking quality gets better with a finer grained quantiles decomposition. 
     
-    # For other parameters settings, see the corresponding :py:class:`sortingDigraphs.QuantilesSortingDigraph` class.
+    For other parameters settings, see the corresponding :py:class:`sortingDigraphs.QuantilesSortingDigraph` class.
 
-    # Example python3.6 session:
+    Example python3.6 session:
 
-    # >>> from cRandPerfTabs import *
-    # >>> tp = RandomCBPerformanceTableau(numberOfActions=1000,
-    #                                     Threading=True,seed=100)
-    # >>> tp
-    # *------- PerformanceTableau instance description ------*
-    # Instance class   : RandomCBPerformanceTableau
-    # Instance name    : randomCBperftab
-    # # Actions        : 1000
-    # # Objectives     : 2
-    # # Criteria       : 7
-    # Attributes       : ['name', 'actions', 'objectives', 
-    #                     'criteriaWeightMode', 'criteria', 
-    #                     'evaluation', 'weightPreorder']
-    # >>> from cSparseIntegerOutrankingDigraphs import *
-    # >>> bg = SparseIntegerOutrankingDigraph(tp,quantiles=35,
-    # ...                        quantilesOrderingStrategy='average',
-    # ...                        LowerClosed=False,
-    # ...                        minimalComponentSize=10,
-    # ...                        Threading=True,Debug=False)
-    # >>> bg
-    #   *----- Object instance description --------------*
-    #   Instance class    : SparseIntegerOutrankingDigraph
-    #   Instance name     : randomCBperftab_mp
-    #   # Actions         : 1000
-    #   # Criteria        : 7
-    #   Sorting by        : 35-Tiling
-    #   Ordering strategy : average
-    #   Ranking rule      : Copeland
-    #   # Components      : 75
-    #   Minimal order     : 10
-    #   Maximal order     : 36
-    #   Average order     : 13.3
-    #   fill rate         : 1.489%
-    #   ----  Constructor run times (in sec.) ----
-    #   Nbr of threads    : 1
-    #   Nbr of threads    : 8
-    #   Total time        : 0.54866
-    #   QuantilesSorting  : 0.39175
-    #   Preordering       : 0.00509
-    #   Decomposing       : 0.15179
-    #   Ordering          : 0.00000
-    # >>> bg.showBestChoiceRecommendation()
-    #   ***********************
-    #   * --- Best choice recommendation(s) ---*
-    #   (in decreasing order of determinateness)   
-    #   Credibility domain:  {'min': -24, 'med': 0, 'max': 24, 
-    #                         'hasIntegerValuation': True}
-    #   * choice              : [131, 151, 388]
-    #     +-irredundancy      : 0.00
-    #     independence        : 0.00
-    #     dominance           : 2.00
-    #     absorbency          : -10.00
-    #     covering (%)        : 61.90
-    #     determinateness (%) : 50.00
-    #     - most credible action(s) = { }
-    #   ***********************
-    #   * --- Worst choice recommendation(s) ---*
-    #   (in decreasing order of determinateness)   
-    #   Credibility domain:  {'min': -24, 'med': 0, 'max': 24, 
-    #                         'hasIntegerValuation': True}
-    #   * choice              : [312]
-    #   +-irredundancy      : 24.00
-    #   independence        : 24.00
-    #   dominance           : -10.00
-    #   absorbency          : 4.00
-    #   covering (%)        : 0.00
-    #   determinateness (%) : 58.33
-    #   - most credible action(s) = { '312': 4.00, }
-    # >>> print(bg.boostedRanking[:10],' ... ',bg.boostedRanking[-10:] )
-    #   [388, 131, 151, 275, 679, 406, 741, 623, 579, 894]  ... 
-    #   [278, 886, 202, 473, 841, 878, 713, 62, 17, 312]
-    # >>>
-    #
-    # """
+    >>> from cRandPerfTabs import *
+    >>> tp = RandomCBPerformanceTableau(numberOfActions=1000,
+                                        Threading=True,seed=100)
+    >>> tp
+    *------- PerformanceTableau instance description ------*
+    Instance class   : RandomCBPerformanceTableau
+    Instance name    : randomCBperftab
+    # Actions        : 1000
+    # Objectives     : 2
+    # Criteria       : 7
+    Attributes       : ['name', 'actions', 'objectives', 
+                        'criteriaWeightMode', 'criteria', 
+                        'evaluation', 'weightPreorder']
+    >>> from cSparseIntegerOutrankingDigraphs import *
+    >>> bg = cQuantilesRankingDigraph(tp,quantiles=35,
+    ...                        quantilesOrderingStrategy='average',
+    ...                        LowerClosed=False,
+    ...                        minimalComponentSize=10,
+    ...                        Threading=True,nbrOfCPUs=8,Debug=False)
+    >>> bg
+      *----- Object instance description --------------*
+      Instance class    : cQuantilesRankingDigraph
+      Instance name     : randomCBperftab_mp
+      # Actions         : 1000
+      # Criteria        : 7
+      Sorting by        : 35-Tiling
+      Ordering strategy : average
+      Ranking rule      : Copeland
+      # Components      : 75
+      Minimal order     : 10
+      Maximal order     : 36
+      Average order     : 13.3
+      fill rate         : 1.489%
+      ----  Constructor run times (in sec.) ----
+      Nbr of threads    : 8
+      Total time        : 0.54866
+      QuantilesSorting  : 0.39175
+      Preordering       : 0.00509
+      Decomposing       : 0.15179
+      Ordering          : 0.00000
+    >>> bg.showBestChoiceRecommendation()
+      ***********************
+      * --- Best choice recommendation(s) ---*
+      (in decreasing order of determinateness)   
+      Credibility domain:  {'min': -24, 'med': 0, 'max': 24, 
+                            'hasIntegerValuation': True}
+      * choice              : [131, 151, 388]
+        +-irredundancy      : 0.00
+        independence        : 0.00
+        dominance           : 2.00
+        absorbency          : -10.00
+        covering (%)        : 61.90
+        determinateness (%) : 50.00
+        - most credible action(s) = { }
+      ***********************
+      * --- Worst choice recommendation(s) ---*
+      (in decreasing order of determinateness)   
+      Credibility domain:  {'min': -24, 'med': 0, 'max': 24, 
+                            'hasIntegerValuation': True}
+      * choice              : [312]
+      +-irredundancy      : 24.00
+      independence        : 24.00
+      dominance           : -10.00
+      absorbency          : 4.00
+      covering (%)        : 0.00
+      determinateness (%) : 58.33
+      - most credible action(s) = { '312': 4.00, }
+    >>> print(bg.boostedRanking[:10],' ... ',bg.boostedRanking[-10:] )
+      [388, 131, 151, 275, 679, 406, 741, 623, 579, 894]  ... 
+      [278, 886, 202, 473, 841, 878, 713, 62, 17, 312]
+    >>>
+    
+    """
     
     def __init__(self,argPerfTab,\
                  int quantiles=4,\
