@@ -886,6 +886,8 @@ class NetFlowsOrder(LinearOrder):
 ##                xnetflows = sum((otherRelation[x][y])\
 ##                                 for y in actions)
                 netFlows.append((xnetflows,x))
+                if Debug:
+                    print(x,xnetflows)
         else:
             otherMax = other.valuationdomain['max']
             otherMin = other.valuationdomain['min']
@@ -895,6 +897,8 @@ class NetFlowsOrder(LinearOrder):
                                 (otherMax - otherRelation[y][x] + otherMin))\
                                  for y in actions)
                 netFlows.append((xnetflows,x))
+                if Debug:
+                    print(x,xnetflows)
         # reversed sorting with keeping the actions initial ordering
         # in case of ties
         netFlows.sort(reverse=True)
@@ -906,9 +910,9 @@ class NetFlowsOrder(LinearOrder):
         self.netFlowsRanking = netFlowsRanking
         netFlowsOrder = list(reversed(netFlowsRanking))
         self.netFlowsOrder = netFlowsOrder
-##        if Debug:
-##            print(self.netFlowsRanking)
-##            print(self.netFlowsOrder)
+        if Debug:
+            print(self.netFlowsRanking)
+            print(self.netFlowsOrder)
         runTimes['netFlows'] = time() - tnf
 
         # init relation

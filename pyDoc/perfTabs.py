@@ -6872,7 +6872,7 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
         * stringInput: instantiates from an XMCDA 2.0 encoded string argument.
            
     """
-    from collections import OrderedDict
+    #from collections import OrderedDict
     
     def __init__(self,fileName='temp',HasSeparatedWeights=False,
                  HasSeparatedThresholds=False,stringInput=None,

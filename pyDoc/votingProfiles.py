@@ -3,7 +3,7 @@
 # Python 3 implementation of voting digraphs
 # Refactored from revision 1.549 of the digraphs module
 # Current revision $Revision: 2484 $
-# Copyright (C) 2011  Raymond Bisdorff
+# Copyright (C) 2011-2018 Raymond Bisdorff
 #
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -224,13 +224,8 @@ class LinearVotingProfile(VotingProfile):
             self.linearBallot = argDict['linearBallot']
             self.ballot = self.computeBallot()
         else:
-            randv = RandomLinearVotingProfile(numberOfCandidates=numberOfCandidates,
-                                              numberOfVoters=numberOfVoters,seed=seed)
-            self.name = 'randLinearVotingProfile'
-            self.candidates = randv.candidates
-            self.voters = randv.voters
-            self.linearBallot = randv.linearBallot
-            self.ballot = randv.ballot
+            print('!!! Error: The name of a stored linear voting profile is required !!!')
+            return
         self.sumWeights = Decimal('0')
         for v in self.voters:
             self.sumWeights += self.voters[v]['weight']
@@ -966,18 +961,28 @@ class RandomApprovalVotingProfile(ApprovalVotingProfile):
 class RandomLinearVotingProfile(LinearVotingProfile):
     """
     A specialized class for random linwear voting profiles.
+    Random reation parameters:
+    
+        numberOfVoters=5, numberOfCandidates=5,
+        votersWeights = optional list of positive integers for instance [2,3,4,1,5].
+        
     """
-    def __init__(self,numberOfVoters=9,numberOfCandidates=5,seed=None):
+    def __init__(self,numberOfVoters=9,numberOfCandidates=5,votersWeights=None,seed=None):
         """
-        Random profile creation parameters:
-            | numberOfVoters=9, numberOfCandidates=5,
         """
         from collections import OrderedDict
         votersList = [x for x in range(1,numberOfVoters + 1)]
         voters = OrderedDict()
         for v in votersList:
             voterID = 'v%d' % v
-            voters[voterID] = {'weight':Decimal('1')}
+            if votersWeights != None:
+                try:
+                    weight = votersWeights[v-1]
+                except:
+                    weight = 1
+            else:
+                weight = 1
+            voters[voterID] = {'weight':Decimal('%d' % weight)}
         candidatesList = [x for x in range(1,numberOfCandidates + 1)]
         candidates = OrderedDict()
         for c in candidatesList:
@@ -986,9 +991,13 @@ class RandomLinearVotingProfile(LinearVotingProfile):
         self.name = str('randLinearProfile')
         self.candidates = candidates
         self.voters = voters
+        self.sumWeights = Decimal('0')
+        for v in self.voters:
+            self.sumWeights += self.voters[v]['weight']
         self.linearBallot = self.generateRandomLinearBallot(seed)
         #print self.linearBallot
         self.ballot = self.computeBallot()
+
 
     def generateRandomLinearBallot(self,seed):
         """
@@ -1264,15 +1273,15 @@ class CondorcetDigraph(Digraph):
         Med = self.valuationdomain['med']
         relation = self.relation
         candidatesList = [x for x in self.actions]
-        CondorcetWinner = []
+        condorcetWinners = []
         for x in candidatesList:
-            winner = True
+            Winner = True
             for y in candidatesList:
                 if x != y and relation[x][y] <= Med:
-                    winner = False
-            if winner:
-                CondorcetWinner.append(x)
-        return CondorcetWinner
+                    Winner = False
+            if Winner:
+                condorcetWinners.append(x)
+        return condorcetWinners
 
 
     def constructBallotRelation(self,hasIntegerValuation):
@@ -1337,6 +1346,36 @@ class CondorcetDigraph(Digraph):
                     scores[x] += 1
                 if relation[y][x] > Med:
                     scores[x] -= 1
+        scoresRanking = [(x,scores[x]) for x in scores]
+        scoresRanking = sorted(scoresRanking,key = itemgetter(1),reverse=True)
+        ranking = [x[0] for x in scoresRanking]
+        if Debug:
+            print(actions)
+            print(scores)
+            print(scoresRanking)
+            print(ranking)
+        return ranking
+
+    def computeNetFlowsRanking(self,Debug=False):
+        """
+        Renders a ranking of the actions following the Net Flows rule.
+        Score(x_i) = Sum_j{M(x_i,x_j)} for i,j = 1..n
+
+        The alternatives are ranked in decreasing order of their Scores.
+
+        In case of a tie, we use a lexicographic rule applied to the identifiers.
+        """
+        from collections import OrderedDict
+        from operator import itemgetter
+        Med = self.valuationdomain['med']
+        actions = [x for x in self.actions]
+        relation = self.relation
+        scores = OrderedDict()
+        for x in actions:
+            scores[x] = 0
+        for x in actions:
+            for y in actions:
+                scores[x] += relation[x][y]
         scoresRanking = [(x,scores[x]) for x in scores]
         scoresRanking = sorted(scoresRanking,key = itemgetter(1),reverse=True)
         ranking = [x[0] for x in scoresRanking]
@@ -1445,10 +1484,13 @@ if __name__ == "__main__":
     ## for x in arrowRaynaudRanking:
     ##     print '%s: %d (%.2f)' % (x[1], x[0], aar[x[1]]['majorityMargin'])
 
-    lvp = LinearVotingProfile(numberOfCandidates=5,numberOfVoters=9,seed=1)
+    lvp = RandomLinearVotingProfile(numberOfCandidates=5,
+                              numberOfVoters=9,
+                              votersWeights=[1,2,3,4,3,2,1,3,2],seed=1)
 ##    ## lvp = LinearVotingProfile('templinearprofile')
     lvp.save()
     lvp1 = LinearVotingProfile('templinearprofile')
+##    lvp1 = LinearVotingProfile('example1')
     lvp1.computeBallot()
     ## for x in lvp.voters:
     ##    print x, lvp.linearBallot[x]
@@ -1463,7 +1505,19 @@ if __name__ == "__main__":
     t = PerformanceTableau('votingPerfTab')
     t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0)
     c = CondorcetDigraph(lvp1)
+    #c.recodeValuation()
+    c.showRelationTable()
     print(c.computeCopelandRanking(Debug=True))
+    print(c.computeNetFlowsRanking(Debug=True))
+    
+##    from linearOrders import NetFlowsOrder
+##    nf = NetFlowsOrder(c,Debug=True)
+##    from outrankingDigraphs import *
+##    t1 = RandomCBPerformanceTableau(numberOfActions=5)
+##    g1 = BipolarOutrankingDigraph(t1)
+##    g1.showRelationTable()
+##    nf1 = NetFlowsOrder(g1,Debug=True)
+    
     
 ##    lvp1.showHTMLVotingHeatmap()
 ##    

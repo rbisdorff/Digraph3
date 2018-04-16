@@ -12,6 +12,10 @@ cimport cython
 from cpython cimport array
 import array
 
+cdef extern from "detertest.h":
+    int cMAX(float a, float b);
+    int cMIN(float a, float b)
+
 __version__ = "Revision: Py35"
 
 from digraphs import *
@@ -403,7 +407,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                     indx = self.criteria[c]['thresholds']['ind'][0]
                     indy = self.criteria[c]['thresholds']['ind'][1]
                     if hasSymmetricThresholds:
-                        ind = indx +indy * max(absFloat(self.evaluation[c][a]), absFloat(self.evaluation[c][b]))
+                        ind = indx +indy * cMAX(absFloat(self.evaluation[c][a]), absFloat(self.evaluation[c][b]))
                     else:
                         ind = indx +indy * absFloat(self.evaluation[c][a])
                 except:
@@ -412,7 +416,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                     wpx = self.criteria[c]['thresholds']['weakPreference'][0]
                     wpy = self.criteria[c]['thresholds']['weakPreference'][1]
                     if hasSymmetricThresholds:
-                        wp = wpx + wpy * max(absFloat(self.evaluation[c][a]), absFlost(self.evaluation[c][b]))
+                        wp = wpx + wpy * cMAX(absFloat(self.evaluation[c][a]), absFlost(self.evaluation[c][b]))
                     else:
                         wp = wpx + wpy * absFloat(self.evaluation[c][a])
                 except:
@@ -421,7 +425,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                     px = self.criteria[c]['thresholds']['pref'][0]
                     py = self.criteria[c]['thresholds']['pref'][1]
                     if hasSymmetricThresholds:
-                        p = px + py * max(absFloat(self.evaluation[c][a]), absFloat(self.evaluation[c][b]))
+                        p = px + py * cMAX(absFloat(self.evaluation[c][a]), absFloat(self.evaluation[c][b]))
                     else:
                         p = px + py * absFloat(self.evaluation[c][a]) 
                 except:
@@ -746,7 +750,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                         #maxAB = max(absFloat(evalca),absFloat(evalcb))
                         
                         if evalca != Decimal('-999') and evalcb != Decimal('-999'):
-                            maxAB = max(absFloat(evalca),absFloat(evalcb))
+                            maxAB = cMAX(absFloat(evalca),absFloat(evalcb))
                             try:
                                 indx = crit['thresholds']['ind'][0]
                                 indy = crit['thresholds']['ind'][1]

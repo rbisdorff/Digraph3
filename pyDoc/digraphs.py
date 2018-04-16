@@ -12629,7 +12629,7 @@ if __name__ == "__main__":
     from digraphsTools import *
     from outrankingDigraphs import OutrankingDigraph,\
     RandomOutrankingDigraph, BipolarOutrankingDigraph
-    from votingDigraphs import CondorcetDigraph
+    from votingProfiles import CondorcetDigraph
     from randomPerfTabs import *
 
 
