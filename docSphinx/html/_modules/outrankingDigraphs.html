@@ -9196,7 +9196,7 @@
         <span class="k">except</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">answer</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">])</span></div>
 
-<div class="viewcode-block" id="RubisRestServer.showHTMLSolution"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.RubisRestServer.showHTMLSolution">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLSolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ticket</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">valuation</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="RubisRestServer.showHTMLSolution"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.RubisRestServer.showHTMLSolution">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLSolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ticket</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">valuation</span><span class="o">=</span><span class="s1">&#39;bipolar&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Show XMCDA 2.0 solution in a default browser window.</span>
 <span class="sd">        The valuation parameter may set the correct style sheet.</span>
@@ -9216,8 +9216,11 @@
         <span class="k">if</span> <span class="n">valuation</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">valuation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuation</span>
+                <span class="k">if</span> <span class="n">valuation</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">valuation</span> <span class="o">=</span> <span class="s1">&#39;bipolar&#39;</span>
             <span class="k">except</span><span class="p">:</span>
-                <span class="n">valuation</span> <span class="o">=</span> <span class="s1">&#39;bipolar&#39;</span>
+                <span class="k">if</span> <span class="n">valuation</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">valuation</span> <span class="o">=</span> <span class="s1">&#39;bipolar&#39;</span>
         <span class="n">arg</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ticket&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">ticket</span><span class="p">,</span> <span class="s1">&#39;valuation&#39;</span><span class="p">:</span> <span class="n">valuation</span><span class="p">}</span>
         <span class="n">answer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_server</span><span class="o">.</span><span class="n">requestSolutionHTML</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
