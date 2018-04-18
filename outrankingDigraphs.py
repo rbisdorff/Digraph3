@@ -9146,7 +9146,7 @@ class RubisRestServer(ServerProxy):
         except:
             print(answer['message'])
 
-    def showHTMLSolution(self,ticket=None,valuation=None):
+    def showHTMLSolution(self,ticket=None,valuation='bipolar'):
         """
         Show XMCDA 2.0 solution in a default browser window.
         The valuation parameter may set the correct style sheet.
@@ -9166,8 +9166,11 @@ class RubisRestServer(ServerProxy):
         if valuation == None:
             try:
                 valuation = self.valuation
+                if valuation == None:
+                    valuation = 'bipolar'
             except:
-                valuation = 'bipolar'
+                if valuation == None:
+                    valuation = 'bipolar'
         arg = {'ticket': self.ticket, 'valuation': valuation}
         answer = self._server.requestSolutionHTML(arg)
         try:
