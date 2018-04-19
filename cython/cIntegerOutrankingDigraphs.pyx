@@ -385,6 +385,39 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         self.runTimes['totalTime'] = time() - tt
         if Comments:
             print(self)
+
+############
+
+    def __repr__(self):
+        """
+        Default presentation method for BipolarOutrankingDigraph instance.
+        """
+        reprString = '*------- Object instance description ------*\n'
+        reprString += 'Instance class   : %s\n' % self.__class__.__name__
+        reprString += 'Instance name    : %s\n' % self.name
+        reprString += '# Actions        : %d\n' % self.order
+        reprString += '# Criteria       : %d\n' % len(self.criteria)
+        reprString += 'Size             : %d\n' % self.computeSize()
+        reprString += 'Determinateness  : %.3f\n' % self.computeDeterminateness()
+        reprString += 'Valuation domain : %s\n' % str(self.valuationdomain)
+        try:
+            val1 = self.runTimes['totalTime']
+            val2 = self.runTimes['dataInput']
+            val3 = self.runTimes['computeRelation']
+            val4 = self.runTimes['gammaSets']
+            reprString += '----  Constructor run times (in sec.) ----\n'
+            reprString += 'Total time       : %.5f\n' % val1
+            reprString += 'Data input       : %.5f\n' % val2
+            reprString += 'Compute relation : %.5f\n' % val3
+            reprString += 'Gamma sets       : %.5f\n' % val4
+            try:
+                reprString += '#Threads         : %d\n' % self.nbrThreads
+            except:
+                self.nbrThreads = 1
+                reprString += '#Threads         : %d\n' % self.nbrThreads
+        except:
+            pass
+        return reprString
         
     def computeCriterionRelation(self,c, a,b,hasSymmetricThresholds=True):
         """
@@ -436,6 +469,23 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
 
             else:
                 return 0
+
+    def computeSize(self):
+        """
+        Renders the number of validated non reflexive arcs
+        """
+        Med = self.valuationdomain['med']
+        #actions = [x for x in self.actions]
+        actions = self.actions
+        relation = self.relation
+        size = 0
+        for x in actions:
+            for y in actions:
+                if x != y:
+                    if relation[x][y] > Med:
+                        size += 1
+        return size
+
             
     def _constructRelationWithThreading(self,criteria,\
                            evaluation,\
