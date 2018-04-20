@@ -146,6 +146,9 @@ Miscellaneous tools
 
 * :ref:`digraphsTools-label` 
      Additional various methods and tools for handling digraphs.
+
+* :ref:`xmcda-label` 
+     Additional various methods and tools for handling XMCDA encoded performance tableaux.
      
 * :ref:`arithmetics-label` 
      Additional various methods and tools for computing with integer numbers.
