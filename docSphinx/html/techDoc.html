@@ -6510,16 +6510,13 @@ see <code class="xref py py-meth docutils literal"><span class="pre">perfTabs.sh
 <div><ul class="simple">
 <li><em>actionsList</em> and <em>criteriaList</em>, if provided,  give the possibility to show the decision alternatives, resp. criteria, in a given ordering.</li>
 <li><em>ndigits</em> = 0 may be used to show integer evaluation values.</li>
-<li>If no <em>actionsList</em> is provided, the decision actions are ordered from
-the best to the worst following the ranking of the NormedQuatilesRatingDigraph instance.              - It may interesting in some cases to use <em>RankingRule</em> = &#8216;NetFlows&#8217;.</li>
-<li>With <em>Correlations</em> = <em>True</em> and <em>criteriaList</em> = <em>None</em>, the criteria will be presented from left to right in decreasing
-order of the correlations between the marginal criterion based ranking and the global ranking used for
-presenting the decision alternatives.</li>
-<li>Computing the marginal correlations may be boosted with Threading = True,
-if multiple parallel computing cores are available.</li>
+<li>If no <em>actionsList</em> is provided, the decision actions are ordered from the best to the worst following the ranking of the NormedQuatilesRatingDigraph instance.</li>
+<li>It may interesting in some cases to use <em>RankingRule</em> = &#8216;NetFlows&#8217;.</li>
+<li>With <em>Correlations</em> = <em>True</em> and <em>criteriaList</em> = <em>None</em>, the criteria will be presented from left to right in decreasing order of the correlations between the marginal criterion based ranking and the global ranking used for presenting the decision alternatives.</li>
+<li>Computing the marginal correlations may be boosted with Threading = True, if multiple parallel computing cores are available.</li>
 </ul>
 </div></blockquote>
-<p>Suppose ew observe the following rating reslut:</p>
+<p>Suppose we observe the following rating result:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
 <span class="go"> [0.50 - 0.75[ [&#39;a1008&#39;, &#39;a1006&#39;, &#39;a1005&#39;, &#39;a1001&#39;, &#39;a1003&#39;, &#39;a1010&#39;]</span>
 <span class="go"> [0.25 - 0.50[ [&#39;a1002&#39;]</span>

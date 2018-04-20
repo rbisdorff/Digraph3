@@ -4065,15 +4065,12 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 
               - *actionsList* and *criteriaList*, if provided,  give the possibility to show the decision alternatives, resp. criteria, in a given ordering.
               - *ndigits* = 0 may be used to show integer evaluation values.
-              - If no *actionsList* is provided, the decision actions are ordered from
-                the best to the worst following the ranking of the NormedQuatilesRatingDigraph instance.              - It may interesting in some cases to use *RankingRule* = 'NetFlows'.
-              - With *Correlations* = *True* and *criteriaList* = *None*, the criteria will be presented from left to right in decreasing
-                order of the correlations between the marginal criterion based ranking and the global ranking used for
-                presenting the decision alternatives.
-              - Computing the marginal correlations may be boosted with Threading = True,
-                if multiple parallel computing cores are available.
+              - If no *actionsList* is provided, the decision actions are ordered from the best to the worst following the ranking of the NormedQuatilesRatingDigraph instance.              
+              - It may interesting in some cases to use *RankingRule* = 'NetFlows'.
+              - With *Correlations* = *True* and *criteriaList* = *None*, the criteria will be presented from left to right in decreasing order of the correlations between the marginal criterion based ranking and the global ranking used for presenting the decision alternatives.
+              - Computing the marginal correlations may be boosted with Threading = True, if multiple parallel computing cores are available.
 
-        Suppose ew observe the following rating reslut:
+        Suppose we observe the following rating result:
         
             >>> nqr.showQuantilesRating()
              [0.50 - 0.75[ ['a1008', 'a1006', 'a1005', 'a1001', 'a1003', 'a1010']

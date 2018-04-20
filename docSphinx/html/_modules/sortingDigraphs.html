@@ -4115,15 +4115,12 @@
 
 <span class="sd">              - *actionsList* and *criteriaList*, if provided,  give the possibility to show the decision alternatives, resp. criteria, in a given ordering.</span>
 <span class="sd">              - *ndigits* = 0 may be used to show integer evaluation values.</span>
-<span class="sd">              - If no *actionsList* is provided, the decision actions are ordered from</span>
-<span class="sd">                the best to the worst following the ranking of the NormedQuatilesRatingDigraph instance.              - It may interesting in some cases to use *RankingRule* = &#39;NetFlows&#39;.</span>
-<span class="sd">              - With *Correlations* = *True* and *criteriaList* = *None*, the criteria will be presented from left to right in decreasing</span>
-<span class="sd">                order of the correlations between the marginal criterion based ranking and the global ranking used for</span>
-<span class="sd">                presenting the decision alternatives.</span>
-<span class="sd">              - Computing the marginal correlations may be boosted with Threading = True,</span>
-<span class="sd">                if multiple parallel computing cores are available.</span>
+<span class="sd">              - If no *actionsList* is provided, the decision actions are ordered from the best to the worst following the ranking of the NormedQuatilesRatingDigraph instance.              </span>
+<span class="sd">              - It may interesting in some cases to use *RankingRule* = &#39;NetFlows&#39;.</span>
+<span class="sd">              - With *Correlations* = *True* and *criteriaList* = *None*, the criteria will be presented from left to right in decreasing order of the correlations between the marginal criterion based ranking and the global ranking used for presenting the decision alternatives.</span>
+<span class="sd">              - Computing the marginal correlations may be boosted with Threading = True, if multiple parallel computing cores are available.</span>
 
-<span class="sd">        Suppose ew observe the following rating reslut:</span>
+<span class="sd">        Suppose we observe the following rating result:</span>
 <span class="sd">        </span>
 <span class="sd">            &gt;&gt;&gt; nqr.showQuantilesRating()</span>
 <span class="sd">             [0.50 - 0.75[ [&#39;a1008&#39;, &#39;a1006&#39;, &#39;a1005&#39;, &#39;a1001&#39;, &#39;a1003&#39;, &#39;a1010&#39;]</span>
