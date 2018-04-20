@@ -1965,7 +1965,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         from cIntegerOutrankingDigraphs import IntegerBipolarOutrankingDigraph
 
         if Comments:
-            print('Cythonized QuantilesRankingDigraph class')
+            print('Cythonized cQuantilesRankingDigraph class')
    
         ttot = time()
         self.runTimes = {}
@@ -2090,6 +2090,8 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                 NUMBER_OF_WORKERS = nbrOfCPUs
                 tasksIndex = [(i,len(decomposition[i][1])) for i in range(nc)]
                 tasksIndex.sort(key=lambda pos: pos[1],reverse=True)
+                if Comments:
+                    print('Maximal component size: %d' % tasksIndex[0][1])
                 TASKS = [(Comments,(pos[0],nc,tempDirName)) for pos in tasksIndex]
                 task_queue = Queue()
                 for task in TASKS:
