@@ -16,6 +16,7 @@ def testSparseOutrankingDigraph():
     MP = True
     t0 = time()
     ctp = Random3ObjectivesPerformanceTableau(numberOfActions=100,seed=100)
+    print(ctp)
     print(time()-t0)
     print(total_size(ctp.evaluation))
     bg1 = SparseIntegerOutrankingDigraph(ctp,quantiles=10,quantilesOrderingStrategy='average',
@@ -69,6 +70,7 @@ def testBestChoiceRecommendation():
     print('==>> Testing ordinal correlations')
     MP = True
     tp = RandomCBPerformanceTableau(numberOfActions=200,Threading=MP,seed=None)
+    print(tp)
     bg2 = SparseIntegerOutrankingDigraph(tp,quantiles=35,quantilesOrderingStrategy='average',
                                 LowerClosed=False,
                                minimalComponentSize=10,
@@ -89,9 +91,12 @@ def testSparseModelFitness():
     fo.write('"c","d"\n')
     fo.close()
     statistics = {'correlation': 0.0, 'determination': 0.0}
+    seed = 0
     for s in range(Nsim):
+        s += 1
         print(s)
-        tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrOfActions,numberOfCriteria=nbrOfCriteria)
+        tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrOfActions,numberOfCriteria=nbrOfCriteria,seed=s)
+        print(tp)
         tp.showObjectives()
         bg1 = SparseIntegerOutrankingDigraph(tp,quantiles=qTiles,quantilesOrderingStrategy='average',
                                 LowerClosed=False,

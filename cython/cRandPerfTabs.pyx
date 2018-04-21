@@ -309,6 +309,7 @@ class RandomPerformanceTableau(cPerformanceTableau):
         from copy import copy
 
         # fixing the seed (None by default)
+        self.randomSeed = seed
         import random
         random.seed(seed)
         from randomNumbers import ExtendedTriangularRandomVariable as RNGTr
@@ -530,6 +531,7 @@ class RandomRankPerformanceTableau(cPerformanceTableau):
         cdef float randeval 
         
         # set random seed
+        self.randomSeed = seed
         import random
         random.seed(seed)
 
@@ -655,6 +657,7 @@ class RandomCoalitionsPerformanceTableau(cPerformanceTableau):
         # naming
         self.name = 'cRandCoalitionsPerfTab'
         # randomizer init
+        self.randomSeed = seed
         import random
         random.seed(seed)
         if RandomCoalitions:
@@ -1022,6 +1025,7 @@ class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
         # naming
         self.name = 'random3ObjectivesPerfTab'
         # randomizer init
+        self.randomSeed = seed
         import random
         random.seed(seed)
 
@@ -1390,6 +1394,7 @@ class RandomCBPerformanceTableau(cPerformanceTableau):
         
         self.name = 'randomCBperftab'
         # randomizer init
+        self.randomSeed = seed
         import random
         random.seed(seed)
 

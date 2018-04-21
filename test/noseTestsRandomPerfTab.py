@@ -20,6 +20,7 @@ def testRandomPerformanceTableau():
                                  commonMode=('normal',50,20),
                                  seed=100)
     t.showAll()
+    print(t)
     print(t.computeWeightedAveragePerformances(isNormalized=True,
                                                lowValue=0.0,highValue=20.0))
     t1 = RandomPerformanceTableau(weightScale=(1,10),
@@ -48,6 +49,7 @@ def testRandomRankPerformanceTableau():
                                  numberOfCriteria=7,
                                  seed=100)
     t.showAll()
+    print(t)
     print(t.computeWeightedAveragePerformances(isNormalized=True,
                                                lowValue=0.0,highValue=20.0))
     t1 = RandomRankPerformanceTableau(weightScale=(1,10),
@@ -61,6 +63,7 @@ def testFullRandomPerformanceTableau():
                                  numberOfCriteria=7,
                                  seed=100)
     t.showAll()
+    print(t)
     print(t.computeWeightedAveragePerformances(isNormalized=True,
                                                lowValue=0.0,highValue=20.0))
     t = FullRandomPerformanceTableau(weightScale=(1,10),
@@ -85,6 +88,7 @@ def testCBPerformanceTableau():
                                    commonMode=["normal",50.0,25.0],
                                    missingDataProbability=0.5,
                                    seed=100,Debug=True)
+    print(t)
     t.saveXMCDA(fileName='randomPerformanceTableau',servingD3=False)
     t.showCriteria(Debug=False)
     t.showStatistics(Debug=True)
@@ -115,6 +119,7 @@ def test3ObjectivesPerformanceTableau():
                                             commonMode=['triangular',
                                                                 'variable',
                                                                 0.5])
+    print(t)
     t.saveXMCDA2('test',servingD3=False)
     t.showCriteria(IntegerWeights=True)
     g = BipolarOutrankingDigraph(t)
@@ -128,6 +133,7 @@ def testCoalitionsPerformanceTableau():
                                            Coalitions=False,\
                                            RandomCoalitions=True,\
                                            weightDistribution="equicoalitions")
+    print(t)
     t.saveXMCDA2('test',servingD3=False)
     t.showCriteria(IntegerWeights=True)
     g = BipolarOutrankingDigraph(t)
@@ -144,6 +150,7 @@ def testRandomCoalitionsPerformanceTableau():
                                    OrdinalScales=False,\
                                    Coalitions=True,\
                                    RandomCoalitions=False)
+    print(t)
     t.saveXMCDA2(fileName='randomS3PerformanceTableau',servingD3=False)
     for g in t.criteria:
         print('==>>', g, t.computeThresholdPercentile(g,'ind'))

@@ -410,6 +410,10 @@ The performance evaluations of each decision alternative on each criterion are g
         """
         reprString = '*------- PerformanceTableau instance description ------*\n'
         reprString += 'Instance class   : %s\n' % self.__class__.__name__
+        try:
+            reprString += 'Seed             : %s\n' % str(self.randomSeed)
+        except:
+            pass
         reprString += 'Instance name    : %s\n' % self.name
         reprString += '# Actions        : %d\n' % len(self.actions)
         try:
