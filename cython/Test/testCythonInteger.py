@@ -136,9 +136,13 @@ for s in range(sampleSize):
                 bg2.runTimes['sorting'],seed)
     fo.write(wstr)
     fo.close()
-    print(wstr)
+    #print(wstr)
+    print(bg2)
+    fo = open('bg2res.txt','a')
+    fo.write(str(bg2))
+    fo.close()
 # .....
-print('results in file = %s' % fileName)
+print('results in files <%s> and <%s>' % (fileName,'bg2res.txt'))
 
 
 

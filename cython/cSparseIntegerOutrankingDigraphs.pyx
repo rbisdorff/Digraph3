@@ -2053,13 +2053,18 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         self.nd = nd
         if not self.sortingParameters['Threading']:
             self.nbrOfCPUs = 1
+            maximalComponentSize = 0
             components = OrderedDict()
             boostedRanking = []
             for i in range(1,nc+1):
                 comp = decomposition[i-1]
                 compKey = ('c%%0%dd' % (self.nd)) % (i)
                 components[compKey] = {'rank':i}
-                pt = PartialPerformanceTableau(perfTab,actionsSubset=comp[1])
+                compActions = comp[1]
+                nca = len(compActions)
+                if nca > maximalComponentSize:
+                    maximalComponentSize = nca
+                pt = PartialPerformanceTableau(perfTab,actionsSubset=compActions)
                 components[compKey]['lowQtileLimit'] = comp[0][1]
                 components[compKey]['highQtileLimit'] = comp[0][0]
                 pg = IntegerBipolarOutrankingDigraph(pt,
@@ -2085,13 +2090,15 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                 print('Threading ...')
             #tdump = time()
             from tempfile import TemporaryDirectory,mkdtemp
+            maximalComponentSize = 0
             with TemporaryDirectory(dir=tempDir) as tempDirName:
                 ## tasks queue and workers launching
                 NUMBER_OF_WORKERS = nbrOfCPUs
                 tasksIndex = [(i,len(decomposition[i][1])) for i in range(nc)]
                 tasksIndex.sort(key=lambda pos: pos[1],reverse=True)
+                maximalComponentSize += tasksIndex[0][1]
                 if Comments:
-                    print('Maximal component size: %d' % tasksIndex[0][1])
+                    print('Maximal component size: %d' % maximalComponentSize)
                 TASKS = [(Comments,(pos[0],nc,tempDirName)) for pos in tasksIndex]
                 task_queue = Queue()
                 for task in TASKS:
@@ -2126,13 +2133,13 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
 
         self.components = components
         fillRate = 0
-        maximalComponentSize = 0
+        #maximalComponentSize = 0
         for compKey,comp in components.items():
             #pg = comp['subGraph']
             componentRanking = components[compKey]['componentRanking']
             npg = len(componentRanking)
-            if npg > maximalComponentSize:
-                maximalComponentSize = npg
+            #if npg > maximalComponentSize:
+            #    maximalComponentSize = npg
             fillRate += npg*(npg-1)
             for x in componentRanking:
                 self.actions[x]['component'] = compKey
