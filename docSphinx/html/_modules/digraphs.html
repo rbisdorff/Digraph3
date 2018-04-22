@@ -2667,6 +2667,12 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">weakCondorcetWinners</span><span class="p">()</span></div>
 
+<div class="viewcode-block" id="Digraph.computeWeakCondorcetLoosers"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeWeakCondorcetLoosers">[docs]</a>    <span class="k">def</span> <span class="nf">computeWeakCondorcetLoosers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Wrapper for weakCondorcetLoosers().</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">weakCondorcetLoosers</span><span class="p">()</span></div>
+
 <div class="viewcode-block" id="Digraph.weakCondorcetWinners"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.weakCondorcetWinners">[docs]</a>    <span class="k">def</span> <span class="nf">weakCondorcetWinners</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the set of decision actions x such that</span>
@@ -2693,11 +2699,43 @@
             <span class="k">pass</span>
         <span class="k">return</span> <span class="n">wCW</span></div>
 
+<div class="viewcode-block" id="Digraph.weakCondorcetLoosers"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.weakCondorcetLoosers">[docs]</a>    <span class="k">def</span> <span class="nf">weakCondorcetLoosers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders the set of decision actions x such that</span>
+<span class="sd">        self.relation[x][y] &lt;= self.valuationdomain[&#39;med&#39;]</span>
+<span class="sd">        for all y != x.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#actions = self.actions</span>
+        <span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span>
+        <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
+        <span class="n">wCL</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">rx</span> <span class="ow">in</span> <span class="n">relation</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c1">#rx = relation[x]</span>
+            <span class="n">Looser</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">for</span> <span class="n">y</span><span class="p">,</span><span class="n">rxy</span> <span class="ow">in</span> <span class="n">rx</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">y</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">rx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
+                        <span class="n">Looser</span> <span class="o">=</span> <span class="kc">False</span>
+                        <span class="k">break</span>
+            <span class="k">if</span> <span class="n">Looser</span><span class="p">:</span>
+                <span class="n">wCL</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">wCL</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">return</span> <span class="n">wCL</span></div>
+
 <div class="viewcode-block" id="Digraph.computeCondorcetWinners"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeCondorcetWinners">[docs]</a>    <span class="k">def</span> <span class="nf">computeCondorcetWinners</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Wrapper for condorcetWinners().</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">condorcetWinners</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Digraph.computeCondorcetLoosers"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeCondorcetLoosers">[docs]</a>    <span class="k">def</span> <span class="nf">computeCondorcetLoosers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Wrapper for condorcetLoosers().</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">condorcetLoosers</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="Digraph.condorcetWinners"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.condorcetWinners">[docs]</a>    <span class="k">def</span> <span class="nf">condorcetWinners</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -2724,6 +2762,32 @@
         <span class="k">except</span><span class="p">:</span>
             <span class="k">pass</span>
         <span class="k">return</span> <span class="n">CW</span></div>
+
+<div class="viewcode-block" id="Digraph.condorcetLoosers"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.condorcetLoosers">[docs]</a>    <span class="k">def</span> <span class="nf">condorcetLoosers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders the set of decision actions x such that</span>
+<span class="sd">        self.relation[x][y] &lt; self.valuationdomain[&#39;med&#39;]</span>
+<span class="sd">        for all y != x.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#actions = self.actions</span>
+        <span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span>
+        <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
+        <span class="n">CL</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">rx</span> <span class="ow">in</span> <span class="n">relation</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c1">#rx = relation[x]</span>
+            <span class="n">Looser</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">for</span> <span class="n">y</span><span class="p">,</span><span class="n">rxy</span> <span class="ow">in</span> <span class="n">rx</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">y</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">rxy</span> <span class="o">&gt;=</span> <span class="n">Med</span><span class="p">:</span>
+                        <span class="n">Looser</span> <span class="o">=</span> <span class="kc">False</span>
+                        <span class="k">break</span>
+            <span class="k">if</span> <span class="n">Looser</span><span class="p">:</span>
+                <span class="n">CL</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">CL</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">return</span> <span class="n">CL</span></div>
 
 <div class="viewcode-block" id="Digraph.forcedBestSingleChoice"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.forcedBestSingleChoice">[docs]</a>    <span class="k">def</span> <span class="nf">forcedBestSingleChoice</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

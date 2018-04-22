@@ -886,6 +886,12 @@ Based on the triangles summation formula.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="digraphs.Digraph.computeCondorcetLoosers">
+<code class="descname">computeCondorcetLoosers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeCondorcetLoosers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeCondorcetLoosers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper for condorcetLoosers().</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="digraphs.Digraph.computeCondorcetWinners">
 <code class="descname">computeCondorcetWinners</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeCondorcetWinners"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeCondorcetWinners" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wrapper for condorcetWinners().</p>
@@ -1387,6 +1393,12 @@ of the non reflexive pairs.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="digraphs.Digraph.computeWeakCondorcetLoosers">
+<code class="descname">computeWeakCondorcetLoosers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeWeakCondorcetLoosers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeWeakCondorcetLoosers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper for weakCondorcetLoosers().</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="digraphs.Digraph.computeWeakCondorcetWinners">
 <code class="descname">computeWeakCondorcetWinners</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeWeakCondorcetWinners"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeWeakCondorcetWinners" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wrapper for weakCondorcetWinners().</p>
@@ -1411,6 +1423,14 @@ Fills self.newmisset, self.upmis, self.downmis.</p>
 <code class="descname">computeupdown2irred</code><span class="sig-paren">(</span><em>s</em>, <em>S</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeupdown2irred"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeupdown2irred" title="Permalink to this definition">¶</a></dt>
 <dd><p>Help method for show_MIS_HB1 method.
 Fills self.newmisset, self.upmis, self.downmis.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.Digraph.condorcetLoosers">
+<code class="descname">condorcetLoosers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.condorcetLoosers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.condorcetLoosers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the set of decision actions x such that
+self.relation[x][y] &lt; self.valuationdomain[&#8216;med&#8217;]
+for all y != x.</p>
 </dd></dl>
 
 <dl class="method">
@@ -2415,6 +2435,14 @@ Annals Of Discrete Mathematics 57 2nd Ed. , Elsevier 2004, Algorithm 2.4 p.44.</
 <dt id="digraphs.Digraph.weakAneighbors">
 <code class="descname">weakAneighbors</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.weakAneighbors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.weakAneighbors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the set of absorbed in-neighbors of a node.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.Digraph.weakCondorcetLoosers">
+<code class="descname">weakCondorcetLoosers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.weakCondorcetLoosers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.weakCondorcetLoosers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the set of decision actions x such that
+self.relation[x][y] &lt;= self.valuationdomain[&#8216;med&#8217;]
+for all y != x.</p>
 </dd></dl>
 
 <dl class="method">

@@ -2617,6 +2617,12 @@ class Digraph(object):
         """
         return self.weakCondorcetWinners()
 
+    def computeWeakCondorcetLoosers(self):
+        """
+        Wrapper for weakCondorcetLoosers().
+        """
+        return self.weakCondorcetLoosers()
+
     def weakCondorcetWinners(self):
         """
         Renders the set of decision actions x such that
@@ -2643,11 +2649,43 @@ class Digraph(object):
             pass
         return wCW
 
+    def weakCondorcetLoosers(self):
+        """
+        Renders the set of decision actions x such that
+        self.relation[x][y] <= self.valuationdomain['med']
+        for all y != x.
+        """
+        #actions = self.actions
+        relation = self.relation
+        Med = self.valuationdomain['med']
+        wCL = []
+        for x,rx in relation.items():
+            #rx = relation[x]
+            Looser = True
+            for y,rxy in rx.items():
+                if x != y:
+                    if rx[y] > Med:
+                        Looser = False
+                        break
+            if Looser:
+                wCL.append(x)
+        try:
+            wCL.sort()
+        except:
+            pass
+        return wCL
+
     def computeCondorcetWinners(self):
         """
         Wrapper for condorcetWinners().
         """
         return self.condorcetWinners()
+
+    def computeCondorcetLoosers(self):
+        """
+        Wrapper for condorcetLoosers().
+        """
+        return self.condorcetLoosers()
 
     def condorcetWinners(self):
         """
@@ -2674,6 +2712,32 @@ class Digraph(object):
         except:
             pass
         return CW
+
+    def condorcetLoosers(self):
+        """
+        Renders the set of decision actions x such that
+        self.relation[x][y] < self.valuationdomain['med']
+        for all y != x.
+        """
+        #actions = self.actions
+        relation = self.relation
+        Med = self.valuationdomain['med']
+        CL = []
+        for x,rx in relation.items():
+            #rx = relation[x]
+            Looser = True
+            for y,rxy in rx.items():
+                if x != y:
+                    if rxy >= Med:
+                        Looser = False
+                        break
+            if Looser:
+                CL.append(x)
+        try:
+            CL.sort()
+        except:
+            pass
+        return CL
 
     def forcedBestSingleChoice(self):
         """

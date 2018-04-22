@@ -150,6 +150,7 @@
         <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span>
 
         <span class="c1"># fixing the seed (None by default)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">randomSeed</span> <span class="o">=</span> <span class="n">seed</span>
         <span class="kn">import</span> <span class="nn">random</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="k">import</span> <span class="n">ExtendedTriangularRandomVariable</span> <span class="k">as</span> <span class="n">RNGTr</span>
@@ -608,6 +609,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># set random seed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">randomSeed</span> <span class="o">=</span> <span class="n">seed</span>
         <span class="kn">import</span> <span class="nn">random</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
 
@@ -725,6 +727,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;fullrandomperftab&#39;</span>
 
         <span class="c1"># set random seaad</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">randomSeed</span> <span class="o">=</span> <span class="n">seed</span>
         <span class="kn">import</span> <span class="nn">random</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
 
@@ -1033,6 +1036,7 @@
         <span class="c1"># naming</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;randomCoalitionsPerfTab&#39;</span>
         <span class="c1"># randomizer init</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">randomSeed</span> <span class="o">=</span> <span class="n">seed</span>
         <span class="kn">import</span> <span class="nn">random</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">RandomCoalitions</span><span class="p">:</span>
@@ -1442,6 +1446,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">missingDataProbability</span> <span class="o">=</span> <span class="n">missingDataProbability</span>
         
         <span class="c1"># randomizer init</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">randomSeed</span> <span class="o">=</span> <span class="n">seed</span>
         <span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">Random</span>
         <span class="n">_random</span> <span class="o">=</span> <span class="n">Random</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="n">_random1</span> <span class="o">=</span> <span class="n">Random</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
@@ -2274,6 +2279,7 @@
         <span class="kn">import</span> <span class="nn">random</span>
 
         <span class="c1"># randomizer init</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">randomSeed</span> <span class="o">=</span> <span class="n">seed</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
 
         <span class="c1"># store argument values</span>

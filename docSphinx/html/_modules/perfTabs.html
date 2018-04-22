@@ -460,6 +460,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">reprString</span> <span class="o">=</span> <span class="s1">&#39;*------- PerformanceTableau instance description ------*</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Instance class   : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Seed             : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">randomSeed</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
         <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Instance name    : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
         <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;# Actions        : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
