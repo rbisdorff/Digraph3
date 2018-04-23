@@ -1069,7 +1069,8 @@
         <span class="n">ttot</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 
         <span class="c1"># data input</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Data input&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Data input&#39;</span><span class="p">)</span>
         
         <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="n">perfTab</span> <span class="o">=</span> <span class="n">argPerfTab</span>
@@ -1090,9 +1091,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dimension</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">criteria</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;dataInput&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span> <span class="p">}</span>
-        <span class="c1">#if Comments:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;data input time: </span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;dataInput&#39;</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="c1">#print(self.runTimes)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;data input time: </span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;dataInput&#39;</span><span class="p">]))</span>
 
         <span class="c1">#######</span>
         <span class="k">if</span> <span class="n">quantiles</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>

@@ -1019,7 +1019,8 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         ttot = time()
 
         # data input
-        print('Data input')
+        if Comments:
+            print('Data input')
         
         t0 = time()
         perfTab = argPerfTab
@@ -1040,9 +1041,9 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         self.runTimes = {}
         self.dimension = len(perfTab.criteria)
         self.runTimes = {'dataInput': (time() - t0) }
-        #if Comments:
-        print(self.runTimes)
-        print('data input time: %.4f' % (self.runTimes['dataInput']))
+        if Comments:
+            #print(self.runTimes)
+            print('data input time: %.4f' % (self.runTimes['dataInput']))
 
         #######
         if quantiles == None:

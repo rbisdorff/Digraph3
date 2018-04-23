@@ -49,7 +49,7 @@ def testApprovalVotingProfiles():
     print(g.condorcetWinners())
     print(g.weakCondorcetWinners())
     print(g.condorcetLoosers())
-    print(g.weakcondorcetLoosers())
+    print(g.weakCondorcetLoosers())
     g.showPreKernels()
     g.showRubyChoice()
     g.showBadChoices()

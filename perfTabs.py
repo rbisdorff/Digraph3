@@ -1123,13 +1123,15 @@ The performance evaluations of each decision alternative on each criterion are g
         perfx = self.evaluation[criterion][action]
         if perfx != Decimal('-999'):
             try:
-                indx = self.criteria[criterion]['thresholds']['ind'][0] + self.criteria[criterion]['thresholds']['ind'][1]*perfx
+                indx = self.criteria[criterion]['thresholds']['ind'][0]\
+                       + self.criteria[criterion]['thresholds']['ind'][1]*perfx
                 ## indx = self.criteria[criterion]['thresholds']['ind'][0] + self.criteria[criterion]['thresholds']['pref'][1]*perfx
             except:
                 indx = Decimal('0')
             quantile = float(len([y for y in perfsy\
                                   if (y in self.actions) and (perfsy[y] != Decimal(-999)) and \
-                                  (perfsy[y] <= perfx+indx)]) )/float(len(self.actions))
+                                  #(perfsy[y] <= perfx+indx)]) )/float(len(self.actions))
+                                  (perfsy[y] <= perfx)]) )/float(len(self.actions))
             return quantile
         else:
             return 'NA'
@@ -2294,7 +2296,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                    ndigits=2,
                                    SparseModel=False,
                                    minimalComponentSize=1,
-                                   RankingRule='Copeland',
+                                   rankingRule='Copeland',
                                    quantiles=None,
                                    strategy='average',
                                    Correlations=False,
@@ -2315,7 +2317,7 @@ The performance evaluations of each decision alternative on each criterion are g
               - The *minimalComponentSize* allows to control the fill rate of the pre-ranked model.
                 If *minimalComponentSize* = *n* (the number of decision actions) both the pre-ranked model will be
                 in fact equivalent to the standard model.
-              - It may interesting in some cases to use *RankingRule* = 'NetFlows'.
+              - It may interesting in some cases to use *rankingRule* = 'NetFlows'.
               - Quantiles used for the pre-ranked decomposition are put by default to *n*
                 (the number of decision alternatives) for *n* < 50. For larger cardinalities up to 1000, quantiles = *n* /10.
                 For bigger performance tableaux the *quantiles* parameter may be set to a much lower value
@@ -2351,7 +2353,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                              argActionsList=actionsList,
                                              SparseModel=SparseModel,
                                              minimalComponentSize=minimalComponentSize,
-                                             RankingRule=RankingRule,
+                                             rankingRule=rankingRule,
                                              quantiles=quantiles,
                                              strategy=strategy,
                                              ndigits=ndigits,
@@ -2367,9 +2369,9 @@ The performance evaluations of each decision alternative on each criterion are g
 
     def htmlPerformanceHeatmap(self,argCriteriaList=None,
                                argActionsList=None,
-                               SparseModel=True,
+                               SparseModel=False,
                                minimalComponentSize=1,
-                               RankingRule='Copeland',
+                               rankingRule='Copeland',
                                quantiles=None,
                                strategy='average',
                                ndigits=2,
@@ -2440,17 +2442,19 @@ The performance evaluations of each decision alternative on each criterion are g
         html += '</head>\n<body>\n'
         html += '<h2>%s</h2>\n' % pageTitle
         
-        from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
         if argCriteriaList == None:
             argCriteriaList = list(self.criteria.keys())
             criteriaList = None
         else:
             criteriaList = argCriteriaList
 
-        if RankingRule == None:
-            RankingRule = 'Copeland'
+        if rankingRule == None:
+            rankingRule = 'Copeland'
+        #html += '<h3>Ranking rule: %s</h3>\n' % rankingRule
+        
         na = len(self.actions)
         if SparseModel:
+            from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
             if quantiles == None:
                 if na < 100:
                     q = 5
@@ -2460,14 +2464,14 @@ The performance evaluations of each decision alternative on each criterion are g
                 q = quantiles
             g = PreRankedOutrankingDigraph(self,quantiles=q,LowerClosed=False,
                                            minimalComponentSize=minimalComponentSize,
-                                       componentRankingRule=RankingRule,Threading=Threading,
+                                       componentRankingRule=rankingRule,Threading=Threading,
                                        nbrOfCPUs=nbrOfCPUs)
             if argActionsList == None:
                 actionsList = g.boostedRanking
             else:
                 actionsList = argActionsList
         else: # standard outranking model
-            if RankingRule == 'NetFlows':
+            if rankingRule == 'NetFlows':
 ##                if quantiles == None:
 ##                    quantiles = na
                 from outrankingDigraphs import BipolarOutrankingDigraph
@@ -2566,7 +2570,7 @@ The performance evaluations of each decision alternative on each criterion are g
         if criteriaCorrelation != None:
             html += '<tr><th bgcolor=%s>tau<sup>(*)</sup></th>' % (columnHeaderColor)
             for cg in criteriaCorrelation:
-                html += '<td align="center">%.2f</td>' % (cg[0])
+                html += '<td align="center">%+.2f</td>' % (cg[0])
             html += '</tr>\n'
         if Debug:
             print(html)
@@ -2598,9 +2602,10 @@ The performance evaluations of each decision alternative on each criterion are g
         html += '</tr>\n'
         html += '</table>\n'
         if criteriaCorrelation != None:
-            html += '<i>(*) tau: Ordinal (Kendall) correlation between marginal criterion and global ranking relation.</i><br/>\n'
-        if rankCorrelation != None:
-            html += '<i>Ordinal (Kendall) correlation between global ranking and outranking relation: %.2f.</i><br/>\n' % (rankCorrelation['correlation'])
+            html += '<b>(*) tau:</b> <i>Ordinal (Kendall) correlation between marginal criterion and global ranking relation</i><br/>\n'
+        #if rankCorrelation != None:
+        html += '<i>Ranking rule</i>: <b>%s</b><br/>\n' % rankingRule
+        html += '<i>Ordinal (Kendall) correlation between global ranking and global outranking relation:</i> <b>%+.3f</b><br/>\n' % (rankCorrelation['correlation'])
         html += '</body></html>'
         return html
 
@@ -7241,10 +7246,10 @@ if __name__ == "__main__":
 ##    qsrbc = QuantilesRankingDigraph(t,LowerClosed=False,PrefThresholds=False,Threading=False)
 ##    qsrbc.showSorting()
 ##    t.showHTMLPerformanceHeatmap(Threading=False,Correlations=True,ndigits=0)
-##    t.showHTMLPerformanceHeatmap(quantiles=11,Threading=False,RankingRule=None,
+##    t.showHTMLPerformanceHeatmap(quantiles=11,Threading=False,rankingRule=None,
 ##                                 Correlations=True,ndigits=0)
 ##    t.showHTMLPerformanceHeatmap(actionsList=list(t.actions),criteriaList=list(t.criteria.keys()),
-##                                 Threading=False,RankingRule=None,SparseModel=False,
+##                                 Threading=False,rankingRule=None,SparseModel=False,
 ##                                Correlations=True,ndigits=0,
 ##                                 Debug=False)
 ##    t.showHTMLPerformanceQuantiles(Sorted=False)

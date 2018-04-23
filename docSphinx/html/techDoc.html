@@ -4226,7 +4226,7 @@ Return a Boolen value.</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.htmlPerformanceHeatmap">
-<code class="descname">htmlPerformanceHeatmap</code><span class="sig-paren">(</span><em>argCriteriaList=None</em>, <em>argActionsList=None</em>, <em>SparseModel=True</em>, <em>minimalComponentSize=1</em>, <em>RankingRule='Copeland'</em>, <em>quantiles=None</em>, <em>strategy='average'</em>, <em>ndigits=2</em>, <em>contentCentered=True</em>, <em>colorLevels=None</em>, <em>pageTitle='Performance Heatmap'</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.htmlPerformanceHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.htmlPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
+<code class="descname">htmlPerformanceHeatmap</code><span class="sig-paren">(</span><em>argCriteriaList=None</em>, <em>argActionsList=None</em>, <em>SparseModel=False</em>, <em>minimalComponentSize=1</em>, <em>rankingRule='Copeland'</em>, <em>quantiles=None</em>, <em>strategy='average'</em>, <em>ndigits=2</em>, <em>contentCentered=True</em>, <em>colorLevels=None</em>, <em>pageTitle='Performance Heatmap'</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.htmlPerformanceHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.htmlPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table
 actions x criteria in html format.</p>
 <p>See the corresponding perfTabs.showHTMLPerformanceHeatMap() method.</p>
@@ -4339,7 +4339,7 @@ the values observed in the performance Tableau.</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap">
-<code class="descname">showHTMLPerformanceHeatmap</code><span class="sig-paren">(</span><em>actionsList=None</em>, <em>criteriaList=None</em>, <em>colorLevels=7</em>, <em>pageTitle=None</em>, <em>ndigits=2</em>, <em>SparseModel=False</em>, <em>minimalComponentSize=1</em>, <em>RankingRule='Copeland'</em>, <em>quantiles=None</em>, <em>strategy='average'</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.showHTMLPerformanceHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showHTMLPerformanceHeatmap</code><span class="sig-paren">(</span><em>actionsList=None</em>, <em>criteriaList=None</em>, <em>colorLevels=7</em>, <em>pageTitle=None</em>, <em>ndigits=2</em>, <em>SparseModel=False</em>, <em>minimalComponentSize=1</em>, <em>rankingRule='Copeland'</em>, <em>quantiles=None</em>, <em>strategy='average'</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.showHTMLPerformanceHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
 <dd><p>shows the html heatmap version of the performance tableau in a browser window
 (see perfTabs.htmlPerformanceHeatMap() method ).</p>
 <p><strong>Parameters</strong>:</p>
@@ -4353,7 +4353,7 @@ When the <em>SparseModel</em> flag is put to <em>True</em>, a sparse <em>PreRank
 <li>The <em>minimalComponentSize</em> allows to control the fill rate of the pre-ranked model.
 If <em>minimalComponentSize</em> = <em>n</em> (the number of decision actions) both the pre-ranked model will be
 in fact equivalent to the standard model.</li>
-<li>It may interesting in some cases to use <em>RankingRule</em> = &#8216;NetFlows&#8217;.</li>
+<li>It may interesting in some cases to use <em>rankingRule</em> = &#8216;NetFlows&#8217;.</li>
 <li>Quantiles used for the pre-ranked decomposition are put by default to <em>n</em>
 (the number of decision alternatives) for <em>n</em> &lt; 50. For larger cardinalities up to 1000, quantiles = <em>n</em> /10.
 For bigger performance tableaux the <em>quantiles</em> parameter may be set to a much lower value
@@ -7282,7 +7282,7 @@ For each voter <em>v</em>, the rank performance of candidate <em>x</em> correspo
 
 <dl class="method">
 <dt id="votingProfiles.LinearVotingProfile.showHTMLVotingHeatmap">
-<code class="descname">showHTMLVotingHeatmap</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>actionsList=None</em>, <em>SparseModel=False</em>, <em>minimalComponentSize=1</em>, <em>RankingRule='Copeland'</em>, <em>quantiles=None</em>, <em>strategy='average'</em>, <em>ndigits=0</em>, <em>colorLevels=None</em>, <em>pageTitle='Voting Heatmap'</em>, <em>Correlations=True</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#LinearVotingProfile.showHTMLVotingHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.LinearVotingProfile.showHTMLVotingHeatmap" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showHTMLVotingHeatmap</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>actionsList=None</em>, <em>SparseModel=False</em>, <em>minimalComponentSize=1</em>, <em>rankingRule='Copeland'</em>, <em>quantiles=None</em>, <em>strategy='average'</em>, <em>ndigits=0</em>, <em>colorLevels=None</em>, <em>pageTitle='Voting Heatmap'</em>, <em>Correlations=True</em>, <em>Threading=False</em>, <em>nbrOfCPUs=1</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#LinearVotingProfile.showHTMLVotingHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.LinearVotingProfile.showHTMLVotingHeatmap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show the linear voting profile as a rank performance heatmap.
 The linear voting profile is previously saved to a stored Performance Tableau.</p>
 <p>(see perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap() )</p>

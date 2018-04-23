@@ -539,7 +539,7 @@ class LinearVotingProfile(VotingProfile):
                               actionsList=None,\
                               SparseModel=False,\
                               minimalComponentSize=1, \
-                              RankingRule='Copeland',\
+                              rankingRule='Copeland',\
                               quantiles=None,\
                               strategy='average', \
                               ndigits=0,\
@@ -562,7 +562,7 @@ class LinearVotingProfile(VotingProfile):
         t = PerformanceTableau(perfTabFileName)
         t.showHTMLPerformanceHeatmap(criteriaList=criteriaList, actionsList=actionsList,\
                               SparseModel=SparseModel, minimalComponentSize=minimalComponentSize, \
-                              RankingRule=RankingRule, quantiles=quantiles, strategy=strategy, \
+                              rankingRule=rankingRule, quantiles=quantiles, strategy=strategy, \
                               ndigits=ndigits, colorLevels=colorLevels, \
                               pageTitle=pageTitle, \
                               Correlations=True, Threading=Threading, nbrOfCPUs=nbrOfCPUs, Debug=Debug)
