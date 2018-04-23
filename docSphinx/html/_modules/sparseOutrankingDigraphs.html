@@ -1854,187 +1854,188 @@
             <span class="n">ordering</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">boostedOrder</span>
         <span class="k">return</span> <span class="n">ordering</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">action</span><span class="p">)</span> <span class="o">+</span><span class="mi">1</span></div>
 
-<div class="viewcode-block" id="PreRankedOutrankingDigraph.htmlPerformanceHeatmap"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.htmlPerformanceHeatmap">[docs]</a>    <span class="k">def</span> <span class="nf">htmlPerformanceHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argCriteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                               <span class="n">argActionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                               <span class="n">SparseModel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                               <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                               <span class="n">RankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">,</span>
-                               <span class="n">quantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                               <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
-                               <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-                               <span class="n">contentCentered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                               <span class="n">colorLevels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                               <span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Performance Heatmap&#39;</span><span class="p">,</span>
-                               <span class="n">Correlations</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                               <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                               <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                               <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Specialization of the generic perfTabs method for spare outranking digraphs.</span>
-
-<span class="sd">        Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table</span>
-<span class="sd">        actions x criteria in html format.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
-        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">flatten</span>
-
-        <span class="n">brewerRdYlGn9Colors</span> <span class="o">=</span> <span class="p">[(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.1111&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#D53E4F&quot;&#39;</span><span class="p">),</span>
-                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.2222&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#F46D43&quot;&#39;</span><span class="p">),</span>
-                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.3333&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#FDAE61&quot;&#39;</span><span class="p">),</span>
-                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.4444&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#FEE08B&quot;&#39;</span><span class="p">),</span>
-                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.5555&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#FFFFBF&quot;&#39;</span><span class="p">),</span>
-                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.6666&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#D9EF8B&quot;&#39;</span><span class="p">),</span>
-                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.7777&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#A6D96A&quot;&#39;</span><span class="p">),</span>
-                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.8888&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#65BD63&quot;&#39;</span><span class="p">),</span>
-                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.000&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#1A9850&quot;&#39;</span><span class="p">)]</span>
-        <span class="n">brewerRdYlGn7Colors</span> <span class="o">=</span> <span class="p">[</span>
-                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.1429&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#F46D43&quot;&#39;</span><span class="p">),</span>
-                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.2857&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#FDAE61&quot;&#39;</span><span class="p">),</span>
-                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.4286&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#FEE08B&quot;&#39;</span><span class="p">),</span>
-                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.5714&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#FFFFBF&quot;&#39;</span><span class="p">),</span>
-                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.7143&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#D9EF8B&quot;&#39;</span><span class="p">),</span>
-                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.8571&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#A6D96A&quot;&#39;</span><span class="p">),</span>
-                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0000&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#65BD63&quot;&#39;</span><span class="p">)</span>
-                               <span class="p">]</span>
-        <span class="n">brewerRdYlGn5Colors</span> <span class="o">=</span> <span class="p">[</span>
-                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.2&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#FDAE61&quot;&#39;</span><span class="p">),</span>
-                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.4&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#FEE08B&quot;&#39;</span><span class="p">),</span>
-                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.6&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#FFFFBF&quot;&#39;</span><span class="p">),</span>
-                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.8&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#D9EF8B&quot;&#39;</span><span class="p">),</span>
-                               <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#A6D96A&quot;&#39;</span><span class="p">)</span>
-                               <span class="p">]</span>
-        <span class="k">if</span> <span class="n">colorLevels</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">colorLevels</span> <span class="o">=</span> <span class="mi">7</span>
-        <span class="k">if</span> <span class="n">colorLevels</span> <span class="o">==</span> <span class="mi">7</span><span class="p">:</span>
-            <span class="n">colorPalette</span> <span class="o">=</span> <span class="n">brewerRdYlGn7Colors</span>
-        <span class="k">elif</span> <span class="n">colorLevels</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
-            <span class="n">colorPalette</span> <span class="o">=</span> <span class="n">brewerRdYlGn9Colors</span>
-        <span class="k">elif</span> <span class="n">colorLevels</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
-            <span class="n">colorPalette</span> <span class="o">=</span> <span class="n">brewerRdYlGn5Colors</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">colorPalette</span> <span class="o">=</span> <span class="n">brewerRdYlGn7Colors</span>
-        <span class="n">nc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">colorPalette</span><span class="p">)</span>
-        <span class="n">backGroundColor</span>   <span class="o">=</span> <span class="s1">&#39;&quot;#FFFFFF&quot;&#39;</span>
-        <span class="n">naColor</span>           <span class="o">=</span> <span class="s1">&#39;&quot;#FFFFFF&quot;&#39;</span>
-        <span class="n">columnHeaderColor</span> <span class="o">=</span> <span class="s1">&#39;&quot;#CCFFFF&quot;&#39;</span>
-        <span class="n">rowHeaderColor</span>    <span class="o">=</span> <span class="s1">&#39;&quot;#FFFFFF&quot;&#39;</span>
-
-        <span class="n">html</span> <span class="o">=</span> <span class="s1">&#39;&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;title&gt;</span><span class="si">%s</span><span class="s1">&lt;/title&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="s1">&#39;Digraph3 performance heat map&#39;</span>
-        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;style type=&quot;text/css&quot;&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="c1">#html += &#39;table {border-collapse: collapse;}&#39;</span>
-        <span class="k">if</span> <span class="n">contentCentered</span><span class="p">:</span>
-            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;td {text-align: center;}</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;td.na {color: rgb(192,192,192);}</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/style&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/head&gt;</span><span class="se">\n</span><span class="s1">&lt;body&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;h2&gt;</span><span class="si">%s</span><span class="s1">&lt;/h2&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">pageTitle</span>
-        <span class="k">if</span> <span class="n">argActionsList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">actionsList</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">boostedRanking</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">actionsList</span> <span class="o">=</span> <span class="n">argActionsList</span>
-        <span class="n">na</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">actionsList</span><span class="p">)</span>
-
-        <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
-        <span class="k">if</span> <span class="n">argCriteriaList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">Correlations</span><span class="p">:</span>
-                <span class="n">criteriaCorrelation</span> <span class="o">=</span>\
-                        <span class="bp">self</span><span class="o">.</span><span class="n">computeMarginalVersusGlobalRankingCorrelations</span><span class="p">(</span>\
-                                <span class="n">actionsList</span><span class="p">,</span><span class="n">ValuedCorrelation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">)</span>
-                <span class="n">criteriaList</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">criteriaCorrelation</span><span class="p">]</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">criteriaList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">criteria</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-                <span class="n">criteriaList</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-                <span class="n">criteriaWeightsList</span> <span class="o">=</span> <span class="p">[(</span><span class="o">-</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">],</span><span class="n">g</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="p">]</span>
-                <span class="n">criteriaWeightsList</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-                <span class="n">criteriaList</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaWeightsList</span><span class="p">]</span>
-                <span class="n">criteriaCorrelation</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">criteria</span> <span class="o">=</span> <span class="n">argCriteriaList</span>
-            <span class="n">criteriaCorrelation</span> <span class="o">=</span> <span class="kc">None</span>
-
-        <span class="n">quantileColor</span><span class="o">=</span><span class="p">{}</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionsList</span><span class="p">:</span>
-            <span class="n">quantileColor</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="p">:</span>
-                <span class="n">quantilexg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeActionCriterionQuantile</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">g</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">quantilexg</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">quantilexg</span> <span class="o">!=</span> <span class="s1">&#39;NA&#39;</span><span class="p">:</span>
-                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc</span><span class="p">):</span>
-                        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                            <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">colorPalette</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
-
-                        <span class="k">if</span> <span class="n">quantilexg</span> <span class="o">&lt;=</span> <span class="n">colorPalette</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
-                            <span class="n">quantileColor</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">colorPalette</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-                            <span class="k">break</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">quantileColor</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">naColor</span>
-                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">quantileColor</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">g</span><span class="p">])</span>
-        <span class="c1"># legend</span>
+<span class="c1">##    def htmlPerformanceHeatmap(self,argCriteriaList=None,</span>
+<span class="c1">##                               argActionsList=None,</span>
+<span class="c1">##                               SparseModel=True,</span>
+<span class="c1">##                               minimalComponentSize=1,</span>
+<span class="c1">##                               rankingRule=&#39;Copeland&#39;,</span>
+<span class="c1">##                               quantiles=None,</span>
+<span class="c1">##                               strategy=&#39;average&#39;,</span>
+<span class="c1">##                               ndigits=2,</span>
+<span class="c1">##                               contentCentered=True,</span>
+<span class="c1">##                               colorLevels=None,</span>
+<span class="c1">##                               pageTitle=&#39;Performance Heatmap&#39;,</span>
+<span class="c1">##                               Correlations=False,</span>
+<span class="c1">##                               Threading=False,</span>
+<span class="c1">##                               nbrOfCPUs=None,</span>
+<span class="c1">##                               Debug=False):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Specialization of the generic perfTabs method for spare outranking digraphs.</span>
+<span class="c1">##</span>
+<span class="c1">##        Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table</span>
+<span class="c1">##        actions x criteria in html format.</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        from decimal import Decimal</span>
+<span class="c1">##        from digraphs import flatten</span>
+<span class="c1">##</span>
+<span class="c1">##        brewerRdYlGn9Colors = [(Decimal(&#39;0.1111&#39;),&#39;&quot;#D53E4F&quot;&#39;),</span>
+<span class="c1">##                               (Decimal(&#39;0.2222&#39;),&#39;&quot;#F46D43&quot;&#39;),</span>
+<span class="c1">##                               (Decimal(&#39;0.3333&#39;),&#39;&quot;#FDAE61&quot;&#39;),</span>
+<span class="c1">##                               (Decimal(&#39;0.4444&#39;),&#39;&quot;#FEE08B&quot;&#39;),</span>
+<span class="c1">##                               (Decimal(&#39;0.5555&#39;),&#39;&quot;#FFFFBF&quot;&#39;),</span>
+<span class="c1">##                               (Decimal(&#39;0.6666&#39;),&#39;&quot;#D9EF8B&quot;&#39;),</span>
+<span class="c1">##                               (Decimal(&#39;0.7777&#39;),&#39;&quot;#A6D96A&quot;&#39;),</span>
+<span class="c1">##                               (Decimal(&#39;0.8888&#39;),&#39;&quot;#65BD63&quot;&#39;),</span>
+<span class="c1">##                               (Decimal(&#39;1.000&#39;),&#39;&quot;#1A9850&quot;&#39;)]</span>
+<span class="c1">##        brewerRdYlGn7Colors = [</span>
+<span class="c1">##                               (Decimal(&#39;0.1429&#39;),&#39;&quot;#F46D43&quot;&#39;),</span>
+<span class="c1">##                               (Decimal(&#39;0.2857&#39;),&#39;&quot;#FDAE61&quot;&#39;),</span>
+<span class="c1">##                               (Decimal(&#39;0.4286&#39;),&#39;&quot;#FEE08B&quot;&#39;),</span>
+<span class="c1">##                               (Decimal(&#39;0.5714&#39;),&#39;&quot;#FFFFBF&quot;&#39;),</span>
+<span class="c1">##                               (Decimal(&#39;0.7143&#39;),&#39;&quot;#D9EF8B&quot;&#39;),</span>
+<span class="c1">##                               (Decimal(&#39;0.8571&#39;),&#39;&quot;#A6D96A&quot;&#39;),</span>
+<span class="c1">##                               (Decimal(&#39;1.0000&#39;),&#39;&quot;#65BD63&quot;&#39;)</span>
+<span class="c1">##                               ]</span>
+<span class="c1">##        brewerRdYlGn5Colors = [</span>
+<span class="c1">##                               (Decimal(&#39;0.2&#39;),&#39;&quot;#FDAE61&quot;&#39;),</span>
+<span class="c1">##                               (Decimal(&#39;0.4&#39;),&#39;&quot;#FEE08B&quot;&#39;),</span>
+<span class="c1">##                               (Decimal(&#39;0.6&#39;),&#39;&quot;#FFFFBF&quot;&#39;),</span>
+<span class="c1">##                               (Decimal(&#39;0.8&#39;),&#39;&quot;#D9EF8B&quot;&#39;),</span>
+<span class="c1">##                               (Decimal(&#39;1.0&#39;),&#39;&quot;#A6D96A&quot;&#39;)</span>
+<span class="c1">##                               ]</span>
+<span class="c1">##        if colorLevels == None:</span>
+<span class="c1">##            colorLevels = 7</span>
+<span class="c1">##        if colorLevels == 7:</span>
+<span class="c1">##            colorPalette = brewerRdYlGn7Colors</span>
+<span class="c1">##        elif colorLevels == 9:</span>
+<span class="c1">##            colorPalette = brewerRdYlGn9Colors</span>
+<span class="c1">##        elif colorLevels == 5:</span>
+<span class="c1">##            colorPalette = brewerRdYlGn5Colors</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            colorPalette = brewerRdYlGn7Colors</span>
+<span class="c1">##        nc = len(colorPalette)</span>
+<span class="c1">##        backGroundColor   = &#39;&quot;#FFFFFF&quot;&#39;</span>
+<span class="c1">##        naColor           = &#39;&quot;#FFFFFF&quot;&#39;</span>
+<span class="c1">##        columnHeaderColor = &#39;&quot;#CCFFFF&quot;&#39;</span>
+<span class="c1">##        rowHeaderColor    = &#39;&quot;#FFFFFF&quot;&#39;</span>
+<span class="c1">##</span>
+<span class="c1">##        html = &#39;&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;\n&#39;</span>
+<span class="c1">##        html += &#39;&lt;title&gt;%s&lt;/title&gt;\n&#39; % pageTitle</span>
+<span class="c1">##        html += &#39;&lt;style type=&quot;text/css&quot;&gt;\n&#39;</span>
+<span class="c1">##        #html += &#39;table {border-collapse: collapse;}&#39;</span>
+<span class="c1">##        if contentCentered:</span>
+<span class="c1">##            html += &#39;td {text-align: center;}\n&#39;</span>
+<span class="c1">##        html += &#39;td.na {color: rgb(192,192,192);}\n&#39;</span>
+<span class="c1">##        html += &#39;&lt;/style&gt;\n&#39;</span>
+<span class="c1">##        html += &#39;&lt;/head&gt;\n&lt;body&gt;\n&#39;</span>
+<span class="c1">##        html += &#39;&lt;h2&gt;%s&lt;/h2&gt;\n&#39; % pageTitle</span>
+<span class="c1">##        if argActionsList == None:</span>
+<span class="c1">##            actionsList = self.boostedRanking</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            actionsList = argActionsList</span>
+<span class="c1">##        na = len(actionsList)</span>
+<span class="c1">##</span>
+<span class="c1">##        if Debug:</span>
+<span class="c1">##            print(&#39;1&#39;,actionsList)</span>
+<span class="c1">##</span>
+<span class="c1">##        criteria = self.criteria</span>
+<span class="c1">##        if argCriteriaList == None:</span>
+<span class="c1">##            if Correlations:</span>
+<span class="c1">##                criteriaCorrelation =\</span>
+<span class="c1">##                        self.computeMarginalVersusGlobalRankingCorrelations(\</span>
+<span class="c1">##                                actionsList,ValuedCorrelation=True,Threading=Threading)</span>
+<span class="c1">##                criteriaList = [c[1] for c in criteriaCorrelation]</span>
+<span class="c1">##            else:</span>
+<span class="c1">##                criteriaList = list(criteria.keys())</span>
+<span class="c1">##                criteriaList.sort()</span>
+<span class="c1">##                criteriaWeightsList = [(-criteria[g][&#39;weight&#39;],g) for g in criteriaList]</span>
+<span class="c1">##                criteriaWeightsList.sort(reverse=False)</span>
+<span class="c1">##                criteriaList = [g[1] for g in criteriaWeightsList]</span>
+<span class="c1">##                criteriaCorrelation = None</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            criteria = argCriteriaList</span>
+<span class="c1">##            criteriaCorrelation = None</span>
+<span class="c1">##</span>
+<span class="c1">##        quantileColor={}</span>
+<span class="c1">##        for x in actionsList:</span>
+<span class="c1">##            quantileColor[x] = {}</span>
+<span class="c1">##            for g in criteriaList:</span>
+<span class="c1">##                quantilexg = self.computeActionCriterionQuantile(x,g)</span>
+<span class="c1">##                if Debug:</span>
+<span class="c1">##                    print(x,g,quantilexg)</span>
+<span class="c1">##                if quantilexg != &#39;NA&#39;:</span>
+<span class="c1">##                    for i in range(nc):</span>
+<span class="c1">##                        if Debug:</span>
+<span class="c1">##                            print(i, colorPalette[i][0])</span>
+<span class="c1">##</span>
+<span class="c1">##                        if quantilexg &lt;= colorPalette[i][0]:</span>
+<span class="c1">##                            quantileColor[x][g] = colorPalette[i][1]</span>
+<span class="c1">##                            break</span>
+<span class="c1">##                else:</span>
+<span class="c1">##                    quantileColor[x][g] = naColor</span>
+<span class="c1">##                if Debug:</span>
+<span class="c1">##                    print(x,g,quantileColor[x][g])</span>
+<span class="c1">##        # legend</span>
+<span class="c1">####        html += &#39;&lt;i&gt;Color legend: &lt;/i&gt;\n&#39;</span>
+<span class="c1">####        html += &#39;&lt;table style=&quot;background-color:%s; border-collapse: collapse;&quot; border=&quot;1&quot;&gt;\n&#39; % (backGroundColor)</span>
+<span class="c1">####        html += &#39;&lt;tr bgcolor=%s&gt;&lt;th&gt;quantile&lt;/th&gt;&#39; % (columnHeaderColor)</span>
+<span class="c1">####        for col in range(nc):</span>
+<span class="c1">####            html += &#39;&lt;td bgcolor=%s&gt;%s&lt;/td&gt;&#39; % (colorPalette[col][1],str(colorPalette[col][0]))</span>
+<span class="c1">####        html += &#39;&lt;/tr&gt;\n&#39;</span>
+<span class="c1">####        html += &#39;&lt;/table&gt;\n&#39;</span>
+<span class="c1">##        # heatmap</span>
+<span class="c1">##        html += &#39;&lt;table style=&quot;background-color:%s;&quot; border=&quot;1&quot;&gt;\n&#39; % (backGroundColor)</span>
+<span class="c1">##        html += &#39;&lt;tr bgcolor=%s&gt;&lt;th&gt;criteria&lt;/th&gt;&#39; % (columnHeaderColor)</span>
+<span class="c1">##        for g in criteriaList:</span>
+<span class="c1">##            try:</span>
+<span class="c1">##                gName = self.criteria[g][&#39;shortName&#39;]</span>
+<span class="c1">##            except:</span>
+<span class="c1">##                gName = str(g)</span>
+<span class="c1">##            html += &#39;&lt;th&gt;%s&lt;/th&gt;&#39; % (gName)</span>
+<span class="c1">##        html += &#39;&lt;/tr&gt;\n&#39;</span>
+<span class="c1">##        html += &#39;&lt;tr&gt;&lt;th bgcolor=%s&gt;weights&lt;/th&gt;&#39; % (columnHeaderColor)</span>
+<span class="c1">##        for g in criteriaList:</span>
+<span class="c1">##            html += &#39;&lt;td align=&quot;center&quot;&gt;%s&lt;/td&gt;&#39; % (str(self.criteria[g][&#39;weight&#39;]))</span>
+<span class="c1">##        html += &#39;&lt;/tr&gt;\n&#39;</span>
+<span class="c1">##        if criteriaCorrelation != None:</span>
+<span class="c1">##            html += &#39;&lt;tr&gt;&lt;th bgcolor=%s&gt;tau&lt;sup&gt;(*)&lt;/sup&gt;&lt;/th&gt;&#39; % (columnHeaderColor)</span>
+<span class="c1">##            for cg in criteriaCorrelation:</span>
+<span class="c1">##                html += &#39;&lt;td align=&quot;center&quot;&gt;%.2f&lt;/td&gt;&#39; % (cg[0])</span>
+<span class="c1">##            html += &#39;&lt;/tr&gt;\n&#39;</span>
+<span class="c1">##        if Debug:</span>
+<span class="c1">##            print(html)</span>
+<span class="c1">##        for x in actionsList:</span>
+<span class="c1">##            try:</span>
+<span class="c1">##                xName = self.actions[x][&#39;shortName&#39;]</span>
+<span class="c1">##            except:</span>
+<span class="c1">##                xName = str(x)</span>
+<span class="c1">##            html += &#39;&lt;tr&gt;&lt;th bgcolor=%s&gt;%s&lt;/th&gt;&#39; % (rowHeaderColor,xName)</span>
+<span class="c1">##            for g in criteriaList:</span>
+<span class="c1">##                if self.evaluation[g][x] != Decimal(&quot;-999&quot;):</span>
+<span class="c1">##                    formatString = &#39;&lt;td bgcolor=%s align=&quot;right&quot;&gt;%% .%df&lt;/td&gt;&#39; % (quantileColor[x][g],ndigits)</span>
+<span class="c1">##                    html += formatString % (self.evaluation[g][x])</span>
+<span class="c1">##                else:</span>
+<span class="c1">##                    html += &#39;&lt;td bgcolor=%s class=&quot;na&quot;&gt;NA&lt;/td&gt;&#39; % naColor</span>
+<span class="c1">##                if Debug:</span>
+<span class="c1">##                    print(html)</span>
+<span class="c1">##            html += &#39;&lt;/tr&gt;\n&#39;</span>
+<span class="c1">##        html += &#39;&lt;/table&gt;\n&#39;</span>
+<span class="c1">##        # legend</span>
 <span class="c1">##        html += &#39;&lt;i&gt;Color legend: &lt;/i&gt;\n&#39;</span>
-<span class="c1">##        html += &#39;&lt;table style=&quot;background-color:%s; border-collapse: collapse;&quot; border=&quot;1&quot;&gt;\n&#39; % (backGroundColor)</span>
+<span class="c1">##        html += &#39;&lt;table style=&quot;background-color:%s;&quot; border=&quot;1&quot;&gt;\n&#39; % (backGroundColor)</span>
 <span class="c1">##        html += &#39;&lt;tr bgcolor=%s&gt;&lt;th&gt;quantile&lt;/th&gt;&#39; % (columnHeaderColor)</span>
-<span class="c1">##        for col in range(nc):</span>
-<span class="c1">##            html += &#39;&lt;td bgcolor=%s&gt;%s&lt;/td&gt;&#39; % (colorPalette[col][1],str(colorPalette[col][0]))</span>
+<span class="c1">##        #html += &#39;&lt;td bgcolor=%s&gt;&amp;nbsp;[%.2f - %.2f[&amp;nbsp;&lt;/td&gt;&#39; % (colorPalette[0][1],0.0,colorPalette[0][0])</span>
+<span class="c1">##        for col in range(0,nc):</span>
+<span class="c1">##            html += &#39;&lt;td bgcolor=%s&gt;&amp;nbsp;%.2f&amp;#037;&lt;/td&gt;&#39; % (colorPalette[col][1],</span>
+<span class="c1">##                                                                   #colorPalette[col-1][0],</span>
+<span class="c1">##                                                                   colorPalette[col][0]*Decimal(&#39;100.0&#39;))</span>
 <span class="c1">##        html += &#39;&lt;/tr&gt;\n&#39;</span>
 <span class="c1">##        html += &#39;&lt;/table&gt;\n&#39;</span>
-        <span class="c1"># heatmap</span>
-        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;table style=&quot;background-color:</span><span class="si">%s</span><span class="s1">;&quot; border=&quot;1&quot;&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">backGroundColor</span><span class="p">)</span>
-        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr bgcolor=</span><span class="si">%s</span><span class="s1">&gt;&lt;th&gt;criteria&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">columnHeaderColor</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">gName</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">]</span>
-            <span class="k">except</span><span class="p">:</span>
-                <span class="n">gName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;th&gt;</span><span class="si">%s</span><span class="s1">&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">gName</span><span class="p">)</span>
-        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;th bgcolor=</span><span class="si">%s</span><span class="s1">&gt;weights&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">columnHeaderColor</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="p">:</span>
-            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;td align=&quot;center&quot;&gt;</span><span class="si">%s</span><span class="s1">&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]))</span>
-        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="k">if</span> <span class="n">criteriaCorrelation</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;th bgcolor=</span><span class="si">%s</span><span class="s1">&gt;tau&lt;sup&gt;(*)&lt;/sup&gt;&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">columnHeaderColor</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">cg</span> <span class="ow">in</span> <span class="n">criteriaCorrelation</span><span class="p">:</span>
-                <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;td align=&quot;center&quot;&gt;</span><span class="si">%.2f</span><span class="s1">&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cg</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionsList</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">xName</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">]</span>
-            <span class="k">except</span><span class="p">:</span>
-                <span class="n">xName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;th bgcolor=</span><span class="si">%s</span><span class="s1">&gt;</span><span class="si">%s</span><span class="s1">&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">rowHeaderColor</span><span class="p">,</span><span class="n">xName</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="p">:</span>
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;-999&quot;</span><span class="p">):</span>
-                    <span class="n">formatString</span> <span class="o">=</span> <span class="s1">&#39;&lt;td bgcolor=</span><span class="si">%s</span><span class="s1"> align=&quot;right&quot;&gt;</span><span class="si">%%</span><span class="s1"> .</span><span class="si">%d</span><span class="s1">f&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">quantileColor</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">g</span><span class="p">],</span><span class="n">ndigits</span><span class="p">)</span>
-                    <span class="n">html</span> <span class="o">+=</span> <span class="n">formatString</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">])</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;td bgcolor=</span><span class="si">%s</span><span class="s1"> class=&quot;na&quot;&gt;NA&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="n">naColor</span>
-                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
-            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="c1"># legend</span>
-        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;i&gt;Color legend: &lt;/i&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;table style=&quot;background-color:</span><span class="si">%s</span><span class="s1">;&quot; border=&quot;1&quot;&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">backGroundColor</span><span class="p">)</span>
-        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr bgcolor=</span><span class="si">%s</span><span class="s1">&gt;&lt;th&gt;quantile&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">columnHeaderColor</span><span class="p">)</span>
-        <span class="c1">#html += &#39;&lt;td bgcolor=%s&gt;&amp;nbsp;[%.2f - %.2f[&amp;nbsp;&lt;/td&gt;&#39; % (colorPalette[0][1],0.0,colorPalette[0][0])</span>
-        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">nc</span><span class="p">):</span>
-            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;td bgcolor=</span><span class="si">%s</span><span class="s1">&gt;&amp;nbsp;</span><span class="si">%.2f</span><span class="s1">&amp;#037;&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">colorPalette</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
-                                                                   <span class="c1">#colorPalette[col-1][0],</span>
-                                                                   <span class="n">colorPalette</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;100.0&#39;</span><span class="p">))</span>
-        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="k">if</span> <span class="n">criteriaCorrelation</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;i&gt;(*) tau: Ordinal (Kendall) correlation between marginal criterion and global ranking relation.&lt;/i&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/body&gt;&lt;/html&gt;&#39;</span>
-        <span class="k">return</span> <span class="n">html</span></div>
+<span class="c1">##        if criteriaCorrelation != None:</span>
+<span class="c1">##            html += &#39;&lt;i&gt;(*) tau: Ordinal (Kendall) correlation between marginal criterion and global ranking relation.&lt;/i&gt;\n&#39;</span>
+<span class="c1">##        html += &#39;&lt;i&gt;Ranking rule&lt;/i&gt;: &lt;b&gt;%s&lt;/b&gt;&lt;br/&gt;\n&#39; % rankingRule</span>
+<span class="c1">##        html += &#39;&lt;/body&gt;&lt;/html&gt;&#39;</span>
+<span class="c1">##        return html</span>
 
 <div class="viewcode-block" id="PreRankedOutrankingDigraph.computeNewSortingCharacteristics"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeNewSortingCharacteristics">[docs]</a>    <span class="k">def</span> <span class="nf">computeNewSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">relation</span><span class="p">,</span> <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -2754,6 +2755,7 @@
                                  <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                  <span class="n">save2File</span><span class="o">=</span><span class="s1">&#39;testbgMP&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">bg1</span><span class="p">)</span>
+    <span class="n">bg1</span><span class="o">.</span><span class="n">showHTMLPrformanceHeatmap</span><span class="p">()</span>
 <span class="c1">##    bg1.showComponents(direction=&#39;descending&#39;)</span>
 <span class="c1">##    #bg1.showRelationTable()</span>
 <span class="c1">##    bg2 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,</span>
