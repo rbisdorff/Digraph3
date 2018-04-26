@@ -9411,7 +9411,7 @@ class Digraph(object):
 
     def computePrincipalOrder(self, plotFileName=None,\
                               Colwise=False, imageType=None,\
-                              TempDir=None,\
+                              tempDir=None,\
                               Comments=False, Debug=False):
         """
         Renders a ordered list of self.actions using the decreasing scores from the
@@ -9425,11 +9425,13 @@ class Digraph(object):
         """
         from csv import reader
         #from operator import itemgetter, attrgetter
-        from tempfile import mkdtemp
-        if TempDir == None:
-            tempDirName = mkdtemp()
-        else:
-            tempDirName = TempDir
+        from tempfile import TemporaryDirectory,mkdtemp
+##        if tempDir == None:
+##            tempDirName = mkdtemp()
+##        else:
+##            tempDirName = TempDir
+        tempd = TemporaryDirectory(dir=tempDir)
+        tempDirName = tempd.name
         self.exportPrincipalImage(Colwise=Colwise,Comments=Comments,
                                   Type=imageType,
                                   plotFileName=plotFileName,
@@ -9449,6 +9451,8 @@ class Digraph(object):
         principalScores.sort(reverse=True)
         if Debug:
             print(principalScores)
+        else:
+            tempd.cleanup()
         return principalScores
 
 
