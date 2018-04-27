@@ -35,20 +35,20 @@ nbrOfThreads = 8
 nbrOfSubProcesses = 2
 #set_start_method('fork')
 componentThreadingThreshold = 500
-nbrActions = 10000
+nbrActions = 100
 nbrCriteria = 21
 commonPar=('beta','variable',None)
 qtiles = 5
 minimalSize = 5
 seed = 10
-fileName = 'CythonA%dObj21q%ds%dc%dhome.csv' % (nbrActions,qtiles,minimalSize,nbrOfCPUs)
+resFileName = 'CythonA%dObj21q%dms%dsd%dcpu%dhome.txt' % (nbrActions,qtiles,minimalSize,seed,nbrOfCPUs) 
 # write header row
-if path.isfile(fileName):
-	pass
-else:
-	fo = open(fileName,'w')
-	fo.write('"tti","pri","dci","si","sd"\n')
-	fo.close()
+##if path.isfile(resFileName):
+##	pass
+##else:
+##	fo = open(fileName,'w')
+##	fo.write('"tti","pri","dci","si","sd"\n')
+##	fo.close()
 
 for s in range(sampleSize):
     seed += 1
@@ -89,7 +89,7 @@ for s in range(sampleSize):
                                         #BigData=True,
 #                                        nbrCores=nbrOfCPUs,
                                         seed=seed)
-    print(tp2.name)
+    print(tp2)
     print(time()-t0)
 #    bg2 = iBg.SparseIntegerOutrankingDigraph(tp2,quantiles=qtiles,
     bg2 = iBg.cQuantilesRankingDigraph(tp2,quantiles=qtiles,
@@ -108,10 +108,10 @@ for s in range(sampleSize):
     print(bg2)
     print(bg2.boostedRanking[:100])
     bg2.showActions()
-    bg2.showCriteria()
+    #bg2.showCriteria()
     bg2.showDecomposition()
     bg2.showComponents()
-    bg2.showRelationTable()
+    #bg2.showRelationTable()
     
     #tp2.convertBigData2Standard()
     #tp2.showHTMLPerformanceHeatmap(Correlations=True)
@@ -128,21 +128,23 @@ for s in range(sampleSize):
     #print(bg2.computeOrdinalCorrelation(g,Debug=True))
     
     
-    fo = open(fileName,'a')
-    wstr = '%.4f,%.4f,%.4f,%.4f,%d\n'\
-             % (bg2.runTimes['totalTime'],\
-                bg2.runTimes['preordering'],\
-                bg2.runTimes['decomposing'],\
-                bg2.runTimes['sorting'],seed)
-    fo.write(wstr)
-    fo.close()
+##    fo = open(fileName,'a')
+##    wstr = '%.4f,%.4f,%.4f,%.4f,%d\n'\
+##             % (bg2.runTimes['totalTime'],\
+##                bg2.runTimes['preordering'],\
+##                bg2.runTimes['decomposing'],\
+##                bg2.runTimes['sorting'],seed)
+##    fo.write(wstr)
+##    fo.close()
     #print(wstr)
     print(bg2)
-    fo = open('bg2res.txt','a')
+    fo = open(resFileName,'a')
+    fo.write('################\n')
+    fo.write(str(tp2))
     fo.write(str(bg2))
     fo.close()
 # .....
-print('results in files <%s> and <%s>' % (fileName,'bg2res.txt'))
+print('results in file <%s>.' % (resFileName))
 
 
 

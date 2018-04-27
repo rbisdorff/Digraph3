@@ -56,6 +56,8 @@ class SparseIntegerDigraph(object):
             reprString += 'Ordering          : %.5f\n' % self.runTimes['ordering']
         except:
             pass
+        reprString += 'Attributes       : %s\n' % list(self.__dict__.keys())     
+
         return reprString
 
     def showBestChoiceRecommendation(self,bint Comments=False,bint ChoiceVector=False,bint Debug=False):
@@ -1974,21 +1976,21 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         perfTab = argPerfTab
         self.name = perfTab.name + '_mp'
         # setting quantiles sorting parameters
-        if CopyPerfTab:
-            self.actions = deepcopy(perfTab.actions)
-            self.criteria = deepcopy(perfTab.criteria)
-            self.evaluation = deepcopy(perfTab.evaluation)
-        else:
-            self.actions = perfTab.actions
-            self.criteria = perfTab.criteria
-            self.evaluation = perfTab.evaluation
+##        if CopyPerfTab:
+##            self.actions = deepcopy(perfTab.actions)
+##            self.criteria = deepcopy(perfTab.criteria)
+##            self.evaluation = deepcopy(perfTab.evaluation)
+##        else:
+        self.actions = perfTab.actions
+        criteria = perfTab.criteria
+        evaluation = perfTab.evaluation
         na = len(self.actions)
         self.order = na
-        dimension = len(perfTab.criteria)
+        dimension = len(criteria)
         self.dimension = dimension
-        for g in self.criteria:
-            self.criteria[g]['weight'] = int(self.criteria[g]['weight'])
-            totalWeight += self.criteria[g]['weight']
+        for g in criteria:
+            criteria[g]['weight'] = int(criteria[g]['weight'])
+            totalWeight += criteria[g]['weight']
         self.runTimes['dataInput'] = time()-t0
         
         #######
@@ -2146,7 +2148,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         self.fillRate = fillRate/(self.order * (self.order-1))
         self.maximalComponentSize = maximalComponentSize
 
-        # setting the component relation
+        # setting the boosted ranking
         
         self.valuationdomain = {'min': -totalWeight,
                                 'med': 0,

@@ -417,6 +417,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                 reprString += '#Threads         : %d\n' % self.nbrThreads
         except:
             pass
+        reprString += 'Attributes       : %s\n' % list(self.__dict__.keys())     
         return reprString
         
     def computeCriterionRelation(self,c, a,b,hasSymmetricThresholds=True):
