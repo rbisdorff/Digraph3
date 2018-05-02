@@ -29,17 +29,17 @@ from multiprocessing import set_start_method
 
 # parameters
 sampleSize = 1
-MP = True
+MP = False
 nbrOfCPUs = 8
 nbrOfThreads = 8
-nbrOfSubProcesses = 2
+nbrOfSubProcesses = 1
 #set_start_method('fork')
-componentThreadingThreshold = 500
+#componentThreadingThreshold = 500
 nbrActions = 100
 nbrCriteria = 21
 commonPar=('beta','variable',None)
 qtiles = 5
-minimalSize = 5
+minimalSize = 1
 seed = 10
 resFileName = 'CythonA%dObj21q%dms%dsd%dcpu%dhome.txt' % (nbrActions,qtiles,minimalSize,seed,nbrOfCPUs) 
 # write header row
@@ -101,7 +101,7 @@ for s in range(sampleSize):
                                nbrOfCPUs=nbrOfCPUs,
                                nbrOfThreads=nbrOfCPUs,
                                nbrOfSubProcesses=nbrOfSubProcesses,
-                               componentThreadingThreshold=componentThreadingThreshold,
+                               #componentThreadingThreshold=componentThreadingThreshold,
                                Comments=True,
                                Debug=False)
 

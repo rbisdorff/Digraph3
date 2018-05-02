@@ -48,7 +48,8 @@ class RandomPerformanceTableau(PerformanceTableau):
         * IntegerWeights := True (default) | False (normalized to proportions of 1.0).
         * commonScale := [Min;Max]; common performance measuring scales (default = [0;100])
         * commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p)
-          and considerable performance difference discrimination thresholds.
+          and considerable performance difference discrimination thresholds. q0, p0 and v0 are
+          expressed in percentige of the common scale amplitude: Max - Min.
         * commonMode := common random distribution of random performance measurements:
              | ('uniform',Min,Max), uniformly distributed between min and max values. 
              | ('normal',mu,sigma), truncated Gaussion distribution. 
@@ -143,7 +144,8 @@ class RandomPerformanceTableau(PerformanceTableau):
                     weightsList.append(Decimal(str(weightScale[0])))
                     sumWeights += weightScale[0]
             weightsList.reverse()
-        elif weightDistribution == 'equisignificant' or weightDistribution == 'equiobjectives':
+        elif weightDistribution == 'equisignificant' or\
+             weightDistribution == 'equiobjectives':
             weightScale = (1,1)
             weightsList = []
             sumWeights = Decimal('0.0')
@@ -156,7 +158,9 @@ class RandomPerformanceTableau(PerformanceTableau):
                     sumWeights += weightScale[0]
             weightsList.reverse()
         else:
-            print('!!! Error: wrong criteria weight distribution mode: %s !!!!' % (weightDistribution))
+            print('!!! Error: wrong criteria weight distribution mode: %s !!!!'\
+                  % (weightDistribution))
+        self.sumWeights = sumWeights
 
         # generate criteria dictionary
         ngd = len(str(numberOfCriteria))
@@ -188,7 +192,7 @@ class RandomPerformanceTableau(PerformanceTableau):
                                              'weakVeto':weakVetoThresholds,
                                              'veto':vetoThresholds}
             except:
-                ind = round(commonThresholds[0][0]*commonAmplitude/100.0,digits)
+                ind = round((commonThresholds[0][0]/100.0)*commonAmplitude,digits)
                 pref = round(commonThresholds[1][0]*commonAmplitude/100.0,digits)
                 veto = round(commonThresholds[2][0]*commonAmplitude/100.0,digits)
                 indThresholds=(Decimal(str(ind)),Decimal(str(commonThresholds[0][1])))

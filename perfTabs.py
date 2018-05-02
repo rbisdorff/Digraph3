@@ -798,7 +798,6 @@ The performance evaluations of each decision alternative on each criterion are g
                                 print('-->>>', th,criteria[g]['thresholds'][th][0],criteria[g]['thresholds'][th][1])
                             print('  Threshold %s : %.2f + %.2fx' %\
                                   (th,criteria[g]['thresholds'][th][0],criteria[g]['thresholds'][th][1]), end=' ')
-                            #print self.criteria[g]['thresholds'][th]
                             print('; percentile: ',self.computeVariableThresholdPercentile(g,th,Debug))
                     except:
                         pass
@@ -7182,15 +7181,15 @@ if __name__ == "__main__":
 
 ##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
-    t = RandomCBPerformanceTableau(numberOfCriteria=13,
-                                   numberOfActions=40,
+    t = RandomCBPerformanceTableau(numberOfCriteria=2,
+                                   numberOfActions=5,
                                    weightDistribution='equiobjectives',
                                    integerWeights=True,
                                    Debug=False,
                                    missingDataProbability=0.1,
                                    seed=100,Threading=False)
-    for g in t.criteria:
-        t._computeLimitingQuantiles(g,frequencies=[0.0,0.25,0.5,0.75,1.0],LowerClosed=False,Debug=True)
+##    for g in t.criteria:
+##        t._computeLimitingQuantiles(g,frequencies=[0.0,0.25,0.5,0.75,1.0],LowerClosed=False,Debug=False)
 ##    t.saveXMCDA2('test')
 ##    t1 = XMCDA2PerformanceTableau('test')
 ##    t1.showObjectives()

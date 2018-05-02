@@ -236,6 +236,94 @@ class cPerformanceTableau(PerformanceTableau):
                     
         return normEvaluation
 
+    def showHTMLPerformanceHeatmap(self,actionsList=None,
+                                   criteriaList=None,
+                                   colorLevels=7,
+                                   pageTitle=None,
+                                   ndigits=2,
+                                   SparseModel=False,
+                                   minimalComponentSize=1,
+                                   rankingRule='Copeland',
+                                   quantiles=None,
+                                   strategy='average',
+                                   Correlations=False,
+                                   Threading=False,
+                                   nbrOfCPUs=None,
+                                   Debug=False):
+        """
+        shows the html heatmap version of the performance tableau in a browser window
+        (see perfTabs.htmlPerformanceHeatMap() method ).
+
+        **Parameters**:
+
+              - *actionsList* and *criteriaList*, if provided,  give the possibility to show the decision alternatives, resp. criteria, in a given ordering.
+              - *ndigits* = 0 may be used to show integer evaluation values.
+              - If no *actionsList* is provided, the decision actions are ordered from the best to the worst. This
+                ranking is obtained by default with the Copeland rule applied on a standard *BipolarOutrankingDigraph*.
+                When the *SparseModel* flag is put to *True*, a sparse *PreRankedOutrankingDigraph* construction is used instead.                
+              - The *minimalComponentSize* allows to control the fill rate of the pre-ranked model.
+                If *minimalComponentSize* = *n* (the number of decision actions) both the pre-ranked model will be
+                in fact equivalent to the standard model.
+              - It may interesting in some cases to use *rankingRule* = 'NetFlows'.
+              - Quantiles used for the pre-ranked decomposition are put by default to *n*
+                (the number of decision alternatives) for *n* < 50. For larger cardinalities up to 1000, quantiles = *n* /10.
+                For bigger performance tableaux the *quantiles* parameter may be set to a much lower value
+                not exceeding usually 1000.
+              - The pre-ranking may be obtained with three ordering strategies for the
+                quantiles equivalence classes: 'average' (default), 'optimistic' or  'pessimistic'.
+              - With *Correlations* = *True* and *criteriaList* = *None*, the criteria will be presented from left to right in decreasing
+                order of the correlations between the marginal criterion based ranking and the global ranking used for
+                presenting the decision alternatives.
+              - For large performance Tableaux, *multiprocessing* techniques may be used by setting
+                *Threading* = *True* in order to speed up the computations; especially when *Correlations* = *True*.
+              - By default, the number of cores available, will be detected. It may be efficient in a HPC context
+                to indicate the exact number of singled threaded cores in fact allocated to the job.
+
+
+        >>> from cRandomPerfTabs import RandomPerformanceTableau
+        >>> rt = RandomPerformanceTableau(seed=100)
+        >>> rt.showHTMLPerformanceHeatmap(colorLevels=5,Correlations=True)
+
+        .. image:: perfTabsExample.png
+           :alt: HTML heat map of the performance tableau
+           :width: 600 px
+           :align: center
+        
+        """
+        import webbrowser
+
+        ## convert to std
+        self.convertBigData2Standard()
+        
+        fileName = '/tmp/performanceHeatmap.html'
+        fo = open(fileName,'w')
+        if pageTitle == None:
+            pageTitle = 'Heatmap of Performance Tableau \'%s\'' % self.name
+            
+        fo.write(self.htmlPerformanceHeatmap(argCriteriaList=criteriaList,
+                                             argActionsList=actionsList,
+                                             SparseModel=SparseModel,
+                                             minimalComponentSize=minimalComponentSize,
+                                             rankingRule=rankingRule,
+                                             quantiles=quantiles,
+                                             strategy=strategy,
+                                             ndigits=ndigits,
+                                             colorLevels=colorLevels,
+                                             pageTitle=pageTitle,
+                                             Correlations=Correlations,
+                                             Threading=Threading,
+                                             nbrOfCPUs=1,
+                                             Debug=Debug))
+        fo.close()
+        url = 'file://'+fileName
+        webbrowser.open_new(url)
+
+        ### convert back to Bgd
+        self.convertStandard2BigData()
+        
+    
+
+############ Specialized cPerformanceTableaux ################
 
 class RandomPerformanceTableau(cPerformanceTableau):
     """
