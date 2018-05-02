@@ -987,10 +987,10 @@ The :py:class:`randomPerfTabs.RandomPerformanceTableau` class, the simplest of t
     * commonScale := [Min;Max]; common performance measuring scales (default = [0;100])
     * commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p) and considerable performance difference discrimination thresholds. For each threshold type *x* in *{q,p,v}*, the float x0 value represents a constant and the float x1 value a proportional value. Default values are [(10.0,0.0),(20.0,0.0),(80.0,0,0)]. 
     * commonMode := common random distribution of random performance measurements:
-         | ('uniform',Min,Max), uniformly distributed float values on the given common scales' range. 
+         | ('uniform',None,None), uniformly distributed float values on the given common scales' range [Min,Max]. 
          | ('normal',mu,sigma), truncated Gaussian distribution. 
          | ('triangular',mode,repartition), generalized triangular distribution with a probability repartition parameter specifying the probability mass accumulated until the mode value.
-         | ('beta',alpha,beta), a beta generator with standard alpha and beta parameters.
+         | ('beta',None,(alpha,beta)), a beta generator with standard alpha=2 and beta=2 parameters.
     * valueDigits := <integer>, precision of performance measurements (2 decimal digits by default).
         
 Code example:

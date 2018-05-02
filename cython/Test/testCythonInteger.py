@@ -29,7 +29,7 @@ from multiprocessing import set_start_method
 
 # parameters
 sampleSize = 1
-MP = False
+MP = True
 nbrOfCPUs = 8
 nbrOfThreads = 8
 nbrOfSubProcesses = 1

@@ -101,7 +101,7 @@
 <span class="sd">          and considerable performance difference discrimination thresholds. q0, p0 and v0 are</span>
 <span class="sd">          expressed in percentige of the common scale amplitude: Max - Min.</span>
 <span class="sd">        * commonMode := common random distribution of random performance measurements:</span>
-<span class="sd">             | (&#39;uniform&#39;,Min,Max), uniformly distributed between min and max values. </span>
+<span class="sd">             | (&#39;uniform&#39;,None,None), uniformly distributed between min and max values. </span>
 <span class="sd">             | (&#39;normal&#39;,mu,sigma), truncated Gaussion distribution. </span>
 <span class="sd">             | (&#39;triangular&#39;,mode,repartition), generalized triangular distribution </span>
 <span class="sd">             | (&#39;beta&#39;,mod,(alpha,beta)), mode in ]0,1[.</span>
@@ -213,6 +213,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">sumWeights</span> <span class="o">=</span> <span class="n">sumWeights</span>
 
         <span class="c1"># generate criteria dictionary</span>
+        <span class="k">if</span> <span class="n">commonMode</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1">#commonMode = [&#39;uniform&#39;,None,None]</span>
+            <span class="n">commonMode</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;beta&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">,(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)]</span>
         <span class="n">ngd</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">numberOfCriteria</span><span class="p">))</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
         <span class="n">commentString</span> <span class="o">=</span> <span class="s1">&#39;Arguments: &#39;</span>
@@ -259,12 +262,10 @@
         <span class="c1">#self.criteria = criteria</span>
         
         <span class="c1"># generate evaluations</span>
-        <span class="k">if</span> <span class="n">commonMode</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">commonMode</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">commonMode</span> <span class="o">=</span> <span class="n">commonMode</span>
         <span class="n">digits</span><span class="o">=</span><span class="n">valueDigits</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">digits</span> <span class="o">=</span> <span class="n">digits</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">commonScale</span> <span class="o">=</span> <span class="n">commonScale</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">commonMode</span> <span class="o">=</span> <span class="n">commonMode</span>
 
         <span class="n">evaluation</span> <span class="o">=</span> <span class="p">{}</span>        
         <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">commonMode</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="s1">&#39;uniform&#39;</span><span class="p">:</span>          
@@ -2241,15 +2242,15 @@
 <span class="sd">        * weightDistribution := {&#39;equiobjectives&#39;|&#39;fixed&#39;|&#39;random&#39;|&#39;equisignificant&#39;} By default, the sum of</span>
 <span class="sd">           significance of the cost criteria is set equal to the sum of the significance of the benefit criteria. </span>
 <span class="sd">        * default weightScale for &#39;random&#39; weightDistribution is 1 - numberOfCriteria.</span>
-<span class="sd">        * commonScale parameter is obsolete. The scale of cost criteria is cardinal or ordinal (0-10)</span>
+<span class="sd">        * commonScale parameter is not used. The scale of cost criteria is cardinal or ordinal (0-10)</span>
 <span class="sd">           with proabailities 1/4 respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal</span>
 <span class="sd">           with probabilities 2/3, respectively 1/3.</span>
 <span class="sd">        * All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria</span>
 <span class="sd">           are evaluated with integers between 0 and 10.</span>
-<span class="sd">        * commonThresholds is obsolete. Preference discrimination is specified as percentiles of</span>
+<span class="sd">        * commonThresholds parameter is not used. Preference discrimination is specified as percentiles of</span>
 <span class="sd">           concerned performance differences (see below).</span>
-<span class="sd">        * CommonPercentiles = {&#39;ind&#39;:0.05, &#39;pref&#39;:0.10, [&#39;weakveto&#39;:0.90,] &#39;veto&#39;:&#39;95} are expressed</span>
-<span class="sd">           in centiless (reversed for vetoes) and only concern cardinal criteria.</span>
+<span class="sd">        * CommonPercentiles = {&#39;ind&#39;:0.05, &#39;pref&#39;:0.10, &#39;veto&#39;:&#39;95} are expressed</span>
+<span class="sd">           in percentiles of the observed performance differences and only concern cardinal criteria.</span>
 
 <span class="sd">    .. warning::</span>
 

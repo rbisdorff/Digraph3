@@ -1656,10 +1656,10 @@ a given number of decision actions.</p>
 <li><dl class="first docutils">
 <dt>commonMode := common random distribution of random performance measurements:</dt>
 <dd><div class="first last line-block">
-<div class="line">(&#8216;uniform&#8217;,Min,Max), uniformly distributed float values on the given common scales&#8217; range.</div>
+<div class="line">(&#8216;uniform&#8217;,None,None), uniformly distributed float values on the given common scales&#8217; range [Min,Max].</div>
 <div class="line">(&#8216;normal&#8217;,mu,sigma), truncated Gaussian distribution.</div>
 <div class="line">(&#8216;triangular&#8217;,mode,repartition), generalized triangular distribution with a probability repartition parameter specifying the probability mass accumulated until the mode value.</div>
-<div class="line">(&#8216;beta&#8217;,alpha,beta), a beta generator with standard alpha and beta parameters.</div>
+<div class="line">(&#8216;beta&#8217;,None,(alpha,beta)), a beta generator with standard alpha=2 and beta=2 parameters.</div>
 </div>
 </dd>
 </dl>

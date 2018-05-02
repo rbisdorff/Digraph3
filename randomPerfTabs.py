@@ -51,7 +51,7 @@ class RandomPerformanceTableau(PerformanceTableau):
           and considerable performance difference discrimination thresholds. q0, p0 and v0 are
           expressed in percentige of the common scale amplitude: Max - Min.
         * commonMode := common random distribution of random performance measurements:
-             | ('uniform',Min,Max), uniformly distributed between min and max values. 
+             | ('uniform',None,None), uniformly distributed between min and max values. 
              | ('normal',mu,sigma), truncated Gaussion distribution. 
              | ('triangular',mode,repartition), generalized triangular distribution 
              | ('beta',mod,(alpha,beta)), mode in ]0,1[.
@@ -163,6 +163,9 @@ class RandomPerformanceTableau(PerformanceTableau):
         self.sumWeights = sumWeights
 
         # generate criteria dictionary
+        if commonMode == None:
+            #commonMode = ['uniform',None,None]
+            commonMode = ['beta',None,(2,2)]
         ngd = len(str(numberOfCriteria))
         criteria = OrderedDict()
         commentString = 'Arguments: '
@@ -209,12 +212,10 @@ class RandomPerformanceTableau(PerformanceTableau):
         #self.criteria = criteria
         
         # generate evaluations
-        if commonMode == None:
-            commonMode = ['uniform',None,None]
-        self.commonMode = commonMode
         digits=valueDigits
         self.digits = digits
         self.commonScale = commonScale
+        self.commonMode = commonMode
 
         evaluation = {}        
         if str(commonMode[0]) == 'uniform':          
@@ -2191,15 +2192,15 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         * weightDistribution := {'equiobjectives'|'fixed'|'random'|'equisignificant'} By default, the sum of
            significance of the cost criteria is set equal to the sum of the significance of the benefit criteria. 
         * default weightScale for 'random' weightDistribution is 1 - numberOfCriteria.
-        * commonScale parameter is obsolete. The scale of cost criteria is cardinal or ordinal (0-10)
+        * commonScale parameter is not used. The scale of cost criteria is cardinal or ordinal (0-10)
            with proabailities 1/4 respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal
            with probabilities 2/3, respectively 1/3.
         * All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria
            are evaluated with integers between 0 and 10.
-        * commonThresholds is obsolete. Preference discrimination is specified as percentiles of
+        * commonThresholds parameter is not used. Preference discrimination is specified as percentiles of
            concerned performance differences (see below).
-        * CommonPercentiles = {'ind':0.05, 'pref':0.10, ['weakveto':0.90,] 'veto':'95} are expressed
-           in centiless (reversed for vetoes) and only concern cardinal criteria.
+        * CommonPercentiles = {'ind':0.05, 'pref':0.10, 'veto':'95} are expressed
+           in percentiles of the observed performance differences and only concern cardinal criteria.
 
     .. warning::
 

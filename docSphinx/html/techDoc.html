@@ -4725,7 +4725,7 @@ However, at least one criterion of each kind is always instantiated.</dd>
 </li>
 <li>default weightScale for &#8216;random&#8217; weightDistribution is 1 - numberOfCriteria.</li>
 <li><dl class="first docutils">
-<dt>commonScale parameter is obsolete. The scale of cost criteria is cardinal or ordinal (0-10)</dt>
+<dt>commonScale parameter is not used. The scale of cost criteria is cardinal or ordinal (0-10)</dt>
 <dd>with proabailities 1/4 respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal
 with probabilities 2/3, respectively 1/3.</dd>
 </dl>
@@ -4736,13 +4736,13 @@ with probabilities 2/3, respectively 1/3.</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>commonThresholds is obsolete. Preference discrimination is specified as percentiles of</dt>
+<dt>commonThresholds parameter is not used. Preference discrimination is specified as percentiles of</dt>
 <dd>concerned performance differences (see below).</dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>CommonPercentiles = {&#8216;ind&#8217;:0.05, &#8216;pref&#8217;:0.10, [&#8216;weakveto&#8217;:0.90,] &#8216;veto&#8217;:&#8216;95} are expressed</dt>
-<dd>in centiless (reversed for vetoes) and only concern cardinal criteria.</dd>
+<dt>CommonPercentiles = {&#8216;ind&#8217;:0.05, &#8216;pref&#8217;:0.10, &#8216;veto&#8217;:&#8216;95} are expressed</dt>
+<dd>in percentiles of the observed performance differences and only concern cardinal criteria.</dd>
 </dl>
 </li>
 </ul>
@@ -4848,7 +4848,7 @@ expressed in percentige of the common scale amplitude: Max - Min.</p>
 <li><dl class="first docutils">
 <dt>commonMode := common random distribution of random performance measurements:</dt>
 <dd><div class="first last line-block">
-<div class="line">(&#8216;uniform&#8217;,Min,Max), uniformly distributed between min and max values. </div>
+<div class="line">(&#8216;uniform&#8217;,None,None), uniformly distributed between min and max values. </div>
 <div class="line">(&#8216;normal&#8217;,mu,sigma), truncated Gaussion distribution. </div>
 <div class="line">(&#8216;triangular&#8217;,mode,repartition), generalized triangular distribution </div>
 <div class="line">(&#8216;beta&#8217;,mod,(alpha,beta)), mode in ]0,1[.</div>
