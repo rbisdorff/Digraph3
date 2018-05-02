@@ -1003,7 +1003,7 @@
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">evaluation</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">])</span>
 
-<div class="viewcode-block" id="RandomCoalitionsPerformanceTableau"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomCoalitionsPerformanceTableau">[docs]</a><span class="k">class</span> <span class="nc">RandomCoalitionsPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">_RandomCoalitionsPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Full automatic generation of performance tableaux with random coalitions of criteria</span>
 
@@ -1399,7 +1399,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">criteriaWeightMode</span> <span class="o">=</span> <span class="n">weightMode</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">criteria</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">evaluation</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">weightPreorder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeWeightPreorder</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weightPreorder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeWeightPreorder</span><span class="p">()</span>
 
 <div class="viewcode-block" id="Random3ObjectivesPerformanceTableau"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.Random3ObjectivesPerformanceTableau">[docs]</a><span class="k">class</span> <span class="nc">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -2033,7 +2033,7 @@
 
 
 <span class="c1">#---------------</span>
-<span class="k">class</span> <span class="nc">_Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">RandomCoalitionsPerformanceTableau</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">_Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">_RandomCoalitionsPerformanceTableau</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the RandomCoalitionsPerformanceTableau</span>
 <span class="sd">    for 3 objectives: *A*, *B* and *C*.</span>
@@ -2920,7 +2920,7 @@
         
 
 <span class="c1">##############################</span>
-<span class="k">class</span> <span class="nc">_RandomS3PerformanceTableau</span><span class="p">(</span><span class="n">RandomCoalitionsPerformanceTableau</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">_RandomS3PerformanceTableau</span><span class="p">(</span><span class="n">_RandomCoalitionsPerformanceTableau</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Obsolete dummy class for backports.</span>
 <span class="sd">    &quot;&quot;&quot;</span>

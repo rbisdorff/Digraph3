@@ -953,7 +953,7 @@ class _FullRandomPerformanceTableau(PerformanceTableau):
         for g in evaluation:
             print(g, evaluation[g])
 
-class RandomCoalitionsPerformanceTableau(PerformanceTableau):
+class _RandomCoalitionsPerformanceTableau(PerformanceTableau):
     """
     Full automatic generation of performance tableaux with random coalitions of criteria
 
@@ -1983,7 +1983,7 @@ class Random3ObjectivesPerformanceGenerator(RandomPerformanceGenerator):
 
 
 #---------------
-class _Random3ObjectivesPerformanceTableau(RandomCoalitionsPerformanceTableau):
+class _Random3ObjectivesPerformanceTableau(_RandomCoalitionsPerformanceTableau):
     """
     Specialization of the RandomCoalitionsPerformanceTableau
     for 3 objectives: *A*, *B* and *C*.
@@ -2870,7 +2870,7 @@ class RandomCBPerformanceGenerator(RandomPerformanceGenerator):
         
 
 ##############################
-class _RandomS3PerformanceTableau(RandomCoalitionsPerformanceTableau):
+class _RandomS3PerformanceTableau(_RandomCoalitionsPerformanceTableau):
     """
     Obsolete dummy class for backports.
     """

@@ -16,6 +16,8 @@ from randomPerfTabs import _RandomS3PerformanceTableau\
      as RandomS3PerformanceTableau
 from randomPerfTabs import _FullRandomPerformanceTableau as\
      FullRandomPerformanceTableau
+from randomPerfTabs import _RandomCoalitionsPerformanceTableau as\
+     RandomCoalitionsPerformanceTableau
 
 def testRandomPerformanceTableau():
     print('==>> Testing Random Performance Tableau instantiation')
