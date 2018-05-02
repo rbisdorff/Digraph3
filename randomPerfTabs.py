@@ -1374,13 +1374,15 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         * commonThresholds := ((Ind,Ind_slope),(Pref,Pref_slope),(Veto,Veto_slope)) with
                 | Ind < Pref < Veto in [0.0,100.0] such that 
                 | (Ind/100.0*span + Ind_slope*x) < (Pref/100.0*span + Pref_slope*x) < (Pref/100.0*span + Pref_slope*x)
-                | By default [(0.10001*span,0.0),(0.20001*span,0.0),(0.80001*span,0.0)]
+                | By default [(0.05*span,0.0),(0.10*span,0.0),(0.60*span,0.0)] if OrdinalScales=False
+                | By default [(0.1*span,0.0),(0.2*span,0.0),(0.8*span,0.0)] otherwise
                 | with span = commonScale[1] - commonScale[0].
         * commonMode := ['triangular','variable',0.50] (default), A constant mode may be provided.
                 | ['uniform','variable',None], a constant range may be provided.
                 | ['beta','variable',None] (three alpha, beta combinations:
                 | (5.8661,2.62203),(5.05556,5.05556) and (2.62203, 5.8661)
-                | chosen by default for 'good', 'fair' and 'weak' evaluations. Constant parameters may be provided.
+                | chosen by default for 'good', 'fair' and 'weak' evaluations. 
+                | Constant parameters may be provided.
         * valueDigits := 2 (default, for cardinal scales only)
         * vetoProbability := x in ]0.0-1.0[ (0.5 default), probability that a cardinal criterion shows a veto preference discrimination threshold.
         * Debug := True / False (default)

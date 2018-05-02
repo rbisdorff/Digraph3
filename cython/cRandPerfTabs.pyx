@@ -818,6 +818,7 @@ class RandomCoalitionsPerformanceTableau(cPerformanceTableau):
         # generate criteria dictionary with random thresholds
         if commonScale == None:
             commonScale = (0.0,100.0)
+        span = commonScale[1] - commonScale[0]
         if Coalitions:
             criterionCoalitionsList=[('A',None),('B',None),('C',None)]
         elif RandomCoalitions:
@@ -859,11 +860,23 @@ class RandomCoalitionsPerformanceTableau(cPerformanceTableau):
                 criteria[g]['name'] = 'random criterion of coalition %s' % (criteria[g]['coalition'])
             else:
                 criteria[g]['name'] = 'random criterion'            
-            if commonThresholds == None:                        
                 span = commonScale[1] - commonScale[0]
-                thresholds = [(0.05001*span,0),(0.10001*span,0.0),(0.60001*span,0.0)]
+            if commonThresholds == None:                    
+                if OrdinalScales:
+                    thresholds = [(0.1001*span,0.0),(0.2001*span,0.0),(0.8001*span,0.0)]
+                else:
+                    #span = commonScale[1] - commonScale[0]
+                    thresholds = [(0.05001*span,0.0),(0.10001*span,0.0),(0.60001*span,0.0)]
             else:
-                thresholds = commonThresholds
+                #span = commonScale[1] - commonScale[0]
+                thresholds = [(commonThresholds[0][0]/100.0*span,commonThresholds[0][1]),\
+                              (commonThresholds[1][0]/100.0*span,commonThresholds[1][1]),\
+                              (commonThresholds[2][0]/100.0*span,commonThresholds[2][1])]
+            # if commonThresholds == None:                        
+            #     span = commonScale[1] - commonScale[0]
+            #     thresholds = [(0.05001*span,0),(0.10001*span,0.0),(0.60001*span,0.0)]
+            # else:
+            #     thresholds = commonThresholds
             ## print thresholds
             #if Electre3:
             thitems = ['ind','pref','veto']
@@ -1081,13 +1094,20 @@ class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
                               | 'equisignificant' (weights set all to 1)
                               | 'random' (in the range 1 to numberOfCriteria),
         * weightScale := [1,numerOfCriteria] (random default),
-        * commonScale := (0.0, 100.0) (default if OrdinalScales == False),
-        * commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalScales == True, otherwise
-                            | [(0.10001*span,0.0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].,
+        * commonScale := (0.0, 100.0) (default)
+                | (0.0,10.0) if OrdinalScales == True,
+        * commonThresholds := ((Ind,Ind_slope),(Pref,Pref_slope),(Veto,Veto_slope)) with
+                | Ind < Pref < Veto in [0.0,100.0] such that 
+                | (Ind/100.0*span + Ind_slope*x) < (Pref/100.0*span + Pref_slope*x) < (Pref/100.0*span + Pref_slope*x)
+                | By default [(0.05*span,0.0),(0.10*span,0.0),(0.60*span,0.0)] if OrdinalScales=False
+                | By default [(0.1*span,0.0),(0.2*span,0.0),(0.8*span,0.0)] otherwise
+                | with span = commonScale[1] - commonScale[0].
         * commonMode := ['triangular','variable',0.50] (default), A constant mode may be provided.
-                      | ['uniform','variable',None], a constant range may be provided.
-                      | ['beta','variable',None] (three alpha, beta combinations (5.8661,2.62203)
-                      |   chosen by default for 'good', 'fair' and 'weak' evaluations. Constant parameters may be provided.
+                | ['uniform','variable',None], a constant range may be provided.
+                | ['beta','variable',None] (three alpha, beta combinations:
+                | (5.8661,2.62203),(5.05556,5.05556) and (2.62203, 5.8661)
+                | chosen by default for 'good', 'fair' and 'weak' evaluations. 
+                | Constant parameters may be provided.
         * valueDigits := 2 (default, for cardinal scales only),
         * vetoProbability := x in ]0.0-1.0[ (0.5 default), probability that a cardinal criterion shows a veto preference discrimination threshold.
         * missingDataProbability := x in ]0.0-1.0[ (0.05 default), probability that an action x criterion evaluation is missing.
@@ -1098,7 +1118,7 @@ class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
     def __init__(self, int numberOfActions = 20, int numberOfCriteria = 13,\
                  weightDistribution = 'equiobjectives', weightScale=None,\
                  #integerWeights = True,\
-                 #OrdinalScales=False,\
+                 bint OrdinalScales=False,\
                  commonScale = None,\
                  commonThresholds = None, commonMode = None,\
                  int valueDigits=2,\
@@ -1164,7 +1184,11 @@ class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
         # generate criteria dictionary with random thresholds
         
         if commonScale == None:
-            commonScale = (0.0,100.0)
+            if OrdinalScales:
+                commonScale = (0.0,10.0)
+            else:
+                commonScale = (0.0,100.0)
+        span = commonScale[1] - commonScale[0]
 
         criteria = OrderedDict()
         objectivesKeys = list(objectives.keys())
@@ -1185,10 +1209,21 @@ class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
             criteria[g]['name'] = 'criterion of objective %s' % (criterionObjective)
             criteria[g]['shortName'] = g + criterionObjective[0:2]
             if commonThresholds == None:                    
-                span = commonScale[1] - commonScale[0]
-                thresholds = [(0.05001*span,0),(0.10001*span,0.0),(0.60001*span,0.0)]
+                if OrdinalScales:
+                    thresholds = [(0.1001*span,0.0),(0.2001*span,0.0),(0.8001*span,0.0)]
+                else:
+                    #span = commonScale[1] - commonScale[0]
+                    thresholds = [(0.05001*span,0.0),(0.10001*span,0.0),(0.60001*span,0.0)]
             else:
-                thresholds = commonThresholds
+                #span = commonScale[1] - commonScale[0]
+                thresholds = [(commonThresholds[0][0]/100.0*span,commonThresholds[0][1]),\
+                              (commonThresholds[1][0]/100.0*span,commonThresholds[1][1]),\
+                              (commonThresholds[2][0]/100.0*span,commonThresholds[2][1])]
+            # if commonThresholds == None:                    
+            #     span = commonScale[1] - commonScale[0]
+            #     thresholds = [(0.05001*span,0),(0.10001*span,0.0),(0.60001*span,0.0)]
+            # else:
+            #     thresholds = commonThresholds
             if Debug:
                 print(g,thresholds)
             thitems = ['ind','pref','veto']
