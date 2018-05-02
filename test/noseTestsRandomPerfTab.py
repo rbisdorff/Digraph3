@@ -119,14 +119,13 @@ def testmpCBPerformanceTableau():
 
 def test3ObjectivesPerformanceTableau():
     print('*==>> random 3 Objectives (Eco, Soc, Env) Performance Tableaux ------------*')
-    t = Random3ObjectivesPerformanceTableau(numberOfActions=21,
-                                            numberOfCriteria=13,
-                                            commonScale=[0.0,50.0],
-                                            commonMode=['triangular',
-                                                                'variable',
-                                                                0.5])
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=21,\
+                            numberOfCriteria=13,\
+                            commonScale=[0.0,50.0],\
+                            commonThresholds = ((5.0,0.0),(10.0,0.0),(80.0,0.0)),
+                            commonMode=['triangular','variable',0.5])
     print(t)
-    t.saveXMCDA2('test',servingD3=False)
+    t.saveXMCDA2('testY',servingD3=False)
     t.showCriteria(IntegerWeights=True)
     g = BipolarOutrankingDigraph(t)
     rbc = RankingByChoosingDigraph(g)
@@ -135,12 +134,14 @@ def test3ObjectivesPerformanceTableau():
 def testCoalitionsPerformanceTableau():
     print('*==>> random Coalitions Performance Tableaux ------------*')
     t = RandomCoalitionsPerformanceTableau(numberOfActions=13,\
-                                           numberOfCriteria=21,\
-                                           Coalitions=False,\
-                                           RandomCoalitions=True,\
-                                           weightDistribution="equicoalitions")
+                            numberOfCriteria=21,\
+                            Coalitions=False,\
+                            RandomCoalitions=True,\
+                            commonScale=[0.0,50.0],\
+                            commonThresholds = ((5.0,0.0),(10.0,0.0),(80.0,0.0)),
+                            weightDistribution="equicoalitions")
     print(t)
-    t.saveXMCDA2('test',servingD3=False)
+    t.saveXMCDA2('testX',servingD3=False)
     t.showCriteria(IntegerWeights=True)
     g = BipolarOutrankingDigraph(t)
     rbc = RankingByChoosingDigraph(g)
