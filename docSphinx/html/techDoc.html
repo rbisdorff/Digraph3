@@ -1174,7 +1174,7 @@ a given preordering in increasing levels (list of lists) result.</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.computePrincipalOrder">
-<code class="descname">computePrincipalOrder</code><span class="sig-paren">(</span><em>plotFileName=None</em>, <em>Colwise=False</em>, <em>imageType=None</em>, <em>TempDir=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computePrincipalOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computePrincipalOrder" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computePrincipalOrder</code><span class="sig-paren">(</span><em>plotFileName=None</em>, <em>Colwise=False</em>, <em>imageType=None</em>, <em>tempDir=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computePrincipalOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computePrincipalOrder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders a ordered list of self.actions using the decreasing scores from the
 first rincipal eigenvector of the covariance of the valued outdegrees of self.</p>
 <div class="admonition note">
@@ -4842,7 +4842,8 @@ with probabilities 2/3, respectively 1/3.</dd>
 <li><p class="first">commonScale := [Min;Max]; common performance measuring scales (default = [0;100])</p>
 </li>
 <li><p class="first">commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p)
-and considerable performance difference discrimination thresholds.</p>
+and considerable performance difference discrimination thresholds. q0, p0 and v0 are
+expressed in percentige of the common scale amplitude: Max - Min.</p>
 </li>
 <li><dl class="first docutils">
 <dt>commonMode := common random distribution of random performance measurements:</dt>
@@ -7535,7 +7536,7 @@ a given bipolar-valued Digraph instance</p>
 
 <dl class="class">
 <dt id="linearOrders.PrincipalOrder">
-<em class="property">class </em><code class="descclassname">linearOrders.</code><code class="descname">PrincipalOrder</code><span class="sig-paren">(</span><em>other</em>, <em>Colwise=True</em>, <em>imageType=None</em>, <em>plotFileName='principalOrdering'</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/linearOrders.html#PrincipalOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linearOrders.PrincipalOrder" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">linearOrders.</code><code class="descname">PrincipalOrder</code><span class="sig-paren">(</span><em>other</em>, <em>Colwise=True</em>, <em>imageType=None</em>, <em>plotFileName='principalOrdering'</em>, <em>tempDir=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/linearOrders.html#PrincipalOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linearOrders.PrincipalOrder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#linearOrders.LinearOrder" title="linearOrders.LinearOrder"><code class="xref py py-class docutils literal"><span class="pre">linearOrders.LinearOrder</span></code></a></p>
 <p>instantiates the order from the scores obtained by the first
 princiapl axis of the eigen deomposition of the covariance of the
@@ -8583,6 +8584,46 @@ to int format.</p>
 </ul>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="cRandPerfTabs.cPerformanceTableau.showHTMLPerformanceHeatmap">
+<code class="descname">showHTMLPerformanceHeatmap</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.showHTMLPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>shows the html heatmap version of the performance tableau in a browser window
+(see perfTabs.htmlPerformanceHeatMap() method ).</p>
+<p><strong>Parameters</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>actionsList</em> and <em>criteriaList</em>, if provided,  give the possibility to show the decision alternatives, resp. criteria, in a given ordering.</li>
+<li><em>ndigits</em> = 0 may be used to show integer evaluation values.</li>
+<li>If no <em>actionsList</em> is provided, the decision actions are ordered from the best to the worst. This
+ranking is obtained by default with the Copeland rule applied on a standard <em>BipolarOutrankingDigraph</em>.
+When the <em>SparseModel</em> flag is put to <em>True</em>, a sparse <em>PreRankedOutrankingDigraph</em> construction is used instead.</li>
+<li>The <em>minimalComponentSize</em> allows to control the fill rate of the pre-ranked model.
+If <em>minimalComponentSize</em> = <em>n</em> (the number of decision actions) both the pre-ranked model will be
+in fact equivalent to the standard model.</li>
+<li>It may interesting in some cases to use <em>rankingRule</em> = &#8216;NetFlows&#8217;.</li>
+<li>Quantiles used for the pre-ranked decomposition are put by default to <em>n</em>
+(the number of decision alternatives) for <em>n</em> &lt; 50. For larger cardinalities up to 1000, quantiles = <em>n</em> /10.
+For bigger performance tableaux the <em>quantiles</em> parameter may be set to a much lower value
+not exceeding usually 1000.</li>
+<li>The pre-ranking may be obtained with three ordering strategies for the
+quantiles equivalence classes: &#8216;average&#8217; (default), &#8216;optimistic&#8217; or  &#8216;pessimistic&#8217;.</li>
+<li>With <em>Correlations</em> = <em>True</em> and <em>criteriaList</em> = <em>None</em>, the criteria will be presented from left to right in decreasing
+order of the correlations between the marginal criterion based ranking and the global ranking used for
+presenting the decision alternatives.</li>
+<li>For large performance Tableaux, <em>multiprocessing</em> techniques may be used by setting
+<em>Threading</em> = <em>True</em> in order to speed up the computations; especially when <em>Correlations</em> = <em>True</em>.</li>
+<li>By default, the number of cores available, will be detected. It may be efficient in a HPC context
+to indicate the exact number of singled threaded cores in fact allocated to the job.</li>
+</ul>
+</div></blockquote>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandomPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceTableau</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/perfTabsExample.png"><img alt="HTML heat map of the performance tableau" class="align-center" src="_images/perfTabsExample.png" style="width: 600px;" /></a>
 </dd></dl>
 
 </dd></dl>

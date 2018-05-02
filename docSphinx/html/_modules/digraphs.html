@@ -9461,7 +9461,7 @@
 
 <div class="viewcode-block" id="Digraph.computePrincipalOrder"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computePrincipalOrder">[docs]</a>    <span class="k">def</span> <span class="nf">computePrincipalOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plotFileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                               <span class="n">Colwise</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">imageType</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
-                              <span class="n">TempDir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+                              <span class="n">tempDir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                               <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a ordered list of self.actions using the decreasing scores from the</span>
@@ -9475,11 +9475,13 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">csv</span> <span class="k">import</span> <span class="n">reader</span>
         <span class="c1">#from operator import itemgetter, attrgetter</span>
-        <span class="kn">from</span> <span class="nn">tempfile</span> <span class="k">import</span> <span class="n">mkdtemp</span>
-        <span class="k">if</span> <span class="n">TempDir</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">tempDirName</span> <span class="o">=</span> <span class="n">mkdtemp</span><span class="p">()</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">tempDirName</span> <span class="o">=</span> <span class="n">TempDir</span>
+        <span class="kn">from</span> <span class="nn">tempfile</span> <span class="k">import</span> <span class="n">TemporaryDirectory</span><span class="p">,</span><span class="n">mkdtemp</span>
+<span class="c1">##        if tempDir == None:</span>
+<span class="c1">##            tempDirName = mkdtemp()</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            tempDirName = TempDir</span>
+        <span class="n">tempd</span> <span class="o">=</span> <span class="n">TemporaryDirectory</span><span class="p">(</span><span class="nb">dir</span><span class="o">=</span><span class="n">tempDir</span><span class="p">)</span>
+        <span class="n">tempDirName</span> <span class="o">=</span> <span class="n">tempd</span><span class="o">.</span><span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">exportPrincipalImage</span><span class="p">(</span><span class="n">Colwise</span><span class="o">=</span><span class="n">Colwise</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span>
                                   <span class="n">Type</span><span class="o">=</span><span class="n">imageType</span><span class="p">,</span>
                                   <span class="n">plotFileName</span><span class="o">=</span><span class="n">plotFileName</span><span class="p">,</span>
@@ -9499,6 +9501,8 @@
         <span class="n">principalScores</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">principalScores</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tempd</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">principalScores</span></div>
 
 

@@ -1387,7 +1387,7 @@
 <span class="sd">    outdegrees of the valued digraph &#39;other&#39;.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">Colwise</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">imageType</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">plotFileName</span><span class="o">=</span><span class="s2">&quot;principalOrdering&quot;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                 <span class="n">plotFileName</span><span class="o">=</span><span class="s2">&quot;principalOrdering&quot;</span><span class="p">,</span><span class="n">tempDir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        constructor for generating a linear order</span>
 <span class="sd">        from a given other digraph by using the first</span>
@@ -1411,10 +1411,11 @@
         <span class="n">actionsList</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)</span>
         <span class="n">relation</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">relation</span><span class="p">)</span>
-        <span class="k">with</span> <span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tempDirName</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">TemporaryDirectory</span><span class="p">(</span><span class="nb">dir</span><span class="o">=</span><span class="n">tempDir</span><span class="p">)</span> <span class="k">as</span> <span class="n">tempDirName</span><span class="p">:</span>
             <span class="n">principalScores</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">computePrincipalOrder</span><span class="p">(</span><span class="n">Colwise</span><span class="o">=</span><span class="n">Colwise</span><span class="p">,</span>
                                                       <span class="n">imageType</span><span class="o">=</span><span class="n">imageType</span><span class="p">,</span>
                                                       <span class="n">plotFileName</span><span class="o">=</span><span class="n">plotFileName</span><span class="p">,</span>
+                                                      <span class="n">tempDir</span><span class="o">=</span><span class="n">tempDir</span><span class="p">,</span>
                                                       <span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
         <span class="c1"># [ (score1,action_(1)), (score2,action_(2)), ...] </span>
         <span class="k">if</span> <span class="n">principalScores</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
@@ -1535,7 +1536,7 @@
     <span class="nb">print</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; principal ordering:&#39;</span><span class="p">)</span>
     <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>    
-    <span class="n">pri</span> <span class="o">=</span> <span class="n">PrincipalOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+    <span class="n">pri</span> <span class="o">=</span> <span class="n">PrincipalOrder</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">tempDir</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">pri</span><span class="o">.</span><span class="n">principalRanking</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">pri</span><span class="o">.</span><span class="n">principalRanking</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">pri</span><span class="o">.</span><span class="n">principalOrder</span><span class="p">)</span>

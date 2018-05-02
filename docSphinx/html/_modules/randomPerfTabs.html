@@ -98,7 +98,8 @@
 <span class="sd">        * IntegerWeights := True (default) | False (normalized to proportions of 1.0).</span>
 <span class="sd">        * commonScale := [Min;Max]; common performance measuring scales (default = [0;100])</span>
 <span class="sd">        * commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p)</span>
-<span class="sd">          and considerable performance difference discrimination thresholds.</span>
+<span class="sd">          and considerable performance difference discrimination thresholds. q0, p0 and v0 are</span>
+<span class="sd">          expressed in percentige of the common scale amplitude: Max - Min.</span>
 <span class="sd">        * commonMode := common random distribution of random performance measurements:</span>
 <span class="sd">             | (&#39;uniform&#39;,Min,Max), uniformly distributed between min and max values. </span>
 <span class="sd">             | (&#39;normal&#39;,mu,sigma), truncated Gaussion distribution. </span>
@@ -193,7 +194,8 @@
                     <span class="n">weightsList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">weightScale</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
                     <span class="n">sumWeights</span> <span class="o">+=</span> <span class="n">weightScale</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">weightsList</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
-        <span class="k">elif</span> <span class="n">weightDistribution</span> <span class="o">==</span> <span class="s1">&#39;equisignificant&#39;</span> <span class="ow">or</span> <span class="n">weightDistribution</span> <span class="o">==</span> <span class="s1">&#39;equiobjectives&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">weightDistribution</span> <span class="o">==</span> <span class="s1">&#39;equisignificant&#39;</span> <span class="ow">or</span>\
+             <span class="n">weightDistribution</span> <span class="o">==</span> <span class="s1">&#39;equiobjectives&#39;</span><span class="p">:</span>
             <span class="n">weightScale</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
             <span class="n">weightsList</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">sumWeights</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
@@ -206,7 +208,9 @@
                     <span class="n">sumWeights</span> <span class="o">+=</span> <span class="n">weightScale</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">weightsList</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;!!! Error: wrong criteria weight distribution mode: </span><span class="si">%s</span><span class="s1"> !!!!&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">weightDistribution</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;!!! Error: wrong criteria weight distribution mode: </span><span class="si">%s</span><span class="s1"> !!!!&#39;</span>\
+                  <span class="o">%</span> <span class="p">(</span><span class="n">weightDistribution</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sumWeights</span> <span class="o">=</span> <span class="n">sumWeights</span>
 
         <span class="c1"># generate criteria dictionary</span>
         <span class="n">ngd</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">numberOfCriteria</span><span class="p">))</span>
@@ -238,7 +242,7 @@
                                              <span class="s1">&#39;weakVeto&#39;</span><span class="p">:</span><span class="n">weakVetoThresholds</span><span class="p">,</span>
                                              <span class="s1">&#39;veto&#39;</span><span class="p">:</span><span class="n">vetoThresholds</span><span class="p">}</span>
             <span class="k">except</span><span class="p">:</span>
-                <span class="n">ind</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">commonThresholds</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">commonAmplitude</span><span class="o">/</span><span class="mf">100.0</span><span class="p">,</span><span class="n">digits</span><span class="p">)</span>
+                <span class="n">ind</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">commonThresholds</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mf">100.0</span><span class="p">)</span><span class="o">*</span><span class="n">commonAmplitude</span><span class="p">,</span><span class="n">digits</span><span class="p">)</span>
                 <span class="n">pref</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">commonThresholds</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">commonAmplitude</span><span class="o">/</span><span class="mf">100.0</span><span class="p">,</span><span class="n">digits</span><span class="p">)</span>
                 <span class="n">veto</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">commonThresholds</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">commonAmplitude</span><span class="o">/</span><span class="mf">100.0</span><span class="p">,</span><span class="n">digits</span><span class="p">)</span>
                 <span class="n">indThresholds</span><span class="o">=</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ind</span><span class="p">)),</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">commonThresholds</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])))</span>
