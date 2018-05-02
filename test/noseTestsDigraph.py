@@ -9,6 +9,10 @@
 
 from digraphs import *
 from outrankingDigraphs import *
+from randomPerfTabs import _RandomS3PerformanceTableau\
+     as RandomS3PerformanceTableau
+from randomPerfTabs import _FullRandomPerformanceTableau as\
+     FullRandomPerformanceTableau
 
 def testShowMethods():
 

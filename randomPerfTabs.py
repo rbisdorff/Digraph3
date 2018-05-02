@@ -660,7 +660,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
 # ------------------------------
 
 
-class FullRandomPerformanceTableau(PerformanceTableau):
+class _FullRandomPerformanceTableau(PerformanceTableau):
     """
     Full automatic generation of random performance tableaux
     """
@@ -2870,7 +2870,7 @@ class RandomCBPerformanceGenerator(RandomPerformanceGenerator):
         
 
 ##############################
-class RandomS3PerformanceTableau(RandomCoalitionsPerformanceTableau):
+class _RandomS3PerformanceTableau(RandomCoalitionsPerformanceTableau):
     """
     Obsolete dummy class for backports.
     """
