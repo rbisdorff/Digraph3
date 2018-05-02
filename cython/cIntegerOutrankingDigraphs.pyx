@@ -1022,7 +1022,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         """
         cdef int i, j, x, y, sMax, oMax, selfMultiple=1, otherMultiple=1
         cdef int corr, determ, selfRelation, otherRelation
-        cdef int corrSum=0, determSum=0
+        cdef double corrSum=0.0, determSum=0.0
         cdef double correlation=0.0, determination=0.0
         
         sMax = self.valuationdomain['max']
@@ -1037,22 +1037,22 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                 otherRelation = sMax
                 corr = min( max(-selfRelation,otherRelation),\
                             max(selfRelation,-otherRelation) )
-                corrSum += corr
+                corrSum += float(corr)
                 determ = min( absInt(selfRelation),absInt(otherRelation) )
-                determSum += determ
+                determSum += float(determ)
                 selfRelation = self.relation[y][x]
                 otherRelation = -sMax
                 corr = min( max(-selfRelation,otherRelation),\
                             max(selfRelation,-otherRelation) )
-                corrSum += corr
+                corrSum += float(corr)
                 determ = min( abs(selfRelation),abs(otherRelation) )
-                determSum += determ
+                determSum += float(determ)
 
-        if determSum > 0:
-            correlation = float(corrSum) / float(determSum)
+        if determSum > 0.000001:
+            correlation = corrSum / determSum
             n2 = (self.order*self.order) - self.order
-            determination = (float(determSum) / n2)
-            determination /= (sMax * selfMultiple)
+            determination = determSum / float(n2)
+            determination /= float(sMax * selfMultiple)
             
             return { 'correlation': correlation,\
                      'determination': determination }
