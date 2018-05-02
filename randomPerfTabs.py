@@ -1368,13 +1368,20 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         * weightScale := [1,numerOfCriteria] (random default)
         * integerWeights := True (default) / False
         * OrdinalScales := True / False (default), if True commonScale is set to (0,10)
-        * commonScale := (0.0, 100.0) (default if OrdinalScales == False)
-        * commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalScales == True, otherwise
-                            | [(0.10001*span,0.0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].
+        * commonScale := (Min, Max)
+                | when common Scale = False, (0.0,10.0) by default if OrdinalScales == True and CommonScale=None,
+                | and (0.0,100.0) by default otherwise 
+        * commonThresholds := ((Ind,Ind_slope),(Pref,Pref_slope),(Veto,Veto_slope)) with
+                | Ind < Pref < Veto in [0.0,100.0] such that 
+                |(Ind/100.0*span + Ind_slope*x) < (Pref/100.0*span + Pref_slope*x)
+                |    < (Pref/100.0*span + Pref_slope*x)
+                | By default [(0.10001*span,0.0),(0.20001*span,0.0),(0.80001*span,0.0)]
+          with span = commonScale[1] - commonScale[0].
         * commonMode := ['triangular','variable',0.50] (default), A constant mode may be provided.
-                      | ['uniform','variable',None], a constant range may be provided.
-                      | ['beta','variable',None] (three alpha, beta combinations (5.8661,2.62203)
-                      |   chosen by default for 'good', 'fair' and 'weak' evaluations. Constant parameters may be provided.
+                | ['uniform','variable',None], a constant range may be provided.
+                | ['beta','variable',None] (three alpha, beta combinations:
+                | (5.8661,2.62203),(5.05556,5.05556) and (2.62203, 5.8661)
+                | chosen by default for 'good', 'fair' and 'weak' evaluations. Constant parameters may be provided.
         * valueDigits := 2 (default, for cardinal scales only)
         * vetoProbability := x in ]0.0-1.0[ (0.5 default), probability that a cardinal criterion shows a veto preference discrimination threshold.
         * Debug := True / False (default)
@@ -1500,14 +1507,18 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
             criteria[g]['preferenceDirection'] = 'max'           
             criteria[g]['name'] = 'criterion of objective %s' % (criterionObjective)
             criteria[g]['shortName'] = g + criterionObjective[0:2]
+            span = commonScale[1] - commonScale[0]
             if commonThresholds == None:                    
                 if OrdinalScales:
-                    thresholds = [(1.0,0.0),(2.001,0.0),(8.001,0.0)]
+                    thresholds = [(0.1001*span,0.0),(0.2001*span,0.0),(0.8001*span,0.0)]
                 else:
-                    span = commonScale[1] - commonScale[0]
-                    thresholds = [(0.05001*span,0),(0.10001*span,0.0),(0.60001*span,0.0)]
+                    #span = commonScale[1] - commonScale[0]
+                    thresholds = [(0.05001*span,0.0),(0.10001*span,0.0),(0.60001*span,0.0)]
             else:
-                thresholds = commonThresholds
+                #span = commonScale[1] - commonScale[0]
+                thresholds = [(commonThresholds[0][0]/100.0*span,commonThresholds[0][1]),\
+                              (commonThresholds[1][0]/100.0*span,commonThresholds[1][1]),\
+                              (commonThresholds[2][0]/100.0*span,commonThresholds[2][1])]
             if Debug:
                 print(g,thresholds)
             thitems = ['ind','pref','veto']
@@ -2929,10 +2940,13 @@ if __name__ == "__main__":
 ##    print('*---------- test percentiles of variable thresholds --------*') 
 ####    t = RandomCoalitionsPerformanceTableau(weightDistribution='equicoalitions',
 ####                                           seed=100)
-    t = Random3ObjectivesPerformanceTableau(numberOfActions=10,OrdinalScales=False,
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=10,OrdinalScales=True,
+                                            commonScale=(0.0,10.0),
+                                            commonThresholds=((0.1,0.0),(0.2,0.0),(0.6,0.0)),
                                            seed=100)
     t.showAll()
-    rag1 = Random3ObjectivesPerformanceGenerator(t,actionNamePrefix='b',seed=100)
+    rag1 = Random3ObjectivesPerformanceGenerator(t,\
+                actionNamePrefix='b',seed=100)
     sampleSize = 5
     rag1.randomActions(sampleSize)
     #t.showHTMLPerformanceHeatmap(Correlations=True)
