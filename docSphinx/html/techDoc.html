@@ -4639,12 +4639,22 @@ on each of the three objectives.</p>
 </li>
 <li><p class="first">OrdinalScales := True / False (default), if True commonScale is set to (0,10)</p>
 </li>
-<li><p class="first">commonScale := (0.0, 100.0) (default if OrdinalScales == False)</p>
+<li><dl class="first docutils">
+<dt>commonScale := (Min, Max)</dt>
+<dd><div class="first last line-block">
+<div class="line">when common Scale = False, (0.0,10.0) by default if OrdinalScales == True and CommonScale=None,</div>
+<div class="line">and (0.0,100.0) by default otherwise </div>
+</div>
+</dd>
+</dl>
 </li>
 <li><dl class="first docutils">
-<dt>commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalScales == True, otherwise</dt>
+<dt>commonThresholds := ((Ind,Ind_slope),(Pref,Pref_slope),(Veto,Veto_slope)) with</dt>
 <dd><div class="first last line-block">
-<div class="line">[(0.10001*span,0.0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].</div>
+<div class="line">Ind &lt; Pref &lt; Veto in [0.0,100.0] such that </div>
+<div class="line">(Ind/100.0*span + Ind_slope*x) &lt; (Pref/100.0*span + Pref_slope*x) &lt; (Pref/100.0*span + Pref_slope*x)</div>
+<div class="line">By default [(0.10001*span,0.0),(0.20001*span,0.0),(0.80001*span,0.0)]</div>
+<div class="line">with span = commonScale[1] - commonScale[0].</div>
 </div>
 </dd>
 </dl>
@@ -4653,10 +4663,9 @@ on each of the three objectives.</p>
 <dt>commonMode := [&#8216;triangular&#8217;,&#8217;variable&#8217;,0.50] (default), A constant mode may be provided.</dt>
 <dd><div class="first last line-block">
 <div class="line">[&#8216;uniform&#8217;,&#8217;variable&#8217;,None], a constant range may be provided.</div>
-<div class="line">[&#8216;beta&#8217;,&#8217;variable&#8217;,None] (three alpha, beta combinations (5.8661,2.62203)</div>
-<div class="line-block">
+<div class="line">[&#8216;beta&#8217;,&#8217;variable&#8217;,None] (three alpha, beta combinations:</div>
+<div class="line">(5.8661,2.62203),(5.05556,5.05556) and (2.62203, 5.8661)</div>
 <div class="line">chosen by default for &#8216;good&#8217;, &#8216;fair&#8217; and &#8216;weak&#8217; evaluations. Constant parameters may be provided.</div>
-</div>
 </div>
 </dd>
 </dl>

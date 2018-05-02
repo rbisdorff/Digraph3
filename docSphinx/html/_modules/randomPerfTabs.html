@@ -1418,13 +1418,19 @@
 <span class="sd">        * weightScale := [1,numerOfCriteria] (random default)</span>
 <span class="sd">        * integerWeights := True (default) / False</span>
 <span class="sd">        * OrdinalScales := True / False (default), if True commonScale is set to (0,10)</span>
-<span class="sd">        * commonScale := (0.0, 100.0) (default if OrdinalScales == False)</span>
-<span class="sd">        * commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalScales == True, otherwise</span>
-<span class="sd">                            | [(0.10001*span,0.0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].</span>
+<span class="sd">        * commonScale := (Min, Max)</span>
+<span class="sd">                | when common Scale = False, (0.0,10.0) by default if OrdinalScales == True and CommonScale=None,</span>
+<span class="sd">                | and (0.0,100.0) by default otherwise </span>
+<span class="sd">        * commonThresholds := ((Ind,Ind_slope),(Pref,Pref_slope),(Veto,Veto_slope)) with</span>
+<span class="sd">                | Ind &lt; Pref &lt; Veto in [0.0,100.0] such that </span>
+<span class="sd">                | (Ind/100.0*span + Ind_slope*x) &lt; (Pref/100.0*span + Pref_slope*x) &lt; (Pref/100.0*span + Pref_slope*x)</span>
+<span class="sd">                | By default [(0.10001*span,0.0),(0.20001*span,0.0),(0.80001*span,0.0)]</span>
+<span class="sd">                | with span = commonScale[1] - commonScale[0].</span>
 <span class="sd">        * commonMode := [&#39;triangular&#39;,&#39;variable&#39;,0.50] (default), A constant mode may be provided.</span>
-<span class="sd">                      | [&#39;uniform&#39;,&#39;variable&#39;,None], a constant range may be provided.</span>
-<span class="sd">                      | [&#39;beta&#39;,&#39;variable&#39;,None] (three alpha, beta combinations (5.8661,2.62203)</span>
-<span class="sd">                      |   chosen by default for &#39;good&#39;, &#39;fair&#39; and &#39;weak&#39; evaluations. Constant parameters may be provided.</span>
+<span class="sd">                | [&#39;uniform&#39;,&#39;variable&#39;,None], a constant range may be provided.</span>
+<span class="sd">                | [&#39;beta&#39;,&#39;variable&#39;,None] (three alpha, beta combinations:</span>
+<span class="sd">                | (5.8661,2.62203),(5.05556,5.05556) and (2.62203, 5.8661)</span>
+<span class="sd">                | chosen by default for &#39;good&#39;, &#39;fair&#39; and &#39;weak&#39; evaluations. Constant parameters may be provided.</span>
 <span class="sd">        * valueDigits := 2 (default, for cardinal scales only)</span>
 <span class="sd">        * vetoProbability := x in ]0.0-1.0[ (0.5 default), probability that a cardinal criterion shows a veto preference discrimination threshold.</span>
 <span class="sd">        * Debug := True / False (default)</span>
@@ -1550,14 +1556,18 @@
             <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;max&#39;</span>           
             <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;criterion of objective </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">criterionObjective</span><span class="p">)</span>
             <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">g</span> <span class="o">+</span> <span class="n">criterionObjective</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">span</span> <span class="o">=</span> <span class="n">commonScale</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">commonScale</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">commonThresholds</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>                    
                 <span class="k">if</span> <span class="n">OrdinalScales</span><span class="p">:</span>
-                    <span class="n">thresholds</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">2.001</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">8.001</span><span class="p">,</span><span class="mf">0.0</span><span class="p">)]</span>
+                    <span class="n">thresholds</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">0.1001</span><span class="o">*</span><span class="n">span</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">0.2001</span><span class="o">*</span><span class="n">span</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">0.8001</span><span class="o">*</span><span class="n">span</span><span class="p">,</span><span class="mf">0.0</span><span class="p">)]</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">span</span> <span class="o">=</span> <span class="n">commonScale</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">commonScale</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-                    <span class="n">thresholds</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">0.05001</span><span class="o">*</span><span class="n">span</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mf">0.10001</span><span class="o">*</span><span class="n">span</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">0.60001</span><span class="o">*</span><span class="n">span</span><span class="p">,</span><span class="mf">0.0</span><span class="p">)]</span>
+                    <span class="c1">#span = commonScale[1] - commonScale[0]</span>
+                    <span class="n">thresholds</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">0.05001</span><span class="o">*</span><span class="n">span</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">0.10001</span><span class="o">*</span><span class="n">span</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">0.60001</span><span class="o">*</span><span class="n">span</span><span class="p">,</span><span class="mf">0.0</span><span class="p">)]</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">thresholds</span> <span class="o">=</span> <span class="n">commonThresholds</span>
+                <span class="c1">#span = commonScale[1] - commonScale[0]</span>
+                <span class="n">thresholds</span> <span class="o">=</span> <span class="p">[(</span><span class="n">commonThresholds</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mf">100.0</span><span class="o">*</span><span class="n">span</span><span class="p">,</span><span class="n">commonThresholds</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]),</span>\
+                              <span class="p">(</span><span class="n">commonThresholds</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mf">100.0</span><span class="o">*</span><span class="n">span</span><span class="p">,</span><span class="n">commonThresholds</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]),</span>\
+                              <span class="p">(</span><span class="n">commonThresholds</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mf">100.0</span><span class="o">*</span><span class="n">span</span><span class="p">,</span><span class="n">commonThresholds</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">])]</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">thresholds</span><span class="p">)</span>
             <span class="n">thitems</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ind&#39;</span><span class="p">,</span><span class="s1">&#39;pref&#39;</span><span class="p">,</span><span class="s1">&#39;veto&#39;</span><span class="p">]</span>
@@ -2979,10 +2989,13 @@
 <span class="c1">##    print(&#39;*---------- test percentiles of variable thresholds --------*&#39;) </span>
 <span class="c1">####    t = RandomCoalitionsPerformanceTableau(weightDistribution=&#39;equicoalitions&#39;,</span>
 <span class="c1">####                                           seed=100)</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">OrdinalScales</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">OrdinalScales</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                            <span class="n">commonScale</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">10.0</span><span class="p">),</span>
+                                            <span class="n">commonThresholds</span><span class="o">=</span><span class="p">((</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">0.6</span><span class="p">,</span><span class="mf">0.0</span><span class="p">)),</span>
                                            <span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
     <span class="n">t</span><span class="o">.</span><span class="n">showAll</span><span class="p">()</span>
-    <span class="n">rag1</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceGenerator</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">actionNamePrefix</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">rag1</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceGenerator</span><span class="p">(</span><span class="n">t</span><span class="p">,</span>\
+                <span class="n">actionNamePrefix</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
     <span class="n">sampleSize</span> <span class="o">=</span> <span class="mi">5</span>
     <span class="n">rag1</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="n">sampleSize</span><span class="p">)</span>
     <span class="c1">#t.showHTMLPerformanceHeatmap(Correlations=True)</span>

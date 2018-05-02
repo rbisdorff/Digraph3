@@ -1373,10 +1373,9 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                 | and (0.0,100.0) by default otherwise 
         * commonThresholds := ((Ind,Ind_slope),(Pref,Pref_slope),(Veto,Veto_slope)) with
                 | Ind < Pref < Veto in [0.0,100.0] such that 
-                |(Ind/100.0*span + Ind_slope*x) < (Pref/100.0*span + Pref_slope*x)
-                |    < (Pref/100.0*span + Pref_slope*x)
+                | (Ind/100.0*span + Ind_slope*x) < (Pref/100.0*span + Pref_slope*x) < (Pref/100.0*span + Pref_slope*x)
                 | By default [(0.10001*span,0.0),(0.20001*span,0.0),(0.80001*span,0.0)]
-          with span = commonScale[1] - commonScale[0].
+                | with span = commonScale[1] - commonScale[0].
         * commonMode := ['triangular','variable',0.50] (default), A constant mode may be provided.
                 | ['uniform','variable',None], a constant range may be provided.
                 | ['beta','variable',None] (three alpha, beta combinations:
