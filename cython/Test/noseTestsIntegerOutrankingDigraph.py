@@ -20,10 +20,21 @@ def testcIntegerOutrankingDigraph():
     gi = IntegerBipolarOutrankingDigraph(tc,Threading=True,nbrCores=4)
     print(gi)
     gi.showRelationTable()
-    tc.convertBigData2Standard()
+    tc.convert2Standard()
     g = BipolarOutrankingDigraph(tc)
     print(g)
     g.showRelationTable()
+
+def testBigDataConversion():
+    t = R3ObjPT(numberOfActions=50,seed=1)
+    print(t)
+    g = BipolarOutrankingDigraph(t,Threading=True,nbrCores=4)
+    print(g)
+    g.showRelationTable()
+    t.convert2BigData()
+    gi = IntegerBipolarOutrankingDigraph(t)
+    print(gi)
+    gi.showRelationTable()
 
 ##def testconvert2DecimalValuation():
 ##    t = cR3ObjPT(numberOfActions=13,numberOfCriteria=7,seed=2)

@@ -851,7 +851,7 @@ The performance evaluations of each decision alternative on each criterion are g
         else:
             print('The performance tableau does not contain objectives.')
 
-    def convertBigData2Standard(self):
+    def convert2Standard(self):
         """
         convert cRandPerfTabs generated objects into standard PerformanceTableau instances.
         """
@@ -859,7 +859,7 @@ The performance evaluations of each decision alternative on each criterion are g
         self.convertEvaluationFloatToDecimal()
         self.convertDiscriminationThresholds2Decimal()
 
-    def convertStandard2BigData(self):
+    def convert2BigData(self):
         """
         convert standard PerformanceTableau to cPerformanceTableau instances, by converting the action keys to integers
         and evaluations to floats, including the discrimination thresholds the case given.
@@ -901,12 +901,14 @@ The performance evaluations of each decision alternative on each criterion are g
         """
         Convert evaluations from decimal format to float
         """
+        from decimal import Decimal
         evaluation = self.evaluation
         actions = self.actions
         criteria = self.criteria
         for g in criteria:
             for x in actions:
-                evaluation[g][x] = float(evaluation[g][x])
+                if evaluation[g][x] != Decimal('-999'):
+                    evaluation[g][x] = float(evaluation[g][x])
         self.evaluation = evaluation
 
     def convertDiscriminationThresholds2Float(self):
@@ -932,6 +934,7 @@ The performance evaluations of each decision alternative on each criterion are g
         Convert significance weights from obsolete float format
         to decimal format.
         """
+        from decimal import Decimal
         criteria = self.criteria
         criteriaList = [x for x in self.criteria]
         for g in criteriaList:
@@ -942,6 +945,7 @@ The performance evaluations of each decision alternative on each criterion are g
         """
         Convert evaluations from obsolete float format to decimal format
         """
+        from decimal import Decimal
         evaluation = self.evaluation
         actionsList = [x for x in self.actions]
         criteriaList = [x for x in self.criteria]

@@ -901,7 +901,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The performance tableau does not contain objectives.&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PerformanceTableau.convertBigData2Standard"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convertBigData2Standard">[docs]</a>    <span class="k">def</span> <span class="nf">convertBigData2Standard</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PerformanceTableau.convert2Standard"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convert2Standard">[docs]</a>    <span class="k">def</span> <span class="nf">convert2Standard</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        convert cRandPerfTabs generated objects into standard PerformanceTableau instances.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -909,7 +909,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluationFloatToDecimal</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">convertDiscriminationThresholds2Decimal</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="PerformanceTableau.convertStandard2BigData"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convertStandard2BigData">[docs]</a>    <span class="k">def</span> <span class="nf">convertStandard2BigData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PerformanceTableau.convert2BigData"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convert2BigData">[docs]</a>    <span class="k">def</span> <span class="nf">convert2BigData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        convert standard PerformanceTableau to cPerformanceTableau instances, by converting the action keys to integers</span>
 <span class="sd">        and evaluations to floats, including the discrimination thresholds the case given.</span>
@@ -951,12 +951,14 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert evaluations from decimal format to float</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
         <span class="n">evaluation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
-                <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">):</span>
+                    <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">evaluation</span></div>
 
 <div class="viewcode-block" id="PerformanceTableau.convertDiscriminationThresholds2Float"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convertDiscriminationThresholds2Float">[docs]</a>    <span class="k">def</span> <span class="nf">convertDiscriminationThresholds2Float</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -982,6 +984,7 @@
 <span class="sd">        Convert significance weights from obsolete float format</span>
 <span class="sd">        to decimal format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="n">criteriaList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="p">:</span>
@@ -992,6 +995,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert evaluations from obsolete float format to decimal format</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
         <span class="n">evaluation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span>
         <span class="n">actionsList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
         <span class="n">criteriaList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">]</span>
