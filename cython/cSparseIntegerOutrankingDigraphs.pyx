@@ -2211,21 +2211,21 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
             highQtileLimit = self.categories[highCateg]['highLimit']
             if strategy == "optimistic":
                 score1 = float(highCateg)
-                score2 = -notHighLimit
+                score2 = -float(notHighLimit)
                 score3 = float(lowCateg)
-                score4 = lowLimit
+                score4 = float(lowLimit)
             elif strategy == "pessimistic":
                 score1 = float(lowCateg)
-                score2 = lowLimit
+                score2 = float(lowLimit)
                 score3 = float(highCateg)
-                score4 = -notHighLimit
+                score4 = -float(notHighLimit)
             else:   #strategy == "average":
                 lc = float(lowCateg)
                 hc = float(highCateg)
                 score1 = (lc+hc)/2.0
                 score2 = float(highCateg)
-                score3 = -notHighLimit
-                score4 = lowLimit
+                score3 = float(lowLimit)-float(notHighLimit)
+                score4 = float(lowLimit)
             #print(score,highQtileLimit,lowQtileLimit,lowCateg,highCateg)
             try:
                 actionsCategories[(score1,highQtileLimit,\

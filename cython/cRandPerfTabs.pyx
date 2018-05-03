@@ -216,7 +216,7 @@ class cPerformanceTableau(PerformanceTableau):
             if Debug:
                 print('-->> g, glow, ghigh, gamp', g, glow, ghigh, gamp)
             for x in actionKeys:
-                if evaluation[g][x] != -999:
+                if evaluation[g][x] != Decimal('-999'):
                     evalx = abs(evaluation[g][x])
                     if Debug:
                         print(evalx)

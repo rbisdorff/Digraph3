@@ -1302,21 +1302,21 @@
             <span class="n">highQtileLimit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="n">highCateg</span><span class="p">][</span><span class="s1">&#39;highLimit&#39;</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s2">&quot;optimistic&quot;</span><span class="p">:</span>
                 <span class="n">score1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">highCateg</span><span class="p">)</span>
-                <span class="n">score2</span> <span class="o">=</span> <span class="o">-</span><span class="n">notHighLimit</span>
+                <span class="n">score2</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">notHighLimit</span><span class="p">)</span>
                 <span class="n">score3</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">lowCateg</span><span class="p">)</span>
-                <span class="n">score4</span> <span class="o">=</span> <span class="n">lowLimit</span>
+                <span class="n">score4</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">lowLimit</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s2">&quot;pessimistic&quot;</span><span class="p">:</span>
                 <span class="n">score1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">lowCateg</span><span class="p">)</span>
-                <span class="n">score2</span> <span class="o">=</span> <span class="n">lowLimit</span>
+                <span class="n">score2</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">lowLimit</span><span class="p">)</span>
                 <span class="n">score3</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">highCateg</span><span class="p">)</span>
-                <span class="n">score4</span> <span class="o">=</span> <span class="o">-</span><span class="n">notHighLimit</span>
+                <span class="n">score4</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">notHighLimit</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>   <span class="c1">#strategy == &quot;average&quot;:</span>
                 <span class="n">lc</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">lowCateg</span><span class="p">)</span>
                 <span class="n">hc</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">highCateg</span><span class="p">)</span>
                 <span class="n">score1</span> <span class="o">=</span> <span class="p">(</span><span class="n">lc</span><span class="o">+</span><span class="n">hc</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span>
                 <span class="n">score2</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">highCateg</span><span class="p">)</span>
-                <span class="n">score3</span> <span class="o">=</span> <span class="n">lowLimit</span> <span class="o">-</span> <span class="n">notHighLimit</span>
-                <span class="n">score4</span> <span class="o">=</span> <span class="o">-</span><span class="n">notHighLimit</span>
+                <span class="n">score3</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">lowLimit</span><span class="p">)</span> <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">notHighLimit</span><span class="p">)</span>
+                <span class="n">score4</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">notHighLimit</span><span class="p">)</span>
             <span class="c1">#print(score1,highQtileLimit,lowQtileLimit,lowCateg,highCateg,score2,score3,score4)</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">actionsCategories</span><span class="p">[(</span><span class="n">score1</span><span class="p">,</span><span class="n">highQtileLimit</span><span class="p">,</span>\
