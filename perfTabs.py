@@ -873,7 +873,7 @@ The performance evaluations of each decision alternative on each criterion are g
         actions = self.actions
         newActions = OrderedDict()
         for i,x in enumerate(actions):
-            newKey = i+1
+            newKey = i
             newActions[newKey] = actions[x]
         # convert evaluation access keys
         evaluation = self.evaluation
@@ -881,7 +881,7 @@ The performance evaluations of each decision alternative on each criterion are g
         for g in self.criteria:
             newEvaluation[g] = {}
             for i,x in enumerate(actions):
-                newKey = i+1
+                newKey = i
                 newEvaluation[g][newKey] = evaluation[g][x]
         self.actions = newActions
         self.evaluation = newEvaluation
