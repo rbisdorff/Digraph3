@@ -2,7 +2,7 @@ Technical Reference of the Digraph3 modules
 ===========================================
 :Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg FSTC/CSC
 :Version: Revision: Python 3.6
-:Copyright: `R. Bisdorff <http://leopold-loewenheim.uni.lu/bisdorff/>`_ 2013-2018
+:Copyright: `R. Bisdorff <https://leopold-loewenheim.uni.lu/bisdorff/>`_ 2013-2018
 
 .. contents:: Table of Contents
 	:depth: 2
@@ -23,11 +23,11 @@ Three download options are given:
 
 2. or a subversion client::
 
-     ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3 
+     ..$ svn co https://leopold-loewenheim.uni.lu/svn/repos/Digraph3 
 
 3. Or, with a browser access, download and extract the latest distribution tar.gz archive from this page::
 
-     http://leopold-loewenheim.uni.lu/Digraph3/dist/
+     https://leopold-loewenheim.uni.lu/Digraph3/dist/
 
 On Linux or Mac OS, ..$ cd to the extracted <Digraph3> directory::
 
@@ -53,7 +53,7 @@ runs a verbose (with stdout not captured) nose test suite::
 
 runs the nose test suite in multiple processing mode when the GNU `parallel <https://www.gnu.org/software/parallel/>`_ shell tool is installed and multiple cores are detected.
 
-**Dependencies**: To be fully functional, the Digraph3 resources mainly need the `graphviz <http://graphviz.org>`_ tools and the `R statistics resources <http://www.r-project.org>`_ to be installed. When exploring digraph isomorphisms, the `nauty <http://www.cs.sunysb.edu/~algorith/implement/nauty/implement.shtml>`_ isomorphism testing program is required. Two specific criteria and actions clustering methods of the `OutrankingDigraph <techDoc.html#outrankingDigraphs.OutrankingDigraph>`_ class furthermore require the `calmat <http://leopold-loewenheim.uni.lu/svn/repos/Calmat/>`_ matrix computing resource to be installed. 
+**Dependencies**: To be fully functional, the Digraph3 resources mainly need the `graphviz <https://graphviz.org>`_ tools and the `R statistics resources <https://www.r-project.org>`_ to be installed. When exploring digraph isomorphisms, the `nauty <https://www.cs.sunysb.edu/~algorith/implement/nauty/implement.shtml>`_ isomorphism testing program is required. Two specific criteria and actions clustering methods of the `OutrankingDigraph <techDoc.html#outrankingDigraphs.OutrankingDigraph>`_ class furthermore require the `calmat <https://leopold-loewenheim.uni.lu/svn/repos/Calmat/>`_ matrix computing resource to be installed. 
 
 .. _Modules-organisation-label:
 
@@ -153,7 +153,7 @@ Miscellaneous tools
 * :ref:`arithmetics-label` 
      Additional various methods and tools for computing with integer numbers.
 
-Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff <http://leopold-loewenheim.uni.lu/bisdorff/>, University of Luxembourg.
+Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff <https://leopold-loewenheim.uni.lu/bisdorff/>, University of Luxembourg.
 
 .. toctree::
    :maxdepth: 2
