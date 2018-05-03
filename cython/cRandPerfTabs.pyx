@@ -352,7 +352,7 @@ class RandomPerformanceTableau(cPerformanceTableau):
              | ('uniform',Min,Max), uniformly distributed between min and max values. 
              | ('normal',mu,sigma), truncated Gaussion distribution. 
              | ('triangular',mode,repartition), generalized triangular distribution 
-             | ('beta',alpha,beta).
+             | ('beta',mode,(alpha,beta)), by default Mode=None, alpha=beta=2.
         * valueDigits := <integer>, precision of performance measurements
           (2 decimal digits by default).
         
