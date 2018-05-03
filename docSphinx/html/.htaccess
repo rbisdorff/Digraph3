@@ -1,4 +1,3 @@
 RewriteEngine On
-RewriteCond %{SERVER_PORT} !443
-RewriteRule (.*) https://leopold-loewenheim.uni.lu/Digraph3/docSphinx/html/ [R]
-http://leopold-loewenheim.uni.lu/Digraph3/docSphinx/html/tutorial.html
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
