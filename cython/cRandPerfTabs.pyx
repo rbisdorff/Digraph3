@@ -59,15 +59,17 @@ class cPerformanceTableau(PerformanceTableau):
         """
         Convert evaluations from decimal format to float
         """
+        from decimal import Decimal
         evaluation = self.evaluation
         actions = self.actions
         criteria = self.criteria
         for g in criteria:
             for x in actions:
-                evaluation[g][x] = float(evaluation[g][x])
+                if evaluation[g][x] != Decimal('-999'):
+                    evaluation[g][x] = float(evaluation[g][x])
         self.evaluation = evaluation
 
-    def convertEvaluation2Decimal(self):
+    def convertEvaluation2Decimal(self,int ndigits=2):
         """
         Convert evaluations from decimal format to float
         """
@@ -75,9 +77,11 @@ class cPerformanceTableau(PerformanceTableau):
         evaluation = self.evaluation
         actions = self.actions
         criteria = self.criteria
+        fstr = '%%.%df' % ndigits
         for g in criteria:
             for x in actions:
-                evaluation[g][x] = Decimal('%.2f' % evaluation[g][x])
+                if evaluation[g][x] != Decimal('-999'):
+                    evaluation[g][x] = Decimal(fstr % evaluation[g][x])
         self.evaluation = evaluation
 
     def convertDiscriminationThresholds2Float(self):

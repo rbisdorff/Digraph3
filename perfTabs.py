@@ -1646,17 +1646,18 @@ The performance evaluations of each decision alternative on each criterion are g
             print('percentile =', percentile)   
         return percentile
 
-    def showPerformanceTableau(self,actionsSubset=None,sorted=None,ndigits=2):
+    def showPerformanceTableau(self,actionsSubset=None,Sorted=True,ndigits=2):
         """
         Print the performance Tableau.
         """
+        from decimal import Decimal
         print('*----  performance tableau -----*')
         criteriaList = list(self.criteria)
-        if sorted:
+        if Sorted:
             criteriaList.sort()
         if actionsSubset == None:
             actionsList = list(self.actions)
-            if sorted:
+            if Sorted:
                 actionsList.sort()
         else:
             actionsList = list(actionsSubset)     
@@ -1664,11 +1665,15 @@ The performance evaluations of each decision alternative on each criterion are g
         for x in actionsList:
             print('\''+str(x)+'\'  ', end=' ')
         print('\n---------|-----------------------------------------')
+        formatString = '%% .%df ' % ndigits
         for g in criteriaList:
             print('   \''+str(g)+'\'  |   '+str(self.criteria[g]['weight'])+'   | ', end=' ')
             for x in actionsList:
-                formatString = '%% .%df ' % ndigits
-                print(formatString % (self.evaluation[g][x]), end=' ')
+                evalgx = self.evaluation[g][x]
+                if evalgx == Decimal('-999'):
+                    print(' NA ', end=' ')
+                else:                    
+                    print(formatString % (evalgx), end=' ')
             print()      
 
     def saveCSV(self,fileName='tempPerfTab',Sorted=True,actionsList=None,ndigits=2,Debug=False):
