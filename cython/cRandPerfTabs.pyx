@@ -25,18 +25,24 @@ class cPerformanceTableau(PerformanceTableau):
     Abstract root class for cythenized performace tableau methods.
     """
     def convert2BigData(self):
+        """
+        Converts a standard :py:class:`perfTabs.PerformanceTableau` class instance to a corresponding BigData :py:class:`cRandPerfTabs.cPerformanceTableau` class instance.
+        """ 
         self.convertWeight2Integer()
         self.convertEvaluation2Float()
         self.convertDiscriminationThresholds2Float()
 
     def convert2Standard(self):
+        """
+        Converts a BigData :py:class:`cRandPerfTabs.cPerformanceTableau` class instance to a corresponding standard :py:class:`perfTabs.PerformanceTableau` class instance.
+        """ 
         self.convertWeight2Decimal()
         self.convertEvaluation2Decimal()
         self.convertDiscriminationThresholds2Decimal()
         
     def convertWeight2Integer(self):
         """
-        Convert significance weights from Decimal format
+        Converts significance weights from Decimal
         to int format.
         """
         criteria = self.criteria
@@ -46,8 +52,7 @@ class cPerformanceTableau(PerformanceTableau):
 
     def convertWeight2Decimal(self):
         """
-        Convert significance weights from Decimal format
-        to int format.
+        Converts significance weights from int to  Decimal format.
         """
         from decimal import Decimal
         criteria = self.criteria
@@ -57,7 +62,7 @@ class cPerformanceTableau(PerformanceTableau):
 
     def convertEvaluation2Float(self):
         """
-        Convert evaluations from decimal format to float
+        Converts evaluations from Decimal to float format.
         """
         from decimal import Decimal
         evaluation = self.evaluation
@@ -71,7 +76,7 @@ class cPerformanceTableau(PerformanceTableau):
 
     def convertEvaluation2Decimal(self,int ndigits=2):
         """
-        Convert evaluations from decimal format to float
+        Converts evaluations from float to Decimal format.
         """
         from decimal import Decimal
         evaluation = self.evaluation
@@ -85,6 +90,9 @@ class cPerformanceTableau(PerformanceTableau):
         self.evaluation = evaluation
 
     def convertDiscriminationThresholds2Float(self):
+        """
+        Converts perrformance discrimination thresholds from Decimal to float format.
+        """
         criteria = self.criteria
         for g in criteria:
             for th in criteria[g]['thresholds']:
@@ -93,6 +101,9 @@ class cPerformanceTableau(PerformanceTableau):
                 criteria[g]['thresholds'][th] = d1
 
     def convertDiscriminationThresholds2Decimal(self):
+        """
+        Converts perrformance discrimination thresholds from float to Decimal format.
+        """
         from decimal import Decimal
         criteria = self.criteria
         for g in criteria:
@@ -103,7 +114,7 @@ class cPerformanceTableau(PerformanceTableau):
 
     def showCriteria(self,IntegerWeights=True,Alphabetic=False,ByObjectives=True,Debug=False):
         """
-        print Criteria with thresholds and weights.
+        Prints self.criteria with thresholds and weights.
 
         *Parameters*:
             * IntegerWeights=True,
@@ -188,7 +199,7 @@ class cPerformanceTableau(PerformanceTableau):
 
     def normalizeEvaluations(self,lowValue=0.0,highValue=100.0,Debug=False):
         """
-        recode the evaluations between lowValue and highValue on all criteria.
+        Recodes the evaluations between lowValue and highValue on all criteria.
 
         *Parameters*:
             * lowValue=0.0,
@@ -260,29 +271,17 @@ class cPerformanceTableau(PerformanceTableau):
 
         **Parameters**:
 
-              - *actionsList* and *criteriaList*, if provided,  give the possibility to show the decision alternatives, resp. criteria, in a given ordering.
-              - *ndigits* = 0 may be used to show integer evaluation values.
-              - If no *actionsList* is provided, the decision actions are ordered from the best to the worst. This
-                ranking is obtained by default with the Copeland rule applied on a standard *BipolarOutrankingDigraph*.
-                When the *SparseModel* flag is put to *True*, a sparse *PreRankedOutrankingDigraph* construction is used instead.                
-              - The *minimalComponentSize* allows to control the fill rate of the pre-ranked model.
-                If *minimalComponentSize* = *n* (the number of decision actions) both the pre-ranked model will be
-                in fact equivalent to the standard model.
-              - It may interesting in some cases to use *rankingRule* = 'NetFlows'.
-              - Quantiles used for the pre-ranked decomposition are put by default to *n*
-                (the number of decision alternatives) for *n* < 50. For larger cardinalities up to 1000, quantiles = *n* /10.
-                For bigger performance tableaux the *quantiles* parameter may be set to a much lower value
-                not exceeding usually 1000.
-              - The pre-ranking may be obtained with three ordering strategies for the
-                quantiles equivalence classes: 'average' (default), 'optimistic' or  'pessimistic'.
-              - With *Correlations* = *True* and *criteriaList* = *None*, the criteria will be presented from left to right in decreasing
-                order of the correlations between the marginal criterion based ranking and the global ranking used for
-                presenting the decision alternatives.
-              - For large performance Tableaux, *multiprocessing* techniques may be used by setting
-                *Threading* = *True* in order to speed up the computations; especially when *Correlations* = *True*.
-              - By default, the number of cores available, will be detected. It may be efficient in a HPC context
-                to indicate the exact number of singled threaded cores in fact allocated to the job.
-
+              * *actionsList* and *criteriaList*, if provided,  give the possibility to show the decision alternatives, resp. criteria, in a given ordering.
+              * *ndigits* = 0 may be used to show integer evaluation values.
+              * If no *actionsList* is provided, the decision actions are ordered from the best to the worst. This ranking is obtained by default with the Copeland rule applied on a standard *BipolarOutrankingDigraph*. When the *SparseModel* flag is put to *True*, a sparse *PreRankedOutrankingDigraph* construction is used instead.                
+              * The *minimalComponentSize* allows to control the fill rate of the pre-ranked model. If *minimalComponentSize* = *n* (the number of decision actions) both the pre-ranked model will be in fact equivalent to the standard model.
+              * It may interesting in some cases to use *rankingRule* = 'NetFlows'.
+              * Quantiles used for the pre-ranked decomposition are put by default to *n* (the number of decision alternatives) for *n* < 50. For larger cardinalities up to 1000, quantiles = *n* /10. For bigger performance tableaux the *quantiles* parameter may be set to a much lower value not exceeding usually 1000.
+              * The pre-ranking may be obtained with three ordering strategies for the quantiles equivalence classes: 'average' (default), 'optimistic' or  'pessimistic'.
+              * With *Correlations* = *True* and *criteriaList* = *None*, the criteria will be presented from left to right in decreasing order of the correlations between the marginal criterion based ranking and the global ranking used for presenting the decision alternatives.
+              * For large performance Tableaux, *multiprocessing* techniques may be used by setting.
+              *  *Threading* = *True* in order to speed up the computations; especially when *Correlations* = *True*.
+              * By default, the number of cores available, will be detected. It may be necessary in a HPC context to indicate the exact number of singled threaded cores that are actually allocated to the running job.
 
         >>> from cRandomPerfTabs import RandomPerformanceTableau
         >>> rt = RandomPerformanceTableau(seed=100)
@@ -297,7 +296,7 @@ class cPerformanceTableau(PerformanceTableau):
         import webbrowser
 
         ## convert to std
-        self.convertBigData2Standard()
+        self.convert2Standard()
         
         fileName = '/tmp/performanceHeatmap.html'
         fo = open(fileName,'w')
@@ -323,11 +322,9 @@ class cPerformanceTableau(PerformanceTableau):
         webbrowser.open_new(url)
 
         ### convert back to Bgd
-        self.convertStandard2BigData()
-        
-    
+        self.convert2BigData()
 
-############ Specialized cPerformanceTableaux ################
+############ Specialized cPerformanceTableau models ################
 
 class RandomPerformanceTableau(cPerformanceTableau):
     """

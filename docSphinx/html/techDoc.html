@@ -8397,53 +8397,56 @@ matching the RandomLinearVotingProfiles class (see the votingDigraphs module)</p
 <dl class="method">
 <dt id="cRandPerfTabs.cPerformanceTableau.convert2BigData">
 <code class="descname">convert2BigData</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.convert2BigData" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Converts a standard <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a> class instance to a corresponding BigData <a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau" title="cRandPerfTabs.cPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">cRandPerfTabs.cPerformanceTableau</span></code></a> class instance.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="cRandPerfTabs.cPerformanceTableau.convert2Standard">
 <code class="descname">convert2Standard</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.convert2Standard" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Converts a BigData <a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau" title="cRandPerfTabs.cPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">cRandPerfTabs.cPerformanceTableau</span></code></a> class instance to a corresponding standard <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a> class instance.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="cRandPerfTabs.cPerformanceTableau.convertDiscriminationThresholds2Decimal">
 <code class="descname">convertDiscriminationThresholds2Decimal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.convertDiscriminationThresholds2Decimal" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Converts perrformance discrimination thresholds from float to Decimal format.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="cRandPerfTabs.cPerformanceTableau.convertDiscriminationThresholds2Float">
 <code class="descname">convertDiscriminationThresholds2Float</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.convertDiscriminationThresholds2Float" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Converts perrformance discrimination thresholds from Decimal to float format.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="cRandPerfTabs.cPerformanceTableau.convertEvaluation2Decimal">
 <code class="descname">convertEvaluation2Decimal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.convertEvaluation2Decimal" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert evaluations from decimal format to float</p>
+<dd><p>Converts evaluations from float to Decimal format.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="cRandPerfTabs.cPerformanceTableau.convertEvaluation2Float">
 <code class="descname">convertEvaluation2Float</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.convertEvaluation2Float" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert evaluations from decimal format to float</p>
+<dd><p>Converts evaluations from Decimal to float format.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="cRandPerfTabs.cPerformanceTableau.convertWeight2Decimal">
 <code class="descname">convertWeight2Decimal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.convertWeight2Decimal" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert significance weights from Decimal format
-to int format.</p>
+<dd><p>Converts significance weights from int to  Decimal format.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="cRandPerfTabs.cPerformanceTableau.convertWeight2Integer">
 <code class="descname">convertWeight2Integer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.convertWeight2Integer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert significance weights from Decimal format
+<dd><p>Converts significance weights from Decimal
 to int format.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="cRandPerfTabs.cPerformanceTableau.normalizeEvaluations">
 <code class="descname">normalizeEvaluations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.normalizeEvaluations" title="Permalink to this definition">¶</a></dt>
-<dd><p>recode the evaluations between lowValue and highValue on all criteria.</p>
+<dd><p>Recodes the evaluations between lowValue and highValue on all criteria.</p>
 <dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -8458,7 +8461,7 @@ to int format.</p>
 <dl class="method">
 <dt id="cRandPerfTabs.cPerformanceTableau.showCriteria">
 <code class="descname">showCriteria</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.showCriteria" title="Permalink to this definition">¶</a></dt>
-<dd><p>print Criteria with thresholds and weights.</p>
+<dd><p>Prints self.criteria with thresholds and weights.</p>
 <dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -8481,26 +8484,15 @@ to int format.</p>
 <div><ul class="simple">
 <li><em>actionsList</em> and <em>criteriaList</em>, if provided,  give the possibility to show the decision alternatives, resp. criteria, in a given ordering.</li>
 <li><em>ndigits</em> = 0 may be used to show integer evaluation values.</li>
-<li>If no <em>actionsList</em> is provided, the decision actions are ordered from the best to the worst. This
-ranking is obtained by default with the Copeland rule applied on a standard <em>BipolarOutrankingDigraph</em>.
-When the <em>SparseModel</em> flag is put to <em>True</em>, a sparse <em>PreRankedOutrankingDigraph</em> construction is used instead.</li>
-<li>The <em>minimalComponentSize</em> allows to control the fill rate of the pre-ranked model.
-If <em>minimalComponentSize</em> = <em>n</em> (the number of decision actions) both the pre-ranked model will be
-in fact equivalent to the standard model.</li>
+<li>If no <em>actionsList</em> is provided, the decision actions are ordered from the best to the worst. This ranking is obtained by default with the Copeland rule applied on a standard <em>BipolarOutrankingDigraph</em>. When the <em>SparseModel</em> flag is put to <em>True</em>, a sparse <em>PreRankedOutrankingDigraph</em> construction is used instead.</li>
+<li>The <em>minimalComponentSize</em> allows to control the fill rate of the pre-ranked model. If <em>minimalComponentSize</em> = <em>n</em> (the number of decision actions) both the pre-ranked model will be in fact equivalent to the standard model.</li>
 <li>It may interesting in some cases to use <em>rankingRule</em> = &#8216;NetFlows&#8217;.</li>
-<li>Quantiles used for the pre-ranked decomposition are put by default to <em>n</em>
-(the number of decision alternatives) for <em>n</em> &lt; 50. For larger cardinalities up to 1000, quantiles = <em>n</em> /10.
-For bigger performance tableaux the <em>quantiles</em> parameter may be set to a much lower value
-not exceeding usually 1000.</li>
-<li>The pre-ranking may be obtained with three ordering strategies for the
-quantiles equivalence classes: &#8216;average&#8217; (default), &#8216;optimistic&#8217; or  &#8216;pessimistic&#8217;.</li>
-<li>With <em>Correlations</em> = <em>True</em> and <em>criteriaList</em> = <em>None</em>, the criteria will be presented from left to right in decreasing
-order of the correlations between the marginal criterion based ranking and the global ranking used for
-presenting the decision alternatives.</li>
-<li>For large performance Tableaux, <em>multiprocessing</em> techniques may be used by setting
-<em>Threading</em> = <em>True</em> in order to speed up the computations; especially when <em>Correlations</em> = <em>True</em>.</li>
-<li>By default, the number of cores available, will be detected. It may be efficient in a HPC context
-to indicate the exact number of singled threaded cores in fact allocated to the job.</li>
+<li>Quantiles used for the pre-ranked decomposition are put by default to <em>n</em> (the number of decision alternatives) for <em>n</em> &lt; 50. For larger cardinalities up to 1000, quantiles = <em>n</em> /10. For bigger performance tableaux the <em>quantiles</em> parameter may be set to a much lower value not exceeding usually 1000.</li>
+<li>The pre-ranking may be obtained with three ordering strategies for the quantiles equivalence classes: &#8216;average&#8217; (default), &#8216;optimistic&#8217; or  &#8216;pessimistic&#8217;.</li>
+<li>With <em>Correlations</em> = <em>True</em> and <em>criteriaList</em> = <em>None</em>, the criteria will be presented from left to right in decreasing order of the correlations between the marginal criterion based ranking and the global ranking used for presenting the decision alternatives.</li>
+<li>For large performance Tableaux, <em>multiprocessing</em> techniques may be used by setting.</li>
+<li><em>Threading</em> = <em>True</em> in order to speed up the computations; especially when <em>Correlations</em> = <em>True</em>.</li>
+<li>By default, the number of cores available, will be detected. It may be necessary in a HPC context to indicate the exact number of singled threaded cores that are actually allocated to the running job.</li>
 </ul>
 </div></blockquote>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandomPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceTableau</span>
