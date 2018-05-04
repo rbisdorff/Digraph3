@@ -1911,7 +1911,7 @@ The performance evaluations of each decision alternative on each criterion are g
 #####                                                         START                                             ######
 ######################################################################################################################
 
-    def showHTMLMCSRPerformanceTableau(self,ndigits=2,title='Min/Max Performance Tableau'):
+    def _showHTMLMCSRPerformanceTableau(self,ndigits=2,title='Min/Max Performance Tableau'):
 
         """
         Ask the server for an HTML representation of the performance tableau.
@@ -1964,7 +1964,7 @@ The performance evaluations of each decision alternative on each criterion are g
 #####                                                computeMCSRPerformanceTableau                              ######
 #####                                                         START                                             ######
 ######################################################################################################################
-    def computeMCSRPerformanceTableau(self,isSorted=True,
+    def _computeMCSRPerformanceTableau(self,isSorted=True,
                                ndigits=2,title='Min/Max Performance Tableau',Debug=False):
 
         """
@@ -2082,7 +2082,7 @@ The performance evaluations of each decision alternative on each criterion are g
 #####                                                computeMCSRPerformanceHeatmap                              ######
 #####                                                         START                                             ######
 ######################################################################################################################
-    def computeMCSRPerformanceHeatmap(self,criteriaList=None,
+    def _computeMCSRPerformanceHeatmap(self,criteriaList=None,
                                actionsList=None,
                                ndigits=2,
                                colorLevels=7,
