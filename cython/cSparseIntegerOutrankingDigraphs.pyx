@@ -2027,6 +2027,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         self.categories = qs.categories
         self.sorting = qs.sorting
         if Comments:
+            print(qs)
             print('execution time: %.4f' % (self.runTimes['sorting']))
         # preordering
 ##        if minimalComponentSize == None:
