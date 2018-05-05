@@ -1983,7 +1983,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
 ##            self.evaluation = deepcopy(perfTab.evaluation)
 ##        else:
         self.actions = perfTab.actions
-        self.actionsOrig = [x for x in perfTab]
+        self.actionsOrig = [x for x in perfTab.actions]
         criteria = perfTab.criteria
         evaluation = perfTab.evaluation
         na = len(self.actions)
