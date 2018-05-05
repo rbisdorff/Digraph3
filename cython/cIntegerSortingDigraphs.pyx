@@ -110,11 +110,11 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         
         
         from time import time
-        from copy import copy, deepcopy
-        if CopyPerfTab:
-            copy2self = deepcopy
-        else:
-            copy2self = copy
+        from copy import deepcopy
+        # if CopyPerfTab:
+        #     copy2self = deepcopy
+        # else:
+        #     copy2self = copy
         #from decimal import Decimal
 
         tt = time()
@@ -129,16 +129,20 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
             for ox in perfTab.actions:
                 actions[x] = {'name': str(ox)}
         else:
-            actions = copy2self(perfTab.actions)
-        actions = actions
+            if CopyPerfTab:
+                actions = deepcopy(perfTab.actions)
+            else:
+                actions = perfTab.actions
         self.actions = actions
 
         # keep a copy of the original actions set before adding the profiles
-        actionsOrig = OrderedDict(actions)
+        #actionsOrig = OrderedDict(actions)
+        actionsOrig = [x for x in self.actions]
         self.actionsOrig = actionsOrig
 
         #  normalizing the performance tableau
-        normPerfTab = NormalizedPerformanceTableau(perfTab)
+        #normPerfTab = NormalizedPerformanceTableau(perfTab)
+        normPerfTab = perfTab
 
         # instantiating the performance tableau part
         criteria = normPerfTab.criteria
@@ -300,8 +304,10 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
             
         self.runTimes['computeRelation'] = time() - t0
 
-        # store actions set
-        self.actions = actionsOrig
+        # restore original actions set
+        #actions = [x for x in self.actions if x not in self.profiles]
+        #perfTab.actions = actions
+        #self.actions = actions
         self.order = len(self.actions)
 
         self.runTimes['totalTime'] = time() - tt
@@ -351,7 +357,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         """
         Specialization of the corresponding BipolarOutrankingDigraph method
         """
-        cdef int x, n, ns, nq, ni, nt, nbrOfJobs, nit, i, j, Min, Max, Med
+        cdef int n, ns, nq, ni, nt, nbrOfJobs, nit, i, j, Min, Max, Med
         cdef bint LowerClosed, InitialSplit
         global actions
         global criteria
@@ -740,7 +746,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         shows the quantiles sorting result all (default) of a subset of the decision actions.
         """
         if actionSubset == None:
-            actions = [x for x in self.actions]
+            actions = self.actionsOrig
             actions.sort()
         else:
             actions = [x for x in flatten(actionSubset)]
@@ -817,7 +823,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
             except:
                 strategy = 'average'
         actionsCategories = {}
-        for x in self.actions:
+        for x in self.actionsOrig:
             a,lowCateg,highCateg,credibility =\
                      self.showActionCategories(x,Comments=Debug,\
                             Threading=Threading,nbrOfCPUs=nbrOfCPUs)
@@ -878,7 +884,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
             html += '<th>%s sorting</th>' % strategy
             html += '</tr>'
         actionsCategories = {}
-        for x in self.actions:
+        for x in self.actionsOrig:
             a,lowCateg,highCateg,credibility =\
                      self.showActionCategories(x,Comments=Debug)
             if strategy == "optimistic":
@@ -1077,7 +1083,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
             eq.sort()
             for x in eq:
                 actionsList.append(x)
-        if len(actionsList) != len(self.actions):
+        if len(actionsList) != len(self.actionsOrig):
             print('Error !: missing action(s) %s in ordered table.')
             
         Digraph.showRelationTable(self,actionsSubset=actionsList,\
