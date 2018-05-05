@@ -39,7 +39,7 @@ def testSparseOutrankingDigraph():
 
 def testMinimalComponentSize():
     print('==>> Testing SparseOutrankingDigraph with minimal Component Size instantiation')
-    MP = True
+    MP = False
     t0 = time()
     tp = RandomCBPerformanceTableau(numberOfActions=200,Threading=MP,seed=None)
     print(time()-t0)
@@ -54,6 +54,7 @@ def testMinimalComponentSize():
     print(bg1)
     bg1.showRelationTable()
     tp = RandomPerformanceTableau(numberOfActions=200,seed=None)
+    print(tp.criteria)
     bg2 = SparseIntegerOutrankingDigraph(tp,quantiles=35,quantilesOrderingStrategy='average',
                                 LowerClosed=False,
                                minimalComponentSize=20,

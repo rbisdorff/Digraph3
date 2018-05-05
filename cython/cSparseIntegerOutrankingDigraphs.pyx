@@ -569,7 +569,7 @@ class SparseIntegerDigraph(object):
         """
         cdef int x, y, sMax, oMax, selfMultiple=1, otherMultiple=1
         cdef int corr, determ, selfRelation, otherRelation
-        cdef int corrSum=0, determSum=0
+        cdef double corrSum=0.0, determSum=0.0
         cdef double correlation=0.0, determination=0.0
         
         ## if self.valuationdomain['min'] != Decimal('-1.0'):
@@ -592,14 +592,13 @@ class SparseIntegerDigraph(object):
             otherMultiple = sMax
         #if Debug:
         #    print('self', selfMultiple)
-        #    print('other', otherMultiple)
-        
+        #    print('other', otherMultiple)        
         #     print('Error: the other digraph must be recoded !!')
         #     print('self', self.valuationdomain)
         #     print('other', other.valuationdomain)
         #     return
-        for x in self.actions:
-            for y in self.actions:
+        for x in self.actionsOrig:
+            for y in self.actionsOrig:
                 if x != y:
                     selfRelation = self.relation(x,y) * selfMultiple
                     try:
@@ -611,15 +610,15 @@ class SparseIntegerDigraph(object):
                     #   print(x,y,'other', otherRelation)
                     corr = min( cMAX(-selfRelation,otherRelation),\
                                  cMAX(selfRelation,-otherRelation) )
-                    corrSum += corr
+                    corrSum += float(corr)
                     determ = min( ABS(selfRelation),ABS(otherRelation) )
-                    determSum += determ
+                    determSum += float(determ)
 
-        if determSum > 0:
-            correlation = float(corrSum) / float(determSum)
+        if determSum > 0.0:
+            correlation = corrSum / determSum
             n2 = (self.order*self.order) - self.order
-            determination = (float(determSum) / n2)
-            determination /= (sMax * selfMultiple)
+            determination = determSum / float(n2)
+            determination /= float(sMax * selfMultiple)
             
             return { 'correlation': correlation,\
                      'determination': determination }
@@ -808,11 +807,11 @@ class SparseIntegerDigraph(object):
         Renders the sum of the squares (without diagonal) of the orders of the component's subgraphs
         over the square (without diagonal) of the big digraph order. 
         """
-        
-        fillRateSum = sum((comp['subGraph'].order*comp['subGraph'].order-1)\
+        cdef double fillRate, fillRateSum 
+        fillRateSum = sum(float((comp['subGraph'].order*comp['subGraph'].order-1))\
                         for comp in self.components.values())
         n2 = self.order*(self.order-1)
-        fillRate = float(fillRateSum)/n2
+        fillRate = fillRateSum/float(n2)
         return fillRate
 
 
@@ -986,7 +985,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,PerformanceTableau):
                  bint Comments=False,\
                  bint Debug=False):
 
-        cdef int i, j, totalWeight = 0
+        cdef int i, x, j, totalWeight = 0
         cdef int nbrOfLocals,nbrOfThreadsUsed,threadLoad
         cdef double ttot, t0, tw, tdump
         cdef int maximalComponentSize
@@ -1024,6 +1023,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,PerformanceTableau):
             self.actions = perfTab.actions
             self.criteria = perfTab.criteria
             self.evaluation = perfTab.evaluation
+        self.actionsOrig = [x for x in perfTab.actions]
         na = len(self.actions)
         self.order = na
         dimension = len(perfTab.criteria)
@@ -1227,7 +1227,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,PerformanceTableau):
         if strategy == None:
             strategy = self.sortingParameters['strategy']
         actionsCategories = {}
-        for x in self.actions:
+        for x in self.actionsOrig:
             a,lowCateg,highCateg,credibility,lowLimit,notHighLimit =\
                      self.computeActionCategories(x,Comments=Comments,Debug=False,\
                                                Threading=Threading,\
@@ -1236,21 +1236,21 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,PerformanceTableau):
             highQtileLimit = self.categories[highCateg]['highLimit']
             if strategy == "optimistic":
                 score1 = float(highCateg)
-                score2 = -notHighLimit
+                score2 = -float(notHighLimit)
                 score3 = float(lowCateg)
-                score4 = lowLimit
+                score4 = float(lowLimit)
             elif strategy == "pessimistic":
                 score1 = float(lowCateg)
-                score2 = lowLimit
+                score2 = float(lowLimit)
                 score3 = float(highCateg)
-                score4 = -notHighLimit
+                score4 = -float(notHighLimit)
             else:   #strategy == "average":
                 lc = float(lowCateg)
                 hc = float(highCateg)
                 score1 = (lc+hc)/2.0
                 score2 = float(highCateg)
-                score3 = -notHighLimit
-                score4 = lowLimit
+                score3 = float(lowLimit) - float(notHighLimit)
+                score4 = -float(notHighLimit)
             #print(score,highQtileLimit,lowQtileLimit,lowCateg,highCateg)
             try:
                 actionsCategories[(score1,highQtileLimit,\
@@ -1763,24 +1763,25 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,PerformanceTableau):
         deter = (sum_{x,y in X} abs[r(xSy) - Med])/(oder*order-1)
         """
         
-        cdef int Max, Med, order, x, y, sumDeter=0
+        cdef int Max, Med, order, x, y,
+        cdef float sumDeter=0.0
         cdef float deter
         
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
 
-        actions = self.actions
+        actions = self.actionsOrig
         relation = self.relation
         order = self.order
 
         for x in actions:
             for y in actions:
                 if x != y:
-                    sumDeter += ABS(relation(x,y) - Med)
+                    sumDeter += float(ABS(relation(x,y) - Med))
 
-        deter = float(sumDeter) / (order * (order-1))
+        deter = sumDeter / float(order * (order-1))
         if InPercent:
-            return deter/(Max-Med)*100.0
+            return deter/float(Max-Med)*100.0
         else:
             return deter
 
@@ -1982,6 +1983,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
 ##            self.evaluation = deepcopy(perfTab.evaluation)
 ##        else:
         self.actions = perfTab.actions
+        self.actionsOrig = [x for x in perfTab]
         criteria = perfTab.criteria
         evaluation = perfTab.evaluation
         na = len(self.actions)
@@ -2202,9 +2204,9 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
 
         if strategy == None:
             strategy = self.sortingParameters['strategy']
-        actions = [x for x in self.actions if not in self.profiles]
-        actionsCategories = {}
-        for x in self.actions:
+        #actions = [key for key in self.actions if key not in self.profiles]
+        #actionsCategories = {}
+        for x in self.actionsOrig:
             a,lowCateg,highCateg,credibility,lowLimit,notHighLimit =\
                      self.computeActionCategories(x,Comments=Comments,Debug=False,\
                                                Threading=Threading,\
@@ -2517,7 +2519,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         """
         print('Quantiles sorting result per decision action')
         if actionsSubset==None:
-            for x in self.actions.keys():
+            for x in self.actionsOrig:
                 self.computeActionCategories(x,Show=True)
         else:
             for x in actionsSubset:
@@ -2589,8 +2591,8 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         """
         cdef int x
         print('List of decision actions')
-        for ix in self.actions:
-            print('%d: %s' % (ix,self.actions[ix]['name']) )
+        for x in self.actionsOrig:
+            print('%d: %s' % (ix,self.actions[x]['name']) )
 
     def showCriteria(self, bint IntegerWeights=False, bint Debug=False):
         """
@@ -2696,7 +2698,8 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         deter = (sum_{x,y in X} abs[r(xSy) - Med])/(oder*order-1)
         """
         
-        cdef int Max, Med, order, x, y, sumDeter=0
+        cdef int Max, Med, order, x, y
+        cdef float sumDeter=0.0
         cdef float deter
         
         Max = self.valuationdomain['max']
@@ -2709,9 +2712,9 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         for x in actions:
             for y in actions:
                 if x != y:
-                    sumDeter += ABS(relation(x,y) - Med)
+                    sumDeter += float(ABS(relation(x,y) - Med))
 
-        deter = float(sumDeter) / (order * (order-1))
+        deter = float(sumDeter) / float((order * (order-1)))
         if InPercent:
             return deter/(Max-Med)*100.0
         else:

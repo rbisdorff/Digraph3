@@ -485,6 +485,7 @@ class RandomPerformanceTableau(cPerformanceTableau):
                                              'veto':vetoThresholds}
             criteria[g]['scale'] = commonScale
             criteria[g]['weight'] = weightsList[i]
+            criteria[g]['preferenceDirection'] = 'max'
         #self.criteria = criteria
         
         # generate evaluations
