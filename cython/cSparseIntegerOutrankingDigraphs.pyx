@@ -2202,6 +2202,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
 
         if strategy == None:
             strategy = self.sortingParameters['strategy']
+        actions = [x for x in self.actions if not in self.profiles]
         actionsCategories = {}
         for x in self.actions:
             a,lowCateg,highCateg,credibility,lowLimit,notHighLimit =\
