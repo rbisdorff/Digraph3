@@ -597,8 +597,8 @@ class SparseIntegerDigraph(object):
         #     print('self', self.valuationdomain)
         #     print('other', other.valuationdomain)
         #     return
-        for x in self.actionsOrig:
-            for y in self.actionsOrig:
+        for x in self.actions:
+            for y in self.actions:
                 if x != y:
                     selfRelation = self.relation(x,y) * selfMultiple
                     try:
@@ -1023,7 +1023,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,PerformanceTableau):
             self.actions = perfTab.actions
             self.criteria = perfTab.criteria
             self.evaluation = perfTab.evaluation
-        self.actionsOrig = [x for x in perfTab.actions]
+        #self.actions = [x for x in perfTab.actions]
         na = len(self.actions)
         self.order = na
         dimension = len(perfTab.criteria)
@@ -1227,7 +1227,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,PerformanceTableau):
         if strategy == None:
             strategy = self.sortingParameters['strategy']
         actionsCategories = {}
-        for x in self.actionsOrig:
+        for x in self.actions:
             a,lowCateg,highCateg,credibility,lowLimit,notHighLimit =\
                      self.computeActionCategories(x,Comments=Comments,Debug=False,\
                                                Threading=Threading,\
@@ -1770,7 +1770,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,PerformanceTableau):
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
 
-        actions = self.actionsOrig
+        actions = self.actions
         relation = self.relation
         order = self.order
 
@@ -1983,7 +1983,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
 ##            self.evaluation = deepcopy(perfTab.evaluation)
 ##        else:
         self.actions = perfTab.actions
-        self.actionsOrig = [x for x in perfTab.actions]
+        #self.actionsOrig = [x for x in perfTab.actions]
         criteria = perfTab.criteria
         evaluation = perfTab.evaluation
         na = len(self.actions)
@@ -2206,7 +2206,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
             strategy = self.sortingParameters['strategy']
         #actions = [key for key in self.actions if key not in self.profiles]
         actionsCategories = {}
-        for x in self.actionsOrig:
+        for x in self.actions:
             a,lowCateg,highCateg,credibility,lowLimit,notHighLimit =\
                      self.computeActionCategories(x,Comments=Comments,Debug=False,\
                                                Threading=Threading,\
@@ -2519,7 +2519,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         """
         print('Quantiles sorting result per decision action')
         if actionsSubset==None:
-            for x in self.actionsOrig:
+            for x in self.actions:
                 self.computeActionCategories(x,Show=True)
         else:
             for x in actionsSubset:
@@ -2591,8 +2591,8 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         """
         cdef int x
         print('List of decision actions')
-        for x in self.actionsOrig:
-            print('%d: %s' % (ix,self.actions[x]['name']) )
+        for x in self.actions:
+            print('%d: %s' % (x,self.actions[x]['name']) )
 
     def showCriteria(self, bint IntegerWeights=False, bint Debug=False):
         """

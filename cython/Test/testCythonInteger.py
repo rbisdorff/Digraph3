@@ -32,7 +32,7 @@ sampleSize = 1
 MP = True
 nbrOfCPUs = 8
 nbrOfThreads = 8
-nbrOfSubProcesses = 1
+nbrOfSubProcesses = 0
 #set_start_method('fork')
 #componentThreadingThreshold = 500
 nbrActions = 100
@@ -40,7 +40,7 @@ nbrCriteria = 21
 commonPar=('beta','variable',None)
 qtiles = 5
 minimalSize = 1
-seed = 10
+seed = 11
 resFileName = 'CythonA%dObj21q%dms%dsd%dcpu%dhome.txt' % (nbrActions,qtiles,minimalSize,seed,nbrOfCPUs) 
 # write header row
 ##if path.isfile(resFileName):
@@ -114,7 +114,7 @@ for s in range(sampleSize):
     #bg2.showRelationTable()
     
     #tp2.convertBigData2Standard()
-    #tp2.showHTMLPerformanceHeatmap(Correlations=True)
+    tp2.showHTMLPerformanceHeatmap(actionsList=bg2.boostedRanking,Correlations=True)
     ## bg2.showActions()
     ## bg2.showCriteria()
     ## bg2.showDecomposition()

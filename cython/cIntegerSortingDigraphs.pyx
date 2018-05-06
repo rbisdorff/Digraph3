@@ -87,6 +87,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                  bint CompleteOutranking = False,\
                  bint StoreSorting=False,\
                  bint CopyPerfTab=False,\
+                 bint AddProfiles2Actions=False,\
                  bint Threading=False,\
                  tempDir=None,\
                  nbrCores=None,\
@@ -98,7 +99,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
 
         """
         cdef int k, i, ox, totalWeight = 0
-        cdef double tt,t0,
+        cdef double tt,t0
         cdef float q, lowValue=0.0, highValue=100.0
         from cRandPerfTabs import NormalizedPerformanceTableau
         global actions
@@ -248,10 +249,12 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                 cKey = c+'-M'
             #profileLimits.add(cKey)
             if LowerClosed:
-                actions[cKey] = {'name': 'categorical low limits', 'comment': 'Inferior or equal limits for category membership assessment'}
+                if AddProfiles2Actions:
+                    actions[cKey] = {'name': 'categorical low limits', 'comment': 'Inferior or equal limits for category membership assessment'}
                 profiles[cKey] = {'category': c, 'name': 'categorical low limits', 'comment': 'Inferior or equal limits for category membership assessment'}
             else:
-                actions[cKey] = {'name': 'categorical high limits', 'comment': 'Lower or equal limits for category membership assessment'}
+                if AddProfiles2Actions:
+                    actions[cKey] = {'name': 'categorical high limits', 'comment': 'Lower or equal limits for category membership assessment'}
                 profiles[cKey] = {'category': c, 'name': 'categorical high limits', 'comment': 'Lower or equal limits for category membership assessment'}
             for g in dict.keys(criteria):
                 if LowerClosed:
