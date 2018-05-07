@@ -4,7 +4,7 @@ c-Extension for the Digraph3 collection.
 Module cBigIntegerOutrankingDigraphs.py is a c-compiled partial version of the
 :py:mod:`sparseOutrankingDigraphs` module for handling outranking digraphs of very large order.
 
-Copyright (C) 2018  Raymond Bisdorff
+Copyright (C) 2018  Raymond Bisdorff 
 """
 ######################
 
