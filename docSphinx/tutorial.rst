@@ -946,9 +946,9 @@ The :py:mod:`randomPerfTabs` module provides several constructors for random per
     1. The simplest model, called **RandomPerformaceTableau**, generates
     a set of *n* decision actions, a set of *m* real-valued
     performance criteria, ranging by default from 0.0 to 100.0,
-    associated with default discrimination thresholds: 10.0 (ind.),
-    20.0 (pref.) and 80.0 (veto). The generated performances are
-    uniformly distributed on each measurement scale.
+    associated with default discrimination thresholds: 2.5 (ind.),
+    5.0 (pref.) and 60.0 (veto). The generated performances are
+    Beta(2.2) distributed on each measurement scale.
        
     2. One of the most useful random generator, called
     **RandomCBPerformanceTableau**, proposes two decision objectives,
@@ -984,12 +984,12 @@ The :py:class:`randomPerfTabs.RandomPerformanceTableau` class, the simplest of t
          | If 'equisignificant', all criterion weights are put to unity.
     * weightScale := [Min,Max] (default =(1,numberOfCriteria).
     * IntegerWeights := True (default) | False (normalized to proportions of 1.0).
-    * commonScale := [Min;Max]; common performance measuring scales (default = [0;100])
-    * commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p) and considerable performance difference discrimination thresholds. For each threshold type *x* in *{q,p,v}*, the float x0 value represents a constant and the float x1 value a proportional value. Default values are [(10.0,0.0),(20.0,0.0),(80.0,0,0)]. 
+    * commonScale := [a,b]; common performance measuring scales (default = [0.0,100.0])
+    * commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p) and considerable performance difference discrimination thresholds. For each threshold type *x* in *{q,p,v}*, the float x0 value represents a constant percentage of the common scale and the float x1 value a proportional value of the actual perforamance measure. Default values are [(2.5.0,0.0),(5.0,0.0),(60.0,0,0)]. 
     * commonMode := common random distribution of random performance measurements:
          | ('uniform',None,None), uniformly distributed float values on the given common scales' range [Min,Max]. 
-         | ('normal',mu,sigma), truncated Gaussian distribution. 
-         | ('triangular',mode,repartition), generalized triangular distribution with a probability repartition parameter specifying the probability mass accumulated until the mode value.
+         | ('normal',*mu*,*sigma*), truncated Gaussian distribution, by default *mu* = (*b-a*)/2 and *sigma* = (*b-a*)/4. 
+         | ('triangular',*mode*,*repartition*), generalized triangular distribution with a probability repartition parameter specifying the probability mass accumulated until the mode value. By deafult, *mode* = (*b-a*)/2 and *repartition* = 0.5.
          | ('beta',None,(alpha,beta)), a beta generator with standard alpha=2 and beta=2 parameters.
     * valueDigits := <integer>, precision of performance measurements (2 decimal digits by default).
         

@@ -29,15 +29,18 @@ from multiprocessing import set_start_method
 
 # parameters
 sampleSize = 1
-MP = True
+MP = False
 nbrOfCPUs = 8
 nbrOfThreads = 8
 nbrOfSubProcesses = 0
 #set_start_method('fork')
 #componentThreadingThreshold = 500
-nbrActions = 100
+nbrActions = 10
 nbrCriteria = 21
-commonPar=('beta','variable',None)
+#commonPar = ('beta','variable',None)
+#commonPar = ('triangular','variable',0.5)
+#commonPar = ('uniform','variable',None)
+commonPar = None
 qtiles = 5
 minimalSize = 1
 seed = 11

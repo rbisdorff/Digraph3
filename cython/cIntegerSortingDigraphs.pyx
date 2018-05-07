@@ -138,8 +138,8 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
 
         # keep a copy of the original actions set before adding the profiles
         #actionsOrig = OrderedDict(actions)
-        actionsOrig = [x for x in self.actions]
-        self.actionsOrig = actionsOrig
+        #actionsOrig = [x for x in self.actions]
+        #self.actionsOrig = actionsOrig
 
         #  normalizing the performance tableau
         #normPerfTab = NormalizedPerformanceTableau(perfTab)
@@ -284,11 +284,11 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         self.valuationdomain = valuationdomain
 
         if LowerClosed:
-            initialArg = actionsOrig
+            initialArg = actions
             terminalArg = profiles
         else:
             initialArg  = profiles
-            terminalArg = actionsOrig
+            terminalArg = actions
         self.relation = self._constructRelationWithThreading(
                                                    #criteria, global
                                                    #evaluation, global
@@ -749,7 +749,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         shows the quantiles sorting result all (default) of a subset of the decision actions.
         """
         if actionSubset == None:
-            actions = self.actionsOrig
+            actions = self.actions
             actions.sort()
         else:
             actions = [x for x in flatten(actionSubset)]
@@ -826,7 +826,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
             except:
                 strategy = 'average'
         actionsCategories = {}
-        for x in self.actionsOrig:
+        for x in self.actions:
             a,lowCateg,highCateg,credibility =\
                      self.showActionCategories(x,Comments=Debug,\
                             Threading=Threading,nbrOfCPUs=nbrOfCPUs)
@@ -887,7 +887,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
             html += '<th>%s sorting</th>' % strategy
             html += '</tr>'
         actionsCategories = {}
-        for x in self.actionsOrig:
+        for x in self.actions:
             a,lowCateg,highCateg,credibility =\
                      self.showActionCategories(x,Comments=Debug)
             if strategy == "optimistic":
@@ -1086,7 +1086,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
             eq.sort()
             for x in eq:
                 actionsList.append(x)
-        if len(actionsList) != len(self.actionsOrig):
+        if len(actionsList) != len(self.actions):
             print('Error !: missing action(s) %s in ordered table.')
             
         Digraph.showRelationTable(self,actionsSubset=actionsList,\
@@ -1153,7 +1153,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         from copy import copy, deepcopy
         LowerClosed = self.criteriaCategoryLimits['LowerClosed']
         gValues = []
-        for x in self.actionsOrig:
+        for x in self.actions:
             if Debug:
                 print('g,x,evaluation[g][x]',g,x,self.evaluation[g][x])
             if self.evaluation[g][x] != Decimal('-999'):
@@ -1715,7 +1715,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         Min = self.valuationdomain['min']
-        actions = [x for x in self.actionsOrig]
+        actions = [x for x in self.actions]
         currActions = set(actions)
         sortingRelation = {}
         for x in actions:

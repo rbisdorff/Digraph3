@@ -763,8 +763,7 @@ class RandomCoalitionsPerformanceTableau(cPerformanceTableau):
             actionKey = ('a%%0%dd' % (nd)) % (i+1)
             #if BigData:
             actions[i] = {'shortName':actionKey,
-                          'name': actionKey,
-                          'generators': {}}
+                          'name': actionKey}
             ## else:   
             ##     actions[actionKey] = {'shortName':actionKey,
             ##             'name': 'random decision action',
@@ -977,7 +976,7 @@ class RandomCoalitionsPerformanceTableau(cPerformanceTableau):
                     else:
                         randomRange = (randomMode[1],randomMode[2]) 
                         randeval = random.uniform(randomMode[1],randomMode[2])
-                    self.actions[a]['generators'][g] = (randomMode[0],randomRange)
+                    ##self.actions[a]['generators'][g] = (randomMode[0],randomRange)
                     ## if OrdinalScales:
                     ##     randeval /= 10.0
                     ##     if criteria[g]['preferenceDirection'] == 'max':
@@ -1032,7 +1031,7 @@ class RandomCoalitionsPerformanceTableau(cPerformanceTableau):
                     randeval = (u * (M-m)) + m
                     if Debug:
                         print('xm,alpha,beta,u,m,M,randeval',xm,alpha,beta,u,m,M,randeval)
-                    self.actions[a]['generators'][g] = ('beta',alpha,beta)
+                    ## self.actions[a]['generators'][g] = ('beta',alpha,beta)
                     ## if OrdinalScales:
                     ##     randeval /= 10.0
                     ##     if criteria[g]['preferenceDirection'] == 'max':
@@ -1056,7 +1055,7 @@ class RandomCoalitionsPerformanceTableau(cPerformanceTableau):
                     else:
                         xm = randomMode[1]
                     r  = randomMode[2]
-                    self.actions[a]['generators'][g] = (randomMode[0],xm,r)
+                    ## self.actions[a]['generators'][g] = (randomMode[0],xm,r)
                     # setting a speudo random seed
                     rdseed = random.random()
                     rngtr = RNGTr(m,M,xm,r,seed=rdseed)
@@ -1147,7 +1146,7 @@ class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
         actions = OrderedDict()
         for i in range(numberOfActions):
             actionKey = ('a%%0%dd' % (nd)) % (i+1)
-            actions[i] = {'name': actionKey,'generators': {}}
+            actions[i] = {'name': actionKey}
                            
         # generate random weights
         if weightDistribution == 'equisignificant':
@@ -1284,7 +1283,7 @@ class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
             if commonMode == None:
                 randomMode = ['triangular','variable',0.50]               
             else:
-                randomMode = commonMode
+                randomMode = list(commonMode)
             if randomMode[0] == 'uniform' and randomMode[1] == None:
                 randomMode[1] = commonScale[0]
                 randomMode[2] = commonScale[1]
@@ -1295,6 +1294,7 @@ class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
             else:
                 commentString = 'Constant '+randomMode[0]+(' law with parameters = %s, %s' % (str(randomMode[1]),str(randomMode[2])))
                     
+            print(g,criteria[g],commentString)
             criteria[g]['comment'] = commentString
             digits = valueDigits
             
@@ -1311,11 +1311,11 @@ class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
                         elif actions[a]['profile'][aobj] == 'good':
                             randomRange = (commonScale[0]+0.3*(commonScale[1]-commonScale[0]),
                                           commonScale[1])       
-                        actions[a]['comment'] += ': %s %s' % (randomMode[0],randomRange)
+                        #actions[a]['comment'] = ': %s %s' % (randomMode[0],randomRange)
                     else:
                         randomRange = (commonScale[1],commonScale[2]) 
                     randeval = random.uniform(randomRange[0],randomRange[1])
-                    actions[a]['generators'][g] = (randomMode[0],randomRange)
+                    #actions[a]['generators'][g] = (randomMode[0],randomRange)
                     if criteria[g]['preferenceDirection'] == 'max':
                         evaluation[g][a] = round(randeval,digits)
                     else:
@@ -1359,7 +1359,7 @@ class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
                     randeval = (u * (M-m)) + m
                     if Debug:
                         print('xm,alpha,beta,u,m,M,randeval',xm,alpha,beta,u,m,M,randeval)
-                    actions[a]['generators'][g] = ('beta',alpha,beta)
+                    #actions[a]['generators'][g] = ('beta',alpha,beta)
                     if criteria[g]['preferenceDirection'] == 'max':
                         evaluation[g][a] = round(randeval,digits)
                     else:
@@ -1380,7 +1380,7 @@ class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
                     else:
                         xm = randomMode[1]
                     r  = randomMode[2]
-                    actions[a]['generators'][g] = (randomMode[0],xm,r)
+                    #actions[a]['generators'][g] = (randomMode[0],xm,r)
                     # setting a speudo random seed
                     if seed == None:
                         rdseed = random.random()
@@ -1398,6 +1398,8 @@ class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
                    
                     if Debug:
                         print(randeval, criteria[g]['preferenceDirection'], evaluation[g][a])
+            else:
+                print('Error: invalid random number generator %s !!!' % (str(randomMode)) )
 
         # install self object attributes
 

@@ -1712,6 +1712,8 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                    
                     if Debug:
                         print(randeval, criteria[g]['preferenceDirection'], evaluation[g][a])
+            else:
+                print('Error: invalid random number generator %s !!!' % commonPar) 
 
         # install self object attributes
 
