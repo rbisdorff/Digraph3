@@ -1602,9 +1602,9 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <div><p>1. The simplest model, called <strong>RandomPerformaceTableau</strong>, generates
 a set of <em>n</em> decision actions, a set of <em>m</em> real-valued
 performance criteria, ranging by default from 0.0 to 100.0,
-associated with default discrimination thresholds: 10.0 (ind.),
-20.0 (pref.) and 80.0 (veto). The generated performances are
-uniformly distributed on each measurement scale.</p>
+associated with default discrimination thresholds: 2.5 (ind.),
+5.0 (pref.) and 60.0 (veto). The generated performances are
+Beta(2.2) distributed on each measurement scale.</p>
 <p>2. One of the most useful random generator, called
 <strong>RandomCBPerformanceTableau</strong>, proposes two decision objectives,
 named <em>Costs</em> (to be minimized) respectively <em>Benefits</em> (to be
@@ -1649,16 +1649,16 @@ a given number of decision actions.</p>
 </li>
 <li><p class="first">IntegerWeights := True (default) | False (normalized to proportions of 1.0).</p>
 </li>
-<li><p class="first">commonScale := [Min;Max]; common performance measuring scales (default = [0;100])</p>
+<li><p class="first">commonScale := [a,b]; common performance measuring scales (default = [0.0,100.0])</p>
 </li>
-<li><p class="first">commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p) and considerable performance difference discrimination thresholds. For each threshold type <em>x</em> in <em>{q,p,v}</em>, the float x0 value represents a constant and the float x1 value a proportional value. Default values are [(10.0,0.0),(20.0,0.0),(80.0,0,0)].</p>
+<li><p class="first">commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p) and considerable performance difference discrimination thresholds. For each threshold type <em>x</em> in <em>{q,p,v}</em>, the float x0 value represents a constant percentage of the common scale and the float x1 value a proportional value of the actual perforamance measure. Default values are [(2.5.0,0.0),(5.0,0.0),(60.0,0,0)].</p>
 </li>
 <li><dl class="first docutils">
 <dt>commonMode := common random distribution of random performance measurements:</dt>
 <dd><div class="first last line-block">
 <div class="line">(&#8216;uniform&#8217;,None,None), uniformly distributed float values on the given common scales&#8217; range [Min,Max].</div>
-<div class="line">(&#8216;normal&#8217;,mu,sigma), truncated Gaussian distribution.</div>
-<div class="line">(&#8216;triangular&#8217;,mode,repartition), generalized triangular distribution with a probability repartition parameter specifying the probability mass accumulated until the mode value.</div>
+<div class="line">(&#8216;normal&#8217;,*mu*,*sigma*), truncated Gaussian distribution, by default <em>mu</em> = (<em>b-a</em>)/2 and <em>sigma</em> = (<em>b-a</em>)/4.</div>
+<div class="line">(&#8216;triangular&#8217;,*mode*,*repartition*), generalized triangular distribution with a probability repartition parameter specifying the probability mass accumulated until the mode value. By deafult, <em>mode</em> = (<em>b-a</em>)/2 and <em>repartition</em> = 0.5.</div>
 <div class="line">(&#8216;beta&#8217;,None,(alpha,beta)), a beta generator with standard alpha=2 and beta=2 parameters.</div>
 </div>
 </dd>
