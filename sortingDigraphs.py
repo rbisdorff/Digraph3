@@ -3075,7 +3075,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         :py:class:`performanceQuantiles.PerformanceQuantiles` instance.
 
     Example Python session:
-        >>> From sortingDigraphs import *
+        >>> from sortingDigraphs import *
         >>> # historical data
         >>> from randomPerfTabs import RandomCBPerformanceTableau
         >>> nbrActions=1000
@@ -3086,21 +3086,18 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         >>> # new incoming decision actions of the same kind
         >>> from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
         >>> tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
-        >>> newActions = []
-        >>> for i in range(10):
-        ...     newAction = tpg.randomAction()
-        ...     newActions.append(newAction)
+        >>> newActions = tpg.randomActions(10)
         >>> # rating the new set of decision actions after
         >>> # updating the historical performance quantiles
         >>> pq.updateQuantiles(newActions,historySize=None)
         >>> nqr = NormedQuantilesRatingDigraph(pq,newActions,Debug=True)
         >>> # inspecting the rating result
-        >>> nqr.showQuantileRating()
+        >>> nqr.showQuantilesRating()
          *-------- Normed quantiles rating result ---------
          [0.50 - 0.60[ ['a1', 'a7', 'a3', 'a10', 'a2']
          [0.40 - 0.50[ ['a6', 'a9', 'a8']
          [0.20 - 0.30[ ['a4', 'a5']
-        >>> nqr.showHTMLPerformanceHeatmap(pageTitle='Heatmap of Quantiles Rating',Correlations=True)
+        >>> nqr.showHTMLQuantilesHeatmap(pageTitle='Heatmap of Quantiles Rating')
 
     .. image:: exampleIncRatDigraph.png
         :alt: usage example of Normed Quantiles Rating Digraph
