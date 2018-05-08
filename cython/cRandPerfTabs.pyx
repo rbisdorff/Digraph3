@@ -1294,7 +1294,7 @@ class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
             else:
                 commentString = 'Constant '+randomMode[0]+(' law with parameters = %s, %s' % (str(randomMode[1]),str(randomMode[2])))
                     
-            print(g,criteria[g],commentString)
+            #print(g,criteria[g],commentString)
             criteria[g]['comment'] = commentString
             digits = valueDigits
             
