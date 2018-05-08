@@ -3705,7 +3705,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
     Parameters:
         * argPerfTab: instance of PerformanceTableau class.
           If a file name string is given, the performance tableau will directly be loaded first.
-        * coalition: subset of criteria to be used for contruction the outranking digraph.
+        * coalition: subset of criteria to be used for contructing the outranking digraph.
         * hasNoVeto: veto desactivation flag (False by default).
         * hasBipolarVeto: bipolar versus electre veto activation (true by default).
         * Normalized: the valuation domain is set by default to [-100,+100] (bipolar percents).
