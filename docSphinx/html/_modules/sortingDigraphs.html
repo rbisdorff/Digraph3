@@ -3125,7 +3125,7 @@
 <span class="sd">        :py:class:`performanceQuantiles.PerformanceQuantiles` instance.</span>
 
 <span class="sd">    Example Python session:</span>
-<span class="sd">        &gt;&gt;&gt; From sortingDigraphs import *</span>
+<span class="sd">        &gt;&gt;&gt; from sortingDigraphs import *</span>
 <span class="sd">        &gt;&gt;&gt; # historical data</span>
 <span class="sd">        &gt;&gt;&gt; from randomPerfTabs import RandomCBPerformanceTableau</span>
 <span class="sd">        &gt;&gt;&gt; nbrActions=1000</span>
@@ -3136,21 +3136,18 @@
 <span class="sd">        &gt;&gt;&gt; # new incoming decision actions of the same kind</span>
 <span class="sd">        &gt;&gt;&gt; from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator</span>
 <span class="sd">        &gt;&gt;&gt; tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)</span>
-<span class="sd">        &gt;&gt;&gt; newActions = []</span>
-<span class="sd">        &gt;&gt;&gt; for i in range(10):</span>
-<span class="sd">        ...     newAction = tpg.randomAction()</span>
-<span class="sd">        ...     newActions.append(newAction)</span>
+<span class="sd">        &gt;&gt;&gt; newActions = tpg.randomActions(10)</span>
 <span class="sd">        &gt;&gt;&gt; # rating the new set of decision actions after</span>
 <span class="sd">        &gt;&gt;&gt; # updating the historical performance quantiles</span>
 <span class="sd">        &gt;&gt;&gt; pq.updateQuantiles(newActions,historySize=None)</span>
 <span class="sd">        &gt;&gt;&gt; nqr = NormedQuantilesRatingDigraph(pq,newActions,Debug=True)</span>
 <span class="sd">        &gt;&gt;&gt; # inspecting the rating result</span>
-<span class="sd">        &gt;&gt;&gt; nqr.showQuantileRating()</span>
+<span class="sd">        &gt;&gt;&gt; nqr.showQuantilesRating()</span>
 <span class="sd">         *-------- Normed quantiles rating result ---------</span>
 <span class="sd">         [0.50 - 0.60[ [&#39;a1&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a10&#39;, &#39;a2&#39;]</span>
 <span class="sd">         [0.40 - 0.50[ [&#39;a6&#39;, &#39;a9&#39;, &#39;a8&#39;]</span>
 <span class="sd">         [0.20 - 0.30[ [&#39;a4&#39;, &#39;a5&#39;]</span>
-<span class="sd">        &gt;&gt;&gt; nqr.showHTMLPerformanceHeatmap(pageTitle=&#39;Heatmap of Quantiles Rating&#39;,Correlations=True)</span>
+<span class="sd">        &gt;&gt;&gt; nqr.showHTMLRatingHeatmap(pageTitle=&#39;Heatmap of Quantiles Rating&#39;)</span>
 
 <span class="sd">    .. image:: exampleIncRatDigraph.png</span>
 <span class="sd">        :alt: usage example of Normed Quantiles Rating Digraph</span>
@@ -4126,7 +4123,7 @@
 <span class="sd">             [0.50 - 0.75[ [&#39;a1008&#39;, &#39;a1006&#39;, &#39;a1005&#39;, &#39;a1001&#39;, &#39;a1003&#39;, &#39;a1010&#39;]</span>
 <span class="sd">             [0.25 - 0.50[ [&#39;a1002&#39;]</span>
 <span class="sd">             [0.00 - 0.25[ [&#39;a1004&#39;, &#39;a1009&#39;, &#39;a1007&#39;]</span>
-<span class="sd">            &gt;&gt;&gt; nqr.showHTMLRatingHeatmap(pageTitle=&#39;Heatmap of Quantiles Rating&#39;,</span>
+<span class="sd">            &gt;&gt;&gt; nqr.showHTMLRatingHeatmap(pageTitle=&#39;Heat map of the ratings&#39;,</span>
 <span class="sd">            ...                           Correlations=True,</span>
 <span class="sd">            ...                           colorLevels = 5)</span>
 

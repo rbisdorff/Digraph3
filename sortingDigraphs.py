@@ -3097,7 +3097,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
          [0.50 - 0.60[ ['a1', 'a7', 'a3', 'a10', 'a2']
          [0.40 - 0.50[ ['a6', 'a9', 'a8']
          [0.20 - 0.30[ ['a4', 'a5']
-        >>> nqr.showHTMLQuantilesHeatmap(pageTitle='Heatmap of Quantiles Rating')
+        >>> nqr.showHTMLRatingHeatmap(pageTitle='Heatmap of Quantiles Rating')
 
     .. image:: exampleIncRatDigraph.png
         :alt: usage example of Normed Quantiles Rating Digraph
@@ -4073,7 +4073,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
              [0.50 - 0.75[ ['a1008', 'a1006', 'a1005', 'a1001', 'a1003', 'a1010']
              [0.25 - 0.50[ ['a1002']
              [0.00 - 0.25[ ['a1004', 'a1009', 'a1007']
-            >>> nqr.showHTMLRatingHeatmap(pageTitle='Heatmap of Quantiles Rating',
+            >>> nqr.showHTMLRatingHeatmap(pageTitle='Heat map of the ratings',
             ...                           Correlations=True,
             ...                           colorLevels = 5)
 
