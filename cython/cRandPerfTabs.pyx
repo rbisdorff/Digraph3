@@ -146,7 +146,10 @@ class cPerformanceTableau(PerformanceTableau):
                     except:
                         pass
                     print(g, repr(criterionName))
-                    
+                    try:
+                        print('Random generator:  %s' % criteria[g]['randomMode'])
+                    except:
+                        pass
                     print('  Scale =', criteria[g]['scale'])
                     if IntegerWeights:
                         print('  Weight = %d ' % (criteria[g]['weight']))
@@ -178,7 +181,10 @@ class cPerformanceTableau(PerformanceTableau):
                 except:
                     pass
                 print(g, repr(criterionName))
-                
+                try:
+                    print('Random generator:  %s' % criteria[g]['randomMode'])
+                except:
+                    pass
                 print('  Scale =', criteria[g]['scale'])
                 if IntegerWeights:
                     print('  Weight = %d ' % (criteria[g]['weight']))
@@ -1268,10 +1274,11 @@ class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
                 if Debug:
                     print(objectives,obj)
                 ost = random.choice(objectiveSupportingType)
-                actions[x][obj]=ost[0]
-                actions[x]['name'] =\
-                    actions[x]['name'] + ' '+ str(obj) + ost[1]
-                profile[obj] = actions[x][obj]
+                #actions[x][obj]=ost[0]
+                # actions[x]['name'] =\
+                #     actions[x]['name'] + ' '+ str(obj) + ost[1]
+                #profile[obj] = actions[x][obj]
+                profile[obj] = ost[0]
             actions[x]['profile'] = profile
             if Debug:
                 print(x,actions[x])
@@ -1300,15 +1307,20 @@ class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
             
             if str(randomMode[0]) == 'uniform':          
                 for a in actions:
+                    aobj = criteria[g]['objective']
+                    aobjSt = actions[a]['profile'][aobj]
                     if randomMode[1] == 'variable':
                         aobj = criteria[g]['objective']
-                        if actions[a]['profile'][aobj] == 'weak':
+                        #if actions[a]['profile'][aobj] == 'weak':
+                        if aobjSt == 'weak':
                             randomRange = (commonScale[0],
                                            commonScale[0]+0.7*(commonScale[1]-commonScale[0]))
-                        elif actions[a]['profile'][aobj] == 'fair':
+                        #elif actions[a]['profile'][aobj] == 'fair':
+                        elif aobjSt == 'fair':
                             randomRange = (commonScale[0]+0.3*(commonScale[1]-commonScale[0]),
                                            commonScale[0]+0.7*(commonScale[1]-commonScale[0]))
-                        elif actions[a]['profile'][aobj] == 'good':
+                        #elif actions[a]['profile'][aobj] == 'good':
+                        elif aobjSt == 'good':
                             randomRange = (commonScale[0]+0.3*(commonScale[1]-commonScale[0]),
                                           commonScale[1])       
                         #actions[a]['comment'] = ': %s %s' % (randomMode[0],randomRange)
@@ -1323,20 +1335,25 @@ class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
 
             elif str(randomMode[0]) == 'beta':
                 for a in actions:
+                    aobj = criteria[g]['objective']
+                    aobjSt = actions[a]['profile'][aobj]
                     m = commonScale[0]
                     M = commonScale[1]
                     if randomMode[1] == 'variable':
-                        if actions[a][criteria[g]['objective']] == 'good':
+                        #if actions[a][criteria[g]['objective']] == 'good':
+                        if aobjSt == 'good':
                             # mode = 75, stdev = 15
                             #xm = 75
                             alpha = 5.8661
                             beta = 2.62203
-                        elif actions[a][criteria[g]['objective']] == 'fair':
+                        #elif actions[a][criteria[g]['objective']] == 'fair':
+                        elif aobjSt == 'fair':
                             # nmode = 50, stdev = 15
                             #xm = 50
                             alpha = 5.05556
                             beta = 5.05556
-                        elif actions[a][criteria[g]['objective']] == 'weak':
+                        #elif actions[a][criteria[g]['objective']] == 'weak':
+                        elif aobjSt == 'weak':
                             # mode = 25, stdev = 15
                             # xm = 25
                             alpha = 2.62203
@@ -1367,15 +1384,20 @@ class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
     
             elif str(randomMode[0]) == 'triangular':
                 for a in actions:
+                    aobj = criteria[g]['objective']
+                    aobjSt = actions[a]['profile'][aobj]
                     m = commonScale[0]
                     M = commonScale[1]
                     span = commonScale[1]-commonScale[0]
                     if randomMode[1] == 'variable':
-                        if actions[a][criteria[g]['objective']] == 'good':
+                        #if actions[a][criteria[g]['objective']] == 'good':
+                        if aobjSt == 'good':
                             xm = 0.7*span
-                        elif actions[a][criteria[g]['objective']] == 'fair':
+                        #elif actions[a][criteria[g]['objective']] == 'fair':
+                        elif aobjSt == 'fair':
                             xm = 0.5*span
-                        elif actions[a][criteria[g]['objective']] == 'weak':
+                        #elif actions[a][criteria[g]['objective']] == 'weak':
+                        elif aobjSt == 'weak':
                             xm = 0.3*span
                     else:
                         xm = randomMode[1]

@@ -1585,7 +1585,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </div>
 </div>
 <div class="section" id="generating-random-performance-tableaux">
-<span id="randomperformacetableau-tutorial-label"></span><h2><a class="toc-backref" href="#id47">Generating random performance tableaux</a><a class="headerlink" href="#generating-random-performance-tableaux" title="Permalink to this headline">¶</a></h2>
+<span id="randomperformancetableau-tutorial-label"></span><h2><a class="toc-backref" href="#id47">Generating random performance tableaux</a><a class="headerlink" href="#generating-random-performance-tableaux" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id16">
 <ul class="simple">
 <li><a class="reference internal" href="#introduction" id="id80">Introduction</a></li>
@@ -1599,7 +1599,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <h3><a class="toc-backref" href="#id80">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="techDoc.html#module-randomPerfTabs" title="randomPerfTabs"><code class="xref py py-mod docutils literal"><span class="pre">randomPerfTabs</span></code></a> module provides several constructors for random performance tableaux generators of different kind, mainly for the purpose of testing implemented methods and tools presented and discussed in the Algorithmic Decision Theory course at the University of Luxembourg. This tutorial concerns the four most useful generators:</p>
 <blockquote>
-<div><p>1. The simplest model, called <strong>RandomPerformaceTableau</strong>, generates
+<div><p>1. The simplest model, called <strong>RandomPerformanceTableau</strong>, generates
 a set of <em>n</em> decision actions, a set of <em>m</em> real-valued
 performance criteria, ranging by default from 0.0 to 100.0,
 associated with default discrimination thresholds: 2.5 (ind.),
@@ -1926,7 +1926,7 @@ a given number of decision actions.</p>
 </div>
 <div class="section" id="generating-three-objectives-tableaux">
 <h3><a class="toc-backref" href="#id83">Generating three objectives tableaux</a><a class="headerlink" href="#generating-three-objectives-tableaux" title="Permalink to this headline">¶</a></h3>
-<p>We provide the <code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.Random3ObjectivesPerformaceTableau</span></code> class for generating random performance tableaux concerning three preferential decision objectives which take respectively into account <em>economical</em>, <em>societal</em> as well as <em>environmental</em> aspects.</p>
+<p>We provide the <a class="reference internal" href="techDoc.html#randomPerfTabs.Random3ObjectivesPerformanceTableau" title="randomPerfTabs.Random3ObjectivesPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.Random3ObjectivesPerformanceTableau</span></code></a> class for generating random performance tableaux concerning three preferential decision objectives which take respectively into account <em>economical</em>, <em>societal</em> as well as <em>environmental</em> aspects.</p>
 <p>Each decision action is qualified randomly as performing <strong>weak</strong> (-), <strong>fair</strong> (~) or <strong>good</strong> (+) on each of the three objectives.</p>
 <dl class="docutils">
 <dt>Generator directives are the following:</dt>
@@ -3538,7 +3538,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <div class="contents local topic" id="id31">
 <ul class="simple">
 <li><a class="reference internal" href="#id32" id="id99">Introduction</a></li>
-<li><a class="reference internal" href="#incremental-learning-of-historical-performace-quantiles" id="id100">Incremental learning of historical performace quantiles</a></li>
+<li><a class="reference internal" href="#incremental-learning-of-historical-performance-quantiles" id="id100">Incremental learning of historical performance quantiles</a></li>
 <li><a class="reference internal" href="#rating-performances-with-quantile-norms" id="id101">Rating performances with quantile norms</a></li>
 </ul>
 </div>
@@ -3613,8 +3613,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>The non trivial decision problem we now face here, is to decide, how the multi-criteria performances of <em>a1007</em>, respectively <em>a1008</em>,  may be rated (<strong>excellent</strong> ? <strong>good</strong> ?, or <strong>fair</strong> ?; perhaps even, <strong>weak</strong> ? or <strong>very weak</strong> ?) in an <strong>order statistical sense</strong>, when compared with all potential similar multi-criteria performances one has encountered, or may encounter in the future.</p>
 <p>To solve this absolute rating decision problem, first, we need to estimate multi-criteria <strong>performance quantiles</strong> from historical records.</p>
 </div>
-<div class="section" id="incremental-learning-of-historical-performace-quantiles">
-<h3><a class="toc-backref" href="#id100">Incremental learning of historical performace quantiles</a><a class="headerlink" href="#incremental-learning-of-historical-performace-quantiles" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="incremental-learning-of-historical-performance-quantiles">
+<h3><a class="toc-backref" href="#id100">Incremental learning of historical performance quantiles</a><a class="headerlink" href="#incremental-learning-of-historical-performance-quantiles" title="Permalink to this headline">¶</a></h3>
 <p>See also the technical documentation of the <a class="reference internal" href="techDoc.html#performancequantiles-label"><span class="std std-ref">performanceQuantiles module</span></a>.</p>
 <p>Suppose that we see flying in random multiple criteria performances from a given model of random performance tableau (see the <a class="reference internal" href="techDoc.html#module-randomPerfTabs" title="randomPerfTabs"><code class="xref py py-mod docutils literal"><span class="pre">randomPerfTabs</span></code></a> module). The question we address here is to estimate empirical performance quantiles on the basis of so far observed performance vectors. For this task, we are inspired by <a class="reference internal" href="#cham-2006" id="id34">[CHAM-2006]</a> and <a class="reference internal" href="#nr3-2007" id="id35">[NR3-2007]</a>, who present an efficient algorithm for incrementally updating a quantile-binned cumulative density function (CDF) with newly observed CDFs.</p>
 <p>The <a class="reference internal" href="techDoc.html#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a> class implements such a performance quantiles estimation based on a given performance tableau. Its main components are:</p>
@@ -3789,7 +3789,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </td></tr></table></div>
 </dd>
 </dl>
-<p>Data input to the <a class="reference internal" href="techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph" title="sortingDigraphs.NormedQuantilesRatingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.NormedQuantilesRatingDigraph</span></code></a> class constructor (see Line 2) are a valid PerformanceQuantiles object <em>pq</em> and a compatible set <em>newActions</em> of new decision actions generated from the same random origin. Let us have a look at the digraph&#8217;s nodes, here called <strong>actions</strong>. Among the 10 new incoming decision actions (see Line 4 above) there are 3 advantageous (high benefits, but also high costs), 4 cheap (low costs, buts also low benefits) and 4 neutral decision actions. Among the new decision actions shown in the performace tableau below, we recognize actions <em>a1007</em> and <em>a1008</em> we have mentioned in our introduction.</p>
+<p>Data input to the <a class="reference internal" href="techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph" title="sortingDigraphs.NormedQuantilesRatingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.NormedQuantilesRatingDigraph</span></code></a> class constructor (see Line 2) are a valid PerformanceQuantiles object <em>pq</em> and a compatible set <em>newActions</em> of new decision actions generated from the same random origin. Let us have a look at the digraph&#8217;s nodes, here called <strong>actions</strong>. Among the 10 new incoming decision actions (see Line 4 above) there are 3 advantageous (high benefits, but also high costs), 4 cheap (low costs, buts also low benefits) and 4 neutral decision actions. Among the new decision actions shown in the performance tableau below, we recognize actions <em>a1007</em> and <em>a1008</em> we have mentioned in our introduction.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -3853,13 +3853,13 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
  7
  8
  9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Ranking rule        :&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankingRule</span><span class="p">)</span>
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Ranking rule        :&#39;</span><span class="p">,</span> <span class="n">nqr</span><span class="o">.</span><span class="n">rankingRule</span><span class="p">)</span>
 <span class="go">Ranking rule        : Copeland</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Actions ranking     :&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">actionsRanking</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Actions ranking     :&#39;</span><span class="p">,</span> <span class="n">nqr</span><span class="o">.</span><span class="n">actionsRanking</span><span class="p">)</span>
 <span class="go">Actions ranking     : [</span>
 <span class="go">&#39;m4&#39;, &#39;a1008&#39;, &#39;a1006&#39;, &#39;a1005&#39;, &#39;a1001&#39;, &#39;a1003&#39;, &#39;a1010&#39;,</span>
 <span class="go">&#39;m3&#39;, &#39;a1002&#39;, &#39;m2&#39;, &#39;a1004&#39;, &#39;a1009&#39;, &#39;a1007&#39;, &#39;m1&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Ranking correlation :&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankingCorrelation</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Ranking correlation :&#39;</span><span class="p">,</span> <span class="n">nqr</span><span class="o">.</span><span class="n">rankingCorrelation</span><span class="p">)</span>
 <span class="go">Ranking correlation : {</span>
 <span class="go"> &#39;determination&#39;: Decimal(&#39;0.544&#39;),</span>
 <span class="go"> &#39;correlation&#39;: Decimal(&#39;0.966&#39;) }</span>
@@ -4856,7 +4856,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </li>
 <li><a class="reference internal" href="#rating-with-learned-quantile-norms">Rating with learned quantile norms</a><ul>
 <li><a class="reference internal" href="#id32">Introduction</a></li>
-<li><a class="reference internal" href="#incremental-learning-of-historical-performace-quantiles">Incremental learning of historical performace quantiles</a></li>
+<li><a class="reference internal" href="#incremental-learning-of-historical-performance-quantiles">Incremental learning of historical performance quantiles</a></li>
 <li><a class="reference internal" href="#rating-performances-with-quantile-norms">Rating performances with quantile norms</a></li>
 </ul>
 </li>

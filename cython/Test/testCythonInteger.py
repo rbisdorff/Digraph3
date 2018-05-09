@@ -43,7 +43,7 @@ nbrCriteria = 21
 commonPar = None
 qtiles = 5
 minimalSize = 1
-seed = 11
+seed = 15
 resFileName = 'CythonA%dObj21q%dms%dsd%dcpu%dhome.txt' % (nbrActions,qtiles,minimalSize,seed,nbrOfCPUs) 
 # write header row
 ##if path.isfile(resFileName):

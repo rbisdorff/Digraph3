@@ -227,7 +227,7 @@ Back to the :ref:`Technical-label`
 randomPerfTabs module
 ---------------------
 
-A tutorial with coding examples is available here: :ref:`RandomPerformaceTableau-Tutorial-label`
+A tutorial with coding examples is available here: :ref:`RandomPerformanceTableau-Tutorial-label`
 
 .. automodule:: randomPerfTabs
    :member-order: alphabetical

@@ -929,7 +929,7 @@ Many more tools for exploiting bipolarly valued outranking digraphs are availabl
 
 Back to :ref:`Tutorial-label`
 
-.. _RandomPerformaceTableau-Tutorial-label:
+.. _RandomPerformanceTableau-Tutorial-label:
 
 Generating random performance tableaux
 --------------------------------------
@@ -943,7 +943,7 @@ Introduction
 
 The :py:mod:`randomPerfTabs` module provides several constructors for random performance tableaux generators of different kind, mainly for the purpose of testing implemented methods and tools presented and discussed in the Algorithmic Decision Theory course at the University of Luxembourg. This tutorial concerns the four most useful generators:
 
-    1. The simplest model, called **RandomPerformaceTableau**, generates
+    1. The simplest model, called **RandomPerformanceTableau**, generates
     a set of *n* decision actions, a set of *m* real-valued
     performance criteria, ranging by default from 0.0 to 100.0,
     associated with default discrimination thresholds: 2.5 (ind.),
@@ -1141,7 +1141,7 @@ Back to :ref:`Tutorial-label`
 Generating three objectives tableaux
 ....................................
 
-We provide the :py:class:`randomPerfTabs.Random3ObjectivesPerformaceTableau` class for generating random performance tableaux concerning three preferential decision objectives which take respectively into account *economical*, *societal* as well as *environmental* aspects.
+We provide the :py:class:`randomPerfTabs.Random3ObjectivesPerformanceTableau` class for generating random performance tableaux concerning three preferential decision objectives which take respectively into account *economical*, *societal* as well as *environmental* aspects.
 
 Each decision action is qualified randomly as performing **weak** (-), **fair** (~) or **good** (+) on each of the three objectives. 
 
@@ -2106,8 +2106,8 @@ The non trivial decision problem we now face here, is to decide, how the multi-c
 
 To solve this absolute rating decision problem, first, we need to estimate multi-criteria **performance quantiles** from historical records.  
 
-Incremental learning of historical performace quantiles
-.......................................................
+Incremental learning of historical performance quantiles
+........................................................
 
 See also the technical documentation of the :ref:`performanceQuantiles-label`.
 
@@ -2215,7 +2215,7 @@ We reconsider the :code:`PerformanceQuantiles` object instance *pq* as computed 
     Compute rating   : 0.01617
     Compute sorting  : 0.00000
 
-Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class constructor (see Line 2) are a valid PerformanceQuantiles object *pq* and a compatible set *newActions* of new decision actions generated from the same random origin. Let us have a look at the digraph's nodes, here called **actions**. Among the 10 new incoming decision actions (see Line 4 above) there are 3 advantageous (high benefits, but also high costs), 4 cheap (low costs, buts also low benefits) and 4 neutral decision actions. Among the new decision actions shown in the performace tableau below, we recognize actions *a1007* and *a1008* we have mentioned in our introduction.
+Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class constructor (see Line 2) are a valid PerformanceQuantiles object *pq* and a compatible set *newActions* of new decision actions generated from the same random origin. Let us have a look at the digraph's nodes, here called **actions**. Among the 10 new incoming decision actions (see Line 4 above) there are 3 advantageous (high benefits, but also high costs), 4 cheap (low costs, buts also low benefits) and 4 neutral decision actions. Among the new decision actions shown in the performance tableau below, we recognize actions *a1007* and *a1008* we have mentioned in our introduction.
 
     >>> nqr.showPerformanceTableau(actionsSubset=nqr.newActions)
     *----  performance tableau -----*
@@ -2247,13 +2247,13 @@ The main time (0.4 out of 0.5 sec. , see Lines 21-27 of the object description a
 The actual rating procedure will rely on a complete ranking of the new decision actions as well ass the quantile class limits obtained from the corresponding bipolar valued outranking digraph. Two efficient and scalable ranking rules, the **Copeland** and its valued version, the **Netflows** rule may be used for this purpose. The *rankingRule* parameter allows to choose one of both. With *rankingRule='best'* (see Line 2 above) the :code:`NormedQuantilesRatingDigraph` constructor will choose the ranking rule that results in the highest ordinal correlation with the given outranking relation (see [BIS-2012]_).
 
 In this rating example, the Copeland rule appears to be the more appropriate ranking rule:
-    >>> print('Ranking rule        :', self.rankingRule)
+    >>> print('Ranking rule        :', nqr.rankingRule)
     Ranking rule        : Copeland
-    >>> print('Actions ranking     :', self.actionsRanking)
+    >>> print('Actions ranking     :', nqr.actionsRanking)
     Actions ranking     : [
     'm4', 'a1008', 'a1006', 'a1005', 'a1001', 'a1003', 'a1010',
     'm3', 'a1002', 'm2', 'a1004', 'a1009', 'a1007', 'm1']
-    >>> print('Ranking correlation :', self.rankingCorrelation)
+    >>> print('Ranking correlation :', nqr.rankingCorrelation)
     Ranking correlation : {
      'determination': Decimal('0.544'),
      'correlation': Decimal('0.966') }
