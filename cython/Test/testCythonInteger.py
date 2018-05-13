@@ -35,7 +35,7 @@ nbrOfThreads = 8
 nbrOfSubProcesses = 0
 #set_start_method('fork')
 #componentThreadingThreshold = 500
-nbrActions = 10
+nbrActions = 20
 nbrCriteria = 21
 #commonPar = ('beta','variable',None)
 #commonPar = ('triangular','variable',0.5)
@@ -99,6 +99,7 @@ for s in range(sampleSize):
                                quantilesOrderingStrategy='average',
                                minimalComponentSize=minimalSize,
                                LowerClosed=False,
+                               componentRankingRule='NetFlows',
                                Threading=MP,
                                #CopyPerfTab=False,
                                nbrOfCPUs=nbrOfCPUs,
@@ -117,7 +118,7 @@ for s in range(sampleSize):
     #bg2.showRelationTable()
     
     #tp2.convertBigData2Standard()
-    tp2.showHTMLPerformanceHeatmap(actionsList=bg2.boostedRanking,Correlations=True)
+    tp2.showHTMLPerformanceHeatmap(actionsList=bg2.boostedRanking,rankingRule='NetFlows',Correlations=True)
     ## bg2.showActions()
     ## bg2.showCriteria()
     ## bg2.showDecomposition()

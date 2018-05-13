@@ -2205,13 +2205,13 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                 hc = int(highCateg)
                 score1 = lc + hc
                 score2 = hc
-                score3 = -notHighLimit
+                score3 = lowLimit + notHighLimit
                 score4 = lowLimit
             elif strategy == "optimistic":
-                score1 = highCateg
+                score1 = int(highCateg)
                 score2 = -notHighLimit
                 score3 = int(lowCateg)
-                score4 = int(lowLimit)
+                score4 = lowLimit
             else:    # strategy == "pessimistic":
                 score1 = int(lowCateg)
                 score2 = lowLimit
