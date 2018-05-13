@@ -91,7 +91,6 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                  bint Threading=False,\
                  tempDir=None,\
                  nbrCores=None,\
-                 nbrOfProcesses=None,\
                  bint Comments=False,
                  bint Debug=False):
         """
@@ -1303,9 +1302,9 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         
         return categoryContent
 
-    def computeSortingCharacteristics(self, action=None,Comments=False,\
-                                      StoreSorting=False,Debug=False,\
-                                        Threading=False, nbrOfCPUs=None):
+    def computeSortingCharacteristics(self, action=None,bint Comments=False,\
+                                      bint StoreSorting=False,bint Debug=False,\
+                                        bint Threading=False, int nbrOfCPUs=1):
         """
         *Parameters*:
             * action=None,
@@ -1321,6 +1320,8 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         ie x outranks low category limit and does not outrank
         the high category limit.
         """
+        cdef int Min, Max, Med, nbrOfThreads, na
+        cdef bint LowerClosed
         
         Min = self.valuationdomain['min']
         Med = self.valuationdomain['med']
@@ -1352,8 +1353,8 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
 ##            if Comments:
 ##                self.Debug = True
             class myThread(Process):
-                def __init__(self, threadID, tempDirName,
-                             nq, Min, Max, LowerClosed, Debug):
+                def __init__(self, int threadID, tempDirName,
+                             int nq, int Min, int Max, bint LowerClosed, bint Debug):
                     Process.__init__(self)
                     self.threadID = threadID
                     self.workingDirectory = tempDirName

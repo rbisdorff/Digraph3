@@ -871,9 +871,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,PerformanceTableau):
         * Threading=False,
         * tempDir=None,
         * componentThreadingThreshold=1000,\
-        * nbrOfSubProcesses=0,
         * nbrOfCPUs=1,
-        * nbrOfThreads=1,
         * save2File=None,
         * CopyPerfTab=False,
         * Comments=False,
@@ -977,9 +975,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,PerformanceTableau):
                  bint Threading=False,\
                  tempDir=None,\
                  int componentThreadingThreshold=50,\
-                 int nbrOfSubProcesses=0,
                  int nbrOfCPUs=1,\
-                 int nbrOfThreads=1,\
                  save2File=None,\
                  bint CopyPerfTab=False,\
                  bint Comments=False,\
@@ -1057,7 +1053,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,PerformanceTableau):
                                      Threading= self.sortingParameters['Threading'],
                                      tempDir=tempDir,
                                      nbrCores=nbrOfCPUs,
-                                     nbrOfProcesses=nbrOfThreads,
+                                     #nbrOfProcesses=nbrOfCPUs,
                                      #componentThreadingThreshold=50,
                                      Comments=Comments,
                                      Debug=Debug)
@@ -1841,10 +1837,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         * minimalComponentSize=1,
         * Threading=False,
         * tempDir=None,
-        * componentThreadingThreshold=1000,\
-        * nbrOfSubProcesses=0,
         * nbrOfCPUs=1,
-        * nbrOfThreads=1,
         * save2File=None,
         * CopyPerfTab=False,
         * Comments=False,
@@ -1940,10 +1933,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                  int minimalComponentSize=1,\
                  bint Threading=False,\
                  tempDir=None,\
-                 int componentThreadingThreshold=50,\
-                 int nbrOfSubProcesses=0,
                  int nbrOfCPUs=1,\
-                 int nbrOfThreads=1,\
                  save2File=None,\
                  bint CopyPerfTab=False,\
                  bint Comments=False,\
@@ -2011,16 +2001,12 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         qs = IntegerQuantilesSortingDigraph(argPerfTab=perfTab,
                                      limitingQuantiles=quantiles,
                                      LowerClosed=LowerClosed,
-                                     #IntegerValued=True,
                                      CompleteOutranking=False,
                                      StoreSorting=True,
-                                     #WithSortingRelation=False,
                                      CopyPerfTab=CopyPerfTab,
                                      Threading= self.sortingParameters['Threading'],
                                      tempDir=tempDir,
                                      nbrCores=nbrOfCPUs,
-                                     nbrOfProcesses=nbrOfThreads,
-                                     #componentThreadingThreshold=50,
                                      Comments=Comments,
                                      Debug=Debug)
         self.runTimes['sorting'] = time() - t0
@@ -2056,6 +2042,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         self.nbrComponents = nc
         nd = len(str(nc))
         self.nd = nd
+        ### not threding
         if not self.sortingParameters['Threading']:
             self.nbrOfCPUs = 1
             maximalComponentSize = 0
@@ -2119,7 +2106,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                     pass
                 if Comments:
                     print('Exit %d threads' % NUMBER_OF_WORKERS)
-                    
+                ####  post-threading operations    
                 components = OrderedDict()
                 #componentsList = []
                 boostedRanking = []
@@ -2198,7 +2185,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         
         """
         cdef int x,i,nc,currentContLength,CompSize
-        cdef double lc,hc,score1,score2,score3,score4
+        cdef int lc,hc,score1,score2,score3,score4
         
         from operator import itemgetter
 
@@ -2213,23 +2200,23 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                                                nbrOfCPUs = nbrOfCPUs)
             lowQtileLimit = self.categories[lowCateg]['lowLimit']
             highQtileLimit = self.categories[highCateg]['highLimit']
-            if strategy == "optimistic":
-                score1 = float(highCateg)
-                score2 = -float(notHighLimit)
-                score3 = float(lowCateg)
-                score4 = float(lowLimit)
-            elif strategy == "pessimistic":
-                score1 = float(lowCateg)
-                score2 = float(lowLimit)
-                score3 = float(highCateg)
-                score4 = -float(notHighLimit)
-            else:   #strategy == "average":
-                lc = float(lowCateg)
-                hc = float(highCateg)
-                score1 = (lc+hc)/2.0
-                score2 = float(highCateg)
-                score3 = float(lowLimit)-float(notHighLimit)
-                score4 = float(lowLimit)
+            if strategy == "average":
+                lc = int(lowCateg)
+                hc = int(highCateg)
+                score1 = lc + hc
+                score2 = hc
+                score3 = -notHighLimit
+                score4 = lowLimit
+            elif strategy == "optimistic":
+                score1 = highCateg
+                score2 = -notHighLimit
+                score3 = int(lowCateg)
+                score4 = int(lowLimit)
+            else:    # strategy == "pessimistic":
+                score1 = int(lowCateg)
+                score2 = lowLimit
+                score3 = int(highCateg)
+                score4 = -notHighLimit
             #print(score,highQtileLimit,lowQtileLimit,lowCateg,highCateg)
             try:
                 actionsCategories[(score1,highQtileLimit,\

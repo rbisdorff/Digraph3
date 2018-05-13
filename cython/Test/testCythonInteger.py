@@ -102,8 +102,8 @@ for s in range(sampleSize):
                                Threading=MP,
                                #CopyPerfTab=False,
                                nbrOfCPUs=nbrOfCPUs,
-                               nbrOfThreads=nbrOfCPUs,
-                               nbrOfSubProcesses=nbrOfSubProcesses,
+                               #nbrOfThreads=nbrOfCPUs,
+                               #nbrOfSubProcesses=nbrOfSubProcesses,
                                #componentThreadingThreshold=componentThreadingThreshold,
                                Comments=True,
                                Debug=False)
