@@ -1216,7 +1216,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,PerformanceTableau):
         
         """
         cdef int x,i,nc,currentContLength,CompSize
-        cdef double lc,hc,score1,score2,score3,score4
+        cdef int lc,hc,score1,score2,score3,score4
         
         from operator import itemgetter
 
@@ -1230,23 +1230,23 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,PerformanceTableau):
                                                nbrOfCPUs = nbrOfCPUs)
             lowQtileLimit = self.categories[lowCateg]['lowLimit']
             highQtileLimit = self.categories[highCateg]['highLimit']
-            if strategy == "optimistic":
-                score1 = float(highCateg)
-                score2 = -float(notHighLimit)
-                score3 = float(lowCateg)
-                score4 = float(lowLimit)
-            elif strategy == "pessimistic":
-                score1 = float(lowCateg)
-                score2 = float(lowLimit)
-                score3 = float(highCateg)
-                score4 = -float(notHighLimit)
-            else:   #strategy == "average":
-                lc = float(lowCateg)
-                hc = float(highCateg)
-                score1 = (lc+hc)/2.0
-                score2 = float(highCateg)
-                score3 = float(lowLimit) - float(notHighLimit)
-                score4 = -float(notHighLimit)
+            if   strategy == "average":
+                lc = int(lowCateg)
+                hc = int(highCateg)
+                score1 = (lc+hc)
+                score2 = hc
+                score3 = lowLimit - notHighLimit
+                score4 = -notHighLimit
+            elif strategy == "optimistic":
+                score1 = int(highCateg)
+                score2 = -notHighLimit
+                score3 = int(lowCateg)
+                score4 = lowLimit
+            else:  #strategy == "pessimistic"
+                score1 = int(lowCateg)
+                score2 = lowLimit
+                score3 = int(highCateg)
+                score4 = -notHighLimit
             #print(score,highQtileLimit,lowQtileLimit,lowCateg,highCateg)
             try:
                 actionsCategories[(score1,highQtileLimit,\
