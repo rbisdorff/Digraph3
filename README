@@ -28,19 +28,24 @@ http://leopold-loewenheim.uni.lu/docDigraph3/
 
 Installation instructions:
 
-On a (Unix, Mac OSX) command line using git or subversion:
+On a (Unix, Mac OSX) command line using a git client:
 
 ...$git clone https://github.com/rbisdorff/Digraph3
 
-or,
+or a subversion client,
 
-...$svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
+...$svn co https://leopold-loewenheim.uni.lu/svn/repos/Digraph3
 
-cd to the extracted Digraph3 directory:
+You may also download a latest release fom the github link above, or a mirror release from 
+
+https://sourceforge.net/projects/digraph3/.
+
+cd to the extracted or cloned Digraph3 working directory:
 
 ../Digraph3$ make install
 installs (with sudo !!) the digraphs module in the current running python environment. 
-Pythhon 3.5+ environment is recommemded. 
+Pythhon 3.5+ environment is recommemded. A 'make installVenv' allows to install into a private
+virtual python environment.  
 
 If the cython C-compiled modules for Big Data are required, the Cython package must previously be 
 installed in the running Python environment (...$ pip3.5+ install cython )

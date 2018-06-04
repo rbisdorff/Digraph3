@@ -45,9 +45,8 @@ Three download options are given:
 
    ..$ svn co https://leopold-loewenheim.uni.lu/svn/repos/Digraph3 
 
-3. Or, with a browser access, download and extract the latest distribution tar.gz archive from this page:
-
-   https://leopold-loewenheim.uni.lu/Digraph3/dist/
+3. Or, with a browser access, download and extract the latest distribution tar.gz archive
+from this `sourceforge page <https://sourceforge.net/projects/digraph3/>`_ .
 
 
 Starting a python3 session
