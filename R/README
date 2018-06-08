@@ -1,0 +1,9 @@
+# trace of R session
+--$ R
+> source('coraRFP.R')
+> x = read.csv('quartiersNatAll')
+> Call = as.matrix(x[,3:23])
+> rownames(Call)= x[,1]
+> coraPersp(Call)
+> source ('ca.R')
+> ca(Call)
