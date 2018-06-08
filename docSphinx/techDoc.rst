@@ -21,20 +21,24 @@ Three download options are given:
 
      ..$ git clone https://github.com/rbisdorff/Digraph3 
 
-2. or a subversion client::
+2. or, a subversion client::
 
      ..$ svn co https://leopold-loewenheim.uni.lu/svn/repos/Digraph3 
 
-3. Or, with a browser access, download and extract the latest distribution tar.gz archive from this page::
+3. Or, with a browser access, download and extract the latest distribution release tar.gz or zip archive from this sourceforge page::
 
-     https://leopold-loewenheim.uni.lu/Digraph3/dist/
+      https://sourceforge.net/projects/digraph3/
 
 On Linux or Mac OS, ..$ cd to the extracted <Digraph3> directory::
 
      ../Digraph3$ make install
 
-installs (with sudo !!) the digraphs module in the current running python environment. Pythhon 3.5 (or later) environment is recommended.
+installs (with sudo !!) the digraphs module in the current running python environment. Pythhon 3.5 (or later) environment is recommended. Whereas::
 
+     ../Digraph3$ make installVenv
+          
+installs the modules in an activated virtual python environment.
+     
 If the cyton C-compiled modules for Big Data applications are required, it is necessary to previously install the Cython package in the running Python environment::
 
      ...$pip3.5+ install cython
@@ -138,22 +142,22 @@ Sorting, rating and ranking tools
      class;
      
 * :ref:`weakOrders-label` 
-     Additional tools for solving ranking by choosing problems with
+     Additional tools for solving pre-ranking problems with
      root `WeakOrder <techDoc.html#weakOrders.WeakOrder>`_ class.
 
 Miscellaneous tools
 ...................
 
 * :ref:`digraphsTools-label` 
-     Additional various methods and tools for handling digraphs.
+     Various generic methods and tools for handling digraphs.
 
 * :ref:`xmcda-label` 
-     Additional various methods and tools for handling XMCDA encoded performance tableaux.
+     Methods and tools for handling XMCDA encoded performance tableaux and digraphs.
      
 * :ref:`arithmetics-label` 
-     Additional various methods and tools for computing with integer numbers.
+     Some common methods and tools for computing with integer numbers.
 
-Developping the Rubis decision support methodology is an ongoing research project of Raymond Bisdorff <https://leopold-loewenheim.uni.lu/bisdorff/>, University of Luxembourg.
+Developping an outranking digraphs based decision support methodology is an ongoing research project of Raymond Bisdorff <https://leopold-loewenheim.uni.lu/bisdorff/>, University of Luxembourg.
 
 .. toctree::
    :maxdepth: 2
