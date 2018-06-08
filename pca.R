@@ -13,9 +13,21 @@ center = function(x) {
 }
 ####
 pcacov = function(Xin) {
-X = as.matrix(x)
+X = as.matrix(Xin)
 # cov is working on the columns of t(X)
 A = cov(t(X))
+# eigenvectors and values
+E = eigen(A, symmetric=TRUE)
+P = E$values * t(E$vectors)
+valprop = E$values/sum(E$values)
+pcaRes = list(x=X,eig=E,a=A,P=P,val=valprop,cr=0)
+pcaRes
+}
+####
+pcacor = function(Xin) {
+X = as.matrix(Xin)
+# cor is working on the columns of t(X)
+A = cor(t(X))
 # eigenvectors and values
 E = eigen(A, symmetric=TRUE)
 P = E$values * t(E$vectors)
@@ -60,6 +72,19 @@ E = eigen(A, symmetric=TRUE)
 P = E$values * t(E$vectors)
 valprop = E$values/sum(E$values)
 pcaRes = list(x=X,eig=E,a=A,P=P,val=valprop,cr=0)
+pcaRes
+}
+####
+pcachisq = function(Xin) {
+# center and reduce 
+X = chisq.test(as.matrix(Xin))$expected
+# covariance on the lines
+A = X %*% t(X)
+# eigenvectors and values
+E = eigen(A, symmetric=FALSE)
+P = E$values * t(E$vectors)
+valprop = E$values/sum(E$values)
+pcaRes = list(x=X,eig=E,a=A,P=P,val=valprop,cr=1)
 pcaRes
 }
 ####
