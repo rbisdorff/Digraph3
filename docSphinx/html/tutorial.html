@@ -976,7 +976,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </td></tr></table></div>
 </dd>
-<dt>Notice that in this example, all voters are considered to be equi-significant. Their linear ballots can be viewed with the <code class="docutils literal"><span class="pre">showLinearBallots</span></code> method:</dt>
+<dt>Notice that in this random example, the five voters are weighted (see Line 4). Their linear ballots can be viewed with the <code class="docutils literal"><span class="pre">showLinearBallots</span></code> method:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -1029,7 +1029,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </div>
 </dd>
-<dt>We may also follow the Chevalier de Borda&#8217;s advice and, after a <strong>rank analysis</strong> of the linear ballots, compute the <strong>Borda score</strong> of each candidate and hence determine the <strong>Borda winner(s)</strong>:</dt>
+<dt>We may also follow the <em>Chevalier de Borda</em>&#8216;s advice and, after a <strong>rank analysis</strong> of the linear ballots, compute the <strong>Borda score</strong> of each candidate and hence determine the <strong>Borda winner(s)</strong>:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -1070,7 +1070,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <div class="section" id="the-condorcet-winner">
 <h3><a class="toc-backref" href="#id71">The Condorcet winner</a><a class="headerlink" href="#the-condorcet-winner" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>In our randomly generated election results, we are lucky: The instant runoff winner and the Borda winner both are candidate <em>a1</em>. However, we could also follow the Marquis de Condorcet&#8217;s advice, and compute the <strong>majority margins</strong> obtained by voting for each individual pair of candidates. For instance, candidate <em>a1</em> is ranked four times before and once behind candidate <em>a2</em>. Hence the majority margin <em>M(a1,a2)</em> is 4 - 1 = +3. These majority margins define on the set of candidates what we call the <strong>Condorcet digraph</strong>. The <a class="reference internal" href="techDoc.html#votingProfiles.CondorcetDigraph" title="votingProfiles.CondorcetDigraph"><code class="xref py py-class docutils literal"><span class="pre">votingProfiles.CondorcetDigraph</span></code></a> class (a specialization of the <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a> class) is available for handling such pairwise majority margins:</dt>
+<dt>In our randomly generated election results, we are lucky: The instant runoff winner and the Borda winner both are candidate <em>a1</em>. However, we could also follow the <em>Marquis de Condorcet</em>&#8216;s advice, and compute the <strong>majority margins</strong> obtained by voting for each individual pair of candidates. For instance, candidate <em>a1</em> is ranked four times before and once behind candidate <em>a2</em>. Hence the majority margin <em>M(a1,a2)</em> is 4 - 1 = +3. These majority margins define on the set of candidates what we call the <strong>Condorcet digraph</strong>. The <a class="reference internal" href="techDoc.html#votingProfiles.CondorcetDigraph" title="votingProfiles.CondorcetDigraph"><code class="xref py py-class docutils literal"><span class="pre">votingProfiles.CondorcetDigraph</span></code></a> class (a specialization of the <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a> class) is available for handling such pairwise majority margins:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -2059,7 +2059,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go">                          t.objectives[&#39;Env&#39;][&#39;criteria&#39;])</span>
 </pre></div>
 </td></tr></table></div>
-<p>One may this compute partial a bipolar outranking digraph for each individual objective:</p>
+<p>One may thus compute a partial bipolar outranking digraph for each individual objective:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">geco</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">teco</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gsoc</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">tsoc</span><span class="p">)</span>
@@ -3204,7 +3204,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go">Fitness of Kemeny&#39;s ranking: 0.9175</span>
 </pre></div>
 </td></tr></table></div>
-<p>So, <strong>0.9175</strong> is the highest possible ordinal correlation (fitness) any potential ranking can achieve with the given pairwise outranking relation. A Kemeny ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In our example we hence obtain seven optimal Kemeny rankings with a same maximal Kemeny index of 15.095:</p>
+<p>So, <strong>+0.9175</strong> is the highest possible ordinal correlation (fitness) any potential ranking can achieve with the given pairwise outranking relation. A Kemeny ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In our example we hence obtain seven optimal Kemeny rankings with a same maximal Kemeny index of 15.095:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -3281,7 +3281,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="gp">&gt;&gt;&gt; </span><span class="n">slw</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;tutorialSlater&#39;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
-<p>We notice that the first crisp Slater ranking is a rather good fit (0.844), better apparently than the Net-Flows ranking. However, there are in fact 174 such potentially optimal Slater rankings. The corresponding epistemic disjunction gives the follwowing partial ordering:</p>
+<p>We notice that the first crisp Slater ranking is a rather good fit (+0.844), better apparently than the Net-Flows ranking. However, there are in fact 174 such potentially optimal Slater rankings. The corresponding epistemic disjunction gives the follwowing partial ordering:</p>
 <a class="reference internal image-reference" href="_images/tutorialSlater.png"><img alt="_images/tutorialSlater.png" class="align-center" src="_images/tutorialSlater.png" style="width: 150pt;" /></a>
 <p>What precise ranking result should we hence adopt ?</p>
 <p>Kemeny&#8217;s as well as Slater&#8217;s ranking rules are furthermore computationally difficult problems and effective ranking results are only computable for tiny outranking digraphs (&lt; 15 objects).</p>
@@ -3314,7 +3314,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 </div></blockquote>
-<p>Here, we find a better fitness (0.868) when compared with Slater&#8217;s (0.844) or the Net-Flows result (0.828), but not as good as Copeland crisp rule&#8217;s result (0.906).</p>
+<p>Here, we find a better fitness (0.868) when compared with Slater&#8217;s (0.844) or the Net-Flows result (0.828), but not as good as Copeland crisp rule&#8217;s result (+0.906).</p>
 </div>
 <div class="section" id="tideman-s-ranked-pairs-rule">
 <h3><a class="toc-backref" href="#id97">Tideman&#8217;s Ranked-Pairs rule</a><a class="headerlink" href="#tideman-s-ranked-pairs-rule" title="Permalink to this headline">¶</a></h3>

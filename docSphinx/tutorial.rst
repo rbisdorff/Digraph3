@@ -558,7 +558,7 @@ The module provides a :py:class:`votingProfiles.RandomLinearVotingProfile` class
      'v5': ['a2', 'a3', 'a1'], 'v2': ['a3', 'a2', 'a1']}
      >>> ...
 
-Notice that in this example, all voters are considered to be equi-significant. Their linear ballots can be viewed with the ``showLinearBallots`` method:
+Notice that in this random example, the five voters are weighted (see Line 4). Their linear ballots can be viewed with the ``showLinearBallots`` method:
     >>> v.showLinearBallots()
     voters(weight)	 candidates rankings
     v1(2): 	 ['a2', 'a1', 'a3']
@@ -589,7 +589,7 @@ As we observe no absolute majority (8/15) of votes for any of the three candidat
     ['a1']
     >>> ...
 
-We may also follow the Chevalier de Borda's advice and, after a **rank analysis** of the linear ballots, compute the **Borda score** of each candidate and hence determine the **Borda winner(s)**:
+We may also follow the *Chevalier de Borda*'s advice and, after a **rank analysis** of the linear ballots, compute the **Borda score** of each candidate and hence determine the **Borda winner(s)**:
     >>> v.computeRankAnalysis()
     {'a2': [2, 5, 8], 'a1': [6, 9, 0], 'a3': [7, 1, 7]}
     >>> v.computeBordaScores()
@@ -611,7 +611,7 @@ The Borda **rank analysis table** my be printed out with a corresponding ``show`
 The Condorcet winner
 ....................
 
-In our randomly generated election results, we are lucky: The instant runoff winner and the Borda winner both are candidate *a1*. However, we could also follow the Marquis de Condorcet's advice, and compute the **majority margins** obtained by voting for each individual pair of candidates. For instance, candidate *a1* is ranked four times before and once behind candidate *a2*. Hence the majority margin *M(a1,a2)* is 4 - 1 = +3. These majority margins define on the set of candidates what we call the **Condorcet digraph**. The :py:class:`votingProfiles.CondorcetDigraph` class (a specialization of the :py:class:`digraphs.Digraph` class) is available for handling such pairwise majority margins:
+In our randomly generated election results, we are lucky: The instant runoff winner and the Borda winner both are candidate *a1*. However, we could also follow the *Marquis de Condorcet*'s advice, and compute the **majority margins** obtained by voting for each individual pair of candidates. For instance, candidate *a1* is ranked four times before and once behind candidate *a2*. Hence the majority margin *M(a1,a2)* is 4 - 1 = +3. These majority margins define on the set of candidates what we call the **Condorcet digraph**. The :py:class:`votingProfiles.CondorcetDigraph` class (a specialization of the :py:class:`digraphs.Digraph` class) is available for handling such pairwise majority margins:
     >>> from votingProfiles import CondorcetDigraph
     >>> cdg = CondorcetDigraph(v,hasIntegerValuation=True)
     >>> cdg.showAll()
@@ -1224,7 +1224,7 @@ For testing purposes we provifde a special :py:class:`perfTabs.PartialPerformanc
     >>> tenv = PartialPerformanceTableau(t,criteriaSubset=\
                               t.objectives['Env']['criteria'])
 
-One may this compute partial a bipolar outranking digraph for each individual objective:
+One may thus compute a partial bipolar outranking digraph for each individual objective:
 
     >>> from outrankingDigraphs import BipolarOutrankingDigraph
     >>> geco = BipolarOutrankingDigraph(teco)
@@ -1856,7 +1856,7 @@ A **Kemeny** ranking is a linear order which is closest, in the sense of the ord
     >>> print("Fitness of Kemeny's ranking: %.3f" % corr['correlation'])
     Fitness of Kemeny's ranking: 0.9175
 
-So, **0.9175** is the highest possible ordinal correlation (fitness) any potential ranking can achieve with the given pairwise outranking relation. A Kemeny ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In our example we hence obtain seven optimal Kemeny rankings with a same maximal Kemeny index of 15.095::
+So, **+0.9175** is the highest possible ordinal correlation (fitness) any potential ranking can achieve with the given pairwise outranking relation. A Kemeny ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In our example we hence obtain seven optimal Kemeny rankings with a same maximal Kemeny index of 15.095::
 
     >>> ke.maximalRankings
     [['a1', 'a3', 'a4', 'a9', 'a5', 'a8', 'a2', 'a6', 'a7'], 
@@ -1907,7 +1907,7 @@ The **Slater** ranking rule is similar to Kemeny's, but it is working, instead, 
     >>> slw = KemenyWeakOrder(c,orderLimit=9)
     >>> slw.exportGraphViz('tutorialSlater')
 
-We notice that the first crisp Slater ranking is a rather good fit (0.844), better apparently than the Net-Flows ranking. However, there are in fact 174 such potentially optimal Slater rankings. The corresponding epistemic disjunction gives the follwowing partial ordering:
+We notice that the first crisp Slater ranking is a rather good fit (+0.844), better apparently than the Net-Flows ranking. However, there are in fact 174 such potentially optimal Slater rankings. The corresponding epistemic disjunction gives the follwowing partial ordering:
 
 .. image:: tutorialSlater.png
     :width: 150pt
@@ -1939,7 +1939,7 @@ At step *r* (*r* goes from 1 to *n*) do the following:
     >>> print("Fitness of Kohler's ranking: %.3f" % corr['correlation'])
     Fitness of Kohler's ranking: 0.868
 
-Here, we find a better fitness (0.868) when compared with Slater's (0.844) or the Net-Flows result (0.828), but not as good as Copeland crisp rule's result (0.906). 
+Here, we find a better fitness (0.868) when compared with Slater's (0.844) or the Net-Flows result (0.828), but not as good as Copeland crisp rule's result (+0.906). 
 
 Tideman's Ranked-Pairs rule
 ...........................
