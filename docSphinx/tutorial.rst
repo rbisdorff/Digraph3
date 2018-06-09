@@ -13,7 +13,7 @@ Tutorials of the Digraph3 resources
 
 .. _Digraphs-tutorial-label:
 
-Working with the *Digraph3* software ressources
+Working with the *Digraph3* software resources
 -----------------------------------------------
 
 .. contents:: 

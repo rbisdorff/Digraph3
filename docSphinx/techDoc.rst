@@ -13,7 +13,7 @@ Technical Reference of the Digraph3 modules
 Installation
 ------------
 
-**Dowloading the Digraph3 ressources**
+**Dowloading the Digraph3 resources**
 
 Three download options are given:
 
@@ -74,7 +74,7 @@ Basic modules
      <techDoc.html#digraphs.Digraph>`_ class.
      
 * :ref:`graphs-label`
-     Ressources for handling undirected graphs with the root `Graph
+     Resources for handling undirected graphs with the root `Graph
      <techDoc.html#graphs.Graph>`_ class and a brigde to the
      ``digraphs`` module resources.
      

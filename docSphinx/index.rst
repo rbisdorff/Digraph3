@@ -45,7 +45,7 @@ References
 
 .. [2] R. Bisdorff (2013) "On Polarizing Outranking Relations with Large Performance Differences" *Journal of Multi-Criteria Decision Analysis* (Wiley) **20**:3-12 (Preprint `PDF file 403.5kB <https://leopold-loewenheim.uni.lu/bisdorff/documents/MCDA-10-0059-PrePeerReview.pdf>`_)
 
-For further scientific documentation of the Digraph3 ressources, see |location_link2|.
+For further scientific documentation of the Digraph3 resources, see |location_link2|.
 
 |location_link3|
 
