@@ -1,6 +1,5 @@
 .. _Tutorial-label:
 
-
 Tutorials of the Digraph3 resources
 ===================================
 :Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg FSTC/CSC
