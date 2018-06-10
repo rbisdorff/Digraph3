@@ -35,7 +35,7 @@ nbrOfThreads = 8
 nbrOfSubProcesses = 0
 #set_start_method('fork')
 #componentThreadingThreshold = 500
-nbrActions = 20
+nbrActions = 100
 nbrCriteria = 21
 #commonPar = ('beta','variable',None)
 #commonPar = ('triangular','variable',0.5)
