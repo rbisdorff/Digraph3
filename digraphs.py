@@ -6630,7 +6630,9 @@ class Digraph(object):
         fo.close()
 
         resultFile = tempFileName+'.py'
-        if os.path.exists('/usr/local/bin/detectChordlessCircuits'):
+        if os.path.exists('/usr/bin/detectChordlessCircuits'):
+            os.system('/usr/bin/detectChordlessCircuits ' + tempFileName + ' ' + resultFile)
+        elif os.path.exists('/usr/local/bin/detectChordlessCircuits'):
             os.system('/usr/local/bin/detectChordlessCircuits ' + tempFileName + ' ' + resultFile)
         elif os.path.exists('/opt/local/bin/detectChordlessCircuits'):
             os.system('/opt/local/bin/detectChordlessCircuits ' + tempFileName + ' ' + resultFile)
@@ -6664,7 +6666,9 @@ class Digraph(object):
         import os
         from subprocess import Popen,PIPE
 
-        if os.path.exists('/usr/local/bin/enumChordlessCircuitsInOutPiping'):
+        if os.path.exists('/usr/bin/enumChordlessCircuitsInOutPiping'):
+            p = Popen(args=['/usr/bin/enumChordlessCircuitsInOutPiping'],stdin=PIPE,stdout=PIPE)
+        elif os.path.exists('/usr/local/bin/enumChordlessCircuitsInOutPiping'):
             p = Popen(args=['/usr/local/bin/enumChordlessCircuitsInOutPiping'],stdin=PIPE,stdout=PIPE)
         elif os.path.exists('/opt/local/bin/enumChordlessCircuitsInOutPiping'):
             p = Popen(args=['/opt/local/bin/enumChordlessCircuitsInOutPiping'],stdin=PIPE,stdout=PIPE)
@@ -6740,7 +6744,9 @@ class Digraph(object):
         ## if Debug:
         ##     print 'see file: ', tempFileName
         resultFile = tempFileName+'.py'
-        if os.path.exists('/usr/local/bin/enumChordlessCircuits'):
+        if os.path.exists('/usr/bin/enumChordlessCircuits'):
+            os.system('/usr/bin/enumChordlessCircuits ' + tempFileName + ' ' + resultFile)
+        elif os.path.exists('/usr/local/bin/enumChordlessCircuits'):
             os.system('/usr/local/bin/enumChordlessCircuits ' + tempFileName + ' ' + resultFile)
         elif os.path.exists('/opt/local/bin/enumChordlessCircuits'):
             os.system('/opt/local/bin/enumChordlessCircuits ' + tempFileName + ' ' + resultFile)

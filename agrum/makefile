@@ -3,8 +3,8 @@
 #
 CC = g++-7
 CCFLAGS = -Wall -DNDEBUG -std=c++11
-INCLUDE = /usr/local/include
-INSTALL = /usr/local/bin
+INCLUDE = /usr/include
+INSTALL = /usr/bin
 LDagrum = agrum
 all:	
 	make enum
