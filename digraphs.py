@@ -9829,9 +9829,9 @@ class FusionLDigraph(Digraph):
         for x in self.actions:
             fusionRelation[x] = {}
             fx = fusionRelation[x]
-            gx = g.relation[x]
+            #gx = g.relation[x]
             for y in self.actions:
-                args = [gx[y] for g in L]
+                args = [g.relation[x][y] for g in L]
                 if operator == "o-min":
                     fx[y] = omin(Med,args)
                 elif operator == "o-max":

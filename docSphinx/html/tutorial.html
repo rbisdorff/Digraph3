@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>Tutorials of the Digraph3 resources &#8212; Digraph3 3.6-2500+ documentation</title>
-    
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
@@ -29,7 +26,7 @@
     <link rel="next" title="Technical Reference of the Digraph3 modules" href="techDoc.html" />
     <link rel="prev" title="Documentation of the Digraph3 resources" href="index.html" /> 
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -147,7 +144,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <h3><a class="toc-backref" href="#id56"><code class="docutils literal"><span class="pre">Digraph</span></code> object structure</a><a class="headerlink" href="#digraph-object-structure" title="Permalink to this headline">¶</a></h3>
 <p>All <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a> object <em>dg</em> contains at least the following components:</p>
 <ol class="arabic simple">
-<li>A collection of digraph nodes called <strong>actions</strong> (decision actions): a list, set or (ordered) dictionary of nodes with &#8216;name&#8217; and &#8216;shortname&#8217; attributes,</li>
+<li>A collection of digraph nodes called <strong>actions</strong> (decision actions): a list, set or (ordered) dictionary of nodes with ‘name’ and ‘shortname’ attributes,</li>
 <li>A logical characteristic <strong>valuationdomain</strong>, a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true),</li>
 <li>The digraph <strong>relation</strong> : a double dictionary indexed by an oriented pair of actions (nodes) and carrying a characteristic value in the range of the previous valuation domain,</li>
 <li>Its associated <strong>gamma function</strong> : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor,</li>
@@ -441,7 +438,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </dd>
 </dl>
 <a class="reference internal image-reference" href="_images/tutRandValDigraph.png"><img alt="_images/tutRandValDigraph.png" class="align-center" src="_images/tutRandValDigraph.png" style="width: 300px;" /></a>
-<p>Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the undetermined relational situation (<img class="math" src="_images/math/e3061269b88984f61f92e3fc79316900d7baba89.png" alt="r(6\,S\,2) = 0.00"/>) observed between nodes &#8216;6&#8217; and &#8216;2&#8217;. The corresponding link is marked in gray with an open arrowhead in the drawing.</p>
+<p>Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the undetermined relational situation (<img class="math" src="_images/math/e3061269b88984f61f92e3fc79316900d7baba89.png" alt="r(6\,S\,2) = 0.00"/>) observed between nodes ‘6’ and ‘2’. The corresponding link is marked in gray with an open arrowhead in the drawing.</p>
 </div>
 <div class="section" id="asymmetric-and-symmetric-parts">
 <h3><a class="toc-backref" href="#id62">Asymmetric and symmetric parts</a><a class="headerlink" href="#asymmetric-and-symmetric-parts" title="Permalink to this headline">¶</a></h3>
@@ -1029,7 +1026,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </div>
 </dd>
-<dt>We may also follow the <em>Chevalier de Borda</em>&#8216;s advice and, after a <strong>rank analysis</strong> of the linear ballots, compute the <strong>Borda score</strong> of each candidate and hence determine the <strong>Borda winner(s)</strong>:</dt>
+<dt>We may also follow the <em>Chevalier de Borda</em>’s advice and, after a <strong>rank analysis</strong> of the linear ballots, compute the <strong>Borda score</strong> of each candidate and hence determine the <strong>Borda winner(s)</strong>:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -1070,7 +1067,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <div class="section" id="the-condorcet-winner">
 <h3><a class="toc-backref" href="#id71">The Condorcet winner</a><a class="headerlink" href="#the-condorcet-winner" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>In our randomly generated election results, we are lucky: The instant runoff winner and the Borda winner both are candidate <em>a1</em>. However, we could also follow the <em>Marquis de Condorcet</em>&#8216;s advice, and compute the <strong>majority margins</strong> obtained by voting for each individual pair of candidates. For instance, candidate <em>a1</em> is ranked four times before and once behind candidate <em>a2</em>. Hence the majority margin <em>M(a1,a2)</em> is 4 - 1 = +3. These majority margins define on the set of candidates what we call the <strong>Condorcet digraph</strong>. The <a class="reference internal" href="techDoc.html#votingProfiles.CondorcetDigraph" title="votingProfiles.CondorcetDigraph"><code class="xref py py-class docutils literal"><span class="pre">votingProfiles.CondorcetDigraph</span></code></a> class (a specialization of the <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a> class) is available for handling such pairwise majority margins:</dt>
+<dt>In our randomly generated election results, we are lucky: The instant runoff winner and the Borda winner both are candidate <em>a1</em>. However, we could also follow the <em>Marquis de Condorcet</em>’s advice, and compute the <strong>majority margins</strong> obtained by voting for each individual pair of candidates. For instance, candidate <em>a1</em> is ranked four times before and once behind candidate <em>a2</em>. Hence the majority margin <em>M(a1,a2)</em> is 4 - 1 = +3. These majority margins define on the set of candidates what we call the <strong>Condorcet digraph</strong>. The <a class="reference internal" href="techDoc.html#votingProfiles.CondorcetDigraph" title="votingProfiles.CondorcetDigraph"><code class="xref py py-class docutils literal"><span class="pre">votingProfiles.CondorcetDigraph</span></code></a> class (a specialization of the <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a> class) is available for handling such pairwise majority margins:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1192,7 +1189,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </div>
 </dd>
 </dl>
-<p>Condorcet&#8217;s approach for determining the winner of an election is hence not decisive in all circumstances and we need to exploit more sophisticated approaches for finding the winner of the election on the basis of the majority margins of the given linear ballots (see <a class="reference internal" href="#bis-2008" id="id8">[BIS-2008]</a>).</p>
+<p>Condorcet’s approach for determining the winner of an election is hence not decisive in all circumstances and we need to exploit more sophisticated approaches for finding the winner of the election on the basis of the majority margins of the given linear ballots (see <a class="reference internal" href="#bis-2008" id="id8">[BIS-2008]</a>).</p>
 <p>Many more tools for exploiting voting results are available, see the technical documentation of the <a class="reference internal" href="techDoc.html#votingprofiles-label"><span class="std std-ref">votingProfiles module</span></a>.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Tutorials of the Digraph3 resources</span></a></p>
 </div>
@@ -1215,14 +1212,14 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <h3><a class="toc-backref" href="#id73">Outranking digraph</a><a class="headerlink" href="#outranking-digraph" title="Permalink to this headline">¶</a></h3>
 <p>In this <em>Digraph3</em> module, the root <a class="reference internal" href="techDoc.html#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.OutrankingDigraph</span></code></a> class provides a generic <strong>outranking digraph model</strong>. A given object of this class consists in:</p>
 <ol class="arabic simple">
-<li>a potential set of decision <strong>actions</strong> : a dictionary describing the potential decision actions or alternatives with &#8216;name&#8217; and &#8216;comment&#8217; attributes,</li>
+<li>a potential set of decision <strong>actions</strong> : a dictionary describing the potential decision actions or alternatives with ‘name’ and ‘comment’ attributes,</li>
 <li>a coherent family of <strong>criteria</strong>: a dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,</li>
 <li>the <strong>evaluations</strong>: a dictionary of performance evaluations for each decision action or alternative on each criterion function.</li>
 <li>the digraph <strong>valuationdomain</strong>, a dictionary with three entries: the <em>minimum</em> (-100, means certainly no link), the <em>median</em> (0, means missing information) and the <em>maximum</em> characteristic value (+100, means certainly a link),</li>
 <li>the <strong>outranking relation</strong> : a double dictionary defined on the Cartesian product of the set of decision alternatives capturing the credibility of the pairwise <em>outranking situation</em> computed on the basis of the performance differences observed between couples of decision alternatives on the given family if criteria functions.</li>
 </ol>
 <dl class="docutils">
-<dt>With the help of the <a class="reference internal" href="techDoc.html#outrankingDigraphs.RandomBipolarOutrankingDigraph" title="outrankingDigraphs.RandomBipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.RandomBipolarOutrankingDigraph</span></code></a> class (of type <a class="reference internal" href="techDoc.html#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a>) , let us generate for illustration a random bipolar outranking digraph consisting of 7 decision actions denoted <em>a01</em>, <em>a02</em>, ..., <em>a07</em>:</dt>
+<dt>With the help of the <a class="reference internal" href="techDoc.html#outrankingDigraphs.RandomBipolarOutrankingDigraph" title="outrankingDigraphs.RandomBipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.RandomBipolarOutrankingDigraph</span></code></a> class (of type <a class="reference internal" href="techDoc.html#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a>) , let us generate for illustration a random bipolar outranking digraph consisting of 7 decision actions denoted <em>a01</em>, <em>a02</em>, …, <em>a07</em>:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1257,7 +1254,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 </pre></div>
 </td></tr></table></div>
 </dd>
-<dt>In this example we consider furthermore a family of seven equisignificant cardinal criteria functions <em>g01</em>, <em>g02</em>, ..., <em>g07</em>, measuring the performance of each alternative on a rational scale from 0.0 to 100.00. In order to capture the evaluation&#8217;s uncertainty and imprecision, each criterion function <em>g1</em> to <em>g7</em> admits three performance discrimination thresholds of 10, 20 and 80 pts for warranting respectively any indifference, preference and veto situations:</dt>
+<dt>In this example we consider furthermore a family of seven equisignificant cardinal criteria functions <em>g01</em>, <em>g02</em>, …, <em>g07</em>, measuring the performance of each alternative on a rational scale from 0.0 to 100.00. In order to capture the evaluation’s uncertainty and imprecision, each criterion function <em>g1</em> to <em>g7</em> admits three performance discrimination thresholds of 10, 20 and 80 pts for warranting respectively any indifference, preference and veto situations:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1359,7 +1356,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <div class="section" id="valuation-semantics">
 <h3><a class="toc-backref" href="#id75">Valuation semantics</a><a class="headerlink" href="#valuation-semantics" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>Considering the given performance tableau, the <a class="reference internal" href="techDoc.html#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a> class constructor computes the characteristic value <img class="math" src="_images/math/695ed665bf18eb08d098dfa192d47766d22268fe.png" alt="r(x\,S\,y)"/> of a pairwise outranking relation &#8220;<img class="math" src="_images/math/f77d95e5b3095ffa485a8d2acd5e8367686d6bfa.png" alt="x\,S\,y"/>&#8221; (see <a class="reference internal" href="#bis-2013" id="id10">[BIS-2013]</a>, <a class="reference internal" href="#adt-l7" id="id11">[ADT-L7]</a>) in a default valuation domain [-100.0,+100.0] with the median value 0.0 acting as indeterminate characteristic value. The semantics of r(x S y) are the following:</dt>
+<dt>Considering the given performance tableau, the <a class="reference internal" href="techDoc.html#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a> class constructor computes the characteristic value <img class="math" src="_images/math/695ed665bf18eb08d098dfa192d47766d22268fe.png" alt="r(x\,S\,y)"/> of a pairwise outranking relation “<img class="math" src="_images/math/f77d95e5b3095ffa485a8d2acd5e8367686d6bfa.png" alt="x\,S\,y"/>” (see <a class="reference internal" href="#bis-2013" id="id10">[BIS-2013]</a>, <a class="reference internal" href="#adt-l7" id="id11">[ADT-L7]</a>) in a default valuation domain [-100.0,+100.0] with the median value 0.0 acting as indeterminate characteristic value. The semantics of r(x S y) are the following:</dt>
 <dd><ol class="first last arabic simple">
 <li>If <img class="math" src="_images/math/7b95cdf4d0d7ded67a358f08f1e29b142a962371.png" alt="r(x\,S\,y) &gt; 0.0"/> it is more <em>True</em> than <em>False</em> that <em>x outranks y</em>, i.e. alternative x is at least as well performing than alternative y <strong>and</strong> there is no considerable negative performance difference observed in disfavour of x,</li>
 <li>If <img class="math" src="_images/math/8396e0f084210f2d2494034603b8808c2fea89ac.png" alt="r(x\,S\,y) &lt; 0.0"/> it is more <em>False</em> than <em>True</em> that <em>x outranks y</em>, i.e. alternative x is <strong>not</strong> at least as well performing than alternative y <strong>and</strong> there is no considerable positive performance difference observed in favour of x,</li>
@@ -1633,13 +1630,13 @@ a given number of decision actions.</p>
 <li><p class="first">numberOfCriteria := number performance criteria.</p>
 </li>
 <li><dl class="first docutils">
-<dt>weightDistribution := &#8216;random&#8217; (default) | &#8216;fixed&#8217; | &#8216;equisignificant&#8217;.</dt>
+<dt>weightDistribution := ‘random’ (default) | ‘fixed’ | ‘equisignificant’.</dt>
 <dd><div class="first last line-block">
-<div class="line">If &#8216;random&#8217;, weights are uniformly selected randomly</div>
+<div class="line">If ‘random’, weights are uniformly selected randomly</div>
 <div class="line">from the given weight scale;</div>
-<div class="line">If &#8216;fixed&#8217;, the weightScale must provided a corresponding weights</div>
+<div class="line">If ‘fixed’, the weightScale must provided a corresponding weights</div>
 <div class="line">distribution;</div>
-<div class="line">If &#8216;equisignificant&#8217;, all criterion weights are put to unity.</div>
+<div class="line">If ‘equisignificant’, all criterion weights are put to unity.</div>
 </div>
 </dd>
 </dl>
@@ -1655,10 +1652,10 @@ a given number of decision actions.</p>
 <li><dl class="first docutils">
 <dt>commonMode := common random distribution of random performance measurements:</dt>
 <dd><div class="first last line-block">
-<div class="line">(&#8216;uniform&#8217;,None,None), uniformly distributed float values on the given common scales&#8217; range [Min,Max].</div>
-<div class="line">(&#8216;normal&#8217;,*mu*,*sigma*), truncated Gaussian distribution, by default <em>mu</em> = (<em>b-a</em>)/2 and <em>sigma</em> = (<em>b-a</em>)/4.</div>
-<div class="line">(&#8216;triangular&#8217;,*mode*,*repartition*), generalized triangular distribution with a probability repartition parameter specifying the probability mass accumulated until the mode value. By deafult, <em>mode</em> = (<em>b-a</em>)/2 and <em>repartition</em> = 0.5.</div>
-<div class="line">(&#8216;beta&#8217;,None,(alpha,beta)), a beta generator with standard alpha=2 and beta=2 parameters.</div>
+<div class="line">(‘uniform’,None,None), uniformly distributed float values on the given common scales’ range [Min,Max].</div>
+<div class="line">(‘normal’,*mu*,*sigma*), truncated Gaussian distribution, by default <em>mu</em> = (<em>b-a</em>)/2 and <em>sigma</em> = (<em>b-a</em>)/4.</div>
+<div class="line">(‘triangular’,*mode*,*repartition*), generalized triangular distribution with a probability repartition parameter specifying the probability mass accumulated until the mode value. By deafult, <em>mode</em> = (<em>b-a</em>)/2 and <em>repartition</em> = 0.5.</div>
+<div class="line">(‘beta’,None,(alpha,beta)), a beta generator with standard alpha=2 and beta=2 parameters.</div>
 </div>
 </dd>
 </dl>
@@ -1722,7 +1719,7 @@ a given number of decision actions.</p>
 <li>We distinguish three types of decision actions: <em>cheap</em>, <em>neutral</em> and <em>expensive</em> ones with an equal proportion of 1/3. We also distinguish two types of weighted criteria: <em>cost</em> criteria to be <em>minimized</em>, and <em>benefit</em> criteria to be <em>maximized</em>; in the proportions 1/3 respectively 2/3.</li>
 <li>Random performances on each type of criteria  are drawn, either from an ordinal scale [0;10], or from a cardinal scale [0.0;100.0], following a parametric triangular law of mode: 30% performance for cheap, 50% for neutral, and$70% performance for expensive decision actions, with constant probability repartition 0.5 on each side of the respective mode.</li>
 <li>Cost criteria use mostly cardinal scales (3/4), whereas benefit criteria use mostly ordinal scales (2/3).</li>
-<li>The sum of weights of the cost criteria by default equals the sum weights of the benefit criteria: weighDistribution = &#8216;equiobjectives&#8217;.</li>
+<li>The sum of weights of the cost criteria by default equals the sum weights of the benefit criteria: weighDistribution = ‘equiobjectives’.</li>
 <li>On cardinal criteria, both of cost or of benefit type, we observe following constant preference discrimination quantiles: 5% indifferent situations, 90% strict preference situations, and 5% veto situation.</li>
 </ul>
 </div></blockquote>
@@ -1731,11 +1728,11 @@ a given number of decision actions.</p>
 <dd><ul class="first last simple">
 <li>If <em>numberOfActions</em> == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated</li>
 <li>If <em>numberOfCriteria</em> == None, a uniform random number between 5 and 21 of cost or benefit criteria (1/3 respectively 2/3 probability) is instantiated</li>
-<li><em>weightDistribution</em> = {&#8216;equiobjectives&#8217;|&#8217;fixed&#8217;|&#8217;random&#8217;|&#8217;equisignificant&#8217; (default = &#8216;equisignificant&#8217;)}</li>
-<li>default <em>weightScale</em> for &#8216;random&#8217; weightDistribution is 1 - numberOfCriteria</li>
+<li><em>weightDistribution</em> = {‘equiobjectives’|’fixed’|’random’|’equisignificant’ (default = ‘equisignificant’)}</li>
+<li>default <em>weightScale</em> for ‘random’ weightDistribution is 1 - numberOfCriteria</li>
 <li>All cardinal criteria are evaluated with decimals between 0.0 and 100.0 whereas ordinal criteria are evaluated with integers between 0 and 10.</li>
 <li>commonThresholds is obsolete. Preference discrimination is specified as percentiles of concerned performance differences (see below).</li>
-<li>commonPercentiles = {&#8216;ind&#8217;:5, &#8216;pref&#8217;:10, [&#8216;weakveto&#8217;:90,] &#8216;veto&#8217;:95} are expressed in percents (reversed for vetoes) and only concern cardinal criteria.</li>
+<li>commonPercentiles = {‘ind’:5, ‘pref’:10, [‘weakveto’:90,] ‘veto’:95} are expressed in percents (reversed for vetoes) and only concern cardinal criteria.</li>
 </ul>
 </dd>
 </dl>
@@ -1932,12 +1929,12 @@ a given number of decision actions.</p>
 <dd><ul class="first last simple">
 <li>numberOfActions = 20 (default),</li>
 <li>numberOfCriteria = 13 (default),</li>
-<li>weightDistribution = &#8216;equiobjectives&#8217; (default) | &#8216;random&#8217; | &#8216;equisignificant&#8217;,</li>
+<li>weightDistribution = ‘equiobjectives’ (default) | ‘random’ | ‘equisignificant’,</li>
 <li>weightScale = (1,numberOfCriteria): only used when random criterion weights are requested,</li>
 <li>integerWeights = True (default): False gives normlized rational weights,</li>
 <li>commonScale = (0.0,100.0),</li>
-<li>commonThresholds = [(5.0,0.0),(10.0,0.0),(60.0,0.0)]: Performance discrimination thresholds may be set for &#8216;ind&#8217;, &#8216;pref&#8217; and &#8216;veto&#8217;,</li>
-<li>commonMode = [&#8216;triangular&#8217;,&#8217;variable&#8217;,0.5]: random number generators of various other types (&#8216;uniform&#8217;,&#8217;beta&#8217;) are available,</li>
+<li>commonThresholds = [(5.0,0.0),(10.0,0.0),(60.0,0.0)]: Performance discrimination thresholds may be set for ‘ind’, ‘pref’ and ‘veto’,</li>
+<li>commonMode = [‘triangular’,’variable’,0.5]: random number generators of various other types (‘uniform’,’beta’) are available,</li>
 <li>valueDigits = 2 (default): evaluations are encoded as Decimals,</li>
 <li>missingProbability = 0.05 (default): random insertion of missing values with given probability,</li>
 <li>seed= None.</li>
@@ -1946,7 +1943,7 @@ a given number of decision actions.</p>
 </dl>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">If the mode of the <strong>triangular</strong> distribution is set to &#8216;<em>variable</em>&#8216;,
+<p class="last">If the mode of the <strong>triangular</strong> distribution is set to ‘<em>variable</em>’,
 three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span are set at random for each coalition and action.</p>
 </div>
 <div class="admonition warning">
@@ -2158,9 +2155,9 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <li><dl class="first docutils">
 <dt>commonThresholds (default) := {</dt>
 <dd><div class="first last line-block">
-<div class="line">&#8216;ind&#8217;:(0,0),</div>
-<div class="line">&#8216;pref&#8217;:(1,0),</div>
-<div class="line">&#8216;veto&#8217;:(numberOfActions,0)</div>
+<div class="line">‘ind’:(0,0),</div>
+<div class="line">‘pref’:(1,0),</div>
+<div class="line">‘veto’:(numberOfActions,0)</div>
 <div class="line">} (default)</div>
 </div>
 </dd>
@@ -2234,7 +2231,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </table>
 </div></blockquote>
 <dl class="docutils">
-<dt>Three <strong>decision objectives</strong> are guiding the CEO&#8217;s choice:</dt>
+<dt>Three <strong>decision objectives</strong> are guiding the CEO’s choice:</dt>
 <dd><ol class="first last arabic simple">
 <li><em>minimize</em> the yearly costs induced by the moving,</li>
 <li><em>maximize</em> the future turnover of the SME,</li>
@@ -2516,7 +2513,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <div class="section" id="id20">
 <h3><a class="toc-backref" href="#id87">Outranking digraph</a><a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>To help now the CEO choosing the best site, we are going to compute pairwise outrankings (see <a class="reference internal" href="#bis-2013" id="id21">[BIS-2013]</a>) on the set of potential sites. For two sites <em>x</em> and <em>y</em>, the situation &#8220;<em>x</em> outranks <em>y</em>&#8221;, denoted (<em>x</em> S <em>y</em>), is given if there is:</dt>
+<dt>To help now the CEO choosing the best site, we are going to compute pairwise outrankings (see <a class="reference internal" href="#bis-2013" id="id21">[BIS-2013]</a>) on the set of potential sites. For two sites <em>x</em> and <em>y</em>, the situation “<em>x</em> outranks <em>y</em>”, denoted (<em>x</em> S <em>y</em>), is given if there is:</dt>
 <dd><ol class="first last arabic simple">
 <li>a <strong>significant majority</strong> of criteria concordantly supporting that site <em>x</em> is <em>at least as satisfactory as</em> site <em>y</em>, and</li>
 <li><strong>no considerable</strong> counter-performance observed on any discordant criterion.</li>
@@ -2759,11 +2756,11 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <dl class="docutils">
 <dt>The <code class="code docutils literal"><span class="pre">valuationType</span></code> parameter allows to work:</dt>
 <dd><ul class="first last simple">
-<li>on the standard bipolar outranking digraph (valuationType = &#8216;bipolar&#8217;, default),</li>
-<li>on the normalized &#8211;[-1,1] valued&#8211; bipolar outranking digraph (valuationType = &#8216;normalized&#8217;),</li>
-<li>on the robust &#8211;ordinal criteria weights&#8211; bipolar outranking digraph (valuationType = &#8216;robust&#8217;),</li>
-<li>on the confident outranking digraph (valuationType = &#8216;confident&#8217;),</li>
-<li>ignoring considerable performances differences (valuationType = &#8216;noVeto&#8217;).</li>
+<li>on the standard bipolar outranking digraph (valuationType = ‘bipolar’, default),</li>
+<li>on the normalized –[-1,1] valued– bipolar outranking digraph (valuationType = ‘normalized’),</li>
+<li>on the robust –ordinal criteria weights– bipolar outranking digraph (valuationType = ‘robust’),</li>
+<li>on the confident outranking digraph (valuationType = ‘confident’),</li>
+<li>ignoring considerable performances differences (valuationType = ‘noVeto’).</li>
 </ul>
 </dd>
 </dl>
@@ -2931,7 +2928,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </td></tr></table></div>
 </dd>
 </dl>
-<p>It is interesting to notice that the <strong>strict best choice recommendation</strong> consists in the set of weak Condorcet winners: &#8216;A&#8217;, &#8216;C&#8217; and &#8216;D&#8217; (see line 6). In the corresponding characteristic vector (see line 14-15), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see <a class="reference internal" href="#bis-2006" id="id25">[BIS-2006]</a>), we find confirmed that alternative <em>D</em> is the only positively validated one, whereas both extreme alternatives - <em>A</em> (the most expensive) and <em>C</em> (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides <em>D</em>. Notice furthermore that compromise alternative <em>G</em>, while not actually included in the strict best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate.</p>
+<p>It is interesting to notice that the <strong>strict best choice recommendation</strong> consists in the set of weak Condorcet winners: ‘A’, ‘C’ and ‘D’ (see line 6). In the corresponding characteristic vector (see line 14-15), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see <a class="reference internal" href="#bis-2006" id="id25">[BIS-2006]</a>), we find confirmed that alternative <em>D</em> is the only positively validated one, whereas both extreme alternatives - <em>A</em> (the most expensive) and <em>C</em> (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides <em>D</em>. Notice furthermore that compromise alternative <em>G</em>, while not actually included in the strict best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate.</p>
 <p>We may also notice (see line 17 and line 21) that both alternatives <em>A</em> and <em>F</em> are reported as certainly outranked choices, hence a <strong>potential worst choice recommendation</strong> . This confirms again the global incomparability status of alternative <em>A</em>.</p>
 </div>
 <div class="section" id="weakly-ordering">
@@ -2993,8 +2990,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <li><a class="reference internal" href="#the-net-flows-ranking" id="id93">The Net-Flows ranking</a></li>
 <li><a class="reference internal" href="#kemeny-rankings" id="id94">Kemeny rankings</a></li>
 <li><a class="reference internal" href="#slater-rankings" id="id95">Slater rankings</a></li>
-<li><a class="reference internal" href="#kohler-s-ranking-by-choosing-rule" id="id96">Kohler&#8217;s ranking-by-choosing rule</a></li>
-<li><a class="reference internal" href="#tideman-s-ranked-pairs-rule" id="id97">Tideman&#8217;s Ranked-Pairs rule</a></li>
+<li><a class="reference internal" href="#kohler-s-ranking-by-choosing-rule" id="id96">Kohler’s ranking-by-choosing rule</a></li>
+<li><a class="reference internal" href="#tideman-s-ranked-pairs-rule" id="id97">Tideman’s Ranked-Pairs rule</a></li>
 <li><a class="reference internal" href="#ranking-big-performance-tableaux" id="id98">Ranking big performance tableaux</a></li>
 </ul>
 </div>
@@ -3102,11 +3099,11 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </td></tr></table></div>
 <p>There is one chordless circuit detected in the given strict outranking digraph <em>gcd</em>, namely <em>a4</em> outranks <em>a9</em>, the latter outranks <em>a8</em>, and <em>a8</em> outranks again <em>a4</em>. Any potential linear ordering of these three alternatives will, in fact, always contradict somehow the given outranking relation.</p>
 <p>Several heuristic ranking rules have been proposed for constructing a linear ordering which is closest in some specific sense to a given outranking relation.</p>
-<p>The Digraph3 resources provide some of the most common of these ranking rules, like Copeland&#8217;s, Kemeny&#8217;s, Slater&#8217;s, Kohler and Tideman&#8217;s ranking rules.</p>
+<p>The Digraph3 resources provide some of the most common of these ranking rules, like Copeland’s, Kemeny’s, Slater’s, Kohler and Tideman’s ranking rules.</p>
 </div>
 <div class="section" id="the-copeland-ranking">
 <h3><a class="toc-backref" href="#id92">The Copeland ranking</a><a class="headerlink" href="#the-copeland-ranking" title="Permalink to this headline">¶</a></h3>
-<p>Copeland&#8217;s rule, the most intuitive one as it works well for any outranking relation which models in fact a linear order, computes for each alternative a score  resulting from the difference between its crisp out-degree (number of validated (+1) crisp outranking situations) and its crisp in-degree (number of validated crisp (+1) outranked situations):</p>
+<p>Copeland’s rule, the most intuitive one as it works well for any outranking relation which models in fact a linear order, computes for each alternative a score  resulting from the difference between its crisp out-degree (number of validated (+1) crisp outranking situations) and its crisp in-degree (number of validated crisp (+1) outranked situations):</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -3138,7 +3135,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </td></tr></table></div>
 <p>Alternative <em>a3</em> has the best score (+7), followed by alternative <em>a1</em> (+3). Alternatives <em>a4</em> and <em>a9</em> have the same score (+1); following the lexicographic rule, <em>a4</em> is hence ranked before <em>a9</em>. Same situation is observed for <em>a5</em> and <em>a8</em> with a score of -1.</p>
 <p>Notice by the way that Copeland scores, as computed in the associated Condorcet relation table or similarly in the codual digraph drawing above, are in fact invariant under a codual - converse of the negation ~(-g) - transform of the outranking digraph.</p>
-<p>Copeland&#8217;s rule actually renders a linear order which is indeed highly correlated, in the ordinal Kendall sense (see <a class="reference internal" href="#bis-2012" id="id28">[BIS-2012]</a>), with the given pairwise outranking relation:</p>
+<p>Copeland’s rule actually renders a linear order which is indeed highly correlated, in the ordinal Kendall sense (see <a class="reference internal" href="#bis-2012" id="id28">[BIS-2012]</a>), with the given pairwise outranking relation:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">cop</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Fitness of Copeland&#39;s ranking: </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">])</span>
 <span class="go">Fitness of Copeland&#39;s ranking: 0.906</span>
@@ -3184,7 +3181,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 <p>The <strong>Net-Flows</strong> ranking is here, in this didactic example, not as much correlated with the given outranking relation as its crisp cousin ranking.</p>
-<p>To appreciate the effective quality of both the Copeland and the Net-Flows rankings, it is useful to consider Kemeny&#8217;s and Slater&#8217;s optimal ranking rules.</p>
+<p>To appreciate the effective quality of both the Copeland and the Net-Flows rankings, it is useful to consider Kemeny’s and Slater’s optimal ranking rules.</p>
 </div>
 <div class="section" id="kemeny-rankings">
 <h3><a class="toc-backref" href="#id94">Kemeny rankings</a><a class="headerlink" href="#kemeny-rankings" title="Permalink to this headline">¶</a></h3>
@@ -3259,7 +3256,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 <div class="section" id="slater-rankings">
 <h3><a class="toc-backref" href="#id95">Slater rankings</a><a class="headerlink" href="#slater-rankings" title="Permalink to this headline">¶</a></h3>
-<p>The <strong>Slater</strong> ranking rule is similar to Kemeny&#8217;s, but it is working, instead,  on the associated crisp Condorcet digraph <em>c</em>. It renders here the following results:</p>
+<p>The <strong>Slater</strong> ranking rule is similar to Kemeny’s, but it is working, instead,  on the associated crisp Condorcet digraph <em>c</em>. It renders here the following results:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -3284,12 +3281,12 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>We notice that the first crisp Slater ranking is a rather good fit (+0.844), better apparently than the Net-Flows ranking. However, there are in fact 174 such potentially optimal Slater rankings. The corresponding epistemic disjunction gives the follwowing partial ordering:</p>
 <a class="reference internal image-reference" href="_images/tutorialSlater.png"><img alt="_images/tutorialSlater.png" class="align-center" src="_images/tutorialSlater.png" style="width: 150pt;" /></a>
 <p>What precise ranking result should we hence adopt ?</p>
-<p>Kemeny&#8217;s as well as Slater&#8217;s ranking rules are furthermore computationally difficult problems and effective ranking results are only computable for tiny outranking digraphs (&lt; 15 objects).</p>
+<p>Kemeny’s as well as Slater’s ranking rules are furthermore computationally difficult problems and effective ranking results are only computable for tiny outranking digraphs (&lt; 15 objects).</p>
 <p>More efficient ranking heuristics, like the Copeland and the Net-Flows rules, are therefore needed in practice.</p>
 </div>
 <div class="section" id="kohler-s-ranking-by-choosing-rule">
-<h3><a class="toc-backref" href="#id96">Kohler&#8217;s ranking-by-choosing rule</a><a class="headerlink" href="#kohler-s-ranking-by-choosing-rule" title="Permalink to this headline">¶</a></h3>
-<p>Kohler&#8217;s <strong>ranking-by-choosing</strong> rule can be formulated like this.</p>
+<h3><a class="toc-backref" href="#id96">Kohler’s ranking-by-choosing rule</a><a class="headerlink" href="#kohler-s-ranking-by-choosing-rule" title="Permalink to this headline">¶</a></h3>
+<p>Kohler’s <strong>ranking-by-choosing</strong> rule can be formulated like this.</p>
 <p>At step <em>r</em> (<em>r</em> goes from 1 to <em>n</em>) do the following:</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -3314,10 +3311,10 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 </div></blockquote>
-<p>Here, we find a better fitness (0.868) when compared with Slater&#8217;s (0.844) or the Net-Flows result (0.828), but not as good as Copeland crisp rule&#8217;s result (+0.906).</p>
+<p>Here, we find a better fitness (0.868) when compared with Slater’s (0.844) or the Net-Flows result (0.828), but not as good as Copeland crisp rule’s result (+0.906).</p>
 </div>
 <div class="section" id="tideman-s-ranked-pairs-rule">
-<h3><a class="toc-backref" href="#id97">Tideman&#8217;s Ranked-Pairs rule</a><a class="headerlink" href="#tideman-s-ranked-pairs-rule" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id97">Tideman’s Ranked-Pairs rule</a><a class="headerlink" href="#tideman-s-ranked-pairs-rule" title="Permalink to this headline">¶</a></h3>
 <p>A further ranking heuristic, the <strong>Ranked-Pairs</strong> rule, is based on a prudent incremental construction of linear orders that avoids on the fly any cycling outrankings. The ranking procedure may be formulated as follows:</p>
 <blockquote>
 <div><ol class="arabic">
@@ -3620,7 +3617,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <blockquote>
 <div><ul class="simple">
 <li>An <strong>objectives</strong> and a <strong>criteria</strong> ordered dictionary from a valid performance tableau instance;</li>
-<li>A list <strong>quantileFrequencies</strong> of quantile frequencies like <em>quartiles</em> [0.0, 0.25, 05, 0.75,1.0], <em>quintiles</em> [0.0, 0.2, 0.4, 0.6, 0.8, 1.0] or <em>deciles</em> [0.0, 0.1, 0.2, ... 1.0] for instance;</li>
+<li>A list <strong>quantileFrequencies</strong> of quantile frequencies like <em>quartiles</em> [0.0, 0.25, 05, 0.75,1.0], <em>quintiles</em> [0.0, 0.2, 0.4, 0.6, 0.8, 1.0] or <em>deciles</em> [0.0, 0.1, 0.2, … 1.0] for instance;</li>
 <li>An ordered  dictionary <strong>limitingQuantiles</strong> of so far estimated <em>lower</em> (default) or <em>upper</em> quantile class limits for each frequency per criterion;</li>
 <li>An ordered dictionary <strong>historySizes</strong> for keeping track of the number of evaluations seen so far per criterion. Missing data may make these sizes vary from criterion to criterion.</li>
 </ul>
@@ -3650,7 +3647,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span>\
 <span class="gp">... </span>              <span class="n">numberOfBins</span> <span class="o">=</span> <span class="s1">&#39;quartiles&#39;</span><span class="p">,</span>\
 <span class="gp">... </span>              <span class="n">LowerClosed</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 <span class="go">dict_keys([&#39;objectives&#39;, &#39;LowerClosed&#39;, &#39;name&#39;,</span>
 <span class="go">&#39;quantilesFrequencies&#39;, &#39;criteria&#39;, &#39;historySizes&#39;,</span>
 <span class="go">&#39;limitingQuantiles&#39;, ... ])</span>
@@ -3693,7 +3690,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </td></tr></table></div>
 </dd>
 </dl>
-<p>Both objectives are equi-important; the weight (6) of the cost criterion balances the sum of weights (6) of the benefit criteria (see column 2). The preference direction of the cost criterion <em>c1</em> is negative; the lesser the costs the better it is, wheras all the benefit criteria <em>b1</em> to <em>b6</em> show positive preference directions, ie the higher the benefits the better it is. The columns entitled &#8216;0.0&#8217;, resp. &#8216;1.0&#8217; show the quartile <em>Q0</em>, resp. <em>Q4</em>, ie the <strong>worst</strong>, resp. <strong>best</strong> performance observed so far on each criterion. Column &#8216;0.5&#8217; shows the <strong>median</strong> (<em>Q2</em>) observed on the criteria.</p>
+<p>Both objectives are equi-important; the weight (6) of the cost criterion balances the sum of weights (6) of the benefit criteria (see column 2). The preference direction of the cost criterion <em>c1</em> is negative; the lesser the costs the better it is, wheras all the benefit criteria <em>b1</em> to <em>b6</em> show positive preference directions, ie the higher the benefits the better it is. The columns entitled ‘0.0’, resp. ‘1.0’ show the quartile <em>Q0</em>, resp. <em>Q4</em>, ie the <strong>worst</strong>, resp. <strong>best</strong> performance observed so far on each criterion. Column ‘0.5’ shows the <strong>median</strong> (<em>Q2</em>) observed on the criteria.</p>
 <dl class="docutils">
 <dt>New  decision actions with random multiple criteria performance vectors from the same random performance tableau model may now be generated with ad hoc random performance generators. We provide for experimental purpose, in the <a class="reference internal" href="techDoc.html#module-randomPerfTabs" title="randomPerfTabs"><code class="xref py py-mod docutils literal"><span class="pre">randomPerfTabs</span></code></a> module, three such generators: one for the standard <a class="reference internal" href="techDoc.html#randomPerfTabs.RandomPerformanceTableau" title="randomPerfTabs.RandomPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.RandomPerformanceTableau</span></code></a> model, one the for the two objectives <a class="reference internal" href="techDoc.html#randomPerfTabs.RandomCBPerformanceTableau" title="randomPerfTabs.RandomCBPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.RandomCBPerformanceTableau</span></code></a> Cost-Benefit model, and one for the <a class="reference internal" href="techDoc.html#randomPerfTabs.Random3ObjectivesPerformanceTableau" title="randomPerfTabs.Random3ObjectivesPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.Random3ObjectivesPerformanceTableau</span></code></a> model with three objectives concerning respectively  economic, environmental or social aspects. Given a set of 10 new decision actions with generated random performance evaluations, the so far estimated historical quantile limits may be updated as follows:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -3725,7 +3722,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>The constructor requires a valid <a class="reference internal" href="techDoc.html#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a> instance.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">It is important to notice that the <a class="reference internal" href="techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph" title="sortingDigraphs.NormedQuantilesRatingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.NormedQuantilesRatingDigraph</span></code></a> class, contrary to the generic <a class="reference internal" href="techDoc.html#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.OutrankingDigraph</span></code></a> class, does not inherit from the generic <a class="reference internal" href="techDoc.html#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a> class, but instead from the <a class="reference internal" href="techDoc.html#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a> class. The <strong>actions</strong> in such a <a class="reference internal" href="techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph" title="sortingDigraphs.NormedQuantilesRatingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.NormedQuantilesRatingDigraph</span></code></a> class instance contain not only the newly given decision actions, but also the historical quantile profiles obtained from a given <a class="reference internal" href="techDoc.html#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a> class instance, ie estimated quantile bins&#8217; performance limits from historical performance data.</p>
+<p class="last">It is important to notice that the <a class="reference internal" href="techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph" title="sortingDigraphs.NormedQuantilesRatingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.NormedQuantilesRatingDigraph</span></code></a> class, contrary to the generic <a class="reference internal" href="techDoc.html#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.OutrankingDigraph</span></code></a> class, does not inherit from the generic <a class="reference internal" href="techDoc.html#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a> class, but instead from the <a class="reference internal" href="techDoc.html#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a> class. The <strong>actions</strong> in such a <a class="reference internal" href="techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph" title="sortingDigraphs.NormedQuantilesRatingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.NormedQuantilesRatingDigraph</span></code></a> class instance contain not only the newly given decision actions, but also the historical quantile profiles obtained from a given <a class="reference internal" href="techDoc.html#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a> class instance, ie estimated quantile bins’ performance limits from historical performance data.</p>
 </div>
 <dl class="docutils">
 <dt>We reconsider the <code class="code docutils literal"><span class="pre">PerformanceQuantiles</span></code> object instance <em>pq</em> as computed in the previous section. Let <em>newActions</em> be a set of 10 random generated new decision actions of the same kind:</dt>
@@ -3788,7 +3785,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </td></tr></table></div>
 </dd>
 </dl>
-<p>Data input to the <a class="reference internal" href="techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph" title="sortingDigraphs.NormedQuantilesRatingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.NormedQuantilesRatingDigraph</span></code></a> class constructor (see Line 2) are a valid PerformanceQuantiles object <em>pq</em> and a compatible set <em>newActions</em> of new decision actions generated from the same random origin. Let us have a look at the digraph&#8217;s nodes, here called <strong>actions</strong>. Among the 10 new incoming decision actions (see Line 4 above) there are 3 advantageous (high benefits, but also high costs), 4 cheap (low costs, buts also low benefits) and 4 neutral decision actions. Among the new decision actions shown in the performance tableau below, we recognize actions <em>a1007</em> and <em>a1008</em> we have mentioned in our introduction.</p>
+<p>Data input to the <a class="reference internal" href="techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph" title="sortingDigraphs.NormedQuantilesRatingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.NormedQuantilesRatingDigraph</span></code></a> class constructor (see Line 2) are a valid PerformanceQuantiles object <em>pq</em> and a compatible set <em>newActions</em> of new decision actions generated from the same random origin. Let us have a look at the digraph’s nodes, here called <strong>actions</strong>. Among the 10 new incoming decision actions (see Line 4 above) there are 3 advantageous (high benefits, but also high costs), 4 cheap (low costs, buts also low benefits) and 4 neutral decision actions. Among the new decision actions shown in the performance tableau below, we recognize actions <em>a1007</em> and <em>a1008</em> we have mentioned in our introduction.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -3813,7 +3810,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 <dl class="docutils">
-<dt>The <code class="code docutils literal"><span class="pre">NormedQuantilesRatingDigraphdigraph</span></code> instance&#8217;s actions dictionary also contains the closed lower limits of the four quartile classes: <em>m1</em> = [0.0-0.25[, <em>m2</em> = [0.25-0.5[, <em>m3</em> =[0.5 - 0.75[, <em>m4</em> = [0.75 - 1.0[.</dt>
+<dt>The <code class="code docutils literal"><span class="pre">NormedQuantilesRatingDigraphdigraph</span></code> instance’s actions dictionary also contains the closed lower limits of the four quartile classes: <em>m1</em> = [0.0-0.25[, <em>m2</em> = [0.25-0.5[, <em>m3</em> =[0.5 - 0.75[, <em>m4</em> = [0.75 - 1.0[.</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -3840,7 +3837,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </dd>
 </dl>
 <p>The main time (0.4 out of 0.5 sec. , see Lines 21-27 of the object description above) is spent by the class constructor in computing a bipolar valued outranking relation on the extended actions set including both the new actions as well as the quartile class limits. In case of large volumes, ie many new decision actions and centile classes for instance, a multi-threading version may be used when multiple processing cores are available (see the technical description of the <a class="reference internal" href="techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph" title="sortingDigraphs.NormedQuantilesRatingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.NormedQuantilesRatingDigraph</span></code></a> class).</p>
-<p>The actual rating procedure will rely on a complete ranking of the new decision actions as well ass the quantile class limits obtained from the corresponding bipolar valued outranking digraph. Two efficient and scalable ranking rules, the <strong>Copeland</strong> and its valued version, the <strong>Netflows</strong> rule may be used for this purpose. The <em>rankingRule</em> parameter allows to choose one of both. With <em>rankingRule=&#8217;best&#8217;</em> (see Line 2 above) the <code class="code docutils literal"><span class="pre">NormedQuantilesRatingDigraph</span></code> constructor will choose the ranking rule that results in the highest ordinal correlation with the given outranking relation (see <a class="reference internal" href="#bis-2012" id="id36">[BIS-2012]</a>).</p>
+<p>The actual rating procedure will rely on a complete ranking of the new decision actions as well ass the quantile class limits obtained from the corresponding bipolar valued outranking digraph. Two efficient and scalable ranking rules, the <strong>Copeland</strong> and its valued version, the <strong>Netflows</strong> rule may be used for this purpose. The <em>rankingRule</em> parameter allows to choose one of both. With <em>rankingRule=’best’</em> (see Line 2 above) the <code class="code docutils literal"><span class="pre">NormedQuantilesRatingDigraph</span></code> constructor will choose the ranking rule that results in the highest ordinal correlation with the given outranking relation (see <a class="reference internal" href="#bis-2012" id="id36">[BIS-2012]</a>).</p>
 <dl class="docutils">
 <dt>In this rating example, the Copeland rule appears to be the more appropriate ranking rule:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -3865,7 +3862,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 </dd>
-<dt>We achieve here a linear ranking without ties (from best to worst) of the digraph&#8217;s actions, ie including the new decision actions as well as the quartile limits <em>m1</em> to <em>m4</em>, which is very close in an ordinal sense (<em>tau</em> = 0.97) to the underlying valued outranking relation. With the <em>NetFlows</em> rule we would get the following slightly different ranking result:</dt>
+<dt>We achieve here a linear ranking without ties (from best to worst) of the digraph’s actions, ie including the new decision actions as well as the quartile limits <em>m1</em> to <em>m4</em>, which is very close in an ordinal sense (<em>tau</em> = 0.97) to the underlying valued outranking relation. With the <em>NetFlows</em> rule we would get the following slightly different ranking result:</dt>
 <dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -3887,7 +3884,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </dl>
 <p>which is, however, less correlated (<em>tau</em> = 0.89) with the underlying outranking relation.</p>
 <dl class="docutils">
-<dt>The eventual rating procedure is based on the lower quantile limits, such that we may collect the quartile classes&#8217; contents in increasing order of the quartiles lower limits:</dt>
+<dt>The eventual rating procedure is based on the lower quantile limits, such that we may collect the quartile classes’ contents in increasing order of the quartiles lower limits:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Rating categories:&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ratingCategories</span><span class="p">)</span>
 <span class="go">Rating categories: OrderedDict([</span>
 <span class="go"> (&#39;m1&#39;, [&#39;a1004&#39;, &#39;a1009&#39;, &#39;a1007&#39;]), (&#39;m2&#39;, [&#39;a1002&#39;]),</span>
@@ -3982,7 +3979,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <h3><a class="toc-backref" href="#id102">Structure of a <code class="docutils literal"><span class="pre">Graph</span></code> object</a><a class="headerlink" href="#structure-of-a-graph-object" title="Permalink to this headline">¶</a></h3>
 <p>In the <a class="reference internal" href="techDoc.html#module-graphs" title="graphs"><code class="xref py py-mod docutils literal"><span class="pre">graphs</span></code></a> module, the root <a class="reference internal" href="techDoc.html#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal"><span class="pre">graphs.Graph</span></code></a> class provides a generic <strong>simple graph model</strong>, without loops and multiple links. A given object of this class consists in:</p>
 <ol class="arabic simple">
-<li>the graph <strong>vertices</strong> : a dictionary of vertices with &#8216;name&#8217; and &#8216;shortname&#8217; attributes,</li>
+<li>the graph <strong>vertices</strong> : a dictionary of vertices with ‘name’ and ‘shortname’ attributes,</li>
 <li>the graph <strong>valuationDomain</strong> , a dictionary with three entries: the minimum (-1, means certainly no link), the median (0, means missing information) and the maximum characteristic value (+1, means certainly a link),</li>
 <li>the graph <strong>edges</strong> : a dictionary with frozensets of pairs of vertices as entries carrying a characteristic value in the range of the previous valuation domain,</li>
 <li>and its associated <strong>gamma function</strong> : a dictionary containing the direct neighbors of each vertice, automatically added by the object constructor.</li>
@@ -4485,7 +4482,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </dd>
 </dl>
 <p>The <code class="docutils literal"><span class="pre">checkSampling()</span></code> method (see line 23) generates a random walk of <em>nSim=30000</em> steps on the given graph and records by the way the observed relative frequency with which each vertex is passed by. In this example, the stationary transition probability distribution, shown by the <code class="docutils literal"><span class="pre">showTransitionMatrix()</span></code> method above (see lines 31-), is quite adequately simulated.</p>
-<p>For more technical information and more code examples, look into the technical documentation of the <a class="reference internal" href="techDoc.html#graphs-label"><span class="std std-ref">graphs module</span></a>. For the readers interested in algorithmic applications of Markov Chains we may recommend consulting O. Häggström&#8217;s 2002 book: <a class="reference internal" href="#fmcaa" id="id39">[FMCAA]</a>.</p>
+<p>For more technical information and more code examples, look into the technical documentation of the <a class="reference internal" href="techDoc.html#graphs-label"><span class="std std-ref">graphs module</span></a>. For the readers interested in algorithmic applications of Markov Chains we may recommend consulting O. Häggström’s 2002 book: <a class="reference internal" href="#fmcaa" id="id39">[FMCAA]</a>.</p>
 </div>
 <div class="section" id="the-berge-mystery-story-who-is-the-lier">
 <h3><a class="toc-backref" href="#id107">The Berge mystery story: Who is the lier ?</a><a class="headerlink" href="#the-berge-mystery-story-who-is-the-lier" title="Permalink to this headline">¶</a></h3>
@@ -4711,7 +4708,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label">[BIS-2013]</td><td><em>(<a class="fn-backref" href="#id10">1</a>, <a class="fn-backref" href="#id12">2</a>, <a class="fn-backref" href="#id13">3</a>, <a class="fn-backref" href="#id19">4</a>, <a class="fn-backref" href="#id21">5</a>, <a class="fn-backref" href="#id22">6</a>, <a class="fn-backref" href="#id24">7</a>, <a class="fn-backref" href="#id27">8</a>)</em> <ol class="last upperalpha simple" start="18">
-<li>Bisdorff (2013) &#8220;On Polarizing Outranking Relations with Large Performance Differences&#8221; <em>Journal of Multi-Criteria Decision Analysis</em> (Wiley) <strong>20</strong>:3-12 (downloadable preprint <a class="reference external" href="https://leopold-loewenheim.uni.lu/bisdorff/documents/MCDA-10-0059-PrePeerReview.pdf">PDF file 403.5 Kb</a>)</li>
+<li>Bisdorff (2013) “On Polarizing Outranking Relations with Large Performance Differences” <em>Journal of Multi-Criteria Decision Analysis</em> (Wiley) <strong>20</strong>:3-12 (downloadable preprint <a class="reference external" href="https://leopold-loewenheim.uni.lu/bisdorff/documents/MCDA-10-0059-PrePeerReview.pdf">PDF file 403.5 Kb</a>)</li>
 </ol>
 </td></tr>
 </tbody>
@@ -4720,7 +4717,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label">[BIS-2012]</td><td><em>(<a class="fn-backref" href="#id28">1</a>, <a class="fn-backref" href="#id29">2</a>, <a class="fn-backref" href="#id36">3</a>)</em> <ol class="last upperalpha simple" start="18">
-<li>Bisdorff (2012). &#8220;On measuring and testing the ordinal correlation between bipolar outranking relations&#8221;. In Proceedings of DA2PL’2012 <em>From Multiple Criteria Decision Aid to Preference Learning</em>, University of Mons 91-100. (downloadable preliminary version <a class="reference external" href="https://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RBisdorffMons.pdf">PDF file 408.5 kB</a> )</li>
+<li>Bisdorff (2012). “On measuring and testing the ordinal correlation between bipolar outranking relations”. In Proceedings of DA2PL’2012 <em>From Multiple Criteria Decision Aid to Preference Learning</em>, University of Mons 91-100. (downloadable preliminary version <a class="reference external" href="https://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RBisdorffMons.pdf">PDF file 408.5 kB</a> )</li>
 </ol>
 </td></tr>
 </tbody>
@@ -4729,7 +4726,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label">[BIS-2008]</td><td><em>(<a class="fn-backref" href="#id8">1</a>, <a class="fn-backref" href="#id23">2</a>)</em> <ol class="last upperalpha simple" start="18">
-<li>Bisdorff, P. Meyer and M. Roubens (2008) &#8220;RUBIS: a bipolar-valued outranking method for the choice problem&#8221;. 4OR, <em>A Quarterly Journal of Operations Research</em> Springer-Verlag, Volume 6,  Number 2 pp. 143-165. (Online) Electronic version: DOI: 10.1007/s10288-007-0045-5 (downloadable preliminary version <a class="reference external" href="https://leopold-loewenheim.uni.lu/bisdorff/documents/HyperKernels.pdf">PDF file 271.5Kb</a>)</li>
+<li>Bisdorff, P. Meyer and M. Roubens (2008) “RUBIS: a bipolar-valued outranking method for the choice problem”. 4OR, <em>A Quarterly Journal of Operations Research</em> Springer-Verlag, Volume 6,  Number 2 pp. 143-165. (Online) Electronic version: DOI: 10.1007/s10288-007-0045-5 (downloadable preliminary version <a class="reference external" href="https://leopold-loewenheim.uni.lu/bisdorff/documents/HyperKernels.pdf">PDF file 271.5Kb</a>)</li>
 </ol>
 </td></tr>
 </tbody>
@@ -4737,20 +4734,20 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <table class="docutils citation" frame="void" id="nr3-2007" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id35">[NR3-2007]</a></td><td>W.H. Press, S.A. Teukolsky, W.T. Vetterling and B.P. Flannery (2007) &#8220;Single-Pass Estimation of Arbitrary Quantiles&#8221; Section 5.8.2 in <em>Numerical Recipes: The Art of Scientific Computing 3rd Ed.</em>, Cambridge University Press, pp 435-438.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id35">[NR3-2007]</a></td><td>W.H. Press, S.A. Teukolsky, W.T. Vetterling and B.P. Flannery (2007) “Single-Pass Estimation of Arbitrary Quantiles” Section 5.8.2 in <em>Numerical Recipes: The Art of Scientific Computing 3rd Ed.</em>, Cambridge University Press, pp 435-438.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="cham-2006" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id34">[CHAM-2006]</a></td><td>J.M. Chambers, D.A. James, D. Lambert and S. Vander Wiel (2006) &#8220;Monitoring Networked Applications with Incremental Quantile Estimation&#8221;. <em>Statistical Science</em>, Vol. 21, No.4, pp.463-475. DOI: 10 12140/088342306000000583.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id34">[CHAM-2006]</a></td><td>J.M. Chambers, D.A. James, D. Lambert and S. Vander Wiel (2006) “Monitoring Networked Applications with Incremental Quantile Estimation”. <em>Statistical Science</em>, Vol. 21, No.4, pp.463-475. DOI: 10 12140/088342306000000583.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="bis-2006" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id25">[BIS-2006]</a></td><td><ol class="first last upperalpha simple" start="18">
-<li>Bisdorff, M. Pirlot and M. Roubens (2006). &#8220;Choices and kernels from bipolar valued digraphs&#8221;. <em>European Journal of Operational Research</em>, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version <a class="reference external" href="https://sma.uni.lu/bisdorff/documents/BisdorffPirlotRoubens05.pdf">PDF file 257.3Kb</a>)</li>
+<li>Bisdorff, M. Pirlot and M. Roubens (2006). “Choices and kernels from bipolar valued digraphs”. <em>European Journal of Operational Research</em>, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version <a class="reference external" href="https://sma.uni.lu/bisdorff/documents/BisdorffPirlotRoubens05.pdf">PDF file 257.3Kb</a>)</li>
 </ol>
 </td></tr>
 </tbody>
@@ -4848,8 +4845,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <li><a class="reference internal" href="#the-net-flows-ranking">The Net-Flows ranking</a></li>
 <li><a class="reference internal" href="#kemeny-rankings">Kemeny rankings</a></li>
 <li><a class="reference internal" href="#slater-rankings">Slater rankings</a></li>
-<li><a class="reference internal" href="#kohler-s-ranking-by-choosing-rule">Kohler&#8217;s ranking-by-choosing rule</a></li>
-<li><a class="reference internal" href="#tideman-s-ranked-pairs-rule">Tideman&#8217;s Ranked-Pairs rule</a></li>
+<li><a class="reference internal" href="#kohler-s-ranking-by-choosing-rule">Kohler’s ranking-by-choosing rule</a></li>
+<li><a class="reference internal" href="#tideman-s-ranked-pairs-rule">Tideman’s Ranked-Pairs rule</a></li>
 <li><a class="reference internal" href="#ranking-big-performance-tableaux">Ranking big performance tableaux</a></li>
 </ul>
 </li>
@@ -4926,7 +4923,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2012-2018, Raymond Bisdorff.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
     </div>
   </body>
 </html>
