@@ -696,3 +696,13 @@ def testXMCDARubisSolver():
 ##    solver2.submitXMCDA2Problem('test',Debug=False)
 ##    sleep(5)
 ##    solver2.saveXMCDA2Solution()
+
+def testFusionLDigraph():
+    print('==>> Testing FusionLDigraph instantiation')
+    t = Random3ObjectivesPerformanceTableau()
+    geco = BipolarOutrankingDigraph(t,coalition=t.objectives['Eco']['criteria'],Normalized=True)
+    genv = BipolarOutrankingDigraph(t,coalition=t.objectives['Env']['criteria'],Normalized=True)
+    gsoc = BipolarOutrankingDigraph(t,coalition=t.objectives['Soc']['criteria'],Normalized=True)
+    gfus = FusionLDigraph([geco,genv,gsoc],operator='o-max')
+    g = BipolarOutrankingDigraph(t,Normalized=True)
+    print(g.computeOrdinalCorrelation(gfus))
