@@ -9632,22 +9632,11 @@ class CoDualDigraph(Digraph):
         from copy import deepcopy
         self.__class__ = other.__class__
         self.name = 'codual-'+other.name
-        try:
-            self.description = deepcopy(other.description)
-        except AttributeError:
-            pass
-        try:
-            self.criteria = deepcopy(other.criteria)
-        except AttributeError:
-            pass
-        try:
-            self.evaluation = deepcopy(other.evaluation)
-        except AttributeError:
-            pass
-        self.actions = deepcopy(other.actions)
-        self.order = len(self.actions)
-        self.valuationdomain = deepcopy(other.valuationdomain)
-        #actionsList = list(self.actions)
+        att = [a for a in other.__dict__]
+        att.remove('name')
+        att.remove('relation')
+        for a in att:
+            self.__dict__[a] = deepcopy(other.__dict__[a])
         Max = self.valuationdomain['max']
         Min = self.valuationdomain['min']
         relation = {}
@@ -9661,7 +9650,7 @@ class CoDualDigraph(Digraph):
         self.notGamma = self.notGammaSets()
 
 
-# ------ CoDual construction
+# ------ Cover construction
 
 class CoverDigraph(Digraph):
     """
@@ -9681,21 +9670,27 @@ class CoverDigraph(Digraph):
         from copy import deepcopy
         self.__class__ = other.__class__
         self.name = 'cover-'+other.name
-        try:
-            self.description = deepcopy(other.description)
-        except AttributeError:
-            pass
-        try:
-            self.criteria = deepcopy(other.criteria)
-        except AttributeError:
-            pass
-        try:
-            self.evaluation = deepcopy(other.evaluation)
-        except AttributeError:
-            pass
-        self.actions = deepcopy(other.actions)
-        self.order = len(self.actions)
-        self.valuationdomain = deepcopy(other.valuationdomain)
+        self.name = 'codual-'+other.name
+        att = [a for a in other.__dict__]
+        att.remove('name')
+        att.remove('relation')
+        for a in att:
+            self.__dict__[a] = deepcopy(other.__dict__[a])
+        # try:
+        #     self.description = deepcopy(other.description)
+        # except AttributeError:
+        #     pass
+        # try:
+        #     self.criteria = deepcopy(other.criteria)
+        # except AttributeError:
+        #     pass
+        # try:
+        #     self.evaluation = deepcopy(other.evaluation)
+        # except AttributeError:
+        #     pass
+        # self.actions = deepcopy(other.actions)
+        # self.order = len(self.actions)
+        # self.valuationdomain = deepcopy(other.valuationdomain)
         #actionsList = list(self.actions)
         #Max = Decimal('2')*other.valuationdomain['max']
         #Med = Decimal('0')
@@ -9742,25 +9737,12 @@ class ConverseDigraph(Digraph):
     def __init__(self,other):
         from copy import deepcopy
         self.__class__ = other.__class__
+        att = [a for a in other.__dict__]
+        att.remove('name')
+        att.remove('relation')
+        for a in att:
+            self.__dict__[a] = deepcopy(other.__dict__[a])
         self.name = 'converse-'+other.name
-        try:
-            self.description = deepcopy(other.description)
-        except AttributeError:
-            pass
-        try:
-            self.criteria = deepcopy(other.criteria)
-        except AttributeError:
-            pass
-        try:
-            self.evaluation = deepcopy(other.evaluation)
-        except AttributeError:
-            pass
-        self.actions = deepcopy(other.actions)
-        self.order = len(self.actions)
-        self.valuationdomain = deepcopy(other.valuationdomain)
-        #actionsList = list(self.actions)
-        #max = self.valuationdomain['max']
-        #min = self.valuationdomain['min']
         relation = {}
         for x in self.actions:
             relation[x] = {}
@@ -9861,21 +9843,27 @@ class Preorder(Digraph):
         from copy import deepcopy
         self.__class__ = other.__class__
         self.name = 'preorder-'+other.name
-        try:
-            self.description = deepcopy(other.description)
-        except AttributeError:
-            pass
-        try:
-            self.criteria = deepcopy(other.criteria)
-        except AttributeError:
-            pass
-        try:
-            self.evaluation = deepcopy(other.evaluation)
-        except AttributeError:
-            pass
-        self.actions = deepcopy(other.actions)
-        self.order = len(self.actions)
-        self.valuationdomain = deepcopy(other.valuationdomain)
+        self.name = 'codual-'+other.name
+        att = [a for a in other.__dict__]
+        att.remove('name')
+        att.remove('relation')
+        for a in att:
+            self.__dict__[a] = deepcopy(other.__dict__[a])
+        # try:
+        #     self.description = deepcopy(other.description)
+        # except AttributeError:
+        #     pass
+        # try:
+        #     self.criteria = deepcopy(other.criteria)
+        # except AttributeError:
+        #     pass
+        # try:
+        #     self.evaluation = deepcopy(other.evaluation)
+        # except AttributeError:
+        #     pass
+        # self.actions = deepcopy(other.actions)
+        # self.order = len(self.actions)
+        # self.valuationdomain = deepcopy(other.valuationdomain)
         actionsList = [x for x in self.actions]
         Max = self.valuationdomain['max']
         Min = self.valuationdomain['min']
@@ -10016,14 +10004,15 @@ class EquivalenceDigraph(Digraph):
                                 'max': Decimal("1.0")}
 
         if Recoded:
-            self.valuationdomain = {'min': Decimal("-1.0"),
-                                    'med': Decimal("0.0"),
-                                    'max': Decimal("1.0")}
+            # self.valuationdomain = {'min': Decimal("-1.0"),
+            #                         'med': Decimal("0.0"),
+            #                         'max': Decimal("1.0")}
             d1.recodeValuation(Mind1,Maxd1)
             d2.recodeValuation(Mind2,Maxd2)
         else:
             self.valuationdomain = dict(d1.valuationdomain.items())
 
+        self.correlation = self.computeCorrelation()      
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
@@ -10035,14 +10024,14 @@ class EquivalenceDigraph(Digraph):
         corr = Decimal('0')
         dterm = Decimal('0')
         #actions = [x for x in self.actions]
-        actions = self.actions
+        #actions = self.actions
         relation = self.relation
         for x,rx in relation.items():
             for y,rxy in rx.items():
                 if x != y:
                     corr += rxy
-                    dterm += abs(xy)
-        return corr / dterm
+                    dterm += abs(rxy)
+        return corr/dterm
 
 
 # ------- Specialisations of the Digraph class -----------
@@ -11243,22 +11232,11 @@ class DualDigraph(Digraph):
     def __init__(self,other):
         from copy import deepcopy
         self.name = 'dual_' + str(other.name)
-        try:
-            self.description = deepcopy(other.description)
-        except AttributeError:
-            pass
-        try:
-            self.criteria = deepcopy(other.criteria)
-        except AttributeError:
-            pass
-        try:
-            self.evaluation = deepcopy(other.evaluation)
-        except AttributeError:
-            pass
-        self.valuationdomain = deepcopy(other.valuationdomain)
-        Max = self.valuationdomain['max']
-        Med = self.valuationdomain['med']
-        self.actions = deepcopy(other.actions)
+        att = [a for a in other.__dict__]
+        att.remove('name')
+        att.remove('relation')
+        for a in att:
+            self.__dict__[a] = deepcopy(other.__dict__[a])
         self.order = len(self.actions)
         self.relation = self._constructRelation(other.relation)
         self.__class__ = other.__class__

@@ -150,7 +150,7 @@ Sorting, rating and ranking tools
      `SortingDigraph <techDoc.html#sortingDigraphs.QuantilesSortingDigraph>`_
      class;
 
-     .. inheritance-diagram:: sortingDigraphs.SortingDigraph
+     .. inheritance-diagram:: sortingDigraphs.QuantilesSortingDigraph
      
 * :ref:`linearOrders-label` 
      Additional tools for solving linearly ranking problems with the
