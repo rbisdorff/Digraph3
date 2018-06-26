@@ -10031,7 +10031,7 @@ class EquivalenceDigraph(Digraph):
                 if x != y:
                     corr += rxy
                     dterm += abs(rxy)
-        return corr/dterm
+        return float(corr)/float(dterm)
 
 
 # ------- Specialisations of the Digraph class -----------
