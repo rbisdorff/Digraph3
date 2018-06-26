@@ -155,56 +155,165 @@
 <p>The Digraph3 source code is split into several interdependent modules of which the <code class="docutils literal"><span class="pre">digraphs</span></code> module is the master module.</p>
 <div class="section" id="basic-modules">
 <h3><a class="toc-backref" href="#id5">Basic modules</a><a class="headerlink" href="#basic-modules" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
+<ul>
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#digraphs-label"><span class="std std-ref">digraphs module</span></a></dt>
-<dd>Main part of the Digraph3 source code with the root <a class="reference external" href="techDoc.html#digraphs.Digraph">Digraph</a> class.</dd>
+<dd><p class="first">Main part of the Digraph3 source code with the root <a class="reference external" href="techDoc.html#digraphs.Digraph">Digraph</a> class.</p>
+<img src="_images/inheritance-89b2858cf23ec2dd78d2c31f7aad908ef8daf4fa.png" alt="Inheritance diagram of digraphs" usemap="#inheritancec93c7841f3" class="inheritance"/>
+<map id="inheritancec93c7841f3" name="inheritancec93c7841f3">
+<area shape="rect" id="node1" href="#digraphs.AsymmetricPartialDigraph" target="_top" title="Renders the asymmetric part of a Digraph instance." alt="" coords="173,4,372,24"/>
+<area shape="rect" id="node2" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="4,567,109,586"/>
+<area shape="rect" id="node3" href="#digraphs.BreakAddCocsDigraph" target="_top" title="Specialization of general Digraph class for instantiation" alt="" coords="184,43,362,63"/>
+<area shape="rect" id="node4" href="#digraphs.BrokenCocsDigraph" target="_top" title="Specialization of general Digraph class for instantiation" alt="" coords="190,82,356,102"/>
+<area shape="rect" id="node5" href="#digraphs.CSVDigraph" target="_top" title="Specialization of the general Digraph class for reading" alt="" coords="211,120,335,140"/>
+<area shape="rect" id="node6" href="#digraphs.CirculantDigraph" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="198,159,348,179"/>
+<area shape="rect" id="node7" href="#digraphs.CoDualDigraph" target="_top" title="Instantiates the associated codual &#45;converse of the negation&#45; from a deep copy of" alt="" coords="202,198,344,218"/>
+<area shape="rect" id="node8" href="#digraphs.CocaDigraph" target="_top" title="Old CocaDigraph class without circuit breakings; all circuits and circuits of circuits are added as hyper&#45;nodes." alt="" coords="208,237,338,257"/>
+<area shape="rect" id="node9" href="#digraphs.CompleteDigraph" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="196,275,350,295"/>
+<area shape="rect" id="node10" href="#digraphs.ConverseDigraph" target="_top" title="Instantiates the associated converse or reciprocal version from" alt="" coords="196,314,349,334"/>
+<area shape="rect" id="node11" href="#digraphs.CoverDigraph" target="_top" title="Instantiates the associated cover relation &#45;immediate neighbours&#45; from" alt="" coords="206,353,340,373"/>
+<area shape="rect" id="node12" href="#digraphs.DualDigraph" target="_top" title="Instantiates the dual ( = negated valuation) Digraph object from a deep copy of a given other Digraph instance." alt="" coords="209,392,337,412"/>
+<area shape="rect" id="node13" href="#digraphs.EmptyDigraph" target="_top" title="Parameters:" alt="" coords="204,430,341,450"/>
+<area shape="rect" id="node14" href="#digraphs.EquivalenceDigraph" target="_top" title="Instantiates the logical equivalence digraph of two bipolar" alt="" coords="190,469,356,489"/>
+<area shape="rect" id="node15" href="#digraphs.FusionDigraph" target="_top" title="Instantiates the epistemic fusion of two given Digraph instances" alt="" coords="204,508,341,528"/>
+<area shape="rect" id="node16" href="#digraphs.FusionLDigraph" target="_top" title="Instantiates the epistemic fusion a list L of Digraph instances." alt="" coords="202,547,344,567"/>
+<area shape="rect" id="node17" href="#digraphs.GridDigraph" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="210,585,336,605"/>
+<area shape="rect" id="node18" href="#digraphs.IndeterminateDigraph" target="_top" title="Parameters: order &gt; 0; valuationdomain =(Min,Max)." alt="" coords="184,624,361,644"/>
+<area shape="rect" id="node19" href="#digraphs.KneserDigraph" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="203,663,343,683"/>
+<area shape="rect" id="node20" href="#digraphs.PolarisedDigraph" target="_top" title="Renders the polarised valuation of a Digraph class instance:" alt="" coords="197,702,349,722"/>
+<area shape="rect" id="node21" href="#digraphs.Preorder" target="_top" title="Instantiates the associated preorder from" alt="" coords="219,740,327,760"/>
+<area shape="rect" id="node22" href="#digraphs.RandomTree" target="_top" title=".. warning::" alt="" coords="209,779,337,799"/>
+<area shape="rect" id="node23" href="#digraphs.RedhefferDigraph" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="196,818,349,838"/>
+<area shape="rect" id="node24" href="#digraphs.StrongComponentsCollapsedDigraph" target="_top" title="Reduction of Digraph object to its strong components." alt="" coords="147,857,399,877"/>
+<area shape="rect" id="node25" href="#digraphs.SymmetricPartialDigraph" target="_top" title="Renders the symmetric part of a Digraph instance." alt="" coords="176,895,369,915"/>
+<area shape="rect" id="node26" href="#digraphs.XMCDA2Digraph" target="_top" title="Specialization of the general Digraph class for reading" alt="" coords="198,934,347,954"/>
+<area shape="rect" id="node27" href="#digraphs.XMCDADigraph" target="_top" title="Specialization of the general Digraph class for reading" alt="" coords="202,973,344,993"/>
+<area shape="rect" id="node28" href="#digraphs.XMLDigraph" target="_top" title="Specialization of the general Digraph class for reading" alt="" coords="210,1012,336,1032"/>
+<area shape="rect" id="node29" href="#digraphs.XMLDigraph24" target="_top" title="Specialization of the general Digraph class for reading" alt="" coords="204,1050,342,1070"/>
+<area shape="rect" id="node30" href="#digraphs.XORDigraph" target="_top" title="Instantiates the XOR digraph of two bipolar" alt="" coords="210,1089,336,1109"/>
+<area shape="rect" id="node31" href="#digraphs.kChoicesDigraph" target="_top" title="Specialization of general Digraph class for instantiation" alt="" coords="197,1128,348,1148"/>
+</map></dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#graphs-label"><span class="std std-ref">graphs module</span></a></dt>
-<dd>Resources for handling undirected graphs with the root <a class="reference external" href="techDoc.html#graphs.Graph">Graph</a> class and a brigde to the
-<code class="docutils literal"><span class="pre">digraphs</span></code> module resources.</dd>
+<dd><p class="first">Resources for handling undirected graphs with the root <a class="reference external" href="techDoc.html#graphs.Graph">Graph</a> class and a brigde to the
+<code class="docutils literal"><span class="pre">digraphs</span></code> module resources.</p>
+<img src="_images/inheritance-3bfd5a3beffd2e6657ab231da546f4ad12251e9c.png" alt="Inheritance diagram of graphs" usemap="#inheritance2573f8af4a" class="inheritance"/>
+<map id="inheritance2573f8af4a" name="inheritance2573f8af4a">
+<area shape="rect" id="node1" href="#graphs.BestDeterminedSpanningForest" target="_top" title="Constructing the most determined spanning tree (or forest if not connected)" alt="" coords="497,5,763,29"/>
+<area shape="rect" id="node2" href="#graphs.RandomTree" target="_top" title="Instance of a tree generated from a random (or a given) Prüfer code." alt="" coords="231,53,376,77"/>
+<area shape="rect" id="node17" href="#graphs.RandomSpanningForest" target="_top" title="Random instance of a spanning forest (one or more trees)" alt="" coords="522,53,738,77"/>
+<area shape="rect" id="node18" href="#graphs.RandomSpanningTree" target="_top" title="Uniform random instance of a spanning tree" alt="" coords="529,100,731,124"/>
+<area shape="rect" id="node3" href="#graphs.CompleteGraph" target="_top" title="Instances of complete graphs bipolarly valuated in {&#45;1,0,+1}." alt="" coords="221,100,387,124"/>
+<area shape="rect" id="node4" href="#graphs.Graph" target="_top" title="In the `graphs` module, the root :py:class:`graphs.Graph` class provides a generic graph model. A given object consists in:" alt="" coords="5,409,110,433"/>
+<area shape="rect" id="node5" href="#graphs.CycleGraph" target="_top" title="Instances of cycle graph characterized in [&#45;1,1]." alt="" coords="234,147,374,172"/>
+<area shape="rect" id="node6" href="#graphs.DualGraph" target="_top" title="Instantiates the dual Graph object of a given other Graph instance." alt="" coords="237,195,371,219"/>
+<area shape="rect" id="node7" href="#graphs.EmptyGraph" target="_top" title="Intantiates graph of given order without any positively valued edge." alt="" coords="231,242,376,267"/>
+<area shape="rect" id="node8" href="#graphs.GridGraph" target="_top" title="Specialization of the general Graph class for generating" alt="" coords="238,290,369,314"/>
+<area shape="rect" id="node9" href="#graphs.IsingModel" target="_top" title="Specialisation of a Gibbs Sampler for the Ising model" alt="" coords="237,337,371,362"/>
+<area shape="rect" id="node10" href="#graphs.MISModel" target="_top" title="Specialisation of a Gibbs Sampler for the hard code model," alt="" coords="240,385,367,409"/>
+<area shape="rect" id="node11" href="#graphs.MetropolisChain" target="_top" title="Specialisation of the graph class for implementing a generic" alt="" coords="220,432,388,456"/>
+<area shape="rect" id="node12" href="#graphs.Q_Coloring" target="_top" title="Generate a q&#45;coloring of a Graph instance via a Gibbs MCMC sampler in" alt="" coords="236,480,372,504"/>
+<area shape="rect" id="node13" href="#graphs.RandomFixedDegreeSequenceGraph" target="_top" title="Specialization of the general Graph class for generating" alt="" coords="156,527,451,551"/>
+<area shape="rect" id="node14" href="#graphs.RandomFixedSizeGraph" target="_top" title="Generates a random graph with a fixed size (number of edges), by instantiating a fixed numbers of arcs" alt="" coords="196,574,412,599"/>
+<area shape="rect" id="node15" href="#graphs.RandomGraph" target="_top" title="Random instances of the Graph class" alt="" coords="226,622,382,646"/>
+<area shape="rect" id="node16" href="#graphs.RandomRegularGraph" target="_top" title="Specialization of the general Graph class for generating" alt="" coords="202,669,406,694"/>
+<area shape="rect" id="node19" href="#graphs.RandomValuationGraph" target="_top" title="Specialization of the genuine Graph class for generating temporary" alt="" coords="196,717,412,741"/>
+<area shape="rect" id="node21" href="#graphs.TriangulatedGrid" target="_top" title="Specialization of the general Graph class for generating" alt="" coords="219,764,389,789"/>
+<area shape="rect" id="node20" href="#graphs.SnakeGraph" target="_top" title="Snake graphs S(p/q) are made up of all the integer grid squares between" alt="" coords="558,290,702,314"/>
+</map></dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#perftabs-label"><span class="std std-ref">perfTabs module</span></a></dt>
-<dd>Tools for handling multiple criteria performance tableaux with
-root <a class="reference external" href="techDoc.html#perfTabs.PerformanceTableau">PerformanceTableau</a> class.</dd>
+<dd><p class="first">Tools for handling multiple criteria performance tableaux with
+root <a class="reference external" href="techDoc.html#perfTabs.PerformanceTableau">PerformanceTableau</a> class.</p>
+<img src="_images/inheritance-0365d849ce93d06c1e4cc790f9d0e6db237accce.png" alt="Inheritance diagram of perfTabs" usemap="#inheritancee813425653" class="inheritance"/>
+<map id="inheritancee813425653" name="inheritancee813425653">
+<area shape="rect" id="node1" href="#perfTabs.ConstantPerformanceTableau" target="_top" title="Constructor for (partially) constant performance tableaux." alt="" coords="277,5,549,31"/>
+<area shape="rect" id="node2" href="#perfTabs.PerformanceTableau" target="_top" title="In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` class provides a generic **performance table model**. A given object of this class consists in:" alt="" coords="5,203,220,228"/>
+<area shape="rect" id="node3" href="#perfTabs.EmptyPerformanceTableau" target="_top" title="Template for PerformanceTableau objects." alt="" coords="285,55,541,80"/>
+<area shape="rect" id="node4" href="#perfTabs.NormalizedPerformanceTableau" target="_top" title="specialsation of the PerformanceTableau class for" alt="" coords="268,104,557,129"/>
+<area shape="rect" id="node5" href="#perfTabs.OldXMCDAPerformanceTableau" target="_top" title="Specialization of the general PerformanceTableau class for reading" alt="" coords="271,153,555,179"/>
+<area shape="rect" id="node6" href="#perfTabs.PartialPerformanceTableau" target="_top" title="Constructor for partial performance tableaux concerning a subset of actions and/or criteria and/or objectives" alt="" coords="285,203,540,228"/>
+<area shape="rect" id="node7" href="#perfTabs.XMCDA2PerformanceTableau" target="_top" title="Specialization of the general PerformanceTableau class for reading" alt="" coords="277,252,548,277"/>
+<area shape="rect" id="node8" href="#perfTabs.XMCDAPerformanceTableau" target="_top" title="Specialization of the general PerformanceTableau class for reading" alt="" coords="281,301,544,327"/>
+<area shape="rect" id="node9" href="#perfTabs.XMLPerformanceTableau" target="_top" title="Specialization of the general PerformanceTableau class for reading" alt="" coords="292,351,533,376"/>
+<area shape="rect" id="node10" href="#perfTabs.XMLRubisPerformanceTableau" target="_top" title="Specialization of the general PerformanceTableau class for reading" alt="" coords="275,400,551,425"/>
+</map></dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#outrankingdigraphs-label"><span class="std std-ref">outrankingDigraphs module</span></a></dt>
-<dd>Root module for handling outranking digraphs with the main
+<dd><p class="first">Root module for handling outranking digraphs with the main
 <a class="reference external" href="techDoc.html#outrankingDigraphs.BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>
-class and its specializations.</dd>
+class and its specializations.</p>
+<img src="_images/inheritance-7a1f7f603fe93adedb7176de7a8416f09fdc6537.png" alt="Inheritance diagram of outrankingDigraphs.BipolarOutrankingDigraph" usemap="#inheritance6b5a34546c" class="inheritance"/>
+<map id="inheritance6b5a34546c" name="inheritance6b5a34546c">
+<area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="38,4,149,26"/>
+<area shape="rect" id="node3" href="#outrankingDigraphs.OutrankingDigraph" target="_top" title="Abstract root class for **outranking digraphs** inheritating methods both from the generic :py:class:`digraphs.Digraph`" alt="" coords="223,4,455,26"/>
+<area shape="rect" id="node2" href="#outrankingDigraphs.BipolarOutrankingDigraph" target="_top" title="Specialization of the abstract OutrankingDigraph root class for generating" alt="" coords="495,26,764,47"/>
+<area shape="rect" id="node4" href="#perfTabs.PerformanceTableau" target="_top" title="In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` class provides a generic **performance table model**. A given object of this class consists in:" alt="" coords="4,46,183,67"/>
+</map></dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#votingprofiles-label"><span class="std std-ref">votingProfiles module</span></a></dt>
-<dd>Classes and methods for handling voting ballots and computing election results
-with main <a class="reference external" href="techDoc.html#votingProfiles.LinearVotingProfile">LinearVotingProfile</a> class.</dd>
+<dd><p class="first">Classes and methods for handling voting ballots and computing election results
+with main <a class="reference external" href="techDoc.html#votingProfiles.LinearVotingProfile">LinearVotingProfile</a> class.</p>
+<img src="_images/inheritance-0f91c5fec9f18e3d02d799dc3cdc1d4ffa7d4503.png" alt="Inheritance diagram of votingProfiles.LinearVotingProfile" usemap="#inheritancedd51be6259" class="inheritance"/>
+<map id="inheritancedd51be6259" name="inheritancedd51be6259">
+<area shape="rect" id="node1" href="#votingProfiles.LinearVotingProfile" target="_top" title="A specialised class for linear voting profiles" alt="" coords="251,5,488,31"/>
+<area shape="rect" id="node2" href="#votingProfiles.VotingProfile" target="_top" title="A generic class for storing voting profiles." alt="" coords="5,5,203,31"/>
+</map></dd>
 </dl>
 </li>
 </ul>
 </div>
 <div class="section" id="various-random-generators">
 <h3><a class="toc-backref" href="#id6">Various Random generators</a><a class="headerlink" href="#various-random-generators" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
+<ul>
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#randomdigraphs-label"><span class="std std-ref">randomDigraphs module</span></a></dt>
-<dd>Various implemented random digraph models.</dd>
+<dd><p class="first">Various implemented random digraph models.</p>
+<img src="_images/inheritance-1a323e028d87ba8843982b578e873366d77ec6bf.png" alt="Inheritance diagram of randomDigraphs" usemap="#inheritance862fa805bc" class="inheritance"/>
+<map id="inheritance862fa805bc" name="inheritance862fa805bc">
+<area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="5,154,120,176"/>
+<area shape="rect" id="node2" href="#digraphs.GridDigraph" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="257,5,396,26"/>
+<area shape="rect" id="node3" href="#randomDigraphs.RandomDigraph" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="223,47,429,69"/>
+<area shape="rect" id="node4" href="#randomDigraphs.RandomFixedDegreeSequenceDigraph" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="161,90,492,112"/>
+<area shape="rect" id="node5" href="#randomDigraphs.RandomFixedSizeDigraph" target="_top" title="Generates a random crisp digraph with a fixed size, by instantiating a fixed numbers of arcs" alt="" coords="197,132,456,154"/>
+<area shape="rect" id="node7" href="#randomDigraphs.RandomRegularDigraph" target="_top" title="Parameters:" alt="" coords="202,175,451,197"/>
+<area shape="rect" id="node8" href="#randomDigraphs.RandomTournament" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="212,218,441,239"/>
+<area shape="rect" id="node9" href="#randomDigraphs.RandomValuationDigraph" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="197,260,456,282"/>
+<area shape="rect" id="node10" href="#randomDigraphs.RandomWeakTournament" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="196,303,457,325"/>
+<area shape="rect" id="node6" href="#randomDigraphs.RandomGridDigraph" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="533,5,763,26"/>
+</map></dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#randomperftabs-label"><span class="std std-ref">randomPerfTabs module</span></a></dt>
-<dd>Various implemented random performance tableau models.</dd>
+<dd><p class="first">Various implemented random performance tableau models.</p>
+<img src="_images/inheritance-d2aab2f77466e1439aada644581ed1e64acad39b.png" alt="Inheritance diagram of randomPerfTabs" usemap="#inheritance4442f81dbd" class="inheritance"/>
+<map id="inheritance4442f81dbd" name="inheritance4442f81dbd">
+<area shape="rect" id="node1" href="#perfTabs.PerformanceTableau" target="_top" title="In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` class provides a generic **performance table model**. A given object of this class consists in:" alt="" coords="62,218,267,242"/>
+<area shape="rect" id="node4" href="#randomPerfTabs.Random3ObjectivesPerformanceTableau" target="_top" title="Specialization of the PerformanceTableau" alt="" coords="378,147,755,171"/>
+<area shape="rect" id="node6" href="#randomPerfTabs.RandomCBPerformanceTableau" target="_top" title="Full automatic generation of random" alt="" coords="406,194,727,218"/>
+<area shape="rect" id="node7" href="#randomPerfTabs.RandomPerformanceTableau" target="_top" title="Specialization of the generic :py:class:`perftabs.PerformanceTableau` class for generating a temporary random performance tableau." alt="" coords="414,241,719,265"/>
+<area shape="rect" id="node8" href="#randomPerfTabs.RandomRankPerformanceTableau" target="_top" title="Specialization of the PerformanceTableau class for generating a temporary" alt="" coords="399,288,734,313"/>
+<area shape="rect" id="node2" href="#randomPerfTabs.Random3ObjectivesPerformanceGenerator" target="_top" title="Generates and/or new decision actions with random evaluation for a" alt="" coords="370,5,763,29"/>
+<area shape="rect" id="node3" href="#randomPerfTabs.RandomPerformanceGenerator" target="_top" title="Wrapper for generating new decision actions with random evaluation for a given RandomPerformanceTableau instance." alt="" coords="5,52,324,77"/>
+<area shape="rect" id="node5" href="#randomPerfTabs.RandomCBPerformanceGenerator" target="_top" title="Instantiates a generator of new decision actions with associated random evaluations using the model parameters provided by a given RandomCBPerformanceTableau instance." alt="" coords="399,52,734,77"/>
+<area shape="rect" id="node9" href="#randomPerfTabs.RandomStdPerformanceGenerator" target="_top" title="Generates for a given standard RandomPerformanceTableau instance." alt="" coords="397,100,736,124"/>
+</map></dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#randomnumbers-label"><span class="std std-ref">randomNumbers module</span></a></dt>
-<dd>Additional random number generators, not available in the
-standard python random.py library.</dd>
+<dd><p class="first last">Additional random number generators, not available in the
+standard python random.py library.</p>
+</dd>
 </dl>
 </li>
 </ul>
@@ -241,25 +350,60 @@ and bipolar outranking digraphs (order
 </div>
 <div class="section" id="sorting-rating-and-ranking-tools">
 <h3><a class="toc-backref" href="#id9">Sorting, rating and ranking tools</a><a class="headerlink" href="#sorting-rating-and-ranking-tools" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
+<ul>
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#sortingdigraphs-label"><span class="std std-ref">sortingDigraphs module</span></a></dt>
-<dd>Additional tools for solving sorting problems with the root
-<a class="reference external" href="techDoc.html#sortingDigraphs.SortingDigraph">SortingDigraph</a>
-class;</dd>
+<dd><p class="first">Additional tools for solving sorting problems with the main
+<a class="reference external" href="techDoc.html#sortingDigraphs.QuantilesSortingDigraph">SortingDigraph</a>
+class;</p>
+<img src="_images/inheritance-7d80d0498514dd9f8fe2dfcac4989a00817a7261.png" alt="Inheritance diagram of sortingDigraphs.SortingDigraph" usemap="#inheritance2e8e0e3b90" class="inheritance"/>
+<map id="inheritance2e8e0e3b90" name="inheritance2e8e0e3b90">
+<area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="30,3,115,20"/>
+<area shape="rect" id="node3" href="#outrankingDigraphs.OutrankingDigraph" target="_top" title="Abstract root class for **outranking digraphs** inheritating methods both from the generic :py:class:`digraphs.Digraph`" alt="" coords="172,3,350,20"/>
+<area shape="rect" id="node2" href="#outrankingDigraphs.BipolarOutrankingDigraph" target="_top" title="Specialization of the abstract OutrankingDigraph root class for generating" alt="" coords="381,36,588,52"/>
+<area shape="rect" id="node5" href="#sortingDigraphs.SortingDigraph" target="_top" title="Specialisation of the digraphs.BipolarOutrankingDigraph Class" alt="" coords="619,52,765,68"/>
+<area shape="rect" id="node4" href="#perfTabs.PerformanceTableau" target="_top" title="In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` class provides a generic **performance table model**. A given object of this class consists in:" alt="" coords="3,36,141,52"/>
+</map></dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#linearorders-label"><span class="std std-ref">linearOrders module</span></a></dt>
-<dd>Additional tools for solving linearly ranking problems with the
+<dd><p class="first">Additional tools for solving linearly ranking problems with the
 root <a class="reference external" href="techDoc.html#linearOrders.LinearOrder">LinearOrder</a>
-class;</dd>
+class;</p>
+<img src="_images/inheritance-feeab3e93cbe17029e7a3bb3e754d5ec1a3bffbf.png" alt="Inheritance diagram of linearOrders" usemap="#inheritance6ca036f5b8" class="inheritance"/>
+<map id="inheritance6ca036f5b8" name="inheritance6ca036f5b8">
+<area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="5,204,139,229"/>
+<area shape="rect" id="node3" href="#linearOrders.LinearOrder" target="_top" title="abstract class for digraphs which represent" alt="" coords="229,179,412,204"/>
+<area shape="rect" id="node4" href="#linearOrders.ExtendedPrudentDigraph" target="_top" title="Instantiates the associated extended prudent" alt="" coords="187,228,455,253"/>
+<area shape="rect" id="node2" href="#linearOrders.CopelandOrder" target="_top" title="instantiates the Copèeland Order from" alt="" coords="519,5,722,31"/>
+<area shape="rect" id="node5" href="#linearOrders.KemenyOrder" target="_top" title="instantiates the exact Kemeny Order from" alt="" coords="523,55,718,80"/>
+<area shape="rect" id="node6" href="#linearOrders.KohlerOrder" target="_top" title="instantiates the Kohler Order from" alt="" coords="529,104,712,129"/>
+<area shape="rect" id="node7" href="#linearOrders.NetFlowsOrder" target="_top" title="instantiates the net flows Order from" alt="" coords="519,153,722,179"/>
+<area shape="rect" id="node8" href="#linearOrders.OutFlowsOrder" target="_top" title="instantiates the out flows Order from" alt="" coords="519,203,722,228"/>
+<area shape="rect" id="node9" href="#linearOrders.PrincipalOrder" target="_top" title="instantiates the order from the scores obtained by the first" alt="" coords="521,252,720,277"/>
+<area shape="rect" id="node10" href="#linearOrders.RandomLinearOrder" target="_top" title="Instantiates random linear orders" alt="" coords="503,301,739,327"/>
+<area shape="rect" id="node11" href="#linearOrders.RankedPairsOrder" target="_top" title="instantiates the Extended Prudent Ranked Pairs Order from" alt="" coords="509,351,732,376"/>
+</map></dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#weakorders-label"><span class="std std-ref">weakOrders module</span></a></dt>
-<dd>Additional tools for solving pre-ranking problems with
-root <a class="reference external" href="techDoc.html#weakOrders.WeakOrder">WeakOrder</a> class.</dd>
+<dd><p class="first">Additional tools for solving pre-ranking problems with
+root <a class="reference external" href="techDoc.html#weakOrders.WeakOrder">WeakOrder</a> class.</p>
+<img src="_images/inheritance-4458425b19151a21601641d31c3e3c96a430a9b2.png" alt="Inheritance diagram of weakOrders" usemap="#inheritance43ca32dee1" class="inheritance"/>
+<map id="inheritance43ca32dee1" name="inheritance43ca32dee1">
+<area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="4,71,94,88"/>
+<area shape="rect" id="node3" href="#weakOrders.WeakOrder" target="_top" title="Abstract class for weak orderings&#39; specialized methods." alt="" coords="127,71,246,88"/>
+<area shape="rect" id="node2" href="#weakOrders.KemenyWeakOrder" target="_top" title="Specialization of the abstract WeakOrder class for " alt="" coords="314,4,470,21"/>
+<area shape="rect" id="node4" href="#weakOrders.KohlerArrowRaynaudFusionDigraph" target="_top" title="Specialization of the abstract WeakOrder class for " alt="" coords="279,37,504,54"/>
+<area shape="rect" id="node5" href="#weakOrders.PrincipalInOutDegreesOrdering" target="_top" title="Specialization of abstract WeakOrder class for ranking by fusion" alt="" coords="288,71,495,88"/>
+<area shape="rect" id="node7" href="#weakOrders.RankingByChoosingDigraph" target="_top" title="Specialization of the abstract WeakOrder class for " alt="" coords="295,104,489,121"/>
+<area shape="rect" id="node10" href="#weakOrders.WeakRankingOrder" target="_top" title="Specialization of the abstract WeakOrder class for " alt="" coords="314,138,470,155"/>
+<area shape="rect" id="node6" href="#weakOrders.RankingByBestChoosingDigraph" target="_top" title="Specialization of abstract WeakOrder class for computing a ranking by best&#45;choosing." alt="" coords="544,71,758,88"/>
+<area shape="rect" id="node8" href="#weakOrders.RankingByLastChoosingDigraph" target="_top" title="Specialization of abstract WeakOrder class for computing a ranking by rejecting." alt="" coords="545,104,757,121"/>
+<area shape="rect" id="node9" href="#weakOrders.RankingByPrudentChoosingDigraph" target="_top" title="Specialization for ranking&#45;by&#45;rejecting results with prudent single elimination of chordless circuits. By default, the cut level for circuits elimination is set to 20% of the valuation domain maximum (1.0)." alt="" coords="537,138,764,155"/>
+</map></dd>
 </dl>
 </li>
 </ul>
@@ -291,7 +435,7 @@ root <a class="reference external" href="techDoc.html#weakOrders.WeakOrder">Weak
 <div class="section" id="digraphs-module">
 <span id="digraphs-label"></span><h2><a class="toc-backref" href="#id11">digraphs module</a><a class="headerlink" href="#digraphs-module" title="Permalink to this headline">¶</a></h2>
 <p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#digraphs-tutorial-label"><span class="std std-ref">Working with the Digraph3 software resources</span></a></p>
-<span class="target" id="module-digraphs"></span><p>Python3+ implementation of digraphs</p>
+<span class="target" id="module-digraphs"></span><p>Python3+ implementation of the digraphs module, root module of the Digraph3 resources.</p>
 <p>Copyright (C) 2006-2017  Raymond Bisdorff</p>
 <p>This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -6836,7 +6980,22 @@ the high category limit.</p>
 <div class="section" id="votingprofiles-module">
 <span id="votingprofiles-label"></span><h2><a class="toc-backref" href="#id21">votingProfiles module</a><a class="headerlink" href="#votingprofiles-module" title="Permalink to this headline">¶</a></h2>
 <p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#linearvoting-tutorial-label"><span class="std std-ref">Computing the winner of an election</span></a></p>
-<span class="target" id="module-votingProfiles"></span><dl class="class">
+<span class="target" id="module-votingProfiles"></span><p>Python 3 implementation of voting digraphs
+Refactored from revision 1.549 of the digraphs module
+Current revision $Revision: 2484 $
+Copyright (C) 2011-2018 Raymond Bisdorff</p>
+<p>This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 3 of the License, or
+(at your option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</p>
+<dl class="class">
 <dt id="votingProfiles.ApprovalVotingProfile">
 <em class="property">class </em><code class="descclassname">votingProfiles.</code><code class="descname">ApprovalVotingProfile</code><span class="sig-paren">(</span><em>fileVotingProfile=None</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#ApprovalVotingProfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.ApprovalVotingProfile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#votingProfiles.VotingProfile" title="votingProfiles.VotingProfile"><code class="xref py py-class docutils literal"><span class="pre">votingProfiles.VotingProfile</span></code></a></p>

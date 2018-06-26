@@ -72,16 +72,22 @@ Basic modules
 * :ref:`digraphs-label`  
      Main part of the Digraph3 source code with the root `Digraph
      <techDoc.html#digraphs.Digraph>`_ class.
+
+     .. inheritance-diagram:: digraphs
      
 * :ref:`graphs-label`
      Resources for handling undirected graphs with the root `Graph
      <techDoc.html#graphs.Graph>`_ class and a brigde to the
      ``digraphs`` module resources.
+
+     .. inheritance-diagram:: graphs
      
 * :ref:`perfTabs-label`
      Tools for handling multiple criteria performance tableaux with
      root `PerformanceTableau
      <techDoc.html#perfTabs.PerformanceTableau>`_ class.
+
+     .. inheritance-diagram:: perfTabs
      
 * :ref:`outrankingDigraphs-label`
      Root module for handling outranking digraphs with the main
@@ -89,10 +95,14 @@ Basic modules
      <techDoc.html#outrankingDigraphs.BipolarOutrankingDigraph>`_
      class and its specializations.
 
+     .. inheritance-diagram:: outrankingDigraphs.BipolarOutrankingDigraph
+
 * :ref:`votingProfiles-label` 
      Classes and methods for handling voting ballots and computing election results
      with main `LinearVotingProfile
      <techDoc.html#votingProfiles.LinearVotingProfile>`_ class.
+
+     .. inheritance-diagram:: votingProfiles.LinearVotingProfile
      
 
 Various Random generators
@@ -101,8 +111,12 @@ Various Random generators
 * :ref:`randomDigraphs-label` 
      Various implemented random digraph models.
 
+     .. inheritance-diagram:: randomDigraphs
+
 * :ref:`randomPerfTabs-label` 
      Various implemented random performance tableau models.
+
+     .. inheritance-diagram:: randomPerfTabs
 
 * :ref:`randomNumbers-label` 
      Additional random number generators, not available in the
@@ -132,18 +146,24 @@ Sorting, rating and ranking tools
 .................................
 
 * :ref:`sortingDigraphs-label`
-     Additional tools for solving sorting problems with the root
-     `SortingDigraph <techDoc.html#sortingDigraphs.SortingDigraph>`_
+     Additional tools for solving sorting problems with the main
+     `SortingDigraph <techDoc.html#sortingDigraphs.QuantilesSortingDigraph>`_
      class;
+
+     .. inheritance-diagram:: sortingDigraphs.SortingDigraph
      
 * :ref:`linearOrders-label` 
      Additional tools for solving linearly ranking problems with the
      root `LinearOrder <techDoc.html#linearOrders.LinearOrder>`_
      class;
+
+     .. inheritance-diagram:: linearOrders
      
 * :ref:`weakOrders-label` 
      Additional tools for solving pre-ranking problems with
      root `WeakOrder <techDoc.html#weakOrders.WeakOrder>`_ class.
+
+     .. inheritance-diagram:: weakOrders
 
 Miscellaneous tools
 ...................
