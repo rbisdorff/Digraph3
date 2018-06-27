@@ -853,7 +853,7 @@ The performance evaluations of each decision alternative on each criterion are g
 
     def convert2Standard(self):
         """
-        Convert a performance tableau into a standard PerformanceTableau instances.
+        Convert in site a bigData formated Performance tableau back into a standard formated PerformanceTableau instances.
         """
         self.convertWeightFloatToDecimal()
         self.convertEvaluationFloatToDecimal()
@@ -861,14 +861,22 @@ The performance evaluations of each decision alternative on each criterion are g
 
     def convert2BigData(self):
         """
-        Convert a standard PerformanceTableau to a cPerformanceTableau instances, by converting the action keys to integers and evaluations to floats, including the discrimination thresholds, the case given.
+        Renders a cPerformanceTableau instance, by converting the action keys to integers and evaluations to floats, including the discrimination thresholds, the case given.
         """
         from collections import OrderedDict
         from cRandPerfTabs import cPerformanceTableau
-        self.convertWeight2Integer()
-        self.convertEvaluation2Float()
-        self.convertDiscriminationThresholds2Float()
+        from copy import deepcopy
+        t = PerformanceTableau(isEmpty=True)
+        t.name = 'bgd_' + self.name
+        att = [a for a in self.__dict__]
+        att.remove('name')
+        att.remove('actions')
+        att.remove('evaluation')
+        for a in att:
+            t.__dict__[a] = deepcopy(self.__dict__[a])
         # convert action keys to integers
+        t.convertWeight2Integer()
+        t.convertDiscriminationThresholds2Float()
         actions = self.actions
         newActions = OrderedDict()
         for i,x in enumerate(actions):
@@ -877,21 +885,22 @@ The performance evaluations of each decision alternative on each criterion are g
         # convert evaluation access keys
         evaluation = self.evaluation
         newEvaluation = {}
-        for g in self.criteria:
+        for g in t.criteria:
             newEvaluation[g] = {}
             for i,x in enumerate(actions):
                 newKey = i
-                newEvaluation[g][newKey] = evaluation[g][x]
-        self.actions = newActions
-        self.evaluation = newEvaluation
+                newEvaluation[g][newKey] = float(evaluation[g][x])
+        t.actions = newActions
+        t.evaluation = newEvaluation
         # change the object class
-        self.__class__ = cPerformanceTableau
+        t.__class__ = cPerformanceTableau
+        return t
         
     def convertWeight2Integer(self):
         """
         Convert significance weights from Decimal format
         to int format.
-        """
+    """
         criteria = self.criteria
         for g in criteria:
             criteria[g]['weight'] = int(criteria[g]['weight'])

@@ -24,23 +24,30 @@ class cPerformanceTableau(PerformanceTableau):
     """
     Abstract root class for cythenized performace tableau methods.
     """
-    def convert2BigData(self):
-        """
-        Converts a standard :py:class:`perfTabs.PerformanceTableau` class instance to a corresponding BigData :py:class:`cRandPerfTabs.cPerformanceTableau` class instance.
-        """ 
-        self.convertWeight2Integer()
-        self.convertEvaluation2Float()
-        self.convertDiscriminationThresholds2Float()
+    # def convert2BigData(self):
+    #     """
+    #     Converts a standard :py:class:`perfTabs.PerformanceTableau` class instance to a corresponding BigData :py:class:`cRandPerfTabs.cPerformanceTableau` class instance.
+    #     """ 
+    #     self.convertWeight2Integer()
+    #     self.convertEvaluation2Float()
+    #     self.convertDiscriminationThresholds2Float()
 
     def convert2Standard(self):
         """
-        Converts a BigData :py:class:`cRandPerfTabs.cPerformanceTableau` class instance to a corresponding standard :py:class:`perfTabs.PerformanceTableau` class instance.
+        Renders a standard :py:class:`perfTabs.PerformanceTableau` class instance from a BigData instance.
         """
-        from perfTabs import PerforamnceTableau
-        self.convertWeight2Decimal()
-        self.convertEvaluation2Decimal()
-        self.convertDiscriminationThresholds2Decimal()
-        self.__class__ = PerformanceTableau
+        from perfTabs import PerformanceTableau
+        from copy import deepcopy
+        t = PerformanceTableau(isEmpty=True)
+        t.name = 'std_' + self.name
+        att = [a for a in self.__dict__]
+        att.remove('name')
+        for a in att:
+            t.__dict__[a] = deepcopy(self.__dict__[a])
+        cPerformanceTableau.convertWeight2Decimal(t)
+        cPerformanceTableau.convertEvaluation2Decimal(t)
+        cPerformanceTableau.convertDiscriminationThresholds2Decimal(t)
+        return t
         
     def convertWeight2Integer(self):
         """
