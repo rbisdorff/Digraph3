@@ -35,10 +35,12 @@ class cPerformanceTableau(PerformanceTableau):
     def convert2Standard(self):
         """
         Converts a BigData :py:class:`cRandPerfTabs.cPerformanceTableau` class instance to a corresponding standard :py:class:`perfTabs.PerformanceTableau` class instance.
-        """ 
+        """
+        from perfTabs import PerforamnceTableau
         self.convertWeight2Decimal()
         self.convertEvaluation2Decimal()
         self.convertDiscriminationThresholds2Decimal()
+        self.__class__ = PerformanceTableau
         
     def convertWeight2Integer(self):
         """
