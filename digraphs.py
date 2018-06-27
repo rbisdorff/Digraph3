@@ -11236,34 +11236,25 @@ class DualDigraph(Digraph):
     """
     def __init__(self,other):
         from copy import deepcopy
+        self.__class__ = other.__class__
         self.name = 'dual_' + str(other.name)
         att = [a for a in other.__dict__]
         att.remove('name')
-        att.remove('relation')
         for a in att:
             self.__dict__[a] = deepcopy(other.__dict__[a])
-        self.order = len(self.actions)
-        self.relation = self._constructRelation(other.relation)
-        self.__class__ = other.__class__
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
-
-    def _constructRelation(self,relationIn):
-        """
-        Renders the dual relation with formula:
-        relationOut[a][b] = Max - relationIn[a][b] + Min
-        where Max (resp. Min) equals valuation maximum (resp. minimum).
-        """
+        #self.order = len(self.actions)
         actions = self.actions
         Min = self.valuationdomain['min']
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
-        relationOut = {}
+        dualRelation = {}
         for a in actions:
-            relationOut[a] = {}
+            dualRelation[a] = {}
             for b in actions:
-                relationOut[a][b] = Max - relationIn[a][b] + Min
-        return relationOut
+                dualRelation[a][b] = Max - self.relation[a][b] + Min
+        self.relation = dualRelation
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
 
 class _PreferenceDigraph(Digraph):
     """

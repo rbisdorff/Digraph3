@@ -152,7 +152,7 @@ class RandomValuationDigraph(Digraph):
     """
 
     def __init__(self,order=9, ndigits=2,
-                 Normalized=False,
+                 Normalized=True,
                  hasIntegerValuation=False,
                  seed = None):
         import random
