@@ -9976,16 +9976,23 @@ class EquivalenceDigraph(Digraph):
         Maxd1 = d1.valuationdomain['max']
         Mind2 = d2.valuationdomain['min']
         Maxd2 = d2.valuationdomain['max']
-        if (Mind1 != Mind2) or (Maxd1 != Maxd2):
+        if (Mind1 != Decimal("-1.0")) or (Maxd1 != Decimal("1.0")):
             if Debug:
-                print('!!! valuation recoding required !!!')
+                print('!!! d1 valuation recoding required !!!')
                 print(d1.name,d1.valuationdomain)
-                print(d2.name,d2.valuationdomain)
             d1.recodeValuation(-1.0,1.0)
-            d2.recodeValuation(-1.0,1.0)
-            Recoded = True
+            RecodedD1 = True
         else:
-            Recoded = False
+            RecodedD1 = False
+         
+        if (Mind2 != Decimal("-1.0")) or (Maxd2 != Decimal("1.0")):
+            if Debug:
+                print('!!! d2 valuation recoding required !!!')
+                print(d2.name,d2.valuationdomain)
+            d2.recodeValuation(-1.0,1.0)
+            RecodedD2 = True
+        else:
+            RecodedD2 = False
 
         equivRelation = {}
         for x in self.actions:
@@ -10003,14 +10010,10 @@ class EquivalenceDigraph(Digraph):
                                 'med': Decimal("0.0"),
                                 'max': Decimal("1.0")}
 
-        if Recoded:
-            # self.valuationdomain = {'min': Decimal("-1.0"),
-            #                         'med': Decimal("0.0"),
-            #                         'max': Decimal("1.0")}
+        if RecodedD1:
             d1.recodeValuation(Mind1,Maxd1)
+        if RecodedD2:
             d2.recodeValuation(Mind2,Maxd2)
-        else:
-            self.valuationdomain = dict(d1.valuationdomain.items())
 
         self.correlation = self.computeCorrelation()      
         self.gamma = self.gammaSets()
@@ -10031,7 +10034,9 @@ class EquivalenceDigraph(Digraph):
                 if x != y:
                     corr += rxy
                     dterm += abs(rxy)
-        return float(corr)/float(dterm)
+        n = self.order * (self.order-1)
+        return {'correlation': float(corr)/float(dterm),
+                'determination': float(dterm)/float(n)}
 
 
 # ------- Specialisations of the Digraph class -----------
