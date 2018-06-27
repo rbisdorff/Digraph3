@@ -900,7 +900,7 @@
 
 <div class="viewcode-block" id="PerformanceTableau.convert2Standard"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convert2Standard">[docs]</a>    <span class="k">def</span> <span class="nf">convert2Standard</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        convert cRandPerfTabs generated objects into standard PerformanceTableau instances.</span>
+<span class="sd">        Convert a performance tableau into a standard PerformanceTableau instances.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">convertWeightFloatToDecimal</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluationFloatToDecimal</span><span class="p">()</span>
@@ -908,8 +908,7 @@
 
 <div class="viewcode-block" id="PerformanceTableau.convert2BigData"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convert2BigData">[docs]</a>    <span class="k">def</span> <span class="nf">convert2BigData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        convert standard PerformanceTableau to cPerformanceTableau instances, by converting the action keys to integers</span>
-<span class="sd">        and evaluations to floats, including the discrimination thresholds the case given.</span>
+<span class="sd">        Convert a standard PerformanceTableau to a cPerformanceTableau instances, by converting the action keys to integers and evaluations to floats, including the discrimination thresholds, the case given.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
         <span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="k">import</span> <span class="n">cPerformanceTableau</span>
@@ -932,6 +931,7 @@
                 <span class="n">newEvaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">newKey</span><span class="p">]</span> <span class="o">=</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">newActions</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">newEvaluation</span>
+        <span class="c1"># change the object class</span>
         <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">cPerformanceTableau</span></div>
         
 <div class="viewcode-block" id="PerformanceTableau.convertWeight2Integer"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convertWeight2Integer">[docs]</a>    <span class="k">def</span> <span class="nf">convertWeight2Integer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
