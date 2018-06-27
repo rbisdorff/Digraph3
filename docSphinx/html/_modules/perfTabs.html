@@ -900,7 +900,7 @@
 
 <div class="viewcode-block" id="PerformanceTableau.convert2Standard"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convert2Standard">[docs]</a>    <span class="k">def</span> <span class="nf">convert2Standard</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Convert a performance tableau into a standard PerformanceTableau instances.</span>
+<span class="sd">        Convert in site a bigData formated Performance tableau back into a standard formated PerformanceTableau instances.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">convertWeightFloatToDecimal</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluationFloatToDecimal</span><span class="p">()</span>
@@ -908,14 +908,22 @@
 
 <div class="viewcode-block" id="PerformanceTableau.convert2BigData"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convert2BigData">[docs]</a>    <span class="k">def</span> <span class="nf">convert2BigData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Convert a standard PerformanceTableau to a cPerformanceTableau instances, by converting the action keys to integers and evaluations to floats, including the discrimination thresholds, the case given.</span>
+<span class="sd">        Renders a cPerformanceTableau instance, by converting the action keys to integers and evaluations to floats, including the discrimination thresholds, the case given.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
         <span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="k">import</span> <span class="n">cPerformanceTableau</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">convertWeight2Integer</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluation2Float</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">convertDiscriminationThresholds2Float</span><span class="p">()</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">PerformanceTableau</span><span class="p">(</span><span class="n">isEmpty</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;bgd_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="n">att</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">]</span>
+        <span class="n">att</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
+        <span class="n">att</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;actions&#39;</span><span class="p">)</span>
+        <span class="n">att</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;evaluation&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">att</span><span class="p">:</span>
+            <span class="n">t</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">a</span><span class="p">])</span>
         <span class="c1"># convert action keys to integers</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">convertWeight2Integer</span><span class="p">()</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">convertDiscriminationThresholds2Float</span><span class="p">()</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span>
         <span class="n">newActions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">actions</span><span class="p">):</span>
@@ -924,21 +932,22 @@
         <span class="c1"># convert evaluation access keys</span>
         <span class="n">evaluation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span>
         <span class="n">newEvaluation</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">criteria</span><span class="p">:</span>
             <span class="n">newEvaluation</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">actions</span><span class="p">):</span>
                 <span class="n">newKey</span> <span class="o">=</span> <span class="n">i</span>
-                <span class="n">newEvaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">newKey</span><span class="p">]</span> <span class="o">=</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">newActions</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">newEvaluation</span>
+                <span class="n">newEvaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">newKey</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">])</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">newActions</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">newEvaluation</span>
         <span class="c1"># change the object class</span>
-        <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">cPerformanceTableau</span></div>
+        <span class="n">t</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">cPerformanceTableau</span>
+        <span class="k">return</span> <span class="n">t</span></div>
         
 <div class="viewcode-block" id="PerformanceTableau.convertWeight2Integer"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convertWeight2Integer">[docs]</a>    <span class="k">def</span> <span class="nf">convertWeight2Integer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert significance weights from Decimal format</span>
 <span class="sd">        to int format.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
             <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span>

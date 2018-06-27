@@ -4230,13 +4230,13 @@ can be provided for a specific normalisation.</p>
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.convert2BigData">
 <code class="descname">convert2BigData</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.convert2BigData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.convert2BigData" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert a standard PerformanceTableau to a cPerformanceTableau instances, by converting the action keys to integers and evaluations to floats, including the discrimination thresholds, the case given.</p>
+<dd><p>Renders a cPerformanceTableau instance, by converting the action keys to integers and evaluations to floats, including the discrimination thresholds, the case given.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.convert2Standard">
 <code class="descname">convert2Standard</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.convert2Standard"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.convert2Standard" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert a performance tableau into a standard PerformanceTableau instances.</p>
+<dd><p>Convert in site a bigData formated Performance tableau back into a standard formated PerformanceTableau instances.</p>
 </dd></dl>
 
 <dl class="method">
@@ -8552,15 +8552,9 @@ matching the RandomLinearVotingProfiles class (see the votingDigraphs module)</p
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>Abstract root class for cythenized performace tableau methods.</p>
 <dl class="attribute">
-<dt id="cRandPerfTabs.cPerformanceTableau.convert2BigData">
-<code class="descname">convert2BigData</code><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.convert2BigData" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts a standard <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a> class instance to a corresponding BigData <a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau" title="cRandPerfTabs.cPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">cRandPerfTabs.cPerformanceTableau</span></code></a> class instance.</p>
-</dd></dl>
-
-<dl class="attribute">
 <dt id="cRandPerfTabs.cPerformanceTableau.convert2Standard">
 <code class="descname">convert2Standard</code><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.convert2Standard" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts a BigData <a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau" title="cRandPerfTabs.cPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">cRandPerfTabs.cPerformanceTableau</span></code></a> class instance to a corresponding standard <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a> class instance.</p>
+<dd><p>Renders a standard <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a> class instance from a BigData instance.</p>
 </dd></dl>
 
 <dl class="attribute">
