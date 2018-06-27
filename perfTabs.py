@@ -853,7 +853,7 @@ The performance evaluations of each decision alternative on each criterion are g
 
     def convert2Standard(self):
         """
-        convert cRandPerfTabs generated objects into standard PerformanceTableau instances.
+        Convert a performance tableau into a standard PerformanceTableau instances.
         """
         self.convertWeightFloatToDecimal()
         self.convertEvaluationFloatToDecimal()
@@ -861,8 +861,7 @@ The performance evaluations of each decision alternative on each criterion are g
 
     def convert2BigData(self):
         """
-        convert standard PerformanceTableau to cPerformanceTableau instances, by converting the action keys to integers
-        and evaluations to floats, including the discrimination thresholds the case given.
+        Convert a standard PerformanceTableau to a cPerformanceTableau instances, by converting the action keys to integers and evaluations to floats, including the discrimination thresholds, the case given.
         """
         from collections import OrderedDict
         from cRandPerfTabs import cPerformanceTableau
@@ -885,6 +884,7 @@ The performance evaluations of each decision alternative on each criterion are g
                 newEvaluation[g][newKey] = evaluation[g][x]
         self.actions = newActions
         self.evaluation = newEvaluation
+        # change the object class
         self.__class__ = cPerformanceTableau
         
     def convertWeight2Integer(self):
