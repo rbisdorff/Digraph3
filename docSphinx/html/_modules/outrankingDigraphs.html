@@ -3890,7 +3890,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">criteria</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">convertWeightFloatToDecimal</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convertWeight2Decimal</span><span class="p">()</span>
 
         <span class="c1">#  install method Data and parameters</span>
         <span class="n">methodData</span> <span class="o">=</span> <span class="p">{}</span>
@@ -3917,7 +3917,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">evaluation</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">BigData</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluationFloatToDecimal</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluation2Decimal</span><span class="p">()</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">CopyPerfTab</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
@@ -4883,7 +4883,7 @@
             <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">coalition</span><span class="p">:</span>
                 <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">criteria</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">convertWeightFloatToDecimal</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convertWeight2Decimal</span><span class="p">()</span>
         <span class="c1">#  install method Data and parameters</span>
         <span class="n">methodData</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">try</span><span class="p">:</span>
@@ -4910,7 +4910,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">evaluation</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">evaluation</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluationFloatToDecimal</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluation2Decimal</span><span class="p">()</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">CopyPerfTab</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
@@ -5617,7 +5617,7 @@
             <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">coalition</span><span class="p">:</span>
                 <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">criteria</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">convertWeightFloatToDecimal</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convertWeight2Decimal</span><span class="p">()</span>
         <span class="c1">#  install method Data and parameters</span>
         <span class="n">methodData</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">try</span><span class="p">:</span>
@@ -5641,7 +5641,7 @@
 
         <span class="c1"># insert performance Data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">evaluation</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluationFloatToDecimal</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluation2Decimal</span><span class="p">()</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
@@ -6709,9 +6709,9 @@
                 <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">])</span>
         <span class="c1">#self.relation = self._constructRelation(criteria,perfTab.evaluation, self.weightPreorder)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">criteria</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">convertWeightFloatToDecimal</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convertWeight2Decimal</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">evaluation</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluationFloatToDecimal</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluation2Decimal</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_constructRelation</span><span class="p">(</span><span class="n">perfTab</span><span class="p">,</span><span class="n">hasNoVeto</span><span class="o">=</span><span class="n">hasNoVeto</span><span class="p">)</span>
         <span class="n">methodData</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">methodData</span><span class="p">[</span><span class="s1">&#39;parameter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;valuationType&#39;</span><span class="p">:</span><span class="s1">&#39;integer&#39;</span><span class="p">,</span><span class="s1">&#39;variant&#39;</span><span class="p">:</span><span class="s1">&#39;bipolar&#39;</span><span class="p">}</span>
@@ -6810,9 +6810,9 @@
             <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">coalition</span><span class="p">:</span>
                 <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">criteria</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">convertWeightFloatToDecimal</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convertWeight2Decimal</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">evaluation</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluationFloatToDecimal</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluation2Decimal</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_constructRelation</span><span class="p">(</span><span class="n">criteria</span><span class="p">,</span><span class="n">perfTab</span><span class="o">.</span><span class="n">evaluation</span><span class="p">,</span><span class="n">hasNoVeto</span><span class="o">=</span><span class="n">hasNoVeto</span><span class="p">)</span>
         <span class="n">methodData</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">methodData</span><span class="p">[</span><span class="s1">&#39;parameter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;valuationType&#39;</span><span class="p">:</span><span class="s1">&#39;decimal&#39;</span><span class="p">,</span><span class="s1">&#39;variant&#39;</span><span class="p">:</span><span class="s1">&#39;none&#39;</span><span class="p">}</span>
@@ -7163,9 +7163,9 @@
             <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">coalition</span><span class="p">:</span>
                 <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">criteria</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">convertWeightFloatToDecimal</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convertWeight2Decimal</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">evaluation</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluationFloatToDecimal</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluation2Decimal</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_constructRelation</span><span class="p">(</span><span class="n">criteria</span><span class="p">,</span><span class="n">perfTab</span><span class="o">.</span><span class="n">evaluation</span><span class="p">,</span><span class="n">hasNoVeto</span><span class="o">=</span><span class="n">hasNoVeto</span><span class="p">)</span>
         <span class="n">methodData</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">methodData</span><span class="p">[</span><span class="s1">&#39;parameter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;valuationType&#39;</span><span class="p">:</span><span class="s1">&#39;decimal&#39;</span><span class="p">,</span><span class="s1">&#39;variant&#39;</span><span class="p">:</span><span class="s1">&#39;none&#39;</span><span class="p">}</span>

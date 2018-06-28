@@ -3843,7 +3843,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             else:
                 criteria[g] = perfTab.criteria[g]
         self.criteria = criteria
-        self.convertWeightFloatToDecimal()
+        self.convertWeight2Decimal()
 
         #  install method Data and parameters
         methodData = {}
@@ -3870,7 +3870,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         else:
             self.evaluation = perfTab.evaluation
         if not BigData:
-            self.convertEvaluationFloatToDecimal()
+            self.convertEvaluation2Decimal()
         try:
             if CopyPerfTab:
                 self.description = deepcopy(perfTab.description)
@@ -4836,7 +4836,7 @@ class _BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             for g in coalition:
                 criteria[g] = perfTab.criteria[g]
             self.criteria = criteria
-        self.convertWeightFloatToDecimal()
+        self.convertWeight2Decimal()
         #  install method Data and parameters
         methodData = {}
         try:
@@ -4863,7 +4863,7 @@ class _BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             self.evaluation = deepcopy(perfTab.evaluation)
         else:
             self.evaluation = perfTab.evaluation
-        self.convertEvaluationFloatToDecimal()
+        self.convertEvaluation2Decimal()
         try:
             if CopyPerfTab:
                 self.description = deepcopy(perfTab.description)
@@ -5570,7 +5570,7 @@ class _BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             for g in coalition:
                 criteria[g] = copy.copy(perfTab.criteria[g])
         self.criteria = criteria
-        self.convertWeightFloatToDecimal()
+        self.convertWeight2Decimal()
         #  install method Data and parameters
         methodData = {}
         try:
@@ -5594,7 +5594,7 @@ class _BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 
         # insert performance Data
         self.evaluation = copy.copy(perfTab.evaluation)
-        self.convertEvaluationFloatToDecimal()
+        self.convertEvaluation2Decimal()
         try:
             self.description = copy.copy(perfTab.description)
         except:
@@ -6662,9 +6662,9 @@ class EquiSignificanceMajorityOutrankingDigraph(BipolarOutrankingDigraph,Perform
                 criteria[g] = copy.copy(perfTab.criteria[g])
         #self.relation = self._constructRelation(criteria,perfTab.evaluation, self.weightPreorder)
         self.criteria = criteria
-        self.convertWeightFloatToDecimal()
+        self.convertWeight2Decimal()
         self.evaluation = copy.copy(perfTab.evaluation)
-        self.convertEvaluationFloatToDecimal()
+        self.convertEvaluation2Decimal()
         self.relation = self._constructRelation(perfTab,hasNoVeto=hasNoVeto)
         methodData = {}
         methodData['parameter'] = {'valuationType':'integer','variant':'bipolar'}
@@ -6763,9 +6763,9 @@ class OrdinalOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             for g in coalition:
                 criteria[g] = perfTab.criteria[g]
         self.criteria = criteria
-        self.convertWeightFloatToDecimal()
+        self.convertWeight2Decimal()
         self.evaluation = copy.deepcopy(perfTab.evaluation)
-        self.convertEvaluationFloatToDecimal()
+        self.convertEvaluation2Decimal()
         self.relation = self._constructRelation(criteria,perfTab.evaluation,hasNoVeto=hasNoVeto)
         methodData = {}
         methodData['parameter'] = {'valuationType':'decimal','variant':'none'}
@@ -7116,9 +7116,9 @@ class UnanimousOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             for g in coalition:
                 criteria[g] = perfTab.criteria[g]
         self.criteria = criteria
-        self.convertWeightFloatToDecimal()
+        self.convertWeight2Decimal()
         self.evaluation = copy.deepcopy(perfTab.evaluation)
-        self.convertEvaluationFloatToDecimal()
+        self.convertEvaluation2Decimal()
         self.relation = self._constructRelation(criteria,perfTab.evaluation,hasNoVeto=hasNoVeto)
         methodData = {}
         methodData['parameter'] = {'valuationType':'decimal','variant':'none'}

@@ -851,13 +851,21 @@ The performance evaluations of each decision alternative on each criterion are g
         else:
             print('The performance tableau does not contain objectives.')
 
-    def convert2Standard(self):
+    def convertInsite2Standard(self):
         """
-        Convert in site a bigData formated Performance tableau back into a standard formated PerformanceTableau instances.
+        Convert in site a bigData formated Performance tableau back into a standard formated PerformanceTableau instance.
         """
-        self.convertWeightFloatToDecimal()
-        self.convertEvaluationFloatToDecimal()
+        self.convertWeight2Decimal()
+        self.convertEvaluation2Decimal()
         self.convertDiscriminationThresholds2Decimal()
+
+    def convertInsite2BigData(self):
+        """
+        Convert in site a standard formated Performance tableau into a bigData formated instance.
+        """
+        self.convertWeight2Integer()
+        self.convertEvaluation2Float()
+        self.convertDiscriminationThresholds2Float()
 
     def convert2BigData(self):
         """
@@ -938,7 +946,7 @@ The performance evaluations of each decision alternative on each criterion are g
                 criteria[g]['thresholds'][th] = d1
 
  
-    def convertWeightFloatToDecimal(self):
+    def convertWeight2Decimal(self):
         """
         Convert significance weights from obsolete float format
         to decimal format.
@@ -950,7 +958,7 @@ The performance evaluations of each decision alternative on each criterion are g
             criteria[g]['weight'] = Decimal(str(criteria[g]['weight']))
         self.criteria = criteria
 
-    def convertEvaluationFloatToDecimal(self):
+    def convertEvaluation2Decimal(self):
         """
         Convert evaluations from obsolete float format to decimal format
         """

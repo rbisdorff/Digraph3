@@ -24,17 +24,17 @@ class cPerformanceTableau(PerformanceTableau):
     """
     Abstract root class for cythenized performace tableau methods.
     """
-    # def convert2BigData(self):
-    #     """
-    #     Converts a standard :py:class:`perfTabs.PerformanceTableau` class instance to a corresponding BigData :py:class:`cRandPerfTabs.cPerformanceTableau` class instance.
-    #     """ 
-    #     self.convertWeight2Integer()
-    #     self.convertEvaluation2Float()
-    #     self.convertDiscriminationThresholds2Float()
+    def convertInsite2BigData(self):
+        """
+        Converts in site weights, evaluations and discrimination thresholds to bigData float format.
+        """ 
+        self.convertWeight2Integer()
+        self.convertEvaluation2Float()
+        self.convertDiscriminationThresholds2Float()
 
     def convert2Standard(self):
         """
-        Renders a standard :py:class:`perfTabs.PerformanceTableau` class instance from a BigData instance.
+        Renders a standard :py:class:`perfTabs.PerformanceTableau` class instance from a deepcopy of a BigData instance.
         """
         from perfTabs import PerformanceTableau
         from copy import deepcopy
@@ -48,6 +48,22 @@ class cPerformanceTableau(PerformanceTableau):
         cPerformanceTableau.convertEvaluation2Decimal(t)
         cPerformanceTableau.convertDiscriminationThresholds2Decimal(t)
         return t
+
+    def convertInsite2Standard(self):
+        """
+        Converts in site weights, evaluations and discrimination thresholds to standard Decimal format.
+        """
+        self.convertWeight2Decimal()
+        self.convertEvaluation2Decimal()
+        self.convertDiscriminationThresholds2Decimal()
+
+    def convertInsite2BigData(self):
+        """
+        Converts in site weights, evaluations and discrimination thresholds to bigData float format.
+        """
+        self.convertWeight2Decimal()
+        self.convertEvaluation2Decimal()
+        self.convertDiscriminationThresholds2Decimal()
         
     def convertWeight2Integer(self):
         """
@@ -87,6 +103,7 @@ class cPerformanceTableau(PerformanceTableau):
         """
         Converts evaluations from float to Decimal format.
         """
+        cdef int x
         from decimal import Decimal
         evaluation = self.evaluation
         actions = self.actions
@@ -311,7 +328,7 @@ class cPerformanceTableau(PerformanceTableau):
         import webbrowser
 
         ## convert to std
-        self.convert2Standard()
+        self.convertInsite2Standard()
         
         fileName = '/tmp/performanceHeatmap.html'
         fo = open(fileName,'w')
@@ -337,7 +354,7 @@ class cPerformanceTableau(PerformanceTableau):
         webbrowser.open_new(url)
 
         ### convert back to Bgd
-        self.convert2BigData()
+        self.convertInsite2BigData()
 
 ############ Specialized cPerformanceTableau models ################
 

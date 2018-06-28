@@ -156,9 +156,9 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         else:
             self.actions = deepcopy(perfTab.actions)
         self.criteria = deepcopy(perfTab.criteria)
-        self.convertWeightFloatToDecimal()
+        self.convertWeight2Decimal()
         self.evaluation = deepcopy(perfTab.evaluation)
-        self.convertEvaluationFloatToDecimal()
+        self.convertEvaluation2Decimal()
 
         # keep a copy of the original actions set before adding the profiles
         actionsOrig = deepcopy(perfTab.actions)
@@ -176,9 +176,9 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             else:
                 self.actions = deepcopy(perfTab.actions)
             self.criteria = deepcopy(perfTab.criteria)
-            self.convertWeightFloatToDecimal()
+            self.convertWeight2Decimal()
             self.evaluation = deepcopy(perfTab.evaluation)
-            self.convertEvaluationFloatToDecimal()
+            self.convertEvaluation2Decimal()
             if isinstance(argProfile,str): # input from stored instantiation
                 fileName = argProfile
                 fileNameExt = fileName + '.py'
@@ -203,9 +203,9 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             normPerfTab = NormalizedPerformanceTableau(perfTab)
             self.actions = normPerfTab.actions
             self.criteria = normPerfTab.criteria
-            self.convertWeightFloatToDecimal()
+            self.convertWeight2Decimal()
             self.evaluation = normPerfTab.evaluation
-            self.convertEvaluationFloatToDecimal()
+            self.convertEvaluation2Decimal()
             # supposing all criteria scales between 0.0 and 100.0
             lowValue = Decimal('0.0')
             highValue = Decimal('100.0')
@@ -291,7 +291,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         self.profiles = profiles
         self.profileLimits = profileLimits
         self.evaluation = evaluation
-        self.convertEvaluationFloatToDecimal()
+        self.convertEvaluation2Decimal()
         self.LowerClosed = LowerClosed
 
         self.runTimes['computeProfiles'] =  time()-t0
@@ -1497,10 +1497,10 @@ class QuantilesSortingDigraph(SortingDigraph):
         # instantiating the performance tableau part
         criteria = normPerfTab.criteria
         self.criteria = criteria
-        self.convertWeightFloatToDecimal()
+        self.convertWeight2Decimal()
         evaluation = normPerfTab.evaluation
         self.evaluation = evaluation
-        self.convertEvaluationFloatToDecimal()
+        self.convertEvaluation2Decimal()
         self.runTimes = {'dataInput': time()-tt}
 
         #  compute the limiting quantiles
@@ -1600,7 +1600,6 @@ class QuantilesSortingDigraph(SortingDigraph):
             print('self.profiles',profiles)
             print('self.profileLimits',profileLimits)
             
-        #self.convertEvaluationFloatToDecimal()
         self.runTimes['computeProfiles'] = time() - t0
         
         # construct outranking relation
@@ -3139,7 +3138,6 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         except:
             pass
         self.criteria = deepcopy(perfQuantiles.criteria)
-        #self.convertWeightFloatToDecimal()
         self.LowerClosed = perfQuantiles.LowerClosed
         self.quantilesFrequencies = deepcopy(perfQuantiles.quantilesFrequencies)
         self.limitingQuantiles = deepcopy(perfQuantiles.limitingQuantiles)

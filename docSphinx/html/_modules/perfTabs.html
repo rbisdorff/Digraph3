@@ -898,13 +898,21 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The performance tableau does not contain objectives.&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PerformanceTableau.convert2Standard"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convert2Standard">[docs]</a>    <span class="k">def</span> <span class="nf">convert2Standard</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PerformanceTableau.convertInsite2Standard"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convertInsite2Standard">[docs]</a>    <span class="k">def</span> <span class="nf">convertInsite2Standard</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Convert in site a bigData formated Performance tableau back into a standard formated PerformanceTableau instances.</span>
+<span class="sd">        Convert in site a bigData formated Performance tableau back into a standard formated PerformanceTableau instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">convertWeightFloatToDecimal</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluationFloatToDecimal</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convertWeight2Decimal</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluation2Decimal</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">convertDiscriminationThresholds2Decimal</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="PerformanceTableau.convertInsite2BigData"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convertInsite2BigData">[docs]</a>    <span class="k">def</span> <span class="nf">convertInsite2BigData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert in site a standard formated Performance tableau into a bigData formated instance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convertWeight2Integer</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluation2Float</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convertDiscriminationThresholds2Float</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="PerformanceTableau.convert2BigData"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convert2BigData">[docs]</a>    <span class="k">def</span> <span class="nf">convert2BigData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -985,7 +993,7 @@
                 <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;thresholds&#39;</span><span class="p">][</span><span class="n">th</span><span class="p">]</span> <span class="o">=</span> <span class="n">d1</span></div>
 
  
-<div class="viewcode-block" id="PerformanceTableau.convertWeightFloatToDecimal"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convertWeightFloatToDecimal">[docs]</a>    <span class="k">def</span> <span class="nf">convertWeightFloatToDecimal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PerformanceTableau.convertWeight2Decimal"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convertWeight2Decimal">[docs]</a>    <span class="k">def</span> <span class="nf">convertWeight2Decimal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert significance weights from obsolete float format</span>
 <span class="sd">        to decimal format.</span>
@@ -997,7 +1005,7 @@
             <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">criteria</span></div>
 
-<div class="viewcode-block" id="PerformanceTableau.convertEvaluationFloatToDecimal"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convertEvaluationFloatToDecimal">[docs]</a>    <span class="k">def</span> <span class="nf">convertEvaluationFloatToDecimal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PerformanceTableau.convertEvaluation2Decimal"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convertEvaluation2Decimal">[docs]</a>    <span class="k">def</span> <span class="nf">convertEvaluation2Decimal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert evaluations from obsolete float format to decimal format</span>
 <span class="sd">        &quot;&quot;&quot;</span>

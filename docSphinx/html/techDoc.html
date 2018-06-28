@@ -4234,12 +4234,6 @@ can be provided for a specific normalisation.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="perfTabs.PerformanceTableau.convert2Standard">
-<code class="descname">convert2Standard</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.convert2Standard"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.convert2Standard" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert in site a bigData formated Performance tableau back into a standard formated PerformanceTableau instances.</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="perfTabs.PerformanceTableau.convertDiscriminationThresholds2Decimal">
 <code class="descname">convertDiscriminationThresholds2Decimal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.convertDiscriminationThresholds2Decimal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.convertDiscriminationThresholds2Decimal" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -4250,15 +4244,34 @@ can be provided for a specific normalisation.</p>
 <dd></dd></dl>
 
 <dl class="method">
+<dt id="perfTabs.PerformanceTableau.convertEvaluation2Decimal">
+<code class="descname">convertEvaluation2Decimal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.convertEvaluation2Decimal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.convertEvaluation2Decimal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert evaluations from obsolete float format to decimal format</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="perfTabs.PerformanceTableau.convertEvaluation2Float">
 <code class="descname">convertEvaluation2Float</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.convertEvaluation2Float"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.convertEvaluation2Float" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert evaluations from decimal format to float</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="perfTabs.PerformanceTableau.convertEvaluationFloatToDecimal">
-<code class="descname">convertEvaluationFloatToDecimal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.convertEvaluationFloatToDecimal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.convertEvaluationFloatToDecimal" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert evaluations from obsolete float format to decimal format</p>
+<dt id="perfTabs.PerformanceTableau.convertInsite2BigData">
+<code class="descname">convertInsite2BigData</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.convertInsite2BigData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.convertInsite2BigData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert in site a standard formated Performance tableau into a bigData formated instance.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="perfTabs.PerformanceTableau.convertInsite2Standard">
+<code class="descname">convertInsite2Standard</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.convertInsite2Standard"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.convertInsite2Standard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert in site a bigData formated Performance tableau back into a standard formated PerformanceTableau instance.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="perfTabs.PerformanceTableau.convertWeight2Decimal">
+<code class="descname">convertWeight2Decimal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.convertWeight2Decimal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.convertWeight2Decimal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert significance weights from obsolete float format
+to decimal format.</p>
 </dd></dl>
 
 <dl class="method">
@@ -4266,13 +4279,6 @@ can be provided for a specific normalisation.</p>
 <code class="descname">convertWeight2Integer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.convertWeight2Integer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.convertWeight2Integer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert significance weights from Decimal format
 to int format.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="perfTabs.PerformanceTableau.convertWeightFloatToDecimal">
-<code class="descname">convertWeightFloatToDecimal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.convertWeightFloatToDecimal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.convertWeightFloatToDecimal" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert significance weights from obsolete float format
-to decimal format.</p>
 </dd></dl>
 
 <dl class="method">
@@ -8554,7 +8560,7 @@ matching the RandomLinearVotingProfiles class (see the votingDigraphs module)</p
 <dl class="attribute">
 <dt id="cRandPerfTabs.cPerformanceTableau.convert2Standard">
 <code class="descname">convert2Standard</code><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.convert2Standard" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders a standard <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a> class instance from a BigData instance.</p>
+<dd><p>Renders a standard <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a> class instance from a deepcopy of a BigData instance.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -8579,6 +8585,18 @@ matching the RandomLinearVotingProfiles class (see the votingDigraphs module)</p
 <dt id="cRandPerfTabs.cPerformanceTableau.convertEvaluation2Float">
 <code class="descname">convertEvaluation2Float</code><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.convertEvaluation2Float" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts evaluations from Decimal to float format.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cRandPerfTabs.cPerformanceTableau.convertInsite2BigData">
+<code class="descname">convertInsite2BigData</code><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.convertInsite2BigData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts in site weights, evaluations and discrimination thresholds to bigData float format.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cRandPerfTabs.cPerformanceTableau.convertInsite2Standard">
+<code class="descname">convertInsite2Standard</code><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.convertInsite2Standard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts in site weights, evaluations and discrimination thresholds to standard Decimal format.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -8992,9 +9010,9 @@ If no limitingQuantiles parameter quantity is given, a default profile with the 
 </div>
 </dd>
 </dl>
-<dl class="method">
+<dl class="attribute">
 <dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.computeCategoryContents">
-<code class="descname">computeCategoryContents</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.computeCategoryContents" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeCategoryContents</code><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.computeCategoryContents" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -9009,9 +9027,9 @@ If no limitingQuantiles parameter quantity is given, a default profile with the 
 <p>Computes the sorting results per category.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.computeQuantileOrdering">
-<code class="descname">computeQuantileOrdering</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.computeQuantileOrdering" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeQuantileOrdering</code><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.computeQuantileOrdering" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -9026,9 +9044,9 @@ in the uppest, the lowest or the average potential quantile.</li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.computeSortingCharacteristics">
-<code class="descname">computeSortingCharacteristics</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.computeSortingCharacteristics" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeSortingCharacteristics</code><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.computeSortingCharacteristics" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -9048,9 +9066,9 @@ ie x outranks low category limit and does not outrank
 the high category limit.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.computeSortingRelation">
-<code class="descname">computeSortingRelation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.computeSortingRelation" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeSortingRelation</code><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.computeSortingRelation" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -9066,9 +9084,9 @@ the high category limit.</p>
 <p>constructs a bipolar sorting relation using the category contents.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.computeWeakOrder">
-<code class="descname">computeWeakOrder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.computeWeakOrder" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeWeakOrder</code><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.computeWeakOrder" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -9080,9 +9098,9 @@ the high category limit.</p>
 <p>Specialisation for QuantilesSortingDigraphs.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.getActionsKeys">
-<code class="descname">getActionsKeys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.getActionsKeys" title="Permalink to this definition">¶</a></dt>
+<code class="descname">getActionsKeys</code><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.getActionsKeys" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -9094,9 +9112,9 @@ the high category limit.</p>
 <p>Extract normal actions keys()</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.orderedCategoryKeys">
-<code class="descname">orderedCategoryKeys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.orderedCategoryKeys" title="Permalink to this definition">¶</a></dt>
+<code class="descname">orderedCategoryKeys</code><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.orderedCategoryKeys" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameter</em>:</dt>
 <dd><ul class="first last simple">
@@ -9108,9 +9126,9 @@ the high category limit.</p>
 based on self.categories[‘order’] numeric values.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showActionCategories">
-<code class="descname">showActionCategories</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showActionCategories" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showActionCategories</code><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showActionCategories" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -9126,9 +9144,9 @@ based on self.categories[‘order’] numeric values.</p>
 Returns a tuple : action, lowest category key, highest category key, membership credibility !</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showActionsSortingResult">
-<code class="descname">showActionsSortingResult</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showActionsSortingResult" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showActionsSortingResult</code><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showActionsSortingResult" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -9140,9 +9158,9 @@ Returns a tuple : action, lowest category key, highest category key, membership 
 <p>shows the quantiles sorting result all (default) of a subset of the decision actions.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showHTMLQuantileOrdering">
-<code class="descname">showHTMLQuantileOrdering</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showHTMLQuantileOrdering" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showHTMLQuantileOrdering</code><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showHTMLQuantileOrdering" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -9163,9 +9181,9 @@ Returns a tuple : action, lowest category key, highest category key, membership 
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showHTMLSorting">
-<code class="descname">showHTMLSorting</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showHTMLSorting" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showHTMLSorting</code><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showHTMLSorting" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>“Parameter*:</dt>
 <dd><ul class="first last simple">
@@ -9176,9 +9194,9 @@ Returns a tuple : action, lowest category key, highest category key, membership 
 <p>Shows the html version of the sorting result in a browser window.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showOrderedRelationTable">
-<code class="descname">showOrderedRelationTable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showOrderedRelationTable" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showOrderedRelationTable</code><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showOrderedRelationTable" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameter</em>:</dt>
 <dd><ul class="first last simple">
@@ -9189,9 +9207,9 @@ Returns a tuple : action, lowest category key, highest category key, membership 
 <p>Showing the relation table in decreasing (default) or increasing order.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showQuantileOrdering">
-<code class="descname">showQuantileOrdering</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showQuantileOrdering" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showQuantileOrdering</code><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showQuantileOrdering" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameter</em>:</dt>
 <dd><ul class="first last simple">
@@ -9202,9 +9220,9 @@ Returns a tuple : action, lowest category key, highest category key, membership 
 <p>Dummy show method for the commenting computeQuantileOrdering() method.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showSorting">
-<code class="descname">showSorting</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showSorting" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showSorting</code><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showSorting" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -9219,9 +9237,9 @@ order of the categories. If isReturningHTML is True (default = False)
 the method returns a htlm table with the sorting result.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showSortingCharacteristics">
-<code class="descname">showSortingCharacteristics</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showSortingCharacteristics" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showSortingCharacteristics</code><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showSortingCharacteristics" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameter</em>:</dt>
 <dd><ul class="first last simple">
@@ -9236,9 +9254,9 @@ ie x outranks low category limit and does not outrank
 the high category limit.</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showWeakOrder">
-<code class="descname">showWeakOrder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showWeakOrder" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showWeakOrder</code><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showWeakOrder" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameter</em>:</dt>
 <dd><ul class="first last simple">

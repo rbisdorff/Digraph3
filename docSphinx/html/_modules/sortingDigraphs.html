@@ -203,9 +203,9 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">criteria</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">convertWeightFloatToDecimal</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convertWeight2Decimal</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">evaluation</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluationFloatToDecimal</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluation2Decimal</span><span class="p">()</span>
 
         <span class="c1"># keep a copy of the original actions set before adding the profiles</span>
         <span class="n">actionsOrig</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
@@ -223,9 +223,9 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">criteria</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">convertWeightFloatToDecimal</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">convertWeight2Decimal</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">evaluation</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluationFloatToDecimal</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluation2Decimal</span><span class="p">()</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">argProfile</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span> <span class="c1"># input from stored instantiation</span>
                 <span class="n">fileName</span> <span class="o">=</span> <span class="n">argProfile</span>
                 <span class="n">fileNameExt</span> <span class="o">=</span> <span class="n">fileName</span> <span class="o">+</span> <span class="s1">&#39;.py&#39;</span>
@@ -250,9 +250,9 @@
             <span class="n">normPerfTab</span> <span class="o">=</span> <span class="n">NormalizedPerformanceTableau</span><span class="p">(</span><span class="n">perfTab</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">normPerfTab</span><span class="o">.</span><span class="n">actions</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">normPerfTab</span><span class="o">.</span><span class="n">criteria</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">convertWeightFloatToDecimal</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">convertWeight2Decimal</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">normPerfTab</span><span class="o">.</span><span class="n">evaluation</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluationFloatToDecimal</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluation2Decimal</span><span class="p">()</span>
             <span class="c1"># supposing all criteria scales between 0.0 and 100.0</span>
             <span class="n">lowValue</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
             <span class="n">highValue</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;100.0&#39;</span><span class="p">)</span>
@@ -338,7 +338,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span> <span class="o">=</span> <span class="n">profiles</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">profileLimits</span> <span class="o">=</span> <span class="n">profileLimits</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">evaluation</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluationFloatToDecimal</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluation2Decimal</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span> <span class="o">=</span> <span class="n">LowerClosed</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;computeProfiles&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span>
@@ -1544,10 +1544,10 @@
         <span class="c1"># instantiating the performance tableau part</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="n">normPerfTab</span><span class="o">.</span><span class="n">criteria</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">criteria</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">convertWeightFloatToDecimal</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convertWeight2Decimal</span><span class="p">()</span>
         <span class="n">evaluation</span> <span class="o">=</span> <span class="n">normPerfTab</span><span class="o">.</span><span class="n">evaluation</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">evaluation</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluationFloatToDecimal</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convertEvaluation2Decimal</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;dataInput&#39;</span><span class="p">:</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">tt</span><span class="p">}</span>
 
         <span class="c1">#  compute the limiting quantiles</span>
@@ -1647,7 +1647,6 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;self.profiles&#39;</span><span class="p">,</span><span class="n">profiles</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;self.profileLimits&#39;</span><span class="p">,</span><span class="n">profileLimits</span><span class="p">)</span>
             
-        <span class="c1">#self.convertEvaluationFloatToDecimal()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;computeProfiles&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
         
         <span class="c1"># construct outranking relation</span>
@@ -3186,7 +3185,6 @@
         <span class="k">except</span><span class="p">:</span>
             <span class="k">pass</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfQuantiles</span><span class="o">.</span><span class="n">criteria</span><span class="p">)</span>
-        <span class="c1">#self.convertWeightFloatToDecimal()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span> <span class="o">=</span> <span class="n">perfQuantiles</span><span class="o">.</span><span class="n">LowerClosed</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfQuantiles</span><span class="o">.</span><span class="n">quantilesFrequencies</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">limitingQuantiles</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfQuantiles</span><span class="o">.</span><span class="n">limitingQuantiles</span><span class="p">)</span>
