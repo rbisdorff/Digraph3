@@ -3042,6 +3042,13 @@
 <div class="viewcode-block" id="Digraph.automorphismGenerators"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.automorphismGenerators">[docs]</a>    <span class="k">def</span> <span class="nf">automorphismGenerators</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Adds automorphism group generators to the digraph instance.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            Dependency: Uses the dreadnaut command from the nauty software package. See https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml</span>
+
+<span class="sd">            On Linux:</span>
+<span class="sd">              ...$ sudo apt-get install nauty</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">os</span>
         <span class="n">Name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>

@@ -2995,6 +2995,13 @@ class Digraph(object):
     def automorphismGenerators(self):
         """
         Adds automorphism group generators to the digraph instance.
+
+        .. note::
+
+            Dependency: Uses the dreadnaut command from the nauty software package. See https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml
+
+            On Linux:
+              ...$ sudo apt-get install nauty
         """
         import os
         Name = self.name
