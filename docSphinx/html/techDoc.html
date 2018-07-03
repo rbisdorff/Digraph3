@@ -1652,10 +1652,10 @@ Returns a boolean value</p>
 <dl class="method">
 <dt id="digraphs.Digraph.determinateness">
 <code class="descname">determinateness</code><span class="sig-paren">(</span><em>vec</em>, <em>inPercent=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.determinateness"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.determinateness" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the determinateness of a bipolar characteristic vector
-[(r(x),x),(r(y),y), …] of length <em>n</em> in valuationdomain [Min,Max]:</p>
-<p>result = sum_x abs(r(x))/(n*(Max-Min)</p>
-<p>If inPercent, result shifted (+1) and reduced (/2) to [0,1] range.</p>
+<dd><p>Renders the determinateness of a characteristic vector <em>vec</em> = 
+[(r(x),x),(r(y),y), …] of length <em>n</em> in valuationdomain [Min,Med,Max]:</p>
+<p><em>result</em> =  sum_x( abs(r(x)-Med) ) / ( n*(Max-Med) )</p>
+<p>If inPercent, <em>result</em> shifted (+1) and reduced (/2) to [0,1] range.</p>
 </dd></dl>
 
 <dl class="method">
@@ -2678,7 +2678,7 @@ called dg1 and dg2.</p>
 <p>Parameter:</p>
 <blockquote>
 <div><ul class="simple">
-<li>operator = “o-min” | “o-max” (epistemic conjunctive or dijunctive fusion)</li>
+<li>operator = “o-min” | “o-max” (epistemic conjunctive or disjunctive fusion)</li>
 </ul>
 </div></blockquote>
 </dd></dl>

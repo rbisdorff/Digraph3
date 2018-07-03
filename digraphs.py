@@ -4863,7 +4863,7 @@ class Digraph(object):
                     deter += abs(rxy - Med)
                     #print(deter)
         #deter = (deter /Decimal(str((order * (order-1))))) * (Max - Med)
-        deter = ( Decimal(str(deter)) / Decimal(str((order * (order-1)))) )
+        deter = deter / Decimal(str((order * (order-1))))
         return deter/(Decimal(str(Max-Med)))*Decimal('100')
 
     def showStatistics(self):
@@ -7930,12 +7930,12 @@ class Digraph(object):
 
     def determinateness(self,vec,inPercent = True):
         """
-        Renders the determinateness of a bipolar characteristic vector
-        [(r(x),x),(r(y),y), ...] of length *n* in valuationdomain [Min,Max]:
+        Renders the determinateness of a characteristic vector *vec* = 
+        [(r(x),x),(r(y),y), ...] of length *n* in valuationdomain [Min,Med,Max]:
         
-        result = sum_x abs(r(x))/(n*(Max-Min)
+        *result* =  sum_x( abs(r(x)-Med) ) / ( n*(Max-Med) )
 
-        If inPercent, result shifted (+1) and reduced (/2) to [0,1] range. 
+        If inPercent, *result* shifted (+1) and reduced (/2) to [0,1] range. 
         """
         Min = Decimal(str(self.valuationdomain['min']))
         Max = Decimal(str(self.valuationdomain['max']))
@@ -9760,7 +9760,7 @@ class FusionDigraph(Digraph):
 
     Parameter:
 
-        * operator = "o-min" | "o-max" (epistemic conjunctive or dijunctive fusion)
+        * operator = "o-min" | "o-max" (epistemic conjunctive or disjunctive fusion)
     """
 
     def __init__(self,dg1,dg2,operator="o-min"):
