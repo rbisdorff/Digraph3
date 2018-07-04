@@ -1,0 +1,12 @@
+<map id="inheritancee813425653" name="inheritancee813425653">
+<area shape="rect" id="node1" href="#perfTabs.ConstantPerformanceTableau" target="_top" title="Constructor for (partially) constant performance tableaux." alt="" coords="277,5,549,31"/>
+<area shape="rect" id="node2" href="#perfTabs.PerformanceTableau" target="_top" title="In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` class provides a generic **performance table model**. A given object of this class consists in:" alt="" coords="5,203,220,228"/>
+<area shape="rect" id="node3" href="#perfTabs.EmptyPerformanceTableau" target="_top" title="Template for PerformanceTableau objects." alt="" coords="285,55,541,80"/>
+<area shape="rect" id="node4" href="#perfTabs.NormalizedPerformanceTableau" target="_top" title="specialsation of the PerformanceTableau class for" alt="" coords="268,104,557,129"/>
+<area shape="rect" id="node5" href="#perfTabs.OldXMCDAPerformanceTableau" target="_top" title="Specialization of the general PerformanceTableau class for reading" alt="" coords="271,153,555,179"/>
+<area shape="rect" id="node6" href="#perfTabs.PartialPerformanceTableau" target="_top" title="Constructor for partial performance tableaux concerning a subset of actions and/or criteria and/or objectives" alt="" coords="285,203,540,228"/>
+<area shape="rect" id="node7" href="#perfTabs.XMCDA2PerformanceTableau" target="_top" title="Specialization of the general PerformanceTableau class for reading" alt="" coords="277,252,548,277"/>
+<area shape="rect" id="node8" href="#perfTabs.XMCDAPerformanceTableau" target="_top" title="Specialization of the general PerformanceTableau class for reading" alt="" coords="281,301,544,327"/>
+<area shape="rect" id="node9" href="#perfTabs.XMLPerformanceTableau" target="_top" title="Specialization of the general PerformanceTableau class for reading" alt="" coords="292,351,533,376"/>
+<area shape="rect" id="node10" href="#perfTabs.XMLRubisPerformanceTableau" target="_top" title="Specialization of the general PerformanceTableau class for reading" alt="" coords="275,400,551,425"/>
+</map>
