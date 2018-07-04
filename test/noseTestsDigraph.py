@@ -237,27 +237,27 @@ def testFixpointAlgorithmes():
     g.computeBadChoices(Comments=True)
     print(g.badChoices)
 
-def testXMLSaveReadDigraph():
-    print('*==>> testing XML save and read procedure ----*')
-    g = RandomBipolarOutrankingDigraph()
-    g.showAll()
-    g.saveXML(name='randXML',category='outranking',subcategory='random',author='RB',reference='Digraph implementation')
-    g1 = XMLDigraph('randXML')
-    g1.showAll()
+# def testXMLSaveReadDigraph():
+#     print('*==>> testing XML save and read procedure ----*')
+#     g = RandomBipolarOutrankingDigraph()
+#     g.showAll()
+#     g.saveXML(name='randXML',category='outranking',subcategory='random',author='RB',reference='Digraph implementation')
+#     g1 = XMLDigraph('randXML')
+#     g1.showAll()
 
-def testXMLSaveReadPerformanceTableau():
-    print('*==>> testing XML save and read performance tableaus ----*')
-    t = RandomPerformanceTableau()
-    t.showAll()
-    t.saveXML(name='randperftabXML',category='standard',subcategory='random',author='RB',reference='Digraph implementation')
-    t1 = XMLPerformanceTableau('randperftabXML')
-    t1.showAll()
-    g = BipolarOutrankingDigraph(t1)
-    g.showRubyChoice()
-    print('Name : ',t1.name)
-    print('Actions : ', t1.actions)
-    print('Criteria : ', t1.criteria)
-    print('Evaluations :', t1.evaluation)
+# def testXMLSaveReadPerformanceTableau():
+#     print('*==>> testing XML save and read performance tableaus ----*')
+#     t = RandomPerformanceTableau()
+#     t.showAll()
+#     t.saveXML(name='randperftabXML',category='standard',subcategory='random',author='RB',reference='Digraph implementation')
+#     t1 = XMLPerformanceTableau('randperftabXML')
+#     t1.showAll()
+#     g = BipolarOutrankingDigraph(t1)
+#     g.showRubyChoice()
+#     print('Name : ',t1.name)
+#     print('Actions : ', t1.actions)
+#     print('Criteria : ', t1.criteria)
+#     print('Evaluations :', t1.evaluation)
 
 def testRandomValuationDigraph():
     print('*==>> testing RandomValuationDigraph ----*')
@@ -355,12 +355,12 @@ def testZoomingValuations():
     print(g.relation)
     g.showRelationTable()
 
-def testXMCDASaveReadDigraph():
-    print('*==>> save XMCDA Digraph --------------*')
-    g = RandomValuationDigraph()
-    g.saveXMCDA('testXMCDADigraph',valuationType='bipolar', relationName='Stilde',servingD3=False)
-    g = XMCDADigraph('testXMCDADigraph')
-    g.showAll()
+# def testXMCDASaveReadDigraph():
+#     print('*==>> save XMCDA Digraph --------------*')
+#     g = RandomValuationDigraph()
+#     g.saveXMCDA('testXMCDADigraph',valuationType='bipolar', relationName='Stilde',servingD3=False)
+#     g = XMCDADigraph('testXMCDADigraph')
+#     g.showAll()
 
 def testWeakTournaments():
     print('*==>> weak tournaments ----*')
@@ -371,16 +371,16 @@ def testWeakTournaments():
     t = RandomWeakTournament(order=5,hasIntegerValuation=True)
     t.showRelationTable()
 
-def testXMCDAPerformanceTableauLoading():
-    print('*==>> XMCDA Performance tableau loading ---*')
-    t = RandomCBPerformanceTableau()
-    t.saveXMCDA('testxmcda')
-    t = XMCDAPerformanceTableau('testxmcda')
-    t.showPerformanceTableau()
-    g = BipolarOutrankingDigraph(t)
-    g.showRelationTable()
-    g.save('testdecimal')
-    gd = Digraph('testdecimal')
+# def testXMCDAPerformanceTableauLoading():
+#     print('*==>> XMCDA Performance tableau loading ---*')
+#     t = RandomCBPerformanceTableau()
+#     t.saveXMCDA('testxmcda')
+#     t = XMCDAPerformanceTableau('testxmcda')
+#     t.showPerformanceTableau()
+#     g = BipolarOutrankingDigraph(t)
+#     g.showRelationTable()
+#     g.save('testdecimal')
+#     gd = Digraph('testdecimal')
 
 def testODistance():
     print('*==>> verifying ODistance between digraphs ---*')
@@ -473,12 +473,12 @@ def testCBPerformanceTableau():
 def testRandomS3PerformanceTableau():
     print('*==>> random S3 Performance Tableaux ------------*')
     t = RandomS3PerformanceTableau(numberOfActions=10,numberOfCriteria=7,VariableGenerators=True,commonThresholds=[(5.0,0.0),(10.0,0.0),(65.0,0.0)],commonMode=['beta',0.5,None],Debug=False,OrdinalScales=False,Coalitions=False,RandomCoalitions=True)
-    t.saveXMCDA(fileName='randomS3PerformanceTableau',servingD3=False)
+    t.saveXMCDA2(fileName='randomS3PerformanceTableau',servingD3=False)
     for g in t.criteria:
         print('==>>', g, t.computeThresholdPercentile(g,'ind'))
         for a in t.actions:
             print(t.actions[a]['generators'][g])
-    t = XMCDAPerformanceTableau('randomS3PerformanceTableau')
+    t = XMCDA2PerformanceTableau('randomS3PerformanceTableau')
     g = Electre3OutrankingDigraph(t)
     #g.defaultDiscriminationThresholds()
     g.showCriteria()
@@ -547,13 +547,9 @@ def testXMCDA2SaveReadPerformanceTableau():
     t.saveXMCDA('test')
     g = BipolarOutrankingDigraph(t)
     g.showRelationTable()
-    t1 = XMCDAPerformanceTableau('test')
+    t1 = XMCDA2PerformanceTableau('test')
     g1 = BipolarOutrankingDigraph(t1)
     g1.showRelationTable()
-    t1.saveXMCDA2('test1')
-    t2 = XMCDAPerformanceTableau('test')
-    g2 = BipolarOutrankingDigraph(t2)
-    g2.showRelationTable()
 
 def testChordlessOddCircuits():
 

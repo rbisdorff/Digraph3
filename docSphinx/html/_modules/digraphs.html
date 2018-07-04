@@ -78,467 +78,116 @@
 <span class="kn">from</span> <span class="nn">perfTabs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="o">*</span>
 
-<span class="c1">################  see digraphsTools.py module ###############</span>
-<span class="c1">###--------- Decimal precision --------------</span>
-<span class="c1">##from decimal import Decimal</span>
-<span class="c1">##</span>
-<span class="c1">###---------- general methods -----------------</span>
-<span class="c1">### from High Performance Python M Gorelick &amp; I Ozswald</span>
-<span class="c1">### O&#39;Reilly 2014 p.27</span>
-<span class="c1">##from functools import wraps</span>
-<span class="c1">##from time import time</span>
-<span class="c1">##def timefn(fn):</span>
-<span class="c1">##    &quot;&quot;&quot;</span>
-<span class="c1">##    A decorator for automate run time measurements</span>
-<span class="c1">##    from &quot;High Performance Python&quot; by  M Gorelick &amp; I Ozswald</span>
-<span class="c1">##    O&#39;Reilly 2014 p.27</span>
-<span class="c1">##    &quot;&quot;&quot;</span>
-<span class="c1">##    @wraps(fn)</span>
-<span class="c1">##    def measure_time(*args,**kwargs):</span>
-<span class="c1">##        t1 = time()</span>
-<span class="c1">##        result = fn(*args,**kwargs)</span>
-<span class="c1">##        t2 = time()</span>
-<span class="c1">##        print(&quot;@timefn:&quot; + fn.__name__ + &quot; took &quot; + str(t2-t1) + &quot; sec.&quot;)</span>
-<span class="c1">##        return result</span>
-<span class="c1">##    return measure_time</span>
-<span class="c1">##</span>
-<span class="c1">### generate all permutations from a string or a list</span>
-<span class="c1">### From Michael Davies&#39;s recipe:</span>
-<span class="c1">### http://snippets.dzone.com/posts/show/753</span>
-<span class="c1">##def all_perms(str):</span>
-<span class="c1">##    if len(str) &lt;=1:</span>
-<span class="c1">##        yield str</span>
-<span class="c1">##    else:</span>
-<span class="c1">##        for perm in all_perms(str[1:]):</span>
-<span class="c1">##            for i in range(len(perm)+1):</span>
-<span class="c1">##                yield perm[:i] + str[0:1] + perm[i:]</span>
-<span class="c1">### epistemic or symmetric disjunction operator</span>
-<span class="c1">##def omax(Med,L, Debug=False):</span>
-<span class="c1">##    &quot;&quot;&quot;</span>
-<span class="c1">##    epistemic disjunction for bipolar outranking characteristics</span>
-<span class="c1">##    computation: Med is the valuation domain median and L is a list of</span>
-<span class="c1">##    r-valued statement characteristics. </span>
-<span class="c1">##    &quot;&quot;&quot;</span>
-<span class="c1">##    #Med = self.valuationdomain[&#39;med&#39;]</span>
-<span class="c1">##    terms = list(L)</span>
-<span class="c1">##    termsPlus = []</span>
-<span class="c1">##    termsMinus = []</span>
-<span class="c1">##    termsNuls = []</span>
-<span class="c1">##    for i in range(len(terms)):</span>
-<span class="c1">##        if terms[i] &gt; Med:</span>
-<span class="c1">##            termsPlus.append(terms[i])</span>
-<span class="c1">##        elif terms[i] &lt; Med:</span>
-<span class="c1">##            termsMinus.append(terms[i])</span>
-<span class="c1">##        else:</span>
-<span class="c1">##            termsNuls.append(terms[i])</span>
-<span class="c1">####    if Debug:</span>
-<span class="c1">####        print(&#39;terms&#39;, terms)</span>
-<span class="c1">####        print(&#39;termsPlus&#39;,termsPlus)</span>
-<span class="c1">####        print(&#39;termsMinus&#39;, termsMinus)</span>
-<span class="c1">####        print(&#39;termsNuls&#39;, termsNuls)</span>
-<span class="c1">##    np = len(termsPlus)</span>
-<span class="c1">##    nm = len(termsMinus)</span>
-<span class="c1">##    if np &gt; 0 and nm == 0:</span>
-<span class="c1">##        return max(termsPlus)</span>
-<span class="c1">##    elif nm &gt; 0 and np == 0:</span>
-<span class="c1">##        return min(termsMinus)</span>
-<span class="c1">##    else:</span>
-<span class="c1">##        return Med</span>
-<span class="c1">### epistemic or symmetric conjunction operator</span>
-<span class="c1">##def omin(Med,L, Debug=False):</span>
-<span class="c1">##    &quot;&quot;&quot;</span>
-<span class="c1">##    epistemic conjunction of a list L of bipolar outranking characteristics.</span>
-<span class="c1">##    Med is the given valuation domain median.</span>
-<span class="c1">##    &quot;&quot;&quot;</span>
-<span class="c1">##    #Med = self.valuationdomain[&#39;med&#39;]</span>
-<span class="c1">##    terms = list(L)</span>
-<span class="c1">##    termsPlus = []</span>
-<span class="c1">##    termsMinus = []</span>
-<span class="c1">##    termsNuls = []</span>
-<span class="c1">##    for i in range(len(terms)):</span>
-<span class="c1">##        if terms[i] &gt; Med:</span>
-<span class="c1">##            termsPlus.append(terms[i])</span>
-<span class="c1">##        elif terms[i] &lt; Med:</span>
-<span class="c1">##            termsMinus.append(terms[i])</span>
-<span class="c1">##        else:</span>
-<span class="c1">##            termsNuls.append(terms[i])</span>
-<span class="c1">####    if Debug:</span>
-<span class="c1">####        print(&#39;terms&#39;, terms)</span>
-<span class="c1">####        print(&#39;termsPlus&#39;,termsPlus)</span>
-<span class="c1">####        print(&#39;termsMinus&#39;, termsMinus)</span>
-<span class="c1">####        print(&#39;termsNuls&#39;, termsNuls)</span>
-<span class="c1">##    np = len(termsPlus)</span>
-<span class="c1">##    nm = len(termsMinus)</span>
-<span class="c1">##    if np &gt; 0:</span>
-<span class="c1">##        if nm &gt; 0:</span>
-<span class="c1">##            return Med</span>
-<span class="c1">##        else:</span>
-<span class="c1">##            return min(termsPlus)</span>
-<span class="c1">##    else:</span>
-<span class="c1">##        if nm &gt; 0:</span>
-<span class="c1">##            return max(termsMinus)</span>
-<span class="c1">##        else:</span>
-<span class="c1">##            return Med</span>
-<span class="c1">##</span>
-<span class="c1">### generate all subsets of a given set E</span>
-<span class="c1">### Discrete Mathematics BINFO 1 course Lesson 2-sets</span>
-<span class="c1">### RB October 2009 (recursive version)</span>
-<span class="c1">##def powerset(S):</span>
-<span class="c1">##    &quot;&quot;&quot;</span>
-<span class="c1">##    Power set generator iterator.</span>
-<span class="c1">##</span>
-<span class="c1">##    Parameter S may be any object that is accepted as input by the set class constructor.</span>
-<span class="c1">##</span>
-<span class="c1">##    &quot;&quot;&quot;</span>
-<span class="c1">##    E = set(S)</span>
-<span class="c1">##    if len(E) == 0:</span>
-<span class="c1">##        yield set()</span>
-<span class="c1">##    else:</span>
-<span class="c1">##        e = E.pop()</span>
-<span class="c1">##        for X in powerset(E):</span>
-<span class="c1">##            yield set([e]) | X</span>
-<span class="c1">##            yield X</span>
-<span class="c1">##</span>
-<span class="c1">### transforms a ranking (list from best to worst) into</span>
-<span class="c1">### a preorder ( a list of list from worst to best)</span>
-<span class="c1">##def ranking2preorder(R):</span>
-<span class="c1">##    preorder = [[x] for x in reversed(R)]</span>
-<span class="c1">###    for x in R:</span>
-<span class="c1">###        preorder.append([x])</span>
-<span class="c1">###    preorder.reverse()</span>
-<span class="c1">##    return preorder</span>
-<span class="c1">##</span>
-<span class="c1">### flattens a list of lists into a flat list</span>
-<span class="c1">##import itertools as IT</span>
-<span class="c1">##import collections</span>
-<span class="c1">##</span>
-<span class="c1">##def flatten(iterable, ltypes=collections.Iterable):</span>
-<span class="c1">##    &quot;&quot;&quot;</span>
-<span class="c1">##    Flattens a list of lists into a flat list.</span>
-<span class="c1">##</span>
-<span class="c1">##    Main usage:</span>
-<span class="c1">##    </span>
-<span class="c1">##    &gt;&gt;&gt; listOfLists = [[1,2],[3],[4]]</span>
-<span class="c1">##    &gt;&gt;&gt; [x for x in flatten(listOfLists)]</span>
-<span class="c1">##    [1,2,3,4]</span>
-<span class="c1">##    </span>
-<span class="c1">##    &quot;&quot;&quot;</span>
-<span class="c1">##    </span>
-<span class="c1">##    remainder = iter(iterable)</span>
-<span class="c1">##    while True:</span>
-<span class="c1">##        first = next(remainder)</span>
-<span class="c1">##        if isinstance(first, ltypes) and not isinstance(first, str):</span>
-<span class="c1">##            remainder = IT.chain(first, remainder)</span>
-<span class="c1">##        else:</span>
-<span class="c1">##            yield first</span>
-<span class="c1">##</span>
-<span class="c1">##def total_size(o, handlers={}, verbose=False):</span>
-<span class="c1">##    &quot;&quot;&quot; Returns the approximate memory footprint of an object and all of its contents.</span>
-<span class="c1">##</span>
-<span class="c1">##    Automatically finds the contents of the following containers and</span>
-<span class="c1">##    their subclasses:  tuple, list, deque, dict, set, frozenset, Digraph and BigDigraph.</span>
-<span class="c1">##    To search other containers, add handlers to iterate over their contents:</span>
-<span class="c1">##</span>
-<span class="c1">##        handlers = {SomeContainerClass: iter,</span>
-<span class="c1">##                    OtherContainerClass: OtherContainerClass.get_elements}</span>
-<span class="c1">##</span>
-<span class="c1">##    See http://code.activestate.com/recipes/577504/  </span>
-<span class="c1">##</span>
-<span class="c1">##    &quot;&quot;&quot;</span>
-<span class="c1">##    from sys import getsizeof, stderr</span>
-<span class="c1">##    from itertools import chain</span>
-<span class="c1">##    from collections import deque</span>
-<span class="c1">##    from bigOutrankingDigraphs import BigDigraph</span>
-<span class="c1">##    </span>
-<span class="c1">##    try:</span>
-<span class="c1">##        from reprlib import repr</span>
-<span class="c1">##    except ImportError:</span>
-<span class="c1">##        pass</span>
-<span class="c1">##</span>
-<span class="c1">##    # built-in containers and their subclasses</span>
-<span class="c1">##    dict_handler = lambda d: chain.from_iterable(d.items())</span>
-<span class="c1">##    all_handlers = {tuple: iter,</span>
-<span class="c1">##                    list: iter,</span>
-<span class="c1">##                    deque: iter,</span>
-<span class="c1">##                    dict: dict_handler,</span>
-<span class="c1">##                    set: iter,</span>
-<span class="c1">##                    frozenset: iter,</span>
-<span class="c1">##                    }</span>
-<span class="c1">##</span>
-<span class="c1">##    # Digraph3 objects </span>
-<span class="c1">##    object_handler = lambda d: chain.from_iterable(d.__dict__.items())    </span>
-<span class="c1">##    handlers = {BigDigraph: object_handler,</span>
-<span class="c1">##                Digraph: object_handler,</span>
-<span class="c1">##                PerformanceTableau : object_handler,</span>
-<span class="c1">##                }</span>
-<span class="c1">##    </span>
-<span class="c1">##    all_handlers.update(handlers)     # user handlers take precedence</span>
-<span class="c1">##    seen = set()                      # track which object id&#39;s have already been seen</span>
-<span class="c1">##    default_size = getsizeof(0)       # estimate sizeof object without __sizeof__</span>
-<span class="c1">##</span>
-<span class="c1">##    def sizeof(o):</span>
-<span class="c1">##        if id(o) in seen:       # do not double count the same object</span>
-<span class="c1">##            return 0</span>
-<span class="c1">##        seen.add(id(o))</span>
-<span class="c1">##        s = getsizeof(o, default_size)</span>
-<span class="c1">##</span>
-<span class="c1">##        if verbose:</span>
-<span class="c1">##            print(s, type(o), repr(o), file=stderr)</span>
-<span class="c1">##</span>
-<span class="c1">##        for typ, handler in all_handlers.items():</span>
-<span class="c1">##            if isinstance(o, typ):</span>
-<span class="c1">##                s += sum(map(sizeof, handler(o)))</span>
-<span class="c1">##                break</span>
-<span class="c1">##        return s</span>
-<span class="c1">##</span>
-<span class="c1">##    return sizeof(o)</span>
-<span class="c1">##</span>
-<span class="c1">##### arithmetics</span>
-<span class="c1">##def primesbelow(N):</span>
-<span class="c1">##    # http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188</span>
-<span class="c1">##    #&quot;&quot;&quot; Input N&gt;=6, Returns a list of primes, 2 &lt;= p &lt; N &quot;&quot;&quot;</span>
-<span class="c1">##    correction = N % 6 &gt; 1</span>
-<span class="c1">##    N = {0:N, 1:N-1, 2:N+4, 3:N+3, 4:N+2, 5:N+1}[N%6]</span>
-<span class="c1">##    sieve = [True] * (N // 3)</span>
-<span class="c1">##    sieve[0] = False</span>
-<span class="c1">##    for i in range(int(N ** .5) // 3 + 1):</span>
-<span class="c1">##        if sieve[i]:</span>
-<span class="c1">##            k = (3 * i + 1) | 1</span>
-<span class="c1">##            sieve[k*k // 3::2*k] = [False] * ((N//6 - (k*k)//6 - 1)//k + 1)</span>
-<span class="c1">##            sieve[(k*k + 4*k - 2*k*(i%2)) // 3::2*k] = [False] * ((N // 6 - (k*k + 4*k - 2*k*(i%2))//6 - 1) // k + 1)</span>
-<span class="c1">##    return [2, 3] + [(3 * i + 1) | 1 for i in range(1, N//3 - correction) if sieve[i]]</span>
-<span class="c1">##</span>
-<span class="c1">##smallprimeset = set(primesbelow(100000))</span>
-<span class="c1">##_smallprimeset = 100000</span>
-<span class="c1">##def isprime(n, precision=7):</span>
-<span class="c1">##    # http://en.wikipedia.org/wiki/Miller-Rabin_primality_test#Algorithm_and_running_time</span>
-<span class="c1">##    if n == 1 or n % 2 == 0:</span>
-<span class="c1">##        return False</span>
-<span class="c1">##    elif n &lt; 1:</span>
-<span class="c1">##        raise ValueError(&quot;Out of bounds, first argument must be &gt; 0&quot;)</span>
-<span class="c1">##    elif n &lt; _smallprimeset:</span>
-<span class="c1">##        return n in smallprimeset</span>
-<span class="c1">##</span>
-<span class="c1">##</span>
-<span class="c1">##    d = n - 1</span>
-<span class="c1">##    s = 0</span>
-<span class="c1">##    while d % 2 == 0:</span>
-<span class="c1">##        d //= 2</span>
-<span class="c1">##        s += 1</span>
-<span class="c1">##</span>
-<span class="c1">##    for repeat in range(precision):</span>
-<span class="c1">##        a = random.randrange(2, n - 2)</span>
-<span class="c1">##        x = pow(a, d, n)</span>
-<span class="c1">##</span>
-<span class="c1">##        if x == 1 or x == n - 1: continue</span>
-<span class="c1">##</span>
-<span class="c1">##        for r in range(s - 1):</span>
-<span class="c1">##            x = pow(x, 2, n)</span>
-<span class="c1">##            if x == 1: return False</span>
-<span class="c1">##            if x == n - 1: break</span>
-<span class="c1">##        else: return False</span>
-<span class="c1">##</span>
-<span class="c1">##    return True</span>
-<span class="c1">##</span>
-<span class="c1">##def pollard_brent(n):</span>
-<span class="c1">##    # https://comeoncodeon.wordpress.com/2010/09/18/pollard-rho-brent-integer-factorization/</span>
-<span class="c1">##    if n % 2 == 0: return 2</span>
-<span class="c1">##    if n % 3 == 0: return 3</span>
-<span class="c1">##</span>
-<span class="c1">##    y, c, m = random.randint(1, n-1), random.randint(1, n-1), random.randint(1, n-1)</span>
-<span class="c1">##    g, r, q = 1, 1, 1</span>
-<span class="c1">##    while g == 1:</span>
-<span class="c1">##        x = y</span>
-<span class="c1">##        for i in range(r):</span>
-<span class="c1">##            y = (pow(y, 2, n) + c) % n</span>
-<span class="c1">##</span>
-<span class="c1">##        k = 0</span>
-<span class="c1">##        while k &lt; r and g==1:</span>
-<span class="c1">##            ys = y</span>
-<span class="c1">##            for i in range(min(m, r-k)):</span>
-<span class="c1">##                y = (pow(y, 2, n) + c) % n</span>
-<span class="c1">##                q = q * abs(x-y) % n</span>
-<span class="c1">##            g = gcd(q, n)</span>
-<span class="c1">##            k += m</span>
-<span class="c1">##        r *= 2</span>
-<span class="c1">##    if g == n:</span>
-<span class="c1">##        while True:</span>
-<span class="c1">##            ys = (pow(ys, 2, n) + c) % n</span>
-<span class="c1">##            g = gcd(abs(x - ys), n)</span>
-<span class="c1">##            if g &gt; 1:</span>
-<span class="c1">##                break</span>
-<span class="c1">##</span>
-<span class="c1">##    return g</span>
-<span class="c1">##</span>
-<span class="c1">##smallprimes = primesbelow(1000) # might seem low, but 1000*1000 = 1000000, so this will fully factor every composite &lt; 1000000</span>
-<span class="c1">##def primefactors(n, sort=False):</span>
-<span class="c1">##    factors = []</span>
-<span class="c1">##</span>
-<span class="c1">##    limit = int(n ** .5) + 1</span>
-<span class="c1">##    for checker in smallprimes:</span>
-<span class="c1">##        if checker &gt; limit: break</span>
-<span class="c1">##        while n % checker == 0:</span>
-<span class="c1">##            factors.append(checker)</span>
-<span class="c1">##            n //= checker</span>
-<span class="c1">##            limit = int(n ** .5) + 1</span>
-<span class="c1">##            if checker &gt; limit: break</span>
-<span class="c1">##</span>
-<span class="c1">##    if n &lt; 2: return factors</span>
-<span class="c1">##</span>
-<span class="c1">##    while n &gt; 1:</span>
-<span class="c1">##        if isprime(n):</span>
-<span class="c1">##            factors.append(n)</span>
-<span class="c1">##            break</span>
-<span class="c1">##        factor = pollard_brent(n) # trial division did not fully factor, switch to pollard-brent</span>
-<span class="c1">##        factors.extend(primefactors(factor)) # recurse to factor the not necessarily prime factor returned by pollard-brent</span>
-<span class="c1">##        n //= factor</span>
-<span class="c1">##</span>
-<span class="c1">##    if sort: factors.sort()</span>
-<span class="c1">##</span>
-<span class="c1">##    return factors</span>
-<span class="c1">##</span>
-<span class="c1">##def factorization(n):</span>
-<span class="c1">##    factors = {}</span>
-<span class="c1">##    for p1 in primefactors(n):</span>
-<span class="c1">##        try:</span>
-<span class="c1">##            factors[p1] += 1</span>
-<span class="c1">##        except KeyError:</span>
-<span class="c1">##            factors[p1] = 1</span>
-<span class="c1">##    return factors</span>
-<span class="c1">##</span>
-<span class="c1">##totients = {}</span>
-<span class="c1">##def totient(n):</span>
-<span class="c1">##    if n == 0: return 1</span>
-<span class="c1">##</span>
-<span class="c1">##    try: return totients[n]</span>
-<span class="c1">##    except KeyError: pass</span>
-<span class="c1">##</span>
-<span class="c1">##    tot = 1</span>
-<span class="c1">##    for p, exp in factorization(n).items():</span>
-<span class="c1">##        tot *= (p - 1)  *  p ** (exp - 1)</span>
-<span class="c1">##</span>
-<span class="c1">##    totients[n] = tot</span>
-<span class="c1">##    return tot</span>
-<span class="c1">##</span>
-<span class="c1">##def gcd(a, b):</span>
-<span class="c1">##    if a == b: return a</span>
-<span class="c1">##    while b &gt; 0: a, b = b, a % b</span>
-<span class="c1">##    return a</span>
-<span class="c1">##</span>
-<span class="c1">##def lcm(a, b):</span>
-<span class="c1">##    return abs(a * b) // gcd(a, b)</span>
-<span class="c1">##</span>
+<span class="c1"># #----------XML handling class obsolete -----------------</span>
+<span class="c1"># try:</span>
+<span class="c1">#     from xml.sax import *</span>
+<span class="c1"># except:</span>
+<span class="c1">#     print(&#39;XML extension will not work with this Python version!&#39;)</span>
 
-<span class="c1">#----------XML handling class -----------------</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">xml.sax</span> <span class="k">import</span> <span class="o">*</span>
-<span class="k">except</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;XML extension will not work with this Python version!&#39;</span><span class="p">)</span>
+<span class="c1"># class _XMLDigraphHandler(ContentHandler):</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     A private handler to deal with digraphs stored in XML format.</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
 
-<span class="k">class</span> <span class="nc">_XMLDigraphHandler</span><span class="p">(</span><span class="n">ContentHandler</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    A private handler to deal with digraphs stored in XML format.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">inName</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">digraphName</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-    <span class="n">inAction</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">actionName</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-    <span class="n">actions</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">iAction</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-    <span class="n">tAction</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-    <span class="n">inMin</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">minText</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-    <span class="n">inMax</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">maxText</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-    <span class="n">inValue</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">valueText</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-    <span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">relation</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="c1">#     inName = 0</span>
+<span class="c1">#     digraphName = &#39;&#39;</span>
+<span class="c1">#     inAction = 0</span>
+<span class="c1">#     actionName = &#39;&#39;</span>
+<span class="c1">#     actions = []</span>
+<span class="c1">#     iAction = &#39;&#39;</span>
+<span class="c1">#     tAction = &#39;&#39;</span>
+<span class="c1">#     inMin = 0</span>
+<span class="c1">#     minText = &#39;&#39;</span>
+<span class="c1">#     inMax = 0</span>
+<span class="c1">#     maxText = &#39;&#39;</span>
+<span class="c1">#     inValue = 0</span>
+<span class="c1">#     valueText = &#39;&#39;</span>
+<span class="c1">#     valuationdomain = {}</span>
+<span class="c1">#     relation = {}</span>
 
 
-    <span class="k">def</span> <span class="nf">startElement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nodeName</span><span class="p">,</span><span class="n">attrs</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">nodeName</span> <span class="o">==</span> <span class="s1">&#39;digraph&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">category</span> <span class="o">=</span> <span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">subcategory</span> <span class="o">=</span> <span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;subcategory&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="c1">#     def startElement(self,nodeName,attrs):</span>
+<span class="c1">#         if nodeName == &#39;digraph&#39;:</span>
+<span class="c1">#             self.category = attrs.get(&quot;category&quot;, &quot;&quot;)</span>
+<span class="c1">#             self.subcategory = attrs.get(&quot;subcategory&quot;, &quot;&quot;)</span>
 
-        <span class="k">if</span> <span class="n">nodeName</span> <span class="o">==</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">inName</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="c1">#         if nodeName == &#39;name&#39;:</span>
+<span class="c1">#             self.inName = 1</span>
 
-        <span class="k">if</span> <span class="n">nodeName</span> <span class="o">==</span> <span class="s1">&#39;nodes&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1">#         if nodeName == &#39;nodes&#39;:</span>
+<span class="c1">#             self.actions = []</span>
 
-        <span class="k">if</span> <span class="n">nodeName</span> <span class="o">==</span> <span class="s1">&#39;node&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">actionName</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">inAction</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="c1">#         if nodeName == &#39;node&#39;:</span>
+<span class="c1">#             self.actionName = &#39;&#39;</span>
+<span class="c1">#             self.inAction = 1</span>
 
-        <span class="k">if</span> <span class="n">nodeName</span> <span class="o">==</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">inMin</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="c1">#         if nodeName == &#39;min&#39;:</span>
+<span class="c1">#             self.inMin = 1</span>
 
-        <span class="k">if</span> <span class="n">nodeName</span> <span class="o">==</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">inMax</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="c1">#         if nodeName == &#39;max&#39;:</span>
+<span class="c1">#             self.inMax = 1</span>
 
-        <span class="k">if</span> <span class="n">nodeName</span> <span class="o">==</span> <span class="s1">&#39;relation&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="c1">#         if nodeName == &#39;relation&#39;:</span>
+<span class="c1">#             self.relation = {}</span>
+<span class="c1">#             for x in self.actions:</span>
+<span class="c1">#                 self.relation[x] = {}</span>
 
-        <span class="k">if</span> <span class="n">nodeName</span> <span class="o">==</span> <span class="s1">&#39;i&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">actionName</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">inAction</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="c1">#         if nodeName == &#39;i&#39;:</span>
+<span class="c1">#             self.actionName = &#39;&#39;</span>
+<span class="c1">#             self.inAction = 1</span>
 
-        <span class="k">if</span> <span class="n">nodeName</span> <span class="o">==</span> <span class="s1">&#39;t&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">actionName</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">inAction</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="c1">#         if nodeName == &#39;t&#39;:</span>
+<span class="c1">#             self.actionName = &#39;&#39;</span>
+<span class="c1">#             self.inAction = 1</span>
 
-        <span class="k">if</span> <span class="n">nodeName</span> <span class="o">==</span> <span class="s1">&#39;v&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">valueText</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">inValue</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="c1">#         if nodeName == &#39;v&#39;:</span>
+<span class="c1">#             self.valueText = &#39;&#39;</span>
+<span class="c1">#             self.inValue = 1</span>
 
 
-    <span class="k">def</span> <span class="nf">endElement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nodeName</span><span class="p">):</span>
+<span class="c1">#     def endElement(self,nodeName):</span>
 
-        <span class="k">if</span> <span class="n">nodeName</span> <span class="o">==</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">inName</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">digraphName</span><span class="p">)</span>
+<span class="c1">#         if nodeName == &#39;name&#39;:</span>
+<span class="c1">#             self.inName = 0</span>
+<span class="c1">#             self.name = str(self.digraphName)</span>
 
-        <span class="k">if</span> <span class="n">nodeName</span> <span class="o">==</span> <span class="s1">&#39;node&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actionName</span><span class="p">))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">inAction</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1">#         if nodeName == &#39;node&#39;:</span>
+<span class="c1">#             self.actions.append(str(self.actionName))</span>
+<span class="c1">#             self.inAction = 0</span>
 
-        <span class="k">if</span> <span class="n">nodeName</span> <span class="o">==</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">inMin</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minText</span><span class="p">)</span>
+<span class="c1">#         if nodeName == &#39;min&#39;:</span>
+<span class="c1">#             self.inMin = 0</span>
+<span class="c1">#             self.valuationdomain[&#39;min&#39;] = eval(self.minText)</span>
 
-        <span class="k">if</span> <span class="n">nodeName</span> <span class="o">==</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">inMax</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maxText</span><span class="p">)</span>
+<span class="c1">#         if nodeName == &#39;max&#39;:</span>
+<span class="c1">#             self.inMax = 0</span>
+<span class="c1">#             self.valuationdomain[&#39;max&#39;] = eval(self.maxText)</span>
 
-        <span class="k">if</span> <span class="n">nodeName</span> <span class="o">==</span> <span class="s1">&#39;i&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">inAction</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">iAction</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actionName</span><span class="p">)</span>
+<span class="c1">#         if nodeName == &#39;i&#39;:</span>
+<span class="c1">#             self.inAction = 0</span>
+<span class="c1">#             self.iAction = str(self.actionName)</span>
 
-        <span class="k">if</span> <span class="n">nodeName</span> <span class="o">==</span> <span class="s1">&#39;t&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">inAction</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">tAction</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actionName</span><span class="p">)</span>
+<span class="c1">#         if nodeName == &#39;t&#39;:</span>
+<span class="c1">#             self.inAction = 0</span>
+<span class="c1">#             self.tAction = str(self.actionName)</span>
 
-        <span class="k">if</span> <span class="n">nodeName</span> <span class="o">==</span> <span class="s1">&#39;v&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">inValue</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1">#         if nodeName == &#39;v&#39;:</span>
+<span class="c1">#             self.inValue = 0</span>
 
-        <span class="k">if</span> <span class="n">nodeName</span> <span class="o">==</span> <span class="s1">&#39;arc&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">iAction</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">tAction</span><span class="p">]</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valueText</span><span class="p">)</span>
+<span class="c1">#         if nodeName == &#39;arc&#39;:</span>
+<span class="c1">#             self.relation[self.iAction][self.tAction] = eval(self.valueText)</span>
 
-    <span class="k">def</span> <span class="nf">characters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ch</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inName</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">digraphName</span> <span class="o">+=</span> <span class="n">ch</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inAction</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">actionName</span> <span class="o">+=</span> <span class="n">ch</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inMin</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">minText</span> <span class="o">+=</span> <span class="n">ch</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inMax</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">maxText</span> <span class="o">+=</span> <span class="n">ch</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inValue</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">valueText</span> <span class="o">+=</span> <span class="n">ch</span>
+<span class="c1">#     def characters(self, ch):</span>
+<span class="c1">#         if self.inName:</span>
+<span class="c1">#             self.digraphName += ch</span>
+<span class="c1">#         if self.inAction:</span>
+<span class="c1">#             self.actionName += ch</span>
+<span class="c1">#         if self.inMin:</span>
+<span class="c1">#             self.minText += ch</span>
+<span class="c1">#         if self.inMax:</span>
+<span class="c1">#             self.maxText += ch</span>
+<span class="c1">#         if self.inValue:</span>
+<span class="c1">#             self.valueText += ch</span>
 
 
 <span class="c1">#----------Digraph classes -----------------</span>
@@ -12365,9 +12014,9 @@
 <span class="c1">#-------------------------------------------------------</span>
 
 
-<span class="c1"># ------------ XML encoded stored Digraph instances</span>
+<span class="c1"># ------------ XML encoded stored Digraph instances obsolete</span>
 
-<div class="viewcode-block" id="XMLDigraph24"><a class="viewcode-back" href="../techDoc.html#digraphs.XMLDigraph24">[docs]</a><span class="k">class</span> <span class="nc">XMLDigraph24</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">_XMLDigraph24</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the general Digraph class for reading</span>
 <span class="sd">    stored XML formatted digraphs.</span>
@@ -12394,7 +12043,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
 
-<div class="viewcode-block" id="XMLDigraph24.showAll"><a class="viewcode-back" href="../techDoc.html#digraphs.XMLDigraph24.showAll">[docs]</a>    <span class="k">def</span> <span class="nf">showAll</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">showAll</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">category</span> <span class="o">==</span> <span class="s1">&#39;outranking&#39;</span><span class="p">:</span>
             <span class="n">Digraph</span><span class="o">.</span><span class="n">showAll</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -12403,9 +12052,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">showBadChoices</span><span class="p">()</span>
 
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">Digraph</span><span class="o">.</span><span class="n">showAll</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div></div>
+            <span class="n">Digraph</span><span class="o">.</span><span class="n">showAll</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
-<span class="k">class</span> <span class="nc">XMLDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">_XMLDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the general Digraph class for reading</span>
 <span class="sd">    stored XML formatted digraphs. Using the inbuilt module</span>
@@ -12444,7 +12093,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
 
-<div class="viewcode-block" id="XMLDigraph"><a class="viewcode-back" href="../techDoc.html#digraphs.XMLDigraph">[docs]</a><span class="k">class</span> <span class="nc">XMLDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">_XMLDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the general Digraph class for reading</span>
 <span class="sd">    stored XML formatted digraphs. Using the inbuilt module</span>
@@ -12481,7 +12130,7 @@
             <span class="n">relation</span><span class="p">[</span><span class="n">arc</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;i&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">][</span><span class="n">arc</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">arc</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">relation</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
 
 <div class="viewcode-block" id="CSVDigraph"><a class="viewcode-back" href="../techDoc.html#digraphs.CSVDigraph">[docs]</a><span class="k">class</span> <span class="nc">CSVDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -12538,7 +12187,7 @@
         <span class="k">except</span><span class="p">:</span>
             <span class="n">Digraph</span><span class="o">.</span><span class="n">showAll</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div></div>
 
-<div class="viewcode-block" id="XMCDADigraph"><a class="viewcode-back" href="../techDoc.html#digraphs.XMCDADigraph">[docs]</a><span class="k">class</span> <span class="nc">XMCDADigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">_XMCDADigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the general Digraph class for reading</span>
 <span class="sd">    stored XMCDA formatted digraphs. Using the inbuilt module</span>
@@ -12610,7 +12259,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
         
-<div class="viewcode-block" id="XMCDADigraph.showAll"><a class="viewcode-back" href="../techDoc.html#digraphs.XMCDADigraph.showAll">[docs]</a>    <span class="k">def</span> <span class="nf">showAll</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">showAll</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">category</span> <span class="o">==</span> <span class="s1">&#39;outranking&#39;</span><span class="p">:</span>
                 <span class="n">Digraph</span><span class="o">.</span><span class="n">showAll</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -12620,7 +12269,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">Digraph</span><span class="o">.</span><span class="n">showAll</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="n">Digraph</span><span class="o">.</span><span class="n">showAll</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div></div>
+            <span class="n">Digraph</span><span class="o">.</span><span class="n">showAll</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
 <div class="viewcode-block" id="XMCDA2Digraph"><a class="viewcode-back" href="../techDoc.html#digraphs.XMCDA2Digraph">[docs]</a><span class="k">class</span> <span class="nc">XMCDA2Digraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>

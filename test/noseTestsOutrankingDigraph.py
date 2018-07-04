@@ -149,8 +149,8 @@ def testXMLRubisIntegerOutrankingSave():
 def testRobustoutranking():
     print('*==>> robust outranking ------------------*')
     t0 = FullRandomPerformanceTableau(numberOfActions=7,numberOfCriteria=5)
-    t0.saveXMLRubis('testXMLRubis')
-    t = XMLRubisPerformanceTableau('testXMLRubis')
+    t0.saveXMCDA2('testXMLRubis')
+    t = XMCDA2PerformanceTableau('testXMLRubis')
     g = BipolarOutrankingDigraph(t)
     g.saveXMLRubisOutrankingDigraph('test1',servingD3=False)
     go = OrdinalOutrankingDigraph(t)
@@ -177,8 +177,8 @@ def testPairwiseCompleteComparisons():
     t = RandomCBPerformanceTableau(numberOfActions=10,numberOfCriteria=7)
     #t = PerformanceTableau('testCorr')
     #t = XMCDAPerformanceTableau('randomPerformanceTableau')
-    t.saveXMCDA('testCorr')
-    t = XMCDAPerformanceTableau('testCorr')
+    t.saveXMCDA2('testCorr')
+    t = XMCDA2PerformanceTableau('testCorr')
     g = BipolarOutrankingDigraph(t) 
     g.showCriteriaCorrelationTable()
     g.showPerformanceTableau()
@@ -306,15 +306,8 @@ def testsaveXMCDA2RubisChoiceRecommendation():
                                    integerWeights=True,
                                    commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0),(60.0,0.0)],
                                    commonMode=['beta',0.5,None])
-    t.saveXMCDA2('test')
-    t.saveXMCDA('test1')
-    t1 = XMCDAPerformanceTableau('test1')
-    t1 = XMCDA2PerformanceTableau('test')
-    t1.saveXMCDA2('test1')
-    g1 = BipolarOutrankingDigraph(t1)
-    g2 = BipolarOutrankingDigraph(t1)
+    g1 = BipolarOutrankingDigraph(t)
     g1.showRelationTable()
-    g2.showRelationTable()
     g1.saveXMCDA2RubisChoiceRecommendation('testRubisChoiceRecommendation')
 
 def testXMCDA2RobustChoiceRecommendation():

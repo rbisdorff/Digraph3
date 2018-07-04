@@ -163,7 +163,7 @@ def testRandomCoalitionsPerformanceTableau():
         print('==>>', g, t.computeThresholdPercentile(g,'ind'))
         for a in t.actions:
             print(t.actions[a]['generators'][g])
-    t = XMCDAPerformanceTableau('randomS3PerformanceTableau')
+    t = XMCDA2PerformanceTableau('randomS3PerformanceTableau')
     g = BipolarOutrankingDigraph(t)
     #g.defaultDiscriminationThresholds()
     g.showCriteria()

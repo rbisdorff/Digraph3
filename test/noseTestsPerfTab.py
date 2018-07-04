@@ -101,20 +101,6 @@ def testRandomS3PerformanceTableau():
     for p in percentiles:
         print('%d : %.3f ' % (p,percentages[p]))
 
-def testXMLSaveReadPerformanceTableau():
-    print('*==>> testing XML save and read performance tableaus ----*')
-    t = RandomPerformanceTableau()
-    t.showAll()
-    t.saveXML(name='randperftabXML',category='standard',subcategory='random',author='RB',reference='Digraph implementation')
-    t1 = XMLPerformanceTableau('randperftabXML')
-    t1.showAll()
-    g = BipolarOutrankingDigraph(t1)
-    g.showRubyChoice()
-    print('Name : ',t1.name)
-    print('Actions : ', t1.actions)
-    print('Criteria : ', t1.criteria)
-    print('Evaluations :', t1.evaluation)
-
 def testPerformanceTableauStatistics():
     print('*==>> performanceTableau statistics ---------*')
     t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
@@ -124,16 +110,16 @@ def testPerformanceTableauStatistics():
     t.showStatistics()
     t.showEvaluationStatistics()
     
-def testXMCDAPerformanceTableauLoading():
-    print('*==>> XMCDA Performance tableau loading ---*')
-    t = RandomPerformanceTableau(seed=1)
-    t.saveXMCDA('testXMCDA',servingD3=False)
-    t = XMCDAPerformanceTableau('testXMCDA')
-    t.showPerformanceTableau()
-    g = BipolarOutrankingDigraph(t)
-    g.showRelationTable()
-    g.save('testdecimal')
-    gd = Digraph('testdecimal')
+# def testXMCDAPerformanceTableauLoading():
+#     print('*==>> XMCDA Performance tableau loading ---*')
+#     t = RandomPerformanceTableau(seed=1)
+#     t.saveXMCDA('testXMCDA',servingD3=False)
+#     t = XMCDAPerformanceTableau('testXMCDA')
+#     t.showPerformanceTableau()
+#     g = BipolarOutrankingDigraph(t)
+#     g.showRelationTable()
+#     g.save('testdecimal')
+#     gd = Digraph('testdecimal')
 
 def testPerformanceDifferencesPerCriteria():
     print('*==>> verifying  performance differences per criteria ---*')
@@ -179,12 +165,12 @@ def testRandomS3PerformanceTableau():
                                    OrdinalScales=False,\
                                    Coalitions=False,\
                                    RandomCoalitions=True)
-    t.saveXMCDA(fileName='randomS3PerformanceTableau',servingD3=False)
+    t.saveXMCDA2(fileName='randomS3PerformanceTableau',servingD3=False)
     for g in t.criteria:
         print('==>>', g, t.computeThresholdPercentile(g,'ind'))
         for a in t.actions:
             print(t.actions[a]['generators'][g])
-    t = XMCDAPerformanceTableau('randomS3PerformanceTableau')
+    t = XMCDA2PerformanceTableau('randomS3PerformanceTableau')
     g = Electre3OutrankingDigraph(t)
     #g.defaultDiscriminationThresholds()
     g.showCriteria()
@@ -213,13 +199,7 @@ def testXMCDA2SaveReadPerformanceTableau():
     t = RandomS3PerformanceTableau(numberOfActions=5,numberOfCriteria=15,weightDistribution="random",weightScale=(1,13),integerWeights=True,commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0),(60.0,0.0)],RandomCoalitions=True,commonMode=['beta',0.5,None])
     #t.showAll()
     #t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=7,weightDistribution="random",weightScale=(1,7),integerWeights=True)
-    t.saveXMCDA('testXMCDA')
-    g = BipolarOutrankingDigraph(t)
-    g.showRelationTable()
-    t1 = XMCDAPerformanceTableau('testXMCDA')
-    g1 = BipolarOutrankingDigraph(t1)
-    g1.showRelationTable()
-    t1.saveXMCDA2('testXMCDA2',servingD3=False)
+    t.saveXMCDA2('testXMCDA2',servingD3=False)
     t2 = XMCDA2PerformanceTableau('testXMCDA2')
     g2 = BipolarOutrankingDigraph(t2)
     g2.showRelationTable()

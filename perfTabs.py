@@ -64,235 +64,235 @@ class _DecimalJSONEncoder(json.JSONEncoder):
 ######################################################################################################################
 
 
-class _XMLPerformanceTableauHandler(ContentHandler):
-    """
-    A private handler to deal with performance tableaus stored in XML format.
-    """
+# class _XMLPerformanceTableauHandler(ContentHandler):
+#     """
+#     A private handler to deal with performance tableaus stored in XML format.
+#     """
 
-    inName = 0
-    performanceTableauName = ''
-    inActions = 0
-    inAction = 0
-    actionName = ''
-    actions = []
-    inCriteria = 0
-    inCriterion = 0
-    criterionName = ''
-    inWeight = 0
-    weightValue = ''
-    criteria = {}
-    inScale = 0
-    scaleValue = '('
-    inMin = 0
-    minValue = ''
-    inMax = 0
-    maxValue = ''
-    inValue = 0
-    valueText = ''
-    inThresholds = 0
-    inIndifference = 0
-    inPreference = 0
-    inWeakveto = 0
-    inVeto = 0
-    inEvaluations = 0
-    evaluation = {}
-    inEvaluation = 0
-    inEvalActions = 0
+#     inName = 0
+#     performanceTableauName = ''
+#     inActions = 0
+#     inAction = 0
+#     actionName = ''
+#     actions = []
+#     inCriteria = 0
+#     inCriterion = 0
+#     criterionName = ''
+#     inWeight = 0
+#     weightValue = ''
+#     criteria = {}
+#     inScale = 0
+#     scaleValue = '('
+#     inMin = 0
+#     minValue = ''
+#     inMax = 0
+#     maxValue = ''
+#     inValue = 0
+#     valueText = ''
+#     inThresholds = 0
+#     inIndifference = 0
+#     inPreference = 0
+#     inWeakveto = 0
+#     inVeto = 0
+#     inEvaluations = 0
+#     evaluation = {}
+#     inEvaluation = 0
+#     inEvalActions = 0
     
     
-    def startElement(self,nodeName,attrs):
-        if nodeName == 'performancetableau':          
-            self.category = attrs.get("category", "")
-            self.subcategory = attrs.get("subcategory", "")
+#     def startElement(self,nodeName,attrs):
+#         if nodeName == 'performancetableau':          
+#             self.category = attrs.get("category", "")
+#             self.subcategory = attrs.get("subcategory", "")
             
-        if nodeName == 'name':
-            self.inName = 1
+#         if nodeName == 'name':
+#             self.inName = 1
             
-        if nodeName == 'actions':
-            self.actions = []
-            self.inActions = 1
+#         if nodeName == 'actions':
+#             self.actions = []
+#             self.inActions = 1
 
-        if nodeName == 'action':
-            self.actionName = ''
-            self.inAction = 1
+#         if nodeName == 'action':
+#             self.actionName = ''
+#             self.inAction = 1
 
-        if nodeName == 'criteria':
-            self.criteria = {}
-            self.inCriteria = 1
+#         if nodeName == 'criteria':
+#             self.criteria = {}
+#             self.inCriteria = 1
 
-        if nodeName == 'critname':
-            self.criterionName = ''
-            self.inCriterion = 1
+#         if nodeName == 'critname':
+#             self.criterionName = ''
+#             self.inCriterion = 1
 
-        if nodeName == 'weight':
-            self.weightValue = ''
-            self.inWeight = 1
+#         if nodeName == 'weight':
+#             self.weightValue = ''
+#             self.inWeight = 1
 
-        if nodeName == 'scale':
-            self.scaleValue = '('
-            self.inScale = 1
+#         if nodeName == 'scale':
+#             self.scaleValue = '('
+#             self.inScale = 1
 
-        if nodeName == 'min':
-            self.minValue = ''
-            self.inMin = 1
+#         if nodeName == 'min':
+#             self.minValue = ''
+#             self.inMin = 1
 
-        if nodeName == 'max':
-            self.maxValue = ''
-            self.inMax = 1
+#         if nodeName == 'max':
+#             self.maxValue = ''
+#             self.inMax = 1
 
-        if nodeName == 'thresholds':
-            self.thresholds = {}
-            self.inThresholds = 1
+#         if nodeName == 'thresholds':
+#             self.thresholds = {}
+#             self.inThresholds = 1
 
-        if nodeName == 'indifference':
-            self.valueText = ''
-            self.inIndifference = 1
+#         if nodeName == 'indifference':
+#             self.valueText = ''
+#             self.inIndifference = 1
 
-        if nodeName == 'preference':
-            self.valueText = ''
-            self.inPreference = 1
+#         if nodeName == 'preference':
+#             self.valueText = ''
+#             self.inPreference = 1
 
-        if nodeName == 'weakveto':
-            self.valueText = ''
-            self.inWeakveto = 1
+#         if nodeName == 'weakveto':
+#             self.valueText = ''
+#             self.inWeakveto = 1
 
-        if nodeName == 'veto':
-            self.valueText = ''
-            self.inVeto = 1
+#         if nodeName == 'veto':
+#             self.valueText = ''
+#             self.inVeto = 1
 
-        if nodeName == 'evaluations':
-            self.evaluation = {}
-            self.inEvaluations = 1
+#         if nodeName == 'evaluations':
+#             self.evaluation = {}
+#             self.inEvaluations = 1
 
-        if nodeName == 'evaluation':
-            self.inEvaluation = 1
+#         if nodeName == 'evaluation':
+#             self.inEvaluation = 1
 
-        if nodeName == 'evalactions':
-            self.inEvalActions = 1
+#         if nodeName == 'evalactions':
+#             self.inEvalActions = 1
 
-        if nodeName == 'value':
-            self.inValue = 1
+#         if nodeName == 'value':
+#             self.inValue = 1
         
 
-    def endElement(self,nodeName):
+#     def endElement(self,nodeName):
 
-        if nodeName == 'name':
-            self.inName = 0
-            self.name = str(self.performanceTableauName)
+#         if nodeName == 'name':
+#             self.inName = 0
+#             self.name = str(self.performanceTableauName)
 
-        if nodeName == 'action' and self.inActions == 1:
-            self.actions.append(str(self.actionName))
-            self.inAction = 0
+#         if nodeName == 'action' and self.inActions == 1:
+#             self.actions.append(str(self.actionName))
+#             self.inAction = 0
 
-        if nodeName == 'action' and self.inEvalActions == 1:
-            self.inAction = 0
-            self.valueText = ''
+#         if nodeName == 'action' and self.inEvalActions == 1:
+#             self.inAction = 0
+#             self.valueText = ''
 
-        if nodeName == 'critname' and self.inCriteria == 1:
-            self.criterion = str(self.criterionName)
-            self.criteria[self.criterion]={}
-            self.inCriterion = 0
+#         if nodeName == 'critname' and self.inCriteria == 1:
+#             self.criterion = str(self.criterionName)
+#             self.criteria[self.criterion]={}
+#             self.inCriterion = 0
 
-        if nodeName == 'critname' and self.inEvaluation == 1:
-            self.criterion = str(self.criterionName)
-            self.evaluation[self.criterion] = {}
+#         if nodeName == 'critname' and self.inEvaluation == 1:
+#             self.criterion = str(self.criterionName)
+#             self.evaluation[self.criterion] = {}
 
-        if nodeName == 'actions':
-            self.inActions = 0
+#         if nodeName == 'actions':
+#             self.inActions = 0
             
-        if nodeName == 'weight':
-            self.criteria[self.criterion]['weight'] = Decimal(self.weightValue)
-            self.weightValue = ''
-            self.inWeight = 0
+#         if nodeName == 'weight':
+#             self.criteria[self.criterion]['weight'] = Decimal(self.weightValue)
+#             self.weightValue = ''
+#             self.inWeight = 0
 
-        if nodeName == 'thresholds':
-            self.criteria[self.criterion]['thresholds'] = self.thresholds
-            self.thresholds = {}
-            self.inThresholds = 0
+#         if nodeName == 'thresholds':
+#             self.criteria[self.criterion]['thresholds'] = self.thresholds
+#             self.thresholds = {}
+#             self.inThresholds = 0
 
-        if nodeName == 'scale':
-            scaleString = str(self.scaleValue) +')'
-            self.criteria[self.criterion]['scale'] = eval(scaleString)
-            self.scaleValue = '('
-            self.inScale = 0
+#         if nodeName == 'scale':
+#             scaleString = str(self.scaleValue) +')'
+#             self.criteria[self.criterion]['scale'] = eval(scaleString)
+#             self.scaleValue = '('
+#             self.inScale = 0
 
-        if nodeName == 'min':
-            self.scaleValue += str(self.minValue)+','
-            self.minValue = ''
-            self.inMin = 0
+#         if nodeName == 'min':
+#             self.scaleValue += str(self.minValue)+','
+#             self.minValue = ''
+#             self.inMin = 0
 
-        if nodeName == 'max':
-            self.scaleValue += str(self.maxValue)
-            self.maxValue = ''
-            self.inMax = 0
+#         if nodeName == 'max':
+#             self.scaleValue += str(self.maxValue)
+#             self.maxValue = ''
+#             self.inMax = 0
 
-        if nodeName == 'indifference':
-            value = eval(self.valueText)
-            self.thresholds['ind'] = (Decimal(str(value[0])),Decimal(str(value[1])))
-            self.valueText = ''
-            self.inIndifference = 0
+#         if nodeName == 'indifference':
+#             value = eval(self.valueText)
+#             self.thresholds['ind'] = (Decimal(str(value[0])),Decimal(str(value[1])))
+#             self.valueText = ''
+#             self.inIndifference = 0
 
-        if nodeName == 'preference':
-            value = eval(self.valueText)
-            self.thresholds['pref'] = (Decimal(str(value[0])),Decimal(str(value[1])))
-            self.valueText = ''
-            self.inPreference = 0
+#         if nodeName == 'preference':
+#             value = eval(self.valueText)
+#             self.thresholds['pref'] = (Decimal(str(value[0])),Decimal(str(value[1])))
+#             self.valueText = ''
+#             self.inPreference = 0
 
-        if nodeName == 'weakveto':
-            value = eval(self.valueText)
-            self.thresholds['weakveto'] = (Decimal(str(value[0])),Decimal(str(value[1])))
-            self.valueText = ''
-            self.inWeakveto = 0
+#         if nodeName == 'weakveto':
+#             value = eval(self.valueText)
+#             self.thresholds['weakveto'] = (Decimal(str(value[0])),Decimal(str(value[1])))
+#             self.valueText = ''
+#             self.inWeakveto = 0
 
-        if nodeName == 'veto':
-            value = eval(self.valueText)
-            self.thresholds['veto'] = (Decimal(str(value[0])),Decimal(str(value[1])))
-            self.valueText = ''
-            self.inVeto = 0
+#         if nodeName == 'veto':
+#             value = eval(self.valueText)
+#             self.thresholds['veto'] = (Decimal(str(value[0])),Decimal(str(value[1])))
+#             self.valueText = ''
+#             self.inVeto = 0
             
-        if nodeName == 'criteria':
-            self.inCriteria = 0
+#         if nodeName == 'criteria':
+#             self.inCriteria = 0
 
-        if nodeName == 'evaluations':
-            self.inEvaluations = 0
+#         if nodeName == 'evaluations':
+#             self.inEvaluations = 0
 
-        if nodeName == 'evaluation':
-            self.inEvaluation = 0
+#         if nodeName == 'evaluation':
+#             self.inEvaluation = 0
 
-        if nodeName == 'evalactions':
-            self.inEvalActions = 0
+#         if nodeName == 'evalactions':
+#             self.inEvalActions = 0
 
-        if nodeName == 'value':
-            self.evaluation[self.criterion][str(self.actionName)] = Decimal(self.valueText)
+#         if nodeName == 'value':
+#             self.evaluation[self.criterion][str(self.actionName)] = Decimal(self.valueText)
 
-            self.inValue = 0
+#             self.inValue = 0
 
 
-    def characters(self, ch):
-        if self.inName:
-            self.performanceTableauName += ch
-        if self.inAction: 
-            self.actionName += ch
-        if self.inCriterion:
-            self.criterionName += ch
-        if self.inWeight:
-            self.weightValue += ch
-        if self.inMin:
-            self.minValue += ch
-        if self.inMax:
-            self.maxValue += ch
-        if self.inIndifference:
-            self.valueText += ch
-        if self.inPreference:
-            self.valueText += ch
-        if self.inWeakveto:
-            self.valueText += ch
-        if self.inVeto:
-            self.valueText += ch
-        if self.inValue:
-            self.valueText += ch
+#     def characters(self, ch):
+#         if self.inName:
+#             self.performanceTableauName += ch
+#         if self.inAction: 
+#             self.actionName += ch
+#         if self.inCriterion:
+#             self.criterionName += ch
+#         if self.inWeight:
+#             self.weightValue += ch
+#         if self.inMin:
+#             self.minValue += ch
+#         if self.inMax:
+#             self.maxValue += ch
+#         if self.inIndifference:
+#             self.valueText += ch
+#         if self.inPreference:
+#             self.valueText += ch
+#         if self.inWeakveto:
+#             self.valueText += ch
+#         if self.inVeto:
+#             self.valueText += ch
+#         if self.inValue:
+#             self.valueText += ch
         
-
+##############################################################
 
 
 class PerformanceTableau(object):
@@ -6438,291 +6438,291 @@ class _RandomCBPerformanceTableau(PerformanceTableau):
                
 #############################33
 # XML encoded stored PerformanceTableau Class instances
-class XMLPerformanceTableau(PerformanceTableau):
-    """
-    Specialization of the general PerformanceTableau class for reading
-    stored XML formatted instances.
-    """
+# class XMLPerformanceTableau(PerformanceTableau):
+#     """
+#     Specialization of the general PerformanceTableau class for reading
+#     stored XML formatted instances.
+#     """
 
-    def __init__(self,fileName='testperftabXML'):
-        from xml.sax import make_parser
-        xmlPerformanceTableau = _XMLPerformanceTableauHandler()
-        saxParser = make_parser()
-        saxParser.setContentHandler(xmlPerformanceTableau)
-        fileNameExt = fileName + '.xml'
-        fo = open(fileNameExt,'r')
-        saxParser.parse(fo)
-        self.name = xmlPerformanceTableau.name
-        self.category = xmlPerformanceTableau.category
-        self.subcategory = xmlPerformanceTableau.subcategory  
-        self.actions = xmlPerformanceTableau.actions
-        self.criteria = xmlPerformanceTableau.criteria
-        self.evaluation = xmlPerformanceTableau.evaluation
-        self.weightPreorder = self.computeWeightPreorder()
+#     def __init__(self,fileName='testperftabXML'):
+#         from xml.sax import make_parser
+#         xmlPerformanceTableau = _XMLPerformanceTableauHandler()
+#         saxParser = make_parser()
+#         saxParser.setContentHandler(xmlPerformanceTableau)
+#         fileNameExt = fileName + '.xml'
+#         fo = open(fileNameExt,'r')
+#         saxParser.parse(fo)
+#         self.name = xmlPerformanceTableau.name
+#         self.category = xmlPerformanceTableau.category
+#         self.subcategory = xmlPerformanceTableau.subcategory  
+#         self.actions = xmlPerformanceTableau.actions
+#         self.criteria = xmlPerformanceTableau.criteria
+#         self.evaluation = xmlPerformanceTableau.evaluation
+#         self.weightPreorder = self.computeWeightPreorder()
 
-class XMLRubisPerformanceTableau(PerformanceTableau):
-    """
-    Specialization of the general PerformanceTableau class for reading
-    stored XML formatted instances. Using the inbuilt module
-    xml.etree (for Python 2.5+).
+# class _XMLRubisPerformanceTableau(PerformanceTableau):
+#     """
+#     Specialization of the general PerformanceTableau class for reading
+#     stored XML formatted instances. Using the inbuilt module
+#     xml.etree (for Python 2.5+).
 
-    Param: fileName (without the extension .xml). 
-    """
+#     Param: fileName (without the extension .xml). 
+#     """
     
-    def __init__(self,fileName='rubisPerformanceTableau'):
-        from xml.etree import ElementTree
-        try:
-            fileNameExt = fileName + '.xml'
-            fo = open(fileNameExt,mode='r')
-        except:
-            try:
-                fileNameExt = fileName + '.xmcda'
-                fo = open(fileNameExt,mode='r')
-            except:
-                fileNameExt = fileName + '.xmcda2'
-                fo = open(fileNameExt,mode='r')
-        rubisPerformanceTableau = ElementTree.parse(fo).getroot()
-        self.comment = rubisPerformanceTableau.find('comment').text
-        self.category = rubisPerformanceTableau.attrib['category']
-        self.subcategory = rubisPerformanceTableau.attrib['subcategory']
-        self.name = rubisPerformanceTableau.find('header').find('name').text
-        self.author = rubisPerformanceTableau.find('header').find('author').text
-        self.reference = rubisPerformanceTableau.find('header').find('reference').text
-        actions = {}
-        ## actions['comment'] = rubisPerformanceTableau.find('actions').find('comment').text
-        for x in rubisPerformanceTableau.find('actions').findall('action'):
-            actions[x.attrib['id']] = {}
-            actions[x.attrib['id']]['name'] = x.find('name').text
-            actions[x.attrib['id']]['comment'] = x.find('comment').text
-        self.actions = actions
-        criteria = {}
-        ##criteria['comment'] = rubisPerformanceTableau.find('criteria').find('comment').text
-        for g in rubisPerformanceTableau.find('criteria').findall('criterion'):
-            criteria[g.attrib['id']] = {}
-            criteria[g.attrib['id']]['name'] = g.find('name').text
-            criteria[g.attrib['id']]['comment'] = g.find('comment').text
-            criteria[g.attrib['id']]['scale'] = {}
-            Min = Decimal(g.find('scale').find('min').text)
-            Max = Decimal(g.find('scale').find('max').text)
-            ##criteria[g.attrib['id']]['scale'] = str((Min,Max))
-            criteria[g.attrib['id']]['scale'] = (Min,Max)
-            criteria[g.attrib['id']]['thresholds'] = {}
-            try:
-                th = self.stripsplit(g.find('thresholds').find('indifference').text)
-                criteria[g.attrib['id']]['thresholds']['ind'] = (Decimal(str(th[0])),Decimal(str(th[1])))
-            except:
-                pass
-            try:
-                th = self.stripsplit(g.find('thresholds').find('weakPreference').text)
-                criteria[g.attrib['id']]['thresholds']['weakPreference'] = (Decimal(str(th[0])),Decimal(str(th[1])))
-            except:
-                pass
-            try:
-                th = self.stripsplit(g.find('thresholds').find('preference').text)
-                criteria[g.attrib['id']]['thresholds']['pref'] = (Decimal(str(th[0])),Decimal(str(th[1])))
-            except:
-                pass
-            try:
-                th = self.stripsplit(g.find('thresholds').find('weakVeto').text)
-                criteria[g.attrib['id']]['thresholds']['weakVeto'] = (Decimal(str(th[0])),Decimal(str(th[1])))
-            except:
-                pass
-            try:
-                th = self.stripsplit(g.find('thresholds').find('veto').text)
-                criteria[g.attrib['id']]['thresholds']['veto'] = (Decimal(str(th[0])),Decimal(str(th[1])))
-            except:
-                pass
-                ## criteria[g.attrib['id']]['thresholds']['veto'] = (Max + 1.0,0.0)
-            criteria[g.attrib['id']]['weight'] = Decimal(g.find('weight').text)     
-        self.criteria = criteria
-        evaluation = {}
-        ##evaluation['comment'] = rubisPerformanceTableau.find('evaluations').find('comment').text
-        for v in rubisPerformanceTableau.find('evaluations').findall('evaluation'):
-            g = v.find('criterionID').text
-            evaluation[g] = {}
-            for x in v.findall('performance'):
-                evaluation[g][x.find('actionID').text]=Decimal(x.find('value').text)   
-        self.evaluation = evaluation
+#     def __init__(self,fileName='rubisPerformanceTableau'):
+#         from xml.etree import ElementTree
+#         try:
+#             fileNameExt = fileName + '.xml'
+#             fo = open(fileNameExt,mode='r')
+#         except:
+#             try:
+#                 fileNameExt = fileName + '.xmcda'
+#                 fo = open(fileNameExt,mode='r')
+#             except:
+#                 fileNameExt = fileName + '.xmcda2'
+#                 fo = open(fileNameExt,mode='r')
+#         rubisPerformanceTableau = ElementTree.parse(fo).getroot()
+#         self.comment = rubisPerformanceTableau.find('comment').text
+#         self.category = rubisPerformanceTableau.attrib['category']
+#         self.subcategory = rubisPerformanceTableau.attrib['subcategory']
+#         self.name = rubisPerformanceTableau.find('header').find('name').text
+#         self.author = rubisPerformanceTableau.find('header').find('author').text
+#         self.reference = rubisPerformanceTableau.find('header').find('reference').text
+#         actions = {}
+#         ## actions['comment'] = rubisPerformanceTableau.find('actions').find('comment').text
+#         for x in rubisPerformanceTableau.find('actions').findall('action'):
+#             actions[x.attrib['id']] = {}
+#             actions[x.attrib['id']]['name'] = x.find('name').text
+#             actions[x.attrib['id']]['comment'] = x.find('comment').text
+#         self.actions = actions
+#         criteria = {}
+#         ##criteria['comment'] = rubisPerformanceTableau.find('criteria').find('comment').text
+#         for g in rubisPerformanceTableau.find('criteria').findall('criterion'):
+#             criteria[g.attrib['id']] = {}
+#             criteria[g.attrib['id']]['name'] = g.find('name').text
+#             criteria[g.attrib['id']]['comment'] = g.find('comment').text
+#             criteria[g.attrib['id']]['scale'] = {}
+#             Min = Decimal(g.find('scale').find('min').text)
+#             Max = Decimal(g.find('scale').find('max').text)
+#             ##criteria[g.attrib['id']]['scale'] = str((Min,Max))
+#             criteria[g.attrib['id']]['scale'] = (Min,Max)
+#             criteria[g.attrib['id']]['thresholds'] = {}
+#             try:
+#                 th = self.stripsplit(g.find('thresholds').find('indifference').text)
+#                 criteria[g.attrib['id']]['thresholds']['ind'] = (Decimal(str(th[0])),Decimal(str(th[1])))
+#             except:
+#                 pass
+#             try:
+#                 th = self.stripsplit(g.find('thresholds').find('weakPreference').text)
+#                 criteria[g.attrib['id']]['thresholds']['weakPreference'] = (Decimal(str(th[0])),Decimal(str(th[1])))
+#             except:
+#                 pass
+#             try:
+#                 th = self.stripsplit(g.find('thresholds').find('preference').text)
+#                 criteria[g.attrib['id']]['thresholds']['pref'] = (Decimal(str(th[0])),Decimal(str(th[1])))
+#             except:
+#                 pass
+#             try:
+#                 th = self.stripsplit(g.find('thresholds').find('weakVeto').text)
+#                 criteria[g.attrib['id']]['thresholds']['weakVeto'] = (Decimal(str(th[0])),Decimal(str(th[1])))
+#             except:
+#                 pass
+#             try:
+#                 th = self.stripsplit(g.find('thresholds').find('veto').text)
+#                 criteria[g.attrib['id']]['thresholds']['veto'] = (Decimal(str(th[0])),Decimal(str(th[1])))
+#             except:
+#                 pass
+#                 ## criteria[g.attrib['id']]['thresholds']['veto'] = (Max + 1.0,0.0)
+#             criteria[g.attrib['id']]['weight'] = Decimal(g.find('weight').text)     
+#         self.criteria = criteria
+#         evaluation = {}
+#         ##evaluation['comment'] = rubisPerformanceTableau.find('evaluations').find('comment').text
+#         for v in rubisPerformanceTableau.find('evaluations').findall('evaluation'):
+#             g = v.find('criterionID').text
+#             evaluation[g] = {}
+#             for x in v.findall('performance'):
+#                 evaluation[g][x.find('actionID').text]=Decimal(x.find('value').text)   
+#         self.evaluation = evaluation
 
-##         self.actions = xmlPerformanceTableau.actions
-##         self.criteria = xmlPerformanceTableau.criteria
-##         self.evaluation = xmlPerformanceTableau.evaluation
-        self.weightPreorder = self.computeWeightPreorder()
+# ##         self.actions = xmlPerformanceTableau.actions
+# ##         self.criteria = xmlPerformanceTableau.criteria
+# ##         self.evaluation = xmlPerformanceTableau.evaluation
+#         self.weightPreorder = self.computeWeightPreorder()
 
-    def stripsplit(self,th):
-        """ extract thresholds new Python 3 compatible version """
-        import string
-        ## th = string.split(string.lstrip(string.rstrip(th,')'),'('),',')
-        th = th.rstrip(')')
-        th = th.lstrip('(')
-        th = th.split(',')
-        res = (th[0].strip(),th[1].strip())
-        return res      
+#     def stripsplit(self,th):
+#         """ extract thresholds new Python 3 compatible version """
+#         import string
+#         ## th = string.split(string.lstrip(string.rstrip(th,')'),'('),',')
+#         th = th.rstrip(')')
+#         th = th.lstrip('(')
+#         th = th.split(',')
+#         res = (th[0].strip(),th[1].strip())
+#         return res      
 
-class OldXMCDAPerformanceTableau(PerformanceTableau):
-    """
-    Specialization of the general PerformanceTableau class for reading
-    stored XMCDA formatted instances. Using the inbuilt module
-    xml.etree (for Python 2.5+).
+# class _OldXMCDAPerformanceTableau(PerformanceTableau):
+#     """
+#     Specialization of the general PerformanceTableau class for reading
+#     stored XMCDA formatted instances. Using the inbuilt module
+#     xml.etree (for Python 2.5+).
 
-    Param: fileName (without the extension .xml or .xmcda). 
-    """
+#     Param: fileName (without the extension .xml or .xmcda). 
+#     """
     
-    def __init__(self,fileName='temp'):
-        from xml.etree import ElementTree
-        fileNameExt = fileName + '.xmcda'
-        try:
-            fo = open(fileNameExt,mode='r')
-        except:
-            fileNameExt = fileName + '.xml'
-            try:
-                fo = open(fileNameExt,mode='r')
-            except:
-                print("Error: file %s{.xmcda|.xml} not found !" % (fileName))
+#     def __init__(self,fileName='temp'):
+#         from xml.etree import ElementTree
+#         fileNameExt = fileName + '.xmcda'
+#         try:
+#             fo = open(fileNameExt,mode='r')
+#         except:
+#             fileNameExt = fileName + '.xml'
+#             try:
+#                 fo = open(fileNameExt,mode='r')
+#             except:
+#                 print("Error: file %s{.xmcda|.xml} not found !" % (fileName))
         
-        xmcdaPerformanceTableau = ElementTree.parse(fo).getroot()
-        # get description
-        description = {}
-        for elem in [x for x in xmcdaPerformanceTableau.find('caseReference').getchildren()]:
-            if elem.tag == 'bibliography':
-                description[elem.tag] = {'description': {'subSubTitle': 'Bibliography'}}
-                i = 0
-                for bibEntry in [x for x in elem.findall('bibEntry')]:
-                    i += 1
-                    description[elem.tag][i] = bibEntry.text 
-            else:
-                description[elem.tag] = elem.text
-        self.description = description
-        try:
-            self.name = description['name']
-        except:
-            pass
-        try:
-            self.author = description['user']
-        except:
-            pass
-        try:
-            self.reference = description['comment']
-        except:
-            pass
-        # get method Data
-        parameter = {}
-        for elem in [x for x in xmcdaPerformanceTableau.find('methodData').find('parameters').getchildren()]:
-            tag = elem.find('name').text
-            try:
-                value = elem.find('value').find('label').text
-            except:
-                try:
-                    value = float(elem.find('value').find('real').text)
-                except:
-                    value = int(elem.find('value').find('integer').text)                        
-            parameter[tag] = value
-        self.parameter = parameter
-        actions = {}
-        # get alternatives' description
-        description = {}
-        for elem in [x for x in xmcdaPerformanceTableau.find('alternatives').find('description').getchildren()]:
-            description[elem.tag] = elem.text
-        self.actionsDescription = description
-        # get alternatives
-        for x in xmcdaPerformanceTableau.find('alternatives').findall('alternative'):
-            try:
-                if x.find('status').text == 'active':
-                    Active = True
-                else:
-                    Active = False
-            except:
-                Active = True
-            if Active:
-                actions[x.attrib['id']] = {}
-                for elem in [y for y in x.find('description').getchildren()]:
-                    actions[x.attrib['id']][elem.tag] = elem.text
-        self.actions = actions
-        criteria = {}
-        # get criteria' description
-        description = {}
-        for elem in [x for x in xmcdaPerformanceTableau.find('criteria').find('description').getchildren()]:
-            description[elem.tag] = elem.text
-        self.criteriaDescription = description
-        ## get criteria
-        for g in xmcdaPerformanceTableau.find('criteria').findall('criterion'):
-            try:
+#         xmcdaPerformanceTableau = ElementTree.parse(fo).getroot()
+#         # get description
+#         description = {}
+#         for elem in [x for x in xmcdaPerformanceTableau.find('caseReference').getchildren()]:
+#             if elem.tag == 'bibliography':
+#                 description[elem.tag] = {'description': {'subSubTitle': 'Bibliography'}}
+#                 i = 0
+#                 for bibEntry in [x for x in elem.findall('bibEntry')]:
+#                     i += 1
+#                     description[elem.tag][i] = bibEntry.text 
+#             else:
+#                 description[elem.tag] = elem.text
+#         self.description = description
+#         try:
+#             self.name = description['name']
+#         except:
+#             pass
+#         try:
+#             self.author = description['user']
+#         except:
+#             pass
+#         try:
+#             self.reference = description['comment']
+#         except:
+#             pass
+#         # get method Data
+#         parameter = {}
+#         for elem in [x for x in xmcdaPerformanceTableau.find('methodData').find('parameters').getchildren()]:
+#             tag = elem.find('name').text
+#             try:
+#                 value = elem.find('value').find('label').text
+#             except:
+#                 try:
+#                     value = float(elem.find('value').find('real').text)
+#                 except:
+#                     value = int(elem.find('value').find('integer').text)                        
+#             parameter[tag] = value
+#         self.parameter = parameter
+#         actions = {}
+#         # get alternatives' description
+#         description = {}
+#         for elem in [x for x in xmcdaPerformanceTableau.find('alternatives').find('description').getchildren()]:
+#             description[elem.tag] = elem.text
+#         self.actionsDescription = description
+#         # get alternatives
+#         for x in xmcdaPerformanceTableau.find('alternatives').findall('alternative'):
+#             try:
+#                 if x.find('status').text == 'active':
+#                     Active = True
+#                 else:
+#                     Active = False
+#             except:
+#                 Active = True
+#             if Active:
+#                 actions[x.attrib['id']] = {}
+#                 for elem in [y for y in x.find('description').getchildren()]:
+#                     actions[x.attrib['id']][elem.tag] = elem.text
+#         self.actions = actions
+#         criteria = {}
+#         # get criteria' description
+#         description = {}
+#         for elem in [x for x in xmcdaPerformanceTableau.find('criteria').find('description').getchildren()]:
+#             description[elem.tag] = elem.text
+#         self.criteriaDescription = description
+#         ## get criteria
+#         for g in xmcdaPerformanceTableau.find('criteria').findall('criterion'):
+#             try:
                 
-                if g.find('status').text == 'active':
-                    Active = True
-                else:
-                    Active = False
-            except:
-                Active = True
-            if Active:
-                criteria[g.attrib['id']] = {}
-                for elem in [y for y in g.find('description').getchildren()]:
-                    criteria[g.attrib['id']][elem.tag] = elem.text
-                criteria[g.attrib['id']]['scale'] = {}
-                Min = float(g.find('criterionFunction').find('scale').find('quantitative').find('min').find('real').text)
-                Max = float(g.find('criterionFunction').find('scale').find('quantitative').find('max').find('real').text)
-                ##criteria[g.attrib['id']]['scale'] = str((Min,Max))
-                criteria[g.attrib['id']]['scale'] = (Min,Max)
-                try:
-                    criteria[g.attrib['id']]['weight'] = float(g.find('significance').find('real').text)
-                except:
-                    criteria[g.attrib['id']]['weight'] = int(g.find('significance').find('integer').text)
-                try:
-                    criteria[g.attrib['id']]['preferenceDirection'] = g.find('criterionFunction').find('scale').find('quantitative').find('preferenceDirection').text
-                    if criteria[g.attrib['id']]['preferenceDirection'] == 'min':
-                        pdir = -1
-                    else:
-                        pdir = 1
-                except:
-                    pdir = 1
+#                 if g.find('status').text == 'active':
+#                     Active = True
+#                 else:
+#                     Active = False
+#             except:
+#                 Active = True
+#             if Active:
+#                 criteria[g.attrib['id']] = {}
+#                 for elem in [y for y in g.find('description').getchildren()]:
+#                     criteria[g.attrib['id']][elem.tag] = elem.text
+#                 criteria[g.attrib['id']]['scale'] = {}
+#                 Min = float(g.find('criterionFunction').find('scale').find('quantitative').find('min').find('real').text)
+#                 Max = float(g.find('criterionFunction').find('scale').find('quantitative').find('max').find('real').text)
+#                 ##criteria[g.attrib['id']]['scale'] = str((Min,Max))
+#                 criteria[g.attrib['id']]['scale'] = (Min,Max)
+#                 try:
+#                     criteria[g.attrib['id']]['weight'] = float(g.find('significance').find('real').text)
+#                 except:
+#                     criteria[g.attrib['id']]['weight'] = int(g.find('significance').find('integer').text)
+#                 try:
+#                     criteria[g.attrib['id']]['preferenceDirection'] = g.find('criterionFunction').find('scale').find('quantitative').find('preferenceDirection').text
+#                     if criteria[g.attrib['id']]['preferenceDirection'] == 'min':
+#                         pdir = -1
+#                     else:
+#                         pdir = 1
+#                 except:
+#                     pdir = 1
 
-                criteria[g.attrib['id']]['thresholds'] = {}
-                for th in g.find('criterionFunction').find('thresholds').findall('threshold'):
-                    try:
-                        try:
-                            intercept = float(th.find('function').find('linear').find('intercept').find('real').text)
-                        except:
-                            intercept = int(th.find('function').find('linear').find('intercept').find('integer').text)
-                        slope = float(th.find('function').find('linear').find('slope').find('real').text)
-                    except:
-                        try:
-                            intercept = float(th.find('function').find('constant').find('real').text)
-                        except:
-                            intercept = float(th.find('function').find('constant').find('integer').text)
-                        slope = 0.0
-                    ## criteria[g.attrib['id']]['thresholds'][th.find('type').text] = (intercept,pdir*slope)
-                    criteria[g.attrib['id']]['thresholds'][th.find('type').text] = (intercept,slope)
+#                 criteria[g.attrib['id']]['thresholds'] = {}
+#                 for th in g.find('criterionFunction').find('thresholds').findall('threshold'):
+#                     try:
+#                         try:
+#                             intercept = float(th.find('function').find('linear').find('intercept').find('real').text)
+#                         except:
+#                             intercept = int(th.find('function').find('linear').find('intercept').find('integer').text)
+#                         slope = float(th.find('function').find('linear').find('slope').find('real').text)
+#                     except:
+#                         try:
+#                             intercept = float(th.find('function').find('constant').find('real').text)
+#                         except:
+#                             intercept = float(th.find('function').find('constant').find('integer').text)
+#                         slope = 0.0
+#                     ## criteria[g.attrib['id']]['thresholds'][th.find('type').text] = (intercept,pdir*slope)
+#                     criteria[g.attrib['id']]['thresholds'][th.find('type').text] = (intercept,slope)
 
-        self.criteria = criteria
-        # get evaluations' description
-        description = {}
-        for elem in [x for x in xmcdaPerformanceTableau.find('performanceTable').find('description').getchildren()]:
-            description[elem.tag] = elem.text
-        self.evaluationDescription = description
-        # get evaluations
-        evaluation = {}
-        for v in xmcdaPerformanceTableau.find('performanceTable').findall('criterionEvaluations'):
-            g = v.find('criterionID').text
-            try:
-                if self.criteria[g]['preferenceDirection'] == 'min':
-                    pdir = -1
-                else:
-                    pdir = 1
-            except:
-                pdir = 1
-            evaluation[g] = {}
-            for x in v.findall('evaluation'):
-                try:
-                    value = x.find('value').find('integer').text
-                    evaluation[g][x.find('alternativeID').text]=int(value) * pdir
-                except:
-                    value = x.find('value').find('real').text
-                    evaluation[g][x.find('alternativeID').text]=float(value) * pdir
-        self.evaluation = evaluation
-        # compute weigth preoder
-        self.weightPreorder = self.computeWeightPreorder()
+#         self.criteria = criteria
+#         # get evaluations' description
+#         description = {}
+#         for elem in [x for x in xmcdaPerformanceTableau.find('performanceTable').find('description').getchildren()]:
+#             description[elem.tag] = elem.text
+#         self.evaluationDescription = description
+#         # get evaluations
+#         evaluation = {}
+#         for v in xmcdaPerformanceTableau.find('performanceTable').findall('criterionEvaluations'):
+#             g = v.find('criterionID').text
+#             try:
+#                 if self.criteria[g]['preferenceDirection'] == 'min':
+#                     pdir = -1
+#                 else:
+#                     pdir = 1
+#             except:
+#                 pdir = 1
+#             evaluation[g] = {}
+#             for x in v.findall('evaluation'):
+#                 try:
+#                     value = x.find('value').find('integer').text
+#                     evaluation[g][x.find('alternativeID').text]=int(value) * pdir
+#                 except:
+#                     value = x.find('value').find('real').text
+#                     evaluation[g][x.find('alternativeID').text]=float(value) * pdir
+#         self.evaluation = evaluation
+#         # compute weigth preoder
+#         self.weightPreorder = self.computeWeightPreorder()
 
-class XMCDAPerformanceTableau(PerformanceTableau):
+class _XMCDAPerformanceTableau(PerformanceTableau):
     """
     Specialization of the general PerformanceTableau class for reading
     stored XMCDA formatted instances with exact decimal numbers.
