@@ -23,9 +23,6 @@ This Python3 software resources implement decision aid algorithms useful in the 
 Algorithmic Decision Theory and more specifically 
 in outranking based Multiple Criteria Decision Aid (MCDA).
 
-Technical documentation and tutorials are available under the following link:
-http://digraph3.readthedocs.io/en/latest/
-
 Installation instructions:
 
 On a (Unix, Mac OSX) command line using a git client:
@@ -56,6 +53,10 @@ runs a nose test suite in the ./test directory
 
 .. /Digraph3$ make verboseTests
 runs a verbose (with stdout not captured) nose test suite 
+
+Tutorials and technical documentation of modules, classes and methods are available under the following link:
+http://digraph3.readthedocs.io/en/latest/
+
 
 Enjoy !!
 R Bisdorff

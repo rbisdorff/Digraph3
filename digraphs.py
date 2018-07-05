@@ -3744,8 +3744,8 @@ class Digraph(object):
         fo.close()
         if type(self) == CirculantDigraph:
             commandString = 'circo -T'+graphType+' '+dotName+' -o '+name+'.' + graphType
-        elif type(self) == RandomTree:
-            commandString = 'neato -T'+graphType+' '+dotName+' -o '+name+'.' + graphType
+        # elif type(self) == RandomTree:
+        #     commandString = 'neato -T'+graphType+' '+dotName+' -o '+name+'.' + graphType
         else:
             commandString = 'dot -Grankdir=BT -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
             #commandString = 'dot -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
@@ -10075,77 +10075,77 @@ class _RandomFixedDegreeSequenceDigraph(Digraph):
                     self.relation = relation.copy()
                     self.gamma = self.gammaSets()
 
-class RandomTree(Digraph):
-    """
-    .. warning::
+# class RandomTree(Digraph):
+#     """
+#     .. warning::
 
-       *Obsolete version!* Will be removed in the future. Instead, use
-       the new :py:class:`graphs.RandomTree` constructor. 
+#        *Obsolete version!* Will be removed in the future. Instead, use
+#        the new :py:class:`graphs.RandomTree` constructor. 
 
-    """
-    def __init__(self,numberOfNodes=5, ndigits=2, hasIntegerValuation=True):
-        from random import choice
-        from decimal import Decimal
-        self.name = 'randomTree'
-        self.order = numberOfNodes
-        actions = {}
-        nodes = [str(x+1) for x in range(numberOfNodes)]
-        for x in nodes:
-            actions[x] = {'name': 'node %s' % x}
-        self.actions = actions
-        print(actions)
-        precision = pow(10,ndigits)
-        if hasIntegerValuation:
-            self.valuationdomain = {'min':-precision, 'med':0, 'max':precision}
-        else:
-            self.valuationdomain = {'min':Decimal('-1.0'), 'med':Decimal('0.0'), 'max':Decimal('1.0')}
-        self.valuationdomain['hasIntegerValuation'] = hasIntegerValuation
-        # init relation dictionary
-        relation = {}
-        nodeKeys = [x for x in actions]
-        print(nodeKeys)
-        for x in nodeKeys:
-            relation[x] = {}
-            for y in nodeKeys:
-                relation[x][y] = self.valuationdomain['min']
-        nodes = [x for x in range(len(nodeKeys))]
-        pruefer = []
-        for i in range(len(nodeKeys)-2):
-            pruefer.append(choice(nodes))
-        print(pruefer)
-        pairs = self.prufer_to_tree(pruefer)
-        for (i,j) in pairs:
-            relation[str(i+1)][str(j+1)] = Decimal('1.0')
-            relation[str(j+1)][str(i+1)] = Decimal('1.0')
-        self.relation = relation
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
+#     """
+#     def __init__(self,numberOfNodes=5, ndigits=2, hasIntegerValuation=True):
+#         from random import choice
+#         from decimal import Decimal
+#         self.name = 'randomTree'
+#         self.order = numberOfNodes
+#         actions = {}
+#         nodes = [str(x+1) for x in range(numberOfNodes)]
+#         for x in nodes:
+#             actions[x] = {'name': 'node %s' % x}
+#         self.actions = actions
+#         print(actions)
+#         precision = pow(10,ndigits)
+#         if hasIntegerValuation:
+#             self.valuationdomain = {'min':-precision, 'med':0, 'max':precision}
+#         else:
+#             self.valuationdomain = {'min':Decimal('-1.0'), 'med':Decimal('0.0'), 'max':Decimal('1.0')}
+#         self.valuationdomain['hasIntegerValuation'] = hasIntegerValuation
+#         # init relation dictionary
+#         relation = {}
+#         nodeKeys = [x for x in actions]
+#         print(nodeKeys)
+#         for x in nodeKeys:
+#             relation[x] = {}
+#             for y in nodeKeys:
+#                 relation[x][y] = self.valuationdomain['min']
+#         nodes = [x for x in range(len(nodeKeys))]
+#         pruefer = []
+#         for i in range(len(nodeKeys)-2):
+#             pruefer.append(choice(nodes))
+#         print(pruefer)
+#         pairs = self.prufer_to_tree(pruefer)
+#         for (i,j) in pairs:
+#             relation[str(i+1)][str(j+1)] = Decimal('1.0')
+#             relation[str(j+1)][str(i+1)] = Decimal('1.0')
+#         self.relation = relation
+#         self.gamma = self.gammaSets()
+#         self.notGamma = self.notGammaSets()
 
-    def prufer_to_tree(self,a):
-        tree = []
-        T = list(range(0, len(a)+2))
-        print(T)
-        # the degree of each node is how many times it appears
-        # in the sequence
-        deg = [1]*len(T)
-        print(deg)
-        for i in a: deg[i] += 1
+#     def prufer_to_tree(self,a):
+#         tree = []
+#         T = list(range(0, len(a)+2))
+#         print(T)
+#         # the degree of each node is how many times it appears
+#         # in the sequence
+#         deg = [1]*len(T)
+#         print(deg)
+#         for i in a: deg[i] += 1
 
-        # for each node label i in a, find the first node j with degree 1 and add
-        # the edge (j, i) to the tree
-        for i in a:
-            for j in T:
-                if deg[j] == 1:
-                    tree.append((i,j))
-                    # decrement the degrees of i and j
-                    deg[i] -= 1
-                    deg[j] -= 1
-                    break
+#         # for each node label i in a, find the first node j with degree 1 and add
+#         # the edge (j, i) to the tree
+#         for i in a:
+#             for j in T:
+#                 if deg[j] == 1:
+#                     tree.append((i,j))
+#                     # decrement the degrees of i and j
+#                     deg[i] -= 1
+#                     deg[j] -= 1
+#                     break
 
-        last = [x for x in T if deg[x] == 1]
-        tree.append((last[0],last[1]))
+#         last = [x for x in T if deg[x] == 1]
+#         tree.append((last[0],last[1]))
 
-        return tree
+#         return tree
 
 
 class _RandomRegularDigraph(Digraph):

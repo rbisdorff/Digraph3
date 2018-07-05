@@ -699,11 +699,11 @@ def testActionsCorrelation():
     g.saveActionsCorrelationTable('act.prn')
     g.export3DplotOfActionsCorrelation('actionsCorrelation')
 
-def testRandomTree():
-    print('*---- random tree instance generation ---*')
-    t = RandomTree(numberOfNodes=10)
-    t.showAll()
-    t.exportGraphViz()
+# def testRandomTree():
+#     print('*---- random tree instance generation ---*')
+#     t = RandomTree(numberOfNodes=10)
+#     t.showAll()
+#     t.exportGraphViz()
 
 def testRankingRules():
     print('*-------- Testing Ranking Rules -------')
