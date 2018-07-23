@@ -1697,7 +1697,7 @@ The performance evaluations of each decision alternative on each criterion are g
                     print(formatString % (evalgx), end=' ')
             print()      
 
-    def saveCSV(self,fileName='tempPerfTab',Sorted=True,actionsList=None,ndigits=2,Debug=False):
+    def saveCSV(self,fileName='tempPerfTab',Sorted=True,criteriaList=None,actionsList=None,ndigits=2,Debug=False):
         """1
         Store the performance Tableau self Actions x Criteria in CSV format.
         """
@@ -1718,10 +1718,11 @@ The performance evaluations of each decision alternative on each criterion are g
         fileNameExt = fileName + '.csv'        
         print('*Storing performance tableau in CSV format in file %s'\
               % fileNameExt)
-        criteriaList = list(dict.keys(criteria))
-        if sorted:
-            criteriaList.sort()
-        n = len(criteriaList)
+        if criteriaList == None:
+            criteriaList = list(dict.keys(criteria))
+            if sorted:
+                criteriaList.sort()
+        ng = len(criteriaList)
         if Debug:
             print(criteriaList)
         if actionsList == None:
@@ -1732,24 +1733,29 @@ The performance evaluations of each decision alternative on each criterion are g
             actionsList = flatten(actionsList)
         if Debug:
             print(actionsList)
+        na = len(actionsList)
         formatStr = '%%.%.df' % ndigits
         if Debug:
             print('formatString:',formatStr)
         fo = open(fileNameExt,'w')
         ## header row
-        writeStr = '"actions",'
-        for i in range(n-1):
-            writeStr += '"%s",' % criteriaList[i]
-        writeStr += '"%s"\n' % criteriaList[n-1]
+        writeStr = '"criteria","name","weight","scale","thresholds",'
+        for i in range(na-1):
+            writeStr += '"%s",' % actionsList[i]
+        writeStr += '"%s"\n' % actionsList[na-1]
         if Debug:
             print(writeStr)
         fo.write(writeStr)
         ## writing performance data
-        for x in actionsList:
-            writeStr = '"%s",' % x
-            for i in range(n-1):
-                writeStr += formatStr % evaluation[criteriaList[i]][x] + ','
-            writeStr += formatStr % evaluation[criteriaList[n-1]][x] + '\n'
+        for g in criteriaList:
+            writeStr = '"%s",' % g
+            writeStr += '"%s",' % str(self.criteria[g]['name'])
+            writeStr += '"%s",' % self.criteria[g]['weight']
+            writeStr += '"%s",' % str(self.criteria[g]['scale'])
+            writeStr += '"%s",' % str(self.criteria[g]['thresholds'])
+            for i in range(na-1):
+                writeStr += formatStr % evaluation[g][actionsList[i]] + ','
+            writeStr += formatStr % evaluation[g][actionsList[na-1]] + '\n'
             if Debug:
                 print(writeStr)
             fo.write(writeStr)
@@ -7191,6 +7197,63 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
         
         self.weightPreorder = self.computeWeightPreorder()
 
+###########
+class CSVPerformanceTableau(PerformanceTableau):
+    """
+    Reading stored CSV encoded actions x criteria PerformanceTableau instances, Using the inbuilt module csv.
+
+    Param:
+        fileName (without the extension .csv).
+    """
+    def __init__(self,fileName='temp',Debug=True):
+        from csv import reader
+        from collections import OrderedDict
+
+        try:
+            fileNameExt = fileName + '.csv'
+            fi = open(fileNameExt,'r')
+            csvReader = reader(fi)
+            csvText = [x for x in csvReader]
+            if Debug:
+                print('input',csvText)
+        except:
+            print("Error: File %s.csv not found !!" % (fileName))
+            
+        self.name = fileName
+        self.reference = 'CSV PerformanceTableau input method.'
+        # actions dictionary
+        na = len(csvText[0])-1
+        if Debug:
+            print(na)
+        for i in range(5,na+1):
+            print(i,csvText[0][i])
+        self.actions = OrderedDict([(csvText[0][i],{'name':csvText[0][i],'comment':'potential decision action'}) for i in range(5,na+1)])
+
+        # criteria dictionary
+        ng = len(csvText)-1
+        for j in range(1,ng+1):
+            print(j,csvText[j][0])
+        self.criteria = OrderedDict([(csvText[j][0],{'name':csvText[j][0],'comment':'performance criteria'}) for j in range(1,ng+1)])
+
+        # evaluation tableaut.ev
+        evaluation = {}
+        for j in range(1,ng+1):
+            evaluation[csvText[j][0]] = {}
+            for i in range(5,na+1):
+                evaluation[csvText[j][0]][csvText[0][i]] = Decimal(csvText[j][i])
+        
+        self.evaluation = evaluation
+
+        # scales
+        for j in range(1,ng+1):
+            g = csvText[j][0]
+            self.criteria[g]['name']  = csvText[j][1]          
+            self.criteria[g]['weight']  = Decimal(csvText[j][2])
+            self.criteria[g]['scale']  = eval(csvText[j][3])
+            self.criteria[g]['thresholds']  = eval(csvText[j][4])
+            print(self.criteria[g])
+            
+            
 
 #----------test Digraph class ----------------
 if __name__ == "__main__":
@@ -7207,13 +7270,19 @@ if __name__ == "__main__":
 
 ##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
-    t = RandomCBPerformanceTableau(numberOfCriteria=2,
-                                   numberOfActions=5,
+    t = RandomCBPerformanceTableau(numberOfCriteria=13,
+                                   numberOfActions=21,
                                    weightDistribution='equiobjectives',
                                    integerWeights=True,
                                    Debug=False,
                                    missingDataProbability=0.1,
                                    seed=100,Threading=False)
+    t.saveCSV('test')
+    T = CSVPerformanceTableau('test',Debug=True)
+    print(T.__dict__)
+    T.showActions()
+    T.showCriteria()
+    T.showHTMLPerformanceHeatmap(Correlations=True)
 ##    for g in t.criteria:
 ##        t._computeLimitingQuantiles(g,frequencies=[0.0,0.25,0.5,0.75,1.0],LowerClosed=False,Debug=False)
 ##    t.saveXMCDA2('test')
