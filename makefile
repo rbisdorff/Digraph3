@@ -1,9 +1,9 @@
 ## makefile for digraphs module installation
-## R Bisdorff May 2014
-## version 3.3
+## R Bisdorff July 2018
+## version 3.7
 ########################
 PYTHON=python3
-NOSETESTS=nosetests3
+NOSETESTS=nosetests
 SPHINX=sphinx-build
 
 readme:
@@ -596,7 +596,7 @@ verboseArithmeticsTests:
 
 install:
 		sudo ${PYTHON} setup.py install
-		sudo python3.6 setup.py install
+		#sudo python3.7 setup.py install
 
 installVenv:
 		${PYTHON} setup.py install
