@@ -263,11 +263,14 @@ def flatten(iterable, ltypes=collections.Iterable):
     
     remainder = iter(iterable)
     while True:
-        first = next(remainder)
-        if isinstance(first, ltypes) and not isinstance(first, str):
-            remainder = IT.chain(first, remainder)
-        else:
-            yield first
+        try:
+            first = next(remainder)
+            if isinstance(first, ltypes) and not isinstance(first, str):
+                remainder = IT.chain(first, remainder)
+            else:
+                yield first
+        except:
+            break
 
 def total_size(o, handlers={}, verbose=False):
     """ Returns the approximate memory footprint of an object and all of its contents.
