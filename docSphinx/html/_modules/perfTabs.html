@@ -1,13 +1,16 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
     <title>perfTabs &#8212; Digraph3 3.6-2500+ documentation</title>
+    
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
@@ -24,7 +27,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
   </head>
-  <body>
+  <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -102,7 +105,7 @@
             <span class="c1"># which is still identical to the decimal value</span>
             <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="vm">__dict__</span>
+            <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">__dict__</span>
         <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONEncoder</span><span class="o">.</span><span class="n">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
 
 <span class="c1">######################################################################################################################</span>
@@ -456,7 +459,7 @@
 <span class="sd">        Default presentation method for PerformanceTableau instances.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">reprString</span> <span class="o">=</span> <span class="s1">&#39;*------- PerformanceTableau instance description ------*</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Instance class   : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Instance class   : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Seed             : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">randomSeed</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
@@ -468,7 +471,7 @@
         <span class="k">except</span><span class="p">:</span>
             <span class="k">pass</span>       
         <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;# Criteria       : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">)</span>
-        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Attributes       : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>     
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Attributes       : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>     
         <span class="k">return</span> <span class="n">reprString</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">filePerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">isEmpty</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -883,7 +886,7 @@
                 <span class="nb">print</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="PerformanceTableau.showObjectives"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.showObjectives">[docs]</a>    <span class="k">def</span> <span class="nf">showObjectives</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="s1">&#39;objectives&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">&#39;objectives&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------ show objectives -------&quot;&#39;</span><span class="p">)</span>
             
             <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">objectives</span><span class="p">:</span>
@@ -923,12 +926,12 @@
         <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="n">t</span> <span class="o">=</span> <span class="n">PerformanceTableau</span><span class="p">(</span><span class="n">isEmpty</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">t</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;bgd_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
-        <span class="n">att</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">]</span>
+        <span class="n">att</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">]</span>
         <span class="n">att</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
         <span class="n">att</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;actions&#39;</span><span class="p">)</span>
         <span class="n">att</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;evaluation&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">att</span><span class="p">:</span>
-            <span class="n">t</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">a</span><span class="p">])</span>
+            <span class="n">t</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">a</span><span class="p">])</span>
         <span class="c1"># convert action keys to integers</span>
         <span class="n">t</span><span class="o">.</span><span class="n">convertWeight2Integer</span><span class="p">()</span>
         <span class="n">t</span><span class="o">.</span><span class="n">convertDiscriminationThresholds2Float</span><span class="p">()</span>
@@ -948,7 +951,7 @@
         <span class="n">t</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">newActions</span>
         <span class="n">t</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">newEvaluation</span>
         <span class="c1"># change the object class</span>
-        <span class="n">t</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">cPerformanceTableau</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">__class__</span> <span class="o">=</span> <span class="n">cPerformanceTableau</span>
         <span class="k">return</span> <span class="n">t</span></div>
         
 <div class="viewcode-block" id="PerformanceTableau.convertWeight2Integer"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convertWeight2Integer">[docs]</a>    <span class="k">def</span> <span class="nf">convertWeight2Integer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1744,7 +1747,7 @@
                     <span class="nb">print</span><span class="p">(</span><span class="n">formatString</span> <span class="o">%</span> <span class="p">(</span><span class="n">evalgx</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">()</span>      </div>
 
-<div class="viewcode-block" id="PerformanceTableau.saveCSV"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.saveCSV">[docs]</a>    <span class="k">def</span> <span class="nf">saveCSV</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;tempPerfTab&#39;</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="PerformanceTableau.saveCSV"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.saveCSV">[docs]</a>    <span class="k">def</span> <span class="nf">saveCSV</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;tempPerfTab&#39;</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">criteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;1</span>
 <span class="sd">        Store the performance Tableau self Actions x Criteria in CSV format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1765,10 +1768,11 @@
         <span class="n">fileNameExt</span> <span class="o">=</span> <span class="n">fileName</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span>        
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*Storing performance tableau in CSV format in file </span><span class="si">%s</span><span class="s1">&#39;</span>\
               <span class="o">%</span> <span class="n">fileNameExt</span><span class="p">)</span>
-        <span class="n">criteriaList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">dict</span><span class="o">.</span><span class="n">keys</span><span class="p">(</span><span class="n">criteria</span><span class="p">))</span>
-        <span class="k">if</span> <span class="nb">sorted</span><span class="p">:</span>
-            <span class="n">criteriaList</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">criteriaList</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">criteriaList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">criteriaList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">dict</span><span class="o">.</span><span class="n">keys</span><span class="p">(</span><span class="n">criteria</span><span class="p">))</span>
+            <span class="k">if</span> <span class="nb">sorted</span><span class="p">:</span>
+                <span class="n">criteriaList</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="n">ng</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">criteriaList</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">criteriaList</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">actionsList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
@@ -1779,24 +1783,30 @@
             <span class="n">actionsList</span> <span class="o">=</span> <span class="n">flatten</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)</span>
+        <span class="n">na</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)</span>
         <span class="n">formatStr</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%%</span><span class="s1">.%.df&#39;</span> <span class="o">%</span> <span class="n">ndigits</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;formatString:&#39;</span><span class="p">,</span><span class="n">formatStr</span><span class="p">)</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileNameExt</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
         <span class="c1">## header row</span>
-        <span class="n">writeStr</span> <span class="o">=</span> <span class="s1">&#39;&quot;actions&quot;,&#39;</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-            <span class="n">writeStr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%s</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="n">criteriaList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="n">writeStr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%s</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">criteriaList</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">writeStr</span> <span class="o">=</span> <span class="s1">&#39;&quot;criteria&quot;,&quot;name&quot;,&quot;weight&quot;,&quot;scale&quot;,&quot;thresholds&quot;,&#39;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">na</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">writeStr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%s</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="n">actionsList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">writeStr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%s</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">actionsList</span><span class="p">[</span><span class="n">na</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">writeStr</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">writeStr</span><span class="p">)</span>
         <span class="c1">## writing performance data</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionsList</span><span class="p">:</span>
-            <span class="n">writeStr</span> <span class="o">=</span> <span class="s1">&#39;&quot;</span><span class="si">%s</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="n">x</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-                <span class="n">writeStr</span> <span class="o">+=</span> <span class="n">formatStr</span> <span class="o">%</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">criteriaList</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="n">x</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span>
-            <span class="n">writeStr</span> <span class="o">+=</span> <span class="n">formatStr</span> <span class="o">%</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">criteriaList</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]][</span><span class="n">x</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="p">:</span>
+            <span class="n">writeStr</span> <span class="o">=</span> <span class="s1">&#39;&quot;</span><span class="si">%s</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="n">g</span>
+            <span class="n">writeStr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%s</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
+            <span class="n">writeStr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%s</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
+            <span class="n">writeStr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%s</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">])</span>
+            <span class="n">writeStr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%s</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">])</span>
+            <span class="n">writeStr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%s</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;thresholds&#39;</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">na</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">writeStr</span> <span class="o">+=</span> <span class="n">formatStr</span> <span class="o">%</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">actionsList</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span>
+            <span class="n">writeStr</span> <span class="o">+=</span> <span class="n">formatStr</span> <span class="o">%</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">actionsList</span><span class="p">[</span><span class="n">na</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">writeStr</span><span class="p">)</span>
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">writeStr</span><span class="p">)</span>
@@ -1967,7 +1977,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert the performance table .__dict__ into a JSON string</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">,</span><span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">_DecimalJSONEncoder</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">,</span><span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">cls</span><span class="o">=</span><span class="n">_DecimalJSONEncoder</span><span class="p">)</span></div>
 
 
 <span class="c1">######################################################################################################################</span>
@@ -7238,9 +7248,67 @@
         
         <span class="bp">self</span><span class="o">.</span><span class="n">weightPreorder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeWeightPreorder</span><span class="p">()</span></div>
 
+<span class="c1">###########</span>
+<div class="viewcode-block" id="CSVPerformanceTableau"><a class="viewcode-back" href="../techDoc.html#perfTabs.CSVPerformanceTableau">[docs]</a><span class="k">class</span> <span class="nc">CSVPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reading stored CSV encoded actions x criteria PerformanceTableau instances, Using the inbuilt module csv.</span>
+
+<span class="sd">    Param:</span>
+<span class="sd">        fileName (without the extension .csv).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">csv</span> <span class="k">import</span> <span class="n">reader</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">fileNameExt</span> <span class="o">=</span> <span class="n">fileName</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span>
+            <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileNameExt</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+            <span class="n">csvReader</span> <span class="o">=</span> <span class="n">reader</span><span class="p">(</span><span class="n">fi</span><span class="p">)</span>
+            <span class="n">csvText</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">csvReader</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">,</span><span class="n">csvText</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: File </span><span class="si">%s</span><span class="s2">.csv not found !!&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">fileName</span><span class="p">))</span>
+            
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">fileName</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reference</span> <span class="o">=</span> <span class="s1">&#39;CSV PerformanceTableau input method.&#39;</span>
+        <span class="c1"># actions dictionary</span>
+        <span class="n">na</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">csvText</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">-</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">na</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="n">na</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">csvText</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="n">csvText</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">],{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="n">csvText</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="s1">&#39;comment&#39;</span><span class="p">:</span><span class="s1">&#39;potential decision action&#39;</span><span class="p">})</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="n">na</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span>
+
+        <span class="c1"># criteria dictionary</span>
+        <span class="n">ng</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">csvText</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">ng</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">csvText</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="n">csvText</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">],{</span><span class="s1">&#39;comment&#39;</span><span class="p">:</span><span class="s1">&#39;performance criteria&#39;</span><span class="p">})</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">ng</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span>
+
+        <span class="c1"># criteria characteristics</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">ng</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">g</span> <span class="o">=</span> <span class="n">csvText</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">csvText</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>          
+            <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">csvText</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">csvText</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">3</span><span class="p">])</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">csvText</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">4</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;thresholds&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">csvText</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">5</span><span class="p">])</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">])</span>
+ 
+        <span class="c1"># evaluation tableaut.ev</span>
+        <span class="n">evaluation</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">ng</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">evaluation</span><span class="p">[</span><span class="n">csvText</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="n">na</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">evaluation</span><span class="p">[</span><span class="n">csvText</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]][</span><span class="n">csvText</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">csvText</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">evaluation</span></div>
+
+           
+            
 
 <span class="c1">#----------test Digraph class ----------------</span>
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     
     <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="o">*</span>
     <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
@@ -7254,13 +7322,19 @@
 
 <span class="c1">##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=(&#39;triangular&#39;,30.0,0.7))</span>
     <span class="c1">## t.showStatistics()</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-                                   <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
+                                   <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span>
                                    <span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span>
                                    <span class="n">integerWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                    <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
                                    <span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">saveCSV</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">CSVPerformanceTableau</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">__dict__</span><span class="p">)</span>
+    <span class="n">T</span><span class="o">.</span><span class="n">showActions</span><span class="p">()</span>
+    <span class="n">T</span><span class="o">.</span><span class="n">showCriteria</span><span class="p">()</span>
+    <span class="n">T</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="c1">##    for g in t.criteria:</span>
 <span class="c1">##        t._computeLimitingQuantiles(g,frequencies=[0.0,0.25,0.5,0.75,1.0],LowerClosed=False,Debug=False)</span>
 <span class="c1">##    t.saveXMCDA2(&#39;test&#39;)</span>
@@ -7412,7 +7486,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2012-2018, Raymond Bisdorff.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
     </div>
   </body>
 </html>
