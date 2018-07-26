@@ -1752,6 +1752,7 @@ The performance evaluations of each decision alternative on each criterion are g
             writeStr += '"%s",' % str(self.criteria[g]['name'])
             writeStr += '"%s",' % self.criteria[g]['weight']
             writeStr += '"%s",' % str(self.criteria[g]['scale'])
+            writeStr += '"%s",' % str(self.criteria[g]['preferenceDirection'])
             writeStr += '"%s",' % str(self.criteria[g]['thresholds'])
             for i in range(na-1):
                 writeStr += formatStr % evaluation[g][actionsList[i]] + ','
@@ -7225,34 +7226,35 @@ class CSVPerformanceTableau(PerformanceTableau):
         na = len(csvText[0])-1
         if Debug:
             print(na)
-        for i in range(5,na+1):
+        for i in range(6,na+1):
             print(i,csvText[0][i])
-        self.actions = OrderedDict([(csvText[0][i],{'name':csvText[0][i],'comment':'potential decision action'}) for i in range(5,na+1)])
+        self.actions = OrderedDict([(csvText[0][i],{'name':csvText[0][i],'comment':'potential decision action'}) for i in range(6,na+1)])
 
         # criteria dictionary
         ng = len(csvText)-1
         for j in range(1,ng+1):
             print(j,csvText[j][0])
-        self.criteria = OrderedDict([(csvText[j][0],{'name':csvText[j][0],'comment':'performance criteria'}) for j in range(1,ng+1)])
+        self.criteria = OrderedDict([(csvText[j][0],{'comment':'performance criteria'}) for j in range(1,ng+1)])
 
-        # evaluation tableaut.ev
-        evaluation = {}
-        for j in range(1,ng+1):
-            evaluation[csvText[j][0]] = {}
-            for i in range(5,na+1):
-                evaluation[csvText[j][0]][csvText[0][i]] = Decimal(csvText[j][i])
-        
-        self.evaluation = evaluation
-
-        # scales
+        # criteria characteristics
         for j in range(1,ng+1):
             g = csvText[j][0]
             self.criteria[g]['name']  = csvText[j][1]          
             self.criteria[g]['weight']  = Decimal(csvText[j][2])
-            self.criteria[g]['scale']  = eval(csvText[j][3])
-            self.criteria[g]['thresholds']  = eval(csvText[j][4])
+            self.criteria[g]['scale']  = eval(csvText[j][3]) 
+            self.criteria[g]['preferenceDirection'] = csvText[j][4]
+            self.criteria[g]['thresholds']  = eval(csvText[j][5])
             print(self.criteria[g])
-            
+ 
+        # evaluation tableaut.ev
+        evaluation = {}
+        for j in range(1,ng+1):
+            evaluation[csvText[j][0]] = {}
+            for i in range(6,na+1):
+                evaluation[csvText[j][0]][csvText[0][i]] = Decimal(csvText[j][i])
+        self.evaluation = evaluation
+
+           
             
 
 #----------test Digraph class ----------------

@@ -117,7 +117,43 @@ def testSparseModelFitness():
     statistics['correlation'] /= Nsim
     statistics['determination'] /= Nsim
     print(statistics)
-    
+
+def testcQuantilesRankingFitness():
+    print('==>> Testing cQuantilesRanking fitness')
+    MP = True
+    Nsim = 2
+    nbrOfActions = 300
+    nbrOfCriteria = 13
+    qTiles = 25
+    minimalComponentSize=1
+    fileName = 'res3Obj%d.csv' % nbrOfActions
+    fo = open(fileName,'w')
+    fo.write('"c","d"\n')
+    fo.close()
+    statistics = {'correlation': 0.0, 'determination': 0.0}
+    for s in range(Nsim):
+        print(s)
+        tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrOfActions,numberOfCriteria=nbrOfCriteria)
+        tp.showObjectives()
+        bg1 = cQuantilesRankingDigraph(tp,quantiles=qTiles,quantilesOrderingStrategy='average',
+                                LowerClosed=False,
+                                CopyPerfTab=True,
+                               minimalComponentSize=minimalComponentSize,
+                                    Threading=MP,Debug=False)
+        bg2 = cQuantilesRankingDigraph(tp,quantiles=qTiles,quantilesOrderingStrategy='average',
+                                LowerClosed=False,
+                               minimalComponentSize=nbrOfActions,
+                                    Threading=MP,Comments=False,Debug=False)
+        corr = bg1.computeOrdinalCorrelation(bg2,Debug=False)
+        fo = open(fileName,'a')
+        fo.write('%.3f,%.3f\n' %(corr['correlation'],corr['determination']))
+        fo.close()
+        statistics['correlation'] += corr['correlation']
+        statistics['determination'] += corr['determination']
+    statistics['correlation'] /= Nsim
+    statistics['determination'] /= Nsim
+    print(statistics)
+
         
         
 
