@@ -1739,7 +1739,7 @@ The performance evaluations of each decision alternative on each criterion are g
             print('formatString:',formatStr)
         fo = open(fileNameExt,'w')
         ## header row
-        writeStr = '"criteria","name","weight","scale","thresholds",'
+        writeStr = '"criteria","name","weight","scale","prefDir","thresholds",'
         for i in range(na-1):
             writeStr += '"%s",' % actionsList[i]
         writeStr += '"%s"\n' % actionsList[na-1]
@@ -7278,13 +7278,19 @@ if __name__ == "__main__":
                                    integerWeights=True,
                                    Debug=False,
                                    missingDataProbability=0.1,
-                                   seed=100,Threading=False)
+                                   seed=101,Threading=False)
     t.saveCSV('test')
     T = CSVPerformanceTableau('test',Debug=True)
     print(T.__dict__)
     T.showActions()
     T.showCriteria()
-    T.showHTMLPerformanceHeatmap(Correlations=True)
+#    T.showHTMLPerformanceHeatmap(Correlations=True)
+    from outrankingDigraphs import *
+    g = BipolarOutrankingDigraph(t)
+    gt = BipolarOutrankingDigraph(T)
+    g.showRubisBestChoiceRecommendation()
+    gt.showRubisBestChoiceRecommendation()
+    
 ##    for g in t.criteria:
 ##        t._computeLimitingQuantiles(g,frequencies=[0.0,0.25,0.5,0.75,1.0],LowerClosed=False,Debug=False)
 ##    t.saveXMCDA2('test')
