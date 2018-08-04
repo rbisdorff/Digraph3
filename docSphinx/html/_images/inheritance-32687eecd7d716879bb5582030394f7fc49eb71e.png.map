@@ -1,0 +1,9 @@
+<map id="inheritancee813425653" name="inheritancee813425653">
+<area shape="rect" id="node1" href="#perfTabs.CSVPerformanceTableau" target="_top" title="Reading stored CSV encoded actions x criteria PerformanceTableau instances, Using the inbuilt module csv." alt="" coords="273,5,499,29"/>
+<area shape="rect" id="node2" href="#perfTabs.PerformanceTableau" target="_top" title="In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` class provides a generic **performance table model**. A given object of this class consists in:" alt="" coords="5,125,205,149"/>
+<area shape="rect" id="node3" href="#perfTabs.ConstantPerformanceTableau" target="_top" title="Constructor for (partially) constant performance tableaux." alt="" coords="260,53,512,77"/>
+<area shape="rect" id="node4" href="#perfTabs.EmptyPerformanceTableau" target="_top" title="Template for PerformanceTableau objects." alt="" coords="267,101,504,125"/>
+<area shape="rect" id="node5" href="#perfTabs.NormalizedPerformanceTableau" target="_top" title="specialsation of the PerformanceTableau class for" alt="" coords="253,149,519,173"/>
+<area shape="rect" id="node6" href="#perfTabs.PartialPerformanceTableau" target="_top" title="Constructor for partial performance tableaux concerning a subset of actions and/or criteria and/or objectives" alt="" coords="267,197,504,221"/>
+<area shape="rect" id="node7" href="#perfTabs.XMCDA2PerformanceTableau" target="_top" title="Specialization of the general PerformanceTableau class for reading" alt="" coords="258,245,513,269"/>
+</map>
