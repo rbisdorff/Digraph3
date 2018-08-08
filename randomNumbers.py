@@ -273,12 +273,24 @@ class QuasiRandomKorobovSequence():
         3 0.365950 0.741600 0.703594
         4 0.875964 0.551028 0.714627
         5 0.685392 0.562061 0.940304
+        > library('lattice')
+        > cloud(x$x3 ~ x$x1 + x$x2)
         > plot(x$x1,x$x2,pch='°')
+        > plot(x$x1,x$x3,pch="°")
 
+    .. image:: korobov3D.png
+        :alt: Checking projection regularity
+        :width: 500 px
+        :align: center
 
     .. image:: korobovProjection12.png
         :alt: Checking projection regularity
-        :width: 500 px
+        :width: 400 px
+        :align: center
+
+    .. image:: korobovProjection13.png
+        :alt: Checking projection regularity
+        :width: 400 px
         :align: center
 
     """
