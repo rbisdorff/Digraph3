@@ -240,44 +240,49 @@ class CauchyRandomVariable():
 #----------
 class QuasiRandomKorobovSequence():
     """
-Constructor for rendering a Korobov sequence of dimension *s* and length *n* which is *fully projection regular* in the s-dimensional real-valued [0,1)^s hypercube. The constructor uses a MLCG generator with full period.The sequence is stored in self.sequence and in a csv file.
-Chr. Lemieux, Monte Carlo and quasi Monte Carlo Sampling Fig. 5.12 p. 176
+    Constructor for rendering a Korobov sequence of dimension *s* and length *n* which is *fully projection regular* in the s-dimensional real-valued [0,1)^s hypercube. The constructor uses a MLCG generator with full period.The sequence is stored in self.sequence and in a csv file.
 
-*Parameters*:
-     * n : (default=997) number of Korobov points and modulus of the underlying MLCG
-     * s : (default=3) dimension of the hypercube
-     * Randomized : (default=False) if needed the sequence may be randomly shifted to avoid cycles.
-     * a : (default=383) MLCG coefficient (0 < a < n), primitive with n
-     fileName: (default='korobov') name (without the csv suffix) of the stored result. 
+    *Source*: Chr. Lemieux, Monte Carlo and quasi Monte Carlo Sampling Springer 2009 Fig. 5.12 p. 176.
 
-Sample Python session:
-    >>> from randomNumbers import QuasiRandomKorobovSequence
-    >>> kor = QuasiRandomKorobovSequence(Debug=True)
-    0 [0.0, 0.0, 0.0]
-    1 [0.13536725313948247, 0.23158619430934912, 0.8941657924971758]
-    2 [0.36595043842175035, 0.7415995294344084, 0.7035940773517395]
-    3 [0.8759637735468097, 0.5510278142889722, 0.714627176649633]
-    4 [0.6853920584013734, 0.5620609135868657, 0.9403042077429129]
-    5 [0.6964251576992669, 0.7877379446801456, 0.3746071164690914]
+    *Parameters*:
 
-The resulting Korobov sequence may be inspected in an R session::
-    > x = read.csv('korobov.csv')
-    > x[1:5,]
-        x1       x2       x3
-    1 0.000000 0.000000 0.000000
-    2 0.135367 0.231586 0.894166
-    3 0.365950 0.741600 0.703594
-    4 0.875964 0.551028 0.714627
-    5 0.685392 0.562061 0.940304
-    > plot(x$x1,x$x2,pch='°')
+        * n : (default=997) number of Korobov points and modulus of the underlying MLCG
+        * s : (default=3) dimension of the hypercube
+        * Randomized : (default=True) the sequence is randomly shifted (mod 1) to avoid cycling.
+        * a : (default=383) MLCG coefficient (0 < a < n), primitive with n
+        * fileName: (default='korobov') name (without the csv suffix) of the stored result. 
 
-.. image:: korobovProjection.png
+    Sample Python session:
+
+        >>> from randomNumbers import QuasiRandomKorobovSequence
+        >>> kor = QuasiRandomKorobovSequence(Debug=True)
+        0 [0.0, 0.0, 0.0]
+        1 [0.13536725313948247, 0.23158619430934912, 0.8941657924971758]
+        2 [0.36595043842175035, 0.7415995294344084, 0.7035940773517395]
+        3 [0.8759637735468097, 0.5510278142889722, 0.714627176649633]
+        4 [0.6853920584013734, 0.5620609135868657, 0.9403042077429129]
+        5 [0.6964251576992669, 0.7877379446801456, 0.3746071164690914]
+
+    The resulting Korobov sequence may be inspected in an R session::
+
+        > x = read.csv('korobov.csv')
+        > x[1:5,]
+        >    x1       x2       x3
+        1 0.000000 0.000000 0.000000
+        2 0.135367 0.231586 0.894166
+        3 0.365950 0.741600 0.703594
+        4 0.875964 0.551028 0.714627
+        5 0.685392 0.562061 0.940304
+        > plot(x$x1,x$x2,pch='°')
+
+
+    .. image:: korobovProjection12.png
         :alt: Checking projection regularity
         :width: 500 px
         :align: center
 
-    
     """
+    
     def __init__(self,n=997, s=3, a=383, Randomized=True, fileName='korobov',Debug=False):
         # storing parameters
         self.n = n

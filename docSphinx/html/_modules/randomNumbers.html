@@ -290,17 +290,50 @@
 <span class="c1">#----------</span>
 <div class="viewcode-block" id="QuasiRandomKorobovSequence"><a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomKorobovSequence">[docs]</a><span class="k">class</span> <span class="nc">QuasiRandomKorobovSequence</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Constructor for rendering a Korobov sequence of dimension *s* and length *n* which is *fully projection regular* in the s-dimensional real-valued [0,1)^s hypercube. The constructor uses a MLCG generator with full period.The sequence is stored in self.sequence and in a csv file.</span>
-<span class="sd">Chr. Lemieux, Monte Carlo and quasi Monte Carlo Sampling Fig. 5.12 p. 176</span>
+<span class="sd">    Constructor for rendering a Korobov sequence of dimension *s* and length *n* which is *fully projection regular* in the s-dimensional real-valued [0,1)^s hypercube. The constructor uses a MLCG generator with full period.The sequence is stored in self.sequence and in a csv file.</span>
 
-<span class="sd">*Parameters*:</span>
-<span class="sd">     n : (default=197) number of Korobov points and modulus of the underlying MLCG</span>
-<span class="sd">     s : (default=3) dimension of the hypercube</span>
-<span class="sd">     Randomized : (default=False) if needed the sequence may be randomly shifted to avoid cycles.</span>
-<span class="sd">     a : magic coefficient (0 &lt; a &lt; n) of the MLCG</span>
-<span class="sd">     fileName: (default=&#39;korobov&#39;) name (without the csv suffix) of the stored result. </span>
+<span class="sd">    *Source*: Chr. Lemieux, Monte Carlo and quasi Monte Carlo Sampling Springer 2009 Fig. 5.12 p. 176.</span>
+
+<span class="sd">    *Parameters*:</span>
+
+<span class="sd">        * n : (default=997) number of Korobov points and modulus of the underlying MLCG</span>
+<span class="sd">        * s : (default=3) dimension of the hypercube</span>
+<span class="sd">        * Randomized : (default=True) the sequence is randomly shifted (mod 1) to avoid cycling.</span>
+<span class="sd">        * a : (default=383) MLCG coefficient (0 &lt; a &lt; n), primitive with n</span>
+<span class="sd">        * fileName: (default=&#39;korobov&#39;) name (without the csv suffix) of the stored result. </span>
+
+<span class="sd">    Sample Python session:</span>
+
+<span class="sd">        &gt;&gt;&gt; from randomNumbers import QuasiRandomKorobovSequence</span>
+<span class="sd">        &gt;&gt;&gt; kor = QuasiRandomKorobovSequence(Debug=True)</span>
+<span class="sd">        0 [0.0, 0.0, 0.0]</span>
+<span class="sd">        1 [0.13536725313948247, 0.23158619430934912, 0.8941657924971758]</span>
+<span class="sd">        2 [0.36595043842175035, 0.7415995294344084, 0.7035940773517395]</span>
+<span class="sd">        3 [0.8759637735468097, 0.5510278142889722, 0.714627176649633]</span>
+<span class="sd">        4 [0.6853920584013734, 0.5620609135868657, 0.9403042077429129]</span>
+<span class="sd">        5 [0.6964251576992669, 0.7877379446801456, 0.3746071164690914]</span>
+
+<span class="sd">    The resulting Korobov sequence may be inspected in an R session::</span>
+
+<span class="sd">        &gt; x = read.csv(&#39;korobov.csv&#39;)</span>
+<span class="sd">        &gt; x[1:5,]</span>
+<span class="sd">        &gt;    x1       x2       x3</span>
+<span class="sd">        1 0.000000 0.000000 0.000000</span>
+<span class="sd">        2 0.135367 0.231586 0.894166</span>
+<span class="sd">        3 0.365950 0.741600 0.703594</span>
+<span class="sd">        4 0.875964 0.551028 0.714627</span>
+<span class="sd">        5 0.685392 0.562061 0.940304</span>
+<span class="sd">        &gt; plot(x$x1,x$x2,pch=&#39;°&#39;)</span>
+
+
+<span class="sd">    .. image:: korobovProjection12.png</span>
+<span class="sd">        :alt: Checking projection regularity</span>
+<span class="sd">        :width: 500 px</span>
+<span class="sd">        :align: center</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">197</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">37</span><span class="p">,</span> <span class="n">Randomized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;korobov&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">997</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">383</span><span class="p">,</span> <span class="n">Randomized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;korobov&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="c1"># storing parameters</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">s</span> <span class="o">=</span> <span class="n">s</span>
@@ -316,7 +349,7 @@
             <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">sd</span><span class="p">)</span>
             <span class="n">v</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">)]</span>
         <span class="c1"># storing the simulated point set</span>
-        <span class="n">sequence</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">sequence</span> <span class="o">=</span> <span class="p">[]</span> 
         <span class="n">fileName</span> <span class="o">+=</span> <span class="s1">&#39;.csv&#39;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fo</span><span class="p">:</span>
             <span class="c1"># csv header row</span>
@@ -327,7 +360,7 @@
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">wstr</span><span class="p">)</span>
             <span class="c1"># start point set at origin</span>
             <span class="n">u</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">)]</span>
-            <span class="n">sequence</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+            <span class="n">sequence</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">tuple</span><span class="p">(</span><span class="n">u</span><span class="p">)))</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">u</span><span class="p">)</span>
             <span class="n">wstr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
@@ -345,7 +378,7 @@
                 <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
                     <span class="n">z</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
                     <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
-            <span class="n">sequence</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+            <span class="n">sequence</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">tuple</span><span class="p">(</span><span class="n">u</span><span class="p">)))</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">u</span><span class="p">)</span>
             <span class="n">wstr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
@@ -364,7 +397,7 @@
                     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
                         <span class="n">z</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
                         <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
-                <span class="n">sequence</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+                <span class="n">sequence</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">tuple</span><span class="p">(</span><span class="n">u</span><span class="p">)))</span>
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">u</span><span class="p">)</span>
                 <span class="n">wstr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
