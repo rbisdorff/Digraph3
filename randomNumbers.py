@@ -244,13 +244,41 @@ Constructor for rendering a Korobov sequence of dimension *s* and length *n* whi
 Chr. Lemieux, Monte Carlo and quasi Monte Carlo Sampling Fig. 5.12 p. 176
 
 *Parameters*:
-     n : (default=197) number of Korobov points and modulus of the underlying MLCG
-     s : (default=3) dimension of the hypercube
-     Randomized : (default=False) if needed the sequence may be randomly shifted to avoid cycles.
-     a : magic coefficient (0 < a < n) of the MLCG
+     * n : (default=997) number of Korobov points and modulus of the underlying MLCG
+     * s : (default=3) dimension of the hypercube
+     * Randomized : (default=False) if needed the sequence may be randomly shifted to avoid cycles.
+     * a : (default=383) MLCG coefficient (0 < a < n), primitive with n
      fileName: (default='korobov') name (without the csv suffix) of the stored result. 
+
+Sample Python session:
+    >>> from randomNumbers import QuasiRandomKorobovSequence
+    >>> kor = QuasiRandomKorobovSequence(Debug=True)
+    0 [0.0, 0.0, 0.0]
+    1 [0.13536725313948247, 0.23158619430934912, 0.8941657924971758]
+    2 [0.36595043842175035, 0.7415995294344084, 0.7035940773517395]
+    3 [0.8759637735468097, 0.5510278142889722, 0.714627176649633]
+    4 [0.6853920584013734, 0.5620609135868657, 0.9403042077429129]
+    5 [0.6964251576992669, 0.7877379446801456, 0.3746071164690914]
+
+The resulting Korobov sequence may be inspected in an R session::
+    > x = read.csv('korobov.csv')
+    > x[1:5,]
+        x1       x2       x3
+    1 0.000000 0.000000 0.000000
+    2 0.135367 0.231586 0.894166
+    3 0.365950 0.741600 0.703594
+    4 0.875964 0.551028 0.714627
+    5 0.685392 0.562061 0.940304
+    > plot(x$x1,x$x2,pch='°')
+
+.. image:: korobovProjection.png
+        :alt: Checking projection regularity
+        :width: 500 px
+        :align: center
+
+    
     """
-    def __init__(self,n=197, s=3, a=37, Randomized=False, fileName='korobov',Debug=False):
+    def __init__(self,n=997, s=3, a=383, Randomized=True, fileName='korobov',Debug=False):
         # storing parameters
         self.n = n
         self.s = s
@@ -266,7 +294,7 @@ Chr. Lemieux, Monte Carlo and quasi Monte Carlo Sampling Fig. 5.12 p. 176
             random.seed(sd)
             v = [random.random() for j in range(s)]
         # storing the simulated point set
-        sequence = []
+        sequence = [] 
         fileName += '.csv'
         with open(fileName,'w') as fo:
             # csv header row
@@ -277,7 +305,7 @@ Chr. Lemieux, Monte Carlo and quasi Monte Carlo Sampling Fig. 5.12 p. 176
             fo.write(wstr)
             # start point set at origin
             u = [0.0 for j in range(s)]
-            sequence.append(u)
+            sequence.append((tuple(u)))
             if Debug:
                 print(0,u)
             wstr = ''
@@ -295,7 +323,7 @@ Chr. Lemieux, Monte Carlo and quasi Monte Carlo Sampling Fig. 5.12 p. 176
                 for j in range(s):
                     z = u[j] + v[j]
                     u[j] = z - int(z)
-            sequence.append(u)
+            sequence.append((tuple(u)))
             if Debug:
                 print(1,u)
             wstr = ''
@@ -314,7 +342,7 @@ Chr. Lemieux, Monte Carlo and quasi Monte Carlo Sampling Fig. 5.12 p. 176
                     for j in range(s):
                         z = u[j] + v[j]
                         u[j] = z - int(z)
-                sequence.append(u)
+                sequence.append((tuple(u)))
                 if Debug:
                     print(i,u)
                 wstr = ''
