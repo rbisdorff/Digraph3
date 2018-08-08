@@ -1680,7 +1680,7 @@ Returns a boolean value</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.digraph2Graph">
-<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'max': 1</em>, <em>'med': 0}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.digraph2Graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
+<code class="descname">digraph2Graph</code><span class="sig-paren">(</span><em>valuationDomain={'min': -1</em>, <em>'med': 0</em>, <em>'max': 1}</em>, <em>Debug=False</em>, <em>conjunctiveConversion=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.digraph2Graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.digraph2Graph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Digraph instance to a Graph instance.</p>
 </dd></dl>
 
@@ -4087,7 +4087,7 @@ the quantiles matrix action x criterion</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">
-<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.computeDefaultDiscriminationThresholds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeDefaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>criteriaList=None</em>, <em>quantile={'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.computeDefaultDiscriminationThresholds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.
 Parameters: quantile = {&#8216;ind&#8217;: 10, &#8216;pref&#8217;: 20, &#8216;weakVeto&#8217;: 60, &#8216;veto: 80}.</p>
@@ -5280,7 +5280,7 @@ vetos = {&#8216;all&#8217;: n0, &#8216;strong: n1, &#8216;weak&#8217;:n2}.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds">
-<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'pref': 20</em>, <em>'ind': 10</em>, <em>'veto': 80</em>, <em>'weakVeto': 60}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#OutrankingDigraph.defaultDiscriminationThresholds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
+<code class="descname">defaultDiscriminationThresholds</code><span class="sig-paren">(</span><em>quantile={'weakVeto': 60</em>, <em>'pref': 20</em>, <em>'veto': 80</em>, <em>'ind': 10}</em>, <em>Debug=False</em>, <em>comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#OutrankingDigraph.defaultDiscriminationThresholds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.defaultDiscriminationThresholds" title="Permalink to this definition">¶</a></dt>
 <dd><p>updates the discrimination thresholds with the percentiles
 from the performance differences.</p>
 <dl class="docutils">
@@ -7888,6 +7888,22 @@ disjunctive fusion (omax operator) of a list of rankings.</p>
 <dd><p>generating an extended triangular random number.</p>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="class">
+<dt id="randomNumbers.QuasiRandomKorobovSequence">
+<em class="property">class </em><code class="descclassname">randomNumbers.</code><code class="descname">QuasiRandomKorobovSequence</code><span class="sig-paren">(</span><em>n=197</em>, <em>s=3</em>, <em>a=37</em>, <em>Randomized=False</em>, <em>fileName='korobov'</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#QuasiRandomKorobovSequence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.QuasiRandomKorobovSequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Constructor for rendering a Korobov sequence of dimension <em>s</em> and length <em>n</em> which is <em>fully projection regular</em> in the s-dimensional real-valued [0,1)^s hypercube. The constructor uses a MLCG generator with full period.The sequence is stored in self.sequence and in a csv file.
+Chr. Lemieux, Monte Carlo and quasi Monte Carlo Sampling Fig. 5.12 p. 176</p>
+<dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd>n : (default=197) number of Korobov points and modulus of the underlying MLCG
+s : (default=3) dimension of the hypercube
+Randomized : (default=False) if needed the sequence may be randomly shifted to avoid cycles.
+a : magic coefficient (0 &lt; a &lt; n) of the MLCG
+fileName: (default=&#8217;korobov&#8217;) name (without the csv suffix) of the stored result.</dd>
+</dl>
 </dd></dl>
 
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
