@@ -18,7 +18,7 @@
 #
 #######################
 
-__version__ = "Branch: 3.4 $"
+__version__ = "Branch: 3.6 $"
 # ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
 
 class DiscreteRandomVariable():
@@ -237,106 +237,197 @@ class CauchyRandomVariable():
 
         return randeval
             
+#----------
+class QuasiRandomKorobovSequence():
+    """
+Constructor for rendering a Korobov sequence of dimension *s* and length *n* which is *fully projection regular* in the s-dimensional real-valued [0,1)^s hypercube. The constructor uses a MLCG generator with full period.The sequence is stored in self.sequence and in a csv file.
+Chr. Lemieux, Monte Carlo and quasi Monte Carlo Sampling Fig. 5.12 p. 176
 
+*Parameters*:
+     n : (default=197) number of Korobov points and modulus of the underlying MLCG
+     s : (default=3) dimension of the hypercube
+     Randomized : (default=False) if needed the sequence may be randomly shifted to avoid cycles.
+     a : magic coefficient (0 < a < n) of the MLCG
+     fileName: (default='korobov') name (without the csv suffix) of the stored result. 
+    """
+    def __init__(self,n=197, s=3, a=37, Randomized=False, fileName='korobov',Debug=False):
+        # storing parameters
+        self.n = n
+        self.s = s
+        self.a = a
+        self.Randomized = Randomized
+        self.fileName = fileName
+        # float casting
+        nf = float(n)
+        # randomization
+        if Randomized:
+            import random
+            sd = 1
+            random.seed(sd)
+            v = [random.random() for j in range(s)]
+        # storing the simulated point set
+        sequence = []
+        fileName += '.csv'
+        with open(fileName,'w') as fo:
+            # csv header row
+            wstr = ''
+            for j in range(s-1):
+                wstr += '"x%d",' % (j+1)
+            wstr += '"x%d"\n' % (s)
+            fo.write(wstr)
+            # start point set at origin
+            u = [0.0 for j in range(s)]
+            sequence.append(u)
+            if Debug:
+                print(0,u)
+            wstr = ''
+            for j in range(s-1):
+                wstr += '"%f",' % u[j]
+            wstr += '"%f"\n' % u[j-1]
+            fo.write(wstr)
+            # first s-dimensional point with a full period MLCG
+            x = 1.0
+            u[0] = x/nf
+            for j in range(1,s):
+                x = (divmod(a*x,n))[1]
+                u[j] = x/nf
+            if Randomized:
+                for j in range(s):
+                    z = u[j] + v[j]
+                    u[j] = z - int(z)
+            sequence.append(u)
+            if Debug:
+                print(1,u)
+            wstr = ''
+            for j in range(s-1):
+                wstr += '"%f",' % u[j]
+            wstr += '"%f"\n' % u[s-1]
+            fo.write(wstr)
+            # all the following points
+            for i in range(2,n):
+                #shuffle(u)
+                for j in range(s-1):
+                    u[j] = u[j+1] # << 1
+                x = (divmod(a*x,n))[1]
+                u[s-1] = x/nf
+                if Randomized:
+                    for j in range(s):
+                        z = u[j] + v[j]
+                        u[j] = z - int(z)
+                sequence.append(u)
+                if Debug:
+                    print(i,u)
+                wstr = ''
+                for j in range(s-1):
+                    wstr += '"%f",' % (u[j])
+                wstr += '"%f"\n' % (u[s-1])
+                fo.write(wstr)
+        self.sequence = sequence
+        
 #----------testing the code ----------------
 if __name__ == "__main__":    
-#------------  Discrete number generator
-    ## initialize the discrete random variable 
-    discreteLaw = {0:0.0478,
-                   1:0.3349,
-                   2:0.2392,
-                   3:0.1435,
-                   4:0.0957,
-                   5:0.0670,
-                   6:0.0478,
-                   7:0.0096,
-                   8:0.0096,
-                   9:0.0048,}
+# #------------  Discrete number generator
+#     ## initialize the discrete random variable 
+#     discreteLaw = {0:0.0478,
+#                    1:0.3349,
+#                    2:0.2392,
+#                    3:0.1435,
+#                    4:0.0957,
+#                    5:0.0670,
+#                    6:0.0478,
+#                    7:0.0096,
+#                    8:0.0096,
+#                    9:0.0048,}
 
-    ## initialze the random generator
-    rdv = DiscreteRandomVariable(discreteLaw,seed=1)
+#     ## initialze the random generator
+#     rdv = DiscreteRandomVariable(discreteLaw,seed=1)
     
-    ## sample discrete random variable and count frequencies of obtained values
-    sampleSize = 1000
-    frequencies = {}
-    for i in range(sampleSize):
-        x = rdv.random() 
-        try:
-            frequencies[x] += 1
-        except:
-            frequencies[x] = 1
+#     ## sample discrete random variable and count frequencies of obtained values
+#     sampleSize = 1000
+#     frequencies = {}
+#     for i in range(sampleSize):
+#         x = rdv.random() 
+#         try:
+#             frequencies[x] += 1
+#         except:
+#             frequencies[x] = 1
             
-    ## print results
-    results = [x for x in frequencies]
-    results.sort()
-    counts= 0.0
-    for x in results:
-        counts += frequencies[x]
-        print  ('%s, %d, %.3f, %.3f' % (x, frequencies[x],
-                                       float(frequencies[x])/float(sampleSize),
-                                       discreteLaw[x]))
-    print ('# of valid samples = %d' % counts)
+#     ## print results
+#     results = [x for x in frequencies]
+#     results.sort()
+#     counts= 0.0
+#     for x in results:
+#         counts += frequencies[x]
+#         print  ('%s, %d, %.3f, %.3f' % (x, frequencies[x],
+#                                        float(frequencies[x])/float(sampleSize),
+#                                        discreteLaw[x]))
+#     print ('# of valid samples = %d' % counts)
 
-#-------------- Extended triangular number generator
-    from math import floor
-    rdv1 = ExtendedTriangularRandomVariable(seed=1)
-    rdv2 = ExtendedTriangularRandomVariable(lowLimit=1,
-                                            highLimit=2,
-                                            mode=1.25,
-                                            probRepart=0.5,
-                                            seed=1)
+# #-------------- Extended triangular number generator
+#     from math import floor
+#     rdv1 = ExtendedTriangularRandomVariable(seed=1)
+#     rdv2 = ExtendedTriangularRandomVariable(lowLimit=1,
+#                                             highLimit=2,
+#                                             mode=1.25,
+#                                             probRepart=0.5,
+#                                             seed=1)
 
-    ## sample extTriangular random variable and count frequencies of obtained values
-    Nsim = 10**4
-    modulus = 128
-    frequencies = {}
-    freqKeys = [x for x in range(modulus*2)]
+#     ## sample extTriangular random variable and count frequencies of obtained values
+#     Nsim = 10**4
+#     modulus = 128
+#     frequencies = {}
+#     freqKeys = [x for x in range(modulus*2)]
     
-    for k in freqKeys:
-        frequencies[k] = {1:0,2:0}
+#     for k in freqKeys:
+#         frequencies[k] = {1:0,2:0}
 
-    fo = open('testTr.csv','w')
-    fo.write('"x1","x2"\n')
+#     fo = open('testTr.csv','w')
+#     fo.write('"x1","x2"\n')
 
-    for i in range(Nsim):
-        x1 = rdv1.random()
-        r1 = int(floor(x1*modulus))
-        x2 = rdv2.random()
-        fo.write('%.4f,%4f\n'%(x1,x2))
-        r2 = int(floor(x2*modulus))
-        frequencies[r1][1] += 1
-        frequencies[r2][2] += 1
+#     for i in range(Nsim):
+#         x1 = rdv1.random()
+#         r1 = int(floor(x1*modulus))
+#         x2 = rdv2.random()
+#         fo.write('%.4f,%4f\n'%(x1,x2))
+#         r2 = int(floor(x2*modulus))
+#         frequencies[r1][1] += 1
+#         frequencies[r2][2] += 1
 
-    fo.close()     
-    ## print results
-    print(frequencies)
-    results= [x for x in frequencies]
-    results.sort()
+#     fo.close()     
+#     ## print results
+#     print(frequencies)
+#     results= [x for x in frequencies]
+#     results.sort()
     
-    for x in results:
-        print('%s \t %d \t %.3f \t %d\t %.3f' % (x, frequencies[x][1],
-                                       float(frequencies[x][1])/float(Nsim),
-                                                 frequencies[x][2],
-                                       float(frequencies[x][2])/float(Nsim))
-              )
-    print('# of simulations = %d' % Nsim)
+#     for x in results:
+#         print('%s \t %d \t %.3f \t %d\t %.3f' % (x, frequencies[x][1],
+#                                        float(frequencies[x][1])/float(Nsim),
+#                                                  frequencies[x][2],
+#                                        float(frequencies[x][2])/float(Nsim))
+#               )
+#     print('# of simulations = %d' % Nsim)
 
-#-------------- Cauchy number generator
-    rdv3 = CauchyRandomVariable(seed=1)
-    rdv4 = CauchyRandomVariable(position=10.0,scale=5.0)
+# #-------------- Cauchy number generator
+#     rdv3 = CauchyRandomVariable(seed=1)
+#     rdv4 = CauchyRandomVariable(position=10.0,scale=5.0)
                 
-    ## sample Cauchy random variable and count frequencies of obtained values
-    Nsim = 10**4
-    modulus = 128
-    fo = open('testCauchy.csv','w')
-    fo.write('"x1","x2"\n')
+#     ## sample Cauchy random variable and count frequencies of obtained values
+#     Nsim = 10**4
+#     modulus = 128
+#     fo = open('testCauchy.csv','w')
+#     fo.write('"x1","x2"\n')
 
-    for i in range(Nsim):
-        x1 = rdv3.random()
-        x2 = rdv4.random()
-        fo.write('%.4f,%4f\n'%(x1,x2))
+#     for i in range(Nsim):
+#         x1 = rdv3.random()
+#         x2 = rdv4.random()
+#         fo.write('%.4f,%4f\n'%(x1,x2))
 
-    fo.close()     
-    print('# of Cauchy simulations = %d' % Nsim)
+#     fo.close()     
+#     print('# of Cauchy simulations = %d' % Nsim)
+
+#-------------- quasi random Korobov point sequence
+
+    kor = QuasiRandomKorobovSequence(Debug=True)
+    print(kor.sequence[:10])
 
 
