@@ -368,6 +368,33 @@ class QuasiRandomKorobovSequence():
                 wstr += '"%f"\n' % (u[s-1])
                 fo.write(wstr)
         self.sequence = sequence
+
+    def _testFct(self,buggyRegionLimits=[0.45,0.55],seq=None):
+        """
+        Tiny buggy hypercube for testing a quasi random Korobov 3D sequence.
+        """
+        s = self.s
+        buggyHypercube = {}
+        buggyHypercube.fromkeys(range(s), buggyRegionLimits)
+        print(buggyHypercube)
+        Bugs = 0
+        if seq == None:
+            seq = self.sequence
+        for x in seq:
+            for s in range(s):
+                if (x[s] >= buggyHypercube[s][0] and x[s] <= buggyHypercube[s][1]):
+                    BuggyPoint = True
+                else:
+                    BuggyPoint = False
+                    break
+            if BuggyPoint:
+                print('Bug:', x, bug)
+                Bugs += 1
+        if Bugs > 0:
+            return '%d bug(s) detected !!!' % Bugs
+        else:
+            return 'No bugs detected'
+        
         
 #----------testing the code ----------------
 if __name__ == "__main__":    
@@ -471,8 +498,8 @@ if __name__ == "__main__":
 #     print('# of Cauchy simulations = %d' % Nsim)
 
 #-------------- quasi random Korobov point sequence
-
-    kor = QuasiRandomKorobovSequence(Debug=True)
+    kor = QuasiRandomKorobovSequence(n=10,s=3,a=3,Randomized=False,Debug=False)
     print(kor.sequence[:10])
+    print(kor.testFct(kor.sequence))
 
 
