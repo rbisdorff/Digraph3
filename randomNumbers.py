@@ -369,26 +369,26 @@ class QuasiRandomKorobovSequence():
                 fo.write(wstr)
         self.sequence = sequence
 
-    def _testFct(self,buggyRegionLimits=[0.45,0.55],seq=None):
+    def testFct(self,seq=None,buggyRegionLimits=(0.45,0.55)):
         """
         Tiny buggy hypercube for testing a quasi random Korobov 3D sequence.
         """
         s = self.s
-        buggyHypercube = {}
-        buggyHypercube.fromkeys(range(s), buggyRegionLimits)
-        print(buggyHypercube)
+        buggyHypercube = dict()
+        for j in range(s):
+            buggyHypercube[j] = buggyRegionLimits
         Bugs = 0
         if seq == None:
             seq = self.sequence
         for x in seq:
-            for s in range(s):
-                if (x[s] >= buggyHypercube[s][0] and x[s] <= buggyHypercube[s][1]):
+            for j in range(s):
+                if (x[j] >= buggyHypercube[j][0] and x[j] <= buggyHypercube[j][1]):
                     BuggyPoint = True
                 else:
                     BuggyPoint = False
                     break
             if BuggyPoint:
-                print('Bug:', x, bug)
+                print('Bug:', x, buggyHypercube)
                 Bugs += 1
         if Bugs > 0:
             return '%d bug(s) detected !!!' % Bugs
@@ -498,8 +498,7 @@ if __name__ == "__main__":
 #     print('# of Cauchy simulations = %d' % Nsim)
 
 #-------------- quasi random Korobov point sequence
-    kor = QuasiRandomKorobovSequence(n=10,s=3,a=3,Randomized=False,Debug=False)
+    kor = QuasiRandomKorobovSequence(n=997,s=3,a=383,Randomized=False,Debug=False)
     print(kor.sequence[:10])
-    print(kor.testFct(kor.sequence))
-
+    print(kor.testFct(seq=kor.sequence,buggyRegionLimits=(0.45,0.55)))
 
