@@ -290,17 +290,17 @@
 <span class="c1">#----------</span>
 <div class="viewcode-block" id="QuasiRandomKorobovSequence"><a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomKorobovSequence">[docs]</a><span class="k">class</span> <span class="nc">QuasiRandomKorobovSequence</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Constructor for rendering a Korobov sequence of dimension *s* and length *n* which is *fully projection regular* in the s-dimensional real-valued [0,1)^s hypercube. The constructor uses a MLCG generator with full period.The sequence is stored in self.sequence and in a csv file.</span>
+<span class="sd">    Constructor for rendering a Korobov sequence of dimension *s* and length *n* which is *fully projection regular* in the $s$-dimensional real-valued [0,1)^s hypercube. The constructor uses a MLCG generator with full period.The sequence is stored in a self.sequence attribute and saved in a CSV formatted file.</span>
 
 <span class="sd">    *Source*: Chr. Lemieux, Monte Carlo and quasi Monte Carlo Sampling Springer 2009 Fig. 5.12 p. 176.</span>
 
 <span class="sd">    *Parameters*:</span>
 
-<span class="sd">        * n : (default=997) number of Korobov points and modulus of the underlying MLCG</span>
-<span class="sd">        * s : (default=3) dimension of the hypercube</span>
-<span class="sd">        * Randomized : (default=True) the sequence is randomly shifted (mod 1) to avoid cycling.</span>
-<span class="sd">        * a : (default=383) MLCG coefficient (0 &lt; a &lt; n), primitive with n</span>
-<span class="sd">        * fileName: (default=&#39;korobov&#39;) name (without the csv suffix) of the stored result. </span>
+<span class="sd">        * *n* : (default=997) number of Korobov points and modulus of the underlying MLCG</span>
+<span class="sd">        * *s* : (default=3) dimension of the hypercube</span>
+<span class="sd">        * *Randomized* : (default=False) the sequence is randomly shifted (mod 1) to avoid cycling when *s* &gt; *n*</span>
+<span class="sd">        * *a* : (default=383) MLCG coefficient (0 &lt; *a* &lt; *n*), primitive with *n*</span>
+<span class="sd">        * *fileName*: (default=&#39;korobov&#39;) name -without the csv suffix- of the stored result. </span>
 
 <span class="sd">    Sample Python session:</span>
 
@@ -345,20 +345,21 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">997</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">383</span><span class="p">,</span> <span class="n">Randomized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;korobov&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">997</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">383</span><span class="p">,</span> <span class="n">Randomized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;korobov&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="c1"># storing parameters</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">s</span> <span class="o">=</span> <span class="n">s</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">a</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Randomized</span> <span class="o">=</span> <span class="n">Randomized</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fileName</span> <span class="o">=</span> <span class="n">fileName</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
         <span class="c1"># float casting</span>
         <span class="n">nf</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
         <span class="c1"># randomization</span>
         <span class="k">if</span> <span class="n">Randomized</span><span class="p">:</span>
             <span class="kn">import</span> <span class="nn">random</span>
-            <span class="n">sd</span> <span class="o">=</span> <span class="mi">1</span>
-            <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">sd</span><span class="p">)</span>
+            <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
             <span class="n">v</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">)]</span>
         <span class="c1"># storing the simulated point set</span>
         <span class="n">sequence</span> <span class="o">=</span> <span class="p">[]</span> 
@@ -547,10 +548,24 @@
 <span class="c1">#     fo.close()     </span>
 <span class="c1">#     print(&#39;# of Cauchy simulations = %d&#39; % Nsim)</span>
 
-<span class="c1">#-------------- quasi random Korobov point sequence</span>
-    <span class="n">kor</span> <span class="o">=</span> <span class="n">QuasiRandomKorobovSequence</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">997</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">a</span><span class="o">=</span><span class="mi">383</span><span class="p">,</span><span class="n">Randomized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1">#-------------- testing quasi random Korobov sampling against Mersenne twister sampling</span>
+    <span class="n">kor</span> <span class="o">=</span> <span class="n">QuasiRandomKorobovSequence</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">997</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">a</span><span class="o">=</span><span class="mi">383</span><span class="p">,</span><span class="n">Randomized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">kor</span><span class="o">.</span><span class="n">sequence</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Korobov quasi random sampling&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">kor</span><span class="o">.</span><span class="n">testFct</span><span class="p">(</span><span class="n">seq</span><span class="o">=</span><span class="n">kor</span><span class="o">.</span><span class="n">sequence</span><span class="p">,</span><span class="n">buggyRegionLimits</span><span class="o">=</span><span class="p">(</span><span class="mf">0.45</span><span class="p">,</span><span class="mf">0.55</span><span class="p">)))</span>
+    <span class="n">randSeq</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">seed</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="kn">import</span> <span class="nn">random</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">997</span><span class="p">):</span>
+        <span class="n">point</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">kor</span><span class="o">.</span><span class="n">s</span><span class="p">):</span>
+            <span class="n">point</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>
+        <span class="n">randSeq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mersenne Twister random sampling&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">kor</span><span class="o">.</span><span class="n">testFct</span><span class="p">(</span><span class="n">seq</span><span class="o">=</span><span class="n">randSeq</span><span class="p">,</span><span class="n">buggyRegionLimits</span><span class="o">=</span><span class="p">(</span><span class="mf">0.45</span><span class="p">,</span><span class="mf">0.55</span><span class="p">)))</span>
+    
+            
 
 </pre></div>
 

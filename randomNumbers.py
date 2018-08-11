@@ -240,17 +240,17 @@ class CauchyRandomVariable():
 #----------
 class QuasiRandomKorobovSequence():
     """
-    Constructor for rendering a Korobov sequence of dimension *s* and length *n* which is *fully projection regular* in the s-dimensional real-valued [0,1)^s hypercube. The constructor uses a MLCG generator with full period.The sequence is stored in self.sequence and in a csv file.
+    Constructor for rendering a Korobov sequence of dimension *s* and length *n* which is *fully projection regular* in the $s$-dimensional real-valued [0,1)^s hypercube. The constructor uses a MLCG generator with full period.The sequence is stored in a self.sequence attribute and saved in a CSV formatted file.
 
     *Source*: Chr. Lemieux, Monte Carlo and quasi Monte Carlo Sampling Springer 2009 Fig. 5.12 p. 176.
 
     *Parameters*:
 
-        * n : (default=997) number of Korobov points and modulus of the underlying MLCG
-        * s : (default=3) dimension of the hypercube
-        * Randomized : (default=True) the sequence is randomly shifted (mod 1) to avoid cycling.
-        * a : (default=383) MLCG coefficient (0 < a < n), primitive with n
-        * fileName: (default='korobov') name (without the csv suffix) of the stored result. 
+        * *n* : (default=997) number of Korobov points and modulus of the underlying MLCG
+        * *s* : (default=3) dimension of the hypercube
+        * *Randomized* : (default=False) the sequence is randomly shifted (mod 1) to avoid cycling when *s* > *n*
+        * *a* : (default=383) MLCG coefficient (0 < *a* < *n*), primitive with *n*
+        * *fileName*: (default='korobov') name -without the csv suffix- of the stored result. 
 
     Sample Python session:
 
@@ -295,20 +295,21 @@ class QuasiRandomKorobovSequence():
 
     """
     
-    def __init__(self,n=997, s=3, a=383, Randomized=True, fileName='korobov',Debug=False):
+    def __init__(self,n=997, s=3, a=383, Randomized=False, seed=None,fileName='korobov',Debug=False):
         # storing parameters
         self.n = n
         self.s = s
         self.a = a
         self.Randomized = Randomized
+        self.seed = seed
         self.fileName = fileName
+        self.Debug = Debug
         # float casting
         nf = float(n)
         # randomization
         if Randomized:
             import random
-            sd = 1
-            random.seed(sd)
+            random.seed(seed)
             v = [random.random() for j in range(s)]
         # storing the simulated point set
         sequence = [] 
@@ -497,8 +498,22 @@ if __name__ == "__main__":
 #     fo.close()     
 #     print('# of Cauchy simulations = %d' % Nsim)
 
-#-------------- quasi random Korobov point sequence
-    kor = QuasiRandomKorobovSequence(n=997,s=3,a=383,Randomized=False,Debug=False)
+#-------------- testing quasi random Korobov sampling against Mersenne twister sampling
+    kor = QuasiRandomKorobovSequence(n=997,s=5,a=383,Randomized=True,seed=3,Debug=False)
     print(kor.sequence[:10])
+    print('Korobov quasi random sampling')
     print(kor.testFct(seq=kor.sequence,buggyRegionLimits=(0.45,0.55)))
+    randSeq = []
+    seed = 3
+    import random
+    random.seed(seed)
+    for i in range(997):
+        point = []
+        for j in range(kor.s):
+            point.append(random.random())
+        randSeq.append(point)
+    print('Mersenne Twister random sampling')
+    print(kor.testFct(seq=randSeq,buggyRegionLimits=(0.45,0.55)))
+    
+            
 
