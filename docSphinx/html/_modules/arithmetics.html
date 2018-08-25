@@ -489,6 +489,53 @@
         <span class="nb">print</span><span class="p">(</span><span class="n">piDecimals</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
     <span class="k">return</span> <span class="n">piDecimals</span></div>
 
+<div class="viewcode-block" id="sternBrocot"><a class="viewcode-back" href="../techDoc.html#arithmetics.sternBrocot">[docs]</a><span class="k">def</span> <span class="nf">sternBrocot</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Renders the Stern-Brocot representation of the rational m/n (m and n are positive integers).</span>
+<span class="sd">    For instance, sternBrocot(5,7) = [&#39;L&#39;,&#39;R&#39;,&#39;R&#39;,&#39;L&#39;].</span>
+<span class="sd">    *Source*: Graham, Knuth, Patashnik, Sec. 4.5 in Concrete Mathematics 2nd Ed., Addison-Wesley 1994, pp 115-123. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sb</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="n">m</span> <span class="o">!=</span> <span class="n">n</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">m</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+            <span class="n">sb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;L&#39;</span><span class="p">)</span>
+            <span class="n">n</span> <span class="o">-=</span> <span class="n">m</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;R&#39;</span><span class="p">)</span>
+            <span class="n">m</span> <span class="o">-=</span> <span class="n">n</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">sb</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sb</span></div>
+
+<div class="viewcode-block" id="invSternBrocot"><a class="viewcode-back" href="../techDoc.html#arithmetics.invSternBrocot">[docs]</a><span class="k">def</span> <span class="nf">invSternBrocot</span><span class="p">(</span><span class="n">sb</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;L&#39;</span><span class="p">,</span><span class="s1">&#39;R&#39;</span><span class="p">,</span><span class="s1">&#39;R&#39;</span><span class="p">,</span><span class="s1">&#39;L&#39;</span><span class="p">],</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computing the rational which corresponds to the Stern-Brocot string sb.</span>
+<span class="sd">    *Source*: Graham, Knuth, Patashnik, Sec. 4.5 in Concrete Mathematics 2nd Ed., Addison-Wesley 1994, pp 115-123. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">_matMult</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">X</span><span class="p">):</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="p">[[</span><span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]],</span>
+             <span class="p">[</span><span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]]]</span>
+        <span class="k">return</span> <span class="n">R</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+         <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+         <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+         <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="k">while</span> <span class="n">sb</span> <span class="o">!=</span> <span class="p">[]:</span>
+        <span class="k">if</span> <span class="n">sb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;L&#39;</span><span class="p">:</span>
+            <span class="n">S</span> <span class="o">=</span> <span class="n">_matMult</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">L</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">S</span> <span class="o">=</span> <span class="n">_matMult</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">R</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+        <span class="n">sb</span> <span class="o">=</span> <span class="n">sb</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">sb</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">sb</span><span class="p">)</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">m</span><span class="p">,</span><span class="n">n</span></div>
+
 <span class="c1">###############################</span>
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="c1">######  scratch pad for testing the module components</span>
@@ -550,13 +597,18 @@
 <span class="c1">##        print(divisorsFunction(1,i))</span>
 <span class="c1">##        print(divisorsFunction(2,i))</span>
         
-    <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
-    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-    <span class="n">piDecimals</span> <span class="o">=</span> <span class="n">computePiDecimals</span><span class="p">(</span><span class="n">decimalWordLength</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">nbrOfWords</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">,</span><span class="n">end</span><span class="o">=</span><span class="s1">&#39; sec.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;pi = &#39;</span><span class="o">+</span><span class="n">piDecimals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">piDecimals</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;precision = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">piDecimals</span><span class="p">[</span><span class="mi">1</span><span class="p">:])),</span><span class="n">end</span><span class="o">=</span><span class="s2">&quot; decimals</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># from time import time</span>
+    <span class="c1"># t0 = time()</span>
+    <span class="c1"># piDecimals = computePiDecimals(decimalWordLength=5,nbrOfWords=1000)</span>
+    <span class="c1"># print(time()-t0,end=&#39; sec.\n&#39;)</span>
+    <span class="c1"># print(&#39;pi = &#39;+piDecimals[0]+&#39;.&#39;)</span>
+    <span class="c1"># print(piDecimals[1:])</span>
+    <span class="c1"># print(&#39;precision = &#39;+str(len(piDecimals[1:])),end=&quot; decimals\n&quot;)</span>
+    
+    <span class="n">sb</span> <span class="o">=</span> <span class="n">sternBrocot</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span><span class="mi">101</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sb</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">)</span> <span class="o">=</span> <span class="n">invSternBrocot</span><span class="p">(</span><span class="n">sb</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
         
 </pre></div>
 

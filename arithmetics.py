@@ -439,6 +439,53 @@ def computePiDecimals(decimalWordLength=4,nbrOfWords=600,Comments=False):
         print(piDecimals[1:])
     return piDecimals
 
+def sternBrocot(m=5,n=7,Debug=False):
+    """
+    Renders the Stern-Brocot representation of the rational m/n (m and n are positive integers).
+    For instance, sternBrocot(5,7) = ['L','R','R','L'].
+    *Source*: Graham, Knuth, Patashnik, Sec. 4.5 in Concrete Mathematics 2nd Ed., Addison-Wesley 1994, pp 115-123. 
+    """
+    sb = []
+    while m != n:
+        if m < n:
+            sb.append('L')
+            n -= m
+        else:
+            sb.append('R')
+            m -= n
+        if Debug:
+            print(sb)
+    return sb
+
+def invSternBrocot(sb=['L','R','R','L'],Debug=False):
+    """
+    Computing the rational which corresponds to the Stern-Brocot string sb.
+    *Source*: Graham, Knuth, Patashnik, Sec. 4.5 in Concrete Mathematics 2nd Ed., Addison-Wesley 1994, pp 115-123. 
+    """
+    def _matMult(S,X):
+        R = [[S[0][0]*X[0][0]+S[0][1]*X[1][0],S[0][0]*X[0][1]+S[0][1]*X[1][1]],
+             [S[1][0]*X[0][0]+S[1][1]*X[1][0],S[1][0]*X[0][1]+S[1][1]*X[1][1]]]
+        return R
+    L = [[1,1],
+         [0,1]]
+    R = [[1,0],
+         [1,1]]
+    S = [[1,0],
+         [0,1]]
+    while sb != []:
+        if sb[0] == 'L':
+            S = _matMult(S,L)
+        else:
+            S = _matMult(S,R)
+        if Debug:
+            print(S)
+        sb = sb[1:len(sb)]
+        if Debug:
+            print(sb)
+    m = S[1][0]+S[1][1]
+    n = S[0][0]+S[0][1]
+    return m,n
+
 ###############################
 if __name__ == '__main__':
     ######  scratch pad for testing the module components
@@ -500,11 +547,16 @@ if __name__ == '__main__':
 ##        print(divisorsFunction(1,i))
 ##        print(divisorsFunction(2,i))
         
-    from time import time
-    t0 = time()
-    piDecimals = computePiDecimals(decimalWordLength=5,nbrOfWords=1000)
-    print(time()-t0,end=' sec.\n')
-    print('pi = '+piDecimals[0]+'.')
-    print(piDecimals[1:])
-    print('precision = '+str(len(piDecimals[1:])),end=" decimals\n")
+    # from time import time
+    # t0 = time()
+    # piDecimals = computePiDecimals(decimalWordLength=5,nbrOfWords=1000)
+    # print(time()-t0,end=' sec.\n')
+    # print('pi = '+piDecimals[0]+'.')
+    # print(piDecimals[1:])
+    # print('precision = '+str(len(piDecimals[1:])),end=" decimals\n")
+    
+    sb = sternBrocot(21,101)
+    print(sb)
+    (m,n) = invSternBrocot(sb)
+    print(m,n)
         

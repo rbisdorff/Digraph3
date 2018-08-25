@@ -242,7 +242,7 @@ class CauchyRandomVariable():
 #----------
 class QuasiRandomKorobovSequence():
     """
-    Constructor for rendering a Korobov sequence of dimension *s* and length *n* which is *fully projection regular* in the $s$-dimensional real-valued [0,1)^s hypercube. The constructor uses a MLCG generator with full period.The sequence is stored in a self.sequence attribute and saved in a CSV formatted file.
+    Constructor for rendering a Korobov sequence of dimension *s* and length *n* which is *fully projection regular* in the $s$-dimensional real-valued [0,1)^s hypercube. The constructor uses a MLCG generator with potentially a full period. The sequence is stored in a self.sequence attribute and saved in a CSV formatted file.
 
     *Source*: Chr. Lemieux, Monte Carlo and quasi Monte Carlo Sampling Springer 2009 Fig. 5.12 p. 176.
 
@@ -251,7 +251,7 @@ class QuasiRandomKorobovSequence():
         * *n* : (default=997) number of Korobov points and modulus of the underlying MLCG
         * *s* : (default=3) dimension of the hypercube
         * *Randomized* : (default=False) the sequence is randomly shifted (mod 1) to avoid cycling when *s* > *n*
-        * *a* : (default=383) MLCG coefficient (0 < *a* < *n*), primitive with *n*
+        * *a* : (default=383) MLCG coefficient (0 < *a* < *n*), primitive with *n*. The choice of *a* and *n* is crucial for getting an MLCG with full period and hence a fully projection-regular sequence. A second good pair is given with *n* = 1021 (prime) and *a* = 76.
         * *fileName*: (default='korobov') name -without the csv suffix- of the stored result. 
 
     Sample Python session:

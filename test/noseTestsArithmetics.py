@@ -58,5 +58,13 @@ def testComputePiDecimals():
     print(piDecimals[1:])
     print('precision = '+str(len(piDecimals[1:])),end=" decimals\n")
 
+def testSternBrocot():
+    print('==>> Testing the Stern-Brocot encoding of rationals')
+    sb = sternBrocot(21,101,Debug=True)
+    print(sb)
+    (m,n) = invSternBrocot(sb,Debug=True)
+    print(m,n)
+     
+
 
     
