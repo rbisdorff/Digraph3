@@ -443,6 +443,7 @@ def sternBrocot(m=5,n=7,Debug=False):
     """
     Renders the Stern-Brocot representation of the rational m/n (m and n are positive integers).
     For instance, sternBrocot(5,7) = ['L','R','R','L'].
+
     *Source*: Graham, Knuth, Patashnik, Sec. 4.5 in Concrete Mathematics 2nd Ed., Addison-Wesley 1994, pp 115-123. 
     """
     sb = []
@@ -460,6 +461,7 @@ def sternBrocot(m=5,n=7,Debug=False):
 def invSternBrocot(sb=['L','R','R','L'],Debug=False):
     """
     Computing the rational which corresponds to the Stern-Brocot string sb.
+
     *Source*: Graham, Knuth, Patashnik, Sec. 4.5 in Concrete Mathematics 2nd Ed., Addison-Wesley 1994, pp 115-123. 
     """
     def _matMult(S,X):
@@ -485,6 +487,50 @@ def invSternBrocot(sb=['L','R','R','L'],Debug=False):
     m = S[1][0]+S[1][1]
     n = S[0][0]+S[0][1]
     return m,n
+
+def computeFareySeries(n=7,AsFloats=False,Debug=False):
+    """
+    Renders the Farey series, ie the ordered list of positive rational fractions with positive denominator lower or equal to n. For $n* = 1, we obtain: [[0,1],[1,1]].
+
+    *Parametrs*:
+
+        *n*: strictly positive integer (default = 7).
+        *AsFloats*: If True (defaut False), renders the list of approximate floats corresponding to the rational fractions. 
+
+    *Source*: Graham, Knuth, Patashnik, Sec. 4.5 in Concrete Mathematics 2nd Ed., Addison-Wesley 1994, pp 115-123. 
+    """
+    f = [[0,1],[1,1]]
+    if n < 1:
+        print('Error: n >=1! n = %d' % n)
+    elif n == 1:
+        return f
+
+    i = 1
+    while i < n:
+        i += 1
+        if Debug:
+            print(i)
+        fcur=[]
+        j = 0
+        while j < len(f)-1:
+            if Debug:
+                print(j)
+            fcur.append(f[j])
+            num = f[j][1] + f[j+1][1]
+            if Debug:
+                print(num,i)
+            if num == i:
+                denom = f[j][0] + f[j+1][0]
+                fcur.append([denom,num])
+            #fcur.append(f[j+1])
+            j += 1
+            if Debug:
+                print(fcur)
+        fcur.append(f[j])
+        f = list(fcur)
+    if AsFloats:
+        f = [float(x[0])/float(x[1]) for x in f]
+    return f
 
 ###############################
 if __name__ == '__main__':
@@ -559,4 +605,5 @@ if __name__ == '__main__':
     print(sb)
     (m,n) = invSternBrocot(sb)
     print(m,n)
+    print(computeFareySeries(n=10,AsFloats=False,Debug=True))
         
