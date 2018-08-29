@@ -110,3 +110,14 @@ def testCauchyRandomVariable():
     fo.close()     
     print('# of Cauchy simulations = %d' % Nsim)
 
+def testQuasiRandomKorobovPointSet():
+    print('==>> Testing quasi random Korobov point set generator')
+    kor = QuasiRandomKorobovPointSet()
+    print(kor.sequence)
+    kor.testFct()
+
+def testQuasiRandomFareyPointSet():
+    print('==>> Testing quasi random Farey point set generator')
+    fs = QuasiRandomFareyPointSet()
+    print(fs.pointSet)
+    fs.testFct()

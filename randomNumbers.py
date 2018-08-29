@@ -240,9 +240,9 @@ class CauchyRandomVariable():
         return randeval
             
 #----------
-class QuasiRandomKorobovSequence():
+class QuasiRandomKorobovPointSet():
     """
-    Constructor for rendering a Korobov sequence of dimension *s* and length *n* which is *fully projection regular* in the $s$-dimensional real-valued [0,1)^s hypercube. The constructor uses a MLCG generator with potentially a full period. The sequence is stored in a self.sequence attribute and saved in a CSV formatted file.
+    Constructor for rendering a Korobov point set of dimension *n* which is *fully projection regular* in the $s$-dimensional real-valued [0,1)^s hypercube. The constructor uses a MLCG generator with potentially a full period. The point set is stored in a self.sequence attribute and saved in a CSV formatted file.
 
     *Source*: Chr. Lemieux, Monte Carlo and quasi Monte Carlo Sampling Springer 2009 Fig. 5.12 p. 176.
 
@@ -256,8 +256,8 @@ class QuasiRandomKorobovSequence():
 
     Sample Python session:
 
-        >>> from randomNumbers import QuasiRandomKorobovSequence
-        >>> kor = QuasiRandomKorobovSequence(Debug=True)
+        >>> from randomNumbers import QuasiRandomKorobovPointSet
+        >>> kor = QuasiRandomKorobovPointSet(Debug=True)
         0 [0.0, 0.0, 0.0]
         1 [0.13536725313948247, 0.23158619430934912, 0.8941657924971758]
         2 [0.36595043842175035, 0.7415995294344084, 0.7035940773517395]
@@ -397,7 +397,131 @@ class QuasiRandomKorobovSequence():
             return '%d bug(s) detected !!!' % Bugs
         else:
             return 'No bugs detected'
-        
+
+#-------
+class QuasiRandomFareyPointSet():
+    """
+    Constructor for rendering Farey series of dimension *s* and max denominateor *n* which is *fully projection regular* in the $s$-dimensional real-valued [0,1)^s hypercube. The lattice constructor uses a randomly shuffled Farey series for the point construction. The resulting point set is stored in a self.sequence attribute and saved in a CSV formatted file.
+
+    *Parameters*:
+
+        *n* : (default=20) maximal denominator of the Farey series
+        *s* : (default=3) dimension of the hypercube
+        *seed* : for regenrating the same Farey point set 
+        * *Randomized* : (default=False) the points are randomly shifted (mod 1) to avoid cycling when *s* > *n*.
+        * *fileName*: (default='farey') name -without the csv suffix- of the stored result. 
+
+    Sample Python session:
+
+        >>> from randomNumbers import QuasiRandomFareyPointSet
+        >>> fs = QuasiRandomFareyPointSet
+
+    The resulting point set may be inspected in an R session::
+
+        > x = read.csv('farey.csv')
+        > x[1:5,]
+        >    x1       x2       x3
+        > library('lattice')
+        > cloud(x$x3 ~ x$x1 + x$x2)
+        > plot(x$x1,x$x2,pch='°')
+        > plot(x$x1,x$x3,pch="°")
+
+    """
+    
+    def __init__(self,n=20, s=3, Randomized=False, seed=None,fileName='farey',Debug=False):
+        # imports
+        import random
+        from arithmetics import computeFareySeries
+        # storing parameters
+        self.n = n
+        self.s = s
+        self.Randomized = Randomized
+        self.seed = seed
+        self.fileName = fileName
+        self.Debug = Debug
+        # randomization
+        if Randomized:
+            random.seed(seed)
+            v = [random.random() for j in range(s)]
+        # storing the simulated point set
+        pointSet = [] 
+        fileName += '.csv'
+        with open(fileName,'w') as fo:
+            # csv header row
+            wstr = ''
+            for j in range(s-1):
+                wstr += '"x%d",' % (j+1)
+            wstr += '"x%d"\n' % (s)
+            fo.write(wstr)
+            # start point set at origin
+            u = [0.0 for j in range(s)]
+            # generate Farey series
+            fs = computeFareySeries(n=n,AsFloats=True,Debug=Debug)
+            nf = len(fs)
+            self.seriesLength= nf
+            random.shuffle(fs)
+            ptfs = 0
+            # first s-dimensional point 
+            for j in range(s):
+                u[j] = fs[j]
+            ptfs += j
+            if Randomized:
+                for j in range(s):
+                    z = u[j] + v[j]
+                    u[j] = z - int(z)
+            pointSet.append((tuple(u)))
+            if Debug:
+                print(1,u)
+            wstr = ''
+            for j in range(s-1):
+                wstr += '"%f",' % u[j]
+            wstr += '"%f"\n' % u[s-1]
+            fo.write(wstr)
+            # all the following points
+            for i in range(ptfs,nf):
+                for j in range(s-1):
+                    u[j] = u[j+1] # << 1
+                u[s-1] = fs[i]
+                if Randomized:
+                    for j in range(s):
+                        z = u[j] + v[j]
+                        u[j] = z - int(z)
+                pointSet.append((tuple(u)))
+                if Debug:
+                    print(i,u)
+                wstr = ''
+                for j in range(s-1):
+                    wstr += '"%f",' % (u[j])
+                wstr += '"%f"\n' % (u[s-1])
+                fo.write(wstr)
+        self.pointSet = pointSet
+
+    def testFct(self,ptSet=None,buggyRegionLimits=(0.45,0.55)):
+        """
+        Tiny buggy hypercube for testing a quasi random Farey point set.
+        """
+        s = self.s
+        buggyHypercube = dict()
+        for j in range(s):
+            buggyHypercube[j] = buggyRegionLimits
+        Bugs = 0
+        if ptSet == None:
+            ptSet = self.pointSet
+        for x in ptSet:
+            for j in range(s):
+                if (x[j] >= buggyHypercube[j][0] and x[j] <= buggyHypercube[j][1]):
+                    BuggyPoint = True
+                else:
+                    BuggyPoint = False
+                    break
+            if BuggyPoint:
+                print('Bug:', x, buggyHypercube)
+                Bugs += 1
+        if Bugs > 0:
+            return '%d bug(s) detected !!!' % Bugs
+        else:
+            return 'No bugs detected'
+
         
 #----------testing the code ----------------
 if __name__ == "__main__":    
@@ -501,21 +625,22 @@ if __name__ == "__main__":
 #     print('# of Cauchy simulations = %d' % Nsim)
 
 #-------------- testing quasi random Korobov sampling against Mersenne twister sampling
-    kor = QuasiRandomKorobovSequence(n=997,s=5,a=383,Randomized=True,seed=3,Debug=False)
-    print(kor.sequence[:10])
-    print('Korobov quasi random sampling')
-    print(kor.testFct(seq=kor.sequence,buggyRegionLimits=(0.45,0.55)))
-    randSeq = []
-    seed = 3
-    import random
-    random.seed(seed)
-    for i in range(997):
-        point = []
-        for j in range(kor.s):
-            point.append(random.random())
-        randSeq.append(point)
-    print('Mersenne Twister random sampling')
-    print(kor.testFct(seq=randSeq,buggyRegionLimits=(0.45,0.55)))
-    
+    # kor = QuasiRandomKorobovPointSet(n=997,s=5,a=383,Randomized=True,seed=3,Debug=False)
+    # print(kor.sequence[:10])
+    # print('Korobov quasi random sampling')
+    # print(kor.testFct(seq=kor.sequence,buggyRegionLimits=(0.45,0.55)))
+    # randSeq = []
+    # seed = 3
+    # import random
+    # random.seed(seed)
+    # for i in range(997):
+    #     point = []
+    #     for j in range(kor.s):
+    #         point.append(random.random())
+    #     randSeq.append(point)
+    # print('Mersenne Twister random sampling')
+    # print(kor.testFct(seq=randSeq,buggyRegionLimits=(0.45,0.55)))
+    qrfs = QuasiRandomFareyPointSet(n=10,s=3)
+    print(qrfs)
             
 
