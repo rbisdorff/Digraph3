@@ -414,45 +414,44 @@ class QuasiRandomFareyPointSet():
     Sample Python session:
 
         >>> from randomNumbers import QuasiRandomFareyPointSet
-        >>> qrfs = QuasiRandomFareyPointSet(n=10,s=3,seed=100,
+        >>> qrfs = QuasiRandomFareyPointSet(n=20,s=5,seed=100,
                                             fileName='testFarey')
         >>> print(qrfs.fareySeries[:10])
-        [0.0, 0.1, 0.111, 0.125, 0.143, 
-        0.167, 0.2, 0.222, 0.25, 0.286]
+        [0.0, 0.05, 0.0526, 0.0555, 0.0588, 0.0625, 0.0666, 0.0714, 
+         0.0769, 0.083333]
         >>> print(qrfs.pointSet[:10])
-        [(0.0, 0.9, 0.833), (0.9, 0.833, 1.0), 
-         (0.833, 1.0, 0.2222), (1.0, 0.22, 0.2),
-         (0.222, 0.2, 0.444), (0.2, 0.444, 0.571),
-         (0.444, 0.571, 0.778), (0.571, 0.778, 0.142),
-         (0.778, 0.143, 0.8), (0.143, 0.8, 0.857)]
-
+        [(0.8461, 0.0588, 0.0526, 0.1053, 0.6923), 
+         (0.0588, 0.0526, 0.1053, 0.6923, 0.3636), 
+         (0.0526, 0.1053, 0.6923, 0.3636, 0.0625), 
+         (0.1053, 0.6923, 0.3636, 0.0625, 0.8500), 
+         (0.6923, 0.3636, 0.0625, 0.8500, 0.7692),
+         ...]
+     
     The resulting point set may be inspected in an R session::
 
         > x = read.csv('testFarey.csv')
         > x[1:5,]
-        >    x1       x2       x3
-        x1       x2       x3
-        1 0.000000 0.900000 0.833333
-        2 0.900000 0.833333 1.000000
-        3 0.833333 1.000000 0.222222
-        4 1.000000 0.222222 0.200000
-        5 0.222222 0.200000 0.444444
-        > library('lattice')
-        > cloud(x$x3 ~ x$x1 + x$x2)
-        > plot(x$x1,x$x2,pch='°')
-        > plot(x$x1,x$x3,pch="°")
+        >    x1       x2       x3       x4       x5
+        1 0.846154 0.058824 0.052632 0.105263 0.692308
+        2 0.058824 0.052632 0.105263 0.692308 0.363636
+        3 0.052632 0.105263 0.692308 0.363636 0.062500
+        4 0.105263 0.692308 0.363636 0.062500 0.850000
+        5 0.692308 0.363636 0.062500 0.850000 0.769231
+       > library('lattice')
+        > cloud(x$x5 ~ x$x1 + x$x4)
+        > plot(x$x3,x$x4) 
 
     .. image:: farey3D.png
         :alt: Checking projection regularity
         :width: 500 px
         :align: center
 
-    .. image:: fareyx1x2.png
+    .. image:: fareyx1x4.png
         :alt: Checking projection regularity
         :width: 400 px
         :align: center
 
-    .. image:: fareyx2x3.png
+    .. image:: fareyx3x4.png
         :alt: Checking projection regularity
         :width: 400 px
         :align: center
