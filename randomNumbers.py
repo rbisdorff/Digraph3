@@ -432,6 +432,8 @@ class QuasiRandomFareyPointSet():
         # imports
         import random
         from arithmetics import computeFareySeries
+        # fixing random seed
+        random.seed(seed)
         # storing parameters
         self.n = n
         self.s = s
@@ -441,59 +443,63 @@ class QuasiRandomFareyPointSet():
         self.Debug = Debug
         # randomization
         if Randomized:
-            random.seed(seed)
             v = [random.random() for j in range(s)]
+        # generate Farey series
+        fs = computeFareySeries(n=n,AsFloats=True)
+        self.fareySeries = list(fs)
+        nf = len(fs)
+        self.seriesLength= nf
+        random.shuffle(fs)
         # storing the simulated point set
-        pointSet = [] 
-        fileName += '.csv'
-        with open(fileName,'w') as fo:
+        if fileName != None:
+            fileName += '.csv'
+            fo =  open(fileName,'w') 
             # csv header row
             wstr = ''
             for j in range(s-1):
                 wstr += '"x%d",' % (j+1)
             wstr += '"x%d"\n' % (s)
             fo.write(wstr)
-            # start point set at origin
-            u = [0.0 for j in range(s)]
-            # generate Farey series
-            fs = computeFareySeries(n=n,AsFloats=True,Debug=Debug)
-            nf = len(fs)
-            self.seriesLength= nf
-            random.shuffle(fs)
-            ptfs = 0
-            # first s-dimensional point 
+        # start point set at origin
+        u = [0.0 for j in range(s)]
+        pointSet = [] 
+        ptfs = 0
+        # first s-dimensional point 
+        for j in range(s):
+            u[j] = fs[j]
+        ptfs += s
+        if Randomized:
             for j in range(s):
-                u[j] = fs[j]
-            ptfs += j
+                z = u[j] + v[j]
+                u[j] = z - int(z)
+        pointSet.append((tuple(u)))
+        if Debug:
+            print(1,u)
+        if fileName != None:
+            wstr = ''
+            for j in range(s-1):
+                wstr += '"%f",' % u[j]
+            wstr += '"%f"\n' % u[s-1]
+            fo.write(wstr)
+        # all the following points
+        for i in range(ptfs,nf):
+            for j in range(s-1):
+                u[j] = u[j+1] # << 1
+            u[s-1] = fs[i]
             if Randomized:
                 for j in range(s):
                     z = u[j] + v[j]
                     u[j] = z - int(z)
             pointSet.append((tuple(u)))
             if Debug:
-                print(1,u)
-            wstr = ''
-            for j in range(s-1):
-                wstr += '"%f",' % u[j]
-            wstr += '"%f"\n' % u[s-1]
-            fo.write(wstr)
-            # all the following points
-            for i in range(ptfs,nf):
-                for j in range(s-1):
-                    u[j] = u[j+1] # << 1
-                u[s-1] = fs[i]
-                if Randomized:
-                    for j in range(s):
-                        z = u[j] + v[j]
-                        u[j] = z - int(z)
-                pointSet.append((tuple(u)))
-                if Debug:
-                    print(i,u)
+                print(i,u)
+            if fileName != None:
                 wstr = ''
                 for j in range(s-1):
                     wstr += '"%f",' % (u[j])
                 wstr += '"%f"\n' % (u[s-1])
                 fo.write(wstr)
+        fo.close()
         self.pointSet = pointSet
 
     def testFct(self,ptSet=None,buggyRegionLimits=(0.45,0.55)):
