@@ -414,17 +414,48 @@ class QuasiRandomFareyPointSet():
     Sample Python session:
 
         >>> from randomNumbers import QuasiRandomFareyPointSet
-        >>> fs = QuasiRandomFareyPointSet
+        >>> qrfs = QuasiRandomFareyPointSet(n=10,s=3,seed=100,
+                                            fileName='testFarey')
+        >>> print(qrfs.fareySeries[:10])
+        [0.0, 0.1, 0.111, 0.125, 0.143, 
+        0.167, 0.2, 0.222, 0.25, 0.286]
+        >>> print(qrfs.pointSet[:10])
+        [(0.0, 0.9, 0.833), (0.9, 0.833, 1.0), 
+         (0.833, 1.0, 0.2222), (1.0, 0.22, 0.2),
+         (0.222, 0.2, 0.444), (0.2, 0.444, 0.571),
+         (0.444, 0.571, 0.778), (0.571, 0.778, 0.142),
+         (0.778, 0.143, 0.8), (0.143, 0.8, 0.857)]
 
     The resulting point set may be inspected in an R session::
 
-        > x = read.csv('farey.csv')
+        > x = read.csv('testFarey.csv')
         > x[1:5,]
         >    x1       x2       x3
+        x1       x2       x3
+        1 0.000000 0.900000 0.833333
+        2 0.900000 0.833333 1.000000
+        3 0.833333 1.000000 0.222222
+        4 1.000000 0.222222 0.200000
+        5 0.222222 0.200000 0.444444
         > library('lattice')
         > cloud(x$x3 ~ x$x1 + x$x2)
         > plot(x$x1,x$x2,pch='°')
         > plot(x$x1,x$x3,pch="°")
+
+    .. image:: farey3D.png
+        :alt: Checking projection regularity
+        :width: 500 px
+        :align: center
+
+    .. image:: fareyx1x2.png
+        :alt: Checking projection regularity
+        :width: 400 px
+        :align: center
+
+    .. image:: fareyx2x3.png
+        :alt: Checking projection regularity
+        :width: 400 px
+        :align: center
 
     """
     
