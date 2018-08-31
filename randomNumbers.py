@@ -451,11 +451,6 @@ class QuasiRandomFareyPointSet():
         :width: 400 px
         :align: center
 
-    .. image:: fareyx3x4.png
-        :alt: Checking projection regularity
-        :width: 400 px
-        :align: center
-
     """
     
     def __init__(self,n=20, s=3, Randomized=False, seed=None,fileName='farey',Debug=False):
