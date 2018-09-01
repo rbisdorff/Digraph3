@@ -453,7 +453,7 @@ class QuasiRandomFareyPointSet():
 
     """
     
-    def __init__(self,n=20, s=3, Randomized=False, seed=None,fileName='farey',Debug=False):
+    def __init__(self,n=20,s=3,seed=None,Randomized=False,fileName='farey',Debug=False):
         # imports
         import random
         from arithmetics import computeFareySeries
@@ -473,8 +473,15 @@ class QuasiRandomFareyPointSet():
         fs = computeFareySeries(n=n,AsFloats=True)
         self.fareySeries = list(fs)
         nf = len(fs)
+        if s > nf:
+            print('Error: s = %d larger than Farey series length = %d !!' % (s,nf))
+            print('Choose a higher denominator than the actual n = %d !!' % n)
+            return
         self.seriesLength= nf
         random.shuffle(fs)
+        if fs[0] < self.fareySeries[1]:   # first item is zero
+            fs[0],fs[1] = fs[1],fs[0]
+        self.shuffledFareySeries = list(fs)
         # storing the simulated point set
         if fileName != None:
             fileName += '.csv'
@@ -488,16 +495,14 @@ class QuasiRandomFareyPointSet():
         # start point set at origin
         u = [0.0 for j in range(s)]
         pointSet = [tuple(u)] 
-        ptfs = 0
         if fileName != None:
             wstr = ''
             for j in range(s-1):
                 wstr += '"%f",' % u[j]
             wstr += '"%f"\n' % u[s-1]
             fo.write(wstr)
-        # first s-dimensional point 
-        u[s-1] = fs[ptfs]
-        ptfs += 1
+        # first s-dimensional point
+        u[s-1] = fs[0]
         if Randomized:
             for j in range(s):
                 z = u[j] + v[j]
@@ -512,7 +517,7 @@ class QuasiRandomFareyPointSet():
             wstr += '"%f"\n' % u[s-1]
             fo.write(wstr)
         # all the following points
-        for i in range(ptfs,nf):
+        for i in range(1,nf):
             for j in range(s-1):
                 u[j] = u[j+1] # << 1
             u[s-1] = fs[i]
@@ -676,9 +681,11 @@ if __name__ == "__main__":
     #     randSeq.append(point)
     # print('Mersenne Twister random sampling')
     # print(kor.testFct(seq=randSeq,buggyRegionLimits=(0.45,0.55)))
-    qrfs = QuasiRandomFareyPointSet(n=25,s=4)
+    qrfs = QuasiRandomFareyPointSet(n=25,s=5)
     print(qrfs.fareySeries)
-    print(qrfs.pointSet)
+    print(qrfs.shuffledFareySeries)
+    print(qrfs.seriesLength)
+    #print(qrfs.pointSet)
     print(len(qrfs.pointSet))
             
 
