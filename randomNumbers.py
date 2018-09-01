@@ -487,12 +487,17 @@ class QuasiRandomFareyPointSet():
             fo.write(wstr)
         # start point set at origin
         u = [0.0 for j in range(s)]
-        pointSet = [] 
+        pointSet = [tuple(u)] 
         ptfs = 0
+        if fileName != None:
+            wstr = ''
+            for j in range(s-1):
+                wstr += '"%f",' % u[j]
+            wstr += '"%f"\n' % u[s-1]
+            fo.write(wstr)
         # first s-dimensional point 
-        for j in range(s):
-            u[j] = fs[j]
-        ptfs += s
+        u[s-1] = fs[ptfs]
+        ptfs += 1
         if Randomized:
             for j in range(s):
                 z = u[j] + v[j]
@@ -671,7 +676,9 @@ if __name__ == "__main__":
     #     randSeq.append(point)
     # print('Mersenne Twister random sampling')
     # print(kor.testFct(seq=randSeq,buggyRegionLimits=(0.45,0.55)))
-    qrfs = QuasiRandomFareyPointSet(n=10,s=3)
-    print(qrfs)
+    qrfs = QuasiRandomFareyPointSet(n=25,s=4)
+    print(qrfs.fareySeries)
+    print(qrfs.pointSet)
+    print(len(qrfs.pointSet))
             
 
