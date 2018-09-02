@@ -7898,7 +7898,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 <dl class="class">
 <dt id="randomNumbers.QuasiRandomFareyPointSet">
 <em class="property">class </em><code class="descclassname">randomNumbers.</code><code class="descname">QuasiRandomFareyPointSet</code><span class="sig-paren">(</span><em>n=20</em>, <em>s=3</em>, <em>seed=None</em>, <em>Randomized=True</em>, <em>fileName='farey'</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#QuasiRandomFareyPointSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.QuasiRandomFareyPointSet" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#randomNumbers.QuasiRandomPointSet" title="randomNumbers.QuasiRandomPointSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">randomNumbers.QuasiRandomPointSet</span></code></a></p>
 <p>Constructor for rendering a Farey point set of dimension <em>s</em> and max denominateor <em>n</em> which is <em>fully projection regular</em> in the $s$-dimensional real-valued [0,1]^s hypercube. The lattice constructor uses a randomly shuffled Farey series for the point construction. The resulting point set is stored in a self.pointSet attribute and saved by default in a CSV formatted file.</p>
 <p><em>Parameters</em>:</p>
 <blockquote>
@@ -7941,24 +7941,18 @@ with this program; if not, write to the Free Software Foundation, Inc.,
  4   0.626933 0.532909 0.433209 0.010205 0.612632
  5   0.044506 0.899225 0.659525 0.030205 0.670410
 &gt; library(&#39;lattice&#39;)
- &gt; cloud(x$x5 ~ x$x1 + x$x4)
+ &gt; cloud(x$x5 ~ x$x1 + x$x3)
  &gt; plot(x$x1,x$x3) 
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/farey3D.png"><img alt="Checking projection regularity" class="align-center" src="_images/farey3D.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/farey3D.png"><img alt="Checking hypercube filling" class="align-center" src="_images/farey3D.png" style="width: 500px;" /></a>
 <a class="reference internal image-reference" href="_images/fareyx1x3.png"><img alt="Checking projection regularity" class="align-center" src="_images/fareyx1x3.png" style="width: 400px;" /></a>
-<dl class="method">
-<dt id="randomNumbers.QuasiRandomFareyPointSet.testFct">
-<code class="descname">testFct</code><span class="sig-paren">(</span><em>ptSet=None</em>, <em>buggyRegionLimits=(0.45</em>, <em>0.55)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#QuasiRandomFareyPointSet.testFct"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.QuasiRandomFareyPointSet.testFct" title="Permalink to this definition">¶</a></dt>
-<dd><p>Tiny buggy hypercube for testing a quasi random Farey point set.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="class">
 <dt id="randomNumbers.QuasiRandomKorobovPointSet">
 <em class="property">class </em><code class="descclassname">randomNumbers.</code><code class="descname">QuasiRandomKorobovPointSet</code><span class="sig-paren">(</span><em>n=997</em>, <em>s=3</em>, <em>a=383</em>, <em>Randomized=False</em>, <em>seed=None</em>, <em>fileName='korobov'</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#QuasiRandomKorobovPointSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.QuasiRandomKorobovPointSet" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#randomNumbers.QuasiRandomPointSet" title="randomNumbers.QuasiRandomPointSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">randomNumbers.QuasiRandomPointSet</span></code></a></p>
 <p>Constructor for rendering a Korobov point set of dimension <em>n</em> which is <em>fully projection regular</em> in the $s$-dimensional real-valued [0,1)^s hypercube. The constructor uses a MLCG generator with potentially a full period. The point set is stored in a self.sequence attribute and saved in a CSV formatted file.</p>
 <p><em>Source</em>: Chr. Lemieux, Monte Carlo and quasi Monte Carlo Sampling Springer 2009 Fig. 5.12 p. 176.</p>
 <p><em>Parameters</em>:</p>
@@ -8000,10 +7994,30 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 <a class="reference internal image-reference" href="_images/korobov3D.png"><img alt="Checking projection regularity" class="align-center" src="_images/korobov3D.png" style="width: 500px;" /></a>
 <a class="reference internal image-reference" href="_images/korobovProjection12.png"><img alt="Checking projection regularity" class="align-center" src="_images/korobovProjection12.png" style="width: 400px;" /></a>
 <a class="reference internal image-reference" href="_images/korobovProjection13.png"><img alt="Checking projection regularity" class="align-center" src="_images/korobovProjection13.png" style="width: 400px;" /></a>
+</dd></dl>
+
+<dl class="class">
+<dt id="randomNumbers.QuasiRandomPointSet">
+<em class="property">class </em><code class="descclassname">randomNumbers.</code><code class="descname">QuasiRandomPointSet</code><a class="reference internal" href="_modules/randomNumbers.html#QuasiRandomPointSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.QuasiRandomPointSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Abstract class for generic quasi random point set methods and tools.</p>
 <dl class="method">
-<dt id="randomNumbers.QuasiRandomKorobovPointSet.testFct">
-<code class="descname">testFct</code><span class="sig-paren">(</span><em>seq=None</em>, <em>buggyRegionLimits=(0.45</em>, <em>0.55)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#QuasiRandomKorobovPointSet.testFct"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.QuasiRandomKorobovPointSet.testFct" title="Permalink to this definition">¶</a></dt>
+<dt id="randomNumbers.QuasiRandomPointSet.countHits">
+<code class="descname">countHits</code><span class="sig-paren">(</span><em>regionLimits</em>, <em>pointSet=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#QuasiRandomPointSet.countHits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.QuasiRandomPointSet.countHits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Counting hits of a quasi random point set in given regionLimits.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="randomNumbers.QuasiRandomPointSet.testFct">
+<code class="descname">testFct</code><span class="sig-paren">(</span><em>seq=None</em>, <em>buggyRegionLimits=(0.45</em>, <em>0.55)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#QuasiRandomPointSet.testFct"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.QuasiRandomPointSet.testFct" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tiny buggy hypercube for testing a quasi random Korobov 3D sequence.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="randomNumbers.QuasiRandomPointSet.testUniformityDiscrepancy">
+<code class="descname">testUniformityDiscrepancy</code><span class="sig-paren">(</span><em>k=4</em>, <em>pointSet=None</em>, <em>fileName='testUniformity'</em>, <em>Debug=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#QuasiRandomPointSet.testUniformityDiscrepancy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.QuasiRandomPointSet.testUniformityDiscrepancy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Count the number of point in each partial hypercube [(x-1)/k,x/k]^d
+where x integer ands 0 &lt; x &lt;= k.</p>
 </dd></dl>
 
 </dd></dl>

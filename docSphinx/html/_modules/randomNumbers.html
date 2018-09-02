@@ -276,9 +276,90 @@
         <span class="n">randeval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="o">*</span><span class="p">(</span> <span class="n">tan</span><span class="p">(</span> <span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">prob</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span>                  
 
         <span class="k">return</span> <span class="n">randeval</span></div></div>
+
+<span class="c1">#---------</span>
+<div class="viewcode-block" id="QuasiRandomPointSet"><a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomPointSet">[docs]</a><span class="k">class</span> <span class="nc">QuasiRandomPointSet</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Abstract class for generic quasi random point set methods and tools.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="QuasiRandomPointSet.testFct"><a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomPointSet.testFct">[docs]</a>    <span class="k">def</span> <span class="nf">testFct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">seq</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">buggyRegionLimits</span><span class="o">=</span><span class="p">(</span><span class="mf">0.45</span><span class="p">,</span><span class="mf">0.55</span><span class="p">)):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Tiny buggy hypercube for testing a quasi random Korobov 3D sequence.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span>
+        <span class="n">buggyHypercube</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+            <span class="n">buggyHypercube</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">buggyRegionLimits</span>
+        <span class="n">Bugs</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">seq</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">seq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointSet</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">buggyHypercube</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">buggyHypercube</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]):</span>
+                    <span class="n">BuggyPoint</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">BuggyPoint</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="k">break</span>
+            <span class="k">if</span> <span class="n">BuggyPoint</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Bug:&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">buggyHypercube</span><span class="p">)</span>
+                <span class="n">Bugs</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">Bugs</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1"> bug(s) detected !!!&#39;</span> <span class="o">%</span> <span class="n">Bugs</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;No bugs detected&#39;</span></div>
+
+<div class="viewcode-block" id="QuasiRandomPointSet.countHits"><a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomPointSet.countHits">[docs]</a>    <span class="k">def</span> <span class="nf">countHits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">regionLimits</span><span class="p">,</span><span class="n">pointSet</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Counting hits of a quasi random point set in given regionLimits.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span>
+        <span class="n">hits</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">pointSet</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">pointSet</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointSet</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">pointSet</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">regionLimits</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">regionLimits</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]):</span>
+                    <span class="n">HitPoint</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">HitPoint</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="k">break</span>
+            <span class="k">if</span> <span class="n">HitPoint</span><span class="p">:</span>
+                <span class="c1">#print(&#39;Hit:&#39;, x, regionLimits)</span>
+                <span class="n">hits</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">hits</span></div>
+    
+<div class="viewcode-block" id="QuasiRandomPointSet.testUniformityDiscrepancy"><a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomPointSet.testUniformityDiscrepancy">[docs]</a>    <span class="k">def</span> <span class="nf">testUniformityDiscrepancy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">pointSet</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;testUniformity&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Count the number of point in each partial hypercube [(x-1)/k,x/k]^d</span>
+<span class="sd">        where x integer ands 0 &lt; x &lt;= k.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">product</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span>
+        <span class="n">ctrlLists</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">kf</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+            <span class="n">ctrlLists</span><span class="o">.</span><span class="n">append</span><span class="p">([((</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">kf</span><span class="p">,</span><span class="n">x</span><span class="o">/</span><span class="n">kf</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span>
+            <span class="c1">#if Debug:</span>
+            <span class="c1">#    print(ctrlLists)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="o">+</span><span class="s1">&#39;.csv&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fo</span><span class="p">:</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&quot;x</span><span class="se">\n</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">region</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">ctrlLists</span><span class="p">):</span>
+                <span class="c1">#print(region)</span>
+                <span class="n">hits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">countHits</span><span class="p">(</span><span class="n">region</span><span class="p">,</span><span class="n">pointSet</span><span class="p">)</span>
+                <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">hits</span><span class="p">)</span>            
+        <span class="n">r</span> <span class="o">=</span> <span class="n">k</span><span class="o">**</span><span class="n">s</span>
+        <span class="k">if</span> <span class="n">pointSet</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cardPtSet</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pointSet</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cardPtSet</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointSetCardinality</span>
+        <span class="n">thProb</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">cardPtSet</span><span class="p">)</span><span class="o">/</span><span class="n">r</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Theoretical distribution: </span><span class="si">%d</span><span class="s1"> / </span><span class="si">%d</span><span class="s1"> = </span><span class="si">%.3f</span><span class="s1">&#39;</span>\
+              <span class="o">%</span> <span class="p">(</span><span class="n">cardPtSet</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">thProb</span><span class="p">)</span> <span class="p">)</span></div></div>
+        
             
+    
 <span class="c1">#----------</span>
-<div class="viewcode-block" id="QuasiRandomKorobovPointSet"><a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomKorobovPointSet">[docs]</a><span class="k">class</span> <span class="nc">QuasiRandomKorobovPointSet</span><span class="p">():</span>
+<div class="viewcode-block" id="QuasiRandomKorobovPointSet"><a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomKorobovPointSet">[docs]</a><span class="k">class</span> <span class="nc">QuasiRandomKorobovPointSet</span><span class="p">(</span><span class="n">QuasiRandomPointSet</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Constructor for rendering a Korobov point set of dimension *n* which is *fully projection regular* in the $s$-dimensional real-valued [0,1)^s hypercube. The constructor uses a MLCG generator with potentially a full period. The point set is stored in a self.sequence attribute and saved in a CSV formatted file.</span>
 
@@ -408,36 +489,12 @@
                     <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
                 <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
                 <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">wstr</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sequence</span> <span class="o">=</span> <span class="n">sequence</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointSet</span> <span class="o">=</span> <span class="n">sequence</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointSetCardinality</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="QuasiRandomKorobovPointSet.testFct"><a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomKorobovPointSet.testFct">[docs]</a>    <span class="k">def</span> <span class="nf">testFct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">seq</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">buggyRegionLimits</span><span class="o">=</span><span class="p">(</span><span class="mf">0.45</span><span class="p">,</span><span class="mf">0.55</span><span class="p">)):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Tiny buggy hypercube for testing a quasi random Korobov 3D sequence.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span>
-        <span class="n">buggyHypercube</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-            <span class="n">buggyHypercube</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">buggyRegionLimits</span>
-        <span class="n">Bugs</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">if</span> <span class="n">seq</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">seq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sequence</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">buggyHypercube</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">buggyHypercube</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]):</span>
-                    <span class="n">BuggyPoint</span> <span class="o">=</span> <span class="kc">True</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">BuggyPoint</span> <span class="o">=</span> <span class="kc">False</span>
-                    <span class="k">break</span>
-            <span class="k">if</span> <span class="n">BuggyPoint</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Bug:&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">buggyHypercube</span><span class="p">)</span>
-                <span class="n">Bugs</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">if</span> <span class="n">Bugs</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1"> bug(s) detected !!!&#39;</span> <span class="o">%</span> <span class="n">Bugs</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;No bugs detected&#39;</span></div></div>
 
 <span class="c1">#-------</span>
-<div class="viewcode-block" id="QuasiRandomFareyPointSet"><a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomFareyPointSet">[docs]</a><span class="k">class</span> <span class="nc">QuasiRandomFareyPointSet</span><span class="p">():</span>
+<div class="viewcode-block" id="QuasiRandomFareyPointSet"><a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomFareyPointSet">[docs]</a><span class="k">class</span> <span class="nc">QuasiRandomFareyPointSet</span><span class="p">(</span><span class="n">QuasiRandomPointSet</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Constructor for rendering a Farey point set of dimension *s* and max denominateor *n* which is *fully projection regular* in the $s$-dimensional real-valued [0,1]^s hypercube. The lattice constructor uses a randomly shuffled Farey series for the point construction. The resulting point set is stored in a self.pointSet attribute and saved by default in a CSV formatted file.</span>
 
@@ -481,11 +538,11 @@
 <span class="sd">        4   0.626933 0.532909 0.433209 0.010205 0.612632</span>
 <span class="sd">        5   0.044506 0.899225 0.659525 0.030205 0.670410</span>
 <span class="sd">       &gt; library(&#39;lattice&#39;)</span>
-<span class="sd">        &gt; cloud(x$x5 ~ x$x1 + x$x4)</span>
+<span class="sd">        &gt; cloud(x$x5 ~ x$x1 + x$x3)</span>
 <span class="sd">        &gt; plot(x$x1,x$x3) </span>
 
 <span class="sd">    .. image:: farey3D.png</span>
-<span class="sd">        :alt: Checking projection regularity</span>
+<span class="sd">        :alt: Checking hypercube filling</span>
 <span class="sd">        :width: 500 px</span>
 <span class="sd">        :align: center</span>
 
@@ -604,33 +661,33 @@
         <span class="c1"># close file and store point set</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pointSet</span> <span class="o">=</span> <span class="n">pointSet</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pointSetCardinality</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">nf</span> <span class="o">+</span> <span class="n">s</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointSetCardinality</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">nf</span> <span class="o">+</span> <span class="n">s</span> </div>
 
-<div class="viewcode-block" id="QuasiRandomFareyPointSet.testFct"><a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomFareyPointSet.testFct">[docs]</a>    <span class="k">def</span> <span class="nf">testFct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ptSet</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">buggyRegionLimits</span><span class="o">=</span><span class="p">(</span><span class="mf">0.45</span><span class="p">,</span><span class="mf">0.55</span><span class="p">)):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Tiny buggy hypercube for testing a quasi random Farey point set.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span>
-        <span class="n">buggyHypercube</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-            <span class="n">buggyHypercube</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">buggyRegionLimits</span>
-        <span class="n">Bugs</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">if</span> <span class="n">ptSet</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">ptSet</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointSet</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ptSet</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">buggyHypercube</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">buggyHypercube</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]):</span>
-                    <span class="n">BuggyPoint</span> <span class="o">=</span> <span class="kc">True</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">BuggyPoint</span> <span class="o">=</span> <span class="kc">False</span>
-                    <span class="k">break</span>
-            <span class="k">if</span> <span class="n">BuggyPoint</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Bug:&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">buggyHypercube</span><span class="p">)</span>
-                <span class="n">Bugs</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">if</span> <span class="n">Bugs</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1"> bug(s) detected !!!&#39;</span> <span class="o">%</span> <span class="n">Bugs</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;No bugs detected&#39;</span></div></div>
+    <span class="c1"># def testFct(self,ptSet=None,buggyRegionLimits=(0.45,0.55)):</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     Tiny buggy hypercube for testing a quasi random Farey point set.</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     s = self.s</span>
+    <span class="c1">#     buggyHypercube = dict()</span>
+    <span class="c1">#     for j in range(s):</span>
+    <span class="c1">#         buggyHypercube[j] = buggyRegionLimits</span>
+    <span class="c1">#     Bugs = 0</span>
+    <span class="c1">#     if ptSet == None:</span>
+    <span class="c1">#         ptSet = self.pointSet</span>
+    <span class="c1">#     for x in ptSet:</span>
+    <span class="c1">#         for j in range(s):</span>
+    <span class="c1">#             if (x[j] &gt;= buggyHypercube[j][0] and x[j] &lt;= buggyHypercube[j][1]):</span>
+    <span class="c1">#                 BuggyPoint = True</span>
+    <span class="c1">#             else:</span>
+    <span class="c1">#                 BuggyPoint = False</span>
+    <span class="c1">#                 break</span>
+    <span class="c1">#         if BuggyPoint:</span>
+    <span class="c1">#             print(&#39;Bug:&#39;, x, buggyHypercube)</span>
+    <span class="c1">#             Bugs += 1</span>
+    <span class="c1">#     if Bugs &gt; 0:</span>
+    <span class="c1">#         return &#39;%d bug(s) detected !!!&#39; % Bugs</span>
+    <span class="c1">#     else:</span>
+    <span class="c1">#         return &#39;No bugs detected&#39;</span>
 
         
 <span class="c1">#----------testing the code ----------------</span>
@@ -735,29 +792,36 @@
 <span class="c1">#     print(&#39;# of Cauchy simulations = %d&#39; % Nsim)</span>
 
 <span class="c1">#-------------- testing quasi random Korobov sampling against Mersenne twister sampling</span>
-    <span class="c1"># kor = QuasiRandomKorobovPointSet(n=997,s=5,a=383,Randomized=True,seed=3,Debug=False)</span>
-    <span class="c1"># print(kor.sequence[:10])</span>
-    <span class="c1"># print(&#39;Korobov quasi random sampling&#39;)</span>
-    <span class="c1"># print(kor.testFct(seq=kor.sequence,buggyRegionLimits=(0.45,0.55)))</span>
-    <span class="c1"># randSeq = []</span>
-    <span class="c1"># seed = 3</span>
-    <span class="c1"># import random</span>
-    <span class="c1"># random.seed(seed)</span>
-    <span class="c1"># for i in range(997):</span>
-    <span class="c1">#     point = []</span>
-    <span class="c1">#     for j in range(kor.s):</span>
-    <span class="c1">#         point.append(random.random())</span>
-    <span class="c1">#     randSeq.append(point)</span>
-    <span class="c1"># print(&#39;Mersenne Twister random sampling&#39;)</span>
-    <span class="c1"># print(kor.testFct(seq=randSeq,buggyRegionLimits=(0.45,0.55)))</span>
-    <span class="n">qrfs</span> <span class="o">=</span> <span class="n">QuasiRandomFareyPointSet</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Randomized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">seed</span><span class="o">=</span><span class="mi">101</span>
+    <span class="n">kor</span> <span class="o">=</span> <span class="n">QuasiRandomKorobovPointSet</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">997</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">a</span><span class="o">=</span><span class="mi">383</span><span class="p">,</span><span class="n">Randomized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">kor</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">kor</span><span class="o">.</span><span class="n">pointSet</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">kor</span><span class="o">.</span><span class="n">pointSetCardinality</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Quasi random Korobov sampling&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">kor</span><span class="o">.</span><span class="n">testFct</span><span class="p">(</span><span class="n">seq</span><span class="o">=</span><span class="n">kor</span><span class="o">.</span><span class="n">pointSet</span><span class="p">,</span><span class="n">buggyRegionLimits</span><span class="o">=</span><span class="p">(</span><span class="mf">0.45</span><span class="p">,</span><span class="mf">0.55</span><span class="p">)))</span>
+    <span class="n">randSeq</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="kn">import</span> <span class="nn">random</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">997</span><span class="p">):</span>
+        <span class="n">point</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">kor</span><span class="o">.</span><span class="n">s</span><span class="p">):</span>
+            <span class="n">point</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>
+        <span class="n">randSeq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mersenne Twister random sampling&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">kor</span><span class="o">.</span><span class="n">testFct</span><span class="p">(</span><span class="n">seq</span><span class="o">=</span><span class="n">randSeq</span><span class="p">,</span><span class="n">buggyRegionLimits</span><span class="o">=</span><span class="p">(</span><span class="mf">0.45</span><span class="p">,</span><span class="mf">0.55</span><span class="p">)))</span>
+    <span class="n">qrfs</span> <span class="o">=</span> <span class="n">QuasiRandomFareyPointSet</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">Randomized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="n">fareySeries</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="n">shuffledFareySeries</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="n">seriesLength</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="n">pointSet</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="n">pointSetCardinality</span><span class="p">)</span>
-            
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Quasi random Farey sampling&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="n">testFct</span><span class="p">(</span><span class="n">seq</span><span class="o">=</span><span class="n">qrfs</span><span class="o">.</span><span class="n">pointSet</span><span class="p">,</span><span class="n">buggyRegionLimits</span><span class="o">=</span><span class="p">(</span><span class="mf">0.45</span><span class="p">,</span><span class="mf">0.55</span><span class="p">)))</span>
+    <span class="n">kor</span><span class="o">.</span><span class="n">testUniformityDiscrepancy</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;korobovTest&#39;</span><span class="p">)</span>
+    <span class="n">qrfs</span><span class="o">.</span><span class="n">testUniformityDiscrepancy</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;fareyTest&#39;</span><span class="p">)</span>
+    <span class="n">qrfs</span><span class="o">.</span><span class="n">testUniformityDiscrepancy</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">pointSet</span><span class="o">=</span><span class="n">randSeq</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;randTest&#39;</span><span class="p">)</span>
+           
 
 </pre></div>
 
