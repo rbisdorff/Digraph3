@@ -401,59 +401,64 @@ class QuasiRandomKorobovPointSet():
 #-------
 class QuasiRandomFareyPointSet():
     """
-    Constructor for rendering Farey series of dimension *s* and max denominateor *n* which is *fully projection regular* in the $s$-dimensional real-valued [0,1)^s hypercube. The lattice constructor uses a randomly shuffled Farey series for the point construction. The resulting point set is stored in a self.sequence attribute and saved in a CSV formatted file.
+    Constructor for rendering Farey series of dimension *s* and max denominateor *n* which is *fully projection regular* in the $s$-dimensional real-valued [0,1]^s hypercube. The lattice constructor uses a randomly shuffled Farey series for the point construction. The resulting point set is stored in a self.sequence attribute and saved in a CSV formatted file.
 
     *Parameters*:
 
         *n* : (default=20) maximal denominator of the Farey series
         *s* : (default=3) dimension of the hypercube
         *seed* : for regenrating the same Farey point set 
-        * *Randomized* : (default=False) the points are randomly shifted (mod 1) to avoid cycling when *s* > *n*.
+        * *Randomized* : (default=True) On each dimension, the points are randomly shifted (mod 1) to avoid constant projection for equal index distances.
         * *fileName*: (default='farey') name -without the csv suffix- of the stored result. 
 
     Sample Python session:
 
         >>> from randomNumbers import QuasiRandomFareyPointSet
-        >>> qrfs = QuasiRandomFareyPointSet(n=20,s=5,seed=100,
+        >>> qrfs = QuasiRandomFareyPointSet(n=20,s=5,Randomized=True,
                                             fileName='testFarey')
-        >>> print(qrfs.fareySeries[:10])
-        [0.0, 0.05, 0.0526, 0.0555, 0.0588, 0.0625, 0.0666, 0.0714, 
-         0.0769, 0.083333]
-        >>> print(qrfs.pointSet[:10])
-        [(0.8461, 0.0588, 0.0526, 0.1053, 0.6923), 
-         (0.0588, 0.0526, 0.1053, 0.6923, 0.3636), 
-         (0.0526, 0.1053, 0.6923, 0.3636, 0.0625), 
-         (0.1053, 0.6923, 0.3636, 0.0625, 0.8500), 
-         (0.6923, 0.3636, 0.0625, 0.8500, 0.7692),
-         ...]
+        >>> print(qrfs.__dict__.keys())
+        dict_keys(['n', 's', 'Randomized', 'seed', 'fileName', 'Debug', 
+                   'fareySeries', 'seriesLength', 'shuffledFareySeries', 
+                   'pointSet', 'pointSetCardinality'])
+        >>> print(qrfs.fareySeries)
+        [0.0, 0.04, 0.04166, 0.0435, 0.04545, 0.0476, 0.05, 0.05263, 
+         0.0555, 0.058823529411764705, ...] 
+        >>> print(qrfs.seriesLength)
+        201
+        >>> print(qrfs.pointSet[)
+        [(0.0, 0.0, 0.0, 0.0, 0.0), (0.5116, 0.4660, 0.6493, 0.41757, 0.3663),
+         (0.9776, 0.1153, 0.0669, 0.7839, 0.5926), (0.6269, 0.5329, 0.4332, 0.0102, 0.6126),
+         (0.0445, 0.8992, 0.6595, 0.0302, 0.6704), ...]
+        >>> print(qrfs.pointSetCaridinality)
+        207
      
     The resulting point set may be inspected in an R session::
 
         > x = read.csv('testFarey.csv')
         > x[1:5,]
-        >    x1       x2       x3       x4       x5
-        1 0.846154 0.058824 0.052632 0.105263 0.692308
-        2 0.058824 0.052632 0.105263 0.692308 0.363636
-        3 0.052632 0.105263 0.692308 0.363636 0.062500
-        4 0.105263 0.692308 0.363636 0.062500 0.850000
-        5 0.692308 0.363636 0.062500 0.850000 0.769231
+          x1       x2       x3       x4       x5
+        1   0.000000 0.000000 0.000000 0.000000 0.000000
+        2   0.511597 0.466016 0.649321 0.417573 0.366316
+        3   0.977613 0.115336 0.066893 0.783889 0.592632
+        4   0.626933 0.532909 0.433209 0.010205 0.612632
+        5   0.044506 0.899225 0.659525 0.030205 0.670410
        > library('lattice')
         > cloud(x$x5 ~ x$x1 + x$x4)
-        > plot(x$x3,x$x4) 
+        > plot(x$x1,x$x3) 
 
     .. image:: farey3D.png
         :alt: Checking projection regularity
         :width: 500 px
         :align: center
 
-    .. image:: fareyx1x4.png
+    .. image:: fareyx1x3.png
         :alt: Checking projection regularity
         :width: 400 px
         :align: center
 
     """
     
-    def __init__(self,n=20,s=3,seed=None,Randomized=False,fileName='farey',Debug=False):
+    def __init__(self,n=20,s=3,seed=None,Randomized=True,fileName='farey',Debug=False):
         # imports
         import random
         from arithmetics import computeFareySeries
@@ -477,10 +482,12 @@ class QuasiRandomFareyPointSet():
             print('Error: s = %d larger than Farey series length = %d !!' % (s,nf))
             print('Choose a higher denominator than the actual n = %d !!' % n)
             return
-        self.seriesLength= nf
+        self.seriesLength = nf
         random.shuffle(fs)
-        if fs[0] < self.fareySeries[1]:   # first item is zero
-            fs[0],fs[1] = fs[1],fs[0]
+        if fs[0] < self.fareySeries[1]:   # if first term is zero 
+            fs[0],fs[1] = fs[1],fs[0]     # swap first and second !!!
+        if fs[nf-1] > self.fareySeries[nf-2]:   # if last term is one  
+            fs[nf-1],fs[nf-2] = fs[nf-2],fs[nf-1]     # swap last and second last!!!
         self.shuffledFareySeries = list(fs)
         # storing the simulated point set
         if fileName != None:
@@ -534,8 +541,32 @@ class QuasiRandomFareyPointSet():
                     wstr += '"%f",' % (u[j])
                 wstr += '"%f"\n' % (u[s-1])
                 fo.write(wstr)
+        # close with adding s ones
+        if Randomized:
+            u = [self.fareySeries[nf-1] for j in range(s)]
+            pointSet.append((tuple(u)))
+            if fileName != None:
+                wstr = ''
+                for j in range(s-1):
+                    wstr += '"%f",' % (u[j])
+                wstr += '"%f"\n' % (u[s-1])
+                fo.write(wstr)
+        else:
+            for jj in range(s):
+                for j in range(s-1):
+                    u[j] = u[j+1] # << 1
+                u[s-1] = self.fareySeries[nf-1]
+                pointSet.append((tuple(u)))
+                if fileName != None:
+                    wstr = ''
+                    for j in range(s-1):
+                        wstr += '"%f",' % (u[j])
+                    wstr += '"%f"\n' % (u[s-1])
+                    fo.write(wstr)
+        # close file and store point set
         fo.close()
         self.pointSet = pointSet
+        self.pointSetCardinality = 1 + nf + s 
 
     def testFct(self,ptSet=None,buggyRegionLimits=(0.45,0.55)):
         """
@@ -681,11 +712,12 @@ if __name__ == "__main__":
     #     randSeq.append(point)
     # print('Mersenne Twister random sampling')
     # print(kor.testFct(seq=randSeq,buggyRegionLimits=(0.45,0.55)))
-    qrfs = QuasiRandomFareyPointSet(n=25,s=5)
-    print(qrfs.fareySeries)
-    print(qrfs.shuffledFareySeries)
+    qrfs = QuasiRandomFareyPointSet(n=25,s=5,Randomized=True)
+    print(qrfs.__dict__.keys())
+    print(qrfs.fareySeries[:10])
+    print(qrfs.shuffledFareySeries[:10])
     print(qrfs.seriesLength)
-    #print(qrfs.pointSet)
-    print(len(qrfs.pointSet))
+    print(qrfs.pointSet[:5])
+    print(qrfs.pointSetCardinality)
             
 

@@ -439,59 +439,64 @@
 <span class="c1">#-------</span>
 <div class="viewcode-block" id="QuasiRandomFareyPointSet"><a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomFareyPointSet">[docs]</a><span class="k">class</span> <span class="nc">QuasiRandomFareyPointSet</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Constructor for rendering Farey series of dimension *s* and max denominateor *n* which is *fully projection regular* in the $s$-dimensional real-valued [0,1)^s hypercube. The lattice constructor uses a randomly shuffled Farey series for the point construction. The resulting point set is stored in a self.sequence attribute and saved in a CSV formatted file.</span>
+<span class="sd">    Constructor for rendering Farey series of dimension *s* and max denominateor *n* which is *fully projection regular* in the $s$-dimensional real-valued [0,1]^s hypercube. The lattice constructor uses a randomly shuffled Farey series for the point construction. The resulting point set is stored in a self.sequence attribute and saved in a CSV formatted file.</span>
 
 <span class="sd">    *Parameters*:</span>
 
 <span class="sd">        *n* : (default=20) maximal denominator of the Farey series</span>
 <span class="sd">        *s* : (default=3) dimension of the hypercube</span>
 <span class="sd">        *seed* : for regenrating the same Farey point set </span>
-<span class="sd">        * *Randomized* : (default=False) the points are randomly shifted (mod 1) to avoid cycling when *s* &gt; *n*.</span>
+<span class="sd">        * *Randomized* : (default=True) On each dimension, the points are randomly shifted (mod 1) to avoid constant projection for equal index distances.</span>
 <span class="sd">        * *fileName*: (default=&#39;farey&#39;) name -without the csv suffix- of the stored result. </span>
 
 <span class="sd">    Sample Python session:</span>
 
 <span class="sd">        &gt;&gt;&gt; from randomNumbers import QuasiRandomFareyPointSet</span>
-<span class="sd">        &gt;&gt;&gt; qrfs = QuasiRandomFareyPointSet(n=20,s=5,seed=100,</span>
+<span class="sd">        &gt;&gt;&gt; qrfs = QuasiRandomFareyPointSet(n=20,s=5,Randomized=True,</span>
 <span class="sd">                                            fileName=&#39;testFarey&#39;)</span>
-<span class="sd">        &gt;&gt;&gt; print(qrfs.fareySeries[:10])</span>
-<span class="sd">        [0.0, 0.05, 0.0526, 0.0555, 0.0588, 0.0625, 0.0666, 0.0714, </span>
-<span class="sd">         0.0769, 0.083333]</span>
-<span class="sd">        &gt;&gt;&gt; print(qrfs.pointSet[:10])</span>
-<span class="sd">        [(0.8461, 0.0588, 0.0526, 0.1053, 0.6923), </span>
-<span class="sd">         (0.0588, 0.0526, 0.1053, 0.6923, 0.3636), </span>
-<span class="sd">         (0.0526, 0.1053, 0.6923, 0.3636, 0.0625), </span>
-<span class="sd">         (0.1053, 0.6923, 0.3636, 0.0625, 0.8500), </span>
-<span class="sd">         (0.6923, 0.3636, 0.0625, 0.8500, 0.7692),</span>
-<span class="sd">         ...]</span>
+<span class="sd">        &gt;&gt;&gt; print(qrfs.__dict__.keys())</span>
+<span class="sd">        dict_keys([&#39;n&#39;, &#39;s&#39;, &#39;Randomized&#39;, &#39;seed&#39;, &#39;fileName&#39;, &#39;Debug&#39;, </span>
+<span class="sd">                   &#39;fareySeries&#39;, &#39;seriesLength&#39;, &#39;shuffledFareySeries&#39;, </span>
+<span class="sd">                   &#39;pointSet&#39;, &#39;pointSetCardinality&#39;])</span>
+<span class="sd">        &gt;&gt;&gt; print(qrfs.fareySeries)</span>
+<span class="sd">        [0.0, 0.04, 0.04166, 0.0435, 0.04545, 0.0476, 0.05, 0.05263, </span>
+<span class="sd">         0.0555, 0.058823529411764705, ...] </span>
+<span class="sd">        &gt;&gt;&gt; print(qrfs.seriesLength)</span>
+<span class="sd">        201</span>
+<span class="sd">        &gt;&gt;&gt; print(qrfs.pointSet[)</span>
+<span class="sd">        [(0.0, 0.0, 0.0, 0.0, 0.0), (0.5116, 0.4660, 0.6493, 0.41757, 0.3663),</span>
+<span class="sd">         (0.9776, 0.1153, 0.0669, 0.7839, 0.5926), (0.6269, 0.5329, 0.4332, 0.0102, 0.6126),</span>
+<span class="sd">         (0.0445, 0.8992, 0.6595, 0.0302, 0.6704), ...]</span>
+<span class="sd">        &gt;&gt;&gt; print(qrfs.pointSetCaridinality)</span>
+<span class="sd">        207</span>
 <span class="sd">     </span>
 <span class="sd">    The resulting point set may be inspected in an R session::</span>
 
 <span class="sd">        &gt; x = read.csv(&#39;testFarey.csv&#39;)</span>
 <span class="sd">        &gt; x[1:5,]</span>
-<span class="sd">        &gt;    x1       x2       x3       x4       x5</span>
-<span class="sd">        1 0.846154 0.058824 0.052632 0.105263 0.692308</span>
-<span class="sd">        2 0.058824 0.052632 0.105263 0.692308 0.363636</span>
-<span class="sd">        3 0.052632 0.105263 0.692308 0.363636 0.062500</span>
-<span class="sd">        4 0.105263 0.692308 0.363636 0.062500 0.850000</span>
-<span class="sd">        5 0.692308 0.363636 0.062500 0.850000 0.769231</span>
+<span class="sd">          x1       x2       x3       x4       x5</span>
+<span class="sd">        1   0.000000 0.000000 0.000000 0.000000 0.000000</span>
+<span class="sd">        2   0.511597 0.466016 0.649321 0.417573 0.366316</span>
+<span class="sd">        3   0.977613 0.115336 0.066893 0.783889 0.592632</span>
+<span class="sd">        4   0.626933 0.532909 0.433209 0.010205 0.612632</span>
+<span class="sd">        5   0.044506 0.899225 0.659525 0.030205 0.670410</span>
 <span class="sd">       &gt; library(&#39;lattice&#39;)</span>
 <span class="sd">        &gt; cloud(x$x5 ~ x$x1 + x$x4)</span>
-<span class="sd">        &gt; plot(x$x3,x$x4) </span>
+<span class="sd">        &gt; plot(x$x1,x$x3) </span>
 
 <span class="sd">    .. image:: farey3D.png</span>
 <span class="sd">        :alt: Checking projection regularity</span>
 <span class="sd">        :width: 500 px</span>
 <span class="sd">        :align: center</span>
 
-<span class="sd">    .. image:: fareyx1x4.png</span>
+<span class="sd">    .. image:: fareyx1x3.png</span>
 <span class="sd">        :alt: Checking projection regularity</span>
 <span class="sd">        :width: 400 px</span>
 <span class="sd">        :align: center</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Randomized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;farey&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Randomized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;farey&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="c1"># imports</span>
         <span class="kn">import</span> <span class="nn">random</span>
         <span class="kn">from</span> <span class="nn">arithmetics</span> <span class="k">import</span> <span class="n">computeFareySeries</span>
@@ -515,10 +520,12 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: s = </span><span class="si">%d</span><span class="s1"> larger than Farey series length = </span><span class="si">%d</span><span class="s1"> !!&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">nf</span><span class="p">))</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Choose a higher denominator than the actual n = </span><span class="si">%d</span><span class="s1"> !!&#39;</span> <span class="o">%</span> <span class="n">n</span><span class="p">)</span>
             <span class="k">return</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">seriesLength</span><span class="o">=</span> <span class="n">nf</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seriesLength</span> <span class="o">=</span> <span class="n">nf</span>
         <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">fs</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">fs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">fareySeries</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>   <span class="c1"># first item is zero</span>
-            <span class="n">fs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">fs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">fs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">fs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">fs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">fareySeries</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>   <span class="c1"># if first term is zero </span>
+            <span class="n">fs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">fs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">fs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">fs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>     <span class="c1"># swap first and second !!!</span>
+        <span class="k">if</span> <span class="n">fs</span><span class="p">[</span><span class="n">nf</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">fareySeries</span><span class="p">[</span><span class="n">nf</span><span class="o">-</span><span class="mi">2</span><span class="p">]:</span>   <span class="c1"># if last term is one  </span>
+            <span class="n">fs</span><span class="p">[</span><span class="n">nf</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">fs</span><span class="p">[</span><span class="n">nf</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">fs</span><span class="p">[</span><span class="n">nf</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span><span class="n">fs</span><span class="p">[</span><span class="n">nf</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>     <span class="c1"># swap last and second last!!!</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">shuffledFareySeries</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">fs</span><span class="p">)</span>
         <span class="c1"># storing the simulated point set</span>
         <span class="k">if</span> <span class="n">fileName</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
@@ -572,8 +579,32 @@
                     <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
                 <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
                 <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">wstr</span><span class="p">)</span>
+        <span class="c1"># close with adding s ones</span>
+        <span class="k">if</span> <span class="n">Randomized</span><span class="p">:</span>
+            <span class="n">u</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">fareySeries</span><span class="p">[</span><span class="n">nf</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">)]</span>
+            <span class="n">pointSet</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">tuple</span><span class="p">(</span><span class="n">u</span><span class="p">)))</span>
+            <span class="k">if</span> <span class="n">fileName</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">wstr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">wstr</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># &lt;&lt; 1</span>
+                <span class="n">u</span><span class="p">[</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fareySeries</span><span class="p">[</span><span class="n">nf</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">pointSet</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">tuple</span><span class="p">(</span><span class="n">u</span><span class="p">)))</span>
+                <span class="k">if</span> <span class="n">fileName</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">wstr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                        <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                    <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">wstr</span><span class="p">)</span>
+        <span class="c1"># close file and store point set</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pointSet</span> <span class="o">=</span> <span class="n">pointSet</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointSetCardinality</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">nf</span> <span class="o">+</span> <span class="n">s</span> 
 
 <div class="viewcode-block" id="QuasiRandomFareyPointSet.testFct"><a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomFareyPointSet.testFct">[docs]</a>    <span class="k">def</span> <span class="nf">testFct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ptSet</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">buggyRegionLimits</span><span class="o">=</span><span class="p">(</span><span class="mf">0.45</span><span class="p">,</span><span class="mf">0.55</span><span class="p">)):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -719,12 +750,13 @@
     <span class="c1">#     randSeq.append(point)</span>
     <span class="c1"># print(&#39;Mersenne Twister random sampling&#39;)</span>
     <span class="c1"># print(kor.testFct(seq=randSeq,buggyRegionLimits=(0.45,0.55)))</span>
-    <span class="n">qrfs</span> <span class="o">=</span> <span class="n">QuasiRandomFareyPointSet</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="n">fareySeries</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="n">shuffledFareySeries</span><span class="p">)</span>
+    <span class="n">qrfs</span> <span class="o">=</span> <span class="n">QuasiRandomFareyPointSet</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Randomized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="n">fareySeries</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="n">shuffledFareySeries</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="n">seriesLength</span><span class="p">)</span>
-    <span class="c1">#print(qrfs.pointSet)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="n">pointSet</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="n">pointSet</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="n">pointSetCardinality</span><span class="p">)</span>
             
 
 </pre></div>
