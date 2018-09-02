@@ -439,15 +439,15 @@
 <span class="c1">#-------</span>
 <div class="viewcode-block" id="QuasiRandomFareyPointSet"><a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomFareyPointSet">[docs]</a><span class="k">class</span> <span class="nc">QuasiRandomFareyPointSet</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Constructor for rendering Farey series of dimension *s* and max denominateor *n* which is *fully projection regular* in the $s$-dimensional real-valued [0,1]^s hypercube. The lattice constructor uses a randomly shuffled Farey series for the point construction. The resulting point set is stored in a self.pointSet attribute and saved by default in a CSV formatted file.</span>
+<span class="sd">    Constructor for rendering a Farey point set of dimension *s* and max denominateor *n* which is *fully projection regular* in the $s$-dimensional real-valued [0,1]^s hypercube. The lattice constructor uses a randomly shuffled Farey series for the point construction. The resulting point set is stored in a self.pointSet attribute and saved by default in a CSV formatted file.</span>
 
 <span class="sd">    *Parameters*:</span>
 
 <span class="sd">        * *n* : (default=20) maximal denominator of the Farey series</span>
 <span class="sd">        * *s* : (default=3) dimension of the hypercube</span>
-<span class="sd">        * *seed* : for regenrating the same Farey point set </span>
-<span class="sd">        * * *Randomized* : (default=True) On each dimension, the points are randomly shifted (mod 1) to avoid constant projections for equal dimension index distances.</span>
-<span class="sd">        * * *fileName*: (default=&#39;farey&#39;) name -without the csv suffix- of the stored result file. </span>
+<span class="sd">        * *seed* : for regenerating the same Farey point set </span>
+<span class="sd">        * *Randomized* : (default=True) On each dimension, the points are randomly shifted (mod 1) to avoid constant projections for equal dimension index distances.</span>
+<span class="sd">        * *fileName*: (default=&#39;farey&#39;) name -without the csv suffix- of the stored result file. </span>
 
 <span class="sd">    Sample Python session:</span>
 

@@ -7899,21 +7899,15 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 <dt id="randomNumbers.QuasiRandomFareyPointSet">
 <em class="property">class </em><code class="descclassname">randomNumbers.</code><code class="descname">QuasiRandomFareyPointSet</code><span class="sig-paren">(</span><em>n=20</em>, <em>s=3</em>, <em>seed=None</em>, <em>Randomized=True</em>, <em>fileName='farey'</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#QuasiRandomFareyPointSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.QuasiRandomFareyPointSet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>Constructor for rendering Farey series of dimension <em>s</em> and max denominateor <em>n</em> which is <em>fully projection regular</em> in the $s$-dimensional real-valued [0,1]^s hypercube. The lattice constructor uses a randomly shuffled Farey series for the point construction. The resulting point set is stored in a self.pointSet attribute and saved by default in a CSV formatted file.</p>
+<p>Constructor for rendering a Farey point set of dimension <em>s</em> and max denominateor <em>n</em> which is <em>fully projection regular</em> in the $s$-dimensional real-valued [0,1]^s hypercube. The lattice constructor uses a randomly shuffled Farey series for the point construction. The resulting point set is stored in a self.pointSet attribute and saved by default in a CSV formatted file.</p>
 <p><em>Parameters</em>:</p>
 <blockquote>
 <div><ul class="simple">
 <li><em>n</em> : (default=20) maximal denominator of the Farey series</li>
 <li><em>s</em> : (default=3) dimension of the hypercube</li>
-<li><em>seed</em> : for regenrating the same Farey point set</li>
-<li><ul class="first">
+<li><em>seed</em> : for regenerating the same Farey point set</li>
 <li><em>Randomized</em> : (default=True) On each dimension, the points are randomly shifted (mod 1) to avoid constant projections for equal dimension index distances.</li>
-</ul>
-</li>
-<li><ul class="first">
 <li><em>fileName</em>: (default=’farey’) name -without the csv suffix- of the stored result file.</li>
-</ul>
-</li>
 </ul>
 </div></blockquote>
 <p>Sample Python session:</p>

@@ -401,15 +401,15 @@ class QuasiRandomKorobovPointSet():
 #-------
 class QuasiRandomFareyPointSet():
     """
-    Constructor for rendering Farey series of dimension *s* and max denominateor *n* which is *fully projection regular* in the $s$-dimensional real-valued [0,1]^s hypercube. The lattice constructor uses a randomly shuffled Farey series for the point construction. The resulting point set is stored in a self.pointSet attribute and saved by default in a CSV formatted file.
+    Constructor for rendering a Farey point set of dimension *s* and max denominateor *n* which is *fully projection regular* in the $s$-dimensional real-valued [0,1]^s hypercube. The lattice constructor uses a randomly shuffled Farey series for the point construction. The resulting point set is stored in a self.pointSet attribute and saved by default in a CSV formatted file.
 
     *Parameters*:
 
         * *n* : (default=20) maximal denominator of the Farey series
         * *s* : (default=3) dimension of the hypercube
-        * *seed* : for regenrating the same Farey point set 
-        * * *Randomized* : (default=True) On each dimension, the points are randomly shifted (mod 1) to avoid constant projections for equal dimension index distances.
-        * * *fileName*: (default='farey') name -without the csv suffix- of the stored result file. 
+        * *seed* : for regenerating the same Farey point set 
+        * *Randomized* : (default=True) On each dimension, the points are randomly shifted (mod 1) to avoid constant projections for equal dimension index distances.
+        * *fileName*: (default='farey') name -without the csv suffix- of the stored result file. 
 
     Sample Python session:
 
