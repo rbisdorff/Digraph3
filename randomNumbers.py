@@ -518,7 +518,7 @@ class QuasiRandomFareyPointSet(QuasiRandomPointSet):
     def __init__(self,n=20,s=3,seed=None,Randomized=True,fileName='farey',Debug=False):
         # imports
         import random
-        from arithmetics import computeFareySeries
+        from arithmetics import computeFareyPointSet
         # fixing random seed
         random.seed(seed)
         # storing parameters
