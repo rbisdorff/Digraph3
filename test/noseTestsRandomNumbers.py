@@ -110,14 +110,35 @@ def testCauchyRandomVariable():
     fo.close()     
     print('# of Cauchy simulations = %d' % Nsim)
 
-def testQuasiRandomKorobovPointSet():
-    print('==>> Testing quasi random Korobov point set generator')
-    kor = QuasiRandomKorobovPointSet()
-    print(kor.sequence)
-    kor.testFct()
-
-def testQuasiRandomFareyPointSet():
-    print('==>> Testing quasi random Farey point set generator')
-    fs = QuasiRandomFareyPointSet()
-    print(fs.pointSet)
-    fs.testFct()
+def testUniformityOfQuasiRandomPointSet():
+    print('==>> Testing the uniformity of a quasi random point set')
+    seed=101
+    kor = QuasiRandomKorobovPointSet(n=997,s=4,a=383,Randomized=True,seed=seed,Debug=False)
+    print(kor.__dict__.keys())
+    print(kor.pointSet[:10])
+    print(kor.pointSetCardinality)
+    print('Quasi random Korobov sampling')
+    print(kor.testFct(seq=kor.pointSet,buggyRegionLimits=(0.45,0.55)))
+    randSeq = []
+    import random
+    random.seed(seed)
+    for i in range(997):
+        point = []
+        for j in range(kor.s):
+            point.append(random.random())
+        randSeq.append(point)
+    print('Mersenne Twister random sampling')
+    print(kor.testFct(seq=randSeq,buggyRegionLimits=(0.45,0.55)))
+    qrfs = QuasiRandomFareyPointSet(n=25,s=4,Randomized=True,seed=seed)
+    print(qrfs.__dict__.keys())
+    print(qrfs.fareySeries[:10])
+    print(qrfs.shuffledFareySeries[:10])
+    print(qrfs.seriesLength)
+    print(qrfs.pointSet[:5])
+    print(qrfs.pointSetCardinality)
+    print('Quasi random Farey sampling')
+    print(qrfs.testFct(seq=qrfs.pointSet,buggyRegionLimits=(0.45,0.55)))
+    kor.testUniformityDiscrepancy(k=2,fileName='korobovTest')
+    qrfs.testUniformityDiscrepancy(k=2,fileName='fareyTest')
+    qrfs.testUniformityDiscrepancy(k=2,pointSet=randSeq,fileName='randTest')
+    
