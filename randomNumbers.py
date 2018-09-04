@@ -651,6 +651,175 @@ class QuasiRandomFareyPointSet(QuasiRandomPointSet):
     #     else:
     #         return 'No bugs detected'
 
+#-------
+class QuasiRandomUniformPointSet(QuasiRandomPointSet):
+    """
+    Constructor for rendering a Farey point set of dimension *s* and max denominateor *n* which is *fully projection regular* in the $s$-dimensional real-valued [0,1]^s hypercube. The lattice constructor uses a randomly shuffled uniform series for the point construction. The resulting point set is stored in a self.pointSet attribute and saved by default in a CSV formatted file.
+
+    *Parameters*:
+
+        * *n* : (default=100) denominator of the uniform series x/n with 0 <= x <= n
+        * *s* : (default=3) dimension of the hypercube
+        * *seed* : for regenerating the same Farey point set 
+        * *Randomized* : (default=True) On each dimension, the points are randomly shifted (mod 1) to avoid constant projections for equal dimension index distances.
+        * *fileName*: (default='farey') name -without the csv suffix- of the stored result file. 
+
+    Sample Python session:
+
+        >>> from randomNumbers import QuasiRandomUniformPointSet
+        >>> qrfs = QuasiRandomFareyPointSet(n=1000,s=5,Randomized=True,
+                                            fileName='testFarey')
+        >>> print(qrfs.__dict__.keys())
+        dict_keys(['n', 's', 'Randomized', 'seed', 'fileName', 'Debug', 
+                   'fareySeries', 'seriesLength', 'shuffledFareySeries', 
+                   'pointSet', 'pointSetCardinality'])
+        >>> print(qrfs.fareySeries)
+        [0.0, 0.04, 0.04166, 0.0435, 0.04545, 0.0476, 0.05, 0.05263, 
+         0.0555, 0.058823529411764705, ...] 
+        >>> print(qrfs.seriesLength)
+        201
+        >>> print(qrfs.pointSet[)
+        [(0.0, 0.0, 0.0, 0.0, 0.0), (0.5116, 0.4660, 0.6493, 0.41757, 0.3663),
+         (0.9776, 0.1153, 0.0669, 0.7839, 0.5926), (0.6269, 0.5329, 0.4332, 0.0102, 0.6126),
+         (0.0445, 0.8992, 0.6595, 0.0302, 0.6704), ...]
+        >>> print(qrfs.pointSetCaridinality)
+        207
+     
+    The resulting point set may be inspected in an R session::
+
+        > x = read.csv('testFarey.csv')
+        > x[1:5,]
+          x1       x2       x3       x4       x5
+        1   0.000000 0.000000 0.000000 0.000000 0.000000
+        2   0.511597 0.466016 0.649321 0.417573 0.366316
+        3   0.977613 0.115336 0.066893 0.783889 0.592632
+        4   0.626933 0.532909 0.433209 0.010205 0.612632
+        5   0.044506 0.899225 0.659525 0.030205 0.670410
+       > library('lattice')
+        > cloud(x$x5 ~ x$x1 + x$x3)
+        > plot(x$x1,x$x3) 
+
+    .. image:: farey3D.png
+        :alt: Checking hypercube filling
+        :width: 500 px
+        :align: center
+
+    .. image:: fareyx1x3.png
+        :alt: Checking projection regularity
+        :width: 400 px
+        :align: center
+
+    """
+    
+    def __init__(self,n=20,s=3,seed=None,Randomized=True,fileName='uniform',Debug=False):
+        # imports
+        import random
+        # fixing random seed
+        random.seed(seed)
+        # storing parameters
+        self.n = n
+        nf = float(n)
+        self.s = s
+        self.Randomized = Randomized
+        self.seed = seed
+        self.fileName = fileName
+        self.Debug = Debug
+        # randomization
+        if Randomized:
+            v = [random.random() for j in range(s)]
+        # generate uniform series
+        us = [x/nf for x in range(n+1)]
+        self.uniformSeries = list(us)
+        nu = len(us)
+        if s > nu:
+            print('Error: s = %d larger than uniform series length = %d !!' % (s,nf))
+            print('Choose a higher denominator than the actual n = %d !!' % n)
+            return
+        self.seriesLength = nu
+        random.shuffle(us)
+        if us[0] < self.uniformSeries[1]:   # if first term is zero 
+            us[0],us[1] = us[1],us[0]     # swap first and second !!!
+        if us[nu-1] > self.uniformSeries[nu-2]:   # if last term is one  
+            us[nu-1],us[nu-2] = us[nu-2],us[nu-1]     # swap last and second last!!!
+        self.shuffledUniformSeries = list(us)
+        # storing the simulated point set
+        if fileName != None:
+            fileName += '.csv'
+            fo =  open(fileName,'w') 
+            # csv header row
+            wstr = ''
+            for j in range(s-1):
+                wstr += '"x%d",' % (j+1)
+            wstr += '"x%d"\n' % (s)
+            fo.write(wstr)
+        # start point set at origin
+        u = [0.0 for j in range(s)]
+        pointSet = [tuple(u)] 
+        if fileName != None:
+            wstr = ''
+            for j in range(s-1):
+                wstr += '"%f",' % u[j]
+            wstr += '"%f"\n' % u[s-1]
+            fo.write(wstr)
+        # first s-dimensional point
+        u[s-1] = us[0]
+        if Randomized:
+            for j in range(s):
+                z = u[j] + v[j]
+                u[j] = z - int(z)
+        pointSet.append((tuple(u)))
+        if Debug:
+            print(1,u)
+        if fileName != None:
+            wstr = ''
+            for j in range(s-1):
+                wstr += '"%f",' % u[j]
+            wstr += '"%f"\n' % u[s-1]
+            fo.write(wstr)
+        # all the following points
+        for i in range(1,nu):
+            for j in range(s-1):
+                u[j] = u[j+1] # << 1
+            u[s-1] = us[i]
+            if Randomized:
+                for j in range(s):
+                    z = u[j] + v[j]
+                    u[j] = z - int(z)
+            pointSet.append((tuple(u)))
+            if Debug:
+                print(i,u)
+            if fileName != None:
+                wstr = ''
+                for j in range(s-1):
+                    wstr += '"%f",' % (u[j])
+                wstr += '"%f"\n' % (u[s-1])
+                fo.write(wstr)
+        # close with adding s ones
+        if Randomized:
+            u = [self.uniformSeries[nu-1] for j in range(s)]
+            pointSet.append((tuple(u)))
+            if fileName != None:
+                wstr = ''
+                for j in range(s-1):
+                    wstr += '"%f",' % (u[j])
+                wstr += '"%f"\n' % (u[s-1])
+                fo.write(wstr)
+        else:
+            for jj in range(s):
+                for j in range(s-1):
+                    u[j] = u[j+1] # << 1
+                u[s-1] = self.uniformSeries[nu-1]
+                pointSet.append((tuple(u)))
+                if fileName != None:
+                    wstr = ''
+                    for j in range(s-1):
+                        wstr += '"%f",' % (u[j])
+                    wstr += '"%f"\n' % (u[s-1])
+                    fo.write(wstr)
+        # close file and store point set
+        fo.close()
+        self.pointSet = pointSet
+        self.pointSetCardinality = 1 + nu + s 
         
 #----------testing the code ----------------
 if __name__ == "__main__":    
@@ -771,7 +940,7 @@ if __name__ == "__main__":
         randSeq.append(point)
     print('Mersenne Twister random sampling')
     print(kor.testFct(seq=randSeq,buggyRegionLimits=(0.45,0.55)))
-    qrfs = QuasiRandomFareyPointSet(n=25,s=4,Randomized=True,seed=seed)
+    qrfs = QuasiRandomFareyPointSet(n=55,s=4,Randomized=True,seed=seed)
     print(qrfs.__dict__.keys())
     print(qrfs.fareySeries[:10])
     print(qrfs.shuffledFareySeries[:10])
@@ -780,8 +949,18 @@ if __name__ == "__main__":
     print(qrfs.pointSetCardinality)
     print('Quasi random Farey sampling')
     print(qrfs.testFct(seq=qrfs.pointSet,buggyRegionLimits=(0.45,0.55)))
-    kor.testUniformityDiscrepancy(k=2,fileName='korobovTest')
-    qrfs.testUniformityDiscrepancy(k=2,fileName='fareyTest')
-    qrfs.testUniformityDiscrepancy(k=2,pointSet=randSeq,fileName='randTest')
+    qrus = QuasiRandomUniformPointSet(n=997,s=4,Randomized=True,seed=seed)
+    print(qrus.__dict__.keys())
+    print(qrus.uniformSeries[:81110])
+    print(qrus.shuffledUniformSeries[:10])
+    print(qrus.seriesLength)
+    print(qrus.pointSet[:5])
+    print(qrus.pointSetCardinality)
+    print('Quasi random Farey sampling')
+    print(qrfs.testFct(seq=qrfs.pointSet,buggyRegionLimits=(0.45,0.55)))
+    kor.testUniformityDiscrepancy(k=3,fileName='korobovTest')
+    qrfs.testUniformityDiscrepancy(k=3,fileName='fareyTest')
+    qrus.testUniformityDiscrepancy(k=3,fileName='uniformTest')
+    qrfs.testUniformityDiscrepancy(k=3,pointSet=randSeq,fileName='randTest')
            
 
