@@ -8026,7 +8026,7 @@ where x integer ands 0 &lt; x &lt;= k.</p>
 <dt id="randomNumbers.QuasiRandomUniformPointSet">
 <em class="property">class </em><code class="descclassname">randomNumbers.</code><code class="descname">QuasiRandomUniformPointSet</code><span class="sig-paren">(</span><em>n=20</em>, <em>s=3</em>, <em>seed=None</em>, <em>Randomized=True</em>, <em>fileName='uniform'</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#QuasiRandomUniformPointSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.QuasiRandomUniformPointSet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#randomNumbers.QuasiRandomPointSet" title="randomNumbers.QuasiRandomPointSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">randomNumbers.QuasiRandomPointSet</span></code></a></p>
-<p>Constructor for rendering a Farey point set of dimension <em>s</em> and max denominateor <em>n</em> which is <em>fully projection regular</em> in the $s$-dimensional real-valued [0,1]^s hypercube. The lattice constructor uses a randomly shuffled uniform series for the point construction. The resulting point set is stored in a self.pointSet attribute and saved by default in a CSV formatted file.</p>
+<p>Constructor for rendering a quai random point set of dimension <em>s</em> and max denominateor <em>n</em> which is <em>fully projection regular</em> in the $s$-dimensional real-valued [0,1]^s hypercube. The lattice constructor uses a randomly shuffled <em>uniform</em> series for the point construction. The resulting point set is stored in a self.pointSet attribute and saved by default in a CSV formatted file.</p>
 <p><em>Parameters</em>:</p>
 <blockquote>
 <div><ul class="simple">
@@ -8034,46 +8034,9 @@ where x integer ands 0 &lt; x &lt;= k.</p>
 <li><em>s</em> : (default=3) dimension of the hypercube</li>
 <li><em>seed</em> : for regenerating the same Farey point set</li>
 <li><em>Randomized</em> : (default=True) On each dimension, the points are randomly shifted (mod 1) to avoid constant projections for equal dimension index distances.</li>
-<li><em>fileName</em>: (default=’farey’) name -without the csv suffix- of the stored result file.</li>
+<li><em>fileName</em>: (default=’uniform’) name -without the csv suffix- of the stored result file.</li>
 </ul>
 </div></blockquote>
-<p>Sample Python session:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="k">import</span> <span class="n">QuasiRandomUniformPointSet</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">qrfs</span> <span class="o">=</span> <span class="n">QuasiRandomFareyPointSet</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Randomized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="go">                                    fileName=&#39;testFarey&#39;)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-<span class="go">dict_keys([&#39;n&#39;, &#39;s&#39;, &#39;Randomized&#39;, &#39;seed&#39;, &#39;fileName&#39;, &#39;Debug&#39;, </span>
-<span class="go">           &#39;fareySeries&#39;, &#39;seriesLength&#39;, &#39;shuffledFareySeries&#39;, </span>
-<span class="go">           &#39;pointSet&#39;, &#39;pointSetCardinality&#39;])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="n">fareySeries</span><span class="p">)</span>
-<span class="go">[0.0, 0.04, 0.04166, 0.0435, 0.04545, 0.0476, 0.05, 0.05263, </span>
-<span class="go"> 0.0555, 0.058823529411764705, ...] </span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="n">seriesLength</span><span class="p">)</span>
-<span class="go">201</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="n">pointSet</span><span class="p">[)</span>
-<span class="go">[(0.0, 0.0, 0.0, 0.0, 0.0), (0.5116, 0.4660, 0.6493, 0.41757, 0.3663),</span>
-<span class="go"> (0.9776, 0.1153, 0.0669, 0.7839, 0.5926), (0.6269, 0.5329, 0.4332, 0.0102, 0.6126),</span>
-<span class="go"> (0.0445, 0.8992, 0.6595, 0.0302, 0.6704), ...]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="n">pointSetCaridinality</span><span class="p">)</span>
-<span class="go">207</span>
-</pre></div>
-</div>
-<p>The resulting point set may be inspected in an R session:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> &gt; x = read.csv(&#39;testFarey.csv&#39;)
- &gt; x[1:5,]
-   x1       x2       x3       x4       x5
- 1   0.000000 0.000000 0.000000 0.000000 0.000000
- 2   0.511597 0.466016 0.649321 0.417573 0.366316
- 3   0.977613 0.115336 0.066893 0.783889 0.592632
- 4   0.626933 0.532909 0.433209 0.010205 0.612632
- 5   0.044506 0.899225 0.659525 0.030205 0.670410
-&gt; library(&#39;lattice&#39;)
- &gt; cloud(x$x5 ~ x$x1 + x$x3)
- &gt; plot(x$x1,x$x3) 
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/farey3D.png"><img alt="Checking hypercube filling" class="align-center" src="_images/farey3D.png" style="width: 500px;" /></a>
-<a class="reference internal image-reference" href="_images/fareyx1x3.png"><img alt="Checking projection regularity" class="align-center" src="_images/fareyx1x3.png" style="width: 400px;" /></a>
 </dd></dl>
 
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>

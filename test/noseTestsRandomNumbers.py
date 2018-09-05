@@ -112,33 +112,47 @@ def testCauchyRandomVariable():
 
 def testUniformityOfQuasiRandomPointSet():
     print('==>> Testing the uniformity of a quasi random point set')
+    print('Quasi random Korobov sampling')
     seed=101
-    kor = QuasiRandomKorobovPointSet(n=997,s=4,a=383,Randomized=True,seed=seed,Debug=False)
+    d=3
+    kor = QuasiRandomKorobovPointSet(n=997,s=d,a=383,Randomized=True,seed=seed,Debug=False)
     print(kor.__dict__.keys())
     print(kor.pointSet[:10])
     print(kor.pointSetCardinality)
-    print('Quasi random Korobov sampling')
     print(kor.testFct(seq=kor.pointSet,buggyRegionLimits=(0.45,0.55)))
+
+    print('Mersenne Twister random sampling')
     randSeq = []
     import random
     random.seed(seed)
     for i in range(997):
         point = []
-        for j in range(kor.s):
+        for j in range(d):
             point.append(random.random())
         randSeq.append(point)
-    print('Mersenne Twister random sampling')
     print(kor.testFct(seq=randSeq,buggyRegionLimits=(0.45,0.55)))
-    qrfs = QuasiRandomFareyPointSet(n=25,s=4,Randomized=True,seed=seed)
+
+    print('Quasi random Farey sampling')
+    qrfs = QuasiRandomFareyPointSet(n=55,s=d,Randomized=True,seed=seed)
     print(qrfs.__dict__.keys())
     print(qrfs.fareySeries[:10])
     print(qrfs.shuffledFareySeries[:10])
     print(qrfs.seriesLength)
     print(qrfs.pointSet[:5])
     print(qrfs.pointSetCardinality)
-    print('Quasi random Farey sampling')
     print(qrfs.testFct(seq=qrfs.pointSet,buggyRegionLimits=(0.45,0.55)))
-    kor.testUniformityDiscrepancy(k=2,fileName='korobovTest')
-    qrfs.testUniformityDiscrepancy(k=2,fileName='fareyTest')
-    qrfs.testUniformityDiscrepancy(k=2,pointSet=randSeq,fileName='randTest')
+
+    print('Quasi random uniform sampling')
+    qrus = QuasiRandomUniformPointSet(n=997,s=d,Randomized=True,seed=seed)
+    print(qrus.__dict__.keys())
+    print(qrus.uniformSeries[:10])
+    print(qrus.shuffledUniformSeries[:10])
+    print(qrus.seriesLength)
+    print(qrus.pointSet[:5])
+    print(qrus.pointSetCardinality)
+    print(qrus.testFct(seq=qrfs.pointSet,buggyRegionLimits=(0.45,0.55)))
+    kor.testUniformityDiscrepancy(k=3,fileName='korobovTest')
+    qrfs.testUniformityDiscrepancy(k=3,fileName='fareyTest')
+    qrus.testUniformityDiscrepancy(k=3,fileName='uniformTest')
+    qrfs.testUniformityDiscrepancy(k=3,pointSet=randSeq,fileName='randTest')
     
