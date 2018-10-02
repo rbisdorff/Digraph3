@@ -490,7 +490,7 @@ def invSternBrocot(sb=['L','R','R','L'],Debug=False):
 
 def computeFareySeries(n=7,AsFloats=False,Debug=False):
     """
-    Renders the Farey series, ie the ordered list of positive rational fractions with positive denominator lower or equal to n. For $n* = 1, we obtain: [[0,1],[1,1]].
+    Renders the Farey series, ie the ordered list of positive rational fractions with positive denominator lower or equal to n. For *n* = 1, we obtain: [[0,1],[1,1]].
 
     *Parametrs*:
 
