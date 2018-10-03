@@ -3697,7 +3697,7 @@ class Electre3OutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         else:
             return Decimal('0.0')
 
-class BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
+class BipolarOutrankingDigraph(OutrankingDigraph):
     """
     Specialization of the abstract OutrankingDigraph root class for generating
     bipolarly-valued outranking digraphs.
