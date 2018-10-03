@@ -1,0 +1,4 @@
+<map id="inheritance52722bf106" name="inheritance52722bf106">
+<area shape="rect" id="node1" href="#perfTabs.PerformanceTableau" target="_top" title="In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` class provides a generic **performance table model**. A given object of this class consists in:" alt="" coords="5,5,220,31"/>
+<area shape="rect" id="node2" href="#performanceQuantiles.PerformanceQuantiles" target="_top" title="Implements the incremental performance quantiles representation of a" alt="" coords="268,5,584,31"/>
+</map>

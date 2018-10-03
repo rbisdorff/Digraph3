@@ -128,7 +128,9 @@ Handling big data
 * :ref:`performanceQuantiles-label` 
      Incremental representation of large performance tableaux via
      binned cumulated density functions per criteria. Depends on the
-     :py:mod:`randomPerfTabs` module.     
+     :py:mod:`randomPerfTabs` module.   
+
+     .. inheritance-diagram:: performanceQuantiles  
 
 * :ref:`sparseOutrankingDigraphs-label` 
      Sparse implementation design for large bipolar outranking digraphs (order
