@@ -4234,7 +4234,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
 ##        totalweight = Decimal('0.0')
 ##        for c in dict.keys(criteria):
 ##            totalweight = totalweight + criteria[c]['weight']
-        totalweight = sum(crit['weight'] for crit in criteria.values())
+        totalweight = sum(abs(crit['weight']) for crit in criteria.values())
 
         relation = {}
         vetos = []
@@ -4391,7 +4391,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
 ##        totalweight = Decimal('0.0')
 ##        for c in dict.keys(criteria):
 ##            totalweight = totalweight + criteria[c]['weight']
-        totalweight = sum(criteria[c]['weight'] for c in criteria)
+        totalweight = sum(abs(criteria[c]['weight']) for c in criteria)
 
         relation = {}
         concordanceRelation = {}
@@ -5199,7 +5199,7 @@ class _BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
 ##        totalweight = Decimal('0.0')
 ##        for c in dict.keys(criteria):
 ##            totalweight = totalweight + criteria[c]['weight']
-        totalweight = sum([criteria[c]['weight'] for c in criteria])
+        totalweight = sum([abs(criteria[c]['weight']) for c in criteria])
         relation = {}
         concordanceRelation = {}
         vetos = []
@@ -5617,7 +5617,7 @@ class _BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         actions = self.actions
         totalweight = Decimal('0.0')
         for c in criteria:
-            totalweight = totalweight + criteria[c]['weight']
+            totalweight = totalweight + abs(criteria[c]['weight'])
         relation = {}
         vetos = []
         if hasBipolarVeto:
@@ -6116,7 +6116,7 @@ class BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                 criteria[g] = perfTab.criteria[g]
         totalWeight = Decimal('0')
         for c in criteria:
-            totalWeight += Decimal(str(criteria[c]['weight']))
+            totalWeight += abs(Decimal(str(criteria[c]['weight'])))
         self.criteria = criteria
         try:
             self.description = copy.copy(perfTab.description)
@@ -8138,7 +8138,7 @@ class MultiCriteriaDissimilarityDigraph(OutrankingDigraph,PerformanceTableau):
         evaluation = self.evaluation
         maxWeight = Decimal('0.0')
         for g in criteria:
-            maxWeight += criteria[g]['weight']
+            maxWeight += abs(criteria[g]['weight'])
         Min = self.valuationdomain['min']
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
