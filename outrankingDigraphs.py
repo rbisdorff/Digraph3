@@ -349,8 +349,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     p = px + py * self.evaluation[c][a]
                 except:
                     p = None
-                d = self.evaluation[c][a] - self.evaluation[c][b]
-
+                if self.criteria[c]['weight'] > Decimal('0.0'):
+                    d = self.evaluation[c][a] - self.evaluation[c][b]
+                else:
+                    d = self.evaluation[c][b] - self.evaluation[c][a]
                 if ind == None:
                     return self._localConcordance(d,wp,p)
                 else:
@@ -437,7 +439,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             criteria.append((self.criteria[criteriaList[i]]['weight'],criteriaList[i]))
         criteria.sort()
         for i in range(p):
-            weightSum += self.criteria[criteriaList[i]]['weight']
+            weightSum += abs(self.criteria[criteriaList[i]]['weight'])
         if weightSum != Decimal('0.0'):
             Q = [Decimal('0.0') for i in range(p)]
             F = [Decimal('0.0') for i in range(p)]
@@ -470,7 +472,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         Max = Decimal(str(self.valuationdomain['max']))
         totalweight = Decimal('0.0')
         for c in criteria:
-            totalweight = totalweight + criteria[c]['weight']
+            totalweight = totalweight + abs(criteria[c]['weight'])
         vetos = []
         relation = {}
         for a in actions:
@@ -509,16 +511,19 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                                 v = vx + vy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                             except:
                                 v = None
-                            d = evaluation[c][a] - evaluation[c][b]
+                            if criteria[c]['weight'] > Decimal('0.0'):
+                                d = evaluation[c][a] - evaluation[c][b]
+                            else:
+                                d = evaluation[c][b] - evaluation[c][a]
                             lc0 = self._localConcordance(d,ind,wp,p)
-                            counter = counter + (lc0 * criteria[c]['weight'])
+                            counter = counter + (lc0 * abs(criteria[c]['weight']))
                             testveto = self._localVeto(d,v)
                             if criteria[c]['weight'] > Decimal('0'):
                                 veto = veto + testveto
                                 if testveto == Decimal('1'):
                                     abvetos.append((c,v,d))
                         else:
-                            counter = counter + Decimal('0.5') * criteria[c]['weight']
+                            counter = counter + Decimal('0.5') * abs(criteria[c]['weight'])
                     concordindex = ((counter / totalweight) * (Max-Min)) + Min
                     discordindex = Min
                     if veto == Decimal('0'):
@@ -581,8 +586,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 v = Decimal(str(criteria[c]['scale'][1])) + Decimal('1')
                 
             # compute performance difference
-            d = evaluation[c][a] - evaluation[c][b]   
-
+            if criteria[c]['weight'] > Decimal('0.0'):
+                d = evaluation[c][a] - evaluation[c][b]
+            else:
+                d = evaluation[c][b] - evaluation[c][a]
             # compute characteristic
             
             if d > Decimal('0'):  # positive difference
@@ -1226,20 +1233,23 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                                 p = px + py * abs(evaluation[c][a])
                         except:
                             p = wp
-                        d = evaluation[c][a] - evaluation[c][b]
+                        if criteria[c]['weight'] > Decimal('0.0'):
+                            d = evaluation[c][a] - evaluation[c][b]
+                        else:
+                            d = evaluation[c][b] - evaluation[c][a]
                         #print "Debug: c,a,b,d,ind,wp,p =",c,a,b,d,ind,wp,p
                         if evaluation[c][a] - p >= evaluation[c][b]:
                             #print "Debug: c,a,b,d,ind,wp,p =",c,a,b,d,ind,wp,p,pairwiseComparisons[a][b]['gt']
-                            pairwiseComparisons[a][b]['gt'] += criteria[c]['weight']
+                            pairwiseComparisons[a][b]['gt'] += abs(criteria[c]['weight'])
                             #print "Debug: c,a,b,d,ind,wp,p =",c,a,b,d,ind,wp,p,pairwiseComparisons[a][b]['gt']
                         elif evaluation[c][a] - wp >= evaluation[c][b]:
-                            pairwiseComparisons[a][b]['geq'] += criteria[c]['weight']
+                            pairwiseComparisons[a][b]['geq'] += abs(criteria[c]['weight'])
                         elif evaluation[c][a] + ind >= evaluation[c][b]:
-                            pairwiseComparisons[a][b]['eq'] += criteria[c]['weight']
+                            pairwiseComparisons[a][b]['eq'] += abs(criteria[c]['weight'])
                         elif evaluation[c][a] + p > evaluation[c][b]:
-                            pairwiseComparisons[a][b]['leq'] += criteria[c]['weight']
+                            pairwiseComparisons[a][b]['leq'] += abs(criteria[c]['weight'])
                         elif evaluation[c][a] + p <= evaluation[c][b]:
-                            pairwiseComparisons[a][b]['lt'] += criteria[c]['weight']
+                            pairwiseComparisons[a][b]['lt'] += abs(criteria[c]['weight'])
                         else:
                             print("Error: a,b,c,d,ind,wp,p",a,b,c,d,ind,wp,p)
                         #print "Debug: a,b,d,ind,wp,p",a,b,d,ind,wp,p,pairwiseComparisons[a][b]
@@ -1300,7 +1310,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             criteriaList = [x for x in criteria]
             criteriaList.sort()
             for c in criteriaList:
-                sumWeights += criteria[c]['weight']
+                sumWeights += abs(criteria[c]['weight'])
                 if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):		
                     try:
                         indx = criteria[c]['thresholds']['ind'][0]
@@ -1329,7 +1339,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                             p = px + py * abs(evaluation[c][a])
                     except:
                         p = None
-                    d = evaluation[c][a] - evaluation[c][b]
+                    if self.criteria[c]['weight'] > Decimal('0.0'):
+                        d = evaluation[c][a] - evaluation[c][b]
+                    else:
+                        d = evaluation[c][b] - evaluation[c][a]
                     lc0 = self._localConcordance(d,ind,wp,p)
                     if ind != None:
                         ind = round(ind,2)
@@ -1339,10 +1352,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                         p = round(p,2)
                     if isReturningHTML:
                         html += '<tr>'
-                        html += '<td bgcolor="#FFEEAA" align="center">%s</td> <td>%.2f</td> <td>%2.2f</td> <td>%2.2f</td> <td>%+2.2f</td> <td>%s</td>  <td>%s</td>  <td>%s</td>   <td>%+.2f</td>' % (c,criteria[c]['weight'],evaluation[c][a],evaluation[c][b],d, str(ind),str(wp),str(p),lc0*criteria[c]['weight'])
+                        html += '<td bgcolor="#FFEEAA" align="center">%s</td> <td>%.2f</td> <td>%2.2f</td> <td>%2.2f</td> <td>%+2.2f</td> <td>%s</td>  <td>%s</td>  <td>%s</td>   <td>%+.2f</td>' % (c,criteria[c]['weight'],evaluation[c][a],evaluation[c][b],d, str(ind),str(wp),str(p),lc0*abs(criteria[c]['weight']))
                     else:
-                         print(c, '  %.2f  %2.2f  %2.2f  %+2.2f \t| %s  %s  %s   %+.2f \t|' % (criteria[c]['weight'],evaluation[c][a],evaluation[c][b],d, str(ind),str(wp),str(p),lc0*criteria[c]['weight']), end=' ')
-                    concordance = concordance + (lc0 * criteria[c]['weight'])
+                         print(c, '  %.2f  %2.2f  %2.2f  %+2.2f \t| %s  %s  %s   %+.2f \t|' % (criteria[c]['weight'],evaluation[c][a],evaluation[c][b],d, str(ind),str(wp),str(p),lc0*abs(criteria[c]['weight'])), end=' ')
+                    concordance = concordance + (lc0 * abs(criteria[c]['weight']))
                     try:
                         wvx = criteria[c]['thresholds']['weakVeto'][0]
                         wvy = criteria[c]['thresholds']['weakVeto'][1]
@@ -3529,7 +3542,7 @@ class Electre3OutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         actions = self.actions
         totalweight = Decimal('0.0')
         for c in criteria:
-            totalweight = totalweight + criteria[c]['weight']
+            totalweight = totalweight + abs(criteria[c]['weight'])
         relation = {}
         vetos = []
         for a in actions:
@@ -3574,9 +3587,12 @@ class Electre3OutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                             #h = ax + ay * evaluation[c][a]
                             #q = bx + by * evaluation[c][a]
                             #v = vx + vy * evaluation[c][a]
-                            d = evaluation[c][a] - evaluation[c][b]
+                            if criteria[c]['weight'] > Decimal('0.0'):
+                                d = evaluation[c][a] - evaluation[c][b]
+                            else:
+                                d = evaluation[c][b] - evaluation[c][a]
                             lc0 = self._localConcordance(d,h,h,p)
-                            counter = counter + (lc0 * criteria[c]['weight'])
+                            counter = counter + (lc0 * abs(criteria[c]['weight']))
                             veto[c] = (self._localVeto(d,p,v),d,v)
                         else:
                             counter = counter + Decimal('0.5') * criteria[c]['weight']
@@ -3633,8 +3649,10 @@ class Electre3OutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                         p = px + py * abs(self.evaluation[c][a]) 
                 except:
                     p = None
-                d = self.evaluation[c][a] - self.evaluation[c][b]
-
+                if self.criteria[c]['weight'] > Decimal('0.0'):
+                    d = self.evaluation[c][a] - self.evaluation[c][b]
+                else:
+                    d = self.evaluation[c][b] - self.evaluation[c][a]
                 return self._localConcordance(d,ind,wp,p)
 
             else:
@@ -3956,7 +3974,10 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
                         p = px + py * abs(self.evaluation[c][a]) 
                 except:
                     p = None
-                d = self.evaluation[c][a] - self.evaluation[c][b]
+                if self.criteria[c]['weight'] > Decimal("0.0"):
+                    d = self.evaluation[c][a] - self.evaluation[c][b]
+                else:
+                    d = self.evaluation[c][b] - self.evaluation[c][a]
 
                 return self._localConcordance(d,ind,wp,p)
 
@@ -4286,10 +4307,13 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
                                     p = px + py * abs(evalca) 
                             except KeyError:
                                 p = None
-                            d = evalca - evalcb
+                            if crit['weight'] > Decimal('0.0'):
+                                d = evalca - evalcb
+                            else:
+                                d = evalcb - evalca
                             lc0 = self._localConcordance(d,ind,wp,p)
                             ## print 'c,a,b,d,ind,wp,p,lco = ',c,a,b,d, ind,wp,p,lc0
-                            concordance = concordance + (lc0 * crit['weight'])
+                            concordance = concordance + (lc0 * abs(crit['weight']))
                             try:
                                 wvx = crit['thresholds']['weakVeto'][0]
                                 wvy = crit['thresholds']['weakVeto'][1]
@@ -4460,10 +4484,13 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
                                     p = px + py * abs(evalca) 
                             except KeyError:
                                 p = None
-                            d = evalca - evalcb
+                            if crit['weight'] > Decimal('0.0'):
+                                d = evalca - evalcb
+                            else:
+                                d = evalcb - evalca
                             lc0 = self._localConcordance(d,ind,wp,p)
                             ## print 'c,a,b,d,ind,wp,p,lco = ',c,a,b,d, ind,wp,p,lc0
-                            concordance = concordance + (lc0 * crit['weight'])
+                            concordance = concordance + (lc0 * abs(crit['weight']))
                             try:
                                 wvx = crit['thresholds']['weakVeto'][0]
                                 wvy = crit['thresholds']['weakVeto'][1]
@@ -4507,7 +4534,10 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
                             if hasBipolarVeto:
                                 negativeVeto[c] = (Decimal('-1.0'),None,None,None)
                                 
-                    concordindex = concordance / totalweight                 
+                    if totalweight != Decimal('0.0'):
+                        concordindex = concordance / totalweight
+                    else:
+                        concordindex = concordance
                     crda[b] = concordindex
                     
                     ## init vetoes lists and indexes
@@ -4600,7 +4630,10 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
                     p = px + py * abs(evalca)
             except:
                 p = None
-            d = evalca - evalcb
+            if crit['weight'] > Decimal('0.0'):
+                d = evalca - evalcb
+            else:
+                d = evalcb - evalca
             return self._localConcordance(d,ind,wp,p)
         else:
             return Decimal('0.0')
@@ -4934,8 +4967,10 @@ class _BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
                         p = px + py * abs(self.evaluation[c][a]) 
                 except:
                     p = None
-                d = self.evaluation[c][a] - self.evaluation[c][b]
-
+                if self.criteria[c]['weight'] > Decimal('0.0'):
+                    d = self.evaluation[c][a] - self.evaluation[c][b]
+                else:
+                    d = self.evaluation[c][b] - self.evaluation[c][a]
                 return self._localConcordance(d,ind,wp,p)
 
             else:
