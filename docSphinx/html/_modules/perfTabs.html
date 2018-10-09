@@ -2454,7 +2454,7 @@
                                <span class="n">quantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
                                <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-                               <span class="n">contentCentered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                               <span class="n">ContentCentered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                <span class="n">colorLevels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                <span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Performance Heatmap&#39;</span><span class="p">,</span>
                                <span class="n">Correlations</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -2514,7 +2514,7 @@
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;title&gt;</span><span class="si">%s</span><span class="s1">&lt;/title&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="s1">&#39;Digraph3 performance heat map&#39;</span>
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;style type=&quot;text/css&quot;&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="c1">#html += &#39;table {border-collapse: collapse;}&#39;</span>
-        <span class="k">if</span> <span class="n">contentCentered</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ContentCentered</span><span class="p">:</span>
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;td {text-align: center;}</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;td.na {color: rgb(192,192,192);}</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/style&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
@@ -2613,13 +2613,22 @@
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">quantilexg</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">quantilexg</span> <span class="o">!=</span> <span class="s1">&#39;NA&#39;</span><span class="p">:</span>
-                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc</span><span class="p">):</span>
-                        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                            <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">colorPalette</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
-                        
-                        <span class="k">if</span> <span class="n">quantilexg</span> <span class="o">&lt;=</span> <span class="n">colorPalette</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
-                            <span class="n">quantileColor</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">colorPalette</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-                            <span class="k">break</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">):</span>
+                        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc</span><span class="p">):</span>
+                            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                                <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">colorPalette</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+                            <span class="k">if</span> <span class="n">quantilexg</span> <span class="o">&lt;=</span> <span class="n">colorPalette</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+                                <span class="n">quantileColor</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">colorPalette</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+                                <span class="k">break</span>
+                    <span class="k">else</span><span class="p">:</span> <span class="c1"># negative weight and reversed quatile coloring</span>
+                        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc</span><span class="p">):</span>
+                            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                                <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">colorPalette</span><span class="p">[</span><span class="n">nc</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+                            <span class="k">if</span> <span class="n">quantilexg</span> <span class="o">&lt;=</span> <span class="n">colorPalette</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+                                <span class="n">quantileColor</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">colorPalette</span><span class="p">[</span><span class="n">nc</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+                                <span class="k">break</span>        
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">quantileColor</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">naColor</span>
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>

@@ -2407,7 +2407,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                quantiles=None,
                                strategy='average',
                                ndigits=2,
-                               contentCentered=True,
+                               ContentCentered=True,
                                colorLevels=None,
                                pageTitle='Performance Heatmap',
                                Correlations=False,
@@ -2467,7 +2467,7 @@ The performance evaluations of each decision alternative on each criterion are g
         html += '<title>%s</title>\n' % 'Digraph3 performance heat map'
         html += '<style type="text/css">\n'
         #html += 'table {border-collapse: collapse;}'
-        if contentCentered:
+        if ContentCentered:
             html += 'td {text-align: center;}\n'
         html += 'td.na {color: rgb(192,192,192);}\n'
         html += '</style>\n'
@@ -2566,13 +2566,22 @@ The performance evaluations of each decision alternative on each criterion are g
                 if Debug:
                     print(x,g,quantilexg)
                 if quantilexg != 'NA':
-                    for i in range(nc):
-                        if Debug:
-                            print(i, colorPalette[i][0])
-                        
-                        if quantilexg <= colorPalette[i][0]:
-                            quantileColor[x][g] = colorPalette[i][1]
-                            break
+                    if self.criteria[g]['weight'] > Decimal('0.0'):
+                        for i in range(nc):
+                            if Debug:
+                                print(i, colorPalette[i][0])
+
+                            if quantilexg <= colorPalette[i][0]:
+                                quantileColor[x][g] = colorPalette[i][1]
+                                break
+                    else: # negative weight and reversed quatile coloring
+                        for i in range(nc):
+                            if Debug:
+                                print(i, colorPalette[nc-i-1][0])
+
+                            if quantilexg <= colorPalette[i][0]:
+                                quantileColor[x][g] = colorPalette[nc-i-1][1]
+                                break        
                 else:
                     quantileColor[x][g] = naColor
                 if Debug:
