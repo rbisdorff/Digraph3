@@ -72,7 +72,7 @@ def testNormalizedPerformanceTableau():
 
 def testhasOddWeightsAlgebra():
     print('*--------- Testing hasOddWeightsAlgebra test ------*')
-    t = RandomCBPerformanceTableau(numberOfActions=10,numberOfCriteria=13,commonThresholds=None,commonPercentiles={'ind':5,'pref':10,'veto':90},weightDistribution="random", weightScale=None,integerWeights=True,commonScale=[0.0,100.0],commonMode=["normal",50.0,25.0],Debug=False)
+    t = RandomCBPerformanceTableau(numberOfActions=10,numberOfCriteria=13,commonThresholds=None,commonPercentiles={'ind':5,'pref':10,'veto':90},weightDistribution="random", weightScale=None,IntegerWeights=True,commonScale=[0.0,100.0],commonMode=["normal",50.0,25.0],Debug=False)
     print(t.hasOddWeightAlgebra(Debug=True))
 
 def testRandomS3PerformanceTableau():
@@ -133,7 +133,7 @@ def testCBPerformanceTableau():
                                    commonPercentiles={'ind':5,'pref':10,'veto':95},\
                                    weightDistribution="random",\
                                    weightScale=[1,2],\
-                                   integerWeights=True,\
+                                   IntegerWeights=True,\
                                    commonMode=["normal",50.0,25.0])
     #t.saveXMCDA(fileName='randomPerformanceTableau',servingD3=False)
     t.showCriteria(Debug=False)
@@ -196,9 +196,9 @@ def testPercentilesOfThresholds():
 
 def testXMCDA2SaveReadPerformanceTableau():
     print('*==>> save and read XMCDA-2.0 PerformanceTableau instances ----*')
-    t = RandomS3PerformanceTableau(numberOfActions=5,numberOfCriteria=15,weightDistribution="random",weightScale=(1,13),integerWeights=True,commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0),(60.0,0.0)],RandomCoalitions=True,commonMode=['beta',0.5,None])
+    t = RandomS3PerformanceTableau(numberOfActions=5,numberOfCriteria=15,weightDistribution="random",weightScale=(1,13),IntegerWeights=True,commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0),(60.0,0.0)],RandomCoalitions=True,commonMode=['beta',0.5,None])
     #t.showAll()
-    #t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=7,weightDistribution="random",weightScale=(1,7),integerWeights=True)
+    #t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=7,weightDistribution="random",weightScale=(1,7),IntegerWeights=True)
     t.saveXMCDA2('testXMCDA2',servingD3=False)
     t2 = XMCDA2PerformanceTableau('testXMCDA2')
     g2 = BipolarOutrankingDigraph(t2)
@@ -242,7 +242,7 @@ def testPartialPerfTabs():
     t = RandomCBPerformanceTableau(numberOfCriteria=13,
                                    numberOfActions=20,
                                    weightDistribution='equiobjectives',
-                                   integerWeights=True,
+                                   IntegerWeights=True,
                                    Debug=False)
     t.showAll()
     t.save('testSize1')
@@ -260,7 +260,8 @@ def testSaveCSV():
     t = RandomCBPerformanceTableau(numberOfCriteria=5,
                                    numberOfActions=7,
                                    weightDistribution='equiobjectives',
-                                   integerWeights=True,
+                                   IntegerWeights=True,
+                                   NegativeWeights=True,
                                    Debug=False)
     t.showAll()
     t.saveCSV('testCSVSaving',Sorted=True,Debug=True)
@@ -270,7 +271,8 @@ def testHTMPerformanceHeatmap():
     t = RandomCBPerformanceTableau(numberOfCriteria=5,
                                    numberOfActions=7,
                                    weightDistribution='equiobjectives',
-                                   integerWeights=True,
+                                   IntegerWeights=True,
+                                   NegativeWeights=True,
                                    Debug=False)
     actionsList = [x for x in t.actions.keys()]
     criteriaList = [g for g in t.criteria.keys()]
@@ -286,7 +288,7 @@ def testComputeQuantileOrder():
     t = RandomCBPerformanceTableau(numberOfCriteria=13,
                                    numberOfActions=30,
                                    weightDistribution='equiobjectives',
-                                   integerWeights=True,
+                                   IntegerWeights=True,
                                    Debug=False,
                                    missingDataProbability=0.1,
                                    seed=100,Threading=True,nbrCores=4)

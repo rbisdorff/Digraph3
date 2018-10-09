@@ -91,7 +91,7 @@ def testNormalizedPerformanceTableau():
 
 def testhasOddWeightsAlgebra():
     print('*--------- Testing hasOddWeightsAlgebra test ------*')
-    t = RandomCBPerformanceTableau(numberOfActions=10,numberOfCriteria=13,commonThresholds=None,commonPercentiles={'ind':5,'pref':10,'veto':90},weightDistribution="random", weightScale=None,integerWeights=True,commonScale=[0.0,100.0],commonMode=["normal",50.0,25.0],Debug=False)
+    t = RandomCBPerformanceTableau(numberOfActions=10,numberOfCriteria=13,commonThresholds=None,commonPercentiles={'ind':5,'pref':10,'veto':90},weightDistribution="random", weightScale=None,IntegerWeights=True,commonScale=[0.0,100.0],commonMode=["normal",50.0,25.0],Debug=False)
     print(t.hasOddWeightAlgebra(Debug=True))
 
 def testCirculantDigraph():
@@ -333,7 +333,7 @@ def testMoreOrlessRelatedPairs():
 
 def testXMLRubisSaveReadMethods():
     print('*==>> test rubisOutrankingDigraph XML saving ------------*')
-    t = FullRandomPerformanceTableau(numberOfActions=5,commonMode=['uniform',None,None],integerWeights=True)
+    t = FullRandomPerformanceTableau(numberOfActions=5,commonMode=['uniform',None,None],IntegerWeights=True)
     t.save('testperf')
 
     g = BipolarOutrankingDigraph(t)
@@ -456,10 +456,10 @@ def testCBPerformanceTableau():
                                    commonPercentiles={'ind':5,'pref':10,'veto':95},\
                                    weightDistribution="random",\
                                    weightScale=[1,2],\
-                                   integerWeights=True,\
+                                   IntegerWeights=True,\
                                    commonMode=["normal",50.0,25.0])
     #t.showAll()
-    #t = RandomCBPerformanceTableau(numberOfActions=13,numberOfCriteria=20,integerWeights=True,comments=False)
+    #t = RandomCBPerformanceTableau(numberOfActions=13,numberOfCriteria=20,IntegerWeights=True,comments=False)
     t.saveXMCDA(fileName='randomPerformanceTableau',servingD3=False)
     t.showCriteria(Debug=False)
     #t = XMCDAPerformanceTableau('randomPerformanceTableau')
@@ -520,8 +520,8 @@ def testCriterionRelationTable():
 
 def testAMPLDataFileGeneration():
     print('*----- save AMPL Data file from robust outranking digraph ---*')
-    #t = RandomCBPerformanceTableau(numberOfActions=20,numberOfCriteria=7,weightDistribution="random",weightScale=(1,7),integerWeights=True,commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0)])
-    t = RandomS3PerformanceTableau(numberOfActions=10,numberOfCriteria=15,weightDistribution="random",weightScale=(1,13),integerWeights=True,commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0)],RandomCoalitions=True,commonMode=['beta',0.5,None])
+    #t = RandomCBPerformanceTableau(numberOfActions=20,numberOfCriteria=7,weightDistribution="random",weightScale=(1,7),IntegerWeights=True,commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0)])
+    t = RandomS3PerformanceTableau(numberOfActions=10,numberOfCriteria=15,weightDistribution="random",weightScale=(1,13),IntegerWeights=True,commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0)],RandomCoalitions=True,commonMode=['beta',0.5,None])
     t.saveXMCDA('temp1',servingD3=False)
     #t = XMCDAPerformanceTableau('temp1')
     gr = RobustOutrankingDigraph(t)
@@ -541,9 +541,9 @@ def testXMCDA2SaveReadDigraph():
 
 def testXMCDA2SaveReadPerformanceTableau():
     print('*==>> save and read XMCDA-2.0 PerformanceTableau instances ----*')
-    #t = RandomS3PerformanceTableau(numberOfActions=5,numberOfCriteria=15,weightDistribution="random",weightScale=(1,13),integerWeights=True,commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0),(60.0,0.0)],RandomCoalitions=True,commonMode=['beta',0.5,None])
+    #t = RandomS3PerformanceTableau(numberOfActions=5,numberOfCriteria=15,weightDistribution="random",weightScale=(1,13),IntegerWeights=True,commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0),(60.0,0.0)],RandomCoalitions=True,commonMode=['beta',0.5,None])
     #t.showAll()
-    t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=7,weightDistribution="random",weightScale=(1,7),integerWeights=True)
+    t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=7,weightDistribution="random",weightScale=(1,7),IntegerWeights=True)
     t.saveXMCDA('test')
     g = BipolarOutrankingDigraph(t)
     g.showRelationTable()

@@ -87,7 +87,7 @@ class RandomPerformanceTableau(PerformanceTableau):
                  numberOfCriteria = 7,\
                  weightDistribution = 'equisignificant',\
                  weightScale=None,\
-                 integerWeights=True,\
+                 IntegerWeights=True,\
                  commonScale = (0.0,100.0),\
                  commonThresholds = ((2.5,0.0),(5.0,0.0),(80.0,0.0)),\
                  commonMode = ('beta',None,(2,2)),\
@@ -205,7 +205,7 @@ class RandomPerformanceTableau(PerformanceTableau):
                                              'pref':prefThresholds,
                                              'veto':vetoThresholds}
             criteria[g]['scale'] = commonScale
-            if integerWeights:
+            if IntegerWeights:
                 criteria[g]['weight'] = weightsList[i]
             else:
                 criteria[g]['weight'] = weightsList[i]/sumWeights
@@ -546,7 +546,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
         * number of performance criteria,
         * weightDistribution := equisignificant | random (default, see RandomPerformanceTableau)
         * weightScale := (1, 1 | numberOfCriteria (default when random))
-        * integerWeights := Boolean (True = default) 
+        * IntegerWeights := Boolean (True = default) 
         * commonThresholds (default) := {
             | 'ind':(0,0),
             | 'pref':(1,0),
@@ -556,7 +556,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
     """
     def __init__(self,numberOfActions = 13, numberOfCriteria = 7,\
                  weightDistribution = 'equisignificant', weightScale=None,\
-                 commonThresholds = None, integerWeights=True,\
+                 commonThresholds = None, IntegerWeights=True,\
                  BigData=False,\
                  seed = None,\
                  Debug = False):
@@ -607,7 +607,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
         commentString = 'Arguments: '
         commentString += '; weightDistribution='+str(weightDistribution)
         commentString += '; weightScale='+str(weightScale)
-        commentString += '; integerWeights='+str(integerWeights)
+        commentString += '; IntegerWeights='+str(IntegerWeights)
         commentString += '; commonThresholds='+str(commonThresholds)
     
         for i in range(numberOfCriteria):
@@ -636,7 +636,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
                                               }
             commonScale = ( Decimal("0"), Decimal(numberOfActions) )
             criteria[g]['scale'] = commonScale
-            if integerWeights:
+            if IntegerWeights:
                 criteria[g]['weight'] = weightsList[i]
             else:
                 criteria[g]['weight'] = weightsList[i]/sumWeights
@@ -669,7 +669,7 @@ class _FullRandomPerformanceTableau(PerformanceTableau):
                  numberOfCriteria = None,
                  weightDistribution = None,
                  weightScale=None,
-                 integerWeights = True,
+                 IntegerWeights = True,
                  commonScale = None,
                  commonThresholds = None,
                  commonMode = None,
@@ -788,7 +788,7 @@ class _FullRandomPerformanceTableau(PerformanceTableau):
                     'veto':(Decimal(str(thresholds[2][0])),Decimal(str(thresholds[2][1]))),
                     }               
             criteria[g]['scale'] = commonScale
-            if integerWeights:
+            if IntegerWeights:
                 criteria[g]['weight'] = Decimal(str(weightsList[i]))
             else:
                 criteria[g]['weight'] = Decimal(str(weightsList[i]))/Decimal(str(sumWeights))
@@ -962,7 +962,7 @@ class _RandomCoalitionsPerformanceTableau(PerformanceTableau):
         | number of Criteria := 13 (default)
         | weightDistribution := 'equisignificant' (default with all weights = 1.0), 'random', 'fixed' (default w_1 = numberOfCriteria-1, w_{i!=1} = 1
         | weightScale := [1,numerOfCriteria] (random default), [w_1, w_{i!=1] (fixed)
-        | integerWeights := True (default) / False
+        | IntegerWeights := True (default) / False
         | commonScale := (0.0, 100.0) (default)
         | commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalSacles, [(0.10001*span,0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].
         | commonMode := ['triangular',50.0,0.50] (default), ['uniform',None,None], ['beta', None,None] (three alpha, beta combinations (5.8661,2.62203) chosen by default for high('+'), medium ('~') and low ('-') evaluations.
@@ -979,7 +979,7 @@ class _RandomCoalitionsPerformanceTableau(PerformanceTableau):
 
     def __init__(self,numberOfActions = None, numberOfCriteria = None,\
                  weightDistribution = None, weightScale=None,\
-                 integerWeights = True, commonScale = None,\
+                 IntegerWeights = True, commonScale = None,\
                  commonThresholds = None, commonMode = None,\
                  valueDigits=2, Coalitions=True, VariableGenerators=True,\
                  OrdinalScales=False, Debug=False, RandomCoalitions=False,\
@@ -1152,7 +1152,7 @@ class _RandomCoalitionsPerformanceTableau(PerformanceTableau):
                    (Decimal(str(thresholds[t][0])),Decimal(str(thresholds[t][1])))
                 
             criteria[g]['scale'] = commonScale
-            if integerWeights:
+            if IntegerWeights:
                 criteria[g]['weight'] = weightsList[gi]
             else:
                 criteria[g]['weight'] = weightsList[gi] / sumWeights
@@ -1366,7 +1366,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                               | 'equisignificant' (weights set all to 1)
                               | 'random' (in the range 1 to numberOfCriteria)
         * weightScale := [1,numerOfCriteria] (random default)
-        * integerWeights := True (default) / False
+        * IntegerWeights := True (default) / False
         * OrdinalScales := True / False (default), if True commonScale is set to (0,10)
         * commonScale := (Min, Max)
                 | when common Scale = False, (0.0,10.0) by default if OrdinalScales == True and CommonScale=None,
@@ -1391,7 +1391,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
 
     def __init__(self,numberOfActions = 20, numberOfCriteria = 13,\
                  weightDistribution = 'equiobjectives', weightScale=None,\
-                 integerWeights = True, OrdinalScales=False,\
+                 IntegerWeights = True, OrdinalScales=False,\
                  commonScale = None,\
                  commonThresholds = None, commonMode = None,\
                  valueDigits=2,\
@@ -1532,7 +1532,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                    (Decimal(str(thresholds[t][0])),Decimal(str(thresholds[t][1])))
                 
             criteria[g]['scale'] = commonScale
-            if integerWeights:
+            if IntegerWeights:
                 criteria[g]['weight'] = weightsList[i]
             else:
                 criteria[g]['weight'] = weightsList[i] / sumWeights
@@ -2017,7 +2017,7 @@ class _Random3ObjectivesPerformanceTableau(_RandomCoalitionsPerformanceTableau):
     """
     def __init__(self,numberOfActions = 20, numberOfCriteria = 13,\
                  weightDistribution = 'equiobjectives', weightScale=None,\
-                 integerWeights = True, commonScale = (0.0,100.0),\
+                 IntegerWeights = True, commonScale = (0.0,100.0),\
                  commonThresholds = [(5.0,0.0),(10.0,0.0),(60.0,0.0)],\
                  commonDistribution = ['triangular','variable',0.5],\
                  missingDataProbability = 0.05,\
@@ -2042,7 +2042,7 @@ class _Random3ObjectivesPerformanceTableau(_RandomCoalitionsPerformanceTableau):
                                                numberOfCriteria=numberOfCriteria,
                                                weightDistribution=weightDistribution,
                                                weightScale=weightScale,
-                                               integerWeights=integerWeights,
+                                               IntegerWeights=IntegerWeights,
                                                commonScale =commonScale,
                                                commonThresholds=commonThresholds,
                                                commonMode=commonDistribution,

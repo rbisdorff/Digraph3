@@ -134,7 +134,7 @@
                  <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span>\
                  <span class="n">weightDistribution</span> <span class="o">=</span> <span class="s1">&#39;equisignificant&#39;</span><span class="p">,</span>\
                  <span class="n">weightScale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
-                 <span class="n">integerWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
+                 <span class="n">IntegerWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                  <span class="n">commonScale</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">100.0</span><span class="p">),</span>\
                  <span class="n">commonThresholds</span> <span class="o">=</span> <span class="p">((</span><span class="mf">2.5</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">5.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">80.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">)),</span>\
                  <span class="n">commonMode</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;beta&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">,(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)),</span>\
@@ -252,7 +252,7 @@
                                              <span class="s1">&#39;pref&#39;</span><span class="p">:</span><span class="n">prefThresholds</span><span class="p">,</span>
                                              <span class="s1">&#39;veto&#39;</span><span class="p">:</span><span class="n">vetoThresholds</span><span class="p">}</span>
             <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">commonScale</span>
-            <span class="k">if</span> <span class="n">integerWeights</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">IntegerWeights</span><span class="p">:</span>
                 <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">weightsList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">weightsList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">sumWeights</span>
@@ -593,7 +593,7 @@
 <span class="sd">        * number of performance criteria,</span>
 <span class="sd">        * weightDistribution := equisignificant | random (default, see RandomPerformanceTableau)</span>
 <span class="sd">        * weightScale := (1, 1 | numberOfCriteria (default when random))</span>
-<span class="sd">        * integerWeights := Boolean (True = default) </span>
+<span class="sd">        * IntegerWeights := Boolean (True = default) </span>
 <span class="sd">        * commonThresholds (default) := {</span>
 <span class="sd">            | &#39;ind&#39;:(0,0),</span>
 <span class="sd">            | &#39;pref&#39;:(1,0),</span>
@@ -603,7 +603,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span> <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span>\
                  <span class="n">weightDistribution</span> <span class="o">=</span> <span class="s1">&#39;equisignificant&#39;</span><span class="p">,</span> <span class="n">weightScale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
-                 <span class="n">commonThresholds</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">integerWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
+                 <span class="n">commonThresholds</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">IntegerWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                  <span class="n">BigData</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                  <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
                  <span class="n">Debug</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
@@ -654,7 +654,7 @@
         <span class="n">commentString</span> <span class="o">=</span> <span class="s1">&#39;Arguments: &#39;</span>
         <span class="n">commentString</span> <span class="o">+=</span> <span class="s1">&#39;; weightDistribution=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">weightDistribution</span><span class="p">)</span>
         <span class="n">commentString</span> <span class="o">+=</span> <span class="s1">&#39;; weightScale=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">weightScale</span><span class="p">)</span>
-        <span class="n">commentString</span> <span class="o">+=</span> <span class="s1">&#39;; integerWeights=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">integerWeights</span><span class="p">)</span>
+        <span class="n">commentString</span> <span class="o">+=</span> <span class="s1">&#39;; IntegerWeights=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">IntegerWeights</span><span class="p">)</span>
         <span class="n">commentString</span> <span class="o">+=</span> <span class="s1">&#39;; commonThresholds=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">commonThresholds</span><span class="p">)</span>
     
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numberOfCriteria</span><span class="p">):</span>
@@ -683,7 +683,7 @@
                                               <span class="p">}</span>
             <span class="n">commonScale</span> <span class="o">=</span> <span class="p">(</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">),</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">numberOfActions</span><span class="p">)</span> <span class="p">)</span>
             <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">commonScale</span>
-            <span class="k">if</span> <span class="n">integerWeights</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">IntegerWeights</span><span class="p">:</span>
                 <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">weightsList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">weightsList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">sumWeights</span>
@@ -716,7 +716,7 @@
                  <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">weightDistribution</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">weightScale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">integerWeights</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                 <span class="n">IntegerWeights</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
                  <span class="n">commonScale</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">commonThresholds</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">commonMode</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -835,7 +835,7 @@
                     <span class="s1">&#39;veto&#39;</span><span class="p">:(</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">thresholds</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">])),</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">thresholds</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]))),</span>
                     <span class="p">}</span>               
             <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">commonScale</span>
-            <span class="k">if</span> <span class="n">integerWeights</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">IntegerWeights</span><span class="p">:</span>
                 <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">weightsList</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">weightsList</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span><span class="o">/</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">sumWeights</span><span class="p">))</span>
@@ -1009,7 +1009,7 @@
 <span class="sd">        | number of Criteria := 13 (default)</span>
 <span class="sd">        | weightDistribution := &#39;equisignificant&#39; (default with all weights = 1.0), &#39;random&#39;, &#39;fixed&#39; (default w_1 = numberOfCriteria-1, w_{i!=1} = 1</span>
 <span class="sd">        | weightScale := [1,numerOfCriteria] (random default), [w_1, w_{i!=1] (fixed)</span>
-<span class="sd">        | integerWeights := True (default) / False</span>
+<span class="sd">        | IntegerWeights := True (default) / False</span>
 <span class="sd">        | commonScale := (0.0, 100.0) (default)</span>
 <span class="sd">        | commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalSacles, [(0.10001*span,0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].</span>
 <span class="sd">        | commonMode := [&#39;triangular&#39;,50.0,0.50] (default), [&#39;uniform&#39;,None,None], [&#39;beta&#39;, None,None] (three alpha, beta combinations (5.8661,2.62203) chosen by default for high(&#39;+&#39;), medium (&#39;~&#39;) and low (&#39;-&#39;) evaluations.</span>
@@ -1026,7 +1026,7 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
                  <span class="n">weightDistribution</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">weightScale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
-                 <span class="n">integerWeights</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">commonScale</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
+                 <span class="n">IntegerWeights</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">commonScale</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
                  <span class="n">commonThresholds</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">commonMode</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
                  <span class="n">valueDigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">Coalitions</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">VariableGenerators</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                  <span class="n">OrdinalScales</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">RandomCoalitions</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
@@ -1199,7 +1199,7 @@
                    <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">thresholds</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="mi">0</span><span class="p">])),</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">thresholds</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="mi">1</span><span class="p">])))</span>
                 
             <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">commonScale</span>
-            <span class="k">if</span> <span class="n">integerWeights</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">IntegerWeights</span><span class="p">:</span>
                 <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">weightsList</span><span class="p">[</span><span class="n">gi</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">weightsList</span><span class="p">[</span><span class="n">gi</span><span class="p">]</span> <span class="o">/</span> <span class="n">sumWeights</span>
@@ -1413,7 +1413,7 @@
 <span class="sd">                              | &#39;equisignificant&#39; (weights set all to 1)</span>
 <span class="sd">                              | &#39;random&#39; (in the range 1 to numberOfCriteria)</span>
 <span class="sd">        * weightScale := [1,numerOfCriteria] (random default)</span>
-<span class="sd">        * integerWeights := True (default) / False</span>
+<span class="sd">        * IntegerWeights := True (default) / False</span>
 <span class="sd">        * OrdinalScales := True / False (default), if True commonScale is set to (0,10)</span>
 <span class="sd">        * commonScale := (Min, Max)</span>
 <span class="sd">                | when common Scale = False, (0.0,10.0) by default if OrdinalScales == True and CommonScale=None,</span>
@@ -1438,7 +1438,7 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span>\
                  <span class="n">weightDistribution</span> <span class="o">=</span> <span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span> <span class="n">weightScale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
-                 <span class="n">integerWeights</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">OrdinalScales</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
+                 <span class="n">IntegerWeights</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">OrdinalScales</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                  <span class="n">commonScale</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
                  <span class="n">commonThresholds</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">commonMode</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
                  <span class="n">valueDigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>\
@@ -1579,7 +1579,7 @@
                    <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">thresholds</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="mi">0</span><span class="p">])),</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">thresholds</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="mi">1</span><span class="p">])))</span>
                 
             <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">commonScale</span>
-            <span class="k">if</span> <span class="n">integerWeights</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">IntegerWeights</span><span class="p">:</span>
                 <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">weightsList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">weightsList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">sumWeights</span>
@@ -2064,7 +2064,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span>\
                  <span class="n">weightDistribution</span> <span class="o">=</span> <span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span> <span class="n">weightScale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
-                 <span class="n">integerWeights</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">commonScale</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">100.0</span><span class="p">),</span>\
+                 <span class="n">IntegerWeights</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">commonScale</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">100.0</span><span class="p">),</span>\
                  <span class="n">commonThresholds</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">5.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">10.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">60.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">)],</span>\
                  <span class="n">commonDistribution</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;triangular&#39;</span><span class="p">,</span><span class="s1">&#39;variable&#39;</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],</span>\
                  <span class="n">missingDataProbability</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>\
@@ -2089,7 +2089,7 @@
                                                <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">numberOfCriteria</span><span class="p">,</span>
                                                <span class="n">weightDistribution</span><span class="o">=</span><span class="n">weightDistribution</span><span class="p">,</span>
                                                <span class="n">weightScale</span><span class="o">=</span><span class="n">weightScale</span><span class="p">,</span>
-                                               <span class="n">integerWeights</span><span class="o">=</span><span class="n">integerWeights</span><span class="p">,</span>
+                                               <span class="n">IntegerWeights</span><span class="o">=</span><span class="n">IntegerWeights</span><span class="p">,</span>
                                                <span class="n">commonScale</span> <span class="o">=</span><span class="n">commonScale</span><span class="p">,</span>
                                                <span class="n">commonThresholds</span><span class="o">=</span><span class="n">commonThresholds</span><span class="p">,</span>
                                                <span class="n">commonMode</span><span class="o">=</span><span class="n">commonDistribution</span><span class="p">,</span>
