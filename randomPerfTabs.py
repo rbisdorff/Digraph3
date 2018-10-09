@@ -2227,7 +2227,8 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                  name = 'randomCBperftab',\
                  weightDistribution = 'equiobjectives',\
                  weightScale=None,\
-                 integerWeights = True,\
+                 IntegerWeights = True,\
+                 NegativeWeights = False,\
                  commonScale = None, commonThresholds = None,\
                  commonPercentiles= None,\
                  samplingSize = 100000,\
@@ -2412,11 +2413,23 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         for i,g in enumerate(criteria):
             ## if Debug:
             ##     print 'criterionScale = ', criterionScale
-            if integerWeights:
-                criteria[g]['weight'] = weightsList[i]
+            if NegativeWeights:
+                if criteria[g]['preferenceDirection'] == "max":
+                    Sgn = Decimal('1.0')
+                else:
+                    Sgn = Decimal('-1.0')
+                if IntegerWeights:
+                    criteria[g]['weight'] = Sgn * weightsList[i]
+                else:
+                    criteria[g]['weight'] = Sgn * weightsList[i] / sumWeights
+                i += 1
             else:
-                criteria[g]['weight'] = weightsList[i] / sumWeights
-            i += 1
+                if IntegerWeights:
+                    criteria[g]['weight'] = weightsList[i]
+                else:
+                    criteria[g]['weight'] = weightsList[i] / sumWeights
+                i += 1
+                
 
             if Debug:
                 print(criteria[g])
@@ -2468,7 +2481,11 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                     if criteria[g]['preferenceDirection'] == 'max':
                         evaluation[g][a] = Decimal(str(round(randeval,digits)))
                     else:
-                        evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+                        if NegativeWeights:
+                            evaluation[g][a] = Decimal(str(round(randeval,digits)))
+                        else:
+                            evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+        
             elif str(randomMode[0]) == 'triangular':
                 for a in actions:
                     m = criterionScale[0]
@@ -2500,7 +2517,11 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                     if criteria[g]['preferenceDirection'] == 'max':
                         evaluation[g][a] = Decimal(str(round(randeval,digits)))
                     else:
-                        evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+                        if NegativeWeights:
+                            evaluation[g][a] = Decimal(str(round(randeval,digits)))
+                        else:
+                            evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+                        #evaluation[g][a] = Decimal(str(-round(randeval,digits)))
                     #print randeval, criteria[g]['preferenceDirection'], evaluation[g][a]
                         
             elif str(randomMode[0]) == 'normal':
@@ -2531,7 +2552,11 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                     if criteria[g]['preferenceDirection'] == 'max':
                         evaluation[g][a] = Decimal(str(round(randeval,digits)))
                     else:
-                        evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+                        if NegativeWeights:
+                            evaluation[g][a] = Decimal(str(round(randeval,digits)))
+                        else:
+                            evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+                        #evaluation[g][a] = Decimal(str(-round(randeval,digits)))
             elif str(randomMode[0]) == 'beta':
                 m = criterionScale[0]
                 M = criterionScale[1]
@@ -2554,7 +2579,11 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                     if criteria[g]['preferenceDirection'] == 'max':
                         evaluation[g][a] = Decimal(str(round(randeval,digits)))
                     else:
-                        evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+                        if NegativeWeights:
+                            evaluation[g][a] = Decimal(str(round(randeval,digits)))
+                        else:
+                            evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+                        #evaluation[g][a] = Decimal(str(-round(randeval,digits)))
                     ## if Debug:
                     ##     print 'alpha,beta,u,m,M,randeval',alpha,beta,u,m,M,randeval
                         
@@ -2762,7 +2791,11 @@ class RandomCBPerformanceGenerator(RandomPerformanceGenerator):
                 if criteria[g]['preferenceDirection'] == 'max':
                     evaluation[g] = Decimal(str(round(randeval,digits)))
                 else:
-                    evaluation[g] = Decimal(str(-round(randeval,digits)))
+                    if NegativeWeights:
+                        evaluation[g][a] = Decimal(str(round(randeval,digits)))
+                    else:
+                        evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+                    #evaluation[g] = Decimal(str(-round(randeval,digits)))
             elif str(randomMode[0]) == 'triangular':
                 from math import sqrt
                 m = criterionScale[0]

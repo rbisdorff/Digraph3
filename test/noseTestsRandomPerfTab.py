@@ -90,7 +90,7 @@ def testCBPerformanceTableau():
                                    commonPercentiles={'ind':0.05,'pref':0.10,'veto':0.95},\
                                    weightDistribution="random",\
                                    weightScale=[1,2],\
-                                   integerWeights=True,\
+                                   IntegerWeights=True,\
                                    commonMode=["normal",50.0,25.0],
                                    missingDataProbability=0.5,
                                    seed=100,Debug=True)
@@ -109,7 +109,8 @@ def testmpCBPerformanceTableau():
                                    commonPercentiles={'ind':0.05,'pref':0.10,'veto':0.95},\
                                    weightDistribution="random",\
                                    weightScale=[1,2],\
-                                   integerWeights=True,\
+                                   IntegerWeights=True,\
+                                   NegativeWeights=True,\
                                    commonMode=["normal",50.0,25.0],
                                    missingDataProbability=0.5,
                                    seed=100,Debug=True,
