@@ -524,7 +524,7 @@ The performance evaluations of each decision alternative on each criterion are g
 
         sumWeights = Decimal('0.0')
         for g in dict.keys(criteria):
-            sumWeights += criteria[g]['weight']
+            sumWeights += abs(criteria[g]['weight'])
 
         weightedAverage = {} 
         for x in dict.keys(actions):
@@ -603,7 +603,7 @@ The performance evaluations of each decision alternative on each criterion are g
             criteriaList = [x for x in criteria]
             criteriaList.sort()
             for c in criteriaList:
-                sumWeights += criteria[c]['weight']
+                sumWeights += abs(criteria[c]['weight'])
                 if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):		
                     try:
                         indx = criteria[c]['thresholds']['ind'][0]
@@ -642,10 +642,10 @@ The performance evaluations of each decision alternative on each criterion are g
                         p = round(p,2)
                     if isReturningHTML:
                         html += '<tr>'
-                        html += '<td bgcolor="#FFEEAA" align="center">%s</td> <td>%.2f</td> <td>%2.2f</td> <td>%2.2f</td> <td>%+2.2f</td> <td>%s</td>  <td>%s</td>  <td>%s</td>   <td>%+.2f</td>' % (c,criteria[c]['weight'],evaluation[c][a],evaluation[c][b],d, str(ind),str(wp),str(p),lc0*criteria[c]['weight'])
+                        html += '<td bgcolor="#FFEEAA" align="center">%s</td> <td>%.2f</td> <td>%2.2f</td> <td>%2.2f</td> <td>%+2.2f</td> <td>%s</td>  <td>%s</td>  <td>%s</td>   <td>%+.2f</td>' % (c,criteria[c]['weight'],evaluation[c][a],evaluation[c][b],d, str(ind),str(wp),str(p),lc0*abs(criteria[c]['weight']))
                     else:
                          print(c, '  %.2f  %2.2f  %2.2f  %+2.2f \t| %s  %s  %s   %+.2f \t|' % (criteria[c]['weight'],evaluation[c][a],evaluation[c][b],d, str(ind),str(wp),str(p),lc0*criteria[c]['weight']), end=' ')
-                    concordance = concordance + (lc0 * criteria[c]['weight'])
+                    concordance = concordance + (lc0 * abs(criteria[c]['weight']))
                     try:
                         wvx = criteria[c]['thresholds']['weakVeto'][0]
                         wvy = criteria[c]['thresholds']['weakVeto'][1]
@@ -771,7 +771,7 @@ The performance evaluations of each decision alternative on each criterion are g
 ##        sumWeights = Decimal('0.0')
 ##        for g in criteria:
 ##            sumWeights += criteria[g]['weight']
-        sumWeights = sum([criteria[g]['weight'] for g in criteria])
+        sumWeights = sum([abs(criteria[g]['weight']) for g in criteria])
         if ByObjectives:
             for obj in objectives.keys():
                 criteriaList = [g for g in criteria if criteria[g]['objective']==obj]
