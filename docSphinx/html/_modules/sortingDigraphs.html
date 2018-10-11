@@ -4282,12 +4282,16 @@
 <span class="c1">##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)</span>
 <span class="c1">##    t = XMCDA2PerformanceTableau(&#39;spiegel2004&#39;)</span>
 <span class="c1">##    t = XMCDA2PerformanceTableau(&#39;ex1&#39;)</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>
                                     <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
+                                             <span class="n">NegativeWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                     <span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span>
                                     <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
                                     <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1">#t.showHTMLPerformanceHeatmap(Correlations=True)</span>
     <span class="n">nt</span> <span class="o">=</span> <span class="n">NormalizedPerformanceTableau</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">nt</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
 <span class="c1">##    so = SortingDigraph(t,scaleSteps=5,LowerClosed=True,Debug=True)</span>
 <span class="c1">####    so = SortingDigraph(&#39;grafittiPerfTab&#39;,&#39;grafittiCategories&#39;)</span>
 <span class="c1">##    so = SortingDigraph(t,scaleSteps=7,Debug=True)</span>
@@ -4424,31 +4428,31 @@
 <span class="c1">##    print(ira.computeQuantileProfile(0.5))</span>
 <span class="c1">##    print(ira.computeQuantileProfile(0.75))</span>
 
-    <span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
-    <span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">7</span>
-    <span class="n">seed</span> <span class="o">=</span> <span class="mi">105</span>
-    <span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>\
-                   <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
-    <span class="kn">from</span> <span class="nn">performanceQuantiles</span> <span class="k">import</span> <span class="n">PerformanceQuantiles</span>
-    <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span>\
-                   <span class="n">numberOfBins</span> <span class="o">=</span> <span class="s1">&#39;deciles&#39;</span><span class="p">,</span>\
-                  <span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="c1">##    pq.showLimitingQuantiles(ByObjectives=True)</span>
-    <span class="c1"># generate 100 new random decision actions</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceGenerator</span>
-    <span class="n">rpg</span> <span class="o">=</span> <span class="n">RandomPerformanceGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
-    <span class="n">newActions</span> <span class="o">=</span> <span class="n">rpg</span><span class="o">.</span><span class="n">randomPerformanceTableau</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-    <span class="c1"># Updating the quartile norms shown above</span>
-    <span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-<span class="c1">##    pq.showHTMLLimitingQuantiles(Transposed=True)</span>
-<span class="c1">##    from sortingDigraphs import NormedQuantilesRatingDigraph</span>
-    <span class="n">nqr</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span>\
-                                       <span class="n">quantiles</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">nqr</span><span class="p">)</span>
+<span class="c1">#     nbrActions=1000</span>
+<span class="c1">#     nbrCrit = 7</span>
+<span class="c1">#     seed = 105</span>
+<span class="c1">#     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\</span>
+<span class="c1">#                    numberOfCriteria=nbrCrit,seed=seed)</span>
+<span class="c1">#     from performanceQuantiles import PerformanceQuantiles</span>
+<span class="c1">#     pq = PerformanceQuantiles(tp,\</span>
+<span class="c1">#                    numberOfBins = &#39;deciles&#39;,\</span>
+<span class="c1">#                   LowerClosed=True,Debug=False)</span>
+<span class="c1"># ##    pq.showLimitingQuantiles(ByObjectives=True)</span>
+<span class="c1">#     # generate 100 new random decision actions</span>
+<span class="c1">#     from randomPerfTabs import RandomPerformanceGenerator</span>
+<span class="c1">#     rpg = RandomPerformanceGenerator(tp,seed=seed)</span>
+<span class="c1">#     newActions = rpg.randomPerformanceTableau(10)</span>
+<span class="c1">#     # Updating the quartile norms shown above</span>
+<span class="c1">#     pq.updateQuantiles(newActions,historySize=None)</span>
+<span class="c1"># ##    pq.showHTMLLimitingQuantiles(Transposed=True)</span>
+<span class="c1"># ##    from sortingDigraphs import NormedQuantilesRatingDigraph</span>
+<span class="c1">#     nqr = NormedQuantilesRatingDigraph(pq,newActions,rankingRule=&#39;best&#39;,\</span>
+<span class="c1">#                                        quantiles=4,Debug=False)</span>
+<span class="c1">#     print(nqr)</span>
 <span class="c1">##    nqr.showHTMLRatingHeatmap(pageTitle=&#39;Heat map of the ratings&#39;, colorLevels=5,</span>
 <span class="c1">##                                       Correlations=True,</span>
 <span class="c1">##                                       )</span>
-    <span class="n">nqr</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
+<span class="c1">##    nqr.showQuantilesRating()</span>
 <span class="c1">##    nqr.exportRatingGraphViz(noSilent=False)</span>
 <span class="c1">##</span>
 <span class="c1">##</span>

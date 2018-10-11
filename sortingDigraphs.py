@@ -4235,12 +4235,16 @@ if __name__ == "__main__":
 ##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)
 ##    t = XMCDA2PerformanceTableau('spiegel2004')
 ##    t = XMCDA2PerformanceTableau('ex1')
-    t = Random3ObjectivesPerformanceTableau(numberOfActions=25,
+    t = RandomCBPerformanceTableau(numberOfActions=25,
                                     numberOfCriteria=13,
+                                             NegativeWeights=True,
                                     weightDistribution='equiobjectives',
                                     missingDataProbability=0.05,
                                     seed=1)
+    #t.showHTMLPerformanceHeatmap(Correlations=True)
     nt = NormalizedPerformanceTableau(t)
+    nt.showHTMLPerformanceHeatmap(Correlations=True)
+    
 ##    so = SortingDigraph(t,scaleSteps=5,LowerClosed=True,Debug=True)
 ####    so = SortingDigraph('grafittiPerfTab','grafittiCategories')
 ##    so = SortingDigraph(t,scaleSteps=7,Debug=True)
@@ -4377,31 +4381,31 @@ if __name__ == "__main__":
 ##    print(ira.computeQuantileProfile(0.5))
 ##    print(ira.computeQuantileProfile(0.75))
 
-    nbrActions=1000
-    nbrCrit = 7
-    seed = 105
-    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
-                   numberOfCriteria=nbrCrit,seed=seed)
-    from performanceQuantiles import PerformanceQuantiles
-    pq = PerformanceQuantiles(tp,\
-                   numberOfBins = 'deciles',\
-                  LowerClosed=True,Debug=False)
-##    pq.showLimitingQuantiles(ByObjectives=True)
-    # generate 100 new random decision actions
-    from randomPerfTabs import RandomPerformanceGenerator
-    rpg = RandomPerformanceGenerator(tp,seed=seed)
-    newActions = rpg.randomPerformanceTableau(10)
-    # Updating the quartile norms shown above
-    pq.updateQuantiles(newActions,historySize=None)
-##    pq.showHTMLLimitingQuantiles(Transposed=True)
-##    from sortingDigraphs import NormedQuantilesRatingDigraph
-    nqr = NormedQuantilesRatingDigraph(pq,newActions,rankingRule='best',\
-                                       quantiles=4,Debug=False)
-    print(nqr)
+#     nbrActions=1000
+#     nbrCrit = 7
+#     seed = 105
+#     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
+#                    numberOfCriteria=nbrCrit,seed=seed)
+#     from performanceQuantiles import PerformanceQuantiles
+#     pq = PerformanceQuantiles(tp,\
+#                    numberOfBins = 'deciles',\
+#                   LowerClosed=True,Debug=False)
+# ##    pq.showLimitingQuantiles(ByObjectives=True)
+#     # generate 100 new random decision actions
+#     from randomPerfTabs import RandomPerformanceGenerator
+#     rpg = RandomPerformanceGenerator(tp,seed=seed)
+#     newActions = rpg.randomPerformanceTableau(10)
+#     # Updating the quartile norms shown above
+#     pq.updateQuantiles(newActions,historySize=None)
+# ##    pq.showHTMLLimitingQuantiles(Transposed=True)
+# ##    from sortingDigraphs import NormedQuantilesRatingDigraph
+#     nqr = NormedQuantilesRatingDigraph(pq,newActions,rankingRule='best',\
+#                                        quantiles=4,Debug=False)
+#     print(nqr)
 ##    nqr.showHTMLRatingHeatmap(pageTitle='Heat map of the ratings', colorLevels=5,
 ##                                       Correlations=True,
 ##                                       )
-    nqr.showQuantilesRating()
+##    nqr.showQuantilesRating()
 ##    nqr.exportRatingGraphViz(noSilent=False)
 ##
 ##

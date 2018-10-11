@@ -1195,7 +1195,7 @@ The performance evaluations of each decision alternative on each criterion are g
         # computing the quantiles on criterion g
         gQuantiles = []
         if LowerClosed:
-            # we ignore the 1.00 quantile and replace it with +infty
+            # we ignorethe 1.00 quantile and replace it with +infty
             for q in limitingQuantiles:
                 r = (Decimal(str(nf)) * q)
                 rq = int(floor(r))
@@ -4285,6 +4285,7 @@ The performance evaluations of each decision alternative on each criterion are g
         actionKeys = [x for x in actions]
         normEvaluation = {}
         for g in criterionKeys:
+            #print(g, criteria[g]['weight'], criteria[g]['preferenceDirection'])
             normEvaluation[g] = {}
             glow = Decimal(str(criteria[g]['scale'][0]))
             ghigh = Decimal(str(criteria[g]['scale'][1]))
@@ -4296,18 +4297,23 @@ The performance evaluations of each decision alternative on each criterion are g
                     evalx = abs(evaluation[g][x])
                     if Debug:
                         print(evalx)
-                    ## normEvaluation[g][x] = lowValue + ((evalx-glow)/gamp)*amplitude
+                    normEvaluation[g][x] = lowValue + ((evalx-glow)/gamp)*amplitude
                     try:
-                        if criteria[g]['preferenceDirection'] == 'min':
-                            sign = Decimal('-1')
-                        else:
-                            sign = Decimal('1')
-                        normEvaluation[g][x] = (lowValue + ((evalx-glow)/gamp)*amplitude)*sign
-                        ## else:
-                        ##     normEvaluation[g][x] = -(lowValue + ((evalx-glow)/gamp)*(-amplitude))
+                        if criteria[g]['preferenceDirection'] == 'max':
+                            normEvaluation[g][x] = (lowValue + ((evalx-glow)/gamp)*amplitude)
+                            #print('passing here',normEvaluation[g][x])
+                            
+                        elif criteria[g]['preferenceDirection'] == 'min':
+                        #else:
+                            normEvaluation[g][x] = (lowValue + ((evalx-glow)/gamp)*(-amplitude))
+                            #print('passing here',normEvaluation[g][x])
                     except:
-                        self.criteria[g]['preferenceDirection'] = 'max'
-                        normEvaluation[g][x] = lowValue + ((evalx-glow)/gamp)*amplitude
+                        if criteria[g]['weight'] > Decimal('0.0'):
+                            self.criteria[g]['preferenceDirection'] = 'max'
+                            normEvaluation[g][x] = lowValue + ((evalx-glow)/gamp)*amplitude
+                        else:
+                            self.criteria[g]['preferenceDirection'] = 'min'
+                            normEvaluation[g][x] = -(lowValue + ((evalx-glow)/gamp)*amplitude)
                         
                     if Debug:
                         print(criteria[g]['preferenceDirection'], evaluation[g][x], normEvaluation[g][x])
@@ -4509,6 +4515,8 @@ class NormalizedPerformanceTableau(PerformanceTableau):
         self.evaluation = self.normalizeEvaluations(lowValue,highValue,Debug)
         criteria = self.criteria        
         for g in criteria:
+            if criteria[g]['weight'] < 0:
+                criteria[g]['weight'] = -criteria[g]['weight']
             try:
                 for th in criteria[g]['thresholds']:
                     empan = Decimal(str(criteria[g]['scale'][1]-criteria[g]['scale'][0]))
@@ -7282,30 +7290,36 @@ if __name__ == "__main__":
 ##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
     t = RandomCBPerformanceTableau(numberOfCriteria=13,
-                                   numberOfActions=21,
+                                   numberOfActions=10,
                                    weightDistribution='equiobjectives',
-                                   integerWeights=True,
+                                   IntegerWeights=True,
+                                   NegativeWeights=True,
                                    Debug=False,
                                    missingDataProbability=0.1,
                                    seed=101,Threading=False)
-    t.saveCSV('test')
-    T = CSVPerformanceTableau('test',Debug=True)
-    print(T.__dict__)
-    T.showActions()
-    T.showCriteria()
-#    T.showHTMLPerformanceHeatmap(Correlations=True)
-    from outrankingDigraphs import *
-    g = BipolarOutrankingDigraph(t)
-    gt = BipolarOutrankingDigraph(T)
-    g.showRubisBestChoiceRecommendation()
-    gt.showRubisBestChoiceRecommendation()
+    t.showPerformanceTableau()
+    nt = NormalizedPerformanceTableau(t)
+    nt.showPerformanceTableau()
+    t.showHTMLPerformanceHeatmap(Correlations=True)
+    #nt.showHTMLPerformanceHeatmap(Correlations=True)
+#     t.saveCSV('test')
+#     T = CSVPerformanceTableau('test',Debug=True)
+#     print(T.__dict__)
+#     T.showActions()
+#     T.showCriteria()
+# #    T.showHTMLPerformanceHeatmap(Correlations=True)
+#     from outrankingDigraphs import *
+#     g = BipolarOutrankingDigraph(t)
+#     gt = BipolarOutrankingDigraph(T)
+#     g.showRubisBestChoiceRecommendation()
+#     gt.showRubisBestChoiceRecommendation()
     
 ##    for g in t.criteria:
 ##        t._computeLimitingQuantiles(g,frequencies=[0.0,0.25,0.5,0.75,1.0],LowerClosed=False,Debug=False)
-##    t.saveXMCDA2('test')
-##    t1 = XMCDA2PerformanceTableau('test')
-##    t1.showObjectives()
-##    t1.showHTMLPerformanceHeatmap(Correlations=True,SparseModel=False)
+    # t.saveXMCDA2('test')
+    # t1 = XMCDA2PerformanceTableau('test')
+    # t1.showObjectives()
+    # t1.showHTMLPerformanceHeatmap(Correlations=True,SparseModel=False)
 ##    t = ConstantPerformanceTableau(t,
 ##                                   actionsSubset=['a01','a02','a03'],
 ##                                   criteriaSubset=['g01','g02','g03'],
@@ -7329,7 +7343,7 @@ if __name__ == "__main__":
 ####    t1 = RandomCBPerformanceTableau(numberOfCriteria=13,
 ####                                   numberOfActions=30,
 ####                                   weightDistribution='equiobjectives',
-####                                   integerWeights=True,
+####                                   IntegerWeights=True,
 ####                                   Debug=False,
 ####                                   missingDataProbability=0.1,
 ####                                   seed=100,Threading=False)
@@ -7339,7 +7353,7 @@ if __name__ == "__main__":
 ####    t2 = RandomCBPerformanceTableau(numberOfCriteria=13,
 ####                                   numberOfActions=30,
 ####                                   weightDistribution='equiobjectives',
-####                                   integerWeights=True,
+####                                   IntegerWeights=True,
 ####                                   Debug=False,
 ####                                   missingDataProbability=0.1,
 ####                                   seed=100,Threading=False)
@@ -7349,7 +7363,7 @@ if __name__ == "__main__":
 ####    t = RandomCBPerformanceTableau(numberOfCriteria=13,
 ####                                   numberOfActions=30,
 ####                                   weightDistribution='equiobjectives',
-####                                   integerWeights=True,
+####                                   IntegerWeights=True,
 ####                                   Debug=False,
 ####                                   missingDataProbability=0.1,
 ####                                   seed=100,Threading=False)
@@ -7389,13 +7403,13 @@ if __name__ == "__main__":
 ####    ## t = PerformanceTableau('test')
 ####    t.saveXMCDA2('test',servingD3=False)
 ####    t.showCriteria(IntegerWeights=True)
-####    print(t.computeQuantiles(Debug=False))
-####    t.showQuantileSort()
-####    g = BipolarOutrankingDigraph(t)
-####    s = sortingDigraphs.SortingDigraph(g)
-####    s.showSorting()
-####    g.computeRankingByChoosing(CoDual=False)
-####    g.showRankingByChoosing()
+    # print(t.computeQuantiles(Debug=False))
+    # t.showQuantileSort()
+    # g = BipolarOutrankingDigraph(t)
+    # s = sortingDigraphs.SortingDigraph(g)
+    # s.showSorting()
+    # g.computeRankingByChoosing(CoDual=False)
+    # g.showRankingByChoosing()
 ####    prg = PrincipalInOutDegreesOrdering(g,imageType="pdf")
 ####    prg.showWeakOrder()
 ####    print(g.computeOrdinalCorrelation(prg))
