@@ -2131,6 +2131,7 @@ Copyright (C) 2009 DECISION DECK Consortium
       <li><a href="#graph">Robustly significant outranking digraph</a></li>
       <li><a href="#alternatives">Potential decision actions</a></li>
       <li><a href="#performance">Performance table</a></li>
+      <li><a href="#objectives">Decision objectives</a></li>
       <li><a href="#criteria">Family of criteria</a></li>
       <li><a href="#outranking">Condorcet robustness denotation</a></li>	
       <li><a href="#vetos">Veto situations</a></li>	
@@ -2160,6 +2161,7 @@ Copyright (C) 2009 DECISION DECK Consortium
       <li><a href="#graph">Robustly significant outranking digraph</a></li>
       <li><a href="#alternatives">Potential decision actions</a></li>
       <li><a href="#performance">Performance table</a></li>
+      <li><a href="#objectives">Decision objectives</a></li>
       <li><a href="#criteria">Family of criteria</a></li>
       <li><a href="#outranking">Condorcet robustness denotation</a></li>	
       <li><a href="#vetos">Veto situations</a></li>	
