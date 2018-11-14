@@ -29,6 +29,7 @@ Copyright (C) 2009 DECISION DECK Consortium
       <li><a href="#graph">Outranking digraph</a></li>
       <li><a href="#alternatives">Potential decision actions</a></li>
       <li><a href="#performance">Performance table</a></li>
+      <li><a href="#objectives">Decision objectives</a></li>
       <li><a href="#criteria">Family of criteria</a></li>
       <li><a href="#correlation">Criteria ordinal correlation</a></li>
       <li><a href="#outranking">Outranking relation</a></li>	
@@ -59,6 +60,7 @@ Copyright (C) 2009 DECISION DECK Consortium
       <li><a href="#graph">Outranking digraph</a></li>
       <li><a href="#alternatives">Potential decision actions</a></li>
       <li><a href="#performance">Performance table</a></li>
+      <li><a href="#objectives">Decision objectives</a></li>
       <li><a href="#criteria">Family of criteria</a></li>
       <li><a href="#correlation">Criteria ordinal correlation</a></li>
       <li><a href="#outranking">Outranking relation</a></li>	
@@ -477,7 +479,32 @@ Copyright (C) 2009 DECISION DECK Consortium
       </xsl:if>
     </xsl:if>
   </xsl:template>
+
+  <!-- presentation of the objectives-->
   
+<xsl:template match="objectives">
+  <a name="objectives"/>
+  <xsl:apply-templates  select="description"/>
+   <table border="1">
+     <tr bgcolor="#9acd32">
+        <th rowspan="1">#</th>
+        <th rowspan="1">Identifyer</th>
+        <th rowspan="1">Name</th>
+        <th rowspan="1">Comment</th>
+        <th rowspan="1">Criteria list</th>
+     </tr>
+     <xsl:for-each select="objective">
+       <tr>
+         <td align="center"><xsl:number format="1"/></td>
+         <th bgcolor="#FFF79B"><xsl:value-of select="@id"/></th>
+	   <td><xsl:value-of select="@name"/></td>
+	   <td><xsl:value-of select="description/comment"/></td>        
+         <td align="center"><xsl:value-of select="objectiveCriteria"/></td>
+       </tr>
+     </xsl:for-each>
+   </table>
+</xsl:template>
+ 
  <!-- presentation of the coalitions -->
   <xsl:template match="criteriaSets">
     <a name="coalitions"/>
