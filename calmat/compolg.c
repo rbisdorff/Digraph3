@@ -15,8 +15,8 @@ extern struct variables
        short l;
        short c;
        double *matrice;
-       };
-extern struct variables  *variable[MAXVAR];
+       } *variable[MAXVAR];
+//extern struct variables  *variable[MAXVAR];
 extern char token[80];
 extern char token_type;
 

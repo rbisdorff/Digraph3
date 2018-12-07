@@ -30,8 +30,8 @@ struct variables
        short l; /* nombre de lignes */
        short c; /* nombre de colonnes */
        double *matrice;  /* matrice associée à la variable */
-       };
-struct variables *variable[MAXVAR];       /* MAXVAR variables sont prévues  */
+       } *variable[MAXVAR];
+//struct variables *variable[MAXVAR];       /* MAXVAR variables sont prévues  */
 
 struct commands
    {
@@ -96,12 +96,12 @@ void exec_remark(), exec_load(), exec_save(), exec_print(),
      exec_compo_cor(),exec_compo_cor_c(), exec_goto(), exec_if(), exec_while(),
      exec_endwhile();
 extern void putback(), affectation();
-short load_programmes();
+short load_program();
 void scan_labels();
 char get_token();
 
 /**********************************/
-main(argc, argv)
+int main(argc, argv)
 short argc;
 char *argv[];
 

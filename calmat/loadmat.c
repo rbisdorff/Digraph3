@@ -15,8 +15,8 @@ extern struct variables
        short l;
        short c;
        double *matrice;
-       };
-extern struct variables  *variable[MAXVAR];
+       } *variable[MAXVAR];
+//extern struct variables  *variable[MAXVAR];
 extern char token[80];
 extern char token_type;
 extern short ligne;
@@ -45,7 +45,7 @@ else
 
 if (fp == NULL)
    {
-   printf("Erreur d'ouverture du fichier à charger!!!\n",token);
+   printf("Erreur d'ouverture du fichier %s à charger!!!\n",token);
    serror();
    };
 printf("\n\nLecture de la matrice %s\n",token);

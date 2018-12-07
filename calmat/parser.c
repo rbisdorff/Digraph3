@@ -14,8 +14,8 @@
 extern struct programmes
        {
        char car[PROG_SIZE];
-       };
-extern struct programmes *prog;
+       } *prog;
+//extern struct programmes *prog;
 extern short cour;
 extern struct commands
        {
@@ -37,8 +37,8 @@ extern struct variables
        short l;
        short c;
        double *matrice;
-       };
-extern struct variables *variable[MAXVAR];
+       } *variable[MAXVAR];
+//extern struct variables *variable[MAXVAR];
 
 void affectation();
 struct variables *get_exp();

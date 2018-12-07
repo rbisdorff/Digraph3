@@ -13,8 +13,8 @@
 extern struct programmes
        {
        char car[PROG_SIZE];
-       };
-extern struct programmes *prog;      /* pointeur sur la source */
+       } *prog;
+//extern struct programmes *prog;      /* pointeur sur la source */
 extern short cour;                   /* indice du caractère courant */
 extern char token[80];
 extern char token_type;

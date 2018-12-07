@@ -18,8 +18,8 @@ extern struct variables
        short l;
        short c;
        double *matrice;
-       };
-extern struct variables  *variable[MAXVAR];
+       } *variable[MAXVAR];
+//extern struct variables  *variable[MAXVAR];
 extern char token[80];
 extern char token_type;
 
@@ -55,7 +55,7 @@ if ( nl==0 || mc==0 )
    }
 if ( nl != mc )
    {
-   printf("Erreur: matrice  non carrée !! \n",token);
+   printf("Erreur: matrice %s non carrée !! \n",token);
    serror();
    }
 

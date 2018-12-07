@@ -11,8 +11,8 @@
 extern struct programmes
        {
        char car[PROG_SIZE];
-       };
-extern struct programmes *prog;      /* pointeur sur la source */
+       } *prog;
+//extern struct programmes *prog;      /* pointeur sur la source */
 extern short cour;                   /* indice du caractre couranr */
 extern char token[80];
 extern char token_type;
@@ -24,8 +24,8 @@ extern struct labels
        char name[LAB_LEN];
        short ptr;
        short ligne;
-       };
-extern struct labels label_table[];
+       } label_table[];
+//extern struct labels label_table[];
 
 /* déclaration des fonction */
 char get_token();
