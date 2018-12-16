@@ -6,12 +6,13 @@
  * RB May 2006                            *
  * Current revision $Revision: 1.6 $      *
  * i686 compilation flags :               *       
- * gcc -s -march=pentium4 -mfpmath=sse    *
- * -fomit-frame-pointer -ffast-math -O3   *
+ * gcc -Wall -O4 perrinMIS perrinMIS.c *
  * -------------------------------------- */
 
 #include <stdio.h>
 #include <sys/time.h>
+#include <stdlib.h>
+#include <string.h>
 
 #define MAX_ORDER 50
 #define SMALL_ORDER 20
@@ -45,7 +46,7 @@ unsigned long  Perrin(unsigned long orderIn){
 }
 
 /* ---  Perrin sequence algorithm for MIS extraction  ---*/
-main() {
+int main() {
   
   /* time access structure  */
   struct timeval before,after,lapsed;
@@ -68,14 +69,14 @@ main() {
   printf("* Temporary files used.                  *\n"); 
   printf("* even versus odd order optimized.       *\n");
   printf("* RB December 2006                       *\n");
-  printf("* Current revision $Revision: 1.6 $       \n");       
+  printf("* Current revision Dec 2018              *\n");       
   printf("* -------------------------------------- *\n");
 
   printf("Input cycle order ? ");
-  scanf("%d", &order);
+  scanf("%lu", &order);
   
   if ((order < 5) || (order > MAX_ORDER)){  /* computation limits */
-    printf("usage: ./perrindoubleOptFile order ( 4 < order < 51)\n");
+    printf("usage: ...$./perrinMIS order ( 4 < order < 51)\n");
     exit(1);
   }
   
@@ -360,7 +361,7 @@ main() {
   for (mis=0; mis < Perrin(order); mis++){
     fputs("frozenset([\n",fo);
     if (order < SMALL_ORDER){
-    printf("mis %d : ", mis+1);
+    printf("mis %lu : ", mis+1);
     }
     ml = 0;
     for (i=0; i<order; i++){
@@ -395,16 +396,16 @@ main() {
   ml = 0;
   for (i=0; i < order+1; i++){
     if (order < SMALL_ORDER){
-      printf("%d : %d\n", i,v[i]);    
+      printf("%lu : %lu\n", i,v[i]);    
        }
     else {
       if (v[i] > 0){
-	printf("%d : %d\n", i,v[i]);
+	printf("%lu : %lu\n", i,v[i]);
     }
     }
     ml += v[i];
     }
-  printf("Total: %d\n",ml);
+  printf("Total: %lu\n",ml);
 
   if (before.tv_usec > after.tv_usec) { 
      after.tv_usec += 1000000; 
@@ -412,7 +413,7 @@ main() {
   }
   diff = (after.tv_usec - before.tv_usec)/1000; 
   lapsed.tv_sec  = after.tv_sec  - before.tv_sec; 
-  printf("execution time: %d sec. and ",lapsed.tv_sec);
+  printf("execution time: %ld sec. and ",lapsed.tv_sec);
   printf("%.f millisec.\n",diff);
 
 }
@@ -420,14 +421,11 @@ main() {
 /* ----------------------------------- *
  * Log record for changes:
  * $Log: perrinMIS.c,v $
- * Revision 1.6  2009/04/13 06:38:09  bisi
- * added saveXMCDA2RubisChoiceRecommendation()
- *
- * 
- * Revision 1.3  2006/12/26 15:17:40  bisi
- * Adding version number to perrinMIS binary execution trace.
- *
- * Revision 1.2  2006/12/26 15:10:35  bisi
+ * Revision 1.7  2018/12/16
+ * Correcting printf % types and gcc compile command
+ * Revision 1.6  2009/04/13 06:38:09
+ * Revision 1.3  2006/12/26 15:17:40
+ * Revision 1.2  2006/12/26 15:10:35
  * Debugging perrinMIS.c: writeng 01 intermediate files ao.
  *
  *-------------------------------------*/
