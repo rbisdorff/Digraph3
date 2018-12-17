@@ -2742,7 +2742,7 @@ class Digraph(object):
         Prints the orbits of Choices along the automorphisms of
         the Digraph instance.
 
-        Example Python session for computing the non isomorphic MIS from the 12-cycle digraph:
+        Example Python session for computing the non isomorphic MISs from the 12-cycle digraph:
 
         >>> from digraphs import *
         >>> c12 = CirculantDigraph(order=12,circulants=[1,-1])
@@ -2779,12 +2779,14 @@ class Digraph(object):
           stabilizer size: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, ...]
           frequency      : [0, 2, 0, 0, 0, 0, 0, 1, 0,  0,  0,  1, ...]
 
-        The four **non isomorphic MIS** of the 12-cycle
+        The symmetry axes of the four **non isomorphic MISs** of the 12-cycle:
 
         .. image:: c12.png
            :width: 400 px
            :align: center
            :alt: The 4 non isomorphic MIS of the 12-cycle graph
+
+        *Reference*: R. Bisdorff and J.L. Marichal (2008). Counting non-isomorphic maximal independent sets of the n-cycle graph. Journal of Integer Sequences, Vol. 11 Article 08.5.7 (`openly accessible <https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html>`_)
 
         """
         NoError = True
