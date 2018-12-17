@@ -2740,7 +2740,52 @@ class Digraph(object):
     def showOrbits(self,InChoices,withListing=True):
         """
         Prints the orbits of Choices along the automorphisms of
-        the digraph instance.
+        the Digraph instance.
+
+        Compute the non isomorphic MIS from the 14-cycle:
+
+        >>> from digraphs import *
+        >>> c12 = CirculantDigraph(order=14,circulants=[1,-1])
+        >>> c12.automorphismGenerators()
+        ...
+          Permutations
+          {'1': '1', '2': '12', '3': '11', '4': '10', '5': 
+           '9', '6': '8', '7': '7', '8': '6', '9': '5', '10': 
+           '4', '11': '3', '12': '2'}
+          {'1': '2', '2': '1', '3': '12', '4': '11', '5': '10', 
+           '6': '9', '7': '8', '8': '7', '9': '6', '10': '5', 
+           '11': '4', '12': '3'}
+          Reflections {}
+        >>> print('grpsize = ', c12.automorphismGroupSize)
+          grpsize = 24
+        >>> c12.showMIS(withListing=False)
+          *---  Maximal independent choices ---*
+          number of solutions:  29
+          cardinality distribution
+          card.:  [0, 1, 2, 3, 4,  5,  6, 7, 8, 9, 10, 11, 12]
+          freq.:  [0, 0, 0, 0, 3, 24,  2, 0, 0, 0,  0,  0,  0]
+          Results in c12.misset
+        >>> c12.showOrbits(c12.misset,withListing=False)
+        ...
+          *---- Global result ----
+          Number of MIS:  29
+          Number of orbits :  4
+          Labelled representatives:
+          ['11', '5', '2', '8']
+          ['10', '6', '12', '2', '4', '8']
+          ['11', '7', '9', '1', '4']
+          ['11', '9', '6', '2', '4']
+          ['3', '9', '6', '14', '12']
+          Symmetry vector
+          stabilizer size: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, ...]
+          frequency      : [0, 2, 0, 0, 0, 0, 0, 1, 0,  0,  0,  1, ...]
+
+
+        .. image:: c12.png
+           :alt: The 4 non isomorphic MIS of the 12-cycle graph
+           :width: 600 px
+           :align: center
+
         """
         NoError = True
         try:
