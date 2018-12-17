@@ -2714,14 +2714,14 @@
         <span class="n">String2</span> <span class="o">=</span> <span class="s2">&quot;echo &#39;&lt;&quot;</span><span class="o">+</span><span class="n">File0</span><span class="o">+</span><span class="s1">&#39; -m p &gt;&#39;</span><span class="o">+</span><span class="n">File1</span><span class="o">+</span><span class="s2">&quot; x&#39; | dreadnaut&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">String2</span><span class="p">)</span>
         <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">String2</span><span class="p">)</span>
+        <span class="n">NoError</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">f1</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">File1</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-            <span class="n">noError</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The input file: &#39;</span><span class="p">,</span> <span class="n">File1</span><span class="p">,</span><span class="s1">&#39; could not be found!&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Be sure that nauty&#39;s dreadnaut programm is available!&quot;</span><span class="p">)</span>
-            <span class="n">noError</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="k">if</span> <span class="n">noError</span><span class="p">:</span>
+            <span class="n">NoError</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">NoError</span><span class="p">:</span>
             <span class="n">permutations</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="n">t</span> <span class="o">=</span> <span class="n">f1</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
             <span class="n">nl</span> <span class="o">=</span> <span class="mi">0</span>
@@ -2767,14 +2767,14 @@
 <span class="sd">        Renders the generators of the automorphism group.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- Automorphism group generators ----&#39;</span><span class="p">)</span>
+        <span class="n">NoError</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">reflections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reflections</span>
             <span class="n">permutations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">permutations</span>
-            <span class="n">noError</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No permutations or reflections defined yet !!&#39;</span><span class="p">)</span>
-            <span class="n">noError</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="k">if</span> <span class="n">noError</span><span class="p">:</span>
+            <span class="n">NoError</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">NoError</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Permutations&#39;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">permutations</span><span class="p">[</span><span class="n">g</span><span class="p">])</span>
@@ -2789,15 +2789,15 @@
 <span class="sd">        Prints the orbits of Choices along the automorphisms of</span>
 <span class="sd">        the digraph instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">NoError</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">reflections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reflections</span>
             <span class="n">permutations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">permutations</span>
-            <span class="n">noError</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No permutations or reflections defined yet !!&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Run self.automorphismGenerators()&#39;</span><span class="p">)</span>
-            <span class="n">noError</span><span class="o">=</span><span class="kc">False</span>
-        <span class="k">if</span> <span class="n">noError</span><span class="p">:</span>
+            <span class="n">NoError</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">NoError</span><span class="p">:</span>
             <span class="n">Choices</span> <span class="o">=</span> <span class="n">InChoices</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*--- Isomorphic reduction of choices&#39;</span><span class="p">)</span>
             <span class="n">Iso</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
@@ -2863,17 +2863,17 @@
 <span class="sd">        the digraph self by reading in the 0-1 misset file format.</span>
 <span class="sd">        See the digraphs.Digraph.readPerrinMisset() method.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">NoError</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">reflections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reflections</span>
             <span class="n">permutations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">permutations</span>
             <span class="n">f1</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">InFile</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-            <span class="n">noError</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No permutations or reflections defined yet !!&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Run self.automorphismGenerators()&#39;</span><span class="p">)</span>
-            <span class="n">noError</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">NoError</span> <span class="o">=</span> <span class="kc">False</span>
 
-        <span class="k">if</span> <span class="n">noError</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">NoError</span><span class="p">:</span>
             <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*--- Isomorphic reduction of choices&#39;</span><span class="p">)</span>
             <span class="n">Iso</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
@@ -2941,14 +2941,14 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        read method for 0-1-char-coded MISs from perrinMIS.c curd.dat file.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">NoError</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">f1</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-            <span class="n">noError</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="n">noError</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">NoError</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The input file: &#39;</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span><span class="s1">&#39; could not be found ?&#39;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">noError</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">NoError</span><span class="p">:</span>
             <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
             <span class="n">nl</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="n">misset</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
