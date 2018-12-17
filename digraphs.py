@@ -2667,14 +2667,14 @@ class Digraph(object):
         String2 = "echo '<"+File0+' -m p >'+File1+" x' | dreadnaut"
         print(String2)
         os.system(String2)
+        noError = True
         try:
             f1 = open(File1,'r')
-            noError = True
         except:
             print('The input file: ', File1,' could not be found!')
             print("Be sure that nauty's dreadnaut programm is available!")
-            noError = False
-        if noError:
+            NoError = False
+        if NoError:
             permutations = {}
             t = f1.readline()
             nl = 0
@@ -2720,14 +2720,14 @@ class Digraph(object):
         Renders the generators of the automorphism group.
         """
         print('*---- Automorphism group generators ----')
+        NoError = True
         try:
             reflections = self.reflections
             permutations = self.permutations
-            noError = True
         except:
             print('No permutations or reflections defined yet !!')
-            noError = False
-        if noError:
+            NoError = False
+        if NoError:
             print('Permutations')
             for g in permutations:
                 print(self.permutations[g])
@@ -2742,15 +2742,15 @@ class Digraph(object):
         Prints the orbits of Choices along the automorphisms of
         the digraph instance.
         """
+        NoError = True
         try:
             reflections = self.reflections
             permutations = self.permutations
-            noError = True
         except:
             print('No permutations or reflections defined yet !!')
             print('Run self.automorphismGenerators()')
-            noError=False
-        if noError:
+            NoError = False
+        if NoError:
             Choices = InChoices.copy()
             print('*--- Isomorphic reduction of choices')
             Iso = set()
@@ -2816,17 +2816,17 @@ class Digraph(object):
         the digraph self by reading in the 0-1 misset file format.
         See the digraphs.Digraph.readPerrinMisset() method.
         """
+        NoError = True
         try:
             reflections = self.reflections
             permutations = self.permutations
             f1 = open(InFile,'r')
-            noError = True
         except:
             print('No permutations or reflections defined yet !!')
             print('Run self.automorphismGenerators()')
-            noError = False
+            NoError = False
 
-        if noError:
+        if NoError:
             actions = [x for x in self.actions]
             print('*--- Isomorphic reduction of choices')
             Iso = set()
@@ -2894,14 +2894,14 @@ class Digraph(object):
         """
         read method for 0-1-char-coded MISs from perrinMIS.c curd.dat file.
         """
+        NoError = True
         try:
             f1 = open(file,'r')
-            noError = True
         except:
-            noError = False
+            NoError = False
             print('The input file: ', file,' could not be found ?')
 
-        if noError:
+        if NoError:
             actions = [x for x in self.actions]
             nl = 0
             misset = set()

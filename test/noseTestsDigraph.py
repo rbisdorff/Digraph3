@@ -136,7 +136,7 @@ def testSymmetries():
     for choice in g.misset:
        g.computeOrbit(choice,True)
 
-def testPerrrinMis():
+def testPerrinMis():
     print("==>> Testing perrinMIS.c generated missets read in from file !")
     g = CirculantDigraph(order=10,circulants=[1,-1])
     g.readPerrinMissetOpt('testreadmisset.dat')
