@@ -2784,6 +2784,8 @@ class Digraph(object):
            :width: 400 px
            :align: center
 
+        .. class:: center
+
         *Figure above*: The four **non isomorphic MIS** of the 12-cycle
         """
         NoError = True
