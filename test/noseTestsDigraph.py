@@ -145,6 +145,20 @@ def testPerrinMis():
     g.showOrbitsFromFile('testreadmisset.dat')
     g.showOrbits(g.misset)
 
+def testshowNonIsomorphicMIS(cycleOrder=10):
+    print("==>> Testing perrinMIS C ressource and non isomorphic MIS generation")  
+    import os
+    commandString = ('echo %d| perrinMIS' % (cycleOrder))
+    print(commandString)
+    try:
+        os.system(commandString)
+    except:
+        print('perrinMIS not installed !!')
+        return
+    g = CirculantDigraph(order=cycleOrder,circulants=[-1,1])
+    g.automorphismGenerators()
+    g.showOrbitsFromFile('curd.dat')
+
 def testRandomRegularDigraph():
     print("==>> Testing random regular graph generation")
     g = RandomRegularDigraph(order=12,degree=4)

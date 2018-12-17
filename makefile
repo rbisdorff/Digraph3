@@ -6,6 +6,8 @@ PYTHON=python3
 NOSETESTS=nosetests
 SPHINX=sphinx-build
 INSTALLDIR=/usr/local/bin
+CC=gcc
+CFLAGS=-Wall -O4
 
 readme:
 		echo -n " Digraph3 python3 modules' installer \n (c) R Bisdorff 2013-2014 University of Luxembourg\n Usage: \n ..> make install # installs in Python3, Python3.3 and Python3.4 (Linux, Mac OS)\n ..> make tests # runs the nose tests\n ..> make verbosetests # runs the verbose nose tests\n ..> make pTests # runs all available nose tests with GNU parallel\n\n Technical documentation available here:\n http://digraph3.readthedocs.io/en/latest/ or here:\n http://leopold-loewenheim.uni.lu/docDigraph3/ \n"
@@ -598,7 +600,7 @@ verboseArithmeticsTests:
 install:
 		sudo ${PYTHON} setup.py install
 		cp perrinMIS.c ./build
-		(cd build; gcc -Wall -O4 -o perrinMIS perrinMIS.c)
+		(cd build; ${CC} ${CFLAGS} -o perrinMIS perrinMIS.c)
 		sudo cp build/perrinMIS ${INSTALLDIR}
 		#sudo python3.7 setup.py install
 
