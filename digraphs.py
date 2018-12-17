@@ -2742,7 +2742,7 @@ class Digraph(object):
         Prints the orbits of Choices along the automorphisms of
         the Digraph instance.
 
-        Compute the non isomorphic MIS from the 12-cycle:
+        Example Python session for computing the non isomorphic MIS from the 12-cycle digraph:
 
         >>> from digraphs import *
         >>> c12 = CirculantDigraph(order=12,circulants=[1,-1])

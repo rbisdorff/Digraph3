@@ -2360,7 +2360,7 @@ For best experience make sure to use Firefox, because other browser restrict the
 <code class="descname">showOrbits</code><span class="sig-paren">(</span><em>InChoices</em>, <em>withListing=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showOrbits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showOrbits" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prints the orbits of Choices along the automorphisms of
 the Digraph instance.</p>
-<p>Compute the non isomorphic MIS from the 12-cycle:</p>
+<p>Example Python session for computing the non isomorphic MIS from the 12-cycle digraph:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c12</span> <span class="o">=</span> <span class="n">CirculantDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span><span class="n">circulants</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c12</span><span class="o">.</span><span class="n">automorphismGenerators</span><span class="p">()</span>
