@@ -2667,7 +2667,7 @@ class Digraph(object):
         String2 = "echo '<"+File0+' -m p >'+File1+" x' | dreadnaut"
         print(String2)
         os.system(String2)
-        noError = True
+        NoError = True
         try:
             f1 = open(File1,'r')
         except:
