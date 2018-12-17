@@ -2779,14 +2779,15 @@ class Digraph(object):
           stabilizer size: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, ...]
           frequency      : [0, 2, 0, 0, 0, 0, 0, 1, 0,  0,  0,  1, ...]
 
+        The four **non isomorphic MIS** of the 12-cycle
+
         .. image:: c12.png
-           :alt: The 4 non isomorphic MIS of the 12-cycle graph
            :width: 400 px
            :align: center
+           :alt: The 4 non isomorphic MIS of the 12-cycle graph
+           
+        The four **non isomorphic MIS** of the 12-cycle
 
-        .. class:: center
-
-        *Figure above*: The four **non isomorphic MIS** of the 12-cycle
         """
         NoError = True
         try:
