@@ -2793,6 +2793,7 @@ In the 12-cycle digraph, we observe 29 MIS -- 4 of cardinality 3, 24 of cardinal
    :align: center
    :alt: The 4 non isomorphic MIS of the 12-cycle graph
 
+The MIS in the 12-cycle digraph represents in fact all the ways one may write the number 12 as the sum of '2's and '3's. The first orbit corresponds to writing 6 times a '2', the second orbit corresponds to writing 4 times a '3'. The third and fourth orbit correspond to writing 2 times a '3' and 3 times a '2'. There are two non isomorphic ways to do this latter sum. Either separating the '3's by one or two '2's, or by none or 3 '2's (see Bisdorff & Marichal [ISOMIS-08]_ ).  
 
 Links and appendices
 --------------------
