@@ -2718,6 +2718,82 @@ We see three intersection cycles of length 4, which is impossible to occur on th
    :width: 400 px
    :align: center
 
+Back to :ref:`Tutorial-label`   
+
+.. _IsomorphicMIS-Tutorial-label:
+
+Computing a non isomorphic MIS
+------------------------------
+
+.. contents:: 
+	:depth: 1
+	:local:
+
+Due to the public success of our common 2008 publication with Jean-Luc Marichal [ISOMIS-08]_ , we present in this last tutorial an example Python session for computing the **non isomorphic maximal independent sets** (MIS) from the 12-cycle graph, i.e. a :py:class:`digraphs.CirculantDigraph` class instance of order 12 and symmetric circulants 1 and -1:
+
+>>> from digraphs import *
+>>> c12 = CirculantDigraph(order=12,circulants=[1,-1])
+>>> c12 # 12-cycle digraph instance
+*------- Digraph instance description ------*
+Instance class   : CirculantDigraph
+Instance name    : c12
+Digraph Order    : 12
+Digraph Size     : 24
+Valuation domain : [-1.00 - 1.00]
+Determinateness  : 100.000
+Attributes       : ['name', 'order', 'circulants', 'actions',
+                    'valuationdomain', 'relation', 'gamma',
+		    'notGamma']
+
+The :py:class:`digraphs.Digraph` class contains the :py:func:`digraphs.Digraph.automorphismGenerators` method for adding automorphism group generators to the *c12* digraph instance with the help of the external :code:`dreadnaut` command from the **nauty** software package (see https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml ).
+
+>>> c12.automorphismGenerators()
+...
+  Permutations
+  {'1': '1', '2': '12', '3': '11', '4': '10', '5': 
+   '9', '6': '8', '7': '7', '8': '6', '9': '5', '10': 
+   '4', '11': '3', '12': '2'}
+  {'1': '2', '2': '1', '3': '12', '4': '11', '5': '10', 
+   '6': '9', '7': '8', '8': '7', '9': '6', '10': '5', 
+   '11': '4', '12': '3'}
+  Reflections {}
+>>> print('grpsize = ', c12.automorphismGroupSize)
+  grpsize = 24
+
+The 12-cycle digraph shows two permutations and no reflections and an automorphism group size of 24. We are first computing now all maximal independent sets that are detectable in the 12-cycle digraph with the :py:func:`digraphs.Digraph.showMIS` method:
+
+>>> c12.showMIS(withListing=False)
+  *---  Maximal independent choices ---*
+  number of solutions:  29
+  cardinality distribution
+  card.:  [0, 1, 2, 3, 4,  5,  6, 7, 8, 9, 10, 11, 12]
+  freq.:  [0, 0, 0, 0, 3, 24,  2, 0, 0, 0,  0,  0,  0]
+  Results in c12.misset
+
+In the 12-cycle digraph, we observe 29 MIS -- 4 of cardinality 3, 24 of cardinality 5, and one of cardinality 6. The command :py:func:`digraphs.Digraph.showOrbits` renders now the labelled representatives of each of fours orbits of isomorphic MIS with the corresponding number of orbit stabilizers (symmetry axes), as illustrated in the unlabelled graphs of *Figure-1* below:
+
+>>> c12.showOrbits(c12.misset,withListing=False)
+...
+  *---- Global result ----
+  Number of MIS:  29
+  Number of orbits :  4
+  Labelled representatives:
+  1: ['2','4','6','8','10','12']
+  2: ['2','5','8','11']
+  3: ['2','4','6','9','11']
+  4: ['1','4','7','9','11']
+  Symmetry vector
+  stabilizer size: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, ...]
+  frequency      : [0, 2, 0, 0, 0, 0, 0, 1, 0,  0,  0,  1, ...]
+
+*Figure-1*: The symmetry axes of the non isomorphic MISs of the 12-cycle graph:
+
+.. image:: c12.png
+   :width: 400 px
+   :align: center
+   :alt: The 4 non isomorphic MIS of the 12-cycle graph
+
+
 Links and appendices
 --------------------
 
@@ -2759,6 +2835,8 @@ References
 .. [BIS-2006] R. Bisdorff, M. Pirlot and M. Roubens (2006). "Choices and kernels from bipolar valued digraphs". *European Journal of Operational Research*, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version `PDF file 257.3Kb <https://sma.uni.lu/bisdorff/documents/BisdorffPirlotRoubens05.pdf>`_)
 
 .. [FMCAA] O. Häggström (2002) *Finite Markov Chains and Algorithmic Applications*. Cambridge University Press.
+
+.. [ISOMIS-08] R. Bisdorff and J.L. Marichal (2008). Counting non-isomorphic maximal independent sets of the n-cycle graph. *Journal of Integer Sequences*, Vol. 11 Article 08.5.7 (`openly accessible here <https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html>`_)
 
 
 Footnotes
