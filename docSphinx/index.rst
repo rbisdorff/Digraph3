@@ -29,7 +29,7 @@ This documentation, also available on the `Read The Docs <https://readthedocs.or
 
 **Parts of the documentation:**
 
-The documentation contains, first, a set of tutorials introducing the main objects like digraphs, outranking digraphs and performance tableaux. There is also a tutorial provided on undirected graphs. Some tutorials are problem oriented and show how to compute the winner of an election, how to build a best choice recommendation, or how to linearly rank with multiple incommensurable ranking criteria. 
+The documentation contains, first, a set of tutorials introducing the main objects like digraphs, outranking digraphs and performance tableaux. There is also a tutorial provided on undirected graphs. Some tutorials are problem oriented and show how to compute the winner of an election, how to build a best choice recommendation, or how to linearly rank with multiple incommensurable ranking criteria. A last tutorial illustrates how to compute non isomorphic maximal independent sets in the $n$-cycle graph.
 
 .. toctree:: tutorial
    :maxdepth: 2
