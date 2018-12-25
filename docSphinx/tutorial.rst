@@ -2777,7 +2777,7 @@ A non isomorphic MIS corresponds in fact to a set of isomorphic MISs, i.e. an or
 
 In the 12-cycle graph, we observe 29 labelled MISs: -- 3 of cardinality 4, 24 of cardinality 5, and 2  of cardinality 6.
 
-For computing non isomorphic MISs, we actually need the automorphism group of the c12-cycle graph. The :py:class:`digraphs.Digraph` class therefore provides the :py:func:`digraphs.Digraph.automorphismGenerators` method which adds automorphism group generators to the *c12* digraph instance with the help of the external shell :code:`dreadnaut` command from the **nauty** software package (see https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml ).
+For computing non isomorphic MISs, we actually need the automorphism group of the c12-cycle graph. The :py:class:`digraphs.Digraph` class therefore provides the :py:func:`digraphs.Digraph.automorphismGenerators` method which adds automorphism group generators to the *c12* digraph instance with the help of the external shell :code:`dreadnaut` command from the **nauty** software package (see https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml ) [2]_.
 
 >>> c12.automorphismGenerators()
 ...
@@ -2793,7 +2793,7 @@ For computing non isomorphic MISs, we actually need the automorphism group of th
 
 The 12-cycle graph automorphism group is generated with both the permutations above and has group size 24.
 
-The command :py:func:`digraphs.Digraph.showOrbits` renders now the labelled representatives of each of the four orbits of isomorphic MISs obseved in the 12-cycle graph (see Lines 7-10).
+The command :py:func:`digraphs.Digraph.showOrbits` renders now the labelled representatives of each of the four orbits of isomorphic MISs observed in the 12-cycle graph (see Lines 7-10).
 
 >>> c12.showOrbits(c12.misset,withListing=False)
 ...
@@ -2809,7 +2809,7 @@ The command :py:func:`digraphs.Digraph.showOrbits` renders now the labelled repr
   stabilizer size: [1, 2, 3, ..., 8, 9, ..., 12, 13, ...]
   frequency      : [0, 2, 0, ..., 1, 0, ...,  1,  0, ...]
 
-The corresponding group stabilizers' sizes and frequencies - orbit 1 with 12 symmetry axes, orbit 2 with 8 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 11-13) are illustrated in the corresponding unlabelled graphs of *Figure-1* below:
+The corresponding group stabilizers' sizes and frequencies -- orbit 1 with 12 symmetry axes, orbit 2 with 8 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 11-13), are illustrated in the corresponding unlabelled graphs of *Figure-1* below:
 
 .. image:: c12.png
    :width: 400 px
@@ -2870,3 +2870,8 @@ Footnotes
 
 .. [1] The ``exportGraphViz`` method is depending on drawing tools from `graphviz <https://graphviz.org/>`_. On Linux Ubuntu or Debian you may try ``sudo apt-get install graphviz`` to install them. There are ready ``dmg`` installers for Mac OSX. 
 
+.. [2] Dependency: The :py:func:digraphs.Digraph.automorphismGenerators method uses the sell dreadnaut command from the nauty software package. See https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml . On Ubuntu Linux, one may easily install it with::
+
+       ...$ sudo apt-get install nauty
+
+On Mac OS there exist dmg installers.
