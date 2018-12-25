@@ -2807,7 +2807,7 @@ In the 12-cycle graph, we observe 29 MIS -- 4 of cardinality 3, 24 of cardinalit
   stabilizer size: [1, 2, 3, ..., 8, 9, ..., 12, 13, ...]
   frequency      : [0, 2, 0, ..., 1, 0, ...,  1,  0, ...]
 
-*Figure-1*: The symmetry axes of the non isomorphic MISs of the 12-cycle graph:
+*Figure-1*: The symmetry axes of the four non isomorphic MISs of the 12-cycle graph:
 
 .. image:: c12.png
    :width: 400 px
