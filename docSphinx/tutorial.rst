@@ -2765,7 +2765,7 @@ Attributes       : ['name', 'order', 'vertices', 'valuationDomain',
    :align: center
    :alt: The 12-cycle graph
 
-For computing non isomorphic MISs, we first need to compute the automorphism group of the c12-cycle graph. The :py:class:`digraphs.Digraph` class therefore contains the :py:func:`digraphs.Digraph.automorphismGenerators` method for adding automorphism group generators to the *c12* digraph instance with the help of the external shell :code:`dreadnaut` command from the **nauty** software package (see https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml ).
+For computing non isomorphic MISs, we first need to compute the automorphism group of the c12-cycle graph. The :py:class:`digraphs.Digraph` class therefore provides the :py:func:`digraphs.Digraph.automorphismGenerators` method for adding automorphism group generators to the *c12* digraph instance with the help of the external shell :code:`dreadnaut` command from the **nauty** software package (see https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml ).
 
 >>> c12.automorphismGenerators()
 ...
