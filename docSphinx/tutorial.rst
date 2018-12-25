@@ -2791,7 +2791,9 @@ We are first computing now all maximal independent sets that are detectable in t
   freq.:  [0, 0, 0, 0, 3, 24,  2, 0, 0, 0,  0,  0,  0]
   Results in c12.misset
 
-In the 12-cycle graph, we observe 29 MIS -- 4 of cardinality 3, 24 of cardinality 5, and one of cardinality 6. The command :py:func:`digraphs.Digraph.showOrbits` renders now the labelled representatives of each of fours orbits of isomorphic MISs with the corresponding number of orbit stabilizers (symmetry axes), as illustrated in the unlabelled graphs of *Figure-1* below:
+In the 12-cycle graph, we observe 29 MIS -- 4 of cardinality 3, 24 of cardinality 5, and one of cardinality 6.
+
+A non isomorphic MIS corresponds in fact to a set of isomorphic MISs, i.e. an orbit of MISs under the automorphism group of the 12-cycle graph. The command :py:func:`digraphs.Digraph.showOrbits` renders now the labelled representatives of each of four orbits of isomorphic MISs (see Lines 7-10). The corresponding group stabilizers' sizes and frequencies - orbit 1 with 12 symmetry axes, orbit 2 with 8 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 11-13) as illustrated in the corresponding unlabelled graphs of *Figure-1* below:
 
 >>> c12.showOrbits(c12.misset,withListing=False)
 ...
