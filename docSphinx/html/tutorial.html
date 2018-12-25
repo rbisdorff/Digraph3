@@ -4706,8 +4706,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cg12</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;cg12&#39;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
-<a class="reference internal image-reference" href="_images/cg12.png"><img alt="The 12-cycle graph" class="align-center" src="_images/cg12.png" style="width: 400px;" /></a>
-<p>The <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a> class contains the <a class="reference internal" href="techDoc.html#digraphs.Digraph.automorphismGenerators" title="digraphs.Digraph.automorphismGenerators"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.automorphismGenerators()</span></code></a> method for adding automorphism group generators to the <em>c12</em> digraph instance with the help of the external <code class="code docutils literal"><span class="pre">dreadnaut</span></code> command from the <strong>nauty</strong> software package (see <a class="reference external" href="https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml">https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml</a> ).</p>
+<a class="reference internal image-reference" href="_images/cg12.png"><img alt="The 12-cycle graph" class="align-center" src="_images/cg12.png" style="width: 300px;" /></a>
+<p>For computing non isomorphic MISs, we first need to compute the automorphism group of the c12-cycle graph. The <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a> class therefore contains the <a class="reference internal" href="techDoc.html#digraphs.Digraph.automorphismGenerators" title="digraphs.Digraph.automorphismGenerators"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.automorphismGenerators()</span></code></a> method for adding automorphism group generators to the <em>c12</em> digraph instance with the help of the external shell <code class="code docutils literal"><span class="pre">dreadnaut</span></code> command from the <strong>nauty</strong> software package (see <a class="reference external" href="https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml">https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml</a> ).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -4718,8 +4718,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
  8
  9
 10
-11
-12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c12</span><span class="o">.</span><span class="n">automorphismGenerators</span><span class="p">()</span>
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c12</span><span class="o">.</span><span class="n">automorphismGenerators</span><span class="p">()</span>
 <span class="gp">...</span>
 <span class="go">  Permutations</span>
 <span class="go">  {&#39;1&#39;: &#39;1&#39;, &#39;2&#39;: &#39;12&#39;, &#39;3&#39;: &#39;11&#39;, &#39;4&#39;: &#39;10&#39;, &#39;5&#39;:</span>
@@ -4728,12 +4727,12 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go">  {&#39;1&#39;: &#39;2&#39;, &#39;2&#39;: &#39;1&#39;, &#39;3&#39;: &#39;12&#39;, &#39;4&#39;: &#39;11&#39;, &#39;5&#39;: &#39;10&#39;,</span>
 <span class="go">   &#39;6&#39;: &#39;9&#39;, &#39;7&#39;: &#39;8&#39;, &#39;8&#39;: &#39;7&#39;, &#39;9&#39;: &#39;6&#39;, &#39;10&#39;: &#39;5&#39;,</span>
 <span class="go">   &#39;11&#39;: &#39;4&#39;, &#39;12&#39;: &#39;3&#39;}</span>
-<span class="go">  Reflections {}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;grpsize = &#39;</span><span class="p">,</span> <span class="n">c12</span><span class="o">.</span><span class="n">automorphismGroupSize</span><span class="p">)</span>
 <span class="go">  grpsize = 24</span>
 </pre></div>
 </td></tr></table></div>
-<p>The 12-cycle digraph shows two permutations and no reflections and an automorphism group size of 24. We are first computing now all maximal independent sets that are detectable in the 12-cycle digraph with the <a class="reference internal" href="techDoc.html#digraphs.Digraph.showMIS" title="digraphs.Digraph.showMIS"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.showMIS()</span></code></a> method:</p>
+<p>The 12-cycle graph automorphism group is generated with both the permutations above and has group size of 24.</p>
+<p>We are first computing now all maximal independent sets that are detectable in the 12-cycle digraph with the <a class="reference internal" href="techDoc.html#digraphs.Digraph.showMIS" title="digraphs.Digraph.showMIS"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.showMIS()</span></code></a> method:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -4749,7 +4748,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go">  Results in c12.misset</span>
 </pre></div>
 </td></tr></table></div>
-<p>In the 12-cycle digraph, we observe 29 MIS – 4 of cardinality 3, 24 of cardinality 5, and one of cardinality 6. The command <a class="reference internal" href="techDoc.html#digraphs.Digraph.showOrbits" title="digraphs.Digraph.showOrbits"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.showOrbits()</span></code></a> renders now the labelled representatives of each of fours orbits of isomorphic MIS with the corresponding number of orbit stabilizers (symmetry axes), as illustrated in the unlabelled graphs of <em>Figure-1</em> below:</p>
+<p>In the 12-cycle graph, we observe 29 MIS – 4 of cardinality 3, 24 of cardinality 5, and one of cardinality 6. The command <a class="reference internal" href="techDoc.html#digraphs.Digraph.showOrbits" title="digraphs.Digraph.showOrbits"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.showOrbits()</span></code></a> renders now the labelled representatives of each of fours orbits of isomorphic MISs with the corresponding number of orbit stabilizers (symmetry axes), as illustrated in the unlabelled graphs of <em>Figure-1</em> below:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -4773,13 +4772,13 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go">  3: [&#39;2&#39;,&#39;4&#39;,&#39;6&#39;,&#39;9&#39;,&#39;11&#39;]</span>
 <span class="go">  4: [&#39;1&#39;,&#39;4&#39;,&#39;7&#39;,&#39;9&#39;,&#39;11&#39;]</span>
 <span class="go">  Symmetry vector</span>
-<span class="go">  stabilizer size: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, ...]</span>
-<span class="go">  frequency      : [0, 2, 0, 0, 0, 0, 0, 1, 0,  0,  0,  1, ...]</span>
+<span class="go">  stabilizer size: [1, 2, 3, ..., 8, 9, ..., 12, 13, ...]</span>
+<span class="go">  frequency      : [0, 2, 0, ..., 1, 0, ...,  1,  0, ...]</span>
 </pre></div>
 </td></tr></table></div>
 <p><em>Figure-1</em>: The symmetry axes of the non isomorphic MISs of the 12-cycle graph:</p>
 <a class="reference internal image-reference" href="_images/c12.png"><img alt="The 4 non isomorphic MIS of the 12-cycle graph" class="align-center" src="_images/c12.png" style="width: 400px;" /></a>
-<p>The MIS in the 12-cycle digraph represents in fact all the ways one may write the number 12 as the sum of ‘2’s and ‘3’s. The first orbit corresponds to writing 6 times a ‘2’, the second orbit corresponds to writing 4 times a ‘3’. The third and fourth orbit correspond to writing 2 times a ‘3’ and 3 times a ‘2’. There are two non isomorphic ways to do this latter sum. Either separating the ‘3’s by one or two ‘2’s, or by none or 3 ‘2’s (see Bisdorff &amp; Marichal <a class="reference internal" href="#isomis-08" id="id42">[ISOMIS-08]</a> ).</p>
+<p>The MISs in the 12-cycle graph represent in fact all the ways one may write the number 12 as the circular sum of ‘2’s and ‘3’s. The first orbit corresponds to writing 6 times a ‘2’, the second orbit corresponds to writing 4 times a ‘3’. The third and fourth orbit correspond to writing 2 times a ‘3’ and 3 times a ‘2’. There are two non isomorphic ways to do this latter sum. Either separating the ‘3’s by one or two ‘2’s, or by zero or three ‘2’s (see Bisdorff &amp; Marichal <a class="reference internal" href="#isomis-08" id="id42">[ISOMIS-08]</a> ).</p>
 </div>
 <div class="section" id="links-and-appendices">
 <h2><a class="toc-backref" href="#id56">Links and appendices</a><a class="headerlink" href="#links-and-appendices" title="Permalink to this headline">¶</a></h2>

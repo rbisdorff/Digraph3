@@ -2761,11 +2761,11 @@ Attributes       : ['name', 'order', 'vertices', 'valuationDomain',
 >>> cg12.exportGraphViz('cg12')
 
 .. image:: cg12.png
-   :width: 400 px
+   :width: 300 px
    :align: center
    :alt: The 12-cycle graph
 
-The :py:class:`digraphs.Digraph` class contains the :py:func:`digraphs.Digraph.automorphismGenerators` method for adding automorphism group generators to the *c12* digraph instance with the help of the external :code:`dreadnaut` command from the **nauty** software package (see https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml ).
+For computing non isomorphic MISs, we first need to compute the automorphism group of the c12-cycle graph. The :py:class:`digraphs.Digraph` class therefore contains the :py:func:`digraphs.Digraph.automorphismGenerators` method for adding automorphism group generators to the *c12* digraph instance with the help of the external shell :code:`dreadnaut` command from the **nauty** software package (see https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml ).
 
 >>> c12.automorphismGenerators()
 ...
@@ -2776,11 +2776,12 @@ The :py:class:`digraphs.Digraph` class contains the :py:func:`digraphs.Digraph.a
   {'1': '2', '2': '1', '3': '12', '4': '11', '5': '10', 
    '6': '9', '7': '8', '8': '7', '9': '6', '10': '5', 
    '11': '4', '12': '3'}
-  Reflections {}
 >>> print('grpsize = ', c12.automorphismGroupSize)
   grpsize = 24
 
-The 12-cycle digraph shows two permutations and no reflections and an automorphism group size of 24. We are first computing now all maximal independent sets that are detectable in the 12-cycle digraph with the :py:func:`digraphs.Digraph.showMIS` method:
+The 12-cycle graph automorphism group is generated with both the permutations above and has group size of 24.
+
+We are first computing now all maximal independent sets that are detectable in the 12-cycle digraph with the :py:func:`digraphs.Digraph.showMIS` method:
 
 >>> c12.showMIS(withListing=False)
   *---  Maximal independent choices ---*
@@ -2790,7 +2791,7 @@ The 12-cycle digraph shows two permutations and no reflections and an automorphi
   freq.:  [0, 0, 0, 0, 3, 24,  2, 0, 0, 0,  0,  0,  0]
   Results in c12.misset
 
-In the 12-cycle digraph, we observe 29 MIS -- 4 of cardinality 3, 24 of cardinality 5, and one of cardinality 6. The command :py:func:`digraphs.Digraph.showOrbits` renders now the labelled representatives of each of fours orbits of isomorphic MIS with the corresponding number of orbit stabilizers (symmetry axes), as illustrated in the unlabelled graphs of *Figure-1* below:
+In the 12-cycle graph, we observe 29 MIS -- 4 of cardinality 3, 24 of cardinality 5, and one of cardinality 6. The command :py:func:`digraphs.Digraph.showOrbits` renders now the labelled representatives of each of fours orbits of isomorphic MISs with the corresponding number of orbit stabilizers (symmetry axes), as illustrated in the unlabelled graphs of *Figure-1* below:
 
 >>> c12.showOrbits(c12.misset,withListing=False)
 ...
@@ -2803,8 +2804,8 @@ In the 12-cycle digraph, we observe 29 MIS -- 4 of cardinality 3, 24 of cardinal
   3: ['2','4','6','9','11']
   4: ['1','4','7','9','11']
   Symmetry vector
-  stabilizer size: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, ...]
-  frequency      : [0, 2, 0, 0, 0, 0, 0, 1, 0,  0,  0,  1, ...]
+  stabilizer size: [1, 2, 3, ..., 8, 9, ..., 12, 13, ...]
+  frequency      : [0, 2, 0, ..., 1, 0, ...,  1,  0, ...]
 
 *Figure-1*: The symmetry axes of the non isomorphic MISs of the 12-cycle graph:
 
@@ -2813,7 +2814,7 @@ In the 12-cycle digraph, we observe 29 MIS -- 4 of cardinality 3, 24 of cardinal
    :align: center
    :alt: The 4 non isomorphic MIS of the 12-cycle graph
 
-The MIS in the 12-cycle digraph represents in fact all the ways one may write the number 12 as the sum of '2's and '3's. The first orbit corresponds to writing 6 times a '2', the second orbit corresponds to writing 4 times a '3'. The third and fourth orbit correspond to writing 2 times a '3' and 3 times a '2'. There are two non isomorphic ways to do this latter sum. Either separating the '3's by one or two '2's, or by none or 3 '2's (see Bisdorff & Marichal [ISOMIS-08]_ ).  
+The MISs in the 12-cycle graph represent in fact all the ways one may write the number 12 as the circular sum of '2's and '3's. The first orbit corresponds to writing 6 times a '2', the second orbit corresponds to writing 4 times a '3'. The third and fourth orbit correspond to writing 2 times a '3' and 3 times a '2'. There are two non isomorphic ways to do this latter sum. Either separating the '3's by one or two '2's, or by zero or three '2's (see Bisdorff & Marichal [ISOMIS-08]_ ).  
 
 Links and appendices
 --------------------
