@@ -2791,9 +2791,9 @@ We are first computing now all maximal independent sets that are detectable in t
   freq.:  [0, 0, 0, 0, 3, 24,  2, 0, 0, 0,  0,  0,  0]
   Results in c12.misset
 
-In the 12-cycle graph, we observe 29 MIS -- 4 of cardinality 3, 24 of cardinality 5, and one of cardinality 6.
+In the 12-cycle graph, we observe 29 MIS -- 3 of cardinality 4, 24 of cardinality 5, and 2  of cardinality 6.
 
-A non isomorphic MIS corresponds in fact to a set of isomorphic MISs, i.e. an orbit of MISs under the automorphism group of the 12-cycle graph. The command :py:func:`digraphs.Digraph.showOrbits` renders now the labelled representatives of each of four orbits of isomorphic MISs (see Lines 7-10). The corresponding group stabilizers' sizes and frequencies - orbit 1 with 12 symmetry axes, orbit 2 with 8 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 11-13) as illustrated in the corresponding unlabelled graphs of *Figure-1* below:
+A non isomorphic MIS corresponds in fact to a set of isomorphic MISs, i.e. an orbit of MISs under the automorphism group of the 12-cycle graph. The command :py:func:`digraphs.Digraph.showOrbits` renders the labelled representatives of each of the four orbit of isomorphic MISs obseved in the 12-cycle graph (see Lines 7-10).
 
 >>> c12.showOrbits(c12.misset,withListing=False)
 ...
@@ -2809,12 +2809,14 @@ A non isomorphic MIS corresponds in fact to a set of isomorphic MISs, i.e. an or
   stabilizer size: [1, 2, 3, ..., 8, 9, ..., 12, 13, ...]
   frequency      : [0, 2, 0, ..., 1, 0, ...,  1,  0, ...]
 
-*Figure-1*: The symmetry axes of the four non isomorphic MISs of the 12-cycle graph:
+The corresponding group stabilizers' sizes and frequencies - orbit 1 with 12 symmetry axes, orbit 2 with 8 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 11-13) as illustrated in the corresponding unlabelled graphs of *Figure-1* below:
 
 .. image:: c12.png
    :width: 400 px
    :align: center
    :alt: The 4 non isomorphic MIS of the 12-cycle graph
+
+*Figure-1: The symmetry axes of the four non isomorphic MISs of the 12-cycle graph*:
 
 The MISs in the 12-cycle graph represent in fact all the ways one may write the number 12 as the circular sum of '2's and '3's. The first orbit corresponds to writing 6 times a '2', the second orbit corresponds to writing 4 times a '3'. The third and fourth orbit correspond to writing 2 times a '3' and 3 times a '2'. There are two non isomorphic ways to do this latter sum. Either separating the '3's by one and two '2's, or by zero and three '2's (see Bisdorff & Marichal [ISOMIS-08]_ ).  
 
