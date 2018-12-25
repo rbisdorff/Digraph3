@@ -4652,7 +4652,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 <div class="section" id="computing-a-non-isomorphic-mis">
 <span id="isomorphicmis-tutorial-label"></span><h2><a class="toc-backref" href="#id55">Computing a non isomorphic MIS</a><a class="headerlink" href="#computing-a-non-isomorphic-mis" title="Permalink to this headline">¶</a></h2>
-<p>Due to the public success of our common 2008 publication with Jean-Luc Marichal <a class="reference internal" href="#isomis-08" id="id41">[ISOMIS-08]</a> , we present in this last tutorial an example Python session for computing the <strong>non isomorphic maximal independent sets</strong> (MIS) from the 12-cycle graph, i.e. a <a class="reference internal" href="techDoc.html#digraphs.CirculantDigraph" title="digraphs.CirculantDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.CirculantDigraph</span></code></a> class instance of order 12 and symmetric circulants 1 and -1:</p>
+<p>Due to the public success of our common 2008 publication with Jean-Luc Marichal <a class="reference internal" href="#isomis-08" id="id41">[ISOMIS-08]</a> , we present in this last tutorial an example Python session for computing the <strong>non isomorphic maximal independent sets</strong> (MISs) from the 12-cycle graph, i.e. a <a class="reference internal" href="techDoc.html#digraphs.CirculantDigraph" title="digraphs.CirculantDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.CirculantDigraph</span></code></a> class instance of order 12 and symmetric circulants 1 and -1:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -4673,13 +4673,40 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go">Instance name    : c12</span>
 <span class="go">Digraph Order    : 12</span>
 <span class="go">Digraph Size     : 24</span>
-<span class="go">Valuation domain : [-1.00 - 1.00]</span>
+<span class="go">Valuation domain : [-1.0, 1.0]</span>
 <span class="go">Determinateness  : 100.000</span>
 <span class="go">Attributes       : [&#39;name&#39;, &#39;order&#39;, &#39;circulants&#39;, &#39;actions&#39;,</span>
 <span class="go">                    &#39;valuationdomain&#39;, &#39;relation&#39;, &#39;gamma&#39;,</span>
 <span class="go">                    &#39;notGamma&#39;]</span>
 </pre></div>
 </td></tr></table></div>
+<p>Such <em>n</em>-cycle graphs are also provided as undirceted graph instances by the <a class="reference internal" href="techDoc.html#graphs.CycleGraph" title="graphs.CycleGraph"><code class="xref py py-class docutils literal"><span class="pre">graphs.CycleGraph</span></code></a> class:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">CycleGraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cg12</span> <span class="o">=</span> <span class="n">CycleGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cg12</span>
+<span class="go">*------- Graph instance description ------*</span>
+<span class="go">Instance class   : CycleGraph</span>
+<span class="go">Instance name    : cycleGraph</span>
+<span class="go">Graph Order      : 12</span>
+<span class="go">Graph Size       : 12</span>
+<span class="go">Valuation domain : [-1.0, 1.0]</span>
+<span class="go">Attributes       : [&#39;name&#39;, &#39;order&#39;, &#39;vertices&#39;, &#39;valuationDomain&#39;,</span>
+<span class="go">                    &#39;edges&#39;, &#39;size&#39;, &#39;gamma&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cg12</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;cg12&#39;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<a class="reference internal image-reference" href="_images/cg12.png"><img alt="The 12-cycle graph" class="align-center" src="_images/cg12.png" style="width: 400px;" /></a>
 <p>The <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a> class contains the <a class="reference internal" href="techDoc.html#digraphs.Digraph.automorphismGenerators" title="digraphs.Digraph.automorphismGenerators"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.automorphismGenerators()</span></code></a> method for adding automorphism group generators to the <em>c12</em> digraph instance with the help of the external <code class="code docutils literal"><span class="pre">dreadnaut</span></code> command from the <strong>nauty</strong> software package (see <a class="reference external" href="https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml">https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml</a> ).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2

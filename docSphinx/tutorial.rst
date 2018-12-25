@@ -2729,7 +2729,7 @@ Computing a non isomorphic MIS
 	:depth: 1
 	:local:
 
-Due to the public success of our common 2008 publication with Jean-Luc Marichal [ISOMIS-08]_ , we present in this last tutorial an example Python session for computing the **non isomorphic maximal independent sets** (MIS) from the 12-cycle graph, i.e. a :py:class:`digraphs.CirculantDigraph` class instance of order 12 and symmetric circulants 1 and -1:
+Due to the public success of our common 2008 publication with Jean-Luc Marichal [ISOMIS-08]_ , we present in this last tutorial an example Python session for computing the **non isomorphic maximal independent sets** (MISs) from the 12-cycle graph, i.e. a :py:class:`digraphs.CirculantDigraph` class instance of order 12 and symmetric circulants 1 and -1:
 
 >>> from digraphs import *
 >>> c12 = CirculantDigraph(order=12,circulants=[1,-1])
@@ -2739,11 +2739,31 @@ Instance class   : CirculantDigraph
 Instance name    : c12
 Digraph Order    : 12
 Digraph Size     : 24
-Valuation domain : [-1.00 - 1.00]
+Valuation domain : [-1.0, 1.0]
 Determinateness  : 100.000
 Attributes       : ['name', 'order', 'circulants', 'actions',
                     'valuationdomain', 'relation', 'gamma',
 		    'notGamma']
+
+Such *n*-cycle graphs are also provided as undirceted graph instances by the :py:class:`graphs.CycleGraph` class:
+
+>>> from graphs import CycleGraph
+>>> cg12 = CycleGraph(order=12)
+>>> cg12
+*------- Graph instance description ------*
+Instance class   : CycleGraph
+Instance name    : cycleGraph
+Graph Order      : 12
+Graph Size       : 12
+Valuation domain : [-1.0, 1.0]
+Attributes       : ['name', 'order', 'vertices', 'valuationDomain',
+                    'edges', 'size', 'gamma']
+>>> cg12.exportGraphViz('cg12')
+
+.. image:: cg12.png
+   :width: 400 px
+   :align: center
+   :alt: The 12-cycle graph
 
 The :py:class:`digraphs.Digraph` class contains the :py:func:`digraphs.Digraph.automorphismGenerators` method for adding automorphism group generators to the *c12* digraph instance with the help of the external :code:`dreadnaut` command from the **nauty** software package (see https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml ).
 
