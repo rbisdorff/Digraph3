@@ -2868,7 +2868,7 @@ Footnotes
 
 .. [1] The ``exportGraphViz`` method is depending on drawing tools from `graphviz <https://graphviz.org/>`_. On Linux Ubuntu or Debian you may try ``sudo apt-get install graphviz`` to install them. There are ready ``dmg`` installers for Mac OSX. 
 
-.. [2] Dependency: The :py:func:digraphs.Digraph.automorphismGenerators method uses the sell dreadnaut command from the nauty software package. See https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml . On Mac OS there exist dmg installers and on Ubuntu Linux, one may easily install it with::
+.. [2] Dependency: The :py:func:digraphs.Digraph.automorphismGenerators method uses the sell dreadnaut command from the nauty software package. See https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml . On Mac OS there exist dmg installers and on Ubuntu Linux or Debian, one may easily install it with::
 
        ...$ sudo apt-get install nauty
 
