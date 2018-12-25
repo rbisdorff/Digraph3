@@ -2765,7 +2765,7 @@ Attributes       : ['name', 'order', 'vertices', 'valuationDomain',
    :align: center
    :alt: The 12-cycle graph
 
-A non isomorphic MIS corresponds in fact to a set of isomorphic MISs, i.e. an orbit of MISs under the automorphism group of the 12-cycle graph. We are now first computing now all maximal independent sets that are detectable in the 12-cycle digraph with the :py:func:`digraphs.Digraph.showMIS` method:
+A non isomorphic MIS corresponds in fact to a set of isomorphic MISs, i.e. an orbit of MISs under the automorphism group of the 12-cycle graph. We are now first computing all maximal independent sets that are detectable in the 12-cycle digraph with the :py:func:`digraphs.Digraph.showMIS` method:
 
 >>> c12.showMIS(withListing=False)
   *---  Maximal independent choices ---*
@@ -2793,7 +2793,7 @@ For computing non isomorphic MISs, we need the automorphism group of the c12-cyc
 
 The 12-cycle graph automorphism group is generated with both the permutations above and has group size 24.
 
- The command :py:func:`digraphs.Digraph.showOrbits` renders now the labelled representatives of each of the four orbit of isomorphic MISs obseved in the 12-cycle graph (see Lines 7-10).
+ The command :py:func:`digraphs.Digraph.showOrbits` renders now the labelled representatives of each of the four orbits of isomorphic MISs obseved in the 12-cycle graph (see Lines 7-10).
 
 >>> c12.showOrbits(c12.misset,withListing=False)
 ...
@@ -2809,7 +2809,7 @@ The 12-cycle graph automorphism group is generated with both the permutations ab
   stabilizer size: [1, 2, 3, ..., 8, 9, ..., 12, 13, ...]
   frequency      : [0, 2, 0, ..., 1, 0, ...,  1,  0, ...]
 
-The corresponding group stabilizers' sizes and frequencies - orbit 1 with 12 symmetry axes, orbit 2 with 8 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 11-13) as illustrated in the corresponding unlabelled graphs of *Figure-1* below:
+The corresponding group stabilizers' sizes and frequencies - orbit 1 with 12 symmetry axes, orbit 2 with 8 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 11-13) are illustrated in the corresponding unlabelled graphs of *Figure-1* below:
 
 .. image:: c12.png
    :width: 400 px
@@ -2818,7 +2818,7 @@ The corresponding group stabilizers' sizes and frequencies - orbit 1 with 12 sym
 
 *Figure-1: The symmetry axes of the four non isomorphic MISs of the 12-cycle graph*:
 
-The non isomorphic MISs in the 12-cycle graph represent in fact all the ways one may write the number 12 as the circular sum of '2's and '3's. The first orbit corresponds to writing six times a '2', the second orbit corresponds to writing four times a '3'. The third and fourth orbit correspond to writing two times a '3' and three times a '2'. There are two non isomorphic ways to do this latter sum. Either separating the '3's either, by one and two '2's, or by zero and three '2's (see Bisdorff & Marichal [ISOMIS-08]_ ).  
+The non isomorphic MISs in the 12-cycle graph represent in fact all the ways one may write the number 12 as the circular sum of '2's and '3's. The first orbit corresponds to writing six times a '2', the second orbit corresponds to writing four times a '3'. The third and fourth orbit correspond to writing two times a '3' and three times a '2'. There are two non isomorphic ways to do this latter sum. Either separating the '3's by one and two '2's, or by zero and three '2's (see Bisdorff & Marichal [ISOMIS-08]_ ).  
 
 Links and appendices
 --------------------
