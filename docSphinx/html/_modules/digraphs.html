@@ -2836,10 +2836,10 @@
 <span class="sd">        *Reference*: R. Bisdorff and J.L. Marichal (2008). Counting non-isomorphic maximal independent sets of the n-cycle graph. *Journal of Integer Sequences*, Vol. 11 Article 08.5.7 (`openly accessible here &lt;https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html&gt;`_)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">NoError</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">reflections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reflections</span>
             <span class="n">permutations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">permutations</span>
+            <span class="n">NoError</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No permutations or reflections defined yet !!&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Run self.automorphismGenerators()&#39;</span><span class="p">)</span>
@@ -2908,113 +2908,116 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prints the orbits of Choices along the automorphisms of</span>
 <span class="sd">        the digraph self by reading in the 0-1 misset file format.</span>
-<span class="sd">        See the digraphs.Digraph.readPerrinMisset() method.</span>
+<span class="sd">        See the :py:func:`digraphs.Digraph.readPerrinMisset` method.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">NoError</span> <span class="o">=</span> <span class="kc">True</span>
+        
         <span class="k">try</span><span class="p">:</span>
             <span class="n">reflections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reflections</span>
             <span class="n">permutations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">permutations</span>
-            <span class="n">f1</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">InFile</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No permutations or reflections defined yet !!&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Run self.automorphismGenerators()&#39;</span><span class="p">)</span>
-            <span class="n">NoError</span> <span class="o">=</span> <span class="kc">False</span>
-
-        <span class="k">if</span> <span class="n">NoError</span><span class="p">:</span>
-            <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*--- Isomorphic reduction of choices&#39;</span><span class="p">)</span>
-            <span class="n">Iso</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-            <span class="n">misset</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-            <span class="n">v</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
-            <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">line</span> <span class="o">=</span> <span class="n">f1</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="p">:</span> <span class="k">break</span>
-                <span class="n">sCur</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)):</span>
-                    <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
-                        <span class="n">sCur</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">actions</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-                <span class="k">if</span> <span class="n">sCur</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">misset</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;current representative: &#39;</span><span class="p">,</span><span class="n">sCur</span><span class="p">)</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;length   : &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sCur</span><span class="p">))</span>
-                    <span class="n">IsosCur</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="nb">frozenset</span><span class="p">(</span><span class="n">sCur</span><span class="p">)])</span>
-                    <span class="n">Isos</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-                    <span class="k">while</span> <span class="n">IsosCur</span> <span class="o">!=</span> <span class="n">Isos</span><span class="p">:</span>
-                        <span class="n">Isos</span> <span class="o">=</span> <span class="n">IsosCur</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-                        <span class="n">IsosRes</span> <span class="o">=</span> <span class="n">IsosCur</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-                        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">IsosCur</span><span class="p">:</span>
-                            <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">reflections</span><span class="p">:</span>
-                                <span class="n">cur</span> <span class="o">=</span> <span class="n">s</span>
-                                <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">reflections</span><span class="p">[</span><span class="n">g</span><span class="p">]:</span>
-                                    <span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">cur</span><span class="p">)</span> <span class="ow">and</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cur</span><span class="p">:</span>
-                                        <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">-</span> <span class="nb">set</span><span class="p">([</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
-                                        <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">|</span> <span class="nb">set</span><span class="p">([</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
-                                    <span class="k">else</span><span class="p">:</span>
-                                        <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">cur</span> <span class="ow">and</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cur</span><span class="p">:</span>
-                                            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">-</span> <span class="nb">set</span><span class="p">([</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
-                                            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">|</span> <span class="nb">set</span><span class="p">([</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
-                                <span class="n">IsosRes</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cur</span><span class="p">)</span>
-                        <span class="n">IsosCur</span> <span class="o">=</span> <span class="n">IsosRes</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-                        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">IsosCur</span><span class="p">:</span>
-                            <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">:</span>
-                                <span class="n">cur</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">()</span>
-                                <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
-                                    <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">|</span> <span class="nb">set</span><span class="p">([</span><span class="n">permutations</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]])</span>
-                                <span class="n">IsosRes</span> <span class="o">=</span> <span class="n">IsosRes</span> <span class="o">|</span> <span class="nb">set</span><span class="p">([</span><span class="n">cur</span><span class="p">])</span>
-                        <span class="n">IsosCur</span> <span class="o">=</span> <span class="n">IsosRes</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-                    <span class="n">Iso</span> <span class="o">=</span> <span class="n">Iso</span> <span class="o">|</span> <span class="nb">set</span><span class="p">([</span><span class="nb">frozenset</span><span class="p">(</span><span class="n">sCur</span><span class="p">)])</span>
-                    <span class="n">niso</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Isos</span><span class="p">)</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;number of isomorph choices&#39;</span><span class="p">,</span> <span class="n">niso</span><span class="p">)</span>
-                    <span class="n">v</span><span class="p">[((</span><span class="mi">2</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">)</span><span class="o">//</span><span class="n">niso</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-                    <span class="k">if</span> <span class="n">withListing</span><span class="p">:</span>
-                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;isormorph choices&#39;</span><span class="p">)</span>
-                        <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">Isos</span><span class="p">:</span>
-                            <span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">ch</span><span class="p">))</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of choices before : &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">misset</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-                    <span class="n">misset</span> <span class="o">=</span> <span class="n">misset</span> <span class="o">|</span> <span class="n">Isos</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of choices after  : &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">misset</span><span class="p">))</span>
-            <span class="nb">print</span><span class="p">()</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- Global result ----&#39;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Labelled representatives:&#39;</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">Iso</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">ch</span><span class="p">))</span>
-            <span class="nb">print</span><span class="p">()</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of choices: &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">misset</span><span class="p">))</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of orbits : &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">Iso</span><span class="p">))</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;symmetry vector  : &#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;frequency        : &#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">orbits</span> <span class="o">=</span> <span class="n">Iso</span></div>
-
-<div class="viewcode-block" id="Digraph.readPerrinMisset"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.readPerrinMisset">[docs]</a>    <span class="k">def</span> <span class="nf">readPerrinMisset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        read method for 0-1-char-coded MISs from perrinMIS.c curd.dat file.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">NoError</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">return</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">f1</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+            <span class="n">f1</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">InFile</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="n">NoError</span> <span class="o">=</span> <span class="kc">False</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The input file: &#39;</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span><span class="s1">&#39; could not be found ?&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;File </span><span class="si">%s</span><span class="s1"> not found ?&#39;</span> <span class="o">%</span> <span class="n">InFile</span><span class="p">)</span>
+            <span class="k">return</span>
+        
+        <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*--- Isomorphic reduction of choices&#39;</span><span class="p">)</span>
+        <span class="n">Iso</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">misset</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+        <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">f1</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="p">:</span> <span class="k">break</span>
+            <span class="n">sCur</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
+                    <span class="n">sCur</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">actions</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">sCur</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">misset</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;current representative: &#39;</span><span class="p">,</span><span class="n">sCur</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;length   : &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sCur</span><span class="p">))</span>
+                <span class="n">IsosCur</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="nb">frozenset</span><span class="p">(</span><span class="n">sCur</span><span class="p">)])</span>
+                <span class="n">Isos</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+                <span class="k">while</span> <span class="n">IsosCur</span> <span class="o">!=</span> <span class="n">Isos</span><span class="p">:</span>
+                    <span class="n">Isos</span> <span class="o">=</span> <span class="n">IsosCur</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                    <span class="n">IsosRes</span> <span class="o">=</span> <span class="n">IsosCur</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">IsosCur</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">reflections</span><span class="p">:</span>
+                            <span class="n">cur</span> <span class="o">=</span> <span class="n">s</span>
+                            <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">reflections</span><span class="p">[</span><span class="n">g</span><span class="p">]:</span>
+                                <span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">cur</span><span class="p">)</span> <span class="ow">and</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cur</span><span class="p">:</span>
+                                    <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">-</span> <span class="nb">set</span><span class="p">([</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+                                    <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">|</span> <span class="nb">set</span><span class="p">([</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+                                <span class="k">else</span><span class="p">:</span>
+                                    <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">cur</span> <span class="ow">and</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cur</span><span class="p">:</span>
+                                        <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">-</span> <span class="nb">set</span><span class="p">([</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+                                        <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">|</span> <span class="nb">set</span><span class="p">([</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+                            <span class="n">IsosRes</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cur</span><span class="p">)</span>
+                    <span class="n">IsosCur</span> <span class="o">=</span> <span class="n">IsosRes</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">IsosCur</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">:</span>
+                            <span class="n">cur</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">()</span>
+                            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+                                <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">|</span> <span class="nb">set</span><span class="p">([</span><span class="n">permutations</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]])</span>
+                            <span class="n">IsosRes</span> <span class="o">=</span> <span class="n">IsosRes</span> <span class="o">|</span> <span class="nb">set</span><span class="p">([</span><span class="n">cur</span><span class="p">])</span>
+                    <span class="n">IsosCur</span> <span class="o">=</span> <span class="n">IsosRes</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="n">Iso</span> <span class="o">=</span> <span class="n">Iso</span> <span class="o">|</span> <span class="nb">set</span><span class="p">([</span><span class="nb">frozenset</span><span class="p">(</span><span class="n">sCur</span><span class="p">)])</span>
+                <span class="n">niso</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Isos</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;number of isomorph choices&#39;</span><span class="p">,</span> <span class="n">niso</span><span class="p">)</span>
+                <span class="n">v</span><span class="p">[((</span><span class="mi">2</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">)</span><span class="o">//</span><span class="n">niso</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">withListing</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;isormorph choices&#39;</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">Isos</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">ch</span><span class="p">))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of choices before : &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">misset</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">misset</span> <span class="o">=</span> <span class="n">misset</span> <span class="o">|</span> <span class="n">Isos</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of choices after  : &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">misset</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- Global result ----&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Labelled representatives:&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">Iso</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">ch</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of choices: &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">misset</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of orbits : &#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">Iso</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;symmetry vector  : &#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;frequency        : &#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">orbits</span> <span class="o">=</span> <span class="n">Iso</span></div>
 
-        <span class="k">if</span> <span class="n">NoError</span><span class="p">:</span>
-            <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
-            <span class="n">nl</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="n">misset</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-            <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">line</span> <span class="o">=</span> <span class="n">f1</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="p">:</span> <span class="k">break</span>
-                <span class="n">nl</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="n">mis</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)):</span>
-                    <span class="k">if</span> <span class="nb">ord</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                        <span class="n">mis</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">actions</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-                <span class="c1">#print mis</span>
-                <span class="n">misset</span> <span class="o">=</span> <span class="n">misset</span> <span class="o">|</span> <span class="nb">set</span><span class="p">([</span><span class="nb">frozenset</span><span class="p">(</span><span class="n">mis</span><span class="p">)])</span>
-            <span class="c1">#print &#39;Reading &#39; + str(nl) + &#39; MISs.&#39;</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">misset</span> <span class="o">=</span> <span class="n">misset</span></div>
+    <span class="c1"># def _readPerrinMisset(self,file):</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     read method for 0-1-char-coded MISs from perrinMIS.c curd.dat file.</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     NoError = True</span>
+    <span class="c1">#     try:</span>
+    <span class="c1">#         f1 = open(file,&#39;r&#39;)</span>
+    <span class="c1">#     except:</span>
+    <span class="c1">#         NoError = False</span>
+    <span class="c1">#         print(&#39;The input file: &#39;, file,&#39; could not be found ?&#39;)</span>
 
-<div class="viewcode-block" id="Digraph.readPerrinMissetOpt"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.readPerrinMissetOpt">[docs]</a>    <span class="k">def</span> <span class="nf">readPerrinMissetOpt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="p">):</span>
+    <span class="c1">#     if NoError:</span>
+    <span class="c1">#         actions = [x for x in self.actions]</span>
+    <span class="c1">#         nl = 0</span>
+    <span class="c1">#         misset = set()</span>
+    <span class="c1">#         while 1:</span>
+    <span class="c1">#             line = f1.readline()</span>
+    <span class="c1">#             if not line: break</span>
+    <span class="c1">#             nl += 1</span>
+    <span class="c1">#             mis = set()</span>
+    <span class="c1">#             for i in range(len(line)):</span>
+    <span class="c1">#                 if ord(line[i]) == 1:</span>
+    <span class="c1">#                     mis.add(actions[i])</span>
+    <span class="c1">#             #print mis</span>
+    <span class="c1">#             misset = misset | set([frozenset(mis)])</span>
+    <span class="c1">#         #print &#39;Reading &#39; + str(nl) + &#39; MISs.&#39;</span>
+    <span class="c1">#         self.misset = misset</span>
+
+<div class="viewcode-block" id="Digraph.readPerrinMisset"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.readPerrinMisset">[docs]</a>    <span class="k">def</span> <span class="nf">readPerrinMisset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="s1">&#39;curd.dat&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        read method for 0-1-char-coded MISs from perrinMIS.c curd.dat file.</span>
+<span class="sd">        read method for 0-1-char-coded MISs by default from the perrinMIS.c curd.dat result file.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">f1</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>

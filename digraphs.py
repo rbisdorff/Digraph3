@@ -2789,10 +2789,10 @@ class Digraph(object):
         *Reference*: R. Bisdorff and J.L. Marichal (2008). Counting non-isomorphic maximal independent sets of the n-cycle graph. *Journal of Integer Sequences*, Vol. 11 Article 08.5.7 (`openly accessible here <https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html>`_)
 
         """
-        NoError = True
         try:
             reflections = self.reflections
             permutations = self.permutations
+            NoError = True
         except:
             print('No permutations or reflections defined yet !!')
             print('Run self.automorphismGenerators()')
@@ -2861,113 +2861,116 @@ class Digraph(object):
         """
         Prints the orbits of Choices along the automorphisms of
         the digraph self by reading in the 0-1 misset file format.
-        See the digraphs.Digraph.readPerrinMisset() method.
+        See the :py:func:`digraphs.Digraph.readPerrinMisset` method.
         """
-        NoError = True
+        
         try:
             reflections = self.reflections
             permutations = self.permutations
-            f1 = open(InFile,'r')
         except:
             print('No permutations or reflections defined yet !!')
             print('Run self.automorphismGenerators()')
-            NoError = False
-
-        if NoError:
-            actions = [x for x in self.actions]
-            print('*--- Isomorphic reduction of choices')
-            Iso = set()
-            misset = set()
-            v = [0 for i in range(1,self.order + 1)]
-            while 1:
-                line = f1.readline()
-                if not line: break
-                sCur = set()
-                for i in range(len(line)):
-                    if line[i] == '1':
-                        sCur.add(actions[i])
-                if sCur not in misset:
-                    print('current representative: ',sCur)
-                    print('length   : ', len(sCur))
-                    IsosCur = set([frozenset(sCur)])
-                    Isos = set()
-                    while IsosCur != Isos:
-                        Isos = IsosCur.copy()
-                        IsosRes = IsosCur.copy()
-                        for s in IsosCur:
-                            for g in reflections:
-                                cur = s
-                                for a in reflections[g]:
-                                    if (a[0] in cur) and a[1] not in cur:
-                                        cur = cur - set([a[0]])
-                                        cur = cur | set([a[1]])
-                                    else:
-                                        if a[1] in cur and a[0] not in cur:
-                                            cur = cur - set([a[1]])
-                                            cur = cur | set([a[0]])
-                                IsosRes.add(cur)
-                        IsosCur = IsosRes.copy()
-                        for s in IsosCur:
-                            for g in permutations:
-                                cur = frozenset()
-                                for x in s:
-                                    cur = cur | set([permutations[g][x]])
-                                IsosRes = IsosRes | set([cur])
-                        IsosCur = IsosRes.copy()
-                    Iso = Iso | set([frozenset(sCur)])
-                    niso = len(Isos)
-                    print('number of isomorph choices', niso)
-                    v[((2*self.order)//niso)-1] += 1
-                    if withListing:
-                        print('isormorph choices')
-                        for ch in Isos:
-                            print(list(ch))
-                    print('Number of choices before : ', len(misset) + 1)
-                    misset = misset | Isos
-                    print('Number of choices after  : ', len(misset))
-            print()
-            print('*---- Global result ----')
-            print('Labelled representatives:')
-            for ch in Iso:
-                print(list(ch))
-            print()
-            print('Number of choices: ', len(misset))
-            print('Number of orbits : ', len(Iso))
-            print('symmetry vector  : ', list(range(1,self.order + 1)))
-            print('frequency        : ', v)
-            self.orbits = Iso
-
-    def readPerrinMisset(self,file):
-        """
-        read method for 0-1-char-coded MISs from perrinMIS.c curd.dat file.
-        """
-        NoError = True
+            return
         try:
-            f1 = open(file,'r')
+            f1 = open(InFile,'r')
         except:
-            NoError = False
-            print('The input file: ', file,' could not be found ?')
+            print('File %s not found ?' % InFile)
+            return
+        
+        actions = [x for x in self.actions]
+        print('*--- Isomorphic reduction of choices')
+        Iso = set()
+        misset = set()
+        v = [0 for i in range(1,self.order + 1)]
+        while 1:
+            line = f1.readline()
+            if not line: break
+            sCur = set()
+            for i in range(len(line)):
+                if line[i] == '1':
+                    sCur.add(actions[i])
+            if sCur not in misset:
+                print('current representative: ',sCur)
+                print('length   : ', len(sCur))
+                IsosCur = set([frozenset(sCur)])
+                Isos = set()
+                while IsosCur != Isos:
+                    Isos = IsosCur.copy()
+                    IsosRes = IsosCur.copy()
+                    for s in IsosCur:
+                        for g in reflections:
+                            cur = s
+                            for a in reflections[g]:
+                                if (a[0] in cur) and a[1] not in cur:
+                                    cur = cur - set([a[0]])
+                                    cur = cur | set([a[1]])
+                                else:
+                                    if a[1] in cur and a[0] not in cur:
+                                        cur = cur - set([a[1]])
+                                        cur = cur | set([a[0]])
+                            IsosRes.add(cur)
+                    IsosCur = IsosRes.copy()
+                    for s in IsosCur:
+                        for g in permutations:
+                            cur = frozenset()
+                            for x in s:
+                                cur = cur | set([permutations[g][x]])
+                            IsosRes = IsosRes | set([cur])
+                    IsosCur = IsosRes.copy()
+                Iso = Iso | set([frozenset(sCur)])
+                niso = len(Isos)
+                print('number of isomorph choices', niso)
+                v[((2*self.order)//niso)-1] += 1
+                if withListing:
+                    print('isormorph choices')
+                    for ch in Isos:
+                        print(list(ch))
+                print('Number of choices before : ', len(misset) + 1)
+                misset = misset | Isos
+                print('Number of choices after  : ', len(misset))
+        print()
+        print('*---- Global result ----')
+        print('Labelled representatives:')
+        for ch in Iso:
+            print(list(ch))
+        print()
+        print('Number of choices: ', len(misset))
+        print('Number of orbits : ', len(Iso))
+        print('symmetry vector  : ', list(range(1,self.order + 1)))
+        print('frequency        : ', v)
+        self.orbits = Iso
 
-        if NoError:
-            actions = [x for x in self.actions]
-            nl = 0
-            misset = set()
-            while 1:
-                line = f1.readline()
-                if not line: break
-                nl += 1
-                mis = set()
-                for i in range(len(line)):
-                    if ord(line[i]) == 1:
-                        mis.add(actions[i])
-                #print mis
-                misset = misset | set([frozenset(mis)])
-            #print 'Reading ' + str(nl) + ' MISs.'
-            self.misset = misset
+    # def _readPerrinMisset(self,file):
+    #     """
+    #     read method for 0-1-char-coded MISs from perrinMIS.c curd.dat file.
+    #     """
+    #     NoError = True
+    #     try:
+    #         f1 = open(file,'r')
+    #     except:
+    #         NoError = False
+    #         print('The input file: ', file,' could not be found ?')
 
-    def readPerrinMissetOpt(self,file):
+    #     if NoError:
+    #         actions = [x for x in self.actions]
+    #         nl = 0
+    #         misset = set()
+    #         while 1:
+    #             line = f1.readline()
+    #             if not line: break
+    #             nl += 1
+    #             mis = set()
+    #             for i in range(len(line)):
+    #                 if ord(line[i]) == 1:
+    #                     mis.add(actions[i])
+    #             #print mis
+    #             misset = misset | set([frozenset(mis)])
+    #         #print 'Reading ' + str(nl) + ' MISs.'
+    #         self.misset = misset
+
+    def readPerrinMisset(self,file='curd.dat'):
         """
-        read method for 0-1-char-coded MISs from perrinMIS.c curd.dat file.
+        read method for 0-1-char-coded MISs by default from the perrinMIS.c curd.dat result file.
         """
         try:
             f1 = open(file,'r')

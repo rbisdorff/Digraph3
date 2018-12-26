@@ -4723,7 +4723,105 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go">  Results in c12.misset</span>
 </pre></div>
 </td></tr></table></div>
-<p>In the 12-cycle graph, we observe 29 labelled MISs: – 3 of cardinality 4, 24 of cardinality 5, and 2  of cardinality 6. For computing the corresponding non isomorphic MISs, we actually need the automorphism group of the c12-cycle graph. The <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a> class therefore provides the <a class="reference internal" href="techDoc.html#digraphs.Digraph.automorphismGenerators" title="digraphs.Digraph.automorphismGenerators"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.automorphismGenerators()</span></code></a> method which adds automorphism group generators to a <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a> class instance with the help of the external shell &lt;<code class="code docutils literal"><span class="pre">dreadnaut</span></code>&gt; command from the <strong>nauty</strong> software package <a class="footnote-reference" href="#id47" id="id42">[2]</a>.</p>
+<p>In the 12-cycle graph, we observe 29 labelled MISs: – 3 of cardinality 4, 24 of cardinality 5, and 2  of cardinality 6. In case of $n$-cycle graphs with $n$ &gt; 20, as the cardinality of the MISs becomes more consistent, it is preferable to use the shell <code class="code docutils literal"><span class="pre">perrinMIS</span></code> command compiled from C and installed (by default in /usr/local/bin) along with all the the Digraphs3 python modules for computing the set of MISs observed in the graph:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35</pre></div></td><td class="code"><div class="highlight"><pre><span></span>$ echo 12 | /usr/local/bin/perrinMIS
+# -------------------------------------- #
+# Generating MIS set of Cn with the      #
+# Perrin sequence algorithm.             #
+# Temporary files used.                  #
+# even versus odd order optimized.       #
+# RB December 2006                       #
+# Current revision Dec 2018              #
+# -------------------------------------- #
+Input cycle order ? 12
+mis 1 : 100100100100
+mis 2 : 010010010010
+mis 3 : 001001001001
+...
+...
+...
+mis 27 : 001001010101
+mis 28 : 101010101010
+mis 29 : 010101010101
+Cardinalities:
+0 : 0
+1 : 0
+2 : 0
+3 : 0
+4 : 3
+5 : 24
+6 : 2
+7 : 0
+8 : 0
+9 : 0
+10 : 0
+11 : 0
+12 : 0
+Total: 29
+execution time: 0 sec. and 2 millisec.
+</pre></div>
+</td></tr></table></div>
+<p>Reading in the result of the <code class="code docutils literal"><span class="pre">perrinMIS</span></code>, stored in a file called by default <code class="code docutils literal"><span class="pre">curd.dat</span></code>, may be operated with the <code class="xref py py-func docutils literal"><span class="pre">digraphs.Digrpah.readPerrinMisset()</span></code> method.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c12</span><span class="o">.</span><span class="n">readPerrinMisset</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="s1">&#39;curd.dat&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c12</span><span class="o">.</span><span class="n">misset</span>
+<span class="go">{frozenset({&#39;5&#39;, &#39;7&#39;, &#39;10&#39;, &#39;1&#39;, &#39;3&#39;}),</span>
+<span class="go"> frozenset({&#39;9&#39;, &#39;11&#39;, &#39;5&#39;, &#39;2&#39;, &#39;7&#39;}),</span>
+<span class="go"> frozenset({&#39;7&#39;, &#39;2&#39;, &#39;4&#39;, &#39;10&#39;, &#39;12&#39;}),</span>
+<span class="go"> ...</span>
+<span class="go"> ...</span>
+<span class="go"> ...</span>
+<span class="go"> frozenset({&#39;8&#39;, &#39;4&#39;, &#39;10&#39;, &#39;1&#39;, &#39;6&#39;}),</span>
+<span class="go"> frozenset({&#39;11&#39;, &#39;4&#39;, &#39;1&#39;, &#39;9&#39;, &#39;6&#39;}),</span>
+<span class="go"> frozenset({&#39;8&#39;, &#39;2&#39;, &#39;4&#39;, &#39;10&#39;, &#39;12&#39;, &#39;6&#39;})</span>
+<span class="go">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>For computing the corresponding non isomorphic MISs, we actually need the automorphism group of the c12-cycle graph. The <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a> class therefore provides the <a class="reference internal" href="techDoc.html#digraphs.Digraph.automorphismGenerators" title="digraphs.Digraph.automorphismGenerators"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.automorphismGenerators()</span></code></a> method which adds automorphism group generators to a <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a> class instance with the help of the external shell &lt;<code class="code docutils literal"><span class="pre">dreadnaut</span></code>&gt; command from the <strong>nauty</strong> software package <a class="footnote-reference" href="#id47" id="id42">[2]</a>.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3

@@ -2775,7 +2775,60 @@ A non isomorphic MIS corresponds in fact to a set of isomorphic MISs, i.e. an or
   freq.:  [0, 0, 0, 0, 3, 24,  2, 0, 0, 0,  0,  0,  0]
   Results in c12.misset
 
-In the 12-cycle graph, we observe 29 labelled MISs: -- 3 of cardinality 4, 24 of cardinality 5, and 2  of cardinality 6. For computing the corresponding non isomorphic MISs, we actually need the automorphism group of the c12-cycle graph. The :py:class:`digraphs.Digraph` class therefore provides the :py:func:`digraphs.Digraph.automorphismGenerators` method which adds automorphism group generators to a :py:class:`digraphs.Digraph` class instance with the help of the external shell <:code:`dreadnaut`> command from the **nauty** software package [2]_.
+In the 12-cycle graph, we observe 29 labelled MISs: -- 3 of cardinality 4, 24 of cardinality 5, and 2  of cardinality 6. In case of $n$-cycle graphs with $n$ > 20, as the cardinality of the MISs becomes more consistent, it is preferable to use the shell :code:`perrinMIS` command compiled from C and installed (by default in /usr/local/bin) along with all the the Digraphs3 python modules for computing the set of MISs observed in the graph::
+
+    $ echo 12 | /usr/local/bin/perrinMIS
+    # -------------------------------------- #
+    # Generating MIS set of Cn with the      #
+    # Perrin sequence algorithm.             #
+    # Temporary files used.                  #
+    # even versus odd order optimized.       #
+    # RB December 2006                       #
+    # Current revision Dec 2018              #
+    # -------------------------------------- #
+    Input cycle order ? 12
+    mis 1 : 100100100100
+    mis 2 : 010010010010
+    mis 3 : 001001001001
+    ...
+    ...
+    ...
+    mis 27 : 001001010101
+    mis 28 : 101010101010
+    mis 29 : 010101010101
+    Cardinalities:
+    0 : 0
+    1 : 0
+    2 : 0
+    3 : 0
+    4 : 3
+    5 : 24
+    6 : 2
+    7 : 0
+    8 : 0
+    9 : 0
+    10 : 0
+    11 : 0
+    12 : 0
+    Total: 29
+    execution time: 0 sec. and 2 millisec.
+
+Reading in the result of the :code:`perrinMIS`, stored in a file called by default :code:`curd.dat`, may be operated with the :py:func:`digraphs.Digrpah.readPerrinMisset` method.
+
+>>> c12.readPerrinMisset(file='curd.dat')
+>>> c12.misset
+{frozenset({'5', '7', '10', '1', '3'}),
+ frozenset({'9', '11', '5', '2', '7'}),
+ frozenset({'7', '2', '4', '10', '12'}),
+ ...
+ ...
+ ...
+ frozenset({'8', '4', '10', '1', '6'}),
+ frozenset({'11', '4', '1', '9', '6'}),
+ frozenset({'8', '2', '4', '10', '12', '6'})
+}
+
+For computing the corresponding non isomorphic MISs, we actually need the automorphism group of the c12-cycle graph. The :py:class:`digraphs.Digraph` class therefore provides the :py:func:`digraphs.Digraph.automorphismGenerators` method which adds automorphism group generators to a :py:class:`digraphs.Digraph` class instance with the help of the external shell <:code:`dreadnaut`> command from the **nauty** software package [2]_.
 
 >>> c12.automorphismGenerators()
 ...
