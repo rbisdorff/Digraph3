@@ -2775,9 +2775,9 @@ A non isomorphic MIS corresponds in fact to a set of isomorphic MISs, i.e. an or
   freq.:  [0, 0, 0, 0, 3, 24,  2, 0, 0, 0,  0,  0,  0]
   Results in c12.misset
 
-In the 12-cycle graph, we observe 29 labelled MISs: -- 3 of cardinality 4, 24 of cardinality 5, and 2  of cardinality 6. In case of $n$-cycle graphs with $n$ > 20, as the cardinality of the MISs becomes more consistent, it is preferable to use the shell :code:`perrinMIS` command compiled from C and installed (by default in /usr/local/bin) along with all the the Digraphs3 python modules for computing the set of MISs observed in the graph::
+In the 12-cycle graph, we observe 29 labelled MISs: -- 3 of cardinality 4, 24 of cardinality 5, and 2  of cardinality 6. In case of $n$-cycle graphs with $n$ > 20, as the cardinality of the MISs becomes more consistent, it is preferable to use the shell :code:`perrinMIS` command compiled from C and installed (by default into /usr/local/bin) along with all the the Digraphs3 python modules for computing the set of MISs observed in the graph::
 
-    $ echo 12 | /usr/local/bin/perrinMIS
+    ...$ echo 12 | /usr/local/bin/perrinMIS
     # -------------------------------------- #
     # Generating MIS set of Cn with the      #
     # Perrin sequence algorithm.             #
@@ -2786,7 +2786,7 @@ In the 12-cycle graph, we observe 29 labelled MISs: -- 3 of cardinality 4, 24 of
     # RB December 2006                       #
     # Current revision Dec 2018              #
     # -------------------------------------- #
-    Input cycle order ? 12
+    Input cycle order ? <-- 12
     mis 1 : 100100100100
     mis 2 : 010010010010
     mis 3 : 001001001001
