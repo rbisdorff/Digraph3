@@ -2813,7 +2813,7 @@ In the 12-cycle graph, we observe 29 labelled MISs: -- 3 of cardinality 4, 24 of
     Total: 29
     execution time: 0 sec. and 2 millisec.
 
-Reading in the result of the :code:`perrinMIS`, stored in a file called by default :code:`curd.dat`, may be operated with the :py:func:`digraphs.Digrpah.readPerrinMisset` method.
+Reading in the result of the :code:`perrinMIS`, stored in a file called by default :code:`curd.dat`, may be operated with the :py:func:`digraphs.Digraph.readPerrinMisset` method.
 
 >>> c12.readPerrinMisset(file='curd.dat')
 >>> c12.misset
