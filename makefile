@@ -607,6 +607,6 @@ installPerrin:
 installVenv:
 		${PYTHON} setup.py install
 
-installPerrinVenv:
+installPerrinUser:
 		(cd perrinMIS; ${CC} ${CFLAGS} -o perrinMIS perrinMIS.c)
-		cp perrinMIS/perrinMIS ${INSTALLDIR}
+		cp perrinMIS/perrinMIS ${HOME}/.bin
