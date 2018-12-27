@@ -2925,4 +2925,4 @@ Footnotes
 
        ...$ sudo apt-get install nauty
 
-.. [3] The :code:`perrinMIS` shell command my be installed system wide with the command :code:`make installPerrin` from the main Digraph3 directory. It is stored by default into :code:`</usr/local/bin/>`. This may be changed with the :code:`INSTALLDIR` flag. The command :code:`make installPerrinUser` installs it instead without sudo into the user's private :code:`<$Home/.bin>` directory.
+.. [3] The :code:`perrinMIS` shell command my be installed system wide with the command :code:`.../Digraph3$ make installPerrin` from the main Digraph3 directory. It is stored by default into :code:`</usr/local/bin/>`. This may be changed with the :code:`INSTALLDIR` flag. The command :code:`.../Digraph3$ make installPerrinUser` installs it instead without sudo into the user's private :code:`<$Home/.bin>` directory.
