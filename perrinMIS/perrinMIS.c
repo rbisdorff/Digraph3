@@ -2,11 +2,10 @@
  * Generating MIS set of Cn with the      *
  * Perrin sequence algorithm.             *
  * Temporary files used.                  *
- * even versus odd order optimized.       *
- * RB May 2006                            *
- * Current revision $Revision: 1.6 $      *
- * i686 compilation flags :               *       
- * gcc -Wall -O4 perrinMIS perrinMIS.c *
+ * Even versus odd order optimized.       *
+ * RB May 2006/ Rev: Dec 2018             *
+ * Current revision $Revision: Python3.6$ *       
+ * gcc -Wall -O3 perrinMIS perrinMIS.c    *
  * -------------------------------------- */
 
 #include <stdio.h>
@@ -52,6 +51,7 @@ int main() {
   struct timeval before,after,lapsed;
   struct timezone tz;
   double diff;
+  int s;
 
   FILE *fi, *fo, *fo1;
   char buf, testinit,testfinal;
@@ -73,7 +73,12 @@ int main() {
   printf("* -------------------------------------- *\n");
 
   printf("Input cycle order ? ");
-  scanf("%lu", &order);
+  s = scanf("%lu", &order);
+
+  if (s < 0) { /* non integer input ! */
+    printf("usage: ...$./perrinMIS order (Integer order required)\n");
+    exit(1);
+  }
   
   if ((order < 5) || (order > MAX_ORDER)){  /* computation limits */
     printf("usage: ...$./perrinMIS order ( 4 < order < 51)\n");
@@ -287,7 +292,7 @@ int main() {
 
   }
 
-  if (r != 0){   /* odd order need a supplemntatry single step */
+  if (r != 0){   /* odd order need a supplementary single step */
         
     n += 1;
 
@@ -421,7 +426,7 @@ int main() {
 /* ----------------------------------- *
  * Log record for changes:
  * $Log: perrinMIS.c,v $
- * Revision 1.7  2018/12/16
+ * Revision 1.7  2018/12
  * Correcting printf % types and gcc compile command
  * Revision 1.6  2009/04/13 06:38:09
  * Revision 1.3  2006/12/26 15:17:40
