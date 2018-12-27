@@ -421,6 +421,8 @@ int main() {
   printf("execution time: %ld sec. and ",lapsed.tv_sec);
   printf("%.f millisec.\n",diff);
 
+  exit(0);
+
 }
 
 /* ----------------------------------- *
