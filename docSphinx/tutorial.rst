@@ -2722,8 +2722,8 @@ Back to :ref:`Tutorial-label`
 
 .. _IsomorphicMIS-Tutorial-label:
 
-Computing a non isomorphic MIS
-------------------------------
+Computing the non isomorphic MISs of the n-cycle graph
+------------------------------------------------------
 
 .. contents:: 
 	:depth: 1
@@ -2775,7 +2775,7 @@ A non isomorphic MIS corresponds in fact to a set of isomorphic MISs, i.e. an or
   freq.:  [0, 0, 0, 0, 3, 24,  2, 0, 0, 0,  0,  0,  0]
   Results in c12.misset
 
-In the 12-cycle graph, we observe 29 labelled MISs: -- 3 of cardinality 4, 24 of cardinality 5, and 2  of cardinality 6. In case of $n$-cycle graphs with $n$ > 20, as the cardinality of the MISs becomes more consistent, it is preferable to use the shell :code:`perrinMIS` command compiled from C and installed (by default into /usr/local/bin) along with all the the Digraphs3 python modules for computing the set of MISs observed in the graph::
+In the 12-cycle graph, we observe 29 labelled MISs: -- 3 of cardinality 4, 24 of cardinality 5, and 2  of cardinality 6. In case of $n$-cycle graphs with $n$ > 20, as the cardinality of the MISs becomes big, it is preferable to use the shell :code:`perrinMIS` command compiled from C and installed [3]_  along with all the the Digraphs3 python modules for computing the set of MISs observed in the graph::
 
     ...$ echo 12 | /usr/local/bin/perrinMIS
     # -------------------------------------- #
@@ -2925,4 +2925,4 @@ Footnotes
 
        ...$ sudo apt-get install nauty
 
-.
+.. [3] The perrinMIS shell command my be installed system wide with the command :code:`make installPerrin` from the main Digraph3 directoty. It is stored by default into </usr/local/bin/>. This may be changed with the INSTALLDIR flag. The command :code:`make installPerrinUser` install instaed without sudo into the user's private <$Home/.bin> directory.
