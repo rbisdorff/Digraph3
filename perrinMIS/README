@@ -19,7 +19,7 @@
 #
 #-----------------------------------------------------------------------------
 
-The C file perrinMIS.c is computing the set of maximal independent sets MISs(n) of the n-cycle graph with the Perrin sequence algorithm - MISs(n) is obtained from  MISs(n-2) and  MISs(n-3) - by using recursively temporary data files.
+The C file perrinMIS.c is computing the set of maximal independent sets MISs(n) of the n-cycle graph for n > 20 with the Perrin sequence algorithm - MISs(n) is obtained from  MISs(n-2) and  MISs(n-3) - by using recursively temporary data files.
 
 The algorithm is even versus odd graph order optimized.
 
@@ -40,5 +40,7 @@ To install into the user's bin directory :
 
 .../Digraph3/$ make installPerrinUser
 
-
+Luxembourg, December 2018
+RB
+#-------------------------------------------------------#
 
