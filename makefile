@@ -599,10 +599,14 @@ verboseArithmeticsTests:
 
 install:
 		sudo ${PYTHON} setup.py install
-		cp perrinMIS.c ./build
-		(cd build; ${CC} ${CFLAGS} -o perrinMIS perrinMIS.c)
-		sudo cp build/perrinMIS ${INSTALLDIR}
 		#sudo python3.7 setup.py install
+installPerrin:
+		(cd perrinMIS; ${CC} ${CFLAGS} -o perrinMIS perrinMIS.c)
+		sudo cp perrinMIS/perrinMIS ${INSTALLDIR}
 
 installVenv:
 		${PYTHON} setup.py install
+
+installPerrinVenv:
+		(cd perrinMIS; ${CC} ${CFLAGS} -o perrinMIS perrinMIS.c)
+		cp perrinMIS/perrinMIS ${INSTALLDIR}
