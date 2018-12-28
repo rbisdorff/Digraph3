@@ -1,61 +1,109 @@
-\select@language {english}
-\contentsline {chapter}{\numberline {1}Introduction}{3}{chapter.1}
-\contentsline {section}{\numberline {1.1}Tutorial of the Digraph3 resources}{3}{section.1.1}
-\contentsline {subsection}{\numberline {1.1.1}Content}{3}{subsection.1.1.1}
-\contentsline {subsection}{\numberline {1.1.2}Working with the \texttt {digraphs} module}{3}{subsection.1.1.2}
-\contentsline {subsubsection}{Downloading of the Digraph3 resources}{3}{subsubsection*.3}
-\contentsline {subsubsection}{Purpose}{4}{subsubsection*.4}
-\contentsline {subsubsection}{Starting an interactive python3 session}{4}{subsubsection*.5}
-\contentsline {subsubsection}{Structure of a \texttt {Digraph} object}{4}{subsubsection*.6}
-\contentsline {subsubsection}{Permanent storage of digraphs}{5}{subsubsection*.7}
-\contentsline {subsubsection}{Inspecting a \texttt {Digraph} object}{5}{subsubsection*.8}
-\contentsline {subsubsection}{Special classes of digraphs}{7}{subsubsection*.9}
-\contentsline {subsection}{\numberline {1.1.3}Tools for manipulating \texttt {Digraph} objects}{9}{subsection.1.1.3}
-\contentsline {subsubsection}{Inspecting a random digraph}{9}{subsubsection*.10}
-\contentsline {subsubsection}{Graphviz drawings}{10}{subsubsection*.11}
-\contentsline {subsubsection}{Asymmetric and symmetric parts}{11}{subsubsection*.12}
-\contentsline {subsubsection}{Digraph fusion by epistemic disjunction}{13}{subsubsection*.13}
-\contentsline {subsubsection}{Dual, converse and codual digraphs}{13}{subsubsection*.14}
-\contentsline {subsubsection}{Symmetric and transitive closures}{14}{subsubsection*.15}
-\contentsline {subsubsection}{Strong components}{16}{subsubsection*.16}
-\contentsline {subsubsection}{Saving and reloading in CSV format}{16}{subsubsection*.17}
-\contentsline {subsubsection}{Complete, empty and indeterminate digraphs}{17}{subsubsection*.18}
-\contentsline {subsection}{\numberline {1.1.4}Working with the \texttt {graphs} module}{18}{subsection.1.1.4}
-\contentsline {subsubsection}{Structure of a \texttt {Graph} object}{18}{subsubsection*.19}
-\contentsline {subsubsection}{q-coloring of a graph}{20}{subsubsection*.20}
-\contentsline {subsubsection}{MIS enumeration}{22}{subsubsection*.21}
-\contentsline {subsubsection}{Grids and the Ising model}{23}{subsubsection*.22}
-\contentsline {subsubsection}{Simulating Metropolis random walks}{24}{subsubsection*.23}
-\contentsline {subsection}{\numberline {1.1.5}Computing the winner of an election}{25}{subsection.1.1.5}
-\contentsline {subsubsection}{Linear voting profiles}{25}{subsubsection*.24}
-\contentsline {subsubsection}{Computing the winner}{25}{subsubsection*.25}
-\contentsline {subsubsection}{The Condorcet winner}{26}{subsubsection*.26}
-\contentsline {subsubsection}{Cyclic social preferences}{27}{subsubsection*.27}
-\contentsline {subsection}{\numberline {1.1.6}Working with the \texttt {outrankingDigraphs} module}{29}{subsection.1.1.6}
-\contentsline {subsubsection}{Structure of an outranking digraph}{29}{subsubsection*.28}
-\contentsline {subsubsection}{Semantics of the bipolar valuation}{31}{subsubsection*.29}
-\contentsline {subsubsection}{Pairwise multiple criteria comparisons}{32}{subsubsection*.30}
-\contentsline {subsubsection}{Recoding the valuation}{32}{subsubsection*.31}
-\contentsline {subsubsection}{Strict outranking via the codual digraph}{33}{subsubsection*.32}
-\contentsline {subsubsection}{XMCDA 2.0 storage}{34}{subsubsection*.33}
-\contentsline {subsection}{\numberline {1.1.7}Links and appendices}{35}{subsection.1.1.7}
-\contentsline {subsubsection}{Documents}{35}{subsubsection*.34}
-\contentsline {subsubsection}{Indices and tables}{35}{subsubsection*.35}
-\contentsline {subsubsection}{References}{35}{subsubsection*.36}
-\contentsline {subsubsection}{Footnotes}{35}{subsubsection*.37}
-\contentsline {section}{\numberline {1.2}Technical Reference of the Digraph3 modules}{35}{section.1.2}
-\contentsline {subsection}{\numberline {1.2.1}Introduction}{35}{subsection.1.2.1}
-\contentsline {subsection}{\numberline {1.2.2}digraphs module}{36}{subsection.1.2.2}
-\contentsline {subsection}{\numberline {1.2.3}graphs module}{58}{subsection.1.2.3}
-\contentsline {subsection}{\numberline {1.2.4}perfTabs module}{70}{subsection.1.2.4}
-\contentsline {subsection}{\numberline {1.2.5}outrankingDigraphs module}{75}{subsection.1.2.5}
-\contentsline {subsection}{\numberline {1.2.6}votingDigraphs module}{83}{subsection.1.2.6}
-\contentsline {subsection}{\numberline {1.2.7}sortingDigraphs module}{88}{subsection.1.2.7}
-\contentsline {subsection}{\numberline {1.2.8}linearOrders module}{93}{subsection.1.2.8}
-\contentsline {subsection}{\numberline {1.2.9}weakOrders module}{94}{subsection.1.2.9}
-\contentsline {subsection}{\numberline {1.2.10}Indices and tables}{99}{subsection.1.2.10}
-\contentsline {subsection}{\numberline {1.2.11}Tutorial}{99}{subsection.1.2.11}
-\contentsline {chapter}{\numberline {2}Indices and tables}{101}{chapter.2}
-\contentsline {chapter}{\numberline {3}References}{103}{chapter.3}
-\contentsline {chapter}{Bibliography}{105}{chapter*.550}
-\contentsline {chapter}{Python Module Index}{107}{section*.555}
+\babel@toc {english}{}
+\contentsline {chapter}{\numberline {1}Contents}{3}{chapter.1}
+\contentsline {chapter}{\numberline {2}Introduction}{5}{chapter.2}
+\contentsline {section}{\numberline {2.1}Tutorials of the Digraph3 resources}{6}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Working with the \sphinxstyleemphasis {Digraph3} software resources}{6}{subsection.2.1.1}
+\contentsline {subsubsection}{Purpose}{6}{subsubsection*.21}
+\contentsline {subsubsection}{Downloading of the Digraph3 resources}{7}{subsubsection*.22}
+\contentsline {subsubsection}{Starting a python3 session}{7}{subsubsection*.23}
+\contentsline {subsubsection}{\sphinxstyleliteralintitle {Digraph} object structure}{7}{subsubsection*.24}
+\contentsline {subsubsection}{Permanent storage}{8}{subsubsection*.25}
+\contentsline {subsubsection}{Inspecting a \sphinxstyleliteralintitle {Digraph} object}{8}{subsubsection*.26}
+\contentsline {subsubsection}{Special classes}{9}{subsubsection*.27}
+\contentsline {subsection}{\numberline {2.1.2}Manipulating \sphinxstyleliteralintitle {Digraph} objects}{10}{subsection.2.1.2}
+\contentsline {subsubsection}{Random digraph}{11}{subsubsection*.37}
+\contentsline {subsubsection}{Graphviz drawings}{12}{subsubsection*.38}
+\contentsline {subsubsection}{Asymmetric and symmetric parts}{13}{subsubsection*.39}
+\contentsline {subsubsection}{Fusion by epistemic disjunction}{14}{subsubsection*.40}
+\contentsline {subsubsection}{Dual, converse and codual digraphs}{14}{subsubsection*.41}
+\contentsline {subsubsection}{Symmetric and transitive closures}{15}{subsubsection*.42}
+\contentsline {subsubsection}{Strong components}{16}{subsubsection*.43}
+\contentsline {subsubsection}{CSV storage}{16}{subsubsection*.44}
+\contentsline {subsubsection}{Complete, empty and indeterminate digraphs}{17}{subsubsection*.45}
+\contentsline {subsection}{\numberline {2.1.3}Computing the winner of an election}{19}{subsection.2.1.3}
+\contentsline {subsubsection}{Linear voting profiles}{19}{subsubsection*.50}
+\contentsline {subsubsection}{Computing the winner}{20}{subsubsection*.52}
+\contentsline {subsubsection}{The Condorcet winner}{21}{subsubsection*.54}
+\contentsline {subsubsection}{Cyclic social preferences}{22}{subsubsection*.55}
+\contentsline {subsection}{\numberline {2.1.4}Working with the \sphinxstyleliteralintitle {outrankingDigraphs} module}{23}{subsection.2.1.4}
+\contentsline {subsubsection}{Outranking digraph}{24}{subsubsection*.64}
+\contentsline {subsubsection}{Browsing the performances}{25}{subsubsection*.65}
+\contentsline {subsubsection}{Valuation semantics}{26}{subsubsection*.66}
+\contentsline {subsubsection}{Pairwise comparisons}{27}{subsubsection*.69}
+\contentsline {subsubsection}{Recoding the valuation}{28}{subsubsection*.71}
+\contentsline {subsubsection}{Codual digraph}{28}{subsubsection*.72}
+\contentsline {subsubsection}{XMCDA 2.0}{29}{subsubsection*.75}
+\contentsline {subsection}{\numberline {2.1.5}Generating random performance tableaux}{30}{subsection.2.1.5}
+\contentsline {subsubsection}{Introduction}{30}{subsubsection*.81}
+\contentsline {subsubsection}{Generating standard random performance tableaux}{30}{subsubsection*.82}
+\contentsline {subsubsection}{Generating random Cost-Benefit tableaux}{32}{subsubsection*.83}
+\contentsline {subsubsection}{Generating three objectives tableaux}{35}{subsubsection*.84}
+\contentsline {subsubsection}{Generating random linearly ranked performances}{38}{subsubsection*.85}
+\contentsline {subsection}{\numberline {2.1.6}Computing a best choice recommendation}{38}{subsection.2.1.6}
+\contentsline {subsubsection}{What site to choose ?}{39}{subsubsection*.93}
+\contentsline {subsubsection}{Performance tableau}{40}{subsubsection*.95}
+\contentsline {subsubsection}{Outranking digraph}{42}{subsubsection*.96}
+\contentsline {subsubsection}{Rubis best choice}{43}{subsubsection*.99}
+\contentsline {subsubsection}{Strictly best choice}{46}{subsubsection*.101}
+\contentsline {subsubsection}{Weakly ordering}{47}{subsubsection*.104}
+\contentsline {subsection}{\numberline {2.1.7}Ranking with multiple incommensurable criteria}{49}{subsection.2.1.7}
+\contentsline {subsubsection}{The ranking problem}{49}{subsubsection*.113}
+\contentsline {subsubsection}{The Copeland ranking}{51}{subsubsection*.115}
+\contentsline {subsubsection}{The Net-Flows ranking}{52}{subsubsection*.117}
+\contentsline {subsubsection}{Kemeny rankings}{52}{subsubsection*.118}
+\contentsline {subsubsection}{Slater rankings}{54}{subsubsection*.120}
+\contentsline {subsubsection}{Kohler\IeC {\textquoteright }s ranking-by-choosing rule}{54}{subsubsection*.121}
+\contentsline {subsubsection}{Tideman\IeC {\textquoteright }s Ranked-Pairs rule}{55}{subsubsection*.122}
+\contentsline {subsubsection}{Ranking big performance tableaux}{56}{subsubsection*.123}
+\contentsline {subsection}{\numberline {2.1.8}Rating with learned quantile norms}{57}{subsection.2.1.8}
+\contentsline {subsubsection}{Introduction}{58}{subsubsection*.128}
+\contentsline {subsubsection}{Incremental learning of historical performance quantiles}{58}{subsubsection*.130}
+\contentsline {subsubsection}{Rating performances with quantile norms}{60}{subsubsection*.133}
+\contentsline {subsection}{\numberline {2.1.9}Working with the \sphinxstyleliteralintitle {graphs} module}{66}{subsection.2.1.9}
+\contentsline {subsubsection}{Structure of a \sphinxstyleliteralintitle {Graph} object}{67}{subsubsection*.141}
+\contentsline {subsubsection}{q-coloring of a graph}{69}{subsubsection*.142}
+\contentsline {subsubsection}{MIS and Clique enumeration}{71}{subsubsection*.143}
+\contentsline {subsubsection}{Grids and the Ising model}{72}{subsubsection*.144}
+\contentsline {subsubsection}{Simulating Metropolis random walks}{73}{subsubsection*.145}
+\contentsline {subsubsection}{The Berge mystery story: Who is the lier ?}{74}{subsubsection*.147}
+\contentsline {subsection}{\numberline {2.1.10}Computing the non isomorphic MISs of the n-cycle graph}{77}{subsection.2.1.10}
+\contentsline {subsection}{\numberline {2.1.11}Links and appendices}{80}{subsection.2.1.11}
+\contentsline {subsubsection}{Documents}{80}{subsubsection*.150}
+\contentsline {subsubsection}{Indices and tables}{80}{subsubsection*.151}
+\contentsline {subsubsection}{References}{80}{subsubsection*.152}
+\contentsline {subsubsection}{Footnotes}{81}{subsubsection*.153}
+\contentsline {section}{\numberline {2.2}Technical Reference of the Digraph3 modules}{81}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Installation}{82}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Organisation of the Digraph3 modules}{83}{subsection.2.2.2}
+\contentsline {subsubsection}{Basic modules}{83}{subsubsection*.185}
+\contentsline {subsubsection}{Various Random generators}{86}{subsubsection*.186}
+\contentsline {subsubsection}{Handling big data}{87}{subsubsection*.187}
+\contentsline {subsubsection}{Cythonized modules}{88}{subsubsection*.188}
+\contentsline {subsubsection}{Sorting, rating and ranking tools}{88}{subsubsection*.189}
+\contentsline {subsubsection}{Miscellaneous tools}{89}{subsubsection*.190}
+\contentsline {subsection}{\numberline {2.2.3}digraphs module}{90}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}randomDigraphs module}{118}{subsection.2.2.4}
+\contentsline {subsection}{\numberline {2.2.5}graphs module}{121}{subsection.2.2.5}
+\contentsline {subsection}{\numberline {2.2.6}perfTabs module}{135}{subsection.2.2.6}
+\contentsline {subsection}{\numberline {2.2.7}performanceQuantiles module}{143}{subsection.2.2.7}
+\contentsline {subsection}{\numberline {2.2.8}randomPerfTabs module}{145}{subsection.2.2.8}
+\contentsline {subsection}{\numberline {2.2.9}outrankingDigraphs module}{149}{subsection.2.2.9}
+\contentsline {subsection}{\numberline {2.2.10}xmcda module}{160}{subsection.2.2.10}
+\contentsline {subsection}{\numberline {2.2.11}sparseOutrankingDigraphs module}{161}{subsection.2.2.11}
+\contentsline {subsection}{\numberline {2.2.12}sortingDigraphs module}{172}{subsection.2.2.12}
+\contentsline {subsection}{\numberline {2.2.13}votingProfiles module}{183}{subsection.2.2.13}
+\contentsline {subsection}{\numberline {2.2.14}linearOrders module}{189}{subsection.2.2.14}
+\contentsline {subsection}{\numberline {2.2.15}weakOrders module}{190}{subsection.2.2.15}
+\contentsline {subsection}{\numberline {2.2.16}randomNumbers module}{196}{subsection.2.2.16}
+\contentsline {subsection}{\numberline {2.2.17}digraphsTools module}{204}{subsection.2.2.17}
+\contentsline {subsection}{\numberline {2.2.18}arithmetics module}{205}{subsection.2.2.18}
+\contentsline {subsection}{\numberline {2.2.19}Cythonized modules for big digraphs}{208}{subsection.2.2.19}
+\contentsline {subsubsection}{cRandPerfTabs module}{208}{subsubsection*.931}
+\contentsline {subsubsection}{cIntegerOutrankingDigraphs module}{214}{subsubsection*.954}
+\contentsline {subsubsection}{cIntegerSortingDigraphs module}{218}{subsubsection*.966}
+\contentsline {subsubsection}{cSparseIntegerOutrankingDigraphs module}{222}{subsubsection*.984}
+\contentsline {subsection}{\numberline {2.2.20}Indices and tables}{233}{subsection.2.2.20}
+\contentsline {subsection}{\numberline {2.2.21}Tutorials}{234}{subsection.2.2.21}
+\contentsline {section}{\numberline {2.3}References}{234}{section.2.3}
+\contentsline {chapter}{Bibliography}{235}{chapter*.1028}
+\contentsline {chapter}{Python Module Index}{237}{section*.1041}

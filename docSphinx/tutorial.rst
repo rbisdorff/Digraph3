@@ -2213,7 +2213,7 @@ We reconsider the :code:`PerformanceQuantiles` object instance *pq* as computed 
     Compute rating   : 0.01617
     Compute sorting  : 0.00000
 
-Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class constructor (see Line 2) are a valid PerformanceQuantiles object *pq* and a compatible set *newActions* of new decision actions generated from the same random origin. Let us have a look at the digraph's nodes, here called **actions**. Among the 10 new incoming decision actions (see Line 4 above) there are 3 advantageous (high benefits, but also high costs), 4 cheap (low costs, buts also low benefits) and 4 neutral decision actions. Among the new decision actions shown in the performance tableau below, we recognize actions *a1007* and *a1008* we have mentioned in our introduction.
+Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class constructor (see Line 2-3) are a valid PerformanceQuantiles object *pq* and a compatible set *newActions* of new decision actions generated from the same random origin. Let us have a look at the digraph's nodes, here called **actions**. Among the 10 new incoming decision actions (see below) there are 3 advantageous (high benefits, but also high costs), 4 cheap (low costs, but also low benefits) and 4 neutral decision actions. Among the new decision actions shown in the performance tableau below, we recognize actions *a1007* and *a1008* we have mentioned in our introduction.
 
     >>> nqr.showPerformanceTableau(actionsSubset=nqr.newActions)
     *----  performance tableau -----*
@@ -2227,7 +2227,7 @@ Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class
        'b5'  |    57.0     30.0     64.0     35.0     30.0     29.0     34.0     51.0     86.0     39.0  
        'b6'  |     4        4        4        3        2        7        8        4        9        5  
 
-The :code:`NormedQuantilesRatingDigraphdigraph` instance's actions dictionary also contains the closed lower limits of the four quartile classes: *m1* = [0.0-0.25[, *m2* = [0.25-0.5[, *m3* =[0.5 - 0.75[, *m4* = [0.75 - 1.0[.
+The :py:class:`NormedQuantilesRatingDigraphdigraph` instance's actions dictionary also contains the closed lower limits of the four quartile classes: *m1* = [0.0-0.25[, *m2* = [0.25-0.5[, *m3* =[0.5 - 0.75[, *m4* = [0.75 - 1.0[.
     >>> nqr.showPerformanceTableau(actionsSubset=nqr.profiles)
     *----  performance tableau -----*
     criteria |  'm1'   'm2'   'm3'   'm4'   
