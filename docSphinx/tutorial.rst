@@ -34,7 +34,7 @@ Downloading of the Digraph3 resources
 
 Using the Digraph3 modules is easy. You only need to have installed on your system the `Python <https://www.python.org/doc/>`_ programming language of version 3.+ (readily available under Linux and Mac OS). Notice that, from Version 3.3 on, Python implements very efficiently the decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic valuation functions, which makes the recent python version much faster (more than twice as fast) when extensive digraph operations are performed.
 
-Three download options are given:
+Three download options are given.
 
 1. Either (easiest under Linux or Mac OS-X), by using a git client::
 
@@ -99,6 +99,7 @@ Inspecting a ``Digraph`` object
 ...............................
 
 We may reload a previously saved ``Digraph`` instance from the file named :code:`tutorialDigraph.py` with the ``Digraph`` class constructor and the :py:func:`digraphs.Digraph.showAll()` method output reveals us that *dg* is a connected irreflexive digraph of order five evaluated in a valuation domain from -1 to 1.
+
         >>> dg = Digraph('tutorialDigraph')
        	>>> dg.showAll()
 	*----- show details --------------*
@@ -118,7 +119,8 @@ We may reload a previously saved ``Digraph`` instance from the file named :code:
 	*--- Connected Components ---*
 	1: ['1', '2', '3', '4', '5']
 
-The :py:func:`digraphs.Digraph.exportGraphViz()` method generates in the current working directory a :code:`tutorial.dot` file and a :code:`tutorialdigraph.png` picture of the tutorial digraph *g*, if the `graphviz <https://graphviz.org/>`_ tools are installed on your system.:
+The :py:func:`digraphs.Digraph.exportGraphViz()` method generates in the current working directory a :code:`tutorial.dot` file and a :code:`tutorialdigraph.png` picture of the tutorial digraph *g*, if the `graphviz <https://graphviz.org/>`_ tools are installed on your system.
+
 	>>> dg.exportGraphViz('tutorialDigraph')
         *---- exporting a dot file do GraphViz tools ---------*
         Exporting to tutorialDigraph.dot
@@ -128,7 +130,8 @@ The :py:func:`digraphs.Digraph.exportGraphViz()` method generates in the current
    :width: 300 px
    :align: center
 
-Some simple methods are easily applicable to this instantiated Digraph object *dg* , like the following :py:func:`digraphs.Digraph.showStatistics()` method:
+Some simple methods are easily applicable to this instantiated Digraph object *dg* , like the following :py:func:`digraphs.Digraph.showStatistics()` method.
+
 	>>> dg.showStatistics()
 	*----- general statistics -------------*
 	for digraph             : <tutorialdigraph.py>
@@ -158,7 +161,8 @@ Some simple methods are easily applicable to this instantiated Digraph object *d
 Special classes
 ...............
 
-Some special classes of digraphs, like the :py:class:`digraphs.CompleteDigraph`, the :py:class:`digraphs.EmptyDigraph` or the oriented :py:class:`digraphs.GridDigraph` class for instance, are readily available:
+Some special classes of digraphs, like the :py:class:`digraphs.CompleteDigraph`, the :py:class:`digraphs.EmptyDigraph` or the oriented :py:class:`digraphs.GridDigraph` class for instance, are readily available.
+
         >>> from digraphs import GridDigraph
 	>>> grid = GridDigraph(n=5,m=5,hasMedianSplitOrientation=True)
 	>>> grid.exportGraphViz('tutorialGrid')
@@ -171,7 +175,7 @@ Some special classes of digraphs, like the :py:class:`digraphs.CompleteDigraph`,
    :align: center
 
 
-For more information about its resources, see the technical documentation of the :ref:`digraphs-label` . 
+For more information about its resources, see the technical documentation of the :ref:`digraphs-label`. 
 
 Back to :ref:`Tutorial-label`
 
@@ -187,12 +191,14 @@ Manipulating ``Digraph`` objects
 Random digraph
 ..............
 
-We are starting this tutorial with generating a randomly [-1;1]-valued (*Normalized=True*) digraph of order 7, denoted *dg* and modelling a binary relation (*x S y*) defined on the set of nodes of *dg*. For this purpose, the ``Digraph3`` collection contains a ``randomDigraphs`` module providing a specific :py:class:`digraphs.RandomValuationDigraph` constructor:
+We are starting this tutorial with generating a randomly [-1;1]-valued (*Normalized=True*) digraph of order 7, denoted *dg* and modelling a binary relation (*x S y*) defined on the set of nodes of *dg*. For this purpose, the ``Digraph3`` collection contains a ``randomDigraphs`` module providing a specific :py:class:`digraphs.RandomValuationDigraph` constructor.
+
     >>> from randomDigraphs import RandomValuationDigraph
     >>> dg = RandomValuationDigraph(order=7,Normalized=True)
     >>> dg.save('tutRandValDigraph')
 
-With the ``save()`` method we may keep a backup version for future use of *dg* which will be stored in a file called *tutRandValDigraph.py* in the current working directory. The ``Digraph`` class now provides some generic methods for exploring a given ``Digraph`` object, like the ``showShort()``, ``showAll()``, ``showRelationTable()`` and the ``showNeighborhoods()`` methods:
+With the ``save()`` method we may keep a backup version for future use of *dg* which will be stored in a file called *tutRandValDigraph.py* in the current working directory. The ``Digraph`` class now provides some generic methods for exploring a given ``Digraph`` object, like the ``showShort()``, ``showAll()``, ``showRelationTable()`` and the ``showNeighborhoods()`` methods.
+
     >>> dg.showShort()
     *----- show summary -------------*
     Digraph          : randomValuationDigraph
@@ -240,7 +246,8 @@ With the ``save()`` method we may keep a backup version for future use of *dg* w
 Graphviz drawings
 .................
 
-We may have an even better insight into the ``Digraph`` object *dg* by looking at a `graphviz <https://graphviz.org/>`_ [1]_ drawing:
+We may have an even better insight into the ``Digraph`` object *dg* by looking at a `graphviz <https://graphviz.org/>`_ [1]_ drawing.
+
     >>> dg.exportGraphViz('tutRandValDigraph')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to tutRandValDigraph.dot
@@ -255,7 +262,8 @@ Double links are drawn in bold black with an arrowhead at each end, whereas sing
 Asymmetric and symmetric parts
 ..............................
 
-We may now extract both this symmetric as well as this asymmetric part of digraph *dg* with the help of two corresponding constructors:
+We may now extract both this symmetric as well as this asymmetric part of digraph *dg* with the help of two corresponding constructors.
+
     >>> from digraphs import AsymmetricPartialDigraph, SymmetricPartialDigraph
     >>> asymDg = AsymmetricPartialDigraph(dg)
     >>> asymDg.exportGraphViz()
@@ -296,7 +304,8 @@ Here below, for illustration the source code of *relation* constructor of the :p
 Fusion by epistemic disjunction
 ...............................
 
-We may recover object *dg* from both partial objects *asymDg* and *symDg* with a **bipolar fusion** constructor, also called **epistemic disjunction**, available via the :py:class:`digraphs.FusionDigraph` class:
+We may recover object *dg* from both partial objects *asymDg* and *symDg* with a **bipolar fusion** constructor, also called **epistemic disjunction**, available via the :py:class:`digraphs.FusionDigraph` class.
+
     >>> from digraphs import FusionDigraph
     >>> fusDg = FusionDigraph(asymDg,symDg)
     >>> fusDg.showRelationTable()
@@ -314,7 +323,8 @@ We may recover object *dg* from both partial objects *asymDg* and *symDg* with a
 Dual, converse and codual digraphs
 ..................................
 
-We may as readily compute the **dual**, the **converse** and the **codual** (dual and converse) of *dg*:
+We may as readily compute the **dual**, the **converse** and the **codual** (dual and converse) of *dg*.
+
     >>> from digraphs import DualDigraph, ConverseDigraph, CoDualDigraph
     >>> ddg = DualDigraph(dg)
     >>> ddg.showRelationTable()
@@ -352,7 +362,8 @@ We may as readily compute the **dual**, the **converse** and the **codual** (dua
     '6'     | -0.38  0.54 -0.84 -0.66  0.22  0.00 -0.04	 
     '7'     | -0.44 -0.02  1.00 -0.76  0.52  0.22  0.00	 
 
-Computing the dual, respectively the converse, may also be done with prefixing the ``__neg__ (-)`` or the ``__invert__`` (~) operator. The codual of a Digraph object may, hence, as well be computed with a **composition** (in either order) of both operations:
+Computing the dual, respectively the converse, may also be done with prefixing the ``__neg__ (-)`` or the ``__invert__`` (~) operator. The codual of a Digraph object may, hence, as well be computed with a **composition** (in either order) of both operations.
+
     >>> ddg = -dg   # dual of dg
     >>> cdg = ~dg   # converse of dg
     >>> cddg = -(~dg) = ~(-dg)  # codual of dg
@@ -371,7 +382,8 @@ Computing the dual, respectively the converse, may also be done with prefixing t
 Symmetric and transitive closures
 .................................
 
-Symmetric and transitive closure in-site constructors are also available. Note that it is a good idea, before going ahead with these in-site operations who irreversibly modify the original *dg* object, to previously make a backup version of *dg*. The simplest storage method, always provided by the generic :py:func:`diggraphs.Digraph.save()`, writes out in a named file the python content of the Digraph object in string representation:
+Symmetric and transitive closure in-site constructors are also available. Note that it is a good idea, before going ahead with these in-site operations who irreversibly modify the original *dg* object, to previously make a backup version of *dg*. The simplest storage method, always provided by the generic :py:func:`diggraphs.Digraph.save()`, writes out in a named file the python content of the Digraph object in string representation.
+
     >>> dg.save('tutRandValDigraph')
     >>> dg.closeSymmetric()
     >>> dg.closeTransitive()
@@ -384,7 +396,8 @@ Symmetric and transitive closure in-site constructors are also available. Note t
 Strong components
 .................
 
-As the original digraph *dg* was connected (see above the result of the ``dg.showShort()`` command), both the symmetric and transitive closures operated together, will necessarily produce a single strong component, i.e. a complete digraph. We may sometimes wish to collapse all strong components in a given digraph and construct the so reduced digraph. Using the :py:class:`digraphs.StrongComponentsCollapsedDigraph` constructor here will render a single hyper-node gathering all the original nodes :
+As the original digraph *dg* was connected (see above the result of the ``dg.showShort()`` command), both the symmetric and transitive closures operated together, will necessarily produce a single strong component, i.e. a complete digraph. We may sometimes wish to collapse all strong components in a given digraph and construct the so reduced digraph. Using the :py:class:`digraphs.StrongComponentsCollapsedDigraph` constructor here will render a single hyper-node gathering all the original nodes.
+
     >>> from digraphs import StrongComponentsCollapsedDigraph
     >>> sc = StrongComponentsCollapsedDigraph(dg)
     >>> sc.showAll()
@@ -408,7 +421,8 @@ As the original digraph *dg* was connected (see above the result of the ``dg.sho
 CSV storage
 ...........
 
-Sometimes it is required to exchange the graph valuation data in CSV format with a statistical package like `R <https://www.r-project.org/>`_. For this purpose it is possible to export the digraph data into a CSV file. The valuation domain is hereby normalized by default to the range [-1,1] and the diagonal put by default to the minimal value -1:
+Sometimes it is required to exchange the graph valuation data in CSV format with a statistical package like `R <https://www.r-project.org/>`_. For this purpose it is possible to export the digraph data into a CSV file. The valuation domain is hereby normalized by default to the range [-1,1] and the diagonal put by default to the minimal value -1.
+
 	>>> dg = Digraph('tutRandValDigraph')
 	>>> dg.saveCSV('tutRandValDigraph')
 	# content of file tutRandValDigraph.csv
@@ -421,7 +435,8 @@ Sometimes it is required to exchange the graph valuation data in CSV format with
 	"6",0.84,0.0,0.4,0.96,0.18,-1.0,0.22
 	"7",-0.88,-0.72,-0.82,-0.52,0.84,-0.04,-1.0
 
-It is possible to reload a Digraph instance from its previously saved CSV file content:
+It is possible to reload a Digraph instance from its previously saved CSV file content.
+
 	>>> dgcsv = CSVDigraph('tutRandValDigraph')
 	>>> dgcsv.showRelationTable(ReflexiveTerms=False)
 	* ---- Relation Table -----
@@ -435,7 +450,8 @@ It is possible to reload a Digraph instance from its previously saved CSV file c
 	'6'    | -0.84  0.00 -0.40 -0.96 -0.18   -   -0.22	 
 	'7'    |  0.88  0.72  0.82  0.52 -0.84  0.04   -
 
-It is as well possible to show a colored version of the valued relation table in a system browser window tab:
+It is as well possible to show a colored version of the valued relation table in a system browser window tab.
+
         >>> dgcsv.showHTMLRelationTable(tableTitle="Tutorial random digraph")
 	>>> ...
 
@@ -448,8 +464,10 @@ Positive arcs are shown in green and negative in red. Indeterminate -zero-valued
 Complete, empty and indeterminate digraphs
 ..........................................
 
-Let us finally mention some special universal classes of digraphs that are readily available in the :py:mod:`digraphs` module, like the :py:class:`digraphs.CompleteDigraph`, the :py:class:`digraphs.EmptyDigraph` and the :py:class:`digraphs.IndeterminateDigraph` classes, which put all characteristic values respectively to the *maximum*, the *minimum* or the median *indeterminate* characteristic value:
-	>>> from digraphs import CompleteDigraph, EmptyDigraph, IndeterminateDigraph
+Let us finally mention some special universal classes of digraphs that are readily available in the :py:mod:`digraphs` module, like the :py:class:`digraphs.CompleteDigraph`, the :py:class:`digraphs.EmptyDigraph` and the :py:class:`digraphs.IndeterminateDigraph` classes, which put all characteristic values respectively to the *maximum*, the *minimum* or the median *indeterminate* characteristic value.
+
+	>>> from digraphs import CompleteDigraph,EmptyDigraph,
+	...			 IndeterminateDigraph
 	>>> help(CompleteDigraph)
 	Help on class CompleteDigraph in module digraphs:
 	class CompleteDigraph(Digraph)
@@ -516,7 +534,6 @@ Let us finally mention some special universal classes of digraphs that are readi
 
 Back to :ref:`Tutorial-label`
 
-
 .. _LinearVoting-Tutorial-label:
 
 Computing the winner of an election
@@ -541,7 +558,8 @@ The :ref:`votingProfiles-label` provides resources for handling election results
     ...
     }
 
-The module provides a :py:class:`votingProfiles.RandomLinearVotingProfile` class for generating random instances of the :py:class:`votingProfiles.LinearVotingProfile` class. In an interactive Python session we may obtain for the election of 3 candidates by 5 voters the following result:
+The module provides a :py:class:`votingProfiles.RandomLinearVotingProfile` class for generating random instances of the :py:class:`votingProfiles.LinearVotingProfile` class. In an interactive Python session we may obtain for the election of 3 candidates by 5 voters the following result.
+
     >>> from votingProfiles import RandomLinearVotingProfile
     >>> v = RandomLinearVotingProfile(numberOfVoters=5,
     ...                               numberOfCandidates=3
@@ -557,7 +575,8 @@ The module provides a :py:class:`votingProfiles.RandomLinearVotingProfile` class
      'v5': ['a2', 'a3', 'a1'], 'v2': ['a3', 'a2', 'a1']}
      >>> ...
 
-Notice that in this random example, the five voters are weighted (see Line 4). Their linear ballots can be viewed with the ``showLinearBallots`` method:
+Notice that in this random example, the five voters are weighted (see Line 4). Their linear ballots can be viewed with the ``showLinearBallots`` method.
+
     >>> v.showLinearBallots()
     voters(weight)	 candidates rankings
     v1(2): 	 ['a2', 'a1', 'a3']
@@ -568,7 +587,8 @@ Notice that in this random example, the five voters are weighted (see Line 4). T
     # voters: 15
     >>> ...
 
-Editing of the linear voting profile may be achieved by storing the data in a file, edit it, and reload it again:
+Editing of the linear voting profile may be achieved by storing the data in a file, edit it, and reload it again.
+
     >>> v.save('tutorialLinearVotingProfile')
     *--- Saving linear profile in file: <tutorialLinearVotingProfile.py> ---*
     >>> v = LinearVotingProfile('tutorialLinearVotingProfile')
@@ -576,19 +596,22 @@ Editing of the linear voting profile may be achieved by storing the data in a fi
 Computing the winner
 ....................
 
-We may easily compute **uni-nominal votes**, i.e. how many times a candidate was ranked first, and see who is consequently the **simple majority** winner(s) in this election. 
+We may easily compute **uni-nominal votes**, i.e. how many times a candidate was ranked first, and see who is consequently the **simple majority** winner(s) in this election.
+
     >>> v.computeUninominalVotes()
     {'a2': 2, 'a1': 6, 'a3': 7}
     >>> v.computeSimpleMajorityWinner()
     ['a3']
     >>> ...
 
-As we observe no absolute majority (8/15) of votes for any of the three candidate, we may look for the **instant runoff** winner instead (see [ADT-L2]_):
+As we observe no absolute majority (8/15) of votes for any of the three candidate, we may look for the **instant runoff** winner instead (see [ADT-L2]_).
+
     >>> v.computeInstantRunoffWinner()
     ['a1']
     >>> ...
 
-We may also follow the *Chevalier de Borda*'s advice and, after a **rank analysis** of the linear ballots, compute the **Borda score** of each candidate and hence determine the **Borda winner(s)**:
+We may also follow the *Chevalier de Borda*'s advice and, after a **rank analysis** of the linear ballots, compute the **Borda score** of each candidate and hence determine the **Borda winner(s)**.
+
     >>> v.computeRankAnalysis()
     {'a2': [2, 5, 8], 'a1': [6, 9, 0], 'a3': [7, 1, 7]}
     >>> v.computeBordaScores()
@@ -596,7 +619,8 @@ We may also follow the *Chevalier de Borda*'s advice and, after a **rank analysi
     >>> v.computeBordaWinners()
     ['a1']
 
-The Borda **rank analysis table** my be printed out with a corresponding ``show`` command:
+The Borda **rank analysis table** my be printed out with a corresponding ``show`` command.
+
     >>> v.showRankAnalysisTable()
     *----  Borda rank analysis tableau -----*
     candi- | alternative-to-rank |      Borda
@@ -610,7 +634,8 @@ The Borda **rank analysis table** my be printed out with a corresponding ``show`
 The Condorcet winner
 ....................
 
-In our randomly generated election results, we are lucky: The instant runoff winner and the Borda winner both are candidate *a1*. However, we could also follow the *Marquis de Condorcet*'s advice, and compute the **majority margins** obtained by voting for each individual pair of candidates. For instance, candidate *a1* is ranked four times before and once behind candidate *a2*. Hence the majority margin *M(a1,a2)* is 4 - 1 = +3. These majority margins define on the set of candidates what we call the **Condorcet digraph**. The :py:class:`votingProfiles.CondorcetDigraph` class (a specialization of the :py:class:`digraphs.Digraph` class) is available for handling such pairwise majority margins:
+In our randomly generated election results, we are lucky: The instant runoff winner and the Borda winner both are candidate *a1*. However, we could also follow the *Marquis de Condorcet*'s advice, and compute the **majority margins** obtained by voting for each individual pair of candidates. For instance, candidate *a1* is ranked four times before and once behind candidate *a2*. Hence the majority margin *M(a1,a2)* is 4 - 1 = +3. These majority margins define on the set of candidates what we call the **Condorcet digraph**. The :py:class:`votingProfiles.CondorcetDigraph` class (a specialization of the :py:class:`digraphs.Digraph` class) is available for handling such pairwise majority margins.
+
     >>> from votingProfiles import CondorcetDigraph
     >>> cdg = CondorcetDigraph(v,hasIntegerValuation=True)
     >>> cdg.showAll()
@@ -629,11 +654,13 @@ In our randomly generated election results, we are lucky: The instant runoff win
         'a3'    |   -1      1     0	 
     Valuation domain: [-15;+15]
 
-A candidate *x*, showing a positive majority margin *M(x,y)*, is beating candidate *y*  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in her row in the Condorcet digraph relation table, beats all other candidates with absolute majority of votes. Condorcet recommends to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate *a1* who is hence the **Condorcet winner**:
+A candidate *x*, showing a positive majority margin *M(x,y)*, is beating candidate *y*  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in her row in the Condorcet digraph relation table, beats all other candidates with absolute majority of votes. Condorcet recommends to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate *a1* who is hence the **Condorcet winner**-
+
     >>> cdg.computeCondorcetWinner()
     ['a1']  
     
-By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic ``Digraph`` class (see :ref:`Digraphs-Tutorial-label`), and especially its ``exportGraphViz`` method [1]_, for visualizing an election result:
+By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic ``Digraph`` class (see :ref:`Digraphs-Tutorial-label`), and especially its ``exportGraphViz`` method [1]_, for visualizing an election result.
+
    >>> cdg.exportGraphViz('tutorialLinearBallots')
    *---- exporting a dot file for GraphViz tools ---------*
    Exporting to tutorialLinearBallots.dot
@@ -646,7 +673,8 @@ By seeing the majority margins like a bipolarly-valued characteristic function f
 Cyclic social preferences
 .........................
 
-Usually, when aggregating linear ballots, there appear cyclic social preferences. Let us consider for instance the following linear voting profile and construct the corresponding Condorcet digraph:
+Usually, when aggregating linear ballots, there appear cyclic social preferences. Let us consider for instance the following linear voting profile and construct the corresponding Condorcet digraph.
+
     >>> v.showLinearBallots()
     voters(weight)	 candidates rankings
     v1(1): 	 ['a1', 'a3', 'a5', 'a2', 'a4']
@@ -669,7 +697,8 @@ Usually, when aggregating linear ballots, there appear cyclic social preferences
     'a4'  |  0.56  -0.11   0.33	   -	  0.11	 
     'a5'  |  0.33   0.11   0.11	 -0.11	   -	 
     
-Now, we cannot find any completely positive row in the relation table. No one of the five candidates is beating all the others with an absolute majority of votes. There is no Condorcet winner anymore. In fact, when looking at a graphviz drawing of this Condorcet digraph, we may observe cyclic preferences, like (*a1* > *a2* > *a3* > *a1*) for instance. 
+Now, we cannot find any completely positive row in the relation table. No one of the five candidates is beating all the others with an absolute majority of votes. There is no Condorcet winner anymore. In fact, when looking at a graphviz drawing of this Condorcet digraph, we may observe cyclic preferences, like (*a1* > *a2* > *a3* > *a1*) for instance.
+
     >>> cdg.exportGraphViz('cycles')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to cycles.dot
@@ -679,7 +708,8 @@ Now, we cannot find any completely positive row in the relation table. No one of
    :width: 200 px
    :align: center
 
-But, there may be many cycles appearing in a digraph, and, we may detect and enumerate all minimal chordless circuits in a Digraph instance with the ``computeChordlessCircuits()`` method:
+But, there may be many cycles appearing in a digraph, and, we may detect and enumerate all minimal chordless circuits in a Digraph instance with the ``computeChordlessCircuits()`` method.
+
     >>> cdg.computeChordlessCircuits()
     [(['a2', 'a3', 'a1'], frozenset({'a2', 'a3', 'a1'})), 
      (['a2', 'a4', 'a5'], frozenset({'a2', 'a5', 'a4'})), 
@@ -705,7 +735,7 @@ See also the technical documentation of the :ref:`outrankingDigraphs-label`.
 Outranking digraph
 ..................
 
-In this *Digraph3* module, the root :py:class:`outrankingDigraphs.OutrankingDigraph` class provides a generic **outranking digraph model**. A given object of this class consists in:
+In this *Digraph3* module, the root :py:class:`outrankingDigraphs.OutrankingDigraph` class provides a generic **outranking digraph model**. A given object of this class consists in
 
 1. a potential set of decision **actions** : a dictionary describing the potential decision actions or alternatives with 'name' and 'comment' attributes,
 2. a coherent family of **criteria**: a dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,
@@ -713,7 +743,8 @@ In this *Digraph3* module, the root :py:class:`outrankingDigraphs.OutrankingDigr
 4. the digraph **valuationdomain**, a dictionary with three entries: the *minimum* (-100, means certainly no link), the *median* (0, means missing information) and the *maximum* characteristic value (+100, means certainly a link),
 5. the **outranking relation** : a double dictionary defined on the Cartesian product of the set of decision alternatives capturing the credibility of the pairwise *outranking situation* computed on the basis of the performance differences observed between couples of decision alternatives on the given family if criteria functions.   
 
-With the help of the :py:class:`outrankingDigraphs.RandomBipolarOutrankingDigraph` class (of type :py:class:`outrankingDigraphs.BipolarOutrankingDigraph`) , let us generate for illustration a random bipolar outranking digraph consisting of 7 decision actions denoted *a01*, *a02*, ..., *a07*:
+With the help of the :py:class:`outrankingDigraphs.RandomBipolarOutrankingDigraph` class (of type :py:class:`outrankingDigraphs.BipolarOutrankingDigraph`) , let us generate for illustration a random bipolar outranking digraph consisting of 7 decision actions denoted *a01*, *a02*, ..., *a07*.
+
        >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
        >>> odg = RandomBipolarOutrankingDigraph()
        >>> odg.showActions()
@@ -731,7 +762,8 @@ With the help of the :py:class:`outrankingDigraphs.RandomBipolarOutrankingDigrap
        comment:    RandomPerformanceTableau() generated.
        >>> ...
 
-In this example we consider furthermore a family of seven equisignificant cardinal criteria functions *g01*, *g02*, ..., *g07*, measuring the performance of each alternative on a rational scale from 0.0 to 100.00. In order to capture the evaluation's uncertainty and imprecision, each criterion function *g1* to *g7* admits three performance discrimination thresholds of 10, 20 and 80 pts for warranting respectively any indifference, preference and veto situations: 
+In this example we consider furthermore a family of seven equisignificant cardinal criteria functions *g01*, *g02*, ..., *g07*, measuring the performance of each alternative on a rational scale from 0.0 to 100.00. In order to capture the evaluation's uncertainty and imprecision, each criterion function *g1* to *g7* admits three performance discrimination thresholds of 10, 20 and 80 pts for warranting respectively any indifference, preference and veto situations.
+
         >>> odg.showCriteria()
 	*----  criteria -----*
 	g01 'digraphs.RandomPerformanceTableau() instance'
@@ -755,7 +787,8 @@ In this example we consider furthermore a family of seven equisignificant cardin
 	  Threshold ind : 10.00 + 0.00x ; percentile:  0.238
 	  Threshold veto : 80.00 + 0.00x ; percentile:  1.0
 
-The performance evaluations of each decision alternative on each criterion are gathered in a *performance tableau*:
+The performance evaluations of each decision alternative on each criterion are gathered in a *performance tableau*.
+
 	>>> odg.showPerformanceTableau()
 	*----  performance tableau -----*
 	criteria |  'a01'   'a02'   'a03'   'a04'   'a05'   'a06'   'a07'   
@@ -772,7 +805,8 @@ The performance evaluations of each decision alternative on each criterion are g
 Browsing the performances
 .........................
 
-We may visualize the same performance tableau in a two-colors setting in the default system browser with the command:
+We may visualize the same performance tableau in a two-colors setting in the default system browser with the command.
+
         >>> odg.showHTMLPerformanceTableau()
         >>> ...
 
@@ -782,7 +816,8 @@ We may visualize the same performance tableau in a two-colors setting in the def
 
 It is worthwhile noticing that *green* and *red* marked evaluations indicate *best*, respectively *worst*, performances of an alternative on a criterion. In this example, we may hence notice that alternative *a03* is in fact best performing on *four* out of *seven* criteria.
 
-We may, furthermore, rank the alternatives on the basis of the weighted marginal quintiles and visualize the same performance tableau in an even more colorful and sorted setting:
+We may, furthermore, rank the alternatives on the basis of the weighted marginal quintiles and visualize the same performance tableau in an even more colorful and sorted setting.
+
         >>> odg.showHTMLPerformanceHeatmap(quantiles=5,colorLevels=5)
         >>> ...
 
@@ -795,12 +830,13 @@ There is no doubt that action *a03*, with a performance in the highest quintile 
 Valuation semantics
 ...................
 
-Considering the given performance tableau, the :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class constructor computes the characteristic value :math:`r(x\,S\,y)` of a pairwise outranking relation ":math:`x\,S\,y`" (see [BIS-2013]_, [ADT-L7]_) in a default valuation domain [-100.0,+100.0] with the median value 0.0 acting as indeterminate characteristic value. The semantics of r(x S y) are the following:
+Considering the given performance tableau, the :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class constructor computes the characteristic value :math:`r(x\,S\,y)` of a pairwise outranking relation ":math:`x\,S\,y`" (see [BIS-2013]_, [ADT-L7]_) in a default valuation domain [-100.0,+100.0] with the median value 0.0 acting as indeterminate characteristic value. The semantics of r(x S y) are the following.
     1. If :math:`r(x\,S\,y) > 0.0` it is more *True* than *False* that *x outranks y*, i.e. alternative x is at least as well performing than alternative y **and** there is no considerable negative performance difference observed in disfavour of x,
     2. If :math:`r(x\,S\,y) < 0.0` it is more *False* than *True* that *x outranks y*, i.e. alternative x is **not** at least as well performing than alternative y **and** there is no considerable positive performance difference observed in favour of x,
     3. If :math:`r(x\,S\,y) = 0.0` it is *indeterminate* whether *x outranks y or not*.
 
-The resulting bipolarly valued outranking relation may be inspected with the following command:
+The resulting bipolarly valued outranking relation may be inspected with the following command.
+
 	>>> odg.showRelationTable()
 	* ---- Relation Table -----
 	r(x S y)|   'a01'   'a02'   'a03'   'a04'   'a05'   'a06'   'a07'   
@@ -818,7 +854,8 @@ The resulting bipolarly valued outranking relation may be inspected with the fol
 Pairwise comparisons
 ....................
 
-From above given semantics, we may consider that *a01* outranks *a02* (:math:`r(a_{01}\,S\,a_{02}) > 0.0`), but not *a03* (:math:`r(a_{01}\,S\,a_{03}) < 0.0`). In order to comprehend the characteristic values shown in the relation table above, we may furthermore have a look at the pairwise multiple criteria comparison between alternatives *a01* and *a02*:
+From above given semantics, we may consider that *a01* outranks *a02* (:math:`r(a_{01}\,S\,a_{02}) > 0.0`), but not *a03* (:math:`r(a_{01}\,S\,a_{03}) < 0.0`). In order to comprehend the characteristic values shown in the relation table above, we may furthermore have a look at the pairwise multiple criteria comparison between alternatives *a01* and *a02*.
+
 	>>> odg.showPairwiseComparison('a01','a02')
 	*------------  pairwise comparison ----*
 	Comparing actions : (a01, a02)
@@ -834,7 +871,8 @@ From above given semantics, we may consider that *a01* outranks *a02* (:math:`r(
 	-----------------------------------------------------------------
 	Valuation in range: -37.00 to +37.00; global concordance: +11.00
 
-The outranking valuation characteristic appears as **majority margin** resulting from the difference of the weights of the criteria in favor of the statement that alternative *a01* is at least well performing as alternative *a02*. No considerable performance difference being observed, no veto or counter-veto situation is triggered in this pairwise comparison. Such a case is, however, observed for instance when we pairwise compare the performances of alternatives *a03* and *a02*:
+The outranking valuation characteristic appears as **majority margin** resulting from the difference of the weights of the criteria in favor of the statement that alternative *a01* is at least well performing as alternative *a02*. No considerable performance difference being observed, no veto or counter-veto situation is triggered in this pairwise comparison. Such a case is, however, observed for instance when we pairwise compare the performances of alternatives *a03* and *a02*.
+
 	>>> odg.showPairwiseComparison('a03','a02')
 	*------------  pairwise comparison ----*
 	Comparing actions : (a03, a02)
@@ -856,7 +894,8 @@ This time, we observe a considerable out-performance of *a03* against *a02* on c
 Recoding the valuation
 ......................
 
-All outranking digraphs, being of root type :py:class:`digraphs.Digraph`, inherit the methods available under this class. The characteristic valuation domain of an outranking digraph may be recoded with the :py:func:`digraphs.Digraph.recodeValutaion()` method below to the integer range [-37,+37], i.e. plus or minus the global significance of the family of criteria considered in this example instance:
+All outranking digraphs, being of root type :py:class:`digraphs.Digraph`, inherit the methods available under this class. The characteristic valuation domain of an outranking digraph may be recoded with the :py:func:`digraphs.Digraph.recodeValutaion()` method below to the integer range [-37,+37], i.e. plus or minus the global significance of the family of criteria considered in this example instance.
+
 	>>> odg.recodeValuation(-37,+37)
 	>>> odg.valuationdomain['hasIntegerValuation'] = True
 	>>> Digraph.showRelationTable(odg)
@@ -882,7 +921,8 @@ All outranking digraphs, being of root type :py:class:`digraphs.Digraph`, inheri
 Codual digraph
 ..............
 
-From the theory (see [BIS-2013]_, [ADT-L7]_ )  we know that the bipolarly outranking relation is **weakly complete**, i.e. if :math:`r(x\,S\,y) < 0.0` then :math:`r(y\,S\,x) >= 0.0` . From this property follows that the bipolarly valued outranking relation verifies the coduality principle: the dual (-) of the converse (~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing [1]_: 
+From the theory (see [BIS-2013]_, [ADT-L7]_ )  we know that the bipolarly outranking relation is **weakly complete**, i.e. if :math:`r(x\,S\,y) < 0.0` then :math:`r(y\,S\,x) >= 0.0` . From this property follows that the bipolarly valued outranking relation verifies the coduality principle: the dual (-) of the converse (~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing [1]_.
+
 	>>> cdodg = -(~odg)
 	>>> cdodg.exportGraphViz('codualOdg')
 	*---- exporting a dot file for GraphViz tools ---------*
@@ -899,13 +939,15 @@ It becomes readily clear now from the picture above that alternative *a03* stric
 XMCDA 2.0
 .........
 
-As with all Digraph instances, it is possible to store permanently a copy of the outranking digraph *odg*. As its outranking relation is automatically generated by the :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class constructor on the basis of a given performance tableau, it is sufficient to save only the latter. For this purpose we are using the `XMCDA 2.00 <https://www.decision-deck.org/xmcda/>`_ XML encoding scheme of MCDA data, as provided by the Decision Deck Project (see https://www.decision-deck.org/):
+As with all Digraph instances, it is possible to store permanently a copy of the outranking digraph *odg*. As its outranking relation is automatically generated by the :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class constructor on the basis of a given performance tableau, it is sufficient to save only the latter. For this purpose we are using the `XMCDA 2.00 <https://www.decision-deck.org/xmcda/>`_ XML encoding scheme of MCDA data, as provided by the Decision Deck Project (see https://www.decision-deck.org/).
+
 	>>> PerformanceTableau.saveXMCDA2(odg,'tutorialPerfTab')
 	*----- saving performance tableau in XMCDA 2.0 format  -------------*
 	File: tutorialPerfTab.xml saved !
 	>>> ...
 
-The resulting XML file my be visualized in a browser window (other than Chrome or Chromium)  with a corresponding XMCDA style sheet (`see here <_static/tutorialPerfTab.xml>`_). Hitting ``Ctrl U`` in Firefox will open a browser window showing the underlying xml encoded raw text. It is thus possible to easily edit and update as needed a given performance tableau instance. Reinstantiating again a corresponding updated *odg* object goes like follow:
+The resulting XML file my be visualized in a browser window (other than Chrome or Chromium)  with a corresponding XMCDA style sheet (`see here <_static/tutorialPerfTab.xml>`_). Hitting ``Ctrl U`` in Firefox will open a browser window showing the underlying xml encoded raw text. It is thus possible to easily edit and update as needed a given performance tableau instance. Reinstantiating again a corresponding updated *odg* object goes like follow.
+
         >>> pt = XMCDA2PerformanceTableau('tutorialPerfTab') 
         >>> odg = BipolarOutrankingDigraph(pt)
 	>>> odg.showRelationTable()
@@ -971,7 +1013,7 @@ The :py:mod:`randomPerfTabs` module provides several constructors for random per
 Generating standard random performance tableaux 
 ...............................................
     
-The :py:class:`randomPerfTabs.RandomPerformanceTableau` class, the simplest of the kind, specializes the generic :py:class:`refTabs.PerformanceTableau` class, and takes the following parameters:
+The :py:class:`randomPerfTabs.RandomPerformanceTableau` class, the simplest of the kind, specializes the generic :py:class:`refTabs.PerformanceTableau` class, and takes the following parameters.
     * numberOfActions := nbr of decision actions.
     * numberOfCriteria := number performance criteria.
     * weightDistribution := 'random' (default) | 'fixed' | 'equisignificant'.
@@ -991,7 +1033,8 @@ The :py:class:`randomPerfTabs.RandomPerformanceTableau` class, the simplest of t
          | ('beta',None,(alpha,beta)), a beta generator with standard alpha=2 and beta=2 parameters.
     * valueDigits := <integer>, precision of performance measurements (2 decimal digits by default).
         
-Code example:
+Code example.
+
         >>> from randomPerfTabs import RandomPerformanceTableau
         >>> t = RandomPerformanceTableau(numberOfActions=3,numberOfCriteria=1,seed=100)
         >>> t.actions
@@ -1038,7 +1081,8 @@ We provide the :py:class:`randomPerfTabs.RandomCBPerformanceTableau` class for g
 
     Minimal number of decision actions required is 3 ! 
 
-**Example Python session**:
+Example Python session
+
     >>> from randomPerfTabs import RandomCBPerformanceTableau
     >>> t = RandomCBPerformanceTableau(
     ...          numberOfActions=7,
@@ -1071,7 +1115,7 @@ We provide the :py:class:`randomPerfTabs.RandomCBPerformanceTableau` class for g
       Threshold veto : 73.19 + 0.00x ; percentile:  0.952
     ...
 
-In the example above, we may notice the three types of decision actions (Lines 10-19), as well as the two types (Lines 22-25) of criteria with either an **ordinal** or a **cardinal** performance measuring scale. In the latter case, by default about 5% of the random performance differences will be below the **indifference** and 10% below the **preference discriminating threshold**. About 5% will be considered as **considerably large**. More statistics about the generated performances is available as follows:
+In the example above, we may notice the three types of decision actions (Lines 10-19), as well as the two types (Lines 22-25) of criteria with either an **ordinal** or a **cardinal** performance measuring scale. In the latter case, by default about 5% of the random performance differences will be below the **indifference** and 10% below the **preference discriminating threshold**. About 5% will be considered as **considerably large**. More statistics about the generated performances is available as follows.
 
     >>> t.showStatistics()
     *-------- Performance tableau summary statistics -------*
@@ -1105,7 +1149,7 @@ In the example above, we may notice the three types of decision actions (Lines 1
       standard difference deviation : 39.02
     ...
 
-A (potentially ranked) colored heat map with 5 color levels is also provided:
+A (potentially ranked) colored heat map with 5 color levels is also provided.
     
     >>> t.showHTMLPerformanceHeatmap(colorLevels=5,Ranked=False)
 
@@ -1113,7 +1157,8 @@ A (potentially ranked) colored heat map with 5 color levels is also provided:
    :width: 500 px
    :align: center
 
-Such a performance tableau may be stored and re-accessed in the XMCDA2 encoded format:
+Such a performance tableau may be stored and re-accessed in the XMCDA2 encoded format.
+
     >>> t.saveXMCDA2('temp')
     *----- saving performance tableau in XMCDA 2.0 format  -------------*
     File: temp.xml saved !
@@ -1121,7 +1166,8 @@ Such a performance tableau may be stored and re-accessed in the XMCDA2 encoded f
     >>> t = XMCDA2PerformanceTableau('temp')
     >>> ...
 
-If needed for instance in an R session, a CSV version of the performance tableau may be created as follows:
+If needed for instance in an R session, a CSV version of the performance tableau may be created as follows.
+
     >>> t.saveCSV('temp')
     * --- Storing performance tableau in CSV format in file temp.csv
     ...$ less temp.csv
@@ -1165,7 +1211,8 @@ Generator directives are the following:
 
     Minimal number of decision actions required is 3 ! 
 
-**Example Python session**:
+Example Python session
+
     >>> from randomPerfTabs import Random3ObjectivesPerformanceTableau
     >>> t = Random3ObjectivesPerformanceTableau(
               numberOfActions=31,
@@ -1213,7 +1260,7 @@ In the example code above, we notice that 5 *equisignificant* criteria (g06, g07
 
 Variable triangular modes (0.3, 0.5 or 0.7 of the span of the measure scale) for each objective result in different performance status for each decision action with respect to the three objectives. Action *a01* , for instance, will probably show *good* performances wrt the *economical*  and environmental aspects, and *weak* performances wrt the *societal* aspect.
 
-For testing purposes we provifde a special :py:class:`perfTabs.PartialPerformanceTableau` class for extracting a **partial performance tableau** from a given tableau instance. In the example blow, we construct the partial performance tableaux corresponding to each on of the three decision objectives:
+For testing purposes we provifde a special :py:class:`perfTabs.PartialPerformanceTableau` class for extracting a **partial performance tableau** from a given tableau instance. In the example blow, we construct the partial performance tableaux corresponding to each on of the three decision objectives.
 
     >>> from perfTabs import PartialPerformanceTableau
     >>> teco = PartialPerformanceTableau(t,criteriaSubset=\
@@ -1223,14 +1270,15 @@ For testing purposes we provifde a special :py:class:`perfTabs.PartialPerformanc
     >>> tenv = PartialPerformanceTableau(t,criteriaSubset=\
                               t.objectives['Env']['criteria'])
 
-One may thus compute a partial bipolar outranking digraph for each individual objective:
+One may thus compute a partial bipolar outranking digraph for each individual objective.
 
     >>> from outrankingDigraphs import BipolarOutrankingDigraph
     >>> geco = BipolarOutrankingDigraph(teco)
     >>> gsoc = BipolarOutrankingDigraph(tsoc)
     >>> genv = BipolarOutrankingDigraph(tenv)
 
-The three partial digraphs: *geco*, *gsoc* and *genv*,  hence model the preferences represented in each one of the partial performance tableaux. And, we may aggregate these three outranking digraphs with an epistemic fusion operator:
+The three partial digraphs: *geco*, *gsoc* and *genv*,  hence model the preferences represented in each one of the partial performance tableaux. And, we may aggregate these three outranking digraphs with an epistemic fusion operator.
+
     >>> from digraphs import FusionLDigraph
     >>> gfus = FusionLDigraph([geco,gsoc,genv])
     >>> gfus.strongComponents()
@@ -1260,7 +1308,8 @@ The three partial digraphs: *geco*, *gsoc* and *genv*,  hence model the preferen
       name:       _a26_
       comment:    collapsed strong component
 
-A graphviz drawing illustrates the apparent preferential links between the strong components:
+A graphviz drawing illustrates the apparent preferential links between the strong components.
+
     >>> scc.exportGraphViz('scFusionObjectives')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to scFusionObjectives.dot
@@ -1308,7 +1357,7 @@ See also the lecture 7 notes from the MICS Algorithmic Decision Theory course: [
 What site to choose ?
 ...................................
 
-A SME, specialized in printing and copy services, has to move into new offices, and its CEO has gathered seven **potential office sites**:
+A SME, specialized in printing and copy services, has to move into new offices, and its CEO has gathered seven **potential office sites**.
 
   ====================== ==== ==================================================
    address                ID   Comment
@@ -1327,7 +1376,7 @@ Three **decision objectives** are guiding the CEO's choice:
       2. *maximize* the future turnover of the SME,
       3. *maximize* the new working conditions.
 
-The decision consequences to take into account for evaluating the potential new office sites with respect to each of the three objectives are modelled by the following **family of criteria**:
+The decision consequences to take into account for evaluating the potential new office sites with respect to each of the three objectives are modelled by the following **family of criteria**.
 
    ==================== ==== ============ =========================================
     Objective            ID   Name         Comment
@@ -1343,7 +1392,8 @@ The decision consequences to take into account for evaluating the potential new 
     Working conditions   P    Parking      Available parking facilities
    ==================== ==== ============ =========================================
 
-The evaluation of the seven potential sites on each criterion are gathered in the following **performance tableau**:
+The evaluation of the seven potential sites on each criterion are gathered in the following **performance tableau**.
+
    ============= ======== ======== ======== ======== ======== ======== ======== ======== 
     Criterion     weight   A        B        C        D        E         F         G
    ============= ======== ======== ======== ======== ======== ======== ======== ========
@@ -1374,6 +1424,7 @@ The XMCDA 2.0 encoded version of this performance tableau is available for downl
    .. _officeChoice.xml: _static/officeChoice.xml
 
 We may inspect the performance tableau data with the computing resources provided by the :ref:`perfTabs-label` module.
+
     >>> from perfTabs import *
     >>> t = XMCDA2PerformanceTableau('officeChoice')
     >>> help(t) # for discovering all the methods available
@@ -1389,7 +1440,8 @@ We may inspect the performance tableau data with the computing resources provide
     'V'      |    1.00   |     60.00     80.00    70.00     50.00     60.00      0.00    100.00  
     'W'      |    1.00   |     75.00     30.00     0.00     55.00    100.00      0.00     50.00  
 
-We thus recover all the input data. To measure the actual preference discrimination we observe on each criterion, we may use the ``showCriteria`` method:
+We thus recover all the input data. To measure the actual preference discrimination we observe on each criterion, we may use the ``showCriteria`` method.
+
     >>> t.showCriteria()
     *----  criteria -----*
     C 'Costs'
@@ -1407,7 +1459,8 @@ We thus recover all the input data. To measure the actual preference discriminat
 
 On the *Costs* criterion, 9.5% of the performance differences are considered insignificant and 14.3% below the preference discrimination threshold (lines 6-7). On the qualitative *Comfort* criterion, we observe again 9.5% of insignificant performance differences (line 11). Due to the imprecision in the subjective grading, we notice here 28.6% of performance differences below the preference discrimination threshold (line 12). Furthermore, 100.0 - 90.5 = 9.5% of the performance differences are judged *considerably large* (line 13); 80% and more of satisfaction differences triggering in fact a veto situation. Same information is available for all the other criteria. 
  
-A colorful comparison of all the performances is shown by the **heat map** statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a classification into performance quintiles:
+A colorful comparison of all the performances is shown by the **heat map** statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a classification into performance quintiles.
+
     >>> t.showHTMLPerformanceHeatmap(colorLevels=5)
 
 .. image:: officeChoiceHeatmap.png
@@ -1425,7 +1478,8 @@ To help now the CEO choosing the best site, we are going to compute pairwise out
 
 The credibility of each pairwise outranking situation (see [BIS-2013]_), denoted r(*x* S *y*), is measured in a bipolar significance valuation [-100.00, 100.00], where **positive** terms r(*x* S *y*) > 0.0 indicate a **validated**, and **negative** terms r(*x* S *y*) < 0.0 indicate a **non-validated** outrankings; whereas the **median** value r(*x* S *y*) = 0.0 represents an **indeterminate** situation.   
 
-For computing such a bipolar valued outranking digraph from the given performance tableau *t*, we use the ``BipolarOutrankingDigraph`` constructor from the :ref:`outrankingDigraphs-label` module. The ``Digraph.showHTMLRelationTable`` method shows here the resulting bipolar-valued adjacency matrix in a system browser window:
+For computing such a bipolar valued outranking digraph from the given performance tableau *t*, we use the ``BipolarOutrankingDigraph`` constructor from the :ref:`outrankingDigraphs-label` module. The ``Digraph.showHTMLRelationTable`` method shows here the resulting bipolar-valued adjacency matrix in a system browser window.
+
     >>> from outrankingDigraphs import BipolarOutrankingDigraph
     >>> g = BipolarOutrankingDigraph(t)
     >>> g.showHTMLRelationTable()
@@ -1434,13 +1488,15 @@ For computing such a bipolar valued outranking digraph from the given performanc
    :width: 400 px
    :align: center
 
-We may notice that Alternative *D* is **positively outranking** all other potential office sites (a *Condorcet winner*). Yet, alternatives *A* (the most expensive) and *C* (the cheapest) are *not* outranked by any other site; they are in fact **weak** *Condorcet winners*.  
+We may notice that Alternative *D* is **positively outranking** all other potential office sites (a *Condorcet winner*). Yet, alternatives *A* (the most expensive) and *C* (the cheapest) are *not* outranked by any other site; they are in fact **weak** *Condorcet winners*.
+
     >>> g.condorcetWinners()
     ['D']
     >>> g.weakCondorcetWinners()
     ['A', 'C', 'D']
 
-We may get even more insight in the apparent outranking situations when looking at the Condorcet digraph:
+We may get even more insight in the apparent outranking situations when looking at the Condorcet digraph.
+
     >>> g.exportGraphViz('officeChoice')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to officeChoice.dot
@@ -1450,7 +1506,8 @@ We may get even more insight in the apparent outranking situations when looking 
    :width: 300 px
    :align: center
 
-One may check that the outranking digraph *g* does not admit in fact a cyclic strict preference situation:
+One may check that the outranking digraph *g* does not admit in fact a cyclic strict preference situation.
+
     >>> g.computeChordlessCircuits()
     []
     >>> g.showChordlessCircuits()
@@ -1458,12 +1515,11 @@ One may check that the outranking digraph *g* does not admit in fact a cyclic st
     *---- Chordless circuits ----*
     0 circuits.
 
-
-
 Rubis best choice
 .................
 
-Following the Rubis outranking method (see [BIS-2008]_), potential best choice recommendations are determined by the outranking pre-kernels (weakly independent and strictly outranking choices) of the chordless odd circuits augmented outranking digraph. As we observe no circuits here, we may directly compute the pre-kernels of *g*:
+Following the Rubis outranking method (see [BIS-2008]_), potential best choice recommendations are determined by the outranking pre-kernels (weakly independent and strictly outranking choices) of the chordless odd circuits augmented outranking digraph. As we observe no circuits here, we may directly compute the pre-kernels of *g*.
+
     >>> g.showPreKernels()
     *--- Computing preKernels ---*
     Dominant preKernels :
@@ -1500,7 +1556,8 @@ Following the Rubis outranking method (see [BIS-2008]_), potential best choice r
     Execution time  : 0.00018 sec.
     Results in sets: dompreKernels and abspreKernels.
 
-We notice three potential best choice recommendations: the Condorcet winner *D* (line 4), the triplet *B*, *C* and *E* (line 9), and finally the pair *A* and *G* (line 14). The Rubis best choice recommendation is given by the **most determined** pre-kernel; the one supported by the most significant criteria coalition. This result is shown with the following command:
+We notice three potential best choice recommendations: the Condorcet winner *D* (line 4), the triplet *B*, *C* and *E* (line 9), and finally the pair *A* and *G* (line 14). The Rubis best choice recommendation is given by the **most determined** pre-kernel; the one supported by the most significant criteria coalition. This result is shown with the following command-
+
     >>> g.showRubisBestChoiceRecommendation(CoDual=False)
     ***********************
     * --- Rubis best choice recommendation(s) (BCR) ---*
@@ -1549,24 +1606,26 @@ We notice three potential best choice recommendations: the Condorcet winner *D* 
 
 We notice in line 7 above that the most significantly supported best choice recommendation is indeed the Condorcet winner *D* with a majority of 56% of the criteria significance (see line 13). Both other recommendation candidates, as well as the worst choice candidate are not positively validated as best choices. They may or may not be considered so. Alternative *A*, with extreme contradictory performances, appears both, in a best and a worst choice recommendation (see lines 27 and 37) and seams hence not actually comparable to its competitors.
 
-The same Rubis best choice recommendation, encoded in XMCDA 2.0 and presented in the default system browser, is provided by the :py:mod:`xmcda` module. In a python3 session working in the directory where the XMCDA encoded problem data is stored, we may proceed as follows:
+The same Rubis best choice recommendation, encoded in XMCDA 2.0 and presented in the default system browser, is provided by the :py:mod:`xmcda` module. In a python3 session working in the directory where the XMCDA encoded problem data is stored, we may proceed as follows.
+
     >>> import xmcda
     >>> xmcda.showXMCDARubisBestChoiveRecommendation(\
                                prolemFileName='officeChoice',\
                                valuationType='bipolar')
 
-and, in a system browser window, browse the `solution file`_.
+And, in a system browser window, browse the `solution file`_.
 
    .. _solution file: _static/officeChoice.xml1BYyGVwV866hSNZoSolution.html
 
- The :code:`valuationType` parameter allows to work:
+The :code:`valuationType` parameter allows to work:
     - on the standard bipolar outranking digraph (valuationType = 'bipolar', default),
     - on the normalized --[-1,1] valued-- bipolar outranking digraph (valuationType = 'normalized'),
     - on the robust --ordinal criteria weights-- bipolar outranking digraph (valuationType = 'robust'),
     - on the confident outranking digraph (valuationType = 'confident'),
     - ignoring considerable performances differences (valuationType = 'noVeto').
 
-One may as well use the Rubis XMCDA 2.0 Web services available at the Leopold-Loewenheim Apache Server of the University of Luxembourg:
+One may as well use the Rubis XMCDA 2.0 Web services available at the Leopold-Loewenheim Apache Server of the University of Luxembourg,
+
     >>> from outrankingDigraphs import RubisRestServer
     >>> solver = RubisRestServer()
     >>> solver.ping()
@@ -1578,16 +1637,18 @@ One may as well use the Rubis XMCDA 2.0 Web services available at the Leopold-Lo
     * November 2013, version REST/D4 1.1            *
     *************************************************
 
-We may submit the given performance tableau:
+We may submit the given performance tableau.
+
     >>> t = XMCDA2PerformanceTableau('officeChoice')
     >>> solver.submitProblem(t)
     The problem submission was successful !
     Server ticket: 1BYyGVwV866hSNZo
 
-With the given ticket, saved in a text file in the working directory, we may request from the Rubis solver the corresponding best choice recommendation:
+With the given ticket, saved in a text file in the working directory, we may request from the Rubis solver the corresponding best choice recommendation.
+
     >>> solver.showSolution()
 
-and, in a system browser window, browse again the `solution file`_.
+And, in a system browser window, browse again the `solution file`_.
 
 Here, we find confirmed again that alternative *D*, indeed, appears to be the most significant best choice candidate. 
 
@@ -1596,7 +1657,8 @@ Yet, what about alternative *G*, the other good compromise best choice we have n
 Strictly best choice
 ....................
 
-When comparing the performances of alternatives *D* and *G* on a pairwise perspective, we notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D* ( r(*G* outranks *D*) = 100.0). 
+When comparing the performances of alternatives *D* and *G* on a pairwise perspective, we notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D* ( r(*G* outranks *D*) = 100.0).
+
     >>> g.showPairwiseComparison('G','D')
     *------------  pairwise comparison ----*
     Comparing actions : (G, D)
@@ -1612,7 +1674,8 @@ When comparing the performances of alternatives *D* and *G* on a pairwise perspe
     ---------------------------------------------------------------------
     Valuation in range: -9.00 to +9.00; global concordance: +9.00
 
-However, we must as well notice that the cheapest alternative *C* is in fact **strictly outranking** alternative *G*:
+However, we must as well notice that the cheapest alternative *C* is in fact **strictly outranking** alternative *G*.
+
     >>> g.showPairwiseComparison('C','G')
     *------------  pairwise comparison ----*
     Comparing actions : (C, G)/(G, C)
@@ -1629,7 +1692,8 @@ However, we must as well notice that the cheapest alternative *C* is in fact **s
     Valuation in range: -9.00 to +9.00; global concordance: +1.00/-1.00
 
 
-To model these *strict outranking* situations, we may compute the Rubis best choice recommendation on the **codual**, the converse (~) of the dual (-), of the outranking digraph instance *g* (see [BIS-2013]_), as follows: 
+To model these *strict outranking* situations, we may compute the Rubis best choice recommendation on the **codual**, the converse (~) of the dual (-), of the outranking digraph instance *g* (see [BIS-2013]_), as follows.
+
     >>> g.showRubisBestChoiceRecommendation(CoDual=True,ChoiceVector=True)
     * --- Rubis best choice recommendation(s) ---*
     (in decreasing order of determinateness)   
@@ -1664,7 +1728,8 @@ We may also notice (see line 17 and line 21) that both alternatives *A* and *F* 
 Weakly ordering
 ...............
 
-To get a more complete insight in the overall strict outranking situations, we may use the :py:class:`weakOrders.RankingByChoosingDigraph` constructor imported from the :ref:`weakOrders-label` module, for computing a **ranking-by-choosing** result from the strict outranking digraph instance *gcd*:
+To get a more complete insight in the overall strict outranking situations, we may use the :py:class:`weakOrders.RankingByChoosingDigraph` constructor imported from the :ref:`weakOrders-label` module, for computing a **ranking-by-choosing** result from the strict outranking digraph instance *gcd*.
+
     >>> from weakOrders import RankingByChoosingDigraph
     >>> rbc = RankingByChoosingDigraph(gcd)
     Threading ...  ## multiprocessing if 2 cores are available
@@ -1715,7 +1780,7 @@ We need to rank without ties a set *X* of items (usually decision alternatives) 
 
 Unfortunately, the Condorcet digraph, associated with such a given outranking digraph, presents only exceptionally a linear ordering. Usually, pairwise majority comparisons do not render even a complete or, at least, a transitive partial outranking relation. 
 
-Let us consider a didactic outranking digraph generated from a random Cost-Benefit performance tableau concerning 9 decision alternatives evaluated on 13 performance criteria::
+Let us consider a didactic outranking digraph generated from a random Cost-Benefit performance tableau concerning 9 decision alternatives evaluated on 13 performance criteria.
 
     >>> from outrankingDigraphs import *
     >>> t = RandomCBPerformanceTableau(numberOfActions=9,
@@ -1735,7 +1800,7 @@ Let us consider a didactic outranking digraph generated from a random Cost-Benef
     'a8' |   -0.07  +0.33  -0.24  +0.10  +0.05  +0.29  +0.00   -     -0.02  
     'a9' |   +0.00  +0.00  -1.00  -0.10  +1.00  +0.33  +1.00  +0.02   -  
 
-Some ranking rules will work on the associated Condorcet digraph, i.e. the strict median cut polarised digraph::
+Some ranking rules will work on the associated Condorcet digraph, i.e. the strict median cut polarised digraph.
 
     >>> c = PolarisedOutrankingDigraph(g,level=0,KeepValues=False,
     ...                                StrictCut=True)
@@ -1753,7 +1818,7 @@ Some ranking rules will work on the associated Condorcet digraph, i.e. the stric
     'a8' |   -1   +1   -1   +1   +1   +1    0    -   -1  
     'a9' |    0    0   -1   -1   +1   +1   +1   +1    -  
 
-To estimate how difficult this ranking problem may be, we can have a look at the corresponding *strict* outranking digraph graphviz drawing::
+To estimate how difficult this ranking problem may be, we can have a look at the corresponding *strict* outranking digraph graphviz drawing.
 
     >>> gcd = ~(-g) # converse of the negation of g
     >>> gcd.exportGraphViz('rankingTutorial')
@@ -1765,12 +1830,12 @@ To estimate how difficult this ranking problem may be, we can have a look at the
    :width: 400 px
    :align: center
 
-The shown strict outranking relation is apparently not transitive: for instance, alternative *a9* outranks alternative *a5* and alternative *a5* outranks *a2*, however *a9* does not outrank *a2*. We may compute the transitivity degree of the outranking digraph, ie the ratio of the number of outranking arcs over the number of arcs of the transitive closue of the digraph *gcd*::
+The shown strict outranking relation is apparently not transitive: for instance, alternative *a9* outranks alternative *a5* and alternative *a5* outranks *a2*, however *a9* does not outrank *a2*. We may compute the transitivity degree of the outranking digraph, ie the ratio of the number of outranking arcs over the number of arcs of the transitive closue of the digraph *gcd*.
 
     >>> gcd.computeTransitivityDegree()
     Decimal('0.508')
     
-The outranking relation is hence very far from being transitive; a serious problem when a linear ordering of the decision alternatives is looked for. Let us furthermore see if there are any cyclic outrankings::
+The outranking relation is hence very far from being transitive; a serious problem when a linear ordering of the decision alternatives is looked for. Let us furthermore see if there are any cyclic outrankings.
     
     >>> len(gcd.computeChordlessCircuits())
     1
@@ -1788,7 +1853,7 @@ The Digraph3 resources provide some of the most common of these ranking rules, l
 The Copeland ranking
 ....................
 
-Copeland's rule, the most intuitive one as it works well for any outranking relation which models in fact a linear order, computes for each alternative a score  resulting from the difference between its crisp out-degree (number of validated (+1) crisp outranking situations) and its crisp in-degree (number of validated crisp (+1) outranked situations)::
+Copeland's rule, the most intuitive one as it works well for any outranking relation which models in fact a linear order, computes for each alternative a score  resulting from the difference between its crisp out-degree (number of validated (+1) crisp outranking situations) and its crisp in-degree (number of validated crisp (+1) outranked situations).
 
     >>> from linearOrders import CopelandOrder
     >>> cop = CopelandOrder(g,Debug=True)
@@ -1809,7 +1874,7 @@ Alternative *a3* has the best score (+7), followed by alternative *a1* (+3). Alt
 
 Notice by the way that Copeland scores, as computed in the associated Condorcet relation table or similarly in the codual digraph drawing above, are in fact invariant under a codual - converse of the negation ~(-g) - transform of the outranking digraph. 
 
-Copeland's rule actually renders a linear order which is indeed highly correlated, in the ordinal Kendall sense (see [BIS-2012]_), with the given pairwise outranking relation::
+Copeland's rule actually renders a linear order which is indeed highly correlated, in the ordinal Kendall sense (see [BIS-2012]_), with the given pairwise outranking relation.
 
     >>> corr = g.computeOrdinalCorrelation(cop)
     >>> print("Fitness of Copeland's ranking: %.3f" % corr['correlation'])
@@ -1818,7 +1883,7 @@ Copeland's rule actually renders a linear order which is indeed highly correlate
 The Net-Flows ranking
 .....................
 
-The valued version of the Copeland rule, called **Net-Flows** rule, is working directly on the given valued outranking digraph *g*. For each alternative *x* we compute a net flow score that is the sum of the differences between the **outranking** characteristics :math:`r(x\,S\,y)` and the **outranked** characteristics r(*y* S *x*) for all pairs of alternatives where *y* is different from *x*::
+The valued version of the Copeland rule, called **Net-Flows** rule, is working directly on the given valued outranking digraph *g*. For each alternative *x* we compute a net flow score that is the sum of the differences between the **outranking** characteristics :math:`r(x\,S\,y)` and the **outranked** characteristics r(*y* S *x*) for all pairs of alternatives where *y* is different from *x*.
   
     >>> from linearOrders import NetFlowsOrder
     >>> nf = NetFlowsOrder(g)
@@ -1845,7 +1910,7 @@ To appreciate the effective quality of both the Copeland and the Net-Flows ranki
 Kemeny rankings
 ...............
 
-A **Kemeny** ranking is a linear order which is closest, in the sense of the ordinal Kendall distance (see [BIS-2012]_), to the given valued outranking digraph *g*::
+A **Kemeny** ranking is a linear order which is closest, in the sense of the ordinal Kendall distance (see [BIS-2012]_), to the given valued outranking digraph *g*.
 
     >>> from linearOrders import KemenyOrder
     >>> ke = KemenyOrder(g,orderLimit=9) # default orderLimit is 7
@@ -1855,7 +1920,7 @@ A **Kemeny** ranking is a linear order which is closest, in the sense of the ord
     >>> print("Fitness of Kemeny's ranking: %.3f" % corr['correlation'])
     Fitness of Kemeny's ranking: 0.9175
 
-So, **+0.9175** is the highest possible ordinal correlation (fitness) any potential ranking can achieve with the given pairwise outranking relation. A Kemeny ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In our example we hence obtain seven optimal Kemeny rankings with a same maximal Kemeny index of 15.095::
+So, **+0.9175** is the highest possible ordinal correlation (fitness) any potential ranking can achieve with the given pairwise outranking relation. A Kemeny ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In our example we hence obtain seven optimal Kemeny rankings with a same maximal Kemeny index of 15.095.
 
     >>> ke.maximalRankings
     [['a1', 'a3', 'a4', 'a9', 'a5', 'a8', 'a2', 'a6', 'a7'], 
@@ -1868,7 +1933,7 @@ So, **+0.9175** is the highest possible ordinal correlation (fitness) any potent
     >>> ke.maxKemenyIndex
     Decimal('15.095')
 
-We may visualize the partial order defined by the epistemic disjunction of these seven Kemeny rankings (see `weakOrders module <techDoc.html#module-weakOrders>`_) as follows::
+We may visualize the partial order defined by the epistemic disjunction of these seven Kemeny rankings (see `weakOrders module <techDoc.html#module-weakOrders>`_) as follows.
 
     >>> from weakOrders import KemenyWeakOrder
     >>> wke = KemenyWeakOrder(g,orderLimit=9)
@@ -1893,7 +1958,7 @@ It is interesting to notice that all seven Kemeny rankings place alternative *a1
 Slater rankings
 ...............
 
-The **Slater** ranking rule is similar to Kemeny's, but it is working, instead,  on the associated crisp Condorcet digraph *c*. It renders here the following results::
+The **Slater** ranking rule is similar to Kemeny's, but it is working, instead,  on the associated crisp Condorcet digraph *c*. It renders here the following results.
 
     >>> sl = KemenyOrder(c,orderLimit=9)
     >>> len(sl.maximalRankings)
@@ -1906,7 +1971,7 @@ The **Slater** ranking rule is similar to Kemeny's, but it is working, instead, 
     >>> slw = KemenyWeakOrder(c,orderLimit=9)
     >>> slw.exportGraphViz('tutorialSlater')
 
-We notice that the first crisp Slater ranking is a rather good fit (+0.844), better apparently than the Net-Flows ranking. However, there are in fact 174 such potentially optimal Slater rankings. The corresponding epistemic disjunction gives the follwowing partial ordering:
+We notice that the first crisp Slater ranking is a rather good fit (+0.844), better apparently than the Net-Flows ranking. However, there are in fact 174 such potentially optimal Slater rankings. The corresponding epistemic disjunction gives the follwowing partial ordering.
 
 .. image:: tutorialSlater.png
     :width: 150pt
@@ -1951,7 +2016,7 @@ A further ranking heuristic, the **Ranked-Pairs** rule, is based on a prudent in
          - if the next pair does not create a cycle with the pairs already blocked, block this pair;
          - if the next pair creates a cycle with the already blocked pairs, skip it.
 
-In our didactic outranking example, we get the following result::
+In our didactic outranking example, we get the following result.
 
     >>> from linearOrders import RankedPairsOrder
     >>> rp = RankedPairsOrder(g,Debug=True)
@@ -1977,7 +2042,7 @@ In our didactic outranking example, we get the following result::
     >>> rp.showRanking()
     ['a1', 'a3', 'a4', 'a9', 'a5', 'a8', 'a2', 'a6', 'a7']
 
-The Ranked-Pairs rule actually renders one of the seven optimal Kemeny rankings as we may verify below::
+The Ranked-Pairs rule actually renders one of the seven optimal Kemeny rankings as we may verify below.
  
     >>> corr = g.computeOrdinalCorrelation(rp)
     >>> print("Fitness of Tideman's ranking: %.3f" % corr['correlation'])
@@ -1990,7 +2055,7 @@ Ranking big performance tableaux
 
 None of the previous ranking heuristics, using essentially only the information given by the outranking relation, are scalable for big outranking digraphs gathering millions of pairwise outranking situations. We may notice, however, that a given outranking digraph -the association of a set of decision alternatives and an outranking relation- is, following the methodological requirements of the outranking approach, necessarily associated with a corresponding performance tableau. And, we may use this underlying performance data for linearly decomposing big sets of decision alternatives into ordered quantiles equivalence classes. This decomposition will lead to a pre-ranked sparse outranking digraph.
 
-In the coding example, we generate for instance, by using multiprocessing techniques, first, a cost benefit performance tableau of 100 decision alternatives and, secondly, we construct a **pre-ranked sparse outranking digraph** instance called *bg*. Notice bwt the *BigData* flag used here for generating a parcimonous performance tableau::
+In the coding example, we generate for instance, by using multiprocessing techniques, first, a cost benefit performance tableau of 100 decision alternatives and, secondly, we construct a **pre-ranked sparse outranking digraph** instance called *bg*. Notice bwt the *BigData* flag used here for generating a parcimonous performance tableau.
 
     >>> from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
     >>> tp = RandomCBPerformanceTableau(numberOfActions=100,BigData=True,
@@ -2021,7 +2086,7 @@ In the coding example, we generate for instance, by using multiprocessing techni
     Ordering          : 0.00000
     <class 'sparseOutrankingDigraphs.PreRankedOutrankingDigraph'> instance
 
-The total run time of the :py:class:`sparseOutrankingDigraphs.PreRankedOutrankingDigraph` constructor is less than a fifth of a second. The corresponding multiple criteria deciles sorting leads to 20 quantiles equivalence classes. The corresponding pre-ranked decomposition may be visualized as follows::
+The total run time of the :py:class:`sparseOutrankingDigraphs.PreRankedOutrankingDigraph` constructor is less than a fifth of a second. The corresponding multiple criteria deciles sorting leads to 20 quantiles equivalence classes. The corresponding pre-ranked decomposition may be visualized as follows.
 
     >>> bg.showDecomposition()
     *--- quantiles decomposition in decreasing order---*
@@ -2050,7 +2115,7 @@ The total run time of the :py:class:`sparseOutrankingDigraphs.PreRankedOutrankin
 
 The best decile (]80%-90%]) gathers decision alternatives *49*, *10*, and *52*. Worst decile (]10%-20%]) gathers alternatives *9*, *59*, and *23*.
 
-Each one of these 20 ordered components may now be locally ranked by using a suitable ranking rule. Best operational results, both in run times and quality, are more or less equally given with the Copeland and the NetFlows rules. The eventually obtained linear ordering (from the worst to best) is the following::
+Each one of these 20 ordered components may now be locally ranked by using a suitable ranking rule. Best operational results, both in run times and quality, are more or less equally given with the Copeland and the NetFlows rules. The eventually obtained linear ordering (from the worst to best) is the following.
   
     >>> print(bg.boostedOrder)
     [59, 9, 23, 17, 11, 98, 26, 81, 40, 64, 3, 74,
@@ -2062,7 +2127,7 @@ Each one of these 20 ordered components may now be locally ranked by using a sui
     95, 35, 80, 37, 7, 12, 68, 2, 90, 55, 30, 75, 8, 44,
     41, 70, 79, 86, 84, 18, 45, 49, 10, 52]
 
-Alternative *52* appears first ranked, whereas alternative *59* is last ranked. The quality of this ranking result may be assessed by computing its ordinal correlation with the corresponding standard outranking relation::
+Alternative *52* appears first ranked, whereas alternative *59* is last ranked. The quality of this ranking result may be assessed by computing its ordinal correlation with the corresponding standard outranking relation.
 
     >>> g = BipolarOutrankingDigraph(tp,Normalized=True,Threading=True)
     >>> g.computeOrderCorrelation(bg.boostedOrder)
@@ -2118,7 +2183,8 @@ The :py:class:`performanceQuantiles.PerformanceQuantiles` class implements such 
   * An ordered  dictionary **limitingQuantiles** of so far estimated *lower* (default) or *upper* quantile class limits for each frequency per criterion;
   * An ordered dictionary **historySizes** for keeping track of the number of evaluations seen so far per criterion. Missing data may make these sizes vary from criterion to criterion.
 
-Example python session: 
+Example python session
+
     >>> from performanceQuantiles import PerformanceQuantiles
     >>> from randomPerfTabs import RandomCBPerformanceTableau
     >>> nbrActions=1000
@@ -2135,6 +2201,7 @@ Example python session:
     'limitingQuantiles', ... ])
 
 The constructor parameter *numberOfBins* (see Lines 7-9 above), choosing the wished number of quantile frequencies, may be either **quartiles**, **quintiles** (5 bins), **deciles** (10 bins) , **dodeciles** (20 bins) or any other integer number of quantile bins. The quantile bins may be either **lower closed** (default) or **upper-closed**.
+
     >>> # Printing out the estimated quartile limits 
     >>> pq.showLimitingQuantiles(ByObjectives=True)
     *----  performance quantiles -----*
@@ -2154,7 +2221,8 @@ The constructor parameter *numberOfBins* (see Lines 7-9 above), choosing the wis
 
 Both objectives are equi-important; the weight (6) of the cost criterion balances the sum of weights (6) of the benefit criteria (see column 2). The preference direction of the cost criterion *c1* is negative; the lesser the costs the better it is, wheras all the benefit criteria *b1* to *b6* show positive preference directions, ie the higher the benefits the better it is. The columns entitled '0.0', resp. '1.0' show the quartile *Q0*, resp. *Q4*, ie the **worst**, resp. **best** performance observed so far on each criterion. Column '0.5' shows the **median** (*Q2*) observed on the criteria.  
 
-New  decision actions with random multiple criteria performance vectors from the same random performance tableau model may now be generated with ad hoc random performance generators. We provide for experimental purpose, in the :py:mod:`randomPerfTabs` module, three such generators: one for the standard :py:class:`randomPerfTabs.RandomPerformanceTableau` model, one the for the two objectives :py:class:`randomPerfTabs.RandomCBPerformanceTableau` Cost-Benefit model, and one for the :py:class:`randomPerfTabs.Random3ObjectivesPerformanceTableau` model with three objectives concerning respectively  economic, environmental or social aspects. Given a set of 10 new decision actions with generated random performance evaluations, the so far estimated historical quantile limits may be updated as follows: 
+New  decision actions with random multiple criteria performance vectors from the same random performance tableau model may now be generated with ad hoc random performance generators. We provide for experimental purpose, in the :py:mod:`randomPerfTabs` module, three such generators: one for the standard :py:class:`randomPerfTabs.RandomPerformanceTableau` model, one the for the two objectives :py:class:`randomPerfTabs.RandomCBPerformanceTableau` Cost-Benefit model, and one for the :py:class:`randomPerfTabs.Random3ObjectivesPerformanceTableau` model with three objectives concerning respectively  economic, environmental or social aspects. Given a set of 10 new decision actions with generated random performance evaluations, the so far estimated historical quantile limits may be updated as follows.
+
     >>> # generate 100 new random decision actions
     >>> from randomPerfTabs import RandomPerformanceGenerator
     >>> rpg = RandomPerformanceGenerator(tp,seed=seed)
@@ -2162,7 +2230,8 @@ New  decision actions with random multiple criteria performance vectors from the
     >>> # Updating the quartile norms shown above 
     >>> pq.updateQuantiles(newActions,historySize=None)
 
-Parameter *historySize* (see Line 6) of the :py:meth:`performanceQuantiles.PerformanceQuantiles.updateQuantiles` method allows to **balance** the **new** evaluations against the **historical** ones. With **historySize = None** (the default setting), the balance in the example above is 1000/1100 (91%, weight of historical data) against 100/1100 (9%, weight of the new incoming observations). Putting **historySize = 0**, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile estimation with solely the new incomping data. The updated quantile limits may be shown in a browser view:
+Parameter *historySize* (see Line 6) of the :py:meth:`performanceQuantiles.PerformanceQuantiles.updateQuantiles` method allows to **balance** the **new** evaluations against the **historical** ones. With **historySize = None** (the default setting), the balance in the example above is 1000/1100 (91%, weight of historical data) against 100/1100 (9%, weight of the new incoming observations). Putting **historySize = 0**, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile estimation with solely the new incomping data. The updated quantile limits may be shown in a browser view.
+
     >>> # showing the updated quantile limits in a browser view
     >>> pq.showHTMLLimitingQuantiles(Transposed=True)
 
@@ -2183,7 +2252,8 @@ The constructor requires a valid :py:class:`performanceQuantiles.PerformanceQuan
 
    It is important to notice that the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class, contrary to the generic :py:class:`outrankingDigraphs.OutrankingDigraph` class, does not inherit from the generic :py:class:`perfTabs.PerformanceTableau` class, but instead from the :py:class:`performanceQuantiles.PerformanceQuantiles` class. The **actions** in such a :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class instance contain not only the newly given decision actions, but also the historical quantile profiles obtained from a given :py:class:`performanceQuantiles.PerformanceQuantiles` class instance, ie estimated quantile bins' performance limits from historical performance data.
 
-We reconsider the :code:`PerformanceQuantiles` object instance *pq* as computed in the previous section. Let *newActions* be a set of 10 random generated new decision actions of the same kind:
+We reconsider the :code:`PerformanceQuantiles` object instance *pq* as computed in the previous section. Let *newActions* be a set of 10 random generated new decision actions of the same kind.
+
     >>> from sortingDigraphs import NormedQuantilesRatingDigraph
     >>> newActions = rpg.randomActions(10)
     >>> nqr = NormedQuantilesRatingDigraph(pq,newActions,rankingRule='best')
@@ -2228,6 +2298,7 @@ Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class
        'b6'  |     4        4        4        3        2        7        8        4        9        5  
 
 The :py:class:`NormedQuantilesRatingDigraphdigraph` instance's actions dictionary also contains the closed lower limits of the four quartile classes: *m1* = [0.0-0.25[, *m2* = [0.25-0.5[, *m3* =[0.5 - 0.75[, *m4* = [0.75 - 1.0[.
+
     >>> nqr.showPerformanceTableau(actionsSubset=nqr.profiles)
     *----  performance tableau -----*
     criteria |  'm1'   'm2'   'm3'   'm4'   
@@ -2244,7 +2315,8 @@ The main time (0.4 out of 0.5 sec. , see Lines 21-27 of the object description a
 
 The actual rating procedure will rely on a complete ranking of the new decision actions as well ass the quantile class limits obtained from the corresponding bipolar valued outranking digraph. Two efficient and scalable ranking rules, the **Copeland** and its valued version, the **Netflows** rule may be used for this purpose. The *rankingRule* parameter allows to choose one of both. With *rankingRule='best'* (see Line 2 above) the :code:`NormedQuantilesRatingDigraph` constructor will choose the ranking rule that results in the highest ordinal correlation with the given outranking relation (see [BIS-2012]_).
 
-In this rating example, the Copeland rule appears to be the more appropriate ranking rule:
+In this rating example, the Copeland rule appears to be the more appropriate ranking rule.
+
     >>> print('Ranking rule        :', nqr.rankingRule)
     Ranking rule        : Copeland
     >>> print('Actions ranking     :', nqr.actionsRanking)
@@ -2256,7 +2328,8 @@ In this rating example, the Copeland rule appears to be the more appropriate ran
      'determination': Decimal('0.544'),
      'correlation': Decimal('0.966') }
 
-We achieve here a linear ranking without ties (from best to worst) of the digraph's actions, ie including the new decision actions as well as the quartile limits *m1* to *m4*, which is very close in an ordinal sense (*tau* = 0.97) to the underlying valued outranking relation. With the *NetFlows* rule we would get the following slightly different ranking result:
+We achieve here a linear ranking without ties (from best to worst) of the digraph's actions, ie including the new decision actions as well as the quartile limits *m1* to *m4*, which is very close in an ordinal sense (*tau* = 0.97) to the underlying valued outranking relation. With the *NetFlows* rule we would get the following slightly different ranking result.
+
     >>> from linearOrders import NetFlowsOrder
     >>> nf = NetFlowsOrder(nqr)
     >>> nf.netFlowsRanking
@@ -2268,19 +2341,22 @@ We achieve here a linear ranking without ties (from best to worst) of the digrap
 
 which is, however, less correlated (*tau* = 0.89) with the underlying outranking relation.
 
-The eventual rating procedure is based on the lower quantile limits, such that we may collect the quartile classes' contents in increasing order of the quartiles lower limits:    
+The eventual rating procedure is based on the lower quantile limits, such that we may collect the quartile classes' contents in increasing order of the quartiles lower limits.
+
     >>> print('Rating categories:', self.ratingCategories)
     Rating categories: OrderedDict([
      ('m1', ['a1004', 'a1009', 'a1007']), ('m2', ['a1002']),
      ('m3', ['a1008', 'a1006', 'a1005', 'a1001', 'a1003', 'a1010']),('m4',[]) ])
 
-We notice above that no decision action is rated in the highest quartile class [0.75 - 1.0]. Indeed, the rating result is shown in descending order as follows:
+We notice above that no decision action is rated in the highest quartile class [0.75 - 1.0]. Indeed, the rating result is shown in descending order as follows.
+
     >>> nqr.showQuantilesRating()
     [0.50 - 0.75[ ['a1008', 'a1006', 'a1005', 'a1001', 'a1003', 'a1010']
     [0.25 - 0.50[ ['a1002']
     [0.00 - 0.25[ ['a1004', 'a1009', 'a1007']
     
-The same result may even more conviently be consulted in a browser view via a specialised heatmap format ( see :py:meth:`perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap` method:
+The same result may even more conviently be consulted in a browser view via a specialised heatmap format ( see :py:meth:`perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap` method.
+
     >>> nqr.showHTMLRatingHeatmap(pageTitle='Heatmap of Quantiles Rating',Correlations=True)
 
 .. image:: exampleIncRatDigraphTut.png
@@ -2291,6 +2367,7 @@ The same result may even more conviently be consulted in a browser view via a sp
 Due the fact that the importance weight (6) of the unique cost criterion *c1* is balancing the sum of the six benefit criteria (6) *b1* to *b6*, the marginal cost criteria ranking is highly correlated (*tau* = 0.80) with the proposed rating of the new decision actions. Is is not a surprise than, that decision action **a1008c**, of **cheap** type (low costs, but several good benfits), appears first ranked in the third quartile class [0.50-0.75[. Whereas, action **a1007a**, of **advantageous** type (excellent benefits but also highest costs), appears worst ranked in the first quartile class [0.0 - 0.25[.
 
 Using furthermore a specialised version of the :py:meth:`weakOrders.WeakOrder.exportGraphViz` method allows drawing the rating result in a Hasse diagram format.
+
    >>> nqr.exportRatingGraphViz()
     *---- exporting a dot file for GraphViz tools ---------*
      Exporting to quantilesRatingDigraph.dot
@@ -2301,7 +2378,8 @@ Using furthermore a specialised version of the :py:meth:`weakOrders.WeakOrder.ex
     :width: 500 px
     :align: center
 
-A more precise rating result may be achieved when we use **deciles** instead of quartiles for estimating the historical cumulative density functions:
+A more precise rating result may be achieved when we use **deciles** instead of quartiles for estimating the historical cumulative density functions.
+
     >>> pq1 = PerformanceQuantiles(tp, numberOfBins = 'deciles',\
     ...              LowerClosed=True,Debug=False)
     ...
@@ -2317,7 +2395,8 @@ A more precise rating result may be achieved when we use **deciles** instead of 
 
 Compared with the previous quartiles rating result, we notice that the six alternatives rated before into the third quartile class [0.50 - 0.75[, are now divided up: action *a1008* attains the 8th decile class [0.7 - 0.8[, actions *a1006* and *a1005* the 7th decile class [06 - 0.7[, and actions *a1001*, *a1010* and *a1003* only the 6th decile class [0.5 - 0.6[. Of the three lowest [0.0 - 0.25[ rated actions (*a1004*, *a1009* and *a1007*), action *a1004* is now rated in the third decile class [0.2 - 0.3[, and *a1009* and *a1007* in the second decile class [0.1 - 0.2[.
 
-A browser view may again more conveniently illustrate this preciser deciles rating result:     
+A browser view may again more conveniently illustrate this preciser deciles rating result.
+
     >>> nqr1.showHTMLRatingHeatmap(pageTitle='Heat map of the deciles rating',\
     ...                            colorLevels=5,Correlations=True)
 
@@ -2353,7 +2432,8 @@ In the :py:mod:`graphs` module, the root :py:class:`graphs.Graph` class provides
 
 See the technical documentation of the :ref:`graphs-label`.
 
-Example Python3 session:
+Example Python3 session
+
     >>> from graphs import Graph
     >>> g = Graph(numberOfVertices=7,edgeProbability=0.5)
     >>> g.save(fileName='tutorialGraph')
@@ -2395,7 +2475,8 @@ The saved Graph instance named :code:`tutorialGraph.py` is encoded in python3 as
 	frozenset(['v6','v7']) : -1, 
 	}
 
-The stored graph can be recalled and plotted with the generic :py:func:`graphs.Graph.exportGraphViz()` [1]_ method as follows:
+The stored graph can be recalled and plotted with the generic :py:func:`graphs.Graph.exportGraphViz()` [1]_ method as follows.
+
 	>>> g = Graph('tutorialGraph')
 	>>> g.exportGraphViz()
 	*---- exporting a dot file for GraphViz tools ---------*
@@ -2407,7 +2488,8 @@ The stored graph can be recalled and plotted with the generic :py:func:`graphs.G
    :width: 400 px
    :align: center
 
-Properties, like the gamma function and vertex degrees and neighbourhooddepths may be shown with a `graphs.Graph.showShort()` method:
+Properties, like the gamma function and vertex degrees and neighbourhooddepths may be shown with a `graphs.Graph.showShort()` method.
+
         >>> g.showShort()
         *---- short description of the graph ----*
         Name             : 'tutorialGraph'
@@ -2427,7 +2509,8 @@ Properties, like the gamma function and vertex degrees and neighbourhooddepths m
         distribution :  [0, 0, 1, 4, 2, 0, 0, 0]
         >>> ...
 
-A ``Graph`` instance corresponds bijectively to a symmetric ``Digraph`` instance and we may easily convert from one to the other with the :py:func:`graphs.Graph.graph2Digraph()`, and vice versa with the :py:func:`digraphs.Digraph.digraph2Graph()` method. Thus, all resources of the :py:class:`digraphs.Digraph` class, suitable for symmetric digraphs, become readily available, and vice versa:
+A ``Graph`` instance corresponds bijectively to a symmetric ``Digraph`` instance and we may easily convert from one to the other with the :py:func:`graphs.Graph.graph2Digraph()`, and vice versa with the :py:func:`digraphs.Digraph.digraph2Graph()` method. Thus, all resources of the :py:class:`digraphs.Digraph` class, suitable for symmetric digraphs, become readily available, and vice versa.
+
 	>>> dg = g.graph2Digraph()
 	>>> dg.showRelationTable(ndigits=0,ReflexiveTerms=False)
 	* ---- Relation Table -----
@@ -2463,7 +2546,8 @@ A ``Graph`` instance corresponds bijectively to a symmetric ``Digraph`` instance
 q-coloring of a graph
 .....................
 
-A 3-coloring of the tutorial graph *g* may for instance be computed and plotted with the :py:class:`graphs.Q_Coloring` class as follows:
+A 3-coloring of the tutorial graph *g* may for instance be computed and plotted with the :py:class:`graphs.Q_Coloring` class as follows.
+
 	>>> from graphs import Q_Coloring
 	>>> qc = Q_Coloring(g)
 	Running a Gibbs Sampler for 42 step !
@@ -2485,7 +2569,8 @@ A 3-coloring of the tutorial graph *g* may for instance be computed and plotted 
    :width: 400 px
    :align: center
 
-Actually, with the given tutorial graph instance, a 2-coloring is already feasible:
+Actually, with the given tutorial graph instance, a 2-coloring is already feasible.
+
 	>>> qc = Q_Coloring(g,colors=['gold','coral'])
 	Running a Gibbs Sampler for 42 step !
 	The q-coloring with 2 colors is feasible !!
@@ -2509,7 +2594,8 @@ Actually, with the given tutorial graph instance, a 2-coloring is already feasib
 MIS and Clique enumeration
 ..........................
 
-2-colorings define independent sets of vertices that are maximal in cardinality; for short called a **MIS**. Computing such MISs in a given :code:`Graph` instance may be achieved by the `graphs.Graph.showMIS()` method;
+2-colorings define independent sets of vertices that are maximal in cardinality; for short called a **MIS**. Computing such MISs in a given :code:`Graph` instance may be achieved by the `graphs.Graph.showMIS()` method.
+
 	>>> g = Graph('tutorialGraph')
 	>>> g.showMIS()
         *---  Maximal Independent Sets ---*
@@ -2531,7 +2617,8 @@ MIS and Clique enumeration
          frozenset({'v1', 'v6', 'v7', 'v3'}), 
          frozenset({'v1', 'v6', 'v4', 'v3'})]
 
-A MIS in the dual of a graph instance $g$ (its negation $-g$ ), corresponds to a maximal **clique**, ie a maximal complete subgraph in $g$. Maximal cliques may be directly enumerated with the `graphs.Graph.showCliques()` method:
+A MIS in the dual of a graph instance $g$ (its negation $-g$ ), corresponds to a maximal **clique**, ie a maximal complete subgraph in $g$. Maximal cliques may be directly enumerated with the `graphs.Graph.showCliques()` method.
+
       >>> g.showCliques()
       *---  Maximal Cliques ---*
       ['v2', 'v3']
@@ -2557,7 +2644,8 @@ A MIS in the dual of a graph instance $g$ (its negation $-g$ ), corresponds to a
 Grids and the Ising model
 .........................
 
-Special classes of graphs, like *n* x *m* **rectangular** or **triangular grids** (:py:class:`graphs.GridGraph` and :py:class:`graphs.IsingModel`) are available in the :py:mod:`graphs` module. For instance, we may use a Gibbs sampler again for simulating an **Ising Model** on such a grid:
+Special classes of graphs, like *n* x *m* **rectangular** or **triangular grids** (:py:class:`graphs.GridGraph` and :py:class:`graphs.IsingModel`) are available in the :py:mod:`graphs` module. For instance, we may use a Gibbs sampler again for simulating an **Ising Model** on such a grid.
+
 	>>> from graphs import GridGraph, IsingModel
 	>>> g = GridGraph(n=15,m=15)
 	>>> g.showShort()
@@ -2580,7 +2668,8 @@ Special classes of graphs, like *n* x *m* **rectangular** or **triangular grids*
 Simulating Metropolis random walks
 ..................................
 
-Finally, we provide the :py:class:`graphs.MetropolisChain` class, a specialization of the :py:class:`graphs.Graph` class, for implementing a generic **Metropolis MCMC** (Monte Carlo Markov Chain) sampler for simulating random walks on a given graph following a given probability  :code:`probs = {‘v1’: x, ‘v2’: y, ...}` for visiting each vertex (see lines 14-22). 
+Finally, we provide the :py:class:`graphs.MetropolisChain` class, a specialization of the :py:class:`graphs.Graph` class, for implementing a generic **Metropolis MCMC** (Monte Carlo Markov Chain) sampler for simulating random walks on a given graph following a given probability  :code:`probs = {‘v1’: x, ‘v2’: y, ...}` for visiting each vertex (see lines 14-22).
+
         >>> from graphs import MetropolisChain
 	>>> g = Graph(numberOfVertices=5,edgeProbability=0.5)
 	>>> g.showShort()
@@ -2658,7 +2747,8 @@ Suppose that the file ``berge.py`` contains the following :py:class:`graphs.Grap
 
 This data concerns the famous *Berge mystery story* (see Golumbic, M. C. Algorithmic Graph Theory and Perfect Graphs, *Annals of Discrete Mathematics* 57 p. 20) Six professors (labeled *A*, *B*, *C*, *D*, *E* and *I*) had been to the library on the day that a rare tractate was stolen. Each entered once, stayed for some time, and then left. If two professors were in the library at the same time, then at least one of them saw the other. Detectives questioned the professors and gathered the testimonies that *A* saw *B* and *E*; *B* saw *A* and *I*; *C* saw *D* and *I*; *D* saw *A* and *I*; *E* saw *B* and *I*; and *I* saw *C* and *E*. This data is gathered in the previous file, where each positive edge :math:`\{x,y\}` models the testimony that, either *x* saw *y*, or, *y* saw *x*.
 
-Example Python3 session:
+Example Python3 session
+
     >>> from graphs import Graph
     >>> g = Graph('berge')
     >>> g.showShort()
@@ -2674,7 +2764,8 @@ Example Python3 session:
     E -> ['C', 'B', 'I', 'A']
     I -> ['C', 'E', 'B', 'D']
 
- The graph data can be plotted as follows:
+ The graph data can be plotted as follows.
+ 
 	>>> g.exportGraphViz('berge1')
 	*---- exporting a dot file for GraphViz tools ---------*
 	Exporting to berge1.dot
@@ -2684,7 +2775,8 @@ Example Python3 session:
    :width: 400 px
    :align: center
 
-From graph theory we know that time interval intersection graphs must in fact be triangulated. The testimonies graph should therefore not contain any chordless cycles of four and more vertices. Now, the presence or not of chordless cycles may be checked as follows:
+From graph theory we know that time interval intersection graphs must in fact be triangulated. The testimonies graph should therefore not contain any chordless cycles of four and more vertices. Now, the presence or not of chordless cycles may be checked as follows.
+
 	>>> g.computeChordlessCycles()
 	Chordless cycle certificate -->>>  ['D', 'C', 'E', 'A', 'D']
 	Chordless cycle certificate -->>>  ['D', 'I', 'E', 'A', 'D']
@@ -2693,7 +2785,8 @@ From graph theory we know that time interval intersection graphs must in fact be
         (['D', 'I', 'E', 'A', 'D'], frozenset({'D', 'E', 'I', 'A'})), 
         (['D', 'I', 'B', 'A', 'D'], frozenset({'D', 'B', 'I', 'A'}))]
 
-We see three intersection cycles of length 4, which is impossible to occur on the linear time line. Obviously one professor lied! And it is *D* ; if we put to doubt the testimony that he indeed saw *A*, we obtain a correctly triangulated graph:
+We see three intersection cycles of length 4, which is impossible to occur on the linear time line. Obviously one professor lied! And it is *D* ; if we put to doubt the testimony that he indeed saw *A*, we obtain a correctly triangulated graph.
+
 	>>> g.setEdgeValue( ('D','A'), 0)
 	>>> g.showShort()
 	*---- short description of the graph ----*
@@ -2729,7 +2822,7 @@ Computing the non isomorphic MISs of the n-cycle graph
 	:depth: 1
 	:local:
 
-Due to the public success of our common 2008 publication with Jean-Luc Marichal [ISOMIS-08]_ , we present in this last tutorial an example Python session for computing the **non isomorphic maximal independent sets** (MISs) from the 12-cycle graph, i.e. a :py:class:`digraphs.CirculantDigraph` class instance of order 12 and symmetric circulants 1 and -1:
+Due to the public success of our common 2008 publication with Jean-Luc Marichal [ISOMIS-08]_ , we present in this tutorial an example Python session for computing the **non isomorphic maximal independent sets** (MISs) from the 12-cycle graph, i.e. a :py:class:`digraphs.CirculantDigraph` class instance of order 12 and symmetric circulants 1 and -1.
 
 >>> from digraphs import CirculantDigraph
 >>> c12 = CirculantDigraph(order=12,circulants=[1,-1])
@@ -2745,7 +2838,7 @@ Attributes       : ['name', 'order', 'circulants', 'actions',
                     'valuationdomain', 'relation', 'gamma',
 		    'notGamma']
 
-Such *n*-cycle graphs are also provided as undirected graph instances by the :py:class:`graphs.CycleGraph` class:
+Such *n*-cycle graphs are also provided as undirected graph instances by the :py:class:`graphs.CycleGraph` class.
 
 >>> from graphs import CycleGraph
 >>> cg12 = CycleGraph(order=12)
@@ -2765,7 +2858,7 @@ Attributes       : ['name', 'order', 'vertices', 'valuationDomain',
    :align: center
    :alt: The 12-cycle graph
 
-A non isomorphic MIS corresponds in fact to a set of isomorphic MISs, i.e. an orbit of MISs under the automorphism group of the 12-cycle graph. We are now first computing all maximal independent sets that are detectable in the 12-cycle digraph with the :py:func:`digraphs.Digraph.showMIS` method:
+A non isomorphic MIS corresponds in fact to a set of isomorphic MISs, i.e. an orbit of MISs under the automorphism group of the 12-cycle graph. We are now first computing all maximal independent sets that are detectable in the 12-cycle digraph with the :py:func:`digraphs.Digraph.showMIS` method.
 
 >>> c12.showMIS(withListing=False)
   *---  Maximal independent choices ---*
@@ -2860,7 +2953,7 @@ The command :py:func:`digraphs.Digraph.showOrbits` renders now the labelled repr
   stabilizer size: [1, 2, 3, ..., 8, 9, ..., 12, 13, ...]
   frequency      : [0, 2, 0, ..., 1, 0, ...,  1,  0, ...]
 
-The corresponding group stabilizers' sizes and frequencies -- orbit 1 with 12 symmetry axes, orbit 2 with 8 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 11-13), are illustrated in the corresponding unlabelled graphs of *Figure-1* below:
+The corresponding group stabilizers' sizes and frequencies -- orbit 1 with 12 symmetry axes, orbit 2 with 8 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 11-13), are illustrated in the corresponding unlabelled graphs of *Figure-1* below.
 
 .. image:: c12.png
    :width: 400 px
