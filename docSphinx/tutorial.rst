@@ -119,7 +119,7 @@ We may reload a previously saved ``Digraph`` instance from the file named :code:
 	*--- Connected Components ---*
 	1: ['1', '2', '3', '4', '5']
 
-The :py:func:`digraphs.Digraph.exportGraphViz()` method generates in the current working directory a :code:`tutorial.dot` file and a :code:`tutorialdigraph.png` picture of the tutorial digraph *g*, if the `graphviz <https://graphviz.org/>`_ tools are installed on your system.
+The :py:func:`digraphs.Digraph.exportGraphViz()` method generates in the current working directory a :code:`tutorial.dot` file and a :code:`tutorialdigraph.png` picture of the tutorial digraph *g*, if the `graphviz <https://graphviz.org/>`_ tools are installed on your system.::
 
 	>>> dg.exportGraphViz('tutorialDigraph')
         *---- exporting a dot file do GraphViz tools ---------*
@@ -193,9 +193,9 @@ Random digraph
 
 We are starting this tutorial with generating a randomly [-1;1]-valued (*Normalized=True*) digraph of order 7, denoted *dg* and modelling a binary relation (*x S y*) defined on the set of nodes of *dg*. For this purpose, the ``Digraph3`` collection contains a ``randomDigraphs`` module providing a specific :py:class:`digraphs.RandomValuationDigraph` constructor.
 
-    >>> from randomDigraphs import RandomValuationDigraph
-    >>> dg = RandomValuationDigraph(order=7,Normalized=True)
-    >>> dg.save('tutRandValDigraph')
+	>>> from randomDigraphs import RandomValuationDigraph
+	>>> dg = RandomValuationDigraph(order=7,Normalized=True)
+	>>> dg.save('tutRandValDigraph')
 
 With the ``save()`` method we may keep a backup version for future use of *dg* which will be stored in a file called *tutRandValDigraph.py* in the current working directory. The ``Digraph`` class now provides some generic methods for exploring a given ``Digraph`` object, like the ``showShort()``, ``showAll()``, ``showRelationTable()`` and the ``showNeighborhoods()`` methods.
 
