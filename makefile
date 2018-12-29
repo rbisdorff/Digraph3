@@ -15,6 +15,10 @@ sphinx:
 		(cd docSphinx; \
 		${SPHINX} -E . html/ )
 
+sphinxLatex:
+		(cd docSphinx; \
+		${SPHINX} -E -b latex . latex/ )
+
 pydocs:
 		cp arithmetics.py pyDoc/
 		cp digraphsTools.py pyDoc/
