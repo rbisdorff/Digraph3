@@ -222,7 +222,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <span class="go">1: [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;]</span>
 </pre></div>
 </td></tr></table></div>
-<p>The <a class="reference internal" href="techDoc.html#digraphs.Digraph.exportGraphViz" title="digraphs.Digraph.exportGraphViz"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.exportGraphViz()</span></code></a> method generates in the current working directory a <code class="code docutils literal"><span class="pre">tutorial.dot</span></code> file and a <code class="code docutils literal"><span class="pre">tutorialdigraph.png</span></code> picture of the tutorial digraph <em>g</em>, if the <a class="reference external" href="https://graphviz.org/">graphviz</a> tools are installed on your system.:</p>
+<p>The <a class="reference internal" href="techDoc.html#digraphs.Digraph.exportGraphViz" title="digraphs.Digraph.exportGraphViz"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.exportGraphViz()</span></code></a> method generates in the current working directory a <code class="code docutils literal"><span class="pre">tutorial.dot</span></code> file and a <code class="code docutils literal"><span class="pre">tutorialdigraph.png</span></code> picture of the tutorial digraph <em>g</em>, if the <a class="reference external" href="https://graphviz.org/">graphviz</a> tools are installed on your system.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;tutorialDigraph&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file do GraphViz tools ---------*</span>
 <span class="go">Exporting to tutorialDigraph.dot</span>
@@ -1458,7 +1458,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
 </pre></div>
 </div>
-<p>The resulting XML file my be visualized in a browser window (other than Chrome or Chromium)  with a corresponding XMCDA style sheet (<a class="reference external" href="_static/tutorialPerfTab.xml">see here</a>). Hitting <code class="docutils literal"><span class="pre">Ctrl</span> <span class="pre">U</span></code> in Firefox will open a browser window showing the underlying xml encoded raw text. It is thus possible to easily edit and update as needed a given performance tableau instance. Reinstantiating again a corresponding updated <em>odg</em> object goes like follow.</p>
+<p>The resulting XML file my be visualized in a browser window (other than Chrome or Chromium)  with a corresponding XMCDA style sheet (<a class="reference external" href="html/_static/tutorialPerfTab.xml">see here</a>). Hitting <code class="docutils literal"><span class="pre">Ctrl</span> <span class="pre">U</span></code> in Firefox will open a browser window showing the underlying xml encoded raw text. It is thus possible to easily edit and update as needed a given performance tableau instance. Reinstantiating again a corresponding updated <em>odg</em> object goes like follow.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -4514,7 +4514,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go">  Results in c12.misset</span>
 </pre></div>
 </td></tr></table></div>
-<p>In the 12-cycle graph, we observe 29 labelled MISs: – 3 of cardinality 4, 24 of cardinality 5, and 2  of cardinality 6. In case of $n$-cycle graphs with $n$ &gt; 20, as the cardinality of the MISs becomes big, it is preferable to use the shell <code class="code docutils literal"><span class="pre">perrinMIS</span></code> command compiled from C and installed <a class="footnote-reference" href="#id49" id="id42">[3]</a>  along with all the the Digraphs3 python modules for computing the set of MISs observed in the graph:</p>
+<p>In the 12-cycle graph, we observe 29 labelled MISs: – 3 of cardinality 4, 24 of cardinality 5, and 2  of cardinality 6. In case of $n$-cycle graphs with $n$ &gt; 20, as the cardinality of the MISs becomes big, it is preferable to use the shell <code class="code docutils literal"><span class="pre">perrinMIS</span></code> command compiled from C and installed <a class="footnote-reference" href="#id49" id="id42">[3]</a>  along with all the Digraphs3 python modules for computing the set of MISs observed in the graph:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3

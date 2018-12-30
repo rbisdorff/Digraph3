@@ -119,7 +119,7 @@ We may reload a previously saved ``Digraph`` instance from the file named :code:
 	*--- Connected Components ---*
 	1: ['1', '2', '3', '4', '5']
 
-The :py:func:`digraphs.Digraph.exportGraphViz()` method generates in the current working directory a :code:`tutorial.dot` file and a :code:`tutorialdigraph.png` picture of the tutorial digraph *g*, if the `graphviz <https://graphviz.org/>`_ tools are installed on your system.::
+The :py:func:`digraphs.Digraph.exportGraphViz()` method generates in the current working directory a :code:`tutorial.dot` file and a :code:`tutorialdigraph.png` picture of the tutorial digraph *g*, if the `graphviz <https://graphviz.org/>`_ tools are installed on your system.
 
 	>>> dg.exportGraphViz('tutorialDigraph')
         *---- exporting a dot file do GraphViz tools ---------*
@@ -946,7 +946,7 @@ As with all Digraph instances, it is possible to store permanently a copy of the
 	File: tutorialPerfTab.xml saved !
 	>>> ...
 
-The resulting XML file my be visualized in a browser window (other than Chrome or Chromium)  with a corresponding XMCDA style sheet (`see here <_static/tutorialPerfTab.xml>`_). Hitting ``Ctrl U`` in Firefox will open a browser window showing the underlying xml encoded raw text. It is thus possible to easily edit and update as needed a given performance tableau instance. Reinstantiating again a corresponding updated *odg* object goes like follow.
+The resulting XML file my be visualized in a browser window (other than Chrome or Chromium)  with a corresponding XMCDA style sheet (`see here <html/_static/tutorialPerfTab.xml>`_). Hitting ``Ctrl U`` in Firefox will open a browser window showing the underlying xml encoded raw text. It is thus possible to easily edit and update as needed a given performance tableau instance. Reinstantiating again a corresponding updated *odg* object goes like follow.
 
         >>> pt = XMCDA2PerformanceTableau('tutorialPerfTab') 
         >>> odg = BipolarOutrankingDigraph(pt)
@@ -2868,7 +2868,7 @@ A non isomorphic MIS corresponds in fact to a set of isomorphic MISs, i.e. an or
   freq.:  [0, 0, 0, 0, 3, 24,  2, 0, 0, 0,  0,  0,  0]
   Results in c12.misset
 
-In the 12-cycle graph, we observe 29 labelled MISs: -- 3 of cardinality 4, 24 of cardinality 5, and 2  of cardinality 6. In case of $n$-cycle graphs with $n$ > 20, as the cardinality of the MISs becomes big, it is preferable to use the shell :code:`perrinMIS` command compiled from C and installed [3]_  along with all the the Digraphs3 python modules for computing the set of MISs observed in the graph::
+In the 12-cycle graph, we observe 29 labelled MISs: -- 3 of cardinality 4, 24 of cardinality 5, and 2  of cardinality 6. In case of $n$-cycle graphs with $n$ > 20, as the cardinality of the MISs becomes big, it is preferable to use the shell :code:`perrinMIS` command compiled from C and installed [3]_  along with all the Digraphs3 python modules for computing the set of MISs observed in the graph::
 
     ...$ echo 12 | /usr/local/bin/perrinMIS
     # -------------------------------------- #
