@@ -2999,9 +2999,21 @@ The non isomorphic MISs in the 12-cycle graph represent in fact all the ways one
      * :ref:`modindex`
      * :ref:`search`
 
+Footnotes
+---------
 
+.. [1] The ``exportGraphViz`` method is depending on drawing tools from `graphviz <https://graphviz.org/>`_. On Linux Ubuntu or Debian you may try ``sudo apt-get install graphviz`` to install them. There are ready ``dmg`` installers for Mac OSX. 
+
+.. [2] Dependency: The :py:func:digraphs.Digraph.automorphismGenerators method uses the shell :code:`dreadnaut` command from the nauty software package. See https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml . On Mac OS there exist dmg installers and on Ubuntu Linux or Debian, one may easily install it with::
+
+       ...$ sudo apt-get install nauty
+
+.. [3] The :code:`perrinMIS` shell command my be installed system wide with the command :code:`.../Digraph3$ make installPerrin` from the main Digraph3 directory. It is stored by default into :code:`</usr/local/bin/>`. This may be changed with the :code:`INSTALLDIR` flag. The command :code:`.../Digraph3$ make installPerrinUser` installs it instead without sudo into the user's private :code:`<$Home/.bin>` directory.
+
+       
 References
-..........
+----------
+     
 .. [CPSTAT-L5] R. Bisdorff (2017) *Simulating from abitrary empirical random distributions*. MICS Computational Statistics course, Lecture 5. FSTC/ILIAS University of Luxembourg, Winterr Semester 2017 (`PDF 2x2 reduced presentation slides 211kB downloadable here <_static/quantileEstimation-2x2.pdf>`_)
 
 .. [BIS-2016] R. Bisdorff (2016). *On linear ranking from trillions of pairwise outranking situations*. Research Note 16-1, FSTC/ILIAS Decision Systems Group, University of Luxembourg pp. 1-6 (dowloadable  `PDF file 625.3 kB <https://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RB.pdf>`_)
@@ -3027,13 +3039,3 @@ References
 .. [ISOMIS-08] R. Bisdorff and J.L. Marichal (2008). Counting non-isomorphic maximal independent sets of the n-cycle graph. *Journal of Integer Sequences*, Vol. 11 Article 08.5.7 (`openly accessible here <https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html>`_)
 
 
-Footnotes
-.........
-
-.. [1] The ``exportGraphViz`` method is depending on drawing tools from `graphviz <https://graphviz.org/>`_. On Linux Ubuntu or Debian you may try ``sudo apt-get install graphviz`` to install them. There are ready ``dmg`` installers for Mac OSX. 
-
-.. [2] Dependency: The :py:func:digraphs.Digraph.automorphismGenerators method uses the shell :code:`dreadnaut` command from the nauty software package. See https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml . On Mac OS there exist dmg installers and on Ubuntu Linux or Debian, one may easily install it with::
-
-       ...$ sudo apt-get install nauty
-
-.. [3] The :code:`perrinMIS` shell command my be installed system wide with the command :code:`.../Digraph3$ make installPerrin` from the main Digraph3 directory. It is stored by default into :code:`</usr/local/bin/>`. This may be changed with the :code:`INSTALLDIR` flag. The command :code:`.../Digraph3$ make installPerrinUser` installs it instead without sudo into the user's private :code:`<$Home/.bin>` directory.
