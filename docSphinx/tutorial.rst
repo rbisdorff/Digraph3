@@ -22,8 +22,7 @@ Tutorials of the Digraph3 resources
 :Version: Revision: Python 3.6
 :Copyright: `R. Bisdorff <https://leopold-loewenheim.uni.lu/bisdorff/>`_ 2013-2018
 
-.. only:: html
-    .. contents:: Table of Contents
+.. contents:: List of Digraph3 tutorials
 	:depth: 1
 	:local:
 
