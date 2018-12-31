@@ -2,11 +2,28 @@
 
 Tutorials of the Digraph3 resources
 ===================================
+
+.. only:: latex
+
+   Abstract
+   ........
+
+   This PDF document contains a set of tutorials introducing the main
+   objects like digraphs, outranking digraphs, performance tableaux and voting profiles.
+   available in the Digraph3 Python software resources ( see
+   here <https://digraph3.readthedocs.io/en/latest/index.html> for the corresponding HTML version). Some of the tutorials are problem oriented and show how to compute the winner
+   of an election, how to build a best choice recommendation, or how
+   to rate or linearly rank with multiple incommensurable ranking criteria.
+   There is also a tutorial provided on undirected graphs and a last tutorial
+   illustrates how to compute non isomorphic maximal independent sets
+   in the n-cycle graph.
+   
 :Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg FSTC/CSC
 :Version: Revision: Python 3.6
 :Copyright: `R. Bisdorff <https://leopold-loewenheim.uni.lu/bisdorff/>`_ 2013-2018
 
-.. contents:: Table of Contents
+.. only:: html
+    .. contents:: Table of Contents
 	:depth: 1
 	:local:
 
@@ -20,12 +37,12 @@ Working with the *Digraph3* software resources
 	:local:
 
 .. highlight:: python
-	:linenothreshold: 5
+	:linenothreshold: 1
 
 Purpose
 .......
 
-The basic idea of these Python3 modules is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate the *Algorithmic Decision Theory* course given at the University of Luxembourg in the context of its Master in Information and Computer Science (MICS). 
+The basic idea of the Digraph3 Python resources is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate the *Algorithmic Decision Theory* course given at the University of Luxembourg in the context of its Master in Information and Computer Science (MICS). 
 
 The Python development of these computing resources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.
 
@@ -2964,22 +2981,24 @@ The corresponding group stabilizers' sizes and frequencies -- orbit 1 with 12 sy
 
 The non isomorphic MISs in the 12-cycle graph represent in fact all the ways one may write the number 12 as the circular sum of '2's and '3's without distinguishing opposite directions of writing. The first orbit corresponds to writing six times a '2'; the second orbit corresponds to writing four times a '3'. The third and fourth orbit correspond to writing two times a '3' and three times a '2'. There are two non isomorphic ways to do this latter circular sum. Either separating the '3's by one and two '2's, or by zero and three '2's (see Bisdorff & Marichal [ISOMIS-08]_ ).  
 
-Links and appendices
---------------------
+.. only:: html
 
-Documents
-.........
+     Links and appendices
+     --------------------
 
-* `Introduction <index.html>`_
-* `Reference manual <techDoc.html>`_
-* `Tutorial <tutorial.html>`_
+     Documents
+     .........
 
-Indices and tables
-..................
+     * `Introduction <index.html>`_
+     * `Reference manual <techDoc.html>`_
+     * `Tutorial <tutorial.html>`_
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+     Indices and tables
+     ..................
+
+     * :ref:`genindex`
+     * :ref:`modindex`
+     * :ref:`search`
 
 
 References
