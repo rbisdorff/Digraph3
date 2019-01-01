@@ -5,15 +5,11 @@ Tutorials of the Digraph3 resources
 
 .. only:: latex
 
-   Abstract
-   ........
+   Preface
+   .......
 
-   This PDF document contains a set of tutorials introducing the main
-   objects like digraphs, outranking digraphs, performance tableaux and voting profiles.
-   available in the Digraph3 Python software resources ( see
-   here <https://digraph3.readthedocs.io/en/latest/index.html> for the corresponding HTML version). Some of the tutorials are problem oriented and show how to compute the winner
-   of an election, how to build a best choice recommendation, or how
-   to rate or linearly rank with multiple incommensurable ranking criteria.
+   This PDF document contains a set of tutorials introducing the main objects like digraphs, outranking digraphs, performance tableaux and voting profiles available in the Digraph3 Python software resources ( see html documentation 
+   here <https://digraph3.readthedocs.io/en/latest/index.html> for the corresponding HTML version). Some of the tutorials are problem oriented and show how to compute the winner of an election, how to build a best choice recommendation, or how to rate or linearly rank with multiple incommensurable ranking criteria.
    There is also a tutorial provided on undirected graphs and a last tutorial
    illustrates how to compute non isomorphic maximal independent sets
    in the n-cycle graph.
@@ -60,7 +56,7 @@ Three download options are given.
 
    ..$ svn co https://leopold-loewenheim.uni.lu/svn/repos/Digraph3 
 
-3. Or, with a browser access, download and extract the latest distribution tar.gz archive
+3. Or, with a browser access, download and extract the latest distribution zip archive
 from this `sourceforge page <https://sourceforge.net/projects/digraph3/>`_ .
 
 
@@ -82,7 +78,7 @@ You may start an interactive Python3 session in the :code:`Digraph3` directory f
 ``Digraph`` object structure
 ............................
 
-All :py:class:`digraphs.Digraph` object *dg* contains at least the following components: 
+All :py:class:`digraphs.Digraph` objects (see Line 6) contain at least the following components: 
 
 1. A collection of digraph nodes called **actions** (decision actions): a list, set or (ordered) dictionary of nodes with 'name' and 'shortname' attributes,
 2. A logical characteristic **valuationdomain**, a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true),
@@ -90,12 +86,14 @@ All :py:class:`digraphs.Digraph` object *dg* contains at least the following com
 4. Its associated **gamma function** : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor,
 5. Its associated **notGamma function** : a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor.
 
-See the reference manual of the :ref:`digraphs-label`.
+.. only:: html
+
+    See the reference manual of the :ref:`digraphs-label`.
 
 Permanent storage
 .................
 
-The :code:`dg.save('tutorialDigraph')` command stores the digraph *dg* in a file named :code:`tutorialDigraph.py` with the following content::
+The :code:`dg.save('tutorialDigraph')` command (see Line 7 above) stores the digraph *dg* in a file named :code:`tutorialDigraph.py` with the following content::
 
        # Saved digraph instance
        actionset = {'1','2','3','4','5'}
@@ -135,7 +133,7 @@ We may reload a previously saved ``Digraph`` instance from the file named :code:
 	*--- Connected Components ---*
 	1: ['1', '2', '3', '4', '5']
 
-The :py:func:`digraphs.Digraph.exportGraphViz()` method generates in the current working directory a :code:`tutorial.dot` file and a :code:`tutorialdigraph.png` picture of the tutorial digraph *g*, if the `graphviz <https://graphviz.org/>`_ tools are installed on your system.
+The :py:func:`digraphs.Digraph.exportGraphViz()` method generates in the current working directory a :code:`tutorial.dot` file and a :code:`tutorialdigraph.png` picture of the tutorial digraph *g*, if the `graphviz <https://graphviz.org/>`_ tools are installed on your system [1]_.
 
 	>>> dg.exportGraphViz('tutorialDigraph')
         *---- exporting a dot file do GraphViz tools ---------*
@@ -190,8 +188,9 @@ Some special classes of digraphs, like the :py:class:`digraphs.CompleteDigraph`,
    :width: 200 px
    :align: center
 
+.. only:: html
 
-For more information about its resources, see the technical documentation of the :ref:`digraphs-label`. 
+	  For more information about its resources, see the technical documentation of the :ref:`digraphs-label`. 
 
 Back to :ref:`Tutorial-label`
 
@@ -213,7 +212,7 @@ We are starting this tutorial with generating a randomly [-1;1]-valued (*Normali
 	>>> dg = RandomValuationDigraph(order=7,Normalized=True)
 	>>> dg.save('tutRandValDigraph')
 
-With the ``save()`` method we may keep a backup version for future use of *dg* which will be stored in a file called *tutRandValDigraph.py* in the current working directory. The ``Digraph`` class now provides some generic methods for exploring a given ``Digraph`` object, like the ``showShort()``, ``showAll()``, ``showRelationTable()`` and the ``showNeighborhoods()`` methods.
+With the ``save()`` method (see Line 3) we may keep a backup version for future use of *dg* which will be stored in a file called *tutRandValDigraph.py* in the current working directory. The ``Digraph`` class now provides some generic methods for exploring a given ``Digraph`` object, like the ``showShort()``, ``showAll()``, ``showRelationTable()`` and the ``showNeighborhoods()`` methods.
 
     >>> dg.showShort()
     *----- show summary -------------*
@@ -262,7 +261,7 @@ With the ``save()`` method we may keep a backup version for future use of *dg* w
 Graphviz drawings
 .................
 
-We may have an even better insight into the ``Digraph`` object *dg* by looking at a `graphviz <https://graphviz.org/>`_ [1]_ drawing.
+We may have an even better insight into the ``Digraph`` object *dg* by looking at a `graphviz <https://graphviz.org/>`_  drawing [1]_.
 
     >>> dg.exportGraphViz('tutRandValDigraph')
     *---- exporting a dot file for GraphViz tools ---------*
@@ -2980,17 +2979,19 @@ The corresponding group stabilizers' sizes and frequencies -- orbit 1 with 12 sy
 
 The non isomorphic MISs in the 12-cycle graph represent in fact all the ways one may write the number 12 as the circular sum of '2's and '3's without distinguishing opposite directions of writing. The first orbit corresponds to writing six times a '2'; the second orbit corresponds to writing four times a '3'. The third and fourth orbit correspond to writing two times a '3' and three times a '2'. There are two non isomorphic ways to do this latter circular sum. Either separating the '3's by one and two '2's, or by zero and three '2's (see Bisdorff & Marichal [ISOMIS-08]_ ).  
 
-.. only:: html
+Links and appendices
+--------------------
 
-     Links and appendices
-     --------------------
+.. only:: html
 
      Documents
      .........
-
+     
      * `Introduction <index.html>`_
      * `Reference manual <techDoc.html>`_
      * `Tutorial <tutorial.html>`_
+
+.. only:: html
 
      Indices and tables
      ..................
@@ -2998,21 +2999,10 @@ The non isomorphic MISs in the 12-cycle graph represent in fact all the ways one
      * :ref:`genindex`
      * :ref:`modindex`
      * :ref:`search`
-
-Footnotes
----------
-
-.. [1] The ``exportGraphViz`` method is depending on drawing tools from `graphviz <https://graphviz.org/>`_. On Linux Ubuntu or Debian you may try ``sudo apt-get install graphviz`` to install them. There are ready ``dmg`` installers for Mac OSX. 
-
-.. [2] Dependency: The :py:func:digraphs.Digraph.automorphismGenerators method uses the shell :code:`dreadnaut` command from the nauty software package. See https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml . On Mac OS there exist dmg installers and on Ubuntu Linux or Debian, one may easily install it with::
-
-       ...$ sudo apt-get install nauty
-
-.. [3] The :code:`perrinMIS` shell command my be installed system wide with the command :code:`.../Digraph3$ make installPerrin` from the main Digraph3 directory. It is stored by default into :code:`</usr/local/bin/>`. This may be changed with the :code:`INSTALLDIR` flag. The command :code:`.../Digraph3$ make installPerrinUser` installs it instead without sudo into the user's private :code:`<$Home/.bin>` directory.
-
+	  
        
 References
-----------
+..........
      
 .. [CPSTAT-L5] R. Bisdorff (2017) *Simulating from abitrary empirical random distributions*. MICS Computational Statistics course, Lecture 5. FSTC/ILIAS University of Luxembourg, Winterr Semester 2017 (`PDF 2x2 reduced presentation slides 211kB downloadable here <_static/quantileEstimation-2x2.pdf>`_)
 
@@ -3028,6 +3018,8 @@ References
 
 .. [BIS-2008] R. Bisdorff, P. Meyer and M. Roubens (2008) "RUBIS: a bipolar-valued outranking method for the choice problem". 4OR, *A Quarterly Journal of Operations Research* Springer-Verlag, Volume 6,  Number 2 pp. 143-165. (Online) Electronic version: DOI: 10.1007/s10288-007-0045-5 (downloadable preliminary version `PDF file 271.5Kb <https://leopold-loewenheim.uni.lu/bisdorff/documents/HyperKernels.pdf>`_) 
 
+.. [ISOMIS-08] R. Bisdorff and J.L. Marichal (2008). Counting non-isomorphic maximal independent sets of the n-cycle graph. *Journal of Integer Sequences*, Vol. 11 Article 08.5.7 (`openly accessible here <https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html>`_)
+
 .. [NR3-2007] W.H. Press, S.A. Teukolsky, W.T. Vetterling and B.P. Flannery (2007) "Single-Pass Estimation of Arbitrary Quantiles" Section 5.8.2 in *Numerical Recipes: The Art of Scientific Computing 3rd Ed.*, Cambridge University Press, pp 435-438.		     
 
 .. [CHAM-2006] J.M. Chambers, D.A. James, D. Lambert and S. Vander Wiel (2006) "Monitoring Networked Applications with Incremental Quantile Estimation". *Statistical Science*, Vol. 21, No.4, pp.463-475. DOI: 10 12140/088342306000000583.
@@ -3036,6 +3028,16 @@ References
 
 .. [FMCAA] O. Häggström (2002) *Finite Markov Chains and Algorithmic Applications*. Cambridge University Press.
 
-.. [ISOMIS-08] R. Bisdorff and J.L. Marichal (2008). Counting non-isomorphic maximal independent sets of the n-cycle graph. *Journal of Integer Sequences*, Vol. 11 Article 08.5.7 (`openly accessible here <https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html>`_)
 
+
+Footnotes
+.........
+
+.. [1] The ``exportGraphViz`` method is depending on drawing tools from `graphviz <https://graphviz.org/>`_. On Linux Ubuntu or Debian you may try ``sudo apt-get install graphviz`` to install them. There are ready ``dmg`` installers for Mac OSX. 
+
+.. [2] Dependency: The :py:func:digraphs.Digraph.automorphismGenerators method uses the shell :code:`dreadnaut` command from the nauty software package. See https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml . On Mac OS there exist dmg installers and on Ubuntu Linux or Debian, one may easily install it with::
+
+       ...$ sudo apt-get install nauty
+
+.. [3] The :code:`perrinMIS` shell command my be installed system wide with the command :code:`.../Digraph3$ make installPerrin` from the main Digraph3 directory. It is stored by default into :code:`</usr/local/bin/>`. This may be changed with the :code:`INSTALLDIR` flag. The command :code:`.../Digraph3$ make installPerrinUser` installs it instead without sudo into the user's private :code:`<$Home/.bin>` directory.
 

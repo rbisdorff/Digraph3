@@ -196,8 +196,8 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('tutorial', 'digraph3Tutorial.tex', u'Digraph3 Tutorials',
-   u'Raymond Bisdorff', 'manual'),
+  ('tutorial', 'digraph3Tutorial.tex', u'Tutorials for the Digraph3 Python software resources',
+   u'Raymond Bisdorff', 'howto'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -209,10 +209,10 @@ latex_logo = 'introDoc2.png'
 #latex_use_parts = False
 
 # If true, show page references after internal links.
-# latex_show_pagerefs = False
+latex_show_pagerefs = True
 
 # If true, show URL addresses after external links.
-#latex_show_urls = False
+latex_show_urls = True
 
 # Documents to append as an appendix to all manuals.
 #latex_appendices = []
