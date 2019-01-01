@@ -662,9 +662,10 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                                            hasNoVeto,hasBipolarVeto,
                                            hasSymmetricThresholds,Debug)
                     splitThread.start()
+                    splitThread.join()
                     
-                while active_children() != []:
-                    pass
+##                while active_children() != []:
+##                    pass
 
                 if Comments:    
                     print('Exiting computing threads')
@@ -1498,9 +1499,12 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                                        LowerClosed,Debug)
                     process.start()
                     nbrOfThreads += 1
-            while active_children() != []:
-                pass
+                    process.join()
+                    
+##            while active_children() != []:
+##                pass
                 #sleep(1)
+                
             if Comments:
                 print('Exit %d threads' % nbrOfThreads)
             sorting = {}

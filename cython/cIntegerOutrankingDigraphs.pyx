@@ -700,9 +700,11 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                                            hasNoVeto,hasBipolarVeto,
                                            hasSymmetricThresholds,Debug)
                     splitThread.start()
+                    splitThread.join()	
+	
                     
-                while active_children() != []:
-                    pass
+##                while active_children() != []:
+##                    pass
 
                 if Comments:    
                     print('Exiting computing threads')
@@ -1245,9 +1247,10 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                     splitThread = myThread(jb,tempDirName,\
                                     selfMultiple,otherMultiple,Debug)
                     splitThread.start()
+                    splitThread.join()
                     
-                while active_children() != []:
-                    pass
+##                while active_children() != []:
+##                    pass
                 
                 # post threading operations
                 if Comments:    

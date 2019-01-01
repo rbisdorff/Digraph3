@@ -1130,6 +1130,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,PerformanceTableau):
                     task_queue.put(task)
                 for i in range(NUMBER_OF_WORKERS):
                     Process(target=_worker,args=(task_queue,)).start()
+
                 if Comments:
                     print('started')
                 for i in range(NUMBER_OF_WORKERS):
