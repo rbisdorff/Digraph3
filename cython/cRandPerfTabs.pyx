@@ -38,14 +38,31 @@ class cPerformanceTableau(PerformanceTableau):
         """
         from perfTabs import PerformanceTableau
         from copy import deepcopy
+        from collections import OrderedDict
+        from decimal import Decimal
         t = PerformanceTableau(isEmpty=True)
         t.name = 'std_' + self.name
         att = [a for a in self.__dict__]
         att.remove('name')
+        att.remove('actions')
+        att.remove('evaluation')
         for a in att:
             t.__dict__[a] = deepcopy(self.__dict__[a])
+        actions = OrderedDict()
+        for x in self.actions:
+            xName = self.actions[x]['name']
+            xSName = self.actions[x]['shortName']
+            actions[xName] = {'id': x, 'name': xName, 'shortName': xSName}
+        t.actions = actions
+        evaluation = {}
+        for g in t.criteria:
+            evaluation[g] = {}
+            for x in self.actions:
+                xName = self.actions[x]['name']
+                evaluation[g][xName] = Decimal(str(self.evaluation[g][x]))
+        t.evaluation = evaluation
         cPerformanceTableau.convertWeight2Decimal(t)
-        cPerformanceTableau.convertEvaluation2Decimal(t)
+        #cPerformanceTableau.convertEvaluation2Decimal(t)
         cPerformanceTableau.convertDiscriminationThresholds2Decimal(t)
         return t
 
@@ -1178,8 +1195,7 @@ class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
         actions = OrderedDict()
         for i in range(numberOfActions):
             actionKey = ('a%%0%dd' % (nd)) % (i+1)
-            actions[i] = {'name': actionKey}
-                           
+            actions[i] = {'name': actionKey, 'shortName': actionKey}                 
         # generate random weights
         if weightDistribution == 'equisignificant':
             weightMode = ('equisignificant',(1,1))

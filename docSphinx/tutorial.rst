@@ -2883,7 +2883,7 @@ A non isomorphic MIS corresponds in fact to a set of isomorphic MISs, i.e. an or
   freq.:  [0, 0, 0, 0, 3, 24,  2, 0, 0, 0,  0,  0,  0]
   Results in c12.misset
 
-In the 12-cycle graph, we observe 29 labelled MISs: -- 3 of cardinality 4, 24 of cardinality 5, and 2  of cardinality 6. In case of $n$-cycle graphs with $n$ > 20, as the cardinality of the MISs becomes big, it is preferable to use the shell :code:`perrinMIS` command compiled from C and installed [3]_  along with all the Digraphs3 python modules for computing the set of MISs observed in the graph::
+In the 12-cycle graph, we observe 29 labelled MISs: -- 3 of cardinality 4, 24 of cardinality 5, and 2  of cardinality 6. In case of n-cycle graphs with *n* > 20, as the cardinality of the MISs becomes big, it is preferable to use the shell :code:`perrinMIS` command compiled from C and installed [3]_  along with all the Digraphs3 python modules for computing the set of MISs observed in the graph::
 
     ...$ echo 12 | /usr/local/bin/perrinMIS
     # -------------------------------------- #
@@ -2921,7 +2921,7 @@ In the 12-cycle graph, we observe 29 labelled MISs: -- 3 of cardinality 4, 24 of
     Total: 29
     execution time: 0 sec. and 2 millisec.
 
-Reading in the result of the :code:`perrinMIS`, stored in a file called by default :code:`curd.dat`, may be operated with the :py:func:`digraphs.Digraph.readPerrinMisset` method.
+Reading in the result of the :code:`perrinMIS` shell command, stored in a file called by default :code:`curd.dat`, may be operated with the :py:func:`digraphs.Digraph.readPerrinMisset` method.
 
 >>> c12.readPerrinMisset(file='curd.dat')
 >>> c12.misset
