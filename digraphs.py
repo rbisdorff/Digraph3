@@ -222,7 +222,10 @@ class Digraph(object):
             argDict = {}
             exec(compile(open(fileName).read(), fileName, 'exec'), argDict)
             self.name = file
-            self.actions = argDict['actionset']
+            try:
+                self.actions = argDict['actions']
+            except: # for compatibility with Digraph2 versions
+                self.actions = argDict['actionset']
             self.order = len(self.actions)
             self.valuationdomain = argDict['valuationdomain']
             self.convertValuationToDecimal()
@@ -6103,7 +6106,7 @@ class Digraph(object):
         fo.write('# Saved digraph instance\n')
         if DecimalValuation:
             fo.write('from decimal import Decimal\n')
-        fo.write('actionset = {\n')
+        fo.write('actions = {\n')
         for x in actions:
             fo.write('\'' + str(x) + '\':\n')
             try:

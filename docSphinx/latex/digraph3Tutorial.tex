@@ -70,7 +70,7 @@
 
 
 \section{Preface}
-\label{\detokenize{tutorial:tutorial-label}}\label{\detokenize{tutorial:preface}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}
+\label{\detokenize{tutorial:tutorial-label}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}\label{\detokenize{tutorial:preface}}
 This PDF document contains a set of tutorials introducing the main objects like digraphs, outranking digraphs, performance tableaux and voting profiles available in the Digraph3 Python software resources ( see html documentation
 here \textless{}\sphinxurl{https://digraph3.readthedocs.io/en/latest/index.html}\textgreater{} for the corresponding HTML version). Some of the tutorials are problem oriented and show how to compute the winner of an election, how to build a best choice recommendation, or how to rate or linearly rank with multiple incommensurable ranking criteria.
 There is also a tutorial provided on undirected graphs and a last tutorial
@@ -166,7 +166,7 @@ The Python development of these computing resources offers the advantage of an e
 
 \subsection{Downloading of the Digraph3 resources}
 \label{\detokenize{tutorial:downloading-of-the-digraph3-resources}}
-Using the Digraph3 modules is easy. You only need to have installed on your system the \sphinxhref{https://www.python.org/doc/}{Python} (https://www.python.org/doc/) programming language of version 3.+ (readily available under Linux and Mac OS). Notice that, from Version 3.3 on, Python implements very efficiently the decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic valuation functions, which makes the recent python version much faster (more than twice as fast) when extensive digraph operations are performed.
+Using the Digraph3 modules is easy. You only need to have installed on your system the \sphinxhref{https://www.python.org/doc/}{Python} (https://www.python.org/doc/) programming language of version 3.+ (readily available under Linux and Mac OS). Notice that, from Version 3.3 on, the Python standard decimal module implements very efficiently its decimal.Decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic r-valuation functions, which makes the recent python-3.3+ versions much faster (more than twice as fast) when extensive digraph operations are performed.
 
 Three download options are given.
 \begin{enumerate}
@@ -186,10 +186,10 @@ or a subversion client:
 ..\PYGZdl{} svn co https://leopold\PYGZhy{}loewenheim.uni.lu/svn/repos/Digraph3
 \end{sphinxVerbatim}
 
-\end{enumerate}
+\item {} 
+Or, with a browser access, download and extract the latest distribution zip archive from this \sphinxhref{https://sourceforge.net/projects/digraph3/}{sourceforge page} (https://sourceforge.net/projects/digraph3/) .
 
-3. Or, with a browser access, download and extract the latest distribution zip archive
-from this \sphinxhref{https://sourceforge.net/projects/digraph3/}{sourceforge page} (https://sourceforge.net/projects/digraph3/) .
+\end{enumerate}
 
 
 \subsection{Starting a python3 session}
@@ -198,15 +198,27 @@ You may start an interactive Python3 session in the \sphinxcode{Digraph3} direct
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-[\PYGZbs{}\PYGZdl{}HOME/Digraph3]\PYGZbs{}\PYGZdl{} python3
+\PYGZdl{}HOME/.../Digraph3\PYGZdl{} python3
 Python 3.5.0 (default, Sep 23 2015, 13:39:18)
 [GCC 4.8.4] on linux
-Type \PYGZdq{}help\PYGZdq{}, \PYGZdq{}copyright\PYGZdq{}, \PYGZdq{}credits\PYGZdq{} or \PYGZdq{}license\PYGZdq{} for more information.
-\PYGZgt{}\PYGZgt{}\PYGZgt{} from digraphs import Digraph
-\PYGZgt{}\PYGZgt{}\PYGZgt{} dg = Digraph(\PYGZsq{}test/testdigraph\PYGZsq{})
+Type \PYGZdq{}help\PYGZdq{}, \PYGZdq{}copyright\PYGZdq{}, \PYGZdq{}credits\PYGZdq{} or
+      \PYGZdq{}license\PYGZdq{} for more information.
+\PYGZgt{}\PYGZgt{}\PYGZgt{} from randomDigraphs import RandomDigraph
+\PYGZgt{}\PYGZgt{}\PYGZgt{} dg = RandomDigraph(order=5,arcProbability=0.5,
+                       seed=101)
+\PYGZgt{}\PYGZgt{}\PYGZgt{} dg
+*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Digraph instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*
+Instance class   : RandomDigraph
+Instance name    : randomDigraph
+Digraph Order      : 5
+Digraph Size       : 12
+Valuation domain : [\PYGZhy{}1.00 \PYGZhy{} 1.00]
+Determinateness  : 100.000
+Attributes       : [\PYGZsq{}actions\PYGZsq{}, \PYGZsq{}valuationdomain\PYGZsq{}, \PYGZsq{}relation\PYGZsq{},
+                    \PYGZsq{}order\PYGZsq{}, \PYGZsq{}name\PYGZsq{}, \PYGZsq{}gamma\PYGZsq{}, \PYGZsq{}notGamma\PYGZsq{}]
 \PYGZgt{}\PYGZgt{}\PYGZgt{} dg.save(\PYGZsq{}tutorialDigraph\PYGZsq{})
 *\PYGZhy{}\PYGZhy{}\PYGZhy{} Saving digraph in file: \PYGZlt{}tutorialDigraph.py\PYGZgt{} \PYGZhy{}\PYGZhy{}\PYGZhy{}*
-\PYGZgt{}\PYGZgt{}\PYGZgt{}
+\PYGZgt{}\PYGZgt{}\PYGZgt{} ...
 \end{sphinxVerbatim}
 
 
@@ -215,7 +227,7 @@ Type \PYGZdq{}help\PYGZdq{}, \PYGZdq{}copyright\PYGZdq{}, \PYGZdq{}credits\PYGZd
 All \sphinxcode{digraphs.Digraph} objects (see Line 6) contain at least the following components:
 \begin{enumerate}
 \item {} 
-A collection of digraph nodes called \sphinxstylestrong{actions} (decision actions): a list, set or (ordered) dictionary of nodes with ‘name’ and ‘shortname’ attributes,
+A collection of digraph nodes called \sphinxstylestrong{actions} (decision actions): a n ordered dictionary (ordered by default) of nodes with ‘name’,
 
 \item {} 
 A logical characteristic \sphinxstylestrong{valuationdomain}, a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true),
@@ -239,16 +251,21 @@ The \sphinxcode{dg.save('tutorialDigraph')} command (see Line 7 above) stores th
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{c+c1}{\PYGZsh{} Saved digraph instance}
-\PYG{n}{actionset} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}
-\PYG{n}{valuationdomain} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{min}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}
-                   \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{med}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{0}\PYG{p}{,}
-                   \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{max}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mi}{1}\PYG{p}{\PYGZcb{}}
+\PYG{n}{actions} \PYG{o}{=} \PYG{p}{\PYGZob{}}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{shortName}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{random decision action}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{shortName}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{random decision action}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{shortName}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{random decision action}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{shortName}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{random decision action}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{shortName}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{random decision action}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
+\PYG{p}{\PYGZcb{}}
+\PYG{n}{valuationdomain} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{hasIntegerValuation}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{n+nb+bp}{True}\PYG{p}{,}
+                   \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{min}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.0}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{med}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mf}{0.0}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{max}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+m+mf}{1.0}\PYG{p}{\PYGZcb{}}
 \PYG{n}{relation} \PYG{o}{=} \PYG{p}{\PYGZob{}}
-\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
-\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
-\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{1}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
-\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{1}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
-\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{\PYGZcb{}}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.0}\PYG{p}{,}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mf}{1.0}\PYG{p}{,}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.0}\PYG{p}{,}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.0}\PYG{p}{,}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
+\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.0}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{o}{\PYGZhy{}}\PYG{l+m+mf}{1.0}\PYG{p}{,}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
 \PYG{p}{\PYGZcb{}}
 \end{sphinxVerbatim}
 
@@ -261,22 +278,37 @@ We may reload a previously saved \sphinxcode{Digraph} instance from the file nam
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg} \PYG{o}{=} \PYG{n}{Digraph}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tutorialDigraph}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg}\PYG{o}{.}\PYG{n}{showAll}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} show details \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} show detail \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{Digraph          : tutorialDigraph}
-\PYG{g+go}{Actions          : [\PYGZsq{}1\PYGZsq{}, \PYGZsq{}2\PYGZsq{}, \PYGZsq{}3\PYGZsq{}, \PYGZsq{}4\PYGZsq{}, \PYGZsq{}5\PYGZsq{}]}
-\PYG{g+go}{Valuation domain : \PYGZob{}\PYGZsq{}med\PYGZsq{}: Decimal(\PYGZsq{}0\PYGZsq{}),}
-\PYG{g+go}{                    \PYGZsq{}max\PYGZsq{}: Decimal(\PYGZsq{}1\PYGZsq{}),}
-\PYG{g+go}{                    \PYGZsq{}min\PYGZsq{}: Decimal(\PYGZsq{}\PYGZhy{}1\PYGZsq{})\PYGZcb{}}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Actions \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{[\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a5\PYGZsq{}]}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Characteristic valuation domain \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{\PYGZob{}\PYGZsq{}hasIntegerValuation\PYGZsq{}: True, \PYGZsq{}min\PYGZsq{}: Decimal(\PYGZsq{}\PYGZhy{}1.0\PYGZsq{}), \PYGZsq{}med\PYGZsq{}: Decimal(\PYGZsq{}0.0\PYGZsq{}), \PYGZsq{}max\PYGZsq{}: Decimal(\PYGZsq{}1.0\PYGZsq{})\PYGZcb{}}
 \PYG{g+go}{* \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{  S   \textbar{}  \PYGZsq{}1\PYGZsq{}      \PYGZsq{}2\PYGZsq{}     \PYGZsq{}3\PYGZsq{}     \PYGZsq{}4\PYGZsq{}     \PYGZsq{}5\PYGZsq{}}
-\PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\textbar{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{  \PYGZsq{}1\PYGZsq{} \textbar{}  \PYGZhy{}1.00   \PYGZhy{}1.00   \PYGZhy{}1.00   +1.00   \PYGZhy{}1.00}
-\PYG{g+go}{  \PYGZsq{}2\PYGZsq{} \textbar{}  \PYGZhy{}1.00   \PYGZhy{}1.00   +1.00   \PYGZhy{}1.00   \PYGZhy{}1.00}
-\PYG{g+go}{  \PYGZsq{}3\PYGZsq{} \textbar{}  \PYGZhy{}1.00   +1.00   \PYGZhy{}1.00   \PYGZhy{}1.00   +1.00}
-\PYG{g+go}{  \PYGZsq{}4\PYGZsq{} \textbar{}  +1.00   \PYGZhy{}1.00   +1.00   \PYGZhy{}1.00   +1.00}
-\PYG{g+go}{  \PYGZsq{}5\PYGZsq{} \textbar{}  +1.00   \PYGZhy{}1.00   +1.00   \PYGZhy{}1.00   \PYGZhy{}1.00}
+\PYG{g+go}{  S   \textbar{}  \PYGZsq{}a1\PYGZsq{}  \PYGZsq{}a2\PYGZsq{}  \PYGZsq{}a3\PYGZsq{}  \PYGZsq{}a4\PYGZsq{}  \PYGZsq{}a5\PYGZsq{}}
+\PYG{g+go}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\textbar{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{ \PYGZsq{}a1\PYGZsq{} \textbar{}   \PYGZhy{}1    \PYGZhy{}1     1    \PYGZhy{}1    \PYGZhy{}1}
+\PYG{g+go}{ \PYGZsq{}a2\PYGZsq{} \textbar{}    1    \PYGZhy{}1    \PYGZhy{}1     1     1}
+\PYG{g+go}{ \PYGZsq{}a3\PYGZsq{} \textbar{}    1    \PYGZhy{}1    \PYGZhy{}1     1    \PYGZhy{}1}
+\PYG{g+go}{ \PYGZsq{}a4\PYGZsq{} \textbar{}    1     1     1    \PYGZhy{}1    \PYGZhy{}1}
+\PYG{g+go}{ \PYGZsq{}a5\PYGZsq{} \textbar{}    1     1     1    \PYGZhy{}1    \PYGZhy{}1}
+\PYG{g+go}{Valuation domain: [\PYGZhy{}1;+1]}
 \PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{} Connected Components \PYGZhy{}\PYGZhy{}\PYGZhy{}*}
-\PYG{g+go}{1: [\PYGZsq{}1\PYGZsq{}, \PYGZsq{}2\PYGZsq{}, \PYGZsq{}3\PYGZsq{}, \PYGZsq{}4\PYGZsq{}, \PYGZsq{}5\PYGZsq{}]}
+\PYG{g+go}{1: [\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a5\PYGZsq{}]}
+\PYG{g+go}{Neighborhoods:}
+\PYG{g+go}{  Gamma     :}
+\PYG{g+go}{\PYGZsq{}a1\PYGZsq{}: in =\PYGZgt{} \PYGZob{}\PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a5\PYGZsq{}\PYGZcb{}, out =\PYGZgt{} \PYGZob{}\PYGZsq{}a3\PYGZsq{}\PYGZcb{}}
+\PYG{g+go}{\PYGZsq{}a2\PYGZsq{}: in =\PYGZgt{} \PYGZob{}\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}\PYGZcb{}, out =\PYGZgt{} \PYGZob{}\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a5\PYGZsq{}\PYGZcb{}}
+\PYG{g+go}{\PYGZsq{}a3\PYGZsq{}: in =\PYGZgt{} \PYGZob{}\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a5\PYGZsq{}\PYGZcb{}, out =\PYGZgt{} \PYGZob{}\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}\PYGZcb{}}
+\PYG{g+go}{\PYGZsq{}a4\PYGZsq{}: in =\PYGZgt{} \PYGZob{}\PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}\PYGZcb{}, out =\PYGZgt{} \PYGZob{}\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}\PYGZcb{}}
+\PYG{g+go}{\PYGZsq{}a5\PYGZsq{}: in =\PYGZgt{} \PYGZob{}\PYGZsq{}a2\PYGZsq{}\PYGZcb{}, out =\PYGZgt{} \PYGZob{}\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}\PYGZcb{}}
+\PYG{g+go}{  Not Gamma :}
+\PYG{g+go}{\PYGZsq{}a1\PYGZsq{}: in =\PYGZgt{} set(), out =\PYGZgt{} \PYGZob{}\PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a5\PYGZsq{}\PYGZcb{}}
+\PYG{g+go}{\PYGZsq{}a2\PYGZsq{}: in =\PYGZgt{} \PYGZob{}\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}\PYGZcb{}, out =\PYGZgt{} \PYGZob{}\PYGZsq{}a3\PYGZsq{}\PYGZcb{}}
+\PYG{g+go}{\PYGZsq{}a3\PYGZsq{}: in =\PYGZgt{} \PYGZob{}\PYGZsq{}a2\PYGZsq{}\PYGZcb{}, out =\PYGZgt{} \PYGZob{}\PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a5\PYGZsq{}\PYGZcb{}}
+\PYG{g+go}{\PYGZsq{}a4\PYGZsq{}: in =\PYGZgt{} \PYGZob{}\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a5\PYGZsq{}\PYGZcb{}, out =\PYGZgt{} \PYGZob{}\PYGZsq{}a5\PYGZsq{}\PYGZcb{}}
+\PYG{g+go}{\PYGZsq{}a5\PYGZsq{}: in =\PYGZgt{} \PYGZob{}\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}\PYGZcb{}, out =\PYGZgt{} \PYGZob{}\PYGZsq{}a4\PYGZsq{}\PYGZcb{}}
+\PYG{g+go}{\PYGZgt{}\PYGZgt{}\PYGZgt{}}
 \end{sphinxVerbatim}
 
 The \sphinxcode{digraphs.Digraph.exportGraphViz()} method generates in the current working directory a \sphinxcode{tutorial.dot} file and a \sphinxcode{tutorialdigraph.png} picture of the tutorial digraph \sphinxstyleemphasis{g}, if the \sphinxhref{https://graphviz.org/}{graphviz} (https://graphviz.org/) tools are installed on your system %
@@ -293,7 +325,7 @@ The \sphinxcode{exportGraphViz} method is depending on drawing tools from \sphin
 \PYG{g+go}{dot \PYGZhy{}Grankdir=BT \PYGZhy{}Tpng tutorialDigraph.dot \PYGZhy{}o tutorialDigraph.png}
 \end{sphinxVerbatim}
 
-\noindent{\hspace*{\fill}\sphinxincludegraphics[width=300\sphinxpxdimen]{{testdigraph}.png}\hspace*{\fill}}
+\noindent{\hspace*{\fill}\sphinxincludegraphics[width=300\sphinxpxdimen]{{tutorialDigraph}.png}\hspace*{\fill}}
 
 Some simple methods are easily applicable to this instantiated Digraph object \sphinxstyleemphasis{dg} , like the following \sphinxcode{digraphs.Digraph.showStatistics()} method.
 
@@ -301,28 +333,42 @@ Some simple methods are easily applicable to this instantiated Digraph object \s
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg}\PYG{o}{.}\PYG{n}{showStatistics}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} general statistics \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
-\PYG{g+go}{for digraph             : \PYGZlt{}tutorialdigraph.py\PYGZgt{}}
-\PYG{g+go}{order                   :  5 nodes}
-\PYG{g+go}{size                    :  9 arcs}
-\PYG{g+go}{\PYGZsh{} undetermined          :  0 arcs}
-\PYG{g+go}{arc density             : 45.00}
-\PYG{g+go}{\PYGZsh{} components            :  1}
-\PYG{g+go}{                        :  [0, 1, 2, 3, 4]}
-\PYG{g+go}{outdegrees distribution :  [0, 2, 2, 1, 0]}
-\PYG{g+go}{indegrees distribution  :  [0, 2, 2, 1, 0]}
-\PYG{g+go}{degrees distribution    :  [0, 4, 4, 2, 0]}
-\PYG{g+go}{mean degree : 1.80}
-\PYG{g+go}{                                  :  [0, 1, 2, 3, 4, \PYGZsq{}inf\PYGZsq{}]}
-\PYG{g+go}{neighbourhood\PYGZhy{}depths distribution :  [0, 0, 2, 2, 1, 0]}
-\PYG{g+go}{mean neighborhood depth : 2.80}
-\PYG{g+go}{digraph diameter :  4}
-\PYG{g+go}{agglomeration distribution :}
-\PYG{g+go}{1 : 50.00}
-\PYG{g+go}{2 : 0.00}
-\PYG{g+go}{3 : 16.67}
-\PYG{g+go}{4 : 50.00}
-\PYG{g+go}{5 : 50.00}
-\PYG{g+go}{agglomeration coefficient : 33.33}
+\PYG{g+go}{for digraph              : \PYGZlt{}tutorialDigraph.py\PYGZgt{}}
+\PYG{g+go}{order                    :  5 nodes}
+\PYG{g+go}{size                     :  12 arcs}
+\PYG{g+go}{\PYGZsh{} undetermined           :  0 arcs}
+\PYG{g+go}{determinateness          : 1.00}
+\PYG{g+go}{arc density              : 0.60}
+\PYG{g+go}{double arc density       : 0.40}
+\PYG{g+go}{single arc density       : 0.40}
+\PYG{g+go}{absence density          : 0.20}
+\PYG{g+go}{strict single arc density: 0.40}
+\PYG{g+go}{strict absence density   : 0.20}
+\PYG{g+go}{\PYGZsh{} components             :  1}
+\PYG{g+go}{\PYGZsh{} strong components      :  1}
+\PYG{g+go}{transitivity degree      : 0.48}
+\PYG{g+go}{                         :  [0, 1, 2, 3, 4, 5]}
+\PYG{g+go}{outdegrees distribution  :  [0, 1, 1, 3, 0, 0]}
+\PYG{g+go}{indegrees distribution   :  [0, 1, 2, 1, 1, 0]}
+\PYG{g+go}{mean outdegree           : 2.40}
+\PYG{g+go}{mean indegree            : 2.40}
+\PYG{g+go}{                         :  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+\PYG{g+go}{symmetric degrees dist.  :  [0, 0, 0, 0, 1, 4, 0, 0, 0, 0, 0]}
+\PYG{g+go}{mean symmetric degree    : 4.80}
+\PYG{g+go}{outdegrees concentration index   : 0.1667}
+\PYG{g+go}{indegrees concentration index    : 0.2333}
+\PYG{g+go}{symdegrees concentration index   : 0.0333}
+\PYG{g+go}{                                 :  [0, 1, 2, 3, 4, \PYGZsq{}inf\PYGZsq{}]}
+\PYG{g+go}{neighbourhood depths distribution:  [0, 1, 4, 0, 0, 0]}
+\PYG{g+go}{mean neighbourhood depth         : 1.80}
+\PYG{g+go}{digraph diameter                 :  2}
+\PYG{g+go}{agglomeration distribution       :}
+\PYG{g+go}{a1 : 58.33}
+\PYG{g+go}{a2 : 33.33}
+\PYG{g+go}{a3 : 33.33}
+\PYG{g+go}{a4 : 50.00}
+\PYG{g+go}{a5 : 50.00}
+\PYG{g+go}{agglomeration coefficient        : 45.00}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}
 \end{sphinxVerbatim}
 
@@ -1316,7 +1362,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Generating random performance tableaux}
-\label{\detokenize{tutorial:randomperformancetableau-tutorial-label}}\label{\detokenize{tutorial:generating-random-performance-tableaux}}
+\label{\detokenize{tutorial:generating-random-performance-tableaux}}\label{\detokenize{tutorial:randomperformancetableau-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -2676,7 +2722,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Ranking with multiple incommensurable criteria}
-\label{\detokenize{tutorial:ranking-tutorial-label}}\label{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}}
+\label{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}}\label{\detokenize{tutorial:ranking-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -3144,7 +3190,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Rating with learned quantile norms}
-\label{\detokenize{tutorial:rating-with-learned-quantile-norms}}\label{\detokenize{tutorial:rating-tutorial-label}}
+\label{\detokenize{tutorial:rating-tutorial-label}}\label{\detokenize{tutorial:rating-with-learned-quantile-norms}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -3552,7 +3598,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Working with the \sphinxstyleliteralintitle{graphs} module}
-\label{\detokenize{tutorial:working-with-the-graphs-module}}\label{\detokenize{tutorial:graphs-tutorial-label}}
+\label{\detokenize{tutorial:graphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-graphs-module}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -4021,7 +4067,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Computing the non isomorphic MISs of the n-cycle graph}
-\label{\detokenize{tutorial:computing-the-non-isomorphic-miss-of-the-n-cycle-graph}}\label{\detokenize{tutorial:isomorphicmis-tutorial-label}}
+\label{\detokenize{tutorial:isomorphicmis-tutorial-label}}\label{\detokenize{tutorial:computing-the-non-isomorphic-miss-of-the-n-cycle-graph}}
 Due to the public success of our common 2008 publication with Jean-Luc Marichal \phantomsection\label{\detokenize{tutorial:id42}}{\hyperref[\detokenize{tutorial:isomis-08}]{\sphinxcrossref{{[}ISOMIS-08{]}}}} (\autopageref*{\detokenize{tutorial:isomis-08}}) , we present in this tutorial an example Python session for computing the \sphinxstylestrong{non isomorphic maximal independent sets} (MISs) from the 12-cycle graph, i.e. a \sphinxcode{digraphs.CirculantDigraph} class instance of order 12 and symmetric circulants 1 and -1.
 
 \fvset{hllines={, ,}}%

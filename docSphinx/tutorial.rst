@@ -64,22 +64,34 @@ Starting a python3 session
 
 You may start an interactive Python3 session in the :code:`Digraph3` directory for exploring the classes and methods provided by the :code:`digraphs` module. To do so, enter the ``python3`` commands following the session prompts marked with >>>. The lines without the prompt are output from the Python interpreter::
 
-    [\$HOME/Digraph3]\$ python3
+    $HOME/.../Digraph3$ python3
     Python 3.5.0 (default, Sep 23 2015, 13:39:18)
     [GCC 4.8.4] on linux
-    Type "help", "copyright", "credits" or "license" for more information.
-    >>> from digraphs import Digraph
-    >>> dg = Digraph('test/testdigraph')
+    Type "help", "copyright", "credits" or
+          "license" for more information.
+    >>> from randomDigraphs import RandomDigraph
+    >>> dg = RandomDigraph(order=5,arcProbability=0.5,
+                           seed=101)
+    >>> dg
+    *------- Digraph instance description ------*
+    Instance class   : RandomDigraph
+    Instance name    : randomDigraph
+    Digraph Order      : 5
+    Digraph Size       : 12
+    Valuation domain : [-1.00 - 1.00]
+    Determinateness  : 100.000
+    Attributes       : ['actions', 'valuationdomain', 'relation',
+                        'order', 'name', 'gamma', 'notGamma']
     >>> dg.save('tutorialDigraph')
     *--- Saving digraph in file: <tutorialDigraph.py> ---*
-    >>> 
+    >>> ...
 
 ``Digraph`` object structure
 ............................
 
 All :py:class:`digraphs.Digraph` objects (see Line 6) contain at least the following components: 
 
-1. A collection of digraph nodes called **actions** (decision actions): a list (obsolete), set or dictionary (ordered by default) of nodes with 'name' and 'shortname' attributes,
+1. A collection of digraph nodes called **actions** (decision actions): a n ordered dictionary (ordered by default) of nodes with 'name',
 2. A logical characteristic **valuationdomain**, a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true),
 3. The digraph **relation** : a double dictionary indexed by an oriented pair of actions (nodes) and carrying a characteristic value in the range of the previous valuation domain,
 4. Its associated **gamma function** : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor,
@@ -94,18 +106,23 @@ Permanent storage
 
 The :code:`dg.save('tutorialDigraph')` command (see Line 7 above) stores the digraph *dg* in a file named :code:`tutorialDigraph.py` with the following content::
 
-       # Saved digraph instance
-       actionset = {'1','2','3','4','5'}
-       valuationdomain = {'min': -1,
-                          'med': 0,
-                          'max': 1}
-       relation = {
-       '1': {'1':-1,'2':-1,'3':-1,'4':1,'5':-1},
-       '2': {'1':-1,'2':-1,'3':1,'4':-1,'5':-1},
-       '3': {'1':-1,'2':1,'3':-1,'4':-1,'5':1},
-       '4': {'1':1,'2':-1,'3':1,'4':-1,'5':1},
-       '5': {'1':1,'2':-1,'3':1,'4':-1,'5':-1}
-       }
+    # Saved digraph instance
+    actions = {
+    'a1': {'shortName': 'a1', 'name': 'random decision action'},
+    'a2': {'shortName': 'a2', 'name': 'random decision action'},
+    'a3': {'shortName': 'a3', 'name': 'random decision action'},
+    'a4': {'shortName': 'a4', 'name': 'random decision action'},
+    'a5': {'shortName': 'a5', 'name': 'random decision action'},
+    }
+    valuationdomain = {'hasIntegerValuation': True,
+		       'min': -1.0,'med': 0.0,'max': 1.0}
+    relation = {
+    'a1': {'a1':-1.0, 'a2':-1.0, 'a3':1.0, 'a4':-1.0, 'a5':-1.0,},
+    'a2': {'a1':1.0, 'a2':-1.0, 'a3':-1.0, 'a4':1.0, 'a5':1.0,},
+    'a3': {'a1':1.0, 'a2':-1.0, 'a3':-1.0, 'a4':1.0, 'a5':-1.0,},
+    'a4': {'a1':1.0, 'a2':1.0, 'a3':1.0, 'a4':-1.0, 'a5':-1.0,},
+    'a5': {'a1':1.0, 'a2':1.0, 'a3':1.0, 'a4':-1.0, 'a5':-1.0,},
+    }
 
 
 Inspecting a ``Digraph`` object
@@ -113,24 +130,39 @@ Inspecting a ``Digraph`` object
 
 We may reload a previously saved ``Digraph`` instance from the file named :code:`tutorialDigraph.py` with the ``Digraph`` class constructor and the :py:func:`digraphs.Digraph.showAll()` method output reveals us that *dg* is a connected irreflexive digraph of order five evaluated in a valuation domain from -1 to 1.
 
-        >>> dg = Digraph('tutorialDigraph')
-       	>>> dg.showAll()
-	*----- show details --------------*
-	Digraph          : tutorialDigraph
-	Actions          : ['1', '2', '3', '4', '5']
-	Valuation domain : {'med': Decimal('0'), 
-                            'max': Decimal('1'), 
-                            'min': Decimal('-1')}
-        * ---- Relation Table -----
-          S   |  '1'	  '2'	  '3'	  '4'	  '5'	  
-         -----|------------------------------------------------------------
-          '1' |  -1.00	 -1.00	 -1.00	 +1.00	 -1.00	 
-          '2' |  -1.00	 -1.00	 +1.00	 -1.00	 -1.00	 
-          '3' |  -1.00	 +1.00	 -1.00	 -1.00	 +1.00	 
-          '4' |  +1.00	 -1.00	 +1.00	 -1.00	 +1.00	 
-          '5' |  +1.00	 -1.00	 +1.00	 -1.00	 -1.00	 
-	*--- Connected Components ---*
-	1: ['1', '2', '3', '4', '5']
+    >>> dg = Digraph('tutorialDigraph')
+    >>> dg.showAll()
+    *----- show detail -------------*
+    Digraph          : tutorialDigraph
+    *---- Actions ----*
+    ['a1', 'a2', 'a3', 'a4', 'a5']
+    *---- Characteristic valuation domain ----*
+    {'hasIntegerValuation': True, 'min': Decimal('-1.0'), 'med': Decimal('0.0'), 'max': Decimal('1.0')}
+    * ---- Relation Table -----
+      S   |  'a1'  'a2'  'a3'  'a4'  'a5'	  
+    ------|-------------------------------
+     'a1' |   -1    -1     1    -1    -1	 
+     'a2' |    1    -1    -1     1     1	 
+     'a3' |    1    -1    -1     1    -1	 
+     'a4' |    1     1     1    -1    -1	 
+     'a5' |    1     1     1    -1    -1	 
+    Valuation domain: [-1;+1]
+    *--- Connected Components ---*
+    1: ['a1', 'a2', 'a3', 'a4', 'a5']
+    Neighborhoods:
+      Gamma     :
+    'a1': in => {'a2', 'a4', 'a3', 'a5'}, out => {'a3'}
+    'a2': in => {'a5', 'a4'}, out => {'a1', 'a4', 'a5'}
+    'a3': in => {'a1', 'a4', 'a5'}, out => {'a1', 'a4'}
+    'a4': in => {'a2', 'a3'}, out => {'a1', 'a3', 'a2'}
+    'a5': in => {'a2'}, out => {'a1', 'a3', 'a2'}
+      Not Gamma :
+    'a1': in => set(), out => {'a2', 'a4', 'a5'}
+    'a2': in => {'a1', 'a3'}, out => {'a3'}
+    'a3': in => {'a2'}, out => {'a2', 'a5'}
+    'a4': in => {'a1', 'a5'}, out => {'a5'}
+    'a5': in => {'a1', 'a4', 'a3'}, out => {'a4'}
+    >>> 
 
 The :py:func:`digraphs.Digraph.exportGraphViz()` method generates in the current working directory a :code:`tutorial.dot` file and a :code:`tutorialdigraph.png` picture of the tutorial digraph *g*, if the `graphviz <https://graphviz.org/>`_ tools are installed on your system [1]_.
 
@@ -139,49 +171,63 @@ The :py:func:`digraphs.Digraph.exportGraphViz()` method generates in the current
         Exporting to tutorialDigraph.dot
         dot -Grankdir=BT -Tpng tutorialDigraph.dot -o tutorialDigraph.png
 
-.. image:: testdigraph.png
+.. image:: tutorialDigraph.png
    :width: 300 px
    :align: center
 
 Some simple methods are easily applicable to this instantiated Digraph object *dg* , like the following :py:func:`digraphs.Digraph.showStatistics()` method.
 
-	>>> dg.showStatistics()
-	*----- general statistics -------------*
-	for digraph             : <tutorialdigraph.py>
-	order                   :  5 nodes
-	size                    :  9 arcs
-	# undetermined          :  0 arcs
-	arc density             : 45.00
-	# components            :  1
-	                        :  [0, 1, 2, 3, 4]
-	outdegrees distribution :  [0, 2, 2, 1, 0]
-	indegrees distribution  :  [0, 2, 2, 1, 0]
-	degrees distribution    :  [0, 4, 4, 2, 0]
-	mean degree : 1.80
-	                                  :  [0, 1, 2, 3, 4, 'inf']
-	neighbourhood-depths distribution :  [0, 0, 2, 2, 1, 0]
-	mean neighborhood depth : 2.80
-	digraph diameter :  4
-	agglomeration distribution :
-	1 : 50.00
-	2 : 0.00
-	3 : 16.67
-	4 : 50.00
-	5 : 50.00
-	agglomeration coefficient : 33.33
-	>>> ...
+    >>> dg.showStatistics()
+    *----- general statistics -------------*
+    for digraph              : <tutorialDigraph.py>
+    order                    :  5 nodes
+    size                     :  12 arcs
+    # undetermined           :  0 arcs
+    determinateness          : 1.00
+    arc density              : 0.60
+    double arc density       : 0.40
+    single arc density       : 0.40
+    absence density          : 0.20
+    strict single arc density: 0.40
+    strict absence density   : 0.20
+    # components             :  1
+    # strong components      :  1
+    transitivity degree      : 0.48
+			     :  [0, 1, 2, 3, 4, 5]
+    outdegrees distribution  :  [0, 1, 1, 3, 0, 0]
+    indegrees distribution   :  [0, 1, 2, 1, 1, 0]
+    mean outdegree           : 2.40
+    mean indegree            : 2.40
+			     :  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    symmetric degrees dist.  :  [0, 0, 0, 0, 1, 4, 0, 0, 0, 0, 0]
+    mean symmetric degree    : 4.80
+    outdegrees concentration index   : 0.1667
+    indegrees concentration index    : 0.2333
+    symdegrees concentration index   : 0.0333
+				     :  [0, 1, 2, 3, 4, 'inf']
+    neighbourhood depths distribution:  [0, 1, 4, 0, 0, 0]
+    mean neighbourhood depth         : 1.80 
+    digraph diameter                 :  2
+    agglomeration distribution       : 
+    a1 : 58.33
+    a2 : 33.33
+    a3 : 33.33
+    a4 : 50.00
+    a5 : 50.00
+    agglomeration coefficient        : 45.00
+    >>> ...
 
 Special classes
 ...............
 
 Some special classes of digraphs, like the :py:class:`digraphs.CompleteDigraph`, the :py:class:`digraphs.EmptyDigraph` or the oriented :py:class:`digraphs.GridDigraph` class for instance, are readily available.
 
-        >>> from digraphs import GridDigraph
-	>>> grid = GridDigraph(n=5,m=5,hasMedianSplitOrientation=True)
-	>>> grid.exportGraphViz('tutorialGrid')
-	*---- exporting a dot file for GraphViz tools ---------*
-	Exporting to tutorialGrid.dot
-	dot -Grankdir=BT -Tpng TutorialGrid.dot -o tutorialGrid.png
+    >>> from digraphs import GridDigraph
+    >>> grid = GridDigraph(n=5,m=5,hasMedianSplitOrientation=True)
+    >>> grid.exportGraphViz('tutorialGrid')
+    *---- exporting a dot file for GraphViz tools ---------*
+    Exporting to tutorialGrid.dot
+    dot -Grankdir=BT -Tpng TutorialGrid.dot -o tutorialGrid.png
 
 .. image:: tutorialGrid.png
    :width: 200 px
