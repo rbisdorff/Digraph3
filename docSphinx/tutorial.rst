@@ -89,13 +89,15 @@ You may start an interactive Python3 session in the :code:`Digraph3` directory f
 ``Digraph`` object structure
 ............................
 
-All :py:class:`digraphs.Digraph` objects (see Line 6) contain at least the following components: 
+All :py:class:`digraphs.Digraph` objects (see Line 6) contain at least the following attributes:
 
-1. A collection of digraph nodes called **actions** (decision actions): a n ordered dictionary (ordered by default) of nodes with 'name',
-2. A logical characteristic **valuationdomain**, a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true),
-3. The digraph **relation** : a double dictionary indexed by an oriented pair of actions (nodes) and carrying a characteristic value in the range of the previous valuation domain,
-4. Its associated **gamma function** : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor,
-5. Its associated **notGamma function** : a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor.
+0. A **name**, usually the name of the stored instance; 
+1. A collection of digraph nodes called **actions** (decision actions): a n ordered dictionary (by default) of nodes with 'name';
+2. The order, ie the number of graph nodes (actions) is stored in the **order** by the object constructor;
+3. A logical characteristic **valuationdomain**, a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true);
+4. The digraph **relation** : a double dictionary indexed by an oriented pair of actions (nodes) and carrying a characteristic value in the range of the previous valuation domain;
+5. Its associated **gamma function** : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor;
+6. Its associated **notGamma function** : a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor.
 
 .. only:: html
 

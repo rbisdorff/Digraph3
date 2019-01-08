@@ -167,12 +167,14 @@ Attributes       : [&#39;actions&#39;, &#39;valuationdomain&#39;, &#39;relation&
 </div>
 <div class="section" id="digraph-object-structure">
 <h3><a class="toc-backref" href="#id65"><code class="docutils literal"><span class="pre">Digraph</span></code> object structure</a><a class="headerlink" href="#digraph-object-structure" title="Permalink to this headline">¶</a></h3>
-<p>All <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a> objects (see Line 6) contain at least the following components:</p>
-<ol class="arabic simple">
-<li>A collection of digraph nodes called <strong>actions</strong> (decision actions): a n ordered dictionary (ordered by default) of nodes with ‘name’,</li>
-<li>A logical characteristic <strong>valuationdomain</strong>, a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true),</li>
-<li>The digraph <strong>relation</strong> : a double dictionary indexed by an oriented pair of actions (nodes) and carrying a characteristic value in the range of the previous valuation domain,</li>
-<li>Its associated <strong>gamma function</strong> : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor,</li>
+<p>All <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a> objects (see Line 6) contain at least the following attributes:</p>
+<ol class="arabic simple" start="0">
+<li>A <strong>name</strong>, usually the name of the stored instance;</li>
+<li>A collection of digraph nodes called <strong>actions</strong> (decision actions): a n ordered dictionary (by default) of nodes with ‘name’;</li>
+<li>The order, ie the number of graph nodes (actions) is stored in the <strong>order</strong> by the object constructor;</li>
+<li>A logical characteristic <strong>valuationdomain</strong>, a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true);</li>
+<li>The digraph <strong>relation</strong> : a double dictionary indexed by an oriented pair of actions (nodes) and carrying a characteristic value in the range of the previous valuation domain;</li>
+<li>Its associated <strong>gamma function</strong> : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor;</li>
 <li>Its associated <strong>notGamma function</strong> : a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor.</li>
 </ol>
 <p>See the reference manual of the <a class="reference internal" href="techDoc.html#digraphs-label"><span class="std std-ref">digraphs module</span></a>.</p>
