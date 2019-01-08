@@ -101,7 +101,7 @@
 </div>
 <div class="section" id="downloading-of-the-digraph3-resources">
 <h3><a class="toc-backref" href="#id63">Downloading of the Digraph3 resources</a><a class="headerlink" href="#downloading-of-the-digraph3-resources" title="Permalink to this headline">¶</a></h3>
-<p>Using the Digraph3 modules is easy. You only need to have installed on your system the <a class="reference external" href="https://www.python.org/doc/">Python</a> programming language of version 3.+ (readily available under Linux and Mac OS). Notice that, from Version 3.3 on, Python implements very efficiently the decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic valuation functions, which makes the recent python version much faster (more than twice as fast) when extensive digraph operations are performed.</p>
+<p>Using the Digraph3 modules is easy. You only need to have installed on your system the <a class="reference external" href="https://www.python.org/doc/">Python</a> programming language of version 3.+ (readily available under Linux and Mac OS). Notice that, from Version 3.3 on, the Python standard decimal module implements very efficiently its decimal.Decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic r-valuation functions, which makes the recent python-3.3+ versions much faster (more than twice as fast) when extensive digraph operations are performed.</p>
 <p>Three download options are given.</p>
 <ol class="arabic">
 <li><p class="first">Either (easiest under Linux or Mac OS-X), by using a git client:</p>
@@ -114,9 +114,9 @@
 </pre></div>
 </td></tr></table></div>
 </li>
+<li><p class="first">Or, with a browser access, download and extract the latest distribution zip archive from this <a class="reference external" href="https://sourceforge.net/projects/digraph3/">sourceforge page</a> .</p>
+</li>
 </ol>
-<p>3. Or, with a browser access, download and extract the latest distribution zip archive
-from this <a class="reference external" href="https://sourceforge.net/projects/digraph3/">sourceforge page</a> .</p>
 </div>
 <div class="section" id="starting-a-python3-session">
 <h3><a class="toc-backref" href="#id64">Starting a python3 session</a><a class="headerlink" href="#starting-a-python3-session" title="Permalink to this headline">¶</a></h3>
@@ -145,7 +145,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <h3><a class="toc-backref" href="#id65"><code class="docutils literal"><span class="pre">Digraph</span></code> object structure</a><a class="headerlink" href="#digraph-object-structure" title="Permalink to this headline">¶</a></h3>
 <p>All <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a> objects (see Line 6) contain at least the following components:</p>
 <ol class="arabic simple">
-<li>A collection of digraph nodes called <strong>actions</strong> (decision actions): a list, set or (ordered) dictionary of nodes with ‘name’ and ‘shortname’ attributes,</li>
+<li>A collection of digraph nodes called <strong>actions</strong> (decision actions): a list (obsolete), set or dictionary (ordered by default) of nodes with ‘name’ and ‘shortname’ attributes,</li>
 <li>A logical characteristic <strong>valuationdomain</strong>, a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true),</li>
 <li>The digraph <strong>relation</strong> : a double dictionary indexed by an oriented pair of actions (nodes) and carrying a characteristic value in the range of the previous valuation domain,</li>
 <li>Its associated <strong>gamma function</strong> : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor,</li>

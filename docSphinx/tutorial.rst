@@ -44,7 +44,7 @@ The Python development of these computing resources offers the advantage of an e
 Downloading of the Digraph3 resources
 .....................................
 
-Using the Digraph3 modules is easy. You only need to have installed on your system the `Python <https://www.python.org/doc/>`_ programming language of version 3.+ (readily available under Linux and Mac OS). Notice that, from Version 3.3 on, Python implements very efficiently the decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic valuation functions, which makes the recent python version much faster (more than twice as fast) when extensive digraph operations are performed.
+Using the Digraph3 modules is easy. You only need to have installed on your system the `Python <https://www.python.org/doc/>`_ programming language of version 3.+ (readily available under Linux and Mac OS). Notice that, from Version 3.3 on, the Python standard decimal module implements very efficiently its decimal.Decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic r-valuation functions, which makes the recent python-3.3+ versions much faster (more than twice as fast) when extensive digraph operations are performed.
 
 Three download options are given.
 
@@ -56,8 +56,7 @@ Three download options are given.
 
    ..$ svn co https://leopold-loewenheim.uni.lu/svn/repos/Digraph3 
 
-3. Or, with a browser access, download and extract the latest distribution zip archive
-from this `sourceforge page <https://sourceforge.net/projects/digraph3/>`_ .
+3. Or, with a browser access, download and extract the latest distribution zip archive from this `sourceforge page <https://sourceforge.net/projects/digraph3/>`_ .
 
 
 Starting a python3 session
@@ -80,7 +79,7 @@ You may start an interactive Python3 session in the :code:`Digraph3` directory f
 
 All :py:class:`digraphs.Digraph` objects (see Line 6) contain at least the following components: 
 
-1. A collection of digraph nodes called **actions** (decision actions): a list, set or (ordered) dictionary of nodes with 'name' and 'shortname' attributes,
+1. A collection of digraph nodes called **actions** (decision actions): a list (obsolete), set or dictionary (ordered by default) of nodes with 'name' and 'shortname' attributes,
 2. A logical characteristic **valuationdomain**, a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true),
 3. The digraph **relation** : a double dictionary indexed by an oriented pair of actions (nodes) and carrying a characteristic value in the range of the previous valuation domain,
 4. Its associated **gamma function** : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor,
