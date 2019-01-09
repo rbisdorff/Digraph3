@@ -27,39 +27,40 @@ Installation instructions:
 
 On a (Unix, Mac OSX) command line using a git client and either, cloning from github.com:
 
-...$git clone https://github.com/rbisdorff/Digraph3
+...$ git clone https://github.com/rbisdorff/Digraph3
 
 or, from sourceforge.net:
 
-...$git clone https://git.code.sf.net/p/digraph3/code Digraph3
+...$ git clone https://git.code.sf.net/p/digraph3/code Digraph3
 
 You may as well check out a working copy using a subversion client:
 
-...$svn co https://leopold-loewenheim.uni.lu/svn/repos/Digraph3
+...$ svn co https://leopold-loewenheim.uni.lu/svn/repos/Digraph3
 
 You may also download and extract a zip archive fom the github link above, or a 
- zip archive (not always the latest):from 
+ zip archive (not always the latest) from 
 
 https://sourceforge.net/projects/digraph3/.
 
-cd to the downloaded (and extracted)Digraph3 working directory:
+cd to the downloaded (and extracted) Digraph3 working directory:
 
-../Digraph3$ make install
-installs (with sudo !!) the digraphs module in the current running python environment. 
-Pythhon 3.5+ environment is recommemded. A 'make installVenv' allows to install into a private
-virtual python environment. Check and adapt if necessary the makefile install commands. 
+$Home/.../Digraph3$ make install
 
-If the cython C-compiled modules for Big Data are required, the Cython package must previously be 
-installed in the running Python environment (...$ pip3.5+ install cython )
+installs (with sudo !!) the Digraph3 modules in the current running python environment. A Pythhon 3.5+ environment is recommemded.
+
+A 'make installVenv' allows to install instead into a private virtual python environment. Check and adapt if necessary the makefile install commands. 
+
+If the cython C-compiled modules for Big Data are required, the Cython package must previously be installed in the running Python environment (...$ pip3.5+ install cython).
 
 .. /Digraph3$ make tests
-runs a nose test suite in the ./test directory
-(python3 nose package required  ..$ pip3.5+ install nose )
+
+runs a nose test suite in the ./test directory ( python3 nose package required  ...$ pip3.5+ install nose )
 
 .. /Digraph3$ make verboseTests
 runs a verbose (with stdout not captured) nose test suite 
 
 Tutorials and technical documentation of modules, classes and methods are available under the following link:
+
 http://digraph3.readthedocs.io/en/latest/
 
 Enjoy !!
