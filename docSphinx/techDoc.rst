@@ -43,7 +43,7 @@ installs the Digraph3 modules in an activated virtual python environment.
      
 If the cyton C-compiled modules for Big Data applications are required, it is necessary to previously install the Cython package in the running Python environment::
 
-     ...$pip3.5+ install cython
+     ...$ pip3.5+ install cython
 
 It is recommended to run a nose test suite::
     
@@ -51,7 +51,7 @@ It is recommended to run a nose test suite::
 
 Test results are stored in the <Digraph3/test> directory. Notice, the python3 nose package is required::
 
-      ...$ [sudo] pip3 install nose
+      ...$ pip3 install nose
       .../Digraph3$ make verboseTests
 
 runs a verbose (with stdout not captured) nose test suite::
