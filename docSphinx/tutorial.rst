@@ -46,17 +46,21 @@ Downloading of the Digraph3 resources
 
 Using the Digraph3 modules is easy. You only need to have installed on your system the `Python <https://www.python.org/doc/>`_ programming language of version 3.+ (readily available under Linux and Mac OS). Notice that, from Version 3.3 on, the Python standard decimal module implements very efficiently its decimal.Decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic r-valuation functions, which makes the recent python-3.3+ versions much faster (more than twice as fast) when extensive digraph operations are performed.
 
-Three download options are given.
+Several download options (easiest under Linux or Mac OS-X) are given.
 
-1. Either (easiest under Linux or Mac OS-X), by using a git client::
+1. Either , by using a git client either, from github::
 
-   ..$ git clone https://github.com/rbisdorff/Digraph3 
+   ...$ git clone https://github.com/rbisdorff/Digraph3 
 
-2. or a subversion client::
+2. Or, from sourceforge.net::
 
-   ..$ svn co https://leopold-loewenheim.uni.lu/svn/repos/Digraph3 
+   ...$ git clone https://git.code.sf.net/p/digraph3/code Digraph3 
 
-3. Or, with a browser access, download and extract the latest distribution zip archive from this `sourceforge page <https://sourceforge.net/projects/digraph3/>`_ .
+3. or a subversion client::
+
+   ...$ svn co https://leopold-loewenheim.uni.lu/svn/repos/Digraph3 
+
+4. Or, with a browser access, download and extract the latest distribution zip archive either, from the `github link above <https://github.com/rbisdorff/Digraph3>`_  or, from the `sourceforge page <https://sourceforge.net/projects/digraph3/>`_ .
 
 
 Starting a python3 session
@@ -65,8 +69,8 @@ Starting a python3 session
 You may start an interactive Python3 session in the :code:`Digraph3` directory for exploring the classes and methods provided by the :code:`digraphs` module. To do so, enter the ``python3`` commands following the session prompts marked with >>>. The lines without the prompt are output from the Python interpreter::
 
     $HOME/.../Digraph3$ python3
-    Python 3.5.0 (default, Sep 23 2015, 13:39:18)
-    [GCC 4.8.4] on linux
+    Python 3.6.7 (default, Oct 22 2018, 11:32:17) 
+    [GCC 8.2.0] on linux
     Type "help", "copyright", "credits" or
           "license" for more information.
     >>> from randomDigraphs import RandomDigraph
@@ -106,7 +110,7 @@ All :py:class:`digraphs.Digraph` objects (see Line 12 above) contain at least th
 Permanent storage
 .................
 
-The :code:`dg.save('tutorialDigraph')` command (see Line 7 above) stores the digraph *dg* in a file named :code:`tutorialDigraph.py` with the following content::
+The :code:`dg.save('tutorialDigraph')` command (see Line 19 above) stores the digraph *dg* in a file named :code:`tutorialDigraph.py` with the following content::
 
     # Saved digraph instance
     actions = {
@@ -797,7 +801,7 @@ See also the technical documentation of the :ref:`outrankingDigraphs-label`.
 Outranking digraph
 ..................
 
-In this *Digraph3* module, the root :py:class:`outrankingDigraphs.OutrankingDigraph` class provides a generic **outranking digraph model**. A given object of this class consists in
+In this *Digraph3* module, the main :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class provides a generic **bipolar outranking digraph model**. A given object of this class consists in
 
 1. a potential set of decision **actions** : a dictionary describing the potential decision actions or alternatives with 'name' and 'comment' attributes,
 2. a coherent family of **criteria**: a dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,

@@ -102,19 +102,24 @@
 <div class="section" id="downloading-of-the-digraph3-resources">
 <h3><a class="toc-backref" href="#id63">Downloading of the Digraph3 resources</a><a class="headerlink" href="#downloading-of-the-digraph3-resources" title="Permalink to this headline">¶</a></h3>
 <p>Using the Digraph3 modules is easy. You only need to have installed on your system the <a class="reference external" href="https://www.python.org/doc/">Python</a> programming language of version 3.+ (readily available under Linux and Mac OS). Notice that, from Version 3.3 on, the Python standard decimal module implements very efficiently its decimal.Decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic r-valuation functions, which makes the recent python-3.3+ versions much faster (more than twice as fast) when extensive digraph operations are performed.</p>
-<p>Three download options are given.</p>
+<p>Several download options (easiest under Linux or Mac OS-X) are given.</p>
 <ol class="arabic">
-<li><p class="first">Either (easiest under Linux or Mac OS-X), by using a git client:</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span>..$ git clone https://github.com/rbisdorff/Digraph3
+<li><p class="first">Either , by using a git client either, from github:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span>...$ git clone https://github.com/rbisdorff/Digraph3
+</pre></div>
+</td></tr></table></div>
+</li>
+<li><p class="first">Or, from sourceforge.net:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span>...$ git clone https://git.code.sf.net/p/digraph3/code Digraph3
 </pre></div>
 </td></tr></table></div>
 </li>
 <li><p class="first">or a subversion client:</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span>..$ svn co https://leopold-loewenheim.uni.lu/svn/repos/Digraph3
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span>...$ svn co https://leopold-loewenheim.uni.lu/svn/repos/Digraph3
 </pre></div>
 </td></tr></table></div>
 </li>
-<li><p class="first">Or, with a browser access, download and extract the latest distribution zip archive from this <a class="reference external" href="https://sourceforge.net/projects/digraph3/">sourceforge page</a> .</p>
+<li><p class="first">Or, with a browser access, download and extract the latest distribution zip archive either, from the <a class="reference external" href="https://github.com/rbisdorff/Digraph3">github link above</a>  or, from the <a class="reference external" href="https://sourceforge.net/projects/digraph3/">sourceforge page</a> .</p>
 </li>
 </ol>
 </div>
@@ -142,8 +147,8 @@
 19
 20
 21</pre></div></td><td class="code"><div class="highlight"><pre><span></span>$HOME/.../Digraph3$ python3
-Python 3.5.0 (default, Sep 23 2015, 13:39:18)
-[GCC 4.8.4] on linux
+Python 3.6.7 (default, Oct 22 2018, 11:32:17)
+[GCC 8.2.0] on linux
 Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or
       &quot;license&quot; for more information.
 &gt;&gt;&gt; from randomDigraphs import RandomDigraph
@@ -181,7 +186,7 @@ Attributes       : [&#39;actions&#39;, &#39;valuationdomain&#39;, &#39;relation&
 </div>
 <div class="section" id="permanent-storage">
 <h3><a class="toc-backref" href="#id66">Permanent storage</a><a class="headerlink" href="#permanent-storage" title="Permalink to this headline">¶</a></h3>
-<p>The <code class="code docutils literal"><span class="pre">dg.save('tutorialDigraph')</span></code> command (see Line 7 above) stores the digraph <em>dg</em> in a file named <code class="code docutils literal"><span class="pre">tutorialDigraph.py</span></code> with the following content:</p>
+<p>The <code class="code docutils literal"><span class="pre">dg.save('tutorialDigraph')</span></code> command (see Line 19 above) stores the digraph <em>dg</em> in a file named <code class="code docutils literal"><span class="pre">tutorialDigraph.py</span></code> with the following content:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1269,7 +1274,7 @@ Attributes       : [&#39;actions&#39;, &#39;valuationdomain&#39;, &#39;relation&
 <p>See also the technical documentation of the <a class="reference internal" href="techDoc.html#outrankingdigraphs-label"><span class="std std-ref">outrankingDigraphs module</span></a>.</p>
 <div class="section" id="outranking-digraph">
 <h3><a class="toc-backref" href="#id82">Outranking digraph</a><a class="headerlink" href="#outranking-digraph" title="Permalink to this headline">¶</a></h3>
-<p>In this <em>Digraph3</em> module, the root <a class="reference internal" href="techDoc.html#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.OutrankingDigraph</span></code></a> class provides a generic <strong>outranking digraph model</strong>. A given object of this class consists in</p>
+<p>In this <em>Digraph3</em> module, the main <a class="reference internal" href="techDoc.html#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a> class provides a generic <strong>bipolar outranking digraph model</strong>. A given object of this class consists in</p>
 <ol class="arabic simple">
 <li>a potential set of decision <strong>actions</strong> : a dictionary describing the potential decision actions or alternatives with ‘name’ and ‘comment’ attributes,</li>
 <li>a coherent family of <strong>criteria</strong>: a dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,</li>

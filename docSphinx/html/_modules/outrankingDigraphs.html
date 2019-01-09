@@ -6166,7 +6166,7 @@
 
 
 
-<div class="viewcode-block" id="BipolarIntegerOutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.BipolarIntegerOutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">BipolarIntegerOutrankingDigraph</span><span class="p">(</span><span class="n">BipolarOutrankingDigraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">_BipolarIntegerOutrankingDigraph</span><span class="p">(</span><span class="n">BipolarOutrankingDigraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters:</span>
 <span class="sd">        | performanceTableau (fileName of valid py code)</span>
@@ -6514,7 +6514,7 @@
 
 
 
-<div class="viewcode-block" id="BipolarIntegerOutrankingDigraph.showRelation"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.BipolarIntegerOutrankingDigraph.showRelation">[docs]</a>    <span class="k">def</span> <span class="nf">showRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">showRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        prints the relation valuation in ##.## format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -6523,10 +6523,10 @@
             <span class="nb">print</span><span class="p">()</span>
             <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;(&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;, &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;) = &#39;</span><span class="o">+</span><span class="s1">&#39; </span><span class="si">%d</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]))</span>
-        <span class="nb">print</span><span class="p">()</span></div>
+        <span class="nb">print</span><span class="p">()</span>
 
 
-<div class="viewcode-block" id="BipolarIntegerOutrankingDigraph.savePy2Gprolog"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.BipolarIntegerOutrankingDigraph.savePy2Gprolog">[docs]</a>    <span class="k">def</span> <span class="nf">savePy2Gprolog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">savePy2Gprolog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        save digraph in gprolog version</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -6604,10 +6604,10 @@
                     <span class="n">value</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">+</span> <span class="n">Med</span>
                 <span class="n">resxy</span> <span class="o">=</span> <span class="n">resx</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;,&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;).</span><span class="se">\n</span><span class="s1">&#39;</span>
                 <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">resxy</span><span class="p">)</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div></div>
+        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 
-<div class="viewcode-block" id="RandomElectre3OutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.RandomElectre3OutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">RandomElectre3OutrankingDigraph</span><span class="p">(</span><span class="n">Electre3OutrankingDigraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">_RandomElectre3OutrankingDigraph</span><span class="p">(</span><span class="n">Electre3OutrankingDigraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters:</span>
 <span class="sd">        | n := nbr of actions, p := number criteria, scale := [Min,Max],</span>
@@ -6636,7 +6636,7 @@
         <span class="c1"># standard Digraph parameters initialization</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
 
 
 
@@ -8467,7 +8467,10 @@
 <span class="sd">        sqrt(2) = 1.4142135623731</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">sqrt</span><span class="p">,</span><span class="n">erf</span>
-        <span class="n">z</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">sigma</span> <span class="o">*</span> <span class="mf">1.4142135623731</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">sigma</span> <span class="o">*</span> <span class="mf">1.4142135623731</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="mf">0.0</span>        
         <span class="k">if</span> <span class="n">Bipolar</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">erf</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>

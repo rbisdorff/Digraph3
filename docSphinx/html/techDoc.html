@@ -104,43 +104,46 @@
 <div class="section" id="installation">
 <span id="technical-label"></span><h2><a class="toc-backref" href="#id3">Installation</a><a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p><strong>Dowloading the Digraph3 resources</strong></p>
-<p>Three download options are given:</p>
+<p>Four download options are given:</p>
 <ol class="arabic">
-<li><p class="first">Either (easiest under Linux or Mac OS-X), by using a git client:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>..$ git clone https://github.com/rbisdorff/Digraph3
+<li><p class="first">Either (easiest under Linux or Mac OS-X), by using a git client and cloning from github.com:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>...$ git clone https://github.com/rbisdorff/Digraph3
 </pre></div>
 </div>
 </li>
-<li><p class="first">or, a subversion client:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>..$ svn co https://leopold-loewenheim.uni.lu/svn/repos/Digraph3
+<li><p class="first">Or from sourceforge.net:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>...$ git clone https://git.code.sf.net/p/digraph3/code Digraph3
 </pre></div>
 </div>
 </li>
-<li><p class="first">Or, with a browser access, download and extract the latest distribution release tar.gz or zip archive from this sourceforge page:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">sourceforge</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">digraph3</span><span class="o">/</span>
+<li><p class="first">You may also use a subversion client:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>...$ svn co https://leopold-loewenheim.uni.lu/svn/repos/Digraph3
 </pre></div>
 </div>
+</li>
+<li><p class="first">Or, with a browser access,  download and extract the latest distribution zip archive either, from the <a class="reference external" href="https://github.com/rbisdorff/Digraph3">github link above</a>  or, from the <a class="reference external" href="https://sourceforge.net/projects/digraph3/">sourceforge page</a> .</p>
 </li>
 </ol>
 <p>On Linux or Mac OS, ..$ cd to the extracted &lt;Digraph3&gt; directory:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>../Digraph3$ make install
 </pre></div>
 </div>
-<p>installs (with sudo !!) the digraphs module in the current running python environment. Pythhon 3.5 (or later) environment is recommended. Whereas:</p>
+<p>installs (with sudo !!) the Digraph3 modules in the current running python environment. Pythhon 3.5 (or later) environment is recommended. Whereas:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>../Digraph3$ make installVenv
 </pre></div>
 </div>
-<p>installs the modules in an activated virtual python environment.</p>
+<p>installs the Digraph3 modules in an activated virtual python environment.</p>
 <p>If the cyton C-compiled modules for Big Data applications are required, it is necessary to previously install the Cython package in the running Python environment:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span>...$pip3.5+ install cython
 </pre></div>
 </div>
 <p>It is recommended to run a nose test suite:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>../Digraph3$ make tests
+<div class="highlight-default"><div class="highlight"><pre><span></span>.../Digraph3$ make tests
 </pre></div>
 </div>
-<p>in the ../test directory (python3 nose package required  …$ pip3 install nose ):</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>../Digraph3$ make verboseTests
+<p>Test results are stored in the &lt;Digraph3/test&gt; directory. Notice, the python3 nose package is required:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>...$ [sudo] pip3 install nose
+.../Digraph3$ make verboseTests
 </pre></div>
 </div>
 <p>runs a verbose (with stdout not captured) nose test suite:</p>
@@ -4934,34 +4937,6 @@ GNU General Public License for more details.</p>
 with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</p>
 <dl class="class">
-<dt id="outrankingDigraphs.BipolarIntegerOutrankingDigraph">
-<em class="property">class </em><code class="descclassname">outrankingDigraphs.</code><code class="descname">BipolarIntegerOutrankingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>coalition=None</em>, <em>hasBipolarVeto=True</em>, <em>hasSymmetricThresholds=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#BipolarIntegerOutrankingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.BipolarIntegerOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
-<dl class="docutils">
-<dt>Parameters:</dt>
-<dd><div class="first last line-block">
-<div class="line">performanceTableau (fileName of valid py code)</div>
-<div class="line">optional, coalition (sublist of criteria)</div>
-</div>
-</dd>
-</dl>
-<p>Specialization of the standard OutrankingDigraph class for generating
-bipolar integer-valued outranking digraphs.</p>
-<dl class="method">
-<dt id="outrankingDigraphs.BipolarIntegerOutrankingDigraph.savePy2Gprolog">
-<code class="descname">savePy2Gprolog</code><span class="sig-paren">(</span><em>name='temp'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#BipolarIntegerOutrankingDigraph.savePy2Gprolog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.BipolarIntegerOutrankingDigraph.savePy2Gprolog" title="Permalink to this definition">¶</a></dt>
-<dd><p>save digraph in gprolog version</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="outrankingDigraphs.BipolarIntegerOutrankingDigraph.showRelation">
-<code class="descname">showRelation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#BipolarIntegerOutrankingDigraph.showRelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.BipolarIntegerOutrankingDigraph.showRelation" title="Permalink to this definition">¶</a></dt>
-<dd><p>prints the relation valuation in ##.## format.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
 <dt id="outrankingDigraphs.BipolarOutrankingDigraph">
 <em class="property">class </em><code class="descclassname">outrankingDigraphs.</code><code class="descname">BipolarOutrankingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>coalition=None</em>, <em>actionsSubset=None</em>, <em>hasNoVeto=False</em>, <em>hasBipolarVeto=True</em>, <em>Normalized=False</em>, <em>CopyPerfTab=True</em>, <em>BigData=False</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>WithConcordanceRelation=True</em>, <em>WithVetoCounts=True</em>, <em>nbrCores=None</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#BipolarOutrankingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.OutrankingDigraph</span></code></a></p>
@@ -5464,22 +5439,6 @@ res = ((netdet,sigleton,dom,absorb)+)</p>
 <dd><div class="first last line-block">
 <div class="line">n := nbr of actions, p := number criteria,</div>
 <div class="line">scale := [Min,Max], thresholds := [h,q,v]</div>
-</div>
-</dd>
-</dl>
-<p>Specialization of the OutrankingDigraph class for generating temporary
-Digraphs from random performance tableaux.</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="outrankingDigraphs.RandomElectre3OutrankingDigraph">
-<em class="property">class </em><code class="descclassname">outrankingDigraphs.</code><code class="descname">RandomElectre3OutrankingDigraph</code><span class="sig-paren">(</span><em>numberOfActions=7, numberOfCriteria=7, weightDistribution='random', weightScale=[1, 10], commonScale=[0.0, 100.0], commonThresholds=[(10.0, 0.0), (20.0, 0.0), (80.0, 0.0)], commonMode=['uniform', None, None]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#RandomElectre3OutrankingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.RandomElectre3OutrankingDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.Electre3OutrankingDigraph" title="outrankingDigraphs.Electre3OutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.Electre3OutrankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
-<dl class="docutils">
-<dt>Parameters:</dt>
-<dd><div class="first last line-block">
-<div class="line">n := nbr of actions, p := number criteria, scale := [Min,Max],</div>
-<div class="line">thresholds := [h,q,v]</div>
 </div>
 </dd>
 </dl>

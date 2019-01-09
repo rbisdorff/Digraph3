@@ -25,19 +25,24 @@ in outranking based Multiple Criteria Decision Aid (MCDA).
 
 Installation instructions:
 
-On a (Unix, Mac OSX) command line using a git client:
+On a (Unix, Mac OSX) command line using a git client and either, cloning from github.com:
 
 ...$git clone https://github.com/rbisdorff/Digraph3
 
-or a subversion client,
+or, from sourceforge.net:
+
+...$git clone https://git.code.sf.net/p/digraph3/code Digraph3
+
+You may as well check out a working copy using a subversion client:
 
 ...$svn co https://leopold-loewenheim.uni.lu/svn/repos/Digraph3
 
-You may also download a latest release fom the github link above, or a mirror release from 
+You may also download and extract a zip archive fom the github link above, or a 
+ zip archive (not always the latest):from 
 
 https://sourceforge.net/projects/digraph3/.
 
-cd to the downloaded Digraph3 working directory:
+cd to the downloaded (and extracted)Digraph3 working directory:
 
 ../Digraph3$ make install
 installs (with sudo !!) the digraphs module in the current running python environment. 
@@ -56,7 +61,6 @@ runs a verbose (with stdout not captured) nose test suite
 
 Tutorials and technical documentation of modules, classes and methods are available under the following link:
 http://digraph3.readthedocs.io/en/latest/
-
 
 Enjoy !!
 R Bisdorff

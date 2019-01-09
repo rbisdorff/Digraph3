@@ -15,29 +15,31 @@ Installation
 
 **Dowloading the Digraph3 resources**
 
-Three download options are given:
+Four download options are given:
 
-1. Either (easiest under Linux or Mac OS-X), by using a git client::
+1. Either (easiest under Linux or Mac OS-X), by using a git client and cloning from github.com::
 
-     ..$ git clone https://github.com/rbisdorff/Digraph3 
+     ...$ git clone https://github.com/rbisdorff/Digraph3
 
-2. or, a subversion client::
+2. Or from sourceforge.net::
+  
+     ...$ git clone https://git.code.sf.net/p/digraph3/code Digraph3
+     
+3. You may also use a subversion client::
 
-     ..$ svn co https://leopold-loewenheim.uni.lu/svn/repos/Digraph3 
+     ...$ svn co https://leopold-loewenheim.uni.lu/svn/repos/Digraph3 
 
-3. Or, with a browser access, download and extract the latest distribution release tar.gz or zip archive from this sourceforge page::
-
-      https://sourceforge.net/projects/digraph3/
+4. Or, with a browser access,  download and extract the latest distribution zip archive either, from the `github link above <https://github.com/rbisdorff/Digraph3>`_  or, from the `sourceforge page <https://sourceforge.net/projects/digraph3/>`_ .
 
 On Linux or Mac OS, ..$ cd to the extracted <Digraph3> directory::
 
      ../Digraph3$ make install
 
-installs (with sudo !!) the digraphs module in the current running python environment. Pythhon 3.5 (or later) environment is recommended. Whereas::
+installs (with sudo !!) the Digraph3 modules in the current running python environment. Pythhon 3.5 (or later) environment is recommended. Whereas::
 
      ../Digraph3$ make installVenv
           
-installs the modules in an activated virtual python environment.
+installs the Digraph3 modules in an activated virtual python environment.
      
 If the cyton C-compiled modules for Big Data applications are required, it is necessary to previously install the Cython package in the running Python environment::
 
@@ -45,11 +47,12 @@ If the cyton C-compiled modules for Big Data applications are required, it is ne
 
 It is recommended to run a nose test suite::
     
-     ../Digraph3$ make tests
+     .../Digraph3$ make tests
 
-in the ../test directory (python3 nose package required  ...$ pip3 install nose )::
+Test results are stored in the <Digraph3/test> directory. Notice, the python3 nose package is required::
 
-     ../Digraph3$ make verboseTests
+      ...$ [sudo] pip3 install nose
+      .../Digraph3$ make verboseTests
 
 runs a verbose (with stdout not captured) nose test suite::
 

@@ -137,14 +137,14 @@ def testXMLRubisSaveReadMethods():
     g.saveXMLRubisOutrankingDigraph('testrel',servingD3=False)
     g.showVetos()
 
-def testXMLRubisIntegerOutrankingSave():
-    print('*==>> test rubisIntegerOutrankingDigraph XML saving ------------*')
-    t = FullRandomPerformanceTableau(numberOfActions=5,commonMode=['uniform',None,None],IntegerWeights=True)
-    t.saveXMLRubis()
-    gi = BipolarIntegerOutrankingDigraph(t)
-    gi.saveXMLRubisOutrankingDigraph('testint',servingD3=False)
-    gi.showRelationTable()
-    gi.showRubyChoice(Comments=True)
+# def testXMLRubisIntegerOutrankingSave():
+#     print('*==>> test rubisIntegerOutrankingDigraph XML saving ------------*')
+#     t = FullRandomPerformanceTableau(numberOfActions=5,commonMode=['uniform',None,None],IntegerWeights=True)
+#     t.saveXMLRubis()
+#     gi = BipolarIntegerOutrankingDigraph(t)
+#     gi.saveXMLRubisOutrankingDigraph('testint',servingD3=False)
+#     gi.showRelationTable()
+#     gi.showRubyChoice(Comments=True)
 
 def testRobustoutranking():
     print('*==>> robust outranking ------------------*')

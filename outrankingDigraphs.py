@@ -6119,7 +6119,7 @@ class _MedianBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
 
 
 
-class BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
+class _BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
     """
     Parameters:
         | performanceTableau (fileName of valid py code)
@@ -6560,7 +6560,7 @@ class BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         fo.close()
 
 
-class RandomElectre3OutrankingDigraph(Electre3OutrankingDigraph,PerformanceTableau):
+class _RandomElectre3OutrankingDigraph(Electre3OutrankingDigraph,PerformanceTableau):
     """
     Parameters:
         | n := nbr of actions, p := number criteria, scale := [Min,Max],
@@ -8420,7 +8420,10 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         sqrt(2) = 1.4142135623731
         """
         from math import sqrt,erf
-        z = (x - mean) / (sigma * 1.4142135623731)
+        try:
+            z = (x - mean) / (sigma * 1.4142135623731)
+        except ZeroDivisionError:
+            z = 0.0        
         if Bipolar:
             return erf(z)
         else:
