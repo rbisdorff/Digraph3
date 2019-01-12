@@ -1891,7 +1891,7 @@ class RandomCBPerformanceTableau(cPerformanceTableau):
             nbuf = n
         if n2 < samplingSize:
             samplingSize = n2
-        from iqagent import IncrementalQuantileEstimator
+        from randomNumbers import IncrementalQuantileEstimator
         est = IncrementalQuantileEstimator(nbuf=nbuf)
         if Debug:
             print('commonPercentiles=', commonPercentiles)
