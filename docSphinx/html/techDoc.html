@@ -7892,6 +7892,76 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 </dd></dl>
 
 <dl class="class">
+<dt id="randomNumbers.IncrementalQuantileEstimator">
+<em class="property">class </em><code class="descclassname">randomNumbers.</code><code class="descname">IncrementalQuantileEstimator</code><span class="sig-paren">(</span><em>nbuf=1000</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#IncrementalQuantileEstimator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.IncrementalQuantileEstimator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>John M. Chambers et al. IQagent python implementation
+Monitoring Networked Applications with incremental Quantile estimation
+Statistical Science 2006 (4):463-475
+Transcription from C++/nr3 implementation</p>
+<p>Example usage:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="k">import</span> <span class="n">IncrementalQuantileEstimator</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">random</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iqAgent</span> <span class="o">=</span> <span class="n">IncrementalQuantileEstimator</span><span class="p">(</span><span class="n">nbuf</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># feeding the iqAgent with Gaussian(mu=20,sd=20) random numbers </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">iqAgent</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># reporting the estimated Gaussian quartiles</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">iqAgent</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span>
+<span class="go">-10.116580025214837</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">iqAgent</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="mf">0.25</span><span class="p">))</span>
+<span class="go">1.720581125293748</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">iqAgent</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="go">20.626690336634336</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">iqAgent</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="mf">0.75</span><span class="p">))</span>
+<span class="go">26.414222019976965</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">iqAgent</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))</span>
+<span class="go">67.78224086481373</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># saving the iqAgent&#39;s state</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iqAgent</span><span class="o">.</span><span class="n">saveState</span><span class="p">(</span><span class="s1">&#39;test.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="randomNumbers.IncrementalQuantileEstimator.add">
+<code class="descname">add</code><span class="sig-paren">(</span><em>datum</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#IncrementalQuantileEstimator.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.IncrementalQuantileEstimator.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assimilate a new value from the stream</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="randomNumbers.IncrementalQuantileEstimator.cdf">
+<code class="descname">cdf</code><span class="sig-paren">(</span><em>x=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#IncrementalQuantileEstimator.cdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.IncrementalQuantileEstimator.cdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>return proportion of data lower or equal to value x</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="randomNumbers.IncrementalQuantileEstimator.loadState">
+<code class="descname">loadState</code><span class="sig-paren">(</span><em>FileName='state.csv'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#IncrementalQuantileEstimator.loadState"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.IncrementalQuantileEstimator.loadState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load a previously saved state of the estimator</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="randomNumbers.IncrementalQuantileEstimator.report">
+<code class="descname">report</code><span class="sig-paren">(</span><em>p=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#IncrementalQuantileEstimator.report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.IncrementalQuantileEstimator.report" title="Permalink to this definition">¶</a></dt>
+<dd><p>return estimated p-quantile (default = median)
+for the data seen so far</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="randomNumbers.IncrementalQuantileEstimator.reset">
+<code class="descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#IncrementalQuantileEstimator.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.IncrementalQuantileEstimator.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>reset the content of the estimator to the initial state.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="randomNumbers.IncrementalQuantileEstimator.saveState">
+<code class="descname">saveState</code><span class="sig-paren">(</span><em>fileName='state.csv'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#IncrementalQuantileEstimator.saveState"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.IncrementalQuantileEstimator.saveState" title="Permalink to this definition">¶</a></dt>
+<dd><p>save the state of the IncrementalQuantileEstimator self instance</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="randomNumbers.QuasiRandomFareyPointSet">
 <em class="property">class </em><code class="descclassname">randomNumbers.</code><code class="descname">QuasiRandomFareyPointSet</code><span class="sig-paren">(</span><em>n=20</em>, <em>s=3</em>, <em>seed=None</em>, <em>Randomized=True</em>, <em>fileName='farey'</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#QuasiRandomFareyPointSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.QuasiRandomFareyPointSet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#randomNumbers.QuasiRandomPointSet" title="randomNumbers.QuasiRandomPointSet"><code class="xref py py-class docutils literal"><span class="pre">randomNumbers.QuasiRandomPointSet</span></code></a></p>

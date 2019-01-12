@@ -8,6 +8,26 @@
 ########################
 from randomNumbers import *
 
+def testIqAgent():
+    print('==>> Testing the iqagent')
+    import random
+    random.seed(1)
+    iqAgent = IncrementalQuantileEstimator(nbuf=100,Debug=True)
+    for i in range(200):
+        iqAgent.add(random.gauss(20,20))
+    print(iqAgent.report(0.0))
+    print(iqAgent.report(0.25))
+    print(iqAgent.report(0.5))
+    print(iqAgent.report(0.75))
+    print(iqAgent.report(1.0))
+    iqAgent.saveState('test.csv')
+    iqAgent.loadState('test.csv')
+    print(iqAgent.report(0.0))
+    print(iqAgent.report(0.25))
+    print(iqAgent.report(0.5))
+    print(iqAgent.report(0.75))
+    print(iqAgent.report(1.0))
+
 def testDiscreteRandomVariable():
     print('==>> Testing discrete random number generator')
     ## initialize the discrete random variable 

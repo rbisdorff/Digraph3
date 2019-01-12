@@ -70,6 +70,270 @@
 <span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;Branch: 3.6 $&quot;</span>
 <span class="c1"># ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3</span>
 
+<div class="viewcode-block" id="IncrementalQuantileEstimator"><a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantileEstimator">[docs]</a><span class="k">class</span> <span class="nc">IncrementalQuantileEstimator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    John M. Chambers et al. IQagent python implementation</span>
+<span class="sd">    Monitoring Networked Applications with incremental Quantile estimation</span>
+<span class="sd">    Statistical Science 2006 (4):463-475</span>
+<span class="sd">    Transcription from C++/nr3 implementation</span>
+
+<span class="sd">    Example usage:</span>
+
+<span class="sd">        &gt;&gt;&gt; from randomNumbers import IncrementalQuantileEstimator</span>
+<span class="sd">        &gt;&gt;&gt; import random</span>
+<span class="sd">        &gt;&gt;&gt; random.seed(1)</span>
+<span class="sd">        &gt;&gt;&gt; iqAgent = IncrementalQuantileEstimator(nbuf=100)</span>
+<span class="sd">        &gt;&gt;&gt; # feeding the iqAgent with Gaussian(mu=20,sd=20) random numbers </span>
+<span class="sd">        &gt;&gt;&gt; for i in range(20):</span>
+<span class="sd">        ...     iqAgent.add(random.gauss(20,20))</span>
+<span class="sd">        &gt;&gt;&gt; # reporting the estimated Gaussian quartiles</span>
+<span class="sd">        &gt;&gt;&gt; print(iqAgent.report(0.0))</span>
+<span class="sd">        -10.116580025214837</span>
+<span class="sd">        &gt;&gt;&gt; print(iqAgent.report(0.25))</span>
+<span class="sd">        1.720581125293748</span>
+<span class="sd">        &gt;&gt;&gt; print(iqAgent.report(0.5))</span>
+<span class="sd">        20.626690336634336</span>
+<span class="sd">        &gt;&gt;&gt; print(iqAgent.report(0.75))</span>
+<span class="sd">        26.414222019976965</span>
+<span class="sd">        &gt;&gt;&gt; print(iqAgent.report(1.0))</span>
+<span class="sd">        67.78224086481373</span>
+<span class="sd">        &gt;&gt;&gt; # saving the iqAgent&#39;s state</span>
+<span class="sd">        &gt;&gt;&gt; iqAgent.saveState(&#39;test.csv&#39;)</span>
+<span class="sd">  </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nbuf</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        contructor: nbuf := buffersize (default = 1000)</span>
+<span class="sd">        250 quantiles containing all percentiles from 0.10 to 0.90</span>
+<span class="sd">        and heavy tails.</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">sys</span> <span class="k">import</span> <span class="n">float_info</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nbrupd</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nq</span> <span class="o">=</span> <span class="mi">251</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">qile</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nq</span><span class="p">)]</span>
+        <span class="n">pval</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nq</span><span class="p">)]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">85</span><span class="p">,</span><span class="mi">166</span><span class="p">):</span>
+            <span class="n">pval</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mf">75.0</span><span class="p">)</span><span class="o">/</span><span class="mf">100.0</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">84</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">pval</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.87191909</span><span class="o">*</span><span class="n">pval</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">pval</span><span class="p">[</span><span class="mi">250</span><span class="o">-</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">-</span><span class="n">pval</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pval</span> <span class="o">=</span> <span class="n">pval</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">nt</span> <span class="o">=</span> <span class="mi">0</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">nbuf</span> <span class="o">=</span> <span class="n">nbuf</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dbuf</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">q0</span> <span class="o">=</span> <span class="n">float_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># max float</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">qm</span> <span class="o">=</span> <span class="n">float_info</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="c1"># min float</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">saveState</span><span class="p">(</span><span class="s1">&#39;initState.csv&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="IncrementalQuantileEstimator.reset"><a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantileEstimator.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        reset the content of the estimator to the initial state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nbrupd</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">qile</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nq</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nt</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dbuf</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+<div class="viewcode-block" id="IncrementalQuantileEstimator.add"><a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantileEstimator.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">datum</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Assimilate a new value from the stream</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">datum</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dbuf</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">q0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">q0</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">qm</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">qm</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dbuf</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbuf</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update</span><span class="p">()</span></div>
+
+    <span class="k">def</span> <span class="nf">_update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Batch update. For internal use only.</span>
+<span class="sd">        Called a.o. by self.add(), self.report() and</span>
+<span class="sd">        self.saveState() methods</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">jd</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">jq</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">told</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">tnew</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">nq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nq</span>
+        <span class="n">nt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nt</span>
+        <span class="n">q0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">q0</span>
+        <span class="n">qm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qm</span>
+        <span class="n">dbuf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dbuf</span>
+        <span class="n">dbuf</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="n">nd</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dbuf</span><span class="p">)</span>
+        <span class="n">pval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pval</span>
+        <span class="n">qile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qile</span>
+        <span class="n">newqile</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nq</span><span class="p">)]</span>
+
+        <span class="c1"># set lowest and highest to min and max values seen so far</span>
+        <span class="n">qold</span> <span class="o">=</span> <span class="n">q0</span>
+        <span class="n">qnew</span> <span class="o">=</span> <span class="n">q0</span>
+        <span class="n">qile</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">q0</span>
+        <span class="n">newqile</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">q0</span>
+        <span class="n">qile</span><span class="p">[</span><span class="n">nq</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">qm</span>
+        <span class="n">newqile</span><span class="p">[</span><span class="n">nq</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">qm</span>
+        <span class="c1"># and set compatible p-values</span>
+        <span class="n">pval</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mf">0.5</span><span class="o">/</span><span class="p">(</span><span class="n">nt</span><span class="o">+</span><span class="n">nd</span><span class="p">),</span><span class="mf">0.5</span><span class="o">*</span><span class="n">pval</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">pval</span><span class="p">[</span><span class="n">nq</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">1.0</span><span class="o">-</span><span class="mf">0.5</span><span class="o">/</span><span class="p">(</span><span class="n">nt</span><span class="o">+</span><span class="n">nd</span><span class="p">),</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="mf">1.0</span><span class="o">+</span><span class="n">pval</span><span class="p">[</span><span class="n">nq</span><span class="o">-</span><span class="mi">2</span><span class="p">]))</span>
+
+        <span class="k">for</span> <span class="n">iq</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">nq</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="c1"># main loop over target p-values for interpolation</span>
+            <span class="n">target</span> <span class="o">=</span> <span class="p">(</span><span class="n">nt</span><span class="o">+</span><span class="n">nd</span><span class="p">)</span><span class="o">*</span><span class="n">pval</span><span class="p">[</span><span class="n">iq</span><span class="p">]</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--&gt;&gt; enter quantile iq: &#39;</span><span class="p">,</span> <span class="n">iq</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;        tnew, target &#39;</span> <span class="p">,</span><span class="n">tnew</span><span class="p">,</span><span class="n">target</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">tnew</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">:</span>
+                <span class="c1"># find a succession of abcissa-ordinate pairs (qnew,tnew) that</span>
+                <span class="c1"># are the discontinuity of value or slope and break to perform</span>
+                <span class="c1"># an interpolation as we cross each target</span>
+                <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;iq, jq, nq, jd, nd, qile[jq], dbuf[jd]&#39;</span><span class="p">,</span>\
+                                  <span class="n">iq</span><span class="p">,</span> <span class="n">jq</span><span class="p">,</span> <span class="n">nq</span><span class="p">,</span> <span class="n">jd</span><span class="p">,</span> <span class="n">nd</span><span class="p">,</span> <span class="n">qile</span><span class="p">[</span><span class="n">jq</span><span class="p">],</span> <span class="n">dbuf</span><span class="p">[</span><span class="n">jd</span><span class="p">])</span>
+                        <span class="k">except</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">iq, jq, nq, jd, nd, qile[jq]&#39;</span><span class="p">,</span>\
+                                  <span class="n">iq</span><span class="p">,</span> <span class="n">jq</span><span class="p">,</span> <span class="n">nq</span><span class="p">,</span> <span class="n">jd</span><span class="p">,</span> <span class="n">nd</span><span class="p">,</span> <span class="n">qile</span><span class="p">[</span><span class="n">jq</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">jq</span> <span class="o">&lt;</span> <span class="n">nq</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span> <span class="p">(</span><span class="n">jd</span> <span class="o">&gt;=</span> <span class="n">nd</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">qile</span><span class="p">[</span><span class="n">jq</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">dbuf</span><span class="p">[</span><span class="n">jd</span><span class="p">])</span> <span class="p">):</span>
+                        <span class="c1"># found slope discontinuity from old cdf</span>
+                        <span class="n">qnew</span> <span class="o">=</span> <span class="n">qile</span><span class="p">[</span><span class="n">jq</span><span class="p">]</span>
+                        <span class="n">tnew</span> <span class="o">=</span> <span class="n">jd</span> <span class="o">+</span> <span class="n">nt</span><span class="o">*</span><span class="n">pval</span><span class="p">[</span><span class="n">jq</span><span class="p">]</span>
+                        <span class="n">jq</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;slope: tnew, target&#39;</span><span class="p">,</span> <span class="n">tnew</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">tnew</span> <span class="o">&gt;=</span> <span class="n">target</span><span class="p">:</span>
+                            <span class="k">break</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="c1"># found value discontinuity from batch cdf</span>
+                        <span class="n">qnew</span> <span class="o">=</span> <span class="n">dbuf</span><span class="p">[</span><span class="n">jd</span><span class="p">]</span>
+                        <span class="n">tnew</span> <span class="o">=</span> <span class="n">told</span>
+                        
+                        <span class="k">if</span> <span class="n">qile</span><span class="p">[</span><span class="n">jq</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">qile</span><span class="p">[</span><span class="n">jq</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                            <span class="n">tnew</span> <span class="o">+=</span> <span class="n">nt</span><span class="o">*</span><span class="p">(</span><span class="n">pval</span><span class="p">[</span><span class="n">jq</span><span class="p">]</span><span class="o">-</span><span class="n">pval</span><span class="p">[</span><span class="n">jq</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>\
+                                    <span class="o">*</span> <span class="p">(</span><span class="n">qnew</span><span class="o">-</span><span class="n">qold</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">qile</span><span class="p">[</span><span class="n">jq</span><span class="p">]</span><span class="o">-</span><span class="n">qile</span><span class="p">[</span><span class="n">jq</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                        <span class="n">jd</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;value 1: tnew, target&#39;</span><span class="p">,</span> <span class="n">tnew</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">tnew</span> <span class="o">&gt;=</span> <span class="n">target</span><span class="p">:</span>
+                            <span class="k">break</span>
+                        <span class="n">told</span> <span class="o">=</span> <span class="n">tnew</span>
+                        <span class="n">tnew</span> <span class="o">+=</span> <span class="mf">1.0</span>
+                        <span class="n">qold</span> <span class="o">=</span> <span class="n">qnew</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;value 2: tnew, target&#39;</span><span class="p">,</span> <span class="n">tnew</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">tnew</span> <span class="o">&gt;=</span> <span class="n">target</span><span class="p">:</span>
+                            <span class="k">break</span>
+
+                    <span class="n">told</span> <span class="o">=</span> <span class="n">tnew</span>
+                    <span class="n">qold</span> <span class="o">=</span> <span class="n">qnew</span>
+            <span class="c1"># break to here and perform the new interpolation</span>
+            <span class="k">if</span> <span class="n">tnew</span> <span class="o">==</span> <span class="n">told</span><span class="p">:</span>
+                <span class="n">newqile</span><span class="p">[</span><span class="n">iq</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span> <span class="p">(</span><span class="n">qold</span><span class="o">+</span><span class="n">qnew</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">newqile</span><span class="p">[</span><span class="n">iq</span><span class="p">]</span> <span class="o">=</span> <span class="n">qold</span> <span class="o">+</span> <span class="p">(</span><span class="n">qnew</span> <span class="o">-</span> <span class="n">qold</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">target</span><span class="o">-</span><span class="n">told</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">tnew</span><span class="o">-</span><span class="n">told</span><span class="p">)</span>
+            <span class="n">told</span> <span class="o">=</span> <span class="n">tnew</span>
+            <span class="n">qold</span> <span class="o">=</span> <span class="n">qnew</span>
+
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">q0</span> <span class="o">=</span> <span class="n">q0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">qm</span> <span class="o">=</span> <span class="n">qm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pval</span> <span class="o">=</span> <span class="n">pval</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">qile</span> <span class="o">=</span> <span class="n">newqile</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nt</span> <span class="o">+=</span> <span class="n">nd</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dbuf</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nbrupd</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">fileName</span> <span class="o">=</span> <span class="s1">&#39;saveState-</span><span class="si">%d</span><span class="s1">.csv&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbrupd</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">saveState</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span>
+        
+<div class="viewcode-block" id="IncrementalQuantileEstimator.report"><a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantileEstimator.report">[docs]</a>    <span class="k">def</span> <span class="nf">report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return estimated p-quantile (default = median)</span>
+<span class="sd">        for the data seen so far </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nq</span>
+        <span class="n">pval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pval</span>
+        <span class="n">qile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qile</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dbuf</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update</span><span class="p">()</span>
+        <span class="n">jl</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">jh</span> <span class="o">=</span> <span class="n">nq</span><span class="o">-</span><span class="mi">1</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">jh</span> <span class="o">-</span> <span class="n">jl</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="p">(</span><span class="n">jh</span> <span class="o">+</span> <span class="n">jl</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">p</span> <span class="o">&gt;</span> <span class="n">pval</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="n">jl</span> <span class="o">=</span> <span class="n">j</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">jh</span> <span class="o">=</span> <span class="n">j</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">jl</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="n">qile</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">qile</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">qile</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">pval</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">pval</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">pval</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="n">qile</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">qile</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="nb">min</span><span class="p">(</span><span class="n">qile</span><span class="p">[</span><span class="n">nq</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">q</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="IncrementalQuantileEstimator.cdf"><a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantileEstimator.cdf">[docs]</a>    <span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return proportion of data lower or equal to value x</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nq</span>
+        <span class="n">pval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pval</span>
+        <span class="n">qile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qile</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dbuf</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update</span>
+        <span class="n">jl</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">jh</span> <span class="o">=</span> <span class="n">nq</span><span class="o">-</span><span class="mi">1</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">jh</span> <span class="o">-</span> <span class="n">jl</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="p">(</span><span class="n">jh</span> <span class="o">+</span> <span class="n">jl</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">qile</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="n">jl</span> <span class="o">=</span> <span class="n">j</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">jh</span> <span class="o">=</span> <span class="n">j</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">jl</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">qile</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">qile</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">pval</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">pval</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">pval</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">qile</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">qile</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">qile</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">pval</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">pval</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">min</span><span class="p">(</span><span class="n">pval</span><span class="p">[</span><span class="n">nq</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">p</span><span class="p">))</span></div>
+
+        
+<div class="viewcode-block" id="IncrementalQuantileEstimator.saveState"><a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantileEstimator.saveState">[docs]</a>    <span class="k">def</span> <span class="nf">saveState</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;state.csv&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        save the state of the IncrementalQuantileEstimator self instance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dbuf</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update</span><span class="p">()</span>
+        <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&quot;p-value&quot;,&quot;quantile&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">iq</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nq</span><span class="p">):</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%.7f</span><span class="s1">, </span><span class="si">%.5f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pval</span><span class="p">[</span><span class="n">iq</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">qile</span><span class="p">[</span><span class="n">iq</span><span class="p">]))</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="IncrementalQuantileEstimator.loadState"><a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantileEstimator.loadState">[docs]</a>    <span class="k">def</span> <span class="nf">loadState</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">FileName</span><span class="o">=</span><span class="s1">&#39;state.csv&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Load a previously saved state of the estimator</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">csv</span> <span class="k">import</span> <span class="n">DictReader</span>
+        <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">FileName</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="n">csvDict</span> <span class="o">=</span> <span class="n">DictReader</span><span class="p">(</span><span class="n">fo</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">csvDict</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pval</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;p-value&#39;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">qile</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;quantile&#39;</span><span class="p">])</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div></div>
+
+
 <div class="viewcode-block" id="DiscreteRandomVariable"><a class="viewcode-back" href="../techDoc.html#randomNumbers.DiscreteRandomVariable">[docs]</a><span class="k">class</span> <span class="nc">DiscreteRandomVariable</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Discrete random variable generator</span>
