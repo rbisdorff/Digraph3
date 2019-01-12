@@ -2671,7 +2671,7 @@
             <span class="n">nbuf</span> <span class="o">=</span> <span class="n">n</span>
         <span class="k">if</span> <span class="n">n2</span> <span class="o">&lt;</span> <span class="n">samplingSize</span><span class="p">:</span>
             <span class="n">samplingSize</span> <span class="o">=</span> <span class="n">n2</span>
-        <span class="kn">from</span> <span class="nn">iqagent</span> <span class="k">import</span> <span class="n">IncrementalQuantileEstimator</span>
+        <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="k">import</span> <span class="n">IncrementalQuantileEstimator</span>
         <span class="n">est</span> <span class="o">=</span> <span class="n">IncrementalQuantileEstimator</span><span class="p">(</span><span class="n">nbuf</span><span class="o">=</span><span class="n">nbuf</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;commonPercentiles=&#39;</span><span class="p">,</span> <span class="n">commonPercentiles</span><span class="p">)</span>
@@ -2727,7 +2727,7 @@
         <span class="n">samplingSize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">samplingSize</span>
         <span class="k">if</span> <span class="n">n2</span> <span class="o">&lt;</span> <span class="n">samplingSize</span><span class="p">:</span>
             <span class="n">samplingSize</span> <span class="o">=</span> <span class="n">n2</span>
-        <span class="kn">from</span> <span class="nn">iqagent</span> <span class="k">import</span> <span class="n">IncrementalQuantileEstimator</span>
+        <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="k">import</span> <span class="n">IncrementalQuantileEstimator</span>
         <span class="n">est</span> <span class="o">=</span> <span class="n">IncrementalQuantileEstimator</span><span class="p">(</span><span class="n">nbuf</span><span class="o">=</span><span class="n">nbuf</span><span class="p">)</span>
         <span class="n">commonPercentiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commonPercentiles</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
