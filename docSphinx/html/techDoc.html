@@ -7895,10 +7895,15 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 <dt id="randomNumbers.IncrementalQuantileEstimator">
 <em class="property">class </em><code class="descclassname">randomNumbers.</code><code class="descname">IncrementalQuantileEstimator</code><span class="sig-paren">(</span><em>nbuf=1000</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#IncrementalQuantileEstimator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.IncrementalQuantileEstimator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
-<p>John M. Chambers et al. IQagent python implementation
-Monitoring Networked Applications with incremental Quantile estimation
-Statistical Science 2006 (4):463-475
-Transcription from C++/nr3 implementation</p>
+<p><em>References</em>:</p>
+<p>John M. Chambers (et al.), Monitoring Networked Applications 
+with incremental Quantile estimation, <em>Statistical Science</em> 2006 (4):463-475</p>
+<p><em>Reference</em>: William H. Press, Saul A. Teukolsky, William T. Vetterling, 
+and Brian P. Flannery, <em>Numerical Recipes : The Art of Scientific Computing,
+Third Edition</em> (NR3), Cambridge University Press, Cambridge UK 2007.</p>
+<p>Python reimplemtation from the C++/NR3 source code (RB).</p>
+<p>See Computational Statistics Course : <a class="reference external" href="http://hdl.handle.net/10993/37870">http://hdl.handle.net/10993/37870</a>
+Lecture 5.</p>
 <p>Example usage:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="k">import</span> <span class="n">IncrementalQuantileEstimator</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">random</span>

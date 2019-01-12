@@ -25,10 +25,19 @@ __version__ = "Branch: 3.6 $"
 
 class IncrementalQuantileEstimator(object):
     """
-    John M. Chambers et al. IQagent python implementation
-    Monitoring Networked Applications with incremental Quantile estimation
-    Statistical Science 2006 (4):463-475
-    Transcription from C++/nr3 implementation
+    *References*: 
+
+    John M. Chambers (et al.), Monitoring Networked Applications 
+    with incremental Quantile estimation, *Statistical Science* 2006 (4):463-475
+    
+    *Reference*: William H. Press, Saul A. Teukolsky, William T. Vetterling, 
+    and Brian P. Flannery, *Numerical Recipes : The Art of Scientific Computing,
+    Third Edition* (NR3), Cambridge University Press, Cambridge UK 2007.
+
+    Python reimplemtation from the C++/NR3 source code (RB).
+ 
+    See Computational Statistics Course : http://hdl.handle.net/10993/37870
+    Lecture 5.
 
     Example usage:
 
