@@ -48,9 +48,10 @@ class RandomPerformanceTableau(PerformanceTableau):
         * IntegerWeights := True (default) | False (normalized to proportions of 1.0).
         * commonScale := [Min;Max]; common performance measuring scales (default = [0;100])
         * commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p)
-          and considerable performance difference discrimination thresholds.
+          and considerable performance difference discrimination thresholds. q0, p0 and v0 are
+          expressed in percentige of the common scale amplitude: Max - Min.
         * commonMode := common random distribution of random performance measurements:
-             | ('uniform',Min,Max), uniformly distributed between min and max values. 
+             | ('uniform',None,None), uniformly distributed between min and max values. 
              | ('normal',mu,sigma), truncated Gaussion distribution. 
              | ('triangular',mode,repartition), generalized triangular distribution 
              | ('beta',mod,(alpha,beta)), mode in ]0,1[.
@@ -86,7 +87,7 @@ class RandomPerformanceTableau(PerformanceTableau):
                  numberOfCriteria = 7,\
                  weightDistribution = 'equisignificant',\
                  weightScale=None,\
-                 integerWeights=True,\
+                 IntegerWeights=True,\
                  commonScale = (0.0,100.0),\
                  commonThresholds = ((2.5,0.0),(5.0,0.0),(80.0,0.0)),\
                  commonMode = ('beta',None,(2,2)),\
@@ -100,6 +101,7 @@ class RandomPerformanceTableau(PerformanceTableau):
         from copy import copy
 
         # fixing the seed (None by default)
+        self.randomSeed = seed
         import random
         random.seed(seed)
         from randomNumbers import ExtendedTriangularRandomVariable as RNGTr
@@ -142,7 +144,8 @@ class RandomPerformanceTableau(PerformanceTableau):
                     weightsList.append(Decimal(str(weightScale[0])))
                     sumWeights += weightScale[0]
             weightsList.reverse()
-        elif weightDistribution == 'equisignificant' or weightDistribution == 'equiobjectives':
+        elif weightDistribution == 'equisignificant' or\
+             weightDistribution == 'equiobjectives':
             weightScale = (1,1)
             weightsList = []
             sumWeights = Decimal('0.0')
@@ -155,9 +158,14 @@ class RandomPerformanceTableau(PerformanceTableau):
                     sumWeights += weightScale[0]
             weightsList.reverse()
         else:
-            print('!!! Error: wrong criteria weight distribution mode: %s !!!!' % (weightDistribution))
+            print('!!! Error: wrong criteria weight distribution mode: %s !!!!'\
+                  % (weightDistribution))
+        self.sumWeights = sumWeights
 
         # generate criteria dictionary
+        if commonMode == None:
+            #commonMode = ['uniform',None,None]
+            commonMode = ['beta',None,(2,2)]
         ngd = len(str(numberOfCriteria))
         criteria = OrderedDict()
         commentString = 'Arguments: '
@@ -187,7 +195,7 @@ class RandomPerformanceTableau(PerformanceTableau):
                                              'weakVeto':weakVetoThresholds,
                                              'veto':vetoThresholds}
             except:
-                ind = round(commonThresholds[0][0]*commonAmplitude/100.0,digits)
+                ind = round((commonThresholds[0][0]/100.0)*commonAmplitude,digits)
                 pref = round(commonThresholds[1][0]*commonAmplitude/100.0,digits)
                 veto = round(commonThresholds[2][0]*commonAmplitude/100.0,digits)
                 indThresholds=(Decimal(str(ind)),Decimal(str(commonThresholds[0][1])))
@@ -197,19 +205,17 @@ class RandomPerformanceTableau(PerformanceTableau):
                                              'pref':prefThresholds,
                                              'veto':vetoThresholds}
             criteria[g]['scale'] = commonScale
-            if integerWeights:
+            if IntegerWeights:
                 criteria[g]['weight'] = weightsList[i]
             else:
                 criteria[g]['weight'] = weightsList[i]/sumWeights
         #self.criteria = criteria
         
         # generate evaluations
-        if commonMode == None:
-            commonMode = ['uniform',None,None]
-        self.commonMode = commonMode
         digits=valueDigits
         self.digits = digits
         self.commonScale = commonScale
+        self.commonMode = commonMode
 
         evaluation = {}        
         if str(commonMode[0]) == 'uniform':          
@@ -540,7 +546,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
         * number of performance criteria,
         * weightDistribution := equisignificant | random (default, see RandomPerformanceTableau)
         * weightScale := (1, 1 | numberOfCriteria (default when random))
-        * integerWeights := Boolean (True = default) 
+        * IntegerWeights := Boolean (True = default) 
         * commonThresholds (default) := {
             | 'ind':(0,0),
             | 'pref':(1,0),
@@ -550,7 +556,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
     """
     def __init__(self,numberOfActions = 13, numberOfCriteria = 7,\
                  weightDistribution = 'equisignificant', weightScale=None,\
-                 commonThresholds = None, integerWeights=True,\
+                 commonThresholds = None, IntegerWeights=True,\
                  BigData=False,\
                  seed = None,\
                  Debug = False):
@@ -558,6 +564,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
         """
 
         # set random seed
+        self.randomSeed = seed
         import random
         random.seed(seed)
 
@@ -600,7 +607,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
         commentString = 'Arguments: '
         commentString += '; weightDistribution='+str(weightDistribution)
         commentString += '; weightScale='+str(weightScale)
-        commentString += '; integerWeights='+str(integerWeights)
+        commentString += '; IntegerWeights='+str(IntegerWeights)
         commentString += '; commonThresholds='+str(commonThresholds)
     
         for i in range(numberOfCriteria):
@@ -629,7 +636,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
                                               }
             commonScale = ( Decimal("0"), Decimal(numberOfActions) )
             criteria[g]['scale'] = commonScale
-            if integerWeights:
+            if IntegerWeights:
                 criteria[g]['weight'] = weightsList[i]
             else:
                 criteria[g]['weight'] = weightsList[i]/sumWeights
@@ -653,7 +660,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
 # ------------------------------
 
 
-class FullRandomPerformanceTableau(PerformanceTableau):
+class _FullRandomPerformanceTableau(PerformanceTableau):
     """
     Full automatic generation of random performance tableaux
     """
@@ -662,7 +669,7 @@ class FullRandomPerformanceTableau(PerformanceTableau):
                  numberOfCriteria = None,
                  weightDistribution = None,
                  weightScale=None,
-                 integerWeights = True,
+                 IntegerWeights = True,
                  commonScale = None,
                  commonThresholds = None,
                  commonMode = None,
@@ -675,6 +682,7 @@ class FullRandomPerformanceTableau(PerformanceTableau):
         self.name = 'fullrandomperftab'
 
         # set random seaad
+        self.randomSeed = seed
         import random
         random.seed(seed)
 
@@ -780,7 +788,7 @@ class FullRandomPerformanceTableau(PerformanceTableau):
                     'veto':(Decimal(str(thresholds[2][0])),Decimal(str(thresholds[2][1]))),
                     }               
             criteria[g]['scale'] = commonScale
-            if integerWeights:
+            if IntegerWeights:
                 criteria[g]['weight'] = Decimal(str(weightsList[i]))
             else:
                 criteria[g]['weight'] = Decimal(str(weightsList[i]))/Decimal(str(sumWeights))
@@ -945,7 +953,7 @@ class FullRandomPerformanceTableau(PerformanceTableau):
         for g in evaluation:
             print(g, evaluation[g])
 
-class RandomCoalitionsPerformanceTableau(PerformanceTableau):
+class _RandomCoalitionsPerformanceTableau(PerformanceTableau):
     """
     Full automatic generation of performance tableaux with random coalitions of criteria
 
@@ -954,7 +962,7 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
         | number of Criteria := 13 (default)
         | weightDistribution := 'equisignificant' (default with all weights = 1.0), 'random', 'fixed' (default w_1 = numberOfCriteria-1, w_{i!=1} = 1
         | weightScale := [1,numerOfCriteria] (random default), [w_1, w_{i!=1] (fixed)
-        | integerWeights := True (default) / False
+        | IntegerWeights := True (default) / False
         | commonScale := (0.0, 100.0) (default)
         | commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalSacles, [(0.10001*span,0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].
         | commonMode := ['triangular',50.0,0.50] (default), ['uniform',None,None], ['beta', None,None] (three alpha, beta combinations (5.8661,2.62203) chosen by default for high('+'), medium ('~') and low ('-') evaluations.
@@ -971,7 +979,7 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
 
     def __init__(self,numberOfActions = None, numberOfCriteria = None,\
                  weightDistribution = None, weightScale=None,\
-                 integerWeights = True, commonScale = None,\
+                 IntegerWeights = True, commonScale = None,\
                  commonThresholds = None, commonMode = None,\
                  valueDigits=2, Coalitions=True, VariableGenerators=True,\
                  OrdinalScales=False, Debug=False, RandomCoalitions=False,\
@@ -983,6 +991,7 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
         # naming
         self.name = 'randomCoalitionsPerfTab'
         # randomizer init
+        self.randomSeed = seed
         import random
         random.seed(seed)
         if RandomCoalitions:
@@ -1143,7 +1152,7 @@ class RandomCoalitionsPerformanceTableau(PerformanceTableau):
                    (Decimal(str(thresholds[t][0])),Decimal(str(thresholds[t][1])))
                 
             criteria[g]['scale'] = commonScale
-            if integerWeights:
+            if IntegerWeights:
                 criteria[g]['weight'] = weightsList[gi]
             else:
                 criteria[g]['weight'] = weightsList[gi] / sumWeights
@@ -1357,15 +1366,23 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                               | 'equisignificant' (weights set all to 1)
                               | 'random' (in the range 1 to numberOfCriteria)
         * weightScale := [1,numerOfCriteria] (random default)
-        * integerWeights := True (default) / False
+        * IntegerWeights := True (default) / False
         * OrdinalScales := True / False (default), if True commonScale is set to (0,10)
-        * commonScale := (0.0, 100.0) (default if OrdinalScales == False)
-        * commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalScales == True, otherwise
-                            | [(0.10001*span,0.0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].
+        * commonScale := (Min, Max)
+                | when common Scale = False, (0.0,10.0) by default if OrdinalScales == True and CommonScale=None,
+                | and (0.0,100.0) by default otherwise 
+        * commonThresholds := ((Ind,Ind_slope),(Pref,Pref_slope),(Veto,Veto_slope)) with
+                | Ind < Pref < Veto in [0.0,100.0] such that 
+                | (Ind/100.0*span + Ind_slope*x) < (Pref/100.0*span + Pref_slope*x) < (Pref/100.0*span + Pref_slope*x)
+                | By default [(0.05*span,0.0),(0.10*span,0.0),(0.60*span,0.0)] if OrdinalScales=False
+                | By default [(0.1*span,0.0),(0.2*span,0.0),(0.8*span,0.0)] otherwise
+                | with span = commonScale[1] - commonScale[0].
         * commonMode := ['triangular','variable',0.50] (default), A constant mode may be provided.
-                      | ['uniform','variable',None], a constant range may be provided.
-                      | ['beta','variable',None] (three alpha, beta combinations (5.8661,2.62203)
-                      |   chosen by default for 'good', 'fair' and 'weak' evaluations. Constant parameters may be provided.
+                | ['uniform','variable',None], a constant range may be provided.
+                | ['beta','variable',None] (three alpha, beta combinations:
+                | (5.8661,2.62203),(5.05556,5.05556) and (2.62203, 5.8661)
+                | chosen by default for 'good', 'fair' and 'weak' evaluations. 
+                | Constant parameters may be provided.
         * valueDigits := 2 (default, for cardinal scales only)
         * vetoProbability := x in ]0.0-1.0[ (0.5 default), probability that a cardinal criterion shows a veto preference discrimination threshold.
         * Debug := True / False (default)
@@ -1374,7 +1391,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
 
     def __init__(self,numberOfActions = 20, numberOfCriteria = 13,\
                  weightDistribution = 'equiobjectives', weightScale=None,\
-                 integerWeights = True, OrdinalScales=False,\
+                 IntegerWeights = True, OrdinalScales=False,\
                  commonScale = None,\
                  commonThresholds = None, commonMode = None,\
                  valueDigits=2,\
@@ -1392,6 +1409,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         self.missingDataProbability = missingDataProbability
         
         # randomizer init
+        self.randomSeed = seed
         from random import Random
         _random = Random(seed)
         _random1 = Random(seed)
@@ -1490,14 +1508,18 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
             criteria[g]['preferenceDirection'] = 'max'           
             criteria[g]['name'] = 'criterion of objective %s' % (criterionObjective)
             criteria[g]['shortName'] = g + criterionObjective[0:2]
+            span = commonScale[1] - commonScale[0]
             if commonThresholds == None:                    
                 if OrdinalScales:
-                    thresholds = [(1.0,0.0),(2.001,0.0),(8.001,0.0)]
+                    thresholds = [(0.1001*span,0.0),(0.2001*span,0.0),(0.8001*span,0.0)]
                 else:
-                    span = commonScale[1] - commonScale[0]
-                    thresholds = [(0.05001*span,0),(0.10001*span,0.0),(0.60001*span,0.0)]
+                    #span = commonScale[1] - commonScale[0]
+                    thresholds = [(0.05001*span,0.0),(0.10001*span,0.0),(0.60001*span,0.0)]
             else:
-                thresholds = commonThresholds
+                #span = commonScale[1] - commonScale[0]
+                thresholds = [(commonThresholds[0][0]/100.0*span,commonThresholds[0][1]),\
+                              (commonThresholds[1][0]/100.0*span,commonThresholds[1][1]),\
+                              (commonThresholds[2][0]/100.0*span,commonThresholds[2][1])]
             if Debug:
                 print(g,thresholds)
             thitems = ['ind','pref','veto']
@@ -1510,7 +1532,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                    (Decimal(str(thresholds[t][0])),Decimal(str(thresholds[t][1])))
                 
             criteria[g]['scale'] = commonScale
-            if integerWeights:
+            if IntegerWeights:
                 criteria[g]['weight'] = weightsList[i]
             else:
                 criteria[g]['weight'] = weightsList[i] / sumWeights
@@ -1690,6 +1712,8 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                    
                     if Debug:
                         print(randeval, criteria[g]['preferenceDirection'], evaluation[g][a])
+            else:
+                print('Error: invalid random number generator %s !!!' % commonPar) 
 
         # install self object attributes
 
@@ -1973,7 +1997,7 @@ class Random3ObjectivesPerformanceGenerator(RandomPerformanceGenerator):
 
 
 #---------------
-class _Random3ObjectivesPerformanceTableau(RandomCoalitionsPerformanceTableau):
+class _Random3ObjectivesPerformanceTableau(_RandomCoalitionsPerformanceTableau):
     """
     Specialization of the RandomCoalitionsPerformanceTableau
     for 3 objectives: *A*, *B* and *C*.
@@ -1993,7 +2017,7 @@ class _Random3ObjectivesPerformanceTableau(RandomCoalitionsPerformanceTableau):
     """
     def __init__(self,numberOfActions = 20, numberOfCriteria = 13,\
                  weightDistribution = 'equiobjectives', weightScale=None,\
-                 integerWeights = True, commonScale = (0.0,100.0),\
+                 IntegerWeights = True, commonScale = (0.0,100.0),\
                  commonThresholds = [(5.0,0.0),(10.0,0.0),(60.0,0.0)],\
                  commonDistribution = ['triangular','variable',0.5],\
                  missingDataProbability = 0.05,\
@@ -2018,7 +2042,7 @@ class _Random3ObjectivesPerformanceTableau(RandomCoalitionsPerformanceTableau):
                                                numberOfCriteria=numberOfCriteria,
                                                weightDistribution=weightDistribution,
                                                weightScale=weightScale,
-                                               integerWeights=integerWeights,
+                                               IntegerWeights=IntegerWeights,
                                                commonScale =commonScale,
                                                commonThresholds=commonThresholds,
                                                commonMode=commonDistribution,
@@ -2182,15 +2206,15 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         * weightDistribution := {'equiobjectives'|'fixed'|'random'|'equisignificant'} By default, the sum of
            significance of the cost criteria is set equal to the sum of the significance of the benefit criteria. 
         * default weightScale for 'random' weightDistribution is 1 - numberOfCriteria.
-        * commonScale parameter is obsolete. The scale of cost criteria is cardinal or ordinal (0-10)
+        * commonScale parameter is not used. The scale of cost criteria is cardinal or ordinal (0-10)
            with proabailities 1/4 respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal
            with probabilities 2/3, respectively 1/3.
         * All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria
            are evaluated with integers between 0 and 10.
-        * commonThresholds is obsolete. Preference discrimination is specified as percentiles of
+        * commonThresholds parameter is not used. Preference discrimination is specified as percentiles of
            concerned performance differences (see below).
-        * CommonPercentiles = {'ind':0.05, 'pref':0.10, ['weakveto':0.90,] 'veto':'95} are expressed
-           in centiless (reversed for vetoes) and only concern cardinal criteria.
+        * CommonPercentiles = {'ind':0.05, 'pref':0.10, 'veto':'95} are expressed
+           in percentiles of the observed performance differences and only concern cardinal criteria.
 
     .. warning::
 
@@ -2203,7 +2227,8 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                  name = 'randomCBperftab',\
                  weightDistribution = 'equiobjectives',\
                  weightScale=None,\
-                 integerWeights = True,\
+                 IntegerWeights = True,\
+                 NegativeWeights = False,\
                  commonScale = None, commonThresholds = None,\
                  commonPercentiles= None,\
                  samplingSize = 100000,\
@@ -2224,6 +2249,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         import random
 
         # randomizer init
+        self.randomSeed = seed
         random.seed(seed)
 
         # store argument values
@@ -2387,11 +2413,23 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         for i,g in enumerate(criteria):
             ## if Debug:
             ##     print 'criterionScale = ', criterionScale
-            if integerWeights:
-                criteria[g]['weight'] = weightsList[i]
+            if NegativeWeights:
+                if criteria[g]['preferenceDirection'] == "max":
+                    Sgn = Decimal('1.0')
+                else:
+                    Sgn = Decimal('-1.0')
+                if IntegerWeights:
+                    criteria[g]['weight'] = Sgn * weightsList[i]
+                else:
+                    criteria[g]['weight'] = Sgn * weightsList[i] / sumWeights
+                i += 1
             else:
-                criteria[g]['weight'] = weightsList[i] / sumWeights
-            i += 1
+                if IntegerWeights:
+                    criteria[g]['weight'] = weightsList[i]
+                else:
+                    criteria[g]['weight'] = weightsList[i] / sumWeights
+                i += 1
+                
 
             if Debug:
                 print(criteria[g])
@@ -2443,7 +2481,11 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                     if criteria[g]['preferenceDirection'] == 'max':
                         evaluation[g][a] = Decimal(str(round(randeval,digits)))
                     else:
-                        evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+                        if NegativeWeights:
+                            evaluation[g][a] = Decimal(str(round(randeval,digits)))
+                        else:
+                            evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+        
             elif str(randomMode[0]) == 'triangular':
                 for a in actions:
                     m = criterionScale[0]
@@ -2475,7 +2517,11 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                     if criteria[g]['preferenceDirection'] == 'max':
                         evaluation[g][a] = Decimal(str(round(randeval,digits)))
                     else:
-                        evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+                        if NegativeWeights:
+                            evaluation[g][a] = Decimal(str(round(randeval,digits)))
+                        else:
+                            evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+                        #evaluation[g][a] = Decimal(str(-round(randeval,digits)))
                     #print randeval, criteria[g]['preferenceDirection'], evaluation[g][a]
                         
             elif str(randomMode[0]) == 'normal':
@@ -2506,7 +2552,11 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                     if criteria[g]['preferenceDirection'] == 'max':
                         evaluation[g][a] = Decimal(str(round(randeval,digits)))
                     else:
-                        evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+                        if NegativeWeights:
+                            evaluation[g][a] = Decimal(str(round(randeval,digits)))
+                        else:
+                            evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+                        #evaluation[g][a] = Decimal(str(-round(randeval,digits)))
             elif str(randomMode[0]) == 'beta':
                 m = criterionScale[0]
                 M = criterionScale[1]
@@ -2529,7 +2579,11 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                     if criteria[g]['preferenceDirection'] == 'max':
                         evaluation[g][a] = Decimal(str(round(randeval,digits)))
                     else:
-                        evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+                        if NegativeWeights:
+                            evaluation[g][a] = Decimal(str(round(randeval,digits)))
+                        else:
+                            evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+                        #evaluation[g][a] = Decimal(str(-round(randeval,digits)))
                     ## if Debug:
                     ##     print 'alpha,beta,u,m,M,randeval',alpha,beta,u,m,M,randeval
                         
@@ -2570,7 +2624,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
             nbuf = n
         if n2 < samplingSize:
             samplingSize = n2
-        from iqagent import IncrementalQuantileEstimator
+        from randomNumbers import IncrementalQuantileEstimator
         est = IncrementalQuantileEstimator(nbuf=nbuf)
         if Debug:
             print('commonPercentiles=', commonPercentiles)
@@ -2626,7 +2680,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         samplingSize = self.samplingSize
         if n2 < samplingSize:
             samplingSize = n2
-        from iqagent import IncrementalQuantileEstimator
+        from randomNumbers import IncrementalQuantileEstimator
         est = IncrementalQuantileEstimator(nbuf=nbuf)
         commonPercentiles = self.commonPercentiles
         if Debug:
@@ -2737,7 +2791,11 @@ class RandomCBPerformanceGenerator(RandomPerformanceGenerator):
                 if criteria[g]['preferenceDirection'] == 'max':
                     evaluation[g] = Decimal(str(round(randeval,digits)))
                 else:
-                    evaluation[g] = Decimal(str(-round(randeval,digits)))
+                    if NegativeWeights:
+                        evaluation[g][a] = Decimal(str(round(randeval,digits)))
+                    else:
+                        evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+                    #evaluation[g] = Decimal(str(-round(randeval,digits)))
             elif str(randomMode[0]) == 'triangular':
                 from math import sqrt
                 m = criterionScale[0]
@@ -2859,7 +2917,7 @@ class RandomCBPerformanceGenerator(RandomPerformanceGenerator):
         
 
 ##############################
-class RandomS3PerformanceTableau(RandomCoalitionsPerformanceTableau):
+class _RandomS3PerformanceTableau(_RandomCoalitionsPerformanceTableau):
     """
     Obsolete dummy class for backports.
     """
@@ -2918,10 +2976,13 @@ if __name__ == "__main__":
 ##    print('*---------- test percentiles of variable thresholds --------*') 
 ####    t = RandomCoalitionsPerformanceTableau(weightDistribution='equicoalitions',
 ####                                           seed=100)
-    t = Random3ObjectivesPerformanceTableau(numberOfActions=10,OrdinalScales=False,
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=10,OrdinalScales=True,
+                                            commonScale=(0.0,10.0),
+                                            commonThresholds=((0.1,0.0),(0.2,0.0),(0.6,0.0)),
                                            seed=100)
     t.showAll()
-    rag1 = Random3ObjectivesPerformanceGenerator(t,actionNamePrefix='b',seed=100)
+    rag1 = Random3ObjectivesPerformanceGenerator(t,\
+                actionNamePrefix='b',seed=100)
     sampleSize = 5
     rag1.randomActions(sampleSize)
     #t.showHTMLPerformanceHeatmap(Correlations=True)

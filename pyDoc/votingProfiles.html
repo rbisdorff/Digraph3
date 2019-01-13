@@ -9,26 +9,24 @@
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>votingProfiles</strong></big></big></font></td
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/votingProfiles.py">/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/votingProfiles.py</a></font></td></tr></table>
-    <p><tt>#&nbsp;Python&nbsp;3&nbsp;implementation&nbsp;of&nbsp;voting&nbsp;digraphs<br>
-#&nbsp;Refactored&nbsp;from&nbsp;revision&nbsp;1.549&nbsp;of&nbsp;the&nbsp;digraphs&nbsp;module<br>
-#&nbsp;Current&nbsp;revision&nbsp;$Revision:&nbsp;2484&nbsp;$<br>
-#&nbsp;Copyright&nbsp;(C)&nbsp;2011-2018&nbsp;Raymond&nbsp;Bisdorff<br>
-#<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;it&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;as&nbsp;published&nbsp;by<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation;&nbsp;either&nbsp;version&nbsp;3&nbsp;of&nbsp;the&nbsp;License,&nbsp;or<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;(at&nbsp;your&nbsp;option)&nbsp;any&nbsp;later&nbsp;version.<br>
-#<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;distributed&nbsp;in&nbsp;the&nbsp;hope&nbsp;that&nbsp;it&nbsp;will&nbsp;be&nbsp;useful,<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;but&nbsp;WITHOUT&nbsp;ANY&nbsp;WARRANTY;&nbsp;without&nbsp;even&nbsp;the&nbsp;implied&nbsp;warranty&nbsp;of<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;MERCHANTABILITY&nbsp;or&nbsp;FITNESS&nbsp;FOR&nbsp;A&nbsp;PARTICULAR&nbsp;PURPOSE.&nbsp;&nbsp;See&nbsp;the<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;for&nbsp;more&nbsp;details.<br>
-#<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;You&nbsp;should&nbsp;have&nbsp;received&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;along<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;this&nbsp;program;&nbsp;if&nbsp;not,&nbsp;write&nbsp;to&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation,&nbsp;Inc.,<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;51&nbsp;Franklin&nbsp;Street,&nbsp;Fifth&nbsp;Floor,&nbsp;Boston,&nbsp;MA&nbsp;02110-1301&nbsp;USA.<br>
-#<br>
-#######################</tt></p>
+    <p><tt>Python&nbsp;3&nbsp;implementation&nbsp;of&nbsp;voting&nbsp;digraphs<br>
+Refactored&nbsp;from&nbsp;revision&nbsp;1.549&nbsp;of&nbsp;the&nbsp;digraphs&nbsp;module<br>
+Current&nbsp;revision&nbsp;$Revision:&nbsp;2484&nbsp;$<br>
+Copyright&nbsp;(C)&nbsp;2011-2018&nbsp;Raymond&nbsp;Bisdorff<br>
+&nbsp;<br>
+This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify<br>
+it&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;as&nbsp;published&nbsp;by<br>
+the&nbsp;Free&nbsp;Software&nbsp;Foundation;&nbsp;either&nbsp;version&nbsp;3&nbsp;of&nbsp;the&nbsp;License,&nbsp;or<br>
+(at&nbsp;your&nbsp;option)&nbsp;any&nbsp;later&nbsp;version.<br>
+&nbsp;<br>
+This&nbsp;program&nbsp;is&nbsp;distributed&nbsp;in&nbsp;the&nbsp;hope&nbsp;that&nbsp;it&nbsp;will&nbsp;be&nbsp;useful,<br>
+but&nbsp;WITHOUT&nbsp;ANY&nbsp;WARRANTY;&nbsp;without&nbsp;even&nbsp;the&nbsp;implied&nbsp;warranty&nbsp;of<br>
+MERCHANTABILITY&nbsp;or&nbsp;FITNESS&nbsp;FOR&nbsp;A&nbsp;PARTICULAR&nbsp;PURPOSE.&nbsp;&nbsp;See&nbsp;the<br>
+GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;for&nbsp;more&nbsp;details.<br>
+&nbsp;<br>
+You&nbsp;should&nbsp;have&nbsp;received&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;along<br>
+with&nbsp;this&nbsp;program;&nbsp;if&nbsp;not,&nbsp;write&nbsp;to&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation,&nbsp;Inc.,<br>
+51&nbsp;Franklin&nbsp;Street,&nbsp;Fifth&nbsp;Floor,&nbsp;Boston,&nbsp;MA&nbsp;02110-1301&nbsp;USA.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
@@ -289,7 +287,14 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 
 <dl><dt><a name="CondorcetDigraph-aneighbors"><strong>aneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
-<dl><dt><a name="CondorcetDigraph-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="CondorcetDigraph-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Dependency:&nbsp;Uses&nbsp;the&nbsp;dreadnaut&nbsp;command&nbsp;from&nbsp;the&nbsp;nauty&nbsp;software&nbsp;package.&nbsp;See&nbsp;https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Linux:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...$&nbsp;sudo&nbsp;apt-get&nbsp;install&nbsp;nauty</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
 ie&nbsp;the&nbsp;average&nbsp;number&nbsp;of&nbsp;choice&nbsp;members&nbsp;that&nbsp;cover&nbsp;each<br>
@@ -386,6 +391,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 <dl><dt><a name="CondorcetDigraph-computeConcentrationIndexTrapez"><strong>computeConcentrationIndexTrapez</strong></a>(self, X, N)</dt><dd><tt>Renders&nbsp;the&nbsp;Gini&nbsp;concentration&nbsp;index&nbsp;of&nbsp;the&nbsp;X&nbsp;serie.<br>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
+
+<dl><dt><a name="CondorcetDigraph-computeCondorcetLoosers"><strong>computeCondorcetLoosers</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#CondorcetDigraph-condorcetLoosers">condorcetLoosers</a>().</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#CondorcetDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
 
@@ -541,7 +548,7 @@ a&nbsp;given&nbsp;preRanking&nbsp;in&nbsp;decreasing&nbsp;levels&nbsp;(list&nbsp
 <dl><dt><a name="CondorcetDigraph-computePreorderRelation"><strong>computePreorderRelation</strong></a>(self, preorder, Normalized=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar-valued&nbsp;relation&nbsp;obtained&nbsp;from<br>
 a&nbsp;given&nbsp;preordering&nbsp;in&nbsp;increasing&nbsp;levels&nbsp;(list&nbsp;of&nbsp;lists)&nbsp;result.</tt></dd></dl>
 
-<dl><dt><a name="CondorcetDigraph-computePrincipalOrder"><strong>computePrincipalOrder</strong></a>(self, plotFileName=None, Colwise=False, imageType=None, TempDir=None, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ordered&nbsp;list&nbsp;of&nbsp;self.<strong>actions</strong>&nbsp;using&nbsp;the&nbsp;decreasing&nbsp;scores&nbsp;from&nbsp;the<br>
+<dl><dt><a name="CondorcetDigraph-computePrincipalOrder"><strong>computePrincipalOrder</strong></a>(self, plotFileName=None, Colwise=False, imageType=None, tempDir=None, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ordered&nbsp;list&nbsp;of&nbsp;self.<strong>actions</strong>&nbsp;using&nbsp;the&nbsp;decreasing&nbsp;scores&nbsp;from&nbsp;the<br>
 first&nbsp;rincipal&nbsp;eigenvector&nbsp;of&nbsp;the&nbsp;covariance&nbsp;of&nbsp;the&nbsp;valued&nbsp;outdegrees&nbsp;of&nbsp;self.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
@@ -673,6 +680,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="CondorcetDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="CondorcetDigraph-computeWeakCondorcetLoosers"><strong>computeWeakCondorcetLoosers</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#CondorcetDigraph-weakCondorcetLoosers">weakCondorcetLoosers</a>().</tt></dd></dl>
+
 <dl><dt><a name="CondorcetDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#CondorcetDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
@@ -683,6 +692,10 @@ Fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nb
 
 <dl><dt><a name="CondorcetDigraph-computeupdown2irred"><strong>computeupdown2irred</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB1&nbsp;method.<br>
 Fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
+
+<dl><dt><a name="CondorcetDigraph-condorcetLoosers"><strong>condorcetLoosers</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
+self.<strong>relation</strong>[x][y]&nbsp;&lt;&nbsp;self.<strong>valuationdomain</strong>['med']<br>
+for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-condorcetWinners"><strong>condorcetWinners</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
 self.<strong>relation</strong>[x][y]&nbsp;&gt;&nbsp;self.<strong>valuationdomain</strong>['med']<br>
@@ -718,16 +731,16 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 exchange&nbsp;arguments&nbsp;with&nbsp;external&nbsp;temporary&nbsp;files.<br>
 Returns&nbsp;a&nbsp;boolean&nbsp;value</tt></dd></dl>
 
-<dl><dt><a name="CondorcetDigraph-determinateness"><strong>determinateness</strong></a>(self, vec, inPercent=True)</dt><dd><tt>Renders&nbsp;the&nbsp;determinateness&nbsp;of&nbsp;a&nbsp;bipolar&nbsp;characteristic&nbsp;vector<br>
-[(r(x),x),(r(y),y),&nbsp;...]&nbsp;of&nbsp;length&nbsp;*n*&nbsp;in&nbsp;valuationdomain&nbsp;[Min,Max]:<br>
+<dl><dt><a name="CondorcetDigraph-determinateness"><strong>determinateness</strong></a>(self, vec, inPercent=True)</dt><dd><tt>Renders&nbsp;the&nbsp;determinateness&nbsp;of&nbsp;a&nbsp;characteristic&nbsp;vector&nbsp;*vec*&nbsp;=&nbsp;<br>
+[(r(x),x),(r(y),y),&nbsp;...]&nbsp;of&nbsp;length&nbsp;*n*&nbsp;in&nbsp;valuationdomain&nbsp;[Min,Med,Max]:<br>
 &nbsp;<br>
-result&nbsp;=&nbsp;sum_x&nbsp;abs(r(x))/(n*(Max-Min)<br>
+*result*&nbsp;=&nbsp;&nbsp;sum_x(&nbsp;abs(r(x)-Med)&nbsp;)&nbsp;/&nbsp;(&nbsp;n*(Max-Med)&nbsp;)<br>
 &nbsp;<br>
-If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp;(/2)&nbsp;to&nbsp;[0,1]&nbsp;range.</tt></dd></dl>
+If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp;(/2)&nbsp;to&nbsp;[0,1]&nbsp;range.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="CondorcetDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="CondorcetDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -936,9 +949,7 @@ computation.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-powerset"><strong>powerset</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;subsets&nbsp;of&nbsp;a&nbsp;set.</tt></dd></dl>
 
-<dl><dt><a name="CondorcetDigraph-readPerrinMisset"><strong>readPerrinMisset</strong></a>(self, file)</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;from&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;file.</tt></dd></dl>
-
-<dl><dt><a name="CondorcetDigraph-readPerrinMissetOpt"><strong>readPerrinMissetOpt</strong></a>(self, file)</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;from&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;file.</tt></dd></dl>
+<dl><dt><a name="CondorcetDigraph-readPerrinMisset"><strong>readPerrinMisset</strong></a>(self, file='curd.dat')</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;by&nbsp;default&nbsp;from&nbsp;the&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;result&nbsp;file.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-readabsvector"><strong>readabsvector</strong></a>(self, x, relation)</dt><dd><tt>Parameter:&nbsp;action&nbsp;x<br>
 absorbent&nbsp;in&nbsp;vector.</tt></dd></dl>
@@ -1050,11 +1061,57 @@ Result&nbsp;saved&nbsp;in&nbsp;self.<strong>newmisset</strong>.</tt></dd></dl>
 <dl><dt><a name="CondorcetDigraph-showNeighborhoods"><strong>showNeighborhoods</strong></a>(self)</dt><dd><tt>Lists&nbsp;the&nbsp;gamma&nbsp;and&nbsp;the&nbsp;notGamma&nbsp;function&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-showOrbits"><strong>showOrbits</strong></a>(self, InChoices, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
+the&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance.<br>
+&nbsp;<br>
+Example&nbsp;Python&nbsp;session&nbsp;for&nbsp;computing&nbsp;the&nbsp;non&nbsp;isomorphic&nbsp;MISs&nbsp;from&nbsp;the&nbsp;12-cycle&nbsp;graph:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;digraphs&nbsp;import&nbsp;*<br>
+&gt;&gt;&gt;&nbsp;c12&nbsp;=&nbsp;CirculantDigraph(order=12,circulants=[1,-1])<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#CondorcetDigraph-automorphismGenerators">automorphismGenerators</a>()<br>
+...<br>
+&nbsp;&nbsp;Permutations<br>
+&nbsp;&nbsp;{'1':&nbsp;'1',&nbsp;'2':&nbsp;'12',&nbsp;'3':&nbsp;'11',&nbsp;'4':&nbsp;'10',&nbsp;'5':&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'9',&nbsp;'6':&nbsp;'8',&nbsp;'7':&nbsp;'7',&nbsp;'8':&nbsp;'6',&nbsp;'9':&nbsp;'5',&nbsp;'10':&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'4',&nbsp;'11':&nbsp;'3',&nbsp;'12':&nbsp;'2'}<br>
+&nbsp;&nbsp;{'1':&nbsp;'2',&nbsp;'2':&nbsp;'1',&nbsp;'3':&nbsp;'12',&nbsp;'4':&nbsp;'11',&nbsp;'5':&nbsp;'10',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'6':&nbsp;'9',&nbsp;'7':&nbsp;'8',&nbsp;'8':&nbsp;'7',&nbsp;'9':&nbsp;'6',&nbsp;'10':&nbsp;'5',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'11':&nbsp;'4',&nbsp;'12':&nbsp;'3'}<br>
+&nbsp;&nbsp;Reflections&nbsp;{}<br>
+&gt;&gt;&gt;&nbsp;print('grpsize&nbsp;=&nbsp;',&nbsp;c12.automorphismGroupSize)<br>
+&nbsp;&nbsp;grpsize&nbsp;=&nbsp;24<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#CondorcetDigraph-showMIS">showMIS</a>(withListing=False)<br>
+&nbsp;&nbsp;*---&nbsp;&nbsp;Maximal&nbsp;independent&nbsp;choices&nbsp;---*<br>
+&nbsp;&nbsp;number&nbsp;of&nbsp;solutions:&nbsp;&nbsp;29<br>
+&nbsp;&nbsp;cardinality&nbsp;distribution<br>
+&nbsp;&nbsp;card.:&nbsp;&nbsp;[0,&nbsp;1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;&nbsp;5,&nbsp;&nbsp;6,&nbsp;7,&nbsp;8,&nbsp;9,&nbsp;10,&nbsp;11,&nbsp;12]<br>
+&nbsp;&nbsp;freq.:&nbsp;&nbsp;[0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;3,&nbsp;24,&nbsp;&nbsp;2,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0]<br>
+&nbsp;&nbsp;Results&nbsp;in&nbsp;c12.misset<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#CondorcetDigraph-showOrbits">showOrbits</a>(c12.misset,withListing=False)<br>
+...<br>
+&nbsp;&nbsp;*----&nbsp;Global&nbsp;result&nbsp;----<br>
+&nbsp;&nbsp;Number&nbsp;of&nbsp;MIS:&nbsp;&nbsp;29<br>
+&nbsp;&nbsp;Number&nbsp;of&nbsp;orbits&nbsp;:&nbsp;&nbsp;4<br>
+&nbsp;&nbsp;Labelled&nbsp;representatives:<br>
+&nbsp;&nbsp;1:&nbsp;['2','4','6','8','10','12']<br>
+&nbsp;&nbsp;2:&nbsp;['2','5','8','11']<br>
+&nbsp;&nbsp;3:&nbsp;['2','4','6','9','11']<br>
+&nbsp;&nbsp;4:&nbsp;['1','4','7','9','11']<br>
+&nbsp;&nbsp;Symmetry&nbsp;vector<br>
+&nbsp;&nbsp;stabilizer&nbsp;size:&nbsp;[1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;5,&nbsp;6,&nbsp;7,&nbsp;8,&nbsp;9,&nbsp;10,&nbsp;11,&nbsp;12,&nbsp;...]<br>
+&nbsp;&nbsp;frequency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;[0,&nbsp;2,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;1,&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;1,&nbsp;...]<br>
+&nbsp;<br>
+*Figure*:&nbsp;The&nbsp;symmetry&nbsp;axes&nbsp;of&nbsp;the&nbsp;non&nbsp;isomorphic&nbsp;MISs&nbsp;of&nbsp;the&nbsp;12-cycle:<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;c12.png<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;400&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;The&nbsp;4&nbsp;non&nbsp;isomorphic&nbsp;MIS&nbsp;of&nbsp;the&nbsp;12-cycle&nbsp;graph<br>
+&nbsp;<br>
+*Reference*:&nbsp;R.&nbsp;Bisdorff&nbsp;and&nbsp;J.L.&nbsp;Marichal&nbsp;(2008).&nbsp;Counting&nbsp;non-isomorphic&nbsp;maximal&nbsp;independent&nbsp;sets&nbsp;of&nbsp;the&nbsp;n-cycle&nbsp;graph.&nbsp;*Journal&nbsp;of&nbsp;Integer&nbsp;Sequences*,&nbsp;Vol.&nbsp;11&nbsp;Article&nbsp;08.5.7&nbsp;(`openly&nbsp;accessible&nbsp;here&nbsp;&lt;https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html&gt;`_)</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-showOrbitsFromFile"><strong>showOrbitsFromFile</strong></a>(self, InFile, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
 the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.<br>
-See&nbsp;the&nbsp;digraphs.<a href="digraphs.html#Digraph">Digraph</a>.<a href="#CondorcetDigraph-readPerrinMisset">readPerrinMisset</a>()&nbsp;method.</tt></dd></dl>
+See&nbsp;the&nbsp;:py:func:`digraphs.<a href="digraphs.html#Digraph">Digraph</a>.readPerrinMisset`&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="CondorcetDigraph-showPreKernels"><strong>showPreKernels</strong></a>(self, withListing=True)</dt><dd><tt>Printing&nbsp;dominant&nbsp;and&nbsp;absorbent&nbsp;preKernels:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>dompreKernels</strong>&nbsp;and&nbsp;self.<strong>abspreKernels</strong></tt></dd></dl>
@@ -1200,6 +1257,10 @@ Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&n
 
 <dl><dt><a name="CondorcetDigraph-weakAneighbors"><strong>weakAneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
+<dl><dt><a name="CondorcetDigraph-weakCondorcetLoosers"><strong>weakCondorcetLoosers</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
+self.<strong>relation</strong>[x][y]&nbsp;&lt;=&nbsp;self.<strong>valuationdomain</strong>['med']<br>
+for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
+
 <dl><dt><a name="CondorcetDigraph-weakCondorcetWinners"><strong>weakCondorcetWinners</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
 self.<strong>relation</strong>[x][y]&nbsp;&gt;=&nbsp;self.<strong>valuationdomain</strong>['med']<br>
 for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
@@ -1312,7 +1373,7 @@ number&nbsp;of&nbsp;candidates&nbsp;-&nbsp;linearProfile[v].index(x)</tt></dd></
 
 <dl><dt><a name="LinearVotingProfile-showBordaRanking"><strong>showBordaRanking</strong></a>(self)</dt><dd><tt>show&nbsp;Borda&nbsp;ranking&nbsp;in&nbsp;increasing&nbsp;order&nbsp;of&nbsp;the&nbsp;Borda&nbsp;score</tt></dd></dl>
 
-<dl><dt><a name="LinearVotingProfile-showHTMLVotingHeatmap"><strong>showHTMLVotingHeatmap</strong></a>(self, criteriaList=None, actionsList=None, SparseModel=False, minimalComponentSize=1, RankingRule='Copeland', quantiles=None, strategy='average', ndigits=0, colorLevels=None, pageTitle='Voting Heatmap', Correlations=True, Threading=False, nbrOfCPUs=1, Debug=False)</dt><dd><tt>Show&nbsp;the&nbsp;linear&nbsp;voting&nbsp;profile&nbsp;as&nbsp;a&nbsp;rank&nbsp;performance&nbsp;heatmap.<br>
+<dl><dt><a name="LinearVotingProfile-showHTMLVotingHeatmap"><strong>showHTMLVotingHeatmap</strong></a>(self, criteriaList=None, actionsList=None, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', ndigits=0, colorLevels=None, pageTitle='Voting Heatmap', Correlations=True, Threading=False, nbrOfCPUs=1, Debug=False)</dt><dd><tt>Show&nbsp;the&nbsp;linear&nbsp;voting&nbsp;profile&nbsp;as&nbsp;a&nbsp;rank&nbsp;performance&nbsp;heatmap.<br>
 The&nbsp;linear&nbsp;voting&nbsp;profile&nbsp;is&nbsp;previously&nbsp;saved&nbsp;to&nbsp;a&nbsp;stored&nbsp;Performance&nbsp;Tableau.<br>
 &nbsp;<br>
 (see&nbsp;perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap()&nbsp;)</tt></dd></dl>
@@ -1464,7 +1525,7 @@ number&nbsp;of&nbsp;candidates&nbsp;-&nbsp;linearProfile[v].index(x)</tt></dd></
 
 <dl><dt><a name="RandomLinearVotingProfile-showBordaRanking"><strong>showBordaRanking</strong></a>(self)</dt><dd><tt>show&nbsp;Borda&nbsp;ranking&nbsp;in&nbsp;increasing&nbsp;order&nbsp;of&nbsp;the&nbsp;Borda&nbsp;score</tt></dd></dl>
 
-<dl><dt><a name="RandomLinearVotingProfile-showHTMLVotingHeatmap"><strong>showHTMLVotingHeatmap</strong></a>(self, criteriaList=None, actionsList=None, SparseModel=False, minimalComponentSize=1, RankingRule='Copeland', quantiles=None, strategy='average', ndigits=0, colorLevels=None, pageTitle='Voting Heatmap', Correlations=True, Threading=False, nbrOfCPUs=1, Debug=False)</dt><dd><tt>Show&nbsp;the&nbsp;linear&nbsp;voting&nbsp;profile&nbsp;as&nbsp;a&nbsp;rank&nbsp;performance&nbsp;heatmap.<br>
+<dl><dt><a name="RandomLinearVotingProfile-showHTMLVotingHeatmap"><strong>showHTMLVotingHeatmap</strong></a>(self, criteriaList=None, actionsList=None, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', ndigits=0, colorLevels=None, pageTitle='Voting Heatmap', Correlations=True, Threading=False, nbrOfCPUs=1, Debug=False)</dt><dd><tt>Show&nbsp;the&nbsp;linear&nbsp;voting&nbsp;profile&nbsp;as&nbsp;a&nbsp;rank&nbsp;performance&nbsp;heatmap.<br>
 The&nbsp;linear&nbsp;voting&nbsp;profile&nbsp;is&nbsp;previously&nbsp;saved&nbsp;to&nbsp;a&nbsp;stored&nbsp;Performance&nbsp;Tableau.<br>
 &nbsp;<br>
 (see&nbsp;perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap()&nbsp;)</tt></dd></dl>

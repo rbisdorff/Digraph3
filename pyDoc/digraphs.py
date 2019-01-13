@@ -1,7 +1,7 @@
 #!/Usr/bin/env python3
 
 """
-Python3+ implementation of digraphs
+Python3+ implementation of the digraphs module, root module of the Digraph3 resources.
 
 Copyright (C) 2006-2017  Raymond Bisdorff
 
@@ -18,6 +18,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along
 with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
 """
 
 #######################
@@ -30,467 +31,116 @@ from digraphs import *
 from perfTabs import *
 from randomPerfTabs import *
 
-################  see digraphsTools.py module ###############
-###--------- Decimal precision --------------
-##from decimal import Decimal
-##
-###---------- general methods -----------------
-### from High Performance Python M Gorelick & I Ozswald
-### O'Reilly 2014 p.27
-##from functools import wraps
-##from time import time
-##def timefn(fn):
-##    """
-##    A decorator for automate run time measurements
-##    from "High Performance Python" by  M Gorelick & I Ozswald
-##    O'Reilly 2014 p.27
-##    """
-##    @wraps(fn)
-##    def measure_time(*args,**kwargs):
-##        t1 = time()
-##        result = fn(*args,**kwargs)
-##        t2 = time()
-##        print("@timefn:" + fn.__name__ + " took " + str(t2-t1) + " sec.")
-##        return result
-##    return measure_time
-##
-### generate all permutations from a string or a list
-### From Michael Davies's recipe:
-### http://snippets.dzone.com/posts/show/753
-##def all_perms(str):
-##    if len(str) <=1:
-##        yield str
-##    else:
-##        for perm in all_perms(str[1:]):
-##            for i in range(len(perm)+1):
-##                yield perm[:i] + str[0:1] + perm[i:]
-### epistemic or symmetric disjunction operator
-##def omax(Med,L, Debug=False):
-##    """
-##    epistemic disjunction for bipolar outranking characteristics
-##    computation: Med is the valuation domain median and L is a list of
-##    r-valued statement characteristics. 
-##    """
-##    #Med = self.valuationdomain['med']
-##    terms = list(L)
-##    termsPlus = []
-##    termsMinus = []
-##    termsNuls = []
-##    for i in range(len(terms)):
-##        if terms[i] > Med:
-##            termsPlus.append(terms[i])
-##        elif terms[i] < Med:
-##            termsMinus.append(terms[i])
-##        else:
-##            termsNuls.append(terms[i])
-####    if Debug:
-####        print('terms', terms)
-####        print('termsPlus',termsPlus)
-####        print('termsMinus', termsMinus)
-####        print('termsNuls', termsNuls)
-##    np = len(termsPlus)
-##    nm = len(termsMinus)
-##    if np > 0 and nm == 0:
-##        return max(termsPlus)
-##    elif nm > 0 and np == 0:
-##        return min(termsMinus)
-##    else:
-##        return Med
-### epistemic or symmetric conjunction operator
-##def omin(Med,L, Debug=False):
-##    """
-##    epistemic conjunction of a list L of bipolar outranking characteristics.
-##    Med is the given valuation domain median.
-##    """
-##    #Med = self.valuationdomain['med']
-##    terms = list(L)
-##    termsPlus = []
-##    termsMinus = []
-##    termsNuls = []
-##    for i in range(len(terms)):
-##        if terms[i] > Med:
-##            termsPlus.append(terms[i])
-##        elif terms[i] < Med:
-##            termsMinus.append(terms[i])
-##        else:
-##            termsNuls.append(terms[i])
-####    if Debug:
-####        print('terms', terms)
-####        print('termsPlus',termsPlus)
-####        print('termsMinus', termsMinus)
-####        print('termsNuls', termsNuls)
-##    np = len(termsPlus)
-##    nm = len(termsMinus)
-##    if np > 0:
-##        if nm > 0:
-##            return Med
-##        else:
-##            return min(termsPlus)
-##    else:
-##        if nm > 0:
-##            return max(termsMinus)
-##        else:
-##            return Med
-##
-### generate all subsets of a given set E
-### Discrete Mathematics BINFO 1 course Lesson 2-sets
-### RB October 2009 (recursive version)
-##def powerset(S):
-##    """
-##    Power set generator iterator.
-##
-##    Parameter S may be any object that is accepted as input by the set class constructor.
-##
-##    """
-##    E = set(S)
-##    if len(E) == 0:
-##        yield set()
-##    else:
-##        e = E.pop()
-##        for X in powerset(E):
-##            yield set([e]) | X
-##            yield X
-##
-### transforms a ranking (list from best to worst) into
-### a preorder ( a list of list from worst to best)
-##def ranking2preorder(R):
-##    preorder = [[x] for x in reversed(R)]
-###    for x in R:
-###        preorder.append([x])
-###    preorder.reverse()
-##    return preorder
-##
-### flattens a list of lists into a flat list
-##import itertools as IT
-##import collections
-##
-##def flatten(iterable, ltypes=collections.Iterable):
-##    """
-##    Flattens a list of lists into a flat list.
-##
-##    Main usage:
-##    
-##    >>> listOfLists = [[1,2],[3],[4]]
-##    >>> [x for x in flatten(listOfLists)]
-##    [1,2,3,4]
-##    
-##    """
-##    
-##    remainder = iter(iterable)
-##    while True:
-##        first = next(remainder)
-##        if isinstance(first, ltypes) and not isinstance(first, str):
-##            remainder = IT.chain(first, remainder)
-##        else:
-##            yield first
-##
-##def total_size(o, handlers={}, verbose=False):
-##    """ Returns the approximate memory footprint of an object and all of its contents.
-##
-##    Automatically finds the contents of the following containers and
-##    their subclasses:  tuple, list, deque, dict, set, frozenset, Digraph and BigDigraph.
-##    To search other containers, add handlers to iterate over their contents:
-##
-##        handlers = {SomeContainerClass: iter,
-##                    OtherContainerClass: OtherContainerClass.get_elements}
-##
-##    See http://code.activestate.com/recipes/577504/  
-##
-##    """
-##    from sys import getsizeof, stderr
-##    from itertools import chain
-##    from collections import deque
-##    from bigOutrankingDigraphs import BigDigraph
-##    
-##    try:
-##        from reprlib import repr
-##    except ImportError:
-##        pass
-##
-##    # built-in containers and their subclasses
-##    dict_handler = lambda d: chain.from_iterable(d.items())
-##    all_handlers = {tuple: iter,
-##                    list: iter,
-##                    deque: iter,
-##                    dict: dict_handler,
-##                    set: iter,
-##                    frozenset: iter,
-##                    }
-##
-##    # Digraph3 objects 
-##    object_handler = lambda d: chain.from_iterable(d.__dict__.items())    
-##    handlers = {BigDigraph: object_handler,
-##                Digraph: object_handler,
-##                PerformanceTableau : object_handler,
-##                }
-##    
-##    all_handlers.update(handlers)     # user handlers take precedence
-##    seen = set()                      # track which object id's have already been seen
-##    default_size = getsizeof(0)       # estimate sizeof object without __sizeof__
-##
-##    def sizeof(o):
-##        if id(o) in seen:       # do not double count the same object
-##            return 0
-##        seen.add(id(o))
-##        s = getsizeof(o, default_size)
-##
-##        if verbose:
-##            print(s, type(o), repr(o), file=stderr)
-##
-##        for typ, handler in all_handlers.items():
-##            if isinstance(o, typ):
-##                s += sum(map(sizeof, handler(o)))
-##                break
-##        return s
-##
-##    return sizeof(o)
-##
-##### arithmetics
-##def primesbelow(N):
-##    # http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188
-##    #""" Input N>=6, Returns a list of primes, 2 <= p < N """
-##    correction = N % 6 > 1
-##    N = {0:N, 1:N-1, 2:N+4, 3:N+3, 4:N+2, 5:N+1}[N%6]
-##    sieve = [True] * (N // 3)
-##    sieve[0] = False
-##    for i in range(int(N ** .5) // 3 + 1):
-##        if sieve[i]:
-##            k = (3 * i + 1) | 1
-##            sieve[k*k // 3::2*k] = [False] * ((N//6 - (k*k)//6 - 1)//k + 1)
-##            sieve[(k*k + 4*k - 2*k*(i%2)) // 3::2*k] = [False] * ((N // 6 - (k*k + 4*k - 2*k*(i%2))//6 - 1) // k + 1)
-##    return [2, 3] + [(3 * i + 1) | 1 for i in range(1, N//3 - correction) if sieve[i]]
-##
-##smallprimeset = set(primesbelow(100000))
-##_smallprimeset = 100000
-##def isprime(n, precision=7):
-##    # http://en.wikipedia.org/wiki/Miller-Rabin_primality_test#Algorithm_and_running_time
-##    if n == 1 or n % 2 == 0:
-##        return False
-##    elif n < 1:
-##        raise ValueError("Out of bounds, first argument must be > 0")
-##    elif n < _smallprimeset:
-##        return n in smallprimeset
-##
-##
-##    d = n - 1
-##    s = 0
-##    while d % 2 == 0:
-##        d //= 2
-##        s += 1
-##
-##    for repeat in range(precision):
-##        a = random.randrange(2, n - 2)
-##        x = pow(a, d, n)
-##
-##        if x == 1 or x == n - 1: continue
-##
-##        for r in range(s - 1):
-##            x = pow(x, 2, n)
-##            if x == 1: return False
-##            if x == n - 1: break
-##        else: return False
-##
-##    return True
-##
-##def pollard_brent(n):
-##    # https://comeoncodeon.wordpress.com/2010/09/18/pollard-rho-brent-integer-factorization/
-##    if n % 2 == 0: return 2
-##    if n % 3 == 0: return 3
-##
-##    y, c, m = random.randint(1, n-1), random.randint(1, n-1), random.randint(1, n-1)
-##    g, r, q = 1, 1, 1
-##    while g == 1:
-##        x = y
-##        for i in range(r):
-##            y = (pow(y, 2, n) + c) % n
-##
-##        k = 0
-##        while k < r and g==1:
-##            ys = y
-##            for i in range(min(m, r-k)):
-##                y = (pow(y, 2, n) + c) % n
-##                q = q * abs(x-y) % n
-##            g = gcd(q, n)
-##            k += m
-##        r *= 2
-##    if g == n:
-##        while True:
-##            ys = (pow(ys, 2, n) + c) % n
-##            g = gcd(abs(x - ys), n)
-##            if g > 1:
-##                break
-##
-##    return g
-##
-##smallprimes = primesbelow(1000) # might seem low, but 1000*1000 = 1000000, so this will fully factor every composite < 1000000
-##def primefactors(n, sort=False):
-##    factors = []
-##
-##    limit = int(n ** .5) + 1
-##    for checker in smallprimes:
-##        if checker > limit: break
-##        while n % checker == 0:
-##            factors.append(checker)
-##            n //= checker
-##            limit = int(n ** .5) + 1
-##            if checker > limit: break
-##
-##    if n < 2: return factors
-##
-##    while n > 1:
-##        if isprime(n):
-##            factors.append(n)
-##            break
-##        factor = pollard_brent(n) # trial division did not fully factor, switch to pollard-brent
-##        factors.extend(primefactors(factor)) # recurse to factor the not necessarily prime factor returned by pollard-brent
-##        n //= factor
-##
-##    if sort: factors.sort()
-##
-##    return factors
-##
-##def factorization(n):
-##    factors = {}
-##    for p1 in primefactors(n):
-##        try:
-##            factors[p1] += 1
-##        except KeyError:
-##            factors[p1] = 1
-##    return factors
-##
-##totients = {}
-##def totient(n):
-##    if n == 0: return 1
-##
-##    try: return totients[n]
-##    except KeyError: pass
-##
-##    tot = 1
-##    for p, exp in factorization(n).items():
-##        tot *= (p - 1)  *  p ** (exp - 1)
-##
-##    totients[n] = tot
-##    return tot
-##
-##def gcd(a, b):
-##    if a == b: return a
-##    while b > 0: a, b = b, a % b
-##    return a
-##
-##def lcm(a, b):
-##    return abs(a * b) // gcd(a, b)
-##
+# #----------XML handling class obsolete -----------------
+# try:
+#     from xml.sax import *
+# except:
+#     print('XML extension will not work with this Python version!')
 
-#----------XML handling class -----------------
-try:
-    from xml.sax import *
-except:
-    print('XML extension will not work with this Python version!')
+# class _XMLDigraphHandler(ContentHandler):
+#     """
+#     A private handler to deal with digraphs stored in XML format.
+#     """
 
-class _XMLDigraphHandler(ContentHandler):
-    """
-    A private handler to deal with digraphs stored in XML format.
-    """
-
-    inName = 0
-    digraphName = ''
-    inAction = 0
-    actionName = ''
-    actions = []
-    iAction = ''
-    tAction = ''
-    inMin = 0
-    minText = ''
-    inMax = 0
-    maxText = ''
-    inValue = 0
-    valueText = ''
-    valuationdomain = {}
-    relation = {}
+#     inName = 0
+#     digraphName = ''
+#     inAction = 0
+#     actionName = ''
+#     actions = []
+#     iAction = ''
+#     tAction = ''
+#     inMin = 0
+#     minText = ''
+#     inMax = 0
+#     maxText = ''
+#     inValue = 0
+#     valueText = ''
+#     valuationdomain = {}
+#     relation = {}
 
 
-    def startElement(self,nodeName,attrs):
-        if nodeName == 'digraph':
-            self.category = attrs.get("category", "")
-            self.subcategory = attrs.get("subcategory", "")
+#     def startElement(self,nodeName,attrs):
+#         if nodeName == 'digraph':
+#             self.category = attrs.get("category", "")
+#             self.subcategory = attrs.get("subcategory", "")
 
-        if nodeName == 'name':
-            self.inName = 1
+#         if nodeName == 'name':
+#             self.inName = 1
 
-        if nodeName == 'nodes':
-            self.actions = []
+#         if nodeName == 'nodes':
+#             self.actions = []
 
-        if nodeName == 'node':
-            self.actionName = ''
-            self.inAction = 1
+#         if nodeName == 'node':
+#             self.actionName = ''
+#             self.inAction = 1
 
-        if nodeName == 'min':
-            self.inMin = 1
+#         if nodeName == 'min':
+#             self.inMin = 1
 
-        if nodeName == 'max':
-            self.inMax = 1
+#         if nodeName == 'max':
+#             self.inMax = 1
 
-        if nodeName == 'relation':
-            self.relation = {}
-            for x in self.actions:
-                self.relation[x] = {}
+#         if nodeName == 'relation':
+#             self.relation = {}
+#             for x in self.actions:
+#                 self.relation[x] = {}
 
-        if nodeName == 'i':
-            self.actionName = ''
-            self.inAction = 1
+#         if nodeName == 'i':
+#             self.actionName = ''
+#             self.inAction = 1
 
-        if nodeName == 't':
-            self.actionName = ''
-            self.inAction = 1
+#         if nodeName == 't':
+#             self.actionName = ''
+#             self.inAction = 1
 
-        if nodeName == 'v':
-            self.valueText = ''
-            self.inValue = 1
+#         if nodeName == 'v':
+#             self.valueText = ''
+#             self.inValue = 1
 
 
-    def endElement(self,nodeName):
+#     def endElement(self,nodeName):
 
-        if nodeName == 'name':
-            self.inName = 0
-            self.name = str(self.digraphName)
+#         if nodeName == 'name':
+#             self.inName = 0
+#             self.name = str(self.digraphName)
 
-        if nodeName == 'node':
-            self.actions.append(str(self.actionName))
-            self.inAction = 0
+#         if nodeName == 'node':
+#             self.actions.append(str(self.actionName))
+#             self.inAction = 0
 
-        if nodeName == 'min':
-            self.inMin = 0
-            self.valuationdomain['min'] = eval(self.minText)
+#         if nodeName == 'min':
+#             self.inMin = 0
+#             self.valuationdomain['min'] = eval(self.minText)
 
-        if nodeName == 'max':
-            self.inMax = 0
-            self.valuationdomain['max'] = eval(self.maxText)
+#         if nodeName == 'max':
+#             self.inMax = 0
+#             self.valuationdomain['max'] = eval(self.maxText)
 
-        if nodeName == 'i':
-            self.inAction = 0
-            self.iAction = str(self.actionName)
+#         if nodeName == 'i':
+#             self.inAction = 0
+#             self.iAction = str(self.actionName)
 
-        if nodeName == 't':
-            self.inAction = 0
-            self.tAction = str(self.actionName)
+#         if nodeName == 't':
+#             self.inAction = 0
+#             self.tAction = str(self.actionName)
 
-        if nodeName == 'v':
-            self.inValue = 0
+#         if nodeName == 'v':
+#             self.inValue = 0
 
-        if nodeName == 'arc':
-            self.relation[self.iAction][self.tAction] = eval(self.valueText)
+#         if nodeName == 'arc':
+#             self.relation[self.iAction][self.tAction] = eval(self.valueText)
 
-    def characters(self, ch):
-        if self.inName:
-            self.digraphName += ch
-        if self.inAction:
-            self.actionName += ch
-        if self.inMin:
-            self.minText += ch
-        if self.inMax:
-            self.maxText += ch
-        if self.inValue:
-            self.valueText += ch
+#     def characters(self, ch):
+#         if self.inName:
+#             self.digraphName += ch
+#         if self.inAction:
+#             self.actionName += ch
+#         if self.inMin:
+#             self.minText += ch
+#         if self.inMax:
+#             self.maxText += ch
+#         if self.inValue:
+#             self.valueText += ch
 
 
 #----------Digraph classes -----------------
@@ -572,7 +222,10 @@ class Digraph(object):
             argDict = {}
             exec(compile(open(fileName).read(), fileName, 'exec'), argDict)
             self.name = file
-            self.actions = argDict['actionset']
+            try:
+                self.actions = argDict['actions']
+            except: # for compatibility with Digraph2 versions
+                self.actions = argDict['actionset']
             self.order = len(self.actions)
             self.valuationdomain = argDict['valuationdomain']
             self.convertValuationToDecimal()
@@ -2617,6 +2270,12 @@ class Digraph(object):
         """
         return self.weakCondorcetWinners()
 
+    def computeWeakCondorcetLoosers(self):
+        """
+        Wrapper for weakCondorcetLoosers().
+        """
+        return self.weakCondorcetLoosers()
+
     def weakCondorcetWinners(self):
         """
         Renders the set of decision actions x such that
@@ -2643,11 +2302,43 @@ class Digraph(object):
             pass
         return wCW
 
+    def weakCondorcetLoosers(self):
+        """
+        Renders the set of decision actions x such that
+        self.relation[x][y] <= self.valuationdomain['med']
+        for all y != x.
+        """
+        #actions = self.actions
+        relation = self.relation
+        Med = self.valuationdomain['med']
+        wCL = []
+        for x,rx in relation.items():
+            #rx = relation[x]
+            Looser = True
+            for y,rxy in rx.items():
+                if x != y:
+                    if rx[y] > Med:
+                        Looser = False
+                        break
+            if Looser:
+                wCL.append(x)
+        try:
+            wCL.sort()
+        except:
+            pass
+        return wCL
+
     def computeCondorcetWinners(self):
         """
         Wrapper for condorcetWinners().
         """
         return self.condorcetWinners()
+
+    def computeCondorcetLoosers(self):
+        """
+        Wrapper for condorcetLoosers().
+        """
+        return self.condorcetLoosers()
 
     def condorcetWinners(self):
         """
@@ -2674,6 +2365,32 @@ class Digraph(object):
         except:
             pass
         return CW
+
+    def condorcetLoosers(self):
+        """
+        Renders the set of decision actions x such that
+        self.relation[x][y] < self.valuationdomain['med']
+        for all y != x.
+        """
+        #actions = self.actions
+        relation = self.relation
+        Med = self.valuationdomain['med']
+        CL = []
+        for x,rx in relation.items():
+            #rx = relation[x]
+            Looser = True
+            for y,rxy in rx.items():
+                if x != y:
+                    if rxy >= Med:
+                        Looser = False
+                        break
+            if Looser:
+                CL.append(x)
+        try:
+            CL.sort()
+        except:
+            pass
+        return CL
 
     def forcedBestSingleChoice(self):
         """
@@ -2930,6 +2647,13 @@ class Digraph(object):
     def automorphismGenerators(self):
         """
         Adds automorphism group generators to the digraph instance.
+
+        .. note::
+
+            Dependency: Uses the dreadnaut command from the nauty software package. See https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml
+
+            On Linux:
+              ...$ sudo apt-get install nauty
         """
         import os
         Name = self.name
@@ -2946,14 +2670,14 @@ class Digraph(object):
         String2 = "echo '<"+File0+' -m p >'+File1+" x' | dreadnaut"
         print(String2)
         os.system(String2)
+        NoError = True
         try:
             f1 = open(File1,'r')
-            noError = True
         except:
             print('The input file: ', File1,' could not be found!')
             print("Be sure that nauty's dreadnaut programm is available!")
-            noError = False
-        if noError:
+            NoError = False
+        if NoError:
             permutations = {}
             t = f1.readline()
             nl = 0
@@ -2999,14 +2723,14 @@ class Digraph(object):
         Renders the generators of the automorphism group.
         """
         print('*---- Automorphism group generators ----')
+        NoError = True
         try:
             reflections = self.reflections
             permutations = self.permutations
-            noError = True
         except:
             print('No permutations or reflections defined yet !!')
-            noError = False
-        if noError:
+            NoError = False
+        if NoError:
             print('Permutations')
             for g in permutations:
                 print(self.permutations[g])
@@ -3019,17 +2743,64 @@ class Digraph(object):
     def showOrbits(self,InChoices,withListing=True):
         """
         Prints the orbits of Choices along the automorphisms of
-        the digraph instance.
+        the Digraph instance.
+
+        Example Python session for computing the non isomorphic MISs from the 12-cycle graph:
+
+        >>> from digraphs import *
+        >>> c12 = CirculantDigraph(order=12,circulants=[1,-1])
+        >>> c12.automorphismGenerators()
+        ...
+          Permutations
+          {'1': '1', '2': '12', '3': '11', '4': '10', '5': 
+           '9', '6': '8', '7': '7', '8': '6', '9': '5', '10': 
+           '4', '11': '3', '12': '2'}
+          {'1': '2', '2': '1', '3': '12', '4': '11', '5': '10', 
+           '6': '9', '7': '8', '8': '7', '9': '6', '10': '5', 
+           '11': '4', '12': '3'}
+          Reflections {}
+        >>> print('grpsize = ', c12.automorphismGroupSize)
+          grpsize = 24
+        >>> c12.showMIS(withListing=False)
+          *---  Maximal independent choices ---*
+          number of solutions:  29
+          cardinality distribution
+          card.:  [0, 1, 2, 3, 4,  5,  6, 7, 8, 9, 10, 11, 12]
+          freq.:  [0, 0, 0, 0, 3, 24,  2, 0, 0, 0,  0,  0,  0]
+          Results in c12.misset
+        >>> c12.showOrbits(c12.misset,withListing=False)
+        ...
+          *---- Global result ----
+          Number of MIS:  29
+          Number of orbits :  4
+          Labelled representatives:
+          1: ['2','4','6','8','10','12']
+          2: ['2','5','8','11']
+          3: ['2','4','6','9','11']
+          4: ['1','4','7','9','11']
+          Symmetry vector
+          stabilizer size: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, ...]
+          frequency      : [0, 2, 0, 0, 0, 0, 0, 1, 0,  0,  0,  1, ...]
+
+        *Figure*: The symmetry axes of the non isomorphic MISs of the 12-cycle:
+
+        .. image:: c12.png
+           :width: 400 px
+           :align: center
+           :alt: The 4 non isomorphic MIS of the 12-cycle graph
+
+        *Reference*: R. Bisdorff and J.L. Marichal (2008). Counting non-isomorphic maximal independent sets of the n-cycle graph. *Journal of Integer Sequences*, Vol. 11 Article 08.5.7 (`openly accessible here <https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html>`_)
+
         """
         try:
             reflections = self.reflections
             permutations = self.permutations
-            noError = True
+            NoError = True
         except:
             print('No permutations or reflections defined yet !!')
             print('Run self.automorphismGenerators()')
-            noError=False
-        if noError:
+            NoError = False
+        if NoError:
             Choices = InChoices.copy()
             print('*--- Isomorphic reduction of choices')
             Iso = set()
@@ -3093,113 +2864,116 @@ class Digraph(object):
         """
         Prints the orbits of Choices along the automorphisms of
         the digraph self by reading in the 0-1 misset file format.
-        See the digraphs.Digraph.readPerrinMisset() method.
+        See the :py:func:`digraphs.Digraph.readPerrinMisset` method.
         """
+        
         try:
             reflections = self.reflections
             permutations = self.permutations
-            f1 = open(InFile,'r')
-            noError = True
         except:
             print('No permutations or reflections defined yet !!')
             print('Run self.automorphismGenerators()')
-            noError = False
-
-        if noError:
-            actions = [x for x in self.actions]
-            print('*--- Isomorphic reduction of choices')
-            Iso = set()
-            misset = set()
-            v = [0 for i in range(1,self.order + 1)]
-            while 1:
-                line = f1.readline()
-                if not line: break
-                sCur = set()
-                for i in range(len(line)):
-                    if line[i] == '1':
-                        sCur.add(actions[i])
-                if sCur not in misset:
-                    print('current representative: ',sCur)
-                    print('length   : ', len(sCur))
-                    IsosCur = set([frozenset(sCur)])
-                    Isos = set()
-                    while IsosCur != Isos:
-                        Isos = IsosCur.copy()
-                        IsosRes = IsosCur.copy()
-                        for s in IsosCur:
-                            for g in reflections:
-                                cur = s
-                                for a in reflections[g]:
-                                    if (a[0] in cur) and a[1] not in cur:
-                                        cur = cur - set([a[0]])
-                                        cur = cur | set([a[1]])
-                                    else:
-                                        if a[1] in cur and a[0] not in cur:
-                                            cur = cur - set([a[1]])
-                                            cur = cur | set([a[0]])
-                                IsosRes.add(cur)
-                        IsosCur = IsosRes.copy()
-                        for s in IsosCur:
-                            for g in permutations:
-                                cur = frozenset()
-                                for x in s:
-                                    cur = cur | set([permutations[g][x]])
-                                IsosRes = IsosRes | set([cur])
-                        IsosCur = IsosRes.copy()
-                    Iso = Iso | set([frozenset(sCur)])
-                    niso = len(Isos)
-                    print('number of isomorph choices', niso)
-                    v[((2*self.order)//niso)-1] += 1
-                    if withListing:
-                        print('isormorph choices')
-                        for ch in Isos:
-                            print(list(ch))
-                    print('Number of choices before : ', len(misset) + 1)
-                    misset = misset | Isos
-                    print('Number of choices after  : ', len(misset))
-            print()
-            print('*---- Global result ----')
-            print('Labelled representatives:')
-            for ch in Iso:
-                print(list(ch))
-            print()
-            print('Number of choices: ', len(misset))
-            print('Number of orbits : ', len(Iso))
-            print('symmetry vector  : ', list(range(1,self.order + 1)))
-            print('frequency        : ', v)
-            self.orbits = Iso
-
-    def readPerrinMisset(self,file):
-        """
-        read method for 0-1-char-coded MISs from perrinMIS.c curd.dat file.
-        """
+            return
         try:
-            f1 = open(file,'r')
-            noError = True
+            f1 = open(InFile,'r')
         except:
-            noError = False
-            print('The input file: ', file,' could not be found ?')
+            print('File %s not found ?' % InFile)
+            return
+        
+        actions = [x for x in self.actions]
+        print('*--- Isomorphic reduction of choices')
+        Iso = set()
+        misset = set()
+        v = [0 for i in range(1,self.order + 1)]
+        while 1:
+            line = f1.readline()
+            if not line: break
+            sCur = set()
+            for i in range(len(line)):
+                if line[i] == '1':
+                    sCur.add(actions[i])
+            if sCur not in misset:
+                print('current representative: ',sCur)
+                print('length   : ', len(sCur))
+                IsosCur = set([frozenset(sCur)])
+                Isos = set()
+                while IsosCur != Isos:
+                    Isos = IsosCur.copy()
+                    IsosRes = IsosCur.copy()
+                    for s in IsosCur:
+                        for g in reflections:
+                            cur = s
+                            for a in reflections[g]:
+                                if (a[0] in cur) and a[1] not in cur:
+                                    cur = cur - set([a[0]])
+                                    cur = cur | set([a[1]])
+                                else:
+                                    if a[1] in cur and a[0] not in cur:
+                                        cur = cur - set([a[1]])
+                                        cur = cur | set([a[0]])
+                            IsosRes.add(cur)
+                    IsosCur = IsosRes.copy()
+                    for s in IsosCur:
+                        for g in permutations:
+                            cur = frozenset()
+                            for x in s:
+                                cur = cur | set([permutations[g][x]])
+                            IsosRes = IsosRes | set([cur])
+                    IsosCur = IsosRes.copy()
+                Iso = Iso | set([frozenset(sCur)])
+                niso = len(Isos)
+                print('number of isomorph choices', niso)
+                v[((2*self.order)//niso)-1] += 1
+                if withListing:
+                    print('isormorph choices')
+                    for ch in Isos:
+                        print(list(ch))
+                print('Number of choices before : ', len(misset) + 1)
+                misset = misset | Isos
+                print('Number of choices after  : ', len(misset))
+        print()
+        print('*---- Global result ----')
+        print('Labelled representatives:')
+        for ch in Iso:
+            print(list(ch))
+        print()
+        print('Number of choices: ', len(misset))
+        print('Number of orbits : ', len(Iso))
+        print('symmetry vector  : ', list(range(1,self.order + 1)))
+        print('frequency        : ', v)
+        self.orbits = Iso
 
-        if noError:
-            actions = [x for x in self.actions]
-            nl = 0
-            misset = set()
-            while 1:
-                line = f1.readline()
-                if not line: break
-                nl += 1
-                mis = set()
-                for i in range(len(line)):
-                    if ord(line[i]) == 1:
-                        mis.add(actions[i])
-                #print mis
-                misset = misset | set([frozenset(mis)])
-            #print 'Reading ' + str(nl) + ' MISs.'
-            self.misset = misset
+    # def _readPerrinMisset(self,file):
+    #     """
+    #     read method for 0-1-char-coded MISs from perrinMIS.c curd.dat file.
+    #     """
+    #     NoError = True
+    #     try:
+    #         f1 = open(file,'r')
+    #     except:
+    #         NoError = False
+    #         print('The input file: ', file,' could not be found ?')
 
-    def readPerrinMissetOpt(self,file):
+    #     if NoError:
+    #         actions = [x for x in self.actions]
+    #         nl = 0
+    #         misset = set()
+    #         while 1:
+    #             line = f1.readline()
+    #             if not line: break
+    #             nl += 1
+    #             mis = set()
+    #             for i in range(len(line)):
+    #                 if ord(line[i]) == 1:
+    #                     mis.add(actions[i])
+    #             #print mis
+    #             misset = misset | set([frozenset(mis)])
+    #         #print 'Reading ' + str(nl) + ' MISs.'
+    #         self.misset = misset
+
+    def readPerrinMisset(self,file='curd.dat'):
         """
-        read method for 0-1-char-coded MISs from perrinMIS.c curd.dat file.
+        read method for 0-1-char-coded MISs by default from the perrinMIS.c curd.dat result file.
         """
         try:
             f1 = open(file,'r')
@@ -3733,7 +3507,7 @@ class Digraph(object):
                 except:
                     actionsList += [(actions[x]['name'],x)]
             else:
-                actionsList += [(str(x),str(x))]
+                actionsList += [(str(x),x)]
         if actionsSubset == None:
             actionsList.sort()
         #print actionsList
@@ -4023,8 +3797,8 @@ class Digraph(object):
         fo.close()
         if type(self) == CirculantDigraph:
             commandString = 'circo -T'+graphType+' '+dotName+' -o '+name+'.' + graphType
-        elif type(self) == RandomTree:
-            commandString = 'neato -T'+graphType+' '+dotName+' -o '+name+'.' + graphType
+        # elif type(self) == RandomTree:
+        #     commandString = 'neato -T'+graphType+' '+dotName+' -o '+name+'.' + graphType
         else:
             commandString = 'dot -Grankdir=BT -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
             #commandString = 'dot -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
@@ -4798,7 +4572,7 @@ class Digraph(object):
                     deter += abs(rxy - Med)
                     #print(deter)
         #deter = (deter /Decimal(str((order * (order-1))))) * (Max - Med)
-        deter = ( Decimal(str(deter)) / Decimal(str((order * (order-1)))) )
+        deter = deter / Decimal(str((order * (order-1))))
         return deter/(Decimal(str(Max-Med)))*Decimal('100')
 
     def showStatistics(self):
@@ -6332,7 +6106,7 @@ class Digraph(object):
         fo.write('# Saved digraph instance\n')
         if DecimalValuation:
             fo.write('from decimal import Decimal\n')
-        fo.write('actionset = {\n')
+        fo.write('actions = {\n')
         for x in actions:
             fo.write('\'' + str(x) + '\':\n')
             try:
@@ -6566,7 +6340,9 @@ class Digraph(object):
         fo.close()
 
         resultFile = tempFileName+'.py'
-        if os.path.exists('/usr/local/bin/detectChordlessCircuits'):
+        if os.path.exists('/usr/bin/detectChordlessCircuits'):
+            os.system('/usr/bin/detectChordlessCircuits ' + tempFileName + ' ' + resultFile)
+        elif os.path.exists('/usr/local/bin/detectChordlessCircuits'):
             os.system('/usr/local/bin/detectChordlessCircuits ' + tempFileName + ' ' + resultFile)
         elif os.path.exists('/opt/local/bin/detectChordlessCircuits'):
             os.system('/opt/local/bin/detectChordlessCircuits ' + tempFileName + ' ' + resultFile)
@@ -6600,7 +6376,9 @@ class Digraph(object):
         import os
         from subprocess import Popen,PIPE
 
-        if os.path.exists('/usr/local/bin/enumChordlessCircuitsInOutPiping'):
+        if os.path.exists('/usr/bin/enumChordlessCircuitsInOutPiping'):
+            p = Popen(args=['/usr/bin/enumChordlessCircuitsInOutPiping'],stdin=PIPE,stdout=PIPE)
+        elif os.path.exists('/usr/local/bin/enumChordlessCircuitsInOutPiping'):
             p = Popen(args=['/usr/local/bin/enumChordlessCircuitsInOutPiping'],stdin=PIPE,stdout=PIPE)
         elif os.path.exists('/opt/local/bin/enumChordlessCircuitsInOutPiping'):
             p = Popen(args=['/opt/local/bin/enumChordlessCircuitsInOutPiping'],stdin=PIPE,stdout=PIPE)
@@ -6676,7 +6454,9 @@ class Digraph(object):
         ## if Debug:
         ##     print 'see file: ', tempFileName
         resultFile = tempFileName+'.py'
-        if os.path.exists('/usr/local/bin/enumChordlessCircuits'):
+        if os.path.exists('/usr/bin/enumChordlessCircuits'):
+            os.system('/usr/bin/enumChordlessCircuits ' + tempFileName + ' ' + resultFile)
+        elif os.path.exists('/usr/local/bin/enumChordlessCircuits'):
             os.system('/usr/local/bin/enumChordlessCircuits ' + tempFileName + ' ' + resultFile)
         elif os.path.exists('/opt/local/bin/enumChordlessCircuits'):
             os.system('/opt/local/bin/enumChordlessCircuits ' + tempFileName + ' ' + resultFile)
@@ -7859,12 +7639,12 @@ class Digraph(object):
 
     def determinateness(self,vec,inPercent = True):
         """
-        Renders the determinateness of a bipolar characteristic vector
-        [(r(x),x),(r(y),y), ...] of length *n* in valuationdomain [Min,Max]:
+        Renders the determinateness of a characteristic vector *vec* = 
+        [(r(x),x),(r(y),y), ...] of length *n* in valuationdomain [Min,Med,Max]:
         
-        result = sum_x abs(r(x))/(n*(Max-Min)
+        *result* =  sum_x( abs(r(x)-Med) ) / ( n*(Max-Med) )
 
-        If inPercent, result shifted (+1) and reduced (/2) to [0,1] range. 
+        If inPercent, *result* shifted (+1) and reduced (/2) to [0,1] range. 
         """
         Min = Decimal(str(self.valuationdomain['min']))
         Max = Decimal(str(self.valuationdomain['max']))
@@ -9347,7 +9127,7 @@ class Digraph(object):
 
     def computePrincipalOrder(self, plotFileName=None,\
                               Colwise=False, imageType=None,\
-                              TempDir=None,\
+                              tempDir=None,\
                               Comments=False, Debug=False):
         """
         Renders a ordered list of self.actions using the decreasing scores from the
@@ -9361,11 +9141,13 @@ class Digraph(object):
         """
         from csv import reader
         #from operator import itemgetter, attrgetter
-        from tempfile import mkdtemp
-        if TempDir == None:
-            tempDirName = mkdtemp()
-        else:
-            tempDirName = TempDir
+        from tempfile import TemporaryDirectory,mkdtemp
+##        if tempDir == None:
+##            tempDirName = mkdtemp()
+##        else:
+##            tempDirName = TempDir
+        tempd = TemporaryDirectory(dir=tempDir)
+        tempDirName = tempd.name
         self.exportPrincipalImage(Colwise=Colwise,Comments=Comments,
                                   Type=imageType,
                                   plotFileName=plotFileName,
@@ -9385,6 +9167,8 @@ class Digraph(object):
         principalScores.sort(reverse=True)
         if Debug:
             print(principalScores)
+        else:
+            tempd.cleanup()
         return principalScores
 
 
@@ -9557,22 +9341,11 @@ class CoDualDigraph(Digraph):
         from copy import deepcopy
         self.__class__ = other.__class__
         self.name = 'codual-'+other.name
-        try:
-            self.description = deepcopy(other.description)
-        except AttributeError:
-            pass
-        try:
-            self.criteria = deepcopy(other.criteria)
-        except AttributeError:
-            pass
-        try:
-            self.evaluation = deepcopy(other.evaluation)
-        except AttributeError:
-            pass
-        self.actions = deepcopy(other.actions)
-        self.order = len(self.actions)
-        self.valuationdomain = deepcopy(other.valuationdomain)
-        #actionsList = list(self.actions)
+        att = [a for a in other.__dict__]
+        att.remove('name')
+        att.remove('relation')
+        for a in att:
+            self.__dict__[a] = deepcopy(other.__dict__[a])
         Max = self.valuationdomain['max']
         Min = self.valuationdomain['min']
         relation = {}
@@ -9586,7 +9359,7 @@ class CoDualDigraph(Digraph):
         self.notGamma = self.notGammaSets()
 
 
-# ------ CoDual construction
+# ------ Cover construction
 
 class CoverDigraph(Digraph):
     """
@@ -9606,21 +9379,27 @@ class CoverDigraph(Digraph):
         from copy import deepcopy
         self.__class__ = other.__class__
         self.name = 'cover-'+other.name
-        try:
-            self.description = deepcopy(other.description)
-        except AttributeError:
-            pass
-        try:
-            self.criteria = deepcopy(other.criteria)
-        except AttributeError:
-            pass
-        try:
-            self.evaluation = deepcopy(other.evaluation)
-        except AttributeError:
-            pass
-        self.actions = deepcopy(other.actions)
-        self.order = len(self.actions)
-        self.valuationdomain = deepcopy(other.valuationdomain)
+        self.name = 'codual-'+other.name
+        att = [a for a in other.__dict__]
+        att.remove('name')
+        att.remove('relation')
+        for a in att:
+            self.__dict__[a] = deepcopy(other.__dict__[a])
+        # try:
+        #     self.description = deepcopy(other.description)
+        # except AttributeError:
+        #     pass
+        # try:
+        #     self.criteria = deepcopy(other.criteria)
+        # except AttributeError:
+        #     pass
+        # try:
+        #     self.evaluation = deepcopy(other.evaluation)
+        # except AttributeError:
+        #     pass
+        # self.actions = deepcopy(other.actions)
+        # self.order = len(self.actions)
+        # self.valuationdomain = deepcopy(other.valuationdomain)
         #actionsList = list(self.actions)
         #Max = Decimal('2')*other.valuationdomain['max']
         #Med = Decimal('0')
@@ -9667,25 +9446,12 @@ class ConverseDigraph(Digraph):
     def __init__(self,other):
         from copy import deepcopy
         self.__class__ = other.__class__
+        att = [a for a in other.__dict__]
+        att.remove('name')
+        att.remove('relation')
+        for a in att:
+            self.__dict__[a] = deepcopy(other.__dict__[a])
         self.name = 'converse-'+other.name
-        try:
-            self.description = deepcopy(other.description)
-        except AttributeError:
-            pass
-        try:
-            self.criteria = deepcopy(other.criteria)
-        except AttributeError:
-            pass
-        try:
-            self.evaluation = deepcopy(other.evaluation)
-        except AttributeError:
-            pass
-        self.actions = deepcopy(other.actions)
-        self.order = len(self.actions)
-        self.valuationdomain = deepcopy(other.valuationdomain)
-        #actionsList = list(self.actions)
-        #max = self.valuationdomain['max']
-        #min = self.valuationdomain['min']
         relation = {}
         for x in self.actions:
             relation[x] = {}
@@ -9703,7 +9469,7 @@ class FusionDigraph(Digraph):
 
     Parameter:
 
-        * operator = "o-min" | "o-max" (epistemic conjunctive or dijunctive fusion)
+        * operator = "o-min" | "o-max" (epistemic conjunctive or disjunctive fusion)
     """
 
     def __init__(self,dg1,dg2,operator="o-min"):
@@ -9755,9 +9521,9 @@ class FusionLDigraph(Digraph):
         for x in self.actions:
             fusionRelation[x] = {}
             fx = fusionRelation[x]
-            gx = g.relation[x]
+            #gx = g.relation[x]
             for y in self.actions:
-                args = [gx[y] for g in L]
+                args = [g.relation[x][y] for g in L]
                 if operator == "o-min":
                     fx[y] = omin(Med,args)
                 elif operator == "o-max":
@@ -9786,21 +9552,27 @@ class Preorder(Digraph):
         from copy import deepcopy
         self.__class__ = other.__class__
         self.name = 'preorder-'+other.name
-        try:
-            self.description = deepcopy(other.description)
-        except AttributeError:
-            pass
-        try:
-            self.criteria = deepcopy(other.criteria)
-        except AttributeError:
-            pass
-        try:
-            self.evaluation = deepcopy(other.evaluation)
-        except AttributeError:
-            pass
-        self.actions = deepcopy(other.actions)
-        self.order = len(self.actions)
-        self.valuationdomain = deepcopy(other.valuationdomain)
+        self.name = 'codual-'+other.name
+        att = [a for a in other.__dict__]
+        att.remove('name')
+        att.remove('relation')
+        for a in att:
+            self.__dict__[a] = deepcopy(other.__dict__[a])
+        # try:
+        #     self.description = deepcopy(other.description)
+        # except AttributeError:
+        #     pass
+        # try:
+        #     self.criteria = deepcopy(other.criteria)
+        # except AttributeError:
+        #     pass
+        # try:
+        #     self.evaluation = deepcopy(other.evaluation)
+        # except AttributeError:
+        #     pass
+        # self.actions = deepcopy(other.actions)
+        # self.order = len(self.actions)
+        # self.valuationdomain = deepcopy(other.valuationdomain)
         actionsList = [x for x in self.actions]
         Max = self.valuationdomain['max']
         Min = self.valuationdomain['min']
@@ -9913,16 +9685,23 @@ class EquivalenceDigraph(Digraph):
         Maxd1 = d1.valuationdomain['max']
         Mind2 = d2.valuationdomain['min']
         Maxd2 = d2.valuationdomain['max']
-        if (Mind1 != Mind2) or (Maxd1 != Maxd2):
+        if (Mind1 != Decimal("-1.0")) or (Maxd1 != Decimal("1.0")):
             if Debug:
-                print('!!! valuation recoding required !!!')
+                print('!!! d1 valuation recoding required !!!')
                 print(d1.name,d1.valuationdomain)
-                print(d2.name,d2.valuationdomain)
             d1.recodeValuation(-1.0,1.0)
-            d2.recodeValuation(-1.0,1.0)
-            Recoded = True
+            RecodedD1 = True
         else:
-            Recoded = False
+            RecodedD1 = False
+         
+        if (Mind2 != Decimal("-1.0")) or (Maxd2 != Decimal("1.0")):
+            if Debug:
+                print('!!! d2 valuation recoding required !!!')
+                print(d2.name,d2.valuationdomain)
+            d2.recodeValuation(-1.0,1.0)
+            RecodedD2 = True
+        else:
+            RecodedD2 = False
 
         equivRelation = {}
         for x in self.actions:
@@ -9940,15 +9719,12 @@ class EquivalenceDigraph(Digraph):
                                 'med': Decimal("0.0"),
                                 'max': Decimal("1.0")}
 
-        if Recoded:
-            self.valuationdomain = {'min': Decimal("-1.0"),
-                                    'med': Decimal("0.0"),
-                                    'max': Decimal("1.0")}
+        if RecodedD1:
             d1.recodeValuation(Mind1,Maxd1)
+        if RecodedD2:
             d2.recodeValuation(Mind2,Maxd2)
-        else:
-            self.valuationdomain = dict(d1.valuationdomain.items())
 
+        self.correlation = self.computeCorrelation()      
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
@@ -9960,14 +9736,16 @@ class EquivalenceDigraph(Digraph):
         corr = Decimal('0')
         dterm = Decimal('0')
         #actions = [x for x in self.actions]
-        actions = self.actions
+        #actions = self.actions
         relation = self.relation
         for x,rx in relation.items():
             for y,rxy in rx.items():
                 if x != y:
                     corr += rxy
-                    dterm += abs(xy)
-        return corr / dterm
+                    dterm += abs(rxy)
+        n = self.order * (self.order-1)
+        return {'correlation': float(corr)/float(dterm),
+                'determination': float(dterm)/float(n)}
 
 
 # ------- Specialisations of the Digraph class -----------
@@ -10350,77 +10128,77 @@ class _RandomFixedDegreeSequenceDigraph(Digraph):
                     self.relation = relation.copy()
                     self.gamma = self.gammaSets()
 
-class RandomTree(Digraph):
-    """
-    .. warning::
+# class RandomTree(Digraph):
+#     """
+#     .. warning::
 
-       *Obsolete version!* Will be removed in the future. Instead, use
-       the new :py:class:`graphs.RandomTree` constructor. 
+#        *Obsolete version!* Will be removed in the future. Instead, use
+#        the new :py:class:`graphs.RandomTree` constructor. 
 
-    """
-    def __init__(self,numberOfNodes=5, ndigits=2, hasIntegerValuation=True):
-        from random import choice
-        from decimal import Decimal
-        self.name = 'randomTree'
-        self.order = numberOfNodes
-        actions = {}
-        nodes = [str(x+1) for x in range(numberOfNodes)]
-        for x in nodes:
-            actions[x] = {'name': 'node %s' % x}
-        self.actions = actions
-        print(actions)
-        precision = pow(10,ndigits)
-        if hasIntegerValuation:
-            self.valuationdomain = {'min':-precision, 'med':0, 'max':precision}
-        else:
-            self.valuationdomain = {'min':Decimal('-1.0'), 'med':Decimal('0.0'), 'max':Decimal('1.0')}
-        self.valuationdomain['hasIntegerValuation'] = hasIntegerValuation
-        # init relation dictionary
-        relation = {}
-        nodeKeys = [x for x in actions]
-        print(nodeKeys)
-        for x in nodeKeys:
-            relation[x] = {}
-            for y in nodeKeys:
-                relation[x][y] = self.valuationdomain['min']
-        nodes = [x for x in range(len(nodeKeys))]
-        pruefer = []
-        for i in range(len(nodeKeys)-2):
-            pruefer.append(choice(nodes))
-        print(pruefer)
-        pairs = self.prufer_to_tree(pruefer)
-        for (i,j) in pairs:
-            relation[str(i+1)][str(j+1)] = Decimal('1.0')
-            relation[str(j+1)][str(i+1)] = Decimal('1.0')
-        self.relation = relation
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
+#     """
+#     def __init__(self,numberOfNodes=5, ndigits=2, hasIntegerValuation=True):
+#         from random import choice
+#         from decimal import Decimal
+#         self.name = 'randomTree'
+#         self.order = numberOfNodes
+#         actions = {}
+#         nodes = [str(x+1) for x in range(numberOfNodes)]
+#         for x in nodes:
+#             actions[x] = {'name': 'node %s' % x}
+#         self.actions = actions
+#         print(actions)
+#         precision = pow(10,ndigits)
+#         if hasIntegerValuation:
+#             self.valuationdomain = {'min':-precision, 'med':0, 'max':precision}
+#         else:
+#             self.valuationdomain = {'min':Decimal('-1.0'), 'med':Decimal('0.0'), 'max':Decimal('1.0')}
+#         self.valuationdomain['hasIntegerValuation'] = hasIntegerValuation
+#         # init relation dictionary
+#         relation = {}
+#         nodeKeys = [x for x in actions]
+#         print(nodeKeys)
+#         for x in nodeKeys:
+#             relation[x] = {}
+#             for y in nodeKeys:
+#                 relation[x][y] = self.valuationdomain['min']
+#         nodes = [x for x in range(len(nodeKeys))]
+#         pruefer = []
+#         for i in range(len(nodeKeys)-2):
+#             pruefer.append(choice(nodes))
+#         print(pruefer)
+#         pairs = self.prufer_to_tree(pruefer)
+#         for (i,j) in pairs:
+#             relation[str(i+1)][str(j+1)] = Decimal('1.0')
+#             relation[str(j+1)][str(i+1)] = Decimal('1.0')
+#         self.relation = relation
+#         self.gamma = self.gammaSets()
+#         self.notGamma = self.notGammaSets()
 
-    def prufer_to_tree(self,a):
-        tree = []
-        T = list(range(0, len(a)+2))
-        print(T)
-        # the degree of each node is how many times it appears
-        # in the sequence
-        deg = [1]*len(T)
-        print(deg)
-        for i in a: deg[i] += 1
+#     def prufer_to_tree(self,a):
+#         tree = []
+#         T = list(range(0, len(a)+2))
+#         print(T)
+#         # the degree of each node is how many times it appears
+#         # in the sequence
+#         deg = [1]*len(T)
+#         print(deg)
+#         for i in a: deg[i] += 1
 
-        # for each node label i in a, find the first node j with degree 1 and add
-        # the edge (j, i) to the tree
-        for i in a:
-            for j in T:
-                if deg[j] == 1:
-                    tree.append((i,j))
-                    # decrement the degrees of i and j
-                    deg[i] -= 1
-                    deg[j] -= 1
-                    break
+#         # for each node label i in a, find the first node j with degree 1 and add
+#         # the edge (j, i) to the tree
+#         for i in a:
+#             for j in T:
+#                 if deg[j] == 1:
+#                     tree.append((i,j))
+#                     # decrement the degrees of i and j
+#                     deg[i] -= 1
+#                     deg[j] -= 1
+#                     break
 
-        last = [x for x in T if deg[x] == 1]
-        tree.append((last[0],last[1]))
+#         last = [x for x in T if deg[x] == 1]
+#         tree.append((last[0],last[1]))
 
-        return tree
+#         return tree
 
 
 class _RandomRegularDigraph(Digraph):
@@ -11167,45 +10945,25 @@ class DualDigraph(Digraph):
     """
     def __init__(self,other):
         from copy import deepcopy
-        self.name = 'dual_' + str(other.name)
-        try:
-            self.description = deepcopy(other.description)
-        except AttributeError:
-            pass
-        try:
-            self.criteria = deepcopy(other.criteria)
-        except AttributeError:
-            pass
-        try:
-            self.evaluation = deepcopy(other.evaluation)
-        except AttributeError:
-            pass
-        self.valuationdomain = deepcopy(other.valuationdomain)
-        Max = self.valuationdomain['max']
-        Med = self.valuationdomain['med']
-        self.actions = deepcopy(other.actions)
-        self.order = len(self.actions)
-        self.relation = self._constructRelation(other.relation)
         self.__class__ = other.__class__
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
-
-    def _constructRelation(self,relationIn):
-        """
-        Renders the dual relation with formula:
-        relationOut[a][b] = Max - relationIn[a][b] + Min
-        where Max (resp. Min) equals valuation maximum (resp. minimum).
-        """
+        self.name = 'dual_' + str(other.name)
+        att = [a for a in other.__dict__]
+        att.remove('name')
+        for a in att:
+            self.__dict__[a] = deepcopy(other.__dict__[a])
+        #self.order = len(self.actions)
         actions = self.actions
         Min = self.valuationdomain['min']
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
-        relationOut = {}
+        dualRelation = {}
         for a in actions:
-            relationOut[a] = {}
+            dualRelation[a] = {}
             for b in actions:
-                relationOut[a][b] = Max - relationIn[a][b] + Min
-        return relationOut
+                dualRelation[a][b] = Max - self.relation[a][b] + Min
+        self.relation = dualRelation
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
 
 class _PreferenceDigraph(Digraph):
     """
@@ -12262,9 +12020,9 @@ class StrongComponentsCollapsedDigraph(Digraph):
 #-------------------------------------------------------
 
 
-# ------------ XML encoded stored Digraph instances
+# ------------ XML encoded stored Digraph instances obsolete
 
-class XMLDigraph24(Digraph):
+class _XMLDigraph24(Digraph):
     """
     Specialization of the general Digraph class for reading
     stored XML formatted digraphs.
@@ -12302,7 +12060,7 @@ class XMLDigraph24(Digraph):
         else:
             Digraph.showAll(self)
 
-class XMLDigraph(Digraph):
+class _XMLDigraph(Digraph):
     """
     Specialization of the general Digraph class for reading
     stored XML formatted digraphs. Using the inbuilt module
@@ -12341,7 +12099,7 @@ class XMLDigraph(Digraph):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-class XMLDigraph(Digraph):
+class _XMLDigraph(Digraph):
     """
     Specialization of the general Digraph class for reading
     stored XML formatted digraphs. Using the inbuilt module
@@ -12435,7 +12193,7 @@ class CSVDigraph(Digraph):
         except:
             Digraph.showAll(self)
 
-class XMCDADigraph(Digraph):
+class _XMCDADigraph(Digraph):
     """
     Specialization of the general Digraph class for reading
     stored XMCDA formatted digraphs. Using the inbuilt module

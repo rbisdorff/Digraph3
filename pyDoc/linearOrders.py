@@ -1337,7 +1337,7 @@ class PrincipalOrder(LinearOrder):
     outdegrees of the valued digraph 'other'.
     """
     def __init__(self,other,Colwise=True,imageType=None,
-                 plotFileName="principalOrdering",Debug=False):
+                 plotFileName="principalOrdering",tempDir=None,Debug=False):
         """
         constructor for generating a linear order
         from a given other digraph by using the first
@@ -1361,10 +1361,11 @@ class PrincipalOrder(LinearOrder):
         actionsList.sort()
         n = len(actionsList)
         relation = deepcopy(other.relation)
-        with TemporaryDirectory() as tempDirName:
+        with TemporaryDirectory(dir=tempDir) as tempDirName:
             principalScores = other.computePrincipalOrder(Colwise=Colwise,
                                                       imageType=imageType,
                                                       plotFileName=plotFileName,
+                                                      tempDir=tempDir,
                                                       Debug=Debug)
         # [ (score1,action_(1)), (score2,action_(2)), ...] 
         if principalScores == None:
@@ -1485,7 +1486,7 @@ if __name__ == "__main__":
     print()
     print('==>> principal ordering:')
     t0 = time()    
-    pri = PrincipalOrder(g)
+    pri = PrincipalOrder(g,tempDir=None)
     g.showRelationTable(actionsSubset=pri.principalRanking)
     print(pri.principalRanking)
     print(pri.principalOrder)

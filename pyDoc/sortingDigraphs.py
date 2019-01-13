@@ -156,9 +156,9 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         else:
             self.actions = deepcopy(perfTab.actions)
         self.criteria = deepcopy(perfTab.criteria)
-        self.convertWeightFloatToDecimal()
+        self.convertWeight2Decimal()
         self.evaluation = deepcopy(perfTab.evaluation)
-        self.convertEvaluationFloatToDecimal()
+        self.convertEvaluation2Decimal()
 
         # keep a copy of the original actions set before adding the profiles
         actionsOrig = deepcopy(perfTab.actions)
@@ -176,9 +176,9 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             else:
                 self.actions = deepcopy(perfTab.actions)
             self.criteria = deepcopy(perfTab.criteria)
-            self.convertWeightFloatToDecimal()
+            self.convertWeight2Decimal()
             self.evaluation = deepcopy(perfTab.evaluation)
-            self.convertEvaluationFloatToDecimal()
+            self.convertEvaluation2Decimal()
             if isinstance(argProfile,str): # input from stored instantiation
                 fileName = argProfile
                 fileNameExt = fileName + '.py'
@@ -203,9 +203,9 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             normPerfTab = NormalizedPerformanceTableau(perfTab)
             self.actions = normPerfTab.actions
             self.criteria = normPerfTab.criteria
-            self.convertWeightFloatToDecimal()
+            self.convertWeight2Decimal()
             self.evaluation = normPerfTab.evaluation
-            self.convertEvaluationFloatToDecimal()
+            self.convertEvaluation2Decimal()
             # supposing all criteria scales between 0.0 and 100.0
             lowValue = Decimal('0.0')
             highValue = Decimal('100.0')
@@ -291,7 +291,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         self.profiles = profiles
         self.profileLimits = profileLimits
         self.evaluation = evaluation
-        self.convertEvaluationFloatToDecimal()
+        self.convertEvaluation2Decimal()
         self.LowerClosed = LowerClosed
 
         self.runTimes['computeProfiles'] =  time()-t0
@@ -1497,10 +1497,10 @@ class QuantilesSortingDigraph(SortingDigraph):
         # instantiating the performance tableau part
         criteria = normPerfTab.criteria
         self.criteria = criteria
-        self.convertWeightFloatToDecimal()
+        self.convertWeight2Decimal()
         evaluation = normPerfTab.evaluation
         self.evaluation = evaluation
-        self.convertEvaluationFloatToDecimal()
+        self.convertEvaluation2Decimal()
         self.runTimes = {'dataInput': time()-tt}
 
         #  compute the limiting quantiles
@@ -1600,7 +1600,6 @@ class QuantilesSortingDigraph(SortingDigraph):
             print('self.profiles',profiles)
             print('self.profileLimits',profileLimits)
             
-        #self.convertEvaluationFloatToDecimal()
         self.runTimes['computeProfiles'] = time() - t0
         
         # construct outranking relation
@@ -3075,7 +3074,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         :py:class:`performanceQuantiles.PerformanceQuantiles` instance.
 
     Example Python session:
-        >>> From sortingDigraphs import *
+        >>> from sortingDigraphs import *
         >>> # historical data
         >>> from randomPerfTabs import RandomCBPerformanceTableau
         >>> nbrActions=1000
@@ -3086,21 +3085,18 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         >>> # new incoming decision actions of the same kind
         >>> from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
         >>> tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
-        >>> newActions = []
-        >>> for i in range(10):
-        ...     newAction = tpg.randomAction()
-        ...     newActions.append(newAction)
+        >>> newActions = tpg.randomActions(10)
         >>> # rating the new set of decision actions after
         >>> # updating the historical performance quantiles
         >>> pq.updateQuantiles(newActions,historySize=None)
         >>> nqr = NormedQuantilesRatingDigraph(pq,newActions,Debug=True)
         >>> # inspecting the rating result
-        >>> nqr.showQuantileRating()
+        >>> nqr.showQuantilesRating()
          *-------- Normed quantiles rating result ---------
          [0.50 - 0.60[ ['a1', 'a7', 'a3', 'a10', 'a2']
          [0.40 - 0.50[ ['a6', 'a9', 'a8']
          [0.20 - 0.30[ ['a4', 'a5']
-        >>> nqr.showHTMLPerformanceHeatmap(pageTitle='Heatmap of Quantiles Rating',Correlations=True)
+        >>> nqr.showHTMLRatingHeatmap(pageTitle='Heatmap of Quantiles Rating')
 
     .. image:: exampleIncRatDigraph.png
         :alt: usage example of Normed Quantiles Rating Digraph
@@ -3142,7 +3138,6 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         except:
             pass
         self.criteria = deepcopy(perfQuantiles.criteria)
-        #self.convertWeightFloatToDecimal()
         self.LowerClosed = perfQuantiles.LowerClosed
         self.quantilesFrequencies = deepcopy(perfQuantiles.quantilesFrequencies)
         self.limitingQuantiles = deepcopy(perfQuantiles.limitingQuantiles)
@@ -4065,21 +4060,18 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 
               - *actionsList* and *criteriaList*, if provided,  give the possibility to show the decision alternatives, resp. criteria, in a given ordering.
               - *ndigits* = 0 may be used to show integer evaluation values.
-              - If no *actionsList* is provided, the decision actions are ordered from
-                the best to the worst following the ranking of the NormedQuatilesRatingDigraph instance.              - It may interesting in some cases to use *RankingRule* = 'NetFlows'.
-              - With *Correlations* = *True* and *criteriaList* = *None*, the criteria will be presented from left to right in decreasing
-                order of the correlations between the marginal criterion based ranking and the global ranking used for
-                presenting the decision alternatives.
-              - Computing the marginal correlations may be boosted with Threading = True,
-                if multiple parallel computing cores are available.
+              - If no *actionsList* is provided, the decision actions are ordered from the best to the worst following the ranking of the NormedQuatilesRatingDigraph instance.              
+              - It may interesting in some cases to use *RankingRule* = 'NetFlows'.
+              - With *Correlations* = *True* and *criteriaList* = *None*, the criteria will be presented from left to right in decreasing order of the correlations between the marginal criterion based ranking and the global ranking used for presenting the decision alternatives.
+              - Computing the marginal correlations may be boosted with Threading = True, if multiple parallel computing cores are available.
 
-        Suppose ew observe the following rating reslut:
+        Suppose we observe the following rating result:
         
             >>> nqr.showQuantilesRating()
              [0.50 - 0.75[ ['a1008', 'a1006', 'a1005', 'a1001', 'a1003', 'a1010']
              [0.25 - 0.50[ ['a1002']
              [0.00 - 0.25[ ['a1004', 'a1009', 'a1007']
-            >>> nqr.showHTMLRatingHeatmap(pageTitle='Heatmap of Quantiles Rating',
+            >>> nqr.showHTMLRatingHeatmap(pageTitle='Heat map of the ratings',
             ...                           Correlations=True,
             ...                           colorLevels = 5)
 
@@ -4226,7 +4218,7 @@ if __name__ == "__main__":
     ****************************************************
     * Python sortingDigraphs module                    *
     * depends on BipolarOutrankingDigraph and          *
-    * $Revision: 2464 $                                 *
+    * $Revision: 2716 $                                 *
     * Copyright (C) 2010 Raymond Bisdorff              *
     * The module comes with ABSOLUTELY NO WARRANTY     *
     * to the extent permitted by the applicable law.   *
@@ -4243,12 +4235,16 @@ if __name__ == "__main__":
 ##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)
 ##    t = XMCDA2PerformanceTableau('spiegel2004')
 ##    t = XMCDA2PerformanceTableau('ex1')
-    t = Random3ObjectivesPerformanceTableau(numberOfActions=25,
+    t = RandomCBPerformanceTableau(numberOfActions=25,
                                     numberOfCriteria=13,
+                                             NegativeWeights=True,
                                     weightDistribution='equiobjectives',
                                     missingDataProbability=0.05,
                                     seed=1)
+    #t.showHTMLPerformanceHeatmap(Correlations=True)
     nt = NormalizedPerformanceTableau(t)
+    nt.showHTMLPerformanceHeatmap(Correlations=True)
+    
 ##    so = SortingDigraph(t,scaleSteps=5,LowerClosed=True,Debug=True)
 ####    so = SortingDigraph('grafittiPerfTab','grafittiCategories')
 ##    so = SortingDigraph(t,scaleSteps=7,Debug=True)
@@ -4385,31 +4381,31 @@ if __name__ == "__main__":
 ##    print(ira.computeQuantileProfile(0.5))
 ##    print(ira.computeQuantileProfile(0.75))
 
-    nbrActions=1000
-    nbrCrit = 7
-    seed = 105
-    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
-                   numberOfCriteria=nbrCrit,seed=seed)
-    from performanceQuantiles import PerformanceQuantiles
-    pq = PerformanceQuantiles(tp,\
-                   numberOfBins = 'deciles',\
-                  LowerClosed=True,Debug=False)
-##    pq.showLimitingQuantiles(ByObjectives=True)
-    # generate 100 new random decision actions
-    from randomPerfTabs import RandomPerformanceGenerator
-    rpg = RandomPerformanceGenerator(tp,seed=seed)
-    newActions = rpg.randomPerformanceTableau(10)
-    # Updating the quartile norms shown above
-    pq.updateQuantiles(newActions,historySize=None)
-##    pq.showHTMLLimitingQuantiles(Transposed=True)
-##    from sortingDigraphs import NormedQuantilesRatingDigraph
-    nqr = NormedQuantilesRatingDigraph(pq,newActions,rankingRule='best',\
-                                       quantiles=4,Debug=False)
-    print(nqr)
+#     nbrActions=1000
+#     nbrCrit = 7
+#     seed = 105
+#     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
+#                    numberOfCriteria=nbrCrit,seed=seed)
+#     from performanceQuantiles import PerformanceQuantiles
+#     pq = PerformanceQuantiles(tp,\
+#                    numberOfBins = 'deciles',\
+#                   LowerClosed=True,Debug=False)
+# ##    pq.showLimitingQuantiles(ByObjectives=True)
+#     # generate 100 new random decision actions
+#     from randomPerfTabs import RandomPerformanceGenerator
+#     rpg = RandomPerformanceGenerator(tp,seed=seed)
+#     newActions = rpg.randomPerformanceTableau(10)
+#     # Updating the quartile norms shown above
+#     pq.updateQuantiles(newActions,historySize=None)
+# ##    pq.showHTMLLimitingQuantiles(Transposed=True)
+# ##    from sortingDigraphs import NormedQuantilesRatingDigraph
+#     nqr = NormedQuantilesRatingDigraph(pq,newActions,rankingRule='best',\
+#                                        quantiles=4,Debug=False)
+#     print(nqr)
 ##    nqr.showHTMLRatingHeatmap(pageTitle='Heat map of the ratings', colorLevels=5,
 ##                                       Correlations=True,
 ##                                       )
-    nqr.showQuantilesRating()
+##    nqr.showQuantilesRating()
 ##    nqr.exportRatingGraphViz(noSilent=False)
 ##
 ##
@@ -4436,7 +4432,7 @@ if __name__ == "__main__":
 
     print('*************************************')
     print('* R.B. december 2010                *')
-    print('* $Revision: 2464 $                  *')
+    print('* $Revision: 2716 $                  *')
     print('*************************************')
 
 #############################

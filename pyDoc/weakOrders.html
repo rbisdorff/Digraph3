@@ -142,7 +142,14 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 
 <dl><dt><a name="KemenyWeakOrder-aneighbors"><strong>aneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
-<dl><dt><a name="KemenyWeakOrder-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="KemenyWeakOrder-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Dependency:&nbsp;Uses&nbsp;the&nbsp;dreadnaut&nbsp;command&nbsp;from&nbsp;the&nbsp;nauty&nbsp;software&nbsp;package.&nbsp;See&nbsp;https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Linux:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...$&nbsp;sudo&nbsp;apt-get&nbsp;install&nbsp;nauty</tt></dd></dl>
 
 <dl><dt><a name="KemenyWeakOrder-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
 ie&nbsp;the&nbsp;average&nbsp;number&nbsp;of&nbsp;choice&nbsp;members&nbsp;that&nbsp;cover&nbsp;each<br>
@@ -241,6 +248,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 <dl><dt><a name="KemenyWeakOrder-computeConcentrationIndexTrapez"><strong>computeConcentrationIndexTrapez</strong></a>(self, X, N)</dt><dd><tt>Renders&nbsp;the&nbsp;Gini&nbsp;concentration&nbsp;index&nbsp;of&nbsp;the&nbsp;X&nbsp;serie.<br>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
+
+<dl><dt><a name="KemenyWeakOrder-computeCondorcetLoosers"><strong>computeCondorcetLoosers</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#KemenyWeakOrder-condorcetLoosers">condorcetLoosers</a>().</tt></dd></dl>
 
 <dl><dt><a name="KemenyWeakOrder-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#KemenyWeakOrder-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
 
@@ -404,7 +413,7 @@ a&nbsp;given&nbsp;preRanking&nbsp;in&nbsp;decreasing&nbsp;levels&nbsp;(list&nbsp
 <dl><dt><a name="KemenyWeakOrder-computePreorderRelation"><strong>computePreorderRelation</strong></a>(self, preorder, Normalized=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar-valued&nbsp;relation&nbsp;obtained&nbsp;from<br>
 a&nbsp;given&nbsp;preordering&nbsp;in&nbsp;increasing&nbsp;levels&nbsp;(list&nbsp;of&nbsp;lists)&nbsp;result.</tt></dd></dl>
 
-<dl><dt><a name="KemenyWeakOrder-computePrincipalOrder"><strong>computePrincipalOrder</strong></a>(self, plotFileName=None, Colwise=False, imageType=None, TempDir=None, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ordered&nbsp;list&nbsp;of&nbsp;self.<strong>actions</strong>&nbsp;using&nbsp;the&nbsp;decreasing&nbsp;scores&nbsp;from&nbsp;the<br>
+<dl><dt><a name="KemenyWeakOrder-computePrincipalOrder"><strong>computePrincipalOrder</strong></a>(self, plotFileName=None, Colwise=False, imageType=None, tempDir=None, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ordered&nbsp;list&nbsp;of&nbsp;self.<strong>actions</strong>&nbsp;using&nbsp;the&nbsp;decreasing&nbsp;scores&nbsp;from&nbsp;the<br>
 first&nbsp;rincipal&nbsp;eigenvector&nbsp;of&nbsp;the&nbsp;covariance&nbsp;of&nbsp;the&nbsp;valued&nbsp;outdegrees&nbsp;of&nbsp;self.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
@@ -536,6 +545,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="KemenyWeakOrder-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="KemenyWeakOrder-computeWeakCondorcetLoosers"><strong>computeWeakCondorcetLoosers</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#KemenyWeakOrder-weakCondorcetLoosers">weakCondorcetLoosers</a>().</tt></dd></dl>
+
 <dl><dt><a name="KemenyWeakOrder-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#KemenyWeakOrder-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
 
 <dl><dt><a name="KemenyWeakOrder-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
@@ -546,6 +557,10 @@ Fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nb
 
 <dl><dt><a name="KemenyWeakOrder-computeupdown2irred"><strong>computeupdown2irred</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB1&nbsp;method.<br>
 Fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
+
+<dl><dt><a name="KemenyWeakOrder-condorcetLoosers"><strong>condorcetLoosers</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
+self.<strong>relation</strong>[x][y]&nbsp;&lt;&nbsp;self.<strong>valuationdomain</strong>['med']<br>
+for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
 
 <dl><dt><a name="KemenyWeakOrder-condorcetWinners"><strong>condorcetWinners</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
 self.<strong>relation</strong>[x][y]&nbsp;&gt;&nbsp;self.<strong>valuationdomain</strong>['med']<br>
@@ -581,16 +596,16 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 exchange&nbsp;arguments&nbsp;with&nbsp;external&nbsp;temporary&nbsp;files.<br>
 Returns&nbsp;a&nbsp;boolean&nbsp;value</tt></dd></dl>
 
-<dl><dt><a name="KemenyWeakOrder-determinateness"><strong>determinateness</strong></a>(self, vec, inPercent=True)</dt><dd><tt>Renders&nbsp;the&nbsp;determinateness&nbsp;of&nbsp;a&nbsp;bipolar&nbsp;characteristic&nbsp;vector<br>
-[(r(x),x),(r(y),y),&nbsp;...]&nbsp;of&nbsp;length&nbsp;*n*&nbsp;in&nbsp;valuationdomain&nbsp;[Min,Max]:<br>
+<dl><dt><a name="KemenyWeakOrder-determinateness"><strong>determinateness</strong></a>(self, vec, inPercent=True)</dt><dd><tt>Renders&nbsp;the&nbsp;determinateness&nbsp;of&nbsp;a&nbsp;characteristic&nbsp;vector&nbsp;*vec*&nbsp;=&nbsp;<br>
+[(r(x),x),(r(y),y),&nbsp;...]&nbsp;of&nbsp;length&nbsp;*n*&nbsp;in&nbsp;valuationdomain&nbsp;[Min,Med,Max]:<br>
 &nbsp;<br>
-result&nbsp;=&nbsp;sum_x&nbsp;abs(r(x))/(n*(Max-Min)<br>
+*result*&nbsp;=&nbsp;&nbsp;sum_x(&nbsp;abs(r(x)-Med)&nbsp;)&nbsp;/&nbsp;(&nbsp;n*(Max-Med)&nbsp;)<br>
 &nbsp;<br>
-If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp;(/2)&nbsp;to&nbsp;[0,1]&nbsp;range.</tt></dd></dl>
+If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp;(/2)&nbsp;to&nbsp;[0,1]&nbsp;range.</tt></dd></dl>
 
 <dl><dt><a name="KemenyWeakOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="KemenyWeakOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="KemenyWeakOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="KemenyWeakOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -797,9 +812,7 @@ computation.</tt></dd></dl>
 
 <dl><dt><a name="KemenyWeakOrder-powerset"><strong>powerset</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;subsets&nbsp;of&nbsp;a&nbsp;set.</tt></dd></dl>
 
-<dl><dt><a name="KemenyWeakOrder-readPerrinMisset"><strong>readPerrinMisset</strong></a>(self, file)</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;from&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;file.</tt></dd></dl>
-
-<dl><dt><a name="KemenyWeakOrder-readPerrinMissetOpt"><strong>readPerrinMissetOpt</strong></a>(self, file)</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;from&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;file.</tt></dd></dl>
+<dl><dt><a name="KemenyWeakOrder-readPerrinMisset"><strong>readPerrinMisset</strong></a>(self, file='curd.dat')</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;by&nbsp;default&nbsp;from&nbsp;the&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;result&nbsp;file.</tt></dd></dl>
 
 <dl><dt><a name="KemenyWeakOrder-readabsvector"><strong>readabsvector</strong></a>(self, x, relation)</dt><dd><tt>Parameter:&nbsp;action&nbsp;x<br>
 absorbent&nbsp;in&nbsp;vector.</tt></dd></dl>
@@ -911,11 +924,57 @@ Result&nbsp;saved&nbsp;in&nbsp;self.<strong>newmisset</strong>.</tt></dd></dl>
 <dl><dt><a name="KemenyWeakOrder-showNeighborhoods"><strong>showNeighborhoods</strong></a>(self)</dt><dd><tt>Lists&nbsp;the&nbsp;gamma&nbsp;and&nbsp;the&nbsp;notGamma&nbsp;function&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="KemenyWeakOrder-showOrbits"><strong>showOrbits</strong></a>(self, InChoices, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
+the&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance.<br>
+&nbsp;<br>
+Example&nbsp;Python&nbsp;session&nbsp;for&nbsp;computing&nbsp;the&nbsp;non&nbsp;isomorphic&nbsp;MISs&nbsp;from&nbsp;the&nbsp;12-cycle&nbsp;graph:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;digraphs&nbsp;import&nbsp;*<br>
+&gt;&gt;&gt;&nbsp;c12&nbsp;=&nbsp;CirculantDigraph(order=12,circulants=[1,-1])<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#KemenyWeakOrder-automorphismGenerators">automorphismGenerators</a>()<br>
+...<br>
+&nbsp;&nbsp;Permutations<br>
+&nbsp;&nbsp;{'1':&nbsp;'1',&nbsp;'2':&nbsp;'12',&nbsp;'3':&nbsp;'11',&nbsp;'4':&nbsp;'10',&nbsp;'5':&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'9',&nbsp;'6':&nbsp;'8',&nbsp;'7':&nbsp;'7',&nbsp;'8':&nbsp;'6',&nbsp;'9':&nbsp;'5',&nbsp;'10':&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'4',&nbsp;'11':&nbsp;'3',&nbsp;'12':&nbsp;'2'}<br>
+&nbsp;&nbsp;{'1':&nbsp;'2',&nbsp;'2':&nbsp;'1',&nbsp;'3':&nbsp;'12',&nbsp;'4':&nbsp;'11',&nbsp;'5':&nbsp;'10',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'6':&nbsp;'9',&nbsp;'7':&nbsp;'8',&nbsp;'8':&nbsp;'7',&nbsp;'9':&nbsp;'6',&nbsp;'10':&nbsp;'5',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'11':&nbsp;'4',&nbsp;'12':&nbsp;'3'}<br>
+&nbsp;&nbsp;Reflections&nbsp;{}<br>
+&gt;&gt;&gt;&nbsp;print('grpsize&nbsp;=&nbsp;',&nbsp;c12.automorphismGroupSize)<br>
+&nbsp;&nbsp;grpsize&nbsp;=&nbsp;24<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#KemenyWeakOrder-showMIS">showMIS</a>(withListing=False)<br>
+&nbsp;&nbsp;*---&nbsp;&nbsp;Maximal&nbsp;independent&nbsp;choices&nbsp;---*<br>
+&nbsp;&nbsp;number&nbsp;of&nbsp;solutions:&nbsp;&nbsp;29<br>
+&nbsp;&nbsp;cardinality&nbsp;distribution<br>
+&nbsp;&nbsp;card.:&nbsp;&nbsp;[0,&nbsp;1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;&nbsp;5,&nbsp;&nbsp;6,&nbsp;7,&nbsp;8,&nbsp;9,&nbsp;10,&nbsp;11,&nbsp;12]<br>
+&nbsp;&nbsp;freq.:&nbsp;&nbsp;[0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;3,&nbsp;24,&nbsp;&nbsp;2,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0]<br>
+&nbsp;&nbsp;Results&nbsp;in&nbsp;c12.misset<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#KemenyWeakOrder-showOrbits">showOrbits</a>(c12.misset,withListing=False)<br>
+...<br>
+&nbsp;&nbsp;*----&nbsp;Global&nbsp;result&nbsp;----<br>
+&nbsp;&nbsp;Number&nbsp;of&nbsp;MIS:&nbsp;&nbsp;29<br>
+&nbsp;&nbsp;Number&nbsp;of&nbsp;orbits&nbsp;:&nbsp;&nbsp;4<br>
+&nbsp;&nbsp;Labelled&nbsp;representatives:<br>
+&nbsp;&nbsp;1:&nbsp;['2','4','6','8','10','12']<br>
+&nbsp;&nbsp;2:&nbsp;['2','5','8','11']<br>
+&nbsp;&nbsp;3:&nbsp;['2','4','6','9','11']<br>
+&nbsp;&nbsp;4:&nbsp;['1','4','7','9','11']<br>
+&nbsp;&nbsp;Symmetry&nbsp;vector<br>
+&nbsp;&nbsp;stabilizer&nbsp;size:&nbsp;[1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;5,&nbsp;6,&nbsp;7,&nbsp;8,&nbsp;9,&nbsp;10,&nbsp;11,&nbsp;12,&nbsp;...]<br>
+&nbsp;&nbsp;frequency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;[0,&nbsp;2,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;1,&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;1,&nbsp;...]<br>
+&nbsp;<br>
+*Figure*:&nbsp;The&nbsp;symmetry&nbsp;axes&nbsp;of&nbsp;the&nbsp;non&nbsp;isomorphic&nbsp;MISs&nbsp;of&nbsp;the&nbsp;12-cycle:<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;c12.png<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;400&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;The&nbsp;4&nbsp;non&nbsp;isomorphic&nbsp;MIS&nbsp;of&nbsp;the&nbsp;12-cycle&nbsp;graph<br>
+&nbsp;<br>
+*Reference*:&nbsp;R.&nbsp;Bisdorff&nbsp;and&nbsp;J.L.&nbsp;Marichal&nbsp;(2008).&nbsp;Counting&nbsp;non-isomorphic&nbsp;maximal&nbsp;independent&nbsp;sets&nbsp;of&nbsp;the&nbsp;n-cycle&nbsp;graph.&nbsp;*Journal&nbsp;of&nbsp;Integer&nbsp;Sequences*,&nbsp;Vol.&nbsp;11&nbsp;Article&nbsp;08.5.7&nbsp;(`openly&nbsp;accessible&nbsp;here&nbsp;&lt;https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html&gt;`_)</tt></dd></dl>
 
 <dl><dt><a name="KemenyWeakOrder-showOrbitsFromFile"><strong>showOrbitsFromFile</strong></a>(self, InFile, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
 the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.<br>
-See&nbsp;the&nbsp;digraphs.<a href="digraphs.html#Digraph">Digraph</a>.<a href="#KemenyWeakOrder-readPerrinMisset">readPerrinMisset</a>()&nbsp;method.</tt></dd></dl>
+See&nbsp;the&nbsp;:py:func:`digraphs.<a href="digraphs.html#Digraph">Digraph</a>.readPerrinMisset`&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="KemenyWeakOrder-showPreKernels"><strong>showPreKernels</strong></a>(self, withListing=True)</dt><dd><tt>Printing&nbsp;dominant&nbsp;and&nbsp;absorbent&nbsp;preKernels:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>dompreKernels</strong>&nbsp;and&nbsp;self.<strong>abspreKernels</strong></tt></dd></dl>
@@ -1055,6 +1114,10 @@ Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&n
 
 <dl><dt><a name="KemenyWeakOrder-weakAneighbors"><strong>weakAneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
+<dl><dt><a name="KemenyWeakOrder-weakCondorcetLoosers"><strong>weakCondorcetLoosers</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
+self.<strong>relation</strong>[x][y]&nbsp;&lt;=&nbsp;self.<strong>valuationdomain</strong>['med']<br>
+for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
+
 <dl><dt><a name="KemenyWeakOrder-weakCondorcetWinners"><strong>weakCondorcetWinners</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
 self.<strong>relation</strong>[x][y]&nbsp;&gt;=&nbsp;self.<strong>valuationdomain</strong>['med']<br>
 for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
@@ -1146,7 +1209,14 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 
 <dl><dt><a name="KohlerArrowRaynaudFusionDigraph-aneighbors"><strong>aneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
-<dl><dt><a name="KohlerArrowRaynaudFusionDigraph-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="KohlerArrowRaynaudFusionDigraph-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Dependency:&nbsp;Uses&nbsp;the&nbsp;dreadnaut&nbsp;command&nbsp;from&nbsp;the&nbsp;nauty&nbsp;software&nbsp;package.&nbsp;See&nbsp;https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Linux:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...$&nbsp;sudo&nbsp;apt-get&nbsp;install&nbsp;nauty</tt></dd></dl>
 
 <dl><dt><a name="KohlerArrowRaynaudFusionDigraph-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
 ie&nbsp;the&nbsp;average&nbsp;number&nbsp;of&nbsp;choice&nbsp;members&nbsp;that&nbsp;cover&nbsp;each<br>
@@ -1245,6 +1315,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 <dl><dt><a name="KohlerArrowRaynaudFusionDigraph-computeConcentrationIndexTrapez"><strong>computeConcentrationIndexTrapez</strong></a>(self, X, N)</dt><dd><tt>Renders&nbsp;the&nbsp;Gini&nbsp;concentration&nbsp;index&nbsp;of&nbsp;the&nbsp;X&nbsp;serie.<br>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
+
+<dl><dt><a name="KohlerArrowRaynaudFusionDigraph-computeCondorcetLoosers"><strong>computeCondorcetLoosers</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#KohlerArrowRaynaudFusionDigraph-condorcetLoosers">condorcetLoosers</a>().</tt></dd></dl>
 
 <dl><dt><a name="KohlerArrowRaynaudFusionDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#KohlerArrowRaynaudFusionDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
 
@@ -1408,7 +1480,7 @@ a&nbsp;given&nbsp;preRanking&nbsp;in&nbsp;decreasing&nbsp;levels&nbsp;(list&nbsp
 <dl><dt><a name="KohlerArrowRaynaudFusionDigraph-computePreorderRelation"><strong>computePreorderRelation</strong></a>(self, preorder, Normalized=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar-valued&nbsp;relation&nbsp;obtained&nbsp;from<br>
 a&nbsp;given&nbsp;preordering&nbsp;in&nbsp;increasing&nbsp;levels&nbsp;(list&nbsp;of&nbsp;lists)&nbsp;result.</tt></dd></dl>
 
-<dl><dt><a name="KohlerArrowRaynaudFusionDigraph-computePrincipalOrder"><strong>computePrincipalOrder</strong></a>(self, plotFileName=None, Colwise=False, imageType=None, TempDir=None, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ordered&nbsp;list&nbsp;of&nbsp;self.<strong>actions</strong>&nbsp;using&nbsp;the&nbsp;decreasing&nbsp;scores&nbsp;from&nbsp;the<br>
+<dl><dt><a name="KohlerArrowRaynaudFusionDigraph-computePrincipalOrder"><strong>computePrincipalOrder</strong></a>(self, plotFileName=None, Colwise=False, imageType=None, tempDir=None, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ordered&nbsp;list&nbsp;of&nbsp;self.<strong>actions</strong>&nbsp;using&nbsp;the&nbsp;decreasing&nbsp;scores&nbsp;from&nbsp;the<br>
 first&nbsp;rincipal&nbsp;eigenvector&nbsp;of&nbsp;the&nbsp;covariance&nbsp;of&nbsp;the&nbsp;valued&nbsp;outdegrees&nbsp;of&nbsp;self.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
@@ -1540,6 +1612,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="KohlerArrowRaynaudFusionDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="KohlerArrowRaynaudFusionDigraph-computeWeakCondorcetLoosers"><strong>computeWeakCondorcetLoosers</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#KohlerArrowRaynaudFusionDigraph-weakCondorcetLoosers">weakCondorcetLoosers</a>().</tt></dd></dl>
+
 <dl><dt><a name="KohlerArrowRaynaudFusionDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#KohlerArrowRaynaudFusionDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
 
 <dl><dt><a name="KohlerArrowRaynaudFusionDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
@@ -1550,6 +1624,10 @@ Fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nb
 
 <dl><dt><a name="KohlerArrowRaynaudFusionDigraph-computeupdown2irred"><strong>computeupdown2irred</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB1&nbsp;method.<br>
 Fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
+
+<dl><dt><a name="KohlerArrowRaynaudFusionDigraph-condorcetLoosers"><strong>condorcetLoosers</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
+self.<strong>relation</strong>[x][y]&nbsp;&lt;&nbsp;self.<strong>valuationdomain</strong>['med']<br>
+for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
 
 <dl><dt><a name="KohlerArrowRaynaudFusionDigraph-condorcetWinners"><strong>condorcetWinners</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
 self.<strong>relation</strong>[x][y]&nbsp;&gt;&nbsp;self.<strong>valuationdomain</strong>['med']<br>
@@ -1585,16 +1663,16 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 exchange&nbsp;arguments&nbsp;with&nbsp;external&nbsp;temporary&nbsp;files.<br>
 Returns&nbsp;a&nbsp;boolean&nbsp;value</tt></dd></dl>
 
-<dl><dt><a name="KohlerArrowRaynaudFusionDigraph-determinateness"><strong>determinateness</strong></a>(self, vec, inPercent=True)</dt><dd><tt>Renders&nbsp;the&nbsp;determinateness&nbsp;of&nbsp;a&nbsp;bipolar&nbsp;characteristic&nbsp;vector<br>
-[(r(x),x),(r(y),y),&nbsp;...]&nbsp;of&nbsp;length&nbsp;*n*&nbsp;in&nbsp;valuationdomain&nbsp;[Min,Max]:<br>
+<dl><dt><a name="KohlerArrowRaynaudFusionDigraph-determinateness"><strong>determinateness</strong></a>(self, vec, inPercent=True)</dt><dd><tt>Renders&nbsp;the&nbsp;determinateness&nbsp;of&nbsp;a&nbsp;characteristic&nbsp;vector&nbsp;*vec*&nbsp;=&nbsp;<br>
+[(r(x),x),(r(y),y),&nbsp;...]&nbsp;of&nbsp;length&nbsp;*n*&nbsp;in&nbsp;valuationdomain&nbsp;[Min,Med,Max]:<br>
 &nbsp;<br>
-result&nbsp;=&nbsp;sum_x&nbsp;abs(r(x))/(n*(Max-Min)<br>
+*result*&nbsp;=&nbsp;&nbsp;sum_x(&nbsp;abs(r(x)-Med)&nbsp;)&nbsp;/&nbsp;(&nbsp;n*(Max-Med)&nbsp;)<br>
 &nbsp;<br>
-If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp;(/2)&nbsp;to&nbsp;[0,1]&nbsp;range.</tt></dd></dl>
+If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp;(/2)&nbsp;to&nbsp;[0,1]&nbsp;range.</tt></dd></dl>
 
 <dl><dt><a name="KohlerArrowRaynaudFusionDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="KohlerArrowRaynaudFusionDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="KohlerArrowRaynaudFusionDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="KohlerArrowRaynaudFusionDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -1801,9 +1879,7 @@ computation.</tt></dd></dl>
 
 <dl><dt><a name="KohlerArrowRaynaudFusionDigraph-powerset"><strong>powerset</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;subsets&nbsp;of&nbsp;a&nbsp;set.</tt></dd></dl>
 
-<dl><dt><a name="KohlerArrowRaynaudFusionDigraph-readPerrinMisset"><strong>readPerrinMisset</strong></a>(self, file)</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;from&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;file.</tt></dd></dl>
-
-<dl><dt><a name="KohlerArrowRaynaudFusionDigraph-readPerrinMissetOpt"><strong>readPerrinMissetOpt</strong></a>(self, file)</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;from&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;file.</tt></dd></dl>
+<dl><dt><a name="KohlerArrowRaynaudFusionDigraph-readPerrinMisset"><strong>readPerrinMisset</strong></a>(self, file='curd.dat')</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;by&nbsp;default&nbsp;from&nbsp;the&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;result&nbsp;file.</tt></dd></dl>
 
 <dl><dt><a name="KohlerArrowRaynaudFusionDigraph-readabsvector"><strong>readabsvector</strong></a>(self, x, relation)</dt><dd><tt>Parameter:&nbsp;action&nbsp;x<br>
 absorbent&nbsp;in&nbsp;vector.</tt></dd></dl>
@@ -1915,11 +1991,57 @@ Result&nbsp;saved&nbsp;in&nbsp;self.<strong>newmisset</strong>.</tt></dd></dl>
 <dl><dt><a name="KohlerArrowRaynaudFusionDigraph-showNeighborhoods"><strong>showNeighborhoods</strong></a>(self)</dt><dd><tt>Lists&nbsp;the&nbsp;gamma&nbsp;and&nbsp;the&nbsp;notGamma&nbsp;function&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="KohlerArrowRaynaudFusionDigraph-showOrbits"><strong>showOrbits</strong></a>(self, InChoices, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
+the&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance.<br>
+&nbsp;<br>
+Example&nbsp;Python&nbsp;session&nbsp;for&nbsp;computing&nbsp;the&nbsp;non&nbsp;isomorphic&nbsp;MISs&nbsp;from&nbsp;the&nbsp;12-cycle&nbsp;graph:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;digraphs&nbsp;import&nbsp;*<br>
+&gt;&gt;&gt;&nbsp;c12&nbsp;=&nbsp;CirculantDigraph(order=12,circulants=[1,-1])<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#KohlerArrowRaynaudFusionDigraph-automorphismGenerators">automorphismGenerators</a>()<br>
+...<br>
+&nbsp;&nbsp;Permutations<br>
+&nbsp;&nbsp;{'1':&nbsp;'1',&nbsp;'2':&nbsp;'12',&nbsp;'3':&nbsp;'11',&nbsp;'4':&nbsp;'10',&nbsp;'5':&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'9',&nbsp;'6':&nbsp;'8',&nbsp;'7':&nbsp;'7',&nbsp;'8':&nbsp;'6',&nbsp;'9':&nbsp;'5',&nbsp;'10':&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'4',&nbsp;'11':&nbsp;'3',&nbsp;'12':&nbsp;'2'}<br>
+&nbsp;&nbsp;{'1':&nbsp;'2',&nbsp;'2':&nbsp;'1',&nbsp;'3':&nbsp;'12',&nbsp;'4':&nbsp;'11',&nbsp;'5':&nbsp;'10',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'6':&nbsp;'9',&nbsp;'7':&nbsp;'8',&nbsp;'8':&nbsp;'7',&nbsp;'9':&nbsp;'6',&nbsp;'10':&nbsp;'5',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'11':&nbsp;'4',&nbsp;'12':&nbsp;'3'}<br>
+&nbsp;&nbsp;Reflections&nbsp;{}<br>
+&gt;&gt;&gt;&nbsp;print('grpsize&nbsp;=&nbsp;',&nbsp;c12.automorphismGroupSize)<br>
+&nbsp;&nbsp;grpsize&nbsp;=&nbsp;24<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#KohlerArrowRaynaudFusionDigraph-showMIS">showMIS</a>(withListing=False)<br>
+&nbsp;&nbsp;*---&nbsp;&nbsp;Maximal&nbsp;independent&nbsp;choices&nbsp;---*<br>
+&nbsp;&nbsp;number&nbsp;of&nbsp;solutions:&nbsp;&nbsp;29<br>
+&nbsp;&nbsp;cardinality&nbsp;distribution<br>
+&nbsp;&nbsp;card.:&nbsp;&nbsp;[0,&nbsp;1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;&nbsp;5,&nbsp;&nbsp;6,&nbsp;7,&nbsp;8,&nbsp;9,&nbsp;10,&nbsp;11,&nbsp;12]<br>
+&nbsp;&nbsp;freq.:&nbsp;&nbsp;[0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;3,&nbsp;24,&nbsp;&nbsp;2,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0]<br>
+&nbsp;&nbsp;Results&nbsp;in&nbsp;c12.misset<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#KohlerArrowRaynaudFusionDigraph-showOrbits">showOrbits</a>(c12.misset,withListing=False)<br>
+...<br>
+&nbsp;&nbsp;*----&nbsp;Global&nbsp;result&nbsp;----<br>
+&nbsp;&nbsp;Number&nbsp;of&nbsp;MIS:&nbsp;&nbsp;29<br>
+&nbsp;&nbsp;Number&nbsp;of&nbsp;orbits&nbsp;:&nbsp;&nbsp;4<br>
+&nbsp;&nbsp;Labelled&nbsp;representatives:<br>
+&nbsp;&nbsp;1:&nbsp;['2','4','6','8','10','12']<br>
+&nbsp;&nbsp;2:&nbsp;['2','5','8','11']<br>
+&nbsp;&nbsp;3:&nbsp;['2','4','6','9','11']<br>
+&nbsp;&nbsp;4:&nbsp;['1','4','7','9','11']<br>
+&nbsp;&nbsp;Symmetry&nbsp;vector<br>
+&nbsp;&nbsp;stabilizer&nbsp;size:&nbsp;[1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;5,&nbsp;6,&nbsp;7,&nbsp;8,&nbsp;9,&nbsp;10,&nbsp;11,&nbsp;12,&nbsp;...]<br>
+&nbsp;&nbsp;frequency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;[0,&nbsp;2,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;1,&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;1,&nbsp;...]<br>
+&nbsp;<br>
+*Figure*:&nbsp;The&nbsp;symmetry&nbsp;axes&nbsp;of&nbsp;the&nbsp;non&nbsp;isomorphic&nbsp;MISs&nbsp;of&nbsp;the&nbsp;12-cycle:<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;c12.png<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;400&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;The&nbsp;4&nbsp;non&nbsp;isomorphic&nbsp;MIS&nbsp;of&nbsp;the&nbsp;12-cycle&nbsp;graph<br>
+&nbsp;<br>
+*Reference*:&nbsp;R.&nbsp;Bisdorff&nbsp;and&nbsp;J.L.&nbsp;Marichal&nbsp;(2008).&nbsp;Counting&nbsp;non-isomorphic&nbsp;maximal&nbsp;independent&nbsp;sets&nbsp;of&nbsp;the&nbsp;n-cycle&nbsp;graph.&nbsp;*Journal&nbsp;of&nbsp;Integer&nbsp;Sequences*,&nbsp;Vol.&nbsp;11&nbsp;Article&nbsp;08.5.7&nbsp;(`openly&nbsp;accessible&nbsp;here&nbsp;&lt;https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html&gt;`_)</tt></dd></dl>
 
 <dl><dt><a name="KohlerArrowRaynaudFusionDigraph-showOrbitsFromFile"><strong>showOrbitsFromFile</strong></a>(self, InFile, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
 the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.<br>
-See&nbsp;the&nbsp;digraphs.<a href="digraphs.html#Digraph">Digraph</a>.<a href="#KohlerArrowRaynaudFusionDigraph-readPerrinMisset">readPerrinMisset</a>()&nbsp;method.</tt></dd></dl>
+See&nbsp;the&nbsp;:py:func:`digraphs.<a href="digraphs.html#Digraph">Digraph</a>.readPerrinMisset`&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="KohlerArrowRaynaudFusionDigraph-showPreKernels"><strong>showPreKernels</strong></a>(self, withListing=True)</dt><dd><tt>Printing&nbsp;dominant&nbsp;and&nbsp;absorbent&nbsp;preKernels:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>dompreKernels</strong>&nbsp;and&nbsp;self.<strong>abspreKernels</strong></tt></dd></dl>
@@ -2059,6 +2181,10 @@ Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&n
 
 <dl><dt><a name="KohlerArrowRaynaudFusionDigraph-weakAneighbors"><strong>weakAneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
+<dl><dt><a name="KohlerArrowRaynaudFusionDigraph-weakCondorcetLoosers"><strong>weakCondorcetLoosers</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
+self.<strong>relation</strong>[x][y]&nbsp;&lt;=&nbsp;self.<strong>valuationdomain</strong>['med']<br>
+for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
+
 <dl><dt><a name="KohlerArrowRaynaudFusionDigraph-weakCondorcetWinners"><strong>weakCondorcetWinners</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
 self.<strong>relation</strong>[x][y]&nbsp;&gt;=&nbsp;self.<strong>valuationdomain</strong>['med']<br>
 for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
@@ -2185,7 +2311,14 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 
 <dl><dt><a name="PrincipalInOutDegreesOrdering-aneighbors"><strong>aneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
-<dl><dt><a name="PrincipalInOutDegreesOrdering-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="PrincipalInOutDegreesOrdering-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Dependency:&nbsp;Uses&nbsp;the&nbsp;dreadnaut&nbsp;command&nbsp;from&nbsp;the&nbsp;nauty&nbsp;software&nbsp;package.&nbsp;See&nbsp;https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Linux:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...$&nbsp;sudo&nbsp;apt-get&nbsp;install&nbsp;nauty</tt></dd></dl>
 
 <dl><dt><a name="PrincipalInOutDegreesOrdering-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
 ie&nbsp;the&nbsp;average&nbsp;number&nbsp;of&nbsp;choice&nbsp;members&nbsp;that&nbsp;cover&nbsp;each<br>
@@ -2284,6 +2417,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 <dl><dt><a name="PrincipalInOutDegreesOrdering-computeConcentrationIndexTrapez"><strong>computeConcentrationIndexTrapez</strong></a>(self, X, N)</dt><dd><tt>Renders&nbsp;the&nbsp;Gini&nbsp;concentration&nbsp;index&nbsp;of&nbsp;the&nbsp;X&nbsp;serie.<br>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
+
+<dl><dt><a name="PrincipalInOutDegreesOrdering-computeCondorcetLoosers"><strong>computeCondorcetLoosers</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#PrincipalInOutDegreesOrdering-condorcetLoosers">condorcetLoosers</a>().</tt></dd></dl>
 
 <dl><dt><a name="PrincipalInOutDegreesOrdering-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#PrincipalInOutDegreesOrdering-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
 
@@ -2447,7 +2582,7 @@ a&nbsp;given&nbsp;preRanking&nbsp;in&nbsp;decreasing&nbsp;levels&nbsp;(list&nbsp
 <dl><dt><a name="PrincipalInOutDegreesOrdering-computePreorderRelation"><strong>computePreorderRelation</strong></a>(self, preorder, Normalized=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar-valued&nbsp;relation&nbsp;obtained&nbsp;from<br>
 a&nbsp;given&nbsp;preordering&nbsp;in&nbsp;increasing&nbsp;levels&nbsp;(list&nbsp;of&nbsp;lists)&nbsp;result.</tt></dd></dl>
 
-<dl><dt><a name="PrincipalInOutDegreesOrdering-computePrincipalOrder"><strong>computePrincipalOrder</strong></a>(self, plotFileName=None, Colwise=False, imageType=None, TempDir=None, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ordered&nbsp;list&nbsp;of&nbsp;self.<strong>actions</strong>&nbsp;using&nbsp;the&nbsp;decreasing&nbsp;scores&nbsp;from&nbsp;the<br>
+<dl><dt><a name="PrincipalInOutDegreesOrdering-computePrincipalOrder"><strong>computePrincipalOrder</strong></a>(self, plotFileName=None, Colwise=False, imageType=None, tempDir=None, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ordered&nbsp;list&nbsp;of&nbsp;self.<strong>actions</strong>&nbsp;using&nbsp;the&nbsp;decreasing&nbsp;scores&nbsp;from&nbsp;the<br>
 first&nbsp;rincipal&nbsp;eigenvector&nbsp;of&nbsp;the&nbsp;covariance&nbsp;of&nbsp;the&nbsp;valued&nbsp;outdegrees&nbsp;of&nbsp;self.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
@@ -2579,6 +2714,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="PrincipalInOutDegreesOrdering-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="PrincipalInOutDegreesOrdering-computeWeakCondorcetLoosers"><strong>computeWeakCondorcetLoosers</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#PrincipalInOutDegreesOrdering-weakCondorcetLoosers">weakCondorcetLoosers</a>().</tt></dd></dl>
+
 <dl><dt><a name="PrincipalInOutDegreesOrdering-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#PrincipalInOutDegreesOrdering-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
 
 <dl><dt><a name="PrincipalInOutDegreesOrdering-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
@@ -2589,6 +2726,10 @@ Fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nb
 
 <dl><dt><a name="PrincipalInOutDegreesOrdering-computeupdown2irred"><strong>computeupdown2irred</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB1&nbsp;method.<br>
 Fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
+
+<dl><dt><a name="PrincipalInOutDegreesOrdering-condorcetLoosers"><strong>condorcetLoosers</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
+self.<strong>relation</strong>[x][y]&nbsp;&lt;&nbsp;self.<strong>valuationdomain</strong>['med']<br>
+for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalInOutDegreesOrdering-condorcetWinners"><strong>condorcetWinners</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
 self.<strong>relation</strong>[x][y]&nbsp;&gt;&nbsp;self.<strong>valuationdomain</strong>['med']<br>
@@ -2624,16 +2765,16 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 exchange&nbsp;arguments&nbsp;with&nbsp;external&nbsp;temporary&nbsp;files.<br>
 Returns&nbsp;a&nbsp;boolean&nbsp;value</tt></dd></dl>
 
-<dl><dt><a name="PrincipalInOutDegreesOrdering-determinateness"><strong>determinateness</strong></a>(self, vec, inPercent=True)</dt><dd><tt>Renders&nbsp;the&nbsp;determinateness&nbsp;of&nbsp;a&nbsp;bipolar&nbsp;characteristic&nbsp;vector<br>
-[(r(x),x),(r(y),y),&nbsp;...]&nbsp;of&nbsp;length&nbsp;*n*&nbsp;in&nbsp;valuationdomain&nbsp;[Min,Max]:<br>
+<dl><dt><a name="PrincipalInOutDegreesOrdering-determinateness"><strong>determinateness</strong></a>(self, vec, inPercent=True)</dt><dd><tt>Renders&nbsp;the&nbsp;determinateness&nbsp;of&nbsp;a&nbsp;characteristic&nbsp;vector&nbsp;*vec*&nbsp;=&nbsp;<br>
+[(r(x),x),(r(y),y),&nbsp;...]&nbsp;of&nbsp;length&nbsp;*n*&nbsp;in&nbsp;valuationdomain&nbsp;[Min,Med,Max]:<br>
 &nbsp;<br>
-result&nbsp;=&nbsp;sum_x&nbsp;abs(r(x))/(n*(Max-Min)<br>
+*result*&nbsp;=&nbsp;&nbsp;sum_x(&nbsp;abs(r(x)-Med)&nbsp;)&nbsp;/&nbsp;(&nbsp;n*(Max-Med)&nbsp;)<br>
 &nbsp;<br>
-If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp;(/2)&nbsp;to&nbsp;[0,1]&nbsp;range.</tt></dd></dl>
+If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp;(/2)&nbsp;to&nbsp;[0,1]&nbsp;range.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalInOutDegreesOrdering-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="PrincipalInOutDegreesOrdering-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="PrincipalInOutDegreesOrdering-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalInOutDegreesOrdering-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -2840,9 +2981,7 @@ computation.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalInOutDegreesOrdering-powerset"><strong>powerset</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;subsets&nbsp;of&nbsp;a&nbsp;set.</tt></dd></dl>
 
-<dl><dt><a name="PrincipalInOutDegreesOrdering-readPerrinMisset"><strong>readPerrinMisset</strong></a>(self, file)</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;from&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;file.</tt></dd></dl>
-
-<dl><dt><a name="PrincipalInOutDegreesOrdering-readPerrinMissetOpt"><strong>readPerrinMissetOpt</strong></a>(self, file)</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;from&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;file.</tt></dd></dl>
+<dl><dt><a name="PrincipalInOutDegreesOrdering-readPerrinMisset"><strong>readPerrinMisset</strong></a>(self, file='curd.dat')</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;by&nbsp;default&nbsp;from&nbsp;the&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;result&nbsp;file.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalInOutDegreesOrdering-readabsvector"><strong>readabsvector</strong></a>(self, x, relation)</dt><dd><tt>Parameter:&nbsp;action&nbsp;x<br>
 absorbent&nbsp;in&nbsp;vector.</tt></dd></dl>
@@ -2954,11 +3093,57 @@ Result&nbsp;saved&nbsp;in&nbsp;self.<strong>newmisset</strong>.</tt></dd></dl>
 <dl><dt><a name="PrincipalInOutDegreesOrdering-showNeighborhoods"><strong>showNeighborhoods</strong></a>(self)</dt><dd><tt>Lists&nbsp;the&nbsp;gamma&nbsp;and&nbsp;the&nbsp;notGamma&nbsp;function&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalInOutDegreesOrdering-showOrbits"><strong>showOrbits</strong></a>(self, InChoices, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
+the&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance.<br>
+&nbsp;<br>
+Example&nbsp;Python&nbsp;session&nbsp;for&nbsp;computing&nbsp;the&nbsp;non&nbsp;isomorphic&nbsp;MISs&nbsp;from&nbsp;the&nbsp;12-cycle&nbsp;graph:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;digraphs&nbsp;import&nbsp;*<br>
+&gt;&gt;&gt;&nbsp;c12&nbsp;=&nbsp;CirculantDigraph(order=12,circulants=[1,-1])<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#PrincipalInOutDegreesOrdering-automorphismGenerators">automorphismGenerators</a>()<br>
+...<br>
+&nbsp;&nbsp;Permutations<br>
+&nbsp;&nbsp;{'1':&nbsp;'1',&nbsp;'2':&nbsp;'12',&nbsp;'3':&nbsp;'11',&nbsp;'4':&nbsp;'10',&nbsp;'5':&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'9',&nbsp;'6':&nbsp;'8',&nbsp;'7':&nbsp;'7',&nbsp;'8':&nbsp;'6',&nbsp;'9':&nbsp;'5',&nbsp;'10':&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'4',&nbsp;'11':&nbsp;'3',&nbsp;'12':&nbsp;'2'}<br>
+&nbsp;&nbsp;{'1':&nbsp;'2',&nbsp;'2':&nbsp;'1',&nbsp;'3':&nbsp;'12',&nbsp;'4':&nbsp;'11',&nbsp;'5':&nbsp;'10',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'6':&nbsp;'9',&nbsp;'7':&nbsp;'8',&nbsp;'8':&nbsp;'7',&nbsp;'9':&nbsp;'6',&nbsp;'10':&nbsp;'5',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'11':&nbsp;'4',&nbsp;'12':&nbsp;'3'}<br>
+&nbsp;&nbsp;Reflections&nbsp;{}<br>
+&gt;&gt;&gt;&nbsp;print('grpsize&nbsp;=&nbsp;',&nbsp;c12.automorphismGroupSize)<br>
+&nbsp;&nbsp;grpsize&nbsp;=&nbsp;24<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#PrincipalInOutDegreesOrdering-showMIS">showMIS</a>(withListing=False)<br>
+&nbsp;&nbsp;*---&nbsp;&nbsp;Maximal&nbsp;independent&nbsp;choices&nbsp;---*<br>
+&nbsp;&nbsp;number&nbsp;of&nbsp;solutions:&nbsp;&nbsp;29<br>
+&nbsp;&nbsp;cardinality&nbsp;distribution<br>
+&nbsp;&nbsp;card.:&nbsp;&nbsp;[0,&nbsp;1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;&nbsp;5,&nbsp;&nbsp;6,&nbsp;7,&nbsp;8,&nbsp;9,&nbsp;10,&nbsp;11,&nbsp;12]<br>
+&nbsp;&nbsp;freq.:&nbsp;&nbsp;[0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;3,&nbsp;24,&nbsp;&nbsp;2,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0]<br>
+&nbsp;&nbsp;Results&nbsp;in&nbsp;c12.misset<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#PrincipalInOutDegreesOrdering-showOrbits">showOrbits</a>(c12.misset,withListing=False)<br>
+...<br>
+&nbsp;&nbsp;*----&nbsp;Global&nbsp;result&nbsp;----<br>
+&nbsp;&nbsp;Number&nbsp;of&nbsp;MIS:&nbsp;&nbsp;29<br>
+&nbsp;&nbsp;Number&nbsp;of&nbsp;orbits&nbsp;:&nbsp;&nbsp;4<br>
+&nbsp;&nbsp;Labelled&nbsp;representatives:<br>
+&nbsp;&nbsp;1:&nbsp;['2','4','6','8','10','12']<br>
+&nbsp;&nbsp;2:&nbsp;['2','5','8','11']<br>
+&nbsp;&nbsp;3:&nbsp;['2','4','6','9','11']<br>
+&nbsp;&nbsp;4:&nbsp;['1','4','7','9','11']<br>
+&nbsp;&nbsp;Symmetry&nbsp;vector<br>
+&nbsp;&nbsp;stabilizer&nbsp;size:&nbsp;[1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;5,&nbsp;6,&nbsp;7,&nbsp;8,&nbsp;9,&nbsp;10,&nbsp;11,&nbsp;12,&nbsp;...]<br>
+&nbsp;&nbsp;frequency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;[0,&nbsp;2,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;1,&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;1,&nbsp;...]<br>
+&nbsp;<br>
+*Figure*:&nbsp;The&nbsp;symmetry&nbsp;axes&nbsp;of&nbsp;the&nbsp;non&nbsp;isomorphic&nbsp;MISs&nbsp;of&nbsp;the&nbsp;12-cycle:<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;c12.png<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;400&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;The&nbsp;4&nbsp;non&nbsp;isomorphic&nbsp;MIS&nbsp;of&nbsp;the&nbsp;12-cycle&nbsp;graph<br>
+&nbsp;<br>
+*Reference*:&nbsp;R.&nbsp;Bisdorff&nbsp;and&nbsp;J.L.&nbsp;Marichal&nbsp;(2008).&nbsp;Counting&nbsp;non-isomorphic&nbsp;maximal&nbsp;independent&nbsp;sets&nbsp;of&nbsp;the&nbsp;n-cycle&nbsp;graph.&nbsp;*Journal&nbsp;of&nbsp;Integer&nbsp;Sequences*,&nbsp;Vol.&nbsp;11&nbsp;Article&nbsp;08.5.7&nbsp;(`openly&nbsp;accessible&nbsp;here&nbsp;&lt;https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html&gt;`_)</tt></dd></dl>
 
 <dl><dt><a name="PrincipalInOutDegreesOrdering-showOrbitsFromFile"><strong>showOrbitsFromFile</strong></a>(self, InFile, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
 the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.<br>
-See&nbsp;the&nbsp;digraphs.<a href="digraphs.html#Digraph">Digraph</a>.<a href="#PrincipalInOutDegreesOrdering-readPerrinMisset">readPerrinMisset</a>()&nbsp;method.</tt></dd></dl>
+See&nbsp;the&nbsp;:py:func:`digraphs.<a href="digraphs.html#Digraph">Digraph</a>.readPerrinMisset`&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalInOutDegreesOrdering-showPreKernels"><strong>showPreKernels</strong></a>(self, withListing=True)</dt><dd><tt>Printing&nbsp;dominant&nbsp;and&nbsp;absorbent&nbsp;preKernels:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>dompreKernels</strong>&nbsp;and&nbsp;self.<strong>abspreKernels</strong></tt></dd></dl>
@@ -3098,6 +3283,10 @@ Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&n
 
 <dl><dt><a name="PrincipalInOutDegreesOrdering-weakAneighbors"><strong>weakAneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
+<dl><dt><a name="PrincipalInOutDegreesOrdering-weakCondorcetLoosers"><strong>weakCondorcetLoosers</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
+self.<strong>relation</strong>[x][y]&nbsp;&lt;=&nbsp;self.<strong>valuationdomain</strong>['med']<br>
+for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
+
 <dl><dt><a name="PrincipalInOutDegreesOrdering-weakCondorcetWinners"><strong>weakCondorcetWinners</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
 self.<strong>relation</strong>[x][y]&nbsp;&gt;=&nbsp;self.<strong>valuationdomain</strong>['med']<br>
 for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
@@ -3193,7 +3382,14 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 
 <dl><dt><a name="RankingByBestChoosingDigraph-aneighbors"><strong>aneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
-<dl><dt><a name="RankingByBestChoosingDigraph-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RankingByBestChoosingDigraph-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Dependency:&nbsp;Uses&nbsp;the&nbsp;dreadnaut&nbsp;command&nbsp;from&nbsp;the&nbsp;nauty&nbsp;software&nbsp;package.&nbsp;See&nbsp;https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Linux:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...$&nbsp;sudo&nbsp;apt-get&nbsp;install&nbsp;nauty</tt></dd></dl>
 
 <dl><dt><a name="RankingByBestChoosingDigraph-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
 ie&nbsp;the&nbsp;average&nbsp;number&nbsp;of&nbsp;choice&nbsp;members&nbsp;that&nbsp;cover&nbsp;each<br>
@@ -3292,6 +3488,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 <dl><dt><a name="RankingByBestChoosingDigraph-computeConcentrationIndexTrapez"><strong>computeConcentrationIndexTrapez</strong></a>(self, X, N)</dt><dd><tt>Renders&nbsp;the&nbsp;Gini&nbsp;concentration&nbsp;index&nbsp;of&nbsp;the&nbsp;X&nbsp;serie.<br>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
+
+<dl><dt><a name="RankingByBestChoosingDigraph-computeCondorcetLoosers"><strong>computeCondorcetLoosers</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RankingByBestChoosingDigraph-condorcetLoosers">condorcetLoosers</a>().</tt></dd></dl>
 
 <dl><dt><a name="RankingByBestChoosingDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RankingByBestChoosingDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
 
@@ -3455,7 +3653,7 @@ a&nbsp;given&nbsp;preRanking&nbsp;in&nbsp;decreasing&nbsp;levels&nbsp;(list&nbsp
 <dl><dt><a name="RankingByBestChoosingDigraph-computePreorderRelation"><strong>computePreorderRelation</strong></a>(self, preorder, Normalized=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar-valued&nbsp;relation&nbsp;obtained&nbsp;from<br>
 a&nbsp;given&nbsp;preordering&nbsp;in&nbsp;increasing&nbsp;levels&nbsp;(list&nbsp;of&nbsp;lists)&nbsp;result.</tt></dd></dl>
 
-<dl><dt><a name="RankingByBestChoosingDigraph-computePrincipalOrder"><strong>computePrincipalOrder</strong></a>(self, plotFileName=None, Colwise=False, imageType=None, TempDir=None, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ordered&nbsp;list&nbsp;of&nbsp;self.<strong>actions</strong>&nbsp;using&nbsp;the&nbsp;decreasing&nbsp;scores&nbsp;from&nbsp;the<br>
+<dl><dt><a name="RankingByBestChoosingDigraph-computePrincipalOrder"><strong>computePrincipalOrder</strong></a>(self, plotFileName=None, Colwise=False, imageType=None, tempDir=None, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ordered&nbsp;list&nbsp;of&nbsp;self.<strong>actions</strong>&nbsp;using&nbsp;the&nbsp;decreasing&nbsp;scores&nbsp;from&nbsp;the<br>
 first&nbsp;rincipal&nbsp;eigenvector&nbsp;of&nbsp;the&nbsp;covariance&nbsp;of&nbsp;the&nbsp;valued&nbsp;outdegrees&nbsp;of&nbsp;self.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
@@ -3565,6 +3763,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="RankingByBestChoosingDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="RankingByBestChoosingDigraph-computeWeakCondorcetLoosers"><strong>computeWeakCondorcetLoosers</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RankingByBestChoosingDigraph-weakCondorcetLoosers">weakCondorcetLoosers</a>().</tt></dd></dl>
+
 <dl><dt><a name="RankingByBestChoosingDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RankingByBestChoosingDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
 
 <dl><dt><a name="RankingByBestChoosingDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
@@ -3575,6 +3775,10 @@ Fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nb
 
 <dl><dt><a name="RankingByBestChoosingDigraph-computeupdown2irred"><strong>computeupdown2irred</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB1&nbsp;method.<br>
 Fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
+
+<dl><dt><a name="RankingByBestChoosingDigraph-condorcetLoosers"><strong>condorcetLoosers</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
+self.<strong>relation</strong>[x][y]&nbsp;&lt;&nbsp;self.<strong>valuationdomain</strong>['med']<br>
+for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
 
 <dl><dt><a name="RankingByBestChoosingDigraph-condorcetWinners"><strong>condorcetWinners</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
 self.<strong>relation</strong>[x][y]&nbsp;&gt;&nbsp;self.<strong>valuationdomain</strong>['med']<br>
@@ -3610,16 +3814,16 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 exchange&nbsp;arguments&nbsp;with&nbsp;external&nbsp;temporary&nbsp;files.<br>
 Returns&nbsp;a&nbsp;boolean&nbsp;value</tt></dd></dl>
 
-<dl><dt><a name="RankingByBestChoosingDigraph-determinateness"><strong>determinateness</strong></a>(self, vec, inPercent=True)</dt><dd><tt>Renders&nbsp;the&nbsp;determinateness&nbsp;of&nbsp;a&nbsp;bipolar&nbsp;characteristic&nbsp;vector<br>
-[(r(x),x),(r(y),y),&nbsp;...]&nbsp;of&nbsp;length&nbsp;*n*&nbsp;in&nbsp;valuationdomain&nbsp;[Min,Max]:<br>
+<dl><dt><a name="RankingByBestChoosingDigraph-determinateness"><strong>determinateness</strong></a>(self, vec, inPercent=True)</dt><dd><tt>Renders&nbsp;the&nbsp;determinateness&nbsp;of&nbsp;a&nbsp;characteristic&nbsp;vector&nbsp;*vec*&nbsp;=&nbsp;<br>
+[(r(x),x),(r(y),y),&nbsp;...]&nbsp;of&nbsp;length&nbsp;*n*&nbsp;in&nbsp;valuationdomain&nbsp;[Min,Med,Max]:<br>
 &nbsp;<br>
-result&nbsp;=&nbsp;sum_x&nbsp;abs(r(x))/(n*(Max-Min)<br>
+*result*&nbsp;=&nbsp;&nbsp;sum_x(&nbsp;abs(r(x)-Med)&nbsp;)&nbsp;/&nbsp;(&nbsp;n*(Max-Med)&nbsp;)<br>
 &nbsp;<br>
-If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp;(/2)&nbsp;to&nbsp;[0,1]&nbsp;range.</tt></dd></dl>
+If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp;(/2)&nbsp;to&nbsp;[0,1]&nbsp;range.</tt></dd></dl>
 
 <dl><dt><a name="RankingByBestChoosingDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="RankingByBestChoosingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RankingByBestChoosingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RankingByBestChoosingDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -3826,9 +4030,7 @@ computation.</tt></dd></dl>
 
 <dl><dt><a name="RankingByBestChoosingDigraph-powerset"><strong>powerset</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;subsets&nbsp;of&nbsp;a&nbsp;set.</tt></dd></dl>
 
-<dl><dt><a name="RankingByBestChoosingDigraph-readPerrinMisset"><strong>readPerrinMisset</strong></a>(self, file)</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;from&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;file.</tt></dd></dl>
-
-<dl><dt><a name="RankingByBestChoosingDigraph-readPerrinMissetOpt"><strong>readPerrinMissetOpt</strong></a>(self, file)</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;from&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;file.</tt></dd></dl>
+<dl><dt><a name="RankingByBestChoosingDigraph-readPerrinMisset"><strong>readPerrinMisset</strong></a>(self, file='curd.dat')</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;by&nbsp;default&nbsp;from&nbsp;the&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;result&nbsp;file.</tt></dd></dl>
 
 <dl><dt><a name="RankingByBestChoosingDigraph-readabsvector"><strong>readabsvector</strong></a>(self, x, relation)</dt><dd><tt>Parameter:&nbsp;action&nbsp;x<br>
 absorbent&nbsp;in&nbsp;vector.</tt></dd></dl>
@@ -3940,11 +4142,57 @@ Result&nbsp;saved&nbsp;in&nbsp;self.<strong>newmisset</strong>.</tt></dd></dl>
 <dl><dt><a name="RankingByBestChoosingDigraph-showNeighborhoods"><strong>showNeighborhoods</strong></a>(self)</dt><dd><tt>Lists&nbsp;the&nbsp;gamma&nbsp;and&nbsp;the&nbsp;notGamma&nbsp;function&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="RankingByBestChoosingDigraph-showOrbits"><strong>showOrbits</strong></a>(self, InChoices, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
+the&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance.<br>
+&nbsp;<br>
+Example&nbsp;Python&nbsp;session&nbsp;for&nbsp;computing&nbsp;the&nbsp;non&nbsp;isomorphic&nbsp;MISs&nbsp;from&nbsp;the&nbsp;12-cycle&nbsp;graph:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;digraphs&nbsp;import&nbsp;*<br>
+&gt;&gt;&gt;&nbsp;c12&nbsp;=&nbsp;CirculantDigraph(order=12,circulants=[1,-1])<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#RankingByBestChoosingDigraph-automorphismGenerators">automorphismGenerators</a>()<br>
+...<br>
+&nbsp;&nbsp;Permutations<br>
+&nbsp;&nbsp;{'1':&nbsp;'1',&nbsp;'2':&nbsp;'12',&nbsp;'3':&nbsp;'11',&nbsp;'4':&nbsp;'10',&nbsp;'5':&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'9',&nbsp;'6':&nbsp;'8',&nbsp;'7':&nbsp;'7',&nbsp;'8':&nbsp;'6',&nbsp;'9':&nbsp;'5',&nbsp;'10':&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'4',&nbsp;'11':&nbsp;'3',&nbsp;'12':&nbsp;'2'}<br>
+&nbsp;&nbsp;{'1':&nbsp;'2',&nbsp;'2':&nbsp;'1',&nbsp;'3':&nbsp;'12',&nbsp;'4':&nbsp;'11',&nbsp;'5':&nbsp;'10',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'6':&nbsp;'9',&nbsp;'7':&nbsp;'8',&nbsp;'8':&nbsp;'7',&nbsp;'9':&nbsp;'6',&nbsp;'10':&nbsp;'5',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'11':&nbsp;'4',&nbsp;'12':&nbsp;'3'}<br>
+&nbsp;&nbsp;Reflections&nbsp;{}<br>
+&gt;&gt;&gt;&nbsp;print('grpsize&nbsp;=&nbsp;',&nbsp;c12.automorphismGroupSize)<br>
+&nbsp;&nbsp;grpsize&nbsp;=&nbsp;24<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#RankingByBestChoosingDigraph-showMIS">showMIS</a>(withListing=False)<br>
+&nbsp;&nbsp;*---&nbsp;&nbsp;Maximal&nbsp;independent&nbsp;choices&nbsp;---*<br>
+&nbsp;&nbsp;number&nbsp;of&nbsp;solutions:&nbsp;&nbsp;29<br>
+&nbsp;&nbsp;cardinality&nbsp;distribution<br>
+&nbsp;&nbsp;card.:&nbsp;&nbsp;[0,&nbsp;1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;&nbsp;5,&nbsp;&nbsp;6,&nbsp;7,&nbsp;8,&nbsp;9,&nbsp;10,&nbsp;11,&nbsp;12]<br>
+&nbsp;&nbsp;freq.:&nbsp;&nbsp;[0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;3,&nbsp;24,&nbsp;&nbsp;2,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0]<br>
+&nbsp;&nbsp;Results&nbsp;in&nbsp;c12.misset<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#RankingByBestChoosingDigraph-showOrbits">showOrbits</a>(c12.misset,withListing=False)<br>
+...<br>
+&nbsp;&nbsp;*----&nbsp;Global&nbsp;result&nbsp;----<br>
+&nbsp;&nbsp;Number&nbsp;of&nbsp;MIS:&nbsp;&nbsp;29<br>
+&nbsp;&nbsp;Number&nbsp;of&nbsp;orbits&nbsp;:&nbsp;&nbsp;4<br>
+&nbsp;&nbsp;Labelled&nbsp;representatives:<br>
+&nbsp;&nbsp;1:&nbsp;['2','4','6','8','10','12']<br>
+&nbsp;&nbsp;2:&nbsp;['2','5','8','11']<br>
+&nbsp;&nbsp;3:&nbsp;['2','4','6','9','11']<br>
+&nbsp;&nbsp;4:&nbsp;['1','4','7','9','11']<br>
+&nbsp;&nbsp;Symmetry&nbsp;vector<br>
+&nbsp;&nbsp;stabilizer&nbsp;size:&nbsp;[1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;5,&nbsp;6,&nbsp;7,&nbsp;8,&nbsp;9,&nbsp;10,&nbsp;11,&nbsp;12,&nbsp;...]<br>
+&nbsp;&nbsp;frequency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;[0,&nbsp;2,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;1,&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;1,&nbsp;...]<br>
+&nbsp;<br>
+*Figure*:&nbsp;The&nbsp;symmetry&nbsp;axes&nbsp;of&nbsp;the&nbsp;non&nbsp;isomorphic&nbsp;MISs&nbsp;of&nbsp;the&nbsp;12-cycle:<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;c12.png<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;400&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;The&nbsp;4&nbsp;non&nbsp;isomorphic&nbsp;MIS&nbsp;of&nbsp;the&nbsp;12-cycle&nbsp;graph<br>
+&nbsp;<br>
+*Reference*:&nbsp;R.&nbsp;Bisdorff&nbsp;and&nbsp;J.L.&nbsp;Marichal&nbsp;(2008).&nbsp;Counting&nbsp;non-isomorphic&nbsp;maximal&nbsp;independent&nbsp;sets&nbsp;of&nbsp;the&nbsp;n-cycle&nbsp;graph.&nbsp;*Journal&nbsp;of&nbsp;Integer&nbsp;Sequences*,&nbsp;Vol.&nbsp;11&nbsp;Article&nbsp;08.5.7&nbsp;(`openly&nbsp;accessible&nbsp;here&nbsp;&lt;https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html&gt;`_)</tt></dd></dl>
 
 <dl><dt><a name="RankingByBestChoosingDigraph-showOrbitsFromFile"><strong>showOrbitsFromFile</strong></a>(self, InFile, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
 the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.<br>
-See&nbsp;the&nbsp;digraphs.<a href="digraphs.html#Digraph">Digraph</a>.<a href="#RankingByBestChoosingDigraph-readPerrinMisset">readPerrinMisset</a>()&nbsp;method.</tt></dd></dl>
+See&nbsp;the&nbsp;:py:func:`digraphs.<a href="digraphs.html#Digraph">Digraph</a>.readPerrinMisset`&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="RankingByBestChoosingDigraph-showPreKernels"><strong>showPreKernels</strong></a>(self, withListing=True)</dt><dd><tt>Printing&nbsp;dominant&nbsp;and&nbsp;absorbent&nbsp;preKernels:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>dompreKernels</strong>&nbsp;and&nbsp;self.<strong>abspreKernels</strong></tt></dd></dl>
@@ -4083,6 +4331,10 @@ Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nb
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
 <dl><dt><a name="RankingByBestChoosingDigraph-weakAneighbors"><strong>weakAneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
+
+<dl><dt><a name="RankingByBestChoosingDigraph-weakCondorcetLoosers"><strong>weakCondorcetLoosers</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
+self.<strong>relation</strong>[x][y]&nbsp;&lt;=&nbsp;self.<strong>valuationdomain</strong>['med']<br>
+for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
 
 <dl><dt><a name="RankingByBestChoosingDigraph-weakCondorcetWinners"><strong>weakCondorcetWinners</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
 self.<strong>relation</strong>[x][y]&nbsp;&gt;=&nbsp;self.<strong>valuationdomain</strong>['med']<br>
@@ -4227,7 +4479,14 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 
 <dl><dt><a name="RankingByChoosingDigraph-aneighbors"><strong>aneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
-<dl><dt><a name="RankingByChoosingDigraph-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RankingByChoosingDigraph-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Dependency:&nbsp;Uses&nbsp;the&nbsp;dreadnaut&nbsp;command&nbsp;from&nbsp;the&nbsp;nauty&nbsp;software&nbsp;package.&nbsp;See&nbsp;https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Linux:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...$&nbsp;sudo&nbsp;apt-get&nbsp;install&nbsp;nauty</tt></dd></dl>
 
 <dl><dt><a name="RankingByChoosingDigraph-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
 ie&nbsp;the&nbsp;average&nbsp;number&nbsp;of&nbsp;choice&nbsp;members&nbsp;that&nbsp;cover&nbsp;each<br>
@@ -4326,6 +4585,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 <dl><dt><a name="RankingByChoosingDigraph-computeConcentrationIndexTrapez"><strong>computeConcentrationIndexTrapez</strong></a>(self, X, N)</dt><dd><tt>Renders&nbsp;the&nbsp;Gini&nbsp;concentration&nbsp;index&nbsp;of&nbsp;the&nbsp;X&nbsp;serie.<br>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
+
+<dl><dt><a name="RankingByChoosingDigraph-computeCondorcetLoosers"><strong>computeCondorcetLoosers</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RankingByChoosingDigraph-condorcetLoosers">condorcetLoosers</a>().</tt></dd></dl>
 
 <dl><dt><a name="RankingByChoosingDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RankingByChoosingDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
 
@@ -4489,7 +4750,7 @@ a&nbsp;given&nbsp;preRanking&nbsp;in&nbsp;decreasing&nbsp;levels&nbsp;(list&nbsp
 <dl><dt><a name="RankingByChoosingDigraph-computePreorderRelation"><strong>computePreorderRelation</strong></a>(self, preorder, Normalized=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar-valued&nbsp;relation&nbsp;obtained&nbsp;from<br>
 a&nbsp;given&nbsp;preordering&nbsp;in&nbsp;increasing&nbsp;levels&nbsp;(list&nbsp;of&nbsp;lists)&nbsp;result.</tt></dd></dl>
 
-<dl><dt><a name="RankingByChoosingDigraph-computePrincipalOrder"><strong>computePrincipalOrder</strong></a>(self, plotFileName=None, Colwise=False, imageType=None, TempDir=None, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ordered&nbsp;list&nbsp;of&nbsp;self.<strong>actions</strong>&nbsp;using&nbsp;the&nbsp;decreasing&nbsp;scores&nbsp;from&nbsp;the<br>
+<dl><dt><a name="RankingByChoosingDigraph-computePrincipalOrder"><strong>computePrincipalOrder</strong></a>(self, plotFileName=None, Colwise=False, imageType=None, tempDir=None, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ordered&nbsp;list&nbsp;of&nbsp;self.<strong>actions</strong>&nbsp;using&nbsp;the&nbsp;decreasing&nbsp;scores&nbsp;from&nbsp;the<br>
 first&nbsp;rincipal&nbsp;eigenvector&nbsp;of&nbsp;the&nbsp;covariance&nbsp;of&nbsp;the&nbsp;valued&nbsp;outdegrees&nbsp;of&nbsp;self.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
@@ -4599,6 +4860,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="RankingByChoosingDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="RankingByChoosingDigraph-computeWeakCondorcetLoosers"><strong>computeWeakCondorcetLoosers</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RankingByChoosingDigraph-weakCondorcetLoosers">weakCondorcetLoosers</a>().</tt></dd></dl>
+
 <dl><dt><a name="RankingByChoosingDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RankingByChoosingDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
 
 <dl><dt><a name="RankingByChoosingDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
@@ -4609,6 +4872,10 @@ Fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nb
 
 <dl><dt><a name="RankingByChoosingDigraph-computeupdown2irred"><strong>computeupdown2irred</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB1&nbsp;method.<br>
 Fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
+
+<dl><dt><a name="RankingByChoosingDigraph-condorcetLoosers"><strong>condorcetLoosers</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
+self.<strong>relation</strong>[x][y]&nbsp;&lt;&nbsp;self.<strong>valuationdomain</strong>['med']<br>
+for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
 
 <dl><dt><a name="RankingByChoosingDigraph-condorcetWinners"><strong>condorcetWinners</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
 self.<strong>relation</strong>[x][y]&nbsp;&gt;&nbsp;self.<strong>valuationdomain</strong>['med']<br>
@@ -4644,16 +4911,16 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 exchange&nbsp;arguments&nbsp;with&nbsp;external&nbsp;temporary&nbsp;files.<br>
 Returns&nbsp;a&nbsp;boolean&nbsp;value</tt></dd></dl>
 
-<dl><dt><a name="RankingByChoosingDigraph-determinateness"><strong>determinateness</strong></a>(self, vec, inPercent=True)</dt><dd><tt>Renders&nbsp;the&nbsp;determinateness&nbsp;of&nbsp;a&nbsp;bipolar&nbsp;characteristic&nbsp;vector<br>
-[(r(x),x),(r(y),y),&nbsp;...]&nbsp;of&nbsp;length&nbsp;*n*&nbsp;in&nbsp;valuationdomain&nbsp;[Min,Max]:<br>
+<dl><dt><a name="RankingByChoosingDigraph-determinateness"><strong>determinateness</strong></a>(self, vec, inPercent=True)</dt><dd><tt>Renders&nbsp;the&nbsp;determinateness&nbsp;of&nbsp;a&nbsp;characteristic&nbsp;vector&nbsp;*vec*&nbsp;=&nbsp;<br>
+[(r(x),x),(r(y),y),&nbsp;...]&nbsp;of&nbsp;length&nbsp;*n*&nbsp;in&nbsp;valuationdomain&nbsp;[Min,Med,Max]:<br>
 &nbsp;<br>
-result&nbsp;=&nbsp;sum_x&nbsp;abs(r(x))/(n*(Max-Min)<br>
+*result*&nbsp;=&nbsp;&nbsp;sum_x(&nbsp;abs(r(x)-Med)&nbsp;)&nbsp;/&nbsp;(&nbsp;n*(Max-Med)&nbsp;)<br>
 &nbsp;<br>
-If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp;(/2)&nbsp;to&nbsp;[0,1]&nbsp;range.</tt></dd></dl>
+If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp;(/2)&nbsp;to&nbsp;[0,1]&nbsp;range.</tt></dd></dl>
 
 <dl><dt><a name="RankingByChoosingDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="RankingByChoosingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RankingByChoosingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RankingByChoosingDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -4860,9 +5127,7 @@ computation.</tt></dd></dl>
 
 <dl><dt><a name="RankingByChoosingDigraph-powerset"><strong>powerset</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;subsets&nbsp;of&nbsp;a&nbsp;set.</tt></dd></dl>
 
-<dl><dt><a name="RankingByChoosingDigraph-readPerrinMisset"><strong>readPerrinMisset</strong></a>(self, file)</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;from&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;file.</tt></dd></dl>
-
-<dl><dt><a name="RankingByChoosingDigraph-readPerrinMissetOpt"><strong>readPerrinMissetOpt</strong></a>(self, file)</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;from&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;file.</tt></dd></dl>
+<dl><dt><a name="RankingByChoosingDigraph-readPerrinMisset"><strong>readPerrinMisset</strong></a>(self, file='curd.dat')</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;by&nbsp;default&nbsp;from&nbsp;the&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;result&nbsp;file.</tt></dd></dl>
 
 <dl><dt><a name="RankingByChoosingDigraph-readabsvector"><strong>readabsvector</strong></a>(self, x, relation)</dt><dd><tt>Parameter:&nbsp;action&nbsp;x<br>
 absorbent&nbsp;in&nbsp;vector.</tt></dd></dl>
@@ -4974,11 +5239,57 @@ Result&nbsp;saved&nbsp;in&nbsp;self.<strong>newmisset</strong>.</tt></dd></dl>
 <dl><dt><a name="RankingByChoosingDigraph-showNeighborhoods"><strong>showNeighborhoods</strong></a>(self)</dt><dd><tt>Lists&nbsp;the&nbsp;gamma&nbsp;and&nbsp;the&nbsp;notGamma&nbsp;function&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="RankingByChoosingDigraph-showOrbits"><strong>showOrbits</strong></a>(self, InChoices, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
+the&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance.<br>
+&nbsp;<br>
+Example&nbsp;Python&nbsp;session&nbsp;for&nbsp;computing&nbsp;the&nbsp;non&nbsp;isomorphic&nbsp;MISs&nbsp;from&nbsp;the&nbsp;12-cycle&nbsp;graph:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;digraphs&nbsp;import&nbsp;*<br>
+&gt;&gt;&gt;&nbsp;c12&nbsp;=&nbsp;CirculantDigraph(order=12,circulants=[1,-1])<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#RankingByChoosingDigraph-automorphismGenerators">automorphismGenerators</a>()<br>
+...<br>
+&nbsp;&nbsp;Permutations<br>
+&nbsp;&nbsp;{'1':&nbsp;'1',&nbsp;'2':&nbsp;'12',&nbsp;'3':&nbsp;'11',&nbsp;'4':&nbsp;'10',&nbsp;'5':&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'9',&nbsp;'6':&nbsp;'8',&nbsp;'7':&nbsp;'7',&nbsp;'8':&nbsp;'6',&nbsp;'9':&nbsp;'5',&nbsp;'10':&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'4',&nbsp;'11':&nbsp;'3',&nbsp;'12':&nbsp;'2'}<br>
+&nbsp;&nbsp;{'1':&nbsp;'2',&nbsp;'2':&nbsp;'1',&nbsp;'3':&nbsp;'12',&nbsp;'4':&nbsp;'11',&nbsp;'5':&nbsp;'10',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'6':&nbsp;'9',&nbsp;'7':&nbsp;'8',&nbsp;'8':&nbsp;'7',&nbsp;'9':&nbsp;'6',&nbsp;'10':&nbsp;'5',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'11':&nbsp;'4',&nbsp;'12':&nbsp;'3'}<br>
+&nbsp;&nbsp;Reflections&nbsp;{}<br>
+&gt;&gt;&gt;&nbsp;print('grpsize&nbsp;=&nbsp;',&nbsp;c12.automorphismGroupSize)<br>
+&nbsp;&nbsp;grpsize&nbsp;=&nbsp;24<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#RankingByChoosingDigraph-showMIS">showMIS</a>(withListing=False)<br>
+&nbsp;&nbsp;*---&nbsp;&nbsp;Maximal&nbsp;independent&nbsp;choices&nbsp;---*<br>
+&nbsp;&nbsp;number&nbsp;of&nbsp;solutions:&nbsp;&nbsp;29<br>
+&nbsp;&nbsp;cardinality&nbsp;distribution<br>
+&nbsp;&nbsp;card.:&nbsp;&nbsp;[0,&nbsp;1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;&nbsp;5,&nbsp;&nbsp;6,&nbsp;7,&nbsp;8,&nbsp;9,&nbsp;10,&nbsp;11,&nbsp;12]<br>
+&nbsp;&nbsp;freq.:&nbsp;&nbsp;[0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;3,&nbsp;24,&nbsp;&nbsp;2,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0]<br>
+&nbsp;&nbsp;Results&nbsp;in&nbsp;c12.misset<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#RankingByChoosingDigraph-showOrbits">showOrbits</a>(c12.misset,withListing=False)<br>
+...<br>
+&nbsp;&nbsp;*----&nbsp;Global&nbsp;result&nbsp;----<br>
+&nbsp;&nbsp;Number&nbsp;of&nbsp;MIS:&nbsp;&nbsp;29<br>
+&nbsp;&nbsp;Number&nbsp;of&nbsp;orbits&nbsp;:&nbsp;&nbsp;4<br>
+&nbsp;&nbsp;Labelled&nbsp;representatives:<br>
+&nbsp;&nbsp;1:&nbsp;['2','4','6','8','10','12']<br>
+&nbsp;&nbsp;2:&nbsp;['2','5','8','11']<br>
+&nbsp;&nbsp;3:&nbsp;['2','4','6','9','11']<br>
+&nbsp;&nbsp;4:&nbsp;['1','4','7','9','11']<br>
+&nbsp;&nbsp;Symmetry&nbsp;vector<br>
+&nbsp;&nbsp;stabilizer&nbsp;size:&nbsp;[1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;5,&nbsp;6,&nbsp;7,&nbsp;8,&nbsp;9,&nbsp;10,&nbsp;11,&nbsp;12,&nbsp;...]<br>
+&nbsp;&nbsp;frequency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;[0,&nbsp;2,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;1,&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;1,&nbsp;...]<br>
+&nbsp;<br>
+*Figure*:&nbsp;The&nbsp;symmetry&nbsp;axes&nbsp;of&nbsp;the&nbsp;non&nbsp;isomorphic&nbsp;MISs&nbsp;of&nbsp;the&nbsp;12-cycle:<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;c12.png<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;400&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;The&nbsp;4&nbsp;non&nbsp;isomorphic&nbsp;MIS&nbsp;of&nbsp;the&nbsp;12-cycle&nbsp;graph<br>
+&nbsp;<br>
+*Reference*:&nbsp;R.&nbsp;Bisdorff&nbsp;and&nbsp;J.L.&nbsp;Marichal&nbsp;(2008).&nbsp;Counting&nbsp;non-isomorphic&nbsp;maximal&nbsp;independent&nbsp;sets&nbsp;of&nbsp;the&nbsp;n-cycle&nbsp;graph.&nbsp;*Journal&nbsp;of&nbsp;Integer&nbsp;Sequences*,&nbsp;Vol.&nbsp;11&nbsp;Article&nbsp;08.5.7&nbsp;(`openly&nbsp;accessible&nbsp;here&nbsp;&lt;https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html&gt;`_)</tt></dd></dl>
 
 <dl><dt><a name="RankingByChoosingDigraph-showOrbitsFromFile"><strong>showOrbitsFromFile</strong></a>(self, InFile, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
 the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.<br>
-See&nbsp;the&nbsp;digraphs.<a href="digraphs.html#Digraph">Digraph</a>.<a href="#RankingByChoosingDigraph-readPerrinMisset">readPerrinMisset</a>()&nbsp;method.</tt></dd></dl>
+See&nbsp;the&nbsp;:py:func:`digraphs.<a href="digraphs.html#Digraph">Digraph</a>.readPerrinMisset`&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="RankingByChoosingDigraph-showPreKernels"><strong>showPreKernels</strong></a>(self, withListing=True)</dt><dd><tt>Printing&nbsp;dominant&nbsp;and&nbsp;absorbent&nbsp;preKernels:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>dompreKernels</strong>&nbsp;and&nbsp;self.<strong>abspreKernels</strong></tt></dd></dl>
@@ -5118,6 +5429,10 @@ Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&n
 
 <dl><dt><a name="RankingByChoosingDigraph-weakAneighbors"><strong>weakAneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
+<dl><dt><a name="RankingByChoosingDigraph-weakCondorcetLoosers"><strong>weakCondorcetLoosers</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
+self.<strong>relation</strong>[x][y]&nbsp;&lt;=&nbsp;self.<strong>valuationdomain</strong>['med']<br>
+for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
+
 <dl><dt><a name="RankingByChoosingDigraph-weakCondorcetWinners"><strong>weakCondorcetWinners</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
 self.<strong>relation</strong>[x][y]&nbsp;&gt;=&nbsp;self.<strong>valuationdomain</strong>['med']<br>
 for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
@@ -5213,7 +5528,14 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 
 <dl><dt><a name="RankingByLastChoosingDigraph-aneighbors"><strong>aneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
-<dl><dt><a name="RankingByLastChoosingDigraph-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RankingByLastChoosingDigraph-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Dependency:&nbsp;Uses&nbsp;the&nbsp;dreadnaut&nbsp;command&nbsp;from&nbsp;the&nbsp;nauty&nbsp;software&nbsp;package.&nbsp;See&nbsp;https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Linux:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...$&nbsp;sudo&nbsp;apt-get&nbsp;install&nbsp;nauty</tt></dd></dl>
 
 <dl><dt><a name="RankingByLastChoosingDigraph-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
 ie&nbsp;the&nbsp;average&nbsp;number&nbsp;of&nbsp;choice&nbsp;members&nbsp;that&nbsp;cover&nbsp;each<br>
@@ -5312,6 +5634,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 <dl><dt><a name="RankingByLastChoosingDigraph-computeConcentrationIndexTrapez"><strong>computeConcentrationIndexTrapez</strong></a>(self, X, N)</dt><dd><tt>Renders&nbsp;the&nbsp;Gini&nbsp;concentration&nbsp;index&nbsp;of&nbsp;the&nbsp;X&nbsp;serie.<br>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
+
+<dl><dt><a name="RankingByLastChoosingDigraph-computeCondorcetLoosers"><strong>computeCondorcetLoosers</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RankingByLastChoosingDigraph-condorcetLoosers">condorcetLoosers</a>().</tt></dd></dl>
 
 <dl><dt><a name="RankingByLastChoosingDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RankingByLastChoosingDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
 
@@ -5475,7 +5799,7 @@ a&nbsp;given&nbsp;preRanking&nbsp;in&nbsp;decreasing&nbsp;levels&nbsp;(list&nbsp
 <dl><dt><a name="RankingByLastChoosingDigraph-computePreorderRelation"><strong>computePreorderRelation</strong></a>(self, preorder, Normalized=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar-valued&nbsp;relation&nbsp;obtained&nbsp;from<br>
 a&nbsp;given&nbsp;preordering&nbsp;in&nbsp;increasing&nbsp;levels&nbsp;(list&nbsp;of&nbsp;lists)&nbsp;result.</tt></dd></dl>
 
-<dl><dt><a name="RankingByLastChoosingDigraph-computePrincipalOrder"><strong>computePrincipalOrder</strong></a>(self, plotFileName=None, Colwise=False, imageType=None, TempDir=None, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ordered&nbsp;list&nbsp;of&nbsp;self.<strong>actions</strong>&nbsp;using&nbsp;the&nbsp;decreasing&nbsp;scores&nbsp;from&nbsp;the<br>
+<dl><dt><a name="RankingByLastChoosingDigraph-computePrincipalOrder"><strong>computePrincipalOrder</strong></a>(self, plotFileName=None, Colwise=False, imageType=None, tempDir=None, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ordered&nbsp;list&nbsp;of&nbsp;self.<strong>actions</strong>&nbsp;using&nbsp;the&nbsp;decreasing&nbsp;scores&nbsp;from&nbsp;the<br>
 first&nbsp;rincipal&nbsp;eigenvector&nbsp;of&nbsp;the&nbsp;covariance&nbsp;of&nbsp;the&nbsp;valued&nbsp;outdegrees&nbsp;of&nbsp;self.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
@@ -5585,6 +5909,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="RankingByLastChoosingDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="RankingByLastChoosingDigraph-computeWeakCondorcetLoosers"><strong>computeWeakCondorcetLoosers</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RankingByLastChoosingDigraph-weakCondorcetLoosers">weakCondorcetLoosers</a>().</tt></dd></dl>
+
 <dl><dt><a name="RankingByLastChoosingDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RankingByLastChoosingDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
 
 <dl><dt><a name="RankingByLastChoosingDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
@@ -5595,6 +5921,10 @@ Fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nb
 
 <dl><dt><a name="RankingByLastChoosingDigraph-computeupdown2irred"><strong>computeupdown2irred</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB1&nbsp;method.<br>
 Fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
+
+<dl><dt><a name="RankingByLastChoosingDigraph-condorcetLoosers"><strong>condorcetLoosers</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
+self.<strong>relation</strong>[x][y]&nbsp;&lt;&nbsp;self.<strong>valuationdomain</strong>['med']<br>
+for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
 
 <dl><dt><a name="RankingByLastChoosingDigraph-condorcetWinners"><strong>condorcetWinners</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
 self.<strong>relation</strong>[x][y]&nbsp;&gt;&nbsp;self.<strong>valuationdomain</strong>['med']<br>
@@ -5630,16 +5960,16 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 exchange&nbsp;arguments&nbsp;with&nbsp;external&nbsp;temporary&nbsp;files.<br>
 Returns&nbsp;a&nbsp;boolean&nbsp;value</tt></dd></dl>
 
-<dl><dt><a name="RankingByLastChoosingDigraph-determinateness"><strong>determinateness</strong></a>(self, vec, inPercent=True)</dt><dd><tt>Renders&nbsp;the&nbsp;determinateness&nbsp;of&nbsp;a&nbsp;bipolar&nbsp;characteristic&nbsp;vector<br>
-[(r(x),x),(r(y),y),&nbsp;...]&nbsp;of&nbsp;length&nbsp;*n*&nbsp;in&nbsp;valuationdomain&nbsp;[Min,Max]:<br>
+<dl><dt><a name="RankingByLastChoosingDigraph-determinateness"><strong>determinateness</strong></a>(self, vec, inPercent=True)</dt><dd><tt>Renders&nbsp;the&nbsp;determinateness&nbsp;of&nbsp;a&nbsp;characteristic&nbsp;vector&nbsp;*vec*&nbsp;=&nbsp;<br>
+[(r(x),x),(r(y),y),&nbsp;...]&nbsp;of&nbsp;length&nbsp;*n*&nbsp;in&nbsp;valuationdomain&nbsp;[Min,Med,Max]:<br>
 &nbsp;<br>
-result&nbsp;=&nbsp;sum_x&nbsp;abs(r(x))/(n*(Max-Min)<br>
+*result*&nbsp;=&nbsp;&nbsp;sum_x(&nbsp;abs(r(x)-Med)&nbsp;)&nbsp;/&nbsp;(&nbsp;n*(Max-Med)&nbsp;)<br>
 &nbsp;<br>
-If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp;(/2)&nbsp;to&nbsp;[0,1]&nbsp;range.</tt></dd></dl>
+If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp;(/2)&nbsp;to&nbsp;[0,1]&nbsp;range.</tt></dd></dl>
 
 <dl><dt><a name="RankingByLastChoosingDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="RankingByLastChoosingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RankingByLastChoosingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RankingByLastChoosingDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -5846,9 +6176,7 @@ computation.</tt></dd></dl>
 
 <dl><dt><a name="RankingByLastChoosingDigraph-powerset"><strong>powerset</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;subsets&nbsp;of&nbsp;a&nbsp;set.</tt></dd></dl>
 
-<dl><dt><a name="RankingByLastChoosingDigraph-readPerrinMisset"><strong>readPerrinMisset</strong></a>(self, file)</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;from&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;file.</tt></dd></dl>
-
-<dl><dt><a name="RankingByLastChoosingDigraph-readPerrinMissetOpt"><strong>readPerrinMissetOpt</strong></a>(self, file)</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;from&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;file.</tt></dd></dl>
+<dl><dt><a name="RankingByLastChoosingDigraph-readPerrinMisset"><strong>readPerrinMisset</strong></a>(self, file='curd.dat')</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;by&nbsp;default&nbsp;from&nbsp;the&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;result&nbsp;file.</tt></dd></dl>
 
 <dl><dt><a name="RankingByLastChoosingDigraph-readabsvector"><strong>readabsvector</strong></a>(self, x, relation)</dt><dd><tt>Parameter:&nbsp;action&nbsp;x<br>
 absorbent&nbsp;in&nbsp;vector.</tt></dd></dl>
@@ -5960,11 +6288,57 @@ Result&nbsp;saved&nbsp;in&nbsp;self.<strong>newmisset</strong>.</tt></dd></dl>
 <dl><dt><a name="RankingByLastChoosingDigraph-showNeighborhoods"><strong>showNeighborhoods</strong></a>(self)</dt><dd><tt>Lists&nbsp;the&nbsp;gamma&nbsp;and&nbsp;the&nbsp;notGamma&nbsp;function&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="RankingByLastChoosingDigraph-showOrbits"><strong>showOrbits</strong></a>(self, InChoices, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
+the&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance.<br>
+&nbsp;<br>
+Example&nbsp;Python&nbsp;session&nbsp;for&nbsp;computing&nbsp;the&nbsp;non&nbsp;isomorphic&nbsp;MISs&nbsp;from&nbsp;the&nbsp;12-cycle&nbsp;graph:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;digraphs&nbsp;import&nbsp;*<br>
+&gt;&gt;&gt;&nbsp;c12&nbsp;=&nbsp;CirculantDigraph(order=12,circulants=[1,-1])<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#RankingByLastChoosingDigraph-automorphismGenerators">automorphismGenerators</a>()<br>
+...<br>
+&nbsp;&nbsp;Permutations<br>
+&nbsp;&nbsp;{'1':&nbsp;'1',&nbsp;'2':&nbsp;'12',&nbsp;'3':&nbsp;'11',&nbsp;'4':&nbsp;'10',&nbsp;'5':&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'9',&nbsp;'6':&nbsp;'8',&nbsp;'7':&nbsp;'7',&nbsp;'8':&nbsp;'6',&nbsp;'9':&nbsp;'5',&nbsp;'10':&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'4',&nbsp;'11':&nbsp;'3',&nbsp;'12':&nbsp;'2'}<br>
+&nbsp;&nbsp;{'1':&nbsp;'2',&nbsp;'2':&nbsp;'1',&nbsp;'3':&nbsp;'12',&nbsp;'4':&nbsp;'11',&nbsp;'5':&nbsp;'10',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'6':&nbsp;'9',&nbsp;'7':&nbsp;'8',&nbsp;'8':&nbsp;'7',&nbsp;'9':&nbsp;'6',&nbsp;'10':&nbsp;'5',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'11':&nbsp;'4',&nbsp;'12':&nbsp;'3'}<br>
+&nbsp;&nbsp;Reflections&nbsp;{}<br>
+&gt;&gt;&gt;&nbsp;print('grpsize&nbsp;=&nbsp;',&nbsp;c12.automorphismGroupSize)<br>
+&nbsp;&nbsp;grpsize&nbsp;=&nbsp;24<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#RankingByLastChoosingDigraph-showMIS">showMIS</a>(withListing=False)<br>
+&nbsp;&nbsp;*---&nbsp;&nbsp;Maximal&nbsp;independent&nbsp;choices&nbsp;---*<br>
+&nbsp;&nbsp;number&nbsp;of&nbsp;solutions:&nbsp;&nbsp;29<br>
+&nbsp;&nbsp;cardinality&nbsp;distribution<br>
+&nbsp;&nbsp;card.:&nbsp;&nbsp;[0,&nbsp;1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;&nbsp;5,&nbsp;&nbsp;6,&nbsp;7,&nbsp;8,&nbsp;9,&nbsp;10,&nbsp;11,&nbsp;12]<br>
+&nbsp;&nbsp;freq.:&nbsp;&nbsp;[0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;3,&nbsp;24,&nbsp;&nbsp;2,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0]<br>
+&nbsp;&nbsp;Results&nbsp;in&nbsp;c12.misset<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#RankingByLastChoosingDigraph-showOrbits">showOrbits</a>(c12.misset,withListing=False)<br>
+...<br>
+&nbsp;&nbsp;*----&nbsp;Global&nbsp;result&nbsp;----<br>
+&nbsp;&nbsp;Number&nbsp;of&nbsp;MIS:&nbsp;&nbsp;29<br>
+&nbsp;&nbsp;Number&nbsp;of&nbsp;orbits&nbsp;:&nbsp;&nbsp;4<br>
+&nbsp;&nbsp;Labelled&nbsp;representatives:<br>
+&nbsp;&nbsp;1:&nbsp;['2','4','6','8','10','12']<br>
+&nbsp;&nbsp;2:&nbsp;['2','5','8','11']<br>
+&nbsp;&nbsp;3:&nbsp;['2','4','6','9','11']<br>
+&nbsp;&nbsp;4:&nbsp;['1','4','7','9','11']<br>
+&nbsp;&nbsp;Symmetry&nbsp;vector<br>
+&nbsp;&nbsp;stabilizer&nbsp;size:&nbsp;[1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;5,&nbsp;6,&nbsp;7,&nbsp;8,&nbsp;9,&nbsp;10,&nbsp;11,&nbsp;12,&nbsp;...]<br>
+&nbsp;&nbsp;frequency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;[0,&nbsp;2,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;1,&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;1,&nbsp;...]<br>
+&nbsp;<br>
+*Figure*:&nbsp;The&nbsp;symmetry&nbsp;axes&nbsp;of&nbsp;the&nbsp;non&nbsp;isomorphic&nbsp;MISs&nbsp;of&nbsp;the&nbsp;12-cycle:<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;c12.png<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;400&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;The&nbsp;4&nbsp;non&nbsp;isomorphic&nbsp;MIS&nbsp;of&nbsp;the&nbsp;12-cycle&nbsp;graph<br>
+&nbsp;<br>
+*Reference*:&nbsp;R.&nbsp;Bisdorff&nbsp;and&nbsp;J.L.&nbsp;Marichal&nbsp;(2008).&nbsp;Counting&nbsp;non-isomorphic&nbsp;maximal&nbsp;independent&nbsp;sets&nbsp;of&nbsp;the&nbsp;n-cycle&nbsp;graph.&nbsp;*Journal&nbsp;of&nbsp;Integer&nbsp;Sequences*,&nbsp;Vol.&nbsp;11&nbsp;Article&nbsp;08.5.7&nbsp;(`openly&nbsp;accessible&nbsp;here&nbsp;&lt;https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html&gt;`_)</tt></dd></dl>
 
 <dl><dt><a name="RankingByLastChoosingDigraph-showOrbitsFromFile"><strong>showOrbitsFromFile</strong></a>(self, InFile, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
 the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.<br>
-See&nbsp;the&nbsp;digraphs.<a href="digraphs.html#Digraph">Digraph</a>.<a href="#RankingByLastChoosingDigraph-readPerrinMisset">readPerrinMisset</a>()&nbsp;method.</tt></dd></dl>
+See&nbsp;the&nbsp;:py:func:`digraphs.<a href="digraphs.html#Digraph">Digraph</a>.readPerrinMisset`&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="RankingByLastChoosingDigraph-showPreKernels"><strong>showPreKernels</strong></a>(self, withListing=True)</dt><dd><tt>Printing&nbsp;dominant&nbsp;and&nbsp;absorbent&nbsp;preKernels:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>dompreKernels</strong>&nbsp;and&nbsp;self.<strong>abspreKernels</strong></tt></dd></dl>
@@ -6104,6 +6478,10 @@ Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&n
 
 <dl><dt><a name="RankingByLastChoosingDigraph-weakAneighbors"><strong>weakAneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
+<dl><dt><a name="RankingByLastChoosingDigraph-weakCondorcetLoosers"><strong>weakCondorcetLoosers</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
+self.<strong>relation</strong>[x][y]&nbsp;&lt;=&nbsp;self.<strong>valuationdomain</strong>['med']<br>
+for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
+
 <dl><dt><a name="RankingByLastChoosingDigraph-weakCondorcetWinners"><strong>weakCondorcetWinners</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
 self.<strong>relation</strong>[x][y]&nbsp;&gt;=&nbsp;self.<strong>valuationdomain</strong>['med']<br>
 for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
@@ -6201,7 +6579,14 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 
 <dl><dt><a name="RankingByPrudentChoosingDigraph-aneighbors"><strong>aneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
-<dl><dt><a name="RankingByPrudentChoosingDigraph-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RankingByPrudentChoosingDigraph-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Dependency:&nbsp;Uses&nbsp;the&nbsp;dreadnaut&nbsp;command&nbsp;from&nbsp;the&nbsp;nauty&nbsp;software&nbsp;package.&nbsp;See&nbsp;https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Linux:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...$&nbsp;sudo&nbsp;apt-get&nbsp;install&nbsp;nauty</tt></dd></dl>
 
 <dl><dt><a name="RankingByPrudentChoosingDigraph-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
 ie&nbsp;the&nbsp;average&nbsp;number&nbsp;of&nbsp;choice&nbsp;members&nbsp;that&nbsp;cover&nbsp;each<br>
@@ -6300,6 +6685,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 <dl><dt><a name="RankingByPrudentChoosingDigraph-computeConcentrationIndexTrapez"><strong>computeConcentrationIndexTrapez</strong></a>(self, X, N)</dt><dd><tt>Renders&nbsp;the&nbsp;Gini&nbsp;concentration&nbsp;index&nbsp;of&nbsp;the&nbsp;X&nbsp;serie.<br>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
+
+<dl><dt><a name="RankingByPrudentChoosingDigraph-computeCondorcetLoosers"><strong>computeCondorcetLoosers</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RankingByPrudentChoosingDigraph-condorcetLoosers">condorcetLoosers</a>().</tt></dd></dl>
 
 <dl><dt><a name="RankingByPrudentChoosingDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RankingByPrudentChoosingDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
 
@@ -6463,7 +6850,7 @@ a&nbsp;given&nbsp;preRanking&nbsp;in&nbsp;decreasing&nbsp;levels&nbsp;(list&nbsp
 <dl><dt><a name="RankingByPrudentChoosingDigraph-computePreorderRelation"><strong>computePreorderRelation</strong></a>(self, preorder, Normalized=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar-valued&nbsp;relation&nbsp;obtained&nbsp;from<br>
 a&nbsp;given&nbsp;preordering&nbsp;in&nbsp;increasing&nbsp;levels&nbsp;(list&nbsp;of&nbsp;lists)&nbsp;result.</tt></dd></dl>
 
-<dl><dt><a name="RankingByPrudentChoosingDigraph-computePrincipalOrder"><strong>computePrincipalOrder</strong></a>(self, plotFileName=None, Colwise=False, imageType=None, TempDir=None, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ordered&nbsp;list&nbsp;of&nbsp;self.<strong>actions</strong>&nbsp;using&nbsp;the&nbsp;decreasing&nbsp;scores&nbsp;from&nbsp;the<br>
+<dl><dt><a name="RankingByPrudentChoosingDigraph-computePrincipalOrder"><strong>computePrincipalOrder</strong></a>(self, plotFileName=None, Colwise=False, imageType=None, tempDir=None, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ordered&nbsp;list&nbsp;of&nbsp;self.<strong>actions</strong>&nbsp;using&nbsp;the&nbsp;decreasing&nbsp;scores&nbsp;from&nbsp;the<br>
 first&nbsp;rincipal&nbsp;eigenvector&nbsp;of&nbsp;the&nbsp;covariance&nbsp;of&nbsp;the&nbsp;valued&nbsp;outdegrees&nbsp;of&nbsp;self.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
@@ -6573,6 +6960,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="RankingByPrudentChoosingDigraph-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="RankingByPrudentChoosingDigraph-computeWeakCondorcetLoosers"><strong>computeWeakCondorcetLoosers</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RankingByPrudentChoosingDigraph-weakCondorcetLoosers">weakCondorcetLoosers</a>().</tt></dd></dl>
+
 <dl><dt><a name="RankingByPrudentChoosingDigraph-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#RankingByPrudentChoosingDigraph-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
 
 <dl><dt><a name="RankingByPrudentChoosingDigraph-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
@@ -6583,6 +6972,10 @@ Fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nb
 
 <dl><dt><a name="RankingByPrudentChoosingDigraph-computeupdown2irred"><strong>computeupdown2irred</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB1&nbsp;method.<br>
 Fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
+
+<dl><dt><a name="RankingByPrudentChoosingDigraph-condorcetLoosers"><strong>condorcetLoosers</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
+self.<strong>relation</strong>[x][y]&nbsp;&lt;&nbsp;self.<strong>valuationdomain</strong>['med']<br>
+for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
 
 <dl><dt><a name="RankingByPrudentChoosingDigraph-condorcetWinners"><strong>condorcetWinners</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
 self.<strong>relation</strong>[x][y]&nbsp;&gt;&nbsp;self.<strong>valuationdomain</strong>['med']<br>
@@ -6618,16 +7011,16 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 exchange&nbsp;arguments&nbsp;with&nbsp;external&nbsp;temporary&nbsp;files.<br>
 Returns&nbsp;a&nbsp;boolean&nbsp;value</tt></dd></dl>
 
-<dl><dt><a name="RankingByPrudentChoosingDigraph-determinateness"><strong>determinateness</strong></a>(self, vec, inPercent=True)</dt><dd><tt>Renders&nbsp;the&nbsp;determinateness&nbsp;of&nbsp;a&nbsp;bipolar&nbsp;characteristic&nbsp;vector<br>
-[(r(x),x),(r(y),y),&nbsp;...]&nbsp;of&nbsp;length&nbsp;*n*&nbsp;in&nbsp;valuationdomain&nbsp;[Min,Max]:<br>
+<dl><dt><a name="RankingByPrudentChoosingDigraph-determinateness"><strong>determinateness</strong></a>(self, vec, inPercent=True)</dt><dd><tt>Renders&nbsp;the&nbsp;determinateness&nbsp;of&nbsp;a&nbsp;characteristic&nbsp;vector&nbsp;*vec*&nbsp;=&nbsp;<br>
+[(r(x),x),(r(y),y),&nbsp;...]&nbsp;of&nbsp;length&nbsp;*n*&nbsp;in&nbsp;valuationdomain&nbsp;[Min,Med,Max]:<br>
 &nbsp;<br>
-result&nbsp;=&nbsp;sum_x&nbsp;abs(r(x))/(n*(Max-Min)<br>
+*result*&nbsp;=&nbsp;&nbsp;sum_x(&nbsp;abs(r(x)-Med)&nbsp;)&nbsp;/&nbsp;(&nbsp;n*(Max-Med)&nbsp;)<br>
 &nbsp;<br>
-If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp;(/2)&nbsp;to&nbsp;[0,1]&nbsp;range.</tt></dd></dl>
+If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp;(/2)&nbsp;to&nbsp;[0,1]&nbsp;range.</tt></dd></dl>
 
 <dl><dt><a name="RankingByPrudentChoosingDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="RankingByPrudentChoosingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="RankingByPrudentChoosingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="RankingByPrudentChoosingDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -6834,9 +7227,7 @@ computation.</tt></dd></dl>
 
 <dl><dt><a name="RankingByPrudentChoosingDigraph-powerset"><strong>powerset</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;subsets&nbsp;of&nbsp;a&nbsp;set.</tt></dd></dl>
 
-<dl><dt><a name="RankingByPrudentChoosingDigraph-readPerrinMisset"><strong>readPerrinMisset</strong></a>(self, file)</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;from&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;file.</tt></dd></dl>
-
-<dl><dt><a name="RankingByPrudentChoosingDigraph-readPerrinMissetOpt"><strong>readPerrinMissetOpt</strong></a>(self, file)</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;from&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;file.</tt></dd></dl>
+<dl><dt><a name="RankingByPrudentChoosingDigraph-readPerrinMisset"><strong>readPerrinMisset</strong></a>(self, file='curd.dat')</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;by&nbsp;default&nbsp;from&nbsp;the&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;result&nbsp;file.</tt></dd></dl>
 
 <dl><dt><a name="RankingByPrudentChoosingDigraph-readabsvector"><strong>readabsvector</strong></a>(self, x, relation)</dt><dd><tt>Parameter:&nbsp;action&nbsp;x<br>
 absorbent&nbsp;in&nbsp;vector.</tt></dd></dl>
@@ -6948,11 +7339,57 @@ Result&nbsp;saved&nbsp;in&nbsp;self.<strong>newmisset</strong>.</tt></dd></dl>
 <dl><dt><a name="RankingByPrudentChoosingDigraph-showNeighborhoods"><strong>showNeighborhoods</strong></a>(self)</dt><dd><tt>Lists&nbsp;the&nbsp;gamma&nbsp;and&nbsp;the&nbsp;notGamma&nbsp;function&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="RankingByPrudentChoosingDigraph-showOrbits"><strong>showOrbits</strong></a>(self, InChoices, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
+the&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance.<br>
+&nbsp;<br>
+Example&nbsp;Python&nbsp;session&nbsp;for&nbsp;computing&nbsp;the&nbsp;non&nbsp;isomorphic&nbsp;MISs&nbsp;from&nbsp;the&nbsp;12-cycle&nbsp;graph:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;digraphs&nbsp;import&nbsp;*<br>
+&gt;&gt;&gt;&nbsp;c12&nbsp;=&nbsp;CirculantDigraph(order=12,circulants=[1,-1])<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#RankingByPrudentChoosingDigraph-automorphismGenerators">automorphismGenerators</a>()<br>
+...<br>
+&nbsp;&nbsp;Permutations<br>
+&nbsp;&nbsp;{'1':&nbsp;'1',&nbsp;'2':&nbsp;'12',&nbsp;'3':&nbsp;'11',&nbsp;'4':&nbsp;'10',&nbsp;'5':&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'9',&nbsp;'6':&nbsp;'8',&nbsp;'7':&nbsp;'7',&nbsp;'8':&nbsp;'6',&nbsp;'9':&nbsp;'5',&nbsp;'10':&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'4',&nbsp;'11':&nbsp;'3',&nbsp;'12':&nbsp;'2'}<br>
+&nbsp;&nbsp;{'1':&nbsp;'2',&nbsp;'2':&nbsp;'1',&nbsp;'3':&nbsp;'12',&nbsp;'4':&nbsp;'11',&nbsp;'5':&nbsp;'10',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'6':&nbsp;'9',&nbsp;'7':&nbsp;'8',&nbsp;'8':&nbsp;'7',&nbsp;'9':&nbsp;'6',&nbsp;'10':&nbsp;'5',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'11':&nbsp;'4',&nbsp;'12':&nbsp;'3'}<br>
+&nbsp;&nbsp;Reflections&nbsp;{}<br>
+&gt;&gt;&gt;&nbsp;print('grpsize&nbsp;=&nbsp;',&nbsp;c12.automorphismGroupSize)<br>
+&nbsp;&nbsp;grpsize&nbsp;=&nbsp;24<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#RankingByPrudentChoosingDigraph-showMIS">showMIS</a>(withListing=False)<br>
+&nbsp;&nbsp;*---&nbsp;&nbsp;Maximal&nbsp;independent&nbsp;choices&nbsp;---*<br>
+&nbsp;&nbsp;number&nbsp;of&nbsp;solutions:&nbsp;&nbsp;29<br>
+&nbsp;&nbsp;cardinality&nbsp;distribution<br>
+&nbsp;&nbsp;card.:&nbsp;&nbsp;[0,&nbsp;1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;&nbsp;5,&nbsp;&nbsp;6,&nbsp;7,&nbsp;8,&nbsp;9,&nbsp;10,&nbsp;11,&nbsp;12]<br>
+&nbsp;&nbsp;freq.:&nbsp;&nbsp;[0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;3,&nbsp;24,&nbsp;&nbsp;2,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0]<br>
+&nbsp;&nbsp;Results&nbsp;in&nbsp;c12.misset<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#RankingByPrudentChoosingDigraph-showOrbits">showOrbits</a>(c12.misset,withListing=False)<br>
+...<br>
+&nbsp;&nbsp;*----&nbsp;Global&nbsp;result&nbsp;----<br>
+&nbsp;&nbsp;Number&nbsp;of&nbsp;MIS:&nbsp;&nbsp;29<br>
+&nbsp;&nbsp;Number&nbsp;of&nbsp;orbits&nbsp;:&nbsp;&nbsp;4<br>
+&nbsp;&nbsp;Labelled&nbsp;representatives:<br>
+&nbsp;&nbsp;1:&nbsp;['2','4','6','8','10','12']<br>
+&nbsp;&nbsp;2:&nbsp;['2','5','8','11']<br>
+&nbsp;&nbsp;3:&nbsp;['2','4','6','9','11']<br>
+&nbsp;&nbsp;4:&nbsp;['1','4','7','9','11']<br>
+&nbsp;&nbsp;Symmetry&nbsp;vector<br>
+&nbsp;&nbsp;stabilizer&nbsp;size:&nbsp;[1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;5,&nbsp;6,&nbsp;7,&nbsp;8,&nbsp;9,&nbsp;10,&nbsp;11,&nbsp;12,&nbsp;...]<br>
+&nbsp;&nbsp;frequency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;[0,&nbsp;2,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;1,&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;1,&nbsp;...]<br>
+&nbsp;<br>
+*Figure*:&nbsp;The&nbsp;symmetry&nbsp;axes&nbsp;of&nbsp;the&nbsp;non&nbsp;isomorphic&nbsp;MISs&nbsp;of&nbsp;the&nbsp;12-cycle:<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;c12.png<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;400&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;The&nbsp;4&nbsp;non&nbsp;isomorphic&nbsp;MIS&nbsp;of&nbsp;the&nbsp;12-cycle&nbsp;graph<br>
+&nbsp;<br>
+*Reference*:&nbsp;R.&nbsp;Bisdorff&nbsp;and&nbsp;J.L.&nbsp;Marichal&nbsp;(2008).&nbsp;Counting&nbsp;non-isomorphic&nbsp;maximal&nbsp;independent&nbsp;sets&nbsp;of&nbsp;the&nbsp;n-cycle&nbsp;graph.&nbsp;*Journal&nbsp;of&nbsp;Integer&nbsp;Sequences*,&nbsp;Vol.&nbsp;11&nbsp;Article&nbsp;08.5.7&nbsp;(`openly&nbsp;accessible&nbsp;here&nbsp;&lt;https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html&gt;`_)</tt></dd></dl>
 
 <dl><dt><a name="RankingByPrudentChoosingDigraph-showOrbitsFromFile"><strong>showOrbitsFromFile</strong></a>(self, InFile, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
 the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.<br>
-See&nbsp;the&nbsp;digraphs.<a href="digraphs.html#Digraph">Digraph</a>.<a href="#RankingByPrudentChoosingDigraph-readPerrinMisset">readPerrinMisset</a>()&nbsp;method.</tt></dd></dl>
+See&nbsp;the&nbsp;:py:func:`digraphs.<a href="digraphs.html#Digraph">Digraph</a>.readPerrinMisset`&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="RankingByPrudentChoosingDigraph-showPreKernels"><strong>showPreKernels</strong></a>(self, withListing=True)</dt><dd><tt>Printing&nbsp;dominant&nbsp;and&nbsp;absorbent&nbsp;preKernels:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>dompreKernels</strong>&nbsp;and&nbsp;self.<strong>abspreKernels</strong></tt></dd></dl>
@@ -7092,6 +7529,10 @@ Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&n
 
 <dl><dt><a name="RankingByPrudentChoosingDigraph-weakAneighbors"><strong>weakAneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
+<dl><dt><a name="RankingByPrudentChoosingDigraph-weakCondorcetLoosers"><strong>weakCondorcetLoosers</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
+self.<strong>relation</strong>[x][y]&nbsp;&lt;=&nbsp;self.<strong>valuationdomain</strong>['med']<br>
+for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
+
 <dl><dt><a name="RankingByPrudentChoosingDigraph-weakCondorcetWinners"><strong>weakCondorcetWinners</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
 self.<strong>relation</strong>[x][y]&nbsp;&gt;=&nbsp;self.<strong>valuationdomain</strong>['med']<br>
 for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
@@ -7177,7 +7618,14 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 
 <dl><dt><a name="WeakOrder-aneighbors"><strong>aneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
-<dl><dt><a name="WeakOrder-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="WeakOrder-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Dependency:&nbsp;Uses&nbsp;the&nbsp;dreadnaut&nbsp;command&nbsp;from&nbsp;the&nbsp;nauty&nbsp;software&nbsp;package.&nbsp;See&nbsp;https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Linux:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...$&nbsp;sudo&nbsp;apt-get&nbsp;install&nbsp;nauty</tt></dd></dl>
 
 <dl><dt><a name="WeakOrder-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
 ie&nbsp;the&nbsp;average&nbsp;number&nbsp;of&nbsp;choice&nbsp;members&nbsp;that&nbsp;cover&nbsp;each<br>
@@ -7276,6 +7724,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 <dl><dt><a name="WeakOrder-computeConcentrationIndexTrapez"><strong>computeConcentrationIndexTrapez</strong></a>(self, X, N)</dt><dd><tt>Renders&nbsp;the&nbsp;Gini&nbsp;concentration&nbsp;index&nbsp;of&nbsp;the&nbsp;X&nbsp;serie.<br>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
+
+<dl><dt><a name="WeakOrder-computeCondorcetLoosers"><strong>computeCondorcetLoosers</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#WeakOrder-condorcetLoosers">condorcetLoosers</a>().</tt></dd></dl>
 
 <dl><dt><a name="WeakOrder-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#WeakOrder-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
 
@@ -7439,7 +7889,7 @@ a&nbsp;given&nbsp;preRanking&nbsp;in&nbsp;decreasing&nbsp;levels&nbsp;(list&nbsp
 <dl><dt><a name="WeakOrder-computePreorderRelation"><strong>computePreorderRelation</strong></a>(self, preorder, Normalized=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar-valued&nbsp;relation&nbsp;obtained&nbsp;from<br>
 a&nbsp;given&nbsp;preordering&nbsp;in&nbsp;increasing&nbsp;levels&nbsp;(list&nbsp;of&nbsp;lists)&nbsp;result.</tt></dd></dl>
 
-<dl><dt><a name="WeakOrder-computePrincipalOrder"><strong>computePrincipalOrder</strong></a>(self, plotFileName=None, Colwise=False, imageType=None, TempDir=None, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ordered&nbsp;list&nbsp;of&nbsp;self.<strong>actions</strong>&nbsp;using&nbsp;the&nbsp;decreasing&nbsp;scores&nbsp;from&nbsp;the<br>
+<dl><dt><a name="WeakOrder-computePrincipalOrder"><strong>computePrincipalOrder</strong></a>(self, plotFileName=None, Colwise=False, imageType=None, tempDir=None, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ordered&nbsp;list&nbsp;of&nbsp;self.<strong>actions</strong>&nbsp;using&nbsp;the&nbsp;decreasing&nbsp;scores&nbsp;from&nbsp;the<br>
 first&nbsp;rincipal&nbsp;eigenvector&nbsp;of&nbsp;the&nbsp;covariance&nbsp;of&nbsp;the&nbsp;valued&nbsp;outdegrees&nbsp;of&nbsp;self.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
@@ -7571,6 +8021,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="WeakOrder-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="WeakOrder-computeWeakCondorcetLoosers"><strong>computeWeakCondorcetLoosers</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#WeakOrder-weakCondorcetLoosers">weakCondorcetLoosers</a>().</tt></dd></dl>
+
 <dl><dt><a name="WeakOrder-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#WeakOrder-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
 
 <dl><dt><a name="WeakOrder-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
@@ -7581,6 +8033,10 @@ Fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nb
 
 <dl><dt><a name="WeakOrder-computeupdown2irred"><strong>computeupdown2irred</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB1&nbsp;method.<br>
 Fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
+
+<dl><dt><a name="WeakOrder-condorcetLoosers"><strong>condorcetLoosers</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
+self.<strong>relation</strong>[x][y]&nbsp;&lt;&nbsp;self.<strong>valuationdomain</strong>['med']<br>
+for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
 
 <dl><dt><a name="WeakOrder-condorcetWinners"><strong>condorcetWinners</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
 self.<strong>relation</strong>[x][y]&nbsp;&gt;&nbsp;self.<strong>valuationdomain</strong>['med']<br>
@@ -7616,16 +8072,16 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 exchange&nbsp;arguments&nbsp;with&nbsp;external&nbsp;temporary&nbsp;files.<br>
 Returns&nbsp;a&nbsp;boolean&nbsp;value</tt></dd></dl>
 
-<dl><dt><a name="WeakOrder-determinateness"><strong>determinateness</strong></a>(self, vec, inPercent=True)</dt><dd><tt>Renders&nbsp;the&nbsp;determinateness&nbsp;of&nbsp;a&nbsp;bipolar&nbsp;characteristic&nbsp;vector<br>
-[(r(x),x),(r(y),y),&nbsp;...]&nbsp;of&nbsp;length&nbsp;*n*&nbsp;in&nbsp;valuationdomain&nbsp;[Min,Max]:<br>
+<dl><dt><a name="WeakOrder-determinateness"><strong>determinateness</strong></a>(self, vec, inPercent=True)</dt><dd><tt>Renders&nbsp;the&nbsp;determinateness&nbsp;of&nbsp;a&nbsp;characteristic&nbsp;vector&nbsp;*vec*&nbsp;=&nbsp;<br>
+[(r(x),x),(r(y),y),&nbsp;...]&nbsp;of&nbsp;length&nbsp;*n*&nbsp;in&nbsp;valuationdomain&nbsp;[Min,Med,Max]:<br>
 &nbsp;<br>
-result&nbsp;=&nbsp;sum_x&nbsp;abs(r(x))/(n*(Max-Min)<br>
+*result*&nbsp;=&nbsp;&nbsp;sum_x(&nbsp;abs(r(x)-Med)&nbsp;)&nbsp;/&nbsp;(&nbsp;n*(Max-Med)&nbsp;)<br>
 &nbsp;<br>
-If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp;(/2)&nbsp;to&nbsp;[0,1]&nbsp;range.</tt></dd></dl>
+If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp;(/2)&nbsp;to&nbsp;[0,1]&nbsp;range.</tt></dd></dl>
 
 <dl><dt><a name="WeakOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="WeakOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="WeakOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="WeakOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -7832,9 +8288,7 @@ computation.</tt></dd></dl>
 
 <dl><dt><a name="WeakOrder-powerset"><strong>powerset</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;subsets&nbsp;of&nbsp;a&nbsp;set.</tt></dd></dl>
 
-<dl><dt><a name="WeakOrder-readPerrinMisset"><strong>readPerrinMisset</strong></a>(self, file)</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;from&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;file.</tt></dd></dl>
-
-<dl><dt><a name="WeakOrder-readPerrinMissetOpt"><strong>readPerrinMissetOpt</strong></a>(self, file)</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;from&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;file.</tt></dd></dl>
+<dl><dt><a name="WeakOrder-readPerrinMisset"><strong>readPerrinMisset</strong></a>(self, file='curd.dat')</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;by&nbsp;default&nbsp;from&nbsp;the&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;result&nbsp;file.</tt></dd></dl>
 
 <dl><dt><a name="WeakOrder-readabsvector"><strong>readabsvector</strong></a>(self, x, relation)</dt><dd><tt>Parameter:&nbsp;action&nbsp;x<br>
 absorbent&nbsp;in&nbsp;vector.</tt></dd></dl>
@@ -7946,11 +8400,57 @@ Result&nbsp;saved&nbsp;in&nbsp;self.<strong>newmisset</strong>.</tt></dd></dl>
 <dl><dt><a name="WeakOrder-showNeighborhoods"><strong>showNeighborhoods</strong></a>(self)</dt><dd><tt>Lists&nbsp;the&nbsp;gamma&nbsp;and&nbsp;the&nbsp;notGamma&nbsp;function&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="WeakOrder-showOrbits"><strong>showOrbits</strong></a>(self, InChoices, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
+the&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance.<br>
+&nbsp;<br>
+Example&nbsp;Python&nbsp;session&nbsp;for&nbsp;computing&nbsp;the&nbsp;non&nbsp;isomorphic&nbsp;MISs&nbsp;from&nbsp;the&nbsp;12-cycle&nbsp;graph:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;digraphs&nbsp;import&nbsp;*<br>
+&gt;&gt;&gt;&nbsp;c12&nbsp;=&nbsp;CirculantDigraph(order=12,circulants=[1,-1])<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#WeakOrder-automorphismGenerators">automorphismGenerators</a>()<br>
+...<br>
+&nbsp;&nbsp;Permutations<br>
+&nbsp;&nbsp;{'1':&nbsp;'1',&nbsp;'2':&nbsp;'12',&nbsp;'3':&nbsp;'11',&nbsp;'4':&nbsp;'10',&nbsp;'5':&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'9',&nbsp;'6':&nbsp;'8',&nbsp;'7':&nbsp;'7',&nbsp;'8':&nbsp;'6',&nbsp;'9':&nbsp;'5',&nbsp;'10':&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'4',&nbsp;'11':&nbsp;'3',&nbsp;'12':&nbsp;'2'}<br>
+&nbsp;&nbsp;{'1':&nbsp;'2',&nbsp;'2':&nbsp;'1',&nbsp;'3':&nbsp;'12',&nbsp;'4':&nbsp;'11',&nbsp;'5':&nbsp;'10',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'6':&nbsp;'9',&nbsp;'7':&nbsp;'8',&nbsp;'8':&nbsp;'7',&nbsp;'9':&nbsp;'6',&nbsp;'10':&nbsp;'5',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'11':&nbsp;'4',&nbsp;'12':&nbsp;'3'}<br>
+&nbsp;&nbsp;Reflections&nbsp;{}<br>
+&gt;&gt;&gt;&nbsp;print('grpsize&nbsp;=&nbsp;',&nbsp;c12.automorphismGroupSize)<br>
+&nbsp;&nbsp;grpsize&nbsp;=&nbsp;24<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#WeakOrder-showMIS">showMIS</a>(withListing=False)<br>
+&nbsp;&nbsp;*---&nbsp;&nbsp;Maximal&nbsp;independent&nbsp;choices&nbsp;---*<br>
+&nbsp;&nbsp;number&nbsp;of&nbsp;solutions:&nbsp;&nbsp;29<br>
+&nbsp;&nbsp;cardinality&nbsp;distribution<br>
+&nbsp;&nbsp;card.:&nbsp;&nbsp;[0,&nbsp;1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;&nbsp;5,&nbsp;&nbsp;6,&nbsp;7,&nbsp;8,&nbsp;9,&nbsp;10,&nbsp;11,&nbsp;12]<br>
+&nbsp;&nbsp;freq.:&nbsp;&nbsp;[0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;3,&nbsp;24,&nbsp;&nbsp;2,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0]<br>
+&nbsp;&nbsp;Results&nbsp;in&nbsp;c12.misset<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#WeakOrder-showOrbits">showOrbits</a>(c12.misset,withListing=False)<br>
+...<br>
+&nbsp;&nbsp;*----&nbsp;Global&nbsp;result&nbsp;----<br>
+&nbsp;&nbsp;Number&nbsp;of&nbsp;MIS:&nbsp;&nbsp;29<br>
+&nbsp;&nbsp;Number&nbsp;of&nbsp;orbits&nbsp;:&nbsp;&nbsp;4<br>
+&nbsp;&nbsp;Labelled&nbsp;representatives:<br>
+&nbsp;&nbsp;1:&nbsp;['2','4','6','8','10','12']<br>
+&nbsp;&nbsp;2:&nbsp;['2','5','8','11']<br>
+&nbsp;&nbsp;3:&nbsp;['2','4','6','9','11']<br>
+&nbsp;&nbsp;4:&nbsp;['1','4','7','9','11']<br>
+&nbsp;&nbsp;Symmetry&nbsp;vector<br>
+&nbsp;&nbsp;stabilizer&nbsp;size:&nbsp;[1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;5,&nbsp;6,&nbsp;7,&nbsp;8,&nbsp;9,&nbsp;10,&nbsp;11,&nbsp;12,&nbsp;...]<br>
+&nbsp;&nbsp;frequency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;[0,&nbsp;2,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;1,&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;1,&nbsp;...]<br>
+&nbsp;<br>
+*Figure*:&nbsp;The&nbsp;symmetry&nbsp;axes&nbsp;of&nbsp;the&nbsp;non&nbsp;isomorphic&nbsp;MISs&nbsp;of&nbsp;the&nbsp;12-cycle:<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;c12.png<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;400&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;The&nbsp;4&nbsp;non&nbsp;isomorphic&nbsp;MIS&nbsp;of&nbsp;the&nbsp;12-cycle&nbsp;graph<br>
+&nbsp;<br>
+*Reference*:&nbsp;R.&nbsp;Bisdorff&nbsp;and&nbsp;J.L.&nbsp;Marichal&nbsp;(2008).&nbsp;Counting&nbsp;non-isomorphic&nbsp;maximal&nbsp;independent&nbsp;sets&nbsp;of&nbsp;the&nbsp;n-cycle&nbsp;graph.&nbsp;*Journal&nbsp;of&nbsp;Integer&nbsp;Sequences*,&nbsp;Vol.&nbsp;11&nbsp;Article&nbsp;08.5.7&nbsp;(`openly&nbsp;accessible&nbsp;here&nbsp;&lt;https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html&gt;`_)</tt></dd></dl>
 
 <dl><dt><a name="WeakOrder-showOrbitsFromFile"><strong>showOrbitsFromFile</strong></a>(self, InFile, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
 the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.<br>
-See&nbsp;the&nbsp;digraphs.<a href="digraphs.html#Digraph">Digraph</a>.<a href="#WeakOrder-readPerrinMisset">readPerrinMisset</a>()&nbsp;method.</tt></dd></dl>
+See&nbsp;the&nbsp;:py:func:`digraphs.<a href="digraphs.html#Digraph">Digraph</a>.readPerrinMisset`&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="WeakOrder-showPreKernels"><strong>showPreKernels</strong></a>(self, withListing=True)</dt><dd><tt>Printing&nbsp;dominant&nbsp;and&nbsp;absorbent&nbsp;preKernels:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>dompreKernels</strong>&nbsp;and&nbsp;self.<strong>abspreKernels</strong></tt></dd></dl>
@@ -8090,6 +8590,10 @@ Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&n
 
 <dl><dt><a name="WeakOrder-weakAneighbors"><strong>weakAneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
+<dl><dt><a name="WeakOrder-weakCondorcetLoosers"><strong>weakCondorcetLoosers</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
+self.<strong>relation</strong>[x][y]&nbsp;&lt;=&nbsp;self.<strong>valuationdomain</strong>['med']<br>
+for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
+
 <dl><dt><a name="WeakOrder-weakCondorcetWinners"><strong>weakCondorcetWinners</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
 self.<strong>relation</strong>[x][y]&nbsp;&gt;=&nbsp;self.<strong>valuationdomain</strong>['med']<br>
 for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
@@ -8194,7 +8698,14 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 
 <dl><dt><a name="WeakRankingOrder-aneighbors"><strong>aneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
-<dl><dt><a name="WeakRankingOrder-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="WeakRankingOrder-automorphismGenerators"><strong>automorphismGenerators</strong></a>(self)</dt><dd><tt>Adds&nbsp;automorphism&nbsp;group&nbsp;generators&nbsp;to&nbsp;the&nbsp;digraph&nbsp;instance.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Dependency:&nbsp;Uses&nbsp;the&nbsp;dreadnaut&nbsp;command&nbsp;from&nbsp;the&nbsp;nauty&nbsp;software&nbsp;package.&nbsp;See&nbsp;https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Linux:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...$&nbsp;sudo&nbsp;apt-get&nbsp;install&nbsp;nauty</tt></dd></dl>
 
 <dl><dt><a name="WeakRankingOrder-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
 ie&nbsp;the&nbsp;average&nbsp;number&nbsp;of&nbsp;choice&nbsp;members&nbsp;that&nbsp;cover&nbsp;each<br>
@@ -8293,6 +8804,8 @@ Based&nbsp;on&nbsp;the&nbsp;triangle&nbsp;summation&nbsp;formula.</tt></dd></dl>
 <dl><dt><a name="WeakRankingOrder-computeConcentrationIndexTrapez"><strong>computeConcentrationIndexTrapez</strong></a>(self, X, N)</dt><dd><tt>Renders&nbsp;the&nbsp;Gini&nbsp;concentration&nbsp;index&nbsp;of&nbsp;the&nbsp;X&nbsp;serie.<br>
 N&nbsp;contains&nbsp;the&nbsp;partial&nbsp;frequencies.<br>
 Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl>
+
+<dl><dt><a name="WeakRankingOrder-computeCondorcetLoosers"><strong>computeCondorcetLoosers</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#WeakRankingOrder-condorcetLoosers">condorcetLoosers</a>().</tt></dd></dl>
 
 <dl><dt><a name="WeakRankingOrder-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#WeakRankingOrder-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
 
@@ -8456,7 +8969,7 @@ a&nbsp;given&nbsp;preRanking&nbsp;in&nbsp;decreasing&nbsp;levels&nbsp;(list&nbsp
 <dl><dt><a name="WeakRankingOrder-computePreorderRelation"><strong>computePreorderRelation</strong></a>(self, preorder, Normalized=True, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar-valued&nbsp;relation&nbsp;obtained&nbsp;from<br>
 a&nbsp;given&nbsp;preordering&nbsp;in&nbsp;increasing&nbsp;levels&nbsp;(list&nbsp;of&nbsp;lists)&nbsp;result.</tt></dd></dl>
 
-<dl><dt><a name="WeakRankingOrder-computePrincipalOrder"><strong>computePrincipalOrder</strong></a>(self, plotFileName=None, Colwise=False, imageType=None, TempDir=None, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ordered&nbsp;list&nbsp;of&nbsp;self.<strong>actions</strong>&nbsp;using&nbsp;the&nbsp;decreasing&nbsp;scores&nbsp;from&nbsp;the<br>
+<dl><dt><a name="WeakRankingOrder-computePrincipalOrder"><strong>computePrincipalOrder</strong></a>(self, plotFileName=None, Colwise=False, imageType=None, tempDir=None, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ordered&nbsp;list&nbsp;of&nbsp;self.<strong>actions</strong>&nbsp;using&nbsp;the&nbsp;decreasing&nbsp;scores&nbsp;from&nbsp;the<br>
 first&nbsp;rincipal&nbsp;eigenvector&nbsp;of&nbsp;the&nbsp;covariance&nbsp;of&nbsp;the&nbsp;valued&nbsp;outdegrees&nbsp;of&nbsp;self.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
@@ -8588,6 +9101,8 @@ the&nbsp;arcs&nbsp;in&nbsp;the&nbsp;digraph.</tt></dd></dl>
 <dl><dt><a name="WeakRankingOrder-computeValuationStatistics"><strong>computeValuationStatistics</strong></a>(self, Sampling=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;and&nbsp;variance&nbsp;of&nbsp;the&nbsp;valuation<br>
 of&nbsp;the&nbsp;non&nbsp;reflexive&nbsp;pairs.</tt></dd></dl>
 
+<dl><dt><a name="WeakRankingOrder-computeWeakCondorcetLoosers"><strong>computeWeakCondorcetLoosers</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#WeakRankingOrder-weakCondorcetLoosers">weakCondorcetLoosers</a>().</tt></dd></dl>
+
 <dl><dt><a name="WeakRankingOrder-computeWeakCondorcetWinners"><strong>computeWeakCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#WeakRankingOrder-weakCondorcetWinners">weakCondorcetWinners</a>().</tt></dd></dl>
 
 <dl><dt><a name="WeakRankingOrder-computeupdown1"><strong>computeupdown1</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB2&nbsp;method.<br>
@@ -8598,6 +9113,10 @@ Fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nb
 
 <dl><dt><a name="WeakRankingOrder-computeupdown2irred"><strong>computeupdown2irred</strong></a>(self, s, S)</dt><dd><tt>Help&nbsp;method&nbsp;for&nbsp;show_MIS_HB1&nbsp;method.<br>
 Fills&nbsp;self.<strong>newmisset</strong>,&nbsp;self.<strong>upmis</strong>,&nbsp;self.<strong>downmis</strong>.</tt></dd></dl>
+
+<dl><dt><a name="WeakRankingOrder-condorcetLoosers"><strong>condorcetLoosers</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
+self.<strong>relation</strong>[x][y]&nbsp;&lt;&nbsp;self.<strong>valuationdomain</strong>['med']<br>
+for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
 
 <dl><dt><a name="WeakRankingOrder-condorcetWinners"><strong>condorcetWinners</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
 self.<strong>relation</strong>[x][y]&nbsp;&gt;&nbsp;self.<strong>valuationdomain</strong>['med']<br>
@@ -8633,16 +9152,16 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 exchange&nbsp;arguments&nbsp;with&nbsp;external&nbsp;temporary&nbsp;files.<br>
 Returns&nbsp;a&nbsp;boolean&nbsp;value</tt></dd></dl>
 
-<dl><dt><a name="WeakRankingOrder-determinateness"><strong>determinateness</strong></a>(self, vec, inPercent=True)</dt><dd><tt>Renders&nbsp;the&nbsp;determinateness&nbsp;of&nbsp;a&nbsp;bipolar&nbsp;characteristic&nbsp;vector<br>
-[(r(x),x),(r(y),y),&nbsp;...]&nbsp;of&nbsp;length&nbsp;*n*&nbsp;in&nbsp;valuationdomain&nbsp;[Min,Max]:<br>
+<dl><dt><a name="WeakRankingOrder-determinateness"><strong>determinateness</strong></a>(self, vec, inPercent=True)</dt><dd><tt>Renders&nbsp;the&nbsp;determinateness&nbsp;of&nbsp;a&nbsp;characteristic&nbsp;vector&nbsp;*vec*&nbsp;=&nbsp;<br>
+[(r(x),x),(r(y),y),&nbsp;...]&nbsp;of&nbsp;length&nbsp;*n*&nbsp;in&nbsp;valuationdomain&nbsp;[Min,Med,Max]:<br>
 &nbsp;<br>
-result&nbsp;=&nbsp;sum_x&nbsp;abs(r(x))/(n*(Max-Min)<br>
+*result*&nbsp;=&nbsp;&nbsp;sum_x(&nbsp;abs(r(x)-Med)&nbsp;)&nbsp;/&nbsp;(&nbsp;n*(Max-Med)&nbsp;)<br>
 &nbsp;<br>
-If&nbsp;inPercent,&nbsp;result&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp;(/2)&nbsp;to&nbsp;[0,1]&nbsp;range.</tt></dd></dl>
+If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nbsp;(/2)&nbsp;to&nbsp;[0,1]&nbsp;range.</tt></dd></dl>
 
 <dl><dt><a name="WeakRankingOrder-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="WeakRankingOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'max': 1, 'min': -1, 'med': 0}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="WeakRankingOrder-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="WeakRankingOrder-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -8849,9 +9368,7 @@ computation.</tt></dd></dl>
 
 <dl><dt><a name="WeakRankingOrder-powerset"><strong>powerset</strong></a>(self, U)</dt><dd><tt>Generates&nbsp;all&nbsp;subsets&nbsp;of&nbsp;a&nbsp;set.</tt></dd></dl>
 
-<dl><dt><a name="WeakRankingOrder-readPerrinMisset"><strong>readPerrinMisset</strong></a>(self, file)</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;from&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;file.</tt></dd></dl>
-
-<dl><dt><a name="WeakRankingOrder-readPerrinMissetOpt"><strong>readPerrinMissetOpt</strong></a>(self, file)</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;from&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;file.</tt></dd></dl>
+<dl><dt><a name="WeakRankingOrder-readPerrinMisset"><strong>readPerrinMisset</strong></a>(self, file='curd.dat')</dt><dd><tt>read&nbsp;method&nbsp;for&nbsp;0-1-char-coded&nbsp;MISs&nbsp;by&nbsp;default&nbsp;from&nbsp;the&nbsp;perrinMIS.c&nbsp;curd.dat&nbsp;result&nbsp;file.</tt></dd></dl>
 
 <dl><dt><a name="WeakRankingOrder-readabsvector"><strong>readabsvector</strong></a>(self, x, relation)</dt><dd><tt>Parameter:&nbsp;action&nbsp;x<br>
 absorbent&nbsp;in&nbsp;vector.</tt></dd></dl>
@@ -8963,11 +9480,57 @@ Result&nbsp;saved&nbsp;in&nbsp;self.<strong>newmisset</strong>.</tt></dd></dl>
 <dl><dt><a name="WeakRankingOrder-showNeighborhoods"><strong>showNeighborhoods</strong></a>(self)</dt><dd><tt>Lists&nbsp;the&nbsp;gamma&nbsp;and&nbsp;the&nbsp;notGamma&nbsp;function&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="WeakRankingOrder-showOrbits"><strong>showOrbits</strong></a>(self, InChoices, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
-the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
+the&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance.<br>
+&nbsp;<br>
+Example&nbsp;Python&nbsp;session&nbsp;for&nbsp;computing&nbsp;the&nbsp;non&nbsp;isomorphic&nbsp;MISs&nbsp;from&nbsp;the&nbsp;12-cycle&nbsp;graph:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;digraphs&nbsp;import&nbsp;*<br>
+&gt;&gt;&gt;&nbsp;c12&nbsp;=&nbsp;CirculantDigraph(order=12,circulants=[1,-1])<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#WeakRankingOrder-automorphismGenerators">automorphismGenerators</a>()<br>
+...<br>
+&nbsp;&nbsp;Permutations<br>
+&nbsp;&nbsp;{'1':&nbsp;'1',&nbsp;'2':&nbsp;'12',&nbsp;'3':&nbsp;'11',&nbsp;'4':&nbsp;'10',&nbsp;'5':&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'9',&nbsp;'6':&nbsp;'8',&nbsp;'7':&nbsp;'7',&nbsp;'8':&nbsp;'6',&nbsp;'9':&nbsp;'5',&nbsp;'10':&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'4',&nbsp;'11':&nbsp;'3',&nbsp;'12':&nbsp;'2'}<br>
+&nbsp;&nbsp;{'1':&nbsp;'2',&nbsp;'2':&nbsp;'1',&nbsp;'3':&nbsp;'12',&nbsp;'4':&nbsp;'11',&nbsp;'5':&nbsp;'10',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'6':&nbsp;'9',&nbsp;'7':&nbsp;'8',&nbsp;'8':&nbsp;'7',&nbsp;'9':&nbsp;'6',&nbsp;'10':&nbsp;'5',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;'11':&nbsp;'4',&nbsp;'12':&nbsp;'3'}<br>
+&nbsp;&nbsp;Reflections&nbsp;{}<br>
+&gt;&gt;&gt;&nbsp;print('grpsize&nbsp;=&nbsp;',&nbsp;c12.automorphismGroupSize)<br>
+&nbsp;&nbsp;grpsize&nbsp;=&nbsp;24<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#WeakRankingOrder-showMIS">showMIS</a>(withListing=False)<br>
+&nbsp;&nbsp;*---&nbsp;&nbsp;Maximal&nbsp;independent&nbsp;choices&nbsp;---*<br>
+&nbsp;&nbsp;number&nbsp;of&nbsp;solutions:&nbsp;&nbsp;29<br>
+&nbsp;&nbsp;cardinality&nbsp;distribution<br>
+&nbsp;&nbsp;card.:&nbsp;&nbsp;[0,&nbsp;1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;&nbsp;5,&nbsp;&nbsp;6,&nbsp;7,&nbsp;8,&nbsp;9,&nbsp;10,&nbsp;11,&nbsp;12]<br>
+&nbsp;&nbsp;freq.:&nbsp;&nbsp;[0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;3,&nbsp;24,&nbsp;&nbsp;2,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0]<br>
+&nbsp;&nbsp;Results&nbsp;in&nbsp;c12.misset<br>
+&gt;&gt;&gt;&nbsp;c12.<a href="#WeakRankingOrder-showOrbits">showOrbits</a>(c12.misset,withListing=False)<br>
+...<br>
+&nbsp;&nbsp;*----&nbsp;Global&nbsp;result&nbsp;----<br>
+&nbsp;&nbsp;Number&nbsp;of&nbsp;MIS:&nbsp;&nbsp;29<br>
+&nbsp;&nbsp;Number&nbsp;of&nbsp;orbits&nbsp;:&nbsp;&nbsp;4<br>
+&nbsp;&nbsp;Labelled&nbsp;representatives:<br>
+&nbsp;&nbsp;1:&nbsp;['2','4','6','8','10','12']<br>
+&nbsp;&nbsp;2:&nbsp;['2','5','8','11']<br>
+&nbsp;&nbsp;3:&nbsp;['2','4','6','9','11']<br>
+&nbsp;&nbsp;4:&nbsp;['1','4','7','9','11']<br>
+&nbsp;&nbsp;Symmetry&nbsp;vector<br>
+&nbsp;&nbsp;stabilizer&nbsp;size:&nbsp;[1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;5,&nbsp;6,&nbsp;7,&nbsp;8,&nbsp;9,&nbsp;10,&nbsp;11,&nbsp;12,&nbsp;...]<br>
+&nbsp;&nbsp;frequency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;[0,&nbsp;2,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;0,&nbsp;1,&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;0,&nbsp;&nbsp;1,&nbsp;...]<br>
+&nbsp;<br>
+*Figure*:&nbsp;The&nbsp;symmetry&nbsp;axes&nbsp;of&nbsp;the&nbsp;non&nbsp;isomorphic&nbsp;MISs&nbsp;of&nbsp;the&nbsp;12-cycle:<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;c12.png<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;400&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;The&nbsp;4&nbsp;non&nbsp;isomorphic&nbsp;MIS&nbsp;of&nbsp;the&nbsp;12-cycle&nbsp;graph<br>
+&nbsp;<br>
+*Reference*:&nbsp;R.&nbsp;Bisdorff&nbsp;and&nbsp;J.L.&nbsp;Marichal&nbsp;(2008).&nbsp;Counting&nbsp;non-isomorphic&nbsp;maximal&nbsp;independent&nbsp;sets&nbsp;of&nbsp;the&nbsp;n-cycle&nbsp;graph.&nbsp;*Journal&nbsp;of&nbsp;Integer&nbsp;Sequences*,&nbsp;Vol.&nbsp;11&nbsp;Article&nbsp;08.5.7&nbsp;(`openly&nbsp;accessible&nbsp;here&nbsp;&lt;https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html&gt;`_)</tt></dd></dl>
 
 <dl><dt><a name="WeakRankingOrder-showOrbitsFromFile"><strong>showOrbitsFromFile</strong></a>(self, InFile, withListing=True)</dt><dd><tt>Prints&nbsp;the&nbsp;orbits&nbsp;of&nbsp;Choices&nbsp;along&nbsp;the&nbsp;automorphisms&nbsp;of<br>
 the&nbsp;digraph&nbsp;self&nbsp;by&nbsp;reading&nbsp;in&nbsp;the&nbsp;0-1&nbsp;misset&nbsp;file&nbsp;format.<br>
-See&nbsp;the&nbsp;digraphs.<a href="digraphs.html#Digraph">Digraph</a>.<a href="#WeakRankingOrder-readPerrinMisset">readPerrinMisset</a>()&nbsp;method.</tt></dd></dl>
+See&nbsp;the&nbsp;:py:func:`digraphs.<a href="digraphs.html#Digraph">Digraph</a>.readPerrinMisset`&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="WeakRankingOrder-showPreKernels"><strong>showPreKernels</strong></a>(self, withListing=True)</dt><dd><tt>Printing&nbsp;dominant&nbsp;and&nbsp;absorbent&nbsp;preKernels:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>dompreKernels</strong>&nbsp;and&nbsp;self.<strong>abspreKernels</strong></tt></dd></dl>
@@ -9106,6 +9669,10 @@ Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nb
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
 <dl><dt><a name="WeakRankingOrder-weakAneighbors"><strong>weakAneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
+
+<dl><dt><a name="WeakRankingOrder-weakCondorcetLoosers"><strong>weakCondorcetLoosers</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
+self.<strong>relation</strong>[x][y]&nbsp;&lt;=&nbsp;self.<strong>valuationdomain</strong>['med']<br>
+for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
 
 <dl><dt><a name="WeakRankingOrder-weakCondorcetWinners"><strong>weakCondorcetWinners</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;x&nbsp;such&nbsp;that<br>
 self.<strong>relation</strong>[x][y]&nbsp;&gt;=&nbsp;self.<strong>valuationdomain</strong>['med']<br>

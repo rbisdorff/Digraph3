@@ -1,24 +1,24 @@
 #!/usr/bin/env python3
-#
-# Python 3 implementation of voting digraphs
-# Refactored from revision 1.549 of the digraphs module
-# Current revision $Revision: 2484 $
-# Copyright (C) 2011-2018 Raymond Bisdorff
-#
-#    This program is free software; you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation; either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License along
-#    with this program; if not, write to the Free Software Foundation, Inc.,
-#    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-#
+"""
+Python 3 implementation of voting digraphs
+Refactored from revision 1.549 of the digraphs module
+Current revision $Revision: 2484 $
+Copyright (C) 2011-2018 Raymond Bisdorff
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+"""
 #######################
 from digraphsTools import * 
 from digraphs import *
@@ -539,7 +539,7 @@ class LinearVotingProfile(VotingProfile):
                               actionsList=None,\
                               SparseModel=False,\
                               minimalComponentSize=1, \
-                              RankingRule='Copeland',\
+                              rankingRule='Copeland',\
                               quantiles=None,\
                               strategy='average', \
                               ndigits=0,\
@@ -562,7 +562,7 @@ class LinearVotingProfile(VotingProfile):
         t = PerformanceTableau(perfTabFileName)
         t.showHTMLPerformanceHeatmap(criteriaList=criteriaList, actionsList=actionsList,\
                               SparseModel=SparseModel, minimalComponentSize=minimalComponentSize, \
-                              RankingRule=RankingRule, quantiles=quantiles, strategy=strategy, \
+                              rankingRule=rankingRule, quantiles=quantiles, strategy=strategy, \
                               ndigits=ndigits, colorLevels=colorLevels, \
                               pageTitle=pageTitle, \
                               Correlations=True, Threading=Threading, nbrOfCPUs=nbrOfCPUs, Debug=Debug)
