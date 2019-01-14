@@ -10,7 +10,6 @@ sortingDigraphs.py
 votingProfiles.py
 linearOrders.py
 weakOrders.py
-iqagent.py
 graphs.py
 randomNumbers.py
 randomDigraphs.py

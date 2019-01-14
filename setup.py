@@ -23,8 +23,8 @@ if CythonInstalled:
                       'outrankingDigraphs','performanceQuantiles',\
             'sortingDigraphs','votingProfiles',\
             'linearOrders','weakOrders',\
-            'iqagent','graphs','htmlmodel','randomNumbers','randomDigraphs','randomPerfTabs',
-            'bigOutrankingDigraphs','sparseOutrankingDigraphs','xmcda'],
+            'graphs','htmlmodel','randomNumbers','randomDigraphs',\
+            'randomPerfTabs', 'sparseOutrankingDigraphs','xmcda'],
           ext_modules=cythonize("cython/*.pyx",language_level=3),
           license='http://leopold-loewenheim.uni.lu/Digraph3/digraph3_copyright.html',
           url='http://leoopold-loewenheim.uni.lu/docDigraph3/',
@@ -40,9 +40,9 @@ else:
           py_modules=['arithmetics','digraphsTools','digraphs','perfTabs',
                       'outrankingDigraphs','performanceQuantiles',\
             'sortingDigraphs','votingProfiles',\
-            'linearOrders','weakOrders',\
-            'iqagent','graphs','htmlmodel','randomNumbers','randomDigraphs','randomPerfTabs',
-            'bigOutrankingDigraphs','sparseOutrankingDigraphs','xmcda'],
+            'linearOrders','weakOrders','graphs','htmlmodel','randomNumbers',\
+            'randomDigraphs','randomPerfTabs','sparseOutrankingDigraphs',\
+                      'xmcda'],
           license='http://leopold-loewenheim.uni.lu/Digraph3/digraph3_copyright.html',
           url='http://leoopold-loewenheim.uni.lu/docDigraph3/',
           description='Lets you add bipolar graph and digraphs methods to your applications',
