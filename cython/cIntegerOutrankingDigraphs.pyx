@@ -159,17 +159,17 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
 
     Example Python session:
         >>> from cRandPerfTabs import *
-        >>> t = RandomPerformanceTableau(numberOfActions=9,seed=100)
-        >>> t
+        >>> tc = cRandomPerformanceTableau(numberOfActions=9,seed=100)
+        >>> tc
         *------- PerformanceTableau instance description ------*
-        Instance class   : RandomPerformanceTableau
+        Instance class   : cRandomPerformanceTableau
         Instance name    : cRandomperftab
         # Actions        : 9
         # Criteria       : 7
         Attributes       : ['name', 'actions', 'criteria', 'evaluation', 'weightPreorder']
         >>> from cIntegerOutrankingDigraphs import *
-        >>> ig = IntegerBipolarOutrankingDigraph(t)
-        >>> ig
+        >>> idg = IntegerBipolarOutrankingDigraph(tc)
+        >>> idg
         *------- Object instance description ------*
         Instance class   : IntegerBipolarOutrankingDigraph
         Instance name    : rel_cRandomperftab
@@ -185,7 +185,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         Compute relation : 0.00202
         Gamma sets       : 0.00006
         #Threads         : 1
-        >>> ig.showRelationTable()
+        >>> idg.showRelationTable()
         * ---- Relation Table -----
          R  |   '0' '1' '2' '3' '4' '5' '6' '7' '8'   
         ----|--------------------------------------
@@ -198,7 +198,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         '6' |   +3  +5  +5  +4  +3  +2  +0  +1  +3  
         '7' |   +5  +5  +3  +4  +3  +7  +1  +0  +5  
         '8' |   +1  +3  +2  +7  +0  +2  +2  +0  +0  
-        >>> ig.showRubisBestChoiceRecommendation()
+        >>> idg.showRubisBestChoiceRecommendation()
         ***********************
         Rubis best choice recommendation(s) (BCR)
          (in decreasing order of determinateness)   

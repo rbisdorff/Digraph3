@@ -15,7 +15,7 @@ def testSparseOutrankingDigraph():
     print('==>> Testing SparseOutrankingDigraph instantiation')
     MP = True
     t0 = time()
-    ctp = Random3ObjectivesPerformanceTableau(numberOfActions=100,seed=100)
+    ctp = cRandom3ObjectivesPerformanceTableau(numberOfActions=100,seed=100)
     print(ctp)
     print(time()-t0)
     print(total_size(ctp.evaluation))
@@ -41,7 +41,7 @@ def testMinimalComponentSize():
     print('==>> Testing SparseOutrankingDigraph with minimal Component Size instantiation')
     MP = False
     t0 = time()
-    tp = RandomCBPerformanceTableau(numberOfActions=200,Threading=MP,seed=None)
+    tp = cRandomCBPerformanceTableau(numberOfActions=200,Threading=MP,seed=None)
     print(time()-t0)
     print(total_size(tp.evaluation))
     bg1 = SparseIntegerOutrankingDigraph(tp,quantiles=5,quantilesOrderingStrategy='average',
@@ -53,7 +53,7 @@ def testMinimalComponentSize():
     bg1.showDecomposition()
     print(bg1)
     bg1.showRelationTable()
-    tp = RandomPerformanceTableau(numberOfActions=200,seed=None)
+    tp = cRandomPerformanceTableau(numberOfActions=200,seed=None)
     print(tp.criteria)
     bg2 = SparseIntegerOutrankingDigraph(tp,quantiles=35,quantilesOrderingStrategy='average',
                                 LowerClosed=False,
@@ -70,7 +70,7 @@ def testMinimalComponentSize():
 def testBestChoiceRecommendation():
     print('==>> Testing ordinal correlations')
     MP = True
-    tp = RandomCBPerformanceTableau(numberOfActions=200,Threading=MP,seed=None)
+    tp = cRandomCBPerformanceTableau(numberOfActions=200,Threading=MP,seed=None)
     print(tp)
     bg2 = SparseIntegerOutrankingDigraph(tp,quantiles=35,quantilesOrderingStrategy='average',
                                 LowerClosed=False,
@@ -96,7 +96,7 @@ def testSparseModelFitness():
     for s in range(Nsim):
         s += 1
         print(s)
-        tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrOfActions,numberOfCriteria=nbrOfCriteria,seed=s)
+        tp = cRandom3ObjectivesPerformanceTableau(numberOfActions=nbrOfActions,numberOfCriteria=nbrOfCriteria,seed=s)
         print(tp)
         tp.showObjectives()
         bg1 = SparseIntegerOutrankingDigraph(tp,quantiles=qTiles,quantilesOrderingStrategy='average',
@@ -133,7 +133,7 @@ def testcQuantilesRankingFitness():
     statistics = {'correlation': 0.0, 'determination': 0.0}
     for s in range(Nsim):
         print(s)
-        tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrOfActions,numberOfCriteria=nbrOfCriteria)
+        tp = cRandom3ObjectivesPerformanceTableau(numberOfActions=nbrOfActions,numberOfCriteria=nbrOfCriteria)
         tp.showObjectives()
         bg1 = cQuantilesRankingDigraph(tp,quantiles=qTiles,quantilesOrderingStrategy='average',
                                 LowerClosed=False,

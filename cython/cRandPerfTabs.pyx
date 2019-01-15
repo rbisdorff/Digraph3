@@ -379,7 +379,7 @@ class cPerformanceTableau(PerformanceTableau):
 
 ############ Specialized cPerformanceTableau models ################
 
-class RandomPerformanceTableau(cPerformanceTableau):
+class cRandomPerformanceTableau(cPerformanceTableau):
     """
     Specialization of the cPerformanceTableau class for generating a temporary
     random performance tableau.
@@ -640,7 +640,7 @@ class RandomPerformanceTableau(cPerformanceTableau):
         self.weightPreorder = self.computeWeightPreorder()
 
 # -----------------
-class RandomRankPerformanceTableau(cPerformanceTableau):
+class cRandomRankPerformanceTableau(cPerformanceTableau):
     """
     Specialization of the cPerformanceTableau class for generating a temporary
     random performance tableau.
@@ -757,7 +757,7 @@ class RandomRankPerformanceTableau(cPerformanceTableau):
 # ------------------------------
 
 
-class RandomCoalitionsPerformanceTableau(cPerformanceTableau):
+class cRandomCoalitionsPerformanceTableau(cPerformanceTableau):
     """
     Full automatic generation of performance tableaux with random coalitions of criteria
 
@@ -1133,7 +1133,7 @@ class RandomCoalitionsPerformanceTableau(cPerformanceTableau):
         self.evaluation = evaluation
         self.weightPreorder = self.computeWeightPreorder()
 
-class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
+class cRandom3ObjectivesPerformanceTableau(cPerformanceTableau):
     """
     Specialization of the cPerformanceTableau
     for 3 objectives: *Eco*, *Soc* and *Env*.
@@ -1536,7 +1536,7 @@ class Random3ObjectivesPerformanceTableau(cPerformanceTableau):
                 print('  profile:   ',actions[x]['profile'])
         
 #---------------
-class RandomCBPerformanceTableau(cPerformanceTableau):
+class cRandomCBPerformanceTableau(cPerformanceTableau):
     """
     Full automatic generation of random
     Cost versus Benefit oriented performance tableaux.
@@ -1569,7 +1569,7 @@ class RandomCBPerformanceTableau(cPerformanceTableau):
                  int samplingSize = 100000,\
                  commonMode = None,\
                  int valueDigits = 2,\
-                 float missingDataProbability = 0.0,\
+                 float missingDataProbability = 0.05,\
                  #BigData=False,\
                  seed = None,\
                  bint Threading = False,\

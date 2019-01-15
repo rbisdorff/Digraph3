@@ -8461,264 +8461,6 @@ instances from a given argPerfTab instance.</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="cRandPerfTabs.Random3ObjectivesPerformanceTableau">
-<em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">Random3ObjectivesPerformanceTableau</code><a class="headerlink" href="#cRandPerfTabs.Random3ObjectivesPerformanceTableau" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau" title="cRandPerfTabs.cPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">cRandPerfTabs.cPerformanceTableau</span></code></a></p>
-<p>Specialization of the cPerformanceTableau
-for 3 objectives: <em>Eco</em>, <em>Soc</em> and <em>Env</em>.</p>
-<p>Each decision action is qualified at random as weak (-), fair (~) or good (+)
-on each of the three objectives.</p>
-<dl class="docutils">
-<dt><em>Parameters</em>:</dt>
-<dd><ul class="first last">
-<li><p class="first">numberOf Actions := 20 (default),</p>
-</li>
-<li><p class="first">number of Criteria := 13 (default),</p>
-</li>
-<li><dl class="first docutils">
-<dt>weightDistribution := ‘equiobjectives’ (default)</dt>
-<dd><div class="first last line-block">
-<div class="line">‘equisignificant’ (weights set all to 1)</div>
-<div class="line">‘random’ (in the range 1 to numberOfCriteria),</div>
-</div>
-</dd>
-</dl>
-</li>
-<li><p class="first">weightScale := [1,numerOfCriteria] (random default),</p>
-</li>
-<li><dl class="first docutils">
-<dt>commonScale := (0.0, 100.0) (default)</dt>
-<dd><div class="first last line-block">
-<div class="line">(0.0,10.0) if OrdinalScales == True,</div>
-</div>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>commonThresholds := ((Ind,Ind_slope),(Pref,Pref_slope),(Veto,Veto_slope)) with</dt>
-<dd><div class="first last line-block">
-<div class="line">Ind &lt; Pref &lt; Veto in [0.0,100.0] such that </div>
-<div class="line">(Ind/100.0*span + Ind_slope*x) &lt; (Pref/100.0*span + Pref_slope*x) &lt; (Pref/100.0*span + Pref_slope*x)</div>
-<div class="line">By default [(0.05*span,0.0),(0.10*span,0.0),(0.60*span,0.0)] if OrdinalScales=False</div>
-<div class="line">By default [(0.1*span,0.0),(0.2*span,0.0),(0.8*span,0.0)] otherwise</div>
-<div class="line">with span = commonScale[1] - commonScale[0].</div>
-</div>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt>commonMode := [‘triangular’,’variable’,0.50] (default), A constant mode may be provided.</dt>
-<dd><div class="first last line-block">
-<div class="line">[‘uniform’,’variable’,None], a constant range may be provided.</div>
-<div class="line">[‘beta’,’variable’,None] (three alpha, beta combinations:</div>
-<div class="line">(5.8661,2.62203),(5.05556,5.05556) and (2.62203, 5.8661)</div>
-<div class="line">chosen by default for ‘good’, ‘fair’ and ‘weak’ evaluations. </div>
-<div class="line">Constant parameters may be provided.</div>
-</div>
-</dd>
-</dl>
-</li>
-<li><p class="first">valueDigits := 2 (default, for cardinal scales only),</p>
-</li>
-<li><p class="first">vetoProbability := x in ]0.0-1.0[ (0.5 default), probability that a cardinal criterion shows a veto preference discrimination threshold.</p>
-</li>
-<li><p class="first">missingDataProbability := x in ]0.0-1.0[ (0.05 default), probability that an action x criterion evaluation is missing.</p>
-</li>
-<li><p class="first">Debug := True / False (default).</p>
-</li>
-</ul>
-</dd>
-</dl>
-<dl class="attribute">
-<dt id="cRandPerfTabs.Random3ObjectivesPerformanceTableau.showActions">
-<code class="descname">showActions</code><a class="headerlink" href="#cRandPerfTabs.Random3ObjectivesPerformanceTableau.showActions" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt><em>Parameter</em>:</dt>
-<dd><ul class="first last simple">
-<li>Alphabetic=False</li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="cRandPerfTabs.Random3ObjectivesPerformanceTableau.showObjectives">
-<code class="descname">showObjectives</code><a class="headerlink" href="#cRandPerfTabs.Random3ObjectivesPerformanceTableau.showObjectives" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="cRandPerfTabs.RandomCBPerformanceTableau">
-<em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">RandomCBPerformanceTableau</code><a class="headerlink" href="#cRandPerfTabs.RandomCBPerformanceTableau" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau" title="cRandPerfTabs.cPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">cRandPerfTabs.cPerformanceTableau</span></code></a></p>
-<p>Full automatic generation of random
-Cost versus Benefit oriented performance tableaux.</p>
-<p>Parameters:</p>
-<blockquote>
-<div><ul class="simple">
-<li>If numberOfActions == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated</li>
-<li>If numberOfCriteria == None, a uniform random number between 5 and 21 of cost or benefit criteria (1/3 respectively 2/3 probability) is instantiated</li>
-<li>weightDistribution := {‘equiobjectives’|’fixed’|’random’|’equisignificant’ (default = ‘equisignificant’)}</li>
-<li>default weightScale for ‘random’ weightDistribution is 1 - numberOfCriteria</li>
-<li>commonScale parameter is obsolete. The scale of cost criteria is cardinal or ordinal (0-10) with proabailities 1/4 respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal with probabilities 2/3, respectively 1/3.</li>
-<li>All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.</li>
-<li>commonThresholds is obsolete. Preference discrimination is specified as percentiles of concerned performance differences (see below).</li>
-<li>CommonPercentiles = {‘ind’:0.05, ‘pref’:0.10, [‘weakveto’:0.90,] ‘veto’:‘95} are expressed in centiless (reversed for vetoes) and only concern cardinal criteria.</li>
-<li>missingDataProbability := x in ]0.0-1.0[ (0.05 default), probability that an action x criterion evaluation is missing.</li>
-</ul>
-</div></blockquote>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Minimal number of decision actions required is 3 !</p>
-</div>
-</dd></dl>
-
-<dl class="class">
-<dt id="cRandPerfTabs.RandomCoalitionsPerformanceTableau">
-<em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">RandomCoalitionsPerformanceTableau</code><a class="headerlink" href="#cRandPerfTabs.RandomCoalitionsPerformanceTableau" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau" title="cRandPerfTabs.cPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">cRandPerfTabs.cPerformanceTableau</span></code></a></p>
-<p>Full automatic generation of performance tableaux with random coalitions of criteria</p>
-<dl class="docutils">
-<dt><em>Parameters</em>:</dt>
-<dd><ul class="first last simple">
-<li>numberOf Actions := 20 (default)</li>
-<li>number of Criteria := 13 (default)</li>
-<li>weightDistribution := ‘equisignificant’ (default with all weights = 1.0), ‘random’, ‘fixed’ (default w_1 = numberOfCriteria-1, w_{i!=1} = 1</li>
-<li>weightScale := [1,numerOfCriteria] (random default), [w_1, w_{i!=1] (fixed)</li>
-<li>commonScale := (0.0, 100.0) (default)</li>
-<li>commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalSacles, [(0.10001*span,0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].</li>
-<li>commonMode := [‘triangular’,50.0,0.50] (default), [‘uniform’,None,None], [‘beta’, None,None] (three alpha, beta combinations (5.8661,2.62203) chosen by default for high(‘+’), medium (‘~’) and low (‘-‘) evaluations.</li>
-<li>valueDigits := 2 (default, for cardinal scales only)</li>
-<li>Coalitions := True (default)/False, three coalitions if True</li>
-<li>VariableGenerators := True (default) / False, variable high(‘+’), medium (‘~’) or low (‘-‘) law generated evaluations.</li>
-<li>OrdinalScales := True / False (default)</li>
-<li>Debug := True / False (default)</li>
-<li>RandomCoalitions = True / False (default) zero or more than three coalitions if Coalitions == False.</li>
-<li>vetoProbability := x in ]0.0-1.0[ / None (default), probability that a cardinal criterion shows a veto preference discrimination threshold.</li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="class">
-<dt id="cRandPerfTabs.RandomPerformanceTableau">
-<em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">RandomPerformanceTableau</code><a class="headerlink" href="#cRandPerfTabs.RandomPerformanceTableau" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau" title="cRandPerfTabs.cPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">cRandPerfTabs.cPerformanceTableau</span></code></a></p>
-<p>Specialization of the cPerformanceTableau class for generating a temporary
-random performance tableau.</p>
-<dl class="docutils">
-<dt><em>Parameters</em>:</dt>
-<dd><ul class="first last">
-<li><p class="first">numberOfActions := nbr of decision actions.</p>
-</li>
-<li><p class="first">numberOfCriteria := number performance criteria.</p>
-</li>
-<li><dl class="first docutils">
-<dt>weightDistribution := ‘random’ (default) | ‘fixed’ | ‘equisignificant’.</dt>
-<dd><div class="first last line-block">
-<div class="line">If ‘random’, weights are uniformly selected randomly</div>
-<div class="line">form the given weight scale;</div>
-<div class="line">If ‘fixed’, the weightScale must provided a corresponding weights</div>
-<div class="line">distribution;</div>
-<div class="line">If ‘equisignificant’, all criterion weights are put to unity.</div>
-</div>
-</dd>
-</dl>
-</li>
-<li><p class="first">weightScale := [Min,Max] (default =[1,numberOfCriteria].</p>
-</li>
-<li><p class="first">IntegerWeights := True (in the BigData format)</p>
-</li>
-<li><p class="first">commonScale := [Min;Max]; common performance measuring scales (default = [0;100])</p>
-</li>
-<li><p class="first">commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p)
-and considerable performance difference discrimination thresholds.</p>
-</li>
-<li><dl class="first docutils">
-<dt>commonMode := common random distribution of random performance measurements:</dt>
-<dd><div class="first last line-block">
-<div class="line">(‘uniform’,Min,Max), uniformly distributed between min and max values. </div>
-<div class="line">(‘normal’,mu,sigma), truncated Gaussion distribution. </div>
-<div class="line">(‘triangular’,mode,repartition), generalized triangular distribution </div>
-<div class="line">(‘beta’,mode,(alpha,beta)), by default Mode=None, alpha=beta=2.</div>
-</div>
-</dd>
-</dl>
-</li>
-<li><p class="first">valueDigits := &lt;integer&gt;, precision of performance measurements
-(2 decimal digits by default).</p>
-</li>
-</ul>
-</dd>
-<dt>Code example::</dt>
-<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceTableau</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">actions</span>
-<span class="go">OrderedDict([</span>
-<span class="go">(0: {&#39;name&#39;: &#39;a1&#39;}),</span>
-<span class="go">(1: {&#39;name&#39;: &#39;a2&#39;}),</span>
-<span class="go">(3: {&#39;name&#39;: &#39;a3&#39;})</span>
-<span class="go">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">criteria</span>
-<span class="go">OrderedDict([</span>
-<span class="go">(&#39;g1&#39;: {&#39;thresholds&#39;: {&#39;ind&#39; : (10.0, 0.0) ),</span>
-<span class="go">                           &#39;veto&#39;: (80.0, 0.0) ),</span>
-<span class="go">                           &#39;pref&#39;: (20.0, 0.0) },</span>
-<span class="go">            &#39;scale&#39;: (0.0, 100.0),</span>
-<span class="go">            &#39;weight&#39;: 1,</span>
-<span class="go">            &#39;name&#39;: &#39;cRandPerfTabs.RandomPerformanceTableau() instance&#39;,</span>
-<span class="go">            &#39;comment&#39;: &#39;Arguments: weightDistribution=random;</span>
-<span class="go">                weightScale=(1, 1); commonMode=None&#39;}).</span>
-<span class="go">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">evaluation</span>
-<span class="go">{&#39;g01&#39;: {0: 45.95, 1: 95.17, 2: 17.47.}}</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="class">
-<dt id="cRandPerfTabs.RandomRankPerformanceTableau">
-<em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">RandomRankPerformanceTableau</code><a class="headerlink" href="#cRandPerfTabs.RandomRankPerformanceTableau" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau" title="cRandPerfTabs.cPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">cRandPerfTabs.cPerformanceTableau</span></code></a></p>
-<p>Specialization of the cPerformanceTableau class for generating a temporary
-random performance tableau.</p>
-<p>Random generator for multiple criteria ranked (without ties) performances of a
-given number of decision actions. On each criterion,
-all decision actions are hence lineraly ordered. The RandomRankPerformanceTableau class is
-matching the RandomLinearVotingProfiles class (see the votingDigraphs module)</p>
-<dl class="docutils">
-<dt><em>Parameters</em>:</dt>
-<dd><ul class="first last">
-<li><p class="first">number of actions,</p>
-</li>
-<li><p class="first">number of performance criteria,</p>
-</li>
-<li><p class="first">weightDistribution := equisignificant | random (default, see RandomPerformanceTableau)</p>
-</li>
-<li><p class="first">weightScale := (1, 1 | numberOfCriteria (default when random))</p>
-</li>
-<li><p class="first">integerWeights := Boolean (True = default)</p>
-</li>
-<li><dl class="first docutils">
-<dt>commonThresholds (default) := {</dt>
-<dd><div class="first last line-block">
-<div class="line">‘ind’:(0,0),</div>
-<div class="line">‘pref’:(1,0),</div>
-<div class="line">‘veto’:(numberOfActions,0)</div>
-<div class="line">} (default)</div>
-</div>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="class">
 <dt id="cRandPerfTabs.cPerformanceTableau">
 <em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">cPerformanceTableau</code><span class="sig-paren">(</span><em>filePerfTab=None</em>, <em>isEmpty=False</em><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
@@ -8838,6 +8580,264 @@ to int format.</p>
 <a class="reference internal image-reference" href="_images/perfTabsExample.png"><img alt="HTML heat map of the performance tableau" class="align-center" src="_images/perfTabsExample.png" style="width: 600px;" /></a>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="class">
+<dt id="cRandPerfTabs.cRandom3ObjectivesPerformanceTableau">
+<em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">cRandom3ObjectivesPerformanceTableau</code><a class="headerlink" href="#cRandPerfTabs.cRandom3ObjectivesPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau" title="cRandPerfTabs.cPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">cRandPerfTabs.cPerformanceTableau</span></code></a></p>
+<p>Specialization of the cPerformanceTableau
+for 3 objectives: <em>Eco</em>, <em>Soc</em> and <em>Env</em>.</p>
+<p>Each decision action is qualified at random as weak (-), fair (~) or good (+)
+on each of the three objectives.</p>
+<dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last">
+<li><p class="first">numberOf Actions := 20 (default),</p>
+</li>
+<li><p class="first">number of Criteria := 13 (default),</p>
+</li>
+<li><dl class="first docutils">
+<dt>weightDistribution := ‘equiobjectives’ (default)</dt>
+<dd><div class="first last line-block">
+<div class="line">‘equisignificant’ (weights set all to 1)</div>
+<div class="line">‘random’ (in the range 1 to numberOfCriteria),</div>
+</div>
+</dd>
+</dl>
+</li>
+<li><p class="first">weightScale := [1,numerOfCriteria] (random default),</p>
+</li>
+<li><dl class="first docutils">
+<dt>commonScale := (0.0, 100.0) (default)</dt>
+<dd><div class="first last line-block">
+<div class="line">(0.0,10.0) if OrdinalScales == True,</div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>commonThresholds := ((Ind,Ind_slope),(Pref,Pref_slope),(Veto,Veto_slope)) with</dt>
+<dd><div class="first last line-block">
+<div class="line">Ind &lt; Pref &lt; Veto in [0.0,100.0] such that </div>
+<div class="line">(Ind/100.0*span + Ind_slope*x) &lt; (Pref/100.0*span + Pref_slope*x) &lt; (Pref/100.0*span + Pref_slope*x)</div>
+<div class="line">By default [(0.05*span,0.0),(0.10*span,0.0),(0.60*span,0.0)] if OrdinalScales=False</div>
+<div class="line">By default [(0.1*span,0.0),(0.2*span,0.0),(0.8*span,0.0)] otherwise</div>
+<div class="line">with span = commonScale[1] - commonScale[0].</div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>commonMode := [‘triangular’,’variable’,0.50] (default), A constant mode may be provided.</dt>
+<dd><div class="first last line-block">
+<div class="line">[‘uniform’,’variable’,None], a constant range may be provided.</div>
+<div class="line">[‘beta’,’variable’,None] (three alpha, beta combinations:</div>
+<div class="line">(5.8661,2.62203),(5.05556,5.05556) and (2.62203, 5.8661)</div>
+<div class="line">chosen by default for ‘good’, ‘fair’ and ‘weak’ evaluations. </div>
+<div class="line">Constant parameters may be provided.</div>
+</div>
+</dd>
+</dl>
+</li>
+<li><p class="first">valueDigits := 2 (default, for cardinal scales only),</p>
+</li>
+<li><p class="first">vetoProbability := x in ]0.0-1.0[ (0.5 default), probability that a cardinal criterion shows a veto preference discrimination threshold.</p>
+</li>
+<li><p class="first">missingDataProbability := x in ]0.0-1.0[ (0.05 default), probability that an action x criterion evaluation is missing.</p>
+</li>
+<li><p class="first">Debug := True / False (default).</p>
+</li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="cRandPerfTabs.cRandom3ObjectivesPerformanceTableau.showActions">
+<code class="descname">showActions</code><a class="headerlink" href="#cRandPerfTabs.cRandom3ObjectivesPerformanceTableau.showActions" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt><em>Parameter</em>:</dt>
+<dd><ul class="first last simple">
+<li>Alphabetic=False</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cRandPerfTabs.cRandom3ObjectivesPerformanceTableau.showObjectives">
+<code class="descname">showObjectives</code><a class="headerlink" href="#cRandPerfTabs.cRandom3ObjectivesPerformanceTableau.showObjectives" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="cRandPerfTabs.cRandomCBPerformanceTableau">
+<em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">cRandomCBPerformanceTableau</code><a class="headerlink" href="#cRandPerfTabs.cRandomCBPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau" title="cRandPerfTabs.cPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">cRandPerfTabs.cPerformanceTableau</span></code></a></p>
+<p>Full automatic generation of random
+Cost versus Benefit oriented performance tableaux.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li>If numberOfActions == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated</li>
+<li>If numberOfCriteria == None, a uniform random number between 5 and 21 of cost or benefit criteria (1/3 respectively 2/3 probability) is instantiated</li>
+<li>weightDistribution := {‘equiobjectives’|’fixed’|’random’|’equisignificant’ (default = ‘equisignificant’)}</li>
+<li>default weightScale for ‘random’ weightDistribution is 1 - numberOfCriteria</li>
+<li>commonScale parameter is obsolete. The scale of cost criteria is cardinal or ordinal (0-10) with proabailities 1/4 respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal with probabilities 2/3, respectively 1/3.</li>
+<li>All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.</li>
+<li>commonThresholds is obsolete. Preference discrimination is specified as percentiles of concerned performance differences (see below).</li>
+<li>CommonPercentiles = {‘ind’:0.05, ‘pref’:0.10, [‘weakveto’:0.90,] ‘veto’:‘95} are expressed in centiless (reversed for vetoes) and only concern cardinal criteria.</li>
+<li>missingDataProbability := x in ]0.0-1.0[ (0.05 default), probability that an action x criterion evaluation is missing.</li>
+</ul>
+</div></blockquote>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Minimal number of decision actions required is 3 !</p>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="cRandPerfTabs.cRandomCoalitionsPerformanceTableau">
+<em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">cRandomCoalitionsPerformanceTableau</code><a class="headerlink" href="#cRandPerfTabs.cRandomCoalitionsPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau" title="cRandPerfTabs.cPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">cRandPerfTabs.cPerformanceTableau</span></code></a></p>
+<p>Full automatic generation of performance tableaux with random coalitions of criteria</p>
+<dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last simple">
+<li>numberOf Actions := 20 (default)</li>
+<li>number of Criteria := 13 (default)</li>
+<li>weightDistribution := ‘equisignificant’ (default with all weights = 1.0), ‘random’, ‘fixed’ (default w_1 = numberOfCriteria-1, w_{i!=1} = 1</li>
+<li>weightScale := [1,numerOfCriteria] (random default), [w_1, w_{i!=1] (fixed)</li>
+<li>commonScale := (0.0, 100.0) (default)</li>
+<li>commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalSacles, [(0.10001*span,0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].</li>
+<li>commonMode := [‘triangular’,50.0,0.50] (default), [‘uniform’,None,None], [‘beta’, None,None] (three alpha, beta combinations (5.8661,2.62203) chosen by default for high(‘+’), medium (‘~’) and low (‘-‘) evaluations.</li>
+<li>valueDigits := 2 (default, for cardinal scales only)</li>
+<li>Coalitions := True (default)/False, three coalitions if True</li>
+<li>VariableGenerators := True (default) / False, variable high(‘+’), medium (‘~’) or low (‘-‘) law generated evaluations.</li>
+<li>OrdinalScales := True / False (default)</li>
+<li>Debug := True / False (default)</li>
+<li>RandomCoalitions = True / False (default) zero or more than three coalitions if Coalitions == False.</li>
+<li>vetoProbability := x in ]0.0-1.0[ / None (default), probability that a cardinal criterion shows a veto preference discrimination threshold.</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="cRandPerfTabs.cRandomPerformanceTableau">
+<em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">cRandomPerformanceTableau</code><a class="headerlink" href="#cRandPerfTabs.cRandomPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau" title="cRandPerfTabs.cPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">cRandPerfTabs.cPerformanceTableau</span></code></a></p>
+<p>Specialization of the cPerformanceTableau class for generating a temporary
+random performance tableau.</p>
+<dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last">
+<li><p class="first">numberOfActions := nbr of decision actions.</p>
+</li>
+<li><p class="first">numberOfCriteria := number performance criteria.</p>
+</li>
+<li><dl class="first docutils">
+<dt>weightDistribution := ‘random’ (default) | ‘fixed’ | ‘equisignificant’.</dt>
+<dd><div class="first last line-block">
+<div class="line">If ‘random’, weights are uniformly selected randomly</div>
+<div class="line">form the given weight scale;</div>
+<div class="line">If ‘fixed’, the weightScale must provided a corresponding weights</div>
+<div class="line">distribution;</div>
+<div class="line">If ‘equisignificant’, all criterion weights are put to unity.</div>
+</div>
+</dd>
+</dl>
+</li>
+<li><p class="first">weightScale := [Min,Max] (default =[1,numberOfCriteria].</p>
+</li>
+<li><p class="first">IntegerWeights := True (in the BigData format)</p>
+</li>
+<li><p class="first">commonScale := [Min;Max]; common performance measuring scales (default = [0;100])</p>
+</li>
+<li><p class="first">commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p)
+and considerable performance difference discrimination thresholds.</p>
+</li>
+<li><dl class="first docutils">
+<dt>commonMode := common random distribution of random performance measurements:</dt>
+<dd><div class="first last line-block">
+<div class="line">(‘uniform’,Min,Max), uniformly distributed between min and max values. </div>
+<div class="line">(‘normal’,mu,sigma), truncated Gaussion distribution. </div>
+<div class="line">(‘triangular’,mode,repartition), generalized triangular distribution </div>
+<div class="line">(‘beta’,mode,(alpha,beta)), by default Mode=None, alpha=beta=2.</div>
+</div>
+</dd>
+</dl>
+</li>
+<li><p class="first">valueDigits := &lt;integer&gt;, precision of performance measurements
+(2 decimal digits by default).</p>
+</li>
+</ul>
+</dd>
+<dt>Code example::</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceTableau</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">actions</span>
+<span class="go">OrderedDict([</span>
+<span class="go">(0: {&#39;name&#39;: &#39;a1&#39;}),</span>
+<span class="go">(1: {&#39;name&#39;: &#39;a2&#39;}),</span>
+<span class="go">(3: {&#39;name&#39;: &#39;a3&#39;})</span>
+<span class="go">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">criteria</span>
+<span class="go">OrderedDict([</span>
+<span class="go">(&#39;g1&#39;: {&#39;thresholds&#39;: {&#39;ind&#39; : (10.0, 0.0) ),</span>
+<span class="go">                           &#39;veto&#39;: (80.0, 0.0) ),</span>
+<span class="go">                           &#39;pref&#39;: (20.0, 0.0) },</span>
+<span class="go">            &#39;scale&#39;: (0.0, 100.0),</span>
+<span class="go">            &#39;weight&#39;: 1,</span>
+<span class="go">            &#39;name&#39;: &#39;cRandPerfTabs.RandomPerformanceTableau() instance&#39;,</span>
+<span class="go">            &#39;comment&#39;: &#39;Arguments: weightDistribution=random;</span>
+<span class="go">                weightScale=(1, 1); commonMode=None&#39;}).</span>
+<span class="go">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">evaluation</span>
+<span class="go">{&#39;g01&#39;: {0: 45.95, 1: 95.17, 2: 17.47.}}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="cRandPerfTabs.cRandomRankPerformanceTableau">
+<em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">cRandomRankPerformanceTableau</code><a class="headerlink" href="#cRandPerfTabs.cRandomRankPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau" title="cRandPerfTabs.cPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">cRandPerfTabs.cPerformanceTableau</span></code></a></p>
+<p>Specialization of the cPerformanceTableau class for generating a temporary
+random performance tableau.</p>
+<p>Random generator for multiple criteria ranked (without ties) performances of a
+given number of decision actions. On each criterion,
+all decision actions are hence lineraly ordered. The RandomRankPerformanceTableau class is
+matching the RandomLinearVotingProfiles class (see the votingDigraphs module)</p>
+<dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last">
+<li><p class="first">number of actions,</p>
+</li>
+<li><p class="first">number of performance criteria,</p>
+</li>
+<li><p class="first">weightDistribution := equisignificant | random (default, see RandomPerformanceTableau)</p>
+</li>
+<li><p class="first">weightScale := (1, 1 | numberOfCriteria (default when random))</p>
+</li>
+<li><p class="first">integerWeights := Boolean (True = default)</p>
+</li>
+<li><dl class="first docutils">
+<dt>commonThresholds (default) := {</dt>
+<dd><div class="first last line-block">
+<div class="line">‘ind’:(0,0),</div>
+<div class="line">‘pref’:(1,0),</div>
+<div class="line">‘veto’:(numberOfActions,0)</div>
+<div class="line">} (default)</div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>

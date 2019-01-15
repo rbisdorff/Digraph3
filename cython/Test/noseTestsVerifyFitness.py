@@ -21,7 +21,7 @@ def testSparseModelFitness():
     statistics = {'correlation': 0.0, 'determination': 0.0}
     for s in range(Nsim):
         print(s)
-        tp = RandomCBPerformanceTableau(numberOfActions=nbrOfActions,seed=s)
+        tp = cRandomCBPerformanceTableau(numberOfActions=nbrOfActions,seed=s)
         bg1 = SparseIntegerOutrankingDigraph(tp,quantiles=35,quantilesOrderingStrategy='average',
                                 LowerClosed=False,
                                 CopyPerfTab=True,
