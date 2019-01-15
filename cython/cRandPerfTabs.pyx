@@ -51,8 +51,12 @@ class cPerformanceTableau(PerformanceTableau):
         actions = OrderedDict()
         for x in self.actions:
             xName = self.actions[x]['name']
+            try:
+                sName = self.actions[x]['shortName']
+            except KeyError:
+                sName = xName
             actions[xName] = {'id':x,'name': xName,
-                              'shortname': xName}
+                              'shortname': sName}
         t.actions = actions
         evaluation = {}
         for g in t.criteria:
