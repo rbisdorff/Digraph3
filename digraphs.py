@@ -6706,7 +6706,7 @@ class Digraph(object):
 
     def circuitMinCredibility(self,circ):
         """
-        Renders the minimal linking credibility of a COC.
+        Renders the minimal linking credibility of a Chordless Circuit.
         """
         actions = self.actions
         Max = self.valuationdomain['max']
@@ -6728,7 +6728,7 @@ class Digraph(object):
 
     def circuitMaxCredibility(self,circ):
         """
-        Renders the minimal linking credibility of a COC.
+        Renders the maximal linking credibility of a Chordless Circuit.
         """
         actions = self.actions
         Min = self.valuationdomain['min']
@@ -6765,7 +6765,7 @@ class Digraph(object):
 
     def circuitAverageCredibility(self,circ):
         """
-        Renders the average linking credibility of a COC.
+        Renders the average linking credibility of a Chordless Circuit.
         """
         actions = self.actions
         n = len(actions)
@@ -6783,7 +6783,7 @@ class Digraph(object):
 
     def circuitCredibilities(self,circuit,Debug=False):
         """
-        Renders the average linking credibilities and the minimal link of a COC.
+        Renders the average linking credibilities and the minimal link of a Chordless Circuit.
 
         """
         if Debug:
@@ -6934,9 +6934,9 @@ class Digraph(object):
 
     # -----  graph restrictions methods
 
-    def domkernelrestrict(self, choice):
+    def domkernelrestrict(self, prekernel):
         """
-        Parameter: prekernel
+        Parameter: dominant prekernel
         Renders dominant prekernel restricted relation.
         """
         actions = self.actions
@@ -6950,17 +6950,17 @@ class Digraph(object):
                 #relation_k[x][y] = {}
                 if x == y:
                     relation_k[x][y] = Min
-                elif x in choice and y in choice:
+                elif x in prekernel and y in prekernel:
                     relation_k[x][y] = relation[x][y]
-                elif x in choice and relation[x][y] > Med:
+                elif x in prekernel and relation[x][y] > Med:
                     relation_k[x][y] = relation[x][y]
-                elif y in choice and relation[x][y] < Med:
+                elif y in prekernel and relation[x][y] < Med:
                     relation_k[x][y] = relation[x][y]
                 else:
                     relation_k[x][y] = Med
         return relation_k
 
-    def abskernelrestrict(self, choice):
+    def abskernelrestrict(self, prekernel):
         """
         Parameter: prekernel
         Renders absorbent prekernel restricted relation.
@@ -6976,11 +6976,11 @@ class Digraph(object):
                 #relation_k[x][y] = {}
                 if x == y:
                     relation_k[x][y] = Min
-                elif x in choice and y in choice:
+                elif x in prekernel and y in prekernel:
                     relation_k[x][y] = relation[x][y]
-                elif x in choice and relation[x][y] < Med:
+                elif x in prekernel and relation[x][y] < Med:
                     relation_k[x][y] = relation[x][y]
-                elif y in choice and relation[x][y] > Med:
+                elif y in prekernel and relation[x][y] > Med:
                     relation_k[x][y] = relation[x][y]
                 else:
                     relation_k[x][y] = Med
@@ -6989,8 +6989,8 @@ class Digraph(object):
 
     def showRubyChoice(self,Comments=False,_OldCoca=True):
         """
-        dummy for showRubisBestChoiceRecommendation()
-        older versions compatibility
+        Dummy for showRubisBestChoiceRecommendation()
+        needed for older versions compatibility.
         """
         self.showRubisBestChoiceRecommendation(Comments=Comments,_OldCoca=_OldCoca)
 

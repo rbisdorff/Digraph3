@@ -154,8 +154,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         * hasNoVeto: veto desactivation flag (False by default).
         * hasBipolarVeto: bipolar versus electre veto activation (true by default).
         * Threading: False by default. Allows to profit from SMP machines via the Python multiprocessing module.
-        * nbrCores: controls the maximal number of cores that will be used in the multiprocessing phases.
-          If None is given, the os.cpu_count method is used in order to determine the number of availble cores on the SMP machine.
+        * nbrCores: controls the maximal number of cores that will be used in the multiprocessing phases. If None is given, the os.cpu_count method is used in order to determine the number of availble cores on the SMP machine.
 
     Example Python session:
         >>> from cRandPerfTabs import *
