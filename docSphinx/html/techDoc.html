@@ -2909,7 +2909,7 @@ a digraph of all k-choices collapsed actions.</p>
 <span id="randomdigraphs-module"></span><span id="randomdigraphs-label"></span><h2><a class="toc-backref" href="#id12">randomDigraphs module</a><a class="headerlink" href="#module-randomDigraphs" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="randomDigraphs.RandomDigraph">
-<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomDigraph</code><span class="sig-paren">(</span><em>order=9</em>, <em>arcProbability=0.5</em>, <em>hasIntegerValuation=True</em>, <em>Bipolar=True</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomDigraphs.html#RandomDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomDigraphs.RandomDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomDigraph</code><span class="sig-paren">(</span><em>order=9</em>, <em>arcProbability=0.5</em>, <em>IntegerValuation=True</em>, <em>Bipolar=True</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomDigraphs.html#RandomDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomDigraphs.RandomDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <p>Specialization of the general Digraph class for generating
 temporary crisp (irreflexive) random crisp digraphs.</p>
@@ -2917,7 +2917,8 @@ temporary crisp (irreflexive) random crisp digraphs.</p>
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
 <li>order (default = 10);</li>
-<li>arc_probability (in [0.,1.], default=0.5)</li>
+<li>arcProbability (in [0.,1.], default=0.5)</li>
+<li>IntegerValuation (default = True);</li>
 <li>If Bipolar=True, valuation domain = {-1,1} otherwise = {0,1}</li>
 <li>Is seed != None, the random generator is seeded</li>
 </ul>
@@ -2979,7 +2980,7 @@ temporary randomly oriented Grid digraphs of dimension n time m
 
 <dl class="class">
 <dt id="randomDigraphs.RandomTournament">
-<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomTournament</code><span class="sig-paren">(</span><em>order=10, ndigits=2, isCrisp=True, valuationDomain=[-1, 1], seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomDigraphs.html#RandomTournament"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomDigraphs.RandomTournament" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomTournament</code><span class="sig-paren">(</span><em>order=10, ndigits=2, Crisp=True, valuationDomain=[-1, 1], seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomDigraphs.html#RandomTournament"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomDigraphs.RandomTournament" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <p>Specialization of the general Digraph class for generating
 temporary weak tournaments</p>
@@ -2996,7 +2997,7 @@ temporary weak tournaments</p>
 
 <dl class="class">
 <dt id="randomDigraphs.RandomValuationDigraph">
-<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomValuationDigraph</code><span class="sig-paren">(</span><em>order=9</em>, <em>ndigits=2</em>, <em>Normalized=True</em>, <em>hasIntegerValuation=False</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomDigraphs.html#RandomValuationDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomDigraphs.RandomValuationDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomValuationDigraph</code><span class="sig-paren">(</span><em>order=9</em>, <em>ndigits=2</em>, <em>Normalized=True</em>, <em>IntegerValuation=False</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomDigraphs.html#RandomValuationDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomDigraphs.RandomValuationDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <p>Specialization of the general Digraph class for generating
 temporary uniformly valuated random digraphs.</p>
@@ -3004,10 +3005,10 @@ temporary uniformly valuated random digraphs.</p>
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
 <li>order &gt; 0, number of arcs;</li>
-<li>ndigits &gt; 0, number of digits if hasIntegerValuation = True;
-Otherwise, decimal precision.</li>
+<li>ndigits &gt; 0, number of digits if IntegerValuation = True, 
+otherwise number of decimals;</li>
 <li>Normalized = True (r in [-1,1], r in [0,1] if False/default);</li>
-<li>hasIntegerValuation = False (default)</li>
+<li>IntegerValuation = False (default)</li>
 <li>If seed != none, the random generator is seeded</li>
 </ul>
 </dd>
@@ -3057,7 +3058,7 @@ Otherwise, decimal precision.</li>
 
 <dl class="class">
 <dt id="randomDigraphs.RandomWeakTournament">
-<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomWeakTournament</code><span class="sig-paren">(</span><em>order=10</em>, <em>ndigits=2</em>, <em>hasIntegerValuation=False</em>, <em>weaknessDegree=0.25</em>, <em>seed=None</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomDigraphs.html#RandomWeakTournament"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomDigraphs.RandomWeakTournament" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomDigraphs.</code><code class="descname">RandomWeakTournament</code><span class="sig-paren">(</span><em>order=10</em>, <em>ndigits=2</em>, <em>IntegerValuation=False</em>, <em>weaknessDegree=0.25</em>, <em>seed=None</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomDigraphs.html#RandomWeakTournament"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomDigraphs.RandomWeakTournament" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <p>Specialization of the general Digraph class for generating
 temporary bipolar-valued weak tournaments</p>
@@ -3066,7 +3067,7 @@ temporary bipolar-valued weak tournaments</p>
 <dd><ul class="first last simple">
 <li>order = n &gt; 0</li>
 <li>weaknessDegree in [0.0,1.0]: proportion of indeterminate links (default = 0.25)</li>
-<li>If hasIntegerValuation = True,
+<li>If IntegerValuation = True,
 valuation domain = [-pow(10,ndigits); + pow(10,ndigits)]
 else valuation domain = [-1.0,1.0]</li>
 <li>If seed != None, the random number generator is seeded</li>

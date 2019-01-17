@@ -51,27 +51,20 @@ def testWeakTournaments():
     t.showRelationTable(ndigits=3)
     t = RandomWeakTournament(order=5,weaknessDegree=0.5)
     t.showRelationTable()
-    t = RandomWeakTournament(order=5,hasIntegerValuation=True)
+    t = RandomWeakTournament(order=5,IntegerValuation=True)
     t.showRelationTable()
 
 def testRandomTournament():
     print('*----- test RandomTournament -----*')
-    t = RandomTournament(order=5,ndigits=3,isCrisp=False)
+    t = RandomTournament(order=5,ndigits=3,Crisp=False)
     t.showRelationTable()
-    t = RandomTournament(order=5,isCrisp=True)
+    t = RandomTournament(order=5,Crisp=True)
     t.showRelationTable()
     t = RandomTournament(order=5,valuationDomain=(-10,10))
     t.showRelationTable()
 
 def testIntegerRandomDigraph():
     print('==>> Testing Integer RandomDigraph() class instantiation ')
-    g = RandomDigraph(order=10,hasIntegerValuation=True)
+    g = RandomDigraph(order=10,IntegerValuation=True)
     g.save()
     g.computeChordlessCircuits(Comments=True,Debug=True)
-
-##def testRandomTree():  # obsolete see graphs module
-##    print('*---- random tree instance generation ---*')
-##    t = RandomTree(numberOfNodes=10)
-##    t.showAll()
-##    t.exportGraphViz()
-

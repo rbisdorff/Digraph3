@@ -36,14 +36,15 @@ class RandomDigraph(Digraph):
     
     *Parameters*:
         * order (default = 10);
-        * arc_probability (in [0.,1.], default=0.5)
+        * arcProbability (in [0.,1.], default=0.5)
+        * IntegerValuation (default = True);
         * If Bipolar=True, valuation domain = {-1,1} otherwise = {0,1}
         * Is seed != None, the random generator is seeded 
 
      """
 
     def __init__(self,order=9,arcProbability=0.5,
-                 hasIntegerValuation=True, Bipolar=True,
+                 IntegerValuation=True, Bipolar=True,
                  seed=None):
 
         arcProbability = Decimal(str(arcProbability))
@@ -75,7 +76,7 @@ class RandomDigraph(Digraph):
             valuationdomain['min'] = Min
             valuationdomain['max'] = Max
             valuationdomain['med'] = Med
-            valuationdomain['hasIntegerValuation'] = hasIntegerValuation
+            valuationdomain['hasIntegerValuation'] = IntegerValuation
             self.valuationdomain = valuationdomain
             relation = {}
             for x in actions.keys():
@@ -103,10 +104,10 @@ class RandomValuationDigraph(Digraph):
 
     *Parameters*:
         * order > 0, number of arcs;
-        * ndigits > 0, number of digits if hasIntegerValuation = True;
-          Otherwise, decimal precision.
+        * ndigits > 0, number of digits if IntegerValuation = True, 
+          otherwise number of decimals;
         * Normalized = True (r in [-1,1], r in [0,1] if False/default);
-        * hasIntegerValuation = False (default)
+        * IntegerValuation = False (default)
         * If seed != none, the random generator is seeded
 
 
@@ -153,7 +154,7 @@ class RandomValuationDigraph(Digraph):
 
     def __init__(self,order=9, ndigits=2,
                  Normalized=True,
-                 hasIntegerValuation=False,
+                 IntegerValuation=False,
                  seed = None):
         import random
         random.seed(seed)
@@ -167,18 +168,18 @@ class RandomValuationDigraph(Digraph):
         self.actions = actions
 ##        actionsList = [x for x in self.actions]
 ##        actionsList.sort()
-        if hasIntegerValuation:
+        if IntegerValuation:
             precision = pow(10,ndigits) - 1
         else:
             precision = pow(10,ndigits)
-        if hasIntegerValuation:
+        if IntegerValuation:
             self.valuationdomain = {'min':-precision, 'med':0, 'max':precision}
         else:
             if Normalized:
                  self.valuationdomain = {'min':Decimal('-1.0'), 'med':Decimal('0.0'), 'max':Decimal('1.0')}
             else:
                 self.valuationdomain = {'min':Decimal('0'), 'med':Decimal('0.5'), 'max':Decimal('1.0')}
-        self.valuationdomain['hasIntegerValuation'] = hasIntegerValuation
+        self.valuationdomain['hasIntegerValuation'] = IntegerValuation
         Med = self.valuationdomain['med']
         relation = {}
         for x in actions.keys():
@@ -188,7 +189,7 @@ class RandomValuationDigraph(Digraph):
                 if x == y:
                     rx[y] = Med
                 else:
-                    if hasIntegerValuation:
+                    if IntegerValuation:
                         rx[y] = (2*random.randrange(start=0,stop=precision)) - precision
                     elif Normalized:
                         rx[y] = (Decimal(str(round(float(random.randrange(start=0,stop=precision))/precision,ndigits))) * Decimal('2.0')) - Decimal('1.0')
@@ -206,7 +207,7 @@ class RandomWeakTournament(Digraph):
     *Parameters*:
         * order = n > 0
         * weaknessDegree in [0.0,1.0]: proportion of indeterminate links (default = 0.25)
-        * If hasIntegerValuation = True,
+        * If IntegerValuation = True,
           valuation domain = [-pow(10,ndigits); + pow(10,ndigits)]
           else valuation domain = [-1.0,1.0]
         * If seed != None, the random number generator is seeded
@@ -214,7 +215,7 @@ class RandomWeakTournament(Digraph):
     """
 
     def __init__(self,order=10,ndigits=2,
-                 hasIntegerValuation=False,
+                 IntegerValuation=False,
                  weaknessDegree=0.25,
                  seed=None,
                  Comments=False):
@@ -241,7 +242,7 @@ class RandomWeakTournament(Digraph):
         Med = 0
         precision = Max
         dPrecision = Decimal(str(precision))
-        if hasIntegerValuation:
+        if IntegerValuation:
             self.valuationdomain = {'hasIntegerValuation':True, 'min':Decimal(str(Min)), 'med':Decimal('0'), 'max':Decimal(str(Max))}
         else:
             self.valuationdomain = {'hasIntegerValuation':False, 'min':Decimal('-1.0'), 'med':Decimal('0.0'), 'max':Decimal('1.0')}
@@ -272,7 +273,7 @@ class RandomWeakTournament(Digraph):
                     u2 = Decimal(str(random.randint(0,precision)))
 
                     if u < weaknessDegree: # i = j
-                        if hasIntegerValuation:
+                        if IntegerValuation:
                             randeval1 = u1
                             randeval2 = u2
                         else:
@@ -280,7 +281,7 @@ class RandomWeakTournament(Digraph):
                             randeval2 = u2/dPrecision
 
                     elif u < forwardDegree: # i > j
-                        if hasIntegerValuation:
+                        if IntegerValuation:
                             randeval1 = u1
                             randeval2 = Min + u2
                         else:
@@ -288,14 +289,14 @@ class RandomWeakTournament(Digraph):
                             randeval2 = (Min + u2)/dPrecision
 
                     else: # j > i
-                        if hasIntegerValuation:
+                        if IntegerValuation:
                             randeval1 = Min + u1
                             randeval2 = u2
                         else:
                             randeval1 = (Min + u1)/dPrecision
                             randeval2 = u2/dPrecision
 
-                    if hasIntegerValuation:
+                    if IntegerValuation:
                         rai[actionsList[j]] = Decimal(str(randeval1))
                         relation[actionsList[j]][actionsList[i]] = Decimal(str(randeval2))
                     else:
@@ -324,7 +325,7 @@ class RandomTournament(Digraph):
     """
 
     def __init__(self,order=10,ndigits=2,
-                 isCrisp=True,
+                 Crisp=True,
                  valuationDomain=[-1,1],
                  seed=None):
         import random
@@ -380,7 +381,7 @@ class RandomTournament(Digraph):
                     rai[actionsList[j]] = Med
                 else:
                     u = random.randint(0,precision)
-                    if isCrisp:
+                    if Crisp:
                         if u < Decimal(str(precision))/Decimal('2'):
                             rai[actionsList[j]] = Min
                             raj[actionsList[i]] = Max
@@ -528,90 +529,7 @@ class RandomFixedDegreeSequenceDigraph(Digraph):
                     self.relation = relation.copy()
                     self.gamma = self.gammaSets()
 
-##class _RandomTree(Digraph):
-##    """
-##    Random generator for trees, using random Pruefer codes
-##
-##    Parameter:
-##        numerOfNodes
-##
-##    """
-##    def __init__(self,numberOfNodes=5, ndigits=0, hasIntegerValuation=True, seed=None):
-##        import random
-##        random.seed(seed)
-##        from decimal import Decimal
-##        self.name = 'randomTree'
-##        self.order = numberOfNodes
-##        # generate actions oredered dictionary
-##        nd = len(str(order))
-####        actions = OrderedDict()
-####        for i in range(order):
-####            actionKey = ('a%%0%dd' % nd) % (i+1)
-####            actions[actionKey] = {'shortName':actionKey, 'name': 'random decision action'}
-####        self.actions = actions
-##        actions = OrderedDict()
-##        nodes = [str(x+1) for x in range(numberOfNodes)]
-##        for x in nodes:
-##            actions[x] = {'name': 'node %s' % x}
-##        self.actions = actions
-##        print(actions)
-##        # set valuation domain
-##        precision = pow(10,ndigits)
-##        if hasIntegerValuation:
-##            self.valuationdomain = {'min':-precision, 'med':0, 'max':precision}
-##        else:
-##            self.valuationdomain = {'min':Decimal('-1.0'), 'med':Decimal('0.0'), 'max':Decimal('1.0')}
-##        self.valuationdomain['hasIntegerValuation'] = hasIntegerValuation
-##        # init empty relation dictionary
-##        relation = {}
-####        nodeKeys = [x for x in actions]
-####        print(nodeKeys)
-##        for x in actions.keys():
-##            relation[x] = {}
-##            for y in actions.keys():
-##                relation[x][y] = self.valuationdomain['min']
-##        # generate a random pruefer code
-##        nodes = [x for x in range(len(nodeKeys))]
-##        pruefer = []
-##        for i in range(len(nodeKeys)-2):
-##            pruefer.append(random.choice(nodes))
-##        print(pruefer)
-##        # contruct the corresponding relation (a tree)
-##        pairs = self._prufer_to_tree(pruefer)
-##        for (i,j) in pairs:
-##            relation[str(i+1)][str(j+1)] = self.valuationdomain['max']
-##            relation[str(j+1)][str(i+1)] = self.valuationdomain['max']
-##        self.relation = relation
-##        # generate neighboring sets
-##        self.gamma = self.gammaSets()
-##        self.notGamma = self.notGammaSets()
-##
-##    def _prufer_to_tree(self,a):
-##        tree = []
-##        T = list(range(0, len(a)+2))
-##        print(T)
-##        # the degree of each node is how many times it appears
-##        # in the sequence
-##        deg = [1]*len(T)
-##        print(deg)
-##        for i in a: deg[i] += 1
-##
-##        # for each node label i in a, find the first node j with degree 1 and add
-##        # the edge (j, i) to the tree
-##        for i in a:
-##            for j in T:
-##                if deg[j] == 1:
-##                    tree.append((i,j))
-##                    # decrement the degrees of i and j
-##                    deg[i] -= 1
-##                    deg[j] -= 1
-##                    break
-##
-##        last = [x for x in T if deg[x] == 1]
-##        tree.append((last[0],last[1]))
-##
-##        return tree
-
+#######################################
 
 class RandomRegularDigraph(Digraph):
     """
@@ -691,6 +609,8 @@ class RandomRegularDigraph(Digraph):
                 self.gamma = self.gammaSets()
                 self.notGamma = self.notGammaSets()
                 self.componentslist = self.components()
+
+###############################3
 
 class RandomGridDigraph(GridDigraph):
     """
@@ -807,7 +727,7 @@ if __name__ == "__main__":
 ##    rg2.showRelationTable()
     
 ##    dg = RandomValuationDigraph(Normalized=True,
-##                                #hasIntegerValuation=True,
+##                                #IntegerValuation=True,
 ##                                ndigits=2,
 ##                                seed=1)
 ##    dg.showRelationTable()

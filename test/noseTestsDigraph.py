@@ -382,7 +382,7 @@ def testWeakTournaments():
     t.showRelationTable(ndigits=3)
     t = RandomWeakTournament(order=5,weaknessDegree=0.5)
     t.showRelationTable()
-    t = RandomWeakTournament(order=5,hasIntegerValuation=True)
+    t = RandomWeakTournament(order=5,IntegerValuation=True)
     t.showRelationTable()
 
 # def testXMCDAPerformanceTableauLoading():
@@ -589,9 +589,9 @@ def testChordlessOddCircuits():
 
 def testRandomTournament():
     print('*----- test RandomTournament -----*')
-    t = RandomTournament(order=5,ndigits=3,isCrisp=False)
+    t = RandomTournament(order=5,ndigits=3,Crisp=False)
     t.showRelationTable()
-    t = RandomTournament(order=5,isCrisp=True)
+    t = RandomTournament(order=5,Crisp=True)
     t.showRelationTable()
     t = RandomTournament(order=5,valuationDomain=(-10,10))
     t.showRelationTable()
@@ -610,7 +610,7 @@ def testChordlessCircuits():
 
 def testIntegerRandomDigraph():
     print('==>> Testing Integer RandomDigraph() class instantiation ')
-    g = RandomDigraph(order=10,hasIntegerValuation=True)
+    g = RandomDigraph(order=10,IntegerValuation=True)
     g.save()
     g.computeChordlessCircuits(Comments=True,Debug=True)
 
@@ -791,7 +791,7 @@ def testEquivDigraph():
 
 def testUnaryOperatorsNegationInverse():
     print('*----- test negation and inverse operators (- ~) ----*')
-    g1 = RandomValuationDigraph(Normalized=True,hasIntegerValuation=True)
+    g1 = RandomValuationDigraph(Normalized=True,IntegerValuation=True)
     g1.showRelationTable()
     g1.computeValuationStatistics(Comments=True)
     dg1 = -g1

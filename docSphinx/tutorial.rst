@@ -9,10 +9,11 @@ Tutorials of the Digraph3 resources
    .......
 
    This PDF document contains a set of tutorials introducing the main objects like digraphs, outranking digraphs, performance tableaux and voting profiles available in the Digraph3 Python software resources ( see html documentation 
-   here <https://digraph3.readthedocs.io/en/latest/index.html> for the corresponding HTML version). Some of the tutorials are problem oriented and show how to compute the winner of an election, how to build a best choice recommendation, or how to rate or linearly rank with multiple incommensurable ranking criteria.
-   There is also a tutorial provided on undirected graphs and a last tutorial
-   illustrates how to compute non isomorphic maximal independent sets
-   in the n-cycle graph.
+   here <https://digraph3.readthedocs.io/en/latest/index.html> for the corresponding HTML version).
+
+   Some of the tutorials are problem oriented and show how to compute the potential winner(s) of an election, how to build a best choice recommendation, or how to rate or linearly rank with multiple incommensurable ranking criteria.
+
+   More graph theoretical tutorials follow. One on working with undirected graphs, followed by a tutorial on how to compute non isomorphic maximal independent sets in the n-cycle graph. A last tutorial is finally devoted on how to compute kernels in graphs, digraphs and more specifically in outranking digraphs. 
    
 :Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg FSTC/CSC
 :Version: Revision: Python 3.6
@@ -3021,14 +3022,197 @@ The command :py:func:`digraphs.Digraph.showOrbits` renders now the labelled repr
 
 The corresponding group stabilizers' sizes and frequencies -- orbit 1 with 12 symmetry axes, orbit 2 with 8 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 11-13), are illustrated in the corresponding unlabelled graphs of *Figure-1* below.
 
-.. image:: c12.png
-   :width: 400 px
-   :align: center
-   :alt: The 4 non isomorphic MIS of the 12-cycle graph
+.. figure:: c12.png
+    :width: 400 px
+    :align: center
+    :alt: The 4 non isomorphic MIS of the 12-cycle graph
 
-*Figure-1: The symmetry axes of the four non isomorphic MISs of the 12-cycle graph*:
+    *Figure-1: The symmetry axes of the four non isomorphic MISs of the 12-cycle graph*:
 
-The non isomorphic MISs in the 12-cycle graph represent in fact all the ways one may write the number 12 as the circular sum of '2's and '3's without distinguishing opposite directions of writing. The first orbit corresponds to writing six times a '2'; the second orbit corresponds to writing four times a '3'. The third and fourth orbit correspond to writing two times a '3' and three times a '2'. There are two non isomorphic ways to do this latter circular sum. Either separating the '3's by one and two '2's, or by zero and three '2's (see Bisdorff & Marichal [ISOMIS-08]_ ).  
+The non isomorphic MISs in the 12-cycle graph represent in fact all the ways one may write the number 12 as the circular sum of '2's and '3's without distinguishing opposite directions of writing. The first orbit corresponds to writing six times a '2'; the second orbit corresponds to writing four times a '3'. The third and fourth orbit correspond to writing two times a '3' and three times a '2'. There are two non isomorphic ways to do this latter circular sum. Either separating the '3's by one and two '2's, or by zero and three '2's (see Bisdorff & Marichal [ISOMIS-08]_ ).
+
+.. _Kernel-Tutorial-label:
+
+Computing kernels in graphs and digraphs
+----------------------------------------
+
+.. contents:: 
+	:depth: 2
+	:local:
+
+What is a kernel in graph or digraph?
+.....................................
+
+We call **choice set** in a graph, respectively a digraph, a subset of its vertices, resp. of its nodes or actions. A choice set *Y* is called **internally stable** or **independent** when there exist **no links** (edges) or relations between its members. Furthermore, a choice set *Y* is called **externally stable** when for each vertex, node or action *x* not in *Y*, there exists at least a member *y* of *Y* such that *x* is linked or related to *y*. Now, an internally **and** externally stable choice set is called a **kernel**. Finally, in a bipolarly-valued context, we call **prekernel** a choice set which is **externally stable** and for which the **internal stability** condition is **valid or indeterminate**, that is not violated. All kernels are hence aso prekernels, but not vice-versa. 
+
+A first trivial example is immediately given by the MISs of the n-cycle graph. Indeed, each MIS in the n-cycle graph is by definition independent, ie internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See for instance the four non isomorphic MISs of the 12-cycle graph below.
+
+.. figure:: c12.png
+    :width: 400 px
+    :align: center
+    :alt: The 4 non isomorphic kernels of the 12-cycle graph
+
+    *Figure-2*: The four non isomorphic kernels of the 12-cycle graph
+
+In all graph or symmetric digraph, the maximility condition imposed on the internal stability implies automatically the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice set, then we may safely add this vertex or node without violating the internal stability condition. All kernels must hence be maximal independent choices. In fact, in a topolgical sense, they correspond to maximal **holes** in the given graph relation.
+
+We may illustrate this coincidence between MISs and kernels in this context  with the following random 3-regular graph instance.
+
+    >>> from graphs import *
+    >>> g = RandomRegularGraph(order=12,degree=3,seed=100)
+    >>> g.exportGraphViz('random3RegularGraph')
+    *---- exporting a dot file for GraphViz tools ---------*
+    Exporting to random3RegularGraph.dot
+    fdp -Tpng random3RegularGraph.dot -o random3RegularGraph.png
+
+.. figure:: random3RegularGraph.png
+    :width: 400 px
+    :align: center
+    :alt: A random 3-regular graph instance
+
+    *Figure-3*: A random 3-regular graph instance
+
+A random  maximal independent choice set in this graph may be computed for instance by using the :py:class:`graphs.MISModel` class constructor from the :py:mod:`graphs` module.
+
+    >>> m = MISModel(g)
+    Iteration:  1
+    Running a Gibbs Sampler for 660 step !
+    {'a06', 'a02', 'a12', 'a10'}  is maximal !
+    >>> m.exportGraphViz('random3RegularGraph_mis')
+    *---- exporting a dot file for GraphViz tools ---------*
+    Exporting to randomRegularGraph-mis.dot
+    fdp -Tpng randomRegularGraph-mis.dot -o randomRegularGraph-mis.png
+
+    .. figure:: random3RegularGraph-mis.png
+        :width: 400 px
+        :align: center
+        :alt: A random MIS colored in the graph.
+
+        *Figure-4*: A random MIS colored in the graph
+
+It is easily verified in the Figure above, that the computed MIS renders indeed a valid kernel of the given graph. The complete set of kernels of this 3-regular graph instance may be computed as follows. 
+
+    >>> g.showMIS()
+    *---  Maximal Independent Sets ---*
+    ['a01', 'a02', 'a03', 'a07']
+    ['a01', 'a04', 'a05', 'a08']
+    ['a04', 'a05', 'a08', 'a09']
+    ['a01', 'a04', 'a05', 'a10']
+    ['a04', 'a05', 'a09', 'a10']
+    ['a02', 'a03', 'a07', 'a12']
+    ['a01', 'a03', 'a07', 'a11']
+    ['a05', 'a08', 'a09', 'a11']
+    ['a03', 'a07', 'a11', 'a12']
+    ['a07', 'a09', 'a11', 'a12']
+    ['a08', 'a09', 'a11', 'a12']
+    ['a04', 'a05', 'a06', 'a08']
+    ['a04', 'a05', 'a06', 'a10']
+    ['a02', 'a04', 'a06', 'a10']
+    ['a02', 'a03', 'a06', 'a12']
+    ['a02', 'a06', 'a10', 'a12']
+    ['a01', 'a02', 'a04', 'a07', 'a10']
+    ['a02', 'a04', 'a07', 'a09', 'a10']
+    ['a02', 'a07', 'a09', 'a10', 'a12']
+    ['a01', 'a03', 'a05', 'a08', 'a11']
+    ['a03', 'a05', 'a06', 'a08', 'a11']
+    ['a03', 'a06', 'a08', 'a11', 'a12']
+    number of solutions:  22
+    cardinality distribution
+    card.:  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    freq.:  [0, 0, 0, 0, 16, 6, 0, 0, 0, 0, 0, 0, 0]
+    execution time: 0.00045 sec.
+    Results in self.misset
+    >>> g.misset
+    [frozenset({'a02', 'a01', 'a07', 'a03'}),
+     frozenset({'a04', 'a01', 'a08', 'a05'}),
+     frozenset({'a09', 'a04', 'a08', 'a05'}),
+     ...
+     ...
+     frozenset({'a06', 'a02', 'a12', 'a10'}),
+     frozenset({'a06', 'a11', 'a08', 'a03', 'a05'}),
+     frozenset({'a03', 'a06', 'a11', 'a12', 'a08'})]
+
+Finally, we cannot resist in looking for non isomorphic kernels (MISs) in this 3-regular graph. To do so we must first convert the given graph instance into a digraph instance.
+
+    >>> dg = g.graph2Digraph()
+    >>> dg.automorphismGenerators()
+    *----- saving digraph in nauty dre format  -------------*
+    Actions index:
+    1 :  a01
+    2 :  a02
+    3 :  a03
+    4 :  a04
+    5 :  a05
+    6 :  a06
+    7 :  a07
+    8 :  a08
+    9 :  a09
+    10 :  a10
+    11 :  a11
+    12 :  a12
+    {'1': 'a01',  '2': 'a02', '3': 'a03', '4': 'a04',  '5': 'a05',
+     '6': 'a06',  '7': 'a07', '8': 'a08', '9': 'a09', '10': 'a10',
+    '11': 'a11', '12': 'a12'}
+    # automorphisms extraction from dre file #
+    # Using input file: randomRegularGraph.dre
+    echo '<randomRegularGraph.dre -m p >randomRegularGraph.auto x' | dreadnaut
+    # permutation = 1['1', '11', '7', '5', '4', '9', '3', '10', '6', '8', '2', '12']
+    >>> dg.showMIS()
+    ...
+    number of solutions:  22
+    cardinality distribution
+    card.:  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    freq.:  [0, 0, 0, 0, 16, 6, 0, 0, 0, 0, 0, 0, 0]
+    execution time: 0.00174 sec.
+    Results in self.misset
+    >>> dg.showOrbits(dg.misset)
+    *--- Isomorphic reduction of choices
+    ...
+    current representative:  frozenset({'a09', 'a11', 'a12', 'a08'})
+    length   :  4
+    number of isomorph choices 2
+    isormorph choices
+    ['a06', 'a02', 'a12', 'a10']
+    ['a09', 'a11', 'a12', 'a08']
+    ...
+    *---- Global result ----
+    Number of choices:  22
+    Number of orbits :  11
+    Labelled representatives:
+    ['a06', 'a04', 'a10', 'a05']
+    ['a09', 'a07', 'a10', 'a04', 'a02']
+    ['a06', 'a11', 'a12', 'a08', 'a03']
+    ['a04', 'a01', 'a10', 'a05']
+    ['a07', 'a02', 'a12', 'a03']
+    ['a09', 'a11', 'a12', 'a07']
+    ['a06', 'a04', 'a08', 'a05']
+    ['a06', 'a04', 'a02', 'a10']
+    ['a01', 'a11', 'a07', 'a03']
+    ['a01', 'a11', 'a08', 'a03', 'a05']
+    ['a09', 'a11', 'a12', 'a08']
+    Symmetry vector
+    stabilizer size  :  [1, 2]
+    frequency        :  [11, 0]
+
+In our random 3-regular graph instance here (see Fig. 3), we find eleven non isomorphic kernels with orbit sizes of 2 each time each. We illustrate below the orbit of the random MIS example shown previously:
+
+    .. figure:: random3RegularGraphKernelOrbit.png
+       :width: 700 px
+       :align: center
+       :alt: Two isomorphic kernels of the random 3-regular graph instance
+
+       *Figure 5*: Two isomorphic kernels of the random 3-regular graph instance
+
+Computing valued digraph kernels
+................................
+
+The kernel concept gets much richer, first in the context of oriented graphs, ie digraphs, and secondly when we take into account a bipolar characteristic valuation domain. 
+
+Computing prekernels in outranking digraphs
+...........................................
+
+To be written
+
 
 Links and appendices
 --------------------

@@ -33,7 +33,7 @@ pTests:
 
 tests:
 		for md in ${modules}; do \
-		    cp $$md pyDoc/; \
+		    cp $$md test/; \
 		done
 		(cd test; ${NOSETESTS} -v noseTestsArithmetics.py)
 		(cd test; ${NOSETESTS} -v noseTestsDigraph.py)
@@ -52,7 +52,7 @@ tests:
 
 verboseTests:
 		for md in ${modules}; do \
-		    cp $$md pyDoc/; \
+		    cp $$md test/; \
 		done
 		(cd test; ${NOSETESTS} -vs noseTestsArithmetics.py)
 		(cd test; ${NOSETESTS} -vs noseTestsDigraph.py)
@@ -70,145 +70,145 @@ verboseTests:
 
 digraphsTests:
 		for md in ${modules}; do \
-		    cp $$md pyDoc/; \
+		    cp $$md test/; \
 		done
 		(cd test; ${NOSETESTS} -v noseTestsDigraph.py)
 
 verboseDigraphsTests:
 		for md in ${modules}; do \
-		    cp $$md pyDoc/; \
+		    cp $$md test/; \
 		done
 		(cd test; ${NOSETESTS} -vs noseTestsDigraph.py)
 
 sparseOutrankingDigraphsTests:
 		for md in ${modules}; do \
-		    cp $$md pyDoc/; \
+		    cp $$md test/; \
 		done
 		(cd test; ${NOSETESTS} -v noseTestsSparseOutrankingDigraph.py)
 
 verboseSparseOutrankingDigraphsTests:
 		for md in ${modules}; do \
-		    cp $$md pyDoc/; \
+		    cp $$md test/; \
 		done
 		(cd test; ${NOSETESTS} -vs noseTestsSparseOutrankingDigraph.py)
 
 # bigOutrankingDigraphsTests:
 # 		for md in ${modules}; do \
-# 		    cp $$md pyDoc/; \
+# 		    cp $$md test/; \
 # 		done
 # 		(cd test; ${NOSETESTS} -v noseTestsBigOutrankingDigraph.py)
 
 # verboseBigOutrankingDigraphsTests:
 # 		for md in ${modules}; do \
-# 		    cp $$md pyDoc/; \
+# 		    cp $$md test/; \
 # 		done
 # 		(cd test; ${NOSETESTS} -vs noseTestsBigOutrankingDigraph.py)
 
 graphsTests:
 		for md in ${modules}; do \
-		    cp $$md pyDoc/; \
+		    cp $$md test/; \
 		done
 		(cd test; ${NOSETESTS} -v noseTestsGraph.py)
 
 verboseGraphsTests:
 		for md in ${modules}; do \
-		    cp $$md pyDoc/; \
+		    cp $$md test/; \
 		done
 		(cd test; ${NOSETESTS} -vs noseTestsGraph.py)
 
 perfTabsTests:
 		for md in ${modules}; do \
-		    cp $$md pyDoc/; \
+		    cp $$md test/; \
 		done
 		(cd test; ${NOSETESTS} -v noseTestsPerfTab.py)
 
 randomPerfTabsTests:
 		for md in ${modules}; do \
-		    cp $$md pyDoc/; \
+		    cp $$md test/; \
 		done
 		(cd test; ${NOSETESTS} -v noseTestsRandomPerfTab.py)
 
 verbosePerfTabsTests:
 		for md in ${modules}; do \
-		    cp $$md pyDoc/; \
+		    cp $$md test/; \
 		done
 		(cd test; ${NOSETESTS} -vs noseTestsPerfTab.py)
 
 verboseRandomPerfTabsTests:
 		for md in ${modules}; do \
-		    cp $$md pyDoc/; \
+		    cp $$md test/; \
 		done
 		(cd test; ${NOSETESTS} -vs noseTestsRandomPerfTab.py)
 
 outrankingDigraphsTests:
 		for md in ${modules}; do \
-		    cp $$md pyDoc/; \
+		    cp $$md test/; \
 		done
 		(cd test; ${NOSETESTS} -v noseTestsOutrankingDigraph.py)
 
 verboseOutrankingDigraphsTests:
 		for md in ${modules}; do \
-		    cp $$md pyDoc/; \
+		    cp $$md test/; \
 		done
 		(cd test; ${NOSETESTS} -vs noseTestsOutrankingDigraph.py)
 
 sortingDigraphsTests:
 		for md in ${modules}; do \
-		    cp $$md pyDoc/; \
+		    cp $$md test/; \
 		done
 		(cd test; ${NOSETESTS} -v noseTestsSortingDigraph.py)
 
 verboseSortingDigraphsTests:
 		for md in ${modules}; do \
-		    cp $$md pyDoc/; \
+		    cp $$md test/; \
 		done
 		(cd test; ${NOSETESTS} -vs noseTestsSortingDigraph.py)
 
 votingProfilesTests:
 		for md in ${modules}; do \
-		    cp $$md pyDoc/; \
+		    cp $$md test/; \
 		done
 		(cd test; ${NOSETESTS} -v noseTestsVotingProfile.py)
 
 verboseVotingProfilesTests:
 		for md in ${modules}; do \
-		    cp $$md pyDoc/; \
+		    cp $$md test/; \
 		done
 		(cd test; ${NOSETESTS} -vs noseTestsVotingProfile.py)
 
 linearOrdersTests:
 		for md in ${modules}; do \
-		    cp $$md pyDoc/; \
+		    cp $$md test/; \
 		done
 		(cd test; ${NOSETESTS} -v noseTestsLinearOrder.py)
 
 verboseLinearOrdersTests:
 		for md in ${modules}; do \
-		    cp $$md pyDoc/; \
+		    cp $$md test/; \
 		done
 		(cd test; ${NOSETESTS} -vs noseTestsLinearOrder.py)
 
 weakOrdersTests:
 		for md in ${modules}; do \
-		    cp $$md pyDoc/; \
+		    cp $$md test/; \
 		done
 		(cd test; ${NOSETESTS} -v noseTestsWeakOrders.py)
 
 verboseWeakOrdersTests:
 		for md in ${modules}; do \
-		    cp $$md pyDoc/; \
+		    cp $$md test/; \
 		done
 		(cd test; ${NOSETESTS} -vs noseTestsWeakOrders.py)
 
 randomDigraphsTests:
 		for md in ${modules}; do \
-		    cp $$md pyDoc/; \
+		    cp $$md test/; \
 		done
 		(cd test; ${NOSETESTS} -v noseTestsRandomDigraph.py)
 
 verboseRandomDigraphsTests:
 		for md in ${modules}; do \
-		    cp $$md pyDoc/; \
+		    cp $$md test/; \
 		done
 		(cd test; ${NOSETESTS} -vs noseTestsRandomDigraph.py)
 

@@ -975,8 +975,9 @@ class Graph(object):
         Converts a Graph object into a symmetric Digraph object.
         """
         from copy import deepcopy
-        from digraphs import EmptyDigraph
+        from digraphs import Digraph, EmptyDigraph
         dg = EmptyDigraph(order=self.order)
+        dg.__class__ = Digraph
         dg.name = deepcopy(self.name)
         dg.actions = deepcopy(self.vertices)
         dg.order = len(dg.actions)

@@ -1022,8 +1022,9 @@
 <span class="sd">        Converts a Graph object into a symmetric Digraph object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">EmptyDigraph</span>
+        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">Digraph</span><span class="p">,</span> <span class="n">EmptyDigraph</span>
         <span class="n">dg</span> <span class="o">=</span> <span class="n">EmptyDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">)</span>
+        <span class="n">dg</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">Digraph</span>
         <span class="n">dg</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="n">dg</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">)</span>
         <span class="n">dg</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dg</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
