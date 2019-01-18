@@ -3043,22 +3043,15 @@ Computing kernels in graphs and digraphs
 What is a kernel in graph or digraph?
 .....................................
 
-We call **choice set** in a graph, respectively a digraph, a subset of its vertices, resp. of its nodes or actions. A choice set *Y* is called **internally stable** or **independent** when there exist **no links** (edges) or relations between its members. Furthermore, a choice set *Y* is called **externally stable** when for each vertex, node or action *x* not in *Y*, there exists at least a member *y* of *Y* such that *x* is linked or related to *y*. Now, an internally **and** externally stable choice set is called a **kernel**. Finally, in a bipolarly-valued context, we call **prekernel** a choice set which is **externally stable** and for which the **internal stability** condition is **valid or indeterminate**, that is not violated. All kernels are hence aso prekernels, but not vice-versa. 
+We call **choice set** in a graph, respectively a digraph, a subset of its vertices, resp. of its nodes or actions. A choice set *Y* is called **internally stable** or **independent** when there exist **no links** (edges) or relations (arcs) between its members. Furthermore, a choice set *Y* is called **externally stable** when for each vertex, node or action *x* not in *Y*, there exists at least a member *y* of *Y* such that *x* is linked or related to *y*. Now, an internally **and** externally stable choice set is called a **kernel**.  
 
-A first trivial example is immediately given by the MISs of the n-cycle graph. Indeed, each MIS in the n-cycle graph is by definition independent, ie internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See for instance the four non isomorphic MISs of the 12-cycle graph below.
+A first trivial example is immediately given by the MISs of the n-cycle graph. Indeed, each MIS in the n-cycle graph is by definition independent, ie internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12-cycle graph as shown in Fig. 1 above. 
 
-.. figure:: c12.png
-    :width: 400 px
-    :align: center
-    :alt: The 4 non isomorphic kernels of the 12-cycle graph
+In all graph or symmetric digraph, the *maximality condition* imposed on the internal stability implies automatically the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice set, then we may safely add this vertex or node the choice set without violating its internal stability. All kernels must hence be maximal independent choices. In fact, in a topological sense, they correspond to maximal **holes** in the given graph.
 
-    *Figure-2*: The four non isomorphic kernels of the 12-cycle graph
+We may illustrate this coincidence between MISs and kernels in graphs  with the following random 3-regular graph instance.
 
-In all graph or symmetric digraph, the maximility condition imposed on the internal stability implies automatically the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice set, then we may safely add this vertex or node without violating the internal stability condition. All kernels must hence be maximal independent choices. In fact, in a topolgical sense, they correspond to maximal **holes** in the given graph relation.
-
-We may illustrate this coincidence between MISs and kernels in this context  with the following random 3-regular graph instance.
-
-    >>> from graphs import *
+    >>> from graphs import RandomRegularGraph
     >>> g = RandomRegularGraph(order=12,degree=3,seed=100)
     >>> g.exportGraphViz('random3RegularGraph')
     *---- exporting a dot file for GraphViz tools ---------*
@@ -3066,31 +3059,32 @@ We may illustrate this coincidence between MISs and kernels in this context  wit
     fdp -Tpng random3RegularGraph.dot -o random3RegularGraph.png
 
 .. figure:: random3RegularGraph.png
-    :width: 400 px
+    :width: 350 px
     :align: center
     :alt: A random 3-regular graph instance
 
-    *Figure-3*: A random 3-regular graph instance
+    *Figure-2*: A random 3-regular graph instance
 
-A random  maximal independent choice set in this graph may be computed for instance by using the :py:class:`graphs.MISModel` class constructor from the :py:mod:`graphs` module.
+A random MIS in this graph may be computed for instance by using the :py:class:`graphs.MISModel` class.
 
-    >>> m = MISModel(g)
+    >>> from graphs import MISModel
+    >>> mg = MISModel(g)
     Iteration:  1
     Running a Gibbs Sampler for 660 step !
     {'a06', 'a02', 'a12', 'a10'}  is maximal !
-    >>> m.exportGraphViz('random3RegularGraph_mis')
+    >>> mg.exportGraphViz('random3RegularGraph_mis')
     *---- exporting a dot file for GraphViz tools ---------*
-    Exporting to randomRegularGraph-mis.dot
-    fdp -Tpng randomRegularGraph-mis.dot -o randomRegularGraph-mis.png
+    Exporting to random3RegularGraph-mis.dot
+    fdp -Tpng random3RegularGraph-mis.dot -o random3RegularGraph-mis.png
 
     .. figure:: random3RegularGraph-mis.png
-        :width: 400 px
+        :width: 350 px
         :align: center
         :alt: A random MIS colored in the graph.
 
-        *Figure-4*: A random MIS colored in the graph
+        *Figure-3*: A random MIS colored in the random 3-regular graph
 
-It is easily verified in the Figure above, that the computed MIS renders indeed a valid kernel of the given graph. The complete set of kernels of this 3-regular graph instance may be computed as follows. 
+It is easily verified in Fig. 3 above, that the computed MIS renders indeed a valid kernel of the given graph. The complete set of kernels of this 3-regular graph instance coincides hence with the set of its MISs. 
 
     >>> g.showMIS()
     *---  Maximal Independent Sets ---*
@@ -3132,7 +3126,7 @@ It is easily verified in the Figure above, that the computed MIS renders indeed 
      frozenset({'a06', 'a11', 'a08', 'a03', 'a05'}),
      frozenset({'a03', 'a06', 'a11', 'a12', 'a08'})]
 
-Finally, we cannot resist in looking for non isomorphic kernels (MISs) in this 3-regular graph. To do so we must first convert the given graph instance into a digraph instance.
+We cannot resist here in looking for non isomorphic kernels (MISs, see previous tutorial) in this 3-regular graph. To do so we must first, convert the given *graph* instance into a *digraph* instance then, compute its automorphism generators, and finally compute the isomorphic orbits.
 
     >>> dg = g.graph2Digraph()
     >>> dg.automorphismGenerators()
@@ -3157,22 +3151,14 @@ Finally, we cannot resist in looking for non isomorphic kernels (MISs) in this 3
     # Using input file: randomRegularGraph.dre
     echo '<randomRegularGraph.dre -m p >randomRegularGraph.auto x' | dreadnaut
     # permutation = 1['1', '11', '7', '5', '4', '9', '3', '10', '6', '8', '2', '12']
-    >>> dg.showMIS()
-    ...
-    number of solutions:  22
-    cardinality distribution
-    card.:  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-    freq.:  [0, 0, 0, 0, 16, 6, 0, 0, 0, 0, 0, 0, 0]
-    execution time: 0.00174 sec.
-    Results in self.misset
-    >>> dg.showOrbits(dg.misset)
+    >>> dg.showOrbits(g.misset)
     *--- Isomorphic reduction of choices
     ...
     current representative:  frozenset({'a09', 'a11', 'a12', 'a08'})
     length   :  4
     number of isomorph choices 2
     isormorph choices
-    ['a06', 'a02', 'a12', 'a10']
+    ['a06', 'a02', 'a12', 'a10']  # <<== the random MIS shown in Fig. 4
     ['a09', 'a11', 'a12', 'a08']
     ...
     *---- Global result ----
@@ -3194,22 +3180,197 @@ Finally, we cannot resist in looking for non isomorphic kernels (MISs) in this 3
     stabilizer size  :  [1, 2]
     frequency        :  [11, 0]
 
-In our random 3-regular graph instance here (see Fig. 3), we find eleven non isomorphic kernels with orbit sizes of 2 each time each. We illustrate below the orbit of the random MIS example shown previously:
+In our random 3-regular graph instance (see Fig. 2), we may find eleven non isomorphic kernels with orbit sizes equal to two. We illustrate below the isomorphic twin of the random MIS example shown in Fig. 2:
 
     .. figure:: random3RegularGraphKernelOrbit.png
        :width: 700 px
        :align: center
        :alt: Two isomorphic kernels of the random 3-regular graph instance
 
-       *Figure 5*: Two isomorphic kernels of the random 3-regular graph instance
+       *Figure 4*: Two isomorphic kernels of the random 3-regular graph instance
 
-Computing valued digraph kernels
-................................
+All symmteric digraphs admid MISs, hence also kernels. In the context of digraphs, ie *oriented* graphs, the kernel concept gets much richer and separates from the symmetric MIS concept.  
 
-The kernel concept gets much richer, first in the context of oriented graphs, ie digraphs, and secondly when we take into account a bipolar characteristic valuation domain. 
 
-Computing prekernels in outranking digraphs
-...........................................
+Computing initial and terminal kernels
+......................................
+
+In an oriented graph context, the internal stability condition of the kernel concept remains untouched, however, the external stability condition gets indeed split up by laterality into two cases:
+     1. A **dominant** stability condition, where each non selected node is dominated by at least one member of the kernel;
+     2. An **absorbant** stability condition, where each non selected node is absorbed by at least one member of the kernel.
+
+A both *internally* and *dominant*, resp. *absorbent stable* choice set is called a *dominant* or **initial**, resp. an *absorbent* or **terminal** kernel. From a topological perspective, the initial kernel concept looks from the outside of the digraph into its interior, whereas the terminal kernel looks from the interior of a digraph towards its outside. From an algebraic perspective, the initial kernel is a prefix operand, and the terminal kernel is a suffix operand of the Berge kernel equation (see [BIS-2006]_ )
+
+Furthermore, as the kernel concept involves conjointly a **positive logical refutation** (the *internal stability*) and a **positive logical affirmation** (the *external stability*), it appeared rather quickly necessary in our operational developments to adopt a bipolar characteristic [-1,1] valuation domain, including explicitely a third **median** logical value (0) expressing logical **indeterminateness** (see [BIS-2000]_).
+
+In such a  bipolarly-valued context, we call **prekernel** a choice set which is **externally stable** and for which the **internal stability** condition is **valid or indeterminate**. We say that the independence condition is in this case only **weakly** valiadated. Notice that all kernels are hence aso prekernels, but not vice-versa.
+
+In a symmetric digraph, where there is no apparent laterality, all kernels are initial *and* terminal at the same time. They correspond to what we have called *holes* in the graph. An *universal* example is given by the **complete** digraph.
+
+    >>> from digraphs import CompleteDigraph
+    >>> u = CompleteDigraph(order=5)
+    >>> u
+    *------- Digraph instance description ------*
+    Instance class   : CompleteDigraph
+    Instance name    : complete
+    Digraph Order      : 5
+    Digraph Size       : 20
+    Valuation domain : [-1.00 - 1.00]
+    ...
+    >>> u.showPreKernels()
+    *--- Computing preKernels ---*
+    Dominant kernels :
+    ['1'] independence: 1.0; dominance : 1.0; absorbency : 1.0
+    ['2'] independence: 1.0; dominance : 1.0; absorbency : 1.0
+    ['3'] independence: 1.0; dominance : 1.0; absorbency : 1.0
+    ['4'] independence: 1.0; dominance : 1.0; absorbency : 1.0
+    ['5'] independence: 1.0; dominance : 1.0; absorbency : 1.0
+    Absorbent kernels :
+    ['1'] independence: 1.0; dominance : 1.0; absorbency : 1.0
+    ['2'] independence: 1.0; dominance : 1.0; absorbency : 1.0
+    ['3'] independence: 1.0; dominance : 1.0; absorbency : 1.0
+    ['4'] independence: 1.0; dominance : 1.0; absorbency : 1.0
+    ['5'] independence: 1.0; dominance : 1.0; absorbency : 1.0
+    *----- statistics -----
+    graph name:  complete
+    number of solutions
+     dominant kernels :  5
+     absorbent kernels:  5
+    cardinality frequency distributions
+    cardinality     :  [0, 1, 2, 3, 4, 5]
+    dominant kernel :  [0, 5, 0, 0, 0, 0]
+    absorbent kernel:  [0, 5, 0, 0, 0, 0]
+    Execution time  : 0.00004 sec.
+    Results in sets: dompreKernels and abspreKernels.
+
+In a complete digraph, each single node is both an initial and a terminal kernel candidate and there is no definite *begin* or *end* of the digraph to be detected. Laterality is here entirely *relative* to a specific chosen singleton point of view. The same absence of laterality is apparent for two other universal digraph models, the **empty** and the **indeterminate** digraph. 
+
+    >>> ed = EmptyDigraph(order=5)
+    >>> ed.showPreKernels()
+    *--- Computing preKernels ---*
+    Dominant kernel :
+    ['1', '2', '3', '4', '5']
+       independence :  1.0 
+       dominance    :  1.0
+       absorbency   :  1.0
+    Absorbent kernel :
+    ['1', '2', '3', '4', '5']
+       independence :  1.0 
+       dominance    :  1.0
+       absorbency   :  1.0
+    ...
+
+In the empty digraph, the whole set of nodes gives indeed at the same time the **unique** *initial* **and** *terminal* kernel candidate. Similarly, for the **indeterminate** digraph.
+
+    >>> from digraphs import IndeterminateDigraph
+    >>> id = IndeterminateDigraph(order=5)
+    >>> id.showPreKernels()
+    *--- Computing preKernels ---*
+    Dominant prekernel :
+    ['1', '2', '3', '4', '5']
+       independence :  0.0   # <<== indeterminate
+       dominance    :  1.0
+       absorbency   :  1.0
+    Absorbent prekernel :
+    ['1', '2', '3', '4', '5']
+       independence :  0.0   # <<== indeterminate
+       dominance    :  1.0
+       absorbency   :  1.0
+
+Both these resulus make sense as in a completely empty or indeterminate digraph, each node may appear anywhere in the digraph; at its beginning, at its end, or somewhere as a hole in its middle. Notice however, that in the indeterminate case the complete set of nodes verifies only weakly the internal stability condition (see above).
+
+Other digraphs models may show as well no apparent laterality, like **chordless circuits**, ie *holes*, and their **dual**, namely *anti-holes*. In both these cases, there do not exist any prekernel candidates.
+
+    >>> from digraphs import CirculantDigraph
+    >>> cd = CirculantDigraph(order=5,circulants=[1])
+    >>> cd.showPreKernels()
+    *----- statistics -----
+    digraph name:  c5
+    number of solutions
+     dominant prekernels :  0
+     absorbent prekernels:  0
+    >>> dcd = -cd   # dcd = DualDigraph(cd)
+    >>> dcd.showPreKernels()
+    *----- statistics -----
+    graph name:  dual_c5
+    number of solutions
+     dominant prekernels :  0
+     absorbent prekernels:  0
+
+Humans are living in a physical world of apparent plain laterality, fully empowered in numerical modelling. In a linear order, for instance, the first, resp. worst ranked, single node gives the unique initial, resp. terminal, kernel. In a preorder, the first, resp. last, equivalence class gives the unique initial, resp. unique terminal, kernel. More generally, in a partial order, ie asymmetric and transitive digraph, a topological sort will easily reveal on the first, resp. last, level its unique initial, resp. terminal, kernel.
+
+In genuine random digraphs, however, we may need to check for each of its given MISs, whether one, both, or none of the lateralized external stability conditions may be satisfied. Consider, for instance, the following random digraph instance of order 7 and generated with an arc probability of 30%. 
+
+    >>> from randomDigraphs import RandomDigraph
+    >>> rd = RandomDigraph(order=7,arcProbability=0.3,seed=5)
+    >>> rd.exportGraphViz('randomLatrality')
+    *---- exporting a dot file dor GraphViz tools ---------*
+    Exporting to randomLaterality.dot
+    dot -Grankdir=BT -Tpng randomLaterality.dot -o randomLaterality.png
+
+    .. figure:: randomLaterality.png
+       :width: 300 px
+       :align: center
+       :alt: A random digraph instance
+
+       *Figure 5*: A random digraph instance of order 7 and arc probability 0.3
+
+    >>> rd.showMIS()
+    *---  Maximal independent choices ---*
+    ['a2', 'a4', 'a6']
+    ['a6', 'a1']
+    ['a5', 'a1']
+    ['a3', 'a1']
+    ['a4', 'a3']
+    ['a7']
+    ...
+    >>> rd.showPreKernels()
+    *--- Computing preKernels ---*
+    Dominant kernels :
+    ['a2', 'a4', 'a6']
+       independence :  1.0
+       dominance    :  1.0
+       absorbency   :  -1.0
+       covering     :  0.500
+    ['a4', 'a3']
+       independence :  1.0
+       dominance    :  1.0
+       absorbency   :  -1.0
+       covering     :  0.600
+    Absorbent kernels :
+    ['a3', 'a1']
+       independence :  1.0
+       dominance    :  -1.0
+       absorbency   :  1.0
+       covering     :  0.500
+    ['a6', 'a1']
+       independence :  1.0
+       dominance    :  -1.0
+       absorbency   :  1.0
+       covering     :  0.600
+    ...
+
+We discover two initial and two terminal kernels in this random digraph. Notice the covering index (between 0.0 and 1.0) given by the :py:func:`digraphs.Digraph.showPreKernels` method (see above). The higher this value, the more the corresponding kernel candidate makes laterality apparent. We may hence redraw the same graph by looking into the digraph via the best covering initial kernel candidate: the choice set {'3','4'} (marqued in yellow), and looking out of the digraph via the best covering terminal kernel candidate: the choice set {'1','6'} (marqued in blue).
+
+    >>> rd.exportGraphViz(fileName='orientedLaterality',\
+    ...                   bestChoice=set(['a4', 'a3']),\
+    ...                   worstChoice=set(['a6', 'a1']))
+    *---- exporting a dot file dor GraphViz tools ---------*
+    Exporting to orientedLaterality.dot
+    dot -Grankdir=BT -Tpng orientedLaterality.dot -o orientedLaterality.png
+
+    .. figure:: orientedLaterality.png
+       :width: 300 px
+       :align: center
+       :alt: A random digraph oriented by best covering initial and terminal kernels  
+
+       *Figure 6*: A random digraph oriented by best covering initial and terminal kernels
+
+Until now, we have considered solely fully determined crisp digraphs. 
+The effective computation of (pre)kernels in a valued digraph context involves quite sophisticated mathematics (see [BIS-2006a]_). We will illustrate this in the next section in the context of bipolar outranking digraphs.
+
+Computing the kernels in an outranking digraph
+..............................................
 
 To be written
 
@@ -3261,9 +3422,11 @@ References
 
 .. [BIS-2006] R. Bisdorff, M. Pirlot and M. Roubens (2006). "Choices and kernels from bipolar valued digraphs". *European Journal of Operational Research*, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version `PDF file 257.3Kb <https://sma.uni.lu/bisdorff/documents/BisdorffPirlotRoubens05.pdf>`_)
 
+.. [BIS-2006a] R. Bisdorff (2006). On enumerating the kernels in a bipolar-valued digraph. Annales du Lamsade 6, Octobre 2006, pp. 1 - 38. Université Paris-Dauphine. ISSN 1762-455X (downloadable version `PDF file 532.2 Kb <https://leopold-loewenheim.uni.lu/bisdorff/documents/EnumKernels.pdf>`_).
+
 .. [FMCAA] O. Häggström (2002) *Finite Markov Chains and Algorithmic Applications*. Cambridge University Press.
 
-
+.. [BIS-2000] R. Bisdorff (2000), Logical foundation of fuzzy preferential systems with application to the ELECTRE decision aid methods, *Computers and Operations Research*, 27:673-687 (downloadable version `PDF file 159.1Kb <https://leopold-loewenheim.uni.lu/bisdorff/documents/foundationElectre.pdf>`_)
 
 Footnotes
 .........
