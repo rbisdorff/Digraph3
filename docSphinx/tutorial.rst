@@ -3403,8 +3403,9 @@ dot -Grankdir=BT -Tpng orientedLaterality.dot -o orientedLaterality.png
 
    *Figure 7*: A random digraph oriented by best covering initial and terminal kernels
 
-In algorithmic decision theory, such initial kernels may be used for computing and graphically illustrating best choice recommendations (see the corresponding tutorial). Checking external stability conditions for a given MIS may be done in a linear complexity, the order of the digraph. However, generating the complete set of MISs in larger digraphs gets a harder problem. As of order 30, there may appear exponentially many MISs in certain types of sparse digraphs (see [BIS-2006b]_).    
+In algorithmic decision theory, such initial kernels may be used for computing and graphically illustrating best choice recommendations (see the corresponding tutorial).
 
+Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraphs may get a hard problem already from some digraphs of order 30 and more. There may appear indeed exponentially many independet choices to check in certain types of sparse digraphs (see [BIS-2006b]_). There exist more efficient specialized algorithms for enumerating all MISs contained in sparse digraph models. Checking maximality however via the external stability conditions has the advantage of computing in a same run all initial and/or terminal kernels at the same time.
 
 Links and appendices
 --------------------
