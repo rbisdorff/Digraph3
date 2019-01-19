@@ -3323,9 +3323,12 @@ circo -Tpng dualChordlessCircuit.dot -o dualChordlessCircuit.png
 
    *Figure 5*: The dual of the chordless 6-circuit
 
-Humans are living in an apparent physical space  of plain transitive '*laterality*', fully empowered in numerical 3D models. In linear orders, for instance, the first, resp. worst ranked, single node gives the unique initial, resp. terminal, kernel. Similarly, in a preorder, the first, resp. last, equivalence class gives the unique initial, resp. unique terminal, kernel. More generally, in a partial order, ie asymmetric and transitive digraph, a topological sort will easily reveal on the first, resp. last, level its unique initial, resp. terminal, kernel.
+Kernels in lateralized digraphs
+...............................
 
-In genuine random digraphs, however, we may need to check for each of its given MISs, whether one, both, or none of the lateralized external stability conditions may be satisfied. Consider, for instance, the following random digraph instance of order 7 and generated with an arc probability of 30%. 
+Humans are living in an apparent physical space  of plain transitive '*laterality*', fully empowered in geometrical 3D models with linear orders where first, resp. worst ranked, nodes gives unique initial, resp. terminal, kernels. Similarly, in preorders, the first, resp. last, equivalence classes deliver the unique initial, resp. unique terminal, kernels. More generally, in partial orders, ie asymmetric and transitive digraphs, topological sorts will easily reveal on the first, resp. last, level all unique initial, resp. terminal, kernels.
+
+In genuine random digraphs, however, we may need to check for each of its MISs, whether *one*, *both*, or *none* of the lateralized external stability conditions may be satisfied. Consider, for instance, the following random digraph instance of order 7 and generated with an arc probability of 30%. 
 
 >>> from randomDigraphs import RandomDigraph
 >>> rd = RandomDigraph(order=7,arcProbability=0.3,seed=5)
@@ -3348,7 +3351,7 @@ dot -Grankdir=BT -Tpng randomLaterality.dot -o randomLaterality.png
 
    *Figure 6*: A random digraph instance of order 7 and arc probability 0.3
 
-The random digraph shown in Fig. 5 above has no apparent special properties, except from being connected. This digraph is neither asymmetric nor symmetric; there are no chordless circuits; the digraph is not transitive: a5 -> a2 -> a1, but a5 -/> a1.
+The random digraph shown in Fig. 5 above has no apparent special properties, except from being connected. This digraph is neither asymmetric nor symmetric; there are no chordless circuits; and, the digraph is not transitive: a5 -> a2 -> a1, but a5 -/> a1.
 
 Now, we know that its potential prekernels must be among its set of maximal independent choices. 
 
@@ -3387,7 +3390,7 @@ Absorbent kernels :
    covering     :  0.600  # <<==
 ...
 
-We discover two initial and two terminal kernels in this random digraph. Notice above the covering index (between 0.0 and 1.0) shown by the :py:func:`digraphs.Digraph.showPreKernels` method. The higher this value, the more the corresponding kernel candidate makes laterality apparent. We may hence redraw the same graph by looking into the digraph via the *best covering* initial kernel candidate: the dominant choice {'3','4'} (coloured in yellow), and looking out of the digraph via the *best covering* terminal kernel candidate: the absorbent choice {'1','6'} (coloured in blue).
+We discover in this random digrap two initial and two terminal kernels (see above Lines 12-34). Notice by the way the covering values (Lines 17, 22, 28 and 33) between shown by the :py:func:`digraphs.Digraph.showPreKernels` method. The higher this value (between 0.0 and 1.0), the more the corresponding kernel candidate makes laterality apparent. We may hence redraw the same graph by looking into the digraph via the *best covering* initial kernel candidate: the dominant choice {'3','4'} (coloured in yellow), and looking out of the digraph via the *best covering* terminal kernel candidate: the absorbent choice {'1','6'} (coloured in blue).
 
 >>> rd.exportGraphViz(fileName='orientedLaterality',\
 ...                   bestChoice=set(['a4', 'a3']),\
@@ -3403,9 +3406,11 @@ dot -Grankdir=BT -Tpng orientedLaterality.dot -o orientedLaterality.png
 
    *Figure 7*: A random digraph oriented by best covering initial and terminal kernels
 
-In algorithmic decision theory, such initial kernels may be used for computing and graphically illustrating best choice recommendations (see the corresponding tutorial).
+In algorithmic decision theory, such initial kernels may be used for graphically illustrating best choice recommendations as shown above in Fig. 7.
 
-Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraphs may get a hard problem already from some digraphs of order 30 and more. There may appear indeed exponentially many independet choices to check in certain types of sparse digraphs (see [BIS-2006b]_). There exist more efficient specialized algorithms for enumerating all MISs contained in sparse digraph models. Checking maximality however via the external stability conditions has the advantage of computing in a same run all initial and/or terminal kernels at the same time.
+Finally, let us give some hints on the tarctability of kernel computations:. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraphs may get a hard problem already from some digraphs of order 30 and more on. There may appear indeed exponentially many independet choices to check in certain types of sparse digraphs (see [BIS-2006b]_).
+
+Now, there exist more efficient specialized algorithms for enumerating all MISs contained in sparse digraph models. Checking maximality however via the external stability conditions during the emuneration of all potential independet choices has the effective advantage of allowing to compute all initial and/or terminal kernels on a same run (see [BIS-2006b]_).
 
 Links and appendices
 --------------------
