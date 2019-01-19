@@ -1788,7 +1788,7 @@ To model these *strict outranking* situations, we may compute the Rubis best cho
          {'A': 0.00, 'B': 0.00, 'C': 0.00, 'D': 0.00, 
           'E': 0.00, 'F': 0.00, 'G': 0.00, }
 
-It is interesting to notice that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D' (see line 6). In the corresponding characteristic vector (see line 14-15), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see [BIS-2006]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in the strict best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate. 
+It is interesting to notice that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D' (see line 6). In the corresponding characteristic vector (see line 14-15), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see [BIS-2006a]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in the strict best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate. 
 
 We may also notice (see line 17 and line 21) that both alternatives *A* and *F* are reported as certainly outranked choices, hence a **potential worst choice recommendation** . This confirms again the global incomparability status of alternative *A*.
 
@@ -3033,15 +3033,15 @@ The non isomorphic MISs in the 12-cycle graph represent in fact all the ways one
 
 .. _Kernel-Tutorial-label:
 
-Computing kernels in graphs and digraphs
-----------------------------------------
+On Computing Digraph Kernels
+----------------------------
 
 .. contents:: 
 	:depth: 2
 	:local:
 
-What is a kernel in graph or digraph?
-.....................................
+What is a graph kernel ?
+........................
 
 We call **choice set** in a graph, respectively a digraph, a subset of its vertices, resp. of its nodes or actions. A choice set *Y* is called **internally stable** or **independent** when there exist **no links** (edges) or relations (arcs) between its members. Furthermore, a choice set *Y* is called **externally stable** when for each vertex, node or action *x* not in *Y*, there exists at least a member *y* of *Y* such that *x* is linked or related to *y*. Now, an internally **and** externally stable choice set is called a **kernel**.  
 
@@ -3192,14 +3192,14 @@ In our random 3-regular graph instance (see Fig. 2), we may find eleven non isom
 All symmteric digraphs admid MISs, hence also kernels. In the context of digraphs, ie *oriented* graphs, the kernel concept gets much richer and separates from the symmetric MIS concept.  
 
 
-Computing initial and terminal kernels
-......................................
+Initial and terminal digraph kernels
+....................................
 
-In an oriented graph context, the internal stability condition of the kernel concept remains untouched, however, the external stability condition gets indeed split up by laterality into two cases:
+In an oriented graph context, the internal stability condition of the kernel concept remains untouched; however, the external stability condition gets indeed split up by *laterality* into two cases:
      1. A **dominant** stability condition, where each non selected node is dominated by at least one member of the kernel;
      2. An **absorbant** stability condition, where each non selected node is absorbed by at least one member of the kernel.
 
-A both *internally* and *dominant*, resp. *absorbent stable* choice set is called a *dominant* or **initial**, resp. an *absorbent* or **terminal** kernel. From a topological perspective, the initial kernel concept looks from the outside of the digraph into its interior, whereas the terminal kernel looks from the interior of a digraph towards its outside. From an algebraic perspective, the initial kernel is a prefix operand, and the terminal kernel is a suffix operand of the Berge kernel equation (see [BIS-2006]_ )
+A both *internally* **and** *dominant*, resp. *absorbent stable* choice set is called a *dominant* or **initial**, resp. an *absorbent* or **terminal** kernel. From a topological perspective, the initial kernel concept looks from the outside of the digraph into its interior, whereas the terminal kernel looks from the interior of a digraph toward its outside. From an algebraic perspective, the initial kernel is a prefix operand, and the terminal kernel is a suffix operand of the Berge kernel equation (see [BIS-2006a]_ )
 
 Furthermore, as the kernel concept involves conjointly a **positive logical refutation** (the *internal stability*) and a **positive logical affirmation** (the *external stability*), it appeared rather quickly necessary in our operational developments to adopt a bipolar characteristic [-1,1] valuation domain, including explicitely a third **median** logical value (0) expressing logical **indeterminateness** (see [BIS-2000]_).
 
@@ -3243,7 +3243,7 @@ In a symmetric digraph, where there is no apparent laterality, all kernels are i
     Execution time  : 0.00004 sec.
     Results in sets: dompreKernels and abspreKernels.
 
-In a complete digraph, each single node is both an initial and a terminal kernel candidate and there is no definite *begin* or *end* of the digraph to be detected. Laterality is here entirely *relative* to a specific chosen singleton point of view. The same absence of laterality is apparent for two other universal digraph models, the **empty** and the **indeterminate** digraph. 
+In a complete digraph, each single node is both an initial and a terminal kernel candidate and there is no definite *begin* or *end* of the digraph to be detected. Laterality is here entirely *relative* to a specificly chosen singleton point of view. The same absence of laterality is apparent for two other universal digraph models, the **empty** and the **indeterminate** digraph. 
 
     >>> ed = EmptyDigraph(order=5)
     >>> ed.showPreKernels()
@@ -3277,9 +3277,9 @@ In the empty digraph, the whole set of nodes gives indeed at the same time the *
        dominance    :  1.0
        absorbency   :  1.0
 
-Both these resulus make sense as in a completely empty or indeterminate digraph, each node may appear anywhere in the digraph; at its beginning, at its end, or somewhere as a hole in its middle. Notice however, that in the indeterminate case the complete set of nodes verifies only weakly the internal stability condition (see above).
+Both these results make sense, as in a completely empty or indeterminate digraph, each node may appear anywhere; as its beginning, its end, or somewhere as a hole in its middle. Notice however, that in the latter indeterminate case the complete set of nodes verifies only weakly the internal stability condition (see above).
 
-Other digraphs models may show as well no apparent laterality, like **chordless circuits**, ie *holes*, and their **dual**, namely *anti-holes*. In both these cases, there do not exist any prekernel candidates.
+Other digraph models may show as well no apparent laterality, like **chordless circuits**, ie *holes*, and their **dual**, namely *anti-holes*. In both these cases, there do not even exist any suitable prekernel candidates.
 
     >>> from digraphs import CirculantDigraph
     >>> cd = CirculantDigraph(order=5,circulants=[1])
@@ -3297,12 +3297,19 @@ Other digraphs models may show as well no apparent laterality, like **chordless 
      dominant prekernels :  0
      absorbent prekernels:  0
 
-Humans are living in a physical world of apparent plain laterality, fully empowered in numerical modelling. In a linear order, for instance, the first, resp. worst ranked, single node gives the unique initial, resp. terminal, kernel. In a preorder, the first, resp. last, equivalence class gives the unique initial, resp. unique terminal, kernel. More generally, in a partial order, ie asymmetric and transitive digraph, a topological sort will easily reveal on the first, resp. last, level its unique initial, resp. terminal, kernel.
+Humans are living in a physical world of apparent plain transitive laterality, fully empowered in numerical modelling. In linear orders, for instance, the first, resp. worst ranked, single node gives the unique initial, resp. terminal, kernel. Similarly, in a preorder, the first, resp. last, equivalence class gives the unique initial, resp. unique terminal, kernel. More generally, in a partial order, ie asymmetric and transitive digraph, a topological sort will easily reveal on the first, resp. last, level its unique initial, resp. terminal, kernel.
 
 In genuine random digraphs, however, we may need to check for each of its given MISs, whether one, both, or none of the lateralized external stability conditions may be satisfied. Consider, for instance, the following random digraph instance of order 7 and generated with an arc probability of 30%. 
 
     >>> from randomDigraphs import RandomDigraph
     >>> rd = RandomDigraph(order=7,arcProbability=0.3,seed=5)
+    >>> rd.showComponents()
+    *--- Connected Components ---*
+    1: ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7']
+    >>> rd.computeChordlessCircuits()
+    []                 # no chordless circuits detected
+    >>> rd.computeTransitivityDegree()
+    Decimal('0.4839')  # half of the required transitive arcs are missing
     >>> rd.exportGraphViz('randomLatrality')
     *---- exporting a dot file dor GraphViz tools ---------*
     Exporting to randomLaterality.dot
@@ -3314,6 +3321,10 @@ In genuine random digraphs, however, we may need to check for each of its given 
        :alt: A random digraph instance
 
        *Figure 5*: A random digraph instance of order 7 and arc probability 0.3
+
+The random digraph shown in Fig. 5 above has no apparent special properties, except from being connected. This digraph is neither asymmetric nor symmetric; there are no chordless circuits; the digraph is not transitive: a5 -> a2 -> a1, but a5 -/> a1.
+
+Now, we know that its potential prekernels must be among its set of maximal independent choice sets. 
 
     >>> rd.showMIS()
     *---  Maximal independent choices ---*
@@ -3336,7 +3347,7 @@ In genuine random digraphs, however, we may need to check for each of its given 
        independence :  1.0
        dominance    :  1.0
        absorbency   :  -1.0
-       covering     :  0.600
+       covering     :  0.600  # <<==
     Absorbent kernels :
     ['a3', 'a1']
        independence :  1.0
@@ -3347,10 +3358,10 @@ In genuine random digraphs, however, we may need to check for each of its given 
        independence :  1.0
        dominance    :  -1.0
        absorbency   :  1.0
-       covering     :  0.600
+       covering     :  0.600  # <<==
     ...
 
-We discover two initial and two terminal kernels in this random digraph. Notice the covering index (between 0.0 and 1.0) given by the :py:func:`digraphs.Digraph.showPreKernels` method (see above). The higher this value, the more the corresponding kernel candidate makes laterality apparent. We may hence redraw the same graph by looking into the digraph via the best covering initial kernel candidate: the choice set {'3','4'} (marqued in yellow), and looking out of the digraph via the best covering terminal kernel candidate: the choice set {'1','6'} (marqued in blue).
+We discover two initial and two terminal kernels in this random digraph. Notice above the covering index (between 0.0 and 1.0) shown by the :py:func:`digraphs.Digraph.showPreKernels` method. The higher this value, the more the corresponding kernel candidate makes laterality apparent. We may hence redraw the same graph by looking into the digraph via the *best covering* initial kernel candidate: the dominant choice set {'3','4'} (coloured in yellow), and looking out of the digraph via the *best covering* terminal kernel candidate: the absorbent choice set {'1','6'} (coloured in blue).
 
     >>> rd.exportGraphViz(fileName='orientedLaterality',\
     ...                   bestChoice=set(['a4', 'a3']),\
@@ -3365,6 +3376,8 @@ We discover two initial and two terminal kernels in this random digraph. Notice 
        :alt: A random digraph oriented by best covering initial and terminal kernels  
 
        *Figure 6*: A random digraph oriented by best covering initial and terminal kernels
+
+In algorithmic decision theory, such initial kernels may be used for computing and graphically illustrating best choice recommendations (see the corresponding tutorial). Checking external stability conditions for a given MIS may be done in a linear complexity, the order of the digraph. However, generating the complete set of MISs in larger digraphs gets a harder problem. As of order 30, there may appear exponentially many MISs in certain types of sparse digraphs (see [BIS-2006b]_).    
 
 Until now, we have considered solely fully determined crisp digraphs. 
 The effective computation of (pre)kernels in a valued digraph context involves quite sophisticated mathematics (see [BIS-2006a]_). We will illustrate this in the next section in the context of bipolar outranking digraphs.
@@ -3420,9 +3433,9 @@ References
 
 .. [CHAM-2006] J.M. Chambers, D.A. James, D. Lambert and S. Vander Wiel (2006) "Monitoring Networked Applications with Incremental Quantile Estimation". *Statistical Science*, Vol. 21, No.4, pp.463-475. DOI: 10 12140/088342306000000583.
 
-.. [BIS-2006] R. Bisdorff, M. Pirlot and M. Roubens (2006). "Choices and kernels from bipolar valued digraphs". *European Journal of Operational Research*, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version `PDF file 257.3Kb <https://sma.uni.lu/bisdorff/documents/BisdorffPirlotRoubens05.pdf>`_)
+.. [BIS-2006a] R. Bisdorff, M. Pirlot and M. Roubens (2006). "Choices and kernels from bipolar valued digraphs". *European Journal of Operational Research*, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version `PDF file 257.3Kb <https://sma.uni.lu/bisdorff/documents/BisdorffPirlotRoubens05.pdf>`_)
 
-.. [BIS-2006a] R. Bisdorff (2006). On enumerating the kernels in a bipolar-valued digraph. Annales du Lamsade 6, Octobre 2006, pp. 1 - 38. Université Paris-Dauphine. ISSN 1762-455X (downloadable version `PDF file 532.2 Kb <https://leopold-loewenheim.uni.lu/bisdorff/documents/EnumKernels.pdf>`_).
+.. [BIS-2006b] R. Bisdorff (2006). On enumerating the kernels in a bipolar-valued digraph. Annales du Lamsade 6, Octobre 2006, pp. 1 - 38. Université Paris-Dauphine. ISSN 1762-455X (downloadable version `PDF file 532.2 Kb <https://leopold-loewenheim.uni.lu/bisdorff/documents/EnumKernels.pdf>`_).
 
 .. [FMCAA] O. Häggström (2002) *Finite Markov Chains and Algorithmic Applications*. Cambridge University Press.
 

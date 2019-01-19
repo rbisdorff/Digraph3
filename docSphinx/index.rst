@@ -29,12 +29,12 @@ This documentation, also available on the `Read The Docs <https://readthedocs.or
 
 **Parts of the documentation:**
 
-The documentation contains, first, a set of tutorials introducing the main objects like digraphs, outranking digraphs and performance tableaux. There is also a tutorial provided on undirected graphs. Some tutorials are problem oriented and show how to compute the winner of an election, how to build a best choice recommendation, or how to linearly rank with multiple incommensurable ranking criteria. A last tutorial illustrates how to compute non isomorphic maximal independent sets in the $n$-cycle graph.
+The documentation contains, first, a set of tutorials introducing the main objects like digraphs, outranking digraphs and performance tableaux. There is also a tutorial provided on undirected graphs. Some tutorials are problem oriented and show how to compute the winner of an election, how to build a best choice recommendation, or how to linearly rank or rate with multiple incommensurable performance criteria. The last tutorials concern more specifically operational aspects for computating maximal independent sets (MISs) and kernels in graphs and digraphs.
 
 .. toctree:: tutorial
    :maxdepth: 2
 
-The second part concerns the reference manual of the proposed Python3 modules, classes and methods. The main generic root classes in this collection are the :py:class:`digraphs.Digraph` class, the :py:class:`perfTabs.PerformanceTableau` class and the :py:class:`outrankingDigraphs.OutrankingDigraph` class. The technical documentation also provides links to the complete source code of all modules, classes and methods.
+The second part concerns the reference manual of the collection of provided Python3 modules, classes and methods. The main classes in this collection are the :py:class:`digraphs.Digraph` overall root class, the :py:class:`perfTabs.PerformanceTableau` class and the :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class. The technical documentation also provides direkt insight into the complete source code of all public modules, classes and methods.
 
 .. toctree:: techDoc
    :maxdepth: 2
