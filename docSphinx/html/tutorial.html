@@ -4858,8 +4858,8 @@ execution time: 0 sec. and 2 millisec.
 <h3><a class="toc-backref" href="#id129">What is a graph kernel ?</a><a class="headerlink" href="#what-is-a-graph-kernel" title="Permalink to this headline">¶</a></h3>
 <p>We call <strong>choice</strong> in a graph, respectively a digraph, a subset of its vertices, resp. of its nodes or actions. A choice <em>Y</em> is called <strong>internally stable</strong> or <strong>independent</strong> when there exist <strong>no links</strong> (edges) or relations (arcs) between its members. Furthermore, a choice <em>Y</em> is called <strong>externally stable</strong> when for each vertex, node or action <em>x</em> not in <em>Y</em>, there exists at least a member <em>y</em> of <em>Y</em> such that <em>x</em> is linked or related to <em>y</em>. Now, an internally <strong>and</strong> externally stable choice is called a <strong>kernel</strong>.</p>
 <p>A first trivial example is immediately given by the MISs of the n-cycle graph. Indeed, each MIS in the n-cycle graph is by definition independent, ie internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12-cycle graph as shown in Fig. 1 above.</p>
-<p>In all graph or symmetric digraph, the <em>maximality condition</em> imposed on the internal stability implies automatically the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice, then we may safely add this vertex or node the choice without violating its internal stability. All kernels must hence be maximal independent choices. In fact, in a topological sense, they correspond to maximal <strong>holes</strong> in the given graph.</p>
-<p>We may illustrate this coincidence between MISs and kernels in graphs  with the following random 3-regular graph instance.</p>
+<p>In all graph or symmetric digraph, the <em>maximality condition</em> imposed on the internal stability is equivalent to the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice, then we may safely add this vertex or node the choice without violating its internal stability. All kernels must hence be maximal independent choices. In fact, in a topological sense, they correspond to maximal <strong>holes</strong> in the given graph.</p>
+<p>We may illustrate this coincidence between MISs and kernels in graphs and symmetric digraphs with the following random 3-regular graph instance.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -4981,7 +4981,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="go"> frozenset({&#39;a03&#39;, &#39;a06&#39;, &#39;a11&#39;, &#39;a12&#39;, &#39;a08&#39;})]</span>
 </pre></div>
 </td></tr></table></div>
-<p>We cannot resist here in looking for non isomorphic kernels (MISs, see previous tutorial) in this 3-regular graph. To do so we must first, convert the given <em>graph</em> instance into a <em>digraph</em> instance then, compute its automorphism generators, and finally compute the isomorphic orbits.</p>
+<p>We cannot resist in looking in this 3-regular graph for non isomorphic kernels (MISs, see previous tutorial). To do so we must first, convert the given <em>graph</em> instance into a <em>digraph</em> instance. Then, compute its automorphism generators, and finally, identify the isomorphic kernel orbits.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -5085,7 +5085,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">frequency        :  [11, 0]</span>
 </pre></div>
 </td></tr></table></div>
-<p>In our random 3-regular graph instance (see Fig. 2), we may find eleven non isomorphic kernels with orbit sizes equal to two. We illustrate below the isomorphic twin of the random MIS example shown in Fig. 3.</p>
+<p>In our random 3-regular graph instance (see Fig. 2), we may thus find eleven non isomorphic kernels with orbit sizes equal to two. We illustrate below the isomorphic twin of the random MIS example shown in Fig. 3.</p>
 <div class="figure align-center" id="id58">
 <a class="reference internal image-reference" href="_images/random3RegularGraphKernelOrbit.png"><img alt="Two isomorphic kernels of the random 3-regular graph instance" src="_images/random3RegularGraphKernelOrbit.png" style="width: 700px;" /></a>
 <p class="caption"><span class="caption-text"><em>Figure 4</em>: Two isomorphic kernels of the random 3-regular graph instance</span></p>
@@ -5102,10 +5102,10 @@ execution time: 0 sec. and 2 millisec.
 </ol>
 </dd>
 </dl>
-<p>A both <em>internally</em> <strong>and</strong> <em>dominant</em>, resp. <em>absorbent stable</em> choice is called a <em>dominant</em> or <strong>initial</strong>, resp. an <em>absorbent</em> or <strong>terminal</strong> kernel. From a topological perspective, the initial kernel concept looks from the outside of the digraph into its interior, whereas the terminal kernel looks from the interior of a digraph toward its outside. From an algebraic perspective, the initial kernel is a prefix operand, and the terminal kernel is a suffix operand of the Berge kernel equation (see <a class="reference internal" href="#bis-2006a" id="id47">[BIS-2006a]</a> )</p>
-<p>Furthermore, as the kernel concept involves conjointly a <strong>positive logical refutation</strong> (the <em>internal stability</em>) and a <strong>positive logical affirmation</strong> (the <em>external stability</em>), it appeared rather quickly necessary in our operational developments to adopt a bipolar characteristic [-1,1] valuation domain, including explicitely a third <strong>median</strong> logical value (0) expressing logical <strong>indeterminateness</strong> (see <a class="reference internal" href="#bis-2000" id="id48">[BIS-2000]</a>).</p>
-<p>In such a  bipolarly-valued context, we call <strong>prekernel</strong> a choice which is <strong>externally stable</strong> and for which the <strong>internal stability</strong> condition is <strong>valid or indeterminate</strong>. We say that the independence condition is in this case only <strong>weakly</strong> valiadated. Notice that all kernels are hence aso prekernels, but not vice-versa.</p>
-<p>In a symmetric digraph, where there is no apparent laterality, all kernels are initial <em>and</em> terminal at the same time. They correspond to what we have called <em>holes</em> in the graph. An <em>universal</em> example is given by the <strong>complete</strong> digraph.</p>
+<p>A both <em>internally</em> <strong>and</strong> <em>dominant</em>, resp. <em>absorbent stable</em> choice is called a <em>dominant</em> or <strong>initial</strong>, resp. an <em>absorbent</em> or <strong>terminal</strong> kernel. From a topological perspective, the initial kernel concept looks from the outside of the digraph into its interior, whereas the terminal kernel looks from the interior of a digraph toward its outside. From an algebraic perspective, the initial kernel is a <em>prefix</em> operand, and the terminal kernel is a <em>suffix</em> operand of the Berge kernel equation (see <a class="reference internal" href="#bis-2006a" id="id47">[BIS-2006a]</a> )</p>
+<p>Furthermore, as the kernel concept involves conjointly a <strong>positive logical refutation</strong> (the <em>internal stability</em>) and a <strong>positive logical affirmation</strong> (the <em>external stability</em>), it appeared rather quickly necessary in our operational developments to adopt a bipolar characteristic [-1,1] valuation domain, modelling <em>negation</em> by change of numerical sign and including explicitely a third <strong>median</strong> logical value (0) expressing logical <strong>indeterminateness</strong> (neither positive, nor negative, see <a class="reference internal" href="#bis-2000" id="id48">[BIS-2000]</a>).</p>
+<p>In such a  bipolar valued context, we call <strong>prekernel</strong> a choice which is <strong>externally stable</strong> and for which the <strong>internal stability</strong> condition is <strong>valid or indeterminate</strong>. We say that the independence condition is in this case only <strong>weakly</strong> valiadated. Notice that all kernels are hence prekernels, but not vice-versa.</p>
+<p>In graphs or symmetric digraphs, where there is essentially no apparent ‘<em>laterality</em>’, all kernels are <em>initial</em> <strong>and</strong> <em>terminal</em> at the same time. They correspond to what we call <em>holes</em> in the graph. An <em>universal</em> example is given by the <strong>complete</strong> digraph.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -5177,7 +5177,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">Results in sets: dompreKernels and abspreKernels.</span>
 </pre></div>
 </td></tr></table></div>
-<p>In a complete digraph, each single node is both an initial and a terminal kernel candidate and there is no definite <em>begin</em> or <em>end</em> of the digraph to be detected. Laterality is here entirely <em>relative</em> to a specificly chosen singleton point of view. The same absence of laterality is apparent for two other universal digraph models, the <strong>empty</strong> and the <strong>indeterminate</strong> digraph.</p>
+<p>In a complete digraph, each single node is both an initial and a terminal kernel candidate and there is no definite <em>begin</em> or <em>end</em> of the digraph to be detected. Laterality is here entirely <em>relative</em> to a specific singleton chosen as reference point of view. The same absence of laterality is apparent for two other universal digraph models, the <strong>empty</strong> and the <strong>indeterminate</strong> digraph.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -5207,7 +5207,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="gp">...</span>
 </pre></div>
 </td></tr></table></div>
-<p>In the empty digraph, the whole set of nodes gives indeed at the same time the <strong>unique</strong> <em>initial</em> <strong>and</strong> <em>terminal</em> kernel candidate. Similarly, for the <strong>indeterminate</strong> digraph.</p>
+<p>In the empty digraph, the whole set of nodes gives indeed at the same time the <strong>unique</strong> <em>initial</em> <strong>and</strong> <em>terminal</em> kernel. Similarly, for the <strong>indeterminate</strong> digraph.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -5237,8 +5237,8 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">   absorbency   :  1.0</span>
 </pre></div>
 </td></tr></table></div>
-<p>Both these results make sense, as in a completely empty or indeterminate digraph, each node may appear anywhere; as its beginning, its end, or somewhere as a hole in its middle. Notice however, that in the latter indeterminate case the complete set of nodes verifies only weakly the internal stability condition (see above). In a dynamic process of becoming more and definite, the whole powerset of all nodes gathers all potential choices that could eventually become the kernels the resulting definite digraph.</p>
-<p>But, other digraph models may show as well no apparent ‘<em>laterality</em>’, like <strong>odd chordless circuits</strong> ie <em>holes</em> surrounded by a circuit of odd length. They do not contain in fact any initial or terminal kernel.</p>
+<p>Both these results make sense, as in a completely empty or indeterminate digraph, each node may appear anywhere; as its beginning, its end, or somewhere as a hole in its middle. Notice however, that in the latter indeterminate case the complete set of nodes verifies only weakly the internal stability condition (see above). In a dynamic process of becoming more and definite, the powerset of the nodes contains all choice candidates that may become in the end the actual kernels of the eventually determined digraph.</p>
+<p>Other common digraph models may show as well no apparent ‘<em>laterality</em>’, like <em>odd</em> <strong>chordless circuits</strong>, ie <em>holes</em> surrounded by a circuit of odd length. They do not admit in fact any initial or terminal kernel.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -5276,7 +5276,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">[&#39;2&#39;, &#39;4&#39;, &#39;6&#39;] independence: 1.0, dominance: 1.0, absorbency: 1.0</span>
 </pre></div>
 </td></tr></table></div>
-<p>Chordless circuits of rvrn lrngth may thus be indifferently oriented in two opposite directions. Notice by the way that the duals of all chordless circuits, ie <em>filled</em> circuits also called <strong>anti-holes</strong> (see Fig.5), indifferently of <em>odd</em> or <em>even</em> length, never contain any potential kernel candidate.</p>
+<p>Chordless circuits of even length may thus be indifferently oriented along two opposite directions. Notice by the way that the duals of all chordless circuits of <em>odd</em> or <em>even</em> length, ie <em>filled</em> circuits also called <strong>anti-holes</strong> (see Fig.5), never contain any potential kernel candidates.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3

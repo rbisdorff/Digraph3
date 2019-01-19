@@ -3047,9 +3047,9 @@ We call **choice** in a graph, respectively a digraph, a subset of its vertices,
 
 A first trivial example is immediately given by the MISs of the n-cycle graph. Indeed, each MIS in the n-cycle graph is by definition independent, ie internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12-cycle graph as shown in Fig. 1 above. 
 
-In all graph or symmetric digraph, the *maximality condition* imposed on the internal stability implies automatically the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice, then we may safely add this vertex or node the choice without violating its internal stability. All kernels must hence be maximal independent choices. In fact, in a topological sense, they correspond to maximal **holes** in the given graph.
+In all graph or symmetric digraph, the *maximality condition* imposed on the internal stability is equivalent to the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice, then we may safely add this vertex or node the choice without violating its internal stability. All kernels must hence be maximal independent choices. In fact, in a topological sense, they correspond to maximal **holes** in the given graph.
 
-We may illustrate this coincidence between MISs and kernels in graphs  with the following random 3-regular graph instance.
+We may illustrate this coincidence between MISs and kernels in graphs and symmetric digraphs with the following random 3-regular graph instance.
 
 >>> from graphs import RandomRegularGraph
 >>> g = RandomRegularGraph(order=12,degree=3,seed=100)
@@ -3126,7 +3126,7 @@ Results in self.misset
  frozenset({'a06', 'a11', 'a08', 'a03', 'a05'}),
  frozenset({'a03', 'a06', 'a11', 'a12', 'a08'})]
 
-We cannot resist here in looking for non isomorphic kernels (MISs, see previous tutorial) in this 3-regular graph. To do so we must first, convert the given *graph* instance into a *digraph* instance then, compute its automorphism generators, and finally compute the isomorphic orbits.
+We cannot resist in looking in this 3-regular graph for non isomorphic kernels (MISs, see previous tutorial). To do so we must first, convert the given *graph* instance into a *digraph* instance. Then, compute its automorphism generators, and finally, identify the isomorphic kernel orbits.
 
 >>> dg = g.graph2Digraph()
 >>> dg.automorphismGenerators()
@@ -3180,7 +3180,7 @@ Symmetry vector
 stabilizer size  :  [1, 2]
 frequency        :  [11, 0]
 
-In our random 3-regular graph instance (see Fig. 2), we may find eleven non isomorphic kernels with orbit sizes equal to two. We illustrate below the isomorphic twin of the random MIS example shown in Fig. 3.
+In our random 3-regular graph instance (see Fig. 2), we may thus find eleven non isomorphic kernels with orbit sizes equal to two. We illustrate below the isomorphic twin of the random MIS example shown in Fig. 3.
 
 .. figure:: random3RegularGraphKernelOrbit.png
    :width: 700 px
@@ -3199,13 +3199,13 @@ In an oriented graph context, the internal stability condition of the kernel con
      1. A **dominant** stability condition, where each non selected node is dominated by at least one member of the kernel;
      2. An **absorbant** stability condition, where each non selected node is absorbed by at least one member of the kernel.
 
-A both *internally* **and** *dominant*, resp. *absorbent stable* choice is called a *dominant* or **initial**, resp. an *absorbent* or **terminal** kernel. From a topological perspective, the initial kernel concept looks from the outside of the digraph into its interior, whereas the terminal kernel looks from the interior of a digraph toward its outside. From an algebraic perspective, the initial kernel is a prefix operand, and the terminal kernel is a suffix operand of the Berge kernel equation (see [BIS-2006a]_ )
+A both *internally* **and** *dominant*, resp. *absorbent stable* choice is called a *dominant* or **initial**, resp. an *absorbent* or **terminal** kernel. From a topological perspective, the initial kernel concept looks from the outside of the digraph into its interior, whereas the terminal kernel looks from the interior of a digraph toward its outside. From an algebraic perspective, the initial kernel is a *prefix* operand, and the terminal kernel is a *suffix* operand of the Berge kernel equation (see [BIS-2006a]_ )
 
-Furthermore, as the kernel concept involves conjointly a **positive logical refutation** (the *internal stability*) and a **positive logical affirmation** (the *external stability*), it appeared rather quickly necessary in our operational developments to adopt a bipolar characteristic [-1,1] valuation domain, including explicitely a third **median** logical value (0) expressing logical **indeterminateness** (see [BIS-2000]_).
+Furthermore, as the kernel concept involves conjointly a **positive logical refutation** (the *internal stability*) and a **positive logical affirmation** (the *external stability*), it appeared rather quickly necessary in our operational developments to adopt a bipolar characteristic [-1,1] valuation domain, modelling *negation* by change of numerical sign and including explicitely a third **median** logical value (0) expressing logical **indeterminateness** (neither positive, nor negative, see [BIS-2000]_).
 
-In such a  bipolarly-valued context, we call **prekernel** a choice which is **externally stable** and for which the **internal stability** condition is **valid or indeterminate**. We say that the independence condition is in this case only **weakly** valiadated. Notice that all kernels are hence aso prekernels, but not vice-versa.
+In such a  bipolar valued context, we call **prekernel** a choice which is **externally stable** and for which the **internal stability** condition is **valid or indeterminate**. We say that the independence condition is in this case only **weakly** valiadated. Notice that all kernels are hence prekernels, but not vice-versa.
 
-In a symmetric digraph, where there is no apparent laterality, all kernels are initial *and* terminal at the same time. They correspond to what we have called *holes* in the graph. An *universal* example is given by the **complete** digraph.
+In graphs or symmetric digraphs, where there is essentially no apparent '*laterality*', all kernels are *initial* **and** *terminal* at the same time. They correspond to what we call *holes* in the graph. An *universal* example is given by the **complete** digraph.
 
 >>> from digraphs import CompleteDigraph
 >>> u = CompleteDigraph(order=5)
@@ -3243,7 +3243,7 @@ absorbent kernel:  [0, 5, 0, 0, 0, 0]
 Execution time  : 0.00004 sec.
 Results in sets: dompreKernels and abspreKernels.
 
-In a complete digraph, each single node is both an initial and a terminal kernel candidate and there is no definite *begin* or *end* of the digraph to be detected. Laterality is here entirely *relative* to a specificly chosen singleton point of view. The same absence of laterality is apparent for two other universal digraph models, the **empty** and the **indeterminate** digraph. 
+In a complete digraph, each single node is both an initial and a terminal kernel candidate and there is no definite *begin* or *end* of the digraph to be detected. Laterality is here entirely *relative* to a specific singleton chosen as reference point of view. The same absence of laterality is apparent for two other universal digraph models, the **empty** and the **indeterminate** digraph. 
 
 >>> ed = EmptyDigraph(order=5)
 >>> ed.showPreKernels()
@@ -3260,7 +3260,7 @@ Absorbent kernel :
    absorbency   :  1.0
 ...
 
-In the empty digraph, the whole set of nodes gives indeed at the same time the **unique** *initial* **and** *terminal* kernel candidate. Similarly, for the **indeterminate** digraph.
+In the empty digraph, the whole set of nodes gives indeed at the same time the **unique** *initial* **and** *terminal* kernel. Similarly, for the **indeterminate** digraph.
 
 >>> from digraphs import IndeterminateDigraph
 >>> id = IndeterminateDigraph(order=5)
@@ -3277,9 +3277,9 @@ Absorbent prekernel :
    dominance    :  1.0
    absorbency   :  1.0
 
-Both these results make sense, as in a completely empty or indeterminate digraph, each node may appear anywhere; as its beginning, its end, or somewhere as a hole in its middle. Notice however, that in the latter indeterminate case the complete set of nodes verifies only weakly the internal stability condition (see above). In a dynamic process of becoming more and definite, the whole powerset of all nodes gathers all potential choices that could eventually become the kernels the resulting definite digraph.
+Both these results make sense, as in a completely empty or indeterminate digraph, each node may appear anywhere; as its beginning, its end, or somewhere as a hole in its middle. Notice however, that in the latter indeterminate case the complete set of nodes verifies only weakly the internal stability condition (see above). In a dynamic process of becoming more and definite, the powerset of the nodes contains all choice candidates that may become in the end the actual kernels of the eventually determined digraph.
 
-But, other digraph models may show as well no apparent '*laterality*', like **odd chordless circuits** ie *holes* surrounded by a circuit of odd length. They do not contain in fact any initial or terminal kernel.
+Other common digraph models may show as well no apparent '*laterality*', like *odd* **chordless circuits**, ie *holes* surrounded by a circuit of odd length. They do not admit in fact any initial or terminal kernel.
 
 >>> from digraphs import CirculantDigraph
 >>> c5 = CirculantDigraph(order=5,circulants=[1])
@@ -3302,7 +3302,7 @@ Absorbent preKernels :
 ['1', '3', '5'] independence: 1.0, dominance: 1.0, absorbency: 1.0
 ['2', '4', '6'] independence: 1.0, dominance: 1.0, absorbency: 1.0
 
-Chordless circuits of rvrn lrngth may thus be indifferently oriented in two opposite directions. Notice by the way that the duals of all chordless circuits, ie *filled* circuits also called **anti-holes** (see Fig.5), indifferently of *odd* or *even* length, never contain any potential kernel candidate.
+Chordless circuits of even length may thus be indifferently oriented along two opposite directions. Notice by the way that the duals of all chordless circuits of *odd* or *even* length, ie *filled* circuits also called **anti-holes** (see Fig.5), never contain any potential kernel candidates.
 
 >>> dc6 = -c6   # dc6 = DualDigraph(c6)
 >>> dc6.showPreKernels()
