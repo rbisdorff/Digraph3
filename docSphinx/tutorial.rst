@@ -3180,7 +3180,7 @@ Symmetry vector
 stabilizer size  :  [1, 2]
 frequency        :  [11, 0]
 
-In our random 3-regular graph instance (see Fig. 2), we may find eleven non isomorphic kernels with orbit sizes equal to two. We illustrate below the isomorphic twin of the random MIS example shown in Fig. 2:
+In our random 3-regular graph instance (see Fig. 2), we may find eleven non isomorphic kernels with orbit sizes equal to two. We illustrate below the isomorphic twin of the random MIS example shown in Fig. 3.
 
 .. figure:: random3RegularGraphKernelOrbit.png
    :width: 700 px
@@ -3215,7 +3215,7 @@ Instance class   : CompleteDigraph
 Instance name    : complete
 Digraph Order      : 5
 Digraph Size       : 20
-Valuation domain : [-1.00 - 1.00]
+Valuation domain : [-1.00 ; 1.00]
 ...
 >>> u.showPreKernels()
 *--- Computing preKernels ---*
