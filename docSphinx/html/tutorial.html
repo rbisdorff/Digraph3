@@ -78,7 +78,7 @@
 <li><a class="reference internal" href="#rating-with-learned-quantile-norms" id="id69">Rating with learned quantile norms</a></li>
 <li><a class="reference internal" href="#working-with-the-graphs-module" id="id70">Working with the <a class="reference internal" href="techDoc.html#module-graphs" title="graphs"><code class="xref py py-mod docutils literal"><span class="pre">graphs</span></code></a> module</a></li>
 <li><a class="reference internal" href="#computing-the-non-isomorphic-miss-of-the-n-cycle-graph" id="id71">Computing the non isomorphic MISs of the n-cycle graph</a></li>
-<li><a class="reference internal" href="#on-computing-digraph-kernels" id="id72">On Computing Digraph Kernels</a></li>
+<li><a class="reference internal" href="#on-computing-digraph-kernels" id="id72">On computing digraph kernels</a></li>
 <li><a class="reference internal" href="#links-and-appendices" id="id73">Links and appendices</a></li>
 </ul>
 </div>
@@ -294,7 +294,7 @@ Attributes       : [&#39;actions&#39;, &#39;valuationdomain&#39;, &#39;relation&
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </td></tr></table></div>
-<p>The <a class="reference internal" href="techDoc.html#digraphs.Digraph.exportGraphViz" title="digraphs.Digraph.exportGraphViz"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.exportGraphViz()</span></code></a> method generates in the current working directory a <code class="code docutils literal"><span class="pre">tutorial.dot</span></code> file and a <code class="code docutils literal"><span class="pre">tutorialdigraph.png</span></code> picture of the tutorial digraph <em>g</em>, if the <a class="reference external" href="https://graphviz.org/">graphviz</a> tools are installed on your system <a class="footnote-reference" href="#id52" id="id1">[1]</a>.</p>
+<p>The <a class="reference internal" href="techDoc.html#digraphs.Digraph.exportGraphViz" title="digraphs.Digraph.exportGraphViz"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.exportGraphViz()</span></code></a> method generates in the current working directory a <code class="code docutils literal"><span class="pre">tutorial.dot</span></code> file and a <code class="code docutils literal"><span class="pre">tutorialdigraph.png</span></code> picture of the tutorial digraph <em>g</em>, if the <a class="reference external" href="https://graphviz.org/">graphviz</a> tools are installed on your system <a class="footnote-reference" href="#id51" id="id1">[1]</a>.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -519,7 +519,7 @@ Attributes       : [&#39;actions&#39;, &#39;valuationdomain&#39;, &#39;relation&
 </div>
 <div class="section" id="graphviz-drawings">
 <h3><a class="toc-backref" href="#id82">Graphviz drawings</a><a class="headerlink" href="#graphviz-drawings" title="Permalink to this headline">¶</a></h3>
-<p>We may have an even better insight into the <code class="docutils literal"><span class="pre">Digraph</span></code> object <em>dg</em> by looking at a <a class="reference external" href="https://graphviz.org/">graphviz</a>  drawing <a class="footnote-reference" href="#id52" id="id4">[1]</a>.</p>
+<p>We may have an even better insight into the <code class="docutils literal"><span class="pre">Digraph</span></code> object <em>dg</em> by looking at a <a class="reference external" href="https://graphviz.org/">graphviz</a>  drawing <a class="footnote-reference" href="#id51" id="id4">[1]</a>.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -1175,7 +1175,7 @@ Attributes       : [&#39;actions&#39;, &#39;valuationdomain&#39;, &#39;relation&
 <span class="go">[&#39;a1&#39;]</span>
 </pre></div>
 </td></tr></table></div>
-<p>By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic <code class="docutils literal"><span class="pre">Digraph</span></code> class (see <a class="reference internal" href="#digraphs-tutorial-label"><span class="std std-ref">Working with the Digraph3 software resources</span></a>), and especially its <code class="docutils literal"><span class="pre">exportGraphViz</span></code> method <a class="footnote-reference" href="#id52" id="id8">[1]</a>, for visualizing an election result.</p>
+<p>By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic <code class="docutils literal"><span class="pre">Digraph</span></code> class (see <a class="reference internal" href="#digraphs-tutorial-label"><span class="std std-ref">Working with the Digraph3 software resources</span></a>), and especially its <code class="docutils literal"><span class="pre">exportGraphViz</span></code> method <a class="footnote-reference" href="#id51" id="id8">[1]</a>, for visualizing an election result.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -1560,7 +1560,7 @@ Attributes       : [&#39;actions&#39;, &#39;valuationdomain&#39;, &#39;relation&
 </div>
 <div class="section" id="codual-digraph">
 <h3><a class="toc-backref" href="#id99">Codual digraph</a><a class="headerlink" href="#codual-digraph" title="Permalink to this headline">¶</a></h3>
-<p>From the theory (see <a class="reference internal" href="#bis-2013" id="id14">[BIS-2013]</a>, <a class="reference internal" href="#adt-l7" id="id15">[ADT-L7]</a> )  we know that the bipolarly outranking relation is <strong>weakly complete</strong>, i.e. if <img class="math" src="_images/math/8396e0f084210f2d2494034603b8808c2fea89ac.png" alt="r(x\,S\,y) &lt; 0.0"/> then <img class="math" src="_images/math/3e37e003c93b282b150385759ea6b7586a28047b.png" alt="r(y\,S\,x) &gt;= 0.0"/> . From this property follows that the bipolarly valued outranking relation verifies the coduality principle: the dual (-) of the converse (~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing <a class="footnote-reference" href="#id52" id="id16">[1]</a>.</p>
+<p>From the theory (see <a class="reference internal" href="#bis-2013" id="id14">[BIS-2013]</a>, <a class="reference internal" href="#adt-l7" id="id15">[ADT-L7]</a> )  we know that the bipolarly outranking relation is <strong>weakly complete</strong>, i.e. if <img class="math" src="_images/math/8396e0f084210f2d2494034603b8808c2fea89ac.png" alt="r(x\,S\,y) &lt; 0.0"/> then <img class="math" src="_images/math/3e37e003c93b282b150385759ea6b7586a28047b.png" alt="r(y\,S\,x) &gt;= 0.0"/> . From this property follows that the bipolarly valued outranking relation verifies the coduality principle: the dual (-) of the converse (~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing <a class="footnote-reference" href="#id51" id="id16">[1]</a>.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -3964,7 +3964,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <ul class="simple">
 <li><a class="reference internal" href="#structure-of-a-graph-object" id="id123">Structure of a <code class="docutils literal"><span class="pre">Graph</span></code> object</a></li>
 <li><a class="reference internal" href="#q-coloring-of-a-graph" id="id124">q-coloring of a graph</a></li>
-<li><a class="reference internal" href="#mis-and-clique-enumeration" id="id125">MIS and Clique enumeration</a></li>
+<li><a class="reference internal" href="#mis-and-clique-enumeration" id="id125">MIS and clique enumeration</a></li>
 <li><a class="reference internal" href="#grids-and-the-ising-model" id="id126">Grids and the Ising model</a></li>
 <li><a class="reference internal" href="#simulating-metropolis-random-walks" id="id127">Simulating Metropolis random walks</a></li>
 <li><a class="reference internal" href="#the-berge-mystery-story-who-is-the-lier" id="id128">The Berge mystery story: Who is the lier ?</a></li>
@@ -4059,7 +4059,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
-<p>The stored graph can be recalled and plotted with the generic <a class="reference internal" href="techDoc.html#graphs.Graph.exportGraphViz" title="graphs.Graph.exportGraphViz"><code class="xref py py-func docutils literal"><span class="pre">graphs.Graph.exportGraphViz()</span></code></a> <a class="footnote-reference" href="#id52" id="id39">[1]</a> method as follows.</p>
+<p>The stored graph can be recalled and plotted with the generic <a class="reference internal" href="techDoc.html#graphs.Graph.exportGraphViz" title="graphs.Graph.exportGraphViz"><code class="xref py py-func docutils literal"><span class="pre">graphs.Graph.exportGraphViz()</span></code></a> <a class="footnote-reference" href="#id51" id="id39">[1]</a> method as follows.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -4249,7 +4249,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <a class="reference internal image-reference" href="_images/tutorial-2-coloring.png"><img alt="_images/tutorial-2-coloring.png" class="align-center" src="_images/tutorial-2-coloring.png" style="width: 400px;" /></a>
 </div>
 <div class="section" id="mis-and-clique-enumeration">
-<h3><a class="toc-backref" href="#id125">MIS and Clique enumeration</a><a class="headerlink" href="#mis-and-clique-enumeration" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id125">MIS and clique enumeration</a><a class="headerlink" href="#mis-and-clique-enumeration" title="Permalink to this headline">¶</a></h3>
 <p>2-colorings define independent sets of vertices that are maximal in cardinality; for short called a <strong>MIS</strong>. Computing such MISs in a given <code class="code docutils literal"><span class="pre">Graph</span></code> instance may be achieved by the <cite>graphs.Graph.showMIS()</cite> method.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -4514,8 +4514,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </td></tr></table></div>
 <p>This data concerns the famous <em>Berge mystery story</em> (see Golumbic, M. C. Algorithmic Graph Theory and Perfect Graphs, <em>Annals of Discrete Mathematics</em> 57 p. 20) Six professors (labeled <em>A</em>, <em>B</em>, <em>C</em>, <em>D</em>, <em>E</em> and <em>I</em>) had been to the library on the day that a rare tractate was stolen. Each entered once, stayed for some time, and then left. If two professors were in the library at the same time, then at least one of them saw the other. Detectives questioned the professors and gathered the testimonies that <em>A</em> saw <em>B</em> and <em>E</em>; <em>B</em> saw <em>A</em> and <em>I</em>; <em>C</em> saw <em>D</em> and <em>I</em>; <em>D</em> saw <em>A</em> and <em>I</em>; <em>E</em> saw <em>B</em> and <em>I</em>; and <em>I</em> saw <em>C</em> and <em>E</em>. This data is gathered in the previous file, where each positive edge <img class="math" src="_images/math/8568910c7efe82f7078fddb5c0e0a06f6079a704.png" alt="\{x,y\}"/> models the testimony that, either <em>x</em> saw <em>y</em>, or, <em>y</em> saw <em>x</em>.</p>
 <p>Example Python3 session</p>
-<blockquote>
-<div><div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -4544,7 +4543,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go">I -&gt; [&#39;C&#39;, &#39;E&#39;, &#39;B&#39;, &#39;D&#39;]</span>
 </pre></div>
 </td></tr></table></div>
-<p>The graph data can be plotted as follows.</p>
+<blockquote>
+<div>The graph data can be plotted as follows.</div></blockquote>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -4554,7 +4554,6 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go">fdp -Tpng berge1.dot -o berge1.png</span>
 </pre></div>
 </td></tr></table></div>
-</div></blockquote>
 <a class="reference internal image-reference" href="_images/berge1.png"><img alt="_images/berge1.png" class="align-center" src="_images/berge1.png" style="width: 400px;" /></a>
 <p>From graph theory we know that time interval intersection graphs must in fact be triangulated. The testimonies graph should therefore not contain any chordless cycles of four and more vertices. Now, the presence or not of chordless cycles may be checked as follows.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -4689,7 +4688,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go">  Results in c12.misset</span>
 </pre></div>
 </td></tr></table></div>
-<p>In the 12-cycle graph, we observe 29 labelled MISs: – 3 of cardinality 4, 24 of cardinality 5, and 2  of cardinality 6. In case of n-cycle graphs with <em>n</em> &gt; 20, as the cardinality of the MISs becomes big, it is preferable to use the shell <code class="code docutils literal"><span class="pre">perrinMIS</span></code> command compiled from C and installed <a class="footnote-reference" href="#id55" id="id43">[3]</a>  along with all the Digraphs3 python modules for computing the set of MISs observed in the graph:</p>
+<p>In the 12-cycle graph, we observe 29 labelled MISs: – 3 of cardinality 4, 24 of cardinality 5, and 2  of cardinality 6. In case of n-cycle graphs with <em>n</em> &gt; 20, as the cardinality of the MISs becomes big, it is preferable to use the shell <code class="code docutils literal"><span class="pre">perrinMIS</span></code> command compiled from C and installed <a class="footnote-reference" href="#id54" id="id43">[3]</a>  along with all the Digraphs3 python modules for computing the set of MISs observed in the graph:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -4787,7 +4786,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">}</span>
 </pre></div>
 </td></tr></table></div>
-<p>For computing the corresponding non isomorphic MISs, we actually need the automorphism group of the c12-cycle graph. The <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a> class therefore provides the <a class="reference internal" href="techDoc.html#digraphs.Digraph.automorphismGenerators" title="digraphs.Digraph.automorphismGenerators"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.automorphismGenerators()</span></code></a> method which adds automorphism group generators to a <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a> class instance with the help of the external shell &lt;<code class="code docutils literal"><span class="pre">dreadnaut</span></code>&gt; command from the <strong>nauty</strong> software package <a class="footnote-reference" href="#id54" id="id44">[2]</a>.</p>
+<p>For computing the corresponding non isomorphic MISs, we actually need the automorphism group of the c12-cycle graph. The <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a> class therefore provides the <a class="reference internal" href="techDoc.html#digraphs.Digraph.automorphismGenerators" title="digraphs.Digraph.automorphismGenerators"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.automorphismGenerators()</span></code></a> method which adds automorphism group generators to a <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a> class instance with the help of the external shell &lt;<code class="code docutils literal"><span class="pre">dreadnaut</span></code>&gt; command from the <strong>nauty</strong> software package <a class="footnote-reference" href="#id53" id="id44">[2]</a>.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -4841,26 +4840,25 @@ execution time: 0 sec. and 2 millisec.
 </pre></div>
 </td></tr></table></div>
 <p>The corresponding group stabilizers’ sizes and frequencies – orbit 1 with 12 symmetry axes, orbit 2 with 8 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 11-13), are illustrated in the corresponding unlabelled graphs of <em>Figure-1</em> below.</p>
-<div class="figure align-center" id="id56">
+<div class="figure align-center" id="id55">
 <a class="reference internal image-reference" href="_images/c12.png"><img alt="The 4 non isomorphic MIS of the 12-cycle graph" src="_images/c12.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text"><em>Figure-1: The symmetry axes of the four non isomorphic MISs of the 12-cycle graph</em>:</span></p>
 </div>
 <p>The non isomorphic MISs in the 12-cycle graph represent in fact all the ways one may write the number 12 as the circular sum of ‘2’s and ‘3’s without distinguishing opposite directions of writing. The first orbit corresponds to writing six times a ‘2’; the second orbit corresponds to writing four times a ‘3’. The third and fourth orbit correspond to writing two times a ‘3’ and three times a ‘2’. There are two non isomorphic ways to do this latter circular sum. Either separating the ‘3’s by one and two ‘2’s, or by zero and three ‘2’s (see Bisdorff &amp; Marichal <a class="reference internal" href="#isomis-08" id="id45">[ISOMIS-08]</a> ).</p>
 </div>
 <div class="section" id="on-computing-digraph-kernels">
-<span id="kernel-tutorial-label"></span><h2><a class="toc-backref" href="#id72">On Computing Digraph Kernels</a><a class="headerlink" href="#on-computing-digraph-kernels" title="Permalink to this headline">¶</a></h2>
+<span id="kernel-tutorial-label"></span><h2><a class="toc-backref" href="#id72">On computing digraph kernels</a><a class="headerlink" href="#on-computing-digraph-kernels" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id46">
 <ul class="simple">
 <li><a class="reference internal" href="#what-is-a-graph-kernel" id="id129">What is a graph kernel ?</a></li>
-<li><a class="reference internal" href="#initial-and-terminal-digraph-kernels" id="id130">Initial and terminal digraph kernels</a></li>
-<li><a class="reference internal" href="#computing-the-kernels-in-an-outranking-digraph" id="id131">Computing the kernels in an outranking digraph</a></li>
+<li><a class="reference internal" href="#initial-and-terminal-kernels" id="id130">Initial and terminal kernels</a></li>
 </ul>
 </div>
 <div class="section" id="what-is-a-graph-kernel">
 <h3><a class="toc-backref" href="#id129">What is a graph kernel ?</a><a class="headerlink" href="#what-is-a-graph-kernel" title="Permalink to this headline">¶</a></h3>
-<p>We call <strong>choice set</strong> in a graph, respectively a digraph, a subset of its vertices, resp. of its nodes or actions. A choice set <em>Y</em> is called <strong>internally stable</strong> or <strong>independent</strong> when there exist <strong>no links</strong> (edges) or relations (arcs) between its members. Furthermore, a choice set <em>Y</em> is called <strong>externally stable</strong> when for each vertex, node or action <em>x</em> not in <em>Y</em>, there exists at least a member <em>y</em> of <em>Y</em> such that <em>x</em> is linked or related to <em>y</em>. Now, an internally <strong>and</strong> externally stable choice set is called a <strong>kernel</strong>.</p>
+<p>We call <strong>choice</strong> in a graph, respectively a digraph, a subset of its vertices, resp. of its nodes or actions. A choice <em>Y</em> is called <strong>internally stable</strong> or <strong>independent</strong> when there exist <strong>no links</strong> (edges) or relations (arcs) between its members. Furthermore, a choice <em>Y</em> is called <strong>externally stable</strong> when for each vertex, node or action <em>x</em> not in <em>Y</em>, there exists at least a member <em>y</em> of <em>Y</em> such that <em>x</em> is linked or related to <em>y</em>. Now, an internally <strong>and</strong> externally stable choice is called a <strong>kernel</strong>.</p>
 <p>A first trivial example is immediately given by the MISs of the n-cycle graph. Indeed, each MIS in the n-cycle graph is by definition independent, ie internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12-cycle graph as shown in Fig. 1 above.</p>
-<p>In all graph or symmetric digraph, the <em>maximality condition</em> imposed on the internal stability implies automatically the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice set, then we may safely add this vertex or node the choice set without violating its internal stability. All kernels must hence be maximal independent choices. In fact, in a topological sense, they correspond to maximal <strong>holes</strong> in the given graph.</p>
+<p>In all graph or symmetric digraph, the <em>maximality condition</em> imposed on the internal stability implies automatically the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice, then we may safely add this vertex or node the choice without violating its internal stability. All kernels must hence be maximal independent choices. In fact, in a topological sense, they correspond to maximal <strong>holes</strong> in the given graph.</p>
 <p>We may illustrate this coincidence between MISs and kernels in graphs  with the following random 3-regular graph instance.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -4875,13 +4873,12 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">fdp -Tpng random3RegularGraph.dot -o random3RegularGraph.png</span>
 </pre></div>
 </td></tr></table></div>
-<div class="figure align-center" id="id57">
+<div class="figure align-center" id="id56">
 <a class="reference internal image-reference" href="_images/random3RegularGraph.png"><img alt="A random 3-regular graph instance" src="_images/random3RegularGraph.png" style="width: 350px;" /></a>
 <p class="caption"><span class="caption-text"><em>Figure-2</em>: A random 3-regular graph instance</span></p>
 </div>
 <p>A random MIS in this graph may be computed for instance by using the <a class="reference internal" href="techDoc.html#graphs.MISModel" title="graphs.MISModel"><code class="xref py py-class docutils literal"><span class="pre">graphs.MISModel</span></code></a> class.</p>
-<blockquote>
-<div><div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -4900,11 +4897,10 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">fdp -Tpng random3RegularGraph-mis.dot -o random3RegularGraph-mis.png</span>
 </pre></div>
 </td></tr></table></div>
-<div class="figure align-center" id="id58">
+<div class="figure align-center" id="id57">
 <a class="reference internal image-reference" href="_images/random3RegularGraph-mis.png"><img alt="A random MIS colored in the graph." src="_images/random3RegularGraph-mis.png" style="width: 350px;" /></a>
 <p class="caption"><span class="caption-text"><em>Figure-3</em>: A random MIS colored in the random 3-regular graph</span></p>
 </div>
-</div></blockquote>
 <p>It is easily verified in Fig. 3 above, that the computed MIS renders indeed a valid kernel of the given graph. The complete set of kernels of this 3-regular graph instance coincides hence with the set of its MISs.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -5090,16 +5086,14 @@ execution time: 0 sec. and 2 millisec.
 </pre></div>
 </td></tr></table></div>
 <p>In our random 3-regular graph instance (see Fig. 2), we may find eleven non isomorphic kernels with orbit sizes equal to two. We illustrate below the isomorphic twin of the random MIS example shown in Fig. 2:</p>
-<blockquote>
-<div><div class="figure align-center" id="id59">
+<div class="figure align-center" id="id58">
 <a class="reference internal image-reference" href="_images/random3RegularGraphKernelOrbit.png"><img alt="Two isomorphic kernels of the random 3-regular graph instance" src="_images/random3RegularGraphKernelOrbit.png" style="width: 700px;" /></a>
 <p class="caption"><span class="caption-text"><em>Figure 4</em>: Two isomorphic kernels of the random 3-regular graph instance</span></p>
 </div>
-</div></blockquote>
 <p>All symmteric digraphs admid MISs, hence also kernels. In the context of digraphs, ie <em>oriented</em> graphs, the kernel concept gets much richer and separates from the symmetric MIS concept.</p>
 </div>
-<div class="section" id="initial-and-terminal-digraph-kernels">
-<h3><a class="toc-backref" href="#id130">Initial and terminal digraph kernels</a><a class="headerlink" href="#initial-and-terminal-digraph-kernels" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="initial-and-terminal-kernels">
+<h3><a class="toc-backref" href="#id130">Initial and terminal kernels</a><a class="headerlink" href="#initial-and-terminal-kernels" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt>In an oriented graph context, the internal stability condition of the kernel concept remains untouched; however, the external stability condition gets indeed split up by <em>laterality</em> into two cases:</dt>
 <dd><ol class="first last arabic simple">
@@ -5108,9 +5102,9 @@ execution time: 0 sec. and 2 millisec.
 </ol>
 </dd>
 </dl>
-<p>A both <em>internally</em> <strong>and</strong> <em>dominant</em>, resp. <em>absorbent stable</em> choice set is called a <em>dominant</em> or <strong>initial</strong>, resp. an <em>absorbent</em> or <strong>terminal</strong> kernel. From a topological perspective, the initial kernel concept looks from the outside of the digraph into its interior, whereas the terminal kernel looks from the interior of a digraph toward its outside. From an algebraic perspective, the initial kernel is a prefix operand, and the terminal kernel is a suffix operand of the Berge kernel equation (see <a class="reference internal" href="#bis-2006a" id="id47">[BIS-2006a]</a> )</p>
+<p>A both <em>internally</em> <strong>and</strong> <em>dominant</em>, resp. <em>absorbent stable</em> choice is called a <em>dominant</em> or <strong>initial</strong>, resp. an <em>absorbent</em> or <strong>terminal</strong> kernel. From a topological perspective, the initial kernel concept looks from the outside of the digraph into its interior, whereas the terminal kernel looks from the interior of a digraph toward its outside. From an algebraic perspective, the initial kernel is a prefix operand, and the terminal kernel is a suffix operand of the Berge kernel equation (see <a class="reference internal" href="#bis-2006a" id="id47">[BIS-2006a]</a> )</p>
 <p>Furthermore, as the kernel concept involves conjointly a <strong>positive logical refutation</strong> (the <em>internal stability</em>) and a <strong>positive logical affirmation</strong> (the <em>external stability</em>), it appeared rather quickly necessary in our operational developments to adopt a bipolar characteristic [-1,1] valuation domain, including explicitely a third <strong>median</strong> logical value (0) expressing logical <strong>indeterminateness</strong> (see <a class="reference internal" href="#bis-2000" id="id48">[BIS-2000]</a>).</p>
-<p>In such a  bipolarly-valued context, we call <strong>prekernel</strong> a choice set which is <strong>externally stable</strong> and for which the <strong>internal stability</strong> condition is <strong>valid or indeterminate</strong>. We say that the independence condition is in this case only <strong>weakly</strong> valiadated. Notice that all kernels are hence aso prekernels, but not vice-versa.</p>
+<p>In such a  bipolarly-valued context, we call <strong>prekernel</strong> a choice which is <strong>externally stable</strong> and for which the <strong>internal stability</strong> condition is <strong>valid or indeterminate</strong>. We say that the independence condition is in this case only <strong>weakly</strong> valiadated. Notice that all kernels are hence aso prekernels, but not vice-versa.</p>
 <p>In a symmetric digraph, where there is no apparent laterality, all kernels are initial <em>and</em> terminal at the same time. They correspond to what we have called <em>holes</em> in the graph. An <em>universal</em> example is given by the <strong>complete</strong> digraph.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -5243,8 +5237,46 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">   absorbency   :  1.0</span>
 </pre></div>
 </td></tr></table></div>
-<p>Both these results make sense, as in a completely empty or indeterminate digraph, each node may appear anywhere; as its beginning, its end, or somewhere as a hole in its middle. Notice however, that in the latter indeterminate case the complete set of nodes verifies only weakly the internal stability condition (see above).</p>
-<p>Other digraph models may show as well no apparent laterality, like <strong>chordless circuits</strong>, ie <em>holes</em>, and their <strong>dual</strong>, namely <em>anti-holes</em>. In both these cases, there do not even exist any suitable prekernel candidates.</p>
+<p>Both these results make sense, as in a completely empty or indeterminate digraph, each node may appear anywhere; as its beginning, its end, or somewhere as a hole in its middle. Notice however, that in the latter indeterminate case the complete set of nodes verifies only weakly the internal stability condition (see above). In a dynamic process of becoming more and definite, the whole powerset of all nodes gathers all potential choices that could eventually become the kernels the resulting definite digraph.</p>
+<p>But, other digraph models may show as well no apparent ‘<em>laterality</em>’, like <strong>odd chordless circuits</strong> ie <em>holes</em> surrounded by a circuit of odd length. They do not contain in fact any initial or terminal kernel.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">CirculantDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c5</span> <span class="o">=</span> <span class="n">CirculantDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">circulants</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c5</span><span class="o">.</span><span class="n">showPreKernels</span><span class="p">()</span>
+<span class="go">*----- statistics -----</span>
+<span class="go">digraph name:  c5</span>
+<span class="go">number of solutions</span>
+<span class="go"> dominant prekernels :  0</span>
+<span class="go"> absorbent prekernels:  0</span>
+</pre></div>
+</td></tr></table></div>
+<p>Chordless circuits of even length 2 x <em>k</em>, with <em>k</em> &gt; 1, contain however two isomorphic kernels of cardinality <em>k</em> which are conjointly initial and terminal.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c6</span> <span class="o">=</span> <span class="n">CirculantDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">circulants</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c6</span><span class="o">.</span><span class="n">showPreKernels</span><span class="p">()</span>
+<span class="go">*--- Computing preKernels ---*</span>
+<span class="go">Dominant preKernels :</span>
+<span class="go">[&#39;1&#39;, &#39;3&#39;, &#39;5&#39;] independence: 1.0, dominance: 1.0, absorbency: 1.0</span>
+<span class="go">[&#39;2&#39;, &#39;4&#39;, &#39;6&#39;] independence: 1.0, dominance: 1.0, absorbency: 1.0</span>
+<span class="go">Absorbent preKernels :</span>
+<span class="go">[&#39;1&#39;, &#39;3&#39;, &#39;5&#39;] independence: 1.0, dominance: 1.0, absorbency: 1.0</span>
+<span class="go">[&#39;2&#39;, &#39;4&#39;, &#39;6&#39;] independence: 1.0, dominance: 1.0, absorbency: 1.0</span>
+</pre></div>
+</td></tr></table></div>
+<p>Chordless circuits of rvrn lrngth may thus be indifferently oriented in two opposite directions. Notice by the way that the duals of all chordless circuits, ie <em>filled</em> circuits also called <strong>anti-holes</strong> (see Fig.5), indifferently of <em>odd</em> or <em>even</em> length, never contain any potential kernel candidate.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -5255,31 +5287,26 @@ execution time: 0 sec. and 2 millisec.
  8
  9
 10
-11
-12
-13
-14
-15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">CirculantDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cd</span> <span class="o">=</span> <span class="n">CirculantDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">circulants</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cd</span><span class="o">.</span><span class="n">showPreKernels</span><span class="p">()</span>
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dc6</span> <span class="o">=</span> <span class="o">-</span><span class="n">c6</span>   <span class="c1"># dc6 = DualDigraph(c6)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dc6</span><span class="o">.</span><span class="n">showPreKernels</span><span class="p">()</span>
 <span class="go">*----- statistics -----</span>
-<span class="go">digraph name:  c5</span>
+<span class="go">graph name:  dual_c6</span>
 <span class="go">number of solutions</span>
 <span class="go"> dominant prekernels :  0</span>
 <span class="go"> absorbent prekernels:  0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dcd</span> <span class="o">=</span> <span class="o">-</span><span class="n">cd</span>   <span class="c1"># dcd = DualDigraph(cd)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dcd</span><span class="o">.</span><span class="n">showPreKernels</span><span class="p">()</span>
-<span class="go">*----- statistics -----</span>
-<span class="go">graph name:  dual_c5</span>
-<span class="go">number of solutions</span>
-<span class="go"> dominant prekernels :  0</span>
-<span class="go"> absorbent prekernels:  0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dc6</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;dualChordlessCircuit&#39;</span><span class="p">)</span>
+<span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
+<span class="go">Exporting to dualChordlessCircuit.dot</span>
+<span class="go">circo -Tpng dualChordlessCircuit.dot -o dualChordlessCircuit.png</span>
 </pre></div>
 </td></tr></table></div>
-<p>Humans are living in a physical world of apparent plain transitive laterality, fully empowered in numerical modelling. In linear orders, for instance, the first, resp. worst ranked, single node gives the unique initial, resp. terminal, kernel. Similarly, in a preorder, the first, resp. last, equivalence class gives the unique initial, resp. unique terminal, kernel. More generally, in a partial order, ie asymmetric and transitive digraph, a topological sort will easily reveal on the first, resp. last, level its unique initial, resp. terminal, kernel.</p>
+<div class="figure align-center" id="id59">
+<a class="reference internal image-reference" href="_images/dualChordlessCircuit.png"><img alt="The dual of the chordless 6-circuit" src="_images/dualChordlessCircuit.png" style="width: 350px;" /></a>
+<p class="caption"><span class="caption-text"><em>Figure 5</em>: The dual of the chordless 6-circuit</span></p>
+</div>
+<p>Humans are living in an apparent physical space  of plain transitive ‘<em>laterality</em>’, fully empowered in numerical 3D models. In linear orders, for instance, the first, resp. worst ranked, single node gives the unique initial, resp. terminal, kernel. Similarly, in a preorder, the first, resp. last, equivalence class gives the unique initial, resp. unique terminal, kernel. More generally, in a partial order, ie asymmetric and transitive digraph, a topological sort will easily reveal on the first, resp. last, level its unique initial, resp. terminal, kernel.</p>
 <p>In genuine random digraphs, however, we may need to check for each of its given MISs, whether one, both, or none of the lateralized external stability conditions may be satisfied. Consider, for instance, the following random digraph instance of order 7 and generated with an arc probability of 30%.</p>
-<blockquote>
-<div><div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -5308,11 +5335,10 @@ execution time: 0 sec. and 2 millisec.
 </td></tr></table></div>
 <div class="figure align-center" id="id60">
 <a class="reference internal image-reference" href="_images/randomLaterality.png"><img alt="A random digraph instance" src="_images/randomLaterality.png" style="width: 300px;" /></a>
-<p class="caption"><span class="caption-text"><em>Figure 5</em>: A random digraph instance of order 7 and arc probability 0.3</span></p>
+<p class="caption"><span class="caption-text"><em>Figure 6</em>: A random digraph instance of order 7 and arc probability 0.3</span></p>
 </div>
-</div></blockquote>
 <p>The random digraph shown in Fig. 5 above has no apparent special properties, except from being connected. This digraph is neither asymmetric nor symmetric; there are no chordless circuits; the digraph is not transitive: a5 -&gt; a2 -&gt; a1, but a5 -/&gt; a1.</p>
-<p>Now, we know that its potential prekernels must be among its set of maximal independent choice sets.</p>
+<p>Now, we know that its potential prekernels must be among its set of maximal independent choices.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -5382,9 +5408,8 @@ execution time: 0 sec. and 2 millisec.
 <span class="gp">...</span>
 </pre></div>
 </td></tr></table></div>
-<p>We discover two initial and two terminal kernels in this random digraph. Notice above the covering index (between 0.0 and 1.0) shown by the <a class="reference internal" href="techDoc.html#digraphs.Digraph.showPreKernels" title="digraphs.Digraph.showPreKernels"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.showPreKernels()</span></code></a> method. The higher this value, the more the corresponding kernel candidate makes laterality apparent. We may hence redraw the same graph by looking into the digraph via the <em>best covering</em> initial kernel candidate: the dominant choice set {‘3’,‘4’} (coloured in yellow), and looking out of the digraph via the <em>best covering</em> terminal kernel candidate: the absorbent choice set {‘1’,‘6’} (coloured in blue).</p>
-<blockquote>
-<div><div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+<p>We discover two initial and two terminal kernels in this random digraph. Notice above the covering index (between 0.0 and 1.0) shown by the <a class="reference internal" href="techDoc.html#digraphs.Digraph.showPreKernels" title="digraphs.Digraph.showPreKernels"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.showPreKernels()</span></code></a> method. The higher this value, the more the corresponding kernel candidate makes laterality apparent. We may hence redraw the same graph by looking into the digraph via the <em>best covering</em> initial kernel candidate: the dominant choice {‘3’,‘4’} (coloured in yellow), and looking out of the digraph via the <em>best covering</em> terminal kernel candidate: the absorbent choice {‘1’,‘6’} (coloured in blue).</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
@@ -5399,16 +5424,9 @@ execution time: 0 sec. and 2 millisec.
 </td></tr></table></div>
 <div class="figure align-center" id="id61">
 <a class="reference internal image-reference" href="_images/orientedLaterality.png"><img alt="A random digraph oriented by best covering initial and terminal kernels" src="_images/orientedLaterality.png" style="width: 300px;" /></a>
-<p class="caption"><span class="caption-text"><em>Figure 6</em>: A random digraph oriented by best covering initial and terminal kernels</span></p>
+<p class="caption"><span class="caption-text"><em>Figure 7</em>: A random digraph oriented by best covering initial and terminal kernels</span></p>
 </div>
-</div></blockquote>
 <p>In algorithmic decision theory, such initial kernels may be used for computing and graphically illustrating best choice recommendations (see the corresponding tutorial). Checking external stability conditions for a given MIS may be done in a linear complexity, the order of the digraph. However, generating the complete set of MISs in larger digraphs gets a harder problem. As of order 30, there may appear exponentially many MISs in certain types of sparse digraphs (see <a class="reference internal" href="#bis-2006b" id="id49">[BIS-2006b]</a>).</p>
-<p>Until now, we have considered solely fully determined crisp digraphs.
-The effective computation of (pre)kernels in a valued digraph context involves quite sophisticated mathematics (see <a class="reference internal" href="#bis-2006a" id="id50">[BIS-2006a]</a>). We will illustrate this in the next section in the context of bipolar outranking digraphs.</p>
-</div>
-<div class="section" id="computing-the-kernels-in-an-outranking-digraph">
-<h3><a class="toc-backref" href="#id131">Computing the kernels in an outranking digraph</a><a class="headerlink" href="#computing-the-kernels-in-an-outranking-digraph" title="Permalink to this headline">¶</a></h3>
-<p>To be written</p>
 </div>
 </div>
 <div class="section" id="links-and-appendices">
@@ -5518,7 +5536,7 @@ The effective computation of (pre)kernels in a valued digraph context involves q
 <table class="docutils citation" frame="void" id="bis-2006a" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[BIS-2006a]</td><td><em>(<a class="fn-backref" href="#id26">1</a>, <a class="fn-backref" href="#id47">2</a>, <a class="fn-backref" href="#id50">3</a>)</em> <ol class="last upperalpha simple" start="18">
+<tr><td class="label">[BIS-2006a]</td><td><em>(<a class="fn-backref" href="#id26">1</a>, <a class="fn-backref" href="#id47">2</a>)</em> <ol class="last upperalpha simple" start="18">
 <li>Bisdorff, M. Pirlot and M. Roubens (2006). “Choices and kernels from bipolar valued digraphs”. <em>European Journal of Operational Research</em>, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version <a class="reference external" href="https://sma.uni.lu/bisdorff/documents/BisdorffPirlotRoubens05.pdf">PDF file 257.3Kb</a>)</li>
 </ol>
 </td></tr>
@@ -5554,13 +5572,13 @@ The effective computation of (pre)kernels in a valued digraph context involves q
 </div>
 <div class="section" id="footnotes">
 <h3>Footnotes<a class="headerlink" href="#footnotes" title="Permalink to this headline">¶</a></h3>
-<table class="docutils footnote" frame="void" id="id52" rules="none">
+<table class="docutils footnote" frame="void" id="id51" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id4">2</a>, <a class="fn-backref" href="#id8">3</a>, <a class="fn-backref" href="#id16">4</a>, <a class="fn-backref" href="#id39">5</a>)</em> The <code class="docutils literal"><span class="pre">exportGraphViz</span></code> method is depending on drawing tools from <a class="reference external" href="https://graphviz.org/">graphviz</a>. On Linux Ubuntu or Debian you may try <code class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">graphviz</span></code> to install them. There are ready <code class="docutils literal"><span class="pre">dmg</span></code> installers for Mac OSX.</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id54" rules="none">
+<table class="docutils footnote" frame="void" id="id53" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id44">[2]</a></td><td><p class="first">Dependency: The :py:func:digraphs.Digraph.automorphismGenerators method uses the shell <code class="code docutils literal"><span class="pre">dreadnaut</span></code> command from the nauty software package. See <a class="reference external" href="https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml">https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml</a> . On Mac OS there exist dmg installers and on Ubuntu Linux or Debian, one may easily install it with:</p>
@@ -5570,7 +5588,7 @@ The effective computation of (pre)kernels in a valued digraph context involves q
 </td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id55" rules="none">
+<table class="docutils footnote" frame="void" id="id54" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label"><a class="fn-backref" href="#id43">[3]</a></td><td>The <code class="code docutils literal"><span class="pre">perrinMIS</span></code> shell command my be installed system wide with the command <code class="code docutils literal"><span class="pre">.../Digraph3$</span> <span class="pre">make</span> <span class="pre">installPerrin</span></code> from the main Digraph3 directory. It is stored by default into <code class="code docutils literal"><span class="pre">&lt;/usr/local/bin/&gt;</span></code>. This may be changed with the <code class="code docutils literal"><span class="pre">INSTALLDIR</span></code> flag. The command <code class="code docutils literal"><span class="pre">.../Digraph3$</span> <span class="pre">make</span> <span class="pre">installPerrinUser</span></code> installs it instead without sudo into the user’s private <code class="code docutils literal"><span class="pre">&lt;$Home/.bin&gt;</span></code> directory.</td></tr>
@@ -5665,17 +5683,16 @@ The effective computation of (pre)kernels in a valued digraph context involves q
 <li><a class="reference internal" href="#working-with-the-graphs-module">Working with the <code class="docutils literal"><span class="pre">graphs</span></code> module</a><ul>
 <li><a class="reference internal" href="#structure-of-a-graph-object">Structure of a <code class="docutils literal"><span class="pre">Graph</span></code> object</a></li>
 <li><a class="reference internal" href="#q-coloring-of-a-graph">q-coloring of a graph</a></li>
-<li><a class="reference internal" href="#mis-and-clique-enumeration">MIS and Clique enumeration</a></li>
+<li><a class="reference internal" href="#mis-and-clique-enumeration">MIS and clique enumeration</a></li>
 <li><a class="reference internal" href="#grids-and-the-ising-model">Grids and the Ising model</a></li>
 <li><a class="reference internal" href="#simulating-metropolis-random-walks">Simulating Metropolis random walks</a></li>
 <li><a class="reference internal" href="#the-berge-mystery-story-who-is-the-lier">The Berge mystery story: Who is the lier ?</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#computing-the-non-isomorphic-miss-of-the-n-cycle-graph">Computing the non isomorphic MISs of the n-cycle graph</a></li>
-<li><a class="reference internal" href="#on-computing-digraph-kernels">On Computing Digraph Kernels</a><ul>
+<li><a class="reference internal" href="#on-computing-digraph-kernels">On computing digraph kernels</a><ul>
 <li><a class="reference internal" href="#what-is-a-graph-kernel">What is a graph kernel ?</a></li>
-<li><a class="reference internal" href="#initial-and-terminal-digraph-kernels">Initial and terminal digraph kernels</a></li>
-<li><a class="reference internal" href="#computing-the-kernels-in-an-outranking-digraph">Computing the kernels in an outranking digraph</a></li>
+<li><a class="reference internal" href="#initial-and-terminal-kernels">Initial and terminal kernels</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#links-and-appendices">Links and appendices</a><ul>
