@@ -3045,7 +3045,7 @@ What is a graph kernel ?
 
 We call **choice** in a graph, respectively a digraph, a subset of its vertices, resp. of its nodes or actions. A choice *Y* is called **internally stable** or **independent** when there exist **no links** (edges) or relations (arcs) between its members. Furthermore, a choice *Y* is called **externally stable** when for each vertex, node or action *x* not in *Y*, there exists at least a member *y* of *Y* such that *x* is linked or related to *y*. Now, an internally **and** externally stable choice is called a **kernel**.  
 
-A first trivial example is immediately given by the MISs of the n-cycle graph. Indeed, each MIS in the n-cycle graph is by definition independent, ie internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12-cycle graph as shown in Fig. 1 above. 
+A first trivial example is immediately given by the naximal independent vertices sets (MISs) of the n-cycle graph (see :ref:`IsomorphicMIS-Tutorial-label`). Indeed, each MIS in the n-cycle graph is by definition independent, ie internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12-cycle graph as shown in Fig. 1. 
 
 In all graph or symmetric digraph, the *maximality condition* imposed on the internal stability is equivalent to the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice, then we may safely add this vertex or node the choice without violating its internal stability. All kernels must hence be maximal independent choices. In fact, in a topological sense, they correspond to maximal **holes** in the given graph.
 
@@ -3199,7 +3199,7 @@ In an oriented graph context, the internal stability condition of the kernel con
      1. A **dominant** stability condition, where each non selected node is dominated by at least one member of the kernel;
      2. An **absorbant** stability condition, where each non selected node is absorbed by at least one member of the kernel.
 
-A both *internally* **and** *dominant*, resp. *absorbent stable* choice is called a *dominant* or **initial**, resp. an *absorbent* or **terminal** kernel. From a topological perspective, the initial kernel concept looks from the outside of the digraph into its interior, whereas the terminal kernel looks from the interior of a digraph toward its outside. From an algebraic perspective, the initial kernel is a *prefix* operand, and the terminal kernel is a *suffix* operand of the Berge kernel equation (see [BIS-2006a]_ )
+A both *internally* **and** *dominant*, resp. *absorbent stable* choice is called a *dominant* or **initial**, resp. an *absorbent* or **terminal** kernel. From a topological perspective, the initial kernel concept looks from the outside of the digraph into its interior, whereas the terminal kernel looks from the interior of a digraph toward its outside. From an algebraic perspective, the initial kernel is a *prefix* operand, and the terminal kernel is a *postfix* operand in the *Berge* kernel equation (see [BIS-2006a]_ )
 
 Furthermore, as the kernel concept involves conjointly a **positive logical refutation** (the *internal stability*) and a **positive logical affirmation** (the *external stability*), it appeared rather quickly necessary in our operational developments to adopt a bipolar characteristic [-1,1] valuation domain, modelling *negation* by change of numerical sign and including explicitely a third **median** logical value (0) expressing logical **indeterminateness** (neither positive, nor negative, see [BIS-2000]_).
 
@@ -3326,7 +3326,7 @@ circo -Tpng dualChordlessCircuit.dot -o dualChordlessCircuit.png
 Kernels in lateralized digraphs
 ...............................
 
-Humans are living in an apparent physical space  of plain transitive **lateral orientation**, fully empowered in finite geometrical 3D models with **linear orders**, where first, resp. worst ranked, nodes deliver unique initial, resp. terminal, kernels. Similarly, in finite **preorders**, the first, resp. last, equivalence classes deliver the unique initial, resp. unique terminal, kernels. More generally, in finite **partial orders**, ie asymmetric and transitive digraphs, topological sort algorithms will easily reveal on the first, resp. last, level all unique initial, resp. terminal, kernels.
+Humans are living in an apparent physical space of plain transitive **lateral orientation**, fully empowered in finite geometrical 3D models with **linear orders**, where first, resp. last ranked, nodes deliver unique initial, resp. terminal, kernels. Similarly, in finite **preorders**, the first, resp. last, equivalence classes deliver the unique initial, resp. unique terminal, kernels. More generally, in finite **partial orders**, ie asymmetric and transitive digraphs, topological sort algorithms will easily reveal on the first, resp. last, level all unique initial, resp. terminal, kernels.
 
 In genuine random digraphs, however, we may need to check for each of its MISs, whether *one*, *both*, or *none* of the lateralized external stability conditions may be satisfied. Consider, for instance, the following random digraph instance of order 7 and generated with an arc probability of 30%. 
 
@@ -3394,7 +3394,7 @@ Absorbent preKernels :
    covering     :  0.600  # <<==
 ...
 
-We discover in this random digraph two initial and two terminal kernels (see above Lines 12-34). Notice by the way the covering values (Lines 17, 22, 28 and 33) shown by the :py:func:`digraphs.Digraph.showPreKernels` method. The higher this value (between 0.0 and 1.0), the more the corresponding kernel candidate makes the digraphs *laterality* apparent. We may hence redraw the same graph by looking into the digraph via the *best covering* initial kernel candidate: the dominant choice {'3','4'} (coloured in yellow), and looking out of the digraph via the *best covering* terminal kernel candidate: the absorbent choice {'1','6'} (coloured in blue).
+Among the six MISs contained in this random digraph (see above Lines 3-8) we dicover two initial and two terminal kernels (Lines 12-34). Notice by the way the covering values (between 0.0 and 1.0) shown by the :py:func:`digraphs.Digraph.showPreKernels` method (Lines 17, 22, 28 and 33). The higher this value, the more the corresponding kernel candidate makes apparent the digraphs *laterality*. We may hence redraw the same graph by looking into the digraph via the *best covering* initial kernel candidate: the dominant choice {'3','4'} (coloured in yellow), and looking out of the digraph via the *best covering* terminal kernel candidate: the absorbent choice {'1','6'} (coloured in blue).
 
 >>> rd.exportGraphViz(fileName='orientedLaterality',\
 ...                   bestChoice=set(['a4', 'a3']),\
@@ -3410,11 +3410,11 @@ dot -Grankdir=BT -Tpng orientedLaterality.dot -o orientedLaterality.png
 
    *Figure 7*: A random digraph oriented by best covering initial and terminal kernels
 
-In algorithmic decision theory, initial and terminal kernels are very useful for graphically illustrating best choice recommendations as shown above in Fig. 7.
+In algorithmic decision theory, initial and terminal kernels are very useful for graphically illustrating best and worst choice recommendations as shown in Fig. 7 above.
 
-Finally, let us give some hints on the tarctability of kernel computations. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraphs may get a hard problem already for sparse digraphs of order *n* > 30 (see [BIS-2006b]_). Indeed, the worst case is given by an empty or indeterminate digraph where the number of independent choices is 2 to power *n*.
+Finally, let us give some hints on the **tractability** of kernel computations. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraphs may get a hard problem already for sparse digraphs of order *n* > 30 (see [BIS-2006b]_). Indeed, the worst case is given by an empty or indeterminate digraph where the number of independent choices is 2 to power *n*.
 
-Now, there exist more efficient specialized algorithms for directly enumerating dominant or absorbent kernels contained in certain digraph models. For more or less dense digraphs, as facing here in algorithmic decision theory, enumerating all independent choices is luckily more tractable. And, checking maximality of independent choices via the external stability conditions during their emuneration has the effective advantage of allowing to compute all initial and/or terminal kernels in a single run (see [BIS-2006b]_).
+Now, there exist more efficient specialized algorithms for directly enumerating dominant or absorbent kernels contained in specific digraph models. For more or less dense digraphs, as facing usually in algorithmic decision theory, enumerating all independent choices is more tractable. And, checking maximality of independent choices via the external stability conditions during their emuneration provides the effective advantage of allowing to compute all initial and/or terminal kernels in a single run (see [BIS-2006b]_).
 
 Links and appendices
 --------------------
