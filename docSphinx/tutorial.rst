@@ -3394,7 +3394,7 @@ Absorbent preKernels :
    covering     :  0.600  # <<==
 ...
 
-Among the six MISs contained in this random digraph (see above Lines 3-8) we dicover two initial and two terminal kernels (Lines 12-34). Notice by the way the covering values (between 0.0 and 1.0) shown by the :py:func:`digraphs.Digraph.showPreKernels` method (Lines 17, 22, 28 and 33). The higher this value, the more the corresponding kernel candidate makes apparent the digraphs *laterality*. We may hence redraw the same graph by looking into the digraph via the *best covering* initial kernel candidate: the dominant choice {'3','4'} (coloured in yellow), and looking out of the digraph via the *best covering* terminal kernel candidate: the absorbent choice {'1','6'} (coloured in blue).
+Among the six MISs contained in this random digraph (see above Lines 3-8) we dicover two initial and two terminal kernels (Lines 12-34). Notice by the way the covering values (between 0.0 and 1.0) shown by the :py:func:`digraphs.Digraph.showPreKernels` method (Lines 17, 22, 28 and 33). The higher this value, the more the corresponding kernel candidate makes apparent the digraphs *laterality*. We may hence redraw the same graph in Fig. 7 by looking into the digraph via the *best covering* initial kernel candidate: the dominant choice {'3','4'} (coloured in yellow), and looking out of the digraph via the *best covering* terminal kernel candidate: the absorbent choice {'1','6'} (coloured in blue).
 
 >>> rd.exportGraphViz(fileName='orientedLaterality',\
 ...                   bestChoice=set(['a4', 'a3']),\
@@ -3410,7 +3410,7 @@ dot -Grankdir=BT -Tpng orientedLaterality.dot -o orientedLaterality.png
 
    *Figure 7*: A random digraph oriented by best covering initial and terminal kernels
 
-In algorithmic decision theory, initial and terminal kernels are very useful for graphically illustrating best and worst choice recommendations as shown in Fig. 7 above.
+In algorithmic decision theory, initial and terminal kernels may provide convincing best, resp. worst, choice recommendations (see :ref:`Rubis-Tutorial-label`).
 
 Finally, let us give some hints on the **tractability** of kernel computations. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraphs may get a hard problem already for sparse digraphs of order *n* > 30 (see [BIS-2006b]_). Indeed, the worst case is given by an empty or indeterminate digraph where the number of independent choices is 2 to power *n*.
 
