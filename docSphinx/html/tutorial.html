@@ -5096,7 +5096,7 @@ execution time: 0 sec. and 2 millisec.
 <div class="section" id="initial-and-terminal-kernels">
 <h3><a class="toc-backref" href="#id131">Initial and terminal kernels</a><a class="headerlink" href="#initial-and-terminal-kernels" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
-<dt>In an oriented graph context, the internal stability condition of the kernel concept remains untouched; however, the external stability condition gets indeed split up by <em>laterality</em> into two cases:</dt>
+<dt>In an oriented graph context, the internal stability condition of the kernel concept remains untouched; however, the external stability condition gets indeed split up by the <em>orientation</em> into two lateral cases:</dt>
 <dd><ol class="first last arabic simple">
 <li>A <strong>dominant</strong> stability condition, where each non selected node is dominated by at least one member of the kernel;</li>
 <li>An <strong>absorbant</strong> stability condition, where each non selected node is absorbed by at least one member of the kernel.</li>
@@ -5106,7 +5106,7 @@ execution time: 0 sec. and 2 millisec.
 <p>A both <em>internally</em> <strong>and</strong> <em>dominant</em>, resp. <em>absorbent stable</em> choice is called a <em>dominant</em> or <strong>initial</strong>, resp. an <em>absorbent</em> or <strong>terminal</strong> kernel. From a topological perspective, the initial kernel concept looks from the outside of the digraph into its interior, whereas the terminal kernel looks from the interior of a digraph toward its outside. From an algebraic perspective, the initial kernel is a <em>prefix</em> operand, and the terminal kernel is a <em>suffix</em> operand of the Berge kernel equation (see <a class="reference internal" href="#bis-2006a" id="id47">[BIS-2006a]</a> )</p>
 <p>Furthermore, as the kernel concept involves conjointly a <strong>positive logical refutation</strong> (the <em>internal stability</em>) and a <strong>positive logical affirmation</strong> (the <em>external stability</em>), it appeared rather quickly necessary in our operational developments to adopt a bipolar characteristic [-1,1] valuation domain, modelling <em>negation</em> by change of numerical sign and including explicitely a third <strong>median</strong> logical value (0) expressing logical <strong>indeterminateness</strong> (neither positive, nor negative, see <a class="reference internal" href="#bis-2000" id="id48">[BIS-2000]</a>).</p>
 <p>In such a  bipolar valued context, we call <strong>prekernel</strong> a choice which is <strong>externally stable</strong> and for which the <strong>internal stability</strong> condition is <strong>valid or indeterminate</strong>. We say that the independence condition is in this case only <strong>weakly</strong> valiadated. Notice that all kernels are hence prekernels, but not vice-versa.</p>
-<p>In graphs or symmetric digraphs, where there is essentially no apparent ‘<em>laterality</em>’, all kernels are <em>initial</em> <strong>and</strong> <em>terminal</em> at the same time. They correspond to what we call <em>holes</em> in the graph. An <em>universal</em> example is given by the <strong>complete</strong> digraph.</p>
+<p>In graphs or symmetric digraphs, where there is essentially no apparent ‘ <em>laterality</em> ‘, all kernels are <em>initial</em> <strong>and</strong> <em>terminal</em> at the same time. They correspond to what we call <em>holes</em> in the graph. An <em>universal</em> example is given by the <strong>complete</strong> digraph.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -5178,7 +5178,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">Results in sets: dompreKernels and abspreKernels.</span>
 </pre></div>
 </td></tr></table></div>
-<p>In a complete digraph, each single node is both an initial and a terminal kernel candidate and there is no definite <em>begin</em> or <em>end</em> of the digraph to be detected. Laterality is here entirely <em>relative</em> to a specific singleton chosen as reference point of view. The same absence of laterality is apparent for two other universal digraph models, the <strong>empty</strong> and the <strong>indeterminate</strong> digraph.</p>
+<p>In a complete digraph, each single node is indeed both an initial and a terminal kernel candidate and there is no definite <em>begin</em> or <em>end</em> of the digraph to be detected. <em>Laterality</em> is here entirely <em>relative</em> to a specific singleton chosen as reference point of view. The same absence of laterality is apparent in two other universal digraph models, the <strong>empty</strong> and the <strong>indeterminate</strong> digraph.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -5238,8 +5238,8 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">   absorbency   :  1.0</span>
 </pre></div>
 </td></tr></table></div>
-<p>Both these results make sense, as in a completely empty or indeterminate digraph, each node may appear anywhere; as its beginning, its end, or somewhere as a hole in its middle. Notice however, that in the latter indeterminate case the complete set of nodes verifies only weakly the internal stability condition (see above). In a dynamic process of becoming more and definite, the powerset of the nodes contains all choice candidates that may become in the end the actual kernels of the eventually determined digraph.</p>
-<p>Other common digraph models may show as well no apparent ‘<em>laterality</em>’, like <em>odd</em> <strong>chordless circuits</strong>, ie <em>holes</em> surrounded by a circuit of odd length. They do not admit in fact any initial or terminal kernel.</p>
+<p>Both these results make sense, as in a completely empty or indeterminate digraph, each node may appear anywhere; as its beginning, its end, or somewhere as a hole in its middle. Notice however, that in the latter indeterminate case the complete set of nodes verifies only weakly the internal stability condition (see above). In a dynamic process of becoming more and more definite, the powerset of the nodes contains all choice candidates that may become in the end the actual kernels of the eventually determined digraph.</p>
+<p>Other common digraph models, allthough being clearly oriented, may show nevertheless no apparent laterality, like <em>odd</em> <strong>chordless circuits</strong>, ie <em>holes</em> surrounded by a circuit of odd length. They do not admit in fact any initial or terminal kernel.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -5257,7 +5257,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="go"> absorbent prekernels:  0</span>
 </pre></div>
 </td></tr></table></div>
-<p>Chordless circuits of even length 2 x <em>k</em>, with <em>k</em> &gt; 1, contain however two isomorphic kernels of cardinality <em>k</em> which are conjointly initial and terminal.</p>
+<p>Chordless circuits of even length 2 x <em>k</em>, with <em>k</em> &gt; 1, contain however two isomorphic kernels of cardinality <em>k</em> which qualify conjointly as initial and terminal candidates.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -5308,29 +5308,15 @@ execution time: 0 sec. and 2 millisec.
 </div>
 <div class="section" id="kernels-in-lateralized-digraphs">
 <h3><a class="toc-backref" href="#id132">Kernels in lateralized digraphs</a><a class="headerlink" href="#kernels-in-lateralized-digraphs" title="Permalink to this headline">¶</a></h3>
-<p>Humans are living in an apparent physical space  of plain transitive ‘<em>laterality</em>’, fully empowered in geometrical 3D models with linear orders where first, resp. worst ranked, nodes gives unique initial, resp. terminal, kernels. Similarly, in preorders, the first, resp. last, equivalence classes deliver the unique initial, resp. unique terminal, kernels. More generally, in partial orders, ie asymmetric and transitive digraphs, topological sorts will easily reveal on the first, resp. last, level all unique initial, resp. terminal, kernels.</p>
+<p>Humans are living in an apparent physical space  of plain transitive <strong>lateral orientation</strong>, fully empowered in finite geometrical 3D models with <strong>linear orders</strong>, where first, resp. worst ranked, nodes deliver unique initial, resp. terminal, kernels. Similarly, in finite <strong>preorders</strong>, the first, resp. last, equivalence classes deliver the unique initial, resp. unique terminal, kernels. More generally, in finite <strong>partial orders</strong>, ie asymmetric and transitive digraphs, topological sort algorithms will easily reveal on the first, resp. last, level all unique initial, resp. terminal, kernels.</p>
 <p>In genuine random digraphs, however, we may need to check for each of its MISs, whether <em>one</em>, <em>both</em>, or <em>none</em> of the lateralized external stability conditions may be satisfied. Consider, for instance, the following random digraph instance of order 7 and generated with an arc probability of 30%.</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomDigraphs</span> <span class="kn">import</span> <span class="n">RandomDigraph</span>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomDigraphs</span> <span class="kn">import</span> <span class="n">RandomDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rd</span> <span class="o">=</span> <span class="n">RandomDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">arcProbability</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rd</span><span class="o">.</span><span class="n">showComponents</span><span class="p">()</span>
-<span class="go">*--- Connected Components ---*</span>
-<span class="go">1: [&#39;a1&#39;, &#39;a2&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a5&#39;, &#39;a6&#39;, &#39;a7&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rd</span><span class="o">.</span><span class="n">computeChordlessCircuits</span><span class="p">()</span>
-<span class="go">[]                 # no chordless circuits detected</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rd</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span>
-<span class="go">Decimal(&#39;0.4839&#39;)  # half of the required transitive arcs are missing</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rd</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;randomLatrality&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
 <span class="go">Exporting to randomLaterality.dot</span>
@@ -5341,7 +5327,25 @@ execution time: 0 sec. and 2 millisec.
 <a class="reference internal image-reference" href="_images/randomLaterality.png"><img alt="A random digraph instance" src="_images/randomLaterality.png" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-text"><em>Figure 6</em>: A random digraph instance of order 7 and arc probability 0.3</span></p>
 </div>
-<p>The random digraph shown in Fig. 5 above has no apparent special properties, except from being connected. This digraph is neither asymmetric nor symmetric; there are no chordless circuits; and, the digraph is not transitive: a5 -&gt; a2 -&gt; a1, but a5 -/&gt; a1.</p>
+<p>The random digraph shown in Fig. 5 above has no apparent special properties, except from being connected.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rd</span><span class="o">.</span><span class="n">showComponents</span><span class="p">()</span>
+<span class="go">*--- Connected Components ---*</span>
+<span class="go">1: [&#39;a1&#39;, &#39;a2&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a5&#39;, &#39;a6&#39;, &#39;a7&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rd</span><span class="o">.</span><span class="n">computeChordlessCircuits</span><span class="p">()</span>
+<span class="go">[]                 # no chordless circuits detected</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Transitivity degree: </span><span class="si">%.2f%%</span><span class="s1">&#39;</span> <span class="o">%</span>\
+<span class="gp">... </span>              <span class="p">(</span><span class="n">rd</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+<span class="go">Transitivity degree: 48.39%</span>
+</pre></div>
+</td></tr></table></div>
+<p>The given digraph instance is neither asymmetric (a3 &lt;–&gt; a6) nor symmetric (a2 –&gt; a1, a1 -/&gt; a2); there are no chordless circuits (see Line 5 above); and, the digraph is not transitive (a5 -&gt; a2 -&gt; a1, but a5 -/&gt; a1). More than half of the required transitive closures are missing (see Line 8).</p>
 <p>Now, we know that its potential prekernels must be among its set of maximal independent choices.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -5387,7 +5391,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="gp">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rd</span><span class="o">.</span><span class="n">showPreKernels</span><span class="p">()</span>
 <span class="go">*--- Computing preKernels ---*</span>
-<span class="go">Dominant kernels :</span>
+<span class="go">Dominant preKernels :</span>
 <span class="go">[&#39;a2&#39;, &#39;a4&#39;, &#39;a6&#39;]</span>
 <span class="go">   independence :  1.0</span>
 <span class="go">   dominance    :  1.0</span>
@@ -5398,7 +5402,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">   dominance    :  1.0</span>
 <span class="go">   absorbency   :  -1.0</span>
 <span class="go">   covering     :  0.600  # &lt;&lt;==</span>
-<span class="go">Absorbent kernels :</span>
+<span class="go">Absorbent preKernels :</span>
 <span class="go">[&#39;a3&#39;, &#39;a1&#39;]</span>
 <span class="go">   independence :  1.0</span>
 <span class="go">   dominance    :  -1.0</span>
@@ -5412,7 +5416,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="gp">...</span>
 </pre></div>
 </td></tr></table></div>
-<p>We discover in this random digrap two initial and two terminal kernels (see above Lines 12-34). Notice by the way the covering values (Lines 17, 22, 28 and 33) between shown by the <a class="reference internal" href="techDoc.html#digraphs.Digraph.showPreKernels" title="digraphs.Digraph.showPreKernels"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.showPreKernels()</span></code></a> method. The higher this value (between 0.0 and 1.0), the more the corresponding kernel candidate makes laterality apparent. We may hence redraw the same graph by looking into the digraph via the <em>best covering</em> initial kernel candidate: the dominant choice {‘3’,‘4’} (coloured in yellow), and looking out of the digraph via the <em>best covering</em> terminal kernel candidate: the absorbent choice {‘1’,‘6’} (coloured in blue).</p>
+<p>We discover in this random digraph two initial and two terminal kernels (see above Lines 12-34). Notice by the way the covering values (Lines 17, 22, 28 and 33) shown by the <a class="reference internal" href="techDoc.html#digraphs.Digraph.showPreKernels" title="digraphs.Digraph.showPreKernels"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.showPreKernels()</span></code></a> method. The higher this value (between 0.0 and 1.0), the more the corresponding kernel candidate makes the digraphs <em>laterality</em> apparent. We may hence redraw the same graph by looking into the digraph via the <em>best covering</em> initial kernel candidate: the dominant choice {‘3’,‘4’} (coloured in yellow), and looking out of the digraph via the <em>best covering</em> terminal kernel candidate: the absorbent choice {‘1’,‘6’} (coloured in blue).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -5430,9 +5434,9 @@ execution time: 0 sec. and 2 millisec.
 <a class="reference internal image-reference" href="_images/orientedLaterality.png"><img alt="A random digraph oriented by best covering initial and terminal kernels" src="_images/orientedLaterality.png" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-text"><em>Figure 7</em>: A random digraph oriented by best covering initial and terminal kernels</span></p>
 </div>
-<p>In algorithmic decision theory, such initial kernels may be used for graphically illustrating best choice recommendations as shown above in Fig. 7.</p>
-<p>Finally, let us give some hints on the tarctability of kernel computations:. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraphs may get a hard problem already from some digraphs of order 30 and more on. There may appear indeed exponentially many independet choices to check in certain types of sparse digraphs (see <a class="reference internal" href="#bis-2006b" id="id49">[BIS-2006b]</a>).</p>
-<p>Now, there exist more efficient specialized algorithms for enumerating all MISs contained in sparse digraph models. Checking maximality however via the external stability conditions during the emuneration of all potential independet choices has the effective advantage of allowing to compute all initial and/or terminal kernels on a same run (see <a class="reference internal" href="#bis-2006b" id="id50">[BIS-2006b]</a>).</p>
+<p>In algorithmic decision theory, initial and terminal kernels are very useful for graphically illustrating best choice recommendations as shown above in Fig. 7.</p>
+<p>Finally, let us give some hints on the tarctability of kernel computations. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraphs may get a hard problem already for sparse digraphs of order <em>n</em> &gt; 30 (see <a class="reference internal" href="#bis-2006b" id="id49">[BIS-2006b]</a>). Indeed, the worst case is given by an empty or indeterminate digraph where the number of independent choices is 2 to power <em>n</em>.</p>
+<p>Now, there exist more efficient specialized algorithms for directly enumerating dominant or absorbent kernels contained in certain digraph models. For more or less dense digraphs, as facing here in algorithmic decision theory, enumerating all independent choices is luckily more tractable. And, checking maximality of independent choices via the external stability conditions during their emuneration has the effective advantage of allowing to compute all initial and/or terminal kernels in a single run (see <a class="reference internal" href="#bis-2006b" id="id50">[BIS-2006b]</a>).</p>
 </div>
 </div>
 <div class="section" id="links-and-appendices">

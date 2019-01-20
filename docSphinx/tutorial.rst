@@ -3195,7 +3195,7 @@ All symmteric digraphs admid MISs, hence also kernels. In the context of digraph
 Initial and terminal kernels
 ............................
 
-In an oriented graph context, the internal stability condition of the kernel concept remains untouched; however, the external stability condition gets indeed split up by *laterality* into two cases:
+In an oriented graph context, the internal stability condition of the kernel concept remains untouched; however, the external stability condition gets indeed split up by the *orientation* into two lateral cases:
      1. A **dominant** stability condition, where each non selected node is dominated by at least one member of the kernel;
      2. An **absorbant** stability condition, where each non selected node is absorbed by at least one member of the kernel.
 
@@ -3205,7 +3205,7 @@ Furthermore, as the kernel concept involves conjointly a **positive logical refu
 
 In such a  bipolar valued context, we call **prekernel** a choice which is **externally stable** and for which the **internal stability** condition is **valid or indeterminate**. We say that the independence condition is in this case only **weakly** valiadated. Notice that all kernels are hence prekernels, but not vice-versa.
 
-In graphs or symmetric digraphs, where there is essentially no apparent '*laterality*', all kernels are *initial* **and** *terminal* at the same time. They correspond to what we call *holes* in the graph. An *universal* example is given by the **complete** digraph.
+In graphs or symmetric digraphs, where there is essentially no apparent ' *laterality* ', all kernels are *initial* **and** *terminal* at the same time. They correspond to what we call *holes* in the graph. An *universal* example is given by the **complete** digraph.
 
 >>> from digraphs import CompleteDigraph
 >>> u = CompleteDigraph(order=5)
@@ -3243,7 +3243,7 @@ absorbent kernel:  [0, 5, 0, 0, 0, 0]
 Execution time  : 0.00004 sec.
 Results in sets: dompreKernels and abspreKernels.
 
-In a complete digraph, each single node is both an initial and a terminal kernel candidate and there is no definite *begin* or *end* of the digraph to be detected. Laterality is here entirely *relative* to a specific singleton chosen as reference point of view. The same absence of laterality is apparent for two other universal digraph models, the **empty** and the **indeterminate** digraph. 
+In a complete digraph, each single node is indeed both an initial and a terminal kernel candidate and there is no definite *begin* or *end* of the digraph to be detected. *Laterality* is here entirely *relative* to a specific singleton chosen as reference point of view. The same absence of laterality is apparent in two other universal digraph models, the **empty** and the **indeterminate** digraph. 
 
 >>> ed = EmptyDigraph(order=5)
 >>> ed.showPreKernels()
@@ -3277,9 +3277,9 @@ Absorbent prekernel :
    dominance    :  1.0
    absorbency   :  1.0
 
-Both these results make sense, as in a completely empty or indeterminate digraph, each node may appear anywhere; as its beginning, its end, or somewhere as a hole in its middle. Notice however, that in the latter indeterminate case the complete set of nodes verifies only weakly the internal stability condition (see above). In a dynamic process of becoming more and definite, the powerset of the nodes contains all choice candidates that may become in the end the actual kernels of the eventually determined digraph.
+Both these results make sense, as in a completely empty or indeterminate digraph, each node may appear anywhere; as its beginning, its end, or somewhere as a hole in its middle. Notice however, that in the latter indeterminate case the complete set of nodes verifies only weakly the internal stability condition (see above). In a dynamic process of becoming more and more definite, the powerset of the nodes contains all choice candidates that may become in the end the actual kernels of the eventually determined digraph.
 
-Other common digraph models may show as well no apparent '*laterality*', like *odd* **chordless circuits**, ie *holes* surrounded by a circuit of odd length. They do not admit in fact any initial or terminal kernel.
+Other common digraph models, allthough being clearly oriented, may show nevertheless no apparent laterality, like *odd* **chordless circuits**, ie *holes* surrounded by a circuit of odd length. They do not admit in fact any initial or terminal kernel.
 
 >>> from digraphs import CirculantDigraph
 >>> c5 = CirculantDigraph(order=5,circulants=[1])
@@ -3290,7 +3290,7 @@ number of solutions
  dominant prekernels :  0
  absorbent prekernels:  0
 
-Chordless circuits of even length 2 x *k*, with *k* > 1, contain however two isomorphic kernels of cardinality *k* which are conjointly initial and terminal.
+Chordless circuits of even length 2 x *k*, with *k* > 1, contain however two isomorphic kernels of cardinality *k* which qualify conjointly as initial and terminal candidates.
 
 >>> c6 = CirculantDigraph(order=6,circulants=[1])
 >>> c6.showPreKernels()
@@ -3326,19 +3326,12 @@ circo -Tpng dualChordlessCircuit.dot -o dualChordlessCircuit.png
 Kernels in lateralized digraphs
 ...............................
 
-Humans are living in an apparent physical space  of plain transitive '*laterality*', fully empowered in geometrical 3D models with linear orders where first, resp. worst ranked, nodes gives unique initial, resp. terminal, kernels. Similarly, in preorders, the first, resp. last, equivalence classes deliver the unique initial, resp. unique terminal, kernels. More generally, in partial orders, ie asymmetric and transitive digraphs, topological sorts will easily reveal on the first, resp. last, level all unique initial, resp. terminal, kernels.
+Humans are living in an apparent physical space  of plain transitive **lateral orientation**, fully empowered in finite geometrical 3D models with **linear orders**, where first, resp. worst ranked, nodes deliver unique initial, resp. terminal, kernels. Similarly, in finite **preorders**, the first, resp. last, equivalence classes deliver the unique initial, resp. unique terminal, kernels. More generally, in finite **partial orders**, ie asymmetric and transitive digraphs, topological sort algorithms will easily reveal on the first, resp. last, level all unique initial, resp. terminal, kernels.
 
 In genuine random digraphs, however, we may need to check for each of its MISs, whether *one*, *both*, or *none* of the lateralized external stability conditions may be satisfied. Consider, for instance, the following random digraph instance of order 7 and generated with an arc probability of 30%. 
 
 >>> from randomDigraphs import RandomDigraph
 >>> rd = RandomDigraph(order=7,arcProbability=0.3,seed=5)
->>> rd.showComponents()
-*--- Connected Components ---*
-1: ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7']
->>> rd.computeChordlessCircuits()
-[]                 # no chordless circuits detected
->>> rd.computeTransitivityDegree()
-Decimal('0.4839')  # half of the required transitive arcs are missing
 >>> rd.exportGraphViz('randomLatrality')
 *---- exporting a dot file dor GraphViz tools ---------*
 Exporting to randomLaterality.dot
@@ -3351,7 +3344,18 @@ dot -Grankdir=BT -Tpng randomLaterality.dot -o randomLaterality.png
 
    *Figure 6*: A random digraph instance of order 7 and arc probability 0.3
 
-The random digraph shown in Fig. 5 above has no apparent special properties, except from being connected. This digraph is neither asymmetric nor symmetric; there are no chordless circuits; and, the digraph is not transitive: a5 -> a2 -> a1, but a5 -/> a1.
+The random digraph shown in Fig. 5 above has no apparent special properties, except from being connected.
+
+>>> rd.showComponents()
+*--- Connected Components ---*
+1: ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7']
+>>> rd.computeChordlessCircuits()
+[]                 # no chordless circuits detected
+>>> print('Transitivity degree: %.2f%%' %\
+...               (rd.computeTransitivityDegree()*100))
+Transitivity degree: 48.39%
+
+The given digraph instance is neither asymmetric (a3 <--> a6) nor symmetric (a2 --> a1, a1 -/> a2); there are no chordless circuits (see Line 5 above); and, the digraph is not transitive (a5 -> a2 -> a1, but a5 -/> a1). More than half of the required transitive closures are missing (see Line 8).
 
 Now, we know that its potential prekernels must be among its set of maximal independent choices. 
 
@@ -3366,7 +3370,7 @@ Now, we know that its potential prekernels must be among its set of maximal inde
 ...
 >>> rd.showPreKernels()
 *--- Computing preKernels ---*
-Dominant kernels :
+Dominant preKernels :
 ['a2', 'a4', 'a6']
    independence :  1.0
    dominance    :  1.0
@@ -3377,7 +3381,7 @@ Dominant kernels :
    dominance    :  1.0
    absorbency   :  -1.0
    covering     :  0.600  # <<==
-Absorbent kernels :
+Absorbent preKernels :
 ['a3', 'a1']
    independence :  1.0
    dominance    :  -1.0
@@ -3390,7 +3394,7 @@ Absorbent kernels :
    covering     :  0.600  # <<==
 ...
 
-We discover in this random digrap two initial and two terminal kernels (see above Lines 12-34). Notice by the way the covering values (Lines 17, 22, 28 and 33) between shown by the :py:func:`digraphs.Digraph.showPreKernels` method. The higher this value (between 0.0 and 1.0), the more the corresponding kernel candidate makes laterality apparent. We may hence redraw the same graph by looking into the digraph via the *best covering* initial kernel candidate: the dominant choice {'3','4'} (coloured in yellow), and looking out of the digraph via the *best covering* terminal kernel candidate: the absorbent choice {'1','6'} (coloured in blue).
+We discover in this random digraph two initial and two terminal kernels (see above Lines 12-34). Notice by the way the covering values (Lines 17, 22, 28 and 33) shown by the :py:func:`digraphs.Digraph.showPreKernels` method. The higher this value (between 0.0 and 1.0), the more the corresponding kernel candidate makes the digraphs *laterality* apparent. We may hence redraw the same graph by looking into the digraph via the *best covering* initial kernel candidate: the dominant choice {'3','4'} (coloured in yellow), and looking out of the digraph via the *best covering* terminal kernel candidate: the absorbent choice {'1','6'} (coloured in blue).
 
 >>> rd.exportGraphViz(fileName='orientedLaterality',\
 ...                   bestChoice=set(['a4', 'a3']),\
@@ -3406,11 +3410,11 @@ dot -Grankdir=BT -Tpng orientedLaterality.dot -o orientedLaterality.png
 
    *Figure 7*: A random digraph oriented by best covering initial and terminal kernels
 
-In algorithmic decision theory, such initial kernels may be used for graphically illustrating best choice recommendations as shown above in Fig. 7.
+In algorithmic decision theory, initial and terminal kernels are very useful for graphically illustrating best choice recommendations as shown above in Fig. 7.
 
-Finally, let us give some hints on the tarctability of kernel computations:. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraphs may get a hard problem already from some digraphs of order 30 and more on. There may appear indeed exponentially many independet choices to check in certain types of sparse digraphs (see [BIS-2006b]_).
+Finally, let us give some hints on the tarctability of kernel computations. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraphs may get a hard problem already for sparse digraphs of order *n* > 30 (see [BIS-2006b]_). Indeed, the worst case is given by an empty or indeterminate digraph where the number of independent choices is 2 to power *n*.
 
-Now, there exist more efficient specialized algorithms for enumerating all MISs contained in sparse digraph models. Checking maximality however via the external stability conditions during the emuneration of all potential independet choices has the effective advantage of allowing to compute all initial and/or terminal kernels on a same run (see [BIS-2006b]_).
+Now, there exist more efficient specialized algorithms for directly enumerating dominant or absorbent kernels contained in certain digraph models. For more or less dense digraphs, as facing here in algorithmic decision theory, enumerating all independent choices is luckily more tractable. And, checking maximality of independent choices via the external stability conditions during their emuneration has the effective advantage of allowing to compute all initial and/or terminal kernels in a single run (see [BIS-2006b]_).
 
 Links and appendices
 --------------------
