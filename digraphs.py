@@ -10286,11 +10286,12 @@ class EmptyDigraph(Digraph):
     """
     def __init__(self,order=5,valuationdomain = (-1.0,1.0)):
         import sys,array,copy
+        from collections import OrderedDict
         self.name = 'empty'
         self.order = order
         actionlist = list(range(order+1))
         actionlist.remove(0)
-        actions = {}
+        actions = OrderedDict()
         for x in actionlist:
             actions[str(x)] = {'name':str(x)}
         self.actions = actions
@@ -10315,12 +10316,13 @@ class IndeterminateDigraph(Digraph):
     """
     def __init__(self,other=None,order=5,valuationdomain = (-1.0,1.0)):
         import sys,array,copy
+        from collections import OrderedDict
         self.name = 'indeterminate'
         if other == None:
             self.order = order
             actionlist = list(range(order+1))
             actionlist.remove(0)
-            actions = {}
+            actions = OrderedDict()
             for x in actionlist:
                 actions[str(x)] = {'name':str(x)}
 
@@ -10401,13 +10403,14 @@ class CirculantDigraph(Digraph):
     """
     def __init__(self,order=7,valuationdomain = {'min':Decimal('-1.0'),'max':Decimal('1.0')},circulants = [-1,1]):
         import sys,array,copy
+        from collections import OrderedDict
         self.name = 'c'+str(order)
         self.order = order
         self.circulants = circulants
         actionlist = list(range(1,order+1))
-        actions = []
+        actions = OrderedDict()
         for x in actionlist:
-            actions.append(str(x))
+            actions[str(x)] = {'name': str(x)}
         self.actions = actions
         Min = Decimal(str(valuationdomain['min']))
         Max = Decimal(str(valuationdomain['max']))
@@ -11090,6 +11093,7 @@ class kChoicesDigraph(Digraph):
     def __init__(self,digraph=None,k=3):
         import random,sys,array
         from copy import deepcopy
+        from collections import OrderedDict
         from outrankingDigraphs import OutrankingDigraph, RandomOutrankingDigraph, BipolarOutrankingDigraph
         if digraph == None:
             digraph = RandomValuationDigraph()
@@ -11101,7 +11105,7 @@ class kChoicesDigraph(Digraph):
         self.valuationdomain = deepcopy(digraph.valuationdomain)
         dactions = [x for x in digraph.actions]
         drelation = digraph.relation
-        actions = {}
+        actions = OrderedDict()
         for kChoice in Digraph.kChoices(digraph,dactions,k):
             cn = '_'
             for x in kChoice:
@@ -11977,13 +11981,14 @@ class StrongComponentsCollapsedDigraph(Digraph):
     """
     def __init__(self,digraph=None):
         from copy import copy,deepcopy
+        from collections import OrderedDict
         if digraph == None:
            print('Error: you must provide a valid digraph to the constructor!')
         else:
            self.name = digraph.name + '_Scc'
            self.valuationdomain = deepcopy(digraph.valuationdomain)
            scc = digraph.strongComponents()
-           actions = {}
+           actions = OrderedDict()
            for i,strongComponent in enumerate(scc):
                actionShortName = 'Scc_'+str(i+1)
                actionKey = strongComponent

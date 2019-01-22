@@ -54,7 +54,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{January 08, 2019}
+\date{January 20, 2019}
 \release{3.6-2500+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc2.png}\par}
@@ -70,12 +70,13 @@
 
 
 \section{Preface}
-\label{\detokenize{tutorial:tutorial-label}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}\label{\detokenize{tutorial:preface}}
+\label{\detokenize{tutorial:preface}}\label{\detokenize{tutorial:tutorial-label}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}
 This PDF document contains a set of tutorials introducing the main objects like digraphs, outranking digraphs, performance tableaux and voting profiles available in the Digraph3 Python software resources ( see html documentation
-here \textless{}\sphinxurl{https://digraph3.readthedocs.io/en/latest/index.html}\textgreater{} for the corresponding HTML version). Some of the tutorials are problem oriented and show how to compute the winner of an election, how to build a best choice recommendation, or how to rate or linearly rank with multiple incommensurable ranking criteria.
-There is also a tutorial provided on undirected graphs and a last tutorial
-illustrates how to compute non isomorphic maximal independent sets
-in the n-cycle graph.
+here \textless{}\sphinxurl{https://digraph3.readthedocs.io/en/latest/index.html}\textgreater{} for the corresponding HTML version).
+
+Some of the tutorials are problem oriented and show how to compute the potential winner(s) of an election, how to build a best choice recommendation, or how to rate or linearly rank with multiple incommensurable ranking criteria.
+
+More graph theoretical tutorials follow. One on working with undirected graphs, followed by a tutorial on how to compute non isomorphic maximal independent sets in the n-cycle graph. A last tutorial is finally devoted on how to compute kernels in graphs, digraphs and more specifically in outranking digraphs.
 \begin{quote}\begin{description}
 \item[{Author}] \leavevmode
 Raymond Bisdorff, Emeritus Professor, University of Luxembourg FSTC/CSC
@@ -92,37 +93,40 @@ Revision: Python 3.6
 \sphinxstyletopictitle{List of Digraph3 tutorials}
 \begin{itemize}
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id51}}{\hyperref[\detokenize{tutorial:working-with-the-digraph3-software-resources}]{\sphinxcrossref{Working with the \sphinxstyleemphasis{Digraph3} software resources}}} (\autopageref*{\detokenize{tutorial:working-with-the-digraph3-software-resources}})
+\phantomsection\label{\detokenize{tutorial:id63}}{\hyperref[\detokenize{tutorial:working-with-the-digraph3-software-resources}]{\sphinxcrossref{Working with the \sphinxstyleemphasis{Digraph3} software resources}}} (\autopageref*{\detokenize{tutorial:working-with-the-digraph3-software-resources}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id52}}{\hyperref[\detokenize{tutorial:manipulating-digraph-objects}]{\sphinxcrossref{Manipulating \sphinxcode{Digraph} objects}}} (\autopageref*{\detokenize{tutorial:manipulating-digraph-objects}})
+\phantomsection\label{\detokenize{tutorial:id64}}{\hyperref[\detokenize{tutorial:manipulating-digraph-objects}]{\sphinxcrossref{Manipulating \sphinxcode{Digraph} objects}}} (\autopageref*{\detokenize{tutorial:manipulating-digraph-objects}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id53}}{\hyperref[\detokenize{tutorial:computing-the-winner-of-an-election}]{\sphinxcrossref{Computing the winner of an election}}} (\autopageref*{\detokenize{tutorial:computing-the-winner-of-an-election}})
+\phantomsection\label{\detokenize{tutorial:id65}}{\hyperref[\detokenize{tutorial:computing-the-winner-of-an-election}]{\sphinxcrossref{Computing the winner of an election}}} (\autopageref*{\detokenize{tutorial:computing-the-winner-of-an-election}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id54}}{\hyperref[\detokenize{tutorial:working-with-the-outrankingdigraphs-module}]{\sphinxcrossref{Working with the \sphinxcode{outrankingDigraphs} module}}} (\autopageref*{\detokenize{tutorial:working-with-the-outrankingdigraphs-module}})
+\phantomsection\label{\detokenize{tutorial:id66}}{\hyperref[\detokenize{tutorial:working-with-the-outrankingdigraphs-module}]{\sphinxcrossref{Working with the \sphinxcode{outrankingDigraphs} module}}} (\autopageref*{\detokenize{tutorial:working-with-the-outrankingdigraphs-module}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id55}}{\hyperref[\detokenize{tutorial:generating-random-performance-tableaux}]{\sphinxcrossref{Generating random performance tableaux}}} (\autopageref*{\detokenize{tutorial:generating-random-performance-tableaux}})
+\phantomsection\label{\detokenize{tutorial:id67}}{\hyperref[\detokenize{tutorial:generating-random-performance-tableaux}]{\sphinxcrossref{Generating random performance tableaux}}} (\autopageref*{\detokenize{tutorial:generating-random-performance-tableaux}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id56}}{\hyperref[\detokenize{tutorial:computing-a-best-choice-recommendation}]{\sphinxcrossref{Computing a best choice recommendation}}} (\autopageref*{\detokenize{tutorial:computing-a-best-choice-recommendation}})
+\phantomsection\label{\detokenize{tutorial:id68}}{\hyperref[\detokenize{tutorial:computing-a-best-choice-recommendation}]{\sphinxcrossref{Computing a best choice recommendation}}} (\autopageref*{\detokenize{tutorial:computing-a-best-choice-recommendation}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id57}}{\hyperref[\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}]{\sphinxcrossref{Ranking with multiple incommensurable criteria}}} (\autopageref*{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}})
+\phantomsection\label{\detokenize{tutorial:id69}}{\hyperref[\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}]{\sphinxcrossref{Ranking with multiple incommensurable criteria}}} (\autopageref*{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id58}}{\hyperref[\detokenize{tutorial:rating-with-learned-quantile-norms}]{\sphinxcrossref{Rating with learned quantile norms}}} (\autopageref*{\detokenize{tutorial:rating-with-learned-quantile-norms}})
+\phantomsection\label{\detokenize{tutorial:id70}}{\hyperref[\detokenize{tutorial:rating-with-learned-quantile-norms}]{\sphinxcrossref{Rating with learned quantile norms}}} (\autopageref*{\detokenize{tutorial:rating-with-learned-quantile-norms}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id59}}{\hyperref[\detokenize{tutorial:working-with-the-graphs-module}]{\sphinxcrossref{Working with the \sphinxcode{graphs} module}}} (\autopageref*{\detokenize{tutorial:working-with-the-graphs-module}})
+\phantomsection\label{\detokenize{tutorial:id71}}{\hyperref[\detokenize{tutorial:working-with-the-graphs-module}]{\sphinxcrossref{Working with the \sphinxcode{graphs} module}}} (\autopageref*{\detokenize{tutorial:working-with-the-graphs-module}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id60}}{\hyperref[\detokenize{tutorial:computing-the-non-isomorphic-miss-of-the-n-cycle-graph}]{\sphinxcrossref{Computing the non isomorphic MISs of the n-cycle graph}}} (\autopageref*{\detokenize{tutorial:computing-the-non-isomorphic-miss-of-the-n-cycle-graph}})
+\phantomsection\label{\detokenize{tutorial:id72}}{\hyperref[\detokenize{tutorial:computing-the-non-isomorphic-miss-of-the-n-cycle-graph}]{\sphinxcrossref{Computing the non isomorphic MISs of the n-cycle graph}}} (\autopageref*{\detokenize{tutorial:computing-the-non-isomorphic-miss-of-the-n-cycle-graph}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id61}}{\hyperref[\detokenize{tutorial:links-and-appendices}]{\sphinxcrossref{Links and appendices}}} (\autopageref*{\detokenize{tutorial:links-and-appendices}})
+\phantomsection\label{\detokenize{tutorial:id73}}{\hyperref[\detokenize{tutorial:on-computing-digraph-kernels}]{\sphinxcrossref{On computing digraph kernels}}} (\autopageref*{\detokenize{tutorial:on-computing-digraph-kernels}})
+
+\item {} 
+\phantomsection\label{\detokenize{tutorial:id74}}{\hyperref[\detokenize{tutorial:links-and-appendices}]{\sphinxcrossref{Links and appendices}}} (\autopageref*{\detokenize{tutorial:links-and-appendices}})
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -133,25 +137,25 @@ Revision: Python 3.6
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id62}}{\hyperref[\detokenize{tutorial:purpose}]{\sphinxcrossref{Purpose}}} (\autopageref*{\detokenize{tutorial:purpose}})
+\phantomsection\label{\detokenize{tutorial:id75}}{\hyperref[\detokenize{tutorial:purpose}]{\sphinxcrossref{Purpose}}} (\autopageref*{\detokenize{tutorial:purpose}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id63}}{\hyperref[\detokenize{tutorial:downloading-of-the-digraph3-resources}]{\sphinxcrossref{Downloading of the Digraph3 resources}}} (\autopageref*{\detokenize{tutorial:downloading-of-the-digraph3-resources}})
+\phantomsection\label{\detokenize{tutorial:id76}}{\hyperref[\detokenize{tutorial:downloading-of-the-digraph3-resources}]{\sphinxcrossref{Downloading of the Digraph3 resources}}} (\autopageref*{\detokenize{tutorial:downloading-of-the-digraph3-resources}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id64}}{\hyperref[\detokenize{tutorial:starting-a-python3-session}]{\sphinxcrossref{Starting a python3 session}}} (\autopageref*{\detokenize{tutorial:starting-a-python3-session}})
+\phantomsection\label{\detokenize{tutorial:id77}}{\hyperref[\detokenize{tutorial:starting-a-python3-session}]{\sphinxcrossref{Starting a python3 session}}} (\autopageref*{\detokenize{tutorial:starting-a-python3-session}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id65}}{\hyperref[\detokenize{tutorial:digraph-object-structure}]{\sphinxcrossref{\sphinxcode{Digraph} object structure}}} (\autopageref*{\detokenize{tutorial:digraph-object-structure}})
+\phantomsection\label{\detokenize{tutorial:id78}}{\hyperref[\detokenize{tutorial:digraph-object-structure}]{\sphinxcrossref{\sphinxcode{Digraph} object structure}}} (\autopageref*{\detokenize{tutorial:digraph-object-structure}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id66}}{\hyperref[\detokenize{tutorial:permanent-storage}]{\sphinxcrossref{Permanent storage}}} (\autopageref*{\detokenize{tutorial:permanent-storage}})
+\phantomsection\label{\detokenize{tutorial:id79}}{\hyperref[\detokenize{tutorial:permanent-storage}]{\sphinxcrossref{Permanent storage}}} (\autopageref*{\detokenize{tutorial:permanent-storage}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id67}}{\hyperref[\detokenize{tutorial:inspecting-a-digraph-object}]{\sphinxcrossref{Inspecting a \sphinxcode{Digraph} object}}} (\autopageref*{\detokenize{tutorial:inspecting-a-digraph-object}})
+\phantomsection\label{\detokenize{tutorial:id80}}{\hyperref[\detokenize{tutorial:inspecting-a-digraph-object}]{\sphinxcrossref{Inspecting a \sphinxcode{Digraph} object}}} (\autopageref*{\detokenize{tutorial:inspecting-a-digraph-object}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id68}}{\hyperref[\detokenize{tutorial:special-classes}]{\sphinxcrossref{Special classes}}} (\autopageref*{\detokenize{tutorial:special-classes}})
+\phantomsection\label{\detokenize{tutorial:id81}}{\hyperref[\detokenize{tutorial:special-classes}]{\sphinxcrossref{Special classes}}} (\autopageref*{\detokenize{tutorial:special-classes}})
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -168,14 +172,22 @@ The Python development of these computing resources offers the advantage of an e
 \label{\detokenize{tutorial:downloading-of-the-digraph3-resources}}
 Using the Digraph3 modules is easy. You only need to have installed on your system the \sphinxhref{https://www.python.org/doc/}{Python} (https://www.python.org/doc/) programming language of version 3.+ (readily available under Linux and Mac OS). Notice that, from Version 3.3 on, the Python standard decimal module implements very efficiently its decimal.Decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic r-valuation functions, which makes the recent python-3.3+ versions much faster (more than twice as fast) when extensive digraph operations are performed.
 
-Three download options are given.
+Several download options (easiest under Linux or Mac OS-X) are given.
 \begin{enumerate}
 \item {} 
-Either (easiest under Linux or Mac OS-X), by using a git client:
+Either , by using a git client either, from github:
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-..\PYGZdl{} git clone https://github.com/rbisdorff/Digraph3
+...\PYGZdl{} git clone https://github.com/rbisdorff/Digraph3
+\end{sphinxVerbatim}
+
+\item {} 
+Or, from sourceforge.net:
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+...\PYGZdl{} git clone https://git.code.sf.net/p/digraph3/code Digraph3
 \end{sphinxVerbatim}
 
 \item {} 
@@ -183,11 +195,11 @@ or a subversion client:
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-..\PYGZdl{} svn co https://leopold\PYGZhy{}loewenheim.uni.lu/svn/repos/Digraph3
+...\PYGZdl{} svn co https://leopold\PYGZhy{}loewenheim.uni.lu/svn/repos/Digraph3
 \end{sphinxVerbatim}
 
 \item {} 
-Or, with a browser access, download and extract the latest distribution zip archive from this \sphinxhref{https://sourceforge.net/projects/digraph3/}{sourceforge page} (https://sourceforge.net/projects/digraph3/) .
+Or, with a browser access, download and extract the latest distribution zip archive either, from the \sphinxhref{https://github.com/rbisdorff/Digraph3}{github link above} (https://github.com/rbisdorff/Digraph3)  or, from the \sphinxhref{https://sourceforge.net/projects/digraph3/}{sourceforge page} (https://sourceforge.net/projects/digraph3/) .
 
 \end{enumerate}
 
@@ -199,8 +211,8 @@ You may start an interactive Python3 session in the \sphinxcode{Digraph3} direct
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYGZdl{}HOME/.../Digraph3\PYGZdl{} python3
-Python 3.5.0 (default, Sep 23 2015, 13:39:18)
-[GCC 4.8.4] on linux
+Python 3.6.7 (default, Oct 22 2018, 11:32:17)
+[GCC 8.2.0] on linux
 Type \PYGZdq{}help\PYGZdq{}, \PYGZdq{}copyright\PYGZdq{}, \PYGZdq{}credits\PYGZdq{} or
       \PYGZdq{}license\PYGZdq{} for more information.
 \PYGZgt{}\PYGZgt{}\PYGZgt{} from randomDigraphs import RandomDigraph
@@ -224,19 +236,26 @@ Attributes       : [\PYGZsq{}actions\PYGZsq{}, \PYGZsq{}valuationdomain\PYGZsq{}
 
 \subsection{\sphinxstyleliteralintitle{Digraph} object structure}
 \label{\detokenize{tutorial:digraph-object-structure}}
-All \sphinxcode{digraphs.Digraph} objects (see Line 6) contain at least the following components:
+All \sphinxcode{digraphs.Digraph} objects (see Line 12 above) contain at least the following attributes:
 \begin{enumerate}
+\setcounter{enumi}{-1}
 \item {} 
-A collection of digraph nodes called \sphinxstylestrong{actions} (decision actions): a n ordered dictionary (ordered by default) of nodes with ‘name’,
+A \sphinxstylestrong{name} attribute, holding usually the actual name of the stored instance that was used to create the instance;
 
 \item {} 
-A logical characteristic \sphinxstylestrong{valuationdomain}, a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true),
+A collection of digraph nodes called \sphinxstylestrong{actions} (decision actions): an ordered dictionary of nodes with at least a ‘name’ attribute;
 
 \item {} 
-The digraph \sphinxstylestrong{relation} : a double dictionary indexed by an oriented pair of actions (nodes) and carrying a characteristic value in the range of the previous valuation domain,
+An \sphinxstylestrong{order} attribute containig the number of graph nodes (length of the actions dictionary) automatically added by the object constructor;
 
 \item {} 
-Its associated \sphinxstylestrong{gamma function} : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor,
+A logical characteristic \sphinxstylestrong{valuationdomain}, a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true);
+
+\item {} 
+The digraph \sphinxstylestrong{relation} : a double dictionary indexed by an oriented pair of actions (nodes) and carrying a decimal characteristic value in the range of the previous valuation domain;
+
+\item {} 
+Its associated \sphinxstylestrong{gamma function} : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor;
 
 \item {} 
 Its associated \sphinxstylestrong{notGamma function} : a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor.
@@ -246,7 +265,7 @@ Its associated \sphinxstylestrong{notGamma function} : a dictionary containing t
 
 \subsection{Permanent storage}
 \label{\detokenize{tutorial:permanent-storage}}
-The \sphinxcode{dg.save('tutorialDigraph')} command (see Line 7 above) stores the digraph \sphinxstyleemphasis{dg} in a file named \sphinxcode{tutorialDigraph.py} with the following content:
+The \sphinxcode{dg.save('tutorialDigraph')} command (see Line 19 above) stores the digraph \sphinxstyleemphasis{dg} in a file named \sphinxcode{tutorialDigraph.py} with the following content:
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -393,35 +412,35 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Manipulating \sphinxstyleliteralintitle{Digraph} objects}
-\label{\detokenize{tutorial:digraph-tools-label}}\label{\detokenize{tutorial:manipulating-digraph-objects}}
+\label{\detokenize{tutorial:manipulating-digraph-objects}}\label{\detokenize{tutorial:digraph-tools-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id69}}{\hyperref[\detokenize{tutorial:random-digraph}]{\sphinxcrossref{Random digraph}}} (\autopageref*{\detokenize{tutorial:random-digraph}})
+\phantomsection\label{\detokenize{tutorial:id82}}{\hyperref[\detokenize{tutorial:random-digraph}]{\sphinxcrossref{Random digraph}}} (\autopageref*{\detokenize{tutorial:random-digraph}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id70}}{\hyperref[\detokenize{tutorial:graphviz-drawings}]{\sphinxcrossref{Graphviz drawings}}} (\autopageref*{\detokenize{tutorial:graphviz-drawings}})
+\phantomsection\label{\detokenize{tutorial:id83}}{\hyperref[\detokenize{tutorial:graphviz-drawings}]{\sphinxcrossref{Graphviz drawings}}} (\autopageref*{\detokenize{tutorial:graphviz-drawings}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id71}}{\hyperref[\detokenize{tutorial:asymmetric-and-symmetric-parts}]{\sphinxcrossref{Asymmetric and symmetric parts}}} (\autopageref*{\detokenize{tutorial:asymmetric-and-symmetric-parts}})
+\phantomsection\label{\detokenize{tutorial:id84}}{\hyperref[\detokenize{tutorial:asymmetric-and-symmetric-parts}]{\sphinxcrossref{Asymmetric and symmetric parts}}} (\autopageref*{\detokenize{tutorial:asymmetric-and-symmetric-parts}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id72}}{\hyperref[\detokenize{tutorial:fusion-by-epistemic-disjunction}]{\sphinxcrossref{Fusion by epistemic disjunction}}} (\autopageref*{\detokenize{tutorial:fusion-by-epistemic-disjunction}})
+\phantomsection\label{\detokenize{tutorial:id85}}{\hyperref[\detokenize{tutorial:fusion-by-epistemic-disjunction}]{\sphinxcrossref{Fusion by epistemic disjunction}}} (\autopageref*{\detokenize{tutorial:fusion-by-epistemic-disjunction}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id73}}{\hyperref[\detokenize{tutorial:dual-converse-and-codual-digraphs}]{\sphinxcrossref{Dual, converse and codual digraphs}}} (\autopageref*{\detokenize{tutorial:dual-converse-and-codual-digraphs}})
+\phantomsection\label{\detokenize{tutorial:id86}}{\hyperref[\detokenize{tutorial:dual-converse-and-codual-digraphs}]{\sphinxcrossref{Dual, converse and codual digraphs}}} (\autopageref*{\detokenize{tutorial:dual-converse-and-codual-digraphs}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id74}}{\hyperref[\detokenize{tutorial:symmetric-and-transitive-closures}]{\sphinxcrossref{Symmetric and transitive closures}}} (\autopageref*{\detokenize{tutorial:symmetric-and-transitive-closures}})
+\phantomsection\label{\detokenize{tutorial:id87}}{\hyperref[\detokenize{tutorial:symmetric-and-transitive-closures}]{\sphinxcrossref{Symmetric and transitive closures}}} (\autopageref*{\detokenize{tutorial:symmetric-and-transitive-closures}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id75}}{\hyperref[\detokenize{tutorial:strong-components}]{\sphinxcrossref{Strong components}}} (\autopageref*{\detokenize{tutorial:strong-components}})
+\phantomsection\label{\detokenize{tutorial:id88}}{\hyperref[\detokenize{tutorial:strong-components}]{\sphinxcrossref{Strong components}}} (\autopageref*{\detokenize{tutorial:strong-components}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id76}}{\hyperref[\detokenize{tutorial:csv-storage}]{\sphinxcrossref{CSV storage}}} (\autopageref*{\detokenize{tutorial:csv-storage}})
+\phantomsection\label{\detokenize{tutorial:id89}}{\hyperref[\detokenize{tutorial:csv-storage}]{\sphinxcrossref{CSV storage}}} (\autopageref*{\detokenize{tutorial:csv-storage}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id77}}{\hyperref[\detokenize{tutorial:complete-empty-and-indeterminate-digraphs}]{\sphinxcrossref{Complete, empty and indeterminate digraphs}}} (\autopageref*{\detokenize{tutorial:complete-empty-and-indeterminate-digraphs}})
+\phantomsection\label{\detokenize{tutorial:id90}}{\hyperref[\detokenize{tutorial:complete-empty-and-indeterminate-digraphs}]{\sphinxcrossref{Complete, empty and indeterminate digraphs}}} (\autopageref*{\detokenize{tutorial:complete-empty-and-indeterminate-digraphs}})
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -812,16 +831,16 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id78}}{\hyperref[\detokenize{tutorial:linear-voting-profiles}]{\sphinxcrossref{Linear voting profiles}}} (\autopageref*{\detokenize{tutorial:linear-voting-profiles}})
+\phantomsection\label{\detokenize{tutorial:id91}}{\hyperref[\detokenize{tutorial:linear-voting-profiles}]{\sphinxcrossref{Linear voting profiles}}} (\autopageref*{\detokenize{tutorial:linear-voting-profiles}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id79}}{\hyperref[\detokenize{tutorial:computing-the-winner}]{\sphinxcrossref{Computing the winner}}} (\autopageref*{\detokenize{tutorial:computing-the-winner}})
+\phantomsection\label{\detokenize{tutorial:id92}}{\hyperref[\detokenize{tutorial:computing-the-winner}]{\sphinxcrossref{Computing the winner}}} (\autopageref*{\detokenize{tutorial:computing-the-winner}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id80}}{\hyperref[\detokenize{tutorial:the-condorcet-winner}]{\sphinxcrossref{The Condorcet winner}}} (\autopageref*{\detokenize{tutorial:the-condorcet-winner}})
+\phantomsection\label{\detokenize{tutorial:id93}}{\hyperref[\detokenize{tutorial:the-condorcet-winner}]{\sphinxcrossref{The Condorcet winner}}} (\autopageref*{\detokenize{tutorial:the-condorcet-winner}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id81}}{\hyperref[\detokenize{tutorial:cyclic-social-preferences}]{\sphinxcrossref{Cyclic social preferences}}} (\autopageref*{\detokenize{tutorial:cyclic-social-preferences}})
+\phantomsection\label{\detokenize{tutorial:id94}}{\hyperref[\detokenize{tutorial:cyclic-social-preferences}]{\sphinxcrossref{Cyclic social preferences}}} (\autopageref*{\detokenize{tutorial:cyclic-social-preferences}})
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -1044,29 +1063,29 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Working with the \sphinxstyleliteralintitle{outrankingDigraphs} module}
-\label{\detokenize{tutorial:outrankingdigraphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-outrankingdigraphs-module}}
+\label{\detokenize{tutorial:working-with-the-outrankingdigraphs-module}}\label{\detokenize{tutorial:outrankingdigraphs-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id82}}{\hyperref[\detokenize{tutorial:outranking-digraph}]{\sphinxcrossref{Outranking digraph}}} (\autopageref*{\detokenize{tutorial:outranking-digraph}})
+\phantomsection\label{\detokenize{tutorial:id95}}{\hyperref[\detokenize{tutorial:outranking-digraph}]{\sphinxcrossref{Outranking digraph}}} (\autopageref*{\detokenize{tutorial:outranking-digraph}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id83}}{\hyperref[\detokenize{tutorial:browsing-the-performances}]{\sphinxcrossref{Browsing the performances}}} (\autopageref*{\detokenize{tutorial:browsing-the-performances}})
+\phantomsection\label{\detokenize{tutorial:id96}}{\hyperref[\detokenize{tutorial:browsing-the-performances}]{\sphinxcrossref{Browsing the performances}}} (\autopageref*{\detokenize{tutorial:browsing-the-performances}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id84}}{\hyperref[\detokenize{tutorial:valuation-semantics}]{\sphinxcrossref{Valuation semantics}}} (\autopageref*{\detokenize{tutorial:valuation-semantics}})
+\phantomsection\label{\detokenize{tutorial:id97}}{\hyperref[\detokenize{tutorial:valuation-semantics}]{\sphinxcrossref{Valuation semantics}}} (\autopageref*{\detokenize{tutorial:valuation-semantics}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id85}}{\hyperref[\detokenize{tutorial:pairwise-comparisons}]{\sphinxcrossref{Pairwise comparisons}}} (\autopageref*{\detokenize{tutorial:pairwise-comparisons}})
+\phantomsection\label{\detokenize{tutorial:id98}}{\hyperref[\detokenize{tutorial:pairwise-comparisons}]{\sphinxcrossref{Pairwise comparisons}}} (\autopageref*{\detokenize{tutorial:pairwise-comparisons}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id86}}{\hyperref[\detokenize{tutorial:recoding-the-valuation}]{\sphinxcrossref{Recoding the valuation}}} (\autopageref*{\detokenize{tutorial:recoding-the-valuation}})
+\phantomsection\label{\detokenize{tutorial:id99}}{\hyperref[\detokenize{tutorial:recoding-the-valuation}]{\sphinxcrossref{Recoding the valuation}}} (\autopageref*{\detokenize{tutorial:recoding-the-valuation}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id87}}{\hyperref[\detokenize{tutorial:codual-digraph}]{\sphinxcrossref{Codual digraph}}} (\autopageref*{\detokenize{tutorial:codual-digraph}})
+\phantomsection\label{\detokenize{tutorial:id100}}{\hyperref[\detokenize{tutorial:codual-digraph}]{\sphinxcrossref{Codual digraph}}} (\autopageref*{\detokenize{tutorial:codual-digraph}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id88}}{\hyperref[\detokenize{tutorial:xmcda-2-0}]{\sphinxcrossref{XMCDA 2.0}}} (\autopageref*{\detokenize{tutorial:xmcda-2-0}})
+\phantomsection\label{\detokenize{tutorial:id101}}{\hyperref[\detokenize{tutorial:xmcda-2-0}]{\sphinxcrossref{XMCDA 2.0}}} (\autopageref*{\detokenize{tutorial:xmcda-2-0}})
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -1076,7 +1095,7 @@ See also the technical documentation of the \DUrole{xref,std,std-ref}{outranking
 
 \subsection{Outranking digraph}
 \label{\detokenize{tutorial:outranking-digraph}}
-In this \sphinxstyleemphasis{Digraph3} module, the root \sphinxcode{outrankingDigraphs.OutrankingDigraph} class provides a generic \sphinxstylestrong{outranking digraph model}. A given object of this class consists in
+In this \sphinxstyleemphasis{Digraph3} module, the main \sphinxcode{outrankingDigraphs.BipolarOutrankingDigraph} class provides a generic \sphinxstylestrong{bipolar outranking digraph model}. A given object of this class consists in
 \begin{enumerate}
 \item {} 
 a potential set of decision \sphinxstylestrong{actions} : a dictionary describing the potential decision actions or alternatives with ‘name’ and ‘comment’ attributes,
@@ -1366,19 +1385,19 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id89}}{\hyperref[\detokenize{tutorial:introduction}]{\sphinxcrossref{Introduction}}} (\autopageref*{\detokenize{tutorial:introduction}})
+\phantomsection\label{\detokenize{tutorial:id102}}{\hyperref[\detokenize{tutorial:introduction}]{\sphinxcrossref{Introduction}}} (\autopageref*{\detokenize{tutorial:introduction}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id90}}{\hyperref[\detokenize{tutorial:generating-standard-random-performance-tableaux}]{\sphinxcrossref{Generating standard random performance tableaux}}} (\autopageref*{\detokenize{tutorial:generating-standard-random-performance-tableaux}})
+\phantomsection\label{\detokenize{tutorial:id103}}{\hyperref[\detokenize{tutorial:generating-standard-random-performance-tableaux}]{\sphinxcrossref{Generating standard random performance tableaux}}} (\autopageref*{\detokenize{tutorial:generating-standard-random-performance-tableaux}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id91}}{\hyperref[\detokenize{tutorial:generating-random-cost-benefit-tableaux}]{\sphinxcrossref{Generating random Cost-Benefit tableaux}}} (\autopageref*{\detokenize{tutorial:generating-random-cost-benefit-tableaux}})
+\phantomsection\label{\detokenize{tutorial:id104}}{\hyperref[\detokenize{tutorial:generating-random-cost-benefit-tableaux}]{\sphinxcrossref{Generating random Cost-Benefit tableaux}}} (\autopageref*{\detokenize{tutorial:generating-random-cost-benefit-tableaux}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id92}}{\hyperref[\detokenize{tutorial:generating-three-objectives-tableaux}]{\sphinxcrossref{Generating three objectives tableaux}}} (\autopageref*{\detokenize{tutorial:generating-three-objectives-tableaux}})
+\phantomsection\label{\detokenize{tutorial:id105}}{\hyperref[\detokenize{tutorial:generating-three-objectives-tableaux}]{\sphinxcrossref{Generating three objectives tableaux}}} (\autopageref*{\detokenize{tutorial:generating-three-objectives-tableaux}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id93}}{\hyperref[\detokenize{tutorial:generating-random-linearly-ranked-performances}]{\sphinxcrossref{Generating random linearly ranked performances}}} (\autopageref*{\detokenize{tutorial:generating-random-linearly-ranked-performances}})
+\phantomsection\label{\detokenize{tutorial:id106}}{\hyperref[\detokenize{tutorial:generating-random-linearly-ranked-performances}]{\sphinxcrossref{Generating random linearly ranked performances}}} (\autopageref*{\detokenize{tutorial:generating-random-linearly-ranked-performances}})
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -1884,26 +1903,26 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Computing a best choice recommendation}
-\label{\detokenize{tutorial:rubis-tutorial-label}}\label{\detokenize{tutorial:computing-a-best-choice-recommendation}}
+\label{\detokenize{tutorial:computing-a-best-choice-recommendation}}\label{\detokenize{tutorial:rubis-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id94}}{\hyperref[\detokenize{tutorial:what-site-to-choose}]{\sphinxcrossref{What site to choose ?}}} (\autopageref*{\detokenize{tutorial:what-site-to-choose}})
+\phantomsection\label{\detokenize{tutorial:id107}}{\hyperref[\detokenize{tutorial:what-site-to-choose}]{\sphinxcrossref{What site to choose ?}}} (\autopageref*{\detokenize{tutorial:what-site-to-choose}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id95}}{\hyperref[\detokenize{tutorial:performance-tableau}]{\sphinxcrossref{Performance tableau}}} (\autopageref*{\detokenize{tutorial:performance-tableau}})
+\phantomsection\label{\detokenize{tutorial:id108}}{\hyperref[\detokenize{tutorial:performance-tableau}]{\sphinxcrossref{Performance tableau}}} (\autopageref*{\detokenize{tutorial:performance-tableau}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id96}}{\hyperref[\detokenize{tutorial:id21}]{\sphinxcrossref{Outranking digraph}}} (\autopageref*{\detokenize{tutorial:id21}})
+\phantomsection\label{\detokenize{tutorial:id109}}{\hyperref[\detokenize{tutorial:id21}]{\sphinxcrossref{Outranking digraph}}} (\autopageref*{\detokenize{tutorial:id21}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id97}}{\hyperref[\detokenize{tutorial:rubis-best-choice}]{\sphinxcrossref{Rubis best choice}}} (\autopageref*{\detokenize{tutorial:rubis-best-choice}})
+\phantomsection\label{\detokenize{tutorial:id110}}{\hyperref[\detokenize{tutorial:rubis-best-choice}]{\sphinxcrossref{Rubis best choice}}} (\autopageref*{\detokenize{tutorial:rubis-best-choice}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id98}}{\hyperref[\detokenize{tutorial:strictly-best-choice}]{\sphinxcrossref{Strictly best choice}}} (\autopageref*{\detokenize{tutorial:strictly-best-choice}})
+\phantomsection\label{\detokenize{tutorial:id111}}{\hyperref[\detokenize{tutorial:strictly-best-choice}]{\sphinxcrossref{Strictly best choice}}} (\autopageref*{\detokenize{tutorial:strictly-best-choice}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id99}}{\hyperref[\detokenize{tutorial:weakly-ordering}]{\sphinxcrossref{Weakly ordering}}} (\autopageref*{\detokenize{tutorial:weakly-ordering}})
+\phantomsection\label{\detokenize{tutorial:id112}}{\hyperref[\detokenize{tutorial:weakly-ordering}]{\sphinxcrossref{Weakly ordering}}} (\autopageref*{\detokenize{tutorial:weakly-ordering}})
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -2679,7 +2698,7 @@ To model these \sphinxstyleemphasis{strict outranking} situations, we may comput
 \PYG{g+go}{      \PYGZsq{}E\PYGZsq{}: 0.00, \PYGZsq{}F\PYGZsq{}: 0.00, \PYGZsq{}G\PYGZsq{}: 0.00, \PYGZcb{}}
 \end{sphinxVerbatim}
 
-It is interesting to notice that the \sphinxstylestrong{strict best choice recommendation} consists in the set of weak Condorcet winners: ‘A’, ‘C’ and ‘D’ (see line 6). In the corresponding characteristic vector (see line 14-15), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see \phantomsection\label{\detokenize{tutorial:id26}}{\hyperref[\detokenize{tutorial:bis-2006}]{\sphinxcrossref{{[}BIS-2006{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006}})), we find confirmed that alternative \sphinxstyleemphasis{D} is the only positively validated one, whereas both extreme alternatives - \sphinxstyleemphasis{A} (the most expensive) and \sphinxstyleemphasis{C} (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides \sphinxstyleemphasis{D}. Notice furthermore that compromise alternative \sphinxstyleemphasis{G}, while not actually included in the strict best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate.
+It is interesting to notice that the \sphinxstylestrong{strict best choice recommendation} consists in the set of weak Condorcet winners: ‘A’, ‘C’ and ‘D’ (see line 6). In the corresponding characteristic vector (see line 14-15), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see \phantomsection\label{\detokenize{tutorial:id26}}{\hyperref[\detokenize{tutorial:bis-2006a}]{\sphinxcrossref{{[}BIS-2006a{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006a}})), we find confirmed that alternative \sphinxstyleemphasis{D} is the only positively validated one, whereas both extreme alternatives - \sphinxstyleemphasis{A} (the most expensive) and \sphinxstyleemphasis{C} (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides \sphinxstyleemphasis{D}. Notice furthermore that compromise alternative \sphinxstyleemphasis{G}, while not actually included in the strict best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate.
 
 We may also notice (see line 17 and line 21) that both alternatives \sphinxstyleemphasis{A} and \sphinxstyleemphasis{F} are reported as certainly outranked choices, hence a \sphinxstylestrong{potential worst choice recommendation} . This confirms again the global incomparability status of alternative \sphinxstyleemphasis{A}.
 
@@ -2722,32 +2741,32 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Ranking with multiple incommensurable criteria}
-\label{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}}\label{\detokenize{tutorial:ranking-tutorial-label}}
+\label{\detokenize{tutorial:ranking-tutorial-label}}\label{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id100}}{\hyperref[\detokenize{tutorial:the-ranking-problem}]{\sphinxcrossref{The ranking problem}}} (\autopageref*{\detokenize{tutorial:the-ranking-problem}})
+\phantomsection\label{\detokenize{tutorial:id113}}{\hyperref[\detokenize{tutorial:the-ranking-problem}]{\sphinxcrossref{The ranking problem}}} (\autopageref*{\detokenize{tutorial:the-ranking-problem}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id101}}{\hyperref[\detokenize{tutorial:the-copeland-ranking}]{\sphinxcrossref{The Copeland ranking}}} (\autopageref*{\detokenize{tutorial:the-copeland-ranking}})
+\phantomsection\label{\detokenize{tutorial:id114}}{\hyperref[\detokenize{tutorial:the-copeland-ranking}]{\sphinxcrossref{The Copeland ranking}}} (\autopageref*{\detokenize{tutorial:the-copeland-ranking}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id102}}{\hyperref[\detokenize{tutorial:the-net-flows-ranking}]{\sphinxcrossref{The Net-Flows ranking}}} (\autopageref*{\detokenize{tutorial:the-net-flows-ranking}})
+\phantomsection\label{\detokenize{tutorial:id115}}{\hyperref[\detokenize{tutorial:the-net-flows-ranking}]{\sphinxcrossref{The Net-Flows ranking}}} (\autopageref*{\detokenize{tutorial:the-net-flows-ranking}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id103}}{\hyperref[\detokenize{tutorial:kemeny-rankings}]{\sphinxcrossref{Kemeny rankings}}} (\autopageref*{\detokenize{tutorial:kemeny-rankings}})
+\phantomsection\label{\detokenize{tutorial:id116}}{\hyperref[\detokenize{tutorial:kemeny-rankings}]{\sphinxcrossref{Kemeny rankings}}} (\autopageref*{\detokenize{tutorial:kemeny-rankings}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id104}}{\hyperref[\detokenize{tutorial:slater-rankings}]{\sphinxcrossref{Slater rankings}}} (\autopageref*{\detokenize{tutorial:slater-rankings}})
+\phantomsection\label{\detokenize{tutorial:id117}}{\hyperref[\detokenize{tutorial:slater-rankings}]{\sphinxcrossref{Slater rankings}}} (\autopageref*{\detokenize{tutorial:slater-rankings}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id105}}{\hyperref[\detokenize{tutorial:kohler-s-ranking-by-choosing-rule}]{\sphinxcrossref{Kohler’s ranking-by-choosing rule}}} (\autopageref*{\detokenize{tutorial:kohler-s-ranking-by-choosing-rule}})
+\phantomsection\label{\detokenize{tutorial:id118}}{\hyperref[\detokenize{tutorial:kohler-s-ranking-by-choosing-rule}]{\sphinxcrossref{Kohler’s ranking-by-choosing rule}}} (\autopageref*{\detokenize{tutorial:kohler-s-ranking-by-choosing-rule}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id106}}{\hyperref[\detokenize{tutorial:tideman-s-ranked-pairs-rule}]{\sphinxcrossref{Tideman’s Ranked-Pairs rule}}} (\autopageref*{\detokenize{tutorial:tideman-s-ranked-pairs-rule}})
+\phantomsection\label{\detokenize{tutorial:id119}}{\hyperref[\detokenize{tutorial:tideman-s-ranked-pairs-rule}]{\sphinxcrossref{Tideman’s Ranked-Pairs rule}}} (\autopageref*{\detokenize{tutorial:tideman-s-ranked-pairs-rule}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id107}}{\hyperref[\detokenize{tutorial:ranking-big-performance-tableaux}]{\sphinxcrossref{Ranking big performance tableaux}}} (\autopageref*{\detokenize{tutorial:ranking-big-performance-tableaux}})
+\phantomsection\label{\detokenize{tutorial:id120}}{\hyperref[\detokenize{tutorial:ranking-big-performance-tableaux}]{\sphinxcrossref{Ranking big performance tableaux}}} (\autopageref*{\detokenize{tutorial:ranking-big-performance-tableaux}})
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -3194,13 +3213,13 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id108}}{\hyperref[\detokenize{tutorial:id33}]{\sphinxcrossref{Introduction}}} (\autopageref*{\detokenize{tutorial:id33}})
+\phantomsection\label{\detokenize{tutorial:id121}}{\hyperref[\detokenize{tutorial:id33}]{\sphinxcrossref{Introduction}}} (\autopageref*{\detokenize{tutorial:id33}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id109}}{\hyperref[\detokenize{tutorial:incremental-learning-of-historical-performance-quantiles}]{\sphinxcrossref{Incremental learning of historical performance quantiles}}} (\autopageref*{\detokenize{tutorial:incremental-learning-of-historical-performance-quantiles}})
+\phantomsection\label{\detokenize{tutorial:id122}}{\hyperref[\detokenize{tutorial:incremental-learning-of-historical-performance-quantiles}]{\sphinxcrossref{Incremental learning of historical performance quantiles}}} (\autopageref*{\detokenize{tutorial:incremental-learning-of-historical-performance-quantiles}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id110}}{\hyperref[\detokenize{tutorial:rating-performances-with-quantile-norms}]{\sphinxcrossref{Rating performances with quantile norms}}} (\autopageref*{\detokenize{tutorial:rating-performances-with-quantile-norms}})
+\phantomsection\label{\detokenize{tutorial:id123}}{\hyperref[\detokenize{tutorial:rating-performances-with-quantile-norms}]{\sphinxcrossref{Rating performances with quantile norms}}} (\autopageref*{\detokenize{tutorial:rating-performances-with-quantile-norms}})
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -3598,26 +3617,26 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Working with the \sphinxstyleliteralintitle{graphs} module}
-\label{\detokenize{tutorial:graphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-graphs-module}}
+\label{\detokenize{tutorial:working-with-the-graphs-module}}\label{\detokenize{tutorial:graphs-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id111}}{\hyperref[\detokenize{tutorial:structure-of-a-graph-object}]{\sphinxcrossref{Structure of a \sphinxcode{Graph} object}}} (\autopageref*{\detokenize{tutorial:structure-of-a-graph-object}})
+\phantomsection\label{\detokenize{tutorial:id124}}{\hyperref[\detokenize{tutorial:structure-of-a-graph-object}]{\sphinxcrossref{Structure of a \sphinxcode{Graph} object}}} (\autopageref*{\detokenize{tutorial:structure-of-a-graph-object}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id112}}{\hyperref[\detokenize{tutorial:q-coloring-of-a-graph}]{\sphinxcrossref{q-coloring of a graph}}} (\autopageref*{\detokenize{tutorial:q-coloring-of-a-graph}})
+\phantomsection\label{\detokenize{tutorial:id125}}{\hyperref[\detokenize{tutorial:q-coloring-of-a-graph}]{\sphinxcrossref{q-coloring of a graph}}} (\autopageref*{\detokenize{tutorial:q-coloring-of-a-graph}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id113}}{\hyperref[\detokenize{tutorial:mis-and-clique-enumeration}]{\sphinxcrossref{MIS and Clique enumeration}}} (\autopageref*{\detokenize{tutorial:mis-and-clique-enumeration}})
+\phantomsection\label{\detokenize{tutorial:id126}}{\hyperref[\detokenize{tutorial:mis-and-clique-enumeration}]{\sphinxcrossref{MIS and clique enumeration}}} (\autopageref*{\detokenize{tutorial:mis-and-clique-enumeration}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id114}}{\hyperref[\detokenize{tutorial:grids-and-the-ising-model}]{\sphinxcrossref{Grids and the Ising model}}} (\autopageref*{\detokenize{tutorial:grids-and-the-ising-model}})
+\phantomsection\label{\detokenize{tutorial:id127}}{\hyperref[\detokenize{tutorial:grids-and-the-ising-model}]{\sphinxcrossref{Grids and the Ising model}}} (\autopageref*{\detokenize{tutorial:grids-and-the-ising-model}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id115}}{\hyperref[\detokenize{tutorial:simulating-metropolis-random-walks}]{\sphinxcrossref{Simulating Metropolis random walks}}} (\autopageref*{\detokenize{tutorial:simulating-metropolis-random-walks}})
+\phantomsection\label{\detokenize{tutorial:id128}}{\hyperref[\detokenize{tutorial:simulating-metropolis-random-walks}]{\sphinxcrossref{Simulating Metropolis random walks}}} (\autopageref*{\detokenize{tutorial:simulating-metropolis-random-walks}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id116}}{\hyperref[\detokenize{tutorial:the-berge-mystery-story-who-is-the-lier}]{\sphinxcrossref{The Berge mystery story: Who is the lier ?}}} (\autopageref*{\detokenize{tutorial:the-berge-mystery-story-who-is-the-lier}})
+\phantomsection\label{\detokenize{tutorial:id129}}{\hyperref[\detokenize{tutorial:the-berge-mystery-story-who-is-the-lier}]{\sphinxcrossref{The Berge mystery story: Who is the lier ?}}} (\autopageref*{\detokenize{tutorial:the-berge-mystery-story-who-is-the-lier}})
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -3820,7 +3839,7 @@ Actually, with the given tutorial graph instance, a 2-coloring is already feasib
 \noindent{\hspace*{\fill}\sphinxincludegraphics[width=400\sphinxpxdimen]{{tutorial-2-coloring}.png}\hspace*{\fill}}
 
 
-\subsection{MIS and Clique enumeration}
+\subsection{MIS and clique enumeration}
 \label{\detokenize{tutorial:mis-and-clique-enumeration}}
 2-colorings define independent sets of vertices that are maximal in cardinality; for short called a \sphinxstylestrong{MIS}. Computing such MISs in a given \sphinxcode{Graph} instance may be achieved by the \sphinxtitleref{graphs.Graph.showMIS()} method.
 
@@ -3990,7 +4009,6 @@ Suppose that the file \sphinxcode{berge.py} contains the following \sphinxcode{g
 This data concerns the famous \sphinxstyleemphasis{Berge mystery story} (see Golumbic, M. C. Algorithmic Graph Theory and Perfect Graphs, \sphinxstyleemphasis{Annals of Discrete Mathematics} 57 p. 20) Six professors (labeled \sphinxstyleemphasis{A}, \sphinxstyleemphasis{B}, \sphinxstyleemphasis{C}, \sphinxstyleemphasis{D}, \sphinxstyleemphasis{E} and \sphinxstyleemphasis{I}) had been to the library on the day that a rare tractate was stolen. Each entered once, stayed for some time, and then left. If two professors were in the library at the same time, then at least one of them saw the other. Detectives questioned the professors and gathered the testimonies that \sphinxstyleemphasis{A} saw \sphinxstyleemphasis{B} and \sphinxstyleemphasis{E}; \sphinxstyleemphasis{B} saw \sphinxstyleemphasis{A} and \sphinxstyleemphasis{I}; \sphinxstyleemphasis{C} saw \sphinxstyleemphasis{D} and \sphinxstyleemphasis{I}; \sphinxstyleemphasis{D} saw \sphinxstyleemphasis{A} and \sphinxstyleemphasis{I}; \sphinxstyleemphasis{E} saw \sphinxstyleemphasis{B} and \sphinxstyleemphasis{I}; and \sphinxstyleemphasis{I} saw \sphinxstyleemphasis{C} and \sphinxstyleemphasis{E}. This data is gathered in the previous file, where each positive edge \(\{x,y\}\) models the testimony that, either \sphinxstyleemphasis{x} saw \sphinxstyleemphasis{y}, or, \sphinxstyleemphasis{y} saw \sphinxstyleemphasis{x}.
 
 Example Python3 session
-\begin{quote}
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4009,8 +4027,10 @@ Example Python3 session
 \PYG{g+go}{E \PYGZhy{}\PYGZgt{} [\PYGZsq{}C\PYGZsq{}, \PYGZsq{}B\PYGZsq{}, \PYGZsq{}I\PYGZsq{}, \PYGZsq{}A\PYGZsq{}]}
 \PYG{g+go}{I \PYGZhy{}\PYGZgt{} [\PYGZsq{}C\PYGZsq{}, \PYGZsq{}E\PYGZsq{}, \PYGZsq{}B\PYGZsq{}, \PYGZsq{}D\PYGZsq{}]}
 \end{sphinxVerbatim}
+\begin{quote}
 
 The graph data can be plotted as follows.
+\end{quote}
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4019,7 +4039,6 @@ The graph data can be plotted as follows.
 \PYG{g+go}{Exporting to berge1.dot}
 \PYG{g+go}{fdp \PYGZhy{}Tpng berge1.dot \PYGZhy{}o berge1.png}
 \end{sphinxVerbatim}
-\end{quote}
 
 \noindent{\hspace*{\fill}\sphinxincludegraphics[width=400\sphinxpxdimen]{{berge1}.png}\hspace*{\fill}}
 
@@ -4067,7 +4086,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Computing the non isomorphic MISs of the n-cycle graph}
-\label{\detokenize{tutorial:isomorphicmis-tutorial-label}}\label{\detokenize{tutorial:computing-the-non-isomorphic-miss-of-the-n-cycle-graph}}
+\label{\detokenize{tutorial:computing-the-non-isomorphic-miss-of-the-n-cycle-graph}}\label{\detokenize{tutorial:isomorphicmis-tutorial-label}}
 Due to the public success of our common 2008 publication with Jean-Luc Marichal \phantomsection\label{\detokenize{tutorial:id42}}{\hyperref[\detokenize{tutorial:isomis-08}]{\sphinxcrossref{{[}ISOMIS-08{]}}}} (\autopageref*{\detokenize{tutorial:isomis-08}}) , we present in this tutorial an example Python session for computing the \sphinxstylestrong{non isomorphic maximal independent sets} (MISs) from the 12-cycle graph, i.e. a \sphinxcode{digraphs.CirculantDigraph} class instance of order 12 and symmetric circulants 1 and -1.
 
 \fvset{hllines={, ,}}%
@@ -4233,11 +4252,455 @@ The command \sphinxcode{digraphs.Digraph.showOrbits()} renders now the labelled 
 
 The corresponding group stabilizers’ sizes and frequencies \textendash{} orbit 1 with 12 symmetry axes, orbit 2 with 8 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 11-13), are illustrated in the corresponding unlabelled graphs of \sphinxstyleemphasis{Figure-1} below.
 
-\noindent{\hspace*{\fill}\sphinxincludegraphics[width=400\sphinxpxdimen]{{c12}.png}\hspace*{\fill}}
+\begin{figure}[htbp]
+\centering
+\capstart
 
-\sphinxstyleemphasis{Figure-1: The symmetry axes of the four non isomorphic MISs of the 12-cycle graph}:
+\noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{c12}.png}
+\caption{\sphinxstyleemphasis{Figure-1: The symmetry axes of the four non isomorphic MISs of the 12-cycle graph}:}\label{\detokenize{tutorial:id56}}\end{figure}
 
 The non isomorphic MISs in the 12-cycle graph represent in fact all the ways one may write the number 12 as the circular sum of ‘2’s and ‘3’s without distinguishing opposite directions of writing. The first orbit corresponds to writing six times a ‘2’; the second orbit corresponds to writing four times a ‘3’. The third and fourth orbit correspond to writing two times a ‘3’ and three times a ‘2’. There are two non isomorphic ways to do this latter circular sum. Either separating the ‘3’s by one and two ‘2’s, or by zero and three ‘2’s (see Bisdorff \& Marichal \phantomsection\label{\detokenize{tutorial:id45}}{\hyperref[\detokenize{tutorial:isomis-08}]{\sphinxcrossref{{[}ISOMIS-08{]}}}} (\autopageref*{\detokenize{tutorial:isomis-08}}) ).
+
+
+\section{On computing digraph kernels}
+\label{\detokenize{tutorial:kernel-tutorial-label}}\label{\detokenize{tutorial:on-computing-digraph-kernels}}
+\begin{sphinxShadowBox}
+\begin{itemize}
+\item {} 
+\phantomsection\label{\detokenize{tutorial:id130}}{\hyperref[\detokenize{tutorial:what-is-a-graph-kernel}]{\sphinxcrossref{What is a graph kernel ?}}} (\autopageref*{\detokenize{tutorial:what-is-a-graph-kernel}})
+
+\item {} 
+\phantomsection\label{\detokenize{tutorial:id131}}{\hyperref[\detokenize{tutorial:initial-and-terminal-kernels}]{\sphinxcrossref{Initial and terminal kernels}}} (\autopageref*{\detokenize{tutorial:initial-and-terminal-kernels}})
+
+\item {} 
+\phantomsection\label{\detokenize{tutorial:id132}}{\hyperref[\detokenize{tutorial:kernels-in-lateralized-digraphs}]{\sphinxcrossref{Kernels in lateralized digraphs}}} (\autopageref*{\detokenize{tutorial:kernels-in-lateralized-digraphs}})
+
+\end{itemize}
+\end{sphinxShadowBox}
+
+
+\subsection{What is a graph kernel ?}
+\label{\detokenize{tutorial:what-is-a-graph-kernel}}
+We call \sphinxstylestrong{choice} in a graph, respectively a digraph, a subset of its vertices, resp. of its nodes or actions. A choice \sphinxstyleemphasis{Y} is called \sphinxstylestrong{internally stable} or \sphinxstylestrong{independent} when there exist \sphinxstylestrong{no links} (edges) or relations (arcs) between its members. Furthermore, a choice \sphinxstyleemphasis{Y} is called \sphinxstylestrong{externally stable} when for each vertex, node or action \sphinxstyleemphasis{x} not in \sphinxstyleemphasis{Y}, there exists at least a member \sphinxstyleemphasis{y} of \sphinxstyleemphasis{Y} such that \sphinxstyleemphasis{x} is linked or related to \sphinxstyleemphasis{y}. Now, an internally \sphinxstylestrong{and} externally stable choice is called a \sphinxstylestrong{kernel}.
+
+A first trivial example is immediately given by the naximal independent vertices sets (MISs) of the n-cycle graph (see {\hyperref[\detokenize{tutorial:isomorphicmis-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Computing the non isomorphic MISs of the n-cycle graph}}}} (\autopageref*{\detokenize{tutorial:isomorphicmis-tutorial-label}})). Indeed, each MIS in the n-cycle graph is by definition independent, ie internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12-cycle graph as shown in Fig. 1.
+
+In all graph or symmetric digraph, the \sphinxstyleemphasis{maximality condition} imposed on the internal stability is equivalent to the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice, then we may safely add this vertex or node the choice without violating its internal stability. All kernels must hence be maximal independent choices. In fact, in a topological sense, they correspond to maximal \sphinxstylestrong{holes} in the given graph.
+
+We may illustrate this coincidence between MISs and kernels in graphs and symmetric digraphs with the following random 3-regular graph instance.
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{graphs} \PYG{k+kn}{import} \PYG{n}{RandomRegularGraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{RandomRegularGraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{12}\PYG{p}{,}\PYG{n}{degree}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{random3RegularGraph}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{Exporting to random3RegularGraph.dot}
+\PYG{g+go}{fdp \PYGZhy{}Tpng random3RegularGraph.dot \PYGZhy{}o random3RegularGraph.png}
+\end{sphinxVerbatim}
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[width=350\sphinxpxdimen]{{random3RegularGraph}.png}
+\caption{\sphinxstyleemphasis{Figure-2}: A random 3-regular graph instance}\label{\detokenize{tutorial:id57}}\end{figure}
+
+A random MIS in this graph may be computed for instance by using the \sphinxcode{graphs.MISModel} class.
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{graphs} \PYG{k+kn}{import} \PYG{n}{MISModel}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{mg} \PYG{o}{=} \PYG{n}{MISModel}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
+\PYG{g+go}{Iteration:  1}
+\PYG{g+go}{Running a Gibbs Sampler for 660 step !}
+\PYG{g+go}{\PYGZob{}\PYGZsq{}a06\PYGZsq{}, \PYGZsq{}a02\PYGZsq{}, \PYGZsq{}a12\PYGZsq{}, \PYGZsq{}a10\PYGZsq{}\PYGZcb{}  is maximal !}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{mg}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{random3RegularGraph\PYGZus{}mis}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{Exporting to random3RegularGraph\PYGZhy{}mis.dot}
+\PYG{g+go}{fdp \PYGZhy{}Tpng random3RegularGraph\PYGZhy{}mis.dot \PYGZhy{}o random3RegularGraph\PYGZhy{}mis.png}
+\end{sphinxVerbatim}
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[width=350\sphinxpxdimen]{{random3RegularGraph-mis}.png}
+\caption{\sphinxstyleemphasis{Figure-3}: A random MIS colored in the random 3-regular graph}\label{\detokenize{tutorial:id58}}\end{figure}
+
+It is easily verified in Fig. 3 above, that the computed MIS renders indeed a valid kernel of the given graph. The complete set of kernels of this 3-regular graph instance coincides hence with the set of its MISs.
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showMIS}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}  Maximal Independent Sets \PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{[\PYGZsq{}a01\PYGZsq{}, \PYGZsq{}a02\PYGZsq{}, \PYGZsq{}a03\PYGZsq{}, \PYGZsq{}a07\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a01\PYGZsq{}, \PYGZsq{}a04\PYGZsq{}, \PYGZsq{}a05\PYGZsq{}, \PYGZsq{}a08\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a04\PYGZsq{}, \PYGZsq{}a05\PYGZsq{}, \PYGZsq{}a08\PYGZsq{}, \PYGZsq{}a09\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a01\PYGZsq{}, \PYGZsq{}a04\PYGZsq{}, \PYGZsq{}a05\PYGZsq{}, \PYGZsq{}a10\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a04\PYGZsq{}, \PYGZsq{}a05\PYGZsq{}, \PYGZsq{}a09\PYGZsq{}, \PYGZsq{}a10\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a02\PYGZsq{}, \PYGZsq{}a03\PYGZsq{}, \PYGZsq{}a07\PYGZsq{}, \PYGZsq{}a12\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a01\PYGZsq{}, \PYGZsq{}a03\PYGZsq{}, \PYGZsq{}a07\PYGZsq{}, \PYGZsq{}a11\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a05\PYGZsq{}, \PYGZsq{}a08\PYGZsq{}, \PYGZsq{}a09\PYGZsq{}, \PYGZsq{}a11\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a03\PYGZsq{}, \PYGZsq{}a07\PYGZsq{}, \PYGZsq{}a11\PYGZsq{}, \PYGZsq{}a12\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a07\PYGZsq{}, \PYGZsq{}a09\PYGZsq{}, \PYGZsq{}a11\PYGZsq{}, \PYGZsq{}a12\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a08\PYGZsq{}, \PYGZsq{}a09\PYGZsq{}, \PYGZsq{}a11\PYGZsq{}, \PYGZsq{}a12\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a04\PYGZsq{}, \PYGZsq{}a05\PYGZsq{}, \PYGZsq{}a06\PYGZsq{}, \PYGZsq{}a08\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a04\PYGZsq{}, \PYGZsq{}a05\PYGZsq{}, \PYGZsq{}a06\PYGZsq{}, \PYGZsq{}a10\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a02\PYGZsq{}, \PYGZsq{}a04\PYGZsq{}, \PYGZsq{}a06\PYGZsq{}, \PYGZsq{}a10\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a02\PYGZsq{}, \PYGZsq{}a03\PYGZsq{}, \PYGZsq{}a06\PYGZsq{}, \PYGZsq{}a12\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a02\PYGZsq{}, \PYGZsq{}a06\PYGZsq{}, \PYGZsq{}a10\PYGZsq{}, \PYGZsq{}a12\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a01\PYGZsq{}, \PYGZsq{}a02\PYGZsq{}, \PYGZsq{}a04\PYGZsq{}, \PYGZsq{}a07\PYGZsq{}, \PYGZsq{}a10\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a02\PYGZsq{}, \PYGZsq{}a04\PYGZsq{}, \PYGZsq{}a07\PYGZsq{}, \PYGZsq{}a09\PYGZsq{}, \PYGZsq{}a10\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a02\PYGZsq{}, \PYGZsq{}a07\PYGZsq{}, \PYGZsq{}a09\PYGZsq{}, \PYGZsq{}a10\PYGZsq{}, \PYGZsq{}a12\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a01\PYGZsq{}, \PYGZsq{}a03\PYGZsq{}, \PYGZsq{}a05\PYGZsq{}, \PYGZsq{}a08\PYGZsq{}, \PYGZsq{}a11\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a03\PYGZsq{}, \PYGZsq{}a05\PYGZsq{}, \PYGZsq{}a06\PYGZsq{}, \PYGZsq{}a08\PYGZsq{}, \PYGZsq{}a11\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a03\PYGZsq{}, \PYGZsq{}a06\PYGZsq{}, \PYGZsq{}a08\PYGZsq{}, \PYGZsq{}a11\PYGZsq{}, \PYGZsq{}a12\PYGZsq{}]}
+\PYG{g+go}{number of solutions:  22}
+\PYG{g+go}{cardinality distribution}
+\PYG{g+go}{card.:  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
+\PYG{g+go}{freq.:  [0, 0, 0, 0, 16, 6, 0, 0, 0, 0, 0, 0, 0]}
+\PYG{g+go}{execution time: 0.00045 sec.}
+\PYG{g+go}{Results in self.misset}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{misset}
+\PYG{g+go}{[frozenset(\PYGZob{}\PYGZsq{}a02\PYGZsq{}, \PYGZsq{}a01\PYGZsq{}, \PYGZsq{}a07\PYGZsq{}, \PYGZsq{}a03\PYGZsq{}\PYGZcb{}),}
+\PYG{g+go}{ frozenset(\PYGZob{}\PYGZsq{}a04\PYGZsq{}, \PYGZsq{}a01\PYGZsq{}, \PYGZsq{}a08\PYGZsq{}, \PYGZsq{}a05\PYGZsq{}\PYGZcb{}),}
+\PYG{g+go}{ frozenset(\PYGZob{}\PYGZsq{}a09\PYGZsq{}, \PYGZsq{}a04\PYGZsq{}, \PYGZsq{}a08\PYGZsq{}, \PYGZsq{}a05\PYGZsq{}\PYGZcb{}),}
+\PYG{g+go}{ ...}
+\PYG{g+go}{ ...}
+\PYG{g+go}{ frozenset(\PYGZob{}\PYGZsq{}a06\PYGZsq{}, \PYGZsq{}a02\PYGZsq{}, \PYGZsq{}a12\PYGZsq{}, \PYGZsq{}a10\PYGZsq{}\PYGZcb{}),}
+\PYG{g+go}{ frozenset(\PYGZob{}\PYGZsq{}a06\PYGZsq{}, \PYGZsq{}a11\PYGZsq{}, \PYGZsq{}a08\PYGZsq{}, \PYGZsq{}a03\PYGZsq{}, \PYGZsq{}a05\PYGZsq{}\PYGZcb{}),}
+\PYG{g+go}{ frozenset(\PYGZob{}\PYGZsq{}a03\PYGZsq{}, \PYGZsq{}a06\PYGZsq{}, \PYGZsq{}a11\PYGZsq{}, \PYGZsq{}a12\PYGZsq{}, \PYGZsq{}a08\PYGZsq{}\PYGZcb{})]}
+\end{sphinxVerbatim}
+
+We cannot resist in looking in this 3-regular graph for non isomorphic kernels (MISs, see previous tutorial). To do so we must first, convert the given \sphinxstyleemphasis{graph} instance into a \sphinxstyleemphasis{digraph} instance. Then, compute its automorphism generators, and finally, identify the isomorphic kernel orbits.
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{graph2Digraph}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg}\PYG{o}{.}\PYG{n}{automorphismGenerators}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} saving digraph in nauty dre format  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{Actions index:}
+\PYG{g+go}{1 :  a01}
+\PYG{g+go}{2 :  a02}
+\PYG{g+go}{3 :  a03}
+\PYG{g+go}{4 :  a04}
+\PYG{g+go}{5 :  a05}
+\PYG{g+go}{6 :  a06}
+\PYG{g+go}{7 :  a07}
+\PYG{g+go}{8 :  a08}
+\PYG{g+go}{9 :  a09}
+\PYG{g+go}{10 :  a10}
+\PYG{g+go}{11 :  a11}
+\PYG{g+go}{12 :  a12}
+\PYG{g+go}{\PYGZob{}\PYGZsq{}1\PYGZsq{}: \PYGZsq{}a01\PYGZsq{},  \PYGZsq{}2\PYGZsq{}: \PYGZsq{}a02\PYGZsq{}, \PYGZsq{}3\PYGZsq{}: \PYGZsq{}a03\PYGZsq{}, \PYGZsq{}4\PYGZsq{}: \PYGZsq{}a04\PYGZsq{},  \PYGZsq{}5\PYGZsq{}: \PYGZsq{}a05\PYGZsq{},}
+\PYG{g+go}{ \PYGZsq{}6\PYGZsq{}: \PYGZsq{}a06\PYGZsq{},  \PYGZsq{}7\PYGZsq{}: \PYGZsq{}a07\PYGZsq{}, \PYGZsq{}8\PYGZsq{}: \PYGZsq{}a08\PYGZsq{}, \PYGZsq{}9\PYGZsq{}: \PYGZsq{}a09\PYGZsq{}, \PYGZsq{}10\PYGZsq{}: \PYGZsq{}a10\PYGZsq{},}
+\PYG{g+go}{\PYGZsq{}11\PYGZsq{}: \PYGZsq{}a11\PYGZsq{}, \PYGZsq{}12\PYGZsq{}: \PYGZsq{}a12\PYGZsq{}\PYGZcb{}}
+\PYG{g+go}{\PYGZsh{} automorphisms extraction from dre file \PYGZsh{}}
+\PYG{g+go}{\PYGZsh{} Using input file: randomRegularGraph.dre}
+\PYG{g+go}{echo \PYGZsq{}\PYGZlt{}randomRegularGraph.dre \PYGZhy{}m p \PYGZgt{}randomRegularGraph.auto x\PYGZsq{} \textbar{} dreadnaut}
+\PYG{g+go}{\PYGZsh{} permutation = 1[\PYGZsq{}1\PYGZsq{}, \PYGZsq{}11\PYGZsq{}, \PYGZsq{}7\PYGZsq{}, \PYGZsq{}5\PYGZsq{}, \PYGZsq{}4\PYGZsq{}, \PYGZsq{}9\PYGZsq{}, \PYGZsq{}3\PYGZsq{}, \PYGZsq{}10\PYGZsq{}, \PYGZsq{}6\PYGZsq{}, \PYGZsq{}8\PYGZsq{}, \PYGZsq{}2\PYGZsq{}, \PYGZsq{}12\PYGZsq{}]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg}\PYG{o}{.}\PYG{n}{showOrbits}\PYG{p}{(}\PYG{n}{g}\PYG{o}{.}\PYG{n}{misset}\PYG{p}{)}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{} Isomorphic reduction of choices}
+\PYG{g+gp}{...}
+\PYG{g+go}{current representative:  frozenset(\PYGZob{}\PYGZsq{}a09\PYGZsq{}, \PYGZsq{}a11\PYGZsq{}, \PYGZsq{}a12\PYGZsq{}, \PYGZsq{}a08\PYGZsq{}\PYGZcb{})}
+\PYG{g+go}{length   :  4}
+\PYG{g+go}{number of isomorph choices 2}
+\PYG{g+go}{isormorph choices}
+\PYG{g+go}{[\PYGZsq{}a06\PYGZsq{}, \PYGZsq{}a02\PYGZsq{}, \PYGZsq{}a12\PYGZsq{}, \PYGZsq{}a10\PYGZsq{}]  \PYGZsh{} \PYGZlt{}\PYGZlt{}== the random MIS shown in Fig. 4}
+\PYG{g+go}{[\PYGZsq{}a09\PYGZsq{}, \PYGZsq{}a11\PYGZsq{}, \PYGZsq{}a12\PYGZsq{}, \PYGZsq{}a08\PYGZsq{}]}
+\PYG{g+gp}{...}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Global result \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{Number of choices:  22}
+\PYG{g+go}{Number of orbits :  11}
+\PYG{g+go}{Labelled representatives:}
+\PYG{g+go}{[\PYGZsq{}a06\PYGZsq{}, \PYGZsq{}a04\PYGZsq{}, \PYGZsq{}a10\PYGZsq{}, \PYGZsq{}a05\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a09\PYGZsq{}, \PYGZsq{}a07\PYGZsq{}, \PYGZsq{}a10\PYGZsq{}, \PYGZsq{}a04\PYGZsq{}, \PYGZsq{}a02\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a06\PYGZsq{}, \PYGZsq{}a11\PYGZsq{}, \PYGZsq{}a12\PYGZsq{}, \PYGZsq{}a08\PYGZsq{}, \PYGZsq{}a03\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a04\PYGZsq{}, \PYGZsq{}a01\PYGZsq{}, \PYGZsq{}a10\PYGZsq{}, \PYGZsq{}a05\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a07\PYGZsq{}, \PYGZsq{}a02\PYGZsq{}, \PYGZsq{}a12\PYGZsq{}, \PYGZsq{}a03\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a09\PYGZsq{}, \PYGZsq{}a11\PYGZsq{}, \PYGZsq{}a12\PYGZsq{}, \PYGZsq{}a07\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a06\PYGZsq{}, \PYGZsq{}a04\PYGZsq{}, \PYGZsq{}a08\PYGZsq{}, \PYGZsq{}a05\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a06\PYGZsq{}, \PYGZsq{}a04\PYGZsq{}, \PYGZsq{}a02\PYGZsq{}, \PYGZsq{}a10\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a01\PYGZsq{}, \PYGZsq{}a11\PYGZsq{}, \PYGZsq{}a07\PYGZsq{}, \PYGZsq{}a03\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a01\PYGZsq{}, \PYGZsq{}a11\PYGZsq{}, \PYGZsq{}a08\PYGZsq{}, \PYGZsq{}a03\PYGZsq{}, \PYGZsq{}a05\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a09\PYGZsq{}, \PYGZsq{}a11\PYGZsq{}, \PYGZsq{}a12\PYGZsq{}, \PYGZsq{}a08\PYGZsq{}]}
+\PYG{g+go}{Symmetry vector}
+\PYG{g+go}{stabilizer size  :  [1, 2]}
+\PYG{g+go}{frequency        :  [11, 0]}
+\end{sphinxVerbatim}
+
+In our random 3-regular graph instance (see Fig. 2), we may thus find eleven non isomorphic kernels with orbit sizes equal to two. We illustrate below the isomorphic twin of the random MIS example shown in Fig. 3.
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[width=700\sphinxpxdimen]{{random3RegularGraphKernelOrbit}.png}
+\caption{\sphinxstyleemphasis{Figure 4}: Two isomorphic kernels of the random 3-regular graph instance}\label{\detokenize{tutorial:id59}}\end{figure}
+
+All symmteric digraphs admid MISs, hence also kernels. In the context of digraphs, ie \sphinxstyleemphasis{oriented} graphs, the kernel concept gets much richer and separates from the symmetric MIS concept.
+
+
+\subsection{Initial and terminal kernels}
+\label{\detokenize{tutorial:initial-and-terminal-kernels}}\begin{description}
+\item[{In an oriented graph context, the internal stability condition of the kernel concept remains untouched; however, the external stability condition gets indeed split up by the \sphinxstyleemphasis{orientation} into two lateral cases:}] \leavevmode\begin{enumerate}
+\item {} 
+A \sphinxstylestrong{dominant} stability condition, where each non selected node is dominated by at least one member of the kernel;
+
+\item {} 
+An \sphinxstylestrong{absorbant} stability condition, where each non selected node is absorbed by at least one member of the kernel.
+
+\end{enumerate}
+
+\end{description}
+
+A both \sphinxstyleemphasis{internally} \sphinxstylestrong{and} \sphinxstyleemphasis{dominant}, resp. \sphinxstyleemphasis{absorbent stable} choice is called a \sphinxstyleemphasis{dominant} or \sphinxstylestrong{initial}, resp. an \sphinxstyleemphasis{absorbent} or \sphinxstylestrong{terminal} kernel. From a topological perspective, the initial kernel concept looks from the outside of the digraph into its interior, whereas the terminal kernel looks from the interior of a digraph toward its outside. From an algebraic perspective, the initial kernel is a \sphinxstyleemphasis{prefix} operand, and the terminal kernel is a \sphinxstyleemphasis{postfix} operand in the \sphinxstyleemphasis{Berge} kernel equation (see \phantomsection\label{\detokenize{tutorial:id47}}{\hyperref[\detokenize{tutorial:bis-2006a}]{\sphinxcrossref{{[}BIS-2006a{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006a}}) )
+
+Furthermore, as the kernel concept involves conjointly a \sphinxstylestrong{positive logical refutation} (the \sphinxstyleemphasis{internal stability}) and a \sphinxstylestrong{positive logical affirmation} (the \sphinxstyleemphasis{external stability}), it appeared rather quickly necessary in our operational developments to adopt a bipolar characteristic {[}-1,1{]} valuation domain, modelling \sphinxstyleemphasis{negation} by change of numerical sign and including explicitely a third \sphinxstylestrong{median} logical value (0) expressing logical \sphinxstylestrong{indeterminateness} (neither positive, nor negative, see \phantomsection\label{\detokenize{tutorial:id48}}{\hyperref[\detokenize{tutorial:bis-2000}]{\sphinxcrossref{{[}BIS-2000{]}}}} (\autopageref*{\detokenize{tutorial:bis-2000}})).
+
+In such a  bipolar valued context, we call \sphinxstylestrong{prekernel} a choice which is \sphinxstylestrong{externally stable} and for which the \sphinxstylestrong{internal stability} condition is \sphinxstylestrong{valid or indeterminate}. We say that the independence condition is in this case only \sphinxstylestrong{weakly} valiadated. Notice that all kernels are hence prekernels, but not vice-versa.
+
+In graphs or symmetric digraphs, where there is essentially no apparent ‘ \sphinxstyleemphasis{laterality} ‘, all kernels are \sphinxstyleemphasis{initial} \sphinxstylestrong{and} \sphinxstyleemphasis{terminal} at the same time. They correspond to what we call \sphinxstyleemphasis{holes} in the graph. An \sphinxstyleemphasis{universal} example is given by the \sphinxstylestrong{complete} digraph.
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{CompleteDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{u} \PYG{o}{=} \PYG{n}{CompleteDigraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{u}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Digraph instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{Instance class   : CompleteDigraph}
+\PYG{g+go}{Instance name    : complete}
+\PYG{g+go}{Digraph Order      : 5}
+\PYG{g+go}{Digraph Size       : 20}
+\PYG{g+go}{Valuation domain : [\PYGZhy{}1.00 ; 1.00]}
+\PYG{g+gp}{...}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{u}\PYG{o}{.}\PYG{n}{showPreKernels}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{} Computing preKernels \PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{Dominant kernels :}
+\PYG{g+go}{[\PYGZsq{}1\PYGZsq{}] independence: 1.0; dominance : 1.0; absorbency : 1.0}
+\PYG{g+go}{[\PYGZsq{}2\PYGZsq{}] independence: 1.0; dominance : 1.0; absorbency : 1.0}
+\PYG{g+go}{[\PYGZsq{}3\PYGZsq{}] independence: 1.0; dominance : 1.0; absorbency : 1.0}
+\PYG{g+go}{[\PYGZsq{}4\PYGZsq{}] independence: 1.0; dominance : 1.0; absorbency : 1.0}
+\PYG{g+go}{[\PYGZsq{}5\PYGZsq{}] independence: 1.0; dominance : 1.0; absorbency : 1.0}
+\PYG{g+go}{Absorbent kernels :}
+\PYG{g+go}{[\PYGZsq{}1\PYGZsq{}] independence: 1.0; dominance : 1.0; absorbency : 1.0}
+\PYG{g+go}{[\PYGZsq{}2\PYGZsq{}] independence: 1.0; dominance : 1.0; absorbency : 1.0}
+\PYG{g+go}{[\PYGZsq{}3\PYGZsq{}] independence: 1.0; dominance : 1.0; absorbency : 1.0}
+\PYG{g+go}{[\PYGZsq{}4\PYGZsq{}] independence: 1.0; dominance : 1.0; absorbency : 1.0}
+\PYG{g+go}{[\PYGZsq{}5\PYGZsq{}] independence: 1.0; dominance : 1.0; absorbency : 1.0}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} statistics \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{graph name:  complete}
+\PYG{g+go}{number of solutions}
+\PYG{g+go}{ dominant kernels :  5}
+\PYG{g+go}{ absorbent kernels:  5}
+\PYG{g+go}{cardinality frequency distributions}
+\PYG{g+go}{cardinality     :  [0, 1, 2, 3, 4, 5]}
+\PYG{g+go}{dominant kernel :  [0, 5, 0, 0, 0, 0]}
+\PYG{g+go}{absorbent kernel:  [0, 5, 0, 0, 0, 0]}
+\PYG{g+go}{Execution time  : 0.00004 sec.}
+\PYG{g+go}{Results in sets: dompreKernels and abspreKernels.}
+\end{sphinxVerbatim}
+
+In a complete digraph, each single node is indeed both an initial and a terminal kernel candidate and there is no definite \sphinxstyleemphasis{begin} or \sphinxstyleemphasis{end} of the digraph to be detected. \sphinxstyleemphasis{Laterality} is here entirely \sphinxstyleemphasis{relative} to a specific singleton chosen as reference point of view. The same absence of laterality is apparent in two other universal digraph models, the \sphinxstylestrong{empty} and the \sphinxstylestrong{indeterminate} digraph.
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ed} \PYG{o}{=} \PYG{n}{EmptyDigraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ed}\PYG{o}{.}\PYG{n}{showPreKernels}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{} Computing preKernels \PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{Dominant kernel :}
+\PYG{g+go}{[\PYGZsq{}1\PYGZsq{}, \PYGZsq{}2\PYGZsq{}, \PYGZsq{}3\PYGZsq{}, \PYGZsq{}4\PYGZsq{}, \PYGZsq{}5\PYGZsq{}]}
+\PYG{g+go}{   independence :  1.0}
+\PYG{g+go}{   dominance    :  1.0}
+\PYG{g+go}{   absorbency   :  1.0}
+\PYG{g+go}{Absorbent kernel :}
+\PYG{g+go}{[\PYGZsq{}1\PYGZsq{}, \PYGZsq{}2\PYGZsq{}, \PYGZsq{}3\PYGZsq{}, \PYGZsq{}4\PYGZsq{}, \PYGZsq{}5\PYGZsq{}]}
+\PYG{g+go}{   independence :  1.0}
+\PYG{g+go}{   dominance    :  1.0}
+\PYG{g+go}{   absorbency   :  1.0}
+\PYG{g+gp}{...}
+\end{sphinxVerbatim}
+
+In the empty digraph, the whole set of nodes gives indeed at the same time the \sphinxstylestrong{unique} \sphinxstyleemphasis{initial} \sphinxstylestrong{and} \sphinxstyleemphasis{terminal} kernel. Similarly, for the \sphinxstylestrong{indeterminate} digraph.
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{IndeterminateDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{id} \PYG{o}{=} \PYG{n}{IndeterminateDigraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{id}\PYG{o}{.}\PYG{n}{showPreKernels}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{} Computing preKernels \PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{Dominant prekernel :}
+\PYG{g+go}{[\PYGZsq{}1\PYGZsq{}, \PYGZsq{}2\PYGZsq{}, \PYGZsq{}3\PYGZsq{}, \PYGZsq{}4\PYGZsq{}, \PYGZsq{}5\PYGZsq{}]}
+\PYG{g+go}{   independence :  0.0   \PYGZsh{} \PYGZlt{}\PYGZlt{}== indeterminate}
+\PYG{g+go}{   dominance    :  1.0}
+\PYG{g+go}{   absorbency   :  1.0}
+\PYG{g+go}{Absorbent prekernel :}
+\PYG{g+go}{[\PYGZsq{}1\PYGZsq{}, \PYGZsq{}2\PYGZsq{}, \PYGZsq{}3\PYGZsq{}, \PYGZsq{}4\PYGZsq{}, \PYGZsq{}5\PYGZsq{}]}
+\PYG{g+go}{   independence :  0.0   \PYGZsh{} \PYGZlt{}\PYGZlt{}== indeterminate}
+\PYG{g+go}{   dominance    :  1.0}
+\PYG{g+go}{   absorbency   :  1.0}
+\end{sphinxVerbatim}
+
+Both these results make sense, as in a completely empty or indeterminate digraph, each node may appear anywhere; as its beginning, its end, or somewhere as a hole in its middle. Notice however, that in the latter indeterminate case the complete set of nodes verifies only weakly the internal stability condition (see above). In a dynamic process of becoming more and more definite, the powerset of the nodes contains all choice candidates that may become in the end the actual kernels of the eventually determined digraph.
+
+Other common digraph models, allthough being clearly oriented, may show nevertheless no apparent laterality, like \sphinxstyleemphasis{odd} \sphinxstylestrong{chordless circuits}, ie \sphinxstyleemphasis{holes} surrounded by a circuit of odd length. They do not admit in fact any initial or terminal kernel.
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{CirculantDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{c5} \PYG{o}{=} \PYG{n}{CirculantDigraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{circulants}\PYG{o}{=}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{c5}\PYG{o}{.}\PYG{n}{showPreKernels}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} statistics \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{digraph name:  c5}
+\PYG{g+go}{number of solutions}
+\PYG{g+go}{ dominant prekernels :  0}
+\PYG{g+go}{ absorbent prekernels:  0}
+\end{sphinxVerbatim}
+
+Chordless circuits of even length 2 x \sphinxstyleemphasis{k}, with \sphinxstyleemphasis{k} \textgreater{} 1, contain however two isomorphic kernels of cardinality \sphinxstyleemphasis{k} which qualify conjointly as initial and terminal candidates.
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{c6} \PYG{o}{=} \PYG{n}{CirculantDigraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{circulants}\PYG{o}{=}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{c6}\PYG{o}{.}\PYG{n}{showPreKernels}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{} Computing preKernels \PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{Dominant preKernels :}
+\PYG{g+go}{[\PYGZsq{}1\PYGZsq{}, \PYGZsq{}3\PYGZsq{}, \PYGZsq{}5\PYGZsq{}] independence: 1.0, dominance: 1.0, absorbency: 1.0}
+\PYG{g+go}{[\PYGZsq{}2\PYGZsq{}, \PYGZsq{}4\PYGZsq{}, \PYGZsq{}6\PYGZsq{}] independence: 1.0, dominance: 1.0, absorbency: 1.0}
+\PYG{g+go}{Absorbent preKernels :}
+\PYG{g+go}{[\PYGZsq{}1\PYGZsq{}, \PYGZsq{}3\PYGZsq{}, \PYGZsq{}5\PYGZsq{}] independence: 1.0, dominance: 1.0, absorbency: 1.0}
+\PYG{g+go}{[\PYGZsq{}2\PYGZsq{}, \PYGZsq{}4\PYGZsq{}, \PYGZsq{}6\PYGZsq{}] independence: 1.0, dominance: 1.0, absorbency: 1.0}
+\end{sphinxVerbatim}
+
+Chordless circuits of even length may thus be indifferently oriented along two opposite directions. Notice by the way that the duals of all chordless circuits of \sphinxstyleemphasis{odd} or \sphinxstyleemphasis{even} length, ie \sphinxstyleemphasis{filled} circuits also called \sphinxstylestrong{anti-holes} (see Fig.5), never contain any potential kernel candidates.
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dc6} \PYG{o}{=} \PYG{o}{\PYGZhy{}}\PYG{n}{c6}   \PYG{c+c1}{\PYGZsh{} dc6 = DualDigraph(c6)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dc6}\PYG{o}{.}\PYG{n}{showPreKernels}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} statistics \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{graph name:  dual\PYGZus{}c6}
+\PYG{g+go}{number of solutions}
+\PYG{g+go}{ dominant prekernels :  0}
+\PYG{g+go}{ absorbent prekernels:  0}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dc6}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{dualChordlessCircuit}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file dor GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{Exporting to dualChordlessCircuit.dot}
+\PYG{g+go}{circo \PYGZhy{}Tpng dualChordlessCircuit.dot \PYGZhy{}o dualChordlessCircuit.png}
+\end{sphinxVerbatim}
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[width=350\sphinxpxdimen]{{dualChordlessCircuit}.png}
+\caption{\sphinxstyleemphasis{Figure 5}: The dual of the chordless 6-circuit}\label{\detokenize{tutorial:id60}}\end{figure}
+
+
+\subsection{Kernels in lateralized digraphs}
+\label{\detokenize{tutorial:kernels-in-lateralized-digraphs}}
+Humans are living in an apparent physical space of plain transitive \sphinxstylestrong{lateral orientation}, fully empowered in finite geometrical 3D models with \sphinxstylestrong{linear orders}, where first, resp. last ranked, nodes deliver unique initial, resp. terminal, kernels. Similarly, in finite \sphinxstylestrong{preorders}, the first, resp. last, equivalence classes deliver the unique initial, resp. unique terminal, kernels. More generally, in finite \sphinxstylestrong{partial orders}, ie asymmetric and transitive digraphs, topological sort algorithms will easily reveal on the first, resp. last, level all unique initial, resp. terminal, kernels.
+
+In genuine random digraphs, however, we may need to check for each of its MISs, whether \sphinxstyleemphasis{one}, \sphinxstyleemphasis{both}, or \sphinxstyleemphasis{none} of the lateralized external stability conditions may be satisfied. Consider, for instance, the following random digraph instance of order 7 and generated with an arc probability of 30\%.
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{randomDigraphs} \PYG{k+kn}{import} \PYG{n}{RandomDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rd} \PYG{o}{=} \PYG{n}{RandomDigraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{arcProbability}\PYG{o}{=}\PYG{l+m+mf}{0.3}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rd}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{randomLatrality}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file dor GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{Exporting to randomLaterality.dot}
+\PYG{g+go}{dot \PYGZhy{}Grankdir=BT \PYGZhy{}Tpng randomLaterality.dot \PYGZhy{}o randomLaterality.png}
+\end{sphinxVerbatim}
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{randomLaterality}.png}
+\caption{\sphinxstyleemphasis{Figure 6}: A random digraph instance of order 7 and arc probability 0.3}\label{\detokenize{tutorial:id61}}\end{figure}
+
+The random digraph shown in Fig. 5 above has no apparent special properties, except from being connected.
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rd}\PYG{o}{.}\PYG{n}{showComponents}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{} Connected Components \PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{1: [\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rd}\PYG{o}{.}\PYG{n}{computeChordlessCircuits}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{[]                 \PYGZsh{} no chordless circuits detected}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Transitivity degree: }\PYG{l+s+si}{\PYGZpc{}.2f}\PYG{l+s+si}{\PYGZpc{}\PYGZpc{}}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{\PYGZpc{}}\PYGZbs{}
+\PYG{g+gp}{... }              \PYG{p}{(}\PYG{n}{rd}\PYG{o}{.}\PYG{n}{computeTransitivityDegree}\PYG{p}{(}\PYG{p}{)}\PYG{o}{*}\PYG{l+m+mi}{100}\PYG{p}{)}\PYG{p}{)}
+\PYG{g+go}{Transitivity degree: 48.39\PYGZpc{}}
+\end{sphinxVerbatim}
+
+The given digraph instance is neither asymmetric (a3 \textless{}\textendash{}\textgreater{} a6) nor symmetric (a2 \textendash{}\textgreater{} a1, a1 -/\textgreater{} a2); there are no chordless circuits (see Line 5 above); and, the digraph is not transitive (a5 -\textgreater{} a2 -\textgreater{} a1, but a5 -/\textgreater{} a1). More than half of the required transitive closures are missing (see Line 8).
+
+Now, we know that its potential prekernels must be among its set of maximal independent choices.
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rd}\PYG{o}{.}\PYG{n}{showMIS}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}  Maximal independent choices \PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{[\PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}]}
+\PYG{g+go}{[\PYGZsq{}a7\PYGZsq{}]}
+\PYG{g+gp}{...}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rd}\PYG{o}{.}\PYG{n}{showPreKernels}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{} Computing preKernels \PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{Dominant preKernels :}
+\PYG{g+go}{[\PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}]}
+\PYG{g+go}{   independence :  1.0}
+\PYG{g+go}{   dominance    :  1.0}
+\PYG{g+go}{   absorbency   :  \PYGZhy{}1.0}
+\PYG{g+go}{   covering     :  0.500}
+\PYG{g+go}{[\PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}]}
+\PYG{g+go}{   independence :  1.0}
+\PYG{g+go}{   dominance    :  1.0}
+\PYG{g+go}{   absorbency   :  \PYGZhy{}1.0}
+\PYG{g+go}{   covering     :  0.600  \PYGZsh{} \PYGZlt{}\PYGZlt{}==}
+\PYG{g+go}{Absorbent preKernels :}
+\PYG{g+go}{[\PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}]}
+\PYG{g+go}{   independence :  1.0}
+\PYG{g+go}{   dominance    :  \PYGZhy{}1.0}
+\PYG{g+go}{   absorbency   :  1.0}
+\PYG{g+go}{   covering     :  0.500}
+\PYG{g+go}{[\PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}]}
+\PYG{g+go}{   independence :  1.0}
+\PYG{g+go}{   dominance    :  \PYGZhy{}1.0}
+\PYG{g+go}{   absorbency   :  1.0}
+\PYG{g+go}{   covering     :  0.600  \PYGZsh{} \PYGZlt{}\PYGZlt{}==}
+\PYG{g+gp}{...}
+\end{sphinxVerbatim}
+
+Among the six MISs contained in this random digraph (see above Lines 3-8) we dicover two initial and two terminal kernels (Lines 12-34). Notice by the way the covering values (between 0.0 and 1.0) shown by the \sphinxcode{digraphs.Digraph.showPreKernels()} method (Lines 17, 22, 28 and 33). The higher this value, the more the corresponding kernel candidate makes apparent the digraph’s \sphinxstyleemphasis{laterality}. We may hence redraw the same digraph in Fig. 7 by looking into its interior via the \sphinxstyleemphasis{best covering} initial kernel candidate: the dominant choice \{‘3’,‘4’\} (coloured in yellow), and looking out of it via the \sphinxstyleemphasis{best covering} terminal kernel candidate: the absorbent choice \{‘1’,‘6’\} (coloured in blue).
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rd}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{orientedLaterality}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
+\PYG{g+gp}{... }                  \PYG{n}{bestChoice}\PYG{o}{=}\PYG{n+nb}{set}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
+\PYG{g+gp}{... }                  \PYG{n}{worstChoice}\PYG{o}{=}\PYG{n+nb}{set}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a6}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{)}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file dor GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{Exporting to orientedLaterality.dot}
+\PYG{g+go}{dot \PYGZhy{}Grankdir=BT \PYGZhy{}Tpng orientedLaterality.dot \PYGZhy{}o orientedLaterality.png}
+\end{sphinxVerbatim}
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{orientedLaterality}.png}
+\caption{\sphinxstyleemphasis{Figure 7}: A random digraph oriented by best covering initial and terminal kernels}\label{\detokenize{tutorial:id62}}\end{figure}
+
+In algorithmic decision theory, initial and terminal kernels may provide convincing best, resp. worst, choice recommendations (see {\hyperref[\detokenize{tutorial:rubis-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Computing a best choice recommendation}}}} (\autopageref*{\detokenize{tutorial:rubis-tutorial-label}})).
+
+Finally, let us give some hints on the \sphinxstylestrong{tractability} of kernel computations. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraphs may get a hard problem already for sparse digraphs of order \sphinxstyleemphasis{n} \textgreater{} 30 (see \phantomsection\label{\detokenize{tutorial:id49}}{\hyperref[\detokenize{tutorial:bis-2006b}]{\sphinxcrossref{{[}BIS-2006b{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006b}})). Indeed, the worst case is given by an empty or indeterminate digraph where the number of independent choices is 2 to power \sphinxstyleemphasis{n}.
+
+Now, there exist more efficient specialized algorithms for directly enumerating dominant or absorbent kernels contained in specific digraph models. For more or less dense digraphs, as facing usually in algorithmic decision theory, enumerating all independent choices is more tractable. And, checking maximality of independent choices via the external stability conditions during their emuneration provides the effective advantage of allowing to compute all initial and/or terminal kernels in a single run (see \phantomsection\label{\detokenize{tutorial:id50}}{\hyperref[\detokenize{tutorial:bis-2006b}]{\sphinxcrossref{{[}BIS-2006b{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006b}})).
 
 
 \section{Links and appendices}
@@ -4311,10 +4774,17 @@ W.H. Press, S.A. Teukolsky, W.T. Vetterling and B.P. Flannery (2007) “Single-P
 \bibitem[CHAM-2006]{\detokenize{CHAM-2006}}{\phantomsection\label{\detokenize{tutorial:cham-2006}} 
 J.M. Chambers, D.A. James, D. Lambert and S. Vander Wiel (2006) “Monitoring Networked Applications with Incremental Quantile Estimation”. \sphinxstyleemphasis{Statistical Science}, Vol. 21, No.4, pp.463-475. DOI: 10 12140/088342306000000583.
 }
-\bibitem[BIS-2006]{\detokenize{BIS-2006}}{\phantomsection\label{\detokenize{tutorial:bis-2006}} \begin{enumerate}
+\bibitem[BIS-2006a]{\detokenize{BIS-2006a}}{\phantomsection\label{\detokenize{tutorial:bis-2006a}} \begin{enumerate}
 \setcounter{enumi}{17}
 \item {} 
 Bisdorff, M. Pirlot and M. Roubens (2006). “Choices and kernels from bipolar valued digraphs”. \sphinxstyleemphasis{European Journal of Operational Research}, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version \sphinxhref{https://sma.uni.lu/bisdorff/documents/BisdorffPirlotRoubens05.pdf}{PDF file 257.3Kb} (https://sma.uni.lu/bisdorff/documents/BisdorffPirlotRoubens05.pdf))
+
+\end{enumerate}
+}
+\bibitem[BIS-2006b]{\detokenize{BIS-2006b}}{\phantomsection\label{\detokenize{tutorial:bis-2006b}} \begin{enumerate}
+\setcounter{enumi}{17}
+\item {} 
+Bisdorff (2006). On enumerating the kernels in a bipolar-valued digraph. Annales du Lamsade 6, Octobre 2006, pp. 1 - 38. Université Paris-Dauphine. ISSN 1762-455X (downloadable version \sphinxhref{https://leopold-loewenheim.uni.lu/bisdorff/documents/EnumKernels.pdf}{PDF file 532.2 Kb} (https://leopold-loewenheim.uni.lu/bisdorff/documents/EnumKernels.pdf)).
 
 \end{enumerate}
 }
@@ -4322,6 +4792,13 @@ Bisdorff, M. Pirlot and M. Roubens (2006). “Choices and kernels from bipolar v
 \setcounter{enumi}{14}
 \item {} 
 Häggström (2002) \sphinxstyleemphasis{Finite Markov Chains and Algorithmic Applications}. Cambridge University Press.
+
+\end{enumerate}
+}
+\bibitem[BIS-2000]{\detokenize{BIS-2000}}{\phantomsection\label{\detokenize{tutorial:bis-2000}} \begin{enumerate}
+\setcounter{enumi}{17}
+\item {} 
+Bisdorff (2000), Logical foundation of fuzzy preferential systems with application to the ELECTRE decision aid methods, \sphinxstyleemphasis{Computers and Operations Research}, 27:673-687 (downloadable version \sphinxhref{https://leopold-loewenheim.uni.lu/bisdorff/documents/foundationElectre.pdf}{PDF file 159.1Kb} (https://leopold-loewenheim.uni.lu/bisdorff/documents/foundationElectre.pdf))
 
 \end{enumerate}
 }
