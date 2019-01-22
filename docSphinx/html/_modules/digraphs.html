@@ -10333,11 +10333,12 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">)):</span>
         <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">array</span><span class="o">,</span><span class="nn">copy</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;empty&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
         <span class="n">actionlist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">order</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
         <span class="n">actionlist</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-        <span class="n">actions</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionlist</span><span class="p">:</span>
             <span class="n">actions</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">actions</span>
@@ -10362,12 +10363,13 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">)):</span>
         <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">array</span><span class="o">,</span><span class="nn">copy</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;indeterminate&#39;</span>
         <span class="k">if</span> <span class="n">other</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
             <span class="n">actionlist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">order</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
             <span class="n">actionlist</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-            <span class="n">actions</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">actions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionlist</span><span class="p">:</span>
                 <span class="n">actions</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)}</span>
 
@@ -10448,13 +10450,14 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-1.0&#39;</span><span class="p">),</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">)},</span><span class="n">circulants</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]):</span>
         <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">array</span><span class="o">,</span><span class="nn">copy</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;c&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">circulants</span> <span class="o">=</span> <span class="n">circulants</span>
         <span class="n">actionlist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">order</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
-        <span class="n">actions</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionlist</span><span class="p">:</span>
-            <span class="n">actions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="n">actions</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">actions</span>
         <span class="n">Min</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]))</span>
         <span class="n">Max</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]))</span>
@@ -11137,6 +11140,7 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">sys</span><span class="o">,</span><span class="nn">array</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
         <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">OutrankingDigraph</span><span class="p">,</span> <span class="n">RandomOutrankingDigraph</span><span class="p">,</span> <span class="n">BipolarOutrankingDigraph</span>
         <span class="k">if</span> <span class="n">digraph</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">digraph</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">()</span>
@@ -11148,7 +11152,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
         <span class="n">dactions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">digraph</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
         <span class="n">drelation</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">relation</span>
-        <span class="n">actions</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">kChoice</span> <span class="ow">in</span> <span class="n">Digraph</span><span class="o">.</span><span class="n">kChoices</span><span class="p">(</span><span class="n">digraph</span><span class="p">,</span><span class="n">dactions</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
             <span class="n">cn</span> <span class="o">=</span> <span class="s1">&#39;_&#39;</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">kChoice</span><span class="p">:</span>
@@ -12024,13 +12028,14 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span><span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
         <span class="k">if</span> <span class="n">digraph</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: you must provide a valid digraph to the constructor!&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_Scc&#39;</span>
            <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
            <span class="n">scc</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">strongComponents</span><span class="p">()</span>
-           <span class="n">actions</span> <span class="o">=</span> <span class="p">{}</span>
+           <span class="n">actions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
            <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">strongComponent</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">scc</span><span class="p">):</span>
                <span class="n">actionShortName</span> <span class="o">=</span> <span class="s1">&#39;Scc_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
                <span class="n">actionKey</span> <span class="o">=</span> <span class="n">strongComponent</span>
