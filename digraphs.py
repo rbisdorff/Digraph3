@@ -12396,15 +12396,15 @@ if __name__ == "__main__":
     from randomPerfTabs import *
 
 
-    print('****************************************************')
-    print('* Python digraphs module                           *')
-    print('* $Revision: 1.697 $                               *')
-    print('* Copyright (C) 2006-2007 University of Luxembourg *')
-    print('* The module comes with ABSOLUTELY NO WARRANTY     *')
-    print('* to the extent permitted by the applicable law.   *')
-    print('* This is free software, and you are welcome to    *')
-    print('* redistribute it if it remains free software.     *')
-    print('****************************************************')
+    print('*****************************************************')
+    print('* Python digraphs module                            *')
+    print('* $Revision: 2500+ $                                *')
+    print('* Copyright (C) 2006-20018 Raymond Bisdorff         *')
+    print('* The module comes with ABSOLUTELY NO WARRANTY      *')
+    print('* to the extent permitted by the applicable law.    *')
+    print('* This is free software, and you are welcome to     *')
+    print('* redistribute it if it remains free software.      *')
+    print('*****************************************************')
 
     narg = len(sys.argv)
 
@@ -12588,8 +12588,8 @@ if __name__ == "__main__":
         print('Enjoy !')
 
     print('*************************************')
-    print('* R.B. July 2012                    *')
-    print('* $Revision: 1.697 $                *')
+    print('* R.B. July 2018                    *')
+    print('* $Revision: 2500+ $                *')
     print('*************************************')
 
 #############################

@@ -6610,7 +6610,8 @@ class RandomBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
                  commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(80.0,0.0)],
                  commonMode=('uniform',None,None),
                  hasBipolarVeto=True,
-                 Normalized=False):
+                 Normalized=False,
+                 seed=None):
         # generate random performance tableau
         import copy
         tb = RandomPerformanceTableau(numberOfActions=numberOfActions,
@@ -6619,7 +6620,8 @@ class RandomBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
                                       weightScale=weightScale,
                                       commonScale=commonScale,
                                       commonThresholds = commonThresholds,
-                                      commonMode=commonMode)
+                                      commonMode=commonMode,
+                                      seed=seed)
         g = BipolarOutrankingDigraph(tb,
                                      hasBipolarVeto=hasBipolarVeto)
         self.name = copy.copy(g.name)

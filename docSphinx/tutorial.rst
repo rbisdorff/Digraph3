@@ -3047,7 +3047,7 @@ We call **choice** in a graph, respectively a digraph, a subset of its vertices,
 
 A first trivial example is immediately given by the naximal independent vertices sets (MISs) of the n-cycle graph (see :ref:`IsomorphicMIS-Tutorial-label`). Indeed, each MIS in the n-cycle graph is by definition independent, ie internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12-cycle graph as shown in Fig. 1. 
 
-In all graph or symmetric digraph, the *maximality condition* imposed on the internal stability is equivalent to the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice, then we may safely add this vertex or node the choice without violating its internal stability. All kernels must hence be maximal independent choices. In fact, in a topological sense, they correspond to maximal **holes** in the given graph.
+In all graph or symmetric digraph, the *maximality condition* imposed on the internal stability is equivalent to the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice, then we may safely add this vertex or node to the given choice without violating its internal stability. All kernels must hence be maximal independent choices. In fact, in a topological sense, they correspond to maximal **holes** in the given graph.
 
 We may illustrate this coincidence between MISs and kernels in graphs and symmetric digraphs with the following random 3-regular graph instance.
 
@@ -3277,7 +3277,7 @@ Absorbent prekernel :
    dominance    :  1.0
    absorbency   :  1.0
 
-Both these results make sense, as in a completely empty or indeterminate digraph, each node may appear anywhere; as its beginning, its end, or somewhere as a hole in its middle. Notice however, that in the latter indeterminate case the complete set of nodes verifies only weakly the internal stability condition (see above). In a dynamic process of becoming more and more definite, the powerset of the nodes contains all choice candidates that may become in the end the actual kernels of the eventually determined digraph.
+Both these results make sense, as in a completely empty or indeterminate digraph, there is no interior of the digraph defined, only a *border* which is hence at the same time initial and terminal.  Notice however, that in the latter indeterminate case the complete set of nodes verifies only weakly the internal stability condition (see above).
 
 Other common digraph models, allthough being clearly oriented, may show nevertheless no apparent laterality, like *odd* **chordless circuits**, ie *holes* surrounded by a circuit of odd length. They do not admit in fact any initial or terminal kernel.
 
