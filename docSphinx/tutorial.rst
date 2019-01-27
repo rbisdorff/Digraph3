@@ -3416,6 +3416,120 @@ Finally, let us give some hints on the **tractability** of kernel computations. 
 
 Now, there exist more efficient specialized algorithms for directly enumerating dominant or absorbent kernels contained in specific digraph models. For more or less dense digraphs, as facing usually in algorithmic decision theory, enumerating all independent choices is more tractable. And, checking maximality of independent choices via the external stability conditions during their emuneration provides the effective advantage of allowing to compute all initial and/or terminal kernels in a single run (see [BIS-2006b]_).
 
+Computing outranking and outranked choices
+..........................................
+
+Let us finally compute good and bad choice recommendations in the following random bipolarly-valued outranking digraphs.
+
+>>> from outrankingDigraphs import *
+>>> g = RandomBipolarOutrankingDigraph(seed=5)
+>>> g
+*------- Object instance description ------*
+Instance class   : RandomBipolarOutrankingDigraph
+Instance name    : randomOutranking
+# Actions        : 7
+# Criteria       : 7
+Size             : 26
+Determinateness  : 34.275
+Valuation domain : {'min': Decimal('-100.0'), 'med': Decimal('0.0'), 'max': Decimal('100.0'), 'precision': Decimal('0')}
+>>> g.showHTMLPerformanceTableau()
+
+.. figure:: randomOutranking.png
+   :width: 500 px
+   :align: center
+   :alt: A random performance tableau
+
+   *Figure 8*: The performance tableau of a random outranking digraph instance
+
+The underlying random performance tableau (see Fig. 8) shows the performance grading of 7 decision actions with respect to 7 decision criteria. The corresponding strict outranking digraph is shown below.
+
+>>> gcd = ~(-g)  # Codual: negation of the converse
+>>> gcd.exportGraphViz(fileName='tutOutRanking')
+*---- exporting a dot file dor GraphViz tools ---------*
+Exporting to tutOutranking.dot
+dot -Grankdir=BT -Tpng tutOutranking.dot -o tutOutranking.png
+
+.. figure:: tutOutranking.png
+   :width: 300 px
+   :align: center
+   :alt: A random performance tableau
+
+   *Figure 8*: A random strict outranking digraph instance
+
+With disjoint initial and terminal prekernels, the given strict outranking digraph is clearly lateralized.
+
+>>> gcd.showPreKernels()
+*--- Computing preKernels ---*
+Dominant preKernels :
+['a1', 'a2', 'a4']
+   independence :  0.00
+   dominance    :  6.98
+   absorbency   :  -48.84
+   covering     :  0.667
+Absorbent preKernels :
+['a3', 'a7']
+   independence :  0.00
+   dominance    :  -74.42
+   absorbency   :  16.28
+   covering     :  0.800
+
+The initial and terminal prekernels of the codual outranking digraph reveal in fact the best, resp. worst, choice recomendations one may formulate on the basis of the given outranking digraph instance.
+
+>>> g.showRubisBestChoiceRecommendation()
+***********************
+Rubis best choice recommendation(s) (BCR)
+ (in decreasing order of determinateness)   
+Credibility domain: [-100.00,100.00]
+ === >> potential best choice(s)
+* choice              : ['a1', 'a2', 'a4']
+  +-irredundancy      : 0.00
+  independence        : 0.00
+  dominance           : 6.98
+  absorbency          : -48.84
+  covering (%)        : 66.67
+  determinateness (%) : 57.97
+  - most credible action(s) = { 'a4': 20.93, 'a2': 20.93, }
+ === >> potential worst choice(s) 
+* choice              : ['a3', 'a7']
+  +-irredundancy      : 0.00
+  independence        : 0.00
+  dominance           : -74.42
+  absorbency          : 16.28
+  covering (%)        : 0.00
+  determinateness (%) : 64.62
+  - most credible action(s) = { 'a7': 48.84, }
+
+Notice that solving the valued Berge kernel equations ([BIS-2006a]_) provides furthermore a positive characterization of the most credible decision actions in each respective choice recommendation.
+
+We may orient the drawing of the strict outranking digraph instance with the help of these choice recommendations.
+
+>>> gcd.exportGraphViz(fileName='bestWorstOrientation',
+...       bestChoice=['a2','a4'], worstChoice=['a7'])
+*---- exporting a dot file dor GraphViz tools ---------*
+Exporting to bestWorstOrientation.dot
+dot -Grankdir=BT -Tpng bestWorstOrientation.dot -o bestWorstOrientation.png
+
+.. figure:: bestWorstOrientation.png
+   :width: 300 px
+   :align: center
+   :alt: The random outranking digraph oriented by its initial and terminal prekernels
+
+   *Figure 9*: The strict outranking digraph oriented by its initial and terminal prekernels 
+
+
+It may be interesting to compare this result with a Copeland ranking of this outranking digraph.
+
+>>> g.showHTMLPerformanceHeatmap(colorLevels=5,
+...         ndigits=0, Correlations=True)
+
+.. figure:: outrankingResult.png
+   :width: 500 px
+   :align: center
+   :alt: Copeland ranking of the random outranking digraph instance
+
+   *Figure 10*: Copeland ranking of the random outranking digraph instance 
+
+
 Links and appendices
 --------------------
 

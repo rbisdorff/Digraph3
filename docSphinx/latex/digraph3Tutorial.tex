@@ -54,7 +54,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{January 20, 2019}
+\date{January 26, 2019}
 \release{3.6-2500+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc2.png}\par}
@@ -70,7 +70,7 @@
 
 
 \section{Preface}
-\label{\detokenize{tutorial:preface}}\label{\detokenize{tutorial:tutorial-label}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}
+\label{\detokenize{tutorial:tutorial-label}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}\label{\detokenize{tutorial:preface}}
 This PDF document contains a set of tutorials introducing the main objects like digraphs, outranking digraphs, performance tableaux and voting profiles available in the Digraph3 Python software resources ( see html documentation
 here \textless{}\sphinxurl{https://digraph3.readthedocs.io/en/latest/index.html}\textgreater{} for the corresponding HTML version).
 
@@ -133,7 +133,7 @@ Revision: Python 3.6
 
 
 \section{Working with the \sphinxstyleemphasis{Digraph3} software resources}
-\label{\detokenize{tutorial:working-with-the-digraph3-software-resources}}\label{\detokenize{tutorial:digraphs-tutorial-label}}
+\label{\detokenize{tutorial:digraphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-digraph3-software-resources}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -827,7 +827,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Computing the winner of an election}
-\label{\detokenize{tutorial:linearvoting-tutorial-label}}\label{\detokenize{tutorial:computing-the-winner-of-an-election}}
+\label{\detokenize{tutorial:computing-the-winner-of-an-election}}\label{\detokenize{tutorial:linearvoting-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -1063,7 +1063,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Working with the \sphinxstyleliteralintitle{outrankingDigraphs} module}
-\label{\detokenize{tutorial:working-with-the-outrankingdigraphs-module}}\label{\detokenize{tutorial:outrankingdigraphs-tutorial-label}}
+\label{\detokenize{tutorial:outrankingdigraphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-outrankingdigraphs-module}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -2741,7 +2741,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Ranking with multiple incommensurable criteria}
-\label{\detokenize{tutorial:ranking-tutorial-label}}\label{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}}
+\label{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}}\label{\detokenize{tutorial:ranking-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -4086,7 +4086,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Computing the non isomorphic MISs of the n-cycle graph}
-\label{\detokenize{tutorial:computing-the-non-isomorphic-miss-of-the-n-cycle-graph}}\label{\detokenize{tutorial:isomorphicmis-tutorial-label}}
+\label{\detokenize{tutorial:isomorphicmis-tutorial-label}}\label{\detokenize{tutorial:computing-the-non-isomorphic-miss-of-the-n-cycle-graph}}
 Due to the public success of our common 2008 publication with Jean-Luc Marichal \phantomsection\label{\detokenize{tutorial:id42}}{\hyperref[\detokenize{tutorial:isomis-08}]{\sphinxcrossref{{[}ISOMIS-08{]}}}} (\autopageref*{\detokenize{tutorial:isomis-08}}) , we present in this tutorial an example Python session for computing the \sphinxstylestrong{non isomorphic maximal independent sets} (MISs) from the 12-cycle graph, i.e. a \sphinxcode{digraphs.CirculantDigraph} class instance of order 12 and symmetric circulants 1 and -1.
 
 \fvset{hllines={, ,}}%
@@ -4263,7 +4263,7 @@ The non isomorphic MISs in the 12-cycle graph represent in fact all the ways one
 
 
 \section{On computing digraph kernels}
-\label{\detokenize{tutorial:kernel-tutorial-label}}\label{\detokenize{tutorial:on-computing-digraph-kernels}}
+\label{\detokenize{tutorial:on-computing-digraph-kernels}}\label{\detokenize{tutorial:kernel-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -4285,7 +4285,7 @@ We call \sphinxstylestrong{choice} in a graph, respectively a digraph, a subset 
 
 A first trivial example is immediately given by the naximal independent vertices sets (MISs) of the n-cycle graph (see {\hyperref[\detokenize{tutorial:isomorphicmis-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Computing the non isomorphic MISs of the n-cycle graph}}}} (\autopageref*{\detokenize{tutorial:isomorphicmis-tutorial-label}})). Indeed, each MIS in the n-cycle graph is by definition independent, ie internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12-cycle graph as shown in Fig. 1.
 
-In all graph or symmetric digraph, the \sphinxstyleemphasis{maximality condition} imposed on the internal stability is equivalent to the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice, then we may safely add this vertex or node the choice without violating its internal stability. All kernels must hence be maximal independent choices. In fact, in a topological sense, they correspond to maximal \sphinxstylestrong{holes} in the given graph.
+In all graph or symmetric digraph, the \sphinxstyleemphasis{maximality condition} imposed on the internal stability is equivalent to the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice, then we may safely add this vertex or node to the given choice without violating its internal stability. All kernels must hence be maximal independent choices. In fact, in a topological sense, they correspond to maximal \sphinxstylestrong{holes} in the given graph.
 
 We may illustrate this coincidence between MISs and kernels in graphs and symmetric digraphs with the following random 3-regular graph instance.
 
@@ -4542,7 +4542,7 @@ In the empty digraph, the whole set of nodes gives indeed at the same time the \
 \PYG{g+go}{   absorbency   :  1.0}
 \end{sphinxVerbatim}
 
-Both these results make sense, as in a completely empty or indeterminate digraph, each node may appear anywhere; as its beginning, its end, or somewhere as a hole in its middle. Notice however, that in the latter indeterminate case the complete set of nodes verifies only weakly the internal stability condition (see above). In a dynamic process of becoming more and more definite, the powerset of the nodes contains all choice candidates that may become in the end the actual kernels of the eventually determined digraph.
+Both these results make sense, as in a completely empty or indeterminate digraph, there is no interior of the digraph defined, only a \sphinxstyleemphasis{border} which is hence at the same time initial and terminal.  Notice however, that in the latter indeterminate case the complete set of nodes verifies only weakly the internal stability condition (see above).
 
 Other common digraph models, allthough being clearly oriented, may show nevertheless no apparent laterality, like \sphinxstyleemphasis{odd} \sphinxstylestrong{chordless circuits}, ie \sphinxstyleemphasis{holes} surrounded by a circuit of odd length. They do not admit in fact any initial or terminal kernel.
 
