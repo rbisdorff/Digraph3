@@ -4853,7 +4853,7 @@ execution time: 0 sec. and 2 millisec.
 <li><a class="reference internal" href="#what-is-a-graph-kernel" id="id135">What is a graph kernel ?</a></li>
 <li><a class="reference internal" href="#initial-and-terminal-kernels" id="id136">Initial and terminal kernels</a></li>
 <li><a class="reference internal" href="#kernels-in-lateralized-digraphs" id="id137">Kernels in lateralized digraphs</a></li>
-<li><a class="reference internal" href="#computing-outranking-and-outranked-choices" id="id138">Computing outranking and outranked choices</a></li>
+<li><a class="reference internal" href="#computing-best-and-worst-choice-recommandations" id="id138">Computing best and worst choice recommandations</a></li>
 </ul>
 </div>
 <div class="section" id="what-is-a-graph-kernel">
@@ -5435,13 +5435,11 @@ execution time: 0 sec. and 2 millisec.
 <a class="reference internal image-reference" href="_images/orientedLaterality.png"><img alt="A random digraph oriented by best covering initial and terminal kernels" src="_images/orientedLaterality.png" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-text"><em>Figure 7</em>: A random digraph oriented by best covering initial and terminal kernels</span></p>
 </div>
-<p>In algorithmic decision theory, initial and terminal kernels may provide convincing best, resp. worst, choice recommendations (see <a class="reference internal" href="#rubis-tutorial-label"><span class="std std-ref">Computing a best choice recommendation</span></a>).</p>
-<p>Finally, let us give some hints on the <strong>tractability</strong> of kernel computations. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraphs may get a hard problem already for sparse digraphs of order <em>n</em> &gt; 30 (see <a class="reference internal" href="#bis-2006b" id="id49">[BIS-2006b]</a>). Indeed, the worst case is given by an empty or indeterminate digraph where the number of independent choices is 2 to power <em>n</em>.</p>
-<p>Now, there exist more efficient specialized algorithms for directly enumerating dominant or absorbent kernels contained in specific digraph models. For more or less dense digraphs, as facing usually in algorithmic decision theory, enumerating all independent choices is more tractable. And, checking maximality of independent choices via the external stability conditions during their emuneration provides the effective advantage of allowing to compute all initial and/or terminal kernels in a single run (see <a class="reference internal" href="#bis-2006b" id="id50">[BIS-2006b]</a>).</p>
+<p>In algorithmic decision theory, initial and terminal prekernels may provide convincing best, resp. worst, choice recommendations (see <a class="reference internal" href="#rubis-tutorial-label"><span class="std std-ref">Computing a best choice recommendation</span></a>).</p>
 </div>
-<div class="section" id="computing-outranking-and-outranked-choices">
-<h3><a class="toc-backref" href="#id138">Computing outranking and outranked choices</a><a class="headerlink" href="#computing-outranking-and-outranked-choices" title="Permalink to this headline">¶</a></h3>
-<p>Let us finally compute good and bad choice recommendations in the following random bipolarly-valued outranking digraphs.</p>
+<div class="section" id="computing-best-and-worst-choice-recommandations">
+<h3><a class="toc-backref" href="#id138">Computing best and worst choice recommandations</a><a class="headerlink" href="#computing-best-and-worst-choice-recommandations" title="Permalink to this headline">¶</a></h3>
+<p>To illustrate the idea above, let us finally compute good and bad choice recommendations in the following random bipolarly-valued outranking digraphs.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -5471,7 +5469,7 @@ execution time: 0 sec. and 2 millisec.
 <a class="reference internal image-reference" href="_images/randomOutranking.png"><img alt="A random performance tableau" src="_images/randomOutranking.png" style="width: 500px;" /></a>
 <p class="caption"><span class="caption-text"><em>Figure 8</em>: The performance tableau of a random outranking digraph instance</span></p>
 </div>
-<p>The underlying random performance tableau (see Fig. 8) shows the performance grading of 7 decision actions with respect to 7 decision criteria. The corresponding strict outranking digraph is shown below.</p>
+<p>The underlying random performance tableau (see Fig. 8) shows the performance grading of 7 decision actions with respect to 7 decision criteria. The corresponding strict outranking digraph is shown below in Fig. 9.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -5485,9 +5483,9 @@ execution time: 0 sec. and 2 millisec.
 </td></tr></table></div>
 <div class="figure align-center" id="id65">
 <a class="reference internal image-reference" href="_images/tutOutranking.png"><img alt="A random performance tableau" src="_images/tutOutranking.png" style="width: 300px;" /></a>
-<p class="caption"><span class="caption-text"><em>Figure 8</em>: A random strict outranking digraph instance</span></p>
+<p class="caption"><span class="caption-text"><em>Figure 9</em>: A random strict outranking digraph instance</span></p>
 </div>
-<p>With disjoint initial and terminal prekernels, the given strict outranking digraph is clearly lateralized.</p>
+<p>With disjoint initial and terminal prekernels (see Line 4 and 10 below), the random strict outranking digraph instance is clearly lateralized.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -5517,7 +5515,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">   covering     :  0.800</span>
 </pre></div>
 </td></tr></table></div>
-<p>The initial and terminal prekernels of the codual outranking digraph reveal in fact the best, resp. worst, choice recomendations one may formulate on the basis of the given outranking digraph instance.</p>
+<p>The initial and terminal prekernels of the codual outranking digraph reveal hence the best, resp. worst, choice recomendations one may formulate on the basis of the given outranking digraph instance.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -5565,8 +5563,8 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">  - most credible action(s) = { &#39;a7&#39;: 48.84, }</span>
 </pre></div>
 </td></tr></table></div>
-<p>Notice that solving the valued Berge kernel equations (<a class="reference internal" href="#bis-2006a" id="id51">[BIS-2006a]</a>) provides furthermore a positive characterization of the most credible decision actions in each respective choice recommendation.</p>
-<p>We may orient the drawing of the strict outranking digraph instance with the help of these choice recommendations.</p>
+<p>Notice that solving the valued Berge kernel equations (<a class="reference internal" href="#bis-2006a" id="id49">[BIS-2006a]</a>) provides furthermore a positive characterization of the most credible decision actions in each respective choice recommendation (see Line 14 and 23 above).</p>
+<p>We may orient in Fig. 10 below the drawing of the strict outranking digraph instance with the help of these best and worst choice recommendations.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -5580,7 +5578,7 @@ execution time: 0 sec. and 2 millisec.
 </td></tr></table></div>
 <div class="figure align-center" id="id66">
 <a class="reference internal image-reference" href="_images/bestWorstOrientation.png"><img alt="The random outranking digraph oriented by its initial and terminal prekernels" src="_images/bestWorstOrientation.png" style="width: 300px;" /></a>
-<p class="caption"><span class="caption-text"><em>Figure 9</em>: The strict outranking digraph oriented by its initial and terminal prekernels</span></p>
+<p class="caption"><span class="caption-text"><em>Figure 10</em>: The strict outranking digraph oriented by its initial and terminal prekernels</span></p>
 </div>
 <p>It may be interesting to compare this result with a Copeland ranking of this outranking digraph.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -5590,8 +5588,11 @@ execution time: 0 sec. and 2 millisec.
 </td></tr></table></div>
 <div class="figure align-center" id="id67">
 <a class="reference internal image-reference" href="_images/outrankingResult.png"><img alt="Copeland ranking of the random outranking digraph instance" src="_images/outrankingResult.png" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-text"><em>Figure 10</em>: Copeland ranking of the random outranking digraph instance</span></p>
+<p class="caption"><span class="caption-text"><em>Figure 11</em>: Copeland ranking of the random outranking digraph instance</span></p>
 </div>
+<p>Both best decision actions, namely ‘a2’ and ‘a4’, don’t schow a performance profile that would make apparent a clear preference situation in favour of one or the other. This makes the prekernels base best choice recommendation more faithful with the actually underlying performance tableau than the forced linear ranking as shown in Fig. 11 above.</p>
+<p>Finally, let us give some hints on the <strong>tractability</strong> of kernel computations. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraphs may get a hard problem already for sparse digraphs of order <em>n</em> &gt; 30 (see <a class="reference internal" href="#bis-2006b" id="id50">[BIS-2006b]</a>). Indeed, the worst case is given by an empty or indeterminate digraph where the number of independent choices is 2 to power <em>n</em>.</p>
+<p>Now, there exist more efficient specialized algorithms for directly enumerating dominant or absorbent kernels contained in specific digraph models. For more or less dense outranking digraphs of modest order, as facing usually in algorithmic decision theory, enumerating all independent choices remains usually tractable. And, checking maximality of independent choices via the external stability conditions during their emuneration provides the effective advantage of allowing to compute all initial and/or terminal kernels in a single run (see <a class="reference internal" href="#bis-2006b" id="id51">[BIS-2006b]</a>).</p>
 </div>
 </div>
 <div class="section" id="links-and-appendices">
@@ -5701,7 +5702,7 @@ execution time: 0 sec. and 2 millisec.
 <table class="docutils citation" frame="void" id="bis-2006a" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[BIS-2006a]</td><td><em>(<a class="fn-backref" href="#id26">1</a>, <a class="fn-backref" href="#id47">2</a>, <a class="fn-backref" href="#id51">3</a>)</em> <ol class="last upperalpha simple" start="18">
+<tr><td class="label">[BIS-2006a]</td><td><em>(<a class="fn-backref" href="#id26">1</a>, <a class="fn-backref" href="#id47">2</a>, <a class="fn-backref" href="#id49">3</a>)</em> <ol class="last upperalpha simple" start="18">
 <li>Bisdorff, M. Pirlot and M. Roubens (2006). “Choices and kernels from bipolar valued digraphs”. <em>European Journal of Operational Research</em>, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version <a class="reference external" href="https://sma.uni.lu/bisdorff/documents/BisdorffPirlotRoubens05.pdf">PDF file 257.3Kb</a>)</li>
 </ol>
 </td></tr>
@@ -5710,7 +5711,7 @@ execution time: 0 sec. and 2 millisec.
 <table class="docutils citation" frame="void" id="bis-2006b" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[BIS-2006b]</td><td><em>(<a class="fn-backref" href="#id49">1</a>, <a class="fn-backref" href="#id50">2</a>)</em> <ol class="last upperalpha simple" start="18">
+<tr><td class="label">[BIS-2006b]</td><td><em>(<a class="fn-backref" href="#id50">1</a>, <a class="fn-backref" href="#id51">2</a>)</em> <ol class="last upperalpha simple" start="18">
 <li>Bisdorff (2006). On enumerating the kernels in a bipolar-valued digraph. Annales du Lamsade 6, Octobre 2006, pp. 1 - 38. Université Paris-Dauphine. ISSN 1762-455X (downloadable version <a class="reference external" href="https://leopold-loewenheim.uni.lu/bisdorff/documents/EnumKernels.pdf">PDF file 532.2 Kb</a>).</li>
 </ol>
 </td></tr>
@@ -5859,7 +5860,7 @@ execution time: 0 sec. and 2 millisec.
 <li><a class="reference internal" href="#what-is-a-graph-kernel">What is a graph kernel ?</a></li>
 <li><a class="reference internal" href="#initial-and-terminal-kernels">Initial and terminal kernels</a></li>
 <li><a class="reference internal" href="#kernels-in-lateralized-digraphs">Kernels in lateralized digraphs</a></li>
-<li><a class="reference internal" href="#computing-outranking-and-outranked-choices">Computing outranking and outranked choices</a></li>
+<li><a class="reference internal" href="#computing-best-and-worst-choice-recommandations">Computing best and worst choice recommandations</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#links-and-appendices">Links and appendices</a><ul>
