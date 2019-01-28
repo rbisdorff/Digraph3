@@ -1381,7 +1381,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Generating random performance tableaux}
-\label{\detokenize{tutorial:generating-random-performance-tableaux}}\label{\detokenize{tutorial:randomperformancetableau-tutorial-label}}
+\label{\detokenize{tutorial:randomperformancetableau-tutorial-label}}\label{\detokenize{tutorial:generating-random-performance-tableaux}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -1903,7 +1903,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Computing a best choice recommendation}
-\label{\detokenize{tutorial:rubis-tutorial-label}}\label{\detokenize{tutorial:computing-a-best-choice-recommendation}}
+\label{\detokenize{tutorial:computing-a-best-choice-recommendation}}\label{\detokenize{tutorial:rubis-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -2741,7 +2741,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Ranking with multiple incommensurable criteria}
-\label{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}}\label{\detokenize{tutorial:ranking-tutorial-label}}
+\label{\detokenize{tutorial:ranking-tutorial-label}}\label{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -3209,7 +3209,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Rating with learned quantile norms}
-\label{\detokenize{tutorial:rating-tutorial-label}}\label{\detokenize{tutorial:rating-with-learned-quantile-norms}}
+\label{\detokenize{tutorial:rating-with-learned-quantile-norms}}\label{\detokenize{tutorial:rating-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -4086,7 +4086,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Computing the non isomorphic MISs of the n-cycle graph}
-\label{\detokenize{tutorial:computing-the-non-isomorphic-miss-of-the-n-cycle-graph}}\label{\detokenize{tutorial:isomorphicmis-tutorial-label}}
+\label{\detokenize{tutorial:isomorphicmis-tutorial-label}}\label{\detokenize{tutorial:computing-the-non-isomorphic-miss-of-the-n-cycle-graph}}
 Due to the public success of our common 2008 publication with Jean-Luc Marichal \phantomsection\label{\detokenize{tutorial:id42}}{\hyperref[\detokenize{tutorial:isomis-08}]{\sphinxcrossref{{[}ISOMIS-08{]}}}} (\autopageref*{\detokenize{tutorial:isomis-08}}) , we present in this tutorial an example Python session for computing the \sphinxstylestrong{non isomorphic maximal independent sets} (MISs) from the 12-cycle graph, i.e. a \sphinxcode{digraphs.CirculantDigraph} class instance of order 12 and symmetric circulants 1 and -1.
 
 \fvset{hllines={, ,}}%
@@ -4263,7 +4263,7 @@ The non isomorphic MISs in the 12-cycle graph represent in fact all the ways one
 
 
 \section{On computing digraph kernels}
-\label{\detokenize{tutorial:kernel-tutorial-label}}\label{\detokenize{tutorial:on-computing-digraph-kernels}}
+\label{\detokenize{tutorial:on-computing-digraph-kernels}}\label{\detokenize{tutorial:kernel-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -4834,12 +4834,12 @@ The grey arrows in Fig.10, like the one between actions ‘a4’ and ‘a1’, r
 \noindent\sphinxincludegraphics[width=550\sphinxpxdimen]{{outrankingResult}.png}
 \caption{\sphinxstyleemphasis{Figure 11}: Copeland ranking of the peformance tableau}\label{\detokenize{tutorial:id68}}\end{figure}
 
-In the resulting linear ranking, action ‘a4’ is set at first rank, followed by action ‘a2’. This makes sense as ‘a4’ shows three performances in the first quintile, whereas ‘a2’ is only partially evaluated and shows only two such excellent performances. But ‘a4’ also shows a very weak performance in the first quintile, Both decision actions don’t schow eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually determined outranking relation than any ‘forced’ linear ranking result as shown in Fig. 11 above.
+In the resulting linear ranking, action ‘a4’ is set at first rank, followed by action ‘a2’. This makes sense as ‘a4’ shows three performances in the first quintile, whereas ‘a2’ is only partially evaluated and shows only two such excellent performances. But ‘a4’ also shows a very weak performance in the first quintile, Both decision actions don’t schow eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually definite strict outranking relation than any ‘forced’ linear ranking result as shown in Fig. 11 above.
 
 
 \subsection{Tractability}
 \label{\detokenize{tutorial:tractability}}
-Finally, let us give some hints on the \sphinxstylestrong{tractability} of kernel computations. Detecting all (pre)kernels in a digraph is a famously NP-hard computational problem. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraphs may get hard already for tiny sparse digraphs of order \sphinxstyleemphasis{n} \textgreater{} 30 (see \phantomsection\label{\detokenize{tutorial:id50}}{\hyperref[\detokenize{tutorial:bis-2006b}]{\sphinxcrossref{{[}BIS-2006b{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006b}})). Indeed, the worst case is given by an empty or indeterminate digraph where the number of independent choices is 2 to power \sphinxstyleemphasis{n}.
+Finally, let us give some hints on the \sphinxstylestrong{tractability} of kernel computations. Detecting all (pre)kernels in a digraph is a famously NP-hard computational problem. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraphs may get hard already for tiny sparse digraphs of order \sphinxstyleemphasis{n} \textgreater{} 30 (see \phantomsection\label{\detokenize{tutorial:id50}}{\hyperref[\detokenize{tutorial:bis-2006b}]{\sphinxcrossref{{[}BIS-2006b{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006b}})). Indeed, the worst case is given by an empty or indeterminate digraph where the number of independent choices is indeed 2 to power \sphinxstyleemphasis{n}.
 
 Now, there exist more efficient specialized algorithms for directly enumerating MISs and dominant or absorbent kernels contained in specific digraph models (see \phantomsection\label{\detokenize{tutorial:id51}}{\hyperref[\detokenize{tutorial:bis-2006b}]{\sphinxcrossref{{[}BIS-2006b{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006b}})).
 
