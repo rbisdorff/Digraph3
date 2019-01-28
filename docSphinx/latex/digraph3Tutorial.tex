@@ -54,7 +54,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{January 27, 2019}
+\date{January 28, 2019}
 \release{3.6-2500+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc2.png}\par}
@@ -70,7 +70,7 @@
 
 
 \section{Preface}
-\label{\detokenize{tutorial:preface}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}\label{\detokenize{tutorial:tutorial-label}}
+\label{\detokenize{tutorial:tutorial-label}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}\label{\detokenize{tutorial:preface}}
 This PDF document contains a set of tutorials introducing the main objects like digraphs, outranking digraphs, performance tableaux and voting profiles available in the Digraph3 Python software resources ( see html documentation
 here \textless{}\sphinxurl{https://digraph3.readthedocs.io/en/latest/index.html}\textgreater{} for the corresponding HTML version).
 
@@ -827,7 +827,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Computing the winner of an election}
-\label{\detokenize{tutorial:linearvoting-tutorial-label}}\label{\detokenize{tutorial:computing-the-winner-of-an-election}}
+\label{\detokenize{tutorial:computing-the-winner-of-an-election}}\label{\detokenize{tutorial:linearvoting-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -1381,7 +1381,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Generating random performance tableaux}
-\label{\detokenize{tutorial:randomperformancetableau-tutorial-label}}\label{\detokenize{tutorial:generating-random-performance-tableaux}}
+\label{\detokenize{tutorial:generating-random-performance-tableaux}}\label{\detokenize{tutorial:randomperformancetableau-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -1903,7 +1903,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Computing a best choice recommendation}
-\label{\detokenize{tutorial:rubis-tutorial-label}}\label{\detokenize{tutorial:computing-a-best-choice-recommendation}}
+\label{\detokenize{tutorial:computing-a-best-choice-recommendation}}\label{\detokenize{tutorial:rubis-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -2741,7 +2741,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Ranking with multiple incommensurable criteria}
-\label{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}}\label{\detokenize{tutorial:ranking-tutorial-label}}
+\label{\detokenize{tutorial:ranking-tutorial-label}}\label{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -4263,7 +4263,7 @@ The non isomorphic MISs in the 12-cycle graph represent in fact all the ways one
 
 
 \section{On computing digraph kernels}
-\label{\detokenize{tutorial:kernel-tutorial-label}}\label{\detokenize{tutorial:on-computing-digraph-kernels}}
+\label{\detokenize{tutorial:on-computing-digraph-kernels}}\label{\detokenize{tutorial:kernel-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -4276,7 +4276,10 @@ The non isomorphic MISs in the 12-cycle graph represent in fact all the ways one
 \phantomsection\label{\detokenize{tutorial:id138}}{\hyperref[\detokenize{tutorial:kernels-in-lateralized-digraphs}]{\sphinxcrossref{Kernels in lateralized digraphs}}} (\autopageref*{\detokenize{tutorial:kernels-in-lateralized-digraphs}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id139}}{\hyperref[\detokenize{tutorial:computing-best-and-worst-choice-recommandations}]{\sphinxcrossref{Computing best and worst choice recommandations}}} (\autopageref*{\detokenize{tutorial:computing-best-and-worst-choice-recommandations}})
+\phantomsection\label{\detokenize{tutorial:id139}}{\hyperref[\detokenize{tutorial:computing-good-and-bad-choice-recommandations}]{\sphinxcrossref{Computing good and bad choice recommandations}}} (\autopageref*{\detokenize{tutorial:computing-good-and-bad-choice-recommandations}})
+
+\item {} 
+\phantomsection\label{\detokenize{tutorial:id140}}{\hyperref[\detokenize{tutorial:tractability}]{\sphinxcrossref{Tractability}}} (\autopageref*{\detokenize{tutorial:tractability}})
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -4702,9 +4705,9 @@ Among the six MISs contained in this random digraph (see above Lines 3-8) we dic
 In algorithmic decision theory, initial and terminal prekernels may provide convincing best, resp. worst, choice recommendations (see {\hyperref[\detokenize{tutorial:rubis-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Computing a best choice recommendation}}}} (\autopageref*{\detokenize{tutorial:rubis-tutorial-label}})).
 
 
-\subsection{Computing best and worst choice recommandations}
-\label{\detokenize{tutorial:computing-best-and-worst-choice-recommandations}}
-To illustrate this idea, let us finally compute good and bad choice recommendations in the following random bipolarly-valued outranking digraphs.
+\subsection{Computing good and bad choice recommandations}
+\label{\detokenize{tutorial:computing-good-and-bad-choice-recommandations}}
+To illustrate this idea, let us finally compute good and bad choice recommendations in the following random bipolarly-valued \sphinxstylestrong{outranking} digraph.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4718,7 +4721,7 @@ To illustrate this idea, let us finally compute good and bad choice recommendati
 \PYG{g+go}{\PYGZsh{} Criteria       : 7}
 \PYG{g+go}{Size             : 26}
 \PYG{g+go}{Determinateness  : 34.275}
-\PYG{g+go}{Valuation domain : \PYGZob{}\PYGZsq{}min\PYGZsq{}: Decimal(\PYGZsq{}\PYGZhy{}100.0\PYGZsq{}), \PYGZsq{}med\PYGZsq{}: Decimal(\PYGZsq{}0.0\PYGZsq{}), \PYGZsq{}max\PYGZsq{}: Decimal(\PYGZsq{}100.0\PYGZsq{}), \PYGZsq{}precision\PYGZsq{}: Decimal(\PYGZsq{}0\PYGZsq{})\PYGZcb{}}
+\PYG{g+go}{Valuation domain : \PYGZob{}\PYGZsq{}min\PYGZsq{}: \PYGZhy{}100.0, \PYGZsq{}med\PYGZsq{}: 0.0, \PYGZsq{}max\PYGZsq{}: 100.0\PYGZcb{}}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showHTMLPerformanceTableau}\PYG{p}{(}\PYG{p}{)}
 \end{sphinxVerbatim}
 
@@ -4729,7 +4732,7 @@ To illustrate this idea, let us finally compute good and bad choice recommendati
 \noindent\sphinxincludegraphics[width=500\sphinxpxdimen]{{randomOutranking}.png}
 \caption{\sphinxstyleemphasis{Figure 8}: The performance tableau of a random outranking digraph instance}\label{\detokenize{tutorial:id65}}\end{figure}
 
-The underlying random performance tableau (see Fig. 8) shows the performance grading of 7 decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision action ‘a2’. The resulting strict outranking - ie a weighted majority supported \sphinxstyleemphasis{better than without considerable counter-performance} - digraph is shown below in Fig. 9.
+The underlying random performance tableau (see Fig. 8) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision action ‘a2’. The resulting \sphinxstylestrong{strict outranking} - ie a weighted majority supported - \sphinxstyleemphasis{better than without considerable counter-performance} - digraph is shown in Fig. 9 below.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4747,7 +4750,7 @@ The underlying random performance tableau (see Fig. 8) shows the performance gra
 \noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{tutOutranking}.png}
 \caption{\sphinxstyleemphasis{Figure 9}: A random strict outranking digraph instance}\label{\detokenize{tutorial:id66}}\end{figure}
 
-With unique disjoint initial and terminal prekernels (see Line 4 and 10 below), the resulting strict outranking digraph instance ( see Line 1 above) is clearly \sphinxstyleemphasis{lateralized}.
+All decision actions appear strictly better performing than action ‘a7’. We call it a \sphinxstylestrong{Condorcet looser} and it is an evident terminal prekernel candidate. On the other side, three actions: ‘a1’, ‘a2’ nd ‘a4’ are not dominated. They give together an initial prekernel candidate.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4767,7 +4770,7 @@ With unique disjoint initial and terminal prekernels (see Line 4 and 10 below), 
 \PYG{g+go}{   covering     :  0.800}
 \end{sphinxVerbatim}
 
-Indeed, these initial and terminal prekernels of the codual outranking digraph reveal the best, resp. worst, choice recomendations one may formulate on the basis of the given outranking digraph instance.
+With such unique disjoint initial and terminal prekernels (see Line 4 and 10), the given digraph instance is hence clearly \sphinxstyleemphasis{lateralized}. Indeed, these initial and terminal prekernels of the codual outranking digraph reveal best, resp. worst, choice recomendations one may formulate on the basis of a given outranking digraph instance.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4796,9 +4799,9 @@ Indeed, these initial and terminal prekernels of the codual outranking digraph r
 \PYG{g+go}{  \PYGZhy{} most credible action(s) = \PYGZob{} \PYGZsq{}a7\PYGZsq{}: 48.84, \PYGZcb{}}
 \end{sphinxVerbatim}
 
-Notice that solving the valued Berge kernel equations (\phantomsection\label{\detokenize{tutorial:id49}}{\hyperref[\detokenize{tutorial:bis-2006a}]{\sphinxcrossref{{[}BIS-2006a{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006a}})) provides furthermore a positive characterization of the most credible decision actions in each respective choice recommendation (see Line 14 and 23 above).
+Notice that solving the valued \sphinxstyleemphasis{Berge} kernel equations (\phantomsection\label{\detokenize{tutorial:id49}}{\hyperref[\detokenize{tutorial:bis-2006a}]{\sphinxcrossref{{[}BIS-2006a{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006a}})) provides furthermore a positive characterization of the most credible decision actions in each respective choice recommendation (see Line 14 and 23 above). Actions ‘a2’ and ‘a4’ are equivalent candidates for a unique best choice, and action ‘a7’ is clearly confirmed as the worst choice.
 
-We may orient in Fig. 10 below the drawing of the strict outranking digraph instance with the help of these best and worst choice recommendations.
+In Fig. 10 below, we orient the drawing of the strict outranking digraph instance with the help of these best and worst choice recommendations.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4814,9 +4817,9 @@ We may orient in Fig. 10 below the drawing of the strict outranking digraph inst
 \capstart
 
 \noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{bestWorstOrientation}.png}
-\caption{\sphinxstyleemphasis{Figure 10}: The strict outranking digraph oriented by its initial and terminal prekernels}\label{\detokenize{tutorial:id67}}\end{figure}
+\caption{\sphinxstyleemphasis{Figure 10}: The strict outranking digraph oriented by its best and worst choice recommendations}\label{\detokenize{tutorial:id67}}\end{figure}
 
-It may be interesting to compare this result with a Copeland ranking of this outranking digraph (see {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Ranking with multiple incommensurable criteria}}}} (\autopageref*{\detokenize{tutorial:ranking-tutorial-label}})).
+The grey arrows in Fig.10, like the one between actions ‘a4’ and ‘a1’, represent indeterminate preferential situations. Action ‘a1’ appears hence to be rather incomparable to all the other, except action ‘a7’. It may be interesting to compare this result with a Copeland ranking of the underlying performance tableau (see {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Ranking with multiple incommensurable criteria}}}} (\autopageref*{\detokenize{tutorial:ranking-tutorial-label}})).
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4828,14 +4831,19 @@ It may be interesting to compare this result with a Copeland ranking of this out
 \centering
 \capstart
 
-\noindent\sphinxincludegraphics[width=500\sphinxpxdimen]{{outrankingResult}.png}
-\caption{\sphinxstyleemphasis{Figure 11}: Copeland ranking of the random outranking digraph instance}\label{\detokenize{tutorial:id68}}\end{figure}
+\noindent\sphinxincludegraphics[width=550\sphinxpxdimen]{{outrankingResult}.png}
+\caption{\sphinxstyleemphasis{Figure 11}: Copeland ranking of the peformance tableau}\label{\detokenize{tutorial:id68}}\end{figure}
 
-Both best decision actions, namely ‘a2’ and ‘a4’, don’t schow a performance profile that would make apparent a clear preference situation in favour of one or the other. This makes usually the prekernels based best choice recommendations more faithful with respect to the actually underlying performance tableau than any ‘forced’ linear ranking result as shown in Fig. 11 above.
+In the resulting linear ranking, action ‘a4’ is set at first rank, followed by action ‘a2’. This makes sense as ‘a4’ shows three performances in the first quintile, whereas ‘a2’ is only partially evaluated and shows only two such excellent performances. But ‘a4’ also shows a very weak performance in the first quintile, Both decision actions don’t schow eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually determined outranking relation than any ‘forced’ linear ranking result as shown in Fig. 11 above.
 
-Finally, let us give some hints on the \sphinxstylestrong{tractability} of kernel computations. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraphs may get a hard problem already for sparse digraphs of order \sphinxstyleemphasis{n} \textgreater{} 30 (see \phantomsection\label{\detokenize{tutorial:id50}}{\hyperref[\detokenize{tutorial:bis-2006b}]{\sphinxcrossref{{[}BIS-2006b{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006b}})). Indeed, the worst case is given by an empty or indeterminate digraph where the number of independent choices is 2 to power \sphinxstyleemphasis{n}.
 
-Now, there exist more efficient specialized algorithms for directly enumerating dominant or absorbent kernels contained in specific digraph models(see \phantomsection\label{\detokenize{tutorial:id51}}{\hyperref[\detokenize{tutorial:bis-2006b}]{\sphinxcrossref{{[}BIS-2006b{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006b}})). For more or less dense outranking digraphs of modest order, as facing usually in algorithmic decision theory, enumerating all independent choices remains usually tractable. And, checking maximality of independent choices via the external stability conditions during their emuneration provides the effective advantage of allowing to compute all initial and/or terminal kernels in a single run (see \phantomsection\label{\detokenize{tutorial:id52}}{\hyperref[\detokenize{tutorial:bis-2006b}]{\sphinxcrossref{{[}BIS-2006b{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006b}})).
+\subsection{Tractability}
+\label{\detokenize{tutorial:tractability}}
+Finally, let us give some hints on the \sphinxstylestrong{tractability} of kernel computations. Detecting all (pre)kernels in a digraph is a famously NP-hard computational problem. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraphs may get hard already for tiny sparse digraphs of order \sphinxstyleemphasis{n} \textgreater{} 30 (see \phantomsection\label{\detokenize{tutorial:id50}}{\hyperref[\detokenize{tutorial:bis-2006b}]{\sphinxcrossref{{[}BIS-2006b{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006b}})). Indeed, the worst case is given by an empty or indeterminate digraph where the number of independent choices is 2 to power \sphinxstyleemphasis{n}.
+
+Now, there exist more efficient specialized algorithms for directly enumerating MISs and dominant or absorbent kernels contained in specific digraph models (see \phantomsection\label{\detokenize{tutorial:id51}}{\hyperref[\detokenize{tutorial:bis-2006b}]{\sphinxcrossref{{[}BIS-2006b{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006b}})).
+
+For more or less dense strict outranking digraphs of modest order, as facing usually in algorithmic decision theory, enumerating all independent choices remains usually tractable. And, checking maximality of independent choices via the external stability conditions during their emuneration provides the effective advantage of allowing to compute all initial and/or terminal kernels in a single run (see \phantomsection\label{\detokenize{tutorial:id52}}{\hyperref[\detokenize{tutorial:bis-2006b}]{\sphinxcrossref{{[}BIS-2006b{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006b}})).
 
 
 \section{Links and appendices}
