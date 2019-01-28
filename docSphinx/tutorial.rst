@@ -3416,7 +3416,7 @@ In algorithmic decision theory, initial and terminal prekernels may provide conv
 Computing good and bad choice recommandations
 ...............................................
 
-To illustrate this idea, let us finally compute good and bad choice recommendations in the following random bipolarly-valued outranking digraphs.
+To illustrate this idea, let us finally compute good and bad choice recommendations in the following random bipolarly-valued **outranking** digraph.
 
 >>> from outrankingDigraphs import *
 >>> g = RandomBipolarOutrankingDigraph(seed=5)
@@ -3438,7 +3438,7 @@ Valuation domain : {'min': Decimal('-100.0'), 'med': Decimal('0.0'), 'max': Deci
 
    *Figure 8*: The performance tableau of a random outranking digraph instance
 
-The underlying random performance tableau (see Fig. 8) shows the performance grading of 7 decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision action 'a2'. The resulting strict outranking - ie a weighted majority supported - *better than without considerable counter-performance* - - digraph is shown below in Fig. 9.
+The underlying random performance tableau (see Fig. 8) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision action 'a2'. The resulting strict outranking - ie a weighted majority supported - *better than without considerable counter-performance* - digraph is shown in Fig. 9 below.
 
 >>> gcd = ~(-g)  # Codual: the converse of the negation
 >>> gcd.exportGraphViz(fileName='tutOutRanking')
