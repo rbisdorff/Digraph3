@@ -3432,7 +3432,7 @@ Valuation domain : {'min': -100.0, 'med': 0.0, 'max': 100.0}
 >>> g.showHTMLPerformanceTableau()
 
 .. figure:: randomOutranking.png
-   :width: 500 px
+   :width: 550 px
    :align: center
    :alt: A random performance tableau
 
@@ -3515,8 +3515,8 @@ dot -Grankdir=BT -Tpng bestWorstOrientation.dot -o bestWorstOrientation.png
 
 The grey arrows in Fig.10, like the one between actions 'a4' and 'a1', represent indeterminate preferential situations. Action 'a1' appears hence to be rather incomparable to all the other, except action 'a7'. It may be interesting to compare this result with a Copeland ranking of the underlying performance tableau (see :ref:`Ranking-tutorial-label`).
 
->>> g.showHTMLPerformanceHeatmap(colorLevels=5,
-...         ndigits=0, Correlations=True)
+>>> g.showHTMLPerformanceHeatmap(colorLevels=5, ndigits=0,
+...          Correlations=True, rankingRule='Copeland')
 
 .. figure:: outrankingResult.png
    :width: 550 px
