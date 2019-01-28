@@ -3413,7 +3413,7 @@ dot -Grankdir=BT -Tpng orientedLaterality.dot -o orientedLaterality.png
 In algorithmic decision theory, initial and terminal prekernels may provide convincing best, resp. worst, choice recommendations (see :ref:`Rubis-Tutorial-label`).
 
 
-Computing best and worst choice recommandations
+Computing good and bad choice recommandations
 ...............................................
 
 To illustrate this idea, let us finally compute good and bad choice recommendations in the following random bipolarly-valued outranking digraphs.
@@ -3438,7 +3438,7 @@ Valuation domain : {'min': Decimal('-100.0'), 'med': Decimal('0.0'), 'max': Deci
 
    *Figure 8*: The performance tableau of a random outranking digraph instance
 
-The underlying random performance tableau (see Fig. 8) shows the performance grading of 7 decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision action 'a2'. The resulting strict outranking - ie a weighted majority supported *better than without considerable counter-performance* - digraph is shown below in Fig. 9.
+The underlying random performance tableau (see Fig. 8) shows the performance grading of 7 decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision action 'a2'. The resulting strict outranking - ie a weighted majority supported - *better than without considerable counter-performance* - - digraph is shown below in Fig. 9.
 
 >>> gcd = ~(-g)  # Codual: the converse of the negation
 >>> gcd.exportGraphViz(fileName='tutOutRanking')
@@ -3453,7 +3453,7 @@ dot -Grankdir=BT -Tpng tutOutranking.dot -o tutOutranking.png
 
    *Figure 9*: A random strict outranking digraph instance
 
-With unique disjoint initial and terminal prekernels (see Line 4 and 10 below), the resulting strict outranking digraph instance ( see Line 1 above) is clearly *lateralized*.
+All decision actions appear strictly better performing than action 'a7'. We call it a **Condorcet looser** and it is an evident terminal prekernel candidate. On the other side, three actions: 'a1', 'a2' nd 'a4' are not dominated. They give together an initial prekernel candidate. 
 
 >>> gcd.showPreKernels()
 *--- Computing preKernels ---*
@@ -3470,7 +3470,7 @@ Absorbent preKernels :
    absorbency   :  16.28
    covering     :  0.800
 
-Indeed, these initial and terminal prekernels of the codual outranking digraph reveal the best, resp. worst, choice recomendations one may formulate on the basis of the given outranking digraph instance.
+With such unique disjoint initial and terminal prekernels (see Line 4 and 10), the given digraph instance is hence clearly *lateralized*. Indeed, these initial and terminal prekernels of the codual outranking digraph reveal the best, resp. worst, choice recomendations one may formulate on the basis of a given outranking digraph instance.
 
 >>> g.showRubisBestChoiceRecommendation()
 ***********************
@@ -3496,9 +3496,9 @@ Credibility domain: [-100.00,100.00]
   determinateness (%) : 64.62
   - most credible action(s) = { 'a7': 48.84, }
 
-Notice that solving the valued Berge kernel equations ([BIS-2006a]_) provides furthermore a positive characterization of the most credible decision actions in each respective choice recommendation (see Line 14 and 23 above).
+Notice that solving the valued *Berge* kernel equations ([BIS-2006a]_) provides furthermore a positive characterization of the most credible decision actions in each respective choice recommendation (see Line 14 and 23 above). Actions 'a2' and 'a4' are equivalent candidates for a unique best choice, and action 'a7' is clearly confirmed as the worst choice.
 
-We may orient in Fig. 10 below the drawing of the strict outranking digraph instance with the help of these best and worst choice recommendations.
+In Fig. 10 below, we orient the drawing of the strict outranking digraph instance with the help of these best and worst choice recommendations. 
 
 >>> gcd.exportGraphViz(fileName='bestWorstOrientation',
 ...       bestChoice=['a2','a4'], worstChoice=['a7'])
@@ -3513,19 +3513,19 @@ dot -Grankdir=BT -Tpng bestWorstOrientation.dot -o bestWorstOrientation.png
 
    *Figure 10*: The strict outranking digraph oriented by its initial and terminal prekernels 
 
-It may be interesting to compare this result with a Copeland ranking of this outranking digraph (see :ref:`Ranking-tutorial-label`).
+Grey arrows represent here an indeterminate preferential situation. Action 'a1' appears to be rather incomparable to all the other, except action 'a7'. It may be interesting to compare this result with a Copeland ranking of this outranking digraph (see :ref:`Ranking-tutorial-label`).
 
 >>> g.showHTMLPerformanceHeatmap(colorLevels=5,
 ...         ndigits=0, Correlations=True)
 
 .. figure:: outrankingResult.png
-   :width: 500 px
+   :width: 550 px
    :align: center
    :alt: Copeland ranking of the random outranking digraph instance
 
    *Figure 11*: Copeland ranking of the random outranking digraph instance 
 
-Both best decision actions, namely 'a2' and 'a4', don't schow a performance profile that would make apparent a clear preference situation in favour of one or the other. This makes usually the prekernels based best choice recommendations more faithful with respect to the actually underlying performance tableau than any 'forced' linear ranking result as shown in Fig. 11 above.
+In the resulting linear ranking, action 'a4' is set at first rank, followed by action 'a2'. This makes sense as 'a4' shows three performances in the first quintile, whereas 'a2' only shows two such excellent performances, and is only partially evaluated. But 'a4' also shows a very weak performance in the first quintile, Both decision actions don't schow hence a performance profile that would make apparent a clear preference situation in favour of one or the other. This makes usually the prekernels based best choice recommendations more faithful with respect to the actually underlying performance tableau than any 'forced' linear ranking result as shown in Fig. 11 above.
 
 Finally, let us give some hints on the **tractability** of kernel computations. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraphs may get a hard problem already for sparse digraphs of order *n* > 30 (see [BIS-2006b]_). Indeed, the worst case is given by an empty or indeterminate digraph where the number of independent choices is 2 to power *n*.
 
