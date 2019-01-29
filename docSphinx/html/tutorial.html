@@ -5595,7 +5595,7 @@ execution time: 0 sec. and 2 millisec.
 </div>
 <div class="section" id="tractability">
 <h3><a class="toc-backref" href="#id140">Tractability</a><a class="headerlink" href="#tractability" title="Permalink to this headline">¶</a></h3>
-<p>Finally, let us give some hints on the <strong>tractability</strong> of kernel computations. Detecting all (pre)kernels in a digraph is a famously NP-hard computational problem. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraphs may get hard already for tiny sparse digraphs of order <em>n</em> &gt; 30 (see <a class="reference internal" href="#bis-2006b" id="id50">[BIS-2006b]</a>). Indeed, the worst case is given by an empty or indeterminate digraph where the number of independent choices is indeed 2 to power <em>n</em>.</p>
+<p>Finally, let us give some hints on the <strong>tractability</strong> of kernel computations. Detecting all (pre)kernels in a digraph is a famously NP-hard computational problem. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraphs may get hard already for tiny sparse digraphs of order <em>n</em> &gt; 20 (see <a class="reference internal" href="#bis-2006b" id="id50">[BIS-2006b]</a>). Indeed, the worst case is given by an empty or indeterminate digraph where the number of independent choices is indeed 2 to power <em>n</em>.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -5611,7 +5611,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">execution time: 1.47640 sec.  # &lt;&lt;== !!!</span>
 </pre></div>
 </td></tr></table></div>
-<p>Now, there exist more efficient specialized algorithms for directly enumerating MISs and dominant or absorbent kernels contained in specific digraph models without enumerating all independent choices (see <a class="reference internal" href="#bis-2006b" id="id51">[BIS-2006b]</a>). Alain Hertz provided kindly such a MISs enumeration algorithm for the Digraph3 project (see <a class="reference internal" href="techDoc.html#digraphs.Digraph.showMIS_AH" title="digraphs.Digraph.showMIS_AH"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.showMIS_AH()</span></code></a>). When the number of independent choices is big when compared to the number of MISs, like in sparse or empty digraphs, the performance difference may be dramatic.</p>
+<p>Now, there exist more efficient specialized algorithms for directly enumerating MISs and dominant or absorbent kernels contained in specific digraph models without visiting all independent choices (see <a class="reference internal" href="#bis-2006b" id="id51">[BIS-2006b]</a>). Alain Hertz provided kindly such a MISs enumeration algorithm for the Digraph3 project (see <a class="reference internal" href="techDoc.html#digraphs.Digraph.showMIS_AH" title="digraphs.Digraph.showMIS_AH"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.showMIS_AH()</span></code></a>). When the number of independent choices is big compared to the actual number of MISs, like in sparse or empty digraphs, the performance difference may be dramatic.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -5633,7 +5633,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">* algorithm for generating all MISs *</span>
 <span class="go">* R.B. version 7(6)-25-Apr-2006     *</span>
 <span class="go">*-----------------------------------*</span>
-<span class="go">===&gt;&gt;&gt; Inital solution :</span>
+<span class="go">===&gt;&gt;&gt; Initial solution :</span>
 <span class="go">[ &#39;1&#39;,  &#39;2&#39;,  &#39;3&#39;,  &#39;4&#39;,  &#39;5&#39;,  &#39;6&#39;,  &#39;7&#39;,  &#39;8&#39;,  &#39;9&#39;, &#39;10&#39;,</span>
 <span class="go"> &#39;11&#39;, &#39;12&#39;, &#39;13&#39;, &#39;14&#39;, &#39;15&#39;, &#39;16&#39;, &#39;17&#39;, &#39;18&#39;, &#39;19&#39;, &#39;20&#39;]</span>
 <span class="go">*---- results ----*</span>
@@ -5645,7 +5645,87 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">iteration history:  1</span>
 </pre></div>
 </td></tr></table></div>
-<p>For more or less dense strict outranking digraphs of modest order, as facing usually in algorithmic decision theory, enumerating all independent choices remains however in most cases tractable. And, checking maximality of independent choices via the external stability conditions during their emuneration provides the effective advantage of allowing to compute all initial and/or terminal kernels in a single run (see <a class="reference internal" href="#bis-2006b" id="id52">[BIS-2006b]</a>).</p>
+<p>For more or less dense strict outranking digraphs of modest order, as facing usually in algorithmic decision theory, enumerating all independent choices remains however in most cases tractable, especially by using a very efficient Python generator (see <a class="reference internal" href="techDoc.html#digraphs.Digraph.independentChoices" title="digraphs.Digraph.independentChoices"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.independentChoices()</span></code></a> below):</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">independentChoices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">U</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generator for all independent choices with associated</span>
+<span class="sd">    dominated, absorbed and independent neighborhoods</span>
+<span class="sd">    of digraph instance self.</span>
+<span class="sd">    Initiate with U = self.singletons().</span>
+<span class="sd">    Yields [(independent choice, domnb, absnb, indnb)].</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">U</span> <span class="o">==</span> <span class="p">[]:</span>
+        <span class="k">yield</span> <span class="p">[(</span><span class="nb">frozenset</span><span class="p">(),</span><span class="nb">set</span><span class="p">(),</span><span class="nb">set</span><span class="p">(),</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">))]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">U</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">S</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">independentChoices</span><span class="p">(</span><span class="n">U</span><span class="p">):</span>
+            <span class="k">yield</span> <span class="n">S</span>
+            <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span>  <span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">]:</span>
+                <span class="n">Sxgamdom</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">|</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">Sxgamabs</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">|</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="n">Sxindep</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">&amp;</span>  <span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+                <span class="n">Sxchoice</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">|</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">Sx</span> <span class="o">=</span> <span class="p">[(</span><span class="n">Sxchoice</span><span class="p">,</span><span class="n">Sxgamdom</span><span class="p">,</span><span class="n">Sxgamabs</span><span class="p">,</span><span class="n">Sxindep</span><span class="p">)]</span>
+                <span class="k">yield</span> <span class="n">Sx</span>
+</pre></div>
+</td></tr></table></div>
+<p>And, checking maximality of independent choices via the external stability conditions during their emuneration (see <a class="reference internal" href="techDoc.html#digraphs.Digraph.computePreKernels" title="digraphs.Digraph.computePreKernels"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.computePreKernels()</span></code></a> below):</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">computePreKernels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    computing dominant and absorbent preKernels:</span>
+<span class="sd">    Result in self.dompreKernels and self.abspreKernels</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">actions</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
+    <span class="n">dompreKernels</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">abspreKernels</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">choice</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">independentChoices</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">singletons</span><span class="p">()):</span>
+        <span class="n">restactions</span> <span class="o">=</span> <span class="n">actions</span> <span class="o">-</span> <span class="n">choice</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">restactions</span> <span class="o">&lt;=</span> <span class="n">choice</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">dompreKernels</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">choice</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">restactions</span> <span class="o">&lt;=</span> <span class="n">choice</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]:</span>
+            <span class="n">abspreKernels</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">choice</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">dompreKernels</span> <span class="o">=</span> <span class="n">dompreKernels</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">abspreKernels</span> <span class="o">=</span> <span class="n">abspreKernels</span>
+</pre></div>
+</td></tr></table></div>
+<p>provides the effective advantage of allowing to compute all initial and/or terminal kernels in a single run (see <a class="reference internal" href="#bis-2006b" id="id52">[BIS-2006b]</a>).</p>
 </div>
 </div>
 <div class="section" id="links-and-appendices">

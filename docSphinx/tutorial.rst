@@ -3530,7 +3530,7 @@ In the resulting linear ranking, action 'a4' is set at first rank, followed by a
 Tractability
 ............
 
-Finally, let us give some hints on the **tractability** of kernel computations. Detecting all (pre)kernels in a digraph is a famously NP-hard computational problem. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraphs may get hard already for tiny sparse digraphs of order *n* > 30 (see [BIS-2006b]_). Indeed, the worst case is given by an empty or indeterminate digraph where the number of independent choices is indeed 2 to power *n*.
+Finally, let us give some hints on the **tractability** of kernel computations. Detecting all (pre)kernels in a digraph is a famously NP-hard computational problem. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraphs may get hard already for tiny sparse digraphs of order *n* > 20 (see [BIS-2006b]_). Indeed, the worst case is given by an empty or indeterminate digraph where the number of independent choices is indeed 2 to power *n*.
 
 >>> e = EmptyDigraph(order=20)
 >>> e.showMIS()   # by visiting all 2^20 independent choices
@@ -3540,7 +3540,7 @@ Finally, let us give some hints on the **tractability** of kernel computations. 
 number of solutions:  1
 execution time: 1.47640 sec.  # <<== !!!
 
-Now, there exist more efficient specialized algorithms for directly enumerating MISs and dominant or absorbent kernels contained in specific digraph models without enumerating all independent choices (see [BIS-2006b]_). Alain Hertz provided kindly such a MISs enumeration algorithm for the Digraph3 project (see :py:func:`digraphs.Digraph.showMIS_AH`). When the number of independent choices is big when compared to the number of MISs, like in sparse or empty digraphs, the performance difference may be dramatic.
+Now, there exist more efficient specialized algorithms for directly enumerating MISs and dominant or absorbent kernels contained in specific digraph models without visiting all independent choices (see [BIS-2006b]_). Alain Hertz provided kindly such a MISs enumeration algorithm for the Digraph3 project (see :py:func:`digraphs.Digraph.showMIS_AH`). When the number of independent choices is big compared to the actual number of MISs, like in sparse or empty digraphs, the performance difference may be dramatic.
 
 >>> e.showMIS_AH()  # by visiting only maximal independent choices
 *-----------------------------------*
@@ -3548,7 +3548,7 @@ Now, there exist more efficient specialized algorithms for directly enumerating 
 * algorithm for generating all MISs *
 * R.B. version 7(6)-25-Apr-2006     *
 *-----------------------------------*
-===>>> Inital solution :
+===>>> Initial solution :
 [ '1',  '2',  '3',  '4',  '5',  '6',  '7',  '8',  '9', '10',
  '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
 *---- results ----*
@@ -3559,7 +3559,51 @@ mis solutions    :  1
 execution time   : 0.00026 sec. # <<== !!!
 iteration history:  1
 
-For more or less dense strict outranking digraphs of modest order, as facing usually in algorithmic decision theory, enumerating all independent choices remains however in most cases tractable. And, checking maximality of independent choices via the external stability conditions during their emuneration provides the effective advantage of allowing to compute all initial and/or terminal kernels in a single run (see [BIS-2006b]_).
+For more or less dense strict outranking digraphs of modest order, as facing usually in algorithmic decision theory, enumerating all independent choices remains however in most cases tractable, especially by using a very efficient Python generator (see :py:func:`digraphs.Digraph.independentChoices` below)::
+
+    def independentChoices(self,U):
+        """
+        Generator for all independent choices with associated
+	dominated, absorbed and independent neighborhoods
+	of digraph instance self.
+	Initiate with U = self.singletons().
+	Yields [(independent choice, domnb, absnb, indnb)].
+        """
+        if U == []:
+            yield [(frozenset(),set(),set(),set(self.actions))]
+        else:
+            x = list(U.pop())
+            for S in self.independentChoices(U):
+                yield S
+                if x[0] <=  S[0][3]:
+                    Sxgamdom = S[0][1] | x[1]
+                    Sxgamabs = S[0][2] | x[2]
+                    Sxindep = S[0][3] &  x[3]
+                    Sxchoice = S[0][0] | x[0]
+                    Sx = [(Sxchoice,Sxgamdom,Sxgamabs,Sxindep)]
+                    yield Sx
+
+And, checking maximality of independent choices via the external stability conditions during their emuneration (see :py:func:`digraphs.Digraph.computePreKernels` below)::
+
+    def computePreKernels(self):
+        """
+        computing dominant and absorbent preKernels:
+        Result in self.dompreKernels and self.abspreKernels
+        """
+        actions = set(self.actions)
+        n = len(actions)
+        dompreKernels = set()
+        abspreKernels = set()
+        for choice in self.independentChoices(self.singletons()):
+            restactions = actions - choice[0][0]
+            if restactions <= choice[0][1]:
+                dompreKernels.add(choice[0][0])
+            if restactions <= choice[0][2]:
+                abspreKernels.add(choice[0][0])
+        self.dompreKernels = dompreKernels
+        self.abspreKernels = abspreKernels
+
+provides the effective advantage of allowing to compute all initial and/or terminal kernels in a single run (see [BIS-2006b]_).
 
 Links and appendices
 --------------------
