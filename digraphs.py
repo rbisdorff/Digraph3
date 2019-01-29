@@ -7966,6 +7966,11 @@ class Digraph(object):
         notGamma = self.notGammaSets()
         t0 = time.time()
         # MIS extraction
+        print('*-----------------------------------*')
+        print("* Python implementation of Hertz's  *")
+        print('* algorithm for generating all MIS  *')
+        print('* R.B. version 7(6)-25-Apr-06       *')
+        print('*-----------------------------------*')
         print('*---- MIS extraction ----')
         t0 = time.time()
         # initialize MIS extraction
@@ -7979,7 +7984,7 @@ class Digraph(object):
             S.add(i)
             gammaS = gammaS | gamma[i][0]
         if withListing:
-            print('===>>> Inital solution : ', list(S))
+            print('===>>> Initial solution : ', list(S))
         hertzmisset = hertzmisset | set([frozenset(S)])
         # initialize all variables
         R = V - S
@@ -8073,11 +8078,6 @@ class Digraph(object):
         print('execution time   : %.5f sec.' % (t1 - t0))
         print('iteration history: ', hist)
         print('result in self.hertzmisset')
-        print('*-----------------------------------*')
-        print("* Python implementation of Hertz's  *")
-        print('* algorithm for generating all MIS  *')
-        print('* R.B. version 7(6)-25-Apr-06       *')
-        print('*-----------------------------------*')
         # store global results
         self.mislen = mislenlist
         self.hertzmisset = hertzmisset
