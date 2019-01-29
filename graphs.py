@@ -3141,17 +3141,148 @@ class MISModel(Graph):
             if noSilent:
                 print('graphViz tools not avalaible! Please check installation.')
                 
+##########################
 
-    
+class LineGraph(Graph):
+    """
+    Line graphs represent the adjacencies between edges of a graph instance.
+
+    The line graph transfrom is stable for n-cycle graphs.
+
+    >>> g = CycleGraph(order=5)
+    >>> g
+    *------- Graph instance description ------*
+    Instance class   : CycleGraph
+    Instance name    : cycleGraph
+    Graph Order      : 5
+    Graph Size       : 5
+    Valuation domain : [-1.00 - 1.00]
+    Attributes       : ['name', 'order', 'vertices', 'valuationDomain',
+                        'edges', 'size', 'gamma']
+    g.showShort()
+    *---- short description of the graph ----*
+    Name             : 'cycleGraph'
+    Vertices         :  ['v1', 'v2', 'v3', 'v4', 'v5']
+    Valuation domain :  {'min': Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
+    Gamma function   : 
+    v1 -> ['v2', 'v5']
+    v2 -> ['v1', 'v3']
+    v3 -> ['v2', 'v4']
+    v4 -> ['v3', 'v5']
+    v5 -> ['v4', 'v1']
+    degrees      :  [0, 1, 2, 3, 4]
+    distribution :  [0, 0, 5, 0, 0]
+    nbh depths   :  [0, 1, 2, 3, 4, 'inf.']
+    distribution :  [0, 0, 5, 0, 0, 0]
+    # the line graph of the 5-cycle graph
+    >>> lg = LineGraph(g)
+    >>> lg
+    *------- Graph instance description ------*
+    Instance class   : LineGraph
+    Instance name    : line-cycleGraph
+    Graph Order      : 5
+    Graph Size       : 5
+    Valuation domain : [-1.00 - 1.00]
+    Attributes       : ['name', 'graph', 'valuationDomain', 'vertices', 'order', 'edges', 'size', 'gamma']
+    >>> lg.showShort()
+    *---- short description of the graph ----*
+    Name             : 'line-cycleGraph'
+    Vertices         :  [frozenset({'v2', 'v1'}), frozenset({'v1', 'v5'}), frozenset({'v2', 'v3'}),
+                         frozenset({'v4', 'v3'}), frozenset({'v4', 'v5'})]
+    Valuation domain :  {'min': Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
+    Gamma function   : 
+    frozenset({'v2', 'v1'}) -> [frozenset({'v2', 'v3'}), frozenset({'v1', 'v5'})]
+    frozenset({'v1', 'v5'}) -> [frozenset({'v2', 'v1'}), frozenset({'v4', 'v5'})]
+    frozenset({'v2', 'v3'}) -> [frozenset({'v2', 'v1'}), frozenset({'v4', 'v3'})]
+    frozenset({'v4', 'v3'}) -> [frozenset({'v2', 'v3'}), frozenset({'v4', 'v5'})]
+    frozenset({'v4', 'v5'}) -> [frozenset({'v4', 'v3'}), frozenset({'v1', 'v5'})]
+    degrees      :  [0, 1, 2, 3, 4]
+    distribution :  [0, 0, 5, 0, 0]
+    nbh depths   :  [0, 1, 2, 3, 4, 'inf.']
+    distribution :  [0, 0, 5, 0, 0, 0]
+    # the line grapge of the line graph of the 5-cycle graph
+    >>> llg = LineGraph(lg)
+    >>> llg
+    *------- Graph instance description ------*
+    Instance class   : LineGraph
+    Instance name    : line-line-cycleGraph
+    Graph Order      : 5
+    Graph Size       : 5
+    Valuation domain : [-1.00 - 1.00]
+    Attributes       : ['name', 'graph', 'valuationDomain', 'vertices', 'order', 'edges', 'size', 'gamma']
+    >>> llg.showShort()
+    *---- short description of the graph ----*
+    Name             : 'line-line-cycleGraph'
+    Vertices         :  [frozenset({frozenset({'v2', 'v1'}), frozenset({'v1', 'v5'})}), frozenset({frozenset({'v2', 'v1'}), frozenset({'v2', 'v3'})}), frozenset({frozenset({'v4', 'v5'}), frozenset({'v1', 'v5'})}), frozenset({frozenset({'v4', 'v3'}), frozenset({'v2', 'v3'})}), frozenset({frozenset({'v4', 'v3'}), frozenset({'v4', 'v5'})})]
+    Valuation domain :  {'min': Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
+    Gamma function   : 
+    frozenset({frozenset({'v2', 'v1'}), frozenset({'v1', 'v5'})}) -> [frozenset({frozenset({'v2', 'v1'}),
+               frozenset({'v2', 'v3'})}), frozenset({frozenset({'v4', 'v5'}), frozenset({'v1', 'v5'})})]
+    frozenset({frozenset({'v2', 'v1'}), frozenset({'v2', 'v3'})}) -> [frozenset({frozenset({'v2', 'v1'}),
+               frozenset({'v1', 'v5'})}), frozenset({frozenset({'v4', 'v3'}), frozenset({'v2', 'v3'})})]
+    frozenset({frozenset({'v4', 'v5'}), frozenset({'v1', 'v5'})}) -> [frozenset({frozenset({'v4', 'v3'}),
+               frozenset({'v4', 'v5'})}), frozenset({frozenset({'v2', 'v1'}), frozenset({'v1', 'v5'})})]
+    frozenset({frozenset({'v4', 'v3'}), frozenset({'v2', 'v3'})}) -> [frozenset({frozenset({'v4', 'v3'}),
+               frozenset({'v4', 'v5'})}), frozenset({frozenset({'v2', 'v1'}), frozenset({'v2', 'v3'})})]
+    frozenset({frozenset({'v4', 'v3'}), frozenset({'v4', 'v5'})}) -> [frozenset({frozenset({'v4', 'v5'}),
+               frozenset({'v1', 'v5'})}), frozenset({frozenset({'v4', 'v3'}), frozenset({'v2', 'v3'})})]
+    degrees      :  [0, 1, 2, 3, 4]
+    distribution :  [0, 0, 5, 0, 0]
+    nbh depths   :  [0, 1, 2, 3, 4, 'inf.']
+    distribution :  [0, 0, 5, 0, 0, 0] 
+    """
+    def __init__(self, graph):
+        from copy import deepcopy
+        from collections import OrderedDict
+        from graphs import CycleGraph
+        from digraphsTools import omin
+
+        if graph.__class__ == CycleGraph:
+            self.__class__ = CycleGraph
+        self.name = 'line-' + graph.name
+        self.graph = deepcopy(graph)
+        self.valuationDomain = deepcopy(graph.valuationDomain)
+        Max = self.valuationDomain['max']
+        Min = self.valuationDomain['min']
+        Med = self.valuationDomain['med']      
+        vertices = OrderedDict()
+        for edge in graph.edges:
+            if graph.edges[edge] > Med:
+                vertices[edge] = {'name': str(list(edge))}
+        self.vertices = vertices
+        self.order = len(vertices)
+        edges = OrderedDict()
+        for v1 in vertices:
+            for v2 in vertices:
+                if v1 != v2:
+                    intv = v1 & v2
+                    unv = v1 | v2
+                    if len(intv) > 0:
+                        edges[frozenset([frozenset(v1),frozenset(v2)])] = min(graph.edges[v1],graph.edges[v2])
+                    else:
+                        edges[frozenset([frozenset(v1),frozenset(v2)])] = Min
+        self.edges = edges
+        self.size = self.computeSize()
+        self.gamma = self.gammaSets()
     
 # --------------testing the module ----
 if __name__ == '__main__':
 
 
-        from graphs import SnakeGraph
-        S = SnakeGraph(p=3,q=7)
-        S.showShort()
-        S.exportGraphViz('4_7_snake',lineWidth=3,arcColor="red")
+    g = CycleGraph(order=5)
+    print(g)
+    g.showShort()
+    lg = LineGraph(g)
+    print(lg)
+    lg.showShort()
+    llg = LineGraph(lg)
+    print(llg)
+    llg.showShort()
+    
+        # from graphs import SnakeGraph
+        # S = SnakeGraph(p=3,q=7)
+        # S.showShort()
+        # S.exportGraphViz('4_7_snake',lineWidth=3,arcColor="red")
 
 ##    from time import time
 ##    #g = GridGraph(4,4)

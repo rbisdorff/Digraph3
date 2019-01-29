@@ -165,4 +165,16 @@ def testBestDeterminedSpanningForest():
     mt = BestDeterminedSpanningForest(g,Debug=True)
     mt.exportGraphViz(layout="circo")
 
-    
+def testLineGraphs():
+    print('==>> Testing line graphs construction')
+    g = CycleGraph(order=5)
+    print(g)
+    g.showShort()
+    lg = LineGraph(g)
+    print(lg)
+    lg.exportGraphViz('testLineGraph')
+    lg.showShort()
+    llg = LineGraph(lg)
+    print(llg)
+    llg.showShort()
+
