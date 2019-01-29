@@ -3147,8 +3147,9 @@ class LineGraph(Graph):
     """
     Line graphs represent the adjacencies between edges of a graph instance.
 
-    Interesting property a.o. : The line graph construction is stable for n-cycle graphs.
-    Usually, line graphs of line graphs are expanding. 
+    Iterated line graph constructions are usually expanding, except for chordless cycles,
+    where the same cycle is repeated. And, for non-closed paths (interupted cycles), iterated line graphs
+    progressively reduce one by one the number of vertices and edges and become eventually an empty graph. 
 
     >>> g = CycleGraph(order=5)
     >>> g

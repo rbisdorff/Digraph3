@@ -3194,8 +3194,9 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Line graphs represent the adjacencies between edges of a graph instance.</span>
 
-<span class="sd">    Interesting property a.o. : The line graph construction is stable for n-cycle graphs.</span>
-<span class="sd">    Usually, line graphs of line graphs are expanding. </span>
+<span class="sd">    Iterated line graph constructions are usually expanding, except for chordless cycles,</span>
+<span class="sd">    where the same cycle is repeated. And, for non-closed paths (interupted cycles), iterated line graphs</span>
+<span class="sd">    progressively reduce one by one the number of vertices and edges and become eventually an empty graph. </span>
 
 <span class="sd">    &gt;&gt;&gt; g = CycleGraph(order=5)</span>
 <span class="sd">    &gt;&gt;&gt; g</span>

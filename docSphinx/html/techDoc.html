@@ -3523,8 +3523,9 @@ H(c) = -sum_{{x,y} in self.edges}[spin_c(x)*spin_c(y)]</p>
 <em class="property">class </em><code class="descclassname">graphs.</code><code class="descname">LineGraph</code><span class="sig-paren">(</span><em>graph</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#LineGraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.LineGraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal"><span class="pre">graphs.Graph</span></code></a></p>
 <p>Line graphs represent the adjacencies between edges of a graph instance.</p>
-<p>Interesting property a.o. : The line graph construction is stable for n-cycle graphs.
-Usually, line graphs of line graphs are expanding.</p>
+<p>Iterated line graph constructions are usually expanding, except for chordless cycles,
+where the same cycle is repeated. And, for non-closed paths (interupted cycles), iterated line graphs
+progressively reduce one by one the number of vertices and edges and become eventually an empty graph.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">CycleGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span>
 <span class="go">*------- Graph instance description ------*</span>
