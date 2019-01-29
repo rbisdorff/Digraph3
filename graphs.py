@@ -3203,39 +3203,34 @@ class LineGraph(Graph):
     nbh depths   :  [0, 1, 2, 3, 4, 'inf.']
     distribution :  [0, 0, 5, 0, 0, 0]
     # the line graph of the line graph of the 5-cycle graph
-    >>> llg = LineGraph(lg)
-    >>> llg
-    *------- Graph instance description ------*
-    Instance class   : LineGraph
-    Instance name    : line-line-cycleGraph
-    Graph Order      : 5
-    Graph Size       : 5
-    Valuation domain : [-1.00 - 1.00]
-    Attributes       : ['name', 'graph', 'valuationDomain', 'vertices', 'order', 'edges', 'size', 'gamma']
-    >>> llg.showShort()
-    *---- short description of the graph ----*
-    Name             : 'line-line-cycleGraph'
-    Vertices         :  [frozenset({frozenset({'v2', 'v1'}), frozenset({'v1', 'v5'})}),
-                         frozenset({frozenset({'v2', 'v1'}), frozenset({'v2', 'v3'})}),
-                         frozenset({frozenset({'v4', 'v5'}), frozenset({'v1', 'v5'})}),
-                         frozenset({frozenset({'v4', 'v3'}), frozenset({'v2', 'v3'})}),
-                         frozenset({frozenset({'v4', 'v3'}), frozenset({'v4', 'v5'})})]
-    Valuation domain :  {'min': Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
-    Gamma function   : 
-    frozenset({frozenset({'v2', 'v1'}), frozenset({'v1', 'v5'})}) -> [frozenset({frozenset({'v2', 'v1'}),
-               frozenset({'v2', 'v3'})}), frozenset({frozenset({'v4', 'v5'}), frozenset({'v1', 'v5'})})]
-    frozenset({frozenset({'v2', 'v1'}), frozenset({'v2', 'v3'})}) -> [frozenset({frozenset({'v2', 'v1'}),
-               frozenset({'v1', 'v5'})}), frozenset({frozenset({'v4', 'v3'}), frozenset({'v2', 'v3'})})]
-    frozenset({frozenset({'v4', 'v5'}), frozenset({'v1', 'v5'})}) -> [frozenset({frozenset({'v4', 'v3'}),
-               frozenset({'v4', 'v5'})}), frozenset({frozenset({'v2', 'v1'}), frozenset({'v1', 'v5'})})]
-    frozenset({frozenset({'v4', 'v3'}), frozenset({'v2', 'v3'})}) -> [frozenset({frozenset({'v4', 'v3'}),
-               frozenset({'v4', 'v5'})}), frozenset({frozenset({'v2', 'v1'}), frozenset({'v2', 'v3'})})]
-    frozenset({frozenset({'v4', 'v3'}), frozenset({'v4', 'v5'})}) -> [frozenset({frozenset({'v4', 'v5'}),
-               frozenset({'v1', 'v5'})}), frozenset({frozenset({'v4', 'v3'}), frozenset({'v2', 'v3'})})]
-    degrees      :  [0, 1, 2, 3, 4]
-    distribution :  [0, 0, 5, 0, 0]
-    nbh depths   :  [0, 1, 2, 3, 4, 'inf.']
-    distribution :  [0, 0, 5, 0, 0, 0] 
+
+    MISs in line graphs provide maximal matchings - maximal sets of independent edges - in the original graph.
+
+    >>> c8 = CycleGraph(order=8)
+    >>> lc8 = LineGraph(c8)
+    >>> lc8.showMIS()
+    *---  Maximal Independent Sets ---*
+    [frozenset({'v3', 'v4'}), frozenset({'v5', 'v6'}), frozenset({'v1', 'v8'})]
+    [frozenset({'v2', 'v3'}), frozenset({'v5', 'v6'}), frozenset({'v1', 'v8'})]
+    [frozenset({'v8', 'v7'}), frozenset({'v2', 'v3'}), frozenset({'v5', 'v6'})]
+    [frozenset({'v8', 'v7'}), frozenset({'v2', 'v3'}), frozenset({'v4', 'v5'})]
+    [frozenset({'v7', 'v6'}), frozenset({'v3', 'v4'}), frozenset({'v1', 'v8'})]
+    [frozenset({'v2', 'v1'}), frozenset({'v8', 'v7'}), frozenset({'v4', 'v5'})]
+    [frozenset({'v2', 'v1'}), frozenset({'v7', 'v6'}), frozenset({'v4', 'v5'})]
+    [frozenset({'v2', 'v1'}), frozenset({'v7', 'v6'}), frozenset({'v3', 'v4'})]
+    [frozenset({'v7', 'v6'}), frozenset({'v2', 'v3'}), frozenset({'v1', 'v8'}), frozenset({'v4', 'v5'})]
+    [frozenset({'v2', 'v1'}), frozenset({'v8', 'v7'}), frozenset({'v3', 'v4'}), frozenset({'v5', 'v6'})]
+    number of solutions:  10
+    cardinality distribution
+    card.:  [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    freq.:  [0, 0, 0, 8, 2, 0, 0, 0, 0]
+    execution time: 0.00029 sec.
+
+    The two last MISs of cardinality 4 (see Lines 14-15 above) give
+    **isomorphic perfect maximum matchings** of the 8-cycle graph.
+    Every vertex of the cycle is adjacent to a matching edge.
+    Odd cyle graphs do not admid any perfect matching. 
+    
     """
     def __init__(self, graph):
         from copy import deepcopy
