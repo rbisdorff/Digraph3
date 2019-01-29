@@ -3540,7 +3540,7 @@ Finally, let us give some hints on the **tractability** of kernel computations. 
 number of solutions:  1
 execution time: 1.47640 sec.  # <<== !!!
 
-Now, there exist more efficient specialized algorithms for directly enumerating MISs and dominant or absorbent kernels contained in specific digraph models without visiting all independent choices (see [BIS-2006b]_). Alain Hertz provided kindly such a MISs enumeration algorithm for the Digraph3 project (see :py:func:`digraphs.Digraph.showMIS_AH`). When the number of independent choices is big compared to the actual number of MISs, like in sparse or empty digraphs, the performance difference may be dramatic.
+Now, there exist more efficient specialized algorithms for directly enumerating MISs and dominant or absorbent kernels contained in specific digraph models without visiting all independent choices (see [BIS-2006b]_). Alain Hertz provided kindly such a MISs enumeration algorithm for the Digraph3 project (see :py:func:`digraphs.Digraph.showMIS_AH`). When the number of independent choices is big compared to the actual number of MISs, like in very sparse or empty digraphs, the performance difference may be dramatic.
 
 >>> e.showMIS_AH()  # by visiting only maximal independent choices
 *-----------------------------------*
@@ -3559,7 +3559,7 @@ mis solutions    :  1
 execution time   : 0.00026 sec. # <<== !!!
 iteration history:  1
 
-For more or less dense strict outranking digraphs of modest order, as facing usually in algorithmic decision theory, enumerating all independent choices remains however in most cases tractable, especially by using a very efficient Python generator (see :py:func:`digraphs.Digraph.independentChoices` below)::
+For more or less dense strict outranking digraphs of modest order, as facing usually in algorithmic decision theory applications, enumerating all independent choices remains however in most cases tractable, especially by using a very efficient Python generator (see :py:func:`digraphs.Digraph.independentChoices` below)::
 
     def independentChoices(self,U):
         """
@@ -3603,7 +3603,7 @@ And, checking maximality of independent choices via the external stability condi
         self.dompreKernels = dompreKernels
         self.abspreKernels = abspreKernels
 
-provides the effective advantage of allowing to compute all initial and/or terminal kernels in a single run (see [BIS-2006b]_).
+provides the effective advantage of computing all initial and/or terminal kernels in a single loop (see Line 10 and [BIS-2006b]_).
 
 Links and appendices
 --------------------

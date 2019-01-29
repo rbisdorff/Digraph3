@@ -70,7 +70,7 @@
 
 
 \section{Preface}
-\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}\label{\detokenize{tutorial:preface}}\label{\detokenize{tutorial:tutorial-label}}
+\label{\detokenize{tutorial:preface}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}\label{\detokenize{tutorial:tutorial-label}}
 This PDF document contains a set of tutorials introducing the main objects like digraphs, outranking digraphs, performance tableaux and voting profiles available in the Digraph3 Python software resources ( see html documentation
 here \textless{}\sphinxurl{https://digraph3.readthedocs.io/en/latest/index.html}\textgreater{} for the corresponding HTML version).
 
@@ -133,7 +133,7 @@ Revision: Python 3.6
 
 
 \section{Working with the \sphinxstyleemphasis{Digraph3} software resources}
-\label{\detokenize{tutorial:digraphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-digraph3-software-resources}}
+\label{\detokenize{tutorial:working-with-the-digraph3-software-resources}}\label{\detokenize{tutorial:digraphs-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -1063,7 +1063,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Working with the \sphinxstyleliteralintitle{outrankingDigraphs} module}
-\label{\detokenize{tutorial:outrankingdigraphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-outrankingdigraphs-module}}
+\label{\detokenize{tutorial:working-with-the-outrankingdigraphs-module}}\label{\detokenize{tutorial:outrankingdigraphs-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -4846,7 +4846,7 @@ Finally, let us give some hints on the \sphinxstylestrong{tractability} of kerne
 \PYG{g+go}{execution time: 1.47640 sec.  \PYGZsh{} \PYGZlt{}\PYGZlt{}== !!!}
 \end{sphinxVerbatim}
 
-Now, there exist more efficient specialized algorithms for directly enumerating MISs and dominant or absorbent kernels contained in specific digraph models without visiting all independent choices (see \phantomsection\label{\detokenize{tutorial:id51}}{\hyperref[\detokenize{tutorial:bis-2006b}]{\sphinxcrossref{{[}BIS-2006b{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006b}})). Alain Hertz provided kindly such a MISs enumeration algorithm for the Digraph3 project (see \sphinxcode{digraphs.Digraph.showMIS\_AH()}). When the number of independent choices is big compared to the actual number of MISs, like in sparse or empty digraphs, the performance difference may be dramatic.
+Now, there exist more efficient specialized algorithms for directly enumerating MISs and dominant or absorbent kernels contained in specific digraph models without visiting all independent choices (see \phantomsection\label{\detokenize{tutorial:id51}}{\hyperref[\detokenize{tutorial:bis-2006b}]{\sphinxcrossref{{[}BIS-2006b{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006b}})). Alain Hertz provided kindly such a MISs enumeration algorithm for the Digraph3 project (see \sphinxcode{digraphs.Digraph.showMIS\_AH()}). When the number of independent choices is big compared to the actual number of MISs, like in very sparse or empty digraphs, the performance difference may be dramatic.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4868,7 +4868,7 @@ Now, there exist more efficient specialized algorithms for directly enumerating 
 \PYG{g+go}{iteration history:  1}
 \end{sphinxVerbatim}
 
-For more or less dense strict outranking digraphs of modest order, as facing usually in algorithmic decision theory, enumerating all independent choices remains however in most cases tractable, especially by using a very efficient Python generator (see \sphinxcode{digraphs.Digraph.independentChoices()} below):
+For more or less dense strict outranking digraphs of modest order, as facing usually in algorithmic decision theory applications, enumerating all independent choices remains however in most cases tractable, especially by using a very efficient Python generator (see \sphinxcode{digraphs.Digraph.independentChoices()} below):
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4918,7 +4918,7 @@ And, checking maximality of independent choices via the external stability condi
     \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{abspreKernels} \PYG{o}{=} \PYG{n}{abspreKernels}
 \end{sphinxVerbatim}
 
-provides the effective advantage of allowing to compute all initial and/or terminal kernels in a single run (see \phantomsection\label{\detokenize{tutorial:id52}}{\hyperref[\detokenize{tutorial:bis-2006b}]{\sphinxcrossref{{[}BIS-2006b{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006b}})).
+provides the effective advantage of computing all initial and/or terminal kernels in a single loop (see Line 10 and \phantomsection\label{\detokenize{tutorial:id52}}{\hyperref[\detokenize{tutorial:bis-2006b}]{\sphinxcrossref{{[}BIS-2006b{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006b}})).
 
 
 \section{Links and appendices}
