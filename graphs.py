@@ -3145,10 +3145,10 @@ class MISModel(Graph):
 
 class LineGraph(Graph):
     """
-    Line graphs represent the adjacencies between edges of a graph instance.
+    Line graphs represent the **adjacencies between edges** of a graph instance.
 
     Iterated line graph constructions are usually expanding, except for chordless cycles,
-    where the same cycle is repeated. And, for non-closed paths (interupted cycles), iterated line graphs
+    where the same cycle is repeated. And, for non-closed paths (interupted cycles), where iterated line graphs
     progressively reduce one by one the number of vertices and edges and become eventually an empty graph. 
 
     >>> g = CycleGraph(order=5)
@@ -3202,7 +3202,6 @@ class LineGraph(Graph):
     distribution :  [0, 0, 5, 0, 0]
     nbh depths   :  [0, 1, 2, 3, 4, 'inf.']
     distribution :  [0, 0, 5, 0, 0, 0]
-    # the line graph of the line graph of the 5-cycle graph
 
     MISs in line graphs provide maximal matchings - maximal sets of independent edges - in the original graph.
 

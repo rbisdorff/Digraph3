@@ -3192,10 +3192,10 @@
 
 <div class="viewcode-block" id="LineGraph"><a class="viewcode-back" href="../techDoc.html#graphs.LineGraph">[docs]</a><span class="k">class</span> <span class="nc">LineGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Line graphs represent the adjacencies between edges of a graph instance.</span>
+<span class="sd">    Line graphs represent the **adjacencies between edges** of a graph instance.</span>
 
 <span class="sd">    Iterated line graph constructions are usually expanding, except for chordless cycles,</span>
-<span class="sd">    where the same cycle is repeated. And, for non-closed paths (interupted cycles), iterated line graphs</span>
+<span class="sd">    where the same cycle is repeated. And, for non-closed paths (interupted cycles), where iterated line graphs</span>
 <span class="sd">    progressively reduce one by one the number of vertices and edges and become eventually an empty graph. </span>
 
 <span class="sd">    &gt;&gt;&gt; g = CycleGraph(order=5)</span>
@@ -3249,7 +3249,6 @@
 <span class="sd">    distribution :  [0, 0, 5, 0, 0]</span>
 <span class="sd">    nbh depths   :  [0, 1, 2, 3, 4, &#39;inf.&#39;]</span>
 <span class="sd">    distribution :  [0, 0, 5, 0, 0, 0]</span>
-<span class="sd">    # the line graph of the line graph of the 5-cycle graph</span>
 
 <span class="sd">    MISs in line graphs provide maximal matchings - maximal sets of independent edges - in the original graph.</span>
 
