@@ -3148,6 +3148,7 @@ class LineGraph(Graph):
     Line graphs represent the adjacencies between edges of a graph instance.
 
     Interesting property a.o. : The line graph construction is stable for n-cycle graphs.
+    Usually, line graphs of line graphs are expanding. 
 
     >>> g = CycleGraph(order=5)
     >>> g
