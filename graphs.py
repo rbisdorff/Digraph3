@@ -3213,7 +3213,11 @@ class LineGraph(Graph):
     >>> llg.showShort()
     *---- short description of the graph ----*
     Name             : 'line-line-cycleGraph'
-    Vertices         :  [frozenset({frozenset({'v2', 'v1'}), frozenset({'v1', 'v5'})}), frozenset({frozenset({'v2', 'v1'}), frozenset({'v2', 'v3'})}), frozenset({frozenset({'v4', 'v5'}), frozenset({'v1', 'v5'})}), frozenset({frozenset({'v4', 'v3'}), frozenset({'v2', 'v3'})}), frozenset({frozenset({'v4', 'v3'}), frozenset({'v4', 'v5'})})]
+    Vertices         :  [frozenset({frozenset({'v2', 'v1'}), frozenset({'v1', 'v5'})}),
+                         frozenset({frozenset({'v2', 'v1'}), frozenset({'v2', 'v3'})}),
+                         frozenset({frozenset({'v4', 'v5'}), frozenset({'v1', 'v5'})}),
+                         frozenset({frozenset({'v4', 'v3'}), frozenset({'v2', 'v3'})}),
+                         frozenset({frozenset({'v4', 'v3'}), frozenset({'v4', 'v5'})})]
     Valuation domain :  {'min': Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
     Gamma function   : 
     frozenset({frozenset({'v2', 'v1'}), frozenset({'v1', 'v5'})}) -> [frozenset({frozenset({'v2', 'v1'}),
