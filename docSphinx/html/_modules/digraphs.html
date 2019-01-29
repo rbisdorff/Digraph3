@@ -8013,6 +8013,11 @@
         <span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
         <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
         <span class="c1"># MIS extraction</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-----------------------------------*&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;* Python implementation of Hertz&#39;s  *&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* algorithm for generating all MIS  *&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. version 7(6)-25-Apr-06       *&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-----------------------------------*&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- MIS extraction ----&#39;</span><span class="p">)</span>
         <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
         <span class="c1"># initialize MIS extraction</span>
@@ -8026,7 +8031,7 @@
             <span class="n">S</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
             <span class="n">gammaS</span> <span class="o">=</span> <span class="n">gammaS</span> <span class="o">|</span> <span class="n">gamma</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">withListing</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;===&gt;&gt;&gt; Inital solution : &#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">S</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;===&gt;&gt;&gt; Initial solution : &#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">S</span><span class="p">))</span>
         <span class="n">hertzmisset</span> <span class="o">=</span> <span class="n">hertzmisset</span> <span class="o">|</span> <span class="nb">set</span><span class="p">([</span><span class="nb">frozenset</span><span class="p">(</span><span class="n">S</span><span class="p">)])</span>
         <span class="c1"># initialize all variables</span>
         <span class="n">R</span> <span class="o">=</span> <span class="n">V</span> <span class="o">-</span> <span class="n">S</span>
@@ -8120,11 +8125,6 @@
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;execution time   : </span><span class="si">%.5f</span><span class="s1"> sec.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;iteration history: &#39;</span><span class="p">,</span> <span class="n">hist</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;result in self.hertzmisset&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-----------------------------------*&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;* Python implementation of Hertz&#39;s  *&quot;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* algorithm for generating all MIS  *&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. version 7(6)-25-Apr-06       *&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-----------------------------------*&#39;</span><span class="p">)</span>
         <span class="c1"># store global results</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mislen</span> <span class="o">=</span> <span class="n">mislenlist</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hertzmisset</span> <span class="o">=</span> <span class="n">hertzmisset</span>
