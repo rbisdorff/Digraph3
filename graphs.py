@@ -3147,7 +3147,7 @@ class LineGraph(Graph):
     """
     Line graphs represent the adjacencies between edges of a graph instance.
 
-    The line graph transfrom is stable for n-cycle graphs.
+    Interesting property a.o. : The line graph construction is stable for n-cycle graphs.
 
     >>> g = CycleGraph(order=5)
     >>> g
@@ -3200,7 +3200,7 @@ class LineGraph(Graph):
     distribution :  [0, 0, 5, 0, 0]
     nbh depths   :  [0, 1, 2, 3, 4, 'inf.']
     distribution :  [0, 0, 5, 0, 0, 0]
-    # the line grapge of the line graph of the 5-cycle graph
+    # the line graph of the line graph of the 5-cycle graph
     >>> llg = LineGraph(lg)
     >>> llg
     *------- Graph instance description ------*
