@@ -70,7 +70,7 @@
 
 
 \section{Preface}
-\label{\detokenize{tutorial:preface}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}\label{\detokenize{tutorial:tutorial-label}}
+\label{\detokenize{tutorial:tutorial-label}}\label{\detokenize{tutorial:preface}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}
 This PDF document contains a set of tutorials introducing the main objects like digraphs, outranking digraphs, performance tableaux and voting profiles available in the Digraph3 Python software resources ( see html documentation
 here \textless{}\sphinxurl{https://digraph3.readthedocs.io/en/latest/index.html}\textgreater{} for the corresponding HTML version).
 
@@ -412,7 +412,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Manipulating \sphinxstyleliteralintitle{Digraph} objects}
-\label{\detokenize{tutorial:manipulating-digraph-objects}}\label{\detokenize{tutorial:digraph-tools-label}}
+\label{\detokenize{tutorial:digraph-tools-label}}\label{\detokenize{tutorial:manipulating-digraph-objects}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -827,7 +827,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Computing the winner of an election}
-\label{\detokenize{tutorial:computing-the-winner-of-an-election}}\label{\detokenize{tutorial:linearvoting-tutorial-label}}
+\label{\detokenize{tutorial:linearvoting-tutorial-label}}\label{\detokenize{tutorial:computing-the-winner-of-an-election}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -1381,7 +1381,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Generating random performance tableaux}
-\label{\detokenize{tutorial:generating-random-performance-tableaux}}\label{\detokenize{tutorial:randomperformancetableau-tutorial-label}}
+\label{\detokenize{tutorial:randomperformancetableau-tutorial-label}}\label{\detokenize{tutorial:generating-random-performance-tableaux}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -1903,7 +1903,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Computing a best choice recommendation}
-\label{\detokenize{tutorial:rubis-tutorial-label}}\label{\detokenize{tutorial:computing-a-best-choice-recommendation}}
+\label{\detokenize{tutorial:computing-a-best-choice-recommendation}}\label{\detokenize{tutorial:rubis-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -2741,7 +2741,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Ranking with multiple incommensurable criteria}
-\label{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}}\label{\detokenize{tutorial:ranking-tutorial-label}}
+\label{\detokenize{tutorial:ranking-tutorial-label}}\label{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -3617,7 +3617,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Working with the \sphinxstyleliteralintitle{graphs} module}
-\label{\detokenize{tutorial:working-with-the-graphs-module}}\label{\detokenize{tutorial:graphs-tutorial-label}}
+\label{\detokenize{tutorial:graphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-graphs-module}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -4835,9 +4835,40 @@ In the resulting linear ranking, action ‘a4’ is set at first rank, followed 
 \label{\detokenize{tutorial:tractability}}
 Finally, let us give some hints on the \sphinxstylestrong{tractability} of kernel computations. Detecting all (pre)kernels in a digraph is a famously NP-hard computational problem. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraphs may get hard already for tiny sparse digraphs of order \sphinxstyleemphasis{n} \textgreater{} 30 (see \phantomsection\label{\detokenize{tutorial:id50}}{\hyperref[\detokenize{tutorial:bis-2006b}]{\sphinxcrossref{{[}BIS-2006b{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006b}})). Indeed, the worst case is given by an empty or indeterminate digraph where the number of independent choices is indeed 2 to power \sphinxstyleemphasis{n}.
 
-Now, there exist more efficient specialized algorithms for directly enumerating MISs and dominant or absorbent kernels contained in specific digraph models (see \phantomsection\label{\detokenize{tutorial:id51}}{\hyperref[\detokenize{tutorial:bis-2006b}]{\sphinxcrossref{{[}BIS-2006b{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006b}})).
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{e} \PYG{o}{=} \PYG{n}{EmptyDigraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{20}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{e}\PYG{o}{.}\PYG{n}{showMIS}\PYG{p}{(}\PYG{p}{)}   \PYG{c+c1}{\PYGZsh{} by visiting all 2\PYGZca{}20 independent choices}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}  Maximal independent choices \PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{[ \PYGZsq{}1\PYGZsq{},  \PYGZsq{}2\PYGZsq{},  \PYGZsq{}3\PYGZsq{},  \PYGZsq{}4\PYGZsq{},  \PYGZsq{}5\PYGZsq{},  \PYGZsq{}6\PYGZsq{},  \PYGZsq{}7\PYGZsq{},  \PYGZsq{}8\PYGZsq{},  \PYGZsq{}9\PYGZsq{}, \PYGZsq{}10\PYGZsq{},}
+\PYG{g+go}{ \PYGZsq{}11\PYGZsq{}, \PYGZsq{}12\PYGZsq{}, \PYGZsq{}13\PYGZsq{}, \PYGZsq{}14\PYGZsq{}, \PYGZsq{}15\PYGZsq{}, \PYGZsq{}16\PYGZsq{}, \PYGZsq{}17\PYGZsq{}, \PYGZsq{}18\PYGZsq{}, \PYGZsq{}19\PYGZsq{}, \PYGZsq{}20\PYGZsq{}]}
+\PYG{g+go}{number of solutions:  1}
+\PYG{g+go}{execution time: 1.47640 sec.  \PYGZsh{} \PYGZlt{}\PYGZlt{}== !!!}
+\end{sphinxVerbatim}
 
-For more or less dense strict outranking digraphs of modest order, as facing usually in algorithmic decision theory, enumerating all independent choices remains usually tractable. And, checking maximality of independent choices via the external stability conditions during their emuneration provides the effective advantage of allowing to compute all initial and/or terminal kernels in a single run (see \phantomsection\label{\detokenize{tutorial:id52}}{\hyperref[\detokenize{tutorial:bis-2006b}]{\sphinxcrossref{{[}BIS-2006b{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006b}})).
+Now, there exist more efficient specialized algorithms for directly enumerating MISs and dominant or absorbent kernels contained in specific digraph models without enumerating all independent choices (see \phantomsection\label{\detokenize{tutorial:id51}}{\hyperref[\detokenize{tutorial:bis-2006b}]{\sphinxcrossref{{[}BIS-2006b{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006b}})). Alain Hertz provided kindly such a MISs enumeration algorithm for the Digraph3 project (see \sphinxcode{digraphs.Digraph.showMIS\_AH()}). When the number of independent choices is big when compared to the number of MISs, like in sparse or empty digraphs, the performance difference may be dramatic.
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{e}\PYG{o}{.}\PYG{n}{showMIS\PYGZus{}AH}\PYG{p}{(}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} by visiting only maximal independent choices}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{* Python implementation of Hertz\PYGZsq{}s  *}
+\PYG{g+go}{* algorithm for generating all MISs *}
+\PYG{g+go}{* R.B. version 7(6)\PYGZhy{}25\PYGZhy{}Apr\PYGZhy{}2006     *}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{===\PYGZgt{}\PYGZgt{}\PYGZgt{} Inital solution :}
+\PYG{g+go}{[ \PYGZsq{}1\PYGZsq{},  \PYGZsq{}2\PYGZsq{},  \PYGZsq{}3\PYGZsq{},  \PYGZsq{}4\PYGZsq{},  \PYGZsq{}5\PYGZsq{},  \PYGZsq{}6\PYGZsq{},  \PYGZsq{}7\PYGZsq{},  \PYGZsq{}8\PYGZsq{},  \PYGZsq{}9\PYGZsq{}, \PYGZsq{}10\PYGZsq{},}
+\PYG{g+go}{ \PYGZsq{}11\PYGZsq{}, \PYGZsq{}12\PYGZsq{}, \PYGZsq{}13\PYGZsq{}, \PYGZsq{}14\PYGZsq{}, \PYGZsq{}15\PYGZsq{}, \PYGZsq{}16\PYGZsq{}, \PYGZsq{}17\PYGZsq{}, \PYGZsq{}18\PYGZsq{}, \PYGZsq{}19\PYGZsq{}, \PYGZsq{}20\PYGZsq{}]}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} results \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{[ \PYGZsq{}1\PYGZsq{},  \PYGZsq{}2\PYGZsq{},  \PYGZsq{}3\PYGZsq{},  \PYGZsq{}4\PYGZsq{},  \PYGZsq{}5\PYGZsq{},  \PYGZsq{}6\PYGZsq{},  \PYGZsq{}7\PYGZsq{},  \PYGZsq{}8\PYGZsq{},  \PYGZsq{}9\PYGZsq{}, \PYGZsq{}10\PYGZsq{},}
+\PYG{g+go}{ \PYGZsq{}11\PYGZsq{}, \PYGZsq{}12\PYGZsq{}, \PYGZsq{}13\PYGZsq{}, \PYGZsq{}14\PYGZsq{}, \PYGZsq{}15\PYGZsq{}, \PYGZsq{}16\PYGZsq{}, \PYGZsq{}17\PYGZsq{}, \PYGZsq{}18\PYGZsq{}, \PYGZsq{}19\PYGZsq{}, \PYGZsq{}20\PYGZsq{}]}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} statistics \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{mis solutions    :  1}
+\PYG{g+go}{execution time   : 0.00026 sec. \PYGZsh{} \PYGZlt{}\PYGZlt{}== !!!}
+\PYG{g+go}{iteration history:  1}
+\end{sphinxVerbatim}
+
+For more or less dense strict outranking digraphs of modest order, as facing usually in algorithmic decision theory, enumerating all independent choices remains however in most cases tractable. And, checking maximality of independent choices via the external stability conditions during their emuneration provides the effective advantage of allowing to compute all initial and/or terminal kernels in a single run (see \phantomsection\label{\detokenize{tutorial:id52}}{\hyperref[\detokenize{tutorial:bis-2006b}]{\sphinxcrossref{{[}BIS-2006b{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006b}})).
 
 
 \section{Links and appendices}

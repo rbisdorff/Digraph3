@@ -3532,9 +3532,34 @@ Tractability
 
 Finally, let us give some hints on the **tractability** of kernel computations. Detecting all (pre)kernels in a digraph is a famously NP-hard computational problem. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraphs may get hard already for tiny sparse digraphs of order *n* > 30 (see [BIS-2006b]_). Indeed, the worst case is given by an empty or indeterminate digraph where the number of independent choices is indeed 2 to power *n*.
 
-Now, there exist more efficient specialized algorithms for directly enumerating MISs and dominant or absorbent kernels contained in specific digraph models (see [BIS-2006b]_).
+>>> e = EmptyDigraph(order=20)
+>>> e.showMIS()   # by visiting all 2^20 independent choices
+*---  Maximal independent choices ---*
+[ '1',  '2',  '3',  '4',  '5',  '6',  '7',  '8',  '9', '10',
+ '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
+number of solutions:  1
+execution time: 1.47640 sec.  # <<== !!!
 
-For more or less dense strict outranking digraphs of modest order, as facing usually in algorithmic decision theory, enumerating all independent choices remains usually tractable. And, checking maximality of independent choices via the external stability conditions during their emuneration provides the effective advantage of allowing to compute all initial and/or terminal kernels in a single run (see [BIS-2006b]_).
+Now, there exist more efficient specialized algorithms for directly enumerating MISs and dominant or absorbent kernels contained in specific digraph models without enumerating all independent choices (see [BIS-2006b]_). Alain Hertz provided kindly such a MISs enumeration algorithm for the Digraph3 project (see :py:func:`digraphs.Digraph.showMIS_AH`). When the number of independent choices is big when compared to the number of MISs, like in sparse or empty digraphs, the performance difference may be dramatic.
+
+>>> e.showMIS_AH()  # by visiting only maximal independent choices
+*-----------------------------------*
+* Python implementation of Hertz's  *
+* algorithm for generating all MISs *
+* R.B. version 7(6)-25-Apr-2006     *
+*-----------------------------------*
+===>>> Inital solution :
+[ '1',  '2',  '3',  '4',  '5',  '6',  '7',  '8',  '9', '10',
+ '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
+*---- results ----*
+[ '1',  '2',  '3',  '4',  '5',  '6',  '7',  '8',  '9', '10',
+ '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
+*---- statistics ----*
+mis solutions    :  1
+execution time   : 0.00026 sec. # <<== !!!
+iteration history:  1
+
+For more or less dense strict outranking digraphs of modest order, as facing usually in algorithmic decision theory, enumerating all independent choices remains however in most cases tractable. And, checking maximality of independent choices via the external stability conditions during their emuneration provides the effective advantage of allowing to compute all initial and/or terminal kernels in a single run (see [BIS-2006b]_).
 
 Links and appendices
 --------------------
