@@ -54,7 +54,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{January 28, 2019}
+\date{January 29, 2019}
 \release{3.6-2500+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc2.png}\par}
@@ -70,7 +70,7 @@
 
 
 \section{Preface}
-\label{\detokenize{tutorial:preface}}\label{\detokenize{tutorial:tutorial-label}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}
+\label{\detokenize{tutorial:preface}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}\label{\detokenize{tutorial:tutorial-label}}
 This PDF document contains a set of tutorials introducing the main objects like digraphs, outranking digraphs, performance tableaux and voting profiles available in the Digraph3 Python software resources ( see html documentation
 here \textless{}\sphinxurl{https://digraph3.readthedocs.io/en/latest/index.html}\textgreater{} for the corresponding HTML version).
 
@@ -412,7 +412,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Manipulating \sphinxstyleliteralintitle{Digraph} objects}
-\label{\detokenize{tutorial:digraph-tools-label}}\label{\detokenize{tutorial:manipulating-digraph-objects}}
+\label{\detokenize{tutorial:manipulating-digraph-objects}}\label{\detokenize{tutorial:digraph-tools-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -1063,7 +1063,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Working with the \sphinxstyleliteralintitle{outrankingDigraphs} module}
-\label{\detokenize{tutorial:working-with-the-outrankingdigraphs-module}}\label{\detokenize{tutorial:outrankingdigraphs-tutorial-label}}
+\label{\detokenize{tutorial:outrankingdigraphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-outrankingdigraphs-module}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -1903,7 +1903,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Computing a best choice recommendation}
-\label{\detokenize{tutorial:computing-a-best-choice-recommendation}}\label{\detokenize{tutorial:rubis-tutorial-label}}
+\label{\detokenize{tutorial:rubis-tutorial-label}}\label{\detokenize{tutorial:computing-a-best-choice-recommendation}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -3209,7 +3209,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Rating with learned quantile norms}
-\label{\detokenize{tutorial:rating-tutorial-label}}\label{\detokenize{tutorial:rating-with-learned-quantile-norms}}
+\label{\detokenize{tutorial:rating-with-learned-quantile-norms}}\label{\detokenize{tutorial:rating-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -3617,7 +3617,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Working with the \sphinxstyleliteralintitle{graphs} module}
-\label{\detokenize{tutorial:graphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-graphs-module}}
+\label{\detokenize{tutorial:working-with-the-graphs-module}}\label{\detokenize{tutorial:graphs-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -4086,7 +4086,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Computing the non isomorphic MISs of the n-cycle graph}
-\label{\detokenize{tutorial:isomorphicmis-tutorial-label}}\label{\detokenize{tutorial:computing-the-non-isomorphic-miss-of-the-n-cycle-graph}}
+\label{\detokenize{tutorial:computing-the-non-isomorphic-miss-of-the-n-cycle-graph}}\label{\detokenize{tutorial:isomorphicmis-tutorial-label}}
 Due to the public success of our common 2008 publication with Jean-Luc Marichal \phantomsection\label{\detokenize{tutorial:id42}}{\hyperref[\detokenize{tutorial:isomis-08}]{\sphinxcrossref{{[}ISOMIS-08{]}}}} (\autopageref*{\detokenize{tutorial:isomis-08}}) , we present in this tutorial an example Python session for computing the \sphinxstylestrong{non isomorphic maximal independent sets} (MISs) from the 12-cycle graph, i.e. a \sphinxcode{digraphs.CirculantDigraph} class instance of order 12 and symmetric circulants 1 and -1.
 
 \fvset{hllines={, ,}}%
@@ -4257,7 +4257,7 @@ The non isomorphic MISs in the 12-cycle graph represent in fact all the ways one
 
 
 \section{On computing digraph kernels}
-\label{\detokenize{tutorial:on-computing-digraph-kernels}}\label{\detokenize{tutorial:kernel-tutorial-label}}
+\label{\detokenize{tutorial:kernel-tutorial-label}}\label{\detokenize{tutorial:on-computing-digraph-kernels}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -4544,7 +4544,7 @@ In the empty digraph, the whole set of nodes gives indeed at the same time the \
 
 Both these results make sense, as in a completely empty or indeterminate digraph, there is no interior of the digraph defined, only a \sphinxstyleemphasis{border} which is hence at the same time initial and terminal.  Notice however, that in the latter indeterminate case the complete set of nodes verifies only weakly the internal stability condition (see above).
 
-Other common digraph models, allthough being clearly oriented, may show nevertheless no apparent laterality, like \sphinxstyleemphasis{odd} \sphinxstylestrong{chordless circuits}, ie \sphinxstyleemphasis{holes} surrounded by a circuit of odd length. They do not admit in fact any initial or terminal kernel.
+Other common digraph models, allthough being clearly oriented, may show nevertheless no apparent laterality, like \sphinxstylestrong{odd chordless circuits}, ie \sphinxstyleemphasis{holes} surrounded by a circuit of odd length. They do not admit in fact any initial or terminal kernel.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4621,7 +4621,7 @@ In genuine random digraphs, however, we may need to check for each of its MISs, 
 \noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{randomLaterality}.png}
 \caption{\sphinxstyleemphasis{Figure 6}: A random digraph instance of order 7 and arc probability 0.3}\label{\detokenize{tutorial:id63}}\end{figure}
 
-The random digraph shown in Fig. 5 above has no apparent special properties, except from being connected.
+The random digraph shown in Fig. 6 above has no apparent special properties, except from being connected.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4726,7 +4726,7 @@ To illustrate this idea, let us finally compute good and bad choice recommendati
 \noindent\sphinxincludegraphics[width=550\sphinxpxdimen]{{randomOutranking}.png}
 \caption{\sphinxstyleemphasis{Figure 8}: The performance tableau of a random outranking digraph instance}\label{\detokenize{tutorial:id65}}\end{figure}
 
-The underlying random performance tableau (see Fig. 8) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision action ‘a2’. The resulting \sphinxstylestrong{strict outranking} - ie a weighted majority supported - \sphinxstyleemphasis{better than without considerable counter-performance} - digraph is shown in Fig. 9 below.
+The underlying random performance tableau (see Fig. 8) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision actions ‘a2’ and ‘a5’. The resulting \sphinxstylestrong{strict outranking} - ie a weighted majority supported - \sphinxstyleemphasis{better than without considerable counter-performance} - digraph is shown in Fig. 9 below.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4744,7 +4744,7 @@ The underlying random performance tableau (see Fig. 8) shows the performance gra
 \noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{tutOutranking}.png}
 \caption{\sphinxstyleemphasis{Figure 9}: A random strict outranking digraph instance}\label{\detokenize{tutorial:id66}}\end{figure}
 
-All decision actions appear strictly better performing than action ‘a7’. We call it a \sphinxstylestrong{Condorcet looser} and it is an evident terminal prekernel candidate. On the other side, three actions: ‘a1’, ‘a2’ nd ‘a4’ are not dominated. They give together an initial prekernel candidate.
+All decision actions appear strictly better performing than action ‘a7’. We call it a \sphinxstylestrong{Condorcet looser} and it is an evident terminal prekernel candidate. On the other side, three actions: ‘a1’, ‘a2’ and ‘a4’ are not dominated. They give together an initial prekernel candidate.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]

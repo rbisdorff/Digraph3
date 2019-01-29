@@ -3279,7 +3279,7 @@ Absorbent prekernel :
 
 Both these results make sense, as in a completely empty or indeterminate digraph, there is no interior of the digraph defined, only a *border* which is hence at the same time initial and terminal.  Notice however, that in the latter indeterminate case the complete set of nodes verifies only weakly the internal stability condition (see above).
 
-Other common digraph models, allthough being clearly oriented, may show nevertheless no apparent laterality, like *odd* **chordless circuits**, ie *holes* surrounded by a circuit of odd length. They do not admit in fact any initial or terminal kernel.
+Other common digraph models, allthough being clearly oriented, may show nevertheless no apparent laterality, like **odd chordless circuits**, ie *holes* surrounded by a circuit of odd length. They do not admit in fact any initial or terminal kernel.
 
 >>> from digraphs import CirculantDigraph
 >>> c5 = CirculantDigraph(order=5,circulants=[1])
@@ -3344,7 +3344,7 @@ dot -Grankdir=BT -Tpng randomLaterality.dot -o randomLaterality.png
 
    *Figure 6*: A random digraph instance of order 7 and arc probability 0.3
 
-The random digraph shown in Fig. 5 above has no apparent special properties, except from being connected.
+The random digraph shown in Fig. 6 above has no apparent special properties, except from being connected.
 
 >>> rd.showComponents()
 *--- Connected Components ---*
@@ -3438,7 +3438,7 @@ Valuation domain : {'min': -100.0, 'med': 0.0, 'max': 100.0}
 
    *Figure 8*: The performance tableau of a random outranking digraph instance
 
-The underlying random performance tableau (see Fig. 8) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision action 'a2'. The resulting **strict outranking** - ie a weighted majority supported - *better than without considerable counter-performance* - digraph is shown in Fig. 9 below.
+The underlying random performance tableau (see Fig. 8) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision actions 'a2' and 'a5'. The resulting **strict outranking** - ie a weighted majority supported - *better than without considerable counter-performance* - digraph is shown in Fig. 9 below.
 
 >>> gcd = ~(-g)  # Codual: the converse of the negation
 >>> gcd.exportGraphViz(fileName='tutOutRanking')
@@ -3453,7 +3453,7 @@ dot -Grankdir=BT -Tpng tutOutranking.dot -o tutOutranking.png
 
    *Figure 9*: A random strict outranking digraph instance
 
-All decision actions appear strictly better performing than action 'a7'. We call it a **Condorcet looser** and it is an evident terminal prekernel candidate. On the other side, three actions: 'a1', 'a2' nd 'a4' are not dominated. They give together an initial prekernel candidate. 
+All decision actions appear strictly better performing than action 'a7'. We call it a **Condorcet looser** and it is an evident terminal prekernel candidate. On the other side, three actions: 'a1', 'a2' and 'a4' are not dominated. They give together an initial prekernel candidate. 
 
 >>> gcd.showPreKernels()
 *--- Computing preKernels ---*

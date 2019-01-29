@@ -5241,7 +5241,7 @@ execution time: 0 sec. and 2 millisec.
 </pre></div>
 </td></tr></table></div>
 <p>Both these results make sense, as in a completely empty or indeterminate digraph, there is no interior of the digraph defined, only a <em>border</em> which is hence at the same time initial and terminal.  Notice however, that in the latter indeterminate case the complete set of nodes verifies only weakly the internal stability condition (see above).</p>
-<p>Other common digraph models, allthough being clearly oriented, may show nevertheless no apparent laterality, like <em>odd</em> <strong>chordless circuits</strong>, ie <em>holes</em> surrounded by a circuit of odd length. They do not admit in fact any initial or terminal kernel.</p>
+<p>Other common digraph models, allthough being clearly oriented, may show nevertheless no apparent laterality, like <strong>odd chordless circuits</strong>, ie <em>holes</em> surrounded by a circuit of odd length. They do not admit in fact any initial or terminal kernel.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -5329,7 +5329,7 @@ execution time: 0 sec. and 2 millisec.
 <a class="reference internal image-reference" href="_images/randomLaterality.png"><img alt="A random digraph instance" src="_images/randomLaterality.png" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-text"><em>Figure 6</em>: A random digraph instance of order 7 and arc probability 0.3</span></p>
 </div>
-<p>The random digraph shown in Fig. 5 above has no apparent special properties, except from being connected.</p>
+<p>The random digraph shown in Fig. 6 above has no apparent special properties, except from being connected.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -5470,7 +5470,7 @@ execution time: 0 sec. and 2 millisec.
 <a class="reference internal image-reference" href="_images/randomOutranking.png"><img alt="A random performance tableau" src="_images/randomOutranking.png" style="width: 550px;" /></a>
 <p class="caption"><span class="caption-text"><em>Figure 8</em>: The performance tableau of a random outranking digraph instance</span></p>
 </div>
-<p>The underlying random performance tableau (see Fig. 8) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision action ‘a2’. The resulting <strong>strict outranking</strong> - ie a weighted majority supported - <em>better than without considerable counter-performance</em> - digraph is shown in Fig. 9 below.</p>
+<p>The underlying random performance tableau (see Fig. 8) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision actions ‘a2’ and ‘a5’. The resulting <strong>strict outranking</strong> - ie a weighted majority supported - <em>better than without considerable counter-performance</em> - digraph is shown in Fig. 9 below.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -5486,7 +5486,7 @@ execution time: 0 sec. and 2 millisec.
 <a class="reference internal image-reference" href="_images/tutOutranking.png"><img alt="A random performance tableau" src="_images/tutOutranking.png" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-text"><em>Figure 9</em>: A random strict outranking digraph instance</span></p>
 </div>
-<p>All decision actions appear strictly better performing than action ‘a7’. We call it a <strong>Condorcet looser</strong> and it is an evident terminal prekernel candidate. On the other side, three actions: ‘a1’, ‘a2’ nd ‘a4’ are not dominated. They give together an initial prekernel candidate.</p>
+<p>All decision actions appear strictly better performing than action ‘a7’. We call it a <strong>Condorcet looser</strong> and it is an evident terminal prekernel candidate. On the other side, three actions: ‘a1’, ‘a2’ and ‘a4’ are not dominated. They give together an initial prekernel candidate.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
