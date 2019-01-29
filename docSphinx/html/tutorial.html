@@ -5611,7 +5611,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">execution time: 1.47640 sec.  # &lt;&lt;== !!!</span>
 </pre></div>
 </td></tr></table></div>
-<p>Now, there exist more efficient specialized algorithms for directly enumerating MISs and dominant or absorbent kernels contained in specific digraph models without visiting all independent choices (see <a class="reference internal" href="#bis-2006b" id="id51">[BIS-2006b]</a>). Alain Hertz provided kindly such a MISs enumeration algorithm for the Digraph3 project (see <a class="reference internal" href="techDoc.html#digraphs.Digraph.showMIS_AH" title="digraphs.Digraph.showMIS_AH"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.showMIS_AH()</span></code></a>). When the number of independent choices is big compared to the actual number of MISs, like in sparse or empty digraphs, the performance difference may be dramatic.</p>
+<p>Now, there exist more efficient specialized algorithms for directly enumerating MISs and dominant or absorbent kernels contained in specific digraph models without visiting all independent choices (see <a class="reference internal" href="#bis-2006b" id="id51">[BIS-2006b]</a>). Alain Hertz provided kindly such a MISs enumeration algorithm for the Digraph3 project (see <a class="reference internal" href="techDoc.html#digraphs.Digraph.showMIS_AH" title="digraphs.Digraph.showMIS_AH"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.showMIS_AH()</span></code></a>). When the number of independent choices is big compared to the actual number of MISs, like in very sparse or empty digraphs, the performance difference may be dramatic.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -5645,7 +5645,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">iteration history:  1</span>
 </pre></div>
 </td></tr></table></div>
-<p>For more or less dense strict outranking digraphs of modest order, as facing usually in algorithmic decision theory, enumerating all independent choices remains however in most cases tractable, especially by using a very efficient Python generator (see <a class="reference internal" href="techDoc.html#digraphs.Digraph.independentChoices" title="digraphs.Digraph.independentChoices"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.independentChoices()</span></code></a> below):</p>
+<p>For more or less dense strict outranking digraphs of modest order, as facing usually in algorithmic decision theory applications, enumerating all independent choices remains however in most cases tractable, especially by using a very efficient Python generator (see <a class="reference internal" href="techDoc.html#digraphs.Digraph.independentChoices" title="digraphs.Digraph.independentChoices"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.independentChoices()</span></code></a> below):</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -5725,7 +5725,7 @@ execution time: 0 sec. and 2 millisec.
     <span class="bp">self</span><span class="o">.</span><span class="n">abspreKernels</span> <span class="o">=</span> <span class="n">abspreKernels</span>
 </pre></div>
 </td></tr></table></div>
-<p>provides the effective advantage of allowing to compute all initial and/or terminal kernels in a single run (see <a class="reference internal" href="#bis-2006b" id="id52">[BIS-2006b]</a>).</p>
+<p>provides the effective advantage of computing all initial and/or terminal kernels in a single loop (see Line 10 and <a class="reference internal" href="#bis-2006b" id="id52">[BIS-2006b]</a>).</p>
 </div>
 </div>
 <div class="section" id="links-and-appendices">
