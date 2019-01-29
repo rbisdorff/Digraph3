@@ -810,6 +810,7 @@ class Graph(object):
                        noSilent=True,
                        graphType='png',graphSize='7,7',
                        withSpanningTree=False,
+                       matching=None,
                        layout=None,
                        arcColor='black',
                        lineWidth=1):
@@ -880,12 +881,26 @@ class Graph(object):
                     #print(i,tree[i],tree[i+1])
                     edgesColored.add(frozenset([tree[i],tree[i+1]]))
             #print('Spanning tree: ', edgesColored)
+                    
+        if matching != None:
+            withMatching = True
+            edgesColored = set()
+            print(matching)
+            for edge in matching:
+                edgesColored.add(edge)
+            print('Matching: ', edgesColored)
+        else:
+            withMatching = False
         for i in range(n):
             for j in range(i+1, n):
                 if i != j:
                     edge = 'n'+str(i+1)
                     if edges[frozenset( [vertexkeys[i], vertexkeys[j]])] > Med:
                         if withSpanningTree and \
+                        frozenset( [vertexkeys[i], vertexkeys[j]]) in edgesColored:
+                               arrowFormat = \
+        ' [dir=both,style="setlinewidth(3)",color=red, arrowhead=none, arrowtail=none] ;\n'                                          
+                        elif withMatching and \
                         frozenset( [vertexkeys[i], vertexkeys[j]]) in edgesColored:
                                arrowFormat = \
         ' [dir=both,style="setlinewidth(3)",color=red, arrowhead=none, arrowtail=none] ;\n'                                          
@@ -3269,7 +3284,7 @@ class LineGraph(Graph):
 if __name__ == '__main__':
 
 
-    g = CycleGraph(order=5)
+    g = CycleGraph(order=8)
     print(g)
     g.showShort()
     lg = LineGraph(g)
@@ -3278,6 +3293,9 @@ if __name__ == '__main__':
     llg = LineGraph(lg)
     print(llg)
     llg.showShort()
+    lg.showMIS()
+    maxMatching = lg.misset[0]
+    g.exportGraphViz(matching=maxMatching)
     
         # from graphs import SnakeGraph
         # S = SnakeGraph(p=3,q=7)
