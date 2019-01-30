@@ -3316,7 +3316,7 @@ class LineGraph(Graph):
 
 class PermutationGraph(Graph):
     """
-    Martin Ch. Gulombic, Agorithmic Graph Theroy and Perfect Graphs 2nd Ed.,
+    Martin Ch. Gulombic, Agorithmic Graph Theory and Perfect Graphs 2nd Ed.,
     Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.
     """
     def __init__(self,permutation=[4,3,6,1,5,2],Debug=False):
@@ -3389,7 +3389,7 @@ class PermutationGraph(Graph):
 
         .. image:: oriented_permutationGraph.png
             :alt: Transitive orientation of a permutation graph
-            :width: 300 px
+            :width: 200 px
             :align: center 
 
         """
