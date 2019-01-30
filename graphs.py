@@ -3377,6 +3377,8 @@ class PermutationGraph(Graph):
         Digraph Size       : 9
         Valuation domain : [-1.00 - 1.00]
         Determinateness  : 100.000
+        Attributes       : ['name', 'order', 'actions', 'valuationdomain',
+                            'relation', 'gamma', 'notGamma', 'size']
         >>> dg.exportGraphViz()
         *---- exporting a dot file for GraphViz tools ---------*
         Exporting to oriented_permutationGraph.dot
@@ -3384,8 +3386,6 @@ class PermutationGraph(Graph):
         1 { rank = same; 5; 3; }
         2 { rank = same; 4; 6; }
         dot -Grankdir=TB -Tpng oriented_permutationGraph.dot -o oriented_permutationGraph.png
-        Attributes       : ['name', 'order', 'actions', 'valuationdomain',
-                            'relation', 'gamma', 'notGamma', 'size']
 
         .. image:: oriented_permutationGraph.png
             :alt: Transitive orientation of a permutation graph
