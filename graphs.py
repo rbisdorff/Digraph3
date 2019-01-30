@@ -3368,7 +3368,7 @@ class PermutationGraph(Graph):
         Valuation domain : [-1.00 - 1.00]
         Attributes       : ['name', 'vertices', 'order', 'permutation',
                             'valuationDomain', 'edges', 'size', 'gamma']
-        >>> dg = transitiveOrientation()
+        >>> dg = g.transitiveOrientation()
         >>> dg
         *------- Digraph instance description ------*
         Instance class   : WeakOrder
