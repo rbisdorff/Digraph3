@@ -3189,7 +3189,7 @@ In our random 3-regular graph instance (see Fig. 2), we may thus find eleven non
 
    *Figure 4*: Two isomorphic kernels of the random 3-regular graph instance
 
-All symmteric digraphs admid MISs, hence also kernels.
+All graphs and symmetric digraphs admid MISs, hence also kernels.
 
 It is worthwhile noticing that the **maximal matchings** of a graph correspond bijectively to its line graph's **kernels** (see the :py:class:`graphs.LineGraph` class).
 
@@ -3299,9 +3299,9 @@ Absorbent prekernel :
    dominance    :  1.0
    absorbency   :  1.0
 
-Both these results make sense, as in a completely empty or indeterminate digraph, there is no interior of the digraph defined, only a *border* which is hence at the same time initial and terminal.  Notice however, that in the latter indeterminate case the complete set of nodes verifies only weakly the internal stability condition (see above).
+Both these results make sense, as in a completely empty or indeterminate digraph, there is no *interior* of the digraph defined, only a *border* which is hence at the same time an initial and terminal kernel.  Notice however, that in the latter indeterminate case, the complete set of nodes verifies only weakly the internal stability condition (see above).
 
-Other common digraph models, allthough being clearly oriented, may show nevertheless no apparent laterality, like **odd chordless circuits**, ie *holes* surrounded by a circuit of odd length. They do not admit in fact any initial or terminal kernel.
+Other common digraph models, allthough being clearly oriented, may show nevertheless no apparent laterality, like **odd chordless circuits**, ie *holes* surrounded by an *oriented cycle* -a circuit- of odd length. They do not admit in fact any initial or terminal kernel.
 
 >>> from digraphs import CirculantDigraph
 >>> c5 = CirculantDigraph(order=5,circulants=[1])
@@ -3312,7 +3312,7 @@ number of solutions
  dominant prekernels :  0
  absorbent prekernels:  0
 
-Chordless circuits of even length 2 x *k*, with *k* > 1, contain however two isomorphic kernels of cardinality *k* which qualify conjointly as initial and terminal candidates.
+Chordless circuits of **even** length 2 x *k*, with *k* > 1, contain however two isomorphic kernels of cardinality *k* which qualify conjointly as initial and terminal candidates.
 
 >>> c6 = CirculantDigraph(order=6,circulants=[1])
 >>> c6.showPreKernels()
@@ -3324,7 +3324,7 @@ Absorbent preKernels :
 ['1', '3', '5'] independence: 1.0, dominance: 1.0, absorbency: 1.0
 ['2', '4', '6'] independence: 1.0, dominance: 1.0, absorbency: 1.0
 
-Chordless circuits of even length may thus be indifferently oriented along two opposite directions. Notice by the way that the duals of all chordless circuits of *odd* or *even* length, ie *filled* circuits also called **anti-holes** (see Fig.6), never contain any potential kernel candidates.
+Chordless circuits of even length may thus be indifferently oriented along two opposite directions. Notice by the way that the duals of **all** chordless circuits of *odd* **or** *even* length, ie *filled* circuits also called **anti-holes** (see Fig.6), never contain any potential kernel candidates.
 
 >>> dc6 = -c6   # dc6 = DualDigraph(c6)
 >>> dc6.showPreKernels()

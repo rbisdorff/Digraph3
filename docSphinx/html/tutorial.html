@@ -5093,7 +5093,7 @@ execution time: 0 sec. and 2 millisec.
 <a class="reference internal image-reference" href="_images/random3RegularGraphKernelOrbit.png"><img alt="Two isomorphic kernels of the random 3-regular graph instance" src="_images/random3RegularGraphKernelOrbit.png" style="width: 700px;" /></a>
 <p class="caption"><span class="caption-text"><em>Figure 4</em>: Two isomorphic kernels of the random 3-regular graph instance</span></p>
 </div>
-<p>All symmteric digraphs admid MISs, hence also kernels.</p>
+<p>All graphs and symmetric digraphs admid MISs, hence also kernels.</p>
 <p>It is worthwhile noticing that the <strong>maximal matchings</strong> of a graph correspond bijectively to its line graph’s <strong>kernels</strong> (see the <a class="reference internal" href="techDoc.html#graphs.LineGraph" title="graphs.LineGraph"><code class="xref py py-class docutils literal"><span class="pre">graphs.LineGraph</span></code></a> class).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -5267,8 +5267,8 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">   absorbency   :  1.0</span>
 </pre></div>
 </td></tr></table></div>
-<p>Both these results make sense, as in a completely empty or indeterminate digraph, there is no interior of the digraph defined, only a <em>border</em> which is hence at the same time initial and terminal.  Notice however, that in the latter indeterminate case the complete set of nodes verifies only weakly the internal stability condition (see above).</p>
-<p>Other common digraph models, allthough being clearly oriented, may show nevertheless no apparent laterality, like <strong>odd chordless circuits</strong>, ie <em>holes</em> surrounded by a circuit of odd length. They do not admit in fact any initial or terminal kernel.</p>
+<p>Both these results make sense, as in a completely empty or indeterminate digraph, there is no <em>interior</em> of the digraph defined, only a <em>border</em> which is hence at the same time an initial and terminal kernel.  Notice however, that in the latter indeterminate case, the complete set of nodes verifies only weakly the internal stability condition (see above).</p>
+<p>Other common digraph models, allthough being clearly oriented, may show nevertheless no apparent laterality, like <strong>odd chordless circuits</strong>, ie <em>holes</em> surrounded by an <em>oriented cycle</em> -a circuit- of odd length. They do not admit in fact any initial or terminal kernel.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -5286,7 +5286,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="go"> absorbent prekernels:  0</span>
 </pre></div>
 </td></tr></table></div>
-<p>Chordless circuits of even length 2 x <em>k</em>, with <em>k</em> &gt; 1, contain however two isomorphic kernels of cardinality <em>k</em> which qualify conjointly as initial and terminal candidates.</p>
+<p>Chordless circuits of <strong>even</strong> length 2 x <em>k</em>, with <em>k</em> &gt; 1, contain however two isomorphic kernels of cardinality <em>k</em> which qualify conjointly as initial and terminal candidates.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -5306,7 +5306,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">[&#39;2&#39;, &#39;4&#39;, &#39;6&#39;] independence: 1.0, dominance: 1.0, absorbency: 1.0</span>
 </pre></div>
 </td></tr></table></div>
-<p>Chordless circuits of even length may thus be indifferently oriented along two opposite directions. Notice by the way that the duals of all chordless circuits of <em>odd</em> or <em>even</em> length, ie <em>filled</em> circuits also called <strong>anti-holes</strong> (see Fig.6), never contain any potential kernel candidates.</p>
+<p>Chordless circuits of even length may thus be indifferently oriented along two opposite directions. Notice by the way that the duals of <strong>all</strong> chordless circuits of <em>odd</em> <strong>or</strong> <em>even</em> length, ie <em>filled</em> circuits also called <strong>anti-holes</strong> (see Fig.6), never contain any potential kernel candidates.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
