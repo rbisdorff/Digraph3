@@ -3300,6 +3300,13 @@ Returns a partition of the vertices as a list</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="graphs.Graph.computeMaximumMatching">
+<code class="descname">computeMaximumMatching</code><span class="sig-paren">(</span><em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.computeMaximumMatching"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.computeMaximumMatching" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a maximum matching in <em>self</em> by computing
+a maximum MIS of the line graph of <em>self</em>.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="graphs.Graph.computeNeighbourhoodDepth">
 <code class="descname">computeNeighbourhoodDepth</code><span class="sig-paren">(</span><em>vertex</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.computeNeighbourhoodDepth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.computeNeighbourhoodDepth" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the distribtion of neighbourhood depths.</p>
@@ -3327,7 +3334,7 @@ of the vertex keys.</p>
 
 <dl class="method">
 <dt id="graphs.Graph.exportGraphViz">
-<code class="descname">exportGraphViz</code><span class="sig-paren">(</span><em>fileName=None</em>, <em>verticesSubset=None</em>, <em>noSilent=True</em>, <em>graphType='png'</em>, <em>graphSize='7</em>, <em>7'</em>, <em>withSpanningTree=False</em>, <em>layout=None</em>, <em>arcColor='black'</em>, <em>lineWidth=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.exportGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.exportGraphViz" title="Permalink to this definition">¶</a></dt>
+<code class="descname">exportGraphViz</code><span class="sig-paren">(</span><em>fileName=None</em>, <em>verticesSubset=None</em>, <em>noSilent=True</em>, <em>graphType='png'</em>, <em>graphSize='7</em>, <em>7'</em>, <em>withSpanningTree=False</em>, <em>matching=None</em>, <em>layout=None</em>, <em>arcColor='black'</em>, <em>lineWidth=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.exportGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.exportGraphViz" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exports GraphViz dot file  for graph drawing filtering.</p>
 <dl class="docutils">
 <dt>Example:</dt>
@@ -3560,7 +3567,8 @@ progressively reduce one by one the number of vertices and edges and become even
 <span class="go">Graph Order      : 5</span>
 <span class="go">Graph Size       : 5</span>
 <span class="go">Valuation domain : [-1.00 - 1.00]</span>
-<span class="go">Attributes       : [&#39;name&#39;, &#39;graph&#39;, &#39;valuationDomain&#39;, &#39;vertices&#39;, &#39;order&#39;, &#39;edges&#39;, &#39;size&#39;, &#39;gamma&#39;]</span>
+<span class="go">Attributes       : [&#39;name&#39;, &#39;graph&#39;, &#39;valuationDomain&#39;, &#39;vertices&#39;,</span>
+<span class="go">                    &#39;order&#39;, &#39;edges&#39;, &#39;size&#39;, &#39;gamma&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lg</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*---- short description of the graph ----*</span>
 <span class="go">Name             : &#39;line-cycleGraph&#39;</span>
@@ -3605,6 +3613,17 @@ progressively reduce one by one the number of vertices and edges and become even
 <strong>isomorphic perfect maximum matchings</strong> of the 8-cycle graph.
 Every vertex of the cycle is adjacent to a matching edge.
 Odd cyle graphs do not admid any perfect matching.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maxMatching</span> <span class="o">=</span> <span class="n">c8</span><span class="o">.</span><span class="n">computeMaximumMatching</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c8</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;maxMatchingcycleGraph&#39;</span><span class="p">,</span>
+<span class="go">                      matching=maxMatching)</span>
+<span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
+<span class="go">Exporting to maxMatchingcyleGraph.dot</span>
+<span class="go">Matching:  {frozenset({&#39;v1&#39;, &#39;v2&#39;}), frozenset({&#39;v5&#39;, &#39;v6&#39;}),</span>
+<span class="go">            frozenset({&#39;v3&#39;, &#39;v4&#39;}), frozenset({&#39;v7&#39;, &#39;v8&#39;}) }</span>
+<span class="go">circo -Tpng maxMatchingcyleGraph.dot -o maxMatchingcyleGraph.png</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/maxMatchingcycleGraph.png"><img alt="maximum matching colored c8" class="align-center" src="_images/maxMatchingcycleGraph.png" style="width: 300px;" /></a>
 </dd></dl>
 
 <dl class="class">

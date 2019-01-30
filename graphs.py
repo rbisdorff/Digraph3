@@ -636,6 +636,21 @@ class Graph(object):
                     break
         return diameter
 
+    def computeMaximumMatching(self,Comments=False):
+        """
+        Renders a maximum matching in *self* by computing
+        a maximum MIS of the line graph of *self*.
+        """
+        from graphs import LineGraph
+        ls = LineGraph(self)
+        ls.computeMIS()
+        matchings = [(len(mis),mis) for mis in ls.misset]
+        ms = sorted(matchings,reverse=True)
+        if Comments:
+            for mis in ms:
+                print(mis)
+        return ms[0][1] # skipping the length argument
+
     def computeMIS(self,Comments=False):
         """
         Prints all maximal independent vertex sets:
@@ -885,7 +900,6 @@ class Graph(object):
         if matching != None:
             withMatching = True
             edgesColored = set()
-            print(matching)
             for edge in matching:
                 edgesColored.add(edge)
             print('Matching: ', edgesColored)
@@ -3200,7 +3214,8 @@ class LineGraph(Graph):
     Graph Order      : 5
     Graph Size       : 5
     Valuation domain : [-1.00 - 1.00]
-    Attributes       : ['name', 'graph', 'valuationDomain', 'vertices', 'order', 'edges', 'size', 'gamma']
+    Attributes       : ['name', 'graph', 'valuationDomain', 'vertices',
+                        'order', 'edges', 'size', 'gamma']
     >>> lg.showShort()
     *---- short description of the graph ----*
     Name             : 'line-cycleGraph'
@@ -3243,8 +3258,21 @@ class LineGraph(Graph):
     The two last MISs of cardinality 4 (see Lines 14-15 above) give
     **isomorphic perfect maximum matchings** of the 8-cycle graph.
     Every vertex of the cycle is adjacent to a matching edge.
-    Odd cyle graphs do not admid any perfect matching. 
-    
+    Odd cyle graphs do not admid any perfect matching.
+
+    >>> maxMatching = c8.computeMaximumMatching()
+    >>> c8.exportGraphViz(fileName='maxMatchingcycleGraph',
+                          matching=maxMatching)
+    *---- exporting a dot file for GraphViz tools ---------*
+    Exporting to maxMatchingcyleGraph.dot
+    Matching:  {frozenset({'v1', 'v2'}), frozenset({'v5', 'v6'}),
+                frozenset({'v3', 'v4'}), frozenset({'v7', 'v8'}) }
+    circo -Tpng maxMatchingcyleGraph.dot -o maxMatchingcyleGraph.png
+
+    .. image:: maxMatchingcycleGraph.png
+        :alt: maximum matching colored c8
+        :width: 300 px
+        :align: center 
     """
     def __init__(self, graph):
         from copy import deepcopy
@@ -3284,7 +3312,8 @@ class LineGraph(Graph):
 if __name__ == '__main__':
 
 
-    g = CycleGraph(order=8)
+    #g = CycleGraph(order=12)
+    g = RandomGraph(order=7)
     print(g)
     g.showShort()
     lg = LineGraph(g)
@@ -3294,7 +3323,7 @@ if __name__ == '__main__':
     print(llg)
     llg.showShort()
     lg.showMIS()
-    maxMatching = lg.misset[0]
+    maxMatching = g.computeMaximumMatching(Comments=False)
     g.exportGraphViz(matching=maxMatching)
     
         # from graphs import SnakeGraph

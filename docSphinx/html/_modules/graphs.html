@@ -683,6 +683,21 @@
                     <span class="k">break</span>
         <span class="k">return</span> <span class="n">diameter</span></div>
 
+<div class="viewcode-block" id="Graph.computeMaximumMatching"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeMaximumMatching">[docs]</a>    <span class="k">def</span> <span class="nf">computeMaximumMatching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders a maximum matching in *self* by computing</span>
+<span class="sd">        a maximum MIS of the line graph of *self*.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">graphs</span> <span class="k">import</span> <span class="n">LineGraph</span>
+        <span class="n">ls</span> <span class="o">=</span> <span class="n">LineGraph</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">ls</span><span class="o">.</span><span class="n">computeMIS</span><span class="p">()</span>
+        <span class="n">matchings</span> <span class="o">=</span> <span class="p">[(</span><span class="nb">len</span><span class="p">(</span><span class="n">mis</span><span class="p">),</span><span class="n">mis</span><span class="p">)</span> <span class="k">for</span> <span class="n">mis</span> <span class="ow">in</span> <span class="n">ls</span><span class="o">.</span><span class="n">misset</span><span class="p">]</span>
+        <span class="n">ms</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">matchings</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">mis</span> <span class="ow">in</span> <span class="n">ms</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">mis</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ms</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># skipping the length argument</span></div>
+
 <div class="viewcode-block" id="Graph.computeMIS"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeMIS">[docs]</a>    <span class="k">def</span> <span class="nf">computeMIS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prints all maximal independent vertex sets:</span>
@@ -857,6 +872,7 @@
                        <span class="n">noSilent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                        <span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>
                        <span class="n">withSpanningTree</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                       <span class="n">matching</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">arcColor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
                        <span class="n">lineWidth</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
@@ -927,12 +943,25 @@
                     <span class="c1">#print(i,tree[i],tree[i+1])</span>
                     <span class="n">edgesColored</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">frozenset</span><span class="p">([</span><span class="n">tree</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">tree</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]]))</span>
             <span class="c1">#print(&#39;Spanning tree: &#39;, edgesColored)</span>
+                    
+        <span class="k">if</span> <span class="n">matching</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">withMatching</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">edgesColored</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">matching</span><span class="p">:</span>
+                <span class="n">edgesColored</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Matching: &#39;</span><span class="p">,</span> <span class="n">edgesColored</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">withMatching</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
                     <span class="n">edge</span> <span class="o">=</span> <span class="s1">&#39;n&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">edges</span><span class="p">[</span><span class="nb">frozenset</span><span class="p">(</span> <span class="p">[</span><span class="n">vertexkeys</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">vertexkeys</span><span class="p">[</span><span class="n">j</span><span class="p">]])]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
                         <span class="k">if</span> <span class="n">withSpanningTree</span> <span class="ow">and</span> \
+                        <span class="nb">frozenset</span><span class="p">(</span> <span class="p">[</span><span class="n">vertexkeys</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">vertexkeys</span><span class="p">[</span><span class="n">j</span><span class="p">]])</span> <span class="ow">in</span> <span class="n">edgesColored</span><span class="p">:</span>
+                               <span class="n">arrowFormat</span> <span class="o">=</span> \
+        <span class="s1">&#39; [dir=both,style=&quot;setlinewidth(3)&quot;,color=red, arrowhead=none, arrowtail=none] ;</span><span class="se">\n</span><span class="s1">&#39;</span>                                          
+                        <span class="k">elif</span> <span class="n">withMatching</span> <span class="ow">and</span> \
                         <span class="nb">frozenset</span><span class="p">(</span> <span class="p">[</span><span class="n">vertexkeys</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">vertexkeys</span><span class="p">[</span><span class="n">j</span><span class="p">]])</span> <span class="ow">in</span> <span class="n">edgesColored</span><span class="p">:</span>
                                <span class="n">arrowFormat</span> <span class="o">=</span> \
         <span class="s1">&#39; [dir=both,style=&quot;setlinewidth(3)&quot;,color=red, arrowhead=none, arrowtail=none] ;</span><span class="se">\n</span><span class="s1">&#39;</span>                                          
@@ -3232,7 +3261,8 @@
 <span class="sd">    Graph Order      : 5</span>
 <span class="sd">    Graph Size       : 5</span>
 <span class="sd">    Valuation domain : [-1.00 - 1.00]</span>
-<span class="sd">    Attributes       : [&#39;name&#39;, &#39;graph&#39;, &#39;valuationDomain&#39;, &#39;vertices&#39;, &#39;order&#39;, &#39;edges&#39;, &#39;size&#39;, &#39;gamma&#39;]</span>
+<span class="sd">    Attributes       : [&#39;name&#39;, &#39;graph&#39;, &#39;valuationDomain&#39;, &#39;vertices&#39;,</span>
+<span class="sd">                        &#39;order&#39;, &#39;edges&#39;, &#39;size&#39;, &#39;gamma&#39;]</span>
 <span class="sd">    &gt;&gt;&gt; lg.showShort()</span>
 <span class="sd">    *---- short description of the graph ----*</span>
 <span class="sd">    Name             : &#39;line-cycleGraph&#39;</span>
@@ -3275,8 +3305,21 @@
 <span class="sd">    The two last MISs of cardinality 4 (see Lines 14-15 above) give</span>
 <span class="sd">    **isomorphic perfect maximum matchings** of the 8-cycle graph.</span>
 <span class="sd">    Every vertex of the cycle is adjacent to a matching edge.</span>
-<span class="sd">    Odd cyle graphs do not admid any perfect matching. </span>
-<span class="sd">    </span>
+<span class="sd">    Odd cyle graphs do not admid any perfect matching.</span>
+
+<span class="sd">    &gt;&gt;&gt; maxMatching = c8.computeMaximumMatching()</span>
+<span class="sd">    &gt;&gt;&gt; c8.exportGraphViz(fileName=&#39;maxMatchingcycleGraph&#39;,</span>
+<span class="sd">                          matching=maxMatching)</span>
+<span class="sd">    *---- exporting a dot file for GraphViz tools ---------*</span>
+<span class="sd">    Exporting to maxMatchingcyleGraph.dot</span>
+<span class="sd">    Matching:  {frozenset({&#39;v1&#39;, &#39;v2&#39;}), frozenset({&#39;v5&#39;, &#39;v6&#39;}),</span>
+<span class="sd">                frozenset({&#39;v3&#39;, &#39;v4&#39;}), frozenset({&#39;v7&#39;, &#39;v8&#39;}) }</span>
+<span class="sd">    circo -Tpng maxMatchingcyleGraph.dot -o maxMatchingcyleGraph.png</span>
+
+<span class="sd">    .. image:: maxMatchingcycleGraph.png</span>
+<span class="sd">        :alt: maximum matching colored c8</span>
+<span class="sd">        :width: 300 px</span>
+<span class="sd">        :align: center </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
@@ -3316,7 +3359,8 @@
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
 
 
-    <span class="n">g</span> <span class="o">=</span> <span class="n">CycleGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="c1">#g = CycleGraph(order=12)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">RandomGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
     <span class="n">lg</span> <span class="o">=</span> <span class="n">LineGraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
@@ -3325,6 +3369,9 @@
     <span class="n">llg</span> <span class="o">=</span> <span class="n">LineGraph</span><span class="p">(</span><span class="n">lg</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">llg</span><span class="p">)</span>
     <span class="n">llg</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
+    <span class="n">lg</span><span class="o">.</span><span class="n">showMIS</span><span class="p">()</span>
+    <span class="n">maxMatching</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeMaximumMatching</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">matching</span><span class="o">=</span><span class="n">maxMatching</span><span class="p">)</span>
     
         <span class="c1"># from graphs import SnakeGraph</span>
         <span class="c1"># S = SnakeGraph(p=3,q=7)</span>

@@ -167,7 +167,7 @@ def testBestDeterminedSpanningForest():
 
 def testLineGraphs():
     print('==>> Testing line graphs construction')
-    g = CycleGraph(order=5)
+    g = CycleGraph(order=6)
     print(g)
     g.showShort()
     lg = LineGraph(g)
@@ -177,4 +177,8 @@ def testLineGraphs():
     llg = LineGraph(lg)
     print(llg)
     llg.showShort()
+    lg.showMIS()
+    maxMatching = g.computeMaximumMatching(Comments=False)
+    g.exportGraphViz(layout='circo',matching=maxMatching)
+   
 
