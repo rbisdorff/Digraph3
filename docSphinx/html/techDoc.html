@@ -3790,13 +3790,8 @@ vertices X vertices table format.</p>
 <dd><p>Bases: <a class="reference internal" href="#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal"><span class="pre">graphs.Graph</span></code></a></p>
 <p>Martin Ch. Gulombic, Agorithmic Graph Theory and Perfect Graphs 2nd Ed.,
 Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.</p>
-<dl class="method">
-<dt id="graphs.PermutationGraph.transitiveOrientation">
-<code class="descname">transitiveOrientation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#PermutationGraph.transitiveOrientation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.PermutationGraph.transitiveOrientation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders a digraph where each edge of the permutation graph <em>self</em>
-is converted into an arc oriented in increasing order of the adjacent vertices’ numbers.
-This orientation is always transitive and delivers a weak ordering of the vertices.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">PermutationGraph</span><span class="p">()</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="k">import</span> <span class="n">PermutationGraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">PermutationGraph</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span>
 <span class="go">*------- Graph instance description ------*</span>
 <span class="go">Instance class   : PermutationGraph</span>
@@ -3807,7 +3802,20 @@ This orientation is always transitive and delivers a weak ordering of the vertic
 <span class="go">Valuation domain : [-1.00 - 1.00]</span>
 <span class="go">Attributes       : [&#39;name&#39;, &#39;vertices&#39;, &#39;order&#39;, &#39;permutation&#39;,</span>
 <span class="go">                    &#39;valuationDomain&#39;, &#39;edges&#39;, &#39;size&#39;, &#39;gamma&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">transitiveOrientation</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
+<span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
+<span class="go">Exporting to permutationGraph.dot</span>
+<span class="go">fdp -Tpng permutationGraph.dot -o permutationGraph.png</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/permutationGraph.png"><img alt="Default permutation graph" class="align-center" src="_images/permutationGraph.png" style="width: 200px;" /></a>
+<dl class="method">
+<dt id="graphs.PermutationGraph.transitiveOrientation">
+<code class="descname">transitiveOrientation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#PermutationGraph.transitiveOrientation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.PermutationGraph.transitiveOrientation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a digraph where each edge of the permutation graph <em>self</em>
+is converted into an arc oriented in increasing order of the adjacent vertices’ numbers.
+This orientation is always transitive and delivers a weak ordering of the vertices.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">transitiveOrientation</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span>
 <span class="go">*------- Digraph instance description ------*</span>
 <span class="go">Instance class   : WeakOrder</span>

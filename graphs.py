@@ -3318,6 +3318,29 @@ class PermutationGraph(Graph):
     """
     Martin Ch. Gulombic, Agorithmic Graph Theory and Perfect Graphs 2nd Ed.,
     Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.
+
+    >>> from graphs import PermutationGraph
+    >>> g = PermutationGraph()
+    >>> g
+    *------- Graph instance description ------*
+    Instance class   : PermutationGraph
+    Instance name    : permutationGraph
+    Graph Order      : 6
+    Permutation      : [4, 3, 6, 1, 5, 2]
+    Graph Size       : 9
+    Valuation domain : [-1.00 - 1.00]
+    Attributes       : ['name', 'vertices', 'order', 'permutation',
+                        'valuationDomain', 'edges', 'size', 'gamma']
+    >>> g.exportGraphViz()
+    *---- exporting a dot file for GraphViz tools ---------*
+    Exporting to permutationGraph.dot
+    fdp -Tpng permutationGraph.dot -o permutationGraph.png
+
+    .. image:: permutationGraph.png
+        :alt: Default permutation graph
+        :width: 200 px
+        :align: center 
+ 
     """
     def __init__(self,permutation=[4,3,6,1,5,2],Debug=False):
         from collections import OrderedDict
@@ -3356,18 +3379,7 @@ class PermutationGraph(Graph):
         Renders a digraph where each edge of the permutation graph *self*
         is converted into an arc oriented in increasing order of the adjacent vertices' numbers.
         This orientation is always transitive and delivers a weak ordering of the vertices.
-
-        >>> g = PermutationGraph()
-        >>> g
-        *------- Graph instance description ------*
-        Instance class   : PermutationGraph
-        Instance name    : permutationGraph
-        Graph Order      : 6
-        Permutation      : [4, 3, 6, 1, 5, 2]
-        Graph Size       : 9
-        Valuation domain : [-1.00 - 1.00]
-        Attributes       : ['name', 'vertices', 'order', 'permutation',
-                            'valuationDomain', 'edges', 'size', 'gamma']
+    
         >>> dg = g.transitiveOrientation()
         >>> dg
         *------- Digraph instance description ------*

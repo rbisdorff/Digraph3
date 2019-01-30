@@ -3365,6 +3365,29 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Martin Ch. Gulombic, Agorithmic Graph Theory and Perfect Graphs 2nd Ed.,</span>
 <span class="sd">    Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.</span>
+
+<span class="sd">    &gt;&gt;&gt; from graphs import PermutationGraph</span>
+<span class="sd">    &gt;&gt;&gt; g = PermutationGraph()</span>
+<span class="sd">    &gt;&gt;&gt; g</span>
+<span class="sd">    *------- Graph instance description ------*</span>
+<span class="sd">    Instance class   : PermutationGraph</span>
+<span class="sd">    Instance name    : permutationGraph</span>
+<span class="sd">    Graph Order      : 6</span>
+<span class="sd">    Permutation      : [4, 3, 6, 1, 5, 2]</span>
+<span class="sd">    Graph Size       : 9</span>
+<span class="sd">    Valuation domain : [-1.00 - 1.00]</span>
+<span class="sd">    Attributes       : [&#39;name&#39;, &#39;vertices&#39;, &#39;order&#39;, &#39;permutation&#39;,</span>
+<span class="sd">                        &#39;valuationDomain&#39;, &#39;edges&#39;, &#39;size&#39;, &#39;gamma&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; g.exportGraphViz()</span>
+<span class="sd">    *---- exporting a dot file for GraphViz tools ---------*</span>
+<span class="sd">    Exporting to permutationGraph.dot</span>
+<span class="sd">    fdp -Tpng permutationGraph.dot -o permutationGraph.png</span>
+
+<span class="sd">    .. image:: permutationGraph.png</span>
+<span class="sd">        :alt: Default permutation graph</span>
+<span class="sd">        :width: 200 px</span>
+<span class="sd">        :align: center </span>
+<span class="sd"> </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">permutation</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
@@ -3403,18 +3426,7 @@
 <span class="sd">        Renders a digraph where each edge of the permutation graph *self*</span>
 <span class="sd">        is converted into an arc oriented in increasing order of the adjacent vertices&#39; numbers.</span>
 <span class="sd">        This orientation is always transitive and delivers a weak ordering of the vertices.</span>
-
-<span class="sd">        &gt;&gt;&gt; g = PermutationGraph()</span>
-<span class="sd">        &gt;&gt;&gt; g</span>
-<span class="sd">        *------- Graph instance description ------*</span>
-<span class="sd">        Instance class   : PermutationGraph</span>
-<span class="sd">        Instance name    : permutationGraph</span>
-<span class="sd">        Graph Order      : 6</span>
-<span class="sd">        Permutation      : [4, 3, 6, 1, 5, 2]</span>
-<span class="sd">        Graph Size       : 9</span>
-<span class="sd">        Valuation domain : [-1.00 - 1.00]</span>
-<span class="sd">        Attributes       : [&#39;name&#39;, &#39;vertices&#39;, &#39;order&#39;, &#39;permutation&#39;,</span>
-<span class="sd">                            &#39;valuationDomain&#39;, &#39;edges&#39;, &#39;size&#39;, &#39;gamma&#39;]</span>
+<span class="sd">    </span>
 <span class="sd">        &gt;&gt;&gt; dg = g.transitiveOrientation()</span>
 <span class="sd">        &gt;&gt;&gt; dg</span>
 <span class="sd">        *------- Digraph instance description ------*</span>
