@@ -3338,7 +3338,7 @@ class PermutationGraph(Graph):
 
     .. image:: permutationGraph.png
         :alt: Default permutation graph
-        :width: 200 px
+        :width: 300 px
         :align: center 
  
     """
