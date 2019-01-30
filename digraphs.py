@@ -563,7 +563,7 @@ class Digraph(object):
             return None
             
     def digraph2Graph(self,valuationDomain={'min':-1,'med':0,'max':1},
-                      Debug=False,conjunctiveConversion=True):
+                      Debug=False,ConjunctiveConversion=True):
         """
         Convert a Digraph instance to a Graph instance.
         """
@@ -590,7 +590,7 @@ class Digraph(object):
                 x = verticesKeys[i]
                 y = verticesKeys[j]
                 vertex = frozenset([x,y])
-                if conjunctiveConversion:
+                if ConjunctiveConversion:
                     edgeValue = min(self.relation[x][y],self.relation[y][x])
                 else:
                     edgeValue = max(self.relation[x][y],self.relation[y][x])
