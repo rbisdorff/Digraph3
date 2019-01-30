@@ -3307,24 +3307,83 @@ class LineGraph(Graph):
         self.edges = edges
         self.size = self.computeSize()
         self.gamma = self.gammaSets()
-    
+
+####################
+
+class PermutationGraph(Graph):
+    """
+    Martin Ch. Gulombic, Agorithmic Graph Theroy and Perfect Graphs 2nd Ed.,
+    Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.
+    """
+    def __init__(self,permutation=[4,3,6,1,5,2],Debug=False):
+        from collections import OrderedDict
+        self.name = 'permutationGraph'
+        vertices = OrderedDict()
+        order = len(permutation)
+        for i in range(1,order+1):
+            vertices[str(i)] = {'name': str(i)}
+        self.vertices = vertices
+        self.order = len(vertices)
+        self.permutation = permutation
+        self.valuationDomain = {'min': Decimal('-1'),
+                                'med': Decimal('0'),
+                                'max': Decimal('1')}
+        Min = self.valuationDomain['min']
+        Max = self.valuationDomain['max']
+        
+        edges = OrderedDict()
+        for i in range(1,order+1):
+            for j in range(i+1,order+1):
+                invi = permutation.index(i) + 1
+                invj = permutation.index(j) + 1
+                if Debug:
+                    print('i,invi, j, invj',i,invi, j, invj)
+                    print((i - j)*(invi - invj))
+                if (i - j)*(invi - invj) < 0:
+                    edges[frozenset([str(i),str(j)])] = Max
+                else:
+                    edges[frozenset([str(i),str(j)])] = Min
+        self.edges = edges
+        self.size = self.computeSize()
+        self.gamma = self.gammaSets()
+
+class RandomPermutationGraph(PermutationGraph):
+    """
+    A generator for random permutation graphs.
+    """
+    def __init__(self,order=6,seed=None):
+        import random
+        random.seed(seed)
+        permutation = list(range(1,order+1))
+        random.shuffle(permutation)
+        g = PermutationGraph(permutation=permutation)
+        att = [a for a in g.__dict__]
+        for a in att:
+            self.__dict__[a] = g.__dict__[a]
+        self.name = 'randomPermGraph'
+        
 # --------------testing the module ----
 if __name__ == '__main__':
 
+    g = PermutationGraph(permutation=[4,3,6,1,5,2])
+    print(g)
+    g.exportGraphViz()
+    rg = RandomPermutationGraph(order=6,seed=100)
+    print(rg)
 
     #g = CycleGraph(order=12)
-    g = RandomGraph(order=7)
-    print(g)
-    g.showShort()
-    lg = LineGraph(g)
-    print(lg)
-    lg.showShort()
-    llg = LineGraph(lg)
-    print(llg)
-    llg.showShort()
-    lg.showMIS()
-    maxMatching = g.computeMaximumMatching(Comments=False)
-    g.exportGraphViz(matching=maxMatching)
+##    g = RandomGraph(order=7)
+##    print(g)
+##    g.showShort()
+##    lg = LineGraph(g)
+##    print(lg)
+##    lg.showShort()
+##    llg = LineGraph(lg)
+##    print(llg)
+##    llg.showShort()
+##    lg.showMIS()
+##    maxMatching = g.computeMaximumMatching(Comments=False)
+##    g.exportGraphViz(matching=maxMatching)
     
         # from graphs import SnakeGraph
         # S = SnakeGraph(p=3,q=7)

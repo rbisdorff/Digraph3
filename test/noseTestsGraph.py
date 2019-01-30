@@ -180,5 +180,14 @@ def testLineGraphs():
     lg.showMIS()
     maxMatching = g.computeMaximumMatching(Comments=False)
     g.exportGraphViz(layout='circo',matching=maxMatching)
-   
+
+def testPermutationGraphs():
+    print('==>> Testing permutation graphs construction')
+    g = PermutationGraph(permutation=[4,3,6,1,5,2])
+    print(g)
+    g.exportGraphViz()
+    rg = RandomPermutationGraph(order=6,seed=100)
+    print(rg)
+    print('permutation:',rg.permutation)
+
 
