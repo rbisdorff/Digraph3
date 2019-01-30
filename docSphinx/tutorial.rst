@@ -3189,7 +3189,29 @@ In our random 3-regular graph instance (see Fig. 2), we may thus find eleven non
 
    *Figure 4*: Two isomorphic kernels of the random 3-regular graph instance
 
-All symmteric digraphs admid MISs, hence also kernels. In the context of digraphs, ie *oriented* graphs, the kernel concept gets much richer and separates from the symmetric MIS concept.  
+All symmteric digraphs admid MISs, hence also kernels. It is worthwhile noticing that the **maximal matchings** of a graph correspond bijectively to the **kernels of its line graph** (see the :py:class:`graphs.LineGraph` class).
+
+>>> from graphs import CycleGraph
+>>> c8 = CycleGraph(order=8)
+>>> maxMatching = c8.computeMaximumMatching()
+>>> c8.exportGraphViz(fileName='maxMatchingcycleGraph',
+...                          matching=maxMatching)
+*---- exporting a dot file for GraphViz tools ---------*
+Exporting to maxMatchingcyleGraph.dot
+Matching:  {frozenset({'v1', 'v2'}), frozenset({'v5', 'v6'}),
+            frozenset({'v3', 'v4'}), frozenset({'v7', 'v8'}) }
+circo -Tpng maxMatchingcyleGraph.dot -o maxMatchingcyleGraph.png
+
+
+.. figure:: maxMatchingcycleGraph.png
+   :width: 300 px
+   :align: center
+   :alt: Perfect maximum matching in the 8.cycle graph 
+
+   *Figure 5*: Perfect maximum matching in the 8-cycle graph
+
+
+In the context of digraphs, ie *oriented* graphs, the kernel concept gets much richer and separates from the symmetric MIS concept.  
 
 
 Initial and terminal kernels

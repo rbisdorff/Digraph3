@@ -610,7 +610,7 @@
             <span class="k">return</span> <span class="kc">None</span></div>
             
 <div class="viewcode-block" id="Digraph.digraph2Graph"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.digraph2Graph">[docs]</a>    <span class="k">def</span> <span class="nf">digraph2Graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">valuationDomain</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;med&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">},</span>
-                      <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">conjunctiveConversion</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+                      <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ConjunctiveConversion</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert a Digraph instance to a Graph instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -637,7 +637,7 @@
                 <span class="n">x</span> <span class="o">=</span> <span class="n">verticesKeys</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
                 <span class="n">y</span> <span class="o">=</span> <span class="n">verticesKeys</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
                 <span class="n">vertex</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">])</span>
-                <span class="k">if</span> <span class="n">conjunctiveConversion</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">ConjunctiveConversion</span><span class="p">:</span>
                     <span class="n">edgeValue</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">])</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">edgeValue</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">])</span>
