@@ -3189,7 +3189,9 @@ In our random 3-regular graph instance (see Fig. 2), we may thus find eleven non
 
    *Figure 4*: Two isomorphic kernels of the random 3-regular graph instance
 
-All symmteric digraphs admid MISs, hence also kernels. It is worthwhile noticing that the **maximal matchings** of a graph correspond bijectively to the **kernels of its line graph** (see the :py:class:`graphs.LineGraph` class).
+All symmteric digraphs admid MISs, hence also kernels.
+
+It is worthwhile noticing that the **maximal matchings** of a graph correspond bijectively to its line graph's **kernels** (see the :py:class:`graphs.LineGraph` class).
 
 >>> from graphs import CycleGraph
 >>> c8 = CycleGraph(order=8)
