@@ -3215,13 +3215,12 @@ circo -Tpng maxMatchingcyleGraph.dot -o maxMatchingcyleGraph.png
 
 In the context of digraphs, ie *oriented* graphs, the kernel concept gets much richer and separates from the symmetric MIS concept.  
 
-
 Initial and terminal kernels
 ............................
 
 In an oriented graph context, the internal stability condition of the kernel concept remains untouched; however, the external stability condition gets indeed split up by the *orientation* into two lateral cases:
-     1. A **dominant** stability condition, where each non selected node is dominated by at least one member of the kernel;
-     2. An **absorbant** stability condition, where each non selected node is absorbed by at least one member of the kernel.
+     1. A **dominant** stability condition, where each non selected node is *dominated* by at least one member of the kernel;
+     2. An **absorbant** stability condition, where each non selected node is *absorbed* by at least one member of the kernel.
 
 A both *internally* **and** *dominant*, resp. *absorbent stable* choice is called a *dominant* or **initial**, resp. an *absorbent* or **terminal** kernel. From a topological perspective, the initial kernel concept looks from the outside of the digraph into its interior, whereas the terminal kernel looks from the interior of a digraph toward its outside. From an algebraic perspective, the initial kernel is a *prefix* operand, and the terminal kernel is a *postfix* operand in the *Berge* kernel equation (see [BIS-2006a]_ )
 
