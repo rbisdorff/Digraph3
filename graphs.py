@@ -69,6 +69,10 @@ class Graph(object):
         reprString += 'Instance class   : %s\n' % self.__class__.__name__
         reprString += 'Instance name    : %s\n' % self.name
         reprString += 'Graph Order      : %d\n' % self.order
+        try:
+            reprString += 'Permutation      : %s\n' % str(self.permutation)
+        except AttributeError:
+            pass
         reprString += 'Graph Size       : %d\n' % self.computeSize()
         reprString += 'Valuation domain : [%.2f - %.2f]\n'\
                       % (self.valuationDomain['min'],self.valuationDomain['max'])
@@ -3347,6 +3351,80 @@ class PermutationGraph(Graph):
         self.size = self.computeSize()
         self.gamma = self.gammaSets()
 
+    def transitiveOrientation(self):
+        """
+        Renders a digraph where each edge of the permutation graph *self*
+        is converted into an arc oriented in increasing order of the adjacent vertices' numbers.
+        This orientation is always transitive and delivers a weak ordering of the vertices.
+
+        >>> g = PermutationGraph()
+        >>> g
+        *------- Graph instance description ------*
+        Instance class   : PermutationGraph
+        Instance name    : permutationGraph
+        Graph Order      : 6
+        Permutation      : [4, 3, 6, 1, 5, 2]
+        Graph Size       : 9
+        Valuation domain : [-1.00 - 1.00]
+        Attributes       : ['name', 'vertices', 'order', 'permutation',
+                            'valuationDomain', 'edges', 'size', 'gamma']
+        >>> dg = transitiveOrientation()
+        >>> dg
+        *------- Digraph instance description ------*
+        Instance class   : WeakOrder
+        Instance name    : oriented_permutationGraph
+        Digraph Order      : 6
+        Digraph Size       : 9
+        Valuation domain : [-1.00 - 1.00]
+        Determinateness  : 100.000
+        >>> dg.exportGraphViz()
+        *---- exporting a dot file for GraphViz tools ---------*
+        Exporting to oriented_permutationGraph.dot
+        0 { rank = same; 1; 2; }
+        1 { rank = same; 5; 3; }
+        2 { rank = same; 4; 6; }
+        dot -Grankdir=TB -Tpng oriented_permutationGraph.dot -o oriented_permutationGraph.png
+        Attributes       : ['name', 'order', 'actions', 'valuationdomain',
+                            'relation', 'gamma', 'notGamma', 'size']
+
+        .. image:: oriented_permutationGraph.png
+            :alt: Transitive orientation of a permutation graph
+            :width: 300 px
+            :align: center 
+
+        """
+        from digraphs import EmptyDigraph
+        from weakOrders import WeakOrder
+        from copy import deepcopy
+        
+        g = EmptyDigraph(order=self.order)
+        g.__class__ = WeakOrder
+        g.name = 'oriented_'+self.name
+        g.actions = deepcopy(self.vertices)
+        g.valuationdomain = deepcopy(self.valuationDomain)
+        Max = g.valuationdomain['max']
+        Min = g.valuationdomain['min']
+        Med = g.valuationdomain['med']
+        relation = {}
+        for x in g.actions:
+            relation[x] = {}
+            for y in g.actions:
+                if x == y:
+                    relation[x][y] = Med
+                else:
+                    if self.edges[frozenset([x,y])] > Med:
+                        if int(x) < int(y):
+                            relation[x][y] = Max
+                        else:
+                            relation[x][y] = Min
+                    else:
+                        relation[x][y] = Min
+        g.relation = relation
+        g.size = g.computeSize()
+        g.gamma = g.gammaSets()
+        g.notGamma = g.notGammaSets()
+        return g      
+
 class RandomPermutationGraph(PermutationGraph):
     """
     A generator for random permutation graphs.
@@ -3370,6 +3448,9 @@ if __name__ == '__main__':
     g.exportGraphViz()
     rg = RandomPermutationGraph(order=6,seed=100)
     print(rg)
+    dg = g.transitiveOrientation()
+    print(dg)
+    dg.exportGraphViz()
 
     #g = CycleGraph(order=12)
 ##    g = RandomGraph(order=7)
