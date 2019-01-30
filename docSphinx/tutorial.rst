@@ -3212,7 +3212,6 @@ circo -Tpng maxMatchingcyleGraph.dot -o maxMatchingcyleGraph.png
 
    *Figure 5*: Perfect maximum matching in the 8-cycle graph
 
-
 In the context of digraphs, ie *oriented* graphs, the kernel concept gets much richer and separates from the symmetric MIS concept.  
 
 Initial and terminal kernels
@@ -3325,7 +3324,7 @@ Absorbent preKernels :
 ['1', '3', '5'] independence: 1.0, dominance: 1.0, absorbency: 1.0
 ['2', '4', '6'] independence: 1.0, dominance: 1.0, absorbency: 1.0
 
-Chordless circuits of even length may thus be indifferently oriented along two opposite directions. Notice by the way that the duals of all chordless circuits of *odd* or *even* length, ie *filled* circuits also called **anti-holes** (see Fig.5), never contain any potential kernel candidates.
+Chordless circuits of even length may thus be indifferently oriented along two opposite directions. Notice by the way that the duals of all chordless circuits of *odd* or *even* length, ie *filled* circuits also called **anti-holes** (see Fig.6), never contain any potential kernel candidates.
 
 >>> dc6 = -c6   # dc6 = DualDigraph(c6)
 >>> dc6.showPreKernels()
@@ -3344,7 +3343,7 @@ circo -Tpng dualChordlessCircuit.dot -o dualChordlessCircuit.png
    :align: center
    :alt: The dual of the chordless 6-circuit
 
-   *Figure 5*: The dual of the chordless 6-circuit
+   *Figure 6*: The dual of the chordless 6-circuit
 
 Kernels in lateralized digraphs
 ...............................
@@ -3365,9 +3364,9 @@ dot -Grankdir=BT -Tpng randomLaterality.dot -o randomLaterality.png
    :align: center
    :alt: A random digraph instance
 
-   *Figure 6*: A random digraph instance of order 7 and arc probability 0.3
+   *Figure 7*: A random digraph instance of order 7 and arc probability 0.3
 
-The random digraph shown in Fig. 6 above has no apparent special properties, except from being connected.
+The random digraph shown in Fig. 7 above has no apparent special properties, except from being connected.
 
 >>> rd.showComponents()
 *--- Connected Components ---*
@@ -3417,7 +3416,7 @@ Absorbent preKernels :
    covering     :  0.600  # <<==
 ...
 
-Among the six MISs contained in this random digraph (see above Lines 3-8) we dicover two initial and two terminal kernels (Lines 12-34). Notice by the way the covering values (between 0.0 and 1.0) shown by the :py:func:`digraphs.Digraph.showPreKernels` method (Lines 17, 22, 28 and 33). The higher this value, the more the corresponding kernel candidate makes apparent the digraph's *laterality*. We may hence redraw the same digraph in Fig. 7 by looking into its interior via the *best covering* initial kernel candidate: the dominant choice {'3','4'} (coloured in yellow), and looking out of it via the *best covering* terminal kernel candidate: the absorbent choice {'1','6'} (coloured in blue).
+Among the six MISs contained in this random digraph (see above Lines 3-8) we dicover two initial and two terminal kernels (Lines 12-34). Notice by the way the covering values (between 0.0 and 1.0) shown by the :py:func:`digraphs.Digraph.showPreKernels` method (Lines 17, 22, 28 and 33). The higher this value, the more the corresponding kernel candidate makes apparent the digraph's *laterality*. We may hence redraw the same digraph in Fig. 8 by looking into its interior via the *best covering* initial kernel candidate: the dominant choice {'3','4'} (coloured in yellow), and looking out of it via the *best covering* terminal kernel candidate: the absorbent choice {'1','6'} (coloured in blue).
 
 >>> rd.exportGraphViz(fileName='orientedLaterality',\
 ...                   bestChoice=set(['a4', 'a3']),\
@@ -3431,7 +3430,7 @@ dot -Grankdir=BT -Tpng orientedLaterality.dot -o orientedLaterality.png
    :align: center
    :alt: A random digraph oriented by best covering initial and terminal kernels  
 
-   *Figure 7*: A random digraph oriented by best covering initial and terminal kernels
+   *Figure 8*: A random digraph oriented by best covering initial and terminal kernels
 
 In algorithmic decision theory, initial and terminal prekernels may provide convincing best, resp. worst, choice recommendations (see :ref:`Rubis-Tutorial-label`).
 
@@ -3459,9 +3458,9 @@ Valuation domain : {'min': -100.0, 'med': 0.0, 'max': 100.0}
    :align: center
    :alt: A random performance tableau
 
-   *Figure 8*: The performance tableau of a random outranking digraph instance
+   *Figure 9*: The performance tableau of a random outranking digraph instance
 
-The underlying random performance tableau (see Fig. 8) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision actions 'a2' and 'a5'. The resulting **strict outranking** - ie a weighted majority supported - *better than without considerable counter-performance* - digraph is shown in Fig. 9 below.
+The underlying random performance tableau (see Fig. 9) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision actions 'a2' and 'a5'. The resulting **strict outranking** - ie a weighted majority supported - *better than without considerable counter-performance* - digraph is shown in Fig. 10 below.
 
 >>> gcd = ~(-g)  # Codual: the converse of the negation
 >>> gcd.exportGraphViz(fileName='tutOutRanking')
@@ -3474,7 +3473,7 @@ dot -Grankdir=BT -Tpng tutOutranking.dot -o tutOutranking.png
    :align: center
    :alt: A random performance tableau
 
-   *Figure 9*: A random strict outranking digraph instance
+   *Figure 10*: A random strict outranking digraph instance
 
 All decision actions appear strictly better performing than action 'a7'. We call it a **Condorcet looser** and it is an evident terminal prekernel candidate. On the other side, three actions: 'a1', 'a2' and 'a4' are not dominated. They give together an initial prekernel candidate. 
 
@@ -3521,7 +3520,7 @@ Credibility domain: [-100.00,100.00]
 
 Notice that solving the valued *Berge* kernel equations ([BIS-2006a]_) provides furthermore a positive characterization of the most credible decision actions in each respective choice recommendation (see Line 14 and 23 above). Actions 'a2' and 'a4' are equivalent candidates for a unique best choice, and action 'a7' is clearly confirmed as the worst choice.
 
-In Fig. 10 below, we orient the drawing of the strict outranking digraph instance with the help of these best and worst choice recommendations. 
+In Fig. 11 below, we orient the drawing of the strict outranking digraph instance with the help of these best and worst choice recommendations. 
 
 >>> gcd.exportGraphViz(fileName='bestWorstOrientation',
 ...       bestChoice=['a2','a4'], worstChoice=['a7'])
@@ -3534,9 +3533,9 @@ dot -Grankdir=BT -Tpng bestWorstOrientation.dot -o bestWorstOrientation.png
    :align: center
    :alt: The random outranking digraph oriented by its initial and terminal prekernels
 
-   *Figure 10*: The strict outranking digraph oriented by its best and worst choice recommendations 
+   *Figure 11*: The strict outranking digraph oriented by its best and worst choice recommendations 
 
-The grey arrows in Fig.10, like the one between actions 'a4' and 'a1', represent indeterminate preferential situations. Action 'a1' appears hence to be rather incomparable to all the other, except action 'a7'. It may be interesting to compare this result with a Copeland ranking of the underlying performance tableau (see :ref:`Ranking-tutorial-label`).
+The grey arrows in Fig.11, like the one between actions 'a4' and 'a1', represent indeterminate preferential situations. Action 'a1' appears hence to be rather incomparable to all the other, except action 'a7'. It may be interesting to compare this result with a Copeland ranking of the underlying performance tableau (see :ref:`Ranking-tutorial-label`).
 
 >>> g.showHTMLPerformanceHeatmap(colorLevels=5, ndigits=0,
 ...          Correlations=True, rankingRule='Copeland')
@@ -3546,9 +3545,9 @@ The grey arrows in Fig.10, like the one between actions 'a4' and 'a1', represent
    :align: center
    :alt: Copeland ranking of the random outranking digraph instance
 
-   *Figure 11*: Copeland ranking of the peformance tableau 
+   *Figure 12*: Copeland ranking of the peformance tableau 
 
-In the resulting linear ranking, action 'a4' is set at first rank, followed by action 'a2'. This makes sense as 'a4' shows three performances in the first quintile, whereas 'a2' is only partially evaluated and shows only two such excellent performances. But 'a4' also shows a very weak performance in the first quintile, Both decision actions don't schow eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually definite strict outranking relation than any 'forced' linear ranking result as shown in Fig. 11 above.
+In the resulting linear ranking (see Fig.12), action 'a4' is set at first rank, followed by action 'a2'. This makes sense as 'a4' shows three performances in the first quintile, whereas 'a2' is only partially evaluated and shows only two such excellent performances. But 'a4' also shows a very weak performance in the first quintile, Both decision actions don't schow eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually definite strict outranking relation than any 'forced' linear ranking result as shown in Fig. 11 above.
 
 Tractability
 ............
