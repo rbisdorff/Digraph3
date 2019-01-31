@@ -2712,7 +2712,7 @@ A MIS in the dual of a graph instance $g$ (its negation $-g$ ), corresponds to a
 Line graphs and maximal matchings
 .................................
 
-The module also provides a :py:class:`graphs.LineGraph` constructor. A **line graph** represents the **adjacencies between edges** of the given graph instance. We may compute for instance the line graph of the previous 5-cycle graph.
+The module also provides a :py:class:`graphs.LineGraph` constructor. A **line graph** represents the **adjacencies between edges** of the given graph instance. We may compute for instance the line graph of the 5-cycle graph.
 
 >>> g = CycleGraph(order=5)
 >>> g
@@ -2753,7 +2753,7 @@ distribution :  [0, 0, 5, 0, 0, 0]
 
 Iterated line graph constructions are usually expanding, except for *chordless cycles*, where the same cycle is repeated, and for *non-closed paths*, where iterated line graphs progressively reduce one by one the number of vertices and edges and become eventually an empty graph.
 
-Notice that the MISs in line graphs provide **maximal matchings** - *maximal sets of independent edges* - of the original graph.
+Notice that the MISs in the line graph provide **maximal matchings** - *maximal sets of independent edges* - of the original graph.
 
 >>> c8 = CycleGraph(order=8)
 >>> lc8 = LineGraph(c8)
