@@ -195,4 +195,12 @@ def testPermutationGraphs():
     rgd = -rg
     print(rgd)
 
-
+def testGraphOrientations():
+    print('==>> Testing graph orientations')
+    g = RandomGraph(order=6,edgeProbability=0.5,seed=None)
+    og = g.computeOrientedDigraph()
+    print('Transitivity degree: %.3f' % og.transitivityDegree)
+    gd = -g
+    ogd = gd.computeOrientedDigraph()
+    print('Dual transitivity degree: %.3f' % ogd.transitivityDegree)
+ 

@@ -3321,6 +3321,31 @@ a maximum MIS of the line graph of <em>self</em>.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="graphs.Graph.computeOrientedDigraph">
+<code class="descname">computeOrientedDigraph</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.computeOrientedDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.computeOrientedDigraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a digraph where each edge of the permutation graph <em>self</em>
+is converted into an arc oriented in increasing order of the adjacent vertices’ numbers.
+If self is a PermutationGraph instance, the orientation will be transitive.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">101</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrientedDigraph</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span>
+<span class="go">*------- Digraph instance description ------*</span>
+<span class="go">Instance class   : Digraph</span>
+<span class="go">Instance name    : oriented_randomGraph</span>
+<span class="go">Digraph Order      : 6</span>
+<span class="go">Digraph Size       : 5</span>
+<span class="go">Valuation domain : [-1.00 - 1.00]</span>
+<span class="go">Determinateness  : 100.000</span>
+<span class="go">Attributes       : [&#39;name&#39;,&#39;order&#39;,&#39;actions&#39;,&#39;valuationdomain&#39;,</span>
+<span class="go">                    &#39;relation&#39;, &#39;gamma&#39;, &#39;notGamma&#39;,</span>
+<span class="go">                    &#39;size&#39;, &#39;transitivityDegree&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">tansitivityDegree</span>
+<span class="go">Decimal(&#39;0.7142857142857142857142857143&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
 <dt id="graphs.Graph.computeSize">
 <code class="descname">computeSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.computeSize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.computeSize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the number of positively characterised edges of this graph instance

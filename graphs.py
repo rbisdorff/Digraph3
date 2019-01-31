@@ -756,6 +756,65 @@ class Graph(object):
 
         return vecNeighbourhoodDepth
 
+    def computeOrientedDigraph(self):
+        """
+        Renders a digraph where each edge of the permutation graph *self*
+        is converted into an arc oriented in increasing order of the adjacent vertices' numbers.
+        If self is a PermutationGraph instance, the orientation will be transitive.
+     
+        >>> g = RandomGraph(order=6,seed=101)
+        >>> dg = g.computeOrientedDigraph()
+        >>> dg
+        *------- Digraph instance description ------*
+        Instance class   : Digraph
+        Instance name    : oriented_randomGraph
+        Digraph Order      : 6
+        Digraph Size       : 5
+        Valuation domain : [-1.00 - 1.00]
+        Determinateness  : 100.000
+        Attributes       : ['name','order','actions','valuationdomain',
+                            'relation', 'gamma', 'notGamma',
+                            'size', 'transitivityDegree']
+        >>> dg.tansitivityDegree
+        Decimal('0.7142857142857142857142857143')
+        
+        """
+        from digraphs import Digraph, EmptyDigraph
+        from copy import deepcopy
+        
+        g = EmptyDigraph(order=self.order)
+        g.__class__ = Digraph
+        g.name = 'oriented_'+self.name
+        g.actions = deepcopy(self.vertices)
+        g.valuationdomain = deepcopy(self.valuationDomain)
+        Max = g.valuationdomain['max']
+        Min = g.valuationdomain['min']
+        Med = g.valuationdomain['med']
+        relation = {}
+        actionKeysList = [a for a in g.actions]
+        n = len(actionKeysList)
+        for i in range(n):
+            x = actionKeysList[i]
+            relation[x] = {}
+            for j in range(n):
+                y = actionKeysList[j]
+                if x == y:
+                    relation[x][y] = Med
+                else:
+                    if self.edges[frozenset([x,y])] > Med:
+                        if i < j:
+                            relation[x][y] = Max
+                        else:
+                            relation[x][y] = Min
+                    else:
+                        relation[x][y] = Min
+        g.relation = relation
+        g.size = g.computeSize()
+        g.gamma = g.gammaSets()
+        g.notGamma = g.notGammaSets()
+        g.transitivityDegree = g.computeTransitivityDegree()
+        return g      
+
     def computeSize(self):
         """
         Renders the number of positively characterised edges of this graph instance
@@ -3472,6 +3531,13 @@ if __name__ == '__main__':
     dg.exportGraphViz()
     rgd = -rg
     print(rgd)
+    g = RandomGraph(order=6,seed=101)
+    og = g.computeOrientedDigraph()
+    print('Transitivity degree: %.3f' % og.transitivityDegree)
+    gd = -g
+    ogd = gd.computeOrientedDigraph()
+    print('Dual transitivity degree: %.3f' % ogd.transitivityDegree)
+    
 
     #g = CycleGraph(order=12)
 ##    g = RandomGraph(order=7)
