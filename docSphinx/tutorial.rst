@@ -2712,7 +2712,7 @@ A MIS in the dual of a graph instance $g$ (its negation $-g$ ), corresponds to a
 Line graphs and maximal matchings
 .................................
 
-Line graphs represent the **adjacencies between edges** of a graph instance. Iterated line graph constructions are usually expanding, except for chordless cycles, where the same cycle is repeated. And, for non-closed paths (interupted cycles), where iterated line graphs progressively reduce one by one the number of vertices and edges and become eventually an empty graph. 
+Line graphs represent the **adjacencies between edges** of a graph instance.  
 
     >>> g = CycleGraph(order=5)
     >>> g
@@ -2739,7 +2739,9 @@ Line graphs represent the **adjacencies between edges** of a graph instance. Ite
     distribution :  [0, 0, 5, 0, 0]
     nbh depths   :  [0, 1, 2, 3, 4, 'inf.']
     distribution :  [0, 0, 5, 0, 0, 0]
-    # the line graph of the 5-cycle graph
+    
+We may compute the line graph of the previous 5-cycle graph.
+
     >>> lg = LineGraph(g)
     >>> lg
     *------- Graph instance description ------*
@@ -2767,7 +2769,9 @@ Line graphs represent the **adjacencies between edges** of a graph instance. Ite
     nbh depths   :  [0, 1, 2, 3, 4, 'inf.']
     distribution :  [0, 0, 5, 0, 0, 0]
 
-    MISs in line graphs provide **maximal matchings** - maximal sets of independent edges - in the original graph.
+Iterated line graph constructions are usually expanding, except for chordless cycles, where the same cycle is repeated. And, for non-closed paths (interupted cycles), where iterated line graphs progressively reduce one by one the number of vertices and edges and become eventually an empty graph.
+
+Notice that the MISs in line graphs provide **maximal matchings** - maximal sets of independent edges - in the original graph.
 
     >>> c8 = CycleGraph(order=8)
     >>> lc8 = LineGraph(c8)
@@ -2789,7 +2793,7 @@ Line graphs represent the **adjacencies between edges** of a graph instance. Ite
     freq.:  [0, 0, 0, 8, 2, 0, 0, 0, 0]
     execution time: 0.00029 sec.
 
-    The two last MISs of cardinality 4 (see Lines 14-15 above) give
+The two last MISs of cardinality 4 (see Lines 14-15 above) give
     **isomorphic perfect maximum matchings** of the 8-cycle graph.
     Every vertex of the cycle is adjacent to a matching edge.
     Odd cyle graphs do not admid any perfect matching.
