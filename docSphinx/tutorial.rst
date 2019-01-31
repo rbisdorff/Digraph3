@@ -2781,7 +2781,7 @@ The two last MISs of cardinality 4 (see Lines 13-16 above) give **isomorphic per
 
 >>> maxMatching = c8.computeMaximumMatching()
 >>> c8.exportGraphViz(fileName='maxMatchingcycleGraph',
-		      matching=maxMatching)
+...		      matching=maxMatching)
 *---- exporting a dot file for GraphViz tools ---------*
 Exporting to maxMatchingcyleGraph.dot
 Matching:  {frozenset({'v1', 'v2'}), frozenset({'v5', 'v6'}),
