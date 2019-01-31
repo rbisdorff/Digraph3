@@ -1400,11 +1400,18 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="vm">__class__</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;dual_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
             <span class="k">pass</span>
+        <span class="k">try</span><span class="p">:</span>  <span class="c1"># the dual of a PermutationGraph reverses the permutation</span>
+            <span class="n">permutation</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">permutation</span><span class="p">)</span>
+            <span class="n">permutation</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">permutation</span> <span class="o">=</span> <span class="n">permutation</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">pass</span>        
         <span class="bp">self</span><span class="o">.</span><span class="n">valuationDomain</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">valuationDomain</span><span class="p">)</span>
         <span class="n">Max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationDomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
         <span class="n">Min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationDomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
@@ -1413,7 +1420,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">edges</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">other</span><span class="o">.</span><span class="n">edges</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="n">e</span><span class="p">]</span> <span class="o">=</span> <span class="n">Max</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="n">e</span><span class="p">]</span> <span class="o">+</span> <span class="n">Min</span>
-        <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="vm">__class__</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeSize</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="CycleGraph"><a class="viewcode-back" href="../techDoc.html#graphs.CycleGraph">[docs]</a><span class="k">class</span> <span class="nc">CycleGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
@@ -3505,11 +3512,13 @@
     <span class="n">g</span> <span class="o">=</span> <span class="n">PermutationGraph</span><span class="p">(</span><span class="n">permutation</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
-    <span class="n">rg</span> <span class="o">=</span> <span class="n">RandomPermutationGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">rg</span> <span class="o">=</span> <span class="n">RandomPermutationGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">rg</span><span class="p">)</span>
     <span class="n">dg</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">transitiveOrientation</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
     <span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
+    <span class="n">rgd</span> <span class="o">=</span> <span class="o">-</span><span class="n">rg</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">rgd</span><span class="p">)</span>
 
     <span class="c1">#g = CycleGraph(order=12)</span>
 <span class="c1">##    g = RandomGraph(order=7)</span>

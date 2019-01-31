@@ -1353,11 +1353,18 @@ class DualGraph(Graph):
     """
     def __init__(self,other):
         from copy import deepcopy
+        self.__class__ = other.__class__
         self.name = 'dual_' + str(other.name)
         try:
             self.description = deepcopy(other.description)
         except AttributeError:
             pass
+        try:  # the dual of a PermutationGraph reverses the permutation
+            permutation = list(other.permutation)
+            permutation.reverse()
+            self.permutation = permutation
+        except AttributeError:
+            pass        
         self.valuationDomain = deepcopy(other.valuationDomain)
         Max = self.valuationDomain['max']
         Min = self.valuationDomain['min']
@@ -1366,7 +1373,7 @@ class DualGraph(Graph):
         self.edges = {}
         for e in other.edges:
             self.edges[e] = Max - other.edges[e] + Min
-        self.__class__ = other.__class__
+        self.size = self.computeSize()
         self.gamma = self.gammaSets()
 
 class CycleGraph(Graph):
@@ -3458,11 +3465,13 @@ if __name__ == '__main__':
     g = PermutationGraph(permutation=[4,3,6,1,5,2])
     print(g)
     g.exportGraphViz()
-    rg = RandomPermutationGraph(order=6,seed=100)
+    rg = RandomPermutationGraph(order=6,seed=None)
     print(rg)
     dg = g.transitiveOrientation()
     print(dg)
     dg.exportGraphViz()
+    rgd = -rg
+    print(rgd)
 
     #g = CycleGraph(order=12)
 ##    g = RandomGraph(order=7)

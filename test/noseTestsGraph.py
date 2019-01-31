@@ -192,5 +192,7 @@ def testPermutationGraphs():
     dg = g.transitiveOrientation()
     print(dg)
     dg.exportGraphViz()
+    rgd = -rg
+    print(rgd)
 
 
