@@ -4340,7 +4340,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 <div class="section" id="line-graphs-and-maximal-matchings">
 <h3><a class="toc-backref" href="#id134">Line graphs and maximal matchings</a><a class="headerlink" href="#line-graphs-and-maximal-matchings" title="Permalink to this headline">¶</a></h3>
-<p>The module also provides a line graph constructor. Line graphs represent the <strong>adjacencies between edges</strong> of a graph instance. We may compute for instance the line graph of the previous 5-cycle graph.</p>
+<p>The module also provides a <a class="reference internal" href="techDoc.html#graphs.LineGraph" title="graphs.LineGraph"><code class="xref py py-class docutils literal"><span class="pre">graphs.LineGraph</span></code></a> constructor. A <strong>line graph</strong> represents the <strong>adjacencies between edges</strong> of the given graph instance. We may compute for instance the line graph of the previous 5-cycle graph.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -4399,14 +4399,14 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lg</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*---- short description of the graph ----*</span>
 <span class="go">Name             : &#39;line-cycleGraph&#39;</span>
-<span class="go">Vertices         :  [frozenset({&#39;v2&#39;, &#39;v1&#39;}), frozenset({&#39;v1&#39;, &#39;v5&#39;}), frozenset({&#39;v2&#39;, &#39;v3&#39;}),</span>
-<span class="go">                     frozenset({&#39;v4&#39;, &#39;v3&#39;}), frozenset({&#39;v4&#39;, &#39;v5&#39;})]</span>
+<span class="go">Vertices         :  [frozenset({&#39;v1&#39;, &#39;v2&#39;}), frozenset({&#39;v1&#39;, &#39;v5&#39;}), frozenset({&#39;v2&#39;, &#39;v3&#39;}),</span>
+<span class="go">                     frozenset({&#39;v3&#39;, &#39;v4&#39;}), frozenset({&#39;v4&#39;, &#39;v5&#39;})]</span>
 <span class="go">Valuation domain :  {&#39;min&#39;: Decimal(&#39;-1&#39;), &#39;med&#39;: Decimal(&#39;0&#39;), &#39;max&#39;: Decimal(&#39;1&#39;)}</span>
 <span class="go">Gamma function   :</span>
-<span class="go">frozenset({&#39;v2&#39;, &#39;v1&#39;}) -&gt; [frozenset({&#39;v2&#39;, &#39;v3&#39;}), frozenset({&#39;v1&#39;, &#39;v5&#39;})]</span>
-<span class="go">frozenset({&#39;v1&#39;, &#39;v5&#39;}) -&gt; [frozenset({&#39;v2&#39;, &#39;v1&#39;}), frozenset({&#39;v4&#39;, &#39;v5&#39;})]</span>
-<span class="go">frozenset({&#39;v2&#39;, &#39;v3&#39;}) -&gt; [frozenset({&#39;v2&#39;, &#39;v1&#39;}), frozenset({&#39;v4&#39;, &#39;v3&#39;})]</span>
-<span class="go">frozenset({&#39;v4&#39;, &#39;v3&#39;}) -&gt; [frozenset({&#39;v2&#39;, &#39;v3&#39;}), frozenset({&#39;v4&#39;, &#39;v5&#39;})]</span>
+<span class="go">frozenset({&#39;v1&#39;, &#39;v2&#39;}) -&gt; [frozenset({&#39;v2&#39;, &#39;v3&#39;}), frozenset({&#39;v1&#39;, &#39;v5&#39;})]</span>
+<span class="go">frozenset({&#39;v1&#39;, &#39;v5&#39;}) -&gt; [frozenset({&#39;v1&#39;, &#39;v2&#39;}), frozenset({&#39;v4&#39;, &#39;v5&#39;})]</span>
+<span class="go">frozenset({&#39;v2&#39;, &#39;v3&#39;}) -&gt; [frozenset({&#39;v1&#39;, &#39;v2&#39;}), frozenset({&#39;v3&#39;, &#39;v4&#39;})]</span>
+<span class="go">frozenset({&#39;v3&#39;, &#39;v4&#39;}) -&gt; [frozenset({&#39;v2&#39;, &#39;v3&#39;}), frozenset({&#39;v4&#39;, &#39;v5&#39;})]</span>
 <span class="go">frozenset({&#39;v4&#39;, &#39;v5&#39;}) -&gt; [frozenset({&#39;v4&#39;, &#39;v3&#39;}), frozenset({&#39;v1&#39;, &#39;v5&#39;})]</span>
 <span class="go">degrees      :  [0, 1, 2, 3, 4]</span>
 <span class="go">distribution :  [0, 0, 5, 0, 0]</span>
@@ -4414,7 +4414,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go">distribution :  [0, 0, 5, 0, 0, 0]</span>
 </pre></div>
 </td></tr></table></div>
-<p>Iterated line graph constructions are usually expanding, except for chordless cycles, where the same cycle is repeated. And, for non-closed paths (interupted cycles), where iterated line graphs progressively reduce one by one the number of vertices and edges and become eventually an empty graph.</p>
+<p>Iterated line graph constructions are usually expanding, except for <em>chordless cycles</em>, where the same cycle is repeated, and for <em>non-closed paths</em>, where iterated line graphs progressively reduce one by one the number of vertices and edges and become eventually an empty graph.</p>
 <p>Notice that the MISs in line graphs provide <strong>maximal matchings</strong> - <em>maximal sets of independent edges</em> - of the original graph.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -4459,7 +4459,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go">execution time: 0.00029 sec.</span>
 </pre></div>
 </td></tr></table></div>
-<p>The two last MISs of cardinality 4 (see Lines 14-15 above) give <strong>isomorphic perfect maximum matchings</strong> of the 8-cycle graph. Every vertex of the cycle is adjacent to a matching edge. Odd cyle graphs do not admid any perfect matching.</p>
+<p>The two last MISs of cardinality 4 (see Lines 13-16 above) give <strong>isomorphic perfect maximum matchings</strong> of the 8-cycle graph. Every vertex of the cycle is adjacent to a matching edge. Odd cyle graphs do not admid any perfect matching.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
