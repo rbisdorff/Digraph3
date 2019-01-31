@@ -2478,7 +2478,7 @@ Back to :ref:`Tutorial-label`
 
 .. _Graphs-Tutorial-label:
 
-Working with the :py:mod:`graphs` module
+Working with the :code:`graphs` module
 ----------------------------------------
 
 .. contents:: 
@@ -2712,105 +2712,86 @@ A MIS in the dual of a graph instance $g$ (its negation $-g$ ), corresponds to a
 Line graphs and maximal matchings
 .................................
 
-Line graphs represent the **adjacencies between edges** of a graph instance.  
+The module also provides a line graph constructor. Line graphs represent the **adjacencies between edges** of a graph instance. We may compute for instance the line graph of the previous 5-cycle graph.
 
-    >>> g = CycleGraph(order=5)
-    >>> g
-    *------- Graph instance description ------*
-    Instance class   : CycleGraph
-    Instance name    : cycleGraph
-    Graph Order      : 5
-    Graph Size       : 5
-    Valuation domain : [-1.00 - 1.00]
-    Attributes       : ['name', 'order', 'vertices', 'valuationDomain',
-                        'edges', 'size', 'gamma']
-    g.showShort()
-    *---- short description of the graph ----*
-    Name             : 'cycleGraph'
-    Vertices         :  ['v1', 'v2', 'v3', 'v4', 'v5']
-    Valuation domain :  {'min': Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
-    Gamma function   : 
-    v1 -> ['v2', 'v5']
-    v2 -> ['v1', 'v3']
-    v3 -> ['v2', 'v4']
-    v4 -> ['v3', 'v5']
-    v5 -> ['v4', 'v1']
-    degrees      :  [0, 1, 2, 3, 4]
-    distribution :  [0, 0, 5, 0, 0]
-    nbh depths   :  [0, 1, 2, 3, 4, 'inf.']
-    distribution :  [0, 0, 5, 0, 0, 0]
-    
-We may compute the line graph of the previous 5-cycle graph.
-
-    >>> lg = LineGraph(g)
-    >>> lg
-    *------- Graph instance description ------*
-    Instance class   : LineGraph
-    Instance name    : line-cycleGraph
-    Graph Order      : 5
-    Graph Size       : 5
-    Valuation domain : [-1.00 - 1.00]
-    Attributes       : ['name', 'graph', 'valuationDomain', 'vertices',
-                        'order', 'edges', 'size', 'gamma']
-    >>> lg.showShort()
-    *---- short description of the graph ----*
-    Name             : 'line-cycleGraph'
-    Vertices         :  [frozenset({'v2', 'v1'}), frozenset({'v1', 'v5'}), frozenset({'v2', 'v3'}),
-                         frozenset({'v4', 'v3'}), frozenset({'v4', 'v5'})]
-    Valuation domain :  {'min': Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
-    Gamma function   : 
-    frozenset({'v2', 'v1'}) -> [frozenset({'v2', 'v3'}), frozenset({'v1', 'v5'})]
-    frozenset({'v1', 'v5'}) -> [frozenset({'v2', 'v1'}), frozenset({'v4', 'v5'})]
-    frozenset({'v2', 'v3'}) -> [frozenset({'v2', 'v1'}), frozenset({'v4', 'v3'})]
-    frozenset({'v4', 'v3'}) -> [frozenset({'v2', 'v3'}), frozenset({'v4', 'v5'})]
-    frozenset({'v4', 'v5'}) -> [frozenset({'v4', 'v3'}), frozenset({'v1', 'v5'})]
-    degrees      :  [0, 1, 2, 3, 4]
-    distribution :  [0, 0, 5, 0, 0]
-    nbh depths   :  [0, 1, 2, 3, 4, 'inf.']
-    distribution :  [0, 0, 5, 0, 0, 0]
+>>> g = CycleGraph(order=5)
+>>> g
+*------- Graph instance description ------*
+Instance class   : CycleGraph
+Instance name    : cycleGraph
+Graph Order      : 5
+Graph Size       : 5
+Valuation domain : [-1.00 - 1.00]
+Attributes       : ['name', 'order', 'vertices', 'valuationDomain',
+		    'edges', 'size', 'gamma']
+>>> lg = LineGraph(g)
+>>> lg
+*------- Graph instance description ------*
+Instance class   : LineGraph
+Instance name    : line-cycleGraph
+Graph Order      : 5
+Graph Size       : 5
+Valuation domain : [-1.00 - 1.00]
+Attributes       : ['name', 'graph', 'valuationDomain', 'vertices',
+		    'order', 'edges', 'size', 'gamma']
+>>> lg.showShort()
+*---- short description of the graph ----*
+Name             : 'line-cycleGraph'
+Vertices         :  [frozenset({'v2', 'v1'}), frozenset({'v1', 'v5'}), frozenset({'v2', 'v3'}),
+		     frozenset({'v4', 'v3'}), frozenset({'v4', 'v5'})]
+Valuation domain :  {'min': Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
+Gamma function   : 
+frozenset({'v2', 'v1'}) -> [frozenset({'v2', 'v3'}), frozenset({'v1', 'v5'})]
+frozenset({'v1', 'v5'}) -> [frozenset({'v2', 'v1'}), frozenset({'v4', 'v5'})]
+frozenset({'v2', 'v3'}) -> [frozenset({'v2', 'v1'}), frozenset({'v4', 'v3'})]
+frozenset({'v4', 'v3'}) -> [frozenset({'v2', 'v3'}), frozenset({'v4', 'v5'})]
+frozenset({'v4', 'v5'}) -> [frozenset({'v4', 'v3'}), frozenset({'v1', 'v5'})]
+degrees      :  [0, 1, 2, 3, 4]
+distribution :  [0, 0, 5, 0, 0]
+nbh depths   :  [0, 1, 2, 3, 4, 'inf.']
+distribution :  [0, 0, 5, 0, 0, 0]
 
 Iterated line graph constructions are usually expanding, except for chordless cycles, where the same cycle is repeated. And, for non-closed paths (interupted cycles), where iterated line graphs progressively reduce one by one the number of vertices and edges and become eventually an empty graph.
 
-Notice that the MISs in line graphs provide **maximal matchings** - maximal sets of independent edges - in the original graph.
+Notice that the MISs in line graphs provide **maximal matchings** - *maximal sets of independent edges* - of the original graph.
 
-    >>> c8 = CycleGraph(order=8)
-    >>> lc8 = LineGraph(c8)
-    >>> lc8.showMIS()
-    *---  Maximal Independent Sets ---*
-    [frozenset({'v3', 'v4'}), frozenset({'v5', 'v6'}), frozenset({'v1', 'v8'})]
-    [frozenset({'v2', 'v3'}), frozenset({'v5', 'v6'}), frozenset({'v1', 'v8'})]
-    [frozenset({'v8', 'v7'}), frozenset({'v2', 'v3'}), frozenset({'v5', 'v6'})]
-    [frozenset({'v8', 'v7'}), frozenset({'v2', 'v3'}), frozenset({'v4', 'v5'})]
-    [frozenset({'v7', 'v6'}), frozenset({'v3', 'v4'}), frozenset({'v1', 'v8'})]
-    [frozenset({'v2', 'v1'}), frozenset({'v8', 'v7'}), frozenset({'v4', 'v5'})]
-    [frozenset({'v2', 'v1'}), frozenset({'v7', 'v6'}), frozenset({'v4', 'v5'})]
-    [frozenset({'v2', 'v1'}), frozenset({'v7', 'v6'}), frozenset({'v3', 'v4'})]
-    [frozenset({'v7', 'v6'}), frozenset({'v2', 'v3'}), frozenset({'v1', 'v8'}), frozenset({'v4', 'v5'})]
-    [frozenset({'v2', 'v1'}), frozenset({'v8', 'v7'}), frozenset({'v3', 'v4'}), frozenset({'v5', 'v6'})]
-    number of solutions:  10
-    cardinality distribution
-    card.:  [0, 1, 2, 3, 4, 5, 6, 7, 8]
-    freq.:  [0, 0, 0, 8, 2, 0, 0, 0, 0]
-    execution time: 0.00029 sec.
+>>> c8 = CycleGraph(order=8)
+>>> lc8 = LineGraph(c8)
+>>> lc8.showMIS()
+*---  Maximal Independent Sets ---*
+[frozenset({'v3', 'v4'}), frozenset({'v5', 'v6'}), frozenset({'v1', 'v8'})]
+[frozenset({'v2', 'v3'}), frozenset({'v5', 'v6'}), frozenset({'v1', 'v8'})]
+[frozenset({'v8', 'v7'}), frozenset({'v2', 'v3'}), frozenset({'v5', 'v6'})]
+[frozenset({'v8', 'v7'}), frozenset({'v2', 'v3'}), frozenset({'v4', 'v5'})]
+[frozenset({'v7', 'v6'}), frozenset({'v3', 'v4'}), frozenset({'v1', 'v8'})]
+[frozenset({'v2', 'v1'}), frozenset({'v8', 'v7'}), frozenset({'v4', 'v5'})]
+[frozenset({'v2', 'v1'}), frozenset({'v7', 'v6'}), frozenset({'v4', 'v5'})]
+[frozenset({'v2', 'v1'}), frozenset({'v7', 'v6'}), frozenset({'v3', 'v4'})]
+[frozenset({'v7', 'v6'}), frozenset({'v2', 'v3'}), frozenset({'v1', 'v8'}),
+ frozenset({'v4', 'v5'})]
+[frozenset({'v2', 'v1'}), frozenset({'v8', 'v7'}), frozenset({'v3', 'v4'}),
+ frozenset({'v5', 'v6'})]
+number of solutions:  10
+cardinality distribution
+card.:  [0, 1, 2, 3, 4, 5, 6, 7, 8]
+freq.:  [0, 0, 0, 8, 2, 0, 0, 0, 0]
+execution time: 0.00029 sec.
 
-The two last MISs of cardinality 4 (see Lines 14-15 above) give
-    **isomorphic perfect maximum matchings** of the 8-cycle graph.
-    Every vertex of the cycle is adjacent to a matching edge.
-    Odd cyle graphs do not admid any perfect matching.
+The two last MISs of cardinality 4 (see Lines 14-15 above) give **isomorphic perfect maximum matchings** of the 8-cycle graph. Every vertex of the cycle is adjacent to a matching edge. Odd cyle graphs do not admid any perfect matching.
 
-    >>> maxMatching = c8.computeMaximumMatching()
-    >>> c8.exportGraphViz(fileName='maxMatchingcycleGraph',
-                          matching=maxMatching)
-    *---- exporting a dot file for GraphViz tools ---------*
-    Exporting to maxMatchingcyleGraph.dot
-    Matching:  {frozenset({'v1', 'v2'}), frozenset({'v5', 'v6'}),
-                frozenset({'v3', 'v4'}), frozenset({'v7', 'v8'}) }
-    circo -Tpng maxMatchingcyleGraph.dot -o maxMatchingcyleGraph.png
+>>> maxMatching = c8.computeMaximumMatching()
+>>> c8.exportGraphViz(fileName='maxMatchingcycleGraph',
+		      matching=maxMatching)
+*---- exporting a dot file for GraphViz tools ---------*
+Exporting to maxMatchingcyleGraph.dot
+Matching:  {frozenset({'v1', 'v2'}), frozenset({'v5', 'v6'}),
+	    frozenset({'v3', 'v4'}), frozenset({'v7', 'v8'}) }
+circo -Tpng maxMatchingcyleGraph.dot -o maxMatchingcyleGraph.png
 
-    .. image:: maxMatchingcycleGraph.png
-        :alt: maximum matching colored c8
-        :width: 300 px
-        :align: center 
+.. image:: maxMatchingcycleGraph.png
+    :alt: maximum matching colored c8
+    :width: 300 px
+    :align: center 
 
 Grids and the Ising model
 .........................
