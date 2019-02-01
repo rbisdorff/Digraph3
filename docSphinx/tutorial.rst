@@ -3797,7 +3797,7 @@ Decimal('1')
 Recognizing permutation graphs
 ..............................
 
-The last property gives a polynomial test procedure (in *O(n^3)* due to the necessary transitivity check) for recognizing permutation graphs. Let us consider, for instance, the following random graph of order 8 generated with an edge probability of 40%.
+The last property gives a polynomial test procedure (in *O(n^3)*) due to the transitivity check) for recognizing permutation graphs. Let us consider, for instance, the following random graph of order 8 generated with an edge probability of 40%.
 
 >>> g = RandomGraph(order=8,edgeProbability=0.4,seed=4335)
 >>> g
@@ -3812,13 +3812,13 @@ Attributes       : ['name', 'order', 'vertices', 'valuationDomain',
 >>> g.exportGraphViz()
 		    
 .. Figure:: randomGraph4335.png
-    :alt: Transitive orientation of a permutation graph
+    :alt: Random graph which is a permutation graph
     :width: 300 px
     :align: center
 
     *Figure* 15: Random graph of order 8 generated with edge probility 0.4
 
-We may check that this graph and its dual may be transitively orientable by computing for both an oriented digraph with the :py:func:`graphs.Graph.computeOrientedDigraph` method. The :code:`PartiallyDetermined=True` flag is required in order to orient only the actual edges of the graphs. Relations between vertices not linked by an edge will be put to the indeterminate characteristic value 0. This will allow us to compute later on convenient disjunctive digraph fusions.
+We may check that this graph and its dual are transitively orientable by computing for both an oriented digraph with the :py:func:`graphs.Graph.computeOrientedDigraph` method. The :code:`PartiallyDetermined=True` flag is required here in order to orient only the actual edges of the graphs. Relations between vertices not linked by an edge will be put to the indeterminate characteristic value 0. This will allow us to compute later on convenient disjunctive digraph fusions.
 
 >>> og = g.computeOrientedDigraph(PartiallyDetermined=True)
 >>> print('Transitivity degree: %.3f' % (og.transitivityDegree)) 
@@ -3828,21 +3828,25 @@ Transitivity degree: 1.000
 >>> print('Transitivity degree: %.3f' % (ogd.transitivityDegree)) 
 Transitivity degree: 1.000
 
-As both orientations are transitive indeed, we may conclude that the given random graph instance is actally a permutation graph instance. However, we still need to find its corresponding permutation. We therefore implement a recipee given by Martin Gulombic [Gul-2004]_ p.159. We will first *fuse" both *og* and *ogdual* orientations with an epistemic disjunction (see the :py:func:`digraphs.Digraph.o-max` operator, hence the needed partially determined orientations above. 
+As both orientations are transitive indeed, we may conclude that the given random graph instance is actally a permutation graph instance. However, we still need to find its corresponding permutation. We therefore implement a recipee given by Martin Gulombic [Gul-2004]_ p.159.
+
+We will first *fuse" both *og* and *ogdual* orientations above with an epistemic disjunction (see the :py:func:`digraphs.Digraph.o-max` operator), hence, the needed partially determined orientations above. 
 
 >>> f1gd = FusionDigraph(og,ogdual,operator='o-max')
 >>> seq1 = f1gd.computeNetFlowsRanking()
 >>> print(seq1)
 ['v1', 'v2', 'v3', 'v5', 'v4', 'v6', 'v7', 'v8']
 
-Both *g* and its dual *gdual* are oriented in increasing order of the labels of the vertices and we obtain by a net-flows ranking (see the :py:class:`linearOrders.NetFlowsOrder` constructor) a complete linear ordering of the vertices in increasing labels' numbers (see Line 4 above). We reverse now the orientation of the edges in *og* (see Line 1 below) in order to generate by disjunctive fusion again the inversions that are produced by the permutation we are looking for (see Line 4 below).
+Both *g* and its dual *gdual* are oriented in increasing order of the labels of the vertices and we obtain by a net-flows ranking (see the :py:class:`linearOrders.NetFlowsOrder` constructor) a complete linear ordering of the vertices in increasing labels' numbers (see Line 4 above).
+
+We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) in order to generate by disjunctive fusion again the inversions that are produced by the permutation we are looking for. Computing again a net-flows ranking will show the inversions we are looking for (see Line 4 above).
 
 >>> f2gd = FusionDigraph((-og),ogdual,'o-max')
 >>> seq2 = f2gd.computeNetFlowsRanking()
 >>> print(seq2)
 ['v2', 'v3', 'v4', 'v8', 'v6', 'v1', 'v7', 'v5']
 
-Computing again a net-flows ranking will show the inversions (see Line 4 above) we are looking for. We may notice that vertex 'v1' is hence put at position 6, vertex 'v2' at position 1, etc. We generate these positions for all vertices aby using the 'id' attribute of the vertices definitions and obtain thus the required permutation (see Line 5 below).
+ We may notice that vertex 'v1' is hence put at position 6, vertex 'v2' at position 1, etc. We generate these positions for all vertices by using the 'id' attribute of the vertices definitions and obtain thus the required permutation (see Line 5 below).
 
 >>> permutation = [0 for j in range(g.order)]
 >>> for j in range(g.order):
