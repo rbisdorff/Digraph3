@@ -756,7 +756,7 @@ class Graph(object):
 
         return vecNeighbourhoodDepth
 
-    def computeOrientedDigraph(self):
+    def computeOrientedDigraph(self,PartiallyDetermined=False):
         """
         Renders a digraph where each edge of the permutation graph *self*
         is converted into an arc oriented in increasing order of the adjacent vertices' numbers.
@@ -792,22 +792,37 @@ class Graph(object):
         Med = g.valuationdomain['med']
         relation = {}
         actionKeysList = [a for a in g.actions]
+        for x in actionKeysList:
+            relation[x] = {}
+            for y in actionKeysList:
+                relation[x][y] = Med
         n = len(actionKeysList)
         for i in range(n):
             x = actionKeysList[i]
-            relation[x] = {}
-            for j in range(n):
+            for j in range(i,n):
                 y = actionKeysList[j]
                 if x == y:
                     relation[x][y] = Med
                 else:
                     if self.edges[frozenset([x,y])] > Med:
-                        if i < j:
                             relation[x][y] = Max
-                        else:
-                            relation[x][y] = Min
-                    else:
+                            relation[y][x] = Min
+                    elif self.edges[frozenset([x,y])] < Med:
                         relation[x][y] = Min
+                        relation[y][x] = Min
+                    else:
+                        relation[x][y] = Med
+                        relation[y][x] = Med
+                        
+        if PartiallyDetermined:
+            for i in range(n):
+                x = actionKeysList[i]
+                for j in range(i+1,n):
+                    y = actionKeysList[j]
+                    if relation[x][y] < Med and relation[y][x] < Med:
+                        relation[x][y] = Med
+                        relation[x][y] = Med
+                        
         g.relation = relation
         g.size = g.computeSize()
         g.gamma = g.gammaSets()
@@ -1459,7 +1474,7 @@ class CycleGraph(Graph):
         vertices = OrderedDict()
         for i in range(order):
             vertexKey = ('v%%0%dd' % nd) % (i+1)
-            vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
+            vertices[vertexKey] = {'id':i+1, 'shortName':vertexKey, 'name': 'random vertex'}
         self.vertices = vertices
         verticesList = [key for key in vertices]
         self.valuationDomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
@@ -1505,7 +1520,7 @@ class RandomGraph(Graph):
         vertices = dict()
         for i in range(order):
             vertexKey = ('v%%0%dd' % nd) % (i+1)
-            vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
+            vertices[vertexKey] = {'id':i+1, 'shortName':vertexKey, 'name': 'random vertex'}
         self.vertices = vertices
         self.valuationDomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
         Min = self.valuationDomain['min']
@@ -1545,7 +1560,7 @@ class RandomValuationGraph(Graph):
         vertices = dict()
         for i in range(order):
             vertexKey = ('v%%0%dd' % nd) % (i+1)
-            vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
+            vertices[vertexKey] = {'id':i+1,'shortName':vertexKey, 'name': 'random vertex'}
         self.vertices = vertices
         self.valuationDomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
         Min = float(self.valuationDomain['min'])
@@ -1603,7 +1618,7 @@ class RandomFixedSizeGraph(Graph):
         vertices = dict()
         for i in range(order):
             vertexKey = ('v%%0%dd' % nd) % (i+1)
-            vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
+            vertices[vertexKey] = {'id':i+1,'shortName':vertexKey, 'name': 'random vertex'}
         self.vertices = vertices
         if Debug:
             print(self.vertices)
@@ -3531,12 +3546,28 @@ if __name__ == '__main__':
     dg.exportGraphViz()
     rgd = -rg
     print(rgd)
-    g = RandomGraph(order=6,seed=101)
-    og = g.computeOrientedDigraph()
+    g = RandomGraph(order=8,seed=4335)
+    og = g.computeOrientedDigraph(PartiallyDetermined=True)
     print('Transitivity degree: %.3f' % og.transitivityDegree)
     gd = -g
-    ogd = gd.computeOrientedDigraph()
+    ogd = gd.computeOrientedDigraph(PartiallyDetermined=True)
     print('Dual transitivity degree: %.3f' % ogd.transitivityDegree)
+    from digraphs import FusionDigraph
+    from linearOrders import LinearOrder
+    f1gd = FusionDigraph(og,ogd,'o-max')
+    s1 = LinearOrder.computeOrder(f1gd)
+    f2gd = FusionDigraph((-og),ogd,'o-max')
+    s2 = LinearOrder.computeOrder(f2gd)
+    print(s1)
+    print(s2)
+    permutation = [0 for i in range(g.order)]
+    for i in range(g.order):
+        x = g.vertices[s1[i]]['id']
+        permutation[i] = g.vertices[s2[x-1]]['id']
+    print(permutation)
+    gtest = PermutationGraph(permutation=permutation)
+    print(gtest)
+    print(g)
     
 
     #g = CycleGraph(order=12)

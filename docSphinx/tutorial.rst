@@ -3712,6 +3712,169 @@ And, checking maximality of independent choices via the external stability condi
 
 provides the effective advantage of computing all initial and/or terminal kernels in a single loop (see Line 10 and [BIS-2006b]_).
 
+.. _Permutation-Tutorial-label:
+
+On checking if a random graph is a permutation graph
+----------------------------------------------------
+
+.. contents:: 
+	:depth: 2
+	:local:
+
+Permutation graphs
+..................
+
+A graph is called a **permutation** or *inversion* graph if there exists a permutation of its vertices such that the permutated graph is isomorphic to the original graph.
+
+*Source*: Martin Ch. Gulombic, Agorithmic Graph Theory and Perfect Graphs 2nd Ed., Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.
+
+>>> from graphs import PermutationGraph
+>>> g = PermutationGraph(permutation = [4, 3, 6, 1, 5, 2])
+>>> g
+*------- Graph instance description ------*
+Instance class   : PermutationGraph
+Instance name    : permutationGraph
+Graph Order      : 6
+Permutation      : [4, 3, 6, 1, 5, 2]
+Graph Size       : 9
+Valuation domain : [-1.00 - 1.00]
+Attributes       : ['name', 'vertices', 'order', 'permutation',
+		    'valuationDomain', 'edges', 'size', 'gamma']
+>>> g.exportGraphViz()
+*---- exporting a dot file for GraphViz tools ---------*
+Exporting to permutationGraph.dot
+fdp -Tpng permutationGraph.dot -o permutationGraph.png
+
+.. Figure:: permutationGraph.png
+    :alt: Default permutation graph
+    :width: 300 px
+    :align: center
+
+    *Figure* 13: The default permutation graph
+
+Properties of permutation graphs
+................................
+
+A permutation graph is **transitively orientable**. The :py:func:`graphs.PermutationGraph.transitiveOrientation` method renders a digraph where each edge of the permutation graph is converted into an arc oriented in increasing order of the adjacent vertices' numbers (see [Gul-2004]_).
+
+This orientation is always transitive and delivers a *weak ordering* of the vertices.
+    
+>>> dg = g.transitiveOrientation()
+>>> dg
+*------- Digraph instance description ------*
+Instance class   : WeakOrder
+Instance name    : oriented_permutationGraph
+Digraph Order      : 6
+Digraph Size       : 9
+Valuation domain : [-1.00 - 1.00]
+Determinateness  : 100.000
+Attributes       : ['name', 'order', 'actions', 'valuationdomain',
+		    'relation', 'gamma', 'notGamma', 'size']
+>>> dg.computeTransitivityDegree()
+Decimal('1')
+>>> dg.exportGraphViz()
+*---- exporting a dot file for GraphViz tools ---------*
+Exporting to oriented_permutationGraph.dot
+0 { rank = same; 1; 2; }
+1 { rank = same; 5; 3; }
+2 { rank = same; 4; 6; }
+dot -Grankdir=TB -Tpng oriented_permutationGraph.dot -o oriented_permutationGraph.png
+
+.. Figure:: oriented_permutationGraph.png
+    :alt: Transitive orientation of a permutation graph
+    :width: 200 px
+    :align: center
+	    
+    *Figure* 14: Transitive orientation of the default permutation graph
+
+The dual of a permutation graph is *again* a permutation graph and as such also transitively orientable. Now, a given graph *g* is a permutation graph iff both *g* and its dual *gdual = -g* are transitively orientable.
+
+>>> gdual = -g
+>>> dgdual = gdual.transitiveOrientation()
+>>> dgdual.computeTransitivityDegree()
+Decimal('1')
+
+Recognizing permutation graphs
+..............................
+
+The last propoerty may give a test procedure for recognizing permutation graphs. Let us consider, for instance, the following random graph of order 8 generated with an edge probability of 40%.
+
+>>> g = RandomGraph(order=8,edgeProbability=0.4,seed=4335)
+>>> g
+*------- Graph instance description ------*
+Instance class   : RandomGraph
+Instance name    : randomGraph
+Graph Order      : 8
+Graph Size       : 10
+Valuation domain : [-1.00 - 1.00]
+Attributes       : ['name', 'order', 'vertices', 'valuationDomain',
+                    'edges', 'size', 'gamma']
+>>> g.exportGraphViz()
+		    
+.. Figure:: randomGraph4335.png
+    :alt: Transitive orientation of a permutation graph
+    :width: 300 px
+    :align: center
+
+    *Figure* 15: Random graph of order 8 generated with edge probility 0.4
+
+We may check that this graph and its dual may be transitively orientable by computing for both an oriented digraph with the :py:func:`graphs.Graph.computeOrientedDigraph` method. The :code:`PartiallyDetermined=True` flag is required in order to orient only the actual edges. Relations between vertices not linked by an edge will be put to the indeterminate characteristics. This will allow us to use later on a digraph fusion operator.
+
+>>> og = g.computeOrientedDigraph(PartiallyDetermined=True)
+>>> print('Transitivity degree: %.3f' % (og.transitivityDegree)) 
+Transitivity degree: 1.000
+>>> gdual = -g
+>>> ogdual = gdual.computeOrientedDigraph(PartiallyDetermined=True)
+>>> print('Transitivity degree: %.3f' % (ogd.transitivityDegree)) 
+Transitivity degree: 1.000
+
+As both orientations are transitive indeed, we may conclude that the given random graph instance is actally a performance graph instance. However, we still need to find its corresponding permutation. We therefore implement a recipee given by Martin Gulombic [Gul-2004]_ p.159. We will first fusion with an epistemic disjunction (see the :py:func:`digraphs.Digraph.o-max` operator both *og* and *ogdual* orientations, hence the needed partially determined orientations above. 
+
+>>> f1gd = FusionDigraph(og,ogdual,'o-max')
+>>> seq1 = f1gd.computeNetFlowsRanking()
+>>> print(seq1)
+['v1', 'v2', 'v3', 'v5', 'v4', 'v6', 'v7', 'v8']
+
+Both *g* and its dual *gdual* are oriented in increasing order of the labels of the vertices and we obtain a complete linear ordering of the vertices (see Line 4 above). We reverse now the orientation of the edges in *og* (see Line 1 below) in order to generate by disjunctive fusion again the inversions that are produced by the permutation we are looking for (see Line 4 below).
+
+>>> f2gd = FusionDigraph((-og),ogdual,'o-max')
+>>> seq2 = f2gd.computeNetFlowsRanking()
+>>> print(seq2)
+['v2', 'v3', 'v4', 'v8', 'v6', 'v1', 'v7', 'v5']
+
+We see that vertex 'v1' is hence put at position 6, vertex 'v2' at position 1, etc. We may generate these positions this for all vertices and obtain thus the required permutation (see Line 5).
+
+>>> for j in range(g.order):
+...     x = g.vertices[seq1[j]]['id']
+...     permutation[j] = g.vertices[seq2[x-1]]['id']
+>>> print(permutation)
+[2, 3, 4, 6, 8, 1, 7, 5]
+
+We may check now that this permutation will indeed correctly generate a permutation graph that is isomorphic to the random graph *g*.
+
+>>> gtest = PermutationGraph(permutation=[2, 3, 4, 6, 8, 1, 7, 5])
+>>> gtest
+*------- Graph instance description ------*
+Instance class   : PermutationGraph
+Instance name    : permutationGraph
+Graph Order      : 8
+Permutation      : [2, 3, 4, 6, 8, 1, 7, 5]
+Graph Size       : 9
+Valuation domain : [-1.00 - 1.00]
+Attributes       : ['name', 'vertices', 'order', 'permutation',
+                    'valuationDomain', 'edges', 'size', 'gamma']
+>>> gtest.exportGraphViz('permutationGraph4335')
+*---- exporting a dot file for GraphViz tools ---------*
+Exporting to permutationGraph4335.dot
+fdp -Tpng permutationGraph4335.dot -o permutationGraph4335.png
+
+.. Figure:: permutationGraph4335.png
+    :alt: The correct permutation graph
+    :width: 300 px
+    :align: center
+
+    *Figure* 15: Permutation graph obtained from [2, 3, 4, 6, 8, 1, 7, 5]
+
 Links and appendices
 --------------------
 
@@ -3762,6 +3925,8 @@ References
 .. [BIS-2006b] R. Bisdorff (2006). On enumerating the kernels in a bipolar-valued digraph. Annales du Lamsade 6, Octobre 2006, pp. 1 - 38. Université Paris-Dauphine. ISSN 1762-455X (downloadable version `PDF file 532.2 Kb <https://leopold-loewenheim.uni.lu/bisdorff/documents/EnumKernels.pdf>`_).
 
 .. [FMCAA] O. Häggström (2002) *Finite Markov Chains and Algorithmic Applications*. Cambridge University Press.
+
+.. [Gul-2004] Martin Ch. Gulombic, *Agorithmic Graph Theory and Perfect Graphs* 2nd Ed., Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.
 
 .. [BIS-2000] R. Bisdorff (2000), Logical foundation of fuzzy preferential systems with application to the ELECTRE decision aid methods, *Computers and Operations Research*, 27:673-687 (downloadable version `PDF file 159.1Kb <https://leopold-loewenheim.uni.lu/bisdorff/documents/foundationElectre.pdf>`_)
 
