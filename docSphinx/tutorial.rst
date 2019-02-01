@@ -3787,7 +3787,7 @@ dot -Grankdir=TB -Tpng oriented_permutationGraph.dot -o oriented_permutationGrap
 	    
     *Figure* 14: Transitive orientation of the default permutation graph
 
-The dual of a permutation graph is *again* a permutation graph and as such also transitively orientable. Now, a given graph *g* is a permutation graph **if and only if** both *g* and its dual *gdual = -g* are transitively orientable.
+The dual of a permutation graph is *again* a permutation graph and as such also transitively orientable. Now, a given graph *g* is a permutation graph **if and only if** both *g* and *gdual = -g* are transitively orientable.
 
 >>> gdual = -g
 >>> dgdual = gdual.transitiveOrientation()
@@ -3797,7 +3797,7 @@ Decimal('1')
 Recognizing permutation graphs
 ..............................
 
-The last property gives a polynomial test procedure (in *O(n^3)*) due to the transitivity check) for recognizing permutation graphs. Let us consider, for instance, the following random graph of order 8 generated with an edge probability of 40%.
+The last property gives a polynomial test procedure (in *O(n^3)* due to the transitivity check) for recognizing permutation graphs. Let us consider, for instance, the following random graph of order 8 generated with an edge probability of 40%.
 
 >>> g = RandomGraph(order=8,edgeProbability=0.4,seed=4335)
 >>> g
@@ -3830,7 +3830,7 @@ Transitivity degree: 1.000
 
 As both orientations are transitive indeed, we may conclude that the given random graph instance is actally a permutation graph instance. However, we still need to find its corresponding permutation. We therefore implement a recipee given by Martin Gulombic [Gul-2004]_ p.159.
 
-We will first *fuse" both *og* and *ogdual* orientations above with an epistemic disjunction (see the :py:func:`digraphs.Digraph.o-max` operator), hence, the needed partially determined orientations above. 
+We will first *fuse" both *og* and *ogdual* orientations above with an epistemic disjunction (see the :py:func:`digraphTools.omax` operator), hence, the needed partially determined orientations above. 
 
 >>> f1gd = FusionDigraph(og,ogdual,operator='o-max')
 >>> seq1 = f1gd.computeNetFlowsRanking()
@@ -3841,7 +3841,7 @@ Both *g* and its dual *gdual* are oriented in increasing order of the labels of 
 
 We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) in order to generate by disjunctive fusion again the inversions that are produced by the permutation we are looking for. Computing again a net-flows ranking will show the inversions we are looking for (see Line 4 above).
 
->>> f2gd = FusionDigraph((-og),ogdual,'o-max')
+>>> f2gd = FusionDigraph((-og),ogdual,operator 'o-max')
 >>> seq2 = f2gd.computeNetFlowsRanking()
 >>> print(seq2)
 ['v2', 'v3', 'v4', 'v8', 'v6', 'v1', 'v7', 'v5']
