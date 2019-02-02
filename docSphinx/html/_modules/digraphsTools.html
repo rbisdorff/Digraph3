@@ -108,11 +108,20 @@
 <span class="c1"># epistemic or symmetric disjunction operator</span>
 <div class="viewcode-block" id="omax"><a class="viewcode-back" href="../techDoc.html#digraphsTools.omax">[docs]</a><span class="k">def</span> <span class="nf">omax</span><span class="p">(</span><span class="n">Med</span><span class="p">,</span><span class="n">L</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    epistemic disjunction for bipolar outranking characteristics</span>
+<span class="sd">    epistemic **disjunction** for bipolar outranking characteristics</span>
 <span class="sd">    computation: Med is the valuation domain median and L is a list of</span>
-<span class="sd">    r-valued statement characteristics. </span>
+<span class="sd">    r-valued statement characteristics.</span>
+
+<span class="sd">    With **positive** arguments, omax operates a **max**,</span>
+<span class="sd">    with **negative** arguments, a **min**.</span>
+
+<span class="sd">    The mixture of **both positive and negative** arguments results in</span>
+<span class="sd">    an **indeterminate** value.</span>
+
+<span class="sd">    Likewise to a mean, the *omax* operator is not associative. We therefore first assemble all positive, negative and null terms</span>
+<span class="sd">    and operate omax on the three assembled arguments.</span>
+<span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1">#Med = self.valuationdomain[&#39;med&#39;]</span>
     <span class="n">terms</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
     <span class="n">termsPlus</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">termsMinus</span> <span class="o">=</span> <span class="p">[]</span>
@@ -137,13 +146,23 @@
         <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">termsMinus</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">Med</span></div>
+
 <span class="c1"># epistemic or symmetric conjunction operator</span>
 <div class="viewcode-block" id="omin"><a class="viewcode-back" href="../techDoc.html#digraphsTools.omin">[docs]</a><span class="k">def</span> <span class="nf">omin</span><span class="p">(</span><span class="n">Med</span><span class="p">,</span><span class="n">L</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    epistemic conjunction of a list L of bipolar outranking characteristics.</span>
+<span class="sd">    Epistemic **conjunction** of a list L of bipolar outranking characteristics.</span>
 <span class="sd">    Med is the given valuation domain median.</span>
+
+<span class="sd">    With **positive** arguments, omax operates a **min**,</span>
+<span class="sd">    with **negative** arguments, a **max**.</span>
+
+<span class="sd">    The mixture of both **positive and negative** arguments results</span>
+<span class="sd">    in an **indeterminate** value.</span>
+
+<span class="sd">    Likewise to a mean, the *omin* operator is not associative. We therefore first assemble all positive, negative and null terms</span>
+<span class="sd">    and operate omin on the three assembled arguments. </span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1">#Med = self.valuationdomain[&#39;med&#39;]</span>
     <span class="n">terms</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
     <span class="n">termsPlus</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">termsMinus</span> <span class="o">=</span> <span class="p">[]</span>

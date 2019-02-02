@@ -61,11 +61,20 @@ def all_perms(str):
 # epistemic or symmetric disjunction operator
 def omax(Med,L, Debug=False):
     """
-    epistemic disjunction for bipolar outranking characteristics
+    epistemic **disjunction** for bipolar outranking characteristics
     computation: Med is the valuation domain median and L is a list of
-    r-valued statement characteristics. 
+    r-valued statement characteristics.
+
+    With **positive** arguments, omax operates a **max**,
+    with **negative** arguments, a **min**.
+
+    The mixture of **both positive and negative** arguments results in
+    an **indeterminate** value.
+
+    Likewise to a mean, the *omax* operator is not associative. We therefore first assemble all positive, negative and null terms
+    and operate omax on the three assembled arguments.
+    
     """
-    #Med = self.valuationdomain['med']
     terms = list(L)
     termsPlus = []
     termsMinus = []
@@ -90,13 +99,23 @@ def omax(Med,L, Debug=False):
         return min(termsMinus)
     else:
         return Med
+
 # epistemic or symmetric conjunction operator
 def omin(Med,L, Debug=False):
     """
-    epistemic conjunction of a list L of bipolar outranking characteristics.
+    Epistemic **conjunction** of a list L of bipolar outranking characteristics.
     Med is the given valuation domain median.
+
+    With **positive** arguments, omax operates a **min**,
+    with **negative** arguments, a **max**.
+
+    The mixture of both **positive and negative** arguments results
+    in an **indeterminate** value.
+
+    Likewise to a mean, the *omin* operator is not associative. We therefore first assemble all positive, negative and null terms
+    and operate omin on the three assembled arguments. 
+
     """
-    #Med = self.valuationdomain['med']
     terms = list(L)
     termsPlus = []
     termsMinus = []

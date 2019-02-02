@@ -8375,16 +8375,28 @@ Algorithm L</p>
 <dl class="function">
 <dt id="digraphsTools.omax">
 <code class="descclassname">digraphsTools.</code><code class="descname">omax</code><span class="sig-paren">(</span><em>Med</em>, <em>L</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#omax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.omax" title="Permalink to this definition">¶</a></dt>
-<dd><p>epistemic disjunction for bipolar outranking characteristics
+<dd><p>epistemic <strong>disjunction</strong> for bipolar outranking characteristics
 computation: Med is the valuation domain median and L is a list of
 r-valued statement characteristics.</p>
+<p>With <strong>positive</strong> arguments, omax operates a <strong>max</strong>,
+with <strong>negative</strong> arguments, a <strong>min</strong>.</p>
+<p>The mixture of <strong>both positive and negative</strong> arguments results in
+an <strong>indeterminate</strong> value.</p>
+<p>Likewise to a mean, the <em>omax</em> operator is not associative. We therefore first assemble all positive, negative and null terms
+and operate omax on the three assembled arguments.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="digraphsTools.omin">
 <code class="descclassname">digraphsTools.</code><code class="descname">omin</code><span class="sig-paren">(</span><em>Med</em>, <em>L</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#omin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.omin" title="Permalink to this definition">¶</a></dt>
-<dd><p>epistemic conjunction of a list L of bipolar outranking characteristics.
+<dd><p>Epistemic <strong>conjunction</strong> of a list L of bipolar outranking characteristics.
 Med is the given valuation domain median.</p>
+<p>With <strong>positive</strong> arguments, omax operates a <strong>min</strong>,
+with <strong>negative</strong> arguments, a <strong>max</strong>.</p>
+<p>The mixture of both <strong>positive and negative</strong> arguments results
+in an <strong>indeterminate</strong> value.</p>
+<p>Likewise to a mean, the <em>omin</em> operator is not associative. We therefore first assemble all positive, negative and null terms
+and operate omin on the three assembled arguments.</p>
 </dd></dl>
 
 <dl class="function">
