@@ -98,7 +98,7 @@ All :py:class:`digraphs.Digraph` objects (see Line 12 above) contain at least th
 
 0. A **name** attribute, holding usually the actual name of the stored instance that was used to create the instance; 
 1. A collection of digraph nodes called **actions** (decision actions): an ordered dictionary of nodes with at least a 'name' attribute;
-2. An **order** attribute containig the number of graph nodes (length of the actions dictionary) automatically added by the object constructor;
+2. An **order** attribute containing the number of graph nodes (length of the actions dictionary) automatically added by the object constructor;
 3. A logical characteristic **valuationdomain**, a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true);
 4. The digraph **relation** : a double dictionary indexed by an oriented pair of actions (nodes) and carrying a decimal characteristic value in the range of the previous valuation domain;
 5. Its associated **gamma function** : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor;
@@ -3520,8 +3520,8 @@ dot -Grankdir=BT -Tpng orientedLaterality.dot -o orientedLaterality.png
 In algorithmic decision theory, initial and terminal prekernels may provide convincing best, resp. worst, choice recommendations (see :ref:`Rubis-Tutorial-label`).
 
 
-Computing good and bad choice recommandations
-...............................................
+Computing good and bad choice recommendations
+.............................................
 
 To illustrate this idea, let us finally compute good and bad choice recommendations in the following random bipolarly-valued **outranking** digraph.
 
@@ -3787,7 +3787,7 @@ dot -Grankdir=TB -Tpng oriented_permutationGraph.dot -o oriented_permutationGrap
 	    
     *Figure* 14: Transitive orientation of the default permutation graph
 
-The dual of a permutation graph is *again* a permutation graph and as such also transitively orientable. Now, a given graph *g* is a permutation graph **if and only if** both *g* and *gdual = -g* are transitively orientable.
+The dual of a permutation graph is *again* a permutation graph and as such also transitively orientable. Now, a given graph *g* is a permutation graph **if and only if** both *g* **and** *gdual = -g* are *transitively orientable*.
 
 >>> gdual = -g
 >>> dgdual = gdual.transitiveOrientation()
@@ -3797,7 +3797,7 @@ Decimal('1')
 Recognizing permutation graphs
 ..............................
 
-The last property gives a polynomial test procedure (in *O(n^3)* due to the transitivity check) for recognizing permutation graphs. Let us consider, for instance, the following random graph of order 8 generated with an edge probability of 40%.
+The last property gives a polynomial test procedure (in :math:`O(n^3)` due to the transitivity check) for recognizing permutation graphs. Let us consider, for instance, the following random graph of order 8 generated with an edge probability of 40%.
 
 >>> g = RandomGraph(order=8,edgeProbability=0.4,seed=4335)
 >>> g
@@ -3839,14 +3839,14 @@ We will first *fuse" both *og* and *ogdual* orientations above with an epistemic
 
 Both *g* and its dual *gdual* are oriented in increasing order of the labels of the vertices and we obtain by a net-flows ranking (see the :py:class:`linearOrders.NetFlowsOrder` constructor) a complete linear ordering of the vertices in increasing labels' numbers (see Line 4 above).
 
-We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) in order to generate by disjunctive fusion again the inversions that are produced by the permutation we are looking for. Computing again a net-flows ranking will show the inversions we are looking for (see Line 4 above).
+We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) in order to generate by disjunctive fusion again the inversions that are produced by the permutation we are looking for. Computing again a net-flows ranking will show the trquired inversions (see Line 4 below).
 
 >>> f2gd = FusionDigraph((-og),ogdual,operator 'o-max')
 >>> seq2 = f2gd.computeNetFlowsRanking()
 >>> print(seq2)
 ['v2', 'v3', 'v4', 'v8', 'v6', 'v1', 'v7', 'v5']
 
- We may notice that vertex 'v1' is hence put at position 6, vertex 'v2' at position 1, etc. We generate these positions for all vertices by using the 'id' attribute of the vertices definitions and obtain thus the required permutation (see Line 5 below).
+We may notice that vertex 'v1' is hence put at position 6, vertex 'v2' at position 1, etc. We generate these positions for all vertices by using the 'id' attribute of the vertex definitions and obtain thus the required permutation (see Line 5 below).
 
 >>> permutation = [0 for j in range(g.order)]
 >>> for j in range(g.order):

@@ -178,7 +178,7 @@ Attributes       : [&#39;actions&#39;, &#39;valuationdomain&#39;, &#39;relation&
 <ol class="arabic simple" start="0">
 <li>A <strong>name</strong> attribute, holding usually the actual name of the stored instance that was used to create the instance;</li>
 <li>A collection of digraph nodes called <strong>actions</strong> (decision actions): an ordered dictionary of nodes with at least a ‘name’ attribute;</li>
-<li>An <strong>order</strong> attribute containig the number of graph nodes (length of the actions dictionary) automatically added by the object constructor;</li>
+<li>An <strong>order</strong> attribute containing the number of graph nodes (length of the actions dictionary) automatically added by the object constructor;</li>
 <li>A logical characteristic <strong>valuationdomain</strong>, a dictionary with three decimal entries: the minimum (-1.0, means certainly false), the median (0.0, means missing information) and the maximum characteristic value (+1.0, means certainly true);</li>
 <li>The digraph <strong>relation</strong> : a double dictionary indexed by an oriented pair of actions (nodes) and carrying a decimal characteristic value in the range of the previous valuation domain;</li>
 <li>Its associated <strong>gamma function</strong> : a dictionary containing the direct successors, respectively predecessors of each action, automatically added by the object constructor;</li>
@@ -4996,7 +4996,7 @@ execution time: 0 sec. and 2 millisec.
 <li><a class="reference internal" href="#what-is-a-graph-kernel" id="id146">What is a graph kernel ?</a></li>
 <li><a class="reference internal" href="#initial-and-terminal-kernels" id="id147">Initial and terminal kernels</a></li>
 <li><a class="reference internal" href="#kernels-in-lateralized-digraphs" id="id148">Kernels in lateralized digraphs</a></li>
-<li><a class="reference internal" href="#computing-good-and-bad-choice-recommandations" id="id149">Computing good and bad choice recommandations</a></li>
+<li><a class="reference internal" href="#computing-good-and-bad-choice-recommendations" id="id149">Computing good and bad choice recommendations</a></li>
 <li><a class="reference internal" href="#tractability" id="id150">Tractability</a></li>
 </ul>
 </div>
@@ -5608,8 +5608,8 @@ execution time: 0 sec. and 2 millisec.
 </div>
 <p>In algorithmic decision theory, initial and terminal prekernels may provide convincing best, resp. worst, choice recommendations (see <a class="reference internal" href="#rubis-tutorial-label"><span class="std std-ref">Computing a best choice recommendation</span></a>).</p>
 </div>
-<div class="section" id="computing-good-and-bad-choice-recommandations">
-<h3><a class="toc-backref" href="#id149">Computing good and bad choice recommandations</a><a class="headerlink" href="#computing-good-and-bad-choice-recommandations" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="computing-good-and-bad-choice-recommendations">
+<h3><a class="toc-backref" href="#id149">Computing good and bad choice recommendations</a><a class="headerlink" href="#computing-good-and-bad-choice-recommendations" title="Permalink to this headline">¶</a></h3>
 <p>To illustrate this idea, let us finally compute good and bad choice recommendations in the following random bipolarly-valued <strong>outranking</strong> digraph.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -5998,7 +5998,7 @@ execution time: 0 sec. and 2 millisec.
 <a class="reference internal image-reference" href="_images/oriented_permutationGraph.png"><img alt="Transitive orientation of a permutation graph" src="_images/oriented_permutationGraph.png" style="width: 200px;" /></a>
 <p class="caption"><span class="caption-text"><em>Figure</em> 14: Transitive orientation of the default permutation graph</span></p>
 </div>
-<p>The dual of a permutation graph is <em>again</em> a permutation graph and as such also transitively orientable. Now, a given graph <em>g</em> is a permutation graph <strong>if and only if</strong> both <em>g</em> and <em>gdual = -g</em> are transitively orientable.</p>
+<p>The dual of a permutation graph is <em>again</em> a permutation graph and as such also transitively orientable. Now, a given graph <em>g</em> is a permutation graph <strong>if and only if</strong> both <em>g</em> <strong>and</strong> <em>gdual = -g</em> are <em>transitively orientable</em>.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -6011,7 +6011,7 @@ execution time: 0 sec. and 2 millisec.
 </div>
 <div class="section" id="recognizing-permutation-graphs">
 <h3><a class="toc-backref" href="#id153">Recognizing permutation graphs</a><a class="headerlink" href="#recognizing-permutation-graphs" title="Permalink to this headline">¶</a></h3>
-<p>The last property gives a polynomial test procedure (in <em>O(n^3)</em> due to the transitivity check) for recognizing permutation graphs. Let us consider, for instance, the following random graph of order 8 generated with an edge probability of 40%.</p>
+<p>The last property gives a polynomial test procedure (in <img class="math" src="_images/math/b7ed29dd710e8bf1346e128bf62bff037b7e66f8.png" alt="O(n^3)"/> due to the transitivity check) for recognizing permutation graphs. Let us consider, for instance, the following random graph of order 8 generated with an edge probability of 40%.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -6067,7 +6067,7 @@ execution time: 0 sec. and 2 millisec.
 </pre></div>
 </td></tr></table></div>
 <p>Both <em>g</em> and its dual <em>gdual</em> are oriented in increasing order of the labels of the vertices and we obtain by a net-flows ranking (see the <a class="reference internal" href="techDoc.html#linearOrders.NetFlowsOrder" title="linearOrders.NetFlowsOrder"><code class="xref py py-class docutils literal"><span class="pre">linearOrders.NetFlowsOrder</span></code></a> constructor) a complete linear ordering of the vertices in increasing labels’ numbers (see Line 4 above).</p>
-<p>We reverse now the orientation of the edges in <em>og</em> (see <em>-og</em> in Line 1 below) in order to generate by disjunctive fusion again the inversions that are produced by the permutation we are looking for. Computing again a net-flows ranking will show the inversions we are looking for (see Line 4 above).</p>
+<p>We reverse now the orientation of the edges in <em>og</em> (see <em>-og</em> in Line 1 below) in order to generate by disjunctive fusion again the inversions that are produced by the permutation we are looking for. Computing again a net-flows ranking will show the trquired inversions (see Line 4 below).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -6077,8 +6077,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">[&#39;v2&#39;, &#39;v3&#39;, &#39;v4&#39;, &#39;v8&#39;, &#39;v6&#39;, &#39;v1&#39;, &#39;v7&#39;, &#39;v5&#39;]</span>
 </pre></div>
 </td></tr></table></div>
-<blockquote>
-<div>We may notice that vertex ‘v1’ is hence put at position 6, vertex ‘v2’ at position 1, etc. We generate these positions for all vertices by using the ‘id’ attribute of the vertices definitions and obtain thus the required permutation (see Line 5 below).</div></blockquote>
+<p>We may notice that vertex ‘v1’ is hence put at position 6, vertex ‘v2’ at position 1, etc. We generate these positions for all vertices by using the ‘id’ attribute of the vertex definitions and obtain thus the required permutation (see Line 5 below).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -6398,7 +6397,7 @@ execution time: 0 sec. and 2 millisec.
 <li><a class="reference internal" href="#what-is-a-graph-kernel">What is a graph kernel ?</a></li>
 <li><a class="reference internal" href="#initial-and-terminal-kernels">Initial and terminal kernels</a></li>
 <li><a class="reference internal" href="#kernels-in-lateralized-digraphs">Kernels in lateralized digraphs</a></li>
-<li><a class="reference internal" href="#computing-good-and-bad-choice-recommandations">Computing good and bad choice recommandations</a></li>
+<li><a class="reference internal" href="#computing-good-and-bad-choice-recommendations">Computing good and bad choice recommendations</a></li>
 <li><a class="reference internal" href="#tractability">Tractability</a></li>
 </ul>
 </li>
