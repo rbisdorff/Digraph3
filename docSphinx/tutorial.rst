@@ -3813,7 +3813,7 @@ Attributes       : ['name', 'order', 'vertices', 'valuationDomain',
 		    
 .. Figure:: randomGraph4335.png
     :alt: Random graph which is a permutation graph
-    :width: 300 px
+    :width: 400 px
     :align: center
 
     *Figure* 15: Random graph of order 8 generated with edge probility 0.4
@@ -3875,10 +3875,12 @@ fdp -Tpng permutationGraph4335.dot -o permutationGraph4335.png
 
 .. Figure:: permutationGraph4335.png
     :alt: The correct permutation graph
-    :width: 300 px
+    :width: 400 px
     :align: center
 
-    *Figure* 15: Permutation graph obtained from [2, 3, 4, 6, 8, 1, 7, 5]
+    *Figure* 16: Permutation graph obtained from [2, 3, 4, 6, 8, 1, 7, 5]
+
+And we recover an isomorphic copy of the original random graph (see Fig. 15).
 
 Links and appendices
 --------------------
