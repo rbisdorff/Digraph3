@@ -3828,18 +3828,18 @@ Transitivity degree: 1.000
 >>> print('Transitivity degree: %.3f' % (ogd.transitivityDegree)) 
 Transitivity degree: 1.000
 
-As both orientations are transitive indeed, we may conclude that the given random graph instance is actally a permutation graph instance. However, we still need to find its corresponding permutation. We therefore implement a recipee given by Martin Gulombic [Gul-2004]_ p.159.
+As both orientations are transitive indeed, we may conclude that the given random graph is actally a permutation graph instance. However, we still need to find its corresponding permutation. We therefore implement a recipee given by Martin Gulombic [Gul-2004]_ p.159.
 
-We will first *fuse" both *og* and *ogdual* orientations above with an epistemic disjunction (see the :py:func:`digraphsTools.omax` operator), hence, the needed partially determined orientations above. 
+We will first **fuse** both *og* and *ogdual* orientations above with an **epistemic disjunction** (see the :py:func:`digraphsTools.omax` operator, hence, the needed partially determined orientations above). 
 
 >>> f1gd = FusionDigraph(og,ogdual,operator='o-max')
 >>> seq1 = f1gd.computeNetFlowsRanking()
 >>> print(seq1)
 ['v1', 'v2', 'v3', 'v5', 'v4', 'v6', 'v7', 'v8']
 
-Both *g* and its dual *gdual* are oriented in increasing order of the labels of the vertices and we obtain by a net-flows ranking (see the :py:class:`linearOrders.NetFlowsOrder` constructor) a complete linear ordering of the vertices in increasing labels' numbers (see Line 4 above).
+Both *g* and *gdual* are oriented in increasing order of the labels of the vertices and we obtain by a net-flows ranking rule (see :ref:`Ranking-tutorial-label` and the :py:func:`digraphs.Digraph.computeNetFlowsRanking` method) a complete linear ordering of the vertices in increasing labels' numbers (see Line 4 above).
 
-We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) in order to generate by disjunctive fusion again the inversions that are produced by the permutation we are looking for. Computing again a net-flows ranking will show the correspondingly permuted list of vertices (see Line 4 below).
+We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) in order to generate by disjunctive fusion again the inversions that are produced by the permutation we are looking for. Computing again a ranking with the net-flows rule will show the correspondingly permuted list of vertices (see Line 4 below).
 
 >>> f2gd = FusionDigraph((-og),ogdual,operator 'o-max')
 >>> seq2 = f2gd.computeNetFlowsRanking()
@@ -3855,7 +3855,7 @@ Vertex 'v1' is hence put at position 6, vertex 'v2' at position 1, ... etc. We g
 >>> print(permutation)
 [2, 3, 4, 6, 8, 1, 7, 5]
 
-We may check now that this permutation will indeed correctly generate a permutation graph that is isomorphic to the random graph *g*.
+We may check now that this permutation will correctly generate a permutation graph which is indeed isomorphic to the random graph *g*.
 
 >>> gtest = PermutationGraph(permutation=[2, 3, 4, 6, 8, 1, 7, 5])
 >>> gtest

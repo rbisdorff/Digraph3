@@ -68,6 +68,14 @@ class Graph(object):
         reprString = '*------- Graph instance description ------*\n'
         reprString += 'Instance class   : %s\n' % self.__class__.__name__
         reprString += 'Instance name    : %s\n' % self.name
+        try:
+            reprString += 'Seed             : %s\n' % str(self.seed)      
+        except AttributeError:
+            pass
+        try:
+            reprString += 'Edge Probability     : %s\n' % str(self.edgeProbability)      
+        except AttributeError:
+            pass
         reprString += 'Graph Order      : %d\n' % self.order
         try:
             reprString += 'Permutation      : %s\n' % str(self.permutation)
@@ -761,6 +769,9 @@ class Graph(object):
         Renders a digraph where each edge of the permutation graph *self*
         is converted into an arc oriented in increasing order of the adjacent vertices' numbers.
         If self is a PermutationGraph instance, the orientation will be transitive.
+
+        "Parameter*: PartiallyDetermined: {True|False by default] converts if *True* all absent
+        edges in the graph into indeterminate symmetric relations in the resulting digraph.
      
         >>> g = RandomGraph(order=6,seed=101)
         >>> dg = g.computeOrientedDigraph()
@@ -1514,6 +1525,8 @@ class RandomGraph(Graph):
     def __init__(self,order=5,edgeProbability=0.4,seed=None):
         import random
         random.seed(seed)
+        self.seed = seed
+        self.edgeProbability = edgeProbability
         self.name = 'randomGraph'
         self.order = order
         nd = len(str(order))
@@ -3536,16 +3549,17 @@ class RandomPermutationGraph(PermutationGraph):
 # --------------testing the module ----
 if __name__ == '__main__':
 
-    g = PermutationGraph(permutation=[4,3,6,1,5,2])
-    print(g)
-    g.exportGraphViz()
-    rg = RandomPermutationGraph(order=6,seed=None)
-    print(rg)
-    dg = g.transitiveOrientation()
-    print(dg)
-    dg.exportGraphViz()
-    rgd = -rg
-    print(rgd)
+##    g = PermutationGraph(permutation=[4,3,6,1,5,2])
+##    print(g)
+##    g.exportGraphViz()
+##    rg = RandomPermutationGraph(order=6,seed=None)
+##    print(rg)
+##    dg = g.transitiveOrientation()
+##    print(dg)
+##    dg.exportGraphViz()
+##    rgd = -rg
+##    print(rgd)
+##    
     g = RandomGraph(order=8,seed=4335)
     og = g.computeOrientedDigraph(PartiallyDetermined=True)
     print('Transitivity degree: %.3f' % og.transitivityDegree)
@@ -3553,22 +3567,22 @@ if __name__ == '__main__':
     ogd = gd.computeOrientedDigraph(PartiallyDetermined=True)
     print('Dual transitivity degree: %.3f' % ogd.transitivityDegree)
     from digraphs import FusionDigraph
-    from linearOrders import LinearOrder
-    f1gd = FusionDigraph(og,ogd,'o-max')
-    s1 = LinearOrder.computeOrder(f1gd)
-    f2gd = FusionDigraph((-og),ogd,'o-max')
-    s2 = LinearOrder.computeOrder(f2gd)
-    print(s1)
-    print(s2)
-    permutation = [0 for i in range(g.order)]
-    for i in range(g.order):
-        x = g.vertices[s1[i]]['id']
-        permutation[i] = g.vertices[s2[x-1]]['id']
-    print(permutation)
-    gtest = PermutationGraph(permutation=permutation)
-    print(gtest)
-    print(g)
-    
+##    from linearOrders import LinearOrder
+##    f1gd = FusionDigraph(og,ogd,'o-max')
+##    s1 = LinearOrder.computeOrder(f1gd)
+##    f2gd = FusionDigraph((-og),ogd,'o-max')
+##    s2 = LinearOrder.computeOrder(f2gd)
+##    print(s1)
+##    print(s2)
+##    permutation = [0 for i in range(g.order)]
+##    for i in range(g.order):
+##        x = g.vertices[s1[i]]['id']
+##        permutation[i] = g.vertices[s2[x-1]]['id']
+##    print(permutation)
+##    gtest = PermutationGraph(permutation=permutation)
+##    print(gtest)
+##    print(g)
+##    
 
     #g = CycleGraph(order=12)
 ##    g = RandomGraph(order=7)

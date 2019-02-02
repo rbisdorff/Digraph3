@@ -3326,6 +3326,8 @@ a maximum MIS of the line graph of <em>self</em>.</p>
 <dd><p>Renders a digraph where each edge of the permutation graph <em>self</em>
 is converted into an arc oriented in increasing order of the adjacent vertices’ numbers.
 If self is a PermutationGraph instance, the orientation will be transitive.</p>
+<p>“Parameter*: PartiallyDetermined: {True|False by default] converts if <em>True</em> all absent
+edges in the graph into indeterminate symmetric relations in the resulting digraph.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">101</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrientedDigraph</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span>

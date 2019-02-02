@@ -115,6 +115,14 @@
         <span class="n">reprString</span> <span class="o">=</span> <span class="s1">&#39;*------- Graph instance description ------*</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Instance class   : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
         <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Instance name    : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Seed             : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seed</span><span class="p">)</span>      
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Edge Probability     : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edgeProbability</span><span class="p">)</span>      
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">pass</span>
         <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Graph Order      : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Permutation      : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">permutation</span><span class="p">)</span>
@@ -808,6 +816,9 @@
 <span class="sd">        Renders a digraph where each edge of the permutation graph *self*</span>
 <span class="sd">        is converted into an arc oriented in increasing order of the adjacent vertices&#39; numbers.</span>
 <span class="sd">        If self is a PermutationGraph instance, the orientation will be transitive.</span>
+
+<span class="sd">        &quot;Parameter*: PartiallyDetermined: {True|False by default] converts if *True* all absent</span>
+<span class="sd">        edges in the graph into indeterminate symmetric relations in the resulting digraph.</span>
 <span class="sd">     </span>
 <span class="sd">        &gt;&gt;&gt; g = RandomGraph(order=6,seed=101)</span>
 <span class="sd">        &gt;&gt;&gt; dg = g.computeOrientedDigraph()</span>
@@ -1561,6 +1572,8 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edgeProbability</span> <span class="o">=</span> <span class="n">edgeProbability</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;randomGraph&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
         <span class="n">nd</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">order</span><span class="p">))</span>
@@ -3583,16 +3596,17 @@
 <span class="c1"># --------------testing the module ----</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
 
-    <span class="n">g</span> <span class="o">=</span> <span class="n">PermutationGraph</span><span class="p">(</span><span class="n">permutation</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
-    <span class="n">rg</span> <span class="o">=</span> <span class="n">RandomPermutationGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">rg</span><span class="p">)</span>
-    <span class="n">dg</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">transitiveOrientation</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
-    <span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
-    <span class="n">rgd</span> <span class="o">=</span> <span class="o">-</span><span class="n">rg</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">rgd</span><span class="p">)</span>
+<span class="c1">##    g = PermutationGraph(permutation=[4,3,6,1,5,2])</span>
+<span class="c1">##    print(g)</span>
+<span class="c1">##    g.exportGraphViz()</span>
+<span class="c1">##    rg = RandomPermutationGraph(order=6,seed=None)</span>
+<span class="c1">##    print(rg)</span>
+<span class="c1">##    dg = g.transitiveOrientation()</span>
+<span class="c1">##    print(dg)</span>
+<span class="c1">##    dg.exportGraphViz()</span>
+<span class="c1">##    rgd = -rg</span>
+<span class="c1">##    print(rgd)</span>
+<span class="c1">##    </span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">RandomGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">4335</span><span class="p">)</span>
     <span class="n">og</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrientedDigraph</span><span class="p">(</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Transitivity degree: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">og</span><span class="o">.</span><span class="n">transitivityDegree</span><span class="p">)</span>
@@ -3600,22 +3614,22 @@
     <span class="n">ogd</span> <span class="o">=</span> <span class="n">gd</span><span class="o">.</span><span class="n">computeOrientedDigraph</span><span class="p">(</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dual transitivity degree: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">ogd</span><span class="o">.</span><span class="n">transitivityDegree</span><span class="p">)</span>
     <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">FusionDigraph</span>
-    <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="k">import</span> <span class="n">LinearOrder</span>
-    <span class="n">f1gd</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">(</span><span class="n">og</span><span class="p">,</span><span class="n">ogd</span><span class="p">,</span><span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
-    <span class="n">s1</span> <span class="o">=</span> <span class="n">LinearOrder</span><span class="o">.</span><span class="n">computeOrder</span><span class="p">(</span><span class="n">f1gd</span><span class="p">)</span>
-    <span class="n">f2gd</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">((</span><span class="o">-</span><span class="n">og</span><span class="p">),</span><span class="n">ogd</span><span class="p">,</span><span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
-    <span class="n">s2</span> <span class="o">=</span> <span class="n">LinearOrder</span><span class="o">.</span><span class="n">computeOrder</span><span class="p">(</span><span class="n">f2gd</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
-    <span class="n">permutation</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">order</span><span class="p">)]</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">order</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">s1</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
-        <span class="n">permutation</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">s2</span><span class="p">[</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">permutation</span><span class="p">)</span>
-    <span class="n">gtest</span> <span class="o">=</span> <span class="n">PermutationGraph</span><span class="p">(</span><span class="n">permutation</span><span class="o">=</span><span class="n">permutation</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">gtest</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-    
+<span class="c1">##    from linearOrders import LinearOrder</span>
+<span class="c1">##    f1gd = FusionDigraph(og,ogd,&#39;o-max&#39;)</span>
+<span class="c1">##    s1 = LinearOrder.computeOrder(f1gd)</span>
+<span class="c1">##    f2gd = FusionDigraph((-og),ogd,&#39;o-max&#39;)</span>
+<span class="c1">##    s2 = LinearOrder.computeOrder(f2gd)</span>
+<span class="c1">##    print(s1)</span>
+<span class="c1">##    print(s2)</span>
+<span class="c1">##    permutation = [0 for i in range(g.order)]</span>
+<span class="c1">##    for i in range(g.order):</span>
+<span class="c1">##        x = g.vertices[s1[i]][&#39;id&#39;]</span>
+<span class="c1">##        permutation[i] = g.vertices[s2[x-1]][&#39;id&#39;]</span>
+<span class="c1">##    print(permutation)</span>
+<span class="c1">##    gtest = PermutationGraph(permutation=permutation)</span>
+<span class="c1">##    print(gtest)</span>
+<span class="c1">##    print(g)</span>
+<span class="c1">##    </span>
 
     <span class="c1">#g = CycleGraph(order=12)</span>
 <span class="c1">##    g = RandomGraph(order=7)</span>

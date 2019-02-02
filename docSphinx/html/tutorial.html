@@ -6055,8 +6055,8 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">Transitivity degree: 1.000</span>
 </pre></div>
 </td></tr></table></div>
-<p>As both orientations are transitive indeed, we may conclude that the given random graph instance is actally a permutation graph instance. However, we still need to find its corresponding permutation. We therefore implement a recipee given by Martin Gulombic <a class="reference internal" href="#gul-2004" id="id55">[Gul-2004]</a> p.159.</p>
-<p>We will first <em>fuse” both *og</em> and <em>ogdual</em> orientations above with an epistemic disjunction (see the <a class="reference internal" href="techDoc.html#digraphsTools.omax" title="digraphsTools.omax"><code class="xref py py-func docutils literal"><span class="pre">digraphsTools.omax()</span></code></a> operator), hence, the needed partially determined orientations above.</p>
+<p>As both orientations are transitive indeed, we may conclude that the given random graph is actally a permutation graph instance. However, we still need to find its corresponding permutation. We therefore implement a recipee given by Martin Gulombic <a class="reference internal" href="#gul-2004" id="id55">[Gul-2004]</a> p.159.</p>
+<p>We will first <strong>fuse</strong> both <em>og</em> and <em>ogdual</em> orientations above with an <strong>epistemic disjunction</strong> (see the <a class="reference internal" href="techDoc.html#digraphsTools.omax" title="digraphsTools.omax"><code class="xref py py-func docutils literal"><span class="pre">digraphsTools.omax()</span></code></a> operator, hence, the needed partially determined orientations above).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -6066,8 +6066,8 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">[&#39;v1&#39;, &#39;v2&#39;, &#39;v3&#39;, &#39;v5&#39;, &#39;v4&#39;, &#39;v6&#39;, &#39;v7&#39;, &#39;v8&#39;]</span>
 </pre></div>
 </td></tr></table></div>
-<p>Both <em>g</em> and its dual <em>gdual</em> are oriented in increasing order of the labels of the vertices and we obtain by a net-flows ranking (see the <a class="reference internal" href="techDoc.html#linearOrders.NetFlowsOrder" title="linearOrders.NetFlowsOrder"><code class="xref py py-class docutils literal"><span class="pre">linearOrders.NetFlowsOrder</span></code></a> constructor) a complete linear ordering of the vertices in increasing labels’ numbers (see Line 4 above).</p>
-<p>We reverse now the orientation of the edges in <em>og</em> (see <em>-og</em> in Line 1 below) in order to generate by disjunctive fusion again the inversions that are produced by the permutation we are looking for. Computing again a net-flows ranking will show the correspondingly permuted list of vertices (see Line 4 below).</p>
+<p>Both <em>g</em> and <em>gdual</em> are oriented in increasing order of the labels of the vertices and we obtain by a net-flows ranking rule (see <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a> and the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeNetFlowsRanking" title="digraphs.Digraph.computeNetFlowsRanking"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.computeNetFlowsRanking()</span></code></a> method) a complete linear ordering of the vertices in increasing labels’ numbers (see Line 4 above).</p>
+<p>We reverse now the orientation of the edges in <em>og</em> (see <em>-og</em> in Line 1 below) in order to generate by disjunctive fusion again the inversions that are produced by the permutation we are looking for. Computing again a ranking with the net-flows rule will show the correspondingly permuted list of vertices (see Line 4 below).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -6091,7 +6091,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">[2, 3, 4, 6, 8, 1, 7, 5]</span>
 </pre></div>
 </td></tr></table></div>
-<p>We may check now that this permutation will indeed correctly generate a permutation graph that is isomorphic to the random graph <em>g</em>.</p>
+<p>We may check now that this permutation will correctly generate a permutation graph which is indeed isomorphic to the random graph <em>g</em>.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
