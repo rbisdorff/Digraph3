@@ -6060,7 +6060,9 @@ execution time: 0 sec. and 2 millisec.
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f1gd</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">(</span><span class="n">og</span><span class="p">,</span><span class="n">ogdual</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">FusionDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f1gd</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">(</span><span class="n">og</span><span class="p">,</span><span class="n">ogdual</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">seq1</span> <span class="o">=</span> <span class="n">f1gd</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">seq1</span><span class="p">)</span>
 <span class="go">[&#39;v1&#39;, &#39;v2&#39;, &#39;v3&#39;, &#39;v5&#39;, &#39;v4&#39;, &#39;v6&#39;, &#39;v7&#39;, &#39;v8&#39;]</span>

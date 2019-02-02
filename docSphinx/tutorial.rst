@@ -3830,8 +3830,9 @@ Transitivity degree: 1.000
 
 As both orientations are transitive indeed, we may conclude that the given random graph is actally a permutation graph instance. However, we still need to find its corresponding permutation. We therefore implement a recipee given by Martin Gulombic [Gul-2004]_ p.159.
 
-We will first **fuse** both *og* and *ogdual* orientations above with an **epistemic disjunction** (see the :py:func:`digraphsTools.omax` operator, hence, the needed partially determined orientations above). 
+We will first **fuse** both *og* and *ogdual* orientations above with an **epistemic disjunction** (see the :py:func:`digraphsTools.omax` operator, hence, the needed partially determined orientations above).
 
+>>> from digraphs import FusionDigraph
 >>> f1gd = FusionDigraph(og,ogdual,operator='o-max')
 >>> seq1 = f1gd.computeNetFlowsRanking()
 >>> print(seq1)
