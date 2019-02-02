@@ -27,7 +27,7 @@ from digraphs import *
 from outrankingDigraphs import *
 from sortingDigraphs import *
 
-class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
+class SortingDigraph(BipolarOutrankingDigraph):
     """
     Specialisation of the digraphs.BipolarOutrankingDigraph Class
     for Condorcet based multicriteria sorting of alternatives.
@@ -1402,7 +1402,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         
 class QuantilesSortingDigraph(SortingDigraph):
     """
-    Specialisation of the sortingDigraph Class
+    Specialisation of the root :py:class:`sortingDigraphs.SortingDigraph` class
     for sorting of a large set of alternatives into
     quantiles delimited ordered classes.
       
@@ -3064,7 +3064,7 @@ class QuantilesSortingDigraph(SortingDigraph):
 from performanceQuantiles import PerformanceQuantiles  
 class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles):
     """
-    Specialisation of the sortingDigraph Class
+    Specialisation of the root :py:class:`sortingDigraphs.SortingDigraph` class
     for absolute rating of a new set of decision actions with
     normed performance quantiles gathered from historical data.
       

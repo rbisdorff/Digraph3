@@ -1,0 +1,5 @@
+<map id="inheritance437e03faf7" name="inheritance437e03faf7">
+<area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="46,5,179,31"/>
+<area shape="rect" id="node2" href="#outrankingDigraphs.OutrankingDigraph" target="_top" title="Abstract root class for **outranking digraphs** inheritating methods both from the generic :py:class:`digraphs.Digraph`" alt="" coords="268,31,545,56"/>
+<area shape="rect" id="node3" href="#perfTabs.PerformanceTableau" target="_top" title="In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` class provides a generic **performance table model**. A given object of this class consists in:" alt="" coords="5,55,220,80"/>
+</map>

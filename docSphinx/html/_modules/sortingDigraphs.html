@@ -74,7 +74,7 @@
 <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 
-<div class="viewcode-block" id="SortingDigraph"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph">[docs]</a><span class="k">class</span> <span class="nc">SortingDigraph</span><span class="p">(</span><span class="n">BipolarOutrankingDigraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<div class="viewcode-block" id="SortingDigraph"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph">[docs]</a><span class="k">class</span> <span class="nc">SortingDigraph</span><span class="p">(</span><span class="n">BipolarOutrankingDigraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialisation of the digraphs.BipolarOutrankingDigraph Class</span>
 <span class="sd">    for Condorcet based multicriteria sorting of alternatives.</span>
@@ -1449,7 +1449,7 @@
         
 <div class="viewcode-block" id="QuantilesSortingDigraph"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph">[docs]</a><span class="k">class</span> <span class="nc">QuantilesSortingDigraph</span><span class="p">(</span><span class="n">SortingDigraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Specialisation of the sortingDigraph Class</span>
+<span class="sd">    Specialisation of the root :py:class:`sortingDigraphs.SortingDigraph` class</span>
 <span class="sd">    for sorting of a large set of alternatives into</span>
 <span class="sd">    quantiles delimited ordered classes.</span>
 <span class="sd">      </span>
@@ -3111,7 +3111,7 @@
 <span class="kn">from</span> <span class="nn">performanceQuantiles</span> <span class="k">import</span> <span class="n">PerformanceQuantiles</span>  
 <div class="viewcode-block" id="NormedQuantilesRatingDigraph"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph">[docs]</a><span class="k">class</span> <span class="nc">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">QuantilesSortingDigraph</span><span class="p">,</span><span class="n">PerformanceQuantiles</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Specialisation of the sortingDigraph Class</span>
+<span class="sd">    Specialisation of the root :py:class:`sortingDigraphs.SortingDigraph` class</span>
 <span class="sd">    for absolute rating of a new set of decision actions with</span>
 <span class="sd">    normed performance quantiles gathered from historical data.</span>
 <span class="sd">      </span>

@@ -93,10 +93,10 @@ Basic modules
      .. inheritance-diagram:: perfTabs
      
 * :ref:`outrankingDigraphs-label`
-     Root module for handling outranking digraphs with the main
+     Root module for handling outranking digraphs with the abstract root :py:class:`outrankingDigraphs.OutrankingDigraph` classs and the main
      `BipolarOutrankingDigraph
      <techDoc.html#outrankingDigraphs.BipolarOutrankingDigraph>`_
-     class and its specializations.
+     class. Notice that the outrankingDigraph class defines a hybrid object type, inheriting conjointly from the Digraph class *and* the PerformanceTableau class.
 
      .. inheritance-diagram:: outrankingDigraphs.BipolarOutrankingDigraph
 
@@ -151,11 +151,11 @@ Sorting, rating and ranking tools
 .................................
 
 * :ref:`sortingDigraphs-label`
-     Additional tools for solving sorting problems with the main
-     `SortingDigraph <techDoc.html#sortingDigraphs.QuantilesSortingDigraph>`_
+     Additional tools for solving sorting problems with the root :py:class:`sortingDigraphs.SortingDigraph` class and the main
+     `QuantilesSortingDigraph <techDoc.html#sortingDigraphs.QuantilesSortingDigraph>`_
      class;
 
-     .. inheritance-diagram:: sortingDigraphs.QuantilesSortingDigraph
+     .. inheritance-diagram:: sortingDigraphs.SortingDigraph
      
 * :ref:`linearOrders-label` 
      Additional tools for solving linearly ranking problems with the

@@ -4820,7 +4820,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-1.0&#39;</span><span class="p">)</span></div>
 
-<span class="k">class</span> <span class="nc">_BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">OutrankingDigraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">_BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">OutrankingDigraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the abstract OutrankingDigraph root class for generating</span>
 <span class="sd">    bipolarly-valued outranking digraphs.</span>
@@ -6640,7 +6640,7 @@
 
 
 
-<div class="viewcode-block" id="RandomBipolarOutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.RandomBipolarOutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">RandomBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">BipolarOutrankingDigraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomBipolarOutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.RandomBipolarOutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">RandomBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">BipolarOutrankingDigraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters:</span>
 <span class="sd">        | n := nbr of actions, p := number criteria,</span>
@@ -6688,7 +6688,7 @@
 <span class="sd">    Dummy for obsolete RandomOutrankingDigraph Class</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
         
-<div class="viewcode-block" id="PolarisedOutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.PolarisedOutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">PolarisedOutrankingDigraph</span><span class="p">(</span><span class="n">PolarisedDigraph</span><span class="p">,</span><span class="n">OutrankingDigraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<div class="viewcode-block" id="PolarisedOutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.PolarisedOutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">PolarisedOutrankingDigraph</span><span class="p">(</span><span class="n">PolarisedDigraph</span><span class="p">,</span><span class="n">OutrankingDigraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specilised :py:class:`digraphs.PolarisedDigraph` instance for Outranking Digraphs.</span>
 
@@ -6713,7 +6713,7 @@
             <span class="k">pass</span></div>
 
 
-<div class="viewcode-block" id="EquiSignificanceMajorityOutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.EquiSignificanceMajorityOutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">EquiSignificanceMajorityOutrankingDigraph</span><span class="p">(</span><span class="n">BipolarOutrankingDigraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<div class="viewcode-block" id="EquiSignificanceMajorityOutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.EquiSignificanceMajorityOutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">EquiSignificanceMajorityOutrankingDigraph</span><span class="p">(</span><span class="n">BipolarOutrankingDigraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters:</span>
 <span class="sd">        performanceTableau (fileName of valid py code)</span>
@@ -6814,7 +6814,7 @@
         
             
         
-<div class="viewcode-block" id="OrdinalOutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.OrdinalOutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">OrdinalOutrankingDigraph</span><span class="p">(</span><span class="n">OutrankingDigraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<div class="viewcode-block" id="OrdinalOutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.OrdinalOutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">OrdinalOutrankingDigraph</span><span class="p">(</span><span class="n">OutrankingDigraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters:</span>
 <span class="sd">        performanceTableau (fileName of valid py code)</span>
@@ -7167,7 +7167,7 @@
             <span class="k">return</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="UnanimousOutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.UnanimousOutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">UnanimousOutrankingDigraph</span><span class="p">(</span><span class="n">OutrankingDigraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<div class="viewcode-block" id="UnanimousOutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.UnanimousOutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">UnanimousOutrankingDigraph</span><span class="p">(</span><span class="n">OutrankingDigraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters:</span>
 <span class="sd">        performanceTableau (fileName of valid py code)</span>
@@ -7361,7 +7361,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="NewRobustOutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.NewRobustOutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">NewRobustOutrankingDigraph</span><span class="p">(</span><span class="n">BipolarOutrankingDigraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<div class="viewcode-block" id="NewRobustOutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.NewRobustOutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">NewRobustOutrankingDigraph</span><span class="p">(</span><span class="n">BipolarOutrankingDigraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters:</span>
 <span class="sd">        performanceTableau (fileName of valid py code)</span>
@@ -7473,7 +7473,7 @@
                     
         <span class="k">return</span> <span class="n">relation</span></div>
 
-<div class="viewcode-block" id="RobustOutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.RobustOutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">RobustOutrankingDigraph</span><span class="p">(</span><span class="n">BipolarOutrankingDigraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<div class="viewcode-block" id="RobustOutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.RobustOutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">RobustOutrankingDigraph</span><span class="p">(</span><span class="n">BipolarOutrankingDigraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters:</span>
 <span class="sd">        performanceTableau (fileName of valid py code)</span>
@@ -8067,7 +8067,7 @@
 
     
             
-<div class="viewcode-block" id="DissimilarityOutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.DissimilarityOutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">DissimilarityOutrankingDigraph</span><span class="p">(</span><span class="n">OutrankingDigraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<div class="viewcode-block" id="DissimilarityOutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.DissimilarityOutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">DissimilarityOutrankingDigraph</span><span class="p">(</span><span class="n">OutrankingDigraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters:</span>
 <span class="sd">        performanceTableau (fileName of valid py code)</span>
@@ -8182,7 +8182,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Gamma        :&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Not Gamma    :&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span><span class="p">)</span></div></div>
 
-<div class="viewcode-block" id="MultiCriteriaDissimilarityDigraph"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.MultiCriteriaDissimilarityDigraph">[docs]</a><span class="k">class</span> <span class="nc">MultiCriteriaDissimilarityDigraph</span><span class="p">(</span><span class="n">OutrankingDigraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<div class="viewcode-block" id="MultiCriteriaDissimilarityDigraph"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.MultiCriteriaDissimilarityDigraph">[docs]</a><span class="k">class</span> <span class="nc">MultiCriteriaDissimilarityDigraph</span><span class="p">(</span><span class="n">OutrankingDigraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters:</span>
 <span class="sd">        performanceTableau (fileName of valid py code)</span>

@@ -245,9 +245,9 @@ root <a class="reference external" href="techDoc.html#perfTabs.PerformanceTablea
 </li>
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#outrankingdigraphs-label"><span class="std std-ref">outrankingDigraphs module</span></a></dt>
-<dd><p class="first">Root module for handling outranking digraphs with the main
+<dd><p class="first">Root module for handling outranking digraphs with the abstract root <a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.OutrankingDigraph</span></code></a> classs and the main
 <a class="reference external" href="techDoc.html#outrankingDigraphs.BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>
-class and its specializations.</p>
+class. Notice that the outrankingDigraph class defines a hybrid object type, inheriting conjointly from the Digraph class <em>and</em> the PerformanceTableau class.</p>
 <img src="_images/inheritance-5f2efab968314aed8c965df1f7489c52ed0e7f54.png" alt="Inheritance diagram of outrankingDigraphs.BipolarOutrankingDigraph" usemap="#inheritance6b5a34546c" class="inheritance"/>
 <map id="inheritance6b5a34546c" name="inheritance6b5a34546c">
 <area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="38,4,149,26"/>
@@ -358,17 +358,16 @@ and bipolar outranking digraphs (order
 <ul>
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#sortingdigraphs-label"><span class="std std-ref">sortingDigraphs module</span></a></dt>
-<dd><p class="first">Additional tools for solving sorting problems with the main
-<a class="reference external" href="techDoc.html#sortingDigraphs.QuantilesSortingDigraph">SortingDigraph</a>
+<dd><p class="first">Additional tools for solving sorting problems with the root <a class="reference internal" href="#sortingDigraphs.SortingDigraph" title="sortingDigraphs.SortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.SortingDigraph</span></code></a> class and the main
+<a class="reference external" href="techDoc.html#sortingDigraphs.QuantilesSortingDigraph">QuantilesSortingDigraph</a>
 class;</p>
-<img src="_images/inheritance-a8ae440cd467114f00a60a0acc26b85015cea148.png" alt="Inheritance diagram of sortingDigraphs.QuantilesSortingDigraph" usemap="#inheritance2a9dcc696d" class="inheritance"/>
-<map id="inheritance2a9dcc696d" name="inheritance2a9dcc696d">
-<area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="23,3,90,15"/>
-<area shape="rect" id="node3" href="#outrankingDigraphs.OutrankingDigraph" target="_top" title="Abstract root class for **outranking digraphs** inheritating methods both from the generic :py:class:`digraphs.Digraph`" alt="" coords="134,3,273,15"/>
-<area shape="rect" id="node2" href="#outrankingDigraphs.BipolarOutrankingDigraph" target="_top" title="Specialization of the abstract OutrankingDigraph root class for generating" alt="" coords="297,3,459,15"/>
-<area shape="rect" id="node6" href="#sortingDigraphs.SortingDigraph" target="_top" title="Specialisation of the digraphs.BipolarOutrankingDigraph Class" alt="" coords="483,15,597,28"/>
-<area shape="rect" id="node4" href="#perfTabs.PerformanceTableau" target="_top" title="In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` class provides a generic **performance table model**. A given object of this class consists in:" alt="" coords="3,27,110,40"/>
-<area shape="rect" id="node5" href="#sortingDigraphs.QuantilesSortingDigraph" target="_top" title="Specialisation of the sortingDigraph Class" alt="" coords="621,15,765,28"/>
+<img src="_images/inheritance-e7497ba222863f0c3210090f92513d2eed35806c.png" alt="Inheritance diagram of sortingDigraphs.SortingDigraph" usemap="#inheritance2e8e0e3b90" class="inheritance"/>
+<map id="inheritance2e8e0e3b90" name="inheritance2e8e0e3b90">
+<area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="30,3,115,20"/>
+<area shape="rect" id="node3" href="#outrankingDigraphs.OutrankingDigraph" target="_top" title="Abstract root class for **outranking digraphs** inheritating methods both from the generic :py:class:`digraphs.Digraph`" alt="" coords="172,20,350,36"/>
+<area shape="rect" id="node2" href="#outrankingDigraphs.BipolarOutrankingDigraph" target="_top" title="Specialization of the abstract OutrankingDigraph root class for generating" alt="" coords="381,20,588,36"/>
+<area shape="rect" id="node5" href="#sortingDigraphs.SortingDigraph" target="_top" title="Specialisation of the digraphs.BipolarOutrankingDigraph Class" alt="" coords="619,20,765,36"/>
+<area shape="rect" id="node4" href="#perfTabs.PerformanceTableau" target="_top" title="In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` class provides a generic **performance table model**. A given object of this class consists in:" alt="" coords="3,35,141,51"/>
 </map></dd>
 </dl>
 </li>
@@ -5249,7 +5248,7 @@ neglecting all considerable large performance differences polarisations.</p>
 <dl class="class">
 <dt id="outrankingDigraphs.DissimilarityOutrankingDigraph">
 <em class="property">class </em><code class="descclassname">outrankingDigraphs.</code><code class="descname">DissimilarityOutrankingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#DissimilarityOutrankingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.DissimilarityOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.OutrankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.OutrankingDigraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd>performanceTableau (fileName of valid py code)</dd>
@@ -5301,7 +5300,7 @@ on criterion c.</p>
 <dl class="class">
 <dt id="outrankingDigraphs.EquiSignificanceMajorityOutrankingDigraph">
 <em class="property">class </em><code class="descclassname">outrankingDigraphs.</code><code class="descname">EquiSignificanceMajorityOutrankingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>coalition=None</em>, <em>hasNoVeto=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#EquiSignificanceMajorityOutrankingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.EquiSignificanceMajorityOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd>performanceTableau (fileName of valid py code)</dd>
@@ -5313,7 +5312,7 @@ temporary outranking digraphs with equisignificant criteria.</p>
 <dl class="class">
 <dt id="outrankingDigraphs.MultiCriteriaDissimilarityDigraph">
 <em class="property">class </em><code class="descclassname">outrankingDigraphs.</code><code class="descname">MultiCriteriaDissimilarityDigraph</code><span class="sig-paren">(</span><em>perfTab=None</em>, <em>filePerfTab=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#MultiCriteriaDissimilarityDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.MultiCriteriaDissimilarityDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.OutrankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.OutrankingDigraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd>performanceTableau (fileName of valid py code)</dd>
@@ -5325,7 +5324,7 @@ temporary multiple criteria based dissimilarity graphs.</p>
 <dl class="class">
 <dt id="outrankingDigraphs.NewRobustOutrankingDigraph">
 <em class="property">class </em><code class="descclassname">outrankingDigraphs.</code><code class="descname">NewRobustOutrankingDigraph</code><span class="sig-paren">(</span><em>filePerfTab=None</em>, <em>Debug=False</em>, <em>hasNoVeto=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#NewRobustOutrankingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.NewRobustOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd>performanceTableau (fileName of valid py code)</dd>
@@ -5337,7 +5336,7 @@ new robustness anaylsis.</p>
 <dl class="class">
 <dt id="outrankingDigraphs.OrdinalOutrankingDigraph">
 <em class="property">class </em><code class="descclassname">outrankingDigraphs.</code><code class="descname">OrdinalOutrankingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>coalition=None</em>, <em>hasNoVeto=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#OrdinalOutrankingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.OrdinalOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.OutrankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.OutrankingDigraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd>performanceTableau (fileName of valid py code)</dd>
@@ -5637,7 +5636,7 @@ res = ((netdet,sigleton,dom,absorb)+)</p>
 <dl class="class">
 <dt id="outrankingDigraphs.PolarisedOutrankingDigraph">
 <em class="property">class </em><code class="descclassname">outrankingDigraphs.</code><code class="descname">PolarisedOutrankingDigraph</code><span class="sig-paren">(</span><em>digraph=None</em>, <em>level=None</em>, <em>KeepValues=True</em>, <em>AlphaCut=False</em>, <em>StrictCut=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#PolarisedOutrankingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.PolarisedOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#digraphs.PolarisedDigraph" title="digraphs.PolarisedDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.PolarisedDigraph</span></code></a>, <a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.OutrankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#digraphs.PolarisedDigraph" title="digraphs.PolarisedDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.PolarisedDigraph</span></code></a>, <a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.OutrankingDigraph</span></code></a></p>
 <p>Specilised <a class="reference internal" href="#digraphs.PolarisedDigraph" title="digraphs.PolarisedDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.PolarisedDigraph</span></code></a> instance for Outranking Digraphs.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
@@ -5648,7 +5647,7 @@ res = ((netdet,sigleton,dom,absorb)+)</p>
 <dl class="class">
 <dt id="outrankingDigraphs.RandomBipolarOutrankingDigraph">
 <em class="property">class </em><code class="descclassname">outrankingDigraphs.</code><code class="descname">RandomBipolarOutrankingDigraph</code><span class="sig-paren">(</span><em>numberOfActions=7, numberOfCriteria=7, weightDistribution='random', weightScale=[1, 10], commonScale=[0.0, 100.0], commonThresholds=[(10.0, 0.0), (20.0, 0.0), (80.0, 0.0), (80.0, 0.0)], commonMode=('uniform', None, None), hasBipolarVeto=True, Normalized=False, seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#RandomBipolarOutrankingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.RandomBipolarOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd><div class="first last line-block">
@@ -5671,7 +5670,7 @@ Digraphs from random performance tableaux.</p>
 <dl class="class">
 <dt id="outrankingDigraphs.RobustOutrankingDigraph">
 <em class="property">class </em><code class="descclassname">outrankingDigraphs.</code><code class="descname">RobustOutrankingDigraph</code><span class="sig-paren">(</span><em>filePerfTab=None</em>, <em>Debug=False</em>, <em>hasNoVeto=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#RobustOutrankingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.RobustOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd>performanceTableau (fileName of valid py code)</dd>
@@ -5840,7 +5839,7 @@ neglecting all considerable large performance differences polarisations.</p>
 <dl class="class">
 <dt id="outrankingDigraphs.UnanimousOutrankingDigraph">
 <em class="property">class </em><code class="descclassname">outrankingDigraphs.</code><code class="descname">UnanimousOutrankingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>coalition=None</em>, <em>hasNoVeto=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#UnanimousOutrankingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.UnanimousOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.OutrankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.OutrankingDigraph</span></code></a></p>
 <dl class="docutils">
 <dt>Parameters:</dt>
 <dd>performanceTableau (fileName of valid py code)</dd>
@@ -6516,7 +6515,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph">
 <em class="property">class </em><code class="descclassname">sortingDigraphs.</code><code class="descname">NormedQuantilesRatingDigraph</code><span class="sig-paren">(</span><em>argPerfQuantiles=None</em>, <em>newData=None</em>, <em>quantiles=None</em>, <em>hasNoVeto=False</em>, <em>valuationScale=(-1</em>, <em>1)</em>, <em>rankingRule='best'</em>, <em>WithSorting=False</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrOfCPUs=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.QuantilesSortingDigraph</span></code></a>, <a class="reference internal" href="#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a></p>
-<p>Specialisation of the sortingDigraph Class
+<p>Specialisation of the root <a class="reference internal" href="#sortingDigraphs.SortingDigraph" title="sortingDigraphs.SortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.SortingDigraph</span></code></a> class
 for absolute rating of a new set of decision actions with
 normed performance quantiles gathered from historical data.</p>
 <div class="admonition note">
@@ -6725,7 +6724,7 @@ the sum of inflows minus the outflows.</p>
 <dt id="sortingDigraphs.QuantilesSortingDigraph">
 <em class="property">class </em><code class="descclassname">sortingDigraphs.</code><code class="descname">QuantilesSortingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>limitingQuantiles=None</em>, <em>LowerClosed=False</em>, <em>PrefThresholds=True</em>, <em>hasNoVeto=False</em>, <em>outrankingType='bipolar'</em>, <em>WithSortingRelation=True</em>, <em>CompleteOutranking=False</em>, <em>StoreSorting=False</em>, <em>CopyPerfTab=False</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrCores=None</em>, <em>nbrOfProcesses=None</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#QuantilesSortingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#sortingDigraphs.SortingDigraph" title="sortingDigraphs.SortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.SortingDigraph</span></code></a></p>
-<p>Specialisation of the sortingDigraph Class
+<p>Specialisation of the root <a class="reference internal" href="#sortingDigraphs.SortingDigraph" title="sortingDigraphs.SortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.SortingDigraph</span></code></a> class
 for sorting of a large set of alternatives into
 quantiles delimited ordered classes.</p>
 <div class="admonition note">
@@ -6882,7 +6881,7 @@ the high category limit.</p>
 <dl class="class">
 <dt id="sortingDigraphs.SortingDigraph">
 <em class="property">class </em><code class="descclassname">sortingDigraphs.</code><code class="descname">SortingDigraph</code><span class="sig-paren">(</span><em>argPerfTab=None</em>, <em>argProfile=None</em>, <em>scaleSteps=5</em>, <em>minValuation=-100.0</em>, <em>maxValuation=100.0</em>, <em>isRobust=False</em>, <em>hasNoVeto=False</em>, <em>LowerClosed=True</em>, <em>StoreSorting=True</em>, <em>Threading=False</em>, <em>tempDir=None</em>, <em>nbrCores=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#SortingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.SortingDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a>, <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a></p>
 <p>Specialisation of the digraphs.BipolarOutrankingDigraph Class
 for Condorcet based multicriteria sorting of alternatives.</p>
 <p>Besides a valid PerformanceTableau instance we require a sorting profile,
