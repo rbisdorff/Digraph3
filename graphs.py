@@ -770,8 +770,8 @@ class Graph(object):
         is converted into an arc oriented in increasing order of the adjacent vertices' numbers.
         If self is a PermutationGraph instance, the orientation will be transitive.
 
-        "Parameter*: PartiallyDetermined: {True|False by default] converts if *True* all absent
-        edges in the graph into indeterminate symmetric relations in the resulting digraph.
+        The parameter *PartiallyDetermined*: {True|False by default], converts if *True* all absent
+        edges of the graph into indeterminate symmetric relations in the resulting digraph.
      
         >>> g = RandomGraph(order=6,seed=101)
         >>> dg = g.computeOrientedDigraph()
