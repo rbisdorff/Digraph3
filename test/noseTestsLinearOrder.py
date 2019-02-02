@@ -13,14 +13,14 @@ from outrankingDigraphs import *
 from linearOrders import *
 from decimal import Decimal
 
-def testExtendedPrudentDigraph():
-    print('*-------- Testing ExtendedPrudentDigraph class -------')
-    t = RandomCBPerformanceTableau(numberOfActions=13)
-    t.save('testExtPrud')
-    g = BipolarOutrankingDigraph(t)
-    level = g.computePrudentBetaLevel(Debug=True)
-    gep = ExtendedPrudentDigraph(g,prudentBetaLevel=level,Debug=True)
-    gep.showRelationTable()
+##def testExtendedPrudentDigraph():
+##    print('*-------- Testing ExtendedPrudentDigraph class -------')
+##    t = RandomCBPerformanceTableau(numberOfActions=13)
+##    t.save('testExtPrud')
+##    g = BipolarOutrankingDigraph(t)
+##    level = g.computePrudentBetaLevel(Debug=True)
+##    gep = ExtendedPrudentDigraph(g,prudentBetaLevel=level,Debug=True)
+##    gep.showRelationTable()
 
 def testKemenyOrdering():
     print('*-------- Testing KemenyOrder class -------')

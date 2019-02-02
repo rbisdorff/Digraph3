@@ -45,7 +45,7 @@ from decimal import Decimal
 
 #--------- Partial Extended Prudent Digraph class ---------
 
-class ExtendedPrudentDigraph(Digraph):
+class _ExtendedPrudentDigraph(Digraph):
     """
     Instantiates the associated extended prudent
     codual of the digraph enstance.
