@@ -29,7 +29,7 @@ This documentation, also available on the `Read The Docs <https://readthedocs.or
 
 **Parts of the documentation:**
 
-The documentation contains, first, a set of tutorials introducing the main objects like digraphs, outranking digraphs and performance tableaux. There is also a tutorial provided on undirected graphs. Some tutorials are problem oriented and show how to compute the winner of an election, how to build a best choice recommendation, or how to linearly rank or rate with multiple incommensurable performance criteria. The last tutorials concern more specifically operational aspects for computating maximal independent sets (MISs) and kernels in graphs and digraphs.
+The documentation contains, first, a set of tutorials introducing the main objects like digraphs, outranking digraphs and performance tableaux. There is also a tutorial provided on undirected graphs. Some tutorials are problem oriented and show how to compute the winner of an election, how to build a best choice recommendation, or how to linearly rank or rate with multiple incommensurable performance criteria. The next two tutorials concern more specifically operational aspects of computing maximal independent sets (MISs) and kernels in graphs and digraphs. The last tutorial, concerning the characterization of permutation graphs, eventually shows the usefulness of the bipolar digraph fusion operator.
 
 .. toctree:: tutorial
    :maxdepth: 2

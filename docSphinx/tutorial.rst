@@ -3881,7 +3881,7 @@ fdp -Tpng permutationGraph4335.dot -o permutationGraph4335.png
 
     *Figure* 16: Permutation graph obtained from [2, 3, 4, 6, 8, 1, 7, 5]
 
-And we recover an isomorphic copy of the original random graph (see Fig. 15).
+And we recover indeed an isomorphic copy of the original random graph (see Fig. 15).
 
 Links and appendices
 --------------------
