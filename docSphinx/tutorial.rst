@@ -3839,14 +3839,14 @@ We will first *fuse" both *og* and *ogdual* orientations above with an epistemic
 
 Both *g* and its dual *gdual* are oriented in increasing order of the labels of the vertices and we obtain by a net-flows ranking (see the :py:class:`linearOrders.NetFlowsOrder` constructor) a complete linear ordering of the vertices in increasing labels' numbers (see Line 4 above).
 
-We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) in order to generate by disjunctive fusion again the inversions that are produced by the permutation we are looking for. Computing again a net-flows ranking will show the trquired inversions (see Line 4 below).
+We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) in order to generate by disjunctive fusion again the inversions that are produced by the permutation we are looking for. Computing again a net-flows ranking will show the correspondingly permuted list of vertices (see Line 4 below).
 
 >>> f2gd = FusionDigraph((-og),ogdual,operator 'o-max')
 >>> seq2 = f2gd.computeNetFlowsRanking()
 >>> print(seq2)
 ['v2', 'v3', 'v4', 'v8', 'v6', 'v1', 'v7', 'v5']
 
-We may notice that vertex 'v1' is hence put at position 6, vertex 'v2' at position 1, etc. We generate these positions for all vertices by using the 'id' attribute of the vertex definitions and obtain thus the required permutation (see Line 5 below).
+Vertex 'v1' is hence put at position 6, vertex 'v2' at position 1, ... etc. We generate these positions for all vertices by using the 'id' attribute of the vertex definitions and obtain thus the required permutation (see Line 5 below).
 
 >>> permutation = [0 for j in range(g.order)]
 >>> for j in range(g.order):
