@@ -8714,8 +8714,18 @@ class Digraph(object):
 
     def omax(self,L, Debug=False):
         """
-        Epistemic disjunction for bipolar outranking characteristics
-        computation.
+        Epistemic **disjunction** for bipolar outranking characteristics
+        computation: Med is the valuation domain median and L is a list of
+        r-valued statement characteristics.
+
+        With **positive** arguments, omax operates a **max**,
+        with **negative** arguments, a **min**.
+
+        The mixture of **both positive and negative** arguments results in
+        an **indeterminate** value.
+
+        Likewise to a mean, the *omax* operator is not associative. We therefore first assemble all positive, negative and null terms
+        and operate omax on the three assembled arguments.
         """
         Med = self.valuationdomain['med']
         terms = list(L)
@@ -8745,8 +8755,18 @@ class Digraph(object):
 
     def omin(self,L, Debug=False):
         """
-        Epistemic conjunction for bipolar outranking characteristics
-        computation.
+        Epistemic **conjunction** of a list L of bipolar outranking characteristics.
+        Med is the given valuation domain median.
+
+        With **positive** arguments, omax operates a **min**,
+        with **negative** arguments, a **max**.
+
+        The mixture of both **positive and negative** arguments results
+        in an **indeterminate** value.
+
+        Likewise to a mean, the *omin* operator is not associative. We therefore first assemble all positive, negative and null terms
+        and operate omin on the three assembled arguments. 
+
         """
         Med = self.valuationdomain['med']
         terms = list(L)

@@ -61,7 +61,7 @@ def all_perms(str):
 # epistemic or symmetric disjunction operator
 def omax(Med,L, Debug=False):
     """
-    epistemic **disjunction** for bipolar outranking characteristics
+    Epistemic **disjunction** for bipolar outranking characteristics
     computation: Med is the valuation domain median and L is a list of
     r-valued statement characteristics.
 
