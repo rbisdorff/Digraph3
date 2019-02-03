@@ -839,7 +839,46 @@ class Graph(object):
         g.gamma = g.gammaSets()
         g.notGamma = g.notGammaSets()
         g.transitivityDegree = g.computeTransitivityDegree()
-        return g      
+        return g
+
+    def computePermutation(self,Debug=True):
+        """
+        Tests whether the graph instance *self* is a permutation graph
+        and renders, in case the test is positive,
+        the corresponding permutation.
+        """
+        from digraphs import FusionDigraph
+        og = self.computeOrientedDigraph(PartiallyDetermined=True)
+        odt = og.computeTransitivityDegree()
+        if odt < Decimal('0.9999999999'):
+            if Debug:
+                print('Tranditivity degree %.3f < 1' % odt)
+                print('The graph instance is not a permutation graph')
+            return
+        gd = -self
+        ogd = gd.computeOrientedDigraph(PartiallyDetermined=True)
+        ogdt = ogd.computeTransitivityDegree()
+        if ogdt < Decimal('0.99999999999'):
+            if Debug:
+                print('Dual tranditivity degree %.3f < 1' % ogdt)
+                print('The graph instance is not a permutation graph')
+            return
+        
+        f1 = FusionDigraph(og,ogd,'o-max')
+        f2 = FusionDigraph((-og),ogd,'o-max')
+        seq1 = f1.computeNetFlowsRanking()
+        if Debug:
+            print(seq1)
+        seq2 = f2.computeNetFlowsRanking()
+        if Debug:
+            print(seq2)
+        permutation = [0 for j in range(self.order)]
+        for j in range(self.order):
+            x = self.vertices[seq1[j]]['id']
+            permutation[j] = self.vertices[seq2[x-1]]['id']
+        if Debug:
+            print(permutation)
+        return permutation
 
     def computeSize(self):
         """
@@ -3442,7 +3481,7 @@ class PermutationGraph(Graph):
         vertices = OrderedDict()
         order = len(permutation)
         for i in range(1,order+1):
-            vertices[str(i)] = {'name': str(i)}
+            vertices[str(i)] = {'id':i,'name': str(i)}
         self.vertices = vertices
         self.order = len(vertices)
         self.permutation = permutation
@@ -3560,13 +3599,14 @@ if __name__ == '__main__':
 ##    rgd = -rg
 ##    print(rgd)
 ##    
-    g = RandomGraph(order=8,seed=4335)
+    g = RandomGraph(order=8,seed=4334)
     og = g.computeOrientedDigraph(PartiallyDetermined=True)
     print('Transitivity degree: %.3f' % og.transitivityDegree)
     gd = -g
     ogd = gd.computeOrientedDigraph(PartiallyDetermined=True)
     print('Dual transitivity degree: %.3f' % ogd.transitivityDegree)
-    from digraphs import FusionDigraph
+    print(g.computePermutation(Debug=False))
+
 ##    from linearOrders import LinearOrder
 ##    f1gd = FusionDigraph(og,ogd,'o-max')
 ##    s1 = LinearOrder.computeOrder(f1gd)

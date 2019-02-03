@@ -886,7 +886,46 @@
         <span class="n">g</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="n">g</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
         <span class="n">g</span><span class="o">.</span><span class="n">transitivityDegree</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">g</span>      </div>
+        <span class="k">return</span> <span class="n">g</span></div>
+
+<div class="viewcode-block" id="Graph.computePermutation"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computePermutation">[docs]</a>    <span class="k">def</span> <span class="nf">computePermutation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Tests whether the graph instance *self* is a permutation graph</span>
+<span class="sd">        and renders, in case the test is positive,</span>
+<span class="sd">        the corresponding permutation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">FusionDigraph</span>
+        <span class="n">og</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeOrientedDigraph</span><span class="p">(</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">odt</span> <span class="o">=</span> <span class="n">og</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">odt</span> <span class="o">&lt;</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.9999999999&#39;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Tranditivity degree </span><span class="si">%.3f</span><span class="s1"> &lt; 1&#39;</span> <span class="o">%</span> <span class="n">odt</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The graph instance is not a permutation graph&#39;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="n">gd</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span>
+        <span class="n">ogd</span> <span class="o">=</span> <span class="n">gd</span><span class="o">.</span><span class="n">computeOrientedDigraph</span><span class="p">(</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">ogdt</span> <span class="o">=</span> <span class="n">ogd</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">ogdt</span> <span class="o">&lt;</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.99999999999&#39;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dual tranditivity degree </span><span class="si">%.3f</span><span class="s1"> &lt; 1&#39;</span> <span class="o">%</span> <span class="n">ogdt</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The graph instance is not a permutation graph&#39;</span><span class="p">)</span>
+            <span class="k">return</span>
+        
+        <span class="n">f1</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">(</span><span class="n">og</span><span class="p">,</span><span class="n">ogd</span><span class="p">,</span><span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
+        <span class="n">f2</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">((</span><span class="o">-</span><span class="n">og</span><span class="p">),</span><span class="n">ogd</span><span class="p">,</span><span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
+        <span class="n">seq1</span> <span class="o">=</span> <span class="n">f1</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">seq1</span><span class="p">)</span>
+        <span class="n">seq2</span> <span class="o">=</span> <span class="n">f2</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">seq2</span><span class="p">)</span>
+        <span class="n">permutation</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">)]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">seq1</span><span class="p">[</span><span class="n">j</span><span class="p">]][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+            <span class="n">permutation</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">seq2</span><span class="p">[</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">permutation</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">permutation</span></div>
 
 <div class="viewcode-block" id="Graph.computeSize"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeSize">[docs]</a>    <span class="k">def</span> <span class="nf">computeSize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -3489,7 +3528,7 @@
         <span class="n">vertices</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
         <span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">permutation</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">order</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-            <span class="n">vertices</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)}</span>
+            <span class="n">vertices</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span> <span class="o">=</span> <span class="n">vertices</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vertices</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">permutation</span> <span class="o">=</span> <span class="n">permutation</span>
@@ -3607,13 +3646,14 @@
 <span class="c1">##    rgd = -rg</span>
 <span class="c1">##    print(rgd)</span>
 <span class="c1">##    </span>
-    <span class="n">g</span> <span class="o">=</span> <span class="n">RandomGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">4335</span><span class="p">)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">RandomGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">4334</span><span class="p">)</span>
     <span class="n">og</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrientedDigraph</span><span class="p">(</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Transitivity degree: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">og</span><span class="o">.</span><span class="n">transitivityDegree</span><span class="p">)</span>
     <span class="n">gd</span> <span class="o">=</span> <span class="o">-</span><span class="n">g</span>
     <span class="n">ogd</span> <span class="o">=</span> <span class="n">gd</span><span class="o">.</span><span class="n">computeOrientedDigraph</span><span class="p">(</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dual transitivity degree: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">ogd</span><span class="o">.</span><span class="n">transitivityDegree</span><span class="p">)</span>
-    <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">FusionDigraph</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computePermutation</span><span class="p">(</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
 <span class="c1">##    from linearOrders import LinearOrder</span>
 <span class="c1">##    f1gd = FusionDigraph(og,ogd,&#39;o-max&#39;)</span>
 <span class="c1">##    s1 = LinearOrder.computeOrder(f1gd)</span>

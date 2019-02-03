@@ -3856,7 +3856,7 @@ Vertex 'v1' is hence put at position 6, vertex 'v2' at position 1, ... etc. We g
 >>> print(permutation)
 [2, 3, 4, 6, 8, 1, 7, 5]
 
-We may check now that this permutation will correctly generate a permutation graph which is indeed isomorphic to the random graph *g*.
+We may check finally that this permutation will correctly generate a permutation graph which is indeed isomorphic to the random graph *g*.
 
 >>> gtest = PermutationGraph(permutation=[2, 3, 4, 6, 8, 1, 7, 5])
 >>> gtest

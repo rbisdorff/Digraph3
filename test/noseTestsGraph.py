@@ -188,7 +188,7 @@ def testPermutationGraphs():
     g.exportGraphViz()
     rg = RandomPermutationGraph(order=6,seed=100)
     print(rg)
-    print('permutation:',rg.permutation)
+    print('permutation:',rg.computePermutation())
     dg = g.transitiveOrientation()
     print(dg)
     dg.exportGraphViz()

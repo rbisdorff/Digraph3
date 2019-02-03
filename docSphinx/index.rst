@@ -34,7 +34,7 @@ The documentation contains, first, a set of tutorials introducing the main objec
 .. toctree:: tutorial
    :maxdepth: 2
 
-The second part concerns the reference manual of the collection of provided Python3 modules, classes and methods. The main classes in this collection are the :py:class:`digraphs.Digraph` overall root class, the :py:class:`perfTabs.PerformanceTableau` class and the :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class. The technical documentation also provides direkt insight into the complete source code of all public modules, classes and methods.
+The second part concerns the reference manual of the collection of provided Python3 modules, classes and methods. The main classes in this collection are the :py:class:`digraphs.Digraph` overall root class, the :py:class:`perfTabs.PerformanceTableau` class and the :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class. The technical documentation also provides insight into the complete source code of all modules, classes and methods.
 
 .. toctree:: techDoc
    :maxdepth: 2
