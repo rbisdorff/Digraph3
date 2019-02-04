@@ -3750,7 +3750,20 @@ fdp -Tpng permutationGraph.dot -o permutationGraph.png
     :width: 300 px
     :align: center
 
-    *Figure* 13: The default permutation graph
+    *Figure* 13a: The default permutation graph
+
+The given permutation may as well be drawn.
+>>> g.exportPermutationGraphViz()
+*---- exporting a dot file for GraphViz tools ---------*
+Exporting to perm_permutationGraph.dot
+neato -n -Tpng perm_permutationGraph.dot -o perm_permutationGraph.png
+
+.. Figure:: perm_permutationGraph.png
+    :alt: The permutation of the vertices
+    :width: 500 px
+    :align: center
+
+    *Figure* 13b: The permutation of the vertices 
 
 Properties of permutation graphs
 ................................
