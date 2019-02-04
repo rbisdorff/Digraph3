@@ -49,7 +49,7 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">  Digraph3 graphs.py module</span>
 <span class="sd">  Python3.3+ computing resources</span>
-<span class="sd">  Copyright (C)  2011-2015 Raymond Bisdorff</span>
+<span class="sd">  Copyright (C)  2011-2019 Raymond Bisdorff</span>
 
 <span class="sd">    This program is free software; you can redistribute it and/or modify</span>
 <span class="sd">    it under the terms of the GNU General Public License as published by</span>
@@ -64,6 +64,8 @@
 <span class="sd">    You should have received a copy of the GNU General Public License along</span>
 <span class="sd">    with this program; if not, write to the Free Software Foundation, Inc.,</span>
 <span class="sd">    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</span>
+
+<span class="sd">    See :ref:&#39;_Graphs-Tutorial-label`.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="c1">#############################################</span>
 <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
@@ -1042,7 +1044,7 @@
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">dotName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;strict graph G {</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;graph [ bgcolor = cornsilk, fontname = &quot;Helvetica-Oblique&quot;,</span><span class="se">\n</span><span class="s1"> fontsize = 12,</span><span class="se">\n</span><span class="s1"> label = &quot;&#39;</span><span class="p">)</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">nGraphs Python module (graphviz), R. Bisdorff, 2015&quot;, size=&quot;&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">nGraphs Python module (graphviz), R. Bisdorff, 2019&quot;, size=&quot;&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">graphSize</span><span class="p">),</span><span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&quot;];</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
             <span class="k">try</span><span class="p">:</span>
@@ -1163,7 +1165,7 @@
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">dotName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;strict digraph G {</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;graph [ bgcolor = cornsilk, fontname = &quot;Helvetica-Oblique&quot;,</span><span class="se">\n</span><span class="s1"> fontsize = 12,</span><span class="se">\n</span><span class="s1"> label = &quot;&#39;</span><span class="p">)</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">nGraphs Python module (graphviz), R. Bisdorff, 2015&quot;, size=&quot;&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">nGraphs Python module (graphviz), R. Bisdorff, 2019&quot;, size=&quot;&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">graphSize</span><span class="p">),</span><span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&quot;];</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="c1"># horizontally positioned initial nodes at line 100</span>
         <span class="c1"># horinzontal space = 75</span>
@@ -2825,7 +2827,7 @@
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">dotName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;strict graph G {</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;graph [ bgcolor = cornsilk, fontname = &quot;Helvetica-Oblique&quot;,</span><span class="se">\n</span><span class="s1"> fontsize = 12,</span><span class="se">\n</span><span class="s1"> label = &quot;&#39;</span><span class="p">)</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">nGraphs Python module (graphviz), R. Bisdorff, 2015&quot;, size=&quot;&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">nGraphs Python module (graphviz), R. Bisdorff, 2019&quot;, size=&quot;&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">graphSize</span><span class="p">),</span><span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&quot;];</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
             <span class="k">try</span><span class="p">:</span>
@@ -2992,7 +2994,7 @@
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">dotName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;strict graph G {</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;graph [ bgcolor = cornsilk, fontname = &quot;Helvetica-Oblique&quot;,</span><span class="se">\n</span><span class="s1"> fontsize = 12,</span><span class="se">\n</span><span class="s1"> label = &quot;&#39;</span><span class="p">)</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">nGraphs Python module (graphviz), R. Bisdorff, 2015&quot;, size=&quot;&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">nGraphs Python module (graphviz), R. Bisdorff, 2019&quot;, size=&quot;&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">graphSize</span><span class="p">),</span><span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&quot;];</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
             <span class="k">try</span><span class="p">:</span>
@@ -3411,7 +3413,7 @@
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">dotName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;strict graph G {</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;graph [ bgcolor = cornsilk, fontname = &quot;Helvetica-Oblique&quot;,</span><span class="se">\n</span><span class="s1"> fontsize = 12,</span><span class="se">\n</span><span class="s1"> label = &quot;&#39;</span><span class="p">)</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">nGraphs Python module (graphviz), R. Bisdorff, 2015&quot;, size=&quot;&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">nGraphs Python module (graphviz), R. Bisdorff, 2019&quot;, size=&quot;&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">graphSize</span><span class="p">),</span><span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&quot;];</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
             <span class="k">try</span><span class="p">:</span>
@@ -3747,7 +3749,7 @@
 <span class="c1">##        fo = open(dotName,&#39;w&#39;)</span>
 <span class="c1">##        fo.write(&#39;strict digraph G {\n&#39;)</span>
 <span class="c1">##        fo.write(&#39;graph [ bgcolor = cornsilk, fontname = &quot;Helvetica-Oblique&quot;,\n fontsize = 12,\n label = &quot;&#39;)</span>
-<span class="c1">##        fo.write(&#39;\\nGraphs Python module (graphviz), R. Bisdorff, 2015&quot;, size=&quot;&#39;)</span>
+<span class="c1">##        fo.write(&#39;\\nGraphs Python module (graphviz), R. Bisdorff, 2019&quot;, size=&quot;&#39;)</span>
 <span class="c1">##        fo.write(graphSize),fo.write(&#39;&quot;];\n&#39;)</span>
 <span class="c1">##        # horizontally positioned initial nodes at line 100</span>
 <span class="c1">##        # horinzontal space = 75</span>

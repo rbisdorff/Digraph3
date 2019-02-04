@@ -23,7 +23,7 @@ Tutorials of the Digraph3 resources
 	:depth: 1
 	:local:
 
-.. _Digraphs-tutorial-label:
+.. _Digraphs-Tutorial-label:
 
 Working with the *Digraph3* software resources
 -----------------------------------------------
@@ -1832,7 +1832,7 @@ Back to :ref:`Tutorial-label`
    See also the lecture 7 notes from the MICS Algorithmic Decision Theory course: [ADT-L7]_.
 
 
-.. _Ranking-tutorial-label:
+.. _Ranking-Tutorial-label:
 
 Ranking with multiple incommensurable criteria
 ----------------------------------------------
@@ -3620,7 +3620,7 @@ dot -Grankdir=BT -Tpng bestWorstOrientation.dot -o bestWorstOrientation.png
 
    *Figure 11*: The strict outranking digraph oriented by its best and worst choice recommendations 
 
-The grey arrows in Fig.11, like the one between actions 'a4' and 'a1', represent indeterminate preferential situations. Action 'a1' appears hence to be rather incomparable to all the other, except action 'a7'. It may be interesting to compare this result with a Copeland ranking of the underlying performance tableau (see :ref:`Ranking-tutorial-label`).
+The grey arrows in Fig.11, like the one between actions 'a4' and 'a1', represent indeterminate preferential situations. Action 'a1' appears hence to be rather incomparable to all the other, except action 'a7'. It may be interesting to compare this result with a Copeland ranking of the underlying performance tableau (see :ref:`Ranking-Tutorial-label`).
 
 >>> g.showHTMLPerformanceHeatmap(colorLevels=5, ndigits=0,
 ...          Correlations=True, rankingRule='Copeland')
@@ -3853,7 +3853,7 @@ We will first **fuse** both *og* and *ogdual* orientations above with an **epist
 >>> print(seq1)
 ['v1', 'v2', 'v3', 'v5', 'v4', 'v6', 'v7', 'v8']
 
-Both *g* and *gdual* are oriented in increasing order of the keyss of the vertices and we obtain by the Copeland ranking rule (see :ref:`Ranking-tutorial-label` and the :py:func:`digraphs.Digraph.computeCopelandRanking` method) a complete linear ordering of the vertices in increasing vertices' keys (see Line 5 above).
+Both *g* and *gdual* are oriented in increasing order of the keyss of the vertices and we obtain by the Copeland ranking rule (see :ref:`Ranking-Tutorial-label` and the :py:func:`digraphs.Digraph.computeCopelandRanking` method) a complete linear ordering of the vertices in increasing vertices' keys (see Line 5 above).
 
 We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) in order to generate by disjunctive fusion again the inversions that are produced by the permutation we are looking for. Computing again a ranking with the Copeland rule will show the correspondingly permuted list of vertices (see Line 4 below).
 

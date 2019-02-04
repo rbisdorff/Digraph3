@@ -2,7 +2,7 @@
 """
   Digraph3 graphs.py module
   Python3.3+ computing resources
-  Copyright (C)  2011-2015 Raymond Bisdorff
+  Copyright (C)  2011-2019 Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,6 +17,8 @@
     You should have received a copy of the GNU General Public License along
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+    See :ref:'_Graphs-Tutorial-label`.
 """
 #############################################
 from decimal import Decimal
@@ -995,7 +997,7 @@ class Graph(object):
         fo = open(dotName,'w')
         fo.write('strict graph G {\n')
         fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2015", size="')
+        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2019", size="')
         fo.write(graphSize),fo.write('"];\n')
         for i in range(n):
             try:
@@ -1116,7 +1118,7 @@ class Graph(object):
         fo = open(dotName,'w')
         fo.write('strict digraph G {\n')
         fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2015", size="')
+        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2019", size="')
         fo.write(graphSize),fo.write('"];\n')
         # horizontally positioned initial nodes at line 100
         # horinzontal space = 75
@@ -2778,7 +2780,7 @@ class Q_Coloring(Graph):
         fo = open(dotName,'w')
         fo.write('strict graph G {\n')
         fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2015", size="')
+        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2019", size="')
         fo.write(graphSize),fo.write('"];\n')
         for i in range(n):
             try:
@@ -2945,7 +2947,7 @@ class IsingModel(Graph):
         fo = open(dotName,'w')
         fo.write('strict graph G {\n')
         fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2015", size="')
+        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2019", size="')
         fo.write(graphSize),fo.write('"];\n')
         for i in range(n):
             try:
@@ -3364,7 +3366,7 @@ class MISModel(Graph):
         fo = open(dotName,'w')
         fo.write('strict graph G {\n')
         fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2015", size="')
+        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2019", size="')
         fo.write(graphSize),fo.write('"];\n')
         for i in range(n):
             try:
@@ -3700,7 +3702,7 @@ class PermutationGraph(Graph):
 ##        fo = open(dotName,'w')
 ##        fo.write('strict digraph G {\n')
 ##        fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-##        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2015", size="')
+##        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2019", size="')
 ##        fo.write(graphSize),fo.write('"];\n')
 ##        # horizontally positioned initial nodes at line 100
 ##        # horinzontal space = 75
