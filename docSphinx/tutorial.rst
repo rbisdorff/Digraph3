@@ -3755,7 +3755,7 @@ fdp -Tpng permutationGraph.dot -o permutationGraph.png
 Properties of permutation graphs
 ................................
 
-A permutation graph is **transitively orientable**. The :py:func:`graphs.PermutationGraph.transitiveOrientation` method renders a digraph where each edge of the permutation graph is converted into an arc oriented in increasing order of the adjacent vertices' label numbers (see [Gul-2004]_).
+A permutation graph is **transitively orientable**. The :py:func:`graphs.PermutationGraph.transitiveOrientation` method renders a digraph where each edge of the permutation graph is converted into an arc oriented in increasing alphabetic order of the adjacent vertices' keys (see [Gul-2004]_).
 
 This orientation is always transitive and delivers a *weak ordering* of the vertices.
     
@@ -3770,8 +3770,8 @@ Valuation domain : [-1.00 - 1.00]
 Determinateness  : 100.000
 Attributes       : ['name', 'order', 'actions', 'valuationdomain',
 		    'relation', 'gamma', 'notGamma', 'size']
->>> dg.computeTransitivityDegree()
-Decimal('1')
+>>> print('Transitivity degree: %.3f' % dg.computeTransitivityDegree() ) 
+Transitivity degree: 1.000
 >>> dg.exportGraphViz()
 *---- exporting a dot file for GraphViz tools ---------*
 Exporting to oriented_permutationGraph.dot
@@ -3781,18 +3781,19 @@ Exporting to oriented_permutationGraph.dot
 dot -Grankdir=TB -Tpng oriented_permutationGraph.dot -o oriented_permutationGraph.png
 
 .. Figure:: oriented_permutationGraph.png
-    :alt: Transitive orientation of a permutation graph
+    :alt: Hasse diagram of a permutation graph
     :width: 200 px
     :align: center
 	    
-    *Figure* 14: Transitive orientation of the default permutation graph
+    *Figure* 14: Hasse diagram of the default permutation graph
 
 The dual of a permutation graph is *again* a permutation graph and as such also transitively orientable. Now, a given graph *g* is a permutation graph **if and only if** both *g* **and** *gdual = -g* are *transitively orientable*.
 
 >>> gdual = -g
 >>> dgdual = gdual.transitiveOrientation()
->>> dgdual.computeTransitivityDegree()
-Decimal('1')
+>>> print('Dual transitivity degree: %.3f' %\
+...             dgdual.computeTransitivityDegree() ) 
+Dual transitivity degree: 1.000
 
 Recognizing permutation graphs
 ..............................
@@ -3812,7 +3813,7 @@ Attributes       : ['name', 'order', 'vertices', 'valuationDomain',
 >>> g.exportGraphViz()
 		    
 .. Figure:: randomGraph4335.png
-    :alt: Random graph which is a permutation graph
+    :alt: Random graph
     :width: 400 px
     :align: center
 
@@ -3838,7 +3839,7 @@ We will first **fuse** both *og* and *ogdual* orientations above with an **epist
 >>> print(seq1)
 ['v1', 'v2', 'v3', 'v5', 'v4', 'v6', 'v7', 'v8']
 
-Both *g* and *gdual* are oriented in increasing order of the labels of the vertices and we obtain by the Copeland ranking rule (see :ref:`Ranking-tutorial-label` and the :py:func:`digraphs.Digraph.computeCopelandRanking` method) a complete linear ordering of the vertices in increasing labels' numbers (see Line 4 above).
+Both *g* and *gdual* are oriented in increasing order of the keyss of the vertices and we obtain by the Copeland ranking rule (see :ref:`Ranking-tutorial-label` and the :py:func:`digraphs.Digraph.computeCopelandRanking` method) a complete linear ordering of the vertices in increasing vertices' keys (see Line 5 above).
 
 We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) in order to generate by disjunctive fusion again the inversions that are produced by the permutation we are looking for. Computing again a ranking with the Copeland rule will show the correspondingly permuted list of vertices (see Line 4 below).
 
@@ -3855,7 +3856,7 @@ Vertex 'v1' is hence put at position 6, vertex 'v2' at position 1, ... etc. We g
 >>> print(permutation)
 [2, 3, 4, 8, 6, 1, 7, 5]
 
-We may check finally that this permutation will correctly generate a permutation graph which is indeed isomorphic to the random graph *g*.
+We may finally check that this permutation will correctly generate a permutation graph which is indeed isomorphic to the given random graph *g*.
 
 >>> gtest = PermutationGraph(permutation=[2, 3, 4, 8, 6, 1, 7, 5])
 >>> gtest
