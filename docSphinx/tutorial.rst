@@ -3781,11 +3781,11 @@ Exporting to oriented_permutationGraph.dot
 dot -Grankdir=TB -Tpng oriented_permutationGraph.dot -o oriented_permutationGraph.png
 
 .. Figure:: oriented_permutationGraph.png
-    :alt: Hasse diagram of a permutation graph
+    :alt: Hasse diagram of thr otrinttiona permutation graph
     :width: 200 px
     :align: center
 	    
-    *Figure* 14: Hasse diagram of the default permutation graph
+    *Figure* 14: Hasse diagram of the transitive orientation of the permutation graph
 
 The dual of a permutation graph is *again* a permutation graph and as such also transitively orientable. Now, a given graph *g* is a permutation graph **if and only if** both *g* **and** *gdual = -g* are *transitively orientable*.
 
