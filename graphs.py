@@ -3791,27 +3791,27 @@ if __name__ == '__main__':
 ##    rgd = -rg
 ##    print(rgd)
 ##    
-    g = RandomGraph(order=8,seed=4335)
-    og = g.computeOrientedDigraph(PartiallyDetermined=True)
-    print('Transitivity degree: %.3f' % og.transitivityDegree)
-    gd = -g
-    ogd = gd.computeOrientedDigraph(PartiallyDetermined=True)
-    print('Dual transitivity degree: %.3f' % ogd.transitivityDegree)
-    print(g.computePermutation(Debug=False))
-    from digraphs import FusionDigraph
-    from linearOrders import LinearOrder
-    f1gd = FusionDigraph(og,ogd,'o-max')
-    s1 = LinearOrder.computeOrder(f1gd)
-    f2gd = FusionDigraph((-og),ogd,'o-max')
-    s2 = LinearOrder.computeOrder(f2gd)
-    print(s1)
-    print(s2)
-    permutation= Graph.computePermutation(g)
-    print(permutation)
-    gtest = PermutationGraph(permutation=permutation)
-    print(gtest)
-    print(g)
-    gtest.exportPermutationGraphViz()
+##    g = RandomGraph(order=8,seed=4335)
+##    og = g.computeOrientedDigraph(PartiallyDetermined=True)
+##    print('Transitivity degree: %.3f' % og.transitivityDegree)
+##    gd = -g
+##    ogd = gd.computeOrientedDigraph(PartiallyDetermined=True)
+##    print('Dual transitivity degree: %.3f' % ogd.transitivityDegree)
+##    print(g.computePermutation(Debug=False))
+##    from digraphs import FusionDigraph
+##    from linearOrders import LinearOrder
+##    f1gd = FusionDigraph(og,ogd,'o-max')
+##    s1 = LinearOrder.computeOrder(f1gd)
+##    f2gd = FusionDigraph((-og),ogd,'o-max')
+##    s2 = LinearOrder.computeOrder(f2gd)
+##    print(s1)
+##    print(s2)
+##    permutation= Graph.computePermutation(g)
+##    print(permutation)
+##    gtest = PermutationGraph(permutation=permutation)
+##    print(gtest)
+##    print(g)
+##    gtest.exportPermutationGraphViz()
 ##    
 
     #g = CycleGraph(order=12)

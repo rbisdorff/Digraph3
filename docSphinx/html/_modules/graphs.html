@@ -3838,27 +3838,27 @@
 <span class="c1">##    rgd = -rg</span>
 <span class="c1">##    print(rgd)</span>
 <span class="c1">##    </span>
-    <span class="n">g</span> <span class="o">=</span> <span class="n">RandomGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">4335</span><span class="p">)</span>
-    <span class="n">og</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrientedDigraph</span><span class="p">(</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Transitivity degree: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">og</span><span class="o">.</span><span class="n">transitivityDegree</span><span class="p">)</span>
-    <span class="n">gd</span> <span class="o">=</span> <span class="o">-</span><span class="n">g</span>
-    <span class="n">ogd</span> <span class="o">=</span> <span class="n">gd</span><span class="o">.</span><span class="n">computeOrientedDigraph</span><span class="p">(</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dual transitivity degree: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">ogd</span><span class="o">.</span><span class="n">transitivityDegree</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computePermutation</span><span class="p">(</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-    <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">FusionDigraph</span>
-    <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="k">import</span> <span class="n">LinearOrder</span>
-    <span class="n">f1gd</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">(</span><span class="n">og</span><span class="p">,</span><span class="n">ogd</span><span class="p">,</span><span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
-    <span class="n">s1</span> <span class="o">=</span> <span class="n">LinearOrder</span><span class="o">.</span><span class="n">computeOrder</span><span class="p">(</span><span class="n">f1gd</span><span class="p">)</span>
-    <span class="n">f2gd</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">((</span><span class="o">-</span><span class="n">og</span><span class="p">),</span><span class="n">ogd</span><span class="p">,</span><span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
-    <span class="n">s2</span> <span class="o">=</span> <span class="n">LinearOrder</span><span class="o">.</span><span class="n">computeOrder</span><span class="p">(</span><span class="n">f2gd</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
-    <span class="n">permutation</span><span class="o">=</span> <span class="n">Graph</span><span class="o">.</span><span class="n">computePermutation</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">permutation</span><span class="p">)</span>
-    <span class="n">gtest</span> <span class="o">=</span> <span class="n">PermutationGraph</span><span class="p">(</span><span class="n">permutation</span><span class="o">=</span><span class="n">permutation</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">gtest</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-    <span class="n">gtest</span><span class="o">.</span><span class="n">exportPermutationGraphViz</span><span class="p">()</span>
+<span class="c1">##    g = RandomGraph(order=8,seed=4335)</span>
+<span class="c1">##    og = g.computeOrientedDigraph(PartiallyDetermined=True)</span>
+<span class="c1">##    print(&#39;Transitivity degree: %.3f&#39; % og.transitivityDegree)</span>
+<span class="c1">##    gd = -g</span>
+<span class="c1">##    ogd = gd.computeOrientedDigraph(PartiallyDetermined=True)</span>
+<span class="c1">##    print(&#39;Dual transitivity degree: %.3f&#39; % ogd.transitivityDegree)</span>
+<span class="c1">##    print(g.computePermutation(Debug=False))</span>
+<span class="c1">##    from digraphs import FusionDigraph</span>
+<span class="c1">##    from linearOrders import LinearOrder</span>
+<span class="c1">##    f1gd = FusionDigraph(og,ogd,&#39;o-max&#39;)</span>
+<span class="c1">##    s1 = LinearOrder.computeOrder(f1gd)</span>
+<span class="c1">##    f2gd = FusionDigraph((-og),ogd,&#39;o-max&#39;)</span>
+<span class="c1">##    s2 = LinearOrder.computeOrder(f2gd)</span>
+<span class="c1">##    print(s1)</span>
+<span class="c1">##    print(s2)</span>
+<span class="c1">##    permutation= Graph.computePermutation(g)</span>
+<span class="c1">##    print(permutation)</span>
+<span class="c1">##    gtest = PermutationGraph(permutation=permutation)</span>
+<span class="c1">##    print(gtest)</span>
+<span class="c1">##    print(g)</span>
+<span class="c1">##    gtest.exportPermutationGraphViz()</span>
 <span class="c1">##    </span>
 
     <span class="c1">#g = CycleGraph(order=12)</span>
