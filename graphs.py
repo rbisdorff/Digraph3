@@ -874,8 +874,9 @@ class Graph(object):
             print(seq2)
         permutation = [0 for j in range(self.order)]
         for j in range(self.order):
-            x = self.vertices[seq1[j]]['id']
-            permutation[j] = self.vertices[seq2[x-1]]['id']
+            permutation[seq2.index(seq1[j])] = j+1
+##            x = self.vertices[seq1[j]]['id']
+##            permutation[j] = self.vertices[seq2[x-1]]['id']
         if Debug:
             print(permutation)
         return permutation
@@ -1572,7 +1573,7 @@ class RandomGraph(Graph):
         vertices = dict()
         for i in range(order):
             vertexKey = ('v%%0%dd' % nd) % (i+1)
-            vertices[vertexKey] = {'id':i+1, 'shortName':vertexKey, 'name': 'random vertex'}
+            vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
         self.vertices = vertices
         self.valuationDomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
         Min = self.valuationDomain['min']
@@ -3481,7 +3482,7 @@ class PermutationGraph(Graph):
         vertices = OrderedDict()
         order = len(permutation)
         for i in range(1,order+1):
-            vertices[str(i)] = {'id':i,'name': str(i)}
+            vertices[str(i)] = {'name': str(i)}
         self.vertices = vertices
         self.order = len(vertices)
         self.permutation = permutation
@@ -3599,7 +3600,7 @@ if __name__ == '__main__':
 ##    rgd = -rg
 ##    print(rgd)
 ##    
-    g = RandomGraph(order=8,seed=4334)
+    g = RandomGraph(order=8,seed=4335)
     og = g.computeOrientedDigraph(PartiallyDetermined=True)
     print('Transitivity degree: %.3f' % og.transitivityDegree)
     gd = -g

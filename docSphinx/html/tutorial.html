@@ -6079,16 +6079,14 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">[&#39;v2&#39;, &#39;v3&#39;, &#39;v4&#39;, &#39;v8&#39;, &#39;v6&#39;, &#39;v1&#39;, &#39;v7&#39;, &#39;v5&#39;]</span>
 </pre></div>
 </td></tr></table></div>
-<p>Vertex ‘v1’ is hence put at position 6, vertex ‘v2’ at position 1, … etc. We generate these positions for all vertices by using the ‘id’ attribute of the vertex definitions and obtain thus the required permutation (see Line 5 below).</p>
+<p>Vertex ‘v1’ is hence put at position 6, vertex ‘v2’ at position 1, … etc. We generate these positions for all vertices and obtain thus the required permutation (see Line 5 below).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">permutation</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">order</span><span class="p">)]</span>
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">permutation</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">order</span><span class="p">)]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">order</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="n">x</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">seq1</span><span class="p">[</span><span class="n">j</span><span class="p">]][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
-<span class="gp">... </span>    <span class="n">permutation</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">seq2</span><span class="p">[</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="n">permutation</span><span class="p">[</span><span class="n">seq2</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">seq1</span><span class="p">[</span><span class="n">j</span><span class="p">])]</span> <span class="o">=</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">permutation</span><span class="p">)</span>
 <span class="go">[2, 3, 4, 8, 6, 1, 7, 5]</span>
 </pre></div>

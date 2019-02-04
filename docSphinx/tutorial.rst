@@ -3847,12 +3847,11 @@ We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) 
 >>> print(seq2)
 ['v2', 'v3', 'v4', 'v8', 'v6', 'v1', 'v7', 'v5']
 
-Vertex 'v1' is hence put at position 6, vertex 'v2' at position 1, ... etc. We generate these positions for all vertices by using the 'id' attribute of the vertex definitions and obtain thus the required permutation (see Line 5 below).
+Vertex 'v1' is hence put at position 6, vertex 'v2' at position 1, ... etc. We generate these positions for all vertices and obtain thus the required permutation (see Line 5 below).
 
 >>> permutation = [0 for j in range(g.order)]
 >>> for j in range(g.order):
-...     x = g.vertices[seq1[j]]['id']
-...     permutation[j] = g.vertices[seq2[x-1]]['id']
+...     permutation[seq2.index(seq1[j])] = j+1
 >>> print(permutation)
 [2, 3, 4, 8, 6, 1, 7, 5]
 
