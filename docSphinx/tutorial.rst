@@ -3834,16 +3834,16 @@ We will first **fuse** both *og* and *ogdual* orientations above with an **epist
 
 >>> from digraphs import FusionDigraph
 >>> f1gd = FusionDigraph(og,ogdual,operator='o-max')
->>> seq1 = f1gd.computeNetFlowsRanking()
+>>> seq1 = f1gd.computeCopelandRanking()
 >>> print(seq1)
 ['v1', 'v2', 'v3', 'v5', 'v4', 'v6', 'v7', 'v8']
 
-Both *g* and *gdual* are oriented in increasing order of the labels of the vertices and we obtain by a net-flows ranking rule (see :ref:`Ranking-tutorial-label` and the :py:func:`digraphs.Digraph.computeNetFlowsRanking` method) a complete linear ordering of the vertices in increasing labels' numbers (see Line 4 above).
+Both *g* and *gdual* are oriented in increasing order of the labels of the vertices and we obtain by the Copeland ranking rule (see :ref:`Ranking-tutorial-label` and the :py:func:`digraphs.Digraph.computeCopelandRanking` method) a complete linear ordering of the vertices in increasing labels' numbers (see Line 4 above).
 
-We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) in order to generate by disjunctive fusion again the inversions that are produced by the permutation we are looking for. Computing again a ranking with the net-flows rule will show the correspondingly permuted list of vertices (see Line 4 below).
+We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) in order to generate by disjunctive fusion again the inversions that are produced by the permutation we are looking for. Computing again a ranking with the Copeland rule will show the correspondingly permuted list of vertices (see Line 4 below).
 
->>> f2gd = FusionDigraph((-og),ogdual,operator 'o-max')
->>> seq2 = f2gd.computeNetFlowsRanking()
+>>> f2gd = FusionDigraph((-og),ogdual,operator='o-max')
+>>> seq2 = f2gd.computeCopelandRanking()
 >>> print(seq2)
 ['v2', 'v3', 'v4', 'v8', 'v6', 'v1', 'v7', 'v5']
 
@@ -3854,17 +3854,17 @@ Vertex 'v1' is hence put at position 6, vertex 'v2' at position 1, ... etc. We g
 ...     x = g.vertices[seq1[j]]['id']
 ...     permutation[j] = g.vertices[seq2[x-1]]['id']
 >>> print(permutation)
-[2, 3, 4, 6, 8, 1, 7, 5]
+[2, 3, 4, 8, 6, 1, 7, 5]
 
 We may check finally that this permutation will correctly generate a permutation graph which is indeed isomorphic to the random graph *g*.
 
->>> gtest = PermutationGraph(permutation=[2, 3, 4, 6, 8, 1, 7, 5])
+>>> gtest = PermutationGraph(permutation=[2, 3, 4, 8, 6, 1, 7, 5])
 >>> gtest
 *------- Graph instance description ------*
 Instance class   : PermutationGraph
 Instance name    : permutationGraph
 Graph Order      : 8
-Permutation      : [2, 3, 4, 6, 8, 1, 7, 5]
+Permutation      : [2, 3, 4, 8, 6, 1, 7, 5]
 Graph Size       : 9
 Valuation domain : [-1.00 - 1.00]
 Attributes       : ['name', 'vertices', 'order', 'permutation',
@@ -3879,7 +3879,7 @@ fdp -Tpng permutationGraph4335.dot -o permutationGraph4335.png
     :width: 400 px
     :align: center
 
-    *Figure* 16: Permutation graph obtained from [2, 3, 4, 6, 8, 1, 7, 5]
+    *Figure* 16: Permutation graph obtained from [2, 3, 4, 8, 6, 1, 7, 5]
 
 And we recover indeed an isomorphic copy of the original random graph (see Fig. 15).
 

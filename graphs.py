@@ -832,7 +832,7 @@ class Graph(object):
                     y = actionKeysList[j]
                     if relation[x][y] < Med and relation[y][x] < Med:
                         relation[x][y] = Med
-                        relation[x][y] = Med
+                        relation[y][x] = Med
                         
         g.relation = relation
         g.size = g.computeSize()
@@ -866,10 +866,10 @@ class Graph(object):
         
         f1 = FusionDigraph(og,ogd,'o-max')
         f2 = FusionDigraph((-og),ogd,'o-max')
-        seq1 = f1.computeNetFlowsRanking()
+        seq1 = f1.computeCopelandRanking()
         if Debug:
             print(seq1)
-        seq2 = f2.computeNetFlowsRanking()
+        seq2 = f2.computeCopelandRanking()
         if Debug:
             print(seq2)
         permutation = [0 for j in range(self.order)]

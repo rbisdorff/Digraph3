@@ -6063,18 +6063,18 @@ execution time: 0 sec. and 2 millisec.
 4
 5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">FusionDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f1gd</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">(</span><span class="n">og</span><span class="p">,</span><span class="n">ogdual</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">seq1</span> <span class="o">=</span> <span class="n">f1gd</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">seq1</span> <span class="o">=</span> <span class="n">f1gd</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">seq1</span><span class="p">)</span>
 <span class="go">[&#39;v1&#39;, &#39;v2&#39;, &#39;v3&#39;, &#39;v5&#39;, &#39;v4&#39;, &#39;v6&#39;, &#39;v7&#39;, &#39;v8&#39;]</span>
 </pre></div>
 </td></tr></table></div>
-<p>Both <em>g</em> and <em>gdual</em> are oriented in increasing order of the labels of the vertices and we obtain by a net-flows ranking rule (see <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a> and the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeNetFlowsRanking" title="digraphs.Digraph.computeNetFlowsRanking"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.computeNetFlowsRanking()</span></code></a> method) a complete linear ordering of the vertices in increasing labels’ numbers (see Line 4 above).</p>
-<p>We reverse now the orientation of the edges in <em>og</em> (see <em>-og</em> in Line 1 below) in order to generate by disjunctive fusion again the inversions that are produced by the permutation we are looking for. Computing again a ranking with the net-flows rule will show the correspondingly permuted list of vertices (see Line 4 below).</p>
+<p>Both <em>g</em> and <em>gdual</em> are oriented in increasing order of the labels of the vertices and we obtain by the Copeland ranking rule (see <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a> and the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeCopelandRanking" title="digraphs.Digraph.computeCopelandRanking"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.computeCopelandRanking()</span></code></a> method) a complete linear ordering of the vertices in increasing labels’ numbers (see Line 4 above).</p>
+<p>We reverse now the orientation of the edges in <em>og</em> (see <em>-og</em> in Line 1 below) in order to generate by disjunctive fusion again the inversions that are produced by the permutation we are looking for. Computing again a ranking with the Copeland rule will show the correspondingly permuted list of vertices (see Line 4 below).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f2gd</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">((</span><span class="o">-</span><span class="n">og</span><span class="p">),</span><span class="n">ogdual</span><span class="p">,</span><span class="n">operator</span> <span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">seq2</span> <span class="o">=</span> <span class="n">f2gd</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">()</span>
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f2gd</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">((</span><span class="o">-</span><span class="n">og</span><span class="p">),</span><span class="n">ogdual</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">seq2</span> <span class="o">=</span> <span class="n">f2gd</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">seq2</span><span class="p">)</span>
 <span class="go">[&#39;v2&#39;, &#39;v3&#39;, &#39;v4&#39;, &#39;v8&#39;, &#39;v6&#39;, &#39;v1&#39;, &#39;v7&#39;, &#39;v5&#39;]</span>
 </pre></div>
@@ -6090,7 +6090,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="gp">... </span>    <span class="n">x</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">seq1</span><span class="p">[</span><span class="n">j</span><span class="p">]][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
 <span class="gp">... </span>    <span class="n">permutation</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">seq2</span><span class="p">[</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">permutation</span><span class="p">)</span>
-<span class="go">[2, 3, 4, 6, 8, 1, 7, 5]</span>
+<span class="go">[2, 3, 4, 8, 6, 1, 7, 5]</span>
 </pre></div>
 </td></tr></table></div>
 <p>We may check finally that this permutation will correctly generate a permutation graph which is indeed isomorphic to the random graph <em>g</em>.</p>
@@ -6108,13 +6108,13 @@ execution time: 0 sec. and 2 millisec.
 12
 13
 14
-15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gtest</span> <span class="o">=</span> <span class="n">PermutationGraph</span><span class="p">(</span><span class="n">permutation</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gtest</span> <span class="o">=</span> <span class="n">PermutationGraph</span><span class="p">(</span><span class="n">permutation</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gtest</span>
 <span class="go">*------- Graph instance description ------*</span>
 <span class="go">Instance class   : PermutationGraph</span>
 <span class="go">Instance name    : permutationGraph</span>
 <span class="go">Graph Order      : 8</span>
-<span class="go">Permutation      : [2, 3, 4, 6, 8, 1, 7, 5]</span>
+<span class="go">Permutation      : [2, 3, 4, 8, 6, 1, 7, 5]</span>
 <span class="go">Graph Size       : 9</span>
 <span class="go">Valuation domain : [-1.00 - 1.00]</span>
 <span class="go">Attributes       : [&#39;name&#39;, &#39;vertices&#39;, &#39;order&#39;, &#39;permutation&#39;,</span>
@@ -6127,7 +6127,7 @@ execution time: 0 sec. and 2 millisec.
 </td></tr></table></div>
 <div class="figure align-center" id="id76">
 <a class="reference internal image-reference" href="_images/permutationGraph4335.png"><img alt="The correct permutation graph" src="_images/permutationGraph4335.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-text"><em>Figure</em> 16: Permutation graph obtained from [2, 3, 4, 6, 8, 1, 7, 5]</span></p>
+<p class="caption"><span class="caption-text"><em>Figure</em> 16: Permutation graph obtained from [2, 3, 4, 8, 6, 1, 7, 5]</span></p>
 </div>
 <p>And we recover indeed an isomorphic copy of the original random graph (see Fig. 15).</p>
 </div>
