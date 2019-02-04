@@ -3752,7 +3752,7 @@ fdp -Tpng permutationGraph.dot -o permutationGraph.png
 
     *Figure* 13a: The default permutation graph
 
-The given permutation may as well be drawn.
+The nine **inversions** -the actual *edges* of the permutation graph- which are induced by the given permutation [4, 3, 6, 1, 5, 2] may as well be drawn with the graphviz *neato* outlay and explicitely positioned horizontal lists of vertices (see :py:func:`graphs.Graph.exportPermutationGraphViz`).
 
 >>> g.exportPermutationGraphViz()
 *---- exporting a dot file for GraphViz tools ---------*
