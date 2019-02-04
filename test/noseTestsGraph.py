@@ -186,6 +186,7 @@ def testPermutationGraphs():
     g = PermutationGraph(permutation=[4,3,6,1,5,2])
     print(g)
     g.exportGraphViz()
+    g.exportPermutationGraphViz()
     rg = RandomPermutationGraph(order=6,seed=100)
     print(rg)
     print('permutation:',rg.computePermutation())

@@ -1080,6 +1080,109 @@ class Graph(object):
                 print('graphViz tools not avalaible! Please check installation.')
                 print('On Ubuntu: ..$ sudo apt-get install graphviz')
 
+    def exportPermutationGraphViz(self,fileName=None,
+                       permutation=None,
+                       noSilent=True,
+                       hspace=100,
+                       vspace=70,
+                       graphType='png',graphSize='7,7',
+                       arcColor='black',
+                       lineWidth=1):
+        """
+        Exports GraphViz dot file for permutation drawing filtering.
+
+        Horizontal (default=100) and vertical (default=75) spaces betwen the vertices'
+        positions may be explicitely given in *hspace* and *vspace* parameters.
+
+        .. note::
+            If no *permutation* is provided, it is supposed to exist a self.permutation attribute.
+            
+        """
+        import os
+        if noSilent:
+            print('*---- exporting a dot file for GraphViz tools ---------*')
+        vertexkeys = [x for x in self.vertices]
+        n = len(vertexkeys)
+        edges = self.edges
+        Med = self.valuationDomain['med']
+        i = 0
+        if fileName == None:
+            name = 'perm_'+self.name
+        else:
+            name = fileName
+        dotName = name+'.dot'
+        if noSilent:
+            print('Exporting to '+dotName)
+        fo = open(dotName,'w')
+        fo.write('strict digraph G {\n')
+        fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
+        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2015", size="')
+        fo.write(graphSize),fo.write('"];\n')
+        # horizontally positioned initial nodes at line 100
+        # horinzontal space = 75
+        vspace = 100
+        hspace = 60
+        for i in range(n):
+            try:
+                nodeName = str(self.vertices[vertexkeys[i]]['shortName'])
+            except:
+                try:
+                    nodeName = self.vertices[vertexkeys[i]]['name']
+                except:
+                    nodeName = str(vertexkeys[i])
+            node = 'n'+str(i+1)+' [shape = "circle", label = "' +nodeName+'"'
+            try:
+                if self.vertices[vertexkeys[i]]['spin'] == 1:
+                    node += ', style = "filled", color = %s, ' % spinColor
+            except:
+                pass
+            node += 'pos="%d,%d"];\n' % (i*hspace,vspace)                
+            fo.write(node)
+        # horizontally positionned terminal nodes at line 0
+        for i in range(n):
+            try:
+                nodeName = str(self.vertices[vertexkeys[i]]['shortName'])
+            except:
+                try:
+                    nodeName = self.vertices[vertexkeys[i]]['name']
+                except:
+                    nodeName = str(vertexkeys[i])
+            node = 'n'+str(n+i+1)+' [shape = "circle", label = "' +nodeName+'"'
+            try:
+                if self.vertices[vertexkeys[i]]['spin'] == 1:
+                    node += ', style = "filled", color = %s, ' % spinColor
+            except:
+                pass
+            node += 'pos="%d,%d"];\n' % (i*hspace,0)                
+            fo.write(node)
+        # inversions drawing
+        if permutation == None:
+            try:
+                permutation = self.permutation
+            except AttributeError:
+                print('No permutation available !!')
+                return
+        for i in range(n):
+            edge = 'n'+str(i+1)
+            j = self.permutation[i]
+            arrowFormat = \
+                edge0 = edge+'-> n'+str(n+j)+\
+            ' [dir=both, color=black, arrowhead=normal, arrowtail=none] ;\n'
+            fo.write(edge0)
+        fo.write('}\n')
+        fo.close()
+        # choose layout model 
+        layout = 'neato'
+        commandString = layout+' -n -T'+graphType+' '+dotName+' -o '+name+'.'+graphType
+        if noSilent:
+            print(commandString)
+        try:
+            os.system(commandString)
+        except:
+            if noSilent:
+                print('graphViz tools not avalaible! Please check installation.')
+                print('On Ubuntu: ..$ sudo apt-get install graphviz')
+
     def gammaSets(self,Debug=False):
         """
         renders the gamma function as dictionary
@@ -3571,6 +3674,93 @@ class PermutationGraph(Graph):
         g.notGamma = g.notGammaSets()
         return g      
 
+##    def exportPermutationGraphViz(self,fileName=None,
+##                       noSilent=True,
+##                       graphType='png',graphSize='7,7',
+##                       arcColor='black',
+##                       lineWidth=1):
+##        """
+##        Exports GraphViz dot file for permutation drawing filtering.
+##        """
+##        import os
+##        if noSilent:
+##            print('*---- exporting a dot file for GraphViz tools ---------*')
+##        vertexkeys = [x for x in self.vertices]
+##        n = len(vertexkeys)
+##        edges = self.edges
+##        Med = self.valuationDomain['med']
+##        i = 0
+##        if fileName == None:
+##            name = 'perm_'+self.name
+##        else:
+##            name = fileName
+##        dotName = name+'.dot'
+##        if noSilent:
+##            print('Exporting to '+dotName)
+##        fo = open(dotName,'w')
+##        fo.write('strict digraph G {\n')
+##        fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
+##        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2015", size="')
+##        fo.write(graphSize),fo.write('"];\n')
+##        # horizontally positioned initial nodes at line 100
+##        # horinzontal space = 75
+##        vspace = 100
+##        hspace = 70
+##        for i in range(n):
+##            try:
+##                nodeName = str(self.vertices[vertexkeys[i]]['shortName'])
+##            except:
+##                try:
+##                    nodeName = self.vertices[vertexkeys[i]]['name']
+##                except:
+##                    nodeName = str(vertexkeys[i])
+##            node = 'n'+str(i+1)+' [shape = "circle", label = "' +nodeName+'"'
+##            try:
+##                if self.vertices[vertexkeys[i]]['spin'] == 1:
+##                    node += ', style = "filled", color = %s, ' % spinColor
+##            except:
+##                pass
+##            node += 'pos="%d,%d"];\n' % (i*hspace,vspace)                
+##            fo.write(node)
+##        # horizontally positionned terminal nodes at line 0
+##        for i in range(n):
+##            try:
+##                nodeName = str(self.vertices[vertexkeys[i]]['shortName'])
+##            except:
+##                try:
+##                    nodeName = self.vertices[vertexkeys[i]]['name']
+##                except:
+##                    nodeName = str(vertexkeys[i])
+##            node = 'n'+str(n+i+1)+' [shape = "circle", label = "' +nodeName+'"'
+##            try:
+##                if self.vertices[vertexkeys[i]]['spin'] == 1:
+##                    node += ', style = "filled", color = %s, ' % spinColor
+##            except:
+##                pass
+##            node += 'pos="%d,%d"];\n' % (i*hspace,0)                
+##            fo.write(node)
+##        # inversions drawing
+##        for i in range(n):
+##            edge = 'n'+str(i+1)
+##            j = self.permutation[i]
+##            arrowFormat = \
+##                edge0 = edge+'-> n'+str(n+j)+\
+##            ' [dir=both, color=black, arrowhead=normal, arrowtail=none] ;\n'
+##            fo.write(edge0)
+##        fo.write('}\n')
+##        fo.close()
+##        # choose layout model 
+##        layout = 'neato'
+##        commandString = layout+' -n -T'+graphType+' '+dotName+' -o '+name+'.'+graphType
+##        if noSilent:
+##            print(commandString)
+##        try:
+##            os.system(commandString)
+##        except:
+##            if noSilent:
+##                print('graphViz tools not avalaible! Please check installation.')
+##                print('On Ubuntu: ..$ sudo apt-get install graphviz')
+
 class RandomPermutationGraph(PermutationGraph):
     """
     A generator for random permutation graphs.
@@ -3589,9 +3779,10 @@ class RandomPermutationGraph(PermutationGraph):
 # --------------testing the module ----
 if __name__ == '__main__':
 
-##    g = PermutationGraph(permutation=[4,3,6,1,5,2])
-##    print(g)
-##    g.exportGraphViz()
+    g = PermutationGraph(permutation=[4,3,6,1,5,2])
+    print(g)
+    g.exportGraphViz()
+    g.exportPermutationGraphViz()
 ##    rg = RandomPermutationGraph(order=6,seed=None)
 ##    print(rg)
 ##    dg = g.transitiveOrientation()
@@ -3607,22 +3798,20 @@ if __name__ == '__main__':
     ogd = gd.computeOrientedDigraph(PartiallyDetermined=True)
     print('Dual transitivity degree: %.3f' % ogd.transitivityDegree)
     print(g.computePermutation(Debug=False))
-
-##    from linearOrders import LinearOrder
-##    f1gd = FusionDigraph(og,ogd,'o-max')
-##    s1 = LinearOrder.computeOrder(f1gd)
-##    f2gd = FusionDigraph((-og),ogd,'o-max')
-##    s2 = LinearOrder.computeOrder(f2gd)
-##    print(s1)
-##    print(s2)
-##    permutation = [0 for i in range(g.order)]
-##    for i in range(g.order):
-##        x = g.vertices[s1[i]]['id']
-##        permutation[i] = g.vertices[s2[x-1]]['id']
-##    print(permutation)
-##    gtest = PermutationGraph(permutation=permutation)
-##    print(gtest)
-##    print(g)
+    from digraphs import FusionDigraph
+    from linearOrders import LinearOrder
+    f1gd = FusionDigraph(og,ogd,'o-max')
+    s1 = LinearOrder.computeOrder(f1gd)
+    f2gd = FusionDigraph((-og),ogd,'o-max')
+    s2 = LinearOrder.computeOrder(f2gd)
+    print(s1)
+    print(s2)
+    permutation= Graph.computePermutation(g)
+    print(permutation)
+    gtest = PermutationGraph(permutation=permutation)
+    print(gtest)
+    print(g)
+    gtest.exportPermutationGraphViz()
 ##    
 
     #g = CycleGraph(order=12)
