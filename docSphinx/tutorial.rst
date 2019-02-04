@@ -3753,6 +3753,7 @@ fdp -Tpng permutationGraph.dot -o permutationGraph.png
     *Figure* 13a: The default permutation graph
 
 The given permutation may as well be drawn.
+
 >>> g.exportPermutationGraphViz()
 *---- exporting a dot file for GraphViz tools ---------*
 Exporting to perm_permutationGraph.dot
