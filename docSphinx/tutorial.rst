@@ -3761,7 +3761,7 @@ neato -n -Tpng perm_permutationGraph.dot -o perm_permutationGraph.png
 
 .. Figure:: perm_permutationGraph.png
     :alt: The permutation of the vertices
-    :width: 500 px
+    :width: 400 px
     :align: center
 
     *Figure* 13b: The permutation of the vertices 
