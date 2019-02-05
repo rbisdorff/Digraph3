@@ -3766,7 +3766,7 @@ neato -n -Tpng perm_permutationGraph.dot -o perm_permutationGraph.png
 
     *Figure* 13b: The permutation of the vertices
 
-By using color sorting queues, the minimal vertex coloring for a permutation grphs is in complexity :math:`(n log(n))` (see [Gul-2004]_).
+By using color sorting queues, the minimal vertex coloring for a permutation grphs is in complexity :math:`O(n log(n))` (see [Gul-2004]_).
 
 >>> g.computeMinimalVertexColoring(Comments=True)
 vertex 1: lightcoral
