@@ -3752,7 +3752,7 @@ fdp -Tpng permutationGraph.dot -o permutationGraph.png
 
     *Figure* 13a: The default permutation graph
 
-The nine **inversions** -the actual *edges* of the permutation graph- which are induced by the given permutation [4, 3, 6, 1, 5, 2] may as well be drawn with the graphviz *neato* outlay and explicitely positioned horizontal lists of vertices (see :py:func:`graphs.Graph.exportPermutationGraphViz`).
+The nine **inversions** -the actual *edges* of the permutation graph- which are induced by the given permutation [4, 3, 6, 1, 5, 2] may as well be drawn with the graphviz *neato* layout and explicitely positioned horizontal lists of vertices (see :py:func:`graphs.Graph.exportPermutationGraphViz`).
 
 >>> g.exportPermutationGraphViz()
 *---- exporting a dot file for GraphViz tools ---------*
@@ -3764,7 +3764,29 @@ neato -n -Tpng perm_permutationGraph.dot -o perm_permutationGraph.png
     :width: 400 px
     :align: center
 
-    *Figure* 13b: The permutation of the vertices 
+    *Figure* 13b: The permutation of the vertices
+
+By using color sorting queues, the minimal vertex coloring for a permutation grphs is in complexity :math:`(n log(n))` (see [Gul-2004]_).
+
+>>> g.computeMinimalVertexColoring(Comments=True)
+vertex 1: lightcoral
+vertex 2: lightcoral
+vertex 3: lightblue
+vertex 4: gold
+vertex 5: lightblue
+vertex 6: gold
+>>> g.exportGraphViz(fileName='coloredPermutationGraph',\
+...                  WithVertexColoring=True) 
+*---- exporting a dot file for GraphViz tools ---------*
+Exporting to coloredPermutationGraph.dot
+fdp -Tpng coloredPermutationGraph.dot -o coloredPermutationGraph.png
+
+.. Figure:: coloredPermutationGraph.png
+    :alt: minimal vertex coloring
+    :width: 200 px
+    :align: center
+	    
+    *Figure* 13c: Minimal vertex coloring of the permutation graph
 
 Properties of permutation graphs
 ................................
@@ -3795,11 +3817,11 @@ Exporting to oriented_permutationGraph.dot
 dot -Grankdir=TB -Tpng oriented_permutationGraph.dot -o oriented_permutationGraph.png
 
 .. Figure:: oriented_permutationGraph.png
-    :alt: Hasse diagram of thr otrinttiona permutation graph
+    :alt: Hasse diagram of the orientationofof a permutation graph
     :width: 200 px
     :align: center
 	    
-    *Figure* 14: Hasse diagram of the transitive orientation of the permutation graph
+    *Figure* 14a: Hasse diagram of the transitive orientation of the permutation graph
 
 The dual of a permutation graph is *again* a permutation graph and as such also transitively orientable. Now, a given graph *g* is a permutation graph **if and only if** both *g* **and** *gdual = -g* are *transitively orientable*.
 

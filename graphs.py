@@ -954,7 +954,8 @@ class Graph(object):
     def exportGraphViz(self,fileName=None,verticesSubset=None,
                        noSilent=True,
                        graphType='png',graphSize='7,7',
-                       withSpanningTree=False,
+                       WithSpanningTree=False,
+                       WithVertexColoring=False,
                        matching=None,
                        layout=None,
                        arcColor='black',
@@ -1006,7 +1007,12 @@ class Graph(object):
                     nodeName = self.vertices[vertexkeys[i]]['name']
                 except:
                     nodeName = str(vertexkeys[i])
-            node = 'n'+str(i+1)+' [shape = "circle", label = "' +nodeName+'"'
+            if WithVertexColoring:
+                node = 'n'+str(i+1)+' [shape = "circle", label = "' +nodeName+'"'
+                node += ', style = "filled", color = %s' \
+                 % self.vertices[vertexkeys[i]]['color']
+            else:
+                node = 'n'+str(i+1)+' [shape = "circle", label = "' +nodeName+'"'
             try:
                 if self.vertices[vertexkeys[i]]['spin'] == 1:
                     node += ', style = "filled", color = %s' % spinColor
@@ -1014,7 +1020,7 @@ class Graph(object):
                 pass
             node += '];\n'                
             fo.write(node)
-        if withSpanningTree:
+        if WithSpanningTree:
             try:
                 dfs = self.dfs
             except:
@@ -1040,7 +1046,7 @@ class Graph(object):
                 if i != j:
                     edge = 'n'+str(i+1)
                     if edges[frozenset( [vertexkeys[i], vertexkeys[j]])] > Med:
-                        if withSpanningTree and \
+                        if WithSpanningTree and \
                         frozenset( [vertexkeys[i], vertexkeys[j]]) in edgesColored:
                                arrowFormat = \
         ' [dir=both,style="setlinewidth(3)",color=red, arrowhead=none, arrowtail=none] ;\n'                                          
@@ -2504,7 +2510,7 @@ class BestDeterminedSpanningForest(RandomTree):
        v4 -> ['v5', 'v2']
        v5 -> ['v4', 'v2', 'v3']
        >>> mt = BestDeterminedSpanningForest(g)
-       >>> mt.exportGraphViz('spanningTree',withSpanningTree=True)
+       >>> mt.exportGraphViz('spanningTree',WithSpanningTree=True)
        *---- exporting a dot file for GraphViz tools ---------*
        Exporting to spanningTree.dot
        [['v4', 'v2', 'v1', 'v3', 'v1', 'v2', 'v5', 'v2', 'v4']]
@@ -3673,8 +3679,43 @@ class PermutationGraph(Graph):
         g.size = g.computeSize()
         g.gamma = g.gammaSets()
         g.notGamma = g.notGammaSets()
-        return g      
+        return g
 
+    def computeMinimalVertexColoring(self,colors=None,Comments=False):
+        """
+        """
+        permutation = self.permutation
+        vertexKeys = [x for x in self.vertices]
+        n = len(permutation)
+        if colors == None:
+            colors = ['gold','lightblue','lightcoral','lightgreen','lightyellow','orange','gray',\
+                  'lightpink','seagreen1','skyblue','wheat1','lightsalmon']
+        nc = len(colors)
+        Q = [[0,[0]] for x in range(nc)]
+        for i in range(n):
+            for j in range(nc):
+                try:
+                    jQpt = Q[j][0]
+                except IndexError:
+                    print('!!! Error: The number of available colors %d is not sufficient !!!' % nc)
+                    print(colors)
+                    return
+                if permutation[i] > Q[j][1][jQpt]:
+                    Q[j][1].append(permutation[i])
+                    Q[j][0] += 1
+                    break
+        vertexColor = [0 for i in range(n)]
+        for j in range(n):
+            nj = len(Q[j][1])
+            for i in range(1,nj):
+                k = Q[j][1][i] - 1
+                vertexColor[k] = colors[j]
+        for i in range(n):
+            self.vertices[vertexKeys[i]]['color'] = vertexColor[i]
+            if Comments:
+                print('vertex %s: %s' % (vertexKeys[i],vertexColor[i]))
+    
+ 
 ##    def exportPermutationGraphViz(self,fileName=None,
 ##                       noSilent=True,
 ##                       graphType='png',graphSize='7,7',
@@ -3784,6 +3825,9 @@ if __name__ == '__main__':
     print(g)
     g.exportGraphViz()
     g.exportPermutationGraphViz()
+    g.computeMinimalVertexColoring(Comments=True)
+    g.exportGraphViz(WithVertexColoring=True)
+    
 ##    rg = RandomPermutationGraph(order=6,seed=None)
 ##    print(rg)
 ##    dg = g.transitiveOrientation()
@@ -3850,6 +3894,6 @@ if __name__ == '__main__':
 ##    ust.showShort()
 ##    ust.showMore()
 ##    ust.dfs = ust.randomDepthFirstSearch()
-##    ust.exportGraphViz(withSpanningTree=True)
+##    ust.exportGraphViz(WithSpanningTree=True)
 ##    print(ust.prueferCode)
     

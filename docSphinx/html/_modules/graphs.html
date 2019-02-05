@@ -1001,7 +1001,8 @@
 <div class="viewcode-block" id="Graph.exportGraphViz"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.exportGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">verticesSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">noSilent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                        <span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>
-                       <span class="n">withSpanningTree</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                       <span class="n">WithSpanningTree</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                       <span class="n">WithVertexColoring</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                        <span class="n">matching</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">arcColor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
@@ -1053,7 +1054,12 @@
                     <span class="n">nodeName</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">vertexkeys</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
                 <span class="k">except</span><span class="p">:</span>
                     <span class="n">nodeName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">vertexkeys</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="n">node</span> <span class="o">=</span> <span class="s1">&#39;n&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; [shape = &quot;circle&quot;, label = &quot;&#39;</span> <span class="o">+</span><span class="n">nodeName</span><span class="o">+</span><span class="s1">&#39;&quot;&#39;</span>
+            <span class="k">if</span> <span class="n">WithVertexColoring</span><span class="p">:</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="s1">&#39;n&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; [shape = &quot;circle&quot;, label = &quot;&#39;</span> <span class="o">+</span><span class="n">nodeName</span><span class="o">+</span><span class="s1">&#39;&quot;&#39;</span>
+                <span class="n">node</span> <span class="o">+=</span> <span class="s1">&#39;, style = &quot;filled&quot;, color = </span><span class="si">%s</span><span class="s1">&#39;</span> \
+                 <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">vertexkeys</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="s1">&#39;color&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="s1">&#39;n&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; [shape = &quot;circle&quot;, label = &quot;&#39;</span> <span class="o">+</span><span class="n">nodeName</span><span class="o">+</span><span class="s1">&#39;&quot;&#39;</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">vertexkeys</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="s1">&#39;spin&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                     <span class="n">node</span> <span class="o">+=</span> <span class="s1">&#39;, style = &quot;filled&quot;, color = </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">spinColor</span>
@@ -1061,7 +1067,7 @@
                 <span class="k">pass</span>
             <span class="n">node</span> <span class="o">+=</span> <span class="s1">&#39;];</span><span class="se">\n</span><span class="s1">&#39;</span>                
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">withSpanningTree</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">WithSpanningTree</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">dfs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span>
             <span class="k">except</span><span class="p">:</span>
@@ -1087,7 +1093,7 @@
                 <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
                     <span class="n">edge</span> <span class="o">=</span> <span class="s1">&#39;n&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">edges</span><span class="p">[</span><span class="nb">frozenset</span><span class="p">(</span> <span class="p">[</span><span class="n">vertexkeys</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">vertexkeys</span><span class="p">[</span><span class="n">j</span><span class="p">]])]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
-                        <span class="k">if</span> <span class="n">withSpanningTree</span> <span class="ow">and</span> \
+                        <span class="k">if</span> <span class="n">WithSpanningTree</span> <span class="ow">and</span> \
                         <span class="nb">frozenset</span><span class="p">(</span> <span class="p">[</span><span class="n">vertexkeys</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">vertexkeys</span><span class="p">[</span><span class="n">j</span><span class="p">]])</span> <span class="ow">in</span> <span class="n">edgesColored</span><span class="p">:</span>
                                <span class="n">arrowFormat</span> <span class="o">=</span> \
         <span class="s1">&#39; [dir=both,style=&quot;setlinewidth(3)&quot;,color=red, arrowhead=none, arrowtail=none] ;</span><span class="se">\n</span><span class="s1">&#39;</span>                                          
@@ -2551,7 +2557,7 @@
 <span class="sd">       v4 -&gt; [&#39;v5&#39;, &#39;v2&#39;]</span>
 <span class="sd">       v5 -&gt; [&#39;v4&#39;, &#39;v2&#39;, &#39;v3&#39;]</span>
 <span class="sd">       &gt;&gt;&gt; mt = BestDeterminedSpanningForest(g)</span>
-<span class="sd">       &gt;&gt;&gt; mt.exportGraphViz(&#39;spanningTree&#39;,withSpanningTree=True)</span>
+<span class="sd">       &gt;&gt;&gt; mt.exportGraphViz(&#39;spanningTree&#39;,WithSpanningTree=True)</span>
 <span class="sd">       *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="sd">       Exporting to spanningTree.dot</span>
 <span class="sd">       [[&#39;v4&#39;, &#39;v2&#39;, &#39;v1&#39;, &#39;v3&#39;, &#39;v1&#39;, &#39;v2&#39;, &#39;v5&#39;, &#39;v2&#39;, &#39;v4&#39;]]</span>
@@ -3720,8 +3726,43 @@
         <span class="n">g</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeSize</span><span class="p">()</span>
         <span class="n">g</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="n">g</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">g</span>      </div></div>
+        <span class="k">return</span> <span class="n">g</span></div>
 
+<div class="viewcode-block" id="PermutationGraph.computeMinimalVertexColoring"><a class="viewcode-back" href="../techDoc.html#graphs.PermutationGraph.computeMinimalVertexColoring">[docs]</a>    <span class="k">def</span> <span class="nf">computeMinimalVertexColoring</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">permutation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">permutation</span>
+        <span class="n">vertexKeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">]</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">permutation</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">colors</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;gold&#39;</span><span class="p">,</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span><span class="s1">&#39;lightcoral&#39;</span><span class="p">,</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">,</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span>\
+                  <span class="s1">&#39;lightpink&#39;</span><span class="p">,</span><span class="s1">&#39;seagreen1&#39;</span><span class="p">,</span><span class="s1">&#39;skyblue&#39;</span><span class="p">,</span><span class="s1">&#39;wheat1&#39;</span><span class="p">,</span><span class="s1">&#39;lightsalmon&#39;</span><span class="p">]</span>
+        <span class="n">nc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
+        <span class="n">Q</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,[</span><span class="mi">0</span><span class="p">]]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc</span><span class="p">)]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc</span><span class="p">):</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">jQpt</span> <span class="o">=</span> <span class="n">Q</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;!!! Error: The number of available colors </span><span class="si">%d</span><span class="s1"> is not sufficient !!!&#39;</span> <span class="o">%</span> <span class="n">nc</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
+                    <span class="k">return</span>
+                <span class="k">if</span> <span class="n">permutation</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Q</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="n">jQpt</span><span class="p">]:</span>
+                    <span class="n">Q</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">permutation</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                    <span class="n">Q</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">break</span>
+        <span class="n">vertexColor</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">nj</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">nj</span><span class="p">):</span>
+                <span class="n">k</span> <span class="o">=</span> <span class="n">Q</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+                <span class="n">vertexColor</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">colors</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">vertexKeys</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vertexColor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;vertex </span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">vertexKeys</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">vertexColor</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span></div></div>
+    
+ 
 <span class="c1">##    def exportPermutationGraphViz(self,fileName=None,</span>
 <span class="c1">##                       noSilent=True,</span>
 <span class="c1">##                       graphType=&#39;png&#39;,graphSize=&#39;7,7&#39;,</span>
@@ -3831,6 +3872,9 @@
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
     <span class="n">g</span><span class="o">.</span><span class="n">exportPermutationGraphViz</span><span class="p">()</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">computeMinimalVertexColoring</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">WithVertexColoring</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
 <span class="c1">##    rg = RandomPermutationGraph(order=6,seed=None)</span>
 <span class="c1">##    print(rg)</span>
 <span class="c1">##    dg = g.transitiveOrientation()</span>
@@ -3897,7 +3941,7 @@
 <span class="c1">##    ust.showShort()</span>
 <span class="c1">##    ust.showMore()</span>
 <span class="c1">##    ust.dfs = ust.randomDepthFirstSearch()</span>
-<span class="c1">##    ust.exportGraphViz(withSpanningTree=True)</span>
+<span class="c1">##    ust.exportGraphViz(WithSpanningTree=True)</span>
 <span class="c1">##    print(ust.prueferCode)</span>
     
 </pre></div>

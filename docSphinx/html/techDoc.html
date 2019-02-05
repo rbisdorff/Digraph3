@@ -3133,7 +3133,7 @@ using Kruskal’s greedy algorithm on the dual valuation.</p>
 <span class="go">v4 -&gt; [&#39;v5&#39;, &#39;v2&#39;]</span>
 <span class="go">v5 -&gt; [&#39;v4&#39;, &#39;v2&#39;, &#39;v3&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span> <span class="o">=</span> <span class="n">BestDeterminedSpanningForest</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;spanningTree&#39;</span><span class="p">,</span><span class="n">withSpanningTree</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;spanningTree&#39;</span><span class="p">,</span><span class="n">WithSpanningTree</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to spanningTree.dot</span>
 <span class="go">[[&#39;v4&#39;, &#39;v2&#39;, &#39;v1&#39;, &#39;v3&#39;, &#39;v1&#39;, &#39;v2&#39;, &#39;v5&#39;, &#39;v2&#39;, &#39;v4&#39;]]</span>
@@ -3382,7 +3382,7 @@ of the vertex keys.</p>
 
 <dl class="method">
 <dt id="graphs.Graph.exportGraphViz">
-<code class="descname">exportGraphViz</code><span class="sig-paren">(</span><em>fileName=None</em>, <em>verticesSubset=None</em>, <em>noSilent=True</em>, <em>graphType='png'</em>, <em>graphSize='7</em>, <em>7'</em>, <em>withSpanningTree=False</em>, <em>matching=None</em>, <em>layout=None</em>, <em>arcColor='black'</em>, <em>lineWidth=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.exportGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.exportGraphViz" title="Permalink to this definition">¶</a></dt>
+<code class="descname">exportGraphViz</code><span class="sig-paren">(</span><em>fileName=None</em>, <em>verticesSubset=None</em>, <em>noSilent=True</em>, <em>graphType='png'</em>, <em>graphSize='7</em>, <em>7'</em>, <em>WithSpanningTree=False</em>, <em>WithVertexColoring=False</em>, <em>matching=None</em>, <em>layout=None</em>, <em>arcColor='black'</em>, <em>lineWidth=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.exportGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.exportGraphViz" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exports GraphViz dot file  for graph drawing filtering.</p>
 <dl class="docutils">
 <dt>Example:</dt>
@@ -3867,6 +3867,11 @@ Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.</p>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/permutationGraph.png"><img alt="Default permutation graph" class="align-center" src="_images/permutationGraph.png" style="width: 300px;" /></a>
+<dl class="method">
+<dt id="graphs.PermutationGraph.computeMinimalVertexColoring">
+<code class="descname">computeMinimalVertexColoring</code><span class="sig-paren">(</span><em>colors=None</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#PermutationGraph.computeMinimalVertexColoring"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.PermutationGraph.computeMinimalVertexColoring" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="graphs.PermutationGraph.transitiveOrientation">
 <code class="descname">transitiveOrientation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#PermutationGraph.transitiveOrientation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.PermutationGraph.transitiveOrientation" title="Permalink to this definition">¶</a></dt>
