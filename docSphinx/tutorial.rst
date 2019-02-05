@@ -3783,7 +3783,7 @@ fdp -Tpng coloredPermutationGraph.dot -o coloredPermutationGraph.png
 
 .. Figure:: coloredPermutationGraph.png
     :alt: minimal vertex coloring
-    :width: 200 px
+    :width: 300 px
     :align: center
 	    
     *Figure* 13c: Minimal vertex coloring of the permutation graph
