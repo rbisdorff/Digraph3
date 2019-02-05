@@ -131,7 +131,7 @@ def testRandomSpanningForest():
     print('==>> Testing RandomSpanningForest class instantiation')
     p = RandomGraph(order=10,edgeProbability=0.1,seed=100)
     p.randomDepthFirstSearch(seed=1)
-    p.exportGraphViz(withSpanningTree=True)
+    p.exportGraphViz(WithSpanningTree=True)
     print(p.dfs)
     spt = RandomSpanningForest(p,seed=1)
     print(spt.dfs)
@@ -142,7 +142,7 @@ def testRandomSpanningTree():
     p = RandomGraph(order=10,edgeProbability=0.5,seed=100)
     ust = RandomSpanningTree(p,seed=1)
     print(ust.dfs)
-    ust.exportGraphViz(withSpanningTree=True)
+    ust.exportGraphViz(WithSpanningTree=True)
 
 def testRandomGraphsModels():
     print('==>> Testing random graph models')
