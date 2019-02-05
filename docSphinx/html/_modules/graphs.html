@@ -3728,15 +3728,17 @@
         <span class="n">g</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">g</span></div>
 
-<div class="viewcode-block" id="PermutationGraph.computeMinimalVertexColoring"><a class="viewcode-back" href="../techDoc.html#graphs.PermutationGraph.computeMinimalVertexColoring">[docs]</a>    <span class="k">def</span> <span class="nf">computeMinimalVertexColoring</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="PermutationGraph.computeMinimalVertexColoring"><a class="viewcode-back" href="../techDoc.html#graphs.PermutationGraph.computeMinimalVertexColoring">[docs]</a>    <span class="k">def</span> <span class="nf">computeMinimalVertexColoring</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Computes a vertex coloring by using a minimal number of color queues for sorting the</span>
+<span class="sd">        given permutation. Sets by the way the chromatic number of the graph.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">permutation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">permutation</span>
         <span class="n">vertexKeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">]</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">permutation</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">colors</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;gold&#39;</span><span class="p">,</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span><span class="s1">&#39;lightcoral&#39;</span><span class="p">,</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">,</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span>\
-                  <span class="s1">&#39;lightpink&#39;</span><span class="p">,</span><span class="s1">&#39;seagreen1&#39;</span><span class="p">,</span><span class="s1">&#39;skyblue&#39;</span><span class="p">,</span><span class="s1">&#39;wheat1&#39;</span><span class="p">,</span><span class="s1">&#39;lightsalmon&#39;</span><span class="p">]</span>
+            <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;gold&#39;</span><span class="p">,</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span><span class="s1">&#39;lightcoral&#39;</span><span class="p">,</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">,</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span>\
+                  <span class="s1">&#39;lightpink&#39;</span><span class="p">,</span><span class="s1">&#39;seagreen1&#39;</span><span class="p">,</span><span class="s1">&#39;skyblue&#39;</span><span class="p">,</span><span class="s1">&#39;wheat1&#39;</span><span class="p">,</span><span class="s1">&#39;lightsalmon&#39;</span><span class="p">,</span><span class="s1">&#39;wheat&#39;</span><span class="p">]</span>
         <span class="n">nc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
         <span class="n">Q</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,[</span><span class="mi">0</span><span class="p">]]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc</span><span class="p">)]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -3751,105 +3753,26 @@
                     <span class="n">Q</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">permutation</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
                     <span class="n">Q</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
                     <span class="k">break</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span>
         <span class="n">vertexColor</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">chromNumber</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc</span><span class="p">):</span>
             <span class="n">nj</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">nj</span><span class="p">):</span>
-                <span class="n">k</span> <span class="o">=</span> <span class="n">Q</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
-                <span class="n">vertexColor</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">colors</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">nj</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">chromNumber</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">nj</span><span class="p">):</span>
+                    <span class="n">k</span> <span class="o">=</span> <span class="n">Q</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+                    <span class="n">vertexColor</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">colors</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chromaticNumber</span> <span class="o">=</span> <span class="n">chromNumber</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">vertexColor</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">chromNumber</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">vertexKeys</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vertexColor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;vertex </span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">vertexKeys</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">vertexColor</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span></div></div>
     
- 
-<span class="c1">##    def exportPermutationGraphViz(self,fileName=None,</span>
-<span class="c1">##                       noSilent=True,</span>
-<span class="c1">##                       graphType=&#39;png&#39;,graphSize=&#39;7,7&#39;,</span>
-<span class="c1">##                       arcColor=&#39;black&#39;,</span>
-<span class="c1">##                       lineWidth=1):</span>
-<span class="c1">##        &quot;&quot;&quot;</span>
-<span class="c1">##        Exports GraphViz dot file for permutation drawing filtering.</span>
-<span class="c1">##        &quot;&quot;&quot;</span>
-<span class="c1">##        import os</span>
-<span class="c1">##        if noSilent:</span>
-<span class="c1">##            print(&#39;*---- exporting a dot file for GraphViz tools ---------*&#39;)</span>
-<span class="c1">##        vertexkeys = [x for x in self.vertices]</span>
-<span class="c1">##        n = len(vertexkeys)</span>
-<span class="c1">##        edges = self.edges</span>
-<span class="c1">##        Med = self.valuationDomain[&#39;med&#39;]</span>
-<span class="c1">##        i = 0</span>
-<span class="c1">##        if fileName == None:</span>
-<span class="c1">##            name = &#39;perm_&#39;+self.name</span>
-<span class="c1">##        else:</span>
-<span class="c1">##            name = fileName</span>
-<span class="c1">##        dotName = name+&#39;.dot&#39;</span>
-<span class="c1">##        if noSilent:</span>
-<span class="c1">##            print(&#39;Exporting to &#39;+dotName)</span>
-<span class="c1">##        fo = open(dotName,&#39;w&#39;)</span>
-<span class="c1">##        fo.write(&#39;strict digraph G {\n&#39;)</span>
-<span class="c1">##        fo.write(&#39;graph [ bgcolor = cornsilk, fontname = &quot;Helvetica-Oblique&quot;,\n fontsize = 12,\n label = &quot;&#39;)</span>
-<span class="c1">##        fo.write(&#39;\\nGraphs Python module (graphviz), R. Bisdorff, 2019&quot;, size=&quot;&#39;)</span>
-<span class="c1">##        fo.write(graphSize),fo.write(&#39;&quot;];\n&#39;)</span>
-<span class="c1">##        # horizontally positioned initial nodes at line 100</span>
-<span class="c1">##        # horinzontal space = 75</span>
-<span class="c1">##        vspace = 100</span>
-<span class="c1">##        hspace = 70</span>
-<span class="c1">##        for i in range(n):</span>
-<span class="c1">##            try:</span>
-<span class="c1">##                nodeName = str(self.vertices[vertexkeys[i]][&#39;shortName&#39;])</span>
-<span class="c1">##            except:</span>
-<span class="c1">##                try:</span>
-<span class="c1">##                    nodeName = self.vertices[vertexkeys[i]][&#39;name&#39;]</span>
-<span class="c1">##                except:</span>
-<span class="c1">##                    nodeName = str(vertexkeys[i])</span>
-<span class="c1">##            node = &#39;n&#39;+str(i+1)+&#39; [shape = &quot;circle&quot;, label = &quot;&#39; +nodeName+&#39;&quot;&#39;</span>
-<span class="c1">##            try:</span>
-<span class="c1">##                if self.vertices[vertexkeys[i]][&#39;spin&#39;] == 1:</span>
-<span class="c1">##                    node += &#39;, style = &quot;filled&quot;, color = %s, &#39; % spinColor</span>
-<span class="c1">##            except:</span>
-<span class="c1">##                pass</span>
-<span class="c1">##            node += &#39;pos=&quot;%d,%d&quot;];\n&#39; % (i*hspace,vspace)                </span>
-<span class="c1">##            fo.write(node)</span>
-<span class="c1">##        # horizontally positionned terminal nodes at line 0</span>
-<span class="c1">##        for i in range(n):</span>
-<span class="c1">##            try:</span>
-<span class="c1">##                nodeName = str(self.vertices[vertexkeys[i]][&#39;shortName&#39;])</span>
-<span class="c1">##            except:</span>
-<span class="c1">##                try:</span>
-<span class="c1">##                    nodeName = self.vertices[vertexkeys[i]][&#39;name&#39;]</span>
-<span class="c1">##                except:</span>
-<span class="c1">##                    nodeName = str(vertexkeys[i])</span>
-<span class="c1">##            node = &#39;n&#39;+str(n+i+1)+&#39; [shape = &quot;circle&quot;, label = &quot;&#39; +nodeName+&#39;&quot;&#39;</span>
-<span class="c1">##            try:</span>
-<span class="c1">##                if self.vertices[vertexkeys[i]][&#39;spin&#39;] == 1:</span>
-<span class="c1">##                    node += &#39;, style = &quot;filled&quot;, color = %s, &#39; % spinColor</span>
-<span class="c1">##            except:</span>
-<span class="c1">##                pass</span>
-<span class="c1">##            node += &#39;pos=&quot;%d,%d&quot;];\n&#39; % (i*hspace,0)                </span>
-<span class="c1">##            fo.write(node)</span>
-<span class="c1">##        # inversions drawing</span>
-<span class="c1">##        for i in range(n):</span>
-<span class="c1">##            edge = &#39;n&#39;+str(i+1)</span>
-<span class="c1">##            j = self.permutation[i]</span>
-<span class="c1">##            arrowFormat = \</span>
-<span class="c1">##                edge0 = edge+&#39;-&gt; n&#39;+str(n+j)+\</span>
-<span class="c1">##            &#39; [dir=both, color=black, arrowhead=normal, arrowtail=none] ;\n&#39;</span>
-<span class="c1">##            fo.write(edge0)</span>
-<span class="c1">##        fo.write(&#39;}\n&#39;)</span>
-<span class="c1">##        fo.close()</span>
-<span class="c1">##        # choose layout model </span>
-<span class="c1">##        layout = &#39;neato&#39;</span>
-<span class="c1">##        commandString = layout+&#39; -n -T&#39;+graphType+&#39; &#39;+dotName+&#39; -o &#39;+name+&#39;.&#39;+graphType</span>
-<span class="c1">##        if noSilent:</span>
-<span class="c1">##            print(commandString)</span>
-<span class="c1">##        try:</span>
-<span class="c1">##            os.system(commandString)</span>
-<span class="c1">##        except:</span>
-<span class="c1">##            if noSilent:</span>
-<span class="c1">##                print(&#39;graphViz tools not avalaible! Please check installation.&#39;)</span>
-<span class="c1">##                print(&#39;On Ubuntu: ..$ sudo apt-get install graphviz&#39;)</span>
-
 <div class="viewcode-block" id="RandomPermutationGraph"><a class="viewcode-back" href="../techDoc.html#graphs.RandomPermutationGraph">[docs]</a><span class="k">class</span> <span class="nc">RandomPermutationGraph</span><span class="p">(</span><span class="n">PermutationGraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A generator for random permutation graphs.</span>
@@ -3872,7 +3795,7 @@
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
     <span class="n">g</span><span class="o">.</span><span class="n">exportPermutationGraphViz</span><span class="p">()</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">computeMinimalVertexColoring</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">computeMinimalVertexColoring</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">WithVertexColoring</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     
 <span class="c1">##    rg = RandomPermutationGraph(order=6,seed=None)</span>

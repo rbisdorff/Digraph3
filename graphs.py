@@ -3681,15 +3681,17 @@ class PermutationGraph(Graph):
         g.notGamma = g.notGammaSets()
         return g
 
-    def computeMinimalVertexColoring(self,colors=None,Comments=False):
+    def computeMinimalVertexColoring(self,colors=None,Comments=False,Debug=False):
         """
+        Computes a vertex coloring by using a minimal number of color queues for sorting the
+        given permutation. Sets by the way the chromatic number of the graph.
         """
         permutation = self.permutation
         vertexKeys = [x for x in self.vertices]
         n = len(permutation)
         if colors == None:
-            colors = ['gold','lightblue','lightcoral','lightgreen','lightyellow','orange','gray',\
-                  'lightpink','seagreen1','skyblue','wheat1','lightsalmon']
+            colors = ['gold','lightblue','lightcoral','lightyellow','orange','gray',\
+                  'lightpink','seagreen1','skyblue','wheat1','lightsalmon','wheat']
         nc = len(colors)
         Q = [[0,[0]] for x in range(nc)]
         for i in range(n):
@@ -3704,105 +3706,26 @@ class PermutationGraph(Graph):
                     Q[j][1].append(permutation[i])
                     Q[j][0] += 1
                     break
+        if Debug:
+            print(Q)
         vertexColor = [0 for i in range(n)]
-        for j in range(n):
+        chromNumber = 0
+        for j in range(nc):
             nj = len(Q[j][1])
-            for i in range(1,nj):
-                k = Q[j][1][i] - 1
-                vertexColor[k] = colors[j]
+            if nj > 1:
+                chromNumber += 1
+                for i in range(1,nj):
+                    k = Q[j][1][i] - 1
+                    vertexColor[k] = colors[j]
+        self.chromaticNumber = chromNumber
+        if Debug:
+            print(vertexColor)
+            print(chromNumber)
         for i in range(n):
             self.vertices[vertexKeys[i]]['color'] = vertexColor[i]
             if Comments:
                 print('vertex %s: %s' % (vertexKeys[i],vertexColor[i]))
     
- 
-##    def exportPermutationGraphViz(self,fileName=None,
-##                       noSilent=True,
-##                       graphType='png',graphSize='7,7',
-##                       arcColor='black',
-##                       lineWidth=1):
-##        """
-##        Exports GraphViz dot file for permutation drawing filtering.
-##        """
-##        import os
-##        if noSilent:
-##            print('*---- exporting a dot file for GraphViz tools ---------*')
-##        vertexkeys = [x for x in self.vertices]
-##        n = len(vertexkeys)
-##        edges = self.edges
-##        Med = self.valuationDomain['med']
-##        i = 0
-##        if fileName == None:
-##            name = 'perm_'+self.name
-##        else:
-##            name = fileName
-##        dotName = name+'.dot'
-##        if noSilent:
-##            print('Exporting to '+dotName)
-##        fo = open(dotName,'w')
-##        fo.write('strict digraph G {\n')
-##        fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-##        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2019", size="')
-##        fo.write(graphSize),fo.write('"];\n')
-##        # horizontally positioned initial nodes at line 100
-##        # horinzontal space = 75
-##        vspace = 100
-##        hspace = 70
-##        for i in range(n):
-##            try:
-##                nodeName = str(self.vertices[vertexkeys[i]]['shortName'])
-##            except:
-##                try:
-##                    nodeName = self.vertices[vertexkeys[i]]['name']
-##                except:
-##                    nodeName = str(vertexkeys[i])
-##            node = 'n'+str(i+1)+' [shape = "circle", label = "' +nodeName+'"'
-##            try:
-##                if self.vertices[vertexkeys[i]]['spin'] == 1:
-##                    node += ', style = "filled", color = %s, ' % spinColor
-##            except:
-##                pass
-##            node += 'pos="%d,%d"];\n' % (i*hspace,vspace)                
-##            fo.write(node)
-##        # horizontally positionned terminal nodes at line 0
-##        for i in range(n):
-##            try:
-##                nodeName = str(self.vertices[vertexkeys[i]]['shortName'])
-##            except:
-##                try:
-##                    nodeName = self.vertices[vertexkeys[i]]['name']
-##                except:
-##                    nodeName = str(vertexkeys[i])
-##            node = 'n'+str(n+i+1)+' [shape = "circle", label = "' +nodeName+'"'
-##            try:
-##                if self.vertices[vertexkeys[i]]['spin'] == 1:
-##                    node += ', style = "filled", color = %s, ' % spinColor
-##            except:
-##                pass
-##            node += 'pos="%d,%d"];\n' % (i*hspace,0)                
-##            fo.write(node)
-##        # inversions drawing
-##        for i in range(n):
-##            edge = 'n'+str(i+1)
-##            j = self.permutation[i]
-##            arrowFormat = \
-##                edge0 = edge+'-> n'+str(n+j)+\
-##            ' [dir=both, color=black, arrowhead=normal, arrowtail=none] ;\n'
-##            fo.write(edge0)
-##        fo.write('}\n')
-##        fo.close()
-##        # choose layout model 
-##        layout = 'neato'
-##        commandString = layout+' -n -T'+graphType+' '+dotName+' -o '+name+'.'+graphType
-##        if noSilent:
-##            print(commandString)
-##        try:
-##            os.system(commandString)
-##        except:
-##            if noSilent:
-##                print('graphViz tools not avalaible! Please check installation.')
-##                print('On Ubuntu: ..$ sudo apt-get install graphviz')
-
 class RandomPermutationGraph(PermutationGraph):
     """
     A generator for random permutation graphs.
@@ -3825,7 +3748,7 @@ if __name__ == '__main__':
     print(g)
     g.exportGraphViz()
     g.exportPermutationGraphViz()
-    g.computeMinimalVertexColoring(Comments=True)
+    g.computeMinimalVertexColoring(Comments=True,Debug=True)
     g.exportGraphViz(WithVertexColoring=True)
     
 ##    rg = RandomPermutationGraph(order=6,seed=None)
