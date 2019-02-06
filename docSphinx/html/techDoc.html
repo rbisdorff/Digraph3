@@ -3382,7 +3382,7 @@ of the vertex keys.</p>
 
 <dl class="method">
 <dt id="graphs.Graph.exportGraphViz">
-<code class="descname">exportGraphViz</code><span class="sig-paren">(</span><em>fileName=None</em>, <em>verticesSubset=None</em>, <em>noSilent=True</em>, <em>graphType='png'</em>, <em>graphSize='7</em>, <em>7'</em>, <em>WithSpanningTree=False</em>, <em>WithVertexColoring=False</em>, <em>matching=None</em>, <em>layout=None</em>, <em>arcColor='black'</em>, <em>lineWidth=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.exportGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.exportGraphViz" title="Permalink to this definition">¶</a></dt>
+<code class="descname">exportGraphViz</code><span class="sig-paren">(</span><em>fileName=None</em>, <em>verticesSubset=None</em>, <em>Comments=True</em>, <em>graphType='png'</em>, <em>graphSize='7</em>, <em>7'</em>, <em>WithSpanningTree=False</em>, <em>WithVertexColoring=False</em>, <em>matching=None</em>, <em>layout=None</em>, <em>arcColor='black'</em>, <em>lineWidth=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.exportGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.exportGraphViz" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exports GraphViz dot file  for graph drawing filtering.</p>
 <dl class="docutils">
 <dt>Example:</dt>
@@ -3397,7 +3397,7 @@ of the vertex keys.</p>
 
 <dl class="method">
 <dt id="graphs.Graph.exportPermutationGraphViz">
-<code class="descname">exportPermutationGraphViz</code><span class="sig-paren">(</span><em>fileName=None</em>, <em>permutation=None</em>, <em>noSilent=True</em>, <em>hspace=100</em>, <em>vspace=70</em>, <em>graphType='png'</em>, <em>graphSize='7</em>, <em>7'</em>, <em>arcColor='black'</em>, <em>lineWidth=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.exportPermutationGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.exportPermutationGraphViz" title="Permalink to this definition">¶</a></dt>
+<code class="descname">exportPermutationGraphViz</code><span class="sig-paren">(</span><em>fileName=None</em>, <em>permutation=None</em>, <em>Comments=True</em>, <em>WithEdgeColoring=True</em>, <em>hspace=100</em>, <em>vspace=70</em>, <em>graphType='png'</em>, <em>graphSize='7</em>, <em>7'</em>, <em>arcColor='black'</em>, <em>lineWidth=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.exportPermutationGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.exportPermutationGraphViz" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exports GraphViz dot file for permutation drawing filtering.</p>
 <p>Horizontal (default=100) and vertical (default=75) spaces betwen the vertices’
 positions may be explicitely given in <em>hspace</em> and <em>vspace</em> parameters.</p>
@@ -3574,7 +3574,7 @@ H(c) = -sum_{{x,y} in self.edges}[spin_c(x)*spin_c(y)]</p>
 
 <dl class="method">
 <dt id="graphs.IsingModel.exportGraphViz">
-<code class="descname">exportGraphViz</code><span class="sig-paren">(</span><em>fileName=None, noSilent=True, graphType='png', graphSize='7,7', edgeColor='black', colors=['gold', 'lightblue']</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#IsingModel.exportGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.IsingModel.exportGraphViz" title="Permalink to this definition">¶</a></dt>
+<code class="descname">exportGraphViz</code><span class="sig-paren">(</span><em>fileName=None, Comments=True, graphType='png', graphSize='7,7', edgeColor='black', colors=['gold', 'lightblue']</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#IsingModel.exportGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.IsingModel.exportGraphViz" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exports GraphViz dot file  for Ising models drawing filtering.</p>
 </dd></dl>
 
@@ -3748,7 +3748,7 @@ When the last set is empty, the independent choice is maximal.</p>
 
 <dl class="method">
 <dt id="graphs.MISModel.exportGraphViz">
-<code class="descname">exportGraphViz</code><span class="sig-paren">(</span><em>fileName=None</em>, <em>noSilent=True</em>, <em>graphType='png'</em>, <em>graphSize='7</em>, <em>7'</em>, <em>misColor='lightblue'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#MISModel.exportGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.MISModel.exportGraphViz" title="Permalink to this definition">¶</a></dt>
+<code class="descname">exportGraphViz</code><span class="sig-paren">(</span><em>fileName=None</em>, <em>Comments=True</em>, <em>graphType='png'</em>, <em>graphSize='7</em>, <em>7'</em>, <em>misColor='lightblue'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#MISModel.exportGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.MISModel.exportGraphViz" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exports GraphViz dot file  for MIS models drawing filtering.</p>
 </dd></dl>
 
@@ -3944,7 +3944,7 @@ nSim simulation steps (default = len(graph.edges)).</p>
 
 <dl class="method">
 <dt id="graphs.Q_Coloring.exportGraphViz">
-<code class="descname">exportGraphViz</code><span class="sig-paren">(</span><em>fileName=None</em>, <em>noSilent=True</em>, <em>graphType='png'</em>, <em>graphSize='7</em>, <em>7'</em>, <em>layout=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Q_Coloring.exportGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Q_Coloring.exportGraphViz" title="Permalink to this definition">¶</a></dt>
+<code class="descname">exportGraphViz</code><span class="sig-paren">(</span><em>fileName=None</em>, <em>Comments=True</em>, <em>graphType='png'</em>, <em>graphSize='7</em>, <em>7'</em>, <em>layout=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Q_Coloring.exportGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Q_Coloring.exportGraphViz" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exports GraphViz dot file  for q-coloring drawing filtering.</p>
 <p>The graph drawing layout is depending on the graph type, but can be forced to either
 ‘fdp’, ‘circo’ or ‘neato’ with the layout parameter.</p>

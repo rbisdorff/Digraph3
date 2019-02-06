@@ -952,7 +952,7 @@ class Graph(object):
         return self.dfs
 
     def exportGraphViz(self,fileName=None,verticesSubset=None,
-                       noSilent=True,
+                       Comments=True,
                        graphType='png',graphSize='7,7',
                        WithSpanningTree=False,
                        WithVertexColoring=False,
@@ -973,7 +973,7 @@ class Graph(object):
            :align: center
         """
         import os
-        if noSilent:
+        if Comments:
             print('*---- exporting a dot file for GraphViz tools ---------*')
         if verticesSubset == None:
             vertexkeys = [x for x in self.vertices]
@@ -988,7 +988,7 @@ class Graph(object):
         else:
             name = fileName
         dotName = name+'.dot'
-        if noSilent:
+        if Comments:
             print('Exporting to '+dotName)
         ## if bestChoice != set():
         ##     rankBestString = '{rank=max; '
@@ -1078,18 +1078,19 @@ class Graph(object):
                 layout = 'fdp'
             
         commandString = layout+' -T'+graphType+' '+dotName+' -o '+name+'.'+graphType
-        if noSilent:
+        if Comments:
             print(commandString)
         try:
             os.system(commandString)
         except:
-            if noSilent:
+            if Comments:
                 print('graphViz tools not avalaible! Please check installation.')
                 print('On Ubuntu: ..$ sudo apt-get install graphviz')
 
     def exportPermutationGraphViz(self,fileName=None,
                        permutation=None,
-                       noSilent=True,
+                       Comments=True,
+                       WithEdgeColoring=True,
                        hspace=100,
                        vspace=70,
                        graphType='png',graphSize='7,7',
@@ -1113,7 +1114,18 @@ class Graph(object):
             except AttributeError:
                 print('No permutation available !!')
                 return
-        if noSilent:
+            colors = {'gold':'gold',
+                      'lightblue':'blue',
+                      'lightcoral':'coral',
+                      'lightyellow':'yellow',
+                      'orange':'orange',
+                      'gray':'black',
+                      'lightpink':'pink',
+                      'seagreen1':'green',
+                      'skyblue':'skyblue',
+                      'wheat1':'wheat',
+                      'lightsalmon':'salmon'}
+        if Comments:
             print('*---- exporting a dot file for GraphViz tools ---------*')
         vertexkeys = [x for x in self.vertices]
         n = len(vertexkeys)
@@ -1125,7 +1137,7 @@ class Graph(object):
         else:
             name = fileName
         dotName = name+'.dot'
-        if noSilent:
+        if Comments:
             print('Exporting to '+dotName)
         fo = open(dotName,'w')
         fo.write('strict digraph G {\n')
@@ -1172,21 +1184,33 @@ class Graph(object):
             fo.write(node)
         for i in range(n):
             edge = 'n'+str(i+1)
-            arrowFormat = \
-                edge0 = edge+'-> n'+str(n+i+1) +\
-            ' [dir=both, color=black, arrowhead=none, arrowtail=none] ;\n'
+            if WithEdgeColoring:
+                try:
+                    colorKey = self.vertices[vertexkeys[i]]['color']
+                    arrowFormat = \
+                        edge0 = edge+'-> n'+str(n+i+1) +\
+                ' [dir=both, color=%s, arrowhead=none, arrowtail=none] ;\n'\
+                    % colors[colorKey]
+                except KeyError:
+                    arrowFormat = \
+                       edge0 = edge+'-> n'+str(n+i+1) +\
+                ' [dir=both, color=black, arrowhead=none, arrowtail=none] ;\n'
+            else:
+                arrowFormat = \
+                        edge0 = edge+'-> n'+str(n+i+1) +\
+                ' [dir=both, color=black, arrowhead=none, arrowtail=none] ;\n'    
             fo.write(edge0)
         fo.write('}\n')
         fo.close()
         # choose layout model 
         layout = 'neato'
         commandString = layout+' -n -T'+graphType+' '+dotName+' -o '+name+'.'+graphType
-        if noSilent:
+        if Comments:
             print(commandString)
         try:
             os.system(commandString)
         except:
-            if noSilent:
+            if Comments:
                 print('graphViz tools not avalaible! Please check installation.')
                 print('On Ubuntu: ..$ sudo apt-get install graphviz')
 
@@ -2721,7 +2745,7 @@ class Q_Coloring(Graph):
         return infeasibleEdges              
 
     def exportGraphViz(self,fileName=None,
-                       noSilent=True,
+                       Comments=True,
                        graphType='png',
                        graphSize='7,7',
                        layout=None):
@@ -2764,7 +2788,7 @@ class Q_Coloring(Graph):
             :align: center
         """
         import os
-        if noSilent:
+        if Comments:
             print('*---- exporting a dot file for GraphViz tools ---------*')
         vertexkeys = [x for x in self.vertices]
         n = len(vertexkeys)
@@ -2776,7 +2800,7 @@ class Q_Coloring(Graph):
         else:
             name = fileName
         dotName = name+'.dot'
-        if noSilent:
+        if Comments:
             print('Exporting to '+dotName)
         ## if bestChoice != set():
         ##     rankBestString = '{rank=max; '
@@ -2823,12 +2847,12 @@ class Q_Coloring(Graph):
                 commandString = 'fdp -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
         else:
             commandString = layout+' -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
-        if noSilent:
+        if Comments:
             print(commandString)
         try:
             os.system(commandString)
         except:
-            if noSilent:
+            if Comments:
                 print('graphViz tools not avalaible! Please check installation.')
 
 
@@ -2921,7 +2945,7 @@ class IsingModel(Graph):
         return Hc        
     
     def exportGraphViz(self,fileName=None,
-                       noSilent=True,
+                       Comments=True,
                        graphType='png',
                        graphSize='7,7',
                        edgeColor='black',
@@ -2931,7 +2955,7 @@ class IsingModel(Graph):
 
         """
         import os
-        if noSilent:
+        if Comments:
             print('*---- exporting a dot file for GraphViz tools ---------*')
         vertexkeys = [x for x in self.vertices]
         n = len(vertexkeys)
@@ -2943,7 +2967,7 @@ class IsingModel(Graph):
         else:
             name = fileName
         dotName = name+'.dot'
-        if noSilent:
+        if Comments:
             print('Exporting to '+dotName)
         ## if bestChoice != set():
         ##     rankBestString = '{rank=max; '
@@ -2995,12 +3019,12 @@ class IsingModel(Graph):
             commandString = 'circo -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
         else:
             commandString = 'fdp -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
-        if noSilent:
+        if Comments:
             print(commandString)
         try:
             os.system(commandString)
         except:
-            if noSilent:
+            if Comments:
                 print('graphViz tools not avalaible! Please check installation.')
 
 class MetropolisChain(Graph):
@@ -3341,7 +3365,7 @@ class MISModel(Graph):
         return mis,misCover,unCovered
     
     def exportGraphViz(self,fileName=None,
-                       noSilent=True,
+                       Comments=True,
                        graphType='png',
                        graphSize='7,7',
                        misColor='lightblue'):
@@ -3350,7 +3374,7 @@ class MISModel(Graph):
 
         """
         import os
-        if noSilent:
+        if Comments:
             print('*---- exporting a dot file for GraphViz tools ---------*')
         vertexkeys = [x for x in self.vertices]
         n = len(vertexkeys)
@@ -3362,7 +3386,7 @@ class MISModel(Graph):
         else:
             name = fileName
         dotName = name+'.dot'
-        if noSilent:
+        if Comments:
             print('Exporting to '+dotName)
         ## if bestChoice != set():
         ##     rankBestString = '{rank=max; '
@@ -3410,12 +3434,12 @@ class MISModel(Graph):
             commandString = 'circo -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
         else:
             commandString = 'fdp -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
-        if noSilent:
+        if Comments:
             print(commandString)
         try:
             os.system(commandString)
         except:
-            if noSilent:
+            if Comments:
                 print('graphViz tools not avalaible! Please check installation.')
                 
 ##########################

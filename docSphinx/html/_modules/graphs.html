@@ -999,7 +999,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span></div>
 
 <div class="viewcode-block" id="Graph.exportGraphViz"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.exportGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">verticesSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                       <span class="n">noSilent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                       <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                        <span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>
                        <span class="n">WithSpanningTree</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                        <span class="n">WithVertexColoring</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -1020,7 +1020,7 @@
 <span class="sd">           :align: center</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">os</span>
-        <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- exporting a dot file for GraphViz tools ---------*&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">verticesSubset</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">vertexkeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">]</span>
@@ -1035,7 +1035,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">name</span> <span class="o">=</span> <span class="n">fileName</span>
         <span class="n">dotName</span> <span class="o">=</span> <span class="n">name</span><span class="o">+</span><span class="s1">&#39;.dot&#39;</span>
-        <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exporting to &#39;</span><span class="o">+</span><span class="n">dotName</span><span class="p">)</span>
         <span class="c1">## if bestChoice != set():</span>
         <span class="c1">##     rankBestString = &#39;{rank=max; &#39;</span>
@@ -1125,18 +1125,19 @@
                 <span class="n">layout</span> <span class="o">=</span> <span class="s1">&#39;fdp&#39;</span>
             
         <span class="n">commandString</span> <span class="o">=</span> <span class="n">layout</span><span class="o">+</span><span class="s1">&#39; -T&#39;</span><span class="o">+</span><span class="n">graphType</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="n">dotName</span><span class="o">+</span><span class="s1">&#39; -o &#39;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="n">graphType</span>
-        <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;On Ubuntu: ..$ sudo apt-get install graphviz&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Graph.exportPermutationGraphViz"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.exportPermutationGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportPermutationGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">permutation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                       <span class="n">noSilent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                       <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                       <span class="n">WithEdgeColoring</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                        <span class="n">hspace</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
                        <span class="n">vspace</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span>
                        <span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>
@@ -1160,7 +1161,18 @@
             <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No permutation available !!&#39;</span><span class="p">)</span>
                 <span class="k">return</span>
-        <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+            <span class="n">colors</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;gold&#39;</span><span class="p">:</span><span class="s1">&#39;gold&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;lightblue&#39;</span><span class="p">:</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;lightcoral&#39;</span><span class="p">:</span><span class="s1">&#39;coral&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;lightyellow&#39;</span><span class="p">:</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;orange&#39;</span><span class="p">:</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;gray&#39;</span><span class="p">:</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;lightpink&#39;</span><span class="p">:</span><span class="s1">&#39;pink&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;seagreen1&#39;</span><span class="p">:</span><span class="s1">&#39;green&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;skyblue&#39;</span><span class="p">:</span><span class="s1">&#39;skyblue&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;wheat1&#39;</span><span class="p">:</span><span class="s1">&#39;wheat&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;lightsalmon&#39;</span><span class="p">:</span><span class="s1">&#39;salmon&#39;</span><span class="p">}</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- exporting a dot file for GraphViz tools ---------*&#39;</span><span class="p">)</span>
         <span class="n">vertexkeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">]</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vertexkeys</span><span class="p">)</span>
@@ -1172,7 +1184,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">name</span> <span class="o">=</span> <span class="n">fileName</span>
         <span class="n">dotName</span> <span class="o">=</span> <span class="n">name</span><span class="o">+</span><span class="s1">&#39;.dot&#39;</span>
-        <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exporting to &#39;</span><span class="o">+</span><span class="n">dotName</span><span class="p">)</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">dotName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;strict digraph G {</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -1219,21 +1231,33 @@
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
             <span class="n">edge</span> <span class="o">=</span> <span class="s1">&#39;n&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-            <span class="n">arrowFormat</span> <span class="o">=</span> \
-                <span class="n">edge0</span> <span class="o">=</span> <span class="n">edge</span><span class="o">+</span><span class="s1">&#39;-&gt; n&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span>\
-            <span class="s1">&#39; [dir=both, color=black, arrowhead=none, arrowtail=none] ;</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="k">if</span> <span class="n">WithEdgeColoring</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">colorKey</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">vertexkeys</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="s1">&#39;color&#39;</span><span class="p">]</span>
+                    <span class="n">arrowFormat</span> <span class="o">=</span> \
+                        <span class="n">edge0</span> <span class="o">=</span> <span class="n">edge</span><span class="o">+</span><span class="s1">&#39;-&gt; n&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span>\
+                <span class="s1">&#39; [dir=both, color=</span><span class="si">%s</span><span class="s1">, arrowhead=none, arrowtail=none] ;</span><span class="se">\n</span><span class="s1">&#39;</span>\
+                    <span class="o">%</span> <span class="n">colors</span><span class="p">[</span><span class="n">colorKey</span><span class="p">]</span>
+                <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                    <span class="n">arrowFormat</span> <span class="o">=</span> \
+                       <span class="n">edge0</span> <span class="o">=</span> <span class="n">edge</span><span class="o">+</span><span class="s1">&#39;-&gt; n&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span>\
+                <span class="s1">&#39; [dir=both, color=black, arrowhead=none, arrowtail=none] ;</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">arrowFormat</span> <span class="o">=</span> \
+                        <span class="n">edge0</span> <span class="o">=</span> <span class="n">edge</span><span class="o">+</span><span class="s1">&#39;-&gt; n&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span>\
+                <span class="s1">&#39; [dir=both, color=black, arrowhead=none, arrowtail=none] ;</span><span class="se">\n</span><span class="s1">&#39;</span>    
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">edge0</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="c1"># choose layout model </span>
         <span class="n">layout</span> <span class="o">=</span> <span class="s1">&#39;neato&#39;</span>
         <span class="n">commandString</span> <span class="o">=</span> <span class="n">layout</span><span class="o">+</span><span class="s1">&#39; -n -T&#39;</span><span class="o">+</span><span class="n">graphType</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="n">dotName</span><span class="o">+</span><span class="s1">&#39; -o &#39;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="n">graphType</span>
-        <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;On Ubuntu: ..$ sudo apt-get install graphviz&#39;</span><span class="p">)</span></div>
 
@@ -2768,7 +2792,7 @@
         <span class="k">return</span> <span class="n">infeasibleEdges</span>              </div>
 
 <div class="viewcode-block" id="Q_Coloring.exportGraphViz"><a class="viewcode-back" href="../techDoc.html#graphs.Q_Coloring.exportGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                       <span class="n">noSilent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                       <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                        <span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>
                        <span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>
                        <span class="n">layout</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -2811,7 +2835,7 @@
 <span class="sd">            :align: center</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">os</span>
-        <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- exporting a dot file for GraphViz tools ---------*&#39;</span><span class="p">)</span>
         <span class="n">vertexkeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">]</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vertexkeys</span><span class="p">)</span>
@@ -2823,7 +2847,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">name</span> <span class="o">=</span> <span class="n">fileName</span>
         <span class="n">dotName</span> <span class="o">=</span> <span class="n">name</span><span class="o">+</span><span class="s1">&#39;.dot&#39;</span>
-        <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exporting to &#39;</span><span class="o">+</span><span class="n">dotName</span><span class="p">)</span>
         <span class="c1">## if bestChoice != set():</span>
         <span class="c1">##     rankBestString = &#39;{rank=max; &#39;</span>
@@ -2870,12 +2894,12 @@
                 <span class="n">commandString</span> <span class="o">=</span> <span class="s1">&#39;fdp -T&#39;</span><span class="o">+</span><span class="n">graphType</span><span class="o">+</span><span class="s1">&#39; &#39;</span> <span class="o">+</span><span class="n">dotName</span><span class="o">+</span><span class="s1">&#39; -o &#39;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="n">graphType</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">commandString</span> <span class="o">=</span> <span class="n">layout</span><span class="o">+</span><span class="s1">&#39; -T&#39;</span><span class="o">+</span><span class="n">graphType</span><span class="o">+</span><span class="s1">&#39; &#39;</span> <span class="o">+</span><span class="n">dotName</span><span class="o">+</span><span class="s1">&#39; -o &#39;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="n">graphType</span>
-        <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span></div></div>
 
 
@@ -2968,7 +2992,7 @@
         <span class="k">return</span> <span class="n">Hc</span>        </div>
     
 <div class="viewcode-block" id="IsingModel.exportGraphViz"><a class="viewcode-back" href="../techDoc.html#graphs.IsingModel.exportGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                       <span class="n">noSilent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                       <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                        <span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>
                        <span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>
                        <span class="n">edgeColor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
@@ -2978,7 +3002,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">os</span>
-        <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- exporting a dot file for GraphViz tools ---------*&#39;</span><span class="p">)</span>
         <span class="n">vertexkeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">]</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vertexkeys</span><span class="p">)</span>
@@ -2990,7 +3014,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">name</span> <span class="o">=</span> <span class="n">fileName</span>
         <span class="n">dotName</span> <span class="o">=</span> <span class="n">name</span><span class="o">+</span><span class="s1">&#39;.dot&#39;</span>
-        <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exporting to &#39;</span><span class="o">+</span><span class="n">dotName</span><span class="p">)</span>
         <span class="c1">## if bestChoice != set():</span>
         <span class="c1">##     rankBestString = &#39;{rank=max; &#39;</span>
@@ -3042,12 +3066,12 @@
             <span class="n">commandString</span> <span class="o">=</span> <span class="s1">&#39;circo -T&#39;</span><span class="o">+</span><span class="n">graphType</span><span class="o">+</span><span class="s1">&#39; &#39;</span> <span class="o">+</span><span class="n">dotName</span><span class="o">+</span><span class="s1">&#39; -o &#39;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="n">graphType</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">commandString</span> <span class="o">=</span> <span class="s1">&#39;fdp -T&#39;</span><span class="o">+</span><span class="n">graphType</span><span class="o">+</span><span class="s1">&#39; &#39;</span> <span class="o">+</span><span class="n">dotName</span><span class="o">+</span><span class="s1">&#39; -o &#39;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="n">graphType</span>
-        <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span></div></div>
 
 <div class="viewcode-block" id="MetropolisChain"><a class="viewcode-back" href="../techDoc.html#graphs.MetropolisChain">[docs]</a><span class="k">class</span> <span class="nc">MetropolisChain</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
@@ -3388,7 +3412,7 @@
         <span class="k">return</span> <span class="n">mis</span><span class="p">,</span><span class="n">misCover</span><span class="p">,</span><span class="n">unCovered</span></div>
     
 <div class="viewcode-block" id="MISModel.exportGraphViz"><a class="viewcode-back" href="../techDoc.html#graphs.MISModel.exportGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                       <span class="n">noSilent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                       <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                        <span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>
                        <span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>
                        <span class="n">misColor</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">):</span>
@@ -3397,7 +3421,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">os</span>
-        <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- exporting a dot file for GraphViz tools ---------*&#39;</span><span class="p">)</span>
         <span class="n">vertexkeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">]</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vertexkeys</span><span class="p">)</span>
@@ -3409,7 +3433,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">name</span> <span class="o">=</span> <span class="n">fileName</span>
         <span class="n">dotName</span> <span class="o">=</span> <span class="n">name</span><span class="o">+</span><span class="s1">&#39;.dot&#39;</span>
-        <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exporting to &#39;</span><span class="o">+</span><span class="n">dotName</span><span class="p">)</span>
         <span class="c1">## if bestChoice != set():</span>
         <span class="c1">##     rankBestString = &#39;{rank=max; &#39;</span>
@@ -3457,12 +3481,12 @@
             <span class="n">commandString</span> <span class="o">=</span> <span class="s1">&#39;circo -T&#39;</span><span class="o">+</span><span class="n">graphType</span><span class="o">+</span><span class="s1">&#39; &#39;</span> <span class="o">+</span><span class="n">dotName</span><span class="o">+</span><span class="s1">&#39; -o &#39;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="n">graphType</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">commandString</span> <span class="o">=</span> <span class="s1">&#39;fdp -T&#39;</span><span class="o">+</span><span class="n">graphType</span><span class="o">+</span><span class="s1">&#39; &#39;</span> <span class="o">+</span><span class="n">dotName</span><span class="o">+</span><span class="s1">&#39; -o &#39;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="n">graphType</span>
-        <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span></div></div>
                 
 <span class="c1">##########################</span>
