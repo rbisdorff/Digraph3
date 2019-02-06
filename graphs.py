@@ -1114,17 +1114,17 @@ class Graph(object):
             except AttributeError:
                 print('No permutation available !!')
                 return
-            colors = {'gold':'gold',
-                      'lightblue':'blue',
-                      'lightcoral':'coral',
-                      'lightyellow':'yellow',
-                      'orange':'orange',
-                      'gray':'black',
-                      'lightpink':'pink',
-                      'seagreen1':'green',
-                      'skyblue':'skyblue',
-                      'wheat1':'wheat',
-                      'lightsalmon':'salmon'}
+        colors = {'gold':'gold',
+                  'lightblue':'blue',
+                  'lightcoral':'coral',
+                  'lightyellow':'yellow',
+                  'orange':'orange',
+                  'gray':'black',
+                  'lightpink':'pink',
+                  'seagreen1':'green',
+                  'skyblue':'skyblue',
+                  'wheat1':'wheat',
+                  'lightsalmon':'salmon'}
         if Comments:
             print('*---- exporting a dot file for GraphViz tools ---------*')
         vertexkeys = [x for x in self.vertices]
@@ -1187,14 +1187,17 @@ class Graph(object):
             if WithEdgeColoring:
                 try:
                     colorKey = self.vertices[vertexkeys[i]]['color']
-                    arrowFormat = \
+                except KeyError:
+                    self.computeMinimalVertexColoring()
+                    colorKey = self.vertices[vertexkeys[i]]['color']
+                arrowFormat = \
                         edge0 = edge+'-> n'+str(n+i+1) +\
                 ' [dir=both, color=%s, arrowhead=none, arrowtail=none] ;\n'\
                     % colors[colorKey]
-                except KeyError:
-                    arrowFormat = \
-                       edge0 = edge+'-> n'+str(n+i+1) +\
-                ' [dir=both, color=black, arrowhead=none, arrowtail=none] ;\n'
+##                except KeyError:
+##                    arrowFormat = \
+##                       edge0 = edge+'-> n'+str(n+i+1) +\
+##                ' [dir=both, color=black, arrowhead=none, arrowtail=none] ;\n'
             else:
                 arrowFormat = \
                         edge0 = edge+'-> n'+str(n+i+1) +\

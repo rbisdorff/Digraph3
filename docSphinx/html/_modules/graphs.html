@@ -1161,17 +1161,17 @@
             <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No permutation available !!&#39;</span><span class="p">)</span>
                 <span class="k">return</span>
-            <span class="n">colors</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;gold&#39;</span><span class="p">:</span><span class="s1">&#39;gold&#39;</span><span class="p">,</span>
-                      <span class="s1">&#39;lightblue&#39;</span><span class="p">:</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span>
-                      <span class="s1">&#39;lightcoral&#39;</span><span class="p">:</span><span class="s1">&#39;coral&#39;</span><span class="p">,</span>
-                      <span class="s1">&#39;lightyellow&#39;</span><span class="p">:</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span>
-                      <span class="s1">&#39;orange&#39;</span><span class="p">:</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span>
-                      <span class="s1">&#39;gray&#39;</span><span class="p">:</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
-                      <span class="s1">&#39;lightpink&#39;</span><span class="p">:</span><span class="s1">&#39;pink&#39;</span><span class="p">,</span>
-                      <span class="s1">&#39;seagreen1&#39;</span><span class="p">:</span><span class="s1">&#39;green&#39;</span><span class="p">,</span>
-                      <span class="s1">&#39;skyblue&#39;</span><span class="p">:</span><span class="s1">&#39;skyblue&#39;</span><span class="p">,</span>
-                      <span class="s1">&#39;wheat1&#39;</span><span class="p">:</span><span class="s1">&#39;wheat&#39;</span><span class="p">,</span>
-                      <span class="s1">&#39;lightsalmon&#39;</span><span class="p">:</span><span class="s1">&#39;salmon&#39;</span><span class="p">}</span>
+        <span class="n">colors</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;gold&#39;</span><span class="p">:</span><span class="s1">&#39;gold&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;lightblue&#39;</span><span class="p">:</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;lightcoral&#39;</span><span class="p">:</span><span class="s1">&#39;coral&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;lightyellow&#39;</span><span class="p">:</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;orange&#39;</span><span class="p">:</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;gray&#39;</span><span class="p">:</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;lightpink&#39;</span><span class="p">:</span><span class="s1">&#39;pink&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;seagreen1&#39;</span><span class="p">:</span><span class="s1">&#39;green&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;skyblue&#39;</span><span class="p">:</span><span class="s1">&#39;skyblue&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;wheat1&#39;</span><span class="p">:</span><span class="s1">&#39;wheat&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;lightsalmon&#39;</span><span class="p">:</span><span class="s1">&#39;salmon&#39;</span><span class="p">}</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- exporting a dot file for GraphViz tools ---------*&#39;</span><span class="p">)</span>
         <span class="n">vertexkeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">]</span>
@@ -1234,14 +1234,17 @@
             <span class="k">if</span> <span class="n">WithEdgeColoring</span><span class="p">:</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">colorKey</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">vertexkeys</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="s1">&#39;color&#39;</span><span class="p">]</span>
-                    <span class="n">arrowFormat</span> <span class="o">=</span> \
+                <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">computeMinimalVertexColoring</span><span class="p">()</span>
+                    <span class="n">colorKey</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">vertexkeys</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="s1">&#39;color&#39;</span><span class="p">]</span>
+                <span class="n">arrowFormat</span> <span class="o">=</span> \
                         <span class="n">edge0</span> <span class="o">=</span> <span class="n">edge</span><span class="o">+</span><span class="s1">&#39;-&gt; n&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span>\
                 <span class="s1">&#39; [dir=both, color=</span><span class="si">%s</span><span class="s1">, arrowhead=none, arrowtail=none] ;</span><span class="se">\n</span><span class="s1">&#39;</span>\
                     <span class="o">%</span> <span class="n">colors</span><span class="p">[</span><span class="n">colorKey</span><span class="p">]</span>
-                <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-                    <span class="n">arrowFormat</span> <span class="o">=</span> \
-                       <span class="n">edge0</span> <span class="o">=</span> <span class="n">edge</span><span class="o">+</span><span class="s1">&#39;-&gt; n&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span>\
-                <span class="s1">&#39; [dir=both, color=black, arrowhead=none, arrowtail=none] ;</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="c1">##                except KeyError:</span>
+<span class="c1">##                    arrowFormat = \</span>
+<span class="c1">##                       edge0 = edge+&#39;-&gt; n&#39;+str(n+i+1) +\</span>
+<span class="c1">##                &#39; [dir=both, color=black, arrowhead=none, arrowtail=none] ;\n&#39;</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">arrowFormat</span> <span class="o">=</span> \
                         <span class="n">edge0</span> <span class="o">=</span> <span class="n">edge</span><span class="o">+</span><span class="s1">&#39;-&gt; n&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span>\
