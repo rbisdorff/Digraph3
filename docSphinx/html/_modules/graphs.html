@@ -1153,6 +1153,13 @@
 <span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">os</span>
+                <span class="c1"># inversions drawing</span>
+        <span class="k">if</span> <span class="n">permutation</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">permutation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">permutation</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No permutation available !!&#39;</span><span class="p">)</span>
+                <span class="k">return</span>
         <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- exporting a dot file for GraphViz tools ---------*&#39;</span><span class="p">)</span>
         <span class="n">vertexkeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">]</span>
@@ -1194,34 +1201,27 @@
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
         <span class="c1"># horizontally positionned terminal nodes at line 0</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">permutation</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">nodeName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">vertexkeys</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="s1">&#39;shortName&#39;</span><span class="p">])</span>
+                <span class="n">nodeName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">vertexkeys</span><span class="p">[</span><span class="n">k</span><span class="p">]][</span><span class="s1">&#39;shortName&#39;</span><span class="p">])</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="k">try</span><span class="p">:</span>
-                    <span class="n">nodeName</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">vertexkeys</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+                    <span class="n">nodeName</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">vertexkeys</span><span class="p">[</span><span class="n">k</span><span class="p">]][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
                 <span class="k">except</span><span class="p">:</span>
-                    <span class="n">nodeName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">vertexkeys</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="n">node</span> <span class="o">=</span> <span class="s1">&#39;n&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; [shape = &quot;circle&quot;, label = &quot;&#39;</span> <span class="o">+</span><span class="n">nodeName</span><span class="o">+</span><span class="s1">&#39;&quot;&#39;</span>
+                    <span class="n">nodeName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">vertexkeys</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="s1">&#39;n&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; [shape = &quot;circle&quot;, label = &quot;&#39;</span> <span class="o">+</span><span class="n">nodeName</span><span class="o">+</span><span class="s1">&#39;&quot;&#39;</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">vertexkeys</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="s1">&#39;spin&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">vertexkeys</span><span class="p">[</span><span class="n">k</span><span class="p">]][</span><span class="s1">&#39;spin&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                     <span class="n">node</span> <span class="o">+=</span> <span class="s1">&#39;, style = &quot;filled&quot;, color = </span><span class="si">%s</span><span class="s1">, &#39;</span> <span class="o">%</span> <span class="n">spinColor</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="k">pass</span>
             <span class="n">node</span> <span class="o">+=</span> <span class="s1">&#39;pos=&quot;</span><span class="si">%d</span><span class="s1">,</span><span class="si">%d</span><span class="s1">&quot;];</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">hspace</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>                
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-        <span class="c1"># inversions drawing</span>
-        <span class="k">if</span> <span class="n">permutation</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">permutation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">permutation</span>
-            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No permutation available !!&#39;</span><span class="p">)</span>
-                <span class="k">return</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
             <span class="n">edge</span> <span class="o">=</span> <span class="s1">&#39;n&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-            <span class="n">j</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">permutation</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
             <span class="n">arrowFormat</span> <span class="o">=</span> \
-                <span class="n">edge0</span> <span class="o">=</span> <span class="n">edge</span><span class="o">+</span><span class="s1">&#39;-&gt; n&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="n">j</span><span class="p">)</span><span class="o">+</span>\
-            <span class="s1">&#39; [dir=both, color=black, arrowhead=normal, arrowtail=none] ;</span><span class="se">\n</span><span class="s1">&#39;</span>
+                <span class="n">edge0</span> <span class="o">=</span> <span class="n">edge</span><span class="o">+</span><span class="s1">&#39;-&gt; n&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span>\
+            <span class="s1">&#39; [dir=both, color=black, arrowhead=none, arrowtail=none] ;</span><span class="se">\n</span><span class="s1">&#39;</span>
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">edge0</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>

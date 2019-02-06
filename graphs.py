@@ -1106,6 +1106,13 @@ class Graph(object):
             
         """
         import os
+                # inversions drawing
+        if permutation == None:
+            try:
+                permutation = self.permutation
+            except AttributeError:
+                print('No permutation available !!')
+                return
         if noSilent:
             print('*---- exporting a dot file for GraphViz tools ---------*')
         vertexkeys = [x for x in self.vertices]
@@ -1147,34 +1154,27 @@ class Graph(object):
             fo.write(node)
         # horizontally positionned terminal nodes at line 0
         for i in range(n):
+            k = permutation[i]-1
             try:
-                nodeName = str(self.vertices[vertexkeys[i]]['shortName'])
+                nodeName = str(self.vertices[vertexkeys[k]]['shortName'])
             except:
                 try:
-                    nodeName = self.vertices[vertexkeys[i]]['name']
+                    nodeName = self.vertices[vertexkeys[k]]['name']
                 except:
-                    nodeName = str(vertexkeys[i])
-            node = 'n'+str(n+i+1)+' [shape = "circle", label = "' +nodeName+'"'
+                    nodeName = str(vertexkeys[k])
+            node = 'n'+str(n+k+1)+' [shape = "circle", label = "' +nodeName+'"'
             try:
-                if self.vertices[vertexkeys[i]]['spin'] == 1:
+                if self.vertices[vertexkeys[k]]['spin'] == 1:
                     node += ', style = "filled", color = %s, ' % spinColor
             except:
                 pass
             node += 'pos="%d,%d"];\n' % (i*hspace,0)                
             fo.write(node)
-        # inversions drawing
-        if permutation == None:
-            try:
-                permutation = self.permutation
-            except AttributeError:
-                print('No permutation available !!')
-                return
         for i in range(n):
             edge = 'n'+str(i+1)
-            j = self.permutation[i]
             arrowFormat = \
-                edge0 = edge+'-> n'+str(n+j)+\
-            ' [dir=both, color=black, arrowhead=normal, arrowtail=none] ;\n'
+                edge0 = edge+'-> n'+str(n+i+1) +\
+            ' [dir=both, color=black, arrowhead=none, arrowtail=none] ;\n'
             fo.write(edge0)
         fo.write('}\n')
         fo.close()

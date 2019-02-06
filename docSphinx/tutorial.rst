@@ -3760,11 +3760,11 @@ Exporting to perm_permutationGraph.dot
 neato -n -Tpng perm_permutationGraph.dot -o perm_permutationGraph.png
 
 .. Figure:: perm_permutationGraph.png
-    :alt: The permutation of the vertices
+    :alt: The inversions of the permutation [4, 3, 6, 1, 5, 2]
     :width: 400 px
     :align: center
 
-    *Figure* 13b: The permutation of the vertices
+    *Figure* 13b: The inversions of zje permutation [4, 3, 6, 1, 5, 2]
 
 By using color sorting queues, the minimal vertex coloring for a permutation graph is computable in :math:`O(n log(n))` (see [Gul-2004]_).
 
