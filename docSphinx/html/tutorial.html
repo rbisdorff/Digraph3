@@ -5910,7 +5910,7 @@ execution time: 0 sec. and 2 millisec.
 <div class="section" id="permutation-graphs">
 <h3><a class="toc-backref" href="#id154">Permutation graphs</a><a class="headerlink" href="#permutation-graphs" title="Permalink to this headline">¶</a></h3>
 <p>A graph is called a <strong>permutation</strong> or <em>inversion</em> graph if there exists a permutation of its list of vertices such that the graph is isomorphic to the inversions operated by the permutation in this list.</p>
-<p><em>Source</em>: Martin Ch. Gulombic, Agorithmic Graph Theory and Perfect Graphs 2nd Ed., Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.</p>
+<p><em>Source</em>: Martin Ch. Golumbic, Agorithmic Graph Theory and Perfect Graphs 2nd Ed., Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -5962,7 +5962,7 @@ execution time: 0 sec. and 2 millisec.
 <a class="reference internal image-reference" href="_images/perm_permutationGraph.png"><img alt="The inversions of the permutation [4, 3, 6, 1, 5, 2]" src="_images/perm_permutationGraph.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text"><em>Figure</em> 13b: The matching diagram of the inversions of [4, 3, 6, 1, 5, 2]</span></p>
 </div>
-<p>By using color sorting queues, the minimal vertex coloring for a permutation graph is computable in <img class="math" src="_images/math/b2a4061572c6b479bf5122536adc95d28afcaf17.png" alt="O(n log(n))"/> (see <a class="reference internal" href="#gul-2004" id="id54">[Gul-2004]</a>).</p>
+<p>By using color sorting queues, the minimal vertex coloring for a permutation graph is computable in <img class="math" src="_images/math/b2a4061572c6b479bf5122536adc95d28afcaf17.png" alt="O(n log(n))"/> (see <a class="reference internal" href="#gol-2004" id="id54">[Gol-2004]</a>).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -5995,7 +5995,7 @@ execution time: 0 sec. and 2 millisec.
 </div>
 <div class="section" id="properties-of-permutation-graphs">
 <h3><a class="toc-backref" href="#id155">Properties of permutation graphs</a><a class="headerlink" href="#properties-of-permutation-graphs" title="Permalink to this headline">¶</a></h3>
-<p>A permutation graph is <strong>transitively orientable</strong>. The <a class="reference internal" href="techDoc.html#graphs.PermutationGraph.transitiveOrientation" title="graphs.PermutationGraph.transitiveOrientation"><code class="xref py py-func docutils literal"><span class="pre">graphs.PermutationGraph.transitiveOrientation()</span></code></a> method renders a digraph where each edge of the permutation graph is converted into an arc oriented in increasing alphabetic order of the adjacent vertices’ keys (see <a class="reference internal" href="#gul-2004" id="id55">[Gul-2004]</a>).</p>
+<p>A permutation graph is <strong>transitively orientable</strong>. The <a class="reference internal" href="techDoc.html#graphs.PermutationGraph.transitiveOrientation" title="graphs.PermutationGraph.transitiveOrientation"><code class="xref py py-func docutils literal"><span class="pre">graphs.PermutationGraph.transitiveOrientation()</span></code></a> method renders a digraph where each edge of the permutation graph is converted into an arc oriented in increasing alphabetic order of the adjacent vertices’ keys (see <a class="reference internal" href="#gol-2004" id="id55">[Gol-2004]</a>).</p>
 <p>This orientation is always transitive and delivers a <em>weak ordering</em> of the vertices.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -6101,7 +6101,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">Transitivity degree: 1.000</span>
 </pre></div>
 </td></tr></table></div>
-<p>As both orientations are transitive indeed, we may conclude that the given random graph is actally a permutation graph instance. However, we still need to find its corresponding permutation. We therefore implement a recipee given by Martin Gulombic <a class="reference internal" href="#gul-2004" id="id56">[Gul-2004]</a> p.159.</p>
+<p>As both orientations are transitive indeed, we may conclude that the given random graph is actally a permutation graph instance. However, we still need to find its corresponding permutation. We therefore implement a recipee given by Martin Golombic <a class="reference internal" href="#gol-2004" id="id56">[Gol-2004]</a> p.159.</p>
 <p>We will first <strong>fuse</strong> both <em>og</em> and <em>ogdual</em> orientations above with an <strong>epistemic disjunction</strong> (see the <a class="reference internal" href="techDoc.html#digraphsTools.omax" title="digraphsTools.omax"><code class="xref py py-func docutils literal"><span class="pre">digraphsTools.omax()</span></code></a> operator, hence, the needed partially determined orientations above).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -6307,10 +6307,10 @@ execution time: 0 sec. and 2 millisec.
 </td></tr>
 </tbody>
 </table>
-<table class="docutils citation" frame="void" id="gul-2004" rules="none">
+<table class="docutils citation" frame="void" id="gol-2004" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[Gul-2004]</td><td><em>(<a class="fn-backref" href="#id54">1</a>, <a class="fn-backref" href="#id55">2</a>, <a class="fn-backref" href="#id56">3</a>)</em> Martin Ch. Gulombic, <em>Agorithmic Graph Theory and Perfect Graphs</em> 2nd Ed., Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.</td></tr>
+<tr><td class="label">[Gol-2004]</td><td><em>(<a class="fn-backref" href="#id54">1</a>, <a class="fn-backref" href="#id55">2</a>, <a class="fn-backref" href="#id56">3</a>)</em> Martin Ch. Golumbic, <em>Agorithmic Graph Theory and Perfect Graphs</em> 2nd Ed., Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="bis-2000" rules="none">

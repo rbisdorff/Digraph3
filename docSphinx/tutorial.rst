@@ -3726,7 +3726,7 @@ Permutation graphs
 
 A graph is called a **permutation** or *inversion* graph if there exists a permutation of its list of vertices such that the graph is isomorphic to the inversions operated by the permutation in this list.
 
-*Source*: Martin Ch. Gulombic, Agorithmic Graph Theory and Perfect Graphs 2nd Ed., Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.
+*Source*: Martin Ch. Golumbic, Agorithmic Graph Theory and Perfect Graphs 2nd Ed., Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.
 
 >>> from graphs import PermutationGraph
 >>> g = PermutationGraph(permutation = [4, 3, 6, 1, 5, 2])
@@ -3766,7 +3766,7 @@ neato -n -Tpng perm_permutationGraph.dot -o perm_permutationGraph.png
 
     *Figure* 13b: The matching diagram of the inversions of [4, 3, 6, 1, 5, 2]
 
-By using color sorting queues, the minimal vertex coloring for a permutation graph is computable in :math:`O(n log(n))` (see [Gul-2004]_).
+By using color sorting queues, the minimal vertex coloring for a permutation graph is computable in :math:`O(n log(n))` (see [Gol-2004]_).
 
 >>> g.computeMinimalVertexColoring(Comments=True)
 vertex 1: lightcoral
@@ -3791,7 +3791,7 @@ fdp -Tpng coloredPermutationGraph.dot -o coloredPermutationGraph.png
 Properties of permutation graphs
 ................................
 
-A permutation graph is **transitively orientable**. The :py:func:`graphs.PermutationGraph.transitiveOrientation` method renders a digraph where each edge of the permutation graph is converted into an arc oriented in increasing alphabetic order of the adjacent vertices' keys (see [Gul-2004]_).
+A permutation graph is **transitively orientable**. The :py:func:`graphs.PermutationGraph.transitiveOrientation` method renders a digraph where each edge of the permutation graph is converted into an arc oriented in increasing alphabetic order of the adjacent vertices' keys (see [Gol-2004]_).
 
 This orientation is always transitive and delivers a *weak ordering* of the vertices.
     
@@ -3865,7 +3865,7 @@ Transitivity degree: 1.000
 >>> print('Transitivity degree: %.3f' % (ogd.transitivityDegree)) 
 Transitivity degree: 1.000
 
-As both orientations are transitive indeed, we may conclude that the given random graph is actally a permutation graph instance. However, we still need to find its corresponding permutation. We therefore implement a recipee given by Martin Gulombic [Gul-2004]_ p.159.
+As both orientations are transitive indeed, we may conclude that the given random graph is actally a permutation graph instance. However, we still need to find its corresponding permutation. We therefore implement a recipee given by Martin Golombic [Gol-2004]_ p.159.
 
 We will first **fuse** both *og* and *ogdual* orientations above with an **epistemic disjunction** (see the :py:func:`digraphsTools.omax` operator, hence, the needed partially determined orientations above).
 
@@ -3970,7 +3970,7 @@ References
 
 .. [FMCAA] O. Häggström (2002) *Finite Markov Chains and Algorithmic Applications*. Cambridge University Press.
 
-.. [Gul-2004] Martin Ch. Gulombic, *Agorithmic Graph Theory and Perfect Graphs* 2nd Ed., Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.
+.. [Gol-2004] Martin Ch. Golumbic, *Agorithmic Graph Theory and Perfect Graphs* 2nd Ed., Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.
 
 .. [BIS-2000] R. Bisdorff (2000), Logical foundation of fuzzy preferential systems with application to the ELECTRE decision aid methods, *Computers and Operations Research*, 27:673-687 (downloadable version `PDF file 159.1Kb <https://leopold-loewenheim.uni.lu/bisdorff/documents/foundationElectre.pdf>`_)
 
