@@ -3752,20 +3752,6 @@ fdp -Tpng permutationGraph.dot -o permutationGraph.png
 
     *Figure* 13a: The default permutation graph
 
-The **matching diagram** of the nine **inversions** -the actual *edges* of the permutation graph-, which are induced by the given permutation [4, 3, 6, 1, 5, 2], may as well be drawn with the graphviz *neato* layout and explicitely positioned horizontal lists of vertices (see :py:func:`graphs.Graph.exportPermutationGraphViz`).
-
->>> g.exportPermutationGraphViz()
-*---- exporting a dot file for GraphViz tools ---------*
-Exporting to perm_permutationGraph.dot
-neato -n -Tpng perm_permutationGraph.dot -o perm_permutationGraph.png
-
-.. Figure:: perm_permutationGraph.png
-    :alt: The inversions of the permutation [4, 3, 6, 1, 5, 2]
-    :width: 400 px
-    :align: center
-
-    *Figure* 13b: The matching diagram of the inversions of [4, 3, 6, 1, 5, 2]
-
 By using color sorting queues, the minimal vertex coloring for a permutation graph is computable in :math:`O(n log(n))` (see [Gol-2004]_).
 
 >>> g.computeMinimalVertexColoring(Comments=True)
@@ -3786,7 +3772,22 @@ fdp -Tpng coloredPermutationGraph.dot -o coloredPermutationGraph.png
     :width: 300 px
     :align: center
 	    
-    *Figure* 13c: Minimal vertex coloring of the permutation graph
+    *Figure* 13b: Minimal vertex coloring of the permutation graph
+
+The correspondingly colored **matching diagram** of the nine **inversions** -the actual *edges* of the permutation graph-, which are induced by the given permutation [4, 3, 6, 1, 5, 2], may as well be drawn with the graphviz *neato* layout and explicitely positioned horizontal lists of vertices (see :py:func:`graphs.Graph.exportPermutationGraphViz`).
+
+>>> g.exportPermutationGraphViz(WithEdgeColoring=True)
+*---- exporting a dot file for GraphViz tools ---------*
+Exporting to perm_permutationGraph.dot
+neato -n -Tpng perm_permutationGraph.dot -o perm_permutationGraph.png
+
+.. Figure:: perm_permutationGraph.png
+    :alt: The inversions of the permutation [4, 3, 6, 1, 5, 2]
+    :width: 400 px
+    :align: center
+
+    *Figure* 13c: Colored matching diagram of the minimal independent inversions of [4, 3, 6, 1, 5, 2]
+
 
 Properties of permutation graphs
 ................................

@@ -5948,20 +5948,6 @@ execution time: 0 sec. and 2 millisec.
 <a class="reference internal image-reference" href="_images/permutationGraph.png"><img alt="Default permutation graph" src="_images/permutationGraph.png" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-text"><em>Figure</em> 13a: The default permutation graph</span></p>
 </div>
-<p>The <strong>matching diagram</strong> of the nine <strong>inversions</strong> -the actual <em>edges</em> of the permutation graph-, which are induced by the given permutation [4, 3, 6, 1, 5, 2], may as well be drawn with the graphviz <em>neato</em> layout and explicitely positioned horizontal lists of vertices (see <a class="reference internal" href="techDoc.html#graphs.Graph.exportPermutationGraphViz" title="graphs.Graph.exportPermutationGraphViz"><code class="xref py py-func docutils literal"><span class="pre">graphs.Graph.exportPermutationGraphViz()</span></code></a>).</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportPermutationGraphViz</span><span class="p">()</span>
-<span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
-<span class="go">Exporting to perm_permutationGraph.dot</span>
-<span class="go">neato -n -Tpng perm_permutationGraph.dot -o perm_permutationGraph.png</span>
-</pre></div>
-</td></tr></table></div>
-<div class="figure align-center" id="id75">
-<a class="reference internal image-reference" href="_images/perm_permutationGraph.png"><img alt="The inversions of the permutation [4, 3, 6, 1, 5, 2]" src="_images/perm_permutationGraph.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-text"><em>Figure</em> 13b: The matching diagram of the inversions of [4, 3, 6, 1, 5, 2]</span></p>
-</div>
 <p>By using color sorting queues, the minimal vertex coloring for a permutation graph is computable in <img class="math" src="_images/math/b2a4061572c6b479bf5122536adc95d28afcaf17.png" alt="O(n log(n))"/> (see <a class="reference internal" href="#gol-2004" id="id54">[Gol-2004]</a>).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -5988,9 +5974,23 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">fdp -Tpng coloredPermutationGraph.dot -o coloredPermutationGraph.png</span>
 </pre></div>
 </td></tr></table></div>
-<div class="figure align-center" id="id76">
+<div class="figure align-center" id="id75">
 <a class="reference internal image-reference" href="_images/coloredPermutationGraph.png"><img alt="minimal vertex coloring" src="_images/coloredPermutationGraph.png" style="width: 300px;" /></a>
-<p class="caption"><span class="caption-text"><em>Figure</em> 13c: Minimal vertex coloring of the permutation graph</span></p>
+<p class="caption"><span class="caption-text"><em>Figure</em> 13b: Minimal vertex coloring of the permutation graph</span></p>
+</div>
+<p>The correspondingly colored <strong>matching diagram</strong> of the nine <strong>inversions</strong> -the actual <em>edges</em> of the permutation graph-, which are induced by the given permutation [4, 3, 6, 1, 5, 2], may as well be drawn with the graphviz <em>neato</em> layout and explicitely positioned horizontal lists of vertices (see <a class="reference internal" href="techDoc.html#graphs.Graph.exportPermutationGraphViz" title="graphs.Graph.exportPermutationGraphViz"><code class="xref py py-func docutils literal"><span class="pre">graphs.Graph.exportPermutationGraphViz()</span></code></a>).</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportPermutationGraphViz</span><span class="p">(</span><span class="n">WithEdgeColoring</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
+<span class="go">Exporting to perm_permutationGraph.dot</span>
+<span class="go">neato -n -Tpng perm_permutationGraph.dot -o perm_permutationGraph.png</span>
+</pre></div>
+</td></tr></table></div>
+<div class="figure align-center" id="id76">
+<a class="reference internal image-reference" href="_images/perm_permutationGraph.png"><img alt="The inversions of the permutation [4, 3, 6, 1, 5, 2]" src="_images/perm_permutationGraph.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-text"><em>Figure</em> 13c: Colored matching diagram of the minimal independent inversions of [4, 3, 6, 1, 5, 2]</span></p>
 </div>
 </div>
 <div class="section" id="properties-of-permutation-graphs">
