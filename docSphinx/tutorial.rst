@@ -3856,7 +3856,7 @@ Attributes       : ['name', 'order', 'vertices', 'valuationDomain',
 
     *Figure* 15: Random graph of order 8 generated with edge probility 0.4
 
-We may check that this graph and its dual are transitively orientable by computing for both an oriented digraph with the :py:func:`graphs.Graph.computeOrientedDigraph` method. The :code:`PartiallyDetermined=True` flag is required here in order to orient only the actual edges of the graphs. Relations between vertices not linked by an edge will be put to the indeterminate characteristic value 0. This will allow us to compute later on convenient disjunctive digraph fusions.
+We may check that this graph and its dual are transitively orientable by computing for both an oriented digraph with the :py:func:`graphs.Graph.computeOrientedDigraph` method.
 
 >>> og = g.computeOrientedDigraph(PartiallyDetermined=True)
 >>> print('Transitivity degree: %.3f' % (og.transitivityDegree)) 
@@ -3866,9 +3866,11 @@ Transitivity degree: 1.000
 >>> print('Transitivity degree: %.3f' % (ogd.transitivityDegree)) 
 Transitivity degree: 1.000
 
-As both orientations are transitive indeed, we may conclude that the given random graph is actally a permutation graph instance. However, we still need to find its corresponding permutation. We therefore implement a recipee given by Martin Golombic [Gol-2004]_ p.159.
+The :code:`PartiallyDetermined=True` flag (see Line 1 and 5) is required here in order to orient *only* the actual edges of the graphs. Relations between vertices not linked by an edge will be put to the *indeterminate* characteristic value 0. This will allow us to compute later on convenient disjunctive digraph fusions.
 
-We will first **fuse** both *og* and *ogdual* orientations above with an **epistemic disjunction** (see the :py:func:`digraphsTools.omax` operator, hence, the needed partially determined orientations above).
+As both orientations are transitive indeed (see Line 3 and 7), we may conclude that the given random graph is actally a permutation graph instance. However, we still need to find now its corresponding permutation. We therefore implement a recipee given by Martin Golombic [Gol-2004]_ p.159.
+
+We will first **fuse** both *og* and *ogdual* orientations above with an **epistemic disjunction** (see the :py:func:`digraphsTools.omax` operator), hence, the partially determined orientations requested above.
 
 >>> from digraphs import FusionDigraph
 >>> f1gd = FusionDigraph(og,ogdual,operator='o-max')
@@ -3876,9 +3878,9 @@ We will first **fuse** both *og* and *ogdual* orientations above with an **epist
 >>> print(seq1)
 ['v1', 'v2', 'v3', 'v5', 'v4', 'v6', 'v7', 'v8']
 
-Both *g* and *gdual* are oriented in increasing order of the keyss of the vertices and we obtain by the Copeland ranking rule (see :ref:`Ranking-Tutorial-label` and the :py:func:`digraphs.Digraph.computeCopelandRanking` method) a complete linear ordering of the vertices in increasing vertices' keys (see Line 5 above).
+Both *g* and *gdual* are oriented in increasing order of the keys of the vertices and we obtain by the *Copeland* ranking rule (see :ref:`Ranking-Tutorial-label` and the :py:func:`digraphs.Digraph.computeCopelandRanking` method) a complete linear ordering of the vertices in increasing vertices' keys (see Line 5 above).
 
-We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) in order to generate by disjunctive fusion again the inversions that are produced by the permutation we are looking for. Computing again a ranking with the Copeland rule will show the correspondingly permuted list of vertices (see Line 4 below).
+We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) in order to generate, again by disjunctive fusion, the inversions that are produced by the permutation we are looking for. Computing again a ranking with the *Copeland* rule, will show the correspondingly permuted list of vertices (see Line 4 below).
 
 >>> f2gd = FusionDigraph((-og),ogdual,operator='o-max')
 >>> seq2 = f2gd.computeCopelandRanking()
@@ -3893,7 +3895,7 @@ Vertex 'v1' is hence put at position 6, vertex 'v2' at position 1, ... etc. We g
 >>> print(permutation)
 [2, 3, 4, 8, 6, 1, 7, 5]
 
-We may finally check that this permutation will correctly generate a permutation graph which is indeed isomorphic to the given random graph *g*.
+We may finally check that this permutation will correctly generate a permutation graph which is isomorphic to the given random graph *g*.
 
 >>> gtest = PermutationGraph(permutation=[2, 3, 4, 8, 6, 1, 7, 5])
 >>> gtest
@@ -3918,7 +3920,7 @@ fdp -Tpng permutationGraph4335.dot -o permutationGraph4335.png
 
     *Figure* 16: Permutation graph obtained from [2, 3, 4, 8, 6, 1, 7, 5]
 
-And we recover indeed an isomorphic copy of the original random graph (see Fig. 15).
+And, we recover indeed an *isomorphic copy* of the original random graph (see Fig. 15).
 
 Links and appendices
 --------------------
