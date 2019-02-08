@@ -1239,7 +1239,8 @@
                     <span class="n">colorKey</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">vertexkeys</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="s1">&#39;color&#39;</span><span class="p">]</span>
                 <span class="n">arrowFormat</span> <span class="o">=</span> \
                         <span class="n">edge0</span> <span class="o">=</span> <span class="n">edge</span><span class="o">+</span><span class="s1">&#39;-&gt; n&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span>\
-                <span class="s1">&#39; [dir=both, color=</span><span class="si">%s</span><span class="s1">, arrowhead=none, arrowtail=none] ;</span><span class="se">\n</span><span class="s1">&#39;</span>\
+                <span class="s1">&#39; [dir=both, color=</span><span class="si">%s</span><span class="s1">, style=&quot;setlinewidth(2)&quot;,</span><span class="se">\</span>
+<span class="s1">                              arrowhead=none, arrowtail=none] ;</span><span class="se">\n</span><span class="s1">&#39;</span>\
                     <span class="o">%</span> <span class="n">colors</span><span class="p">[</span><span class="n">colorKey</span><span class="p">]</span>
 <span class="c1">##                except KeyError:</span>
 <span class="c1">##                    arrowFormat = \</span>
