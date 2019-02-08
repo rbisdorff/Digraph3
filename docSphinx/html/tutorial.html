@@ -611,7 +611,7 @@ Attributes       : [&#39;actions&#39;, &#39;valuationdomain&#39;, &#39;relation&
 11
 12
 13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">FusionDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fusDg</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">(</span><span class="n">asymDg</span><span class="p">,</span><span class="n">symDg</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fusDg</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">(</span><span class="n">asymDg</span><span class="p">,</span><span class="n">symDg</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fusDg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
 <span class="go">* ---- Relation Table -----</span>
 <span class="go">r(xSy) |  &#39;1&#39;    &#39;2&#39;   &#39;3&#39;  &#39;4&#39;   &#39;5&#39;    &#39;6&#39;  &#39;7&#39;</span>
@@ -5990,7 +5990,7 @@ execution time: 0 sec. and 2 millisec.
 </td></tr></table></div>
 <div class="figure align-center" id="id76">
 <a class="reference internal image-reference" href="_images/perm_permutationGraph.png"><img alt="The inversions of the permutation [4, 3, 6, 1, 5, 2]" src="_images/perm_permutationGraph.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-text"><em>Figure</em> 13c: Colored matching diagram of the minimal independent inversions of [4, 3, 6, 1, 5, 2]</span></p>
+<p class="caption"><span class="caption-text"><em>Figure</em> 13c: Colored matching diagram of the permutation [4, 3, 6, 1, 5, 2]</span></p>
 </div>
 </div>
 <div class="section" id="properties-of-permutation-graphs">

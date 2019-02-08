@@ -307,8 +307,8 @@ def testGraphVizExport():
     print('*==>> graphViz dot & png file exportation ----*')
     g = RandomBipolarOutrankingDigraph(numberOfActions = 7)
     g.showRubyChoice(Comments=True)
-    #g.exportGraphViz(fileName='gtest',bestChoice=g.bestChoice,worstChoice=g.worstChoice,noSilent=False,graphType='png',graphSize='7,7')
-    g.exportGraphViz(fileName='gtest',bestChoice=g.bestChoice,worstChoice=g.worstChoice,noSilent=True,graphType='pdf',graphSize='7,7')
+    #g.exportGraphViz(fileName='gtest',bestChoice=g.bestChoice,worstChoice=g.worstChoice,Comments=False,graphType='png',graphSize='7,7')
+    g.exportGraphViz(fileName='gtest',bestChoice=g.bestChoice,worstChoice=g.worstChoice,Comments=True,graphType='pdf',graphSize='7,7')
 
 def testDigraphDecomposition():
     print('*==>> testing decomposition of digraphs -----*')

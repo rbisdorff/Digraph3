@@ -713,20 +713,20 @@ class SortingDigraph(BipolarOutrankingDigraph):
                                 Sorted=False,\
                                 ReflexiveTerms=False)
 
-    def exportDigraphGraphViz(self,fileName=None, bestChoice=set(),worstChoice=set(),noSilent=True,graphType='png',graphSize='7,7'):
+    def exportDigraphGraphViz(self,fileName=None, bestChoice=set(),worstChoice=set(),Comments=True,graphType='png',graphSize='7,7'):
         """
         export GraphViz dot file for digraph drawing filtering.
         """
         Digraph.exportGraphViz(self, fileName=fileName,\
                                bestChoice=bestChoice,\
                                worstChoice=worstChoice,\
-                               noSilent=noSilent,\
+                               Comments=Comments,\
                                graphType=graphType,\
                                graphSize=graphSize)
 
 
     def exportGraphViz(self,fileName=None,direction='decreasing',\
-                       noSilent=True,graphType='png',\
+                       Comments=True,graphType='png',\
                        graphSize='7,7',\
                        fontSize=10,
                        relation=None,
@@ -758,7 +758,7 @@ class SortingDigraph(BipolarOutrankingDigraph):
         if Debug:
             print(ordering)
                     
-        if noSilent:
+        if Comments:
             print('*---- exporting a dot file for GraphViz tools ---------*')
         actionKeys = [x for x in self.actions]
         n = len(actionKeys)
@@ -771,7 +771,7 @@ class SortingDigraph(BipolarOutrankingDigraph):
         else:
             name = fileName
         dotName = name+'.dot'
-        if noSilent:
+        if Comments:
             print('Exporting to '+dotName)
 
         fo = open(dotName,'w')
@@ -825,12 +825,12 @@ class SortingDigraph(BipolarOutrankingDigraph):
 
         commandString = 'dot -Grankdir=TB -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
             #commandString = 'dot -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
-        if noSilent:
+        if Comments:
             print(commandString)
         try:
             os.system(commandString)
         except:
-            if noSilent:
+            if Comments:
                 print('graphViz tools not avalaible! Please check installation.')
 
     def computeSortingCharacteristics(self, action=None, StoreSorting=True,\
@@ -3746,7 +3746,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         return sorting
 
     def exportRatingGraphViz(self,fileName=None,relation=None,\
-                             direction='best',noSilent=True,\
+                             direction='best',Comments=True,\
                              graphType='png',graphSize='7,7',\
                              fontSize=10):
         """
@@ -3759,7 +3759,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
            *-------- Quantile sorting result ---------
             [0.40 - 0.60[ ['a1', 'a2', 'a3']
             [0.20 - 0.40[ ['a4', 'a5']
-           >>> nqr.exportRatingGraphViz(noSilent=False)
+           >>> nqr.exportRatingGraphViz(Comments=False)
            *---- exporting a dot file for GraphViz tools ---------*
             Exporting to quantilesRatingDigraph.dot
             dot -Grankdir=TB -Tpng quantilesRatingDigraph.dot -o quantilesRatingDigraph.png
@@ -3781,7 +3781,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         self.relationOrig = deepcopy(self.relation)
         self.relation = ratingRelation
         WeakOrder.exportGraphViz(self,fileName=fileName,\
-                             direction=direction,noSilent=noSilent,\
+                             direction=direction,Comments=Comments,\
                              graphType=graphType,graphSize=graphSize,\
                              digraphClass=self.__class__,\
                              fontSize=fontSize)
@@ -4406,7 +4406,7 @@ if __name__ == "__main__":
 ##                                       Correlations=True,
 ##                                       )
 ##    nqr.showQuantilesRating()
-##    nqr.exportRatingGraphViz(noSilent=False)
+##    nqr.exportRatingGraphViz(Comments=False)
 ##
 ##
 ##    pq1 = PerformanceQuantiles(tp,\
@@ -4424,7 +4424,7 @@ if __name__ == "__main__":
 ##                                       Correlations=True,
 ##                                       )
 ##    nqr1.showQuantilesRating()
-##    nqr1.exportRatingGraphViz(noSilent=False)
+##    nqr1.exportRatingGraphViz(Comments=False)
     
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')

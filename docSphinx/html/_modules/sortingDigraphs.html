@@ -760,20 +760,20 @@
                                 <span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                                 <span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="SortingDigraph.exportDigraphGraphViz"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.exportDigraphGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportDigraphGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bestChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span><span class="n">worstChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span><span class="n">noSilent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="SortingDigraph.exportDigraphGraphViz"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.exportDigraphGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportDigraphGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bestChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span><span class="n">worstChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        export GraphViz dot file for digraph drawing filtering.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Digraph</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fileName</span><span class="o">=</span><span class="n">fileName</span><span class="p">,</span>\
                                <span class="n">bestChoice</span><span class="o">=</span><span class="n">bestChoice</span><span class="p">,</span>\
                                <span class="n">worstChoice</span><span class="o">=</span><span class="n">worstChoice</span><span class="p">,</span>\
-                               <span class="n">noSilent</span><span class="o">=</span><span class="n">noSilent</span><span class="p">,</span>\
+                               <span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span>\
                                <span class="n">graphType</span><span class="o">=</span><span class="n">graphType</span><span class="p">,</span>\
                                <span class="n">graphSize</span><span class="o">=</span><span class="n">graphSize</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="SortingDigraph.exportGraphViz"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.exportGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;decreasing&#39;</span><span class="p">,</span>\
-                       <span class="n">noSilent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>\
+                       <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>\
                        <span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>\
                        <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
                        <span class="n">relation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -805,7 +805,7 @@
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">ordering</span><span class="p">)</span>
                     
-        <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- exporting a dot file for GraphViz tools ---------*&#39;</span><span class="p">)</span>
         <span class="n">actionKeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actionKeys</span><span class="p">)</span>
@@ -818,7 +818,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">name</span> <span class="o">=</span> <span class="n">fileName</span>
         <span class="n">dotName</span> <span class="o">=</span> <span class="n">name</span><span class="o">+</span><span class="s1">&#39;.dot&#39;</span>
-        <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exporting to &#39;</span><span class="o">+</span><span class="n">dotName</span><span class="p">)</span>
 
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">dotName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
@@ -872,12 +872,12 @@
 
         <span class="n">commandString</span> <span class="o">=</span> <span class="s1">&#39;dot -Grankdir=TB -T&#39;</span><span class="o">+</span><span class="n">graphType</span><span class="o">+</span><span class="s1">&#39; &#39;</span> <span class="o">+</span><span class="n">dotName</span><span class="o">+</span><span class="s1">&#39; -o &#39;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="n">graphType</span>
             <span class="c1">#commandString = &#39;dot -T&#39;+graphType+&#39; &#39; +dotName+&#39; -o &#39;+name+&#39;.&#39;+graphType</span>
-        <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="SortingDigraph.computeSortingCharacteristics"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.computeSortingCharacteristics">[docs]</a>    <span class="k">def</span> <span class="nf">computeSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">StoreSorting</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
@@ -3793,7 +3793,7 @@
         <span class="k">return</span> <span class="n">sorting</span></div>
 
 <div class="viewcode-block" id="NormedQuantilesRatingDigraph.exportRatingGraphViz"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.exportRatingGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportRatingGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">relation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
-                             <span class="n">direction</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span><span class="n">noSilent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
+                             <span class="n">direction</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                              <span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>\
                              <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -3806,7 +3806,7 @@
 <span class="sd">           *-------- Quantile sorting result ---------</span>
 <span class="sd">            [0.40 - 0.60[ [&#39;a1&#39;, &#39;a2&#39;, &#39;a3&#39;]</span>
 <span class="sd">            [0.20 - 0.40[ [&#39;a4&#39;, &#39;a5&#39;]</span>
-<span class="sd">           &gt;&gt;&gt; nqr.exportRatingGraphViz(noSilent=False)</span>
+<span class="sd">           &gt;&gt;&gt; nqr.exportRatingGraphViz(Comments=False)</span>
 <span class="sd">           *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="sd">            Exporting to quantilesRatingDigraph.dot</span>
 <span class="sd">            dot -Grankdir=TB -Tpng quantilesRatingDigraph.dot -o quantilesRatingDigraph.png</span>
@@ -3828,7 +3828,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">relationOrig</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">ratingRelation</span>
         <span class="n">WeakOrder</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="n">fileName</span><span class="p">,</span>\
-                             <span class="n">direction</span><span class="o">=</span><span class="n">direction</span><span class="p">,</span><span class="n">noSilent</span><span class="o">=</span><span class="n">noSilent</span><span class="p">,</span>\
+                             <span class="n">direction</span><span class="o">=</span><span class="n">direction</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span>\
                              <span class="n">graphType</span><span class="o">=</span><span class="n">graphType</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="n">graphSize</span><span class="p">,</span>\
                              <span class="n">digraphClass</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span>\
                              <span class="n">fontSize</span><span class="o">=</span><span class="n">fontSize</span><span class="p">)</span>
@@ -4453,7 +4453,7 @@
 <span class="c1">##                                       Correlations=True,</span>
 <span class="c1">##                                       )</span>
 <span class="c1">##    nqr.showQuantilesRating()</span>
-<span class="c1">##    nqr.exportRatingGraphViz(noSilent=False)</span>
+<span class="c1">##    nqr.exportRatingGraphViz(Comments=False)</span>
 <span class="c1">##</span>
 <span class="c1">##</span>
 <span class="c1">##    pq1 = PerformanceQuantiles(tp,\</span>
@@ -4471,7 +4471,7 @@
 <span class="c1">##                                       Correlations=True,</span>
 <span class="c1">##                                       )</span>
 <span class="c1">##    nqr1.showQuantilesRating()</span>
-<span class="c1">##    nqr1.exportRatingGraphViz(noSilent=False)</span>
+<span class="c1">##    nqr1.exportRatingGraphViz(Comments=False)</span>
     
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>

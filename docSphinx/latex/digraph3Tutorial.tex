@@ -54,7 +54,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{February 07, 2019}
+\date{February 08, 2019}
 \release{3.6-2500+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc2.png}\par}
@@ -136,7 +136,7 @@ Revision: Python 3.6
 
 
 \section{Working with the \sphinxstyleemphasis{Digraph3} software resources}
-\label{\detokenize{tutorial:working-with-the-digraph3-software-resources}}\label{\detokenize{tutorial:digraphs-tutorial-label}}
+\label{\detokenize{tutorial:digraphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-digraph3-software-resources}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -580,7 +580,7 @@ We may recover object \sphinxstyleemphasis{dg} from both partial objects \sphinx
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{FusionDigraph}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{fusDg} \PYG{o}{=} \PYG{n}{FusionDigraph}\PYG{p}{(}\PYG{n}{asymDg}\PYG{p}{,}\PYG{n}{symDg}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{fusDg} \PYG{o}{=} \PYG{n}{FusionDigraph}\PYG{p}{(}\PYG{n}{asymDg}\PYG{p}{,}\PYG{n}{symDg}\PYG{p}{,}\PYG{n}{operator}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{o\PYGZhy{}max}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{fusDg}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{* \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{g+go}{r(xSy) \textbar{}  \PYGZsq{}1\PYGZsq{}    \PYGZsq{}2\PYGZsq{}   \PYGZsq{}3\PYGZsq{}  \PYGZsq{}4\PYGZsq{}   \PYGZsq{}5\PYGZsq{}    \PYGZsq{}6\PYGZsq{}  \PYGZsq{}7\PYGZsq{}}
@@ -2744,7 +2744,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Ranking with multiple incommensurable criteria}
-\label{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}}\label{\detokenize{tutorial:ranking-tutorial-label}}
+\label{\detokenize{tutorial:ranking-tutorial-label}}\label{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -3212,7 +3212,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Rating with learned quantile norms}
-\label{\detokenize{tutorial:rating-with-learned-quantile-norms}}\label{\detokenize{tutorial:rating-tutorial-label}}
+\label{\detokenize{tutorial:rating-tutorial-label}}\label{\detokenize{tutorial:rating-with-learned-quantile-norms}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -4182,7 +4182,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Computing the non isomorphic MISs of the n-cycle graph}
-\label{\detokenize{tutorial:computing-the-non-isomorphic-miss-of-the-n-cycle-graph}}\label{\detokenize{tutorial:isomorphicmis-tutorial-label}}
+\label{\detokenize{tutorial:isomorphicmis-tutorial-label}}\label{\detokenize{tutorial:computing-the-non-isomorphic-miss-of-the-n-cycle-graph}}
 Due to the public success of our common 2008 publication with Jean-Luc Marichal \phantomsection\label{\detokenize{tutorial:id42}}{\hyperref[\detokenize{tutorial:isomis-08}]{\sphinxcrossref{{[}ISOMIS-08{]}}}} (\autopageref*{\detokenize{tutorial:isomis-08}}) , we present in this tutorial an example Python session for computing the \sphinxstylestrong{non isomorphic maximal independent sets} (MISs) from the 12-cycle graph, i.e. a \sphinxcode{digraphs.CirculantDigraph} class instance of order 12 and symmetric circulants 1 and -1.
 
 \fvset{hllines={, ,}}%
@@ -5132,7 +5132,7 @@ The correspondingly colored \sphinxstylestrong{matching diagram} of the nine \sp
 \capstart
 
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{perm_permutationGraph}.png}
-\caption{\sphinxstyleemphasis{Figure} 13c: Colored matching diagram of the minimal independent inversions of {[}4, 3, 6, 1, 5, 2{]}}\label{\detokenize{tutorial:id76}}\end{figure}
+\caption{\sphinxstyleemphasis{Figure} 13c: Colored matching diagram of the permutation {[}4, 3, 6, 1, 5, 2{]}}\label{\detokenize{tutorial:id76}}\end{figure}
 
 
 \subsection{Properties of permutation graphs}
@@ -5210,7 +5210,7 @@ The last property gives a polynomial test procedure (in \(O(n^3)\) due to the tr
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{randomGraph4335}.png}
 \caption{\sphinxstyleemphasis{Figure} 15: Random graph of order 8 generated with edge probility 0.4}\label{\detokenize{tutorial:id78}}\end{figure}
 
-We may check that this graph and its dual are transitively orientable by computing for both an oriented digraph with the \sphinxcode{graphs.Graph.computeOrientedDigraph()} method. The \sphinxcode{PartiallyDetermined=True} flag is required here in order to orient only the actual edges of the graphs. Relations between vertices not linked by an edge will be put to the indeterminate characteristic value 0. This will allow us to compute later on convenient disjunctive digraph fusions.
+We may check that this graph and its dual are transitively orientable by computing for both an oriented digraph with the \sphinxcode{graphs.Graph.computeOrientedDigraph()} method.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -5223,9 +5223,11 @@ We may check that this graph and its dual are transitively orientable by computi
 \PYG{g+go}{Transitivity degree: 1.000}
 \end{sphinxVerbatim}
 
-As both orientations are transitive indeed, we may conclude that the given random graph is actally a permutation graph instance. However, we still need to find its corresponding permutation. We therefore implement a recipee given by Martin Golombic \phantomsection\label{\detokenize{tutorial:id56}}{\hyperref[\detokenize{tutorial:gol-2004}]{\sphinxcrossref{{[}Gol-2004{]}}}} (\autopageref*{\detokenize{tutorial:gol-2004}}) p.159.
+The \sphinxcode{PartiallyDetermined=True} flag (see Line 1 and 5) is required here in order to orient \sphinxstyleemphasis{only} the actual edges of the graphs. Relations between vertices not linked by an edge will be put to the \sphinxstyleemphasis{indeterminate} characteristic value 0. This will allow us to compute later on convenient disjunctive digraph fusions.
 
-We will first \sphinxstylestrong{fuse} both \sphinxstyleemphasis{og} and \sphinxstyleemphasis{ogdual} orientations above with an \sphinxstylestrong{epistemic disjunction} (see the \sphinxcode{digraphsTools.omax()} operator, hence, the needed partially determined orientations above).
+As both orientations are transitive indeed (see Line 3 and 7), we may conclude that the given random graph is actally a permutation graph instance. However, we still need to find now its corresponding permutation. We therefore implement a recipee given by Martin Golombic \phantomsection\label{\detokenize{tutorial:id56}}{\hyperref[\detokenize{tutorial:gol-2004}]{\sphinxcrossref{{[}Gol-2004{]}}}} (\autopageref*{\detokenize{tutorial:gol-2004}}) p.159.
+
+We will first \sphinxstylestrong{fuse} both \sphinxstyleemphasis{og} and \sphinxstyleemphasis{ogdual} orientations above with an \sphinxstylestrong{epistemic disjunction} (see the \sphinxcode{digraphsTools.omax()} operator), hence, the partially determined orientations requested above.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -5236,9 +5238,9 @@ We will first \sphinxstylestrong{fuse} both \sphinxstyleemphasis{og} and \sphinx
 \PYG{g+go}{[\PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v2\PYGZsq{}, \PYGZsq{}v3\PYGZsq{}, \PYGZsq{}v5\PYGZsq{}, \PYGZsq{}v4\PYGZsq{}, \PYGZsq{}v6\PYGZsq{}, \PYGZsq{}v7\PYGZsq{}, \PYGZsq{}v8\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-Both \sphinxstyleemphasis{g} and \sphinxstyleemphasis{gdual} are oriented in increasing order of the keyss of the vertices and we obtain by the Copeland ranking rule (see {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Ranking with multiple incommensurable criteria}}}} (\autopageref*{\detokenize{tutorial:ranking-tutorial-label}}) and the \sphinxcode{digraphs.Digraph.computeCopelandRanking()} method) a complete linear ordering of the vertices in increasing vertices’ keys (see Line 5 above).
+Both \sphinxstyleemphasis{g} and \sphinxstyleemphasis{gdual} are oriented in increasing order of the keys of the vertices and we obtain by the \sphinxstyleemphasis{Copeland} ranking rule (see {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Ranking with multiple incommensurable criteria}}}} (\autopageref*{\detokenize{tutorial:ranking-tutorial-label}}) and the \sphinxcode{digraphs.Digraph.computeCopelandRanking()} method) a complete linear ordering of the vertices in increasing vertices’ keys (see Line 5 above).
 
-We reverse now the orientation of the edges in \sphinxstyleemphasis{og} (see \sphinxstyleemphasis{-og} in Line 1 below) in order to generate by disjunctive fusion again the inversions that are produced by the permutation we are looking for. Computing again a ranking with the Copeland rule will show the correspondingly permuted list of vertices (see Line 4 below).
+We reverse now the orientation of the edges in \sphinxstyleemphasis{og} (see \sphinxstyleemphasis{-og} in Line 1 below) in order to generate, again by disjunctive fusion, the inversions that are produced by the permutation we are looking for. Computing again a ranking with the \sphinxstyleemphasis{Copeland} rule, will show the correspondingly permuted list of vertices (see Line 4 below).
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -5259,7 +5261,7 @@ Vertex ‘v1’ is hence put at position 6, vertex ‘v2’ at position 1, … e
 \PYG{g+go}{[2, 3, 4, 8, 6, 1, 7, 5]}
 \end{sphinxVerbatim}
 
-We may finally check that this permutation will correctly generate a permutation graph which is indeed isomorphic to the given random graph \sphinxstyleemphasis{g}.
+We may finally check that this permutation will correctly generate a permutation graph which is isomorphic to the given random graph \sphinxstyleemphasis{g}.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -5287,7 +5289,7 @@ We may finally check that this permutation will correctly generate a permutation
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{permutationGraph4335}.png}
 \caption{\sphinxstyleemphasis{Figure} 16: Permutation graph obtained from {[}2, 3, 4, 8, 6, 1, 7, 5{]}}\label{\detokenize{tutorial:id79}}\end{figure}
 
-And we recover indeed an isomorphic copy of the original random graph (see Fig. 15).
+And, we recover indeed an \sphinxstyleemphasis{isomorphic copy} of the original random graph (see Fig. 15).
 
 
 \section{Links and appendices}

@@ -3745,13 +3745,13 @@
         
 <div class="viewcode-block" id="Digraph.exportGraphViz"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.exportGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                        <span class="n">bestChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span><span class="n">worstChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span>\
-                       <span class="n">noSilent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>
+                       <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>
                        <span class="n">relation</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        export GraphViz dot file  for graph drawing filtering.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">os</span>
-        <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- exporting a dot file dor GraphViz tools ---------*&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">actionsSubset</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">actionkeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
@@ -3767,7 +3767,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">name</span> <span class="o">=</span> <span class="n">fileName</span>
         <span class="n">dotName</span> <span class="o">=</span> <span class="n">name</span><span class="o">+</span><span class="s1">&#39;.dot&#39;</span>
-        <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exporting to &#39;</span><span class="o">+</span><span class="n">dotName</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">bestChoice</span> <span class="o">!=</span> <span class="nb">set</span><span class="p">():</span>
             <span class="n">rankBestString</span> <span class="o">=</span> <span class="s1">&#39;{rank=max; &#39;</span>
@@ -3850,12 +3850,12 @@
             <span class="n">commandString</span> <span class="o">=</span> <span class="s1">&#39;dot -Grankdir=BT -T&#39;</span><span class="o">+</span><span class="n">graphType</span><span class="o">+</span><span class="s1">&#39; &#39;</span> <span class="o">+</span><span class="n">dotName</span><span class="o">+</span><span class="s1">&#39; -o &#39;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="n">graphType</span>
             <span class="c1">#commandString = &#39;dot -T&#39;+graphType+&#39; &#39; +dotName+&#39; -o &#39;+name+&#39;.&#39;+graphType</span>
 
-        <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Digraph.exportD3"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.exportD3">[docs]</a>    <span class="k">def</span> <span class="nf">exportD3</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fileName</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">,</span> <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>

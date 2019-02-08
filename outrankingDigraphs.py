@@ -1683,14 +1683,14 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             print('number of real vetos: %d' % (realveto))
             return nv,realveto
 
-    def saveXMLRubisOutrankingDigraph(self,name='temp',category='Rubis outranking digraph',subcategory='Choice recommendation',author='digraphs Module (RB)',reference='saved from Python',noSilent=False,servingD3=True):
+    def saveXMLRubisOutrankingDigraph(self,name='temp',category='Rubis outranking digraph',subcategory='Choice recommendation',author='digraphs Module (RB)',reference='saved from Python',Comments=False,servingD3=True):
         """
         save complete Rubis problem and result in XML format with unicode encoding.
         """
         import codecs
         self.computeRubyChoice()
 
-        if noSilent:
+        if Comments:
             print('*----- saving digraph in XML format  -------------*')        
         nameExt = name+'.xml'
         fo = codecs.open(nameExt,'w',encoding='utf-8')
@@ -1982,7 +1982,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         fo.write('</rubisOutrankingDigraph>\n')
         
         fo.close()
-        if noSilent:
+        if Comments:
             print('File: ' + nameExt + ' saved !')
 
 

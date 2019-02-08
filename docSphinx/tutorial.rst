@@ -374,7 +374,7 @@ Fusion by epistemic disjunction
 We may recover object *dg* from both partial objects *asymDg* and *symDg* with a **bipolar fusion** constructor, also called **epistemic disjunction**, available via the :py:class:`digraphs.FusionDigraph` class.
 
     >>> from digraphs import FusionDigraph
-    >>> fusDg = FusionDigraph(asymDg,symDg)
+    >>> fusDg = FusionDigraph(asymDg,symDg,operator='o-max')
     >>> fusDg.showRelationTable()
     * ---- Relation Table -----
     r(xSy) |  '1'    '2'   '3'  '4'   '5'    '6'  '7'	  
@@ -3786,7 +3786,7 @@ neato -n -Tpng perm_permutationGraph.dot -o perm_permutationGraph.png
     :width: 400 px
     :align: center
 
-    *Figure* 13c: Colored matching diagram of the minimal independent inversions of [4, 3, 6, 1, 5, 2]
+    *Figure* 13c: Colored matching diagram of the permutation [4, 3, 6, 1, 5, 2]
 
 
 Properties of permutation graphs

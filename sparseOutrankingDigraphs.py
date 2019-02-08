@@ -617,13 +617,13 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
 
     def exportGraphViz(self,fileName=None,actionsSubset=None,\
                        bestChoice=set(),worstChoice=set(),\
-                       noSilent=True,graphType='png',graphSize='7,7',
+                       Comments=True,graphType='png',graphSize='7,7',
                        relation=None):
         """
         export GraphViz dot file  for graph drawing filtering.
         """
         import os
-        if noSilent:
+        if Comments:
             print('*---- exporting a dot file dor GraphViz tools ---------*')
         if actionsSubset == None:
             actionkeys = [x for x in self.actions]
@@ -639,7 +639,7 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         else:
             name = fileName
         dotName = name+'.dot'
-        if noSilent:
+        if Comments:
             print('Exporting to '+dotName)
         if bestChoice != set():
             rankBestString = '{rank=max; '
@@ -722,18 +722,18 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
             commandString = 'dot -Grankdir=BT -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
             #commandString = 'dot -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
 
-        if noSilent:
+        if Comments:
             print(commandString)
         try:
             os.system(commandString)
         except:
-            if noSilent:
+            if Comments:
                 print('graphViz tools not avalaible! Please check installation.')
 
     def exportSortingGraphViz(self,fileName=None,\
                               actionsSubset=None,\
                               direction='decreasing',\
-                       noSilent=True,graphType='pdf',\
+                       Comments=True,graphType='pdf',\
                        graphSize='7,7',\
                        fontSize=10,
                        relation=None,
@@ -846,7 +846,7 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         if Debug:
             print(compKeys)
 
-        if noSilent:
+        if Comments:
             print('*---- exporting a dot file for GraphViz tools ---------*')
         if actionsSubset == None:
             actionsKeys = [x for x in self.actions]
@@ -862,7 +862,7 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         else:
             name = fileName
         dotName = name+'.dot'
-        if noSilent:
+        if Comments:
             print('Exporting to '+dotName)
 ##        if bestChoice != set():
 ##            rankBestString = '{rank=max; '
@@ -917,12 +917,12 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
 
         commandString = 'dot -Grankdir=TB -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
             #commandString = 'dot -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
-        if noSilent:
+        if Comments:
             print(commandString)
         try:
             os.system(commandString)
         except:
-            if noSilent:
+            if Comments:
                 print('graphViz tools not avalaible! Please check installation.')
 
 ########################

@@ -201,18 +201,18 @@ class LinearOrder(Digraph):
         html += '</table>'
         return html
     
-    def exportDigraphGraphViz(self,fileName=None, bestChoice=set(),worstChoice=set(),noSilent=True,graphType='png',graphSize='7,7'):
+    def exportDigraphGraphViz(self,fileName=None, bestChoice=set(),worstChoice=set(),Comments=True,graphType='png',graphSize='7,7'):
         """
         export GraphViz dot file for digraph drawing filtering.
         """
-        Digraph.exportGraphViz(self, fileName=fileName, bestChoice=bestChoice,worstChoice=worstChoice,noSilent=noSilent,graphType=graphType,graphSize=graphSize)
+        Digraph.exportGraphViz(self, fileName=fileName, bestChoice=bestChoice,worstChoice=worstChoice,Comments=Comments,graphType=graphType,graphSize=graphSize)
 
-    def exportGraphViz(self,fileName=None, isValued=True, bestChoice=set(),worstChoice=set(),noSilent=True,graphType='png',graphSize='7,7'):
+    def exportGraphViz(self,fileName=None, isValued=True, bestChoice=set(),worstChoice=set(),Comments=True,graphType='png',graphSize='7,7'):
         """
         export GraphViz dot file  for linear order drawing filtering.
         """
         import os
-        if noSilent:
+        if Comments:
             print('*---- exporting a dot file dor GraphViz tools ---------*')
         #actionkeys = [x for x in self.actions]
         actionkeys = self.computeOrder()
@@ -225,7 +225,7 @@ class LinearOrder(Digraph):
         else:
             name = fileName
         dotName = name+'.dot'
-        if noSilent:
+        if Comments:
             print('Exporting to '+dotName)
         if bestChoice != set():
             rankBestString = '{rank=max; '
@@ -260,12 +260,12 @@ class LinearOrder(Digraph):
             #commandString = 'dot -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
         fo.write('}\n')
         fo.close()
-        if noSilent:
+        if Comments:
             print(commandString)
         try:
             os.system(commandString)
         except:
-            if noSilent:
+            if Comments:
                 print('graphViz tools not avalaible! Please check installation.')
     
     def computeKemenyIndex(self, other):

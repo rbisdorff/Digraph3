@@ -3188,10 +3188,10 @@ def saveXMCDARubisBestChoiceRecommendation(problemFileName=None,tempDir='.',valu
             fileName=graphFileName,\
             bestChoice=g_orig.goodChoices,\
             worstChoice=g_orig.badChoices,\
-            noSilent=True,graphType='png',graphSize='10,10')
+            Comments=True,graphType='png',graphSize='10,10')
         g_orig.exportGraphViz(\
                                   fileName=graphFileName,bestChoice=g_orig.goodChoices,\
-                                  worstChoice=g_orig.badChoices,noSilent=False,\
+                                  worstChoice=g_orig.badChoices,Comments=False,\
                                   graphType='pdf',graphSize='10,10')
     except: 
         errorExit(tempDir,problemFileName, 4, 'GraphViz export error', 'Error when computing the outranking digraph image.')

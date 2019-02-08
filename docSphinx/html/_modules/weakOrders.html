@@ -184,14 +184,14 @@
                                 <span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                                 <span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="WeakOrder.exportDigraphGraphViz"><a class="viewcode-back" href="../techDoc.html#weakOrders.WeakOrder.exportDigraphGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportDigraphGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bestChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span><span class="n">worstChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span><span class="n">noSilent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="WeakOrder.exportDigraphGraphViz"><a class="viewcode-back" href="../techDoc.html#weakOrders.WeakOrder.exportDigraphGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportDigraphGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bestChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span><span class="n">worstChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        export GraphViz dot file for digraph drawing filtering.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">Digraph</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fileName</span><span class="o">=</span><span class="n">fileName</span><span class="p">,</span> <span class="n">bestChoice</span><span class="o">=</span><span class="n">bestChoice</span><span class="p">,</span><span class="n">worstChoice</span><span class="o">=</span><span class="n">worstChoice</span><span class="p">,</span><span class="n">noSilent</span><span class="o">=</span><span class="n">noSilent</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="n">graphType</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="n">graphSize</span><span class="p">)</span></div>
+        <span class="n">Digraph</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fileName</span><span class="o">=</span><span class="n">fileName</span><span class="p">,</span> <span class="n">bestChoice</span><span class="o">=</span><span class="n">bestChoice</span><span class="p">,</span><span class="n">worstChoice</span><span class="o">=</span><span class="n">worstChoice</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="n">graphType</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="n">graphSize</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="WeakOrder.exportGraphViz"><a class="viewcode-back" href="../techDoc.html#weakOrders.WeakOrder.exportGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraphClass</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">relation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span>\
-                       <span class="n">noSilent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>\
+                       <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>\
                        <span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>\
                        <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -223,7 +223,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">computeRankingByLastChoosing</span><span class="p">()</span>
                 <span class="n">rankingByChoosing</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankingByLastChoosing</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
         
-        <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- exporting a dot file for GraphViz tools ---------*&#39;</span><span class="p">)</span>
         <span class="n">actionKeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actionKeys</span><span class="p">)</span>
@@ -236,7 +236,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">name</span> <span class="o">=</span> <span class="n">fileName</span>
         <span class="n">dotName</span> <span class="o">=</span> <span class="n">name</span><span class="o">+</span><span class="s1">&#39;.dot&#39;</span>
-        <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exporting to &#39;</span><span class="o">+</span><span class="n">dotName</span><span class="p">)</span>
 <span class="c1">##        if bestChoice != set():</span>
 <span class="c1">##            rankBestString = &#39;{rank=max; &#39;</span>
@@ -310,12 +310,12 @@
         
         <span class="n">commandString</span> <span class="o">=</span> <span class="s1">&#39;dot -Grankdir=TB -T&#39;</span><span class="o">+</span><span class="n">graphType</span><span class="o">+</span><span class="s1">&#39; &#39;</span> <span class="o">+</span><span class="n">dotName</span><span class="o">+</span><span class="s1">&#39; -o &#39;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="n">graphType</span>
             <span class="c1">#commandString = &#39;dot -T&#39;+graphType+&#39; &#39; +dotName+&#39; -o &#39;+name+&#39;.&#39;+graphType</span>
-        <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">noSilent</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span></div></div>
 
 <span class="c1">##    def showWeakOrder(self,rankingByChoosing=None):</span>
@@ -1172,7 +1172,7 @@
             <span class="n">direction</span> <span class="o">=</span> <span class="s1">&#39;worst&#39;</span>
         <span class="n">WeakOrder</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fileName</span><span class="o">=</span><span class="n">fileName</span><span class="p">,</span>\
                             <span class="n">direction</span><span class="o">=</span><span class="n">direction</span><span class="p">,</span>\
-                            <span class="n">noSilent</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span>\
+                            <span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span>\
                             <span class="n">graphType</span><span class="o">=</span><span class="n">graphType</span><span class="p">,</span>\
                             <span class="n">graphSize</span><span class="o">=</span><span class="n">graphSize</span><span class="p">,</span>\
                             <span class="n">fontSize</span><span class="o">=</span><span class="n">fontSize</span><span class="p">)</span></div></div>
@@ -1828,7 +1828,7 @@
 <span class="c1">##        return ordering</span>
 <span class="c1">##</span>
 <span class="c1">##    def exportSortingGraphViz(self,fileName=None,direction=&#39;decreasing&#39;,\</span>
-<span class="c1">##                       noSilent=True,graphType=&#39;png&#39;,\</span>
+<span class="c1">##                       Comments=True,graphType=&#39;png&#39;,\</span>
 <span class="c1">##                       graphSize=&#39;7,7&#39;,\</span>
 <span class="c1">##                       fontSize=10,\</span>
 <span class="c1">##                        Debug=False):</span>
@@ -1845,7 +1845,7 @@
 <span class="c1">##                                     Threading=self.sortingParameters[&#39;Threading&#39;])</span>
 <span class="c1">##        qs.exportGraphViz(fileName=fileName,</span>
 <span class="c1">##                          direction=direction,\</span>
-<span class="c1">##                       noSilent=noSilent,graphType=graphType,\</span>
+<span class="c1">##                       Comments=Comments,graphType=graphType,\</span>
 <span class="c1">##                       graphSize=graphSize,\</span>
 <span class="c1">##                       fontSize=fontSize,Debug=Debug)</span>
 <span class="c1">##</span>
