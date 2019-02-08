@@ -189,6 +189,7 @@ def testPermutationGraphs():
     g.exportPermutationGraphViz()
     g.computeMinimalVertexColoring(Comments=True,Debug=True)
     g.exportGraphViz(WithVertexColoring=True)
+    g.exportPermutationGraphViz(WithEdgeColoring=True)
     rg = RandomPermutationGraph(order=6,seed=100)
     print(rg)
     print('permutation:',rg.computePermutation())

@@ -1192,7 +1192,8 @@ class Graph(object):
                     colorKey = self.vertices[vertexkeys[i]]['color']
                 arrowFormat = \
                         edge0 = edge+'-> n'+str(n+i+1) +\
-                ' [dir=both, color=%s, arrowhead=none, arrowtail=none] ;\n'\
+                ' [dir=both, color=%s, style="setlinewidth(2)",\
+                              arrowhead=none, arrowtail=none] ;\n'\
                     % colors[colorKey]
 ##                except KeyError:
 ##                    arrowFormat = \
