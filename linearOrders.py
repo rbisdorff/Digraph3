@@ -383,7 +383,7 @@ class RankedPairsOrder(LinearOrder):
             if prudentBetaLevel > other.valuationdomain['med']:
                 if Debug:
                     print('Is extended prudent with level: %.2f !' % prudentBetaLevel)
-                g = ExtendedPrudentDigraph(other,\
+                g = _ExtendedPrudentDigraph(other,\
                  prudentBetaLevel=prudentBetaLevel,\
                  CoDual=coDual,Debug=Debug)
                 g.recodeValuation(-3,3)

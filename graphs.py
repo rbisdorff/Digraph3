@@ -2266,7 +2266,7 @@ class RandomTree(Graph):
         if prueferCode == None:
             prueferCode = []
             for k in range(order-2):
-                prueferCode.append( verticesList[random.choice( list(range(order)) )] )
+                prueferCode.append( random.choice(verticesList) )
         self.prueferCode = prueferCode
         if Debug:
             print('prueferCode = ', self.prueferCode)

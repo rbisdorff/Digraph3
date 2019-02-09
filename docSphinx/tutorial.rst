@@ -3922,6 +3922,191 @@ fdp -Tpng permutationGraph4335.dot -o permutationGraph4335.png
 
 And, we recover indeed an *isomorphic copy* of the original random graph (see Fig. 15).
 
+Back to :ref:`Tutorial-label`
+
+
+.. _Trees-Tutorial-label:
+
+On trees and forests
+--------------------
+
+.. contents:: 
+	:depth: 2
+	:local:
+
+Generating random trees
+.......................
+
+Using the :py:class:`graphs.RandomTree` class, we may generate a random tree of order 9.
+
+>>> t = RandomTree()
+>>> t = RandomTree(order=9,seed=100)
+>>> t
+*------- Graph instance description ------*
+Instance class   : RandomTree
+Instance name    : randomTree
+Graph Order      : 9
+Graph Size       : 8
+Valuation domain : [-1.00 - 1.00]
+Attributes       : ['name', 'order', 'vertices', 'valuationDomain',
+                    'edges', 'prueferCode', 'size', 'gamma']
+*---- RandomTree specific data ----*
+Prüfer code  : ['v3', 'v8', 'v8', 'v3', 'v7', 'v6', 'v7']
+>>> t.exportGraphViz('tutRandomTree')
+*---- exporting a dot file for GraphViz tools ---------*
+Exporting to tutRandomTree.dot
+neato -Tpng tutRandomTree.dot -o tutRandomTree.png
+
+
+.. Figure:: tutRandomTree.png
+    :alt: Random tree instance
+    :width: 350 px
+    :align: center
+
+    *Figure 17a*: Random Tree instance of order 9
+
+A tree of order *n* contains *n-1* edges (see Line8 and 9) and the tree's structure is entirely characterized by a corresponding **Prüfer code** -ie a *list of vertices keys*- of length *n-2* (see Line 13).
+
+It is as well possible to generate first a *random* Prüfer code of length *n-2* from a set of *n* vertices and then construct the corresponding tree of order *n* (see [Bar-1991]_).
+
+>>> verticesList = ['v1','v2','v3','v4','v5','v6','v7']
+>>> n = len(verticesList)
+>>> from random import seed, choice
+>>> seed(101)
+>>> code = []
+>>> for k in range(n-2):
+...     code.append( choice(verticesList) )
+>>> print(code)
+['v5', 'v7', 'v2', 'v5', 'v3']
+>>> t = RandomTree(prueferCode=code)
+>>> t
+*------- Graph instance description ------*
+Instance class   : RandomTree
+Instance name    : randomTree
+Graph Order      : 7
+Graph Size       : 6
+Valuation domain : [-1.00 - 1.00]
+Attributes       : ['name', 'order', 'vertices', 'valuationDomain',
+                    'edges', 'prueferCode', 'size', 'gamma']
+*---- RandomTree specific data ----*
+Prüfer code  : ['v5', 'v7', 'v2', 'v5', 'v3']
+>>> t.exportGraphViz('tutPruefTree')
+*---- exporting a dot file for GraphViz tools ---------*
+Exporting to tutPruefTree.dot
+neato -Tpng tutPruefTree.dot -o tutPruefTree.png
+
+.. Figure:: tutPruefTree.png
+    :alt: Tree instance from random Prüfer code
+    :width: 350 px
+    :align: center
+
+    *Figure 17b*: Tree instance from random Prüfer code
+
+Thus we know that there exist :math:`(n-2)^n` different random trees of order *n*.
+
+Given a genuine graph instance, how can we recognize that is in fact a tree instance ?
+
+Recognizing trees
+.................
+
+Given a graph :math:`G(V,E)` of order *n* and size *s*, the following 5 assertions *A1*, *A2*, *A3*, *A4* and *A5* are all equivalent (see [Bar-1991]_):
+
+    - *A1*: *G* is a tree;
+    - *A2*: *G* is without (chordless) cycles and :math:`n \,=\, s + 1`;
+    - *A3*: *G* is connected and :math:`n \,=\, s + 1`;
+    - *A4*: Any two vertices of *G* are always connected by a *unique path*;
+    - *A5*: *G* is connected and *dropping* any single edge will always deconnect *G*.
+
+Assertion *A3*, for instance, gives a simple test for recognizing a tree. In case of a lazy evaluation of the test (see Line 3 below) it is opportune to first make the test on the order and the size of the graph.
+
+>>> from graphs import RandomGraph
+>>> g = RandomGraph(order=6,edgeProbability=0.3,seed=62)
+>>> if g.order == (g.size +1) and g.isConnected():
+...     print('The graph is a tree ?', True)
+... else:
+...     print('The graph is a tree ?',False)
+...
+The graph is a tree ? True
+
+The random graph of order 6 and edgeProbability 30%, generated with seed 62, is indeed a tree instance, as we may readily see from its *graphviz* drawing.
+
+>>> g.exportGraphViz(
+*---- exporting a dot file for GraphViz tools ---------*
+Exporting to test62.dot
+fdp -Tpng test62.dot -o test62.png
+
+.. Figure:: test62.png
+    :alt: Recognizing a tree
+    :width: 350 px
+    :align: center
+
+    *Figure 18*: Recognizing a tree instance
+
+We still have to recover its corresponding Prüfer code. Therefore, we may use the :py:func:`graphs.RandomTree.tree2Pruefer` method.
+
+>>> from graphs import RandomGraph
+>>> RandomTree.tree2Pruefer(g)
+['v6', 'v1', 'v2', 'v1', 'v2', 'v5']
+
+Let us now trun toward a major application f tree graphs, namely *spanning trees* and *forests*.
+
+Spanning trees and forests
+..........................
+
+With the :py:class:`graphs.RandomSpanningTree` class we my generate random instance of a ""spanning** tree generated with *Wilson* 's algorithm from a given connected Graph *g* instance.
+
+.. Note::
+
+         Wilson's algorithm only works for connecte graphs.
+
+.. figure:: randomSpanningTree.png
+     :alt: randomSpanningTree instance
+     :width: 300 px
+     :align: center
+
+     Figure 19a: Random spanning tree
+
+With the :py:class:`graphs.RandomSpanningForest` class we may generated a random instance of a **spanning forest** -one or more trees- generated from a **random depth first** search graph *g* traversal.
+
+.. figure:: spanningForest.png
+     :alt: randomSpanningForest instance
+     :width: 300 px
+     :align: center
+
+     Figure 19b: Random spanning forest instance
+
+With the :py:class:`graphs.BestDeterminedSpanningForest` class we may construct the **most determined** spanning tree (or forest if not connected) using *Kruskal* 's greedy algorithm on the *dual* valuation.
+
+Example Python session:
+    
+>>> from graphs import *
+>>> g = RandomValuationGraph(seed=2)
+>>> g.showShort()
+*---- short description of the graph ----*
+Name             : 'randomGraph'
+Vertices         :  ['v1', 'v2', 'v3', 'v4', 'v5']
+Valuation domain :  {'med': Decimal('0'), 'min': Decimal('-1'), 'max': Decimal('1')}
+Gamma function   : 
+v1 -> ['v2', 'v3']
+v2 -> ['v4', 'v1', 'v5', 'v3']
+v3 -> ['v1', 'v5', 'v2']
+v4 -> ['v5', 'v2']
+v5 -> ['v4', 'v2', 'v3']
+>>> mt = BestDeterminedSpanningForest(g)
+>>> mt.exportGraphViz('spanningTree',WithSpanningTree=True)
+*---- exporting a dot file for GraphViz tools ---------*
+Exporting to spanningTree.dot
+[['v4', 'v2', 'v1', 'v3', 'v1', 'v2', 'v5', 'v2', 'v4']]
+neato -Tpng spanningTree.dot -o spanningTree.png
+
+.. Figure:: spanningTree.png
+   :alt: 7-cycle instance
+   :width: 300 px
+   :align: center
+
+   Figure 19c: Best Determined spanning tree
+
+	   
 Links and appendices
 --------------------
 
@@ -3973,9 +4158,11 @@ References
 
 .. [FMCAA] O. Häggström (2002) *Finite Markov Chains and Algorithmic Applications*. Cambridge University Press.
 
-.. [Gol-2004] Martin Ch. Golumbic, *Agorithmic Graph Theory and Perfect Graphs* 2nd Ed., Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.
+.. [Gol-2004] M. Ch. Golumbic, *Agorithmic Graph Theory and Perfect Graphs* 2nd Ed., Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.
 
 .. [BIS-2000] R. Bisdorff (2000), Logical foundation of fuzzy preferential systems with application to the ELECTRE decision aid methods, *Computers and Operations Research*, 27:673-687 (downloadable version `PDF file 159.1Kb <https://leopold-loewenheim.uni.lu/bisdorff/documents/foundationElectre.pdf>`_)
+
+.. [Bar-1991] J.-P. Barthélemy and A. Guenoche (1991), *Trees and Proximities Representations*, Wiley, ISBN: 978-0471922636.
 
 Footnotes
 .........

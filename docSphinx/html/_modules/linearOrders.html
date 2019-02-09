@@ -430,7 +430,7 @@
             <span class="k">if</span> <span class="n">prudentBetaLevel</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]:</span>
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Is extended prudent with level: </span><span class="si">%.2f</span><span class="s1"> !&#39;</span> <span class="o">%</span> <span class="n">prudentBetaLevel</span><span class="p">)</span>
-                <span class="n">g</span> <span class="o">=</span> <span class="n">ExtendedPrudentDigraph</span><span class="p">(</span><span class="n">other</span><span class="p">,</span>\
+                <span class="n">g</span> <span class="o">=</span> <span class="n">_ExtendedPrudentDigraph</span><span class="p">(</span><span class="n">other</span><span class="p">,</span>\
                  <span class="n">prudentBetaLevel</span><span class="o">=</span><span class="n">prudentBetaLevel</span><span class="p">,</span>\
                  <span class="n">CoDual</span><span class="o">=</span><span class="n">coDual</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
                 <span class="n">g</span><span class="o">.</span><span class="n">recodeValuation</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
