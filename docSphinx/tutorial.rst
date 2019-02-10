@@ -3934,10 +3934,10 @@ On tree graphs and graph forests
 	:depth: 2
 	:local:
 
-Generating random trees
-.......................
+Generating random tree graphs
+.............................
 
-Using the :py:class:`graphs.RandomTree` class, we may, for instance, generate a random tree graph of order 9.
+Using the :py:class:`graphs.RandomTree` class, we may, for instance, generate a random tree graph with 9 vertices.
 
 >>> t = RandomTree(order=9,seed=100)
 >>> t
@@ -3963,9 +3963,9 @@ neato -Tpng tutRandomTree.dot -o tutRandomTree.png
 
     *Figure 17a*: Random Tree instance of order 9
 
-A tree graph of order *n* contains *n-1* edges (see Line8 and 9) and the tree's structure is entirely characterized by a corresponding **Prüfer code** -ie a *list of vertices keys*- of length *n-2* (see Line 13).
+A tree graph of order *n* contains *n-1* edges (see Line8 and 9) and we may distinguish vertices of degree 1m called the **leafs** of the tree, and vertices of degree 2, called the **nodes** of the tree.
 
-Each position of the code indicates the parent of the remaining leaf with the smallest vertex label. Vertex *v3* is the parent of *v1* and we drop leaf *v1*, *v8* is now the parent of leaf *v2* and we drop *v2*, vertex *v8* is again the parent of leaf *v4* and we drop *v4*, vertex *v3* is the parent of leaf *v5* and we drop *v5*, *v7* is now the parent of leaf *v3* and we may drop *v3*, *v6* is now the parent of leaf *v8* and we drop *v8*, *v7* becomes the parent of leaf *v6* and we may drop *v6*. The two eventually remaining vertices, *v7* and *v9*, give the last link in the reconstructed tree.  
+A tree's structure is entirely characterized by a corresponding **Prüfer code** -ie a *list of vertices keys*- of length *n-2* (see Line 13). Each position of the code indicates the parent of the remaining leaf with the smallest vertex label. Vertex *v3* is thus the parent of *v1* and we drop leaf *v1*, *v8* is now the parent of leaf *v2* and we drop *v2*, vertex *v8* is again the parent of leaf *v4* and we drop *v4*, vertex *v3* is the parent of leaf *v5* and we drop *v5*, *v7* is now the parent of leaf *v3* and we may drop *v3*, *v6* becomes the parent of leaf *v8* and we drop *v8*, *v7* becomes now the parent of leaf *v6* and we may drop *v6*. The two eventually remaining vertices, *v7* and *v9*, give the last link in the reconstructed tree (see [Bar-1991]_).  
 
 It is as well possible to first, generate a *random* Prüfer code of length *n-2* from a set of *n* vertices and then, construct the corresponding tree of order *n* by reversing the procedure illustrated above (see [Bar-1991]_).
 
@@ -3978,7 +3978,7 @@ It is as well possible to first, generate a *random* Prüfer code of length *n-2
 ...     code.append( choice(verticesList) )
 >>> print(code)
 ['v5', 'v7', 'v2', 'v5', 'v3']
->>> t = RandomTree(prueferCode=code)
+>>> t = RandomTree(prueferCode=['v5', 'v7', 'v2', 'v5', 'v3'])
 >>> t
 *------- Graph instance description ------*
 Instance class   : RandomTree
@@ -4002,9 +4002,9 @@ neato -Tpng tutPruefTree.dot -o tutPruefTree.png
 
     *Figure 17b*: Tree instance from a random Prüfer code
 
-Thus we know that there exist :math:`n^{n-2}` different tree graphs of order *n*.
+Following the bijection between a tree and its Prüfer code, we actually know that there exist :math:`n^{n-2}` differently labelled tree graphs with *n* vertices.
 
-Given a genuine graph instance, how can we recognize that it is in fact a tree instance ?
+Given a genuine graph, how can we recognize that it is in fact a tree instance ?
 
 Recognizing tree graphs
 .......................
@@ -4114,9 +4114,9 @@ neato -Tpng spanningForest.dot -o spanningForest.png
 
      *Figure 19b*: Random spanning forest instance
 
-In case of graphs with weighted edges, we may finally construct as well the **most determined** spanning tree (or forest if not connected) using *Kruskal* 's *greedy* **minimum-spanning-tree algorithm** [5]_ on the *dual* valuation [Kru-1956]_.
+In case of graphs with weighted edges, we may finally construct as well the **most determined** spanning tree (or forest if not connected) using *Kruskal* 's *greedy* **minimum-spanning-tree algorithm** [5]_ on the *dual* valuation of the graph [Kru-1956]_.
 
-We consider a randomly valued graph with five vertices and seven bipolarly valued edges. 
+We consider, for instance, a randomly valued graph with five vertices and seven bipolarly valued edges. 
 
 >>> from graphs import *
 >>> g = RandomValuationGraph(seed=2)
@@ -4144,7 +4144,7 @@ To inspect the edges' actual weights, we first transform the graph into a corres
  'v5' | -0.83	 0.34	 0.21	  0.21	  0.00	 
 Valuation domain: [-1.00;1.00]
 
-To compute the most determined spanning tree, we use now the :py:class:`graphs.BestDeterminedSpanningForest` class constructor.
+To compute the most determined spanning tree or forest, we may use the :py:class:`graphs.BestDeterminedSpanningForest` class constructor.
 
 >>> mt = BestDeterminedSpanningForest(g)
 >>> mt.exportGraphViz(fileName='bestDeterminedspanningTree',\
@@ -4161,7 +4161,7 @@ neato -Tpng bestDeterminedSpanningTree.dot -o bestDeterminedSpanningTree.png
 
    *Figure 19c*: Best determined spanning tree
 
-And, the resulting spanning tree (see Fig. 19c) shows a **maximum mean determination** of (0.47 + 0.91 + 0.90 + 0.34)/4 = **0.655**.  
+The given graph admids a single spanning tree (see Fig. 19c) with a **maximum mean determination** of (0.47 + 0.91 + 0.90 + 0.34)/4 = **0.655**.  
 	   
 Links and appendices
 --------------------
