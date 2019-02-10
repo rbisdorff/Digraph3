@@ -4004,7 +4004,7 @@ neato -Tpng tutPruefTree.dot -o tutPruefTree.png
 
     *Figure 17b*: Tree instance from a random Prüfer code
 
-Following from the bijection between a labelled tree and its Prüfer code, we actually know that there exist :math:`n^{n-2}` different tree graphs with the same *n* vertices.
+Following from the bijection between a labelled tree and its *Prüfer* code, we actually know that there exist :math:`n^{n-2}` different tree graphs with the same *n* vertices.
 
 Given a genuine graph, how can we recognize that it is in fact a tree instance ?
 
