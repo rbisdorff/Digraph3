@@ -3937,7 +3937,7 @@ On tree graphs and graph forests
 Generating random trees
 .......................
 
-Using the :py:class:`graphs.RandomTree` class, we may generate a random tree graph of order 9.
+Using the :py:class:`graphs.RandomTree` class, we may, for instance, generate a random tree graph of order 9.
 
 >>> t = RandomTree(order=9,seed=100)
 >>> t
@@ -3965,7 +3965,9 @@ neato -Tpng tutRandomTree.dot -o tutRandomTree.png
 
 A tree graph of order *n* contains *n-1* edges (see Line8 and 9) and the tree's structure is entirely characterized by a corresponding **Prüfer code** -ie a *list of vertices keys*- of length *n-2* (see Line 13).
 
-It is as well possible to generate first a *random* Prüfer code of length *n-2* from a set of *n* vertices and then construct the corresponding tree of order *n* (see [Bar-1991]_).
+Each position of the code indicates the parent of the remaining leaf with the smallest vertex label. Vertex *v3* is the parent of *v1* and we drop leaf *v1*, *v8* is now the parent of leaf *v2* and we drop *v2*, vertex *v8* is again the parent of leaf *v4* and we drop *v4*, vertex *v3* is the parent of leaf *v5* and we drop *v5*, *v7* is now the parent of leaf *v3* and we may drop *v3*, *v6* is now the parent of leaf *v8* and we drop *v8*, *v7* becomes the parent of leaf *v6* and we may drop *v6*. The two eventually remaining vertices, *v7* and *v9*, give the last link in the reconstructed tree.  
+
+It is as well possible to first, generate a *random* Prüfer code of length *n-2* from a set of *n* vertices and then, construct the corresponding tree of order *n* by reversing the procedure illustrated above (see [Bar-1991]_).
 
 >>> verticesList = ['v1','v2','v3','v4','v5','v6','v7']
 >>> n = len(verticesList)
