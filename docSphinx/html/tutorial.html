@@ -80,7 +80,7 @@
 <li><a class="reference internal" href="#computing-the-non-isomorphic-miss-of-the-n-cycle-graph" id="id98">Computing the non isomorphic MISs of the n-cycle graph</a></li>
 <li><a class="reference internal" href="#on-computing-digraph-kernels" id="id99">On computing digraph kernels</a></li>
 <li><a class="reference internal" href="#on-checking-if-a-random-graph-is-a-permutation-graph" id="id100">On checking if a random graph is a permutation graph</a></li>
-<li><a class="reference internal" href="#on-trees-and-forests" id="id101">On trees and forests</a></li>
+<li><a class="reference internal" href="#on-tree-graphs-and-graph-forests" id="id101">On tree graphs and graph forests</a></li>
 <li><a class="reference internal" href="#links-and-appendices" id="id102">Links and appendices</a></li>
 </ul>
 </div>
@@ -6179,18 +6179,18 @@ execution time: 0 sec. and 2 millisec.
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Tutorials of the Digraph3 resources</span></a></p>
 </div>
 </div>
-<div class="section" id="on-trees-and-forests">
-<span id="trees-tutorial-label"></span><h2><a class="toc-backref" href="#id101">On trees and forests</a><a class="headerlink" href="#on-trees-and-forests" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="on-tree-graphs-and-graph-forests">
+<span id="trees-tutorial-label"></span><h2><a class="toc-backref" href="#id101">On tree graphs and graph forests</a><a class="headerlink" href="#on-tree-graphs-and-graph-forests" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id57">
 <ul class="simple">
 <li><a class="reference internal" href="#generating-random-trees" id="id167">Generating random trees</a></li>
-<li><a class="reference internal" href="#recognizing-trees" id="id168">Recognizing trees</a></li>
+<li><a class="reference internal" href="#recognizing-tree-graphs" id="id168">Recognizing tree graphs</a></li>
 <li><a class="reference internal" href="#spanning-trees-and-forests" id="id169">Spanning trees and forests</a></li>
 </ul>
 </div>
 <div class="section" id="generating-random-trees">
 <h3><a class="toc-backref" href="#id167">Generating random trees</a><a class="headerlink" href="#generating-random-trees" title="Permalink to this headline">¶</a></h3>
-<p>Using the <a class="reference internal" href="techDoc.html#graphs.RandomTree" title="graphs.RandomTree"><code class="xref py py-class docutils literal"><span class="pre">graphs.RandomTree</span></code></a> class, we may generate a random tree of order 9.</p>
+<p>Using the <a class="reference internal" href="techDoc.html#graphs.RandomTree" title="graphs.RandomTree"><code class="xref py py-class docutils literal"><span class="pre">graphs.RandomTree</span></code></a> class, we may generate a random tree graph of order 9.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -6206,9 +6206,7 @@ execution time: 0 sec. and 2 millisec.
 13
 14
 15
-16
-17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomTree</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomTree</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomTree</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
 <span class="go">*------- Graph instance description ------*</span>
 <span class="go">Instance class   : RandomTree</span>
@@ -6227,10 +6225,10 @@ execution time: 0 sec. and 2 millisec.
 </pre></div>
 </td></tr></table></div>
 <div class="figure align-center" id="id83">
-<a class="reference internal image-reference" href="_images/tutRandomTree.png"><img alt="Random tree instance" src="_images/tutRandomTree.png" style="width: 350px;" /></a>
+<a class="reference internal image-reference" href="_images/tutRandomTree.png"><img alt="Random tree instance" src="_images/tutRandomTree.png" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-text"><em>Figure 17a</em>: Random Tree instance of order 9</span></p>
 </div>
-<p>A tree of order <em>n</em> contains <em>n-1</em> edges (see Line8 and 9) and the tree’s structure is entirely characterized by a corresponding <strong>Prüfer code</strong> -ie a <em>list of vertices keys</em>- of length <em>n-2</em> (see Line 13).</p>
+<p>A tree graph of order <em>n</em> contains <em>n-1</em> edges (see Line8 and 9) and the tree’s structure is entirely characterized by a corresponding <strong>Prüfer code</strong> -ie a <em>list of vertices keys</em>- of length <em>n-2</em> (see Line 13).</p>
 <p>It is as well possible to generate first a <em>random</em> Prüfer code of length <em>n-2</em> from a set of <em>n</em> vertices and then construct the corresponding tree of order <em>n</em> (see <a class="reference internal" href="#bar-1991" id="id58">[Bar-1991]</a>).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -6284,14 +6282,14 @@ execution time: 0 sec. and 2 millisec.
 </pre></div>
 </td></tr></table></div>
 <div class="figure align-center" id="id84">
-<a class="reference internal image-reference" href="_images/tutPruefTree.png"><img alt="Tree instance from random Prüfer code" src="_images/tutPruefTree.png" style="width: 350px;" /></a>
-<p class="caption"><span class="caption-text"><em>Figure 17b</em>: Tree instance from random Prüfer code</span></p>
+<a class="reference internal image-reference" href="_images/tutPruefTree.png"><img alt="Tree instance from a random Prüfer code" src="_images/tutPruefTree.png" style="width: 350px;" /></a>
+<p class="caption"><span class="caption-text"><em>Figure 17b</em>: Tree instance from a random Prüfer code</span></p>
 </div>
-<p>Thus we know that there exist <img class="math" src="_images/math/85bd31e9d535d32b439c183162bd6b65b2dc7ecb.png" alt="(n-2)^n"/> different random trees of order <em>n</em>.</p>
-<p>Given a genuine graph instance, how can we recognize that is in fact a tree instance ?</p>
+<p>Thus we know that there exist <img class="math" src="_images/math/03a6ebd8d5f496f50fe4ef54ca705931da47777e.png" alt="n^{n-2}"/> different tree graphs of order <em>n</em>.</p>
+<p>Given a genuine graph instance, how can we recognize that it is in fact a tree instance ?</p>
 </div>
-<div class="section" id="recognizing-trees">
-<h3><a class="toc-backref" href="#id168">Recognizing trees</a><a class="headerlink" href="#recognizing-trees" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="recognizing-tree-graphs">
+<h3><a class="toc-backref" href="#id168">Recognizing tree graphs</a><a class="headerlink" href="#recognizing-tree-graphs" title="Permalink to this headline">¶</a></h3>
 <p>Given a graph <img class="math" src="_images/math/8d348e5f477be99551c040206bc3778bd3450b95.png" alt="G(V,E)"/> of order <em>n</em> and size <em>s</em>, the following 5 assertions <em>A1</em>, <em>A2</em>, <em>A3</em>, <em>A4</em> and <em>A5</em> are all equivalent (see <a class="reference internal" href="#bar-1991" id="id59">[Bar-1991]</a>):</p>
 <blockquote>
 <div><ul class="simple">
@@ -6302,7 +6300,7 @@ execution time: 0 sec. and 2 millisec.
 <li><em>A5</em>: <em>G</em> is connected and <em>dropping</em> any single edge will always deconnect <em>G</em>.</li>
 </ul>
 </div></blockquote>
-<p>Assertion <em>A3</em>, for instance, gives a simple test for recognizing a tree. In case of a lazy evaluation of the test (see Line 3 below) it is opportune to first make the test on the order and the size of the graph.</p>
+<p>Assertion <em>A3</em>, for instance, gives a simple test for recognizing a tree graph. In case of a lazy evaluation of the test in Line 3 below, it is opportune to first test the order and size of the graph.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -6320,7 +6318,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">The graph is a tree ? True</span>
 </pre></div>
 </td></tr></table></div>
-<p>The random graph of order 6 and edgeProbability 30%, generated with seed 62, is indeed a tree instance, as we may readily see from its <em>graphviz</em> drawing.</p>
+<p>The random graph of order 6 and edgeProbability 30%, generated with seed 62, is indeed a tree graph instance, as we may readily see from its <em>graphviz</em> drawing.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -6342,26 +6340,99 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">[&#39;v6&#39;, &#39;v1&#39;, &#39;v2&#39;, &#39;v1&#39;, &#39;v2&#39;, &#39;v5&#39;]</span>
 </pre></div>
 </td></tr></table></div>
-<p>Let us now trun toward a major application f tree graphs, namely <em>spanning trees</em> and <em>forests</em>.</p>
+<p>Let us now trun toward a major application of tree graphs, namely <em>spanning trees</em> and <em>forests</em> related to graph traversals.</p>
 </div>
 <div class="section" id="spanning-trees-and-forests">
 <h3><a class="toc-backref" href="#id169">Spanning trees and forests</a><a class="headerlink" href="#spanning-trees-and-forests" title="Permalink to this headline">¶</a></h3>
-<p>With the <a class="reference internal" href="techDoc.html#graphs.RandomSpanningTree" title="graphs.RandomSpanningTree"><code class="xref py py-class docutils literal"><span class="pre">graphs.RandomSpanningTree</span></code></a> class we my generate random instance of a “”spanning** tree generated with <em>Wilson</em> ‘s algorithm from a given connected Graph <em>g</em> instance.</p>
+<p>With the <a class="reference internal" href="techDoc.html#graphs.RandomSpanningTree" title="graphs.RandomSpanningTree"><code class="xref py py-class docutils literal"><span class="pre">graphs.RandomSpanningTree</span></code></a> class we my generate a random instance of a <strong>spanning tree</strong> generated with <em>Wilson</em> ‘s algorithm from a given connected graph <em>g</em> instance.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Wilson’s algorithm only works for connecte graphs.</p>
+<p class="last">Wilson’s algorithm only works for connected graphs.</p>
 </div>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spt</span> <span class="o">=</span> <span class="n">RandomSpanningTree</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spt</span>
+<span class="go">*------- Graph instance description ------*</span>
+<span class="go">Instance class   : RandomSpanningTree</span>
+<span class="go">Instance name    : randomGraph_randomSpanningTree</span>
+<span class="go">Graph Order      : 9</span>
+<span class="go">Graph Size       : 8</span>
+<span class="go">Valuation domain : [-1.00 - 1.00]</span>
+<span class="go">Attributes       : [&#39;name&#39;,&#39;vertices&#39;,&#39;order&#39;,&#39;valuationDomain&#39;,&#39;edges&#39;,</span>
+<span class="go">                    &#39;size&#39;,&#39;gamma&#39;,&#39;dfs&#39;,&#39;date&#39;,&#39;dfsx&#39;,&#39;prueferCode&#39;]</span>
+<span class="go">*---- RandomTree specific data ----*</span>
+<span class="go">Prüfer code  : [&#39;v7&#39;, &#39;v9&#39;, &#39;v5&#39;, &#39;v1&#39;, &#39;v8&#39;, &#39;v4&#39;, &#39;v9&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spt</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;randomSpanningTree&#39;</span><span class="p">,</span>\
+<span class="gp">... </span>                   <span class="n">WithSpanningTree</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
+<span class="go">Exporting to randomSpanningTree.dot</span>
+<span class="go">[[&#39;v1&#39;, &#39;v5&#39;, &#39;v6&#39;, &#39;v5&#39;, &#39;v1&#39;, &#39;v8&#39;, &#39;v9&#39;, &#39;v3&#39;, &#39;v9&#39;, &#39;v4&#39;,</span>
+<span class="go">  &#39;v7&#39;, &#39;v2&#39;, &#39;v7&#39;, &#39;v4&#39;, &#39;v9&#39;, &#39;v8&#39;, &#39;v1&#39;]]</span>
+<span class="go">neato -Tpng randomSpanningTree.dot -o randomSpanningTree.png</span>
+</pre></div>
+</td></tr></table></div>
 <div class="figure align-center" id="id86">
 <a class="reference internal image-reference" href="_images/randomSpanningTree.png"><img alt="randomSpanningTree instance" src="_images/randomSpanningTree.png" style="width: 300px;" /></a>
-<p class="caption"><span class="caption-text">Figure 19a: Random spanning tree</span></p>
+<p class="caption"><span class="caption-text"><em>Figure 19a</em>: Random spanning tree</span></p>
 </div>
-<p>With the <a class="reference internal" href="techDoc.html#graphs.RandomSpanningForest" title="graphs.RandomSpanningForest"><code class="xref py py-class docutils literal"><span class="pre">graphs.RandomSpanningForest</span></code></a> class we may generated a random instance of a <strong>spanning forest</strong> -one or more trees- generated from a <strong>random depth first</strong> search graph <em>g</em> traversal.</p>
+<p>In case of a not connected graph <em>g</em>, we may generate with the <a class="reference internal" href="techDoc.html#graphs.RandomSpanningForest" title="graphs.RandomSpanningForest"><code class="xref py py-class docutils literal"><span class="pre">graphs.RandomSpanningForest</span></code></a> class a random instance of a <strong>spanning forest</strong> -one or more tree graphs- generated from a <strong>random depth first</strong> search graph <em>g</em> traversal.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">140</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeComponents</span><span class="p">()</span>
+<span class="go">[{&#39;v12&#39;, &#39;v01&#39;, &#39;v13&#39;}, {&#39;v02&#39;, &#39;v06&#39;},</span>
+<span class="go"> {&#39;v08&#39;, &#39;v03&#39;, &#39;v07&#39;}, {&#39;v15&#39;, &#39;v11&#39;, &#39;v10&#39;, &#39;v04&#39;, &#39;v05&#39;},</span>
+<span class="go"> {&#39;v09&#39;, &#39;v14&#39;}]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spf</span> <span class="o">=</span> <span class="n">RandomSpanningForest</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spf</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;spanningForest&#39;</span><span class="p">,</span><span class="n">WithSpanningTree</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
+<span class="go">Exporting to spanningForest.dot</span>
+<span class="go">[[&#39;v03&#39;, &#39;v07&#39;, &#39;v08&#39;, &#39;v07&#39;, &#39;v03&#39;],</span>
+<span class="go"> [&#39;v13&#39;, &#39;v12&#39;, &#39;v13&#39;, &#39;v01&#39;, &#39;v13&#39;],</span>
+<span class="go"> [&#39;v02&#39;, &#39;v06&#39;, &#39;v02&#39;],</span>
+<span class="go"> [&#39;v15&#39;, &#39;v11&#39;, &#39;v04&#39;, &#39;v11&#39;, &#39;v15&#39;, &#39;v10&#39;, &#39;v05&#39;, &#39;v10&#39;, &#39;v15&#39;],</span>
+<span class="go"> [&#39;v09&#39;, &#39;v14&#39;, &#39;v09&#39;]]</span>
+<span class="go">neato -Tpng spanningForest.dot -o spanningForest.png</span>
+</pre></div>
+</td></tr></table></div>
 <div class="figure align-center" id="id87">
-<a class="reference internal image-reference" href="_images/spanningForest.png"><img alt="randomSpanningForest instance" src="_images/spanningForest.png" style="width: 300px;" /></a>
-<p class="caption"><span class="caption-text">Figure 19b: Random spanning forest instance</span></p>
+<a class="reference internal image-reference" href="_images/spanningForest.png"><img alt="randomSpanningForest instance" src="_images/spanningForest.png" style="width: 350px;" /></a>
+<p class="caption"><span class="caption-text"><em>Figure 19b</em>: Random spanning forest instance</span></p>
 </div>
-<p>With the <a class="reference internal" href="techDoc.html#graphs.BestDeterminedSpanningForest" title="graphs.BestDeterminedSpanningForest"><code class="xref py py-class docutils literal"><span class="pre">graphs.BestDeterminedSpanningForest</span></code></a> class we may construct the <strong>most determined</strong> spanning tree (or forest if not connected) using <em>Kruskal</em> ‘s greedy algorithm on the <em>dual</em> valuation.</p>
-<p>Example Python session:</p>
+<p>In case of valued graphs, we may finally construct, with the <a class="reference internal" href="techDoc.html#graphs.BestDeterminedSpanningForest" title="graphs.BestDeterminedSpanningForest"><code class="xref py py-class docutils literal"><span class="pre">graphs.BestDeterminedSpanningForest</span></code></a>, as well the <strong>most determined</strong> spanning tree (or forest if not connected) using <em>Kruskal</em> ‘s <strong>greedy algorithm</strong> on the <em>dual</em> valuation.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -6394,16 +6465,16 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">v4 -&gt; [&#39;v5&#39;, &#39;v2&#39;]</span>
 <span class="go">v5 -&gt; [&#39;v4&#39;, &#39;v2&#39;, &#39;v3&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span> <span class="o">=</span> <span class="n">BestDeterminedSpanningForest</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;spanningTree&#39;</span><span class="p">,</span><span class="n">WithSpanningTree</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;bestDeterminedspanningTree&#39;</span><span class="p">,</span><span class="n">WithSpanningTree</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to spanningTree.dot</span>
 <span class="go">[[&#39;v4&#39;, &#39;v2&#39;, &#39;v1&#39;, &#39;v3&#39;, &#39;v1&#39;, &#39;v2&#39;, &#39;v5&#39;, &#39;v2&#39;, &#39;v4&#39;]]</span>
-<span class="go">neato -Tpng spanningTree.dot -o spanningTree.png</span>
+<span class="go">neato -Tpng bestDeterminedSpanningTree.dot -o bestDeterminedSpanningTree.png</span>
 </pre></div>
 </td></tr></table></div>
 <div class="figure align-center" id="id88">
-<a class="reference internal image-reference" href="_images/spanningTree.png"><img alt="7-cycle instance" src="_images/spanningTree.png" style="width: 300px;" /></a>
-<p class="caption"><span class="caption-text">Figure 19c: Best Determined spanning tree</span></p>
+<a class="reference internal image-reference" href="_images/bestDeterminedSpanningTree.png"><img alt="Best determined spanning tree" src="_images/bestDeterminedSpanningTree.png" style="width: 350px;" /></a>
+<p class="caption"><span class="caption-text"><em>Figure 19c</em>: Best determined spanning tree</span></p>
 </div>
 </div>
 </div>
@@ -6694,9 +6765,9 @@ execution time: 0 sec. and 2 millisec.
 <li><a class="reference internal" href="#recognizing-permutation-graphs">Recognizing permutation graphs</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#on-trees-and-forests">On trees and forests</a><ul>
+<li><a class="reference internal" href="#on-tree-graphs-and-graph-forests">On tree graphs and graph forests</a><ul>
 <li><a class="reference internal" href="#generating-random-trees">Generating random trees</a></li>
-<li><a class="reference internal" href="#recognizing-trees">Recognizing trees</a></li>
+<li><a class="reference internal" href="#recognizing-tree-graphs">Recognizing tree graphs</a></li>
 <li><a class="reference internal" href="#spanning-trees-and-forests">Spanning trees and forests</a></li>
 </ul>
 </li>

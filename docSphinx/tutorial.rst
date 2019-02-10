@@ -3927,8 +3927,8 @@ Back to :ref:`Tutorial-label`
 
 .. _Trees-Tutorial-label:
 
-On trees and forests
---------------------
+On tree graphs and graph forests
+--------------------------------
 
 .. contents:: 
 	:depth: 2
@@ -3937,9 +3937,8 @@ On trees and forests
 Generating random trees
 .......................
 
-Using the :py:class:`graphs.RandomTree` class, we may generate a random tree of order 9.
+Using the :py:class:`graphs.RandomTree` class, we may generate a random tree graph of order 9.
 
->>> t = RandomTree()
 >>> t = RandomTree(order=9,seed=100)
 >>> t
 *------- Graph instance description ------*
@@ -3957,15 +3956,14 @@ Prüfer code  : ['v3', 'v8', 'v8', 'v3', 'v7', 'v6', 'v7']
 Exporting to tutRandomTree.dot
 neato -Tpng tutRandomTree.dot -o tutRandomTree.png
 
-
 .. Figure:: tutRandomTree.png
     :alt: Random tree instance
-    :width: 350 px
+    :width: 300 px
     :align: center
 
     *Figure 17a*: Random Tree instance of order 9
 
-A tree of order *n* contains *n-1* edges (see Line8 and 9) and the tree's structure is entirely characterized by a corresponding **Prüfer code** -ie a *list of vertices keys*- of length *n-2* (see Line 13).
+A tree graph of order *n* contains *n-1* edges (see Line8 and 9) and the tree's structure is entirely characterized by a corresponding **Prüfer code** -ie a *list of vertices keys*- of length *n-2* (see Line 13).
 
 It is as well possible to generate first a *random* Prüfer code of length *n-2* from a set of *n* vertices and then construct the corresponding tree of order *n* (see [Bar-1991]_).
 
@@ -3996,18 +3994,18 @@ Exporting to tutPruefTree.dot
 neato -Tpng tutPruefTree.dot -o tutPruefTree.png
 
 .. Figure:: tutPruefTree.png
-    :alt: Tree instance from random Prüfer code
+    :alt: Tree instance from a random Prüfer code
     :width: 350 px
     :align: center
 
-    *Figure 17b*: Tree instance from random Prüfer code
+    *Figure 17b*: Tree instance from a random Prüfer code
 
-Thus we know that there exist :math:`(n-2)^n` different random trees of order *n*.
+Thus we know that there exist :math:`n^{n-2}` different tree graphs of order *n*.
 
-Given a genuine graph instance, how can we recognize that is in fact a tree instance ?
+Given a genuine graph instance, how can we recognize that it is in fact a tree instance ?
 
-Recognizing trees
-.................
+Recognizing tree graphs
+.......................
 
 Given a graph :math:`G(V,E)` of order *n* and size *s*, the following 5 assertions *A1*, *A2*, *A3*, *A4* and *A5* are all equivalent (see [Bar-1991]_):
 
@@ -4017,7 +4015,7 @@ Given a graph :math:`G(V,E)` of order *n* and size *s*, the following 5 assertio
     - *A4*: Any two vertices of *G* are always connected by a *unique path*;
     - *A5*: *G* is connected and *dropping* any single edge will always deconnect *G*.
 
-Assertion *A3*, for instance, gives a simple test for recognizing a tree. In case of a lazy evaluation of the test (see Line 3 below) it is opportune to first make the test on the order and the size of the graph.
+Assertion *A3*, for instance, gives a simple test for recognizing a tree graph. In case of a lazy evaluation of the test in Line 3 below, it is opportune to first test the order and size of the graph.
 
 >>> from graphs import RandomGraph
 >>> g = RandomGraph(order=6,edgeProbability=0.3,seed=62)
@@ -4028,7 +4026,7 @@ Assertion *A3*, for instance, gives a simple test for recognizing a tree. In cas
 ...
 The graph is a tree ? True
 
-The random graph of order 6 and edgeProbability 30%, generated with seed 62, is indeed a tree instance, as we may readily see from its *graphviz* drawing.
+The random graph of order 6 and edgeProbability 30%, generated with seed 62, is indeed a tree graph instance, as we may readily see from its *graphviz* drawing.
 
 >>> g.exportGraphViz(
 *---- exporting a dot file for GraphViz tools ---------*
@@ -4048,36 +4046,73 @@ We still have to recover its corresponding Prüfer code. Therefore, we may use t
 >>> RandomTree.tree2Pruefer(g)
 ['v6', 'v1', 'v2', 'v1', 'v2', 'v5']
 
-Let us now trun toward a major application f tree graphs, namely *spanning trees* and *forests*.
+Let us now trun toward a major application of tree graphs, namely *spanning trees* and *forests* related to graph traversals.
 
 Spanning trees and forests
 ..........................
 
-With the :py:class:`graphs.RandomSpanningTree` class we my generate random instance of a ""spanning** tree generated with *Wilson* 's algorithm from a given connected Graph *g* instance.
+With the :py:class:`graphs.RandomSpanningTree` class we my generate a random instance of a **spanning tree** generated with *Wilson* 's algorithm from a given connected graph *g* instance.
 
 .. Note::
 
-         Wilson's algorithm only works for connecte graphs.
+         Wilson's algorithm only works for connected graphs.
+
+>>> from graphs import *
+>>> g = RandomGraph(order=9,edgeProbability=0.4,seed=100)
+>>> spt = RandomSpanningTree(g)
+>>> spt
+*------- Graph instance description ------*
+Instance class   : RandomSpanningTree
+Instance name    : randomGraph_randomSpanningTree
+Graph Order      : 9
+Graph Size       : 8
+Valuation domain : [-1.00 - 1.00]
+Attributes       : ['name','vertices','order','valuationDomain','edges',
+                    'size','gamma','dfs','date','dfsx','prueferCode']
+*---- RandomTree specific data ----*
+Prüfer code  : ['v7', 'v9', 'v5', 'v1', 'v8', 'v4', 'v9']
+>>> spt.exportGraphViz(fileName='randomSpanningTree',\
+...                    WithSpanningTree=True)
+*---- exporting a dot file for GraphViz tools ---------*
+Exporting to randomSpanningTree.dot
+[['v1', 'v5', 'v6', 'v5', 'v1', 'v8', 'v9', 'v3', 'v9', 'v4',
+  'v7', 'v2', 'v7', 'v4', 'v9', 'v8', 'v1']]
+neato -Tpng randomSpanningTree.dot -o randomSpanningTree.png
 
 .. figure:: randomSpanningTree.png
      :alt: randomSpanningTree instance
      :width: 300 px
      :align: center
 
-     Figure 19a: Random spanning tree
+     *Figure 19a*: Random spanning tree
 
-With the :py:class:`graphs.RandomSpanningForest` class we may generated a random instance of a **spanning forest** -one or more trees- generated from a **random depth first** search graph *g* traversal.
+In case of a not connected graph *g*, we may generate with the :py:class:`graphs.RandomSpanningForest` class a random instance of a **spanning forest** -one or more tree graphs- generated from a **random depth first** search graph *g* traversal.
+
+>>> g = RandomGraph(order=15,edgeProbability=0.1,seed=140)
+>>> g.computeComponents()
+[{'v12', 'v01', 'v13'}, {'v02', 'v06'},
+ {'v08', 'v03', 'v07'}, {'v15', 'v11', 'v10', 'v04', 'v05'},
+ {'v09', 'v14'}]
+>>> spf = RandomSpanningForest(g,seed=100)
+>>> spf.exportGraphViz(fileName='spanningForest',WithSpanningTree=True)
+*---- exporting a dot file for GraphViz tools ---------*
+Exporting to spanningForest.dot
+[['v03', 'v07', 'v08', 'v07', 'v03'],
+ ['v13', 'v12', 'v13', 'v01', 'v13'],
+ ['v02', 'v06', 'v02'],
+ ['v15', 'v11', 'v04', 'v11', 'v15', 'v10', 'v05', 'v10', 'v15'],
+ ['v09', 'v14', 'v09']]
+neato -Tpng spanningForest.dot -o spanningForest.png
+
 
 .. figure:: spanningForest.png
      :alt: randomSpanningForest instance
-     :width: 300 px
+     :width: 350 px
      :align: center
 
-     Figure 19b: Random spanning forest instance
+     *Figure 19b*: Random spanning forest instance
 
-With the :py:class:`graphs.BestDeterminedSpanningForest` class we may construct the **most determined** spanning tree (or forest if not connected) using *Kruskal* 's greedy algorithm on the *dual* valuation.
-
-Example Python session:
+In case of valued graphs, we may finally construct, with the :py:class:`graphs.BestDeterminedSpanningForest`, as well the **most determined** spanning tree (or forest if not connected) using *Kruskal* 's **greedy algorithm** on the *dual* valuation.
     
 >>> from graphs import *
 >>> g = RandomValuationGraph(seed=2)
@@ -4093,18 +4128,18 @@ v3 -> ['v1', 'v5', 'v2']
 v4 -> ['v5', 'v2']
 v5 -> ['v4', 'v2', 'v3']
 >>> mt = BestDeterminedSpanningForest(g)
->>> mt.exportGraphViz('spanningTree',WithSpanningTree=True)
+>>> mt.exportGraphViz('bestDeterminedspanningTree',WithSpanningTree=True)
 *---- exporting a dot file for GraphViz tools ---------*
 Exporting to spanningTree.dot
 [['v4', 'v2', 'v1', 'v3', 'v1', 'v2', 'v5', 'v2', 'v4']]
-neato -Tpng spanningTree.dot -o spanningTree.png
+neato -Tpng bestDeterminedSpanningTree.dot -o bestDeterminedSpanningTree.png
 
-.. Figure:: spanningTree.png
-   :alt: 7-cycle instance
-   :width: 300 px
+.. Figure:: bestDeterminedSpanningTree.png
+   :alt: Best determined spanning tree
+   :width: 350 px
    :align: center
 
-   Figure 19c: Best Determined spanning tree
+   *Figure 19c*: Best determined spanning tree
 
 	   
 Links and appendices
