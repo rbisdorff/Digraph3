@@ -4030,7 +4030,7 @@ Assertion *A3*, for instance, gives a simple test for recognizing a tree graph. 
 ...
 The graph is a tree ? True
 
-The random graph of order 6 and edge probability 30%, generated with seed 62, is actually a tree graph instance, as we may readily confirm from its *graphviz* drawing in Fig. 18.
+The random graph of order 6 and edge probability 30%, generated with seed 62, is actually a tree graph instance, as we may readily confirm from its *graphviz* drawing in Fig. 18 (see also the :py:func:`graphs.Graph.isTree` method for an implemented alternative test function).
 
 >>> g.exportGraphViz(
 *---- exporting a dot file for GraphViz tools ---------*
