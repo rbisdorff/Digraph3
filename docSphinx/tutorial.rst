@@ -4182,7 +4182,7 @@ neato -Tpng bestDeterminedSpanningTree.dot -o bestDeterminedSpanningTree.png
 
    *Figure 19c*: Best determined spanning tree
 
-One may easily verify that all other potential spanning trees of this graph will show lower average determinations.
+One may easily verify that all other potential spanning trees, including instead the edges {*v3*, *v5*} and/or {*v4*, *v5*} - will show a lower average determination.
 	   
 Links and appendices
 --------------------
