@@ -2423,8 +2423,8 @@ class RandomSpanningForest(RandomTree):
             if k > 1:
                 for j in range(k-1):
                     edgeKey = frozenset([dfsx[j],dfsx[j+1]])
-                    maxWeight += abs(self.edges[edgeKey])
-                maxWeights.append( maxWeight / Decimal(str(2*k)) )
+                    maxWeight += self.edges[edgeKey]
+                maxWeights.append( maxWeight / Decimal(str(k-1)) )
             else:
                 maxWeights.append(self.valuationDomain['max'])
         self.averageTreeDetermination = maxWeights 
@@ -2584,8 +2584,8 @@ class BestDeterminedSpanningForest(RandomSpanningForest):
         """
         reprString = Graph.__repr__(self)
         reprString += '*---- best determined spanning tree specific data ----*\n'
-        reprString += 'Depth first search paths  : %s\n' % str(self.dfs)
-        reprString += 'Average determinations    : %s\n' %\
+        reprString += 'Depth first search path(s) : %s\n' % str(self.dfs)
+        reprString += 'Average determination(s)   : %s\n' %\
                       str(self.averageTreeDetermination)
        
         return reprString

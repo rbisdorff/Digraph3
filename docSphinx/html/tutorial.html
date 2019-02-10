@@ -6343,11 +6343,11 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">[&#39;v6&#39;, &#39;v1&#39;, &#39;v2&#39;, &#39;v1&#39;, &#39;v2&#39;, &#39;v5&#39;]</span>
 </pre></div>
 </td></tr></table></div>
-<p>Let us now trun toward a major application of tree graphs, namely <em>spanning trees</em> and <em>forests</em> related to graph traversals.</p>
+<p>Let us now turn toward a major application of tree graphs, namely <em>spanning trees</em> and <em>forests</em> related to graph traversals.</p>
 </div>
 <div class="section" id="spanning-trees-and-forests">
 <h3><a class="toc-backref" href="#id176">Spanning trees and forests</a><a class="headerlink" href="#spanning-trees-and-forests" title="Permalink to this headline">¶</a></h3>
-<p>With the <a class="reference internal" href="techDoc.html#graphs.RandomSpanningTree" title="graphs.RandomSpanningTree"><code class="xref py py-class docutils literal"><span class="pre">graphs.RandomSpanningTree</span></code></a> class we may generate, from a given connected graph <em>g</em> instance, <strong>uniform random</strong> instances of a <strong>spanning tree</strong> by using <em>Wilson</em> ‘s algorithm <a class="reference internal" href="#wil-1996" id="id61">[Wil-1996]</a></p>
+<p>With the <a class="reference internal" href="techDoc.html#graphs.RandomSpanningTree" title="graphs.RandomSpanningTree"><code class="xref py py-class docutils literal"><span class="pre">graphs.RandomSpanningTree</span></code></a> class we may generate, from a given <strong>connected</strong> graph <em>g</em> instance, <strong>uniform random</strong> instances of a <strong>spanning tree</strong> by using <em>Wilson</em> ‘s algorithm <a class="reference internal" href="#wil-1996" id="id61">[Wil-1996]</a></p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Wilson’s algorithm <em>only</em> works for connected graphs <a class="footnote-reference" href="#id70" id="id62">[4]</a>.</p>
@@ -6488,13 +6488,39 @@ execution time: 0 sec. and 2 millisec.
 </pre></div>
 </td></tr></table></div>
 <p>To compute the most determined spanning tree or forest, we may use the <a class="reference internal" href="techDoc.html#graphs.BestDeterminedSpanningForest" title="graphs.BestDeterminedSpanningForest"><code class="xref py py-class docutils literal"><span class="pre">graphs.BestDeterminedSpanningForest</span></code></a> class constructor.</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span> <span class="o">=</span> <span class="n">BestDeterminedSpanningForest</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span> <span class="o">=</span> <span class="n">BestDeterminedSpanningForest</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span>
+<span class="go">*------- Graph instance description ------*</span>
+<span class="go">Instance class   : BestDeterminedSpanningForest</span>
+<span class="go">Instance name    : randomGraph_randomSpanningForest</span>
+<span class="go">Graph Order      : 5</span>
+<span class="go">Graph Size       : 4</span>
+<span class="go">Valuation domain : [-1.00; 1.00]</span>
+<span class="go">Attributes       : [&#39;name&#39;, &#39;vertices&#39;, &#39;order&#39;, &#39;valuationDomain&#39;, &#39;edges&#39;,</span>
+<span class="go">                    &#39;size&#39;, &#39;gamma&#39;, &#39;dfs&#39;, &#39;date&#39;, &#39;averageTreeDetermination&#39;]</span>
+<span class="go">*---- best determined spanning tree specific data ----*</span>
+<span class="go">Depth first search paths  :</span>
+<span class="go">[[&#39;v1&#39;, &#39;v2&#39;, &#39;v4&#39;, &#39;v2&#39;, &#39;v5&#39;, &#39;v2&#39;, &#39;v1&#39;, &#39;v3&#39;, &#39;v1&#39;]]</span>
+<span class="go">Average determinations    : [Decimal(&#39;0.655&#39;)]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;bestDeterminedspanningTree&#39;</span><span class="p">,</span>\
 <span class="gp">... </span>                  <span class="n">WithSpanningTree</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
@@ -6507,7 +6533,7 @@ execution time: 0 sec. and 2 millisec.
 <a class="reference internal image-reference" href="_images/bestDeterminedSpanningTree.png"><img alt="Best determined spanning tree" src="_images/bestDeterminedSpanningTree.png" style="width: 350px;" /></a>
 <p class="caption"><span class="caption-text"><em>Figure 19c</em>: Best determined spanning tree</span></p>
 </div>
-<p>The given graph admids a single spanning tree (see Fig. 19c) with a <strong>maximum mean determination</strong> of (0.47 + 0.91 + 0.90 + 0.34)/4 = <strong>0.655</strong>.</p>
+<p>The given graph is connected and, hence, admids a single spanning tree (see Fig. 19c) of <strong>maximum mean determination</strong> of (0.47 + 0.91 + 0.90 + 0.34)/4 = <strong>0.655</strong> (see Lines 9, 6 and 10 in the relation table above).</p>
 </div>
 </div>
 <div class="section" id="links-and-appendices">

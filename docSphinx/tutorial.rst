@@ -4050,12 +4050,12 @@ We still have to recover its corresponding *Prüfer* code. Therefore, we may use
 >>> RandomTree.tree2Pruefer(g)
 ['v6', 'v1', 'v2', 'v1', 'v2', 'v5']
 
-Let us now trun toward a major application of tree graphs, namely *spanning trees* and *forests* related to graph traversals.
+Let us now turn toward a major application of tree graphs, namely *spanning trees* and *forests* related to graph traversals.
 
 Spanning trees and forests
 ..........................
 
-With the :py:class:`graphs.RandomSpanningTree` class we may generate, from a given connected graph *g* instance, **uniform random** instances of a **spanning tree** by using *Wilson* 's algorithm [Wil-1996]_  
+With the :py:class:`graphs.RandomSpanningTree` class we may generate, from a given **connected** graph *g* instance, **uniform random** instances of a **spanning tree** by using *Wilson* 's algorithm [Wil-1996]_  
 
 .. Note::
 
@@ -4152,6 +4152,19 @@ Valuation domain: [-1.00;1.00]
 To compute the most determined spanning tree or forest, we may use the :py:class:`graphs.BestDeterminedSpanningForest` class constructor.
 
 >>> mt = BestDeterminedSpanningForest(g)
+>>> mt
+*------- Graph instance description ------*
+Instance class   : BestDeterminedSpanningForest
+Instance name    : randomGraph_randomSpanningForest
+Graph Order      : 5
+Graph Size       : 4
+Valuation domain : [-1.00; 1.00]
+Attributes       : ['name', 'vertices', 'order', 'valuationDomain', 'edges',
+                    'size', 'gamma', 'dfs', 'date', 'averageTreeDetermination']
+*---- best determined spanning tree specific data ----*
+Depth first search paths  :
+[['v1', 'v2', 'v4', 'v2', 'v5', 'v2', 'v1', 'v3', 'v1']]
+Average determinations    : [Decimal('0.655')]
 >>> mt.exportGraphViz(fileName='bestDeterminedspanningTree',\
 ...                   WithSpanningTree=True)
 *---- exporting a dot file for GraphViz tools ---------*
@@ -4166,7 +4179,7 @@ neato -Tpng bestDeterminedSpanningTree.dot -o bestDeterminedSpanningTree.png
 
    *Figure 19c*: Best determined spanning tree
 
-The given graph admids a single spanning tree (see Fig. 19c) with a **maximum mean determination** of (0.47 + 0.91 + 0.90 + 0.34)/4 = **0.655**.  
+The given graph is connected and, hence, admids a single spanning tree (see Fig. 19c) of **maximum mean determination** of (0.47 + 0.91 + 0.90 + 0.34)/4 = **0.655** (see Lines 9, 6 and 10 in the relation table above).  
 	   
 Links and appendices
 --------------------
