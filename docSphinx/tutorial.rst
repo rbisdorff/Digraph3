@@ -4162,9 +4162,9 @@ Valuation domain : [-1.00; 1.00]
 Attributes       : ['name', 'vertices', 'order', 'valuationDomain', 'edges',
                     'size', 'gamma', 'dfs', 'date', 'averageTreeDetermination']
 *---- best determined spanning tree specific data ----*
-Depth first search paths  :
+Depth first search path(s) :
 [['v1', 'v2', 'v4', 'v2', 'v5', 'v2', 'v1', 'v3', 'v1']]
-Average determinations    : [Decimal('0.655')]
+Average determination(s) : [Decimal('0.655')]
 
 The given graph is connected and, hence, admids a single spanning tree (see Fig. 19c) of **maximum mean determination** of (0.47 + 0.91 + 0.90 + 0.34)/4 = **0.655** (see Lines 9, 6 and 10 in the relation table above).
 
@@ -4182,6 +4182,7 @@ neato -Tpng bestDeterminedSpanningTree.dot -o bestDeterminedSpanningTree.png
 
    *Figure 19c*: Best determined spanning tree
 
+One may easily verify that all other potential spanning trees of this graph will show lower average determinations.
 	   
 Links and appendices
 --------------------
