@@ -83,7 +83,7 @@ class Graph(object):
         except AttributeError:
             pass
         reprString += 'Graph Size       : %d\n' % self.computeSize()
-        reprString += 'Valuation domain : [%.2f - %.2f]\n'\
+        reprString += 'Valuation domain : [%.2f; %.2f]\n'\
                       % (self.valuationDomain['min'],self.valuationDomain['max'])
         reprString += 'Attributes       : %s\n' % list(self.__dict__.keys())
        
@@ -782,7 +782,7 @@ class Graph(object):
         Instance name    : oriented_randomGraph
         Digraph Order      : 6
         Digraph Size       : 5
-        Valuation domain : [-1.00 - 1.00]
+        Valuation domain : [-1.00; 1.00]
         Determinateness  : 100.000
         Attributes       : ['name','order','actions','valuationdomain',
                             'relation', 'gamma', 'notGamma',
@@ -2430,7 +2430,6 @@ class RandomSpanningForest(RandomTree):
         self.averageTreeDetermination = maxWeights 
         return  
         
-
 class RandomSpanningTree(RandomTree):
     """
     Uniform random instance of a spanning tree
@@ -3505,7 +3504,7 @@ class LineGraph(Graph):
     Instance name    : cycleGraph
     Graph Order      : 5
     Graph Size       : 5
-    Valuation domain : [-1.00 - 1.00]
+    Valuation domain : [-1.00; 1.00]
     Attributes       : ['name', 'order', 'vertices', 'valuationDomain',
                         'edges', 'size', 'gamma']
     g.showShort()
@@ -3531,7 +3530,7 @@ class LineGraph(Graph):
     Instance name    : line-cycleGraph
     Graph Order      : 5
     Graph Size       : 5
-    Valuation domain : [-1.00 - 1.00]
+    Valuation domain : [-1.00; 1.00]
     Attributes       : ['name', 'graph', 'valuationDomain', 'vertices',
                         'order', 'edges', 'size', 'gamma']
     >>> lg.showShort()
@@ -3642,7 +3641,7 @@ class PermutationGraph(Graph):
     Graph Order      : 6
     Permutation      : [4, 3, 6, 1, 5, 2]
     Graph Size       : 9
-    Valuation domain : [-1.00 - 1.00]
+    Valuation domain : [-1.00; 1.00]
     Attributes       : ['name', 'vertices', 'order', 'permutation',
                         'valuationDomain', 'edges', 'size', 'gamma']
     >>> g.exportGraphViz()
@@ -3701,7 +3700,7 @@ class PermutationGraph(Graph):
         Instance name    : oriented_permutationGraph
         Digraph Order      : 6
         Digraph Size       : 9
-        Valuation domain : [-1.00 - 1.00]
+        Valuation domain : [-1.00; 1.00]
         Determinateness  : 100.000
         Attributes       : ['name', 'order', 'actions', 'valuationdomain',
                             'relation', 'gamma', 'notGamma', 'size']

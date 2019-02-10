@@ -83,7 +83,7 @@ You may start an interactive Python3 session in the :code:`Digraph3` directory f
     Instance name    : randomDigraph
     Digraph Order      : 5
     Digraph Size       : 12
-    Valuation domain : [-1.00 - 1.00]
+    Valuation domain : [-1.00; 1.00]
     Determinateness  : 100.000
     Attributes       : ['actions', 'valuationdomain', 'relation',
                         'order', 'name', 'gamma', 'notGamma']
@@ -2721,7 +2721,7 @@ Instance class   : CycleGraph
 Instance name    : cycleGraph
 Graph Order      : 5
 Graph Size       : 5
-Valuation domain : [-1.00 - 1.00]
+Valuation domain : [-1.00; 1.00]
 Attributes       : ['name', 'order', 'vertices', 'valuationDomain',
 		    'edges', 'size', 'gamma']
 >>> lg = LineGraph(g)
@@ -2731,7 +2731,7 @@ Instance class   : LineGraph
 Instance name    : line-cycleGraph
 Graph Order      : 5
 Graph Size       : 5
-Valuation domain : [-1.00 - 1.00]
+Valuation domain : [-1.00; 1.00]
 Attributes       : ['name', 'graph', 'valuationDomain', 'vertices',
 		    'order', 'edges', 'size', 'gamma']
 >>> lg.showShort()
@@ -3737,7 +3737,7 @@ Instance name    : permutationGraph
 Graph Order      : 6
 Permutation      : [4, 3, 6, 1, 5, 2]
 Graph Size       : 9
-Valuation domain : [-1.00 - 1.00]
+Valuation domain : [-1.00; 1.00]
 Attributes       : ['name', 'vertices', 'order', 'permutation',
 		    'valuationDomain', 'edges', 'size', 'gamma']
 >>> g.exportGraphViz()
@@ -3803,7 +3803,7 @@ Instance class   : WeakOrder
 Instance name    : oriented_permutationGraph
 Digraph Order      : 6
 Digraph Size       : 9
-Valuation domain : [-1.00 - 1.00]
+Valuation domain : [-1.00; 1.00]
 Determinateness  : 100.000
 Attributes       : ['name', 'order', 'actions', 'valuationdomain',
 		    'relation', 'gamma', 'notGamma', 'size']
@@ -3844,7 +3844,7 @@ Instance class   : RandomGraph
 Instance name    : randomGraph
 Graph Order      : 8
 Graph Size       : 10
-Valuation domain : [-1.00 - 1.00]
+Valuation domain : [-1.00; 1.00]
 Attributes       : ['name', 'order', 'vertices', 'valuationDomain',
                     'edges', 'size', 'gamma']
 >>> g.exportGraphViz()
@@ -3905,7 +3905,7 @@ Instance name    : permutationGraph
 Graph Order      : 8
 Permutation      : [2, 3, 4, 8, 6, 1, 7, 5]
 Graph Size       : 9
-Valuation domain : [-1.00 - 1.00]
+Valuation domain : [-1.00; 1.00]
 Attributes       : ['name', 'vertices', 'order', 'permutation',
                     'valuationDomain', 'edges', 'size', 'gamma']
 >>> gtest.exportGraphViz('permutationGraph4335')
@@ -3946,7 +3946,7 @@ Instance class   : RandomTree
 Instance name    : randomTree
 Graph Order      : 9
 Graph Size       : 8
-Valuation domain : [-1.00 - 1.00]
+Valuation domain : [-1.00; 1.00]
 Attributes       : ['name', 'order', 'vertices', 'valuationDomain',
                     'edges', 'prueferCode', 'size', 'gamma']
 *---- RandomTree specific data ----*
@@ -3963,11 +3963,13 @@ neato -Tpng tutRandomTree.dot -o tutRandomTree.png
 
     *Figure 17a*: Random Tree instance of order 9
 
-A tree graph of order *n* contains *n-1* edges (see Line8 and 9) and we may distinguish vertices like *v1*, *v2*, *v4*, *v5* or *v9*  of degree 1, called the **leafs** of the tree, and vertices like *V3*, *v6*, *v7* or *v8* of degree 2 or more, called the **nodes** of the tree.
+A tree graph of order *n* contains *n-1* edges (see Line8 and 9) and we may distinguish vertices like *v1*, *v2*, *v4*, *v5* or *v9*  of degree 1, called the **leafs** of the tree, and vertices like *v3*, *v6*, *v7* or *v8* of degree 2 or more, called the **nodes** of the tree.
 
-The structure of a tree of order :math:`n > 2` is entirely characterized by a corresponding **Prüfer code** -ie a *list of vertices keys*- of length *n-2*. See, for instance in Line 12 the code ['v3', 'v8', 'v8', 'v3', 'v7', 'v6', 'v7'] corresponding to our sample tree graph *t*. Each position of the code indicates the parent of the remaining leaf with the smallest vertex label. Vertex *v3* is thus the parent of *v1* and we drop leaf *v1*, *v8* is now the parent of leaf *v2* and we drop *v2*, vertex *v8* is again the parent of leaf *v4* and we drop *v4*, vertex *v3* is the parent of leaf *v5* and we drop *v5*, *v7* is now the parent of leaf *v3* and we may drop *v3*, *v6* becomes the parent of leaf *v8* and we drop *v8*, *v7* becomes now the parent of leaf *v6* and we may drop *v6*. The two eventually remaining vertices, *v7* and *v9*, give the last link in the reconstructed tree (see [Bar-1991]_).  
+The structure of a tree of order :math:`n > 2` is entirely characterized by a corresponding *Prüfer* **code** -ie a *list of vertices keys*- of length *n-2*. See, for instance in Line 12 the code ['v3', 'v8', 'v8', 'v3', 'v7', 'v6', 'v7'] corresponding to our sample tree graph *t*.
 
-It is as well possible to first, generate a *random* Prüfer code of length *n-2* from a set of *n* vertices and then, construct the corresponding tree of order *n* by reversing the procedure illustrated above (see [Bar-1991]_).
+Each position of the code indicates the parent of the remaining leaf with the smallest vertex label. Vertex *v3* is thus the parent of *v1* and we drop leaf *v1*, *v8* is now the parent of leaf *v2* and we drop *v2*, vertex *v8* is again the parent of leaf *v4* and we drop *v4*, vertex *v3* is the parent of leaf *v5* and we drop *v5*, *v7* is now the parent of leaf *v3* and we may drop *v3*, *v6* becomes the parent of leaf *v8* and we drop *v8*, *v7* becomes now the parent of leaf *v6* and we may drop *v6*. The two eventually remaining vertices, *v7* and *v9*, give the last link in the reconstructed tree (see [Bar-1991]_).  
+
+It is as well possible to first, generate a random *Prüfer* code of length *n-2* from a set of *n* vertices and then, construct the corresponding tree of order *n* by reversing the procedure illustrated above (see [Bar-1991]_).
 
 >>> verticesList = ['v1','v2','v3','v4','v5','v6','v7']
 >>> n = len(verticesList)
@@ -3985,7 +3987,7 @@ Instance class   : RandomTree
 Instance name    : randomTree
 Graph Order      : 7
 Graph Size       : 6
-Valuation domain : [-1.00 - 1.00]
+Valuation domain : [-1.00; 1.00]
 Attributes       : ['name', 'order', 'vertices', 'valuationDomain',
                     'edges', 'prueferCode', 'size', 'gamma']
 *---- RandomTree specific data ----*
@@ -4002,22 +4004,22 @@ neato -Tpng tutPruefTree.dot -o tutPruefTree.png
 
     *Figure 17b*: Tree instance from a random Prüfer code
 
-Following the bijection between a tree and its Prüfer code, we actually know that there exist :math:`n^{n-2}` differently labelled tree graphs with *n* vertices.
+Following from the bijection between a labelled tree and its Prüfer code, we actually know that there exist :math:`n^{n-2}` different tree graphs with the same *n* vertices.
 
 Given a genuine graph, how can we recognize that it is in fact a tree instance ?
 
 Recognizing tree graphs
 .......................
 
-Given a graph :math:`G(V,E)` of order *n* and size *s*, the following 5 assertions *A1*, *A2*, *A3*, *A4* and *A5* are all equivalent (see [Bar-1991]_):
+Given a graph *g* of order *n* and size *s*, the following 5 assertions *A1*, *A2*, *A3*, *A4* and *A5* are all equivalent (see [Bar-1991]_):
 
-    - *A1*: *G* is a tree;
-    - *A2*: *G* is without (chordless) cycles and :math:`n \,=\, s + 1`;
-    - *A3*: *G* is connected and :math:`n \,=\, s + 1`;
-    - *A4*: Any two vertices of *G* are always connected by a *unique path*;
-    - *A5*: *G* is connected and *dropping* any single edge will always deconnect *G*.
+    - *A1*: *g* is a tree;
+    - *A2*: *g* is without (chordless) cycles and :math:`n \,=\, s + 1`;
+    - *A3*: *g* is connected and :math:`n \,=\, s + 1`;
+    - *A4*: Any two vertices of *g* are always connected by a *unique path*;
+    - *A5*: *g* is connected and *dropping* any single edge will always deconnect *g*.
 
-Assertion *A3*, for instance, gives a simple test for recognizing a tree graph. In case of a lazy evaluation of the test in Line 3 below, it is opportune to first test the order and size of the graph.
+Assertion *A3*, for instance, gives a simple test for recognizing a tree graph. In case of a lazy evaluation of the test in Line 3 below, it is opportune, from a computational complexity perspective, to first check the order and size of the graph before checking its potential connectedness.
 
 >>> from graphs import RandomGraph
 >>> g = RandomGraph(order=6,edgeProbability=0.3,seed=62)
@@ -4028,7 +4030,7 @@ Assertion *A3*, for instance, gives a simple test for recognizing a tree graph. 
 ...
 The graph is a tree ? True
 
-The random graph of order 6 and edge probability 30%, generated with seed 62, is indeed a tree graph instance, as we may readily see from its *graphviz* drawing.
+The random graph of order 6 and edge probability 30%, generated with seed 62, is actually a tree graph instance, as we may readily confirm from its *graphviz* drawing in Fig. 18.
 
 >>> g.exportGraphViz(
 *---- exporting a dot file for GraphViz tools ---------*
@@ -4042,7 +4044,7 @@ fdp -Tpng test62.dot -o test62.png
 
     *Figure 18*: Recognizing a tree instance
 
-We still have to recover its corresponding Prüfer code. Therefore, we may use the :py:func:`graphs.RandomTree.tree2Pruefer` method.
+We still have to recover its corresponding *Prüfer* code. Therefore, we may use the :py:func:`graphs.RandomTree.tree2Pruefer` method.
 
 >>> from graphs import RandomGraph
 >>> RandomTree.tree2Pruefer(g)
@@ -4068,7 +4070,7 @@ Instance class   : RandomSpanningTree
 Instance name    : randomGraph_randomSpanningTree
 Graph Order      : 9
 Graph Size       : 8
-Valuation domain : [-1.00 - 1.00]
+Valuation domain : [-1.00; 1.00]
 Attributes       : ['name','vertices','order','valuationDomain','edges',
                     'size','gamma','dfs','date','dfsx','prueferCode']
 *---- RandomTree specific data ----*
@@ -4088,7 +4090,7 @@ neato -Tpng randomSpanningTree.dot -o randomSpanningTree.png
 
      *Figure 19a*: Random spanning tree
 
-More general, and in case of a not connected graph *g*, we may generate with the :py:class:`graphs.RandomSpanningForest` class a *not necessarily uniform* random instance of a **spanning forest** -one or more random tree graphs- generated from a **random depth first** search graph *g* traversal.
+More general, and in case of a not connected graph, we may generate with the :py:class:`graphs.RandomSpanningForest` class a *not necessarily uniform* random instance of a **spanning forest** -one or more random tree graphs- generated from a **random depth first search** of the graph components' traversals.
 
 >>> g = RandomGraph(order=15,edgeProbability=0.1,seed=140)
 >>> g.computeComponents()
@@ -4114,9 +4116,12 @@ neato -Tpng spanningForest.dot -o spanningForest.png
 
      *Figure 19b*: Random spanning forest instance
 
-In case of graphs with weighted edges, we may finally construct as well the **most determined** spanning tree (or forest if not connected) using *Kruskal* 's *greedy* **minimum-spanning-tree algorithm** [5]_ on the *dual* valuation of the graph [Kru-1956]_.
+Maximum determined spanning forests
+...................................
 
-We consider, for instance, a randomly valued graph with five vertices and seven bipolarly valued edges. 
+In case of valued graphs supporting weighted edges, we may finally construct a **most determined** spanning tree (or forest if not connected) using *Kruskal* 's *greedy* **minimum-spanning-tree algorithm** [5]_ on the *dual* valuation of the graph [Kru-1956]_.
+
+We consider, for instance, a randomly valued graph with five vertices and seven edges bipolarly valued in [-1.0; 1.0]. 
 
 >>> from graphs import *
 >>> g = RandomValuationGraph(seed=2)
@@ -4126,7 +4131,7 @@ Instance class   : RandomValuationGraph
 Instance name    : randomGraph
 Graph Order      : 5
 Graph Size       : 7
-Valuation domain : [-1.00 - 1.00]
+Valuation domain : [-1.00; 1.00]
 Attributes       : ['name', 'order', 'vertices', 'valuationDomain',
                     'edges', 'size', 'gamma']
 
