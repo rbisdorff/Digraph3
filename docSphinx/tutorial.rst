@@ -4165,6 +4165,9 @@ Attributes       : ['name', 'vertices', 'order', 'valuationDomain', 'edges',
 Depth first search paths  :
 [['v1', 'v2', 'v4', 'v2', 'v5', 'v2', 'v1', 'v3', 'v1']]
 Average determinations    : [Decimal('0.655')]
+
+The given graph is connected and, hence, admids a single spanning tree (see Fig. 19c) of **maximum mean determination** of (0.47 + 0.91 + 0.90 + 0.34)/4 = **0.655** (see Lines 9, 6 and 10 in the relation table above).
+
 >>> mt.exportGraphViz(fileName='bestDeterminedspanningTree',\
 ...                   WithSpanningTree=True)
 *---- exporting a dot file for GraphViz tools ---------*
@@ -4179,7 +4182,6 @@ neato -Tpng bestDeterminedSpanningTree.dot -o bestDeterminedSpanningTree.png
 
    *Figure 19c*: Best determined spanning tree
 
-The given graph is connected and, hence, admids a single spanning tree (see Fig. 19c) of **maximum mean determination** of (0.47 + 0.91 + 0.90 + 0.34)/4 = **0.655** (see Lines 9, 6 and 10 in the relation table above).  
 	   
 Links and appendices
 --------------------

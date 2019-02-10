@@ -6501,13 +6501,7 @@ execution time: 0 sec. and 2 millisec.
 11
 12
 13
-14
-15
-16
-17
-18
-19
-20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span> <span class="o">=</span> <span class="n">BestDeterminedSpanningForest</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span> <span class="o">=</span> <span class="n">BestDeterminedSpanningForest</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span>
 <span class="go">*------- Graph instance description ------*</span>
 <span class="go">Instance class   : BestDeterminedSpanningForest</span>
@@ -6521,7 +6515,15 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">Depth first search paths  :</span>
 <span class="go">[[&#39;v1&#39;, &#39;v2&#39;, &#39;v4&#39;, &#39;v2&#39;, &#39;v5&#39;, &#39;v2&#39;, &#39;v1&#39;, &#39;v3&#39;, &#39;v1&#39;]]</span>
 <span class="go">Average determinations    : [Decimal(&#39;0.655&#39;)]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;bestDeterminedspanningTree&#39;</span><span class="p">,</span>\
+</pre></div>
+</td></tr></table></div>
+<p>The given graph is connected and, hence, admids a single spanning tree (see Fig. 19c) of <strong>maximum mean determination</strong> of (0.47 + 0.91 + 0.90 + 0.34)/4 = <strong>0.655</strong> (see Lines 9, 6 and 10 in the relation table above).</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;bestDeterminedspanningTree&#39;</span><span class="p">,</span>\
 <span class="gp">... </span>                  <span class="n">WithSpanningTree</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to spanningTree.dot</span>
@@ -6533,7 +6535,6 @@ execution time: 0 sec. and 2 millisec.
 <a class="reference internal image-reference" href="_images/bestDeterminedSpanningTree.png"><img alt="Best determined spanning tree" src="_images/bestDeterminedSpanningTree.png" style="width: 350px;" /></a>
 <p class="caption"><span class="caption-text"><em>Figure 19c</em>: Best determined spanning tree</span></p>
 </div>
-<p>The given graph is connected and, hence, admids a single spanning tree (see Fig. 19c) of <strong>maximum mean determination</strong> of (0.47 + 0.91 + 0.90 + 0.34)/4 = <strong>0.655</strong> (see Lines 9, 6 and 10 in the relation table above).</p>
 </div>
 </div>
 <div class="section" id="links-and-appendices">
