@@ -163,6 +163,7 @@ def testBestDeterminedSpanningForest():
     g.save()
     g.exportGraphViz()
     mt = BestDeterminedSpanningForest(g,Debug=True)
+    print(mt)
     mt.exportGraphViz(layout="circo")
 
 def testLineGraphs():

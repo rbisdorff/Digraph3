@@ -954,7 +954,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
             <span class="c1">## self.date += 1</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;startDate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">date</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">dfsx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_dfsx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; dfs </span><span class="si">%s</span><span class="s1">, date = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dfs</span><span class="p">),</span>  <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;startDate&#39;</span><span class="p">]))</span>
             <span class="n">nextVertices</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">[</span><span class="n">x</span><span class="p">]]</span>
@@ -966,7 +966,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">date</span> <span class="o">+=</span> <span class="mi">1</span>
                     <span class="n">visitVertex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span><span class="p">)</span>
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">dfsx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_dfsx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;endDate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">date</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">date</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -984,12 +984,12 @@
             <span class="n">verticesList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">]</span>
             <span class="n">verticesList</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">verticesList</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">dfsx</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_dfsx</span> <span class="o">=</span> <span class="p">[]</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; Starting from </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="n">x</span><span class="p">)</span>
                     <span class="n">visitVertex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dfsx</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dfsx</span><span class="p">)</span>
                 <span class="c1">#self.vertices[x][&#39;color&#39;] = 2</span>
                 <span class="c1">#self.vertices[x][&#39;endDate&#39;] = self.date</span>
 
@@ -1396,7 +1396,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
             <span class="c1">## self.date += 1</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;startDate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">date</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">dfsx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_dfsx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; dfs </span><span class="si">%s</span><span class="s1">, date = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dfs</span><span class="p">),</span>  <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;startDate&#39;</span><span class="p">]))</span>
             <span class="n">nextVertices</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">[</span><span class="n">x</span><span class="p">]]</span>
@@ -1409,7 +1409,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">date</span> <span class="o">+=</span> <span class="mi">1</span>
                     <span class="n">visitVertex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">dfsx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_dfsx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
                 <span class="n">nextVertices</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;endDate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">date</span>
@@ -1429,12 +1429,12 @@
             <span class="n">verticesList</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
             <span class="k">while</span> <span class="n">verticesList</span> <span class="o">!=</span> <span class="p">[]:</span>
                 <span class="n">x</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">verticesList</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">dfsx</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_dfsx</span> <span class="o">=</span> <span class="p">[]</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; Starting from </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="n">x</span><span class="p">)</span>
                     <span class="n">visitVertex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dfsx</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dfsx</span><span class="p">)</span>
                 <span class="n">verticesList</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
 
@@ -2261,9 +2261,13 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Show method for RandomTree instances.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">reprString</span> <span class="o">=</span> <span class="n">Graph</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;*---- RandomTree specific data ----*</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Prüfer code  : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">prueferCode</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prueferCode</span>
+            <span class="n">reprString</span> <span class="o">=</span> <span class="n">Graph</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;*---- RandomTree specific data ----*</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Prüfer code  : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">code</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="n">reprString</span> <span class="o">=</span> <span class="n">Graph</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">reprString</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vertices</span><span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -2448,7 +2452,31 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">prueferCodes</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;component&#39;</span><span class="p">:</span> <span class="n">component</span><span class="p">,</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="p">[]})</span>
                 
-        <span class="bp">self</span><span class="o">.</span><span class="n">prueferCodes</span> <span class="o">=</span> <span class="n">prueferCodes</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prueferCodes</span> <span class="o">=</span> <span class="n">prueferCodes</span>
+
+<div class="viewcode-block" id="RandomSpanningForest.computeAverageTreeDetermination"><a class="viewcode-back" href="../techDoc.html#graphs.RandomSpanningForest.computeAverageTreeDetermination">[docs]</a>    <span class="k">def</span> <span class="nf">computeAverageTreeDetermination</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dfs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders the mean average determinations of the spanning trees.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
+        <span class="k">if</span> <span class="n">dfs</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dfs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span>
+        <span class="n">maxWeights</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dfs</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">dfsx</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">maxWeight</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dfsx</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="n">edgeKey</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">([</span><span class="n">dfsx</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">dfsx</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]])</span>
+                    <span class="n">maxWeight</span> <span class="o">+=</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="n">edgeKey</span><span class="p">])</span>
+                <span class="n">maxWeights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">maxWeight</span> <span class="o">/</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="p">))</span> <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">maxWeights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valuationDomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">averageTreeDetermination</span> <span class="o">=</span> <span class="n">maxWeights</span> 
+        <span class="k">return</span>  </div></div>
+        
 
 <div class="viewcode-block" id="RandomSpanningTree"><a class="viewcode-back" href="../techDoc.html#graphs.RandomSpanningTree">[docs]</a><span class="k">class</span> <span class="nc">RandomSpanningTree</span><span class="p">(</span><span class="n">RandomTree</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -2464,6 +2492,8 @@
 <span class="sd">       :width: 300 px</span>
 <span class="sd">       :align: center</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    
+    
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span> <span class="k">as</span> <span class="n">copy</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">g</span><span class="o">.</span><span class="n">isConnected</span><span class="p">():</span>
@@ -2562,10 +2592,9 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;reducedWalk&#39;</span><span class="p">,</span> <span class="n">reducedWalk</span><span class="p">)</span>
             <span class="n">t</span> <span class="o">=</span> <span class="n">k</span>
         <span class="k">return</span> <span class="n">reducedWalk</span></div>
-
-    
+                      
 <span class="c1">#----------</span>
-<div class="viewcode-block" id="BestDeterminedSpanningForest"><a class="viewcode-back" href="../techDoc.html#graphs.BestDeterminedSpanningForest">[docs]</a><span class="k">class</span> <span class="nc">BestDeterminedSpanningForest</span><span class="p">(</span><span class="n">RandomTree</span><span class="p">):</span>
+<div class="viewcode-block" id="BestDeterminedSpanningForest"><a class="viewcode-back" href="../techDoc.html#graphs.BestDeterminedSpanningForest">[docs]</a><span class="k">class</span> <span class="nc">BestDeterminedSpanningForest</span><span class="p">(</span><span class="n">RandomSpanningForest</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Constructing the most determined spanning tree (or forest if not connected)</span>
 <span class="sd">    using Kruskal&#39;s greedy algorithm on the dual valuation.</span>
@@ -2597,11 +2626,23 @@
 <span class="sd">       :align: center</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Show method for best determined spanning forests instances.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">reprString</span> <span class="o">=</span> <span class="n">Graph</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;*---- best determined spanning tree specific data ----*</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Depth first search paths  : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dfs</span><span class="p">)</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Average determinations    : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>\
+                      <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">averageTreeDetermination</span><span class="p">)</span>
+       
+        <span class="k">return</span> <span class="n">reprString</span>
+    
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="kn">import</span> <span class="nn">random</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;_randomSpanningTree&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;_randomSpanningForest&#39;</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">vertices</span><span class="p">)</span>
@@ -2680,7 +2721,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">(</span><span class="n">Debug</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;gamma = &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">depthFirstSearch</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">depthFirstSearch</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">computeAverageTreeDetermination</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="Q_Coloring"><a class="viewcode-back" href="../techDoc.html#graphs.Q_Coloring">[docs]</a><span class="k">class</span> <span class="nc">Q_Coloring</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -3819,12 +3861,15 @@
 <span class="c1"># --------------testing the module ----</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
 
-    <span class="n">g</span> <span class="o">=</span> <span class="n">PermutationGraph</span><span class="p">(</span><span class="n">permutation</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">PermutationGraph</span><span class="p">(</span><span class="n">permutation</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
     <span class="n">g</span><span class="o">.</span><span class="n">exportPermutationGraphViz</span><span class="p">()</span>
     <span class="n">g</span><span class="o">.</span><span class="n">computeMinimalVertexColoring</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">WithVertexColoring</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">b</span> <span class="o">=</span> <span class="n">BestDeterminedSpanningForest</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
     
 <span class="c1">##    rg = RandomPermutationGraph(order=6,seed=None)</span>
 <span class="c1">##    print(rg)</span>

@@ -4026,7 +4026,7 @@ Assertion *A3*, for instance, gives a simple test for recognizing a tree graph. 
 ...
 The graph is a tree ? True
 
-The random graph of order 6 and edgeProbability 30%, generated with seed 62, is indeed a tree graph instance, as we may readily see from its *graphviz* drawing.
+The random graph of order 6 and edge probability 30%, generated with seed 62, is indeed a tree graph instance, as we may readily see from its *graphviz* drawing.
 
 >>> g.exportGraphViz(
 *---- exporting a dot file for GraphViz tools ---------*
@@ -4051,11 +4051,11 @@ Let us now trun toward a major application of tree graphs, namely *spanning tree
 Spanning trees and forests
 ..........................
 
-With the :py:class:`graphs.RandomSpanningTree` class we my generate a random instance of a **spanning tree** generated with *Wilson* 's algorithm from a given connected graph *g* instance.
+With the :py:class:`graphs.RandomSpanningTree` class we may generate, from a given connected graph *g* instance, **uniform random** instances of a **spanning tree** by using *Wilson* 's algorithm [Wil-1996]_  
 
 .. Note::
 
-         Wilson's algorithm only works for connected graphs.
+         Wilson's algorithm *only* works for connected graphs [4]_.
 
 >>> from graphs import *
 >>> g = RandomGraph(order=9,edgeProbability=0.4,seed=100)
@@ -4086,7 +4086,7 @@ neato -Tpng randomSpanningTree.dot -o randomSpanningTree.png
 
      *Figure 19a*: Random spanning tree
 
-In case of a not connected graph *g*, we may generate with the :py:class:`graphs.RandomSpanningForest` class a random instance of a **spanning forest** -one or more tree graphs- generated from a **random depth first** search graph *g* traversal.
+More general, and in case of a not connected graph *g*, we may generate with the :py:class:`graphs.RandomSpanningForest` class a *not necessarily uniform* random instance of a **spanning forest** -one or more random tree graphs- generated from a **random depth first** search graph *g* traversal.
 
 >>> g = RandomGraph(order=15,edgeProbability=0.1,seed=140)
 >>> g.computeComponents()
@@ -4106,29 +4106,47 @@ neato -Tpng spanningForest.dot -o spanningForest.png
 
 
 .. figure:: spanningForest.png
-     :alt: randomSpanningForest instance
+     :alt: Random spanning forest instance
      :width: 350 px
      :align: center
 
      *Figure 19b*: Random spanning forest instance
 
-In case of valued graphs, we may finally construct, with the :py:class:`graphs.BestDeterminedSpanningForest`, as well the **most determined** spanning tree (or forest if not connected) using *Kruskal* 's **greedy algorithm** on the *dual* valuation.
-    
+In case of graphs with weighted edges, we may finally construct as well the **most determined** spanning tree (or forest if not connected) using *Kruskal* 's *greedy* **minimum-spanning-tree algorithm** [5]_ on the *dual* valuation [Kru-1956]_.
+
+We consider a randomly valued graph with five vertices and seven bipolarly valued edges. 
+
 >>> from graphs import *
 >>> g = RandomValuationGraph(seed=2)
->>> g.showShort()
-*---- short description of the graph ----*
-Name             : 'randomGraph'
-Vertices         :  ['v1', 'v2', 'v3', 'v4', 'v5']
-Valuation domain :  {'med': Decimal('0'), 'min': Decimal('-1'), 'max': Decimal('1')}
-Gamma function   : 
-v1 -> ['v2', 'v3']
-v2 -> ['v4', 'v1', 'v5', 'v3']
-v3 -> ['v1', 'v5', 'v2']
-v4 -> ['v5', 'v2']
-v5 -> ['v4', 'v2', 'v3']
+>>> g
+*------- Graph instance description ------*
+Instance class   : RandomValuationGraph
+Instance name    : randomGraph
+Graph Order      : 5
+Graph Size       : 7
+Valuation domain : [-1.00 - 1.00]
+Attributes       : ['name', 'order', 'vertices', 'valuationDomain',
+                    'edges', 'size', 'gamma']
+
+To inspect the edges' actual weights, we first transform the graph into a corresponding digraph (see Line 1 below) and use the :py:func:`digraphs.Digraph.showRelationTable` method (see Line 2 below) for printing its **symmetric adjacency matrix**. 
+
+>>> dg = g.graph2Digraph()
+>>> dg.showRelationTable()
+* ---- Relation Table -----
+  S   |  'v1'	  'v2'	  'v3'	  'v4'	  'v5'	  
+------|-------------------------------------------
+ 'v1' |  0.00	 0.91	 0.90	 -0.89	 -0.83	 
+ 'v2' |  0.91	 0.00	 0.67	  0.47	  0.34	 
+ 'v3' |  0.90	 0.67	 0.00	 -0.38	  0.21	 
+ 'v4' | -0.89	 0.47	-0.38	  0.00	  0.21	 
+ 'v5' | -0.83	 0.34	 0.21	  0.21	  0.00	 
+Valuation domain: [-1.00;1.00]
+
+To compute the most determined spanning tree, we use now the :py:class:`graphs.BestDeterminedSpanningForest` class constructor.
+
 >>> mt = BestDeterminedSpanningForest(g)
->>> mt.exportGraphViz('bestDeterminedspanningTree',WithSpanningTree=True)
+>>> mt.exportGraphViz(fileName='bestDeterminedspanningTree',\
+...                   WithSpanningTree=True)
 *---- exporting a dot file for GraphViz tools ---------*
 Exporting to spanningTree.dot
 [['v4', 'v2', 'v1', 'v3', 'v1', 'v2', 'v5', 'v2', 'v4']]
@@ -4141,6 +4159,7 @@ neato -Tpng bestDeterminedSpanningTree.dot -o bestDeterminedSpanningTree.png
 
    *Figure 19c*: Best determined spanning tree
 
+And, the resulting spanning tree (see Fig. 19c) shows a **maximum mean determination** of (0.47 + 0.91 + 0.90 + 0.34)/4 = **0.655**.  
 	   
 Links and appendices
 --------------------
@@ -4195,9 +4214,13 @@ References
 
 .. [Gol-2004] M. Ch. Golumbic, *Agorithmic Graph Theory and Perfect Graphs* 2nd Ed., Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.
 
-.. [BIS-2000] R. Bisdorff (2000), Logical foundation of fuzzy preferential systems with application to the ELECTRE decision aid methods, *Computers and Operations Research*, 27:673-687 (downloadable version `PDF file 159.1Kb <https://leopold-loewenheim.uni.lu/bisdorff/documents/foundationElectre.pdf>`_)
+.. [BIS-2000] R. Bisdorff (2000), Logical foundation of fuzzy preferential systems with application to the ELECTRE decision aid methods, *Computers and Operations Research*, 27:673-687 (downloadable version `PDF file 159.1Kb <https://leopold-loewenheim.uni.lu/bisdorff/documents/foundationElectre.pdf>`_).
+
+.. [Wil-1996] D. B. Wilson (1996), *Generating random spanning trees more quickly than the cover time*, Proceedings of the Twenty-eighth Annual ACM *Symposium on the Theory of Computing* (Philadelphia, PA, 1996), 296-303, ACM, New York, 1996.
 
 .. [Bar-1991] J.-P. Barthélemy and A. Guenoche (1991), *Trees and Proximities Representations*, Wiley, ISBN: 978-0471922636.
+
+.. [Kru-1956] J. B. Kruskal (1956), *On the shortest spanning subtree of a graph and the traveling salesman problem*, Proceedings of the American Mathematical Society. 7: 48–50.
 
 Footnotes
 .........
@@ -4208,3 +4231,6 @@ Footnotes
 
 .. [3] The :code:`perrinMIS` shell command may be installed system wide with the command :code:`.../Digraph3$ make installPerrin` from the main Digraph3 directory. It is stored by default into :code:`</usr/local/bin/>`. This may be changed with the :code:`INSTALLDIR` flag. The command :code:`.../Digraph3$ make installPerrinUser` installs it instead without sudo into the user's private :code:`<$Home/.bin>` directory.
 
+.. [4] *Wilson* 's algorithm uses *loop-erased random walks*. See https://en.wikipedia.org/wiki/Loop-erased_random_walk .
+
+.. [5] *Kruskal* 's algorithm is a *minimum-spanning-tree* algorithm which finds an edge of the least possible weight that connects any two trees in the forest.  See https://en.wikipedia.org/wiki/Kruskal%27s_algorithm .

@@ -907,7 +907,7 @@ class Graph(object):
             self.vertices[x]['color'] = 1
             ## self.date += 1
             self.vertices[x]['startDate'] = self.date
-            self.dfsx.append(x)
+            self._dfsx.append(x)
             if Debug:
                 print(' dfs %s, date = %d' % (str(self.dfs),  self.vertices[x]['startDate']))
             nextVertices = [y for y in self.gamma[x]]
@@ -919,7 +919,7 @@ class Graph(object):
                     self.date += 1
                     visitVertex(self,y, Debug = Debug)
                     if self.vertices[x]['color'] == 1:
-                        self.dfsx.append(x)
+                        self._dfsx.append(x)
             self.vertices[x]['color'] = 2
             self.vertices[x]['endDate'] = self.date
             self.date += 1
@@ -937,12 +937,12 @@ class Graph(object):
             verticesList = [x for x in self.vertices]
             verticesList.sort()
             for x in verticesList:
-                self.dfsx = []
+                self._dfsx = []
                 if self.vertices[x]['color'] == 0:
                     if Debug:
                         print('==>> Starting from %s ' % x)
                     visitVertex(self, x, Debug = Debug)
-                    self.dfs.append(self.dfsx)
+                    self.dfs.append(self._dfsx)
                 #self.vertices[x]['color'] = 2
                 #self.vertices[x]['endDate'] = self.date
 
@@ -1349,7 +1349,7 @@ class Graph(object):
             self.vertices[x]['color'] = 1
             ## self.date += 1
             self.vertices[x]['startDate'] = self.date
-            self.dfsx.append(x)
+            self._dfsx.append(x)
             if Debug:
                 print(' dfs %s, date = %d' % (str(self.dfs),  self.vertices[x]['startDate']))
             nextVertices = [y for y in self.gamma[x]]
@@ -1362,7 +1362,7 @@ class Graph(object):
                     self.date += 1
                     visitVertex(self,y,Debug=Debug)
                     if self.vertices[x]['color'] == 1:
-                        self.dfsx.append(x)
+                        self._dfsx.append(x)
                 nextVertices.remove(y)
             self.vertices[x]['color'] = 2
             self.vertices[x]['endDate'] = self.date
@@ -1382,12 +1382,12 @@ class Graph(object):
             verticesList.sort()
             while verticesList != []:
                 x = random.choice(verticesList)
-                self.dfsx = []
+                self._dfsx = []
                 if self.vertices[x]['color'] == 0:
                     if Debug:
                         print('==>> Starting from %s ' % x)
                     visitVertex(self,x,Debug=Debug)
-                    self.dfs.append(self.dfsx)
+                    self.dfs.append(self._dfsx)
                 verticesList.remove(x)
 
 
@@ -2214,9 +2214,13 @@ class RandomTree(Graph):
         """
         Show method for RandomTree instances.
         """
-        reprString = Graph.__repr__(self)
-        reprString += '*---- RandomTree specific data ----*\n'
-        reprString += 'Prüfer code  : %s\n' % self.prueferCode
+        try:
+            code = self.prueferCode
+            reprString = Graph.__repr__(self)
+            reprString += '*---- RandomTree specific data ----*\n'
+            reprString += 'Prüfer code  : %s\n' % code
+        except AttributeError:
+            reprString = Graph.__repr__(self)
         return reprString
 
     def __init__(self,order=None, vertices= None,
@@ -2403,6 +2407,30 @@ class RandomSpanningForest(RandomTree):
                 
         self.prueferCodes = prueferCodes
 
+    def computeAverageTreeDetermination(self,dfs=None):
+        """
+        Renders the mean average determinations of the spanning trees.
+        """
+        from decimal import Decimal
+        if dfs == None:
+            dfs = self.dfs
+        maxWeights = []
+        n = len(dfs)
+        for i in range(n):
+            dfsx = dfs[i]
+            maxWeight = Decimal('0')
+            k = len(dfsx)
+            if k > 1:
+                for j in range(k-1):
+                    edgeKey = frozenset([dfsx[j],dfsx[j+1]])
+                    maxWeight += abs(self.edges[edgeKey])
+                maxWeights.append( maxWeight / Decimal(str(2*k)) )
+            else:
+                maxWeights.append(self.valuationDomain['max'])
+        self.averageTreeDetermination = maxWeights 
+        return  
+        
+
 class RandomSpanningTree(RandomTree):
     """
     Uniform random instance of a spanning tree
@@ -2417,6 +2445,8 @@ class RandomSpanningTree(RandomTree):
        :width: 300 px
        :align: center
     """
+    
+    
     def __init__(self,g,seed=None,Debug=False):
         from copy import copy as copy
         if not g.isConnected():
@@ -2515,10 +2545,9 @@ class RandomSpanningTree(RandomTree):
                 print('reducedWalk', reducedWalk)
             t = k
         return reducedWalk
-
-    
+                      
 #----------
-class BestDeterminedSpanningForest(RandomTree):
+class BestDeterminedSpanningForest(RandomSpanningForest):
     """
     Constructing the most determined spanning tree (or forest if not connected)
     using Kruskal's greedy algorithm on the dual valuation.
@@ -2550,11 +2579,23 @@ class BestDeterminedSpanningForest(RandomTree):
        :align: center
 
     """
+    def __repr__(self):
+        """
+        Show method for best determined spanning forests instances.
+        """
+        reprString = Graph.__repr__(self)
+        reprString += '*---- best determined spanning tree specific data ----*\n'
+        reprString += 'Depth first search paths  : %s\n' % str(self.dfs)
+        reprString += 'Average determinations    : %s\n' %\
+                      str(self.averageTreeDetermination)
+       
+        return reprString
+    
     def __init__(self,g,seed=None,Debug=False):
         from copy import deepcopy
         import random
         random.seed(seed)
-        self.name= g.name+'_randomSpanningTree'
+        self.name= g.name+'_randomSpanningForest'
         if Debug:
             print(self.name)
         self.vertices = deepcopy(g.vertices)
@@ -2634,6 +2675,7 @@ class BestDeterminedSpanningForest(RandomTree):
         if Debug:
             print('gamma = ', self.gamma)
         self.dfs = self.depthFirstSearch()
+        self.computeAverageTreeDetermination()
 
 class Q_Coloring(Graph):
     """
@@ -3772,12 +3814,15 @@ class RandomPermutationGraph(PermutationGraph):
 # --------------testing the module ----
 if __name__ == '__main__':
 
-    g = PermutationGraph(permutation=[4,3,6,1,5,2])
+    g = PermutationGraph(permutation=[4,3,6,1,5,2,7,9,8])
     print(g)
     g.exportGraphViz()
     g.exportPermutationGraphViz()
     g.computeMinimalVertexColoring(Comments=True,Debug=True)
     g.exportGraphViz(WithVertexColoring=True)
+
+    b = BestDeterminedSpanningForest(g)
+    print(b)
     
 ##    rg = RandomPermutationGraph(order=6,seed=None)
 ##    print(rg)
