@@ -2204,6 +2204,7 @@ class QuantilesSortingDigraph(SortingDigraph):
     def computeQuantileOrdering(self,strategy=None,
                                 Descending=True,
                                 HTML=False,
+                                title='Quantiles Preordering',
                                 Comments=False,
                                 Debug=False):
         """
@@ -2216,11 +2217,11 @@ class QuantilesSortingDigraph(SortingDigraph):
         if strategy == None:
             strategy = 'optimistic'
         if HTML:
-            html = '<h1>Quantiles preordering</h1>'
-            html += '<table style="background-color:White;" border="1">'
-            html += '<tr bgcolor="#9acd32"><th>quantile limits</th>'
-            html += '<th>%s sorting</th>' % strategy
-            html += '</tr>'
+            html = '<h1>%s</h1>\n' % title
+            html += '<table style="background-color:White;" border="1">\n'
+            html += '<tr bgcolor="#9acd32"><th>quantile limits</th>\n'
+            html += '<th>%s sorting</th>\n' % strategy
+            html += '</tr>\n'
         actionsCategories = {}
         for x in self.actions:
             a,lowCateg,highCateg,credibility =\
@@ -2939,7 +2940,7 @@ class QuantilesSortingDigraph(SortingDigraph):
             print()
 
 
-    def showHTMLQuantileOrdering(self,Descending=True,strategy='optimistic'):
+    def showHTMLQuantileOrdering(self,title='Quantiles Preordering',Descending=True,strategy='optimistic'):
         """
         Shows the html version of the quantile preordering in a browser window.
 
@@ -2954,6 +2955,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         fo.write(self.computeQuantileOrdering(Descending=Descending,
                                               strategy=strategy,
                                               HTML=True,
+                                              title=title,
                                               Comments=True))
         fo.close()
         url = 'file://'+fileName
@@ -3869,6 +3871,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             criteriaList = argCriteriaList
 
         rankingRule = self.rankingRule
+        
         if argActionsList == None:
             actionsList = self.actionsRanking
         else:
@@ -4048,6 +4051,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                                    pageTitle=None,
                                    ndigits=2,
                                    quantiles=None,
+                                   rankingRule=None,
                                    Correlations=False,
                                    Threading=False,
                                    nbrOfCPUs=None,
@@ -4082,6 +4086,8 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 
         
         """
+        if rankingRule != None:
+            print('A ranking rule - Copeland (default) or NetFlows may be given with the NormedQuantilesRatingDigraph constructor')
         import webbrowser
         fileName = '/tmp/performanceHeatmap.html'
         fo = open(fileName,'w')
