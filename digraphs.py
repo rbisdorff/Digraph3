@@ -7257,7 +7257,7 @@ class Digraph(object):
         html += '</style>\n'
         html += '</head>\n<body>\n'
         html += '<h1>%s</h1>' % pageTitle
-        html += '<h3>Outranking graph: %s</h3>' % self.name
+        html += '<h3>Outranking digraph: %s</h3>' % self.name
        
         #print('RuBis BCR')
         t0 = time()
