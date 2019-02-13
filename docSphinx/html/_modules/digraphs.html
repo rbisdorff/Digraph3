@@ -7233,6 +7233,238 @@
 <span class="c1">##        self.gamma = self.gammaSets()</span>
 <span class="c1">##        self.notGamma = self.notGammaSets()</span>
 
+<span class="c1">#############</span>
+
+<div class="viewcode-block" id="Digraph.showHTMLBestChoiceRecommendation"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.showHTMLBestChoiceRecommendation">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLBestChoiceRecommendation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">pageTitle</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                          <span class="n">ChoiceVector</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                          <span class="n">CoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                          <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                          <span class="n">_OldCoca</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                          <span class="n">BrokenCocs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                          <span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+        <span class="kn">import</span> <span class="nn">webbrowser</span>
+        <span class="n">fileName</span> <span class="o">=</span> <span class="s1">&#39;/tmp/relationMap.html&#39;</span>
+        <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">htmlBestChoiceRecommendation</span><span class="p">(</span>\
+            <span class="n">pageTitle</span><span class="o">=</span><span class="n">pageTitle</span><span class="p">,</span>\
+            <span class="n">ChoiceVector</span><span class="o">=</span><span class="n">ChoiceVector</span><span class="p">,</span>\
+            <span class="n">CoDual</span><span class="o">=</span><span class="n">CoDual</span><span class="p">,</span>\
+            <span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">,</span>\
+            <span class="n">_OldCoca</span><span class="o">=</span><span class="n">_OldCoca</span><span class="p">,</span>\
+            <span class="n">BrokenCocs</span><span class="o">=</span><span class="n">BrokenCocs</span><span class="p">,</span>\
+            <span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">))</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;file://&#39;</span><span class="o">+</span><span class="n">fileName</span>
+        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open_new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Digraph.htmlBestChoiceRecommendation"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.htmlBestChoiceRecommendation">[docs]</a>    <span class="k">def</span> <span class="nf">htmlBestChoiceRecommendation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">pageTitle</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                          <span class="n">ChoiceVector</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                     <span class="n">ContentCentered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                          <span class="n">CoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                          <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                          <span class="n">_OldCoca</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                          <span class="n">BrokenCocs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                          <span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders the RuBis best choice recommendation in a browser window.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            Computes by default the Rubis best choice recommendation on the corresponding strict (codual) outranking digraph.</span>
+
+<span class="sd">            In case of chordless circuits, if supporting arcs are more credible</span>
+<span class="sd">            than the reversed negating arcs, we collapse the circuits into hyper nodes.</span>
+<span class="sd">            Inversely,  if supporting arcs are not more credible than the reversed negating arcs,</span>
+<span class="sd">            we brake the circuits on their weakest arc.</span>
+<span class="sd">         </span>
+<span class="sd">        Usage example:</span>
+<span class="sd">        </span>
+<span class="sd">        &gt;&gt;&gt; from outrankingDigraphs import *</span>
+<span class="sd">        &gt;&gt;&gt; t = Random3ObjectivesPerformanceTableau(seed=5)</span>
+<span class="sd">        &gt;&gt;&gt; g = BipolarOutrankingDigraph(t)</span>
+<span class="sd">        &gt;&gt;&gt; g.showHTMLBestChoiceRecommendation()</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="n">Comments</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="c1"># construct html text</span>
+        <span class="n">html</span>  <span class="o">=</span> <span class="s1">&#39;&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;meta charset=&quot;UTF-8&quot;&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">if</span> <span class="n">pageTitle</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">pageTitle</span> <span class="o">=</span> <span class="s1">&#39;Best Choice Recommendation&#39;</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;title&gt;</span><span class="si">%s</span><span class="s1">&lt;/title&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">pageTitle</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;style type=&quot;text/css&quot;&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">if</span> <span class="n">ContentCentered</span><span class="p">:</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;td {text-align: center;}</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;td.na {color: rgb(192,192,192);}</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/style&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/head&gt;</span><span class="se">\n</span><span class="s1">&lt;body&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;h1&gt;</span><span class="si">%s</span><span class="s1">&lt;/h1&gt;&#39;</span> <span class="o">%</span> <span class="n">pageTitle</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;h3&gt;Outranking digraph: </span><span class="si">%s</span><span class="s1">&lt;/h3&gt;&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+       
+        <span class="c1">#print(&#39;RuBis BCR&#39;)</span>
+        <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+        <span class="n">n0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span>
+        <span class="n">cpself</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">CoDual</span><span class="p">:</span>
+            <span class="n">g</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">cpself</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">g</span> <span class="o">=</span> <span class="n">cpself</span>
+        <span class="k">if</span> <span class="n">_OldCoca</span><span class="p">:</span>
+            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">CocaDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">)</span>
+            <span class="n">b1</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">elif</span> <span class="n">BrokenCocs</span><span class="p">:</span>
+            <span class="c1">#print(&#39;passed here!&#39;)</span>
+            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">BrokenCocsDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">)</span>
+            <span class="n">b1</span> <span class="o">=</span> <span class="n">_selfwcoc</span><span class="o">.</span><span class="n">breakings</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">BreakAddCocsDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">)</span>
+            <span class="n">b1</span> <span class="o">=</span>  <span class="n">_selfwcoc</span><span class="o">.</span><span class="n">breakings</span>
+        <span class="n">n1</span> <span class="o">=</span> <span class="n">_selfwcoc</span><span class="o">.</span><span class="n">order</span>
+        <span class="n">nc</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">-</span> <span class="n">n0</span>
+        
+        <span class="c1">#self.relation_orig = deepcopy(g.relation)</span>
+        <span class="k">if</span> <span class="n">b1</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">nc</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1">#self.actions_orig = deepcopy(g.actions)</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">_selfwcoc</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">_selfwcoc</span><span class="o">.</span><span class="n">relation</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;List of pseudo-independent choices&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+        <span class="c1">#self.showPreKernels()</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">showPreKernels</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">dompreKernels</span><span class="p">,</span><span class="n">g</span><span class="o">.</span><span class="n">abspreKernels</span><span class="p">)</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">computeGoodChoices</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">computeBadChoices</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;good and bad choices: &#39;</span><span class="p">,</span><span class="n">g</span><span class="o">.</span><span class="n">goodChoices</span><span class="p">,</span><span class="n">g</span><span class="o">.</span><span class="n">badChoices</span><span class="p">)</span>
+
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Rubis best choice recommendation(s) (BCR)&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; (in decreasing order of determinateness)   &#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Credibility domain: [</span><span class="si">%.2f</span><span class="s1">,</span><span class="si">%.2f</span><span class="s1">]&#39;</span> <span class="o">%</span>\
+                  <span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">],</span>\
+                   <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">])</span> <span class="p">)</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;p&gt;Rubis best choice recommendation(s) (BCR)&lt;/br&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39; (in decreasing order of determinateness)&lt;/br&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;Credibility domain: [</span><span class="si">%.2f</span><span class="s1">,</span><span class="si">%.2f</span><span class="s1">]&lt;/p&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>\
+                  <span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">],</span>\
+                   <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">])</span>
+        <span class="n">Med</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
+        <span class="n">bestChoice</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">worstChoice</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">gch</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">goodChoices</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">gch</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">Med</span><span class="p">:</span>
+                <span class="n">goodChoice</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">for</span> <span class="n">bch</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">badChoices</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">gch</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">==</span> <span class="n">bch</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span>
+                        <span class="c1">#if gch[0] == bch[0]:</span>
+                        <span class="k">if</span> <span class="n">gch</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="n">gch</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span>
+                            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;null (good) choice &#39;</span><span class="p">)</span>
+                                <span class="n">g</span><span class="o">.</span><span class="n">showChoiceVector</span><span class="p">(</span><span class="n">gch</span><span class="p">,</span>
+                                                      <span class="n">ChoiceVector</span><span class="o">=</span><span class="n">ChoiceVector</span><span class="p">)</span>
+                                <span class="n">g</span><span class="o">.</span><span class="n">showChoiceVector</span><span class="p">(</span><span class="n">bch</span><span class="p">,</span>
+                                                      <span class="n">ChoiceVector</span><span class="o">=</span><span class="n">ChoiceVector</span><span class="p">)</span>
+                            <span class="n">goodChoice</span> <span class="o">=</span> <span class="kc">False</span>
+                        <span class="k">elif</span> <span class="n">gch</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">gch</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span>
+                            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;outranked (good) choice &#39;</span><span class="p">)</span>
+                                <span class="n">g</span><span class="o">.</span><span class="n">showChoiceVector</span><span class="p">(</span><span class="n">gch</span><span class="p">,</span>
+                                                      <span class="n">ChoiceVector</span><span class="o">=</span><span class="n">ChoiceVector</span><span class="p">)</span>
+                                <span class="n">g</span><span class="o">.</span><span class="n">showChoiceVector</span><span class="p">(</span><span class="n">bch</span><span class="p">,</span>
+                                                      <span class="n">ChoiceVector</span><span class="o">=</span><span class="n">ChoiceVector</span><span class="p">)</span>
+                            <span class="n">goodChoice</span> <span class="o">=</span> <span class="kc">False</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">goodChoice</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">if</span> <span class="n">goodChoice</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; === &gt;&gt; potential best choice(s)&#39;</span><span class="p">)</span>
+                    <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;h3&gt;Potential best choice(s)&lt;/h3&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+                    
+                    <span class="n">html</span> <span class="o">+=</span> <span class="n">g</span><span class="o">.</span><span class="n">htmlChoiceVector</span><span class="p">(</span><span class="n">gch</span><span class="p">,</span><span class="n">ChoiceVector</span><span class="o">=</span><span class="n">ChoiceVector</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">bestChoice</span> <span class="o">==</span> <span class="nb">set</span><span class="p">():</span>
+                        <span class="n">bestChoice</span> <span class="o">=</span> <span class="n">gch</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; === &gt;&gt; non robust best choice(s)&#39;</span><span class="p">)</span>
+                <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;h3&gt;Non robust best choice(s)&lt;/h3&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+                <span class="n">html</span> <span class="o">+=</span> <span class="n">g</span><span class="o">.</span><span class="n">htmlChoiceVector</span><span class="p">(</span><span class="n">gch</span><span class="p">,</span><span class="n">ChoiceVector</span><span class="o">=</span><span class="n">ChoiceVector</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">bch</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">badChoices</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">bch</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">Med</span><span class="p">:</span>
+                <span class="n">badChoice</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">nullChoice</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">for</span> <span class="n">gch</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">goodChoices</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">bch</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">==</span> <span class="n">gch</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span>
+                        <span class="c1">#if gch[0] == bch[0]:</span>
+                        <span class="k">if</span> <span class="n">bch</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="n">bch</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span>
+                            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;null (bad) choice &#39;</span><span class="p">)</span>
+                                <span class="n">g</span><span class="o">.</span><span class="n">showChoiceVector</span><span class="p">(</span><span class="n">gch</span><span class="p">,</span><span class="n">ChoiceVector</span><span class="o">=</span><span class="n">ChoiceVector</span><span class="p">)</span>
+                                <span class="n">g</span><span class="o">.</span><span class="n">showChoiceVector</span><span class="p">(</span><span class="n">bch</span><span class="p">,</span><span class="n">ChoiceVector</span><span class="o">=</span><span class="n">ChoiceVector</span><span class="p">)</span>
+                            <span class="n">badChoice</span> <span class="o">=</span> <span class="kc">False</span>
+                            <span class="n">nullChoice</span> <span class="o">=</span> <span class="kc">True</span>
+                        <span class="k">elif</span> <span class="n">bch</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">bch</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span>
+                            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;outranking (bad) choice &#39;</span><span class="p">)</span>
+                                <span class="n">g</span><span class="o">.</span><span class="n">showChoiceVector</span><span class="p">(</span><span class="n">gch</span><span class="p">,</span><span class="n">ChoiceVector</span><span class="o">=</span><span class="n">ChoiceVector</span><span class="p">)</span>
+                                <span class="n">g</span><span class="o">.</span><span class="n">showChoiceVector</span><span class="p">(</span><span class="n">bch</span><span class="p">,</span><span class="n">ChoiceVector</span><span class="o">=</span><span class="n">ChoiceVector</span><span class="p">)</span>
+                            <span class="n">badChoice</span> <span class="o">=</span> <span class="kc">False</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">badChoice</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">if</span> <span class="n">badChoice</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; === &gt;&gt; potential worst choice(s) &#39;</span><span class="p">)</span>
+                    <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;h3&gt;Potential worst choice(s)&lt;/h3&gt;</span><span class="se">\n</span><span class="s1"> &#39;</span>
+                    <span class="n">html</span> <span class="o">+=</span> <span class="n">g</span><span class="o">.</span><span class="n">htmlChoiceVector</span><span class="p">(</span><span class="n">bch</span><span class="p">,</span><span class="n">ChoiceVector</span><span class="o">=</span><span class="n">ChoiceVector</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">worstChoice</span> <span class="o">==</span> <span class="nb">set</span><span class="p">():</span>
+                        <span class="n">worstChoice</span> <span class="o">=</span> <span class="n">bch</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+                <span class="k">elif</span> <span class="n">nullChoice</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; === &gt;&gt; ambiguous choice(s)&#39;</span><span class="p">)</span>
+                    <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;h3&gt;Ambiguous choice(s)&lt;/h3&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+                    <span class="n">html</span> <span class="o">+=</span> <span class="n">g</span><span class="o">.</span><span class="n">htmlChoiceVector</span><span class="p">(</span><span class="n">bch</span><span class="p">,</span><span class="n">ChoiceVector</span><span class="o">=</span><span class="n">ChoiceVector</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">worstChoice</span> <span class="o">==</span> <span class="nb">set</span><span class="p">():</span>
+                        <span class="n">worstChoice</span> <span class="o">=</span> <span class="n">bch</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;=== &gt;&gt; non robust worst choice(s)&#39;</span><span class="p">)</span>
+                <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;h3&gt;Non robust worst choice(s)&lt;/h3&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+                <span class="n">html</span> <span class="o">+=</span> <span class="n">g</span><span class="o">.</span><span class="n">htmlChoiceVector</span><span class="p">(</span><span class="n">bch</span><span class="p">,</span><span class="n">ChoiceVector</span><span class="o">=</span><span class="n">ChoiceVector</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Execution time: </span><span class="si">%.3f</span><span class="s1"> seconds&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">t0</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*****************************&#39;</span><span class="p">)</span>
+
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;p&gt;Execution time: </span><span class="si">%.3f</span><span class="s1"> seconds&lt;/p&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span>
+        <span class="c1"># html footer</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/body&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/html&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">return</span> <span class="n">html</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">bestChoice</span> <span class="o">=</span> <span class="n">bestChoice</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">worstChoice</span> <span class="o">=</span> <span class="n">worstChoice</span></div>
+        <span class="c1">#if nc &gt; 0 or b1 &gt; 0:</span>
+<span class="c1">##        self.actions = deepcopy(self.actions_orig)</span>
+<span class="c1">##        self.relation = deepcopy(self.relation_orig)</span>
+<span class="c1">##        self.order = len(self.actions)</span>
+<span class="c1">##        self.gamma = self.gammaSets()</span>
+<span class="c1">##        self.notGamma = self.notGammaSets()</span>
+
+
 <div class="viewcode-block" id="Digraph.computeRubyChoice"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeRubyChoice">[docs]</a>    <span class="k">def</span> <span class="nf">computeRubyChoice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">CppAgrum</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">_OldCoca</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        dummy for computeRubisChoice()</span>
@@ -7800,6 +8032,54 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">badChoices</span> <span class="o">=</span> <span class="n">absChoicesSort</span>
         
         <span class="k">return</span> <span class="n">badChoicesDic</span></div>
+
+<div class="viewcode-block" id="Digraph.htmlChoiceVector"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.htmlChoiceVector">[docs]</a>    <span class="k">def</span> <span class="nf">htmlChoiceVector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ch</span><span class="p">,</span><span class="n">ChoiceVector</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Show procedure for annotated bipolar choices.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="n">flatten</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
+        <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
+        <span class="n">determ</span> <span class="o">=</span> <span class="n">ch</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">degirred</span> <span class="o">=</span> <span class="n">ch</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">degi</span> <span class="o">=</span> <span class="n">ch</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">degd</span> <span class="o">=</span> <span class="n">ch</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">dega</span> <span class="o">=</span> <span class="n">ch</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+        <span class="n">choice</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">flatten</span><span class="p">(</span><span class="n">ch</span><span class="p">[</span><span class="mi">5</span><span class="p">])]</span>
+        <span class="n">choice</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="n">vec</span> <span class="o">=</span> <span class="n">ch</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+        <span class="n">vec</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">html</span>  <span class="o">=</span> <span class="s1">&#39;&lt;p&gt;Choice              : &lt;b&gt;</span><span class="si">%s</span><span class="s1">&lt;/b&gt;&lt;br/&gt;</span><span class="se">\n</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">choice</span><span class="p">)</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;  +-irredundancy      : </span><span class="si">%.2f</span><span class="s1">&lt;br/&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">degirred</span><span class="p">)</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;  independence        : </span><span class="si">%.2f</span><span class="s1">&lt;br/&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">degi</span><span class="p">)</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;  dominance           : </span><span class="si">%.2f</span><span class="s1">&lt;br/&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">degd</span><span class="p">)</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;  absorbency          : </span><span class="si">%.2f</span><span class="s1">&lt;br/&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">dega</span><span class="p">)</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;  covering (</span><span class="si">%%</span><span class="s1">): </span><span class="si">%.2f</span><span class="s1">&lt;br/&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>\
+                <span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">averageCoveringIndex</span><span class="p">(</span><span class="n">choice</span><span class="p">)</span> <span class="o">*</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;100&#39;</span><span class="p">)</span> <span class="p">)</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;  determinateness (in </span><span class="si">%%</span><span class="s1">) : </span><span class="si">%.2f</span><span class="s1">&lt;/p&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">determ</span><span class="o">*</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;100.0&#39;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">ChoiceVector</span><span class="p">:</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;p&gt;  - characteristic vector = {</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">actions</span><span class="p">)):</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">choice</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">eval</span><span class="p">(</span><span class="n">vec</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">])]</span>
+                    <span class="n">choice</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+                    <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">: </span><span class="si">%.2f</span><span class="s1">,</span><span class="se">\n</span><span class="s1"> &#39;</span> <span class="o">%</span>  <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">choice</span><span class="p">),</span><span class="n">vec</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">: </span><span class="si">%.2f</span><span class="s1">,</span><span class="se">\n</span><span class="s1"> &#39;</span> <span class="o">%</span>  <span class="p">(</span><span class="n">vec</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">vec</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">html</span> <span class="o">+=</span><span class="s1">&#39;}&lt;/p&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+<span class="c1">##        elif determ &gt; Decimal(&#39;0&#39;):</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;  - most credible action(s) = {</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">actions</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">vec</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">choice</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">eval</span><span class="p">(</span><span class="n">vec</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">])]</span>
+                        <span class="n">choice</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+                        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">: </span><span class="si">%.2f</span><span class="s1">,</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>  <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">choice</span><span class="p">),</span><span class="n">vec</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="k">except</span><span class="p">:</span>
+                        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">: </span><span class="si">%.2f</span><span class="s1">,</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>  <span class="p">(</span><span class="n">vec</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">vec</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;}&lt;/p&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">return</span> <span class="n">html</span></div>
 
 <div class="viewcode-block" id="Digraph.showChoiceVector"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.showChoiceVector">[docs]</a>    <span class="k">def</span> <span class="nf">showChoiceVector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ch</span><span class="p">,</span><span class="n">ChoiceVector</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -12550,14 +12830,15 @@
         <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="o">*</span>
         <span class="c1">##dg = RedhefferDigraph(order=113)</span>
         <span class="c1">#g = RandomTournament(order=5,seed=1)</span>
-        <span class="n">g</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-<span class="c1">##        from outrankingDigraphs import BipolarOutrankingDigraph</span>
-<span class="c1">##        from randomPerfTabs import RandomCBPerformanceTableau</span>
+        <span class="c1">#g = RandomValuationDigraph(seed=1)</span>
+        <span class="c1">#print(g)</span>
+        
+        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">BipolarOutrankingDigraph</span>
+        <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
 <span class="c1">##        from linearOrders import CopelandOrder</span>
-<span class="c1">##        t1 = RandomCBPerformanceTableau(numberOfActions=10,seed=1)</span>
-<span class="c1">##        g = BipolarOutrankingDigraph(t1,Normalized=False)</span>
-<span class="c1">##        g.showRubisBestChoiceRecommendation()</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">101</span><span class="p">)</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">showHTMLBestChoiceRecommendation</span><span class="p">(</span><span class="n">ChoiceVector</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="c1">##        gcd = ~(-g)</span>
 <span class="c1">##        cocb = BrokenCocsDigraph(gcd,Comments=True)</span>
 <span class="c1">##        print(cocb.brokenLinks)</span>

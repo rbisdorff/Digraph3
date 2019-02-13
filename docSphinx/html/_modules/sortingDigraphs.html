@@ -2251,6 +2251,7 @@
 <div class="viewcode-block" id="QuantilesSortingDigraph.computeQuantileOrdering"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.computeQuantileOrdering">[docs]</a>    <span class="k">def</span> <span class="nf">computeQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                 <span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                 <span class="n">HTML</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Quantiles Preordering&#39;</span><span class="p">,</span>
                                 <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                 <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -2263,11 +2264,11 @@
         <span class="k">if</span> <span class="n">strategy</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">strategy</span> <span class="o">=</span> <span class="s1">&#39;optimistic&#39;</span>
         <span class="k">if</span> <span class="n">HTML</span><span class="p">:</span>
-            <span class="n">html</span> <span class="o">=</span> <span class="s1">&#39;&lt;h1&gt;Quantiles preordering&lt;/h1&gt;&#39;</span>
-            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;table style=&quot;background-color:White;&quot; border=&quot;1&quot;&gt;&#39;</span>
-            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr bgcolor=&quot;#9acd32&quot;&gt;&lt;th&gt;quantile limits&lt;/th&gt;&#39;</span>
-            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;th&gt;</span><span class="si">%s</span><span class="s1"> sorting&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="n">strategy</span>
-            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;&#39;</span>
+            <span class="n">html</span> <span class="o">=</span> <span class="s1">&#39;&lt;h1&gt;</span><span class="si">%s</span><span class="s1">&lt;/h1&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">title</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;table style=&quot;background-color:White;&quot; border=&quot;1&quot;&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr bgcolor=&quot;#9acd32&quot;&gt;&lt;th&gt;quantile limits&lt;/th&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;th&gt;</span><span class="si">%s</span><span class="s1"> sorting&lt;/th&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">strategy</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="n">actionsCategories</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
             <span class="n">a</span><span class="p">,</span><span class="n">lowCateg</span><span class="p">,</span><span class="n">highCateg</span><span class="p">,</span><span class="n">credibility</span> <span class="o">=</span>\
@@ -2986,7 +2987,7 @@
             <span class="nb">print</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="QuantilesSortingDigraph.showHTMLQuantileOrdering"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.showHTMLQuantileOrdering">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;optimistic&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="QuantilesSortingDigraph.showHTMLQuantileOrdering"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.showHTMLQuantileOrdering">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Quantiles Preordering&#39;</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;optimistic&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shows the html version of the quantile preordering in a browser window.</span>
 
@@ -3001,6 +3002,7 @@
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">computeQuantileOrdering</span><span class="p">(</span><span class="n">Descending</span><span class="o">=</span><span class="n">Descending</span><span class="p">,</span>
                                               <span class="n">strategy</span><span class="o">=</span><span class="n">strategy</span><span class="p">,</span>
                                               <span class="n">HTML</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                              <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
                                               <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;file://&#39;</span><span class="o">+</span><span class="n">fileName</span>
@@ -3916,6 +3918,7 @@
             <span class="n">criteriaList</span> <span class="o">=</span> <span class="n">argCriteriaList</span>
 
         <span class="n">rankingRule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankingRule</span>
+        
         <span class="k">if</span> <span class="n">argActionsList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">actionsList</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actionsRanking</span>
         <span class="k">else</span><span class="p">:</span>
@@ -4095,6 +4098,7 @@
                                    <span class="n">pageTitle</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
                                    <span class="n">quantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                   <span class="n">rankingRule</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">Correlations</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -4129,6 +4133,8 @@
 
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">rankingRule</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;A ranking rule - Copeland (default) or NetFlows may be given with the NormedQuantilesRatingDigraph constructor&#39;</span><span class="p">)</span>
         <span class="kn">import</span> <span class="nn">webbrowser</span>
         <span class="n">fileName</span> <span class="o">=</span> <span class="s1">&#39;/tmp/performanceHeatmap.html&#39;</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
@@ -4265,7 +4271,7 @@
 <span class="s2">    ****************************************************</span>
 <span class="s2">    * Python sortingDigraphs module                    *</span>
 <span class="s2">    * depends on BipolarOutrankingDigraph and          *</span>
-<span class="s2">    * $Revision: 2936 $                                 *</span>
+<span class="s2">    * $Revision: 2959 $                                 *</span>
 <span class="s2">    * Copyright (C) 2010 Raymond Bisdorff              *</span>
 <span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
 <span class="s2">    * to the extent permitted by the applicable law.   *</span>
@@ -4479,7 +4485,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. december 2010                *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2936 $                  *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2959 $                  *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>

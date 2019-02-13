@@ -1885,6 +1885,33 @@ the absorbed neighborhood.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="digraphs.Digraph.htmlBestChoiceRecommendation">
+<code class="descname">htmlBestChoiceRecommendation</code><span class="sig-paren">(</span><em>pageTitle=None</em>, <em>ChoiceVector=False</em>, <em>ContentCentered=True</em>, <em>CoDual=True</em>, <em>Debug=False</em>, <em>_OldCoca=False</em>, <em>BrokenCocs=True</em>, <em>Cpp=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.htmlBestChoiceRecommendation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.htmlBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the RuBis best choice recommendation in a browser window.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Computes by default the Rubis best choice recommendation on the corresponding strict (codual) outranking digraph.</p>
+<p class="last">In case of chordless circuits, if supporting arcs are more credible
+than the reversed negating arcs, we collapse the circuits into hyper nodes.
+Inversely,  if supporting arcs are not more credible than the reversed negating arcs,
+we brake the circuits on their weakest arc.</p>
+</div>
+<p>Usage example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLBestChoiceRecommendation</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.Digraph.htmlChoiceVector">
+<code class="descname">htmlChoiceVector</code><span class="sig-paren">(</span><em>ch</em>, <em>ChoiceVector=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.htmlChoiceVector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.htmlChoiceVector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show procedure for annotated bipolar choices.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="digraphs.Digraph.htmlRelationMap">
 <code class="descname">htmlRelationMap</code><span class="sig-paren">(</span><em>tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.htmlRelationMap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.htmlRelationMap" title="Permalink to this definition">¶</a></dt>
 <dd><p>renders the relation map in actions X actions html table format.</p>
@@ -2257,6 +2284,11 @@ Dummy for showCircuits().</p>
 <code class="descname">showGoodChoices</code><span class="sig-paren">(</span><em>Recompute=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showGoodChoices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showGoodChoices" title="Permalink to this definition">¶</a></dt>
 <dd><p>Characteristic values for potentially good choices.</p>
 </dd></dl>
+
+<dl class="method">
+<dt id="digraphs.Digraph.showHTMLBestChoiceRecommendation">
+<code class="descname">showHTMLBestChoiceRecommendation</code><span class="sig-paren">(</span><em>pageTitle=None</em>, <em>ChoiceVector=False</em>, <em>CoDual=True</em>, <em>Debug=False</em>, <em>_OldCoca=False</em>, <em>BrokenCocs=True</em>, <em>Cpp=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showHTMLBestChoiceRecommendation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showHTMLBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="digraphs.Digraph.showHTMLRelationMap">
@@ -6698,7 +6730,7 @@ a subset of the decision actions.</p>
 
 <dl class="method">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph.showHTMLRatingHeatmap">
-<code class="descname">showHTMLRatingHeatmap</code><span class="sig-paren">(</span><em>actionsList=None</em>, <em>criteriaList=None</em>, <em>colorLevels=7</em>, <em>pageTitle=None</em>, <em>ndigits=2</em>, <em>quantiles=None</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.showHTMLRatingHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.showHTMLRatingHeatmap" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showHTMLRatingHeatmap</code><span class="sig-paren">(</span><em>actionsList=None</em>, <em>criteriaList=None</em>, <em>colorLevels=7</em>, <em>pageTitle=None</em>, <em>ndigits=2</em>, <em>quantiles=None</em>, <em>rankingRule=None</em>, <em>Correlations=False</em>, <em>Threading=False</em>, <em>nbrOfCPUs=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.showHTMLRatingHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.showHTMLRatingHeatmap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Specialisation of html heatmap version showing the performance tableau in a browser window;
 see <code class="xref py py-meth docutils literal"><span class="pre">perfTabs.showHTMLPerformanceHeatMap()</span></code> method.</p>
 <p><strong>Parameters</strong>:</p>
@@ -6798,7 +6830,7 @@ By default upper closed limits of categories are supposed to be used in the sort
 
 <dl class="method">
 <dt id="sortingDigraphs.QuantilesSortingDigraph.computeQuantileOrdering">
-<code class="descname">computeQuantileOrdering</code><span class="sig-paren">(</span><em>strategy=None</em>, <em>Descending=True</em>, <em>HTML=False</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#QuantilesSortingDigraph.computeQuantileOrdering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph.computeQuantileOrdering" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computeQuantileOrdering</code><span class="sig-paren">(</span><em>strategy=None</em>, <em>Descending=True</em>, <em>HTML=False</em>, <em>title='Quantiles Preordering'</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#QuantilesSortingDigraph.computeQuantileOrdering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph.computeQuantileOrdering" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last simple">
@@ -6853,7 +6885,7 @@ Returns a tuple : action, lowest category key, highest category key, membership 
 
 <dl class="method">
 <dt id="sortingDigraphs.QuantilesSortingDigraph.showHTMLQuantileOrdering">
-<code class="descname">showHTMLQuantileOrdering</code><span class="sig-paren">(</span><em>Descending=True</em>, <em>strategy='optimistic'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#QuantilesSortingDigraph.showHTMLQuantileOrdering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph.showHTMLQuantileOrdering" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showHTMLQuantileOrdering</code><span class="sig-paren">(</span><em>title='Quantiles Preordering'</em>, <em>Descending=True</em>, <em>strategy='optimistic'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#QuantilesSortingDigraph.showHTMLQuantileOrdering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph.showHTMLQuantileOrdering" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shows the html version of the quantile preordering in a browser window.</p>
 <dl class="docutils">
 <dt>The ordring strategy is either:</dt>
