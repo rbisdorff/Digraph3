@@ -7186,6 +7186,238 @@ class Digraph(object):
 ##        self.gamma = self.gammaSets()
 ##        self.notGamma = self.notGammaSets()
 
+#############
+
+    def showHTMLBestChoiceRecommendation(self,pageTitle=None,
+                                          ChoiceVector=False,
+                                          CoDual=True,
+                                          Debug=False,
+                                          _OldCoca=False,
+                                          BrokenCocs=True,
+                                          Cpp=False):
+
+        import webbrowser
+        fileName = '/tmp/relationMap.html'
+        fo = open(fileName,'w')
+        fo.write(self.htmlBestChoiceRecommendation(\
+            pageTitle=pageTitle,\
+            ChoiceVector=ChoiceVector,\
+            CoDual=CoDual,\
+            Debug=Debug,\
+            _OldCoca=_OldCoca,\
+            BrokenCocs=BrokenCocs,\
+            Cpp=Cpp))
+        fo.close()
+        url = 'file://'+fileName
+        webbrowser.open_new(url)
+
+
+    def htmlBestChoiceRecommendation(self,pageTitle=None,
+                                          ChoiceVector=False,
+                                     ContentCentered=True,
+                                          CoDual=True,
+                                          Debug=False,
+                                          _OldCoca=False,
+                                          BrokenCocs=True,
+                                          Cpp=False):
+        """
+        Renders the RuBis best choice recommendation in a browser window.
+
+        .. note::
+
+            Computes by default the Rubis best choice recommendation on the corresponding strict (codual) outranking digraph.
+
+            In case of chordless circuits, if supporting arcs are more credible
+            than the reversed negating arcs, we collapse the circuits into hyper nodes.
+            Inversely,  if supporting arcs are not more credible than the reversed negating arcs,
+            we brake the circuits on their weakest arc.
+         
+        Usage example:
+        
+        >>> from outrankingDigraphs import *
+        >>> t = Random3ObjectivesPerformanceTableau(seed=5)
+        >>> g = BipolarOutrankingDigraph(t)
+        >>> g.showHTMLBestChoiceRecommendation()
+
+        """
+        from copy import deepcopy
+        from time import time
+        if Debug:
+            Comments = True
+        # construct html text
+        html  = '<!DOCTYPE html><html><head>\n'
+        html += '<meta charset="UTF-8">\n'
+        if pageTitle == None:
+            pageTitle = 'Best Choice Recommendation'
+        html += '<title>%s</title>\n' % pageTitle
+        html += '<style type="text/css">\n'
+        if ContentCentered:
+            html += 'td {text-align: center;}\n'
+        html += 'td.na {color: rgb(192,192,192);}\n'
+        html += '</style>\n'
+        html += '</head>\n<body>\n'
+        html += '<h1>%s</h1>' % pageTitle
+        html += '<h3>Outranking graph: %s</h3>' % self.name
+       
+        #print('RuBis BCR')
+        t0 = time()
+        n0 = self.order
+        cpself = deepcopy(self)
+        if CoDual:
+            g = ~(-cpself)
+        else:
+            g = cpself
+        if _OldCoca:
+            _selfwcoc = CocaDigraph(g,Cpp=Cpp)
+            b1 = 0
+        elif BrokenCocs:
+            #print('passed here!')
+            _selfwcoc = BrokenCocsDigraph(g,Cpp=Cpp)
+            b1 = _selfwcoc.breakings
+        else:
+            _selfwcoc = BreakAddCocsDigraph(g,Cpp=Cpp)
+            b1 =  _selfwcoc.breakings
+        n1 = _selfwcoc.order
+        nc = n1 - n0
+        
+        #self.relation_orig = deepcopy(g.relation)
+        if b1 > 0 or nc > 0:
+            #self.actions_orig = deepcopy(g.actions)
+            g.actions = deepcopy(_selfwcoc.actions)
+            g.order = len(g.actions)
+            g.relation = deepcopy(_selfwcoc.relation)
+        if Debug:
+            print('List of pseudo-independent choices')
+            print(g.actions)
+        g.gamma = g.gammaSets()
+        g.notGamma = g.notGammaSets()
+        if Debug:
+            g.showRelationTable()
+        #self.showPreKernels()
+        actions = set([x for x in g.actions])
+        if Debug:
+            g.showPreKernels()
+            print(g.dompreKernels,g.abspreKernels)
+        g.computeGoodChoices(Comments=Debug)
+        g.computeBadChoices(Comments=Debug)
+        if Debug:
+            print('good and bad choices: ',g.goodChoices,g.badChoices)
+
+        t1 = time()
+        if Debug:
+            print('Rubis best choice recommendation(s) (BCR)')
+            print(' (in decreasing order of determinateness)   ')
+            print('Credibility domain: [%.2f,%.2f]' %\
+                  (g.valuationdomain['min'],\
+                   g.valuationdomain['max']) )
+        html += '<p>Rubis best choice recommendation(s) (BCR)</br>\n'
+        html += ' (in decreasing order of determinateness)</br>\n'
+        html += 'Credibility domain: [%.2f,%.2f]</p>\n' %\
+                  (g.valuationdomain['min'],\
+                   g.valuationdomain['max'])
+        Med = g.valuationdomain['med']
+        bestChoice = set()
+        worstChoice = set()
+        for gch in g.goodChoices:
+            if gch[0] >= Med:
+                goodChoice = True
+                for bch in g.badChoices:
+                    if gch[5] == bch[5]:
+                        #if gch[0] == bch[0]:
+                        if gch[3] == gch[4]:
+                            if Comments:
+                                print('null (good) choice ')
+                                g.showChoiceVector(gch,
+                                                      ChoiceVector=ChoiceVector)
+                                g.showChoiceVector(bch,
+                                                      ChoiceVector=ChoiceVector)
+                            goodChoice = False
+                        elif gch[4] > gch[3]:
+                            if Comments:
+                                print('outranked (good) choice ')
+                                g.showChoiceVector(gch,
+                                                      ChoiceVector=ChoiceVector)
+                                g.showChoiceVector(bch,
+                                                      ChoiceVector=ChoiceVector)
+                            goodChoice = False
+                        else:
+                            goodChoice = True
+                if goodChoice:
+                    if Debug:
+                        print(' === >> potential best choice(s)')
+                    html += '<h3>Potential best choice(s)</h3>\n'
+                    
+                    html += g.htmlChoiceVector(gch,ChoiceVector=ChoiceVector)
+                    if bestChoice == set():
+                        bestChoice = gch[5]
+            else:
+                if Debug:
+                    print(' === >> non robust best choice(s)')
+                html += '<h3>Non robust best choice(s)</h3>\n'
+                html += g.htmlChoiceVector(gch,ChoiceVector=ChoiceVector)
+        for bch in g.badChoices:
+            if bch[0] >= Med:
+                badChoice = True
+                nullChoice = False
+                for gch in g.goodChoices:
+                    if bch[5] == gch[5]:
+                        #if gch[0] == bch[0]:
+                        if bch[3] == bch[4]:
+                            if Comments:
+                                print('null (bad) choice ')
+                                g.showChoiceVector(gch,ChoiceVector=ChoiceVector)
+                                g.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                            badChoice = False
+                            nullChoice = True
+                        elif bch[3] > bch[4]:
+                            if Comments:
+                                print('outranking (bad) choice ')
+                                g.showChoiceVector(gch,ChoiceVector=ChoiceVector)
+                                g.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                            badChoice = False
+                        else:
+                            badChoice = True
+                if badChoice:
+                    if Debug:
+                        print(' === >> potential worst choice(s) ')
+                    html += '<h3>Potential worst choice(s)</h3>\n '
+                    html += g.htmlChoiceVector(bch,ChoiceVector=ChoiceVector)
+                    if worstChoice == set():
+                        worstChoice = bch[5]
+                elif nullChoice:
+                    if Debug:
+                        print(' === >> ambiguous choice(s)')
+                    html += '<h3>Ambiguous choice(s)</h3>\n'
+                    html += g.htmlChoiceVector(bch,ChoiceVector=ChoiceVector)
+                    if worstChoice == set():
+                        worstChoice = bch[5]
+
+            else:
+                if Debug:
+                    print('=== >> non robust worst choice(s)')
+                html += '<h3>Non robust worst choice(s)</h3>\n'
+                html += g.htmlChoiceVector(bch,ChoiceVector=ChoiceVector)
+        if Debug:
+            print()
+            print('Execution time: %.3f seconds' % (t1-t0))
+            print('*****************************')
+
+        html += '<p>Execution time: %.3f seconds</p>\n' % (t1-t0)
+        # html footer
+        html += '</body>\n'
+        html += '</html>\n'
+        return html
+
+        self.bestChoice = bestChoice
+        self.worstChoice = worstChoice
+        #if nc > 0 or b1 > 0:
+##        self.actions = deepcopy(self.actions_orig)
+##        self.relation = deepcopy(self.relation_orig)
+##        self.order = len(self.actions)
+##        self.gamma = self.gammaSets()
+##        self.notGamma = self.notGammaSets()
+
+
     def computeRubyChoice(self,CppAgrum=False,Comments=False,_OldCoca=False):
         """
         dummy for computeRubisChoice()
@@ -7753,6 +7985,54 @@ class Digraph(object):
         self.badChoices = absChoicesSort
         
         return badChoicesDic
+
+    def htmlChoiceVector(self,ch,ChoiceVector=True):
+        """
+        Show procedure for annotated bipolar choices.
+        """
+        from digraphsTools import flatten
+        actions = [x for x in self.actions]
+        Med = self.valuationdomain['med']
+        determ = ch[0]
+        degirred = ch[1]
+        degi = ch[2]
+        degd = ch[3]
+        dega = ch[4]
+        choice = [x for x in flatten(ch[5])]
+        choice.sort()
+        vec = ch[6]
+        vec.sort(reverse=True)
+        html  = '<p>Choice              : <b>%s</b><br/>\n ' % str(choice)
+        html += '  +-irredundancy      : %.2f<br/>\n' % (degirred)
+        html += '  independence        : %.2f<br/>\n' % (degi)
+        html += '  dominance           : %.2f<br/>\n' % (degd)
+        html += '  absorbency          : %.2f<br/>\n' % (dega)
+        html += '  covering (%%): %.2f<br/>\n' %\
+                ( self.averageCoveringIndex(choice) * Decimal('100') )
+        html += '  determinateness (in %%) : %.2f</p>\n' % (determ*Decimal('100.0'))
+        if ChoiceVector:
+            html += '<p>  - characteristic vector = {\n'
+            for i in range(len(actions)):
+                try:
+                    choice = [x for x in eval(vec[i][1])]
+                    choice.sort()
+                    html += '\'%s\': %.2f,\n ' %  (str(choice),vec[i][0])
+                except:
+                    html += '\'%s\': %.2f,\n ' %  (vec[i][1],vec[i][0])
+            html +='}</p>\n'
+##        elif determ > Decimal('0'):
+        else:
+            html += '  - most credible action(s) = {\n'
+            for i in range(len(actions)):
+                if vec[i][0] > Med:
+                    try:
+                        choice = [x for x in eval(vec[i][1])]
+                        choice.sort()
+                        html += '\'%s\': %.2f,\n' %  (str(choice),vec[i][0])
+                    except:
+                        html += '\'%s\': %.2f,\n' %  (vec[i][1],vec[i][0])
+            html += '}</p>\n'
+        return html
 
     def showChoiceVector(self,ch,ChoiceVector=True):
         """
@@ -12503,14 +12783,15 @@ if __name__ == "__main__":
         from digraphsTools import *
         ##dg = RedhefferDigraph(order=113)
         #g = RandomTournament(order=5,seed=1)
-        g = RandomValuationDigraph(seed=1)
-        print(g)
-##        from outrankingDigraphs import BipolarOutrankingDigraph
-##        from randomPerfTabs import RandomCBPerformanceTableau
+        #g = RandomValuationDigraph(seed=1)
+        #print(g)
+        
+        from outrankingDigraphs import BipolarOutrankingDigraph
+        from randomPerfTabs import Random3ObjectivesPerformanceTableau
 ##        from linearOrders import CopelandOrder
-##        t1 = RandomCBPerformanceTableau(numberOfActions=10,seed=1)
-##        g = BipolarOutrankingDigraph(t1,Normalized=False)
-##        g.showRubisBestChoiceRecommendation()
+        t1 = Random3ObjectivesPerformanceTableau(seed=101)
+        g = BipolarOutrankingDigraph(t1,Normalized=True)
+        g.showHTMLBestChoiceRecommendation(ChoiceVector=False)
 ##        gcd = ~(-g)
 ##        cocb = BrokenCocsDigraph(gcd,Comments=True)
 ##        print(cocb.brokenLinks)
