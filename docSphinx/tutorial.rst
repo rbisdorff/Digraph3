@@ -2472,59 +2472,7 @@ A browser view may again more conveniently illustrate this preciser deciles rati
     :width: 550 px
     :align: center
 
-In the case of industrial production monitoring problems, where large volumes of historical performance data may be available, it could become interesting to estimate even more precisely the marginal cumulative density functions with **dodeciles** or even **centiles**. Especially if **tail** rating results, ie distinguishing **very best**, or **very worst** multiple criteria performances, becomes a critical purpose. Similarly, the *historySize* parameter may be used for monitoring on the fly **unstable** random multiple criteria performance data.  	    
-
-Back to :ref:`Tutorial-label`   
-
-.. _MCDA-Tutorial-label:
-
-Star wars: A decision aid primer
---------------------------------
-
-.. contents:: 
-	:depth: 2
-	:local:
-
-Movies, critics and stars
-.........................
-
->>> from outrankingDigraphs import XMCDA2PerformanceTableau
->>> t = XMCDA2PerformanceTableau('graffiti07')
->>> t.showHTMLPerformanceTableau(title='Graffiti Star wars',ndigits=0)
-
-
-Ranking with heatmap
-....................
-
->>> t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,\
-...                   pageTitle='Graffiti Star wars',ndigits=0)
-
-
-Deciles sorting the movies
-..........................
-
->>> from sortingDigraphs import QuantilesSortingDigraph
->>> qs = QuantilesSortingDigraph(t,'deciles')
->>> qs.showHTMLQuantileOrdering(title='Deciles sorting')
-
-Deciles rating the movies
-.........................
-
->>> from performanceQuantiles import PerformanceQuantiles
->>> pq = PerformanceQuantiles(t,numberOfBins=10,LowerClosed=True)
->>> from sortingDigraphs import NormedQuantilesRatingDigraph
->>> nqs = NormedQuantilesRatingDigraph(pq,t,rankingRule='Copeland')
->>> nqs.showHTMLRatingHeatmap(ndigits=0,colorLevels=5,\
-...             Correlations=True,\
-...             pageTitle='Deciles rating of the movies')
-
-Best movie to watch
-...................
-
->>> from outrankingDigraphs import BipolarOutrankingDigraph
->>> g = BipolarOutrankingDigraph(t,Normalized=True)
->>> g.showRubisBestChoiceRecommendation()
-
+In the case of industrial production monitoring problems, where large volumes of historical performance data may be available, it could become interesting to estimate even more precisely the marginal cumulative density functions with **dodeciles** or even **centiles**. Especially if **tail** rating results, ie distinguishing **very best**, or **very worst** multiple criteria performances, becomes a critical purpose. Similarly, the *historySize* parameter may be used for monitoring on the fly **unstable** random multiple criteria performance data.  	
 
 Back to :ref:`Tutorial-label`   
 
