@@ -414,18 +414,18 @@ def testRankingRules():
     gcd.computeSlaterOrder(Debug=True)
     print(gcd.computeSlaterOrder(isProbabilistic=True, seed=1,sampleSize=500))
 
-def testQuantilesRanking():
-    print('*---- test quantiles ranking procedures -----*')
-    g = RandomBipolarOutrankingDigraph()
-    gcd = CoDualDigraph(g)
-    print(gcd.bestRanks())
-    print(gcd.worstRanks())
-    p = Preorder(gcd,'best')
-    strc = StrongComponentsCollapsedDigraph(p)
-    strc.showComponents()
-    p = Preorder(gcd,'worst')
-    strc = StrongComponentsCollapsedDigraph(p)
-    strc.showComponents()
+##def testQuantilesRanking():
+##    print('*---- test quantiles ranking procedures -----*')
+##    g = RandomBipolarOutrankingDigraph()
+##    gcd = CoDualDigraph(g)
+##    print(gcd.bestRanks())
+##    print(gcd.worstRanks())
+##    p = Preorder(gcd,'best')
+##    strc = StrongComponentsCollapsedDigraph(p)
+##    strc.showComponents()
+##    p = Preorder(gcd,'worst')
+##    strc = StrongComponentsCollapsedDigraph(p)
+##    strc.showComponents()
 
 def testPairwiseClusterComparison():
     print('*----- test paiwise cluster comparisons ----*')

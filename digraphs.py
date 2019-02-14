@@ -5370,7 +5370,7 @@ class Digraph(object):
             if A[x] == 0:
                 A[x] = ncomp
                 Comp = Comp | set([x])
-                Comp = Comp | self.collectcomps(x, A, ncomp)
+                Comp = Comp | self._collectcomps(x, A, ncomp)
             if len(Comp) > 0:
                 ncomp = ncomp + 1
                 ConComp = ConComp + [Comp]
@@ -5386,15 +5386,15 @@ class Digraph(object):
             print(str(k) + ': ' + str(component))
             xk = k + 1
 
-    def collectcomps(self, x, A, ncomp):
-        """Recursive subroutine of the components method."""
+    def _collectcomps(self, x, A, ncomp):
+        """ Internal recursive subroutine of the components method."""
         Comp = set()
         Nx = self.gamma[x][0] | self.gamma[x][1]
         for y in Nx:
             if A[y] == 0:
                 A[y] = ncomp
                 Comp.add(y)
-                Comp = Comp | self.collectcomps(y, A, ncomp)
+                Comp = Comp | self._collectcomps(y, A, ncomp)
         return Comp
 
     def outDegrees(self):
@@ -5415,7 +5415,7 @@ class Digraph(object):
             inDegrees[x] = len(self.gamma[x][1])
         return inDegrees
 
-    def bestRanks(self):
+    def _bestRanks(self):
         """
         renders best possible ranks from indegrees account
         """
@@ -5425,7 +5425,7 @@ class Digraph(object):
             bestRanks[x] = inDegrees[x] + 1
         return bestRanks
 
-    def worstRanks(self):
+    def _worstRanks(self):
         """
         renders worst possible ranks from outdegrees account
         """
@@ -9837,7 +9837,7 @@ class FusionLDigraph(Digraph):
 
 # ------ Preorder construction
 
-class Preorder(Digraph):
+class _Preorder(Digraph):
     """
     Instantiates the associated preorder from
     a given Digraph called other.
@@ -9885,9 +9885,9 @@ class Preorder(Digraph):
         
         if ranking == None:
             if direction == 'best':
-                rank = other.bestRanks()
+                rank = other._bestRanks()
             else:
-                rank = other.worstRanks()
+                rank = other._worstRanks()
         else:
             rank = ranking
 
