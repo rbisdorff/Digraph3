@@ -3872,7 +3872,7 @@ Transitivity degree: 1.000
 
 The :code:`PartiallyDetermined=True` flag (see Line 1 and 5) is required here in order to orient *only* the actual edges of the graphs. Relations between vertices not linked by an edge will be put to the *indeterminate* characteristic value 0. This will allow us to compute later on convenient disjunctive digraph fusions.
 
-As both orientations are transitive indeed (see Line 3 and 7), we may conclude that the given random graph is actally a permutation graph instance. However, we still need to find now its corresponding permutation. We therefore implement a recipee given by Martin Golombic [Gol-2004]_ p.159.
+As both orientations are transitive indeed (see Line 3 and 7), we may conclude that the given random graph is actally a permutation graph instance. However, we still need to find now its corresponding permutation. We therefore implement a recipee given by Martin Golumbic [Gol-2004]_ p.159.
 
 We will first **fuse** both *og* and *ogdual* orientations above with an **epistemic disjunction** (see the :py:func:`digraphsTools.omax` operator), hence, the partially determined orientations requested above.
 
@@ -3966,7 +3966,7 @@ neato -Tpng tutRandomTree.dot -o tutRandomTree.png
 
     *Figure 17a*: Random Tree instance of order 9
 
-A tree graph of order *n* contains *n-1* edges (see Line8 and 9) and we may distinguish vertices like *v1*, *v2*, *v4*, *v5* or *v9*  of degree 1, called the **leafs** of the tree, and vertices like *v3*, *v6*, *v7* or *v8* of degree 2 or more, called the **nodes** of the tree.
+A tree graph of order *n* contains *n-1* edges (see Line8 and 9) and we may distinguish vertices like *v1*, *v2*, *v4*, *v5* or *v9*  of degree 1, called the **leaves** of the tree, and vertices like *v3*, *v6*, *v7* or *v8* of degree 2 or more, called the **nodes** of the tree.
 
 The structure of a tree of order :math:`n > 2` is entirely characterized by a corresponding *Prüfer* **code** -ie a *list of vertices keys*- of length *n-2*. See, for instance in Line 12 the code ['v3', 'v8', 'v8', 'v3', 'v7', 'v6', 'v7'] corresponding to our sample tree graph *t*.
 
@@ -4020,9 +4020,9 @@ Given a graph *g* of order *n* and size *s*, the following 5 assertions *A1*, *A
     - *A2*: *g* is without (chordless) cycles and :math:`n \,=\, s + 1`;
     - *A3*: *g* is connected and :math:`n \,=\, s + 1`;
     - *A4*: Any two vertices of *g* are always connected by a *unique path*;
-    - *A5*: *g* is connected and *dropping* any single edge will always deconnect *g*.
+    - *A5*: *g* is connected and *dropping* any single edge will always disconnect *g*.
 
-Assertion *A3*, for instance, gives a simple test for recognizing a tree graph. In case of a lazy evaluation of the test in Line 3 below, it is opportune, from a computational complexity perspective, to first check the order and size of the graph before checking its potential connectedness.
+Assertion *A3*, for instance, gives a simple test for recognizing a tree graph. In case of a *lazy evaluation* of the test in Line 3 below, it is opportune, from a computational complexity perspective, to first, check the order and size of the graph, before checking its potential connectedness.
 
 >>> from graphs import RandomGraph
 >>> g = RandomGraph(order=6,edgeProbability=0.3,seed=62)
@@ -4033,7 +4033,7 @@ Assertion *A3*, for instance, gives a simple test for recognizing a tree graph. 
 ...
 The graph is a tree ? True
 
-The random graph of order 6 and edge probability 30%, generated with seed 62, is actually a tree graph instance, as we may readily confirm from its *graphviz* drawing in Fig. 18 (see also the :py:func:`graphs.Graph.isTree` method for an implemented alternative test function).
+The random graph of order 6 and edge probability 30%, generated with seed 62, is actually a tree graph instance, as we may readily confirm from its *graphviz* drawing in Fig. 18 (see also the :py:func:`graphs.Graph.isTree` method for an implemented alternative test).
 
 >>> g.exportGraphViz(
 *---- exporting a dot file for GraphViz tools ---------*
@@ -4047,7 +4047,7 @@ fdp -Tpng test62.dot -o test62.png
 
     *Figure 18*: Recognizing a tree instance
 
-We still have to recover its corresponding *Prüfer* code. Therefore, we may use the :py:func:`graphs.RandomTree.tree2Pruefer` method.
+Yet, we still have to recover its corresponding *Prüfer* code. Therefore, we may use the :py:func:`graphs.RandomTree.tree2Pruefer` method.
 
 >>> from graphs import RandomGraph
 >>> RandomTree.tree2Pruefer(g)

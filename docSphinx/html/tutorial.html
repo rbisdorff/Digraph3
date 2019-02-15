@@ -6105,7 +6105,7 @@ execution time: 0 sec. and 2 millisec.
 </pre></div>
 </td></tr></table></div>
 <p>The <code class="code docutils literal"><span class="pre">PartiallyDetermined=True</span></code> flag (see Line 1 and 5) is required here in order to orient <em>only</em> the actual edges of the graphs. Relations between vertices not linked by an edge will be put to the <em>indeterminate</em> characteristic value 0. This will allow us to compute later on convenient disjunctive digraph fusions.</p>
-<p>As both orientations are transitive indeed (see Line 3 and 7), we may conclude that the given random graph is actally a permutation graph instance. However, we still need to find now its corresponding permutation. We therefore implement a recipee given by Martin Golombic <a class="reference internal" href="#gol-2004" id="id56">[Gol-2004]</a> p.159.</p>
+<p>As both orientations are transitive indeed (see Line 3 and 7), we may conclude that the given random graph is actally a permutation graph instance. However, we still need to find now its corresponding permutation. We therefore implement a recipee given by Martin Golumbic <a class="reference internal" href="#gol-2004" id="id56">[Gol-2004]</a> p.159.</p>
 <p>We will first <strong>fuse</strong> both <em>og</em> and <em>ogdual</em> orientations above with an <strong>epistemic disjunction</strong> (see the <a class="reference internal" href="techDoc.html#digraphsTools.omax" title="digraphsTools.omax"><code class="xref py py-func docutils literal"><span class="pre">digraphsTools.omax()</span></code></a> operator), hence, the partially determined orientations requested above.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -6231,7 +6231,7 @@ execution time: 0 sec. and 2 millisec.
 <a class="reference internal image-reference" href="_images/tutRandomTree.png"><img alt="Random tree instance" src="_images/tutRandomTree.png" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-text"><em>Figure 17a</em>: Random Tree instance of order 9</span></p>
 </div>
-<p>A tree graph of order <em>n</em> contains <em>n-1</em> edges (see Line8 and 9) and we may distinguish vertices like <em>v1</em>, <em>v2</em>, <em>v4</em>, <em>v5</em> or <em>v9</em>  of degree 1, called the <strong>leafs</strong> of the tree, and vertices like <em>v3</em>, <em>v6</em>, <em>v7</em> or <em>v8</em> of degree 2 or more, called the <strong>nodes</strong> of the tree.</p>
+<p>A tree graph of order <em>n</em> contains <em>n-1</em> edges (see Line8 and 9) and we may distinguish vertices like <em>v1</em>, <em>v2</em>, <em>v4</em>, <em>v5</em> or <em>v9</em>  of degree 1, called the <strong>leaves</strong> of the tree, and vertices like <em>v3</em>, <em>v6</em>, <em>v7</em> or <em>v8</em> of degree 2 or more, called the <strong>nodes</strong> of the tree.</p>
 <p>The structure of a tree of order <img class="math" src="_images/math/b1f847ee0e70d0cb6205627609ffe138ded3fe77.png" alt="n &gt; 2"/> is entirely characterized by a corresponding <em>Prüfer</em> <strong>code</strong> -ie a <em>list of vertices keys</em>- of length <em>n-2</em>. See, for instance in Line 12 the code [‘v3’, ‘v8’, ‘v8’, ‘v3’, ‘v7’, ‘v6’, ‘v7’] corresponding to our sample tree graph <em>t</em>.</p>
 <p>Each position of the code indicates the parent of the remaining leaf with the smallest vertex label. Vertex <em>v3</em> is thus the parent of <em>v1</em> and we drop leaf <em>v1</em>, <em>v8</em> is now the parent of leaf <em>v2</em> and we drop <em>v2</em>, vertex <em>v8</em> is again the parent of leaf <em>v4</em> and we drop <em>v4</em>, vertex <em>v3</em> is the parent of leaf <em>v5</em> and we drop <em>v5</em>, <em>v7</em> is now the parent of leaf <em>v3</em> and we may drop <em>v3</em>, <em>v6</em> becomes the parent of leaf <em>v8</em> and we drop <em>v8</em>, <em>v7</em> becomes now the parent of leaf <em>v6</em> and we may drop <em>v6</em>. The two eventually remaining vertices, <em>v7</em> and <em>v9</em>, give the last link in the reconstructed tree (see <a class="reference internal" href="#bar-1991" id="id58">[Bar-1991]</a>).</p>
 <p>It is as well possible to first, generate a random <em>Prüfer</em> code of length <em>n-2</em> from a set of <em>n</em> vertices and then, construct the corresponding tree of order <em>n</em> by reversing the procedure illustrated above (see <a class="reference internal" href="#bar-1991" id="id59">[Bar-1991]</a>).</p>
@@ -6302,10 +6302,10 @@ execution time: 0 sec. and 2 millisec.
 <li><em>A2</em>: <em>g</em> is without (chordless) cycles and <img class="math" src="_images/math/2c6d283c6b6be6a089c3c371dcce9caed3841b8b.png" alt="n \,=\, s + 1"/>;</li>
 <li><em>A3</em>: <em>g</em> is connected and <img class="math" src="_images/math/2c6d283c6b6be6a089c3c371dcce9caed3841b8b.png" alt="n \,=\, s + 1"/>;</li>
 <li><em>A4</em>: Any two vertices of <em>g</em> are always connected by a <em>unique path</em>;</li>
-<li><em>A5</em>: <em>g</em> is connected and <em>dropping</em> any single edge will always deconnect <em>g</em>.</li>
+<li><em>A5</em>: <em>g</em> is connected and <em>dropping</em> any single edge will always disconnect <em>g</em>.</li>
 </ul>
 </div></blockquote>
-<p>Assertion <em>A3</em>, for instance, gives a simple test for recognizing a tree graph. In case of a lazy evaluation of the test in Line 3 below, it is opportune, from a computational complexity perspective, to first check the order and size of the graph before checking its potential connectedness.</p>
+<p>Assertion <em>A3</em>, for instance, gives a simple test for recognizing a tree graph. In case of a <em>lazy evaluation</em> of the test in Line 3 below, it is opportune, from a computational complexity perspective, to first, check the order and size of the graph, before checking its potential connectedness.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -6323,7 +6323,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">The graph is a tree ? True</span>
 </pre></div>
 </td></tr></table></div>
-<p>The random graph of order 6 and edge probability 30%, generated with seed 62, is actually a tree graph instance, as we may readily confirm from its <em>graphviz</em> drawing in Fig. 18 (see also the <a class="reference internal" href="techDoc.html#graphs.Graph.isTree" title="graphs.Graph.isTree"><code class="xref py py-func docutils literal"><span class="pre">graphs.Graph.isTree()</span></code></a> method for an implemented alternative test function).</p>
+<p>The random graph of order 6 and edge probability 30%, generated with seed 62, is actually a tree graph instance, as we may readily confirm from its <em>graphviz</em> drawing in Fig. 18 (see also the <a class="reference internal" href="techDoc.html#graphs.Graph.isTree" title="graphs.Graph.isTree"><code class="xref py py-func docutils literal"><span class="pre">graphs.Graph.isTree()</span></code></a> method for an implemented alternative test).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -6337,7 +6337,7 @@ execution time: 0 sec. and 2 millisec.
 <a class="reference internal image-reference" href="_images/test62.png"><img alt="Recognizing a tree" src="_images/test62.png" style="width: 350px;" /></a>
 <p class="caption"><span class="caption-text"><em>Figure 18</em>: Recognizing a tree instance</span></p>
 </div>
-<p>We still have to recover its corresponding <em>Prüfer</em> code. Therefore, we may use the <a class="reference internal" href="techDoc.html#graphs.RandomTree.tree2Pruefer" title="graphs.RandomTree.tree2Pruefer"><code class="xref py py-func docutils literal"><span class="pre">graphs.RandomTree.tree2Pruefer()</span></code></a> method.</p>
+<p>Yet, we still have to recover its corresponding <em>Prüfer</em> code. Therefore, we may use the <a class="reference internal" href="techDoc.html#graphs.RandomTree.tree2Pruefer" title="graphs.RandomTree.tree2Pruefer"><code class="xref py py-func docutils literal"><span class="pre">graphs.RandomTree.tree2Pruefer()</span></code></a> method.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">RandomGraph</span>
