@@ -939,7 +939,7 @@ class QuasiRandomUniformPointSet(QuasiRandomPointSet):
 
     """
     
-    def __init__(self,n=20,s=3,seed=None,Randomized=True,fileName='uniform',Debug=False):
+    def __init__(self,n=100,s=3,seed=None,Randomized=True,fileName='uniform',Debug=False):
         # imports
         import random
         # fixing random seed
@@ -1182,7 +1182,7 @@ if __name__ == "__main__":
     print(qrfs.testFct(seq=qrfs.pointSet,buggyRegionLimits=(0.45,0.55)))
 
     print('Quasi random uniform sampling')
-    qrus = QuasiRandomUniformPointSet(n=997,s=d,Randomized=True,seed=seed)
+    qrus = QuasiRandomUniformPointSet(n=997,s=d,Randomized=False,seed=seed)
     print(qrus.__dict__.keys())
     print(qrus.uniformSeries[:10])
     print(qrus.shuffledUniformSeries[:10])

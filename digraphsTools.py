@@ -266,9 +266,9 @@ def ranking2preorder(R):
 
 # flattens a list of lists into a flat list
 import itertools as IT
-import collections
+from collections import abc
 
-def flatten(iterable, ltypes=collections.Iterable):
+def flatten(iterable, ltypes=abc.Iterable):
     """
     Flattens a list of lists into a flat list.
 
