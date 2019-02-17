@@ -3577,7 +3577,7 @@ Absorbent preKernels :
    independence :  0.00
    dominance    :  -74.42
    absorbency   :  16.28
-   covering     :  0.800
+   covered      :  0.800
 
 With such unique disjoint initial and terminal prekernels (see Line 4 and 10), the given digraph instance is hence clearly *lateralized*. Indeed, these initial and terminal prekernels of the codual outranking digraph reveal best, resp. worst, choice recomendations one may formulate on the basis of a given outranking digraph instance.
 
@@ -3601,7 +3601,7 @@ Credibility domain: [-100.00,100.00]
   independence        : 0.00
   dominance           : -74.42
   absorbency          : 16.28
-  covering (%)        : 0.00
+  covered (%)         : 80.00
   determinateness (%) : 64.62
   - most credible action(s) = { 'a7': 48.84, }
 

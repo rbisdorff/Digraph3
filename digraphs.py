@@ -5296,7 +5296,7 @@ class Digraph(object):
                 print('   independence : ', self.intstab(choice))
                 print('   dominance    : ', self.domin(choice))
                 print('   absorbency   : ', self.absorb(choice))
-                print('   covering     :  %.3f' % self.averageCoveringIndex(choice, direction='in'))
+                print('   covered      :  %.3f' % self.averageCoveringIndex(choice, direction='in'))
         print('*----- statistics -----')
         print('graph name: ', self.name)
         print('number of solutions')
@@ -7114,30 +7114,30 @@ class Digraph(object):
                         #if gch[0] == bch[0]:
                         if gch[3] == gch[4]:
                             if Comments:
-                                print('null (good) choice ')
-                                g.showChoiceVector(gch,
+                                print('ambiguous (good) choice ')
+                                g.showChoiceVector(gch,choiceType='good',
                                                       ChoiceVector=ChoiceVector)
-                                g.showChoiceVector(bch,
+                                g.showChoiceVector(bch,choiceType='bad',
                                                       ChoiceVector=ChoiceVector)
                             goodChoice = False
                         elif gch[4] > gch[3]:
                             if Comments:
                                 print('outranked (good) choice ')
-                                g.showChoiceVector(gch,
+                                g.showChoiceVector(gch,choiceType='good',
                                                       ChoiceVector=ChoiceVector)
-                                g.showChoiceVector(bch,
+                                g.showChoiceVector(bch,choiceType='bad',
                                                       ChoiceVector=ChoiceVector)
                             goodChoice = False
                         else:
                             goodChoice = True
                 if goodChoice:
                     print(' === >> potential best choice(s)')
-                    g.showChoiceVector(gch,ChoiceVector=ChoiceVector)
+                    g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
                     if bestChoice == set():
                         bestChoice = gch[5]
             else:
                 print(' === >> non robust best choice(s)')
-                g.showChoiceVector(gch,ChoiceVector=ChoiceVector)
+                g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
         for bch in g.badChoices:
             if bch[0] >= Med:
                 badChoice = True
@@ -7147,33 +7147,33 @@ class Digraph(object):
                         #if gch[0] == bch[0]:
                         if bch[3] == bch[4]:
                             if Comments:
-                                print('null (bad) choice ')
-                                g.showChoiceVector(gch,ChoiceVector=ChoiceVector)
-                                g.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                                print('ambiguous (bad) choice ')
+                                g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
+                                g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
                             badChoice = False
                             nullChoice = True
                         elif bch[3] > bch[4]:
                             if Comments:
                                 print('outranking (bad) choice ')
-                                g.showChoiceVector(gch,ChoiceVector=ChoiceVector)
-                                g.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                                g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
+                                g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
                             badChoice = False
                         else:
                             badChoice = True
                 if badChoice:
                     print(' === >> potential worst choice(s) ')
-                    g.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                    g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
                     if worstChoice == set():
                         worstChoice = bch[5]
                 elif nullChoice:
                     print(' === >> ambiguous choice(s)')
-                    g.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                    g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
                     if worstChoice == set():
                         worstChoice = bch[5]
 
             else:
                 print('=== >> non robust worst choice(s)')
-                g.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
         print()
         print('Execution time: %.3f seconds' % (t1-t0))
         print('*****************************')
@@ -7327,17 +7327,17 @@ class Digraph(object):
                         if gch[3] == gch[4]:
                             if Comments:
                                 print('null (good) choice ')
-                                g.showChoiceVector(gch,
+                                g.showChoiceVector(gch,choiceType='good',
                                                       ChoiceVector=ChoiceVector)
-                                g.showChoiceVector(bch,
+                                g.showChoiceVector(bch,choiceType='bad',
                                                       ChoiceVector=ChoiceVector)
                             goodChoice = False
                         elif gch[4] > gch[3]:
                             if Comments:
                                 print('outranked (good) choice ')
-                                g.showChoiceVector(gch,
+                                g.showChoiceVector(gch,choiceType='good',
                                                       ChoiceVector=ChoiceVector)
-                                g.showChoiceVector(bch,
+                                g.showChoiceVector(bch,choiceType='bad',
                                                       ChoiceVector=ChoiceVector)
                             goodChoice = False
                         else:
@@ -7347,14 +7347,14 @@ class Digraph(object):
                         print(' === >> potential best choice(s)')
                     html += '<h3>Potential best choice(s)</h3>\n'
                     
-                    html += g.htmlChoiceVector(gch,ChoiceVector=ChoiceVector)
+                    html += g.htmlChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
                     if bestChoice == set():
                         bestChoice = gch[5]
             else:
                 if Debug:
                     print(' === >> non robust best choice(s)')
                 html += '<h3>Non robust best choice(s)</h3>\n'
-                html += g.htmlChoiceVector(gch,ChoiceVector=ChoiceVector)
+                html += g.htmlChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
         for bch in g.badChoices:
             if bch[0] >= Med:
                 badChoice = True
@@ -7365,15 +7365,15 @@ class Digraph(object):
                         if bch[3] == bch[4]:
                             if Comments:
                                 print('null (bad) choice ')
-                                g.showChoiceVector(gch,ChoiceVector=ChoiceVector)
-                                g.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                                g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
+                                g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
                             badChoice = False
                             nullChoice = True
                         elif bch[3] > bch[4]:
                             if Comments:
                                 print('outranking (bad) choice ')
-                                g.showChoiceVector(gch,ChoiceVector=ChoiceVector)
-                                g.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                                g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
+                                g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
                             badChoice = False
                         else:
                             badChoice = True
@@ -7381,14 +7381,14 @@ class Digraph(object):
                     if Debug:
                         print(' === >> potential worst choice(s) ')
                     html += '<h3>Potential worst choice(s)</h3>\n '
-                    html += g.htmlChoiceVector(bch,ChoiceVector=ChoiceVector)
+                    html += g.htmlChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
                     if worstChoice == set():
                         worstChoice = bch[5]
                 elif nullChoice:
                     if Debug:
                         print(' === >> ambiguous choice(s)')
                     html += '<h3>Ambiguous choice(s)</h3>\n'
-                    html += g.htmlChoiceVector(bch,ChoiceVector=ChoiceVector)
+                    html += g.htmlChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
                     if worstChoice == set():
                         worstChoice = bch[5]
 
@@ -7396,7 +7396,7 @@ class Digraph(object):
                 if Debug:
                     print('=== >> non robust worst choice(s)')
                 html += '<h3>Non robust worst choice(s)</h3>\n'
-                html += g.htmlChoiceVector(bch,ChoiceVector=ChoiceVector)
+                html += g.htmlChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
         if Debug:
             print()
             print('Execution time: %.3f seconds' % (t1-t0))
@@ -7986,7 +7986,7 @@ class Digraph(object):
         
         return badChoicesDic
 
-    def htmlChoiceVector(self,ch,ChoiceVector=True):
+    def htmlChoiceVector(self,ch,ChoiceVector=True,choiceType="good"):
         """
         Show procedure for annotated bipolar choices.
         """
@@ -8007,8 +8007,16 @@ class Digraph(object):
         html += '  independence        : %.2f<br/>\n' % (degi)
         html += '  dominance           : %.2f<br/>\n' % (degd)
         html += '  absorbency          : %.2f<br/>\n' % (dega)
-        html += '  covering (%%): %.2f<br/>\n' %\
-                ( self.averageCoveringIndex(choice) * Decimal('100') )
+        if choiceType == "good":
+            html += '  covering (%%): %.2f<br/>\n' %\
+                ( self.averageCoveringIndex(choice,direction='out') * Decimal('100') )
+        elif choiceType == "bad":
+            html += '  covered (%%) : %.2f<br/>\n' %\
+                ( self.averageCoveringIndex(choice,direction='in') * Decimal('100') )
+        else:
+            html += '  covering (%%): %.2f<br/>\n' %\
+                ( self.averageCoveringIndex(choice) * Decimal('100') )            
+            
         html += '  determinateness (in %%) : %.2f</p>\n' % (determ*Decimal('100.0'))
         if ChoiceVector:
             html += '<p>  - characteristic vector = {\n'
@@ -8034,7 +8042,7 @@ class Digraph(object):
             html += '}</p>\n'
         return html
 
-    def showChoiceVector(self,ch,ChoiceVector=True):
+    def showChoiceVector(self,ch,choiceType="good",ChoiceVector=True):
         """
         Show procedure for annotated bipolar choices.
         """
@@ -8055,7 +8063,16 @@ class Digraph(object):
         print('  independence        : %.2f' % (degi))
         print('  dominance           : %.2f' % (degd))
         print('  absorbency          : %.2f' % (dega))
-        print('  covering (%)' + '        : %.2f' % ( self.averageCoveringIndex(choice) * Decimal('100') ))
+        if choiceType == "good":
+            print('  covering (%)' + '        : %.2f' %\
+                  ( self.averageCoveringIndex(choice,direction='out') * Decimal('100') ))
+        elif choiceType == "bad":
+            print('  covered (%) ' + '        : %.2f' %\
+                  ( self.averageCoveringIndex(choice,direction='in') * Decimal('100') ))
+        else:
+            print('  covering (%)' + '        : %.2f' %\
+                  ( self.averageCoveringIndex(choice) * Decimal('100') ))
+            
         print("  determinateness (%)", end=' ')
         print(': %.2f' % (determ*Decimal('100.0')))
         if ChoiceVector:
