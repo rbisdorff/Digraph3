@@ -7030,10 +7030,9 @@
 <span class="sd">        Dummy for showRubisBestChoiceRecommendation()</span>
 <span class="sd">        needed for older versions compatibility.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">showRubisBestChoiceRecommendation</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span><span class="n">_OldCoca</span><span class="o">=</span><span class="n">_OldCoca</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">showBestChoiceRecommendation</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span><span class="n">_OldCoca</span><span class="o">=</span><span class="n">_OldCoca</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Digraph.showRubisBestChoiceRecommendation"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.showRubisBestChoiceRecommendation">[docs]</a>    <span class="k">def</span> <span class="nf">showRubisBestChoiceRecommendation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                                          <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<div class="viewcode-block" id="Digraph.showBestChoiceRecommendation"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.showBestChoiceRecommendation">[docs]</a>    <span class="k">def</span> <span class="nf">showBestChoiceRecommendation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                           <span class="n">ChoiceVector</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                           <span class="n">CoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                           <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -7224,6 +7223,13 @@
 <span class="c1">##        self.gamma = self.gammaSets()</span>
 <span class="c1">##        self.notGamma = self.notGammaSets()</span>
 
+
+<div class="viewcode-block" id="Digraph.showRubisBestChoiceRecommendation"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.showRubisBestChoiceRecommendation">[docs]</a>    <span class="k">def</span> <span class="nf">showRubisBestChoiceRecommendation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Dummy for backward portable showBestChoiceRecommendation().</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">showBestChoiceRecommendation</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+        
 <span class="c1">#############</span>
 
 <div class="viewcode-block" id="Digraph.showHTMLBestChoiceRecommendation"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.showHTMLBestChoiceRecommendation">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLBestChoiceRecommendation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">pageTitle</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>

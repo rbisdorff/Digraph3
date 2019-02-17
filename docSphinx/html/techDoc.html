@@ -2235,6 +2235,51 @@ Renders the sharpest of two characteristic vectors v and w.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="digraphs.Digraph.showBestChoiceRecommendation">
+<code class="descname">showBestChoiceRecommendation</code><span class="sig-paren">(</span><em>Comments=False</em>, <em>ChoiceVector=False</em>, <em>CoDual=True</em>, <em>Debug=False</em>, <em>_OldCoca=False</em>, <em>BrokenCocs=True</em>, <em>Cpp=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showBestChoiceRecommendation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the RuBis best choice recommendation.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Computes by default the Rubis best choice recommendation on the corresponding strict (codual) outranking digraph.</p>
+<p class="last">In case of chordless circuits, if supporting arcs are more credible
+than the reversed negating arcs, we collapse the circuits into hyper nodes.
+Inversely,  if supporting arcs are not more credible than the reversed negating arcs,
+we brake the circuits on their weakest arc.</p>
+</div>
+<p>Usage example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showRubisBestChoiceRecommendation</span><span class="p">()</span>
+<span class="go">***********************</span>
+<span class="go">RuBis Best Choice Recommendation (BCR)</span>
+<span class="go">(in decreasing order of determinateness)   </span>
+<span class="go">Credibility domain:  [-100.0, 100.0]</span>
+<span class="go">=== &gt;&gt; potential vest choices</span>
+<span class="go">* choice              : [&#39;a04&#39;, &#39;a14&#39;, &#39;a19&#39;, &#39;a20&#39;]</span>
+<span class="go">   +-irredundancy      : 1.19</span>
+<span class="go">   independence        : 1.19</span>
+<span class="go">   dominance           : 4.76</span>
+<span class="go">   absorbency          : -59.52</span>
+<span class="go">   covering (%)        : 75.00</span>
+<span class="go">   determinateness (%) : 57.86</span>
+<span class="go">   - most credible action(s) = { &#39;a14&#39;: 23.81, &#39;a19&#39;: 11.90, &#39;a04&#39;: 2.38, &#39;a20&#39;: 1.19, }  </span>
+<span class="go">=== &gt;&gt; potential worst choices </span>
+<span class="go">* choice              : [&#39;a03&#39;, &#39;a12&#39;, &#39;a17&#39;]</span>
+<span class="go">   +-irredundancy      : 4.76</span>
+<span class="go">  independence        : 4.76</span>
+<span class="go">  dominance           : -76.19</span>
+<span class="go">  absorbency          : 4.76</span>
+<span class="go">  covering (%)        : 0.00</span>
+<span class="go">  determinateness (%) : 65.39</span>
+<span class="go">  - most credible action(s) = { &#39;a03&#39;: 38.10, &#39;a12&#39;: 13.10, &#39;a17&#39;: 4.76, }</span>
+<span class="go">Execution time: 0.024 seconds</span>
+<span class="go">*****************************</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
 <dt id="digraphs.Digraph.showChoiceVector">
 <code class="descname">showChoiceVector</code><span class="sig-paren">(</span><em>ch</em>, <em>choiceType='good'</em>, <em>ChoiceVector=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showChoiceVector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showChoiceVector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show procedure for annotated bipolar choices.</p>
@@ -2535,47 +2580,8 @@ Kohler’s (rankingRule=”kohler”), and Tideman’s ranked pairs rule (rankin
 
 <dl class="method">
 <dt id="digraphs.Digraph.showRubisBestChoiceRecommendation">
-<code class="descname">showRubisBestChoiceRecommendation</code><span class="sig-paren">(</span><em>Comments=False</em>, <em>ChoiceVector=False</em>, <em>CoDual=True</em>, <em>Debug=False</em>, <em>_OldCoca=False</em>, <em>BrokenCocs=True</em>, <em>Cpp=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showRubisBestChoiceRecommendation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showRubisBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the RuBis best choice recommendation.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>Computes by default the Rubis best choice recommendation on the corresponding strict (codual) outranking digraph.</p>
-<p class="last">In case of chordless circuits, if supporting arcs are more credible
-than the reversed negating arcs, we collapse the circuits into hyper nodes.
-Inversely,  if supporting arcs are not more credible than the reversed negating arcs,
-we brake the circuits on their weakest arc.</p>
-</div>
-<p>Usage example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showRubisBestChoiceRecommendation</span><span class="p">()</span>
-<span class="go">***********************</span>
-<span class="go">RuBis Best Choice Recommendation (BCR)</span>
-<span class="go">(in decreasing order of determinateness)   </span>
-<span class="go">Credibility domain:  [-100.0, 100.0]</span>
-<span class="go">=== &gt;&gt; potential vest choices</span>
-<span class="go">* choice              : [&#39;a04&#39;, &#39;a14&#39;, &#39;a19&#39;, &#39;a20&#39;]</span>
-<span class="go">   +-irredundancy      : 1.19</span>
-<span class="go">   independence        : 1.19</span>
-<span class="go">   dominance           : 4.76</span>
-<span class="go">   absorbency          : -59.52</span>
-<span class="go">   covering (%)        : 75.00</span>
-<span class="go">   determinateness (%) : 57.86</span>
-<span class="go">   - most credible action(s) = { &#39;a14&#39;: 23.81, &#39;a19&#39;: 11.90, &#39;a04&#39;: 2.38, &#39;a20&#39;: 1.19, }  </span>
-<span class="go">=== &gt;&gt; potential worst choices </span>
-<span class="go">* choice              : [&#39;a03&#39;, &#39;a12&#39;, &#39;a17&#39;]</span>
-<span class="go">   +-irredundancy      : 4.76</span>
-<span class="go">  independence        : 4.76</span>
-<span class="go">  dominance           : -76.19</span>
-<span class="go">  absorbency          : 4.76</span>
-<span class="go">  covering (%)        : 0.00</span>
-<span class="go">  determinateness (%) : 65.39</span>
-<span class="go">  - most credible action(s) = { &#39;a03&#39;: 38.10, &#39;a12&#39;: 13.10, &#39;a17&#39;: 4.76, }</span>
-<span class="go">Execution time: 0.024 seconds</span>
-<span class="go">*****************************</span>
-</pre></div>
-</div>
+<code class="descname">showRubisBestChoiceRecommendation</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showRubisBestChoiceRecommendation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showRubisBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dummy for backward portable showBestChoiceRecommendation().</p>
 </dd></dl>
 
 <dl class="method">

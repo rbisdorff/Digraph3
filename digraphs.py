@@ -6992,10 +6992,9 @@ class Digraph(object):
         Dummy for showRubisBestChoiceRecommendation()
         needed for older versions compatibility.
         """
-        self.showRubisBestChoiceRecommendation(Comments=Comments,_OldCoca=_OldCoca)
+        self.showBestChoiceRecommendation(Comments=Comments,_OldCoca=_OldCoca)
 
-    def showRubisBestChoiceRecommendation(self,
-                                          Comments=False,
+    def showBestChoiceRecommendation(self,Comments=False,
                                           ChoiceVector=False,
                                           CoDual=True,
                                           Debug=False,
@@ -7186,6 +7185,13 @@ class Digraph(object):
 ##        self.gamma = self.gammaSets()
 ##        self.notGamma = self.notGammaSets()
 
+
+    def showRubisBestChoiceRecommendation(self,**kwargs):
+        """
+        Dummy for backward portable showBestChoiceRecommendation().
+        """
+        self.showBestChoiceRecommendation(**kwargs)
+        
 #############
 
     def showHTMLBestChoiceRecommendation(self,pageTitle=None,
