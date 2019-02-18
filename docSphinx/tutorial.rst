@@ -1623,55 +1623,58 @@ Following the Rubis outranking method (see [BIS-2008]_), potential best choice r
     Execution time  : 0.00018 sec.
     Results in sets: dompreKernels and abspreKernels.
 
-We notice three potential best choice recommendations: the Condorcet winner *D* (line 4), the triplet *B*, *C* and *E* (line 9), and finally the pair *A* and *G* (line 14). The Rubis best choice recommendation is given by the **most determined** pre-kernel; the one supported by the most significant criteria coalition. This result is shown with the following command-
+We notice three potential best choice recommendations: the Condorcet winner *D* (line 4), the triplet *B*, *C* and *E* (line 9), and finally the pair *A* and *G* (line 14). The Rubis best choice recommendation is given by the **most determined** pre-kernel; the one supported by the most significant criteria coalition. This result is shown with the following command.
 
-    >>> g.showRubisBestChoiceRecommendation(CoDual=False)
-    ***********************
-    * --- Rubis best choice recommendation(s) (BCR) ---*
-      (in decreasing order of determinateness)   
-    Credibility domain:  {'min': -100.0, 'med': 0.0, 'max': 100.0}
-     === >> potential BCR 
-    * choice              : ['D']
-      +-irredundancy      : 100.00
-      independence        : 100.00
-      dominance           : 11.11
-      absorbency          : -100.00
-      covering (%)        : 100.00
-      determinateness (%) : 56,0
-      characteristic vector = { 'D': 11.11, 'A': -11.11, 'B': -11.11, 
-             'C': -11.11, 'E': -11.11, 'F': -11.11, 'G': -11.11 }
-     === >> potential BCR 
-    * choice              : ['B', 'E', 'C']
-      +-irredundancy      : 0.00
-      independence        : 0.00
-      dominance           : 11.11
-      absorbency          : -100.00
-      covering (%)        : 50.00
-      determinateness (%) : 50.0
-      - characteristic vector = { 'B': 0.00, 'E': 0.00, 'F': 0.00, 
-              'D': 0.00, 'A': 0.00, 'G': 0.00, 'C': 0.00 }
-     === >> potential BCR 
-    * choice              : ['A', 'G']
-      +-irredundancy      : 0.00
-      independence        : 0.00
-      dominance           : 55.56
-      absorbency          : 0.00
-      covering (%)        : 70.00
-      determinateness (%) : 50.0
-      - characteristic vector = { 'B': 0.00, 'E': 0.00, 'F': 0.00, 
-               'D': 0.00, 'A': 0.00, 'G': 0.00, 'C': 0.00 }
-     === >> potential worst choice 
-    * choice              : ['A', 'F']
-      +-irredundancy      : 0.00
-      independence        : 0.00
-      dominance           : 0.00
-      absorbency          : 100.00
-      covering (%)        : 30.00
-      determinateness (%) : 50.0
-      characteristic vector = { 'B': 0.00, 'E': 0.00, 'F': 0.00, 
-                 'D': 0.00, 'A': 0.00, 'G': 0.00, 'C': 0.00 }
+>>> g.showRubisBestChoiceRecommendation(CoDual=False)
+*****************************************
+Rubis best choice recommendation(s) (BCR)
+ (in decreasing order of determinateness)   
+Credibility domain: [-100.00,100.00]
+=== >> potential best choice(s)
+* choice              : ['D']
+  +-irredundancy      : 100.00
+  independence        : 100.00
+  dominance           : 2.07
+  absorbency          : -100.00
+  covering (%)        : 100.00
+  determinateness (%) : 51.03
+  - most credible action(s) = { 'D': 2.07, }
+=== >> potential best choice(s)
+* choice              : ['A', 'G']
+  +-irredundancy      : 0.00
+  independence        : 0.00
+  dominance           : 77.93
+  absorbency          : 0.00
+  covering (%)        : 70.00
+  determinateness (%) : 50.00
+  - most credible action(s) = { }
+=== >> potential best choice(s)
+* choice              : ['B', 'C', 'E']
+  +-irredundancy      : 0.00
+  independence        : 0.00
+  dominance           : 10.34
+  absorbency          : -100.00
+  covering (%)        : 50.00
+  determinateness (%) : 50.00
+  - most credible action(s) = { }
+=== >> potential worst choice(s) 
+* choice              : ['A', 'F']
+  +-irredundancy      : 0.00
+  independence        : 0.00
+  dominance           : 0.00
+  absorbency          : 100.00
+  covered (%)         : 70.00
+  determinateness (%) : 50.00
+  - most credible action(s) = { }
+Execution time: 0.014 seconds
+*****************************
 
-We notice in line 7 above that the most significantly supported best choice recommendation is indeed the Condorcet winner *D* with a majority of 56% of the criteria significance (see line 13). Both other recommendation candidates, as well as the worst choice candidate are not positively validated as best choices. They may or may not be considered so. Alternative *A*, with extreme contradictory performances, appears both, in a best and a worst choice recommendation (see lines 27 and 37) and seams hence not actually comparable to its competitors.
+We notice in line 6 above that the most significantly supported best
+choice recommendation is indeed the Condorcet winner *D* with a
+majority of 51% of the criteria significance (see line 12). Both other
+potential best choice recommendations, as well as the potential worst
+choice recommendation, are not positively validated as best,
+resp. worst choices. They may or may not be considered so. Alternative *A*, with extreme contradictory performances, appears both, in a best and a worst choice recommendation (see lines 27 and 37) and seams hence not actually comparable to its competitors.
 
 The same Rubis best choice recommendation, encoded in XMCDA 2.0 and presented in the default system browser, is provided by the :py:mod:`xmcda` module. In a python3 session working in the directory where the XMCDA encoded problem data is stored, we may proceed as follows.
 
