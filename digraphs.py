@@ -5272,26 +5272,26 @@ class Digraph(object):
         print('*--- Computing preKernels ---*')
         actions = set(self.actions)
         n = len(actions)
-        self.dompreKernels = set()
-        self.abspreKernels = set()
+        dompreKernels = set()
+        abspreKernels = set()
         t0 = time.time()
         for choice in self.independentChoices(self.singletons()):
             restactions = actions - choice[0][0]
             if restactions <= choice[0][1]:
-                self.dompreKernels.add(choice[0][0])
+                dompreKernels.add(choice[0][0])
             if restactions <= choice[0][2]:
-                self.abspreKernels.add(choice[0][0])
+                abspreKernels.add(choice[0][0])
         t1 = time.time()
         if withListing:
             print('Dominant preKernels :')
-            for choice in self.dompreKernels:
+            for choice in dompreKernels:
                 print(list(choice))
                 print('   independence : ', self.intstab(choice))
                 print('   dominance    : ', self.domin(choice))
                 print('   absorbency   : ', self.absorb(choice))
                 print('   covering     :  %.3f' % self.averageCoveringIndex(choice, direction='out'))
             print('Absorbent preKernels :')
-            for choice in self.abspreKernels:
+            for choice in abspreKernels:
                 print(list(choice))
                 print('   independence : ', self.intstab(choice))
                 print('   dominance    : ', self.domin(choice))
@@ -5300,20 +5300,19 @@ class Digraph(object):
         print('*----- statistics -----')
         print('graph name: ', self.name)
         print('number of solutions')
-        print(' dominant kernels : ', len(self.dompreKernels))
-        print(' absorbent kernels: ', len(self.abspreKernels))
+        print(' dominant kernels : ', len(dompreKernels))
+        print(' absorbent kernels: ', len(abspreKernels))
         print('cardinality frequency distributions')
         print('cardinality     : ', list(range(n+1)))
         v = [0 for i in range(n+1)]
-        for ch in self.dompreKernels:
+        for ch in dompreKernels:
             v[len(ch)] += 1
         print('dominant kernel : ',v)
         v = [0 for i in range(n+1)]
-        for ch in self.abspreKernels:
+        for ch in abspreKernels:
             v[len(ch)] += 1
         print('absorbent kernel: ',v)
         print('Execution time  : %.5f sec.' % (t1-t0))
-        print('Results in sets: dompreKernels and abspreKernels.')
 
     def computePreKernels(self):
         """
@@ -12812,8 +12811,12 @@ if __name__ == "__main__":
         from outrankingDigraphs import BipolarOutrankingDigraph
         from randomPerfTabs import Random3ObjectivesPerformanceTableau
 ##        from linearOrders import CopelandOrder
-        t1 = Random3ObjectivesPerformanceTableau(seed=101)
+        t1 = Random3ObjectivesPerformanceTableau(numberOfActions=7,numberOfCriteria=7,seed=101)
         g = BipolarOutrankingDigraph(t1,Normalized=True)
+        g.showRelationTable()
+        g.showHTMLBestChoiceRecommendation(ChoiceVector=False)
+        g.showPreKernels()
+        g.showRelationTable()
         g.showHTMLBestChoiceRecommendation(ChoiceVector=False)
 ##        gcd = ~(-g)
 ##        cocb = BrokenCocsDigraph(gcd,Comments=True)
