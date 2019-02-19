@@ -1777,7 +1777,7 @@ To model these *strict outranking* situations, we may compute the Rubis best cho
       covering (%)          : 41.67
       determinateness (%)   : 53.17
       characteristic vector :  
-         { 'D': 11.11, 'A': 0.00, 'C': 0.00, 'G': 0.00, 
+         { 'D': 11.11, 'A': 0.00, 'C': 0.00, 'G': 0.00,
            'B': -11.11, 'E': -11.11, 'F': -11.11 }
     === >> potential worst choice(s)
     * choice                : ['A', 'F']
@@ -1798,7 +1798,7 @@ We may also notice (see line 17 and line 21) that both alternatives *A* and *F* 
 Weakly ordering
 ...............
 
-To get a more complete insight in the overall strict outranking situations, we may use the :py:class:`weakOrders.RankingByChoosingDigraph` constructor imported from the :ref:`weakOrders-label` module, for computing a **ranking-by-choosing** result from the strict outranking digraph instance *gcd*.
+To get a more complete insight in the overall strict outranking situations, we may use the :py:class:`weakOrders.RankingByChoosingDigraph` constructor imported from the :ref:`weakOrders-label`, for computing a **ranking-by-choosing** result from the strict outranking digraph instance *gcd*.
 
     >>> from weakOrders import RankingByChoosingDigraph
     >>> rbc = RankingByChoosingDigraph(gcd)
@@ -1825,7 +1825,13 @@ To get a more complete insight in the overall strict outranking situations, we m
 
 In this **ranking-by-choosing** method, where we operate the epistemic fusion of iterated (strict) best and worst choices, compromise alternative *D* is indeed ranked before compromise alternative *G*. If the computing node supports multiple processor cores, best and worst choosing iterations are run in parallel. The overall partial ordering result shows again the important fact that the most expensive site *A*, and the cheapest site *C*, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking-by-choosing relation. 
 
-The best choice recommendation appears hence depending on the very importance the CEO is attaching to each of the three objectives he is considering. In the setting here, where he considers all three objectives to be **equally important** (minimize costs = 3.0, maximize turnover = 3.0, and maximize working conditions = 3.0), site *D* represents actually the best compromise. However, if *Costs* do not play much role, it would be perhaps better to decide to move to the most advantageous site *A*; or if, on the contrary, *Costs* do matter a lot, moving to the cheapest alternative *C* could definitely represent a more convincing recommendation. 
+The best choice recommendation appears hence depending on the very
+importance the CEO is attaching to each of the three objectives he is
+considering. In the setting here, where he considers all three
+objectives to be **equally important** (minimize costs = 3.0, maximize
+turnover = 3.0, and maximize working conditions = 3.0), site *D*
+represents actually the best compromise. However, if *Costs* do not
+play much a role, it would be perhaps better to decide to move to the most advantageous site *A*; or if, on the contrary, *Costs* do matter a lot, moving to the cheapest alternative *C* could definitely represent a more convincing recommendation. 
 
 It might be worth, as an **exercise**, to modify on the one hand this importance balance in the XMCDA data file by lowering the significance of the *Costs* criterion; all criteria are considered **equi-significant** (weight = 1.0) for instance. It may as well be opportune, on the other hand, to **rank** the importance of the three objectives as follows:  *minimize costs* (weight = 9.0) **>** *maximize turnover* (weight = 3 x 2.0) **>** *maximize working conditions* (weight = 3 x 1.0). What will become the best choice recommendation under both working hypotheses?  
 
