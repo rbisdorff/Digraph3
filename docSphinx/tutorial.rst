@@ -1634,16 +1634,16 @@ Credibility domain: [-100.00,100.00]
 * choice              : ['D']
   +-irredundancy      : 100.00
   independence        : 100.00
-  dominance           : 2.07
+  dominance           : 11.11
   absorbency          : -100.00
   covering (%)        : 100.00
-  determinateness (%) : 51.03
+  determinateness (%) : 55.56
   - most credible action(s) = { 'D': 2.07, }
 === >> potential best choice(s)
 * choice              : ['A', 'G']
   +-irredundancy      : 0.00
   independence        : 0.00
-  dominance           : 77.93
+  dominance           : 55.56
   absorbency          : 0.00
   covering (%)        : 70.00
   determinateness (%) : 50.00
@@ -1652,7 +1652,7 @@ Credibility domain: [-100.00,100.00]
 * choice              : ['B', 'C', 'E']
   +-irredundancy      : 0.00
   independence        : 0.00
-  dominance           : 10.34
+  dominance           : 11.11
   absorbency          : -100.00
   covering (%)        : 50.00
   determinateness (%) : 50.00
@@ -1671,7 +1671,7 @@ Execution time: 0.014 seconds
 
 We notice in line 6 above that the most significantly supported best
 choice recommendation is indeed the Condorcet winner *D* with a
-majority of 51% of the criteria significance (see line 12). Both other
+majority of 56% of the criteria significance (see line 12). Both other
 potential best choice recommendations, as well as the potential worst
 choice recommendation, are not positively validated as best,
 resp. worst choices. They may or may not be considered so. Alternative *A*, with extreme contradictory performances, appears both, in a best and a worst choice recommendation (see lines 27 and 37) and seams hence not actually comparable to its competitors.
@@ -1785,7 +1785,7 @@ To model these *strict outranking* situations, we may compute the Rubis best cho
       independence          : 0.00
       dominance             : -55.56
       absorbency            : 100.00
-      covering (%)          : 0.00
+      covered (%)           : 50.00
       determinateness (%)   : 50.00
       characteristic vector : 
          {'A': 0.00, 'B': 0.00, 'C': 0.00, 'D': 0.00, 
