@@ -1801,6 +1801,7 @@ Weakly ordering
 To get a more complete insight in the overall strict outranking situations, we may use the :py:class:`weakOrders.RankingByChoosingDigraph` constructor imported from the :ref:`weakOrders-label`, for computing a **ranking-by-choosing** result from the strict outranking digraph instance *gcd*.
 
     >>> from weakOrders import RankingByChoosingDigraph
+    >>> gcd = ~(-g)
     >>> rbc = RankingByChoosingDigraph(gcd)
     Threading ...  ## multiprocessing if 2 cores are available
     Exiting computing threads
