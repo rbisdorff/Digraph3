@@ -100,7 +100,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         cdef int k, i, ox, totalWeight = 0
         cdef double tt,t0
         cdef float q, lowValue=0.0, highValue=100.0
-        from cRandPerfTabs import NormalizedPerformanceTableau
+        from cRandPerfTabs import cNormalizedPerformanceTableau
         global actions
         global criteria
         global evaluation
@@ -141,7 +141,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         #self.actionsOrig = actionsOrig
 
         #  normalizing the performance tableau
-        #normPerfTab = NormalizedPerformanceTableau(perfTab)
+        #normPerfTab = cNormalizedPerformanceTableau(perfTab)
         normPerfTab = perfTab
 
         # instantiating the performance tableau part

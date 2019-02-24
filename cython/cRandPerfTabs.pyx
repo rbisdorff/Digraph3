@@ -1931,7 +1931,7 @@ class cRandomCBPerformanceTableau(cPerformanceTableau):
         # update criteria
         self.criteria = criteria
 # ----------------------
-class NormalizedPerformanceTableau(cPerformanceTableau):
+class cNormalizedPerformanceTableau(cPerformanceTableau):
     """
     specialsation of the cPerformanceTableau class for
     constructing normalized, 0 - 100, valued PerformanceTableau
