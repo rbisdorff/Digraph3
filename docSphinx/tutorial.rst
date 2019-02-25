@@ -308,7 +308,7 @@ With the ``save()`` method (see Line 3) we may keep a backup version for future 
     
 .. warning::
     
-    Notice that most Digraph class methods will ignore the reflexive couples by considering that the relation is indeterminate (the characteristic value :math:`r(x\,S\,x)` for all action *x* is put to the median, i.e. indeterminate, value) in this case.
+    Notice that most Digraph class methods will ignore the reflexive couples by considering that the relation is indeterminate (the characteristic value :math:`r(x\,S\,x)` for all action *x* is put to the median, i.e. indeterminate, value) in this case (see [BIS-2004]_)
 
 Graphviz drawings
 .................
@@ -1915,7 +1915,7 @@ To help now the CEO choosing the best site, we are going to compute pairwise out
      1. a **significant majority** of criteria concordantly supporting that site *x* is *at least as satisfactory as* site *y*, and
      2. **no considerable** counter-performance observed on any discordant criterion.
 
-The credibility of each pairwise outranking situation (see [BIS-2013]_), denoted r(*x* S *y*), is measured in a bipolar significance valuation [-100.00, 100.00], where **positive** terms r(*x* S *y*) > 0.0 indicate a **validated**, and **negative** terms r(*x* S *y*) < 0.0 indicate a **non-validated** outrankings; whereas the **median** value r(*x* S *y*) = 0.0 represents an **indeterminate** situation.   
+The credibility of each pairwise outranking situation (see [BIS-2013]_), denoted r(*x* S *y*), is measured in a bipolar significance valuation [-100.00, 100.00], where **positive** terms r(*x* S *y*) > 0.0 indicate a **validated**, and **negative** terms r(*x* S *y*) < 0.0 indicate a **non-validated** outrankings; whereas the **median** value r(*x* S *y*) = 0.0 represents an **indeterminate** situation (see [BIS-2004]_).   
 
 For computing such a bipolar valued outranking digraph from the given performance tableau *t*, we use the ``BipolarOutrankingDigraph`` constructor from the :ref:`outrankingDigraphs-label` module. The ``Digraph.showHTMLRelationTable`` method shows here the resulting bipolar-valued adjacency matrix in a system browser window.
 
@@ -3318,7 +3318,7 @@ In an oriented graph context, the internal stability condition of the kernel con
 
 A both *internally* **and** *dominant*, resp. *absorbent stable* choice is called a *dominant* or **initial**, resp. an *absorbent* or **terminal** kernel. From a topological perspective, the initial kernel concept looks from the outside of the digraph into its interior, whereas the terminal kernel looks from the interior of a digraph toward its outside. From an algebraic perspective, the initial kernel is a *prefix* operand, and the terminal kernel is a *postfix* operand in the *Berge* kernel equation (see [BIS-2006a]_ )
 
-Furthermore, as the kernel concept involves conjointly a **positive logical refutation** (the *internal stability*) and a **positive logical affirmation** (the *external stability*), it appeared rather quickly necessary in our operational developments to adopt a bipolar characteristic [-1,1] valuation domain, modelling *negation* by change of numerical sign and including explicitely a third **median** logical value (0) expressing logical **indeterminateness** (neither positive, nor negative, see [BIS-2000]_).
+Furthermore, as the kernel concept involves conjointly a **positive logical refutation** (the *internal stability*) and a **positive logical affirmation** (the *external stability*), it appeared rather quickly necessary in our operational developments to adopt a bipolar characteristic [-1,1] valuation domain, modelling *negation* by change of numerical sign and including explicitely a third **median** logical value (0) expressing logical **indeterminateness** (neither positive, nor negative, see [BIS-2000]_ and [BIS-2004]_).
 
 In such a  bipolar valued context, we call **prekernel** a choice which is **externally stable** and for which the **internal stability** condition is **valid or indeterminate**. We say that the independence condition is in this case only **weakly** valiadated. Notice that all kernels are hence prekernels, but not vice-versa.
 
@@ -3765,7 +3765,7 @@ fdp -Tpng permutationGraph.dot -o permutationGraph.png
 
     *Figure* 13a: The default permutation graph
 
-By using color sorting queues, the minimal vertex coloring for a permutation graph is computable in :math:`O(n log(n))` (see [Gol-2004]_).
+By using color sorting queues, the minimal vertex coloring for a permutation graph is computable in :math:`O(n log(n))` (see [GOL-2004]_).
 
 >>> g.computeMinimalVertexColoring(Comments=True)
 vertex 1: lightcoral
@@ -3805,7 +3805,7 @@ neato -n -Tpng perm_permutationGraph.dot -o perm_permutationGraph.png
 Properties of permutation graphs
 ................................
 
-A permutation graph is **transitively orientable**. The :py:func:`graphs.PermutationGraph.transitiveOrientation` method renders a digraph where each edge of the permutation graph is converted into an arc oriented in increasing alphabetic order of the adjacent vertices' keys (see [Gol-2004]_).
+A permutation graph is **transitively orientable**. The :py:func:`graphs.PermutationGraph.transitiveOrientation` method renders a digraph where each edge of the permutation graph is converted into an arc oriented in increasing alphabetic order of the adjacent vertices' keys (see [GOL-2004]_).
 
 This orientation is always transitive and delivers a *weak ordering* of the vertices.
     
@@ -3881,7 +3881,7 @@ Transitivity degree: 1.000
 
 The :code:`PartiallyDetermined=True` flag (see Line 1 and 5) is required here in order to orient *only* the actual edges of the graphs. Relations between vertices not linked by an edge will be put to the *indeterminate* characteristic value 0. This will allow us to compute later on convenient disjunctive digraph fusions.
 
-As both orientations are transitive indeed (see Line 3 and 7), we may conclude that the given random graph is actally a permutation graph instance. However, we still need to find now its corresponding permutation. We therefore implement a recipee given by Martin Golumbic [Gol-2004]_ p.159.
+As both orientations are transitive indeed (see Line 3 and 7), we may conclude that the given random graph is actally a permutation graph instance. However, we still need to find now its corresponding permutation. We therefore implement a recipee given by Martin Golumbic [GOL-2004]_ p.159.
 
 We will first **fuse** both *og* and *ogdual* orientations above with an **epistemic disjunction** (see the :py:func:`digraphsTools.omax` operator), hence, the partially determined orientations requested above.
 
@@ -3979,9 +3979,9 @@ A tree graph of order *n* contains *n-1* edges (see Line8 and 9) and we may dist
 
 The structure of a tree of order :math:`n > 2` is entirely characterized by a corresponding *Prüfer* **code** -ie a *list of vertices keys*- of length *n-2*. See, for instance in Line 12 the code ['v3', 'v8', 'v8', 'v3', 'v7', 'v6', 'v7'] corresponding to our sample tree graph *t*.
 
-Each position of the code indicates the parent of the remaining leaf with the smallest vertex label. Vertex *v3* is thus the parent of *v1* and we drop leaf *v1*, *v8* is now the parent of leaf *v2* and we drop *v2*, vertex *v8* is again the parent of leaf *v4* and we drop *v4*, vertex *v3* is the parent of leaf *v5* and we drop *v5*, *v7* is now the parent of leaf *v3* and we may drop *v3*, *v6* becomes the parent of leaf *v8* and we drop *v8*, *v7* becomes now the parent of leaf *v6* and we may drop *v6*. The two eventually remaining vertices, *v7* and *v9*, give the last link in the reconstructed tree (see [Bar-1991]_).  
+Each position of the code indicates the parent of the remaining leaf with the smallest vertex label. Vertex *v3* is thus the parent of *v1* and we drop leaf *v1*, *v8* is now the parent of leaf *v2* and we drop *v2*, vertex *v8* is again the parent of leaf *v4* and we drop *v4*, vertex *v3* is the parent of leaf *v5* and we drop *v5*, *v7* is now the parent of leaf *v3* and we may drop *v3*, *v6* becomes the parent of leaf *v8* and we drop *v8*, *v7* becomes now the parent of leaf *v6* and we may drop *v6*. The two eventually remaining vertices, *v7* and *v9*, give the last link in the reconstructed tree (see [BAR-1991]_).  
 
-It is as well possible to first, generate a random *Prüfer* code of length *n-2* from a set of *n* vertices and then, construct the corresponding tree of order *n* by reversing the procedure illustrated above (see [Bar-1991]_).
+It is as well possible to first, generate a random *Prüfer* code of length *n-2* from a set of *n* vertices and then, construct the corresponding tree of order *n* by reversing the procedure illustrated above (see [BAR-1991]_).
 
 >>> verticesList = ['v1','v2','v3','v4','v5','v6','v7']
 >>> n = len(verticesList)
@@ -4023,7 +4023,7 @@ Given a genuine graph, how can we recognize that it is in fact a tree instance ?
 Recognizing tree graphs
 .......................
 
-Given a graph *g* of order *n* and size *s*, the following 5 assertions *A1*, *A2*, *A3*, *A4* and *A5* are all equivalent (see [Bar-1991]_):
+Given a graph *g* of order *n* and size *s*, the following 5 assertions *A1*, *A2*, *A3*, *A4* and *A5* are all equivalent (see [BAR-1991]_):
 
     - *A1*: *g* is a tree;
     - *A2*: *g* is without (chordless) cycles and :math:`n \,=\, s + 1`;
@@ -4067,7 +4067,7 @@ Let us now turn toward a major application of tree graphs, namely *spanning tree
 Spanning trees and forests
 ..........................
 
-With the :py:class:`graphs.RandomSpanningTree` class we may generate, from a given **connected** graph *g* instance, **uniform random** instances of a **spanning tree** by using *Wilson* 's algorithm [Wil-1996]_  
+With the :py:class:`graphs.RandomSpanningTree` class we may generate, from a given **connected** graph *g* instance, **uniform random** instances of a **spanning tree** by using *Wilson* 's algorithm [WIL-1996]_  
 
 .. Note::
 
@@ -4131,7 +4131,7 @@ neato -Tpng spanningForest.dot -o spanningForest.png
 Maximum determined spanning forests
 ...................................
 
-In case of valued graphs supporting weighted edges, we may finally construct a **most determined** spanning tree (or forest if not connected) using *Kruskal* 's *greedy* **minimum-spanning-tree algorithm** [5]_ on the *dual* valuation of the graph [Kru-1956]_.
+In case of valued graphs supporting weighted edges, we may finally construct a **most determined** spanning tree (or forest if not connected) using *Kruskal* 's *greedy* **minimum-spanning-tree algorithm** [5]_ on the *dual* valuation of the graph [KRU-1956]_.
 
 We consider, for instance, a randomly valued graph with five vertices and seven edges bipolarly valued in [-1.0; 1.0]. 
 
@@ -4247,17 +4247,19 @@ References
 
 .. [BIS-2006b] R. Bisdorff (2006). On enumerating the kernels in a bipolar-valued digraph. Annales du Lamsade 6, Octobre 2006, pp. 1 - 38. Université Paris-Dauphine. ISSN 1762-455X (downloadable version `PDF file 532.2 Kb <https://leopold-loewenheim.uni.lu/bisdorff/documents/EnumKernels.pdf>`_).
 
-.. [FMCAA] O. Häggström (2002) *Finite Markov Chains and Algorithmic Applications*. Cambridge University Press.
+.. [BIS-2004] R. Bisdorff (2004) *On a natural fuzzification of Boolean logic*. In Erich Peter Klement and Endre Pap (editors), Proceedings of the 25th Linz Seminar on *Fuzzy Set Theory, Mathematics of Fuzzy Systems*. Bildungszentrum St. Magdalena, Linz (Austria), February 2004. pp. 20-26 (PDF file (133.4 Kb) for `downloading <_static/Linz2004.pdf>`_)
 
-.. [Gol-2004] M. Ch. Golumbic, *Agorithmic Graph Theory and Perfect Graphs* 2nd Ed., Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.
+.. [GOL-2004] M. Ch. Golumbic, *Agorithmic Graph Theory and Perfect Graphs* 2nd Ed., Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.
+
+.. [FMCAA] O. Häggström (2002) *Finite Markov Chains and Algorithmic Applications*. Cambridge University Press.
 
 .. [BIS-2000] R. Bisdorff (2000), Logical foundation of fuzzy preferential systems with application to the ELECTRE decision aid methods, *Computers and Operations Research*, 27:673-687 (downloadable version `PDF file 159.1Kb <https://leopold-loewenheim.uni.lu/bisdorff/documents/foundationElectre.pdf>`_).
 
-.. [Wil-1996] D. B. Wilson (1996), *Generating random spanning trees more quickly than the cover time*, Proceedings of the Twenty-eighth Annual ACM *Symposium on the Theory of Computing* (Philadelphia, PA, 1996), 296-303, ACM, New York, 1996.
+.. [WIL-1996] D. B. Wilson (1996), *Generating random spanning trees more quickly than the cover time*, Proceedings of the Twenty-eighth Annual ACM *Symposium on the Theory of Computing* (Philadelphia, PA, 1996), 296-303, ACM, New York, 1996.
 
-.. [Bar-1991] J.-P. Barthélemy and A. Guenoche (1991), *Trees and Proximities Representations*, Wiley, ISBN: 978-0471922636.
+.. [BAR-1991] J.-P. Barthélemy and A. Guenoche (1991), *Trees and Proximities Representations*, Wiley, ISBN: 978-0471922636.
 
-.. [Kru-1956] J. B. Kruskal (1956), *On the shortest spanning subtree of a graph and the traveling salesman problem*, Proceedings of the American Mathematical Society. 7: 48–50.
+.. [KRU-1956] J. B. Kruskal (1956), *On the shortest spanning subtree of a graph and the traveling salesman problem*, Proceedings of the American Mathematical Society. 7: 48–50.
 
 Footnotes
 .........
