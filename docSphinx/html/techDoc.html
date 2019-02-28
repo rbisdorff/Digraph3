@@ -3382,6 +3382,48 @@ the corresponding permutation.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="graphs.Graph.computeTransitivelyOrientedDigraph">
+<code class="descname">computeTransitivelyOrientedDigraph</code><span class="sig-paren">(</span><em>PartiallyDetermined=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.computeTransitivelyOrientedDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.computeTransitivelyOrientedDigraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a digraph where each edge of the permutation graph <em>self</em>
+is converted into an arc oriented in increasing order of the adjacent vertices’ numbers.
+If self is a PermutationGraph instance, the orientation will be transitive.</p>
+<p>The parameter <em>PartiallyDetermined</em>: {True|False (by default), converts if <em>True</em> all absent
+edges of the graph into indeterminate symmetric relations in the resulting digraph.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">og</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeTransitivelyOrientedDigraph</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">og</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">og</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Transitivity degree: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">og</span><span class="o">.</span><span class="n">transitivityDegree</span><span class="p">)</span>
+<span class="go">*------- Digraph instance description ------*</span>
+<span class="go">Instance class   : WeakOrder</span>
+<span class="go">Instance name    : trans_oriented_randomGraph</span>
+<span class="go">Digraph Order      : 6</span>
+<span class="go">Digraph Size       : 7</span>
+<span class="go">Valuation domain : [-1.00 - 1.00]</span>
+<span class="go">Determinateness  : 46.667</span>
+<span class="go">Attributes       : [&#39;name&#39;, &#39;order&#39;, &#39;actions&#39;, &#39;valuationdomain&#39;, &#39;relation&#39;,</span>
+<span class="go">                   &#39;gamma&#39;, &#39;notGamma&#39;, &#39;size&#39;, &#39;transitivityDegree&#39;]</span>
+<span class="go">Transitivity degree: 1.000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gd</span> <span class="o">=</span> <span class="o">-</span><span class="n">g</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ogd</span> <span class="o">=</span> <span class="n">gd</span><span class="o">.</span><span class="n">computeTransitivelyOrientedDigraph</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">ogd</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">odg</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dual transitivity degree: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">ogd</span><span class="o">.</span><span class="n">transitivityDegree</span><span class="p">)</span>
+<span class="go">*------- Digraph instance description ------*</span>
+<span class="go">Instance class   : WeakOrder</span>
+<span class="go">Instance name    : trans_oriented_dual_randomGraph</span>
+<span class="go">Digraph Order      : 6</span>
+<span class="go">Digraph Size       : 8</span>
+<span class="go">Valuation domain : [-1.00 - 1.00]</span>
+<span class="go">Determinateness  : 53.333</span>
+<span class="go">Attributes       : [&#39;name&#39;, &#39;order&#39;, &#39;actions&#39;, &#39;valuationdomain&#39;, &#39;relation&#39;,</span>
+<span class="go">                    &#39;gamma&#39;, &#39;notGamma&#39;, &#39;size&#39;, &#39;transitivityDegree&#39;]</span>
+<span class="go">Dual transitivity degree: 1.000</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
 <dt id="graphs.Graph.depthFirstSearch">
 <code class="descname">depthFirstSearch</code><span class="sig-paren">(</span><em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.depthFirstSearch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.depthFirstSearch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Depth first search through a graph in lexicographical order
@@ -3440,6 +3482,15 @@ with neighborhoods of a graph instance:</p>
 <dt id="graphs.Graph.graph2Digraph">
 <code class="descname">graph2Digraph</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.graph2Digraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.graph2Digraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts a Graph object into a symmetric Digraph object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="graphs.Graph.isComparabilityGraph">
+<code class="descname">isComparabilityGraph</code><span class="sig-paren">(</span><em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.isComparabilityGraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.isComparabilityGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verifies if the graph instance is a comparability graph.
+If yes, a decomposition of the edges is stored in self.edgeRanks.</p>
+<p><em>Source</em>: M. Ch. Golumbic (2004) Algorithmic Graph Thery and Perfect Graphs,
+Annals of Discrete Mathematics 57, Elsevier, p. 129-132.</p>
 </dd></dl>
 
 <dl class="method">

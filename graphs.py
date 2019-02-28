@@ -811,20 +811,18 @@ class Graph(object):
         n = len(actionKeysList)
         for i in range(n):
             x = actionKeysList[i]
-            for j in range(i,n):
+            relation[x][x] = Med
+            for j in range(i+1,n):
                 y = actionKeysList[j]
-                if x == y:
-                    relation[x][y] = Med
-                else:
-                    if self.edges[frozenset([x,y])] > Med:
-                            relation[x][y] = Max
-                            relation[y][x] = Min
-                    elif self.edges[frozenset([x,y])] < Med:
-                        relation[x][y] = Min
+                if self.edges[frozenset([x,y])] > Med:
+                        relation[x][y] = Max
                         relation[y][x] = Min
-                    else:
-                        relation[x][y] = Med
-                        relation[y][x] = Med
+                elif self.edges[frozenset([x,y])] < Med:
+                    relation[x][y] = Min
+                    relation[y][x] = Min
+                else:
+                    relation[x][y] = Med
+                    relation[y][x] = Med
                         
         if PartiallyDetermined:
             for i in range(n):
@@ -841,6 +839,95 @@ class Graph(object):
         g.notGamma = g.notGammaSets()
         g.transitivityDegree = g.computeTransitivityDegree()
         return g
+
+    def computeTransitivelyOrientedDigraph(self,PartiallyDetermined=False):
+        """
+        Renders a digraph where each edge of the permutation graph *self*
+        is converted into an arc oriented in increasing order of the adjacent vertices' numbers.
+        If self is a PermutationGraph instance, the orientation will be transitive.
+
+        The parameter *PartiallyDetermined*: {True|False (by default), converts if *True* all absent
+        edges of the graph into indeterminate symmetric relations in the resulting digraph.
+     
+        >>> g = RandomGraph(order=6,edgeProbability=0.5,seed=100)
+        >>> og = g.computeTransitivelyOrientedDigraph()
+        >>> if og != None:
+        ...     print(og)
+        ...     print('Transitivity degree: %.3f' % og.transitivityDegree)
+        *------- Digraph instance description ------*
+        Instance class   : WeakOrder
+        Instance name    : trans_oriented_randomGraph
+        Digraph Order      : 6
+        Digraph Size       : 7
+        Valuation domain : [-1.00 - 1.00]
+        Determinateness  : 46.667
+        Attributes       : ['name', 'order', 'actions', 'valuationdomain', 'relation',
+                           'gamma', 'notGamma', 'size', 'transitivityDegree']
+        Transitivity degree: 1.000
+        >>> gd = -g
+        >>> ogd = gd.computeTransitivelyOrientedDigraph()
+        >>> if ogd != None:
+        ...     print(odg)
+        ...     print('Dual transitivity degree: %.3f' % ogd.transitivityDegree)
+        *------- Digraph instance description ------*
+        Instance class   : WeakOrder
+        Instance name    : trans_oriented_dual_randomGraph
+        Digraph Order      : 6
+        Digraph Size       : 8
+        Valuation domain : [-1.00 - 1.00]
+        Determinateness  : 53.333
+        Attributes       : ['name', 'order', 'actions', 'valuationdomain', 'relation',
+                            'gamma', 'notGamma', 'size', 'transitivityDegree']
+        Dual transitivity degree: 1.000
+        """
+        from digraphs import EmptyDigraph
+        from weakOrders import WeakOrder
+        from copy import deepcopy
+
+        if not self.isComparabilityGraph():
+            print('The graph %s does not admit a transitive orientation.' % self.name)
+        else:
+            g = EmptyDigraph(order=self.order)
+            g.__class__ = WeakOrder
+            g.name = 'trans_oriented_'+self.name
+            g.actions = deepcopy(self.vertices)
+            g.valuationdomain = deepcopy(self.valuationDomain)
+            Max = g.valuationdomain['max']
+            Min = g.valuationdomain['min']
+            Med = g.valuationdomain['med']
+            relation = {}
+            actionKeysList = [a for a in g.actions]
+            for x in actionKeysList:
+                relation[x] = {}
+                for y in actionKeysList:
+                    relation[x][y] = Med
+            n = len(actionKeysList)
+            for i in range(n):
+                x = actionKeysList[i]
+                relation[x][x] = Med
+                for j in range(n):
+                    y = actionKeysList[j]
+                    if self.edgeRanks[x,y] > 0:
+                            relation[x][y] = Max
+                    elif self.edgeRanks[x,y] < 0:
+                        relation[x][y] = Min
+                    else:
+                        relation[x][y] = Med            
+            if PartiallyDetermined:
+                for i in range(n):
+                    x = actionKeysList[i]
+                    for j in range(i+1,n):
+                        y = actionKeysList[j]
+                        if relation[x][y] < Med and relation[y][x] < Med:
+                            relation[x][y] = Med
+                            relation[y][x] = Med
+            g.relation = relation
+            g.size = g.computeSize()
+            g.gamma = g.gammaSets()
+            g.notGamma = g.notGammaSets()
+            g.transitivityDegree = g.computeTransitivityDegree()
+            return g
+
 
     def computePermutation(self,Debug=True):
         """
@@ -1265,7 +1352,9 @@ class Graph(object):
                     Sxchoice = S[0] | x[0]
                     Sx = [Sxchoice,Sxgam,Sxindep]
                     yield Sx
-                    
+
+
+                 
     def graph2Digraph(self):
         """
         Converts a Graph object into a symmetric Digraph object.
@@ -1293,6 +1382,95 @@ class Graph(object):
         dg.gamma = dg.gammaSets()
         dg.notGamma = dg.notGammaSets()
         return dg
+
+    def isComparabilityGraph(self,Debug=False):
+        """
+        Verifies if the graph instance is a comparability graph.
+        If yes, a decomposition of the edges is stored in self.edgeRanks. 
+        
+        *Source*: M. Ch. Golumbic (2004) Algorithmic Graph Thery and Perfect Graphs,
+        Annals of Discrete Mathematics 57, Elsevier, p. 129-132.
+        """
+        global rank,IsComparabilityGraph
+        def _explore(arc):
+            global IsComparabilityGraph
+            i = arc[0]
+            j = arc[1]
+            if Debug:
+                print('arc', arc, rank, self.gamma[i], self.gamma[j])
+
+            for m in self.gamma[i]:
+                if Debug:
+                    print(i,j,m,self.gamma[j],rank[(j,m)])
+                if (m not in self.gamma[j]) or (abs(rank[(j,m)]) < k): 
+                    if rank[(i,m)] == 999:
+                        rank[(i,m)] = k
+                        rank[(m,i)] = -k
+                        _explore((i,m))
+                    elif rank[(i,m)] == -k:
+                        rank[(i,m)] = k
+                        IsComparabilityGraph = False
+                        if Debug:
+                            print('is comp?',IsComparabilityGraph)
+                        return
+                        #_explore((i,m))
+                    
+            for m in self.gamma[j]:
+                if Debug:
+                    print(i,j,m,self.gamma[i],rank[(i,m)])
+                if (m not in self.gamma[i]) or (abs(rank[(i,m)]) < k):
+                    if rank[(m,j)] == 999:
+                        rank[(m,j)] = k
+                        rank[(j,m)] = -k
+                        _explore((m,j))
+                    elif rank[(m,j)] == -k:
+                        rank[(m,j)] = k
+                        IsComparabilityGraph = False
+                        if Debug:
+                            print('is comp ?',IsComparabilityGraph)
+                        return
+                        #_explore((m,j))
+                      
+            if Debug:
+                print(arc,rank,IsComparabilityGraph)
+
+        # initializing
+        IsComparabilityGraph = True
+        k = 0
+        rank = {}
+        n = len(self.vertices)
+        verticesList = list(self.vertices.keys())
+        for i in range(n):
+            vi = verticesList[i]
+            rank[(vi,vi)] = 0
+            for j in range(i+1,n):
+                vi = verticesList[i]
+                vj = verticesList[j]
+                edgeKey = frozenset([vi,vj])
+                if self.edges[edgeKey] > Decimal('0'):
+                    rank[(vi,vj)] = 999
+                    rank[(vj,vi)] = 999
+                else:
+                    rank[(vi,vj)] = 0
+                    rank[(vj,vi)] = 0
+        #exploring all positive edges
+        for edge in self.edges:
+            arc = tuple(edge)
+            if self.edges[edge] > Decimal('0'):  
+                if rank[arc] == 999:
+                    k += 1
+                    rank[arc] = k
+                    rank[tuple(reversed(arc))] = -k
+                    _explore(arc)
+            if Debug:
+                print('===>>>',edge,'=',self.edges[edge],rank)
+                
+        # storing the edge decomposition
+        self.IsComparabilityGraph = IsComparabilityGraph
+        if IsComparabilityGraph:
+            self.edgeRanks = rank
+
+        return IsComparabilityGraph
 
     def isConnected(self):
         """
@@ -3813,15 +3991,25 @@ class RandomPermutationGraph(PermutationGraph):
 # --------------testing the module ----
 if __name__ == '__main__':
 
-    g = PermutationGraph(permutation=[4,3,6,1,5,2,7,9,8])
+    #g = PermutationGraph(permutation=[4,3,6,1,5,2])
+    g = CycleGraph(order=6)
+    #g = Graph('test')
     print(g)
-    g.exportGraphViz()
-    g.exportPermutationGraphViz()
-    g.computeMinimalVertexColoring(Comments=True,Debug=True)
-    g.exportGraphViz(WithVertexColoring=True)
+    #g.exportGraphViz()
+    #g.exportPermutationGraphViz()
+    #g.computeMinimalVertexColoring(Comments=True,Debug=True)
+    #g.exportGraphViz(WithVertexColoring=True)
 
-    b = BestDeterminedSpanningForest(g)
-    print(b)
+    #b = BestDeterminedSpanningForest(g)
+    #print(b)
+    if g.isComparabilityGraph(Debug=True):
+        print('Comparability Graph ? = True',g.edgeRanks)
+        dg = g.computeTransitivelyOrientedDigraph()
+        print(dg)
+        print(dg.computeTransitivityDegree())
+        dg.exportGraphViz()
+    else:
+        print('Comparability Graph ? = False')
     
 ##    rg = RandomPermutationGraph(order=6,seed=None)
 ##    print(rg)

@@ -858,20 +858,18 @@
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actionKeysList</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
             <span class="n">x</span> <span class="o">=</span> <span class="n">actionKeysList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
                 <span class="n">y</span> <span class="o">=</span> <span class="n">actionKeysList</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-                <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">:</span>
-                    <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="nb">frozenset</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">])]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
-                            <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Max</span>
-                            <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
-                    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="nb">frozenset</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">])]</span> <span class="o">&lt;</span> <span class="n">Med</span><span class="p">:</span>
-                        <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="nb">frozenset</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">])]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
+                        <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Max</span>
                         <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
-                        <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
+                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="nb">frozenset</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">])]</span> <span class="o">&lt;</span> <span class="n">Med</span><span class="p">:</span>
+                    <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
+                    <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
+                    <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
                         
         <span class="k">if</span> <span class="n">PartiallyDetermined</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -888,6 +886,95 @@
         <span class="n">g</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
         <span class="n">g</span><span class="o">.</span><span class="n">transitivityDegree</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">g</span></div>
+
+<div class="viewcode-block" id="Graph.computeTransitivelyOrientedDigraph"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeTransitivelyOrientedDigraph">[docs]</a>    <span class="k">def</span> <span class="nf">computeTransitivelyOrientedDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders a digraph where each edge of the permutation graph *self*</span>
+<span class="sd">        is converted into an arc oriented in increasing order of the adjacent vertices&#39; numbers.</span>
+<span class="sd">        If self is a PermutationGraph instance, the orientation will be transitive.</span>
+
+<span class="sd">        The parameter *PartiallyDetermined*: {True|False (by default), converts if *True* all absent</span>
+<span class="sd">        edges of the graph into indeterminate symmetric relations in the resulting digraph.</span>
+<span class="sd">     </span>
+<span class="sd">        &gt;&gt;&gt; g = RandomGraph(order=6,edgeProbability=0.5,seed=100)</span>
+<span class="sd">        &gt;&gt;&gt; og = g.computeTransitivelyOrientedDigraph()</span>
+<span class="sd">        &gt;&gt;&gt; if og != None:</span>
+<span class="sd">        ...     print(og)</span>
+<span class="sd">        ...     print(&#39;Transitivity degree: %.3f&#39; % og.transitivityDegree)</span>
+<span class="sd">        *------- Digraph instance description ------*</span>
+<span class="sd">        Instance class   : WeakOrder</span>
+<span class="sd">        Instance name    : trans_oriented_randomGraph</span>
+<span class="sd">        Digraph Order      : 6</span>
+<span class="sd">        Digraph Size       : 7</span>
+<span class="sd">        Valuation domain : [-1.00 - 1.00]</span>
+<span class="sd">        Determinateness  : 46.667</span>
+<span class="sd">        Attributes       : [&#39;name&#39;, &#39;order&#39;, &#39;actions&#39;, &#39;valuationdomain&#39;, &#39;relation&#39;,</span>
+<span class="sd">                           &#39;gamma&#39;, &#39;notGamma&#39;, &#39;size&#39;, &#39;transitivityDegree&#39;]</span>
+<span class="sd">        Transitivity degree: 1.000</span>
+<span class="sd">        &gt;&gt;&gt; gd = -g</span>
+<span class="sd">        &gt;&gt;&gt; ogd = gd.computeTransitivelyOrientedDigraph()</span>
+<span class="sd">        &gt;&gt;&gt; if ogd != None:</span>
+<span class="sd">        ...     print(odg)</span>
+<span class="sd">        ...     print(&#39;Dual transitivity degree: %.3f&#39; % ogd.transitivityDegree)</span>
+<span class="sd">        *------- Digraph instance description ------*</span>
+<span class="sd">        Instance class   : WeakOrder</span>
+<span class="sd">        Instance name    : trans_oriented_dual_randomGraph</span>
+<span class="sd">        Digraph Order      : 6</span>
+<span class="sd">        Digraph Size       : 8</span>
+<span class="sd">        Valuation domain : [-1.00 - 1.00]</span>
+<span class="sd">        Determinateness  : 53.333</span>
+<span class="sd">        Attributes       : [&#39;name&#39;, &#39;order&#39;, &#39;actions&#39;, &#39;valuationdomain&#39;, &#39;relation&#39;,</span>
+<span class="sd">                            &#39;gamma&#39;, &#39;notGamma&#39;, &#39;size&#39;, &#39;transitivityDegree&#39;]</span>
+<span class="sd">        Dual transitivity degree: 1.000</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">EmptyDigraph</span>
+        <span class="kn">from</span> <span class="nn">weakOrders</span> <span class="k">import</span> <span class="n">WeakOrder</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isComparabilityGraph</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The graph </span><span class="si">%s</span><span class="s1"> does not admit a transitive orientation.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">g</span> <span class="o">=</span> <span class="n">EmptyDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">)</span>
+            <span class="n">g</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">WeakOrder</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;trans_oriented_&#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">)</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valuationDomain</span><span class="p">)</span>
+            <span class="n">Max</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
+            <span class="n">Min</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
+            <span class="n">Med</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
+            <span class="n">relation</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">actionKeysList</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionKeysList</span><span class="p">:</span>
+                <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actionKeysList</span><span class="p">:</span>
+                    <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actionKeysList</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">actionKeysList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+                    <span class="n">y</span> <span class="o">=</span> <span class="n">actionKeysList</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edgeRanks</span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Max</span>
+                    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">edgeRanks</span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>            
+            <span class="k">if</span> <span class="n">PartiallyDetermined</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+                    <span class="n">x</span> <span class="o">=</span> <span class="n">actionKeysList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+                        <span class="n">y</span> <span class="o">=</span> <span class="n">actionKeysList</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                        <span class="k">if</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Med</span> <span class="ow">and</span> <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Med</span><span class="p">:</span>
+                            <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
+                            <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">relation</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeSize</span><span class="p">()</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">transitivityDegree</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">g</span></div>
+
 
 <div class="viewcode-block" id="Graph.computePermutation"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computePermutation">[docs]</a>    <span class="k">def</span> <span class="nf">computePermutation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1312,7 +1399,9 @@
                     <span class="n">Sxchoice</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">|</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                     <span class="n">Sx</span> <span class="o">=</span> <span class="p">[</span><span class="n">Sxchoice</span><span class="p">,</span><span class="n">Sxgam</span><span class="p">,</span><span class="n">Sxindep</span><span class="p">]</span>
                     <span class="k">yield</span> <span class="n">Sx</span></div>
-                    
+
+
+                 
 <div class="viewcode-block" id="Graph.graph2Digraph"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.graph2Digraph">[docs]</a>    <span class="k">def</span> <span class="nf">graph2Digraph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Converts a Graph object into a symmetric Digraph object.</span>
@@ -1340,6 +1429,95 @@
         <span class="n">dg</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="n">dg</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="n">dg</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="n">dg</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">dg</span></div>
+
+<div class="viewcode-block" id="Graph.isComparabilityGraph"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.isComparabilityGraph">[docs]</a>    <span class="k">def</span> <span class="nf">isComparabilityGraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Verifies if the graph instance is a comparability graph.</span>
+<span class="sd">        If yes, a decomposition of the edges is stored in self.edgeRanks. </span>
+<span class="sd">        </span>
+<span class="sd">        *Source*: M. Ch. Golumbic (2004) Algorithmic Graph Thery and Perfect Graphs,</span>
+<span class="sd">        Annals of Discrete Mathematics 57, Elsevier, p. 129-132.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">global</span> <span class="n">rank</span><span class="p">,</span><span class="n">IsComparabilityGraph</span>
+        <span class="k">def</span> <span class="nf">_explore</span><span class="p">(</span><span class="n">arc</span><span class="p">):</span>
+            <span class="k">global</span> <span class="n">IsComparabilityGraph</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">arc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">arc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;arc&#39;</span><span class="p">,</span> <span class="n">arc</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+
+            <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">rank</span><span class="p">[(</span><span class="n">j</span><span class="p">,</span><span class="n">m</span><span class="p">)])</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">m</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">rank</span><span class="p">[(</span><span class="n">j</span><span class="p">,</span><span class="n">m</span><span class="p">)])</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">):</span> 
+                    <span class="k">if</span> <span class="n">rank</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">m</span><span class="p">)]</span> <span class="o">==</span> <span class="mi">999</span><span class="p">:</span>
+                        <span class="n">rank</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">m</span><span class="p">)]</span> <span class="o">=</span> <span class="n">k</span>
+                        <span class="n">rank</span><span class="p">[(</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">)]</span> <span class="o">=</span> <span class="o">-</span><span class="n">k</span>
+                        <span class="n">_explore</span><span class="p">((</span><span class="n">i</span><span class="p">,</span><span class="n">m</span><span class="p">))</span>
+                    <span class="k">elif</span> <span class="n">rank</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">m</span><span class="p">)]</span> <span class="o">==</span> <span class="o">-</span><span class="n">k</span><span class="p">:</span>
+                        <span class="n">rank</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">m</span><span class="p">)]</span> <span class="o">=</span> <span class="n">k</span>
+                        <span class="n">IsComparabilityGraph</span> <span class="o">=</span> <span class="kc">False</span>
+                        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;is comp?&#39;</span><span class="p">,</span><span class="n">IsComparabilityGraph</span><span class="p">)</span>
+                        <span class="k">return</span>
+                        <span class="c1">#_explore((i,m))</span>
+                    
+            <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">rank</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">m</span><span class="p">)])</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">m</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">rank</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">m</span><span class="p">)])</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">rank</span><span class="p">[(</span><span class="n">m</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span> <span class="o">==</span> <span class="mi">999</span><span class="p">:</span>
+                        <span class="n">rank</span><span class="p">[(</span><span class="n">m</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span> <span class="o">=</span> <span class="n">k</span>
+                        <span class="n">rank</span><span class="p">[(</span><span class="n">j</span><span class="p">,</span><span class="n">m</span><span class="p">)]</span> <span class="o">=</span> <span class="o">-</span><span class="n">k</span>
+                        <span class="n">_explore</span><span class="p">((</span><span class="n">m</span><span class="p">,</span><span class="n">j</span><span class="p">))</span>
+                    <span class="k">elif</span> <span class="n">rank</span><span class="p">[(</span><span class="n">m</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span> <span class="o">==</span> <span class="o">-</span><span class="n">k</span><span class="p">:</span>
+                        <span class="n">rank</span><span class="p">[(</span><span class="n">m</span><span class="p">,</span><span class="n">j</span><span class="p">)]</span> <span class="o">=</span> <span class="n">k</span>
+                        <span class="n">IsComparabilityGraph</span> <span class="o">=</span> <span class="kc">False</span>
+                        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;is comp ?&#39;</span><span class="p">,</span><span class="n">IsComparabilityGraph</span><span class="p">)</span>
+                        <span class="k">return</span>
+                        <span class="c1">#_explore((m,j))</span>
+                      
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span><span class="n">rank</span><span class="p">,</span><span class="n">IsComparabilityGraph</span><span class="p">)</span>
+
+        <span class="c1"># initializing</span>
+        <span class="n">IsComparabilityGraph</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">rank</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">)</span>
+        <span class="n">verticesList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">vi</span> <span class="o">=</span> <span class="n">verticesList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">rank</span><span class="p">[(</span><span class="n">vi</span><span class="p">,</span><span class="n">vi</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+                <span class="n">vi</span> <span class="o">=</span> <span class="n">verticesList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">vj</span> <span class="o">=</span> <span class="n">verticesList</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="n">edgeKey</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">([</span><span class="n">vi</span><span class="p">,</span><span class="n">vj</span><span class="p">])</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="n">edgeKey</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">):</span>
+                    <span class="n">rank</span><span class="p">[(</span><span class="n">vi</span><span class="p">,</span><span class="n">vj</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">999</span>
+                    <span class="n">rank</span><span class="p">[(</span><span class="n">vj</span><span class="p">,</span><span class="n">vi</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">999</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">rank</span><span class="p">[(</span><span class="n">vi</span><span class="p">,</span><span class="n">vj</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+                    <span class="n">rank</span><span class="p">[(</span><span class="n">vj</span><span class="p">,</span><span class="n">vi</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1">#exploring all positive edges</span>
+        <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">:</span>
+            <span class="n">arc</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="n">edge</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">):</span>  
+                <span class="k">if</span> <span class="n">rank</span><span class="p">[</span><span class="n">arc</span><span class="p">]</span> <span class="o">==</span> <span class="mi">999</span><span class="p">:</span>
+                    <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">rank</span><span class="p">[</span><span class="n">arc</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span>
+                    <span class="n">rank</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">arc</span><span class="p">))]</span> <span class="o">=</span> <span class="o">-</span><span class="n">k</span>
+                    <span class="n">_explore</span><span class="p">(</span><span class="n">arc</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;===&gt;&gt;&gt;&#39;</span><span class="p">,</span><span class="n">edge</span><span class="p">,</span><span class="s1">&#39;=&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="n">edge</span><span class="p">],</span><span class="n">rank</span><span class="p">)</span>
+                
+        <span class="c1"># storing the edge decomposition</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">IsComparabilityGraph</span> <span class="o">=</span> <span class="n">IsComparabilityGraph</span>
+        <span class="k">if</span> <span class="n">IsComparabilityGraph</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">edgeRanks</span> <span class="o">=</span> <span class="n">rank</span>
+
+        <span class="k">return</span> <span class="n">IsComparabilityGraph</span></div>
 
 <div class="viewcode-block" id="Graph.isConnected"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.isConnected">[docs]</a>    <span class="k">def</span> <span class="nf">isConnected</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -3860,15 +4038,25 @@
 <span class="c1"># --------------testing the module ----</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
 
-    <span class="n">g</span> <span class="o">=</span> <span class="n">PermutationGraph</span><span class="p">(</span><span class="n">permutation</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
+    <span class="c1">#g = PermutationGraph(permutation=[4,3,6,1,5,2])</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">CycleGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+    <span class="c1">#g = Graph(&#39;test&#39;)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">exportPermutationGraphViz</span><span class="p">()</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">computeMinimalVertexColoring</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">WithVertexColoring</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1">#g.exportGraphViz()</span>
+    <span class="c1">#g.exportPermutationGraphViz()</span>
+    <span class="c1">#g.computeMinimalVertexColoring(Comments=True,Debug=True)</span>
+    <span class="c1">#g.exportGraphViz(WithVertexColoring=True)</span>
 
-    <span class="n">b</span> <span class="o">=</span> <span class="n">BestDeterminedSpanningForest</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="c1">#b = BestDeterminedSpanningForest(g)</span>
+    <span class="c1">#print(b)</span>
+    <span class="k">if</span> <span class="n">g</span><span class="o">.</span><span class="n">isComparabilityGraph</span><span class="p">(</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Comparability Graph ? = True&#39;</span><span class="p">,</span><span class="n">g</span><span class="o">.</span><span class="n">edgeRanks</span><span class="p">)</span>
+        <span class="n">dg</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeTransitivelyOrientedDigraph</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">dg</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">())</span>
+        <span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Comparability Graph ? = False&#39;</span><span class="p">)</span>
     
 <span class="c1">##    rg = RandomPermutationGraph(order=6,seed=None)</span>
 <span class="c1">##    print(rg)</span>

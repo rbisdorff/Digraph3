@@ -4237,9 +4237,9 @@ References
 
 .. [BIS-2008] R. Bisdorff, P. Meyer and M. Roubens (2008) "RUBIS: a bipolar-valued outranking method for the choice problem". 4OR, *A Quarterly Journal of Operations Research* Springer-Verlag, Volume 6,  Number 2 pp. 143-165. (Online) Electronic version: DOI: 10.1007/s10288-007-0045-5 (downloadable preliminary version `PDF file 271.5Kb <https://leopold-loewenheim.uni.lu/bisdorff/documents/HyperKernels.pdf>`_) 
 
-.. [ISOMIS-08] R. Bisdorff and J.L. Marichal (2008). Counting non-isomorphic maximal independent sets of the n-cycle graph. *Journal of Integer Sequences*, Vol. 11 Article 08.5.7 (`openly accessible here <https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html>`_)
+.. [ISOMIS-08] R. Bisdorff and J.L. Marichal (2008). Counting non-isomorphic maximal independent sets of the n-cycle graph. *Journal of Integer Sequences*, Vol. 11 Article 08.5.7 (`openly accessible here <https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html>`_)  
 
-.. [NR3-2007] W.H. Press, S.A. Teukolsky, W.T. Vetterling and B.P. Flannery (2007) "Single-Pass Estimation of Arbitrary Quantiles" Section 5.8.2 in *Numerical Recipes: The Art of Scientific Computing 3rd Ed.*, Cambridge University Press, pp 435-438.		     
+.. [NR3-2007] W.H. Press, S.A. Teukolsky, W.T. Vetterling and B.P. Flannery (2007) "Single-Pass Estimation of Arbitrary Quantiles" Section 5.8.2 in *Numerical Recipes: The Art of Scientific Computing 3rd Ed.*, Cambridge University Press, pp 435-438.
 
 .. [CHAM-2006] J.M. Chambers, D.A. James, D. Lambert and S. Vander Wiel (2006) "Monitoring Networked Applications with Incremental Quantile Estimation". *Statistical Science*, Vol. 21, No.4, pp.463-475. DOI: 10 12140/088342306000000583.
 
