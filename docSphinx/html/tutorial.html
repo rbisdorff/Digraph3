@@ -6104,7 +6104,7 @@ best covered terminal kernel</span></p>
 <a class="reference internal image-reference" href="_images/randomGraph4335.png"><img alt="Random graph" src="_images/randomGraph4335.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text"><em>Figure</em> 15a: Random graph of order 8 generated with edge probility 0.4</span></p>
 </div>
-<p>If the graph instance <em>g</em> is a permutation graph, <em>g</em> and its dual <em>dg = -g</em> must be <em>transitively orientable</em>, ie <strong>comparability graphs</strong> (see <a class="reference internal" href="#gol-2004" id="id59">[GOL-2004]</a>). with the <a class="reference internal" href="techDoc.html#graphs.Graph.isComparabilityGraph" title="graphs.Graph.isComparabilityGraph"><code class="xref py py-func docutils literal"><span class="pre">graphs.Graph.isComparabilityGraph()</span></code></a> test, we may easily check this fact. This method proceeds indeed by trying to construct a ranked equivalence class decomposition of a given graph instance and, if successful, stores the decomposition ranks into the <em>self.edgeRanks</em> attribute (see <a class="reference internal" href="#gol-2004" id="id60">[GOL-2004]</a> p.129-132).</p>
+<p>If the graph instance <em>g</em> is a permutation graph, <em>g</em> and its dual <em>dg = -g</em> must be <em>transitively orientable</em>, ie <strong>comparability graphs</strong> (see <a class="reference internal" href="#gol-2004" id="id59">[GOL-2004]</a>). With the <a class="reference internal" href="techDoc.html#graphs.Graph.isComparabilityGraph" title="graphs.Graph.isComparabilityGraph"><code class="xref py py-func docutils literal"><span class="pre">graphs.Graph.isComparabilityGraph()</span></code></a> test, we may easily check this fact. This method proceeds indeed by trying to construct a ranked equivalence class decomposition of a given graph instance and, if successful, stores the decomposition ranks into the <em>self.edgeRanks</em> attribute (see <a class="reference internal" href="#gol-2004" id="id60">[GOL-2004]</a> p.129-132).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -6155,7 +6155,7 @@ best covered terminal kernel</span></p>
 <span class="go">[&#39;v8&#39;, &#39;v7&#39;, &#39;v6&#39;, &#39;v5&#39;, &#39;v4&#39;, &#39;v3&#39;, &#39;v2&#39;, &#39;v1&#39;]</span>
 </pre></div>
 </td></tr></table></div>
-<p>Vertex ‘v8’ is put from position 5 to position 1, vertex ‘v7’ is put from position 2 to position 2, vertex ‘v6’ from position 4 to position 3, ‘vertex ‘v5’ from position 1 to position 4, etc … . We generate these position swapping for all vertices and obtain thus the required permutation (see Line 5 below).</p>
+<p>Vertex ‘v8’ is put from position 5 to position 1, vertex ‘v7’ is put from position 2 to position 2, vertex ‘v6’ from position 4 to position 3, ‘vertex ‘v5’ from position 1 to position 4, etc … . We generate these position swappings for all vertices and obtain thus the required permutation (see Line 5 below).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -6167,7 +6167,7 @@ best covered terminal kernel</span></p>
 <span class="go">[5, 2, 4, 1, 6, 7, 8, 3]</span>
 </pre></div>
 </td></tr></table></div>
-<p>It is worthwhile noticing by the way that <em>transitive orientations</em> of a given graph and its dual are usually <strong>not unique</strong>. And, so may also be the resulting permutations. However, they all correspond to isomorphic graphs (see <a class="reference internal" href="#gol-2004" id="id62">[GOL-2004]</a>). In our case here, we observe two different permutations and their reverses:</p>
+<p>It is worthwhile noticing by the way that <em>transitive orientations</em> of a given graph and its dual are usually <strong>not unique</strong> and, so may also be the resulting permutations. However, they all correspond to isomorphic graphs (see <a class="reference internal" href="#gol-2004" id="id62">[GOL-2004]</a>). In our case here, we observe two different permutations and their reverses:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -6197,43 +6197,21 @@ best covered terminal kernel</span></p>
 <span class="go">[2, 3, 4, 8, 6, 1, 7, 5]</span>
 </pre></div>
 </td></tr></table></div>
-<p>We may finally check, for instance, that the permutation [2, 3, 4, 8, 6, 1, 7, 5] we have generated here (see Line 4 above) will correctly generate a corresponding permutation graph which is isomorphic to the given random graph <em>g</em>.</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gtest</span> <span class="o">=</span> <span class="n">PermutationGraph</span><span class="p">(</span><span class="n">permutation</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gtest</span>
-<span class="go">*------- Graph instance description ------*</span>
-<span class="go">Instance class   : PermutationGraph</span>
-<span class="go">Instance name    : permutationGraph</span>
-<span class="go">Graph Order      : 8</span>
-<span class="go">Permutation      : [2, 3, 4, 8, 6, 1, 7, 5]</span>
-<span class="go">Graph Size       : 9</span>
-<span class="go">Valuation domain : [-1.00; 1.00]</span>
-<span class="go">Attributes       : [&#39;name&#39;, &#39;vertices&#39;, &#39;order&#39;, &#39;permutation&#39;,</span>
-<span class="go">                    &#39;valuationDomain&#39;, &#39;edges&#39;, &#39;size&#39;, &#39;gamma&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gtest</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;permutationGraph4335&#39;</span><span class="p">)</span>
-<span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
-<span class="go">Exporting to permutationGraph4335.dot</span>
-<span class="go">fdp -Tpng permutationGraph4335.dot -o permutationGraph4335.png</span>
+<p>We may finally check, for instance, that the permutations [2, 3, 4, 8, 6, 1, 7, 5] and [4, 2, 8, 3, 1, 5, 6, 7], we have generated above, will correctly generate corresponding isomorphic permutation graphs.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gtesta</span> <span class="o">=</span> <span class="n">PermutationGraph</span><span class="p">(</span><span class="n">permutation</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gtestb</span> <span class="o">=</span> <span class="n">PermutationGraph</span><span class="p">(</span><span class="n">permutation</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gtesta</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;gtesta&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gtestb</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;gtesta&#39;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
 <div class="figure align-center" id="id95">
-<a class="reference internal image-reference" href="_images/permutationGraph4335.png"><img alt="The isomorphic permutation graph" src="_images/permutationGraph4335.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-text"><em>Figure</em> 15b: Permutation graph obtained from [2, 3, 4, 8, 6, 1, 7, 5]</span></p>
+<a class="reference internal image-reference" href="_images/isomorphicPerms.png"><img alt="Isomorphic permutation graphs" src="_images/isomorphicPerms.png" style="width: 700px;" /></a>
+<p class="caption"><span class="caption-text"><em>Figure</em> 15b: Isomorphic permutation graphs</span></p>
 </div>
-<p>And, we recover indeed an <em>isomorphic copy</em> of the original random graph (see Fig. 15a).</p>
+<p>And, we recover indeed <em>isomorphic copies</em> of the original random graph (see Fig. 15a).</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Tutorials of the Digraph3 resources</span></a></p>
 </div>
 </div>

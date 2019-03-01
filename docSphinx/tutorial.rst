@@ -3873,7 +3873,7 @@ Attributes       : ['name', 'order', 'vertices', 'valuationDomain', 'seed',
 
     *Figure* 15a: Random graph of order 8 generated with edge probility 0.4
 
-If the graph instance *g* is a permutation graph, *g* and its dual *dg = -g* must be *transitively orientable*, ie **comparability graphs** (see [GOL-2004]_). with the :py:func:`graphs.Graph.isComparabilityGraph` test, we may easily check this fact. This method proceeds indeed by trying to construct a ranked equivalence class decomposition of a given graph instance and, if successful, stores the decomposition ranks into the *self.edgeRanks* attribute (see [GOL-2004]_ p.129-132).
+If the graph instance *g* is a permutation graph, *g* and its dual *dg = -g* must be *transitively orientable*, ie **comparability graphs** (see [GOL-2004]_). With the :py:func:`graphs.Graph.isComparabilityGraph` test, we may easily check this fact. This method proceeds indeed by trying to construct a ranked equivalence class decomposition of a given graph instance and, if successful, stores the decomposition ranks into the *self.edgeRanks* attribute (see [GOL-2004]_ p.129-132).
 
 >>> print(g.isComparabilityGraph())
 True
@@ -3911,7 +3911,7 @@ We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) 
 >>> print(s2)
 ['v8', 'v7', 'v6', 'v5', 'v4', 'v3', 'v2', 'v1']
 
-Vertex 'v8' is put from position 5 to position 1, vertex 'v7' is put from position 2 to position 2, vertex 'v6' from position 4 to position 3, 'vertex 'v5' from position 1 to position 4, etc ... . We generate these position swapping for all vertices and obtain thus the required permutation (see Line 5 below).
+Vertex 'v8' is put from position 5 to position 1, vertex 'v7' is put from position 2 to position 2, vertex 'v6' from position 4 to position 3, 'vertex 'v5' from position 1 to position 4, etc ... . We generate these position swappings for all vertices and obtain thus the required permutation (see Line 5 below).
 
 >>> permutation = [0 for j in range(g.order)]
 >>> for j in range(g.order):
@@ -3919,7 +3919,7 @@ Vertex 'v8' is put from position 5 to position 1, vertex 'v7' is put from positi
 >>> print(permutation)
 [5, 2, 4, 1, 6, 7, 8, 3]
 
-It is worthwhile noticing by the way that *transitive orientations* of a given graph and its dual are usually **not unique**. And, so may also be the resulting permutations. However, they all correspond to isomorphic graphs (see [GOL-2004]_). In our case here, we observe two different permutations and their reverses::
+It is worthwhile noticing by the way that *transitive orientations* of a given graph and its dual are usually **not unique** and, so may also be the resulting permutations. However, they all correspond to isomorphic graphs (see [GOL-2004]_). In our case here, we observe two different permutations and their reverses::
 
     s1: ['v1', 'v4', 'v3', 'v2', 'v5', 'v6', 'v7', 'v8']
     s2: ['v4', 'v3', 'v2', 'v8', 'v6', 'v1', 'v7', 'v5']
@@ -3940,32 +3940,21 @@ The :py:func:`graphs.Graph.computePermutation` method does directly operate all 
 ['v2', 'v3', 'v4', 'v8', 'v6', 'v1', 'v7', 'v5']
 [2, 3, 4, 8, 6, 1, 7, 5]
 
-We may finally check, for instance, that the permutation [2, 3, 4, 8, 6, 1, 7, 5] we have generated here (see Line 4 above) will correctly generate a corresponding permutation graph which is isomorphic to the given random graph *g*.
+We may finally check, for instance, that the permutations [2, 3, 4, 8, 6, 1, 7, 5] and [4, 2, 8, 3, 1, 5, 6, 7], we have generated above, will correctly generate corresponding isomorphic permutation graphs.
 
->>> gtest = PermutationGraph(permutation=[2, 3, 4, 8, 6, 1, 7, 5])
->>> gtest
-*------- Graph instance description ------*
-Instance class   : PermutationGraph
-Instance name    : permutationGraph
-Graph Order      : 8
-Permutation      : [2, 3, 4, 8, 6, 1, 7, 5]
-Graph Size       : 9
-Valuation domain : [-1.00; 1.00]
-Attributes       : ['name', 'vertices', 'order', 'permutation',
-                    'valuationDomain', 'edges', 'size', 'gamma']
->>> gtest.exportGraphViz('permutationGraph4335')
-*---- exporting a dot file for GraphViz tools ---------*
-Exporting to permutationGraph4335.dot
-fdp -Tpng permutationGraph4335.dot -o permutationGraph4335.png
+>>> gtesta = PermutationGraph(permutation=[2, 3, 4, 8, 6, 1, 7, 5])
+>>> gtestb = PermutationGraph(permutation=[4, 2, 8, 3, 1, 5, 6, 7])
+>>> gtesta.exportGraphViz('gtesta')
+>>> gtestb.exportGraphViz('gtesta')
 
-.. Figure:: permutationGraph4335.png
-    :alt: The isomorphic permutation graph
-    :width: 400 px
+.. Figure:: isomorphicPerms.png
+    :alt: Isomorphic permutation graphs
+    :width: 700 px
     :align: center
 
-    *Figure* 15b: Permutation graph obtained from [2, 3, 4, 8, 6, 1, 7, 5]
+    *Figure* 15b: Isomorphic permutation graphs
 
-And, we recover indeed an *isomorphic copy* of the original random graph (see Fig. 15a).
+And, we recover indeed *isomorphic copies* of the original random graph (see Fig. 15a).
 
 Back to :ref:`Tutorial-label`
 

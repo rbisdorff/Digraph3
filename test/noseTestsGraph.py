@@ -233,7 +233,13 @@ def testGraphTransitiveOrientations():
     print(s2)
     permutation = g.computePermutation(s1,s2)
     print(permutation)
-    pg = PermutationGraph(permutation)
-    pg.exportGraphViz('testpg')
+    pga = PermutationGraph(permutation)
+    pga.exportGraphViz('testpga')
+    pgb = PermutationGraph(permutation=[5, 2, 4, 1, 6, 7, 8, 3])
+    pgb.exportGraphViz('testpgb')
+    pgc = PermutationGraph(permutation=[4, 2, 8, 3, 1, 5, 6, 7])
+    pgc.exportGraphViz('testpgc')
+    pgd = PermutationGraph(permutation=[6, 1, 2, 3, 8, 5, 7, 4])
+    pgd.exportGraphViz('testpgd')
 
  
