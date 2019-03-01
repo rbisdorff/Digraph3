@@ -3873,9 +3873,7 @@ Attributes       : ['name', 'order', 'vertices', 'valuationDomain', 'seed',
 
     *Figure* 15a: Random graph of order 8 generated with edge probility 0.4
 
-If the graph instance *g* is a permutation graph, *g* and its dual *dg = -g* must be *transitively orientable*, in fact **comparability graphs**. We may easily check that this graph instance *g* and its dual *gd* are in fact transitively orientable with the :py:func:`graphs.Graph.isComparabilityGraph` test.
-
-This method proceeds by trying to construct a ranked equivalence class decomposition of a given graph instance and, if successful, stores the decomposition ranks into the *self.edgeRanks* attribute (see [GOL-2004]_ p.129-132).
+If the graph instance *g* is a permutation graph, *g* and its dual *dg = -g* must be *transitively orientable*, ie **comparability graphs** (see [GOL-2004]_). with the :py:func:`graphs.Graph.isComparabilityGraph` test, we may easily check this fact. This method proceeds indeed by trying to construct a ranked equivalence class decomposition of a given graph instance and, if successful, stores the decomposition ranks into the *self.edgeRanks* attribute (see [GOL-2004]_ p.129-132).
 
 >>> print(g.isComparabilityGraph())
 True
@@ -3902,7 +3900,7 @@ We will first **fuse** both *og* and *ogd* orientations above with an **epistemi
 >>> f1 = FusionDigraph(og,ogd,operator='o-max')
 >>> s1 = f1.computeCopelandRanking()
 >>> print(s1)
-['v1', 'v4', 'v3', 'v2', 'v5', 'v6', 'v7', 'v8']
+['v5', 'v7', 'v1', 'v6', 'v8', 'v4', 'v3', 'v2']
 
 We obtain by the *Copeland* ranking rule (see :ref:`Ranking-Tutorial-label` and the :py:func:`digraphs.Digraph.computeCopelandRanking` method) a complete linear ordering of the vertices (see Line 5 above).
 
@@ -3911,26 +3909,38 @@ We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) 
 >>> f2 = FusionDigraph((-og),ogd,operator='o-max')
 >>> s2 = f2.computeCopelandRanking()
 >>> print(s2)
-['v4', 'v3', 'v2', 'v8', 'v6', 'v1', 'v7', 'v5']
+['v8', 'v7', 'v6', 'v5', 'v4', 'v3', 'v2', 'v1']
 
-Vertex 'v1' is put from position 1 to position 6, vertex 'v4' is put from position 2 to position 1, vertex 'v3' from position 3 to position 2, ... etc. We generate these position swapping for all vertices and obtain thus the required permutation (see Line 5 below).
+Vertex 'v5' is put from position 1 to position 5, vertex 'v7' is put from position 2 to position 2, vertex 'v1' from position 3 to position 8, ... etc. We generate these position swapping for all vertices and obtain thus the required permutation (see Line 5 below).
 
 >>> permutation = [0 for j in range(g.order)]
 >>> for j in range(g.order):
 ...     permutation[seq2.index(seq1[j])] = j+1
 >>> print(permutation)
-[2, 3, 4, 8, 6, 1, 7, 5]
+[5, 2, 4, 1, 6, 7, 8, 3]
 
-The :py:func:`graphs.Graph.computePermutation` method does directly operate these steps.
+It is worthwhile noticing by the way that *transitive orientations* of a given graph and its dual are usually **not unique**. And, so may also be the resulting permutations. However, they all correspond to isomorphic graphs (see [GOL-2004]_). In our case here, we observe two different permutations and their reverses::
+
+    s1: ['v1', 'v4', 'v3', 'v2', 'v5', 'v6', 'v7', 'v8']
+    s2: ['v4', 'v3', 'v2', 'v8', 'v6', 'v1', 'v7', 'v5']
+    (s1 -> s2): [2, 3, 4, 8, 6, 1, 7, 5]
+    (s2 -> s1): [6, 1, 2, 3, 8, 5, 7, 4]
+
+And::
+  
+    s3: ['v5', 'v7', 'v1', 'v6', 'v8', 'v4', 'v3', 'v2']
+    s4: ['v8', 'v7', 'v6', 'v5', 'v4', 'v3', 'v2', 'v1']
+    (s3 -> s4): [5, 2, 4, 1, 6, 7, 8, 3]
+    (s4 -> s3) = [4, 2, 8, 3, 1, 5, 6, 7]
+
+The :py:func:`graphs.Graph.computePermutation` method does directly operate these steps and delivers from two such linear orders a corresponding permutation.
 
 >>> g.computePermutation()
 ['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7', 'v8']
 ['v2', 'v3', 'v4', 'v8', 'v6', 'v1', 'v7', 'v5']
 [2, 3, 4, 8, 6, 1, 7, 5]
 
-It is worthwhile noticing (see Lines 2-3 above) that transitive orientations are usually not unique. In case of partial orders, there may exist infact several compatible ranked equivalence class decompositions depending on where to situate incomparable vertices. However, each given permutation graph instance is based on a necessarily unique permutation.
-
-We may finally check that [2, 3, 4, 8, 6, 1, 7, 5] will correctly generate a corresponding permutation graph which is isomorphic to the given random graph *g*.
+We may finally check, for instance, that the permutation [2, 3, 4, 8, 6, 1, 7, 5] we have generated here (see Line 4 above) will correctly generate a corresponding permutation graph which is isomorphic to the given random graph *g*.
 
 >>> gtest = PermutationGraph(permutation=[2, 3, 4, 8, 6, 1, 7, 5])
 >>> gtest
@@ -4271,7 +4281,7 @@ References
 
 .. [BIS-2004] R. Bisdorff (2004) *On a natural fuzzification of Boolean logic*. In Erich Peter Klement and Endre Pap (editors), Proceedings of the 25th Linz Seminar on *Fuzzy Set Theory, Mathematics of Fuzzy Systems*. Bildungszentrum St. Magdalena, Linz (Austria), February 2004. pp. 20-26 (PDF file (133.4 Kb) for `downloading <_static/Linz2004.pdf>`_)
 
-.. [GOL-2004] M. Ch. Golumbic, *Agorithmic Graph Theory and Perfect Graphs* 2nd Ed., Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.
+.. [GOL-2004] M. Ch. Golumbic, *Agorithmic Graph Theory and Perfect Graphs* 2nd Ed., Annals of Discrete Mathematics 57, Elsevier.
 
 .. [FMCAA] O. Häggström (2002) *Finite Markov Chains and Algorithmic Applications*. Cambridge University Press.
 

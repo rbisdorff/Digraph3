@@ -840,7 +840,7 @@ class Graph(object):
         g.transitivityDegree = g.computeTransitivityDegree()
         return g
 
-    def computeTransitivelyOrientedDigraph(self,PartiallyDetermined=False):
+    def computeTransitivelyOrientedDigraph(self,PartiallyDetermined=False,Debug=False):
         """
         Renders a digraph where each edge of the permutation graph *self*
         is converted into an arc oriented in increasing order of the ranks of equivalence classes
@@ -891,6 +891,9 @@ class Graph(object):
         if not self.isComparabilityGraph():
             print('The graph %s does not admit a transitive orientation.' % self.name)
         else:
+            if Debug:
+                for arc in self.edgeRanks:
+                    print(arc, self.edgeRanks[arc])
             g = EmptyDigraph(order=self.order)
             g.__class__ = WeakOrder
             g.name = 'trans_oriented_'+self.name
@@ -1392,9 +1395,9 @@ class Graph(object):
         *Source*: M. Ch. Golumbic (2004) Algorithmic Graph Thery and Perfect Graphs,
         Annals of Discrete Mathematics 57, Elsevier, p. 129-132.
         """
-        global rank,IsComparabilityGraph
+        global rank,IsComparabilityGraph,k
         def _explore(arc):
-            global IsComparabilityGraph
+            global rank,IsComparabilityGraph,k
             i = arc[0]
             j = arc[1]
             if Debug:
@@ -1413,8 +1416,8 @@ class Graph(object):
                         IsComparabilityGraph = False
                         if Debug:
                             print('is comp?',IsComparabilityGraph)
-                        return
-                        #_explore((i,m))
+                        #return
+                        _explore((i,m))
                     
             for m in self.gamma[j]:
                 if Debug:
@@ -1429,8 +1432,8 @@ class Graph(object):
                         IsComparabilityGraph = False
                         if Debug:
                             print('is comp ?',IsComparabilityGraph)
-                        return
-                        #_explore((m,j))
+                        #return
+                        _explore((m,j))
                       
             if Debug:
                 print(arc,rank,IsComparabilityGraph)
