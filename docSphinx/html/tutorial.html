@@ -6155,14 +6155,14 @@ best covered terminal kernel</span></p>
 <span class="go">[&#39;v8&#39;, &#39;v7&#39;, &#39;v6&#39;, &#39;v5&#39;, &#39;v4&#39;, &#39;v3&#39;, &#39;v2&#39;, &#39;v1&#39;]</span>
 </pre></div>
 </td></tr></table></div>
-<p>Vertex ‘v5’ is put from position 1 to position 5, vertex ‘v7’ is put from position 2 to position 2, vertex ‘v1’ from position 3 to position 8, … etc. We generate these position swapping for all vertices and obtain thus the required permutation (see Line 5 below).</p>
+<p>Vertex ‘v8’ is put from position 5 to position 1, vertex ‘v7’ is put from position 2 to position 2, vertex ‘v6’ from position 4 to position 3, ‘vertex ‘v5’ from position 1 to position 4, etc … . We generate these position swapping for all vertices and obtain thus the required permutation (see Line 5 below).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
 5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">permutation</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">order</span><span class="p">)]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">order</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="n">permutation</span><span class="p">[</span><span class="n">seq2</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">seq1</span><span class="p">[</span><span class="n">j</span><span class="p">])]</span> <span class="o">=</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span>
+<span class="gp">... </span>    <span class="n">permutation</span><span class="p">[</span><span class="n">s2</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">s1</span><span class="p">[</span><span class="n">j</span><span class="p">])]</span> <span class="o">=</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">permutation</span><span class="p">)</span>
 <span class="go">[5, 2, 4, 1, 6, 7, 8, 3]</span>
 </pre></div>
@@ -6187,7 +6187,7 @@ best covered terminal kernel</span></p>
 <span class="p">(</span><span class="n">s4</span> <span class="o">-&gt;</span> <span class="n">s3</span><span class="p">)</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
 </pre></div>
 </td></tr></table></div>
-<p>The <a class="reference internal" href="techDoc.html#graphs.Graph.computePermutation" title="graphs.Graph.computePermutation"><code class="xref py py-func docutils literal"><span class="pre">graphs.Graph.computePermutation()</span></code></a> method does directly operate these steps and delivers from two such linear orders a corresponding permutation.</p>
+<p>The <a class="reference internal" href="techDoc.html#graphs.Graph.computePermutation" title="graphs.Graph.computePermutation"><code class="xref py py-func docutils literal"><span class="pre">graphs.Graph.computePermutation()</span></code></a> method does directly operate all these steps: - computing transitive orientations, - ranking their epistemic fusion and, - delivering a corresponding permutation.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3

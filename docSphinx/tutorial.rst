@@ -3911,11 +3911,11 @@ We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) 
 >>> print(s2)
 ['v8', 'v7', 'v6', 'v5', 'v4', 'v3', 'v2', 'v1']
 
-Vertex 'v5' is put from position 1 to position 5, vertex 'v7' is put from position 2 to position 2, vertex 'v1' from position 3 to position 8, ... etc. We generate these position swapping for all vertices and obtain thus the required permutation (see Line 5 below).
+Vertex 'v8' is put from position 5 to position 1, vertex 'v7' is put from position 2 to position 2, vertex 'v6' from position 4 to position 3, 'vertex 'v5' from position 1 to position 4, etc ... . We generate these position swapping for all vertices and obtain thus the required permutation (see Line 5 below).
 
 >>> permutation = [0 for j in range(g.order)]
 >>> for j in range(g.order):
-...     permutation[seq2.index(seq1[j])] = j+1
+...     permutation[s2.index(s1[j])] = j+1
 >>> print(permutation)
 [5, 2, 4, 1, 6, 7, 8, 3]
 
@@ -3933,7 +3933,7 @@ And::
     (s3 -> s4): [5, 2, 4, 1, 6, 7, 8, 3]
     (s4 -> s3) = [4, 2, 8, 3, 1, 5, 6, 7]
 
-The :py:func:`graphs.Graph.computePermutation` method does directly operate these steps and delivers from two such linear orders a corresponding permutation.
+The :py:func:`graphs.Graph.computePermutation` method does directly operate all these steps: - computing transitive orientations, - ranking their epistemic fusion and, - delivering a corresponding permutation.
 
 >>> g.computePermutation()
 ['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7', 'v8']
