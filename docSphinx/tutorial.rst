@@ -3911,7 +3911,7 @@ We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) 
 >>> print(s2)
 ['v8', 'v7', 'v6', 'v5', 'v4', 'v3', 'v2', 'v1']
 
-Vertex 'v8' is put from position 5 to position 1, vertex 'v7' is put from position 2 to position 2, vertex 'v6' from position 4 to position 3, 'vertex 'v5' from position 1 to position 4, etc ... . We generate these position swappings for all vertices and obtain thus the required permutation (see Line 5 below).
+Vertex 'v8' is put from position 5 to position 1, vertex 'v7' is put from position 2 to position 2, vertex 'v6' from position 4 to position 3, 'vertex 'v5' from position 1 to position 4, etc ... . We generate these position swaps for all vertices and obtain thus the required permutation (see Line 5 below).
 
 >>> permutation = [0 for j in range(g.order)]
 >>> for j in range(g.order):
@@ -3940,7 +3940,7 @@ The :py:func:`graphs.Graph.computePermutation` method does directly operate all 
 ['v2', 'v3', 'v4', 'v8', 'v6', 'v1', 'v7', 'v5']
 [2, 3, 4, 8, 6, 1, 7, 5]
 
-We may finally check, for instance, that the permutations [2, 3, 4, 8, 6, 1, 7, 5] and [4, 2, 8, 3, 1, 5, 6, 7], we have generated above, will correctly generate corresponding isomorphic permutation graphs.
+We may finally check that the permutations [2, 3, 4, 8, 6, 1, 7, 5] and [4, 2, 8, 3, 1, 5, 6, 7], we have generated above, will correctly generate corresponding isomorphic permutation graphs.
 
 >>> gtesta = PermutationGraph(permutation=[2, 3, 4, 8, 6, 1, 7, 5])
 >>> gtestb = PermutationGraph(permutation=[4, 2, 8, 3, 1, 5, 6, 7])
@@ -3954,7 +3954,7 @@ We may finally check, for instance, that the permutations [2, 3, 4, 8, 6, 1, 7, 
 
     *Figure* 15b: Isomorphic permutation graphs
 
-And, we recover indeed *isomorphic copies* of the original random graph (see Fig. 15a).
+And, we recover indeed two *isomorphic copies* of the original random graph (see Fig. 15a).
 
 Back to :ref:`Tutorial-label`
 
