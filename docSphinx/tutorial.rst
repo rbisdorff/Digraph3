@@ -3758,6 +3758,7 @@ Attributes       : ['name', 'vertices', 'order', 'permutation',
 Exporting to permutationGraph.dot
 fdp -Tpng permutationGraph.dot -o permutationGraph.png
 
+
 .. Figure:: permutationGraph.png
     :alt: Default permutation graph
     :width: 300 px
@@ -3850,16 +3851,19 @@ Recognizing permutation graphs
 
 The last property gives a polynomial test procedure (in :math:`O(n^3)` due to the transitivity check) for recognizing permutation graphs. Let us consider, for instance, the following random graph of *order* 8 generated with an *edge probability* of 40% and a *random seed* equal to 4335.
 
+>>> from graphs import *
 >>> g = RandomGraph(order=8,edgeProbability=0.4,seed=4335)
 >>> g
 *------- Graph instance description ------*
 Instance class   : RandomGraph
 Instance name    : randomGraph
+Seed             : 4335
+Edge probability : 0.4
 Graph Order      : 8
 Graph Size       : 10
 Valuation domain : [-1.00; 1.00]
-Attributes       : ['name', 'order', 'vertices', 'valuationDomain',
-                    'edges', 'size', 'gamma']
+Attributes       : ['name', 'order', 'vertices', 'valuationDomain', 'seed',
+                    'edges', 'size', 'gamma', 'edgeProbability']
 >>> g.exportGraphViz()
 		    
 .. Figure:: randomGraph4335.png
@@ -3867,23 +3871,30 @@ Attributes       : ['name', 'order', 'vertices', 'valuationDomain',
     :width: 400 px
     :align: center
 
-    *Figure* 15: Random graph of order 8 generated with edge probility 0.4
+    *Figure* 15a: Random graph of order 8 generated with edge probility 0.4
 
-We may check that this graph and its dual are both *transitively orientable* by computing for both an oriented digraph with the :py:func:`graphs.Graph.computeTransitivelyOrientedDigraph` method.
+If the graph instance *g* is a permutation graph, *g* and its dual *-g* must be *transitively orientable*, in fact **comparability graphs**. We may easily check that this graph instance *g* and its dual *gd = -g* are transitively orientable with the :py:func:`graphs.Graph.isComparabilityGraph` test. This method proceeds by trying to construct a ranked equivalence class decomposition of *g* stored in *g.edgeRanks* (see [GOL-2004]_ p.129-132).
+
+>>> print(g.isComparabilityGraph())
+True
+>>> gd = -g
+>>> print(gd.isComparabilityGraph())
+True
+
+Let us recheck this fact by explicitely constructing transitively oriented digraph instances with the :py:func:`graphs.Graph.computeTranditivelyOrientedDigraph` method. 
 
 >>> og = g.computeTransitivelyOrientedDigraph(PartiallyDetermined=True)
 >>> print('Transitivity degree: %.3f' % (og.transitivityDegree)) 
 Transitivity degree: 1.000
->>> gdual = -g
->>> ogdual = gdual.computeTransitivelyOrientedDigraph(PartiallyDetermined=True)
+>>> ogd = gd.computeTransitivelyOrientedDigraph(PartiallyDetermined=True)
 >>> print('Transitivity degree: %.3f' % (ogd.transitivityDegree)) 
 Transitivity degree: 1.000
 
 The :code:`PartiallyDetermined=True` flag (see Line 1 and 5) is required here in order to orient *only* the actual edges of the graphs. Relations between vertices not linked by an edge will be put to the *indeterminate* characteristic value 0. This will allow us to compute later on convenient disjunctive digraph fusions.
 
-As both orientations are transitive indeed (see Line 3 and 7), we may conclude that the given random graph is actally a *permutation graph* instance. However, we still need to find now its corresponding *permutation*. We therefore implement a recipee given by Martin Golumbic [GOL-2004]_ p.159.
+As both graphs are indeed transitivily orientable (see Line 3 and 7), we may conclude that the given random graph is actally a *permutation graph* instance. Yet, we still need to find now its corresponding *permutation*. We therefore implement a recipee given by Martin Golumbic [GOL-2004]_ p.159.
 
-We will first **fuse** both *og* and *ogdual* orientations above with an **epistemic disjunction** (see the :py:func:`digraphsTools.omax` operator), hence, the partially determined orientations requested above.
+We will first **fuse** both *og* and *ogd* orientations above with an **epistemic disjunction** (see the :py:func:`digraphsTools.omax` operator), hence, the partially determined orientations requested above.
 
 >>> from digraphs import FusionDigraph
 >>> f1gd = FusionDigraph(og,ogdual,operator='o-max')
@@ -3900,7 +3911,7 @@ We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) 
 >>> print(seq2)
 ['v4', 'v3', 'v2', 'v8', 'v6', 'v1', 'v7', 'v5']
 
-Vertex 'v1' is put from position 1 to position 6, vertex 'v4' is put from position 2 to position 1, vertex 'v3' from position 3 to position 2, ... etc. We generate these positions for all vertices and obtain thus the required permutation (see Line 5 below).
+Vertex 'v1' is put from position 1 to position 6, vertex 'v4' is put from position 2 to position 1, vertex 'v3' from position 3 to position 2, ... etc. We generate these position swapping for all vertices and obtain thus the required permutation (see Line 5 below).
 
 >>> permutation = [0 for j in range(g.order)]
 >>> for j in range(g.order):
@@ -3908,7 +3919,16 @@ Vertex 'v1' is put from position 1 to position 6, vertex 'v4' is put from positi
 >>> print(permutation)
 [2, 3, 4, 8, 6, 1, 7, 5]
 
-We may finally check that this permutation will correctly generate a permutation graph which is isomorphic to the given random graph *g*.
+The :py:func:`graphs.Graph.computePermutation` method does directly operate these steps.
+
+>>> g.computePermutation()
+['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7', 'v8']
+['v2', 'v3', 'v4', 'v8', 'v6', 'v1', 'v7', 'v5']
+[2, 3, 4, 8, 6, 1, 7, 5]
+
+It is worth noticing (see Lines 2-3 above) that transitive orientations are usually not unique. In case of partial orders, there may exist infact several compatible ranked equivalence class decompositions depending on where to situate incomparable vertices. However, for each given permutation graph instance is based on a necessarily unique permutation.
+
+We may finally check that this permutation will correctly generate a corresponding permutation graph which is isomorphic to the given random graph *g*.
 
 >>> gtest = PermutationGraph(permutation=[2, 3, 4, 8, 6, 1, 7, 5])
 >>> gtest
@@ -3931,9 +3951,9 @@ fdp -Tpng permutationGraph4335.dot -o permutationGraph4335.png
     :width: 400 px
     :align: center
 
-    *Figure* 16: Permutation graph obtained from [2, 3, 4, 8, 6, 1, 7, 5]
+    *Figure* 15b: Permutation graph obtained from [2, 3, 4, 8, 6, 1, 7, 5]
 
-And, we recover indeed an *isomorphic copy* of the original random graph (see Fig. 15).
+And, we recover indeed an *isomorphic copy* of the original random graph (see Fig. 15a).
 
 Back to :ref:`Tutorial-label`
 
@@ -3975,7 +3995,7 @@ neato -Tpng tutRandomTree.dot -o tutRandomTree.png
 
     *Figure 17a*: Random Tree instance of order 9
 
-A tree graph of order *n* contains *n-1* edges (see Line8 and 9) and we may distinguish vertices like *v1*, *v2*, *v4*, *v5* or *v9*  of degree 1, called the **leaves** of the tree, and vertices like *v3*, *v6*, *v7* or *v8* of degree 2 or more, called the **nodes** of the tree.
+A tree graph of order *n* contains *n-1* edges (see Line 8 and 9) and we may distinguish vertices like *v1*, *v2*, *v4*, *v5* or *v9*  of degree 1, called the **leaves** of the tree, and vertices like *v3*, *v6*, *v7* or *v8* of degree 2 or more, called the **nodes** of the tree.
 
 The structure of a tree of order :math:`n > 2` is entirely characterized by a corresponding *Prüfer* **code** -ie a *list of vertices keys*- of length *n-2*. See, for instance in Line 12 the code ['v3', 'v8', 'v8', 'v3', 'v7', 'v6', 'v7'] corresponding to our sample tree graph *t*.
 

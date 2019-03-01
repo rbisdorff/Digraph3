@@ -968,8 +968,6 @@ class Graph(object):
         permutation = [0 for j in range(self.order)]
         for j in range(self.order):
             permutation[seq2.index(seq1[j])] = j+1
-        if Comments:
-            print(permutation)
         return permutation
 
     def computeSize(self):
