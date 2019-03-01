@@ -890,11 +890,15 @@
 <div class="viewcode-block" id="Graph.computeTransitivelyOrientedDigraph"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeTransitivelyOrientedDigraph">[docs]</a>    <span class="k">def</span> <span class="nf">computeTransitivelyOrientedDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a digraph where each edge of the permutation graph *self*</span>
-<span class="sd">        is converted into an arc oriented in increasing order of the adjacent vertices&#39; numbers.</span>
-<span class="sd">        If self is a PermutationGraph instance, the orientation will be transitive.</span>
+<span class="sd">        is converted into an arc oriented in increasing order of the ranks of equivalence classes</span>
+<span class="sd">        detected with the :py:func:`digraphs.Digraph.isComparabilityGraph` test and stored in self.edgeRanks.</span>
 
 <span class="sd">        The parameter *PartiallyDetermined*: {True|False (by default), converts if *True* all absent</span>
 <span class="sd">        edges of the graph into indeterminate symmetric relations in the resulting digraph.</span>
+<span class="sd">        Verifies if the graph instance is a comparability graph.</span>
+<span class="sd">        </span>
+<span class="sd">        *Source*: M. Ch. Golumbic (2004) Algorithmic Graph Thery and Perfect Graphs,</span>
+<span class="sd">        Annals of Discrete Mathematics 57, Elsevier, p. 129-132.</span>
 <span class="sd">     </span>
 <span class="sd">        &gt;&gt;&gt; g = RandomGraph(order=6,edgeProbability=0.5,seed=100)</span>
 <span class="sd">        &gt;&gt;&gt; og = g.computeTransitivelyOrientedDigraph()</span>
@@ -976,43 +980,42 @@
             <span class="k">return</span> <span class="n">g</span></div>
 
 
-<div class="viewcode-block" id="Graph.computePermutation"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computePermutation">[docs]</a>    <span class="k">def</span> <span class="nf">computePermutation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.computePermutation"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computePermutation">[docs]</a>    <span class="k">def</span> <span class="nf">computePermutation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">seq1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">seq2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Tests whether the graph instance *self* is a permutation graph</span>
 <span class="sd">        and renders, in case the test is positive,</span>
 <span class="sd">        the corresponding permutation.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">FusionDigraph</span>
-        <span class="n">og</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeOrientedDigraph</span><span class="p">(</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">odt</span> <span class="o">=</span> <span class="n">og</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">odt</span> <span class="o">&lt;</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.9999999999&#39;</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Tranditivity degree </span><span class="si">%.3f</span><span class="s1"> &lt; 1&#39;</span> <span class="o">%</span> <span class="n">odt</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The graph instance is not a permutation graph&#39;</span><span class="p">)</span>
-            <span class="k">return</span>
-        <span class="n">gd</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span>
-        <span class="n">ogd</span> <span class="o">=</span> <span class="n">gd</span><span class="o">.</span><span class="n">computeOrientedDigraph</span><span class="p">(</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">ogdt</span> <span class="o">=</span> <span class="n">ogd</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">ogdt</span> <span class="o">&lt;</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.99999999999&#39;</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dual tranditivity degree </span><span class="si">%.3f</span><span class="s1"> &lt; 1&#39;</span> <span class="o">%</span> <span class="n">ogdt</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The graph instance is not a permutation graph&#39;</span><span class="p">)</span>
-            <span class="k">return</span>
-        
-        <span class="n">f1</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">(</span><span class="n">og</span><span class="p">,</span><span class="n">ogd</span><span class="p">,</span><span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
-        <span class="n">f2</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">((</span><span class="o">-</span><span class="n">og</span><span class="p">),</span><span class="n">ogd</span><span class="p">,</span><span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
-        <span class="n">seq1</span> <span class="o">=</span> <span class="n">f1</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">seq1</span><span class="p">)</span>
-        <span class="n">seq2</span> <span class="o">=</span> <span class="n">f2</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">seq2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">seq1</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">seq2</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">og</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeOrientedDigraph</span><span class="p">(</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">odt</span> <span class="o">=</span> <span class="n">og</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">odt</span> <span class="o">&lt;</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Tranditivity degree </span><span class="si">%.3f</span><span class="s1"> &lt; 1&#39;</span> <span class="o">%</span> <span class="n">odt</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The graph instance is not a permutation graph&#39;</span><span class="p">)</span>
+                <span class="k">return</span>
+            <span class="n">gd</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span>
+            <span class="n">ogd</span> <span class="o">=</span> <span class="n">gd</span><span class="o">.</span><span class="n">computeOrientedDigraph</span><span class="p">(</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">ogdt</span> <span class="o">=</span> <span class="n">ogd</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">ogdt</span> <span class="o">&lt;</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dual tranditivity degree </span><span class="si">%.3f</span><span class="s1"> &lt; 1&#39;</span> <span class="o">%</span> <span class="n">ogdt</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The graph instance is not a permutation graph&#39;</span><span class="p">)</span>
+                <span class="k">return</span>
+            
+            <span class="n">f1</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">(</span><span class="n">og</span><span class="p">,</span><span class="n">ogd</span><span class="p">,</span><span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
+            <span class="n">f2</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">((</span><span class="o">-</span><span class="n">og</span><span class="p">),</span><span class="n">ogd</span><span class="p">,</span><span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
+            <span class="n">seq1</span> <span class="o">=</span> <span class="n">f1</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">seq1</span><span class="p">)</span>
+            <span class="n">seq2</span> <span class="o">=</span> <span class="n">f2</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">seq2</span><span class="p">)</span>
         <span class="n">permutation</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">)]</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">):</span>
             <span class="n">permutation</span><span class="p">[</span><span class="n">seq2</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">seq1</span><span class="p">[</span><span class="n">j</span><span class="p">])]</span> <span class="o">=</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span>
-<span class="c1">##            x = self.vertices[seq1[j]][&#39;id&#39;]</span>
-<span class="c1">##            permutation[j] = self.vertices[seq2[x-1]][&#39;id&#39;]</span>
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">permutation</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">permutation</span></div>
 

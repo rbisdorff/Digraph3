@@ -3368,7 +3368,7 @@ edges of the graph into indeterminate symmetric relations in the resulting digra
 
 <dl class="method">
 <dt id="graphs.Graph.computePermutation">
-<code class="descname">computePermutation</code><span class="sig-paren">(</span><em>Debug=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.computePermutation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.computePermutation" title="Permalink to this definition">¶</a></dt>
+<code class="descname">computePermutation</code><span class="sig-paren">(</span><em>seq1=None</em>, <em>seq2=None</em>, <em>Comments=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.computePermutation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.computePermutation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tests whether the graph instance <em>self</em> is a permutation graph
 and renders, in case the test is positive,
 the corresponding permutation.</p>
@@ -3385,10 +3385,13 @@ the corresponding permutation.</p>
 <dt id="graphs.Graph.computeTransitivelyOrientedDigraph">
 <code class="descname">computeTransitivelyOrientedDigraph</code><span class="sig-paren">(</span><em>PartiallyDetermined=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.computeTransitivelyOrientedDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.computeTransitivelyOrientedDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders a digraph where each edge of the permutation graph <em>self</em>
-is converted into an arc oriented in increasing order of the adjacent vertices’ numbers.
-If self is a PermutationGraph instance, the orientation will be transitive.</p>
+is converted into an arc oriented in increasing order of the ranks of equivalence classes
+detected with the <code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.isComparabilityGraph()</span></code> test and stored in self.edgeRanks.</p>
 <p>The parameter <em>PartiallyDetermined</em>: {True|False (by default), converts if <em>True</em> all absent
-edges of the graph into indeterminate symmetric relations in the resulting digraph.</p>
+edges of the graph into indeterminate symmetric relations in the resulting digraph.
+Verifies if the graph instance is a comparability graph.</p>
+<p><em>Source</em>: M. Ch. Golumbic (2004) Algorithmic Graph Thery and Perfect Graphs,
+Annals of Discrete Mathematics 57, Elsevier, p. 129-132.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">og</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeTransitivelyOrientedDigraph</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">og</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>

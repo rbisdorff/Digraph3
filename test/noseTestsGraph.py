@@ -210,17 +210,30 @@ def testGraphOrientations():
     print('Dual transitivity degree: %.3f' % ogd.transitivityDegree)
 
 def testGraphTransitiveOrientations():
+    from digraphs import FusionDigraph
     print('==>> Testing graph orientations')
-    g = RandomGraph(order=6,edgeProbability=0.5,seed=100)
+    g = RandomGraph(order=8,edgeProbability=0.4,seed=4335)
+    print(g)
     #g = CycleGraph(order=7)
-    og = g.computeTransitivelyOrientedDigraph()
+    g.exportGraphViz('testg')
+    og = g.computeTransitivelyOrientedDigraph(PartiallyDetermined=True)
     if og != None:
         print(og)
         print('Transitivity degree: %.3f' % og.transitivityDegree)
     gd = -g
-    ogd = gd.computeTransitivelyOrientedDigraph()
+    ogd = gd.computeTransitivelyOrientedDigraph(PartiallyDetermined=True)
     if ogd != None:
         print(ogd)
         print('Dual transitivity degree: %.3f' % ogd.transitivityDegree)
+    fog = FusionDigraph(og,ogd,operator='o-max')
+    s1 = fog.computeCopelandRanking()
+    fogd = FusionDigraph((-og),ogd,operator='o-max')
+    s2 = fogd.computeCopelandRanking()
+    print(s1)
+    print(s2)
+    permutation = g.computePermutation(s1,s2)
+    print(permutation)
+    pg = PermutationGraph(permutation)
+    pg.exportGraphViz('testpg')
 
  

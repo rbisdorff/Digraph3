@@ -843,11 +843,15 @@ class Graph(object):
     def computeTransitivelyOrientedDigraph(self,PartiallyDetermined=False):
         """
         Renders a digraph where each edge of the permutation graph *self*
-        is converted into an arc oriented in increasing order of the adjacent vertices' numbers.
-        If self is a PermutationGraph instance, the orientation will be transitive.
+        is converted into an arc oriented in increasing order of the ranks of equivalence classes
+        detected with the :py:func:`digraphs.Digraph.isComparabilityGraph` test and stored in self.edgeRanks.
 
         The parameter *PartiallyDetermined*: {True|False (by default), converts if *True* all absent
         edges of the graph into indeterminate symmetric relations in the resulting digraph.
+        Verifies if the graph instance is a comparability graph.
+        
+        *Source*: M. Ch. Golumbic (2004) Algorithmic Graph Thery and Perfect Graphs,
+        Annals of Discrete Mathematics 57, Elsevier, p. 129-132.
      
         >>> g = RandomGraph(order=6,edgeProbability=0.5,seed=100)
         >>> og = g.computeTransitivelyOrientedDigraph()
@@ -929,43 +933,42 @@ class Graph(object):
             return g
 
 
-    def computePermutation(self,Debug=True):
+    def computePermutation(self,seq1=None,seq2=None,Comments=True):
         """
         Tests whether the graph instance *self* is a permutation graph
         and renders, in case the test is positive,
         the corresponding permutation.
         """
         from digraphs import FusionDigraph
-        og = self.computeOrientedDigraph(PartiallyDetermined=True)
-        odt = og.computeTransitivityDegree()
-        if odt < Decimal('0.9999999999'):
-            if Debug:
-                print('Tranditivity degree %.3f < 1' % odt)
-                print('The graph instance is not a permutation graph')
-            return
-        gd = -self
-        ogd = gd.computeOrientedDigraph(PartiallyDetermined=True)
-        ogdt = ogd.computeTransitivityDegree()
-        if ogdt < Decimal('0.99999999999'):
-            if Debug:
-                print('Dual tranditivity degree %.3f < 1' % ogdt)
-                print('The graph instance is not a permutation graph')
-            return
-        
-        f1 = FusionDigraph(og,ogd,'o-max')
-        f2 = FusionDigraph((-og),ogd,'o-max')
-        seq1 = f1.computeCopelandRanking()
-        if Debug:
-            print(seq1)
-        seq2 = f2.computeCopelandRanking()
-        if Debug:
-            print(seq2)
+        if seq1 == None or seq2 == None:
+            og = self.computeOrientedDigraph(PartiallyDetermined=True)
+            odt = og.computeTransitivityDegree()
+            if odt < Decimal('1'):
+                if Comments:
+                    print('Tranditivity degree %.3f < 1' % odt)
+                    print('The graph instance is not a permutation graph')
+                return
+            gd = -self
+            ogd = gd.computeOrientedDigraph(PartiallyDetermined=True)
+            ogdt = ogd.computeTransitivityDegree()
+            if ogdt < Decimal('1'):
+                if Comments:
+                    print('Dual tranditivity degree %.3f < 1' % ogdt)
+                    print('The graph instance is not a permutation graph')
+                return
+            
+            f1 = FusionDigraph(og,ogd,'o-max')
+            f2 = FusionDigraph((-og),ogd,'o-max')
+            seq1 = f1.computeCopelandRanking()
+            if Comments:
+                print(seq1)
+            seq2 = f2.computeCopelandRanking()
+            if Comments:
+                print(seq2)
         permutation = [0 for j in range(self.order)]
         for j in range(self.order):
             permutation[seq2.index(seq1[j])] = j+1
-##            x = self.vertices[seq1[j]]['id']
-##            permutation[j] = self.vertices[seq2[x-1]]['id']
-        if Debug:
+        if Comments:
             print(permutation)
         return permutation
 

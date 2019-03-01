@@ -6070,7 +6070,7 @@ best covered terminal kernel</span></p>
 </div>
 <div class="section" id="recognizing-permutation-graphs">
 <h3><a class="toc-backref" href="#id176">Recognizing permutation graphs</a><a class="headerlink" href="#recognizing-permutation-graphs" title="Permalink to this headline">¶</a></h3>
-<p>The last property gives a polynomial test procedure (in <img class="math" src="_images/math/b7ed29dd710e8bf1346e128bf62bff037b7e66f8.png" alt="O(n^3)"/> due to the transitivity check) for recognizing permutation graphs. Let us consider, for instance, the following random graph of order 8 generated with an edge probability of 40%.</p>
+<p>The last property gives a polynomial test procedure (in <img class="math" src="_images/math/b7ed29dd710e8bf1346e128bf62bff037b7e66f8.png" alt="O(n^3)"/> due to the transitivity check) for recognizing permutation graphs. Let us consider, for instance, the following random graph of <em>order</em> 8 generated with an <em>edge probability</em> of 40% and a <em>random seed</em> equal to 4335.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -6098,24 +6098,24 @@ best covered terminal kernel</span></p>
 <a class="reference internal image-reference" href="_images/randomGraph4335.png"><img alt="Random graph" src="_images/randomGraph4335.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text"><em>Figure</em> 15: Random graph of order 8 generated with edge probility 0.4</span></p>
 </div>
-<p>We may check that this graph and its dual are transitively orientable by computing for both an oriented digraph with the <a class="reference internal" href="techDoc.html#graphs.Graph.computeOrientedDigraph" title="graphs.Graph.computeOrientedDigraph"><code class="xref py py-func docutils literal"><span class="pre">graphs.Graph.computeOrientedDigraph()</span></code></a> method.</p>
+<p>We may check that this graph and its dual are both <em>transitively orientable</em> by computing for both an oriented digraph with the <a class="reference internal" href="techDoc.html#graphs.Graph.computeTransitivelyOrientedDigraph" title="graphs.Graph.computeTransitivelyOrientedDigraph"><code class="xref py py-func docutils literal"><span class="pre">graphs.Graph.computeTransitivelyOrientedDigraph()</span></code></a> method.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
 5
 6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">og</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrientedDigraph</span><span class="p">(</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">og</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeTransitivelyOrientedDigraph</span><span class="p">(</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Transitivity degree: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">og</span><span class="o">.</span><span class="n">transitivityDegree</span><span class="p">))</span>
 <span class="go">Transitivity degree: 1.000</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gdual</span> <span class="o">=</span> <span class="o">-</span><span class="n">g</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ogdual</span> <span class="o">=</span> <span class="n">gdual</span><span class="o">.</span><span class="n">computeOrientedDigraph</span><span class="p">(</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ogdual</span> <span class="o">=</span> <span class="n">gdual</span><span class="o">.</span><span class="n">computeTransitivelyOrientedDigraph</span><span class="p">(</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Transitivity degree: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ogd</span><span class="o">.</span><span class="n">transitivityDegree</span><span class="p">))</span>
 <span class="go">Transitivity degree: 1.000</span>
 </pre></div>
 </td></tr></table></div>
 <p>The <code class="code docutils literal"><span class="pre">PartiallyDetermined=True</span></code> flag (see Line 1 and 5) is required here in order to orient <em>only</em> the actual edges of the graphs. Relations between vertices not linked by an edge will be put to the <em>indeterminate</em> characteristic value 0. This will allow us to compute later on convenient disjunctive digraph fusions.</p>
-<p>As both orientations are transitive indeed (see Line 3 and 7), we may conclude that the given random graph is actally a permutation graph instance. However, we still need to find now its corresponding permutation. We therefore implement a recipee given by Martin Golumbic <a class="reference internal" href="#gol-2004" id="id59">[GOL-2004]</a> p.159.</p>
+<p>As both orientations are transitive indeed (see Line 3 and 7), we may conclude that the given random graph is actally a <em>permutation graph</em> instance. However, we still need to find now its corresponding <em>permutation</em>. We therefore implement a recipee given by Martin Golumbic <a class="reference internal" href="#gol-2004" id="id59">[GOL-2004]</a> p.159.</p>
 <p>We will first <strong>fuse</strong> both <em>og</em> and <em>ogdual</em> orientations above with an <strong>epistemic disjunction</strong> (see the <a class="reference internal" href="techDoc.html#digraphsTools.omax" title="digraphsTools.omax"><code class="xref py py-func docutils literal"><span class="pre">digraphsTools.omax()</span></code></a> operator), hence, the partially determined orientations requested above.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -6125,21 +6125,21 @@ best covered terminal kernel</span></p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f1gd</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">(</span><span class="n">og</span><span class="p">,</span><span class="n">ogdual</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">seq1</span> <span class="o">=</span> <span class="n">f1gd</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">seq1</span><span class="p">)</span>
-<span class="go">[&#39;v1&#39;, &#39;v2&#39;, &#39;v3&#39;, &#39;v5&#39;, &#39;v4&#39;, &#39;v6&#39;, &#39;v7&#39;, &#39;v8&#39;]</span>
+<span class="go">[&#39;v1&#39;, &#39;v4&#39;, &#39;v3&#39;, &#39;v2&#39;, &#39;v5&#39;, &#39;v6&#39;, &#39;v7&#39;, &#39;v8&#39;]</span>
 </pre></div>
 </td></tr></table></div>
-<p>Both <em>g</em> and <em>gdual</em> are oriented in increasing order of the keys of the vertices and we obtain by the <em>Copeland</em> ranking rule (see <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a> and the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeCopelandRanking" title="digraphs.Digraph.computeCopelandRanking"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.computeCopelandRanking()</span></code></a> method) a complete linear ordering of the vertices in increasing vertices’ keys (see Line 5 above).</p>
-<p>We reverse now the orientation of the edges in <em>og</em> (see <em>-og</em> in Line 1 below) in order to generate, again by disjunctive fusion, the inversions that are produced by the permutation we are looking for. Computing again a ranking with the <em>Copeland</em> rule, will show the correspondingly permuted list of vertices (see Line 4 below).</p>
+<p>We obtain by the <em>Copeland</em> ranking rule (see <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a> and the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeCopelandRanking" title="digraphs.Digraph.computeCopelandRanking"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.computeCopelandRanking()</span></code></a> method) a complete linear ordering of the vertices (see Line 5 above).</p>
+<p>We reverse now the orientation of the edges in <em>og</em> (see <em>-og</em> in Line 1 below) in order to generate, again by disjunctive fusion, the <em>inversions</em> that are produced by the permutation we are looking for. Computing again a ranking with the <em>Copeland</em> rule, will show the correspondingly permuted list of vertices (see Line 4 below).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f2gd</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">((</span><span class="o">-</span><span class="n">og</span><span class="p">),</span><span class="n">ogdual</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">seq2</span> <span class="o">=</span> <span class="n">f2gd</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">seq2</span><span class="p">)</span>
-<span class="go">[&#39;v2&#39;, &#39;v3&#39;, &#39;v4&#39;, &#39;v8&#39;, &#39;v6&#39;, &#39;v1&#39;, &#39;v7&#39;, &#39;v5&#39;]</span>
+<span class="go">[&#39;v4&#39;, &#39;v3&#39;, &#39;v2&#39;, &#39;v8&#39;, &#39;v6&#39;, &#39;v1&#39;, &#39;v7&#39;, &#39;v5&#39;]</span>
 </pre></div>
 </td></tr></table></div>
-<p>Vertex ‘v1’ is hence put at position 6, vertex ‘v2’ at position 1, … etc. We generate these positions for all vertices and obtain thus the required permutation (see Line 5 below).</p>
+<p>Vertex ‘v1’ is put from position 1 to position 6, vertex ‘v4’ is put from position 2 to position 1, vertex ‘v3’ from position 3 to position 2, … etc. We generate these positions for all vertices and obtain thus the required permutation (see Line 5 below).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3

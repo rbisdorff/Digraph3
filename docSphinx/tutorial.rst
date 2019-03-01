@@ -3848,7 +3848,7 @@ Dual transitivity degree: 1.000
 Recognizing permutation graphs
 ..............................
 
-The last property gives a polynomial test procedure (in :math:`O(n^3)` due to the transitivity check) for recognizing permutation graphs. Let us consider, for instance, the following random graph of order 8 generated with an edge probability of 40%.
+The last property gives a polynomial test procedure (in :math:`O(n^3)` due to the transitivity check) for recognizing permutation graphs. Let us consider, for instance, the following random graph of *order* 8 generated with an *edge probability* of 40% and a *random seed* equal to 4335.
 
 >>> g = RandomGraph(order=8,edgeProbability=0.4,seed=4335)
 >>> g
@@ -3869,19 +3869,19 @@ Attributes       : ['name', 'order', 'vertices', 'valuationDomain',
 
     *Figure* 15: Random graph of order 8 generated with edge probility 0.4
 
-We may check that this graph and its dual are transitively orientable by computing for both an oriented digraph with the :py:func:`graphs.Graph.computeOrientedDigraph` method.
+We may check that this graph and its dual are both *transitively orientable* by computing for both an oriented digraph with the :py:func:`graphs.Graph.computeTransitivelyOrientedDigraph` method.
 
->>> og = g.computeOrientedDigraph(PartiallyDetermined=True)
+>>> og = g.computeTransitivelyOrientedDigraph(PartiallyDetermined=True)
 >>> print('Transitivity degree: %.3f' % (og.transitivityDegree)) 
 Transitivity degree: 1.000
 >>> gdual = -g
->>> ogdual = gdual.computeOrientedDigraph(PartiallyDetermined=True)
+>>> ogdual = gdual.computeTransitivelyOrientedDigraph(PartiallyDetermined=True)
 >>> print('Transitivity degree: %.3f' % (ogd.transitivityDegree)) 
 Transitivity degree: 1.000
 
 The :code:`PartiallyDetermined=True` flag (see Line 1 and 5) is required here in order to orient *only* the actual edges of the graphs. Relations between vertices not linked by an edge will be put to the *indeterminate* characteristic value 0. This will allow us to compute later on convenient disjunctive digraph fusions.
 
-As both orientations are transitive indeed (see Line 3 and 7), we may conclude that the given random graph is actally a permutation graph instance. However, we still need to find now its corresponding permutation. We therefore implement a recipee given by Martin Golumbic [GOL-2004]_ p.159.
+As both orientations are transitive indeed (see Line 3 and 7), we may conclude that the given random graph is actally a *permutation graph* instance. However, we still need to find now its corresponding *permutation*. We therefore implement a recipee given by Martin Golumbic [GOL-2004]_ p.159.
 
 We will first **fuse** both *og* and *ogdual* orientations above with an **epistemic disjunction** (see the :py:func:`digraphsTools.omax` operator), hence, the partially determined orientations requested above.
 
@@ -3889,18 +3889,18 @@ We will first **fuse** both *og* and *ogdual* orientations above with an **epist
 >>> f1gd = FusionDigraph(og,ogdual,operator='o-max')
 >>> seq1 = f1gd.computeCopelandRanking()
 >>> print(seq1)
-['v1', 'v2', 'v3', 'v5', 'v4', 'v6', 'v7', 'v8']
+['v1', 'v4', 'v3', 'v2', 'v5', 'v6', 'v7', 'v8']
 
-Both *g* and *gdual* are oriented in increasing order of the keys of the vertices and we obtain by the *Copeland* ranking rule (see :ref:`Ranking-Tutorial-label` and the :py:func:`digraphs.Digraph.computeCopelandRanking` method) a complete linear ordering of the vertices in increasing vertices' keys (see Line 5 above).
+We obtain by the *Copeland* ranking rule (see :ref:`Ranking-Tutorial-label` and the :py:func:`digraphs.Digraph.computeCopelandRanking` method) a complete linear ordering of the vertices (see Line 5 above).
 
-We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) in order to generate, again by disjunctive fusion, the inversions that are produced by the permutation we are looking for. Computing again a ranking with the *Copeland* rule, will show the correspondingly permuted list of vertices (see Line 4 below).
+We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) in order to generate, again by disjunctive fusion, the *inversions* that are produced by the permutation we are looking for. Computing again a ranking with the *Copeland* rule, will show the correspondingly permuted list of vertices (see Line 4 below).
 
 >>> f2gd = FusionDigraph((-og),ogdual,operator='o-max')
 >>> seq2 = f2gd.computeCopelandRanking()
 >>> print(seq2)
-['v2', 'v3', 'v4', 'v8', 'v6', 'v1', 'v7', 'v5']
+['v4', 'v3', 'v2', 'v8', 'v6', 'v1', 'v7', 'v5']
 
-Vertex 'v1' is hence put at position 6, vertex 'v2' at position 1, ... etc. We generate these positions for all vertices and obtain thus the required permutation (see Line 5 below).
+Vertex 'v1' is put from position 1 to position 6, vertex 'v4' is put from position 2 to position 1, vertex 'v3' from position 3 to position 2, ... etc. We generate these positions for all vertices and obtain thus the required permutation (see Line 5 below).
 
 >>> permutation = [0 for j in range(g.order)]
 >>> for j in range(g.order):
