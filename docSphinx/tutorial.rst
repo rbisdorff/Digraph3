@@ -3808,7 +3808,7 @@ Properties of permutation graphs
 
 A permutation graph is **transitively orientable**. The :py:func:`graphs.PermutationGraph.transitiveOrientation` method renders a digraph where each edge of the permutation graph is converted into an arc oriented in increasing alphabetic order of the adjacent vertices' keys (see [GOL-2004]_).
 
-This orientation is always transitive and delivers a *weak ordering* of the vertices.
+Following from the prmutation graph construction, this orientation is always transitive and delivers a *weak ordering* of the vertices.
     
 >>> dg = g.transitiveOrientation()
 >>> dg
@@ -3838,12 +3838,12 @@ dot -Grankdir=TB -Tpng oriented_permutationGraph.dot -o oriented_permutationGrap
 	    
     *Figure* 14a: Hasse diagram of the transitive orientation of the permutation graph
 
-The dual of a permutation graph is *again* a permutation graph and as such also transitively orientable. Now, a given graph *g* is a permutation graph **if and only if** both *g* **and** *gdual = -g* are *transitively orientable*.
+The dual of a permutation graph is *again* a permutation graph and as such also transitively orientable. Now, a given graph *g* is a permutation graph **if and only if** both *g* **and** *gd = -g* are *transitively orientable*.
 
->>> gdual = -g
->>> dgdual = gdual.transitiveOrientation()
+>>> gd = -g
+>>> dgd = gd.transitiveOrientation()
 >>> print('Dual transitivity degree: %.3f' %\
-...             dgdual.computeTransitivityDegree() ) 
+...             dgd.computeTransitivityDegree() ) 
 Dual transitivity degree: 1.000
 
 Recognizing permutation graphs
@@ -3873,7 +3873,9 @@ Attributes       : ['name', 'order', 'vertices', 'valuationDomain', 'seed',
 
     *Figure* 15a: Random graph of order 8 generated with edge probility 0.4
 
-If the graph instance *g* is a permutation graph, *g* and its dual *-g* must be *transitively orientable*, in fact **comparability graphs**. We may easily check that this graph instance *g* and its dual *gd = -g* are transitively orientable with the :py:func:`graphs.Graph.isComparabilityGraph` test. This method proceeds by trying to construct a ranked equivalence class decomposition of *g* stored in *g.edgeRanks* (see [GOL-2004]_ p.129-132).
+If the graph instance *g* is a permutation graph, *g* and its dual *dg = -g* must be *transitively orientable*, in fact **comparability graphs**. We may easily check that this graph instance *g* and its dual *gd* are in fact transitively orientable with the :py:func:`graphs.Graph.isComparabilityGraph` test.
+
+This method proceeds by trying to construct a ranked equivalence class decomposition of a given graph instance and, if successful, stores the decomposition ranks into the *self.edgeRanks* attribute (see [GOL-2004]_ p.129-132).
 
 >>> print(g.isComparabilityGraph())
 True
@@ -3897,18 +3899,18 @@ As both graphs are indeed transitivily orientable (see Line 3 and 7), we may con
 We will first **fuse** both *og* and *ogd* orientations above with an **epistemic disjunction** (see the :py:func:`digraphsTools.omax` operator), hence, the partially determined orientations requested above.
 
 >>> from digraphs import FusionDigraph
->>> f1gd = FusionDigraph(og,ogdual,operator='o-max')
->>> seq1 = f1gd.computeCopelandRanking()
->>> print(seq1)
+>>> f1 = FusionDigraph(og,ogd,operator='o-max')
+>>> s1 = f1.computeCopelandRanking()
+>>> print(s1)
 ['v1', 'v4', 'v3', 'v2', 'v5', 'v6', 'v7', 'v8']
 
 We obtain by the *Copeland* ranking rule (see :ref:`Ranking-Tutorial-label` and the :py:func:`digraphs.Digraph.computeCopelandRanking` method) a complete linear ordering of the vertices (see Line 5 above).
 
 We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) in order to generate, again by disjunctive fusion, the *inversions* that are produced by the permutation we are looking for. Computing again a ranking with the *Copeland* rule, will show the correspondingly permuted list of vertices (see Line 4 below).
 
->>> f2gd = FusionDigraph((-og),ogdual,operator='o-max')
->>> seq2 = f2gd.computeCopelandRanking()
->>> print(seq2)
+>>> f2 = FusionDigraph((-og),ogd,operator='o-max')
+>>> s2 = f2.computeCopelandRanking()
+>>> print(s2)
 ['v4', 'v3', 'v2', 'v8', 'v6', 'v1', 'v7', 'v5']
 
 Vertex 'v1' is put from position 1 to position 6, vertex 'v4' is put from position 2 to position 1, vertex 'v3' from position 3 to position 2, ... etc. We generate these position swapping for all vertices and obtain thus the required permutation (see Line 5 below).
@@ -3926,9 +3928,9 @@ The :py:func:`graphs.Graph.computePermutation` method does directly operate thes
 ['v2', 'v3', 'v4', 'v8', 'v6', 'v1', 'v7', 'v5']
 [2, 3, 4, 8, 6, 1, 7, 5]
 
-It is worth noticing (see Lines 2-3 above) that transitive orientations are usually not unique. In case of partial orders, there may exist infact several compatible ranked equivalence class decompositions depending on where to situate incomparable vertices. However, for each given permutation graph instance is based on a necessarily unique permutation.
+It is worthwhile noticing (see Lines 2-3 above) that transitive orientations are usually not unique. In case of partial orders, there may exist infact several compatible ranked equivalence class decompositions depending on where to situate incomparable vertices. However, each given permutation graph instance is based on a necessarily unique permutation.
 
-We may finally check that this permutation will correctly generate a corresponding permutation graph which is isomorphic to the given random graph *g*.
+We may finally check that [2, 3, 4, 8, 6, 1, 7, 5] will correctly generate a corresponding permutation graph which is isomorphic to the given random graph *g*.
 
 >>> gtest = PermutationGraph(permutation=[2, 3, 4, 8, 6, 1, 7, 5])
 >>> gtest
@@ -3947,7 +3949,7 @@ Exporting to permutationGraph4335.dot
 fdp -Tpng permutationGraph4335.dot -o permutationGraph4335.png
 
 .. Figure:: permutationGraph4335.png
-    :alt: The correct permutation graph
+    :alt: The isomorphic permutation graph
     :width: 400 px
     :align: center
 

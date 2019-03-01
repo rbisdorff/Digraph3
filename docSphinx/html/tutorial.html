@@ -6009,7 +6009,7 @@ best covered terminal kernel</span></p>
 <div class="section" id="properties-of-permutation-graphs">
 <h3><a class="toc-backref" href="#id176">Properties of permutation graphs</a><a class="headerlink" href="#properties-of-permutation-graphs" title="Permalink to this headline">¶</a></h3>
 <p>A permutation graph is <strong>transitively orientable</strong>. The <a class="reference internal" href="techDoc.html#graphs.PermutationGraph.transitiveOrientation" title="graphs.PermutationGraph.transitiveOrientation"><code class="xref py py-func docutils literal"><span class="pre">graphs.PermutationGraph.transitiveOrientation()</span></code></a> method renders a digraph where each edge of the permutation graph is converted into an arc oriented in increasing alphabetic order of the adjacent vertices’ keys (see <a class="reference internal" href="#gol-2004" id="id58">[GOL-2004]</a>).</p>
-<p>This orientation is always transitive and delivers a <em>weak ordering</em> of the vertices.</p>
+<p>Following from the prmutation graph construction, this orientation is always transitive and delivers a <em>weak ordering</em> of the vertices.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -6055,15 +6055,15 @@ best covered terminal kernel</span></p>
 <a class="reference internal image-reference" href="_images/oriented_permutationGraph.png"><img alt="Hasse diagram of the orientationofof a permutation graph" src="_images/oriented_permutationGraph.png" style="width: 200px;" /></a>
 <p class="caption"><span class="caption-text"><em>Figure</em> 14a: Hasse diagram of the transitive orientation of the permutation graph</span></p>
 </div>
-<p>The dual of a permutation graph is <em>again</em> a permutation graph and as such also transitively orientable. Now, a given graph <em>g</em> is a permutation graph <strong>if and only if</strong> both <em>g</em> <strong>and</strong> <em>gdual = -g</em> are <em>transitively orientable</em>.</p>
+<p>The dual of a permutation graph is <em>again</em> a permutation graph and as such also transitively orientable. Now, a given graph <em>g</em> is a permutation graph <strong>if and only if</strong> both <em>g</em> <strong>and</strong> <em>gd = -g</em> are <em>transitively orientable</em>.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gdual</span> <span class="o">=</span> <span class="o">-</span><span class="n">g</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dgdual</span> <span class="o">=</span> <span class="n">gdual</span><span class="o">.</span><span class="n">transitiveOrientation</span><span class="p">()</span>
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gd</span> <span class="o">=</span> <span class="o">-</span><span class="n">g</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dgd</span> <span class="o">=</span> <span class="n">gd</span><span class="o">.</span><span class="n">transitiveOrientation</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Dual transitivity degree: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span>\
-<span class="gp">... </span>            <span class="n">dgdual</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span> <span class="p">)</span>
+<span class="gp">... </span>            <span class="n">dgd</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span> <span class="p">)</span>
 <span class="go">Dual transitivity degree: 1.000</span>
 </pre></div>
 </td></tr></table></div>
@@ -6104,7 +6104,8 @@ best covered terminal kernel</span></p>
 <a class="reference internal image-reference" href="_images/randomGraph4335.png"><img alt="Random graph" src="_images/randomGraph4335.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text"><em>Figure</em> 15a: Random graph of order 8 generated with edge probility 0.4</span></p>
 </div>
-<p>If the graph instance <em>g</em> is a permutation graph, <em>g</em> and its dual <em>-g</em> must be <em>transitively orientable</em>, in fact <strong>comparability graphs</strong>. We may easily check that this graph instance <em>g</em> and its dual <em>gd = -g</em> are transitively orientable with the <a class="reference internal" href="techDoc.html#graphs.Graph.isComparabilityGraph" title="graphs.Graph.isComparabilityGraph"><code class="xref py py-func docutils literal"><span class="pre">graphs.Graph.isComparabilityGraph()</span></code></a> test. This method proceeds by trying to construct a ranked equivalence class decomposition of <em>g</em> stored in <em>g.edgeRanks</em> (see <a class="reference internal" href="#gol-2004" id="id59">[GOL-2004]</a> p.129-132).</p>
+<p>If the graph instance <em>g</em> is a permutation graph, <em>g</em> and its dual <em>dg = -g</em> must be <em>transitively orientable</em>, in fact <strong>comparability graphs</strong>. We may easily check that this graph instance <em>g</em> and its dual <em>gd</em> are in fact transitively orientable with the <a class="reference internal" href="techDoc.html#graphs.Graph.isComparabilityGraph" title="graphs.Graph.isComparabilityGraph"><code class="xref py py-func docutils literal"><span class="pre">graphs.Graph.isComparabilityGraph()</span></code></a> test.</p>
+<p>This method proceeds by trying to construct a ranked equivalence class decomposition of a given graph instance and, if successful, stores the decomposition ranks into the <em>self.edgeRanks</em> attribute (see <a class="reference internal" href="#gol-2004" id="id59">[GOL-2004]</a> p.129-132).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -6138,9 +6139,9 @@ best covered terminal kernel</span></p>
 3
 4
 5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">FusionDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">f1gd</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">(</span><span class="n">og</span><span class="p">,</span><span class="n">ogdual</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">seq1</span> <span class="o">=</span> <span class="n">f1gd</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">seq1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f1</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">(</span><span class="n">og</span><span class="p">,</span><span class="n">ogd</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span> <span class="o">=</span> <span class="n">f1</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
 <span class="go">[&#39;v1&#39;, &#39;v4&#39;, &#39;v3&#39;, &#39;v2&#39;, &#39;v5&#39;, &#39;v6&#39;, &#39;v7&#39;, &#39;v8&#39;]</span>
 </pre></div>
 </td></tr></table></div>
@@ -6149,9 +6150,9 @@ best covered terminal kernel</span></p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f2gd</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">((</span><span class="o">-</span><span class="n">og</span><span class="p">),</span><span class="n">ogdual</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">seq2</span> <span class="o">=</span> <span class="n">f2gd</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">seq2</span><span class="p">)</span>
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f2</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">((</span><span class="o">-</span><span class="n">og</span><span class="p">),</span><span class="n">ogd</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span> <span class="o">=</span> <span class="n">f2</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
 <span class="go">[&#39;v4&#39;, &#39;v3&#39;, &#39;v2&#39;, &#39;v8&#39;, &#39;v6&#39;, &#39;v1&#39;, &#39;v7&#39;, &#39;v5&#39;]</span>
 </pre></div>
 </td></tr></table></div>
@@ -6177,8 +6178,8 @@ best covered terminal kernel</span></p>
 <span class="go">[2, 3, 4, 8, 6, 1, 7, 5]</span>
 </pre></div>
 </td></tr></table></div>
-<p>It is worth noticing (see Lines 2-3 above) that transitive orientations are usually not unique. In case of partial orders, there may exist infact several compatible ranked equivalence class decompositions depending on where to situate incomparable vertices. However, for each given permutation graph instance is based on a necessarily unique permutation.</p>
-<p>We may finally check that this permutation will correctly generate a corresponding permutation graph which is isomorphic to the given random graph <em>g</em>.</p>
+<p>It is worthwhile noticing (see Lines 2-3 above) that transitive orientations are usually not unique. In case of partial orders, there may exist infact several compatible ranked equivalence class decompositions depending on where to situate incomparable vertices. However, each given permutation graph instance is based on a necessarily unique permutation.</p>
+<p>We may finally check that [2, 3, 4, 8, 6, 1, 7, 5] will correctly generate a corresponding permutation graph which is isomorphic to the given random graph <em>g</em>.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -6211,7 +6212,7 @@ best covered terminal kernel</span></p>
 </pre></div>
 </td></tr></table></div>
 <div class="figure align-center" id="id93">
-<a class="reference internal image-reference" href="_images/permutationGraph4335.png"><img alt="The correct permutation graph" src="_images/permutationGraph4335.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/permutationGraph4335.png"><img alt="The isomorphic permutation graph" src="_images/permutationGraph4335.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text"><em>Figure</em> 15b: Permutation graph obtained from [2, 3, 4, 8, 6, 1, 7, 5]</span></p>
 </div>
 <p>And, we recover indeed an <em>isomorphic copy</em> of the original random graph (see Fig. 15a).</p>
