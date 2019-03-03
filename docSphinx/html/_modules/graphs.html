@@ -976,6 +976,7 @@
                             <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
                             <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
             <span class="n">g</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">relation</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">closeTransitive</span><span class="p">()</span>
             <span class="n">g</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeSize</span><span class="p">()</span>
             <span class="n">g</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
             <span class="n">g</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>

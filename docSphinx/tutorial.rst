@@ -3892,7 +3892,7 @@ Transitivity degree: 1.000
 
 The :code:`PartiallyDetermined=True` flag (see Line 1 and 5) is required here in order to orient *only* the actual edges of the graphs. Relations between vertices not linked by an edge will be put to the *indeterminate* characteristic value 0. This will allow us to compute later on convenient disjunctive digraph fusions.
 
-As both graphs are indeed transitivily orientable (see Line 3 and 7), we may conclude that the given random graph is actally a *permutation graph* instance. Yet, we still need to find now its corresponding *permutation*. We therefore implement a recipee given by Martin Golumbic [GOL-2004]_ p.159.
+As both graphs are indeed transitively orientable (see Lines 3 and 6 above), we may conclude that the given random graph is actally a *permutation graph* instance. Yet, we still need to find now its corresponding *permutation*. We therefore implement a recipee given by Martin Golumbic [GOL-2004]_ p.159.
 
 We will first **fuse** both *og* and *ogd* orientations above with an **epistemic disjunction** (see the :py:func:`digraphsTools.omax` operator), hence, the partially determined orientations requested above.
 

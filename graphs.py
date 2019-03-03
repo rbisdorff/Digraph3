@@ -929,6 +929,7 @@ class Graph(object):
                             relation[x][y] = Med
                             relation[y][x] = Med
             g.relation = relation
+            g.closeTransitive()
             g.size = g.computeSize()
             g.gamma = g.gammaSets()
             g.notGamma = g.notGammaSets()
