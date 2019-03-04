@@ -698,7 +698,7 @@ def testHTMLMaps():
 def testCoveringIndex():
     print('*--- test computing the covering index for a choice ---*')
     g = RandomDigraph(order = 10,arcProbability=0.4)
-    g.showPreKernels()
+    g.computePreKernels()
     for kernel in g.dompreKernels:
         print(kernel, g.coveringIndex(kernel,direction='out'))
     for kernel in g.abspreKernels:
