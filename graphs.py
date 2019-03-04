@@ -843,8 +843,8 @@ class Graph(object):
     def computeTransitivelyOrientedDigraph(self,PartiallyDetermined=False,Debug=False):
         """
         Renders a digraph where each edge of the permutation graph *self*
-        is converted into an arc oriented in increasing order of the ranks of equivalence classes
-        detected with the :py:func:`digraphs.Digraph.isComparabilityGraph` test and stored in self.edgeRanks.
+        is converted into an arc oriented in increasing order of the ranks of implication classes
+        detected with the :py:func:`digraphs.Digraph.isComparabilityGraph` test and stored in self.edgeOrientations.
 
         The parameter *PartiallyDetermined*: {True|False (by default), converts if *True* all absent
         edges of the graph into indeterminate symmetric relations in the resulting digraph.
@@ -892,8 +892,8 @@ class Graph(object):
             print('The graph %s does not admit a transitive orientation.' % self.name)
         else:
             if Debug:
-                for arc in self.edgeRanks:
-                    print(arc, self.edgeRanks[arc])
+                for arc in self.edgeOrientations:
+                    print(arc, self.edgeOrientations[arc])
             g = EmptyDigraph(order=self.order)
             g.__class__ = WeakOrder
             g.name = 'trans_oriented_'+self.name
@@ -914,9 +914,9 @@ class Graph(object):
                 relation[x][x] = Med
                 for j in range(n):
                     y = actionKeysList[j]
-                    if self.edgeRanks[x,y] > 0:
+                    if self.edgeOrientations[x,y] > 0:
                             relation[x][y] = Max
-                    elif self.edgeRanks[x,y] < 0:
+                    elif self.edgeOrientations[x,y] < 0:
                         relation[x][y] = Min
                     else:
                         relation[x][y] = Med            
@@ -1391,29 +1391,29 @@ class Graph(object):
     def isComparabilityGraph(self,Debug=False):
         """
         Verifies if the graph instance is a comparability graph.
-        If yes, a decomposition of the edges is stored in self.edgeRanks. 
+        If yes, a decomposition of the edges is stored in self.edgeOrientations. 
         
         *Source*: M. Ch. Golumbic (2004) Algorithmic Graph Thery and Perfect Graphs,
         Annals of Discrete Mathematics 57, Elsevier, p. 129-132.
         """
-        global rank,IsComparabilityGraph,k
+        global orientation,IsComparabilityGraph,k
         def _explore(arc):
-            global rank,IsComparabilityGraph,k
+            global orientation,IsComparabilityGraph,k
             i = arc[0]
             j = arc[1]
             if Debug:
-                print('arc', arc, rank, self.gamma[i], self.gamma[j])
+                print('arc', arc, orientation, self.gamma[i], self.gamma[j])
 
             for m in self.gamma[i]:
                 if Debug:
-                    print(i,j,m,self.gamma[j],rank[(j,m)])
-                if (m not in self.gamma[j]) or (abs(rank[(j,m)]) < k): 
-                    if rank[(i,m)] == 999:
-                        rank[(i,m)] = k
-                        rank[(m,i)] = -k
+                    print(i,j,m,self.gamma[j],orientation[(j,m)])
+                if (m not in self.gamma[j]) or (abs(orientation[(j,m)]) < k): 
+                    if orientation[(i,m)] == 999:
+                        orientation[(i,m)] = k
+                        orientation[(m,i)] = -k
                         _explore((i,m))
-                    elif rank[(i,m)] == -k:
-                        rank[(i,m)] = k
+                    elif orientation[(i,m)] == -k:
+                        orientation[(i,m)] = k
                         IsComparabilityGraph = False
                         if Debug:
                             print('is comp?',IsComparabilityGraph)
@@ -1422,14 +1422,14 @@ class Graph(object):
                     
             for m in self.gamma[j]:
                 if Debug:
-                    print(i,j,m,self.gamma[i],rank[(i,m)])
-                if (m not in self.gamma[i]) or (abs(rank[(i,m)]) < k):
-                    if rank[(m,j)] == 999:
-                        rank[(m,j)] = k
-                        rank[(j,m)] = -k
+                    print(i,j,m,self.gamma[i],orientation[(i,m)])
+                if (m not in self.gamma[i]) or (abs(orientation[(i,m)]) < k):
+                    if orientation[(m,j)] == 999:
+                        orientation[(m,j)] = k
+                        orientation[(j,m)] = -k
                         _explore((m,j))
-                    elif rank[(m,j)] == -k:
-                        rank[(m,j)] = k
+                    elif orientation[(m,j)] == -k:
+                        orientation[(m,j)] = k
                         IsComparabilityGraph = False
                         if Debug:
                             print('is comp ?',IsComparabilityGraph)
@@ -1437,43 +1437,43 @@ class Graph(object):
                         _explore((m,j))
                       
             if Debug:
-                print(arc,rank,IsComparabilityGraph)
+                print(arc,orientation,IsComparabilityGraph)
 
         # initializing
         IsComparabilityGraph = True
         k = 0
-        rank = {}
+        orientation = {}
         n = len(self.vertices)
         verticesList = list(self.vertices.keys())
         for i in range(n):
             vi = verticesList[i]
-            rank[(vi,vi)] = 0
+            orientation[(vi,vi)] = 0
             for j in range(i+1,n):
                 vi = verticesList[i]
                 vj = verticesList[j]
                 edgeKey = frozenset([vi,vj])
                 if self.edges[edgeKey] > Decimal('0'):
-                    rank[(vi,vj)] = 999
-                    rank[(vj,vi)] = 999
+                    orientation[(vi,vj)] = 999
+                    orientation[(vj,vi)] = 999
                 else:
-                    rank[(vi,vj)] = 0
-                    rank[(vj,vi)] = 0
+                    orientation[(vi,vj)] = 0
+                    orientation[(vj,vi)] = 0
         #exploring all positive edges
         for edge in self.edges:
             arc = tuple(edge)
             if self.edges[edge] > Decimal('0'):  
-                if rank[arc] == 999:
+                if orientation[arc] == 999:
                     k += 1
-                    rank[arc] = k
-                    rank[tuple(reversed(arc))] = -k
+                    orientation[arc] = k
+                    orientation[tuple(reversed(arc))] = -k
                     _explore(arc)
             if Debug:
-                print('===>>>',edge,'=',self.edges[edge],rank)
+                print('===>>>',edge,'=',self.edges[edge],orientation)
                 
         # storing the edge decomposition
         self.IsComparabilityGraph = IsComparabilityGraph
         if IsComparabilityGraph:
-            self.edgeRanks = rank
+            self.edgeOrientations = orientation
 
         return IsComparabilityGraph
 
@@ -4008,7 +4008,7 @@ if __name__ == '__main__':
     #b = BestDeterminedSpanningForest(g)
     #print(b)
     if g.isComparabilityGraph(Debug=True):
-        print('Comparability Graph ? = True',g.edgeRanks)
+        print('Comparability Graph ? = True',g.edgeOrientations)
         dg = g.computeTransitivelyOrientedDigraph()
         print(dg)
         print(dg.computeTransitivityDegree())

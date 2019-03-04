@@ -22,6 +22,8 @@ sys.path.insert(0, os.path.abspath('../cython'))
 
 # -- General configuration -----------------------------------------------------
 
+numfig = True
+
 # If your documentation needs a minimal Sphinx version, state it here.
 #needs_sphinx = '1.0'
 
@@ -233,6 +235,7 @@ man_pages = [
 # If true, show URL addresses after external links.
 #man_show_urls = False
 
+numfig = True
 
 # -- Options for Texinfo output ------------------------------------------------
 
