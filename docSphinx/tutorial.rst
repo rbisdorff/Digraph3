@@ -3808,7 +3808,7 @@ Properties of permutation graphs
 
 A permutation graph is **transitively orientable**. The :py:func:`graphs.PermutationGraph.transitiveOrientation` method renders a digraph where each edge of the permutation graph is converted into an arc oriented in increasing alphabetic order of the adjacent vertices' keys (see [GOL-2004]_).
 
-Following from the prmutation graph construction, this orientation is always transitive and delivers a *weak ordering* of the vertices.
+Following from the permutation graph construction, this orientation is always transitive and delivers a *weak ordering* of the vertices.
     
 >>> dg = g.transitiveOrientation()
 >>> dg
@@ -3873,7 +3873,7 @@ Attributes       : ['name', 'order', 'vertices', 'valuationDomain', 'seed',
 
     *Figure* 15a: Random graph of order 8 generated with edge probility 0.4
 
-If the graph instance *g* is a permutation graph, *g* and its dual *dg = -g* must be *transitively orientable*, ie **comparability graphs** (see [GOL-2004]_). With the :py:func:`graphs.Graph.isComparabilityGraph` test, we may easily check this fact. This method proceeds indeed by trying to construct a ranked equivalence class decomposition of a given graph instance and, if successful, stores the decomposition ranks into the *self.edgeRanks* attribute (see [GOL-2004]_ p.129-132).
+If the graph instance *g* is a permutation graph, *g* and its dual *dg = -g* must be *transitively orientable*, ie **comparability graphs** (see [GOL-2004]_). With the :py:func:`graphs.Graph.isComparabilityGraph` test, we may easily check this fact. This method proceeds indeed by trying to construct a ranked implication class decomposition of a given graph instance and, if successful, stores the ranked edge orientations into the *self.edgeRanks* attribute (see [GOL-2004]_ p.129-132).
 
 >>> print(g.isComparabilityGraph())
 True

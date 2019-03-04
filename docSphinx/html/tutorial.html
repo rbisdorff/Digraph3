@@ -6009,7 +6009,7 @@ best covered terminal kernel</span></p>
 <div class="section" id="properties-of-permutation-graphs">
 <h3><a class="toc-backref" href="#id178">Properties of permutation graphs</a><a class="headerlink" href="#properties-of-permutation-graphs" title="Permalink to this headline">¶</a></h3>
 <p>A permutation graph is <strong>transitively orientable</strong>. The <a class="reference internal" href="techDoc.html#graphs.PermutationGraph.transitiveOrientation" title="graphs.PermutationGraph.transitiveOrientation"><code class="xref py py-func docutils literal"><span class="pre">graphs.PermutationGraph.transitiveOrientation()</span></code></a> method renders a digraph where each edge of the permutation graph is converted into an arc oriented in increasing alphabetic order of the adjacent vertices’ keys (see <a class="reference internal" href="#gol-2004" id="id58">[GOL-2004]</a>).</p>
-<p>Following from the prmutation graph construction, this orientation is always transitive and delivers a <em>weak ordering</em> of the vertices.</p>
+<p>Following from the permutation graph construction, this orientation is always transitive and delivers a <em>weak ordering</em> of the vertices.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -6104,7 +6104,7 @@ best covered terminal kernel</span></p>
 <a class="reference internal image-reference" href="_images/randomGraph4335.png"><img alt="Random graph" src="_images/randomGraph4335.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text"><em>Figure</em> 15a: Random graph of order 8 generated with edge probility 0.4</span></p>
 </div>
-<p>If the graph instance <em>g</em> is a permutation graph, <em>g</em> and its dual <em>dg = -g</em> must be <em>transitively orientable</em>, ie <strong>comparability graphs</strong> (see <a class="reference internal" href="#gol-2004" id="id59">[GOL-2004]</a>). With the <a class="reference internal" href="techDoc.html#graphs.Graph.isComparabilityGraph" title="graphs.Graph.isComparabilityGraph"><code class="xref py py-func docutils literal"><span class="pre">graphs.Graph.isComparabilityGraph()</span></code></a> test, we may easily check this fact. This method proceeds indeed by trying to construct a ranked equivalence class decomposition of a given graph instance and, if successful, stores the decomposition ranks into the <em>self.edgeRanks</em> attribute (see <a class="reference internal" href="#gol-2004" id="id60">[GOL-2004]</a> p.129-132).</p>
+<p>If the graph instance <em>g</em> is a permutation graph, <em>g</em> and its dual <em>dg = -g</em> must be <em>transitively orientable</em>, ie <strong>comparability graphs</strong> (see <a class="reference internal" href="#gol-2004" id="id59">[GOL-2004]</a>). With the <a class="reference internal" href="techDoc.html#graphs.Graph.isComparabilityGraph" title="graphs.Graph.isComparabilityGraph"><code class="xref py py-func docutils literal"><span class="pre">graphs.Graph.isComparabilityGraph()</span></code></a> test, we may easily check this fact. This method proceeds indeed by trying to construct a ranked implication class decomposition of a given graph instance and, if successful, stores the ranked edge orientations into the <em>self.edgeRanks</em> attribute (see <a class="reference internal" href="#gol-2004" id="id60">[GOL-2004]</a> p.129-132).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
