@@ -248,6 +248,6 @@ def testIntervalGraphs():
     #print(g)
     print(g.isTriangulated())
     print((-g).isComparabilityGraph())
-    print(g.isIntervalGraph())
+    print(g.isIntervalGraph(Comments=True))
 
 

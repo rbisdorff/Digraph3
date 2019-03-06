@@ -1534,6 +1534,33 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span></div>
 
+<div class="viewcode-block" id="Graph.isIntervalGraph"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.isIntervalGraph">[docs]</a>    <span class="k">def</span> <span class="nf">isIntervalGraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks whether the graph self is triangulated and</span>
+<span class="sd">        its dual is a comparability graph.</span>
+
+<span class="sd">        *Source*: M. Ch. Golumbic (2004) Algorithmic Graph Thery and Perfect Graphs,</span>
+<span class="sd">        Annals of Discrete Mathematics 57, Elsevier, p. 16.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isTriangulated</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Graph </span><span class="si">%s</span><span class="s1"> is triangulated&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">ds</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span>
+            <span class="k">if</span> <span class="n">ds</span><span class="o">.</span><span class="n">isComparabilityGraph</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Graph </span><span class="si">%s</span><span class="s1"> is transitively orientable.&#39;</span> <span class="o">%</span> <span class="n">ds</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Graph </span><span class="si">%s</span><span class="s1"> is an interval graph.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Graph </span><span class="si">%s</span><span class="s1"> is not transitively orientable.&#39;</span> <span class="o">%</span> <span class="n">ds</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">False</span>        
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Graph </span><span class="si">%s</span><span class="s1"> is not triangulated&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+        
 <div class="viewcode-block" id="Graph.isTree"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.isTree">[docs]</a>    <span class="k">def</span> <span class="nf">isTree</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Checks if self is a tree by verifing the required number of</span>
@@ -1557,6 +1584,16 @@
                 <span class="k">return</span> <span class="kc">False</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="Graph.isTriangulated"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.isTriangulated">[docs]</a>    <span class="k">def</span> <span class="nf">isTriangulated</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks if a graph contains no chordless cycle of</span>
+<span class="sd">        length greater or equal to 4.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeChordlessCycles</span><span class="p">()</span> <span class="o">==</span> <span class="nb">set</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
                   
 <div class="viewcode-block" id="Graph.randomDepthFirstSearch"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.randomDepthFirstSearch">[docs]</a>    <span class="k">def</span> <span class="nf">randomDepthFirstSearch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -4044,8 +4081,9 @@
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
 
     <span class="c1">#g = PermutationGraph(permutation=[4,3,6,1,5,2])</span>
-    <span class="n">g</span> <span class="o">=</span> <span class="n">CycleGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+    <span class="c1">#g = CycleGraph(order=6)</span>
     <span class="c1">#g = Graph(&#39;test&#39;)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">RandomGraph</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
     <span class="c1">#g.exportGraphViz()</span>
     <span class="c1">#g.exportPermutationGraphViz()</span>
@@ -4057,11 +4095,15 @@
     <span class="k">if</span> <span class="n">g</span><span class="o">.</span><span class="n">isComparabilityGraph</span><span class="p">(</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Comparability Graph ? = True&#39;</span><span class="p">,</span><span class="n">g</span><span class="o">.</span><span class="n">edgeOrientations</span><span class="p">)</span>
         <span class="n">dg</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeTransitivelyOrientedDigraph</span><span class="p">()</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">dg</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">())</span>
-        <span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">dg</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">dg</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">())</span>
+            <span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Comparability Graph ? = False&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">isTriangulated</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">((</span><span class="o">-</span><span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">isComparabilityGraph</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">isIntervalGraph</span><span class="p">())</span>
     
 <span class="c1">##    rg = RandomPermutationGraph(order=6,seed=None)</span>
 <span class="c1">##    print(rg)</span>
