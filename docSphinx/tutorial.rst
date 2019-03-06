@@ -3527,7 +3527,7 @@ dot -Grankdir=BT -Tpng randomLaterality.dot -o randomLaterality.png
 
    *A random digraph instance of order 7 and arc probability 0.3*
 
-The random digraph shown in Fig. 22 above has no apparent special properties, except from being connected.
+The random digraph shown in Fig. 39 above has no apparent special properties, except from being connected.
 
 >>> rd.showComponents()
 *--- Connected Components ---*
@@ -3577,7 +3577,7 @@ Absorbent preKernels :
    covering     :  0.600  # <<==
 ...
 
-Among the six MISs contained in this random digraph (see above Lines 3-8) we discover two initial and two terminal kernels (Lines 12-34). Notice by the way the covering values (between 0.0 and 1.0) shown by the :py:func:`digraphs.Digraph.showPreKernels` method (Lines 17, 22, 28 and 33). The higher this value, the more the corresponding kernel candidate makes apparent the digraph's *laterality*. We may hence redraw the same digraph in Fig. 23 by looking into its interior via the *best covering* initial kernel candidate: the dominant choice {'3','4'} (coloured in yellow), and looking out of it via the *best covered* terminal kernel candidate: the absorbent choice {'1','6'} (coloured in blue).
+Among the six MISs contained in this random digraph (see above Lines 3-8) we discover two initial and two terminal kernels (Lines 12-34). Notice by the way the covering values (between 0.0 and 1.0) shown by the :py:func:`digraphs.Digraph.showPreKernels` method (Lines 17, 22, 28 and 33). The higher this value, the more the corresponding kernel candidate makes apparent the digraph's *laterality*. We may hence redraw the same digraph in Fig. 40 by looking into its interior via the *best covering* initial kernel candidate: the dominant choice {'3','4'} (coloured in yellow), and looking out of it via the *best covered* terminal kernel candidate: the absorbent choice {'1','6'} (coloured in blue).
 
 >>> rd.exportGraphViz(fileName='orientedLaterality',\
 ...                   bestChoice=set(['a4', 'a3']),\
@@ -3622,7 +3622,7 @@ Valuation domain : {'min': -100.0, 'med': 0.0, 'max': 100.0}
 
    *The performance tableau of a random outranking digraph instance*
 
-The underlying random performance tableau (see Fig. 24) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision actions 'a2' and 'a5'. The resulting **strict outranking** - ie a weighted majority supported - *better than without considerable counter-performance* - digraph is shown in Fig. 25 below.
+The underlying random performance tableau (see Fig. 41) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision actions 'a2' and 'a5'. The resulting **strict outranking** - ie a weighted majority supported - *better than without considerable counter-performance* - digraph is shown in Fig. 42 below.
 
 >>> gcd = ~(-g)  # Codual: the converse of the negation
 >>> gcd.exportGraphViz(fileName='tutOutRanking')
@@ -3682,7 +3682,7 @@ Credibility domain: [-100.00,100.00]
 
 Notice that solving the valued *Berge* kernel equations ([BIS-2006a]_) provides furthermore a positive characterization of the most credible decision actions in each respective choice recommendation (see Lines 14 and 23 above). Actions 'a2' and 'a4' are equivalent candidates for a unique best choice, and action 'a7' is clearly confirmed as the worst choice.
 
-In Fig. 26 below, we orient the drawing of the strict outranking digraph instance with the help of these best and worst choice recommendations. 
+In Fig. 43 below, we orient the drawing of the strict outranking digraph instance with the help of these best and worst choice recommendations. 
 
 >>> gcd.exportGraphViz(fileName='bestWorstOrientation',
 ...       bestChoice=['a2','a4'], worstChoice=['a7'])
@@ -3697,7 +3697,7 @@ dot -Grankdir=BT -Tpng bestWorstOrientation.dot -o bestWorstOrientation.png
 
    *The strict outranking digraph oriented by its best and worst choice recommendations*
 
-The grey arrows in Fig. 26, like the one between actions 'a4' and 'a1', represent indeterminate preferential situations. Action 'a1' appears hence to be rather incomparable to all the other, except action 'a7'. It may be interesting to compare this result with a Copeland ranking of the underlying performance tableau (see :ref:`Ranking-Tutorial-label`).
+The grey arrows in Fig. 43, like the one between actions 'a4' and 'a1', represent indeterminate preferential situations. Action 'a1' appears hence to be rather incomparable to all the other, except action 'a7'. It may be interesting to compare this result with a Copeland ranking of the underlying performance tableau (see :ref:`Ranking-Tutorial-label`).
 
 >>> g.showHTMLPerformanceHeatmap(colorLevels=5, ndigits=0,
 ...          Correlations=True, rankingRule='Copeland')
@@ -3709,7 +3709,7 @@ The grey arrows in Fig. 26, like the one between actions 'a4' and 'a1', represen
 
    *Heatmap with Copeland ranking of the peformance tableau*
 
-In the resulting linear ranking (see Fig. 27), action 'a4' is set at first rank, followed by action 'a2'. This makes sense as 'a4' shows three performances in the first quintile, whereas 'a2' is only partially evaluated and shows only two such excellent performances. But 'a4' also shows a very weak performance in the first quintile. Both decision actions, hence, don't show eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually definite strict outranking relation than any 'forced' linear ranking result as shown in Fig. 27 above.
+In the resulting linear ranking (see Fig. 44), action 'a4' is set at first rank, followed by action 'a2'. This makes sense as 'a4' shows three performances in the first quintile, whereas 'a2' is only partially evaluated and shows only two such excellent performances. But 'a4' also shows a very weak performance in the first quintile. Both decision actions, hence, don't show eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually definite strict outranking relation than any 'forced' linear ranking result as shown in Fig. 27 above.
 
 Tractability
 ............

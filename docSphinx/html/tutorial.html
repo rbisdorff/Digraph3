@@ -5610,7 +5610,7 @@ execution time: 0 sec. and 2 millisec.
 <a class="reference internal image-reference" href="_images/randomLaterality.png"><img alt="A random digraph instance" src="_images/randomLaterality.png" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 39 </span><span class="caption-text"><em>A random digraph instance of order 7 and arc probability 0.3</em></span></p>
 </div>
-<p>The random digraph shown in Fig. 22 above has no apparent special properties, except from being connected.</p>
+<p>The random digraph shown in Fig. 39 above has no apparent special properties, except from being connected.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -5699,7 +5699,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="gp">...</span>
 </pre></div>
 </td></tr></table></div>
-<p>Among the six MISs contained in this random digraph (see above Lines 3-8) we discover two initial and two terminal kernels (Lines 12-34). Notice by the way the covering values (between 0.0 and 1.0) shown by the <a class="reference internal" href="techDoc.html#digraphs.Digraph.showPreKernels" title="digraphs.Digraph.showPreKernels"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.showPreKernels()</span></code></a> method (Lines 17, 22, 28 and 33). The higher this value, the more the corresponding kernel candidate makes apparent the digraph’s <em>laterality</em>. We may hence redraw the same digraph in Fig. 23 by looking into its interior via the <em>best covering</em> initial kernel candidate: the dominant choice {‘3’,‘4’} (coloured in yellow), and looking out of it via the <em>best covered</em> terminal kernel candidate: the absorbent choice {‘1’,‘6’} (coloured in blue).</p>
+<p>Among the six MISs contained in this random digraph (see above Lines 3-8) we discover two initial and two terminal kernels (Lines 12-34). Notice by the way the covering values (between 0.0 and 1.0) shown by the <a class="reference internal" href="techDoc.html#digraphs.Digraph.showPreKernels" title="digraphs.Digraph.showPreKernels"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.showPreKernels()</span></code></a> method (Lines 17, 22, 28 and 33). The higher this value, the more the corresponding kernel candidate makes apparent the digraph’s <em>laterality</em>. We may hence redraw the same digraph in Fig. 40 by looking into its interior via the <em>best covering</em> initial kernel candidate: the dominant choice {‘3’,‘4’} (coloured in yellow), and looking out of it via the <em>best covered</em> terminal kernel candidate: the absorbent choice {‘1’,‘6’} (coloured in blue).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -5752,7 +5752,7 @@ best covered terminal kernel</em></span></p>
 <a class="reference internal image-reference" href="_images/randomOutranking.png"><img alt="A random performance tableau" src="_images/randomOutranking.png" style="width: 550px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 41 </span><span class="caption-text"><em>The performance tableau of a random outranking digraph instance</em></span></p>
 </div>
-<p>The underlying random performance tableau (see Fig. 24) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision actions ‘a2’ and ‘a5’. The resulting <strong>strict outranking</strong> - ie a weighted majority supported - <em>better than without considerable counter-performance</em> - digraph is shown in Fig. 25 below.</p>
+<p>The underlying random performance tableau (see Fig. 41) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision actions ‘a2’ and ‘a5’. The resulting <strong>strict outranking</strong> - ie a weighted majority supported - <em>better than without considerable counter-performance</em> - digraph is shown in Fig. 42 below.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -5847,7 +5847,7 @@ best covered terminal kernel</em></span></p>
 </pre></div>
 </td></tr></table></div>
 <p>Notice that solving the valued <em>Berge</em> kernel equations (<a class="reference internal" href="#bis-2006a" id="id52">[BIS-2006a]</a>) provides furthermore a positive characterization of the most credible decision actions in each respective choice recommendation (see Lines 14 and 23 above). Actions ‘a2’ and ‘a4’ are equivalent candidates for a unique best choice, and action ‘a7’ is clearly confirmed as the worst choice.</p>
-<p>In Fig. 26 below, we orient the drawing of the strict outranking digraph instance with the help of these best and worst choice recommendations.</p>
+<p>In Fig. 43 below, we orient the drawing of the strict outranking digraph instance with the help of these best and worst choice recommendations.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -5863,7 +5863,7 @@ best covered terminal kernel</em></span></p>
 <a class="reference internal image-reference" href="_images/bestWorstOrientation.png"><img alt="The random outranking digraph oriented by its initial and terminal prekernels" src="_images/bestWorstOrientation.png" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 43 </span><span class="caption-text"><em>The strict outranking digraph oriented by its best and worst choice recommendations</em></span></p>
 </div>
-<p>The grey arrows in Fig. 26, like the one between actions ‘a4’ and ‘a1’, represent indeterminate preferential situations. Action ‘a1’ appears hence to be rather incomparable to all the other, except action ‘a7’. It may be interesting to compare this result with a Copeland ranking of the underlying performance tableau (see <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a>).</p>
+<p>The grey arrows in Fig. 43, like the one between actions ‘a4’ and ‘a1’, represent indeterminate preferential situations. Action ‘a1’ appears hence to be rather incomparable to all the other, except action ‘a7’. It may be interesting to compare this result with a Copeland ranking of the underlying performance tableau (see <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a>).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
 <span class="gp">... </span>         <span class="n">Correlations</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">)</span>
@@ -5873,7 +5873,7 @@ best covered terminal kernel</em></span></p>
 <a class="reference internal image-reference" href="_images/outrankingResult.png"><img alt="Copeland ranking of the random outranking digraph instance" src="_images/outrankingResult.png" style="width: 550px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 44 </span><span class="caption-text"><em>Heatmap with Copeland ranking of the peformance tableau</em></span></p>
 </div>
-<p>In the resulting linear ranking (see Fig. 27), action ‘a4’ is set at first rank, followed by action ‘a2’. This makes sense as ‘a4’ shows three performances in the first quintile, whereas ‘a2’ is only partially evaluated and shows only two such excellent performances. But ‘a4’ also shows a very weak performance in the first quintile. Both decision actions, hence, don’t show eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually definite strict outranking relation than any ‘forced’ linear ranking result as shown in Fig. 27 above.</p>
+<p>In the resulting linear ranking (see Fig. 44), action ‘a4’ is set at first rank, followed by action ‘a2’. This makes sense as ‘a4’ shows three performances in the first quintile, whereas ‘a2’ is only partially evaluated and shows only two such excellent performances. But ‘a4’ also shows a very weak performance in the first quintile. Both decision actions, hence, don’t show eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually definite strict outranking relation than any ‘forced’ linear ranking result as shown in Fig. 27 above.</p>
 </div>
 <div class="section" id="tractability">
 <h3><a class="toc-backref" href="#id208">Tractability</a><a class="headerlink" href="#tractability" title="Permalink to this headline">¶</a></h3>
