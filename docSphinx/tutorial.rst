@@ -3179,7 +3179,7 @@ The command :py:func:`digraphs.Digraph.showOrbits` renders now the labelled repr
   stabilizer size: [1, 2, 3, ..., 8, 9, ..., 12, 13, ...]
   frequency      : [0, 2, 0, ..., 1, 0, ...,  1,  0, ...]
 
-The corresponding group stabilizers' sizes and frequencies -- orbit 1 with 12 symmetry axes, orbit 2 with 8 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 11-13), are illustrated in the corresponding unlabelled graphs of *Figure-1* below.
+The corresponding group stabilizers' sizes and frequencies -- orbit 1 with 12 symmetry axes, orbit 2 with 8 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 11-13), are illustrated in the corresponding unlabelled graphs of *Fig. 33* below.
 
 .. figure:: c12.png
     :width: 400 px
@@ -3823,7 +3823,6 @@ Attributes       : ['name', 'vertices', 'order', 'permutation',
 *---- exporting a dot file for GraphViz tools ---------*
 Exporting to permutationGraph.dot
 fdp -Tpng permutationGraph.dot -o permutationGraph.png
-
 
 .. Figure:: permutationGraph.png
     :alt: Default permutation graph
