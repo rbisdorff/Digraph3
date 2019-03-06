@@ -1,0 +1,21 @@
+strict graph G {
+graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",
+ fontsize = 12,
+ label = "\nGraphs Python module (graphviz), R. Bisdorff, 2019", size="7,7"];
+n1 [shape = "circle", label = "A"];
+n2 [shape = "circle", label = "B"];
+n3 [shape = "circle", label = "C"];
+n4 [shape = "circle", label = "D"];
+n5 [shape = "circle", label = "E"];
+n6 [shape = "circle", label = "I"];
+n1-- n2 [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;
+n1-- n4 [dir=both, color=grey, arrowhead=none, arrowtail=none] ;
+n1-- n5 [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;
+n2-- n5 [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;
+n2-- n6 [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;
+n3-- n4 [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;
+n3-- n5 [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;
+n3-- n6 [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;
+n4-- n6 [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;
+n5-- n6 [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;
+}

@@ -1,0 +1,16 @@
+strict graph G {
+graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",
+ fontsize = 12,
+ label = "\nGraphs Python module (graphviz), R. Bisdorff, 2011", size="7,7"];
+n1 [shape = "circle", label = "v2"];
+n2 [shape = "circle", label = "v5"];
+n3 [shape = "circle", label = "v4"];
+n4 [shape = "circle", label = "v3"];
+n5 [shape = "circle", label = "v1"];
+n6 [shape = "circle", label = "v6"];
+n1-- n2 [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;
+n1-- n3 [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;
+n1-- n4 [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;
+n1-- n5 [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;
+n2-- n4 [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;
+}

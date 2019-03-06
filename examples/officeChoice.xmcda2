@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="xmcda2Rubis.xsl"?>
+<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.decision-deck.org/2009/XMCDA-2.0.0 file:../XMCDA-2.0.0.xsd" xmlns:xmcda="http://www.decision-deck.org/2009/XMCDA-2.0.0" instanceID="void">
+<projectReference id="officeChoice" name="officeChoice.xmcda2">
+<title>Performance Tableau in XMCDA 2.0 format.</title>
+<author>digraphs Module (RB)</author>
+<version>saved from Python session</version>
+</projectReference>
+<methodParameters id="Rubis" name="Rubis best choice method" mcdaConcept="methodData">
+<description>
+<subTitle>Method data</subTitle>
+<version>1.0</version>
+</description>
+<parameters>
+<parameter name="variant">
+<value>
+<label>Rubis</label>
+</value>
+</parameter>
+<parameter name="valuationType">
+<value>
+<label>standard</label>
+</value>
+</parameter>
+<parameter name="significanceThreshold">
+<value>
+<real>0.5</real>
+</value>
+</parameter>
+</parameters>
+</methodParameters>
+<alternatives mcdaConcept="alternatives">
+<description>
+<subTitle>Potential decision actions.</subTitle>
+</description>
+<alternative id="A" name="Avenue de la Liberté" mcdaConcept="potentialDecisionAction">
+<description>
+<comment>Prestiguous city centre</comment>
+</description>
+<type>real</type>
+<active>true</active>
+</alternative>
+<alternative id="B" name="Bonnevoie" mcdaConcept="potentialDecisionAction">
+<description>
+<comment>Industrial environment</comment>
+</description>
+<type>real</type>
+<active>true</active>
+</alternative>
+<alternative id="C" name="Cessange" mcdaConcept="potentialDecisionAction">
+<description>
+<comment>suburb location</comment>
+</description>
+<type>real</type>
+<active>true</active>
+</alternative>
+<alternative id="D" name="Dommeldange" mcdaConcept="potentialDecisionAction">
+<description>
+<comment>Industrial suburb environment</comment>
+</description>
+<type>real</type>
+<active>true</active>
+</alternative>
+<alternative id="E" name="Esch-Belval" mcdaConcept="potentialDecisionAction">
+<description>
+<comment>New and ambitious urbanization far from the city</comment>
+</description>
+<type>real</type>
+<active>true</active>
+</alternative>
+<alternative id="F" name="Fentange" mcdaConcept="potentialDecisionAction">
+<description>
+<comment>Out in the countryside</comment>
+</description>
+<type>real</type>
+<active>true</active>
+</alternative>
+<alternative id="G" name="Avenue de la Gare" mcdaConcept="potentialDecisionAction">
+<description>
+<comment>Main town shopping aera</comment>
+</description>
+<type>real</type>
+<active>true</active>
+</alternative>
+</alternatives>
+<criteria mcdaConcept="criteria">
+<description>
+<subTitle>Family of criteria.</subTitle>
+</description>
+<criterion id="C" name="Costs" mcdaConcept="criterion">
+<description>
+<comment>rent, charges and cleaning</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionValue><value><real>45.00</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>min</preferenceDirection>
+<minimum><real>0.00</real></minimum>
+<maximum><real>50000.00</real></maximum>
+</quantitative>
+</scale>
+<thresholds>
+<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
+<linear>
+<slope><real>0.00</real></slope>
+<intercept><real>1000.00</real></intercept>
+</linear>
+</threshold>
+<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
+<linear>
+<slope><real>0.00</real></slope>
+<intercept><real>2500.00</real></intercept>
+</linear>
+</threshold>
+<threshold id="weakVeto" name="weak veto" mcdaConcept="performanceDiscriminationThreshold">
+<linear>
+<slope><real>0.00</real></slope>
+<intercept><real>35000.00</real></intercept>
+</linear>
+</threshold>
+</thresholds>
+</criterion>
+<criterion id="Cf" name="Comfort" mcdaConcept="criterion">
+<description>
+<comment>quality of the office equipments</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionValue><value><real>6.00</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>max</preferenceDirection>
+<minimum><real>0.00</real></minimum>
+<maximum><real>100.00</real></maximum>
+</quantitative>
+</scale>
+<thresholds>
+<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
+<linear>
+<slope><real>0.00</real></slope>
+<intercept><real>10.00</real></intercept>
+</linear>
+</threshold>
+<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
+<linear>
+<slope><real>0.00</real></slope>
+<intercept><real>20.00</real></intercept>
+</linear>
+</threshold>
+<threshold id="weakVeto" name="weak veto" mcdaConcept="performanceDiscriminationThreshold">
+<linear>
+<slope><real>0.00</real></slope>
+<intercept><real>80.00</real></intercept>
+</linear>
+</threshold>
+</thresholds>
+</criterion>
+<criterion id="P" name="Parking" mcdaConcept="criterion">
+<description>
+<comment>available parking facilities</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionValue><value><real>3.00</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>max</preferenceDirection>
+<minimum><real>0.00</real></minimum>
+<maximum><real>100.00</real></maximum>
+</quantitative>
+</scale>
+<thresholds>
+<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
+<linear>
+<slope><real>0.00</real></slope>
+<intercept><real>10.00</real></intercept>
+</linear>
+</threshold>
+<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
+<linear>
+<slope><real>0.00</real></slope>
+<intercept><real>20.00</real></intercept>
+</linear>
+</threshold>
+<threshold id="weakVeto" name="weak veto" mcdaConcept="performanceDiscriminationThreshold">
+<linear>
+<slope><real>0.00</real></slope>
+<intercept><real>80.00</real></intercept>
+</linear>
+</threshold>
+</thresholds>
+</criterion>
+<criterion id="Pr" name="Proximity" mcdaConcept="criterion">
+<description>
+<comment>distance from a town center</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionValue><value><real>32.00</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>max</preferenceDirection>
+<minimum><real>0.00</real></minimum>
+<maximum><real>100.00</real></maximum>
+</quantitative>
+</scale>
+<thresholds>
+<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
+<linear>
+<slope><real>0.00</real></slope>
+<intercept><real>10.00</real></intercept>
+</linear>
+</threshold>
+<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
+<linear>
+<slope><real>0.00</real></slope>
+<intercept><real>20.00</real></intercept>
+</linear>
+</threshold>
+<threshold id="weakVeto" name="weak veto" mcdaConcept="performanceDiscriminationThreshold">
+<linear>
+<slope><real>0.00</real></slope>
+<intercept><real>80.00</real></intercept>
+</linear>
+</threshold>
+</thresholds>
+</criterion>
+<criterion id="St" name="Standing" mcdaConcept="criterion">
+<description>
+<comment>image et presentation</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionValue><value><real>23.00</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>max</preferenceDirection>
+<minimum><real>0.00</real></minimum>
+<maximum><real>100.00</real></maximum>
+</quantitative>
+</scale>
+<thresholds>
+<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
+<linear>
+<slope><real>0.00</real></slope>
+<intercept><real>10.00</real></intercept>
+</linear>
+</threshold>
+<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
+<linear>
+<slope><real>0.00</real></slope>
+<intercept><real>20.00</real></intercept>
+</linear>
+</threshold>
+<threshold id="weakVeto" name="weak veto" mcdaConcept="performanceDiscriminationThreshold">
+<linear>
+<slope><real>0.00</real></slope>
+<intercept><real>80.00</real></intercept>
+</linear>
+</threshold>
+</thresholds>
+</criterion>
+<criterion id="V" name="Visibility" mcdaConcept="criterion">
+<description>
+<comment>circulation of potential customers</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionValue><value><real>26.00</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>max</preferenceDirection>
+<minimum><real>0.00</real></minimum>
+<maximum><real>100.00</real></maximum>
+</quantitative>
+</scale>
+<thresholds>
+<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
+<linear>
+<slope><real>0.00</real></slope>
+<intercept><real>10.00</real></intercept>
+</linear>
+</threshold>
+<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
+<linear>
+<slope><real>0.00</real></slope>
+<intercept><real>20.00</real></intercept>
+</linear>
+</threshold>
+<threshold id="weakVeto" name="weak veto" mcdaConcept="performanceDiscriminationThreshold">
+<linear>
+<slope><real>0.00</real></slope>
+<intercept><real>80.00</real></intercept>
+</linear>
+</threshold>
+</thresholds>
+</criterion>
+<criterion id="W" name="Working space" mcdaConcept="criterion">
+<description>
+<comment>in square meters</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionValue><value><real>10.00</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>max</preferenceDirection>
+<minimum><real>0.00</real></minimum>
+<maximum><real>100.00</real></maximum>
+</quantitative>
+</scale>
+<thresholds>
+<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
+<linear>
+<slope><real>0.00</real></slope>
+<intercept><real>10.00</real></intercept>
+</linear>
+</threshold>
+<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
+<linear>
+<slope><real>0.00</real></slope>
+<intercept><real>20.00</real></intercept>
+</linear>
+</threshold>
+<threshold id="weakVeto" name="weak veto" mcdaConcept="performanceDiscriminationThreshold">
+<linear>
+<slope><real>0.00</real></slope>
+<intercept><real>80.00</real></intercept>
+</linear>
+</threshold>
+</thresholds>
+</criterion>
+</criteria>
+<performanceTable mcdaConcept="performanceTable">
+<description>
+<subTitle>Rubis Performance Table.</subTitle>
+</description>
+<alternativePerformances>
+<alternativeID>A</alternativeID>
+<performance>
+<criterionID>C</criterionID>
+<value><real>35000.00</real></value>
+</performance>
+<performance>
+<criterionID>Cf</criterionID>
+<value><real>0.00</real></value>
+</performance>
+<performance>
+<criterionID>P</criterionID>
+<value><real>90.00</real></value>
+</performance>
+<performance>
+<criterionID>Pr</criterionID>
+<value><real>100.00</real></value>
+</performance>
+<performance>
+<criterionID>St</criterionID>
+<value><real>100.00</real></value>
+</performance>
+<performance>
+<criterionID>V</criterionID>
+<value><real>60.00</real></value>
+</performance>
+<performance>
+<criterionID>W</criterionID>
+<value><real>75.00</real></value>
+</performance>
+</alternativePerformances>
+<alternativePerformances>
+<alternativeID>B</alternativeID>
+<performance>
+<criterionID>C</criterionID>
+<value><real>17800.00</real></value>
+</performance>
+<performance>
+<criterionID>Cf</criterionID>
+<value><real>100.00</real></value>
+</performance>
+<performance>
+<criterionID>P</criterionID>
+<value><real>30.00</real></value>
+</performance>
+<performance>
+<criterionID>Pr</criterionID>
+<value><real>20.00</real></value>
+</performance>
+<performance>
+<criterionID>St</criterionID>
+<value><real>10.00</real></value>
+</performance>
+<performance>
+<criterionID>V</criterionID>
+<value><real>80.00</real></value>
+</performance>
+<performance>
+<criterionID>W</criterionID>
+<value><real>30.00</real></value>
+</performance>
+</alternativePerformances>
+<alternativePerformances>
+<alternativeID>C</alternativeID>
+<performance>
+<criterionID>C</criterionID>
+<value><real>6700.00</real></value>
+</performance>
+<performance>
+<criterionID>Cf</criterionID>
+<value><real>10.00</real></value>
+</performance>
+<performance>
+<criterionID>P</criterionID>
+<value><real>100.00</real></value>
+</performance>
+<performance>
+<criterionID>Pr</criterionID>
+<value><real>80.00</real></value>
+</performance>
+<performance>
+<criterionID>St</criterionID>
+<value><real>0.00</real></value>
+</performance>
+<performance>
+<criterionID>V</criterionID>
+<value><real>70.00</real></value>
+</performance>
+<performance>
+<criterionID>W</criterionID>
+<value><real>0.00</real></value>
+</performance>
+</alternativePerformances>
+<alternativePerformances>
+<alternativeID>D</alternativeID>
+<performance>
+<criterionID>C</criterionID>
+<value><real>14100.00</real></value>
+</performance>
+<performance>
+<criterionID>Cf</criterionID>
+<value><real>30.00</real></value>
+</performance>
+<performance>
+<criterionID>P</criterionID>
+<value><real>90.00</real></value>
+</performance>
+<performance>
+<criterionID>Pr</criterionID>
+<value><real>70.00</real></value>
+</performance>
+<performance>
+<criterionID>St</criterionID>
+<value><real>30.00</real></value>
+</performance>
+<performance>
+<criterionID>V</criterionID>
+<value><real>50.00</real></value>
+</performance>
+<performance>
+<criterionID>W</criterionID>
+<value><real>55.00</real></value>
+</performance>
+</alternativePerformances>
+<alternativePerformances>
+<alternativeID>E</alternativeID>
+<performance>
+<criterionID>C</criterionID>
+<value><real>34800.00</real></value>
+</performance>
+<performance>
+<criterionID>Cf</criterionID>
+<value><real>60.00</real></value>
+</performance>
+<performance>
+<criterionID>P</criterionID>
+<value><real>70.00</real></value>
+</performance>
+<performance>
+<criterionID>Pr</criterionID>
+<value><real>40.00</real></value>
+</performance>
+<performance>
+<criterionID>St</criterionID>
+<value><real>90.00</real></value>
+</performance>
+<performance>
+<criterionID>V</criterionID>
+<value><real>60.00</real></value>
+</performance>
+<performance>
+<criterionID>W</criterionID>
+<value><real>100.00</real></value>
+</performance>
+</alternativePerformances>
+<alternativePerformances>
+<alternativeID>F</alternativeID>
+<performance>
+<criterionID>C</criterionID>
+<value><real>18600.00</real></value>
+</performance>
+<performance>
+<criterionID>Cf</criterionID>
+<value><real>80.00</real></value>
+</performance>
+<performance>
+<criterionID>P</criterionID>
+<value><real>0.00</real></value>
+</performance>
+<performance>
+<criterionID>Pr</criterionID>
+<value><real>0.00</real></value>
+</performance>
+<performance>
+<criterionID>St</criterionID>
+<value><real>70.00</real></value>
+</performance>
+<performance>
+<criterionID>V</criterionID>
+<value><real>0.00</real></value>
+</performance>
+<performance>
+<criterionID>W</criterionID>
+<value><real>0.00</real></value>
+</performance>
+</alternativePerformances>
+<alternativePerformances>
+<alternativeID>G</alternativeID>
+<performance>
+<criterionID>C</criterionID>
+<value><real>12000.00</real></value>
+</performance>
+<performance>
+<criterionID>Cf</criterionID>
+<value><real>50.00</real></value>
+</performance>
+<performance>
+<criterionID>P</criterionID>
+<value><real>80.00</real></value>
+</performance>
+<performance>
+<criterionID>Pr</criterionID>
+<value><real>60.00</real></value>
+</performance>
+<performance>
+<criterionID>St</criterionID>
+<value><real>20.00</real></value>
+</performance>
+<performance>
+<criterionID>V</criterionID>
+<value><real>100.00</real></value>
+</performance>
+<performance>
+<criterionID>W</criterionID>
+<value><real>50.00</real></value>
+</performance>
+</alternativePerformances>
+</performanceTable>
+</xmcda:XMCDA>
