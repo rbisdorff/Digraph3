@@ -242,4 +242,12 @@ def testGraphTransitiveOrientations():
     pgd = PermutationGraph(permutation=[6, 1, 2, 3, 8, 5, 7, 4])
     pgd.exportGraphViz('testpgd')
 
- 
+def testIntervalGraphs():
+    print('==>> Testing interval graph property')
+    g = RandomGraph(order=8,edgeProbability=0.4)
+    #print(g)
+    print(g.isTriangulated())
+    print((-g).isComparabilityGraph())
+    print(g.isIntervalGraph())
+
+

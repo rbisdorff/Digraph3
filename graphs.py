@@ -1487,6 +1487,33 @@ class Graph(object):
         else:
             return False
 
+    def isIntervalGraph(self,Comments=False):
+        """
+        Checks whether the graph self is triangulated and
+        its dual is a comparability graph.
+
+        *Source*: M. Ch. Golumbic (2004) Algorithmic Graph Thery and Perfect Graphs,
+        Annals of Discrete Mathematics 57, Elsevier, p. 16.
+
+        """
+        if self.isTriangulated():
+            if Comments:
+                print('Graph %s is triangulated' % self.name)
+            ds = -self
+            if ds.isComparabilityGraph():
+                if Comments:
+                    print('Graph %s is transitively orientable.' % ds.name)
+                    print('Graph %s is an interval graph.' % self.name)
+                return True
+            else:
+                if Comments:
+                    print('Graph %s is not transitively orientable.' % ds.name)
+                return False        
+        else:
+            if Comments:
+                print('Graph %s is not triangulated' % self.name)
+            return False
+        
     def isTree(self):
         """
         Checks if self is a tree by verifing the required number of
@@ -1510,6 +1537,16 @@ class Graph(object):
                 return False
             else:
                 return True
+
+    def isTriangulated(self):
+        """
+        Checks if a graph contains no chordless cycle of
+        length greater or equal to 4.
+        """
+        if self.computeChordlessCycles() == set():
+            return True
+        else:
+            return False
                   
     def randomDepthFirstSearch(self,seed=None,Debug=False):
         """
@@ -3997,8 +4034,9 @@ class RandomPermutationGraph(PermutationGraph):
 if __name__ == '__main__':
 
     #g = PermutationGraph(permutation=[4,3,6,1,5,2])
-    g = CycleGraph(order=6)
+    #g = CycleGraph(order=6)
     #g = Graph('test')
+    g = RandomGraph()
     print(g)
     #g.exportGraphViz()
     #g.exportPermutationGraphViz()
@@ -4010,11 +4048,15 @@ if __name__ == '__main__':
     if g.isComparabilityGraph(Debug=True):
         print('Comparability Graph ? = True',g.edgeOrientations)
         dg = g.computeTransitivelyOrientedDigraph()
-        print(dg)
-        print(dg.computeTransitivityDegree())
-        dg.exportGraphViz()
+        if dg != None:
+            print(dg)
+            print(dg.computeTransitivityDegree())
+            dg.exportGraphViz()
     else:
         print('Comparability Graph ? = False')
+    print(g.isTriangulated())
+    print((-g).isComparabilityGraph())
+    print(g.isIntervalGraph())
     
 ##    rg = RandomPermutationGraph(order=6,seed=None)
 ##    print(rg)

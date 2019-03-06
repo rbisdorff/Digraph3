@@ -698,7 +698,7 @@ We may also follow the *Chevalier de Borda*'s advice and, after a **rank analysi
     >>> v.computeBordaWinners()
     ['a1']
 
-The Borda **rank analysis table** my be printed out with a corresponding ``show`` command.
+The Borda **rank analysis table** may be printed out with a corresponding ``show`` command.
 
     >>> v.showRankAnalysisTable()
     *----  Borda rank analysis tableau -----*
@@ -1035,7 +1035,7 @@ As with all Digraph instances, it is possible to store permanently a copy of the
 	File: tutorialPerfTab.xml saved !
 	>>> ...
 
-The resulting XML file my be visualized in a browser window (other than Chrome or Chromium)  with a corresponding XMCDA style sheet (`see here <_static/tutorialPerfTab.xml>`_). Hitting ``Ctrl U`` in Firefox will open a browser window showing the underlying xml encoded raw text. It is thus possible to easily edit and update as needed a given performance tableau instance. Reinstantiating again a corresponding updated *odg* object goes like follow.
+The resulting XML file may be visualized in a browser window (other than Chrome or Chromium)  with a corresponding XMCDA style sheet (`see here <_static/tutorialPerfTab.xml>`_). Hitting ``Ctrl U`` in Firefox will open a browser window showing the underlying xml encoded raw text. It is thus possible to easily edit and update as needed a given performance tableau instance. Reinstantiating again a corresponding updated *odg* object goes like follow.
 
         >>> pt = XMCDA2PerformanceTableau('tutorialPerfTab') 
         >>> odg = BipolarOutrankingDigraph(pt)
