@@ -1391,7 +1391,8 @@ class Graph(object):
     def isComparabilityGraph(self,Debug=False):
         """
         Verifies if the graph instance is a comparability graph.
-        If yes, a decomposition of the edges is stored in self.edgeOrientations. 
+        If yes, a tranditive orientation of the edges is stored 
+        in self.edgeOrientations. 
         
         *Source*: M. Ch. Golumbic (2004) Algorithmic Graph Thery and Perfect Graphs,
         Annals of Discrete Mathematics 57, Elsevier, p. 129-132.
