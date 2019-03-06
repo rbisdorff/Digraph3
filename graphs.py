@@ -1498,20 +1498,20 @@ class Graph(object):
         """
         if self.isTriangulated():
             if Comments:
-                print('Graph %s is triangulated' % self.name)
+                print('Graph \'%s\' is triangulated' % self.name)
             ds = -self
             if ds.isComparabilityGraph():
                 if Comments:
-                    print('Graph %s is transitively orientable.' % ds.name)
-                    print('Graph %s is an interval graph.' % self.name)
+                    print('Graph \'%s\' is transitively orientable.' % ds.name)
+                    print('=> Graph \'%s\' is an interval graph.' % self.name)
                 return True
             else:
                 if Comments:
-                    print('Graph %s is not transitively orientable.' % ds.name)
+                    print('Graph \'%s\' is not transitively orientable.' % ds.name)
                 return False        
         else:
             if Comments:
-                print('Graph %s is not triangulated' % self.name)
+                print('Graph \%s\' is not triangulated' % self.name)
             return False
         
     def isTree(self):
@@ -4056,7 +4056,7 @@ if __name__ == '__main__':
         print('Comparability Graph ? = False')
     print(g.isTriangulated())
     print((-g).isComparabilityGraph())
-    print(g.isIntervalGraph())
+    print(g.isIntervalGraph(Comments=True))
     
 ##    rg = RandomPermutationGraph(order=6,seed=None)
 ##    print(rg)

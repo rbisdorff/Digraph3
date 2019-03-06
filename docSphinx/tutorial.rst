@@ -3005,7 +3005,7 @@ Chordless cycle certificate -->>>  ['D', 'I', 'B', 'A', 'D']
 (['D', 'I', 'E', 'A', 'D'], frozenset({'D', 'E', 'I', 'A'})), 
 (['D', 'I', 'B', 'A', 'D'], frozenset({'D', 'B', 'I', 'A'}))]
 
-We see three intersection cycles of length 4, which is impossible to occur on the linear time line. Obviously one professor lied! And it is *D* ; if we put to doubt the testimony that he indeed saw *A*, we obtain a correctly triangulated graph.
+We see three intersection cycles of length 4, which is impossible to occur on the linear time line. Obviously one professor lied! And it is *D* ; if we put to doubt the testimony that he indeed saw *A*, we obtain indeed a triangulated graph instance whose dual is a *comparability* graph. Hence it is, as required,  a valid *interval graph* instance.
 
 >>> g.setEdgeValue( ('D','A'), 0)
 >>> g.showShort()
@@ -3020,8 +3020,10 @@ C -> ['I', 'E', 'D']
 D -> ['I', 'C']
 E -> ['A', 'I', 'B', 'C']
 I -> ['B', 'E', 'D', 'C']
->>> g.computeChordlessCycles()
-[]
+>>> g.isIntervalGraph(Comments=True)
+Graph 'berge' is triangulated.
+Graph 'dual_berge' is transitively orientable.
+=> Graph 'berge' is an interval graph.
 >>> g.exportGraphViz('berge2')
 *---- exporting a dot file for GraphViz tools ---------*
 Exporting to berge2.dot

@@ -4814,7 +4814,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <span class="go">([&#39;D&#39;, &#39;I&#39;, &#39;B&#39;, &#39;A&#39;, &#39;D&#39;], frozenset({&#39;D&#39;, &#39;B&#39;, &#39;I&#39;, &#39;A&#39;}))]</span>
 </pre></div>
 </td></tr></table></div>
-<p>We see three intersection cycles of length 4, which is impossible to occur on the linear time line. Obviously one professor lied! And it is <em>D</em> ; if we put to doubt the testimony that he indeed saw <em>A</em>, we obtain a correctly triangulated graph.</p>
+<p>We see three intersection cycles of length 4, which is impossible to occur on the linear time line. Obviously one professor lied! And it is <em>D</em> ; if we put to doubt the testimony that he indeed saw <em>A</em>, we obtain indeed a triangulated graph instance whose dual is a <em>comparability</em> graph. Hence it is, as required,  a valid <em>interval graph</em> instance.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -4833,7 +4833,9 @@ play much a role, it would be perhaps better to decide to move to the most advan
 16
 17
 18
-19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">setEdgeValue</span><span class="p">(</span> <span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="s1">&#39;A&#39;</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">setEdgeValue</span><span class="p">(</span> <span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="s1">&#39;A&#39;</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*---- short description of the graph ----*</span>
 <span class="go">Name             : &#39;berge&#39;</span>
@@ -4846,8 +4848,10 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <span class="go">D -&gt; [&#39;I&#39;, &#39;C&#39;]</span>
 <span class="go">E -&gt; [&#39;A&#39;, &#39;I&#39;, &#39;B&#39;, &#39;C&#39;]</span>
 <span class="go">I -&gt; [&#39;B&#39;, &#39;E&#39;, &#39;D&#39;, &#39;C&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeChordlessCycles</span><span class="p">()</span>
-<span class="go">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">isIntervalGraph</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">Graph &#39;berge&#39; is triangulated.</span>
+<span class="go">Graph &#39;dual_berge&#39; is transitively orientable.</span>
+<span class="go">=&gt; Graph &#39;berge&#39; is an interval graph.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;berge2&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to berge2.dot</span>
