@@ -3815,7 +3815,7 @@ Following Martin Golumbic (see [GOL-2004]_ p. 149), we call a given graph *g*:
     * **Permutation graph** *g* and its dual *-g* are both *comparability* graphs.
     * **Split graph** when *g* and its dual *-g* are both *triangulated* graphs.
 
-To illustrate these graph classes, We may generate from 8 intervals randomly chosen in the default integer range [0,10] a :py:class:`RandomIntervalIntersectionsGraph` class instance *g* (see Line 2 belaw). With seed = 101 we get an interval graph which is conjointly a *triangulated*, a *comparability* graph, a *split* and a *permutaion* graph.
+To illustrate these graph classes, we may generate from 8 intervals randomly chosen in the default integer range [0,10] a :py:class:`RandomIntervalIntersectionsGraph` class instance *g* (see Line 2 belaw). With seed = 101 we get an interval graph which is conjointly a *triangulated*, a *comparability* graph, a *split* and a *permutaion* graph.
 
 >>> from graphs import RandomIntervalIntersectionsGraph
 >>> g = RandomIntervalIntersectionsGraph(order=8,seed=100)
