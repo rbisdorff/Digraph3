@@ -3691,25 +3691,25 @@ Back to :ref:`Tutorial-label`
 .. _Permutation-Tutorial-label:
 
 About Split, Interval and Permutation Graphs
-------------------------------------------------
+--------------------------------------------
 
 .. contents:: 
 	:depth: 2
 	:local:
 
 
-Introduction
-............
+A super *perfect* graph
+.......................
 
 Following Martin Golumbic (see [GOL-2004]_ p. 149), we call a given graph *g*:
 
     * **Comparability graph** when *g*  is *transitively orientable*.
-    * **Triangulated graph** when *g* does not contain any *chordless cycles* of length 4 and more.
+    * **Triangulated graph** when *g* does not contain any *chordless cycle* of length 4 and more.
     * **Interval graph** when *g* is *triangulated* and its dual *-g* is a *comparability* graph.
     * **Permutation graph** *g* and its dual *-g* are both *comparability* graphs.
     * **Split graph** when *g* and its dual *-g* are both *triangulated* graphs.
 
-To illustrate these graph classes, we may generate from 8 intervals randomly chosen in the default integer range [0,10] a :py:class:`RandomIntervalIntersectionsGraph` class instance *g* (see Line 2 below). With seed = 101, we get an interval graph which is **conjointly** a *triangulated*, a *comparability*, a *split* and a *permutation* graph.
+To illustrate these perfect graph classes, we will generate from 8 intervals randomly chosen in the default integer range [0,10] a :py:class:`RandomIntervalIntersectionsGraph` class instance *g* (see Line 2 below). With seed = 101, we get an *interval* graph which is **conjointly** a *triangulated*, a *comparability*, a *split* and a *permutation* graph.
 
 >>> from graphs import RandomIntervalIntersectionsGraph
 >>> g = RandomIntervalIntersectionsGraph(order=8,seed=100)
@@ -3754,7 +3754,7 @@ fdp -Tpng randomSplitGraph.dot -o randomSplitGraph.png
 
     *A conjointly triangulated, comparability, interval, permutation and split graph instance*
 
-In Fig. 43 we recognize the essential characteristic of split graphs, namely being always splitable into two disjoint sub-graphs: an independentt choice (*v6*) and a clique (*v1*,*v2*,*v3*,*v4*,*v5*,*v7*,*v8*); which explains their name.
+In Fig. 43 we may recognize the essential characteristic of split graphs, namely being always splitable into two disjoint sub-graphs: an independentt choice (*v6*) and a clique (*v1*, *v2*, *v3*, *v4*, *v5*, *v7*, *v8*); which explains their name.
 
 Notice however that the four properties:
 
@@ -3765,8 +3765,8 @@ Notice however that the four properties:
 
 are *independent* of one another (see [GOL-2004]_ p. 275).
 
-Who is the lier ?
-.................
+Who is the lier ? On the importance to be an *interval* graph
+.............................................................
 
 Berge's famous mystery story (see [GOL-2004]_ p.20) may well illustrate the importance to be an **interval graph**.
 
@@ -3799,9 +3799,7 @@ Suppose that the file ``berge.py`` contains the following :py:class:`graphs.Grap
     frozenset(['E','I']) : 1, 
     }
 
-Six professors (labeled *A*, *B*, *C*, *D*, *E* and *I*) had been to the library on the day that a rare tractate was stolen. Each entered once, stayed for some time, and then left. If two professors were in the library at the same time, then at least one of them saw the other. Detectives questioned the professors and gathered the testimonies that *A* saw *B* and *E*; *B* saw *A* and *I*; *C* saw *D* and *I*; *D* saw *A* and *I*; *E* saw *B* and *I*; and *I* saw *C* and *E*. This data is gathered in the previous file, where each positive edge :math:`\{x,y\}` models the testimony that, either *x* saw *y*, or, *y* saw *x*.
-
-Example Python3 session
+Six professors (labeled *A*, *B*, *C*, *D*, *E* and *I*) had been to the library on the day that a rare tractate was stolen. Each entered once, stayed for some time, and then left. If two professors were in the library at the same time, then at least one of them saw the other. Detectives questioned the professors and gathered the testimonies that *A* saw *B* and *E*; *B* saw *A* and *I*; *C* saw *D* and *I*; *D* saw *A* and *I*; *E* saw *B* and *I*; and *I* saw *C* and *E*. This data is gathered in the previous file, where each positive edge :math:`\{x,y\}` models the testimony that, either *x* saw *y*, or *y* saw *x*.
 
 >>> from graphs import Graph
 >>> g = Graph('berge')
@@ -3828,7 +3826,7 @@ fdp -Tpng berge1.dot -o berge1.png
 
    *Graph representation of the testimonies of the professors*	   
 
-From graph theory we know that time interval intersections graphs must in fact be interval graphs. The testimonies graph should therefore not contain any chordless cycles of four and more vertices. Now, the presence or not of chordless cycles may be checked as follows.
+From graph theory we know that time interval intersections graphs must in fact be interval graphs. The testimonies graph should therefore not contain any chordless cycles of four and more vertices. Now, the presence or not of such chordless cycles may be checked as follows.
 
 >>> g.computeChordlessCycles()
 Chordless cycle certificate -->>>  ['D', 'C', 'E', 'A', 'D']
@@ -3838,7 +3836,7 @@ Chordless cycle certificate -->>>  ['D', 'I', 'B', 'A', 'D']
 (['D', 'I', 'E', 'A', 'D'], frozenset({'D', 'E', 'I', 'A'})), 
 (['D', 'I', 'B', 'A', 'D'], frozenset({'D', 'B', 'I', 'A'}))]
 
-We see three intersection cycles of length 4, which is impossible to occur on the linear time line. Obviously one professor lied! And it is *D* ; if we put to doubt his testimony that he saw *A*, we obtain indeed a triangulated graph instance whose dual is a *comparability* graph. Hence it is, as required,  a valid *interval graph* instance.
+We see three intersection cycles of length 4, which is impossible to occur on the linear time line. Obviously one professor lied! And it is *D* ; if we put to doubt his testimony that he saw *A* (see Line 1 below), we obtain indeed a triangulated graph instance whose dual is a *comparability* graph.
 
 >>> g.setEdgeValue( ('D','A'), 0)
 >>> g.showShort()
@@ -3969,7 +3967,7 @@ dot -Grankdir=TB -Tpng oriented_permutationGraph.dot -o oriented_permutationGrap
 	    
     *Hasse diagram of the transitive orientation of the permutation graph*
 
-The dual of a permutation graph is *again* a permutation graph and as such also transitively orientable. Now, a given graph *g* is a permutation graph **if and only if** both *g* **and** *gd = -g* are *transitively orientable*.
+The dual of a permutation graph is *again* a permutation graph and as such also transitively orientable. Now, a given graph *g* is a **permutation** graph **if and only if** both *g* **and** *gd = -g* are *transitively orientable*.
 
 >>> gd = -g
 >>> dgd = gd.transitiveOrientation()
@@ -4002,7 +4000,7 @@ Attributes       : ['name', 'order', 'vertices', 'valuationDomain', 'seed',
     :width: 400 px
     :align: center
 
-    *Random graph of order 8 generated with edge probility 0.4*
+    *Random graph of order 8 generated with edge probability 0.4*
 
 If the random graph instance *g* (see Fig. 50) is a permutation graph, *g* and its dual *dg = -g* must be *transitively orientable*, ie **comparability graphs** (see [GOL-2004]_). With the :py:func:`graphs.Graph.isComparabilityGraph` test, we may easily check this fact. This method proceeds indeed by trying to construct an implication class decomposition of a given graph instance and, if successful, stores the resulting edge orientations into the *self.edgeOrientations* attribute (see [GOL-2004]_ p.129-132).
 
@@ -4035,7 +4033,7 @@ We will first **fuse** both *og* and *ogd* orientations above with an **epistemi
 
 We obtain by the *Copeland* ranking rule (see :ref:`Ranking-Tutorial-label` and the :py:func:`digraphs.Digraph.computeCopelandRanking` method) a complete linear ordering of the vertices (see Line 5 above).
 
-We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) in order to generate, again by disjunctive fusion, the *inversions* that are produced by the permutation we are looking for. Computing again a ranking with the *Copeland* rule, will show the correspondingly permuted list of vertices (see Line 4 below).
+We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) in order to generate, again by *disjunctive fusion*, the *inversions* that are produced by the permutation we are looking for. Computing again a ranking with the *Copeland* rule, will show the correspondingly permuted list of vertices (see Line 4 below).
 
 >>> f2 = FusionDigraph((-og),ogd,operator='o-max')
 >>> s2 = f2.computeCopelandRanking()
@@ -4071,12 +4069,12 @@ The :py:func:`graphs.Graph.computePermutation` method does directly operate all 
 ['v2', 'v3', 'v4', 'v8', 'v6', 'v1', 'v7', 'v5']
 [2, 3, 4, 8, 6, 1, 7, 5]
 
-We may finally check that, for instance the permutations [2, 3, 4, 8, 6, 1, 7, 5] and [4, 2, 8, 3, 1, 5, 6, 7] observed above, will correctly generate corresponding isomorphic permutation graphs.
+We may finally check that, for instance, the two permutations [2, 3, 4, 8, 6, 1, 7, 5] and [4, 2, 8, 3, 1, 5, 6, 7] observed above, will correctly generate corresponding isomorphic permutation graphs.
 
 >>> gtesta = PermutationGraph(permutation=[2, 3, 4, 8, 6, 1, 7, 5])
 >>> gtestb = PermutationGraph(permutation=[4, 2, 8, 3, 1, 5, 6, 7])
 >>> gtesta.exportGraphViz('gtesta')
->>> gtestb.exportGraphViz('gtesta')
+>>> gtestb.exportGraphViz('gtestb')
 
 .. Figure:: isomorphicPerms.png
     :alt: Isomorphic permutation graphs
