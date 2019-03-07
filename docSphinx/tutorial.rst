@@ -3796,8 +3796,8 @@ Back to :ref:`Tutorial-label`
 
 .. _Permutation-Tutorial-label:
 
-Abut permutation graphs
------------------------
+About permutation graphs
+------------------------
 
 .. contents:: 
 	:depth: 2
