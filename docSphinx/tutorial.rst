@@ -3796,12 +3796,63 @@ Back to :ref:`Tutorial-label`
 
 .. _Permutation-Tutorial-label:
 
-About permutation graphs
-------------------------
+About Permutation, Interval and Split Graphs
+------------------------------------------------
 
 .. contents:: 
 	:depth: 2
 	:local:
+
+
+Introduction
+............
+
+Following Martin Golumbic (see [GOL-2004]_ p. 149), we call a given graph *g*:
+
+    * **Comparability graph** when *g*  is *transitively orientable*.
+    * **Triangulated graph** when *g* does not contain any *chordless cycles* of length 4 and more.
+    * **Interval graph** when *g* is *triangulated* and its dual *-g* is a *comparability* graph.
+    * **Permutation graph** *g* and its dual *-g* are both *comparability* graphs.
+    * **Split graph** when *g* and its dual *-g* are both *triangulated* graphs.
+
+We may generate, for instance, from 8 intervals randomly chosen in the integer range [0,10] a . With seed = 8 (see Line 2 below) we get an interval graph which is both a *triangulated* and a comparability graph and, furthermore, a split graph as follows.
+
+>>> from graphs import *
+>>> g = RandomIntervalIntersectionsGraph(order=8,seed=100)
+>>> g
+*------- Graph instance description ------*
+Instance class   : RandomLineIntersectionsGraph
+Instance name    : randLineIntersections
+Seed             : 101
+Graph Order      : 8
+Graph Size       : 23
+Valuation domain : [-1.0; 1.0]
+Attributes       : ['seed', 'name', 'order', 'intervals',
+                    'vertices', 'valuationDomain',
+		    'edges', 'size', 'gamma']
+>>> print(g.intervals)
+[(2, 7), (2, 7), (5, 6), (6, 8), (1, 8), (1, 1), (4, 7), (0, 10)]
+>>> g.isIntervalGraph(Comments=True)
+Graph 'randLineIntersections' is triangulated.
+Graph 'dual_randLineIntersections' is transitively orientable.
+=> Graph 'randLineIntersections' is an interval graph.
+>>> g.isSplitGraph(Comments=True)
+Graph 'randLineIntersections' is triangulated.
+Graph 'dual_randLineIntersections' is triangulated.
+=> Graph 'randLineIntersections' is a split graph.
+>>> g.exportGraphViz('randomSplitGraph')
+*---- exporting a dot file for GraphViz tools ---------*
+Exporting to randomSplitGraph.dot
+fdp -Tpng randomSplitGraph.dot -o randomSplitGraph.png
+
+.. Figure:: randomSplitGraph.png
+    :alt: Ransdom split graph
+    :width: 300 px
+    :align: center
+
+    *A triangulated, comparability, interval and split graph*
+
+In Fig. 45 we recognize the characteristic appearance of split, namely the graph may be splwhich explains the its name
 
 Permutation graphs
 ..................
@@ -3856,7 +3907,7 @@ fdp -Tpng coloredPermutationGraph.dot -o coloredPermutationGraph.png
 	    
     *Minimal vertex coloring of the permutation graph*
 
-The correspondingly colored **matching diagram** of the nine **inversions** -the actual *edges* of the permutation graph-, which are induced by the given permutation [4, 3, 6, 1, 5, 2], may as well be drawn with the graphviz *neato* layout and explicitely positioned horizontal lists of vertices (see Fig. 47).
+The correspondingly colored **matching diagram** of the nine **inversions** -the actual *edges* of the permutation graph-, which are induced by the given permutation [4, 3, 6, 1, 5, 2], may as well be drawn with the graphviz *neato* layout and explicitely positioned horizontal lists of vertices (see Fig. 48).
 
 >>> g.exportPermutationGraphViz(WithEdgeColoring=True)
 *---- exporting a dot file for GraphViz tools ---------*
@@ -3941,7 +3992,7 @@ Attributes       : ['name', 'order', 'vertices', 'valuationDomain', 'seed',
 
     *Random graph of order 8 generated with edge probility 0.4*
 
-If the random graph instance *g* (see Fig. 49) is a permutation graph, *g* and its dual *dg = -g* must be *transitively orientable*, ie **comparability graphs** (see [GOL-2004]_). With the :py:func:`graphs.Graph.isComparabilityGraph` test, we may easily check this fact. This method proceeds indeed by trying to construct an implication class decomposition of a given graph instance and, if successful, stores the resulting edge orientations into the *self.edgeOrientations* attribute (see [GOL-2004]_ p.129-132).
+If the random graph instance *g* (see Fig. 50) is a permutation graph, *g* and its dual *dg = -g* must be *transitively orientable*, ie **comparability graphs** (see [GOL-2004]_). With the :py:func:`graphs.Graph.isComparabilityGraph` test, we may easily check this fact. This method proceeds indeed by trying to construct an implication class decomposition of a given graph instance and, if successful, stores the resulting edge orientations into the *self.edgeOrientations* attribute (see [GOL-2004]_ p.129-132).
 
 >>> print(g.isComparabilityGraph())
 True
@@ -4022,7 +4073,7 @@ We may finally check that, for instance the permutations [2, 3, 4, 8, 6, 1, 7, 5
 
     *Isomorphic permutation graphs*
 
-And, we recover indeed two *isomorphic copies* of the original random graph (see Fig. 49).
+And, we recover indeed two *isomorphic copies* of the original random graph (see Fig. 50).
 
 Back to :ref:`Tutorial-label`
 
@@ -4131,7 +4182,7 @@ Assertion *A3*, for instance, gives a simple test for recognizing a tree graph. 
 ...
 The graph is a tree ? True
 
-The random graph of order 6 and edge probability 30%, generated with seed 62, is actually a tree graph instance, as we may readily confirm from its *graphviz* drawing in Fig. 36 (see also the :py:func:`graphs.Graph.isTree` method for an implemented alternative test).
+The random graph of order 6 and edge probability 30%, generated with seed 62, is actually a tree graph instance, as we may readily confirm from its *graphviz* drawing in Fig. 54 (see also the :py:func:`graphs.Graph.isTree` method for an implemented alternative test).
 
 >>> g.exportGraphViz(
 *---- exporting a dot file for GraphViz tools ---------*
@@ -4267,7 +4318,7 @@ Depth first search path(s) :
 [['v1', 'v2', 'v4', 'v2', 'v5', 'v2', 'v1', 'v3', 'v1']]
 Average determination(s) : [Decimal('0.655')]
 
-The given graph is connected and, hence, admids a single spanning tree (see Fig. 39) of **maximum mean determination** = (0.47 + 0.91 + 0.90 + 0.34)/4 = **0.655** (see Lines 9, 6 and 10 in the relation table above).
+The given graph is connected and, hence, admids a single spanning tree (see Fig. 57) of **maximum mean determination** = (0.47 + 0.91 + 0.90 + 0.34)/4 = **0.655** (see Lines 9, 6 and 10 in the relation table above).
 
 >>> mt.exportGraphViz(fileName='bestDeterminedspanningTree',\
 ...                   WithSpanningTree=True)

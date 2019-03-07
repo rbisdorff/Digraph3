@@ -245,9 +245,18 @@ def testGraphTransitiveOrientations():
 def testIntervalGraphs():
     print('==>> Testing interval graph property')
     g = RandomGraph(order=8,edgeProbability=0.4)
-    #print(g)
+    print(g)
     print(g.isTriangulated())
     print((-g).isComparabilityGraph())
     print(g.isIntervalGraph(Comments=True))
+    print(g.isSplitGraph(Comments=True))
+
+def testLineIntersectionsGraphs():
+    print('==>> Testing split graph property')
+    g = RandomLineIntersectionsGraph(order=8)
+    print(g)
+    print(g.intervals)
+    print(g.isIntervalGraph(Comments=True))
+    print(g.isSplitGraph(Comments=True))
 
 

@@ -647,8 +647,8 @@ class Graph(object):
                 if nbDepths[i+1] != 0:
                     diameter = order - (i+1)
                     break
-        return diameter
-
+        return diameter                       
+                
     def computeMaximumMatching(self,Comments=False):
         """
         Renders a maximum matching in *self* by computing
@@ -1499,7 +1499,7 @@ class Graph(object):
         """
         if self.isTriangulated():
             if Comments:
-                print('Graph \'%s\' is triangulated' % self.name)
+                print('Graph \'%s\' is triangulated.' % self.name)
             ds = -self
             if ds.isComparabilityGraph():
                 if Comments:
@@ -1548,6 +1548,30 @@ class Graph(object):
             return True
         else:
             return False
+
+    def isSplitGraph(self,Comments=False):
+        """
+        Checks whether the graph ' *self* ' and its dual ' *-self* ' are
+        triangulated graphs
+        """
+        if self.isTriangulated():
+            if Comments:
+                print('Graph \'%s\' is triangulated.' % self.name)
+            ds = -self
+            if ds.isTriangulated():
+                if Comments:
+                    print('Graph \'%s\' is triangulated.' % ds.name)
+                    print('=> Graph \'%s\' is a split graph.' % self.name)
+                return True
+            else:
+                if Comments:
+                    print('Graph \'%s\' is not is not triangulated.' % ds.name)
+                return False        
+        else:
+            if Comments:
+                print('Graph \%s\' is not triangulated' % self.name)
+            return False
+        
                   
     def randomDepthFirstSearch(self,seed=None,Debug=False):
         """
@@ -1913,6 +1937,94 @@ class CycleGraph(Graph):
         self.size = self.computeSize()
         self.gamma = self.gammaSets()
 
+class IntervalIntersectionsGraph(Graph):
+    """
+    Inveral graph constructed from a list *n*
+    intervals, ie pairs (a,b) of integer numbers where a < b.
+    """
+    def __init__(self,intervals,Debug=False):
+        from collections import OrderedDict
+        self.name = 'lineIntersections'
+        self.intervals = intervals
+        if Debug:
+            print(intervals)
+        order = len(intervals)
+        self.order = order
+        nd = len(str(order))
+        vertices = OrderedDict()
+        for i in range(order):
+            vertexKey = ('v%%0%dd' % nd) % (i+1)
+            vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
+        self.vertices = vertices
+        self.valuationDomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
+        Min = self.valuationDomain['min']
+        Max = self.valuationDomain['max']
+        edges = OrderedDict()
+        verticesList = [v for v in vertices]
+        #verticesList.sort()
+        for i in range(order):
+            x = verticesList[i]
+            a = intervals[i][0]
+            b = intervals[i][1]
+            for j in range(i+1,order):
+                y = verticesList[j]
+                c = intervals[j][0]
+                d = intervals[j][1]
+                edgeKey = frozenset([x,y])
+                if c <= a and d >= a: 
+                    edges[edgeKey] = Max
+                    if Debug:
+                        print(a,b,c,d,'=>',1)
+                elif d >= b and c <= b:
+                    edges[edgeKey] = Max
+                    if Debug:
+                        print(a,b,c,d,'=>',2)
+                elif c <= a and d >= a:
+                    edges[edgeKey] = Max
+                    if Debug:
+                        print(a,b,c,d,'=>',3)
+                elif c >= a and d <= b:
+                    edges[edgeKey] = Max
+                    if Debug:
+                        print(a,b,c,d,'=>',4)
+                else:
+                    edges[edgeKey] = Min
+                    if Debug:
+                        print(a,b,c,d,'=>',5)
+                 
+                if Debug:
+                    print('a,b,c,d,edgeKey,edges[edgeKey]')
+                    print(edgeKey,edges[edgeKey])
+        self.edges = edges
+        self.size = self.computeSize()
+        self.gamma = self.gammaSets()
+
+class RandomIntervalIntersectionsGraph(Graph):
+    """ Random generator for LineIntersectionsGraph intances."""
+    def __init__(self,order=5,seed=None,m=0,M=10,Debug=False):
+        import random
+        random.seed(seed)
+        self.seed = seed
+        self.name = 'randIntervalIntersections'
+        self.order = order
+        intervals = []
+        for i in range(order):
+            a = random.randint(m,M)
+            b = random.randint(m,M)
+            if a < b:
+                intervals.append((a,b))
+            else:
+                intervals.append((b,a))
+        if Debug:
+            print(intervals)
+        self.intervals = intervals
+        lis = IntervalIntersectionsGraph(intervals)
+        self.vertices = lis.vertices
+        self.valuationDomain = lis.valuationDomain
+        self.edges = lis.edges
+        self.size = self.computeSize()
+        self.gamma = self.gammaSets()
+        
 class RandomGraph(Graph):
     """
     Random instances of the Graph class
@@ -1922,6 +2034,7 @@ class RandomGraph(Graph):
         * edgeProbability (in [0,1])
     """
     def __init__(self,order=5,edgeProbability=0.4,seed=None):
+        from collections import OrderedDict
         import random
         random.seed(seed)
         self.seed = seed
@@ -1929,7 +2042,7 @@ class RandomGraph(Graph):
         self.name = 'randomGraph'
         self.order = order
         nd = len(str(order))
-        vertices = dict()
+        vertices = OrderedDict()
         for i in range(order):
             vertexKey = ('v%%0%dd' % nd) % (i+1)
             vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
@@ -1937,9 +2050,9 @@ class RandomGraph(Graph):
         self.valuationDomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
         Min = self.valuationDomain['min']
         Max = self.valuationDomain['max']
-        edges = dict()
+        edges = OrderedDict()
         verticesList = [v for v in vertices]
-        verticesList.sort()
+        #verticesList.sort()
         for i in range(order):
             x = verticesList[i]
             for j in range(i+1,order):
@@ -4037,28 +4150,45 @@ if __name__ == '__main__':
     #g = PermutationGraph(permutation=[4,3,6,1,5,2])
     #g = CycleGraph(order=6)
     #g = Graph('test')
-    g = RandomGraph()
-    print(g)
-    #g.exportGraphViz()
-    #g.exportPermutationGraphViz()
-    #g.computeMinimalVertexColoring(Comments=True,Debug=True)
-    #g.exportGraphViz(WithVertexColoring=True)
+##    g = RandomGraph(seed=100)
+##    print(g)
+##    g.exportGraphViz()
+##    #g.exportPermutationGraphViz()
+##    #g.computeMinimalVertexColoring(Comments=True,Debug=True)
+##    #g.exportGraphViz(WithVertexColoring=True)
+##
+##    #b = BestDeterminedSpanningForest(g)
+##    #print(b)
+##    if g.isComparabilityGraph(Debug=True):
+##        print('Comparability Graph ? = True',g.edgeOrientations)
+##        dg = g.computeTransitivelyOrientedDigraph()
+##        if dg != None:
+##            print(dg)
+##            print(dg.computeTransitivityDegree())
+##            dg.exportGraphViz()
+##    else:
+##        print('Comparability Graph ? = False')
+##    print(g.isTriangulated())
+##    print((-g).isComparabilityGraph())
+##    g.isIntervalGraph(Comments=True)
+##
+##    intervals = [(1,5),(2,3),(3,5),(7,8),(3,5),(1,9)]
+##    i = LineIntersectionsGraph(intervals)
+##    print(i)
+##    print(i.intervals)
+##    print(i.isTriangulated())
+##    print((-i).isTriangulated())
 
-    #b = BestDeterminedSpanningForest(g)
-    #print(b)
-    if g.isComparabilityGraph(Debug=True):
-        print('Comparability Graph ? = True',g.edgeOrientations)
-        dg = g.computeTransitivelyOrientedDigraph()
-        if dg != None:
-            print(dg)
-            print(dg.computeTransitivityDegree())
-            dg.exportGraphViz()
-    else:
-        print('Comparability Graph ? = False')
-    print(g.isTriangulated())
-    print((-g).isComparabilityGraph())
-    print(g.isIntervalGraph(Comments=True))
-    
+    ri = RandomIntervalIntersectionsGraph(order=8,seed=100)
+    print(ri)
+    print(ri.intervals)
+    print(ri.isIntervalGraph(Comments=True))
+    print(ri.isTriangulated())
+    print((-ri).isTriangulated())
+    ri.exportGraphViz()
+    ri.isSplitGraph(Comments=True)
+
+          
 ##    rg = RandomPermutationGraph(order=6,seed=None)
 ##    print(rg)
 ##    dg = g.transitiveOrientation()
