@@ -3690,7 +3690,7 @@ Back to :ref:`Tutorial-label`
 
 .. _Permutation-Tutorial-label:
 
-About Permutation, Interval and Split Graphs
+About Split, Interval and Permutation Graphs
 ------------------------------------------------
 
 .. contents:: 
@@ -3765,8 +3765,8 @@ Notice however that the four properties:
 
 are *independent* of one another (see [GOL-2004]_ p. 275).
 
-The Berge mystery story: Who is the lier ?
-..........................................
+Who is the lier ?
+.................
 
 Berge's famous mystery story (see [GOL-2004]_ p.20) may well illustrate the importance to be an **interval graph**.
 
@@ -3868,12 +3868,10 @@ fdp -Tpng berge2.dot -o berge2.png
 
    *The triangulated testominies graph*	   
 
-About Permutation graphs
+About permutation graphs
 ........................
 
-A graph is called a **permutation** or *inversion* graph if there exists a permutation of its list of vertices such that the graph is isomorphic to the inversions operated by the permutation in this list.
-
-*Source*: Martin Ch. Golumbic, Agorithmic Graph Theory and Perfect Graphs 2nd Ed., Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.
+A graph is called a **permutation** or *inversion* graph if there exists a permutation of its list of vertices such that the graph is isomorphic to the inversions operated by the permutation in this list (see [GOL-2004]_ Chapter 7, pp 157-170).
 
 >>> from graphs import PermutationGraph
 >>> g = PermutationGraph(permutation = [4, 3, 6, 1, 5, 2])
