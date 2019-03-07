@@ -937,7 +937,7 @@ class Graph(object):
             return g
 
 
-    def computePermutation(self,seq1=None,seq2=None,Comments=True):
+    def computePermutation(self,seq1=None,seq2=None,Comments=False):
         """
         Tests whether the graph instance *self* is a permutation graph
         and renders, in case the test is positive,
@@ -945,19 +945,19 @@ class Graph(object):
         """
         from digraphs import FusionDigraph
         if seq1 == None or seq2 == None:
-            og = self.computeOrientedDigraph(PartiallyDetermined=True)
+            og = self.computeTransitivelyOrientedDigraph(PartiallyDetermined=True)
             odt = og.computeTransitivityDegree()
             if odt < Decimal('1'):
                 if Comments:
-                    print('Tranditivity degree %.3f < 1' % odt)
+                    print('Transitivity degree %.3f < 1' % odt)
                     print('The graph instance is not a permutation graph')
                 return
             gd = -self
-            ogd = gd.computeOrientedDigraph(PartiallyDetermined=True)
+            ogd = gd.computeTransitivelyOrientedDigraph(PartiallyDetermined=True)
             ogdt = ogd.computeTransitivityDegree()
             if ogdt < Decimal('1'):
                 if Comments:
-                    print('Dual tranditivity degree %.3f < 1' % ogdt)
+                    print('Dual transitivity degree %.3f < 1' % ogdt)
                     print('The graph instance is not a permutation graph')
                 return
             
@@ -1514,7 +1514,34 @@ class Graph(object):
             if Comments:
                 print('Graph \%s\' is not triangulated' % self.name)
             return False
-        
+
+    def isPermutationGraph(self,Comments=False):
+        """
+        Checks whether the graph self and
+        its dual are comparability graphs.
+
+        *Source*: M. Ch. Golumbic (2004) Algorithmic Graph Thery and Perfect Graphs,
+        Annals of Discrete Mathematics 57, Elsevier, p. 16.
+
+        """
+        if self.isComparabilityGraph():
+            if Comments:
+                print('Graph \'%s\' is transitively Orfientable.' % self.name)
+            ds = -self
+            if ds.isComparabilityGraph():
+                if Comments:
+                    print('Graph \'%s\' is transitively orientable.' % ds.name)
+                    print('=> Graph \'%s\' is a permutation graph.' % self.name)
+                return True
+            else:
+                if Comments:
+                    print('Graph \'%s\' is not transitively orientable.' % ds.name)
+                return False        
+        else:
+            if Comments:
+                print('Graph \%s\' is not transitively orientable' % self.name)
+            return False
+         
     def isTree(self):
         """
         Checks if self is a tree by verifing the required number of
@@ -4187,7 +4214,8 @@ if __name__ == '__main__':
     print((-ri).isTriangulated())
     ri.exportGraphViz()
     ri.isSplitGraph(Comments=True)
-
+    ri.isPermutationGraph(Comments=True)
+    print(ri.computePermutation())
           
 ##    rg = RandomPermutationGraph(order=6,seed=None)
 ##    print(rg)

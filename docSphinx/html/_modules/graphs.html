@@ -984,7 +984,7 @@
             <span class="k">return</span> <span class="n">g</span></div>
 
 
-<div class="viewcode-block" id="Graph.computePermutation"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computePermutation">[docs]</a>    <span class="k">def</span> <span class="nf">computePermutation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">seq1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">seq2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.computePermutation"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computePermutation">[docs]</a>    <span class="k">def</span> <span class="nf">computePermutation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">seq1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">seq2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Tests whether the graph instance *self* is a permutation graph</span>
 <span class="sd">        and renders, in case the test is positive,</span>
@@ -992,19 +992,19 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">FusionDigraph</span>
         <span class="k">if</span> <span class="n">seq1</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">seq2</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">og</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeOrientedDigraph</span><span class="p">(</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">og</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeTransitivelyOrientedDigraph</span><span class="p">(</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="n">odt</span> <span class="o">=</span> <span class="n">og</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">odt</span> <span class="o">&lt;</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Tranditivity degree </span><span class="si">%.3f</span><span class="s1"> &lt; 1&#39;</span> <span class="o">%</span> <span class="n">odt</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Transitivity degree </span><span class="si">%.3f</span><span class="s1"> &lt; 1&#39;</span> <span class="o">%</span> <span class="n">odt</span><span class="p">)</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The graph instance is not a permutation graph&#39;</span><span class="p">)</span>
                 <span class="k">return</span>
             <span class="n">gd</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span>
-            <span class="n">ogd</span> <span class="o">=</span> <span class="n">gd</span><span class="o">.</span><span class="n">computeOrientedDigraph</span><span class="p">(</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">ogd</span> <span class="o">=</span> <span class="n">gd</span><span class="o">.</span><span class="n">computeTransitivelyOrientedDigraph</span><span class="p">(</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="n">ogdt</span> <span class="o">=</span> <span class="n">ogd</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">ogdt</span> <span class="o">&lt;</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dual tranditivity degree </span><span class="si">%.3f</span><span class="s1"> &lt; 1&#39;</span> <span class="o">%</span> <span class="n">ogdt</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dual transitivity degree </span><span class="si">%.3f</span><span class="s1"> &lt; 1&#39;</span> <span class="o">%</span> <span class="n">ogdt</span><span class="p">)</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The graph instance is not a permutation graph&#39;</span><span class="p">)</span>
                 <span class="k">return</span>
             
@@ -1561,7 +1561,34 @@
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Graph \</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1"> is not triangulated&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">False</span></div>
-        
+
+<div class="viewcode-block" id="Graph.isPermutationGraph"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.isPermutationGraph">[docs]</a>    <span class="k">def</span> <span class="nf">isPermutationGraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks whether the graph self and</span>
+<span class="sd">        its dual are comparability graphs.</span>
+
+<span class="sd">        *Source*: M. Ch. Golumbic (2004) Algorithmic Graph Thery and Perfect Graphs,</span>
+<span class="sd">        Annals of Discrete Mathematics 57, Elsevier, p. 16.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isComparabilityGraph</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Graph </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1"> is transitively Orfientable.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">ds</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span>
+            <span class="k">if</span> <span class="n">ds</span><span class="o">.</span><span class="n">isComparabilityGraph</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Graph </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1"> is transitively orientable.&#39;</span> <span class="o">%</span> <span class="n">ds</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;=&gt; Graph </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1"> is a permutation graph.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Graph </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1"> is not transitively orientable.&#39;</span> <span class="o">%</span> <span class="n">ds</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">False</span>        
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Graph \</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1"> is not transitively orientable&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+         
 <div class="viewcode-block" id="Graph.isTree"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.isTree">[docs]</a>    <span class="k">def</span> <span class="nf">isTree</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Checks if self is a tree by verifing the required number of</span>
@@ -4234,7 +4261,8 @@
     <span class="nb">print</span><span class="p">((</span><span class="o">-</span><span class="n">ri</span><span class="p">)</span><span class="o">.</span><span class="n">isTriangulated</span><span class="p">())</span>
     <span class="n">ri</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
     <span class="n">ri</span><span class="o">.</span><span class="n">isSplitGraph</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
+    <span class="n">ri</span><span class="o">.</span><span class="n">isPermutationGraph</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ri</span><span class="o">.</span><span class="n">computePermutation</span><span class="p">())</span>
           
 <span class="c1">##    rg = RandomPermutationGraph(order=6,seed=None)</span>
 <span class="c1">##    print(rg)</span>

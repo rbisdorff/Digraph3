@@ -6022,7 +6022,7 @@ best covered terminal kernel</em></span></p>
 <div class="contents local topic" id="id56">
 <ul class="simple">
 <li><a class="reference internal" href="#id57" id="id212">Introduction</a></li>
-<li><a class="reference internal" href="#permutation-graphs" id="id213">Permutation graphs</a></li>
+<li><a class="reference internal" href="#about-permutation-graphs" id="id213">About Permutation graphs</a></li>
 <li><a class="reference internal" href="#properties-of-permutation-graphs" id="id214">Properties of permutation graphs</a></li>
 <li><a class="reference internal" href="#recognizing-permutation-graphs" id="id215">Recognizing permutation graphs</a></li>
 </ul>
@@ -6066,7 +6066,15 @@ best covered terminal kernel</em></span></p>
 24
 25
 26
-27</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="o">*</span>
+27
+28
+29
+30
+31
+32
+33
+34
+35</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomIntervalIntersectionsGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span>
 <span class="go">*------- Graph instance description ------*</span>
@@ -6089,6 +6097,14 @@ best covered terminal kernel</em></span></p>
 <span class="go">Graph &#39;randLineIntersections&#39; is triangulated.</span>
 <span class="go">Graph &#39;dual_randLineIntersections&#39; is triangulated.</span>
 <span class="go">=&gt; Graph &#39;randLineIntersections&#39; is a split graph.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">isPermutationGraph</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">Graph &#39;randIntervalIntersections&#39; is transitively Orfientable.</span>
+<span class="go">Graph &#39;dual_randIntervalIntersections&#39; is transitively orientable.</span>
+<span class="go">=&gt; Graph &#39;randIntervalIntersections&#39; is a permutation graph.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computePermutation</span><span class="p">())</span>
+<span class="go">[&#39;v5&#39;, &#39;v6&#39;, &#39;v4&#39;, &#39;v2&#39;, &#39;v1&#39;, &#39;v3&#39;, &#39;v7&#39;, &#39;v8&#39;]</span>
+<span class="go">[&#39;v8&#39;, &#39;v6&#39;, &#39;v1&#39;, &#39;v2&#39;, &#39;v3&#39;, &#39;v4&#39;, &#39;v7&#39;, &#39;v5&#39;]</span>
+<span class="go">[8, 2, 6, 5, 7, 4, 3, 1]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;randomSplitGraph&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to randomSplitGraph.dot</span>
@@ -6099,10 +6115,10 @@ best covered terminal kernel</em></span></p>
 <a class="reference internal image-reference" href="_images/randomSplitGraph.png"><img alt="Ransdom split graph" src="_images/randomSplitGraph.png" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 45 </span><span class="caption-text"><em>A triangulated, comparability, interval and split graph</em></span></p>
 </div>
-<p>In Fig. 45 we recognize the characteristic appearance of split, namely the graph may be splwhich explains the its name</p>
+<p>In Fig. 45 we recognize the characteristic appearance of split graphs, namely the graph may be split into disjoint sub-graphs: a Mis and a maximal clique; which explains its name.</p>
 </div>
-<div class="section" id="permutation-graphs">
-<h3><a class="toc-backref" href="#id213">Permutation graphs</a><a class="headerlink" href="#permutation-graphs" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="about-permutation-graphs">
+<h3><a class="toc-backref" href="#id213">About Permutation graphs</a><a class="headerlink" href="#about-permutation-graphs" title="Permalink to this headline">¶</a></h3>
 <p>A graph is called a <strong>permutation</strong> or <em>inversion</em> graph if there exists a permutation of its list of vertices such that the graph is isomorphic to the inversions operated by the permutation in this list.</p>
 <p><em>Source</em>: Martin Ch. Golumbic, Agorithmic Graph Theory and Perfect Graphs 2nd Ed., Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -7084,7 +7100,7 @@ best covered terminal kernel</em></span></p>
 </li>
 <li><a class="reference internal" href="#about-permutation-interval-and-split-graphs">About Permutation, Interval and Split Graphs</a><ul>
 <li><a class="reference internal" href="#id57">Introduction</a></li>
-<li><a class="reference internal" href="#permutation-graphs">Permutation graphs</a></li>
+<li><a class="reference internal" href="#about-permutation-graphs">About Permutation graphs</a></li>
 <li><a class="reference internal" href="#properties-of-permutation-graphs">Properties of permutation graphs</a></li>
 <li><a class="reference internal" href="#recognizing-permutation-graphs">Recognizing permutation graphs</a></li>
 </ul>

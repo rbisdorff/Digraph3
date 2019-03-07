@@ -3840,6 +3840,14 @@ Graph 'dual_randLineIntersections' is transitively orientable.
 Graph 'randLineIntersections' is triangulated.
 Graph 'dual_randLineIntersections' is triangulated.
 => Graph 'randLineIntersections' is a split graph.
+>>> g.isPermutationGraph(Comments=True)
+Graph 'randIntervalIntersections' is transitively Orfientable.
+Graph 'dual_randIntervalIntersections' is transitively orientable.
+=> Graph 'randIntervalIntersections' is a permutation graph.
+>>> print(g.computePermutation())
+['v5', 'v6', 'v4', 'v2', 'v1', 'v3', 'v7', 'v8']
+['v8', 'v6', 'v1', 'v2', 'v3', 'v4', 'v7', 'v5']
+[8, 2, 6, 5, 7, 4, 3, 1]
 >>> g.exportGraphViz('randomSplitGraph')
 *---- exporting a dot file for GraphViz tools ---------*
 Exporting to randomSplitGraph.dot
@@ -3852,10 +3860,10 @@ fdp -Tpng randomSplitGraph.dot -o randomSplitGraph.png
 
     *A triangulated, comparability, interval and split graph*
 
-In Fig. 45 we recognize the characteristic appearance of split, namely the graph may be splwhich explains the its name
+In Fig. 45 we recognize the characteristic appearance of split graphs, namely the graph may be split into disjoint sub-graphs: a Mis and a maximal clique; which explains its name.
 
-Permutation graphs
-..................
+About Permutation graphs
+........................
 
 A graph is called a **permutation** or *inversion* graph if there exists a permutation of its list of vertices such that the graph is isomorphic to the inversions operated by the permutation in this list.
 
