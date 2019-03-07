@@ -2106,27 +2106,27 @@ The :code:`valuationType` parameter allows to work:
 
 One may as well use the Rubis XMCDA 2.0 Web services available at the Leopold-Loewenheim Apache Server of the University of Luxembourg,
 
-    >>> from outrankingDigraphs import RubisRestServer
-    >>> solver = RubisRestServer()
-    >>> solver.ping()
-    *************************************************
-    * This is the Leopold-Loewenheim Apache Server  *
-    * of the University of Luxembourg.              *
-    * Welcome to the Rubis XMCDA 2.0 Web service    *
-    * R. Bisdorff (c) 2009-2013                     *
-    * November 2013, version REST/D4 1.1            *
-    *************************************************
+>>> from outrankingDigraphs import RubisRestServer
+>>> solver = RubisRestServer()
+>>> solver.ping()
+*************************************************
+* This is the Leopold-Loewenheim Apache Server  *
+* of the University of Luxembourg.              *
+* Welcome to the Rubis XMCDA 2.0 Web service    *
+* R. Bisdorff (c) 2009-2013                     *
+* November 2013, version REST/D4 1.1            *
+*************************************************
 
 We may submit the given performance tableau.
 
-    >>> t = XMCDA2PerformanceTableau('officeChoice')
-    >>> solver.submitProblem(t)
-    The problem submission was successful !
-    Server ticket: 1BYyGVwV866hSNZo
+>>> t = XMCDA2PerformanceTableau('officeChoice')
+>>> solver.submitProblem(t)
+The problem submission was successful !
+Server ticket: 1BYyGVwV866hSNZo
 
 With the given ticket, saved in a text file in the working directory, we may request from the Rubis solver the corresponding best choice recommendation.
 
-    >>> solver.showSolution()
+>>> solver.showSolution()
 
 And, in a system browser window, browse again the `solution file`_.
 
@@ -2139,67 +2139,67 @@ Strictly best choice
 
 When comparing the performances of alternatives *D* and *G* on a pairwise perspective, we notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D* ( r(*G* outranks *D*) = 100.0).
 
-    >>> g.showPairwiseComparison('G','D')
-    *------------  pairwise comparison ----*
-    Comparing actions : (G, D)
-    crit. wght.  g(x)      g(y)    diff.  |   ind     pref    concord 	|
-    --------------------------------------------------------------------- 	 
-    C   3.00 -12000.00 -14100.00 +2100.00 | 1000.00 2500.00   +3.00 	| 
-    Cf  1.00     50.00     30.00   +20.00 |   10.00   20.00   +1.00 	| 
-    P   1.00     80.00     90.00   -10.00 |   10.00   20.00   +1.00 	| 
-    Pr  1.00     60.00     70.00   -10.00 |   10.00   20.00   +1.00 	| 
-    St  1.00     20.00     30.00   -10.00 |   10.00   20.00   +1.00 	| 
-    V   1.00    100.00     50.00   +50.00 |   10.00   20.00   +1.00 	| 
-    W   1.00     50.00     55.00    -5.00 |   10.00   20.00   +1.00 	| 
-    ---------------------------------------------------------------------
-    Valuation in range: -9.00 to +9.00; global concordance: +9.00
+>>> g.showPairwiseComparison('G','D')
+*------------  pairwise comparison ----*
+Comparing actions : (G, D)
+crit. wght.  g(x)      g(y)    diff.  |   ind     pref    concord 	|
+--------------------------------------------------------------------- 	 
+C   3.00 -12000.00 -14100.00 +2100.00 | 1000.00 2500.00   +3.00 	| 
+Cf  1.00     50.00     30.00   +20.00 |   10.00   20.00   +1.00 	| 
+P   1.00     80.00     90.00   -10.00 |   10.00   20.00   +1.00 	| 
+Pr  1.00     60.00     70.00   -10.00 |   10.00   20.00   +1.00 	| 
+St  1.00     20.00     30.00   -10.00 |   10.00   20.00   +1.00 	| 
+V   1.00    100.00     50.00   +50.00 |   10.00   20.00   +1.00 	| 
+W   1.00     50.00     55.00    -5.00 |   10.00   20.00   +1.00 	| 
+---------------------------------------------------------------------
+Valuation in range: -9.00 to +9.00; global concordance: +9.00
 
 However, we must as well notice that the cheapest alternative *C* is in fact **strictly outranking** alternative *G*.
 
-    >>> g.showPairwiseComparison('C','G')
-    *------------  pairwise comparison ----*
-    Comparing actions : (C, G)/(G, C)
-    crit. wght.   g(x)     g(y)      diff.  |   ind.   pref.   	(C,G)/(G,C) |
-    -------------------------------------------------------------------------
-    C     3.00 -6700.00 -12000.00  +5300.00 | 1000.00 2500.00   +3.00/-3.00 | 
-    Cf    1.00    10.00     50.00    -40.00 |   10.00   20.00   -1.00/+1.00 | 
-    P     1.00   100.00     80.00    +20.00 |   10.00   20.00   +1.00/-1.00 | 
-    Pr    1.00    80.00     60.00    +20.00 |   10.00   20.00   +1.00/-1.00 | 
-    St    1.00     0.00     20.00    -20.00 |   10.00   20.00   -1.00/+1.00 | 
-    V     1.00    70.00    100.00    -30.00 |   10.00   20.00   -1.00/+1.00 | 
-    W     1.00     0.00     50.00    -50.00 |   10.00   20.00   -1.00/+1.00 | 
-    -------------------------------------------------------------------------
-    Valuation in range: -9.00 to +9.00; global concordance: +1.00/-1.00
+>>> g.showPairwiseComparison('C','G')
+*------------  pairwise comparison ----*
+Comparing actions : (C, G)/(G, C)
+crit. wght.   g(x)     g(y)      diff.  |   ind.   pref.   	(C,G)/(G,C) |
+-------------------------------------------------------------------------
+C     3.00 -6700.00 -12000.00  +5300.00 | 1000.00 2500.00   +3.00/-3.00 | 
+Cf    1.00    10.00     50.00    -40.00 |   10.00   20.00   -1.00/+1.00 | 
+P     1.00   100.00     80.00    +20.00 |   10.00   20.00   +1.00/-1.00 | 
+Pr    1.00    80.00     60.00    +20.00 |   10.00   20.00   +1.00/-1.00 | 
+St    1.00     0.00     20.00    -20.00 |   10.00   20.00   -1.00/+1.00 | 
+V     1.00    70.00    100.00    -30.00 |   10.00   20.00   -1.00/+1.00 | 
+W     1.00     0.00     50.00    -50.00 |   10.00   20.00   -1.00/+1.00 | 
+-------------------------------------------------------------------------
+Valuation in range: -9.00 to +9.00; global concordance: +1.00/-1.00
 
 
 To model these *strict outranking* situations, we may compute the Rubis best choice recommendation on the **codual**, the converse (~) of the dual (-), of the outranking digraph instance *g* (see [BIS-2013]_), as follows.
 
-    >>> g.showRubisBestChoiceRecommendation(CoDual=True,ChoiceVector=True)
-    * --- Rubis best choice recommendation(s) ---*
-    (in decreasing order of determinateness)   
-    Credibility domain:  {'min':-100.0, 'max': 100.0', 'med':0.0'}
-    === >> potential best choice(s)
-    * choice                : ['A', 'C', 'D']
-      +-irredundancy        : 0.00
-      independence          : 0.00
-      dominance             : 11.11
-      absorbency            : 0.00
-      covering (%)          : 41.67
-      determinateness (%)   : 53.17
-      characteristic vector :  
-         { 'D': 11.11, 'A': 0.00, 'C': 0.00, 'G': 0.00,
-           'B': -11.11, 'E': -11.11, 'F': -11.11 }
-    === >> potential worst choice(s)
-    * choice                : ['A', 'F']
-      +-irredundancy        : 0.00
-      independence          : 0.00
-      dominance             : -55.56
-      absorbency            : 100.00
-      covered (%)           : 50.00
-      determinateness (%)   : 50.00
-      characteristic vector : 
-         {'A': 0.00, 'B': 0.00, 'C': 0.00, 'D': 0.00, 
-          'E': 0.00, 'F': 0.00, 'G': 0.00, }
+>>> g.showRubisBestChoiceRecommendation(CoDual=True,ChoiceVector=True)
+* --- Rubis best choice recommendation(s) ---*
+(in decreasing order of determinateness)   
+Credibility domain:  {'min':-100.0, 'max': 100.0', 'med':0.0'}
+=== >> potential best choice(s)
+* choice                : ['A', 'C', 'D']
+  +-irredundancy        : 0.00
+  independence          : 0.00
+  dominance             : 11.11
+  absorbency            : 0.00
+  covering (%)          : 41.67
+  determinateness (%)   : 53.17
+  characteristic vector :  
+     { 'D': 11.11, 'A': 0.00, 'C': 0.00, 'G': 0.00,
+       'B': -11.11, 'E': -11.11, 'F': -11.11 }
+=== >> potential worst choice(s)
+* choice                : ['A', 'F']
+  +-irredundancy        : 0.00
+  independence          : 0.00
+  dominance             : -55.56
+  absorbency            : 100.00
+  covered (%)           : 50.00
+  determinateness (%)   : 50.00
+  characteristic vector : 
+     {'A': 0.00, 'B': 0.00, 'C': 0.00, 'D': 0.00, 
+      'E': 0.00, 'F': 0.00, 'G': 0.00, }
 
 It is interesting to notice that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D' (see line 6). In the corresponding characteristic vector (see line 14-15), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see [BIS-2006a]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in the strict best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate. 
 
@@ -2298,41 +2298,39 @@ The :py:class:`performanceQuantiles.PerformanceQuantiles` class implements such 
   * An ordered  dictionary **limitingQuantiles** of so far estimated *lower* (default) or *upper* quantile class limits for each frequency per criterion;
   * An ordered dictionary **historySizes** for keeping track of the number of evaluations seen so far per criterion. Missing data may make these sizes vary from criterion to criterion.
 
-Example python session
-
-    >>> from performanceQuantiles import PerformanceQuantiles
-    >>> from randomPerfTabs import RandomCBPerformanceTableau
-    >>> nbrActions=1000
-    >>> nbrCrit = 7
-    >>> seed = 105
-    >>> tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
-    ...               numberOfCriteria=nbrCrit,seed=seed)
-    >>> pq = PerformanceQuantiles(tp,\
-    ...               numberOfBins = 'quartiles',\
-    ...               LowerClosed=True,Debug=False)
-    >>> pq.__dict__.keys()
-    dict_keys(['objectives', 'LowerClosed', 'name',
-    'quantilesFrequencies', 'criteria', 'historySizes',
-    'limitingQuantiles', ... ])
+>>> from performanceQuantiles import PerformanceQuantiles
+>>> from randomPerfTabs import RandomCBPerformanceTableau
+>>> nbrActions=1000
+>>> nbrCrit = 7
+>>> seed = 105
+>>> tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
+...               numberOfCriteria=nbrCrit,seed=seed)
+>>> pq = PerformanceQuantiles(tp,\
+...               numberOfBins = 'quartiles',\
+...               LowerClosed=True,Debug=False)
+>>> pq.__dict__.keys()
+dict_keys(['objectives', 'LowerClosed', 'name',
+'quantilesFrequencies', 'criteria', 'historySizes',
+'limitingQuantiles', ... ])
 
 The constructor parameter *numberOfBins* (see Lines 7-9 above), choosing the wished number of quantile frequencies, may be either **quartiles**, **quintiles** (5 bins), **deciles** (10 bins) , **dodeciles** (20 bins) or any other integer number of quantile bins. The quantile bins may be either **lower closed** (default) or **upper-closed**.
 
-    >>> # Printing out the estimated quartile limits 
-    >>> pq.showLimitingQuantiles(ByObjectives=True)
-    *----  performance quantiles -----*
-    Costs
-    criteria  | weights |  '0.0'   '0.25'  '0.5'   '0.75'  '1.0'   
-     ---------|--------------------------------------------------
-	'c1'  |   6     | -97.12  -69.69  -50.08  -28.95  -1.85  
-    Benefits
-    criteria  | weights |  '0.0'   '0.25'  '0.5'   '0.75'  '1.0'   
-     ---------|--------------------------------------------------
-	'b1'  |   1     |   2.11   27.92   48.76   68.94   98.69 
-	'b2'  |   1     |   0.00    3.00    5.00    7.00   10.00  
-	'b3'  |   1     |   1.08   30.41   50.57   69.01   97.23  
-	'b4'  |   1     |   0.00    3.00    5.00    7.00   10.00  
-	'b5'  |   1     |   1.84   29.77   50.62   70.14   96.40  
-        'b6'  |   1     |   0.00    3.00    5.00    7.00   10.00
+>>> # Printing out the estimated quartile limits 
+>>> pq.showLimitingQuantiles(ByObjectives=True)
+*----  performance quantiles -----*
+Costs
+criteria  | weights |  '0.0'   '0.25'  '0.5'   '0.75'  '1.0'   
+ ---------|--------------------------------------------------
+    'c1'  |   6     | -97.12  -69.69  -50.08  -28.95  -1.85  
+Benefits
+criteria  | weights |  '0.0'   '0.25'  '0.5'   '0.75'  '1.0'   
+ ---------|--------------------------------------------------
+    'b1'  |   1     |   2.11   27.92   48.76   68.94   98.69 
+    'b2'  |   1     |   0.00    3.00    5.00    7.00   10.00  
+    'b3'  |   1     |   1.08   30.41   50.57   69.01   97.23  
+    'b4'  |   1     |   0.00    3.00    5.00    7.00   10.00  
+    'b5'  |   1     |   1.84   29.77   50.62   70.14   96.40  
+    'b6'  |   1     |   0.00    3.00    5.00    7.00   10.00
 
 Both objectives are equi-important; the weight (6) of the cost criterion balances the sum of weights (6) of the benefit criteria (see column 2). The preference direction of the cost criterion *c1* is negative; the lesser the costs the better it is, wheras all the benefit criteria *b1* to *b6* show positive preference directions, ie the higher the benefits the better it is. The columns entitled '0.0', resp. '1.0' show the quartile *Q0*, resp. *Q4*, ie the **worst**, resp. **best** performance observed so far on each criterion. Column '0.5' shows the **median** (*Q2*) observed on the criteria.  
 
@@ -2371,62 +2369,62 @@ The constructor requires a valid :py:class:`performanceQuantiles.PerformanceQuan
 
 We reconsider the :code:`PerformanceQuantiles` object instance *pq* as computed in the previous section. Let *newActions* be a set of 10 random generated new decision actions of the same kind.
 
-    >>> from sortingDigraphs import NormedQuantilesRatingDigraph
-    >>> newActions = rpg.randomActions(10)
-    >>> nqr = NormedQuantilesRatingDigraph(pq,newActions,rankingRule='best')
-    >>> nqr
-    *-----  Object instance description -----------*
-    Instance class      : NormedQuantilesRatingDigraph
-    Instance name       : normedRatingDigraph
-    # Criteria          : 7
-    # Quantile classes  : 4
-    # New actions       : 10
-    Digraph Size        : 85
-    Determinateness     : 64.44%
-    Attributes: [
-     'LowerClosed', 'actions', 'actionsRanking', 'categories', 'cdf',
-     'completeRelation', 'concordanceRelation', 'criteria', 'criteriaCategoryLimits',
-     'evaluation', 'gamma', 'hasNoVeto', 'historySizes', 'limitingQuantiles', 'name',
-     'nbrThreads', 'newActions', 'notGamma', 'objectives', 'order', 'profileLimits', 'profiles',
-     'quantilesFrequencies', 'rankingCorrelation', 'rankingRule', 'rankingScores',
-     'ratingCategories', 'relation', 'runTimes', 'valuationdomain'] 
-    *------  Constructor run times (in sec.) ------*
-    #Threads         : 1
-    Total time       : 0.54058
-    Data input       : 0.00191
-    Quantile classes : 0.00361
-    Compute profiles : 0.07990
-    Compute relation : 0.41333
-    Compute rating   : 0.01617
-    Compute sorting  : 0.00000
+>>> from sortingDigraphs import NormedQuantilesRatingDigraph
+>>> newActions = rpg.randomActions(10)
+>>> nqr = NormedQuantilesRatingDigraph(pq,newActions,rankingRule='best')
+>>> nqr
+*-----  Object instance description -----------*
+Instance class      : NormedQuantilesRatingDigraph
+Instance name       : normedRatingDigraph
+# Criteria          : 7
+# Quantile classes  : 4
+# New actions       : 10
+Digraph Size        : 85
+Determinateness     : 64.44%
+Attributes: [
+ 'LowerClosed', 'actions', 'actionsRanking', 'categories', 'cdf',
+ 'completeRelation', 'concordanceRelation', 'criteria', 'criteriaCategoryLimits',
+ 'evaluation', 'gamma', 'hasNoVeto', 'historySizes', 'limitingQuantiles', 'name',
+ 'nbrThreads', 'newActions', 'notGamma', 'objectives', 'order', 'profileLimits', 'profiles',
+ 'quantilesFrequencies', 'rankingCorrelation', 'rankingRule', 'rankingScores',
+ 'ratingCategories', 'relation', 'runTimes', 'valuationdomain'] 
+*------  Constructor run times (in sec.) ------*
+#Threads         : 1
+Total time       : 0.54058
+Data input       : 0.00191
+Quantile classes : 0.00361
+Compute profiles : 0.07990
+Compute relation : 0.41333
+Compute rating   : 0.01617
+Compute sorting  : 0.00000
 
 Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class constructor (see Line 2-3) are a valid PerformanceQuantiles object *pq* and a compatible set *newActions* of new decision actions generated from the same random origin. Let us have a look at the digraph's nodes, here called **actions**. Among the 10 new incoming decision actions (see below) there are 3 advantageous (high benefits, but also high costs), 4 cheap (low costs, but also low benefits) and 4 neutral decision actions. Among the new decision actions shown in the performance tableau below, we recognize actions *a1007* and *a1008* we have mentioned in our introduction.
 
-    >>> nqr.showPerformanceTableau(actionsSubset=nqr.newActions)
-    *----  performance tableau -----*
-    criteria |  'a1001'  'a1002'  'a1003'  'a1004'  'a1005'  'a1006'  'a1007'  'a1008'  'a1009'  'a1010'   
-    ---------|------------------------------------------------------------------------------------------
-       'c1'  |   -58.5    -70.9    -70.3    -76.7    -38.1    -45.5    -96.9    -35.7    -79.1    -48.5  
-       'b1'  |    80.6     49.8     65.7     34.9     18.3     20.4     70.6      9.4     69.0     48.8  
-       'b2'  |     9        7        8        6        5        7        9        5        2        5  
-       'b3'  |    55.0     60.0     89.0     53.0     28.0     80.0     82.0     62.0     59.0     11.0  
-       'b4'  |     8        6        9        5        5        5        5        6        3        7  
-       'b5'  |    57.0     30.0     64.0     35.0     30.0     29.0     34.0     51.0     86.0     39.0  
-       'b6'  |     4        4        4        3        2        7        8        4        9        5  
+>>> nqr.showPerformanceTableau(actionsSubset=nqr.newActions)
+*----  performance tableau -----*
+criteria |  'a1001'  'a1002'  'a1003'  'a1004'  'a1005'  'a1006'  'a1007'  'a1008'  'a1009'  'a1010'   
+---------|------------------------------------------------------------------------------------------
+   'c1'  |   -58.5    -70.9    -70.3    -76.7    -38.1    -45.5    -96.9    -35.7    -79.1    -48.5  
+   'b1'  |    80.6     49.8     65.7     34.9     18.3     20.4     70.6      9.4     69.0     48.8  
+   'b2'  |     9        7        8        6        5        7        9        5        2        5  
+   'b3'  |    55.0     60.0     89.0     53.0     28.0     80.0     82.0     62.0     59.0     11.0  
+   'b4'  |     8        6        9        5        5        5        5        6        3        7  
+   'b5'  |    57.0     30.0     64.0     35.0     30.0     29.0     34.0     51.0     86.0     39.0  
+   'b6'  |     4        4        4        3        2        7        8        4        9        5  
 
 The :py:class:`NormedQuantilesRatingDigraphdigraph` instance's actions dictionary also contains the closed lower limits of the four quartile classes: *m1* = [0.0-0.25[, *m2* = [0.25-0.5[, *m3* =[0.5 - 0.75[, *m4* = [0.75 - 1.0[.
 
-    >>> nqr.showPerformanceTableau(actionsSubset=nqr.profiles)
-    *----  performance tableau -----*
-    criteria |  'm1'   'm2'   'm3'   'm4'   
-    ---------|-----------------------------------------
-       'c1'  | -97.1  -73.7  -60.5  -42.5,   
-       'b1'  |   2.1   26.4   49.8   68.9  
-       'b2'  |   0.0    4.0    5.0    6.8  
-       'b3'  |   1.1   44.4   59.8   73.5  
-       'b4'  |   0.0    3.4    4.0    6.1  
-       'b5'  |   1.8   31.9   38.9   57.9  
-       'b6'  |   0.0    2.2    2.8    5.7  
+>>> nqr.showPerformanceTableau(actionsSubset=nqr.profiles)
+*----  performance tableau -----*
+criteria |  'm1'   'm2'   'm3'   'm4'   
+---------|-----------------------------------------
+   'c1'  | -97.1  -73.7  -60.5  -42.5,   
+   'b1'  |   2.1   26.4   49.8   68.9  
+   'b2'  |   0.0    4.0    5.0    6.8  
+   'b3'  |   1.1   44.4   59.8   73.5  
+   'b4'  |   0.0    3.4    4.0    6.1  
+   'b5'  |   1.8   31.9   38.9   57.9  
+   'b6'  |   0.0    2.2    2.8    5.7  
 
 The main time (0.4 out of 0.5 sec. , see Lines 21-27 of the object description above) is spent by the class constructor in computing a bipolar valued outranking relation on the extended actions set including both the new actions as well as the quartile class limits. In case of large volumes, ie many new decision actions and centile classes for instance, a multi-threading version may be used when multiple processing cores are available (see the technical description of the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class).
 
@@ -2932,110 +2930,6 @@ The ``checkSampling()`` method (see line 23) generates a random walk of *nSim=30
 
 For more technical information and more code examples, look into the technical documentation of the :ref:`graphs-label`. For the readers interested in algorithmic applications of Markov Chains we may recommend consulting O. Häggström's 2002 book: [FMCAA]_.
 
-The Berge mystery story: Who is the lier ?
-..........................................
-Suppose that the file ``berge.py`` contains the following :py:class:`graphs.Graph` instance data::
-
-    vertices = {
-    'A': {'name': 'Abe', 'shortName': 'A'},
-    'B': {'name': 'Burt', 'shortName': 'B'},
-    'C': {'name': 'Charlotte', 'shortName': 'C'},
-    'D': {'name': 'Desmond', 'shortName': 'D'},
-    'E': {'name': 'Eddie', 'shortName': 'E'},
-    'I': {'name': 'Ida', 'shortName': 'I'},
-    }
-    valuationDomain = {'min':-1,'med':0,'max':1}
-    edges = {
-    frozenset(['A','B']) : 1, 
-    frozenset(['A','C']) : -1, 
-    frozenset(['A','D']) : 1, 
-    frozenset(['A','E']) : 1, 
-    frozenset(['A','I']) : -1, 
-    frozenset(['B','C']) : -1, 
-    frozenset(['B','D']) : -1, 
-    frozenset(['B','E']) : 1, 
-    frozenset(['B','I']) : 1, 
-    frozenset(['C','D']) : 1, 
-    frozenset(['C','E']) : 1, 
-    frozenset(['C','I']) : 1, 
-    frozenset(['D','E']) : -1, 
-    frozenset(['D','I']) : 1, 
-    frozenset(['E','I']) : 1, 
-    }
-
-This data concerns the famous *Berge mystery story* (see Golumbic, M. C. Algorithmic Graph Theory and Perfect Graphs, *Annals of Discrete Mathematics* 57 p. 20) Six professors (labeled *A*, *B*, *C*, *D*, *E* and *I*) had been to the library on the day that a rare tractate was stolen. Each entered once, stayed for some time, and then left. If two professors were in the library at the same time, then at least one of them saw the other. Detectives questioned the professors and gathered the testimonies that *A* saw *B* and *E*; *B* saw *A* and *I*; *C* saw *D* and *I*; *D* saw *A* and *I*; *E* saw *B* and *I*; and *I* saw *C* and *E*. This data is gathered in the previous file, where each positive edge :math:`\{x,y\}` models the testimony that, either *x* saw *y*, or, *y* saw *x*.
-
-Example Python3 session
-
->>> from graphs import Graph
->>> g = Graph('berge')
->>> g.showShort()
-*---- short description of the graph ----*
-Name             : 'berge'
-Vertices         :  ['A', 'B', 'C', 'D', 'E', 'I']
-Valuation domain :  {'min': -1, 'med': 0, 'max': 1}
-Gamma function   : 
-A -> ['D', 'B', 'E']
-B -> ['E', 'I', 'A']
-C -> ['E', 'D', 'I']
-D -> ['C', 'I', 'A']
-E -> ['C', 'B', 'I', 'A']
-I -> ['C', 'E', 'B', 'D']
-
- The graph data can be plotted as follows.
- 
->>> g.exportGraphViz('berge1')
-*---- exporting a dot file for GraphViz tools ---------*
-Exporting to berge1.dot
-fdp -Tpng berge1.dot -o berge1.png
-
-.. figure:: berge1.png
-   :width: 400 px
-   :align: center
-
-   *Graph representation of the testimonies of the professors*	   
-
-From graph theory we know that time interval intersection graphs must in fact be triangulated. The testimonies graph should therefore not contain any chordless cycles of four and more vertices. Now, the presence or not of chordless cycles may be checked as follows.
-
->>> g.computeChordlessCycles()
-Chordless cycle certificate -->>>  ['D', 'C', 'E', 'A', 'D']
-Chordless cycle certificate -->>>  ['D', 'I', 'E', 'A', 'D']
-Chordless cycle certificate -->>>  ['D', 'I', 'B', 'A', 'D']
-[(['D', 'C', 'E', 'A', 'D'], frozenset({'C', 'D', 'E', 'A'})),
-(['D', 'I', 'E', 'A', 'D'], frozenset({'D', 'E', 'I', 'A'})), 
-(['D', 'I', 'B', 'A', 'D'], frozenset({'D', 'B', 'I', 'A'}))]
-
-We see three intersection cycles of length 4, which is impossible to occur on the linear time line. Obviously one professor lied! And it is *D* ; if we put to doubt his testimony that he saw *A*, we obtain indeed a triangulated graph instance whose dual is a *comparability* graph. Hence it is, as required,  a valid *interval graph* instance.
-
->>> g.setEdgeValue( ('D','A'), 0)
->>> g.showShort()
-*---- short description of the graph ----*
-Name             : 'berge'
-Vertices         :  ['A', 'B', 'C', 'D', 'E', 'I']
-Valuation domain :  {'med': 0, 'min': -1, 'max': 1}
-Gamma function   : 
-A -> ['B', 'E']
-B -> ['A', 'I', 'E']
-C -> ['I', 'E', 'D']
-D -> ['I', 'C']
-E -> ['A', 'I', 'B', 'C']
-I -> ['B', 'E', 'D', 'C']
->>> print(g.isIntervalGraph(Comments=True))
-Graph 'berge' is triangulated.
-Graph 'dual_berge' is transitively orientable.
-=> Graph 'berge' is an interval graph.
-True
->>> g.exportGraphViz('berge2')
-*---- exporting a dot file for GraphViz tools ---------*
-Exporting to berge2.dot
-fdp -Tpng berge2.dot -o berge2.png
-
-.. figure:: berge2.png
-   :width: 400 px
-   :align: center
-
-   *The triangulated testominies graph*	   
-
 Back to :ref:`Tutorial-label`   
 
 .. _IsomorphicMIS-Tutorial-label:
@@ -3180,7 +3074,7 @@ The command :py:func:`digraphs.Digraph.showOrbits` renders now the labelled repr
   stabilizer size: [1, 2, 3, ..., 8, 9, ..., 12, 13, ...]
   frequency      : [0, 2, 0, ..., 1, 0, ...,  1,  0, ...]
 
-The corresponding group stabilizers' sizes and frequencies -- orbit 1 with 12 symmetry axes, orbit 2 with 8 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 11-13), are illustrated in the corresponding unlabelled graphs of *Fig. 33* below.
+The corresponding group stabilizers' sizes and frequencies -- orbit 1 with 12 symmetry axes, orbit 2 with 8 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 11-13), are illustrated in the corresponding unlabelled graphs of Fig. 31 below.
 
 .. figure:: c12.png
     :width: 400 px
@@ -3207,7 +3101,7 @@ What is a graph kernel ?
 
 We call **choice** in a graph, respectively a digraph, a subset of its vertices, resp. of its nodes or actions. A choice *Y* is called **internally stable** or **independent** when there exist **no links** (edges) or relations (arcs) between its members. Furthermore, a choice *Y* is called **externally stable** when for each vertex, node or action *x* not in *Y*, there exists at least a member *y* of *Y* such that *x* is linked or related to *y*. Now, an internally **and** externally stable choice is called a **kernel**.  
 
-A first trivial example is immediately given by the maximal independent vertices sets (MISs) of the n-cycle graph (see :ref:`IsomorphicMIS-Tutorial-label`). Indeed, each MIS in the n-cycle graph is by definition independent, ie internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12-cycle graph as shown in Fig. 34. 
+A first trivial example is immediately given by the maximal independent vertices sets (MISs) of the n-cycle graph (see :ref:`IsomorphicMIS-Tutorial-label`). Indeed, each MIS in the n-cycle graph is by definition independent, ie internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12-cycle graph as shown in Fig. 31. 
 
 In all graph or symmetric digraph, the *maximality condition* imposed on the internal stability is equivalent to the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice, then we may safely add this vertex or node to the given choice without violating its internal stability. All kernels must hence be maximal independent choices. In fact, in a topological sense, they correspond to maximal **holes** in the given graph.
 
@@ -3246,7 +3140,7 @@ fdp -Tpng random3RegularGraph-mis.dot -o random3RegularGraph-mis.png
 
     *A random MIS colored in the random 3-regular graph*
 
-It is easily verified in Fig. 35 above, that the computed MIS renders indeed a valid kernel of the given graph. The complete set of kernels of this 3-regular graph instance coincides hence with the set of its MISs. 
+It is easily verified in Fig. 33 above, that the computed MIS renders indeed a valid kernel of the given graph. The complete set of kernels of this 3-regular graph instance coincides hence with the set of its MISs. 
 
 >>> g.showMIS()
 *---  Maximal Independent Sets ---*
@@ -3320,7 +3214,7 @@ current representative:  frozenset({'a09', 'a11', 'a12', 'a08'})
 length   :  4
 number of isomorph choices 2
 isormorph choices
-['a06', 'a02', 'a12', 'a10']  # <<== the random MIS shown in Fig. 4
+['a06', 'a02', 'a12', 'a10']  # <<== the random MIS shown in Fig. 33
 ['a09', 'a11', 'a12', 'a08']
 ...
 *---- Global result ----
@@ -3342,7 +3236,7 @@ Symmetry vector
 stabilizer size  :  [1, 2]
 frequency        :  [11, 0]
 
-In our random 3-regular graph instance (see Fig. 34), we may thus find eleven non isomorphic kernels with orbit sizes equal to two. We illustrate below the isomorphic twin of the random MIS example shown in Fig. 35.
+In our random 3-regular graph instance (see Fig. 32), we may thus find eleven non isomorphic kernels with orbit sizes equal to two. We illustrate below the isomorphic twin of the random MIS example shown in Fig. 33.
 
 .. figure:: random3RegularGraphKernelOrbit.png
    :width: 700 px
@@ -3486,7 +3380,7 @@ Absorbent preKernels :
 ['1', '3', '5'] independence: 1.0, dominance: 1.0, absorbency: 1.0
 ['2', '4', '6'] independence: 1.0, dominance: 1.0, absorbency: 1.0
 
-Chordless circuits of even length may thus be indifferently oriented along two opposite directions. Notice by the way that the duals of **all** chordless circuits of *odd* **or** *even* length, ie *filled* circuits also called **anti-holes** (see Fig. 38), never contain any potential kernel candidates.
+Chordless circuits of even length may thus be indifferently oriented along two opposite directions. Notice by the way that the duals of **all** chordless circuits of *odd* **or** *even* length, ie *filled* circuits also called **anti-holes** (see Fig. 36), never contain any potential kernel candidates.
 
 >>> dc6 = -c6   # dc6 = DualDigraph(c6)
 >>> dc6.showPreKernels()
@@ -3528,7 +3422,7 @@ dot -Grankdir=BT -Tpng randomLaterality.dot -o randomLaterality.png
 
    *A random digraph instance of order 7 and arc probability 0.3*
 
-The random digraph shown in Fig. 39 above has no apparent special properties, except from being connected.
+The random digraph shown in Fig. 37 above has no apparent special properties, except from being connected.
 
 >>> rd.showComponents()
 *--- Connected Components ---*
@@ -3578,7 +3472,7 @@ Absorbent preKernels :
    covering     :  0.600  # <<==
 ...
 
-Among the six MISs contained in this random digraph (see above Lines 3-8) we discover two initial and two terminal kernels (Lines 12-34). Notice by the way the covering values (between 0.0 and 1.0) shown by the :py:func:`digraphs.Digraph.showPreKernels` method (Lines 17, 22, 28 and 33). The higher this value, the more the corresponding kernel candidate makes apparent the digraph's *laterality*. We may hence redraw the same digraph in Fig. 40 by looking into its interior via the *best covering* initial kernel candidate: the dominant choice {'3','4'} (coloured in yellow), and looking out of it via the *best covered* terminal kernel candidate: the absorbent choice {'1','6'} (coloured in blue).
+Among the six MISs contained in this random digraph (see above Lines 3-8) we discover two initial and two terminal kernels (Lines 12-34). Notice by the way the covering values (between 0.0 and 1.0) shown by the :py:func:`digraphs.Digraph.showPreKernels` method (Lines 17, 22, 28 and 33). The higher this value, the more the corresponding kernel candidate makes apparent the digraph's *laterality*. We may hence redraw the same digraph in Fig. 38 by looking into its interior via the *best covering* initial kernel candidate: the dominant choice {'3','4'} (coloured in yellow), and looking out of it via the *best covered* terminal kernel candidate: the absorbent choice {'1','6'} (coloured in blue).
 
 >>> rd.exportGraphViz(fileName='orientedLaterality',\
 ...                   bestChoice=set(['a4', 'a3']),\
@@ -3623,7 +3517,7 @@ Valuation domain : {'min': -100.0, 'med': 0.0, 'max': 100.0}
 
    *The performance tableau of a random outranking digraph instance*
 
-The underlying random performance tableau (see Fig. 41) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision actions 'a2' and 'a5'. The resulting **strict outranking** - ie a weighted majority supported - *better than without considerable counter-performance* - digraph is shown in Fig. 42 below.
+The underlying random performance tableau (see Fig. 39) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision actions 'a2' and 'a5'. The resulting **strict outranking** - ie a weighted majority supported - *better than without considerable counter-performance* - digraph is shown in Fig. 40 below.
 
 >>> gcd = ~(-g)  # Codual: the converse of the negation
 >>> gcd.exportGraphViz(fileName='tutOutRanking')
@@ -3683,7 +3577,7 @@ Credibility domain: [-100.00,100.00]
 
 Notice that solving the valued *Berge* kernel equations ([BIS-2006a]_) provides furthermore a positive characterization of the most credible decision actions in each respective choice recommendation (see Lines 14 and 23 above). Actions 'a2' and 'a4' are equivalent candidates for a unique best choice, and action 'a7' is clearly confirmed as the worst choice.
 
-In Fig. 43 below, we orient the drawing of the strict outranking digraph instance with the help of these best and worst choice recommendations. 
+In Fig. 41 below, we orient the drawing of the strict outranking digraph instance with the help of these best and worst choice recommendations. 
 
 >>> gcd.exportGraphViz(fileName='bestWorstOrientation',
 ...       bestChoice=['a2','a4'], worstChoice=['a7'])
@@ -3698,7 +3592,7 @@ dot -Grankdir=BT -Tpng bestWorstOrientation.dot -o bestWorstOrientation.png
 
    *The strict outranking digraph oriented by its best and worst choice recommendations*
 
-The grey arrows in Fig. 43, like the one between actions 'a4' and 'a1', represent indeterminate preferential situations. Action 'a1' appears hence to be rather incomparable to all the other, except action 'a7'. It may be interesting to compare this result with a Copeland ranking of the underlying performance tableau (see :ref:`Ranking-Tutorial-label`).
+The grey arrows in Fig. 41, like the one between actions 'a4' and 'a1', represent indeterminate preferential situations. Action 'a1' appears hence to be rather incomparable to all the other, except action 'a7'. It may be interesting to compare this result with a Copeland ranking of the underlying performance tableau (see :ref:`Ranking-Tutorial-label`).
 
 >>> g.showHTMLPerformanceHeatmap(colorLevels=5, ndigits=0,
 ...          Correlations=True, rankingRule='Copeland')
@@ -3710,7 +3604,7 @@ The grey arrows in Fig. 43, like the one between actions 'a4' and 'a1', represen
 
    *Heatmap with Copeland ranking of the peformance tableau*
 
-In the resulting linear ranking (see Fig. 44), action 'a4' is set at first rank, followed by action 'a2'. This makes sense as 'a4' shows three performances in the first quintile, whereas 'a2' is only partially evaluated and shows only two such excellent performances. But 'a4' also shows a very weak performance in the first quintile. Both decision actions, hence, don't show eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually definite strict outranking relation than any 'forced' linear ranking result as shown in Fig. 44  above.
+In the resulting linear ranking (see Fig. 42), action 'a4' is set at first rank, followed by action 'a2'. This makes sense as 'a4' shows three performances in the first quintile, whereas 'a2' is only partially evaluated and shows only two such excellent performances. But 'a4' also shows a very weak performance in the first quintile. Both decision actions, hence, don't show eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually definite strict outranking relation than any 'forced' linear ranking result as shown in Fig. 44  above.
 
 Tractability
 ............
@@ -3860,7 +3754,7 @@ fdp -Tpng randomSplitGraph.dot -o randomSplitGraph.png
 
     *A conjointly triangulated, comparability, interval, permutation and split graph instance*
 
-In Fig. 45 we recognize the essential characteristic of split graphs, namely being always splitable into two disjoint sub-graphs: an independentt choice (*v6*) and a clique (*v1*,*v2*,*v3*,*v4*,*v5*,*v7*,*v8*); which explains their name.
+In Fig. 43 we recognize the essential characteristic of split graphs, namely being always splitable into two disjoint sub-graphs: an independentt choice (*v6*) and a clique (*v1*,*v2*,*v3*,*v4*,*v5*,*v7*,*v8*); which explains their name.
 
 Notice however that the four properties:
 
@@ -3870,6 +3764,110 @@ Notice however that the four properties:
     #. *-g* is a triangulated graph;
 
 are *independent* of one another (see [GOL-2004]_ p. 275).
+
+The Berge mystery story: Who is the lier ?
+..........................................
+
+Berge's famous mystery story (see [GOL-2004]_ p.20) may well illustrate the importance to be an **interval graph**.
+
+Suppose that the file ``berge.py`` contains the following :py:class:`graphs.Graph` instance data::
+
+    vertices = {
+    'A': {'name': 'Abe', 'shortName': 'A'},
+    'B': {'name': 'Burt', 'shortName': 'B'},
+    'C': {'name': 'Charlotte', 'shortName': 'C'},
+    'D': {'name': 'Desmond', 'shortName': 'D'},
+    'E': {'name': 'Eddie', 'shortName': 'E'},
+    'I': {'name': 'Ida', 'shortName': 'I'},
+    }
+    valuationDomain = {'min':-1,'med':0,'max':1}
+    edges = {
+    frozenset(['A','B']) : 1, 
+    frozenset(['A','C']) : -1, 
+    frozenset(['A','D']) : 1, 
+    frozenset(['A','E']) : 1, 
+    frozenset(['A','I']) : -1, 
+    frozenset(['B','C']) : -1, 
+    frozenset(['B','D']) : -1, 
+    frozenset(['B','E']) : 1, 
+    frozenset(['B','I']) : 1, 
+    frozenset(['C','D']) : 1, 
+    frozenset(['C','E']) : 1, 
+    frozenset(['C','I']) : 1, 
+    frozenset(['D','E']) : -1, 
+    frozenset(['D','I']) : 1, 
+    frozenset(['E','I']) : 1, 
+    }
+
+Six professors (labeled *A*, *B*, *C*, *D*, *E* and *I*) had been to the library on the day that a rare tractate was stolen. Each entered once, stayed for some time, and then left. If two professors were in the library at the same time, then at least one of them saw the other. Detectives questioned the professors and gathered the testimonies that *A* saw *B* and *E*; *B* saw *A* and *I*; *C* saw *D* and *I*; *D* saw *A* and *I*; *E* saw *B* and *I*; and *I* saw *C* and *E*. This data is gathered in the previous file, where each positive edge :math:`\{x,y\}` models the testimony that, either *x* saw *y*, or, *y* saw *x*.
+
+Example Python3 session
+
+>>> from graphs import Graph
+>>> g = Graph('berge')
+>>> g.showShort()
+*---- short description of the graph ----*
+Name             : 'berge'
+Vertices         :  ['A', 'B', 'C', 'D', 'E', 'I']
+Valuation domain :  {'min': -1, 'med': 0, 'max': 1}
+Gamma function   : 
+A -> ['D', 'B', 'E']
+B -> ['E', 'I', 'A']
+C -> ['E', 'D', 'I']
+D -> ['C', 'I', 'A']
+E -> ['C', 'B', 'I', 'A']
+I -> ['C', 'E', 'B', 'D']
+>>> g.exportGraphViz('berge1')
+*---- exporting a dot file for GraphViz tools ---------*
+Exporting to berge1.dot
+fdp -Tpng berge1.dot -o berge1.png
+
+.. figure:: berge1.png
+   :width: 400 px
+   :align: center
+
+   *Graph representation of the testimonies of the professors*	   
+
+From graph theory we know that time interval intersection graphs must in fact be triangulated. The testimonies graph should therefore not contain any chordless cycles of four and more vertices. Now, the presence or not of chordless cycles may be checked as follows.
+
+>>> g.computeChordlessCycles()
+Chordless cycle certificate -->>>  ['D', 'C', 'E', 'A', 'D']
+Chordless cycle certificate -->>>  ['D', 'I', 'E', 'A', 'D']
+Chordless cycle certificate -->>>  ['D', 'I', 'B', 'A', 'D']
+[(['D', 'C', 'E', 'A', 'D'], frozenset({'C', 'D', 'E', 'A'})),
+(['D', 'I', 'E', 'A', 'D'], frozenset({'D', 'E', 'I', 'A'})), 
+(['D', 'I', 'B', 'A', 'D'], frozenset({'D', 'B', 'I', 'A'}))]
+
+We see three intersection cycles of length 4, which is impossible to occur on the linear time line. Obviously one professor lied! And it is *D* ; if we put to doubt his testimony that he saw *A*, we obtain indeed a triangulated graph instance whose dual is a *comparability* graph. Hence it is, as required,  a valid *interval graph* instance.
+
+>>> g.setEdgeValue( ('D','A'), 0)
+>>> g.showShort()
+*---- short description of the graph ----*
+Name             : 'berge'
+Vertices         :  ['A', 'B', 'C', 'D', 'E', 'I']
+Valuation domain :  {'med': 0, 'min': -1, 'max': 1}
+Gamma function   : 
+A -> ['B', 'E']
+B -> ['A', 'I', 'E']
+C -> ['I', 'E', 'D']
+D -> ['I', 'C']
+E -> ['A', 'I', 'B', 'C']
+I -> ['B', 'E', 'D', 'C']
+>>> print(g.isIntervalGraph(Comments=True))
+Graph 'berge' is triangulated.
+Graph 'dual_berge' is transitively orientable.
+=> Graph 'berge' is an interval graph.
+True
+>>> g.exportGraphViz('berge2')
+*---- exporting a dot file for GraphViz tools ---------*
+Exporting to berge2.dot
+fdp -Tpng berge2.dot -o berge2.png
+
+.. figure:: berge2.png
+   :width: 400 px
+   :align: center
+
+   *The triangulated testominies graph*	   
 
 About Permutation graphs
 ........................
