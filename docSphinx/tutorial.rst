@@ -3485,7 +3485,7 @@ Absorbent preKernels :
 ['1', '3', '5'] independence: 1.0, dominance: 1.0, absorbency: 1.0
 ['2', '4', '6'] independence: 1.0, dominance: 1.0, absorbency: 1.0
 
-Chordless circuits of even length may thus be indifferently oriented along two opposite directions. Notice by the way that the duals of **all** chordless circuits of *odd* **or** *even* length, ie *filled* circuits also called **anti-holes** (see Fig. 21), never contain any potential kernel candidates.
+Chordless circuits of even length may thus be indifferently oriented along two opposite directions. Notice by the way that the duals of **all** chordless circuits of *odd* **or** *even* length, ie *filled* circuits also called **anti-holes** (see Fig. 38), never contain any potential kernel candidates.
 
 >>> dc6 = -c6   # dc6 = DualDigraph(c6)
 >>> dc6.showPreKernels()
@@ -3709,7 +3709,7 @@ The grey arrows in Fig. 43, like the one between actions 'a4' and 'a1', represen
 
    *Heatmap with Copeland ranking of the peformance tableau*
 
-In the resulting linear ranking (see Fig. 44), action 'a4' is set at first rank, followed by action 'a2'. This makes sense as 'a4' shows three performances in the first quintile, whereas 'a2' is only partially evaluated and shows only two such excellent performances. But 'a4' also shows a very weak performance in the first quintile. Both decision actions, hence, don't show eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually definite strict outranking relation than any 'forced' linear ranking result as shown in Fig. 27 above.
+In the resulting linear ranking (see Fig. 44), action 'a4' is set at first rank, followed by action 'a2'. This makes sense as 'a4' shows three performances in the first quintile, whereas 'a2' is only partially evaluated and shows only two such excellent performances. But 'a4' also shows a very weak performance in the first quintile. Both decision actions, hence, don't show eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually definite strict outranking relation than any 'forced' linear ranking result as shown in Fig. 44  above.
 
 Tractability
 ............
@@ -3853,7 +3853,7 @@ fdp -Tpng coloredPermutationGraph.dot -o coloredPermutationGraph.png
 	    
     *Minimal vertex coloring of the permutation graph*
 
-The correspondingly colored **matching diagram** of the nine **inversions** -the actual *edges* of the permutation graph-, which are induced by the given permutation [4, 3, 6, 1, 5, 2], may as well be drawn with the graphviz *neato* layout and explicitely positioned horizontal lists of vertices (see :py:func:`graphs.Graph.exportPermutationGraphViz`).
+The correspondingly colored **matching diagram** of the nine **inversions** -the actual *edges* of the permutation graph-, which are induced by the given permutation [4, 3, 6, 1, 5, 2], may as well be drawn with the graphviz *neato* layout and explicitely positioned horizontal lists of vertices (see Fig. 47).
 
 >>> g.exportPermutationGraphViz(WithEdgeColoring=True)
 *---- exporting a dot file for GraphViz tools ---------*
@@ -3938,7 +3938,7 @@ Attributes       : ['name', 'order', 'vertices', 'valuationDomain', 'seed',
 
     *Random graph of order 8 generated with edge probility 0.4*
 
-If the graph instance *g* is a permutation graph, *g* and its dual *dg = -g* must be *transitively orientable*, ie **comparability graphs** (see [GOL-2004]_). With the :py:func:`graphs.Graph.isComparabilityGraph` test, we may easily check this fact. This method proceeds indeed by trying to construct a ranked implication class decomposition of a given graph instance and, if successful, stores the ranked edge orientations into the *self.edgeRanks* attribute (see [GOL-2004]_ p.129-132).
+If the random graph instance *g* (see Fig. 49) is a permutation graph, *g* and its dual *dg = -g* must be *transitively orientable*, ie **comparability graphs** (see [GOL-2004]_). With the :py:func:`graphs.Graph.isComparabilityGraph` test, we may easily check this fact. This method proceeds indeed by trying to construct an implication class decomposition of a given graph instance and, if successful, stores the resulting edge orientations into the *self.edgeOrientations* attribute (see [GOL-2004]_ p.129-132).
 
 >>> print(g.isComparabilityGraph())
 True
