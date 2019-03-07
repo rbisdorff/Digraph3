@@ -251,9 +251,9 @@ def testIntervalGraphs():
     print(g.isIntervalGraph(Comments=True))
     print(g.isSplitGraph(Comments=True))
 
-def testLineIntersectionsGraphs():
+def testIntervalIntersectionsGraphs():
     print('==>> Testing split graph property')
-    g = RandomLineIntersectionsGraph(order=8)
+    g = RandomIntervalIntersectionsGraph(order=8)
     print(g)
     print(g.intervals)
     print(g.isIntervalGraph(Comments=True))
