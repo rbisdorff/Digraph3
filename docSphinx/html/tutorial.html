@@ -5869,7 +5869,7 @@ best covered terminal kernel</em></span></p>
 <li><strong>Split graph</strong> when <em>g</em> and its dual <em>-g</em> are both <em>triangulated</em> graphs.</li>
 </ul>
 </div></blockquote>
-<p>To illustrate these perfect graph classes, we will generate from 8 intervals randomly chosen in the default integer range [0,10] a <code class="xref py py-class docutils literal"><span class="pre">RandomIntervalIntersectionsGraph</span></code> class instance <em>g</em> (see Line 2 below). With seed = 101, we get an <em>interval</em> graph which is <strong>conjointly</strong> a <em>triangulated</em>, a <em>comparability</em>, a <em>split</em> and a <em>permutation</em> graph.</p>
+<p>To illustrate these <em>perfect</em> graph classes, we will generate from 8 intervals, randomly chosen in the default integer range [0,10], a <code class="xref py py-class docutils literal"><span class="pre">RandomIntervalIntersectionsGraph</span></code> instance <em>g</em> (see Line 2 below). With seed = 101, we obtain an <em>interval</em> graph which is <strong>conjointly</strong> a <em>triangulated</em>, a <em>comparability</em>, a <em>split</em> and a <em>permutation</em> graph.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -5905,7 +5905,7 @@ best covered terminal kernel</em></span></p>
 33
 34
 35</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">RandomIntervalIntersectionsGraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomIntervalIntersectionsGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomIntervalIntersectionsGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">101</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span>
 <span class="go">*------- Graph instance description ------*</span>
 <span class="go">Instance class   : RandomLineIntersectionsGraph</span>
@@ -5945,7 +5945,7 @@ best covered terminal kernel</em></span></p>
 <a class="reference internal image-reference" href="_images/randomSplitGraph.png"><img alt="Ransdom split graph" src="_images/randomSplitGraph.png" style="width: 350px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 43 </span><span class="caption-text"><em>A conjointly triangulated, comparability, interval, permutation and split graph instance</em></span></p>
 </div>
-<p>In Fig. 43 we may recognize the essential characteristic of split graphs, namely being always splitable into two disjoint sub-graphs: an independentt choice (<em>v6</em>) and a clique (<em>v1</em>, <em>v2</em>, <em>v3</em>, <em>v4</em>, <em>v5</em>, <em>v7</em>, <em>v8</em>); which explains their name.</p>
+<p>In Fig. 43 we may readily recognize the essential characteristic of split graphs, namely being always splitable into two disjoint sub-graphs: an independentt choice (<em>v6</em>) and a clique (<em>v1</em>, <em>v2</em>, <em>v3</em>, <em>v4</em>, <em>v5</em>, <em>v7</em>, <em>v8</em>); which explains their name.</p>
 <p>Notice however that the four properties:</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -5959,7 +5959,7 @@ best covered terminal kernel</em></span></p>
 </div>
 <div class="section" id="who-is-the-lier-on-the-importance-to-be-an-interval-graph">
 <h3><a class="toc-backref" href="#id214">Who is the lier ? On the importance to be an <em>interval</em> graph</a><a class="headerlink" href="#who-is-the-lier-on-the-importance-to-be-an-interval-graph" title="Permalink to this headline">¶</a></h3>
-<p>Berge’s famous mystery story (see <a class="reference internal" href="#gol-2004" id="id59">[GOL-2004]</a> p.20) may well illustrate the importance to be an <strong>interval graph</strong>.</p>
+<p><em>Claude Berge</em> ‘s famous mystery story (see <a class="reference internal" href="#gol-2004" id="id59">[GOL-2004]</a> p.20) may well illustrate the importance to be an <strong>interval graph</strong>.</p>
 <p>Suppose that the file <code class="docutils literal"><span class="pre">berge.py</span></code> contains the following <a class="reference internal" href="techDoc.html#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal"><span class="pre">graphs.Graph</span></code></a> instance data:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -6056,7 +6056,7 @@ best covered terminal kernel</em></span></p>
 <a class="reference internal image-reference" href="_images/berge1.png"><img alt="_images/berge1.png" src="_images/berge1.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 44 </span><span class="caption-text"><em>Graph representation of the testimonies of the professors</em></span></p>
 </div>
-<p>From graph theory we know that time interval intersections graphs must in fact be interval graphs. The testimonies graph should therefore not contain any chordless cycles of four and more vertices. Now, the presence or not of such chordless cycles may be checked as follows.</p>
+<p>From graph theory we know that time interval intersections graphs must in fact be interval graphs. The testimonies graph should therefore not contain any chordless cycle of four and more vertices. Now, the presence or not of such chordless cycles may be checked as follows.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3

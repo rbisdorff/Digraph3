@@ -3709,10 +3709,10 @@ Following Martin Golumbic (see [GOL-2004]_ p. 149), we call a given graph *g*:
     * **Permutation graph** *g* and its dual *-g* are both *comparability* graphs.
     * **Split graph** when *g* and its dual *-g* are both *triangulated* graphs.
 
-To illustrate these perfect graph classes, we will generate from 8 intervals randomly chosen in the default integer range [0,10] a :py:class:`RandomIntervalIntersectionsGraph` class instance *g* (see Line 2 below). With seed = 101, we get an *interval* graph which is **conjointly** a *triangulated*, a *comparability*, a *split* and a *permutation* graph.
+To illustrate these *perfect* graph classes, we will generate from 8 intervals, randomly chosen in the default integer range [0,10], a :py:class:`RandomIntervalIntersectionsGraph` instance *g* (see Line 2 below). With seed = 101, we obtain an *interval* graph which is **conjointly** a *triangulated*, a *comparability*, a *split* and a *permutation* graph.
 
 >>> from graphs import RandomIntervalIntersectionsGraph
->>> g = RandomIntervalIntersectionsGraph(order=8,seed=100)
+>>> g = RandomIntervalIntersectionsGraph(order=8,seed=101)
 >>> g
 *------- Graph instance description ------*
 Instance class   : RandomLineIntersectionsGraph
@@ -3754,7 +3754,7 @@ fdp -Tpng randomSplitGraph.dot -o randomSplitGraph.png
 
     *A conjointly triangulated, comparability, interval, permutation and split graph instance*
 
-In Fig. 43 we may recognize the essential characteristic of split graphs, namely being always splitable into two disjoint sub-graphs: an independentt choice (*v6*) and a clique (*v1*, *v2*, *v3*, *v4*, *v5*, *v7*, *v8*); which explains their name.
+In Fig. 43 we may readily recognize the essential characteristic of split graphs, namely being always splitable into two disjoint sub-graphs: an independentt choice (*v6*) and a clique (*v1*, *v2*, *v3*, *v4*, *v5*, *v7*, *v8*); which explains their name.
 
 Notice however that the four properties:
 
@@ -3768,7 +3768,7 @@ are *independent* of one another (see [GOL-2004]_ p. 275).
 Who is the lier ? On the importance to be an *interval* graph
 .............................................................
 
-Berge's famous mystery story (see [GOL-2004]_ p.20) may well illustrate the importance to be an **interval graph**.
+*Claude Berge* 's famous mystery story (see [GOL-2004]_ p.20) may well illustrate the importance to be an **interval graph**.
 
 Suppose that the file ``berge.py`` contains the following :py:class:`graphs.Graph` instance data::
 
@@ -3826,7 +3826,7 @@ fdp -Tpng berge1.dot -o berge1.png
 
    *Graph representation of the testimonies of the professors*	   
 
-From graph theory we know that time interval intersections graphs must in fact be interval graphs. The testimonies graph should therefore not contain any chordless cycles of four and more vertices. Now, the presence or not of such chordless cycles may be checked as follows.
+From graph theory we know that time interval intersections graphs must in fact be interval graphs. The testimonies graph should therefore not contain any chordless cycle of four and more vertices. Now, the presence or not of such chordless cycles may be checked as follows.
 
 >>> g.computeChordlessCycles()
 Chordless cycle certificate -->>>  ['D', 'C', 'E', 'A', 'D']
