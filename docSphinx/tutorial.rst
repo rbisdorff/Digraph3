@@ -3005,7 +3005,7 @@ Chordless cycle certificate -->>>  ['D', 'I', 'B', 'A', 'D']
 (['D', 'I', 'E', 'A', 'D'], frozenset({'D', 'E', 'I', 'A'})), 
 (['D', 'I', 'B', 'A', 'D'], frozenset({'D', 'B', 'I', 'A'}))]
 
-We see three intersection cycles of length 4, which is impossible to occur on the linear time line. Obviously one professor lied! And it is *D* ; if we put to doubt the testimony that he indeed saw *A*, we obtain indeed a triangulated graph instance whose dual is a *comparability* graph. Hence it is, as required,  a valid *interval graph* instance.
+We see three intersection cycles of length 4, which is impossible to occur on the linear time line. Obviously one professor lied! And it is *D* ; if we put to doubt his testimony that he saw *A*, we obtain indeed a triangulated graph instance whose dual is a *comparability* graph. Hence it is, as required,  a valid *interval graph* instance.
 
 >>> g.setEdgeValue( ('D','A'), 0)
 >>> g.showShort()
@@ -3020,10 +3020,11 @@ C -> ['I', 'E', 'D']
 D -> ['I', 'C']
 E -> ['A', 'I', 'B', 'C']
 I -> ['B', 'E', 'D', 'C']
->>> g.isIntervalGraph(Comments=True)
+>>> print(g.isIntervalGraph(Comments=True))
 Graph 'berge' is triangulated.
 Graph 'dual_berge' is transitively orientable.
 => Graph 'berge' is an interval graph.
+True
 >>> g.exportGraphViz('berge2')
 *---- exporting a dot file for GraphViz tools ---------*
 Exporting to berge2.dot
@@ -3714,7 +3715,7 @@ In the resulting linear ranking (see Fig. 44), action 'a4' is set at first rank,
 Tractability
 ............
 
-Finally, let us give some hints on the **tractability** of kernel computations. Detecting all (pre)kernels in a digraph is a famously NP-hard computational problem. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraphs may get hard already for tiny sparse digraphs of order *n* > 20 (see [BIS-2006b]_). Indeed, the worst case is given by an empty or indeterminate digraph where the number of independent choices is indeed 2 to power *n*.
+Finally, let us give some hints on the **tractability** of kernel computations. Detecting all (pre)kernels in a digraph is a famously NP-hard computational problem. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraphs may get hard already for tiny sparse digraphs of order *n* > 20 (see [BIS-2006b]_). Indeed, the worst case is given by an empty or indeterminate digraph where the set of all potential independent choices to check is in fact the power set of the vertices.
 
 >>> e = EmptyDigraph(order=20)
 >>> e.showMIS()   # by visiting all 2^20 independent choices
@@ -3723,8 +3724,10 @@ Finally, let us give some hints on the **tractability** of kernel computations. 
  '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
 number of solutions:  1
 execution time: 1.47640 sec.  # <<== !!!
+>>> 2**20
+1048576
 
-Now, there exist more efficient specialized algorithms for directly enumerating MISs and dominant or absorbent kernels contained in specific digraph models without visiting all independent choices (see [BIS-2006b]_). Alain Hertz provided kindly such a MISs enumeration algorithm for the Digraph3 project (see :py:func:`digraphs.Digraph.showMIS_AH`). When the number of independent choices is big compared to the actual number of MISs, like in very sparse or empty digraphs, the performance difference may be dramatic.
+Now, there exist more efficient specialized algorithms for directly enumerating MISs and dominant or absorbent kernels contained in specific digraph models without visiting all independent choices (see [BIS-2006b]_). Alain Hertz provided kindly such a MISs enumeration algorithm for the Digraph3 project (see :py:func:`digraphs.Digraph.showMIS_AH`). When the number of independent choices is big compared to the actual number of MISs, like in very sparse or empty digraphs, the performance difference may be dramatic (see Line 7 above and Line 15 below).
 
 >>> e.showMIS_AH()  # by visiting only maximal independent choices
 *-----------------------------------*
@@ -3787,7 +3790,7 @@ And, checking maximality of independent choices via the external stability condi
         self.dompreKernels = dompreKernels
         self.abspreKernels = abspreKernels
 
-provides the effective advantage of computing all initial and/or terminal kernels in a single loop (see Line 10 and [BIS-2006b]_).
+provides the effective advantage of computing all initial **and** terminal prekernels in a single loop (see Line 10 and [BIS-2006b]_).
 
 Back to :ref:`Tutorial-label`
 
@@ -3955,7 +3958,7 @@ Transitivity degree: 1.000
 >>> print('Transitivity degree: %.3f' % (ogd.transitivityDegree)) 
 Transitivity degree: 1.000
 
-The :code:`PartiallyDetermined=True` flag (see Lines 1 and 5) is required here in order to orient *only* the actual edges of the graphs. Relations between vertices not linked by an edge will be put to the *indeterminate* characteristic value 0. This will allow us to compute later on convenient disjunctive digraph fusions.
+The :code:`PartiallyDetermined=True` flag (see Lines 1 and 5) is required here in order to orient *only* the actual edges of the graphs. Relations between vertices not linked by an edge will be put to the *indeterminate* characteristic value 0. This will allow us to compute, later on, convenient *disjunctive digraph fusions*.
 
 As both graphs are indeed transitively orientable (see Lines 3 and 6 above), we may conclude that the given random graph is actally a *permutation graph* instance. Yet, we still need to find now its corresponding *permutation*. We therefore implement a recipee given by Martin Golumbic [GOL-2004]_ p.159.
 
@@ -4005,7 +4008,7 @@ The :py:func:`graphs.Graph.computePermutation` method does directly operate all 
 ['v2', 'v3', 'v4', 'v8', 'v6', 'v1', 'v7', 'v5']
 [2, 3, 4, 8, 6, 1, 7, 5]
 
-We may finally check that the permutations [2, 3, 4, 8, 6, 1, 7, 5] and [4, 2, 8, 3, 1, 5, 6, 7], we have generated above, will correctly generate corresponding isomorphic permutation graphs.
+We may finally check that, for instance the permutations [2, 3, 4, 8, 6, 1, 7, 5] and [4, 2, 8, 3, 1, 5, 6, 7] observed above, will correctly generate corresponding isomorphic permutation graphs.
 
 >>> gtesta = PermutationGraph(permutation=[2, 3, 4, 8, 6, 1, 7, 5])
 >>> gtestb = PermutationGraph(permutation=[4, 2, 8, 3, 1, 5, 6, 7])
