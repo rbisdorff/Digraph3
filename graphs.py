@@ -937,7 +937,7 @@ class Graph(object):
             return g
 
 
-    def computePermutation(self,seq1=None,seq2=None,Comments=False):
+    def computePermutation(self,seq1=None,seq2=None,Comments=True):
         """
         Tests whether the graph instance *self* is a permutation graph
         and renders, in case the test is positive,

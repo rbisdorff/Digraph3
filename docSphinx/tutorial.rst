@@ -3815,14 +3815,14 @@ Following Martin Golumbic (see [GOL-2004]_ p. 149), we call a given graph *g*:
     * **Permutation graph** *g* and its dual *-g* are both *comparability* graphs.
     * **Split graph** when *g* and its dual *-g* are both *triangulated* graphs.
 
-We may generate, for instance, from 8 intervals randomly chosen in the integer range [0,10] a . With seed = 8 (see Line 2 below) we get an interval graph which is both a *triangulated* and a comparability graph and, furthermore, a split graph as follows.
+We may generate, for instance, from 8 intervals randomly chosen in the default integer range [0,10] a :py:class:`RandomInterValIntersectionGraph` class instane *g* (see Line 2 belaow). With seed = 101 we get an interval graph which is both a *triangulated* and a comparability graph and, furthermore, a split graph.
 
->>> from graphs import *
+>>> from graphs import RandomIntervalIntersectionsGraph
 >>> g = RandomIntervalIntersectionsGraph(order=8,seed=100)
 >>> g
 *------- Graph instance description ------*
 Instance class   : RandomLineIntersectionsGraph
-Instance name    : randLineIntersections
+Instance name    : randIntervalIntersections
 Seed             : 101
 Graph Order      : 8
 Graph Size       : 23
@@ -3833,13 +3833,13 @@ Attributes       : ['seed', 'name', 'order', 'intervals',
 >>> print(g.intervals)
 [(2, 7), (2, 7), (5, 6), (6, 8), (1, 8), (1, 1), (4, 7), (0, 10)]
 >>> g.isIntervalGraph(Comments=True)
-Graph 'randLineIntersections' is triangulated.
-Graph 'dual_randLineIntersections' is transitively orientable.
-=> Graph 'randLineIntersections' is an interval graph.
+Graph 'randIntervalIntersections' is triangulated.
+Graph 'dual_randIntervalIntersections' is transitively orientable.
+=> Graph 'randIntervalIntersections' is an interval graph.
 >>> g.isSplitGraph(Comments=True)
-Graph 'randLineIntersections' is triangulated.
-Graph 'dual_randLineIntersections' is triangulated.
-=> Graph 'randLineIntersections' is a split graph.
+Graph 'randIntervalIntersections' is triangulated.
+Graph 'dual_randIntervalIntersections' is triangulated.
+=> Graph 'randIntervalIntersections' is a split graph.
 >>> g.isPermutationGraph(Comments=True)
 Graph 'randIntervalIntersections' is transitively Orfientable.
 Graph 'dual_randIntervalIntersections' is transitively orientable.
@@ -3855,12 +3855,21 @@ fdp -Tpng randomSplitGraph.dot -o randomSplitGraph.png
 
 .. Figure:: randomSplitGraph.png
     :alt: Ransdom split graph
-    :width: 300 px
+    :width: 350 px
     :align: center
 
-    *A triangulated, comparability, interval and split graph*
+    *A conjointly triangulated, comparability, interval, permutation and split graph instance*
 
-In Fig. 45 we recognize the characteristic appearance of split graphs, namely the graph may be split into disjoint sub-graphs: a Mis and a maximal clique; which explains its name.
+In Fig. 45 we recognize the essential characteristic of split graphs, namely being always splitable into two disjoint sub-graphs: an independentt choice (*v6*) and a clique (*v1*,*v2*,*v3*,*v4*,*v5*,*v7*,*v8*); which explains their name.
+
+Notice however that the four properties:
+
+    # *g* is a comparability graph;
+    # *-g* is a comparability graph;
+    # *g* is a trinagulated graph;
+    # *-g* is a trinagulated graph;
+
+are independent of one another (see [GOL-2004]_ p. 149).
 
 About Permutation graphs
 ........................
