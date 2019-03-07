@@ -3864,10 +3864,10 @@ In Fig. 45 we recognize the essential characteristic of split graphs, namely bei
 
 Notice however that the four properties:
 
-    # *g* is a comparability graph;
-    # *-g* is a comparability graph;
-    # *g* is a trinagulated graph;
-    # *-g* is a trinagulated graph;
+    #. *g* is a comparability graph;
+    #. *-g* is a comparability graph;
+    #. *g* is a trinagulated graph;
+    #. *-g* is a trinagulated graph;
 
 are independent of one another (see [GOL-2004]_ p. 149).
 
