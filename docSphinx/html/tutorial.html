@@ -6057,7 +6057,7 @@ best covered terminal kernel</em></span></p>
 <a class="reference internal image-reference" href="_images/berge1.png"><img alt="_images/berge1.png" src="_images/berge1.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 44 </span><span class="caption-text"><em>Graph representation of the testimonies of the professors</em></span></p>
 </div>
-<p>From graph theory we know that time interval intersection graphs must in fact be triangulated. The testimonies graph should therefore not contain any chordless cycles of four and more vertices. Now, the presence or not of chordless cycles may be checked as follows.</p>
+<p>From graph theory we know that time interval intersections graphs must in fact be interval graphs. The testimonies graph should therefore not contain any chordless cycles of four and more vertices. Now, the presence or not of chordless cycles may be checked as follows.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -6094,8 +6094,7 @@ best covered terminal kernel</em></span></p>
 18
 19
 20
-21
-22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">setEdgeValue</span><span class="p">(</span> <span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="s1">&#39;A&#39;</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">setEdgeValue</span><span class="p">(</span> <span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">,</span><span class="s1">&#39;A&#39;</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*---- short description of the graph ----*</span>
 <span class="go">Name             : &#39;berge&#39;</span>
@@ -6108,11 +6107,10 @@ best covered terminal kernel</em></span></p>
 <span class="go">D -&gt; [&#39;I&#39;, &#39;C&#39;]</span>
 <span class="go">E -&gt; [&#39;A&#39;, &#39;I&#39;, &#39;B&#39;, &#39;C&#39;]</span>
 <span class="go">I -&gt; [&#39;B&#39;, &#39;E&#39;, &#39;D&#39;, &#39;C&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">isIntervalGraph</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">isIntervalGraph</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="go">Graph &#39;berge&#39; is triangulated.</span>
 <span class="go">Graph &#39;dual_berge&#39; is transitively orientable.</span>
 <span class="go">=&gt; Graph &#39;berge&#39; is an interval graph.</span>
-<span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;berge2&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to berge2.dot</span>

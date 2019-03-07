@@ -3828,7 +3828,7 @@ fdp -Tpng berge1.dot -o berge1.png
 
    *Graph representation of the testimonies of the professors*	   
 
-From graph theory we know that time interval intersection graphs must in fact be triangulated. The testimonies graph should therefore not contain any chordless cycles of four and more vertices. Now, the presence or not of chordless cycles may be checked as follows.
+From graph theory we know that time interval intersections graphs must in fact be interval graphs. The testimonies graph should therefore not contain any chordless cycles of four and more vertices. Now, the presence or not of chordless cycles may be checked as follows.
 
 >>> g.computeChordlessCycles()
 Chordless cycle certificate -->>>  ['D', 'C', 'E', 'A', 'D']
@@ -3853,11 +3853,10 @@ C -> ['I', 'E', 'D']
 D -> ['I', 'C']
 E -> ['A', 'I', 'B', 'C']
 I -> ['B', 'E', 'D', 'C']
->>> print(g.isIntervalGraph(Comments=True))
+>>> g.isIntervalGraph(Comments=True)
 Graph 'berge' is triangulated.
 Graph 'dual_berge' is transitively orientable.
 => Graph 'berge' is an interval graph.
-True
 >>> g.exportGraphViz('berge2')
 *---- exporting a dot file for GraphViz tools ---------*
 Exporting to berge2.dot
