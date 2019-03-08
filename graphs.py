@@ -1190,8 +1190,10 @@ class Graph(object):
         Exports GraphViz dot file for oriented graph drawing filtering.
 
         Example:
-           >>> g = Graph(numberOfVertices=5,edgeProbability=0.3)
-           >>> g.exportEdgeOrientationGraphViz('orientedGraph'))
+           >>> from graphs import *
+           >>> g = RandomGraph(order=6,seed=100)
+           >>> if g.isComparavbilityGraph():
+           ...     g.exportEdgeOrientationGraphViz('orientedGraph')
 
         .. image:: orientedGraph.png
            :alt: Random graph

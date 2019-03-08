@@ -3436,6 +3436,23 @@ of the vertex keys.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="graphs.Graph.exportEdgeOrientationsGraphViz">
+<code class="descname">exportEdgeOrientationsGraphViz</code><span class="sig-paren">(</span><em>fileName=None</em>, <em>verticesSubset=None</em>, <em>Comments=True</em>, <em>graphType='png'</em>, <em>graphSize='7</em>, <em>7'</em>, <em>layout=None</em>, <em>arcColor='black'</em>, <em>lineWidth=1</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.exportEdgeOrientationsGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.exportEdgeOrientationsGraphViz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exports GraphViz dot file for oriented graph drawing filtering.</p>
+<dl class="docutils">
+<dt>Example:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">g</span><span class="o">.</span><span class="n">isComparavbilityGraph</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="n">g</span><span class="o">.</span><span class="n">exportEdgeOrientationGraphViz</span><span class="p">(</span><span class="s1">&#39;orientedGraph&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<a class="reference internal image-reference" href="_images/orientedGraph.png"><img alt="Random graph" class="align-center" src="_images/orientedGraph.png" style="width: 300px;" /></a>
+</dd></dl>
+
+<dl class="method">
 <dt id="graphs.Graph.exportGraphViz">
 <code class="descname">exportGraphViz</code><span class="sig-paren">(</span><em>fileName=None</em>, <em>verticesSubset=None</em>, <em>Comments=True</em>, <em>graphType='png'</em>, <em>graphSize='7</em>, <em>7'</em>, <em>WithSpanningTree=False</em>, <em>WithVertexColoring=False</em>, <em>matching=None</em>, <em>layout=None</em>, <em>arcColor='black'</em>, <em>lineWidth=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.exportGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.exportGraphViz" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exports GraphViz dot file  for graph drawing filtering.</p>

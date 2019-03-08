@@ -1226,6 +1226,135 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;On Ubuntu: ..$ sudo apt-get install graphviz&#39;</span><span class="p">)</span></div>
 
+<div class="viewcode-block" id="Graph.exportEdgeOrientationsGraphViz"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.exportEdgeOrientationsGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportEdgeOrientationsGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">verticesSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                       <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                       <span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>
+                       <span class="n">layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                       <span class="n">arcColor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+                       <span class="n">lineWidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                        <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Exports GraphViz dot file for oriented graph drawing filtering.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">           &gt;&gt;&gt; from graphs import *</span>
+<span class="sd">           &gt;&gt;&gt; g = RandomGraph(order=6,seed=100)</span>
+<span class="sd">           &gt;&gt;&gt; if g.isComparavbilityGraph():</span>
+<span class="sd">           ...     g.exportEdgeOrientationGraphViz(&#39;orientedGraph&#39;)</span>
+
+<span class="sd">        .. image:: orientedGraph.png</span>
+<span class="sd">           :alt: Random graph</span>
+<span class="sd">           :width: 300 px</span>
+<span class="sd">           :align: center</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">os</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">edgeOrientations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edgeOrientations</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isComparabilityGraph</span><span class="p">():</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The graph </span><span class="si">%s</span><span class="s1"> is not transitively orientable&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- exporting a dot file for GraphViz tools ---------*&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">verticesSubset</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">vertexkeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">vertexkeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">verticesSubset</span><span class="p">]</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vertexkeys</span><span class="p">)</span>
+        <span class="n">edges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edges</span>
+        <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationDomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">fileName</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">fileName</span>
+        <span class="n">dotName</span> <span class="o">=</span> <span class="n">name</span><span class="o">+</span><span class="s1">&#39;.dot&#39;</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exporting to &#39;</span><span class="o">+</span><span class="n">dotName</span><span class="p">)</span>
+        <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">dotName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;strict graph G {</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;graph [ bgcolor = cornsilk, fontname = &quot;Helvetica-Oblique&quot;,</span><span class="se">\n</span><span class="s1"> fontsize = 12,</span><span class="se">\n</span><span class="s1"> label = &quot;&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">nGraphs Python module (graphviz), R. Bisdorff, 2019&quot;, size=&quot;&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">graphSize</span><span class="p">),</span><span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&quot;];</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">nodeName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">vertexkeys</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="s1">&#39;shortName&#39;</span><span class="p">])</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">nodeName</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">vertexkeys</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="n">nodeName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">vertexkeys</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="s1">&#39;n&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; [shape = &quot;circle&quot;, label = &quot;&#39;</span> <span class="o">+</span><span class="n">nodeName</span><span class="o">+</span><span class="s1">&#39;&quot;&#39;</span>
+            <span class="n">node</span> <span class="o">+=</span> <span class="s1">&#39;];</span><span class="se">\n</span><span class="s1">&#39;</span>                
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+        <span class="c1"># reminder include a color palette in digraphsToold</span>
+        <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;blue&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;coral&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;gold&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;gray&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;black&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;pink&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;green&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;orange&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;skyblue&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;wheat&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;salmon&#39;</span><span class="p">]</span>    
+        <span class="n">edgeColors</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">edges</span><span class="p">[</span><span class="n">edge</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
+                <span class="n">arc</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">([</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">edge</span><span class="p">]))</span>
+                <span class="n">edgeColors</span><span class="p">[</span><span class="n">arc</span><span class="p">]</span> <span class="o">=</span> <span class="n">colors</span><span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">edgeOrientations</span><span class="p">[</span><span class="n">arc</span><span class="p">])]</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edgeOrientations</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">edgeColors</span><span class="p">)</span>    
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
+                    <span class="n">edge</span> <span class="o">=</span> <span class="s1">&#39;n&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="n">edgeKey</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">([</span><span class="n">vertexkeys</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">vertexkeys</span><span class="p">[</span><span class="n">j</span><span class="p">]])</span>
+                    <span class="k">if</span> <span class="n">edges</span><span class="p">[</span><span class="n">edgeKey</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
+                        <span class="n">arc</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">([</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">edgeKey</span><span class="p">]))</span>
+                        <span class="n">arcColor</span> <span class="o">=</span> <span class="n">edgeColors</span><span class="p">[</span><span class="n">arc</span><span class="p">]</span>
+                        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="n">arcColor</span><span class="p">,</span><span class="n">lineWidth</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">edgeOrientations</span><span class="p">[</span><span class="n">arc</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">arrowFormat</span> <span class="o">=</span> \
+        <span class="s1">&#39; [dir=forward,style=&quot;setlinewidth(</span><span class="si">%d</span><span class="s1">)&quot;,color=</span><span class="si">%s</span><span class="s1">, arrowhead=normal, arrowtail=none] ;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>\
+                     <span class="p">(</span><span class="n">lineWidth</span><span class="p">,</span><span class="n">arcColor</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">edgeOrientations</span><span class="p">[</span><span class="n">arc</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">arrowFormat</span> <span class="o">=</span> \
+        <span class="s1">&#39; [dir=back,style=&quot;setlinewidth(</span><span class="si">%d</span><span class="s1">)&quot;,color=</span><span class="si">%s</span><span class="s1">, arrowhead=none, arrowtail=normal] ;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>\
+                     <span class="p">(</span><span class="n">lineWidth</span><span class="p">,</span><span class="n">arcColor</span><span class="p">)</span>
+                        <span class="n">edge0</span> <span class="o">=</span> <span class="n">edge</span><span class="o">+</span><span class="s1">&#39;-- n&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">arrowFormat</span>
+                        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">edge0</span><span class="p">)</span>                    
+<span class="c1">##                    elif edges[frozenset([vertexkeys[i],vertexkeys[j]])] == Med:</span>
+<span class="c1">##                        edge0 = edge+&#39;-- n&#39;+str(j+1)+\</span>
+<span class="c1">##            &#39; [dir=both, color=grey, arrowhead=none, arrowtail=none] ;\n&#39;</span>
+<span class="c1">##                        fo.write(edge0)</span>
+
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="c1"># choose layout model </span>
+        <span class="k">if</span> <span class="n">layout</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">layout</span> <span class="o">=</span> <span class="s1">&#39;fdp&#39;</span>
+            
+        <span class="n">commandString</span> <span class="o">=</span> <span class="n">layout</span><span class="o">+</span><span class="s1">&#39; -T&#39;</span><span class="o">+</span><span class="n">graphType</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="n">dotName</span><span class="o">+</span><span class="s1">&#39; -o &#39;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="n">graphType</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;On Ubuntu: ..$ sudo apt-get install graphviz&#39;</span><span class="p">)</span></div>
+
+
 <div class="viewcode-block" id="Graph.exportPermutationGraphViz"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.exportPermutationGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportPermutationGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">permutation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -4253,17 +4382,19 @@
 <span class="c1">##    print(i.isTriangulated())</span>
 <span class="c1">##    print((-i).isTriangulated())</span>
 
-    <span class="n">ri</span> <span class="o">=</span> <span class="n">RandomIntervalIntersectionsGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">ri</span> <span class="o">=</span> <span class="n">RandomGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">4435</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">ri</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">ri</span><span class="o">.</span><span class="n">intervals</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">ri</span><span class="o">.</span><span class="n">isIntervalGraph</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">ri</span><span class="o">.</span><span class="n">isTriangulated</span><span class="p">())</span>
-    <span class="nb">print</span><span class="p">((</span><span class="o">-</span><span class="n">ri</span><span class="p">)</span><span class="o">.</span><span class="n">isTriangulated</span><span class="p">())</span>
+    <span class="c1">#print(ri.intervals)</span>
+    <span class="c1">#print(ri.isIntervalGraph(Comments=True))</span>
+    <span class="c1">#print(ri.isTriangulated())</span>
+    <span class="c1">#print((-ri).isTriangulated())</span>
     <span class="n">ri</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
-    <span class="n">ri</span><span class="o">.</span><span class="n">isSplitGraph</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">ri</span><span class="o">.</span><span class="n">isPermutationGraph</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">ri</span><span class="o">.</span><span class="n">computePermutation</span><span class="p">())</span>
-          
+    <span class="c1">#ri.isSplitGraph(Comments=True)</span>
+    <span class="c1">#ri.isPermutationGraph(Comments=True)</span>
+    <span class="c1">#print(ri.computePermutation())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ri</span><span class="o">.</span><span class="n">isComparabilityGraph</span><span class="p">())</span>
+    <span class="n">ri</span><span class="o">.</span><span class="n">exportEdgeOrientationsGraphViz</span><span class="p">(</span><span class="s1">&#39;orientedGraph&#39;</span><span class="p">)</span>
+    
 <span class="c1">##    rg = RandomPermutationGraph(order=6,seed=None)</span>
 <span class="c1">##    print(rg)</span>
 <span class="c1">##    dg = g.transitiveOrientation()</span>
