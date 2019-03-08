@@ -3698,8 +3698,8 @@ About Split, Interval and Permutation Graphs
 	:local:
 
 
-A super *perfect* graph
-.......................
+A super ' *perfect* ' graph
+...........................
 
 Following Martin Golumbic (see [GOL-2004]_ p. 149), we call a given graph *g*:
 
@@ -3754,21 +3754,22 @@ fdp -Tpng randomSplitGraph.dot -o randomSplitGraph.png
 
     *A conjointly triangulated, comparability, interval, permutation and split graph instance*
 
-In Fig. 43 we may readily recognize the essential characteristic of split graphs, namely being always splitable into two disjoint sub-graphs: an independentt choice (*v6*) and a clique (*v1*, *v2*, *v3*, *v4*, *v5*, *v7*, *v8*); which explains their name.
+In Fig. 43 we may readily recognize the essential characteristic of **split graphs**, namely being always splitable into two disjoint sub-graphs: an *independentt choice* (*v6*) and a *clique* (*v1*, *v2*, *v3*, *v4*, *v5*, *v7*, *v8*); which explains their name.
 
 Notice however that the four properties:
 
-    #. *g* is a comparability graph;
-    #. *-g* is a comparability graph;
-    #. *g* is a triangulated graph;
-    #. *-g* is a triangulated graph;
+    #. *g* is a *comparability* graph;
+    #. *g* is a *cocomparability* graph, ie *-g* is a *comparability* graph;
+    #. *g* is a *triangulated* graph;
+    #. *g* is a *cotriangulated* graph, ie *-g* is a *comparability* graph;
 
 are *independent* of one another (see [GOL-2004]_ p. 275).
 
-Who is the lier ? On the importance to be an *interval* graph
-.............................................................
 
-*Claude Berge* 's famous mystery story (see [GOL-2004]_ p.20) may well illustrate the importance to be an **interval graph**.
+Who is the lier ?
+.................
+
+*Claude Berge* 's famous mystery story (see [GOL-2004]_ p.20) may well illustrate the importance of being an **interval graph**.
 
 Suppose that the file ``berge.py`` contains the following :py:class:`graphs.Graph` instance data::
 
@@ -3826,7 +3827,7 @@ fdp -Tpng berge1.dot -o berge1.png
 
    *Graph representation of the testimonies of the professors*	   
 
-From graph theory we know that time interval intersections graphs must in fact be interval graphs. The testimonies graph should therefore not contain any chordless cycle of four and more vertices. Now, the presence or not of such chordless cycles may be checked as follows.
+From graph theory we know that time interval intersections graphs must in fact be interval graphs, ie *triangulated* and *co-comparative* graphs. The testimonies graph should therefore not contain any chordless cycle of four and more vertices. Now, the presence or not of such chordless cycles in the testimonies graph may be checked as follows.
 
 >>> g.computeChordlessCycles()
 Chordless cycle certificate -->>>  ['D', 'C', 'E', 'A', 'D']
@@ -3836,7 +3837,9 @@ Chordless cycle certificate -->>>  ['D', 'I', 'B', 'A', 'D']
 (['D', 'I', 'E', 'A', 'D'], frozenset({'D', 'E', 'I', 'A'})), 
 (['D', 'I', 'B', 'A', 'D'], frozenset({'D', 'B', 'I', 'A'}))]
 
-We see three intersection cycles of length 4, which is impossible to occur on the linear time line. Obviously one professor lied! And it is *D* ; if we put to doubt his testimony that he saw *A* (see Line 1 below), we obtain indeed a triangulated graph instance whose dual is a *comparability* graph.
+We see three intersection cycles of length 4, which is impossible to occur on the linear time line. Obviously one professor lied!
+
+And it is *D* ; if we put to doubt his testimony that he saw *A* (see Line 1 below), we obtain indeed a *triangulated* graph instance whose dual is a *comparability* graph.
 
 >>> g.setEdgeValue( ('D','A'), 0)
 >>> g.showShort()
@@ -3866,8 +3869,8 @@ fdp -Tpng berge2.dot -o berge2.png
 
    *The triangulated testominies graph*	   
 
-About permutation graphs
-........................
+Generating permutation graphs
+.............................
 
 A graph is called a **permutation** or *inversion* graph if there exists a permutation of its list of vertices such that the graph is isomorphic to the inversions operated by the permutation in this list (see [GOL-2004]_ Chapter 7, pp 157-170).
 
@@ -3931,13 +3934,7 @@ neato -n -Tpng perm_permutationGraph.dot -o perm_permutationGraph.png
 
     *Colored matching diagram of the permutation* [4, 3, 6, 1, 5, 2]
 
-
-Properties of permutation graphs
-................................
-
-A permutation graph is **transitively orientable**. The :py:func:`graphs.PermutationGraph.transitiveOrientation` method renders a digraph where each edge of the permutation graph is converted into an arc oriented in increasing alphabetic order of the adjacent vertices' keys (see [GOL-2004]_).
-
-Following from the permutation graph construction, this orientation is always transitive and delivers a *weak ordering* of the vertices.
+As mentioned before, a permutation graph and its dual are **transitively orientable**. The :py:func:`graphs.PermutationGraph.transitiveOrientation` method constructs from a given permutation graph a digraph where each edge of the permutation graph is converted into an arc oriented in increasing alphabetic order of the adjacent vertices' keys (see [GOL-2004]_). This orientation of the edges of a permutation graph is always transitive and delivers a *weak ordering* of the vertices.
     
 >>> dg = g.transitiveOrientation()
 >>> dg
@@ -3967,10 +3964,9 @@ dot -Grankdir=TB -Tpng oriented_permutationGraph.dot -o oriented_permutationGrap
 	    
     *Hasse diagram of the transitive orientation of the permutation graph*
 
-The dual of a permutation graph is *again* a permutation graph and as such also transitively orientable. Now, a given graph *g* is a **permutation** graph **if and only if** both *g* **and** *gd = -g* are *transitively orientable*.
+The dual of a permutation graph is *again* a permutation graph and as such also transitively orientable.
 
->>> gd = -g
->>> dgd = gd.transitiveOrientation()
+>>> dgd = (-g).transitiveOrientation()
 >>> print('Dual transitivity degree: %.3f' %\
 ...             dgd.computeTransitivityDegree() ) 
 Dual transitivity degree: 1.000
@@ -3978,7 +3974,9 @@ Dual transitivity degree: 1.000
 Recognizing permutation graphs
 ..............................
 
-The last property gives a polynomial test procedure (in :math:`O(n^3)` due to the transitivity check) for recognizing permutation graphs. Let us consider, for instance, the following random graph of *order* 8 generated with an *edge probability* of 40% and a *random seed* equal to 4335.
+Now, a given graph *g* is a **permutation** graph **if and only if** both *g* **and** *-g* are *transitively orientable*. This  property gives a polynomial test procedure (in :math:`O(n^3)` due to the transitivity check) for recognizing permutation graphs.
+
+Let us consider, for instance, the following random graph of *order* 8 generated with an *edge probability* of 40% and a *random seed* equal to 4335.
 
 >>> from graphs import *
 >>> g = RandomGraph(order=8,edgeProbability=0.4,seed=4335)
@@ -4002,26 +4000,64 @@ Attributes       : ['name', 'order', 'vertices', 'valuationDomain', 'seed',
 
     *Random graph of order 8 generated with edge probability 0.4*
 
-If the random graph instance *g* (see Fig. 50) is a permutation graph, *g* and its dual *dg = -g* must be *transitively orientable*, ie **comparability graphs** (see [GOL-2004]_). With the :py:func:`graphs.Graph.isComparabilityGraph` test, we may easily check this fact. This method proceeds indeed by trying to construct an implication class decomposition of a given graph instance and, if successful, stores the resulting edge orientations into the *self.edgeOrientations* attribute (see [GOL-2004]_ p.129-132).
+If the random graph instance *g* (see Fig. 50) is a permutation graph, *g* and its dual *-g* must be *transitively orientable*, ie **comparability graphs** (see [GOL-2004]_). With the :py:func:`graphs.Graph.isComparabilityGraph` test, we may easily check this fact. This method proceeds indeed by trying to construct an implication class decomposition of a given graph instance and, if successful, stores the resulting edge orientations into a *self.edgeOrientations* attribute (see [GOL-2004]_ p.129-132).
 
->>> print(g.isComparabilityGraph())
-True
+>>> if g.isComparabilityGraph():
+...     print(g.edgeOrientations)
+{('v1', 'v1'): 0, ('v1', 'v2'): 1, ('v2', 'v1'): -1, ('v1', 'v3'): 1,
+ ('v3', 'v1'): -1, ('v1', 'v4'): 1, ('v4', 'v1'): -1, ('v1', 'v5'): 0,
+ ('v5', 'v1'): 0, ('v1', 'v6'): 1, ('v6', 'v1'): -1, ('v1', 'v7'): 0,
+ ('v7', 'v1'): 0, ('v1', 'v8'): 1, ('v8', 'v1'): -1, ('v2', 'v2'): 0,
+ ('v2', 'v3'): 0, ('v3', 'v2'): 0, ('v2', 'v4'): 0, ('v4', 'v2'): 0,
+ ('v2', 'v5'): 0, ('v5', 'v2'): 0, ('v2', 'v6'): 0, ('v6', 'v2'): 0,
+ ('v2', 'v7'): 0, ('v7', 'v2'): 0, ('v2', 'v8'): 0, ('v8', 'v2'): 0,
+ ('v3', 'v3'): 0, ('v3', 'v4'): 0, ('v4', 'v3'): 0, ('v3', 'v5'): 0,
+ ('v5', 'v3'): 0, ('v3', 'v6'): 0, ('v6', 'v3'): 0, ('v3', 'v7'): 0,
+ ('v7', 'v3'): 0, ('v3', 'v8'): 0, ('v8', 'v3'): 0, ('v4', 'v4'): 0,
+ ('v4', 'v5'): 0, ('v5', 'v4'): 0, ('v4', 'v6'): 0, ('v6', 'v4'): 0,
+ ('v4', 'v7'): 0, ('v7', 'v4'): 0, ('v4', 'v8'): 0, ('v8', 'v4'): 0,
+ ('v5', 'v5'): 0, ('v5', 'v6'): 1, ('v6', 'v5'): -1, ('v5', 'v7'): 1,
+ ('v7', 'v5'): -1, ('v5', 'v8'): 1, ('v8', 'v5'): -1, ('v6', 'v6'): 0,
+ ('v6', 'v7'): 0, ('v7', 'v6'): 0, ('v6', 'v8'): 1, ('v8', 'v6'): -1,
+ ('v7', 'v7'): 0, ('v7', 'v8'): 1, ('v8', 'v7'): -1, ('v8', 'v8'): 0}
+
+The resulting orientation of the edges of *g* is indeed transitive. 
+The procedure for the dual graph *gd = -g* gives a transitive orientation to the edges of *-g*.
+
 >>> gd = -g
->>> print(gd.isComparabilityGraph())
-True
+>>> if gd.isComparabilityGraph():
+...     print(gd.edgeOrientations)
+{('v1', 'v1'): 0, ('v1', 'v2'): 0, ('v2', 'v1'): 0, ('v1', 'v3'): 0,
+ ('v3', 'v1'): 0, ('v1', 'v4'): 0, ('v4', 'v1'): 0, ('v1', 'v5'): 1,
+ ('v5', 'v1'): -1, ('v1', 'v6'): 0, ('v6', 'v1'): 0, ('v1', 'v7'): 1,
+ ('v7', 'v1'): -1, ('v1', 'v8'): 0, ('v8', 'v1'): 0, ('v2', 'v2'): 0,
+ ('v2', 'v3'): -2, ('v3', 'v2'): 2, ('v2', 'v4'): -3, ('v4', 'v2'): 3,
+ ('v2', 'v5'): 1, ('v5', 'v2'): -1, ('v2', 'v6'): 1, ('v6', 'v2'): -1,
+ ('v2', 'v7'): 1, ('v7', 'v2'): -1, ('v2', 'v8'): 1, ('v8', 'v2'): -1,
+ ('v3', 'v3'): 0, ('v3', 'v4'): -3, ('v4', 'v3'): 3, ('v3', 'v5'): 1,
+ ('v5', 'v3'): -1, ('v3', 'v6'): 1, ('v6', 'v3'): -1, ('v3', 'v7'): 1,
+ ('v7', 'v3'): -1, ('v3', 'v8'): 1, ('v8', 'v3'): -1, ('v4', 'v4'): 0,
+ ('v4', 'v5'): 1, ('v5', 'v4'): -1, ('v4', 'v6'): 1, ('v6', 'v4'): -1,
+ ('v4', 'v7'): 1, ('v7', 'v4'): -1, ('v4', 'v8'): 1, ('v8', 'v4'): -1,
+ ('v5', 'v5'): 0, ('v5', 'v6'): 0, ('v6', 'v5'): 0, ('v5', 'v7'): 0,
+ ('v7', 'v5'): 0, ('v5', 'v8'): 0, ('v8', 'v5'): 0, ('v6', 'v6'): 0,
+ ('v6', 'v7'): 1, ('v7', 'v6'): -1, ('v6', 'v8'): 0, ('v8', 'v6'): 0,
+ ('v7', 'v7'): 0, ('v7', 'v8'): 0, ('v8', 'v7'): 0, ('v8', 'v8'): 0}
+
+It is worthwhile noticing that the orientation of *g* is achieved with a single implication class, whereas the orientation of *-g* needs three implication classes.
 
 Let us recheck this fact by explicitely constructing transitively oriented digraph instances with the :py:func:`graphs.Graph.computeTranditivelyOrientedDigraph` method. 
 
 >>> og = g.computeTransitivelyOrientedDigraph(PartiallyDetermined=True)
 >>> print('Transitivity degree: %.3f' % (og.transitivityDegree)) 
 Transitivity degree: 1.000
->>> ogd = gd.computeTransitivelyOrientedDigraph(PartiallyDetermined=True)
+>>> ogd = (-g).computeTransitivelyOrientedDigraph(PartiallyDetermined=True)
 >>> print('Transitivity degree: %.3f' % (ogd.transitivityDegree)) 
 Transitivity degree: 1.000
 
 The :code:`PartiallyDetermined=True` flag (see Lines 1 and 5) is required here in order to orient *only* the actual edges of the graphs. Relations between vertices not linked by an edge will be put to the *indeterminate* characteristic value 0. This will allow us to compute, later on, convenient *disjunctive digraph fusions*.
 
-As both graphs are indeed transitively orientable (see Lines 3 and 6 above), we may conclude that the given random graph is actally a *permutation graph* instance. Yet, we still need to find now its corresponding *permutation*. We therefore implement a recipee given by Martin Golumbic [GOL-2004]_ p.159.
+As both graphs are indeed *transitively orientable* (see Lines 3 and 6 above), we may conclude that the given random graph *g* is actually a *permutation graph* instance. Yet, we still need to find now its corresponding *permutation*. We therefore implement a recipee given by Martin Golumbic [GOL-2004]_ p.159.
 
 We will first **fuse** both *og* and *ogd* orientations above with an **epistemic disjunction** (see the :py:func:`digraphsTools.omax` operator), hence, the partially determined orientations requested above.
 
@@ -4031,7 +4067,7 @@ We will first **fuse** both *og* and *ogd* orientations above with an **epistemi
 >>> print(s1)
 ['v5', 'v7', 'v1', 'v6', 'v8', 'v4', 'v3', 'v2']
 
-We obtain by the *Copeland* ranking rule (see :ref:`Ranking-Tutorial-label` and the :py:func:`digraphs.Digraph.computeCopelandRanking` method) a complete linear ordering of the vertices (see Line 5 above).
+We obtain by the *Copeland* ranking rule (see :ref:`Ranking-Tutorial-label` and the :py:func:`digraphs.Digraph.computeCopelandRanking` method) a linear ordering of the vertices (see Line 5 above).
 
 We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) in order to generate, again by *disjunctive fusion*, the *inversions* that are produced by the permutation we are looking for. Computing again a ranking with the *Copeland* rule, will show the correspondingly permuted list of vertices (see Line 4 below).
 
@@ -4064,12 +4100,12 @@ And::
 
 The :py:func:`graphs.Graph.computePermutation` method does directly operate all these steps: - computing transitive orientations, - ranking their epistemic fusion and, - delivering a corresponding permutation.
 
->>> g.computePermutation()
+>>> g.computePermutation(Comments=True)
 ['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7', 'v8']
 ['v2', 'v3', 'v4', 'v8', 'v6', 'v1', 'v7', 'v5']
 [2, 3, 4, 8, 6, 1, 7, 5]
 
-We may finally check that, for instance, the two permutations [2, 3, 4, 8, 6, 1, 7, 5] and [4, 2, 8, 3, 1, 5, 6, 7] observed above, will correctly generate corresponding isomorphic permutation graphs.
+We may finally check that, for instance, the two permutations [2, 3, 4, 8, 6, 1, 7, 5] and [4, 2, 8, 3, 1, 5, 6, 7] observed above, will correctly generate corresponding *isomorphic permutation* graphs.
 
 >>> gtesta = PermutationGraph(permutation=[2, 3, 4, 8, 6, 1, 7, 5])
 >>> gtestb = PermutationGraph(permutation=[4, 2, 8, 3, 1, 5, 6, 7])
