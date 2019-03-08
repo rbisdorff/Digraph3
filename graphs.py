@@ -1179,6 +1179,133 @@ class Graph(object):
                 print('graphViz tools not avalaible! Please check installation.')
                 print('On Ubuntu: ..$ sudo apt-get install graphviz')
 
+    def exportEdgeOrientationsGraphViz(self,fileName=None,verticesSubset=None,
+                       Comments=True,
+                       graphType='png',graphSize='7,7',
+                       layout=None,
+                       arcColor='black',
+                       lineWidth=1,
+                        Debug=False):
+        """
+        Exports GraphViz dot file for oriented graph drawing filtering.
+
+        Example:
+           >>> g = Graph(numberOfVertices=5,edgeProbability=0.3)
+           >>> g.exportEdgeOrientationGraphViz('orientedGraph'))
+
+        .. image:: orientedGraph.png
+           :alt: Random graph
+           :width: 300 px
+           :align: center
+        """
+        import os
+        if Debug:
+            Comments=True
+        try:
+            edgeOrientations = self.edgeOrientations
+        except AttributeError:
+            if not self.isComparabilityGraph():
+                print('The graph %s is not transitively orientable' % self.name)
+            return
+
+        if Comments:
+            print('*---- exporting a dot file for GraphViz tools ---------*')
+        if verticesSubset == None:
+            vertexkeys = [x for x in self.vertices]
+        else:
+            vertexkeys = [x for x in verticesSubset]
+        n = len(vertexkeys)
+        edges = self.edges
+        Med = self.valuationDomain['med']
+        i = 0
+        if fileName == None:
+            name = self.name
+        else:
+            name = fileName
+        dotName = name+'.dot'
+        if Comments:
+            print('Exporting to '+dotName)
+        fo = open(dotName,'w')
+        fo.write('strict graph G {\n')
+        fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
+        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2019", size="')
+        fo.write(graphSize),fo.write('"];\n')
+        for i in range(n):
+            try:
+                nodeName = str(self.vertices[vertexkeys[i]]['shortName'])
+            except:
+                try:
+                    nodeName = self.vertices[vertexkeys[i]]['name']
+                except:
+                    nodeName = str(vertexkeys[i])
+            node = 'n'+str(i+1)+' [shape = "circle", label = "' +nodeName+'"'
+            node += '];\n'                
+            fo.write(node)
+
+        # reminder include a color palette in digraphsToold
+        colors = ['black',
+                  'blue',
+                  'coral',
+                  'gold',
+                  'gray',
+                  'black',
+                  'pink',
+                  'green',
+                  'orange',
+                  'skyblue',
+                  'wheat',
+                  'salmon']    
+        edgeColors = {}
+        for edge in self.edges:
+            if edges[edge] > Med:
+                arc = tuple(sorted([v for v in edge]))
+                edgeColors[arc] = colors[abs(edgeOrientations[arc])]
+        if Debug:
+            print(self.edgeOrientations)
+            print(edgeColors)    
+
+        for i in range(n):
+            for j in range(i+1, n):
+                if i != j:
+                    edge = 'n'+str(i+1)
+                    edgeKey = frozenset([vertexkeys[i], vertexkeys[j]])
+                    if edges[edgeKey] > Med:
+                        arc = tuple(sorted([v for v in edgeKey]))
+                        arcColor = edgeColors[arc]
+                        if Debug:
+                            print(arcColor,lineWidth)
+                        if edgeOrientations[arc] > 0:
+                            arrowFormat = \
+        ' [dir=forward,style="setlinewidth(%d)",color=%s, arrowhead=normal, arrowtail=none] ;\n' %\
+                     (lineWidth,arcColor)
+                        elif edgeOrientations[arc] < 0:
+                            arrowFormat = \
+        ' [dir=back,style="setlinewidth(%d)",color=%s, arrowhead=none, arrowtail=normal] ;\n' %\
+                     (lineWidth,arcColor)
+                        edge0 = edge+'-- n'+str(j+1)+arrowFormat
+                        fo.write(edge0)                    
+##                    elif edges[frozenset([vertexkeys[i],vertexkeys[j]])] == Med:
+##                        edge0 = edge+'-- n'+str(j+1)+\
+##            ' [dir=both, color=grey, arrowhead=none, arrowtail=none] ;\n'
+##                        fo.write(edge0)
+
+        fo.write('}\n')
+        fo.close()
+        # choose layout model 
+        if layout == None:
+            layout = 'fdp'
+            
+        commandString = layout+' -T'+graphType+' '+dotName+' -o '+name+'.'+graphType
+        if Comments:
+            print(commandString)
+        try:
+            os.system(commandString)
+        except:
+            if Comments:
+                print('graphViz tools not avalaible! Please check installation.')
+                print('On Ubuntu: ..$ sudo apt-get install graphviz')
+
+
     def exportPermutationGraphViz(self,fileName=None,
                        permutation=None,
                        Comments=True,
@@ -4206,17 +4333,19 @@ if __name__ == '__main__':
 ##    print(i.isTriangulated())
 ##    print((-i).isTriangulated())
 
-    ri = RandomIntervalIntersectionsGraph(order=8,seed=100)
+    ri = RandomGraph(order=8,seed=4435)
     print(ri)
-    print(ri.intervals)
-    print(ri.isIntervalGraph(Comments=True))
-    print(ri.isTriangulated())
-    print((-ri).isTriangulated())
+    #print(ri.intervals)
+    #print(ri.isIntervalGraph(Comments=True))
+    #print(ri.isTriangulated())
+    #print((-ri).isTriangulated())
     ri.exportGraphViz()
-    ri.isSplitGraph(Comments=True)
-    ri.isPermutationGraph(Comments=True)
-    print(ri.computePermutation())
-          
+    #ri.isSplitGraph(Comments=True)
+    #ri.isPermutationGraph(Comments=True)
+    #print(ri.computePermutation())
+    print(ri.isComparabilityGraph())
+    ri.exportEdgeOrientationsGraphViz('orientedGraph')
+    
 ##    rg = RandomPermutationGraph(order=6,seed=None)
 ##    print(rg)
 ##    dg = g.transitiveOrientation()
