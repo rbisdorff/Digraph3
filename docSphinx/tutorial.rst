@@ -3119,7 +3119,7 @@ fdp -Tpng random3RegularGraph.dot -o random3RegularGraph.png
     :align: center
     :alt: A random 3-regular graph instance
 
-    *A random 3-regular graph instance*
+    A random 3-regular graph instance
 
 A random MIS in this graph may be computed for instance by using the :py:class:`graphs.MISModel` class.
 
@@ -3138,7 +3138,7 @@ fdp -Tpng random3RegularGraph-mis.dot -o random3RegularGraph-mis.png
     :align: center
     :alt: A random MIS colored in the graph.
 
-    *A random MIS colored in the random 3-regular graph*
+    A random MIS colored in the random 3-regular graph
 
 It is easily verified in Fig. 33 above, that the computed MIS renders indeed a valid kernel of the given graph. The complete set of kernels of this 3-regular graph instance coincides hence with the set of its MISs. 
 
@@ -3243,7 +3243,7 @@ In our random 3-regular graph instance (see Fig. 32), we may thus find eleven no
    :align: center
    :alt: Two isomorphic kernels of the random 3-regular graph instance
 
-   *Two isomorphic kernels of the random 3-regular graph instance*
+   Two isomorphic kernels of the random 3-regular graph instance
 
 All graphs and symmetric digraphs admid MISs, hence also kernels.
 
@@ -3266,7 +3266,7 @@ circo -Tpng maxMatchingcyleGraph.dot -o maxMatchingcyleGraph.png
    :align: center
    :alt: Perfect maximum matching in the 8.cycle graph 
 
-   *Perfect maximum matching in the 8-cycle graph*
+   Perfect maximum matching in the 8-cycle graph
 
 In the context of digraphs, ie *oriented* graphs, the kernel concept gets much richer and separates from the symmetric MIS concept.  
 
@@ -3399,7 +3399,7 @@ circo -Tpng dualChordlessCircuit.dot -o dualChordlessCircuit.png
    :align: center
    :alt: The dual of the chordless 6-circuit
 
-   *The dual of the chordless 6-circuit*
+   The dual of the chordless 6-circuit
 
 Kernels in lateralized digraphs
 ...............................
@@ -3420,7 +3420,7 @@ dot -Grankdir=BT -Tpng randomLaterality.dot -o randomLaterality.png
    :align: center
    :alt: A random digraph instance
 
-   *A random digraph instance of order 7 and arc probability 0.3*
+   A random digraph instance of order 7 and arc probability 0.3
 
 The random digraph shown in Fig. 37 above has no apparent special properties, except from being connected.
 
@@ -3486,8 +3486,8 @@ dot -Grankdir=BT -Tpng orientedLaterality.dot -o orientedLaterality.png
    :align: center
    :alt: A random digraph oriented by best covering initial and terminal kernels  
 
-   *A random digraph oriented by best covering initial and
-   best covered terminal kernel*
+   A random digraph oriented by best covering initial and
+   best covered terminal kernel
 
 In algorithmic decision theory, initial and terminal prekernels may provide convincing best, resp. worst, choice recommendations (see :ref:`Rubis-Tutorial-label`).
 
@@ -3530,7 +3530,7 @@ dot -Grankdir=BT -Tpng tutOutranking.dot -o tutOutranking.png
    :align: center
    :alt: A random performance tableau
 
-   *A random strict outranking digraph instance*
+   A random strict outranking digraph instance
 
 All decision actions appear strictly better performing than action 'a7'. We call it a **Condorcet looser** and it is an evident terminal prekernel candidate. On the other side, three actions: 'a1', 'a2' and 'a4' are not dominated. They give together an initial prekernel candidate. 
 
@@ -3590,7 +3590,7 @@ dot -Grankdir=BT -Tpng bestWorstOrientation.dot -o bestWorstOrientation.png
    :align: center
    :alt: The random outranking digraph oriented by its initial and terminal prekernels
 
-   *The strict outranking digraph oriented by its best and worst choice recommendations*
+   The strict outranking digraph oriented by its best and worst choice recommendations
 
 The grey arrows in Fig. 41, like the one between actions 'a4' and 'a1', represent indeterminate preferential situations. Action 'a1' appears hence to be rather incomparable to all the other, except action 'a7'. It may be interesting to compare this result with a Copeland ranking of the underlying performance tableau (see :ref:`Ranking-Tutorial-label`).
 
@@ -3602,7 +3602,7 @@ The grey arrows in Fig. 41, like the one between actions 'a4' and 'a1', represen
    :align: center
    :alt: Copeland ranking of the random outranking digraph instance
 
-   *Heatmap with Copeland ranking of the peformance tableau*
+   Heatmap with Copeland ranking of the peformance tableau
 
 In the resulting linear ranking (see Fig. 42), action 'a4' is set at first rank, followed by action 'a2'. This makes sense as 'a4' shows three performances in the first quintile, whereas 'a2' is only partially evaluated and shows only two such excellent performances. But 'a4' also shows a very weak performance in the first quintile. Both decision actions, hence, don't show eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually definite strict outranking relation than any 'forced' linear ranking result as shown in Fig. 44  above.
 
@@ -3752,7 +3752,7 @@ fdp -Tpng randomSplitGraph.dot -o randomSplitGraph.png
     :width: 350 px
     :align: center
 
-    *A conjointly triangulated, comparability, interval, permutation and split graph instance*
+    A conjointly triangulated, comparability, interval, permutation and split graph
 
 In Fig. 43 we may readily recognize the essential characteristic of **split graphs**, namely being always splitable into two disjoint sub-graphs: an *independentt choice* (*v6*) and a *clique* (*v1*, *v2*, *v3*, *v4*, *v5*, *v7*, *v8*); which explains their name.
 
@@ -3825,7 +3825,7 @@ fdp -Tpng berge1.dot -o berge1.png
    :width: 400 px
    :align: center
 
-   *Graph representation of the testimonies of the professors*	   
+   Graph representation of the testimonies of the professors	   
 
 From graph theory we know that time interval intersections graphs must in fact be interval graphs, ie *triangulated* and *co-comparative* graphs. The testimonies graph should therefore not contain any chordless cycle of four and more vertices. Now, the presence or not of such chordless cycles in the testimonies graph may be checked as follows.
 
@@ -3867,7 +3867,7 @@ fdp -Tpng berge2.dot -o berge2.png
    :width: 400 px
    :align: center
 
-   *The triangulated testominies graph*	   
+   The triangulated testominies graph	   
 
 Generating permutation graphs
 .............................
@@ -3896,7 +3896,7 @@ fdp -Tpng permutationGraph.dot -o permutationGraph.png
     :width: 300 px
     :align: center
 
-    *The default permutation graph*
+    The default permutation graph
 
 By using color sorting queues, the minimal vertex coloring for a permutation graph is computable in :math:`O(n log(n))` (see [GOL-2004]_).
 
@@ -3918,7 +3918,7 @@ fdp -Tpng coloredPermutationGraph.dot -o coloredPermutationGraph.png
     :width: 300 px
     :align: center
 	    
-    *Minimal vertex coloring of the permutation graph*
+    Minimal vertex coloring of the permutation graph
 
 The correspondingly colored **matching diagram** of the nine **inversions** -the actual *edges* of the permutation graph-, which are induced by the given permutation [4, 3, 6, 1, 5, 2], may as well be drawn with the graphviz *neato* layout and explicitely positioned horizontal lists of vertices (see Fig. 48).
 
@@ -3932,7 +3932,7 @@ neato -n -Tpng perm_permutationGraph.dot -o perm_permutationGraph.png
     :width: 400 px
     :align: center
 
-    *Colored matching diagram of the permutation* [4, 3, 6, 1, 5, 2]
+    Colored matching diagram of the permutation [4, 3, 6, 1, 5, 2]
 
 As mentioned before, a permutation graph and its dual are **transitively orientable**. The :py:func:`graphs.PermutationGraph.transitiveOrientation` method constructs from a given permutation graph a digraph where each edge of the permutation graph is converted into an arc oriented in increasing alphabetic order of the adjacent vertices' keys (see [GOL-2004]_). This orientation of the edges of a permutation graph is always transitive and delivers a *weak ordering* of the vertices.
     
@@ -3962,7 +3962,7 @@ dot -Grankdir=TB -Tpng oriented_permutationGraph.dot -o oriented_permutationGrap
     :width: 200 px
     :align: center
 	    
-    *Hasse diagram of the transitive orientation of the permutation graph*
+    Hasse diagram of the transitive orientation of the permutation graph
 
 The dual of a permutation graph is *again* a permutation graph and as such also transitively orientable.
 
@@ -3998,7 +3998,7 @@ Attributes       : ['name', 'order', 'vertices', 'valuationDomain', 'seed',
     :width: 400 px
     :align: center
 
-    *Random graph of order 8 generated with edge probability 0.4*
+    Random graph of order 8 generated with edge probability 0.4
 
 If the random graph instance *g* (see Fig. 50) is a permutation graph, *g* and its dual *-g* must be *transitively orientable*, ie **comparability graphs** (see [GOL-2004]_). With the :py:func:`graphs.Graph.isComparabilityGraph` test, we may easily check this fact. This method proceeds indeed by trying to construct an implication class decomposition of a given graph instance and, if successful, stores the resulting edge orientations into a *self.edgeOrientations* attribute (see [GOL-2004]_ p.129-132).
 
@@ -4021,8 +4021,14 @@ If the random graph instance *g* (see Fig. 50) is a permutation graph, *g* and i
  ('v6', 'v7'): 0, ('v7', 'v6'): 0, ('v6', 'v8'): 1, ('v8', 'v6'): -1,
  ('v7', 'v7'): 0, ('v7', 'v8'): 1, ('v8', 'v7'): -1, ('v8', 'v8'): 0}
 
-The resulting orientation of the edges of *g* is indeed transitive. 
-The procedure for the dual graph *gd = -g* gives a transitive orientation to the edges of *-g*.
+.. Figure:: transOrientGraph.png
+    :alt: transitive orientation of a graph
+    :width: 400 px
+    :align: center
+	    
+    Transitive orientation of the graph *g*
+
+The resulting orientation of the edges of *g* (see Fig. 51) is indeed transitive. The same procedure applied to the dual graph *gd = -g* gives a transitive orientation to the edges of *-g*.
 
 >>> gd = -g
 >>> if gd.isComparabilityGraph():
@@ -4044,9 +4050,16 @@ The procedure for the dual graph *gd = -g* gives a transitive orientation to the
  ('v6', 'v7'): 1, ('v7', 'v6'): -1, ('v6', 'v8'): 0, ('v8', 'v6'): 0,
  ('v7', 'v7'): 0, ('v7', 'v8'): 0, ('v8', 'v7'): 0, ('v8', 'v8'): 0}
 
-It is worthwhile noticing that the orientation of *g* is achieved with a single implication class, whereas the orientation of *-g* needs three implication classes.
+.. Figure:: transOrientDualGraph.png
+    :alt: transitive orientation of the dual graph
+    :width: 300 px
+    :align: center
+	    
+    Transitive orientation of the dual graph *-g*
+ 
+It is worthwhile noticing that the orientation of *g* is achieved with a *single implication class* covering all the vertices, whereas the orientation of the dual *-g* needs a decomposition into *three implication classes* marked in black, red and blue (see Fig.52).
 
-Let us recheck this fact by explicitely constructing transitively oriented digraph instances with the :py:func:`graphs.Graph.computeTranditivelyOrientedDigraph` method. 
+Let us recheck these facts by explicitely constructing transitively oriented digraph instances with the :py:func:`graphs.Graph.computeTranditivelyOrientedDigraph` method. 
 
 >>> og = g.computeTransitivelyOrientedDigraph(PartiallyDetermined=True)
 >>> print('Transitivity degree: %.3f' % (og.transitivityDegree)) 
@@ -4076,7 +4089,7 @@ We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) 
 >>> print(s2)
 ['v8', 'v7', 'v6', 'v5', 'v4', 'v3', 'v2', 'v1']
 
-Vertex 'v8' is put from position 5 to position 1, vertex 'v7' is put from position 2 to position 2, vertex 'v6' from position 4 to position 3, 'vertex 'v5' from position 1 to position 4, etc ... . We generate these position swaps for all vertices and obtain thus the required permutation (see Line 5 below).
+Vertex *v8* is put from position 5 to position 1, vertex *v7* is put from position 2 to position 2, vertex *v6* from position 4 to position 3, 'vertex *v5* from position 1 to position 4, etc ... . We generate these position swaps for all vertices and obtain thus the required permutation (see Line 5 below).
 
 >>> permutation = [0 for j in range(g.order)]
 >>> for j in range(g.order):
@@ -4117,7 +4130,7 @@ We may finally check that, for instance, the two permutations [2, 3, 4, 8, 6, 1,
     :width: 700 px
     :align: center
 
-    *Isomorphic permutation graphs*
+    Isomorphic permutation graphs
 
 And, we recover indeed two *isomorphic copies* of the original random graph (see Fig. 50).
 
@@ -4159,7 +4172,7 @@ neato -Tpng tutRandomTree.dot -o tutRandomTree.png
     :width: 300 px
     :align: center
 
-    *Random Tree instance of order* 9
+    Random Tree instance of order 9
 
 A tree graph of order *n* contains *n-1* edges (see Line 8 and 9) and we may distinguish vertices like *v1*, *v2*, *v4*, *v5* or *v9*  of degree 1, called the **leaves** of the tree, and vertices like *v3*, *v6*, *v7* or *v8* of degree 2 or more, called the **nodes** of the tree.
 
@@ -4200,7 +4213,7 @@ neato -Tpng tutPruefTree.dot -o tutPruefTree.png
     :width: 350 px
     :align: center
 
-    *Tree instance from a random Prüfer code*
+    Tree instance from a random Prüfer code
 
 Following from the bijection between a labelled tree and its *Prüfer* code, we actually know that there exist :math:`n^{n-2}` different tree graphs with the same *n* vertices.
 
@@ -4228,7 +4241,7 @@ Assertion *A3*, for instance, gives a simple test for recognizing a tree graph. 
 ...
 The graph is a tree ? True
 
-The random graph of order 6 and edge probability 30%, generated with seed 62, is actually a tree graph instance, as we may readily confirm from its *graphviz* drawing in Fig. 54 (see also the :py:func:`graphs.Graph.isTree` method for an implemented alternative test).
+The random graph of order 6 and edge probability 30%, generated with seed 62, is actually a tree graph instance, as we may readily confirm from its *graphviz* drawing in Fig. 56 (see also the :py:func:`graphs.Graph.isTree` method for an implemented alternative test).
 
 >>> g.exportGraphViz(
 *---- exporting a dot file for GraphViz tools ---------*
@@ -4240,7 +4253,7 @@ fdp -Tpng test62.dot -o test62.png
     :width: 350 px
     :align: center
 
-    *Recognizing a tree instance*
+    Recognizing a tree instance
 
 Yet, we still have to recover its corresponding *Prüfer* code. Therefore, we may use the :py:func:`graphs.RandomTree.tree2Pruefer` method.
 
@@ -4286,7 +4299,7 @@ neato -Tpng randomSpanningTree.dot -o randomSpanningTree.png
      :width: 300 px
      :align: center
 
-     *Random spanning tree*
+     Random spanning tree
 
 More general, and in case of a not connected graph, we may generate with the :py:class:`graphs.RandomSpanningForest` class a *not necessarily uniform* random instance of a **spanning forest** -one or more random tree graphs- generated from a **random depth first search** of the graph components' traversals.
 
@@ -4312,7 +4325,7 @@ neato -Tpng spanningForest.dot -o spanningForest.png
      :width: 350 px
      :align: center
 
-     *Random spanning forest instance*
+     Random spanning forest instance
 
 Maximum determined spanning forests
 ...................................
@@ -4364,7 +4377,7 @@ Depth first search path(s) :
 [['v1', 'v2', 'v4', 'v2', 'v5', 'v2', 'v1', 'v3', 'v1']]
 Average determination(s) : [Decimal('0.655')]
 
-The given graph is connected and, hence, admids a single spanning tree (see Fig. 57) of **maximum mean determination** = (0.47 + 0.91 + 0.90 + 0.34)/4 = **0.655** (see Lines 9, 6 and 10 in the relation table above).
+The given graph is connected and, hence, admids a single spanning tree (see Fig. 59) of **maximum mean determination** = (0.47 + 0.91 + 0.90 + 0.34)/4 = **0.655** (see Lines 9, 6 and 10 in the relation table above).
 
 >>> mt.exportGraphViz(fileName='bestDeterminedspanningTree',\
 ...                   WithSpanningTree=True)
@@ -4378,7 +4391,7 @@ neato -Tpng bestDeterminedSpanningTree.dot -o bestDeterminedSpanningTree.png
    :width: 350 px
    :align: center
 
-   *Best determined spanning tree*
+   Best determined spanning tree
 
 One may easily verify that all other potential spanning trees, including instead the edges {*v3*, *v5*} and/or {*v4*, *v5*} - will show a lower average determination.
 
