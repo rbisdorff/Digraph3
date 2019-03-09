@@ -2,7 +2,7 @@
 """
 Python3+ implementation of Digraph3 tools
 
-Copyright (C) 2016-2017 Raymond Bisdorff
+Copyright (C) 2016-2019 Raymond Bisdorff
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@ You should have received a copy of the GNU General Public License along
 with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 """
-__version__ = "Branch: 3.5 $"
+__version__ = "Branch: 3.6 $"
 # ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
 
 #from digraphs import *
@@ -58,7 +58,8 @@ def all_perms(str):
         for perm in all_perms(str[1:]):
             for i in range(len(perm)+1):
                 yield perm[:i] + str[0:1] + perm[i:]
-# epistemic or symmetric disjunction operator
+
+#epistemic or symmetric disjunction operator
 def omax(Med,L, Debug=False):
     """
     Epistemic **disjunction** for bipolar outranking characteristics
@@ -112,8 +113,9 @@ def omin(Med,L, Debug=False):
     The mixture of both **positive and negative** arguments results
     in an **indeterminate** value.
 
-    Likewise to a mean, the *omin* operator is not associative. We therefore first assemble all positive, negative and null terms
-    and operate omin on the three assembled arguments. 
+    Likewise to a mean, the *omin* operator is not associative.
+    We therefore first assemble all positive, negative and null terms
+    and operate *omin* on the three assembled arguments. 
 
     """
     terms = list(L)

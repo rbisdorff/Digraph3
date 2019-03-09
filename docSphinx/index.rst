@@ -21,7 +21,7 @@ Contents
 Introduction
 ------------
 
-This documentation, also available on the `Read The Docs <https://readthedocs.org/>`_ site: |location_link1|, describes the Python3 resources for implementing decision aid algorithms in the context of a bipolarly-valued outranking approach ([1]_, [2]_). These computing resources are useful in the field of *Algorithmic Decision Theory* (https://www.algodec.org/) and more specifically in outranking based *Multiple Criteria Decision Aid* (MCDA).
+This documentation, also available on the `Read The Docs <https://readthedocs.org/>`_ site: |location_link1|, describes the Python3 resources for implementing decision aid algorithms in the context of a bipolarly-valued outranking approach ([1]_, [2]_). These computing resources are useful in the field of *Algorithmic Decision Theory* (https://www.algodec.org/) and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA).
 
 .. image:: introDoc2.png
     :width: 500pt
@@ -37,9 +37,8 @@ an election, how to build a best choice recommendation, or how to
 linearly rank or rate with multiple incommensurable performance
 criteria. Other tutorials concern more specifically operational
 aspects of computing maximal independent sets (MISs) and kernels in
-graphs and digraphs. The tutorial about handling and
-characterization of permutation graphs, shows the usefulness of the
-bipolar digraph fusion operator. Finally, we provide a tutorial on
+graphs and digraphs. The tutorial about split, interval and permutation graphs
+is inspired by Martin Golumbic's book on *Algorithmic Graph Theory and Perfect Graphs* ([3]_). Finally, we provide a tutorial on
 tree graphs and spanning forests. 
 
 .. toctree:: tutorial
@@ -52,10 +51,13 @@ The second part concerns the reference manual of the collection of provided Pyth
 
 References
 ..........
+
 .. [1] R. Bisdorff, L.C. Dias, P. Meyer, V. Mousseau and M. Pirlot (Eds.) (2015). *Evaluation and decision models with multiple criteria: Case studies*. Springer-Verlag Berlin Heidelberg, International Handbooks on Information Systems, `ISBN 978-3-662-46815-9 <https://link.springer.com/book/10.1007/978-3-662-46816-6>`_, 643 pages (downloadable content extract `PDF file 401.4 kB <https://leopold-loewenheim.uni.lu/bisdorff/documents/MCDAApplicationsContent.pdf>`_).
 
-.. [2] R. Bisdorff (2013) "On Polarizing Outranking Relations with Large Performance Differences" *Journal of Multi-Criteria Decision Analysis* (Wiley) **20**:3-12 (Preprint `PDF file 403.5kB <https://leopold-loewenheim.uni.lu/bisdorff/documents/MCDA-10-0059-PrePeerReview.pdf>`_)
+.. [2] R. Bisdorff (2000). "Logical foundation of fuzzy preferential systems with application to the electre decision aid methods", *Computers and Operations Research*, 27: 673-687 (downloadable `PDF file 159.1kB <http://hdl.handle.net/10993/23724>`_)
 
+.. [3] M. Ch. Golumbic (2004), *Agorithmic Graph Theory and Perfect Graphs* 2nd Ed., Annals of Discrete Mathematics 57, Elsevier.
+       
 For further scientific documentation of the Digraph3 resources, see |location_link2|.
 
 |location_link3|
