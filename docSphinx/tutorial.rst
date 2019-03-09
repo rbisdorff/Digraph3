@@ -182,7 +182,7 @@ The :py:func:`digraphs.Digraph.exportGraphViz()` method generates in the current
    :width: 300 px
    :align: center
 
-   *The tutorial digraph*
+   The tutorial digraph
    
 Some simple methods are easily applicable to this instantiated Digraph object *dg* , like the following :py:func:`digraphs.Digraph.showStatistics()` method.
 
@@ -242,7 +242,7 @@ Some special classes of digraphs, like the :py:class:`digraphs.CompleteDigraph`,
    :width: 200 px
    :align: center
 
-   *The tutorial grid graph*
+   The tutorial grid graph
 
 .. only:: html
 
@@ -328,7 +328,7 @@ We may have an even better insight into the ``Digraph`` object *dg* by looking a
    :width: 300 px
    :align: center
 
-   *The tutorial random valuation digraph*
+   The tutorial random valuation digraph
 
 Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the undetermined relational situation (:math:`r(6\,S\,2) = 0.00`) observed between nodes '6' and '2'. The corresponding link is marked in gray with an open arrowhead in the drawing. 
 
@@ -347,7 +347,7 @@ We may now extract both this symmetric as well as this asymmetric part of digrap
    :width: 600 px
    :align: center
 
-   *Asymmetric part of the tutorial random valuation digraph*
+   Asymmetric part of the tutorial random valuation digraph
    
 .. note::
 
@@ -465,10 +465,10 @@ Symmetric and transitive closure in-site constructors are also available. Note t
     >>> dg.exportGraphViz('strongComponents')
 
 .. figure:: strongComponents.png
-   :width: 200 px
+   :width: 300 px
    :align: center
 
-   *Symmetric amd transitive closure of the tutorial random valuation digraph*
+   Symmetric and transitive closure of the tutorial random valuation digraph
    
 Strong components
 .................
@@ -536,7 +536,7 @@ It is as well possible to show a colored version of the valued relation table in
    :width: 400 px
    :align: center
 
-   *The valued relation table shown in a browser window* 
+   The valued relation table shown in a browser window 
 
 Positive arcs are shown in green and negative in red. Indeterminate -zero-valued- links, like the reflexive diagonal ones or the link between node *6* and node *2*, are shown in gray.
 
@@ -749,7 +749,7 @@ By seeing the majority margins like a bipolarly-valued characteristic function f
    :width: 300 px
    :align: center
 
-   *Visualizing an election result*
+   Visualizing an election result
 
 Cyclic social preferences
 .........................
@@ -789,7 +789,7 @@ Now, we cannot find any completely positive row in the relation table. No one of
    :width: 200 px
    :align: center
 
-   *Cyclic social preferences*
+   Cyclic social preferences
 	   
 But, there may be many cycles appearing in a digraph, and, we may detect and enumerate all minimal chordless circuits in a Digraph instance with the ``computeChordlessCircuits()`` method.
 
@@ -897,7 +897,7 @@ We may visualize the same performance tableau in a two-colors setting in the def
    :width: 400 px
    :align: center
 
-   *Visualizing a performance tableau in a browser window*
+   Visualizing a performance tableau in a browser window
 
 It is worthwhile noticing that *green* and *red* marked evaluations indicate *best*, respectively *worst*, performances of an alternative on a criterion. In this example, we may hence notice that alternative *a03* is in fact best performing on *four* out of *seven* criteria.
 
@@ -910,7 +910,7 @@ We may, furthermore, rank the alternatives on the basis of the weighted marginal
    :width: 400 px
    :align: center
 
-   *Ranked heatmap of the performance table* 
+   Ranked heatmap of the performance table 
 
 There is no doubt that action *a03*, with a performance in the highest quintile in five out of seven criteria, appears definitely to be best performing. Action *a05* shows a more or less average performance on most criteria, whereas action *a02* appears to be the weakest alternative.
 
@@ -1021,7 +1021,7 @@ From the theory (see [BIS-2013]_, [ADT-L7]_ )  we know that the bipolarly outran
    :width: 300 px
    :align: center
 
-   *Codual digraph*
+   Codual digraph
 
 It becomes readily clear now from the picture above that alternative *a03* strictly outranks in fact all the other alternatives. Hence, *a03* appears as **Condorcet winner** and may be recommended as *best decision action* in this illustrative preference modelling exercise. 
 
@@ -1243,10 +1243,10 @@ A (potentially ranked) colored heat map with 5 color levels is also provided.
     >>> t.showHTMLPerformanceHeatmap(colorLevels=5,Ranked=False)
 
 .. figure:: randomCBHeatmap.png
-   :width: 500 px
+   :width: 400 px
    :align: center
 
-   *Unranked heatmap of a random Cost-Benefit performance tableau*
+   Unranked heatmap of a random Cost-Benefit performance tableau
    
 Such a performance tableau may be stored and re-accessed in the XMCDA2 encoded format.
 
@@ -1410,7 +1410,7 @@ A graphviz drawing illustrates the apparent preferential links between the stron
    :width: 300 px
    :align: center
 
-   *Strong components digraph*
+   Strong components digraph
 	   
 Decision action *a26* (Eco+ Soc+ Env-) appears dominating the other decision alternatives, whereas decision action *a30* (Eco- Soc- Env-) appears to be dominated by all the others.
 
@@ -1500,7 +1500,7 @@ To estimate how difficult this ranking problem may be, we can have a look at the
    :width: 400 px
    :align: center
 
-   *The strict outranking digraph*	   
+   The strict outranking digraph	   
 
 The shown strict outranking relation is apparently not transitive: for instance, alternative *a9* outranks alternative *a5* and alternative *a5* outranks *a2*, however *a9* does not outrank *a2*. We may compute the transitivity degree of the outranking digraph, ie the ratio of the number of outranking arcs over the number of arcs of the transitive closue of the digraph *gcd*.
 
@@ -1625,7 +1625,7 @@ We may visualize the partial order defined by the epistemic disjunction of these
    :width: 100pt
    :align: center
 
-   *Epistemic disjunction of Kemeny rankings*	   
+   Epistemic disjunction of Kemeny rankings	   
 
 It is interesting to notice that all seven Kemeny rankings place alternative *a1* at rank 1 before alternative *a3*. This is precisely the only inversion that separates the Copeland ranking (see above) from being optimal in the Kemeny sense.
 
@@ -1651,7 +1651,7 @@ We notice that the first crisp Slater ranking is a rather good fit (+0.844), bet
     :width: 150pt
     :align: center
 
-    *Epistemic disjunction of Slater rankings*
+    Epistemic disjunction of Slater rankings
        
 What precise ranking result should we hence adopt ? 
 
@@ -1935,10 +1935,10 @@ A colorful comparison of all the performances is shown by the **heat map** stati
     >>> t.showHTMLPerformanceHeatmap(colorLevels=5)
 
 .. figure:: officeChoiceHeatmap.png
-   :width: 600 px
+   :width: 500 px
    :align: center
 
-   *Heatmap of the office choice performance tableau*
+   Heatmap of the office choice performance tableau
 	   
 Site *A* shows extreme and contradictory performances: highest *Costs* and no *Working Comfort* on one hand, and total satisfaction with respect to *Standing*, *Proximity* and *Parking facilities* on the other hand. Similar, but opposite, situation is given for site *C*: unsatisfactory *Working Space*, no *Standing* and no *Working Comfort* on the one hand, and lowest *Costs*, best *Proximity* and *Parking facilities* on the other hand. Contrary to these contradictory alternatives, we observe two appealing compromise decision alternatives: sites *D* and *G*. Finally, site *F* is clearly the less satisfactory alternative of all.
 
@@ -1961,7 +1961,7 @@ For computing such a bipolar valued outranking digraph from the given performanc
    :width: 400 px
    :align: center
 
-   *The office choice outranking digraph*  
+   The office choice outranking digraph  
 	   
 We may notice that Alternative *D* is **positively outranking** all other potential office sites (a *Condorcet winner*). Yet, alternatives *A* (the most expensive) and *C* (the cheapest) are *not* outranked by any other site; they are in fact **weak** *Condorcet winners*.
 
@@ -1981,7 +1981,7 @@ We may get even more insight in the apparent outranking situations when looking 
    :width: 300 px
    :align: center
 
-   *The office choice outranking digraph* 	   
+   The office choice outranking digraph 	   
 
 One may check that the outranking digraph *g* does not admit in fact a cyclic strict preference situation.
 
@@ -1992,8 +1992,8 @@ One may check that the outranking digraph *g* does not admit in fact a cyclic st
     *---- Chordless circuits ----*
     0 circuits.
 
-Rubis best choice
-.................
+*Rubis* best choice recommendations
+...................................
 
 Following the Rubis outranking method (see [BIS-2008]_), potential best choice recommendations are determined by the outranking pre-kernels (weakly independent and strictly outranking choices) of the chordless odd circuits augmented outranking digraph. As we observe no circuits here, we may directly compute the pre-kernels of *g*.
 
@@ -2134,8 +2134,8 @@ Here, we find confirmed again that alternative *D*, indeed, appears to be the mo
 
 Yet, what about alternative *G*, the other good compromise best choice we have noticed from the performance heat map shown above?
 
-Strictly best choice
-....................
+Rubis *strict best* choice recommendation
+.........................................
 
 When comparing the performances of alternatives *D* and *G* on a pairwise perspective, we notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D* ( r(*G* outranks *D*) = 100.0).
 
@@ -2234,9 +2234,9 @@ To get a more complete insight in the overall strict outranking situations, we m
    :width: 200 px
    :align: center
 
-   *Ranking-by-choosing from the office choice outranking digraph*
+   Ranking-by-choosing from the office choice outranking digraph
 	   
-In this **ranking-by-choosing** method, where we operate the epistemic fusion of iterated (strict) best and worst choices, compromise alternative *D* is indeed ranked before compromise alternative *G*. If the computing node supports multiple processor cores, best and worst choosing iterations are run in parallel. The overall partial ordering result shows again the important fact that the most expensive site *A*, and the cheapest site *C*, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking-by-choosing relation. 
+In this **ranking-by-choosing** method, where we operate the *epistemic fusion* of iterated (strict) best and worst choices, compromise alternative *D* is indeed ranked before compromise alternative *G*. If the computing node supports multiple processor cores, best and worst choosing iterations are run in parallel. The overall partial ordering result shows again the important fact that the most expensive site *A*, and the cheapest site *C*, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking-by-choosing relation. 
 
 The best choice recommendation appears hence depending on the very
 importance the CEO is attaching to each of the three objectives he is
@@ -2353,7 +2353,7 @@ Parameter *historySize* (see Line 6) of the :py:meth:`performanceQuantiles.Perfo
     :width: 400 px
     :align: center
 
-    *Showing the updated quartiles limits*	    
+    Showing the updated quartiles limits	    
     
 
 Rating performances with quantile norms
@@ -2479,7 +2479,7 @@ The same result may even more conviently be consulted in a browser view via a sp
     :width: 550 px
     :align: center
 
-    *Heatmap of normed quartiles ranking* 
+    Heatmap of normed quartiles ranking 
 	    
 Due to the fact that the importance weight (6) of the unique cost criterion *c1* is balancing the sum of the six benefit criteria (6) *b1* to *b6*, the marginal cost criteria ranking is highly correlated (*tau* = 0.80) with the proposed rating of the new decision actions. Is is not a surprise than, that decision action **a1008c**, of **cheap** type (low costs, but several good benfits), appears first ranked in the third quartile class [0.50-0.75[. Whereas, action **a1007a**, of **advantageous** type (excellent benefits but also highest costs), appears worst ranked in the first quartile class [0.0 - 0.25[.
 
@@ -2495,7 +2495,7 @@ Using furthermore a specialised version of the :py:meth:`weakOrders.WeakOrder.ex
     :width: 500 px
     :align: center
 
-    *Normed quartiles rating digraph*
+    Normed quartiles rating digraph
 
 A more precise rating result may be achieved when we use **deciles** instead of quartiles for estimating the historical cumulative density functions.
 
@@ -2524,7 +2524,7 @@ A browser view may again more conveniently illustrate this preciser deciles rati
     :width: 550 px
     :align: center
 
-    *Heatmap of mormed deciles rating* 
+    Heatmap of mormed deciles rating 
 	    
 In the case of industrial production monitoring problems, where large volumes of historical performance data may be available, it could become interesting to estimate even more precisely the marginal cumulative density functions with **dodeciles** or even **centiles**. Especially if **tail** rating results, ie distinguishing **very best**, or **very worst** multiple criteria performances, becomes a critical purpose. Similarly, the *historySize* parameter may be used for monitoring on the fly **unstable** random multiple criteria performance data.  	
 
@@ -2609,7 +2609,7 @@ The stored graph can be recalled and plotted with the generic :py:func:`graphs.G
    :width: 400 px
    :align: center
 
-   *Tutorial graph instance*
+   Tutorial graph instance
 
 Properties, like the gamma function and vertex degrees and neighbourhooddepths may be shown with a `graphs.Graph.showShort()` method.
 
@@ -2692,7 +2692,7 @@ A 3-coloring of the tutorial graph *g* may for instance be computed and plotted 
    :width: 400 px
    :align: center
 
-   *3-Coloring of the tutorial graph*
+   3-Coloring of the tutorial graph
 
 Actually, with the given tutorial graph instance, a 2-coloring is already feasible.
 
@@ -2716,7 +2716,7 @@ Actually, with the given tutorial graph instance, a 2-coloring is already feasib
    :width: 400 px
    :align: center
 
-   *2-coloring of the tutorial graph*
+   2-coloring of the tutorial graph
 
 MIS and clique enumeration
 ..........................
@@ -2853,7 +2853,7 @@ circo -Tpng maxMatchingcyleGraph.dot -o maxMatchingcyleGraph.png
     :width: 300 px
     :align: center
 
-    *A perfect maximum matching of the 8-cycle graph*	    
+    A perfect maximum matching of the 8-cycle graph	    
 	    
 Grids and the Ising model
 .........................
@@ -2879,7 +2879,7 @@ Special classes of graphs, like *n* x *m* **rectangular** or **triangular grids*
    :width: 600 px
    :align: center
 
-   *Ising model of the 15x15 grid graph*	   
+   Ising model of the 15x15 grid graph	   
 
 Simulating Metropolis random walks
 ..................................
@@ -2977,7 +2977,7 @@ Such *n*-cycle graphs are also provided as undirected graph instances by the :py
    :align: center
    :alt: The 12-cycle graph
 
-   *The 12-cycle graph*	 
+   The 12-cycle graph	 
 
 A non isomorphic MIS corresponds in fact to a set of isomorphic MISs, i.e. an orbit of MISs under the automorphism group of the 12-cycle graph. We are now first computing all maximal independent sets that are detectable in the 12-cycle digraph with the :py:func:`digraphs.Digraph.showMIS` method.
 
@@ -3081,7 +3081,7 @@ The corresponding group stabilizers' sizes and frequencies -- orbit 1 with 12 sy
     :align: center
     :alt: The 4 non isomorphic MIS of the 12-cycle graph
 
-    *The symmetry axes of the four non isomorphic MISs of the 12-cycle graph*:
+    The symmetry axes of the four non isomorphic MISs of the 12-cycle graph
 
 The non isomorphic MISs in the 12-cycle graph represent in fact all the ways one may write the number 12 as the circular sum of '2's and '3's without distinguishing opposite directions of writing. The first orbit corresponds to writing six times a '2'; the second orbit corresponds to writing four times a '3'. The third and fourth orbit correspond to writing two times a '3' and three times a '2'. There are two non isomorphic ways to do this latter circular sum. Either separating the '3's by one and two '2's, or by zero and three '2's (see Bisdorff & Marichal [ISOMIS-08]_ ).
 
@@ -3515,7 +3515,7 @@ Valuation domain : {'min': -100.0, 'med': 0.0, 'max': 100.0}
    :align: center
    :alt: A random performance tableau
 
-   *The performance tableau of a random outranking digraph instance*
+   The performance tableau of a random outranking digraph instance
 
 The underlying random performance tableau (see Fig. 39) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision actions 'a2' and 'a5'. The resulting **strict outranking** - ie a weighted majority supported - *better than without considerable counter-performance* - digraph is shown in Fig. 40 below.
 
@@ -3690,7 +3690,7 @@ Back to :ref:`Tutorial-label`
 
 .. _Permutation-Tutorial-label:
 
-About Split, Interval and Permutation Graphs
+About split, interval and permutation graphs
 --------------------------------------------
 
 .. contents:: 
@@ -3698,8 +3698,8 @@ About Split, Interval and Permutation Graphs
 	:local:
 
 
-A super ' *perfect* ' graph
-...........................
+A super *perfect* graph
+.......................
 
 Following Martin Golumbic (see [GOL-2004]_ p. 149), we call a given graph *g*:
 
@@ -3709,7 +3709,7 @@ Following Martin Golumbic (see [GOL-2004]_ p. 149), we call a given graph *g*:
     * **Permutation graph** *g* and its dual *-g* are both *comparability* graphs.
     * **Split graph** when *g* and its dual *-g* are both *triangulated* graphs.
 
-To illustrate these *perfect* graph classes, we will generate from 8 intervals, randomly chosen in the default integer range [0,10], a :py:class:`RandomIntervalIntersectionsGraph` instance *g* (see Line 2 below). With seed = 101, we obtain an *interval* graph which is **conjointly** a *triangulated*, a *comparability*, a *split* and a *permutation* graph.
+To illustrate these *perfect* graph classes, we will generate from 8 intervals, randomly chosen in the default integer range [0,10], a :py:class:`RandomIntervalIntersectionsGraph` instance *g* (see Line 2 below). With seed = 100, we obtain an *interval* graph which is **conjointly** a *triangulated*, a *comparability*, a *split* and a *permutation* graph.
 
 >>> from graphs import RandomIntervalIntersectionsGraph
 >>> g = RandomIntervalIntersectionsGraph(order=8,seed=101)
@@ -3717,7 +3717,7 @@ To illustrate these *perfect* graph classes, we will generate from 8 intervals, 
 *------- Graph instance description ------*
 Instance class   : RandomLineIntersectionsGraph
 Instance name    : randIntervalIntersections
-Seed             : 101
+Seed             : 100
 Graph Order      : 8
 Graph Size       : 23
 Valuation domain : [-1.0; 1.0]
@@ -3867,7 +3867,7 @@ fdp -Tpng berge2.dot -o berge2.png
    :width: 400 px
    :align: center
 
-   The triangulated testominies graph	   
+   The triangulated testimonies graph	   
 
 Generating permutation graphs
 .............................
@@ -3891,7 +3891,7 @@ Attributes       : ['name', 'vertices', 'order', 'permutation',
 Exporting to permutationGraph.dot
 fdp -Tpng permutationGraph.dot -o permutationGraph.png
 
-.. Figure:: permutationGraph.png
+.. figure:: permutationGraph.png
     :alt: Default permutation graph
     :width: 300 px
     :align: center
@@ -3913,7 +3913,7 @@ vertex 6: gold
 Exporting to coloredPermutationGraph.dot
 fdp -Tpng coloredPermutationGraph.dot -o coloredPermutationGraph.png
 
-.. Figure:: coloredPermutationGraph.png
+.. figure:: coloredPermutationGraph.png
     :alt: minimal vertex coloring
     :width: 300 px
     :align: center
@@ -3927,7 +3927,7 @@ The correspondingly colored **matching diagram** of the nine **inversions** -the
 Exporting to perm_permutationGraph.dot
 neato -n -Tpng perm_permutationGraph.dot -o perm_permutationGraph.png
 
-.. Figure:: perm_permutationGraph.png
+.. figure:: perm_permutationGraph.png
     :alt: The inversions of the permutation [4, 3, 6, 1, 5, 2]
     :width: 400 px
     :align: center
@@ -3957,7 +3957,7 @@ Exporting to oriented_permutationGraph.dot
 2 { rank = same; 4; 6; }
 dot -Grankdir=TB -Tpng oriented_permutationGraph.dot -o oriented_permutationGraph.png
 
-.. Figure:: oriented_permutationGraph.png
+.. figure:: oriented_permutationGraph.png
     :alt: Hasse diagram of the orientationofof a permutation graph
     :width: 200 px
     :align: center
@@ -4052,7 +4052,7 @@ The resulting orientation of the edges of *g* (see Fig. 51) is indeed transitive
 
 .. Figure:: transOrientDualGraph.png
     :alt: transitive orientation of the dual graph
-    :width: 300 px
+    :width: 400 px
     :align: center
 	    
     Transitive orientation of the dual graph *-g*
