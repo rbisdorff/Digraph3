@@ -28,6 +28,22 @@ __version__ = "Branch: 3.6 $"
 #--------- Decimal precision --------------
 from decimal import Decimal
 
+#--------- X11 Color list ------------
+# https://www.graphviz.org/doc/info/colors.html
+x11ColorNames = [
+    'none',
+    'black',
+    'red',
+    'cyan',
+    'green',
+    'brown',
+    'blue',
+    'gold',
+    'orange',
+    'grey',
+    'green2',
+]    
+
 #---------- general methods -----------------
 # from High Performance Python M Gorelick & I Ozswald
 # O'Reilly 2014 p.27
@@ -589,29 +605,31 @@ def total_size(o, handlers={}, verbose=False):
 ###############################
 if __name__ == '__main__':
     ######  scratch pad for testing the module components
-   
-    print(grayCode(4))
-    #print(list(generateBipolarGrayCode(4)))
-    print(list(generateGrayCode(4)))
-    print(list(generateLooplessGrayCode(4)))
 
-    X = list(range(4))
-    n = len(X)
-    for g in generateGrayCode(n):
-        Xg = set()
-        for i in range(n):
-            if g[i] == 1:
-                Xg.add(X[i])
-        print(Xg)
-        
-    from outrankingDigraphs import *
-    t = RandomPerformanceTableau()
-    g = BipolarOutrankingDigraph(t)
-    print(total_size(g))
-
-    from sparseOutrankingDigraphs import *
-    pr = PreRankedOutrankingDigraph(t)
-    print(total_size(pr))
+    from digraphsTools import x11ColorNames
+    print(x11ColorNames)
+##    print(grayCode(4))
+##    #print(list(generateBipolarGrayCode(4)))
+##    print(list(generateGrayCode(4)))
+##    print(list(generateLooplessGrayCode(4)))
+##
+##    X = list(range(4))
+##    n = len(X)
+##    for g in generateGrayCode(n):
+##        Xg = set()
+##        for i in range(n):
+##            if g[i] == 1:
+##                Xg.add(X[i])
+##        print(Xg)
+##        
+##    from outrankingDigraphs import *
+##    t = RandomPerformanceTableau()
+##    g = BipolarOutrankingDigraph(t)
+##    print(total_size(g))
+##
+##    from sparseOutrankingDigraphs import *
+##    pr = PreRankedOutrankingDigraph(t)
+##    print(total_size(pr))
 
 ##  see arithmetics module
 ##    a = 17
