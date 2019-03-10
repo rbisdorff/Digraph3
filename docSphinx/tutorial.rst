@@ -3698,8 +3698,8 @@ About split, interval and permutation graphs
 	:local:
 
 
-A super *perfect* graph
-.......................
+A multiply *perfect* graph
+..........................
 
 Following Martin Golumbic (see [GOL-2004]_ p. 149), we call a given graph *g*:
 

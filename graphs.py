@@ -1655,7 +1655,7 @@ class Graph(object):
         """
         if self.isComparabilityGraph():
             if Comments:
-                print('Graph \'%s\' is transitively Orfientable.' % self.name)
+                print('Graph \'%s\' is transitively orientable.' % self.name)
             ds = -self
             if ds.isComparabilityGraph():
                 if Comments:
