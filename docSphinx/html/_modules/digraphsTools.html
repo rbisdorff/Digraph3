@@ -77,7 +77,7 @@
 
 <span class="c1">#--------- X11 Color list ------------</span>
 <span class="c1"># https://www.graphviz.org/doc/info/colors.html</span>
-<span class="n">x11ColorNames</span> <span class="o">=</span> <span class="p">[</span>
+<span class="n">_colorPalette0</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s1">&#39;none&#39;</span><span class="p">,</span>
     <span class="s1">&#39;black&#39;</span><span class="p">,</span>
     <span class="s1">&#39;red&#39;</span><span class="p">,</span>
@@ -90,6 +90,45 @@
     <span class="s1">&#39;grey&#39;</span><span class="p">,</span>
     <span class="s1">&#39;green2&#39;</span><span class="p">,</span>
 <span class="p">]</span>    
+<span class="n">_colorPalette1</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;none&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;#EA2027&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;#006266&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;#1B1464&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;#5758BB&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;#6F1E51&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;#EE5A24&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;#009432&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;#0652DD&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;#9980FA&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;#833471&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;#F79F1F&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;#A3CB38&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;#1289A7&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;#D980FA&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;#B53471&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;#FFC312&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;#C4E538&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;#12CBC4&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;#FDA7DF&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;#ED4C67&#39;</span><span class="p">,</span>
+       <span class="p">]</span>
+
+<span class="n">_colorPalette2</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;black&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;blue&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;coral&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;gold&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;gray&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;black&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;pink&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;green&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;orange&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;skyblue&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;wheat&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;salmon&#39;</span><span class="p">]</span>    
+
+<span class="n">colorPalettes</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="n">_colorPalette1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="n">_colorPalette2</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="n">_colorPalette0</span><span class="p">}</span>
 
 <span class="c1">#---------- general methods -----------------</span>
 <span class="c1"># from High Performance Python M Gorelick &amp; I Ozswald</span>

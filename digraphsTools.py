@@ -30,7 +30,7 @@ from decimal import Decimal
 
 #--------- X11 Color list ------------
 # https://www.graphviz.org/doc/info/colors.html
-x11ColorNames = [
+_colorPalette0 = [
     'none',
     'black',
     'red',
@@ -43,6 +43,45 @@ x11ColorNames = [
     'grey',
     'green2',
 ]    
+_colorPalette1 = [
+    'none',
+    '#EA2027',
+      '#006266',
+      '#1B1464',
+      '#5758BB',
+      '#6F1E51',
+      '#EE5A24',
+      '#009432',
+      '#0652DD',
+      '#9980FA',
+      '#833471',
+      '#F79F1F',
+      '#A3CB38',
+       '#1289A7',
+       '#D980FA',
+       '#B53471',
+       '#FFC312',
+       '#C4E538',
+       '#12CBC4',
+       '#FDA7DF',
+       '#ED4C67',
+       ]
+
+_colorPalette2 = [
+    'black',
+      'blue',
+      'coral',
+      'gold',
+      'gray',
+      'black',
+      'pink',
+      'green',
+      'orange',
+      'skyblue',
+      'wheat',
+      'salmon']    
+
+colorPalettes = {1: _colorPalette1, 2: _colorPalette2, 3: _colorPalette0}
 
 #---------- general methods -----------------
 # from High Performance Python M Gorelick & I Ozswald

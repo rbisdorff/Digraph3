@@ -54,7 +54,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{March 08, 2019}
+\date{March 10, 2019}
 \release{3.7-2980+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc2.png}\par}
@@ -70,7 +70,7 @@
 
 
 \section{Preface}
-\label{\detokenize{tutorial:preface}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}\label{\detokenize{tutorial:tutorial-label}}
+\label{\detokenize{tutorial:tutorial-label}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}\label{\detokenize{tutorial:preface}}
 This PDF document contains a set of tutorials introducing the main objects like digraphs, outranking digraphs, performance tableaux and voting profiles available in the Digraph3 Python software resources ( see html documentation
 here \textless{}\sphinxurl{https://digraph3.readthedocs.io/en/latest/index.html}\textgreater{} for the corresponding HTML version).
 
@@ -126,7 +126,7 @@ Revision: Python 3.7
 \phantomsection\label{\detokenize{tutorial:id151}}{\hyperref[\detokenize{tutorial:on-computing-digraph-kernels}]{\sphinxcrossref{On computing digraph kernels}}} (\autopageref*{\detokenize{tutorial:on-computing-digraph-kernels}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id152}}{\hyperref[\detokenize{tutorial:about-split-interval-and-permutation-graphs}]{\sphinxcrossref{About Split, Interval and Permutation Graphs}}} (\autopageref*{\detokenize{tutorial:about-split-interval-and-permutation-graphs}})
+\phantomsection\label{\detokenize{tutorial:id152}}{\hyperref[\detokenize{tutorial:about-split-interval-and-permutation-graphs}]{\sphinxcrossref{About split, interval and permutation graphs}}} (\autopageref*{\detokenize{tutorial:about-split-interval-and-permutation-graphs}})
 
 \item {} 
 \phantomsection\label{\detokenize{tutorial:id153}}{\hyperref[\detokenize{tutorial:on-tree-graphs-and-graph-forests}]{\sphinxcrossref{On tree graphs and graph forests}}} (\autopageref*{\detokenize{tutorial:on-tree-graphs-and-graph-forests}})
@@ -355,7 +355,7 @@ The \sphinxcode{exportGraphViz} method is depending on drawing tools from \sphin
 \capstart
 
 \noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{tutorialDigraph}.png}
-\caption{\sphinxstyleemphasis{The tutorial digraph}}\label{\detokenize{tutorial:id82}}\end{figure}
+\caption{The tutorial digraph}\label{\detokenize{tutorial:id82}}\end{figure}
 
 Some simple methods are easily applicable to this instantiated Digraph object \sphinxstyleemphasis{dg} , like the following \sphinxcode{digraphs.Digraph.showStatistics()} method.
 
@@ -422,7 +422,7 @@ Some special classes of digraphs, like the \sphinxcode{digraphs.CompleteDigraph}
 \capstart
 
 \noindent\sphinxincludegraphics[width=200\sphinxpxdimen]{{tutorialGrid}.png}
-\caption{\sphinxstyleemphasis{The tutorial grid graph}}\label{\detokenize{tutorial:id83}}\end{figure}
+\caption{The tutorial grid graph}\label{\detokenize{tutorial:id83}}\end{figure}
 
 Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Tutorials of the Digraph3 resources}}}} (\autopageref*{\detokenize{tutorial:tutorial-label}})
 
@@ -540,7 +540,7 @@ We may have an even better insight into the \sphinxcode{Digraph} object \sphinxs
 \capstart
 
 \noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{tutRandValDigraph}.png}
-\caption{\sphinxstyleemphasis{The tutorial random valuation digraph}}\label{\detokenize{tutorial:id84}}\end{figure}
+\caption{The tutorial random valuation digraph}\label{\detokenize{tutorial:id84}}\end{figure}
 
 Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the undetermined relational situation (\(r(6\,S\,2) = 0.00\)) observed between nodes ‘6’ and ‘2’. The corresponding link is marked in gray with an open arrowhead in the drawing.
 
@@ -563,7 +563,7 @@ We may now extract both this symmetric as well as this asymmetric part of digrap
 \capstart
 
 \noindent\sphinxincludegraphics[width=600\sphinxpxdimen]{{asymSymParts}.png}
-\caption{\sphinxstyleemphasis{Asymmetric part of the tutorial random valuation digraph}}\label{\detokenize{tutorial:id85}}\end{figure}
+\caption{Asymmetric part of the tutorial random valuation digraph}\label{\detokenize{tutorial:id85}}\end{figure}
 
 \begin{sphinxadmonition}{note}{Note:}
 Notice that the partial objects \sphinxstyleemphasis{asymDg} and \sphinxstyleemphasis{symDg} put to the indeterminate characteristic value all not-asymmetric, respectively not-symmetric links between nodes.
@@ -699,8 +699,8 @@ Symmetric and transitive closure in-site constructors are also available. Note t
 \centering
 \capstart
 
-\noindent\sphinxincludegraphics[width=200\sphinxpxdimen]{{strongComponents}.png}
-\caption{\sphinxstyleemphasis{Symmetric amd transitive closure of the tutorial random valuation digraph}}\label{\detokenize{tutorial:id86}}\end{figure}
+\noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{strongComponents}.png}
+\caption{Symmetric and transitive closure of the tutorial random valuation digraph}\label{\detokenize{tutorial:id86}}\end{figure}
 
 
 \subsection{Strong components}
@@ -781,7 +781,7 @@ It is as well possible to show a colored version of the valued relation table in
 \capstart
 
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{htmlTutorialDigraph}.png}
-\caption{\sphinxstyleemphasis{The valued relation table shown in a browser window}}\label{\detokenize{tutorial:id87}}\end{figure}
+\caption{The valued relation table shown in a browser window}\label{\detokenize{tutorial:id87}}\end{figure}
 
 Positive arcs are shown in green and negative in red. Indeterminate -zero-valued- links, like the reflexive diagonal ones or the link between node \sphinxstyleemphasis{6} and node \sphinxstyleemphasis{2}, are shown in gray.
 
@@ -863,7 +863,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Computing the winner of an election}
-\label{\detokenize{tutorial:linearvoting-tutorial-label}}\label{\detokenize{tutorial:computing-the-winner-of-an-election}}
+\label{\detokenize{tutorial:computing-the-winner-of-an-election}}\label{\detokenize{tutorial:linearvoting-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -1042,7 +1042,7 @@ By seeing the majority margins like a bipolarly-valued characteristic function f
 \capstart
 
 \noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{tutorialLinearBallots}.png}
-\caption{\sphinxstyleemphasis{Visualizing an election result}}\label{\detokenize{tutorial:id88}}\end{figure}
+\caption{Visualizing an election result}\label{\detokenize{tutorial:id88}}\end{figure}
 
 
 \subsection{Cyclic social preferences}
@@ -1089,7 +1089,7 @@ Now, we cannot find any completely positive row in the relation table. No one of
 \capstart
 
 \noindent\sphinxincludegraphics[width=200\sphinxpxdimen]{{cycles}.png}
-\caption{\sphinxstyleemphasis{Cyclic social preferences}}\label{\detokenize{tutorial:id89}}\end{figure}
+\caption{Cyclic social preferences}\label{\detokenize{tutorial:id89}}\end{figure}
 
 But, there may be many cycles appearing in a digraph, and, we may detect and enumerate all minimal chordless circuits in a Digraph instance with the \sphinxcode{computeChordlessCircuits()} method.
 
@@ -1109,7 +1109,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Working with the \sphinxstyleliteralintitle{outrankingDigraphs} module}
-\label{\detokenize{tutorial:working-with-the-outrankingdigraphs-module}}\label{\detokenize{tutorial:outrankingdigraphs-tutorial-label}}
+\label{\detokenize{tutorial:outrankingdigraphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-outrankingdigraphs-module}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -1244,7 +1244,7 @@ We may visualize the same performance tableau in a two-colors setting in the def
 \capstart
 
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{tutorialPerfTab}.png}
-\caption{\sphinxstyleemphasis{Visualizing a performance tableau in a browser window}}\label{\detokenize{tutorial:id90}}\end{figure}
+\caption{Visualizing a performance tableau in a browser window}\label{\detokenize{tutorial:id90}}\end{figure}
 
 It is worthwhile noticing that \sphinxstyleemphasis{green} and \sphinxstyleemphasis{red} marked evaluations indicate \sphinxstyleemphasis{best}, respectively \sphinxstyleemphasis{worst}, performances of an alternative on a criterion. In this example, we may hence notice that alternative \sphinxstyleemphasis{a03} is in fact best performing on \sphinxstyleemphasis{four} out of \sphinxstyleemphasis{seven} criteria.
 
@@ -1261,7 +1261,7 @@ We may, furthermore, rank the alternatives on the basis of the weighted marginal
 \capstart
 
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{tutorialHeatmap}.png}
-\caption{\sphinxstyleemphasis{Ranked heatmap of the performance table}}\label{\detokenize{tutorial:id91}}\end{figure}
+\caption{Ranked heatmap of the performance table}\label{\detokenize{tutorial:id91}}\end{figure}
 
 There is no doubt that action \sphinxstyleemphasis{a03}, with a performance in the highest quintile in five out of seven criteria, appears definitely to be best performing. Action \sphinxstyleemphasis{a05} shows a more or less average performance on most criteria, whereas action \sphinxstyleemphasis{a02} appears to be the weakest alternative.
 
@@ -1397,7 +1397,7 @@ From the theory (see \phantomsection\label{\detokenize{tutorial:id15}}{\hyperref
 \capstart
 
 \noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{codualOdg}.png}
-\caption{\sphinxstyleemphasis{Codual digraph}}\label{\detokenize{tutorial:id92}}\end{figure}
+\caption{Codual digraph}\label{\detokenize{tutorial:id92}}\end{figure}
 
 It becomes readily clear now from the picture above that alternative \sphinxstyleemphasis{a03} strictly outranks in fact all the other alternatives. Hence, \sphinxstyleemphasis{a03} appears as \sphinxstylestrong{Condorcet winner} and may be recommended as \sphinxstyleemphasis{best decision action} in this illustrative preference modelling exercise.
 
@@ -1442,7 +1442,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Generating random performance tableaux}
-\label{\detokenize{tutorial:generating-random-performance-tableaux}}\label{\detokenize{tutorial:randomperformancetableau-tutorial-label}}
+\label{\detokenize{tutorial:randomperformancetableau-tutorial-label}}\label{\detokenize{tutorial:generating-random-performance-tableaux}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -1713,8 +1713,8 @@ A (potentially ranked) colored heat map with 5 color levels is also provided.
 \centering
 \capstart
 
-\noindent\sphinxincludegraphics[width=500\sphinxpxdimen]{{randomCBHeatmap}.png}
-\caption{\sphinxstyleemphasis{Unranked heatmap of a random Cost-Benefit performance tableau}}\label{\detokenize{tutorial:id93}}\end{figure}
+\noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{randomCBHeatmap}.png}
+\caption{Unranked heatmap of a random Cost-Benefit performance tableau}\label{\detokenize{tutorial:id93}}\end{figure}
 
 Such a performance tableau may be stored and re-accessed in the XMCDA2 encoded format.
 
@@ -1928,7 +1928,7 @@ A graphviz drawing illustrates the apparent preferential links between the stron
 \capstart
 
 \noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{sccFusionObjectives}.png}
-\caption{\sphinxstyleemphasis{Strong components digraph}}\label{\detokenize{tutorial:id94}}\end{figure}
+\caption{Strong components digraph}\label{\detokenize{tutorial:id94}}\end{figure}
 
 Decision action \sphinxstyleemphasis{a26} (Eco+ Soc+ Env-) appears dominating the other decision alternatives, whereas decision action \sphinxstyleemphasis{a30} (Eco- Soc- Env-) appears to be dominated by all the others.
 
@@ -2071,7 +2071,7 @@ To estimate how difficult this ranking problem may be, we can have a look at the
 \capstart
 
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{rankingTutorial}.png}
-\caption{\sphinxstyleemphasis{The strict outranking digraph}}\label{\detokenize{tutorial:id95}}\end{figure}
+\caption{The strict outranking digraph}\label{\detokenize{tutorial:id95}}\end{figure}
 
 The shown strict outranking relation is apparently not transitive: for instance, alternative \sphinxstyleemphasis{a9} outranks alternative \sphinxstyleemphasis{a5} and alternative \sphinxstyleemphasis{a5} outranks \sphinxstyleemphasis{a2}, however \sphinxstyleemphasis{a9} does not outrank \sphinxstyleemphasis{a2}. We may compute the transitivity degree of the outranking digraph, ie the ratio of the number of outranking arcs over the number of arcs of the transitive closue of the digraph \sphinxstyleemphasis{gcd}.
 
@@ -2220,7 +2220,7 @@ We may visualize the partial order defined by the epistemic disjunction of these
 \capstart
 
 \noindent\sphinxincludegraphics[width=100bp]{{tutorialKemeny}.png}
-\caption{\sphinxstyleemphasis{Epistemic disjunction of Kemeny rankings}}\label{\detokenize{tutorial:id96}}\end{figure}
+\caption{Epistemic disjunction of Kemeny rankings}\label{\detokenize{tutorial:id96}}\end{figure}
 
 It is interesting to notice that all seven Kemeny rankings place alternative \sphinxstyleemphasis{a1} at rank 1 before alternative \sphinxstyleemphasis{a3}. This is precisely the only inversion that separates the Copeland ranking (see above) from being optimal in the Kemeny sense.
 
@@ -2250,7 +2250,7 @@ We notice that the first crisp Slater ranking is a rather good fit (+0.844), bet
 \capstart
 
 \noindent\sphinxincludegraphics[width=150bp]{{tutorialSlater}.png}
-\caption{\sphinxstyleemphasis{Epistemic disjunction of Slater rankings}}\label{\detokenize{tutorial:id97}}\end{figure}
+\caption{Epistemic disjunction of Slater rankings}\label{\detokenize{tutorial:id97}}\end{figure}
 
 What precise ranking result should we hence adopt ?
 
@@ -2470,10 +2470,10 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \phantomsection\label{\detokenize{tutorial:id197}}{\hyperref[\detokenize{tutorial:id27}]{\sphinxcrossref{Outranking digraph}}} (\autopageref*{\detokenize{tutorial:id27}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id198}}{\hyperref[\detokenize{tutorial:rubis-best-choice}]{\sphinxcrossref{Rubis best choice}}} (\autopageref*{\detokenize{tutorial:rubis-best-choice}})
+\phantomsection\label{\detokenize{tutorial:id198}}{\hyperref[\detokenize{tutorial:rubis-best-choice-recommendations}]{\sphinxcrossref{\sphinxstyleemphasis{Rubis} best choice recommendations}}} (\autopageref*{\detokenize{tutorial:rubis-best-choice-recommendations}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id199}}{\hyperref[\detokenize{tutorial:strictly-best-choice}]{\sphinxcrossref{Strictly best choice}}} (\autopageref*{\detokenize{tutorial:strictly-best-choice}})
+\phantomsection\label{\detokenize{tutorial:id199}}{\hyperref[\detokenize{tutorial:rubis-strict-best-choice-recommendation}]{\sphinxcrossref{Rubis \sphinxstyleemphasis{strict best} choice recommendation}}} (\autopageref*{\detokenize{tutorial:rubis-strict-best-choice-recommendation}})
 
 \item {} 
 \phantomsection\label{\detokenize{tutorial:id200}}{\hyperref[\detokenize{tutorial:weakly-ordering}]{\sphinxcrossref{Weakly ordering}}} (\autopageref*{\detokenize{tutorial:weakly-ordering}})
@@ -2946,8 +2946,8 @@ A colorful comparison of all the performances is shown by the \sphinxstylestrong
 \centering
 \capstart
 
-\noindent\sphinxincludegraphics[width=600\sphinxpxdimen]{{officeChoiceHeatmap}.png}
-\caption{\sphinxstyleemphasis{Heatmap of the office choice performance tableau}}\label{\detokenize{tutorial:id98}}\end{figure}
+\noindent\sphinxincludegraphics[width=500\sphinxpxdimen]{{officeChoiceHeatmap}.png}
+\caption{Heatmap of the office choice performance tableau}\label{\detokenize{tutorial:id98}}\end{figure}
 
 Site \sphinxstyleemphasis{A} shows extreme and contradictory performances: highest \sphinxstyleemphasis{Costs} and no \sphinxstyleemphasis{Working Comfort} on one hand, and total satisfaction with respect to \sphinxstyleemphasis{Standing}, \sphinxstyleemphasis{Proximity} and \sphinxstyleemphasis{Parking facilities} on the other hand. Similar, but opposite, situation is given for site \sphinxstyleemphasis{C}: unsatisfactory \sphinxstyleemphasis{Working Space}, no \sphinxstyleemphasis{Standing} and no \sphinxstyleemphasis{Working Comfort} on the one hand, and lowest \sphinxstyleemphasis{Costs}, best \sphinxstyleemphasis{Proximity} and \sphinxstyleemphasis{Parking facilities} on the other hand. Contrary to these contradictory alternatives, we observe two appealing compromise decision alternatives: sites \sphinxstyleemphasis{D} and \sphinxstyleemphasis{G}. Finally, site \sphinxstyleemphasis{F} is clearly the less satisfactory alternative of all.
 
@@ -2981,7 +2981,7 @@ For computing such a bipolar valued outranking digraph from the given performanc
 \capstart
 
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{officeChoiceOutranking}.png}
-\caption{\sphinxstyleemphasis{The office choice outranking digraph}}\label{\detokenize{tutorial:id99}}\end{figure}
+\caption{The office choice outranking digraph}\label{\detokenize{tutorial:id99}}\end{figure}
 
 We may notice that Alternative \sphinxstyleemphasis{D} is \sphinxstylestrong{positively outranking} all other potential office sites (a \sphinxstyleemphasis{Condorcet winner}). Yet, alternatives \sphinxstyleemphasis{A} (the most expensive) and \sphinxstyleemphasis{C} (the cheapest) are \sphinxstyleemphasis{not} outranked by any other site; they are in fact \sphinxstylestrong{weak} \sphinxstyleemphasis{Condorcet winners}.
 
@@ -3008,7 +3008,7 @@ We may get even more insight in the apparent outranking situations when looking 
 \capstart
 
 \noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{officeChoice}.png}
-\caption{\sphinxstyleemphasis{The office choice outranking digraph}}\label{\detokenize{tutorial:id100}}\end{figure}
+\caption{The office choice outranking digraph}\label{\detokenize{tutorial:id100}}\end{figure}
 
 One may check that the outranking digraph \sphinxstyleemphasis{g} does not admit in fact a cyclic strict preference situation.
 
@@ -3023,8 +3023,8 @@ One may check that the outranking digraph \sphinxstyleemphasis{g} does not admit
 \end{sphinxVerbatim}
 
 
-\subsection{Rubis best choice}
-\label{\detokenize{tutorial:rubis-best-choice}}
+\subsection{\sphinxstyleemphasis{Rubis} best choice recommendations}
+\label{\detokenize{tutorial:rubis-best-choice-recommendations}}
 Following the Rubis outranking method (see \phantomsection\label{\detokenize{tutorial:id31}}{\hyperref[\detokenize{tutorial:bis-2008}]{\sphinxcrossref{{[}BIS-2008{]}}}} (\autopageref*{\detokenize{tutorial:bis-2008}})), potential best choice recommendations are determined by the outranking pre-kernels (weakly independent and strictly outranking choices) of the chordless odd circuits augmented outranking digraph. As we observe no circuits here, we may directly compute the pre-kernels of \sphinxstyleemphasis{g}.
 
 \fvset{hllines={, ,}}%
@@ -3196,8 +3196,8 @@ Here, we find confirmed again that alternative \sphinxstyleemphasis{D}, indeed, 
 Yet, what about alternative \sphinxstyleemphasis{G}, the other good compromise best choice we have noticed from the performance heat map shown above?
 
 
-\subsection{Strictly best choice}
-\label{\detokenize{tutorial:strictly-best-choice}}
+\subsection{Rubis \sphinxstyleemphasis{strict best} choice recommendation}
+\label{\detokenize{tutorial:rubis-strict-best-choice-recommendation}}
 When comparing the performances of alternatives \sphinxstyleemphasis{D} and \sphinxstyleemphasis{G} on a pairwise perspective, we notice that, with the given preference discrimination thresholds, alternative \sphinxstyleemphasis{G} is actually \sphinxstylestrong{certainly} \sphinxstyleemphasis{at least as good as} alternative \sphinxstyleemphasis{D} ( r(\sphinxstyleemphasis{G} outranks \sphinxstyleemphasis{D}) = 100.0).
 
 \fvset{hllines={, ,}}%
@@ -3307,9 +3307,9 @@ To get a more complete insight in the overall strict outranking situations, we m
 \capstart
 
 \noindent\sphinxincludegraphics[width=200\sphinxpxdimen]{{officeChoiceRanking}.png}
-\caption{\sphinxstyleemphasis{Ranking-by-choosing from the office choice outranking digraph}}\label{\detokenize{tutorial:id101}}\end{figure}
+\caption{Ranking-by-choosing from the office choice outranking digraph}\label{\detokenize{tutorial:id101}}\end{figure}
 
-In this \sphinxstylestrong{ranking-by-choosing} method, where we operate the epistemic fusion of iterated (strict) best and worst choices, compromise alternative \sphinxstyleemphasis{D} is indeed ranked before compromise alternative \sphinxstyleemphasis{G}. If the computing node supports multiple processor cores, best and worst choosing iterations are run in parallel. The overall partial ordering result shows again the important fact that the most expensive site \sphinxstyleemphasis{A}, and the cheapest site \sphinxstyleemphasis{C}, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking-by-choosing relation.
+In this \sphinxstylestrong{ranking-by-choosing} method, where we operate the \sphinxstyleemphasis{epistemic fusion} of iterated (strict) best and worst choices, compromise alternative \sphinxstyleemphasis{D} is indeed ranked before compromise alternative \sphinxstyleemphasis{G}. If the computing node supports multiple processor cores, best and worst choosing iterations are run in parallel. The overall partial ordering result shows again the important fact that the most expensive site \sphinxstyleemphasis{A}, and the cheapest site \sphinxstyleemphasis{C}, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking-by-choosing relation.
 
 The best choice recommendation appears hence depending on the very
 importance the CEO is attaching to each of the three objectives he is
@@ -3325,7 +3325,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Rating with learned quantile norms}
-\label{\detokenize{tutorial:rating-tutorial-label}}\label{\detokenize{tutorial:rating-with-learned-quantile-norms}}
+\label{\detokenize{tutorial:rating-with-learned-quantile-norms}}\label{\detokenize{tutorial:rating-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -3540,7 +3540,7 @@ Parameter \sphinxstyleemphasis{historySize} (see Line 6) of the \sphinxcode{perf
 \capstart
 
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{examplePerfQuantiles}.png}
-\caption{\sphinxstyleemphasis{Showing the updated quartiles limits}}\label{\detokenize{tutorial:id102}}\end{figure}
+\caption{Showing the updated quartiles limits}\label{\detokenize{tutorial:id102}}\end{figure}
 
 
 \subsection{Rating performances with quantile norms}
@@ -3689,7 +3689,7 @@ The same result may even more conviently be consulted in a browser view via a sp
 \capstart
 
 \noindent\sphinxincludegraphics[width=550\sphinxpxdimen]{{exampleIncRatDigraphTut}.png}
-\caption{\sphinxstyleemphasis{Heatmap of normed quartiles ranking}}\label{\detokenize{tutorial:id103}}\end{figure}
+\caption{Heatmap of normed quartiles ranking}\label{\detokenize{tutorial:id103}}\end{figure}
 
 Due to the fact that the importance weight (6) of the unique cost criterion \sphinxstyleemphasis{c1} is balancing the sum of the six benefit criteria (6) \sphinxstyleemphasis{b1} to \sphinxstyleemphasis{b6}, the marginal cost criteria ranking is highly correlated (\sphinxstyleemphasis{tau} = 0.80) with the proposed rating of the new decision actions. Is is not a surprise than, that decision action \sphinxstylestrong{a1008c}, of \sphinxstylestrong{cheap} type (low costs, but several good benfits), appears first ranked in the third quartile class {[}0.50-0.75{[}. Whereas, action \sphinxstylestrong{a1007a}, of \sphinxstylestrong{advantageous} type (excellent benefits but also highest costs), appears worst ranked in the first quartile class {[}0.0 - 0.25{[}.
 
@@ -3708,7 +3708,7 @@ Using furthermore a specialised version of the \sphinxcode{weakOrders.WeakOrder.
 \capstart
 
 \noindent\sphinxincludegraphics[width=500\sphinxpxdimen]{{normedRatingDigraph}.png}
-\caption{\sphinxstyleemphasis{Normed quartiles rating digraph}}\label{\detokenize{tutorial:id104}}\end{figure}
+\caption{Normed quartiles rating digraph}\label{\detokenize{tutorial:id104}}\end{figure}
 
 A more precise rating result may be achieved when we use \sphinxstylestrong{deciles} instead of quartiles for estimating the historical cumulative density functions.
 
@@ -3743,7 +3743,7 @@ A browser view may again more conveniently illustrate this preciser deciles rati
 \capstart
 
 \noindent\sphinxincludegraphics[width=550\sphinxpxdimen]{{exampleIncRatDigraphTutBis}.png}
-\caption{\sphinxstyleemphasis{Heatmap of mormed deciles rating}}\label{\detokenize{tutorial:id105}}\end{figure}
+\caption{Heatmap of mormed deciles rating}\label{\detokenize{tutorial:id105}}\end{figure}
 
 In the case of industrial production monitoring problems, where large volumes of historical performance data may be available, it could become interesting to estimate even more precisely the marginal cumulative density functions with \sphinxstylestrong{dodeciles} or even \sphinxstylestrong{centiles}. Especially if \sphinxstylestrong{tail} rating results, ie distinguishing \sphinxstylestrong{very best}, or \sphinxstylestrong{very worst} multiple criteria performances, becomes a critical purpose. Similarly, the \sphinxstyleemphasis{historySize} parameter may be used for monitoring on the fly \sphinxstylestrong{unstable} random multiple criteria performance data.
 
@@ -3751,7 +3751,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Working with the \sphinxstyleliteralintitle{graphs} module}
-\label{\detokenize{tutorial:graphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-graphs-module}}
+\label{\detokenize{tutorial:working-with-the-graphs-module}}\label{\detokenize{tutorial:graphs-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -3864,7 +3864,7 @@ The stored graph can be recalled and plotted with the generic \sphinxcode{graphs
 \capstart
 
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{tutorialGraph}.png}
-\caption{\sphinxstyleemphasis{Tutorial graph instance}}\label{\detokenize{tutorial:id106}}\end{figure}
+\caption{Tutorial graph instance}\label{\detokenize{tutorial:id106}}\end{figure}
 
 Properties, like the gamma function and vertex degrees and neighbourhooddepths may be shown with a \sphinxtitleref{graphs.Graph.showShort()} method.
 
@@ -3957,7 +3957,7 @@ A 3-coloring of the tutorial graph \sphinxstyleemphasis{g} may for instance be c
 \capstart
 
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{tutorial-3-coloring}.png}
-\caption{\sphinxstyleemphasis{3-Coloring of the tutorial graph}}\label{\detokenize{tutorial:id107}}\end{figure}
+\caption{3-Coloring of the tutorial graph}\label{\detokenize{tutorial:id107}}\end{figure}
 
 Actually, with the given tutorial graph instance, a 2-coloring is already feasible.
 
@@ -3985,7 +3985,7 @@ Actually, with the given tutorial graph instance, a 2-coloring is already feasib
 \capstart
 
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{tutorial-2-coloring}.png}
-\caption{\sphinxstyleemphasis{2-coloring of the tutorial graph}}\label{\detokenize{tutorial:id108}}\end{figure}
+\caption{2-coloring of the tutorial graph}\label{\detokenize{tutorial:id108}}\end{figure}
 
 
 \subsection{MIS and clique enumeration}
@@ -4136,7 +4136,7 @@ The two last MISs of cardinality 4 (see Lines 13-16 above) give \sphinxstylestro
 \capstart
 
 \noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{maxMatchingcycleGraph}.png}
-\caption{\sphinxstyleemphasis{A perfect maximum matching of the 8-cycle graph}}\label{\detokenize{tutorial:id109}}\end{figure}
+\caption{A perfect maximum matching of the 8-cycle graph}\label{\detokenize{tutorial:id109}}\end{figure}
 
 
 \subsection{Grids and the Ising model}
@@ -4166,7 +4166,7 @@ Special classes of graphs, like \sphinxstyleemphasis{n} x \sphinxstyleemphasis{m
 \capstart
 
 \noindent\sphinxincludegraphics[width=600\sphinxpxdimen]{{grid-15-15-ising}.png}
-\caption{\sphinxstyleemphasis{Ising model of the 15x15 grid graph}}\label{\detokenize{tutorial:id110}}\end{figure}
+\caption{Ising model of the 15x15 grid graph}\label{\detokenize{tutorial:id110}}\end{figure}
 
 
 \subsection{Simulating Metropolis random walks}
@@ -4267,7 +4267,7 @@ Such \sphinxstyleemphasis{n}-cycle graphs are also provided as undirected graph 
 \capstart
 
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{cg12}.png}
-\caption{\sphinxstyleemphasis{The 12-cycle graph}}\label{\detokenize{tutorial:id111}}\end{figure}
+\caption{The 12-cycle graph}\label{\detokenize{tutorial:id111}}\end{figure}
 
 A non isomorphic MIS corresponds in fact to a set of isomorphic MISs, i.e. an orbit of MISs under the automorphism group of the 12-cycle graph. We are now first computing all maximal independent sets that are detectable in the 12-cycle digraph with the \sphinxcode{digraphs.Digraph.showMIS()} method.
 
@@ -4394,7 +4394,7 @@ The corresponding group stabilizers’ sizes and frequencies \textendash{} orbit
 \capstart
 
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{c12}.png}
-\caption{\sphinxstyleemphasis{The symmetry axes of the four non isomorphic MISs of the 12-cycle graph}:}\label{\detokenize{tutorial:id112}}\end{figure}
+\caption{The symmetry axes of the four non isomorphic MISs of the 12-cycle graph}\label{\detokenize{tutorial:id112}}\end{figure}
 
 The non isomorphic MISs in the 12-cycle graph represent in fact all the ways one may write the number 12 as the circular sum of ‘2’s and ‘3’s without distinguishing opposite directions of writing. The first orbit corresponds to writing six times a ‘2’; the second orbit corresponds to writing four times a ‘3’. The third and fourth orbit correspond to writing two times a ‘3’ and three times a ‘2’. There are two non isomorphic ways to do this latter circular sum. Either separating the ‘3’s by one and two ‘2’s, or by zero and three ‘2’s (see Bisdorff \& Marichal \phantomsection\label{\detokenize{tutorial:id47}}{\hyperref[\detokenize{tutorial:isomis-08}]{\sphinxcrossref{{[}ISOMIS-08{]}}}} (\autopageref*{\detokenize{tutorial:isomis-08}}) ).
 
@@ -4402,7 +4402,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{On computing digraph kernels}
-\label{\detokenize{tutorial:kernel-tutorial-label}}\label{\detokenize{tutorial:on-computing-digraph-kernels}}
+\label{\detokenize{tutorial:on-computing-digraph-kernels}}\label{\detokenize{tutorial:kernel-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -4895,7 +4895,7 @@ To illustrate this idea, let us finally compute good and bad choice recommendati
 \capstart
 
 \noindent\sphinxincludegraphics[width=550\sphinxpxdimen]{{randomOutranking}.png}
-\caption{\sphinxstyleemphasis{The performance tableau of a random outranking digraph instance}}\label{\detokenize{tutorial:id120}}\end{figure}
+\caption{The performance tableau of a random outranking digraph instance}\label{\detokenize{tutorial:id120}}\end{figure}
 
 The underlying random performance tableau (see Fig. 39) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision actions ‘a2’ and ‘a5’. The resulting \sphinxstylestrong{strict outranking} - ie a weighted majority supported - \sphinxstyleemphasis{better than without considerable counter-performance} - digraph is shown in Fig. 40 below.
 
@@ -5096,12 +5096,12 @@ provides the effective advantage of computing all initial \sphinxstylestrong{and
 Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Tutorials of the Digraph3 resources}}}} (\autopageref*{\detokenize{tutorial:tutorial-label}})
 
 
-\section{About Split, Interval and Permutation Graphs}
+\section{About split, interval and permutation graphs}
 \label{\detokenize{tutorial:about-split-interval-and-permutation-graphs}}\label{\detokenize{tutorial:permutation-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id215}}{\hyperref[\detokenize{tutorial:a-super-perfect-graph}]{\sphinxcrossref{A super ‘ \sphinxstyleemphasis{perfect} ‘ graph}}} (\autopageref*{\detokenize{tutorial:a-super-perfect-graph}})
+\phantomsection\label{\detokenize{tutorial:id215}}{\hyperref[\detokenize{tutorial:a-multiply-perfect-graph}]{\sphinxcrossref{A multiply \sphinxstyleemphasis{perfect} graph}}} (\autopageref*{\detokenize{tutorial:a-multiply-perfect-graph}})
 
 \item {} 
 \phantomsection\label{\detokenize{tutorial:id216}}{\hyperref[\detokenize{tutorial:who-is-the-lier}]{\sphinxcrossref{Who is the lier ?}}} (\autopageref*{\detokenize{tutorial:who-is-the-lier}})
@@ -5116,8 +5116,8 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \end{sphinxShadowBox}
 
 
-\subsection{A super ‘ \sphinxstyleemphasis{perfect} ‘ graph}
-\label{\detokenize{tutorial:a-super-perfect-graph}}
+\subsection{A multiply \sphinxstyleemphasis{perfect} graph}
+\label{\detokenize{tutorial:a-multiply-perfect-graph}}
 Following Martin Golumbic (see \phantomsection\label{\detokenize{tutorial:id57}}{\hyperref[\detokenize{tutorial:gol-2004}]{\sphinxcrossref{{[}GOL-2004{]}}}} (\autopageref*{\detokenize{tutorial:gol-2004}}) p. 149), we call a given graph \sphinxstyleemphasis{g}:
 \begin{itemize}
 \item {} 
@@ -5137,17 +5137,17 @@ Following Martin Golumbic (see \phantomsection\label{\detokenize{tutorial:id57}}
 
 \end{itemize}
 
-To illustrate these \sphinxstyleemphasis{perfect} graph classes, we will generate from 8 intervals, randomly chosen in the default integer range {[}0,10{]}, a \sphinxcode{RandomIntervalIntersectionsGraph} instance \sphinxstyleemphasis{g} (see Line 2 below). With seed = 101, we obtain an \sphinxstyleemphasis{interval} graph which is \sphinxstylestrong{conjointly} a \sphinxstyleemphasis{triangulated}, a \sphinxstyleemphasis{comparability}, a \sphinxstyleemphasis{split} and a \sphinxstyleemphasis{permutation} graph.
+To illustrate these \sphinxstyleemphasis{perfect} graph classes, we will generate from 8 intervals, randomly chosen in the default integer range {[}0,10{]}, a \sphinxcode{RandomIntervalIntersectionsGraph} instance \sphinxstyleemphasis{g} (see Line 2 below). With seed = 100, we obtain an \sphinxstyleemphasis{interval} graph which is \sphinxstylestrong{conjointly} a \sphinxstyleemphasis{triangulated}, a \sphinxstyleemphasis{comparability}, a \sphinxstyleemphasis{split} and a \sphinxstyleemphasis{permutation} graph.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{graphs} \PYG{k+kn}{import} \PYG{n}{RandomIntervalIntersectionsGraph}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{RandomIntervalIntersectionsGraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{8}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{101}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{RandomIntervalIntersectionsGraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{8}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}
 \PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Graph instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
-\PYG{g+go}{Instance class   : RandomLineIntersectionsGraph}
+\PYG{g+go}{Instance class   : RandomIntervalIntersectionsGraph}
 \PYG{g+go}{Instance name    : randIntervalIntersections}
-\PYG{g+go}{Seed             : 101}
+\PYG{g+go}{Seed             : 100}
 \PYG{g+go}{Graph Order      : 8}
 \PYG{g+go}{Graph Size       : 23}
 \PYG{g+go}{Valuation domain : [\PYGZhy{}1.0; 1.0]}
@@ -5165,7 +5165,7 @@ To illustrate these \sphinxstyleemphasis{perfect} graph classes, we will generat
 \PYG{g+go}{Graph \PYGZsq{}dual\PYGZus{}randIntervalIntersections\PYGZsq{} is triangulated.}
 \PYG{g+go}{=\PYGZgt{} Graph \PYGZsq{}randIntervalIntersections\PYGZsq{} is a split graph.}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{isPermutationGraph}\PYG{p}{(}\PYG{n}{Comments}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}
-\PYG{g+go}{Graph \PYGZsq{}randIntervalIntersections\PYGZsq{} is transitively Orfientable.}
+\PYG{g+go}{Graph \PYGZsq{}randIntervalIntersections\PYGZsq{} is transitively orientable.}
 \PYG{g+go}{Graph \PYGZsq{}dual\PYGZus{}randIntervalIntersections\PYGZsq{} is transitively orientable.}
 \PYG{g+go}{=\PYGZgt{} Graph \PYGZsq{}randIntervalIntersections\PYGZsq{} is a permutation graph.}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{print}\PYG{p}{(}\PYG{n}{g}\PYG{o}{.}\PYG{n}{computePermutation}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
@@ -5320,7 +5320,7 @@ And it is \sphinxstyleemphasis{D} ; if we put to doubt his testimony that he saw
 \capstart
 
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{berge2}.png}
-\caption{The triangulated testominies graph}\label{\detokenize{tutorial:id126}}\end{figure}
+\caption{The triangulated testimonies graph}\label{\detokenize{tutorial:id126}}\end{figure}
 
 
 \subsection{Generating permutation graphs}
@@ -5531,7 +5531,7 @@ The resulting orientation of the edges of \sphinxstyleemphasis{g} (see Fig. 51) 
 \centering
 \capstart
 
-\noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{transOrientDualGraph}.png}
+\noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{transOrientDualGraph}.png}
 \caption{Transitive orientation of the dual graph \sphinxstyleemphasis{-g}}\label{\detokenize{tutorial:id133}}\end{figure}
 
 It is worthwhile noticing that the orientation of \sphinxstyleemphasis{g} is achieved with a \sphinxstyleemphasis{single implication class} covering all the vertices, whereas the orientation of the dual \sphinxstyleemphasis{-g} needs a decomposition into \sphinxstyleemphasis{three implication classes} marked in black, red and blue (see Fig.52).
@@ -5639,7 +5639,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{On tree graphs and graph forests}
-\label{\detokenize{tutorial:trees-tutorial-label}}\label{\detokenize{tutorial:on-tree-graphs-and-graph-forests}}
+\label{\detokenize{tutorial:on-tree-graphs-and-graph-forests}}\label{\detokenize{tutorial:trees-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -5962,7 +5962,18 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Links and appendices}
-\label{\detokenize{tutorial:links-and-appendices}}
+\label{\detokenize{tutorial:links-and-appendices}}\begin{itemize}
+\item {} 
+\sphinxhref{index.html}{Introduction}
+
+\item {} 
+\sphinxhref{techDoc.html}{Reference manual}
+
+\item {} 
+\sphinxhref{tutorial.html}{Tutorial}
+
+\end{itemize}
+
 
 \subsection{References}
 \label{\detokenize{tutorial:references}}
@@ -5973,56 +5984,56 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \bibitem[CPSTAT-L5]{\detokenize{CPSTAT-L5}}{\phantomsection\label{\detokenize{tutorial:cpstat-l5}} \begin{enumerate}
 \setcounter{enumi}{17}
 \item {} 
-Bisdorff (2017) \sphinxstyleemphasis{Simulating from abitrary empirical random distributions}. MICS Computational Statistics course, Lecture 5. FSTC/ILIAS University of Luxembourg, Winterr Semester 2017 (\sphinxhref{\_static/quantileEstimation-2x2.pdf}{PDF 2x2 reduced presentation slides 211kB downloadable here})
+Bisdorff (2017) \sphinxstyleemphasis{Simulating from abitrary empirical random distributions}. MICS Computational Statistics course, Lecture 5. FSTC/ILIAS University of Luxembourg, Winterr Semester 2017 (\sphinxhref{\_static/quantileEstimation-2x2.pdf}{PDF 2x2 reduced presentation slides 211kB downloadable here}).
 
 \end{enumerate}
 }
 \bibitem[BIS-2016]{\detokenize{BIS-2016}}{\phantomsection\label{\detokenize{tutorial:bis-2016}} \begin{enumerate}
 \setcounter{enumi}{17}
 \item {} 
-Bisdorff (2016). \sphinxstyleemphasis{On linear ranking from trillions of pairwise outranking situations}. Research Note 16-1, FSTC/ILIAS Decision Systems Group, University of Luxembourg pp. 1-6 (dowloadable  \sphinxhref{https://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RB.pdf}{PDF file 625.3 kB} (https://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RB.pdf))
+Bisdorff (2016). \sphinxstyleemphasis{On linear ranking from trillions of pairwise outranking situations}. Research Note 16-1, FSTC/ILIAS Decision Systems Group, University of Luxembourg pp. 1-6 (dowloadable  \sphinxhref{https://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RB.pdf}{PDF file 625.3 kB} (https://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RB.pdf)).
 
 \end{enumerate}
 }
 \bibitem[ADT-L2]{\detokenize{ADT-L2}}{\phantomsection\label{\detokenize{tutorial:adt-l2}} \begin{enumerate}
 \setcounter{enumi}{17}
 \item {} 
-Bisdorff (2014)  \sphinxstyleemphasis{Who wins the election}? MICS Algorithmic Decision Theory course, Lecture 2. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 ( \sphinxhref{\_static/adtVoting-2x2.pdf}{PDF 2x2 reduced presentation slides 195 kB downloadable here} )
+Bisdorff (2014)  \sphinxstyleemphasis{Who wins the election}? MICS Algorithmic Decision Theory course, Lecture 2. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 ( \sphinxhref{\_static/adtVoting-2x2.pdf}{PDF 2x2 reduced presentation slides 195 kB downloadable here}).
 
 \end{enumerate}
 }
 \bibitem[ADT-L7]{\detokenize{ADT-L7}}{\phantomsection\label{\detokenize{tutorial:adt-l7}} \begin{enumerate}
 \setcounter{enumi}{17}
 \item {} 
-Bisdorff (2014)  \sphinxstyleemphasis{Best multiple criteria choice: the Rubis outranking method}. MICS Algorithmic Decision Theory course, Lecture 7. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 (\sphinxhref{\_static/adtOutranking-2x2.pdf}{PDF 2x2 reduced slides 310kB downloadable here})
+Bisdorff (2014)  \sphinxstyleemphasis{Best multiple criteria choice: the Rubis outranking method}. MICS Algorithmic Decision Theory course, Lecture 7. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 (\sphinxhref{\_static/adtOutranking-2x2.pdf}{PDF 2x2 reduced slides 310kB downloadable here}).
 
 \end{enumerate}
 }
 \bibitem[BIS-2013]{\detokenize{BIS-2013}}{\phantomsection\label{\detokenize{tutorial:bis-2013}} \begin{enumerate}
 \setcounter{enumi}{17}
 \item {} 
-Bisdorff (2013) “On Polarizing Outranking Relations with Large Performance Differences” \sphinxstyleemphasis{Journal of Multi-Criteria Decision Analysis} (Wiley) \sphinxstylestrong{20}:3-12 (downloadable preprint \sphinxhref{https://leopold-loewenheim.uni.lu/bisdorff/documents/MCDA-10-0059-PrePeerReview.pdf}{PDF file 403.5 Kb} (https://leopold-loewenheim.uni.lu/bisdorff/documents/MCDA-10-0059-PrePeerReview.pdf))
+Bisdorff (2013) “On Polarizing Outranking Relations with Large Performance Differences” \sphinxstyleemphasis{Journal of Multi-Criteria Decision Analysis} (Wiley) \sphinxstylestrong{20}:3-12 (downloadable preprint \sphinxhref{https://leopold-loewenheim.uni.lu/bisdorff/documents/MCDA-10-0059-PrePeerReview.pdf}{PDF file 403.5 Kb} (https://leopold-loewenheim.uni.lu/bisdorff/documents/MCDA-10-0059-PrePeerReview.pdf)).
 
 \end{enumerate}
 }
 \bibitem[BIS-2012]{\detokenize{BIS-2012}}{\phantomsection\label{\detokenize{tutorial:bis-2012}} \begin{enumerate}
 \setcounter{enumi}{17}
 \item {} 
-Bisdorff (2012). “On measuring and testing the ordinal correlation between bipolar outranking relations”. In Proceedings of DA2PL’2012 \sphinxstyleemphasis{From Multiple Criteria Decision Aid to Preference Learning}, University of Mons 91-100. (downloadable preliminary version \sphinxhref{https://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RBisdorffMons.pdf}{PDF file 408.5 kB} (https://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RBisdorffMons.pdf) )
+Bisdorff (2012). “On measuring and testing the ordinal correlation between bipolar outranking relations”. In Proceedings of DA2PL’2012 \sphinxstyleemphasis{From Multiple Criteria Decision Aid to Preference Learning}, University of Mons 91-100. (downloadable preliminary version \sphinxhref{https://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RBisdorffMons.pdf}{PDF file 408.5 kB} (https://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RBisdorffMons.pdf) ).
 
 \end{enumerate}
 }
 \bibitem[BIS-2008]{\detokenize{BIS-2008}}{\phantomsection\label{\detokenize{tutorial:bis-2008}} \begin{enumerate}
 \setcounter{enumi}{17}
 \item {} 
-Bisdorff, P. Meyer and M. Roubens (2008) “RUBIS: a bipolar-valued outranking method for the choice problem”. 4OR, \sphinxstyleemphasis{A Quarterly Journal of Operations Research} Springer-Verlag, Volume 6,  Number 2 pp. 143-165. (Online) Electronic version: DOI: 10.1007/s10288-007-0045-5 (downloadable preliminary version \sphinxhref{https://leopold-loewenheim.uni.lu/bisdorff/documents/HyperKernels.pdf}{PDF file 271.5Kb} (https://leopold-loewenheim.uni.lu/bisdorff/documents/HyperKernels.pdf))
+Bisdorff, P. Meyer and M. Roubens (2008) “RUBIS: a bipolar-valued outranking method for the choice problem”. 4OR, \sphinxstyleemphasis{A Quarterly Journal of Operations Research} Springer-Verlag, Volume 6,  Number 2 pp. 143-165. (Online) Electronic version: DOI: 10.1007/s10288-007-0045-5 (downloadable preliminary version \sphinxhref{https://leopold-loewenheim.uni.lu/bisdorff/documents/HyperKernels.pdf}{PDF file 271.5Kb} (https://leopold-loewenheim.uni.lu/bisdorff/documents/HyperKernels.pdf)).
 
 \end{enumerate}
 }
 \bibitem[ISOMIS-08]{\detokenize{ISOMIS-08}}{\phantomsection\label{\detokenize{tutorial:isomis-08}} \begin{enumerate}
 \setcounter{enumi}{17}
 \item {} 
-Bisdorff and J.L. Marichal (2008). Counting non-isomorphic maximal independent sets of the n-cycle graph. \sphinxstyleemphasis{Journal of Integer Sequences}, Vol. 11 Article 08.5.7 (\sphinxhref{https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html}{openly accessible here} (https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html))
+Bisdorff and J.L. Marichal (2008). Counting non-isomorphic maximal independent sets of the n-cycle graph. \sphinxstyleemphasis{Journal of Integer Sequences}, Vol. 11 Article 08.5.7 (\sphinxhref{https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html}{openly accessible here} (https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html)).
 
 \end{enumerate}
 }
@@ -6035,7 +6046,7 @@ J.M. Chambers, D.A. James, D. Lambert and S. Vander Wiel (2006) “Monitoring Ne
 \bibitem[BIS-2006a]{\detokenize{BIS-2006a}}{\phantomsection\label{\detokenize{tutorial:bis-2006a}} \begin{enumerate}
 \setcounter{enumi}{17}
 \item {} 
-Bisdorff, M. Pirlot and M. Roubens (2006). “Choices and kernels from bipolar valued digraphs”. \sphinxstyleemphasis{European Journal of Operational Research}, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version \sphinxhref{https://sma.uni.lu/bisdorff/documents/BisdorffPirlotRoubens05.pdf}{PDF file 257.3Kb} (https://sma.uni.lu/bisdorff/documents/BisdorffPirlotRoubens05.pdf))
+Bisdorff, M. Pirlot and M. Roubens (2006). “Choices and kernels from bipolar valued digraphs”. \sphinxstyleemphasis{European Journal of Operational Research}, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version \sphinxhref{https://sma.uni.lu/bisdorff/documents/BisdorffPirlotRoubens05.pdf}{PDF file 257.3Kb} (https://sma.uni.lu/bisdorff/documents/BisdorffPirlotRoubens05.pdf)).
 
 \end{enumerate}
 }
@@ -6056,7 +6067,7 @@ Bisdorff (2004) \sphinxstyleemphasis{On a natural fuzzification of Boolean logic
 \bibitem[GOL-2004]{\detokenize{GOL-2004}}{\phantomsection\label{\detokenize{tutorial:gol-2004}} \begin{enumerate}
 \setcounter{enumi}{12}
 \item {} 
-Ch. Golumbic, \sphinxstyleemphasis{Agorithmic Graph Theory and Perfect Graphs} 2nd Ed., Annals of Discrete Mathematics 57, Elsevier.
+Ch. Golumbic (2004), \sphinxstyleemphasis{Agorithmic Graph Theory and Perfect Graphs} 2nd Ed., Annals of Discrete Mathematics 57, Elsevier.
 
 \end{enumerate}
 }
@@ -6101,8 +6112,4 @@ Kruskal (1956), \sphinxstyleemphasis{On the shortest spanning subtree of a graph
 }
 \end{sphinxthebibliography}
 
-
-
-\renewcommand{\indexname}{Index}
-\printindex
 \end{document}

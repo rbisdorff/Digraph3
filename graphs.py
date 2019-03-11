@@ -1185,6 +1185,7 @@ class Graph(object):
                        layout=None,
                        arcColor='black',
                        lineWidth=1,
+                        palette=1,
                         Debug=False):
         """
         Exports GraphViz dot file for oriented graph drawing filtering.
@@ -1245,18 +1246,41 @@ class Graph(object):
             fo.write(node)
 
         # reminder include a color palette in digraphsToold
-        colors = ['black',
-                  'blue',
-                  'coral',
-                  'gold',
-                  'gray',
-                  'black',
-                  'pink',
-                  'green',
-                  'orange',
-                  'skyblue',
-                  'wheat',
-                  'salmon']    
+        from digraphsTools import colorPalettes
+##        colors0 = ['black',
+##                  'blue',
+##                  'coral',
+##                  'gold',
+##                  'gray',
+##                  'black',
+##                  'pink',
+##                  'green',
+##                  'orange',
+##                  'skyblue',
+##                  'wheat',
+##                  'salmon']    
+##        colors1 = ['#EA2027',
+##                  '#006266',
+##                  '#1B1464',
+##                  '#5758BB',
+##                  '#6F1E51',
+##                  '#EE5A24',
+##                  '#009432',
+##                  '#0652DD',
+##                  '#9980FA',
+##                  '#833471',
+##                  '#F79F1F',
+##                  '#A3CB38',
+##                   '#1289A7',
+##                   '#D980FA',
+##                   '#B53471',
+##                   '#FFC312',
+##                   '#C4E538',
+##                   '#12CBC4',
+##                   '#FDA7DF',
+##                   '#ED4C67',
+##                   ]
+        colors = colorPalettes[palette]
         edgeColors = {}
         for edge in self.edges:
             if edges[edge] > Med:
@@ -1278,11 +1302,11 @@ class Graph(object):
                             print(arcColor,lineWidth)
                         if edgeOrientations[arc] > 0:
                             arrowFormat = \
-        ' [dir=forward,style="setlinewidth(%d)",color=%s, arrowhead=normal, arrowtail=none] ;\n' %\
+        ' [dir=forward,style="setlinewidth(%d)",color="%s", arrowhead=normal, arrowtail=none] ;\n' %\
                      (lineWidth,arcColor)
                         elif edgeOrientations[arc] < 0:
                             arrowFormat = \
-        ' [dir=back,style="setlinewidth(%d)",color=%s, arrowhead=none, arrowtail=normal] ;\n' %\
+        ' [dir=back,style="setlinewidth(%d)",color="%s", arrowhead=none, arrowtail=normal] ;\n' %\
                      (lineWidth,arcColor)
                         edge0 = edge+'-- n'+str(j+1)+arrowFormat
                         fo.write(edge0)                    
@@ -4335,7 +4359,7 @@ if __name__ == '__main__':
 ##    print(i.isTriangulated())
 ##    print((-i).isTriangulated())
 
-    ri = RandomGraph(order=8,seed=4435)
+    ri = RandomGraph(order=8,seed=4335)
     print(ri)
     #print(ri.intervals)
     #print(ri.isIntervalGraph(Comments=True))
@@ -4345,8 +4369,12 @@ if __name__ == '__main__':
     #ri.isSplitGraph(Comments=True)
     #ri.isPermutationGraph(Comments=True)
     #print(ri.computePermutation())
-    print(ri.isComparabilityGraph())
-    ri.exportEdgeOrientationsGraphViz('orientedGraph')
+    if ri.isComparabilityGraph():
+        ri.exportEdgeOrientationsGraphViz('testColors1')
+    rid = -ri
+    if rid.isComparabilityGraph():
+        rid.exportEdgeOrientationsGraphViz('testColors2',palette=2)
+    
     
 ##    rg = RandomPermutationGraph(order=6,seed=None)
 ##    print(rg)
