@@ -2480,59 +2480,53 @@ The performance evaluations of each decision alternative on each criterion are g
         else:
             criteriaList = argCriteriaList
 
-        if rankingRule == None:
-            rankingRule = 'Copeland'
-        #html += '<h3>Ranking rule: %s</h3>\n' % rankingRule
-        
-        na = len(self.actions)
-        if SparseModel:
-            from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
-            if quantiles == None:
-                if na < 100:
-                    q = 5
+        if argActionsList == None: # actions ranking is needed
+            if rankingRule == None:
+                rankingRule = 'Copeland'
+            
+            na = len(self.actions)
+            if SparseModel:
+                from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
+                if quantiles == None:
+                    if na < 100:
+                        q = 5
+                    else:
+                        q = None
                 else:
-                    q = None
-            else:
-                q = quantiles
-            g = PreRankedOutrankingDigraph(self,quantiles=q,LowerClosed=False,
-                                           minimalComponentSize=minimalComponentSize,
-                                       componentRankingRule=rankingRule,Threading=Threading,
-                                       nbrOfCPUs=nbrOfCPUs)
-            if argActionsList == None:
+                    q = quantiles
+                g = PreRankedOutrankingDigraph(self,quantiles=q,LowerClosed=False,
+                                               minimalComponentSize=minimalComponentSize,
+                                           componentRankingRule=rankingRule,Threading=Threading,
+                                           nbrOfCPUs=nbrOfCPUs)
                 actionsList = g.boostedRanking
-            else:
-                actionsList = argActionsList
-        else: # standard outranking model
-            if rankingRule == 'NetFlows':
-##                if quantiles == None:
-##                    quantiles = na
+                
+            else: # standard outranking model
                 from outrankingDigraphs import BipolarOutrankingDigraph
-                from linearOrders import NetFlowsOrder
                 g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
-                if argActionsList == None:
+                if rankingRule == 'NetFlows':
                     actionsList = g.computeNetFlowsRanking()
-                else:
-                    actionsList = argActionsList
-            else:
-##                if quantiles == None:
-##                    quantiles = na
-                from outrankingDigraphs import BipolarOutrankingDigraph
-                from linearOrders import CopelandOrder
-                g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
-                #actionsList = g.computeNetFlowsRanking()
-                cop = CopelandOrder(g)
-                if argActionsList == None:
-                    actionsList = cop.computeRanking()
-                else:
-                    actionsList = argActionsList
-        if SparseModel:
-            rankCorrelation = None
-        else:
-            rankCorrelation = g.computeOrderCorrelation(list(reversed(actionsList)))
-        if Debug:
-            print('1',actionsList)
-            print('2',rankCorrelation)
+                elif rankingRule == 'Kohler':
+                    actionsList = g.computeKohlerRanking()
+                elif rankingRule == 'RankedPairs':
+                    actionsList = g.computeRankedPairsOrder()
+                elif rankingRule == 'ArrowRaynaud':
+                    actionsList = g.computeArrowRaynaudRanking()
+                else: # default ranking rule
+                    actionsList = g.computeCopelandRanking()
 
+            if SparseModel:
+                rankCorrelation = None
+            else:
+                rankCorrelation = g.computeOrderCorrelation(list(reversed(actionsList)))
+            if Debug:
+                print('1',actionsList)
+                print('2',rankCorrelation)
+        else:  # actions list given
+            actionsList = argActionsList
+            Correlations = False
+            rankCorrelation = None
+            
+        ##########
         criteria = self.criteria
         if criteriaList == None:
             if Correlations:
@@ -2550,6 +2544,8 @@ The performance evaluations of each decision alternative on each criterion are g
                 criteriaCorrelation = None
         else:
             criteriaList = list(criteria.keys())
+            if argActionsList != None:
+                Correlations = False
             if Correlations:
                 criteriaCorrelation =\
                         g.computeMarginalVersusGlobalRankingCorrelations(\
@@ -2644,10 +2640,10 @@ The performance evaluations of each decision alternative on each criterion are g
         html += '</table>\n'
         if criteriaCorrelation != None:
             html += '<b>(*) tau:</b> <i>Ordinal (Kendall) correlation between marginal criterion and global ranking relation</i><br/>\n'
-        #if rankCorrelation != None:
-        html += '<i>Ranking rule</i>: <b>%s</b><br/>\n' % rankingRule
-        html += '<i>Ordinal (Kendall) correlation between global ranking and global outranking relation:</i> <b>%+.3f</b><br/>\n' % (rankCorrelation['correlation'])
-        html += '</body></html>'
+        if rankCorrelation != None:
+            html += '<i>Ranking rule</i>: <b>%s</b><br/>\n' % rankingRule
+            html += '<i>Ordinal (Kendall) correlation between global ranking and global outranking relation:</i> <b>%+.3f</b><br/>\n' % (rankCorrelation['correlation'])
+            html += '</body></html>'
         return html
 
     def computeWeightPreorder(self):
@@ -7300,7 +7296,12 @@ if __name__ == "__main__":
     t.showPerformanceTableau()
     nt = NormalizedPerformanceTableau(t)
     nt.showPerformanceTableau()
-    t.showHTMLPerformanceHeatmap(Correlations=True)
+    #t.showHTMLPerformanceHeatmap(Correlations=True)
+    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows')
+    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='Kohler')
+    t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='ArrowRaynaud')
+    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='Kohler')
+    
     #nt.showHTMLPerformanceHeatmap(Correlations=True)
 #     t.saveCSV('test')
 #     T = CSVPerformanceTableau('test',Debug=True)

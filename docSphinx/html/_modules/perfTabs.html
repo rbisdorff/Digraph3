@@ -2527,59 +2527,53 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">criteriaList</span> <span class="o">=</span> <span class="n">argCriteriaList</span>
 
-        <span class="k">if</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">rankingRule</span> <span class="o">=</span> <span class="s1">&#39;Copeland&#39;</span>
-        <span class="c1">#html += &#39;&lt;h3&gt;Ranking rule: %s&lt;/h3&gt;\n&#39; % rankingRule</span>
-        
-        <span class="n">na</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">SparseModel</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="k">import</span> <span class="n">PreRankedOutrankingDigraph</span>
-            <span class="k">if</span> <span class="n">quantiles</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">na</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
-                    <span class="n">q</span> <span class="o">=</span> <span class="mi">5</span>
+        <span class="k">if</span> <span class="n">argActionsList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span> <span class="c1"># actions ranking is needed</span>
+            <span class="k">if</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">rankingRule</span> <span class="o">=</span> <span class="s1">&#39;Copeland&#39;</span>
+            
+            <span class="n">na</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">SparseModel</span><span class="p">:</span>
+                <span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="k">import</span> <span class="n">PreRankedOutrankingDigraph</span>
+                <span class="k">if</span> <span class="n">quantiles</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">na</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+                        <span class="n">q</span> <span class="o">=</span> <span class="mi">5</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">q</span> <span class="o">=</span> <span class="kc">None</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">q</span> <span class="o">=</span> <span class="kc">None</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">q</span> <span class="o">=</span> <span class="n">quantiles</span>
-            <span class="n">g</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="n">q</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                           <span class="n">minimalComponentSize</span><span class="o">=</span><span class="n">minimalComponentSize</span><span class="p">,</span>
-                                       <span class="n">componentRankingRule</span><span class="o">=</span><span class="n">rankingRule</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span>
-                                       <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">argActionsList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">q</span> <span class="o">=</span> <span class="n">quantiles</span>
+                <span class="n">g</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="n">q</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                               <span class="n">minimalComponentSize</span><span class="o">=</span><span class="n">minimalComponentSize</span><span class="p">,</span>
+                                           <span class="n">componentRankingRule</span><span class="o">=</span><span class="n">rankingRule</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span>
+                                           <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
                 <span class="n">actionsList</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">boostedRanking</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">actionsList</span> <span class="o">=</span> <span class="n">argActionsList</span>
-        <span class="k">else</span><span class="p">:</span> <span class="c1"># standard outranking model</span>
-            <span class="k">if</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;NetFlows&#39;</span><span class="p">:</span>
-<span class="c1">##                if quantiles == None:</span>
-<span class="c1">##                    quantiles = na</span>
+                
+            <span class="k">else</span><span class="p">:</span> <span class="c1"># standard outranking model</span>
                 <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">BipolarOutrankingDigraph</span>
-                <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="k">import</span> <span class="n">NetFlowsOrder</span>
                 <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">argActionsList</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">argActionsList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;NetFlows&#39;</span><span class="p">:</span>
                     <span class="n">actionsList</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">()</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">actionsList</span> <span class="o">=</span> <span class="n">argActionsList</span>
-            <span class="k">else</span><span class="p">:</span>
-<span class="c1">##                if quantiles == None:</span>
-<span class="c1">##                    quantiles = na</span>
-                <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">BipolarOutrankingDigraph</span>
-                <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="k">import</span> <span class="n">CopelandOrder</span>
-                <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">argActionsList</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-                <span class="c1">#actionsList = g.computeNetFlowsRanking()</span>
-                <span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">argActionsList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">actionsList</span> <span class="o">=</span> <span class="n">cop</span><span class="o">.</span><span class="n">computeRanking</span><span class="p">()</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">actionsList</span> <span class="o">=</span> <span class="n">argActionsList</span>
-        <span class="k">if</span> <span class="n">SparseModel</span><span class="p">:</span>
-            <span class="n">rankCorrelation</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">rankCorrelation</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)))</span>
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">actionsList</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="n">rankCorrelation</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;Kohler&#39;</span><span class="p">:</span>
+                    <span class="n">actionsList</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeKohlerRanking</span><span class="p">()</span>
+                <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;RankedPairs&#39;</span><span class="p">:</span>
+                    <span class="n">actionsList</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankedPairsOrder</span><span class="p">()</span>
+                <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;ArrowRaynaud&#39;</span><span class="p">:</span>
+                    <span class="n">actionsList</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeArrowRaynaudRanking</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span> <span class="c1"># default ranking rule</span>
+                    <span class="n">actionsList</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
 
+            <span class="k">if</span> <span class="n">SparseModel</span><span class="p">:</span>
+                <span class="n">rankCorrelation</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">rankCorrelation</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)))</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="n">actionsList</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="n">rankCorrelation</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># actions list given</span>
+            <span class="n">actionsList</span> <span class="o">=</span> <span class="n">argActionsList</span>
+            <span class="n">Correlations</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">rankCorrelation</span> <span class="o">=</span> <span class="kc">None</span>
+            
+        <span class="c1">##########</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="k">if</span> <span class="n">criteriaList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">Correlations</span><span class="p">:</span>
@@ -2597,6 +2591,8 @@
                 <span class="n">criteriaCorrelation</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">criteriaList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">criteria</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">argActionsList</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">Correlations</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="k">if</span> <span class="n">Correlations</span><span class="p">:</span>
                 <span class="n">criteriaCorrelation</span> <span class="o">=</span>\
                         <span class="n">g</span><span class="o">.</span><span class="n">computeMarginalVersusGlobalRankingCorrelations</span><span class="p">(</span>\
@@ -2691,10 +2687,10 @@
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="k">if</span> <span class="n">criteriaCorrelation</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;b&gt;(*) tau:&lt;/b&gt; &lt;i&gt;Ordinal (Kendall) correlation between marginal criterion and global ranking relation&lt;/i&gt;&lt;br/&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="c1">#if rankCorrelation != None:</span>
-        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;i&gt;Ranking rule&lt;/i&gt;: &lt;b&gt;</span><span class="si">%s</span><span class="s1">&lt;/b&gt;&lt;br/&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">rankingRule</span>
-        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;i&gt;Ordinal (Kendall) correlation between global ranking and global outranking relation:&lt;/i&gt; &lt;b&gt;</span><span class="si">%+.3f</span><span class="s1">&lt;/b&gt;&lt;br/&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">rankCorrelation</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">])</span>
-        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/body&gt;&lt;/html&gt;&#39;</span>
+        <span class="k">if</span> <span class="n">rankCorrelation</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;i&gt;Ranking rule&lt;/i&gt;: &lt;b&gt;</span><span class="si">%s</span><span class="s1">&lt;/b&gt;&lt;br/&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">rankingRule</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;i&gt;Ordinal (Kendall) correlation between global ranking and global outranking relation:&lt;/i&gt; &lt;b&gt;</span><span class="si">%+.3f</span><span class="s1">&lt;/b&gt;&lt;br/&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">rankCorrelation</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">])</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/body&gt;&lt;/html&gt;&#39;</span>
         <span class="k">return</span> <span class="n">html</span></div>
 
 <div class="viewcode-block" id="PerformanceTableau.computeWeightPreorder"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeWeightPreorder">[docs]</a>    <span class="k">def</span> <span class="nf">computeWeightPreorder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -7347,7 +7343,12 @@
     <span class="n">t</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">()</span>
     <span class="n">nt</span> <span class="o">=</span> <span class="n">NormalizedPerformanceTableau</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
     <span class="n">nt</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">()</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1">#t.showHTMLPerformanceHeatmap(Correlations=True)</span>
+    <span class="c1">#t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule=&#39;NetFlows&#39;)</span>
+    <span class="c1">#t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule=&#39;Kohler&#39;)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;ArrowRaynaud&#39;</span><span class="p">)</span>
+    <span class="c1">#t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule=&#39;Kohler&#39;)</span>
+    
     <span class="c1">#nt.showHTMLPerformanceHeatmap(Correlations=True)</span>
 <span class="c1">#     t.saveCSV(&#39;test&#39;)</span>
 <span class="c1">#     T = CSVPerformanceTableau(&#39;test&#39;,Debug=True)</span>
