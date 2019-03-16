@@ -116,9 +116,6 @@ def testNonPrudentRankings():
     c = CondorcetDigraph(v)
     c.save('testcondorcet')
     c.showRelationTable()
-    c.computeRankedPairsOrder(Debug=True)
-    print(c.computeRankedPairsOrder())
-
     c.computeKemenyRanking(Debug=True)
     print(c.computeKemenyRanking(isProbabilistic=True, seed=1,sampleSize=500, Debug=True))
     c.computeSlaterOrder(Debug=True)

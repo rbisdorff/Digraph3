@@ -62,11 +62,12 @@ def testNetFlowsOrdering():
 
 def testOutFlowsOrdering():
     print("*==>> testing OutFlowsOrder Class ----*")
+    from linearOrders import _OutFlowsOrder
     t = RandomCBPerformanceTableau(numberOfActions=5)
     t.saveXMCDA2('testof')
     g = BipolarOutrankingDigraph(t)
     #g.showRelationTable()
-    ofo = OutFlowsOrder(g,coDual=False,Debug=True)
+    ofo = _OutFlowsOrder(g,coDual=False,Debug=True)
     print(ofo.computeOrder())
 
 def testRandomLinearOrders():
@@ -84,6 +85,7 @@ def testRandomLinearOrders():
 
 def testRankingCorrelations():
     print('*-------- Testing ranking qualities -------')
+    from linearOrders import _OutFlowsOrder
     t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=5,seed=100)
     g = BipolarOutrankingDigraph(t,Normalized=True)
     g.showRelationTable()
@@ -119,7 +121,7 @@ def testRankingCorrelations():
     nf.showScores()
     print()
     print('==>> out flows ordering:')
-    of = OutFlowsOrder(g)
+    of = _OutFlowsOrder(g)
     #g.showRelationTable()
     print(of.outFlowsRanking)
     print(of.outFlowsOrder)

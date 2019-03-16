@@ -9196,7 +9196,8 @@ class Digraph(object):
 
     def computeKohlerOrder(self):
         ranking = self._computeKohlerRankingDict()
-        return list(reversed(ranking))
+        res = [x for x in ranking]
+        return list(reversed(res))
     
     def computeKohlerRanking(self):
         ranking = self._computeKohlerRankingDict()
@@ -9240,14 +9241,15 @@ class Digraph(object):
         Renders a linear ordering from worst to best of the actions following Arrow&Raynaud's rule.
         """
         ranking = self._computeArrowRaynaudRankingDict()
-        return ranking
+        return [x for x in ranking]
     
     def computeArrowRaynaudRanking(self):
         """
         renders a linear ranking from best to worst of the actions following Arrow&Raynaud's rule.
         """
         ranking = self._computeArrowRaynaudRankingDict()
-        return list(reversed(ranking))
+        res = [x for x in ranking]
+        return list(reversed(res))
 
     def _computeCopelandRanking(self):
         """
@@ -9280,84 +9282,86 @@ class Digraph(object):
         ranking = self._computeCopelandRanking()
         return list(reversed(ranking))
 
-    def computeRankedPairsOrder(self,Cpp=False,Debug=False):
-        """
-        Renders an actions ordering from the worst to the best obtained from the
-        ranked pairs rule.
-        """
-        relation = self.relation
-        #actions = self.actions
-        actions = [x for x in self.actions]
-        actions.sort()
-
-        n = len(actions)
-
-        listPairs = []
-        for x,rx in relation.items():
-            for y,rxy in rx.items():
-                if x != y:
-                    listPairs.append((rxy,(x,y),x,y))
-        listPairs.sort(reverse=False)
-
-        g = IndeterminateDigraph(order=n)
-        g.actions = self.actions
-        g.valuationdomain = {'min':Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
-        Min = g.valuationdomain['min']
-        Max = g.valuationdomain['max']
-        Med = g.valuationdomain['med']
-        g.relation = {}
-        for x in g.actions:
-            g.relation[x] = {}
-            grx = g.relation[x]
-            for y in g.actions:
-                grx[y] = Min
-
-        rankedPairs = [x[1] for x in listPairs]
-        for pair in rankedPairs:
-            if Debug:
-                print('next pair: ', pair)
-            x = pair[0]
-            y = pair[1]
-            grxy = g.relation[x][y]
-            gryx = g.relation[y][x]
-            if grxy == Min and gryx == Min:
-                grxy = Max
-                g.gamma = g.gammaSets()
-                g.notGamma = g.notGammaSets()
-                if Cpp:
-                    circ = g.computeCppChordlessCircuits()
-                else:
-                    circ = g.computeChordlessCircuits()
-                if len(circ) != 0:
-                    if Debug:
-                        print(circ)
-                    grxy = Min
+##    def _computeRankedPairsOrder(self,Cpp=False,Debug=False):
+##        """
+##        Renders an actions ordering from the worst to the best obtained from the
+##        ranked pairs rule.
+##        """
+##        relation = self.relation
+##        #actions = self.actions
+##        actions = [x for x in self.actions]
+##        actions.sort()
+##
+##        n = len(actions)
+##
+##        listPairs = []
+##        for x,rx in relation.items():
+##            for y,rxy in rx.items():
+##                if x != y:
+##                    listPairs.append((rxy,(x,y),x,y))
+##        listPairs.sort(reverse=False)
+##        if Debug:
+##            print(listPairs)
+##
+##        g = IndeterminateDigraph(order=n)
+##        g.actions = self.actions
+##        g.valuationdomain = {'min':Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
+##        Min = g.valuationdomain['min']
+##        Max = g.valuationdomain['max']
+##        Med = g.valuationdomain['med']
+##        g.relation = {}
+##        for x in g.actions:
+##            g.relation[x] = {}
+##            grx = g.relation[x]
+##            for y in g.actions:
+##                grx[y] = Med
+##
+##        rankedPairs = [x[1] for x in listPairs]
+##        for pair in rankedPairs:
+##            if Debug:
+##                print('next pair: ', pair)
+##            x = pair[0]
+##            y = pair[1]
+##            grxy = g.relation[x][y]
+##            gryx = g.relation[y][x]
+##            if grxy == Min and gryx == Min:
+##                grxy = Max
+##                g.gamma = g.gammaSets()
+##                g.notGamma = g.notGammaSets()
+##                if Cpp:
+##                    circ = g.computeCppChordlessCircuits()
 ##                else:
+##                    circ = g.computeChordlessCircuits()
+##                if len(circ) != 0:
 ##                    if Debug:
-##                        print('added: (%s,%s) characteristic: %.2f' %\
-##                              (x,y, self.relation[x][y]))
-
-        g.gamma = g.gammaSets()
-
-        outdegrees = []
-        for x in g.actions:
-            outdegrees.append((len(g.gamma[x][0]),x))
-        outdegrees.sort(reverse=True)
-
-        rankedPairsOrder = []
-        for x in outdegrees:
-            rankedPairsOrder.append(x[1])
-        if Debug:
-            print('Ranked Pairs Order = ', rankedPairsOrder)
-        return rankedPairsOrder
-
-    def computeRankedPairsRanking(self):
-        """
-        Renders an actions ordering from the best to the worst obtained from the
-        ranked pairs rule.
-        """
-        ordering = self.computeRankedPairsOrder()
-        return list(reversed(ordering))
+##                        print(circ)
+##                    grxy = Min
+####                else:
+####                    if Debug:
+####                        print('added: (%s,%s) characteristic: %.2f' %\
+####                              (x,y, self.relation[x][y]))
+##
+##        g.gamma = g.gammaSets()
+##
+##        outdegrees = []
+##        for x in g.actions:
+##            outdegrees.append((len(g.gamma[x][0]),x))
+##        outdegrees.sort(reverse=True)
+##
+##        rankedPairsOrder = []
+##        for x in outdegrees:
+##            rankedPairsOrder.append(x[1])
+##        if Debug:
+##            print('Ranked Pairs Order = ', rankedPairsOrder)
+##        return rankedPairsOrder
+##
+##    def _computeRankedPairsRanking(self):
+##        """
+##        Renders an actions ordering from the best to the worst obtained from the
+##        ranked pairs rule.
+##        """
+##        ordering = self.computeRankedPairsOrder()
+##        return list(reversed(ordering))
 
     def computeKemenyRanking(self,isProbabilistic=False,
                            orderLimit=7, seed=None,

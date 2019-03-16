@@ -377,18 +377,17 @@ class;</p>
 <dd><p class="first">Additional tools for solving linearly ranking problems with the
 root <a class="reference external" href="techDoc.html#linearOrders.LinearOrder">LinearOrder</a>
 class;</p>
-<img src="_images/inheritance-2cf53f48115b98375782452a59ece957f4d7e943.png" alt="Inheritance diagram of linearOrders" usemap="#inheritance6ca036f5b8" class="inheritance"/>
+<img src="_images/inheritance-b7e050015bf20259aeb74a0dd11968cec5935eee.png" alt="Inheritance diagram of linearOrders" usemap="#inheritance6ca036f5b8" class="inheritance"/>
 <map id="inheritance6ca036f5b8" name="inheritance6ca036f5b8">
-<area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="5,179,139,204"/>
-<area shape="rect" id="node3" href="#linearOrders.LinearOrder" target="_top" title="abstract class for digraphs which represent" alt="" coords="187,179,369,204"/>
+<area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="5,153,139,179"/>
+<area shape="rect" id="node3" href="#linearOrders.LinearOrder" target="_top" title="abstract class for digraphs which represent" alt="" coords="187,153,369,179"/>
 <area shape="rect" id="node2" href="#linearOrders.CopelandOrder" target="_top" title="instantiates the Copèeland Order from" alt="" coords="434,5,637,31"/>
 <area shape="rect" id="node4" href="#linearOrders.KemenyOrder" target="_top" title="instantiates the exact Kemeny Order from" alt="" coords="438,55,633,80"/>
 <area shape="rect" id="node5" href="#linearOrders.KohlerOrder" target="_top" title="instantiates the Kohler Order from" alt="" coords="444,104,627,129"/>
 <area shape="rect" id="node6" href="#linearOrders.NetFlowsOrder" target="_top" title="instantiates the net flows Order from" alt="" coords="434,153,637,179"/>
-<area shape="rect" id="node7" href="#linearOrders.OutFlowsOrder" target="_top" title="instantiates the out flows Order from" alt="" coords="434,203,637,228"/>
-<area shape="rect" id="node8" href="#linearOrders.PrincipalOrder" target="_top" title="instantiates the order from the scores obtained by the first" alt="" coords="436,252,635,277"/>
-<area shape="rect" id="node9" href="#linearOrders.RandomLinearOrder" target="_top" title="Instantiates random linear orders" alt="" coords="417,301,653,327"/>
-<area shape="rect" id="node10" href="#linearOrders.RankedPairsOrder" target="_top" title="instantiates the Extended Prudent Ranked Pairs Order from" alt="" coords="424,351,647,376"/>
+<area shape="rect" id="node7" href="#linearOrders.PrincipalOrder" target="_top" title="instantiates the order from the scores obtained by the first" alt="" coords="436,203,635,228"/>
+<area shape="rect" id="node8" href="#linearOrders.RandomLinearOrder" target="_top" title="Instantiates random linear orders" alt="" coords="417,252,653,277"/>
+<area shape="rect" id="node9" href="#linearOrders.RankedPairsOrder" target="_top" title="instantiates the Extended Prudent Ranked Pairs Order from" alt="" coords="424,301,647,327"/>
 </map></dd>
 </dl>
 </li>
@@ -1340,20 +1339,6 @@ first rincipal eigenvector of the covariance of the valued outdegrees of self.</
 <code class="descname">computePrudentBetaLevel</code><span class="sig-paren">(</span><em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computePrudentBetaLevel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computePrudentBetaLevel" title="Permalink to this definition">¶</a></dt>
 <dd><p>computes alpha, ie the lowest valuation level, for which the
 bipolarly polarised digraph doesn’t contain a chordless circuit.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="digraphs.Digraph.computeRankedPairsOrder">
-<code class="descname">computeRankedPairsOrder</code><span class="sig-paren">(</span><em>Cpp=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeRankedPairsOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeRankedPairsOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders an actions ordering from the worst to the best obtained from the
-ranked pairs rule.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="digraphs.Digraph.computeRankedPairsRanking">
-<code class="descname">computeRankedPairsRanking</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeRankedPairsRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeRankedPairsRanking" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders an actions ordering from the best to the worst obtained from the
-ranked pairs rule.</p>
 </dd></dl>
 
 <dl class="method">
@@ -7830,19 +7815,6 @@ a given bipolar-valued Digraph instance</p>
 <dl class="method">
 <dt id="linearOrders.NetFlowsOrder.showScores">
 <code class="descname">showScores</code><span class="sig-paren">(</span><em>direction='descending'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/linearOrders.html#NetFlowsOrder.showScores"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linearOrders.NetFlowsOrder.showScores" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="linearOrders.OutFlowsOrder">
-<em class="property">class </em><code class="descclassname">linearOrders.</code><code class="descname">OutFlowsOrder</code><span class="sig-paren">(</span><em>other</em>, <em>coDual=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/linearOrders.html#OutFlowsOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linearOrders.OutFlowsOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#linearOrders.LinearOrder" title="linearOrders.LinearOrder"><code class="xref py py-class docutils literal"><span class="pre">linearOrders.LinearOrder</span></code></a></p>
-<p>instantiates the out flows Order from
-a given bipolar-valued Digraph instance</p>
-<dl class="method">
-<dt id="linearOrders.OutFlowsOrder.showScores">
-<code class="descname">showScores</code><span class="sig-paren">(</span><em>direction='descending'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/linearOrders.html#OutFlowsOrder.showScores"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linearOrders.OutFlowsOrder.showScores" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

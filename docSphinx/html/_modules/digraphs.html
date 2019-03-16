@@ -9243,7 +9243,8 @@
 
 <div class="viewcode-block" id="Digraph.computeKohlerOrder"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeKohlerOrder">[docs]</a>    <span class="k">def</span> <span class="nf">computeKohlerOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">ranking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computeKohlerRankingDict</span><span class="p">()</span>
-        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">ranking</span><span class="p">))</span></div>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ranking</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">res</span><span class="p">))</span></div>
     
 <div class="viewcode-block" id="Digraph.computeKohlerRanking"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeKohlerRanking">[docs]</a>    <span class="k">def</span> <span class="nf">computeKohlerRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">ranking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computeKohlerRankingDict</span><span class="p">()</span>
@@ -9287,14 +9288,15 @@
 <span class="sd">        Renders a linear ordering from worst to best of the actions following Arrow&amp;Raynaud&#39;s rule.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ranking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computeArrowRaynaudRankingDict</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">ranking</span></div>
+        <span class="k">return</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ranking</span><span class="p">]</span></div>
     
 <div class="viewcode-block" id="Digraph.computeArrowRaynaudRanking"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeArrowRaynaudRanking">[docs]</a>    <span class="k">def</span> <span class="nf">computeArrowRaynaudRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders a linear ranking from best to worst of the actions following Arrow&amp;Raynaud&#39;s rule.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ranking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computeArrowRaynaudRankingDict</span><span class="p">()</span>
-        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">ranking</span><span class="p">))</span></div>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ranking</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">res</span><span class="p">))</span></div>
 
     <span class="k">def</span> <span class="nf">_computeCopelandRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -9327,84 +9329,86 @@
         <span class="n">ranking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computeCopelandRanking</span><span class="p">()</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">ranking</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="Digraph.computeRankedPairsOrder"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeRankedPairsOrder">[docs]</a>    <span class="k">def</span> <span class="nf">computeRankedPairsOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Renders an actions ordering from the worst to the best obtained from the</span>
-<span class="sd">        ranked pairs rule.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span>
-        <span class="c1">#actions = self.actions</span>
-        <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
-        <span class="n">actions</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-
-        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
-
-        <span class="n">listPairs</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">rx</span> <span class="ow">in</span> <span class="n">relation</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">for</span> <span class="n">y</span><span class="p">,</span><span class="n">rxy</span> <span class="ow">in</span> <span class="n">rx</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">y</span><span class="p">:</span>
-                    <span class="n">listPairs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">rxy</span><span class="p">,(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">),</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
-        <span class="n">listPairs</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-        <span class="n">g</span> <span class="o">=</span> <span class="n">IndeterminateDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-1&#39;</span><span class="p">),</span> <span class="s1">&#39;med&#39;</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">),</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)}</span>
-        <span class="n">Min</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
-        <span class="n">Max</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
-        <span class="n">Med</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
-            <span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="n">grx</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
-                <span class="n">grx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
-
-        <span class="n">rankedPairs</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">listPairs</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">rankedPairs</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;next pair: &#39;</span><span class="p">,</span> <span class="n">pair</span><span class="p">)</span>
-            <span class="n">x</span> <span class="o">=</span> <span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-            <span class="n">grxy</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span>
-            <span class="n">gryx</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">grxy</span> <span class="o">==</span> <span class="n">Min</span> <span class="ow">and</span> <span class="n">gryx</span> <span class="o">==</span> <span class="n">Min</span><span class="p">:</span>
-                <span class="n">grxy</span> <span class="o">=</span> <span class="n">Max</span>
-                <span class="n">g</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
-                <span class="n">g</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
-                <span class="k">if</span> <span class="n">Cpp</span><span class="p">:</span>
-                    <span class="n">circ</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeCppChordlessCircuits</span><span class="p">()</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">circ</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeChordlessCircuits</span><span class="p">()</span>
-                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">circ</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                        <span class="nb">print</span><span class="p">(</span><span class="n">circ</span><span class="p">)</span>
-                    <span class="n">grxy</span> <span class="o">=</span> <span class="n">Min</span>
+<span class="c1">##    def _computeRankedPairsOrder(self,Cpp=False,Debug=False):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Renders an actions ordering from the worst to the best obtained from the</span>
+<span class="c1">##        ranked pairs rule.</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        relation = self.relation</span>
+<span class="c1">##        #actions = self.actions</span>
+<span class="c1">##        actions = [x for x in self.actions]</span>
+<span class="c1">##        actions.sort()</span>
+<span class="c1">##</span>
+<span class="c1">##        n = len(actions)</span>
+<span class="c1">##</span>
+<span class="c1">##        listPairs = []</span>
+<span class="c1">##        for x,rx in relation.items():</span>
+<span class="c1">##            for y,rxy in rx.items():</span>
+<span class="c1">##                if x != y:</span>
+<span class="c1">##                    listPairs.append((rxy,(x,y),x,y))</span>
+<span class="c1">##        listPairs.sort(reverse=False)</span>
+<span class="c1">##        if Debug:</span>
+<span class="c1">##            print(listPairs)</span>
+<span class="c1">##</span>
+<span class="c1">##        g = IndeterminateDigraph(order=n)</span>
+<span class="c1">##        g.actions = self.actions</span>
+<span class="c1">##        g.valuationdomain = {&#39;min&#39;:Decimal(&#39;-1&#39;), &#39;med&#39;: Decimal(&#39;0&#39;), &#39;max&#39;: Decimal(&#39;1&#39;)}</span>
+<span class="c1">##        Min = g.valuationdomain[&#39;min&#39;]</span>
+<span class="c1">##        Max = g.valuationdomain[&#39;max&#39;]</span>
+<span class="c1">##        Med = g.valuationdomain[&#39;med&#39;]</span>
+<span class="c1">##        g.relation = {}</span>
+<span class="c1">##        for x in g.actions:</span>
+<span class="c1">##            g.relation[x] = {}</span>
+<span class="c1">##            grx = g.relation[x]</span>
+<span class="c1">##            for y in g.actions:</span>
+<span class="c1">##                grx[y] = Med</span>
+<span class="c1">##</span>
+<span class="c1">##        rankedPairs = [x[1] for x in listPairs]</span>
+<span class="c1">##        for pair in rankedPairs:</span>
+<span class="c1">##            if Debug:</span>
+<span class="c1">##                print(&#39;next pair: &#39;, pair)</span>
+<span class="c1">##            x = pair[0]</span>
+<span class="c1">##            y = pair[1]</span>
+<span class="c1">##            grxy = g.relation[x][y]</span>
+<span class="c1">##            gryx = g.relation[y][x]</span>
+<span class="c1">##            if grxy == Min and gryx == Min:</span>
+<span class="c1">##                grxy = Max</span>
+<span class="c1">##                g.gamma = g.gammaSets()</span>
+<span class="c1">##                g.notGamma = g.notGammaSets()</span>
+<span class="c1">##                if Cpp:</span>
+<span class="c1">##                    circ = g.computeCppChordlessCircuits()</span>
 <span class="c1">##                else:</span>
+<span class="c1">##                    circ = g.computeChordlessCircuits()</span>
+<span class="c1">##                if len(circ) != 0:</span>
 <span class="c1">##                    if Debug:</span>
-<span class="c1">##                        print(&#39;added: (%s,%s) characteristic: %.2f&#39; %\</span>
-<span class="c1">##                              (x,y, self.relation[x][y]))</span>
-
-        <span class="n">g</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
-
-        <span class="n">outdegrees</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
-            <span class="n">outdegrees</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">gamma</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span><span class="n">x</span><span class="p">))</span>
-        <span class="n">outdegrees</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-        <span class="n">rankedPairsOrder</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">outdegrees</span><span class="p">:</span>
-            <span class="n">rankedPairsOrder</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ranked Pairs Order = &#39;</span><span class="p">,</span> <span class="n">rankedPairsOrder</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">rankedPairsOrder</span></div>
-
-<div class="viewcode-block" id="Digraph.computeRankedPairsRanking"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeRankedPairsRanking">[docs]</a>    <span class="k">def</span> <span class="nf">computeRankedPairsRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Renders an actions ordering from the best to the worst obtained from the</span>
-<span class="sd">        ranked pairs rule.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">ordering</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeRankedPairsOrder</span><span class="p">()</span>
-        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">ordering</span><span class="p">))</span></div>
+<span class="c1">##                        print(circ)</span>
+<span class="c1">##                    grxy = Min</span>
+<span class="c1">####                else:</span>
+<span class="c1">####                    if Debug:</span>
+<span class="c1">####                        print(&#39;added: (%s,%s) characteristic: %.2f&#39; %\</span>
+<span class="c1">####                              (x,y, self.relation[x][y]))</span>
+<span class="c1">##</span>
+<span class="c1">##        g.gamma = g.gammaSets()</span>
+<span class="c1">##</span>
+<span class="c1">##        outdegrees = []</span>
+<span class="c1">##        for x in g.actions:</span>
+<span class="c1">##            outdegrees.append((len(g.gamma[x][0]),x))</span>
+<span class="c1">##        outdegrees.sort(reverse=True)</span>
+<span class="c1">##</span>
+<span class="c1">##        rankedPairsOrder = []</span>
+<span class="c1">##        for x in outdegrees:</span>
+<span class="c1">##            rankedPairsOrder.append(x[1])</span>
+<span class="c1">##        if Debug:</span>
+<span class="c1">##            print(&#39;Ranked Pairs Order = &#39;, rankedPairsOrder)</span>
+<span class="c1">##        return rankedPairsOrder</span>
+<span class="c1">##</span>
+<span class="c1">##    def _computeRankedPairsRanking(self):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Renders an actions ordering from the best to the worst obtained from the</span>
+<span class="c1">##        ranked pairs rule.</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        ordering = self.computeRankedPairsOrder()</span>
+<span class="c1">##        return list(reversed(ordering))</span>
 
 <div class="viewcode-block" id="Digraph.computeKemenyRanking"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeKemenyRanking">[docs]</a>    <span class="k">def</span> <span class="nf">computeKemenyRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">isProbabilistic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                            <span class="n">orderLimit</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
