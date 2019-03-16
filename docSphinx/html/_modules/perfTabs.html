@@ -2555,7 +2555,9 @@
                 <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;Kohler&#39;</span><span class="p">:</span>
                     <span class="n">actionsList</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeKohlerRanking</span><span class="p">()</span>
                 <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;RankedPairs&#39;</span><span class="p">:</span>
-                    <span class="n">actionsList</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankedPairsOrder</span><span class="p">()</span>
+                    <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="k">import</span> <span class="n">RankedPairsOrder</span>
+                    <span class="n">rp</span> <span class="o">=</span> <span class="n">RankedPairsOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+                    <span class="n">actionsList</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">computeRanking</span><span class="p">()</span>
                 <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;ArrowRaynaud&#39;</span><span class="p">:</span>
                     <span class="n">actionsList</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeArrowRaynaudRanking</span><span class="p">()</span>
                 <span class="k">else</span><span class="p">:</span> <span class="c1"># default ranking rule</span>

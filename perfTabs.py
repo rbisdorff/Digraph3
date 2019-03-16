@@ -2508,7 +2508,9 @@ The performance evaluations of each decision alternative on each criterion are g
                 elif rankingRule == 'Kohler':
                     actionsList = g.computeKohlerRanking()
                 elif rankingRule == 'RankedPairs':
-                    actionsList = g.computeRankedPairsOrder()
+                    from linearOrders import RankedPairsOrder
+                    rp = RankedPairsOrder(g)
+                    actionsList = rp.computeRanking()
                 elif rankingRule == 'ArrowRaynaud':
                     actionsList = g.computeArrowRaynaudRanking()
                 else: # default ranking rule
