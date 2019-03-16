@@ -531,6 +531,189 @@ class RandomStdPerformanceGenerator(RandomPerformanceGenerator):
                 
 ##################
 #-----------------
+class RandomAcademicPerformanceTableau(PerformanceTableau):
+    """
+    Specialization of the PerformanceTableau class for generating a temporary
+    academic performance tableau.
+
+    Random generator for performances of a number Of Students in different academic courses.
+    
+    *Parameters*:
+        * number of students,
+        * number of courses,
+        * weightDistribution := equisignificant | random (default, see RandomPerformanceTableau)
+        * weightScale := (1, 1 | numberOfCriteria (default when random))
+        * IntegerWeights := Boolean (True = default)
+        * commonScale := (0,20) (default)
+        * ndigits := 0
+        * commonMode := ('triangular',xm=14,r=0.25)
+        * commonThresholds (default) := {
+            | 'ind':(0,0),
+            | 'pref':(1,0),
+            | } (default)
+
+    """
+    def __init__(self,numberOfStudents = 13, numberOfCourses = 7,\
+                 weightDistribution = 'random', weightScale=None,\
+                 commonScale = (0,20), ndigits = 0,\
+                 commonMode = ('triangular',14,0.25),\
+                 commonThresholds = None, IntegerWeights=True,\
+                 BigData=False, missingDataProbability = 0.0,\
+                 seed = None,\
+                 Debug = False):
+        """
+        """
+
+        # set random seed
+        self.randomSeed = seed
+        import random
+        random.seed(seed)
+
+        # set name
+        self.name = 'randstudPerf'
+
+        # generate actions
+        numberOfActions = numberOfStudents
+        nd = len(str(numberOfActions))
+        actions = OrderedDict()
+        for i in range(numberOfActions):
+            if BigData:
+                actionName = ('s%%0%dd' % (nd)) % (i+1)
+                actions[i] = {'name': actionName}
+            else:   
+                actionKey = ('s%%0%dd' % (nd)) % (i+1)
+                actions[actionKey] = {'shortName':actionKey,
+                        'name': 'student',
+                        'comment': 'RandomAcademicPerformanceTableau() generated.' }
+        # generate the criteria weights
+        numberOfCriteria = numberOfCourses 
+        if weightScale == None:
+            weightScale = (1,numberOfCriteria)
+        if weightDistribution == 'random':
+            weightsList = []
+            sumWeights = Decimal('0.0')
+            i = 0
+            for i in range(numberOfCriteria):
+                weightsList.append(Decimal(str(random.randint(weightScale[0],weightScale[1]))))
+                sumWeights += weightsList[i]
+            weightsList.reverse()
+        elif weightDistribution == 'equisignificant':
+            weightScale = (1,1)
+            weightsList = [Decimal(str(weightScale[0])) for i in range(numberOfCriteria)]
+            sumWeights = sum(weightsList)
+        else:
+            print('!!! Error: wrong course weight distribution mode: %s !!!!' % (weightDistribution))
+
+        # generate criteria dictionary
+        ngd = len(str(numberOfCriteria))
+        criteria = OrderedDict()
+        commentString = 'Arguments: '
+        commentString += '; weightDistribution='+str(weightDistribution)
+        commentString += '; weightScale='+str(weightScale)
+        commentString += '; IntegerWeights='+str(IntegerWeights)
+        commentString += '; commonThresholds='+str(commonThresholds)
+    
+        for i in range(numberOfCriteria):
+            g = ('g%%0%dd' % ngd) % (i+1)
+            criteria[g] = {}
+            criteria[g]['name']='RandomAcademicPerformanceTableau() instance'
+            criteria[g]['comment']=commentString
+            try:
+                indThreshold  =(Decimal(str(commonThresholds['ind'][0])),
+                                Decimal(str(commonThresholds['ind'][1])))
+                prefThreshold =(Decimal(str(commonThresholds['pref'][0])),
+                                Decimal(str(commonThresholds['pref'][1])))
+                
+##                vetoThreshold =(Decimal(str(commonThresholds['veto'][0])),
+##                                Decimal(str(commonThresholds['veto'][1])))
+             
+                criteria[g]['thresholds'] = {'ind':indThreshold,
+                                             'pref':prefThreshold}
+##                                             'veto':vetoThreshold}
+            except:
+                indThreshold  = ( Decimal("0"), Decimal("0") )
+                prefThreshold = ( Decimal("1"), Decimal("0") )
+#                vetoThreshold = ( Decimal(str(numberOfActions)), Decimal("0") )               
+                criteria[g]['thresholds'] = { 'ind':indThreshold,\
+                                              'pref':prefThreshold,
+ #                                             'veto': vetoThreshold
+                                              }
+            criteria[g]['scale'] = commonScale
+                                             
+            if IntegerWeights:
+                criteria[g]['weight'] = weightsList[i]
+            else:
+                criteria[g]['weight'] = weightsList[i]/sumWeights
+                
+        # generate evaluations
+        # generate random evaluation
+        digits = ndigits
+        evaluation = {}
+        
+        if str(commonMode[0]) == 'uniform':          
+            for g in criteria:
+                evaluation[g] = {}
+                randeval = random.uniform(commonScale[0],commonScale[1])
+                evaluation[g] = Decimal(str(round(randeval,digits)))
+                    
+        elif str(commonMode[0]) == 'triangular':
+            from randomNumbers import ExtendedTriangularRandomVariable as RNGTr
+            rng = RNGTr(commonScale[0],commonScale[1],commonMode[1],commonMode[2],seed=seed)
+            for g in criteria:
+                evaluation[g] = Decimal(str(round(rng.random(),digits)))
+                    
+        elif str(commonMode[0]) == 'beta':
+            m = commonScale[0]
+            M = commonScale[1]
+            if commonMode[1] == None:
+                xm = 0.5
+            else:
+                xm = commonMode[1]
+                
+            if commonMode[2] == None:
+                if xm > 0.5:
+                    beta = 2.0
+                    alpha = 1.0/(1-xm)
+                else:
+                    alpha = 2.0
+                    beta = 1.0/xm
+            else:
+                alpha = commonMode[2][0]
+                beta = commonMode[2][1]
+            if Debug:
+                print('alpha,beta', alpha,beta)
+            for g in criteria:
+                u = random.betavariate(alpha,beta)
+                randeval = (u * (M-m)) + m
+                evaluation[g] = Decimal(str(round(randeval,digits)))
+
+        # randomly insert missing data
+        for c in criteria:
+            if random.random() < missingDataProbability:
+                evaluation[c] = Decimal('-999')
+
+
+
+
+
+
+        evaluation = {}       
+        for g in criteria:
+            evaluation[g] = {}
+            choiceRange = list(range(commonScale[0],commonScale[1]))
+            for s in actions:                                
+                randeval = random.choice(choiceRange)
+                evaluation[g][s] = Decimal( str(randeval) )
+                choiceRange.remove(randeval)
+
+        # install object items
+        self.actions = actions
+        self.criteria = criteria
+        self.evaluation = evaluation
+        self.weightPreorder = self.computeWeightPreorder()
+                                             
+    
+#-----------------
 class RandomRankPerformanceTableau(PerformanceTableau):
     """
     Specialization of the PerformanceTableau class for generating a temporary
@@ -2931,7 +3114,16 @@ if __name__ == "__main__":
     from outrankingDigraphs import BipolarOutrankingDigraph
 #    from weakOrders import QuantilesRankingDigraph
     from randomPerfTabs import *
-    from time import time
+    t = RandomAcademicPerformanceTableau(numberOfStudents=10,numberOfCourses=5,
+                                         commonMode=('uniform',None,None))
+    print(t)
+    #t.showHTMLPerformanceTableau(ndigits=0)
+    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,ndigits=0)
+                                             
+
+
+
+##    from time import time
 ##    t0 = time()
 ##    t = RandomCBPerformanceTableau(numberOfActions=20,
 ##                                   numberOfCriteria=13,
@@ -2976,22 +3168,22 @@ if __name__ == "__main__":
 ##    print('*---------- test percentiles of variable thresholds --------*') 
 ####    t = RandomCoalitionsPerformanceTableau(weightDistribution='equicoalitions',
 ####                                           seed=100)
-    t = Random3ObjectivesPerformanceTableau(numberOfActions=10,OrdinalScales=True,
-                                            commonScale=(0.0,10.0),
-                                            commonThresholds=((0.1,0.0),(0.2,0.0),(0.6,0.0)),
-                                           seed=100)
-    t.showAll()
-    rag1 = Random3ObjectivesPerformanceGenerator(t,\
-                actionNamePrefix='b',seed=100)
-    sampleSize = 5
-    rag1.randomActions(sampleSize)
-    #t.showHTMLPerformanceHeatmap(Correlations=True)
-    rag2 = Random3ObjectivesPerformanceGenerator(t,actionNamePrefix='c',seed=110)
-    #rag2.randomUpdate(nbrOfRandomActions=5)
-    print(rag2.randomActions(2))
-    ntp = rag2.randomPerformanceTableau(nbrOfRandomActions=10)
-    #t.showHTMLPerformanceHeatmap(ndigits=0,Correlations=True)
-    # t.updateDiscriminationThresholds(Comments=True,Debug=True)
+##    t = Random3ObjectivesPerformanceTableau(numberOfActions=10,OrdinalScales=True,
+##                                            commonScale=(0.0,10.0),
+##                                            commonThresholds=((0.1,0.0),(0.2,0.0),(0.6,0.0)),
+##                                           seed=100)
+##    t.showAll()
+##    rag1 = Random3ObjectivesPerformanceGenerator(t,\
+##                actionNamePrefix='b',seed=100)
+##    sampleSize = 5
+##    rag1.randomActions(sampleSize)
+##    #t.showHTMLPerformanceHeatmap(Correlations=True)
+##    rag2 = Random3ObjectivesPerformanceGenerator(t,actionNamePrefix='c',seed=110)
+##    #rag2.randomUpdate(nbrOfRandomActions=5)
+##    print(rag2.randomActions(2))
+##    ntp = rag2.randomPerformanceTableau(nbrOfRandomActions=10)
+##    #t.showHTMLPerformanceHeatmap(ndigits=0,Correlations=True)
+##    # t.updateDiscriminationThresholds(Comments=True,Debug=True)
     
     
 ##
