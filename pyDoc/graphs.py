@@ -2,7 +2,7 @@
 """
   Digraph3 graphs.py module
   Python3.3+ computing resources
-  Copyright (C)  2011-2015 Raymond Bisdorff
+  Copyright (C)  2011-2019 Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,6 +17,7 @@
     You should have received a copy of the GNU General Public License along
     with this program; if not, write to the Free Software Foundation, Inc.,
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+    
 """
 #############################################
 from decimal import Decimal
@@ -68,9 +69,21 @@ class Graph(object):
         reprString = '*------- Graph instance description ------*\n'
         reprString += 'Instance class   : %s\n' % self.__class__.__name__
         reprString += 'Instance name    : %s\n' % self.name
+        try:
+            reprString += 'Seed             : %s\n' % str(self.seed)      
+        except AttributeError:
+            pass
+        try:
+            reprString += 'Edge Probability     : %s\n' % str(self.edgeProbability)      
+        except AttributeError:
+            pass
         reprString += 'Graph Order      : %d\n' % self.order
+        try:
+            reprString += 'Permutation      : %s\n' % str(self.permutation)
+        except AttributeError:
+            pass
         reprString += 'Graph Size       : %d\n' % self.computeSize()
-        reprString += 'Valuation domain : [%.2f - %.2f]\n'\
+        reprString += 'Valuation domain : [%.2f; %.2f]\n'\
                       % (self.valuationDomain['min'],self.valuationDomain['max'])
         reprString += 'Attributes       : %s\n' % list(self.__dict__.keys())
        
@@ -634,7 +647,22 @@ class Graph(object):
                 if nbDepths[i+1] != 0:
                     diameter = order - (i+1)
                     break
-        return diameter
+        return diameter                       
+                
+    def computeMaximumMatching(self,Comments=False):
+        """
+        Renders a maximum matching in *self* by computing
+        a maximum MIS of the line graph of *self*.
+        """
+        from graphs import LineGraph
+        ls = LineGraph(self)
+        ls.computeMIS()
+        matchings = [(len(mis),mis) for mis in ls.misset]
+        ms = sorted(matchings,reverse=True)
+        if Comments:
+            for mis in ms:
+                print(mis)
+        return ms[0][1] # skipping the length argument
 
     def computeMIS(self,Comments=False):
         """
@@ -737,6 +765,215 @@ class Graph(object):
 
         return vecNeighbourhoodDepth
 
+    def computeOrientedDigraph(self,PartiallyDetermined=False):
+        """
+        Renders a digraph where each edge of the permutation graph *self*
+        is converted into an arc oriented in increasing order of the adjacent vertices' numbers.
+        If self is a PermutationGraph instance, the orientation will be transitive.
+
+        The parameter *PartiallyDetermined*: {True|False by default], converts if *True* all absent
+        edges of the graph into indeterminate symmetric relations in the resulting digraph.
+     
+        >>> g = RandomGraph(order=6,seed=101)
+        >>> dg = g.computeOrientedDigraph()
+        >>> dg
+        *------- Digraph instance description ------*
+        Instance class   : Digraph
+        Instance name    : oriented_randomGraph
+        Digraph Order      : 6
+        Digraph Size       : 5
+        Valuation domain : [-1.00; 1.00]
+        Determinateness  : 100.000
+        Attributes       : ['name','order','actions','valuationdomain',
+                            'relation', 'gamma', 'notGamma',
+                            'size', 'transitivityDegree']
+        >>> dg.tansitivityDegree
+        Decimal('0.7142857142857142857142857143')
+        
+        """
+        from digraphs import Digraph, EmptyDigraph
+        from copy import deepcopy
+        
+        g = EmptyDigraph(order=self.order)
+        g.__class__ = Digraph
+        g.name = 'oriented_'+self.name
+        g.actions = deepcopy(self.vertices)
+        g.valuationdomain = deepcopy(self.valuationDomain)
+        Max = g.valuationdomain['max']
+        Min = g.valuationdomain['min']
+        Med = g.valuationdomain['med']
+        relation = {}
+        actionKeysList = [a for a in g.actions]
+        for x in actionKeysList:
+            relation[x] = {}
+            for y in actionKeysList:
+                relation[x][y] = Med
+        n = len(actionKeysList)
+        for i in range(n):
+            x = actionKeysList[i]
+            relation[x][x] = Med
+            for j in range(i+1,n):
+                y = actionKeysList[j]
+                if self.edges[frozenset([x,y])] > Med:
+                        relation[x][y] = Max
+                        relation[y][x] = Min
+                elif self.edges[frozenset([x,y])] < Med:
+                    relation[x][y] = Min
+                    relation[y][x] = Min
+                else:
+                    relation[x][y] = Med
+                    relation[y][x] = Med
+                        
+        if PartiallyDetermined:
+            for i in range(n):
+                x = actionKeysList[i]
+                for j in range(i+1,n):
+                    y = actionKeysList[j]
+                    if relation[x][y] < Med and relation[y][x] < Med:
+                        relation[x][y] = Med
+                        relation[y][x] = Med
+                        
+        g.relation = relation
+        g.size = g.computeSize()
+        g.gamma = g.gammaSets()
+        g.notGamma = g.notGammaSets()
+        g.transitivityDegree = g.computeTransitivityDegree()
+        return g
+
+    def computeTransitivelyOrientedDigraph(self,PartiallyDetermined=False,Debug=False):
+        """
+        Renders a digraph where each edge of the permutation graph *self*
+        is converted into an arc oriented in increasing order of the ranks of implication classes
+        detected with the :py:func:`digraphs.Digraph.isComparabilityGraph` test and stored in self.edgeOrientations.
+
+        The parameter *PartiallyDetermined*: {True|False (by default), converts if *True* all absent
+        edges of the graph into indeterminate symmetric relations in the resulting digraph.
+        Verifies if the graph instance is a comparability graph.
+        
+        *Source*: M. Ch. Golumbic (2004) Algorithmic Graph Thery and Perfect Graphs,
+        Annals of Discrete Mathematics 57, Elsevier, p. 129-132.
+     
+        >>> g = RandomGraph(order=6,edgeProbability=0.5,seed=100)
+        >>> og = g.computeTransitivelyOrientedDigraph()
+        >>> if og != None:
+        ...     print(og)
+        ...     print('Transitivity degree: %.3f' % og.transitivityDegree)
+        *------- Digraph instance description ------*
+        Instance class   : WeakOrder
+        Instance name    : trans_oriented_randomGraph
+        Digraph Order      : 6
+        Digraph Size       : 7
+        Valuation domain : [-1.00 - 1.00]
+        Determinateness  : 46.667
+        Attributes       : ['name', 'order', 'actions', 'valuationdomain', 'relation',
+                           'gamma', 'notGamma', 'size', 'transitivityDegree']
+        Transitivity degree: 1.000
+        >>> gd = -g
+        >>> ogd = gd.computeTransitivelyOrientedDigraph()
+        >>> if ogd != None:
+        ...     print(odg)
+        ...     print('Dual transitivity degree: %.3f' % ogd.transitivityDegree)
+        *------- Digraph instance description ------*
+        Instance class   : WeakOrder
+        Instance name    : trans_oriented_dual_randomGraph
+        Digraph Order      : 6
+        Digraph Size       : 8
+        Valuation domain : [-1.00 - 1.00]
+        Determinateness  : 53.333
+        Attributes       : ['name', 'order', 'actions', 'valuationdomain', 'relation',
+                            'gamma', 'notGamma', 'size', 'transitivityDegree']
+        Dual transitivity degree: 1.000
+        """
+        from digraphs import EmptyDigraph
+        from weakOrders import WeakOrder
+        from copy import deepcopy
+
+        if not self.isComparabilityGraph():
+            print('The graph %s does not admit a transitive orientation.' % self.name)
+        else:
+            if Debug:
+                for arc in self.edgeOrientations:
+                    print(arc, self.edgeOrientations[arc])
+            g = EmptyDigraph(order=self.order)
+            g.__class__ = WeakOrder
+            g.name = 'trans_oriented_'+self.name
+            g.actions = deepcopy(self.vertices)
+            g.valuationdomain = deepcopy(self.valuationDomain)
+            Max = g.valuationdomain['max']
+            Min = g.valuationdomain['min']
+            Med = g.valuationdomain['med']
+            relation = {}
+            actionKeysList = [a for a in g.actions]
+            for x in actionKeysList:
+                relation[x] = {}
+                for y in actionKeysList:
+                    relation[x][y] = Med
+            n = len(actionKeysList)
+            for i in range(n):
+                x = actionKeysList[i]
+                relation[x][x] = Med
+                for j in range(n):
+                    y = actionKeysList[j]
+                    if self.edgeOrientations[x,y] > 0:
+                            relation[x][y] = Max
+                    elif self.edgeOrientations[x,y] < 0:
+                        relation[x][y] = Min
+                    else:
+                        relation[x][y] = Med            
+            if PartiallyDetermined:
+                for i in range(n):
+                    x = actionKeysList[i]
+                    for j in range(i+1,n):
+                        y = actionKeysList[j]
+                        if relation[x][y] < Med and relation[y][x] < Med:
+                            relation[x][y] = Med
+                            relation[y][x] = Med
+            g.relation = relation
+            g.closeTransitive()
+            g.size = g.computeSize()
+            g.gamma = g.gammaSets()
+            g.notGamma = g.notGammaSets()
+            g.transitivityDegree = g.computeTransitivityDegree()
+            return g
+
+
+    def computePermutation(self,seq1=None,seq2=None,Comments=True):
+        """
+        Tests whether the graph instance *self* is a permutation graph
+        and renders, in case the test is positive,
+        the corresponding permutation.
+        """
+        from digraphs import FusionDigraph
+        if seq1 == None or seq2 == None:
+            og = self.computeTransitivelyOrientedDigraph(PartiallyDetermined=True)
+            odt = og.computeTransitivityDegree()
+            if odt < Decimal('1'):
+                if Comments:
+                    print('Transitivity degree %.3f < 1' % odt)
+                    print('The graph instance is not a permutation graph')
+                return
+            gd = -self
+            ogd = gd.computeTransitivelyOrientedDigraph(PartiallyDetermined=True)
+            ogdt = ogd.computeTransitivityDegree()
+            if ogdt < Decimal('1'):
+                if Comments:
+                    print('Dual transitivity degree %.3f < 1' % ogdt)
+                    print('The graph instance is not a permutation graph')
+                return
+            
+            f1 = FusionDigraph(og,ogd,'o-max')
+            f2 = FusionDigraph((-og),ogd,'o-max')
+            seq1 = f1.computeCopelandRanking()
+            if Comments:
+                print(seq1)
+            seq2 = f2.computeCopelandRanking()
+            if Comments:
+                print(seq2)
+        permutation = [0 for j in range(self.order)]
+        for j in range(self.order):
+            permutation[seq2.index(seq1[j])] = j+1
+        return permutation
+
     def computeSize(self):
         """
         Renders the number of positively characterised edges of this graph instance
@@ -762,7 +999,7 @@ class Graph(object):
             self.vertices[x]['color'] = 1
             ## self.date += 1
             self.vertices[x]['startDate'] = self.date
-            self.dfsx.append(x)
+            self._dfsx.append(x)
             if Debug:
                 print(' dfs %s, date = %d' % (str(self.dfs),  self.vertices[x]['startDate']))
             nextVertices = [y for y in self.gamma[x]]
@@ -774,7 +1011,7 @@ class Graph(object):
                     self.date += 1
                     visitVertex(self,y, Debug = Debug)
                     if self.vertices[x]['color'] == 1:
-                        self.dfsx.append(x)
+                        self._dfsx.append(x)
             self.vertices[x]['color'] = 2
             self.vertices[x]['endDate'] = self.date
             self.date += 1
@@ -792,12 +1029,12 @@ class Graph(object):
             verticesList = [x for x in self.vertices]
             verticesList.sort()
             for x in verticesList:
-                self.dfsx = []
+                self._dfsx = []
                 if self.vertices[x]['color'] == 0:
                     if Debug:
                         print('==>> Starting from %s ' % x)
                     visitVertex(self, x, Debug = Debug)
-                    self.dfs.append(self.dfsx)
+                    self.dfs.append(self._dfsx)
                 #self.vertices[x]['color'] = 2
                 #self.vertices[x]['endDate'] = self.date
 
@@ -807,9 +1044,11 @@ class Graph(object):
         return self.dfs
 
     def exportGraphViz(self,fileName=None,verticesSubset=None,
-                       noSilent=True,
+                       Comments=True,
                        graphType='png',graphSize='7,7',
-                       withSpanningTree=False,
+                       WithSpanningTree=False,
+                       WithVertexColoring=False,
+                       matching=None,
                        layout=None,
                        arcColor='black',
                        lineWidth=1):
@@ -826,7 +1065,7 @@ class Graph(object):
            :align: center
         """
         import os
-        if noSilent:
+        if Comments:
             print('*---- exporting a dot file for GraphViz tools ---------*')
         if verticesSubset == None:
             vertexkeys = [x for x in self.vertices]
@@ -841,7 +1080,7 @@ class Graph(object):
         else:
             name = fileName
         dotName = name+'.dot'
-        if noSilent:
+        if Comments:
             print('Exporting to '+dotName)
         ## if bestChoice != set():
         ##     rankBestString = '{rank=max; '
@@ -850,7 +1089,7 @@ class Graph(object):
         fo = open(dotName,'w')
         fo.write('strict graph G {\n')
         fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2015", size="')
+        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2019", size="')
         fo.write(graphSize),fo.write('"];\n')
         for i in range(n):
             try:
@@ -860,7 +1099,12 @@ class Graph(object):
                     nodeName = self.vertices[vertexkeys[i]]['name']
                 except:
                     nodeName = str(vertexkeys[i])
-            node = 'n'+str(i+1)+' [shape = "circle", label = "' +nodeName+'"'
+            if WithVertexColoring:
+                node = 'n'+str(i+1)+' [shape = "circle", label = "' +nodeName+'"'
+                node += ', style = "filled", color = %s' \
+                 % self.vertices[vertexkeys[i]]['color']
+            else:
+                node = 'n'+str(i+1)+' [shape = "circle", label = "' +nodeName+'"'
             try:
                 if self.vertices[vertexkeys[i]]['spin'] == 1:
                     node += ', style = "filled", color = %s' % spinColor
@@ -868,7 +1112,7 @@ class Graph(object):
                 pass
             node += '];\n'                
             fo.write(node)
-        if withSpanningTree:
+        if WithSpanningTree:
             try:
                 dfs = self.dfs
             except:
@@ -880,12 +1124,25 @@ class Graph(object):
                     #print(i,tree[i],tree[i+1])
                     edgesColored.add(frozenset([tree[i],tree[i+1]]))
             #print('Spanning tree: ', edgesColored)
+                    
+        if matching != None:
+            withMatching = True
+            edgesColored = set()
+            for edge in matching:
+                edgesColored.add(edge)
+            print('Matching: ', edgesColored)
+        else:
+            withMatching = False
         for i in range(n):
             for j in range(i+1, n):
                 if i != j:
                     edge = 'n'+str(i+1)
                     if edges[frozenset( [vertexkeys[i], vertexkeys[j]])] > Med:
-                        if withSpanningTree and \
+                        if WithSpanningTree and \
+                        frozenset( [vertexkeys[i], vertexkeys[j]]) in edgesColored:
+                               arrowFormat = \
+        ' [dir=both,style="setlinewidth(3)",color=red, arrowhead=none, arrowtail=none] ;\n'                                          
+                        elif withMatching and \
                         frozenset( [vertexkeys[i], vertexkeys[j]]) in edgesColored:
                                arrowFormat = \
         ' [dir=both,style="setlinewidth(3)",color=red, arrowhead=none, arrowtail=none] ;\n'                                          
@@ -913,12 +1170,296 @@ class Graph(object):
                 layout = 'fdp'
             
         commandString = layout+' -T'+graphType+' '+dotName+' -o '+name+'.'+graphType
-        if noSilent:
+        if Comments:
             print(commandString)
         try:
             os.system(commandString)
         except:
-            if noSilent:
+            if Comments:
+                print('graphViz tools not avalaible! Please check installation.')
+                print('On Ubuntu: ..$ sudo apt-get install graphviz')
+
+    def exportEdgeOrientationsGraphViz(self,fileName=None,verticesSubset=None,
+                       Comments=True,
+                       graphType='png',graphSize='7,7',
+                       layout=None,
+                       arcColor='black',
+                       lineWidth=1,
+                        palette=1,
+                        Debug=False):
+        """
+        Exports GraphViz dot file for oriented graph drawing filtering.
+
+        Example:
+           >>> from graphs import *
+           >>> g = RandomGraph(order=6,seed=100)
+           >>> if g.isComparavbilityGraph():
+           ...     g.exportEdgeOrientationGraphViz('orientedGraph')
+
+        .. image:: orientedGraph.png
+           :alt: Random graph
+           :width: 300 px
+           :align: center
+        """
+        import os
+        if Debug:
+            Comments=True
+        try:
+            edgeOrientations = self.edgeOrientations
+        except AttributeError:
+            if not self.isComparabilityGraph():
+                print('The graph %s is not transitively orientable' % self.name)
+            return
+
+        if Comments:
+            print('*---- exporting a dot file for GraphViz tools ---------*')
+        if verticesSubset == None:
+            vertexkeys = [x for x in self.vertices]
+        else:
+            vertexkeys = [x for x in verticesSubset]
+        n = len(vertexkeys)
+        edges = self.edges
+        Med = self.valuationDomain['med']
+        i = 0
+        if fileName == None:
+            name = self.name
+        else:
+            name = fileName
+        dotName = name+'.dot'
+        if Comments:
+            print('Exporting to '+dotName)
+        fo = open(dotName,'w')
+        fo.write('strict graph G {\n')
+        fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
+        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2019", size="')
+        fo.write(graphSize),fo.write('"];\n')
+        for i in range(n):
+            try:
+                nodeName = str(self.vertices[vertexkeys[i]]['shortName'])
+            except:
+                try:
+                    nodeName = self.vertices[vertexkeys[i]]['name']
+                except:
+                    nodeName = str(vertexkeys[i])
+            node = 'n'+str(i+1)+' [shape = "circle", label = "' +nodeName+'"'
+            node += '];\n'                
+            fo.write(node)
+
+        # reminder include a color palette in digraphsToold
+        from digraphsTools import colorPalettes
+##        colors0 = ['black',
+##                  'blue',
+##                  'coral',
+##                  'gold',
+##                  'gray',
+##                  'black',
+##                  'pink',
+##                  'green',
+##                  'orange',
+##                  'skyblue',
+##                  'wheat',
+##                  'salmon']    
+##        colors1 = ['#EA2027',
+##                  '#006266',
+##                  '#1B1464',
+##                  '#5758BB',
+##                  '#6F1E51',
+##                  '#EE5A24',
+##                  '#009432',
+##                  '#0652DD',
+##                  '#9980FA',
+##                  '#833471',
+##                  '#F79F1F',
+##                  '#A3CB38',
+##                   '#1289A7',
+##                   '#D980FA',
+##                   '#B53471',
+##                   '#FFC312',
+##                   '#C4E538',
+##                   '#12CBC4',
+##                   '#FDA7DF',
+##                   '#ED4C67',
+##                   ]
+        colors = colorPalettes[palette]
+        edgeColors = {}
+        for edge in self.edges:
+            if edges[edge] > Med:
+                arc = tuple(sorted([v for v in edge]))
+                edgeColors[arc] = colors[abs(edgeOrientations[arc])]
+        if Debug:
+            print(self.edgeOrientations)
+            print(edgeColors)    
+
+        for i in range(n):
+            for j in range(i+1, n):
+                if i != j:
+                    edge = 'n'+str(i+1)
+                    edgeKey = frozenset([vertexkeys[i], vertexkeys[j]])
+                    if edges[edgeKey] > Med:
+                        arc = tuple(sorted([v for v in edgeKey]))
+                        arcColor = edgeColors[arc]
+                        if Debug:
+                            print(arcColor,lineWidth)
+                        if edgeOrientations[arc] > 0:
+                            arrowFormat = \
+        ' [dir=forward,style="setlinewidth(%d)",color="%s", arrowhead=normal, arrowtail=none] ;\n' %\
+                     (lineWidth,arcColor)
+                        elif edgeOrientations[arc] < 0:
+                            arrowFormat = \
+        ' [dir=back,style="setlinewidth(%d)",color="%s", arrowhead=none, arrowtail=normal] ;\n' %\
+                     (lineWidth,arcColor)
+                        edge0 = edge+'-- n'+str(j+1)+arrowFormat
+                        fo.write(edge0)                    
+##                    elif edges[frozenset([vertexkeys[i],vertexkeys[j]])] == Med:
+##                        edge0 = edge+'-- n'+str(j+1)+\
+##            ' [dir=both, color=grey, arrowhead=none, arrowtail=none] ;\n'
+##                        fo.write(edge0)
+
+        fo.write('}\n')
+        fo.close()
+        # choose layout model 
+        if layout == None:
+            layout = 'fdp'
+            
+        commandString = layout+' -T'+graphType+' '+dotName+' -o '+name+'.'+graphType
+        if Comments:
+            print(commandString)
+        try:
+            os.system(commandString)
+        except:
+            if Comments:
+                print('graphViz tools not avalaible! Please check installation.')
+                print('On Ubuntu: ..$ sudo apt-get install graphviz')
+
+
+    def exportPermutationGraphViz(self,fileName=None,
+                       permutation=None,
+                       Comments=True,
+                       WithEdgeColoring=True,
+                       hspace=100,
+                       vspace=70,
+                       graphType='png',graphSize='7,7',
+                       arcColor='black',
+                       lineWidth=1):
+        """
+        Exports GraphViz dot file for permutation drawing filtering.
+
+        Horizontal (default=100) and vertical (default=75) spaces betwen the vertices'
+        positions may be explicitely given in *hspace* and *vspace* parameters.
+
+        .. note::
+            If no *permutation* is provided, it is supposed to exist a self.permutation attribute.
+            
+        """
+        import os
+                # inversions drawing
+        if permutation == None:
+            try:
+                permutation = self.permutation
+            except AttributeError:
+                print('No permutation available !!')
+                return
+        colors = {'gold':'gold',
+                  'lightblue':'blue',
+                  'lightcoral':'coral',
+                  'lightyellow':'yellow',
+                  'orange':'orange',
+                  'gray':'black',
+                  'lightpink':'pink',
+                  'seagreen1':'green',
+                  'skyblue':'skyblue',
+                  'wheat1':'wheat',
+                  'lightsalmon':'salmon'}
+        if Comments:
+            print('*---- exporting a dot file for GraphViz tools ---------*')
+        vertexkeys = [x for x in self.vertices]
+        n = len(vertexkeys)
+        edges = self.edges
+        Med = self.valuationDomain['med']
+        i = 0
+        if fileName == None:
+            name = 'perm_'+self.name
+        else:
+            name = fileName
+        dotName = name+'.dot'
+        if Comments:
+            print('Exporting to '+dotName)
+        fo = open(dotName,'w')
+        fo.write('strict digraph G {\n')
+        fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
+        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2019", size="')
+        fo.write(graphSize),fo.write('"];\n')
+        # horizontally positioned initial nodes at line 100
+        # horinzontal space = 75
+        vspace = 100
+        hspace = 60
+        for i in range(n):
+            try:
+                nodeName = str(self.vertices[vertexkeys[i]]['shortName'])
+            except:
+                try:
+                    nodeName = self.vertices[vertexkeys[i]]['name']
+                except:
+                    nodeName = str(vertexkeys[i])
+            node = 'n'+str(i+1)+' [shape = "circle", label = "' +nodeName+'"'
+            try:
+                if self.vertices[vertexkeys[i]]['spin'] == 1:
+                    node += ', style = "filled", color = %s, ' % spinColor
+            except:
+                pass
+            node += 'pos="%d,%d"];\n' % (i*hspace,vspace)                
+            fo.write(node)
+        # horizontally positionned terminal nodes at line 0
+        for i in range(n):
+            k = permutation[i]-1
+            try:
+                nodeName = str(self.vertices[vertexkeys[k]]['shortName'])
+            except:
+                try:
+                    nodeName = self.vertices[vertexkeys[k]]['name']
+                except:
+                    nodeName = str(vertexkeys[k])
+            node = 'n'+str(n+k+1)+' [shape = "circle", label = "' +nodeName+'"'
+            try:
+                if self.vertices[vertexkeys[k]]['spin'] == 1:
+                    node += ', style = "filled", color = %s, ' % spinColor
+            except:
+                pass
+            node += 'pos="%d,%d"];\n' % (i*hspace,0)                
+            fo.write(node)
+        for i in range(n):
+            edge = 'n'+str(i+1)
+            if WithEdgeColoring:
+                try:
+                    colorKey = self.vertices[vertexkeys[i]]['color']
+                except KeyError:
+                    self.computeMinimalVertexColoring()
+                    colorKey = self.vertices[vertexkeys[i]]['color']
+                arrowFormat = \
+                        edge0 = edge+'-> n'+str(n+i+1) +\
+                ' [dir=both, color=%s, style="setlinewidth(2)",\
+                              arrowhead=none, arrowtail=none] ;\n'\
+                    % colors[colorKey]
+##                except KeyError:
+##                    arrowFormat = \
+##                       edge0 = edge+'-> n'+str(n+i+1) +\
+##                ' [dir=both, color=black, arrowhead=none, arrowtail=none] ;\n'
+            else:
+                arrowFormat = \
+                        edge0 = edge+'-> n'+str(n+i+1) +\
+                ' [dir=both, color=black, arrowhead=none, arrowtail=none] ;\n'    
+            fo.write(edge0)
+        fo.write('}\n')
+        fo.close()
+        # choose layout model 
+        layout = 'neato'
+        commandString = layout+' -n -T'+graphType+' '+dotName+' -o '+name+'.'+graphType
+        if Comments:
+            print(commandString)
+        try:
+            os.system(commandString)
+        except:
+            if Comments:
                 print('graphViz tools not avalaible! Please check installation.')
                 print('On Ubuntu: ..$ sudo apt-get install graphviz')
 
@@ -969,14 +1510,17 @@ class Graph(object):
                     Sxchoice = S[0] | x[0]
                     Sx = [Sxchoice,Sxgam,Sxindep]
                     yield Sx
-                    
+
+
+                 
     def graph2Digraph(self):
         """
         Converts a Graph object into a symmetric Digraph object.
         """
         from copy import deepcopy
-        from digraphs import EmptyDigraph
+        from digraphs import Digraph, EmptyDigraph
         dg = EmptyDigraph(order=self.order)
+        dg.__class__ = Digraph
         dg.name = deepcopy(self.name)
         dg.actions = deepcopy(self.vertices)
         dg.order = len(dg.actions)
@@ -997,6 +1541,96 @@ class Graph(object):
         dg.notGamma = dg.notGammaSets()
         return dg
 
+    def isComparabilityGraph(self,Debug=False):
+        """
+        Verifies if the graph instance is a comparability graph.
+        If yes, a tranditive orientation of the edges is stored 
+        in self.edgeOrientations. 
+        
+        *Source*: M. Ch. Golumbic (2004) Algorithmic Graph Thery and Perfect Graphs,
+        Annals of Discrete Mathematics 57, Elsevier, p. 129-132.
+        """
+        global orientation,IsComparabilityGraph,k
+        def _explore(arc):
+            global orientation,IsComparabilityGraph,k
+            i = arc[0]
+            j = arc[1]
+            if Debug:
+                print('arc', arc, orientation, self.gamma[i], self.gamma[j])
+
+            for m in self.gamma[i]:
+                if Debug:
+                    print(i,j,m,self.gamma[j],orientation[(j,m)])
+                if (m not in self.gamma[j]) or (abs(orientation[(j,m)]) < k): 
+                    if orientation[(i,m)] == 999:
+                        orientation[(i,m)] = k
+                        orientation[(m,i)] = -k
+                        _explore((i,m))
+                    elif orientation[(i,m)] == -k:
+                        orientation[(i,m)] = k
+                        IsComparabilityGraph = False
+                        if Debug:
+                            print('is comp?',IsComparabilityGraph)
+                        #return
+                        _explore((i,m))
+                    
+            for m in self.gamma[j]:
+                if Debug:
+                    print(i,j,m,self.gamma[i],orientation[(i,m)])
+                if (m not in self.gamma[i]) or (abs(orientation[(i,m)]) < k):
+                    if orientation[(m,j)] == 999:
+                        orientation[(m,j)] = k
+                        orientation[(j,m)] = -k
+                        _explore((m,j))
+                    elif orientation[(m,j)] == -k:
+                        orientation[(m,j)] = k
+                        IsComparabilityGraph = False
+                        if Debug:
+                            print('is comp ?',IsComparabilityGraph)
+                        #return
+                        _explore((m,j))
+                      
+            if Debug:
+                print(arc,orientation,IsComparabilityGraph)
+
+        # initializing
+        IsComparabilityGraph = True
+        k = 0
+        orientation = {}
+        n = len(self.vertices)
+        verticesList = list(self.vertices.keys())
+        for i in range(n):
+            vi = verticesList[i]
+            orientation[(vi,vi)] = 0
+            for j in range(i+1,n):
+                vi = verticesList[i]
+                vj = verticesList[j]
+                edgeKey = frozenset([vi,vj])
+                if self.edges[edgeKey] > Decimal('0'):
+                    orientation[(vi,vj)] = 999
+                    orientation[(vj,vi)] = 999
+                else:
+                    orientation[(vi,vj)] = 0
+                    orientation[(vj,vi)] = 0
+        #exploring all positive edges
+        for edge in self.edges:
+            arc = tuple(edge)
+            if self.edges[edge] > Decimal('0'):  
+                if orientation[arc] == 999:
+                    k += 1
+                    orientation[arc] = k
+                    orientation[tuple(reversed(arc))] = -k
+                    _explore(arc)
+            if Debug:
+                print('===>>>',edge,'=',self.edges[edge],orientation)
+                
+        # storing the edge decomposition
+        self.IsComparabilityGraph = IsComparabilityGraph
+        if IsComparabilityGraph:
+            self.edgeOrientations = orientation
+
+        return IsComparabilityGraph
+
     def isConnected(self):
         """
         Cheks if self is a connected graph instance.
@@ -1007,6 +1641,60 @@ class Graph(object):
         else:
             return False
 
+    def isIntervalGraph(self,Comments=False):
+        """
+        Checks whether the graph self is triangulated and
+        its dual is a comparability graph.
+
+        *Source*: M. Ch. Golumbic (2004) Algorithmic Graph Thery and Perfect Graphs,
+        Annals of Discrete Mathematics 57, Elsevier, p. 16.
+
+        """
+        if self.isTriangulated():
+            if Comments:
+                print('Graph \'%s\' is triangulated.' % self.name)
+            ds = -self
+            if ds.isComparabilityGraph():
+                if Comments:
+                    print('Graph \'%s\' is transitively orientable.' % ds.name)
+                    print('=> Graph \'%s\' is an interval graph.' % self.name)
+                return True
+            else:
+                if Comments:
+                    print('Graph \'%s\' is not transitively orientable.' % ds.name)
+                return False        
+        else:
+            if Comments:
+                print('Graph \%s\' is not triangulated' % self.name)
+            return False
+
+    def isPermutationGraph(self,Comments=False):
+        """
+        Checks whether the graph self and
+        its dual are comparability graphs.
+
+        *Source*: M. Ch. Golumbic (2004) Algorithmic Graph Thery and Perfect Graphs,
+        Annals of Discrete Mathematics 57, Elsevier, p. 16.
+
+        """
+        if self.isComparabilityGraph():
+            if Comments:
+                print('Graph \'%s\' is transitively orientable.' % self.name)
+            ds = -self
+            if ds.isComparabilityGraph():
+                if Comments:
+                    print('Graph \'%s\' is transitively orientable.' % ds.name)
+                    print('=> Graph \'%s\' is a permutation graph.' % self.name)
+                return True
+            else:
+                if Comments:
+                    print('Graph \'%s\' is not transitively orientable.' % ds.name)
+                return False        
+        else:
+            if Comments:
+                print('Graph \%s\' is not transitively orientable' % self.name)
+            return False
+         
     def isTree(self):
         """
         Checks if self is a tree by verifing the required number of
@@ -1030,6 +1718,40 @@ class Graph(object):
                 return False
             else:
                 return True
+
+    def isTriangulated(self):
+        """
+        Checks if a graph contains no chordless cycle of
+        length greater or equal to 4.
+        """
+        if self.computeChordlessCycles() == set():
+            return True
+        else:
+            return False
+
+    def isSplitGraph(self,Comments=False):
+        """
+        Checks whether the graph ' *self* ' and its dual ' *-self* ' are
+        triangulated graphs
+        """
+        if self.isTriangulated():
+            if Comments:
+                print('Graph \'%s\' is triangulated.' % self.name)
+            ds = -self
+            if ds.isTriangulated():
+                if Comments:
+                    print('Graph \'%s\' is triangulated.' % ds.name)
+                    print('=> Graph \'%s\' is a split graph.' % self.name)
+                return True
+            else:
+                if Comments:
+                    print('Graph \'%s\' is not is not triangulated.' % ds.name)
+                return False        
+        else:
+            if Comments:
+                print('Graph \%s\' is not triangulated' % self.name)
+            return False
+        
                   
     def randomDepthFirstSearch(self,seed=None,Debug=False):
         """
@@ -1052,7 +1774,7 @@ class Graph(object):
             self.vertices[x]['color'] = 1
             ## self.date += 1
             self.vertices[x]['startDate'] = self.date
-            self.dfsx.append(x)
+            self._dfsx.append(x)
             if Debug:
                 print(' dfs %s, date = %d' % (str(self.dfs),  self.vertices[x]['startDate']))
             nextVertices = [y for y in self.gamma[x]]
@@ -1065,7 +1787,7 @@ class Graph(object):
                     self.date += 1
                     visitVertex(self,y,Debug=Debug)
                     if self.vertices[x]['color'] == 1:
-                        self.dfsx.append(x)
+                        self._dfsx.append(x)
                 nextVertices.remove(y)
             self.vertices[x]['color'] = 2
             self.vertices[x]['endDate'] = self.date
@@ -1085,12 +1807,12 @@ class Graph(object):
             verticesList.sort()
             while verticesList != []:
                 x = random.choice(verticesList)
-                self.dfsx = []
+                self._dfsx = []
                 if self.vertices[x]['color'] == 0:
                     if Debug:
                         print('==>> Starting from %s ' % x)
                     visitVertex(self,x,Debug=Debug)
-                    self.dfs.append(self.dfsx)
+                    self.dfs.append(self._dfsx)
                 verticesList.remove(x)
 
 
@@ -1319,11 +2041,18 @@ class DualGraph(Graph):
     """
     def __init__(self,other):
         from copy import deepcopy
+        self.__class__ = other.__class__
         self.name = 'dual_' + str(other.name)
         try:
             self.description = deepcopy(other.description)
         except AttributeError:
             pass
+        try:  # the dual of a PermutationGraph reverses the permutation
+            permutation = list(other.permutation)
+            permutation.reverse()
+            self.permutation = permutation
+        except AttributeError:
+            pass        
         self.valuationDomain = deepcopy(other.valuationDomain)
         Max = self.valuationDomain['max']
         Min = self.valuationDomain['min']
@@ -1332,7 +2061,7 @@ class DualGraph(Graph):
         self.edges = {}
         for e in other.edges:
             self.edges[e] = Max - other.edges[e] + Min
-        self.__class__ = other.__class__
+        self.size = self.computeSize()
         self.gamma = self.gammaSets()
 
 class CycleGraph(Graph):
@@ -1359,7 +2088,7 @@ class CycleGraph(Graph):
         vertices = OrderedDict()
         for i in range(order):
             vertexKey = ('v%%0%dd' % nd) % (i+1)
-            vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
+            vertices[vertexKey] = {'id':i+1, 'shortName':vertexKey, 'name': 'random vertex'}
         self.vertices = vertices
         verticesList = [key for key in vertices]
         self.valuationDomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
@@ -1388,6 +2117,94 @@ class CycleGraph(Graph):
         self.size = self.computeSize()
         self.gamma = self.gammaSets()
 
+class IntervalIntersectionsGraph(Graph):
+    """
+    Inveral graph constructed from a list *n*
+    intervals, ie pairs (a,b) of integer numbers where a < b.
+    """
+    def __init__(self,intervals,Debug=False):
+        from collections import OrderedDict
+        self.name = 'lineIntersections'
+        self.intervals = intervals
+        if Debug:
+            print(intervals)
+        order = len(intervals)
+        self.order = order
+        nd = len(str(order))
+        vertices = OrderedDict()
+        for i in range(order):
+            vertexKey = ('v%%0%dd' % nd) % (i+1)
+            vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
+        self.vertices = vertices
+        self.valuationDomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
+        Min = self.valuationDomain['min']
+        Max = self.valuationDomain['max']
+        edges = OrderedDict()
+        verticesList = [v for v in vertices]
+        #verticesList.sort()
+        for i in range(order):
+            x = verticesList[i]
+            a = intervals[i][0]
+            b = intervals[i][1]
+            for j in range(i+1,order):
+                y = verticesList[j]
+                c = intervals[j][0]
+                d = intervals[j][1]
+                edgeKey = frozenset([x,y])
+                if c <= a and d >= a: 
+                    edges[edgeKey] = Max
+                    if Debug:
+                        print(a,b,c,d,'=>',1)
+                elif d >= b and c <= b:
+                    edges[edgeKey] = Max
+                    if Debug:
+                        print(a,b,c,d,'=>',2)
+                elif c <= a and d >= a:
+                    edges[edgeKey] = Max
+                    if Debug:
+                        print(a,b,c,d,'=>',3)
+                elif c >= a and d <= b:
+                    edges[edgeKey] = Max
+                    if Debug:
+                        print(a,b,c,d,'=>',4)
+                else:
+                    edges[edgeKey] = Min
+                    if Debug:
+                        print(a,b,c,d,'=>',5)
+                 
+                if Debug:
+                    print('a,b,c,d,edgeKey,edges[edgeKey]')
+                    print(edgeKey,edges[edgeKey])
+        self.edges = edges
+        self.size = self.computeSize()
+        self.gamma = self.gammaSets()
+
+class RandomIntervalIntersectionsGraph(Graph):
+    """ Random generator for LineIntersectionsGraph intances."""
+    def __init__(self,order=5,seed=None,m=0,M=10,Debug=False):
+        import random
+        random.seed(seed)
+        self.seed = seed
+        self.name = 'randIntervalIntersections'
+        self.order = order
+        intervals = []
+        for i in range(order):
+            a = random.randint(m,M)
+            b = random.randint(m,M)
+            if a < b:
+                intervals.append((a,b))
+            else:
+                intervals.append((b,a))
+        if Debug:
+            print(intervals)
+        self.intervals = intervals
+        lis = IntervalIntersectionsGraph(intervals)
+        self.vertices = lis.vertices
+        self.valuationDomain = lis.valuationDomain
+        self.edges = lis.edges
+        self.size = self.computeSize()
+        self.gamma = self.gammaSets()
+        
 class RandomGraph(Graph):
     """
     Random instances of the Graph class
@@ -1397,12 +2214,15 @@ class RandomGraph(Graph):
         * edgeProbability (in [0,1])
     """
     def __init__(self,order=5,edgeProbability=0.4,seed=None):
+        from collections import OrderedDict
         import random
         random.seed(seed)
+        self.seed = seed
+        self.edgeProbability = edgeProbability
         self.name = 'randomGraph'
         self.order = order
         nd = len(str(order))
-        vertices = dict()
+        vertices = OrderedDict()
         for i in range(order):
             vertexKey = ('v%%0%dd' % nd) % (i+1)
             vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
@@ -1410,9 +2230,9 @@ class RandomGraph(Graph):
         self.valuationDomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
         Min = self.valuationDomain['min']
         Max = self.valuationDomain['max']
-        edges = dict()
+        edges = OrderedDict()
         verticesList = [v for v in vertices]
-        verticesList.sort()
+        #verticesList.sort()
         for i in range(order):
             x = verticesList[i]
             for j in range(i+1,order):
@@ -1445,7 +2265,7 @@ class RandomValuationGraph(Graph):
         vertices = dict()
         for i in range(order):
             vertexKey = ('v%%0%dd' % nd) % (i+1)
-            vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
+            vertices[vertexKey] = {'id':i+1,'shortName':vertexKey, 'name': 'random vertex'}
         self.vertices = vertices
         self.valuationDomain = {'min':Decimal('-1'),'med':Decimal('0'),'max':Decimal('1')}
         Min = float(self.valuationDomain['min'])
@@ -1503,7 +2323,7 @@ class RandomFixedSizeGraph(Graph):
         vertices = dict()
         for i in range(order):
             vertexKey = ('v%%0%dd' % nd) % (i+1)
-            vertices[vertexKey] = {'shortName':vertexKey, 'name': 'random vertex'}
+            vertices[vertexKey] = {'id':i+1,'shortName':vertexKey, 'name': 'random vertex'}
         self.vertices = vertices
         if Debug:
             print(self.vertices)
@@ -1908,9 +2728,13 @@ class RandomTree(Graph):
         """
         Show method for RandomTree instances.
         """
-        reprString = Graph.__repr__(self)
-        reprString += '*---- RandomTree specific data ----*\n'
-        reprString += 'Prüfer code  : %s\n' % self.prueferCode
+        try:
+            code = self.prueferCode
+            reprString = Graph.__repr__(self)
+            reprString += '*---- RandomTree specific data ----*\n'
+            reprString += 'Prüfer code  : %s\n' % code
+        except AttributeError:
+            reprString = Graph.__repr__(self)
         return reprString
 
     def __init__(self,order=None, vertices= None,
@@ -1960,7 +2784,7 @@ class RandomTree(Graph):
         if prueferCode == None:
             prueferCode = []
             for k in range(order-2):
-                prueferCode.append( verticesList[random.choice( list(range(order)) )] )
+                prueferCode.append( random.choice(verticesList) )
         self.prueferCode = prueferCode
         if Debug:
             print('prueferCode = ', self.prueferCode)
@@ -2097,6 +2921,29 @@ class RandomSpanningForest(RandomTree):
                 
         self.prueferCodes = prueferCodes
 
+    def computeAverageTreeDetermination(self,dfs=None):
+        """
+        Renders the mean average determinations of the spanning trees.
+        """
+        from decimal import Decimal
+        if dfs == None:
+            dfs = self.dfs
+        maxWeights = []
+        n = len(dfs)
+        for i in range(n):
+            dfsx = dfs[i]
+            maxWeight = Decimal('0')
+            k = len(dfsx)
+            if k > 1:
+                for j in range(k-1):
+                    edgeKey = frozenset([dfsx[j],dfsx[j+1]])
+                    maxWeight += self.edges[edgeKey]
+                maxWeights.append( maxWeight / Decimal(str(k-1)) )
+            else:
+                maxWeights.append(self.valuationDomain['max'])
+        self.averageTreeDetermination = maxWeights 
+        return  
+        
 class RandomSpanningTree(RandomTree):
     """
     Uniform random instance of a spanning tree
@@ -2111,6 +2958,8 @@ class RandomSpanningTree(RandomTree):
        :width: 300 px
        :align: center
     """
+    
+    
     def __init__(self,g,seed=None,Debug=False):
         from copy import copy as copy
         if not g.isConnected():
@@ -2209,10 +3058,9 @@ class RandomSpanningTree(RandomTree):
                 print('reducedWalk', reducedWalk)
             t = k
         return reducedWalk
-
-    
+                      
 #----------
-class BestDeterminedSpanningForest(RandomTree):
+class BestDeterminedSpanningForest(RandomSpanningForest):
     """
     Constructing the most determined spanning tree (or forest if not connected)
     using Kruskal's greedy algorithm on the dual valuation.
@@ -2232,7 +3080,7 @@ class BestDeterminedSpanningForest(RandomTree):
        v4 -> ['v5', 'v2']
        v5 -> ['v4', 'v2', 'v3']
        >>> mt = BestDeterminedSpanningForest(g)
-       >>> mt.exportGraphViz('spanningTree',withSpanningTree=True)
+       >>> mt.exportGraphViz('spanningTree',WithSpanningTree=True)
        *---- exporting a dot file for GraphViz tools ---------*
        Exporting to spanningTree.dot
        [['v4', 'v2', 'v1', 'v3', 'v1', 'v2', 'v5', 'v2', 'v4']]
@@ -2244,11 +3092,23 @@ class BestDeterminedSpanningForest(RandomTree):
        :align: center
 
     """
+    def __repr__(self):
+        """
+        Show method for best determined spanning forests instances.
+        """
+        reprString = Graph.__repr__(self)
+        reprString += '*---- best determined spanning tree specific data ----*\n'
+        reprString += 'Depth first search path(s) : %s\n' % str(self.dfs)
+        reprString += 'Average determination(s)   : %s\n' %\
+                      str(self.averageTreeDetermination)
+       
+        return reprString
+    
     def __init__(self,g,seed=None,Debug=False):
         from copy import deepcopy
         import random
         random.seed(seed)
-        self.name= g.name+'_randomSpanningTree'
+        self.name= g.name+'_randomSpanningForest'
         if Debug:
             print(self.name)
         self.vertices = deepcopy(g.vertices)
@@ -2328,6 +3188,7 @@ class BestDeterminedSpanningForest(RandomTree):
         if Debug:
             print('gamma = ', self.gamma)
         self.dfs = self.depthFirstSearch()
+        self.computeAverageTreeDetermination()
 
 class Q_Coloring(Graph):
     """
@@ -2443,7 +3304,7 @@ class Q_Coloring(Graph):
         return infeasibleEdges              
 
     def exportGraphViz(self,fileName=None,
-                       noSilent=True,
+                       Comments=True,
                        graphType='png',
                        graphSize='7,7',
                        layout=None):
@@ -2486,7 +3347,7 @@ class Q_Coloring(Graph):
             :align: center
         """
         import os
-        if noSilent:
+        if Comments:
             print('*---- exporting a dot file for GraphViz tools ---------*')
         vertexkeys = [x for x in self.vertices]
         n = len(vertexkeys)
@@ -2498,7 +3359,7 @@ class Q_Coloring(Graph):
         else:
             name = fileName
         dotName = name+'.dot'
-        if noSilent:
+        if Comments:
             print('Exporting to '+dotName)
         ## if bestChoice != set():
         ##     rankBestString = '{rank=max; '
@@ -2507,7 +3368,7 @@ class Q_Coloring(Graph):
         fo = open(dotName,'w')
         fo.write('strict graph G {\n')
         fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2015", size="')
+        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2019", size="')
         fo.write(graphSize),fo.write('"];\n')
         for i in range(n):
             try:
@@ -2545,12 +3406,12 @@ class Q_Coloring(Graph):
                 commandString = 'fdp -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
         else:
             commandString = layout+' -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
-        if noSilent:
+        if Comments:
             print(commandString)
         try:
             os.system(commandString)
         except:
-            if noSilent:
+            if Comments:
                 print('graphViz tools not avalaible! Please check installation.')
 
 
@@ -2643,7 +3504,7 @@ class IsingModel(Graph):
         return Hc        
     
     def exportGraphViz(self,fileName=None,
-                       noSilent=True,
+                       Comments=True,
                        graphType='png',
                        graphSize='7,7',
                        edgeColor='black',
@@ -2653,7 +3514,7 @@ class IsingModel(Graph):
 
         """
         import os
-        if noSilent:
+        if Comments:
             print('*---- exporting a dot file for GraphViz tools ---------*')
         vertexkeys = [x for x in self.vertices]
         n = len(vertexkeys)
@@ -2665,7 +3526,7 @@ class IsingModel(Graph):
         else:
             name = fileName
         dotName = name+'.dot'
-        if noSilent:
+        if Comments:
             print('Exporting to '+dotName)
         ## if bestChoice != set():
         ##     rankBestString = '{rank=max; '
@@ -2674,7 +3535,7 @@ class IsingModel(Graph):
         fo = open(dotName,'w')
         fo.write('strict graph G {\n')
         fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2015", size="')
+        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2019", size="')
         fo.write(graphSize),fo.write('"];\n')
         for i in range(n):
             try:
@@ -2717,12 +3578,12 @@ class IsingModel(Graph):
             commandString = 'circo -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
         else:
             commandString = 'fdp -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
-        if noSilent:
+        if Comments:
             print(commandString)
         try:
             os.system(commandString)
         except:
-            if noSilent:
+            if Comments:
                 print('graphViz tools not avalaible! Please check installation.')
 
 class MetropolisChain(Graph):
@@ -3063,7 +3924,7 @@ class MISModel(Graph):
         return mis,misCover,unCovered
     
     def exportGraphViz(self,fileName=None,
-                       noSilent=True,
+                       Comments=True,
                        graphType='png',
                        graphSize='7,7',
                        misColor='lightblue'):
@@ -3072,7 +3933,7 @@ class MISModel(Graph):
 
         """
         import os
-        if noSilent:
+        if Comments:
             print('*---- exporting a dot file for GraphViz tools ---------*')
         vertexkeys = [x for x in self.vertices]
         n = len(vertexkeys)
@@ -3084,7 +3945,7 @@ class MISModel(Graph):
         else:
             name = fileName
         dotName = name+'.dot'
-        if noSilent:
+        if Comments:
             print('Exporting to '+dotName)
         ## if bestChoice != set():
         ##     rankBestString = '{rank=max; '
@@ -3093,7 +3954,7 @@ class MISModel(Graph):
         fo = open(dotName,'w')
         fo.write('strict graph G {\n')
         fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2015", size="')
+        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2019", size="')
         fo.write(graphSize),fo.write('"];\n')
         for i in range(n):
             try:
@@ -3132,25 +3993,438 @@ class MISModel(Graph):
             commandString = 'circo -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
         else:
             commandString = 'fdp -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
-        if noSilent:
+        if Comments:
             print(commandString)
         try:
             os.system(commandString)
         except:
-            if noSilent:
+            if Comments:
                 print('graphViz tools not avalaible! Please check installation.')
                 
+##########################
 
+class LineGraph(Graph):
+    """
+    Line graphs represent the **adjacencies between edges** of a graph instance.
+
+    Iterated line graph constructions are usually expanding, except for chordless cycles,
+    where the same cycle is repeated. And, for non-closed paths (interupted cycles), where iterated line graphs
+    progressively reduce one by one the number of vertices and edges and become eventually an empty graph. 
+
+    >>> g = CycleGraph(order=5)
+    >>> g
+    *------- Graph instance description ------*
+    Instance class   : CycleGraph
+    Instance name    : cycleGraph
+    Graph Order      : 5
+    Graph Size       : 5
+    Valuation domain : [-1.00; 1.00]
+    Attributes       : ['name', 'order', 'vertices', 'valuationDomain',
+                        'edges', 'size', 'gamma']
+    g.showShort()
+    *---- short description of the graph ----*
+    Name             : 'cycleGraph'
+    Vertices         :  ['v1', 'v2', 'v3', 'v4', 'v5']
+    Valuation domain :  {'min': Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
+    Gamma function   : 
+    v1 -> ['v2', 'v5']
+    v2 -> ['v1', 'v3']
+    v3 -> ['v2', 'v4']
+    v4 -> ['v3', 'v5']
+    v5 -> ['v4', 'v1']
+    degrees      :  [0, 1, 2, 3, 4]
+    distribution :  [0, 0, 5, 0, 0]
+    nbh depths   :  [0, 1, 2, 3, 4, 'inf.']
+    distribution :  [0, 0, 5, 0, 0, 0]
+    # the line graph of the 5-cycle graph
+    >>> lg = LineGraph(g)
+    >>> lg
+    *------- Graph instance description ------*
+    Instance class   : LineGraph
+    Instance name    : line-cycleGraph
+    Graph Order      : 5
+    Graph Size       : 5
+    Valuation domain : [-1.00; 1.00]
+    Attributes       : ['name', 'graph', 'valuationDomain', 'vertices',
+                        'order', 'edges', 'size', 'gamma']
+    >>> lg.showShort()
+    *---- short description of the graph ----*
+    Name             : 'line-cycleGraph'
+    Vertices         :  [frozenset({'v2', 'v1'}), frozenset({'v1', 'v5'}), frozenset({'v2', 'v3'}),
+                         frozenset({'v4', 'v3'}), frozenset({'v4', 'v5'})]
+    Valuation domain :  {'min': Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
+    Gamma function   : 
+    frozenset({'v2', 'v1'}) -> [frozenset({'v2', 'v3'}), frozenset({'v1', 'v5'})]
+    frozenset({'v1', 'v5'}) -> [frozenset({'v2', 'v1'}), frozenset({'v4', 'v5'})]
+    frozenset({'v2', 'v3'}) -> [frozenset({'v2', 'v1'}), frozenset({'v4', 'v3'})]
+    frozenset({'v4', 'v3'}) -> [frozenset({'v2', 'v3'}), frozenset({'v4', 'v5'})]
+    frozenset({'v4', 'v5'}) -> [frozenset({'v4', 'v3'}), frozenset({'v1', 'v5'})]
+    degrees      :  [0, 1, 2, 3, 4]
+    distribution :  [0, 0, 5, 0, 0]
+    nbh depths   :  [0, 1, 2, 3, 4, 'inf.']
+    distribution :  [0, 0, 5, 0, 0, 0]
+
+    MISs in line graphs provide maximal matchings - maximal sets of independent edges - in the original graph.
+
+    >>> c8 = CycleGraph(order=8)
+    >>> lc8 = LineGraph(c8)
+    >>> lc8.showMIS()
+    *---  Maximal Independent Sets ---*
+    [frozenset({'v3', 'v4'}), frozenset({'v5', 'v6'}), frozenset({'v1', 'v8'})]
+    [frozenset({'v2', 'v3'}), frozenset({'v5', 'v6'}), frozenset({'v1', 'v8'})]
+    [frozenset({'v8', 'v7'}), frozenset({'v2', 'v3'}), frozenset({'v5', 'v6'})]
+    [frozenset({'v8', 'v7'}), frozenset({'v2', 'v3'}), frozenset({'v4', 'v5'})]
+    [frozenset({'v7', 'v6'}), frozenset({'v3', 'v4'}), frozenset({'v1', 'v8'})]
+    [frozenset({'v2', 'v1'}), frozenset({'v8', 'v7'}), frozenset({'v4', 'v5'})]
+    [frozenset({'v2', 'v1'}), frozenset({'v7', 'v6'}), frozenset({'v4', 'v5'})]
+    [frozenset({'v2', 'v1'}), frozenset({'v7', 'v6'}), frozenset({'v3', 'v4'})]
+    [frozenset({'v7', 'v6'}), frozenset({'v2', 'v3'}), frozenset({'v1', 'v8'}), frozenset({'v4', 'v5'})]
+    [frozenset({'v2', 'v1'}), frozenset({'v8', 'v7'}), frozenset({'v3', 'v4'}), frozenset({'v5', 'v6'})]
+    number of solutions:  10
+    cardinality distribution
+    card.:  [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    freq.:  [0, 0, 0, 8, 2, 0, 0, 0, 0]
+    execution time: 0.00029 sec.
+
+    The two last MISs of cardinality 4 (see Lines 14-15 above) give
+    **isomorphic perfect maximum matchings** of the 8-cycle graph.
+    Every vertex of the cycle is adjacent to a matching edge.
+    Odd cyle graphs do not admid any perfect matching.
+
+    >>> maxMatching = c8.computeMaximumMatching()
+    >>> c8.exportGraphViz(fileName='maxMatchingcycleGraph',
+                          matching=maxMatching)
+    *---- exporting a dot file for GraphViz tools ---------*
+    Exporting to maxMatchingcyleGraph.dot
+    Matching:  {frozenset({'v1', 'v2'}), frozenset({'v5', 'v6'}),
+                frozenset({'v3', 'v4'}), frozenset({'v7', 'v8'}) }
+    circo -Tpng maxMatchingcyleGraph.dot -o maxMatchingcyleGraph.png
+
+    .. image:: maxMatchingcycleGraph.png
+        :alt: maximum matching colored c8
+        :width: 300 px
+        :align: center 
+    """
+    def __init__(self, graph):
+        from copy import deepcopy
+        from collections import OrderedDict
+        from graphs import CycleGraph
+        from digraphsTools import omin
+
+        if graph.__class__ == CycleGraph:
+            self.__class__ = CycleGraph
+        self.name = 'line-' + graph.name
+        self.graph = deepcopy(graph)
+        self.valuationDomain = deepcopy(graph.valuationDomain)
+        Max = self.valuationDomain['max']
+        Min = self.valuationDomain['min']
+        Med = self.valuationDomain['med']      
+        vertices = OrderedDict()
+        for edge in graph.edges:
+            if graph.edges[edge] > Med:
+                vertices[edge] = {'name': str(list(edge))}
+        self.vertices = vertices
+        self.order = len(vertices)
+        edges = OrderedDict()
+        for v1 in vertices:
+            for v2 in vertices:
+                if v1 != v2:
+                    intv = v1 & v2
+                    unv = v1 | v2
+                    if len(intv) > 0:
+                        edges[frozenset([frozenset(v1),frozenset(v2)])] = min(graph.edges[v1],graph.edges[v2])
+                    else:
+                        edges[frozenset([frozenset(v1),frozenset(v2)])] = Min
+        self.edges = edges
+        self.size = self.computeSize()
+        self.gamma = self.gammaSets()
+
+####################
+
+class PermutationGraph(Graph):
+    """
+    Martin Ch. Gulombic, Agorithmic Graph Theory and Perfect Graphs 2nd Ed.,
+    Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.
+
+    >>> from graphs import PermutationGraph
+    >>> g = PermutationGraph()
+    >>> g
+    *------- Graph instance description ------*
+    Instance class   : PermutationGraph
+    Instance name    : permutationGraph
+    Graph Order      : 6
+    Permutation      : [4, 3, 6, 1, 5, 2]
+    Graph Size       : 9
+    Valuation domain : [-1.00; 1.00]
+    Attributes       : ['name', 'vertices', 'order', 'permutation',
+                        'valuationDomain', 'edges', 'size', 'gamma']
+    >>> g.exportGraphViz()
+    *---- exporting a dot file for GraphViz tools ---------*
+    Exporting to permutationGraph.dot
+    fdp -Tpng permutationGraph.dot -o permutationGraph.png
+
+    .. image:: permutationGraph.png
+        :alt: Default permutation graph
+        :width: 300 px
+        :align: center 
+ 
+    """
+    def __init__(self,permutation=[4,3,6,1,5,2],Debug=False):
+        from collections import OrderedDict
+        self.name = 'permutationGraph'
+        vertices = OrderedDict()
+        order = len(permutation)
+        for i in range(1,order+1):
+            vertices[str(i)] = {'name': str(i)}
+        self.vertices = vertices
+        self.order = len(vertices)
+        self.permutation = permutation
+        self.valuationDomain = {'min': Decimal('-1'),
+                                'med': Decimal('0'),
+                                'max': Decimal('1')}
+        Min = self.valuationDomain['min']
+        Max = self.valuationDomain['max']
+        
+        edges = OrderedDict()
+        for i in range(1,order+1):
+            for j in range(i+1,order+1):
+                invi = permutation.index(i) + 1
+                invj = permutation.index(j) + 1
+                if Debug:
+                    print('i,invi, j, invj',i,invi, j, invj)
+                    print((i - j)*(invi - invj))
+                if (i - j)*(invi - invj) < 0:
+                    edges[frozenset([str(i),str(j)])] = Max
+                else:
+                    edges[frozenset([str(i),str(j)])] = Min
+        self.edges = edges
+        self.size = self.computeSize()
+        self.gamma = self.gammaSets()
+
+    def transitiveOrientation(self):
+        """
+        Renders a digraph where each edge of the permutation graph *self*
+        is converted into an arc oriented in increasing order of the adjacent vertices' numbers.
+        This orientation is always transitive and delivers a weak ordering of the vertices.
     
+        >>> dg = g.transitiveOrientation()
+        >>> dg
+        *------- Digraph instance description ------*
+        Instance class   : WeakOrder
+        Instance name    : oriented_permutationGraph
+        Digraph Order      : 6
+        Digraph Size       : 9
+        Valuation domain : [-1.00; 1.00]
+        Determinateness  : 100.000
+        Attributes       : ['name', 'order', 'actions', 'valuationdomain',
+                            'relation', 'gamma', 'notGamma', 'size']
+        >>> dg.exportGraphViz()
+        *---- exporting a dot file for GraphViz tools ---------*
+        Exporting to oriented_permutationGraph.dot
+        0 { rank = same; 1; 2; }
+        1 { rank = same; 5; 3; }
+        2 { rank = same; 4; 6; }
+        dot -Grankdir=TB -Tpng oriented_permutationGraph.dot -o oriented_permutationGraph.png
+
+        .. image:: oriented_permutationGraph.png
+            :alt: Transitive orientation of a permutation graph
+            :width: 200 px
+            :align: center 
+
+        """
+        from digraphs import EmptyDigraph
+        from weakOrders import WeakOrder
+        from copy import deepcopy
+        
+        g = EmptyDigraph(order=self.order)
+        g.__class__ = WeakOrder
+        g.name = 'oriented_'+self.name
+        g.actions = deepcopy(self.vertices)
+        g.valuationdomain = deepcopy(self.valuationDomain)
+        Max = g.valuationdomain['max']
+        Min = g.valuationdomain['min']
+        Med = g.valuationdomain['med']
+        relation = {}
+        for x in g.actions:
+            relation[x] = {}
+            for y in g.actions:
+                if x == y:
+                    relation[x][y] = Med
+                else:
+                    if self.edges[frozenset([x,y])] > Med:
+                        if int(x) < int(y):
+                            relation[x][y] = Max
+                        else:
+                            relation[x][y] = Min
+                    else:
+                        relation[x][y] = Min
+        g.relation = relation
+        g.size = g.computeSize()
+        g.gamma = g.gammaSets()
+        g.notGamma = g.notGammaSets()
+        return g
+
+    def computeMinimalVertexColoring(self,colors=None,Comments=False,Debug=False):
+        """
+        Computes a vertex coloring by using a minimal number of color queues for sorting the
+        given permutation. Sets by the way the chromatic number of the graph.
+        """
+        permutation = self.permutation
+        vertexKeys = [x for x in self.vertices]
+        n = len(permutation)
+        if colors == None:
+            colors = ['gold','lightblue','lightcoral','lightyellow','orange','gray',\
+                  'lightpink','seagreen1','skyblue','wheat1','lightsalmon','wheat']
+        nc = len(colors)
+        Q = [[0,[0]] for x in range(nc)]
+        for i in range(n):
+            for j in range(nc):
+                try:
+                    jQpt = Q[j][0]
+                except IndexError:
+                    print('!!! Error: The number of available colors %d is not sufficient !!!' % nc)
+                    print(colors)
+                    return
+                if permutation[i] > Q[j][1][jQpt]:
+                    Q[j][1].append(permutation[i])
+                    Q[j][0] += 1
+                    break
+        if Debug:
+            print(Q)
+        vertexColor = [0 for i in range(n)]
+        chromNumber = 0
+        for j in range(nc):
+            nj = len(Q[j][1])
+            if nj > 1:
+                chromNumber += 1
+                for i in range(1,nj):
+                    k = Q[j][1][i] - 1
+                    vertexColor[k] = colors[j]
+        self.chromaticNumber = chromNumber
+        if Debug:
+            print(vertexColor)
+            print(chromNumber)
+        for i in range(n):
+            self.vertices[vertexKeys[i]]['color'] = vertexColor[i]
+            if Comments:
+                print('vertex %s: %s' % (vertexKeys[i],vertexColor[i]))
     
+class RandomPermutationGraph(PermutationGraph):
+    """
+    A generator for random permutation graphs.
+    """
+    def __init__(self,order=6,seed=None):
+        import random
+        random.seed(seed)
+        permutation = list(range(1,order+1))
+        random.shuffle(permutation)
+        g = PermutationGraph(permutation=permutation)
+        att = [a for a in g.__dict__]
+        for a in att:
+            self.__dict__[a] = g.__dict__[a]
+        self.name = 'randomPermGraph'
+        
 # --------------testing the module ----
 if __name__ == '__main__':
 
+    #g = PermutationGraph(permutation=[4,3,6,1,5,2])
+    #g = CycleGraph(order=6)
+    #g = Graph('test')
+##    g = RandomGraph(seed=100)
+##    print(g)
+##    g.exportGraphViz()
+##    #g.exportPermutationGraphViz()
+##    #g.computeMinimalVertexColoring(Comments=True,Debug=True)
+##    #g.exportGraphViz(WithVertexColoring=True)
+##
+##    #b = BestDeterminedSpanningForest(g)
+##    #print(b)
+##    if g.isComparabilityGraph(Debug=True):
+##        print('Comparability Graph ? = True',g.edgeOrientations)
+##        dg = g.computeTransitivelyOrientedDigraph()
+##        if dg != None:
+##            print(dg)
+##            print(dg.computeTransitivityDegree())
+##            dg.exportGraphViz()
+##    else:
+##        print('Comparability Graph ? = False')
+##    print(g.isTriangulated())
+##    print((-g).isComparabilityGraph())
+##    g.isIntervalGraph(Comments=True)
+##
+##    intervals = [(1,5),(2,3),(3,5),(7,8),(3,5),(1,9)]
+##    i = LineIntersectionsGraph(intervals)
+##    print(i)
+##    print(i.intervals)
+##    print(i.isTriangulated())
+##    print((-i).isTriangulated())
 
-        from graphs import SnakeGraph
-        S = SnakeGraph(p=3,q=7)
-        S.showShort()
-        S.exportGraphViz('4_7_snake',lineWidth=3,arcColor="red")
+    ri = RandomGraph(order=8,seed=4335)
+    print(ri)
+    #print(ri.intervals)
+    #print(ri.isIntervalGraph(Comments=True))
+    #print(ri.isTriangulated())
+    #print((-ri).isTriangulated())
+    ri.exportGraphViz()
+    #ri.isSplitGraph(Comments=True)
+    #ri.isPermutationGraph(Comments=True)
+    #print(ri.computePermutation())
+    if ri.isComparabilityGraph():
+        ri.exportEdgeOrientationsGraphViz('testColors1')
+    rid = -ri
+    if rid.isComparabilityGraph():
+        rid.exportEdgeOrientationsGraphViz('testColors2',palette=2)
+    
+    
+##    rg = RandomPermutationGraph(order=6,seed=None)
+##    print(rg)
+##    dg = g.transitiveOrientation()
+##    print(dg)
+##    dg.exportGraphViz()
+##    rgd = -rg
+##    print(rgd)
+##    
+##    g = RandomGraph(order=8,seed=4335)
+##    og = g.computeOrientedDigraph(PartiallyDetermined=True)
+##    print('Transitivity degree: %.3f' % og.transitivityDegree)
+##    gd = -g
+##    ogd = gd.computeOrientedDigraph(PartiallyDetermined=True)
+##    print('Dual transitivity degree: %.3f' % ogd.transitivityDegree)
+##    print(g.computePermutation(Debug=False))
+##    from digraphs import FusionDigraph
+##    from linearOrders import LinearOrder
+##    f1gd = FusionDigraph(og,ogd,'o-max')
+##    s1 = LinearOrder.computeOrder(f1gd)
+##    f2gd = FusionDigraph((-og),ogd,'o-max')
+##    s2 = LinearOrder.computeOrder(f2gd)
+##    print(s1)
+##    print(s2)
+##    permutation= Graph.computePermutation(g)
+##    print(permutation)
+##    gtest = PermutationGraph(permutation=permutation)
+##    print(gtest)
+##    print(g)
+##    gtest.exportPermutationGraphViz()
+##    
+
+    #g = CycleGraph(order=12)
+##    g = RandomGraph(order=7)
+##    print(g)
+##    g.showShort()
+##    lg = LineGraph(g)
+##    print(lg)
+##    lg.showShort()
+##    llg = LineGraph(lg)
+##    print(llg)
+##    llg.showShort()
+##    lg.showMIS()
+##    maxMatching = g.computeMaximumMatching(Comments=False)
+##    g.exportGraphViz(matching=maxMatching)
+    
+        # from graphs import SnakeGraph
+        # S = SnakeGraph(p=3,q=7)
+        # S.showShort()
+        # S.exportGraphViz('4_7_snake',lineWidth=3,arcColor="red")
 
 ##    from time import time
 ##    #g = GridGraph(4,4)
@@ -3168,6 +4442,6 @@ if __name__ == '__main__':
 ##    ust.showShort()
 ##    ust.showMore()
 ##    ust.dfs = ust.randomDepthFirstSearch()
-##    ust.exportGraphViz(withSpanningTree=True)
+##    ust.exportGraphViz(WithSpanningTree=True)
 ##    print(ust.prueferCode)
     

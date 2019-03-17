@@ -37,7 +37,7 @@ with&nbsp;this&nbsp;program;&nbsp;if&nbsp;not,&nbsp;write&nbsp;to&nbsp;the&nbsp;
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="itertools.html">itertools</a><br>
-<a href="collections.html">collections</a><br>
+<a href="collections.abc.html">collections.abc</a><br>
 </td><td width="25%" valign=top><a href="decimal.html">decimal</a><br>
 <a href="xml.sax.handler.html">xml.sax.handler</a><br>
 </td><td width="25%" valign=top><a href="json.html">json</a><br>
@@ -53,23 +53,7 @@ with&nbsp;this&nbsp;program;&nbsp;if&nbsp;not,&nbsp;write&nbsp;to&nbsp;the&nbsp;
 <dt><font face="helvetica, arial"><a href="outrankingDigraphs.html#BipolarOutrankingDigraph">outrankingDigraphs.BipolarOutrankingDigraph</a>(<a href="outrankingDigraphs.html#OutrankingDigraph">outrankingDigraphs.OutrankingDigraph</a>)
 </font></dt><dd>
 <dl>
-<dt><font face="helvetica, arial"><a href="sortingDigraphs.html#SortingDigraph">SortingDigraph</a>(<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">outrankingDigraphs.BipolarOutrankingDigraph</a>, <a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>)
-</font></dt><dd>
-<dl>
-<dt><font face="helvetica, arial"><a href="sortingDigraphs.html#QuantilesSortingDigraph">QuantilesSortingDigraph</a>
-</font></dt><dd>
-<dl>
-<dt><font face="helvetica, arial"><a href="sortingDigraphs.html#NormedQuantilesRatingDigraph">NormedQuantilesRatingDigraph</a>(<a href="sortingDigraphs.html#QuantilesSortingDigraph">QuantilesSortingDigraph</a>, <a href="performanceQuantiles.html#PerformanceQuantiles">performanceQuantiles.PerformanceQuantiles</a>)
-</font></dt></dl>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd>
-<dt><font face="helvetica, arial"><a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>(<a href="builtins.html#object">builtins.object</a>)
-</font></dt><dd>
-<dl>
-<dt><font face="helvetica, arial"><a href="sortingDigraphs.html#SortingDigraph">SortingDigraph</a>(<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">outrankingDigraphs.BipolarOutrankingDigraph</a>, <a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>)
+<dt><font face="helvetica, arial"><a href="sortingDigraphs.html#SortingDigraph">SortingDigraph</a>
 </font></dt><dd>
 <dl>
 <dt><font face="helvetica, arial"><a href="sortingDigraphs.html#QuantilesSortingDigraph">QuantilesSortingDigraph</a>
@@ -90,7 +74,7 @@ with&nbsp;this&nbsp;program;&nbsp;if&nbsp;not,&nbsp;write&nbsp;to&nbsp;the&nbsp;
 <font color="#000000" face="helvetica, arial"><a name="NormedQuantilesRatingDigraph">class <strong>NormedQuantilesRatingDigraph</strong></a>(<a href="sortingDigraphs.html#QuantilesSortingDigraph">QuantilesSortingDigraph</a>, <a href="performanceQuantiles.html#PerformanceQuantiles">performanceQuantiles.PerformanceQuantiles</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Specialisation&nbsp;of&nbsp;the&nbsp;sortingDigraph&nbsp;Class<br>
+<td colspan=2><tt>Specialisation&nbsp;of&nbsp;the&nbsp;root&nbsp;:py:class:`sortingDigraphs.<a href="#SortingDigraph">SortingDigraph</a>`&nbsp;class<br>
 for&nbsp;absolute&nbsp;rating&nbsp;of&nbsp;a&nbsp;new&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;with<br>
 normed&nbsp;performance&nbsp;quantiles&nbsp;gathered&nbsp;from&nbsp;historical&nbsp;data.<br>
 &nbsp;&nbsp;<br>
@@ -168,7 +152,7 @@ and&nbsp;x&nbsp;does&nbsp;not&nbsp;outrank&nbsp;the&nbsp;category&nbsp;high&nbsp
 If&nbsp;LowerClosed&nbsp;is&nbsp;False,&nbsp;ie&nbsp;UPPERCLosed&nbsp;is&nbsp;True,&nbsp;the&nbsp;category<br>
 low&nbsp;limit&nbsp;does&nbsp;not&nbsp;outrank&nbsp;x&nbsp;and&nbsp;the&nbsp;category&nbsp;high&nbsp;limit&nbsp;does&nbsp;outrank&nbsp;x.</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-exportRatingGraphViz"><strong>exportRatingGraphViz</strong></a>(self, fileName=None, relation=None, direction='best', noSilent=True, graphType='png', graphSize='7,7', fontSize=10)</dt><dd><tt>The&nbsp;rating&nbsp;drawing&nbsp;is&nbsp;using&nbsp;the&nbsp;weakOrders.WeakOrder&nbsp;<a href="#NormedQuantilesRatingDigraph-exportGraphViz">exportGraphViz</a>()&nbsp;method&nbsp;for<br>
+<dl><dt><a name="NormedQuantilesRatingDigraph-exportRatingGraphViz"><strong>exportRatingGraphViz</strong></a>(self, fileName=None, relation=None, direction='best', Comments=True, graphType='png', graphSize='7,7', fontSize=10)</dt><dd><tt>The&nbsp;rating&nbsp;drawing&nbsp;is&nbsp;using&nbsp;the&nbsp;weakOrders.WeakOrder&nbsp;<a href="#NormedQuantilesRatingDigraph-exportGraphViz">exportGraphViz</a>()&nbsp;method&nbsp;for<br>
 drawing&nbsp;oriented&nbsp;Hasse&nbsp;diagrams&nbsp;of&nbsp;weak&nbsp;orderings,&nbsp;ie&nbsp;the&nbsp;negation<br>
 of&nbsp;the&nbsp;corresponding&nbsp;preorder&nbsp;relation.<br>
 &nbsp;<br>
@@ -177,7 +161,7 @@ Continuing&nbsp;the&nbsp;previous&nbsp;Python&nbsp;session:<br>
 &nbsp;&nbsp;&nbsp;*--------&nbsp;Quantile&nbsp;sorting&nbsp;result&nbsp;---------<br>
 &nbsp;&nbsp;&nbsp;&nbsp;[0.40&nbsp;-&nbsp;0.60[&nbsp;['a1',&nbsp;'a2',&nbsp;'a3']<br>
 &nbsp;&nbsp;&nbsp;&nbsp;[0.20&nbsp;-&nbsp;0.40[&nbsp;['a4',&nbsp;'a5']<br>
-&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;nqr.<a href="#NormedQuantilesRatingDigraph-exportRatingGraphViz">exportRatingGraphViz</a>(noSilent=False)<br>
+&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;nqr.<a href="#NormedQuantilesRatingDigraph-exportRatingGraphViz">exportRatingGraphViz</a>(Comments=False)<br>
 &nbsp;&nbsp;&nbsp;*----&nbsp;exporting&nbsp;a&nbsp;dot&nbsp;file&nbsp;for&nbsp;GraphViz&nbsp;tools&nbsp;---------*<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Exporting&nbsp;to&nbsp;quantilesRatingDigraph.dot<br>
 &nbsp;&nbsp;&nbsp;&nbsp;dot&nbsp;-Grankdir=TB&nbsp;-Tpng&nbsp;quantilesRatingDigraph.dot&nbsp;-o&nbsp;quantilesRatingDigraph.png<br>
@@ -210,7 +194,7 @@ The&nbsp;ordring&nbsp;strategy&nbsp;is&nbsp;either:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;**pessimistic**,&nbsp;following&nbsp;the&nbsp;lower&nbsp;quantile&nbsp;limits,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;**average**,&nbsp;following&nbsp;the&nbsp;averag&nbsp;of&nbsp;the&nbsp;upper&nbsp;and&nbsp;lower&nbsp;quantile&nbsp;limits.</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-showHTMLRatingHeatmap"><strong>showHTMLRatingHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, quantiles=None, Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>Specialisation&nbsp;of&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;showing&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window;<br>
+<dl><dt><a name="NormedQuantilesRatingDigraph-showHTMLRatingHeatmap"><strong>showHTMLRatingHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, quantiles=None, rankingRule=None, Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>Specialisation&nbsp;of&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;showing&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window;<br>
 see&nbsp;:py:meth:`perfTabs.showHTMLPerformanceHeatMap`&nbsp;method.<br>
 &nbsp;<br>
 **Parameters**:<br>
@@ -255,7 +239,7 @@ Methods inherited from <a href="sortingDigraphs.html#QuantilesSortingDigraph">Qu
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-getActionsKeys"><strong>getActionsKeys</strong></a>(self, action=None, withoutProfiles=True)</dt><dd><tt>extract&nbsp;normal&nbsp;actions&nbsp;keys()</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-showHTMLQuantileOrdering"><strong>showHTMLQuantileOrdering</strong></a>(self, Descending=True, strategy='optimistic')</dt><dd><tt>Shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;quantile&nbsp;preordering&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.<br>
+<dl><dt><a name="NormedQuantilesRatingDigraph-showHTMLQuantileOrdering"><strong>showHTMLQuantileOrdering</strong></a>(self, title='Quantiles Preordering', Descending=True, strategy='optimistic')</dt><dd><tt>Shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;quantile&nbsp;preordering&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.<br>
 &nbsp;<br>
 The&nbsp;ordring&nbsp;strategy&nbsp;is&nbsp;either:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;**optimistic**,&nbsp;following&nbsp;the&nbsp;upper&nbsp;quantile&nbsp;limits&nbsp;(default),<br>
@@ -280,9 +264,9 @@ the&nbsp;high&nbsp;category&nbsp;limit.</tt></dd></dl>
 
 <hr>
 Methods inherited from <a href="sortingDigraphs.html#SortingDigraph">SortingDigraph</a>:<br>
-<dl><dt><a name="NormedQuantilesRatingDigraph-exportDigraphGraphViz"><strong>exportDigraphGraphViz</strong></a>(self, fileName=None, bestChoice=set(), worstChoice=set(), noSilent=True, graphType='png', graphSize='7,7')</dt><dd><tt>export&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;for&nbsp;digraph&nbsp;drawing&nbsp;filtering.</tt></dd></dl>
+<dl><dt><a name="NormedQuantilesRatingDigraph-exportDigraphGraphViz"><strong>exportDigraphGraphViz</strong></a>(self, fileName=None, bestChoice=set(), worstChoice=set(), Comments=True, graphType='png', graphSize='7,7')</dt><dd><tt>export&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;for&nbsp;digraph&nbsp;drawing&nbsp;filtering.</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, direction='decreasing', noSilent=True, graphType='png', graphSize='7,7', fontSize=10, relation=None, Debug=False)</dt><dd><tt>export&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;for&nbsp;weak&nbsp;order&nbsp;(Hasse&nbsp;diagram)&nbsp;drawing<br>
+<dl><dt><a name="NormedQuantilesRatingDigraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, direction='decreasing', Comments=True, graphType='png', graphSize='7,7', fontSize=10, relation=None, Debug=False)</dt><dd><tt>export&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;for&nbsp;weak&nbsp;order&nbsp;(Hasse&nbsp;diagram)&nbsp;drawing<br>
 filtering&nbsp;from&nbsp;<a href="#SortingDigraph">SortingDigraph</a>&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-htmlCriteriaCategoryLimits"><strong>htmlCriteriaCategoryLimits</strong></a>(self, tableTitle='Category limits')</dt><dd><tt>Renders&nbsp;category&nbsp;minimum&nbsp;and&nbsp;maximum&nbsp;limits&nbsp;for&nbsp;each&nbsp;criterion<br>
@@ -409,7 +393,7 @@ the&nbsp;criteria&nbsp;ordinal&nbsp;correlation&nbsp;table.</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-saveXMCDAOutrankingDigraph"><strong>saveXMCDAOutrankingDigraph</strong></a>(self, fileName='temp', category='Rubis', subcategory='Choice Recommendation', author='digraphs Module (RB)', reference='saved from Python', comment=True, servingD3=False, relationName='Stilde', valuationType='bipolar', variant='standard', instanceID='void')</dt><dd><tt>save&nbsp;complete&nbsp;Rubis&nbsp;problem&nbsp;and&nbsp;result&nbsp;in&nbsp;XMCDA&nbsp;format&nbsp;with&nbsp;unicode&nbsp;encoding.</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-saveXMLRubisOutrankingDigraph"><strong>saveXMLRubisOutrankingDigraph</strong></a>(self, name='temp', category='Rubis outranking digraph', subcategory='Choice recommendation', author='digraphs Module (RB)', reference='saved from Python', noSilent=False, servingD3=True)</dt><dd><tt>save&nbsp;complete&nbsp;Rubis&nbsp;problem&nbsp;and&nbsp;result&nbsp;in&nbsp;XML&nbsp;format&nbsp;with&nbsp;unicode&nbsp;encoding.</tt></dd></dl>
+<dl><dt><a name="NormedQuantilesRatingDigraph-saveXMLRubisOutrankingDigraph"><strong>saveXMLRubisOutrankingDigraph</strong></a>(self, name='temp', category='Rubis outranking digraph', subcategory='Choice recommendation', author='digraphs Module (RB)', reference='saved from Python', Comments=False, servingD3=True)</dt><dd><tt>save&nbsp;complete&nbsp;Rubis&nbsp;problem&nbsp;and&nbsp;result&nbsp;in&nbsp;XML&nbsp;format&nbsp;with&nbsp;unicode&nbsp;encoding.</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-showAll"><strong>showAll</strong></a>(self)</dt><dd><tt>specialize&nbsp;the&nbsp;general&nbsp;showAll&nbsp;method&nbsp;with&nbsp;criteria<br>
 and&nbsp;performance&nbsp;tableau&nbsp;output</tt></dd></dl>
@@ -464,7 +448,7 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-absirredx"><strong>absirredx</strong></a>(self, choice, x)</dt><dd><tt>Computes&nbsp;the&nbsp;crips&nbsp;-irredundance&nbsp;degree&nbsp;of&nbsp;node&nbsp;x&nbsp;in&nbsp;a&nbsp;choice.</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-abskernelrestrict"><strong>abskernelrestrict</strong></a>(self, choice)</dt><dd><tt>Parameter:&nbsp;prekernel<br>
+<dl><dt><a name="NormedQuantilesRatingDigraph-abskernelrestrict"><strong>abskernelrestrict</strong></a>(self, prekernel)</dt><dd><tt>Parameter:&nbsp;prekernel<br>
 Renders&nbsp;absorbent&nbsp;prekernel&nbsp;restricted&nbsp;relation.</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-absorb"><strong>absorb</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;absorbency&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
@@ -489,8 +473,6 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 ie&nbsp;the&nbsp;average&nbsp;number&nbsp;of&nbsp;choice&nbsp;members&nbsp;that&nbsp;cover&nbsp;each<br>
 non&nbsp;selected&nbsp;object.</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-bestRanks"><strong>bestRanks</strong></a>(self)</dt><dd><tt>renders&nbsp;best&nbsp;possible&nbsp;ranks&nbsp;from&nbsp;indegrees&nbsp;account</tt></dd></dl>
-
 <dl><dt><a name="NormedQuantilesRatingDigraph-bipolarKCorrelation"><strong>bipolarKCorrelation</strong></a>(self, digraph, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar&nbsp;Kendall&nbsp;correlation&nbsp;between&nbsp;two&nbsp;bipolar&nbsp;valued<br>
 digraphs&nbsp;computed&nbsp;from&nbsp;the&nbsp;average&nbsp;valuation&nbsp;of&nbsp;the<br>
 XORDigraph(self,digraph)&nbsp;instance.<br>
@@ -511,19 +493,17 @@ recursive&nbsp;chordless&nbsp;path&nbsp;extraction&nbsp;strating&nbsp;from&nbsp;
 Pk&nbsp;=&nbsp;[n2,&nbsp;....,&nbsp;n1]&nbsp;and&nbsp;ending&nbsp;in&nbsp;node&nbsp;n2.<br>
 Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-circuitAverageCredibility"><strong>circuitAverageCredibility</strong></a>(self, circ)</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;linking&nbsp;credibility&nbsp;of&nbsp;a&nbsp;COC.</tt></dd></dl>
+<dl><dt><a name="NormedQuantilesRatingDigraph-circuitAverageCredibility"><strong>circuitAverageCredibility</strong></a>(self, circ)</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;linking&nbsp;credibility&nbsp;of&nbsp;a&nbsp;Chordless&nbsp;Circuit.</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-circuitCredibilities"><strong>circuitCredibilities</strong></a>(self, circuit, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;linking&nbsp;credibilities&nbsp;and&nbsp;the&nbsp;minimal&nbsp;link&nbsp;of&nbsp;a&nbsp;COC.</tt></dd></dl>
+<dl><dt><a name="NormedQuantilesRatingDigraph-circuitCredibilities"><strong>circuitCredibilities</strong></a>(self, circuit, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;linking&nbsp;credibilities&nbsp;and&nbsp;the&nbsp;minimal&nbsp;link&nbsp;of&nbsp;a&nbsp;Chordless&nbsp;Circuit.</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-circuitMaxCredibility"><strong>circuitMaxCredibility</strong></a>(self, circ)</dt><dd><tt>Renders&nbsp;the&nbsp;minimal&nbsp;linking&nbsp;credibility&nbsp;of&nbsp;a&nbsp;COC.</tt></dd></dl>
+<dl><dt><a name="NormedQuantilesRatingDigraph-circuitMaxCredibility"><strong>circuitMaxCredibility</strong></a>(self, circ)</dt><dd><tt>Renders&nbsp;the&nbsp;maximal&nbsp;linking&nbsp;credibility&nbsp;of&nbsp;a&nbsp;Chordless&nbsp;Circuit.</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-circuitMinCredibility"><strong>circuitMinCredibility</strong></a>(self, circ)</dt><dd><tt>Renders&nbsp;the&nbsp;minimal&nbsp;linking&nbsp;credibility&nbsp;of&nbsp;a&nbsp;COC.</tt></dd></dl>
+<dl><dt><a name="NormedQuantilesRatingDigraph-circuitMinCredibility"><strong>circuitMinCredibility</strong></a>(self, circ)</dt><dd><tt>Renders&nbsp;the&nbsp;minimal&nbsp;linking&nbsp;credibility&nbsp;of&nbsp;a&nbsp;Chordless&nbsp;Circuit.</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-closeSymmetric"><strong>closeSymmetric</strong></a>(self)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Irreflexive=True, Reverse=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
-
-<dl><dt><a name="NormedQuantilesRatingDigraph-collectcomps"><strong>collectcomps</strong></a>(self, x, A, ncomp)</dt><dd><tt>Recursive&nbsp;subroutine&nbsp;of&nbsp;the&nbsp;components&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -587,8 +567,9 @@ Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#NormedQuantilesRatingDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
-following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
+<dl><dt><a name="NormedQuantilesRatingDigraph-computeCopelandOrder"><strong>computeCopelandOrder</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Arrow&amp;Raynaud's&nbsp;rule.</tt></dd></dl>
+
+<dl><dt><a name="NormedQuantilesRatingDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Arrow&amp;Raynaud's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-computeCppChordlessCircuits"><strong>computeCppChordlessCircuits</strong></a>(self, Odd=False, Debug=False)</dt><dd><tt>python&nbsp;wrapper&nbsp;for&nbsp;the&nbsp;C++/Agrum&nbsp;based&nbsp;chordless&nbsp;circuits&nbsp;enumeration<br>
 exchange&nbsp;arguments&nbsp;with&nbsp;external&nbsp;temporary&nbsp;files</tt></dd></dl>
@@ -757,12 +738,6 @@ first&nbsp;rincipal&nbsp;eigenvector&nbsp;of&nbsp;the&nbsp;covariance&nbsp;of&nb
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-computePrudentBetaLevel"><strong>computePrudentBetaLevel</strong></a>(self, Debug=False)</dt><dd><tt>computes&nbsp;alpha,&nbsp;ie&nbsp;the&nbsp;lowest&nbsp;valuation&nbsp;level,&nbsp;for&nbsp;which&nbsp;the<br>
 bipolarly&nbsp;polarised&nbsp;digraph&nbsp;doesn't&nbsp;contain&nbsp;a&nbsp;chordless&nbsp;circuit.</tt></dd></dl>
-
-<dl><dt><a name="NormedQuantilesRatingDigraph-computeRankedPairsOrder"><strong>computeRankedPairsOrder</strong></a>(self, Cpp=False, Debug=False)</dt><dd><tt>Renders&nbsp;an&nbsp;actions&nbsp;ordering&nbsp;from&nbsp;the&nbsp;worst&nbsp;to&nbsp;the&nbsp;best&nbsp;obtained&nbsp;from&nbsp;the<br>
-ranked&nbsp;pairs&nbsp;rule.</tt></dd></dl>
-
-<dl><dt><a name="NormedQuantilesRatingDigraph-computeRankedPairsRanking"><strong>computeRankedPairsRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;actions&nbsp;ordering&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst&nbsp;obtained&nbsp;from&nbsp;the<br>
-ranked&nbsp;pairs&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-computeRankingByBestChoosing"><strong>computeRankingByBestChoosing</strong></a>(self, CoDual=False, CppAgrum=False, Debug=False)</dt><dd><tt>Computes&nbsp;a&nbsp;weak&nbsp;preordering&nbsp;of&nbsp;the&nbsp;self.<strong>actions</strong>&nbsp;by&nbsp;recursive<br>
 best&nbsp;choice&nbsp;elagations.<br>
@@ -934,7 +909,7 @@ If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nb
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;Digraph&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="NormedQuantilesRatingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, ConjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;Digraph&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -952,7 +927,7 @@ If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nb
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-domirredx"><strong>domirredx</strong></a>(self, choice, x)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;+irredundance&nbsp;degree&nbsp;of&nbsp;node&nbsp;x&nbsp;in&nbsp;a&nbsp;choice.</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-domkernelrestrict"><strong>domkernelrestrict</strong></a>(self, choice)</dt><dd><tt>Parameter:&nbsp;prekernel<br>
+<dl><dt><a name="NormedQuantilesRatingDigraph-domkernelrestrict"><strong>domkernelrestrict</strong></a>(self, prekernel)</dt><dd><tt>Parameter:&nbsp;dominant&nbsp;prekernel<br>
 Renders&nbsp;dominant&nbsp;prekernel&nbsp;restricted&nbsp;relation.</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-exportD3"><strong>exportD3</strong></a>(self, fileName='index', Comments=True)</dt><dd><tt>This&nbsp;function&nbsp;was&nbsp;designed&nbsp;and&nbsp;implemented&nbsp;by&nbsp;Gary&nbsp;Cornelius,&nbsp;2014&nbsp;for&nbsp;his&nbsp;bachelor&nbsp;thesis&nbsp;at&nbsp;the&nbsp;University&nbsp;of&nbsp;Luxembourg.&nbsp;<br>
@@ -1038,6 +1013,26 @@ the&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 averageDeterm&nbsp;=&nbsp;(&nbsp;sum_(x,y)&nbsp;[&nbsp;abs(&nbsp;relf-relation[x][y]&nbsp;-&nbsp;Med&nbsp;)]&nbsp;/&nbsp;n&nbsp;)&nbsp;/&nbsp;[(&nbsp;Max-Med&nbsp;)&nbsp;if&nbsp;Normalized],<br>
 &nbsp;<br>
 where&nbsp;Med&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['med']&nbsp;and&nbsp;Max&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['max'].</tt></dd></dl>
+
+<dl><dt><a name="NormedQuantilesRatingDigraph-htmlBestChoiceRecommendation"><strong>htmlBestChoiceRecommendation</strong></a>(self, pageTitle=None, ChoiceVector=False, ContentCentered=True, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Computes&nbsp;by&nbsp;default&nbsp;the&nbsp;Rubis&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;on&nbsp;the&nbsp;corresponding&nbsp;strict&nbsp;(codual)&nbsp;outranking&nbsp;digraph.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;In&nbsp;case&nbsp;of&nbsp;chordless&nbsp;circuits,&nbsp;if&nbsp;supporting&nbsp;arcs&nbsp;are&nbsp;more&nbsp;credible<br>
+&nbsp;&nbsp;&nbsp;&nbsp;than&nbsp;the&nbsp;reversed&nbsp;negating&nbsp;arcs,&nbsp;we&nbsp;collapse&nbsp;the&nbsp;circuits&nbsp;into&nbsp;hyper&nbsp;nodes.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Inversely,&nbsp;&nbsp;if&nbsp;supporting&nbsp;arcs&nbsp;are&nbsp;not&nbsp;more&nbsp;credible&nbsp;than&nbsp;the&nbsp;reversed&nbsp;negating&nbsp;arcs,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;we&nbsp;brake&nbsp;the&nbsp;circuits&nbsp;on&nbsp;their&nbsp;weakest&nbsp;arc.<br>
+&nbsp;<br>
+Usage&nbsp;example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
+&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(seed=5)<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t)<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#NormedQuantilesRatingDigraph-showHTMLBestChoiceRecommendation">showHTMLBestChoiceRecommendation</a>()</tt></dd></dl>
+
+<dl><dt><a name="NormedQuantilesRatingDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
 
@@ -1127,11 +1122,30 @@ the&nbsp;not&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-notdneighbors"><strong>notdneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;not&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-omax"><strong>omax</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;disjunction&nbsp;for&nbsp;bipolar&nbsp;outranking&nbsp;characteristics<br>
-computation.</tt></dd></dl>
+<dl><dt><a name="NormedQuantilesRatingDigraph-omax"><strong>omax</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**disjunction**&nbsp;for&nbsp;bipolar&nbsp;outranking&nbsp;characteristics<br>
+computation:&nbsp;Med&nbsp;is&nbsp;the&nbsp;valuation&nbsp;domain&nbsp;median&nbsp;and&nbsp;L&nbsp;is&nbsp;a&nbsp;list&nbsp;of<br>
+r-valued&nbsp;statement&nbsp;characteristics.<br>
+&nbsp;<br>
+With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**max**,<br>
+with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**min**.<br>
+&nbsp;<br>
+The&nbsp;mixture&nbsp;of&nbsp;**both&nbsp;positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results&nbsp;in<br>
+an&nbsp;**indeterminate**&nbsp;value.<br>
+&nbsp;<br>
+Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omax*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
+and&nbsp;operate&nbsp;omax&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-omin"><strong>omin</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;conjunction&nbsp;for&nbsp;bipolar&nbsp;outranking&nbsp;characteristics<br>
-computation.</tt></dd></dl>
+<dl><dt><a name="NormedQuantilesRatingDigraph-omin"><strong>omin</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**conjunction**&nbsp;of&nbsp;a&nbsp;list&nbsp;L&nbsp;of&nbsp;bipolar&nbsp;outranking&nbsp;characteristics.<br>
+Med&nbsp;is&nbsp;the&nbsp;given&nbsp;valuation&nbsp;domain&nbsp;median.<br>
+&nbsp;<br>
+With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**min**,<br>
+with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**max**.<br>
+&nbsp;<br>
+The&nbsp;mixture&nbsp;of&nbsp;both&nbsp;**positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results<br>
+in&nbsp;an&nbsp;**indeterminate**&nbsp;value.<br>
+&nbsp;<br>
+Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omin*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
+and&nbsp;operate&nbsp;omin&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-outDegrees"><strong>outDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;outdegrees</tt></dd></dl>
 
@@ -1178,7 +1192,49 @@ Renders&nbsp;the&nbsp;sharpest&nbsp;of&nbsp;two&nbsp;characteristic&nbsp;vectors
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-showBadChoices"><strong>showBadChoices</strong></a>(self, Recompute=True)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;bad&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-showChoiceVector"><strong>showChoiceVector</strong></a>(self, ch, ChoiceVector=True)</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
+<dl><dt><a name="NormedQuantilesRatingDigraph-showBestChoiceRecommendation"><strong>showBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Computes&nbsp;by&nbsp;default&nbsp;the&nbsp;Rubis&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;on&nbsp;the&nbsp;corresponding&nbsp;strict&nbsp;(codual)&nbsp;outranking&nbsp;digraph.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;In&nbsp;case&nbsp;of&nbsp;chordless&nbsp;circuits,&nbsp;if&nbsp;supporting&nbsp;arcs&nbsp;are&nbsp;more&nbsp;credible<br>
+&nbsp;&nbsp;&nbsp;&nbsp;than&nbsp;the&nbsp;reversed&nbsp;negating&nbsp;arcs,&nbsp;we&nbsp;collapse&nbsp;the&nbsp;circuits&nbsp;into&nbsp;hyper&nbsp;nodes.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Inversely,&nbsp;&nbsp;if&nbsp;supporting&nbsp;arcs&nbsp;are&nbsp;not&nbsp;more&nbsp;credible&nbsp;than&nbsp;the&nbsp;reversed&nbsp;negating&nbsp;arcs,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;we&nbsp;brake&nbsp;the&nbsp;circuits&nbsp;on&nbsp;their&nbsp;weakest&nbsp;arc.<br>
+&nbsp;<br>
+Usage&nbsp;example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
+&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(seed=5)<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t)<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#NormedQuantilesRatingDigraph-showRubisBestChoiceRecommendation">showRubisBestChoiceRecommendation</a>()<br>
+***********************<br>
+RuBis&nbsp;Best&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
+(in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;determinateness)&nbsp;&nbsp;&nbsp;<br>
+Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
+===&nbsp;&gt;&gt;&nbsp;potential&nbsp;vest&nbsp;choices<br>
+*&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a04',&nbsp;'a14',&nbsp;'a19',&nbsp;'a20']<br>
+&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
+&nbsp;&nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
+&nbsp;&nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
+&nbsp;&nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-59.52<br>
+&nbsp;&nbsp;&nbsp;covering&nbsp;(%)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;75.00<br>
+&nbsp;&nbsp;&nbsp;determinateness&nbsp;(%)&nbsp;:&nbsp;57.86<br>
+&nbsp;&nbsp;&nbsp;-&nbsp;most&nbsp;credible&nbsp;action(s)&nbsp;=&nbsp;{&nbsp;'a14':&nbsp;23.81,&nbsp;'a19':&nbsp;11.90,&nbsp;'a04':&nbsp;2.38,&nbsp;'a20':&nbsp;1.19,&nbsp;}&nbsp;&nbsp;<br>
+===&nbsp;&gt;&gt;&nbsp;potential&nbsp;worst&nbsp;choices&nbsp;<br>
+*&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a03',&nbsp;'a12',&nbsp;'a17']<br>
+&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
+&nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
+&nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-76.19<br>
+&nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
+&nbsp;&nbsp;covering&nbsp;(%)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;0.00<br>
+&nbsp;&nbsp;determinateness&nbsp;(%)&nbsp;:&nbsp;65.39<br>
+&nbsp;&nbsp;-&nbsp;most&nbsp;credible&nbsp;action(s)&nbsp;=&nbsp;{&nbsp;'a03':&nbsp;38.10,&nbsp;'a12':&nbsp;13.10,&nbsp;'a17':&nbsp;4.76,&nbsp;}<br>
+Execution&nbsp;time:&nbsp;0.024&nbsp;seconds<br>
+*****************************</tt></dd></dl>
+
+<dl><dt><a name="NormedQuantilesRatingDigraph-showChoiceVector"><strong>showChoiceVector</strong></a>(self, ch, choiceType='good', ChoiceVector=True)</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-showChordlessCircuits"><strong>showChordlessCircuits</strong></a>(self)</dt><dd><tt>show&nbsp;methods&nbsp;for&nbsp;(chordless)&nbsp;circuits&nbsp;in&nbsp;a&nbsp;Digraph.<br>
 Dummy&nbsp;for&nbsp;<a href="#NormedQuantilesRatingDigraph-showCircuits">showCircuits</a>().</tt></dd></dl>
@@ -1188,6 +1244,8 @@ Dummy&nbsp;for&nbsp;<a href="#NormedQuantilesRatingDigraph-showCircuits">showCir
 <dl><dt><a name="NormedQuantilesRatingDigraph-showComponents"><strong>showComponents</strong></a>(self)</dt><dd><tt>Shows&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-showGoodChoices"><strong>showGoodChoices</strong></a>(self, Recompute=True)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.</tt></dd></dl>
+
+<dl><dt><a name="NormedQuantilesRatingDigraph-showHTMLBestChoiceRecommendation"><strong>showHTMLBestChoiceRecommendation</strong></a>(self, pageTitle=None, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-showHTMLRelationMap"><strong>showHTMLRelationMap</strong></a>(self, actionsList=None, rankingRule='Copeland', Colored=True, tableTitle='Relation Map', relationName='r(x S y)', symbols=['+', '&amp;middot;', '&amp;nbsp;', '&amp;#150;', '&amp;#151'])</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;map&nbsp;of&nbsp;self.<br>
 See&nbsp;corresponding&nbsp;Digraph.<a href="#NormedQuantilesRatingDigraph-showRelationMap">showRelationMap</a>()&nbsp;method.<br>
@@ -1364,50 +1422,10 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Ranking&nbsp;rule:&nbsp;netFlows<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
-&nbsp;<br>
-..&nbsp;note::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Computes&nbsp;by&nbsp;default&nbsp;the&nbsp;Rubis&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;on&nbsp;the&nbsp;corresponding&nbsp;strict&nbsp;(codual)&nbsp;outranking&nbsp;digraph.<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;In&nbsp;case&nbsp;of&nbsp;chordless&nbsp;circuits,&nbsp;if&nbsp;supporting&nbsp;arcs&nbsp;are&nbsp;more&nbsp;credible<br>
-&nbsp;&nbsp;&nbsp;&nbsp;than&nbsp;the&nbsp;reversed&nbsp;negating&nbsp;arcs,&nbsp;we&nbsp;collapse&nbsp;the&nbsp;circuits&nbsp;into&nbsp;hyper&nbsp;nodes.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Inversely,&nbsp;&nbsp;if&nbsp;supporting&nbsp;arcs&nbsp;are&nbsp;not&nbsp;more&nbsp;credible&nbsp;than&nbsp;the&nbsp;reversed&nbsp;negating&nbsp;arcs,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;we&nbsp;brake&nbsp;the&nbsp;circuits&nbsp;on&nbsp;their&nbsp;weakest&nbsp;arc.<br>
-&nbsp;<br>
-Usage&nbsp;example:<br>
-&nbsp;<br>
-&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
-&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(seed=5)<br>
-&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t)<br>
-&gt;&gt;&gt;&nbsp;g.<a href="#NormedQuantilesRatingDigraph-showRubisBestChoiceRecommendation">showRubisBestChoiceRecommendation</a>()<br>
-***********************<br>
-RuBis&nbsp;Best&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
-(in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;determinateness)&nbsp;&nbsp;&nbsp;<br>
-Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
-===&nbsp;&gt;&gt;&nbsp;potential&nbsp;vest&nbsp;choices<br>
-*&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a04',&nbsp;'a14',&nbsp;'a19',&nbsp;'a20']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
-&nbsp;&nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
-&nbsp;&nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
-&nbsp;&nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-59.52<br>
-&nbsp;&nbsp;&nbsp;covering&nbsp;(%)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;75.00<br>
-&nbsp;&nbsp;&nbsp;determinateness&nbsp;(%)&nbsp;:&nbsp;57.86<br>
-&nbsp;&nbsp;&nbsp;-&nbsp;most&nbsp;credible&nbsp;action(s)&nbsp;=&nbsp;{&nbsp;'a14':&nbsp;23.81,&nbsp;'a19':&nbsp;11.90,&nbsp;'a04':&nbsp;2.38,&nbsp;'a20':&nbsp;1.19,&nbsp;}&nbsp;&nbsp;<br>
-===&nbsp;&gt;&gt;&nbsp;potential&nbsp;worst&nbsp;choices&nbsp;<br>
-*&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a03',&nbsp;'a12',&nbsp;'a17']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
-&nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
-&nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-76.19<br>
-&nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
-&nbsp;&nbsp;covering&nbsp;(%)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;0.00<br>
-&nbsp;&nbsp;determinateness&nbsp;(%)&nbsp;:&nbsp;65.39<br>
-&nbsp;&nbsp;-&nbsp;most&nbsp;credible&nbsp;action(s)&nbsp;=&nbsp;{&nbsp;'a03':&nbsp;38.10,&nbsp;'a12':&nbsp;13.10,&nbsp;'a17':&nbsp;4.76,&nbsp;}<br>
-Execution&nbsp;time:&nbsp;0.024&nbsp;seconds<br>
-*****************************</tt></dd></dl>
+<dl><dt><a name="NormedQuantilesRatingDigraph-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, **kwargs)</dt><dd><tt>Dummy&nbsp;for&nbsp;backward&nbsp;portable&nbsp;<a href="#NormedQuantilesRatingDigraph-showBestChoiceRecommendation">showBestChoiceRecommendation</a>().</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-showRubyChoice"><strong>showRubyChoice</strong></a>(self, Comments=False, _OldCoca=True)</dt><dd><tt>dummy&nbsp;for&nbsp;<a href="#NormedQuantilesRatingDigraph-showRubisBestChoiceRecommendation">showRubisBestChoiceRecommendation</a>()<br>
-older&nbsp;versions&nbsp;compatibility</tt></dd></dl>
+<dl><dt><a name="NormedQuantilesRatingDigraph-showRubyChoice"><strong>showRubyChoice</strong></a>(self, Comments=False, _OldCoca=True)</dt><dd><tt>Dummy&nbsp;for&nbsp;<a href="#NormedQuantilesRatingDigraph-showRubisBestChoiceRecommendation">showRubisBestChoiceRecommendation</a>()<br>
+needed&nbsp;for&nbsp;older&nbsp;versions&nbsp;compatibility.</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-showStatistics"><strong>showStatistics</strong></a>(self)</dt><dd><tt>Computes&nbsp;digraph&nbsp;statistics&nbsp;like&nbsp;order,&nbsp;size&nbsp;and&nbsp;arc-density.</tt></dd></dl>
 
@@ -1441,8 +1459,6 @@ for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
 <dl><dt><a name="NormedQuantilesRatingDigraph-weakDneighbors"><strong>weakDneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-weakGammaSets"><strong>weakGammaSets</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;dictionary&nbsp;of&nbsp;neighborhoods&nbsp;{node:&nbsp;(dx,ax)}</tt></dd></dl>
-
-<dl><dt><a name="NormedQuantilesRatingDigraph-worstRanks"><strong>worstRanks</strong></a>(self)</dt><dd><tt>renders&nbsp;worst&nbsp;possible&nbsp;ranks&nbsp;from&nbsp;outdegrees&nbsp;account</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-zoomValuation"><strong>zoomValuation</strong></a>(self, zoomFactor=1.0)</dt><dd><tt>Zooms&nbsp;in&nbsp;or&nbsp;out,&nbsp;depending&nbsp;on&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;zoomFactor&nbsp;provided,<br>
 the&nbsp;bipolar&nbsp;valuation&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -1548,7 +1564,7 @@ can&nbsp;be&nbsp;provided&nbsp;for&nbsp;a&nbsp;specific&nbsp;normalisation.</tt>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-convertInsite2BigData"><strong>convertInsite2BigData</strong></a>(self)</dt><dd><tt>Convert&nbsp;in&nbsp;site&nbsp;a&nbsp;standard&nbsp;formated&nbsp;Performance&nbsp;tableau&nbsp;into&nbsp;a&nbsp;bigData&nbsp;formated&nbsp;instance.</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-convertInsite2Standard"><strong>convertInsite2Standard</strong></a>(self)</dt><dd><tt>Convert&nbsp;in&nbsp;site&nbsp;a&nbsp;bigData&nbsp;formated&nbsp;Performance&nbsp;tableau&nbsp;back&nbsp;into&nbsp;a&nbsp;standard&nbsp;formated&nbsp;<a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="NormedQuantilesRatingDigraph-convertInsite2Standard"><strong>convertInsite2Standard</strong></a>(self)</dt><dd><tt>Convert&nbsp;in&nbsp;site&nbsp;a&nbsp;bigData&nbsp;formated&nbsp;Performance&nbsp;tableau&nbsp;back&nbsp;into&nbsp;a&nbsp;standard&nbsp;formated&nbsp;PerformanceTableau&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-convertWeight2Decimal"><strong>convertWeight2Decimal</strong></a>(self)</dt><dd><tt>Convert&nbsp;significance&nbsp;weights&nbsp;from&nbsp;obsolete&nbsp;float&nbsp;format<br>
 to&nbsp;decimal&nbsp;format.</tt></dd></dl>
@@ -1639,13 +1655,13 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 <font color="#000000" face="helvetica, arial"><a name="QuantilesSortingDigraph">class <strong>QuantilesSortingDigraph</strong></a>(<a href="sortingDigraphs.html#SortingDigraph">SortingDigraph</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Specialisation&nbsp;of&nbsp;the&nbsp;sortingDigraph&nbsp;Class<br>
+<td colspan=2><tt>Specialisation&nbsp;of&nbsp;the&nbsp;root&nbsp;:py:class:`sortingDigraphs.<a href="#SortingDigraph">SortingDigraph</a>`&nbsp;class<br>
 for&nbsp;sorting&nbsp;of&nbsp;a&nbsp;large&nbsp;set&nbsp;of&nbsp;alternatives&nbsp;into<br>
 quantiles&nbsp;delimited&nbsp;ordered&nbsp;classes.<br>
 &nbsp;&nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;constructor&nbsp;requires&nbsp;a&nbsp;valid&nbsp;<a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>&nbsp;instance.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;constructor&nbsp;requires&nbsp;a&nbsp;valid&nbsp;PerformanceTableau&nbsp;instance.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;no&nbsp;number&nbsp;of&nbsp;limiting&nbsp;quantiles&nbsp;is&nbsp;given,&nbsp;then&nbsp;a&nbsp;default&nbsp;profile&nbsp;with&nbsp;the&nbsp;limiting&nbsp;quartiles&nbsp;Q0,Q1,Q2,&nbsp;Q3&nbsp;and&nbsp;Q4&nbsp;is&nbsp;used&nbsp;on&nbsp;each&nbsp;criteria.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;By&nbsp;default&nbsp;upper&nbsp;closed&nbsp;limits&nbsp;of&nbsp;categories&nbsp;are&nbsp;supposed&nbsp;to&nbsp;be&nbsp;used&nbsp;in&nbsp;the&nbsp;sorting.<br>
 &nbsp;<br>
@@ -1693,7 +1709,7 @@ Methods defined here:<br>
 
 <dl><dt><a name="QuantilesSortingDigraph-computeCategoryContents"><strong>computeCategoryContents</strong></a>(self, Reverse=False, Comments=False, StoreSorting=True, Threading=False, nbrOfCPUs=None)</dt><dd><tt>Computes&nbsp;the&nbsp;sorting&nbsp;results&nbsp;per&nbsp;category.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-computeQuantileOrdering"><strong>computeQuantileOrdering</strong></a>(self, strategy=None, Descending=True, HTML=False, Comments=False, Debug=False)</dt><dd><tt>*Parameters*:<br>
+<dl><dt><a name="QuantilesSortingDigraph-computeQuantileOrdering"><strong>computeQuantileOrdering</strong></a>(self, strategy=None, Descending=True, HTML=False, title='Quantiles Preordering', Comments=False, Debug=False)</dt><dd><tt>*Parameters*:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Descending:&nbsp;listing&nbsp;in&nbsp;*decreasing*&nbsp;(default)&nbsp;or&nbsp;*increasing*&nbsp;quantile&nbsp;order.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;strategy:&nbsp;ordering&nbsp;in&nbsp;an&nbsp;{'optimistic'&nbsp;(default)&nbsp;|&nbsp;'pessimistic'&nbsp;|&nbsp;'average'}<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;the&nbsp;uppest,&nbsp;the&nbsp;lowest&nbsp;or&nbsp;the&nbsp;average&nbsp;potential&nbsp;quantile.</tt></dd></dl>
@@ -1715,7 +1731,7 @@ Returns&nbsp;a&nbsp;tuple&nbsp;:&nbsp;action,&nbsp;lowest&nbsp;category&nbsp;key
 
 <dl><dt><a name="QuantilesSortingDigraph-showActionsSortingResult"><strong>showActionsSortingResult</strong></a>(self, actionSubset=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;quantiles&nbsp;sorting&nbsp;result&nbsp;all&nbsp;(default)&nbsp;of&nbsp;a&nbsp;subset&nbsp;of&nbsp;the&nbsp;decision&nbsp;actions.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-showHTMLQuantileOrdering"><strong>showHTMLQuantileOrdering</strong></a>(self, Descending=True, strategy='optimistic')</dt><dd><tt>Shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;quantile&nbsp;preordering&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.<br>
+<dl><dt><a name="QuantilesSortingDigraph-showHTMLQuantileOrdering"><strong>showHTMLQuantileOrdering</strong></a>(self, title='Quantiles Preordering', Descending=True, strategy='optimistic')</dt><dd><tt>Shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;quantile&nbsp;preordering&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.<br>
 &nbsp;<br>
 The&nbsp;ordring&nbsp;strategy&nbsp;is&nbsp;either:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;**optimistic**,&nbsp;following&nbsp;the&nbsp;upper&nbsp;quantile&nbsp;limits&nbsp;(default),<br>
@@ -1744,9 +1760,9 @@ the&nbsp;high&nbsp;category&nbsp;limit.</tt></dd></dl>
 Methods inherited from <a href="sortingDigraphs.html#SortingDigraph">SortingDigraph</a>:<br>
 <dl><dt><a name="QuantilesSortingDigraph-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Default&nbsp;presentation&nbsp;method&nbsp;for&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>&nbsp;instance.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-exportDigraphGraphViz"><strong>exportDigraphGraphViz</strong></a>(self, fileName=None, bestChoice=set(), worstChoice=set(), noSilent=True, graphType='png', graphSize='7,7')</dt><dd><tt>export&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;for&nbsp;digraph&nbsp;drawing&nbsp;filtering.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-exportDigraphGraphViz"><strong>exportDigraphGraphViz</strong></a>(self, fileName=None, bestChoice=set(), worstChoice=set(), Comments=True, graphType='png', graphSize='7,7')</dt><dd><tt>export&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;for&nbsp;digraph&nbsp;drawing&nbsp;filtering.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, direction='decreasing', noSilent=True, graphType='png', graphSize='7,7', fontSize=10, relation=None, Debug=False)</dt><dd><tt>export&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;for&nbsp;weak&nbsp;order&nbsp;(Hasse&nbsp;diagram)&nbsp;drawing<br>
+<dl><dt><a name="QuantilesSortingDigraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, direction='decreasing', Comments=True, graphType='png', graphSize='7,7', fontSize=10, relation=None, Debug=False)</dt><dd><tt>export&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;for&nbsp;weak&nbsp;order&nbsp;(Hasse&nbsp;diagram)&nbsp;drawing<br>
 filtering&nbsp;from&nbsp;<a href="#SortingDigraph">SortingDigraph</a>&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-htmlCriteriaCategoryLimits"><strong>htmlCriteriaCategoryLimits</strong></a>(self, tableTitle='Category limits')</dt><dd><tt>Renders&nbsp;category&nbsp;minimum&nbsp;and&nbsp;maximum&nbsp;limits&nbsp;for&nbsp;each&nbsp;criterion<br>
@@ -1873,7 +1889,7 @@ the&nbsp;criteria&nbsp;ordinal&nbsp;correlation&nbsp;table.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-saveXMCDAOutrankingDigraph"><strong>saveXMCDAOutrankingDigraph</strong></a>(self, fileName='temp', category='Rubis', subcategory='Choice Recommendation', author='digraphs Module (RB)', reference='saved from Python', comment=True, servingD3=False, relationName='Stilde', valuationType='bipolar', variant='standard', instanceID='void')</dt><dd><tt>save&nbsp;complete&nbsp;Rubis&nbsp;problem&nbsp;and&nbsp;result&nbsp;in&nbsp;XMCDA&nbsp;format&nbsp;with&nbsp;unicode&nbsp;encoding.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-saveXMLRubisOutrankingDigraph"><strong>saveXMLRubisOutrankingDigraph</strong></a>(self, name='temp', category='Rubis outranking digraph', subcategory='Choice recommendation', author='digraphs Module (RB)', reference='saved from Python', noSilent=False, servingD3=True)</dt><dd><tt>save&nbsp;complete&nbsp;Rubis&nbsp;problem&nbsp;and&nbsp;result&nbsp;in&nbsp;XML&nbsp;format&nbsp;with&nbsp;unicode&nbsp;encoding.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-saveXMLRubisOutrankingDigraph"><strong>saveXMLRubisOutrankingDigraph</strong></a>(self, name='temp', category='Rubis outranking digraph', subcategory='Choice recommendation', author='digraphs Module (RB)', reference='saved from Python', Comments=False, servingD3=True)</dt><dd><tt>save&nbsp;complete&nbsp;Rubis&nbsp;problem&nbsp;and&nbsp;result&nbsp;in&nbsp;XML&nbsp;format&nbsp;with&nbsp;unicode&nbsp;encoding.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-showAll"><strong>showAll</strong></a>(self)</dt><dd><tt>specialize&nbsp;the&nbsp;general&nbsp;showAll&nbsp;method&nbsp;with&nbsp;criteria<br>
 and&nbsp;performance&nbsp;tableau&nbsp;output</tt></dd></dl>
@@ -1928,7 +1944,7 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 
 <dl><dt><a name="QuantilesSortingDigraph-absirredx"><strong>absirredx</strong></a>(self, choice, x)</dt><dd><tt>Computes&nbsp;the&nbsp;crips&nbsp;-irredundance&nbsp;degree&nbsp;of&nbsp;node&nbsp;x&nbsp;in&nbsp;a&nbsp;choice.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-abskernelrestrict"><strong>abskernelrestrict</strong></a>(self, choice)</dt><dd><tt>Parameter:&nbsp;prekernel<br>
+<dl><dt><a name="QuantilesSortingDigraph-abskernelrestrict"><strong>abskernelrestrict</strong></a>(self, prekernel)</dt><dd><tt>Parameter:&nbsp;prekernel<br>
 Renders&nbsp;absorbent&nbsp;prekernel&nbsp;restricted&nbsp;relation.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-absorb"><strong>absorb</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;absorbency&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
@@ -1953,8 +1969,6 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 ie&nbsp;the&nbsp;average&nbsp;number&nbsp;of&nbsp;choice&nbsp;members&nbsp;that&nbsp;cover&nbsp;each<br>
 non&nbsp;selected&nbsp;object.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-bestRanks"><strong>bestRanks</strong></a>(self)</dt><dd><tt>renders&nbsp;best&nbsp;possible&nbsp;ranks&nbsp;from&nbsp;indegrees&nbsp;account</tt></dd></dl>
-
 <dl><dt><a name="QuantilesSortingDigraph-bipolarKCorrelation"><strong>bipolarKCorrelation</strong></a>(self, digraph, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar&nbsp;Kendall&nbsp;correlation&nbsp;between&nbsp;two&nbsp;bipolar&nbsp;valued<br>
 digraphs&nbsp;computed&nbsp;from&nbsp;the&nbsp;average&nbsp;valuation&nbsp;of&nbsp;the<br>
 XORDigraph(self,digraph)&nbsp;instance.<br>
@@ -1975,19 +1989,17 @@ recursive&nbsp;chordless&nbsp;path&nbsp;extraction&nbsp;strating&nbsp;from&nbsp;
 Pk&nbsp;=&nbsp;[n2,&nbsp;....,&nbsp;n1]&nbsp;and&nbsp;ending&nbsp;in&nbsp;node&nbsp;n2.<br>
 Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-circuitAverageCredibility"><strong>circuitAverageCredibility</strong></a>(self, circ)</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;linking&nbsp;credibility&nbsp;of&nbsp;a&nbsp;COC.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-circuitAverageCredibility"><strong>circuitAverageCredibility</strong></a>(self, circ)</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;linking&nbsp;credibility&nbsp;of&nbsp;a&nbsp;Chordless&nbsp;Circuit.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-circuitCredibilities"><strong>circuitCredibilities</strong></a>(self, circuit, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;linking&nbsp;credibilities&nbsp;and&nbsp;the&nbsp;minimal&nbsp;link&nbsp;of&nbsp;a&nbsp;COC.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-circuitCredibilities"><strong>circuitCredibilities</strong></a>(self, circuit, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;linking&nbsp;credibilities&nbsp;and&nbsp;the&nbsp;minimal&nbsp;link&nbsp;of&nbsp;a&nbsp;Chordless&nbsp;Circuit.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-circuitMaxCredibility"><strong>circuitMaxCredibility</strong></a>(self, circ)</dt><dd><tt>Renders&nbsp;the&nbsp;minimal&nbsp;linking&nbsp;credibility&nbsp;of&nbsp;a&nbsp;COC.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-circuitMaxCredibility"><strong>circuitMaxCredibility</strong></a>(self, circ)</dt><dd><tt>Renders&nbsp;the&nbsp;maximal&nbsp;linking&nbsp;credibility&nbsp;of&nbsp;a&nbsp;Chordless&nbsp;Circuit.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-circuitMinCredibility"><strong>circuitMinCredibility</strong></a>(self, circ)</dt><dd><tt>Renders&nbsp;the&nbsp;minimal&nbsp;linking&nbsp;credibility&nbsp;of&nbsp;a&nbsp;COC.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-circuitMinCredibility"><strong>circuitMinCredibility</strong></a>(self, circ)</dt><dd><tt>Renders&nbsp;the&nbsp;minimal&nbsp;linking&nbsp;credibility&nbsp;of&nbsp;a&nbsp;Chordless&nbsp;Circuit.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-closeSymmetric"><strong>closeSymmetric</strong></a>(self)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Irreflexive=True, Reverse=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
-
-<dl><dt><a name="QuantilesSortingDigraph-collectcomps"><strong>collectcomps</strong></a>(self, x, A, ncomp)</dt><dd><tt>Recursive&nbsp;subroutine&nbsp;of&nbsp;the&nbsp;components&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -2051,8 +2063,9 @@ Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl
 
 <dl><dt><a name="QuantilesSortingDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#QuantilesSortingDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
-following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-computeCopelandOrder"><strong>computeCopelandOrder</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Arrow&amp;Raynaud's&nbsp;rule.</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Arrow&amp;Raynaud's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-computeCppChordlessCircuits"><strong>computeCppChordlessCircuits</strong></a>(self, Odd=False, Debug=False)</dt><dd><tt>python&nbsp;wrapper&nbsp;for&nbsp;the&nbsp;C++/Agrum&nbsp;based&nbsp;chordless&nbsp;circuits&nbsp;enumeration<br>
 exchange&nbsp;arguments&nbsp;with&nbsp;external&nbsp;temporary&nbsp;files</tt></dd></dl>
@@ -2221,12 +2234,6 @@ first&nbsp;rincipal&nbsp;eigenvector&nbsp;of&nbsp;the&nbsp;covariance&nbsp;of&nb
 
 <dl><dt><a name="QuantilesSortingDigraph-computePrudentBetaLevel"><strong>computePrudentBetaLevel</strong></a>(self, Debug=False)</dt><dd><tt>computes&nbsp;alpha,&nbsp;ie&nbsp;the&nbsp;lowest&nbsp;valuation&nbsp;level,&nbsp;for&nbsp;which&nbsp;the<br>
 bipolarly&nbsp;polarised&nbsp;digraph&nbsp;doesn't&nbsp;contain&nbsp;a&nbsp;chordless&nbsp;circuit.</tt></dd></dl>
-
-<dl><dt><a name="QuantilesSortingDigraph-computeRankedPairsOrder"><strong>computeRankedPairsOrder</strong></a>(self, Cpp=False, Debug=False)</dt><dd><tt>Renders&nbsp;an&nbsp;actions&nbsp;ordering&nbsp;from&nbsp;the&nbsp;worst&nbsp;to&nbsp;the&nbsp;best&nbsp;obtained&nbsp;from&nbsp;the<br>
-ranked&nbsp;pairs&nbsp;rule.</tt></dd></dl>
-
-<dl><dt><a name="QuantilesSortingDigraph-computeRankedPairsRanking"><strong>computeRankedPairsRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;actions&nbsp;ordering&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst&nbsp;obtained&nbsp;from&nbsp;the<br>
-ranked&nbsp;pairs&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-computeRankingByBestChoosing"><strong>computeRankingByBestChoosing</strong></a>(self, CoDual=False, CppAgrum=False, Debug=False)</dt><dd><tt>Computes&nbsp;a&nbsp;weak&nbsp;preordering&nbsp;of&nbsp;the&nbsp;self.<strong>actions</strong>&nbsp;by&nbsp;recursive<br>
 best&nbsp;choice&nbsp;elagations.<br>
@@ -2398,7 +2405,7 @@ If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nb
 
 <dl><dt><a name="QuantilesSortingDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;Digraph&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, ConjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;Digraph&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -2416,7 +2423,7 @@ If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nb
 
 <dl><dt><a name="QuantilesSortingDigraph-domirredx"><strong>domirredx</strong></a>(self, choice, x)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;+irredundance&nbsp;degree&nbsp;of&nbsp;node&nbsp;x&nbsp;in&nbsp;a&nbsp;choice.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-domkernelrestrict"><strong>domkernelrestrict</strong></a>(self, choice)</dt><dd><tt>Parameter:&nbsp;prekernel<br>
+<dl><dt><a name="QuantilesSortingDigraph-domkernelrestrict"><strong>domkernelrestrict</strong></a>(self, prekernel)</dt><dd><tt>Parameter:&nbsp;dominant&nbsp;prekernel<br>
 Renders&nbsp;dominant&nbsp;prekernel&nbsp;restricted&nbsp;relation.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-exportD3"><strong>exportD3</strong></a>(self, fileName='index', Comments=True)</dt><dd><tt>This&nbsp;function&nbsp;was&nbsp;designed&nbsp;and&nbsp;implemented&nbsp;by&nbsp;Gary&nbsp;Cornelius,&nbsp;2014&nbsp;for&nbsp;his&nbsp;bachelor&nbsp;thesis&nbsp;at&nbsp;the&nbsp;University&nbsp;of&nbsp;Luxembourg.&nbsp;<br>
@@ -2502,6 +2509,26 @@ the&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 averageDeterm&nbsp;=&nbsp;(&nbsp;sum_(x,y)&nbsp;[&nbsp;abs(&nbsp;relf-relation[x][y]&nbsp;-&nbsp;Med&nbsp;)]&nbsp;/&nbsp;n&nbsp;)&nbsp;/&nbsp;[(&nbsp;Max-Med&nbsp;)&nbsp;if&nbsp;Normalized],<br>
 &nbsp;<br>
 where&nbsp;Med&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['med']&nbsp;and&nbsp;Max&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['max'].</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-htmlBestChoiceRecommendation"><strong>htmlBestChoiceRecommendation</strong></a>(self, pageTitle=None, ChoiceVector=False, ContentCentered=True, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Computes&nbsp;by&nbsp;default&nbsp;the&nbsp;Rubis&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;on&nbsp;the&nbsp;corresponding&nbsp;strict&nbsp;(codual)&nbsp;outranking&nbsp;digraph.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;In&nbsp;case&nbsp;of&nbsp;chordless&nbsp;circuits,&nbsp;if&nbsp;supporting&nbsp;arcs&nbsp;are&nbsp;more&nbsp;credible<br>
+&nbsp;&nbsp;&nbsp;&nbsp;than&nbsp;the&nbsp;reversed&nbsp;negating&nbsp;arcs,&nbsp;we&nbsp;collapse&nbsp;the&nbsp;circuits&nbsp;into&nbsp;hyper&nbsp;nodes.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Inversely,&nbsp;&nbsp;if&nbsp;supporting&nbsp;arcs&nbsp;are&nbsp;not&nbsp;more&nbsp;credible&nbsp;than&nbsp;the&nbsp;reversed&nbsp;negating&nbsp;arcs,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;we&nbsp;brake&nbsp;the&nbsp;circuits&nbsp;on&nbsp;their&nbsp;weakest&nbsp;arc.<br>
+&nbsp;<br>
+Usage&nbsp;example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
+&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(seed=5)<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t)<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#QuantilesSortingDigraph-showHTMLBestChoiceRecommendation">showHTMLBestChoiceRecommendation</a>()</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
 
@@ -2591,11 +2618,30 @@ the&nbsp;not&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-notdneighbors"><strong>notdneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;not&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-omax"><strong>omax</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;disjunction&nbsp;for&nbsp;bipolar&nbsp;outranking&nbsp;characteristics<br>
-computation.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-omax"><strong>omax</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**disjunction**&nbsp;for&nbsp;bipolar&nbsp;outranking&nbsp;characteristics<br>
+computation:&nbsp;Med&nbsp;is&nbsp;the&nbsp;valuation&nbsp;domain&nbsp;median&nbsp;and&nbsp;L&nbsp;is&nbsp;a&nbsp;list&nbsp;of<br>
+r-valued&nbsp;statement&nbsp;characteristics.<br>
+&nbsp;<br>
+With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**max**,<br>
+with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**min**.<br>
+&nbsp;<br>
+The&nbsp;mixture&nbsp;of&nbsp;**both&nbsp;positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results&nbsp;in<br>
+an&nbsp;**indeterminate**&nbsp;value.<br>
+&nbsp;<br>
+Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omax*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
+and&nbsp;operate&nbsp;omax&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-omin"><strong>omin</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;conjunction&nbsp;for&nbsp;bipolar&nbsp;outranking&nbsp;characteristics<br>
-computation.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-omin"><strong>omin</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**conjunction**&nbsp;of&nbsp;a&nbsp;list&nbsp;L&nbsp;of&nbsp;bipolar&nbsp;outranking&nbsp;characteristics.<br>
+Med&nbsp;is&nbsp;the&nbsp;given&nbsp;valuation&nbsp;domain&nbsp;median.<br>
+&nbsp;<br>
+With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**min**,<br>
+with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**max**.<br>
+&nbsp;<br>
+The&nbsp;mixture&nbsp;of&nbsp;both&nbsp;**positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results<br>
+in&nbsp;an&nbsp;**indeterminate**&nbsp;value.<br>
+&nbsp;<br>
+Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omin*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
+and&nbsp;operate&nbsp;omin&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-outDegrees"><strong>outDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;outdegrees</tt></dd></dl>
 
@@ -2642,7 +2688,49 @@ Renders&nbsp;the&nbsp;sharpest&nbsp;of&nbsp;two&nbsp;characteristic&nbsp;vectors
 
 <dl><dt><a name="QuantilesSortingDigraph-showBadChoices"><strong>showBadChoices</strong></a>(self, Recompute=True)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;bad&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-showChoiceVector"><strong>showChoiceVector</strong></a>(self, ch, ChoiceVector=True)</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-showBestChoiceRecommendation"><strong>showBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Computes&nbsp;by&nbsp;default&nbsp;the&nbsp;Rubis&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;on&nbsp;the&nbsp;corresponding&nbsp;strict&nbsp;(codual)&nbsp;outranking&nbsp;digraph.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;In&nbsp;case&nbsp;of&nbsp;chordless&nbsp;circuits,&nbsp;if&nbsp;supporting&nbsp;arcs&nbsp;are&nbsp;more&nbsp;credible<br>
+&nbsp;&nbsp;&nbsp;&nbsp;than&nbsp;the&nbsp;reversed&nbsp;negating&nbsp;arcs,&nbsp;we&nbsp;collapse&nbsp;the&nbsp;circuits&nbsp;into&nbsp;hyper&nbsp;nodes.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Inversely,&nbsp;&nbsp;if&nbsp;supporting&nbsp;arcs&nbsp;are&nbsp;not&nbsp;more&nbsp;credible&nbsp;than&nbsp;the&nbsp;reversed&nbsp;negating&nbsp;arcs,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;we&nbsp;brake&nbsp;the&nbsp;circuits&nbsp;on&nbsp;their&nbsp;weakest&nbsp;arc.<br>
+&nbsp;<br>
+Usage&nbsp;example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
+&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(seed=5)<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t)<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#QuantilesSortingDigraph-showRubisBestChoiceRecommendation">showRubisBestChoiceRecommendation</a>()<br>
+***********************<br>
+RuBis&nbsp;Best&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
+(in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;determinateness)&nbsp;&nbsp;&nbsp;<br>
+Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
+===&nbsp;&gt;&gt;&nbsp;potential&nbsp;vest&nbsp;choices<br>
+*&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a04',&nbsp;'a14',&nbsp;'a19',&nbsp;'a20']<br>
+&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
+&nbsp;&nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
+&nbsp;&nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
+&nbsp;&nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-59.52<br>
+&nbsp;&nbsp;&nbsp;covering&nbsp;(%)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;75.00<br>
+&nbsp;&nbsp;&nbsp;determinateness&nbsp;(%)&nbsp;:&nbsp;57.86<br>
+&nbsp;&nbsp;&nbsp;-&nbsp;most&nbsp;credible&nbsp;action(s)&nbsp;=&nbsp;{&nbsp;'a14':&nbsp;23.81,&nbsp;'a19':&nbsp;11.90,&nbsp;'a04':&nbsp;2.38,&nbsp;'a20':&nbsp;1.19,&nbsp;}&nbsp;&nbsp;<br>
+===&nbsp;&gt;&gt;&nbsp;potential&nbsp;worst&nbsp;choices&nbsp;<br>
+*&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a03',&nbsp;'a12',&nbsp;'a17']<br>
+&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
+&nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
+&nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-76.19<br>
+&nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
+&nbsp;&nbsp;covering&nbsp;(%)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;0.00<br>
+&nbsp;&nbsp;determinateness&nbsp;(%)&nbsp;:&nbsp;65.39<br>
+&nbsp;&nbsp;-&nbsp;most&nbsp;credible&nbsp;action(s)&nbsp;=&nbsp;{&nbsp;'a03':&nbsp;38.10,&nbsp;'a12':&nbsp;13.10,&nbsp;'a17':&nbsp;4.76,&nbsp;}<br>
+Execution&nbsp;time:&nbsp;0.024&nbsp;seconds<br>
+*****************************</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-showChoiceVector"><strong>showChoiceVector</strong></a>(self, ch, choiceType='good', ChoiceVector=True)</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-showChordlessCircuits"><strong>showChordlessCircuits</strong></a>(self)</dt><dd><tt>show&nbsp;methods&nbsp;for&nbsp;(chordless)&nbsp;circuits&nbsp;in&nbsp;a&nbsp;Digraph.<br>
 Dummy&nbsp;for&nbsp;<a href="#QuantilesSortingDigraph-showCircuits">showCircuits</a>().</tt></dd></dl>
@@ -2652,6 +2740,8 @@ Dummy&nbsp;for&nbsp;<a href="#QuantilesSortingDigraph-showCircuits">showCircuits
 <dl><dt><a name="QuantilesSortingDigraph-showComponents"><strong>showComponents</strong></a>(self)</dt><dd><tt>Shows&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-showGoodChoices"><strong>showGoodChoices</strong></a>(self, Recompute=True)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-showHTMLBestChoiceRecommendation"><strong>showHTMLBestChoiceRecommendation</strong></a>(self, pageTitle=None, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-showHTMLRelationMap"><strong>showHTMLRelationMap</strong></a>(self, actionsList=None, rankingRule='Copeland', Colored=True, tableTitle='Relation Map', relationName='r(x S y)', symbols=['+', '&amp;middot;', '&amp;nbsp;', '&amp;#150;', '&amp;#151'])</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;map&nbsp;of&nbsp;self.<br>
 See&nbsp;corresponding&nbsp;Digraph.<a href="#QuantilesSortingDigraph-showRelationMap">showRelationMap</a>()&nbsp;method.<br>
@@ -2828,50 +2918,10 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Ranking&nbsp;rule:&nbsp;netFlows<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
-&nbsp;<br>
-..&nbsp;note::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Computes&nbsp;by&nbsp;default&nbsp;the&nbsp;Rubis&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;on&nbsp;the&nbsp;corresponding&nbsp;strict&nbsp;(codual)&nbsp;outranking&nbsp;digraph.<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;In&nbsp;case&nbsp;of&nbsp;chordless&nbsp;circuits,&nbsp;if&nbsp;supporting&nbsp;arcs&nbsp;are&nbsp;more&nbsp;credible<br>
-&nbsp;&nbsp;&nbsp;&nbsp;than&nbsp;the&nbsp;reversed&nbsp;negating&nbsp;arcs,&nbsp;we&nbsp;collapse&nbsp;the&nbsp;circuits&nbsp;into&nbsp;hyper&nbsp;nodes.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Inversely,&nbsp;&nbsp;if&nbsp;supporting&nbsp;arcs&nbsp;are&nbsp;not&nbsp;more&nbsp;credible&nbsp;than&nbsp;the&nbsp;reversed&nbsp;negating&nbsp;arcs,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;we&nbsp;brake&nbsp;the&nbsp;circuits&nbsp;on&nbsp;their&nbsp;weakest&nbsp;arc.<br>
-&nbsp;<br>
-Usage&nbsp;example:<br>
-&nbsp;<br>
-&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
-&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(seed=5)<br>
-&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t)<br>
-&gt;&gt;&gt;&nbsp;g.<a href="#QuantilesSortingDigraph-showRubisBestChoiceRecommendation">showRubisBestChoiceRecommendation</a>()<br>
-***********************<br>
-RuBis&nbsp;Best&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
-(in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;determinateness)&nbsp;&nbsp;&nbsp;<br>
-Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
-===&nbsp;&gt;&gt;&nbsp;potential&nbsp;vest&nbsp;choices<br>
-*&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a04',&nbsp;'a14',&nbsp;'a19',&nbsp;'a20']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
-&nbsp;&nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
-&nbsp;&nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
-&nbsp;&nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-59.52<br>
-&nbsp;&nbsp;&nbsp;covering&nbsp;(%)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;75.00<br>
-&nbsp;&nbsp;&nbsp;determinateness&nbsp;(%)&nbsp;:&nbsp;57.86<br>
-&nbsp;&nbsp;&nbsp;-&nbsp;most&nbsp;credible&nbsp;action(s)&nbsp;=&nbsp;{&nbsp;'a14':&nbsp;23.81,&nbsp;'a19':&nbsp;11.90,&nbsp;'a04':&nbsp;2.38,&nbsp;'a20':&nbsp;1.19,&nbsp;}&nbsp;&nbsp;<br>
-===&nbsp;&gt;&gt;&nbsp;potential&nbsp;worst&nbsp;choices&nbsp;<br>
-*&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a03',&nbsp;'a12',&nbsp;'a17']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
-&nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
-&nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-76.19<br>
-&nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
-&nbsp;&nbsp;covering&nbsp;(%)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;0.00<br>
-&nbsp;&nbsp;determinateness&nbsp;(%)&nbsp;:&nbsp;65.39<br>
-&nbsp;&nbsp;-&nbsp;most&nbsp;credible&nbsp;action(s)&nbsp;=&nbsp;{&nbsp;'a03':&nbsp;38.10,&nbsp;'a12':&nbsp;13.10,&nbsp;'a17':&nbsp;4.76,&nbsp;}<br>
-Execution&nbsp;time:&nbsp;0.024&nbsp;seconds<br>
-*****************************</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, **kwargs)</dt><dd><tt>Dummy&nbsp;for&nbsp;backward&nbsp;portable&nbsp;<a href="#QuantilesSortingDigraph-showBestChoiceRecommendation">showBestChoiceRecommendation</a>().</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-showRubyChoice"><strong>showRubyChoice</strong></a>(self, Comments=False, _OldCoca=True)</dt><dd><tt>dummy&nbsp;for&nbsp;<a href="#QuantilesSortingDigraph-showRubisBestChoiceRecommendation">showRubisBestChoiceRecommendation</a>()<br>
-older&nbsp;versions&nbsp;compatibility</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-showRubyChoice"><strong>showRubyChoice</strong></a>(self, Comments=False, _OldCoca=True)</dt><dd><tt>Dummy&nbsp;for&nbsp;<a href="#QuantilesSortingDigraph-showRubisBestChoiceRecommendation">showRubisBestChoiceRecommendation</a>()<br>
+needed&nbsp;for&nbsp;older&nbsp;versions&nbsp;compatibility.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-showStatistics"><strong>showStatistics</strong></a>(self)</dt><dd><tt>Computes&nbsp;digraph&nbsp;statistics&nbsp;like&nbsp;order,&nbsp;size&nbsp;and&nbsp;arc-density.</tt></dd></dl>
 
@@ -2905,8 +2955,6 @@ for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
 <dl><dt><a name="QuantilesSortingDigraph-weakDneighbors"><strong>weakDneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-weakGammaSets"><strong>weakGammaSets</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;dictionary&nbsp;of&nbsp;neighborhoods&nbsp;{node:&nbsp;(dx,ax)}</tt></dd></dl>
-
-<dl><dt><a name="QuantilesSortingDigraph-worstRanks"><strong>worstRanks</strong></a>(self)</dt><dd><tt>renders&nbsp;worst&nbsp;possible&nbsp;ranks&nbsp;from&nbsp;outdegrees&nbsp;account</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-zoomValuation"><strong>zoomValuation</strong></a>(self, zoomFactor=1.0)</dt><dd><tt>Zooms&nbsp;in&nbsp;or&nbsp;out,&nbsp;depending&nbsp;on&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;zoomFactor&nbsp;provided,<br>
 the&nbsp;bipolar&nbsp;valuation&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -2993,7 +3041,7 @@ can&nbsp;be&nbsp;provided&nbsp;for&nbsp;a&nbsp;specific&nbsp;normalisation.</tt>
 
 <dl><dt><a name="QuantilesSortingDigraph-convertInsite2BigData"><strong>convertInsite2BigData</strong></a>(self)</dt><dd><tt>Convert&nbsp;in&nbsp;site&nbsp;a&nbsp;standard&nbsp;formated&nbsp;Performance&nbsp;tableau&nbsp;into&nbsp;a&nbsp;bigData&nbsp;formated&nbsp;instance.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-convertInsite2Standard"><strong>convertInsite2Standard</strong></a>(self)</dt><dd><tt>Convert&nbsp;in&nbsp;site&nbsp;a&nbsp;bigData&nbsp;formated&nbsp;Performance&nbsp;tableau&nbsp;back&nbsp;into&nbsp;a&nbsp;standard&nbsp;formated&nbsp;<a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-convertInsite2Standard"><strong>convertInsite2Standard</strong></a>(self)</dt><dd><tt>Convert&nbsp;in&nbsp;site&nbsp;a&nbsp;bigData&nbsp;formated&nbsp;Performance&nbsp;tableau&nbsp;back&nbsp;into&nbsp;a&nbsp;standard&nbsp;formated&nbsp;PerformanceTableau&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-convertWeight2Decimal"><strong>convertWeight2Decimal</strong></a>(self)</dt><dd><tt>Convert&nbsp;significance&nbsp;weights&nbsp;from&nbsp;obsolete&nbsp;float&nbsp;format<br>
 to&nbsp;decimal&nbsp;format.</tt></dd></dl>
@@ -3083,13 +3131,13 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="SortingDigraph">class <strong>SortingDigraph</strong></a>(<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">outrankingDigraphs.BipolarOutrankingDigraph</a>, <a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>)</font></td></tr>
+<font color="#000000" face="helvetica, arial"><a name="SortingDigraph">class <strong>SortingDigraph</strong></a>(<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">outrankingDigraphs.BipolarOutrankingDigraph</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt>Specialisation&nbsp;of&nbsp;the&nbsp;digraphs.<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>&nbsp;Class<br>
 for&nbsp;Condorcet&nbsp;based&nbsp;multicriteria&nbsp;sorting&nbsp;of&nbsp;alternatives.<br>
 &nbsp;<br>
-Besides&nbsp;a&nbsp;valid&nbsp;<a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>&nbsp;instance&nbsp;we&nbsp;require&nbsp;a&nbsp;sorting&nbsp;profile,<br>
+Besides&nbsp;a&nbsp;valid&nbsp;PerformanceTableau&nbsp;instance&nbsp;we&nbsp;require&nbsp;a&nbsp;sorting&nbsp;profile,<br>
 i.e.:<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;a&nbsp;dictionary&nbsp;&lt;categories&gt;&nbsp;of&nbsp;categories&nbsp;with&nbsp;'name',&nbsp;'order'&nbsp;and&nbsp;'comment'<br>
@@ -3194,9 +3242,9 @@ The&nbsp;weak&nbsp;ordering&nbsp;strategy&nbsp;may&nbsp;be:<br>
 &nbsp;&nbsp;&nbsp;"pessimistic"&nbsp;(ranked&nbsp;by&nbsp;lowest&nbsp;category&nbsp;limits)&nbsp;or<br>
 &nbsp;&nbsp;&nbsp;"average"&nbsp;(ranked&nbsp;by&nbsp;average&nbsp;category&nbsp;limits)</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-exportDigraphGraphViz"><strong>exportDigraphGraphViz</strong></a>(self, fileName=None, bestChoice=set(), worstChoice=set(), noSilent=True, graphType='png', graphSize='7,7')</dt><dd><tt>export&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;for&nbsp;digraph&nbsp;drawing&nbsp;filtering.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-exportDigraphGraphViz"><strong>exportDigraphGraphViz</strong></a>(self, fileName=None, bestChoice=set(), worstChoice=set(), Comments=True, graphType='png', graphSize='7,7')</dt><dd><tt>export&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;for&nbsp;digraph&nbsp;drawing&nbsp;filtering.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, direction='decreasing', noSilent=True, graphType='png', graphSize='7,7', fontSize=10, relation=None, Debug=False)</dt><dd><tt>export&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;for&nbsp;weak&nbsp;order&nbsp;(Hasse&nbsp;diagram)&nbsp;drawing<br>
+<dl><dt><a name="SortingDigraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, direction='decreasing', Comments=True, graphType='png', graphSize='7,7', fontSize=10, relation=None, Debug=False)</dt><dd><tt>export&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;for&nbsp;weak&nbsp;order&nbsp;(Hasse&nbsp;diagram)&nbsp;drawing<br>
 filtering&nbsp;from&nbsp;<a href="#SortingDigraph">SortingDigraph</a>&nbsp;instances.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-getActionsKeys"><strong>getActionsKeys</strong></a>(self, action=None, withoutProfiles=True)</dt><dd><tt>extract&nbsp;normal&nbsp;actions&nbsp;keys()</tt></dd></dl>
@@ -3344,7 +3392,7 @@ the&nbsp;criteria&nbsp;ordinal&nbsp;correlation&nbsp;table.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-saveXMCDAOutrankingDigraph"><strong>saveXMCDAOutrankingDigraph</strong></a>(self, fileName='temp', category='Rubis', subcategory='Choice Recommendation', author='digraphs Module (RB)', reference='saved from Python', comment=True, servingD3=False, relationName='Stilde', valuationType='bipolar', variant='standard', instanceID='void')</dt><dd><tt>save&nbsp;complete&nbsp;Rubis&nbsp;problem&nbsp;and&nbsp;result&nbsp;in&nbsp;XMCDA&nbsp;format&nbsp;with&nbsp;unicode&nbsp;encoding.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-saveXMLRubisOutrankingDigraph"><strong>saveXMLRubisOutrankingDigraph</strong></a>(self, name='temp', category='Rubis outranking digraph', subcategory='Choice recommendation', author='digraphs Module (RB)', reference='saved from Python', noSilent=False, servingD3=True)</dt><dd><tt>save&nbsp;complete&nbsp;Rubis&nbsp;problem&nbsp;and&nbsp;result&nbsp;in&nbsp;XML&nbsp;format&nbsp;with&nbsp;unicode&nbsp;encoding.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-saveXMLRubisOutrankingDigraph"><strong>saveXMLRubisOutrankingDigraph</strong></a>(self, name='temp', category='Rubis outranking digraph', subcategory='Choice recommendation', author='digraphs Module (RB)', reference='saved from Python', Comments=False, servingD3=True)</dt><dd><tt>save&nbsp;complete&nbsp;Rubis&nbsp;problem&nbsp;and&nbsp;result&nbsp;in&nbsp;XML&nbsp;format&nbsp;with&nbsp;unicode&nbsp;encoding.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-showAll"><strong>showAll</strong></a>(self)</dt><dd><tt>specialize&nbsp;the&nbsp;general&nbsp;showAll&nbsp;method&nbsp;with&nbsp;criteria<br>
 and&nbsp;performance&nbsp;tableau&nbsp;output</tt></dd></dl>
@@ -3399,7 +3447,7 @@ Methods inherited from <a href="digraphs.html#Digraph">digraphs.Digraph</a>:<br>
 
 <dl><dt><a name="SortingDigraph-absirredx"><strong>absirredx</strong></a>(self, choice, x)</dt><dd><tt>Computes&nbsp;the&nbsp;crips&nbsp;-irredundance&nbsp;degree&nbsp;of&nbsp;node&nbsp;x&nbsp;in&nbsp;a&nbsp;choice.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-abskernelrestrict"><strong>abskernelrestrict</strong></a>(self, choice)</dt><dd><tt>Parameter:&nbsp;prekernel<br>
+<dl><dt><a name="SortingDigraph-abskernelrestrict"><strong>abskernelrestrict</strong></a>(self, prekernel)</dt><dd><tt>Parameter:&nbsp;prekernel<br>
 Renders&nbsp;absorbent&nbsp;prekernel&nbsp;restricted&nbsp;relation.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-absorb"><strong>absorb</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;absorbency&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
@@ -3424,8 +3472,6 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 ie&nbsp;the&nbsp;average&nbsp;number&nbsp;of&nbsp;choice&nbsp;members&nbsp;that&nbsp;cover&nbsp;each<br>
 non&nbsp;selected&nbsp;object.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-bestRanks"><strong>bestRanks</strong></a>(self)</dt><dd><tt>renders&nbsp;best&nbsp;possible&nbsp;ranks&nbsp;from&nbsp;indegrees&nbsp;account</tt></dd></dl>
-
 <dl><dt><a name="SortingDigraph-bipolarKCorrelation"><strong>bipolarKCorrelation</strong></a>(self, digraph, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;bipolar&nbsp;Kendall&nbsp;correlation&nbsp;between&nbsp;two&nbsp;bipolar&nbsp;valued<br>
 digraphs&nbsp;computed&nbsp;from&nbsp;the&nbsp;average&nbsp;valuation&nbsp;of&nbsp;the<br>
 XORDigraph(self,digraph)&nbsp;instance.<br>
@@ -3446,19 +3492,17 @@ recursive&nbsp;chordless&nbsp;path&nbsp;extraction&nbsp;strating&nbsp;from&nbsp;
 Pk&nbsp;=&nbsp;[n2,&nbsp;....,&nbsp;n1]&nbsp;and&nbsp;ending&nbsp;in&nbsp;node&nbsp;n2.<br>
 Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-circuitAverageCredibility"><strong>circuitAverageCredibility</strong></a>(self, circ)</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;linking&nbsp;credibility&nbsp;of&nbsp;a&nbsp;COC.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-circuitAverageCredibility"><strong>circuitAverageCredibility</strong></a>(self, circ)</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;linking&nbsp;credibility&nbsp;of&nbsp;a&nbsp;Chordless&nbsp;Circuit.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-circuitCredibilities"><strong>circuitCredibilities</strong></a>(self, circuit, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;linking&nbsp;credibilities&nbsp;and&nbsp;the&nbsp;minimal&nbsp;link&nbsp;of&nbsp;a&nbsp;COC.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-circuitCredibilities"><strong>circuitCredibilities</strong></a>(self, circuit, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;linking&nbsp;credibilities&nbsp;and&nbsp;the&nbsp;minimal&nbsp;link&nbsp;of&nbsp;a&nbsp;Chordless&nbsp;Circuit.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-circuitMaxCredibility"><strong>circuitMaxCredibility</strong></a>(self, circ)</dt><dd><tt>Renders&nbsp;the&nbsp;minimal&nbsp;linking&nbsp;credibility&nbsp;of&nbsp;a&nbsp;COC.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-circuitMaxCredibility"><strong>circuitMaxCredibility</strong></a>(self, circ)</dt><dd><tt>Renders&nbsp;the&nbsp;maximal&nbsp;linking&nbsp;credibility&nbsp;of&nbsp;a&nbsp;Chordless&nbsp;Circuit.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-circuitMinCredibility"><strong>circuitMinCredibility</strong></a>(self, circ)</dt><dd><tt>Renders&nbsp;the&nbsp;minimal&nbsp;linking&nbsp;credibility&nbsp;of&nbsp;a&nbsp;COC.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-circuitMinCredibility"><strong>circuitMinCredibility</strong></a>(self, circ)</dt><dd><tt>Renders&nbsp;the&nbsp;minimal&nbsp;linking&nbsp;credibility&nbsp;of&nbsp;a&nbsp;Chordless&nbsp;Circuit.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-closeSymmetric"><strong>closeSymmetric</strong></a>(self)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Irreflexive=True, Reverse=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
-
-<dl><dt><a name="SortingDigraph-collectcomps"><strong>collectcomps</strong></a>(self, x, A, ncomp)</dt><dd><tt>Recursive&nbsp;subroutine&nbsp;of&nbsp;the&nbsp;components&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -3522,8 +3566,9 @@ Based&nbsp;on&nbsp;the&nbsp;triangles&nbsp;summation&nbsp;formula.</tt></dd></dl
 
 <dl><dt><a name="SortingDigraph-computeCondorcetWinners"><strong>computeCondorcetWinners</strong></a>(self)</dt><dd><tt>Wrapper&nbsp;for&nbsp;<a href="#SortingDigraph-condorcetWinners">condorcetWinners</a>().</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions<br>
-following&nbsp;Copelands's&nbsp;rule.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-computeCopelandOrder"><strong>computeCopelandOrder</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Arrow&amp;Raynaud's&nbsp;rule.</tt></dd></dl>
+
+<dl><dt><a name="SortingDigraph-computeCopelandRanking"><strong>computeCopelandRanking</strong></a>(self)</dt><dd><tt>renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;from&nbsp;best&nbsp;to&nbsp;worst&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Arrow&amp;Raynaud's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-computeCppChordlessCircuits"><strong>computeCppChordlessCircuits</strong></a>(self, Odd=False, Debug=False)</dt><dd><tt>python&nbsp;wrapper&nbsp;for&nbsp;the&nbsp;C++/Agrum&nbsp;based&nbsp;chordless&nbsp;circuits&nbsp;enumeration<br>
 exchange&nbsp;arguments&nbsp;with&nbsp;external&nbsp;temporary&nbsp;files</tt></dd></dl>
@@ -3692,12 +3737,6 @@ first&nbsp;rincipal&nbsp;eigenvector&nbsp;of&nbsp;the&nbsp;covariance&nbsp;of&nb
 
 <dl><dt><a name="SortingDigraph-computePrudentBetaLevel"><strong>computePrudentBetaLevel</strong></a>(self, Debug=False)</dt><dd><tt>computes&nbsp;alpha,&nbsp;ie&nbsp;the&nbsp;lowest&nbsp;valuation&nbsp;level,&nbsp;for&nbsp;which&nbsp;the<br>
 bipolarly&nbsp;polarised&nbsp;digraph&nbsp;doesn't&nbsp;contain&nbsp;a&nbsp;chordless&nbsp;circuit.</tt></dd></dl>
-
-<dl><dt><a name="SortingDigraph-computeRankedPairsOrder"><strong>computeRankedPairsOrder</strong></a>(self, Cpp=False, Debug=False)</dt><dd><tt>Renders&nbsp;an&nbsp;actions&nbsp;ordering&nbsp;from&nbsp;the&nbsp;worst&nbsp;to&nbsp;the&nbsp;best&nbsp;obtained&nbsp;from&nbsp;the<br>
-ranked&nbsp;pairs&nbsp;rule.</tt></dd></dl>
-
-<dl><dt><a name="SortingDigraph-computeRankedPairsRanking"><strong>computeRankedPairsRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;actions&nbsp;ordering&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst&nbsp;obtained&nbsp;from&nbsp;the<br>
-ranked&nbsp;pairs&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-computeRankingByBestChoosing"><strong>computeRankingByBestChoosing</strong></a>(self, CoDual=False, CppAgrum=False, Debug=False)</dt><dd><tt>Computes&nbsp;a&nbsp;weak&nbsp;preordering&nbsp;of&nbsp;the&nbsp;self.<strong>actions</strong>&nbsp;by&nbsp;recursive<br>
 best&nbsp;choice&nbsp;elagations.<br>
@@ -3869,7 +3908,7 @@ If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nb
 
 <dl><dt><a name="SortingDigraph-diameter"><strong>diameter</strong></a>(self, Oriented=False)</dt><dd><tt>Renders&nbsp;the&nbsp;(by&nbsp;default&nbsp;non-oriented)&nbsp;diameter&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, conjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;Digraph&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-digraph2Graph"><strong>digraph2Graph</strong></a>(self, valuationDomain={'min': -1, 'med': 0, 'max': 1}, Debug=False, ConjunctiveConversion=True)</dt><dd><tt>Convert&nbsp;a&nbsp;Digraph&nbsp;instance&nbsp;to&nbsp;a&nbsp;Graph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-dneighbors"><strong>dneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
@@ -3887,7 +3926,7 @@ If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nb
 
 <dl><dt><a name="SortingDigraph-domirredx"><strong>domirredx</strong></a>(self, choice, x)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;+irredundance&nbsp;degree&nbsp;of&nbsp;node&nbsp;x&nbsp;in&nbsp;a&nbsp;choice.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-domkernelrestrict"><strong>domkernelrestrict</strong></a>(self, choice)</dt><dd><tt>Parameter:&nbsp;prekernel<br>
+<dl><dt><a name="SortingDigraph-domkernelrestrict"><strong>domkernelrestrict</strong></a>(self, prekernel)</dt><dd><tt>Parameter:&nbsp;dominant&nbsp;prekernel<br>
 Renders&nbsp;dominant&nbsp;prekernel&nbsp;restricted&nbsp;relation.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-exportD3"><strong>exportD3</strong></a>(self, fileName='index', Comments=True)</dt><dd><tt>This&nbsp;function&nbsp;was&nbsp;designed&nbsp;and&nbsp;implemented&nbsp;by&nbsp;Gary&nbsp;Cornelius,&nbsp;2014&nbsp;for&nbsp;his&nbsp;bachelor&nbsp;thesis&nbsp;at&nbsp;the&nbsp;University&nbsp;of&nbsp;Luxembourg.&nbsp;<br>
@@ -3973,6 +4012,26 @@ the&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 averageDeterm&nbsp;=&nbsp;(&nbsp;sum_(x,y)&nbsp;[&nbsp;abs(&nbsp;relf-relation[x][y]&nbsp;-&nbsp;Med&nbsp;)]&nbsp;/&nbsp;n&nbsp;)&nbsp;/&nbsp;[(&nbsp;Max-Med&nbsp;)&nbsp;if&nbsp;Normalized],<br>
 &nbsp;<br>
 where&nbsp;Med&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['med']&nbsp;and&nbsp;Max&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['max'].</tt></dd></dl>
+
+<dl><dt><a name="SortingDigraph-htmlBestChoiceRecommendation"><strong>htmlBestChoiceRecommendation</strong></a>(self, pageTitle=None, ChoiceVector=False, ContentCentered=True, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Computes&nbsp;by&nbsp;default&nbsp;the&nbsp;Rubis&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;on&nbsp;the&nbsp;corresponding&nbsp;strict&nbsp;(codual)&nbsp;outranking&nbsp;digraph.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;In&nbsp;case&nbsp;of&nbsp;chordless&nbsp;circuits,&nbsp;if&nbsp;supporting&nbsp;arcs&nbsp;are&nbsp;more&nbsp;credible<br>
+&nbsp;&nbsp;&nbsp;&nbsp;than&nbsp;the&nbsp;reversed&nbsp;negating&nbsp;arcs,&nbsp;we&nbsp;collapse&nbsp;the&nbsp;circuits&nbsp;into&nbsp;hyper&nbsp;nodes.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Inversely,&nbsp;&nbsp;if&nbsp;supporting&nbsp;arcs&nbsp;are&nbsp;not&nbsp;more&nbsp;credible&nbsp;than&nbsp;the&nbsp;reversed&nbsp;negating&nbsp;arcs,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;we&nbsp;brake&nbsp;the&nbsp;circuits&nbsp;on&nbsp;their&nbsp;weakest&nbsp;arc.<br>
+&nbsp;<br>
+Usage&nbsp;example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
+&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(seed=5)<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t)<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#SortingDigraph-showHTMLBestChoiceRecommendation">showHTMLBestChoiceRecommendation</a>()</tt></dd></dl>
+
+<dl><dt><a name="SortingDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
 
@@ -4062,11 +4121,30 @@ the&nbsp;not&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-notdneighbors"><strong>notdneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;not&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-omax"><strong>omax</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;disjunction&nbsp;for&nbsp;bipolar&nbsp;outranking&nbsp;characteristics<br>
-computation.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-omax"><strong>omax</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**disjunction**&nbsp;for&nbsp;bipolar&nbsp;outranking&nbsp;characteristics<br>
+computation:&nbsp;Med&nbsp;is&nbsp;the&nbsp;valuation&nbsp;domain&nbsp;median&nbsp;and&nbsp;L&nbsp;is&nbsp;a&nbsp;list&nbsp;of<br>
+r-valued&nbsp;statement&nbsp;characteristics.<br>
+&nbsp;<br>
+With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**max**,<br>
+with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**min**.<br>
+&nbsp;<br>
+The&nbsp;mixture&nbsp;of&nbsp;**both&nbsp;positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results&nbsp;in<br>
+an&nbsp;**indeterminate**&nbsp;value.<br>
+&nbsp;<br>
+Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omax*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
+and&nbsp;operate&nbsp;omax&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-omin"><strong>omin</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;conjunction&nbsp;for&nbsp;bipolar&nbsp;outranking&nbsp;characteristics<br>
-computation.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-omin"><strong>omin</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**conjunction**&nbsp;of&nbsp;a&nbsp;list&nbsp;L&nbsp;of&nbsp;bipolar&nbsp;outranking&nbsp;characteristics.<br>
+Med&nbsp;is&nbsp;the&nbsp;given&nbsp;valuation&nbsp;domain&nbsp;median.<br>
+&nbsp;<br>
+With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**min**,<br>
+with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**max**.<br>
+&nbsp;<br>
+The&nbsp;mixture&nbsp;of&nbsp;both&nbsp;**positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results<br>
+in&nbsp;an&nbsp;**indeterminate**&nbsp;value.<br>
+&nbsp;<br>
+Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omin*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
+and&nbsp;operate&nbsp;omin&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-outDegrees"><strong>outDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;outdegrees</tt></dd></dl>
 
@@ -4113,7 +4191,49 @@ Renders&nbsp;the&nbsp;sharpest&nbsp;of&nbsp;two&nbsp;characteristic&nbsp;vectors
 
 <dl><dt><a name="SortingDigraph-showBadChoices"><strong>showBadChoices</strong></a>(self, Recompute=True)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;bad&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-showChoiceVector"><strong>showChoiceVector</strong></a>(self, ch, ChoiceVector=True)</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-showBestChoiceRecommendation"><strong>showBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Computes&nbsp;by&nbsp;default&nbsp;the&nbsp;Rubis&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;on&nbsp;the&nbsp;corresponding&nbsp;strict&nbsp;(codual)&nbsp;outranking&nbsp;digraph.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;In&nbsp;case&nbsp;of&nbsp;chordless&nbsp;circuits,&nbsp;if&nbsp;supporting&nbsp;arcs&nbsp;are&nbsp;more&nbsp;credible<br>
+&nbsp;&nbsp;&nbsp;&nbsp;than&nbsp;the&nbsp;reversed&nbsp;negating&nbsp;arcs,&nbsp;we&nbsp;collapse&nbsp;the&nbsp;circuits&nbsp;into&nbsp;hyper&nbsp;nodes.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Inversely,&nbsp;&nbsp;if&nbsp;supporting&nbsp;arcs&nbsp;are&nbsp;not&nbsp;more&nbsp;credible&nbsp;than&nbsp;the&nbsp;reversed&nbsp;negating&nbsp;arcs,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;we&nbsp;brake&nbsp;the&nbsp;circuits&nbsp;on&nbsp;their&nbsp;weakest&nbsp;arc.<br>
+&nbsp;<br>
+Usage&nbsp;example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
+&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(seed=5)<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t)<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#SortingDigraph-showRubisBestChoiceRecommendation">showRubisBestChoiceRecommendation</a>()<br>
+***********************<br>
+RuBis&nbsp;Best&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
+(in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;determinateness)&nbsp;&nbsp;&nbsp;<br>
+Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
+===&nbsp;&gt;&gt;&nbsp;potential&nbsp;vest&nbsp;choices<br>
+*&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a04',&nbsp;'a14',&nbsp;'a19',&nbsp;'a20']<br>
+&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
+&nbsp;&nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
+&nbsp;&nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
+&nbsp;&nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-59.52<br>
+&nbsp;&nbsp;&nbsp;covering&nbsp;(%)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;75.00<br>
+&nbsp;&nbsp;&nbsp;determinateness&nbsp;(%)&nbsp;:&nbsp;57.86<br>
+&nbsp;&nbsp;&nbsp;-&nbsp;most&nbsp;credible&nbsp;action(s)&nbsp;=&nbsp;{&nbsp;'a14':&nbsp;23.81,&nbsp;'a19':&nbsp;11.90,&nbsp;'a04':&nbsp;2.38,&nbsp;'a20':&nbsp;1.19,&nbsp;}&nbsp;&nbsp;<br>
+===&nbsp;&gt;&gt;&nbsp;potential&nbsp;worst&nbsp;choices&nbsp;<br>
+*&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a03',&nbsp;'a12',&nbsp;'a17']<br>
+&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
+&nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
+&nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-76.19<br>
+&nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
+&nbsp;&nbsp;covering&nbsp;(%)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;0.00<br>
+&nbsp;&nbsp;determinateness&nbsp;(%)&nbsp;:&nbsp;65.39<br>
+&nbsp;&nbsp;-&nbsp;most&nbsp;credible&nbsp;action(s)&nbsp;=&nbsp;{&nbsp;'a03':&nbsp;38.10,&nbsp;'a12':&nbsp;13.10,&nbsp;'a17':&nbsp;4.76,&nbsp;}<br>
+Execution&nbsp;time:&nbsp;0.024&nbsp;seconds<br>
+*****************************</tt></dd></dl>
+
+<dl><dt><a name="SortingDigraph-showChoiceVector"><strong>showChoiceVector</strong></a>(self, ch, choiceType='good', ChoiceVector=True)</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-showChordlessCircuits"><strong>showChordlessCircuits</strong></a>(self)</dt><dd><tt>show&nbsp;methods&nbsp;for&nbsp;(chordless)&nbsp;circuits&nbsp;in&nbsp;a&nbsp;Digraph.<br>
 Dummy&nbsp;for&nbsp;<a href="#SortingDigraph-showCircuits">showCircuits</a>().</tt></dd></dl>
@@ -4123,6 +4243,8 @@ Dummy&nbsp;for&nbsp;<a href="#SortingDigraph-showCircuits">showCircuits</a>().</
 <dl><dt><a name="SortingDigraph-showComponents"><strong>showComponents</strong></a>(self)</dt><dd><tt>Shows&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components&nbsp;of&nbsp;the&nbsp;digraph&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-showGoodChoices"><strong>showGoodChoices</strong></a>(self, Recompute=True)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.</tt></dd></dl>
+
+<dl><dt><a name="SortingDigraph-showHTMLBestChoiceRecommendation"><strong>showHTMLBestChoiceRecommendation</strong></a>(self, pageTitle=None, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt></dl>
 
 <dl><dt><a name="SortingDigraph-showHTMLRelationMap"><strong>showHTMLRelationMap</strong></a>(self, actionsList=None, rankingRule='Copeland', Colored=True, tableTitle='Relation Map', relationName='r(x S y)', symbols=['+', '&amp;middot;', '&amp;nbsp;', '&amp;#150;', '&amp;#151'])</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;map&nbsp;of&nbsp;self.<br>
 See&nbsp;corresponding&nbsp;Digraph.<a href="#SortingDigraph-showRelationMap">showRelationMap</a>()&nbsp;method.<br>
@@ -4299,50 +4421,10 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Ranking&nbsp;rule:&nbsp;netFlows<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, Comments=False, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation.<br>
-&nbsp;<br>
-..&nbsp;note::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Computes&nbsp;by&nbsp;default&nbsp;the&nbsp;Rubis&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;on&nbsp;the&nbsp;corresponding&nbsp;strict&nbsp;(codual)&nbsp;outranking&nbsp;digraph.<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;In&nbsp;case&nbsp;of&nbsp;chordless&nbsp;circuits,&nbsp;if&nbsp;supporting&nbsp;arcs&nbsp;are&nbsp;more&nbsp;credible<br>
-&nbsp;&nbsp;&nbsp;&nbsp;than&nbsp;the&nbsp;reversed&nbsp;negating&nbsp;arcs,&nbsp;we&nbsp;collapse&nbsp;the&nbsp;circuits&nbsp;into&nbsp;hyper&nbsp;nodes.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Inversely,&nbsp;&nbsp;if&nbsp;supporting&nbsp;arcs&nbsp;are&nbsp;not&nbsp;more&nbsp;credible&nbsp;than&nbsp;the&nbsp;reversed&nbsp;negating&nbsp;arcs,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;we&nbsp;brake&nbsp;the&nbsp;circuits&nbsp;on&nbsp;their&nbsp;weakest&nbsp;arc.<br>
-&nbsp;<br>
-Usage&nbsp;example:<br>
-&nbsp;<br>
-&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
-&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(seed=5)<br>
-&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t)<br>
-&gt;&gt;&gt;&nbsp;g.<a href="#SortingDigraph-showRubisBestChoiceRecommendation">showRubisBestChoiceRecommendation</a>()<br>
-***********************<br>
-RuBis&nbsp;Best&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
-(in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;determinateness)&nbsp;&nbsp;&nbsp;<br>
-Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
-===&nbsp;&gt;&gt;&nbsp;potential&nbsp;vest&nbsp;choices<br>
-*&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a04',&nbsp;'a14',&nbsp;'a19',&nbsp;'a20']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
-&nbsp;&nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
-&nbsp;&nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
-&nbsp;&nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-59.52<br>
-&nbsp;&nbsp;&nbsp;covering&nbsp;(%)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;75.00<br>
-&nbsp;&nbsp;&nbsp;determinateness&nbsp;(%)&nbsp;:&nbsp;57.86<br>
-&nbsp;&nbsp;&nbsp;-&nbsp;most&nbsp;credible&nbsp;action(s)&nbsp;=&nbsp;{&nbsp;'a14':&nbsp;23.81,&nbsp;'a19':&nbsp;11.90,&nbsp;'a04':&nbsp;2.38,&nbsp;'a20':&nbsp;1.19,&nbsp;}&nbsp;&nbsp;<br>
-===&nbsp;&gt;&gt;&nbsp;potential&nbsp;worst&nbsp;choices&nbsp;<br>
-*&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a03',&nbsp;'a12',&nbsp;'a17']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
-&nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
-&nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-76.19<br>
-&nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
-&nbsp;&nbsp;covering&nbsp;(%)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;0.00<br>
-&nbsp;&nbsp;determinateness&nbsp;(%)&nbsp;:&nbsp;65.39<br>
-&nbsp;&nbsp;-&nbsp;most&nbsp;credible&nbsp;action(s)&nbsp;=&nbsp;{&nbsp;'a03':&nbsp;38.10,&nbsp;'a12':&nbsp;13.10,&nbsp;'a17':&nbsp;4.76,&nbsp;}<br>
-Execution&nbsp;time:&nbsp;0.024&nbsp;seconds<br>
-*****************************</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-showRubisBestChoiceRecommendation"><strong>showRubisBestChoiceRecommendation</strong></a>(self, **kwargs)</dt><dd><tt>Dummy&nbsp;for&nbsp;backward&nbsp;portable&nbsp;<a href="#SortingDigraph-showBestChoiceRecommendation">showBestChoiceRecommendation</a>().</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-showRubyChoice"><strong>showRubyChoice</strong></a>(self, Comments=False, _OldCoca=True)</dt><dd><tt>dummy&nbsp;for&nbsp;<a href="#SortingDigraph-showRubisBestChoiceRecommendation">showRubisBestChoiceRecommendation</a>()<br>
-older&nbsp;versions&nbsp;compatibility</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-showRubyChoice"><strong>showRubyChoice</strong></a>(self, Comments=False, _OldCoca=True)</dt><dd><tt>Dummy&nbsp;for&nbsp;<a href="#SortingDigraph-showRubisBestChoiceRecommendation">showRubisBestChoiceRecommendation</a>()<br>
+needed&nbsp;for&nbsp;older&nbsp;versions&nbsp;compatibility.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-showStatistics"><strong>showStatistics</strong></a>(self)</dt><dd><tt>Computes&nbsp;digraph&nbsp;statistics&nbsp;like&nbsp;order,&nbsp;size&nbsp;and&nbsp;arc-density.</tt></dd></dl>
 
@@ -4376,8 +4458,6 @@ for&nbsp;all&nbsp;y&nbsp;!=&nbsp;x.</tt></dd></dl>
 <dl><dt><a name="SortingDigraph-weakDneighbors"><strong>weakDneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-weakGammaSets"><strong>weakGammaSets</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;dictionary&nbsp;of&nbsp;neighborhoods&nbsp;{node:&nbsp;(dx,ax)}</tt></dd></dl>
-
-<dl><dt><a name="SortingDigraph-worstRanks"><strong>worstRanks</strong></a>(self)</dt><dd><tt>renders&nbsp;worst&nbsp;possible&nbsp;ranks&nbsp;from&nbsp;outdegrees&nbsp;account</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-zoomValuation"><strong>zoomValuation</strong></a>(self, zoomFactor=1.0)</dt><dd><tt>Zooms&nbsp;in&nbsp;or&nbsp;out,&nbsp;depending&nbsp;on&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;zoomFactor&nbsp;provided,<br>
 the&nbsp;bipolar&nbsp;valuation&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
@@ -4464,7 +4544,7 @@ can&nbsp;be&nbsp;provided&nbsp;for&nbsp;a&nbsp;specific&nbsp;normalisation.</tt>
 
 <dl><dt><a name="SortingDigraph-convertInsite2BigData"><strong>convertInsite2BigData</strong></a>(self)</dt><dd><tt>Convert&nbsp;in&nbsp;site&nbsp;a&nbsp;standard&nbsp;formated&nbsp;Performance&nbsp;tableau&nbsp;into&nbsp;a&nbsp;bigData&nbsp;formated&nbsp;instance.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-convertInsite2Standard"><strong>convertInsite2Standard</strong></a>(self)</dt><dd><tt>Convert&nbsp;in&nbsp;site&nbsp;a&nbsp;bigData&nbsp;formated&nbsp;Performance&nbsp;tableau&nbsp;back&nbsp;into&nbsp;a&nbsp;standard&nbsp;formated&nbsp;<a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>&nbsp;instance.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-convertInsite2Standard"><strong>convertInsite2Standard</strong></a>(self)</dt><dd><tt>Convert&nbsp;in&nbsp;site&nbsp;a&nbsp;bigData&nbsp;formated&nbsp;Performance&nbsp;tableau&nbsp;back&nbsp;into&nbsp;a&nbsp;standard&nbsp;formated&nbsp;PerformanceTableau&nbsp;instance.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-convertWeight2Decimal"><strong>convertWeight2Decimal</strong></a>(self)</dt><dd><tt>Convert&nbsp;significance&nbsp;weights&nbsp;from&nbsp;obsolete&nbsp;float&nbsp;format<br>
 to&nbsp;decimal&nbsp;format.</tt></dd></dl>
@@ -4568,5 +4648,6 @@ Fractions&nbsp;of&nbsp;a&nbsp;second&nbsp;may&nbsp;be&nbsp;present&nbsp;if&nbsp;
 <font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>default_parser_list</strong> = ['xml.sax.expatreader']</td></tr></table>
+<td width="100%"><strong>colorPalettes</strong> = {1: ['none', '#EA2027', '#006266', '#1B1464', '#5758BB', '#6F1E51', '#EE5A24', '#009432', '#0652DD', '#9980FA', '#833471', '#F79F1F', '#A3CB38', '#1289A7', '#D980FA', '#B53471', '#FFC312', '#C4E538', '#12CBC4', '#FDA7DF', ...], 2: ['black', 'blue', 'coral', 'gold', 'gray', 'black', 'pink', 'green', 'orange', 'skyblue', 'wheat', 'salmon'], 3: ['none', 'black', 'red', 'cyan', 'green', 'brown', 'blue', 'gold', 'orange', 'grey', 'green2']}<br>
+<strong>default_parser_list</strong> = ['xml.sax.expatreader']</td></tr></table>
 </body></html>

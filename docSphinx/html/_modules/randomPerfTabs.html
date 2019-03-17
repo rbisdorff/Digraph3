@@ -729,7 +729,8 @@
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">_WithTypes</span><span class="p">:</span>
                     <span class="n">rangex</span> <span class="o">=</span> <span class="n">randEvalRanges</span><span class="p">[</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">]]</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">rangex</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">rangex</span><span class="p">)</span>
                 <span class="c1">#--------</span>
                 <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">commonMode</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="s1">&#39;uniform&#39;</span><span class="p">:</span>              
                     <span class="k">if</span> <span class="n">_WithTypes</span><span class="p">:</span>
@@ -3196,7 +3197,7 @@
 <span class="c1">##                                         commonMode=(&#39;uniform&#39;,None,None),</span>
 <span class="c1">##                                         missingDataProbability=0.01)</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">RandomAcademicPerformanceTableau</span><span class="p">(</span><span class="n">numberOfStudents</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">numberOfCourses</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-                                         <span class="c1">#commonMode=(&#39;uniform&#39;,None,None),</span>
+                                         <span class="n">commonMode</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;beta&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">),</span>
                                          <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
                                          <span class="n">WithTypes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                          <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>

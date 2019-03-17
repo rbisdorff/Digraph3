@@ -682,7 +682,8 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
             for x in actions:
                 if _WithTypes:
                     rangex = randEvalRanges[actions[x]['type']]
-                    print(actions[x],rangex)
+                    if Debug:
+                        print(actions[x],rangex)
                 #--------
                 if str(commonMode[0]) == 'uniform':              
                     if _WithTypes:

@@ -1683,14 +1683,14 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             print('number of real vetos: %d' % (realveto))
             return nv,realveto
 
-    def saveXMLRubisOutrankingDigraph(self,name='temp',category='Rubis outranking digraph',subcategory='Choice recommendation',author='digraphs Module (RB)',reference='saved from Python',noSilent=False,servingD3=True):
+    def saveXMLRubisOutrankingDigraph(self,name='temp',category='Rubis outranking digraph',subcategory='Choice recommendation',author='digraphs Module (RB)',reference='saved from Python',Comments=False,servingD3=True):
         """
         save complete Rubis problem and result in XML format with unicode encoding.
         """
         import codecs
         self.computeRubyChoice()
 
-        if noSilent:
+        if Comments:
             print('*----- saving digraph in XML format  -------------*')        
         nameExt = name+'.xml'
         fo = codecs.open(nameExt,'w',encoding='utf-8')
@@ -1982,7 +1982,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         fo.write('</rubisOutrankingDigraph>\n')
         
         fo.close()
-        if noSilent:
+        if Comments:
             print('File: ' + nameExt + ' saved !')
 
 
@@ -4773,7 +4773,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
         else:
             return Decimal('-1.0')
 
-class _BipolarOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
+class _BipolarOutrankingDigraph(OutrankingDigraph):
     """
     Specialization of the abstract OutrankingDigraph root class for generating
     bipolarly-valued outranking digraphs.
@@ -6593,7 +6593,7 @@ class _RandomElectre3OutrankingDigraph(Electre3OutrankingDigraph,PerformanceTabl
 
 
 
-class RandomBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
+class RandomBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     """
     Parameters:
         | n := nbr of actions, p := number criteria,
@@ -6610,7 +6610,8 @@ class RandomBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
                  commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(80.0,0.0)],
                  commonMode=('uniform',None,None),
                  hasBipolarVeto=True,
-                 Normalized=False):
+                 Normalized=False,
+                 seed=None):
         # generate random performance tableau
         import copy
         tb = RandomPerformanceTableau(numberOfActions=numberOfActions,
@@ -6619,7 +6620,8 @@ class RandomBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau
                                       weightScale=weightScale,
                                       commonScale=commonScale,
                                       commonThresholds = commonThresholds,
-                                      commonMode=commonMode)
+                                      commonMode=commonMode,
+                                      seed=seed)
         g = BipolarOutrankingDigraph(tb,
                                      hasBipolarVeto=hasBipolarVeto)
         self.name = copy.copy(g.name)
@@ -6639,7 +6641,7 @@ class RandomOutrankingDigraph(RandomBipolarOutrankingDigraph):
     Dummy for obsolete RandomOutrankingDigraph Class
     """
         
-class PolarisedOutrankingDigraph(PolarisedDigraph,OutrankingDigraph,PerformanceTableau):
+class PolarisedOutrankingDigraph(PolarisedDigraph,OutrankingDigraph):
     """
     Specilised :py:class:`digraphs.PolarisedDigraph` instance for Outranking Digraphs.
 
@@ -6664,7 +6666,7 @@ class PolarisedOutrankingDigraph(PolarisedDigraph,OutrankingDigraph,PerformanceT
             pass
 
 
-class EquiSignificanceMajorityOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
+class EquiSignificanceMajorityOutrankingDigraph(BipolarOutrankingDigraph):
     """
     Parameters:
         performanceTableau (fileName of valid py code)
@@ -6765,7 +6767,7 @@ class EquiSignificanceMajorityOutrankingDigraph(BipolarOutrankingDigraph,Perform
         
             
         
-class OrdinalOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
+class OrdinalOutrankingDigraph(OutrankingDigraph):
     """
     Parameters:
         performanceTableau (fileName of valid py code)
@@ -7118,7 +7120,7 @@ class OrdinalOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
             return Decimal('0.0')
 
 
-class UnanimousOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
+class UnanimousOutrankingDigraph(OutrankingDigraph):
     """
     Parameters:
         performanceTableau (fileName of valid py code)
@@ -7312,7 +7314,7 @@ class UnanimousOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         else:
             return Decimal("1")
 
-class NewRobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
+class NewRobustOutrankingDigraph(BipolarOutrankingDigraph):
     """
     Parameters:
         performanceTableau (fileName of valid py code)
@@ -7424,7 +7426,7 @@ class NewRobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                     
         return relation
 
-class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
+class RobustOutrankingDigraph(BipolarOutrankingDigraph):
     """
     Parameters:
         performanceTableau (fileName of valid py code)
@@ -8018,7 +8020,7 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 
     
             
-class DissimilarityOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
+class DissimilarityOutrankingDigraph(OutrankingDigraph):
     """
     Parameters:
         performanceTableau (fileName of valid py code)
@@ -8133,7 +8135,7 @@ class DissimilarityOutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         print('Gamma        :', self.gamma)
         print('Not Gamma    :', self.notGamma)
 
-class MultiCriteriaDissimilarityDigraph(OutrankingDigraph,PerformanceTableau):
+class MultiCriteriaDissimilarityDigraph(OutrankingDigraph):
     """
     Parameters:
         performanceTableau (fileName of valid py code)

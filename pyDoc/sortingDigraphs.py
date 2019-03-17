@@ -27,7 +27,7 @@ from digraphs import *
 from outrankingDigraphs import *
 from sortingDigraphs import *
 
-class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
+class SortingDigraph(BipolarOutrankingDigraph):
     """
     Specialisation of the digraphs.BipolarOutrankingDigraph Class
     for Condorcet based multicriteria sorting of alternatives.
@@ -713,20 +713,20 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                 Sorted=False,\
                                 ReflexiveTerms=False)
 
-    def exportDigraphGraphViz(self,fileName=None, bestChoice=set(),worstChoice=set(),noSilent=True,graphType='png',graphSize='7,7'):
+    def exportDigraphGraphViz(self,fileName=None, bestChoice=set(),worstChoice=set(),Comments=True,graphType='png',graphSize='7,7'):
         """
         export GraphViz dot file for digraph drawing filtering.
         """
         Digraph.exportGraphViz(self, fileName=fileName,\
                                bestChoice=bestChoice,\
                                worstChoice=worstChoice,\
-                               noSilent=noSilent,\
+                               Comments=Comments,\
                                graphType=graphType,\
                                graphSize=graphSize)
 
 
     def exportGraphViz(self,fileName=None,direction='decreasing',\
-                       noSilent=True,graphType='png',\
+                       Comments=True,graphType='png',\
                        graphSize='7,7',\
                        fontSize=10,
                        relation=None,
@@ -758,7 +758,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         if Debug:
             print(ordering)
                     
-        if noSilent:
+        if Comments:
             print('*---- exporting a dot file for GraphViz tools ---------*')
         actionKeys = [x for x in self.actions]
         n = len(actionKeys)
@@ -771,7 +771,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         else:
             name = fileName
         dotName = name+'.dot'
-        if noSilent:
+        if Comments:
             print('Exporting to '+dotName)
 
         fo = open(dotName,'w')
@@ -825,12 +825,12 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 
         commandString = 'dot -Grankdir=TB -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
             #commandString = 'dot -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
-        if noSilent:
+        if Comments:
             print(commandString)
         try:
             os.system(commandString)
         except:
-            if noSilent:
+            if Comments:
                 print('graphViz tools not avalaible! Please check installation.')
 
     def computeSortingCharacteristics(self, action=None, StoreSorting=True,\
@@ -1402,7 +1402,7 @@ class SortingDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         
 class QuantilesSortingDigraph(SortingDigraph):
     """
-    Specialisation of the sortingDigraph Class
+    Specialisation of the root :py:class:`sortingDigraphs.SortingDigraph` class
     for sorting of a large set of alternatives into
     quantiles delimited ordered classes.
       
@@ -2204,6 +2204,7 @@ class QuantilesSortingDigraph(SortingDigraph):
     def computeQuantileOrdering(self,strategy=None,
                                 Descending=True,
                                 HTML=False,
+                                title='Quantiles Preordering',
                                 Comments=False,
                                 Debug=False):
         """
@@ -2216,11 +2217,11 @@ class QuantilesSortingDigraph(SortingDigraph):
         if strategy == None:
             strategy = 'optimistic'
         if HTML:
-            html = '<h1>Quantiles preordering</h1>'
-            html += '<table style="background-color:White;" border="1">'
-            html += '<tr bgcolor="#9acd32"><th>quantile limits</th>'
-            html += '<th>%s sorting</th>' % strategy
-            html += '</tr>'
+            html = '<h1>%s</h1>\n' % title
+            html += '<table style="background-color:White;" border="1">\n'
+            html += '<tr bgcolor="#9acd32"><th>quantile limits</th>\n'
+            html += '<th>%s sorting</th>\n' % strategy
+            html += '</tr>\n'
         actionsCategories = {}
         for x in self.actions:
             a,lowCateg,highCateg,credibility =\
@@ -2939,7 +2940,7 @@ class QuantilesSortingDigraph(SortingDigraph):
             print()
 
 
-    def showHTMLQuantileOrdering(self,Descending=True,strategy='optimistic'):
+    def showHTMLQuantileOrdering(self,title='Quantiles Preordering',Descending=True,strategy='optimistic'):
         """
         Shows the html version of the quantile preordering in a browser window.
 
@@ -2954,6 +2955,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         fo.write(self.computeQuantileOrdering(Descending=Descending,
                                               strategy=strategy,
                                               HTML=True,
+                                              title=title,
                                               Comments=True))
         fo.close()
         url = 'file://'+fileName
@@ -3064,7 +3066,7 @@ class QuantilesSortingDigraph(SortingDigraph):
 from performanceQuantiles import PerformanceQuantiles  
 class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles):
     """
-    Specialisation of the sortingDigraph Class
+    Specialisation of the root :py:class:`sortingDigraphs.SortingDigraph` class
     for absolute rating of a new set of decision actions with
     normed performance quantiles gathered from historical data.
       
@@ -3746,7 +3748,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         return sorting
 
     def exportRatingGraphViz(self,fileName=None,relation=None,\
-                             direction='best',noSilent=True,\
+                             direction='best',Comments=True,\
                              graphType='png',graphSize='7,7',\
                              fontSize=10):
         """
@@ -3759,7 +3761,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
            *-------- Quantile sorting result ---------
             [0.40 - 0.60[ ['a1', 'a2', 'a3']
             [0.20 - 0.40[ ['a4', 'a5']
-           >>> nqr.exportRatingGraphViz(noSilent=False)
+           >>> nqr.exportRatingGraphViz(Comments=False)
            *---- exporting a dot file for GraphViz tools ---------*
             Exporting to quantilesRatingDigraph.dot
             dot -Grankdir=TB -Tpng quantilesRatingDigraph.dot -o quantilesRatingDigraph.png
@@ -3781,7 +3783,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         self.relationOrig = deepcopy(self.relation)
         self.relation = ratingRelation
         WeakOrder.exportGraphViz(self,fileName=fileName,\
-                             direction=direction,noSilent=noSilent,\
+                             direction=direction,Comments=Comments,\
                              graphType=graphType,graphSize=graphSize,\
                              digraphClass=self.__class__,\
                              fontSize=fontSize)
@@ -3869,6 +3871,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             criteriaList = argCriteriaList
 
         rankingRule = self.rankingRule
+        
         if argActionsList == None:
             actionsList = self.actionsRanking
         else:
@@ -4048,6 +4051,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                                    pageTitle=None,
                                    ndigits=2,
                                    quantiles=None,
+                                   rankingRule=None,
                                    Correlations=False,
                                    Threading=False,
                                    nbrOfCPUs=None,
@@ -4082,6 +4086,8 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 
         
         """
+        if rankingRule != None:
+            print('A ranking rule - Copeland (default) or NetFlows may be given with the NormedQuantilesRatingDigraph constructor')
         import webbrowser
         fileName = '/tmp/performanceHeatmap.html'
         fo = open(fileName,'w')
@@ -4218,7 +4224,7 @@ if __name__ == "__main__":
     ****************************************************
     * Python sortingDigraphs module                    *
     * depends on BipolarOutrankingDigraph and          *
-    * $Revision: 2716 $                                 *
+    * $Revision: 2959 $                                 *
     * Copyright (C) 2010 Raymond Bisdorff              *
     * The module comes with ABSOLUTELY NO WARRANTY     *
     * to the extent permitted by the applicable law.   *
@@ -4406,7 +4412,7 @@ if __name__ == "__main__":
 ##                                       Correlations=True,
 ##                                       )
 ##    nqr.showQuantilesRating()
-##    nqr.exportRatingGraphViz(noSilent=False)
+##    nqr.exportRatingGraphViz(Comments=False)
 ##
 ##
 ##    pq1 = PerformanceQuantiles(tp,\
@@ -4424,7 +4430,7 @@ if __name__ == "__main__":
 ##                                       Correlations=True,
 ##                                       )
 ##    nqr1.showQuantilesRating()
-##    nqr1.exportRatingGraphViz(noSilent=False)
+##    nqr1.exportRatingGraphViz(Comments=False)
     
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
@@ -4432,7 +4438,7 @@ if __name__ == "__main__":
 
     print('*************************************')
     print('* R.B. december 2010                *')
-    print('* $Revision: 2716 $                  *')
+    print('* $Revision: 2959 $                  *')
     print('*************************************')
 
 #############################

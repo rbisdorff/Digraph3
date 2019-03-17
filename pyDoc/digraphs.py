@@ -563,7 +563,7 @@ class Digraph(object):
             return None
             
     def digraph2Graph(self,valuationDomain={'min':-1,'med':0,'max':1},
-                      Debug=False,conjunctiveConversion=True):
+                      Debug=False,ConjunctiveConversion=True):
         """
         Convert a Digraph instance to a Graph instance.
         """
@@ -590,7 +590,7 @@ class Digraph(object):
                 x = verticesKeys[i]
                 y = verticesKeys[j]
                 vertex = frozenset([x,y])
-                if conjunctiveConversion:
+                if ConjunctiveConversion:
                     edgeValue = min(self.relation[x][y],self.relation[y][x])
                 else:
                     edgeValue = max(self.relation[x][y],self.relation[y][x])
@@ -3698,13 +3698,13 @@ class Digraph(object):
         
     def exportGraphViz(self,fileName=None,actionsSubset=None,\
                        bestChoice=set(),worstChoice=set(),\
-                       noSilent=True,graphType='png',graphSize='7,7',
+                       Comments=True,graphType='png',graphSize='7,7',
                        relation=None):
         """
         export GraphViz dot file  for graph drawing filtering.
         """
         import os
-        if noSilent:
+        if Comments:
             print('*---- exporting a dot file dor GraphViz tools ---------*')
         if actionsSubset == None:
             actionkeys = [x for x in self.actions]
@@ -3720,7 +3720,7 @@ class Digraph(object):
         else:
             name = fileName
         dotName = name+'.dot'
-        if noSilent:
+        if Comments:
             print('Exporting to '+dotName)
         if bestChoice != set():
             rankBestString = '{rank=max; '
@@ -3803,12 +3803,12 @@ class Digraph(object):
             commandString = 'dot -Grankdir=BT -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
             #commandString = 'dot -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
 
-        if noSilent:
+        if Comments:
             print(commandString)
         try:
             os.system(commandString)
         except:
-            if noSilent:
+            if Comments:
                 print('graphViz tools not avalaible! Please check installation.')
 
     def exportD3(self, fileName="index", Comments=True):
@@ -5272,48 +5272,47 @@ class Digraph(object):
         print('*--- Computing preKernels ---*')
         actions = set(self.actions)
         n = len(actions)
-        self.dompreKernels = set()
-        self.abspreKernels = set()
+        dompreKernels = set()
+        abspreKernels = set()
         t0 = time.time()
         for choice in self.independentChoices(self.singletons()):
             restactions = actions - choice[0][0]
             if restactions <= choice[0][1]:
-                self.dompreKernels.add(choice[0][0])
+                dompreKernels.add(choice[0][0])
             if restactions <= choice[0][2]:
-                self.abspreKernels.add(choice[0][0])
+                abspreKernels.add(choice[0][0])
         t1 = time.time()
         if withListing:
             print('Dominant preKernels :')
-            for choice in self.dompreKernels:
+            for choice in dompreKernels:
                 print(list(choice))
                 print('   independence : ', self.intstab(choice))
                 print('   dominance    : ', self.domin(choice))
                 print('   absorbency   : ', self.absorb(choice))
                 print('   covering     :  %.3f' % self.averageCoveringIndex(choice, direction='out'))
             print('Absorbent preKernels :')
-            for choice in self.abspreKernels:
+            for choice in abspreKernels:
                 print(list(choice))
                 print('   independence : ', self.intstab(choice))
                 print('   dominance    : ', self.domin(choice))
                 print('   absorbency   : ', self.absorb(choice))
-                print('   covering     :  %.3f' % self.averageCoveringIndex(choice, direction='in'))
+                print('   covered      :  %.3f' % self.averageCoveringIndex(choice, direction='in'))
         print('*----- statistics -----')
         print('graph name: ', self.name)
         print('number of solutions')
-        print(' dominant kernels : ', len(self.dompreKernels))
-        print(' absorbent kernels: ', len(self.abspreKernels))
+        print(' dominant kernels : ', len(dompreKernels))
+        print(' absorbent kernels: ', len(abspreKernels))
         print('cardinality frequency distributions')
         print('cardinality     : ', list(range(n+1)))
         v = [0 for i in range(n+1)]
-        for ch in self.dompreKernels:
+        for ch in dompreKernels:
             v[len(ch)] += 1
         print('dominant kernel : ',v)
         v = [0 for i in range(n+1)]
-        for ch in self.abspreKernels:
+        for ch in abspreKernels:
             v[len(ch)] += 1
         print('absorbent kernel: ',v)
         print('Execution time  : %.5f sec.' % (t1-t0))
-        print('Results in sets: dompreKernels and abspreKernels.')
 
     def computePreKernels(self):
         """
@@ -5370,7 +5369,7 @@ class Digraph(object):
             if A[x] == 0:
                 A[x] = ncomp
                 Comp = Comp | set([x])
-                Comp = Comp | self.collectcomps(x, A, ncomp)
+                Comp = Comp | self._collectcomps(x, A, ncomp)
             if len(Comp) > 0:
                 ncomp = ncomp + 1
                 ConComp = ConComp + [Comp]
@@ -5386,15 +5385,15 @@ class Digraph(object):
             print(str(k) + ': ' + str(component))
             xk = k + 1
 
-    def collectcomps(self, x, A, ncomp):
-        """Recursive subroutine of the components method."""
+    def _collectcomps(self, x, A, ncomp):
+        """ Internal recursive subroutine of the components method."""
         Comp = set()
         Nx = self.gamma[x][0] | self.gamma[x][1]
         for y in Nx:
             if A[y] == 0:
                 A[y] = ncomp
                 Comp.add(y)
-                Comp = Comp | self.collectcomps(y, A, ncomp)
+                Comp = Comp | self._collectcomps(y, A, ncomp)
         return Comp
 
     def outDegrees(self):
@@ -5415,7 +5414,7 @@ class Digraph(object):
             inDegrees[x] = len(self.gamma[x][1])
         return inDegrees
 
-    def bestRanks(self):
+    def _bestRanks(self):
         """
         renders best possible ranks from indegrees account
         """
@@ -5425,7 +5424,7 @@ class Digraph(object):
             bestRanks[x] = inDegrees[x] + 1
         return bestRanks
 
-    def worstRanks(self):
+    def _worstRanks(self):
         """
         renders worst possible ranks from outdegrees account
         """
@@ -6992,10 +6991,9 @@ class Digraph(object):
         Dummy for showRubisBestChoiceRecommendation()
         needed for older versions compatibility.
         """
-        self.showRubisBestChoiceRecommendation(Comments=Comments,_OldCoca=_OldCoca)
+        self.showBestChoiceRecommendation(Comments=Comments,_OldCoca=_OldCoca)
 
-    def showRubisBestChoiceRecommendation(self,
-                                          Comments=False,
+    def showBestChoiceRecommendation(self,Comments=False,
                                           ChoiceVector=False,
                                           CoDual=True,
                                           Debug=False,
@@ -7114,30 +7112,30 @@ class Digraph(object):
                         #if gch[0] == bch[0]:
                         if gch[3] == gch[4]:
                             if Comments:
-                                print('null (good) choice ')
-                                g.showChoiceVector(gch,
+                                print('ambiguous (good) choice ')
+                                g.showChoiceVector(gch,choiceType='good',
                                                       ChoiceVector=ChoiceVector)
-                                g.showChoiceVector(bch,
+                                g.showChoiceVector(bch,choiceType='bad',
                                                       ChoiceVector=ChoiceVector)
                             goodChoice = False
                         elif gch[4] > gch[3]:
                             if Comments:
                                 print('outranked (good) choice ')
-                                g.showChoiceVector(gch,
+                                g.showChoiceVector(gch,choiceType='good',
                                                       ChoiceVector=ChoiceVector)
-                                g.showChoiceVector(bch,
+                                g.showChoiceVector(bch,choiceType='bad',
                                                       ChoiceVector=ChoiceVector)
                             goodChoice = False
                         else:
                             goodChoice = True
                 if goodChoice:
                     print(' === >> potential best choice(s)')
-                    g.showChoiceVector(gch,ChoiceVector=ChoiceVector)
+                    g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
                     if bestChoice == set():
                         bestChoice = gch[5]
             else:
                 print(' === >> non robust best choice(s)')
-                g.showChoiceVector(gch,ChoiceVector=ChoiceVector)
+                g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
         for bch in g.badChoices:
             if bch[0] >= Med:
                 badChoice = True
@@ -7147,33 +7145,33 @@ class Digraph(object):
                         #if gch[0] == bch[0]:
                         if bch[3] == bch[4]:
                             if Comments:
-                                print('null (bad) choice ')
-                                g.showChoiceVector(gch,ChoiceVector=ChoiceVector)
-                                g.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                                print('ambiguous (bad) choice ')
+                                g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
+                                g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
                             badChoice = False
                             nullChoice = True
                         elif bch[3] > bch[4]:
                             if Comments:
                                 print('outranking (bad) choice ')
-                                g.showChoiceVector(gch,ChoiceVector=ChoiceVector)
-                                g.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                                g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
+                                g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
                             badChoice = False
                         else:
                             badChoice = True
                 if badChoice:
                     print(' === >> potential worst choice(s) ')
-                    g.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                    g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
                     if worstChoice == set():
                         worstChoice = bch[5]
                 elif nullChoice:
                     print(' === >> ambiguous choice(s)')
-                    g.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                    g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
                     if worstChoice == set():
                         worstChoice = bch[5]
 
             else:
                 print('=== >> non robust worst choice(s)')
-                g.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
         print()
         print('Execution time: %.3f seconds' % (t1-t0))
         print('*****************************')
@@ -7185,6 +7183,245 @@ class Digraph(object):
 ##        self.order = len(self.actions)
 ##        self.gamma = self.gammaSets()
 ##        self.notGamma = self.notGammaSets()
+
+
+    def showRubisBestChoiceRecommendation(self,**kwargs):
+        """
+        Dummy for backward portable showBestChoiceRecommendation().
+        """
+        self.showBestChoiceRecommendation(**kwargs)
+        
+#############
+
+    def showHTMLBestChoiceRecommendation(self,pageTitle=None,
+                                          ChoiceVector=False,
+                                          CoDual=True,
+                                          Debug=False,
+                                          _OldCoca=False,
+                                          BrokenCocs=True,
+                                          Cpp=False):
+
+        import webbrowser
+        fileName = '/tmp/relationMap.html'
+        fo = open(fileName,'w')
+        fo.write(self.htmlBestChoiceRecommendation(\
+            pageTitle=pageTitle,\
+            ChoiceVector=ChoiceVector,\
+            CoDual=CoDual,\
+            Debug=Debug,\
+            _OldCoca=_OldCoca,\
+            BrokenCocs=BrokenCocs,\
+            Cpp=Cpp))
+        fo.close()
+        url = 'file://'+fileName
+        webbrowser.open_new(url)
+
+
+    def htmlBestChoiceRecommendation(self,pageTitle=None,
+                                          ChoiceVector=False,
+                                     ContentCentered=True,
+                                          CoDual=True,
+                                          Debug=False,
+                                          _OldCoca=False,
+                                          BrokenCocs=True,
+                                          Cpp=False):
+        """
+        Renders the RuBis best choice recommendation in a browser window.
+
+        .. note::
+
+            Computes by default the Rubis best choice recommendation on the corresponding strict (codual) outranking digraph.
+
+            In case of chordless circuits, if supporting arcs are more credible
+            than the reversed negating arcs, we collapse the circuits into hyper nodes.
+            Inversely,  if supporting arcs are not more credible than the reversed negating arcs,
+            we brake the circuits on their weakest arc.
+         
+        Usage example:
+        
+        >>> from outrankingDigraphs import *
+        >>> t = Random3ObjectivesPerformanceTableau(seed=5)
+        >>> g = BipolarOutrankingDigraph(t)
+        >>> g.showHTMLBestChoiceRecommendation()
+
+        """
+        from copy import deepcopy
+        from time import time
+        if Debug:
+            Comments = True
+        # construct html text
+        html  = '<!DOCTYPE html><html><head>\n'
+        html += '<meta charset="UTF-8">\n'
+        if pageTitle == None:
+            pageTitle = 'Best Choice Recommendation'
+        html += '<title>%s</title>\n' % pageTitle
+        html += '<style type="text/css">\n'
+        if ContentCentered:
+            html += 'td {text-align: center;}\n'
+        html += 'td.na {color: rgb(192,192,192);}\n'
+        html += '</style>\n'
+        html += '</head>\n<body>\n'
+        html += '<h1>%s</h1>' % pageTitle
+        html += '<h3>Outranking digraph: %s</h3>' % self.name
+       
+        #print('RuBis BCR')
+        t0 = time()
+        n0 = self.order
+        cpself = deepcopy(self)
+        if CoDual:
+            g = ~(-cpself)
+        else:
+            g = cpself
+        if _OldCoca:
+            _selfwcoc = CocaDigraph(g,Cpp=Cpp)
+            b1 = 0
+        elif BrokenCocs:
+            #print('passed here!')
+            _selfwcoc = BrokenCocsDigraph(g,Cpp=Cpp)
+            b1 = _selfwcoc.breakings
+        else:
+            _selfwcoc = BreakAddCocsDigraph(g,Cpp=Cpp)
+            b1 =  _selfwcoc.breakings
+        n1 = _selfwcoc.order
+        nc = n1 - n0
+        
+        #self.relation_orig = deepcopy(g.relation)
+        if b1 > 0 or nc > 0:
+            #self.actions_orig = deepcopy(g.actions)
+            g.actions = deepcopy(_selfwcoc.actions)
+            g.order = len(g.actions)
+            g.relation = deepcopy(_selfwcoc.relation)
+        if Debug:
+            print('List of pseudo-independent choices')
+            print(g.actions)
+        g.gamma = g.gammaSets()
+        g.notGamma = g.notGammaSets()
+        if Debug:
+            g.showRelationTable()
+        #self.showPreKernels()
+        actions = set([x for x in g.actions])
+        if Debug:
+            g.showPreKernels()
+            print(g.dompreKernels,g.abspreKernels)
+        g.computeGoodChoices(Comments=Debug)
+        g.computeBadChoices(Comments=Debug)
+        if Debug:
+            print('good and bad choices: ',g.goodChoices,g.badChoices)
+
+        t1 = time()
+        if Debug:
+            print('Rubis best choice recommendation(s) (BCR)')
+            print(' (in decreasing order of determinateness)   ')
+            print('Credibility domain: [%.2f,%.2f]' %\
+                  (g.valuationdomain['min'],\
+                   g.valuationdomain['max']) )
+        html += '<p>Rubis best choice recommendation(s) (BCR)</br>\n'
+        html += ' (in decreasing order of determinateness)</br>\n'
+        html += 'Credibility domain: [%.2f,%.2f]</p>\n' %\
+                  (g.valuationdomain['min'],\
+                   g.valuationdomain['max'])
+        Med = g.valuationdomain['med']
+        bestChoice = set()
+        worstChoice = set()
+        for gch in g.goodChoices:
+            if gch[0] >= Med:
+                goodChoice = True
+                for bch in g.badChoices:
+                    if gch[5] == bch[5]:
+                        #if gch[0] == bch[0]:
+                        if gch[3] == gch[4]:
+                            if Comments:
+                                print('null (good) choice ')
+                                g.showChoiceVector(gch,choiceType='good',
+                                                      ChoiceVector=ChoiceVector)
+                                g.showChoiceVector(bch,choiceType='bad',
+                                                      ChoiceVector=ChoiceVector)
+                            goodChoice = False
+                        elif gch[4] > gch[3]:
+                            if Comments:
+                                print('outranked (good) choice ')
+                                g.showChoiceVector(gch,choiceType='good',
+                                                      ChoiceVector=ChoiceVector)
+                                g.showChoiceVector(bch,choiceType='bad',
+                                                      ChoiceVector=ChoiceVector)
+                            goodChoice = False
+                        else:
+                            goodChoice = True
+                if goodChoice:
+                    if Debug:
+                        print(' === >> potential best choice(s)')
+                    html += '<h3>Potential best choice(s)</h3>\n'
+                    
+                    html += g.htmlChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
+                    if bestChoice == set():
+                        bestChoice = gch[5]
+            else:
+                if Debug:
+                    print(' === >> non robust best choice(s)')
+                html += '<h3>Non robust best choice(s)</h3>\n'
+                html += g.htmlChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
+        for bch in g.badChoices:
+            if bch[0] >= Med:
+                badChoice = True
+                nullChoice = False
+                for gch in g.goodChoices:
+                    if bch[5] == gch[5]:
+                        #if gch[0] == bch[0]:
+                        if bch[3] == bch[4]:
+                            if Comments:
+                                print('null (bad) choice ')
+                                g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
+                                g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
+                            badChoice = False
+                            nullChoice = True
+                        elif bch[3] > bch[4]:
+                            if Comments:
+                                print('outranking (bad) choice ')
+                                g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
+                                g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
+                            badChoice = False
+                        else:
+                            badChoice = True
+                if badChoice:
+                    if Debug:
+                        print(' === >> potential worst choice(s) ')
+                    html += '<h3>Potential worst choice(s)</h3>\n '
+                    html += g.htmlChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
+                    if worstChoice == set():
+                        worstChoice = bch[5]
+                elif nullChoice:
+                    if Debug:
+                        print(' === >> ambiguous choice(s)')
+                    html += '<h3>Ambiguous choice(s)</h3>\n'
+                    html += g.htmlChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
+                    if worstChoice == set():
+                        worstChoice = bch[5]
+
+            else:
+                if Debug:
+                    print('=== >> non robust worst choice(s)')
+                html += '<h3>Non robust worst choice(s)</h3>\n'
+                html += g.htmlChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
+        if Debug:
+            print()
+            print('Execution time: %.3f seconds' % (t1-t0))
+            print('*****************************')
+
+        html += '<p>Execution time: %.3f seconds</p>\n' % (t1-t0)
+        # html footer
+        html += '</body>\n'
+        html += '</html>\n'
+        return html
+
+        self.bestChoice = bestChoice
+        self.worstChoice = worstChoice
+        #if nc > 0 or b1 > 0:
+##        self.actions = deepcopy(self.actions_orig)
+##        self.relation = deepcopy(self.relation_orig)
+##        self.order = len(self.actions)
+##        self.gamma = self.gammaSets()
+##        self.notGamma = self.notGammaSets()
+
 
     def computeRubyChoice(self,CppAgrum=False,Comments=False,_OldCoca=False):
         """
@@ -7754,7 +7991,63 @@ class Digraph(object):
         
         return badChoicesDic
 
-    def showChoiceVector(self,ch,ChoiceVector=True):
+    def htmlChoiceVector(self,ch,ChoiceVector=True,choiceType="good"):
+        """
+        Show procedure for annotated bipolar choices.
+        """
+        from digraphsTools import flatten
+        actions = [x for x in self.actions]
+        Med = self.valuationdomain['med']
+        determ = ch[0]
+        degirred = ch[1]
+        degi = ch[2]
+        degd = ch[3]
+        dega = ch[4]
+        choice = [x for x in flatten(ch[5])]
+        choice.sort()
+        vec = ch[6]
+        vec.sort(reverse=True)
+        html  = '<p>Choice              : <b>%s</b><br/>\n ' % str(choice)
+        html += '  +-irredundancy      : %.2f<br/>\n' % (degirred)
+        html += '  independence        : %.2f<br/>\n' % (degi)
+        html += '  dominance           : %.2f<br/>\n' % (degd)
+        html += '  absorbency          : %.2f<br/>\n' % (dega)
+        if choiceType == "good":
+            html += '  covering (%%): %.2f<br/>\n' %\
+                ( self.averageCoveringIndex(choice,direction='out') * Decimal('100') )
+        elif choiceType == "bad":
+            html += '  covered (%%) : %.2f<br/>\n' %\
+                ( self.averageCoveringIndex(choice,direction='in') * Decimal('100') )
+        else:
+            html += '  covering (%%): %.2f<br/>\n' %\
+                ( self.averageCoveringIndex(choice) * Decimal('100') )            
+            
+        html += '  determinateness (in %%) : %.2f</p>\n' % (determ*Decimal('100.0'))
+        if ChoiceVector:
+            html += '<p>  - characteristic vector = {\n'
+            for i in range(len(actions)):
+                try:
+                    choice = [x for x in eval(vec[i][1])]
+                    choice.sort()
+                    html += '\'%s\': %.2f,\n ' %  (str(choice),vec[i][0])
+                except:
+                    html += '\'%s\': %.2f,\n ' %  (vec[i][1],vec[i][0])
+            html +='}</p>\n'
+##        elif determ > Decimal('0'):
+        else:
+            html += '  - most credible action(s) = {\n'
+            for i in range(len(actions)):
+                if vec[i][0] > Med:
+                    try:
+                        choice = [x for x in eval(vec[i][1])]
+                        choice.sort()
+                        html += '\'%s\': %.2f,\n' %  (str(choice),vec[i][0])
+                    except:
+                        html += '\'%s\': %.2f,\n' %  (vec[i][1],vec[i][0])
+            html += '}</p>\n'
+        return html
+
+    def showChoiceVector(self,ch,choiceType="good",ChoiceVector=True):
         """
         Show procedure for annotated bipolar choices.
         """
@@ -7775,7 +8068,16 @@ class Digraph(object):
         print('  independence        : %.2f' % (degi))
         print('  dominance           : %.2f' % (degd))
         print('  absorbency          : %.2f' % (dega))
-        print('  covering (%)' + '        : %.2f' % ( self.averageCoveringIndex(choice) * Decimal('100') ))
+        if choiceType == "good":
+            print('  covering (%)' + '        : %.2f' %\
+                  ( self.averageCoveringIndex(choice,direction='out') * Decimal('100') ))
+        elif choiceType == "bad":
+            print('  covered (%) ' + '        : %.2f' %\
+                  ( self.averageCoveringIndex(choice,direction='in') * Decimal('100') ))
+        else:
+            print('  covering (%)' + '        : %.2f' %\
+                  ( self.averageCoveringIndex(choice) * Decimal('100') ))
+            
         print("  determinateness (%)", end=' ')
         print(': %.2f' % (determ*Decimal('100.0')))
         if ChoiceVector:
@@ -7966,6 +8268,11 @@ class Digraph(object):
         notGamma = self.notGammaSets()
         t0 = time.time()
         # MIS extraction
+        print('*-----------------------------------*')
+        print("* Python implementation of Hertz's  *")
+        print('* algorithm for generating all MIS  *')
+        print('* R.B. version 7(6)-25-Apr-06       *')
+        print('*-----------------------------------*')
         print('*---- MIS extraction ----')
         t0 = time.time()
         # initialize MIS extraction
@@ -7979,7 +8286,7 @@ class Digraph(object):
             S.add(i)
             gammaS = gammaS | gamma[i][0]
         if withListing:
-            print('===>>> Inital solution : ', list(S))
+            print('===>>> Initial solution : ', list(S))
         hertzmisset = hertzmisset | set([frozenset(S)])
         # initialize all variables
         R = V - S
@@ -8073,11 +8380,6 @@ class Digraph(object):
         print('execution time   : %.5f sec.' % (t1 - t0))
         print('iteration history: ', hist)
         print('result in self.hertzmisset')
-        print('*-----------------------------------*')
-        print("* Python implementation of Hertz's  *")
-        print('* algorithm for generating all MIS  *')
-        print('* R.B. version 7(6)-25-Apr-06       *')
-        print('*-----------------------------------*')
         # store global results
         self.mislen = mislenlist
         self.hertzmisset = hertzmisset
@@ -8714,8 +9016,18 @@ class Digraph(object):
 
     def omax(self,L, Debug=False):
         """
-        Epistemic disjunction for bipolar outranking characteristics
-        computation.
+        Epistemic **disjunction** for bipolar outranking characteristics
+        computation: Med is the valuation domain median and L is a list of
+        r-valued statement characteristics.
+
+        With **positive** arguments, omax operates a **max**,
+        with **negative** arguments, a **min**.
+
+        The mixture of **both positive and negative** arguments results in
+        an **indeterminate** value.
+
+        Likewise to a mean, the *omax* operator is not associative. We therefore first assemble all positive, negative and null terms
+        and operate omax on the three assembled arguments.
         """
         Med = self.valuationdomain['med']
         terms = list(L)
@@ -8745,8 +9057,18 @@ class Digraph(object):
 
     def omin(self,L, Debug=False):
         """
-        Epistemic conjunction for bipolar outranking characteristics
-        computation.
+        Epistemic **conjunction** of a list L of bipolar outranking characteristics.
+        Med is the given valuation domain median.
+
+        With **positive** arguments, omax operates a **min**,
+        with **negative** arguments, a **max**.
+
+        The mixture of both **positive and negative** arguments results
+        in an **indeterminate** value.
+
+        Likewise to a mean, the *omin* operator is not associative. We therefore first assemble all positive, negative and null terms
+        and operate omin on the three assembled arguments. 
+
         """
         Med = self.valuationdomain['med']
         terms = list(L)
@@ -8874,7 +9196,8 @@ class Digraph(object):
 
     def computeKohlerOrder(self):
         ranking = self._computeKohlerRankingDict()
-        return list(reversed(ranking))
+        res = [x for x in ranking]
+        return list(reversed(res))
     
     def computeKohlerRanking(self):
         ranking = self._computeKohlerRankingDict()
@@ -8918,16 +9241,17 @@ class Digraph(object):
         Renders a linear ordering from worst to best of the actions following Arrow&Raynaud's rule.
         """
         ranking = self._computeArrowRaynaudRankingDict()
-        return list(reversed(ranking))
+        return [x for x in ranking]
     
     def computeArrowRaynaudRanking(self):
         """
         renders a linear ranking from best to worst of the actions following Arrow&Raynaud's rule.
         """
         ranking = self._computeArrowRaynaudRankingDict()
-        return [x for x in ranking]
+        res = [x for x in ranking]
+        return list(reversed(res))
 
-    def computeCopelandRanking(self):
+    def _computeCopelandRanking(self):
         """
         Renders a linear ranking from best to worst of the actions
         following Copelands's rule.
@@ -8944,84 +9268,100 @@ class Digraph(object):
         self.copelandRanking = copelandRanking
         return copelandRanking
 
-    def computeRankedPairsOrder(self,Cpp=False,Debug=False):
+    def computeCopelandRanking(self):
         """
-        Renders an actions ordering from the worst to the best obtained from the
-        ranked pairs rule.
+        renders a linear ranking from best to worst of the actions following Arrow&Raynaud's rule.
         """
-        relation = self.relation
-        #actions = self.actions
-        actions = [x for x in self.actions]
-        actions.sort()
+        ranking = self._computeCopelandRanking()
+        return ranking
 
-        n = len(actions)
+    def computeCopelandOrder(self):
+        """
+        renders a linear ranking from best to worst of the actions following Arrow&Raynaud's rule.
+        """
+        ranking = self._computeCopelandRanking()
+        return list(reversed(ranking))
 
-        listPairs = []
-        for x,rx in relation.items():
-            for y,rxy in rx.items():
-                if x != y:
-                    listPairs.append((rxy,(x,y),x,y))
-        listPairs.sort(reverse=False)
-
-        g = IndeterminateDigraph(order=n)
-        g.actions = self.actions
-        g.valuationdomain = {'min':Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
-        Min = g.valuationdomain['min']
-        Max = g.valuationdomain['max']
-        Med = g.valuationdomain['med']
-        g.relation = {}
-        for x in g.actions:
-            g.relation[x] = {}
-            grx = g.relation[x]
-            for y in g.actions:
-                grx[y] = Min
-
-        rankedPairs = [x[1] for x in listPairs]
-        for pair in rankedPairs:
-            if Debug:
-                print('next pair: ', pair)
-            x = pair[0]
-            y = pair[1]
-            grxy = g.relation[x][y]
-            gryx = g.relation[y][x]
-            if grxy == Min and gryx == Min:
-                grxy = Max
-                g.gamma = g.gammaSets()
-                g.notGamma = g.notGammaSets()
-                if Cpp:
-                    circ = g.computeCppChordlessCircuits()
-                else:
-                    circ = g.computeChordlessCircuits()
-                if len(circ) != 0:
-                    if Debug:
-                        print(circ)
-                    grxy = Min
+##    def _computeRankedPairsOrder(self,Cpp=False,Debug=False):
+##        """
+##        Renders an actions ordering from the worst to the best obtained from the
+##        ranked pairs rule.
+##        """
+##        relation = self.relation
+##        #actions = self.actions
+##        actions = [x for x in self.actions]
+##        actions.sort()
+##
+##        n = len(actions)
+##
+##        listPairs = []
+##        for x,rx in relation.items():
+##            for y,rxy in rx.items():
+##                if x != y:
+##                    listPairs.append((rxy,(x,y),x,y))
+##        listPairs.sort(reverse=False)
+##        if Debug:
+##            print(listPairs)
+##
+##        g = IndeterminateDigraph(order=n)
+##        g.actions = self.actions
+##        g.valuationdomain = {'min':Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
+##        Min = g.valuationdomain['min']
+##        Max = g.valuationdomain['max']
+##        Med = g.valuationdomain['med']
+##        g.relation = {}
+##        for x in g.actions:
+##            g.relation[x] = {}
+##            grx = g.relation[x]
+##            for y in g.actions:
+##                grx[y] = Med
+##
+##        rankedPairs = [x[1] for x in listPairs]
+##        for pair in rankedPairs:
+##            if Debug:
+##                print('next pair: ', pair)
+##            x = pair[0]
+##            y = pair[1]
+##            grxy = g.relation[x][y]
+##            gryx = g.relation[y][x]
+##            if grxy == Min and gryx == Min:
+##                grxy = Max
+##                g.gamma = g.gammaSets()
+##                g.notGamma = g.notGammaSets()
+##                if Cpp:
+##                    circ = g.computeCppChordlessCircuits()
 ##                else:
+##                    circ = g.computeChordlessCircuits()
+##                if len(circ) != 0:
 ##                    if Debug:
-##                        print('added: (%s,%s) characteristic: %.2f' %\
-##                              (x,y, self.relation[x][y]))
-
-        g.gamma = g.gammaSets()
-
-        outdegrees = []
-        for x in g.actions:
-            outdegrees.append((len(g.gamma[x][0]),x))
-        outdegrees.sort(reverse=True)
-
-        rankedPairsOrder = []
-        for x in outdegrees:
-            rankedPairsOrder.append(x[1])
-        if Debug:
-            print('Ranked Pairs Order = ', rankedPairsOrder)
-        return rankedPairsOrder
-
-    def computeRankedPairsRanking(self):
-        """
-        Renders an actions ordering from the best to the worst obtained from the
-        ranked pairs rule.
-        """
-        ordering = self.computeRankedPairsOrder()
-        return list(reversed(ordering))
+##                        print(circ)
+##                    grxy = Min
+####                else:
+####                    if Debug:
+####                        print('added: (%s,%s) characteristic: %.2f' %\
+####                              (x,y, self.relation[x][y]))
+##
+##        g.gamma = g.gammaSets()
+##
+##        outdegrees = []
+##        for x in g.actions:
+##            outdegrees.append((len(g.gamma[x][0]),x))
+##        outdegrees.sort(reverse=True)
+##
+##        rankedPairsOrder = []
+##        for x in outdegrees:
+##            rankedPairsOrder.append(x[1])
+##        if Debug:
+##            print('Ranked Pairs Order = ', rankedPairsOrder)
+##        return rankedPairsOrder
+##
+##    def _computeRankedPairsRanking(self):
+##        """
+##        Renders an actions ordering from the best to the worst obtained from the
+##        ranked pairs rule.
+##        """
+##        ordering = self.computeRankedPairsOrder()
+##        return list(reversed(ordering))
 
     def computeKemenyRanking(self,isProbabilistic=False,
                            orderLimit=7, seed=None,
@@ -9537,7 +9877,7 @@ class FusionLDigraph(Digraph):
 
 # ------ Preorder construction
 
-class Preorder(Digraph):
+class _Preorder(Digraph):
     """
     Instantiates the associated preorder from
     a given Digraph called other.
@@ -9585,9 +9925,9 @@ class Preorder(Digraph):
         
         if ranking == None:
             if direction == 'best':
-                rank = other.bestRanks()
+                rank = other._bestRanks()
             else:
-                rank = other.worstRanks()
+                rank = other._worstRanks()
         else:
             rank = ranking
 
@@ -10286,11 +10626,12 @@ class EmptyDigraph(Digraph):
     """
     def __init__(self,order=5,valuationdomain = (-1.0,1.0)):
         import sys,array,copy
+        from collections import OrderedDict
         self.name = 'empty'
         self.order = order
         actionlist = list(range(order+1))
         actionlist.remove(0)
-        actions = {}
+        actions = OrderedDict()
         for x in actionlist:
             actions[str(x)] = {'name':str(x)}
         self.actions = actions
@@ -10315,12 +10656,13 @@ class IndeterminateDigraph(Digraph):
     """
     def __init__(self,other=None,order=5,valuationdomain = (-1.0,1.0)):
         import sys,array,copy
+        from collections import OrderedDict
         self.name = 'indeterminate'
         if other == None:
             self.order = order
             actionlist = list(range(order+1))
             actionlist.remove(0)
-            actions = {}
+            actions = OrderedDict()
             for x in actionlist:
                 actions[str(x)] = {'name':str(x)}
 
@@ -10401,13 +10743,14 @@ class CirculantDigraph(Digraph):
     """
     def __init__(self,order=7,valuationdomain = {'min':Decimal('-1.0'),'max':Decimal('1.0')},circulants = [-1,1]):
         import sys,array,copy
+        from collections import OrderedDict
         self.name = 'c'+str(order)
         self.order = order
         self.circulants = circulants
         actionlist = list(range(1,order+1))
-        actions = []
+        actions = OrderedDict()
         for x in actionlist:
-            actions.append(str(x))
+            actions[str(x)] = {'name': str(x)}
         self.actions = actions
         Min = Decimal(str(valuationdomain['min']))
         Max = Decimal(str(valuationdomain['max']))
@@ -11090,6 +11433,7 @@ class kChoicesDigraph(Digraph):
     def __init__(self,digraph=None,k=3):
         import random,sys,array
         from copy import deepcopy
+        from collections import OrderedDict
         from outrankingDigraphs import OutrankingDigraph, RandomOutrankingDigraph, BipolarOutrankingDigraph
         if digraph == None:
             digraph = RandomValuationDigraph()
@@ -11101,7 +11445,7 @@ class kChoicesDigraph(Digraph):
         self.valuationdomain = deepcopy(digraph.valuationdomain)
         dactions = [x for x in digraph.actions]
         drelation = digraph.relation
-        actions = {}
+        actions = OrderedDict()
         for kChoice in Digraph.kChoices(digraph,dactions,k):
             cn = '_'
             for x in kChoice:
@@ -11977,13 +12321,14 @@ class StrongComponentsCollapsedDigraph(Digraph):
     """
     def __init__(self,digraph=None):
         from copy import copy,deepcopy
+        from collections import OrderedDict
         if digraph == None:
            print('Error: you must provide a valid digraph to the constructor!')
         else:
            self.name = digraph.name + '_Scc'
            self.valuationdomain = deepcopy(digraph.valuationdomain)
            scc = digraph.strongComponents()
-           actions = {}
+           actions = OrderedDict()
            for i,strongComponent in enumerate(scc):
                actionShortName = 'Scc_'+str(i+1)
                actionKey = strongComponent
@@ -12391,15 +12736,15 @@ if __name__ == "__main__":
     from randomPerfTabs import *
 
 
-    print('****************************************************')
-    print('* Python digraphs module                           *')
-    print('* $Revision: 1.697 $                               *')
-    print('* Copyright (C) 2006-2007 University of Luxembourg *')
-    print('* The module comes with ABSOLUTELY NO WARRANTY     *')
-    print('* to the extent permitted by the applicable law.   *')
-    print('* This is free software, and you are welcome to    *')
-    print('* redistribute it if it remains free software.     *')
-    print('****************************************************')
+    print('*****************************************************')
+    print('* Python digraphs module                            *')
+    print('* $Revision: 2500+ $                                *')
+    print('* Copyright (C) 2006-20018 Raymond Bisdorff         *')
+    print('* The module comes with ABSOLUTELY NO WARRANTY      *')
+    print('* to the extent permitted by the applicable law.    *')
+    print('* This is free software, and you are welcome to     *')
+    print('* redistribute it if it remains free software.      *')
+    print('*****************************************************')
 
     narg = len(sys.argv)
 
@@ -12478,14 +12823,19 @@ if __name__ == "__main__":
         from digraphsTools import *
         ##dg = RedhefferDigraph(order=113)
         #g = RandomTournament(order=5,seed=1)
-        g = RandomValuationDigraph(seed=1)
-        print(g)
-##        from outrankingDigraphs import BipolarOutrankingDigraph
-##        from randomPerfTabs import RandomCBPerformanceTableau
+        #g = RandomValuationDigraph(seed=1)
+        #print(g)
+        
+        from outrankingDigraphs import BipolarOutrankingDigraph
+        from randomPerfTabs import Random3ObjectivesPerformanceTableau
 ##        from linearOrders import CopelandOrder
-##        t1 = RandomCBPerformanceTableau(numberOfActions=10,seed=1)
-##        g = BipolarOutrankingDigraph(t1,Normalized=False)
-##        g.showRubisBestChoiceRecommendation()
+        t1 = Random3ObjectivesPerformanceTableau(numberOfActions=7,numberOfCriteria=7,seed=101)
+        g = BipolarOutrankingDigraph(t1,Normalized=True)
+        g.showRelationTable()
+        g.showHTMLBestChoiceRecommendation(ChoiceVector=False)
+        g.showPreKernels()
+        g.showRelationTable()
+        g.showHTMLBestChoiceRecommendation(ChoiceVector=False)
 ##        gcd = ~(-g)
 ##        cocb = BrokenCocsDigraph(gcd,Comments=True)
 ##        print(cocb.brokenLinks)
@@ -12583,8 +12933,8 @@ if __name__ == "__main__":
         print('Enjoy !')
 
     print('*************************************')
-    print('* R.B. July 2012                    *')
-    print('* $Revision: 1.697 $                *')
+    print('* R.B. July 2018                    *')
+    print('* $Revision: 2500+ $                *')
     print('*************************************')
 
 #############################

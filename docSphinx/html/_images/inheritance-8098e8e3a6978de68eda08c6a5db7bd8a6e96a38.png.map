@@ -1,0 +1,12 @@
+<map id="inheritance4442f81dbd" name="inheritance4442f81dbd">
+<area shape="rect" id="node1" href="#perfTabs.PerformanceTableau" target="_top" title="In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` class provides a generic **performance table model**. A given object of this class consists in:" alt="" coords="62,241,267,265"/>
+<area shape="rect" id="node4" href="#randomPerfTabs.Random3ObjectivesPerformanceTableau" target="_top" title="Specialization of the PerformanceTableau" alt="" coords="378,147,755,171"/>
+<area shape="rect" id="node5" href="#randomPerfTabs.RandomAcademicPerformanceTableau" target="_top" title="Specialization of the PerformanceTableau class for generating a temporary" alt="" coords="383,194,750,218"/>
+<area shape="rect" id="node7" href="#randomPerfTabs.RandomCBPerformanceTableau" target="_top" title="Full automatic generation of random" alt="" coords="406,241,727,265"/>
+<area shape="rect" id="node8" href="#randomPerfTabs.RandomPerformanceTableau" target="_top" title="Specialization of the generic :py:class:`perftabs.PerformanceTableau` class for generating a temporary random performance tableau." alt="" coords="414,288,719,313"/>
+<area shape="rect" id="node9" href="#randomPerfTabs.RandomRankPerformanceTableau" target="_top" title="Specialization of the PerformanceTableau class for generating a temporary" alt="" coords="399,336,734,360"/>
+<area shape="rect" id="node2" href="#randomPerfTabs.Random3ObjectivesPerformanceGenerator" target="_top" title="Generates and/or new decision actions with random evaluation for a" alt="" coords="370,5,763,29"/>
+<area shape="rect" id="node3" href="#randomPerfTabs.RandomPerformanceGenerator" target="_top" title="Wrapper for generating new decision actions with random evaluation for a given RandomPerformanceTableau instance." alt="" coords="5,52,324,77"/>
+<area shape="rect" id="node6" href="#randomPerfTabs.RandomCBPerformanceGenerator" target="_top" title="Instantiates a generator of new decision actions with associated random evaluations using the model parameters provided by a given RandomCBPerformanceTableau instance." alt="" coords="399,52,734,77"/>
+<area shape="rect" id="node10" href="#randomPerfTabs.RandomStdPerformanceGenerator" target="_top" title="Generates for a given standard RandomPerformanceTableau instance." alt="" coords="397,100,736,124"/>
+</map>

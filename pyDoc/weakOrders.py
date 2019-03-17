@@ -137,14 +137,14 @@ class WeakOrder(Digraph):
                                 Sorted=False,\
                                 ReflexiveTerms=False)
 
-    def exportDigraphGraphViz(self,fileName=None, bestChoice=set(),worstChoice=set(),noSilent=True,graphType='png',graphSize='7,7'):
+    def exportDigraphGraphViz(self,fileName=None, bestChoice=set(),worstChoice=set(),Comments=True,graphType='png',graphSize='7,7'):
         """
         export GraphViz dot file for digraph drawing filtering.
         """
-        Digraph.exportGraphViz(self, fileName=fileName, bestChoice=bestChoice,worstChoice=worstChoice,noSilent=noSilent,graphType=graphType,graphSize=graphSize)
+        Digraph.exportGraphViz(self, fileName=fileName, bestChoice=bestChoice,worstChoice=worstChoice,Comments=Comments,graphType=graphType,graphSize=graphSize)
 
     def exportGraphViz(self,digraphClass=None,fileName=None,relation=None,direction='best',\
-                       noSilent=True,graphType='png',\
+                       Comments=True,graphType='png',\
                        graphSize='7,7',\
                        fontSize=10):
         """
@@ -176,7 +176,7 @@ class WeakOrder(Digraph):
                 self.computeRankingByLastChoosing()
                 rankingByChoosing = self.rankingByLastChoosing['result']
         
-        if noSilent:
+        if Comments:
             print('*---- exporting a dot file for GraphViz tools ---------*')
         actionKeys = [x for x in self.actions]
         n = len(actionKeys)
@@ -189,7 +189,7 @@ class WeakOrder(Digraph):
         else:
             name = fileName
         dotName = name+'.dot'
-        if noSilent:
+        if Comments:
             print('Exporting to '+dotName)
 ##        if bestChoice != set():
 ##            rankBestString = '{rank=max; '
@@ -263,12 +263,12 @@ class WeakOrder(Digraph):
         
         commandString = 'dot -Grankdir=TB -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
             #commandString = 'dot -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
-        if noSilent:
+        if Comments:
             print(commandString)
         try:
             os.system(commandString)
         except:
-            if noSilent:
+            if Comments:
                 print('graphViz tools not avalaible! Please check installation.')
 
 ##    def showWeakOrder(self,rankingByChoosing=None):
@@ -1125,7 +1125,7 @@ class PrincipalInOutDegreesOrdering(WeakOrder):
             direction = 'worst'
         WeakOrder.exportGraphViz(self, fileName=fileName,\
                             direction=direction,\
-                            noSilent=Comments,\
+                            Comments=Comments,\
                             graphType=graphType,\
                             graphSize=graphSize,\
                             fontSize=fontSize)
@@ -1781,7 +1781,7 @@ def _jobTaskKohlerFusion(categID):
 ##        return ordering
 ##
 ##    def exportSortingGraphViz(self,fileName=None,direction='decreasing',\
-##                       noSilent=True,graphType='png',\
+##                       Comments=True,graphType='png',\
 ##                       graphSize='7,7',\
 ##                       fontSize=10,\
 ##                        Debug=False):
@@ -1798,7 +1798,7 @@ def _jobTaskKohlerFusion(categID):
 ##                                     Threading=self.sortingParameters['Threading'])
 ##        qs.exportGraphViz(fileName=fileName,
 ##                          direction=direction,\
-##                       noSilent=noSilent,graphType=graphType,\
+##                       Comments=Comments,graphType=graphType,\
 ##                       graphSize=graphSize,\
 ##                       fontSize=fontSize,Debug=Debug)
 ##
