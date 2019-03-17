@@ -406,8 +406,8 @@ def testRankingRules():
     g.exportGraphViz()
     gcd = CoDualDigraph(g)
     gcd.exportGraphViz()
-    gcd.computeRankedPairsOrder(Debug=True)
-    print(gcd.computeRankedPairsOrder())
+##    gcd.computeRankedPairsOrder(Debug=True)
+##    print(gcd.computeRankedPairsOrder())
 
     gcd.computeKemenyOrder(Debug=True)
     print(gcd.computeKemenyRanking(isProbabilistic=True, seed=1,sampleSize=500))    
