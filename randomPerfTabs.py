@@ -557,7 +557,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
                  weightDistribution = 'random', weightScale = None,\
                  commonScale = (0,20), ndigits = 0,\
                  WithTypes = False,\
-                 commonMode = ('triangular',14,0.25),\
+                 commonMode = ('triangular',12,0.25),\
                  commonThresholds = None, IntegerWeights = True,\
                  BigData = False, missingDataProbability = 0.0,\
                  seed = None,\
@@ -665,16 +665,18 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
                 criteria[g]['weight'] = weightsList[i]/sumWeights
                 
         # generate evaluations
-        # generate random evaluation
         digits = ndigits
         evaluation = {}
         # evaluation ranges for student types
         if _WithTypes:
-            randEvalRanges = {'weak':(commonScale[0],commonScale[1]*0.2),
+            randEvalRanges = {'weak':(commonScale[0],commonScale[1]*0.5),
                     'fair':(commonScale[0]+commonScale[1]*0.2,commonScale[1]*0.8),
                     'good':(commonScale[0]+commonScale[1]*0.4,commonScale[1]),
-                    'excellent':(commonScale[0]+commonScale[1]*0.5,commonScale[1])}
-        
+                    'excellent':(commonScale[0]+commonScale[1]*0.6,commonScale[1])}
+        # install the triangular RNG if necessary
+        if str(commonMode[0]) == 'triangular':
+            from randomNumbers import ExtendedTriangularRandomVariable as RNGTr
+        # generate all individual random evaluations
         for g in criteria:
             evaluation[g] = {}       
             for x in actions:
@@ -690,11 +692,15 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
                     evaluation[g][x] = Decimal(str(round(randeval,digits)))
                 # ---------        
                 elif str(commonMode[0]) == 'triangular':
-                    from randomNumbers import ExtendedTriangularRandomVariable as RNGTr
+                    #from randomNumbers import ExtendedTriangularRandomVariable as RNGTr
                     if _WithTypes:
-                        rng = RNGTr(rangex[0],rangex[1],commonMode[2],seed=seed)
+                        rdseed = random.random()
+                        rng = RNGTr(rangex[0],rangex[1],min(rangex[1],\
+                                    commonMode[1]),commonMode[2],seed=rdseed)
                     else:
-                        rng = RNGTr(commonScale[0],commonScale[1],commonMode[1],commonMode[2],seed=seed)    
+                        rdseed = random.random()
+                        rng = RNGTr(commonScale[0],commonScale[1],\
+                                    commonMode[1],commonMode[2],seed=rdseed)    
                     evaluation[g][x] = Decimal(str(round(rng.random(),digits)))
                 #-------------------       
                 elif str(commonMode[0]) == 'beta':
@@ -3139,9 +3145,14 @@ if __name__ == "__main__":
     from outrankingDigraphs import BipolarOutrankingDigraph
 #    from weakOrders import QuantilesRankingDigraph
     from randomPerfTabs import *
+##    t = RandomAcademicPerformanceTableau(numberOfStudents=10,numberOfCourses=5,
+##                                         commonMode=('uniform',None,None),
+##                                         missingDataProbability=0.01)
     t = RandomAcademicPerformanceTableau(numberOfStudents=10,numberOfCourses=5,
-                                         commonMode=('uniform',None,None),
-                                         missingDataProbability=0.01)
+                                         commonMode=('beta',None,None),
+                                         missingDataProbability=0.01,
+                                         WithTypes=True,
+                                         seed=1)
     print(t)
     t.showHTMLPerformanceTableau(ndigits=0)
     #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,ndigits=0)
