@@ -125,6 +125,8 @@ Various Random generators
      Additional random number generators, not available in the
      standard python random.py library.
 
+     .. inheritance-diagram:: randomNumbers
+
 Handling big data
 .................
 
