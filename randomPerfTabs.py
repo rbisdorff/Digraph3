@@ -542,7 +542,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         * number of students,
         * number of courses,
         * weightDistribution := equisignificant | random (default, see RandomPerformanceTableau)
-        * weightScale := (1, 1 | numberOfCriteria (default when random))
+        * weightScale := (1, 1 | numberOfCourses (default when random))
         * IntegerWeights := Boolean (True = default)
         * commonScale := (0,20) (default)
         * ndigits := 0
@@ -553,17 +553,25 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
             | } (default)
 
     """
-    def __init__(self,numberOfStudents = 13, numberOfCourses = 7,\
-                 weightDistribution = 'random', weightScale=None,\
+    def __init__(self,numberOfStudents = 10, numberOfCourses = 5,\
+                 weightDistribution = 'random', weightScale = None,\
                  commonScale = (0,20), ndigits = 0,\
+                 WithTypes = False,\
                  commonMode = ('triangular',14,0.25),\
-                 commonThresholds = None, IntegerWeights=True,\
-                 BigData=False, missingDataProbability = 0.0,\
+                 commonThresholds = None, IntegerWeights = True,\
+                 BigData = False, missingDataProbability = 0.0,\
                  seed = None,\
                  Debug = False):
         """
         """
-
+        # didactic
+        if WithTypes:
+            _WithTypes = True
+        else:
+            _WithTypes = False
+        if _WithTypes:
+            types = ['weak','fair','fair','good','good','excellent']
+            nt = len(types)
         # set random seed
         self.randomSeed = seed
         import random
@@ -577,14 +585,25 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         nd = len(str(numberOfActions))
         actions = OrderedDict()
         for i in range(numberOfActions):
+            if _WithTypes:
+                ri = random.randint(0,nt-1)
             if BigData:
                 actionName = ('s%%0%dd' % (nd)) % (i+1)
                 actions[i] = {'name': actionName}
+                if _WithTypes:
+                    actions[i]['type'] = types[ri]
+                    actions[i]['name'] = '%s%s' % (actions[i]['name'],(actions[i]['type'])[0])
+                
             else:   
                 actionKey = ('s%%0%dd' % (nd)) % (i+1)
                 actions[actionKey] = {'shortName':actionKey,
                         'name': 'student',
                         'comment': 'RandomAcademicPerformanceTableau() generated.' }
+                if _WithTypes:
+                    actions[actionKey]['type'] = types[ri]
+                    actions[actionKey]['shortName'] = '%s%s' %\
+                                        (actionKey,actions[actionKey]['type'][0])
+            
         # generate the criteria weights
         numberOfCriteria = numberOfCourses 
         if weightScale == None:
@@ -649,62 +668,68 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         # generate random evaluation
         digits = ndigits
         evaluation = {}
+        # evaluation ranges for student types
+        if _WithTypes:
+            randEvalRanges = {'weak':(commonScale[0],commonScale[1]*0.2),
+                    'fair':(commonScale[0]+commonScale[1]*0.2,commonScale[1]*0.8),
+                    'good':(commonScale[0]+commonScale[1]*0.4,commonScale[1]),
+                    'excellent':(commonScale[0]+commonScale[1]*0.5,commonScale[1])}
         
-        if str(commonMode[0]) == 'uniform':          
-            for g in criteria:
-                evaluation[g] = {}
-                randeval = random.uniform(commonScale[0],commonScale[1])
-                evaluation[g] = Decimal(str(round(randeval,digits)))
-                    
-        elif str(commonMode[0]) == 'triangular':
-            from randomNumbers import ExtendedTriangularRandomVariable as RNGTr
-            rng = RNGTr(commonScale[0],commonScale[1],commonMode[1],commonMode[2],seed=seed)
-            for g in criteria:
-                evaluation[g] = Decimal(str(round(rng.random(),digits)))
-                    
-        elif str(commonMode[0]) == 'beta':
-            m = commonScale[0]
-            M = commonScale[1]
-            if commonMode[1] == None:
-                xm = 0.5
-            else:
-                xm = commonMode[1]
-                
-            if commonMode[2] == None:
-                if xm > 0.5:
-                    beta = 2.0
-                    alpha = 1.0/(1-xm)
-                else:
-                    alpha = 2.0
-                    beta = 1.0/xm
-            else:
-                alpha = commonMode[2][0]
-                beta = commonMode[2][1]
-            if Debug:
-                print('alpha,beta', alpha,beta)
-            for g in criteria:
-                u = random.betavariate(alpha,beta)
-                randeval = (u * (M-m)) + m
-                evaluation[g] = Decimal(str(round(randeval,digits)))
+        for g in criteria:
+            evaluation[g] = {}       
+            for x in actions:
+                if _WithTypes:
+                    rangex = randEvalRanges[actions[x]['type']]
+                    print(actions[x],rangex)
+                #--------
+                if str(commonMode[0]) == 'uniform':              
+                    if _WithTypes:
+                        randeval = random.uniform(rangex[0],rangex[1])
+                    else:
+                        randeval = random.uniform(commonScale[0],commonScale[1])
+                    evaluation[g][x] = Decimal(str(round(randeval,digits)))
+                # ---------        
+                elif str(commonMode[0]) == 'triangular':
+                    from randomNumbers import ExtendedTriangularRandomVariable as RNGTr
+                    if _WithTypes:
+                        rng = RNGTr(rangex[0],rangex[1],commonMode[2],seed=seed)
+                    else:
+                        rng = RNGTr(commonScale[0],commonScale[1],commonMode[1],commonMode[2],seed=seed)    
+                    evaluation[g][x] = Decimal(str(round(rng.random(),digits)))
+                #-------------------       
+                elif str(commonMode[0]) == 'beta':
+                    if _WithTypes:
+                        m = rangex[0]
+                        M = rangex[1]
+                    else:
+                        m = commonScale[0]
+                        M = commonScale[1]
+                    if commonMode[1] == None:
+                        xm = 0.5
+                    else:
+                        xm = commonMode[1]
+                        
+                    if commonMode[2] == None:
+                        if xm > 0.5:
+                            beta = 2.0
+                            alpha = 1.0/(1-xm)
+                        else:
+                            alpha = 2.0
+                            beta = 1.0/xm
+                    else:
+                        alpha = commonMode[2][0]
+                        beta = commonMode[2][1]
+                    if Debug:
+                        print('alpha,beta', alpha,beta)
+                    u = random.betavariate(alpha,beta)
+                    randeval = (u * (M-m)) + m
+                    evaluation[g][x] = Decimal(str(round(randeval,digits)))
 
         # randomly insert missing data
         for c in criteria:
-            if random.random() < missingDataProbability:
-                evaluation[c] = Decimal('-999')
-
-
-
-
-
-
-        evaluation = {}       
-        for g in criteria:
-            evaluation[g] = {}
-            choiceRange = list(range(commonScale[0],commonScale[1]))
-            for s in actions:                                
-                randeval = random.choice(choiceRange)
-                evaluation[g][s] = Decimal( str(randeval) )
-                choiceRange.remove(randeval)
+            for x in actions:
+                if random.random() < missingDataProbability:
+                    evaluation[c][x] = Decimal('-999')
 
         # install object items
         self.actions = actions
@@ -3115,10 +3140,11 @@ if __name__ == "__main__":
 #    from weakOrders import QuantilesRankingDigraph
     from randomPerfTabs import *
     t = RandomAcademicPerformanceTableau(numberOfStudents=10,numberOfCourses=5,
-                                         commonMode=('uniform',None,None))
+                                         commonMode=('uniform',None,None),
+                                         missingDataProbability=0.01)
     print(t)
-    #t.showHTMLPerformanceTableau(ndigits=0)
-    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,ndigits=0)
+    t.showHTMLPerformanceTableau(ndigits=0)
+    #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,ndigits=0)
                                              
 
 

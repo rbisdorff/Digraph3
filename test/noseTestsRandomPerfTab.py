@@ -239,3 +239,10 @@ def testRandom3ObjectivesPerformanceGenerators():
     rag2.randomActions(nbrOfRandomActions=5)
     print(rag2.randomActions(2))
     #t.showHTMLPerformanceHeatmap(ndigits=0,Correlations=True)
+def testRandomAcademicPerformanceTableauGenerator():
+    print('*---------- test of a random academic performance tableau --------*') 
+    t = RandomAcademicPerformanceTableau(numberOfStudents=10,numberOfCourses=5,
+                                         commonMode=('uniform',None,None),
+                                         missingDataProbability=0.01)
+    print(t)
+    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,ndigits=0)
