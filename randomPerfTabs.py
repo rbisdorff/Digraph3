@@ -554,7 +554,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
 
     """
     def __init__(self,numberOfStudents = 10, numberOfCourses = 5,\
-                 weightDistribution = 'random', weightScale = None,\
+                 weightDistribution = 'random', weightScale = (1,5),\
                  commonScale = (0,20), ndigits = 0,\
                  WithTypes = False,\
                  commonMode = ('triangular',12,0.25),\
@@ -566,10 +566,6 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         """
         # didactic
         if WithTypes:
-            _WithTypes = True
-        else:
-            _WithTypes = False
-        if _WithTypes:
             types = ['weak','fair','fair','good','good','excellent']
             nt = len(types)
         # set random seed
@@ -585,12 +581,12 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         nd = len(str(numberOfActions))
         actions = OrderedDict()
         for i in range(numberOfActions):
-            if _WithTypes:
+            if WithTypes:
                 ri = random.randint(0,nt-1)
             if BigData:
                 actionName = ('s%%0%dd' % (nd)) % (i+1)
                 actions[i] = {'name': actionName}
-                if _WithTypes:
+                if WithTypes:
                     actions[i]['type'] = types[ri]
                     actions[i]['name'] = '%s%s' % (actions[i]['name'],(actions[i]['type'])[0])
                 
@@ -599,7 +595,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
                 actions[actionKey] = {'shortName':actionKey,
                         'name': 'student',
                         'comment': 'RandomAcademicPerformanceTableau() generated.' }
-                if _WithTypes:
+                if WithTypes:
                     actions[actionKey]['type'] = types[ri]
                     actions[actionKey]['shortName'] = '%s%s' %\
                                         (actionKey,actions[actionKey]['type'][0])
@@ -668,7 +664,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         digits = ndigits
         evaluation = {}
         # evaluation ranges for student types
-        if _WithTypes:
+        if WithTypes:
             randEvalRanges = {'weak':(commonScale[0],commonScale[1]*0.5),
                     'fair':(commonScale[0]+commonScale[1]*0.2,commonScale[1]*0.8),
                     'good':(commonScale[0]+commonScale[1]*0.4,commonScale[1]),
@@ -680,7 +676,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         for g in criteria:
             evaluation[g] = {}       
             for x in actions:
-                if _WithTypes:
+                if WithTypes:
                     rangex = randEvalRanges[actions[x]['type']]
                     if Debug:
                         print(actions[x],rangex)
@@ -694,7 +690,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
                 # ---------        
                 elif str(commonMode[0]) == 'triangular':
                     #from randomNumbers import ExtendedTriangularRandomVariable as RNGTr
-                    if _WithTypes:
+                    if WithTypes:
                         rdseed = random.random()
                         rng = RNGTr(rangex[0],rangex[1],min(rangex[1],\
                                     commonMode[1]),commonMode[2],seed=rdseed)
@@ -705,7 +701,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
                     evaluation[g][x] = Decimal(str(round(rng.random(),digits)))
                 #-------------------       
                 elif str(commonMode[0]) == 'beta':
-                    if _WithTypes:
+                    if WithTypes:
                         m = rangex[0]
                         M = rangex[1]
                     else:
@@ -803,17 +799,17 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
             html += '</tr>'
             for g in criteriaKeys:
                 try:
-                    gName = criteria[g]['shortName']
+                    gName = '%s (%d)' % (criteria[g]['shortName'],criteria[g]['weight'])
                 except:
-                    gName = str(g)
+                    gName = '%s (%d)' % (g,int(criteria[g]['weight']))
                 html += '<tr><th bgcolor="#FFF79B">%s</th>' % (gName)
                 for x in actionsKeys:
                     if self.evaluation[g][x] != Decimal("-999"):
-                        if minMaxEvaluations[g]['minimum'] == minMaxEvaluations[g]['maximum']:
-                            formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
-                            html += formatString % (evaluation[g][x])
-                        elif self.evaluation[g][x] == minMaxEvaluations[g]['minimum']:
+                        if self.evaluation[g][x] < Decimal('10'):
                             formatString = '<td bgcolor="#ffddff"  align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                            html += formatString % (evaluation[g][x])
+                        elif minMaxEvaluations[g]['minimum'] == minMaxEvaluations[g]['maximum']:
+                            formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
                             html += formatString % (evaluation[g][x])
                         elif self.evaluation[g][x] == minMaxEvaluations[g]['maximum']:
                             formatString = '<td bgcolor="#ddffdd" align="%s">%% .%df</td>' % (alignFormat,ndigits)
@@ -836,10 +832,10 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
                     gName = str(g)
                 html += '<th bgcolor="#FFF79B">%s</th>' % (gName)
             html += '</tr>'
-            html += '<tr><th bgcolor="#9acd32" >Weights</th>'
+            html += '<tr><th bgcolor="#9acd32" >Students</th>'
             for g in criteriaKeys:
                 gweight = criteria[g]['weight']
-                html += '<th>%d</th>' % (int(gweight))
+                html += '<td  align="center" bgcolor="#FFF79B" ><i>%d</i></td>' % (int(gweight))
             html += '</tr>'
             for x in actionsKeys:
                 try:
@@ -3275,13 +3271,13 @@ if __name__ == "__main__":
 ##    t = RandomAcademicPerformanceTableau(numberOfStudents=10,numberOfCourses=5,
 ##                                         commonMode=('uniform',None,None),
 ##                                         missingDataProbability=0.01)
-    t = RandomAcademicPerformanceTableau(numberOfStudents=10,numberOfCourses=5,
-                                         commonMode=('beta',None,None),
+    t = RandomAcademicPerformanceTableau(numberOfStudents=20,numberOfCourses=10,
+                                         commonMode=('triangular',14,0.4),
                                          missingDataProbability=0.01,
                                          WithTypes=True,
                                          seed=1)
     print(t)
-    t.showHTMLPerformanceTableau(ndigits=0)
+    t.showHTMLPerformanceTableau(Transposed=True)
     #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,ndigits=0)
                                              
 
