@@ -743,7 +743,133 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         self.criteria = criteria
         self.evaluation = evaluation
         self.weightPreorder = self.computeWeightPreorder()
-                                             
+
+    def showHTMLPerformanceTableau(self,studentsSubset=None,isSorted=True,\
+                                   Transposed=False,ndigits=0,\
+                                   ContentCentered=True,title=None):
+        """
+        shows the html version of the performance tableau in a browser window.
+        """
+        import webbrowser
+        fileName = '/tmp/performanceTable.html'
+        fo = open(fileName,'w')
+        fo.write(self._htmlPerformanceTable(actions=studentsSubset,isSorted=isSorted,\
+                                           Transposed=Transposed,\
+                                           ndigits=ndigits,
+                                           ContentCentered=ContentCentered,
+                                           title=title))
+        fo.close()
+        url = 'file://'+fileName
+        webbrowser.open_new(url)
+           
+            
+    def _htmlPerformanceTable(self,actions=None,isSorted=False,\
+                             Transposed=False,ndigits=2,\
+                             ContentCentered=True,
+                             title=None):
+        """
+        Renders the performance table citerion x actions in html format.
+        """
+        criteria = self.criteria
+        minMaxEvaluations = self.computeMinMaxEvaluations()
+        if title == None:
+            html = '<h1>Random Student Gradings</h1>'
+        else:
+            html = '<h1>%s</h1>' % title            
+        criteriaKeys = list(criteria.keys())
+        if isSorted:
+            criteriaKeys.sort()
+        if actions == None:
+            actions = self.actions
+            actionsKeys = list(self.actions.keys())
+        else:
+            actionsKeys = [x for x in actions]
+        if isSorted:
+            actionsKeys.sort()
+        evaluation = self.evaluation
+        if ContentCentered:
+            alignFormat = 'center'
+        else:
+            alignFormat = 'right'
+        if Transposed:
+            html += '<table style="background-color:White;" border="1">'
+            html += '<tr bgcolor="#9acd32"><th>Courses</th>'
+            for x in actionsKeys:
+                try:
+                    xName = actions[x]['shortName']
+                except:
+                    xName = str(x)
+                html += '<th bgcolor="#FFF79B">%s</th>' % (xName)
+            html += '</tr>'
+            for g in criteriaKeys:
+                try:
+                    gName = criteria[g]['shortName']
+                except:
+                    gName = str(g)
+                html += '<tr><th bgcolor="#FFF79B">%s</th>' % (gName)
+                for x in actionsKeys:
+                    if self.evaluation[g][x] != Decimal("-999"):
+                        if minMaxEvaluations[g]['minimum'] == minMaxEvaluations[g]['maximum']:
+                            formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                            html += formatString % (evaluation[g][x])
+                        elif self.evaluation[g][x] == minMaxEvaluations[g]['minimum']:
+                            formatString = '<td bgcolor="#ffddff"  align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                            html += formatString % (evaluation[g][x])
+                        elif self.evaluation[g][x] == minMaxEvaluations[g]['maximum']:
+                            formatString = '<td bgcolor="#ddffdd" align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                            html += formatString % (evaluation[g][x])
+                        else:
+                            formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                            html += formatString % (evaluation[g][x])
+                            
+                    else:
+                        html += '<td align="center"><span style="color: LightGrey;font-size:75%; ">NA</span></td>'
+                html += '</tr>'
+            html += '</table>'
+        else:
+            html += '<table style="background-color:White;" border="1">'
+            html += '<tr bgcolor="#9acd32"><th>Courses</th>'
+            for g in criteriaKeys:
+                try:
+                    gName = criteria[g]['shortName']
+                except:
+                    gName = str(g)
+                html += '<th bgcolor="#FFF79B">%s</th>' % (gName)
+            html += '</tr>'
+            html += '<tr><th bgcolor="#9acd32" >Weights</th>'
+            for g in criteriaKeys:
+                gweight = criteria[g]['weight']
+                html += '<th>%d</th>' % (int(gweight))
+            html += '</tr>'
+            for x in actionsKeys:
+                try:
+                    xName = actions[x]['shortName']
+                except:
+                    xName = str(x)
+                html += '<tr><th bgcolor="#FFF79B">%s</th>' % (xName)
+                for g in criteriaKeys:
+                    if self.evaluation[g][x] != Decimal("-999"):
+                        if self.evaluation[g][x] < Decimal('10'):
+                            formatString = '<td bgcolor="#ffddff"  align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                            html += formatString % (evaluation[g][x])
+                        elif minMaxEvaluations[g]['minimum'] == minMaxEvaluations[g]['maximum']:
+                            formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                            html += formatString % (evaluation[g][x])
+                        #elif self.evaluation[g][x] == minMaxEvaluations[g]['minimum']:
+                        elif self.evaluation[g][x] == minMaxEvaluations[g]['maximum']:
+                            formatString = '<td bgcolor="#ddffdd" align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                            html += formatString % (evaluation[g][x])
+                        else:
+                            formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                            html += formatString % (evaluation[g][x])
+                            
+                    else:
+                        html += '<td align="center"><span style="color: LightGrey;font-size:75%;">NA</span></td>'
+                html += '</tr>'
+            html += '</table>'
+            
+        return html
+                                            
     
 #-----------------
 class RandomRankPerformanceTableau(PerformanceTableau):
