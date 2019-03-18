@@ -748,7 +748,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
                                    Transposed=False,ndigits=0,\
                                    ContentCentered=True,title=None):
         """
-        shows the html version of the performance tableau in a browser window.
+        shows the html version of the academic performance tableau in a browser window.
         """
         import webbrowser
         fileName = '/tmp/performanceTable.html'
@@ -764,7 +764,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
            
             
     def _htmlPerformanceTable(self,actions=None,isSorted=False,\
-                             Transposed=False,ndigits=2,\
+                             Transposed=False,ndigits=0,\
                              ContentCentered=True,
                              title=None):
         """
