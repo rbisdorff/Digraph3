@@ -682,7 +682,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
                         print(actions[x],rangex)
                 #--------
                 if str(commonMode[0]) == 'uniform':              
-                    if _WithTypes:
+                    if WithTypes:
                         randeval = random.uniform(rangex[0],rangex[1])
                     else:
                         randeval = random.uniform(commonScale[0],commonScale[1])
