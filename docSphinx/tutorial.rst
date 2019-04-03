@@ -4059,7 +4059,7 @@ The resulting orientation of the edges of *g* (see Fig. 51) is indeed transitive
  
 It is worthwhile noticing that the orientation of *g* is achieved with a *single implication class* covering all the vertices, whereas the orientation of the dual *-g* needs a decomposition into *three implication classes* marked in black, red and blue (see Fig.52).
 
-Let us recheck these facts by explicitely constructing transitively oriented digraph instances with the :py:func:`graphs.Graph.computeTranditivelyOrientedDigraph` method. 
+Let us recheck these facts by explicitely constructing transitively oriented digraph instances with the :py:func:`graphs.Graph.computeTransitivelyOrientedDigraph` method. 
 
 >>> og = g.computeTransitivelyOrientedDigraph(PartiallyDetermined=True)
 >>> print('Transitivity degree: %.3f' % (og.transitivityDegree)) 
