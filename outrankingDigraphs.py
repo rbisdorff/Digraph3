@@ -1457,7 +1457,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     if not isReturningHTML:
                         print(c,'    %s %s' % (eval_c_a,eval_c_b))
                     else:
-                        html += '<td bgcolor="#FFEEAA" align="center">%s</td> <td>%s</td><td>%s</td><td>%s</td><td></td><td></td><td></td><td></td><td>%.2f</td></tr>' % (c, criteria[c]['weight'],eval_c_a,eval_c_b, self.valuationdomain['med']*criteria[c]['weight'])
+                        html += '<td bgcolor="#FFEEAA" align="center">%s</td> <td>%.2f</td><td>%s</td><td>%s</td><td></td><td></td><td></td><td></td><td>%.2f</td></tr>' % (c, criteria[c]['weight'],eval_c_a,eval_c_b, self.valuationdomain['med']*criteria[c]['weight'])
             if not isReturningHTML:
                 print('             ----------------------------------------')
                 print(' Valuation in range: %+.2f to %+.2f; global concordance: %+.2f' % (-sumWeights,sumWeights,concordance))
@@ -1467,7 +1467,20 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         if isReturningHTML:
             return html
 
-    
+
+    def showHTMLPairwiseComparison(self,a,b,\
+                               fileName=None):
+        """
+        Exporting the pairwise comparison table of actions a and b in the default system browser. A specific file name may be provided.
+        """
+        import webbrowser
+        if fileName == None:
+            fileName = '/tmp/pairwiseComparison_%s_%s.html' % (a,b)
+        fo = open(fileName,'w')
+        fo.write(self.showPairwiseComparison(a,b,isReturningHTML=True))
+        fo.close()
+        url = 'file://'+fileName
+        webbrowser.open_new(url)
 
     def showShort(self):
         """
@@ -9238,13 +9251,14 @@ if __name__ == "__main__":
 
     ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
     Threading = False
-    t1 = Random3ObjectivesPerformanceTableau(numberOfActions=100,\
+    t1 = Random3ObjectivesPerformanceTableau(numberOfActions=10,\
                                    numberOfCriteria=21,\
                                    weightDistribution='equiobjectives',
                                    seed=100)
     
     g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=Threading,
                                   tempDir=None,nbrCores=8,Comments=True,Debug=False)
+    g1.showHTMLPairwiseComparison('a01','a02')
     #print(g1)
     #g1.saveXMCDA2RubisChoiceRecommendation()
     #g1.showRelationTable()
