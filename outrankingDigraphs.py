@@ -1258,7 +1258,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
 
     def showPairwiseComparisonsDistributions(self):
         """
-        show the lt,leq, eq, geq, gt distributions for all pairs
+        Renders the lt,leq, eq, geq, gt distributions for all pairs
         """
         a = [x for x in self.actions]
         a.sort()
@@ -1271,21 +1271,11 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 print(' %s  %s | %.2f %.2f %.2f %.2f %.2f | %.2f' % (a[i],a[j],pc[a[i]][a[j]]['lt'],pc[a[i]][a[j]]['leq'],pc[a[i]][a[j]]['eq'],pc[a[i]][a[j]]['geq'],pc[a[i]][a[j]]['gt'],self.relation[a[i]][a[j]]))
                 print(' %s  %s | %.2f %.2f %.2f %.2f %.2f | %.2f' % (a[j],a[i],pc[a[j]][a[i]]['lt'],pc[a[j]][a[i]]['leq'],pc[a[j]][a[i]]['eq'],pc[a[j]][a[i]]['geq'],pc[a[j]][a[i]]['gt'],self.relation[a[j]][a[i]]))
 
-    def showPairwiseOutrankings(self,a,b,\
-                               Debug=False,isReturningHTML=False,\
-                               hasSymmetricThresholds=True):
-        self.showPairwiseComparison(a,b,\
-                               Debug=Debug,isReturningHTML=isReturningHTML,\
-                               hasSymmetricThresholds=hasSymmetricThresholds)
-        self.showPairwiseComparison(b,a,\
-                               Debug=Debug,isReturningHTML=isReturningHTML,\
-                               hasSymmetricThresholds=hasSymmetricThresholds)
-
     def showPairwiseComparison(self,a,b,\
                                Debug=False,isReturningHTML=False,\
                                hasSymmetricThresholds=True):
         """
-        renders the pairwise comprison parameters on all criteria
+        Renders the pairwise comprison parameters on all criteria
         in html format
         """
         evaluation = self.evaluation
@@ -1481,6 +1471,36 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         fo.close()
         url = 'file://'+fileName
         webbrowser.open_new(url)
+
+    def showPairwiseOutrankings(self,a,b,\
+                               Debug=False,isReturningHTML=False,\
+                               hasSymmetricThresholds=True):
+        """
+        Renders the pairwise outrankings table for actions *a* and *b*.
+        """
+        self.showPairwiseComparison(a,b,\
+                               Debug=Debug,isReturningHTML=isReturningHTML,\
+                               hasSymmetricThresholds=hasSymmetricThresholds)
+        self.showPairwiseComparison(b,a,\
+                               Debug=Debug,isReturningHTML=isReturningHTML,\
+                               hasSymmetricThresholds=hasSymmetricThresholds)
+
+    def showHTMLPairwiseOutrankings(self,a,b,\
+                               fileName=None):
+        """
+        Exporting the pairwise outrankings table of actions a and b
+        in the default system browser. A specific file name may be provided.
+        """
+        import webbrowser
+        if fileName == None:
+            fileName = '/tmp/pairwiseOutrankings_%s_%s.html' % (a,b)
+        fo = open(fileName,'w')
+        fo.write(self.showPairwiseComparison(a,b,isReturningHTML=True))
+        fo.write(self.showPairwiseComparison(b,a,isReturningHTML=True))
+        fo.close()
+        url = 'file://'+fileName
+        webbrowser.open_new(url)
+
 
     def showShort(self):
         """
