@@ -1809,7 +1809,7 @@ The performance evaluations of each decision alternative on each criterion are g
         import webbrowser
         fileName = '/tmp/performanceTable.html'
         fo = open(fileName,'w')
-        fo.write(self.htmlPerformanceTable(actions=actionsSubset,isSorted=isSorted,\
+        fo.write(self.htmlPerformanceTableau(actions=actionsSubset,isSorted=isSorted,\
                                            Transposed=Transposed,\
                                            ndigits=ndigits,
                                            ContentCentered=ContentCentered,
@@ -1819,12 +1819,12 @@ The performance evaluations of each decision alternative on each criterion are g
         webbrowser.open_new(url)
            
             
-    def htmlPerformanceTable(self,actions=None,isSorted=False,\
+    def htmlPerformanceTableau(self,actions=None,isSorted=False,\
                              Transposed=False,ndigits=2,\
                              ContentCentered=True,
                              title=None):
         """
-        Renders the performance table citerion x actions in html format.
+        Renders the performance tableau citerion x actions in html format.
         """
         criteria = self.criteria
         minMaxEvaluations = self.computeMinMaxEvaluations()
@@ -1884,13 +1884,18 @@ The performance evaluations of each decision alternative on each criterion are g
             html += '</table>'
         else:
             html += '<table style="background-color:White;" border="1">'
-            html += '<tr bgcolor="#9acd32"><th>criterion</th>'
+            html += '<tr bgcolor="#9acd32"><th>criteria</th>'
             for g in criteriaKeys:
                 try:
                     gName = criteria[g]['shortName']
                 except:
                     gName = str(g)
                 html += '<th bgcolor="#FFF79B">%s</th>' % (gName)
+            html += '</tr>'
+            html += '<tr bgcolor="#9acd32"><th>weight</th>'
+            for g in criteriaKeys:
+                gWeight = criteria[g]['weight']
+                html += '<th bgcolor="#FFF79B">%.2f</th>' % (gWeight)
             html += '</tr>'
             for x in actionsKeys:
                 try:
@@ -1899,22 +1904,39 @@ The performance evaluations of each decision alternative on each criterion are g
                     xName = str(x)
                 html += '<tr><th bgcolor="#FFF79B">%s</th>' % (xName)
                 for g in criteriaKeys:
-                    if self.evaluation[g][x] != Decimal("-999"):
-                        if minMaxEvaluations[g]['minimum'] == minMaxEvaluations[g]['maximum']:
-                            formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
-                            html += formatString % (evaluation[g][x])
-                        elif self.evaluation[g][x] == minMaxEvaluations[g]['minimum']:
-                            formatString = '<td bgcolor="#ffddff"  align="%s">%% .%df</td>' % (alignFormat,ndigits)
-                            html += formatString % (evaluation[g][x])
-                        elif self.evaluation[g][x] == minMaxEvaluations[g]['maximum']:
-                            formatString = '<td bgcolor="#ddffdd" align="%s">%% .%df</td>' % (alignFormat,ndigits)
-                            html += formatString % (evaluation[g][x])
+                    if self.criteria[g]['weight'] < Decimal('0'):
+                        if self.evaluation[g][x] != Decimal("-999"):
+                            if minMaxEvaluations[g]['minimum'] == minMaxEvaluations[g]['maximum']:
+                                formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                                html += formatString % (evaluation[g][x])
+                            elif self.evaluation[g][x] == minMaxEvaluations[g]['minimum']:
+                                formatString = '<td bgcolor="#ddffdd"  align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                                html += formatString % (evaluation[g][x])
+                            elif self.evaluation[g][x] == minMaxEvaluations[g]['maximum']:
+                                formatString = '<td bgcolor="#ffddff" align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                                html += formatString % (evaluation[g][x])
+                            else:
+                                formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                                html += formatString % (evaluation[g][x])
                         else:
-                            formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
-                            html += formatString % (evaluation[g][x])
-                            
+                            html += '<td align="center"><span style="color: LightGrey;font-size:75%;">NA</span></td>'
                     else:
-                        html += '<td align="center"><span style="color: LightGrey;font-size:75%;">NA</span></td>'
+                        if self.evaluation[g][x] != Decimal("-999"):
+                            if minMaxEvaluations[g]['minimum'] == minMaxEvaluations[g]['maximum']:
+                                formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                                html += formatString % (evaluation[g][x])
+                            elif self.evaluation[g][x] == minMaxEvaluations[g]['minimum']:
+                                formatString = '<td bgcolor="#ffddff"  align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                                html += formatString % (evaluation[g][x])
+                            elif self.evaluation[g][x] == minMaxEvaluations[g]['maximum']:
+                                formatString = '<td bgcolor="#ddffdd" align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                                html += formatString % (evaluation[g][x])
+                            else:
+                                formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                                html += formatString % (evaluation[g][x])
+                        else:
+                            html += '<td align="center"><span style="color: LightGrey;font-size:75%;">NA</span></td>'
+                        
                 html += '</tr>'
             html += '</table>'
             
@@ -7291,7 +7313,7 @@ if __name__ == "__main__":
                                    numberOfActions=10,
                                    weightDistribution='equiobjectives',
                                    IntegerWeights=True,
-                                   NegativeWeights=True,
+                                   NegativeWeights=False,
                                    Debug=False,
                                    missingDataProbability=0.1,
                                    seed=101,Threading=False)
@@ -7301,9 +7323,29 @@ if __name__ == "__main__":
     #t.showHTMLPerformanceHeatmap(Correlations=True)
     #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows')
     #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='Kohler')
+
     t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='ArrowRaynaud')
     #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='Kohler')
+    t1 = RandomCBPerformanceTableau(numberOfCriteria=13,
+                                   numberOfActions=10,
+                                   weightDistribution='equiobjectives',
+                                   IntegerWeights=True,
+                                   NegativeWeights=True,
+                                   Debug=False,
+                                   missingDataProbability=0.1,
+                                   seed=101,Threading=False)
+    t1.showPerformanceTableau()
+
+    g = BipolarOutrankingDigraph(t)
+    g1 = BipolarOutrankingDigraph(t1)
     
+    nt = NormalizedPerformanceTableau(t1)
+    nt.showPerformanceTableau()
+    #t.showHTMLPerformanceHeatmap(Correlations=True)
+    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows')
+    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='Kohler')
+    t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='ArrowRaynaud')
+   
     #nt.showHTMLPerformanceHeatmap(Correlations=True)
 #     t.saveCSV('test')
 #     T = CSVPerformanceTableau('test',Debug=True)
