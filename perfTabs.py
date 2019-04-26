@@ -2684,7 +2684,7 @@ The performance evaluations of each decision alternative on each criterion are g
         # generate weightslist
         weightslist = []
         for g in criteria:
-            weightslist.append((criteria[g]['weight'],g))
+            weightslist.append((abs(criteria[g]['weight']),g))
         weightslist.sort()
         # generate weightPreorder
         weightPreorder = []

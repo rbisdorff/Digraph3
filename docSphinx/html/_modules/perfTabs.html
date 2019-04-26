@@ -2731,7 +2731,7 @@
         <span class="c1"># generate weightslist</span>
         <span class="n">weightslist</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
-            <span class="n">weightslist</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">],</span><span class="n">g</span><span class="p">))</span>
+            <span class="n">weightslist</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">abs</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]),</span><span class="n">g</span><span class="p">))</span>
         <span class="n">weightslist</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
         <span class="c1"># generate weightPreorder</span>
         <span class="n">weightPreorder</span> <span class="o">=</span> <span class="p">[]</span>

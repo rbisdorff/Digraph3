@@ -379,7 +379,7 @@ def testHTMLTables():
     g = RandomOutrankingDigraph()
     print(g.htmlRelationTable(isColored=True))
     t = RandomPerformanceTableau()
-    print(t.htmlPerformanceTable())
+    print(t.htmlPerformanceTableau())
 
 def testActionsCorrelation():
     print('*---- test computing actions correlation table and digraph ---*')

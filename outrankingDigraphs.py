@@ -8484,7 +8484,7 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         
         weightSquares = {}
         for g in criteriaList:
-            gWeight = self.criteria[g]['weight']
+            gWeight = abs(self.criteria[g]['weight'])
 ##            if Debug:
 ##                print(g,gWeight)
             weightSquares[g] = gWeight*gWeight

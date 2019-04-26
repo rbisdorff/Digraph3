@@ -952,6 +952,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
             criteria[g] = {}
             criteria[g]['name']='RandomRankPerformanceTableau() instance'
             criteria[g]['comment']=commentString
+            criteria[g]['preferenceDirection'] = 'min'
             try:
                 indThreshold  =(Decimal(str(commonThresholds['ind'][0])),
                                 Decimal(str(commonThresholds['ind'][1])))
@@ -974,9 +975,9 @@ class RandomRankPerformanceTableau(PerformanceTableau):
             commonScale = ( Decimal("0"), Decimal(numberOfActions) )
             criteria[g]['scale'] = commonScale
             if IntegerWeights:
-                criteria[g]['weight'] = weightsList[i]
+                criteria[g]['weight'] = -weightsList[i]
             else:
-                criteria[g]['weight'] = weightsList[i]/sumWeights
+                criteria[g]['weight'] = -weightsList[i]/sumWeights
                 
         # generate evaluations
         evaluation = {}       
@@ -992,6 +993,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
         self.actions = actions
         self.criteria = criteria
         self.evaluation = evaluation
+        self.sumWeights = sumWeights
         self.weightPreorder = self.computeWeightPreorder()
 
 # ------------------------------

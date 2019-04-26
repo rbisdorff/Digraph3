@@ -683,7 +683,7 @@ def testHTMLTables():
     g = RandomOutrankingDigraph()
     print(g.htmlRelationTable(isColored=True))
     t = RandomPerformanceTableau()
-    print(t.htmlPerformanceTable())
+    print(t.htmlPerformanceTableau())
 
 def testHTMLMaps():
     from outrankingDigraphs import BipolarOutrankingDigraph
