@@ -7382,7 +7382,7 @@ if __name__ == "__main__":
     #t.showHTMLPerformanceHeatmap(Correlations=True)
     #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows')
     #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='Kohler')
-    t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='ArrowRaynaud')
+    t1.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='ArrowRaynaud')
    
     #nt.showHTMLPerformanceHeatmap(Correlations=True)
 #     t.saveCSV('test')

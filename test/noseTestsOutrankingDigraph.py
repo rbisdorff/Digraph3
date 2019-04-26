@@ -27,22 +27,36 @@ def testElectre3OutrankingDigraph():
 def testOrdinalOutrankingDigraph():
 
     print('==>> Testing Ordinal Outranking Digraph instantiation')
-    g = OrdinalOutrankingDigraph()
+    t = RandomCBPerformanceTableau(NegativeWeights=False,seed=1)
+    g = OrdinalOutrankingDigraph(t)
     g.showAll()
+    t1 = RandomCBPerformanceTableau(NegativeWeights=True,seed=1)
+    g1 = OrdinalOutrankingDigraph(t1)
+    g1.showAll()
 
 def testUnanimousOutrankingDigraph():
 
     print('==>> Testing Unanimous Outranking Digraph instantiation')
-    g = UnanimousOutrankingDigraph()
+    t = RandomCBPerformanceTableau(NegativeWeights=False,seed=1)
+    g = OrdinalOutrankingDigraph(t)
     g.showAll()
+    t1 = RandomCBPerformanceTableau(NegativeWeights=True,seed=1)
+    g1 = OrdinalOutrankingDigraph(t1)
+    g1.showAll()
+
 
 def testRobustOutrankingDigraph():
     print('==>> Testing Robust Outranking Digraph instantiation')
-    g = RobustOutrankingDigraph()
-    g.showAll()
+    t = RandomCBPerformanceTableau(NegativeWeights=False,seed=1)
+    g = RobustOutrankingDigraph(t)
     g.showPreKernels()
     g.showGoodChoices()
     g.showBadChoices()
+    t1 = RandomCBPerformanceTableau(NegativeWeights=True,seed=1)
+    g1 = RobustOutrankingDigraph(t1)
+    g1.showPreKernels()
+    g1.showGoodChoices()
+    g1.showBadChoices()
 
 def testDissimilarityDigraph():
     print('==>> Testing Dissimilarity Digraph instantiation')
@@ -71,12 +85,6 @@ def testFullRandomOutrankingDigraph():
     ## g.showStatistics()
     g.showVetos(realVetosOnly=True)
     print('criteria significance concentration: ', g.computeWeightsConcentrationIndex())
-
-## def testKChoicesDigraph():
-##     print '*==>> testing k-choices digraph ----*'
-##     g = RandomDigraph(order=5)
-##     h = kChoicesDigraph(g)
-##     h.showAll()
 
 def testElectre3OutrankingDigraph():
     print('*==>> testing Electre III outranking Digraphs ----*')

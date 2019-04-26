@@ -6951,8 +6951,11 @@ class OrdinalOutrankingDigraph(OutrankingDigraph):
                             vv = None
                         if hasNoVeto:
                             vv = None
-
-                        d = evaluation[c][a] - evaluation[c][b]
+                            
+                        if criteria[c]['weight'] < Decimal('0'):
+                            d = evaluation[c][b] - evaluation[c][a]
+                        else:
+                            d = evaluation[c][a] - evaluation[c][b]
 
                         veto = veto + self._localVeto(d,wvv,vv)
                         counter = self._localConcordance(d,ind,wp,p)
@@ -7016,8 +7019,11 @@ class OrdinalOutrankingDigraph(OutrankingDigraph):
                                 p = prefx + prefy * abs(evaluation[c][a])
                         except:
                             p = None
-
-                        d = evaluation[c][a] - evaluation[c][b]
+                        
+                        if criteria[c]['weight'] < Decimal('0'):
+                            d = evaluation[c][b] - evaluation[c][a]
+                        else:
+                            d = evaluation[c][a] - evaluation[c][b]
                             
                         counter = self._localConcordance(d,ind,wp,p)
                             
@@ -7217,7 +7223,7 @@ class UnanimousOutrankingDigraph(OutrankingDigraph):
                 veto = 0
                 for c in criteria:
                     if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):
-                        d = evaluation[c][a] - evaluation[c][b]
+                        #d = evaluation[c][a] - evaluation[c][b]
                         try:
                             indx = criteria[c]['thresholds']['ind'][0]
                             indy = criteria[c]['thresholds']['ind'][1]
@@ -7248,8 +7254,11 @@ class UnanimousOutrankingDigraph(OutrankingDigraph):
                         except:
                             p = None
                             
-                        d = evaluation[c][a] - evaluation[c][b]
-
+                        if criteria[c]['weight'] < Decimal('0'):    
+                            d = evaluation[c][b] - evaluation[c][a]
+                        else:
+                            d = evaluation[c][a] - evaluation[c][b]
+                            
                         lc0 = self._localConcordance(d,ind,wp,p)
                             
                         counter += lc0
