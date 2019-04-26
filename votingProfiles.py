@@ -515,7 +515,7 @@ class LinearVotingProfile(VotingProfile):
                     fo.write('\'%s\': Decimal(\'%s\'),\n' % (it,repr(-self.voters[g][it])))
                 else:
                     fo.write('\'%s\': Decimal(\'%s\'),\n' % (it,repr(self.voters[g][it])))
-            fo.write("\'scale\':(Decimal(0),Decimal(%d)),\n" % nc)
+            fo.write("\'scale\':(Decimal(1),Decimal(%d)),\n" % nc)
             fo.write("\'preferenceDirection\': \'%s\'" % 'min')
             fo.write('}),\n')
         fo.write('])\n')
