@@ -1018,6 +1018,44 @@
                 <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">evaluation</span></div>
 
+<div class="viewcode-block" id="PerformanceTableau.convertWeights2Negative"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convertWeights2Negative">[docs]</a>    <span class="k">def</span> <span class="nf">convertWeights2Negative</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Negates the weights of criteria to be minimzed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
+        <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
+        <span class="n">evaluation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span>
+        <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
+            <span class="n">critg</span> <span class="o">=</span> <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">critg</span><span class="p">[</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span>
+                <span class="n">critg</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="nb">abs</span><span class="p">(</span><span class="n">critg</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span>
+                <span class="n">valg</span> <span class="o">=</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">valg</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">valg</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">):</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">valg</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+                        <span class="n">valg</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">valg</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">criteria</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">evaluation</span></div>
+
+<div class="viewcode-block" id="PerformanceTableau.convertWeights2Positive"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convertWeights2Positive">[docs]</a>    <span class="k">def</span> <span class="nf">convertWeights2Positive</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Negates the weights of criteria to be minimzed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
+        <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
+        <span class="n">evaluation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span>
+        <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
+            <span class="n">critg</span> <span class="o">=</span> <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">critg</span><span class="p">[</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span>
+                <span class="n">critg</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">critg</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span>
+                <span class="n">valg</span> <span class="o">=</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">valg</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">valg</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">):</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">valg</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+                        <span class="n">valg</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="nb">abs</span><span class="p">(</span><span class="n">valg</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">criteria</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">evaluation</span></div>
+        
 <div class="viewcode-block" id="PerformanceTableau.computePerformanceDifferences"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computePerformanceDifferences">[docs]</a>    <span class="k">def</span> <span class="nf">computePerformanceDifferences</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
                                       <span class="n">Debug</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
                                       <span class="n">NotPermanentDiffs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>

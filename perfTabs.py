@@ -971,6 +971,44 @@ The performance evaluations of each decision alternative on each criterion are g
                 evaluation[g][x] = Decimal(str(evaluation[g][x]))
         self.evaluation = evaluation
 
+    def convertWeights2Negative(self):
+        """
+        Negates the weights of criteria to be minimzed.
+        """
+        from decimal import Decimal
+        criteria = self.criteria
+        evaluation = self.evaluation
+        for g in criteria:
+            critg = criteria[g]
+            if critg['preferenceDirection'] == 'min':
+                critg['weight'] = -abs(critg['weight'])
+                valg = evaluation[g]
+                for x in valg:
+                    if valg[x] != Decimal('-999'):
+                        print(g,x,valg[x])
+                        valg[x] = abs(valg[x])
+        self.criteria = criteria
+        self.evaluation = evaluation
+
+    def convertWeights2Positive(self):
+        """
+        Negates the weights of criteria to be minimzed.
+        """
+        from decimal import Decimal
+        criteria = self.criteria
+        evaluation = self.evaluation
+        for g in criteria:
+            critg = criteria[g]
+            if critg['preferenceDirection'] == 'min':
+                critg['weight'] = abs(critg['weight'])
+                valg = evaluation[g]
+                for x in valg:
+                    if valg[x] != Decimal('-999'):
+                        print(g,x,valg[x])
+                        valg[x] = -abs(valg[x])
+        self.criteria = criteria
+        self.evaluation = evaluation
+        
     def computePerformanceDifferences(self,Comments = False,
                                       Debug = False,
                                       NotPermanentDiffs=True,
