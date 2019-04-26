@@ -985,7 +985,7 @@ The performance evaluations of each decision alternative on each criterion are g
                 valg = evaluation[g]
                 for x in valg:
                     if valg[x] != Decimal('-999'):
-                        print(g,x,valg[x])
+                        #print(g,x,valg[x])
                         valg[x] = abs(valg[x])
         self.criteria = criteria
         self.evaluation = evaluation
@@ -1004,7 +1004,7 @@ The performance evaluations of each decision alternative on each criterion are g
                 valg = evaluation[g]
                 for x in valg:
                     if valg[x] != Decimal('-999'):
-                        print(g,x,valg[x])
+                        #print(g,x,valg[x])
                         valg[x] = -abs(valg[x])
         self.criteria = criteria
         self.evaluation = evaluation
