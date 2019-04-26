@@ -511,8 +511,12 @@ class LinearVotingProfile(VotingProfile):
         for g in self.voters:
             fo.write('(\'%s\', {\n' % str(g))
             for it in self.voters[g].keys():
-                fo.write('\'%s\': %s,\n' % (it,repr(self.voters[g][it])))
-                fo.write("\'scale\':(Decimal(0),Decimal(%d)),\n" % nc)
+                if it == 'weight':
+                    fo.write('\'%s\': Decimal(\'%s\'),\n' % (it,repr(-self.voters[g][it])))
+                else:
+                    fo.write('\'%s\': Decimal(\'%s\'),\n' % (it,repr(self.voters[g][it])))
+            fo.write("\'scale\':(Decimal(0),Decimal(%d)),\n" % nc)
+            fo.write("\'preferenceDirection\': \'%s\'" % 'min')
             fo.write('}),\n')
         fo.write('])\n')
         # evaluation
@@ -524,7 +528,7 @@ class LinearVotingProfile(VotingProfile):
                     #fo.write('\'' + str(x) + '\':Decimal("' + str(evaluation[g][x]) + '"),\n')
                     evaluationString = '\'%%s\':Decimal("%%.%df"),\n' % (valueDigits)
                     try:
-                        xval = nc - self.linearBallot[g].index(x)
+                        xval = (self.linearBallot[g].index(x) + 1)
                     except:
                         xval = -999
                     fo.write(evaluationString % (x,Decimal(str(xval))))
