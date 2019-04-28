@@ -1427,6 +1427,7 @@ The performance evaluations of each decision alternative on each criterion are g
             if Comments:
                 print(str(g) + '\t', end=' ')
             html += '<th>%s</th>' % (g)
+        print()
         html += '</tr>\n'
         if Comments:
             print('\nweights  | ', end=' ') 

@@ -1707,6 +1707,8 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         * weightScale := [1,numerOfCriteria] (random default)
         * IntegerWeights := True (default) / False
         * OrdinalScales := True / False (default), if True commonScale is set to (0,10)
+        * NegativeWeights := True (default) / False, if False, evaluations to be minimized are negative
+        * negativeWeightProbability := [0,1] (default 0.25), 'min' preference direction probability  
         * commonScale := (Min, Max)
                 | when common Scale = False, (0.0,10.0) by default if OrdinalScales == True and CommonScale=None,
                 | and (0.0,100.0) by default otherwise 
@@ -1731,8 +1733,8 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
     def __init__(self,numberOfActions = 20, numberOfCriteria = 13,\
                  weightDistribution = 'equiobjectives', weightScale=None,\
                  IntegerWeights = True, OrdinalScales=False,\
-                 commonScale = None,\
-                 commonThresholds = None, commonMode = None,\
+                 NegativeWeights = False, negativeWeightProbability = 0.5,\
+                 commonScale = None, commonThresholds = None, commonMode = None,\
                  valueDigits=2,\
                  vetoProbability=0.5,\
                  missingDataProbability = 0.05,\
@@ -1746,7 +1748,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         self.BigData = BigData
         self.OrdinalScales = OrdinalScales
         self.missingDataProbability = missingDataProbability
-        
+        self.negativeWeightProbability = negativeWeightProbability
         # randomizer init
         self.randomSeed = seed
         from random import Random
@@ -1844,7 +1846,10 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                 criterionObjective = objectivesKeys[objInd-1]
             #print(g,criterionObjective,objectivesKeys)
             criteria[g]['objective'] = criterionObjective
-            criteria[g]['preferenceDirection'] = 'max'           
+            if _random.random() < negativeWeightProbability:
+                criteria[g]['preferenceDirection'] = 'min'
+            else:
+                criteria[g]['preferenceDirection'] = 'max'
             criteria[g]['name'] = 'criterion of objective %s' % (criterionObjective)
             criteria[g]['shortName'] = g + criterionObjective[0:2]
             span = commonScale[1] - commonScale[0]
@@ -1871,10 +1876,23 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                    (Decimal(str(thresholds[t][0])),Decimal(str(thresholds[t][1])))
                 
             criteria[g]['scale'] = commonScale
-            if IntegerWeights:
-                criteria[g]['weight'] = weightsList[i]
+            if criteria[g]['preferenceDirection'] == 'max':
+                if IntegerWeights:
+                    criteria[g]['weight'] = weightsList[i]
+                else:
+                    criteria[g]['weight'] = weightsList[i] / sumWeights
             else:
-                criteria[g]['weight'] = weightsList[i] / sumWeights
+                if NegativeWeights:
+                    if IntegerWeights:
+                        criteria[g]['weight'] = weightsList[i]
+                    else:
+                        criteria[g]['weight'] = weightsList[i] / sumWeights
+                else:
+                    if IntegerWeights:
+                        criteria[g]['weight'] = -weightsList[i]
+                    else:
+                        criteria[g]['weight'] = -weightsList[i] / sumWeights
+
 
         # determine equisignificant objectives
         if weightMode[0] == 'equiobjectives':
@@ -1892,9 +1910,17 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
             if Debug:
                 print(weightsProduct)
             for g in criteria:
-                criteria[g]['weight'] =\
-                    weightsProduct // objectivesCardinality[criteria[g]['objective']]
+                gweight = weightsProduct // objectivesCardinality[criteria[g]['objective']]
+                if criteria[g]['preferenceDirection'] == 'max':
+                    criteria[g]['weight'] = gweight
+                else:
+                    if NegativeWeights:
+                        criteria[g]['weight'] = -gweight
+                    else:
+                        criteria[g]['weight'] = gweight
                 if Debug:
+                    print(weightsProduct)
+                    print(objectivesCardinality[criteria[g]['objective']])
                     print(criteria[g]['weight'])
                 
         # allocate (criterion,action) to coalition supporting type
@@ -1959,12 +1985,18 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                         if criteria[g]['preferenceDirection'] == 'max':
                             evaluation[g][a] = Decimal(str(round(randeval,0)))
                         else:
-                            evaluation[g][a] = Decimal(str(-round(randeval,0)))
+                            if criteria[g]['weight'] < Decimal('0'):
+                                evaluation[g][a] = Decimal(str(round(randeval,0)))
+                            else:
+                                evaluation[g][a] = Decimal(str(-round(randeval,0)))
                     else:
                         if criteria[g]['preferenceDirection'] == 'max':
                             evaluation[g][a] = Decimal(str(round(randeval,digits)))
                         else:
-                            evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+                            if criteria[g]['weight'] < Decimal('0'):
+                                evaluation[g][a] = Decimal(str(round(randeval,0)))
+                            else:
+                                evaluation[g][a] = Decimal(str(-round(randeval,0)))
 
             elif str(randomMode[0]) == 'beta':
                 for a in actions:
@@ -2005,12 +2037,18 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                         if criteria[g]['preferenceDirection'] == 'max':
                             evaluation[g][a] = Decimal(str(round(randeval,0)))
                         else:
-                            evaluation[g][a] = Decimal(str(-round(randeval,0)))
+                            if criteria[g]['weight'] < Decimal('0'):
+                                evaluation[g][a] = Decimal(str(round(randeval,0)))
+                            else:
+                                evaluation[g][a] = Decimal(str(-round(randeval,0)))
                     else:
                         if criteria[g]['preferenceDirection'] == 'max':
                             evaluation[g][a] = Decimal(str(round(randeval,digits)))
                         else:
-                            evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+                            if criteria[g]['weight'] < Decimal('0'):
+                                evaluation[g][a] = Decimal(str(round(randeval,0)))
+                            else:
+                                evaluation[g][a] = Decimal(str(-round(randeval,0)))
     
             elif str(randomMode[0]) == 'triangular':
                 for a in actions:
@@ -2042,12 +2080,18 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                         if criteria[g]['preferenceDirection'] == 'max':
                             evaluation[g][a] = Decimal(str(round(randeval,0)))
                         else:
-                            evaluation[g][a] = Decimal(str(-round(randeval,0)))
+                            if criteria[g]['weight'] < Decimal('0'):
+                                evaluation[g][a] = Decimal(str(round(randeval,0)))
+                            else:
+                                evaluation[g][a] = Decimal(str(-round(randeval,0)))
                     else:
                         if criteria[g]['preferenceDirection'] == 'max':
                             evaluation[g][a] = Decimal(str(round(randeval,digits)))
                         else:
-                            evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+                            if criteria[g]['weight'] < Decimal('0'):
+                                evaluation[g][a] = Decimal(str(round(randeval,0)))
+                            else:
+                                evaluation[g][a] = Decimal(str(-round(randeval,0)))
                    
                     if Debug:
                         print(randeval, criteria[g]['preferenceDirection'], evaluation[g][a])
@@ -2061,7 +2105,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
             objectives[obj]['criteria'] = objCriteria
             objWeight = Decimal('0')
             for g in objCriteria:
-                objWeight += criteria[g]['weight']
+                objWeight += abs(criteria[g]['weight'])
             objectives[obj]['weight'] = objWeight
 
         # instantiate the peformance tableau slots
@@ -3273,14 +3317,14 @@ if __name__ == "__main__":
 ##    t = RandomAcademicPerformanceTableau(numberOfStudents=10,numberOfCourses=5,
 ##                                         commonMode=('uniform',None,None),
 ##                                         missingDataProbability=0.01)
-    t = RandomAcademicPerformanceTableau(numberOfStudents=20,numberOfCourses=10,
-                                         commonMode=('triangular',14,0.4),
-                                         missingDataProbability=0.01,
-                                         WithTypes=True,
-                                         seed=1)
-    print(t)
-    t.showHTMLPerformanceTableau(Transposed=True)
-    #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,ndigits=0)
+##    t = RandomAcademicPerformanceTableau(numberOfStudents=20,numberOfCourses=10,
+##                                         commonMode=('triangular',14,0.4),
+##                                         missingDataProbability=0.01,
+##                                         WithTypes=True,
+##                                         seed=1)
+##    print(t)
+##    t.showHTMLPerformanceTableau(Transposed=True)
+##    #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,ndigits=0)
                                              
 
 
@@ -3295,21 +3339,24 @@ if __name__ == "__main__":
 ##    print(time()-t0)
 ##    t.saveXMCDA2('test2')
 ##    t.showCriteria()
-##    t = Random3ObjectivesPerformanceTableau(numberOfActions=100,
-##                                            numberOfCriteria=13,
-##                                            OrdinalScales=False,
-##                                            commonScale=None,
-##                                            weightDistribution='equiobjectives',
-##     #weightScale=(1,5),
-##                                            commonMode=('triangular','variable',None),
-##                                            vetoProbability=0.5,
-##                                            seed=120)
-##
-##    t.showObjectives()
-##    t.showCriteria()
-##    t.csvAllQuantiles('q')
-##    t.showAllQuantiles()
-##    t.showStatistics()
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=10,
+                                            numberOfCriteria=13,
+                                            OrdinalScales=False,
+                                            commonScale=None,
+                                            weightDistribution='equiobjectives',
+     #weightScale=(1,5),
+                                            commonMode=('triangular','variable',None),
+                                            vetoProbability=0.5,
+                                            NegativeWeights=True,
+                                            negativeWeightProbability=0.25,
+                                            seed=120,Debug=False)
+
+    t.showObjectives()
+    t.showCriteria()
+    t.showPerformanceTableau()
+    t.csvAllQuantiles('q')
+    t.showAllQuantiles()
+    t.showStatistics()
     
 ##    #t.showActions(Debug=True)
 ##    teco = PartialPerformanceTableau(t,criteriaSubset=t.objectives['Eco']['criteria'])
