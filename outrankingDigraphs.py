@@ -1447,7 +1447,8 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     if not isReturningHTML:
                         print(c,'    %s %s' % (eval_c_a,eval_c_b))
                     else:
-                        html += '<td bgcolor="#FFEEAA" align="center">%s</td> <td>%.2f</td><td>%s</td><td>%s</td><td></td><td></td><td></td><td></td><td>%.2f</td></tr>' % (c, criteria[c]['weight'],eval_c_a,eval_c_b, self.valuationdomain['med']*criteria[c]['weight'])
+                        html += '<tr><td bgcolor="#FFEEAA" align="center">%s</td> <td>%.2f</td><td>%s</td><td>%s</td><td></td><td></td><td></td><td></td><td>%.2f</td></tr>' %\
+                                (c, criteria[c]['weight'],eval_c_a,eval_c_b, self.valuationdomain['med']*criteria[c]['weight'])
             if not isReturningHTML:
                 print('             ----------------------------------------')
                 print(' Valuation in range: %+.2f to %+.2f; global concordance: %+.2f' % (-sumWeights,sumWeights,concordance))
@@ -9283,7 +9284,7 @@ if __name__ == "__main__":
     t1 = Random3ObjectivesPerformanceTableau(numberOfActions=10,\
                                    numberOfCriteria=21,\
                                    weightDistribution='equiobjectives',
-                                   seed=100)
+                                   seed=101)
     
     g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=Threading,
                                   tempDir=None,nbrCores=8,Comments=True,Debug=False)

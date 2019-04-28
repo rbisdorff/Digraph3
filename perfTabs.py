@@ -1837,6 +1837,104 @@ The performance evaluations of each decision alternative on each criterion are g
                 result[g]['minimum'] = Decimal('-999')
                 result[g]['maximum'] = Decimal('-999')
         return result
+
+    def showHTMLCriteria(self,criteriaSubset=None,Sorted=True,\
+                         ndigits=2,\
+                         title=None):
+        """
+        shows the criteria in the system browser view.
+        """
+        import webbrowser
+        fileName = '/tmp/criteriaView.html'
+        fo = open(fileName,'w')
+        fo.write(self.htmlCriteriaView(criteria=criteriaSubset,Sorted=Sorted,\
+                                           ndigits=ndigits,\
+                                           title=title))
+        fo.close()
+        url = 'file://'+fileName
+        webbrowser.open_new(url)
+
+    def htmlCriteriaView(self,criteria=None,Sorted=False,\
+                         ndigits=2,title='Family of Criteria'):
+        """
+        Renders a html view of the in the XMCDA2 format.
+        """
+        if title == None:
+            html = '<h1>%s: Family of Criteria</h1>' % self.name
+        else:
+            html = '<h1>%s</h1>' % title            
+        if criteria == None:
+            criteria = self.criteria
+        criteriaList = [x for x in criteria]
+        if Sorted:
+            criteriaList.sort()
+        
+        html += """<table border="1">
+        <tr bgcolor="#9acd32">
+        <th rowspan="2">#</th>
+        <th rowspan="2">Identifyer</th>
+        <th rowspan="2">Name</th>
+        <th rowspan="2">Comment</th>
+        <th rowspan="2">Weight</th>
+        <th colspan="3">Scale</th>
+        <th colspan="5">Thresholds (ax + b)</th>
+        </tr>
+        <tr bgcolor="#9acd32">
+        <th>direction</th>
+        <th>min</th>
+        <th>max</th>
+        <th>indifference</th>
+        <th>preference</th>
+        <th>veto</th>
+        </tr>"""
+        i = 0
+        for g in criteriaList:
+            i += 1
+            critg = criteria[g]
+            print(g,critg)
+            html += '<tr><td align="center">%s</td>' % i
+            html += '<th bgcolor="#FFF79B">%s</th>' % critg['shortName']
+            html += '<td>%s</td><td>%s</td>' % (critg['name'],critg['comment'])
+            html += '<td align="center">%.2f</td>' % critg['weight']
+            html += '<td align="center">%s</td>' % critg['preferenceDirection']
+            html += '<td align="center">%.2f</td>' % critg['scale'][0]
+            html += '<td align="center">%.2f</td>' % critg['scale'][1]
+
+            try:
+                if critg['thresholds']['ind'] != None:
+                    html += '<td align="center">%.2fx + %.2f</td>' %\
+                                (critg['thresholds']['ind'][1],\
+                                 critg['thresholds']['ind'][0])                
+            except:
+                html += '<td></td>'
+                
+            try:
+                if critg['thresholds']['pref'] != None:
+                    html += '<td align="center">%.2fx + %.2f</td>' %\
+                                (critg['thresholds']['pref'][1],\
+                                 critg['thresholds']['pref'][0])                
+            except:
+                html += '<td></td>'
+            try:
+                if critg['thresholds']['veto'] != None:
+                    html += '<td align="center">%.2fx + %.2f</td>' %\
+                                (critg['thresholds']['veto'][1],\
+                                 critg['thresholds']['veto'][0])                
+            except:
+                html += '<td></td>'
+
+            html += '</tr>'
+##            <td align="center">%.2f</td>
+##            <td align="center">%.2f</td>
+##            <td align="center">%.2f</td>
+##            <td align="center">%.2f</td>
+##            <td align="center">%.2f</td>
+##            <td align="center">%.2f</td>
+##            <td align="center">%.2f</td>
+            
+        html += '</table>'
+        return html
+        
         
     def showHTMLPerformanceTableau(self,actionsSubset=None,isSorted=True,\
                                    Transposed=False,ndigits=2,\
@@ -7347,43 +7445,57 @@ if __name__ == "__main__":
 
 ##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
+##    t = Random3ObjectivesPerformanceTableau(numberOfCriteria=13,
+##                                   numberOfActions=10,
+##                                   weightDistribution='equiobjectives',
+##                                   IntegerWeights=True,
+##                                   #NegativeWeights=False,
+##                                   Debug=False,
+##                                   missingDataProbability=0.1,
+##                                   seed=105,
+##                                            #Threading=False
+##                                            )
     t = RandomCBPerformanceTableau(numberOfCriteria=13,
-                                   numberOfActions=10,
-                                   weightDistribution='equiobjectives',
-                                   IntegerWeights=True,
-                                   NegativeWeights=False,
-                                   Debug=False,
-                                   missingDataProbability=0.1,
-                                   seed=101,Threading=False)
-    t.showPerformanceTableau()
-    nt = NormalizedPerformanceTableau(t)
-    nt.showPerformanceTableau()
-    #t.showHTMLPerformanceHeatmap(Correlations=True)
-    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows')
-    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='Kohler')
-
-    t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='ArrowRaynaud')
-    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='Kohler')
-    t1 = RandomCBPerformanceTableau(numberOfCriteria=13,
                                    numberOfActions=10,
                                    weightDistribution='equiobjectives',
                                    IntegerWeights=True,
                                    NegativeWeights=True,
                                    Debug=False,
                                    missingDataProbability=0.1,
-                                   seed=101,Threading=False)
-    t1.showPerformanceTableau()
+                                   seed=105,
+                                   Threading=False,
+                                            )
 
-    g = BipolarOutrankingDigraph(t)
-    g1 = BipolarOutrankingDigraph(t1)
-    
-    nt = NormalizedPerformanceTableau(t1)
-    nt.showPerformanceTableau()
-    #t.showHTMLPerformanceHeatmap(Correlations=True)
-    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows')
-    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='Kohler')
-    t1.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='ArrowRaynaud')
-   
+    t.showHTMLCriteria()
+##    t.showPerformanceTableau()
+##    nt = NormalizedPerformanceTableau(t)
+##    nt.showPerformanceTableau()
+##    #t.showHTMLPerformanceHeatmap(Correlations=True)
+##    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows')
+##    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='Kohler')
+##
+##    t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='ArrowRaynaud')
+##    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='Kohler')
+##    t1 = RandomCBPerformanceTableau(numberOfCriteria=13,
+##                                   numberOfActions=10,
+##                                   weightDistribution='equiobjectives',
+##                                   IntegerWeights=True,
+##                                   NegativeWeights=True,
+##                                   Debug=False,
+##                                   missingDataProbability=0.1,
+##                                   seed=101,Threading=False)
+##    t1.showPerformanceTableau()
+##
+##    g = BipolarOutrankingDigraph(t)
+##    g1 = BipolarOutrankingDigraph(t1)
+##    
+##    nt = NormalizedPerformanceTableau(t1)
+##    nt.showPerformanceTableau()
+##    #t.showHTMLPerformanceHeatmap(Correlations=True)
+##    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows')
+##    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='Kohler')
+##    t1.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='ArrowRaynaud')
+##   
     #nt.showHTMLPerformanceHeatmap(Correlations=True)
 #     t.saveCSV('test')
 #     T = CSVPerformanceTableau('test',Debug=True)
