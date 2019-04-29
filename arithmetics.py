@@ -300,7 +300,8 @@ def totient(n):
 
 def continuedFraction(p, q):
     """
-    Renders the continued fraction [a0,a1,a2,...] of the ratio of two integers p and q, q > 0.
+    Renders the continued fraction [a_0,a_1,a_2,...,a_n]
+    of the ratio of two integers p and q, q > 0 and where a0 = p//q.
     """
     if q < 0:
         return None
@@ -320,13 +321,15 @@ def continuedFraction(p, q):
 
 def evalContinuedFraction(cf):
     """
-    Evaluating the continued fraction [a_0,a_1,a_2,...,a_{n-1}].
+    Backwise recursive evaluation: ev_i-1 + 1/ev_i, for i = n,..,1
+    of the continued fraction cf = [a_0,a_1,a_2,...,a_n] and 
+    where a_0 corresponds to its integer part.
     """
     from decimal import Decimal
-    n = len(cf)
-    res = Decimal(str(cf[n-1]))
-    #print(n-1,res)
-    for i in range(n-2,0,-1):
+    n = len(cf) - 1
+    res = Decimal(str(cf[n]))
+    #print(n,res)
+    for i in range(n-1,0,-1):
         res = Decimal(str(cf[i])) + Decimal('1')/res
         #print(i,res)
     res = Decimal(str(cf[0])) + Decimal('1')/res
@@ -642,7 +645,12 @@ if __name__ == '__main__':
 ##    print(computeFareySeries(n=10,AsFloats=False,Debug=True))
 ##
     from math import sqrt
-    print(continuedFraction(8,5))
-    print(evalContinuedFraction(continuedFraction(8,5)))
-    print(evalContinuedFraction([1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]))
-    print(sqrt(2))
+    p = 5
+    q = 8
+    print('p =',p,', q =',q)
+    print('cf(p,q) = ', continuedFraction(p,q) )
+    print('eval(cf(p,q)) = ', evalContinuedFraction(continuedFraction(p,q)) )
+    cf = [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
+    print('cf(sqrt(2))_%d = ' % (len(cf)-1), cf )
+    print('eval(cf(sqrt(2))_%d) = ' % (len(cf)-1), evalContinuedFraction(cf) )
+    print('sqrt(2)              = ', sqrt(2) )

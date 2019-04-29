@@ -8766,7 +8766,8 @@ The Python transcription here recodes an original C code of unknown author (see 
 <dl class="function">
 <dt id="arithmetics.continuedFraction">
 <code class="descclassname">arithmetics.</code><code class="descname">continuedFraction</code><span class="sig-paren">(</span><em>p</em>, <em>q</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#continuedFraction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#arithmetics.continuedFraction" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the continued fraction [a0,a1,a2,…] of the ratio of two integers p and q, q &gt; 0.</p>
+<dd><p>Renders the continued fraction [a_0,a_1,a_2,…,a_n]
+of the ratio of two integers p and q, q &gt; 0 and where a0 = p//q.</p>
 </dd></dl>
 
 <dl class="function">
@@ -8790,7 +8791,9 @@ The Python transcription here recodes an original C code of unknown author (see 
 <dl class="function">
 <dt id="arithmetics.evalContinuedFraction">
 <code class="descclassname">arithmetics.</code><code class="descname">evalContinuedFraction</code><span class="sig-paren">(</span><em>cf</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#evalContinuedFraction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#arithmetics.evalContinuedFraction" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluating the continued fraction [a_0,a_1,a_2,…,a_{n-1}].</p>
+<dd><p>Backwise recursive evaluation: ev_i-1 + 1/ev_i, for i = n,..,1
+of the continued fraction cf = [a_0,a_1,a_2,…,a_n] and 
+where a_0 corresponds to its integer part.</p>
 </dd></dl>
 
 <dl class="function">
