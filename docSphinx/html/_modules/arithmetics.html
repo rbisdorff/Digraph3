@@ -345,6 +345,40 @@
     <span class="n">_totients</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">tot</span>
     <span class="k">return</span> <span class="n">tot</span></div>
 
+<div class="viewcode-block" id="continuedFraction"><a class="viewcode-back" href="../techDoc.html#arithmetics.continuedFraction">[docs]</a><span class="k">def</span> <span class="nf">continuedFraction</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Renders the continued fraction [a0,a1,a2,...] of the ratio of two integers p and q, q &gt; 0.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">q</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">//</span><span class="n">q</span><span class="p">]</span>
+    <span class="c1">#print(p,q,res)</span>
+    <span class="k">while</span> <span class="n">q</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> 
+        <span class="n">q0</span> <span class="o">=</span> <span class="n">q</span>
+        <span class="n">p</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="n">q</span><span class="p">,</span> <span class="n">p</span> <span class="o">%</span> <span class="n">q</span>
+        <span class="k">if</span> <span class="n">q</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="o">//</span><span class="n">q</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">q</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">:</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">q0</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1">#print(p,q0,q,res)</span>
+    <span class="k">return</span> <span class="n">res</span></div>
+
+<div class="viewcode-block" id="evalContinuedFraction"><a class="viewcode-back" href="../techDoc.html#arithmetics.evalContinuedFraction">[docs]</a><span class="k">def</span> <span class="nf">evalContinuedFraction</span><span class="p">(</span><span class="n">cf</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Evaluating the continued fraction [a_0,a_1,a_2,...,a_{n-1}].</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cf</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cf</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="c1">#print(n-1,res)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cf</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="o">+</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span><span class="o">/</span><span class="n">res</span>
+        <span class="c1">#print(i,res)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cf</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="o">+</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span><span class="o">/</span><span class="n">res</span>
+    <span class="k">return</span> <span class="n">res</span></div>
+        
 <div class="viewcode-block" id="gcd"><a class="viewcode-back" href="../techDoc.html#arithmetics.gcd">[docs]</a><span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the greatest common divisor of a and b.</span>
@@ -648,12 +682,17 @@
     <span class="c1"># print(piDecimals[1:])</span>
     <span class="c1"># print(&#39;precision = &#39;+str(len(piDecimals[1:])),end=&quot; decimals\n&quot;)</span>
     
-    <span class="n">sb</span> <span class="o">=</span> <span class="n">sternBrocot</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span><span class="mi">101</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">sb</span><span class="p">)</span>
-    <span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">)</span> <span class="o">=</span> <span class="n">invSternBrocot</span><span class="p">(</span><span class="n">sb</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">computeFareySeries</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">AsFloats</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-        
+<span class="c1">##    sb = sternBrocot(21,101)</span>
+<span class="c1">##    print(sb)</span>
+<span class="c1">##    (m,n) = invSternBrocot(sb)</span>
+<span class="c1">##    print(m,n)</span>
+<span class="c1">##    print(computeFareySeries(n=10,AsFloats=False,Debug=True))</span>
+<span class="c1">##</span>
+    <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">sqrt</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">continuedFraction</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">evalContinuedFraction</span><span class="p">(</span><span class="n">continuedFraction</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">evalContinuedFraction</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
 
           </div>

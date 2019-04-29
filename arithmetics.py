@@ -298,6 +298,40 @@ def totient(n):
     _totients[n] = tot
     return tot
 
+def continuedFraction(p, q):
+    """
+    Renders the continued fraction [a0,a1,a2,...] of the ratio of two integers p and q, q > 0.
+    """
+    if q < 0:
+        return None
+    res = [p//q]
+    #print(p,q,res)
+    while q > 0: 
+        q0 = q
+        p, q = q, p % q
+        if q > 1:
+            res.append(p//q)
+        elif q == 1 :
+            res.append(1)
+        elif q0 == 1:
+            res.append(1)
+        #print(p,q0,q,res)
+    return res
+
+def evalContinuedFraction(cf):
+    """
+    Evaluating the continued fraction [a_0,a_1,a_2,...,a_{n-1}].
+    """
+    from decimal import Decimal
+    n = len(cf)
+    res = Decimal(str(cf[n-1]))
+    #print(n-1,res)
+    for i in range(n-2,0,-1):
+        res = Decimal(str(cf[i])) + Decimal('1')/res
+        #print(i,res)
+    res = Decimal(str(cf[0])) + Decimal('1')/res
+    return res
+        
 def gcd(a, b):
     """
     Renders the greatest common divisor of a and b.
@@ -601,9 +635,14 @@ if __name__ == '__main__':
     # print(piDecimals[1:])
     # print('precision = '+str(len(piDecimals[1:])),end=" decimals\n")
     
-    sb = sternBrocot(21,101)
-    print(sb)
-    (m,n) = invSternBrocot(sb)
-    print(m,n)
-    print(computeFareySeries(n=10,AsFloats=False,Debug=True))
-        
+##    sb = sternBrocot(21,101)
+##    print(sb)
+##    (m,n) = invSternBrocot(sb)
+##    print(m,n)
+##    print(computeFareySeries(n=10,AsFloats=False,Debug=True))
+##
+    from math import sqrt
+    print(continuedFraction(8,5))
+    print(evalContinuedFraction(continuedFraction(8,5)))
+    print(evalContinuedFraction([1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]))
+    print(sqrt(2))
