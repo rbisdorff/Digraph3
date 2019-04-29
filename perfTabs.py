@@ -1894,7 +1894,10 @@ The performance evaluations of each decision alternative on each criterion are g
             critg = criteria[g]
             print(g,critg)
             html += '<tr><td align="center">%s</td>' % i
-            html += '<th bgcolor="#FFF79B">%s</th>' % critg['shortName']
+            try:
+                html += '<th bgcolor="#FFF79B">%s</th>' % critg['shortName']
+            except:
+                html += '<th bgcolor="#FFF79B">%s</th>' % g
             html += '<td>%s</td><td>%s</td>' % (critg['name'],critg['comment'])
             html += '<td align="center">%.2f</td>' % critg['weight']
             html += '<td align="center">%s</td>' % critg['preferenceDirection']
