@@ -1892,7 +1892,7 @@ The performance evaluations of each decision alternative on each criterion are g
         for g in criteriaList:
             i += 1
             critg = criteria[g]
-            print(g,critg)
+            #print(g,critg)
             html += '<tr><td align="center">%s</td>' % i
             try:
                 html += '<th bgcolor="#FFF79B">%s</th>' % critg['shortName']
