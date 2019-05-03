@@ -1733,7 +1733,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
     def __init__(self,numberOfActions = 20, numberOfCriteria = 13,\
                  weightDistribution = 'equiobjectives', weightScale=None,\
                  IntegerWeights = True, OrdinalScales=False,\
-                 NegativeWeights = False, negativeWeightProbability = 0.5,\
+                 NegativeWeights = True, negativeWeightProbability = 0.25,\
                  commonScale = None, commonThresholds = None, commonMode = None,\
                  valueDigits=2,\
                  vetoProbability=0.5,\

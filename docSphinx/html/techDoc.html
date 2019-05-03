@@ -1909,7 +1909,7 @@ we brake the circuits on their weakest arc.</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.htmlRelationTable">
-<code class="descname">htmlRelationTable</code><span class="sig-paren">(</span><em>tableTitle='Valued Relation Table'</em>, <em>relationName='r(x R y)'</em>, <em>hasIntegerValues=False</em>, <em>actionsSubset=None</em>, <em>isColored=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.htmlRelationTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.htmlRelationTable" title="Permalink to this definition">¶</a></dt>
+<code class="descname">htmlRelationTable</code><span class="sig-paren">(</span><em>tableTitle='Valued Relation Table'</em>, <em>relationName='r(x R y)'</em>, <em>ndigits=2</em>, <em>hasIntegerValues=False</em>, <em>actionsSubset=None</em>, <em>isColored=False</em>, <em>ReflexiveTerms=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.htmlRelationTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.htmlRelationTable" title="Permalink to this definition">¶</a></dt>
 <dd><p>renders the relation valuation in actions X actions html table format.</p>
 </dd></dl>
 
@@ -2343,7 +2343,7 @@ See corresponding Digraph.showRelationMap() method.</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.showHTMLRelationTable">
-<code class="descname">showHTMLRelationTable</code><span class="sig-paren">(</span><em>actionsList=None</em>, <em>IntegerValues=False</em>, <em>Colored=True</em>, <em>tableTitle='Valued Adjacency Matrix'</em>, <em>relationName='r(x S y)'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showHTMLRelationTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showHTMLRelationTable" title="Permalink to this definition">¶</a></dt>
+<code class="descname">showHTMLRelationTable</code><span class="sig-paren">(</span><em>actionsList=None</em>, <em>IntegerValues=False</em>, <em>ndigits=2</em>, <em>Colored=True</em>, <em>tableTitle='Valued Adjacency Matrix'</em>, <em>relationName='r(x S y)'</em>, <em>ReflexiveTerms=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showHTMLRelationTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showHTMLRelationTable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Launches a browser window with the colored relation table of self.</p>
 </dd></dl>
 
@@ -5025,7 +5025,7 @@ given Random3ObjectivesPerformanceTableau instance.</p>
 
 <dl class="class">
 <dt id="randomPerfTabs.Random3ObjectivesPerformanceTableau">
-<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">Random3ObjectivesPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=20</em>, <em>numberOfCriteria=13</em>, <em>weightDistribution='equiobjectives'</em>, <em>weightScale=None</em>, <em>IntegerWeights=True</em>, <em>OrdinalScales=False</em>, <em>NegativeWeights=False</em>, <em>negativeWeightProbability=0.5</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>vetoProbability=0.5</em>, <em>missingDataProbability=0.05</em>, <em>BigData=False</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#Random3ObjectivesPerformanceTableau"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.Random3ObjectivesPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">Random3ObjectivesPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=20</em>, <em>numberOfCriteria=13</em>, <em>weightDistribution='equiobjectives'</em>, <em>weightScale=None</em>, <em>IntegerWeights=True</em>, <em>OrdinalScales=False</em>, <em>NegativeWeights=True</em>, <em>negativeWeightProbability=0.25</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>vetoProbability=0.5</em>, <em>missingDataProbability=0.05</em>, <em>BigData=False</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#Random3ObjectivesPerformanceTableau"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.Random3ObjectivesPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>Specialization of the PerformanceTableau
 for 3 objectives: <em>Eco</em>, <em>Soc</em> and <em>Env</em>.</p>

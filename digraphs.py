@@ -3457,9 +3457,11 @@ class Digraph(object):
 
     def showHTMLRelationTable(self,actionsList=None,
                               IntegerValues=False,
+                              ndigits=2,
                               Colored=True,
                               tableTitle='Valued Adjacency Matrix',
-                              relationName='r(x S y)'):
+                              relationName='r(x S y)',
+                              ReflexiveTerms=False):
         """
         Launches a browser window with the colored relation table of self.
         """
@@ -3468,9 +3470,11 @@ class Digraph(object):
         fo = open(fileName,'w')
         fo.write(self.htmlRelationTable(actionsSubset=actionsList,
                                         isColored=Colored,
+                                        ndigits=ndigits,
                                         hasIntegerValues=IntegerValues,
                                         tableTitle=tableTitle,
-                                        relationName=relationName))
+                                        relationName=relationName,
+                                        ReflexiveTerms=ReflexiveTerms))
         fo.close()
         url = 'file://'+fileName
         webbrowser.open_new(url)
@@ -3478,9 +3482,11 @@ class Digraph(object):
         
     def htmlRelationTable(self,tableTitle='Valued Relation Table',
                           relationName='r(x R y)',
+                          ndigits=2,
                           hasIntegerValues=False,
                           actionsSubset= None,
-                          isColored=False):
+                          isColored=False,
+                          ReflexiveTerms=False):
         """
         renders the relation valuation in actions X actions html table format.
         """
@@ -3535,26 +3541,62 @@ class Digraph(object):
             else:
                 s += '<th>%s</th>' % (x[0])
             for y in actionsList:
-                if hasIntegerValuation:
-                    if isColored:
-                        if self.relation[x[1]][y[1]] > Med:
-                            s += '<td bgcolor="#ddffdd" align="right">%d</td>' % (self.relation[x[1]][y[1]])
-                        elif self.relation[x[1]][y[1]] < Med:
-                            s += '<td bgcolor="#ffddff"  align="right">%d</td>' % (self.relation[x[1]][y[1]])
+                if x == y:
+                    if ReflexiveTerms:
+                        if hasIntegerValuation:
+                            if isColored:
+                                if self.relation[x[1]][y[1]] > Med:
+                                    s += '<td bgcolor="#ddffdd" align="right">%d</td>' % (self.relation[x[1]][y[1]])
+                                elif self.relation[x[1]][y[1]] < Med:
+                                    s += '<td bgcolor="#ffddff"  align="right">%d</td>' % (self.relation[x[1]][y[1]])
+                                else:
+                                    s += '<td bgcolor="#dddddd" align="right" >%d</td>' % (self.relation[x[1]][y[1]])
+                            else:
+                                s += '<td>%d</td>' % (self.relation[x[1]][y[1]])
                         else:
-                            s += '<td bgcolor="#dddddd" align="right" >%d</td>' % (self.relation[x[1]][y[1]])
+                            ndigitsFormat = '%%2.%df' % ndigits
+                            if isColored:
+                                if self.relation[x[1]][y[1]] > Med:
+                                    formatStr = '<td bgcolor="#ddffdd" align="right">%s</td>' % ndigitsFormat 
+                                    s += formatStr % (self.relation[x[1]][y[1]])
+                                elif self.relation[x[1]][y[1]] < Med:
+                                    formatStr = '<td  bgcolor="#ffddff" align="right">%s</td>' % ndigitsFormat
+                                    s +=  formatStr % (self.relation[x[1]][y[1]])
+                                else:
+                                    formatStr = '<td  bgcolor="#dddddd" align="right">%s</td>' % ndigitsFormat
+                                    s += formatStr % (self.relation[x[1]][y[1]])
+                            else:
+                                formatStr = '<td>%s</td>' % ndigitsFormat
+                                s += formatStr % (self.relation[x[1]][y[1]])
                     else:
-                        s += '<td>%d</td>' % (self.relation[x[1]][y[1]])
+                        s += '<td bgcolor="#eeeeee" align="center"> &ndash; </td>'
+                    
                 else:
-                    if isColored:
-                        if self.relation[x[1]][y[1]] > Med:
-                            s += '<td bgcolor="#ddffdd" align="right">%2.2f</td>' % (self.relation[x[1]][y[1]])
-                        elif self.relation[x[1]][y[1]] < Med:
-                            s += '<td  bgcolor="#ffddff" align="right">%2.2f</td>' % (self.relation[x[1]][y[1]])
+                    if hasIntegerValuation:
+                        if isColored:
+                            if self.relation[x[1]][y[1]] > Med:
+                                s += '<td bgcolor="#ddffdd" align="right">%d</td>' % (self.relation[x[1]][y[1]])
+                            elif self.relation[x[1]][y[1]] < Med:
+                                s += '<td bgcolor="#ffddff"  align="right">%d</td>' % (self.relation[x[1]][y[1]])
+                            else:
+                                s += '<td bgcolor="#dddddd" align="right" >%d</td>' % (self.relation[x[1]][y[1]])
                         else:
-                            s += '<td  bgcolor="#dddddd" align="right">%2.2f</td>' % (self.relation[x[1]][y[1]])
+                            s += '<td>%d</td>' % (self.relation[x[1]][y[1]])
                     else:
-                        s += '<td>%2.2f</td>' % (self.relation[x[1]][y[1]])
+                        ndigitsFormat = '%%2.%df' % ndigits
+                        if isColored:
+                            if self.relation[x[1]][y[1]] > Med:
+                                formatStr = '<td bgcolor="#ddffdd" align="right">%s</td>' % ndigitsFormat 
+                                s += formatStr % (self.relation[x[1]][y[1]])
+                            elif self.relation[x[1]][y[1]] < Med:
+                                formatStr = '<td  bgcolor="#ffddff" align="right">%s</td>' % ndigitsFormat
+                                s +=  formatStr % (self.relation[x[1]][y[1]])
+                            else:
+                                formatStr = '<td  bgcolor="#dddddd" align="right">%s</td>' % ndigitsFormat
+                                s += formatStr % (self.relation[x[1]][y[1]])
+                        else:
+                            formatStr = '<td>%s</td>' % ndigitsFormat
+                            s += formatStr % (self.relation[x[1]][y[1]])
             s += '</tr>'
         s += '</table>'
         if hasIntegerValuation:
@@ -6820,7 +6862,7 @@ class Digraph(object):
                     minAmplitude = diffxy
                     minLink = (x,y)
                 if Debug:
-                    print(minLink)
+                    print(minAmplitude,diffxy,minLink)
                 degN += (relation[y][x]-Med)
                 nNarcs += 1
         else:
