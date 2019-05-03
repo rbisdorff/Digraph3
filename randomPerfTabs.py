@@ -873,17 +873,14 @@ class RandomRankPerformanceTableau(PerformanceTableau):
     Specialization of the PerformanceTableau class for generating a temporary
     random performance tableau.
 
-    Random generator for multiple criteria ranked (without ties) performances of a
-    given number of decision actions. On each criterion,
-    all decision actions are hence lineraly ordered. The RandomRankPerformanceTableau class is
-    matching the RandomLinearVotingProfiles class (see the votingDigraphs module)  
+    Random generator for multiple criteria ranked (without ties) performances of a given number of decision actions. On each criterion, all decision actions are hence lineraly ordered. The RandomRankPerformanceTableau class is matching the RandomLinearVotingProfiles class (see the votingDigraphs module)  
         
     *Parameters*:
         * number of actions,
         * number of performance criteria,
         * weightDistribution := equisignificant | random (default, see RandomPerformanceTableau)
         * weightScale := (1, 1 | numberOfCriteria (default when random))
-        * IntegerWeights := Boolean (True = default) 
+        * IntegerWeights := Boolean (True = default). Weights are negativem, as all the criteria preference directions are 'min', as the rank performance is to be minimized. 
         * commonThresholds (default) := {
             | 'ind':(0,0),
             | 'pref':(1,0),
@@ -974,6 +971,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
                                               }
             commonScale = ( Decimal("0"), Decimal(numberOfActions) )
             criteria[g]['scale'] = commonScale
+            # weights are negative
             if IntegerWeights:
                 criteria[g]['weight'] = -weightsList[i]
             else:
@@ -1707,8 +1705,8 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         * weightScale := [1,numerOfCriteria] (random default)
         * IntegerWeights := True (default) / False
         * OrdinalScales := True / False (default), if True commonScale is set to (0,10)
-        * NegativeWeights := True (default) / False, if False, evaluations to be minimized are negative
-        * negativeWeightProbability := [0,1] (default 0.25), 'min' preference direction probability  
+        * NegativeWeights := True (default) / False. If False, evaluations to be minimized are negative.
+        * negativeWeightProbability := [0,1] (default 0.10), 'min' preference direction probability  
         * commonScale := (Min, Max)
                 | when common Scale = False, (0.0,10.0) by default if OrdinalScales == True and CommonScale=None,
                 | and (0.0,100.0) by default otherwise 
@@ -1733,7 +1731,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
     def __init__(self,numberOfActions = 20, numberOfCriteria = 13,\
                  weightDistribution = 'equiobjectives', weightScale=None,\
                  IntegerWeights = True, OrdinalScales=False,\
-                 NegativeWeights = True, negativeWeightProbability = 0.25,\
+                 NegativeWeights = True, negativeWeightProbability = 0.10,\
                  commonScale = None, commonThresholds = None, commonMode = None,\
                  valueDigits=2,\
                  vetoProbability=0.5,\
@@ -2582,22 +2580,15 @@ class RandomCBPerformanceTableau(PerformanceTableau):
 
     Parameters:
     
-        * If numberOfActions == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated
-        * If numberOfCriteria == None, a uniform random number between 5 and 21 of cost or benefit criteria. 
-           Cost criteria have probability 1/3, whereas benefit criteria respectively 2/3 probability to be generated.
-           However, at least one criterion of each kind is always instantiated.
-        * weightDistribution := {'equiobjectives'|'fixed'|'random'|'equisignificant'} By default, the sum of
-           significance of the cost criteria is set equal to the sum of the significance of the benefit criteria. 
-        * default weightScale for 'random' weightDistribution is 1 - numberOfCriteria.
-        * commonScale parameter is not used. The scale of cost criteria is cardinal or ordinal (0-10)
-           with proabailities 1/4 respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal
-           with probabilities 2/3, respectively 1/3.
-        * All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria
-           are evaluated with integers between 0 and 10.
-        * commonThresholds parameter is not used. Preference discrimination is specified as percentiles of
-           concerned performance differences (see below).
-        * CommonPercentiles = {'ind':0.05, 'pref':0.10, 'veto':'95} are expressed
-           in percentiles of the observed performance differences and only concern cardinal criteria.
+        * If numberOfActions == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated.
+        * If numberOfCriteria == None, a uniform random number between 5 and 21 of cost or benefit criteria. Cost criteria have probability 1/3, whereas benefit criteria respectively 2/3 probability to be generated. However, at least one criterion of each kind is always instantiated.
+        * weightDistribution := {'equiobjectives'|'fixed'|'random'|'equisignificant'} By default, the sum of significance of the cost criteria is set equal to the sum of the significance of the benefit criteria. 
+        * Default weightScale for 'random' weightDistribution is 1 - numberOfCriteria.
+        * If NegativeWeights = True (default), the performance evaluation of the criteria with a 'min' preference direction will be positive, otherwise they will be negative.
+        * commonScale parameter is not used. The scale of cost criteria is cardinal or ordinal (0-10) with probability 1/4, respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal with probabilities 2/3, respectively 1/3.
+        * All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.
+        * commonThresholds parameter is not used. Preference discrimination is specified as percentiles of concerned performance differences (see below).
+        * CommonPercentiles = {'ind':0.05, 'pref':0.10, 'veto':'95} are expressed in percentiles of the observed performance differences and only concern cardinal criteria.
 
     .. warning::
 
@@ -2611,7 +2602,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                  weightDistribution = 'equiobjectives',\
                  weightScale=None,\
                  IntegerWeights = True,\
-                 NegativeWeights = False,\
+                 NegativeWeights = True,\
                  commonScale = None, commonThresholds = None,\
                  commonPercentiles= None,\
                  samplingSize = 100000,\

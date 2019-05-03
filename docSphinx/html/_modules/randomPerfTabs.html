@@ -920,17 +920,14 @@
 <span class="sd">    Specialization of the PerformanceTableau class for generating a temporary</span>
 <span class="sd">    random performance tableau.</span>
 
-<span class="sd">    Random generator for multiple criteria ranked (without ties) performances of a</span>
-<span class="sd">    given number of decision actions. On each criterion,</span>
-<span class="sd">    all decision actions are hence lineraly ordered. The RandomRankPerformanceTableau class is</span>
-<span class="sd">    matching the RandomLinearVotingProfiles class (see the votingDigraphs module)  </span>
+<span class="sd">    Random generator for multiple criteria ranked (without ties) performances of a given number of decision actions. On each criterion, all decision actions are hence lineraly ordered. The RandomRankPerformanceTableau class is matching the RandomLinearVotingProfiles class (see the votingDigraphs module)  </span>
 <span class="sd">        </span>
 <span class="sd">    *Parameters*:</span>
 <span class="sd">        * number of actions,</span>
 <span class="sd">        * number of performance criteria,</span>
 <span class="sd">        * weightDistribution := equisignificant | random (default, see RandomPerformanceTableau)</span>
 <span class="sd">        * weightScale := (1, 1 | numberOfCriteria (default when random))</span>
-<span class="sd">        * IntegerWeights := Boolean (True = default) </span>
+<span class="sd">        * IntegerWeights := Boolean (True = default). Weights are negativem, as all the criteria preference directions are &#39;min&#39;, as the rank performance is to be minimized. </span>
 <span class="sd">        * commonThresholds (default) := {</span>
 <span class="sd">            | &#39;ind&#39;:(0,0),</span>
 <span class="sd">            | &#39;pref&#39;:(1,0),</span>
@@ -1021,6 +1018,7 @@
                                               <span class="p">}</span>
             <span class="n">commonScale</span> <span class="o">=</span> <span class="p">(</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">),</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">numberOfActions</span><span class="p">)</span> <span class="p">)</span>
             <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">commonScale</span>
+            <span class="c1"># weights are negative</span>
             <span class="k">if</span> <span class="n">IntegerWeights</span><span class="p">:</span>
                 <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">weightsList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
@@ -1754,8 +1752,8 @@
 <span class="sd">        * weightScale := [1,numerOfCriteria] (random default)</span>
 <span class="sd">        * IntegerWeights := True (default) / False</span>
 <span class="sd">        * OrdinalScales := True / False (default), if True commonScale is set to (0,10)</span>
-<span class="sd">        * NegativeWeights := True (default) / False, if False, evaluations to be minimized are negative</span>
-<span class="sd">        * negativeWeightProbability := [0,1] (default 0.25), &#39;min&#39; preference direction probability  </span>
+<span class="sd">        * NegativeWeights := True (default) / False. If False, evaluations to be minimized are negative.</span>
+<span class="sd">        * negativeWeightProbability := [0,1] (default 0.10), &#39;min&#39; preference direction probability  </span>
 <span class="sd">        * commonScale := (Min, Max)</span>
 <span class="sd">                | when common Scale = False, (0.0,10.0) by default if OrdinalScales == True and CommonScale=None,</span>
 <span class="sd">                | and (0.0,100.0) by default otherwise </span>
@@ -1780,7 +1778,7 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span>\
                  <span class="n">weightDistribution</span> <span class="o">=</span> <span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span> <span class="n">weightScale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">IntegerWeights</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">OrdinalScales</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
-                 <span class="n">NegativeWeights</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">negativeWeightProbability</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">,</span>\
+                 <span class="n">NegativeWeights</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">negativeWeightProbability</span> <span class="o">=</span> <span class="mf">0.10</span><span class="p">,</span>\
                  <span class="n">commonScale</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">commonThresholds</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">commonMode</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
                  <span class="n">valueDigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>\
                  <span class="n">vetoProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>\
@@ -2629,22 +2627,15 @@
 
 <span class="sd">    Parameters:</span>
 <span class="sd">    </span>
-<span class="sd">        * If numberOfActions == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated</span>
-<span class="sd">        * If numberOfCriteria == None, a uniform random number between 5 and 21 of cost or benefit criteria. </span>
-<span class="sd">           Cost criteria have probability 1/3, whereas benefit criteria respectively 2/3 probability to be generated.</span>
-<span class="sd">           However, at least one criterion of each kind is always instantiated.</span>
-<span class="sd">        * weightDistribution := {&#39;equiobjectives&#39;|&#39;fixed&#39;|&#39;random&#39;|&#39;equisignificant&#39;} By default, the sum of</span>
-<span class="sd">           significance of the cost criteria is set equal to the sum of the significance of the benefit criteria. </span>
-<span class="sd">        * default weightScale for &#39;random&#39; weightDistribution is 1 - numberOfCriteria.</span>
-<span class="sd">        * commonScale parameter is not used. The scale of cost criteria is cardinal or ordinal (0-10)</span>
-<span class="sd">           with proabailities 1/4 respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal</span>
-<span class="sd">           with probabilities 2/3, respectively 1/3.</span>
-<span class="sd">        * All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria</span>
-<span class="sd">           are evaluated with integers between 0 and 10.</span>
-<span class="sd">        * commonThresholds parameter is not used. Preference discrimination is specified as percentiles of</span>
-<span class="sd">           concerned performance differences (see below).</span>
-<span class="sd">        * CommonPercentiles = {&#39;ind&#39;:0.05, &#39;pref&#39;:0.10, &#39;veto&#39;:&#39;95} are expressed</span>
-<span class="sd">           in percentiles of the observed performance differences and only concern cardinal criteria.</span>
+<span class="sd">        * If numberOfActions == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated.</span>
+<span class="sd">        * If numberOfCriteria == None, a uniform random number between 5 and 21 of cost or benefit criteria. Cost criteria have probability 1/3, whereas benefit criteria respectively 2/3 probability to be generated. However, at least one criterion of each kind is always instantiated.</span>
+<span class="sd">        * weightDistribution := {&#39;equiobjectives&#39;|&#39;fixed&#39;|&#39;random&#39;|&#39;equisignificant&#39;} By default, the sum of significance of the cost criteria is set equal to the sum of the significance of the benefit criteria. </span>
+<span class="sd">        * Default weightScale for &#39;random&#39; weightDistribution is 1 - numberOfCriteria.</span>
+<span class="sd">        * If NegativeWeights = True (default), the performance evaluation of the criteria with a &#39;min&#39; preference direction will be positive, otherwise they will be negative.</span>
+<span class="sd">        * commonScale parameter is not used. The scale of cost criteria is cardinal or ordinal (0-10) with probability 1/4, respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal with probabilities 2/3, respectively 1/3.</span>
+<span class="sd">        * All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.</span>
+<span class="sd">        * commonThresholds parameter is not used. Preference discrimination is specified as percentiles of concerned performance differences (see below).</span>
+<span class="sd">        * CommonPercentiles = {&#39;ind&#39;:0.05, &#39;pref&#39;:0.10, &#39;veto&#39;:&#39;95} are expressed in percentiles of the observed performance differences and only concern cardinal criteria.</span>
 
 <span class="sd">    .. warning::</span>
 
@@ -2658,7 +2649,7 @@
                  <span class="n">weightDistribution</span> <span class="o">=</span> <span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span>\
                  <span class="n">weightScale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">IntegerWeights</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>\
-                 <span class="n">NegativeWeights</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>\
+                 <span class="n">NegativeWeights</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>\
                  <span class="n">commonScale</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">commonThresholds</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
                  <span class="n">commonPercentiles</span><span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
                  <span class="n">samplingSize</span> <span class="o">=</span> <span class="mi">100000</span><span class="p">,</span>\
