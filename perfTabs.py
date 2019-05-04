@@ -619,8 +619,6 @@ The performance evaluations of each decision alternative on each criterion are g
                         wpy = criteria[c]['thresholds']['weakPreference'][1]
                         if hasSymmetricThresholds:
                             wp = wpx + wpy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
-                        else:
-                            wp = wpx + wpy * abs(evaluation[c][a])
                     except:
                         wp = None
                     try:
@@ -632,7 +630,10 @@ The performance evaluations of each decision alternative on each criterion are g
                             p = px + py * abs(evaluation[c][a])
                     except:
                         p = None
-                    d = evaluation[c][a] - evaluation[c][b]
+                    if criteria[c]['weight'] > Decimal('0'):
+                        d = evaluation[c][a] - evaluation[c][b]
+                    else:
+                        d = evaluation[c][b] - evaluation[c][a]
                     lc0 = BipolarOutrankingDigraph._localConcordance(self,d,ind,wp,p)
                     if ind != None:
                         ind = round(ind,2)

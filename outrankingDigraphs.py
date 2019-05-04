@@ -5328,7 +5328,10 @@ class _BipolarOutrankingDigraph(OutrankingDigraph):
                                     p = px + py * abs(evaluation[c][a]) 
                             except:
                                 p = None
-                            d = evaluation[c][a] - evaluation[c][b]
+                            if criteria[g]['weight'] > Decimal('0'):
+                                d = evaluation[c][a] - evaluation[c][b]
+                            else:
+                                d = evaluation[c][b] - evaluation[c][a]
                             lc0 = self._localConcordance(d,ind,wp,p)
                             ## print 'c,a,b,d,ind,wp,p,lco = ',c,a,b,d, ind,wp,p,lc0
                             concordance += (lc0 * criteria[c]['weight'])
@@ -5466,7 +5469,10 @@ class _BipolarOutrankingDigraph(OutrankingDigraph):
                     p = px + py * abs(evaluation[c][a])
             except:
                 p = None
-            d = evaluation[c][a] - evaluation[c][b]
+            if criteria[c]['weight'] > Decimal('0'):
+                d = evaluation[c][a] - evaluation[c][b]
+            else:
+                d = evaluation[c][b] - evaluation[c][a]
             return self._localConcordance(d,ind,wp,p)
         else:
             return Decimal('0.0')
@@ -5732,7 +5738,10 @@ class _BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                     
                             except:
                                 p = None
-                            d = evaluation[c][a] - evaluation[c][b]
+                            if criteria[c]['weight'] > Decimal('0'):
+                                d = evaluation[c][a] - evaluation[c][b]
+                            else:
+                                d = evaluation[c][b] - evaluation[c][a]
                             lc0 = self._localConcordance(d,ind,wp,p)
                             ## print 'c,a,b,d,ind,wp,p,lco = ',c,a,b,d, ind,wp,p,lc0
                             concordance = concordance + (lc0 * criteria[c]['weight'])
@@ -5860,7 +5869,10 @@ class _BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                     p = px + py * abs(evaluation[c][a])
             except:
                 p = None
-            d = evaluation[c][a] - evaluation[c][b]
+            if criteria[c]['weight'] > Decimal('0'):
+                d = evaluation[c][a] - evaluation[c][b]
+            else:
+                d = evaluation[c][b] - evaluation[c][a]
             return self._localConcordance(d,ind,wp,p)
         else:
             return Decimal('0.0')
@@ -6294,8 +6306,11 @@ class _BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTable
                                     p = prefx + prefy * abs(evaluation[c][a])
                             except:
                                 p = None
-                                
-                            d = evaluation[c][a] - evaluation[c][b]
+
+                            if criteria[c]['weight'] > Decimal('0'):    
+                                d = evaluation[c][a] - evaluation[c][b]
+                            else:
+                                d = evaluation[c][b] - evaluation[c][a]
 
                             lc0 = self._localConcordance(d,ind,wp,p)
                             #print 'a,b,c,w,d,ind,wp,p,localConcordance(d,ind,wp,p)',a,b,c,criteria[c]['weight'],d,ind,wp,p,lc0
@@ -8231,7 +8246,10 @@ class MultiCriteriaDissimilarityDigraph(OutrankingDigraph):
                     counter = Decimal('0.0')
                     for g in criteria:
                         if evaluation[g][a] != Decimal('-999') and evaluation[g][b] != Decimal('-999'):
-                            d = abs(evaluation[g][a] - evaluation[g][b])
+                            if criteria[g]['weight'] > Decimal('0'):
+                                d = abs(evaluation[g][a] - evaluation[g][b])
+                            else:
+                                d = abs(evaluation[g][b] - evaluation[g][a])
                             try:
                                 hx = criteria[g]['thresholds']['ind'][0]
                                 hy = criteria[g]['thresholds']['ind'][1]
@@ -8931,7 +8949,7 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         m = len(criteriaList)
         weightSquares = {}
         for g in criteriaList:
-            gWeight = self.criteria[g]['weight']
+            gWeight = abs(self.criteria[g]['weight'])
 ##            if Debug:
 ##                print(g,gWeight)
             weightSquares[g] = gWeight*gWeight

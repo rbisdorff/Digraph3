@@ -3896,8 +3896,8 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             else:
                 criteriaList = list(criteria.keys())
                 criteriaList.sort()
-                criteriaWeightsList = [(-criteria[g]['weight'],g) for g in criteriaList]
-                criteriaWeightsList.sort(reverse=False)
+                criteriaWeightsList = [(abs(criteria[g]['weight']),g) for g in criteriaList]
+                criteriaWeightsList.sort(reverse=True)
                 criteriaList = [g[1] for g in criteriaWeightsList]
                 criteriaCorrelation = None
         else:

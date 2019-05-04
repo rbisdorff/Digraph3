@@ -2257,12 +2257,18 @@ class Random3ObjectivesPerformanceGenerator(RandomPerformanceGenerator):
                     if criteria[g]['preferenceDirection'] == 'max':
                         evaluation[g] = Decimal(str(round(randeval,0)))
                     else:
-                        evaluation[g] = Decimal(str(-round(randeval,0)))
+                        if criteria[g]['weight'] > Decimal('0'):
+                            evaluation[g] = Decimal(str(-round(randeval,0)))
+                        else:
+                            evaluation[g] = Decimal(str(round(randeval,0)))
                 else:
                     if criteria[g]['preferenceDirection'] == 'max':
                         evaluation[g] = Decimal(str(round(randeval,digits)))
                     else:
-                        evaluation[g] = Decimal(str(-round(randeval,digits)))
+                        if criteria[g]['weight'] > Decimal('0'):
+                            evaluation[g] = Decimal(str(-round(randeval,digits)))
+                        else:
+                            evaluation[g] = Decimal(str(round(randeval,digits)))
                         
             # beta distribution
             elif str(randomMode[0]) == 'beta':
@@ -2303,12 +2309,18 @@ class Random3ObjectivesPerformanceGenerator(RandomPerformanceGenerator):
                     if criteria[g]['preferenceDirection'] == 'max':
                         evaluation[g] = Decimal(str(round(randeval,0)))
                     else:
-                        evaluation[g] = Decimal(str(-round(randeval,0)))
+                        if criteria[g]['weight'] > Decimal('0'):
+                            evaluation[g] = Decimal(str(-round(randeval,0)))
+                        else:
+                            evaluation[g] = Decimal(str(round(randeval,0)))
                 else:
                     if criteria[g]['preferenceDirection'] == 'max':
                         evaluation[g] = Decimal(str(round(randeval,digits)))
                     else:
-                        evaluation[g] = Decimal(str(-round(randeval,digits)))
+                        if criteria[g]['weight'] > Decimal('0'):
+                            evaluation[g] = Decimal(str(-round(randeval,digits)))
+                        else:
+                            evaluation[g] = Decimal(str(round(randeval,digits)))
             # triangular
             elif str(randomMode[0]) == 'triangular':
                 m = commonScale[0]
@@ -2333,12 +2345,18 @@ class Random3ObjectivesPerformanceGenerator(RandomPerformanceGenerator):
                     if criteria[g]['preferenceDirection'] == 'max':
                         evaluation[g] = Decimal(str(round(randeval,0)))
                     else:
-                        evaluation[g] = Decimal(str(-round(randeval,0)))
+                        if criteria[g]['weight'] > Decimal('0'):
+                            evaluation[g] = Decimal(str(-round(randeval,0)))
+                        else:
+                            evaluation[g] = Decimal(str(round(randeval,0)))
                 else:
                     if criteria[g]['preferenceDirection'] == 'max':
                         evaluation[g] = Decimal(str(round(randeval,digits)))
                     else:
-                        evaluation[g] = Decimal(str(-round(randeval,digits)))
+                        if criteria[g]['weight'] > Decimal('0'):
+                            evaluation[g] = Decimal(str(-round(randeval,digits)))
+                        else:
+                            evaluation[g] = Decimal(str(round(randeval,digits)))
                
                 if Debug:
                     print(randeval, criteria[g]['preferenceDirection'], evaluation[g])
@@ -2584,8 +2602,8 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         * If numberOfCriteria == None, a uniform random number between 5 and 21 of cost or benefit criteria. Cost criteria have probability 1/3, whereas benefit criteria respectively 2/3 probability to be generated. However, at least one criterion of each kind is always instantiated.
         * weightDistribution := {'equiobjectives'|'fixed'|'random'|'equisignificant'} By default, the sum of significance of the cost criteria is set equal to the sum of the significance of the benefit criteria. 
         * Default weightScale for 'random' weightDistribution is 1 - numberOfCriteria.
-        * If NegativeWeights = True (default), the performance evaluation of the criteria with a 'min' preference direction will be positive, otherwise they will be negative.
-        * commonScale parameter is not used. The scale of cost criteria is cardinal or ordinal (0-10) with probability 1/4, respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal with probabilities 2/3, respectively 1/3.
+        * If NegativeWeights = True (False=defaul), the performance evaluation of the criteria with a 'min' preference direction will be positive, otherwise they will be negative.
+        * Parameter commonScale is not used. The scale of cost criteria is cardinal or ordinal (0-10) with probability 1/4, respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal with probabilities 2/3, respectively 1/3.
         * All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.
         * commonThresholds parameter is not used. Preference discrimination is specified as percentiles of concerned performance differences (see below).
         * CommonPercentiles = {'ind':0.05, 'pref':0.10, 'veto':'95} are expressed in percentiles of the observed performance differences and only concern cardinal criteria.
@@ -2602,7 +2620,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                  weightDistribution = 'equiobjectives',\
                  weightScale=None,\
                  IntegerWeights = True,\
-                 NegativeWeights = True,\
+                 NegativeWeights = False,\
                  commonScale = None, commonThresholds = None,\
                  commonPercentiles= None,\
                  samplingSize = 100000,\
@@ -3165,7 +3183,7 @@ class RandomCBPerformanceGenerator(RandomPerformanceGenerator):
                 if criteria[g]['preferenceDirection'] == 'max':
                     evaluation[g] = Decimal(str(round(randeval,digits)))
                 else:
-                    if NegativeWeights:
+                    if criteria[g]['weight'] < Decimal('0'):
                         evaluation[g][a] = Decimal(str(round(randeval,digits)))
                     else:
                         evaluation[g][a] = Decimal(str(-round(randeval,digits)))
@@ -3201,7 +3219,10 @@ class RandomCBPerformanceGenerator(RandomPerformanceGenerator):
                 if criteria[g]['preferenceDirection'] == 'max':
                     evaluation[g] = Decimal(str(round(randeval,digits)))
                 else:
-                    evaluation[g] = Decimal(str(-round(randeval,digits)))
+                    if criteria[g]['weight'] > Decimal('0'):
+                        evaluation[g] = Decimal(str(-round(randeval,digits)))
+                    else:
+                        evaluation[g] = Decimal(str(round(randeval,digits)))
                 #print randeval, criteria[g]['preferenceDirection'], evaluation[g][a]
                         
             elif str(randomMode[0]) == 'normal':
@@ -3229,7 +3250,10 @@ class RandomCBPerformanceGenerator(RandomPerformanceGenerator):
                 if criteria[g]['preferenceDirection'] == 'max':
                     evaluation[g] = Decimal(str(round(randeval,digits)))
                 else:
-                    evaluation[g] = Decimal(str(-round(randeval,digits)))
+                    if criteria[g]['weight'] > Decimal('0'):
+                        evaluation[g] = Decimal(str(-round(randeval,digits)))
+                    else:
+                        evaluation[g] = Decimal(str(round(randeval,digits)))
             elif str(randomMode[0]) == 'beta':
                 m = criterionScale[0]
                 M = criterionScale[1]
@@ -3251,7 +3275,10 @@ class RandomCBPerformanceGenerator(RandomPerformanceGenerator):
                 if criteria[g]['preferenceDirection'] == 'max':
                     evaluation[g] = Decimal(str(round(randeval,digits)))
                 else:
-                    evaluation[g] = Decimal(str(-round(randeval,digits)))
+                    if criteria[g]['weight'] > Decimal('0'):
+                        evaluation[g] = Decimal(str(-round(randeval,digits)))
+                    else:
+                        evaluation[g] = Decimal(str(round(randeval,digits)))
                 if Debug:
                     print('alpha,beta,u,m,M,randeval',alpha,beta,u,m,M,randeval)
                         

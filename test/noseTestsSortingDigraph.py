@@ -152,8 +152,9 @@ def testNormedQuantilesRatingDigraph():
     from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
     nbrActions=1000
     nbrCrit = 13
-    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
+    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,NegativeWeights=True,
                                     numberOfCriteria=nbrCrit,seed=None)
+    tp.convertWeights2Positive()
     pq = PerformanceQuantiles(tp,'deciles',LowerClosed=True,Debug=False)
     tpg = PerfTabGenerator(tp,instanceCounter=0,seed=None)
     newActions = tpg.randomActions(10)

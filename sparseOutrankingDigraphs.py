@@ -1605,7 +1605,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         print('*----  criteria -----*')
         sumWeights = Decimal('0.0')
         for g in self.criteria:
-            sumWeights += self.criteria[g]['weight']
+            sumWeights += abs(self.criteria[g]['weight'])
         criteriaList = [c for c in self.criteria]
         criteriaList.sort()
         for c in criteriaList:
@@ -2448,7 +2448,7 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
 
         weightSquares = {}
         for g in criteriaList:
-            gWeight = self.criteria[g]['weight']
+            gWeight = abs(self.criteria[g]['weight'])
             weightSquares[g] = gWeight*gWeight
             sumWeights += gWeight
         concordanceRelation = self._recodeConcordanceValuation(\
