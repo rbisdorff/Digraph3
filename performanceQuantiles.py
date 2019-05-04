@@ -191,6 +191,7 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
         """
         from math import floor
         from copy import copy, deepcopy
+        critg = self.criteria[g]
         if self.Debug:
             Debug = True
         gValues = []
@@ -198,10 +199,18 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
             if Debug:
                 print('g,x,evaluation[g][x]',g,x,perfTab.evaluation[g][x])
             if perfTab.evaluation[g][x] != Decimal('-999'):
-                gValues.append(perfTab.evaluation[g][x])
+                if critg['weight'] > Decimal('0'):
+                    gValues.append(perfTab.evaluation[g][x])
+                else:
+                    gValues.append(-perfTab.evaluation[g][x])
         gValues.sort()
-        self.criteria[g]['minValue'] = gValues[0]
-        self.criteria[g]['maxValue'] = gValues[-1]
+        if critg['weight'] > Decimal('0'):
+            self.criteria[g]['minValue'] = gValues[0]
+            self.criteria[g]['maxValue'] = gValues[-1]
+        else:
+            self.criteria[g]['minValue'] = -gValues[0]
+            self.criteria[g]['maxValue'] = -gValues[-1]
+
 ##        if PrefThresholds:
 ##            try:
 ##                gPrefThrCst = self.criteria[g]['thresholds']['pref'][0]
@@ -279,6 +288,8 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
                 gQuantiles.append(quantile)
 ##        else:
 ##            gQuantiles = []
+        #if critg['weight'] < Decimal('0'):
+        #    gQuantiles = [-quantile for quantile in gQuantiles]
         if Debug:
             print(g,self.LowerClosed,self.criteria[g]['preferenceDirection'],gQuantiles)
         return gQuantiles
@@ -330,7 +341,10 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
                     if criteria[g]['preferenceDirection'] == 'max':
                         value = min(criteria[g]['scale'][1],max(criteria[g]['scale'][0],limitingQuantiles[g][i]))
                     else:
-                        value = max(-criteria[g]['scale'][1],min(-criteria[g]['scale'][0],limitingQuantiles[g][i]))
+                        if criteria[g]['weight'] > Decimal('0'):
+                            value = max(-criteria[g]['scale'][1],min(-criteria[g]['scale'][0],limitingQuantiles[g][i]))
+                        else:
+                            value = max(criteria[g]['scale'][0],min(criteria[g]['scale'][1],-limitingQuantiles[g][i]))
                     html += formatString % (value)
                 html += '</tr>'
             html += '</table>'
@@ -352,7 +366,10 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
                     if criteria[g]['preferenceDirection'] == 'max':
                         value = min(criteria[g]['scale'][1],max(criteria[g]['scale'][0],limitingQuantiles[g][i]))
                     else:
-                        value = max(-criteria[g]['scale'][1],min(-criteria[g]['scale'][0],limitingQuantiles[g][i]))
+                        if criteria[g]['weight'] > Decimal('0'):
+                            value = max(-criteria[g]['scale'][1],min(-criteria[g]['scale'][0],limitingQuantiles[g][i]))
+                        else:
+                            value = max(criteria[g]['scale'][0],min(criteria[g]['scale'][1],-limitingQuantiles[g][i]))
                     html += formatString % (value)
                 html += '</tr>'
             html += '</table>'        
@@ -388,7 +405,7 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
         """
         See lecture about the iq-agent of the MICS-3 Computational Statistics Course.
         """
-        #self.Debug = True
+        self.Debug = False
         from collections import OrderedDict
         # get present state of the quantiles
         p = self.quantilesFrequencies
@@ -410,7 +427,10 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
         nv = []
         for x in newValues:
             if x != -999:
-                nv.append(x)
+                if self.criteria[g]['weight'] < Decimal('0'):
+                    nv.append(-x)
+                else:
+                    nv.append(x)
         nv.sort()
         nt = len(nv)
         if self.Debug:
@@ -780,7 +800,10 @@ The number of so far observed evaluations per criteria are the following:
                         if criteria[g]['preferenceDirection'] == 'max':
                             value = min(criteria[g]['scale'][1],max(criteria[g]['scale'][0],limitingQuantiles[g][i]))
                         else:
-                            value = max(-criteria[g]['scale'][1],min(-criteria[g]['scale'][0],limitingQuantiles[g][i]))
+                            if criteria[g]['weight'] > Decimal('0'):
+                                value = max(-criteria[g]['scale'][1],min(-criteria[g]['scale'][0],limitingQuantiles[g][i]))
+                            else:
+                                value = max(criteria[g]['scale'][0],min(criteria[g]['scale'][1],limitingQuantiles[g][i]))
                         print(formatString % (value), end=' ')
                     print()      
         else: 
@@ -798,7 +821,10 @@ The number of so far observed evaluations per criteria are the following:
                     if criteria[g]['preferenceDirection'] == 'max':
                         value = min(criteria[g]['scale'][1],max(criteria[g]['scale'][0],limitingQuantiles[g][i]))
                     else:
-                        value = max(-criteria[g]['scale'][1],min(-criteria[g]['scale'][0],limitingQuantiles[g][i]))
+                        if criteria[g]['weight'] > Decimal('0'):
+                            value = max(-criteria[g]['scale'][1],min(-criteria[g]['scale'][0],limitingQuantiles[g][i]))
+                        else:
+                            value = max(criteria[g]['scale'][0],min(criteria[g]['scale'][1],-limitingQuantiles[g][i]))
                     print(formatString % (value), end=' ')
                 print()      
 
@@ -877,7 +903,7 @@ if __name__ == "__main__":
     from performanceQuantiles import *
     seed = 105
     nbrActions = 1000
-    nbrCrit = 21
+    nbrCrit = 13
 ##    from randomPerfTabs import RandomPerformanceTableau
 ##    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
 ##    nbrActions=nbrActions
@@ -895,28 +921,29 @@ if __name__ == "__main__":
     nbrActions=nbrActions
     nbrCrit = nbrCrit
     tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,
+                                             NegativeWeights=True,
+                                             negativeWeightProbability=0.5,
                                     numberOfCriteria=nbrCrit,seed=seed)
     pq = PerformanceQuantiles(tp,5,LowerClosed=True,Debug=False)
-    print(pq.actionsTypeStatistics)
+    #print(pq.actionsTypeStatistics)
+    #pq.showHTMLLimitingQuantiles(Transposed=True)
     #print(pq.limitingQuantiles)
     #pq.showLimitingQuantiles(ByObjectives=False)
     #pq.showHTMLLimitingQuantiles(Transposed=True)
     #pq.showActions()
     #pq.showCriteria(ByObjectives=True)
-    tpg = PerfTabGenerator(tp,seed=seed)
-    newActions = tpg.randomActions(1)
-##    for i in range(100):
-##        newAction = tpg.randomAction()
-##        newActions.append(newAction)
-    #print(newActions)
-    pq.updateQuantiles(newActions,historySize=None)
-##    pq.showActions()
-    #pq.showCriteria()
+    tpg = PerfTabGenerator(tp,seed=None)
+    newActions = tpg.randomActions(1000)
+    pq.updateQuantiles(newActions,historySize=0)
+    pq.showHTMLLimitingQuantiles(Transposed=True)
+    tpg = PerfTabGenerator(tp,seed=None)
+    newActions = tpg.randomActions(1000)
+    pq.updateQuantiles(newActions,historySize=0)
     pq.showHTMLLimitingQuantiles(Transposed=True)
 ##    pq.showCriterionStatistics('c01')
 ##    pq.showCriterionStatistics('b01')
-    print(pq.computeQuantileProfile(0.5))
-    pq.save(fileName='testPerfQuant')
+    #print(pq.computeQuantileProfile(0.5))
+    #pq.save(fileName='testPerfQuant')
 
-    pq1 = PerformanceQuantiles(filePerfQuant='testPerfQuant')
+    #pq1 = PerformanceQuantiles(filePerfQuant='testPerfQuant')
     
