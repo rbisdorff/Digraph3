@@ -398,6 +398,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">criteria</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">+</span> <span class="n">nbrOfRandomActions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nd</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>  
         <span class="n">newActions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
         <span class="n">newEvaluation</span> <span class="o">=</span><span class="p">{}</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
@@ -429,6 +431,8 @@
         <span class="n">newEvaluation</span> <span class="o">=</span><span class="p">{}</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
             <span class="n">newEvaluation</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">+</span> <span class="n">nbrOfRandomActions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nd</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nbrOfRandomActions</span><span class="p">):</span>
             <span class="n">newAction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_randomAction</span><span class="p">()</span>
             <span class="n">newKey</span> <span class="o">=</span> <span class="n">newAction</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;key&#39;</span><span class="p">)</span>
@@ -1778,7 +1782,7 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span>\
                  <span class="n">weightDistribution</span> <span class="o">=</span> <span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span> <span class="n">weightScale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">IntegerWeights</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">OrdinalScales</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
-                 <span class="n">NegativeWeights</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">negativeWeightProbability</span> <span class="o">=</span> <span class="mf">0.10</span><span class="p">,</span>\
+                 <span class="n">NegativeWeights</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">negativeWeightProbability</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>\
                  <span class="n">commonScale</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">commonThresholds</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">commonMode</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
                  <span class="n">valueDigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>\
                  <span class="n">vetoProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>\
