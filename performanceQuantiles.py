@@ -901,8 +901,8 @@ The number of so far observed evaluations per criteria are the following:
 if __name__ == "__main__":
 
     from performanceQuantiles import *
-    seed = 105
-    nbrActions = 1000
+    seed = 100
+    nbrActions = 20
     nbrCrit = 13
 ##    from randomPerfTabs import RandomPerformanceTableau
 ##    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
@@ -922,7 +922,7 @@ if __name__ == "__main__":
     nbrCrit = nbrCrit
     tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,
                                              NegativeWeights=True,
-                                             negativeWeightProbability=0.5,
+                                             negativeWeightProbability=0.1,
                                     numberOfCriteria=nbrCrit,seed=seed)
     pq = PerformanceQuantiles(tp,5,LowerClosed=True,Debug=False)
     #print(pq.actionsTypeStatistics)
@@ -933,15 +933,22 @@ if __name__ == "__main__":
     #pq.showActions()
     #pq.showCriteria(ByObjectives=True)
     tpg = PerfTabGenerator(tp,seed=None)
-    newActions = tpg.randomActions(1000)
+    newActions = tpg.randomActions(10)
     pq.updateQuantiles(newActions,historySize=0)
     pq.showHTMLLimitingQuantiles(Transposed=True)
-    tpg = PerfTabGenerator(tp,seed=None)
-    newActions = tpg.randomActions(1000)
+    #tpg = PerfTabGenerator(tp,seed=None)
+    newActions = tpg.randomActions(10)
     pq.updateQuantiles(newActions,historySize=0)
     pq.showHTMLLimitingQuantiles(Transposed=True)
-##    pq.showCriterionStatistics('c01')
-##    pq.showCriterionStatistics('b01')
+    from sortingDigraphs import NormedQuantilesRatingDigraph
+    nqr1 = NormedQuantilesRatingDigraph(pq,newActions,rankingRule='best',Debug=False)
+    print(nqr1)
+    nqr1.showHTMLRatingHeatmap(pageTitle='Heat map of the qintiles rating',
+                                       colorLevels=7,
+                                       Correlations=True,
+                                       )
+    nqr1.showQuantilesRating()
+    nqr1.exportRatingGraphViz(Comments=False)
     #print(pq.computeQuantileProfile(0.5))
     #pq.save(fileName='testPerfQuant')
 

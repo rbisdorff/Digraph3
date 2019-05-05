@@ -295,12 +295,13 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
             else:
                 criteria[g] = perfTab.criteria[g]
         self.criteria = criteria
+
         #self.convertWeightsToIntegers()
            
         # valuation domain
         for g in self.criteria:
             self.criteria[g]['weight'] = int(self.criteria[g]['weight'])
-            totalWeight += self.criteria[g]['weight']
+            totalWeight += abs(self.criteria[g]['weight'])
         self.totalWeight = totalWeight
         
         Min =   -totalWeight
@@ -699,11 +700,11 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                                            hasNoVeto,hasBipolarVeto,
                                            hasSymmetricThresholds,Debug)
                     splitThread.start()
-                    splitThread.join()	
+                    #splitThread.join()	
 	
                     
-##                while active_children() != []:
-##                    pass
+                while active_children() != []:
+                    pass
 
                 if Comments:    
                     print('Exiting computing threads')
@@ -1246,10 +1247,10 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                     splitThread = myThread(jb,tempDirName,\
                                     selfMultiple,otherMultiple,Debug)
                     splitThread.start()
-                    splitThread.join()
+                    #splitThread.join()
                     
-##                while active_children() != []:
-##                    pass
+                while active_children() != []:
+                    pass
                 
                 # post threading operations
                 if Comments:    

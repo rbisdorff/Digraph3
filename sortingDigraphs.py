@@ -3173,6 +3173,10 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         # instantiate rating categories
         t0 = time()
 
+        # convertWeights to positive
+        from perfTabs import PerformanceTableau
+        PerformanceTableau.convertWeights2Positive(self)        
+
         # check if new quantile limits should be interpolated
         if quantiles != None:
             oldFreq = self.quantilesFrequencies
