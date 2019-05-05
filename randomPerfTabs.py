@@ -351,6 +351,8 @@ class RandomPerformanceGenerator(object):
         """
         from collections import OrderedDict
         criteria = self.perfTab.criteria
+        n = self.counter + nbrOfRandomActions
+        self.nd = len(str(n))  
         newActions = OrderedDict()
         newEvaluation ={}
         for g in criteria:
@@ -382,6 +384,8 @@ class RandomPerformanceGenerator(object):
         newEvaluation ={}
         for g in criteria:
             newEvaluation[g] = {}
+        n = self.counter + nbrOfRandomActions
+        self.nd = len(str(n))
         for i in range(nbrOfRandomActions):
             newAction = self._randomAction()
             newKey = newAction['action'].pop('key')
@@ -1731,7 +1735,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
     def __init__(self,numberOfActions = 20, numberOfCriteria = 13,\
                  weightDistribution = 'equiobjectives', weightScale=None,\
                  IntegerWeights = True, OrdinalScales=False,\
-                 NegativeWeights = True, negativeWeightProbability = 0.10,\
+                 NegativeWeights = False, negativeWeightProbability = 0.0,\
                  commonScale = None, commonThresholds = None, commonMode = None,\
                  valueDigits=2,\
                  vetoProbability=0.5,\
