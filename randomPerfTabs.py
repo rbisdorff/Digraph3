@@ -884,12 +884,50 @@ class RandomRankPerformanceTableau(PerformanceTableau):
         * number of performance criteria,
         * weightDistribution := equisignificant | random (default, see RandomPerformanceTableau)
         * weightScale := (1, 1 | numberOfCriteria (default when random))
-        * IntegerWeights := Boolean (True = default). Weights are negativem, as all the criteria preference directions are 'min', as the rank performance is to be minimized. 
+        * IntegerWeights := Boolean (True = default). Weights are negative, as all the criteria preference directions are 'min', as the rank performance is to be minimized. 
         * commonThresholds (default) := {
             | 'ind':(0,0),
             | 'pref':(1,0),
             | 'veto':(numberOfActions,0)
             | } (default)
+
+    >>> t = RandomRankPerformanceTableau(numberOfActions=3,numberOfCriteria=2)
+    >>> t.showObjectives()
+    The performance tableau does not contain objectives.
+    >>> t.showCriteria()
+    *----  criteria -----*
+    g1 'Random criteria (voter)'
+      Scale = (Decimal('0'), Decimal('3'))
+      Weight = -1 # ranks to be minimal 
+      Threshold ind : 0.00 + 0.00x ; percentile:  0.0
+      Threshold pref : 1.00 + 0.00x ; percentile:  0.667
+      Threshold veto : 3.00 + 0.00x ; percentile:  1.0
+    g2 'Random criteria (voter)'
+      Scale = (Decimal('0'), Decimal('3'))
+      Weight = -1 # ranks to be minimal
+      Threshold ind : 0.00 + 0.00x ; percentile:  0.0
+      Threshold pref : 1.00 + 0.00x ; percentile:  0.667
+      Threshold veto : 3.00 + 0.00x ; percentile:  1.0
+    >>> t.showActions()
+    *----- show decision action --------------*
+    key:  a1
+      short name: a1
+      name:       random decision action (candidate)
+      comment:    RandomRankPerformanceTableau() generated.
+    key:  a2
+      short name: a2
+      name:       random decision action (candidate)
+      comment:    RandomRankPerformanceTableau() generated.
+    key:  a3
+      short name: a3
+      name:       random decision action (candidate)
+      comment:    RandomRankPerformanceTableau() generated.
+    >>> t.showPerformanceTableau()
+    *----  performance tableau -----*
+    criteria | weights | 'a1' 'a2' 'a3'   
+    ---------|--------------------------
+       'g1'  |    -1   |   3    1    2  
+       'g2'  |    -1   |   3    1    2  
 
     """
     def __init__(self,numberOfActions = 13, numberOfCriteria = 7,\
@@ -899,6 +937,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
                  seed = None,\
                  Debug = False):
         """
+        Constructor of random ranks performance tableaux. 
         """
 
         # set random seed
@@ -919,8 +958,8 @@ class RandomRankPerformanceTableau(PerformanceTableau):
             else:   
                 actionKey = ('a%%0%dd' % (nd)) % (i+1)
                 actions[actionKey] = {'shortName':actionKey,
-                        'name': 'random decision action',
-                        'comment': 'RandomPerformanceTableau() generated.' }
+                        'name': 'random decision actions (candidate)',
+                        'comment': 'Random Ranks' }
         # generate the criteria weights
         if weightScale == None:
             weightScale = (1,numberOfCriteria)
@@ -951,7 +990,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
         for i in range(numberOfCriteria):
             g = ('g%%0%dd' % ngd) % (i+1)
             criteria[g] = {}
-            criteria[g]['name']='RandomRankPerformanceTableau() instance'
+            criteria[g]['name']='Random criteria (voter)'
             criteria[g]['comment']=commentString
             criteria[g]['preferenceDirection'] = 'min'
             try:
@@ -1729,6 +1768,64 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         * valueDigits := 2 (default, for cardinal scales only)
         * vetoProbability := x in ]0.0-1.0[ (0.5 default), probability that a cardinal criterion shows a veto preference discrimination threshold.
         * Debug := True / False (default)
+
+    >>> from randomPerfTabs import Random3ObjectivesPerformanceTableau
+    >>> t = Random3ObjectivesPerformanceTableau(numberOfActions=5,numberOfCriteria=3,seed=1)
+    >>> t
+    *------- PerformanceTableau instance description ------*
+    Instance class   : Random3ObjectivesPerformanceTableau
+    Seed             : 1
+    Instance name    : random3ObjectivesPerfTab
+    # Actions        : 5
+    # Objectives     : 3
+    # Criteria       : 3
+    Attributes       : ['name', 'valueDigits', 'BigData', 'OrdinalScales',
+                        'missingDataProbability', 'negativeWeightProbability',
+                        'randomSeed', 'sumWeights', 'valuationPrecision',
+                        'commonScale', 'objectiveSupportingTypes',
+                        'actions', 'objectives', 'criteriaWeightMode',
+                        'criteria', 'evaluation', 'weightPreorder']
+    >>> t.showObjectives()
+    *------ show objectives -------"
+    Eco: Economical aspect
+       g1 criterion of objective Eco 1
+      Total weight: 1.00 (1 criteria)
+    Soc: Societal aspect
+       g2 criterion of objective Soc 1
+      Total weight: 1.00 (1 criteria)
+    Env: Environmental aspect
+       g3 criterion of objective Env 1
+      Total weight: 1.00 (1 criteria)
+    >>> t.showActions()
+    *----- show decision action --------------*
+    key:  a1
+      short name:  a1
+      name:       random decision action Eco+ Soc- Env+
+      profile:    {'Eco': 'good', 'Soc': 'weak', 'Env': 'good'}
+    key:  a2
+      short name:  a2
+      name:       random decision action Eco~ Soc+ Env~
+      profile:    {'Eco': 'fair', 'Soc': 'good', 'Env': 'fair'}
+    key:  a3
+      short name:  a3
+      name:       random decision action Eco~ Soc~ Env-
+      profile:    {'Eco': 'fair', 'Soc': 'fair', 'Env': 'weak'}
+    key:  a4
+      short name:  a4
+      name:       random decision action Eco~ Soc+ Env+
+      profile:    {'Eco': 'fair', 'Soc': 'good', 'Env': 'good'}
+    key:  a5
+      short name:  a5
+      name:       random decision action Eco~ Soc+ Env~
+      profile:    {'Eco': 'fair', 'Soc': 'good', 'Env': 'fair'}
+    >>> t.showPerformanceTableau()
+    *----  performance tableau -----*
+    criteria | weights |  'a1'   'a2'   'a3'   'a4'   'a5'   
+    ---------|---------------------------------------------
+    'g1Eco'  |    1    | 36.29  85.17  34.49    NA   56.58  
+    'g2Soc'  |    1    | 55.00  56.33    NA   67.36  72.22  
+    'g3Env'  |    1    | 66.58  48.71  21.59    NA     NA  
+    >>>
         
     """
 
@@ -2614,7 +2711,77 @@ class RandomCBPerformanceTableau(PerformanceTableau):
 
     .. warning::
 
-        Minimal number of decision actions required is 3 ! 
+        Minimal number of decision actions required is 3 !
+    
+    >>> from randomPerfTabs import RandomCBPerformanceTableau
+    >>> t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=3,seed=1)
+    >>> t
+    *------- PerformanceTableau instance description ------*
+    Instance class   : RandomCBPerformanceTableau
+    Seed             : 1
+    Instance name    : randomCBperftab
+    # Actions        : 5
+    # Objectives     : 2
+    # Criteria       : 3
+    Attributes       : ['randomSeed', 'name', 'digits', 'BigData',
+                        'missingDataProbability', 'commonPercentiles',
+                        'samplingSize', 'Debug', 'actionsTypesList',
+                        'sumWeights', 'valuationPrecision', 'actions',
+                        'objectives', 'criteriaWeightMode', 'criteria',
+                        'evaluation', 'weightPreorder']
+    >>> t.showObjectives()
+    *------ show objectives -------"
+    C: Costs
+       c1 random ordinal cost criterion 2
+      Total weight: 2.00 (1 criteria)
+    B: Benefits
+       b1 random ordinal benefit criterion 1
+       b2 random cardinal benefit criterion 1
+      Total weight: 2.00 (2 criteria)
+    >>> t.showCriteria()
+    *----  criteria -----*
+    c1 'Costs/random ordinal cost criterion'
+      Scale = (0, 10)
+      Weight = 2
+    b1 'Benefits/random ordinal benefit criterion'
+      Scale = (0, 10)
+      Weight = 1 
+    b2 'Benefits/random cardinal benefit criterion'
+      Scale = (0.0, 100.0)
+      Weight = 1 
+      Threshold ind : 4.70 + 0.00x ; percentile:  0.1
+      Threshold pref : 4.70 + 0.00x ; percentile:  0.1
+      Threshold veto : 30.84 + 0.00x ; percentile:  1.0
+    >>> t.showActions()
+    *----- show decision action --------------*
+    key:  a1
+      short name: a1c
+      name:       random cheap decision action
+      comment:    Cost-Benefit
+    key:  a2
+      short name: a2a
+      name:       random advantageous decision action
+      comment:    Cost-Benefit
+    key:  a3
+      short name: a3c
+      name:       random cheap decision action
+      comment:    Cost-Benefit
+    key:  a4
+      short name: a4n
+      name:       random neutral decision action
+      comment:    Cost-Benefit
+    key:  a5
+      short name: a5c
+      name:       random cheap decision action
+      comment:    Cost-Benefit
+    >>> t.showPerformanceTableau()
+    *----  performance tableau -----*
+    criteria | weights |   'a1'   'a2'   'a3'   'a4'   'a5'   
+    ---------|-----------------------------------------
+       'b1'  |    1    |   4.00   8.00   5.00   4.00   6.00  
+       'b2'  |    1    |  36.70  31.65  23.90  10.56  41.40  
+       'c1'  |    2    |    NA   -5.00  -3.00  -8.00  -3.00  
+    >>> ...  
 
     """
 

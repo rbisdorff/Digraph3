@@ -2718,7 +2718,6 @@ The performance evaluations of each decision alternative on each criterion are g
                                 nbrCores=nbrOfCPUs)
             else:
                 criteriaCorrelation = None
-            
         quantileColor={}
         for x in actionsList:
             quantileColor[x] = {}
@@ -2767,7 +2766,7 @@ The performance evaluations of each decision alternative on each criterion are g
         html += '</tr>\n'
         html += '<tr><th bgcolor=%s>weights</th>' % (columnHeaderColor)
         for g in criteriaList:
-            html += '<td align="center">%s</td>' % (str(self.criteria[g]['weight']))
+            html += '<td align="center">%+.2f</td>' % (self.criteria[g]['weight'])
         html += '</tr>\n'
         if criteriaCorrelation != None:
             html += '<tr><th bgcolor=%s>tau<sup>(*)</sup></th>' % (columnHeaderColor)
@@ -7467,11 +7466,34 @@ if __name__ == "__main__":
                                    NegativeWeights=True,
                                    Debug=False,
                                    missingDataProbability=0.1,
-                                   seed=105,
+                                   seed=102,
                                    Threading=False,
                                             )
+    t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='Copeland')
+    g = BipolarOutrankingDigraph(t)
+    ranking = g.computeCopelandRanking()
+    critCorr = g.computeMarginalVersusGlobalRankingCorrelations(ranking)
+    print('copSum',sum([x[0] for x in critCorr]))
+    n = len(critCorr)
+    nd = Decimal(n*(n-1)/2)
+    totDif = Decimal('0')
+    for i in range(n):
+        for j in range(i+1,n):
+            totDif += abs(critCorr[i][0] - critCorr[j][0])
+    print('difcop',totDif/nd)
+    ranking = g.computeNetFlowsRanking()
+    critCorr = g.computeMarginalVersusGlobalRankingCorrelations(ranking)
+    print('nfSum',sum([x[0] for x in critCorr]))
+    totDif = Decimal('0')
+    for i in range(n):
+        for j in range(i+1,n):
+            totDif += abs(critCorr[i][0] - critCorr[j][0])
+    print('difnf',totDif/nd)
+    t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows')
 
-    t.showHTMLCriteria()
+       
+
+    
 ##    t.showPerformanceTableau()
 ##    nt = NormalizedPerformanceTableau(t)
 ##    nt.showPerformanceTableau()
