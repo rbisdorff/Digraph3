@@ -927,7 +927,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
     criteria | weights | 'a1' 'a2' 'a3'   
     ---------|--------------------------
        'g1'  |    -1   |   3    1    2  
-       'g2'  |    -1   |   3    1    2  
+       'g2'  |    -1   |   2    1    3  
 
     """
     def __init__(self,numberOfActions = 13, numberOfCriteria = 7,\
