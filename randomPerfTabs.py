@@ -321,7 +321,8 @@ class RandomPerformanceTableau(PerformanceTableau):
 
 class RandomPerformanceGenerator(object):
     """
-    Wrapper for generating new decision actions with random evaluation for a given RandomPerformanceTableau instance.
+    Generics wrapper for generating new decision actions or performance tableaux
+    with random evaluations generated with a given RandomPerformanceTableau model.
     
     """
     def __init__(self,argPerfTab,actionNamePrefix='a',\
@@ -399,7 +400,8 @@ class RandomPerformanceGenerator(object):
 
 class RandomStdPerformanceGenerator(RandomPerformanceGenerator):
     """
-    Generates for a given standard RandomPerformanceTableau instance.
+    Generator for genrating new decision actions from a
+    given <RandomPerformanceTableau> model.
     """
     def __init__(self,argPerfTab,actionNamePrefix='a',
                  instanceCounter=0,seed=None):
@@ -2260,8 +2262,8 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
 
 class Random3ObjectivesPerformanceGenerator(RandomPerformanceGenerator):
     """
-    Generates and/or new decision actions with random evaluation for a
-    given Random3ObjectivesPerformanceTableau instance.
+    Generator for new decision actions with random evaluation following a
+    given Random3ObjectivesPerformanceTableau model.
     """
     def __init__(self,argPerfTab,actionNamePrefix='a',
                  instanceCounter=0,seed=None,Debug=False):
@@ -3280,7 +3282,8 @@ class RandomCBPerformanceTableau(PerformanceTableau):
 
 class RandomCBPerformanceGenerator(RandomPerformanceGenerator):
     """
-    Instantiates a generator of new decision actions with associated random evaluations using the model parameters provided by a given RandomCBPerformanceTableau instance.
+    Generator of new decision actions with random evaluations using
+    the model parameters provided by a given RandomCBPerformanceTableau instance.
 
     """
     def __init__(self,argPerfTab,actionNamePrefix='a',

@@ -368,7 +368,8 @@
 
 <div class="viewcode-block" id="RandomPerformanceGenerator"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomPerformanceGenerator">[docs]</a><span class="k">class</span> <span class="nc">RandomPerformanceGenerator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Wrapper for generating new decision actions with random evaluation for a given RandomPerformanceTableau instance.</span>
+<span class="sd">    Generics wrapper for generating new decision actions or performance tableaux</span>
+<span class="sd">    with random evaluations generated with a given RandomPerformanceTableau model.</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span><span class="n">actionNamePrefix</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span>\
@@ -446,7 +447,8 @@
 
 <div class="viewcode-block" id="RandomStdPerformanceGenerator"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomStdPerformanceGenerator">[docs]</a><span class="k">class</span> <span class="nc">RandomStdPerformanceGenerator</span><span class="p">(</span><span class="n">RandomPerformanceGenerator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generates for a given standard RandomPerformanceTableau instance.</span>
+<span class="sd">    Generator for genrating new decision actions from a</span>
+<span class="sd">    given &lt;RandomPerformanceTableau&gt; model.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span><span class="n">actionNamePrefix</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span>
                  <span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -2307,8 +2309,8 @@
 
 <div class="viewcode-block" id="Random3ObjectivesPerformanceGenerator"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.Random3ObjectivesPerformanceGenerator">[docs]</a><span class="k">class</span> <span class="nc">Random3ObjectivesPerformanceGenerator</span><span class="p">(</span><span class="n">RandomPerformanceGenerator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generates and/or new decision actions with random evaluation for a</span>
-<span class="sd">    given Random3ObjectivesPerformanceTableau instance.</span>
+<span class="sd">    Generator for new decision actions with random evaluation following a</span>
+<span class="sd">    given Random3ObjectivesPerformanceTableau model.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span><span class="n">actionNamePrefix</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span>
                  <span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -3327,7 +3329,8 @@
 
 <div class="viewcode-block" id="RandomCBPerformanceGenerator"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomCBPerformanceGenerator">[docs]</a><span class="k">class</span> <span class="nc">RandomCBPerformanceGenerator</span><span class="p">(</span><span class="n">RandomPerformanceGenerator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Instantiates a generator of new decision actions with associated random evaluations using the model parameters provided by a given RandomCBPerformanceTableau instance.</span>
+<span class="sd">    Generator of new decision actions with random evaluations using</span>
+<span class="sd">    the model parameters provided by a given RandomCBPerformanceTableau instance.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span><span class="n">actionNamePrefix</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span>

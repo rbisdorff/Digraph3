@@ -295,7 +295,7 @@ with main <a class="reference external" href="techDoc.html#votingProfiles.Linear
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#randomperftabs-label"><span class="std std-ref">randomPerfTabs module</span></a></dt>
 <dd><p class="first">Various implemented random performance tableau models.</p>
-<img src="_images/inheritance-8098e8e3a6978de68eda08c6a5db7bd8a6e96a38.png" alt="Inheritance diagram of randomPerfTabs" usemap="#inheritance4442f81dbd" class="inheritance"/>
+<img src="_images/inheritance-101965eb122a4a7e2aa254000d2b2fe53ef94f04.png" alt="Inheritance diagram of randomPerfTabs" usemap="#inheritance4442f81dbd" class="inheritance"/>
 <map id="inheritance4442f81dbd" name="inheritance4442f81dbd">
 <area shape="rect" id="node1" href="#perfTabs.PerformanceTableau" target="_top" title="In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` class provides a generic **performance table model**. A given object of this class consists in:" alt="" coords="62,241,267,265"/>
 <area shape="rect" id="node4" href="#randomPerfTabs.Random3ObjectivesPerformanceTableau" target="_top" title="Specialization of the PerformanceTableau" alt="" coords="378,147,755,171"/>
@@ -303,10 +303,10 @@ with main <a class="reference external" href="techDoc.html#votingProfiles.Linear
 <area shape="rect" id="node7" href="#randomPerfTabs.RandomCBPerformanceTableau" target="_top" title="Full automatic generation of random" alt="" coords="406,241,727,265"/>
 <area shape="rect" id="node8" href="#randomPerfTabs.RandomPerformanceTableau" target="_top" title="Specialization of the generic :py:class:`perftabs.PerformanceTableau` class for generating a temporary random performance tableau." alt="" coords="414,288,719,313"/>
 <area shape="rect" id="node9" href="#randomPerfTabs.RandomRankPerformanceTableau" target="_top" title="Specialization of the PerformanceTableau class for generating a temporary" alt="" coords="399,336,734,360"/>
-<area shape="rect" id="node2" href="#randomPerfTabs.Random3ObjectivesPerformanceGenerator" target="_top" title="Generates and/or new decision actions with random evaluation for a" alt="" coords="370,5,763,29"/>
-<area shape="rect" id="node3" href="#randomPerfTabs.RandomPerformanceGenerator" target="_top" title="Wrapper for generating new decision actions with random evaluation for a given RandomPerformanceTableau instance." alt="" coords="5,52,324,77"/>
-<area shape="rect" id="node6" href="#randomPerfTabs.RandomCBPerformanceGenerator" target="_top" title="Instantiates a generator of new decision actions with associated random evaluations using the model parameters provided by a given RandomCBPerformanceTableau instance." alt="" coords="399,52,734,77"/>
-<area shape="rect" id="node10" href="#randomPerfTabs.RandomStdPerformanceGenerator" target="_top" title="Generates for a given standard RandomPerformanceTableau instance." alt="" coords="397,100,736,124"/>
+<area shape="rect" id="node2" href="#randomPerfTabs.Random3ObjectivesPerformanceGenerator" target="_top" title="Generator for new decision actions with random evaluation following a" alt="" coords="370,5,763,29"/>
+<area shape="rect" id="node3" href="#randomPerfTabs.RandomPerformanceGenerator" target="_top" title="Generics wrapper for generating new decision actions or performance tableaux" alt="" coords="5,52,324,77"/>
+<area shape="rect" id="node6" href="#randomPerfTabs.RandomCBPerformanceGenerator" target="_top" title="Generator of new decision actions with random evaluations using" alt="" coords="399,52,734,77"/>
+<area shape="rect" id="node10" href="#randomPerfTabs.RandomStdPerformanceGenerator" target="_top" title="Generator for genrating new decision actions from a" alt="" coords="397,100,736,124"/>
 </map></dd>
 </dl>
 </li>
@@ -5019,8 +5019,8 @@ influential compared to the historical data.</p>
 <dt id="randomPerfTabs.Random3ObjectivesPerformanceGenerator">
 <em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">Random3ObjectivesPerformanceGenerator</code><span class="sig-paren">(</span><em>argPerfTab</em>, <em>actionNamePrefix='a'</em>, <em>instanceCounter=0</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#Random3ObjectivesPerformanceGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.Random3ObjectivesPerformanceGenerator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#randomPerfTabs.RandomPerformanceGenerator" title="randomPerfTabs.RandomPerformanceGenerator"><code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.RandomPerformanceGenerator</span></code></a></p>
-<p>Generates and/or new decision actions with random evaluation for a
-given Random3ObjectivesPerformanceTableau instance.</p>
+<p>Generator for new decision actions with random evaluation following a
+given Random3ObjectivesPerformanceTableau model.</p>
 </dd></dl>
 
 <dl class="class">
@@ -5221,7 +5221,8 @@ academic performance tableau.</p>
 <dt id="randomPerfTabs.RandomCBPerformanceGenerator">
 <em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomCBPerformanceGenerator</code><span class="sig-paren">(</span><em>argPerfTab</em>, <em>actionNamePrefix='a'</em>, <em>instanceCounter=None</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomCBPerformanceGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomCBPerformanceGenerator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#randomPerfTabs.RandomPerformanceGenerator" title="randomPerfTabs.RandomPerformanceGenerator"><code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.RandomPerformanceGenerator</span></code></a></p>
-<p>Instantiates a generator of new decision actions with associated random evaluations using the model parameters provided by a given RandomCBPerformanceTableau instance.</p>
+<p>Generator of new decision actions with random evaluations using
+the model parameters provided by a given RandomCBPerformanceTableau instance.</p>
 </dd></dl>
 
 <dl class="class">
@@ -5335,7 +5336,8 @@ Cost versus Benefit oriented performance tableaux.</p>
 <dt id="randomPerfTabs.RandomPerformanceGenerator">
 <em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomPerformanceGenerator</code><span class="sig-paren">(</span><em>argPerfTab</em>, <em>actionNamePrefix='a'</em>, <em>instanceCounter=None</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomPerformanceGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomPerformanceGenerator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
-<p>Wrapper for generating new decision actions with random evaluation for a given RandomPerformanceTableau instance.</p>
+<p>Generics wrapper for generating new decision actions or performance tableaux
+with random evaluations generated with a given RandomPerformanceTableau model.</p>
 <dl class="method">
 <dt id="randomPerfTabs.RandomPerformanceGenerator.randomActions">
 <code class="descname">randomActions</code><span class="sig-paren">(</span><em>nbrOfRandomActions=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomPerformanceGenerator.randomActions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomPerformanceGenerator.randomActions" title="Permalink to this definition">¶</a></dt>
@@ -5507,7 +5509,8 @@ random performance tableau.</p>
 <dt id="randomPerfTabs.RandomStdPerformanceGenerator">
 <em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomStdPerformanceGenerator</code><span class="sig-paren">(</span><em>argPerfTab</em>, <em>actionNamePrefix='a'</em>, <em>instanceCounter=0</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomStdPerformanceGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomStdPerformanceGenerator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#randomPerfTabs.RandomPerformanceGenerator" title="randomPerfTabs.RandomPerformanceGenerator"><code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.RandomPerformanceGenerator</span></code></a></p>
-<p>Generates for a given standard RandomPerformanceTableau instance.</p>
+<p>Generator for genrating new decision actions from a
+given &lt;RandomPerformanceTableau&gt; model.</p>
 </dd></dl>
 
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>
