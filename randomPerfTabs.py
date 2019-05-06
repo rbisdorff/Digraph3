@@ -542,7 +542,8 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
     Specialization of the PerformanceTableau class for generating a temporary
     academic performance tableau.
 
-    Random generator for performances of a number Of Students in different academic courses.
+    Random generator for performances of a number of students
+    in different academic courses.
     
     *Parameters*:
         * number of students,
