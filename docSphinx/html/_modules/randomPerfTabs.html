@@ -368,8 +368,8 @@
 
 <div class="viewcode-block" id="RandomPerformanceGenerator"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomPerformanceGenerator">[docs]</a><span class="k">class</span> <span class="nc">RandomPerformanceGenerator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generics wrapper for generating new decision actions or performance tableaux</span>
-<span class="sd">    with random evaluations generated with a given RandomPerformanceTableau model.</span>
+<span class="sd">    Generic wrapper for generating new decision actions or performance tableaux</span>
+<span class="sd">    with random evaluations generated with a given performance tableau model.</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span><span class="n">actionNamePrefix</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span>\
@@ -1819,6 +1819,10 @@
 <span class="sd">        * vetoProbability := x in ]0.0-1.0[ (0.5 default), probability that a cardinal criterion shows a veto preference discrimination threshold.</span>
 <span class="sd">        * Debug := True / False (default)</span>
 
+<span class="sd">    .. warning::</span>
+
+<span class="sd">        Minimal number required of criteria is 3!</span>
+
 <span class="sd">    &gt;&gt;&gt; from randomPerfTabs import Random3ObjectivesPerformanceTableau</span>
 <span class="sd">    &gt;&gt;&gt; t = Random3ObjectivesPerformanceTableau(numberOfActions=5,numberOfCriteria=3,seed=1)</span>
 <span class="sd">    &gt;&gt;&gt; t</span>
@@ -2753,7 +2757,7 @@
 <span class="sd">        * If numberOfCriteria == None, a uniform random number between 5 and 21 of cost or benefit criteria. Cost criteria have probability 1/3, whereas benefit criteria respectively 2/3 probability to be generated. However, at least one criterion of each kind is always instantiated.</span>
 <span class="sd">        * weightDistribution := {&#39;equiobjectives&#39;|&#39;fixed&#39;|&#39;random&#39;|&#39;equisignificant&#39;} By default, the sum of significance of the cost criteria is set equal to the sum of the significance of the benefit criteria. </span>
 <span class="sd">        * Default weightScale for &#39;random&#39; weightDistribution is 1 - numberOfCriteria.</span>
-<span class="sd">        * If NegativeWeights = True (False=defaul), the performance evaluation of the criteria with a &#39;min&#39; preference direction will be positive, otherwise they will be negative.</span>
+<span class="sd">        * If NegativeWeights = True | False (default), the performance evaluation of the criteria with a &#39;min&#39; preference direction will be positive, otherwise they will be negative.</span>
 <span class="sd">        * Parameter commonScale is not used. The scale of cost criteria is cardinal or ordinal (0-10) with probability 1/4, respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal with probabilities 2/3, respectively 1/3.</span>
 <span class="sd">        * All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.</span>
 <span class="sd">        * commonThresholds parameter is not used. Preference discrimination is specified as percentiles of concerned performance differences (see below).</span>
@@ -2761,7 +2765,7 @@
 
 <span class="sd">    .. warning::</span>
 
-<span class="sd">        Minimal number of decision actions required is 3 !</span>
+<span class="sd">        Minimal number required of criteria is 2, and minimal number required of decision actions is 3 !</span>
 <span class="sd">    </span>
 <span class="sd">    &gt;&gt;&gt; from randomPerfTabs import RandomCBPerformanceTableau</span>
 <span class="sd">    &gt;&gt;&gt; t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=3,seed=1)</span>

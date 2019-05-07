@@ -295,7 +295,7 @@ with main <a class="reference external" href="techDoc.html#votingProfiles.Linear
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#randomperftabs-label"><span class="std std-ref">randomPerfTabs module</span></a></dt>
 <dd><p class="first">Various implemented random performance tableau models.</p>
-<img src="_images/inheritance-101965eb122a4a7e2aa254000d2b2fe53ef94f04.png" alt="Inheritance diagram of randomPerfTabs" usemap="#inheritance4442f81dbd" class="inheritance"/>
+<img src="_images/inheritance-78ffd809000567646ec4deaa9612f2493132f541.png" alt="Inheritance diagram of randomPerfTabs" usemap="#inheritance4442f81dbd" class="inheritance"/>
 <map id="inheritance4442f81dbd" name="inheritance4442f81dbd">
 <area shape="rect" id="node1" href="#perfTabs.PerformanceTableau" target="_top" title="In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` class provides a generic **performance table model**. A given object of this class consists in:" alt="" coords="62,241,267,265"/>
 <area shape="rect" id="node4" href="#randomPerfTabs.Random3ObjectivesPerformanceTableau" target="_top" title="Specialization of the PerformanceTableau" alt="" coords="378,147,755,171"/>
@@ -304,7 +304,7 @@ with main <a class="reference external" href="techDoc.html#votingProfiles.Linear
 <area shape="rect" id="node8" href="#randomPerfTabs.RandomPerformanceTableau" target="_top" title="Specialization of the generic :py:class:`perftabs.PerformanceTableau` class for generating a temporary random performance tableau." alt="" coords="414,288,719,313"/>
 <area shape="rect" id="node9" href="#randomPerfTabs.RandomRankPerformanceTableau" target="_top" title="Specialization of the PerformanceTableau class for generating a temporary" alt="" coords="399,336,734,360"/>
 <area shape="rect" id="node2" href="#randomPerfTabs.Random3ObjectivesPerformanceGenerator" target="_top" title="Generator for new decision actions with random evaluation following a" alt="" coords="370,5,763,29"/>
-<area shape="rect" id="node3" href="#randomPerfTabs.RandomPerformanceGenerator" target="_top" title="Generics wrapper for generating new decision actions or performance tableaux" alt="" coords="5,52,324,77"/>
+<area shape="rect" id="node3" href="#randomPerfTabs.RandomPerformanceGenerator" target="_top" title="Generic wrapper for generating new decision actions or performance tableaux" alt="" coords="5,52,324,77"/>
 <area shape="rect" id="node6" href="#randomPerfTabs.RandomCBPerformanceGenerator" target="_top" title="Generator of new decision actions with random evaluations using" alt="" coords="399,52,734,77"/>
 <area shape="rect" id="node10" href="#randomPerfTabs.RandomStdPerformanceGenerator" target="_top" title="Generator for genrating new decision actions from a" alt="" coords="397,100,736,124"/>
 </map></dd>
@@ -5099,6 +5099,10 @@ on each of the three objectives.</p>
 </ul>
 </dd>
 </dl>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Minimal number required of criteria is 3!</p>
+</div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
@@ -5239,7 +5243,7 @@ Cost versus Benefit oriented performance tableaux.</p>
 <li>If numberOfCriteria == None, a uniform random number between 5 and 21 of cost or benefit criteria. Cost criteria have probability 1/3, whereas benefit criteria respectively 2/3 probability to be generated. However, at least one criterion of each kind is always instantiated.</li>
 <li>weightDistribution := {‘equiobjectives’|’fixed’|’random’|’equisignificant’} By default, the sum of significance of the cost criteria is set equal to the sum of the significance of the benefit criteria.</li>
 <li>Default weightScale for ‘random’ weightDistribution is 1 - numberOfCriteria.</li>
-<li>If NegativeWeights = True (False=defaul), the performance evaluation of the criteria with a ‘min’ preference direction will be positive, otherwise they will be negative.</li>
+<li>If NegativeWeights = True | False (default), the performance evaluation of the criteria with a ‘min’ preference direction will be positive, otherwise they will be negative.</li>
 <li>Parameter commonScale is not used. The scale of cost criteria is cardinal or ordinal (0-10) with probability 1/4, respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal with probabilities 2/3, respectively 1/3.</li>
 <li>All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.</li>
 <li>commonThresholds parameter is not used. Preference discrimination is specified as percentiles of concerned performance differences (see below).</li>
@@ -5248,7 +5252,7 @@ Cost versus Benefit oriented performance tableaux.</p>
 </div></blockquote>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Minimal number of decision actions required is 3 !</p>
+<p class="last">Minimal number required of criteria is 2, and minimal number required of decision actions is 3 !</p>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -5337,8 +5341,8 @@ Cost versus Benefit oriented performance tableaux.</p>
 <dt id="randomPerfTabs.RandomPerformanceGenerator">
 <em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomPerformanceGenerator</code><span class="sig-paren">(</span><em>argPerfTab</em>, <em>actionNamePrefix='a'</em>, <em>instanceCounter=None</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomPerformanceGenerator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomPerformanceGenerator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
-<p>Generics wrapper for generating new decision actions or performance tableaux
-with random evaluations generated with a given RandomPerformanceTableau model.</p>
+<p>Generic wrapper for generating new decision actions or performance tableaux
+with random evaluations generated with a given performance tableau model.</p>
 <dl class="method">
 <dt id="randomPerfTabs.RandomPerformanceGenerator.randomActions">
 <code class="descname">randomActions</code><span class="sig-paren">(</span><em>nbrOfRandomActions=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomPerformanceGenerator.randomActions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomPerformanceGenerator.randomActions" title="Permalink to this definition">¶</a></dt>

@@ -321,8 +321,8 @@ class RandomPerformanceTableau(PerformanceTableau):
 
 class RandomPerformanceGenerator(object):
     """
-    Generics wrapper for generating new decision actions or performance tableaux
-    with random evaluations generated with a given RandomPerformanceTableau model.
+    Generic wrapper for generating new decision actions or performance tableaux
+    with random evaluations generated with a given performance tableau model.
     
     """
     def __init__(self,argPerfTab,actionNamePrefix='a',\
@@ -1772,6 +1772,10 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         * vetoProbability := x in ]0.0-1.0[ (0.5 default), probability that a cardinal criterion shows a veto preference discrimination threshold.
         * Debug := True / False (default)
 
+    .. warning::
+
+        Minimal number required of criteria is 3!
+
     >>> from randomPerfTabs import Random3ObjectivesPerformanceTableau
     >>> t = Random3ObjectivesPerformanceTableau(numberOfActions=5,numberOfCriteria=3,seed=1)
     >>> t
@@ -2706,7 +2710,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         * If numberOfCriteria == None, a uniform random number between 5 and 21 of cost or benefit criteria. Cost criteria have probability 1/3, whereas benefit criteria respectively 2/3 probability to be generated. However, at least one criterion of each kind is always instantiated.
         * weightDistribution := {'equiobjectives'|'fixed'|'random'|'equisignificant'} By default, the sum of significance of the cost criteria is set equal to the sum of the significance of the benefit criteria. 
         * Default weightScale for 'random' weightDistribution is 1 - numberOfCriteria.
-        * If NegativeWeights = True (False=defaul), the performance evaluation of the criteria with a 'min' preference direction will be positive, otherwise they will be negative.
+        * If NegativeWeights = True | False (default), the performance evaluation of the criteria with a 'min' preference direction will be positive, otherwise they will be negative.
         * Parameter commonScale is not used. The scale of cost criteria is cardinal or ordinal (0-10) with probability 1/4, respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal with probabilities 2/3, respectively 1/3.
         * All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.
         * commonThresholds parameter is not used. Preference discrimination is specified as percentiles of concerned performance differences (see below).
@@ -2714,7 +2718,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
 
     .. warning::
 
-        Minimal number of decision actions required is 3 !
+        Minimal number required of criteria is 2, and minimal number required of decision actions is 3 !
     
     >>> from randomPerfTabs import RandomCBPerformanceTableau
     >>> t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=3,seed=1)
