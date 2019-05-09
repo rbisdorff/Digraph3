@@ -2419,7 +2419,7 @@ criteria |  'a1001' 'a1002' 'a1003' 'a1004' 'a1005' 'a1006' 'a1007' 'a1008' 'a10
    'c1'  |  -64.5   -20.3   -73.7   -95.1   -22.2   -50.9   -45.6   -51.5   -80.2   -77.5  
    'c2'  |  -68.0   -48.0   -89.0   -44.0   -47.0   -92.0   -44.0   -66.0   -72.0   -72.0  
 
-Among the 10 new incoming decision actions (see below), we recognize actions *a1001* and *a1010* we have mentioned in our introduction.
+Among the 10 new incoming decision actions (see below), we recognize actions *a1001* (see column 2) and *a1010* (see last column) we have mentioned in our introduction.
 
 The :py:class:`NormedQuantilesRatingDigraphdigraph` instance's *actions* dictionary also contains the closed lower limits of the four quartile classes: *m1* = [0.0-0.25[, *m2* = [0.25-0.5[, *m3* =[0.5 - 0.75[, *m4* = [0.75 - 1.0[.
 
