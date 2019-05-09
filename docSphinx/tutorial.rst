@@ -2371,7 +2371,7 @@ The constructor requires a valid :py:class:`performanceQuantiles.PerformanceQuan
 
    It is important to notice that the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class, contrary to the generic :py:class:`outrankingDigraphs.OutrankingDigraph` class, does not inherit from the generic :py:class:`perfTabs.PerformanceTableau` class, but instead from the :py:class:`performanceQuantiles.PerformanceQuantiles` class. The **actions** in such a :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class instance contain not only the newly given decision actions, but also the historical quantile profiles obtained from a given :py:class:`performanceQuantiles.PerformanceQuantiles` class instance, ie estimated quantile bins' performance limits from historical performance data.
 
-We reconsider the :code:`PerformanceQuantiles` object instance *pq* as computed in the previous section. Let *newActions* be 10 new random decision actions generated with the same random performance tableau model.
+We reconsider the :code:`PerformanceQuantiles` object instance *pq* as computed in the previous section. Let *newActions* be a list of 10 new random decision actions generated with the same random performance tableau model.
 
     >>> from sortingDigraphs import NormedQuantilesRatingDigraph
     >>> newActions = rpg.randomActions(10)
@@ -2439,7 +2439,7 @@ The main run time (see Lines 23-29 of the object description above) is spent by 
 
 The actual rating procedure will rely on a complete ranking of the new decision actions as well ass the quantile class limits obtained from the corresponding bipolar valued outranking digraph. Two efficient and scalable ranking rules, the **Copeland** and its valued version, the **Netflows** rule may be used for this purpose. The *rankingRule* parameter allows to choose one of both. With *rankingRule='best'* (see Line 2 above) the :code:`NormedQuantilesRatingDigraph` constructor will choose the ranking rule that results in the highest ordinal correlation with the given outranking relation (see [BIS-2012]_).
 
-In this rating example, the Copeland rule appears to be the more appropriate ranking rule.
+In this rating example, the *Copeland* rule appears to be the more appropriate ranking rule.
 
     >>> print('Ranking rule        :', nqr.rankingRule)
     Ranking rule        : Copeland
@@ -2455,7 +2455,7 @@ In this rating example, the Copeland rule appears to be the more appropriate ran
 
 We achieve here a linear ranking without ties (from best to worst) of the digraph's actions, ie including the new decision actions as well as the quartile limits *m1* to *m4*, which is very close in an ordinal sense (*tau* = 0.95) to the underlying valued outranking relation.
 
-The eventual rating procedure is based on the lower quantile limits, such that we may collect the quartile classes' contents in increasing order of the quartiles lower limits.
+The eventual rating procedure is based on the lower quantile limits, such that we may collect the quartile classes' contents in increasing order of the *quartiles* ' lower limits.
 
     >>> print('Rating categories:', nqr.ratingCategories)
     Rating categories: OrderedDict([
