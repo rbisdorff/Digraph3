@@ -376,36 +376,56 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
         return html
 
     def _interpolateQuantile(self,x,newq,newp):
-##        if self.Debug:
-##            print(x,newq,newp)
+        Debug = self.Debug
+        #Debug = True
+        if Debug:
+            print('==>>?')
+            print('x')
+            print(x)
+            print('newq')
+            print(newq)
+            print('newp')
+            print(newp)
         np = len(newp)
         i = 0
         while i < np:
+            if Debug:
+                print(i)
             if x < newp[i]:
-                ix = i
-##                if self.Debug:
-##                    print(ix, newp[ix-1],newq[ix-1],newp[ix],newq[ix])
-##                            # nsq[0] 
-                diffq = newp[ix]-newp[ix-1]
-                if diffq > 0.0:
-                    return newq[ix-1]+ (x-newp[ix-1])/diffq*(newq[ix]-newq[ix-1])
+                ix = i + 1
+                if Debug:
+                    print('x < newp[i]', x, newp[i],ix, newp[i-1],newq[ix-1],newp[i],newq[ix])
+                            # nsq[0] 
+                diffp = newp[i]-newp[i-1]
+                if diffp > Decimal('0.0'):
+                    res = newq[ix-1]+ ((x-newp[i-1])/diffp)*(newq[ix]-newq[ix-1])
                 else: # avoid dividing by 0
-                    return newq[ix-1]
+                    res = newq[ix-1]
+                if Debug:
+                    print('res', res)
+                return res
                 i = np
-            elif x == newp[i]:
-                ix = i
-##                if self.Debug:
-##                    print(ix, newp[ix],newq[ix])
-                return newq[ix]
+            elif x == newp[i+1]:
+                ix = i+1
+                res = newq[ix]
+                if Debug:
+                    print('x == newp[i]',ix, newp[ix],newq[ix],res)
+                return res
+                
             else: # x > newp[i]
                 ix = i
-                i += 1       
+                i += 1
+                if Debug:
+                    print('x > newp[i]', i,ix)
 
     def _updateCriterionQuantiles(self,g,newValues,historySize=None):
         """
         See lecture about the iq-agent of the MICS-3 Computational Statistics Course.
         """
-        self.Debug = False
+        Debug = self.Debug
+        #Debug = True
+        if Debug:
+            print('==>>', g,newValues)
         from collections import OrderedDict
         # get present state of the quantiles
         p = self.quantilesFrequencies
@@ -417,7 +437,7 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
         else:
             t = historySize
         oldfrq = [p[i]*(t+1) for i in range(np)]
-        if self.Debug:
+        if Debug:
             print(q)
             print(p)
             print(cdf)
@@ -433,8 +453,8 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
                     nv.append(x)
         nv.sort()
         nt = len(nv)
-        if self.Debug:
-            print(nv,nt)
+        if Debug:
+            print('nv,nt', nv,nt)
         ###
         if nt > 0: # there may be solely missing values observed on g
             # Init results newq and newp
@@ -496,19 +516,19 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
                     newp.append(newp[-1]+1)
                 else:
                     newp[-1] += 1
-            if self.Debug:
+            if Debug:
                 self.newp = newp
                 self.newq = newq
                 print(newp)
                 print(newq)
                     
             # renormalising frequencies
-            if self.Debug:
+            if Debug:
                 print('#inserts = %d' % ins)
             t += len(nv)
             for i in range(len(newq)):
                 newp[i] /= newp[-1]
-            if self.Debug:
+            if Debug:
                 print('p \t q \ (t+1)*q')
                 for i in range(len(newq)):
                     print('%.3f \t %.2f \t %.2f' % (newp[i],newq[i],newp[i]*(t)) )
@@ -516,15 +536,15 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
 
             # compute new state by interpolation
             nstate = {p[0]:newq[0]}
-            if self.Debug:
-                print(p)
+            if Debug:
+                print('==>> ',p)
             np = len(p)
             for i in range(1,np):
                 x = p[i]
-                if self.Debug:
+                if Debug:
                     print(x)
                 nstate[x] = self._interpolateQuantile(x,newq,newp)
-            if self.Debug:
+            if Debug:
                 print(nstate)
             
             # store new state
