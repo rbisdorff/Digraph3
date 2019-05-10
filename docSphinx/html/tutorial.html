@@ -3629,7 +3629,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <div class="section" id="id35">
 <h3><a class="toc-backref" href="#id201">Introduction</a><a class="headerlink" href="#id35" title="Permalink to this headline">¶</a></h3>
 <p>In this tutorial we address the problem of <strong>rating multiple criteria performances</strong> of a set of potential decision actions with respect to empirical order statistics, ie performance quantiles learned from historical performance data gathered from similar decision actions observed in the past (see <a class="reference internal" href="#cpstat-l5" id="id36">[CPSTAT-L5]</a>).</p>
-<p>To illustrate the decision problem we face, consider for a moment that, in a given decision aid study, we observe, for instance in the Table below, the multi-criteria performances of two potential decision actions, named <em>a1001</em> and <em>a1010</em>, marked on 7 <strong>incommensurable</strong> preference criteria: 2 <strong>costs</strong> criteria <em>c1</em> and <em>c2</em> (to <strong>minimize</strong>) and 6 <strong>benefit</strong> criteria <em>b1</em> to <em>b5</em> (to <strong>maximize</strong>).</p>
+<p>To illustrate the decision problem we face, consider for a moment that, in a given decision aid study, we observe, for instance in the Table below, the multi-criteria performances of two potential decision actions, named <em>a1001</em> and <em>a1010</em>, marked on 7 <strong>incommensurable</strong> preference criteria: 2 <strong>costs</strong> criteria <em>c1</em> and <em>c2</em> (to <strong>minimize</strong>) and 6 <strong>benefits</strong> criteria <em>b1</em> to <em>b5</em> (to <strong>maximize</strong>).</p>
 <blockquote>
 <div><table border="1" class="docutils">
 <colgroup>
@@ -3673,28 +3673,29 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <td></td>
 </tr>
 <tr class="row-even"><td><em>a1001</em></td>
-<td>5</td>
-<td>6</td>
-<td>7</td>
-<td>9.0</td>
-<td>3</td>
-<td>-64.5</td>
-<td>-68.0</td>
+<td>37.0</td>
+<td>2</td>
+<td>2</td>
+<td>61.0</td>
+<td>31.0</td>
+<td>-4</td>
+<td>-40.0</td>
 </tr>
 <tr class="row-odd"><td><em>a1010</em></td>
+<td>32.0</td>
+<td>9</td>
 <td>6</td>
-<td>6</td>
-<td>7</td>
-<td>88.0</td>
-<td>8</td>
-<td>-77.5</td>
-<td>-72.0</td>
+<td>55.0</td>
+<td>51.0</td>
+<td>-4</td>
+<td>-35.0</td>
 </tr>
 </tbody>
 </table>
 </div></blockquote>
-<p>The performances on the <em>costs</em> criteria <em>c1</em> and <em>c2</em> are measured on a cardinal negative scale from -100.00 (worst) to 0.0 (best). The performances on the benefit criteria <em>b1</em>, <em>b2</em>, <em>b3</em> and <em>b5</em> are measured on an ordinal scale from 0 (worst) to 10 (best), wheras the performances on benefit criteria <em>b4</em> are measured on a cardinal scale from 0.0 (worst) to 100.0 (best). The importance (sum of weights) of the <em>costs</em> criteria is <strong>equal</strong> to the importance (sum of weights) of the benefit criteria taken all together.</p>
-<p>The non trivial decision problem we now face here, is to decide, how the multi-criteria performances of <em>a1001</em>, respectively <em>a1010</em>,  may be rated (<strong>excellent</strong> ? <strong>good</strong> ?, or <strong>fair</strong> ?; perhaps even, <strong>weak</strong> ? or <strong>very weak</strong> ?) in an <strong>order statistical sense</strong>, when compared with all potential similar multi-criteria performances one has already encountered in the past.</p>
+<p>The performances on <em>benefits</em> criteria <em>b1</em>, <em>b4</em> and <em>b5</em> are measured on a cardinal scale from 0.0 (worst) to 100.0 (best) whereas, the performances on the <em>benefits</em> criteria <em>b2</em> and <em>b3</em>  and on the <em>cost</em> criterion <em>c1</em> are measured on an ordinal scale from 0 (worst) to 10 (best), respectively -10 (worst) to 0 (best). The performances on the <em>cost</em> criterion <em>c2</em> are again measured on a cardinal negative scale from -100.00 (worst) to 0.0 (best).</p>
+<p>The importance (sum of weights) of the <em>costs</em> criteria is <strong>equal</strong> to the importance (sum of weights) of the <em>benefits</em> criteria taken all together.</p>
+<p>The non trivial decision problem we now face here, is to decide, how the multiple criteria performances of <em>a1001</em>, respectively <em>a1010</em>,  may be rated (<strong>excellent</strong> ? <strong>good</strong> ?, or <strong>fair</strong> ?; perhaps even, <strong>weak</strong> ? or <strong>very weak</strong> ?) in an <strong>order statistical sense</strong>, when compared with all potential similar multi-criteria performances one has already encountered in the past.</p>
 <p>To solve this <em>absolute</em> rating decision problem, first, we need to estimate multi-criteria <strong>performance quantiles</strong> from historical records.</p>
 </div>
 <div class="section" id="incremental-learning-of-historical-performance-quantiles">
@@ -3728,7 +3729,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nbrActions</span><span class="o">=</span><span class="mi">900</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">7</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">seed</span> <span class="o">=</span> <span class="mi">105</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">seed</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>\
 <span class="gp">... </span>              <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span>\
@@ -3762,16 +3763,16 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <span class="go">Costs</span>
 <span class="go">criteria | weights |  &#39;0.00&#39;   &#39;0.25&#39;   &#39;0.50&#39;   &#39;0.75&#39;   &#39;1.00&#39;</span>
 <span class="go">---------|-------------------------------------------------------</span>
-<span class="go">   &#39;c1&#39;  |    5    | -95.64   -67.83   -48.33   -29.21    -2.05</span>
-<span class="go">   &#39;c2&#39;  |    5    | -99.16   -68.52   -49.66   -29.61    -1.84</span>
+<span class="go">   &#39;c1&#39;  |    5    | -10.00    -7.00    -5.00    -3.00     0.0</span>
+<span class="go">   &#39;c2&#39;  |    5    | -96.37   -70.65   -50.10   -30.00    -1.43</span>
 <span class="go">Benefits</span>
 <span class="go">criteria | weights | &#39;0.00&#39;   &#39;0.25&#39;   &#39;0.50&#39;   &#39;0.75&#39;    &#39;1.00&#39;</span>
 <span class="go">---------|-------------------------------------------------------</span>
-<span class="go">   &#39;b1&#39;  |    2    |    0       3        5        7        10</span>
+<span class="go">   &#39;b1&#39;  |    2    |  1.99    29.82    49,44     70.73    99.83</span>
 <span class="go">   &#39;b2&#39;  |    2    |    0       3        5        7        10</span>
 <span class="go">   &#39;b3&#39;  |    2    |    0       3        5        7        10</span>
-<span class="go">   &#39;b4&#39;  |    2    |  0.56    29.68    49.27    70.20     98.67</span>
-<span class="go">   &#39;b5&#39;  |    2    |    0       3        5        7        10</span>
+<span class="go">   &#39;b4&#39;  |    2    |  3.27    30.10    50.82     70.89    98.05</span>
+<span class="go">   &#39;b5&#39;  |    2    |  0.85    29.08    48.55     69.98    97.56</span>
 </pre></div>
 </td></tr></table></div>
 <p>Both objectives are <strong>equi-important</strong>; the weight (10) of the <em>costs</em> criteria balance the sum of weights (10) of the <em>benefit</em> criteria (see column 2). The preference direction of the <em>costs</em> criteria <em>c1</em> and <em>c2</em> is <strong>negative</strong>; the lesser the costs the better it is, wheras all the <em>benefit</em> criteria <em>b1</em> to <em>b5</em> show <strong>positive</strong> preference directions, ie the higher the benefits the better it is. The columns entitled ‘0.0’, resp. ‘1.0’ show the quartile <em>Q0</em>, resp. <em>Q4</em>, ie the <strong>worst</strong>, resp. <strong>best</strong> performance observed so far on each criterion. Column ‘0.5’ shows the <strong>median</strong> (<em>Q2</em>) observed on the criteria.</p>
@@ -3849,7 +3850,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <span class="go"># Quantile profiles : 4</span>
 <span class="go"># New actions       : 10</span>
 <span class="go">Size                : 93</span>
-<span class="go">Determinateness     : 50.962</span>
+<span class="go">Determinateness (%)     : 52.17</span>
 <span class="go">Attributes: [&#39;runTimes&#39;,&#39;objectives&#39;,&#39;criteria&#39;,</span>
 <span class="go"> &#39;LowerClosed&#39;,&#39;quantilesFrequencies&#39;,&#39;limitingQuantiles&#39;,</span>
 <span class="go"> &#39;historySizes&#39;,&#39;cdf&#39;,&#39;name&#39;,&#39;newActions&#39;,&#39;evaluation&#39;,</span>
@@ -3861,12 +3862,12 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <span class="go"> &#39;relationOrig&#39;,&#39;rankingByBestChoosing&#39;]</span>
 <span class="go">*------  Constructor run times (in sec.) ------*</span>
 <span class="go">#Threads         : 1</span>
-<span class="go">Total time       : 0.01299</span>
-<span class="go">Data input       : 0.00030</span>
-<span class="go">Quantile classes : 0.00004</span>
+<span class="go">Total time       : 0.01636</span>
+<span class="go">Data input       : 0.00051</span>
+<span class="go">Quantile classes : 0.00006</span>
 <span class="go">Compute profiles : 0.00005</span>
-<span class="go">Compute relation : 0.01146</span>
-<span class="go">Compute rating   : 0.00114</span>
+<span class="go">Compute relation : 0.01420</span>
+<span class="go">Compute rating   : 0.00154</span>
 </pre></div>
 </td></tr></table></div>
 <p>Data input to the <a class="reference internal" href="techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph" title="sortingDigraphs.NormedQuantilesRatingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.NormedQuantilesRatingDigraph</span></code></a> class constructor (see Line 3) are a valid PerformanceQuantiles object <em>pq</em> and a compatible list <em>newActions</em> of new decision actions generated from the same random origin.</p>
@@ -3885,13 +3886,13 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <span class="go">*----  performance tableau -----*</span>
 <span class="go">criteria |  &#39;a1001&#39; &#39;a1002&#39; &#39;a1003&#39; &#39;a1004&#39; &#39;a1005&#39; &#39;a1006&#39; &#39;a1007&#39; &#39;a1008&#39; &#39;a1009&#39; &#39;a1010&#39;</span>
 <span class="go">---------|---------------------------------------------------------------------------------</span>
-<span class="go">   &#39;b1&#39;  |    5.0     5.0     8.0     6.0     8.0     3.0     5.0     9.0     7.0     6.0</span>
-<span class="go">   &#39;b2&#39;  |    6.0     3.0     7.0     4.0     3.0     8.0     5.0     3.0     3.0     6.0</span>
-<span class="go">   &#39;b3&#39;  |    7.0     4.0     7.0     4.0     5.0     6.0     5.0     7.0     4.0     7.0</span>
-<span class="go">   &#39;b4&#39;  |    9.0    80.0    12.0    16.0    48.0    65.0    55.0    28.0  -999.0    88.0</span>
-<span class="go">   &#39;b5&#39;  |    3.0     1.0     8.0     9.0     5.0     7.0     1.0     8.0     4.0     8.0</span>
-<span class="go">   &#39;c1&#39;  |  -64.5   -20.3   -73.7   -95.1   -22.2   -50.9   -45.6   -51.5   -80.2   -77.5</span>
-<span class="go">   &#39;c2&#39;  |  -68.0   -48.0   -89.0   -44.0   -47.0   -92.0   -44.0   -66.0   -72.0   -72.0</span>
+<span class="go">   &#39;b1&#39;  |   37.0    27.0    24.0    16.0    42.0    33.0    39.0    64.0    42.0    32.0</span>
+<span class="go">   &#39;b2&#39;  |    2.0     5.0     8.0     3.0     3.0     3.0     6.0     5.0     4.0     9.0</span>
+<span class="go">   &#39;b3&#39;  |    2.0     4.0     2.0     1.0     6.0     3.0     2.0     6.0     6.0     6.0</span>
+<span class="go">   &#39;b4&#39;  |   61.0    54.0    74.0    25.0    28.0    20.0    20.0    49.0    44.0    55.0</span>
+<span class="go">   &#39;b5&#39;  |   31.0    63.0    61.0    48.0    30.0    39.0    16.0    96.0    57.0    51.0</span>
+<span class="go">   &#39;c1&#39;  |   -4.0    -6.0    -8.0    -5.0    -1.0    -5.0    -1.0    -6.0    -6.0    -4.0</span>
+<span class="go">   &#39;c2&#39;  |  -40.0   -23.0   -37.0   -37.0   -24.0   -27.0   -73.0   -43.0   -94.0   -35.0</span>
 </pre></div>
 </td></tr></table></div>
 <p>Among the 10 new incoming decision actions (see below), we recognize actions <em>a1001</em> (see column 2) and <em>a1010</em> (see last column) we have mentioned in our introduction.</p>
@@ -3910,13 +3911,13 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <span class="go">*----  Quartiles limit profiles -----*</span>
 <span class="go">criteria |   &#39;m1&#39;   &#39;m2&#39;   &#39;m3&#39;   &#39;m4&#39;</span>
 <span class="go">---------|----------------------------</span>
-<span class="go">   &#39;b1&#39;  |   0.0    1.7    3.7    5.7</span>
-<span class="go">   &#39;b2&#39;  |   0.0    1.6    3.9    5.7</span>
-<span class="go">   &#39;b3&#39;  |   0.0    1.6    3.5    5.5</span>
-<span class="go">   &#39;b4&#39;  |   0.6   29.0   47.8   65.3</span>
-<span class="go">   &#39;b5&#39;  |   0.0    1.6    3.5    5.5</span>
-<span class="go">   &#39;c1&#39;  | -96.9  -72.4  -53.8  -31.3</span>
-<span class="go">   &#39;c2&#39;  | -99.2  -66.1  -49.0  -28.5</span>
+<span class="go">   &#39;b1&#39;  |    2.0   28.8   49.6   75.3</span>
+<span class="go">   &#39;b2&#39;  |    0.0    2.9    4.9    6.7</span>
+<span class="go">   &#39;b3&#39;  |    0.0    2.9    4.9    8.0</span>
+<span class="go">   &#39;b4&#39;  |    3.3   35.9   58.6   72.0</span>
+<span class="go">   &#39;b5&#39;  |    0.8   32.8   48.1   69.7</span>
+<span class="go">   &#39;c1&#39;  |  -10.0   -7.4   -5.4   -3.4</span>
+<span class="go">   &#39;c2&#39;  |  -96.4  -72.2  -52.3  -34.0</span>
 </pre></div>
 </td></tr></table></div>
 <p>The main run time (see Lines 23-29 of the object description above) is spent by the class constructor in computing a bipolar valued outranking relation on the extended actions set including both the new actions as well as the quartile class limits. In case of large volumes, ie many new decision actions and centile classes for instance, a multi-threading version may be used when multiple processing cores are available (see the technical description of the <a class="reference internal" href="techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph" title="sortingDigraphs.NormedQuantilesRatingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.NormedQuantilesRatingDigraph</span></code></a> class).</p>
@@ -3931,43 +3932,37 @@ play much a role, it would be perhaps better to decide to move to the most advan
  7
  8
  9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Ranking rule        :&#39;</span><span class="p">,</span> <span class="n">nqr</span><span class="o">.</span><span class="n">rankingRule</span><span class="p">)</span>
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Ranking rule        :&#39;</span><span class="p">,</span> <span class="n">nqr</span><span class="o">.</span><span class="n">rankingRule</span><span class="p">)</span>
 <span class="go">Ranking rule        : Copeland</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Actions ranking     :&#39;</span><span class="p">,</span> <span class="n">nqr</span><span class="o">.</span><span class="n">actionsRanking</span><span class="p">)</span>
 <span class="go">Actions ranking     : [</span>
-<span class="go">&#39;m4&#39;,</span>
-<span class="go">&#39;a1005&#39;, &#39;a1007&#39;, &#39;a1002&#39;, &#39;a1008&#39;, &#39;a1010&#39;, &#39;a1006&#39;, &#39;m3&#39;,</span>
-<span class="go">&#39;a1004&#39;, &#39;a1003&#39;, &#39;a1001&#39;, &#39;m2&#39;,</span>
-<span class="go">&#39;a1009&#39;, &#39;m1&#39;]</span>
+<span class="go">&#39;m4&#39;, &#39;a1005&#39;, &#39;a1010&#39;, &#39;a1008&#39;, &#39;a1002&#39;, &#39;a1006&#39;,</span>
+<span class="go">&#39;m3&#39;, &#39;a1003&#39;, &#39;a1001&#39;, &#39;a1007&#39;, &#39;a1004&#39;, &#39;a1009&#39;,</span>
+<span class="go">&#39;m2&#39;, &#39;m1&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Ranking correlation : </span><span class="si">%+.2f</span><span class="s1">&#39;</span> <span class="o">%</span>\
 <span class="gp">... </span>        <span class="p">(</span><span class="n">nqr</span><span class="o">.</span><span class="n">rankingCorrelation</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">])</span> <span class="p">)</span>
-<span class="go">Ranking correlation : +0.95</span>
+<span class="go">Ranking correlation : +0.94</span>
 </pre></div>
 </td></tr></table></div>
-<p>We achieve here a linear ranking without ties (from best to worst) of the digraph’s actions, ie including the new decision actions as well as the quartile limits <em>m1</em> to <em>m4</em>, which is very close in an ordinal sense (<em>tau</em> = 0.95) to the underlying valued outranking relation.</p>
+<p>We achieve here a linear ranking without ties (from best to worst) of the digraph’s actions, ie including the new decision actions as well as the quartile limits <em>m1</em> to <em>m4</em>, which is very close in an ordinal sense (<em>tau</em> = 0.94) to the underlying valued outranking relation.</p>
 <p>The eventual rating procedure is based on the lower quantile limits, such that we may collect the quartile classes’ contents in increasing order of the <em>quartiles</em> ‘ lower limits.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Rating categories:&#39;</span><span class="p">,</span> <span class="n">nqr</span><span class="o">.</span><span class="n">ratingCategories</span><span class="p">)</span>
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Rating categories:&#39;</span><span class="p">,</span> <span class="n">nqr</span><span class="o">.</span><span class="n">ratingCategories</span><span class="p">)</span>
 <span class="go">Rating categories: OrderedDict([</span>
-<span class="go"> (&#39;m1&#39;, [&#39;a1009&#39;]),</span>
-<span class="go"> (&#39;m2&#39;, [&#39;a1004&#39;, &#39;a1003&#39;, &#39;a1001&#39;]),</span>
-<span class="go"> (&#39;m3&#39;, [&#39;a1005&#39;, &#39;a1007&#39;, &#39;a1002&#39;, &#39;a1008&#39;, &#39;a1010&#39;, &#39;a1006&#39;])])</span>
+<span class="go">(&#39;m2&#39;, [&#39;a1003&#39;, &#39;a1001&#39;, &#39;a1007&#39;, &#39;a1004&#39;, &#39;a1009&#39;]),</span>
+<span class="go">(&#39;m3&#39;, [&#39;a1005&#39;, &#39;a1010&#39;, &#39;a1008&#39;, &#39;a1002&#39;, &#39;a1006&#39;])])</span>
 </pre></div>
 </td></tr></table></div>
-<p>We notice above that no new decision action is rated in the highest quartile class [0.75 - 1.0]. Indeed, the rating result is shown, in descending order, as follows.</p>
+<p>We notice above that no new decision action is rated in the lowest [0.0 - ‘.25[, respectively highest [0.75 - 1.0], quartile class . Indeed, the rating result is shown, in descending order, as follows.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
 <span class="go">*-------- Quartiles rating result ---------</span>
-<span class="go">[0.50 - 0.75[ [&#39;a1005&#39;, &#39;a1007&#39;, &#39;a1002&#39;, &#39;a1008&#39;, &#39;a1010&#39;, &#39;a1006&#39;]</span>
-<span class="go">[0.25 - 0.50[ [&#39;a1004&#39;, &#39;a1003&#39;, &#39;a1001&#39;]</span>
-<span class="go">[0.00 - 0.25[ [&#39;a1009&#39;]</span>
+<span class="go">[0.50 - 0.75[ [&#39;a1005&#39;, &#39;a1010&#39;, &#39;a1008&#39;, &#39;a1002&#39;, &#39;a1006&#39;]</span>
+<span class="go">[0.25 - 0.50[ [&#39;a1003&#39;, &#39;a1001&#39;, &#39;a1007&#39;, &#39;a1004&#39;, &#39;a1009&#39;]</span>
 </pre></div>
 </td></tr></table></div>
 <p>The same result may even more conviently be consulted in a browser view via a specialised heatmap format ( see <code class="xref py py-meth docutils literal"><span class="pre">perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap()</span></code> method.</p>
@@ -3978,12 +3973,11 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <a class="reference internal image-reference" href="_images/exampleIncRatDigraphTut.png"><img alt="usage example of Normed Quantiles Rating Digraph" src="_images/exampleIncRatDigraphTut.png" style="width: 550px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 22 </span><span class="caption-text">Heatmap of normed quartiles ranking</span></p>
 </div>
-<p>Due to the fact that the importance weight (10) of the two <em>cost</em> criteria <em>c1</em> and <em>c2</em> is balancing the sum of the five <em>benefit</em> criteria (10) <em>b1</em> to <em>b5</em>, the marginal <em>cost</em> criteria rankings are most correlated (<em>tau_c1</em> = +066. and <em>tau_c2</em> = +0.51) with the proposed ratings of the new decision actions.</p>
-<p>Using furthermore a specialised version of the <a class="reference internal" href="techDoc.html#weakOrders.WeakOrder.exportGraphViz" title="weakOrders.WeakOrder.exportGraphViz"><code class="xref py py-meth docutils literal"><span class="pre">weakOrders.WeakOrder.exportGraphViz()</span></code></a> method allows drawing the rating result in a Hasse diagram format.</p>
+<p>Using furthermore a specialised version of the <a class="reference internal" href="techDoc.html#weakOrders.WeakOrder.exportGraphViz" title="weakOrders.WeakOrder.exportGraphViz"><code class="xref py py-meth docutils literal"><span class="pre">weakOrders.WeakOrder.exportGraphViz()</span></code></a> method allows drawing the same rating result in a Hasse diagram format.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">exportRatingGraphViz</span><span class="p">()</span>
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">exportRatingGraphViz</span><span class="p">(</span><span class="s1">&#39;normedRatingResult&#39;</span><span class="p">)</span>
 <span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">  Exporting to quantilesRatingDigraph.dot</span>
 <span class="go">  dot -Grankdir=TB -Tpng quantilesRatingDigraph.dot -o quantilesRatingDigraph.png</span>
@@ -3993,7 +3987,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <a class="reference internal image-reference" href="_images/normedRatingDigraph.png"><img alt="usage example of Normed Quartiles Rating Digraph" src="_images/normedRatingDigraph.png" style="width: 500px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 23 </span><span class="caption-text">Normed quartiles rating digraph</span></p>
 </div>
-<p>We may now answer the <strong>normed rating decision problem</strong> stated at the beginning. Decision action <em>a1001</em> is rated in quartile <strong>Q2</strong> and action <em>a1010</em> in quartile <strong>Q3</strong> (see Table below). Indeed, the performances of decision action <em>a1001</em> were generated with a triangular law at <em>median</em> mode, whereas the performances of action <em>a1010</em> were generated with a <em>high</em> mode, ie higher benefits at higher costs.</p>
+<p>We may now answer the <strong>normed rating decision problem</strong> stated at the beginning. Decision action <em>a1001</em> is rated in quartile <strong>Q2</strong> and action <em>a1010</em> in quartile <strong>Q3</strong> (see Table below). Indeed, the performances of decision action <em>a1001</em> were generated with a triangular law at a <em>low</em> mode, i.e. low costs but also low benefits, whereas the performances of action <em>a1010</em> were generated with a <em>median</em> mode.</p>
 <blockquote>
 <div><table border="1" class="docutils">
 <colgroup>
@@ -4040,25 +4034,25 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <td></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><strong>Q1</strong></td>
+<tr class="row-even"><td><strong>Q2</strong></td>
 <td><em>a1001</em></td>
-<td>5</td>
-<td>6</td>
-<td>7</td>
-<td>9.0</td>
-<td>3</td>
-<td>-64.5</td>
-<td>-68.0</td>
+<td>37.0</td>
+<td>2</td>
+<td>2</td>
+<td>61.0</td>
+<td>31.0</td>
+<td>-4.0</td>
+<td>-40.0</td>
 </tr>
 <tr class="row-odd"><td><strong>Q3</strong></td>
 <td><em>a1010</em></td>
+<td>32.0</td>
+<td>9</td>
 <td>6</td>
-<td>6</td>
-<td>7</td>
-<td>88.0</td>
-<td>8</td>
-<td>-77.5</td>
-<td>-72.0</td>
+<td>55.0</td>
+<td>51.0</td>
+<td>-4.0</td>
+<td>-35.0</td>
 </tr>
 </tbody>
 </table>
@@ -4077,13 +4071,13 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nqr1</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq1</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nqr1</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
 <span class="go">*-------- Deciles rating result ---------</span>
-<span class="go">]0.50 - 0.60] [&#39;a1002&#39;, &#39;a1005&#39;, &#39;a1007&#39;]</span>
-<span class="go">]0.40 - 0.50] [&#39;a1006&#39;, &#39;a1008&#39;, &#39;a1010&#39;]</span>
-<span class="go">]0.30 - 0.40] [&#39;a1004&#39;]</span>
-<span class="go">]0.20 - 0.30] [&#39;a1001&#39;, &#39;a1003&#39;, &#39;a1009&#39;]</span>
+<span class="go">]0.60 - 0.70] [&#39;a1005&#39;, &#39;a1010&#39;]</span>
+<span class="go">]0.50 - 0.60] [&#39;a1008&#39;, &#39;a1002&#39;]</span>
+<span class="go">]0.40 - 0.50] [&#39;a1006&#39;, &#39;a1003&#39;, &#39;a1001&#39;, &#39;a1007&#39;]</span>
+<span class="go">]0.30 - 0.40] [&#39;a1004&#39;, &#39;a1009&#39;]</span>
 </pre></div>
 </td></tr></table></div>
-<p>Compared with the previous quartiles rating result, we notice that the six alternatives rated before into the third quartile class [0.50 - 0.75[, are now divided up: actions <em>a1002</em>, <em>a1005</em> and <em>a1007</em> attain the 6th decile class ]0.5 - 0.6], whereas actions <em>a1006</em>, <em>1008</em> and <em>a10105</em> attain only the the 5th decile class ]0-4 - 0.5]. Of the three <em>Q2</em> [0.25 - 0.50[ rated actions (<em>a1001</em>, <em>a1003</em> and <em>a1004</em>), action <em>a1004</em> is now rated in the fourth decile class ]0.3 - 0.4], and <em>a1001</em> and <em>a1003</em> join actions <em>a1009</em> in the third decile class ]0.20 - 0.30].</p>
+<p>Compared with the previous quartiles rating result, we notice that the five alternatives rated before into the third quartile class [0.50 - 0.75[, are now divided up: actions <em>a1005</em> and <em>a1010</em> attain the 7th decile class ]0.6 - 0.7], whereas actions <em>a1002</em> and <em>1008</em> attain only the the 6th decile class ]0.5 - 0.6]. Of the five <em>Q2</em> [0.25 - 0.50[ rated actions (<em>a1001</em>, <em>a1003</em>, <em>a1004</em>, <em>a1006</em> and <em>a1007</em>), actions <em>a1001</em>, <em>a1003</em>, <em>a1006</em> and <em>a1007</em> qre now rated in the fifth decile class ]0.4 - 0.5], and <em>a1004</em> and <em>a1009</em> are rated the fourth decile class ]0.30 - 0.40].</p>
 <p>A browser view may again more conveniently illustrate this preciser <em>deciles</em> rating result.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr1</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heat map of the deciles rating&#39;</span><span class="p">,</span>\
@@ -4094,7 +4088,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <a class="reference internal image-reference" href="_images/exampleIncRatDigraphTutBis.png"><img alt="usage example of Normed Deciles Rating Digraph" src="_images/exampleIncRatDigraphTutBis.png" style="width: 550px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 24 </span><span class="caption-text">Heatmap of mormed deciles rating</span></p>
 </div>
-<p>In this preciser <em>deciles</em> rating, decision actions <em>a1001</em> and <em>a1010</em> are now rated in the <em>third</em> decile (D3), respectively in the <em>fifth</em> decile (D5).</p>
+<p>In this preciser <em>deciles</em> rating, decision actions <em>a1001</em> and <em>a1010</em> are now rated in the <em>fifth</em> decile (D5), respectively in the <em>seventh</em> decile (D7).</p>
 <p>More generally, in the case of industrial production monitoring problems, for instance, where large volumes of historical performance data may be available, it may be of interest to estimate even more precisely the marginal cumulative distribution functions with <strong>dodeciles</strong> or even <strong>centiles</strong>. Especially if <strong>tail</strong> rating results, i.e. distinguishing <strong>very best</strong>, or <strong>very worst</strong> multiple criteria performances, becomes a critical purpose. Similarly, the <em>historySize</em> parameter may be used for monitoring on the fly <strong>unstable</strong> random multiple criteria performance data.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Tutorials of the Digraph3 resources</span></a></p>
 </div>

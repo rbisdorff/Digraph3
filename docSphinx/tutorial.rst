@@ -2267,20 +2267,22 @@ Introduction
 	  
 In this tutorial we address the problem of **rating multiple criteria performances** of a set of potential decision actions with respect to empirical order statistics, ie performance quantiles learned from historical performance data gathered from similar decision actions observed in the past (see [CPSTAT-L5]_).
 
-To illustrate the decision problem we face, consider for a moment that, in a given decision aid study, we observe, for instance in the Table below, the multi-criteria performances of two potential decision actions, named *a1001* and *a1010*, marked on 7 **incommensurable** preference criteria: 2 **costs** criteria *c1* and *c2* (to **minimize**) and 6 **benefit** criteria *b1* to *b5* (to **maximize**). 
+To illustrate the decision problem we face, consider for a moment that, in a given decision aid study, we observe, for instance in the Table below, the multi-criteria performances of two potential decision actions, named *a1001* and *a1010*, marked on 7 **incommensurable** preference criteria: 2 **costs** criteria *c1* and *c2* (to **minimize**) and 6 **benefits** criteria *b1* to *b5* (to **maximize**). 
 
    ============= ======== ======== ======== ======== ======== ======== ======== 
      Criterion      b1       b2       b3       b4       b5       c1      c2
    ============= ======== ======== ======== ======== ======== ======== ========
        weight        2        2        2        2        2        5       5
          \           \        \        \        \        \        \       \
-      *a1001*        5        6        7       9.0       3      -64.5   -68.0   
-      *a1010*        6        6        7      88.0       8      -77.5   -72.0
+      *a1001*      37.0       2        2      61.0     31.0      -4    -40.0   
+      *a1010*      32.0       9        6      55.0     51.0      -4    -35.0
    ============= ======== ======== ======== ======== ======== ======== ========
 
-The performances on the *costs* criteria *c1* and *c2* are measured on a cardinal negative scale from -100.00 (worst) to 0.0 (best). The performances on the benefit criteria *b1*, *b2*, *b3* and *b5* are measured on an ordinal scale from 0 (worst) to 10 (best), wheras the performances on benefit criteria *b4* are measured on a cardinal scale from 0.0 (worst) to 100.0 (best). The importance (sum of weights) of the *costs* criteria is **equal** to the importance (sum of weights) of the benefit criteria taken all together.
+The performances on *benefits* criteria *b1*, *b4* and *b5* are measured on a cardinal scale from 0.0 (worst) to 100.0 (best) whereas, the performances on the *benefits* criteria *b2* and *b3*  and on the *cost* criterion *c1* are measured on an ordinal scale from 0 (worst) to 10 (best), respectively -10 (worst) to 0 (best). The performances on the *cost* criterion *c2* are again measured on a cardinal negative scale from -100.00 (worst) to 0.0 (best).
+
+The importance (sum of weights) of the *costs* criteria is **equal** to the importance (sum of weights) of the *benefits* criteria taken all together.
    
-The non trivial decision problem we now face here, is to decide, how the multi-criteria performances of *a1001*, respectively *a1010*,  may be rated (**excellent** ? **good** ?, or **fair** ?; perhaps even, **weak** ? or **very weak** ?) in an **order statistical sense**, when compared with all potential similar multi-criteria performances one has already encountered in the past. 
+The non trivial decision problem we now face here, is to decide, how the multiple criteria performances of *a1001*, respectively *a1010*,  may be rated (**excellent** ? **good** ?, or **fair** ?; perhaps even, **weak** ? or **very weak** ?) in an **order statistical sense**, when compared with all potential similar multi-criteria performances one has already encountered in the past. 
 
 To solve this *absolute* rating decision problem, first, we need to estimate multi-criteria **performance quantiles** from historical records.  
 
@@ -2304,7 +2306,7 @@ Below, an example Python session concerning 900 decision actions randomly genera
     >>> from randomPerfTabs import RandomCBPerformanceTableau
     >>> nbrActions=900
     >>> nbrCrit = 7
-    >>> seed = 105
+    >>> seed = 100
     >>> tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
     ...               numberOfCriteria=nbrCrit,seed=seed)
     >>> pq = PerformanceQuantiles(tp,\
@@ -2323,16 +2325,16 @@ The :py:class:`performanceQuantiles.PerformanceQuantiles` class parameter *numbe
     Costs
     criteria | weights |  '0.00'   '0.25'   '0.50'   '0.75'   '1.00'   
     ---------|-------------------------------------------------------
-       'c1'  |    5    | -95.64   -67.83   -48.33   -29.21    -2.05  
-       'c2'  |    5    | -99.16   -68.52   -49.66   -29.61    -1.84  
+       'c1'  |    5    | -10.00    -7.00    -5.00    -3.00     0.0  
+       'c2'  |    5    | -96.37   -70.65   -50.10   -30.00    -1.43  
     Benefits
     criteria | weights | '0.00'   '0.25'   '0.50'   '0.75'    '1.00'   
     ---------|-------------------------------------------------------
-       'b1'  |    2    |    0       3        5        7        10  
+       'b1'  |    2    |  1.99    29.82    49,44     70.73    99.83  
        'b2'  |    2    |    0       3        5        7        10  
        'b3'  |    2    |    0       3        5        7        10  
-       'b4'  |    2    |  0.56    29.68    49.27    70.20     98.67  
-       'b5'  |    2    |    0       3        5        7        10  
+       'b4'  |    2    |  3.27    30.10    50.82     70.89    98.05  
+       'b5'  |    2    |  0.85    29.08    48.55     69.98    97.56  
 
 Both objectives are **equi-important**; the weight (10) of the *costs* criteria balance the sum of weights (10) of the *benefit* criteria (see column 2). The preference direction of the *costs* criteria *c1* and *c2* is **negative**; the lesser the costs the better it is, wheras all the *benefit* criteria *b1* to *b5* show **positive** preference directions, ie the higher the benefits the better it is. The columns entitled '0.0', resp. '1.0' show the quartile *Q0*, resp. *Q4*, ie the **worst**, resp. **best** performance observed so far on each criterion. Column '0.5' shows the **median** (*Q2*) observed on the criteria.  
 
@@ -2384,7 +2386,7 @@ We reconsider the :code:`PerformanceQuantiles` object instance *pq* as computed 
     # Quantile profiles : 4
     # New actions       : 10
     Size                : 93
-    Determinateness     : 50.962
+    Determinateness (%)     : 52.17
     Attributes: ['runTimes','objectives','criteria',
      'LowerClosed','quantilesFrequencies','limitingQuantiles',
      'historySizes','cdf','name','newActions','evaluation',
@@ -2396,12 +2398,12 @@ We reconsider the :code:`PerformanceQuantiles` object instance *pq* as computed 
      'relationOrig','rankingByBestChoosing']
     *------  Constructor run times (in sec.) ------*
     #Threads         : 1
-    Total time       : 0.01299
-    Data input       : 0.00030
-    Quantile classes : 0.00004
+    Total time       : 0.01636
+    Data input       : 0.00051
+    Quantile classes : 0.00006
     Compute profiles : 0.00005
-    Compute relation : 0.01146
-    Compute rating   : 0.00114
+    Compute relation : 0.01420
+    Compute rating   : 0.00154
 
 Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class constructor (see Line 3) are a valid PerformanceQuantiles object *pq* and a compatible list *newActions* of new decision actions generated from the same random origin.
 
@@ -2411,13 +2413,13 @@ Let us have a look at the digraph's nodes, here called **newActions**.
 *----  performance tableau -----*
 criteria |  'a1001' 'a1002' 'a1003' 'a1004' 'a1005' 'a1006' 'a1007' 'a1008' 'a1009' 'a1010'   
 ---------|---------------------------------------------------------------------------------
-   'b1'  |    5.0     5.0     8.0     6.0     8.0     3.0     5.0     9.0     7.0     6.0  
-   'b2'  |    6.0     3.0     7.0     4.0     3.0     8.0     5.0     3.0     3.0     6.0  
-   'b3'  |    7.0     4.0     7.0     4.0     5.0     6.0     5.0     7.0     4.0     7.0  
-   'b4'  |    9.0    80.0    12.0    16.0    48.0    65.0    55.0    28.0  -999.0    88.0  
-   'b5'  |    3.0     1.0     8.0     9.0     5.0     7.0     1.0     8.0     4.0     8.0  
-   'c1'  |  -64.5   -20.3   -73.7   -95.1   -22.2   -50.9   -45.6   -51.5   -80.2   -77.5  
-   'c2'  |  -68.0   -48.0   -89.0   -44.0   -47.0   -92.0   -44.0   -66.0   -72.0   -72.0  
+   'b1'  |   37.0    27.0    24.0    16.0    42.0    33.0    39.0    64.0    42.0    32.0  
+   'b2'  |    2.0     5.0     8.0     3.0     3.0     3.0     6.0     5.0     4.0     9.0  
+   'b3'  |    2.0     4.0     2.0     1.0     6.0     3.0     2.0     6.0     6.0     6.0  
+   'b4'  |   61.0    54.0    74.0    25.0    28.0    20.0    20.0    49.0    44.0    55.0  
+   'b5'  |   31.0    63.0    61.0    48.0    30.0    39.0    16.0    96.0    57.0    51.0  
+   'c1'  |   -4.0    -6.0    -8.0    -5.0    -1.0    -5.0    -1.0    -6.0    -6.0    -4.0  
+   'c2'  |  -40.0   -23.0   -37.0   -37.0   -24.0   -27.0   -73.0   -43.0   -94.0   -35.0  
 
 Among the 10 new incoming decision actions (see below), we recognize actions *a1001* (see column 2) and *a1010* (see last column) we have mentioned in our introduction.
 
@@ -2427,13 +2429,13 @@ The :py:class:`NormedQuantilesRatingDigraphdigraph` instance's *actions* diction
 *----  Quartiles limit profiles -----*
 criteria |   'm1'   'm2'   'm3'   'm4'   
 ---------|----------------------------
-   'b1'  |   0.0    1.7    3.7    5.7  
-   'b2'  |   0.0    1.6    3.9    5.7  
-   'b3'  |   0.0    1.6    3.5    5.5  
-   'b4'  |   0.6   29.0   47.8   65.3  
-   'b5'  |   0.0    1.6    3.5    5.5  
-   'c1'  | -96.9  -72.4  -53.8  -31.3  
-   'c2'  | -99.2  -66.1  -49.0  -28.5  
+   'b1'  |    2.0   28.8   49.6   75.3  
+   'b2'  |    0.0    2.9    4.9    6.7  
+   'b3'  |    0.0    2.9    4.9    8.0  
+   'b4'  |    3.3   35.9   58.6   72.0  
+   'b5'  |    0.8   32.8   48.1   69.7  
+   'c1'  |  -10.0   -7.4   -5.4   -3.4  
+   'c2'  |  -96.4  -72.2  -52.3  -34.0  
 
 The main run time (see Lines 23-29 of the object description above) is spent by the class constructor in computing a bipolar valued outranking relation on the extended actions set including both the new actions as well as the quartile class limits. In case of large volumes, ie many new decision actions and centile classes for instance, a multi-threading version may be used when multiple processing cores are available (see the technical description of the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class).
 
@@ -2445,31 +2447,28 @@ In this rating example, the *Copeland* rule appears to be the more appropriate r
     Ranking rule        : Copeland
     >>> print('Actions ranking     :', nqr.actionsRanking)
     Actions ranking     : [
-    'm4',
-    'a1005', 'a1007', 'a1002', 'a1008', 'a1010', 'a1006', 'm3',
-    'a1004', 'a1003', 'a1001', 'm2',
-    'a1009', 'm1']
+    'm4', 'a1005', 'a1010', 'a1008', 'a1002', 'a1006',
+    'm3', 'a1003', 'a1001', 'a1007', 'a1004', 'a1009',
+    'm2', 'm1']
     >>> print('Ranking correlation : %+.2f' %\
     ...         (nqr.rankingCorrelation['correlation']) )
-    Ranking correlation : +0.95
+    Ranking correlation : +0.94
 
-We achieve here a linear ranking without ties (from best to worst) of the digraph's actions, ie including the new decision actions as well as the quartile limits *m1* to *m4*, which is very close in an ordinal sense (*tau* = 0.95) to the underlying valued outranking relation.
+We achieve here a linear ranking without ties (from best to worst) of the digraph's actions, ie including the new decision actions as well as the quartile limits *m1* to *m4*, which is very close in an ordinal sense (*tau* = 0.94) to the underlying valued outranking relation.
 
 The eventual rating procedure is based on the lower quantile limits, such that we may collect the quartile classes' contents in increasing order of the *quartiles* ' lower limits.
 
     >>> print('Rating categories:', nqr.ratingCategories)
     Rating categories: OrderedDict([
-     ('m1', ['a1009']),
-     ('m2', ['a1004', 'a1003', 'a1001']),
-     ('m3', ['a1005', 'a1007', 'a1002', 'a1008', 'a1010', 'a1006'])])
-
-We notice above that no new decision action is rated in the highest quartile class [0.75 - 1.0]. Indeed, the rating result is shown, in descending order, as follows.
+    ('m2', ['a1003', 'a1001', 'a1007', 'a1004', 'a1009']),
+    ('m3', ['a1005', 'a1010', 'a1008', 'a1002', 'a1006'])])
+    
+We notice above that no new decision action is rated in the lowest [0.0 - '.25[, respectively highest [0.75 - 1.0], quartile class . Indeed, the rating result is shown, in descending order, as follows.
 
     >>> nqr.showQuantilesRating()
     *-------- Quartiles rating result ---------
-    [0.50 - 0.75[ ['a1005', 'a1007', 'a1002', 'a1008', 'a1010', 'a1006']
-    [0.25 - 0.50[ ['a1004', 'a1003', 'a1001']
-    [0.00 - 0.25[ ['a1009']
+    [0.50 - 0.75[ ['a1005', 'a1010', 'a1008', 'a1002', 'a1006']
+    [0.25 - 0.50[ ['a1003', 'a1001', 'a1007', 'a1004', 'a1009']
     
 The same result may even more conviently be consulted in a browser view via a specialised heatmap format ( see :py:meth:`perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap` method.
 
@@ -2482,11 +2481,9 @@ The same result may even more conviently be consulted in a browser view via a sp
 
     Heatmap of normed quartiles ranking 
 	    
-Due to the fact that the importance weight (10) of the two *cost* criteria *c1* and *c2* is balancing the sum of the five *benefit* criteria (10) *b1* to *b5*, the marginal *cost* criteria rankings are most correlated (*tau_c1* = +066. and *tau_c2* = +0.51) with the proposed ratings of the new decision actions.
+Using furthermore a specialised version of the :py:meth:`weakOrders.WeakOrder.exportGraphViz` method allows drawing the same rating result in a Hasse diagram format.
 
-Using furthermore a specialised version of the :py:meth:`weakOrders.WeakOrder.exportGraphViz` method allows drawing the rating result in a Hasse diagram format.
-
-   >>> nqr.exportRatingGraphViz()
+   >>> nqr.exportRatingGraphViz('normedRatingResult')
     *---- exporting a dot file for GraphViz tools ---------*
      Exporting to quantilesRatingDigraph.dot
      dot -Grankdir=TB -Tpng quantilesRatingDigraph.dot -o quantilesRatingDigraph.png
@@ -2498,17 +2495,16 @@ Using furthermore a specialised version of the :py:meth:`weakOrders.WeakOrder.ex
 
     Normed quartiles rating digraph
 
-We may now answer the **normed rating decision problem** stated at the beginning. Decision action *a1001* is rated in quartile **Q2** and action *a1010* in quartile **Q3** (see Table below). Indeed, the performances of decision action *a1001* were generated with a triangular law at *median* mode, whereas the performances of action *a1010* were generated with a *high* mode, ie higher benefits at higher costs.   
+We may now answer the **normed rating decision problem** stated at the beginning. Decision action *a1001* is rated in quartile **Q2** and action *a1010* in quartile **Q3** (see Table below). Indeed, the performances of decision action *a1001* were generated with a triangular law at a *low* mode, i.e. low costs but also low benefits, whereas the performances of action *a1010* were generated with a *median* mode.   
 
    ============ =========== ======== ======== ======== ======== ======== ======== ========
       Rating     Criterion     b1       b2       b3       b4       b5       c1       c2    
    ============ =========== ======== ======== ======== ======== ======== ======== ========
     quartiles      weight       2        2        2        2        2        5        5     
          \            \         \        \        \        \        \        \        \
-      **Q1**       *a1001*      5        6        7       9.0       3     -64.5    -68.0    
-      **Q3**       *a1010*      6        6        7      88.0       8     -77.5    -72.0 
+      **Q2**       *a1001*    37.0      2        2      61.0     31.0     -4.0    -40.0    
+      **Q3**       *a1010*    32.0      9        6      55.0     51.0     -4.0    -35.0 
    ============ =========== ======== ======== ======== ======== ======== ======== ========
-
 
 A more precise rating result may be achieved when we use **deciles** instead of *quartiles* for estimating the historical cumulative distribution functions. Notice that, for illustration, we may change by the way to upper closed quantiles bins (see Line 2 below). 
 
@@ -2517,12 +2513,12 @@ A more precise rating result may be achieved when we use **deciles** instead of 
     >>> nqr1 = NormedQuantilesRatingDigraph(pq1,newActions,rankingRule='best')
     >>> nqr1.showQuantilesRating()
     *-------- Deciles rating result ---------
-    ]0.50 - 0.60] ['a1002', 'a1005', 'a1007']
-    ]0.40 - 0.50] ['a1006', 'a1008', 'a1010']
-    ]0.30 - 0.40] ['a1004']
-    ]0.20 - 0.30] ['a1001', 'a1003', 'a1009']
+    ]0.60 - 0.70] ['a1005', 'a1010']
+    ]0.50 - 0.60] ['a1008', 'a1002']
+    ]0.40 - 0.50] ['a1006', 'a1003', 'a1001', 'a1007']
+    ]0.30 - 0.40] ['a1004', 'a1009']
 
-Compared with the previous quartiles rating result, we notice that the six alternatives rated before into the third quartile class [0.50 - 0.75[, are now divided up: actions *a1002*, *a1005* and *a1007* attain the 6th decile class ]0.5 - 0.6], whereas actions *a1006*, *1008* and *a10105* attain only the the 5th decile class ]0-4 - 0.5]. Of the three *Q2* [0.25 - 0.50[ rated actions (*a1001*, *a1003* and *a1004*), action *a1004* is now rated in the fourth decile class ]0.3 - 0.4], and *a1001* and *a1003* join actions *a1009* in the third decile class ]0.20 - 0.30].
+Compared with the previous quartiles rating result, we notice that the five alternatives rated before into the third quartile class [0.50 - 0.75[, are now divided up: actions *a1005* and *a1010* attain the 7th decile class ]0.6 - 0.7], whereas actions *a1002* and *1008* attain only the the 6th decile class ]0.5 - 0.6]. Of the five *Q2* [0.25 - 0.50[ rated actions (*a1001*, *a1003*, *a1004*, *a1006* and *a1007*), actions *a1001*, *a1003*, *a1006* and *a1007* qre now rated in the fifth decile class ]0.4 - 0.5], and *a1004* and *a1009* are rated the fourth decile class ]0.30 - 0.40].
 
 A browser view may again more conveniently illustrate this preciser *deciles* rating result.
 
@@ -2536,7 +2532,7 @@ A browser view may again more conveniently illustrate this preciser *deciles* ra
 
     Heatmap of mormed deciles rating 
 
-In this preciser *deciles* rating, decision actions *a1001* and *a1010* are now rated in the *third* decile (D3), respectively in the *fifth* decile (D5).
+In this preciser *deciles* rating, decision actions *a1001* and *a1010* are now rated in the *fifth* decile (D5), respectively in the *seventh* decile (D7).
     
 More generally, in the case of industrial production monitoring problems, for instance, where large volumes of historical performance data may be available, it may be of interest to estimate even more precisely the marginal cumulative distribution functions with **dodeciles** or even **centiles**. Especially if **tail** rating results, i.e. distinguishing **very best**, or **very worst** multiple criteria performances, becomes a critical purpose. Similarly, the *historySize* parameter may be used for monitoring on the fly **unstable** random multiple criteria performance data.  	
 
