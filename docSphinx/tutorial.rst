@@ -2274,11 +2274,11 @@ To illustrate the decision problem we face, consider for a moment that, in a giv
    ============= ======== ======== ======== ======== ======== ======== ========
        weight        2        2        2        2        2        5       5
          \           \        \        \        \        \        \       \
-        a1001     -64.5    -68.0       5        6        7       9.0      3
-        a1010     -77.5    -72.0       6        6        7      88.0      8
+      *a1001*        5        6        7       9.0       3      -64.5   -68.0   
+      *a1010*        6        6        7      88.0       8      -77.5   -72.0
    ============= ======== ======== ======== ======== ======== ======== ========
 
-The performances on the *costs* criteria *c1* and *c2* are measured on a cardinal negative scale from -100.00 (worst) to 0.0 (best). The performances on the benefit criteria *b1*, *b2*, *b3* and *b5* are measured on an ordinal scale from 0.0 (worst) to 10.00 (best), wheras the performances on benefit criteria *b4* are measured on a cardinal scale from 0.0 (worst) to 100.0 (best). The importance (sum of weights) of the *costs* criteria is **equal** to the importance (sum of weights) of the benefit criteria taken all together.
+The performances on the *costs* criteria *c1* and *c2* are measured on a cardinal negative scale from -100.00 (worst) to 0.0 (best). The performances on the benefit criteria *b1*, *b2*, *b3* and *b5* are measured on an ordinal scale from 0 (worst) to 10 (best), wheras the performances on benefit criteria *b4* are measured on a cardinal scale from 0.0 (worst) to 100.0 (best). The importance (sum of weights) of the *costs* criteria is **equal** to the importance (sum of weights) of the benefit criteria taken all together.
    
 The non trivial decision problem we now face here, is to decide, how the multi-criteria performances of *a1001*, respectively *a1010*,  may be rated (**excellent** ? **good** ?, or **fair** ?; perhaps even, **weak** ? or **very weak** ?) in an **order statistical sense**, when compared with all potential similar multi-criteria performances one has already encountered in the past. 
 
@@ -2298,7 +2298,7 @@ The :py:class:`performanceQuantiles.PerformanceQuantiles` class implements such 
   * An ordered  dictionary **limitingQuantiles** of so far estimated *lower* (default) or *upper* quantile class limits for each frequency per criterion;
   * An ordered dictionary **historySizes** for keeping track of the number of evaluations seen so far per criterion. Missing data may make these sizes vary from criterion to criterion.
 
-An example Python session concerning 900 decision actions randomly generated from a *Cost-Benefit* Performance tableau model with 7 performance criteria  is shown hereafter:
+Below, an example Python session concerning 900 decision actions randomly generated from a *Cost-Benefit* Performance tableau model from which are also drawn the performances of actions *a1001* and *a1010* above.
 
     >>> from performanceQuantiles import PerformanceQuantiles
     >>> from randomPerfTabs import RandomCBPerformanceTableau
@@ -2498,6 +2498,18 @@ Using furthermore a specialised version of the :py:meth:`weakOrders.WeakOrder.ex
 
     Normed quartiles rating digraph
 
+We may now answer the **normed rating decision problem** stated at the beginning. Decision action *a1001* is rated in quartile **Q2** and action *a1010* in quartile **Q3** (see Table below). Indeed, the performances of decision action *a1001* were generated with a triangular law at *median* mode, whereas the performances of action *a1010* were generated with a *high* mode, ie higher benefits at higher costs.   
+
+   ============ =========== ======== ======== ======== ======== ======== ======== ========
+      Rating     Criterion     b1       b2       b3       b4       b5       c1       c2    
+   ============ =========== ======== ======== ======== ======== ======== ======== ========
+    quartiles      weight       2        2        2        2        2        5        5     
+         \            \         \        \        \        \        \        \        \
+      **Q1**       *a1001*      5        6        7       9.0       3     -64.5    -68.0    
+      **Q3**       *a1010*      6        6        7      88.0       8     -77.5    -72.0 
+   ============ =========== ======== ======== ======== ======== ======== ======== ========
+
+
 A more precise rating result may be achieved when we use **deciles** instead of *quartiles* for estimating the historical cumulative distribution functions. Notice that, for illustration, we may change by the way to upper closed quantiles bins (see Line 2 below). 
 
     >>> pq1 = PerformanceQuantiles(tp, numberOfBins = 'deciles',\
@@ -2523,8 +2535,10 @@ A browser view may again more conveniently illustrate this preciser *deciles* ra
     :align: center
 
     Heatmap of mormed deciles rating 
-	    
-In the case of industrial production monitoring problems, where large volumes of historical performance data may be available, it could become interesting to estimate even more precisely the marginal cumulative distribution functions with **dodeciles** or even **centiles**. Especially if **tail** rating results, ie distinguishing **very best**, or **very worst** multiple criteria performances, becomes a critical purpose. Similarly, the *historySize* parameter may be used for monitoring on the fly **unstable** random multiple criteria performance data.  	
+
+In this preciser *deciles* rating, decision actions *a1001* and *a1010* are now rated in the *third* decile (D3), respectively in the *fifth* decile (D5).
+    
+More generally, in the case of industrial production monitoring problems, for instance, where large volumes of historical performance data may be available, it may be of interest to estimate even more precisely the marginal cumulative distribution functions with **dodeciles** or even **centiles**. Especially if **tail** rating results, i.e. distinguishing **very best**, or **very worst** multiple criteria performances, becomes a critical purpose. Similarly, the *historySize* parameter may be used for monitoring on the fly **unstable** random multiple criteria performance data.  	
 
 Back to :ref:`Tutorial-label`   
 

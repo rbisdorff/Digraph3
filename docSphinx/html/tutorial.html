@@ -3672,28 +3672,28 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <td></td>
 <td></td>
 </tr>
-<tr class="row-even"><td>a1001</td>
-<td>-64.5</td>
-<td>-68.0</td>
+<tr class="row-even"><td><em>a1001</em></td>
 <td>5</td>
 <td>6</td>
 <td>7</td>
 <td>9.0</td>
 <td>3</td>
+<td>-64.5</td>
+<td>-68.0</td>
 </tr>
-<tr class="row-odd"><td>a1010</td>
-<td>-77.5</td>
-<td>-72.0</td>
+<tr class="row-odd"><td><em>a1010</em></td>
 <td>6</td>
 <td>6</td>
 <td>7</td>
 <td>88.0</td>
 <td>8</td>
+<td>-77.5</td>
+<td>-72.0</td>
 </tr>
 </tbody>
 </table>
 </div></blockquote>
-<p>The performances on the <em>costs</em> criteria <em>c1</em> and <em>c2</em> are measured on a cardinal negative scale from -100.00 (worst) to 0.0 (best). The performances on the benefit criteria <em>b1</em>, <em>b2</em>, <em>b3</em> and <em>b5</em> are measured on an ordinal scale from 0.0 (worst) to 10.00 (best), wheras the performances on benefit criteria <em>b4</em> are measured on a cardinal scale from 0.0 (worst) to 100.0 (best). The importance (sum of weights) of the <em>costs</em> criteria is <strong>equal</strong> to the importance (sum of weights) of the benefit criteria taken all together.</p>
+<p>The performances on the <em>costs</em> criteria <em>c1</em> and <em>c2</em> are measured on a cardinal negative scale from -100.00 (worst) to 0.0 (best). The performances on the benefit criteria <em>b1</em>, <em>b2</em>, <em>b3</em> and <em>b5</em> are measured on an ordinal scale from 0 (worst) to 10 (best), wheras the performances on benefit criteria <em>b4</em> are measured on a cardinal scale from 0.0 (worst) to 100.0 (best). The importance (sum of weights) of the <em>costs</em> criteria is <strong>equal</strong> to the importance (sum of weights) of the benefit criteria taken all together.</p>
 <p>The non trivial decision problem we now face here, is to decide, how the multi-criteria performances of <em>a1001</em>, respectively <em>a1010</em>,  may be rated (<strong>excellent</strong> ? <strong>good</strong> ?, or <strong>fair</strong> ?; perhaps even, <strong>weak</strong> ? or <strong>very weak</strong> ?) in an <strong>order statistical sense</strong>, when compared with all potential similar multi-criteria performances one has already encountered in the past.</p>
 <p>To solve this <em>absolute</em> rating decision problem, first, we need to estimate multi-criteria <strong>performance quantiles</strong> from historical records.</p>
 </div>
@@ -3710,7 +3710,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <li>An ordered dictionary <strong>historySizes</strong> for keeping track of the number of evaluations seen so far per criterion. Missing data may make these sizes vary from criterion to criterion.</li>
 </ul>
 </div></blockquote>
-<p>An example Python session concerning 900 decision actions randomly generated from a <em>Cost-Benefit</em> Performance tableau model with 7 performance criteria  is shown hereafter:</p>
+<p>Below, an example Python session concerning 900 decision actions randomly generated from a <em>Cost-Benefit</em> Performance tableau model from which are also drawn the performances of actions <em>a1001</em> and <em>a1010</em> above.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -3993,6 +3993,76 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <a class="reference internal image-reference" href="_images/normedRatingDigraph.png"><img alt="usage example of Normed Quartiles Rating Digraph" src="_images/normedRatingDigraph.png" style="width: 500px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 23 </span><span class="caption-text">Normed quartiles rating digraph</span></p>
 </div>
+<p>We may now answer the <strong>normed rating decision problem</strong> stated at the beginning. Decision action <em>a1001</em> is rated in quartile <strong>Q2</strong> and action <em>a1010</em> in quartile <strong>Q3</strong> (see Table below). Indeed, the performances of decision action <em>a1001</em> were generated with a triangular law at <em>median</em> mode, whereas the performances of action <em>a1010</em> were generated with a <em>high</em> mode, ie higher benefits at higher costs.</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="14%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Rating</th>
+<th class="head">Criterion</th>
+<th class="head">b1</th>
+<th class="head">b2</th>
+<th class="head">b3</th>
+<th class="head">b4</th>
+<th class="head">b5</th>
+<th class="head">c1</th>
+<th class="head">c2</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>quartiles</td>
+<td>weight</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>5</td>
+<td>5</td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><strong>Q1</strong></td>
+<td><em>a1001</em></td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>9.0</td>
+<td>3</td>
+<td>-64.5</td>
+<td>-68.0</td>
+</tr>
+<tr class="row-odd"><td><strong>Q3</strong></td>
+<td><em>a1010</em></td>
+<td>6</td>
+<td>6</td>
+<td>7</td>
+<td>88.0</td>
+<td>8</td>
+<td>-77.5</td>
+<td>-72.0</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
 <p>A more precise rating result may be achieved when we use <strong>deciles</strong> instead of <em>quartiles</em> for estimating the historical cumulative distribution functions. Notice that, for illustration, we may change by the way to upper closed quantiles bins (see Line 2 below).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -4024,7 +4094,8 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <a class="reference internal image-reference" href="_images/exampleIncRatDigraphTutBis.png"><img alt="usage example of Normed Deciles Rating Digraph" src="_images/exampleIncRatDigraphTutBis.png" style="width: 550px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 24 </span><span class="caption-text">Heatmap of mormed deciles rating</span></p>
 </div>
-<p>In the case of industrial production monitoring problems, where large volumes of historical performance data may be available, it could become interesting to estimate even more precisely the marginal cumulative distribution functions with <strong>dodeciles</strong> or even <strong>centiles</strong>. Especially if <strong>tail</strong> rating results, ie distinguishing <strong>very best</strong>, or <strong>very worst</strong> multiple criteria performances, becomes a critical purpose. Similarly, the <em>historySize</em> parameter may be used for monitoring on the fly <strong>unstable</strong> random multiple criteria performance data.</p>
+<p>In this preciser <em>deciles</em> rating, decision actions <em>a1001</em> and <em>a1010</em> are now rated in the <em>third</em> decile (D3), respectively in the <em>fifth</em> decile (D5).</p>
+<p>More generally, in the case of industrial production monitoring problems, for instance, where large volumes of historical performance data may be available, it may be of interest to estimate even more precisely the marginal cumulative distribution functions with <strong>dodeciles</strong> or even <strong>centiles</strong>. Especially if <strong>tail</strong> rating results, i.e. distinguishing <strong>very best</strong>, or <strong>very worst</strong> multiple criteria performances, becomes a critical purpose. Similarly, the <em>historySize</em> parameter may be used for monitoring on the fly <strong>unstable</strong> random multiple criteria performance data.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Tutorials of the Digraph3 resources</span></a></p>
 </div>
 </div>
