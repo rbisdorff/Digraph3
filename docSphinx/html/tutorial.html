@@ -3955,7 +3955,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <span class="go">(&#39;m3&#39;, [&#39;a1005&#39;, &#39;a1010&#39;, &#39;a1008&#39;, &#39;a1002&#39;, &#39;a1006&#39;])])</span>
 </pre></div>
 </td></tr></table></div>
-<p>We notice above that no new decision action is rated in the lowest [0.0 - ‘.25[, respectively highest [0.75 - 1.0], quartile class . Indeed, the rating result is shown, in descending order, as follows.</p>
+<p>We notice above that no new decision action is rated in the lowest [0.0-0.25[, respectively highest [0.75- [ quartile class. Indeed, the rating result is shown, in descending order, as follows:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -3965,7 +3965,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <span class="go">[0.25 - 0.50[ [&#39;a1003&#39;, &#39;a1001&#39;, &#39;a1007&#39;, &#39;a1004&#39;, &#39;a1009&#39;]</span>
 </pre></div>
 </td></tr></table></div>
-<p>The same result may even more conviently be consulted in a browser view via a specialised heatmap format ( see <code class="xref py py-meth docutils literal"><span class="pre">perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap()</span></code> method.</p>
+<p>The same result may even more conviently be consulted in a browser view via a specialised rating heatmap format ( see <code class="xref py py-meth docutils literal"><span class="pre">perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap()</span></code> method.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of Quantiles Rating&#39;</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
@@ -4057,7 +4057,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 </tbody>
 </table>
 </div></blockquote>
-<p>A more precise rating result may be achieved when we use <strong>deciles</strong> instead of <em>quartiles</em> for estimating the historical cumulative distribution functions. Notice that, for illustration, we may change by the way to upper closed quantiles bins (see Line 2 below).</p>
+<p>A more precise rating result may be achieved when we use <strong>deciles</strong> instead of <em>quartiles</em> for estimating the historical cumulative distribution functions.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -4079,7 +4079,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <span class="go">]0.30 - 0.40] [&#39;a1004&#39;, &#39;a1009&#39;]</span>
 </pre></div>
 </td></tr></table></div>
-<p>Compared with the previous quartiles rating result, we notice that the five alternatives rated before into the third quartile class [0.50 - 0.75[, are now divided up: actions <em>a1005</em> and <em>a1010</em> attain the 7th decile class ]0.6 - 0.7], whereas actions <em>a1002</em> and <em>1008</em> attain only the the 6th decile class ]0.5 - 0.6]. Of the five <em>Q2</em> [0.25 - 0.50[ rated actions (<em>a1001</em>, <em>a1003</em>, <em>a1004</em>, <em>a1006</em> and <em>a1007</em>), actions <em>a1001</em>, <em>a1003</em>, <em>a1006</em> and <em>a1007</em> qre now rated in the fifth decile class ]0.4 - 0.5], and <em>a1004</em> and <em>a1009</em> are rated the fourth decile class ]0.30 - 0.40].</p>
+<p>Compared with the previous quartiles rating result, we notice that the five alternatives rated before into the third quartile class [0.50 - 0.75[, are now divided up: actions <em>a1005</em> and <em>a1010</em> attain the 7th decile class ]0.6 - 0.7], whereas actions <em>a1002</em> and <em>1008</em> attain only the the 6th decile class ]0.5 - 0.6]. Of the five <em>Q2</em> [0.25 - 0.50[ rated actions (<em>a1001</em>, <em>a1003</em>, <em>a1004</em>, <em>a1006</em> and <em>a1007</em>), actions <em>a1001</em>, <em>a1003</em>, <em>a1006</em> and <em>a1007</em> are now rated in the fifth decile class ]0.4 - 0.5], whereas <em>a1004</em> and <em>a1009</em> are rated the fourth decile class ]0.30 - 0.40].</p>
 <p>A browser view may again more conveniently illustrate this preciser <em>deciles</em> rating result.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr1</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heat map of the deciles rating&#39;</span><span class="p">,</span>\

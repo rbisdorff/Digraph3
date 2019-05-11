@@ -2463,14 +2463,14 @@ The eventual rating procedure is based on the lower quantile limits, such that w
     ('m2', ['a1003', 'a1001', 'a1007', 'a1004', 'a1009']),
     ('m3', ['a1005', 'a1010', 'a1008', 'a1002', 'a1006'])])
     
-We notice above that no new decision action is rated in the lowest [0.0 - '.25[, respectively highest [0.75 - 1.0], quartile class . Indeed, the rating result is shown, in descending order, as follows.
+We notice above that no new decision action is rated in the lowest [0.0-0.25[, respectively highest [0.75- [ quartile class. Indeed, the rating result is shown, in descending order, as follows:
 
     >>> nqr.showQuantilesRating()
     *-------- Quartiles rating result ---------
     [0.50 - 0.75[ ['a1005', 'a1010', 'a1008', 'a1002', 'a1006']
     [0.25 - 0.50[ ['a1003', 'a1001', 'a1007', 'a1004', 'a1009']
     
-The same result may even more conviently be consulted in a browser view via a specialised heatmap format ( see :py:meth:`perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap` method.
+The same result may even more conviently be consulted in a browser view via a specialised rating heatmap format ( see :py:meth:`perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap` method.
 
     >>> nqr.showHTMLRatingHeatmap(pageTitle='Heatmap of Quantiles Rating',Correlations=True)
 
@@ -2506,7 +2506,7 @@ We may now answer the **normed rating decision problem** stated at the beginning
       **Q3**       *a1010*    32.0      9        6      55.0     51.0       -4     -35.0 
    ============ =========== ======== ======== ======== ======== ======== ======== ========
 
-A more precise rating result may be achieved when we use **deciles** instead of *quartiles* for estimating the historical cumulative distribution functions. Notice that, for illustration, we may change by the way to upper closed quantiles bins (see Line 2 below). 
+A more precise rating result may be achieved when we use **deciles** instead of *quartiles* for estimating the historical cumulative distribution functions.
 
     >>> pq1 = PerformanceQuantiles(tp, numberOfBins = 'deciles',\
     ...              LowerClosed=True)
@@ -2519,7 +2519,7 @@ A more precise rating result may be achieved when we use **deciles** instead of 
     ]0.40 - 0.50] ['a1006', 'a1003', 'a1001', 'a1007']
     ]0.30 - 0.40] ['a1004', 'a1009']
 
-Compared with the previous quartiles rating result, we notice that the five alternatives rated before into the third quartile class [0.50 - 0.75[, are now divided up: actions *a1005* and *a1010* attain the 7th decile class ]0.6 - 0.7], whereas actions *a1002* and *1008* attain only the the 6th decile class ]0.5 - 0.6]. Of the five *Q2* [0.25 - 0.50[ rated actions (*a1001*, *a1003*, *a1004*, *a1006* and *a1007*), actions *a1001*, *a1003*, *a1006* and *a1007* qre now rated in the fifth decile class ]0.4 - 0.5], and *a1004* and *a1009* are rated the fourth decile class ]0.30 - 0.40].
+Compared with the previous quartiles rating result, we notice that the five alternatives rated before into the third quartile class [0.50 - 0.75[, are now divided up: actions *a1005* and *a1010* attain the 7th decile class ]0.6 - 0.7], whereas actions *a1002* and *1008* attain only the the 6th decile class ]0.5 - 0.6]. Of the five *Q2* [0.25 - 0.50[ rated actions (*a1001*, *a1003*, *a1004*, *a1006* and *a1007*), actions *a1001*, *a1003*, *a1006* and *a1007* are now rated in the fifth decile class ]0.4 - 0.5], whereas *a1004* and *a1009* are rated the fourth decile class ]0.30 - 0.40].
 
 A browser view may again more conveniently illustrate this preciser *deciles* rating result.
 
