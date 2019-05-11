@@ -2295,7 +2295,7 @@ Suppose that we see flying in random multiple criteria performances from a given
 
 The :py:class:`performanceQuantiles.PerformanceQuantiles` class implements such a performance quantiles estimation based on a given performance tableau. Its main components are:
 
-  * An **objectives** and a **criteria** ordered dictionary from a valid performance tableau instance;
+  * Ordered **objectives** and a **criteria** dictionaries from a valid performance tableau instance;
   * A list **quantileFrequencies** of quantile frequencies like *quartiles* [0.0, 0.25, 05, 0.75,1.0], *quintiles* [0.0, 0.2, 0.4, 0.6, 0.8, 1.0] or *deciles* [0.0, 0.1, 0.2, ... 1.0] for instance;
   * An ordered  dictionary **limitingQuantiles** of so far estimated *lower* (default) or *upper* quantile class limits for each frequency per criterion;
   * An ordered dictionary **historySizes** for keeping track of the number of evaluations seen so far per criterion. Missing data may make these sizes vary from criterion to criterion.
@@ -2336,7 +2336,7 @@ The :py:class:`performanceQuantiles.PerformanceQuantiles` class parameter *numbe
        'b4'  |    2    |  3.27    30.10    50.82     70.89    98.05  
        'b5'  |    2    |  0.85    29.08    48.55     69.98    97.56  
 
-Both objectives are **equi-important**; the weight (10) of the *costs* criteria balance the sum of weights (10) of the *benefit* criteria (see column 2). The preference direction of the *costs* criteria *c1* and *c2* is **negative**; the lesser the costs the better it is, wheras all the *benefit* criteria *b1* to *b5* show **positive** preference directions, ie the higher the benefits the better it is. The columns entitled '0.0', resp. '1.0' show the quartile *Q0*, resp. *Q4*, ie the **worst**, resp. **best** performance observed so far on each criterion. Column '0.5' shows the **median** (*Q2*) observed on the criteria.  
+Both objectives are **equi-important**; the sum of weights (10) of the *costs* criteria balance the sum of weights (10) of the *benefits* criteria (see column 2). The preference direction of the *costs* criteria *c1* and *c2* is **negative**; the lesser the costs the better it is, whereas all the *benefits* criteria *b1* to *b5* show **positive** preference directions, ie the higher the benefits the better it is. The columns entitled '0.0', resp. '1.0' show the *quartile* *Q0*, resp. *Q4*, ie the **worst**, resp. **best** performance observed so far on each criterion. Column '0.5' shows the **median** (*Q2*) observed on the criteria.  
 
 New  decision alternatives with random multiple criteria performance vectors from the same random performance tableau model may now be generated with ad hoc random performance generators. We provide for experimental purpose, in the :py:mod:`randomPerfTabs` module, three such generators: one for the standard :py:class:`randomPerfTabs.RandomPerformanceTableau` model, one the for the two objectives :py:class:`randomPerfTabs.RandomCBPerformanceTableau` Cost-Benefit model, and one for the :py:class:`randomPerfTabs.Random3ObjectivesPerformanceTableau` model with three objectives concerning respectively  economic, environmental or social aspects.
 
@@ -2423,7 +2423,7 @@ criteria |  'a1001' 'a1002' 'a1003' 'a1004' 'a1005' 'a1006' 'a1007' 'a1008' 'a10
 
 Among the 10 new incoming decision alternatives (see below), we recognize alternatives *a1001* (see column 2) and *a1010* (see last column) we have mentioned in our introduction.
 
-The :py:class:`NormedQuantilesRatingDigraphdigraph` instance's *actions* dictionary also contains the closed lower limits of the four quartile classes: *m1* = [0.0-0.25[, *m2* = [0.25-0.5[, *m3* =[0.5 - 0.75[, *m4* = [0.75 - 1.0[.
+The :py:class:`NormedQuantilesRatingDigraphdigraph` instance's *actions* dictionary also contains the closed lower limits of the four quartile classes: *m1* = [0.0- [, *m2* = [0.25- [, *m3* = [0.5- [, *m4* = [0.75 - [.
 
 >>> nqr.showPerformanceTableau(actionsSubset=nqr.profiles)
 *----  Quartiles limit profiles -----*
@@ -2439,7 +2439,7 @@ criteria |   'm1'   'm2'   'm3'   'm4'
 
 The main run time (see Lines 23-29 of the object description above) is spent by the class constructor in computing a bipolar valued outranking relation on the extended actions set including both the new alternatives as well as the quartile class limits. In case of large volumes, ie many new decision alternatives and centile classes for instance, a multi-threading version may be used when multiple processing cores are available (see the technical description of the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class).
 
-The actual rating procedure will rely on a complete ranking of the new decision alternatives as well ass the quantile class limits obtained from the corresponding bipolar valued outranking digraph. Two efficient and scalable ranking rules, the **Copeland** and its valued version, the **Netflows** rule may be used for this purpose. The *rankingRule* parameter allows to choose one of both. With *rankingRule='best'* (see Line 2 above) the :code:`NormedQuantilesRatingDigraph` constructor will choose the ranking rule that results in the highest ordinal correlation with the given outranking relation (see [BIS-2012]_).
+The actual rating procedure will rely on a complete ranking of the new decision alternatives as well as the quantile class limits obtained from the corresponding bipolar valued outranking digraph. Two efficient and scalable ranking rules, the **Copeland** and its valued version, the **Netflows** rule may be used for this purpose. The *rankingRule* parameter allows to choose one of both. With *rankingRule='best'* (see Line 2 above) the :code:`NormedQuantilesRatingDigraph` constructor will choose the ranking rule that results in the highest ordinal correlation with the given outranking relation (see [BIS-2012]_).
 
 In this rating example, the *Copeland* rule appears to be the more appropriate ranking rule.
 
