@@ -3734,7 +3734,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <span class="gp">... </span>              <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span>\
 <span class="gp">... </span>              <span class="n">numberOfBins</span> <span class="o">=</span> <span class="s1">&#39;quartiles&#39;</span><span class="p">,</span>\
-<span class="gp">... </span>              <span class="n">LowerClosed</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="gp">... </span>              <span class="n">LowerClosed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 <span class="go">dict_keys([&#39;objectives&#39;, &#39;LowerClosed&#39;, &#39;name&#39;,</span>
 <span class="go">&#39;quantilesFrequencies&#39;, &#39;criteria&#39;, &#39;historySizes&#39;,</span>
@@ -3763,7 +3763,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <span class="go">Costs</span>
 <span class="go">criteria | weights |  &#39;0.00&#39;   &#39;0.25&#39;   &#39;0.50&#39;   &#39;0.75&#39;   &#39;1.00&#39;</span>
 <span class="go">---------|-------------------------------------------------------</span>
-<span class="go">   &#39;c1&#39;  |    5    | -10.00    -7.00    -5.00    -3.00     0.0</span>
+<span class="go">   &#39;c1&#39;  |    5    |   -10      -7       -5       -3        0</span>
 <span class="go">   &#39;c2&#39;  |    5    | -96.37   -70.65   -50.10   -30.00    -1.43</span>
 <span class="go">Benefits</span>
 <span class="go">criteria | weights | &#39;0.00&#39;   &#39;0.25&#39;   &#39;0.50&#39;   &#39;0.75&#39;    &#39;1.00&#39;</span>
@@ -3935,8 +3935,8 @@ play much a role, it would be perhaps better to decide to move to the most advan
 10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Ranking rule        :&#39;</span><span class="p">,</span> <span class="n">nqr</span><span class="o">.</span><span class="n">rankingRule</span><span class="p">)</span>
 <span class="go">Ranking rule        : Copeland</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Actions ranking     :&#39;</span><span class="p">,</span> <span class="n">nqr</span><span class="o">.</span><span class="n">actionsRanking</span><span class="p">)</span>
-<span class="go">Actions ranking     : [</span>
-<span class="go">&#39;m4&#39;, &#39;a1005&#39;, &#39;a1010&#39;, &#39;a1008&#39;, &#39;a1002&#39;, &#39;a1006&#39;,</span>
+<span class="go">Actions ranking     :</span>
+<span class="go">[&#39;m4&#39;, &#39;a1005&#39;, &#39;a1010&#39;, &#39;a1008&#39;, &#39;a1002&#39;, &#39;a1006&#39;,</span>
 <span class="go">&#39;m3&#39;, &#39;a1003&#39;, &#39;a1001&#39;, &#39;a1007&#39;, &#39;a1004&#39;, &#39;a1009&#39;,</span>
 <span class="go">&#39;m2&#39;, &#39;m1&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Ranking correlation : </span><span class="si">%+.2f</span><span class="s1">&#39;</span> <span class="o">%</span>\
@@ -4041,7 +4041,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <td>2</td>
 <td>61.0</td>
 <td>31.0</td>
-<td>-4.0</td>
+<td>-4</td>
 <td>-40.0</td>
 </tr>
 <tr class="row-odd"><td><strong>Q3</strong></td>
@@ -4051,23 +4051,25 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <td>6</td>
 <td>55.0</td>
 <td>51.0</td>
-<td>-4.0</td>
+<td>-4</td>
 <td>-35.0</td>
 </tr>
 </tbody>
 </table>
 </div></blockquote>
 <p>A more precise rating result may be achieved when we use <strong>deciles</strong> instead of <em>quartiles</em> for estimating the historical cumulative distribution functions. Notice that, for illustration, we may change by the way to upper closed quantiles bins (see Line 2 below).</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pq1</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="n">numberOfBins</span> <span class="o">=</span> <span class="s1">&#39;deciles&#39;</span><span class="p">,</span>\
-<span class="gp">... </span>             <span class="n">LowerClosed</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pq1</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="n">numberOfBins</span> <span class="o">=</span> <span class="s1">&#39;deciles&#39;</span><span class="p">,</span>\
+<span class="gp">... </span>             <span class="n">LowerClosed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nqr1</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq1</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nqr1</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
 <span class="go">*-------- Deciles rating result ---------</span>

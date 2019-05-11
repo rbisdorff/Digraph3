@@ -2311,7 +2311,7 @@ Below, an example Python session concerning 900 decision actions randomly genera
     ...               numberOfCriteria=nbrCrit,seed=seed)
     >>> pq = PerformanceQuantiles(tp,\
     ...               numberOfBins = 'quartiles',\
-    ...               LowerClosed=True,Debug=False)
+    ...               LowerClosed=True)
     >>> pq.__dict__.keys()
     dict_keys(['objectives', 'LowerClosed', 'name',
     'quantilesFrequencies', 'criteria', 'historySizes',
@@ -2325,7 +2325,7 @@ The :py:class:`performanceQuantiles.PerformanceQuantiles` class parameter *numbe
     Costs
     criteria | weights |  '0.00'   '0.25'   '0.50'   '0.75'   '1.00'   
     ---------|-------------------------------------------------------
-       'c1'  |    5    | -10.00    -7.00    -5.00    -3.00     0.0  
+       'c1'  |    5    |   -10      -7       -5       -3        0  
        'c2'  |    5    | -96.37   -70.65   -50.10   -30.00    -1.43  
     Benefits
     criteria | weights | '0.00'   '0.25'   '0.50'   '0.75'    '1.00'   
@@ -2446,8 +2446,8 @@ In this rating example, the *Copeland* rule appears to be the more appropriate r
     >>> print('Ranking rule        :', nqr.rankingRule)
     Ranking rule        : Copeland
     >>> print('Actions ranking     :', nqr.actionsRanking)
-    Actions ranking     : [
-    'm4', 'a1005', 'a1010', 'a1008', 'a1002', 'a1006',
+    Actions ranking     : 
+    ['m4', 'a1005', 'a1010', 'a1008', 'a1002', 'a1006',
     'm3', 'a1003', 'a1001', 'a1007', 'a1004', 'a1009',
     'm2', 'm1']
     >>> print('Ranking correlation : %+.2f' %\
@@ -2502,14 +2502,15 @@ We may now answer the **normed rating decision problem** stated at the beginning
    ============ =========== ======== ======== ======== ======== ======== ======== ========
     quartiles      weight       2        2        2        2        2        5        5     
          \            \         \        \        \        \        \        \        \
-      **Q2**       *a1001*    37.0      2        2      61.0     31.0     -4.0    -40.0    
-      **Q3**       *a1010*    32.0      9        6      55.0     51.0     -4.0    -35.0 
+      **Q2**       *a1001*    37.0      2        2      61.0     31.0       -4     -40.0    
+      **Q3**       *a1010*    32.0      9        6      55.0     51.0       -4     -35.0 
    ============ =========== ======== ======== ======== ======== ======== ======== ========
 
 A more precise rating result may be achieved when we use **deciles** instead of *quartiles* for estimating the historical cumulative distribution functions. Notice that, for illustration, we may change by the way to upper closed quantiles bins (see Line 2 below). 
 
     >>> pq1 = PerformanceQuantiles(tp, numberOfBins = 'deciles',\
-    ...              LowerClosed=False,Debug=False)
+    ...              LowerClosed=True)
+    ...
     >>> nqr1 = NormedQuantilesRatingDigraph(pq1,newActions,rankingRule='best')
     >>> nqr1.showQuantilesRating()
     *-------- Deciles rating result ---------
