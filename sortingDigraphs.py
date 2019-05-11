@@ -3125,6 +3125,9 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         from time import time
         from decimal import Decimal
 
+        # set Debug status
+##        if Debug:
+##            self.Debug = Debug
         # import the performance quantiles
         self.runTimes = {}
         tt = time()

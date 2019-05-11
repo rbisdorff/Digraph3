@@ -119,7 +119,7 @@
         <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span><span class="p">,</span> <span class="n">defaultdict</span>
         <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">,</span>\
                                    <span class="n">Random3ObjectivesPerformanceTableau</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
+        
         <span class="k">if</span> <span class="n">perfTab</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">actionsTypeStatistics</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
@@ -150,7 +150,7 @@
             <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
                 <span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computeLimitingQuantiles</span><span class="p">(</span><span class="n">perfTab</span><span class="p">,</span><span class="n">g</span><span class="p">)</span>
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">])</span>
                 <span class="n">cdf</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="p">)])</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">limitingQuantiles</span> <span class="o">=</span> <span class="n">limitingQuantiles</span>
@@ -239,8 +239,6 @@
         <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">floor</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
         <span class="n">critg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
-            <span class="n">Debug</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="n">gValues</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
@@ -422,8 +420,8 @@
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;&#39;</span>        
         <span class="k">return</span> <span class="n">html</span>
 
-    <span class="k">def</span> <span class="nf">_interpolateQuantile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">newq</span><span class="p">,</span><span class="n">newp</span><span class="p">):</span>
-        <span class="n">Debug</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span>
+    <span class="k">def</span> <span class="nf">_interpolateQuantile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">newq</span><span class="p">,</span><span class="n">newp</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="c1">#Debug = self.Debug</span>
         <span class="c1">#Debug = True</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt;?&#39;</span><span class="p">)</span>
@@ -439,7 +437,7 @@
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">newp</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-                <span class="n">ix</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">ix</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span>
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x &lt; newp[i]&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">newp</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">ix</span><span class="p">,</span> <span class="n">newp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">newq</span><span class="p">[</span><span class="n">ix</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">newp</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">newq</span><span class="p">[</span><span class="n">ix</span><span class="p">])</span>
                             <span class="c1"># nsq[0] </span>
@@ -460,16 +458,16 @@
                 <span class="k">return</span> <span class="n">res</span>
                 
             <span class="k">else</span><span class="p">:</span> <span class="c1"># x &gt; newp[i]</span>
-                <span class="n">ix</span> <span class="o">=</span> <span class="n">i</span>
+                <span class="n">ix</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span>
                 <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x &gt; newp[i]&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span><span class="n">ix</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_updateCriterionQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">newValues</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_updateCriterionQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">newValues</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        See lecture about the iq-agent of the MICS-3 Computational Statistics Course.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">Debug</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span>
+        <span class="c1">#Debug = self.Debug</span>
         <span class="c1">#Debug = True</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt;&#39;</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span><span class="n">newValues</span><span class="p">)</span>
@@ -692,8 +690,8 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        print Criteria with thresholds and weights.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
-            <span class="n">Debug</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="c1">##        if self.Debug:</span>
+<span class="c1">##            Debug = True</span>
             
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="k">try</span><span class="p">:</span>

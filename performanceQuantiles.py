@@ -72,7 +72,7 @@ class PerformanceQuantiles(PerformanceTableau):
         from collections import OrderedDict, defaultdict
         from randomPerfTabs import RandomCBPerformanceTableau,\
                                    Random3ObjectivesPerformanceTableau
-        self.Debug = Debug
+        
         if perfTab != None:
             actionsTypeStatistics = {}
             for x in perfTab.actions:
@@ -103,7 +103,7 @@ class PerformanceQuantiles(PerformanceTableau):
             for g in self.criteria:
                 self.historySizes[g] = 0
                 limitingQuantiles[g] = self._computeLimitingQuantiles(perfTab,g)
-                if self.Debug:
+                if Debug:
                     print(g,limitingQuantiles[g])
                 cdf[g] = OrderedDict([(limitingQuantiles[g][i],self.quantilesFrequencies[i]) for i in range(np)])
             self.limitingQuantiles = limitingQuantiles
@@ -192,8 +192,6 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
         from math import floor
         from copy import copy, deepcopy
         critg = self.criteria[g]
-        if self.Debug:
-            Debug = True
         gValues = []
         for x in perfTab.actions:
             if Debug:
@@ -375,8 +373,8 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
             html += '</table>'        
         return html
 
-    def _interpolateQuantile(self,x,newq,newp):
-        Debug = self.Debug
+    def _interpolateQuantile(self,x,newq,newp,Debug=False):
+        #Debug = self.Debug
         #Debug = True
         if Debug:
             print('==>>?')
@@ -392,7 +390,7 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
             if Debug:
                 print(i)
             if x < newp[i]:
-                ix = i + 1
+                ix = i+1
                 if Debug:
                     print('x < newp[i]', x, newp[i],ix, newp[i-1],newq[ix-1],newp[i],newq[ix])
                             # nsq[0] 
@@ -413,16 +411,16 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
                 return res
                 
             else: # x > newp[i]
-                ix = i
+                ix = i+1
                 i += 1
                 if Debug:
                     print('x > newp[i]', i,ix)
 
-    def _updateCriterionQuantiles(self,g,newValues,historySize=None):
+    def _updateCriterionQuantiles(self,g,newValues,historySize=None,Debug=False):
         """
         See lecture about the iq-agent of the MICS-3 Computational Statistics Course.
         """
-        Debug = self.Debug
+        #Debug = self.Debug
         #Debug = True
         if Debug:
             print('==>>', g,newValues)
@@ -645,8 +643,8 @@ The number of so far observed evaluations per criteria are the following:
         """
         print Criteria with thresholds and weights.
         """
-        if self.Debug:
-            Debug = True
+##        if self.Debug:
+##            Debug = True
             
         criteria = self.criteria
         try:
