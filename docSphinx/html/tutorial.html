@@ -3972,7 +3972,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 </pre></div>
 </td></tr></table></div>
 <div class="figure align-center" id="id103">
-<a class="reference internal image-reference" href="_images/heatMap1.png"><img alt="usage example of Normed Quantiles Rating Digraph" src="_images/heatMap1.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/heatMap1.png"><img alt="heatmap of Normed Quartiles Rating" src="_images/heatMap1.png" style="width: 550px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 22 </span><span class="caption-text">Heatmap of normed quartiles ranking</span></p>
 </div>
 <p>Using furthermore a specialised version of the <a class="reference internal" href="techDoc.html#weakOrders.WeakOrder.exportGraphViz" title="weakOrders.WeakOrder.exportGraphViz"><code class="xref py py-meth docutils literal"><span class="pre">weakOrders.WeakOrder.exportGraphViz()</span></code></a> method allows drawing the same rating result in a Hasse diagram format.</p>
@@ -3986,7 +3986,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 </pre></div>
 </td></tr></table></div>
 <div class="figure align-center" id="id104">
-<a class="reference internal image-reference" href="_images/normedRatingDigraph.png"><img alt="usage example of Normed Quartiles Rating Digraph" src="_images/normedRatingDigraph.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/normedRatingDigraph.png"><img alt="drawing of normed Quartiles Rating Digraph" src="_images/normedRatingDigraph.png" style="width: 500px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 23 </span><span class="caption-text">Normed quartiles rating digraph</span></p>
 </div>
 <p>We may now answer the <strong>normed rating decision problem</strong> stated at the beginning. Decision alternative <em>a1001</em> is rated in quartile <strong>Q2</strong> and alternative <em>a1010</em> in quartile <strong>Q3</strong> (see Table below). Indeed, the performances of decision alternative <em>a1001</em> were generated with a triangular law at a <em>low</em> mode, i.e. low costs but also low benefits, whereas the performances of alternative <em>a1010</em> were generated with a <em>median</em> mode.</p>
@@ -4081,7 +4081,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <span class="go">[0.30 - 0.40[ [&#39;a1009&#39;]</span>
 </pre></div>
 </td></tr></table></div>
-<p>Compared with the previous quartiles rating result, we notice that the five alternatives (<em>a1002</em>, <em>a1005</em>, <em>a1006</em>, <em>a1008</em>, and <em>a1010</em>), rated before into the third quartile class [0.50-0.75[, are now divided up: alternatives <em>a1002</em>, <em>a1005</em>, “a1008* and <em>a1010</em> attain the 7th decile class [0.6-0.7[, whereas alternative <em>a1006</em> attains only the the 6th decile class [0.5-0.6[. Of the five <em>Q2</em> [0.25-0.50[ rated alternatives (<em>a1001</em>, <em>a1003</em>, <em>a1004</em>, <em>a1006</em> and <em>a1007</em>), alternatives <em>a1001</em> and <em>a1003</em> are now uprated in the 6th decile class [0.5 - 0.6[, whereas <em>a1004</em> and <em>a1007</em> are rated the 5th decile class [0.4-0.5[ and <em>a1009</em> is lowest rated in the 4th decile class [0.3 - 0.4[.</p>
+<p>Compared with the quartiles rating result, we notice that the five alternatives (<em>a1002</em>, <em>a1005</em>, <em>a1006</em>, <em>a1008</em>, and <em>a1010</em>), rated before into the third quartile class [0.50-0.75[, are now divided up: alternatives <em>a1002</em>, <em>a1005</em>, “a1008* and <em>a1010</em> attain the 7th decile class [0.6-0.7[, whereas alternative <em>a1006</em> attains only the the 6th decile class [0.5-0.6[. Of the five <em>Q2</em> [0.25-0.50[ rated alternatives (<em>a1001</em>, <em>a1003</em>, <em>a1004</em>, <em>a1006</em> and <em>a1007</em>), alternatives <em>a1001</em> and <em>a1003</em> are now rated in the 6th decile class [0.5 - 0.6[, whereas <em>a1004</em> and <em>a1007</em> are rated the 5th decile class [0.4-0.5[ and <em>a1009</em> is lowest rated in the 4th decile class [0.3 - 0.4[.</p>
 <p>A browser view may again more conveniently illustrate this preciser <em>deciles</em> rating result.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr1</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of the deciles rating&#39;</span><span class="p">,</span>\
@@ -4089,7 +4089,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 </pre></div>
 </td></tr></table></div>
 <div class="figure align-center" id="id105">
-<a class="reference internal image-reference" href="_images/heatMap2.png"><img alt="usage example of Normed Deciles Rating Digraph" src="_images/heatMap2.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/heatMap2.png"><img alt="Heatmap of normed deciles rating" src="_images/heatMap2.png" style="width: 550px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 24 </span><span class="caption-text">Heatmap of mormed deciles rating</span></p>
 </div>
 <p>In this preciser <em>deciles</em> rating, decision alternatives <em>a1001</em> and <em>a1010</em> are now rated in the <em>6th</em> decile (D6), respectively in the <em>7th</em> decile (D7).</p>

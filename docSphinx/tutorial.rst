@@ -2476,7 +2476,7 @@ The same result may even more conviently be consulted in a browser view via a sp
     ...               Correlations=True,colorLevels=5)
 
 .. figure:: heatMap1.png
-    :alt: usage example of Normed Quantiles Rating Digraph
+    :alt: heatmap of Normed Quartiles Rating
     :width: 550 px
     :align: center
 
@@ -2490,7 +2490,7 @@ Using furthermore a specialised version of the :py:meth:`weakOrders.WeakOrder.ex
      dot -Grankdir=TB -Tpng normedRatingDigraph.dot -o normedRatingDigraph.png
 
 .. figure:: normedRatingDigraph.png
-    :alt: usage example of Normed Quartiles Rating Digraph
+    :alt: drawing of normed Quartiles Rating Digraph
     :width: 500 px
     :align: center
 
@@ -2520,7 +2520,7 @@ A more precise rating result may be achieved when we use **deciles** instead of 
     [0.40 - 0.50[ ['a1007', 'a1004']
     [0.30 - 0.40[ ['a1009']
 
-Compared with the previous quartiles rating result, we notice that the five alternatives (*a1002*, *a1005*, *a1006*, *a1008*, and *a1010*), rated before into the third quartile class [0.50-0.75[, are now divided up: alternatives *a1002*, *a1005*, "a1008* and *a1010* attain the 7th decile class [0.6-0.7[, whereas alternative *a1006* attains only the the 6th decile class [0.5-0.6[. Of the five *Q2* [0.25-0.50[ rated alternatives (*a1001*, *a1003*, *a1004*, *a1006* and *a1007*), alternatives *a1001* and *a1003* are now uprated in the 6th decile class [0.5 - 0.6[, whereas *a1004* and *a1007* are rated the 5th decile class [0.4-0.5[ and *a1009* is lowest rated in the 4th decile class [0.3 - 0.4[.
+Compared with the quartiles rating result, we notice that the five alternatives (*a1002*, *a1005*, *a1006*, *a1008*, and *a1010*), rated before into the third quartile class [0.50-0.75[, are now divided up: alternatives *a1002*, *a1005*, "a1008* and *a1010* attain the 7th decile class [0.6-0.7[, whereas alternative *a1006* attains only the the 6th decile class [0.5-0.6[. Of the five *Q2* [0.25-0.50[ rated alternatives (*a1001*, *a1003*, *a1004*, *a1006* and *a1007*), alternatives *a1001* and *a1003* are now rated in the 6th decile class [0.5 - 0.6[, whereas *a1004* and *a1007* are rated the 5th decile class [0.4-0.5[ and *a1009* is lowest rated in the 4th decile class [0.3 - 0.4[.
 
 A browser view may again more conveniently illustrate this preciser *deciles* rating result.
 
@@ -2528,7 +2528,7 @@ A browser view may again more conveniently illustrate this preciser *deciles* ra
     ...                            colorLevels=5,Correlations=True)
 
 .. figure:: heatMap2.png
-    :alt: usage example of Normed Deciles Rating Digraph
+    :alt: Heatmap of normed deciles rating
     :width: 550 px
     :align: center
 
