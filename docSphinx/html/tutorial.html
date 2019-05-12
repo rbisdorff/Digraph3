@@ -3966,11 +3966,13 @@ play much a role, it would be perhaps better to decide to move to the most advan
 </pre></div>
 </td></tr></table></div>
 <p>The same result may even more conviently be consulted in a browser view via a specialised rating heatmap format ( see <code class="xref py py-meth docutils literal"><span class="pre">perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap()</span></code> method.</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of Quantiles Rating&#39;</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of Quartiles Rating&#39;</span><span class="p">,</span>
+<span class="gp">... </span>              <span class="n">Correlations</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
 <div class="figure align-center" id="id103">
-<a class="reference internal image-reference" href="_images/exampleIncRatDigraphTut.png"><img alt="usage example of Normed Quantiles Rating Digraph" src="_images/exampleIncRatDigraphTut.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/heatMap1.png"><img alt="usage example of Normed Quantiles Rating Digraph" src="_images/heatMap1.png" style="width: 550px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 22 </span><span class="caption-text">Heatmap of normed quartiles ranking</span></p>
 </div>
 <p>Using furthermore a specialised version of the <a class="reference internal" href="techDoc.html#weakOrders.WeakOrder.exportGraphViz" title="weakOrders.WeakOrder.exportGraphViz"><code class="xref py py-meth docutils literal"><span class="pre">weakOrders.WeakOrder.exportGraphViz()</span></code></a> method allows drawing the same rating result in a Hasse diagram format.</p>
@@ -4073,24 +4075,24 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nqr1</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq1</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nqr1</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
 <span class="go">*-------- Deciles rating result ---------</span>
-<span class="go">]0.60 - 0.70] [&#39;a1005&#39;, &#39;a1010&#39;]</span>
-<span class="go">]0.50 - 0.60] [&#39;a1008&#39;, &#39;a1002&#39;]</span>
-<span class="go">]0.40 - 0.50] [&#39;a1006&#39;, &#39;a1003&#39;, &#39;a1001&#39;, &#39;a1007&#39;]</span>
-<span class="go">]0.30 - 0.40] [&#39;a1004&#39;, &#39;a1009&#39;]</span>
+<span class="go">[0.60 - 0.70[ [&#39;a1005&#39;, &#39;a1010&#39;, &#39;a1008&#39;, &#39;a1002&#39;]</span>
+<span class="go">[0.50 - 0.60[ [&#39;a1006&#39;, &#39;a1001&#39;, &#39;a1003&#39;]</span>
+<span class="go">[0.40 - 0.50[ [&#39;a1007&#39;, &#39;a1004&#39;]</span>
+<span class="go">[0.30 - 0.40[ [&#39;a1009&#39;]</span>
 </pre></div>
 </td></tr></table></div>
-<p>Compared with the previous quartiles rating result, we notice that the five alternatives rated before into the third quartile class [0.50 - 0.75[, are now divided up: alternatives <em>a1005</em> and <em>a1010</em> attain the 7th decile class ]0.6 - 0.7], whereas alternatives <em>a1002</em> and <em>1008</em> attain only the the 6th decile class ]0.5 - 0.6]. Of the five <em>Q2</em> [0.25 - 0.50[ rated alternatives (<em>a1001</em>, <em>a1003</em>, <em>a1004</em>, <em>a1006</em> and <em>a1007</em>), alternatives <em>a1001</em>, <em>a1003</em>, <em>a1006</em> and <em>a1007</em> are now rated in the fifth decile class ]0.4 - 0.5], whereas <em>a1004</em> and <em>a1009</em> are rated the fourth decile class ]0.30 - 0.40].</p>
+<p>Compared with the previous quartiles rating result, we notice that the five alternatives (<em>a1002</em>, <em>a1005</em>, <em>a1006</em>, <em>a1008</em>, and <em>a1010</em>), rated before into the third quartile class [0.50-0.75[, are now divided up: alternatives <em>a1002</em>, <em>a1005</em>, “a1008* and <em>a1010</em> attain the 7th decile class [0.6-0.7[, whereas alternative <em>a1006</em> attains only the the 6th decile class [0.5-0.6[. Of the five <em>Q2</em> [0.25-0.50[ rated alternatives (<em>a1001</em>, <em>a1003</em>, <em>a1004</em>, <em>a1006</em> and <em>a1007</em>), alternatives <em>a1001</em> and <em>a1003</em> are now uprated in the 6th decile class [0.5 - 0.6[, whereas <em>a1004</em> and <em>a1007</em> are rated the 5th decile class [0.4-0.5[ and <em>a1009</em> is lowest rated in the 4th decile class [0.3 - 0.4[.</p>
 <p>A browser view may again more conveniently illustrate this preciser <em>deciles</em> rating result.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr1</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heat map of the deciles rating&#39;</span><span class="p">,</span>\
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr1</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of the deciles rating&#39;</span><span class="p">,</span>\
 <span class="gp">... </span>                           <span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
 <div class="figure align-center" id="id105">
-<a class="reference internal image-reference" href="_images/exampleIncRatDigraphTutBis.png"><img alt="usage example of Normed Deciles Rating Digraph" src="_images/exampleIncRatDigraphTutBis.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/heatMap2.png"><img alt="usage example of Normed Deciles Rating Digraph" src="_images/heatMap2.png" style="width: 550px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 24 </span><span class="caption-text">Heatmap of mormed deciles rating</span></p>
 </div>
-<p>In this preciser <em>deciles</em> rating, decision alternatives <em>a1001</em> and <em>a1010</em> are now rated in the <em>fifth</em> decile (D5), respectively in the <em>seventh</em> decile (D7).</p>
+<p>In this preciser <em>deciles</em> rating, decision alternatives <em>a1001</em> and <em>a1010</em> are now rated in the <em>6th</em> decile (D6), respectively in the <em>7th</em> decile (D7).</p>
 <p>More generally, in the case of industrial production monitoring problems, for instance, where large volumes of historical performance data may be available, it may be of interest to estimate even more precisely the marginal cumulative distribution functions with <strong>dodeciles</strong> or even <strong>centiles</strong>. Especially if <strong>tail</strong> rating results, i.e. distinguishing <strong>very best</strong>, or <strong>very worst</strong> multiple criteria performances, becomes a critical purpose. Similarly, the <em>historySize</em> parameter may be used for monitoring on the fly <strong>unstable</strong> random multiple criteria performance data.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Tutorials of the Digraph3 resources</span></a></p>
 </div>

@@ -2472,9 +2472,10 @@ We notice above that no new decision alternative is rated in the lowest [0.0-0.2
     
 The same result may even more conviently be consulted in a browser view via a specialised rating heatmap format ( see :py:meth:`perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap` method.
 
-    >>> nqr.showHTMLRatingHeatmap(pageTitle='Heatmap of Quantiles Rating',Correlations=True)
+    >>> nqr.showHTMLRatingHeatmap(pageTitle='Heatmap of Quartiles Rating',
+    ...               Correlations=True,colorLevels=5)
 
-.. figure:: exampleIncRatDigraphTut.png
+.. figure:: heatMap1.png
     :alt: usage example of Normed Quantiles Rating Digraph
     :width: 550 px
     :align: center
@@ -2514,26 +2515,26 @@ A more precise rating result may be achieved when we use **deciles** instead of 
     >>> nqr1 = NormedQuantilesRatingDigraph(pq1,newActions,rankingRule='best')
     >>> nqr1.showQuantilesRating()
     *-------- Deciles rating result ---------
-    ]0.60 - 0.70] ['a1005', 'a1010']
-    ]0.50 - 0.60] ['a1008', 'a1002']
-    ]0.40 - 0.50] ['a1006', 'a1003', 'a1001', 'a1007']
-    ]0.30 - 0.40] ['a1004', 'a1009']
+    [0.60 - 0.70[ ['a1005', 'a1010', 'a1008', 'a1002']
+    [0.50 - 0.60[ ['a1006', 'a1001', 'a1003']
+    [0.40 - 0.50[ ['a1007', 'a1004']
+    [0.30 - 0.40[ ['a1009']
 
-Compared with the previous quartiles rating result, we notice that the five alternatives rated before into the third quartile class [0.50 - 0.75[, are now divided up: alternatives *a1005* and *a1010* attain the 7th decile class ]0.6 - 0.7], whereas alternatives *a1002* and *1008* attain only the the 6th decile class ]0.5 - 0.6]. Of the five *Q2* [0.25 - 0.50[ rated alternatives (*a1001*, *a1003*, *a1004*, *a1006* and *a1007*), alternatives *a1001*, *a1003*, *a1006* and *a1007* are now rated in the fifth decile class ]0.4 - 0.5], whereas *a1004* and *a1009* are rated the fourth decile class ]0.30 - 0.40].
+Compared with the previous quartiles rating result, we notice that the five alternatives (*a1002*, *a1005*, *a1006*, *a1008*, and *a1010*), rated before into the third quartile class [0.50-0.75[, are now divided up: alternatives *a1002*, *a1005*, "a1008* and *a1010* attain the 7th decile class [0.6-0.7[, whereas alternative *a1006* attains only the the 6th decile class [0.5-0.6[. Of the five *Q2* [0.25-0.50[ rated alternatives (*a1001*, *a1003*, *a1004*, *a1006* and *a1007*), alternatives *a1001* and *a1003* are now uprated in the 6th decile class [0.5 - 0.6[, whereas *a1004* and *a1007* are rated the 5th decile class [0.4-0.5[ and *a1009* is lowest rated in the 4th decile class [0.3 - 0.4[.
 
 A browser view may again more conveniently illustrate this preciser *deciles* rating result.
 
-    >>> nqr1.showHTMLRatingHeatmap(pageTitle='Heat map of the deciles rating',\
+    >>> nqr1.showHTMLRatingHeatmap(pageTitle='Heatmap of the deciles rating',\
     ...                            colorLevels=5,Correlations=True)
 
-.. figure:: exampleIncRatDigraphTutBis.png
+.. figure:: heatMap2.png
     :alt: usage example of Normed Deciles Rating Digraph
     :width: 550 px
     :align: center
 
     Heatmap of mormed deciles rating 
 
-In this preciser *deciles* rating, decision alternatives *a1001* and *a1010* are now rated in the *fifth* decile (D5), respectively in the *seventh* decile (D7).
+In this preciser *deciles* rating, decision alternatives *a1001* and *a1010* are now rated in the *6th* decile (D6), respectively in the *7th* decile (D7).
     
 More generally, in the case of industrial production monitoring problems, for instance, where large volumes of historical performance data may be available, it may be of interest to estimate even more precisely the marginal cumulative distribution functions with **dodeciles** or even **centiles**. Especially if **tail** rating results, i.e. distinguishing **very best**, or **very worst** multiple criteria performances, becomes a critical purpose. Similarly, the *historySize* parameter may be used for monitoring on the fly **unstable** random multiple criteria performance data.  	
 

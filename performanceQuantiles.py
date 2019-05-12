@@ -942,7 +942,7 @@ if __name__ == "__main__":
                                              NegativeWeights=True,
                                              negativeWeightProbability=0.1,
                                     numberOfCriteria=nbrCrit,seed=seed)
-    pq = PerformanceQuantiles(tp,5,LowerClosed=True,Debug=False)
+    pq = PerformanceQuantiles(tp,5,LowerClosed=False,Debug=False)
     #print(pq.actionsTypeStatistics)
     #pq.showHTMLLimitingQuantiles(Transposed=True)
     #print(pq.limitingQuantiles)
@@ -959,7 +959,9 @@ if __name__ == "__main__":
     pq.updateQuantiles(newActions,historySize=0)
     pq.showHTMLLimitingQuantiles(Transposed=True)
     from sortingDigraphs import NormedQuantilesRatingDigraph
-    nqr1 = NormedQuantilesRatingDigraph(pq,newActions,rankingRule='best',Debug=False)
+    nqr1 = NormedQuantilesRatingDigraph(pq,newActions,\
+                                        rankingRule='best',\
+                                        Debug=False)
     print(nqr1)
     nqr1.showHTMLRatingHeatmap(pageTitle='Heat map of the qintiles rating',
                                        colorLevels=7,

@@ -3962,7 +3962,10 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         for x in actionsList:
             if x in profiles:
                 xcat = profiles[x]['category']
-                xName = categories[xcat]['name']
+                if self.LowerClosed:
+                    xName = categories[xcat]['lowLimit'] + ' -'
+                else:
+                    xName = '- ' + categories[xcat]['highLimit']
             else:
                 try:
                     xName = self.actions[x]['shortName']
@@ -3994,7 +3997,8 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         html += '</tr>\n'
         html += '</table>\n'
         if criteriaCorrelation != None:
-            html += '<i>(*) tau: Ordinal (Kendall) correlation between marginal criterion and global ranking relation.</i><br/>\n'
+            html += '<i>(*) tau: Ordinal (Kendall) correlation between</i><br/>'
+            html += '<i>marginal criterion and global ranking relation.</i><br/>\n'
 ##        if rankCorrelation != None:
 ##            html += '<i>Ordinal (Kendall) correlation between global ranking and outranking relation: %.2f.</i>' % (rankCorrelation['correlation'])
         html += '</body></html>'
@@ -4079,14 +4083,13 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         Suppose we observe the following rating result:
         
             >>> nqr.showQuantilesRating()
-             [0.50 - 0.75[ ['a1008', 'a1006', 'a1005', 'a1001', 'a1003', 'a1010']
-             [0.25 - 0.50[ ['a1002']
-             [0.00 - 0.25[ ['a1004', 'a1009', 'a1007']
+            [0.50 - 0.75[ ['a1005', 'a1010', 'a1008', 'a1002', 'a1006']
+            [0.25 - 0.50[ ['a1003', 'a1001', 'a1007', 'a1004', 'a1009']
             >>> nqr.showHTMLRatingHeatmap(pageTitle='Heat map of the ratings',
             ...                           Correlations=True,
             ...                           colorLevels = 5)
 
-        .. image:: exampleIncRatDigraphTut.png
+        .. image:: heatMap1.png
             :alt: usage example of Normed Quantiles Rating Digraph
             :width: 550 px
             :align: center

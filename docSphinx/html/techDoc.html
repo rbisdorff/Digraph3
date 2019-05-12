@@ -7088,15 +7088,14 @@ see <code class="xref py py-meth docutils literal"><span class="pre">perfTabs.sh
 </div></blockquote>
 <p>Suppose we observe the following rating result:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
-<span class="go"> [0.50 - 0.75[ [&#39;a1008&#39;, &#39;a1006&#39;, &#39;a1005&#39;, &#39;a1001&#39;, &#39;a1003&#39;, &#39;a1010&#39;]</span>
-<span class="go"> [0.25 - 0.50[ [&#39;a1002&#39;]</span>
-<span class="go"> [0.00 - 0.25[ [&#39;a1004&#39;, &#39;a1009&#39;, &#39;a1007&#39;]</span>
+<span class="go">[0.50 - 0.75[ [&#39;a1005&#39;, &#39;a1010&#39;, &#39;a1008&#39;, &#39;a1002&#39;, &#39;a1006&#39;]</span>
+<span class="go">[0.25 - 0.50[ [&#39;a1003&#39;, &#39;a1001&#39;, &#39;a1007&#39;, &#39;a1004&#39;, &#39;a1009&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heat map of the ratings&#39;</span><span class="p">,</span>
 <span class="gp">... </span>                          <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="gp">... </span>                          <span class="n">colorLevels</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/exampleIncRatDigraphTut.png"><img alt="usage example of Normed Quantiles Rating Digraph" class="align-center" src="_images/exampleIncRatDigraphTut.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/heatMap1.png"><img alt="usage example of Normed Quantiles Rating Digraph" class="align-center" src="_images/heatMap1.png" style="width: 550px;" /></a>
 </dd></dl>
 
 <dl class="method">
