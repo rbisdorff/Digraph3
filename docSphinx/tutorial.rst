@@ -2484,10 +2484,10 @@ The same result may even more conviently be consulted in a browser view via a sp
 	    
 Using furthermore a specialised version of the :py:meth:`weakOrders.WeakOrder.exportGraphViz` method allows drawing the same rating result in a Hasse diagram format.
 
-   >>> nqr.exportRatingGraphViz('normedRatingResult')
+   >>> nqr.exportRatingGraphViz('normedRatingDigraph')
     *---- exporting a dot file for GraphViz tools ---------*
-     Exporting to quantilesRatingDigraph.dot
-     dot -Grankdir=TB -Tpng quantilesRatingDigraph.dot -o quantilesRatingDigraph.png
+     Exporting to normedRatingDigraph.dot
+     dot -Grankdir=TB -Tpng normedRatingDigraph.dot -o normedRatingDigraph.png
 
 .. figure:: normedRatingDigraph.png
     :alt: usage example of Normed Quartiles Rating Digraph
