@@ -2477,7 +2477,7 @@ The same result may even more conviently be consulted in a browser view via a sp
 
 .. figure:: heatMap1.png
     :alt: heatmap of Normed Quartiles Rating
-    :width: 550 px
+    :width: 400 px
     :align: center
 
     Heatmap of normed quartiles ranking 
