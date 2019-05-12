@@ -3778,7 +3778,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 
         .. image:: quantilesRatingDigraph.png
             :alt: usage example of Normed Quantiles Rating Digraph
-            :width: 200 px
+            :width: 400 px
             :align: center
         
         .. warning::
