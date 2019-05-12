@@ -3091,16 +3091,17 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         >>> # rating the new set of decision actions after
         >>> # updating the historical performance quantiles
         >>> pq.updateQuantiles(newActions,historySize=None)
-        >>> nqr = NormedQuantilesRatingDigraph(pq,newActions,Debug=True)
+        >>> nqr = NormedQuantilesRatingDigraph(pq,newActions)
         >>> # inspecting the rating result
         >>> nqr.showQuantilesRating()
-         *-------- Normed quantiles rating result ---------
-         [0.50 - 0.60[ ['a1', 'a7', 'a3', 'a10', 'a2']
-         [0.40 - 0.50[ ['a6', 'a9', 'a8']
-         [0.20 - 0.30[ ['a4', 'a5']
+        *-------- Normed quantiles rating result ---------
+        [0.60 - 0.70[ ['a01']
+        [0.50 - 0.60[ ['a07', 'a10', 'a02', 'a08', 'a09']
+        [0.40 - 0.50[ ['a03', 'a06', 'a05']
+        [0.30 - 0.40[ ['a04']
         >>> nqr.showHTMLRatingHeatmap(pageTitle='Heatmap of Quantiles Rating')
 
-    .. image:: exampleIncRatDigraph.png
+    .. image:: heatMap3.png
         :alt: usage example of Normed Quantiles Rating Digraph
         :width: 500 px
         :align: center

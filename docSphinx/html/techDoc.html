@@ -6946,19 +6946,20 @@ normed performance quantiles gathered from historical data.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># rating the new set of decision actions after</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># updating the historical performance quantiles</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># inspecting the rating result</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
-<span class="go"> *-------- Normed quantiles rating result ---------</span>
-<span class="go"> [0.50 - 0.60[ [&#39;a1&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a10&#39;, &#39;a2&#39;]</span>
-<span class="go"> [0.40 - 0.50[ [&#39;a6&#39;, &#39;a9&#39;, &#39;a8&#39;]</span>
-<span class="go"> [0.20 - 0.30[ [&#39;a4&#39;, &#39;a5&#39;]</span>
+<span class="go">*-------- Normed quantiles rating result ---------</span>
+<span class="go">[0.60 - 0.70[ [&#39;a01&#39;]</span>
+<span class="go">[0.50 - 0.60[ [&#39;a07&#39;, &#39;a10&#39;, &#39;a02&#39;, &#39;a08&#39;, &#39;a09&#39;]</span>
+<span class="go">[0.40 - 0.50[ [&#39;a03&#39;, &#39;a06&#39;, &#39;a05&#39;]</span>
+<span class="go">[0.30 - 0.40[ [&#39;a04&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of Quantiles Rating&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd>
 </dl>
-<a class="reference internal image-reference" href="_images/exampleIncRatDigraph.png"><img alt="usage example of Normed Quantiles Rating Digraph" class="align-center" src="_images/exampleIncRatDigraph.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/heatMap3.png"><img alt="usage example of Normed Quantiles Rating Digraph" class="align-center" src="_images/heatMap3.png" style="width: 500px;" /></a>
 <dl class="method">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph.computeCategoryContents">
 <code class="descname">computeCategoryContents</code><span class="sig-paren">(</span><em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.computeCategoryContents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.computeCategoryContents" title="Permalink to this definition">¶</a></dt>
