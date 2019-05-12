@@ -206,7 +206,10 @@ class WeakOrder(Digraph):
                 #print(digraphClass)
                 if x in self.profiles:
                     cat = self.profiles[x]['category']
-                    nodeName = self.categories[cat]['name']
+                    if self.LowerClosed:
+                        nodeName = self.categories[cat]['lowLimit'] + ' -'
+                    else:
+                        nodeName = '- ' +self.categories[cat]['highLimit']
                     node = '%s [shape = "box", fillcolor=lightcoral, style=filled, label = "%s", fontsize=%d];\n'\
                            % (str(x),nodeName,fontSize)           
                 else:

@@ -3311,10 +3311,10 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">cKey</span> <span class="o">=</span> <span class="s1">&#39;M&#39;</span><span class="o">+</span><span class="n">c</span>
             <span class="k">if</span> <span class="n">LowerClosed</span><span class="p">:</span>
-                <span class="n">profiles</span><span class="p">[</span><span class="n">cKey</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="n">c</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;categorical low limits&#39;</span><span class="p">,</span>\
+                <span class="n">profiles</span><span class="p">[</span><span class="n">cKey</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="n">c</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">categories</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39; -&#39;</span><span class="p">,</span>\
                                   <span class="s1">&#39;comment&#39;</span><span class="p">:</span> <span class="s1">&#39;Inferior or equal limits for category membership assessment&#39;</span><span class="p">}</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">profiles</span><span class="p">[</span><span class="n">cKey</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="n">c</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;categorical high limits&#39;</span><span class="p">,</span>\
+                <span class="n">profiles</span><span class="p">[</span><span class="n">cKey</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="n">c</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;- &#39;</span> <span class="o">+</span> <span class="n">categories</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;highLimit&#39;</span><span class="p">],</span>\
                                   <span class="s1">&#39;comment&#39;</span><span class="p">:</span> <span class="s1">&#39;Lower or equal limits for category membership assessment&#39;</span><span class="p">}</span>
             <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">LowerClosed</span><span class="p">:</span>
@@ -3812,14 +3812,16 @@
 <span class="sd">        of the corresponding preorder relation.</span>
 
 <span class="sd">        Continuing the previous Python session:</span>
-<span class="sd">           &gt;&gt;&gt; nqr.showQuantilesRating()</span>
-<span class="sd">           *-------- Quantile sorting result ---------</span>
-<span class="sd">            [0.40 - 0.60[ [&#39;a1&#39;, &#39;a2&#39;, &#39;a3&#39;]</span>
-<span class="sd">            [0.20 - 0.40[ [&#39;a4&#39;, &#39;a5&#39;]</span>
-<span class="sd">           &gt;&gt;&gt; nqr.exportRatingGraphViz(Comments=False)</span>
-<span class="sd">           *---- exporting a dot file for GraphViz tools ---------*</span>
-<span class="sd">            Exporting to quantilesRatingDigraph.dot</span>
-<span class="sd">            dot -Grankdir=TB -Tpng quantilesRatingDigraph.dot -o quantilesRatingDigraph.png</span>
+
+<span class="sd">        &gt;&gt;&gt; nqr.showQuantilesRating()</span>
+<span class="sd">        *-------- Quantile sorting result ---------</span>
+<span class="sd">        [0.50 - 0.75[ [&#39;a01&#39;]</span>
+<span class="sd">        [0.25 - 0.50[ [&#39;a07&#39;, &#39;a02&#39;, &#39;a10&#39;, &#39;a06&#39;, &#39;a03&#39;, &#39;a08&#39;, &#39;a09&#39;, &#39;a04&#39;]</span>
+<span class="sd">        [0.00 - 0.25[ [&#39;a05&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; nqr.exportRatingGraphViz(&#39;quantilesRatingDigraph&#39;,Comments=False)</span>
+<span class="sd">        *---- exporting a dot file for GraphViz tools ---------*</span>
+<span class="sd">        Exporting to quantilesRatingDigraph.dot</span>
+<span class="sd">        dot -Grankdir=TB -Tpng quantilesRatingDigraph.dot -o quantilesRatingDigraph.png</span>
 
 <span class="sd">        .. image:: quantilesRatingDigraph.png</span>
 <span class="sd">            :alt: usage example of Normed Quantiles Rating Digraph</span>

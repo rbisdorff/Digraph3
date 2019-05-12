@@ -3264,10 +3264,10 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             else:
                 cKey = 'M'+c
             if LowerClosed:
-                profiles[cKey] = {'category': c, 'name': 'categorical low limits',\
+                profiles[cKey] = {'category': c, 'name': categories[c]['lowLimit'] + ' -',\
                                   'comment': 'Inferior or equal limits for category membership assessment'}
             else:
-                profiles[cKey] = {'category': c, 'name': 'categorical high limits',\
+                profiles[cKey] = {'category': c, 'name': '- ' + categories[c]['highLimit'],\
                                   'comment': 'Lower or equal limits for category membership assessment'}
             for g in criteria:
                 if LowerClosed:
@@ -3765,14 +3765,16 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         of the corresponding preorder relation.
 
         Continuing the previous Python session:
-           >>> nqr.showQuantilesRating()
-           *-------- Quantile sorting result ---------
-            [0.40 - 0.60[ ['a1', 'a2', 'a3']
-            [0.20 - 0.40[ ['a4', 'a5']
-           >>> nqr.exportRatingGraphViz(Comments=False)
-           *---- exporting a dot file for GraphViz tools ---------*
-            Exporting to quantilesRatingDigraph.dot
-            dot -Grankdir=TB -Tpng quantilesRatingDigraph.dot -o quantilesRatingDigraph.png
+
+        >>> nqr.showQuantilesRating()
+        *-------- Quantile sorting result ---------
+        [0.50 - 0.75[ ['a01']
+        [0.25 - 0.50[ ['a07', 'a02', 'a10', 'a06', 'a03', 'a08', 'a09', 'a04']
+        [0.00 - 0.25[ ['a05']
+        >>> nqr.exportRatingGraphViz('quantilesRatingDigraph',Comments=False)
+        *---- exporting a dot file for GraphViz tools ---------*
+        Exporting to quantilesRatingDigraph.dot
+        dot -Grankdir=TB -Tpng quantilesRatingDigraph.dot -o quantilesRatingDigraph.png
 
         .. image:: quantilesRatingDigraph.png
             :alt: usage example of Normed Quantiles Rating Digraph

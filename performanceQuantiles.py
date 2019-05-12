@@ -942,7 +942,7 @@ if __name__ == "__main__":
                                              NegativeWeights=True,
                                              negativeWeightProbability=0.1,
                                     numberOfCriteria=nbrCrit,seed=seed)
-    pq = PerformanceQuantiles(tp,5,LowerClosed=False,Debug=False)
+    pq = PerformanceQuantiles(tp,5,LowerClosed=True,Debug=False)
     #print(pq.actionsTypeStatistics)
     #pq.showHTMLLimitingQuantiles(Transposed=True)
     #print(pq.limitingQuantiles)
