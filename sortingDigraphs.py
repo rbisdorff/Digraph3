@@ -3760,7 +3760,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                              graphType='png',graphSize='7,7',\
                              fontSize=10):
         """
-        The rating drawing is using the weakOrders.WeakOrder exportGraphViz() method for
+        The rating drawing is using the :py:func:`weakOrders.WeakOrder.exportGraphViz` method for
         drawing oriented Hasse diagrams of weak orderings, ie the negation
         of the corresponding preorder relation.
 
