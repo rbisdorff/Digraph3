@@ -3783,7 +3783,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         
         .. warning::
 
-             For graphviz, nodes or action keys of the digraph must start with a letter
+             For graphviz, nodes' or actions' keys of the digraph must start with a letter
              and may not contain special characters like '-' or '_'.
              
         """
