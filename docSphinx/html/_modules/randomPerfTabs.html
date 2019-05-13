@@ -377,6 +377,7 @@
         <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomStdPerformanceGenerator</span><span class="p">,</span>\
                                   <span class="n">RandomCBPerformanceGenerator</span><span class="p">,</span>\
                                   <span class="n">Random3ObjectivesPerformanceGenerator</span>
+        <span class="kn">from</span> <span class="nn">performanceQuantiles</span> <span class="k">import</span> <span class="n">PerformanceQuantiles</span>
         <span class="k">if</span> <span class="n">argPerfTab</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">==</span> <span class="n">RandomPerformanceTableau</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">RandomStdPerformanceGenerator</span>
             <span class="k">return</span> <span class="n">RandomStdPerformanceGenerator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
@@ -391,7 +392,24 @@
             <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceGenerator</span>
             <span class="k">return</span> <span class="n">Random3ObjectivesPerformanceGenerator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
                             <span class="n">actionNamePrefix</span><span class="o">=</span><span class="n">actionNamePrefix</span><span class="p">,</span>\
-                            <span class="n">instanceCounter</span><span class="o">=</span><span class="n">instanceCounter</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>    
+                            <span class="n">instanceCounter</span><span class="o">=</span><span class="n">instanceCounter</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">argPerfTab</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">==</span> <span class="n">PerformanceQuantiles</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">argPerfTab</span><span class="o">.</span><span class="n">perfTabType</span> <span class="o">==</span> <span class="s1">&#39;RandomPerformanceTableau&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">RandomStdPerformanceGenerator</span>
+                <span class="k">return</span> <span class="n">RandomStdPerformanceGenerator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
+                            <span class="n">actionNamePrefix</span><span class="o">=</span><span class="n">actionNamePrefix</span><span class="p">,</span>\
+                            <span class="n">instanceCounter</span><span class="o">=</span><span class="n">instanceCounter</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">argPerfTab</span><span class="o">.</span><span class="n">perfTabType</span> <span class="o">==</span> <span class="s1">&#39;RandomCBPerformanceTableau&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">RandomCBPerformanceGenerator</span>
+                <span class="k">return</span> <span class="n">RandomCBPerformanceGenerator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
+                                <span class="n">actionNamePrefix</span><span class="o">=</span><span class="n">actionNamePrefix</span><span class="p">,</span>\
+                                <span class="n">instanceCounter</span><span class="o">=</span><span class="n">instanceCounter</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">argPerfTab</span><span class="o">.</span><span class="n">perfTabType</span> <span class="o">==</span> <span class="s1">&#39;Random3ObjectivesPerformanceTableau&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceGenerator</span>
+                <span class="k">return</span> <span class="n">Random3ObjectivesPerformanceGenerator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
+                                <span class="n">actionNamePrefix</span><span class="o">=</span><span class="n">actionNamePrefix</span><span class="p">,</span>\
+                                <span class="n">instanceCounter</span><span class="o">=</span><span class="n">instanceCounter</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+            
 
 <div class="viewcode-block" id="RandomPerformanceGenerator.randomActions"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomPerformanceGenerator.randomActions">[docs]</a>    <span class="k">def</span> <span class="nf">randomActions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nbrOfRandomActions</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -419,8 +437,23 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
         <span class="kn">from</span> <span class="nn">perfTabs</span> <span class="k">import</span> <span class="n">EmptyPerformanceTableau</span>
+        <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceTableau</span><span class="p">,</span>\
+             <span class="n">RandomCBPerformanceTableau</span><span class="p">,</span>\
+             <span class="n">Random3ObjectivesPerformanceTableau</span>
         <span class="n">newPerfTab</span> <span class="o">=</span> <span class="n">EmptyPerformanceTableau</span><span class="p">()</span>
-        <span class="n">newPerfTab</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="vm">__class__</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">perfTabType</span> <span class="o">==</span> <span class="s1">&#39;PerformanceQuantiles&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">perfTabType</span> <span class="o">!=</span> <span class="s1">&#39;RandomPerformanceTableau&#39;</span><span class="p">:</span>
+                    <span class="n">newPerfTab</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span>
+                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">perfTabType</span> <span class="o">!=</span> <span class="s1">&#39;RandomCBPerformanceTableau&#39;</span><span class="p">:</span>
+                    <span class="n">newPerfTab</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span>
+                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">perfTabType</span> <span class="o">!=</span> <span class="s1">&#39;Random3ObjectivesPerformanceTableau&#39;</span><span class="p">:</span>
+                    <span class="n">newPerfTab</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error&#39;</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">newPerfTab</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="vm">__class__</span>
         <span class="n">newPerfTab</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">name</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">newPerfTab</span><span class="o">.</span><span class="n">objectives</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">objectives</span>
@@ -1985,8 +2018,6 @@
         <span class="c1">#randChoice1 = Random(seed)</span>
         <span class="n">ng</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">numberOfCriteria</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numberOfCriteria</span><span class="p">):</span>
-            <span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;g</span><span class="si">%%</span><span class="s1">0</span><span class="si">%d</span><span class="s1">d&#39;</span> <span class="o">%</span> <span class="n">ng</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-            <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">criterionObjective</span> <span class="o">=</span> <span class="s1">&#39;Eco&#39;</span>
             <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -1997,7 +2028,14 @@
                 <span class="c1">#criterionObjective = _random.choice(objectivesKeys)</span>
                 <span class="n">objInd</span> <span class="o">=</span> <span class="n">_random1</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">objectivesKeys</span><span class="p">))</span>
                 <span class="n">criterionObjective</span> <span class="o">=</span> <span class="n">objectivesKeys</span><span class="p">[</span><span class="n">objInd</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-            <span class="c1">#print(g,criterionObjective,objectivesKeys)</span>
+            <span class="k">if</span> <span class="n">criterionObjective</span> <span class="o">==</span> <span class="s1">&#39;Eco&#39;</span><span class="p">:</span>
+                <span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;ec</span><span class="si">%%</span><span class="s1">0</span><span class="si">%d</span><span class="s1">d&#39;</span> <span class="o">%</span> <span class="n">ng</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">criterionObjective</span> <span class="o">==</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span>
+                <span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;so</span><span class="si">%%</span><span class="s1">0</span><span class="si">%d</span><span class="s1">d&#39;</span> <span class="o">%</span> <span class="n">ng</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;en</span><span class="si">%%</span><span class="s1">0</span><span class="si">%d</span><span class="s1">d&#39;</span> <span class="o">%</span> <span class="n">ng</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+           <span class="c1">#print(g,criterionObjective,objectivesKeys)</span>
             <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;objective&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">criterionObjective</span>
             <span class="k">if</span> <span class="n">_random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">negativeWeightProbability</span><span class="p">:</span>
                 <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;min&#39;</span>
@@ -2330,7 +2368,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span> <span class="o">=</span> <span class="n">argPerfTab</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">actionNamePrefix</span> <span class="o">=</span> <span class="n">actionNamePrefix</span>
         <span class="k">if</span> <span class="n">instanceCounter</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">argPerfTab</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">argPerfTab</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">instanceCounter</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nd</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">counter</span><span class="p">))</span>
@@ -2346,7 +2387,10 @@
         <span class="c1"># generate random evaluation</span>
         <span class="n">Debug</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span>
         <span class="n">random</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">random</span>
-        <span class="n">digits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">valueDigits</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">digits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">valueDigits</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">digits</span> <span class="o">=</span> <span class="mi">2</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">criteria</span>
         <span class="n">objectives</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">objectives</span>
         <span class="n">objectiveSupportingTypes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">objectiveSupportingTypes</span>

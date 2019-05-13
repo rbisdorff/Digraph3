@@ -114,18 +114,49 @@
 <span class="sd">        :align: center</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">perfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">numberOfBins</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">filePerfQuant</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Default presentation method for PerformanceQuantiles instances</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">reprString</span> <span class="o">=</span> <span class="s1">&#39;*------- PerformanceQuantiles instance description ------*</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Instance class   : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Seed             : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">randomSeed</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Instance name    : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="c1">#reprString += &#39;# Actions        : %d\n&#39; % len(self.actions)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;# Objectives     : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objectives</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>       
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;# Criteria       : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">)</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;# Quantiles      : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;# History sizes  : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span>
+   
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Attributes       : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>     
+        <span class="k">return</span> <span class="n">reprString</span>
+
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">perfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">numberOfBins</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span><span class="p">,</span> <span class="n">defaultdict</span>
         <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">,</span>\
-                                   <span class="n">Random3ObjectivesPerformanceTableau</span>
+                                   <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">,</span>\
+                                   <span class="n">RandomPerformanceTableau</span>
         
-        <span class="k">if</span> <span class="n">perfTab</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">perfTab</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">perfTabType</span> <span class="o">=</span> <span class="n">perfTab</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">valueDigits</span> <span class="o">=</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">valueDigits</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">valueDigits</span> <span class="o">=</span> <span class="mi">2</span>
             <span class="n">actionsTypeStatistics</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
                 <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">perfTab</span><span class="p">)</span> <span class="o">==</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">:</span>
                     <span class="n">xType</span> <span class="o">=</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>
                 <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">perfTab</span><span class="p">)</span> <span class="o">==</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">objectiveSupportingTypes</span> <span class="o">=</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">objectiveSupportingTypes</span>
                     <span class="n">xType</span> <span class="o">=</span> <span class="s1">&#39;Soc&#39;</span> <span class="o">+</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">][</span><span class="s1">&#39;Soc&#39;</span><span class="p">]</span>
                     <span class="n">xType</span> <span class="o">+=</span> <span class="s1">&#39;Eco&#39;</span> <span class="o">+</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">][</span><span class="s1">&#39;Eco&#39;</span><span class="p">]</span>
                     <span class="n">xType</span> <span class="o">+=</span> <span class="s1">&#39;Env&#39;</span> <span class="o">+</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">][</span><span class="s1">&#39;Env&#39;</span><span class="p">]</span>
@@ -140,6 +171,22 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">objectives</span> <span class="o">=</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">objectives</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">objectives</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">commonScale</span> <span class="o">=</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">commonScale</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">OrdinalScales</span> <span class="o">=</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">OrdinalScales</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">BigData</span> <span class="o">=</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">BigData</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">missingDataProbability</span> <span class="o">=</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">missingDataProbability</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">criteria</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span> <span class="o">=</span> <span class="n">LowerClosed</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computeQuantilesFrequencies</span><span class="p">(</span><span class="n">numberOfBins</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
@@ -167,14 +214,34 @@
 <span class="c1">##            else:</span>
 <span class="c1">##                print(&#39;!!! Warning: the proposed performance tableau model does not provide a random decision actions generator !!!&#39;)</span>
 <span class="c1">##                self.randomActionsGenerator = None</span>
-        <span class="k">else</span><span class="p">:</span> <span class="c1"># a stored instance file name is given</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">filePerfQuant</span><span class="p">)</span>
-            <span class="n">fileName</span> <span class="o">=</span> <span class="n">filePerfQuant</span> <span class="o">+</span> <span class="s1">&#39;.py&#39;</span>
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">perfTab</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span> <span class="c1"># a stored instance file name is given</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">perfTab</span><span class="p">)</span>
+            <span class="n">fileName</span> <span class="o">=</span> <span class="n">perfTab</span> <span class="o">+</span> <span class="s1">&#39;.py&#39;</span>
             <span class="n">argDict</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="n">exec</span><span class="p">(</span><span class="nb">compile</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">fileName</span><span class="p">,</span> <span class="s1">&#39;exec&#39;</span><span class="p">),</span><span class="n">argDict</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">filePerfQuant</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">perfTab</span><span class="p">)</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">objectives</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;objectives&#39;</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">objectiveSupportingTypes</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;objectiveSupportingTypes&#39;</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">commonScale</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;commonScale&#39;</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">OrdinalScales</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;OrdinalScales&#39;</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">BigData</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;BigData&#39;</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">missingDataProbability</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;missingDataProbability&#39;</span><span class="p">]</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="k">pass</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;criteria&#39;</span><span class="p">]</span>
@@ -190,9 +257,21 @@
                     <span class="n">cdf</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">limitingQuantiles</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
                 <span class="c1">#cdf[g] = OrderedDict([(self.limitingQuantiles[g][i],self.quantilesFrequencies[i]) for i in range(np)])</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">cdf</span> <span class="o">=</span> <span class="n">cdf</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">randomActionsGenerator</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">perfTabType</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;perfTabType&#39;</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">perfTabType</span><span class="p">)</span>
+<span class="c1">##            if self.perfTabType == &#39;RandomPerformanceTableau&#39;:</span>
+<span class="c1">##                from randomPerfTabs import RandomPerformanceGenerator</span>
+<span class="c1">##                self.randomActionsGenerator = RandomPerformanceGenerator</span>
+<span class="c1">##            elif self.perfTabType == &#39;RandomCBPerformanceTableau&#39;:</span>
+<span class="c1">##                from randomPerfTabs import RandomCBPerformanceGenerator</span>
+<span class="c1">##                self.randomActionsGenerator = RandomCBPerformanceGenerator</span>
+<span class="c1">##            elif self.perfTabType == &#39;Random3ObjectivesPerformanceTableau&#39;:</span>
+<span class="c1">##                from randomPerfTabs import Random3ObjectivesPerformanceGenerator</span>
+<span class="c1">##                self.randomActionsGenerator = Random3ObjectivesPerformanceGenerator</span>
+<span class="c1">##            else:</span>
+<span class="c1">##                print(&#39;!!! Warning: the proposed performance tableau model does not provide a random decision actions generator !!!&#39;)</span>
+<span class="c1">##                self.randomActionsGenerator = None</span>
           
-
 <span class="c1">#---------  private class methods</span>
 
     <span class="k">def</span> <span class="nf">_computeQuantilesFrequencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -657,7 +736,13 @@
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;# Saved performance quantiles: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;from decimal import Decimal</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;from collections import OrderedDict</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="c1"># perfTabType</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;perfTabType = </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTabType</span><span class="p">)</span>
             <span class="c1"># objectives</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;objectiveSupportingTypes = </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objectiveSupportingTypes</span><span class="p">)</span> <span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;objectives = OrderedDict([</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">objectives</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">objectives</span><span class="p">:</span>
@@ -667,6 +752,22 @@
                     <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;}),</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;])</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>            
             <span class="c1"># criteria</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;OrdinalScales = </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">OrdinalScales</span><span class="p">))</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;BigData = </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">BigData</span><span class="p">))</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;missingDataProbability = </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">missingDataProbability</span><span class="p">))</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;commonScale = </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">commonScale</span><span class="p">))</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
             <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;criteria = OrderedDict([</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span> 
             <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
@@ -1010,7 +1111,7 @@
     <span class="n">nbrActions</span><span class="o">=</span><span class="n">nbrActions</span>
     <span class="n">nbrCrit</span> <span class="o">=</span> <span class="n">nbrCrit</span>
     <span class="n">tp</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>
-                                             <span class="n">NegativeWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                             <span class="n">NegativeWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                              <span class="n">negativeWeightProbability</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
                                     <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1024,22 +1125,27 @@
     <span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
     <span class="n">newActions</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
     <span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">pq</span><span class="o">.</span><span class="n">showHTMLLimitingQuantiles</span><span class="p">(</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1">#pq.showHTMLLimitingQuantiles(Transposed=True)</span>
     <span class="c1">#tpg = PerfTabGenerator(tp,seed=None)</span>
     <span class="n">newActions</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
     <span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">pq</span><span class="o">.</span><span class="n">showHTMLLimitingQuantiles</span><span class="p">(</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="k">import</span> <span class="n">NormedQuantilesRatingDigraph</span>
-    <span class="n">nqr1</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span>\
-                                        <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span>\
-                                        <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">nqr1</span><span class="p">)</span>
-    <span class="n">nqr1</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heat map of the qintiles rating&#39;</span><span class="p">,</span>
-                                       <span class="n">colorLevels</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
-                                       <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                       <span class="p">)</span>
-    <span class="n">nqr1</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
-    <span class="n">nqr1</span><span class="o">.</span><span class="n">exportRatingGraphViz</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="c1">#pq.showHTMLLimitingQuantiles(Transposed=True)</span>
+    <span class="n">pq</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
+    <span class="n">pq1</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="o">*</span>
+    <span class="n">rg</span> <span class="o">=</span> <span class="n">RandomPerformanceGenerator</span><span class="p">(</span><span class="n">pq1</span><span class="p">)</span>
+    <span class="n">newTab</span> <span class="o">=</span> <span class="n">rg</span><span class="o">.</span><span class="n">randomPerformanceTableau</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1">##    from sortingDigraphs import NormedQuantilesRatingDigraph</span>
+<span class="c1">##    nqr1 = NormedQuantilesRatingDigraph(pq,newActions,\</span>
+<span class="c1">##                                        rankingRule=&#39;best&#39;,\</span>
+<span class="c1">##                                        Debug=False)</span>
+<span class="c1">##    print(nqr1)</span>
+<span class="c1">##    nqr1.showHTMLRatingHeatmap(pageTitle=&#39;Heat map of the qintiles rating&#39;,</span>
+<span class="c1">##                                       colorLevels=7,</span>
+<span class="c1">##                                       Correlations=True,</span>
+<span class="c1">##                                       )</span>
+<span class="c1">##    nqr1.showQuantilesRating()</span>
+<span class="c1">##    nqr1.exportRatingGraphViz(Comments=False)</span>
     <span class="c1">#print(pq.computeQuantileProfile(0.5))</span>
     <span class="c1">#pq.save(fileName=&#39;testPerfQuant&#39;)</span>
 

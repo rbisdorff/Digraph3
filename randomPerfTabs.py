@@ -330,6 +330,7 @@ class RandomPerformanceGenerator(object):
         from randomPerfTabs import RandomStdPerformanceGenerator,\
                                   RandomCBPerformanceGenerator,\
                                   Random3ObjectivesPerformanceGenerator
+        from performanceQuantiles import PerformanceQuantiles
         if argPerfTab.__class__ == RandomPerformanceTableau:
             self.__class__ = RandomStdPerformanceGenerator
             return RandomStdPerformanceGenerator.__init__(self,argPerfTab,\
@@ -344,7 +345,24 @@ class RandomPerformanceGenerator(object):
             self.__class__ = Random3ObjectivesPerformanceGenerator
             return Random3ObjectivesPerformanceGenerator.__init__(self,argPerfTab,\
                             actionNamePrefix=actionNamePrefix,\
-                            instanceCounter=instanceCounter,seed=seed)    
+                            instanceCounter=instanceCounter,seed=seed)
+        elif argPerfTab.__class__ == PerformanceQuantiles:
+            if argPerfTab.perfTabType == 'RandomPerformanceTableau':
+                self.__class__ = RandomStdPerformanceGenerator
+                return RandomStdPerformanceGenerator.__init__(self,argPerfTab,\
+                            actionNamePrefix=actionNamePrefix,\
+                            instanceCounter=instanceCounter,seed=seed)
+            elif argPerfTab.perfTabType == 'RandomCBPerformanceTableau':
+                self.__class__ = RandomCBPerformanceGenerator
+                return RandomCBPerformanceGenerator.__init__(self,argPerfTab,\
+                                actionNamePrefix=actionNamePrefix,\
+                                instanceCounter=instanceCounter,seed=seed)
+            elif argPerfTab.perfTabType == 'Random3ObjectivesPerformanceTableau':
+                self.__class__ = Random3ObjectivesPerformanceGenerator
+                return Random3ObjectivesPerformanceGenerator.__init__(self,argPerfTab,\
+                                actionNamePrefix=actionNamePrefix,\
+                                instanceCounter=instanceCounter,seed=seed)
+            
 
     def randomActions(self,nbrOfRandomActions=1):
         """
@@ -372,8 +390,23 @@ class RandomPerformanceGenerator(object):
         """
         from collections import OrderedDict
         from perfTabs import EmptyPerformanceTableau
+        from randomPerfTabs import RandomPerformanceTableau,\
+             RandomCBPerformanceTableau,\
+             Random3ObjectivesPerformanceTableau
         newPerfTab = EmptyPerformanceTableau()
-        newPerfTab.__class__ = self.perfTab.__class__
+        try:
+            if self.perfTab.perfTabType == 'PerformanceQuantiles':
+                if self.perfTab.perfTabType != 'RandomPerformanceTableau':
+                    newPerfTab.__class__ = RandomPerformanceTableau
+                elif self.perfTab.perfTabType != 'RandomCBPerformanceTableau':
+                    newPerfTab.__class__ = RandomCBPerformanceTableau
+                elif self.perfTab.perfTabType != 'Random3ObjectivesPerformanceTableau':
+                    newPerfTab.__class__ = Random3ObjectivesPerformanceTableau
+                else:
+                    print('Error')
+                    return None
+        except:
+            newPerfTab.__class__ = self.perfTab.__class__
         newPerfTab.name = self.perfTab.name
         try:
             newPerfTab.objectives = self.perfTab.objectives
@@ -1938,8 +1971,6 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         #randChoice1 = Random(seed)
         ng = len(str(numberOfCriteria))
         for i in range(numberOfCriteria):
-            g = ('g%%0%dd' % ng) % (i+1)
-            criteria[g] = {}
             if i == 0:
                 criterionObjective = 'Eco'
             elif i == 1:
@@ -1950,7 +1981,14 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                 #criterionObjective = _random.choice(objectivesKeys)
                 objInd = _random1.randint(1,len(objectivesKeys))
                 criterionObjective = objectivesKeys[objInd-1]
-            #print(g,criterionObjective,objectivesKeys)
+            if criterionObjective == 'Eco':
+                g = ('ec%%0%dd' % ng) % (i+1)
+            elif criterionObjective == 'Soc':
+                g = ('so%%0%dd' % ng) % (i+1)
+            else:
+                g = ('en%%0%dd' % ng) % (i+1)
+            criteria[g] = {}
+           #print(g,criterionObjective,objectivesKeys)
             criteria[g]['objective'] = criterionObjective
             if _random.random() < negativeWeightProbability:
                 criteria[g]['preferenceDirection'] = 'min'
@@ -2283,7 +2321,10 @@ class Random3ObjectivesPerformanceGenerator(RandomPerformanceGenerator):
         self.perfTab = argPerfTab
         self.actionNamePrefix = actionNamePrefix
         if instanceCounter == None:
-            self.counter = len(argPerfTab.actions)
+            try:
+                self.counter = len(argPerfTab.actions)
+            except:
+                self.counter = 0
         else:
             self.counter = instanceCounter
         self.nd = len(str(self.counter))
@@ -2299,7 +2340,10 @@ class Random3ObjectivesPerformanceGenerator(RandomPerformanceGenerator):
         # generate random evaluation
         Debug = self.Debug
         random = self.random
-        digits = self.perfTab.valueDigits
+        try:
+            digits = self.perfTab.valueDigits
+        except:
+            digits = 2
         criteria = self.perfTab.criteria
         objectives = self.perfTab.objectives
         objectiveSupportingTypes = self.perfTab.objectiveSupportingTypes
