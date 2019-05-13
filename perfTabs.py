@@ -4547,6 +4547,10 @@ class PartialPerformanceTableau(PerformanceTableau):
     def __init__(self,inPerfTab,actionsSubset=None,criteriaSubset=None,objectivesSubset=None):
         from copy import deepcopy
         from collections import OrderedDict
+        from randomPerfTabs import RandomCBPerformanceTableau,\
+                                   Random3ObjectivesPerformanceTableau,\
+                                   RandomPerformanceTableau
+        self.__class__ = inPerfTab.__class__
         # name
         self.name = 'partial-'+inPerfTab.name
         # actions
@@ -4557,6 +4561,23 @@ class PartialPerformanceTableau(PerformanceTableau):
         else:
             actions = deepcopy(inPerfTab.actions)
         self.actions = actions
+        actionsTypeStatistics = {}
+        for x in inPerfTab.actions:
+            if type(inPerfTab) == RandomCBPerformanceTableau:
+                xType = inPerfTab.actions[x]['type']
+            elif type(inPerfTab) == Random3ObjectivesPerformanceTableau:
+                self.objectiveSupportingTypes = inPerfTab.objectiveSupportingTypes
+                xType = 'Soc' + inPerfTab.actions[x]['profile']['Soc']
+                xType += 'Eco' + inPerfTab.actions[x]['profile']['Eco']
+                xType += 'Env' + inPerfTab.actions[x]['profile']['Env']
+            else:
+                xType = 'NA'
+            try:
+                actionsTypeStatistics[xType] += 1
+            except:
+                actionsTypeStatistics[xType] = 1
+        self.actionsTypeStatistics = actionsTypeStatistics
+        
         # objectives & criteria
         objectives = OrderedDict()
         HasObjectives = True
@@ -4593,9 +4614,31 @@ class PartialPerformanceTableau(PerformanceTableau):
                         criteria[g] = deepcopy(inPerfTab.criteria[g])
                         objectives[obj]['criteria'].append(g)
         self.objectives = objectives
+        try:
+            self.commonScale = perfTab.commonScale
+        except:
+            pass
+        try:
+            self.OrdinalScales = perfTab.OrdinalScales
+        except:
+            pass
+        try:
+            self.BigData = perfTab.BigData
+        except:
+            pass
+        try:
+            self.missingDataProbability = perfTab.missingDataProbability
+        except:
+            pass
+        
         self.criteria = criteria
         self.weightPreorder = self.computeWeightPreorder()
         # evaluations
+        try:
+            self.valueDigits = perfTab.valueDigits
+        except:
+            self.valueDigits = 2
+
         evaluation = {}
         for g in criteria.keys():
             evaluation[g] = {}
