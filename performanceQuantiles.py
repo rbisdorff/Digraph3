@@ -386,7 +386,7 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
             print(newp)
         np = len(newp)
         i = 0
-        while i < np:
+        while i < np-1: 
             if Debug:
                 print(i)
             if x < newp[i]:
@@ -402,7 +402,8 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
                 if Debug:
                     print('res', res)
                 return res
-                i = np
+                #i = np
+            
             elif x == newp[i+1]:
                 ix = i+1
                 res = newq[ix]
@@ -415,6 +416,29 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
                 i += 1
                 if Debug:
                     print('x > newp[i]', i,ix)
+        # if x is in the last quantile class
+        if i == np-1:
+            if x < newp[i]:
+                ix = i
+                if Debug:
+                    print('x < newp[i]', x, newp[i],ix, newp[i-1],newq[ix-1],newp[i],newq[ix])
+                            # nsq[0] 
+                diffp = newp[i]-newp[i-1]
+                if diffp > Decimal('0.0'):
+                    res = newq[ix-1]+ ((x-newp[i-1])/diffp)*(newq[ix]-newq[ix-1])
+                else: # avoid dividing by 0
+                    res = newq[ix-1]
+                if Debug:
+                    print('res', res)
+                return res
+                i = np
+            elif x == newp[i]:
+                ix = i
+                res = newq[ix]
+                if Debug:
+                    print('x == newp[i]',ix, newp[ix],newq[ix],res)
+                return res
+            
 
     def _updateCriterionQuantiles(self,g,newValues,historySize=None,Debug=False):
         """
@@ -541,7 +565,7 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
                 x = p[i]
                 if Debug:
                     print(x)
-                nstate[x] = self._interpolateQuantile(x,newq,newp)
+                nstate[x] = self._interpolateQuantile(x,newq,newp,Debug=Debug)
             if Debug:
                 print(nstate)
             
@@ -884,7 +908,7 @@ The number of so far observed evaluations per criteria are the following:
 ##                print('  minimal evaluation    : %.2f' % (minEvaluation))
 
         
-    def updateQuantiles(self,newData,historySize=None):
+    def updateQuantiles(self,newData,historySize=None,Debug=False):
         """
         Update the PerformanceQuantiles with a set of new random decision actions.
         Parameter *historysize* allows to take more or less into account the historical situtaion.
@@ -906,7 +930,7 @@ The number of so far observed evaluations per criteria are the following:
             gNewEvaluation = newEvaluation[g]
             for x in newActions:
                 gNewValues.append(gNewEvaluation[x])
-            self._updateCriterionQuantiles(g,gNewValues,historySize=historySize)
+            self._updateCriterionQuantiles(g,gNewValues,historySize=historySize,Debug=Debug)
 ##        self.T += len(newActions)  
     
 

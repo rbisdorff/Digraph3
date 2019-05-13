@@ -150,13 +150,17 @@ def testNormedQuantilesRatingDigraph():
     print('*-------- Testing NormedQuantilesRatingDigraph class -------')
     from randomPerfTabs import RandomCBPerformanceTableau
     from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
+    import random
+    seed = random.randint(1,100)
+    #seed = 15
+    print('=== >> seed = ',seed)
     nbrActions=1000
     nbrCrit = 13
     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,NegativeWeights=True,
-                                    numberOfCriteria=nbrCrit,seed=None)
+                                    numberOfCriteria=nbrCrit,seed=seed)
     tp.convertWeights2Positive()
-    pq = PerformanceQuantiles(tp,'deciles',LowerClosed=True,Debug=False)
-    tpg = PerfTabGenerator(tp,instanceCounter=0,seed=None)
+    pq = PerformanceQuantiles(tp,'deciles',LowerClosed=False,Debug=False)
+    tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed*2)
     newActions = tpg.randomActions(10)
     pq.updateQuantiles(newActions,historySize=100)
     nrq = NormedQuantilesRatingDigraph(pq,newActions,
@@ -170,7 +174,7 @@ def testNormedQuantilesRatingDigraph():
     newActions = tpg.randomPerformanceTableau(1000)
     pq.updateQuantiles(newActions,historySize=0)
     newActions = tpg.randomActions(10)
-    pq.updateQuantiles(newActions,historySize=None)
+    pq.updateQuantiles(newActions,historySize=None,Debug=False)
     nrq = NormedQuantilesRatingDigraph(pq,newActions,quantiles='heptiles',
                                        WithSorting=True,
                                        Debug=False)

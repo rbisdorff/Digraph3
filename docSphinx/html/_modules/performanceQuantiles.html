@@ -433,7 +433,7 @@
             <span class="nb">print</span><span class="p">(</span><span class="n">newp</span><span class="p">)</span>
         <span class="n">np</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">newp</span><span class="p">)</span>
         <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">np</span><span class="p">:</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span> 
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">newp</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
@@ -449,7 +449,8 @@
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;res&#39;</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
                 <span class="k">return</span> <span class="n">res</span>
-                <span class="n">i</span> <span class="o">=</span> <span class="n">np</span>
+                <span class="c1">#i = np</span>
+            
             <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="n">newp</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]:</span>
                 <span class="n">ix</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span>
                 <span class="n">res</span> <span class="o">=</span> <span class="n">newq</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span>
@@ -462,6 +463,29 @@
                 <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x &gt; newp[i]&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span><span class="n">ix</span><span class="p">)</span>
+        <span class="c1"># if x is in the last quantile class</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">np</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">newp</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="n">ix</span> <span class="o">=</span> <span class="n">i</span>
+                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x &lt; newp[i]&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">newp</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">ix</span><span class="p">,</span> <span class="n">newp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">newq</span><span class="p">[</span><span class="n">ix</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">newp</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">newq</span><span class="p">[</span><span class="n">ix</span><span class="p">])</span>
+                            <span class="c1"># nsq[0] </span>
+                <span class="n">diffp</span> <span class="o">=</span> <span class="n">newp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">newp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">diffp</span> <span class="o">&gt;</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">):</span>
+                    <span class="n">res</span> <span class="o">=</span> <span class="n">newq</span><span class="p">[</span><span class="n">ix</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span> <span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="n">newp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">diffp</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">newq</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span><span class="o">-</span><span class="n">newq</span><span class="p">[</span><span class="n">ix</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span> <span class="c1"># avoid dividing by 0</span>
+                    <span class="n">res</span> <span class="o">=</span> <span class="n">newq</span><span class="p">[</span><span class="n">ix</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;res&#39;</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">res</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="n">np</span>
+            <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="n">newp</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="n">ix</span> <span class="o">=</span> <span class="n">i</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="n">newq</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x == newp[i]&#39;</span><span class="p">,</span><span class="n">ix</span><span class="p">,</span> <span class="n">newp</span><span class="p">[</span><span class="n">ix</span><span class="p">],</span><span class="n">newq</span><span class="p">[</span><span class="n">ix</span><span class="p">],</span><span class="n">res</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">res</span>
+            
 
     <span class="k">def</span> <span class="nf">_updateCriterionQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">newValues</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -588,7 +612,7 @@
                 <span class="n">x</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-                <span class="n">nstate</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolateQuantile</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">newq</span><span class="p">,</span><span class="n">newp</span><span class="p">)</span>
+                <span class="n">nstate</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolateQuantile</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">newq</span><span class="p">,</span><span class="n">newp</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">nstate</span><span class="p">)</span>
             
@@ -931,7 +955,7 @@
 <span class="c1">##                print(&#39;  minimal evaluation    : %.2f&#39; % (minEvaluation))</span>
 
         
-<div class="viewcode-block" id="PerformanceQuantiles.updateQuantiles"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.updateQuantiles">[docs]</a>    <span class="k">def</span> <span class="nf">updateQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">newData</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="PerformanceQuantiles.updateQuantiles"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.updateQuantiles">[docs]</a>    <span class="k">def</span> <span class="nf">updateQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">newData</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Update the PerformanceQuantiles with a set of new random decision actions.</span>
 <span class="sd">        Parameter *historysize* allows to take more or less into account the historical situtaion.</span>
@@ -953,7 +977,7 @@
             <span class="n">gNewEvaluation</span> <span class="o">=</span> <span class="n">newEvaluation</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">newActions</span><span class="p">:</span>
                 <span class="n">gNewValues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gNewEvaluation</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_updateCriterionQuantiles</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">gNewValues</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="n">historySize</span><span class="p">)</span></div></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_updateCriterionQuantiles</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">gNewValues</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="n">historySize</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span></div></div>
 <span class="c1">##        self.T += len(newActions)  </span>
     
 
