@@ -432,7 +432,7 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
                     print('res', res)
                 return res
                 i = np
-            elif x == newp[i]:
+            else:    # x == newp[i]:
                 ix = i
                 res = newq[ix]
                 if Debug:
