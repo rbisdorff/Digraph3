@@ -338,7 +338,10 @@ class RandomPerformanceGenerator(object):
     Instance name    : randomperftab
     # Actions        : 13
     # Criteria       : 7
-    Attributes       : ['randomSeed', 'name', 'BigData', 'sumWeights', 'digits', 'commonScale', 'commonMode', 'missingDataProbability', 'actions', 'criteria', 'evaluation', 'weightPreorder']
+    Attributes       : [
+    'randomSeed', 'name', 'BigData', 'sumWeights', 'digits', 'commonScale',
+    'commonMode', 'missingDataProbability', 'actions', 'criteria',
+    'evaluation', 'weightPreorder']
     >>> rpg = RandomPerformanceGenerator(t,seed= 100)
     >>> newActions = rpg.randomActions(2)
     >>> print(newActions)

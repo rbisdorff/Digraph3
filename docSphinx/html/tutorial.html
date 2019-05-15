@@ -3922,7 +3922,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 </td></tr></table></div>
 <p>The main run time (see Lines 23-29 of the object description above) is spent by the class constructor in computing a bipolar valued outranking relation on the extended actions set including both the new alternatives as well as the quartile class limits. In case of large volumes, ie many new decision alternatives and centile classes for instance, a multi-threading version may be used when multiple processing cores are available (see the technical description of the <a class="reference internal" href="techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph" title="sortingDigraphs.NormedQuantilesRatingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.NormedQuantilesRatingDigraph</span></code></a> class).</p>
 <p>The actual rating procedure will rely on a complete ranking of the new decision alternatives as well as the quantile class limits obtained from the corresponding bipolar valued outranking digraph. Two efficient and scalable ranking rules, the <strong>Copeland</strong> and its valued version, the <strong>Netflows</strong> rule may be used for this purpose. The <em>rankingRule</em> parameter allows to choose one of both. With <em>rankingRule=’best’</em> (see Line 2 above) the <code class="code docutils literal"><span class="pre">NormedQuantilesRatingDigraph</span></code> constructor will choose the ranking rule that results in the highest ordinal correlation with the given outranking relation (see <a class="reference internal" href="#bis-2012" id="id39">[BIS-2012]</a>).</p>
-<p>In this rating example, the <em>Copeland</em> rule appears to be the more appropriate ranking rule.</p>
+<p>In this rating example, the <em>NetFlows</em> rule appears to be the more appropriate ranking rule.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -3933,7 +3933,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
  8
  9
 10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Ranking rule        :&#39;</span><span class="p">,</span> <span class="n">nqr</span><span class="o">.</span><span class="n">rankingRule</span><span class="p">)</span>
-<span class="go">Ranking rule        : Copeland</span>
+<span class="go">Ranking rule        : NetFlows</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Actions ranking     :&#39;</span><span class="p">,</span> <span class="n">nqr</span><span class="o">.</span><span class="n">actionsRanking</span><span class="p">)</span>
 <span class="go">Actions ranking     :</span>
 <span class="go">[&#39;m4&#39;, &#39;a1005&#39;, &#39;a1010&#39;, &#39;a1008&#39;, &#39;a1002&#39;, &#39;a1006&#39;,</span>
@@ -3941,7 +3941,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <span class="go">&#39;m2&#39;, &#39;m1&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Ranking correlation : </span><span class="si">%+.2f</span><span class="s1">&#39;</span> <span class="o">%</span>\
 <span class="gp">... </span>        <span class="p">(</span><span class="n">nqr</span><span class="o">.</span><span class="n">rankingCorrelation</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">])</span> <span class="p">)</span>
-<span class="go">Ranking correlation : +0.94</span>
+<span class="go">Ranking correlation : +0.938</span>
 </pre></div>
 </td></tr></table></div>
 <p>We achieve here a linear ranking without ties (from best to worst) of the digraph’s actions, ie including the new decision alternatives as well as the quartile limits <em>m1</em> to <em>m4</em>, which is very close in an ordinal sense (<em>tau</em> = 0.94) to the underlying valued outranking relation.</p>

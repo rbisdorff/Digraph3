@@ -2441,10 +2441,10 @@ The main run time (see Lines 23-29 of the object description above) is spent by 
 
 The actual rating procedure will rely on a complete ranking of the new decision alternatives as well as the quantile class limits obtained from the corresponding bipolar valued outranking digraph. Two efficient and scalable ranking rules, the **Copeland** and its valued version, the **Netflows** rule may be used for this purpose. The *rankingRule* parameter allows to choose one of both. With *rankingRule='best'* (see Line 2 above) the :code:`NormedQuantilesRatingDigraph` constructor will choose the ranking rule that results in the highest ordinal correlation with the given outranking relation (see [BIS-2012]_).
 
-In this rating example, the *Copeland* rule appears to be the more appropriate ranking rule.
+In this rating example, the *NetFlows* rule appears to be the more appropriate ranking rule.
 
     >>> print('Ranking rule        :', nqr.rankingRule)
-    Ranking rule        : Copeland
+    Ranking rule        : NetFlows
     >>> print('Actions ranking     :', nqr.actionsRanking)
     Actions ranking     : 
     ['m4', 'a1005', 'a1010', 'a1008', 'a1002', 'a1006',
@@ -2452,7 +2452,7 @@ In this rating example, the *Copeland* rule appears to be the more appropriate r
     'm2', 'm1']
     >>> print('Ranking correlation : %+.2f' %\
     ...         (nqr.rankingCorrelation['correlation']) )
-    Ranking correlation : +0.94
+    Ranking correlation : +0.938
 
 We achieve here a linear ranking without ties (from best to worst) of the digraph's actions, ie including the new decision alternatives as well as the quartile limits *m1* to *m4*, which is very close in an ordinal sense (*tau* = 0.94) to the underlying valued outranking relation.
 

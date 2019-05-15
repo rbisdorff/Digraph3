@@ -5337,7 +5337,10 @@ This return may be directly feeded to the PerformanceQuantiles.updateQuantiles()
 <span class="go">Instance name    : randomperftab</span>
 <span class="go"># Actions        : 13</span>
 <span class="go"># Criteria       : 7</span>
-<span class="go">Attributes       : [&#39;randomSeed&#39;, &#39;name&#39;, &#39;BigData&#39;, &#39;sumWeights&#39;, &#39;digits&#39;, &#39;commonScale&#39;, &#39;commonMode&#39;, &#39;missingDataProbability&#39;, &#39;actions&#39;, &#39;criteria&#39;, &#39;evaluation&#39;, &#39;weightPreorder&#39;]</span>
+<span class="go">Attributes       : [</span>
+<span class="go">&#39;randomSeed&#39;, &#39;name&#39;, &#39;BigData&#39;, &#39;sumWeights&#39;, &#39;digits&#39;, &#39;commonScale&#39;,</span>
+<span class="go">&#39;commonMode&#39;, &#39;missingDataProbability&#39;, &#39;actions&#39;, &#39;criteria&#39;,</span>
+<span class="go">&#39;evaluation&#39;, &#39;weightPreorder&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rpg</span> <span class="o">=</span> <span class="n">RandomPerformanceGenerator</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">newActions</span> <span class="o">=</span> <span class="n">rpg</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">newActions</span><span class="p">)</span>
