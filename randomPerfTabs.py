@@ -322,44 +322,90 @@ class RandomPerformanceTableau(PerformanceTableau):
 class RandomPerformanceGenerator(object):
     """
     Generic wrapper for generating new decision actions or performance tableaux
-    with random evaluations generated with a given performance tableau model.
+    with random evaluations generated with a given performance tableau model of type:
+    RandomPerformanceTableau, RandomCBPerformanceTableau,
+    or Random3ObjectivesPerformanceTableau.
+
+    The return format of generated new set of random actions is schown below.
+    This return may be directly feeded to the PerformanceQuantiles.updateQuantiles() method.
+
+    >>> from randomPerfTabs import *
+    >>> t = RandomPerformanceTableau(seed=100)
+    >>> t
+    *------- PerformanceTableau instance description ------*
+    Instance class   : RandomPerformanceTableau
+    Seed             : 100
+    Instance name    : randomperftab
+    # Actions        : 13
+    # Criteria       : 7
+    Attributes       : ['randomSeed', 'name', 'BigData', 'sumWeights', 'digits', 'commonScale', 'commonMode', 'missingDataProbability', 'actions', 'criteria', 'evaluation', 'weightPreorder']
+    >>> rpg = RandomPerformanceGenerator(t,seed= 100)
+    >>> newActions = rpg.randomActions(2)
+    >>> print(newActions)
+    {'actions': OrderedDict([
+    ('a14', {'shortName': 'a14',
+             'name': 'random decision action',
+             'comment': 'RandomPerformanceGenerator'}),
+    ('a15', {'shortName': 'a15',
+             'name': 'random decision action',
+             'comment': 'RandomPerformanceGenerator'})]),
+    'evaluation': {
+    'g1': {'a14': Decimal('15.17'), 'a15': Decimal('80.87')},
+    'g2': {'a14': Decimal('44.51'), 'a15': Decimal('62.74')},
+    'g3': {'a14': Decimal('57.87'), 'a15': Decimal('64.24')},
+    'g4': {'a14': Decimal('58.0'), 'a15': Decimal('26.99')},
+    'g5': {'a14': Decimal('24.22'), 'a15': Decimal('21.18')},
+    'g6': {'a14': Decimal('29.1'), 'a15': Decimal('73.09')},
+    'g7': {'a14': Decimal('96.58'), 'a15': Decimal('-999')}}}
+    >>> newTableau = rpg.randomPerformanceTableau(2)
+    >>> newTab.showPerformanceTableau()
+    *----  performance tableau -----*
+    criteria | weights | 'a17'   'a18'   
+    ---------|-----------------------------------------
+       'g1'  |   1   |   55.80   22.03  
+       'g2'  |   1   |   57.78   33.83  
+       'g3'  |   1   |   80.54   31.83  
+       'g4'  |   1   |   31.15   69.98  
+       'g5'  |   1   |   46.25   48.80  
+       'g6'  |   1   |   42.24   82.88  
+       'g7'  |   1   |   57.31   41.66  
     
     """
     def __init__(self,argPerfTab,actionNamePrefix='a',\
                  instanceCounter=None,seed=None):
-        from randomPerfTabs import RandomStdPerformanceGenerator,\
-                                  RandomCBPerformanceGenerator,\
-                                  Random3ObjectivesPerformanceGenerator
+        from randomPerfTabs import _RandomStdPerformanceGenerator,\
+                                  _RandomCBPerformanceGenerator,\
+                                  _Random3ObjectivesPerformanceGenerator
         from performanceQuantiles import PerformanceQuantiles
         if argPerfTab.__class__ == RandomPerformanceTableau:
-            self.__class__ = RandomStdPerformanceGenerator
-            return RandomStdPerformanceGenerator.__init__(self,argPerfTab,\
+            self.__class__ = _RandomStdPerformanceGenerator
+            return _RandomStdPerformanceGenerator.__init__(self,argPerfTab,\
                             actionNamePrefix=actionNamePrefix,\
                             instanceCounter=instanceCounter,seed=seed)
         elif argPerfTab.__class__ == RandomCBPerformanceTableau:
-            self.__class__ = RandomCBPerformanceGenerator
-            return RandomCBPerformanceGenerator.__init__(self,argPerfTab,\
+            self.__class__ = _RandomCBPerformanceGenerator
+            return _RandomCBPerformanceGenerator.__init__(self,argPerfTab,\
                             actionNamePrefix=actionNamePrefix,\
                             instanceCounter=instanceCounter,seed=seed)
         elif argPerfTab.__class__ == Random3ObjectivesPerformanceTableau:
-            self.__class__ = Random3ObjectivesPerformanceGenerator
-            return Random3ObjectivesPerformanceGenerator.__init__(self,argPerfTab,\
+            self.__class__ = _Random3ObjectivesPerformanceGenerator
+            return _Random3ObjectivesPerformanceGenerator.__init__(self,argPerfTab,\
                             actionNamePrefix=actionNamePrefix,\
                             instanceCounter=instanceCounter,seed=seed)
         elif argPerfTab.__class__ == PerformanceQuantiles:
             if argPerfTab.perfTabType == 'RandomPerformanceTableau':
-                self.__class__ = RandomStdPerformanceGenerator
-                return RandomStdPerformanceGenerator.__init__(self,argPerfTab,\
+                self.__class__ = _RandomStdPerformanceGenerator
+                return _RandomStdPerformanceGenerator.__init__(self,argPerfTab,\
                             actionNamePrefix=actionNamePrefix,\
                             instanceCounter=instanceCounter,seed=seed)
             elif argPerfTab.perfTabType == 'RandomCBPerformanceTableau':
-                self.__class__ = RandomCBPerformanceGenerator
-                return RandomCBPerformanceGenerator.__init__(self,argPerfTab,\
+                self.__class__ = _RandomCBPerformanceGenerator
+                return _RandomCBPerformanceGenerator.__init__(self,argPerfTab,\
                                 actionNamePrefix=actionNamePrefix,\
                                 instanceCounter=instanceCounter,seed=seed)
             elif argPerfTab.perfTabType == 'Random3ObjectivesPerformanceTableau':
-                self.__class__ = Random3ObjectivesPerformanceGenerator
-                return Random3ObjectivesPerformanceGenerator.__init__(self,argPerfTab,\
+                self.__class__ = _Random3ObjectivesPerformanceGenerator
+                return _Random3ObjectivesPerformanceGenerator.__init__(self,argPerfTab,\
                                 actionNamePrefix=actionNamePrefix,\
                                 instanceCounter=instanceCounter,seed=seed)
             
@@ -431,7 +477,7 @@ class RandomPerformanceGenerator(object):
         return newPerfTab
 
 
-class RandomStdPerformanceGenerator(RandomPerformanceGenerator):
+class _RandomStdPerformanceGenerator(RandomPerformanceGenerator):
     """
     Generator for genrating new decision actions from a
     given <RandomPerformanceTableau> model.
@@ -2303,7 +2349,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                 print('  name:      ',actions[x]['name'])
                 print('  profile:   ',actions[x]['profile'])
 
-class Random3ObjectivesPerformanceGenerator(RandomPerformanceGenerator):
+class _Random3ObjectivesPerformanceGenerator(RandomPerformanceGenerator):
     """
     Generator for new decision actions with random evaluation following a
     given Random3ObjectivesPerformanceTableau model.
@@ -3329,7 +3375,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                 print('criteria',g,' default thresholds:')
                 print(criteria[g]['thresholds'])
 
-class RandomCBPerformanceGenerator(RandomPerformanceGenerator):
+class _RandomCBPerformanceGenerator(RandomPerformanceGenerator):
     """
     Generator of new decision actions with random evaluations using
     the model parameters provided by a given RandomCBPerformanceTableau instance.

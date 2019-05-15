@@ -190,56 +190,56 @@ def testPercentilesOfThresholds():
     t.showCriteria(Debug=False)
     t.saveXMCDA2('testPerc',servingD3=False)
 
+##def testRandomPerformanceGenerators():
+##    print('*---------- test dynamic updates of a random performance tableau --------*') 
+##    t = RandomPerformanceTableau(numberOfActions=15,commonScale=(0,10),commonThresholds=[(10,0),(20,0),(90,0)],
+##                                           seed=100)
+##    t.showAll()
+##    rag1 = RandomPerformanceGenerator(t,actionNamePrefix='b',seed=100)
+##    sampleSize = 5
+##    rag1.randomActions(sampleSize)
+##    rag2 = RandomPerformanceGenerator(t,actionNamePrefix='c',seed=110)
+##    newActions = rag2.randomActions(nbrOfRandomActions=5)
+##    #t.showHTMLPerformanceHeatmap(Correlations=True)
+## 
+##def testRandomCBPerformanceGenerators():
+##    print('*---------- test dynamic updates of a random CB performance tableau --------*') 
+##    t = RandomCBPerformanceTableau(numberOfActions=10,
+##                                           seed=100)
+##    t.showAll()
+##    rag2 = RandomCBPerformanceGenerator(t,actionNamePrefix='cb',seed=110)
+##    newPerfTab= rag2.randomPerformanceTableau(nbrOfRandomActions=10)
+##    t.updateDiscriminationThresholds(Comments=True)
+##    newPerfTab.showHTMLPerformanceHeatmap(Correlations=True)
+
 def testRandomPerformanceGenerators():
-    print('*---------- test dynamic updates of a random performance tableau --------*') 
-    t = RandomPerformanceTableau(numberOfActions=15,commonScale=(0,10),commonThresholds=[(10,0),(20,0),(90,0)],
+    print('*---------- test dynamic updates of a random 3 Objectives performance tableau --------*') 
+    t = RandomPerformanceTableau(numberOfActions=10,
                                            seed=100)
     t.showAll()
-    rag1 = RandomPerformanceGenerator(t,actionNamePrefix='b',seed=100)
-    sampleSize = 5
-    rag1.randomActions(sampleSize)
-    rag2 = RandomPerformanceGenerator(t,actionNamePrefix='c',seed=110)
-    newActions = rag2.randomActions(nbrOfRandomActions=5)
-    #t.showHTMLPerformanceHeatmap(Correlations=True)
- 
-def testRandomCBPerformanceGenerators():
-    print('*---------- test dynamic updates of a random CB performance tableau --------*') 
+    rag1 = RandomPerformanceGenerator(t,actionNamePrefix='std',seed=100)
+    print(rag1.randomActions(5))
+    newTab = rag1.randomPerformanceTableau(5)
+    print(newTab)
+    
     t = RandomCBPerformanceTableau(numberOfActions=10,
                                            seed=100)
     t.showAll()
-    rag1 = RandomCBPerformanceGenerator(t,actionNamePrefix='b',seed=100)
-    sampleSize = 5
-    for s in range(sampleSize):
-        newAction = rag1._randomAction()
-        ak = newAction['action'].pop('key')
-        t.actions[ak] = newAction['action']
-        for ev in t.evaluation:
-            for g in t.evaluation:
-                t.evaluation[g][ak] = newAction['evaluation'][g]
-    rag2 = RandomCBPerformanceGenerator(t,actionNamePrefix='c',seed=110)
-    newPerfTab= rag2.randomPerformanceTableau(nbrOfRandomActions=10)
-    t.updateDiscriminationThresholds(Comments=True)
-    newPerfTab.showHTMLPerformanceHeatmap(Correlations=True)
+    rag1 = RandomPerformanceGenerator(t,actionNamePrefix='cb',seed=100)
+    print(rag1.randomActions(5))
+    newTab = rag1.randomPerformanceTableau(5)
+    print(newTab)
 
-def testRandom3ObjectivesPerformanceGenerators():
-    print('*---------- test dynamic updates of a random 3 Objectives performance tableau --------*') 
-    t = Random3ObjectivesPerformanceTableau(numberOfActions=10,OrdinalScales=True,
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=10,
                                            seed=100)
     t.showAll()
-    rag1 = Random3ObjectivesPerformanceGenerator(t,actionNamePrefix='b',seed=100)
-    sampleSize = 5
-    for s in range(sampleSize):
-        newAction = rag1._randomAction()
-        ak = newAction['action'].pop('key')
-        t.actions[ak] = newAction['action']
-        for ev in t.evaluation:
-            for g in t.evaluation:
-                t.evaluation[g][ak] = newAction['evaluation'][g]
-    rag2 = Random3ObjectivesPerformanceGenerator(t,actionNamePrefix='c',seed=110)
-    rag2.randomActions(nbrOfRandomActions=5)
-    print(rag2.randomActions(2))
+    rag1 = RandomPerformanceGenerator(t,actionNamePrefix='3ob',seed=100)
+    print(rag1.randomActions(5))
+    newTab = rag1.randomPerformanceTableau(5)
+    print(newTab)
+    
     #t.showHTMLPerformanceHeatmap(ndigits=0,Correlations=True)
-def testRandomAcademicPerformanceTableauGenerator():
+def testRandomAcademicPerformanceTableau():
     print('*---------- test of a random academic performance tableau --------*') 
     t = RandomAcademicPerformanceTableau(numberOfStudents=10,numberOfCourses=5,
                                          commonMode=('uniform',None,None),

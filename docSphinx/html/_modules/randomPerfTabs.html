@@ -369,44 +369,90 @@
 <div class="viewcode-block" id="RandomPerformanceGenerator"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomPerformanceGenerator">[docs]</a><span class="k">class</span> <span class="nc">RandomPerformanceGenerator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generic wrapper for generating new decision actions or performance tableaux</span>
-<span class="sd">    with random evaluations generated with a given performance tableau model.</span>
+<span class="sd">    with random evaluations generated with a given performance tableau model of type:</span>
+<span class="sd">    RandomPerformanceTableau, RandomCBPerformanceTableau,</span>
+<span class="sd">    or Random3ObjectivesPerformanceTableau.</span>
+
+<span class="sd">    The return format of generated new set of random actions is schown below.</span>
+<span class="sd">    This return may be directly feeded to the PerformanceQuantiles.updateQuantiles() method.</span>
+
+<span class="sd">    &gt;&gt;&gt; from randomPerfTabs import *</span>
+<span class="sd">    &gt;&gt;&gt; t = RandomPerformanceTableau(seed=100)</span>
+<span class="sd">    &gt;&gt;&gt; t</span>
+<span class="sd">    *------- PerformanceTableau instance description ------*</span>
+<span class="sd">    Instance class   : RandomPerformanceTableau</span>
+<span class="sd">    Seed             : 100</span>
+<span class="sd">    Instance name    : randomperftab</span>
+<span class="sd">    # Actions        : 13</span>
+<span class="sd">    # Criteria       : 7</span>
+<span class="sd">    Attributes       : [&#39;randomSeed&#39;, &#39;name&#39;, &#39;BigData&#39;, &#39;sumWeights&#39;, &#39;digits&#39;, &#39;commonScale&#39;, &#39;commonMode&#39;, &#39;missingDataProbability&#39;, &#39;actions&#39;, &#39;criteria&#39;, &#39;evaluation&#39;, &#39;weightPreorder&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; rpg = RandomPerformanceGenerator(t,seed= 100)</span>
+<span class="sd">    &gt;&gt;&gt; newActions = rpg.randomActions(2)</span>
+<span class="sd">    &gt;&gt;&gt; print(newActions)</span>
+<span class="sd">    {&#39;actions&#39;: OrderedDict([</span>
+<span class="sd">    (&#39;a14&#39;, {&#39;shortName&#39;: &#39;a14&#39;,</span>
+<span class="sd">             &#39;name&#39;: &#39;random decision action&#39;,</span>
+<span class="sd">             &#39;comment&#39;: &#39;RandomPerformanceGenerator&#39;}),</span>
+<span class="sd">    (&#39;a15&#39;, {&#39;shortName&#39;: &#39;a15&#39;,</span>
+<span class="sd">             &#39;name&#39;: &#39;random decision action&#39;,</span>
+<span class="sd">             &#39;comment&#39;: &#39;RandomPerformanceGenerator&#39;})]),</span>
+<span class="sd">    &#39;evaluation&#39;: {</span>
+<span class="sd">    &#39;g1&#39;: {&#39;a14&#39;: Decimal(&#39;15.17&#39;), &#39;a15&#39;: Decimal(&#39;80.87&#39;)},</span>
+<span class="sd">    &#39;g2&#39;: {&#39;a14&#39;: Decimal(&#39;44.51&#39;), &#39;a15&#39;: Decimal(&#39;62.74&#39;)},</span>
+<span class="sd">    &#39;g3&#39;: {&#39;a14&#39;: Decimal(&#39;57.87&#39;), &#39;a15&#39;: Decimal(&#39;64.24&#39;)},</span>
+<span class="sd">    &#39;g4&#39;: {&#39;a14&#39;: Decimal(&#39;58.0&#39;), &#39;a15&#39;: Decimal(&#39;26.99&#39;)},</span>
+<span class="sd">    &#39;g5&#39;: {&#39;a14&#39;: Decimal(&#39;24.22&#39;), &#39;a15&#39;: Decimal(&#39;21.18&#39;)},</span>
+<span class="sd">    &#39;g6&#39;: {&#39;a14&#39;: Decimal(&#39;29.1&#39;), &#39;a15&#39;: Decimal(&#39;73.09&#39;)},</span>
+<span class="sd">    &#39;g7&#39;: {&#39;a14&#39;: Decimal(&#39;96.58&#39;), &#39;a15&#39;: Decimal(&#39;-999&#39;)}}}</span>
+<span class="sd">    &gt;&gt;&gt; newTableau = rpg.randomPerformanceTableau(2)</span>
+<span class="sd">    &gt;&gt;&gt; newTab.showPerformanceTableau()</span>
+<span class="sd">    *----  performance tableau -----*</span>
+<span class="sd">    criteria | weights | &#39;a17&#39;   &#39;a18&#39;   </span>
+<span class="sd">    ---------|-----------------------------------------</span>
+<span class="sd">       &#39;g1&#39;  |   1   |   55.80   22.03  </span>
+<span class="sd">       &#39;g2&#39;  |   1   |   57.78   33.83  </span>
+<span class="sd">       &#39;g3&#39;  |   1   |   80.54   31.83  </span>
+<span class="sd">       &#39;g4&#39;  |   1   |   31.15   69.98  </span>
+<span class="sd">       &#39;g5&#39;  |   1   |   46.25   48.80  </span>
+<span class="sd">       &#39;g6&#39;  |   1   |   42.24   82.88  </span>
+<span class="sd">       &#39;g7&#39;  |   1   |   57.31   41.66  </span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span><span class="n">actionNamePrefix</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span>\
                  <span class="n">instanceCounter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomStdPerformanceGenerator</span><span class="p">,</span>\
-                                  <span class="n">RandomCBPerformanceGenerator</span><span class="p">,</span>\
-                                  <span class="n">Random3ObjectivesPerformanceGenerator</span>
+        <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">_RandomStdPerformanceGenerator</span><span class="p">,</span>\
+                                  <span class="n">_RandomCBPerformanceGenerator</span><span class="p">,</span>\
+                                  <span class="n">_Random3ObjectivesPerformanceGenerator</span>
         <span class="kn">from</span> <span class="nn">performanceQuantiles</span> <span class="k">import</span> <span class="n">PerformanceQuantiles</span>
         <span class="k">if</span> <span class="n">argPerfTab</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">==</span> <span class="n">RandomPerformanceTableau</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">RandomStdPerformanceGenerator</span>
-            <span class="k">return</span> <span class="n">RandomStdPerformanceGenerator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
+            <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">_RandomStdPerformanceGenerator</span>
+            <span class="k">return</span> <span class="n">_RandomStdPerformanceGenerator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
                             <span class="n">actionNamePrefix</span><span class="o">=</span><span class="n">actionNamePrefix</span><span class="p">,</span>\
                             <span class="n">instanceCounter</span><span class="o">=</span><span class="n">instanceCounter</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">argPerfTab</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">==</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">RandomCBPerformanceGenerator</span>
-            <span class="k">return</span> <span class="n">RandomCBPerformanceGenerator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
+            <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">_RandomCBPerformanceGenerator</span>
+            <span class="k">return</span> <span class="n">_RandomCBPerformanceGenerator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
                             <span class="n">actionNamePrefix</span><span class="o">=</span><span class="n">actionNamePrefix</span><span class="p">,</span>\
                             <span class="n">instanceCounter</span><span class="o">=</span><span class="n">instanceCounter</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">argPerfTab</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">==</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceGenerator</span>
-            <span class="k">return</span> <span class="n">Random3ObjectivesPerformanceGenerator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
+            <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">_Random3ObjectivesPerformanceGenerator</span>
+            <span class="k">return</span> <span class="n">_Random3ObjectivesPerformanceGenerator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
                             <span class="n">actionNamePrefix</span><span class="o">=</span><span class="n">actionNamePrefix</span><span class="p">,</span>\
                             <span class="n">instanceCounter</span><span class="o">=</span><span class="n">instanceCounter</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">argPerfTab</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">==</span> <span class="n">PerformanceQuantiles</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">argPerfTab</span><span class="o">.</span><span class="n">perfTabType</span> <span class="o">==</span> <span class="s1">&#39;RandomPerformanceTableau&#39;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">RandomStdPerformanceGenerator</span>
-                <span class="k">return</span> <span class="n">RandomStdPerformanceGenerator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
+                <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">_RandomStdPerformanceGenerator</span>
+                <span class="k">return</span> <span class="n">_RandomStdPerformanceGenerator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
                             <span class="n">actionNamePrefix</span><span class="o">=</span><span class="n">actionNamePrefix</span><span class="p">,</span>\
                             <span class="n">instanceCounter</span><span class="o">=</span><span class="n">instanceCounter</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">argPerfTab</span><span class="o">.</span><span class="n">perfTabType</span> <span class="o">==</span> <span class="s1">&#39;RandomCBPerformanceTableau&#39;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">RandomCBPerformanceGenerator</span>
-                <span class="k">return</span> <span class="n">RandomCBPerformanceGenerator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
+                <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">_RandomCBPerformanceGenerator</span>
+                <span class="k">return</span> <span class="n">_RandomCBPerformanceGenerator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
                                 <span class="n">actionNamePrefix</span><span class="o">=</span><span class="n">actionNamePrefix</span><span class="p">,</span>\
                                 <span class="n">instanceCounter</span><span class="o">=</span><span class="n">instanceCounter</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">argPerfTab</span><span class="o">.</span><span class="n">perfTabType</span> <span class="o">==</span> <span class="s1">&#39;Random3ObjectivesPerformanceTableau&#39;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceGenerator</span>
-                <span class="k">return</span> <span class="n">Random3ObjectivesPerformanceGenerator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
+                <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">_Random3ObjectivesPerformanceGenerator</span>
+                <span class="k">return</span> <span class="n">_Random3ObjectivesPerformanceGenerator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
                                 <span class="n">actionNamePrefix</span><span class="o">=</span><span class="n">actionNamePrefix</span><span class="p">,</span>\
                                 <span class="n">instanceCounter</span><span class="o">=</span><span class="n">instanceCounter</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
             
@@ -478,7 +524,7 @@
         <span class="k">return</span> <span class="n">newPerfTab</span></div></div>
 
 
-<div class="viewcode-block" id="RandomStdPerformanceGenerator"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomStdPerformanceGenerator">[docs]</a><span class="k">class</span> <span class="nc">RandomStdPerformanceGenerator</span><span class="p">(</span><span class="n">RandomPerformanceGenerator</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">_RandomStdPerformanceGenerator</span><span class="p">(</span><span class="n">RandomPerformanceGenerator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generator for genrating new decision actions from a</span>
 <span class="sd">    given &lt;RandomPerformanceTableau&gt; model.</span>
@@ -592,7 +638,7 @@
                 <span class="n">evaluation</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">)</span>
 
         <span class="c1"># return a new random decision alternative</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="n">action</span><span class="p">,</span><span class="s1">&#39;evaluation&#39;</span><span class="p">:</span><span class="n">evaluation</span><span class="p">}</span></div>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="n">action</span><span class="p">,</span><span class="s1">&#39;evaluation&#39;</span><span class="p">:</span><span class="n">evaluation</span><span class="p">}</span>
 
 <span class="c1">##    def randomUpdate(self,nbrOfRandomActions=1):</span>
 <span class="c1">##        &quot;&quot;&quot;</span>
@@ -2350,7 +2396,7 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  name:      &#39;</span><span class="p">,</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  profile:   &#39;</span><span class="p">,</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">])</span></div></div>
 
-<div class="viewcode-block" id="Random3ObjectivesPerformanceGenerator"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.Random3ObjectivesPerformanceGenerator">[docs]</a><span class="k">class</span> <span class="nc">Random3ObjectivesPerformanceGenerator</span><span class="p">(</span><span class="n">RandomPerformanceGenerator</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">_Random3ObjectivesPerformanceGenerator</span><span class="p">(</span><span class="n">RandomPerformanceGenerator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generator for new decision actions with random evaluation following a</span>
 <span class="sd">    given Random3ObjectivesPerformanceTableau model.</span>
@@ -2570,7 +2616,7 @@
                 <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">)</span>
 
         <span class="c1"># return a new random decision alternative</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="n">action</span><span class="p">,</span><span class="s1">&#39;evaluation&#39;</span><span class="p">:</span><span class="n">evaluation</span><span class="p">}</span></div>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="n">action</span><span class="p">,</span><span class="s1">&#39;evaluation&#39;</span><span class="p">:</span><span class="n">evaluation</span><span class="p">}</span>
 
 <span class="c1">##    def randomUpdate(self,nbrOfRandomActions=1):</span>
 <span class="c1">##        &quot;&quot;&quot;</span>
@@ -3376,7 +3422,7 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;criteria&#39;</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="s1">&#39; default thresholds:&#39;</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;thresholds&#39;</span><span class="p">])</span></div></div>
 
-<div class="viewcode-block" id="RandomCBPerformanceGenerator"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomCBPerformanceGenerator">[docs]</a><span class="k">class</span> <span class="nc">RandomCBPerformanceGenerator</span><span class="p">(</span><span class="n">RandomPerformanceGenerator</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">_RandomCBPerformanceGenerator</span><span class="p">(</span><span class="n">RandomPerformanceGenerator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generator of new decision actions with random evaluations using</span>
 <span class="sd">    the model parameters provided by a given RandomCBPerformanceTableau instance.</span>
@@ -3562,7 +3608,7 @@
                 <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">)</span>
 
         <span class="c1"># return a new random decision alternative</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="n">action</span><span class="p">,</span><span class="s1">&#39;evaluation&#39;</span><span class="p">:</span><span class="n">evaluation</span><span class="p">}</span></div>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="n">action</span><span class="p">,</span><span class="s1">&#39;evaluation&#39;</span><span class="p">:</span><span class="n">evaluation</span><span class="p">}</span>
     
 <span class="c1">##    def randomUpdate(self,nbrOfRandomActions=1):</span>
 <span class="c1">##        &quot;&quot;&quot;</span>
