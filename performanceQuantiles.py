@@ -548,10 +548,10 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
         nv = []
         for x in newValues:
             if x != -999:
-                if self.criteria[g]['weight'] < Decimal('0'):
-                    nv.append(-x)
-                else:
-                    nv.append(x)
+##                if self.criteria[g]['weight'] < Decimal('0'):
+##                    nv.append(-x)
+##                else:
+                nv.append(x)
         nv.sort()
         nt = len(nv)
         if Debug:
@@ -1060,7 +1060,7 @@ if __name__ == "__main__":
 ##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
 ##                                    numberOfCriteria=nbrCrit,seed=seed)
     from randomPerfTabs import Random3ObjectivesPerformanceTableau
-    from randomPerfTabs import Random3ObjectivesPerformanceGenerator as PerfTabGenerator
+    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
     nbrActions=nbrActions
     nbrCrit = nbrCrit
     tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,
@@ -1071,7 +1071,7 @@ if __name__ == "__main__":
     #print(pq.actionsTypeStatistics)
     #pq.showHTMLLimitingQuantiles(Transposed=True)
     #print(pq.limitingQuantiles)
-    #pq.showLimitingQuantiles(ByObjectives=False)
+    pq.showLimitingQuantiles(ByObjectives=False)
     #pq.showHTMLLimitingQuantiles(Transposed=True)
     #pq.showActions()
     #pq.showCriteria(ByObjectives=True)
