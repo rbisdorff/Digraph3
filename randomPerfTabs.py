@@ -622,10 +622,9 @@ class _RandomStdPerformanceGenerator(RandomPerformanceGenerator):
 class RandomAcademicPerformanceTableau(PerformanceTableau):
     """
     Specialization of the PerformanceTableau class for generating a temporary
-    academic performance tableau.
-
-    Random generator for performances of a number of students
-    in different academic courses.
+    academic performance tableau with random grading results performances
+    of a number of students in different academic courses (see Lecture 4: Grading
+    of the Algorithmic decision Theory Course http://hdl.handle.net/10993/37933 )
     
     *Parameters*:
         * number of students,
@@ -960,9 +959,13 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
 class RandomRankPerformanceTableau(PerformanceTableau):
     """
     Specialization of the PerformanceTableau class for generating a temporary
-    random performance tableau.
-
-    Random generator for multiple criteria ranked (without ties) performances of a given number of decision actions. On each criterion, all decision actions are hence lineraly ordered. The RandomRankPerformanceTableau class is matching the RandomLinearVotingProfiles class (see the votingDigraphs module)  
+    random performance tableau with multiple criteria ranked (without ties)
+    performances of a given number of decision actions.
+    On each criterion, all decision actions are hence lineraly ordered.
+    The :py:class:`randomPerfTabs.RandomRankPerformanceTableau` class
+    is matching the :py:class:`votingDigraphs.RandomLinearVotingProfiles`
+    class (see http://hdl.handle.net/10993/37933 Lecture 2 : Voting of
+    the Algorithmic Decision Theory Course)
         
     *Parameters*:
         * number of actions,
@@ -1818,10 +1821,9 @@ class _RandomCoalitionsPerformanceTableau(PerformanceTableau):
 
 class Random3ObjectivesPerformanceTableau(PerformanceTableau):
     """
-    Specialization of the PerformanceTableau
-    for 3 objectives: *Eco*, *Soc* and *Env*.
-
-    Each decision action is qualified at random as weak (-), fair (~) or good (+)
+    Specialization of the :py:class:`perfTabs.PerformanceTableau` class 
+    for 3 objectives: *Eco*, *Soc* and *Env*. Each decision action
+    is qualified randomly as weak (-), fair (~) or good (+)
     on each of the three objectives.
     
     Generator arguments:
@@ -2794,8 +2796,8 @@ class _Random3ObjectivesPerformanceTableau(_RandomCoalitionsPerformanceTableau):
 #---------------
 class RandomCBPerformanceTableau(PerformanceTableau):
     """
-    Full automatic generation of random
-    Cost versus Benefit oriented performance tableaux.
+    Full automatic generation of random Costs versus Benefits
+    oriented performance tableaux.
 
     Parameters:
     
@@ -2809,9 +2811,10 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         * commonThresholds parameter is not used. Preference discrimination is specified as percentiles of concerned performance differences (see below).
         * CommonPercentiles = {'ind':0.05, 'pref':0.10, 'veto':'95} are expressed in percentiles of the observed performance differences and only concern cardinal criteria.
 
-    .. warning::
+    .. note::
 
-        Minimal number required of criteria is 2, and minimal number required of decision actions is 3 !
+        Minimal number required of criteria is 2, and minimal number
+        required of decision actions is 3 !
     
     >>> from randomPerfTabs import RandomCBPerformanceTableau
     >>> t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=3,seed=1)
@@ -2892,7 +2895,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                  weightScale=None,\
                  IntegerWeights = True,\
                  NegativeWeights = False,\
-                 commonScale = None, commonThresholds = None,\
+                 #commonScale = None, commonThresholds = None,\
                  commonPercentiles= None,\
                  samplingSize = 100000,\
                  commonMode = None,\

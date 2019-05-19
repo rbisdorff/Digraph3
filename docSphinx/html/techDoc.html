@@ -295,12 +295,12 @@ with main <a class="reference external" href="techDoc.html#votingProfiles.Linear
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#randomperftabs-label"><span class="std std-ref">randomPerfTabs module</span></a></dt>
 <dd><p class="first">Various implemented random performance tableau models.</p>
-<img src="_images/inheritance-2b5779519d1a8017bb263c8afa965e6b197005c1.png" alt="Inheritance diagram of randomPerfTabs" usemap="#inheritance4442f81dbd" class="inheritance"/>
+<img src="_images/inheritance-0968f6a9be850bf38d6c18d6123359e108861bfc.png" alt="Inheritance diagram of randomPerfTabs" usemap="#inheritance4442f81dbd" class="inheritance"/>
 <map id="inheritance4442f81dbd" name="inheritance4442f81dbd">
 <area shape="rect" id="node1" href="#perfTabs.PerformanceTableau" target="_top" title="In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` class provides a generic **performance table model**. A given object of this class consists in:" alt="" coords="63,102,273,126"/>
-<area shape="rect" id="node2" href="#randomPerfTabs.Random3ObjectivesPerformanceTableau" target="_top" title="Specialization of the PerformanceTableau" alt="" coords="377,5,763,30"/>
+<area shape="rect" id="node2" href="#randomPerfTabs.Random3ObjectivesPerformanceTableau" target="_top" title="Specialization of the :py:class:`perfTabs.PerformanceTableau` class " alt="" coords="377,5,763,30"/>
 <area shape="rect" id="node3" href="#randomPerfTabs.RandomAcademicPerformanceTableau" target="_top" title="Specialization of the PerformanceTableau class for generating a temporary" alt="" coords="383,53,757,78"/>
-<area shape="rect" id="node4" href="#randomPerfTabs.RandomCBPerformanceTableau" target="_top" title="Full automatic generation of random" alt="" coords="406,102,734,126"/>
+<area shape="rect" id="node4" href="#randomPerfTabs.RandomCBPerformanceTableau" target="_top" title="Full automatic generation of random Costs versus Benefits" alt="" coords="406,102,734,126"/>
 <area shape="rect" id="node6" href="#randomPerfTabs.RandomPerformanceTableau" target="_top" title="Specialization of the generic :py:class:`perftabs.PerformanceTableau` class for generating a temporary random performance tableau." alt="" coords="415,150,726,174"/>
 <area shape="rect" id="node7" href="#randomPerfTabs.RandomRankPerformanceTableau" target="_top" title="Specialization of the PerformanceTableau class for generating a temporary" alt="" coords="399,198,741,223"/>
 <area shape="rect" id="node5" href="#randomPerfTabs.RandomPerformanceGenerator" target="_top" title="Generic wrapper for generating new decision actions or performance tableaux" alt="" coords="5,53,331,78"/>
@@ -5016,9 +5016,9 @@ influential compared to the historical data.</p>
 <dt id="randomPerfTabs.Random3ObjectivesPerformanceTableau">
 <em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">Random3ObjectivesPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=20</em>, <em>numberOfCriteria=13</em>, <em>weightDistribution='equiobjectives'</em>, <em>weightScale=None</em>, <em>IntegerWeights=True</em>, <em>OrdinalScales=False</em>, <em>NegativeWeights=False</em>, <em>negativeWeightProbability=0.0</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>vetoProbability=0.5</em>, <em>missingDataProbability=0.05</em>, <em>BigData=False</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#Random3ObjectivesPerformanceTableau"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.Random3ObjectivesPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
-<p>Specialization of the PerformanceTableau
-for 3 objectives: <em>Eco</em>, <em>Soc</em> and <em>Env</em>.</p>
-<p>Each decision action is qualified at random as weak (-), fair (~) or good (+)
+<p>Specialization of the <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a> class 
+for 3 objectives: <em>Eco</em>, <em>Soc</em> and <em>Env</em>. Each decision action
+is qualified randomly as weak (-), fair (~) or good (+)
 on each of the three objectives.</p>
 <dl class="docutils">
 <dt>Generator arguments:</dt>
@@ -5168,9 +5168,9 @@ on each of the three objectives.</p>
 <em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomAcademicPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfStudents=10</em>, <em>numberOfCourses=5</em>, <em>weightDistribution='random'</em>, <em>weightScale=(1</em>, <em>5)</em>, <em>commonScale=(0</em>, <em>20)</em>, <em>ndigits=0</em>, <em>WithTypes=False</em>, <em>commonMode=('triangular'</em>, <em>12</em>, <em>0.25)</em>, <em>commonThresholds=None</em>, <em>IntegerWeights=True</em>, <em>BigData=False</em>, <em>missingDataProbability=0.0</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomAcademicPerformanceTableau"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomAcademicPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>Specialization of the PerformanceTableau class for generating a temporary
-academic performance tableau.</p>
-<p>Random generator for performances of a number of students
-in different academic courses.</p>
+academic performance tableau with random grading results performances
+of a number of students in different academic courses (see Lecture 4: Grading
+of the Algorithmic decision Theory Course <a class="reference external" href="http://hdl.handle.net/10993/37933">http://hdl.handle.net/10993/37933</a> )</p>
 <dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last">
@@ -5213,10 +5213,10 @@ in different academic courses.</p>
 
 <dl class="class">
 <dt id="randomPerfTabs.RandomCBPerformanceTableau">
-<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomCBPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=13</em>, <em>numberOfCriteria=7</em>, <em>name='randomCBperftab'</em>, <em>weightDistribution='equiobjectives'</em>, <em>weightScale=None</em>, <em>IntegerWeights=True</em>, <em>NegativeWeights=False</em>, <em>commonScale=None</em>, <em>commonThresholds=None</em>, <em>commonPercentiles=None</em>, <em>samplingSize=100000</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>missingDataProbability=0.01</em>, <em>BigData=False</em>, <em>seed=None</em>, <em>Threading=False</em>, <em>nbrCores=None</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomCBPerformanceTableau"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomCBPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomCBPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=13</em>, <em>numberOfCriteria=7</em>, <em>name='randomCBperftab'</em>, <em>weightDistribution='equiobjectives'</em>, <em>weightScale=None</em>, <em>IntegerWeights=True</em>, <em>NegativeWeights=False</em>, <em>commonPercentiles=None</em>, <em>samplingSize=100000</em>, <em>commonMode=None</em>, <em>valueDigits=2</em>, <em>missingDataProbability=0.01</em>, <em>BigData=False</em>, <em>seed=None</em>, <em>Threading=False</em>, <em>nbrCores=None</em>, <em>Debug=False</em>, <em>Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomCBPerformanceTableau"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomCBPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
-<p>Full automatic generation of random
-Cost versus Benefit oriented performance tableaux.</p>
+<p>Full automatic generation of random Costs versus Benefits
+oriented performance tableaux.</p>
 <p>Parameters:</p>
 <blockquote>
 <div><ul class="simple">
@@ -5231,9 +5231,10 @@ Cost versus Benefit oriented performance tableaux.</p>
 <li>CommonPercentiles = {‘ind’:0.05, ‘pref’:0.10, ‘veto’:‘95} are expressed in percentiles of the observed performance differences and only concern cardinal criteria.</li>
 </ul>
 </div></blockquote>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Minimal number required of criteria is 2, and minimal number required of decision actions is 3 !</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Minimal number required of criteria is 2, and minimal number
+required of decision actions is 3 !</p>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -5470,8 +5471,13 @@ expressed in percentige of the common scale amplitude: Max - Min.</p>
 <em class="property">class </em><code class="descclassname">randomPerfTabs.</code><code class="descname">RandomRankPerformanceTableau</code><span class="sig-paren">(</span><em>numberOfActions=13</em>, <em>numberOfCriteria=7</em>, <em>weightDistribution='equisignificant'</em>, <em>weightScale=None</em>, <em>commonThresholds=None</em>, <em>IntegerWeights=True</em>, <em>BigData=False</em>, <em>seed=None</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomRankPerformanceTableau"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomRankPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>Specialization of the PerformanceTableau class for generating a temporary
-random performance tableau.</p>
-<p>Random generator for multiple criteria ranked (without ties) performances of a given number of decision actions. On each criterion, all decision actions are hence lineraly ordered. The RandomRankPerformanceTableau class is matching the RandomLinearVotingProfiles class (see the votingDigraphs module)</p>
+random performance tableau with multiple criteria ranked (without ties)
+performances of a given number of decision actions.
+On each criterion, all decision actions are hence lineraly ordered.
+The <a class="reference internal" href="#randomPerfTabs.RandomRankPerformanceTableau" title="randomPerfTabs.RandomRankPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.RandomRankPerformanceTableau</span></code></a> class
+is matching the <code class="xref py py-class docutils literal"><span class="pre">votingDigraphs.RandomLinearVotingProfiles</span></code>
+class (see <a class="reference external" href="http://hdl.handle.net/10993/37933">http://hdl.handle.net/10993/37933</a> Lecture 2 : Voting of
+the Algorithmic Decision Theory Course)</p>
 <dl class="docutils">
 <dt><em>Parameters</em>:</dt>
 <dd><ul class="first last">

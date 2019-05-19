@@ -669,10 +669,9 @@
 <div class="viewcode-block" id="RandomAcademicPerformanceTableau"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomAcademicPerformanceTableau">[docs]</a><span class="k">class</span> <span class="nc">RandomAcademicPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the PerformanceTableau class for generating a temporary</span>
-<span class="sd">    academic performance tableau.</span>
-
-<span class="sd">    Random generator for performances of a number of students</span>
-<span class="sd">    in different academic courses.</span>
+<span class="sd">    academic performance tableau with random grading results performances</span>
+<span class="sd">    of a number of students in different academic courses (see Lecture 4: Grading</span>
+<span class="sd">    of the Algorithmic decision Theory Course http://hdl.handle.net/10993/37933 )</span>
 <span class="sd">    </span>
 <span class="sd">    *Parameters*:</span>
 <span class="sd">        * number of students,</span>
@@ -1007,9 +1006,13 @@
 <div class="viewcode-block" id="RandomRankPerformanceTableau"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomRankPerformanceTableau">[docs]</a><span class="k">class</span> <span class="nc">RandomRankPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the PerformanceTableau class for generating a temporary</span>
-<span class="sd">    random performance tableau.</span>
-
-<span class="sd">    Random generator for multiple criteria ranked (without ties) performances of a given number of decision actions. On each criterion, all decision actions are hence lineraly ordered. The RandomRankPerformanceTableau class is matching the RandomLinearVotingProfiles class (see the votingDigraphs module)  </span>
+<span class="sd">    random performance tableau with multiple criteria ranked (without ties)</span>
+<span class="sd">    performances of a given number of decision actions.</span>
+<span class="sd">    On each criterion, all decision actions are hence lineraly ordered.</span>
+<span class="sd">    The :py:class:`randomPerfTabs.RandomRankPerformanceTableau` class</span>
+<span class="sd">    is matching the :py:class:`votingDigraphs.RandomLinearVotingProfiles`</span>
+<span class="sd">    class (see http://hdl.handle.net/10993/37933 Lecture 2 : Voting of</span>
+<span class="sd">    the Algorithmic Decision Theory Course)</span>
 <span class="sd">        </span>
 <span class="sd">    *Parameters*:</span>
 <span class="sd">        * number of actions,</span>
@@ -1865,10 +1868,9 @@
 
 <div class="viewcode-block" id="Random3ObjectivesPerformanceTableau"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.Random3ObjectivesPerformanceTableau">[docs]</a><span class="k">class</span> <span class="nc">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Specialization of the PerformanceTableau</span>
-<span class="sd">    for 3 objectives: *Eco*, *Soc* and *Env*.</span>
-
-<span class="sd">    Each decision action is qualified at random as weak (-), fair (~) or good (+)</span>
+<span class="sd">    Specialization of the :py:class:`perfTabs.PerformanceTableau` class </span>
+<span class="sd">    for 3 objectives: *Eco*, *Soc* and *Env*. Each decision action</span>
+<span class="sd">    is qualified randomly as weak (-), fair (~) or good (+)</span>
 <span class="sd">    on each of the three objectives.</span>
 <span class="sd">    </span>
 <span class="sd">    Generator arguments:</span>
@@ -2841,8 +2843,8 @@
 <span class="c1">#---------------</span>
 <div class="viewcode-block" id="RandomCBPerformanceTableau"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomCBPerformanceTableau">[docs]</a><span class="k">class</span> <span class="nc">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Full automatic generation of random</span>
-<span class="sd">    Cost versus Benefit oriented performance tableaux.</span>
+<span class="sd">    Full automatic generation of random Costs versus Benefits</span>
+<span class="sd">    oriented performance tableaux.</span>
 
 <span class="sd">    Parameters:</span>
 <span class="sd">    </span>
@@ -2856,9 +2858,10 @@
 <span class="sd">        * commonThresholds parameter is not used. Preference discrimination is specified as percentiles of concerned performance differences (see below).</span>
 <span class="sd">        * CommonPercentiles = {&#39;ind&#39;:0.05, &#39;pref&#39;:0.10, &#39;veto&#39;:&#39;95} are expressed in percentiles of the observed performance differences and only concern cardinal criteria.</span>
 
-<span class="sd">    .. warning::</span>
+<span class="sd">    .. note::</span>
 
-<span class="sd">        Minimal number required of criteria is 2, and minimal number required of decision actions is 3 !</span>
+<span class="sd">        Minimal number required of criteria is 2, and minimal number</span>
+<span class="sd">        required of decision actions is 3 !</span>
 <span class="sd">    </span>
 <span class="sd">    &gt;&gt;&gt; from randomPerfTabs import RandomCBPerformanceTableau</span>
 <span class="sd">    &gt;&gt;&gt; t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=3,seed=1)</span>
@@ -2939,7 +2942,7 @@
                  <span class="n">weightScale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">IntegerWeights</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>\
                  <span class="n">NegativeWeights</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>\
-                 <span class="n">commonScale</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">commonThresholds</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
+                 <span class="c1">#commonScale = None, commonThresholds = None,\</span>
                  <span class="n">commonPercentiles</span><span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
                  <span class="n">samplingSize</span> <span class="o">=</span> <span class="mi">100000</span><span class="p">,</span>\
                  <span class="n">commonMode</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\

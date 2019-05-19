@@ -72,7 +72,13 @@ def testNormalizedPerformanceTableau():
 
 def testhasOddWeightsAlgebra():
     print('*--------- Testing hasOddWeightsAlgebra test ------*')
-    t = RandomCBPerformanceTableau(numberOfActions=10,numberOfCriteria=13,commonThresholds=None,commonPercentiles={'ind':5,'pref':10,'veto':90},weightDistribution="random", weightScale=None,IntegerWeights=True,commonScale=[0.0,100.0],commonMode=["normal",50.0,25.0],Debug=False)
+    t = RandomCBPerformanceTableau(numberOfActions=10,numberOfCriteria=13,
+                                   #commonThresholds=None,
+                                   commonPercentiles={'ind':5,'pref':10,'veto':90},
+                                   weightDistribution="random",
+                                   weightScale=None,IntegerWeights=True,
+                                   #commonScale=[0.0,100.0],
+                                   commonMode=["normal",50.0,25.0],Debug=False)
     print(t.hasOddWeightAlgebra(Debug=True))
 
 def testRandomS3PerformanceTableau():

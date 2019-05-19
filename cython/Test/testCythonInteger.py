@@ -30,8 +30,8 @@ from multiprocessing import set_start_method
 # parameters
 sampleSize = 1
 MP = False
-nbrOfCPUs = 8
-nbrOfThreads = 8
+nbrOfCPUs = 4
+nbrOfThreads = 4
 nbrOfSubProcesses = 0
 #set_start_method('fork')
 #componentThreadingThreshold = 500
