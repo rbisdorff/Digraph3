@@ -3112,7 +3112,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 else:
                     try:
                         if self.criteria[g]['preferenceDirection'] == 'min':
-                            pdir = Decimal('-1')
+                            if self.criteria[g]['weight'] > Decimal('0'):
+                                pdir = Decimal('-1')
+                            else:
+                                pdir = Decimal('1')
                         else:
                             pdir = Decimal('1')
                     except:
@@ -9302,6 +9305,8 @@ if __name__ == "__main__":
     t1 = Random3ObjectivesPerformanceTableau(numberOfActions=10,\
                                    numberOfCriteria=21,\
                                    weightDistribution='equiobjectives',
+                                             NegativeWeights=True,
+                                    negativeWeightProbability=0.25,
                                    seed=101)
     
     g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=Threading,
