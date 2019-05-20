@@ -2041,10 +2041,10 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
             criteria[g] = {}
            #print(g,criterionObjective,objectivesKeys)
             criteria[g]['objective'] = criterionObjective
-            if _random.random() < negativeWeightProbability:
-                criteria[g]['preferenceDirection'] = 'min'
-            else:
+            if _random.random() > negativeWeightProbability:
                 criteria[g]['preferenceDirection'] = 'max'
+            else:
+                criteria[g]['preferenceDirection'] = 'min'
             criteria[g]['name'] = 'criterion of objective %s' % (criterionObjective)
             criteria[g]['shortName'] = g + criterionObjective[0:2]
             span = commonScale[1] - commonScale[0]
@@ -3640,7 +3640,7 @@ if __name__ == "__main__":
      #weightScale=(1,5),
                                             commonMode=('triangular','variable',None),
                                             vetoProbability=0.5,
-                                            NegativeWeights=True,
+                                            NegativeWeights=False,
                                             negativeWeightProbability=0.25,
                                             seed=120,Debug=False)
 

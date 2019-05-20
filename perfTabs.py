@@ -3703,7 +3703,10 @@ The performance evaluations of each decision alternative on each criterion are g
             for g in criteriaList:
                 try:
                     if self.criteria[g]['preferenceDirection'] == 'min':
-                        pdir = Decimal('-1')
+                        if self.criteria[g]['weight'] > Decimal('0'):
+                            pdir = Decimal('-1')
+                        else:
+                            pdir = Decimal('1')
                     else:
                         pdir = Decimal('1')
                 except:
@@ -3713,7 +3716,10 @@ The performance evaluations of each decision alternative on each criterion are g
                 fo.write('<criterionID>')       
                 fo.write(g)
                 fo.write('</criterionID>\n')
-                val = pdir*evaluation[g][actionsList[i]]
+                if evaluation[g][actionsList[i]] == Decimal('-999'):
+                    val = evaluation[g][actionsList[i]]
+                else:
+                    val = pdir*evaluation[g][actionsList[i]]
                 if val == Decimal("-999"):
                     fo.write('<value><NA>')
                     fo.write('%s' % stringNA )
@@ -7401,7 +7407,10 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
         for g in self.criteria:
             try:
                 if self.criteria[g]['preferenceDirection'] == 'min':
-                    pdir = Decimal('-1')
+                    if self.criteria[g]['weight'] > Decimal('0'):
+                        pdir = Decimal('-1')
+                    else:
+                        pdir = Decimal('1')
                 else:
                     pdir = Decimal('1')
             except:
