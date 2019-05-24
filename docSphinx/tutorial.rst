@@ -3420,7 +3420,7 @@ In genuine random digraphs, however, we may need to check for each of its MISs, 
 
 >>> from randomDigraphs import RandomDigraph
 >>> rd = RandomDigraph(order=7,arcProbability=0.3,seed=5)
->>> rd.exportGraphViz('randomLatrality')
+>>> rd.exportGraphViz('randomLaterality')
 *---- exporting a dot file dor GraphViz tools ---------*
 Exporting to randomLaterality.dot
 dot -Grankdir=BT -Tpng randomLaterality.dot -o randomLaterality.png
