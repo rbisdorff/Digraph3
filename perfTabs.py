@@ -1941,7 +1941,9 @@ The performance evaluations of each decision alternative on each criterion are g
         return html
         
         
-    def showHTMLPerformanceTableau(self,actionsSubset=None,isSorted=True,\
+    def showHTMLPerformanceTableau(self,actionsSubset=None,\
+                                   fromIndex=None,toIndex=None,\
+                                   isSorted=True,\
                                    Transposed=False,ndigits=2,\
                                    ContentCentered=True,title=None):
         """
@@ -1950,7 +1952,10 @@ The performance evaluations of each decision alternative on each criterion are g
         import webbrowser
         fileName = '/tmp/performanceTable.html'
         fo = open(fileName,'w')
-        fo.write(self.htmlPerformanceTableau(actions=actionsSubset,isSorted=isSorted,\
+        fo.write(self.htmlPerformanceTableau(actions=actionsSubset,\
+                                             fromIndex=fromIndex,\
+                                             toIndex=toIndex,\
+                                             isSorted=isSorted,\
                                            Transposed=Transposed,\
                                            ndigits=ndigits,
                                            ContentCentered=ContentCentered,
@@ -1960,7 +1965,10 @@ The performance evaluations of each decision alternative on each criterion are g
         webbrowser.open_new(url)
            
             
-    def htmlPerformanceTableau(self,actions=None,isSorted=False,\
+    def htmlPerformanceTableau(self,actions=None,\
+                               fromIndex=None,\
+                               toIndex=None,\
+                               isSorted=False,\
                              Transposed=False,ndigits=2,\
                              ContentCentered=True,
                              title=None):
@@ -1991,7 +1999,13 @@ The performance evaluations of each decision alternative on each criterion are g
         if Transposed:
             html += '<table style="background-color:White;" border="1">'
             html += '<tr bgcolor="#9acd32"><th>criterion</th>'
-            for x in actionsKeys:
+            if fromIndex == None:
+                fromIndex = 0
+            if toIndex == None:
+                fromIndex = len(actionsKeys)
+            for i in raneg(fromIndex,toIndex):
+                x = actionsKeys[i]
+            #for x in actionsKeys:
                 try:
                     xName = actions[x]['shortName']
                 except:
@@ -2038,7 +2052,12 @@ The performance evaluations of each decision alternative on each criterion are g
                 gWeight = criteria[g]['weight']
                 html += '<th bgcolor="#FFF79B">%.2f</th>' % (gWeight)
             html += '</tr>'
-            for x in actionsKeys:
+            if fromIndex == None:
+                fromIndex = 0
+            if toIndex == None:
+                toIndex = len(actionsKeys)
+                x = actionsKeys[i]
+            #for x in actionsKeys:
                 try:
                     xName = actions[x]['shortName']
                 except:

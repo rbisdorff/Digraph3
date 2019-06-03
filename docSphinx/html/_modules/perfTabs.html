@@ -1988,7 +1988,9 @@
         <span class="k">return</span> <span class="n">html</span></div>
         
         
-<div class="viewcode-block" id="PerformanceTableau.showHTMLPerformanceTableau"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.showHTMLPerformanceTableau">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLPerformanceTableau</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">isSorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
+<div class="viewcode-block" id="PerformanceTableau.showHTMLPerformanceTableau"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.showHTMLPerformanceTableau">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLPerformanceTableau</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+                                   <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+                                   <span class="n">isSorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                                    <span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>\
                                    <span class="n">ContentCentered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1997,7 +1999,10 @@
         <span class="kn">import</span> <span class="nn">webbrowser</span>
         <span class="n">fileName</span> <span class="o">=</span> <span class="s1">&#39;/tmp/performanceTable.html&#39;</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">htmlPerformanceTableau</span><span class="p">(</span><span class="n">actions</span><span class="o">=</span><span class="n">actionsSubset</span><span class="p">,</span><span class="n">isSorted</span><span class="o">=</span><span class="n">isSorted</span><span class="p">,</span>\
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">htmlPerformanceTableau</span><span class="p">(</span><span class="n">actions</span><span class="o">=</span><span class="n">actionsSubset</span><span class="p">,</span>\
+                                             <span class="n">fromIndex</span><span class="o">=</span><span class="n">fromIndex</span><span class="p">,</span>\
+                                             <span class="n">toIndex</span><span class="o">=</span><span class="n">toIndex</span><span class="p">,</span>\
+                                             <span class="n">isSorted</span><span class="o">=</span><span class="n">isSorted</span><span class="p">,</span>\
                                            <span class="n">Transposed</span><span class="o">=</span><span class="n">Transposed</span><span class="p">,</span>\
                                            <span class="n">ndigits</span><span class="o">=</span><span class="n">ndigits</span><span class="p">,</span>
                                            <span class="n">ContentCentered</span><span class="o">=</span><span class="n">ContentCentered</span><span class="p">,</span>
@@ -2007,7 +2012,10 @@
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open_new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
            
             
-<div class="viewcode-block" id="PerformanceTableau.htmlPerformanceTableau"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.htmlPerformanceTableau">[docs]</a>    <span class="k">def</span> <span class="nf">htmlPerformanceTableau</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">isSorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
+<div class="viewcode-block" id="PerformanceTableau.htmlPerformanceTableau"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.htmlPerformanceTableau">[docs]</a>    <span class="k">def</span> <span class="nf">htmlPerformanceTableau</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+                               <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+                               <span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+                               <span class="n">isSorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                              <span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>\
                              <span class="n">ContentCentered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                              <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -2038,7 +2046,13 @@
         <span class="k">if</span> <span class="n">Transposed</span><span class="p">:</span>
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;table style=&quot;background-color:White;&quot; border=&quot;1&quot;&gt;&#39;</span>
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr bgcolor=&quot;#9acd32&quot;&gt;&lt;th&gt;criterion&lt;/th&gt;&#39;</span>
-            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionsKeys</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">fromIndex</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">fromIndex</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="n">toIndex</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">fromIndex</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actionsKeys</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">raneg</span><span class="p">(</span><span class="n">fromIndex</span><span class="p">,</span><span class="n">toIndex</span><span class="p">):</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">actionsKeys</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="c1">#for x in actionsKeys:</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">xName</span> <span class="o">=</span> <span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">]</span>
                 <span class="k">except</span><span class="p">:</span>
@@ -2085,7 +2099,12 @@
                 <span class="n">gWeight</span> <span class="o">=</span> <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
                 <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;th bgcolor=&quot;#FFF79B&quot;&gt;</span><span class="si">%.2f</span><span class="s1">&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">gWeight</span><span class="p">)</span>
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;&#39;</span>
-            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionsKeys</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">fromIndex</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">fromIndex</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="n">toIndex</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">toIndex</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actionsKeys</span><span class="p">)</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">actionsKeys</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="c1">#for x in actionsKeys:</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">xName</span> <span class="o">=</span> <span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">]</span>
                 <span class="k">except</span><span class="p">:</span>
