@@ -1896,14 +1896,14 @@
         <span class="kn">import</span> <span class="nn">webbrowser</span>
         <span class="n">fileName</span> <span class="o">=</span> <span class="s1">&#39;/tmp/criteriaView.html&#39;</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">htmlCriteriaView</span><span class="p">(</span><span class="n">criteria</span><span class="o">=</span><span class="n">criteriaSubset</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="n">Sorted</span><span class="p">,</span>\
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_htmlCriteriaView</span><span class="p">(</span><span class="n">criteria</span><span class="o">=</span><span class="n">criteriaSubset</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="n">Sorted</span><span class="p">,</span>\
                                            <span class="n">ndigits</span><span class="o">=</span><span class="n">ndigits</span><span class="p">,</span>\
                                            <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">))</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;file://&#39;</span><span class="o">+</span><span class="n">fileName</span>
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open_new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PerformanceTableau.htmlCriteriaView"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.htmlCriteriaView">[docs]</a>    <span class="k">def</span> <span class="nf">htmlCriteriaView</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criteria</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="nf">_htmlCriteriaView</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criteria</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                          <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Family of Criteria&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a html view of the in the XMCDA2 format.</span>
@@ -1985,7 +1985,7 @@
 <span class="c1">##            &lt;td align=&quot;center&quot;&gt;%.2f&lt;/td&gt;</span>
             
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;&#39;</span>
-        <span class="k">return</span> <span class="n">html</span></div>
+        <span class="k">return</span> <span class="n">html</span>
         
         
 <div class="viewcode-block" id="PerformanceTableau.showHTMLPerformanceTableau"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.showHTMLPerformanceTableau">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLPerformanceTableau</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
@@ -1999,7 +1999,7 @@
         <span class="kn">import</span> <span class="nn">webbrowser</span>
         <span class="n">fileName</span> <span class="o">=</span> <span class="s1">&#39;/tmp/performanceTable.html&#39;</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">htmlPerformanceTableau</span><span class="p">(</span><span class="n">actions</span><span class="o">=</span><span class="n">actionsSubset</span><span class="p">,</span>\
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_htmlPerformanceTableau</span><span class="p">(</span><span class="n">actions</span><span class="o">=</span><span class="n">actionsSubset</span><span class="p">,</span>\
                                              <span class="n">fromIndex</span><span class="o">=</span><span class="n">fromIndex</span><span class="p">,</span>\
                                              <span class="n">toIndex</span><span class="o">=</span><span class="n">toIndex</span><span class="p">,</span>\
                                              <span class="n">isSorted</span><span class="o">=</span><span class="n">isSorted</span><span class="p">,</span>\
@@ -2012,7 +2012,7 @@
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open_new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
            
             
-<div class="viewcode-block" id="PerformanceTableau.htmlPerformanceTableau"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.htmlPerformanceTableau">[docs]</a>    <span class="k">def</span> <span class="nf">htmlPerformanceTableau</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="nf">_htmlPerformanceTableau</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                                <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                                <span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                                <span class="n">isSorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
@@ -2103,8 +2103,9 @@
                 <span class="n">fromIndex</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="k">if</span> <span class="n">toIndex</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">toIndex</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actionsKeys</span><span class="p">)</span>
-                <span class="n">x</span> <span class="o">=</span> <span class="n">actionsKeys</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
             <span class="c1">#for x in actionsKeys:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">fromIndex</span><span class="p">,</span><span class="n">toIndex</span><span class="p">):</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">actionsKeys</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">xName</span> <span class="o">=</span> <span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">]</span>
                 <span class="k">except</span><span class="p">:</span>
@@ -2147,7 +2148,7 @@
                 <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;&#39;</span>
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;&#39;</span>
             
-        <span class="k">return</span> <span class="n">html</span></div>
+        <span class="k">return</span> <span class="n">html</span>
 
 
 
@@ -2550,21 +2551,21 @@
 <span class="c1">#####                                                         END                                             ######</span>
 <span class="c1">######################################################################################################################</span>
 
-<div class="viewcode-block" id="PerformanceTableau.showHTMLPerformanceHeatmap"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                                   <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                                   <span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                                   <span class="n">criteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                                   <span class="n">colorLevels</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
-                                   <span class="n">pageTitle</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                                   <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-                                   <span class="n">SparseModel</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                   <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                                   <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">,</span>
-                                   <span class="n">quantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                                   <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
-                                   <span class="n">Correlations</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                   <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                   <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="PerformanceTableau.showHTMLPerformanceHeatmap"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+                                   <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+                                   <span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+                                   <span class="n">criteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+                                   <span class="n">colorLevels</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>\
+                                   <span class="n">pageTitle</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+                                   <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>\
+                                   <span class="n">SparseModel</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
+                                   <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>\
+                                   <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">,</span>\
+                                   <span class="n">quantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+                                   <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>\
+                                   <span class="n">Correlations</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
+                                   <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
+                                   <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                                    <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        shows the html heatmap version of the performance tableau in a browser window</span>
@@ -2612,7 +2613,7 @@
         <span class="k">if</span> <span class="n">pageTitle</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">pageTitle</span> <span class="o">=</span> <span class="s1">&#39;Heatmap of Performance Tableau </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
             
-        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">htmlPerformanceHeatmap</span><span class="p">(</span><span class="n">argCriteriaList</span><span class="o">=</span><span class="n">criteriaList</span><span class="p">,</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_htmlPerformanceHeatmap</span><span class="p">(</span><span class="n">argCriteriaList</span><span class="o">=</span><span class="n">criteriaList</span><span class="p">,</span>
                                              <span class="n">argActionsList</span><span class="o">=</span><span class="n">actionsList</span><span class="p">,</span>
                                              <span class="n">fromIndex</span><span class="o">=</span><span class="n">fromIndex</span><span class="p">,</span>
                                              <span class="n">toIndex</span><span class="o">=</span><span class="n">toIndex</span><span class="p">,</span>
@@ -2632,7 +2633,7 @@
         <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;file://&#39;</span><span class="o">+</span><span class="n">fileName</span>
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open_new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PerformanceTableau.htmlPerformanceHeatmap"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.htmlPerformanceHeatmap">[docs]</a>    <span class="k">def</span> <span class="nf">htmlPerformanceHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argCriteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">_htmlPerformanceHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argCriteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                <span class="n">argActionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                <span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -2885,7 +2886,7 @@
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;i&gt;Ranking rule&lt;/i&gt;: &lt;b&gt;</span><span class="si">%s</span><span class="s1">&lt;/b&gt;&lt;br/&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">rankingRule</span>
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;i&gt;Ordinal (Kendall) correlation between global ranking and global outranking relation:&lt;/i&gt; &lt;b&gt;</span><span class="si">%+.3f</span><span class="s1">&lt;/b&gt;&lt;br/&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">rankCorrelation</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">])</span>
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/body&gt;&lt;/html&gt;&#39;</span>
-        <span class="k">return</span> <span class="n">html</span></div>
+        <span class="k">return</span> <span class="n">html</span>
 
 <div class="viewcode-block" id="PerformanceTableau.computeWeightPreorder"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeWeightPreorder">[docs]</a>    <span class="k">def</span> <span class="nf">computeWeightPreorder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

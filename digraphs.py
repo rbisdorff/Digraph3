@@ -3327,7 +3327,7 @@ class Digraph(object):
         import webbrowser
         fileName = '/tmp/relationMap.html'
         fo = open(fileName,'w')
-        fo.write(self.htmlRelationMap(actionsSubset=actionsList,
+        fo.write(self._htmlRelationMap(actionsSubset=actionsList,
                                       rankingRule=rankingRule,
                                         Colored=Colored,
                                         tableTitle=tableTitle,
@@ -3339,7 +3339,7 @@ class Digraph(object):
         webbrowser.open_new(url)
         
         
-    def htmlRelationMap(self,tableTitle='Relation Map',\
+    def _htmlRelationMap(self,tableTitle='Relation Map',\
                           relationName='r(x R y)',\
                           actionsSubset= None,\
                           rankingRule='Copeland',\
@@ -3455,12 +3455,12 @@ class Digraph(object):
         return s
 
 
-    def showHTMLRelationTable(self,actionsList=None,
-                              IntegerValues=False,
-                              ndigits=2,
-                              Colored=True,
-                              tableTitle='Valued Adjacency Matrix',
-                              relationName='r(x S y)',
+    def showHTMLRelationTable(self,actionsList=None,\
+                              IntegerValues=False,\
+                              ndigits=2,\
+                              Colored=True,\
+                              tableTitle='Valued Adjacency Matrix',\
+                              relationName='r(x S y)',\
                               ReflexiveTerms=False):
         """
         Launches a browser window with the colored relation table of self.
@@ -3468,7 +3468,7 @@ class Digraph(object):
         import webbrowser
         fileName = '/tmp/relationMap.html'
         fo = open(fileName,'w')
-        fo.write(self.htmlRelationTable(actionsSubset=actionsList,
+        fo.write(self._htmlRelationTable(actionsSubset=actionsList,
                                         isColored=Colored,
                                         ndigits=ndigits,
                                         hasIntegerValues=IntegerValues,
@@ -3480,7 +3480,7 @@ class Digraph(object):
         webbrowser.open_new(url)
         
         
-    def htmlRelationTable(self,tableTitle='Valued Relation Table',
+    def _htmlRelationTable(self,tableTitle='Valued Relation Table',
                           relationName='r(x R y)',
                           ndigits=2,
                           hasIntegerValues=False,

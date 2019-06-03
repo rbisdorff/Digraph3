@@ -688,9 +688,9 @@ def testStringIOXMCDA2Encoding():
 def testHTMLTables():
     print('*--- test rendering html formatted Performance and Relation Tables ---*')
     g = RandomOutrankingDigraph()
-    print(g.htmlRelationTable(isColored=True))
+    print(g._htmlRelationTable(isColored=True))
     t = RandomPerformanceTableau()
-    print(t.htmlPerformanceTableau())
+    print(t._htmlPerformanceTableau())
 
 def testHTMLMaps():
     from outrankingDigraphs import BipolarOutrankingDigraph
@@ -699,8 +699,8 @@ def testHTMLMaps():
     t1 = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)
     g = BipolarOutrankingDigraph(t1,Normalized=True)
     cop = CopelandOrder(g)
-    print(g.htmlRelationMap(cop.copelandRanking))
-    print(g.htmlRelationMap(Colored=False))
+    print(g._htmlRelationMap(cop.copelandRanking))
+    print(g._htmlRelationMap(Colored=False))
 
 def testCoveringIndex():
     print('*--- test computing the covering index for a choice ---*')

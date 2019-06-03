@@ -1849,14 +1849,14 @@ The performance evaluations of each decision alternative on each criterion are g
         import webbrowser
         fileName = '/tmp/criteriaView.html'
         fo = open(fileName,'w')
-        fo.write(self.htmlCriteriaView(criteria=criteriaSubset,Sorted=Sorted,\
+        fo.write(self._htmlCriteriaView(criteria=criteriaSubset,Sorted=Sorted,\
                                            ndigits=ndigits,\
                                            title=title))
         fo.close()
         url = 'file://'+fileName
         webbrowser.open_new(url)
 
-    def htmlCriteriaView(self,criteria=None,Sorted=False,\
+    def _htmlCriteriaView(self,criteria=None,Sorted=False,\
                          ndigits=2,title='Family of Criteria'):
         """
         Renders a html view of the in the XMCDA2 format.
@@ -1952,7 +1952,7 @@ The performance evaluations of each decision alternative on each criterion are g
         import webbrowser
         fileName = '/tmp/performanceTable.html'
         fo = open(fileName,'w')
-        fo.write(self.htmlPerformanceTableau(actions=actionsSubset,\
+        fo.write(self._htmlPerformanceTableau(actions=actionsSubset,\
                                              fromIndex=fromIndex,\
                                              toIndex=toIndex,\
                                              isSorted=isSorted,\
@@ -1965,7 +1965,7 @@ The performance evaluations of each decision alternative on each criterion are g
         webbrowser.open_new(url)
            
             
-    def htmlPerformanceTableau(self,actions=None,\
+    def _htmlPerformanceTableau(self,actions=None,\
                                fromIndex=None,\
                                toIndex=None,\
                                isSorted=False,\
@@ -2056,8 +2056,9 @@ The performance evaluations of each decision alternative on each criterion are g
                 fromIndex = 0
             if toIndex == None:
                 toIndex = len(actionsKeys)
-                x = actionsKeys[i]
             #for x in actionsKeys:
+            for i in range(fromIndex,toIndex):
+                x = actionsKeys[i]
                 try:
                     xName = actions[x]['shortName']
                 except:
@@ -2503,21 +2504,21 @@ The performance evaluations of each decision alternative on each criterion are g
 #####                                                         END                                             ######
 ######################################################################################################################
 
-    def showHTMLPerformanceHeatmap(self,actionsList=None,
-                                   fromIndex=None,
-                                   toIndex=None,
-                                   criteriaList=None,
-                                   colorLevels=7,
-                                   pageTitle=None,
-                                   ndigits=2,
-                                   SparseModel=False,
-                                   minimalComponentSize=1,
-                                   rankingRule='Copeland',
-                                   quantiles=None,
-                                   strategy='average',
-                                   Correlations=False,
-                                   Threading=False,
-                                   nbrOfCPUs=None,
+    def showHTMLPerformanceHeatmap(self,actionsList=None,\
+                                   fromIndex=None,\
+                                   toIndex=None,\
+                                   criteriaList=None,\
+                                   colorLevels=7,\
+                                   pageTitle=None,\
+                                   ndigits=2,\
+                                   SparseModel=False,\
+                                   minimalComponentSize=1,\
+                                   rankingRule='Copeland',\
+                                   quantiles=None,\
+                                   strategy='average',\
+                                   Correlations=False,\
+                                   Threading=False,\
+                                   nbrOfCPUs=None,\
                                    Debug=False):
         """
         shows the html heatmap version of the performance tableau in a browser window
@@ -2565,7 +2566,7 @@ The performance evaluations of each decision alternative on each criterion are g
         if pageTitle == None:
             pageTitle = 'Heatmap of Performance Tableau \'%s\'' % self.name
             
-        fo.write(self.htmlPerformanceHeatmap(argCriteriaList=criteriaList,
+        fo.write(self._htmlPerformanceHeatmap(argCriteriaList=criteriaList,
                                              argActionsList=actionsList,
                                              fromIndex=fromIndex,
                                              toIndex=toIndex,
@@ -2585,7 +2586,7 @@ The performance evaluations of each decision alternative on each criterion are g
         url = 'file://'+fileName
         webbrowser.open_new(url)
 
-    def htmlPerformanceHeatmap(self,argCriteriaList=None,
+    def _htmlPerformanceHeatmap(self,argCriteriaList=None,
                                argActionsList=None,
                                fromIndex=None,
                                toIndex=None,

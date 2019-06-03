@@ -385,9 +385,9 @@ def testStringIOXMCDA2Encoding():
 def testHTMLTables():
     print('*--- test rendering html formatted Performance and Relation Tables ---*')
     g = RandomOutrankingDigraph()
-    print(g.htmlRelationTable(isColored=True))
+    print(g._htmlRelationTable(isColored=True))
     t = RandomPerformanceTableau()
-    print(t.htmlPerformanceTableau())
+    print(t._htmlPerformanceTableau())
 
 def testActionsCorrelation():
     print('*---- test computing actions correlation table and digraph ---*')
