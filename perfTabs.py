@@ -2485,6 +2485,8 @@ The performance evaluations of each decision alternative on each criterion are g
 ######################################################################################################################
 
     def showHTMLPerformanceHeatmap(self,actionsList=None,
+                                   fromIndex=None,
+                                   toIndex=None,
                                    criteriaList=None,
                                    colorLevels=7,
                                    pageTitle=None,
@@ -2546,6 +2548,8 @@ The performance evaluations of each decision alternative on each criterion are g
             
         fo.write(self.htmlPerformanceHeatmap(argCriteriaList=criteriaList,
                                              argActionsList=actionsList,
+                                             fromIndex=fromIndex,
+                                             toIndex=toIndex,
                                              SparseModel=SparseModel,
                                              minimalComponentSize=minimalComponentSize,
                                              rankingRule=rankingRule,
@@ -2564,6 +2568,8 @@ The performance evaluations of each decision alternative on each criterion are g
 
     def htmlPerformanceHeatmap(self,argCriteriaList=None,
                                argActionsList=None,
+                               fromIndex=None,
+                               toIndex=None,
                                SparseModel=False,
                                minimalComponentSize=1,
                                rankingRule='Copeland',
@@ -2775,7 +2781,12 @@ The performance evaluations of each decision alternative on each criterion are g
             html += '</tr>\n'
         if Debug:
             print(html)
-        for x in actionsList:
+        if fromIndex == None:
+            fromIndex=0
+        if toIndex == None:
+            toIndex = na
+        for i in range(fromIndex,toIndex):
+            x = actionsList[i]
             try:
                 xName = self.actions[x]['shortName']
             except:
@@ -7512,7 +7523,7 @@ if __name__ == "__main__":
 ##                                            #Threading=False
 ##                                            )
     t = RandomCBPerformanceTableau(numberOfCriteria=13,
-                                   numberOfActions=10,
+                                   numberOfActions=50,
                                    weightDistribution='equiobjectives',
                                    IntegerWeights=True,
                                    NegativeWeights=True,
@@ -7541,7 +7552,9 @@ if __name__ == "__main__":
         for j in range(i+1,n):
             totDif += abs(critCorr[i][0] - critCorr[j][0])
     print('difnf',totDif/nd)
-    t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows')
+    t.showHTMLPerformanceHeatmap(Correlations=True,
+                                 rankingRule='NetFlows',
+                                 toIndex=10)
 
        
 

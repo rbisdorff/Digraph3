@@ -2532,6 +2532,8 @@
 <span class="c1">######################################################################################################################</span>
 
 <div class="viewcode-block" id="PerformanceTableau.showHTMLPerformanceHeatmap"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                   <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                   <span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">criteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">colorLevels</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
                                    <span class="n">pageTitle</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -2593,6 +2595,8 @@
             
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">htmlPerformanceHeatmap</span><span class="p">(</span><span class="n">argCriteriaList</span><span class="o">=</span><span class="n">criteriaList</span><span class="p">,</span>
                                              <span class="n">argActionsList</span><span class="o">=</span><span class="n">actionsList</span><span class="p">,</span>
+                                             <span class="n">fromIndex</span><span class="o">=</span><span class="n">fromIndex</span><span class="p">,</span>
+                                             <span class="n">toIndex</span><span class="o">=</span><span class="n">toIndex</span><span class="p">,</span>
                                              <span class="n">SparseModel</span><span class="o">=</span><span class="n">SparseModel</span><span class="p">,</span>
                                              <span class="n">minimalComponentSize</span><span class="o">=</span><span class="n">minimalComponentSize</span><span class="p">,</span>
                                              <span class="n">rankingRule</span><span class="o">=</span><span class="n">rankingRule</span><span class="p">,</span>
@@ -2611,6 +2615,8 @@
 
 <div class="viewcode-block" id="PerformanceTableau.htmlPerformanceHeatmap"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.htmlPerformanceHeatmap">[docs]</a>    <span class="k">def</span> <span class="nf">htmlPerformanceHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argCriteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                <span class="n">argActionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                               <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                               <span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                <span class="n">SparseModel</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                                <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">,</span>
@@ -2822,7 +2828,12 @@
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionsList</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">fromIndex</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">fromIndex</span><span class="o">=</span><span class="mi">0</span>
+        <span class="k">if</span> <span class="n">toIndex</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">toIndex</span> <span class="o">=</span> <span class="n">na</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">fromIndex</span><span class="p">,</span><span class="n">toIndex</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">actionsList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">xName</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">]</span>
             <span class="k">except</span><span class="p">:</span>
@@ -7559,7 +7570,7 @@
 <span class="c1">##                                            #Threading=False</span>
 <span class="c1">##                                            )</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
-                                   <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                                   <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
                                    <span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span>
                                    <span class="n">IntegerWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                    <span class="n">NegativeWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -7588,7 +7599,9 @@
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
             <span class="n">totDif</span> <span class="o">+=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">critCorr</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">critCorr</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;difnf&#39;</span><span class="p">,</span><span class="n">totDif</span><span class="o">/</span><span class="n">nd</span><span class="p">)</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                 <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span>
+                                 <span class="n">toIndex</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 
        
 
