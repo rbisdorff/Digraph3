@@ -2784,7 +2784,7 @@ The performance evaluations of each decision alternative on each criterion are g
         if fromIndex == None:
             fromIndex=0
         if toIndex == None:
-            toIndex = na
+            toIndex = len(actionsList)
         for i in range(fromIndex,toIndex):
             x = actionsList[i]
             try:
